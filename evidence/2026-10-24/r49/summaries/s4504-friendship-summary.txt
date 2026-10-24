@@ -1,0 +1,54 @@
+# FOLLOW-THROUGH — seed 4504 (141d, 7 alive)
+
+npcPairs=74 deep2=28 cracks=3 vCracks=4 friendGriev=0 stateGriev=11 stateFriend=0 stateVCrack=2 t2picks=11 closeReadsServed=8 grievanceServes=0 othersSteered=11
+COND-TP: firstDeep2Day=25 lateClose=4 lateTP=2 lateNull=0 condRate=50.0% pooledTP=2/8 pooledRate=25.0% grievReadsByWhy={"grievance":3,"vgrievance":0}
+  FRIEND d35: Greta <> Simone — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Anuar <> Simone — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Greta <> Anuar — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d25: Simone <> Jaxon — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Anuar <> Jaxon — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Jaxon <> James — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Simone <> James — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Simone <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Dale <> Simone — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Jaxon <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: James <> Vasyl — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d40: Fatima <> Simone — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Jaxon <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Olivia <> Vasyl — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d70: Greta <> Jaxon — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d100: Greta <> Olivia — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d90: Dale <> Jaxon — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Simone <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Fatima <> James — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d140: Fatima <> Olivia — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d135: Dale <> Olivia — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d90: James <> Olivia — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d105: Dale <> Fatima — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d105: Dale <> James — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d115: Cameron <> Olivia — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d115: Cameron <> Vasyl — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d115: Cameron <> James — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Cameron <> Jaxon — maxDepth 2, final 2 (v=62), dropped 0
+  CRACK d15: Jaxon vs Fatima (ambushed) depth 0 -> -1
+  CRACK d17: Fatima vs Jaxon (ambushed) depth 0 -> -1
+  CRACK d31: Fatima vs Jaxon (ambushed) depth -1 -> -2
+  VCRACK d12: Fatima vs Jaxon (ambushed) v 2 -> -8 (depth 0 -> 0)
+  VCRACK d15: Jaxon vs Fatima (ambushed) v -8 -> -28 (depth 0 -> -1)
+  VCRACK d17: Fatima vs Jaxon (ambushed) v -8 -> -28 (depth 0 -> -1)
+  VCRACK d21: Fatima vs Jaxon (ambushed) v -28 -> -40 (depth -1 -> -1)
+  CLOSE-READ d4: Olivia about Thabo — live depth=0 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d7: Dale about Thabo — live depth=null ledger depth=null class=null late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: James about Jaxon — live depth=0 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Simone about Jaxon — live depth=0 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Greta about Simone — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Vasyl about Simone — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Jesse about Jaxon — live depth=0 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d134: Mlungisi about Jaxon — live depth=0 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  STATE-VCRACK d13 (betrayal): Fatima vs Jaxon (ambushed) v 2 -> -28 (depth 0 -> -1)
+  STATE-VCRACK d16 (betrayal): Jaxon vs Fatima (ambushed) v -8 -> -28 (depth 0 -> -1)
+  GRIEV-READ d5: Gunther about Thabo (why=grievance)
+  GRIEV-READ d16: Jaxon about Fatima (why=grievance)
+  GRIEV-READ d32: Fatima about Jaxon (why=grievance)
+
+deathCauses: {"ambush":1,"monster":2,"sickness":1,"contest":1,"a wound that wouldn't close":1}

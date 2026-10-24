@@ -50,28 +50,16 @@ function setDepth(Game, a, b, depth) {
   ok(npcs.length >= 5, 'roster has NPCs', 'npcs=' + npcs.length);
   const vid = npcs[0], friend = npcs[1], friend2 = npcs[2], other = npcs[3];
 
-  // find a group mate of vid for the fallback assertion
-  let groupMate = null;
-  for (const g of (v.groups || [])) {
-    if ((g.members || []).includes(vid)) {
-      groupMate = (g.members || []).find(id => id !== vid && id !== Game.villagerId);
-      if (groupMate) break;
-    }
-  }
-
-  // ---- 3. fallback first (no bonds yet): groups serve the close read ----
+  // ---- 3. fallback first (no bonds yet): neutral, NOT the group fallback ----
+  // CONTRACT CHANGE (journey-social r49 2026-10-24, design change on
+  // purpose): the groups fallback named first-group strangers with a
+  // trust-claim (r49 wild proof: 8 speakers named Sergio at depth 0/1).
+  // The r49 fix deleted it: no live bond -> neutral roster pick (honest
+  // non-claim lines). The full new contract lives in
+  // test-t2pick-fallback-livebond-20261024.js; this assertion keeps this
+  // older proof green under the new contract.
   const pre = Game.t2pickOther(vid);
-  ok(pre && pre.why === 'close', 'no deep bonds -> group fallback (why=close)', JSON.stringify(pre && { id: pre.id, why: pre.why }));
-  if (groupMate) {
-    // the fallback must be a group mate (fossil behavior preserved)
-    let allGroup = true;
-    for (let i = 0; i < 10; i++) {
-      const p = Game.t2pickOther(vid);
-      const inGroup = (v.groups || []).some(g => (g.members || []).includes(vid) && (g.members || []).includes(p.id));
-      if (p.why === 'close' && !inGroup) allGroup = false;
-    }
-    ok(allGroup, 'fallback close reads stay within frozen groups');
-  }
+  ok(pre && pre.why === 'neutral', 'no bonds -> neutral (group fallback removed by r49)', JSON.stringify(pre && { id: pre.id, why: pre.why }));
 
   // ---- 1. ledger bond wins over the fossil group ----
   const d1 = setDepth(Game, vid, friend, 2);

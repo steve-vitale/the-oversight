@@ -874,11 +874,32 @@
           }
         }
         if (best) return { id: best.id, why: 'close' };
-        const groups = v.groups || [];
-        for (const g of groups) {
-          const mates = (g.members || []).filter(id => id !== vid && roster.indexOf(id) !== -1);
-          if (mates.length) return { id: mates[Math.floor(Math.random() * mates.length)], why: 'close' };
+        // LIVE-BOND FALLBACK (journey-social r49 2026-10-24): the old
+        // groups fallback named a member of the FIRST group in list
+        // order — it never checked whether the SPEAKER was in that
+        // group, so strangers got trust-claims (wild proof, seed 4503:
+        // 8 speakers named Sergio at ledger depth 0/1, none sharing
+        // his group; pooled late-null share 4/14 = 28.6% fired r49's
+        // pre-registered fallback trigger). Prefer the deepest LIVE
+        // bond (depth >= 1: a real, repeated relationship) instead.
+        // When the speaker holds no live bond at all, fall through to
+        // the neutral roster pick below: honest non-claim lines
+        // ("still figuring that one out") instead of a trust-claim
+        // about someone with no ledger record. 'close' now means a
+        // real bond, period.
+        let live = null;
+        for (const k of Object.keys(bonds)) {
+          const bnd = bonds[k] || {};
+          if ((bnd.depth || 0) < 1) continue;
+          const parts = String(k).split('|');
+          const oid = parts[0] === vid ? parts[1] : parts[1] === vid ? parts[0] : null;
+          if (!oid || roster.indexOf(oid) === -1) continue;
+          try { if ((this.getPerson(oid) || {}).dead) continue; } catch (e) {}
+          if (!live || (bnd.depth || 0) > live.depth || ((bnd.depth || 0) === live.depth && (bnd.v || 0) > live.v)) {
+            live = { id: oid, depth: bnd.depth || 0, v: bnd.v || 0 };
+          }
         }
+        if (live) return { id: live.id, why: 'close' };
       } catch (e) {}
       return { id: roster[Math.floor(Math.random() * roster.length)], why: 'neutral' };
     },
