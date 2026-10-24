@@ -2533,12 +2533,23 @@ function fightAssessDPR(Game, ctx, mid) {
   // 3. Unknown: pessimistic prior — assume it hits hard until proven otherwise.
   return FIGHT_ASSESS_UNKNOWN_DPR;
 }
+// Worst single-round damage from policy-legitimate knowledge: a codex-known
+// species' def max damage; otherwise the average (a lower bound — lore and
+// the prior are averages, and inflating them would invent a max).
+function fightAssessBurst(Game, ctx, mid, dpr) {
+  if (mid && fightAssessCodexKnown(Game, mid)) {
+    const def = fightAssessMonsterDef(Game, mid);
+    const dmg = def && def.attack && def.attack.damage;
+    if (dmg && dmg.length >= 2) return dmg[1];
+  }
+  return dpr;
+}
 // The damage race for a monster list. Returns {decline, detail}.
 function fightAssessRace(Game, ctx, mons, p) {
   let bonus = 0;
   try { const w = Game.equippedWeapon && Game.equippedWeapon(); if (w && w.bonus) bonus += w.bonus; } catch (e) {}
   const playerDPR = 13 + bonus; // roll([10,16]) avg + weapon bonus
-  let totalMhp = 0, monsterDPR = 0;
+  let totalMhp = 0, monsterDPR = 0, burstDPR = 0;
   const per = [];
   for (const m of mons) {
     const mid = fightAssessMidOf(m);
@@ -2548,20 +2559,33 @@ function fightAssessRace(Game, ctx, mons, p) {
     let disc = 1;
     if (mid && typeof beastHintKnown === 'function' && beastHintKnown(Game, mid)) disc = FIGHT_ASSESS_COUNTER_DISC;
     monsterDPR += dpr * disc;
-    per.push({ mid, hp: Math.round(hp), dpr: +dpr.toFixed(1), disc });
+    // BURST TERM (gap-phase2 W1, line 353 — raidassess modal death: 4 hits /
+    // 103 dmg, counter known 94%). A single-round max-vs-HP term would be
+    // redundant on current defs (def max/average <= ~1.33, so it never fires
+    // without deadInTwo firing first), so the term prices the whole kill
+    // window at max rolls, UNDISCOUNTED: the modal death is a scholar who
+    // knew the counter, traded blows, and ate max-roll hits for the rounds
+    // the kill took. Knowing a counter does not shrink the beam — it tells
+    // you to move, and a trading race must not assume you did.
+    const burst = fightAssessBurst(Game, ctx, mid, dpr);
+    burstDPR += burst;
+    per.push({ mid, hp: Math.round(hp), dpr: +dpr.toFixed(1), disc, burst });
   }
   const php = (p && (p.hp || p.health)) || 1;
   const roundsToKill = totalMhp / Math.max(1, playerDPR);
   const roundsToDie = php / Math.max(0.5, monsterDPR);
   const lostRace = roundsToDie < roundsToKill * FIGHT_ASSESS_RACE_MARGIN;
   const deadInTwo = monsterDPR >= php / 2;
+  const burstWindow = roundsToKill * Math.max(0.5, burstDPR);
+  const burstKill = burstWindow >= php;
   return {
-    decline: (lostRace || deadInTwo) && mons.length > 0,
+    decline: (lostRace || deadInTwo || burstKill) && mons.length > 0,
     detail: {
       n: mons.length, playerDPR, monsterDPR: +monsterDPR.toFixed(1),
       totalMhp: Math.round(totalMhp), php: Math.round(php),
       roundsToKill: +roundsToKill.toFixed(1), roundsToDie: +roundsToDie.toFixed(1),
       lostRace, deadInTwo, per,
+      burstDPR: +burstDPR.toFixed(1), burstWindow: +burstWindow.toFixed(1), burstKill,
     },
   };
 }

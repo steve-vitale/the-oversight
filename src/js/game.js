@@ -32046,10 +32046,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // product, the village notices the kill. via='companion' is stamped
       // only by the TB tricktag path (the _tbKilledBy stamp); scholar
       // ('player') and monster kills never take this branch. Wave 3+ only.
-      // Defensive: a beat bug never breaks the kill path (ledger, codex,
-      // unlock check must all survive it).
+      // FIELD EXTENSION (gap-phase2 W1, line 471 — vetcompose): the same
+      // silence covered OFF-SCREEN kills — a villager's wave-3+ field-fight
+      // kill (via 'wild' / 'patrol', the fieldFights call sites) also
+      // landed in the log with no broadcast beat. companionKillBeat is
+      // fight-independent (its witness preference guards a stale tbfight),
+      // so field kills take the same beat. Contests keep their own
+      // narration and stay out. Defensive: a beat bug never breaks the
+      // kill path (ledger, codex, unlock check must all survive it).
       try {
-        if (via === 'companion' && wave >= 3 && killerVid
+        if ((via === 'companion' || via === 'wild' || via === 'patrol') && wave >= 3 && killerVid
           && killerVid !== this.villagerId && killerVid !== 'player'
           && typeof this.companionKillBeat === 'function') {
           this.companionKillBeat(monsterId, killerVid, wave);
