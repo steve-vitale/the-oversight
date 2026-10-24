@@ -225,4 +225,5 @@ blood actually flows.
 - evidence/2026-10-24/bloodrestraint-analysis.json — the join output
 - evidence/2026-10-24/sim-bloodrestraint.md — this file
 
-Anchor: [FILLED AT LAND TIME]
+Anchor: 10db60fe6221e42eb9fbb8115d7b3b5b5012e008 (kill-record branch tip;
+the game-code change was reverted — zero src/js trace in this commit).
