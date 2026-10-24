@@ -1,0 +1,4860 @@
+{
+ "seed": 70201,
+ "base": "leadfeast",
+ "policyId": "lead-wallseg",
+ "instrument": "wallseg sweep on w5gates-lib daily trace + direct waveKillLog read (full landed substrate)",
+ "substrate": "pinned: FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 ARMORVILLAGE=1 VETFORMATION=1 TRUSTBUFFER=1 LINKFORM=2 — trustbuffer census chain + vetformation layer outside",
+ "env": "FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 ARMORVILLAGE=1 VETFORMATION=1 TRUSTBUFFER=1 LINKFORM=2",
+ "anchorCommit": "c76a52480b09",
+ "maxWave": 5,
+ "w4Day": 60,
+ "w5Day": 84,
+ "demand4": {
+  "armored": 3,
+  "armorP": 10,
+  "armed": 5,
+  "tricks": 3,
+  "veterans": 1
+ },
+ "demand5": {
+  "armored": 4,
+  "armorP": 15,
+  "armed": 6,
+  "tricks": 3,
+  "veterans": 2
+ },
+ "sensors4": {
+  "armored": {
+   "demand": 3,
+   "release": 1,
+   "peak": 7,
+   "lastMet": 113
+  },
+  "armed": {
+   "demand": 5,
+   "release": 1,
+   "peak": 11,
+   "lastMet": 90
+  },
+  "tricks": {
+   "demand": 3,
+   "release": 11,
+   "peak": 19,
+   "lastMet": 114
+  },
+  "veterans": {
+   "demand": 1,
+   "release": 60,
+   "peak": 3,
+   "lastMet": 113
+  }
+ },
+ "sensors5": {
+  "armored": {
+   "demand": 4,
+   "release": 84,
+   "peak": 5,
+   "lastMet": 90
+  },
+  "armed": {
+   "demand": 6,
+   "release": 1,
+   "peak": 11,
+   "lastMet": 90
+  },
+  "tricks": {
+   "demand": 3,
+   "release": 11,
+   "peak": 19,
+   "lastMet": 114
+  },
+  "veterans": {
+   "demand": 2,
+   "release": 76,
+   "peak": 2,
+   "lastMet": 90
+  }
+ },
+ "overlapDays": 7,
+ "firstOverlapDay": 84,
+ "overlapWindows": [
+  [
+   84,
+   90
+  ]
+ ],
+ "defer5HeldDays": 25,
+ "firstDefer5Day": 59,
+ "defer4HeldDays": 9,
+ "firstDefer4Day": 51,
+ "binding": null,
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "exiled": 0,
+ "days": 115,
+ "gameDays": 115,
+ "endReason": "village-lost",
+ "deaths": {
+  "villager combat": 7,
+  "combat": 26,
+  "Highbeam Deer": 1,
+  "sickness": 1,
+  "monster": 3,
+  "expedition": 1
+ },
+ "starvation": 0,
+ "nWaveKillLog": 22,
+ "waveKillLog": [
+  {
+   "d": 3,
+   "mid": "mirrormoth",
+   "w": 1,
+   "by": "gen_r6tywwa",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 9,
+   "mid": "white_noise_heron",
+   "w": 1,
+   "by": "greta_hansen",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 9,
+   "mid": "murkcap",
+   "w": 1,
+   "by": "valeria_quispe",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 26,
+   "mid": "drumbelly_tanuki",
+   "w": 1,
+   "by": "gen_r6tywwa",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 28,
+   "mid": "lockpick_raccoon",
+   "w": 1,
+   "by": "gen_mm7rbly",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 31,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "ursula_weber",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 34,
+   "mid": "paparazzo",
+   "w": 2,
+   "by": "gen_jftkih5",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 37,
+   "mid": "lockpick_raccoon",
+   "w": 1,
+   "by": "gen_1uqg5og",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 39,
+   "mid": "drumbelly_tanuki",
+   "w": 1,
+   "by": "gen_jftkih5",
+   "via": "player",
+   "trick": "strike_windup"
+  },
+  {
+   "d": 43,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "gen_r6tywwa",
+   "via": "player",
+   "trick": "strike_recovery"
+  },
+  {
+   "d": 49,
+   "mid": "ducks_in_a_row",
+   "w": 1,
+   "by": "katarina_novak",
+   "via": "agency",
+   "trick": null
+  },
+  {
+   "d": 51,
+   "mid": "paparazzo",
+   "w": 2,
+   "by": "gen_r6tywwa",
+   "via": "player",
+   "trick": "move_windup,move_windup"
+  },
+  {
+   "d": 53,
+   "mid": "voice_mimic_radio",
+   "w": 2,
+   "by": "ursula_weber",
+   "via": "aid-crisis",
+   "trick": null
+  },
+  {
+   "d": 60,
+   "mid": "callback",
+   "w": 3,
+   "by": "valeria_quispe",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 68,
+   "mid": "hummice",
+   "w": 1,
+   "by": "visjoin_48",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 68,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "visjoin_59",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 68,
+   "mid": "influencer",
+   "w": 4,
+   "by": "gen_1uqg5og",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 76,
+   "mid": "congregation",
+   "w": 4,
+   "by": "ursula_weber",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 77,
+   "mid": "hushwolf",
+   "w": 1,
+   "by": "valeria_quispe",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 82,
+   "mid": "anaconda_empress",
+   "w": 1,
+   "by": "visjoin_42",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 110,
+   "mid": "voice_mimic_radio",
+   "w": 2,
+   "by": "visjoin_106",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 113,
+   "mid": "ad_break",
+   "w": 3,
+   "by": "brian_otieno",
+   "via": "player",
+   "trick": null
+  }
+ ],
+ "nGateTraceDays": 114,
+ "gateTrace": [
+  {
+   "d": 1,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 3,
+    "armed": 6,
+    "tricks": 0,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 6,
+    "tricks": 0,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 2,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 0,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 0,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 3,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 0,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 0,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 4,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 5,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 6,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 7,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 8,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 9,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 1,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 10,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 2,
+    "veterans": 0,
+    "short": [
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 2,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 11,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 3,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 3,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 12,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 13,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 14,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 15,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 16,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 5,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 17,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 6,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 6,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 18,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 6,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 6,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 19,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 20,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 21,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 22,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 23,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 8,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 11,
+    "tricks": 8,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 24,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 3,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 25,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 26,
+   "uw": 1,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 27,
+   "uw": 2,
+   "raw": 0,
+   "war": 0,
+   "dip": 0,
+   "plenty": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 0,
+   "gated": 0,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 28,
+   "uw": 2,
+   "raw": 20,
+   "war": 0,
+   "dip": 0,
+   "plenty": 20,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 1,
+   "capped": 20,
+   "gated": 20,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 29,
+   "uw": 2,
+   "raw": 20,
+   "war": 0,
+   "dip": 0,
+   "plenty": 20,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 1,
+   "capped": 20,
+   "gated": 20,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 10,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 10,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 30,
+   "uw": 2,
+   "raw": 20,
+   "war": 0,
+   "dip": 0,
+   "plenty": 20,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 1,
+   "capped": 20,
+   "gated": 20,
+   "peak": 0,
+   "l2": 0,
+   "r4": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 10,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 9,
+    "tricks": 10,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 31,
+   "uw": 2,
+   "raw": 20,
+   "war": 0,
+   "dip": 0,
+   "plenty": 20,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 1,
+   "capped": 20,
+   "gated": 20,
+   "peak": 0,
+   "l2": 1,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 10,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 10,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 32,
+   "uw": 2,
+   "raw": 20,
+   "war": 0,
+   "dip": 0,
+   "plenty": 20,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 1,
+   "capped": 20,
+   "gated": 20,
+   "peak": 0,
+   "l2": 1,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 33,
+   "uw": 2,
+   "raw": 20,
+   "war": 0,
+   "dip": 0,
+   "plenty": 20,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 1,
+   "capped": 20,
+   "gated": 20,
+   "peak": 0,
+   "l2": 1,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 34,
+   "uw": 2,
+   "raw": 40,
+   "war": 0,
+   "dip": 0,
+   "plenty": 40,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 2,
+   "capped": 40,
+   "gated": 40,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 35,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 36,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 37,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 38,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 39,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 40,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 41,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 7,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 42,
+   "uw": 2,
+   "raw": 60,
+   "war": 0,
+   "dip": 0,
+   "plenty": 60,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 3,
+   "capped": 60,
+   "gated": 60,
+   "peak": 0,
+   "l2": 2,
+   "r4": {
+    "armored": 4,
+    "armed": 7,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 13,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 43,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 6,
+    "tricks": 14,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 6,
+    "tricks": 14,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 44,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 45,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 46,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 47,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 48,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 49,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 50,
+   "uw": 2,
+   "raw": 80,
+   "war": 0,
+   "dip": 0,
+   "plenty": 80,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 4,
+   "capped": 80,
+   "gated": 80,
+   "peak": 0,
+   "l2": 3,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 16,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 16,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 51,
+   "uw": 3,
+   "raw": 100,
+   "war": 0,
+   "dip": 0,
+   "plenty": 100,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 5,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 4,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 16,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 16,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 52,
+   "uw": 3,
+   "raw": 120,
+   "war": 0,
+   "dip": 0,
+   "plenty": 120,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 6,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 4,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 17,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 17,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 53,
+   "uw": 3,
+   "raw": 120,
+   "war": 0,
+   "dip": 0,
+   "plenty": 120,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 6,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 4,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 17,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 17,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 54,
+   "uw": 3,
+   "raw": 120,
+   "war": 0,
+   "dip": 0,
+   "plenty": 120,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 6,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 55,
+   "uw": 3,
+   "raw": 120,
+   "war": 0,
+   "dip": 0,
+   "plenty": 120,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 6,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 56,
+   "uw": 3,
+   "raw": 120,
+   "war": 0,
+   "dip": 0,
+   "plenty": 120,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 6,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 57,
+   "uw": 3,
+   "raw": 120,
+   "war": 0,
+   "dip": 0,
+   "plenty": 120,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 6,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 58,
+   "uw": 3,
+   "raw": 140,
+   "war": 0,
+   "dip": 0,
+   "plenty": 140,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 7,
+   "capped": 100,
+   "gated": 99,
+   "peak": 0,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 59,
+   "uw": 3,
+   "raw": 242,
+   "war": 0,
+   "dip": 102,
+   "plenty": 140,
+   "warPts": 0,
+   "links": 3,
+   "feasts": 7,
+   "capped": 202,
+   "gated": 99,
+   "peak": 0,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 60,
+   "uw": 4,
+   "raw": 287,
+   "war": 25,
+   "dip": 102,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 3,
+   "feasts": 8,
+   "capped": 227,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 7,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 7,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 61,
+   "uw": 4,
+   "raw": 287,
+   "war": 25,
+   "dip": 102,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 3,
+   "feasts": 8,
+   "capped": 227,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 62,
+   "uw": 4,
+   "raw": 287,
+   "war": 25,
+   "dip": 102,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 3,
+   "feasts": 8,
+   "capped": 227,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 63,
+   "uw": 4,
+   "raw": 287,
+   "war": 25,
+   "dip": 102,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 3,
+   "feasts": 8,
+   "capped": 227,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 64,
+   "uw": 4,
+   "raw": 287,
+   "war": 25,
+   "dip": 102,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 3,
+   "feasts": 8,
+   "capped": 227,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 65,
+   "uw": 4,
+   "raw": 321,
+   "war": 25,
+   "dip": 136,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 4,
+   "feasts": 8,
+   "capped": 261,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 66,
+   "uw": 4,
+   "raw": 321,
+   "war": 25,
+   "dip": 136,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 4,
+   "feasts": 8,
+   "capped": 261,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 67,
+   "uw": 4,
+   "raw": 321,
+   "war": 25,
+   "dip": 136,
+   "plenty": 160,
+   "warPts": 1,
+   "links": 4,
+   "feasts": 8,
+   "capped": 261,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 0,
+   "alive": true
+  },
+  {
+   "d": 68,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 18,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 69,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 70,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 71,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 72,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 73,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 74,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 75,
+   "uw": 4,
+   "raw": 366,
+   "war": 50,
+   "dip": 136,
+   "plenty": 180,
+   "warPts": 2,
+   "links": 4,
+   "feasts": 9,
+   "capped": 286,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 1,
+   "alive": true
+  },
+  {
+   "d": 76,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 77,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 78,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 79,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 80,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 81,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 82,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 83,
+   "uw": 4,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 199,
+   "peak": 4,
+   "l2": 5,
+   "r4": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [
+     "armor"
+    ],
+    "ready": false
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 84,
+   "uw": 5,
+   "raw": 411,
+   "war": 75,
+   "dip": 136,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 4,
+   "feasts": 10,
+   "capped": 311,
+   "gated": 411,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 6,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 85,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 6,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 86,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 6,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 87,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 6,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 88,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 7,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 5,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 89,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 7,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 3,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 5,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 2,
+   "alive": true
+  },
+  {
+   "d": 90,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 5,
+    "armed": 6,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "r5": {
+    "armored": 4,
+    "armed": 6,
+    "tricks": 19,
+    "veterans": 2,
+    "short": [],
+    "ready": true
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 91,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 92,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 93,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 94,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 95,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 96,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 97,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 98,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 99,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 100,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 101,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 102,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 103,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 104,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 105,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 106,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 107,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 108,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 109,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 110,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 5,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 111,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 6,
+   "r4": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 112,
+   "uw": 5,
+   "raw": 445,
+   "war": 75,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 3,
+   "links": 5,
+   "feasts": 10,
+   "capped": 345,
+   "gated": 445,
+   "peak": 5,
+   "l2": 6,
+   "r4": {
+    "armored": 3,
+    "armed": 3,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 3,
+    "armed": 3,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 113,
+   "uw": 5,
+   "raw": 470,
+   "war": 100,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 4,
+   "links": 5,
+   "feasts": 10,
+   "capped": 370,
+   "gated": 470,
+   "peak": 5,
+   "l2": 6,
+   "r4": {
+    "armored": 3,
+    "armed": 3,
+    "tricks": 19,
+    "veterans": 1,
+    "short": [
+     "weapons"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 3,
+    "armed": 3,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  },
+  {
+   "d": 114,
+   "uw": 5,
+   "raw": 470,
+   "war": 100,
+   "dip": 170,
+   "plenty": 200,
+   "warPts": 4,
+   "links": 5,
+   "feasts": 10,
+   "capped": 370,
+   "gated": 470,
+   "peak": 5,
+   "l2": 6,
+   "r4": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "r5": {
+    "armored": 0,
+    "armed": 1,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "ready": false
+   },
+   "w4faced": 3,
+   "alive": true
+  }
+ ],
+ "gateVector": {
+  "day": 115,
+  "dayFloor": 25,
+  "w2Floor": 8,
+  "barsPerWave": {
+   "1": 5,
+   "2": 4,
+   "3": 4,
+   "4": 3,
+   "5": 2
+  },
+  "l1": 13,
+  "l2": 6,
+  "l3": 2,
+  "l4": 2,
+  "l5": 0,
+  "w3": {
+   "dayOk": true,
+   "l2Ok": true,
+   "met": true,
+   "b2need": 4
+  },
+  "raw": 470,
+  "war": 100,
+  "dip": 170,
+  "plenty": 200,
+  "warPts": 4,
+  "links": 5,
+  "feasts": 10,
+  "t4": 100,
+  "t5": 200,
+  "plentyCap": 100,
+  "demand4": {
+   "armored": 3,
+   "armorP": 10,
+   "armed": 5,
+   "tricks": 3,
+   "veterans": 1
+  },
+  "demand5": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "capped": 370,
+  "peak": 5,
+  "gated": 470,
+  "r4": {
+   "armored": 0,
+   "armed": 0,
+   "tricks": 19,
+   "veterans": 0,
+   "short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "ready": false
+  },
+  "r5": {
+   "armored": 0,
+   "armed": 0,
+   "tricks": 19,
+   "veterans": 0,
+   "short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "ready": false
+  },
+  "df4": {
+   "deferred": false,
+   "grandfathered": true,
+   "raw": 0,
+   "threshold": 0
+  },
+  "df5": {
+   "deferred": false,
+   "grandfathered": true,
+   "raw": 0,
+   "capped": 0,
+   "threshold": 0
+  },
+  "w4faced": 3,
+  "w4facedMids": [
+   "influencer",
+   "congregation",
+   "algorithm"
+  ],
+  "facedPerWave": {
+   "1": 18,
+   "2": 8,
+   "3": 3,
+   "4": 3,
+   "5": 2
+  },
+  "deed": {
+   "ok": false,
+   "w1": 18,
+   "w2": 8,
+   "w3": 3,
+   "w4": 3,
+   "w5": 2
+  },
+  "uw": 5,
+  "dist": {
+   "w3rung": {
+    "day": 0,
+    "l2": 0
+   },
+   "stand-raw": {
+    "standing": 0
+   },
+   "plenty-cap": {
+    "loss": 100
+   },
+   "defer4": {
+    "armor": 3,
+    "weapons": 5,
+    "tricks": 0,
+    "veterans": 1
+   },
+   "defer5": {
+    "armor": 4,
+    "weapons": 6,
+    "tricks": 0,
+    "veterans": 2
+   },
+   "w4faced": {
+    "types": 0
+   }
+  },
+  "attr": {
+   "outcome": "unlocked",
+   "gates": [
+    {
+     "id": "w3rung",
+     "met": true,
+     "detail": {
+      "day": 115,
+      "dayFloor": 25,
+      "l2": 6,
+      "b2need": 4,
+      "d_day": 0,
+      "d_l2": 0
+     }
+    },
+    {
+     "id": "stand-raw",
+     "met": true,
+     "detail": {
+      "raw": 470,
+      "t5": 200,
+      "d": 0
+     }
+    },
+    {
+     "id": "plenty-cap",
+     "met": true,
+     "detail": {
+      "raw": 470,
+      "capped": 370,
+      "loss": 100
+     }
+    },
+    {
+     "id": "defer4",
+     "met": true,
+     "detail": {
+      "deferred": false,
+      "grandfathered": true,
+      "bars": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 19,
+       "veterans": 0
+      },
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "deficit": {
+       "armor": 3,
+       "weapons": 5,
+       "tricks": 0,
+       "veterans": 1
+      },
+      "peak": 5
+     }
+    },
+    {
+     "id": "defer5",
+     "met": true,
+     "detail": {
+      "deferred": false,
+      "grandfathered": true,
+      "bars": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 19,
+       "veterans": 0
+      },
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "deficit": {
+       "armor": 4,
+       "weapons": 6,
+       "tricks": 0,
+       "veterans": 2
+      },
+      "peak": 5
+     }
+    },
+    {
+     "id": "w4faced",
+     "met": true,
+     "detail": {
+      "n": 3,
+      "mids": [
+       "influencer",
+       "congregation",
+       "algorithm"
+      ]
+     }
+    }
+   ],
+   "unmet": [],
+   "binding": null,
+   "attributed": true,
+   "why": "all gates met"
+  }
+ },
+ "gateErr": null,
+ "instrumentErrors": []
+}
