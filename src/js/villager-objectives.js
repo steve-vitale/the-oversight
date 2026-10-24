@@ -1187,14 +1187,20 @@
                 // reads as stage directions ("A is showing A ...").
                 var tnm2 = nm;
                 try { tnm2 = this.firstRef ? this.firstRef(rid) : nm; } catch (e) {}
-                try { this.say(this.teachChoreLine(tnm2, lesson)); } catch (e) {}
+                // PIT OVERHEAR INSTEAD-OF (gap-closure 2026-10-24, findings
+                // #616): the pit overhear line says the same lesson in the
+                // player's own voice ("You watch ... the depth, the
+                // sharpened stakes ..."), so when it fires it REPLACES the
+                // third-person teachChoreLine — saying both duplicated the
+                // lesson back-to-back. The overhear's gates (L0, trust 15+,
+                // knowsPit) decide; when it refuses, the chore line stands.
+                var _pitOverheard = false;
+                if (lesson.topic === 'pit') { try { _pitOverheard = !!this.pitLessonOverhear(rid, true); } catch (e) {} }
+                if (!_pitOverheard) { try { this.say(this.teachChoreLine(tnm2, lesson)); } catch (e) {} }
                 // SNARE OVERHEAR (trapline 2026-10-13): a player at haven
                 // watching the wire lesson learns its shape — recipe L1.
                 // Same regard gate as the TRAPS-return teach beat.
                 if (lesson.topic === 'snare') { try { this.snareLessonOverhear(rid, true); } catch (e) {} }
-                // PIT OVERHEAR (pitknowledge 2026-10-18): the pit lesson's
-                // overhear — same regard gate as the snare's.
-                if (lesson.topic === 'pit') { try { this.pitLessonOverhear(rid, true); } catch (e) {} }
               }
             } else if (playerAtHaven) {
               // no learner in earshot: they review their own finds, and the
