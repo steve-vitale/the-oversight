@@ -181,7 +181,11 @@
         const k = (this.data.knowledge || []).find(x => x.id === skillId) || {};
         let ok;
         if (isPlayerWho(this, learner)) {
-          ok = this.learnSkill(skillId, 1, 'taught');
+          // GAP-CLOSURE 2026-10-24, findings #640: route the player lesson
+          // through the unified grant path — grantKnowledge('skill', ...)
+          // delegates to learnSkill (same gain, same 'taught' via), so the
+          // skill case finally has a real caller instead of sitting unwired.
+          ok = this.grantKnowledge ? this.grantKnowledge('skill', skillId, 1, { type: 'taught', by: teacher }) : this.learnSkill(skillId, 1, 'taught');
           if (ok) { try { this.recomputeActiveSynergies(); } catch (e) { warn('synergy recompute', e); } }
         } else {
           ok = this.npcLearnSkill(learner, skillId);
