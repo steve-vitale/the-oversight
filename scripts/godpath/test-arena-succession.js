@@ -44,7 +44,11 @@ const T = K.reporter('test-arena-cotaken-succession-20261015');
     Game.contestResolveVillager = realResolve;
     Game.playerDeath = realDeath;
   }
-  T.ok('the bearer died once in the arena', deaths.length >= 1 && deaths[0].cause === 'combat' && deaths[0].bearer === bearer, JSON.stringify(deaths));
+  // Arena-loss cause is 'the arena', not generic 'combat' (gap #107,
+  // proven by scripts/test-gap-w4narr-engine.js). The 2026-10-15 expectation
+  // pinned the old generic cause; the mechanism under test (one death, right
+  // bearer, co-taken never bearer) is unchanged. Fixed 2026-10-24 (r42).
+  T.ok('the bearer died once in the arena', deaths.length >= 1 && deaths[0].cause === 'the arena' && deaths[0].bearer === bearer, JSON.stringify(deaths));
   T.ok('the co-taken contestant did not die AS the new bearer', !deaths.some(d => d.bearer === co), JSON.stringify(deaths));
   T.ok('exactly one bearer death in the beat', deaths.length === 1, JSON.stringify(deaths));
   T.ok('the co-taken fate still resolved (they are gone)', (v.roster || []).indexOf(co) < 0, JSON.stringify(v.roster));
