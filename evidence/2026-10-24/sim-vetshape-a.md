@@ -299,4 +299,10 @@ recalibration, not a shape regression — read carefully:
   recalibration (1 / 2) — maintenance item for its owner.
 - No EPERM flap hit this run: all 16 corpus writes + summary + sense
   write succeeded on first attempt through the chunked writer (WRITE-RETRY
-  lines: none). No index clobber observed (verified at commit time).
+  lines: none). Safe-commit index clobber DID strike after the commit
+  (the known class from the repo's AGENTS.md lessons: all 21 committed
+  files showed as staged deletions in the worktree index, worktree files
+  byte-identical to HEAD): repaired with `git update-index --add
+  --cacheinfo` against HEAD blobs, then verified `git status --short`
+  empty + `git diff HEAD` empty. The commit itself was correct throughout;
+  only the index lied. No reset was used.
