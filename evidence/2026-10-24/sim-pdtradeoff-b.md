@@ -83,7 +83,13 @@ the landed lever, not a designed value. Documented here, not invented.
 Full analyzer report: `./pdtradeoff-b-analyzer-report.txt` (exit 0, 0 FAIL).
 Sweep: 128/128 configs verified (16 seeds 9250–9265 x {leadfeast,belongfeast}
 x {pd0,pd1}x{dg0,dg1}, 100d death-aware, FEASTSCALE_R13=1/SEATDRIVE=0,
-DG FATAL-explicit). Proof `scripts/test-pdtradeoff-b.js`: 8/8 GREEN.
+DG FATAL-explicit). Proof `scripts/test-pdtradeoff-b.js`: 8/8 GREEN pre-sweep (the worker's run).
+Post-sweep re-run: 7/8 — P5 ("analyzer exits 2 on missing corpus") fails BY
+DESIGN post-sweep: the corpus now exists, so the analyzer correctly exits 0.
+P5 is a pre-sweep instrument gate (it proves the analyzer fails loudly on
+missing input); it cannot pass once the sweep it gates has completed. P1–P4
+(derivation-confined diff, within-environment byte-identical re-runs, FATAL
+env asserts) all PASS post-sweep.
 Panel compare: invalid BY CONSTRUCTION for env-gated levers (finding #797) —
 `./pdtradeoff-b-panel-compare.md` documents the invalidity; the verdict was
 computed by the analyzer on 128 identical-seed paired PD=1/PD=0 configs with
