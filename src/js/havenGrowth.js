@@ -505,6 +505,15 @@
       if (day - (v.lastRaidDay || 0) < (_ot ? _ot.cooldown : 7)) return false;
       let monsters = [];
       try { monsters = this.worldMonsters ? this.worldMonsters() : []; } catch (e) { return false; }
+      // DEAD RAIDERS DON'T GET DRAFTED (crisis leg r47 2026-10-24): r5
+      // filtered the player-facing raider, but the draft itself still took
+      // the nearest world monsters with no hp check — a 0-hp corpse was
+      // announced as a raider, got the "Nobody met <name>" line, then never
+      // gorged (the dawn loop skips hp<=0) while the crisis resolved
+      // 'fought' for a threat that was never there (phantom lingerer,
+      // observed seeds 9402 d18 / 9403 d26). The 3-monster minimum counts
+      // living raiders only.
+      try { monsters = monsters.filter(m => m && (m.hp || 0) > 0); } catch (e) {}
       if (!monsters.length || monsters.length < 3) return false;
       let pantry = 0;
       try { pantry = this.pantryKcalLive(v) || 0; } catch (e) {}
