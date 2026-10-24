@@ -17,6 +17,24 @@ cd ~/workspace/worktrees/sim-pdvalue-b
 CORPUS=evidence/2026-10-24/pdvalue-b-corpus
 export FEASTSCALE_R13=1 SEATDRIVE=0
 SEEDS="${SEEDS:-94001,94002,94003,94004,94005,94006,94007,94008}"
+# PILOT GATE (gap line 888 — the 1030Z lesson: confirm seeds ran 37s after
+# a pilot NO-GO). Confirm seeds are 94011+; whenever SEEDS includes one,
+# a pilot analyzer verdict must exist and must not be NO-GO, or this
+# runner refuses before any cell runs. PILOT_GATE_REPORT points at the
+# pilot analyzer report dir (default: the pilot verdict dir for this run);
+# PILOT_GATE_ALLOW_MISSING=1 is a deliberate coordinator override only,
+# never a default. Pilot-only seed lists (94001-94008) are ungated.
+case ",$SEEDS," in
+  *",94011,"*|*",94012,"*|*",94013,"*|*",94014,"*|*",94015,"*|*",94016,"*|*",94017,"*|*",94018,"*|*",94019,"*|*",94020,"*|*",94021,"*|*",94022,"*|*",94023,"*|*",94024,"*|*",94025,"*|*",94026,"*|*",94027,"*)
+    GATE_ARGS=()
+    if [ "${PILOT_GATE_ALLOW_MISSING:-}" = "1" ]; then GATE_ARGS+=(--allow-missing); fi
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+    if ! node "$SCRIPT_DIR/pilot-gate.js" --report "${PILOT_GATE_REPORT:-evidence/2026-10-24/pdvalue-b-pilot-verdict}" --stage confirm "${GATE_ARGS[@]}"; then
+      echo "run-pdvalue-b: confirm seeds REFUSED by pilot gate (see above)" >&2
+      exit 3
+    fi
+    ;;
+esac
 # seed list as space-separated array for verify loops
 read -ra SEED_ARR <<< "${SEEDS//,/ }"
 NSEEDS="${#SEED_ARR[@]}"
