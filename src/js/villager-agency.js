@@ -1314,7 +1314,12 @@
         var tellCap = tell.charAt(0).toUpperCase() + tell.slice(1);
         var v = hh % 3;
         if (v === 0) line = `"${Name} — ${tell} ${tail}"`;
-        else if (v === 1) line = `"${tellCap} That's the ${noun} telling you it's about to move. ${tail}"`;
+        // ARTICLE SAFETY (deepening r38 2026-10-23: "That's the The Union Rep
+        // telling you" — monsterNoun keeps proper-cased System names as-is,
+        // so blind "the "+noun doubles the article; same class as backlog
+        // #542). articlePhrase normalizes: proper names stand bare,
+        // lowercase descriptors keep "the ".
+        else if (v === 1) line = `"${tellCap} That's ${(this.articlePhrase ? this.articlePhrase(noun) : 'the ' + noun)} telling you it's about to move. ${tail}"`;
         else line = `"Watch for this: ${tell} ${Name}, every time. ${tail}"`;
       }
       // FALLBACK (no telegraph data): the old generic template, honestly
