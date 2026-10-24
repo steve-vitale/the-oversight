@@ -234,6 +234,14 @@ async function loadGame(opts) {
     G.say = function () {};
     G.sysSay = function () {};
   }
+  // GAP 349/610 (sysSay-deaf probes): opts.captureSysSay (an array) routes
+  // System voice into the array INSTEAD of the no-op, without turning on
+  // full narration. Default behavior is unchanged (still silenced) when
+  // the option is absent, so existing sims' trajectories are untouched.
+  if (Array.isArray(opts.captureSysSay)) {
+    const cap = opts.captureSysSay;
+    G.sysSay = function () { cap.push(Array.prototype.slice.call(arguments).join(' ')); };
+  }
   G.audioEvent = function () {};
   if (G.drama === undefined) G.drama = function () {};
 
