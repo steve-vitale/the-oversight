@@ -52,9 +52,18 @@ if [ "$ARM" = "off" ]; then
 fi
 cp "$WT/scripts/sweep-preserveact-b.js" "$RUNDIR/scripts/sweep-preserveact-b.js" || { echo "DRIVER COPY FAIL $ARM"; exit 2; }
 NSEEDS=$(echo "$SEEDS" | tr ',' '\n' | grep -c .)
+# Trace invocations re-run a SUBSET of seeds; their main-sweep summary
+# must NOT overwrite the full pilot summary. When TRACE_SEEDS is set,
+# the main re-run summary goes to a distinct -mainrerun name (the
+# trace-run summary itself already uses -trace). Without TRACE_SEEDS,
+# the standard name holds the full sweep. (Lesson from the OFF trace
+# run: it overwrote the 8-row pilot summaries with 2-row versions;
+# the pilot mains were re-run afterwards to restore them.)
+MAINOUT_SUFFIX=""
+[ -n "${TRACE_SEEDS:-}" ] && MAINOUT_SUFFIX="-mainrerun"
 for SIDE in pd0 pd1; do
   PDV=0; [ "$SIDE" = "pd1" ] && PDV=1
-  (cd "$RUNDIR" && FEASTSCALE_R13=1 SEATDRIVE=0 ARM="$ARM" BASE="$BASE" SIDE="$SIDE" PLENTYDEPRI="$PDV" DEPOSITGATE=1 POLICY=leadfeast SEEDS="$SEEDS" DAYS=100 PERSEED_DIR="$CORPUS" OUT="$CORPUS/sweep-$ARM-$SIDE-dg1-leadfeast.json" node scripts/sweep-preserveact-b.js) || { echo "SWEEP FAIL LOUDLY $ARM $SIDE"; exit 2; }
+  (cd "$RUNDIR" && FEASTSCALE_R13=1 SEATDRIVE=0 ARM="$ARM" BASE="$BASE" SIDE="$SIDE" PLENTYDEPRI="$PDV" DEPOSITGATE=1 POLICY=leadfeast SEEDS="$SEEDS" DAYS=100 PERSEED_DIR="$CORPUS" OUT="$CORPUS/sweep-$ARM-$SIDE-dg1-leadfeast$MAINOUT_SUFFIX.json" node scripts/sweep-preserveact-b.js) || { echo "SWEEP FAIL LOUDLY $ARM $SIDE"; exit 2; }
   N=$(ls "$CORPUS"/preserveact-b-"$ARM"-"$SIDE"-dg1-leadfeast-s*.json 2>/dev/null | wc -l)
   echo "arm $ARM $SIDE: $N per-seed files present (this run asked for $NSEEDS seeds; cumulative count may exceed it across runs)"
 done
