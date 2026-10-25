@@ -395,9 +395,14 @@ Next blanks, in order:
 ## INFRASTRUCTURE + CORPUS
 
 - No EPERM flap blocked this run; all 8 rows wrote first
-  try. No safe-commit index clobber observed at commit
-  time (commit verified with git show --stat after
-  safe-commit — see below).
+  try. Safe-commit index clobber DID hit this run's commit
+  (bogus staged deletions in the main index after an
+  otherwise-correct commit; a first repair pass used a
+  non-recursive ls-tree and briefly mangled index paths —
+  both repaired via ls-tree -r + per-file cacheinfo; the
+  commit itself was verified correct with git show --stat,
+  and the worktree was verified clean with git status
+  --short empty and git diff HEAD empty before handoff).
 - No sibling tree, branch, claim file, tracker, or lock
   touched. Telemetry-check NOT run, per the standing
   instruction in the 1332Z coordinator evidence (recorder
