@@ -461,13 +461,13 @@
       if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven);
       // vFlee: real wounds from the real fight, then the hurt pipeline
       try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
-      // POST-FLEE REST: fled below 25% of max — flag the day's rest and
+      // POST-FLEE REST: fled at or below 25% of max — flag the day's rest and
       // log it in the expedition encounters list, never a silent save.
       var _pfRest = false;
       try {
         var _vh2 = (this.state.village || {}).health || {};
         var _endHp = (_vh2[vid] !== undefined) ? _vh2[vid] : 0;
-        if (_endHp / Math.max(100, _pfEntryHp) < 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
+        if (_endHp / Math.max(100, _pfEntryHp) <= 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
       } catch (e) {}
       if (_pfRest && st.exped[vid]) st.exped[vid].encounters.push('fled ' + (m.id || 'it') + ' — staying out of sight for the rest of the day, too hurt to meet it again');
       return this.expedHurt(vid, mName + ' (' + fightNote + ')', nm);

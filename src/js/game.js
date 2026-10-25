@@ -19496,8 +19496,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (moved) this.syncMonsterAlias();
     },
-    // POST-FLEE REST (sim-postflee-a 2026-10-25): after a villager flees a
-    // FIELD fight ending below 25% of max HP, they hide for the rest of
+    // POST-FLEE REST (sim-postflee-a 2026-10-25; threshold to <=25%
+    // sim-postflee-threshold-a): after a villager flees a
+    // FIELD fight ending at or below 25% of max HP, they hide for the rest of
     // that calendar day — no re-encounter, no relocation, no HP restored.
     // The flag is keyed by villager + scholar day and expires the next
     // day. Raid defense, aid-crisis fights, arena routes, and the scholar
@@ -19668,14 +19669,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (rec.outcome === 'vFlee') {
         // real wounds from the real fight — not a scaled table number
         try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
-        // POST-FLEE REST: fled below 25% of max (and not an aid-crisis
+        // POST-FLEE REST: fled at or below 25% of max (and not an aid-crisis
         // fight, which never flags) — the rest decision rides in the same
         // awayNews line, never a silent save.
         let _pfRest = false;
         try {
           const _vh = (this.state.village || {}).health || {};
           const _endHp = (_vh[vid] !== undefined) ? _vh[vid] : 0;
-          if (!wViaAid && _endHp / Math.max(100, _pfEntryHp || 100) < 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
+          if (!wViaAid && _endHp / Math.max(100, _pfEntryHp || 100) <= 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
         } catch (e) {}
         tell(`🩸 ${summary}` + (_pfRest ? ' — staying out of sight for the rest of the day — too hurt to meet it again' : ''));
       } else if (rec.outcome === 'vDie') {
