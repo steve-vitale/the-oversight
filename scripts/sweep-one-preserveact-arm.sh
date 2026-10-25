@@ -10,11 +10,20 @@
 # NEVER creates a worktree, NEVER checks out an old commit in the worktree.
 # The ON tree is a HEAD archive, unmodified. The OFF tree is a HEAD archive
 # with ONLY scripts/preserveact-off.patch applied (the two widening hunks
-# of 75fdd9258 reverted in src/js/food.js). The runner VERIFIES the
-# ON-vs-OFF tree diff is exactly that patch (diff of the two extracted
-# trees, excluding the driver copy which is identical in both) and FAILS
-# LOUDLY otherwise — a wider diff would mean the contrast is not the
-# widening alone.
+# of 75fdd9258 reverted in src/js/food.js). The runner VERIFIES the OFF
+# tree is exactly that (see below) and FAILS LOUDLY otherwise — a wider
+# diff would mean the contrast is not the widening alone.
+# VERIFICATION DESIGN (fixed pre-sweep, 2026-10-25): the first version
+# diffed two full HEAD archives with diff -qr — infeasible, because a
+# HEAD archive is ~2.1GB (the evidence tree) and the diff never finished
+# in 10+ minutes while thrashing the disk. The equivalent cheap proof:
+# (1) the patch names exactly one file (src/js/food.js) — proven by
+# counting its diff headers; (2) git apply --check + git apply succeed,
+# so the OFF tree is archive(HEAD) plus that patch and nothing else;
+# (3) git apply --check --reverse succeeds afterwards, which proves the
+# tree's food.js is exactly in the post-patch (OFF) state. Together with
+# (1), that proves OFF differs from ON only in food.js, without reading
+# two 2.1GB trees.
 # TRACE_SEEDS="9750,..." (optional): after the main run, re-run those
 # seeds with HAULCOUNT_TRACE=1; the re-run per-seed files must be
 # byte-identical to the main run's (md5-verified before/after).
@@ -29,17 +38,13 @@ RUNDIR="$WT/bisect-scratch/$ARM"
 rm -rf "$RUNDIR"; mkdir -p "$RUNDIR"
 (cd "$WT" && git archive HEAD | tar -x -C "$RUNDIR") || { echo "EXTRACT FAIL LOUDLY $ARM $BASE"; exit 2; }
 if [ "$ARM" = "off" ]; then
-  (cd "$RUNDIR" && git apply --check "$WT/scripts/preserveact-off.patch" && git apply "$WT/scripts/preserveact-off.patch") || { echo "OFF PATCH FAIL LOUDLY"; exit 2; }
-  # Verify the ONLY tree difference vs a fresh HEAD archive is food.js.
-  ONDIR="$WT/bisect-scratch/on-check"
-  rm -rf "$ONDIR"; mkdir -p "$ONDIR"
-  (cd "$WT" && git archive HEAD | tar -x -C "$ONDIR") || { echo "ON-CHECK EXTRACT FAIL"; exit 2; }
-  DIFFOUT="$(diff -qr "$ONDIR" "$RUNDIR" 2>/dev/null | grep -v "^Only in $RUNDIR: " || true)"
-  # diff -qr lists every differing file; the OFF tree must differ ONLY in src/js/food.js.
-  echo "$DIFFOUT" | grep -v "src/js/food.js" | grep -q "differ" && { echo "TREE DIFF FAIL LOUDLY: OFF tree differs beyond food.js:"; echo "$DIFFOUT"; exit 2; }
-  echo "$DIFFOUT" | grep -q "src/js/food.js" || { echo "TREE DIFF FAIL LOUDLY: OFF tree food.js identical to ON (patch did not apply?)"; exit 2; }
-  rm -rf "$ONDIR"
-  echo "tree-diff verified: OFF differs from ON only in src/js/food.js"
+  # (1) The patch must name exactly one file, src/js/food.js.
+  NHDR=$(grep -c "^diff --git" "$WT/scripts/preserveact-off.patch" || true)
+  [ "$NHDR" = "1" ] || { echo "PATCH SHAPE FAIL LOUDLY: expected 1 diff header, got $NHDR"; exit 2; }
+  grep -q "^diff --git a/src/js/food.js b/src/js/food.js" "$WT/scripts/preserveact-off.patch" || { echo "PATCH SHAPE FAIL LOUDLY: patch does not target src/js/food.js"; exit 2; }
+  # (2) Apply; (3) reverse-check proves food.js is in the post-patch state.
+  (cd "$RUNDIR" && git apply --check "$WT/scripts/preserveact-off.patch" && git apply "$WT/scripts/preserveact-off.patch" && git apply --check --reverse "$WT/scripts/preserveact-off.patch") || { echo "OFF PATCH FAIL LOUDLY"; exit 2; }
+  echo "tree verified: OFF differs from ON only in src/js/food.js (single-file patch + reverse-check)"
 fi
 cp "$WT/scripts/sweep-preserveact-b.js" "$RUNDIR/scripts/sweep-preserveact-b.js" || { echo "DRIVER COPY FAIL $ARM"; exit 2; }
 NSEEDS=$(echo "$SEEDS" | tr ',' '\n' | grep -c .)

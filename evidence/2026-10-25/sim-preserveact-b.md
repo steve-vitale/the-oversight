@@ -274,6 +274,23 @@ loudly as an instrument failure and does not claim GO or NO-GO.
 - See the "Metric review" subsection under RESULTS below (filled
   after the verdict; the verdict above is NOT re-scored by it).
 
+### INSTRUMENT FIX (pre-sweep, before any sim executed)
+
+The runner's OFF-tree verification as first written diffed two full
+HEAD archives with diff -qr. That proof never finished: a HEAD archive
+is ~2.1GB (the evidence tree), and the diff ran 10+ minutes I/O-bound
+while thrashing the disk, with zero sweep configs run. The runner was
+killed, the scratch trees deleted, and the verification replaced with
+the equivalent cheap proof: (1) the patch names exactly one file
+(src/js/food.js, header count checked); (2) git apply --check +
+git apply succeed, so the OFF tree is archive(HEAD) plus that patch
+and nothing else; (3) git apply --check --reverse succeeds
+afterwards, proving the tree's food.js is exactly in the post-patch
+state. Together these prove OFF differs from ON only in food.js,
+without reading two 2.1GB trees. No sweep had run when this fix was
+made, so no corpus file, seed, or threshold is affected; the
+pre-registration above is otherwise unchanged.
+
 ### Scope
 
 Zero src/js game changes in this worktree. New files only:
