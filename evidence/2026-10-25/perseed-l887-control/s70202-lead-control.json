@@ -1,0 +1,3001 @@
+{
+ "seed": 70202,
+ "base": "leadfeast",
+ "policyId": "lead-wallseg",
+ "arm": "control",
+ "instrument": "wallseg substrate + postunlock-instrument (postunlockDeaths/postunlockFights/unlock) + daily door poll",
+ "substrate": "pinned wallseg: FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 ARMORVILLAGE=1 VETFORMATION=1 TRUSTBUFFER=1 LINKFORM=2",
+ "lever": "none (control)",
+ "otDays": 7,
+ "otMax": 6,
+ "anchorCommit": "1b912cd9ca8a",
+ "doorDay": null,
+ "doorSnapshot": null,
+ "unlock": {
+  "w4Day": 78,
+  "w5Day": null
+ },
+ "days": 104,
+ "gameDays": 104,
+ "endReason": "village-lost",
+ "postDoor": null,
+ "national": 1,
+ "table": 1,
+ "seats": 0,
+ "won": 0,
+ "nPostunlockDeaths": 44,
+ "postunlockDeaths": [
+  {
+   "day": 16,
+   "who": "nevermore",
+   "whoName": "nevermore",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 3,
+    "veterans": 0,
+    "roster": 12
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 17,
+   "who": "sweeps_week",
+   "whoName": "sweeps_week",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "sweeps_week",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 17,
+    "mid": "sweeps_week",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "sweeps_week"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "liam_davis"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 4,
+    "veterans": 0,
+    "roster": 12
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 18,
+   "who": "hushwolf",
+   "whoName": "hushwolf",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "sweeps_week",
+   "oppWave": 1,
+   "fightBasis": "prior3d:combat_start",
+   "nearestFight": {
+    "day": 17,
+    "mid": "sweeps_week",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 1,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "sweeps_week"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "liam_davis"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 6,
+    "veterans": 0,
+    "roster": 12
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 23,
+   "who": "speedbump_turtle",
+   "whoName": "speedbump_turt",
+   "kind": "monster",
+   "cause": "expedition",
+   "wave": 1,
+   "person": false,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 7,
+    "veterans": 0,
+    "roster": 12
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 25,
+   "who": "gallowdeer",
+   "whoName": "gallowdeer",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "gallowdeer",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 25,
+    "mid": "gallowdeer",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "gallowdeer"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "gen_akz8hnb",
+     "aria_thompson",
+     "adaeze_nwosu"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 12,
+    "tricks": 8,
+    "veterans": 0,
+    "roster": 12
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 31,
+   "who": "gen_axedv5u",
+   "whoName": "Raj",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 10,
+    "veterans": 0,
+    "roster": 12
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": true
+  },
+  {
+   "day": 31,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "sarge",
+   "oppWave": null,
+   "fightBasis": "same-day:combat_start",
+   "nearestFight": {
+    "day": 31,
+    "mid": "sarge",
+    "wave": null,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [],
+    "monsterWaves": [],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 10,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 34,
+   "who": "rut_king",
+   "whoName": "rut_king",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "sarge",
+   "oppWave": null,
+   "fightBasis": "prior3d:combat_start",
+   "nearestFight": {
+    "day": 31,
+    "mid": "sarge",
+    "wave": null,
+    "via": "combat_start",
+    "dayDistance": 3,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [],
+    "monsterWaves": [],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 12,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 35,
+   "who": "mirrormoth",
+   "whoName": "mirrormoth",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "mirrormoth",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 35,
+    "mid": "mirrormoth",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "mirrormoth"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 13,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 38,
+   "who": "drumbelly_tanuki",
+   "whoName": "drumbelly_tanu",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "mirrormoth",
+   "oppWave": 1,
+   "fightBasis": "prior3d:combat_start",
+   "nearestFight": {
+    "day": 35,
+    "mid": "mirrormoth",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 3,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "mirrormoth"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 13,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 42,
+   "who": "landlord",
+   "whoName": "landlord",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 2,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "landlord",
+   "oppWave": 2,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 42,
+    "mid": "landlord",
+    "wave": 2,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "landlord"
+    ],
+    "monsterWaves": [
+     2
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 14,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 46,
+   "who": "landlord",
+   "whoName": "landlord",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 2,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": {
+    "day": 42,
+    "mid": "landlord",
+    "wave": 2,
+    "via": "combat_start",
+    "dayDistance": 4,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": null,
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 15,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 49,
+   "who": "giant_mosquito",
+   "whoName": "giant_mosquito",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 2,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": {
+    "day": 42,
+    "mid": "landlord",
+    "wave": 2,
+    "via": "combat_start",
+    "dayDistance": 7,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": null,
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 15,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 50,
+   "who": "speedbump_turtle",
+   "whoName": "speedbump_turt",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "speedbump_turtle",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 50,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "speedbump_turtle",
+     "speedbump_turtle"
+    ],
+    "monsterWaves": [
+     1,
+     1
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 16,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 50,
+   "who": "speedbump_turtle",
+   "whoName": "speedbump_turt",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "speedbump_turtle",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 50,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "speedbump_turtle",
+     "speedbump_turtle"
+    ],
+    "monsterWaves": [
+     1,
+     1
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 16,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 50,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "speedbump_turtle",
+   "oppWave": 1,
+   "fightBasis": "same-day:combat_start",
+   "nearestFight": {
+    "day": 50,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "speedbump_turtle",
+     "speedbump_turtle"
+    ],
+    "monsterWaves": [
+     1,
+     1
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 4,
+    "armed": 11,
+    "tricks": 18,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 58,
+   "who": "drumbelly_tanuki",
+   "whoName": "drumbelly_tanu",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": {
+    "day": 50,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 8,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": null,
+   "village": {
+    "armored": 7,
+    "armed": 11,
+    "tricks": 19,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 59,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": {
+    "day": 50,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 9,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": null,
+   "village": {
+    "armored": 7,
+    "armed": 11,
+    "tricks": 19,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 62,
+   "who": "lockpick_raccoon",
+   "whoName": "lockpick_racco",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "lockpick_raccoon",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 62,
+    "mid": "lockpick_raccoon",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "lockpick_raccoon"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 11,
+    "tricks": 19,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 62,
+   "who": "moderator",
+   "whoName": "moderator",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 2,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "moderator",
+   "oppWave": 2,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 62,
+    "mid": "moderator",
+    "wave": 2,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "moderator"
+    ],
+    "monsterWaves": [
+     2
+    ],
+    "party": [
+     "gen_w1wptjr",
+     "adaeze_nwosu"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 11,
+    "tricks": 19,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 64,
+   "who": "rut_king",
+   "whoName": "rut_king",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "moderator",
+   "oppWave": 2,
+   "fightBasis": "prior3d:combat_start",
+   "nearestFight": {
+    "day": 62,
+    "mid": "moderator",
+    "wave": 2,
+    "via": "combat_start",
+    "dayDistance": 2,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "moderator"
+    ],
+    "monsterWaves": [
+     2
+    ],
+    "party": [
+     "gen_w1wptjr",
+     "adaeze_nwosu"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 8,
+    "armed": 11,
+    "tricks": 21,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 64,
+   "who": "paparazzo",
+   "whoName": "paparazzo",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 2,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "moderator",
+   "oppWave": 2,
+   "fightBasis": "prior3d:combat_start",
+   "nearestFight": {
+    "day": 62,
+    "mid": "moderator",
+    "wave": 2,
+    "via": "combat_start",
+    "dayDistance": 2,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "moderator"
+    ],
+    "monsterWaves": [
+     2
+    ],
+    "party": [
+     "gen_w1wptjr",
+     "adaeze_nwosu"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 8,
+    "armed": 11,
+    "tricks": 21,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 69,
+   "who": "liam_davis",
+   "whoName": "Liam",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 8,
+    "armed": 10,
+    "tricks": 21,
+    "veterans": 0,
+    "roster": 11
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": true
+  },
+  {
+   "day": 69,
+   "who": "understudy",
+   "whoName": "understudy",
+   "kind": "monster",
+   "cause": "villager combat",
+   "wave": 2,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "gavel",
+   "oppWave": 3,
+   "fightBasis": "same-day:combat_start",
+   "nearestFight": {
+    "day": 69,
+    "mid": "gavel",
+    "wave": 3,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "gavel"
+    ],
+    "monsterWaves": [
+     3
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 8,
+    "armed": 10,
+    "tricks": 21,
+    "veterans": 0,
+    "roster": 10
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "none"
+   },
+   "player": false
+  },
+  {
+   "day": 77,
+   "who": "spool",
+   "whoName": "spool",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 3,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "spool",
+   "oppWave": 3,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 77,
+    "mid": "spool",
+    "wave": 3,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "spool"
+    ],
+    "monsterWaves": [
+     3
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": false,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 84,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "hummice",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 84,
+    "mid": "hummice",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "hummice",
+     "hummice",
+     "hummice",
+     "hummice"
+    ],
+    "monsterWaves": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "party": [
+     "yara_haddad"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 84,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "hummice",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 84,
+    "mid": "hummice",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "hummice",
+     "hummice",
+     "hummice",
+     "hummice"
+    ],
+    "monsterWaves": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "party": [
+     "yara_haddad"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 84,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "hummice",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 84,
+    "mid": "hummice",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "hummice",
+     "hummice",
+     "hummice",
+     "hummice"
+    ],
+    "monsterWaves": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "party": [
+     "yara_haddad"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 84,
+   "who": "hummice",
+   "whoName": "hummice",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "hummice",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 84,
+    "mid": "hummice",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "hummice",
+     "hummice",
+     "hummice",
+     "hummice"
+    ],
+    "monsterWaves": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "party": [
+     "yara_haddad"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 7,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 85,
+   "who": "cliffhanger",
+   "whoName": "cliffhanger",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "cliffhanger",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 85,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "cliffhanger"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "david_kim"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 8,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 85,
+   "who": "living_wire",
+   "whoName": "living_wire",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "living_wire",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 85,
+    "mid": "living_wire",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "living_wire"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "david_kim"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 8,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 85,
+   "who": "dustboar",
+   "whoName": "dustboar",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "dustboar",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 85,
+    "mid": "dustboar",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "dustboar"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "david_kim"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 8,
+    "armed": 9,
+    "tricks": 22,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": false,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 92,
+   "who": "eater",
+   "whoName": "eater",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 4,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "eater",
+   "oppWave": 4,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 92,
+    "mid": "eater",
+    "wave": 4,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "eater"
+    ],
+    "monsterWaves": [
+     4
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 0,
+    "rerun": false
+   },
+   "village": {
+    "armored": 9,
+    "armed": 9,
+    "tricks": 24,
+    "veterans": 0,
+    "roster": 9
+   },
+   "overtime": {
+    "active": true,
+    "tier": 0,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 99,
+   "who": "nightcourt",
+   "whoName": "nightcourt",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 1,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "nightcourt",
+   "oppWave": 1,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 99,
+    "mid": "nightcourt",
+    "wave": 1,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 1,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "nightcourt"
+    ],
+    "monsterWaves": [
+     1
+    ],
+    "party": [
+     "david_kim"
+    ],
+    "scholarIn": true,
+    "overtimeTier": 1,
+    "rerun": false
+   },
+   "village": {
+    "armored": 9,
+    "armed": 9,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 9
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 102,
+   "who": "redactor",
+   "whoName": "redactor",
+   "kind": "monster",
+   "cause": "combat",
+   "wave": 3,
+   "person": false,
+   "combatCause": true,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 100,
+   "armor": null,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": "redactor",
+   "oppWave": 3,
+   "fightBasis": "live-tbfight",
+   "nearestFight": {
+    "day": 102,
+    "mid": "redactor",
+    "wave": 3,
+    "via": "combat_start",
+    "dayDistance": 0,
+    "overtimeTier": 1,
+    "rerun": false
+   },
+   "fight": {
+    "monsterIds": [
+     "redactor"
+    ],
+    "monsterWaves": [
+     3
+    ],
+    "party": [],
+    "scholarIn": true,
+    "overtimeTier": 1,
+    "rerun": false
+   },
+   "village": {
+    "armored": 9,
+    "armed": 9,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 9
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": false
+  },
+  {
+   "day": 103,
+   "who": "gen_w1wptjr",
+   "whoName": "Emily",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 8,
+    "armed": 8,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 9
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 103,
+   "who": "gen_e0lwm2j",
+   "whoName": "Isabella",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 7,
+    "armed": 7,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 8
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 103,
+   "who": "gen_akz8hnb",
+   "whoName": "Wagner",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 6,
+    "armed": 6,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 7
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 103,
+   "who": "adaeze_nwosu",
+   "whoName": "Adaeze",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 5,
+    "armed": 5,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 6
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 103,
+   "who": "aria_thompson",
+   "whoName": "Aria",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": true,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 24,
+    "veterans": 1,
+    "roster": 5
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 103,
+   "who": "yara_haddad",
+   "whoName": "Yara",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 3,
+    "armed": 3,
+    "tricks": 24,
+    "veterans": 0,
+    "roster": 4
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 103,
+   "who": "gen_d4pknoz",
+   "whoName": "Autumn",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 2,
+    "armed": 2,
+    "tricks": 24,
+    "veterans": 0,
+    "roster": 3
+   },
+   "overtime": {
+    "active": true,
+    "tier": 1,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 104,
+   "who": "sigrun_eiriksdottir",
+   "whoName": "Sigrun",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 24,
+    "veterans": 0,
+    "roster": 2
+   },
+   "overtime": {
+    "active": true,
+    "tier": 2,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  },
+  {
+   "day": 104,
+   "who": "david_kim",
+   "whoName": "David",
+   "kind": "villager",
+   "cause": "the arena",
+   "wave": null,
+   "person": true,
+   "combatCause": false,
+   "disease": false,
+   "diseasePool": null,
+   "diseaseId": null,
+   "hp": 0,
+   "armor": 0,
+   "armored": false,
+   "armed": false,
+   "veteran4plus": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "nearestFight": null,
+   "fight": null,
+   "village": {
+    "armored": 0,
+    "armed": 0,
+    "tricks": 24,
+    "veterans": 0,
+    "roster": 1
+   },
+   "overtime": {
+    "active": true,
+    "tier": 2,
+    "tableWaiting": true,
+    "tableDone": false,
+    "seat": "lesser"
+   },
+   "player": true
+  }
+ ],
+ "nPostunlockFights": 26,
+ "postunlockFights": [
+  {
+   "day": 17,
+   "mid": "sweeps_week",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "liam_davis"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "sweeps_week"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 25,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "gen_akz8hnb",
+    "aria_thompson",
+    "adaeze_nwosu"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "gallowdeer"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 31,
+   "mid": "sarge",
+   "wave": null,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [],
+   "monsterWaves": [],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 35,
+   "mid": "mirrormoth",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "mirrormoth"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 42,
+   "mid": "landlord",
+   "wave": 2,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "landlord"
+   ],
+   "monsterWaves": [
+    2
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 50,
+   "mid": "speedbump_turtle",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "speedbump_turtle",
+    "speedbump_turtle"
+   ],
+   "monsterWaves": [
+    1,
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 62,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "lockpick_raccoon"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 62,
+   "mid": "moderator",
+   "wave": 2,
+   "via": "combat_start",
+   "party": [
+    "gen_w1wptjr",
+    "adaeze_nwosu"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "moderator"
+   ],
+   "monsterWaves": [
+    2
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 69,
+   "mid": "gavel",
+   "wave": 3,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "gavel"
+   ],
+   "monsterWaves": [
+    3
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 77,
+   "mid": "spool",
+   "wave": 3,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "spool"
+   ],
+   "monsterWaves": [
+    3
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 84,
+   "mid": "hummice",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "yara_haddad"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "hummice",
+    "hummice",
+    "hummice",
+    "hummice"
+   ],
+   "monsterWaves": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 85,
+   "mid": "cliffhanger",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "david_kim"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "cliffhanger"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 85,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "david_kim"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "living_wire"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 85,
+   "mid": "dustboar",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "david_kim"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "dustboar"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 92,
+   "mid": "eater",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "eater"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 0,
+   "rerun": false
+  },
+  {
+   "day": 99,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [
+    "david_kim"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "nightcourt"
+   ],
+   "monsterWaves": [
+    1
+   ],
+   "overtimeTier": 1,
+   "rerun": false
+  },
+  {
+   "day": 102,
+   "mid": "redactor",
+   "wave": 3,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "redactor"
+   ],
+   "monsterWaves": [
+    3
+   ],
+   "overtimeTier": 1,
+   "rerun": false
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [
+    "yara_haddad"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [
+    "david_kim"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 103,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [
+    "david_kim"
+   ],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 1,
+   "rerun": true
+  },
+  {
+   "day": 104,
+   "mid": "algorithm",
+   "wave": 4,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "monsterIds": [
+    "algorithm"
+   ],
+   "monsterWaves": [
+    4
+   ],
+   "overtimeTier": 2,
+   "rerun": true
+  }
+ ],
+ "nWaveKillLog": 31,
+ "waveKillLog": [
+  {
+   "d": 16,
+   "mid": "nevermore",
+   "w": 1,
+   "by": "adaeze_nwosu",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 17,
+   "mid": "sweeps_week",
+   "w": 1,
+   "by": "liam_davis",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 18,
+   "mid": "hushwolf",
+   "w": 1,
+   "by": "adaeze_nwosu",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 23,
+   "mid": "speedbump_turtle",
+   "w": 1,
+   "by": "gen_w1wptjr",
+   "via": "agency",
+   "trick": null
+  },
+  {
+   "d": 25,
+   "mid": "gallowdeer",
+   "w": 1,
+   "by": "adaeze_nwosu",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 31,
+   "mid": "hummice",
+   "w": 1,
+   "by": "gen_d4pknoz",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 34,
+   "mid": "rut_king",
+   "w": 1,
+   "by": "gen_d4pknoz",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 35,
+   "mid": "mirrormoth",
+   "w": 1,
+   "by": "liam_davis",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 38,
+   "mid": "drumbelly_tanuki",
+   "w": 1,
+   "by": "david_kim",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 42,
+   "mid": "landlord",
+   "w": 2,
+   "by": "liam_davis",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 46,
+   "mid": "landlord",
+   "w": 2,
+   "by": "gen_e0lwm2j",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 49,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "gen_9avvhlj",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 50,
+   "mid": "speedbump_turtle",
+   "w": 1,
+   "by": "liam_davis",
+   "via": "player",
+   "trick": "keep_distance,keep_distance,keep_distance,keep_distance,keep_distance,keep_distance,keep_distance,keep_distance"
+  },
+  {
+   "d": 50,
+   "mid": "hummice",
+   "w": 1,
+   "by": "gen_akz8hnb",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 58,
+   "mid": "drumbelly_tanuki",
+   "w": 1,
+   "by": "gen_w1wptjr",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 59,
+   "mid": "hummice",
+   "w": 1,
+   "by": "gen_w1wptjr",
+   "via": "wild",
+   "trick": "shout,shout"
+  },
+  {
+   "d": 62,
+   "mid": "lockpick_raccoon",
+   "w": 1,
+   "by": "liam_davis",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 62,
+   "mid": "moderator",
+   "w": 2,
+   "by": "liam_davis",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 64,
+   "mid": "rut_king",
+   "w": 1,
+   "by": "gen_e0lwm2j",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 64,
+   "mid": "paparazzo",
+   "w": 2,
+   "by": "gen_9avvhlj",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 69,
+   "mid": "understudy",
+   "w": 2,
+   "by": "gen_9avvhlj",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 77,
+   "mid": "spool",
+   "w": 3,
+   "by": "gen_w1wptjr",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 84,
+   "mid": "hummice",
+   "w": 1,
+   "by": "gen_akz8hnb",
+   "via": "companion",
+   "trick": "shout,shout,shout,shout"
+  },
+  {
+   "d": 84,
+   "mid": "hummice",
+   "w": 1,
+   "by": "gen_d4pknoz",
+   "via": "companion",
+   "trick": "shout,shout,shout,shout"
+  },
+  {
+   "d": 85,
+   "mid": "cliffhanger",
+   "w": 1,
+   "by": "gen_w1wptjr",
+   "via": "player",
+   "trick": "eyes"
+  },
+  {
+   "d": 85,
+   "mid": "living_wire",
+   "w": 1,
+   "by": "gen_w1wptjr",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 85,
+   "mid": "dustboar",
+   "w": 1,
+   "by": "gen_w1wptjr",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 85,
+   "mid": "nightlight_catfish",
+   "w": 1,
+   "by": "yara_haddad",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 92,
+   "mid": "eater",
+   "w": 4,
+   "by": "aria_thompson",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 99,
+   "mid": "nightcourt",
+   "w": 1,
+   "by": "aria_thompson",
+   "via": "companion",
+   "trick": "move_x2"
+  },
+  {
+   "d": 102,
+   "mid": "redactor",
+   "w": 3,
+   "by": "gen_w1wptjr",
+   "via": "player",
+   "trick": null
+  }
+ ],
+ "instrumentErrors": []
+}
