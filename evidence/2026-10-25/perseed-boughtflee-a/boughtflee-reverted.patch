@@ -1,0 +1,138 @@
+diff --git a/src/js/fieldFights.js b/src/js/fieldFights.js
+index d5e6f1f0e..cc268ec13 100644
+--- a/src/js/fieldFights.js
++++ b/src/js/fieldFights.js
+@@ -485,6 +485,10 @@
+         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
+         allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
+         everWinning: false, everHopeless: false, minHpFrac: 1,
++        // BOUGHTFLEE (sim-boughtflee-a 2026-10-25, scale-onramp): the
++        // wave-4+ field one-shot cap's counters (see the application
++        // point below) and the spent-round flee marker.
++        oneShotCapFires: 0, oneShotCapped: 0, boughtFlee: false,
+       };
+       // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
+       // It's much less risky to learn about a monster (observe, track,
+@@ -853,9 +857,11 @@
+         rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
+         try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
+       }
++      var capFiredThisRound = false;
+       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
+         rec.rounds = round;
+         abRoundTaken = 0;
++        capFiredThisRound = false;
+         // ABILITY — HAYMAKER (throw_haymaker): every 3rd round the villager
+         // winds up — the strike below lands double, but the windup leaves
+         // them open (the monster's hits land +2 this round). The telegraph
+@@ -1095,6 +1101,40 @@
+                   total = Math.max(1, Math.round(total * 0.75));
+                   if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
+                 }
++                // BOUGHTFLEE (sim-boughtflee-a 2026-10-25, scale-onramp):
++                // the companion to the killed oneshotcap-a arm — the cap
++                // it reuses, PLUS the spend mechanism it lacked. In a
++                // FIELD fight (wave 4+ only), a single round's damage to
++                // a villager is capped below half the villager's max HP:
++                // floor((maxHp - 1) / 2) — for the standard 100 max HP,
++                // 49, so a healthy villager cannot be flattened in one
++                // round (a 100-HP villager vs a real wave-4 eater at max
++                // rolls goes from uncapped 160 to capped exactly 49).
++                // Applied HERE, the single villager damage-application
++                // point, AFTER armor, worn avoidance, and ability
++                // reductions (including sigW4/sigW5 damage wraps, which
++                // feed this same total), and it accumulates across pack
++                // members within the round via abRoundTaken. SCOPE: fires
++                // ONLY when the caller passes opts.boughtflee — the
++                // wild-encounter router (non-raid, non-aid field path)
++                // and expedition meetings. Raid, arena (noFlee),
++                // contest, aid, sortie, alien, patrol, and tb routes
++                // never carry the flag; wave-1/2/3 are NOT softened;
++                // the scholar (vid === villagerId) is never guarded.
++                // The round-end check below spends the bought round:
++                // after a capped round the villager withdraws before
++                // round 2 — monster stays, villager survives that fight.
++                if (opts.boughtflee && vid !== this.villagerId && wave >= 4 && !opts.raid && !opts.noFlee && total > 0) {
++                  var _bfCap = Math.floor((vHpMax - 1) / 2);
++                  var _bfRoom = _bfCap - abRoundTaken;
++                  if (_bfRoom < total) {
++                    var _bfCapped = Math.max(0, _bfRoom);
++                    var _bfTrim = total - _bfCapped;
++                    rec.oneShotCapFires++; rec.oneShotCapped += _bfTrim; capFiredThisRound = true;
++                    rec.log.push('R' + round + ': ' + mPhraseCap + '\'s blow would have taken ' + total + ' — but no single round takes half a villager\'s health in the wild. Capped to ' + _bfCapped + '. (One-shot cap)');
++                    total = _bfCapped;
++                  }
++                }
+                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
+                 vBeamTaken += Math.max(0, Math.min(total, Math.round(total * beamShare)));
+                 if (_wardVia && allyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === allyVid))
+@@ -1447,6 +1487,19 @@
+           rec.log.push('The lead falls — the pack\'s coordination shatters. The rest scatter or die.');
+           break;
+         }
++        // BOUGHTFLEE (sim-boughtflee-a): the spend mechanism. A round
++        // the cap trimmed is a round the villager survives — and spends
++        // on flight, before round 2 can deal anything further. A kill
++        // above takes precedence (the villager won); a dead villager
++        // above takes precedence too (the cap cannot save a villager
++        // who entered too hurt for even a capped round). The flee is
++        // narrated here and in the fight summary (rec.boughtFlee) —
++        // never a silent save.
++        if (capFiredThisRound && vHp > 0 && !opts.noFlee) {
++          rec.outcome = 'vFlee'; rec.boughtFlee = true; rec.fleeHpFrac = vHp / vHpMax;
++          rec.log.push(vName + ' took a blow that should have ended them — and runs while running still works, before the next round. (Bought round, spent on flight.)');
++          break;
++        }
+         // SITUATIONAL MORALE (Steve 2026-10-09): after a couple of rounds the
+         // trajectory is legible. Winning -> commit (only the floor breaks
+         // them). Hopeless and alone -> believable flight. Hopeless with help
+@@ -1709,6 +1762,13 @@
+         return vName + ' stood down ' + the + ' and kept walking — ' + rounds + ', bloodied but breathing.';
+       }
+       if (rec.outcome === 'vFlee') {
++        // BOUGHTFLEE (sim-boughtflee-a): a bought-round flee is narrated
++        // as what it was — a blow that should have killed, survived, and
++        // spent on running — not as a generic mauling. The awayNews line
++        // is the village's story of the save; a silent save would be a
++        // defect, not a pass.
++        if (rec.boughtFlee)
++          return The + ' landed a blow that should have ended ' + vName + ' — and ' + vName + ' ran while running still worked, ' + rounds + ', ' + rec.vTaken + ' taken. They\'re lucky to be breathing, and the village knows why.';
+         // HONEST (longsim wave lever r4 2026-10-12): a vFlee with no damage
+         // taken is not a mauling — "mauled (-0 health)" was a lie. The
+         // villager got clear unharmed.
+diff --git a/src/js/game.js b/src/js/game.js
+index ecadca554..af2f3cef3 100644
+--- a/src/js/game.js
++++ b/src/js/game.js
+@@ -19554,7 +19554,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       // through aidFight, allies at the door in the fight from round one.
+       let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
++      // BOUGHTFLEE (sim-boughtflee-a): the wild-encounter router passes
++      // the flag ONLY on the non-raid, non-aid field path. Raid defenders
++      // (opts.raid) and aid-crisis fights take the other branches and
++      // never carry the flag, so raid defense is untouched (wAidTried
++      // remembers an aid attempt even if aidFight returned null, so the
++      // fallback fieldFight stays unflagged too).
++      const wAidTried = wViaAid;
++      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids, boughtflee: (!opts.raid && !wAidTried) }); }
+       const summary = this.fieldFightSummary(rec, name, mName);
+       if (rec.outcome === 'alreadyDead') {
+         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
+diff --git a/src/js/villager-agency.js b/src/js/villager-agency.js
+index 8afd2956e..1146a23e4 100644
+--- a/src/js/villager-agency.js
++++ b/src/js/villager-agency.js
+@@ -366,7 +366,10 @@
+       // don't. The depth probe measured calledHelp 0/531 before this.
+       var allyVids = [];
+       try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
+-      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids });
++      // BOUGHTFLEE (sim-boughtflee-a): expedition meetings are field
++      // fights, so they carry the flag — a capped round is spent on
++      // flight (fieldFights.js) instead of a round-2 death.
++      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids, boughtflee: true });
+       // The village hears about a rescue — gossip fodder, honestly sourced.
+       // "Mara ran into the treeline when she heard James scream."
+       if (rec.calledHelp && rec.allyVid) {
