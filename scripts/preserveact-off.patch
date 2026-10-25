@@ -1,0 +1,34 @@
+--- a/src/js/food.js
++++ b/src/js/food.js
+@@ -114,17 +114,8 @@
+       { m: 'chef', s: 3 }, { m: 'cook', s: 2 }, { m: 'baker', s: 2 }, { m: 'butcher', s: 2 },
+     ],
+     preserver: [ // smoking/drying/salting: keeps longer
+-      // (establishment r31 2026-10-24: the old table matched almost nobody in
+-      // the real 79-occupation pool — 'park ranger' never existed, and the
+-      // food occupations 'hunting guide'/'fishing guide'/'sailor'/'butcher'/
+-      // 'line cook'/'rancher'/'beekeeper'/'mushroom grower' were unmapped, so
+-      // 47/48 villagers across 4 seeds read preserver 0 and every rack ran
+-      // blind. Jerky is the hunter tradition; salt fish the sailor's.)
+-      { m: 'fisherman', s: 3 },
+-      { m: 'fishing guide', s: 2 }, { m: 'hunting guide', s: 2 },
+-      { m: 'sailor', s: 2 }, { m: 'chef', s: 2 }, { m: 'line cook', s: 2 },
+-      { m: 'butcher', s: 2 }, { m: 'farmer', s: 2 }, { m: 'rancher', s: 2 },
+-      { m: 'beekeeper', s: 1 }, { m: 'mushroom grower', s: 1 },
++      { m: 'chef', s: 2 }, { m: 'fisherman', s: 3 }, { m: 'farmer', s: 2 },
++      { m: 'park ranger', s: 1 },
+     ],
+     spotter: [ // plant identification help (future: faster ID)
+       // (r35: 'botanist'/'hiker'/'park ranger'/'herbalist' were ghosts; the
+@@ -150,10 +141,7 @@
+     // camp-cooking intent has no real-occupation equivalent in the pool.)
+     clean: ['hunter', 'veterinarian', 'fisherman', 'fishing guide', 'hunting guide', 'chef', 'line cook', 'farmer', 'rancher', 'sailor', 'butcher'],
+     cook: ['chef', 'cook', 'baker', 'butcher'],
+-    preserve: ['chef', 'fisherman', 'fishing guide', 'hunting guide', 'sailor', 'line cook', 'butcher', 'farmer', 'rancher', 'beekeeper'],
+-    // (r31 2026-10-24: 'smoker' matched no real occupation; aligned with the
+-    // widened SPECIALTIES.preserver — a sailor-player and a sailor-villager
+-    // now agree on who knows preservation.)
++    preserve: ['chef', 'fisherman', 'farmer', 'smoker'],
+     shell: null, // everyone knows: crack and pick. Obvious.
+   };
+ 
