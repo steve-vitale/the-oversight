@@ -235,9 +235,14 @@
             // wound gets un-written, so the quiet IS the fight.)
             return { type: 'wait', why: 'redactor-quiet' };
           }
-          if (mid === 'gavel' && msig.sigG && msig.sigG.trial) {
+          if (mid === 'gavel' && msig.sigG && msig.sigG.trial && !rec.trickConfess) {
             // Confess first — out loud, where everyone can hear. The verdict
             // falls lighter; the confession stays on the record.
+            // ONCE PER TRIAL (sim-gavelconfess-a 2026-10-25): the fired flag
+            // rec.trickConfess is set by the confess branch and cleared only
+            // when the verdict consumes it, so a trial stretched by a
+            // stunned/skipped verdict round no longer confesses twice.
+            // A new trial after a consumed verdict may confess again.
             return { type: 'confess', why: 'gavel-confess' };
           }
           if (mid === 'focus_group') {
