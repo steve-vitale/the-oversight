@@ -1,0 +1,27 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Patricia","t":90},{"id":"Harold","t":90},{"id":"Ada","t":90},{"id":"Kseniya","t":90}], roster=11
+PARITY readable=true equal=true inherited=[] pre=["the_touch","purify"] post=["the_touch","purify"]
+DEATH d40 (a hushwolf, scripted): Kevin -> Harold | passed=true lin=true mo=true trust=56 vouchers=4
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Kseniya (refused=false)
+  CONVO d+3 with Patricia (refused=false)
+  CONVO d+7 with Patricia (refused=false)
+  CONVO d+7 with Ada (refused=false)
+  CONVO d+14 with Vasyl (refused=false)
+  CONVO d+14 with Patricia (refused=false)
+  CONVO d+30 with Patricia (refused=false)
+  CONVO d+30 with Kseniya (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=4) echo=5 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=30 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+SUCCESSOR-LIFE: dayAdv=31 signals={"levelUp":true,"systemVoice":27,"offerLines":38,"codexPlantsDelta":8,"codexSkillsDelta":4,"codexAbilitiesDelta":4,"xpDelta":62,"any":true} pantry 41853->59368
+TRUST-DIALS: office 56->62 (+6, climb) | villageMean 60.2->77 (+16.8, climb) | ge60 4->7 | movers>=5: [{"id":"Boris","from":46,"to":90,"delta":44},{"id":"Oliver","from":56,"to":90,"delta":34},{"id":"Mia","from":59,"to":91,"delta":32},{"id":"Desmond","from":17,"to":39,"delta":22},{"id":"Vasyl","from":75,"to":91,"delta":16},{"id":"Patricia","from":90,"to":96,"delta":6}]
+DEED-LEDGER: calls=3 summary={"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=71 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=31
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+31,d+31) t2=true(deedCalls=3) trustVerdict={"readable":true,"officeMantle":56,"officeLast":62,"officeDelta":6,"officeClass":"climb","villageMantle":60.2,"villageLast":77,"villageDelta":16.8,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":7,"movers":[{"id":"Boris","from":46,"to":90,"delta":44},{"id":"Oliver","from":56,"to":90,"delta":34},{"id":"Mia","from":59,"to":91,"delta":32},{"id":"Desmond","from":17,"to":39,"delta":22},{"id":"Vasyl","from":75,"to":91,"delta":16},{"id":"Patricia","from":90,"to":96,"delta":6}]}
+E-METRICS: e1={"old":5,"v2":7,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":31,"moves":4}
