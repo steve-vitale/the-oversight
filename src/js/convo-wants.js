@@ -1327,7 +1327,7 @@
           }
           if (this.convoSaidFact) this.convoSaidFact(vid, 'taken-story', first);
         } catch (e) {}
-        return `"It's my ${rel}, ${first}. ${cap}. ${takenPodTailFor(vid)}`;
+        return `"It's my ${rel}, ${first}. ${cap}. ${takenPodTailFor(vid)}"`;
       },
       // def-level passthrough for tests; engageBeat calls the module fn
       // directly (inside def methods, `this` is the Game, not the def).
