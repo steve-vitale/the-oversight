@@ -144,9 +144,9 @@ for (const x of stepRatios) lines.push(`  ${x.seed} | ${x.rp.toFixed(3)} | ${x.r
 const [pq1, pq2, pq3] = quartiles(p.ratios.map(x => x.r));
 const [cq1, cq2, cq3] = quartiles(c.ratios.map(x => x.r));
 const [sq1, sq2, sq3] = quartiles(stepRatios.map(x => x.step));
-lines.push(`  parent ratios sorted: ${p.ratios.map(x => x.r.toFixed(3)).sort().join(', ')} (Q1 ${pq1.toFixed(3)} med ${pq2.toFixed(3)} Q3 ${pq3.toFixed(3)})`);
-lines.push(`  commit ratios sorted: ${c.ratios.map(x => x.r.toFixed(3)).sort().join(', ')} (Q1 ${cq1.toFixed(3)} med ${cq2.toFixed(3)} Q3 ${cq3.toFixed(3)})`);
-lines.push(`  per-seed steps sorted: ${stepRatios.map(x => x.step.toFixed(3)).sort().join(', ')} (Q1 ${sq1.toFixed(3)} med ${sq2.toFixed(3)} Q3 ${sq3.toFixed(3)})`);
+lines.push(`  parent ratios sorted: ${p.ratios.map(x => x.r).sort((a, b) => a - b).map(v => v.toFixed(3)).join(', ')} (Q1 ${pq1.toFixed(3)} med ${pq2.toFixed(3)} Q3 ${pq3.toFixed(3)})`);
+lines.push(`  commit ratios sorted: ${c.ratios.map(x => x.r).sort((a, b) => a - b).map(v => v.toFixed(3)).join(', ')} (Q1 ${cq1.toFixed(3)} med ${cq2.toFixed(3)} Q3 ${cq3.toFixed(3)})`);
+lines.push(`  per-seed steps sorted: ${stepRatios.map(x => x.step).sort((a, b) => a - b).map(v => v.toFixed(3)).join(', ')} (Q1 ${sq1.toFixed(3)} med ${sq2.toFixed(3)} Q3 ${sq3.toFixed(3)})`);
 const report = lines.join('\n') + '\n';
 console.log(report);
 if (REPORT) fs.writeFileSync(REPORT, report);
