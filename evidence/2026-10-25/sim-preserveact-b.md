@@ -310,3 +310,219 @@ locally, pending ship, by the coordinator.
 ---
 
 ## RESULTS (appended after the pre-registration above; verdict judged ONLY on the corpus named here)
+
+ADOPTION NOTE (2026-10-25, loop B run fleshout-loop-b-20261025T2230Z):
+this arm was adopted from the dead 2030Z B run, whose coordinator died
+mid-run. Stranded state as found: pilot corpus 32/32 files present
+(seeds 9750-9757 x off/on x pd0/pd1); confirm band 9758-9773 NOT run;
+RESULTS empty; one uncommitted analyzer line; 647M of bisect-scratch
+left over. Adoption work below was done entirely in this worktree
+(`~/workspace/worktrees/sim-preserveact-b`, branch sim-preserveact-b);
+the main tree at `~/workspace/the-scattering` was never touched and
+remains clean. No push, no version bump, no live verification.
+
+CORPUS BASE TAG: the pilot per-seed files carry
+baseCommit 9f11741afc05741afac6581de23cf4eb13e1b245 (the branch head
+at pilot sweep time). The branch head at adoption is 11daf7fb6 (a
+runner trace-summary fix landed after the pilot sweep). The analyzer
+must be run with `--base 9f11741af...` to match the corpus tags; an
+adoption run first passed the branch head and got 32/32 "base tag
+mismatch" fatals, then re-ran with the corpus base tag and got a
+clean analysis. This is a tag-matching note, not a corpus defect:
+the pilot trees were both extracted from the 9f11741af tree, so the
+OFF/ON contrast is intact.
+
+INSTRUMENT FIX REVIEW (the uncommitted diff): the single uncommitted
+line is `const rows = res.rows;` in main() of
+scripts/analyze-preserveact-b.js. It is a LEGITIMATE fix, kept and
+committed with this evidence. Proof: the committed main() prints
+per-seed rows with `for (const r of rows)` but never defines `rows`
+in main() scope, so the committed analyzer crashes with a
+ReferenceError before printing any per-seed table; the added line
+supplies the definition. The proof test's T4 corpus mode (which
+exercises the analyzer end to end) passes only with it in place.
+CORRECTION to the adoption handoff: the runner
+scripts/sweep-one-preserveact-arm.sh was NOT uncommitted — it is
+tracked and clean (git ls-files confirms); only the analyzer line
+was uncommitted. bisect-scratch/ (leftover extracted OFF tree) was
+deleted before committing and is never committed.
+
+PILOT PASS BAR (all hold — verified by proof test T4 corpus+pilot
+mode, 37 PASS / 0 FAIL, plus analyzer exit 0 with zero fatals):
+- 32/32 pilot files present, parsing, arm/base tags + seeds +
+  contrast matching (0 fatal).
+- Rot classifications computable for 8/8 pilot seeds, 0 ambiguous
+  (counts: degenerate 2, genuine 1, up 3, identical 1, mixed 1).
+- invHaulActions > 0 on ALL 32 pilot cells (0 zero-haul cells).
+- Preserve fields present (non-null integers) on ALL 32 pilot cells.
+- batches >= resolutions on ALL 32 pilot cells (0 violations).
+Validity therefore holds: there IS a verdict, and it is judged below
+on the pilot corpus only.
+
+PILOT VERDICT (binding P1 + C1 + C2, pilot corpus seeds 9750-9757):
+NO-GO, failed=P1.
+- P1 FAILS: median total-action count (batches + scholar attempts)
+  pooled OFF=113.5, ON=102.0, ratio 0.899 — below the pre-registered
+  1.25x bar, and in the wrong direction. Per side: pd0 110.5 -> 109.0
+  (flat), pd1 122.0 -> 94.5 (down ~23%). Scholar attempts are 0 on
+  every cell of both arms (expected under leadfeast, backlog #1038),
+  so batches carry the whole total: batches pooled OFF=113.5,
+  ON=102.0. Cross-check resolutions pooled OFF=43.0, ON=38.0.
+- C1 HOLDS: total starvation deaths pooled OFF=13, ON=5; bar
+  ON <= OFF+2 (= 15) holds with room.
+- C2 HOLDS: median daysAlive pooled OFF=100, ON=100; bar
+  ON >= 0.8x OFF holds.
+Because P1 fails, the pilot GO fails. THE ARM IS KILLED HONESTLY:
+no confirm spend (band 9758-9773 NOT run — verified: no 9758+ files
+in the corpus), no game-code change (there is none to revert —
+OFF/ON were scratch trees only), no re-score against any friendlier
+metric. What this NO-GO means, per the header: ONLY that preserver
+widening does not increase preserve-action counts on this corpus.
+It is NOT a recommendation to revert the widening (its quality /
+rate / shelf effects are a separate question), and it does NOT
+touch rotdecide2's rot NO-GO, which stands on its own corpus.
+
+PER-SEED TABLE (batches / resolutions / scholar attempts;
+total actions = batches + attempts; days; national pd1; max wave pd1):
+- 9750 degenerate | pd0 97/38/0 -> 127/44/0 | pd1 131/46/0 -> 91/39/0 | actions pd0 97->127 | pd1 131->91 | days 88->100 | 100->100 | national true->true | wave 3->4
+- 9751 degenerate | pd0 25/17/0 -> 115/40/0 | pd1 159/46/0 -> 111/29/0 | actions pd0 25->115 | pd1 159->111 | days 95->100 | 100->100 | national true->false | wave 2->4
+- 9752 genuine | pd0 114/41/0 -> 78/32/0 | pd1 101/44/0 -> 83/28/0 | actions pd0 114->78 | pd1 101->83 | days 100->100 | 100->100 | national true->true | wave 4->4
+- 9753 up | pd0 193/62/0 -> 55/24/0 | pd1 113/45/0 -> 92/32/0 | actions pd0 193->55 | pd1 113->92 | days 100->100 | 100->100 | national true->true | wave 4->4
+- 9754 up | pd0 59/27/0 -> 0/0/0 | pd1 72/32/0 -> 0/0/0 | actions pd0 59->0 | pd1 72->0 | days 100->100 | 100->100 | national true->true | wave 4->4
+- 9755 identical | pd0 134/43/0 -> 134/43/0 | pd1 138/45/0 -> 138/45/0 | actions pd0 134->134 | pd1 138->138 | days 100->100 | 100->100 | national true->true | wave 3->3
+- 9756 mixed | pd0 121/34/0 -> 111/47/0 | pd1 222/65/0 -> 187/67/0 | actions pd0 121->111 | pd1 222->187 | days 100->100 | 100->100 | national true->true | wave 2->4
+- 9757 up | pd0 107/43/0 -> 107/43/0 | pd1 82/29/0 -> 97/37/0 | actions pd0 107->107 | pd1 82->97 | days 100->100 | 100->100 | national false->false | wave 3->3
+
+ROT-ABS (diagnostic only, never the judge): medians pd0
+31634 -> 50035, pd1 35271 -> 13447; ratio medians (non-degenerate
+seeds only) OFF=0.338, ON=0.330, median-step 0.978. Per-seed abs
+(pd0 OFF->ON | pd1 OFF->ON): 9750 0->30081 | 0->1000; 9751
+0->52656 | 61316->26357; 9752 309949->72865 | 70821->8117; 9753
+249790->3300 | 2671->4301; 9754 53589->47414 | 23988->42997; 9755
+5093->5093 | 52134->52134; 9756 9678->66440 | 46553->8994; 9757
+111584->111584 | 16740->17899. The rot numbers move both ways by
+seed and side and cannot overturn the preserve-action verdict in
+either direction, per the header.
+
+WALL NUMBERS (pilot corpus, 32 configs): national=28, table=0,
+wins=0, wave reach distribution {2: 3, 3: 8, 4: 21} (no wave-1-only
+and no wave-5 cells; wave = max reach per cell), median
+daysAlive=100, max daysAlive=100, total deaths=243. Table 0 is a
+construction fact (SEATDRIVE=0 makes the table unreachable by
+construction), not a scale-wall finding. National reach is high
+(28/32) while wins/table stay at zero — the wall on this corpus
+sits past national, at the table, exactly where SEATDRIVE=0 puts it.
+
+DEATH-CAUSE SPREAD (corpus totals, 243 deaths): the arena 143,
+monster 20, ambush 19, starvation 18 (OFF 13 / ON 5 — the C1 guard),
+contest 11, sickness 9, a wound that wouldn't close 8, combat 2,
+bad belly 2, dehydration 3, alien 3, big ugly 1, the night 1,
+grief counselor 1, the bright bastard 1, the expedition 1. The
+arena alone is ~59% of all deaths: on this policy and horizon,
+villages do not mainly starve — they die in the show. Starvation
+falling on ON (13 -> 5) while preserve counts also fell is a
+reminder that the two are not mechanically tied here; neither
+number re-scores P1.
+
+SENSE-TESTING (read the moved seeds, not just the counts):
+- Largest single move: 9753 pd0, 193 -> 55 batches (-138). The
+  village still lived 100 days and stayed national on both sides —
+  the count collapse did not read as a village collapse.
+- Most striking seed: 9754. ON produced ZERO preserving work on
+  both sides (0 batches, 0 resolutions, 0 attempts) against OFF
+  59/72 batches, yet the village still lived the full 100 days and
+  stayed national. A village surviving 100 days with no preserving
+  at all, on both food-behavior sides, is coherent only if its food
+  story ran on fresh haul and fast turnover rather than stored
+  food — and the pooled haul numbers point that way (invHaul kcal
+  pooled OFF=106394, ON=116353). This single seed does not change
+  the verdict, but it is the clearest candidate for a follow-up
+  diagnostic: why would widening zero out cook resolutions on one
+  seed entirely? That question is documented here, not answered
+  by re-scoring.
+- Null seeds: 9755 is identical on every cell (widening changed
+  nothing at all there), and 9757 pd0 is identical too. Widening
+  is not a uniform dial — on some seeds it moves nothing, on one
+  it removes everything.
+- Trace samples (existing OFF traces from the stranded run's trace
+  invocations, seeds 9753/9754, both sides): preserve events use
+  verb villagerCook and their counts match the mains' resolutions
+  exactly (62/27/45/32), day ranges 14-99, 26-100, 23-99, 25-85 —
+  preserving work spread across the whole horizon, not bunched at
+  the start. LIMIT, STATED: saySamples = 0 on all four trace files
+  — no cook smoke-rack say-lines were captured, so no cook dialogue
+  can be quoted from this corpus; and every trace preserve event
+  carries items: 0 (stack counts live only in the haulcount tap,
+  not the event recorder). No fresh trace re-run was performed on
+  a moved seed: the arm was killed at pilot, so the run is evidence
+  only, and a fresh extract + re-run would be spend on a verdict
+  that is already final. The header's moved-seed byte-compare trace
+  re-run belongs to a run that proceeds past pilot.
+- Villager behavior, plain words: villagers haul constantly
+  (invHaulActions > 0 on all 32 cells; pooled medians ~200 actions
+  per 100 days), preserve steadily across the horizon when they
+  preserve at all, and die overwhelmingly in the arena rather than
+  of hunger. Nothing in the traces reads robotic or static — the
+  divergence that does appear (9754's ON silence, 9755's exact
+  null) tracks the food story seed by seed rather than repeating
+  identically. No dialogue-quality claim is made beyond the
+  event-level behavior above, per the header's stated limit.
+
+VILLAGE ASSESSMENT (plain words): the villages in this corpus are
+hardy, not hungry. Nearly every village lived the full 100 days,
+nearly every one reached national standing, and none reached the
+table — but the table was switched off for this run by design, so
+that zero says nothing about the real scale wall. Widening who
+counts as a preserver did not make villagers preserve more — if
+anything they preserved slightly less, with one village stopping
+entirely — while starvation deaths actually fell. The plain-words
+reading: the widening's effect, if any, runs through the quality
+of preserved food (longer shelf, better yield — villager
+preserved-kcal pooled OFF=63723, ON=66625, diagnostic only), not
+through how often villagers do the work. The count channel the
+header hypothesized (a bigger skilled-cook pool loosening the
+racks-full guard) did not show up in the counts.
+
+BALANCED PANEL (§15): ATTEMPTED. No panel.json.gz cases exist for
+this arm: the panel compare ingests panel-driver cases built from
+sweep-compare policies, and this corpus is env-gated arm-contrast
+recorder rows — the exact expected-failure class the header
+pre-stated (recorder-row ingestion, as in rotdecide2). No panel
+inputs were fabricated to force a compare run. The analyzer's
+per-seed table above is the §15 fallback instrument, and the
+verdict is judged on it. A tooling gap of this class never blocks
+or re-scores the verdict.
+
+METRIC REVIEW (§14 — for the NEXT run; this verdict is NOT re-scored):
+- The pooled median hides a per-side split (pd0 flat, pd1 down
+  ~23%). A next run could pre-register per-side medians as a
+  secondary read, but the pooled rule stands for this verdict.
+- Scale surprise, recorded not re-judged: OFF batches median 113.5
+  is ~3x the rotdecide2 resolutions scale (~33-39) the 25% bar was
+  justified from — batches count stacks, resolutions count cook
+  resolutions, so the bar meant ~28 extra batches at the median.
+  The observed move was -11.5. The bar was reachable in principle;
+  the count channel moved the wrong way.
+- Seed 9754's ON zero is the strongest follow-up lead: a dedicated
+  diagnostic arm (why cook resolutions vanish entirely on one seed
+  under widening) would be more informative than re-running this
+  count question on more seeds.
+- Trace say-matcher: saySamples = 0 on all four existing traces
+  means the cook-line matcher either never matched or no matching
+  lines fired. A next run that wants sense quotes should verify the
+  matcher against a known cook smoke-rack line before relying on it.
+- Scholar attempts 0 confirmed for a third corpus running: under
+  leadfeast the scholar never preserves (backlog #1038 stands);
+  any future preserve-action metric should either keep scholar
+  attempts as the expected-zero companion column or use a policy
+  that actually calls scholar preserve verbs.
+- No other metric doubt: C1/C2 guards behaved, validity checks
+  all held, and the instrument (tap + analyzer + proof test) is
+  sound — the fix to main() above is the only instrument change,
+  and it restores the analyzer to its intended behavior.
+
+CONVERGENCE STATE for this axis (food-economy, preserve-action
+question): KILLED-AT-PILOT. The preserve-action question is closed
+on this corpus with NO-GO (P1 failed); the widening itself is NOT
+killed (quality/rate/shelf effects unmeasured here beyond the
+diagnostic kcal column).

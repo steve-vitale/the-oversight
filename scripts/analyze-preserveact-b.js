@@ -327,6 +327,7 @@ function main() {
   const base = get('--base', null);
   if (!corpus) { console.error('FATAL: --corpus required'); process.exit(1); }
   const res = analyze(corpus, seeds[0], seeds[1], base);
+  const rows = res.rows;
   if (res.fatal.length) {
     for (const f of res.fatal) console.error('FATAL: ' + f);
     process.exit(1);
