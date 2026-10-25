@@ -47,7 +47,13 @@ const K = require('./lib'), T = K.reporter('hide-discovery');
   forget(); s.inventory = [carcass()]; G.askSpecialist(teacher, 0, undefined, 'butcher');
   T.ok('real specialist pack butchering follows the same handling lesson', level() === 1 && s.inventory.some(i => i.material === 'hide'));
   forget(); s.inventory = [{ itemId: 'stone_knife', units: 1, kg: 0.4 }]; stash.length = 0; stash.push(carcass()); G.cleanCarcass(undefined, stash);
-  T.ok('counter butchering keeps material and lesson on the counter until pickup', level() === 0);
+  // R44 (journey-deepening r44): counter butchering IS handling the hide —
+  // the beat fires when the hide lands on the scholar's own prep counter,
+  // so the lesson is taught at the counter; only the MATERIAL waits for
+  // pickup. The old expectation (lesson deferred until pickup) encoded the
+  // pre-r44 wiring limit, not a design law.
+  T.ok('counter butchering teaches at the counter (r44 hide beat)', level() === 1);
+  T.ok('butchered hide stays on the counter until pickup', stash.some(i => i.material === 'hide') && !s.inventory.some(i => i.material === 'hide'));
   G.takePrepMaterial(stash.findIndex(i => i.material === 'hide'), 1);
   T.ok('taking the real butchered hide completes the discovery path', level() === 1);
   forget(); G.noteHideHandled({ plantId: 'animal_hide', units: 1 });
