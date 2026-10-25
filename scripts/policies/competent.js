@@ -1123,6 +1123,31 @@ function knifeWantsStone(Game, ctx) {
 function knifeWantsVine(Game, ctx) {
   return knifeNeeded(Game, ctx) && packMat(Game, 'stone') >= 1 && packMat(Game, 'vine') < 1;
 }
+// ARMOR-VINE SEEK (journey-deepening r48, 2026-10-25): once the knife is
+// owned, the policy's only vine-seeking (knifeWantsVine / vinebank) turns
+// OFF — and vine stalls: r47's 42003 banked exactly 1 vine from day 17 to
+// day 100 with zero thicket forage calls, while bark>=3 sat in the pack.
+// A real player who wants bark armor walks to the thickets for the vine
+// half, the same way a knifeless player does for the knife half. This
+// extends the existing trip preference to the armor need: bark armor
+// (bark 3 + vine 2) or hide armor (hide 2 + vine 1), gated on the recipe
+// being seen enough to attempt (level >= 1, matching the journey driver's
+// daily craft attempts) and on the bulk mat already banked, so the trip
+// has a purpose. Env-gated COMPETENT_ARMOR_VINE_SEEK=1, default OFF —
+// every other competent user is byte-identical.
+function armorWantsVine(Game, ctx) {
+  if (process.env.COMPETENT_ARMOR_VINE_SEEK !== '1') return false;
+  try {
+    const s = Game.state.scholar;
+    if (!s) return false;
+    const recipes = ((Game.state.codex || {}).recipes || {});
+    const barkLvl = (recipes.bark_armor || {}).level || 0;
+    const hideLvl = (recipes.hide_armor || {}).level || 0;
+    if (barkLvl >= 1 && packMat(Game, 'bark') >= 3 && packMat(Game, 'vine') < 2) return true;
+    if (hideLvl >= 1 && packMat(Game, 'hide') >= 2 && packMat(Game, 'vine') < 1) return true;
+    return false;
+  } catch (e) { return false; }
+}
 // hop-by-hop honest walk toward (hx,hy): one travelTo per hop, no force,
 // bounded. travelTargets only reaches d<=3, so a single travelTo can't
 // cross the map — walk it like a player would.
@@ -1336,6 +1361,11 @@ function forageTripSeedFirst(Game, ctx) {
     // that's player-visible world knowledge (revealed tiles only; the fog
     // keeps its secrets). A vine-rich tile counts as one step nearer.
     const wantVine = keepKnifeOn && knifeWantsVine(Game, ctx);
+    // ARMOR-VINE SEEK (journey-deepening r48): the armor need wants the
+    // same thicket ground the knife wants. Counted for the run's telemetry
+    // (driver ctx IS policy ctx); the trip preference itself is unchanged.
+    const armorVine = armorWantsVine(Game, ctx);
+    if (armorVine) ctx.armorVineSeekTrips = (ctx.armorVineSeekTrips || 0) + 1;
     // VINEBANK (materials-banking 2026-10-14): a trapper banking vine+stick
     // for the blind band wants the same ground the knife wants — thickets
     // for vine (bush harvests), groves for stick (tree harvests).
@@ -1345,7 +1375,7 @@ function forageTripSeedFirst(Game, ctx) {
     // rubble-choked tile IS the destination — route to it deliberately
     // instead of sorting it last. The trip's clearing branch does the work.
     const wantStone = keepKnifeOn && knifeWantsStone(Game, ctx);
-    const wantVineBank = wantVine || vbWantVine; // the bank wants thickets too
+    const wantVineBank = wantVine || vbWantVine || armorVine; // the bank wants thickets too, and so does the armor need (r48)
     const deff = (c) => c.d - ((wantVineBank && c.revealed && (c.type === 'thicket' || c.type === 'grove')) ? 1 : 0)
                              - ((vbWantStick && c.revealed && c.type === 'grove') ? 1 : 0);
     cands.sort((a, b) =>
@@ -3150,7 +3180,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
