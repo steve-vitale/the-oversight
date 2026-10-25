@@ -184,8 +184,13 @@ BEFORE any run). Instrument only, no src/js changes. Merged locally, pending shi
 
 - Heartbeat loop kept alive throughout (10-min cadence, PID recorded at
   run start); lock created at start, deleted at close.
-- Safe-commit index guard applied: worktree status re-verified after the
-  commit per standing guard (see commit record).
+- Safe-commit index clobber struck the r45 commit (all 58 committed files
+  showed staged-as-deleted in the worktree index, worktree files
+  byte-identical to HEAD — same class as r44/r51). Commit 376a414c7
+  verified correct (58 files, 14,458 insertions, no sibling files); index
+  repaired per file via `git update-index --add --cacheinfo` from HEAD
+  blobs, then `git read-tree HEAD` resync; post-repair `git status`
+  empty, `git diff HEAD` empty, sampled hash-object matches.
 - Evidence: evidence/2026-10-25/journey-succession-r45-* (prereg, run note,
   5 stdout JSONs, 5 stderr logs, 5 tele JSONs, 38 transcripts).
 - Instrument: scripts/journey-succession-r45-20261025.js,
