@@ -229,7 +229,17 @@
       this.state.scholar.kcal = Math.max(0, this.state.scholar.kcal - 10);
       const n = 1 + (Math.random() < 0.3 ? 1 : 0);
       this.addMaterial('branch', n);
-      this.say(`You gather fallen limbs from under the ${cell === 'bush' || cell === 'thicket' ? 'brush' : 'tree'}. +${n} branch${n > 1 ? 'es' : ''}. Slow, but free.`);
+      // R44 (journey-deepening): branches come with bark strips — the same
+      // fiction the forage sweep already states (Steve 2026-10-09), but the
+      // deliberate-gather path never yielded bark, so a player who gathered
+      // deadfall on purpose could never get bark at all. Tree deadfall
+      // only: brush gives branches, not bark strips.
+      let barkBit = '';
+      if (cell === 'tree' || cell === 'bigtree') {
+        this.addMaterial('bark', n);
+        barkBit = ` +${n} bark strip${n > 1 ? 's' : ''}`;
+      }
+      this.say(`You gather fallen limbs from under the ${cell === 'bush' || cell === 'thicket' ? 'brush' : 'tree'}. +${n} branch${n > 1 ? 'es' : ''}${barkBit}. Slow, but free.`);
       // ACTION CLOCK: gathering deadfall = half chunk (16 ticks) + 10 kcal.
       return this.tickAction(16) || this.status();
     },

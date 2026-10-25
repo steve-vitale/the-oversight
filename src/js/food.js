@@ -781,7 +781,13 @@
             kcalEach: 0, spoilDay: 9999, kg: (matKg[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): matKg is per-item; the old *n2 total bricked the pack.
           };
           inv.push(matItem);
-          try { if (mk === 'hide' && inv === this.state.scholar.inventory && this.noteHideHandled) this.noteHideHandled(matItem); }
+          // R44 (journey-deepening): the beat fires for the scholar's own
+          // prep counter too — butchering at your counter IS holding the
+          // hide, and prep-stash butchering is the dominant hide path
+          // (hides pile up on the counter while the pack stays empty).
+          // prepStash is scholar-only, so this stays scholar-only; the
+          // communal village stash still never fires the beat.
+          try { if (mk === 'hide' && (inv === this.state.scholar.inventory || inv === this.state.scholar.prepStash) && this.noteHideHandled) this.noteHideHandled(matItem); }
           catch (e) { console.warn('[food] butcher hide handling', e); }
           got.push(n2 + ' ' + (matName[mk] || mk).toLowerCase() + (n2 > 1 ? 's' : ''));
         }
