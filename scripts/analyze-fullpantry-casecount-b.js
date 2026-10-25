@@ -98,11 +98,34 @@ function daysSince(rows, vid, deathDay, pred) {
 }
 
 function main() {
-  // C1 freshness: no seed in PILOT+EXT may appear as an exact "seed"
+  // C1SCOPE FIX (sim-c1scope-b, 2026-10-25): C1 scopes to seeds this
+  // corpus ACTUALLY RAN, read from the corpus's own per-seed
+  // filenames — never to the planned band. The old code checked
+  // ALLBATCH (94601-94728, through unrun B4), so a seed another run
+  // legitimately used inside the planned-but-unrun range (e.g.
+  // cover-b's 94701) failed C1 as a phantom collision on a run that
+  // stopped at the B2 boundary. A planned-but-unrun seed must never
+  // fail C1; a real collision (an actually-run seed in another
+  // corpus) still fails loudly below. The filename list is reused
+  // for the batch-boundary validation, so C1 and validation can
+  // never disagree about which seeds ran. (Per-seed files are
+  // individually re-validated against their seed field later.)
+  let runSeeds = [];
+  if (fs.existsSync(CORPUS)) {
+    for (const f of fs.readdirSync(CORPUS)) {
+      const m = f.match(/^fullpantry-casecount-b-competent-s(\d+)\.json$/);
+      if (m) runSeeds.push(parseInt(m[1], 10));
+    }
+  }
+  runSeeds.sort((x, y) => x - y);
+
+  // C1 freshness: no ACTUALLY-RUN seed may appear as an exact "seed"
   // field in ANY other per-seed corpus file under evidence/2026-10-24
   // (substring matches in other fields are noise).
-  const evDir = path.join(__dirname, '..', 'evidence', '2026-10-24');
-  const allSeeds = ALLBATCH;
+  // C1_EVIDENCE_DIR overrides the scan root for proof tests only
+  // (staging doctored corpora in scratch); production default is
+  // unchanged.
+  const evDir = process.env.C1_EVIDENCE_DIR || path.join(__dirname, '..', 'evidence', '2026-10-24');
   if (fs.existsSync(evDir)) {
     for (const dir of fs.readdirSync(evDir)) {
       if (!dir.endsWith('-corpus')) continue;
@@ -113,7 +136,7 @@ function main() {
         if (!f.endsWith('.json') || f.startsWith('sweep-')) continue;
         try {
           const j = JSON.parse(fs.readFileSync(path.join(d, f), 'utf8'));
-          if (allSeeds.includes(j.seed)) fail(`C1 hit: seed ${j.seed} already in ${dir}/${f}`);
+          if (runSeeds.includes(j.seed)) fail(`C1 hit: seed ${j.seed} already in ${dir}/${f}`);
         } catch (e) { /* unreadable non-seed file: ignore */ }
       }
     }
@@ -124,14 +147,8 @@ function main() {
   // 94601, with no gaps. Strata are the batches (B1..B4), not pilot/ext.
   // The runner stops at a batch boundary once n >= 8, so a complete
   // corpus is any batch-boundary prefix, never a partial batch.
-  let seeds = [];
-  if (fs.existsSync(CORPUS)) {
-    for (const f of fs.readdirSync(CORPUS)) {
-      const m = f.match(/^fullpantry-casecount-b-competent-s(\d+)\.json$/);
-      if (m) seeds.push(parseInt(m[1], 10));
-    }
-  }
-  seeds.sort((x, y) => x - y);
+  // Seeds are the C1 run-seed list above (single source of truth).
+  const seeds = runSeeds;
   if (!seeds.length) fail('empty corpus ' + CORPUS);
   if (seeds[0] !== 94601 || seeds.length % 32 !== 0 || seeds.length > 128
       || !seeds.every((s, i) => s === 94601 + i)) fail('corpus is not a batch-boundary prefix from 94601 (got ' + seeds.length + ' seeds, first=' + seeds[0] + ', last=' + seeds[seeds.length - 1] + ')');
