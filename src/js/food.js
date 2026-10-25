@@ -95,15 +95,23 @@
   // Occupation -> food specialties. Emergent, not classes: your old life is
   // what you know. skill 1 = competent, 2 = good, 3 = master.
   const SPECIALTIES = {
+    // (establishment r35 2026-10-24: same ghost class r31 fixed for
+    // preserver — 'line cook / hunter', 'veterinary tech', 'sushi chef',
+    // 'park ranger', 'cafeteria manager' matched no real occupation, while
+    // the real food trades were unmapped. Butcher now covers the
+    // field-to-table trades; cook adds butcher, mirroring the
+    // villagerCompetence cook list. 'hunter' STAYS at 3: it looked like a
+    // ghost in the JSON pool, but drifters arrive as hunters (membership.js
+    // genApplicant) — removing it regressed a live hunter on seed 124, and
+    // the r35 census caught it. Ghost removal alone changes nothing
+    // in-game (those rows matched nobody); the additions are the fix.)
     butcher: [ // cleaning/gutting game
-      { m: 'hunter', s: 3 }, { m: 'line cook / hunter', s: 3 },
-      { m: 'veterinary tech', s: 3 }, { m: 'veterinarian', s: 3 },
-      { m: 'fisherman', s: 2 }, { m: 'chef', s: 2 }, { m: 'sushi chef', s: 2 },
-      { m: 'farmer', s: 2 }, { m: 'park ranger', s: 2 }, { m: 'butcher', s: 3 },
+      { m: 'hunter', s: 3 }, { m: 'hunting guide', s: 3 }, { m: 'veterinarian', s: 3 }, { m: 'butcher', s: 3 },
+      { m: 'fisherman', s: 2 }, { m: 'fishing guide', s: 2 }, { m: 'chef', s: 2 },
+      { m: 'farmer', s: 2 }, { m: 'line cook', s: 2 }, { m: 'rancher', s: 2 }, { m: 'sailor', s: 2 },
     ],
     cook: [ // cooking: more kcal, safer
-      { m: 'chef', s: 3 }, { m: 'sushi chef', s: 3 }, { m: 'line cook / hunter', s: 2 },
-      { m: 'cafeteria manager', s: 2 }, { m: 'cook', s: 2 }, { m: 'baker', s: 2 },
+      { m: 'chef', s: 3 }, { m: 'cook', s: 2 }, { m: 'baker', s: 2 }, { m: 'butcher', s: 2 },
     ],
     preserver: [ // smoking/drying/salting: keeps longer
       // (establishment r31 2026-10-24: the old table matched almost nobody in
@@ -119,19 +127,29 @@
       { m: 'beekeeper', s: 1 }, { m: 'mushroom grower', s: 1 },
     ],
     spotter: [ // plant identification help (future: faster ID)
-      { m: 'botanist', s: 3 }, { m: 'gardener', s: 2 }, { m: 'farmer', s: 2 },
-      { m: 'hiker', s: 2 }, { m: 'park ranger', s: 2 }, { m: 'herbalist', s: 3 },
+      // (r35: 'botanist'/'hiker'/'park ranger'/'herbalist' were ghosts; the
+      // real plant trades are the forager, the arborist, the florist, and
+      // the mushroom grower. Wild food forager is the master here.)
+      { m: 'wild food forager', s: 3 }, { m: 'gardener', s: 2 }, { m: 'farmer', s: 2 },
+      { m: 'arborist', s: 2 }, { m: 'florist', s: 2 }, { m: 'mushroom grower', s: 1 },
     ],
     builder: [ // pantry/storage upgrades: cheaper, faster
-      { m: 'carpenter', s: 3 }, { m: 'construction worker', s: 3 },
-      { m: 'engineer', s: 2 }, { m: 'mechanic', s: 1 },
+      // (r35: 'construction worker'/'engineer' were ghosts; the real
+      // building trades in the pool are carpenter, mason, roofer, mechanic.
+      // This widens WHO counts as a builder, not the palisade mechanism —
+      // r32: the wall is stockpile-gated, and builder skill never fed it.)
+      { m: 'carpenter', s: 3 }, { m: 'mason', s: 2 }, { m: 'roofer', s: 2 }, { m: 'mechanic', s: 1 },
     ],
   };
 
   // Occupation -> processing techniques the PLAYER starts knowing.
   const TECHNIQUE_GRANTS = {
-    clean: ['hunter', 'line cook / hunter', 'veterinary tech', 'veterinarian', 'fisherman', 'chef', 'sushi chef', 'farmer', 'park ranger', 'butcher'],
-    cook: ['chef', 'sushi chef', 'line cook / hunter', 'cafeteria manager', 'cook', 'baker', 'camper', 'scout', 'hiker'],
+    // (r35: clean/cook grants mirror the widened SPECIALTIES tables above —
+    // a player and a villager with the same occupation now agree on who
+    // knows cleaning and cooking. The dropped 'camper'/'scout'/'hiker'
+    // camp-cooking intent has no real-occupation equivalent in the pool.)
+    clean: ['hunter', 'veterinarian', 'fisherman', 'fishing guide', 'hunting guide', 'chef', 'line cook', 'farmer', 'rancher', 'sailor', 'butcher'],
+    cook: ['chef', 'cook', 'baker', 'butcher'],
     preserve: ['chef', 'fisherman', 'fishing guide', 'hunting guide', 'sailor', 'line cook', 'butcher', 'farmer', 'rancher', 'beekeeper'],
     // (r31 2026-10-24: 'smoker' matched no real occupation; aligned with the
     // widened SPECIALTIES.preserver — a sailor-player and a sailor-villager
