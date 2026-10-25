@@ -1,0 +1,711 @@
+{
+ "seed": 88076,
+ "days": 180,
+ "gameDays": 97,
+ "deferDays": 7,
+ "greedy": {
+  "waits": 4,
+  "maxTier": 0,
+  "seatDay": 97,
+  "seatKind": "lesser"
+ },
+ "armory": {
+  "donations": 11,
+  "craftDonations": 9,
+  "donatedBonus": 106,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 0,
+  "errors": 0,
+  "unitsAtEnd": 6
+ },
+ "guardTrace": [
+  {
+   "day": 90,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 91,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 92,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 93,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 94,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 95,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 96,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 97,
+   "decision": "hp",
+   "overtime": 1,
+   "losses": 1,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  }
+ ],
+ "windowEndGuard": "hp",
+ "announceCapIdx": 11297,
+ "overtimeLines": 2,
+ "plan": "wavesnw",
+ "fullseat": {
+  "days": 96,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 18,
+   "w2": 8,
+   "w3": 7,
+   "w4": 1,
+   "w5": 0,
+   "contests": 12,
+   "crises": 3,
+   "stage": 3,
+   "foodShared": 42,
+   "score": 96,
+   "standing": 199
+  },
+  "sentDay": 15,
+  "surgeDay": 50,
+  "firstLesserDay": 56,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": 97,
+  "winSeat": {
+   "day": 97,
+   "seat": "lesser",
+   "wavesOk": false,
+   "contestsOk": true,
+   "crisesOk": true,
+   "stageOk": true,
+   "foodDeedsOk": true,
+   "binding": [
+    "w4",
+    "w5"
+   ],
+   "worst": "w5",
+   "unlock": {
+    "standing": 199,
+    "t4": 100,
+    "t5": 200,
+    "unlockedWave": 4,
+    "w4faced": true,
+    "holdKind": "defer5",
+    "rd5short": [
+     "veterans"
+    ]
+   }
+  }
+ },
+ "endReason": "over-other",
+ "won": true,
+ "announceDay": 90,
+ "satDay": 97,
+ "satSeatKind": "lesser",
+ "satWaves": {
+  "w1": 18,
+  "w2": 8,
+  "w3": 7,
+  "w4": 1,
+  "w5": 0
+ },
+ "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — global standing, waves 1–3 faced (18/8/7), with 1 wave-4 fought, 12 contests survived, 3 crises weathered. The table does not rise. It prices.",
+ "auditNamed": true,
+ "satPenalty": {
+  "tier": 1,
+  "losses": 1,
+  "penalty": 7
+ },
+ "maxTier": 1,
+ "otMismatch": null,
+ "walkedPath": "feared",
+ "walkedBranch": "light",
+ "instrumentErrors": 0,
+ "telemetry": [
+  {
+   "type": "table_entered",
+   "day": 97,
+   "moral": null
+  },
+  {
+   "type": "table_won",
+   "day": 97,
+   "moral": "light",
+   "ending": "god:shepherd_of_the_dead",
+   "endingKind": "coda"
+  }
+ ],
+ "rg": null,
+ "noticedCount": 0,
+ "noticeLines": [],
+ "ledgerLine": "The table has read your ledger. The protected outnumber the killed; the food truth was shared; promises kept. The light road is open.",
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": false,
+  "leanAtSit": 0,
+  "bandAtSit": "grey",
+  "bondAtSit": 0,
+  "groundingAtSit": 100,
+  "capClaimed": 0,
+  "capAppointed": 1,
+  "capAnswers": 0,
+  "capCommunes": 0,
+  "capReroutes": 0,
+  "doorsOffered": [
+   "path:feared",
+   "path:beloved",
+   "path:witness",
+   "path:assimilated",
+   "path:defiant",
+   "path:relay"
+  ],
+  "doorWalked": "feared"
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 56,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 63,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 77,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 84,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 91,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  }
+ ],
+ "finalBeat": true,
+ "finalOptsCount": 2,
+ "finalPickId": "final:mercy",
+ "finalLabel": "Show mercy.",
+ "finalResolved": true,
+ "finalOutcomeLines": [
+  "◈ THE FEARED — \"Show mercy.\"",
+  "◈ THE ARCHITECT — Jorge Silva ascended through doors you built: relay. The galaxy will remember the god's name. The village will remember who built the door. Both are true. Neither is small.",
+  "◈ THE OVERSIGHT —"
+ ],
+ "promptFrameCount": 5,
+ "dispatchCount": 5,
+ "weekly": [],
+ "fightCensus": {
+  "fights": [
+   {
+    "monsters": [
+     "reunion"
+    ],
+    "startDay": 90,
+    "endDay": 90,
+    "turns": 5,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "gen_n3op79p"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_n3op79p",
+      "name": "Vikram Silva",
+      "cause": "the arena",
+      "day": 90,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "reunion",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "reunion"
+    ],
+    "startDay": 96,
+    "endDay": 97,
+    "turns": 1,
+    "turnsObserved": false,
+    "outcome": "mFlee",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": true,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": false,
+    "deathCauses": [],
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   }
+  ],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 2,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 9,
+  "dead": 0,
+  "people": [
+   {
+    "id": "gen_ow0n4u3",
+    "name": "Lamar Baumann",
+    "dead": false,
+    "occupation": "ER nurse",
+    "npcAbilities": 0
+   },
+   {
+    "id": "daniyar_askarov",
+    "name": "Daniyar Askarov",
+    "dead": false,
+    "occupation": "paramedic",
+    "npcAbilities": 4
+   },
+   {
+    "id": "jorge_silva",
+    "name": "Jorge Silva",
+    "dead": false,
+    "occupation": "Rancher",
+    "npcAbilities": 6
+   },
+   {
+    "id": "yara_haddad",
+    "name": "Yara Haddad",
+    "dead": false,
+    "occupation": "interpreter",
+    "npcAbilities": 5
+   },
+   {
+    "id": "mateo_alvarez",
+    "name": "Mateo Alvarez",
+    "dead": false,
+    "occupation": "barber",
+    "npcAbilities": 3
+   },
+   {
+    "id": "theo_lindqvist",
+    "name": "Theo Lindqvist",
+    "dead": false,
+    "occupation": "trail crew lead",
+    "npcAbilities": 3
+   },
+   {
+    "id": "rosa_mendez",
+    "name": "Rosa Mendez",
+    "dead": false,
+    "occupation": "line cook",
+    "npcAbilities": 1
+   },
+   {
+    "id": "ingrid_vik",
+    "name": "Ingrid Vik",
+    "dead": false,
+    "occupation": "physical therapy aide",
+    "npcAbilities": 1
+   },
+   {
+    "id": "nathan_lee",
+    "name": "Nathan Lee",
+    "dead": false,
+    "occupation": "HVAC tech",
+    "npcAbilities": 1
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Willow",
+    "day": 5,
+    "cause": "a wound that wouldn't close"
+   },
+   {
+    "id": null,
+    "name": "Hector",
+    "day": 33,
+    "cause": "dehydration"
+   },
+   {
+    "id": null,
+    "name": "Aditya",
+    "day": 59,
+    "cause": "dehydration"
+   },
+   {
+    "id": null,
+    "name": "Naran",
+    "day": 65,
+    "cause": "the night"
+   },
+   {
+    "id": null,
+    "name": "Vikram",
+    "day": 90,
+    "cause": "the arena"
+   }
+  ],
+  "pantryKcal": 12451,
+  "scale": "global",
+  "mantle": "Lamar Baumann"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 0,
+  "killers": {},
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 0,
+  "vetFirstDay": null,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "gen_gkgdhem",
+   "name": "Willow Zeng",
+   "cause": "a wound that wouldn't close",
+   "day": 5,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_kmpb4w8",
+   "name": "Binsar Purwanto",
+   "cause": "Sunback",
+   "day": 21,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_frjkpd5",
+   "name": "Hector Morozov",
+   "cause": "dehydration",
+   "day": 33,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "olivia_bennett",
+   "name": "Olivia",
+   "cause": "alien",
+   "day": 44,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_yt904r0",
+   "name": "Aditya Sihombing",
+   "cause": "dehydration",
+   "day": 59,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "naran_tumen",
+   "name": "Naran Tumen",
+   "cause": "the night",
+   "day": 65,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "app_mgpspinj531",
+   "name": "Barbara",
+   "cause": "alien",
+   "day": 72,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_n3op79p",
+   "name": "Vikram Silva",
+   "cause": "the arena",
+   "day": 90,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "reunion",
+     "wave": 4
+    }
+   ]
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Anaconda Empress stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Anaconda Empress",
+   "capIdx": 1768
+  },
+  {
+   "line": "The Drum-Belly stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Drum-Belly",
+   "capIdx": 3290
+  },
+  {
+   "line": "The Loud-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud-Eyes",
+   "capIdx": 5779
+  },
+  {
+   "line": "The Hushpuppy stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Hushpuppy",
+   "capIdx": 6740
+  },
+  {
+   "line": "The Big Loud stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Loud",
+   "capIdx": 8885
+  },
+  {
+   "line": "The Reunion stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "reunion",
+   "rawName": "The Reunion",
+   "capIdx": 9102
+  },
+  {
+   "line": "The Ugly Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Ugly Beast",
+   "capIdx": 10114
+  },
+  {
+   "line": "The Ugly Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Ugly Beast",
+   "capIdx": 10186
+  },
+  {
+   "line": "The Loud-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud-Eyes",
+   "capIdx": 10573
+  },
+  {
+   "line": "The Loud-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud-Eyes",
+   "capIdx": 11088
+  },
+  {
+   "line": "The Eater stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "eater",
+   "rawName": "The Eater",
+   "capIdx": 11093
+  },
+  {
+   "line": "The Loud-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud-Eyes",
+   "capIdx": 11305
+  },
+  {
+   "line": "The Loud-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud-Eyes",
+   "capIdx": 11384
+  },
+  {
+   "line": "The Loud-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud-Eyes",
+   "capIdx": 11477
+  },
+  {
+   "line": "The Big Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Beast",
+   "capIdx": 11561
+  }
+ ]
+}

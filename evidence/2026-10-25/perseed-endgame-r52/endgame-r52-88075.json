@@ -1,0 +1,802 @@
+{
+ "seed": 88075,
+ "days": 180,
+ "gameDays": 98,
+ "deferDays": 8,
+ "greedy": {
+  "waits": 2,
+  "maxTier": 0,
+  "seatDay": 98,
+  "seatKind": "lesser"
+ },
+ "armory": {
+  "donations": 8,
+  "craftDonations": 1,
+  "donatedBonus": 229,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 1,
+  "errors": 0,
+  "unitsAtEnd": 4
+ },
+ "guardTrace": [
+  {
+   "day": 90,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 91,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 92,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 93,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 2,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 94,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 2,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 95,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 2,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 96,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 2,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 97,
+   "decision": "wait",
+   "overtime": 1,
+   "losses": 2,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 98,
+   "decision": "losses",
+   "overtime": 1,
+   "losses": 3,
+   "roster": 7,
+   "vets": 1,
+   "seat": "lesser"
+  }
+ ],
+ "windowEndGuard": "losses",
+ "announceCapIdx": 11419,
+ "overtimeLines": 2,
+ "plan": "wavesnw",
+ "fullseat": {
+  "days": 98,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 13,
+   "w2": 11,
+   "w3": 7,
+   "w4": 4,
+   "w5": 0,
+   "contests": 11,
+   "crises": 3,
+   "stage": 3,
+   "foodShared": 50,
+   "score": 223,
+   "standing": 195
+  },
+  "sentDay": 23,
+  "surgeDay": 59,
+  "firstLesserDay": 59,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": 98,
+  "winSeat": {
+   "day": 98,
+   "seat": "lesser",
+   "wavesOk": false,
+   "contestsOk": true,
+   "crisesOk": true,
+   "stageOk": true,
+   "foodDeedsOk": true,
+   "binding": [
+    "w5"
+   ],
+   "worst": "w5",
+   "unlock": {
+    "standing": 195,
+    "t4": 100,
+    "t5": 200,
+    "unlockedWave": 4,
+    "w4faced": true,
+    "holdKind": "below-bar",
+    "rd5short": [
+     "veterans"
+    ]
+   }
+  }
+ },
+ "endReason": "over-other",
+ "won": true,
+ "announceDay": 90,
+ "satDay": 98,
+ "satSeatKind": "lesser",
+ "satWaves": {
+  "w1": 13,
+  "w2": 11,
+  "w3": 7,
+  "w4": 4,
+  "w5": 0
+ },
+ "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — regional standing, waves 1–3 faced (13/11/7), with 4 wave-4 fought, 11 contests survived, 3 crises weathered. The table does not rise. It prices.",
+ "auditNamed": true,
+ "satPenalty": {
+  "tier": 1,
+  "losses": 3,
+  "penalty": 13
+ },
+ "maxTier": 1,
+ "otMismatch": null,
+ "walkedPath": "feared",
+ "walkedBranch": "light",
+ "instrumentErrors": 0,
+ "telemetry": [
+  {
+   "type": "table_entered",
+   "day": 98,
+   "moral": null
+  },
+  {
+   "type": "table_won",
+   "day": 98,
+   "moral": "light",
+   "ending": "class:forager/gardener",
+   "endingKind": "coda"
+  }
+ ],
+ "rg": null,
+ "noticedCount": 0,
+ "noticeLines": [],
+ "ledgerLine": "The table has read your ledger. The protected outnumber the killed; the food truth was shared; promises kept; the relay carried faithfully. The light road is open.",
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": true,
+  "leanAtSit": 2,
+  "bandAtSit": "grey",
+  "bondAtSit": 0,
+  "groundingAtSit": 99,
+  "capClaimed": 0,
+  "capAppointed": 2,
+  "capAnswers": 0,
+  "capCommunes": 1,
+  "capReroutes": 1,
+  "doorsOffered": [
+   "path:feared",
+   "path:beloved",
+   "path:witness",
+   "path:assimilated",
+   "path:defiant",
+   "path:relay"
+  ],
+  "doorWalked": "feared"
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 56,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 63,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 70,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 77,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 84,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 91,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 98,
+   "lean": 2,
+   "band": "grey",
+   "grounding": 99,
+   "bond": 0,
+   "held": true
+  }
+ ],
+ "finalBeat": true,
+ "finalOptsCount": 2,
+ "finalPickId": "final:mercy",
+ "finalLabel": "Show mercy.",
+ "finalResolved": true,
+ "finalOutcomeLines": [
+  "◈ THE FEARED — \"Show mercy.\"",
+  "◈ THE OVERSIGHT —"
+ ],
+ "promptFrameCount": 5,
+ "dispatchCount": 5,
+ "weekly": [
+  {
+   "day": 97,
+   "tier": 1,
+   "alive": 7,
+   "pantry": 8466
+  }
+ ],
+ "fightCensus": {
+  "fights": [
+   {
+    "monsters": [
+     "algorithm"
+    ],
+    "startDay": 98,
+    "endDay": 98,
+    "turns": 15,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine+policy",
+    "committed": true,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [
+     "mara_vasquez"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "mara_vasquez",
+      "name": "Mara Vasquez",
+      "cause": "the arena",
+      "day": 98,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "algorithm",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 98,
+    "endDay": 98,
+    "turns": 15,
+    "turnsObserved": true,
+    "outcome": "vKill",
+    "killFlag": true,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine+policy",
+    "committed": true,
+    "arenaMention": false,
+    "deathCauses": [],
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   }
+  ],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 2,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 6,
+  "dead": 1,
+  "people": [
+   {
+    "id": "jesse_cortez",
+    "name": "Jesse Cortez",
+    "dead": false,
+    "occupation": "line cook",
+    "npcAbilities": 4
+   },
+   {
+    "id": "ella_johnson",
+    "name": "Ella Johnson",
+    "dead": false,
+    "occupation": "ESL teacher",
+    "npcAbilities": 3
+   },
+   {
+    "id": "hannah_kim",
+    "name": "Hannah Kim",
+    "dead": false,
+    "occupation": "Chef",
+    "npcAbilities": 0
+   },
+   {
+    "id": "app_mgpspipv637",
+    "name": "Catarina Seixas",
+    "dead": false,
+    "occupation": "mechanic",
+    "npcAbilities": 2
+   },
+   {
+    "id": "app_mgpsphk1252",
+    "name": "Matteo Biagi",
+    "dead": false,
+    "occupation": "cook",
+    "npcAbilities": 1
+   },
+   {
+    "id": "somchai_prasert",
+    "name": "Somchai Prasert",
+    "dead": false,
+    "occupation": "bike messenger",
+    "npcAbilities": 1
+   },
+   {
+    "id": "pavel_dubinin",
+    "name": "Pavel Dubinin",
+    "dead": true,
+    "occupation": "bush pilot",
+    "npcAbilities": 2
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Avery",
+    "day": 10,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Aroha",
+    "day": 46,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "DeAndre",
+    "day": 62,
+    "cause": "dehydration"
+   },
+   {
+    "id": null,
+    "name": "Dan",
+    "day": 76,
+    "cause": "contest"
+   },
+   {
+    "id": null,
+    "name": "Esther",
+    "day": 91,
+    "cause": "contest"
+   },
+   {
+    "id": null,
+    "name": "Catalina",
+    "day": 97,
+    "cause": "monster"
+   },
+   {
+    "id": null,
+    "name": "Mara",
+    "day": 98,
+    "cause": "the arena"
+   }
+  ],
+  "pantryKcal": 3132,
+  "scale": "regional",
+  "mantle": "Hannah Kim"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "veterans"
+  ],
+  "rd5veterans": 1,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 1,
+  "killers": {
+   "hannah_kim": {
+    "kills": 1,
+    "types": [],
+    "days": [
+     98
+    ]
+   }
+  },
+  "livingVeterans": [
+   "hannah_kim"
+  ],
+  "livingVeteranCount": 1,
+  "vetFights": 23,
+  "vetFirstDay": 98,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "gen_nvyfsq8",
+   "name": "Avery Jiang",
+   "cause": "the arena",
+   "day": 10,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "gallowdeer",
+     "wave": 1
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "dale_hoffman",
+   "name": "Dale",
+   "cause": "alien",
+   "day": 38,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "pavel_dubinin",
+   "name": "Pavel",
+   "cause": "alien",
+   "day": 45,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "aroha_ngata",
+   "name": "Aroha Ngata",
+   "cause": "the arena",
+   "day": 46,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_z72ri2b",
+   "name": "DeAndre Baumann",
+   "cause": "dehydration",
+   "day": 62,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "dmitri_sokolov",
+   "name": "Dmitri",
+   "cause": "alien",
+   "day": 66,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_tbaijfn",
+   "name": "Felicia",
+   "cause": "alien",
+   "day": 73,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_7z8d244",
+   "name": "Dan Wei",
+   "cause": "contest",
+   "day": 76,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_iql1499",
+   "name": "Esther Koehler",
+   "cause": "contest",
+   "day": 91,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_xsbb24m",
+   "name": "Aizhan",
+   "cause": "alien",
+   "day": 93,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "catalina_reyes",
+   "name": "Catalina",
+   "cause": "monster",
+   "day": 97,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "mara_vasquez",
+   "name": "Mara Vasquez",
+   "cause": "the arena",
+   "day": 98,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "algorithm",
+     "wave": 4
+    }
+   ]
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Loud Stare stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud Stare",
+   "capIdx": 5712
+  },
+  {
+   "line": "The Big-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big-Eyes",
+   "capIdx": 6380
+  },
+  {
+   "line": "The Big Thing stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Thing",
+   "capIdx": 8289
+  },
+  {
+   "line": "The Algorithm stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "algorithm",
+   "rawName": "The Algorithm",
+   "capIdx": 10605
+  },
+  {
+   "line": "The Loud Stare stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud Stare",
+   "capIdx": 11229
+  },
+  {
+   "line": "The Influencer stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Influencer",
+   "capIdx": 11235
+  },
+  {
+   "line": "The Loud Stare stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud Stare",
+   "capIdx": 11351
+  },
+  {
+   "line": "The Influencer stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Influencer",
+   "capIdx": 11354
+  },
+  {
+   "line": "The Sweeps Week stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Sweeps Week",
+   "capIdx": 11421
+  },
+  {
+   "line": "The Influencer stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Influencer",
+   "capIdx": 11435
+  },
+  {
+   "line": "The Loud Stare stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Loud Stare",
+   "capIdx": 11439
+  },
+  {
+   "line": "The Big-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big-Eyes",
+   "capIdx": 12248
+  },
+  {
+   "line": "The Influencer stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Influencer",
+   "capIdx": 12272
+  },
+  {
+   "line": "The Spool stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "algorithm",
+   "rawName": "The Spool",
+   "capIdx": 12388
+  },
+  {
+   "line": "The Algorithm stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "algorithm",
+   "rawName": "The Algorithm",
+   "capIdx": 12413
+  }
+ ]
+}
