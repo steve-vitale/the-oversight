@@ -4176,6 +4176,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { drawn = this.pantryDraw(v, want, { cook: false, exposure: risks }); }
         catch (e) { console.warn('[food] ration draw failed', e); }
         p = v.pack[vid] = { day: today, kcal: Math.round(drawn.taken), risks };
+        // TAIL PACK (sim-packtail-b 2026-10-25): the dawn pack size, for
+        // the meal-time top-up in packMeal. Theft/intimidation callers
+        // read packKcal only — this field changes no formula, no caller.
+        p.dawnKcal = p.kcal; p.topUpDone = false;
         const shares=this.blendHarvestShares(drawn.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal})));
         if (Object.keys(shares).length) p.harvestShares=shares;
         const garden=this.blendGardenShares(drawn.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal})));
@@ -28808,7 +28812,45 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const v = this.state.village;
       const pool = this.packKcal(vid); // ensures today's ration is packed
       const p = (v.pack || {})[vid];
-      const take = Math.min(pool, want);
+      // TAIL PACK TOP-UP (sim-packtail-b 2026-10-25): floor-only, meal-time
+      // only. When the DAWN pack falls short of today's shortfall, top it
+      // up from REAL pantry items — never conjured, never a resize.
+      // Non-binding days draw nothing (byte-identical behavior); theft
+      // and intimidation callers use packKcal directly and never reach
+      // this path, so a stolen pack still loses exactly what was taken
+      // (the top-up request is want minus dawn, not want minus pool).
+      // One attempt per pack-day; an empty pantry pays nothing and the
+      // meal falls back to the old min(pool, want) shape.
+      if (p && !p.topUpDone) {
+        p.topUpDone = true;
+        const dawn = (p.dawnKcal != null ? p.dawnKcal : pool);
+        if (dawn < want) {
+          try {
+            const extra = this.pantryDraw(v, want - dawn, { cook: false, exposure });
+            if (extra && extra.taken > 0) {
+              p.kcal = (p.kcal || 0) + Math.round(extra.taken);
+              // Provenance: the topped-up pack's shares are the
+              // kcal-weighted blend of the dawn draw and the top-up
+              // draw (pseudo-items carry the dawn shares at dawn
+              // weight). Absent dawn shares stay absent — an untraced
+              // ration never acquires a harvester from its top-up.
+              if (p.harvestShares && Object.keys(p.harvestShares).length) {
+                const parts = Object.entries(p.harvestShares).map(([id, n]) => ({ item: { harvestShares: { [id]: 1 } }, weight: n * dawn }));
+                for (const d of extra.items) parts.push({ item: d.item, weight: d.units * d.effectiveKcal });
+                const merged = this.blendHarvestShares(parts);
+                if (Object.keys(merged).length) p.harvestShares = merged;
+              }
+              if (p.gardenShares && Object.keys(p.gardenShares).length) {
+                const parts = Object.entries(p.gardenShares).map(([key, n]) => ({ item: { gardenShares: { [key]: 1 } }, weight: n * dawn }));
+                for (const d of extra.items) parts.push({ item: d.item, weight: d.units * d.effectiveKcal });
+                const merged = this.blendGardenShares(parts);
+                if (Object.keys(merged).length) p.gardenShares = merged;
+              }
+            }
+          } catch (e) { console.warn('[food] pack top-up failed', e); }
+        }
+      }
+      const take = Math.min((p ? p.kcal : pool), want);
       // AWAY-HUNGER VOICE (sim-awayvoice-b 2026-10-25): the narration call
       // lives in awayHungerVoice below — words only, see that method.
       if (take <= 0) { this.awayHungerVoice(vid, want, take, pool); return 0; }
