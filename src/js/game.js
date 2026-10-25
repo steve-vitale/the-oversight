@@ -19492,6 +19492,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (moved) this.syncMonsterAlias();
     },
+    // POST-FLEE REST (sim-postflee-a 2026-10-25): after a villager flees a
+    // FIELD fight ending below 25% of max HP, they hide for the rest of
+    // that calendar day — no re-encounter, no relocation, no HP restored.
+    // The flag is keyed by villager + scholar day and expires the next
+    // day. Raid defense, aid-crisis fights, arena routes, and the scholar
+    // are never flagged: the flag is set only in the wild router and the
+    // expedition branch, never in fieldFight itself. Fights are still
+    // blow-by-blow (Steve 2026-10-08) — this gates re-encounters BETWEEN
+    // fights, it never replaces, trims, or re-rolls a fight.
+    postFleeRestDay() {
+      try { return (this.state && this.state.scholar && this.state.scholar.day) || 1; } catch (e) { return 1; }
+    },
+    markPostFleeRest(vid) {
+      if (!vid || vid === this.villagerId) return false;
+      try { if (this.getPerson) { const p = this.getPerson(vid); if (p && p.dead) return false; } } catch (e) {}
+      this._postFleeRest = this._postFleeRest || {};
+      this._postFleeRest[vid] = this.postFleeRestDay();
+      return true;
+    },
+    isPostFleeResting(vid) {
+      if (!vid || !this._postFleeRest) return false;
+      return this._postFleeRest[vid] === this.postFleeRestDay();
+    },
     // villagerMonsterTick: the world lives without you. Villagers on a
     // monster's tile may kill it, drive it off, get mauled, or die.
     villagerMonsterTick() {
@@ -19507,7 +19530,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // SHELTER (2026-10-16): sheltered villagers are behind the barricaded
         // hall door — not on the grounds to be jumped. The muster beat finally
         // has a mechanism (sim-siegeroster 2026-10-15: "narration without a mechanism").
-        try { npcIds = this.npcsOnNode(m.tx, m.ty).filter(id => (v.roster || []).includes(id) && !(this.isSheltered && this.isSheltered(id))); } catch (e) {}
+        try { npcIds = this.npcsOnNode(m.tx, m.ty).filter(id => (v.roster || []).includes(id) && !(this.isSheltered && this.isSheltered(id)) && !(this.isPostFleeResting && this.isPostFleeResting(id))); } catch (e) {}
         if (!npcIds.length) continue;
         if (Math.random() > 0.5) continue; // not every tick is a bloodbath
         const vid = npcIds[Math.floor(Math.random() * npcIds.length)];
@@ -19520,6 +19543,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // routes the honest record into the world's downstream systems.
     resolveWildMonsterEncounter(vid, m, opts) {
       opts = opts || {};
+      // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
+      // recognized after the fight's wounds land (max = max(100, entry),
+      // exactly as the deathcensus recorder reads villager HP).
+      let _pfEntryHp = null;
+      try { const _vh = (this.state.village || {}).health || {}; _pfEntryHp = (_vh[vid] !== undefined) ? _vh[vid] : 100; } catch (e) {}
       let person = null;
       try { person = this.getPerson ? this.getPerson(vid) : null; } catch (e) {}
       const name = person ? String(person.name).split(' ')[0] : 'Someone';
@@ -19553,6 +19581,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // resolvePatrol — a lingering raider during an aid crisis is fought
       // through aidFight, allies at the door in the fight from round one.
       let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      // POST-FLEE REST: a critically wounded fleer hides for the rest of
+      // the day — no new fight is rolled, nothing relocates, no HP
+      // restored. Raid defense and lingering-raider aid fights are never
+      // skipped: the guard exempts opts.raid and the aid path.
+      if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
       if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
       const summary = this.fieldFightSummary(rec, name, mName);
@@ -19631,7 +19664,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (rec.outcome === 'vFlee') {
         // real wounds from the real fight — not a scaled table number
         try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
-        tell(`🩸 ${summary}`);
+        // POST-FLEE REST: fled below 25% of max (and not an aid-crisis
+        // fight, which never flags) — the rest decision rides in the same
+        // awayNews line, never a silent save.
+        let _pfRest = false;
+        try {
+          const _vh = (this.state.village || {}).health || {};
+          const _endHp = (_vh[vid] !== undefined) ? _vh[vid] : 0;
+          if (!wViaAid && _endHp / Math.max(100, _pfEntryHp || 100) < 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
+        } catch (e) {}
+        tell(`🩸 ${summary}` + (_pfRest ? ' — staying out of sight for the rest of the day — too hurt to meet it again' : ''));
       } else if (rec.outcome === 'vDie') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         tell(`💀 ${summary}`);

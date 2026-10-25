@@ -343,6 +343,11 @@
     // awareness check ("saw it, gave it room") stays — it decides contact,
     // not outcome. Once steel is crossed, the fight decides.
     expeditionMonster(vid, dist, playerAtHaven) {
+      // POST-FLEE REST (sim-postflee-a 2026-10-25): a critically wounded
+      // fleer fights nothing for the rest of the day. The entry check
+      // precedes all agency reads, so it holds even when agency state is
+      // uninitialized in a probe process.
+      if (this.isPostFleeResting && this.isPostFleeResting(vid)) return;
       // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
       // holds its breath — expeditions meet nothing out there. The village
       // is at the table or watching it; every stake is the table's own.
@@ -366,6 +371,10 @@
       // don't. The depth probe measured calledHelp 0/531 before this.
       var allyVids = [];
       try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
+      // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
+      // recognized after the fight's wounds land (max = max(100, entry)).
+      var _pfEntryHp = 100;
+      try { var _vh = (this.state.village || {}).health || {}; if (_vh[vid] !== undefined) _pfEntryHp = _vh[vid]; } catch (e) {}
       var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids });
       // The village hears about a rescue — gossip fodder, honestly sourced.
       // "Mara ran into the treeline when she heard James scream."
@@ -452,6 +461,15 @@
       if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven);
       // vFlee: real wounds from the real fight, then the hurt pipeline
       try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+      // POST-FLEE REST: fled below 25% of max — flag the day's rest and
+      // log it in the expedition encounters list, never a silent save.
+      var _pfRest = false;
+      try {
+        var _vh2 = (this.state.village || {}).health || {};
+        var _endHp = (_vh2[vid] !== undefined) ? _vh2[vid] : 0;
+        if (_endHp / Math.max(100, _pfEntryHp) < 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
+      } catch (e) {}
+      if (_pfRest && st.exped[vid]) st.exped[vid].encounters.push('fled ' + (m.id || 'it') + ' — staying out of sight for the rest of the day, too hurt to meet it again');
       return this.expedHurt(vid, mName + ' (' + fightNote + ')', nm);
     },
     expedHurt(vid, mName, nm) {
