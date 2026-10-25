@@ -57,9 +57,18 @@ function beatLines(said) { return said.filter(t => /away from the haven/.test(t)
     v.pantry = [freshItem(Game, 'Foraged food', 50000, 3)];
     const before = Game.packKcal(vid);
     assert(before > 0, 'pack should hold a ration, got ' + before);
+    const pack = (v.pack || {})[vid];
+    const dawn = (pack && pack.dawnKcal != null ? pack.dawnKcal : before);
     const take = Game.packMeal(vid, 1500, Game.freshExposure());
     assert(take > 0, 'take should be positive, got ' + take);
-    assert.strictEqual(Game.packKcal(vid), before - take, 'pack kcal must fall by exactly take');
+    // Combined packtail + awayvoice accounting: on a binding day
+    // (dawn pack < want) the meal first tops the pack up from the pantry
+    // (want - dawn; the pantry here covers it in full), then spends take —
+    // so the pack ends at before + topup - take, not before - take.
+    // The old before - take assertion assumed no top-up and is invalid
+    // once the tail-pack lever lands alongside the voice beat.
+    const topup = (dawn < 1500 ? 1500 - dawn : 0);
+    assert.strictEqual(Game.packKcal(vid), before + topup - take, 'pack kcal must fall by take net of the meal-time top-up');
     const beats = beatLines(said);
     assert.strictEqual(beats.length, 1, 'exactly one beat line, got ' + JSON.stringify(beats));
     assert(beats[0].includes(first), 'beat must name the traveler ' + first + ', got: ' + beats[0]);
