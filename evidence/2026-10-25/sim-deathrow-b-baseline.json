@@ -1,0 +1,313 @@
+{
+  "mode": "pool",
+  "generatedBy": "scripts/analyze-causebase-b.js",
+  "population": "kind in {villager, person} AND scholar flag false; labels raw, unnormalized",
+  "scope": {
+    "scopeVersion": 1,
+    "policy": "tableseat-nowait",
+    "horizon": {
+      "days": 180,
+      "mode": "death-aware"
+    },
+    "flags": {
+      "PLENTYDEPRI": null,
+      "DEPOSITGATE": null
+    },
+    "kindFilter": {
+      "kinds": [
+        "villager",
+        "person"
+      ],
+      "scholarExcluded": true,
+      "scholarFlagFields": {
+        "sweep": "isPlayer",
+        "census": "player"
+      },
+      "description": "kind in {villager, person} AND scholar flag false"
+    },
+    "labels": {
+      "form": "raw, unnormalized",
+      "truncationChars": 32
+    },
+    "corpora": [
+      {
+        "dir": "/home/hatch/workspace/worktrees/sim-deathrow-b/evidence/2026-10-25/perseed-deathrow-b",
+        "seedFirst": 73701,
+        "seedLast": 73748,
+        "seedCount": 40,
+        "filesIngested": 40
+      }
+    ],
+    "counts": {
+      "rowsTotal": 1203,
+      "excludedByKind": 859,
+      "excludedScholar": 200,
+      "villagerDeaths": 144,
+      "labelCount": 21
+    },
+    "derivation": {
+      "policy": "uniform per-seed corpus policy field (a conflict fails loudly)",
+      "flags": "uniform per-seed corpus plentydepri/depositgate fields (a conflict fails loudly)",
+      "horizonDays": "uniform sweep summary meta.days (a conflict fails loudly; null when no summary meta present)",
+      "horizonMode": "documented sweep-driver semantics per sim-causebase-b.md pre-registration (150d death-aware); mode is not a corpus field",
+      "corpora": "per-corpus seed bands from ingested per-seed files; full seed lists in top-level corpora[].seeds"
+    }
+  },
+  "corpora": [
+    {
+      "dir": "/home/hatch/workspace/worktrees/sim-deathrow-b/evidence/2026-10-25/perseed-deathrow-b",
+      "filesIngested": [
+        "s73701.json",
+        "s73702.json",
+        "s73703.json",
+        "s73704.json",
+        "s73705.json",
+        "s73706.json",
+        "s73707.json",
+        "s73708.json",
+        "s73711.json",
+        "s73712.json",
+        "s73713.json",
+        "s73714.json",
+        "s73715.json",
+        "s73716.json",
+        "s73717.json",
+        "s73718.json",
+        "s73721.json",
+        "s73722.json",
+        "s73723.json",
+        "s73724.json",
+        "s73725.json",
+        "s73726.json",
+        "s73727.json",
+        "s73728.json",
+        "s73731.json",
+        "s73732.json",
+        "s73733.json",
+        "s73734.json",
+        "s73735.json",
+        "s73736.json",
+        "s73737.json",
+        "s73738.json",
+        "s73741.json",
+        "s73742.json",
+        "s73743.json",
+        "s73744.json",
+        "s73745.json",
+        "s73746.json",
+        "s73747.json",
+        "s73748.json"
+      ],
+      "filesSkipped": [
+        {
+          "file": "summary.json",
+          "reason": "no per-death rows (summary file)"
+        }
+      ],
+      "seeds": [
+        73701,
+        73702,
+        73703,
+        73704,
+        73705,
+        73706,
+        73707,
+        73708,
+        73711,
+        73712,
+        73713,
+        73714,
+        73715,
+        73716,
+        73717,
+        73718,
+        73721,
+        73722,
+        73723,
+        73724,
+        73725,
+        73726,
+        73727,
+        73728,
+        73731,
+        73732,
+        73733,
+        73734,
+        73735,
+        73736,
+        73737,
+        73738,
+        73741,
+        73742,
+        73743,
+        73744,
+        73745,
+        73746,
+        73747,
+        73748
+      ],
+      "rowsTotal": 1203,
+      "excludedByKind": 859,
+      "excludedScholar": 200,
+      "villagerDeaths": 144,
+      "causes": {
+        "Lockpick": 1,
+        "ambush": 22,
+        "sickness": 15,
+        "monster": 51,
+        "combat": 2,
+        "Buffering": 1,
+        "alien": 6,
+        "a wound that wouldn't close": 22,
+        "thirst": 5,
+        "contest": 1,
+        "starvation": 7,
+        "Inspiration": 1,
+        "The Moderator": 1,
+        "White Noise": 1,
+        "Big Big": 1,
+        "a dog-shaped silence at the treeline": 1,
+        "Choir Toad": 2,
+        "Hushpuppy": 1,
+        "Nevermore": 1,
+        "Ad Break": 1,
+        "The Big Beast": 1
+      }
+    }
+  ],
+  "seedOverlap": [],
+  "rowsTotal": 1203,
+  "excludedByKind": 859,
+  "excludedScholar": 200,
+  "villagerDeaths": 144,
+  "pooledCauses": {
+    "Lockpick": 1,
+    "ambush": 22,
+    "sickness": 15,
+    "monster": 51,
+    "combat": 2,
+    "Buffering": 1,
+    "alien": 6,
+    "a wound that wouldn't close": 22,
+    "thirst": 5,
+    "contest": 1,
+    "starvation": 7,
+    "Inspiration": 1,
+    "The Moderator": 1,
+    "White Noise": 1,
+    "Big Big": 1,
+    "a dog-shaped silence at the treeline": 1,
+    "Choir Toad": 2,
+    "Hushpuppy": 1,
+    "Nevermore": 1,
+    "Ad Break": 1,
+    "The Big Beast": 1
+  },
+  "pooledTable": [
+    {
+      "label": "monster",
+      "count": 51,
+      "share": 0.3541666666666667
+    },
+    {
+      "label": "a wound that wouldn't close",
+      "count": 22,
+      "share": 0.1527777777777778
+    },
+    {
+      "label": "ambush",
+      "count": 22,
+      "share": 0.1527777777777778
+    },
+    {
+      "label": "sickness",
+      "count": 15,
+      "share": 0.10416666666666667
+    },
+    {
+      "label": "starvation",
+      "count": 7,
+      "share": 0.04861111111111111
+    },
+    {
+      "label": "alien",
+      "count": 6,
+      "share": 0.041666666666666664
+    },
+    {
+      "label": "thirst",
+      "count": 5,
+      "share": 0.034722222222222224
+    },
+    {
+      "label": "Choir Toad",
+      "count": 2,
+      "share": 0.013888888888888888
+    },
+    {
+      "label": "combat",
+      "count": 2,
+      "share": 0.013888888888888888
+    },
+    {
+      "label": "Ad Break",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "Big Big",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "Buffering",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "Hushpuppy",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "Inspiration",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "Lockpick",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "Nevermore",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "The Big Beast",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "The Moderator",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "White Noise",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "a dog-shaped silence at the treeline",
+      "count": 1,
+      "share": 0.006944444444444444
+    },
+    {
+      "label": "contest",
+      "count": 1,
+      "share": 0.006944444444444444
+    }
+  ]
+}
