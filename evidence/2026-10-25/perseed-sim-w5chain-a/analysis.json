@@ -1,0 +1,1317 @@
+{
+ "label": "sim-w5chain-a per-class analysis",
+ "dir": "/home/hatch/workspace/worktrees/sim-w5chain-a/evidence/2026-10-25/perseed-sim-w5chain-a",
+ "band": {
+  "n": 8,
+  "won": 4,
+  "medianDays": 135,
+  "nationalEver": 7,
+  "nationalFinal": 6,
+  "table": 4,
+  "entered": 4,
+  "wave3": 8,
+  "wave4": 6,
+  "wave5": 0,
+  "starvationTotal": 5,
+  "deathTotal": 234
+ },
+ "neutrality": {
+  "control": {
+   "raids": 85,
+   "raiders": 361,
+   "deaths": 234,
+   "nationalEver": 7,
+   "wins": 4,
+   "medianDays": 135,
+   "poolTotal": 1494,
+   "poolW3": 107,
+   "wave4": 6,
+   "wave5": 0
+  },
+  "observed": {
+   "raids": 85,
+   "raiders": 361,
+   "deaths": 234,
+   "nationalEver": 7,
+   "wins": 4,
+   "medianDays": 135,
+   "poolTotal": 1494,
+   "poolW3": 107,
+   "wave4": 6,
+   "wave5": 0
+  },
+  "exact": true
+ },
+ "corpusOk": true,
+ "completeN": 8,
+ "totalN": 8,
+ "reconN": 0,
+ "inconsistN": 0,
+ "classes": {
+  "natxw4": {
+   "seeds": [
+    73671,
+    73672,
+    73674,
+    73675,
+    73677,
+    73678
+   ],
+   "legBindCount": {
+    "armored": 0,
+    "armed": 0,
+    "tricks": 0,
+    "veterans": 6
+   },
+   "legMetSum": {
+    "armored": 487,
+    "armed": 828,
+    "tricks": 803,
+    "veterans": 0
+   },
+   "daysAllFour": 0,
+   "daysFullElig": 0,
+   "stagesReached": {
+    "capped200": 1,
+    "rd5ready": 0,
+    "faced4": 2,
+    "proxy5": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ]
+  },
+  "natxnow4": {
+   "seeds": [
+    73673
+   ],
+   "legBindCount": {
+    "armored": 0,
+    "armed": 0,
+    "tricks": 0,
+    "veterans": 1
+   },
+   "legMetSum": {
+    "armored": 119,
+    "armed": 120,
+    "tricks": 118,
+    "veterans": 0
+   },
+   "daysAllFour": 0,
+   "daysFullElig": 0,
+   "stagesReached": {
+    "capped200": 0,
+    "rd5ready": 0,
+    "faced4": 0,
+    "proxy5": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ]
+  },
+  "nonatxnow4": {
+   "seeds": [
+    73676
+   ],
+   "legBindCount": {
+    "armored": 0,
+    "armed": 0,
+    "tricks": 0,
+    "veterans": 1
+   },
+   "legMetSum": {
+    "armored": 55,
+    "armed": 53,
+    "tricks": 61,
+    "veterans": 0
+   },
+   "daysAllFour": 0,
+   "daysFullElig": 0,
+   "stagesReached": {
+    "capped200": 0,
+    "rd5ready": 0,
+    "faced4": 0,
+    "proxy5": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ]
+  }
+ },
+ "seeds": [
+  {
+   "seed": 73671,
+   "end": "survived",
+   "days": 180,
+   "won": 0,
+   "finalRank": "regional",
+   "nationalEver": true,
+   "nationalFinal": false,
+   "table": false,
+   "entered": false,
+   "waveReach": 4,
+   "wave4Harness": true,
+   "wave4Proxy": true,
+   "proxyMax": 4,
+   "recon": null,
+   "classKey": "natxw4",
+   "maxRaw": 127,
+   "maxRawDay": 177,
+   "maxCapped": 127,
+   "maxCappedDay": 177,
+   "maxGated": 127,
+   "peakMax": 4,
+   "first": {
+    "proxy4": 177
+   },
+   "legMet": {
+    "armored": 170,
+    "armed": 172,
+    "tricks": 173,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d177 raw=127 capped=127 gated=127 holds=[none] peak=4 proxy=4 rd5=3/4,5/6,23/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 3,
+    "armed": 5,
+    "tricks": 23,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": false,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=4/4,10/6,7/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=102 capped=102 gated=99 holds=[defer4] peak=0 proxy=3 rd5=4/4,9/6,12/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d120 raw=102 capped=102 gated=99 holds=[defer4] peak=0 proxy=3 rd5=4/4,8/6,20/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d180": {
+     "line": "d180 raw=25 capped=25 gated=100 holds=[none] peak=4 proxy=4 rd5=2/4,4/6,24/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    }
+   },
+   "endLine": "d180 raw=25 capped=25 gated=100 holds=[none] peak=4 proxy=4 rd5=2/4,4/6,24/3,0/2 ready=false faced4=0",
+   "birthsByWave": {
+    "1": 28,
+    "2": 15,
+    "3": 7,
+    "4": 1
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 6,
+    "tile-entry:w1": 19,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w2": 15,
+    "tile-entry:w3": 7,
+    "tile-entry:w4": 1
+   },
+   "targetCalls": 49,
+   "targetCounts": {
+    "1:1": 16,
+    "2:2": 8,
+    "2:1": 7,
+    "3:2": 7,
+    "3:3": 7,
+    "3:1": 3,
+    "4:4": 1
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 1,
+   "target4Calls": 1,
+   "maxTop": 4,
+   "facedFinal": {
+    "anaconda_empress": 1,
+    "ducks_in_a_row": 1,
+    "nevermore": 1,
+    "drumbelly_tanuki": 1,
+    "murkcap": 1,
+    "hushwolf": 1,
+    "cliffhanger": 1,
+    "mirrormoth": 1,
+    "gallowdeer": 1,
+    "rut_king": 1,
+    "bright_idea": 2,
+    "landlord": 2,
+    "living_wire": 1,
+    "moderator": 2,
+    "nightcourt": 1,
+    "lockpick_raccoon": 1,
+    "giant_mosquito": 2,
+    "alien_tick": 2,
+    "terms_of_service": 3,
+    "hummice": 1,
+    "glasswing": 1,
+    "warranty_caller": 2,
+    "spool": 3,
+    "buffering": 3,
+    "review_drone": 2,
+    "nightlight_catfish": 1,
+    "redactor": 3,
+    "heckler": 2
+   },
+   "kills4": 0,
+   "tracePoints": 180,
+   "distinctDays": 178,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73672,
+   "end": "over-other",
+   "days": 97,
+   "won": 1,
+   "finalRank": "global",
+   "nationalEver": true,
+   "nationalFinal": true,
+   "table": true,
+   "entered": true,
+   "waveReach": 4,
+   "wave4Harness": true,
+   "wave4Proxy": true,
+   "proxyMax": 4,
+   "recon": null,
+   "classKey": "natxw4",
+   "maxRaw": 167,
+   "maxRawDay": 67,
+   "maxCapped": 167,
+   "maxCappedDay": 67,
+   "maxGated": 167,
+   "peakMax": 4,
+   "first": {
+    "proxy4": 60
+   },
+   "legMet": {
+    "armored": 47,
+    "armed": 95,
+    "tricks": 88,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d67 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=2/4,6/6,20/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 2,
+    "armed": 6,
+    "tricks": 20,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": false,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=4/4,8/6,14/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=147 capped=147 gated=147 holds=[none] peak=4 proxy=4 rd5=2/4,6/6,19/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d97 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=2/4,7/6,21/3,0/2 ready=false faced4=0",
+     "endSubstituted": true
+    },
+    "d180": {
+     "line": "d97 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=2/4,7/6,21/3,0/2 ready=false faced4=0",
+     "endSubstituted": true
+    }
+   },
+   "endLine": "d97 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=2/4,7/6,21/3,0/2 ready=false faced4=0",
+   "birthsByWave": {
+    "1": 25,
+    "2": 14,
+    "3": 3,
+    "4": 2
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 5,
+    "tile-entry:w1": 16,
+    "wanderer-contact:w1": 1,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w2": 14,
+    "tile-entry:w3": 3,
+    "scripted-titan:w4": 1,
+    "tile-entry:w4": 1
+   },
+   "targetCalls": 43,
+   "targetCounts": {
+    "1:1": 17,
+    "2:1": 5,
+    "2:2": 12,
+    "3:3": 3,
+    "3:2": 1,
+    "4:2": 2,
+    "4:4": 1,
+    "4:3": 1,
+    "4:1": 1
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 5,
+   "target4Calls": 1,
+   "maxTop": 4,
+   "facedFinal": {
+    "living_wire": 1,
+    "murkcap": 1,
+    "sanjun": 1,
+    "glasswing": 1,
+    "lockpick_raccoon": 1,
+    "drumbelly_tanuki": 1,
+    "hushwolf": 1,
+    "white_noise_heron": 1,
+    "nightcourt": 1,
+    "nightlight_catfish": 1,
+    "hummice": 1,
+    "belltoad": 1,
+    "review_drone": 2,
+    "bright_idea": 2,
+    "landlord": 2,
+    "understudy": 2,
+    "paparazzo": 2,
+    "nevermore": 1,
+    "sunback": 1,
+    "cliffhanger": 1,
+    "statickite": 2,
+    "focus_group": 3,
+    "alien_tick": 2,
+    "voice_mimic_radio": 2,
+    "warranty_caller": 2,
+    "buffering": 3,
+    "memory_projector": 2,
+    "moderator": 2,
+    "chorus_line": 3,
+    "heckler": 2
+   },
+   "kills4": 0,
+   "tracePoints": 97,
+   "distinctDays": 95,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73673,
+   "end": "over-other",
+   "days": 124,
+   "won": 1,
+   "finalRank": "global",
+   "nationalEver": true,
+   "nationalFinal": true,
+   "table": true,
+   "entered": true,
+   "waveReach": 3,
+   "wave4Harness": false,
+   "wave4Proxy": false,
+   "proxyMax": 3,
+   "recon": null,
+   "classKey": "natxnow4",
+   "maxRaw": 122,
+   "maxRawDay": 66,
+   "maxCapped": 122,
+   "maxCappedDay": 66,
+   "maxGated": 99,
+   "peakMax": 0,
+   "first": {},
+   "legMet": {
+    "armored": 119,
+    "armed": 120,
+    "tricks": 118,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d66 raw=122 capped=122 gated=99 holds=[defer4] peak=0 proxy=3 rd5=6/4,8/6,20/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 6,
+    "armed": 8,
+    "tricks": 20,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": false,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=6/4,10/6,12/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=20 capped=20 gated=20 holds=[none] peak=0 proxy=3 rd5=6/4,8/6,20/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d120 raw=122 capped=122 gated=99 holds=[defer4] peak=0 proxy=3 rd5=5/4,9/6,24/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d180": {
+     "line": "d124 raw=122 capped=122 gated=99 holds=[defer4] peak=0 proxy=3 rd5=5/4,9/6,24/3,0/2 ready=false faced4=0",
+     "endSubstituted": true
+    }
+   },
+   "endLine": "d124 raw=122 capped=122 gated=99 holds=[defer4] peak=0 proxy=3 rd5=5/4,9/6,24/3,0/2 ready=false faced4=0",
+   "birthsByWave": {
+    "1": 20,
+    "2": 10,
+    "3": 2
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 5,
+    "tile-entry:w1": 11,
+    "tile-entry:w2": 8,
+    "maintain:w2": 2,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w3": 2,
+    "wanderer-contact:w1": 1
+   },
+   "targetCalls": 31,
+   "targetCounts": {
+    "1:1": 11,
+    "2:2": 9,
+    "2:1": 6,
+    "3:3": 3,
+    "3:1": 1,
+    "3:2": 1
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 0,
+   "target4Calls": 0,
+   "maxTop": 3,
+   "facedFinal": {
+    "belltoad": 1,
+    "mirrormoth": 1,
+    "nightlight_catfish": 1,
+    "gallowdeer": 1,
+    "speedbump_turtle": 1,
+    "sanjun": 1,
+    "dustboar": 1,
+    "living_wire": 1,
+    "sweeps_week": 1,
+    "bulldozer": 1,
+    "hummice": 1,
+    "glasswing": 1,
+    "mirror_stag": 2,
+    "bright_idea": 2,
+    "hushwolf": 1,
+    "review_drone": 2,
+    "statickite": 2,
+    "heckler": 2,
+    "nightcourt": 1,
+    "cliffhanger": 1,
+    "paparazzo": 2,
+    "murkcap": 1,
+    "landlord": 2,
+    "alien_tick": 2,
+    "focus_group": 3,
+    "sunbasker": 1,
+    "giant_mosquito": 2,
+    "rut_king": 1,
+    "redactor": 3,
+    "gavel": 3
+   },
+   "kills4": 0,
+   "tracePoints": 124,
+   "distinctDays": 122,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73674,
+   "end": "survived",
+   "days": 180,
+   "won": 0,
+   "finalRank": "global",
+   "nationalEver": true,
+   "nationalFinal": true,
+   "table": false,
+   "entered": false,
+   "waveReach": 4,
+   "wave4Harness": true,
+   "wave4Proxy": true,
+   "proxyMax": 4,
+   "recon": null,
+   "classKey": "natxw4",
+   "maxRaw": 167,
+   "maxRawDay": 157,
+   "maxCapped": 167,
+   "maxCappedDay": 157,
+   "maxGated": 167,
+   "peakMax": 4,
+   "first": {
+    "proxy4": 157
+   },
+   "legMet": {
+    "armored": 52,
+    "armed": 178,
+    "tricks": 172,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d157 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=4/4,9/6,17/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 4,
+    "armed": 9,
+    "tricks": 17,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": false,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=2/4,10/6,5/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=2/4,10/6,7/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d120 raw=142 capped=142 gated=99 holds=[defer4] peak=0 proxy=3 rd5=3/4,9/6,15/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d180": {
+     "line": "d180 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=4/4,9/6,17/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    }
+   },
+   "endLine": "d180 raw=167 capped=167 gated=167 holds=[none] peak=4 proxy=4 rd5=4/4,9/6,17/3,0/2 ready=false faced4=0",
+   "birthsByWave": {
+    "1": 22,
+    "2": 5,
+    "3": 3,
+    "4": 3
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 9,
+    "tile-entry:w1": 9,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w2": 5,
+    "tile-entry:w3": 3,
+    "trap:w1": 1,
+    "scripted-titan:w4": 1,
+    "tile-entry:w4": 2
+   },
+   "targetCalls": 29,
+   "targetCounts": {
+    "1:1": 15,
+    "2:2": 3,
+    "2:1": 4,
+    "3:3": 3,
+    "3:2": 2,
+    "4:4": 2
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 2,
+   "target4Calls": 2,
+   "maxTop": 4,
+   "facedFinal": {
+    "speedbump_turtle": 1,
+    "nightlight_catfish": 1,
+    "rut_king": 1,
+    "nightcourt": 1,
+    "hushwolf": 1,
+    "sunback": 1,
+    "cliffhanger": 1,
+    "anaconda_empress": 1,
+    "glasswing": 1,
+    "bright_idea": 2,
+    "murkcap": 1,
+    "alien_tick": 2,
+    "moderator": 2,
+    "memory_projector": 2,
+    "living_wire": 1,
+    "drumbelly_tanuki": 1,
+    "ducks_in_a_row": 1,
+    "giant_mosquito": 2,
+    "nevermore": 1,
+    "callback": 3,
+    "redactor": 3,
+    "mirrormoth": 1,
+    "spool": 3
+   },
+   "kills4": 0,
+   "tracePoints": 180,
+   "distinctDays": 178,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73675,
+   "end": "over-other",
+   "days": 135,
+   "won": 1,
+   "finalRank": "national",
+   "nationalEver": true,
+   "nationalFinal": true,
+   "table": true,
+   "entered": true,
+   "waveReach": 4,
+   "wave4Harness": true,
+   "wave4Proxy": true,
+   "proxyMax": 4,
+   "recon": null,
+   "classKey": "natxw4",
+   "maxRaw": 267,
+   "maxRawDay": 134,
+   "maxCapped": 227,
+   "maxCappedDay": 134,
+   "maxGated": 199,
+   "peakMax": 4,
+   "first": {
+    "capped200": 99,
+    "proxy4": 134
+   },
+   "legMet": {
+    "armored": 32,
+    "armed": 133,
+    "tricks": 127,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d134 raw=267 capped=227 gated=199 holds=[defer5] peak=4 proxy=4 rd5=5/4,8/6,19/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 5,
+    "armed": 8,
+    "tricks": 19,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 37,
+   "daysCapped200": 37,
+   "stages": {
+    "capped200": true,
+    "rd5ready": false,
+    "faced4": false,
+    "proxy5": false
+   },
+   "bindingStage": "rd5ready",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=2/4,10/6,9/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=40 capped=40 gated=40 holds=[none] peak=0 proxy=3 rd5=2/4,9/6,12/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d120 raw=222 capped=202 gated=99 holds=[defer4,defer5] peak=0 proxy=3 rd5=5/4,9/6,19/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d180": {
+     "line": "d135 raw=267 capped=227 gated=199 holds=[defer5] peak=4 proxy=4 rd5=3/4,7/6,19/3,0/2 ready=false faced4=0",
+     "endSubstituted": true
+    }
+   },
+   "endLine": "d135 raw=267 capped=227 gated=199 holds=[defer5] peak=4 proxy=4 rd5=3/4,7/6,19/3,0/2 ready=false faced4=0",
+   "birthsByWave": {
+    "1": 20,
+    "2": 11,
+    "3": 3
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 7,
+    "tile-entry:w1": 10,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w2": 11,
+    "tile-entry:w3": 3
+   },
+   "targetCalls": 33,
+   "targetCounts": {
+    "1:1": 13,
+    "2:2": 11,
+    "2:1": 3,
+    "3:1": 2,
+    "3:3": 4
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 0,
+   "target4Calls": 0,
+   "maxTop": 3,
+   "facedFinal": {
+    "hummice": 1,
+    "gallowdeer": 1,
+    "sanjun": 1,
+    "drumbelly_tanuki": 1,
+    "murkcap": 1,
+    "nightcourt": 1,
+    "hushwolf": 1,
+    "mirrormoth": 1,
+    "nevermore": 1,
+    "psycho_pavel_dubinin": 1,
+    "anaconda_empress": 1,
+    "psycho_gen_3nq7jxo": 1,
+    "paparazzo": 2,
+    "nightlight_catfish": 1,
+    "understudy": 2,
+    "rut_king": 1,
+    "sweeps_week": 1,
+    "belltoad": 1,
+    "statickite": 2,
+    "voice_mimic_radio": 2,
+    "living_wire": 1,
+    "speedbump_turtle": 1,
+    "giant_mosquito": 2,
+    "ducks_in_a_row": 1,
+    "bright_idea": 2,
+    "spool": 3,
+    "redactor": 3,
+    "callback": 3,
+    "bulldozer": 1,
+    "buffering": 3
+   },
+   "kills4": 0,
+   "tracePoints": 135,
+   "distinctDays": 133,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73676,
+   "end": "village-lost",
+   "days": 70,
+   "won": 0,
+   "finalRank": "regional",
+   "nationalEver": false,
+   "nationalFinal": false,
+   "table": false,
+   "entered": false,
+   "waveReach": 3,
+   "wave4Harness": false,
+   "wave4Proxy": false,
+   "proxyMax": 3,
+   "recon": null,
+   "classKey": "nonatxnow4",
+   "maxRaw": 50,
+   "maxRawDay": 70,
+   "maxCapped": 50,
+   "maxCappedDay": 70,
+   "maxGated": 50,
+   "peakMax": 0,
+   "first": {},
+   "legMet": {
+    "armored": 55,
+    "armed": 53,
+    "tricks": 61,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d70 raw=50 capped=50 gated=50 holds=[none] peak=0 proxy=3 rd5=1/4,1/6,15/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 1,
+    "armed": 1,
+    "tricks": 15,
+    "veterans": 0,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": false,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=5/4,8/6,10/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=1/4,2/6,14/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d70 raw=50 capped=50 gated=50 holds=[none] peak=0 proxy=3 rd5=1/4,1/6,15/3,0/2 ready=false faced4=0",
+     "endSubstituted": true
+    },
+    "d180": {
+     "line": "d70 raw=50 capped=50 gated=50 holds=[none] peak=0 proxy=3 rd5=1/4,1/6,15/3,0/2 ready=false faced4=0",
+     "endSubstituted": true
+    }
+   },
+   "endLine": "d70 raw=50 capped=50 gated=50 holds=[none] peak=0 proxy=3 rd5=1/4,1/6,15/3,0/2 ready=false faced4=0",
+   "birthsByWave": {
+    "1": 23,
+    "2": 10,
+    "3": 3
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 5,
+    "tile-entry:w1": 15,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w2": 10,
+    "tile-entry:w3": 3
+   },
+   "targetCalls": 34,
+   "targetCounts": {
+    "1:1": 18,
+    "2:2": 10,
+    "2:1": 3,
+    "3:3": 3
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 0,
+   "target4Calls": 0,
+   "maxTop": 3,
+   "facedFinal": {
+    "nightlight_catfish": 1,
+    "rut_king": 1,
+    "anaconda_empress": 1,
+    "nevermore": 1,
+    "gallowdeer": 1,
+    "cliffhanger": 1,
+    "hushwolf": 1,
+    "murkcap": 1,
+    "lockpick_raccoon": 1,
+    "living_wire": 1,
+    "sweeps_week": 1,
+    "mirrormoth": 1,
+    "hummice": 1,
+    "alien_tick": 2,
+    "moderator": 2,
+    "heckler": 2,
+    "voice_mimic_radio": 2,
+    "paparazzo": 2,
+    "terms_of_service": 3,
+    "spool": 3
+   },
+   "kills4": 0,
+   "tracePoints": 70,
+   "distinctDays": 68,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73677,
+   "end": "village-lost",
+   "days": 143,
+   "won": 0,
+   "finalRank": "national",
+   "nationalEver": true,
+   "nationalFinal": true,
+   "table": false,
+   "entered": false,
+   "waveReach": 4,
+   "wave4Harness": true,
+   "wave4Proxy": true,
+   "proxyMax": 4,
+   "recon": null,
+   "classKey": "natxw4",
+   "maxRaw": 127,
+   "maxRawDay": 125,
+   "maxCapped": 127,
+   "maxCappedDay": 125,
+   "maxGated": 127,
+   "peakMax": 4,
+   "first": {
+    "proxy4": 125,
+    "faced4": 136
+   },
+   "legMet": {
+    "armored": 74,
+    "armed": 136,
+    "tricks": 132,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d125 raw=127 capped=127 gated=127 holds=[none] peak=4 proxy=4 rd5=7/4,8/6,21/3,0/2 ready=false faced4=0",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 7,
+    "armed": 8,
+    "tricks": 21,
+    "veterans": 0,
+    "short": [
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 0,
+   "daysVet1plus": 0,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": true,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=2/4,10/6,9/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=2/4,8/6,13/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d120 raw=102 capped=102 gated=99 holds=[defer4] peak=0 proxy=3 rd5=7/4,8/6,21/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d180": {
+     "line": "d142 raw=127 capped=127 gated=127 holds=[none] peak=4 proxy=4 rd5=0/4,1/6,22/3,0/2 ready=false faced4=1",
+     "endSubstituted": true
+    }
+   },
+   "endLine": "d142 raw=127 capped=127 gated=127 holds=[none] peak=4 proxy=4 rd5=0/4,1/6,22/3,0/2 ready=false faced4=1",
+   "birthsByWave": {
+    "1": 23,
+    "2": 15,
+    "3": 8,
+    "4": 4
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 7,
+    "tile-entry:w1": 12,
+    "maintain:w2": 2,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w2": 13,
+    "tile-entry:w3": 8,
+    "wanderer-contact:w1": 1,
+    "tile-entry:w4": 4
+   },
+   "targetCalls": 48,
+   "targetCounts": {
+    "1:1": 11,
+    "2:1": 6,
+    "2:2": 11,
+    "3:1": 4,
+    "3:3": 7,
+    "3:2": 4,
+    "4:3": 1,
+    "4:4": 4
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 5,
+   "target4Calls": 4,
+   "maxTop": 4,
+   "facedFinal": {
+    "nightlight_catfish": 1,
+    "drumbelly_tanuki": 1,
+    "mirrormoth": 1,
+    "anaconda_empress": 1,
+    "rut_king": 1,
+    "nightcourt": 1,
+    "lockpick_raccoon": 1,
+    "belltoad": 1,
+    "living_wire": 1,
+    "hushwolf": 1,
+    "memory_projector": 2,
+    "alien_tick": 2,
+    "psycho_sigrun_eiriksdottir": 1,
+    "sweeps_week": 1,
+    "bright_idea": 2,
+    "cliffhanger": 1,
+    "paparazzo": 2,
+    "statickite": 2,
+    "warranty_caller": 2,
+    "heckler": 2,
+    "murkcap": 1,
+    "spool": 3,
+    "bulldozer": 1,
+    "ducks_in_a_row": 1,
+    "giant_mosquito": 2,
+    "redactor": 3,
+    "callback": 3,
+    "understudy": 2,
+    "review_drone": 2,
+    "sunback": 1,
+    "ad_break": 3,
+    "moderator": 2,
+    "suburb": 4
+   },
+   "kills4": 0,
+   "tracePoints": 142,
+   "distinctDays": 140,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  },
+  {
+   "seed": 73678,
+   "end": "over-other",
+   "days": 116,
+   "won": 1,
+   "finalRank": "national",
+   "nationalEver": true,
+   "nationalFinal": true,
+   "table": true,
+   "entered": true,
+   "waveReach": 4,
+   "wave4Harness": true,
+   "wave4Proxy": true,
+   "proxyMax": 4,
+   "recon": null,
+   "classKey": "natxw4",
+   "maxRaw": 172,
+   "maxRawDay": 115,
+   "maxCapped": 172,
+   "maxCappedDay": 115,
+   "maxGated": 172,
+   "peakMax": 4,
+   "first": {
+    "proxy4": 113,
+    "faced4": 115
+   },
+   "legMet": {
+    "armored": 112,
+    "armed": 114,
+    "tricks": 111,
+    "veterans": 0
+   },
+   "bindingLegs": [
+    "veterans"
+   ],
+   "atMaxCapped": "d115 raw=172 capped=172 gated=172 holds=[none] peak=4 proxy=4 rd5=4/4,6/6,23/3,1/2 ready=false faced4=1",
+   "atMaxCappedRd5": {
+    "ready": false,
+    "armored": 4,
+    "armed": 6,
+    "tricks": 23,
+    "veterans": 1,
+    "short": [
+     "veterans"
+    ]
+   },
+   "daysAllFour": 0,
+   "allFourDays": [],
+   "vetMax": 1,
+   "daysVet1plus": 2,
+   "daysAllFourCapped": 0,
+   "daysFullElig": 0,
+   "daysDefer5": 0,
+   "daysCapped200": 0,
+   "stages": {
+    "capped200": false,
+    "rd5ready": false,
+    "faced4": true,
+    "proxy5": false
+   },
+   "bindingStage": "capped200",
+   "samples": {
+    "d30": {
+     "line": "d30 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=4/4,7/6,9/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d60": {
+     "line": "d60 raw=0 capped=0 gated=0 holds=[none] peak=0 proxy=3 rd5=6/4,9/6,15/3,0/2 ready=false faced4=0",
+     "endSubstituted": false
+    },
+    "d120": {
+     "line": "d116 raw=172 capped=172 gated=172 holds=[none] peak=4 proxy=4 rd5=4/4,6/6,23/3,1/2 ready=false faced4=1",
+     "endSubstituted": true
+    },
+    "d180": {
+     "line": "d116 raw=172 capped=172 gated=172 holds=[none] peak=4 proxy=4 rd5=4/4,6/6,23/3,1/2 ready=false faced4=1",
+     "endSubstituted": true
+    }
+   },
+   "endLine": "d116 raw=172 capped=172 gated=172 holds=[none] peak=4 proxy=4 rd5=4/4,6/6,23/3,1/2 ready=false faced4=1",
+   "birthsByWave": {
+    "1": 20,
+    "2": 15,
+    "3": 7,
+    "4": 1
+   },
+   "birthsBySourceWave": {
+    "maintain:w1": 9,
+    "tile-entry:w1": 8,
+    "tile-entry:w2": 15,
+    "scripted-hushwolf:w1": 3,
+    "tile-entry:w3": 7,
+    "tile-entry:w4": 1
+   },
+   "targetCalls": 42,
+   "targetCounts": {
+    "1:1": 12,
+    "2:2": 14,
+    "2:1": 4,
+    "3:3": 7,
+    "3:2": 1,
+    "3:1": 2,
+    "4:4": 2
+   },
+   "top5Calls": 0,
+   "target5Calls": 0,
+   "top4Calls": 2,
+   "target4Calls": 2,
+   "maxTop": 4,
+   "facedFinal": {
+    "sweeps_week": 1,
+    "nightcourt": 1,
+    "cliffhanger": 1,
+    "glasswing": 1,
+    "ducks_in_a_row": 1,
+    "gallowdeer": 1,
+    "sunbasker": 1,
+    "belltoad": 1,
+    "murkcap": 1,
+    "hushwolf": 1,
+    "moderator": 2,
+    "sanjun": 1,
+    "paparazzo": 2,
+    "voice_mimic_radio": 2,
+    "anaconda_empress": 1,
+    "memory_projector": 2,
+    "lockpick_raccoon": 1,
+    "bright_idea": 2,
+    "alien_tick": 2,
+    "warranty_caller": 2,
+    "union_rep": 2,
+    "nevermore": 1,
+    "giant_mosquito": 2,
+    "mirrormoth": 1,
+    "callback": 3,
+    "chorus_line": 3,
+    "understudy": 2,
+    "living_wire": 1,
+    "ad_break": 3,
+    "terms_of_service": 3,
+    "redactor": 3,
+    "spool": 3,
+    "strike": 4
+   },
+   "kills4": 1,
+   "tracePoints": 116,
+   "distinctDays": 114,
+   "pointErrs": 0,
+   "recErrs": 0,
+   "inconsistencies": [],
+   "complete": true
+  }
+ ],
+ "generated": "2026-10-25T19:26:40.537Z"
+}
