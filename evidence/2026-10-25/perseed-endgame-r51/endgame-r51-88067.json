@@ -1,0 +1,998 @@
+{
+ "seed": 88067,
+ "days": 180,
+ "gameDays": 96,
+ "deferDays": 6,
+ "greedy": {
+  "waits": 4,
+  "maxTier": 0,
+  "seatDay": 96,
+  "seatKind": "lesser"
+ },
+ "armory": {
+  "donations": 7,
+  "craftDonations": 1,
+  "donatedBonus": 72,
+  "donateFailed": 4,
+  "vinebankDeferred": 0,
+  "knapWasted": 1,
+  "errors": 0,
+  "unitsAtEnd": 1
+ },
+ "guardTrace": [
+  {
+   "day": 90,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 6,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 91,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 92,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 93,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 94,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 95,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 96,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 8,
+   "vets": 0,
+   "seat": "lesser"
+  }
+ ],
+ "windowEndGuard": "not-ready:Finish the current encounter before taking your seat.",
+ "announceCapIdx": 13586,
+ "overtimeLines": 0,
+ "plan": "wavesnw",
+ "fullseat": {
+  "days": 95,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 15,
+   "w2": 6,
+   "w3": 6,
+   "w4": 3,
+   "w5": 0,
+   "contests": 11,
+   "crises": 3,
+   "stage": 3,
+   "foodShared": 66,
+   "score": 230,
+   "standing": 199
+  },
+  "sentDay": 16,
+  "surgeDay": 35,
+  "firstLesserDay": 52,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": 96,
+  "winSeat": {
+   "day": 96,
+   "seat": "lesser",
+   "wavesOk": false,
+   "contestsOk": true,
+   "crisesOk": true,
+   "stageOk": true,
+   "foodDeedsOk": true,
+   "binding": [
+    "w5"
+   ],
+   "worst": "w5",
+   "unlock": {
+    "standing": 199,
+    "t4": 100,
+    "t5": 200,
+    "unlockedWave": 4,
+    "w4faced": true,
+    "holdKind": "defer5",
+    "rd5short": [
+     "veterans"
+    ]
+   }
+  }
+ },
+ "endReason": "over-other",
+ "won": true,
+ "announceDay": 90,
+ "satDay": 96,
+ "satSeatKind": "lesser",
+ "satWaves": {
+  "w1": 15,
+  "w2": 6,
+  "w3": 6,
+  "w4": 3,
+  "w5": 0
+ },
+ "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — global standing, waves 1–3 faced (15/6/6), with 3 wave-4 fought, 11 contests survived, 3 crises weathered. The table does not rise. It prices.",
+ "auditNamed": true,
+ "satPenalty": {
+  "tier": 0,
+  "losses": 1,
+  "penalty": 3
+ },
+ "maxTier": 0,
+ "otMismatch": null,
+ "walkedPath": "witness",
+ "walkedBranch": "light",
+ "instrumentErrors": 0,
+ "telemetry": [
+  {
+   "type": "table_entered",
+   "day": 96,
+   "moral": null
+  },
+  {
+   "type": "table_won",
+   "day": 96,
+   "moral": "light",
+   "ending": "track:social",
+   "endingKind": "coda"
+  }
+ ],
+ "rg": null,
+ "noticedCount": 0,
+ "noticeLines": [],
+ "ledgerLine": "The table has read your ledger. More promises broken than kept; the protected outnumber the killed; the food truth was shared. The light road is open.",
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": false,
+  "leanAtSit": 2,
+  "bandAtSit": "grey",
+  "bondAtSit": 0,
+  "groundingAtSit": 100,
+  "capClaimed": 0,
+  "capAppointed": 3,
+  "capAnswers": 0,
+  "capCommunes": 1,
+  "capReroutes": 1,
+  "doorsOffered": [
+   "path:feared",
+   "path:beloved",
+   "path:witness",
+   "path:assimilated",
+   "path:defiant",
+   "path:relay"
+  ],
+  "doorWalked": "witness"
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 56,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 63,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 63,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 70,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 77,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 84,
+   "lean": 2,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": true
+  },
+  {
+   "day": 91,
+   "lean": 2,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  }
+ ],
+ "finalBeat": true,
+ "finalOptsCount": 2,
+ "finalPickId": "final:charges",
+ "finalLabel": "Read the charges.",
+ "finalResolved": true,
+ "finalOutcomeLines": [
+  "◈ THE WITNESS — \"Read the charges.\"",
+  "◈ THE ARCHITECT — Grace Obi ascended through doors you built: relay. The galaxy will remember the god's name. The village will remember who built the door. Both are true. Neither is small.",
+  "◈ THE OVERSIGHT —"
+ ],
+ "promptFrameCount": 5,
+ "dispatchCount": 5,
+ "weekly": [],
+ "fightCensus": {
+  "fights": [
+   {
+    "monsters": [
+     "reunion"
+    ],
+    "startDay": 84,
+    "endDay": 84,
+    "turns": 7,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [
+     "gen_28w4ely"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_28w4ely",
+      "name": "Esther Fisher",
+      "cause": "the arena",
+      "day": 84,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "reunion",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 84,
+    "endDay": 84,
+    "turns": 9,
+    "outcome": "vKill",
+    "killFlag": true,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   },
+   {
+    "monsters": [
+     "reunion",
+     "reunion"
+    ],
+    "startDay": 84,
+    "endDay": 84,
+    "turns": 4,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [
+     "sam_wilson"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "sam_wilson",
+      "name": "Sam Wilson",
+      "cause": "the arena",
+      "day": 84,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "reunion",
+        "wave": 4
+       },
+       {
+        "id": "reunion",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "reunion",
+     "reunion",
+     "reunion"
+    ],
+    "startDay": 85,
+    "endDay": 85,
+    "turns": 3,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [
+     "gen_yiiklo7"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_yiiklo7",
+      "name": "Ximena Morales",
+      "cause": "the arena",
+      "day": 85,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "reunion",
+        "wave": 4
+       },
+       {
+        "id": "reunion",
+        "wave": 4
+       },
+       {
+        "id": "reunion",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "reunion"
+    ],
+    "startDay": 85,
+    "endDay": 85,
+    "turns": 10,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [
+     "elijah_scott"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "elijah_scott",
+      "name": "Elijah Scott",
+      "cause": "the arena",
+      "day": 85,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "reunion",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "reunion"
+    ],
+    "startDay": 85,
+    "endDay": 85,
+    "turns": 1,
+    "outcome": "otherEnd",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   }
+  ],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0
+ },
+ "census": {
+  "alive": 8,
+  "dead": 0,
+  "people": [
+   {
+    "id": "yara_haddad",
+    "name": "Yara Haddad",
+    "dead": false,
+    "occupation": "interpreter",
+    "npcAbilities": 2
+   },
+   {
+    "id": "app_mgpsphjq331",
+    "name": "Rubel Majhi",
+    "dead": false,
+    "occupation": "cook",
+    "npcAbilities": 0
+   },
+   {
+    "id": "grace_obi",
+    "name": "Grace Obi",
+    "dead": false,
+    "occupation": "ESL teacher",
+    "npcAbilities": 2
+   },
+   {
+    "id": "ella_johnson",
+    "name": "Ella Johnson",
+    "dead": false,
+    "occupation": "ESL teacher",
+    "npcAbilities": 3
+   },
+   {
+    "id": "ruth_goldstein",
+    "name": "Ruth Goldstein",
+    "dead": false,
+    "occupation": "librarian",
+    "npcAbilities": 2
+   },
+   {
+    "id": "app_mgpspivj99",
+    "name": "Mariana Viana",
+    "dead": false,
+    "occupation": "cook",
+    "npcAbilities": 1
+   },
+   {
+    "id": "maya_singh",
+    "name": "Maya Singh",
+    "dead": false,
+    "occupation": "ER nurse",
+    "npcAbilities": 1
+   },
+   {
+    "id": "jovan_milic",
+    "name": "Jovan Milic",
+    "dead": false,
+    "occupation": "tattoo artist",
+    "npcAbilities": 1
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Saul",
+    "day": 36,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Luis",
+    "day": 47,
+    "cause": "combat"
+   },
+   {
+    "id": null,
+    "name": "Lisa",
+    "day": 50,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Mai",
+    "day": 52,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Fatima",
+    "day": 52,
+    "cause": "sickness"
+   },
+   {
+    "id": null,
+    "name": "Aisling",
+    "day": 65,
+    "cause": "dehydration"
+   },
+   {
+    "id": null,
+    "name": "Esther",
+    "day": 84,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Sam",
+    "day": 84,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Ximena",
+    "day": 85,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Elijah",
+    "day": 85,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Katarina",
+    "day": 93,
+    "cause": "monster"
+   }
+  ],
+  "pantryKcal": 957,
+  "scale": "global",
+  "mantle": "Rubel Majhi"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 1,
+  "killers": {
+   "sam_wilson": {
+    "kills": 1,
+    "types": [],
+    "days": [
+     84
+    ]
+   }
+  },
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 36,
+  "vetFirstDay": 84,
+  "vetDpsFledSeen": 0
+ },
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "leo_martin",
+   "name": "Leo",
+   "cause": "ambush",
+   "day": 6,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": null,
+   "name": "Stranger",
+   "cause": "combat",
+   "day": 35,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_hwo2n5e",
+   "name": "Saul Soto",
+   "cause": "the arena",
+   "day": 36,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "raj_patel",
+   "name": "Raj",
+   "cause": "alien",
+   "day": 42,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "tbVillagerFalls",
+   "vid": "luis_fernandez",
+   "name": "Luis",
+   "cause": "combat",
+   "day": 47,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": [
+    {
+     "id": "focus_group",
+     "wave": 3
+    },
+    {
+     "id": "focus_group_eye",
+     "wave": 3
+    },
+    {
+     "id": "focus_group_eye",
+     "wave": 3
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "luis_fernandez",
+   "name": "Luis",
+   "cause": "combat",
+   "day": 47,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": [
+    {
+     "id": "focus_group",
+     "wave": 3
+    },
+    {
+     "id": "focus_group_eye",
+     "wave": 3
+    },
+    {
+     "id": "focus_group_eye",
+     "wave": 3
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_4jepz7s",
+   "name": "Lisa Shi",
+   "cause": "the arena",
+   "day": 50,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_lhsqv5w",
+   "name": "Mai Warren",
+   "cause": "the arena",
+   "day": 52,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "fatima_hassan",
+   "name": "Fatima",
+   "cause": "sickness",
+   "day": 52,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_kec3py4",
+   "name": "Aisling Wisniewski",
+   "cause": "dehydration",
+   "day": 65,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "jesse_cortez",
+   "name": "Jesse",
+   "cause": "alien",
+   "day": 83,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_28w4ely",
+   "name": "Esther Fisher",
+   "cause": "the arena",
+   "day": 84,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "reunion",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "sam_wilson",
+   "name": "Sam Wilson",
+   "cause": "the arena",
+   "day": 84,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "reunion",
+     "wave": 4
+    },
+    {
+     "id": "reunion",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_yiiklo7",
+   "name": "Ximena Morales",
+   "cause": "the arena",
+   "day": 85,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "reunion",
+     "wave": 4
+    },
+    {
+     "id": "reunion",
+     "wave": 4
+    },
+    {
+     "id": "reunion",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "elijah_scott",
+   "name": "Elijah Scott",
+   "cause": "the arena",
+   "day": 85,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "reunion",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "app_mgpsphh4415",
+   "name": "Cristóbal",
+   "cause": "alien",
+   "day": 89,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": [
+    {
+     "id": "heckler",
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "katarina_novak",
+   "name": "Katarina",
+   "cause": "monster",
+   "day": 93,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Spool stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Spool",
+   "capIdx": 6859
+  },
+  {
+   "line": "The Callback stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Callback",
+   "capIdx": 9697
+  },
+  {
+   "line": "The Ugly Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Ugly Beast",
+   "capIdx": 11981
+  },
+  {
+   "line": "The Reunion stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "reunion",
+   "rawName": "The Reunion",
+   "capIdx": 12055
+  },
+  {
+   "line": "The Herald stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "herald",
+   "rawName": "The Herald",
+   "capIdx": 13868
+  },
+  {
+   "line": "The Big Thing stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "herald",
+   "rawName": "The Big Thing",
+   "capIdx": 13873
+  }
+ ]
+}
