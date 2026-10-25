@@ -7211,6 +7211,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               convert(it);
             }
             budget -= stackKcal; n++; keptKcal += Math.round(stackKcal * (skill > 0 ? Math.min(1.0, 0.95 + 0.02 * skill) : 0.80));
+            // HAULCOUNT TAP BEGIN (2026-10-25, sim-haulcount-b): counting
+            // only. Mirrors this resolution's own n/keptKcal into
+            // Game._haulcount for the haul/preserve recorder
+            // (scripts/sweep-haulcount-b.js). Writes NOTHING else, reads
+            // no other state, changes no behavior. If the tap itself
+            // throws, the catch swallows it and the duty continues.
+            try { const hc = (this._haulcount = this._haulcount || { villagerPreserveBatches: 0, villagerPreserveKcal: 0 }); hc.villagerPreserveBatches += 1; hc.villagerPreserveKcal += Math.round(stackKcal * (skill > 0 ? Math.min(1.0, 0.95 + 0.02 * skill) : 0.80)); } catch (e) {}
+            // HAULCOUNT TAP END
           }
           if (n > 0) {
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
