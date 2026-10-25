@@ -174,6 +174,20 @@ regression from this run — they sit in areas other lanes touched today
 and are flagged here for the ship loop / owning lanes, not fixed in
 this leg run. Full log: hidden_files/checkquick-r49.log.
 
+## Landing note (rebase, not a re-score)
+
+Master moved during this run (lane A journey-establishment r34 + food
+confirm landings), so the branch was rebased onto the new master in the
+worktree (clean, 1 commit, no conflicts) and the proof re-run: seed
+9409 on the rebased base reproduces the panel record EXACTLY (120d,
+horizon, 10 raids, 12 unmet lines, 16 gorge nights, 16 aligned, 11
+drafted, 2 tick events, 5 day-boundary exits, 0 quiet, 1 wander capture
+— gavel d103→d106). The panel measurements above were taken on base
+110eb84e0; the rebased instrument behaves identically on the new tip.
+The safe-commit index clobber (staged-deletion variant) struck after
+the first commit and was repaired with `update-index --cacheinfo`
+before rebasing — the commit itself was correct throughout.
+
 ## Files
 
 - Instrument (to commit): scripts/journey-crisis-r49-quietlinger-20261024.js
