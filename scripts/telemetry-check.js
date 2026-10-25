@@ -11,6 +11,27 @@
 //   --current also accepts a single JSON file (treated as one run) or a
 //   flat aggregate JSON (used directly, no glob).
 //   --update-baseline out.json  writes the current aggregates as the new baseline.
+//   --allow-recorder-corpus  permits a recorder-corpus --current (see below).
+//
+// Glob quirk: --current supports a single * in the BASENAME only
+// (path.dirname + basename * -> .*). No **, no * in directory parts.
+//
+// Recorder-corpus exclusion rule (measurement audit 2026-10-25): sweep
+// recorder corpora (flat per-seed rows stamped with top-level anchorCommit,
+// e.g. rotdecide2/haulcount/tableseat outputs) are NEVER compared against
+// run baselines here. Their per-file boolean sums scale with corpus size,
+// so a cross-size or cross-regime compare prints false LOUD lines (the
+// known 1937Z class: national 12 -> 44 across 80 files vs a 16-file
+// winseat baseline). Recorder corpora are compared with sweep-compare
+// tables, not with this tool. When every --current file carries
+// anchorCommit, this tool REFUSES (exit 2, not a LOUD line) unless
+// --allow-recorder-corpus or --update-baseline is given. Death-list
+// corpora (policy/side/substrate per-seed files, e.g. deathrow) are also
+// excluded by this rule; they are compared with pooled-list analysis.
+// Baselines written by --update-baseline keep the previous baseline's
+// underscore-prefixed metadata blocks (e.g. _regime): rolling a baseline
+// forward no longer silently drops its regime label. Re-label only when
+// the regime itself changes.
 //
 // Metric paths: dot-separated into the JSON. Arrays count as their length.
 // Missing paths count as 0.
@@ -19,7 +40,8 @@
 //   - baseline >= 3  and current == 0        -> LOUD (disappearance)
 //   - baseline == 0  and current >= 3        -> LOUD (new appearance)
 //   - baseline >= 5  and |rel change| >= 0.6 -> LOUD (large swing)
-// Otherwise quiet. Exit 1 when any LOUD line fired, 0 when quiet.
+// Otherwise quiet. Exit 1 when any LOUD line fired, 0 when quiet,
+// 2 on usage errors and recorder-corpus refusals.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -37,6 +59,7 @@ function parseArgs(argv) {
     else if (k === '--current') a.current = argv[++i];
     else if (k === '--metrics') a.metrics = argv[++i];
     else if (k === '--update-baseline') a.updateBaseline = argv[++i];
+    else if (k === '--allow-recorder-corpus') a.allowRecorderCorpus = true;
     else usage();
   }
   if (!a.baseline || !a.current || !a.metrics) usage();
@@ -90,14 +113,37 @@ function main() {
   }
   const agg = {};
   for (const m of metrics) agg[m] = 0;
+  const objs = [];
   for (const f of files) {
     let obj;
     try { obj = JSON.parse(fs.readFileSync(f, 'utf8')); }
     catch (e) { console.log('LOUD: telemetry-check could not parse ' + f + ': ' + e.message); process.exit(1); }
+    objs.push(obj);
+  }
+  // Recorder-corpus guard (see header): every --current file stamped with
+  // top-level anchorCommit is a sweep recorder row, not a run. Refuse the
+  // compare rather than print false LOUD lines; --allow-recorder-corpus
+  // (same-shape recorder-vs-recorder compares) or --update-baseline
+  // (reseeding a baseline) bypasses the refusal.
+  if (!args.updateBaseline && !args.allowRecorderCorpus && objs.length > 0
+      && objs.every(o => o != null && typeof o === 'object'
+        && Object.prototype.hasOwnProperty.call(o, 'anchorCommit'))) {
+    console.log('telemetry-check: refusing recorder-corpus input: all ' + objs.length
+      + ' --current files carry top-level anchorCommit, so they are sweep recorder rows, not runs.'
+      + ' Recorder corpora are compared with sweep-compare tables, never against a run baseline here.'
+      + ' Pass --allow-recorder-corpus for a same-shape recorder-vs-recorder compare,'
+      + ' or --update-baseline to reseed a baseline from these files.');
+    process.exit(2);
+  }
+  for (const obj of objs) {
     for (const m of metrics) agg[m] += metricValue(obj, m);
   }
   if (args.updateBaseline) {
-    fs.writeFileSync(args.updateBaseline, JSON.stringify(agg, null, 2) + '\n');
+    // Preserve the previous baseline's underscore-prefixed metadata blocks
+    // (e.g. _regime): rolling forward must not silently drop the regime label.
+    const meta = {};
+    for (const [k, v] of Object.entries(baseline)) if (k.startsWith('_')) meta[k] = v;
+    fs.writeFileSync(args.updateBaseline, JSON.stringify({ ...meta, ...agg }, null, 2) + '\n');
   }
   const loud = [];
   for (const m of metrics) {
