@@ -3088,7 +3088,10 @@
           this._linkNote(link, 'pool', 'Pool week: Haven poured ' + paid.toLocaleString() + ' kcal; the league poured ' + theirs.toLocaleString() + '.');
           if (paid < havenShare) {
             var ls = this._peerLinks('covenant');
-            for (var i = 0; i < ls.length; i++) ls[i].trust = Math.max(0, ls[i].trust - 4);
+            // journey-scale r36: book the move per link — the say line is
+            // heard in the moment, but the −4 never landed in any link's
+            // book. Note only; the numbers are unchanged.
+            for (var i = 0; i < ls.length; i++) { ls[i].trust = Math.max(0, ls[i].trust - 4); this._linkNote(ls[i], 'pool', 'Haven\'s share of the league pool came up short (' + paid.toLocaleString() + ' of ' + havenShare.toLocaleString() + ' kcal) — trust −4 across the league.'); }
             this.say(`🌾 Haven's share of the league pool comes up short — ${paid.toLocaleString()} of ${havenShare.toLocaleString()} kcal. The council counts it. (Trust -4 across the league.)`);
           } else if (R() < 0.4) {
             this.say(`🌾 The league pool grows: ${(paid + theirs).toLocaleString()} kcal this week — Haven's share and the other fires'. The granary under no one's roof fills.`);

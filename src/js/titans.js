@@ -286,6 +286,10 @@
       try { ov = Game._otherVillage(Game._linkOther(link, 'haven')); } catch (e) {}
       var nm = (ov && ov.name) || 'an allied fire';
       link.trust = Math.max(0, (link.trust || 0) - 5);
+      // journey-scale r36: book the move — the say line is heard in the
+      // moment, but a player scrolling back could never find the −5.
+      // Note only; the number above is unchanged.
+      try { if (Game._linkNote) Game._linkNote(link, 'titan', def.title + ' struck ' + nm + ' in the night — trust −5; they notice who wasn\'t there.'); } catch (e) {}
       Game.say('🌪️ ' + def.title + ' struck ' + nm + ' in the night. They bled while the coalition talked. (trust −5 — they notice who wasn\'t there.)');
     }
     try { if (Game.recordMoment) Game.recordMoment(def.title + ' struck unanswered.'); } catch (e) {}
