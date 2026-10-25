@@ -458,7 +458,7 @@
         this.recordDeed(vid, 'stood_down', `${nm} stood down ${mName} and kept walking. ${fightNote}.`, 4);
         return;
       }
-      if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven);
+      if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven, m.id);
       // vFlee: real wounds from the real fight, then the hurt pipeline
       try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
       // POST-FLEE REST: fled at or below 25% of max — flag the day's rest and
@@ -485,15 +485,27 @@
       }
       this.recordDeed(vid, 'survived_hurt', `${nm} came back mauled by ${mName} and alive. ${scar.charAt(0).toUpperCase() + scar.slice(1)} now.`, 2);
     },
-    expedDeath(vid, mName, nm, playerAtHaven) {
+    expedDeath(vid, mName, nm, playerAtHaven, monsterId) {
       var st = this.agencyState();
       var char = {};
       try { char = (this.data.villagers || []).find(function (x) { return x.id === vid; }) || {}; } catch (e) {}
       var v = this.state.village;
       try {
-        this.registerDeath({ kind: 'villager', villagerId: vid, name: char.name || nm, cause: mName, killerId: null });
+        // EXPEDID (2026-10-25, #1047): thread the killer's roster id through,
+        // mirroring the hurtVillager path — registerDeath carries monsterId
+        // (corpse + tele wave) and the fallen push below carries it too.
+        // The display name stays mName, so a generated village-name alias
+        // still displays exactly as before; only the plumbing now says
+        // which species wore it. An absent monsterId lands null, as before.
+        this.registerDeath({ kind: 'villager', villagerId: vid, name: char.name || nm, cause: mName, killerId: null,
+          monsterId: monsterId || null, monsterName: mName });
       } catch (e) {}
       try { this.removeVillager(vid, 'killed'); } catch (e) {}
+      // MEMORIAL ROLL (2026-10-25, #1047): expedition deaths never pushed
+      // v.fallen — the roll missed them entirely. Mirror hurtVillager's
+      // fallen push field for field, so the threaded monsterId lands in
+      // the fallen entry, not just the corpse.
+      try { v.fallen = v.fallen || []; v.fallen.push({ villagerId: vid, day: this.state.scholar.day, cause: mName, name: this.fallenName(vid), monsterId: monsterId || null, monsterName: mName }); } catch (e) {}
       delete st.exped[vid];
       if (v.away) delete v.away[vid];
       // TRIGGER REGISTRY (rogue P0-5): death reactions (gossip + moment +
