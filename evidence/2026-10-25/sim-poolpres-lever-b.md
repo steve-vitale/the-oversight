@@ -310,7 +310,15 @@ Next blanks, in order:
 ## INFRASTRUCTURE + CORPUS
 
 - No EPERM flap blocked this run; all 16 control+lever rows wrote first
-  try. Safe-commit index clobber: [to be noted at commit time].
+  try. Safe-commit index clobber DID hit the main commit (all 21 files
+  showed as staged-deleted in the worktree's main index after an
+  otherwise-correct commit; commit 69e6a881 verified correct with
+  git show --stat, 21 files / 87,636 insertions). Repaired via
+  per-file `git update-index --add --cacheinfo "100644,<blob-from-HEAD>,
+  <path>"`, then verified `git status --short` empty, `git diff HEAD`
+  empty, `git diff --cached` empty, and hash-object matches HEAD blob
+  for the evidence file. The commit itself was never wrong; only the
+  main index lied.
 - No sibling tree, branch, claim file, tracker, or lock touched.
   Telemetry-check NOT run, per the standing instruction (recorder rows
   are not panels). Balanced panel NOT run: balance-panel.js cannot
