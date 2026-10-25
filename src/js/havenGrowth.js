@@ -545,6 +545,31 @@
       const names = raiders.map(mname).join(', ');
       this.say(`🐗 RAID — ${raiders.length === 1 ? 'a raider' : raiders.length + ' raiders'} (${names}) hit Haven in the night, drawn by the smell of the pantry!` +
         (palisade ? " The palisade's stakes take their toll as they come over the wall." : ' No walls. No warning but the noise.'));
+      // PALISADE-ESCALATION BEAT (2026-10-25, sim-palisade-a): the
+      // carried blank — a wave-3+ raider at the wall used to read
+      // exactly like any other name in the raid list. NARRATION ONLY:
+      // no spawn, draft, damage, crisis, or economy value is touched
+      // here (the crisis tier below still computes its own wmax
+      // exactly as before). Fires exactly when the raid's drafted
+      // wmax >= 3 via crisisWaveOf (m.wave is never on the entity);
+      // the named raider is the first drafted raider at that wmax,
+      // named via mname (knowledge-gated display name, never the
+      // true name). No wave number or wave title is named — the
+      // village knows something bigger came, not what the System
+      // calls it. Separate aloud line (not an appended sentence)
+      // so the RAID sentence above stays byte-identical.
+      try {
+        let _raidWmax = 1; let _raidBig = null;
+        for (const m of raiders) {
+          try {
+            const w = this.crisisWaveOf(m);
+            if (w > _raidWmax) { _raidWmax = w; _raidBig = m; }
+          } catch (e) {}
+        }
+        if (_raidWmax >= 3 && _raidBig) {
+          this.say(`🐗⚠️ One of them is bigger than the usual teeth at the door — ${mname(_raidBig)} came with this raid, and the wall was not built for its kind.`);
+        }
+      } catch (e) { console.warn('raid escalation beat', e); }
       // CONTEST COLLISION (journey crisis r40 2026-10-21): the mirror of the
       // fireContest acknowledgment above — a raid firing on (or the day after)
       // a contest announcement gets a village-voice connective line instead

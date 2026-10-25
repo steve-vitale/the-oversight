@@ -1,0 +1,84 @@
+SENSE-TESTING — palisade-escalation beat, before/after raid excerpts
+(SENSE-ONLY replays — narration shifts trajectories; never enters the census.
+After-excerpts are from scripts/test-palisade-sense-20261025.js, seed 73671,
+180d, tableseat-nowait, full-transcript capture: 16 census raids, 16 RAID
+lines, pairing exact. The before-excerpt is the day-60 line quoted in
+evidence/2026-10-25/sim-tileentry-a.md, reproduced verbatim below.)
+
+BEFORE (tileentry sense replay, day 60; wmax=2 — a wave-2 apex at the wall,
+no escalation beat exists in the format at all):
+> [d60] 🐗 RAID — 5 raiders (Ugly-Eyes, The Moderator, Loud-Eyes,
+> Inspiration, Flashbulb Moth) hit Haven in the night, drawn by the
+> smell of the pantry! The palisade's stakes take their toll as they
+> come over the wall.
+
+AFTER — same seed, same day-60 raid, beat correctly ABSENT (wmax=2, so a
+wave-2 apex still gets no special billing; the beat is not a generic
+"big raid" flag, it is a wave-3+ flag):
+> [d60] 🐗 RAID — 5 raiders (Ugly-Eyes, The Moderator, Loud-Eyes,
+> Inspiration, Flashbulb Moth) hit Haven in the night, drawn by the
+> smell of the pantry! The palisade's stakes take their toll as they
+> come over the wall.
+> [d60] 🚨 Ugly-Eyes, The Moderator, Loud-Eyes, Inspiration, Flashbulb
+> Moth is at Haven's door. The village looks to you. Four ways to call:
+> a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees),
+> the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your
+> build has one). Each with honest costs.
+
+AFTER — first wave-3+ raid in the replay (day 145, wmax=3):
+> [d145] 🐗 RAID — 5 raiders (Nevermore, Buffering, Loud-Eyes, Loud-Eyes,
+> Murkcap) hit Haven in the night, drawn by the smell of the pantry! The
+> palisade's stakes take their toll as they come over the wall.
+> [d145] 🐗⚠️ One of them is bigger than the usual teeth at the door —
+> Buffering came with this raid, and the wall was not built for its kind.
+
+AFTER — day 154 (wmax=3):
+> [d154] 🐗 RAID — 5 raiders (The Terms of Service, Loud-Eyes, Nevermore,
+> Loud-Eyes, The Big Beast) hit Haven in the night, drawn by the smell
+> of the pantry! The palisade's stakes take their toll as they come over
+> the wall.
+> [d154] 🐗⚠️ One of them is bigger than the usual teeth at the door —
+> The Terms of Service came with this raid, and the wall was not built
+> for its kind.
+
+AFTER — day 161 (TWO wave-3+ raiders; the beat names the first at wmax,
+and says "One of them" — singular and accurate, not a roster):
+> [d161] 🐗 RAID — 5 raiders (Loud-Eyes, The Terms of Service, The
+> Redactor, Loud-Eyes, Rut King) hit Haven in the night, drawn by the
+> smell of the pantry! The palisade's stakes take their toll as they
+> come over the wall.
+> [d161] 🐗⚠️ One of them is bigger than the usual teeth at the door —
+> The Terms of Service came with this raid, and the wall was not built
+> for its kind.
+
+AFTER — day 176 (wmax=3):
+> [d176] 🐗 RAID — 5 raiders (The Big Beast, The Ugly Beast, The Bailiff,
+> Spool, Loud-Eyes) hit Haven in the night, drawn by the smell of the
+> pantry! The palisade's stakes take their toll as they come over the
+> wall.
+> [d176] 🐗⚠️ One of them is bigger than the usual teeth at the door —
+> Spool came with this raid, and the wall was not built for its kind.
+
+SENSE JUDGMENT (meaning, not counts):
+- The beat reads as escalation, not noise: it lands immediately after
+  the RAID line, before the call-for-help line, in the same voice as
+  the raid announcement; "the wall was not built for its kind" says
+  the palisade itself is outmatched, which is the escalation the old
+  format could not express. The day-60 contrast proves the negative:
+  the same village, the same wall, a wave-2 apex — and silence,
+  correctly.
+- Fog-of-war / knowledge gating: the beat never names a wave number
+  or wave title, and it uses exactly the RAID line's display-name
+  convention (mname / monsterDisplayName). Late in this replay the
+  names shown are true names (Buffering, Spool) — but that is the
+  RAID line's own convention once the System has arrived (the RAID
+  line itself prints those names); the beat leaks nothing the RAID
+  line does not already print. Early-game, before the System arrives,
+  the proof variants show the gated form ("a tangle of tape that
+  moves like it's remembering", "a missing piece of the world").
+- One honest wrinkle, judged acceptable: on a raid with two wave-3+
+  raiders (day 161) the beat names only the first. "One of them"
+  keeps it honest — it never claims to be a roster — and naming both
+  would turn an alarm beat into a census. The escalation signal is
+  "something bigger came", not "here is the inventory".
+- SENSE VERDICT: PASS.
