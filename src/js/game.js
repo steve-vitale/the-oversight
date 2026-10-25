@@ -28809,7 +28809,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const pool = this.packKcal(vid); // ensures today's ration is packed
       const p = (v.pack || {})[vid];
       const take = Math.min(pool, want);
-      if (take <= 0) return 0;
+      // AWAY-HUNGER VOICE (sim-awayvoice-b 2026-10-25): the narration call
+      // lives in awayHungerVoice below — words only, see that method.
+      if (take <= 0) { this.awayHungerVoice(vid, want, take, pool); return 0; }
       this.packSpend(vid, take);
       this.recordHarvestIntake(vid,[{item:p,kcal:take,nourishment:take}],'ration');
       // the ration's risks ride with it — claimed once, on the first meal
@@ -28821,7 +28823,48 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const r of (p.risks.monster || [])) exposure.monster.push(r);
         exposure.spoiled += p.risks.spoiled || 0;
       }
+      this.awayHungerVoice(vid, want, take, pool);
       return take;
+    },
+
+    // awayHungerVoice(vid, want, take, pool): NARRATION ONLY
+    // (sim-awayvoice-b 2026-10-25, backlog: away-hunger invisibility).
+    // A hurt traveler eating from a pack away from the haven used to
+    // leave no line at all — their decline existed only in the meal
+    // log while the haven ate on-screen (Stan, David, Misky sightings).
+    // This line names the traveler and what they carry / ate, nothing
+    // else: it invents no history, reason, or fate, and it changes no
+    // number, draw, or outcome — packMeal's amounts above are untouched,
+    // no Math.random is read, and the armed trajectory must match the
+    // baseline exactly (the sweep's meal/death identity proof checks it).
+    // The name comes from THIS meal's own vid via getPerson — never a
+    // haven speaker's name — so the line cannot borrow a name the way
+    // the generic haven beats did. It fires only for away villagers
+    // (packMeal's only caller is the away branch of villagerMealDay, and
+    // the away check below holds even if a future caller misuses it),
+    // only at health <= 7 (the upper bound of the 3–7 HP death shape
+    // from sim-awayration-size-b), and at most once per (vid,day): the
+    // second villagerMealDay caller found by pantrystarve/fullpantry
+    // would otherwise print twice. The day-marker writes narration
+    // bookkeeping only — no amount, draw, or outcome passes through it.
+    awayHungerVoice(vid, want, take, pool) {
+      try {
+        const v = this.state.village;
+        if (!v || !(v.away && v.away[vid])) return;
+        const hp = (v.health && v.health[vid] !== undefined) ? v.health[vid] : 100;
+        if (hp > 7) return;
+        const dayNow = (this.state.scholar || {}).day || 0;
+        const mark = (v._awayVoice = v._awayVoice || { day: dayNow, seen: {} });
+        if (mark.day !== dayNow) { mark.day = dayNow; mark.seen = {}; }
+        const mkey = vid + '|' + dayNow;
+        if (mark.seen[mkey]) return;
+        mark.seen[mkey] = true;
+        const person = this.getPerson ? this.getPerson(vid) : null;
+        const first = String((person && person.name) || 'Someone').split(' ')[0];
+        if (take <= 0) this.say(`${first} is away from the haven, hurt (health ${hp}/100), and their pack is empty — nothing to eat out here.`);
+        else if (take < want) this.say(`${first} eats away from the haven on a short pack meal — ${Math.round(take)} kcal from the pack, ${Math.round(want)} wanted — while hurt (health ${hp}/100). The haven's shelves can't reach them out here.`);
+        else this.say(`${first} eats away from the haven — ${Math.round(take)} kcal from the pack — while hurt (health ${hp}/100), far from the haven's shelves.`);
+      } catch (e) {}
     },
 
     // VILLAGER GRIT (Steve 2026-10-09): "Villagers should vary. No more
