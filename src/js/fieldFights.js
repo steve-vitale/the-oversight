@@ -995,7 +995,6 @@
                 if (rec.trickDisrupt && total > 0) {
                   var _preT = total;
                   total = Math.floor(total / 2);
-                  rec.trickDisrupt = 0;
                   rec.log.push(vName + "'s bellow broke the chorus — " + mPhrase + "'s note dies mid-croak. " + _preT + ' → ' + total + '.');
                 }
                 if (rec.trickStill && total > 0) {
@@ -1102,6 +1101,14 @@
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
             }
+            // PACK-WIDE CHORUS BREAK (2026-10-25, sim-belltoad-fix-a):
+            // the shout disrupts the whole chorus — every pack member's
+            // next attack is halved, matching the counter text ("the
+            // note dies mid-croak", "scatter the choir"). Clear only
+            // once the full monster phase has acted, not after the
+            // first member's swing. A lone monster is unchanged: one
+            // member, one halved attack, then clear.
+            rec.trickDisrupt = 0;
           } else {
             // Ordinary damage can exhaust HP before the round-end flag
             // update. The dead cannot strike; existing death prevention
@@ -1161,7 +1168,7 @@
               try { (rec.trickLog || (rec.trickLog = [])).push(trickAct.type === 'wait' ? ('wait:' + (trickAct.why || 'x')) : trickAct.type); } catch (e) {}
               if (trickAct.type === 'shout') {
                 rec.trickShouts = (rec.trickShouts || 0) + 1;
-                rec.trickDisrupt = 1; // the monster's next attack is halved — the note dies mid-croak
+                rec.trickDisrupt = 1; // the chorus's next attacks are halved — every pack member's note dies mid-croak, cleared after the full monster phase
                 rec.log.push('R' + round + ': ' + vName + ' cups their hands and BELLOWS — raw noise, no words. (' + (trickAct.why || 'the trick') + ' — ' + rec.trickShouts + '/2)');
               } else if (trickAct.type === 'offer_food') {
                 var _fname = (this.villagerSpendFood ? this.villagerSpendFood(vid) : null) || 'food';
