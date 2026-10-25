@@ -2,7 +2,7 @@
 
 85 items were filtered to the 45 below: 38 resolve from standing design directives, 2 were misclassified (not steve-calls at all), and these 45 genuinely need Steve's word. Nothing here is decided. Each item states the question in plain words, why it matters, the real options, and a recommendation labeled as such — the recommendation is the pack author's, not Steve's, and nothing gets built until he rules. Mark rulings as they come; every item starts UNRULED.
 
-How to use this pack: rule family by family, blocking families first. A ruling on a family principle settles its items unless an item is marked otherwise. The 38 resolved items and 2 misclassified items are listed in Appendix B so the filter can be spot-checked. Six newer candidates Phase 2 surfaced are in Appendix A — they are not part of the 85.
+How to use this pack: rule family by family, blocking families first. A ruling on a family principle settles its items unless an item is marked otherwise. The 38 resolved items and 2 misclassified items are listed in Appendix B so the filter can be spot-checked. Seven newer candidates are in Appendix A — they are not part of the 85. Six came out of Phase 2 gap closure; the seventh came out of the 1915Z scale-onramp round.
 
 ---
 
@@ -509,9 +509,9 @@ Each stands alone. 415 is flagged: it revises Steve's own prior ruling.
 
 ---
 
-## Appendix A — 6 newer candidates Phase 2 surfaced (NOT part of the 85)
+## Appendix A — 7 newer candidates (NOT part of the 85)
 
-These came out of Phase 2 gap closure as (d)-to-(c) candidates. They await the same decision pass but were not adjudicated with the 85. Same format.
+The first six came out of Phase 2 gap closure as (d)-to-(c) candidates. The seventh came out of the 1915Z scale-onramp round. They await the same decision pass but were not adjudicated with the 85. Same format.
 
 ### 58 (new) — Unlock-lane gate: wire it, or drop the dead keys?
 
@@ -573,6 +573,17 @@ These came out of Phase 2 gap closure as (d)-to-(c) candidates. They await the s
   - Design for the takeover (the takeover is a feature).
   - Suppress it (patrol assignment does not provoke challenges).
 - My take: Design for the takeover, with an answer available. The amplification is emergent but legible — a contender taking a domain and working it is village politics, not a bug. The missing piece is the player's ability to answer the challenge, not the takeover itself.
+- Status: [ ] UNRULED
+
+### (new) — Residual wound mill: should defenders finish a crippled beast they meet?
+
+- Question: When a villager out on defense MEETS a crippled beast — wounded, not dead, still circling the haven months later — should they finish it? The 1915Z round measured 105 defender events and 351 re-meets on the armed band: the same wounded animals keep being met and never resolved. The defender-finish rule from the same round was proven mechanically but killed on cost (deaths 234 to 316, wins 4 to 3), so this is a separate, narrower rule with its own loot and ledger scale — and the round flagged it as needing Steve's ruling before any arm touches it.
+- Why it matters: Crippled beasts echo for months ("it's still out there, somewhere" dozens of times for the same animal) while the village lives next to them. Whether meeting means finishing changes the kill economy — veteran formation is the binding leg of wave-5 eligibility — and it needs its own loot scale, since a finished beast is a kill with a ledger entry.
+- Options:
+  - Defenders finish a crippled beast they meet, with its own loot and ledger scale.
+  - Defenders leave them; only real fights resolve crippled beasts, and the echoes continue.
+  - Finish only under conditions (for example, only beasts below a wound line, or only when the defender can afford the fight).
+- My take: Leave them for now. The Stage 2 finish rule just showed finishing costs lives, and the meet path is unmeasured — a meet-finish rule is a new kill source feeding the binding leg without a cost guard. If it goes ahead, it needs its own pre-registered cost guard and its own loot scale, proven on the meet path, and it should wait until the wave-4 funnel question (carried item 1 from the same round) is answered, since both feed the same kill economy.
 - Status: [ ] UNRULED
 
 ---
