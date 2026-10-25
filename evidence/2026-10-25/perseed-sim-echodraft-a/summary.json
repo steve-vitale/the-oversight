@@ -1,0 +1,3208 @@
+{
+ "label": "sim-echodraft-a pilot",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "band": {
+  "n": 8,
+  "won": 4,
+  "medianDays": 135,
+  "nationalEver": 7,
+  "nationalFinal": 6,
+  "table": 4,
+  "entered": 4,
+  "wave3": 8,
+  "wave4": 6,
+  "wave5": 0,
+  "deathTotal": 234
+ },
+ "control": {
+  "raids": 85,
+  "raiders": 361,
+  "deaths": 234,
+  "nationalEver": 7,
+  "wins": 4,
+  "medianDays": 135,
+  "poolTotal": 1494,
+  "poolW3": 107
+ },
+ "neutrality": {
+  "control": {
+   "raids": 85,
+   "raiders": 361,
+   "deaths": 234,
+   "nationalEver": 7,
+   "wins": 4,
+   "medianDays": 135,
+   "poolTotal": 1494,
+   "poolW3": 107
+  },
+  "observed": {
+   "raids": 85,
+   "raiders": 361,
+   "deaths": 234,
+   "nationalEver": 7,
+   "wins": 4,
+   "medianDays": 135,
+   "poolTotal": 1494,
+   "poolW3": 107
+  },
+  "exact": true
+ },
+ "corpusOk": true,
+ "perSeed": [
+  {
+   "seed": 73671,
+   "analysis": {
+    "raids": 16,
+    "totalDrafted": 74,
+    "totalPool": 342,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 74,
+     "median": 2,
+     "mean": 2.0135135135135136,
+     "dist0Share": 0.02702702702702703
+    },
+    "poolDist": {
+     "n": 342,
+     "median": 4,
+     "mean": 4.184210526315789,
+     "dist0Share": 0.005847953216374269
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 52,
+      "median": 2,
+      "mean": 1.8846153846153846,
+      "dist0Share": 0.038461538461538464
+     },
+     "above": {
+      "n": 22,
+      "median": 2,
+      "mean": 2.3181818181818183,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "field-wounded": {
+      "n": 29,
+      "median": 2,
+      "mean": 1.6551724137931034,
+      "dist0Share": 0.06896551724137931
+     },
+     "healthy": {
+      "n": 23,
+      "median": 2,
+      "mean": 2.260869565217391,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 22,
+      "median": 2,
+      "mean": 2.227272727272727,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "field-wounded": {
+      "n": 181,
+      "median": 4,
+      "mean": 4.348066298342541,
+      "dist0Share": 0.011049723756906077
+     },
+     "healthy": {
+      "n": 90,
+      "median": 4,
+      "mean": 3.966666666666667,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 71,
+      "median": 4,
+      "mean": 4.042253521126761,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "field-wounded": 29,
+     "healthy": 23,
+     "defender-wounded": 22
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 42,
+      "median": 2,
+      "mean": 1.9761904761904763,
+      "dist0Share": 0.047619047619047616
+     },
+     "never-drafted": {
+      "n": 32,
+      "median": 2,
+      "mean": 2.0625,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.6468817138957007,
+    "spearmanN": 342,
+    "quartile": {
+     "observed": 69,
+     "expected": 19.944266364897473,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-pre-wounded": {
+      "events": 49,
+      "laterDrafts": 67
+     },
+     "defender-manufactured": {
+      "events": 6,
+      "laterDrafts": 22
+     }
+    },
+    "laterDraftsPerEntity": {
+     "healthy": {
+      "entities": 10,
+      "drafts": 11
+     },
+     "defender-manufactured": {
+      "entities": 9,
+      "drafts": 31
+     },
+     "field-manufactured": {
+      "entities": 13,
+      "drafts": 32
+     }
+    },
+    "distinctDraftedEntities": 32,
+    "senseTimeline": {
+     "entity": {
+      "seq": 2,
+      "type": "drumbelly_tanuki",
+      "wave": 1,
+      "drafts": 7,
+      "firstWoundSource": "defender-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 8,
+        "dist": 3,
+        "frac": 1,
+        "belowLine": false,
+        "rank": 1,
+        "priorClass": "healthy",
+        "prev": "never-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 22,
+        "dist": 4,
+        "frac": 0.1111111111111111,
+        "belowLine": true,
+        "rank": 3,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 30,
+        "dist": 1,
+        "frac": 0.1111111111111111,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 60,
+        "dist": 2,
+        "frac": 0.1111111111111111,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 72,
+        "dist": 1,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 145,
+        "dist": 3,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 154,
+        "dist": 3,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 1,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 8,
+       "dist": 3,
+       "frac": 1,
+       "belowLine": false,
+       "rank": 1,
+       "priorClass": "healthy",
+       "prev": "never-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 22,
+       "dist": 4,
+       "frac": 0.1111111111111111,
+       "belowLine": true,
+       "rank": 3,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 30,
+       "dist": 1,
+       "frac": 0.1111111111111111,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 60,
+       "dist": 2,
+       "frac": 0.1111111111111111,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 72,
+       "dist": 1,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 145,
+       "dist": 3,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 154,
+       "dist": 3,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 1,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 8,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 3,
+       "startFrac": 1,
+       "endFrac": 0.1111111111111111,
+       "manufactured": true
+      },
+      {
+       "day": 10,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.1111111111111111,
+       "endFrac": 0.1111111111111111,
+       "manufactured": false
+      },
+      {
+       "day": 12,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.1111111111111111,
+       "endFrac": 0.1111111111111111,
+       "manufactured": false
+      },
+      {
+       "day": 22,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.1111111111111111,
+       "endFrac": 0.1111111111111111,
+       "manufactured": false
+      },
+      {
+       "day": 30,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.1111111111111111,
+       "endFrac": 0.1111111111111111,
+       "manufactured": false
+      },
+      {
+       "day": 31,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.1111111111111111,
+       "endFrac": 0.1111111111111111,
+       "manufactured": false
+      },
+      {
+       "day": 60,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 72,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 72,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 73,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 74,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 78,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 79,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 83,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 85,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 112,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 115,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 122,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 124,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 129,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 144,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 145,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 151,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 154,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73672,
+   "analysis": {
+    "raids": 7,
+    "totalDrafted": 28,
+    "totalPool": 127,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 28,
+     "median": 2,
+     "mean": 2.5,
+     "dist0Share": 0
+    },
+    "poolDist": {
+     "n": 127,
+     "median": 5,
+     "mean": 4.606299212598425,
+     "dist0Share": 0
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 13,
+      "median": 2,
+      "mean": 2.3076923076923075,
+      "dist0Share": 0
+     },
+     "above": {
+      "n": 15,
+      "median": 2,
+      "mean": 2.6666666666666665,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "field-wounded": {
+      "n": 7,
+      "median": 2,
+      "mean": 2.4285714285714284,
+      "dist0Share": 0
+     },
+     "healthy": {
+      "n": 15,
+      "median": 2,
+      "mean": 2.6666666666666665,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 6,
+      "median": 2,
+      "mean": 2.1666666666666665,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "field-wounded": {
+      "n": 41,
+      "median": 4,
+      "mean": 4.487804878048781,
+      "dist0Share": 0
+     },
+     "healthy": {
+      "n": 59,
+      "median": 5,
+      "mean": 4.559322033898305,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 27,
+      "median": 5,
+      "mean": 4.888888888888889,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "field-wounded": 7,
+     "healthy": 15,
+     "defender-wounded": 6
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 9,
+      "median": 2,
+      "mean": 2.3333333333333335,
+      "dist0Share": 0
+     },
+     "never-drafted": {
+      "n": 19,
+      "median": 2,
+      "mean": 2.5789473684210527,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.6039827014358523,
+    "spearmanN": 127,
+    "quartile": {
+     "observed": 25,
+     "expected": 7.9613572701808,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-pre-wounded": {
+      "events": 11,
+      "laterDrafts": 8
+     },
+     "defender-manufactured": {
+      "events": 6,
+      "laterDrafts": 6
+     }
+    },
+    "laterDraftsPerEntity": {
+     "field-manufactured": {
+      "entities": 4,
+      "drafts": 7
+     },
+     "defender-manufactured": {
+      "entities": 8,
+      "drafts": 14
+     },
+     "healthy": {
+      "entities": 7,
+      "drafts": 7
+     }
+    },
+    "distinctDraftedEntities": 19,
+    "senseTimeline": {
+     "entity": {
+      "seq": 5,
+      "type": "drumbelly_tanuki",
+      "wave": 1,
+      "drafts": 4,
+      "firstWoundSource": "defender-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 9,
+        "dist": 4,
+        "frac": 1,
+        "belowLine": false,
+        "rank": 2,
+        "priorClass": "healthy",
+        "prev": "never-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 73,
+        "dist": 4,
+        "frac": 0.06666666666666667,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 80,
+        "dist": 1,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 89,
+        "dist": 1,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 9,
+       "dist": 4,
+       "frac": 1,
+       "belowLine": false,
+       "rank": 2,
+       "priorClass": "healthy",
+       "prev": "never-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 73,
+       "dist": 4,
+       "frac": 0.06666666666666667,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 80,
+       "dist": 1,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 89,
+       "dist": 1,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 9,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 4,
+       "startFrac": 1,
+       "endFrac": 0.06666666666666667,
+       "manufactured": true
+      },
+      {
+       "day": 10,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.06666666666666667,
+       "endFrac": 0.06666666666666667,
+       "manufactured": false
+      },
+      {
+       "day": 14,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.06666666666666667,
+       "endFrac": 0.06666666666666667,
+       "manufactured": false
+      },
+      {
+       "day": 73,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 80,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 80,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73673,
+   "analysis": {
+    "raids": 7,
+    "totalDrafted": 30,
+    "totalPool": 104,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 30,
+     "median": 2,
+     "mean": 2.2666666666666666,
+     "dist0Share": 0
+    },
+    "poolDist": {
+     "n": 104,
+     "median": 5,
+     "mean": 4.471153846153846,
+     "dist0Share": 0
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 22,
+      "median": 3,
+      "mean": 2.5,
+      "dist0Share": 0
+     },
+     "above": {
+      "n": 8,
+      "median": 2,
+      "mean": 1.625,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "healthy": {
+      "n": 9,
+      "median": 2,
+      "mean": 1.6666666666666667,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 18,
+      "median": 3,
+      "mean": 2.6666666666666665,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 2,
+      "median": 2,
+      "mean": 2,
+      "dist0Share": 0
+     },
+     "arrived-wounded": {
+      "n": 1,
+      "median": 1,
+      "mean": 1,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "healthy": {
+      "n": 33,
+      "median": 5,
+      "mean": 4.545454545454546,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 60,
+      "median": 5,
+      "mean": 4.55,
+      "dist0Share": 0
+     },
+     "arrived-wounded": {
+      "n": 6,
+      "median": 5,
+      "mean": 3.8333333333333335,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 5,
+      "median": 4,
+      "mean": 3.8,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "healthy": 9,
+     "field-wounded": 18,
+     "defender-wounded": 2,
+     "arrived-wounded": 1
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 15,
+      "median": 2,
+      "mean": 2.3333333333333335,
+      "dist0Share": 0
+     },
+     "never-drafted": {
+      "n": 15,
+      "median": 2,
+      "mean": 2.2,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.7359913897477205,
+    "spearmanN": 104,
+    "quartile": {
+     "observed": 28,
+     "expected": 8.36092796092796,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-pre-wounded": {
+      "events": 21,
+      "laterDrafts": 23
+     },
+     "defender-manufactured": {
+      "events": 2,
+      "laterDrafts": 2
+     }
+    },
+    "laterDraftsPerEntity": {
+     "field-manufactured": {
+      "entities": 8,
+      "drafts": 19
+     },
+     "defender-manufactured": {
+      "entities": 4,
+      "drafts": 6
+     },
+     "healthy": {
+      "entities": 1,
+      "drafts": 1
+     },
+     "arrived-wounded": {
+      "entities": 2,
+      "drafts": 4
+     }
+    },
+    "distinctDraftedEntities": 15,
+    "senseTimeline": {
+     "entity": {
+      "seq": 11,
+      "type": "review_drone",
+      "wave": 2,
+      "drafts": 5,
+      "firstWoundSource": "field-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 35,
+        "dist": 2,
+        "frac": 0.075,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "field-wounded",
+        "prev": "never-drafted",
+        "type": "review_drone",
+        "wave": 2
+       },
+       {
+        "day": 47,
+        "dist": 1,
+        "frac": 0.0125,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "review_drone",
+        "wave": 2
+       },
+       {
+        "day": 66,
+        "dist": 3,
+        "frac": 0.0125,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "review_drone",
+        "wave": 2
+       },
+       {
+        "day": 91,
+        "dist": 2,
+        "frac": 0.0125,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "review_drone",
+        "wave": 2
+       },
+       {
+        "day": 119,
+        "dist": 3,
+        "frac": 0.0125,
+        "belowLine": true,
+        "rank": 3,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "review_drone",
+        "wave": 2
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 35,
+       "dist": 2,
+       "frac": 0.075,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "field-wounded",
+       "prev": "never-drafted",
+       "type": "review_drone",
+       "wave": 2
+      },
+      {
+       "day": 47,
+       "dist": 1,
+       "frac": 0.0125,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "review_drone",
+       "wave": 2
+      },
+      {
+       "day": 66,
+       "dist": 3,
+       "frac": 0.0125,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "review_drone",
+       "wave": 2
+      },
+      {
+       "day": 91,
+       "dist": 2,
+       "frac": 0.0125,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "review_drone",
+       "wave": 2
+      },
+      {
+       "day": 119,
+       "dist": 3,
+       "frac": 0.0125,
+       "belowLine": true,
+       "rank": 3,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "review_drone",
+       "wave": 2
+      }
+     ],
+     "fights": [
+      {
+       "day": 18,
+       "context": "field",
+       "outcome": "vFlee",
+       "rounds": 2,
+       "startFrac": 1,
+       "endFrac": 0.8125,
+       "manufactured": false
+      },
+      {
+       "day": 19,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 3,
+       "startFrac": 0.8125,
+       "endFrac": 0.075,
+       "manufactured": true
+      },
+      {
+       "day": 22,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.075,
+       "endFrac": 0.075,
+       "manufactured": false
+      },
+      {
+       "day": 23,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.075,
+       "endFrac": 0.075,
+       "manufactured": false
+      },
+      {
+       "day": 34,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.075,
+       "endFrac": 0.075,
+       "manufactured": false
+      },
+      {
+       "day": 35,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 41,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 47,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 47,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 47,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 49,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 49,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 55,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 56,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 66,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 91,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      },
+      {
+       "day": 119,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.0125,
+       "endFrac": 0.0125,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73674,
+   "analysis": {
+    "raids": 14,
+    "totalDrafted": 65,
+    "totalPool": 210,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 65,
+     "median": 2,
+     "mean": 2.3846153846153846,
+     "dist0Share": 0.015384615384615385
+    },
+    "poolDist": {
+     "n": 210,
+     "median": 4,
+     "mean": 4.285714285714286,
+     "dist0Share": 0.004761904761904762
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 49,
+      "median": 2,
+      "mean": 2.36734693877551,
+      "dist0Share": 0.02040816326530612
+     },
+     "above": {
+      "n": 16,
+      "median": 2,
+      "mean": 2.4375,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "field-wounded": {
+      "n": 25,
+      "median": 2,
+      "mean": 2.36,
+      "dist0Share": 0.04
+     },
+     "healthy": {
+      "n": 18,
+      "median": 2,
+      "mean": 2.388888888888889,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 21,
+      "median": 3,
+      "mean": 2.4285714285714284,
+      "dist0Share": 0
+     },
+     "arrived-wounded": {
+      "n": 1,
+      "median": 2,
+      "mean": 2,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "field-wounded": {
+      "n": 91,
+      "median": 4,
+      "mean": 4.56043956043956,
+      "dist0Share": 0.01098901098901099
+     },
+     "healthy": {
+      "n": 49,
+      "median": 4,
+      "mean": 3.795918367346939,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 65,
+      "median": 4,
+      "mean": 4.2615384615384615,
+      "dist0Share": 0
+     },
+     "arrived-wounded": {
+      "n": 5,
+      "median": 5,
+      "mean": 4.4,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "field-wounded": 25,
+     "healthy": 18,
+     "defender-wounded": 21,
+     "arrived-wounded": 1
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 43,
+      "median": 2,
+      "mean": 2.3488372093023258,
+      "dist0Share": 0.023255813953488372
+     },
+     "never-drafted": {
+      "n": 22,
+      "median": 2,
+      "mean": 2.4545454545454546,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.7119170956250904,
+    "spearmanN": 210,
+    "quartile": {
+     "observed": 57,
+     "expected": 18.07345399698341,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-pre-wounded": {
+      "events": 47,
+      "laterDrafts": 69
+     },
+     "defender-manufactured": {
+      "events": 6,
+      "laterDrafts": 21
+     }
+    },
+    "laterDraftsPerEntity": {
+     "defender-manufactured": {
+      "entities": 10,
+      "drafts": 31
+     },
+     "field-manufactured": {
+      "entities": 8,
+      "drafts": 27
+     },
+     "healthy": {
+      "entities": 3,
+      "drafts": 3
+     },
+     "arrived-wounded": {
+      "entities": 1,
+      "drafts": 4
+     }
+    },
+    "distinctDraftedEntities": 22,
+    "senseTimeline": {
+     "entity": {
+      "seq": 1,
+      "type": "nightcourt",
+      "wave": 1,
+      "drafts": 6,
+      "firstWoundSource": "defender-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 7,
+        "dist": 6,
+        "frac": 1,
+        "belowLine": false,
+        "rank": 3,
+        "priorClass": "healthy",
+        "prev": "never-drafted",
+        "type": "nightcourt",
+        "wave": 1
+       },
+       {
+        "day": 34,
+        "dist": 1,
+        "frac": 0.18181818181818182,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "nightcourt",
+        "wave": 1
+       },
+       {
+        "day": 66,
+        "dist": 4,
+        "frac": 0.18181818181818182,
+        "belowLine": true,
+        "rank": 4,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "nightcourt",
+        "wave": 1
+       },
+       {
+        "day": 109,
+        "dist": 4,
+        "frac": 0.01818181818181818,
+        "belowLine": true,
+        "rank": 4,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "nightcourt",
+        "wave": 1
+       },
+       {
+        "day": 149,
+        "dist": 3,
+        "frac": 0.01818181818181818,
+        "belowLine": true,
+        "rank": 4,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "nightcourt",
+        "wave": 1
+       },
+       {
+        "day": 156,
+        "dist": 2,
+        "frac": 0.01818181818181818,
+        "belowLine": true,
+        "rank": 1,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "nightcourt",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 7,
+       "dist": 6,
+       "frac": 1,
+       "belowLine": false,
+       "rank": 3,
+       "priorClass": "healthy",
+       "prev": "never-drafted",
+       "type": "nightcourt",
+       "wave": 1
+      },
+      {
+       "day": 34,
+       "dist": 1,
+       "frac": 0.18181818181818182,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "nightcourt",
+       "wave": 1
+      },
+      {
+       "day": 66,
+       "dist": 4,
+       "frac": 0.18181818181818182,
+       "belowLine": true,
+       "rank": 4,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "nightcourt",
+       "wave": 1
+      },
+      {
+       "day": 109,
+       "dist": 4,
+       "frac": 0.01818181818181818,
+       "belowLine": true,
+       "rank": 4,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "nightcourt",
+       "wave": 1
+      },
+      {
+       "day": 149,
+       "dist": 3,
+       "frac": 0.01818181818181818,
+       "belowLine": true,
+       "rank": 4,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "nightcourt",
+       "wave": 1
+      },
+      {
+       "day": 156,
+       "dist": 2,
+       "frac": 0.01818181818181818,
+       "belowLine": true,
+       "rank": 1,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "nightcourt",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 7,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 2,
+       "startFrac": 1,
+       "endFrac": 0.18181818181818182,
+       "manufactured": true
+      },
+      {
+       "day": 9,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.18181818181818182,
+       "endFrac": 0.18181818181818182,
+       "manufactured": false
+      },
+      {
+       "day": 34,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.18181818181818182,
+       "endFrac": 0.18181818181818182,
+       "manufactured": false
+      },
+      {
+       "day": 35,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.18181818181818182,
+       "endFrac": 0.18181818181818182,
+       "manufactured": false
+      },
+      {
+       "day": 66,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      },
+      {
+       "day": 69,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      },
+      {
+       "day": 109,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      },
+      {
+       "day": 113,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      },
+      {
+       "day": 149,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      },
+      {
+       "day": 156,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      },
+      {
+       "day": 156,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.01818181818181818,
+       "endFrac": 0.01818181818181818,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73675,
+   "analysis": {
+    "raids": 13,
+    "totalDrafted": 56,
+    "totalPool": 146,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 56,
+     "median": 2,
+     "mean": 2.4642857142857144,
+     "dist0Share": 0
+    },
+    "poolDist": {
+     "n": 146,
+     "median": 4,
+     "mean": 4.191780821917808,
+     "dist0Share": 0
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 35,
+      "median": 2,
+      "mean": 2.342857142857143,
+      "dist0Share": 0
+     },
+     "above": {
+      "n": 21,
+      "median": 2,
+      "mean": 2.6666666666666665,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "healthy": {
+      "n": 21,
+      "median": 2,
+      "mean": 2.6666666666666665,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 25,
+      "median": 2,
+      "mean": 2.36,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 10,
+      "median": 3,
+      "mean": 2.3,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "healthy": {
+      "n": 39,
+      "median": 4,
+      "mean": 3.871794871794872,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 70,
+      "median": 4,
+      "mean": 4.142857142857143,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 37,
+      "median": 5,
+      "mean": 4.621621621621622,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "healthy": 21,
+     "defender-wounded": 25,
+     "field-wounded": 10
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 31,
+      "median": 2,
+      "mean": 2.2580645161290325,
+      "dist0Share": 0
+     },
+     "never-drafted": {
+      "n": 25,
+      "median": 2,
+      "mean": 2.72,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.7076023620755022,
+    "spearmanN": 146,
+    "quartile": {
+     "observed": 41,
+     "expected": 15.821212121212117,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-manufactured": {
+      "events": 9,
+      "laterDrafts": 25
+     },
+     "defender-pre-wounded": {
+      "events": 30,
+      "laterDrafts": 46
+     }
+    },
+    "laterDraftsPerEntity": {
+     "defender-manufactured": {
+      "entities": 14,
+      "drafts": 39
+     },
+     "healthy": {
+      "entities": 7,
+      "drafts": 7
+     },
+     "field-manufactured": {
+      "entities": 4,
+      "drafts": 10
+     }
+    },
+    "distinctDraftedEntities": 25,
+    "senseTimeline": {
+     "entity": {
+      "seq": 1,
+      "type": "drumbelly_tanuki",
+      "wave": 1,
+      "drafts": 7,
+      "firstWoundSource": "defender-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 8,
+        "dist": 4,
+        "frac": 1,
+        "belowLine": false,
+        "rank": 1,
+        "priorClass": "healthy",
+        "prev": "never-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 18,
+        "dist": 2,
+        "frac": 0.044444444444444446,
+        "belowLine": true,
+        "rank": 3,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 38,
+        "dist": 3,
+        "frac": 0.044444444444444446,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 65,
+        "dist": 4,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 4,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 72,
+        "dist": 2,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 80,
+        "dist": 2,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 1,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       },
+       {
+        "day": 114,
+        "dist": 1,
+        "frac": 0.022222222222222223,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "drumbelly_tanuki",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 8,
+       "dist": 4,
+       "frac": 1,
+       "belowLine": false,
+       "rank": 1,
+       "priorClass": "healthy",
+       "prev": "never-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 18,
+       "dist": 2,
+       "frac": 0.044444444444444446,
+       "belowLine": true,
+       "rank": 3,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 38,
+       "dist": 3,
+       "frac": 0.044444444444444446,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 65,
+       "dist": 4,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 4,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 72,
+       "dist": 2,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 80,
+       "dist": 2,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 1,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      },
+      {
+       "day": 114,
+       "dist": 1,
+       "frac": 0.022222222222222223,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "drumbelly_tanuki",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 8,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 4,
+       "startFrac": 1,
+       "endFrac": 0.044444444444444446,
+       "manufactured": true
+      },
+      {
+       "day": 13,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.044444444444444446,
+       "endFrac": 0.044444444444444446,
+       "manufactured": false
+      },
+      {
+       "day": 16,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.044444444444444446,
+       "endFrac": 0.044444444444444446,
+       "manufactured": false
+      },
+      {
+       "day": 18,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.044444444444444446,
+       "endFrac": 0.044444444444444446,
+       "manufactured": false
+      },
+      {
+       "day": 20,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.044444444444444446,
+       "endFrac": 0.044444444444444446,
+       "manufactured": false
+      },
+      {
+       "day": 20,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.044444444444444446,
+       "endFrac": 0.044444444444444446,
+       "manufactured": false
+      },
+      {
+       "day": 38,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.044444444444444446,
+       "endFrac": 0.044444444444444446,
+       "manufactured": false
+      },
+      {
+       "day": 38,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 51,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 65,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 72,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 73,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 80,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 98,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 112,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 114,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 130,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      },
+      {
+       "day": 134,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.022222222222222223,
+       "endFrac": 0.022222222222222223,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73676,
+   "analysis": {
+    "raids": 7,
+    "totalDrafted": 28,
+    "totalPool": 121,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 28,
+     "median": 2,
+     "mean": 1.7857142857142858,
+     "dist0Share": 0.03571428571428571
+    },
+    "poolDist": {
+     "n": 121,
+     "median": 4,
+     "mean": 4.2727272727272725,
+     "dist0Share": 0.008264462809917356
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 14,
+      "median": 2,
+      "mean": 1.9285714285714286,
+      "dist0Share": 0.07142857142857142
+     },
+     "above": {
+      "n": 14,
+      "median": 2,
+      "mean": 1.6428571428571428,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "healthy": {
+      "n": 15,
+      "median": 2,
+      "mean": 1.6666666666666667,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 5,
+      "median": 2,
+      "mean": 1.8,
+      "dist0Share": 0.2
+     },
+     "defender-wounded": {
+      "n": 8,
+      "median": 2,
+      "mean": 2,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "healthy": {
+      "n": 76,
+      "median": 4,
+      "mean": 3.986842105263158,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 21,
+      "median": 5,
+      "mean": 4.571428571428571,
+      "dist0Share": 0.047619047619047616
+     },
+     "defender-wounded": {
+      "n": 24,
+      "median": 6,
+      "mean": 4.916666666666667,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "healthy": 15,
+     "field-wounded": 5,
+     "defender-wounded": 8
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 11,
+      "median": 2,
+      "mean": 1.9090909090909092,
+      "dist0Share": 0.09090909090909091
+     },
+     "never-drafted": {
+      "n": 17,
+      "median": 2,
+      "mean": 1.7058823529411764,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.6856425762905668,
+    "spearmanN": 121,
+    "quartile": {
+     "observed": 26,
+     "expected": 7.954609116373822,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-pre-wounded": {
+      "events": 10,
+      "laterDrafts": 6
+     },
+     "defender-manufactured": {
+      "events": 8,
+      "laterDrafts": 8
+     }
+    },
+    "laterDraftsPerEntity": {
+     "field-manufactured": {
+      "entities": 4,
+      "drafts": 7
+     },
+     "defender-manufactured": {
+      "entities": 11,
+      "drafts": 19
+     },
+     "healthy": {
+      "entities": 2,
+      "drafts": 2
+     }
+    },
+    "distinctDraftedEntities": 17,
+    "senseTimeline": {
+     "entity": {
+      "seq": 12,
+      "type": "murkcap",
+      "wave": 1,
+      "drafts": 4,
+      "firstWoundSource": "defender-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 16,
+        "dist": 3,
+        "frac": 1,
+        "belowLine": false,
+        "rank": 3,
+        "priorClass": "healthy",
+        "prev": "never-drafted",
+        "type": "murkcap",
+        "wave": 1
+       },
+       {
+        "day": 25,
+        "dist": 2,
+        "frac": 0.16666666666666666,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "murkcap",
+        "wave": 1
+       },
+       {
+        "day": 38,
+        "dist": 2,
+        "frac": 0.16666666666666666,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "murkcap",
+        "wave": 1
+       },
+       {
+        "day": 45,
+        "dist": 2,
+        "frac": 0.016666666666666666,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "defender-wounded",
+        "prev": "previously-drafted",
+        "type": "murkcap",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 16,
+       "dist": 3,
+       "frac": 1,
+       "belowLine": false,
+       "rank": 3,
+       "priorClass": "healthy",
+       "prev": "never-drafted",
+       "type": "murkcap",
+       "wave": 1
+      },
+      {
+       "day": 25,
+       "dist": 2,
+       "frac": 0.16666666666666666,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "murkcap",
+       "wave": 1
+      },
+      {
+       "day": 38,
+       "dist": 2,
+       "frac": 0.16666666666666666,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "murkcap",
+       "wave": 1
+      },
+      {
+       "day": 45,
+       "dist": 2,
+       "frac": 0.016666666666666666,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "defender-wounded",
+       "prev": "previously-drafted",
+       "type": "murkcap",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 16,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 4,
+       "startFrac": 1,
+       "endFrac": 0.16666666666666666,
+       "manufactured": true
+      },
+      {
+       "day": 25,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.16666666666666666,
+       "endFrac": 0.16666666666666666,
+       "manufactured": false
+      },
+      {
+       "day": 38,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.016666666666666666,
+       "endFrac": 0.016666666666666666,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73677,
+   "analysis": {
+    "raids": 12,
+    "totalDrafted": 45,
+    "totalPool": 282,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 45,
+     "median": 2,
+     "mean": 1.8666666666666667,
+     "dist0Share": 0
+    },
+    "poolDist": {
+     "n": 282,
+     "median": 4,
+     "mean": 4.48581560283688,
+     "dist0Share": 0
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 24,
+      "median": 2,
+      "mean": 2,
+      "dist0Share": 0
+     },
+     "above": {
+      "n": 21,
+      "median": 1,
+      "mean": 1.7142857142857142,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "healthy": {
+      "n": 22,
+      "median": 1,
+      "mean": 1.8181818181818181,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 15,
+      "median": 2,
+      "mean": 2,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 8,
+      "median": 2,
+      "mean": 1.75,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "healthy": {
+      "n": 115,
+      "median": 4,
+      "mean": 4.269565217391304,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 100,
+      "median": 4,
+      "mean": 4.51,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 66,
+      "median": 5,
+      "mean": 4.818181818181818,
+      "dist0Share": 0
+     },
+     "arrived-wounded": {
+      "n": 1,
+      "median": 5,
+      "mean": 5,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "healthy": 22,
+     "field-wounded": 15,
+     "defender-wounded": 8
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 20,
+      "median": 2,
+      "mean": 1.95,
+      "dist0Share": 0
+     },
+     "never-drafted": {
+      "n": 25,
+      "median": 1,
+      "mean": 1.8,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.5798737260350744,
+    "spearmanN": 282,
+    "quartile": {
+     "observed": 42,
+     "expected": 11.914434178432824,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-manufactured": {
+      "events": 10,
+      "laterDrafts": 8
+     },
+     "defender-pre-wounded": {
+      "events": 23,
+      "laterDrafts": 20
+     }
+    },
+    "laterDraftsPerEntity": {
+     "defender-manufactured": {
+      "entities": 11,
+      "drafts": 20
+     },
+     "field-manufactured": {
+      "entities": 6,
+      "drafts": 16
+     },
+     "healthy": {
+      "entities": 7,
+      "drafts": 7
+     },
+     "arrived-wounded": {
+      "entities": 1,
+      "drafts": 2
+     }
+    },
+    "distinctDraftedEntities": 25,
+    "senseTimeline": {
+     "entity": {
+      "seq": 4,
+      "type": "lockpick_raccoon",
+      "wave": 1,
+      "drafts": 4,
+      "firstWoundSource": "field-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 14,
+        "dist": 4,
+        "frac": 0.125,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "healthy",
+        "prev": "never-drafted",
+        "type": "lockpick_raccoon",
+        "wave": 1
+       },
+       {
+        "day": 50,
+        "dist": 3,
+        "frac": 0.125,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "lockpick_raccoon",
+        "wave": 1
+       },
+       {
+        "day": 62,
+        "dist": 1,
+        "frac": 0.025,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "lockpick_raccoon",
+        "wave": 1
+       },
+       {
+        "day": 75,
+        "dist": 2,
+        "frac": 0.025,
+        "belowLine": true,
+        "rank": 3,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "lockpick_raccoon",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 14,
+       "dist": 4,
+       "frac": 0.125,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "healthy",
+       "prev": "never-drafted",
+       "type": "lockpick_raccoon",
+       "wave": 1
+      },
+      {
+       "day": 50,
+       "dist": 3,
+       "frac": 0.125,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "lockpick_raccoon",
+       "wave": 1
+      },
+      {
+       "day": 62,
+       "dist": 1,
+       "frac": 0.025,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "lockpick_raccoon",
+       "wave": 1
+      },
+      {
+       "day": 75,
+       "dist": 2,
+       "frac": 0.025,
+       "belowLine": true,
+       "rank": 3,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "lockpick_raccoon",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 14,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 2,
+       "startFrac": 1,
+       "endFrac": 0.125,
+       "manufactured": true
+      },
+      {
+       "day": 14,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.125,
+       "endFrac": 0.125,
+       "manufactured": false
+      },
+      {
+       "day": 20,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.125,
+       "endFrac": 0.125,
+       "manufactured": false
+      },
+      {
+       "day": 20,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.125,
+       "endFrac": 0.125,
+       "manufactured": false
+      },
+      {
+       "day": 50,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      },
+      {
+       "day": 53,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      },
+      {
+       "day": 59,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      },
+      {
+       "day": 59,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      },
+      {
+       "day": 62,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      },
+      {
+       "day": 67,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      },
+      {
+       "day": 75,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.025,
+       "endFrac": 0.025,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 73678,
+   "analysis": {
+    "raids": 9,
+    "totalDrafted": 35,
+    "totalPool": 162,
+    "untaggedDrafted": 0,
+    "untaggedPool": 0,
+    "constructionMismatches": 0,
+    "draftedDist": {
+     "n": 35,
+     "median": 2,
+     "mean": 2.057142857142857,
+     "dist0Share": 0
+    },
+    "poolDist": {
+     "n": 162,
+     "median": 4,
+     "mean": 4.419753086419753,
+     "dist0Share": 0
+    },
+    "draftedDistByWound": {
+     "below": {
+      "n": 15,
+      "median": 2,
+      "mean": 1.9333333333333333,
+      "dist0Share": 0
+     },
+     "above": {
+      "n": 20,
+      "median": 2,
+      "mean": 2.15,
+      "dist0Share": 0
+     }
+    },
+    "draftedDistByClass": {
+     "healthy": {
+      "n": 20,
+      "median": 2,
+      "mean": 2.15,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 9,
+      "median": 2,
+      "mean": 1.7777777777777777,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 6,
+      "median": 2,
+      "mean": 2.1666666666666665,
+      "dist0Share": 0
+     }
+    },
+    "poolDistByClass": {
+     "healthy": {
+      "n": 87,
+      "median": 4,
+      "mean": 4.471264367816092,
+      "dist0Share": 0
+     },
+     "field-wounded": {
+      "n": 42,
+      "median": 4,
+      "mean": 4.380952380952381,
+      "dist0Share": 0
+     },
+     "defender-wounded": {
+      "n": 33,
+      "median": 4,
+      "mean": 4.333333333333333,
+      "dist0Share": 0
+     }
+    },
+    "draftedCountByClass": {
+     "healthy": 20,
+     "field-wounded": 9,
+     "defender-wounded": 6
+    },
+    "draftedDistByPrev": {
+     "previously-drafted": {
+      "n": 11,
+      "median": 2,
+      "mean": 1.8181818181818181,
+      "dist0Share": 0
+     },
+     "never-drafted": {
+      "n": 24,
+      "median": 2,
+      "mean": 2.1666666666666665,
+      "dist0Share": 0
+     }
+    },
+    "spearmanDistDrafted": -0.6539101006572458,
+    "spearmanN": 162,
+    "quartile": {
+     "observed": 32,
+     "expected": 9.72336813513284,
+     "size": null
+    },
+    "laterDraftsBySource": {
+     "defender-manufactured": {
+      "events": 9,
+      "laterDrafts": 6
+     },
+     "defender-pre-wounded": {
+      "events": 13,
+      "laterDrafts": 12
+     }
+    },
+    "laterDraftsPerEntity": {
+     "defender-manufactured": {
+      "entities": 14,
+      "drafts": 20
+     },
+     "healthy": {
+      "entities": 6,
+      "drafts": 6
+     },
+     "field-manufactured": {
+      "entities": 4,
+      "drafts": 9
+     }
+    },
+    "distinctDraftedEntities": 24,
+    "senseTimeline": {
+     "entity": {
+      "seq": 15,
+      "type": "hushwolf",
+      "wave": 1,
+      "drafts": 5,
+      "firstWoundSource": "field-manufactured",
+      "everBelowLineAtDraft": true,
+      "draftsList": [
+       {
+        "day": 56,
+        "dist": 2,
+        "frac": 0.04,
+        "belowLine": true,
+        "rank": 2,
+        "priorClass": "field-wounded",
+        "prev": "never-drafted",
+        "type": "hushwolf",
+        "wave": 1
+       },
+       {
+        "day": 69,
+        "dist": 2,
+        "frac": 0.04,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "hushwolf",
+        "wave": 1
+       },
+       {
+        "day": 76,
+        "dist": 2,
+        "frac": 0.02,
+        "belowLine": true,
+        "rank": 1,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "hushwolf",
+        "wave": 1
+       },
+       {
+        "day": 90,
+        "dist": 1,
+        "frac": 0.02,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "hushwolf",
+        "wave": 1
+       },
+       {
+        "day": 97,
+        "dist": 1,
+        "frac": 0.02,
+        "belowLine": true,
+        "rank": 0,
+        "priorClass": "field-wounded",
+        "prev": "previously-drafted",
+        "type": "hushwolf",
+        "wave": 1
+       }
+      ]
+     },
+     "drafts": [
+      {
+       "day": 56,
+       "dist": 2,
+       "frac": 0.04,
+       "belowLine": true,
+       "rank": 2,
+       "priorClass": "field-wounded",
+       "prev": "never-drafted",
+       "type": "hushwolf",
+       "wave": 1
+      },
+      {
+       "day": 69,
+       "dist": 2,
+       "frac": 0.04,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "hushwolf",
+       "wave": 1
+      },
+      {
+       "day": 76,
+       "dist": 2,
+       "frac": 0.02,
+       "belowLine": true,
+       "rank": 1,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "hushwolf",
+       "wave": 1
+      },
+      {
+       "day": 90,
+       "dist": 1,
+       "frac": 0.02,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "hushwolf",
+       "wave": 1
+      },
+      {
+       "day": 97,
+       "dist": 1,
+       "frac": 0.02,
+       "belowLine": true,
+       "rank": 0,
+       "priorClass": "field-wounded",
+       "prev": "previously-drafted",
+       "type": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "fights": [
+      {
+       "day": 24,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 3,
+       "startFrac": 1,
+       "endFrac": 0.04,
+       "manufactured": true
+      },
+      {
+       "day": 56,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.04,
+       "endFrac": 0.04,
+       "manufactured": false
+      },
+      {
+       "day": 65,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.04,
+       "endFrac": 0.04,
+       "manufactured": false
+      },
+      {
+       "day": 69,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 76,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 83,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 84,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 87,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 90,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 97,
+       "context": "field",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      },
+      {
+       "day": 97,
+       "context": "raid",
+       "outcome": "mFlee",
+       "rounds": 0,
+       "startFrac": 0.02,
+       "endFrac": 0.02,
+       "manufactured": false
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "pooled": {
+  "draftedDist": {
+   "n": 361,
+   "median": 2,
+   "mean": 2.177285318559557,
+   "dist0Share": 0.0110803324099723
+  },
+  "poolDist": {
+   "n": 1494,
+   "median": 4,
+   "mean": 4.3447121820615795,
+   "dist0Share": 0.002677376171352075
+  },
+  "draftedDistByClass": {
+   "field-wounded": {
+    "n": 118,
+    "median": 2,
+    "mean": 2.1186440677966103,
+    "dist0Share": 0.03389830508474576
+   },
+   "healthy": {
+    "n": 143,
+    "median": 2,
+    "mean": 2.195804195804196,
+    "dist0Share": 0
+   },
+   "defender-wounded": {
+    "n": 98,
+    "median": 2,
+    "mean": 2.2346938775510203,
+    "dist0Share": 0
+   },
+   "arrived-wounded": {
+    "n": 2,
+    "median": 2,
+    "mean": 1.5,
+    "dist0Share": 0
+   }
+  },
+  "draftedDistByWound": {
+   "below": {
+    "n": 224,
+    "median": 2,
+    "mean": 2.1651785714285716,
+    "dist0Share": 0.017857142857142856
+   },
+   "above": {
+    "n": 137,
+    "median": 2,
+    "mean": 2.197080291970803,
+    "dist0Share": 0
+   }
+  },
+  "draftedDistByPrev": {
+   "previously-drafted": {
+    "n": 182,
+    "median": 2,
+    "mean": 2.142857142857143,
+    "dist0Share": 0.02197802197802198
+   },
+   "never-drafted": {
+    "n": 179,
+    "median": 2,
+    "mean": 2.212290502793296,
+    "dist0Share": 0
+   }
+  },
+  "draftedCountByClass": {
+   "field-wounded": 118,
+   "healthy": 143,
+   "defender-wounded": 98,
+   "arrived-wounded": 2
+  },
+  "spearmanDistDrafted": -0.6544635054291493,
+  "spearmanN": 1494,
+  "quartile": {
+   "observed": 320,
+   "expected": 99.75362914414123
+  },
+  "constructionMismatches": 0,
+  "untaggedDrafted": 0,
+  "untaggedPool": 0,
+  "echoRaids": 85,
+  "echoDrafted": 361,
+  "echoPool": 1494,
+  "raftRaids": 85,
+  "raftRaiders": 361,
+  "laterDraftsBySource": {
+   "defender-pre-wounded": {
+    "events": 204,
+    "laterDrafts": 251
+   },
+   "defender-manufactured": {
+    "events": 56,
+    "laterDrafts": 98
+   }
+  },
+  "laterDraftsPerEntity": {
+   "healthy": {
+    "entities": 43,
+    "drafts": 44
+   },
+   "defender-manufactured": {
+    "entities": 81,
+    "drafts": 180
+   },
+   "field-manufactured": {
+    "entities": 51,
+    "drafts": 127
+   },
+   "arrived-wounded": {
+    "entities": 4,
+    "drafts": 10
+   }
+  }
+ },
+ "generated": "2026-10-25T20:36:55.393Z"
+}
