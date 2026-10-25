@@ -1,0 +1,531 @@
+{
+  "mode": "pool",
+  "generatedBy": "scripts/analyze-causebase-b.js",
+  "population": "kind in {villager, person} AND scholar flag false; labels raw, unnormalized",
+  "scope": {
+    "scopeVersion": 1,
+    "policy": "tableseat-nowait",
+    "horizon": {
+      "days": 180,
+      "mode": "death-aware"
+    },
+    "flags": {
+      "PLENTYDEPRI": null,
+      "DEPOSITGATE": null
+    },
+    "kindFilter": {
+      "kinds": [
+        "villager",
+        "person"
+      ],
+      "scholarExcluded": true,
+      "scholarFlagFields": {
+        "sweep": "isPlayer",
+        "census": "player"
+      },
+      "description": "kind in {villager, person} AND scholar flag false"
+    },
+    "labels": {
+      "form": "raw, unnormalized",
+      "truncationChars": 32
+    },
+    "corpora": [
+      {
+        "dir": "evidence/2026-10-25/perseed-deathrow-b",
+        "seedFirst": 73701,
+        "seedLast": 73748,
+        "seedCount": 40,
+        "filesIngested": 40
+      },
+      {
+        "dir": "evidence/2026-10-25/perseed-deathext-b",
+        "seedFirst": 73751,
+        "seedLast": 73818,
+        "seedCount": 56,
+        "filesIngested": 56
+      }
+    ],
+    "counts": {
+      "rowsTotal": 2806,
+      "excludedByKind": 1963,
+      "excludedScholar": 520,
+      "villagerDeaths": 323,
+      "labelCount": 31
+    },
+    "derivation": {
+      "policy": "uniform per-seed corpus policy field (a conflict fails loudly)",
+      "flags": "uniform per-seed corpus plentydepri/depositgate fields (a conflict fails loudly)",
+      "horizonDays": "uniform sweep summary meta.days (a conflict fails loudly; null when no summary meta present)",
+      "horizonMode": "documented sweep-driver semantics per sim-causebase-b.md pre-registration (150d death-aware); mode is not a corpus field",
+      "corpora": "per-corpus seed bands from ingested per-seed files; full seed lists in top-level corpora[].seeds"
+    }
+  },
+  "corpora": [
+    {
+      "dir": "evidence/2026-10-25/perseed-deathrow-b",
+      "filesIngested": [
+        "s73701.json",
+        "s73702.json",
+        "s73703.json",
+        "s73704.json",
+        "s73705.json",
+        "s73706.json",
+        "s73707.json",
+        "s73708.json",
+        "s73711.json",
+        "s73712.json",
+        "s73713.json",
+        "s73714.json",
+        "s73715.json",
+        "s73716.json",
+        "s73717.json",
+        "s73718.json",
+        "s73721.json",
+        "s73722.json",
+        "s73723.json",
+        "s73724.json",
+        "s73725.json",
+        "s73726.json",
+        "s73727.json",
+        "s73728.json",
+        "s73731.json",
+        "s73732.json",
+        "s73733.json",
+        "s73734.json",
+        "s73735.json",
+        "s73736.json",
+        "s73737.json",
+        "s73738.json",
+        "s73741.json",
+        "s73742.json",
+        "s73743.json",
+        "s73744.json",
+        "s73745.json",
+        "s73746.json",
+        "s73747.json",
+        "s73748.json"
+      ],
+      "filesSkipped": [
+        {
+          "file": "summary.json",
+          "reason": "no per-death rows (summary file)"
+        }
+      ],
+      "seeds": [
+        73701,
+        73702,
+        73703,
+        73704,
+        73705,
+        73706,
+        73707,
+        73708,
+        73711,
+        73712,
+        73713,
+        73714,
+        73715,
+        73716,
+        73717,
+        73718,
+        73721,
+        73722,
+        73723,
+        73724,
+        73725,
+        73726,
+        73727,
+        73728,
+        73731,
+        73732,
+        73733,
+        73734,
+        73735,
+        73736,
+        73737,
+        73738,
+        73741,
+        73742,
+        73743,
+        73744,
+        73745,
+        73746,
+        73747,
+        73748
+      ],
+      "rowsTotal": 1203,
+      "excludedByKind": 859,
+      "excludedScholar": 200,
+      "villagerDeaths": 144,
+      "causes": {
+        "Lockpick": 1,
+        "ambush": 22,
+        "sickness": 15,
+        "monster": 51,
+        "combat": 2,
+        "Buffering": 1,
+        "alien": 6,
+        "a wound that wouldn't close": 22,
+        "thirst": 5,
+        "contest": 1,
+        "starvation": 7,
+        "Inspiration": 1,
+        "The Moderator": 1,
+        "White Noise": 1,
+        "Big Big": 1,
+        "a dog-shaped silence at the treeline": 1,
+        "Choir Toad": 2,
+        "Hushpuppy": 1,
+        "Nevermore": 1,
+        "Ad Break": 1,
+        "The Big Beast": 1
+      }
+    },
+    {
+      "dir": "evidence/2026-10-25/perseed-deathext-b",
+      "filesIngested": [
+        "s73751.json",
+        "s73752.json",
+        "s73753.json",
+        "s73754.json",
+        "s73755.json",
+        "s73756.json",
+        "s73757.json",
+        "s73758.json",
+        "s73761.json",
+        "s73762.json",
+        "s73763.json",
+        "s73764.json",
+        "s73765.json",
+        "s73766.json",
+        "s73767.json",
+        "s73768.json",
+        "s73771.json",
+        "s73772.json",
+        "s73773.json",
+        "s73774.json",
+        "s73775.json",
+        "s73776.json",
+        "s73777.json",
+        "s73778.json",
+        "s73781.json",
+        "s73782.json",
+        "s73783.json",
+        "s73784.json",
+        "s73785.json",
+        "s73786.json",
+        "s73787.json",
+        "s73788.json",
+        "s73791.json",
+        "s73792.json",
+        "s73793.json",
+        "s73794.json",
+        "s73795.json",
+        "s73796.json",
+        "s73797.json",
+        "s73798.json",
+        "s73801.json",
+        "s73802.json",
+        "s73803.json",
+        "s73804.json",
+        "s73805.json",
+        "s73806.json",
+        "s73807.json",
+        "s73808.json",
+        "s73811.json",
+        "s73812.json",
+        "s73813.json",
+        "s73814.json",
+        "s73815.json",
+        "s73816.json",
+        "s73817.json",
+        "s73818.json"
+      ],
+      "filesSkipped": [
+        {
+          "file": "summary.json",
+          "reason": "no per-death rows (summary file)"
+        }
+      ],
+      "seeds": [
+        73751,
+        73752,
+        73753,
+        73754,
+        73755,
+        73756,
+        73757,
+        73758,
+        73761,
+        73762,
+        73763,
+        73764,
+        73765,
+        73766,
+        73767,
+        73768,
+        73771,
+        73772,
+        73773,
+        73774,
+        73775,
+        73776,
+        73777,
+        73778,
+        73781,
+        73782,
+        73783,
+        73784,
+        73785,
+        73786,
+        73787,
+        73788,
+        73791,
+        73792,
+        73793,
+        73794,
+        73795,
+        73796,
+        73797,
+        73798,
+        73801,
+        73802,
+        73803,
+        73804,
+        73805,
+        73806,
+        73807,
+        73808,
+        73811,
+        73812,
+        73813,
+        73814,
+        73815,
+        73816,
+        73817,
+        73818
+      ],
+      "rowsTotal": 1603,
+      "excludedByKind": 1104,
+      "excludedScholar": 320,
+      "villagerDeaths": 179,
+      "causes": {
+        "The Anaconda Empress": 1,
+        "Sunbasker": 1,
+        "Hummice": 1,
+        "monster": 56,
+        "a monitor lizard the size of a canoe, light sliding wrong off its back": 1,
+        "ambush": 28,
+        "sickness": 39,
+        "starvation": 7,
+        "a wound that wouldn't close": 24,
+        "Choir Toad": 2,
+        "combat": 4,
+        "The Callback": 3,
+        "alien": 4,
+        "thirst": 2,
+        "The Big Beast": 1,
+        "The Understudy": 1,
+        "Big Loud": 1,
+        "Speedbump": 1,
+        "a heron that isn't quite there when you look at it": 1,
+        "The Glow Stag": 1
+      }
+    }
+  ],
+  "seedOverlap": [],
+  "rowsTotal": 2806,
+  "excludedByKind": 1963,
+  "excludedScholar": 520,
+  "villagerDeaths": 323,
+  "pooledCauses": {
+    "Lockpick": 1,
+    "ambush": 50,
+    "sickness": 54,
+    "monster": 107,
+    "combat": 6,
+    "Buffering": 1,
+    "alien": 10,
+    "a wound that wouldn't close": 46,
+    "thirst": 7,
+    "contest": 1,
+    "starvation": 14,
+    "Inspiration": 1,
+    "The Moderator": 1,
+    "White Noise": 1,
+    "Big Big": 1,
+    "a dog-shaped silence at the treeline": 1,
+    "Choir Toad": 4,
+    "Hushpuppy": 1,
+    "Nevermore": 1,
+    "Ad Break": 1,
+    "The Big Beast": 2,
+    "The Anaconda Empress": 1,
+    "Sunbasker": 1,
+    "Hummice": 1,
+    "a monitor lizard the size of a canoe, light sliding wrong off its back": 1,
+    "The Callback": 3,
+    "The Understudy": 1,
+    "Big Loud": 1,
+    "Speedbump": 1,
+    "a heron that isn't quite there when you look at it": 1,
+    "The Glow Stag": 1
+  },
+  "pooledTable": [
+    {
+      "label": "monster",
+      "count": 107,
+      "share": 0.33126934984520123
+    },
+    {
+      "label": "sickness",
+      "count": 54,
+      "share": 0.16718266253869968
+    },
+    {
+      "label": "ambush",
+      "count": 50,
+      "share": 0.15479876160990713
+    },
+    {
+      "label": "a wound that wouldn't close",
+      "count": 46,
+      "share": 0.14241486068111456
+    },
+    {
+      "label": "starvation",
+      "count": 14,
+      "share": 0.043343653250773995
+    },
+    {
+      "label": "alien",
+      "count": 10,
+      "share": 0.030959752321981424
+    },
+    {
+      "label": "thirst",
+      "count": 7,
+      "share": 0.021671826625386997
+    },
+    {
+      "label": "combat",
+      "count": 6,
+      "share": 0.018575851393188854
+    },
+    {
+      "label": "Choir Toad",
+      "count": 4,
+      "share": 0.01238390092879257
+    },
+    {
+      "label": "The Callback",
+      "count": 3,
+      "share": 0.009287925696594427
+    },
+    {
+      "label": "The Big Beast",
+      "count": 2,
+      "share": 0.006191950464396285
+    },
+    {
+      "label": "Ad Break",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Big Big",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Big Loud",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Buffering",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Hummice",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Hushpuppy",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Inspiration",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Lockpick",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Nevermore",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Speedbump",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "Sunbasker",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "The Anaconda Empress",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "The Glow Stag",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "The Moderator",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "The Understudy",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "White Noise",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "a dog-shaped silence at the treeline",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "a heron that isn't quite there when you look at it",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "a monitor lizard the size of a canoe, light sliding wrong off its back",
+      "count": 1,
+      "share": 0.0030959752321981426
+    },
+    {
+      "label": "contest",
+      "count": 1,
+      "share": 0.0030959752321981426
+    }
+  ]
+}
