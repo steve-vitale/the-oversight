@@ -266,9 +266,14 @@ taken, d99 cleared gavel; 7 raids, 6 unmet, 8 gorge, 7 convos).
 The panel measurements above were taken on base c737198d7; the
 rebased instrument behaves identically on the new tip because the
 intervening commit touched evidence only (verified with
-`git show --stat f17276d50`). Safe-commit index check: `git status
---short` in the worktree after commit showed only the expected state
-(no clobber sighting this run).
+`git show --stat f17276d50`). Safe-commit index clobber DID strike
+after the first commit (staged-deletion variant, same class as
+r49's): the worktree index showed both committed files staged as
+deleted while the worktree files were byte-identical to HEAD. The
+commit itself was correct throughout; repaired with
+`git update-index --add --cacheinfo` of the two HEAD blobs, then
+verified `git status --short` empty + `git diff HEAD` empty before
+rebasing.
 
 ## Files
 
