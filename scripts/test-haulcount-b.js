@@ -108,16 +108,17 @@ try {
     for (const f of ['haulActions', 'haulKcal', 'pantryDepositActions', 'pantryDepositKcal', 'preserveAttempts', 'preserveSuccessItems', 'preservePemmicanSets', 'preservePemmicanBars', 'preserveVillagerResolutions']) {
       check(`T2 trace total == per-seed ${f}`, tr.totals[f] === first[f], `trace=${tr.totals[f]} perSeed=${first[f]}`);
     }
-    // Event-level recomputation for haul fields (independent of the totals).
     // Stock events are pushed for every stockPantry call including
     // kcal<=0 ones, but the kcal>0 filter below matches the counter;
     // pieces events are pushed only for counted home-pantry hauls.
-    const FIELD = new Set(['Foraged food', 'Game meat', 'Garden harvest', 'Fish catch', 'Expedition haul', 'Aid crew haul']);
+    // This predicate MUST mirror the sweep's isFieldHaul exactly.
+    const FIELD = new Set(['Foraged food', 'Game meat', 'Garden harvest', 'Fish catch', 'Expedition haul', 'Aid crew haul', 'Snared meat', 'Hauled meat', 'Emergency hunt meat']);
+    const isFieldHaul = (nm) => FIELD.has(nm) || (typeof nm === 'string' && nm.startsWith('Pit meat ('));
     let evHaulA = 0, evHaulK = 0;
     for (const ev of tr.events) {
       if (ev.kind !== 'haul' || !(ev.kcal > 0)) continue;
       if (ev.via === 'pieces') { evHaulA += 1; evHaulK += ev.kcal; }
-      else if (FIELD.has(ev.name)) { evHaulA += 1; evHaulK += ev.kcal; }
+      else if (isFieldHaul(ev.name)) { evHaulA += 1; evHaulK += ev.kcal; }
     }
     // Note: the stock trace pushes for every stockPantry call including
     // kcal<=0 ones, but the kcal>0 filter above matches the counter.

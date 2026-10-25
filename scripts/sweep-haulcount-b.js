@@ -23,9 +23,12 @@
 //      - stockPantry(kcal, name, opts): every call with rounded kcal > 0
 //        is a pantry deposit (pantryDepositActions/pantryDepositKcal).
 //        The HAUL subset is calls whose name (defaulting to
-//        'Foraged food' when falsy, mirroring stockPantry itself) is in
-//        FIELD_HAUL_NAMES — duty forage/garden/fish/hunt and expedition
-//        hauls. System gifts (Weregild, Hoarder's interest, Genesis
+//        'Foraged food' when falsy, mirroring stockPantry itself)
+//        passes isFieldHaul: the generic duty names (forage/game/
+//        garden/fish/expedition/aid-crew), the trap lines ('Snared
+//        meat', 'Pit meat (X)'), the haul-return default ('Hauled
+//        meat'), and the emergency hunt ('Emergency hunt meat').
+//        System gifts (Weregild, Hoarder's interest, Genesis
 //        fruit, trial feasts, leftovers, refunds) and other deposits
 //        count ONLY in the pantryDeposit totals, never in haulActions.
 //      - depositPantryPieces(v, src, pieceKcal): the homecoming/village
@@ -200,15 +203,31 @@ async function oneRun(seed, days) {
   const tracePush = (ev) => { if (TRACE && W.traceEvents.length < 500) W.traceEvents.push(ev); };
   const dayNow = () => { try { return (Game.state.scholar || {}).day || 0; } catch (e) { return 0; } };
   // stockPantry's own default name (mirrored, not redefined): a falsy
-  // name arrives as 'Foraged food'. Only these names are field hauls;
-  // everything else stockPantry carries is a deposit, not a haul.
-  const FIELD_HAUL_NAMES = new Set(['Foraged food', 'Game meat', 'Garden harvest', 'Fish catch', 'Expedition haul', 'Aid crew haul']);
+  // name arrives as 'Foraged food'. The HAUL rule below is a caller
+  // census, not a guess: every stockPantry call site was read
+  // (2026-10-25). Field/duty hauls: the generic duty names, the
+  // trap lines (villager-objectives snare/pit returns), the
+  // haul-return default ('Hauled meat', villager-objectives haul
+  // return via ho.haulName), and the emergency hunt (safetynets:
+  // named villagers go out and come back heavy). Everything else a
+  // caller passes is NOT a haul and counts only in the
+  // pantryDeposit totals: System gifts (Weregild, Hoarder's
+  // interest, System aid cache / SYNTHETIC bricks, trial feasts,
+  // System-replicated meals), aid transfers ('Aid from X',
+  // 'Remedy stores from X'), refunds, restitution, leftovers,
+  // returned rations. Residual gap, stated not hidden: a
+  // haul-return whose haulName is a bare custom label (a site label
+  // other than 'Hauled meat') would miss the predicate — no such
+  // name appeared in the 4 traced pilot runs, and a future trace
+  // showing one is the signal to widen the predicate.
+  const FIELD_HAUL_NAMES = new Set(['Foraged food', 'Game meat', 'Garden harvest', 'Fish catch', 'Expedition haul', 'Aid crew haul', 'Snared meat', 'Hauled meat', 'Emergency hunt meat']);
+  const isFieldHaul = (nm) => FIELD_HAUL_NAMES.has(nm) || (typeof nm === 'string' && nm.startsWith('Pit meat ('));
   const countStock = (kcal, name) => {
     const k = Math.round(kcal || 0);
     if (k <= 0) return;
     W.pantryDepositActions += 1; W.pantryDepositKcal += k;
     const nm = name || 'Foraged food';
-    if (FIELD_HAUL_NAMES.has(nm)) { W.haulActions += 1; W.haulKcal += k; }
+    if (isFieldHaul(nm)) { W.haulActions += 1; W.haulKcal += k; }
   };
   const oStock = Game.stockPantry;
   if (typeof oStock === 'function') Game.stockPantry = function (kcal, name, opts) {
