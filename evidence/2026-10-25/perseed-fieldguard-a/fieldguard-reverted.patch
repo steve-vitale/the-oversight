@@ -1,0 +1,106 @@
+diff --git a/src/js/fieldFights.js b/src/js/fieldFights.js
+index d5e6f1f0e..27f36ff55 100644
+--- a/src/js/fieldFights.js
++++ b/src/js/fieldFights.js
+@@ -520,6 +520,34 @@
+       var vHpMax = 100;
+       var vHp = (vv.health && vv.health[vid] !== undefined) ? vv.health[vid] : 100;
+       var vHpStart = vHp;
++      // FIELDGUARD (sim-fieldguard-a 2026-10-25, scale-onramp): a villager
++      // below the guard line does not enter a FIELD fight — they withdraw
++      // before round 1, dealing and taking nothing, and the monster stays
++      // where it was. Behavioral protection, NOT a stat buff and NOT a
++      // break-line change. The line is 15 HP on the 100-point villager
++      // scale fieldFight itself uses (vHpMax = max(100, vHp), so below 15
++      // HP is below 15% here) — deliberately NOT the wave-dependent
++      // monster break line (0.15 wave>=2 / 0.25 wave 1): the mechanism
++      // deaths were all at 6–11% HP, and a wave-1 0.25 line would pull
++      // villagers at 20% HP who were never observed dying this way.
++      // SCOPE: fires ONLY when the caller passes opts.fieldguard — the
++      // wild-encounter router (non-raid, non-aid) and expedition
++      // meetings. Raid defenders, arena (noFlee), contests (seeded rng),
++      // aid-crisis fights, sorties, and alien fights never pass the flag,
++      // so they can never trigger this guard (the raid flag does not
++      // survive into fieldFight, which is why the flag — not a context
++      // check — is the gate). The scholar (vid === villagerId) is never
++      // guarded: player fights are the player's own. Allies do not
++      // override the guard: a nearly-dead villager does not stand in
++      // the fight even with company — the jumped villager withdrawing
++      // means no fight happens on this routing.
++      if (opts.fieldguard && vid !== this.villagerId && vHp < 15) {
++        rec.outcome = 'vWithdraw';
++        rec.rounds = 0; rec.vTaken = 0; rec.mDealt = 0;
++        rec.vHpLeft = vHp; rec.mHpLeft = (m && m.hp != null) ? m.hp : null;
++        rec.log.push('Too hurt to stand and fight — withdrew before round 1.');
++        return rec;
++      }
+       var vBeamTaken = 0; // landed light, after all defenses; not raw attack damage
+       if (vHp > vHpMax) vHpMax = vHp;
+       // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat 3 was
+@@ -1718,6 +1746,8 @@
+       }
+       if (rec.outcome === 'vDie')
+         return The + ' killed ' + vName + ' in ' + rounds + '. The village mourns.';
++      if (rec.outcome === 'vWithdraw')
++        return vName + ' slipped away from ' + the + ', too hurt to stand and fight.';
+       return vName + ' met ' + the + ' and walked away from it.';
+     },
+   };
+diff --git a/src/js/game.js b/src/js/game.js
+index ecadca554..2c68f1505 100644
+--- a/src/js/game.js
++++ b/src/js/game.js
+@@ -19554,7 +19554,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       // through aidFight, allies at the door in the fight from round one.
+       let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
++      // FIELDGUARD (sim-fieldguard-a): the wild-encounter router passes
++      // the guard flag ONLY on the non-raid, non-aid field path. Raid
++      // defenders (opts.raid) and aid-crisis fights take the other
++      // branches and never carry the flag, so raid defense is untouched
++      // (wAidTried remembers an aid attempt even if aidFight returned
++      // null, so the fallback fieldFight stays unguarded too).
++      // A guard withdrawal returns outcome 'vWithdraw', which no branch
++      // below handles — deliberately: no wounds, no trust, no kill, no
++      // deed, the monster stays, and the summary line narrates it.
++      const wAidTried = wViaAid;
++      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids, fieldguard: (!opts.raid && !wAidTried) }); }
+       const summary = this.fieldFightSummary(rec, name, mName);
+       if (rec.outcome === 'alreadyDead') {
+         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
+diff --git a/src/js/villager-agency.js b/src/js/villager-agency.js
+index 8afd2956e..f2587d08d 100644
+--- a/src/js/villager-agency.js
++++ b/src/js/villager-agency.js
+@@ -366,7 +366,12 @@
+       // don't. The depth probe measured calledHelp 0/531 before this.
+       var allyVids = [];
+       try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
+-      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids });
++      // FIELDGUARD (sim-fieldguard-a): expedition meetings are field
++      // fights, so they carry the guard flag — a villager below 15 HP
++      // withdraws before round 1 (fieldFights.js) instead of fighting
++      // hurt. Handled by the vWithdraw branch below, before any
++      // knowledge/xp/wound accounting.
++      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids, fieldguard: true });
+       // The village hears about a rescue — gossip fodder, honestly sourced.
+       // "Mara ran into the treeline when she heard James scream."
+       if (rec.calledHelp && rec.allyVid) {
+@@ -384,6 +389,16 @@
+         st.exped[vid].encounters.push('evaded ' + (m.id || 'it'));
+         return;
+       }
++      if (rec.outcome === 'vWithdraw') {
++        // FIELDGUARD (sim-fieldguard-a): too hurt to stand and fight —
++        // slipped away before round 1, unwounded. An encounter note only:
++        // no knowledge, no tracking XP, no scar, no wound, and the
++        // expedition is NOT cut short (nothing happened to the body).
++        // Must sit before the contact accounting below — without this
++        // branch a withdrawal would fall through to expedHurt.
++        st.exped[vid].encounters.push('withdrew hurt from ' + (m.id || 'it'));
++        return;
++      }
+       // contact: they fought. Fighting teaches, whatever the ending.
+       // (2026-10-08: wins and drive-offs used to walk away unwounded —
+       // the record said "44 taken" while health never moved. Every
