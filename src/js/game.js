@@ -4199,7 +4199,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // One deliberate action; the drama is in detection, not confirmation.
     // Costs 1 tick (time + calories — quick hands are still work).
     stealFrom(vid) {
-      if (this.tbfight) { this.say('Not in the middle of a fight.'); return false; }
+      if (this.tbfight) { this.sayOncePerFight('Not in the middle of a fight.'); return false; }
       const v = this.state.village;
       if (!(v.roster || []).includes(vid) || vid === this.villagerId) return false;
       const dname = this.displayName(vid);
@@ -4296,7 +4296,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Costs 2 ticks (confrontation is work). Outcome runs on temperament:
     // the fearful yield, the steady refuse, the bold push back — sometimes swinging.
     intimidate(vid) {
-      if (this.tbfight) { this.say('Not in the middle of a fight.'); return false; }
+      if (this.tbfight) { this.sayOncePerFight('Not in the middle of a fight.'); return false; }
       const v = this.state.village;
       if (!(v.roster || []).includes(vid) || vid === this.villagerId) return false;
       const dname = this.displayName(vid);
@@ -11427,7 +11427,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // real time cost (tickAction no-ops in combat). Without this guard a
       // stale blockage card could clear a path mid-fight — kcal spent, no
       // time spent, then travelTo refuses anyway. The barrier is the way out.
-      if (this.inCombat()) { this.say('Not mid-fight — the barrier is the way out.'); return false; }
+      if (this.inCombat()) { this.sayOncePerFight('Not mid-fight — the barrier is the way out.'); return false; }
       const dest = this.tileAt(x, y);
       const bf = dest.blockFrom;
       if (!bf) {
@@ -11476,7 +11476,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.over) return false;
       // MID-FIGHT (break-it travel r4 2026-10-09): same class as
       // clearBlockage — construction is work, fights are not workshops.
-      if (this.inCombat()) { this.say('Not mid-fight — the barrier is the way out.'); return false; }
+      if (this.inCombat()) { this.sayOncePerFight('Not mid-fight — the barrier is the way out.'); return false; }
       const dest = this.tileAt(x, y);
       // ALREADY BRIDGED (break-it camps-6 2026-10-09): a stale double-call
       // (the blockage card can sit open; the engine is the last line) used
@@ -11584,7 +11584,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // roll and a desynced fight. The flee-by-door branch (tbPlayerMove)
       // is the one sanctioned mid-combat caller — it passes doorFlee.
       if (this.inCombat() && !doorFlee) {
-        this.say('Not mid-fight — the barrier is the way out.');
+        this.sayOncePerFight('Not mid-fight — the barrier is the way out.');
         return false;
       }
       // NO-OP (explorer break-it 2026-10-09): the old code repositioned to
@@ -11720,7 +11720,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // monsters AI-acting against a ghost. Only the flee-by-door branch
       // may pass doorFlee.
       if (this.inCombat() && !doorFlee) {
-        this.say('Not mid-fight — the barrier is the way out.');
+        this.sayOncePerFight('Not mid-fight — the barrier is the way out.');
         return false;
       }
       // NO-OP (explorer break-it 2026-10-09): re-entering while inside
@@ -11860,7 +11860,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Refuse, loudly. tbBarrierExit is the one legitimate mid-combat
       // caller — it passes combatExit.
       if (this.inCombat() && !combatExit) {
-        this.say('Not mid-fight — the barrier is the way out.');
+        this.sayOncePerFight('Not mid-fight — the barrier is the way out.');
         return null;
       }
       const t = this.travelTargets().find(t => t.x === x && t.y === y);
@@ -12306,7 +12306,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // stale tile card could grant the interaction (secret reveal, drink,
       // forage...) for free AND hand monsters extra turns. Same class as the
       // examineCell/beginPathWalk/travelTo combat guards: refuse, loudly.
-      if (this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (this.inCombat()) { this.sayOncePerFight('Not mid-fight — finish it first.'); return null; }
       // SWEEP FIRST (break-it alien r14 2026-10-11, sibling of the
       // apPlaygroundBurn/apDousePlayerFire fixes): expired-but-unswept fires
       // still read 'fire' on the grid — tapping one said "You warm your
@@ -12796,7 +12796,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the rest. Worn armor must be unequipped first (the honest unequip path).
     giftArmor(invIdx, vid) {
       if (this.over) return null;
-      if (this.inCombat && this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (this.inCombat && this.inCombat()) { this.sayOncePerFight('Not mid-fight — finish it first.'); return null; }
       if (this.havenStoresAccess && this.havenStoresAccess() === 'none') {
         this.say("You're not at haven — they're not here to hand it to.");
         return null;
@@ -13771,7 +13771,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.over) return null;
       // COMBAT (break-it travel 2026-10-08, sibling sweep): no committed walks
       // mid-fight — same desync class as travelTo/microMove. Say so, loudly.
-      if (this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (this.inCombat()) { this.sayOncePerFight('Not mid-fight — finish it first.'); return null; }
       const s = this.state.scholar;
       const sx = s.mx ?? 4, sy = s.my ?? 4;
       if (tx === sx && ty === sy) return [];
@@ -14035,7 +14035,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // MID-FIGHT (survivalist loop 2026-10-09): tickAction no-ops in combat,
       // so boiling mid-fight purified for kcal only with the clock frozen —
       // same class as the examineCell/_cellInteract mid-fight guards.
-      if (this.inCombat && this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (this.inCombat && this.inCombat()) { this.sayOncePerFight('Not mid-fight — finish it first.'); return null; }
       // NEED FIRE. you can't boil water with wishes.
       // (beard_moss: moss in your beard is always tinder. Anywhere works.)
       // TENT FIRE COUNTS (survivalist loop 2026-10-09): nearFire() only sees
@@ -15686,7 +15686,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (q <= 0) continue;
           const carry = carryNow();
           const canTake = Math.min(q, Math.floor(max - carry)); // 1L = 1kg
-          if (canTake <= 0) { this.say('Too heavy for more water.'); continue; }
+          if (canTake <= 0) { this.sayGated('tooHeavy', 'Too heavy for more water.', 3); continue; }
           v.water.clean -= canTake;
           this.addWater(canTake, 'clean', 'Haven well');
           totalKg += canTake;
@@ -15700,7 +15700,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // weight check per item (running total)
         const carry = carryNow();
         const canTake = Math.min(q, Math.floor((max - carry) / (item.kg || 0.1)));
-        if (canTake <= 0) { this.say(`Too heavy for more ${item.name}.`); continue; }
+        if (canTake <= 0) { this.sayGated('tooHeavy', `Too heavy for more ${item.name}.`, 3); continue; }
         item.units -= canTake;
         if (item.units <= 0) pantry.splice(pantry.indexOf(item), 1);
         // merge into inventory
@@ -15821,7 +15821,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const carry = (this.state.scholar.inventory || []).reduce((t, i) => t + (i.kg || 0) * (i.units || 1), 0) + this.waterWeight();
       const max = this.carryCapacity();
       if (carry + (item.kg || 0) > max) {
-        this.say(`Too heavy. Carrying ${carry.toFixed(1)}/${max} kg.`);
+        this.sayGated('tooHeavy', `Too heavy. Carrying ${carry.toFixed(1)}/${max} kg.`, 3);
         return null;
       }
       // take one unit
@@ -16953,18 +16953,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const name = this.displayName(rid);
       const brave = (this.repOf(rid).brave || 0);
       const lines = {
+        // GAP-W4-NARR #563: witness ritual lines were 2-line pools
+        // (pickFresh cycles them, but a long fight still echoes the same
+        // two tellings). 3-4 lines per moment now; the kill pool keeps
+        // the "Remind me not to cross you" telling in rotation.
         start: brave > 5
-          ? [`${name} squares up to watch. "Give it hell."`, `${name} doesn't look away. "About time someone fought back."`]
+          ? [`${name} squares up to watch. "Give it hell."`, `${name} doesn't look away. "About time someone fought back."`, `${name} plants their feet. "Finally. A fight worth watching."`]
           : brave < -5
-          ? [`${name} backs away, hands up. "Don't — don't bring it here!"`, `${name} goes pale. "We should RUN."`]
-          : [`${name} freezes. "What IS that?"`, `${name} watches, jaw tight.`],
+          ? [`${name} backs away, hands up. "Don't — don't bring it here!"`, `${name} goes pale. "We should RUN."`, `${name} looks for the nearest way out. "Not here. Not us."`]
+          : [`${name} freezes. "What IS that?"`, `${name} watches, jaw tight.`, `${name} holds very still. "That's new. That's new and bad."`],
         kill: brave > 5
-          ? [`${name} whoops. "That's how it's done!"`, `${name} nods, slow. "Remind me not to cross you."`]
-          : [`${name} exhales. "It's dead? It's really dead."`, `${name} stares at the body, then at you.`],
-        hurt: [`${name} winces. "You're bleeding!"`, `${name} shouts: "Move! MOVE!"`],
+          ? [`${name} whoops. "That's how it's done!"`, `${name} nods, slow. "Remind me not to cross you."`, `${name} laughs, disbelieving. "Did you SEE that?"`, `${name} claps once, slow. "That's how it's done."`]
+          : [`${name} exhales. "It's dead? It's really dead."`, `${name} stares at the body, then at you.`, `${name} lets out a breath they were holding. "It's over. It's really over."`, `${name} looks from the body to you, and nods.`],
+        hurt: [`${name} winces. "You're bleeding!"`, `${name} shouts: "Move! MOVE!"`, `${name} gasps. "You're hit — move!"`],
         flee: brave > 5
-          ? [`${name} spits. "Coward's move. Smart, but coward's."`]
-          : [`${name} sags with relief. "Good. Good call."`],
+          ? [`${name} spits. "Coward's move. Smart, but coward's."`, `${name} watches you go. "Live to fight it. Smart."`]
+          : [`${name} sags with relief. "Good. Good call."`, `${name} breathes out. "Good. Walking away is winning too."`],
       }[moment] || [];
       if (lines.length) this.say(this.pickFresh(lines, 'witness_' + moment));
     },
@@ -17287,7 +17291,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // line supplies "the", so fold the description's leading
               // article to avoid "showed Tariq the a cluster of...".
               const pdName = String(this.plantDisplayName(pid)).replace(/^(a|an|the)\s+/i, '');
-              this.say(`${this.displayName(teacher)} showed ${this.displayName(learner)} the ${pdName} — "remember it." Word gets around.`);
+              this.say(`${this.displayName(teacher)} showed ${this.displayName(learner)} the ${pdName} — "remember it." ${this.rotLine('teachGossip', ['Word gets around.', 'The haven hears about it by supper.', 'Word travels before the lesson cools.'])}`);
             }
           }
           }
@@ -17712,7 +17716,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // ticks of thinking) and tickAction no-ops in combat — a stale card
       // could farm encounters, trust and energy for free while the world
       // stands still. Same class as the examineCell / beginPathWalk guards.
-      if (this.inCombat()) { this.say('Not mid-fight — think later.'); return null; }
+      if (this.inCombat()) { this.sayOncePerFight('Not mid-fight — think later.'); return null; }
       const cg = this.data.characterGen || {};
       const theories = cg.theories || {};
       const { primary, secondary } = this.npcIntel(vid);
@@ -20096,7 +20100,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     sleep() {
       const s = this.state.scholar;
       const T = this.TIME;
-      if (this.tbfight) { this.say('Not in the middle of a fight.'); return this.status(); }
+      if (this.tbfight) { this.sayOncePerFight('Not in the middle of a fight.'); return this.status(); }
       if (this._breachLock()) return this.status();
       if (this.dayPart === 0 && (s.dayTicks || 0) < T.TICKS_PER_BATCH) {
         this.say('It\'s barely dawn. The day is yours — sleep is for later.');
@@ -22031,7 +22035,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const rosterN = ((this.state.village || {}).roster || []).length;
       const need = Math.max(1, Math.min(3, rosterN));
       if (knowers.size >= need) {
-        this.say('Word gets around the haven. Whatever that thing was — everyone\'s talking about it now.');
+        this.say(this.rotLine('monsterReaction', [
+          'Word gets around the haven. Whatever that thing was — everyone\'s talking about it now.',
+          'Word gets around the haven. Whatever that thing was — the haven\'s talking about nothing else.',
+          'Word gets around the haven. Whatever that thing was — every fire has a theory tonight.',
+        ]));
         this.kickMonsterNaming(mid);
       }
     },
@@ -22094,7 +22102,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (names.length) {
         const first = names[0];
         const who = this.firstRef(Object.keys(e.proposals)[0]);
-        this.say(`Back at the haven the argument starts: ${who} is calling it "${first}." They'll fight it out — weigh in if you want.`);
+        this.say(this.rotLine('monsterDebate', [
+          `Back at the haven the argument starts: ${who} is calling it "${first}." They'll fight it out — weigh in if you want.`,
+          `Back at the haven the argument starts: ${who} is calling it "${first}." Nobody agrees yet — weigh in if you want.`,
+          `Back at the haven the argument starts: ${who} is calling it "${first}." The name's up for grabs — weigh in if you want.`,
+        ]));
       }
       this.monsterNamingCheck(mid);
     },
@@ -24226,7 +24238,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // and tbEnd overwrites s.health with p.hp — a mid-fight Price kept the
         // +500 kcal AND the open wound while the -10 HP cost was silently
         // erased. The cut needs a steady hand anyway: not in a fight.
-        if (this.inCombat && this.inCombat()) { this.say('Not in the middle of a fight — the Price needs a steady hand, and a cut opened now would never close right.'); return false; }
+        if (this.inCombat && this.inCombat()) { this.sayOncePerFight('Not in the middle of a fight — the Price needs a steady hand, and a cut opened now would never close right.'); return false; }
         // BLOOD-PRICE CAP (Steve 2026-10-08, break-it food run): the body can
         // only be eaten so much in one day part. Without a cap, blood_magic +
         // field_medicine printed ~+5,400 kcal/daypart (~21,600/day) — a true
@@ -24259,7 +24271,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // countdown, and every blood-price day-part cap could be dodged for
         // free. The real cost is named honestly: time passes.
         if (s.timeSkipDay === s.day) { this.say('The light won\'t stutter twice in one day. Your body couldn\'t take it. (Time Skip: 1/day.)'); return false; }
-        if (this.inCombat && this.inCombat()) { this.say('Not in the middle of a fight — time won\'t skip for you here.'); return false; }
+        if (this.inCombat && this.inCombat()) { this.sayOncePerFight('Not in the middle of a fight — time won\'t skip for you here.'); return false; }
         s.timeSkipDay = s.day;
         this.say('TIME SKIP: the light stutters. Hours go missing. Your food is older, your belly emptier — the time had to come from somewhere.');
         this.endDayPart(); return true;
@@ -25738,7 +25750,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // travelTo combat guards: refuse, loudly.
       if (kind !== 'drink' && kind !== 'rest' && this.inCombat && this.inCombat()) {
         if (kind === 'forage' && S.buildarounds) S.buildarounds.onForage(this, false);
-        this.say('Not mid-fight — finish it first.');
+        this.sayOncePerFight('Not mid-fight — finish it first.');
         return null;
       }
       const scholar = this.state.scholar;
@@ -25835,7 +25847,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.noteAbilityUse('grave_robber');
           this.noteToolUse(); // RELIC BOND: prying, cutting, carrying.
           const item = this.scavengeItem(lootId);
-          if (!this.canCarry(item.kg)) { t.loot.unshift(lootId); this.say('Too heavy — your pack can\'t take it. Eat something or leave it.'); return null; }
+          if (!this.canCarry(item.kg)) { t.loot.unshift(lootId); this.sayGated('tooHeavy', 'Too heavy — your pack can\'t take it. Eat something or leave it.', 3); return null; }
           // MEDICINE (disease rework 2026-10-09): bottled, dosed, specific.
           const medPush = { plantId: lootId, units: 1, kcalEach: item.kcal, spoilDay: 9999, name: item.name, unit: item.medType ? 'bottle' : 'can', prep: item.medType ? 'Use from your pack when sick. Specific — read the label.' : 'No prep. The miracle of the can.', kg: item.kg };
           if (item.medType) { medPush.itemId = lootId; medPush.medType = item.medType; medPush.doses = item.doses || 2; }
@@ -26189,7 +26201,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // is fiction-breaking mid-fight — and the heal below wrote
         // scholar.health directly (phantom mid-fight, erased at tbEnd).
         // Sleep already refuses mid-fight; rest does too.
-        if (this.inCombat && this.inCombat()) { this.say('Not in the middle of a fight.'); return false; }
+        if (this.inCombat && this.inCombat()) { this.sayOncePerFight('Not in the middle of a fight.'); return false; }
         // COLD SNAPS BITE REST TOO (survivalist loop 2026-10-10, r5): rest()
         // had no cold-exposure check, so a hostile player rested through cold
         // nights instead of sleeping — full +30 energy and +5 healing for the
@@ -43934,6 +43946,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     say(msg) {
       this.emit(msg, 'narration');
     },
+    // sayGated(key, msg, maxPerDay): voice-only throttle for refusal
+    // spam classes (GAP-W4-NARR #576/#636/#647 too-heavy). The counter
+    // lives OFF-STATE on the Game object like _nothingEdibleDay — voice
+    // only, never behavior, saves and state fingerprints untouched. The
+    // action itself still refuses (return values unchanged); only the
+    // Nth identical-class telling in a day goes quiet, after the player
+    // has already heard it maxPerDay times.
+    sayGated(key, msg, maxPerDay) {
+      const d = (this.state.scholar || {}).day || 0;
+      this._sayGate = this._sayGate || {};
+      const rec = this._sayGate[key];
+      if (!rec || rec.day !== d) this._sayGate[key] = { day: d, n: 0 };
+      const cur = this._sayGate[key];
+      if (cur.n >= (maxPerDay || 3)) return false;
+      cur.n++;
+      this.say(msg);
+      return true;
+    },
+    // sayOncePerFight(msg): one voice per refusal TEXT per live fight
+    // (GAP-W4-NARR #577 not-mid-fight spam, ~30x/fight). Keyed on the
+    // fight object itself (like pickFresh's _fresh store), so a new fight
+    // gets a fresh voice and distinct refusals stay audible within a
+    // fight. Outside combat it degrades to a plain say.
+    sayOncePerFight(msg) {
+      const f = this.tbfight;
+      if (!f || f.over) { this.say(msg); return true; }
+      f._midFightRefusals = f._midFightRefusals || {};
+      if (f._midFightRefusals[msg]) return false;
+      f._midFightRefusals[msg] = true;
+      this.say(msg);
+      return true;
+    },
     // pickFresh(pool, key): cycle through narration lines without repeating
     // until every line has been used once. Repeating the same horror line
     // three times in one brawl reads as a bug, not a style. Keyed storage
@@ -43953,6 +43997,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const pick = avail[Math.floor(Math.random() * avail.length)];
       used.push(pick);
       return pick;
+    },
+
+    // rotLine(key, pool): deterministic narration rotation for the
+    // GAP-W4-NARR variety passes — cycles through the pool in order,
+    // no repeat until exhausted, ZERO Math.random draws (FOODVOICE2
+    // precedent: narration variety must never perturb the RNG stream
+    // that decides fights, loot, or trajectories). State lives OFF-STATE
+    // on the Game object (voice only, saves/fingerprints untouched).
+    // Unlike pickFresh (random order, fight-scoped), rotLine is for
+    // ambient beats where stream-neutrality matters more than shuffle.
+    rotLine(key, pool) {
+      if (!pool || !pool.length) return '';
+      this._rotSeq = this._rotSeq || {};
+      const n = (this._rotSeq[key] || 0);
+      this._rotSeq[key] = n + 1;
+      return pool[n % pool.length];
     },
 
     // maybeCheatDeath: second_wind / phoenix_clause / molt. Called BEFORE death is final.

@@ -429,7 +429,7 @@
     // closely" card (or a hostile player) could farm knowledge/skills for
     // free while the world stands still. Same class as the clearBlockage /
     // beginPathWalk / travelTo combat guards: refuse, loudly.
-    if (this.inCombat()) { this.say('Not mid-fight — eyes on the threat.'); return null; }
+    if (this.inCombat()) { this.sayOncePerFight('Not mid-fight — eyes on the threat.'); return null; }
     const s = this.state.scholar;
     const px = s.mx ?? 4, py = s.my ?? 4;
     const dist = Math.max(Math.abs(cx - px), Math.abs(cy - py));

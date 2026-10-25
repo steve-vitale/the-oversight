@@ -1127,7 +1127,7 @@
         // and remove the blockage with NO time cost (tickAction no-ops in
         // combat) — and the swim would charge 20 kcal and then refuse the
         // crossing. The engine guards too; the barrier is the way out.
-        if (Game.inCombat()) { Game.say('Not mid-fight — the barrier is the way out.'); refresh(); return; }
+        if (Game.inCombat()) { Game.sayOncePerFight('Not mid-fight — the barrier is the way out.'); refresh(); return; }
         if (act === 'cut' || act === 'clear') { Game.clearBlockage(x, y); }
         else if (act === 'bridge') { if (!Game.buildBridge(x, y)) { refresh(); return; } }
         else if (act === 'swim') {

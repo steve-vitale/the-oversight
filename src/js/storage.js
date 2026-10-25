@@ -420,7 +420,7 @@
       const carry = inv.reduce((t2, i) => t2 + (i.kg || 0) * (i.units || 1), 0) + (this.waterWeight ? this.waterWeight() : 0);
       const max = this.carryCapacity ? this.carryCapacity() : 20;
       const fits = Math.max(0, Math.floor((max - carry) / def.kg));
-      if (fits <= 0) { this.say('Too heavy. Lighten your pack first.'); return null; }
+      if (fits <= 0) { this.sayGated('tooHeavy', 'Too heavy. Lighten your pack first.', 3); return null; }
       n = Math.min(n, fits);
       st.materials[mat] -= n;
       this.addMaterial(mat, n);
@@ -574,7 +574,7 @@
       const carry = inv.reduce((t2, it) => t2 + (it.kg || 0) * (it.units || 1), 0) + (this.waterWeight ? this.waterWeight() : 0);
       const max = this.carryCapacity ? this.carryCapacity() : 20;
       const takeUnits = st.tools[i].units || 1;
-      if (carry + (def.kg || 0.8) * takeUnits > max) { this.say(`Too heavy for the ${st.tools[i].name}. Lighten your pack first.`); return null; }
+      if (carry + (def.kg || 0.8) * takeUnits > max) { this.sayGated('tooHeavy', `Too heavy for the ${st.tools[i].name}. Lighten your pack first.`, 3); return null; }
       const [tool] = st.tools.splice(i, 1);
       inv.push({ itemId, name: tool.name, units: takeUnits, kcalEach: 0, kg: def.kg || 0.8 });
       // LEDGER HONESTY (miser break-it 2026-10-11): log the whole entry's
@@ -735,7 +735,7 @@
       const max = this.carryCapacity ? this.carryCapacity() : 20;
       // UNITS (miser break-it 2026-10-10): weigh the whole entry, not one.
       const takeUnits = pile[i].units ?? 1;
-      if (carry + (def.kg || 0.5) * takeUnits > max) { this.say(`Too heavy for the ${pile[i].name}. Lighten your pack first.`); return null; }
+      if (carry + (def.kg || 0.5) * takeUnits > max) { this.sayGated('tooHeavy', `Too heavy for the ${pile[i].name}. Lighten your pack first.`, 3); return null; }
       const [entry] = pile.splice(i, 1);
       // PHARMACY IDENTITY (miser break-it 2026-10-10): restore what the
       // deposit preserved — medType/doses/units. A dosed bottle comes home
@@ -1036,7 +1036,7 @@
       const carry = inv.reduce((t2, it) => t2 + (it.kg || 0) * (it.units || 1), 0) + (this.waterWeight ? this.waterWeight() : 0);
       const max = this.carryCapacity ? this.carryCapacity() : 20;
       const need = good.reduce((t2, it) => t2 + (it.kg || 0) * (it.units || 1), 0);
-      if (carry + need > max) { this.say("Too heavy to carry it all. Lighten your pack, come back."); return null; }
+      if (carry + need > max) { this.sayGated('tooHeavy', "Too heavy to carry it all. Lighten your pack, come back.", 3); return null; }
       for (const it of good) {
         if (it.material) this.addMaterial(it.material, it.units);
         else {
@@ -1130,7 +1130,7 @@
       const carry = inv.reduce((t2, i) => t2 + (i.kg || 0) * (i.units || 1), 0) + (this.waterWeight ? this.waterWeight() : 0);
       const max = this.carryCapacity ? this.carryCapacity() : 20;
       const need = (it.kg || 0) * qty;
-      if (carry + need > max) { this.say('Too heavy for that much. Take less, or lighten your pack.'); return null; }
+      if (carry + need > max) { this.sayGated('tooHeavy', 'Too heavy for that much. Take less, or lighten your pack.', 3); return null; }
       it.units -= qty;
       if (it.material) this.addMaterial(it.material, qty);
       else {

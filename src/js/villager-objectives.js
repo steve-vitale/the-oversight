@@ -818,11 +818,21 @@
       // on the Game object — zero engine-RNG draws, zero game-state moves.
       // FOODVOICE2_GATE='0' (testing only) restores the single line.
       var purposeLine;
-      if (obj.purpose === 'forage' && !(typeof process !== 'undefined' && process.env && process.env.FOODVOICE2_GATE === '0')) {
+      // GAP-W4-NARR #588/#721: the water departure was the same single
+      // stock line every day ("The well won't fill itself."). Water
+      // departures share the FOODVOICE2 pool machinery (per-day sequence,
+      // no within-day repeats, off-state, zero RNG draws).
+      if ((obj.purpose === 'forage' || obj.purpose === 'water') && !(typeof process !== 'undefined' && process.env && process.env.FOODVOICE2_GATE === '0')) {
         var fvToday = 0;
         try { fvToday = (this.state.scholar || {}).day || 0; } catch (e) {}
         if (this._fvDepartDay !== fvToday) { this._fvDepartDay = fvToday; this._fvDepartSeq = 0; this._fvDepartUsed = {}; }
-        var fvPool = [
+        var fvPool = obj.purpose === 'water' ? [
+          '"The well won\'t fill itself."',
+          '"Water first. Everything else waits."',
+          '"Off to the well — back with a full skin."',
+          '"Thirst doesn\'t negotiate. Going."',
+          '"Fetching water. Somebody has to."',
+        ] : [
           '"Back before dark. Probably."',
           '"Gone looking. Don\'t wait up."',
           '"There\'s food out there. Going to find it."',
@@ -840,7 +850,7 @@
         var fvGuard = 0;
         while (this._fvDepartUsed[fvIdx] && fvGuard < fvPool.length) { fvIdx = (fvIdx + 1) % fvPool.length; fvGuard++; }
         this._fvDepartUsed[fvIdx] = 1;
-        purposeLine = 'heads out to forage. ' + fvPool[fvIdx];
+        purposeLine = (obj.purpose === 'water' ? 'heads out for water. ' : 'heads out to forage. ') + fvPool[fvIdx];
       } else {
         purposeLine = {
         forage: 'heads out to forage. "Back before dark. Probably."',

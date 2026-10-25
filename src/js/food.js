@@ -2438,7 +2438,7 @@
       const desired = Math.min(have, requested);
       const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));
       const taken = Math.min(desired, fits);
-      if (!taken) return refuse('Too heavy. Lighten your pack first.');
+      if (!taken) { this.sayGated('tooHeavy', 'Too heavy. Lighten your pack first.', 3); return { ok: false, why: 'Too heavy. Lighten your pack first.', taken: 0 }; }
       const moved = { ...item, units: taken };
       s.inventory.push(moved);
       if (taken === have) stash.splice(idx, 1); else item.units = have - taken;
@@ -2474,7 +2474,7 @@
       const unitWeight = (kg || 0.1) * mult, desired = Math.min(have, requested);
       const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));
       const taken = Math.min(desired, fits);
-      if (!taken) return refuse('Too heavy. Lighten your pack first.');
+      if (!taken) { this.sayGated('tooHeavy', 'Too heavy. Lighten your pack first.', 3); return { ok: false, why: 'Too heavy. Lighten your pack first.', taken: 0 }; }
       const moved = { ...item, units: taken };
       s.inventory.push(moved);
       if (taken === have) stash.splice(idx, 1); else item.units = have - taken;
