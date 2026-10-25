@@ -315,5 +315,151 @@ files were written (it throws before writing).
   sweep-awayvoice-b.js; delta: seeds exactly CONFIRM 94901–94916,
   per-seed files awayvoice-b-confirm-<cell>-s<seed>.json in the same
   corpus dir) + analyzer with AWAYVOICE_SEEDS env override.
-- CONFIRM Results: PENDING
-- CONFIRM VERDICT: PENDING
+- CONFIRM Results (adoption run, this session — read the infrastructure
+  note below for how the band completed):
+  - BASELINE confirm: 16/16 seeds complete (per-seed files
+    awayvoice-b-confirm-baseline-s94901–94916, carried over from the
+    holding run; days 150/150/150/150/150/150/150/150/53/150/150/150/
+    150/115/150/150). Deaths total 140. Qualifying days (baseline
+    packCalls, health <= 7): 35 — 94901:2, 94902:0, 94903:0, 94904:5,
+    94905:2, 94906:0, 94907:4, 94908:0, 94909:0, 94910:0, 94911:3,
+    94912:3, 94913:10, 94914:2, 94915:1, 94916:3.
+  - ARMED confirm: 16/16 seeds complete (awayvoice-b-confirm-armed-
+    s94901–94916 + sweep-confirm-armed.json, which records the 5
+    resume-run rows only — see infrastructure note). Days match
+    baseline EXACTLY per seed. Meal rows, packCalls, deaths match
+    the analyzer's identity checks exactly (table below).
+  - CONFIRM TABLE (analyzer scripts/analyze-awayvoice-b.js, env
+    AWAYVOICE_SEEDS=94901..94916 + AWAYVOICE_PREFIX=awayvoice-b-confirm):
+
+| seed | daysB/A | qual | fired | rate | borrow | mealDiff | deathDiff | packIdDiff | uncovered |
+| 94901 | 150/150 | 2 | 2 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94902 | 150/150 | 0 | 0 | n/a | 0 | 0 | 0 | 0 | 0 |
+| 94903 | 150/150 | 0 | 0 | n/a | 0 | 0 | 0 | 0 | 0 |
+| 94904 | 150/150 | 5 | 5 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94905 | 150/150 | 2 | 2 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94906 | 150/150 | 0 | 0 | n/a | 0 | 0 | 0 | 0 | 0 |
+| 94907 | 150/150 | 4 | 4 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94908 | 150/150 | 0 | 0 | n/a | 0 | 0 | 0 | 0 | 0 |
+| 94909 | 53/53 | 0 | 0 | n/a | 0 | 0 | 0 | 0 | 0 |
+| 94910 | 150/150 | 0 | 0 | n/a | 0 | 0 | 0 | 0 | 0 |
+| 94911 | 150/150 | 3 | 3 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94912 | 150/150 | 3 | 3 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94913 | 150/150 | 10 | 10 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94914 | 115/115 | 2 | 2 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94915 | 150/150 | 1 | 1 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| 94916 | 150/150 | 3 | 3 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+| TOTAL | — | 35 | 35 | 1.000 | 0 | 0 | 0 | 0 | 0 |
+
+  - Narration-only proof (same strength as pilot): the armed sayLog is
+    EXACTLY the baseline sayLog with the 35 beat lines inserted in
+    order — subsequence check per seed, 35 insertions total, 0
+    non-beat insertions, 0 missed baseline lines.
+  - Beat variants: short pack meal 30, adequate meal 4, empty pack 1.
+  - Wall numbers (confirm, competent-only, not win-seeking): national
+    0/16, table 0/16, wins 0/16, wave-4 6/16 (94903, 94907, 94910,
+    94911, 94914, 94916), wave-5 0/16, median survival 150d
+    (horizon-capped; early losses d53, d115).
+  - SENSE (read-through — death-day beats, all name traveler + pack):
+    - NATHAN d23 (s94901, sickness): "d23 Nathan eats away from the
+      haven on a short pack meal — 1000 kcal from the pack, 1394
+      wanted — while hurt (health 4/100)…" A failing traveler
+      voiced before the death line. PASS.
+    - EURICO d115 (s94904, sickness): 1000/1655, health 3. Same
+      decline-arc shape as pilot Quinn/Grace. PASS.
+    - EMMA d109 (s94905, starvation): 800/1374, health 1.
+    - LEO d144 (s94907, starvation): 800/1646, health 2.
+    - MANUEL d26 (s94912, starvation): 700/1335, health 5.
+    - ELLA d85 (s94913, starvation): 600/1105, health 1.
+    - YULIBETH d148 (s94913, starvation) — EMPTY variant: "d148
+      Yulibeth is away from the haven, hurt (health 1/100), and
+      their pack is empty — nothing to eat out here." The empty
+      variant lands on a starvation death day, naming the
+      traveler and the empty pack, inventing nothing. PASS.
+    - IOLANDA d39 (s94914, food poisoning raw): 908/1363, health 3.
+      The beat reports the pack meal; it does NOT claim the meal
+      caused the death — cause stays with the death line. The
+      beat is honest about what it knows. PASS.
+    - FRANCO d112 (s94916, starvation): 544/1200, health 6.
+    - Adequate variants (URSULA d17 s94904, 1143 kcal, health 7;
+      WANJIRU d121 s94904, 1085 kcal, health 7; MAYA d148 s94911,
+      1262 kcal, health 6): "eats away from the haven — N kcal from
+      the pack — while hurt (health H/100), far from the haven's
+      shelves." No shortfall claimed where none exists. PASS.
+    - Non-firing away deaths are all non-hunger causes (arena,
+      monster, ambush, wound, choir toad, redactor, focus group) —
+      correctly silent by design: no separate away-death beat, so
+      the pack is never blamed for a fight. The one thirst death
+      (Alejandra d87 s94901, dehydration) is likewise silent —
+      the pack meal is not the thirst story. PASS (honest
+      silence, same design as pilot).
+    - All 6 starvation away deaths in the confirm band got a
+      death-day beat (Emma, Leo, Manuel, Ella, Yulibeth, Franco).
+      No David-style threshold-edge miss in confirm (pilot's
+      health-8 miss stays a next-run metric-review proposal, not
+      re-tuned here).
+    - Sense verdict: every fired beat names its traveler + pack/
+      hunger state coherently; zero name-borrowing. The sense leg
+      PASSES on its pre-registered terms.
+  - Proof test: scripts/test-awayvoice-b.js 10/10 legs passed after
+    the flap cleared (L1–L5 live harness + A1–A3 analyzer +
+    S1–S2 sweep guards). Its first run during the flap passed
+    L1–L5 then crashed on a synthetic-corpus temp write (EPERM) —
+    infrastructure, not a beat failure; the full green rerun
+    supersedes it.
+- CONFIRM VERDICT: CONFIRM-GO — rate 1.000 >= 0.80, sense leg passes
+  with zero borrowing, meal/death/pack-call identity exact, say-log
+  identity exact. The pilot GO generalizes to fresh seeds. Per the
+  confirm pre-registration this verdict stands on its own; it does
+  not retroactively alter the pilot GO (which stands on its own
+  seeds). [needs-eyes] — the beat's wording is player-facing;
+  Steve's feel check on the lines above is welcome, not required
+  for landing.
+
+## Confirm infrastructure notes (adoption run)
+
+- Held state adopted: baseline 16/16 complete, armed 11/16 (94901–
+  94911). All 27 pre-existing corpus files verified parseable before
+  any rerun, and the 11 armed files were backed up + hash-recorded
+  inside the worktree before the rerun (backup removed before
+  commit).
+- The confirm sweep FATAL-asserts the exact 16-seed list, so it
+  cannot scope to the 5 missing seeds. The full armed band was
+  rerun (11 seeds rewritten + 5 new). Post-run hash check: all 11
+  rewritten files are BYTE-IDENTICAL to the pre-run originals —
+  determinism proven, no valid file harmed.
+- EPERM write flap (container class, same as 2026-10-22/23/24
+  sightings): the full-band run died at seed 94912's per-seed
+  write (WRITE FAIL LOUDLY EPERM after the sweep's 300-attempt
+  budget; sim data for 94912 was computed — 150d, 6 deaths, 175
+  packCalls — but lost with the process). Diagnosis, run
+  explicitly: writeFileSync creates the file (open succeeds) but
+  the write() syscall returns EPERM, leaving a 0-byte file; the
+  flap is time-varying (brief open windows at 11:07, 11:10–11:11,
+  11:29) and at its worst blocks even 100-byte writes, repo-wide
+  and beyond (home dir, /tmp all failed at the peak). It is NOT
+  per-process, per-file, or per-directory. Chunked writes do not
+  beat a fully-closed window, but they DO accumulate progress
+  across windows: the resume driver (temporary, deleted before
+  commit) reused the sweep module's own oneRun for seeds
+  94912–94916 only and wrote each per-seed file in 1000-byte
+  chunks with per-chunk retry; seed 94912 needed 249 chunk
+  retries before its window opened, then 94913–94916 landed
+  within minutes (11:38–11:40). Lesson for the next flap run:
+  never kill a retrying driver to "try again" — the retry IS the
+  recovery; killing only loses computed sims (done twice here
+  before this was understood).
+- The resume run's summary sweep-confirm-armed.json holds ONLY
+  the 5 resume rows: the full-band run died before writing any
+  summary, so there was no prior summary to merge into. The
+  analyzer reads per-seed files, not the summary, so this is a
+  record-scope note, not a verdict gap. All 32 per-seed confirm
+  files + the summary are committed with this run.
+- Rebase: none performed. Branch base 6e7dbe528 already contains
+  origin/master 3aff8d64b (batch-ship version bump) — the local
+  line is ahead of origin, not behind it, so there is nothing to
+  rebase onto. The coordinator's local merge is unaffected.
+- No check.js run: this commit is evidence + corpus only (the
+  game.js narration code shipped in the pilot commit c586cfe2c
+  and is NOT re-committed or modified here); the proof test
+  scripts/test-awayvoice-b.js is green as reported above.
