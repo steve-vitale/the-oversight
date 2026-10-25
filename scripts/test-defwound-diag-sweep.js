@@ -148,6 +148,16 @@ async function runOne(pid, seed, days, evidDir, storeHolder) {
   const faced = copyFaced(Game);
   const log = copyKillLog(Game);
   const deaths = result.samples.deaths || [];
+  const scholarId = Game.villagerId || null;
+  // DEFWOUND Stage 2 addition (tooling only): keep the raw death list
+  // so the summary can report kind-filtered villager deaths (the
+  // deathcensus correction) alongside the mixed death-tele total.
+  // Stage 1 corpus rows predate this field and lack it.
+  const deathList = deaths.map(d => {
+    let player = false;
+    try { player = !!d.player; } catch (e) { player = false; }
+    return { day: d.day | 0, kind: d.kind || null, who: (d.who != null) ? String(d.who) : null, cause: (d.cause != null) ? String(d.cause) : null, player: player };
+  });
   const starv = deaths.filter(d => STARV_RE.test(String(d.cause || '')));
   const last = (arr) => (arr && arr.length ? arr[arr.length - 1][1] : null);
   let finalPresent = [];
@@ -170,6 +180,8 @@ async function runOne(pid, seed, days, evidDir, storeHolder) {
     entered: (hist.everEntered || end.tableEntered) ? 1 : 0,
     deaths: deathSummary(deaths),
     deathTotal: deaths.length,
+    deathList: deathList,
+    scholarId: scholarId,
     starvationDeaths: starv.length,
     starvationDetail: starv.map(d => ({ day: d.day, who: d.who, cause: d.cause, player: !!d.player })),
     ts: (() => { const ts = {}; if (capturedCtx) for (const k of Object.keys(capturedCtx)) if (k.indexOf('ts') === 0) ts[k] = capturedCtx[k]; return ts; })(),

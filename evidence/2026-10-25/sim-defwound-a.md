@@ -362,31 +362,123 @@ the door.
 
 ## NEXT BLANKS, IN ORDER (for the coordinator, not this run)
 
-1. STAGE 2 of this run (defender finish, pre-registered above)
-   — pending at the time this Stage 1 record is committed.
-2. The residual mill: met-below-line phantoms (204 defender
-   events, 877 re-meets) that narrow (a) deliberately leaves
-   untouched — field-manufactured (72 entities) and toll-fed
-   remnants keep echoing. Whether defenders should finish a
-   crippled beast they MEET (not just one they drop) is a
-   separate rule with its own loot/ledger scale, and likely
-   needs Steve's design ruling before any arm touches it.
+1. STAGE 2 VERDICT: NO-GO (see below) — defender finish, narrow
+   scope, fails both cost guards (deaths 316 > 257, wins 3 < 4)
+   despite passing the mechanism bars. Game code REVERTED;
+   record only lands. The next question is NOT to re-run this
+   rule: it is whether a survivability companion (the brief
+   forbade bundling one here) changes the cost, or whether the
+   met-below-line residual is the better target.
+2. The residual mill: met-below-line phantoms (105 defender
+   events, 351 re-meets armed) that narrow (a) deliberately
+   leaves untouched — field-manufactured entities keep
+   echoing. Whether defenders should finish a crippled beast
+   they MEET (not just one they drop) is a separate rule with
+   its own loot/ledger scale, and likely needs Steve's design
+   ruling before any arm touches it.
 3. Defender-fight narration repetition: the awayNews lines for
    defender fights are two boilerplate sentences repeated
    dozens of times (see Sense) — a narration blank, not a
    mechanics blank.
 4. The 1815 near-immortality question (is surviving-core
    near-immortality intended?) — this run's fates (87/108
-   still-present) add weight but do not settle it; still a
-   Steve ruling.
+   still-present control, 42 armed) add weight but do not
+   settle it; still a Steve ruling.
 
-scale-onramp stays converging (NOT converged): Stage 1 is a
-DIAG — it names the rule precisely, but no lever moved yet,
-the full seat is still unreached, and wave 5 is still 0/8.
-The standing directive stands.
+scale-onramp stays converging (NOT converged): Stage 1 measured
+the mill precisely and Stage 2 proved a clean rule against it
+but failed its cost guards, so no lever moved, the full seat
+is still unreached, and wave 5 is still 0/8. The standing
+directive stands.
 food-economy untouched (sibling loop B).
 Convergence state: converging.
 
-[STAGE 2 PENDING — this record will be extended by the Stage 2
-commit, or closed as DIAG-only if Stage 2 NO-GOs. The
-pre-registration above binds that judgment.]
+## STAGE 2 VERDICT: NO-GO (mechanism proven, cost guards failed)
+
+Rule as implemented (game.js 1 line: raid flag threaded into
+fieldFight; fieldFights.js: start-fraction capture + both
+break-line mFlee checks gated on raid AND started-at/above-line;
+round-cap, trick mFlees, vFlee, arena, aidFight untouched —
+verified by git diff before the pilot).
+
+Pilot (8 seeds, identical seeds, same recorder, armed vs the
+Stage 1 control corpus):
+- PRIMARY PASS: defender below-line survivor events 260 → 105
+  (-60%, bar ≤182). Manufactured events 56 → 0 — the rule
+  eliminates exactly what it claims to, and nothing else in
+  that count: pre-wounded events 204 → 105 (the residual is
+  entirely the met-below-line population the rule deliberately
+  leaves alone).
+- SECOND LEG PASS, both ways: defender villager kills 25 → 65;
+  re-meet events of below-line survivors 877 → 351 (-60%).
+  Re-meet finishes stay 0 (met-below-line entities still
+  rounds-0 flee — the rule finishes dropped monsters, not met
+  ones, by design).
+- COST GUARDS FAIL, both: mixed death-tele total 234 → 316
+  (+35%, bar ≤257); wins 4/8 → 3/8 (bar ≥4/8).
+- PROOF GATES: first-divergence check PASS 8/8 — every seed's
+  first control manufactured fight converts to a vKill in the
+  armed run, in exactly one more round each time (control
+  rounds 3/4/5/4/6/6/4/3 → armed 4/5/6/5/8/7/5/4). The finish
+  costs one extra round per fight, no more. check.js --only
+  fieldfight: 2 passed, 0 failed (measured on the armed code
+  before revert). Corpus PASS (all recorders errs=0, overflow=0).
+- Other diagnostics: defender fights 322 → 219 (runs end
+  earlier); defender vDie 0 → 3 (defenders now die at the wall);
+  defender vFlee 34 → 45; median survival 135d → 96d;
+  national-ever 7/8 → 5/8; wave-4 6/8 → 5/8; wave-5 0/8
+  (unchanged); starvation 5 → 6; kind-filtered villager deaths
+  armed = 58 (standalone — the Stage 1 corpus predates the
+  deathList field, so no same-band control exists; do NOT
+  compare with deathcensus's 27, which is a different band).
+  Fates of the remaining survivor entities: still-present 42
+  (vs 87), player-fight-kill 7, player-fight-melt 3.
+
+Per-seed armed vs control (days/end/won/deaths; armed
+villager deaths in parentheses):
+73671: survived 180d/0/31 → village-lost d137/0/47 (vill 17).
+73672: won d97/1/25 → won d90/1/32 (vill 4).
+73673: won d124/1/28 → survived 180d/0/50 (vill 6).
+73674: survived 180d/0/18 → won d90/1/30 (vill 1).
+73675: won d135/1/24 → village-lost d96/0/32 (vill 2).
+73676: village-lost d70/0/31 → village-lost d58/0/32 (vill 16).
+73677: village-lost d143/0/43 → village-lost d154/0/51 (vill 7).
+73678: won d116/1/34 → won d90/1/42 (vill 5).
+Deaths rise on ALL 8 seeds (+16/+7/+22/+12/+8/+1/+8/+8) — that
+is systematic cost, not seed noise. Wins move both ways
+(73673 loses one, 73674 gains one) for a net -1.
+
+Why the cost, as far as the numbers say: the finish itself
+costs one round per fight (proven by the divergence check),
+but the cascade costs far more — dead phantoms free raid
+slots that refill with healthy monsters (nearest-first draft
++ pool refill), so later raids are fought against real teeth
+instead of ghosts, and villages that were surviving start
+losing villagers. This is the same class as the 0535 finish
+lessons (breakexcept deaths up, defendfinish median/wave-4
+miss): the break line protects villagers, and removing it —
+even only at the wall, even only for dropped monsters — is
+paid for in village blood. The rule is therefore NO-GO, and
+the game code is REVERTED in this worktree (git diff for
+src/js is empty after revert). What lands is record only:
+this evidence, the Stage 2 pilot script, and the armed corpus
+(evidence/2026-10-25/perseed-defwound-arm-a/).
+
+What this does NOT say: it does not say defender finishing is
+inherently wrong — it says THIS finish, unaccompanied, fails
+its cost guards on this band. The brief forbids bundling a
+survivability companion with the rule, so whether a companion
+changes the cost is a separate, later question (see next
+blanks). It also does not re-score any 0535 verdict: those
+verdicts stand on their own bars.
+
+## STAGE 2 SENSE NOTE (one armed line, for the record)
+
+The armed 73671 divergence fight (the day-8 tanuki, seq 2)
+now ends: defender kills it in 4 rounds instead of dropping
+it at 0.11 in 3 rounds. The twenty-three identical shrugs
+that followed in the control run never happen for that animal
+— but the village that killed it dies on day 137 instead of
+surviving to day 180. The kill line reads better than the
+shrug; the village reads worse. That is the trade, stated
+plainly.
