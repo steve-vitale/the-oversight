@@ -270,7 +270,22 @@ const ACTION_PLAN = {
   'patient_aim.take_aim': (I) => (I.canLoad && I.hp > 0.5 ? 5.5 : null),
   'rage.unleash_rage': (I) => (I.canLoad && I.n('rage.unleash_rage') < 1 ? 6.5 : null),
   'trade_of_blows.open_trade': (I) => (I.canLoad && I.hp > 0.7 && I.n('trade_of_blows.open_trade') < 1 ? 5 : null),
-  'peacemaker.walk_in': (I) => (I.outmatched && I.n('peacemaker.walk_in') < 1 ? 8.5 : null),
+  'peacemaker.walk_in': (I) => {
+    // NOWALKIN_W4 (CAPABLE_NOWALKIN_W4=1, journey-endgame r50, lane B
+    // 2026-10-25): fight wave-4+ encounters to the death instead of
+    // talking them down — the single variable vs r49's road. Only Walk In
+    // is declined, only when a wave-4+ monster is in the fight; other
+    // stall verbs still fire, and Walk In still fires on wave <= 3.
+    // Fighters carry mdef (game.js tb fighter creation), so the wave is
+    // readable here without Game.data. Default off = byte-identical.
+    if (process.env.CAPABLE_NOWALKIN_W4 === '1') {
+      try {
+        const mons = (I && I.mons) || [];
+        if (mons.some(m => ((m && m.mdef && m.mdef.wave) || 0) >= 4)) return null;
+      } catch (e) {}
+    }
+    return (I.outmatched && I.n('peacemaker.walk_in') < 1 ? 8.5 : null);
+  },
   // KEEPSAKE L2 ACTIONS (2026-10-14, keepsakes.js): worn keepsake verbs.
   'keepsake.steady': (I) => (((I.p.stunned || 0) > 0 || ((I.p.statuses || []).some(x => x && x.id === 'fear'))) ? 8.5 : null),
   'keepsake.hold': (I) => (I.outmatched ? 8 : null),
