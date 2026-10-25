@@ -5,6 +5,24 @@ Pre-registration: evidence/2026-10-25/journey-endgame-r51-prereg.md (written
 BEFORE any play). Instrument + probe-local read-only wrappers; no src/js
 changes. Merged locally, pending ship.
 
+## Rebase addendum (sibling landing mid-run)
+
+While this run was in flight, a sibling loop landed 3 commits on master
+(belltoad chorus fix + postflee rest threshold, both [needs-eyes]).
+Per the run body's rebase rule, the branch was rebased onto the new
+master INSIDE the worktree (clean, no conflicts — this run's commit
+touches only new files), the instrument was re-proved (DET GREEN +
+FID GREEN, identical mini values), and the full 7-seed sweep was
+RE-RUN on the rebased base so the committed evidence describes the
+merged tree, not the pre-landing base. Verdicts reproduced exactly
+(M1 GO, M2 NO-GO 1/3, M2b GO 5/5, M3 GO 1v0, M3b NO-GO, M4 NO-GO,
+M5 GO, M6 GO, REG GO). Two control-only diffs on the new base, both
+outside the scored waves metrics: 88064's relay final pick changed
+from final:merge to final:voice, and the control now ends with 1
+living veteran (was 0); M9's blocked-arrival tally moved 94 → 93
+(noise-level). The check-quick log below is also from the rebased
+tree.
+
 ## Leg question (r50's three named next steps, in order)
 
 1. WHO dies IN wave-4 fights (fight-causal, not day-window)?

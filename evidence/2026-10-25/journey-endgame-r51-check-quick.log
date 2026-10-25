@@ -1,7 +1,7 @@
 check.js: 287 scripts, 2 parallel (quick)
-...............................................................................F...............................F....FF.F..F.........F......................................................................................................................F...................................
+...............................................................................F...............................F..F..F..F.F.........F.......................................................................................................................F..................................
 
-  FAIL scripts/godpath/test-hide-discovery.js (exit 1, 3.3s)
+  FAIL scripts/godpath/test-hide-discovery.js (exit 1, 2.4s)
         FAIL counter butchering keeps material and lesson on the counter until pickup
         ok   taking the real butchered hide completes the discovery path
         ok   blind public trial risks actual hide and lashing supplies
@@ -15,7 +15,7 @@ check.js: 287 scripts, 2 parallel (quick)
       hide-discovery: 24 passed, 1 failed, 0 todo (phase 0)
       failing: counter butchering keeps material and lesson on the counter until pickup
 
-  FAIL scripts/godpath/test-measurement-comparison.js (exit 1, 2.7s)
+  FAIL scripts/godpath/test-measurement-comparison.js (exit 1, 5.3s)
           at summarizeValidated (/home/hatch/workspace/worktrees/journey2-endgame/scripts/balance-windows.js:46:46)
           at Object.summarizeHarnessRevision (/home/hatch/workspace/worktrees/journey2-endgame/scripts/balance-windows.js:40:10)
           at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-measurement-comparison.js:5:1161)
@@ -29,7 +29,7 @@ check.js: 287 scripts, 2 parallel (quick)
       
       Node.js v24.22.1
 
-  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 1.8s)
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 1.6s)
       Error: Proof source inputs are not current
           at Object.validate (/home/hatch/workspace/worktrees/journey2-endgame/scripts/balance-proof-update.js:8:76)
           at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-measurement-proof-update.js:4:40)
@@ -43,7 +43,7 @@ check.js: 287 scripts, 2 parallel (quick)
       
       Node.js v24.22.1
 
-  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 1.4s)
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 1.6s)
       ok   metric IDs are unique and every contract declares units, direction and tolerance
         ok   sampling and confirmation settings remain valid
         ok   retained real panel matches its proof digest
@@ -57,7 +57,7 @@ check.js: 287 scripts, 2 parallel (quick)
       measurement-workflow: 5 passed, 4 failed, 0 todo (phase 0)
       failing: retained neutrality proof covers the current Game/controller/harness inputs | proof declares every collector and contract input rather than silently omitting one | collector and contract have
 
-  FAIL scripts/godpath/test-mobile-combat-cadence.js (exit 1, 1.4s)
+  FAIL scripts/godpath/test-mobile-combat-cadence.js (exit 1, 2.2s)
         ok   hand-back follows resolution
         ok   superseded announcement cannot perform a stale enemy action
         ok   save retains the announced but unresolved actor
@@ -71,7 +71,7 @@ check.js: 287 scripts, 2 parallel (quick)
       mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
       failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
 
-  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 0.4s)
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 0.7s)
           at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-occupation-panels.js:17:14)
           at Module._compile (node:internal/modules/cjs/loader:1929:14)
           at Object..js (node:internal/modules/cjs/loader:2060:10)
@@ -85,7 +85,7 @@ check.js: 287 scripts, 2 parallel (quick)
       occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
       failing: real CLI workflow completed
 
-  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 1.1s)
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 1.7s)
       ok   both actual target phone sizes are retained
         FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/codex-people.js,src/js/comms.js,src/js/contes
         FAIL all current boot inputs are covered
@@ -96,7 +96,7 @@ check.js: 287 scripts, 2 parallel (quick)
       Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
       failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
 
-  FAIL scripts/test-parity-20261014.js (exit 1, 3.2s)
+  FAIL scripts/test-parity-20261014.js (exit 1, 1.2s)
         ok   objectives call villagerSeekKnowledge / villagerNeedTrack
         ok   playerDeath calls mantleBecome
         ok   endDay village tick calls villagerBuildDay
@@ -110,7 +110,5 @@ check.js: 287 scripts, 2 parallel (quick)
       test-parity-20261014: 59 passed, 1 failed, 0 todo (phase 0)
       failing: gear: they still wear their spear and jacket
 
-  slowest: scripts/test-capable-bot-20261014.js 43s, scripts/test-succession-grief-20261017.js 37s
-
-check.js: 279 passed, 8 failed in 710s
-check-quick exit: 1
+check.js: 279 passed, 8 failed in 551s
+R51-CHECK-EXIT:1
