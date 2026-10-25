@@ -1,0 +1,75 @@
+# SURFACE+SEEDED — seed 4901 (142d, 8 alive)
+
+npcPairs=72 deep2=30 cracks=0 vCracks=0 friendGriev=0 stateGriev=7 stateFriend=0 stateVCrack=0 t2picks=27 closeReadsServed=18 grievanceServes=1 othersSteered=27
+COND-TP: firstDeep2Day=25 lateClose=15 lateTP=9 lateNull=0 condRate=60.0% pooledTP=9/18 pooledRate=50.0% grievReadsByWhy={"grievance":0,"vgrievance":1}
+FUNNEL (natural): convos=414 subject=412 offered=33 picked=27 classes={"subject-no-offer":379,"picked-others":27,"no-subject-no-ans":2,"offered-capped":4,"offered-not-picked":2}
+FUNNEL-UNSTEERED (r53 strict): convos=387 subjectNoOffer=379 rate=97.9% offered=6 picked=0 latePicks=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Daniyar / Larry / Stan / Rosa — "Patrick talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Patrick / Benoit — "Good question." "Kennedy talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=20 picks=15 latePicks=10 missedChangedNotOffered=15
+WRAPSERVE: convos=1 matcherHits=1 matcherServes=1 classes={"grievance-line":1,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=695 menuProblem=456 pickProblem=239
+SEEDED-DAILY: [{"day":24,"v":44,"depth":3},{"day":25,"v":48,"depth":3},{"day":26,"v":48,"depth":3},{"day":27,"v":52,"depth":3},{"day":28,"v":56,"depth":3},{"day":29,"v":60,"depth":3},{"day":30,"v":68,"depth":3},{"day":31,"v":70,"depth":3},{"day":32,"v":74,"depth":3},{"day":33,"v":78,"depth":3},{"day":34,"v":78,"depth":3},{"day":35,"v":82,"depth":3},{"day":36,"v":82,"depth":3},{"day":37,"v":82,"depth":3}] class=rise
+GOSSIP: totalPicks=382 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=14 31-60=1 61-90=0 91-120=8 121+=4 naturalPicks=27 seededPicks=0 gossipPicks=382
+SEEDED: {"pair":{"a":"gen_4ka3gr7","b":"gen_cid3bd1","aName":"Kennedy","bName":"Larry"},"day":23,"pre":{"v":54,"depth":2},"post":{"v":42,"depth":3},"daily":[{"day":24,"v":44,"depth":3},{"day":25,"v":48,"depth":3},{"day":26,"v":48,"depth":3},{"day":27,"v":52,"depth":3},{"day":28,"v":56,"depth":3},{"day":29,"v":60,"depth":3},{"day":30,"v":68,"depth":3},{"day":31,"v":70,"depth":3},{"day":32,"v":74,"depth":3},{"day":33,"v":78,"depth":3},{"day":34,"v":78,"depth":3},{"day":35,"v":82,"depth":3},{"day":36,"v":82,"depth":3},{"day":37,"v":82,"depth":3}],"crackTraceClass":"rise","vAt7":68,"depthAt7":3,"vDrop":-14,"depthDrop":-1,"crack7":false,"firstServe":{"day":24,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":24,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Kennedy <> Larry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Kennedy <> Assem — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Assem <> Larry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Benoit <> Larry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Larry <> Sari — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Larry <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Assem <> Omar — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d135: Benoit <> Omar — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d100: Assem <> Sari — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d75: Assem <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Kennedy <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Larry <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Assem <> Giuseppe — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d95: Benoit <> Assem — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d25: Giuseppe <> Larry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Giuseppe <> Sari — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d80: Benoit <> Kennedy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Omar <> Stan — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d105: Kennedy <> Sari — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d85: Kennedy <> Giuseppe — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d140: Sari <> Stan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d70: Kennedy <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Omar <> Sari — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d95: Fernando <> Sari — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d95: Assem <> Fernando — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d95: Kennedy <> Fernando — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Daniyar <> Fernando — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d95: Fernando <> Stan — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d95: Giuseppe <> Fernando — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d110: Larry <> Fernando — maxDepth 2, final 2 (v=67), dropped 0
+  CLOSE-READ d17: Stan about Larry — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Assem about Larry — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Giuseppe about Larry — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Sari about Larry — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Larry about Kennedy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Benoit about Larry — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Omar about Larry — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Sari about Assem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Kennedy about Assem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Benoit about Kennedy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Stan about Kennedy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Assem about Kennedy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Omar about Kennedy — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Sari about Kennedy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Rosa about Kennedy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d137: Hassan about Kennedy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Benoit about Omar — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Omar about Benoit — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d24: Kennedy about Larry (why=vgrievance)
+  KNACK d12 Giuseppe: "Kennedy talks to the garden. The garden listens. I've seen it. Just thinking out loud."
+  KNACK d14 Daniyar: "Patrick talks to the garden. The garden listens. I've seen it."
+  KNACK d18 Patrick: "Good question." "Kennedy talks to the garden. The garden listens. I've seen it."
+  KNACK d24 Kennedy: "Huh. Let me think about that." "Patrick talks to the garden. The garden listens. I've seen it."
+  KNACK d36 Sari: "Kennedy talks to the garden. The garden listens. I've seen it."
+  KNACK d43 Larry: "Patrick talks to the garden. The garden listens. I've seen it."
+  KNACK d45 Benoit: "Good question." "Kennedy talks to the garden. The garden listens. I've seen it."
+  KNACK d59 Assem: "Good question." "Patrick talks to the garden. The garden listens. I've seen it. …sorry."
+
+deathCauses: {"ambush":1,"combat":1,"dehydration":2,"monster":1,"the arena":2,"contest":1}

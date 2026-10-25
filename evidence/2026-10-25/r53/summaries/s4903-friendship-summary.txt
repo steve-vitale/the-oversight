@@ -1,0 +1,62 @@
+# SURFACE+SEEDED — seed 4903 (105d, 0 alive)
+
+npcPairs=104 deep2=19 cracks=0 vCracks=0 friendGriev=0 stateGriev=8 stateFriend=0 stateVCrack=0 t2picks=27 closeReadsServed=14 grievanceServes=1 othersSteered=27
+COND-TP: firstDeep2Day=15 lateClose=15 lateTP=3 lateNull=0 condRate=20.0% pooledTP=3/15 pooledRate=20.0% grievReadsByWhy={"grievance":0,"vgrievance":1}
+FUNNEL (natural): convos=303 subject=292 offered=33 picked=27 classes={"subject-no-offer":259,"picked-others":27,"no-subject-no-ans":11,"offered-not-picked":4,"offered-capped":2}
+FUNNEL-UNSTEERED (r53 strict): convos=276 subjectNoOffer=259 rate=93.8% offered=6 picked=0 latePicks=0
+STEERING-ARM: steering=false knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Theo / Efraín — "that stray dog — the one that bit two people — lets Brian touch it."
+  KNACK-CIRCULATION: Brian / Efraín — "Elijah talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Elijah / Nathan — "Mateo talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=16 picks=12 latePicks=1 missedChangedNotOffered=12
+WRAPSERVE: convos=1 matcherHits=1 matcherServes=1 classes={"grievance-line":1,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=453 menuProblem=265 pickProblem=188
+SEEDED-DAILY: [{"day":14,"v":42,"depth":3},{"day":15,"v":42,"depth":3},{"day":16,"v":46,"depth":3},{"day":17,"v":48,"depth":3},{"day":18,"v":52,"depth":3},{"day":19,"v":56,"depth":3},{"day":21,"v":64,"depth":3},{"day":22,"v":68,"depth":3},{"day":23,"v":68,"depth":3},{"day":24,"v":68,"depth":3},{"day":25,"v":68,"depth":3},{"day":26,"v":68,"depth":3},{"day":27,"v":68,"depth":3},{"day":28,"v":68,"depth":3}] class=rise
+GOSSIP: totalPicks=249 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=12 31-60=10 61-90=4 91-120=1 121+=0 naturalPicks=27 seededPicks=0 gossipPicks=249
+SEEDED: {"pair":{"a":"gen_1d3i0do","b":"gen_avwsbt3","aName":"Nia","bName":"Theo"},"day":14,"pre":{"v":54,"depth":2},"post":{"v":42,"depth":3},"daily":[{"day":14,"v":42,"depth":3},{"day":15,"v":42,"depth":3},{"day":16,"v":46,"depth":3},{"day":17,"v":48,"depth":3},{"day":18,"v":52,"depth":3},{"day":19,"v":56,"depth":3},{"day":21,"v":64,"depth":3},{"day":22,"v":68,"depth":3},{"day":23,"v":68,"depth":3},{"day":24,"v":68,"depth":3},{"day":25,"v":68,"depth":3},{"day":26,"v":68,"depth":3},{"day":27,"v":68,"depth":3},{"day":28,"v":68,"depth":3}],"crackTraceClass":"rise","vAt7":42,"depthAt7":3,"vDrop":12,"depthDrop":-1,"crack7":true,"firstServe":{"day":16,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":16,"why":"vgrievance"}],"effect":true}
+  FRIEND d15: Nia <> Theo — maxDepth 3, final 3 (v=68), dropped 0
+  FRIEND d25: Nia <> Jun-ho — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d35: Jun-ho <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Dale <> Pablo — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d45: Brian <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Brian <> Jun-ho — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Fatos <> Jun-ho — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d105: Jun-ho <> Nino — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d85: Nathan <> Nino — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d105: Efraín <> Jun-ho — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d65: Efraín <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Efraín <> Nino — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d70: Grace <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Efraín <> Brian — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d95: Efraín <> Grace — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d95: Mateo <> Nathan — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d100: Brian <> Mateo — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d105: Jun-ho <> Grace — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d105: Jun-ho <> Mateo — maxDepth 3, final 3 (v=84), dropped 0
+  CLOSE-READ d15: Jun-ho about Nia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Brian about Nia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Dale about Nia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Jun-ho about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Jun-ho about Nathan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Nathan about Jun-ho — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Brian about Nathan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Dale about Jun-ho — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Nathan about Brian — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Efraín about Nathan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Grace about Nathan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Mateo about Brian — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Mateo about Nathan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Nino about Nathan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Efraín about Brian — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d16: Nia about Theo (why=vgrievance)
+  KNACK d8 Theo: "cuts close faster when Fatima wraps them. Don't ask me how."
+  KNACK d12 Aki: "Theo found a lost knife by smell last week. By SMELL. ...sorry."
+  KNACK d15 Theo: "that stray dog — the one that bit two people — lets Brian touch it."
+  KNACK d20 Dale: "You want to know about that? Okay." "cuts close faster when Nia wraps them. Don't ask me how."
+  KNACK d28 Jun-ho: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Brian touch it."
+  KNACK d33 Priya: "that stray dog — the one that bit two people — lets Nino touch it."
+  KNACK d38 Brian: "Jun-ho found a lost knife by smell last week. By SMELL."
+  KNACK d43 Efraín: "You want to know about that? Okay." "Fatos ate something last month that should've killed them. They're fine."
+
+deathCauses: {"the arena":9,"a wound that wouldn't close":2,"combat":2,"monster":2}

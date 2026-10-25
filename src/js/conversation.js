@@ -4632,7 +4632,15 @@
         const sub = [];
         let n = 0;
         for (const a of t2fresh) {
-          if (a.id === threadAsk || n >= freshCap || n >= topicCapMood) continue;
+          // R53 OTHERS EXEMPTION (journey-social r52 funnel fix): 'others'
+          // is the village's social life surfacing (bonds, rifts, deeds),
+          // not small talk — like the gossip verbs below, it rides past
+          // the fresh cap instead of inside it. Still bounded by
+          // topicCapMood, so the menu grows by at most one slot and the
+          // exempt topic may displace one generic ask — the intended
+          // tradeoff, judged by the r53 funnel metric.
+          const othersExempt = a.id === 'ask:others';
+          if (a.id === threadAsk || (!othersExempt && n >= freshCap) || n >= topicCapMood) continue;
           sub.push(a); n++;
         }
         for (const a of asks) {
@@ -4768,7 +4776,11 @@
       } else {
         let topicsAdded = 0;
         for (const a of t2fresh) {
-          if (a.id === threadAsk || topicsAdded >= freshCap || topicsAdded >= topicCapMood || choices.length >= MAXC) continue;
+          // R53 OTHERS EXEMPTION: same rule as the subject menu above —
+          // 'others' rides past freshCap, still bounded by topicCapMood
+          // and MAXC.
+          const othersExempt = a.id === 'ask:others';
+          if (a.id === threadAsk || (!othersExempt && topicsAdded >= freshCap) || topicsAdded >= topicCapMood || choices.length >= MAXC) continue;
           choices.push(a); topicsAdded++;
         }
         for (const a of asks) {
