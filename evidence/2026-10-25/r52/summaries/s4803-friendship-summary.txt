@@ -1,0 +1,60 @@
+# SURFACE+SEEDED — seed 4803 (134d, 0 alive)
+
+npcPairs=105 deep2=25 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=15 closeReadsServed=12 grievanceServes=1 othersSteered=15
+COND-TP: firstDeep2Day=35 lateClose=12 lateTP=7 lateNull=0 condRate=58.3% pooledTP=7/12 pooledRate=58.3% grievReadsByWhy={"grievance":0,"vgrievance":1}
+FUNNEL (natural): convos=353 subject=342 offered=27 picked=14 classes={"subject-no-offer":315,"picked-others":14,"no-subject-no-ans":11,"offered-not-picked":12,"offered-capped":1}
+REOFFER: offers=11 picks=6 latePicks=3 missedChangedNotOffered=11
+WRAPSERVE: convos=1 matcherHits=1 matcherServes=1 classes={"grievance-line":1,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=603 menuProblem=481 pickProblem=122
+SEEDED-DAILY: [{"day":38,"v":38,"depth":2},{"day":39,"v":38,"depth":2},{"day":40,"v":38,"depth":2},{"day":41,"v":42,"depth":2},{"day":42,"v":48,"depth":2},{"day":43,"v":48,"depth":2},{"day":44,"v":48,"depth":2},{"day":45,"v":48,"depth":2},{"day":46,"v":50,"depth":3},{"day":47,"v":54,"depth":3},{"day":48,"v":56,"depth":3},{"day":49,"v":56,"depth":3},{"day":50,"v":58,"depth":3},{"day":51,"v":58,"depth":3}] class=no-drop
+GOSSIP: totalPicks=288 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=1 31-60=5 61-90=4 91-120=4 121+=0 naturalPicks=14 seededPicks=1 gossipPicks=288
+SEEDED: {"pair":{"a":"gen_yr9fsk6","b":"sigrun_eiriksdottir","aName":"Halil","bName":"Sigrun"},"day":37,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":38,"v":38,"depth":2},{"day":39,"v":38,"depth":2},{"day":40,"v":38,"depth":2},{"day":41,"v":42,"depth":2},{"day":42,"v":48,"depth":2},{"day":43,"v":48,"depth":2},{"day":44,"v":48,"depth":2},{"day":45,"v":48,"depth":2},{"day":46,"v":50,"depth":3},{"day":47,"v":54,"depth":3},{"day":48,"v":56,"depth":3},{"day":49,"v":56,"depth":3},{"day":50,"v":58,"depth":3},{"day":51,"v":58,"depth":3}],"crackTraceClass":"no-drop","vAt7":38,"depthAt7":2,"vDrop":12,"depthDrop":0,"crack7":true,"firstServe":{"day":41,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":41,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Nancy <> Casey — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d35: Nancy <> Sigrun — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d90: Ines <> Sigrun — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d65: Raj <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Nancy <> Halil — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d115: Ines <> Raj — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d45: Casey <> Halil — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d80: Brian <> Sigrun — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d90: Brian <> Ines — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d90: Ines <> Meera — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d40: Halil <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Halil <> Ines — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Halil <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Meera <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Brian <> Halil — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Brian <> Meera — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d90: Casey <> Ines — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d50: Halil <> Meera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Meera <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Halil <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Jesse <> Sigrun — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d115: Jesse <> Raj — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d100: Adaeze <> Sigrun — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d75: Adaeze <> Halil — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Ines <> Jesse — maxDepth 2, final 2 (v=64), dropped 0
+  CLOSE-READ d38: Brian about Halil — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Brian about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Casey about Halil — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Raj about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d62: Brian about Halil — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Meera about Halil — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Adaeze about Halil — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Sigrun about Halil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Jesse about Halil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Meera about Sigrun — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Jesse about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Adaeze about Arnaldo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d41: Halil about Sigrun (why=vgrievance)
+  KNACK d6 Grace: "Ines talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Casey: "Good question." "What's this about? that stray dog — the one that bit two people — lets Nancy touch it."
+  KNACK d24 Nancy: "You want to know about that? Okay." "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d26 Ines: "Meera ate something last month that should've killed them. They're fine."
+  KNACK d31 Halil: "You want to know about that? Okay." "Meera ate something last month that should've killed them. They're fine. You'd kno
+  KNACK d31 Ines: "Huh. Let me think about that." "Brian sees in the dark. Not well — but better than you. Better than me."
+  KNACK d31 Ines: "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d32 Raj: "Huh. Let me think about that." "cuts close faster when Halil wraps them. Don't ask me how."
+
+deathCauses: {"monster":6,"starvation":1,"contest":1,"the arena":9,"combat":1}

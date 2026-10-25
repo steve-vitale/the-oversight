@@ -1,0 +1,58 @@
+# SURFACE+SEEDED — seed 4802 (102d, 6 alive)
+
+npcPairs=89 deep2=21 cracks=0 vCracks=0 friendGriev=1 stateGriev=6 stateFriend=1 stateVCrack=0 t2picks=18 closeReadsServed=10 grievanceServes=1 othersSteered=18
+COND-TP: firstDeep2Day=35 lateClose=7 lateTP=2 lateNull=0 condRate=28.6% pooledTP=2/10 pooledRate=20.0% grievReadsByWhy={"grievance":2,"vgrievance":1}
+FUNNEL (natural): convos=300 subject=283 offered=20 picked=17 classes={"subject-no-offer":263,"no-subject-no-ans":17,"offered-not-picked":2,"picked-others":17,"offered-capped":1}
+REOFFER: offers=8 picks=7 latePicks=1 missedChangedNotOffered=15
+WRAPSERVE: convos=3 matcherHits=1 matcherServes=1 classes={"grievance-line":1,"deflection":1,"other":1}
+FUNNEL-PROBE (subject-no-offer turns): turns=493 menuProblem=377 pickProblem=116
+SEEDED-DAILY: [{"day":36,"v":40,"depth":2},{"day":37,"v":42,"depth":2},{"day":38,"v":44,"depth":2},{"day":39,"v":46,"depth":2},{"day":40,"v":50,"depth":3},{"day":41,"v":52,"depth":3},{"day":42,"v":56,"depth":3},{"day":43,"v":58,"depth":3},{"day":44,"v":58,"depth":3},{"day":45,"v":60,"depth":3},{"day":46,"v":60,"depth":3},{"day":47,"v":62,"depth":3},{"day":48,"v":64,"depth":3},{"day":49,"v":66,"depth":3}] class=rise
+GOSSIP: totalPicks=173 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=4 31-60=6 61-90=4 91-120=3 121+=0 naturalPicks=17 seededPicks=1 gossipPicks=173
+SEEDED: {"pair":{"a":"ivy_wang","b":"nathan_lee","aName":"Ivy","bName":"Nathan"},"day":35,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":36,"v":40,"depth":2},{"day":37,"v":42,"depth":2},{"day":38,"v":44,"depth":2},{"day":39,"v":46,"depth":2},{"day":40,"v":50,"depth":3},{"day":41,"v":52,"depth":3},{"day":42,"v":56,"depth":3},{"day":43,"v":58,"depth":3},{"day":44,"v":58,"depth":3},{"day":45,"v":60,"depth":3},{"day":46,"v":60,"depth":3},{"day":47,"v":62,"depth":3},{"day":48,"v":64,"depth":3},{"day":49,"v":66,"depth":3}],"crackTraceClass":"rise","vAt7":50,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":40,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":40,"why":"vgrievance"}],"effect":true}
+  FRIEND d45: Ivy <> Valeria — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d45: Aria <> Ivy — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d40: Paolo <> Tariq — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d60: Aria <> Paolo — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d60: Paolo <> Valeria — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d35: Ivy <> Nathan — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d60: Paolo <> Nathan — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d50: Paolo <> Ivy — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d75: Nathan <> Tariq — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d65: Paolo <> Katarina — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d55: Jaxon <> Katarina — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d55: Aria <> Jaxon — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d55: Jaxon <> Ivy — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d55: Jaxon <> Valeria — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d60: Paolo <> Jaxon — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Pavel <> Tariq — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d100: Franz <> Tariq — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d90: Franz <> Nathan — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d100: Franz <> Pavel — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d85: Nathan <> Pavel — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d100: Tariq <> Emre — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND-GRIEV d35: Ivy vs Nathan (ambushed) depth 2 v 50 -> 50
+  CLOSE-READ d24: Paolo about Tariq — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Katarina about Paolo — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Aria about Ivy — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Katarina about Tariq — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d65: Tariq about Nathan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Nathan about Tariq — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Pavel about Nathan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Pavel about Tariq — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d94: Tariq about Pavel — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Emre about Tariq — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d36 (betrayal): Ivy vs Nathan (ambushed) depth 2 v 50 -> 50
+  GRIEV-READ d22: Valeria about Nathan (why=grievance)
+  GRIEV-READ d40: Ivy about Nathan (why=vgrievance)
+  GRIEV-READ d54: Nathan about Valeria (why=grievance)
+  KNACK d5 Paolo: "Tariq ate something last month that should've killed them. They're fine."
+  KNACK d8 Ellis: "Good question." "that stray dog — the one that bit two people — lets Katarina touch it."
+  KNACK d21 Katarina: "Valeria talks to the garden. The garden listens. I've seen it."
+  KNACK d38 Ivy: "Good question." "that stray dog — the one that bit two people — lets Aria touch it."
+  KNACK d38 Ivy: "Valeria talks to the garden. The garden listens. I've seen it."
+  KNACK d50 Tariq: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Paolo touch it."
+  KNACK d51 Paolo: "Nathan talks to the garden. The garden listens. I've seen it."
+  KNACK d56 Ivy: "Good question." "Sure — Tariq ate something last month that should've killed them. They're fine."
+
+deathCauses: {"ambush":1,"Hushpuppy":1,"dehydration":2,"alien":1,"contest":1,"a wound that wouldn't close":1,"monster":1}
