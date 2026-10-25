@@ -526,3 +526,64 @@ question): KILLED-AT-PILOT. The preserve-action question is closed
 on this corpus with NO-GO (P1 failed); the widening itself is NOT
 killed (quality/rate/shelf effects unmeasured here beyond the
 diagnostic kcal column).
+
+ADDENDUM (2030Z worker resumption, after the adoption commit
+6460108a0 — this addendum changes NO verdict number, it repairs
+the corpus the verdict was read from):
+- RESUMPTION: the 2030Z worker session resumed after the 2230Z
+  adoption run had already committed RESULTS + corpus as
+  6460108a0. The adoption commit is the verdict deliverable; the
+  work below only repairs two defects it carried and answers one
+  of its open questions. No confirm run, no game-code change, no
+  ON trace run (the adoption decision stands: killed arm,
+  evidence only).
+- SAY-STUB ROOT CAUSE (answers the adoption metric-review
+  question "matcher never matched, or no lines fired?"):
+  NEITHER, in the sense meant. A probe against the node harness
+  shows Game.say is `function () {}` — a no-op stub — while
+  Game.emit itself works (a direct emit lands in Game.log, a
+  direct say leaves it empty). The cook's smoke-rack lines are
+  constructed by the duty code and then dropped by the stub, so
+  no emit wrapper and no matcher could ever capture them in
+  sims. saySamples = 0 on all trace files is a harness-design
+  limit, not a matcher bug and not evidence that cooks never
+  speak. A future run that wants cook voice in sims must
+  address the sim-harness say stub as its own instrument change
+  first; verifying the matcher alone cannot fix it.
+- CORPUS DEFECTS FOUND IN 6460108a0: (a) mixed baseCommit
+  tags — OFF pd0 seeds 9750-9754 carried 11daf7fb while the
+  other 27 files carried 9f11741a, so no single --base passed
+  the analyzer's tag check on all 32 cells (the adoption note's
+  "clean analysis" claim does not survive this: the 5 files
+  were re-run on the 11daf7fb tree, which differs from
+  9f11741a only in the runner script, but the tags still
+  mismatched); (b) OFF mains summaries still 2-row
+  (9753/9754 only) — the trace-summary clobber was never
+  repaired in the commit.
+- CORPUS REPAIR (genuine re-runs, no hand edits to data):
+  all 16 OFF configs were re-run on a git-archive extract of
+  9f11741a with the OFF patch applied (tree verified by the
+  same cheap proof: single-file patch + reverse-check; the
+  extract's driver verified byte-identical to the worktree
+  driver). Every re-run reproduced pilot values exactly
+  (batches/kcal/resolutions/days/rank/wave on all 16 cells,
+  fifth identical reproduction for the pilot configs), and
+  every staged file differed from the corpus file ONLY in
+  baseCommit. The 16 files and the 2 new 8-row summaries
+  (meta.base 9f11741a) were promoted into the corpus. Final
+  corpus state: uniform 9f11741a tags on all 32 cells, 8-row
+  OFF mains summaries, ON files and OFF trace files
+  untouched. Analyzer re-run with --base 9f11741a exits 0
+  with the verdict UNCHANGED (NO-GO failed=P1, pooled
+  medians 113.5 -> 102.0, ratio 0.899, same per-seed tables,
+  same wall numbers); pilot proof test 37 PASS / 0 FAIL.
+- RECOVERY INCIDENTS (loud, no data lost): the first OFF
+  mains restore attempt crashed on seed 9755 pd0 with
+  `spawnSync /bin/sh ENOENT` inside sim-harness loadGame
+  (transient under load averages 9-13; /bin/sh itself
+  exists); a service restart then orphaned a scratch dir
+  (cleaned; no per-seed file was mid-write at the time).
+  The successful restore ran to DONE (exit 0) before the
+  tag-normalization re-run above. Scratch dirs are deleted;
+  the worktree holds only committed work plus this addendum
+  and the corpus repair.
