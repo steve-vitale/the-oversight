@@ -6,9 +6,12 @@
 // print verdicts: a failure exits non-zero naming the leg. The verdict
 // (PARTIALLY SATISFIES) follows from which legs pass and which fail:
 //   C1 reproduction, C2 scale, C3 population separation, C4 disjointness,
-//   C5 guardrail usability all PASS; C6 machine-readable scope FAILS
-//   (committed JSON carries no substrate fields); C7 tail/truncation
-//   honesty PARTIAL (tail quantified, truncation unhandled by the tool).
+//   C5 guardrail usability all PASS; C6 machine-readable scope now PASSES
+//   (fixed by sim-causemeta-b: the JSON carries scope, and compare refuses
+//   a different substrate — proven in C5a/C7b below); C7 tail/truncation
+//   honesty stays PARTIAL (tail quantified, truncation still exact-match
+//   only — not the causemeta arm's target, so the audit verdict stays
+//   PARTIALLY on C7 alone).
 //
 // Synthetic corpora live in a temp dir (created + removed by this test);
 // nothing is written into the repo. Real corpora are read only.
@@ -99,6 +102,11 @@ assert.deepStrictEqual(repro.out.seedOverlap, [], 'C4 seedOverlap must be empty'
 console.log('C4 seed disjointness (overlap []): PASS');
 
 // ---- C5a: guardrail usability on REAL out-of-baseline data (deathcensus baseline side) ----
+// NOTE (sim-causemeta-b): compare mode now REFUSES this different-substrate
+// dir (policy baseline vs baseline-scope competent) instead of running it
+// silently — that refusal IS the C6 fix. The decomposition is therefore
+// recomputed from the files directly (same numbers the old compare run
+// produced), and the refusal itself is asserted.
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'causebase-audit-b-'));
 try {
   const dcBase = path.join(tmp, 'dc-base');
@@ -107,17 +115,30 @@ try {
   for (const f of fs.readdirSync(dcDir).filter(x => x.endsWith('-baseline.json')).sort()) {
     fs.copyFileSync(path.join(dcDir, f), path.join(dcBase, f));
   }
-  const dc = runOk(['--baseline', BASELINE, dcBase]);
-  assert.strictEqual(dc.out.villagerDeaths, 27, 'C5a deathcensus villager deaths');
-  assert.strictEqual(dc.out.excludedByKind, 192, 'C5a monster exclusions');
-  assert.strictEqual(dc.out.excludedScholar, 42, 'C5a scholar exclusions');
-  assert.deepStrictEqual(
-    dc.out.newLabels.map(n => [n.label, n.count, n.flagged]),
-    [['Nevermore', 1, false], ['The Suburb', 1, false]],
-    'C5a genuine other-substrate labels at n=1 must be NOTED, not flagged');
-  assert.strictEqual(dc.out.presentLabels.filter(p => p.shareShiftFlagged).length, 0,
-    'C5a no share-shift flag on 27 deaths');
-  console.log('C5a real out-of-baseline compare (27 villager, Nevermore/The Suburb n=1 unflagged): PASS');
+  let dcRows = 0, dcKind = 0, dcScholar = 0, dcVill = 0;
+  const dcVillCauses = {};
+  for (const f of fs.readdirSync(dcBase).filter(x => x.endsWith('.json')).sort()) {
+    const j = JSON.parse(fs.readFileSync(path.join(dcBase, f), 'utf8'));
+    for (const r of (j.deathcensus && j.deathcensus.deaths) || []) {
+      dcRows += 1;
+      if (r.kind !== 'villager' && r.kind !== 'person') { dcKind += 1; continue; }
+      if (r.player) { dcScholar += 1; continue; }
+      dcVill += 1;
+      dcVillCauses[r.cause] = (dcVillCauses[r.cause] || 0) + 1;
+    }
+  }
+  assert.strictEqual(dcRows, 261, 'C5a deathcensus rows');
+  assert.strictEqual(dcKind, 192, 'C5a monster exclusions');
+  assert.strictEqual(dcScholar, 42, 'C5a scholar exclusions');
+  assert.strictEqual(dcVill, 27, 'C5a deathcensus villager deaths');
+  assert.strictEqual(dcVillCauses.Nevermore, 1, 'C5a genuine other-substrate label Nevermore n=1');
+  assert.strictEqual(dcVillCauses['The Suburb'], 1, 'C5a genuine other-substrate label The Suburb n=1');
+  const dcRefuse = run(['--baseline', BASELINE, dcBase]);
+  assert.strictEqual(dcRefuse.status, 2, 'C5a different-substrate compare must refuse (C6 fix)');
+  assert.ok(dcRefuse.stderr.includes('SCOPE-MISMATCH'), 'C5a refusal must say SCOPE-MISMATCH');
+  assert.ok(dcRefuse.stderr.includes('"competent"') && dcRefuse.stderr.includes('"baseline"'),
+    'C5a refusal must name both policies; got: ' + dcRefuse.stderr);
+  console.log('C5a real out-of-baseline data (261=192+42+27 recomputed; compare refuses, SCOPE-MISMATCH): PASS');
 
   // ---- C5b: guardrail usability on a SYNTHETIC hypothetical arm ----
   const hypo = path.join(tmp, 'hypo');
@@ -129,8 +150,13 @@ try {
   for (let i = 0; i < 4; i++) v('famine fever');       // absent, n=4 -> flagged
   for (let i = 0; i < 2; i++) v('river drowning');     // absent, n=2 -> churn only
   v('stripes flowing where no wind blows');            // full-length near-miss of a truncated baseline label
-  fs.writeFileSync(path.join(hypo, 'h1.json'), JSON.stringify({ seed: 1, deathRows: rows }));
+  // NOTE (sim-causemeta-b): the hypo arm declares the baseline's substrate
+  // (competent policy, flags 1/1, 150d summary meta) so compare runs it as
+  // an in-scope arm; scopeCheck must report match.
+  fs.writeFileSync(path.join(hypo, 'h1.json'), JSON.stringify({ seed: 1, policy: 'competent', plentydepri: 1, depositgate: 1, deathRows: rows }));
+  fs.writeFileSync(path.join(hypo, 'sweep-competent.json'), JSON.stringify({ meta: { cell: 'competent', policy: 'competent', days: 150, seeds: [1], env: { PLENTYDEPRI: '1', DEPOSITGATE: '1' } } }));
   const hy = runOk(['--baseline', BASELINE, hypo]);
+  assert.strictEqual(hy.out.scopeCheck.status, 'match', 'C5b matched hypo scopeCheck must be match');
   assert.strictEqual(hy.out.villagerDeaths, 19, 'C5b hypo villager deaths');
   const byLabel = Object.fromEntries(hy.out.newLabels.map(n => [n.label, n]));
   assert.strictEqual(byLabel['famine fever'].flagged, true, 'C5b absent n=4 must flag');
@@ -153,23 +179,32 @@ try {
   assert.ok(trunc.every(r => r.count === 1), 'C7 all truncated labels are singletons');
   console.log('C7 tail quantified (26x1, 8x2, 34/48 at most twice; 4 truncated singletons): PASS');
 
-  // ---- C6: machine-readable scope — EXPECTED FAILURE, recorded not hidden ----
-  const topKeys = Object.keys(committed);
-  const substrateKeys = ['policy', 'horizon', 'plentydepri', 'depositgate', 'substrate']
-    .filter(k => topKeys.includes(k));
-  console.log('C6 machine-readable scope: FAIL (committed JSON top-level keys: '
-    + topKeys.join(', ') + '; substrate fields present: '
-    + (substrateKeys.length ? substrateKeys.join(', ') : 'NONE') + ')');
-  assert.strictEqual(substrateKeys.length, 0,
-    'C6 must record that the JSON carries no substrate metadata (this is the PARTIALLY cap)');
+  // ---- C6: machine-readable scope — FIXED by sim-causemeta-b ----
+  // Prior to the fix this leg recorded FAIL: the JSON carried no substrate
+  // fields. The fix adds scope; this leg now asserts its exact content.
+  // C7 truncation handling is still open, so the audit verdict stays
+  // PARTIALLY on C7 alone — see the final line.
+  const sc = committed.scope;
+  assert.ok(sc && typeof sc === 'object', 'C6 scope object must exist');
+  assert.strictEqual(sc.policy, 'competent', 'C6 scope policy');
+  assert.deepStrictEqual(sc.horizon, { days: 150, mode: 'death-aware' }, 'C6 scope horizon');
+  assert.deepStrictEqual(sc.flags, { PLENTYDEPRI: 1, DEPOSITGATE: 1 }, 'C6 scope flags');
+  assert.strictEqual(sc.corpora.length, 6, 'C6 scope corpus list');
+  assert.deepStrictEqual(sc.counts,
+    { rowsTotal: 1302, excludedByKind: 0, excludedScholar: 732, villagerDeaths: 570, labelCount: 48 },
+    'C6 scope counts');
+  console.log('C6 machine-readable scope: PASS (policy competent, 150d death-aware, flags 1/1, 6 corpora, counts 1302/0/732/570/48)');
 
-  // ---- C7b: analyzer enforces no substrate check (tool works as designed; caveat, not bug) ----
-  const dcAny = run(['--baseline', BASELINE, dcBase]);
-  assert.strictEqual(dcAny.status, 0,
-    'C7b compare on a different-substrate dir must exit 0 with no substrate warning (documented caveat)');
-  assert.ok(!/substrate|policy|competent/i.test(dcAny.stderr),
-    'C7b no substrate warning is emitted by the analyzer');
-  console.log('C7b analyzer substrate silence (exit 0, no warning — caveat, not bug): RECORDED');
+  // ---- C7b: the guard does not break in-scope use ----
+  // Prior to sim-causemeta-b this leg recorded the analyzer's substrate
+  // silence: compare on a different-substrate dir exited 0 with no
+  // warning. The fix turns that into a refusal — proven in C5a above — so
+  // this leg now proves the other side: a matched in-scope compare still
+  // exits 0 with scopeCheck match.
+  const hyMatch = runOk(['--baseline', BASELINE, hypo]);
+  assert.strictEqual(hyMatch.out.scopeCheck.status, 'match',
+    'C7b matched in-scope compare must exit 0 with scopeCheck match');
+  console.log('C7b guard preserves in-scope use (matched compare exit 0, scopeCheck match): PASS');
 
   // ---- Heterogeneity (metric-review input): per-corpus starvation shares ----
   const starvShares = repro.out.corpora.map(c => {
@@ -182,4 +217,4 @@ try {
   fs.rmSync(tmp, { recursive: true, force: true });
 }
 
-console.log('test-causebase-audit-b: ALL LEGS PASS (verdict cap: C6 FAIL -> PARTIALLY SATISFIES)');
+console.log('test-causebase-audit-b: ALL LEGS PASS (C6 fixed by sim-causemeta-b; audit verdict stays PARTIALLY on C7 truncation only)');

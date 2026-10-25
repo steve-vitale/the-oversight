@@ -2,6 +2,92 @@
   "mode": "pool",
   "generatedBy": "scripts/analyze-causebase-b.js",
   "population": "kind in {villager, person} AND scholar flag false; labels raw, unnormalized",
+  "scope": {
+    "scopeVersion": 1,
+    "policy": "competent",
+    "horizon": {
+      "days": 150,
+      "mode": "death-aware"
+    },
+    "flags": {
+      "PLENTYDEPRI": 1,
+      "DEPOSITGATE": 1
+    },
+    "kindFilter": {
+      "kinds": [
+        "villager",
+        "person"
+      ],
+      "scholarExcluded": true,
+      "scholarFlagFields": {
+        "sweep": "isPlayer",
+        "census": "player"
+      },
+      "description": "kind in {villager, person} AND scholar flag false"
+    },
+    "labels": {
+      "form": "raw, unnormalized",
+      "truncationChars": 32
+    },
+    "corpora": [
+      {
+        "dir": "evidence/2026-10-24/pantrystarve-b-corpus",
+        "seedFirst": 94301,
+        "seedLast": 94308,
+        "seedCount": 8,
+        "filesIngested": 8
+      },
+      {
+        "dir": "evidence/2026-10-24/fullpantry-diag-b-corpus",
+        "seedFirst": 94401,
+        "seedLast": 94416,
+        "seedCount": 16,
+        "filesIngested": 16
+      },
+      {
+        "dir": "evidence/2026-10-24/fullpantry-confirm-b-corpus",
+        "seedFirst": 94421,
+        "seedLast": 94436,
+        "seedCount": 16,
+        "filesIngested": 16
+      },
+      {
+        "dir": "evidence/2026-10-24/awayration-size-b-corpus",
+        "seedFirst": 94501,
+        "seedLast": 94508,
+        "seedCount": 8,
+        "filesIngested": 8
+      },
+      {
+        "dir": "evidence/2026-10-24/fullpantry-casecount-b-corpus",
+        "seedFirst": 94601,
+        "seedLast": 94664,
+        "seedCount": 64,
+        "filesIngested": 64
+      },
+      {
+        "dir": "evidence/2026-10-24/awayration-cover-b-corpus",
+        "seedFirst": 94701,
+        "seedLast": 94732,
+        "seedCount": 32,
+        "filesIngested": 32
+      }
+    ],
+    "counts": {
+      "rowsTotal": 1302,
+      "excludedByKind": 0,
+      "excludedScholar": 732,
+      "villagerDeaths": 570,
+      "labelCount": 48
+    },
+    "derivation": {
+      "policy": "uniform per-seed corpus policy field (a conflict fails loudly)",
+      "flags": "uniform per-seed corpus plentydepri/depositgate fields (a conflict fails loudly)",
+      "horizonDays": "uniform sweep summary meta.days (a conflict fails loudly; null when no summary meta present)",
+      "horizonMode": "documented sweep-driver semantics per sim-causebase-b.md pre-registration (150d death-aware); mode is not a corpus field",
+      "corpora": "per-corpus seed bands from ingested per-seed files; full seed lists in top-level corpora[].seeds"
+    }
+  },
   "corpora": [
     {
       "dir": "evidence/2026-10-24/pantrystarve-b-corpus",
