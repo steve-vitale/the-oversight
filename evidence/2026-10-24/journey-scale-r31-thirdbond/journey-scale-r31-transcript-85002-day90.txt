@@ -1,0 +1,14 @@
+=== seed 85002 day 90 — conversation with Domfeh (app_mgpsphgm663) ===
+occupation=carpenter temperament=dry trust=58 dead=false
+want: ask_favor (stage 1)
+
+THEM: "We're eating through stores faster than we replace them. Forage with me tomorrow? I know the far treeline, past the rocks."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. Nobody's worked the far treeline, past the rocks in days. We'll fill packs before dark."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+YOU: [goon] "I'm listening, I promise."
+THEM: "Walk with me? I want another pair of eyes on something."
+YOU: (leave)
+closing line: "Do try to stay alive. The paperwork otherwise is murder."

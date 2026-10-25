@@ -167,7 +167,14 @@ function courtship(Game, ctx) {
           const nt = needy[0];
           if (nt) {
             const s = Game.state.scholar || {};
-            const hpPct = (s.hp || 0) / Math.max(1, s.maxHp || s.hp || 1);
+            // R31 (journey-scale r31): scholar HP lives in scholar.health,
+            // max via Game.maxHealth() — scholar.hp/maxHp are never set, so
+            // the old read gave hpPct 0 forever and no pilgrimage ever
+            // started (r30: pilgrimages 0/4 despite eligible candidates).
+            const hpNow = (s.health != null ? s.health : (s.hp != null ? s.hp : 100));
+            let hpMax = 100;
+            try { hpMax = Game.maxHealth ? Game.maxHealth() : 100; } catch (e) {}
+            const hpPct = hpNow / Math.max(1, hpMax);
             if (!s.exiled && hpPct > 0.7) {
               ctx._pilgrim = { vid: nt.id, day };
               ctx.pilgrimages = (ctx.pilgrimages || 0) + 1;
