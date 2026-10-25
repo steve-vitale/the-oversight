@@ -1,0 +1,439 @@
+AWAYRATION-PACKTAIL-B ANALYZER REPORT
+mode: confirm seeds: 94909,94910,94911,94912,94913,94914,94915,94916,94917,94918,94919,94920,94921,94922,94923,94924 policy: competent PD=1 DG=1 days: 150
+--- BASELINE ---
+WALL: s94909 53d nat=false win=false wave=2 deaths=7 | s94910 150d nat=false win=false wave=4 deaths=8 | s94911 150d nat=false win=false wave=4 deaths=8 | s94912 150d nat=false win=false wave=3 deaths=6 | s94913 150d nat=false win=false wave=3 deaths=19 | s94914 115d nat=false win=false wave=4 deaths=13 | s94915 150d nat=false win=false wave=3 deaths=7 | s94916 150d nat=false win=false wave=4 deaths=12 | s94917 150d nat=false win=false wave=3 deaths=17 | s94918 150d nat=false win=false wave=3 deaths=4 | s94919 150d nat=false win=false wave=3 deaths=16 | s94920 150d nat=false win=false wave=4 deaths=10 | s94921 29d nat=false win=false wave=2 deaths=5 | s94922 85d nat=false win=false wave=3 deaths=13 | s94923 150d nat=false win=false wave=3 deaths=4 | s94924 150d nat=false win=false wave=4 deaths=13
+WALL SUMMARY: median survival 150d max 150d national 0/16 wins 0/16 wave w1=16 w2=16 w3=14 w4=6 w5=0
+DEATH-CAUSE SHARES (pooled): the arena=65 monster=31 starvation=18 sickness=16 a wound that wouldn't close=7 ambush=7 contest=7 dehydration=4 the night=2 food poisoning (raw)=1 the focus group=1 a toad like a war drum, throat s=1 combat=1 the eater=1
+MEALS: away 4887/4955 (0.986) haven 11982/12135 (0.987)
+DRAW DAYS: 1076 self-fed away 3879 pack rows 1082 without-draw-day 6 draw-days-without-packMeal-row 0 take-vs-drawn mismatches 0
+DRAW_DAY_COVERAGE=1076/1076 (1.000)
+BINDING DAYS (dawn pack < dayWant, draw days only): n=191 (17.8% of draw days)
+BINDING COVERAGE (drawn/dayWant): n=191 median=0.772 mean=0.747 q1=0.642 q3=0.869 share==1.0=0.000 min=0.197 max=0.998
+BINDING PACK/NEED (diagnostic): n=191 median=0.381 q1=0.316 q3=0.438 median dawn pack=800 median dayWant=1102.3231990654765
+STREAKS: per-villager max median=0 global max=6 villagers=252
+STARVATION DEATHS (villagers): n=17 full-pantry-away n=4 preceded by >=3 inadequate away days: 1
+  s94909 d45 Leo (leo_martin) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=2
+    quote[say]: d45 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+  s94909 d47 Vy (gen_rj4iv36) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=3
+    quote[say]: d47 Noah and Vy lingered over the fire together.
+  s94909 d48 Tariq (tariq_mahmood) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=4
+    quote[say]: d48 🎣 Tariq worked the creek — 3 fish, +350 kcal to the pantry.
+  s94909 d50 Zoe (zoe_adams) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=5
+    quote[say]: d50 🎣 Zoe worked the creek — 3 fish, +550 kcal to the pantry.
+  s94912 d26 Manuel (gen_pcenjl2) class=A sub=away-at-death pantry=9160kcal fresh=7d awayAtDeath=true trailing=1 sinceAdequate=1
+    quote[say]: d26 ⚠ STARVING: health and energy falling. The spiral has started.
+  s94913 d85 Ella (ella_johnson) class=A sub=away-at-death pantry=7877kcal fresh=3.4d awayAtDeath=true trailing=4 sinceAdequate=4
+    quote[say]: d85 🔍 Ella crouches over an olive-green capped mushroom with white gills, a skirt-like ring, and a sac at the stem base, studying it a moment before moving on. (2/3 looks)
+  s94913 d148 Yulibeth (app_mgpspivn220) class=A sub=away-at-death pantry=0kcal fresh=0d awayAtDeath=true trailing=2 sinceAdequate=2
+    quote[say]: d148 Yulibeth traded something with someone for something else. The barter economy stirs.
+  s94913 d149 Hwa-young (visjoin_106) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=3
+    quote[say]: d149 🗣️ Hwa-young to Jorge, by the fire: "The pantry's the thing. We don't raise The Palisade on empty shelves — 2,924 of 14,000 kcal."
+  s94916 d112 Franco (app_mgpspi0j335) class=A sub=away-at-death pantry=14289kcal fresh=29.4d awayAtDeath=true trailing=2 sinceAdequate=2
+    quote[say]: d112 Someone is crying, quietly, in one of the bunks. Franco goes to sit with them.
+  s94917 d35 Aroha (aroha_ngata) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=3
+    quote[say]: d35 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+  s94918 d42 Theo (theo_lindqvist) class=A sub=away-at-death pantry=91234kcal fresh=18.3d awayAtDeath=true trailing=1 sinceAdequate=1
+    quote[say]: d42 🔍 Theo has been turning over a soft-trunked small tree with a crown of huge lobed leaves and melon-like fruit hanging below for days — today it clicked. "I know this one
+  s94921 d21 Omar (omar_farouk) class=A sub=away-at-death pantry=0kcal fresh=0d awayAtDeath=true trailing=2 sinceAdequate=2
+    quote[say]: d21 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+  s94921 d21 Dmitri (dmitri_sokolov) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=4
+    quote[say]: d21 Carlos and Naran lingered over the fire together.
+  s94921 d28 Priya (gen_px3esbv) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=1
+    quote[say]: d28 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+  s94922 d29 Sam (sam_wilson) class=A sub=away-at-death pantry=1700kcal fresh=0.7d awayAtDeath=true trailing=2 sinceAdequate=2
+    quote[say]: d29 📚 Village knowledge: Sam taught everyone about Dog Rose Hip. The Codex grows without you lifting a finger.
+  s94924 d12 Jason (gen_4xlk4xd) class=A sub=away-at-death pantry=22450kcal fresh=15.2d awayAtDeath=true trailing=1 sinceAdequate=1
+    quote[say]: d12 ⚠ STARVING: health and energy falling. The spiral has started.
+  s94924 d121 Dale (dale_hoffman) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=3
+    quote[say]: d121 Dale: "The lily of the valley patch is fruiting again. Somebody should get out there."
+SENSE WINDOWS (BASELINE starvation deaths):
+  --- s94909 d45 Leo trailing=0 ---
+    say: d45 It's settled. The village is calling it "The Ugly Beast." The Codex keeps it.
+    say: d45 ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)
+    say: d45 A cold snap. Breath smokes. The woods go quiet.
+    say: d45 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+    say: d45 Village meal: +2320 kcal, +1L water from the communal pantry.
+    say: d45 Quiet mending sounds from the bunks — Zoe fixing something.
+    say: d45 Ursula: "Walked past a good stand of blackberry. Worth remembering where."
+    say: d45 Roman: "The feathery fern-like leaves, flat-topped white flower clusters patch is fruiting again. Somebody should get out there."
+    tele: d45 trust {"who":"leo_martin","delta":1,"reason":"worked the creek for fish"}
+    tele: d45 track_level {"who":"gen_m4cadok","track":"combat","level":1,"why":"fight_won"}
+    tele: d45 ability_granted {"id":"rage","who":"villager:gen_m4cadok"}
+    tele: d45 villager_grant {"vid":"gen_m4cadok","ability":"rage","track":"combat","xp":18}
+    tele: d45 villager_level_up {"vid":"gen_m4cadok","track":"combat","level":1,"pick":"rage","replaced":null,"offers":["rage","adrenaline_surge","adrenaline_control"]}
+    tele: d45 death {"kind":"monster","who":"nightlight_catfish","cause":"villager combat","wave":1,"player":false}
+    tele: d45 trust {"who":"gen_kj1ucfx","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d45 integrate {"amount":2,"reason":"monster named","total":100}
+  --- s94909 d47 Vy trailing=0 ---
+    say: d47 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+    say: d47 Village meal: +2387 kcal, +1L water from the communal pantry.
+    say: d47 The fire is quiet today. Nobody's talking much.
+    say: d47 Roman came back with 537 kcal of something edible. The pantry breathes.
+    say: d47 Noah traded something with someone for something else. The barter economy stirs.
+    say: d47 Noah and Vy lingered over the fire together.
+    say: d47 Elijah and Vy lingered over the fire together.
+    say: d47 Ursula and Elijah lingered over the fire together.
+    tele: d46 trust {"who":"gen_rj4iv36","delta":1,"reason":"worked the creek for fish"}
+    tele: d46 contest_fired {"id":"pantry_raid"}
+    tele: d46 villager_skill {"vid":"hassan_ali","skill":"animal_behavior","via":"animal_behavior"}
+    tele: d46 skill_lesson {"teacher":"gen_m4cadok","learner":"hassan_ali","skill":"animal_behavior","via":"villager"}
+    tele: d47 eat {"ateKcal":90,"spoiled":0}
+    tele: d47 trust {"who":"elijah_scott","delta":1,"reason":"ran into each other out there"}
+    tele: d47 loot_taken {"id":"snare_wire","alien":false}
+    tele: d47 trust {"who":"elijah_scott","delta":1,"reason":"foraged the wilds for the village"}
+  --- s94909 d48 Tariq trailing=0 ---
+    say: d48 🎣 Roman worked the creek — 1 fish, +180 kcal to the pantry.
+    say: d48 🎣 Hassan worked the creek — 1 fish, +240 kcal to the pantry.
+    say: d48 🎣 Tariq worked the creek — 3 fish, +350 kcal to the pantry.
+    say: d48 🌿 Roman returns from foraging the wilds: +400 kcal to the pantry.
+    say: d48 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+    say: d48 Village meal: +1170 kcal, +1L water from the communal pantry.
+    say: d48 Ursula traded something with someone for something else. The barter economy stirs.
+    say: d48 Hassan went to sleep hungry. Nobody says anything.
+    tele: d48 villager_grant {"vid":"hassan_ali","ability":"green_thumb","track":"field","xp":19}
+    tele: d48 villager_level_up {"vid":"hassan_ali","track":"field","level":1,"pick":"green_thumb","replaced":null,"offers":["lucky_rock","dowsing","green_thumb"]}
+    tele: d48 track_level {"who":"gen_kj1ucfx","track":"field","level":1,"why":"gardening"}
+    tele: d48 ability_granted {"id":"lucky_rock","who":"villager:gen_kj1ucfx"}
+    tele: d48 villager_grant {"vid":"gen_kj1ucfx","ability":"lucky_rock","track":"field","xp":18}
+    tele: d48 villager_level_up {"vid":"gen_kj1ucfx","track":"field","level":1,"pick":"lucky_rock","replaced":null,"offers":["lucky_rock","dowsing","green_thumb"]}
+    tele: d48 trust {"who":"gen_kj1ucfx","delta":1,"reason":"worked the garden"}
+    tele: d48 trust {"who":"tariq_mahmood","delta":1,"reason":"worked the creek for fish"}
+  --- s94909 d50 Zoe trailing=0 ---
+    say: d50 🎣 Roman worked the creek — 1 fish, +180 kcal to the pantry.
+    say: d50 🎣 Hassan worked the creek — 4 fish, +900 kcal to the pantry.
+    say: d50 🎣 Zoe worked the creek — 3 fish, +550 kcal to the pantry.
+    say: d50 ◈ AUDIENCE TRIAL — SYSTEM: "The audience wants an encore. A trial, then — smaller this time, but televised." Haul 1,000 kcal to the pantry within 3 days. Reward: integrat
+    say: d50 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d50 Village meal: +2395 kcal, +1L water from the communal pantry.
+    say: d50 Ursula set out an extra bowl before catching themself. Nobody mentioned it.
+    say: d50 Zoe came back with 620 kcal of something edible. The pantry breathes.
+    tele: d49 trust {"who":"zoe_adams","delta":1,"reason":"worked the creek for fish"}
+    tele: d49 trust {"who":"elijah_scott","delta":1,"reason":"foraged the wilds for the village"}
+    tele: d49 integrate {"amount":2,"reason":"monster named","total":100}
+    tele: d50 trust {"who":"gen_kj1ucfx","delta":1,"reason":"worked the garden"}
+    tele: d50 forage {"tile":"grove","epithet":"creekside grove","plants":["acorn_white_oak"],"cells":1,"kcal":0,"cost":60}
+    tele: d50 loot_taken {"id":"nightlight_catfish_trophy_0","alien":false}
+    tele: d50 loot_taken {"id":"nightlight_catfish_trophy_1","alien":false}
+    tele: d50 trust {"who":"zoe_adams","delta":1,"reason":"worked the creek for fish"}
+  --- s94912 d26 Manuel trailing=1 ---
+    say: d26 💧 Caleb returns with water: +4 clean.
+    say: d26 🧳 A traveler passed through yesterday, talking about a village to the east called The Hungry Road. The region is bigger than your fire.
+    say: d26 🌙 Night. Shouts from the treeline — Cole of The Hungry Road with 3 others, and they're not here to talk. "Your pantry or your blood. Choose." (They want ~2,000 kcal.)
+    say: d26 📓 Codex: Cole of The Hungry Road raids Haven's treeline — demands ~2,000 kcal.
+    say: d26 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d26 Village meal: +1031 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)
+    say: d26 Hassan came back with an armful of something edible, unprompted. (+100 kcal pantry)
+    say: d26 Yara is hurt — a fall, a thorn, a bad step. (health 72/100)
+    tele: d26 trust {"who":"yara_haddad","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d26 counter_observed {"id":"cliffhanger","n":2,"vid":"caleb_jones"}
+    tele: d26 counter_discovered {"id":"cliffhanger","via":"observed"}
+    tele: d26 trust {"who":"caleb_jones","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d26 forage {"tile":"forest_floor","epithet":"forest floor","plants":["acorn_white_oak"],"cells":1,"kcal":0,"cost":60}
+    tele: d26 trust {"who":"gen_vak7lvk","delta":1,"reason":"pried stone from the creek bed"}
+    tele: d26 trust {"who":"caleb_jones","delta":1,"reason":"hauled clean water home"}
+    tele: d26 contest_fired {"id":"duel"}
+  --- s94913 d85 Ella trailing=4 ---
+    say: d85 🚶 Daniyar is back — found Willow.
+    say: d85 A cart-driver with flour on their sleeves waits a while, then moves on down the road. Word travels about that, too.
+    say: d85 Rain. Steady, cold, honest rain.
+    say: d85 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d85 Village meal: +2373 kcal, +1L water from the communal pantry.
+    say: d85 Mara came back with 365 kcal of something edible. The pantry breathes.
+    say: d85 🔍 Ella crouches over an olive-green capped mushroom with white gills, a skirt-like ring, and a sac at the stem base, studying it a moment before moving on. (2/3 looks)
+    say: d85 Ella traded something with someone for something else. The barter economy stirs.
+    tele: d85 trust {"who":"benoit_lambert","delta":1,"reason":"they walk out with me"}
+    tele: d85 forage {"tile":"forest_floor","epithet":"forest floor","plants":["hickory_nut"],"cells":1,"kcal":0,"cost":60}
+    tele: d85 track_level {"who":"dale_hoffman","track":"field","level":2,"why":"fishing"}
+    tele: d85 villager_skill {"vid":"dale_hoffman","skill":"field_dressing","via":"field_dressing"}
+    tele: d85 ability_granted {"id":"beast_calm","who":"villager:dale_hoffman"}
+    tele: d85 class_recognized {"who":"dale_hoffman","path":"hunter","subclass":"stalker","day":85}
+    tele: d85 villager_grant {"vid":"dale_hoffman","ability":"beast_calm","track":"field","xp":48}
+    tele: d85 villager_level_up {"vid":"dale_hoffman","track":"field","level":2,"pick":"beast_calm","replaced":null,"offers":["dowsing","bird_whisperer","beast_calm"]}
+  --- s94913 d148 Yulibeth trailing=2 ---
+    say: d148 Riders on the ridge — no, a cart. A TRADER. Word travels: Haven has food, and where there's food there's trade.
+    say: d148 That night, they bring Benoit home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling
+    say: d148 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d148 Village meal: +2322 kcal, +1L water from the communal pantry.
+    say: d148 🩹 You make rounds — Hwa-young gets bound up properly. (21 → 36 HP)
+    say: d148 The fire is quiet today. Nobody's talking much.
+    say: d148 Yulibeth traded something with someone for something else. The barter economy stirs.
+    say: d148 Naran and Hwa-young lingered over the fire together.
+    tele: d148 trust {"who":"jorge_silva","delta":1,"reason":"they walk out with me"}
+    tele: d148 forage {"tile":"forest_floor","epithet":"forest floor","plants":["hickory_nut","burdock"],"cells":2,"kcal":540,"cost":60}
+    tele: d148 trust {"who":"visjoin_106","delta":1,"reason":"worked the creek for fish"}
+    tele: d148 trust {"who":"naran_tumen","delta":1,"reason":"worked the creek for fish"}
+    tele: d148 trust {"who":"jorge_silva","delta":1,"reason":"ran into each other out there"}
+    tele: d148 trust {"who":"naran_tumen","delta":1,"reason":"worked the garden"}
+    tele: d148 trust {"who":"jorge_silva","delta":1,"reason":"foraged the wilds for the village"}
+    tele: d148 contest_fired {"id":"duel"}
+  --- s94913 d149 Hwa-young trailing=0 ---
+    say: d149 🗣️ Hwa-young to Jorge, by the fire: "The pantry's the thing. We don't raise The Palisade on empty shelves — 2,924 of 14,000 kcal."
+    say: d149 A cart-driver with flour on their sleeves waits a while, then moves on down the road. Word travels about that, too.
+    say: d149 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d149 Village meal: +2424 kcal, +1L water from the communal pantry.
+    say: d149 🩹 You make rounds — Cheyenne gets bound up properly. (27 → 42 HP)
+    say: d149 Hwa-young is hurt — a fall, a thorn, a bad step. (health 8/100)
+    say: d149 Naran came back with 440 kcal of something edible. The pantry breathes.
+    say: d149 Hwa-young and Cheyenne lingered over the fire together.
+    tele: d148 contest_fired {"id":"duel"}
+    tele: d148 death {"kind":"villager","who":"app_mgpspivn220","cause":"starvation","wave":null,"player":false}
+    tele: d148 villager_synergy {"vid":"app_mgpspik7915","synergy":"closed_loop"}
+    tele: d148 villager_synergy {"vid":"jorge_silva","synergy":"apex_sense"}
+    tele: d149 godpath_deed {"t":1760400002438,"who":"app_mgpspi57593","event":"care_survived","day":149,"patient":"app_mgpspik7915","via":"heal_check","scene":"haven"}
+    tele: d149 loot_taken {"id":"bark_armor","alien":false}
+    tele: d149 trust {"who":"visjoin_106","delta":1,"reason":"worked the creek for fish"}
+    tele: d149 trust {"who":"naran_tumen","delta":1,"reason":"worked the creek for fish"}
+  --- s94916 d112 Franco trailing=2 ---
+    say: d112 🌙 You weren't at the treeline. Fatima of Stonebridge didn't wait — they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this fo
+    say: d112 The village debates a tired teacher. The room is cold — Inkar, Mia, Sofia against. "More mouths, same fire." (20% for.)
+    say: d112 🗣️ Inkar to Darío, by the fire: "The granary wants food that WAITS — 0 of 2,000 kcal preserved. Smoke it, dry it, render it. The fresh stuff doesn't count."
+    say: d112 Riders on the ridge — no, a cart. A TRADER. Word travels: Haven has food, and where there's food there's trade.
+    say: d112 Village meal: +600 kcal, +1L water from the communal pantry.
+    say: d112 Someone is crying, quietly, in one of the bunks. Franco goes to sit with them.
+    say: d112 Tom is hurt — a fall, a thorn, a bad step. (health 60/100)
+    say: d112 Inkar had the day of their life — 1108 kcal. The pantry can't take it all: 554 kcal goes in, 554 kcal is eaten at the fire.
+    tele: d112 death {"kind":"monster","who":"living_wire","cause":"villager combat","wave":1,"player":false}
+    tele: d112 death {"kind":"villager","who":"app_mgpsphi1310","cause":"monster","wave":3,"player":false}
+    tele: d112 ability_used {"id":"green_whisper","action":"cultivate","ok":true}
+    tele: d112 loot_taken {"id":"alien_boots","alien":false}
+    tele: d112 loot_taken {"id":"hunting_spear","alien":false}
+    tele: d112 loot_taken {"id":"stone_knife","alien":false}
+    tele: d112 loot_taken {"id":"whispering_compass","alien":false}
+    tele: d112 trust {"who":"gen_3a0chrw","delta":1,"reason":"pried stone from the creek bed"}
+  --- s94917 d35 Aroha trailing=0 ---
+    say: d35 ◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)
+    say: d35 🧳 A traveler passed through yesterday, talking about a village to the northeast called The Red Table II. The region is bigger than your fire.
+    say: d35 They waited three days at the edge of your fire. Nobody called the moot. Darius nods — not angry, just done — and they walk.
+    say: d35 Word later: they walked to The Red Table II. Another fire in the world, whether you wanted it or not.
+    say: d35 Word will travel: Haven is clean hands. (Opinion +2 with every village that knows you.)
+    say: d35 A lean scout waits a while, then moves on down the road. Word travels about that, too.
+    say: d35 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+    say: d35 You camp wild tonight — no pantry meal. Eat from your pack.
+    tele: d35 trust {"who":"mateo_alvarez","delta":1,"reason":"foraged the wilds for the village"}
+    tele: d35 eat {"ateKcal":500,"spoiled":0}
+    tele: d35 eat {"ateKcal":42,"spoiled":0}
+    tele: d35 forage {"tile":"meadow","epithet":"open meadow","plants":["goldenrod"],"cells":1,"kcal":0,"cost":60}
+    tele: d35 trust {"who":"nora_wilson","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d35 combat_start {"vs":"sunback","wave":1,"pack":1,"php":100,"maxhp":100}
+    tele: d35 death {"kind":"monster","who":"sunback","cause":"combat","wave":1,"player":false}
+    tele: d35 combat_end {"result":"won","php":100}
+  --- s94918 d42 Theo trailing=1 ---
+    say: d42 The watch holds the wall. You sleep through the worst of it — or would have, if the shouting had let you.
+    say: d42 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+    say: d42 Village meal: +2108 kcal, +1L water from the communal pantry.
+    say: d42 🩹 You make rounds — Kavya gets bound up properly. (51 → 66 HP)
+    say: d42 🔍 Theo has been turning over a soft-trunked small tree with a crown of huge lobed leaves and melon-like fruit hanging below for days — today it clicked. "I know this one
+    say: d42 Theo is hurt — a fall, a thorn, a bad step. (health 1/100)
+    say: d42 Elijah traded something with someone for something else. The barter economy stirs.
+    say: d42 Benjamin and Kavya lingered over the fire together.
+    tele: d42 eat {"ateKcal":540,"spoiled":0}
+    tele: d42 trust {"who":"carlos_diaz","delta":-2,"reason":"gave orders over a contender"}
+    tele: d42 trust {"who":"carlos_diaz","delta":1,"reason":"hauled wood for the pile"}
+    tele: d42 counter_observed {"id":"heckler","n":1,"vid":"gen_iu1iroq"}
+    tele: d42 trust {"who":"gen_1fvjea4","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d42 trust {"who":"gen_8osqb8k","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d42 trust {"who":"dale_hoffman","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d42 show_aired {"id":"swear_jar","who":"gen_1fvjea4","why":"fresh"}
+  --- s94921 d21 Omar trailing=2 ---
+    say: d21 🐪 A trader from the downriver village walks into Haven, pack heavy, smile practiced. River-mud on their boots, river-gossip on their tongue.
+    say: d21 "Heard you people eat REGULARLY now," they say. "Heard the sky talks to you. I have news — some of it might even be true."
+    say: d21 Feed a guest: about 600 kcal from the stores. Trading takes a full day-part. Rudeness is free — but the river remembers. (They'll be here till dusk.)
+    say: d21 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+    say: d21 Village meal: +2142 kcal, +1L water from the communal pantry.
+    say: d21 Priya traded something with someone for something else. The barter economy stirs.
+    say: d21 Carlos and Naran lingered over the fire together.
+    say: d21 Marcus and Erin lingered over the fire together.
+    tele: d21 trust {"who":"gen_690wvma","delta":1,"reason":"pried stone from the creek bed"}
+    tele: d21 villager_seek_knowledge {"vid":"gen_690wvma","teacher":"gen_px3esbv","ability":"echo_location","level":2}
+    tele: d21 counter_observed {"id":"anaconda_empress","n":2,"vid":"gen_ukv7dx2"}
+    tele: d21 counter_discovered {"id":"anaconda_empress","via":"observed"}
+    tele: d21 trust {"who":"gen_ukv7dx2","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d21 trust {"who":"gen_690wvma","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d21 trust {"who":"gen_jcca16r","delta":2,"reason":"stood down a monster and walked home"}
+    tele: d21 contest_fired {"id":"informant"}
+  --- s94921 d21 Dmitri trailing=0 ---
+    say: d21 Carlos and Naran lingered over the fire together.
+    say: d21 Marcus and Erin lingered over the fire together.
+    say: d21 📖 The Codex turns a page on its own. Omar is dead. You didn't ask. It knew.
+    say: d21 Nobody's talking much. The fire feels smaller tonight.
+    say: d21 ◈ CRISIS — THE FIRST GRAVE. Omar is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did.
+    say: d21 SYSTEM: "Oh. Oh no. Was that supposed to happen? The audience is crying. I did not know they could do that."
+    say: d21 📖 The entry for Omar is finished. No more pages.
+    say: d21 💀 Omar starved. Slowly. Somebody's sleeping-roll stays rolled out. Nobody puts it away.
+    tele: d21 villager_seek_knowledge {"vid":"gen_690wvma","teacher":"gen_px3esbv","ability":"echo_location","level":2}
+    tele: d21 counter_observed {"id":"anaconda_empress","n":2,"vid":"gen_ukv7dx2"}
+    tele: d21 counter_discovered {"id":"anaconda_empress","via":"observed"}
+    tele: d21 trust {"who":"gen_ukv7dx2","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d21 trust {"who":"gen_690wvma","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d21 trust {"who":"gen_jcca16r","delta":2,"reason":"stood down a monster and walked home"}
+    tele: d21 contest_fired {"id":"informant"}
+    tele: d21 death {"kind":"villager","who":"omar_farouk","cause":"starvation","wave":null,"player":false}
+  --- s94921 d28 Priya trailing=0 ---
+    say: d28 📚 Village knowledge: Marcus taught everyone about Wood Sorrel. The Codex grows without you lifting a finger.
+    say: d28 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+    say: d28 Village meal: +2160 kcal, +1L water from the communal pantry.
+    say: d28 Paloma paces the hall, restless, then sits. Then paces.
+    say: d28 Marcus is showing everyone Wood Sorrel by the fire. "See the leaves? Like that. Don't mix it up." The Codex grows — the human way.
+    say: d28 🔍 Aria crouches over a vast tangle of vines with huge leaves, roots like buried logs, studying it a moment before moving on. (1/3 looks)
+    say: d28 Aria came back with 573 kcal of something edible. The pantry breathes.
+    say: d28 Marcus and Erin lingered over the fire together.
+    tele: d28 trust {"who":"gen_690wvma","delta":1,"reason":"fetched creek water"}
+    tele: d28 godpath_deed {"t":1760400000667,"who":"marcus_webb","event":"field_truth_shared","day":28,"plant":"wood_sorrel","recipient":"gen_ukv7dx2","discoveredDay":27,"discoverySource":"fieldwo
+    tele: d28 trust {"who":"gen_690wvma","delta":-2,"reason":"gave orders over a contender"}
+    tele: d28 trust {"who":"gen_ukv7dx2","delta":1,"reason":"worked the creek for fish"}
+    tele: d28 trust {"who":"gen_690wvma","delta":1,"reason":"worked the creek for fish"}
+    tele: d28 trust {"who":"gen_jcca16r","delta":1,"reason":"kept the haven fed"}
+    tele: d28 trust {"who":"gen_jcca16r","delta":1,"reason":"kept the haven work going"}
+    tele: d28 integrate {"amount":3,"reason":"discovery","total":79}
+  --- s94922 d29 Sam trailing=2 ---
+    say: d29 📚 Village knowledge: Sam taught everyone about Dog Rose Hip. The Codex grows without you lifting a finger.
+    say: d29 A cold snap. Breath smokes. The woods go quiet.
+    say: d29 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+    say: d29 Village meal: +2200 kcal, +1L water from the communal pantry.
+    say: d29 Nora and Thien are comparing scars like trading cards.
+    say: d29 Fireside lesson: Sam passes around Dog Rose Hip. Someone asks a dumb question. Nobody minds. That's how you learn.
+    say: d29 Amina came back with 602 kcal of something edible. The pantry breathes.
+    say: d29 Thien traded something with someone for something else. The barter economy stirs.
+    tele: d29 trust {"who":"farid_ahmed","delta":1,"reason":"walked out to visit them"}
+    tele: d29 trust {"who":"marcus_webb","delta":1,"reason":"they came all this way to visit"}
+    tele: d29 trust {"who":"diana_osei","delta":1,"reason":"ran into each other out there"}
+    tele: d29 trust {"who":"farid_ahmed","delta":1,"reason":"ran into each other out there"}
+    tele: d29 trust {"who":"sam_wilson","delta":1,"reason":"worked the creek for fish"}
+    tele: d29 trust {"who":"marcus_webb","delta":1,"reason":"worked the creek for fish"}
+    tele: d29 integrate {"amount":3,"reason":"discovery","total":100}
+    tele: d29 contest_fired {"id":"pattern"}
+  --- s94924 d12 Jason trailing=1 ---
+    say: d12 📨 Word came: a weathered hunter wants to join Haven. "I saw you on the broadcast. You looked like people who eat." — they haven't set foot here. The village will judge.
+    say: d12 Riders on the ridge — no, a cart. A TRADER. Word travels: Haven has food, and where there's food there's trade.
+    say: d12 📋 SYSTEM QUEST: "We've been thinking. You know things we don't. Teach us? Show us a plant you know COMPLETELY (Codex L3). We will watch very closely, which is our entire
+    say: d12 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d12 Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)
+    say: d12 Fireside lesson: Yuki passes around Neem. Someone asks a dumb question. Nobody minds. That's how you learn.
+    say: d12 Yuki traded something with someone for something else. The barter economy stirs.
+    say: d12 Dale came back with 328 kcal of something edible. The pantry can't take it all — 164 kcal in, 164 kcal eaten at the fire.
+    tele: d12 trust {"who":"wanjiru_kamau","delta":1,"reason":"pried stone from the creek bed"}
+    tele: d12 trust {"who":"gen_hg2vggx","delta":1,"reason":"hauled clean water home"}
+    tele: d12 trust {"who":"gen_kb5miop","delta":1,"reason":"hauled clean water home"}
+    tele: d12 trust {"who":"grace_obi","delta":1,"reason":"hauled clean water home"}
+    tele: d12 trust {"who":"pavel_dubinin","delta":1,"reason":"hauled clean water home"}
+    tele: d12 trust {"who":"wanjiru_kamau","delta":1,"reason":"hauled clean water home"}
+    tele: d12 counter_observed {"id":"hushwolf","n":2,"vid":"gen_4xlk4xd"}
+    tele: d12 counter_discovered {"id":"hushwolf","via":"observed"}
+  --- s94924 d121 Dale trailing=0 ---
+    say: d121 A cold snap. Breath smokes. The woods go quiet.
+    say: d121 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+    say: d121 No food in the pantry. The village is hungry. You still get your 1L water.
+    say: d121 🩹 You make rounds — Luciana gets bound up properly. (1 → 16 HP)
+    say: d121 Someone is crying, quietly, in one of the bunks. Adaeze goes to sit with them.
+    say: d121 Grace has been asking about the strange leaves all week — "but what IS it?" Tonight, an answer. Adaeze drew Spicebush in the dirt for the others. It'll wash away. The kno
+    say: d121 Luciana had the day of their life — 1640 kcal. Two days of food from one person.
+    say: d121 Dale: "The lily of the valley patch is fruiting again. Somebody should get out there."
+    tele: d120 integrate {"amount":3,"reason":"discovery","total":100}
+    tele: d121 trust {"who":"nikos_papadopoulos","delta":2,"reason":"foraged the wilds for the village"}
+    tele: d121 npc_trap {"vid":"gen_hg2vggx","caught":false,"kcal":0}
+    tele: d121 trust {"who":"adaeze_nwosu","delta":2,"reason":"they walk out with me"}
+    tele: d121 death {"kind":"villager","who":"app_mgpsphkz485","cause":"monster","wave":3,"player":false}
+    tele: d121 forage {"tile":"forest_floor","epithet":"forest floor","plants":["hickory_nut","burdock"],"cells":3,"kcal":990,"cost":60}
+    tele: d121 trust {"who":"adaeze_nwosu","delta":2,"reason":"ran into each other out there"}
+    tele: d121 trust {"who":"adaeze_nwosu","delta":4,"reason":"walked out to visit them"}
+--- ARMED ---
+WALL: s94909 150d nat=false win=false wave=3 deaths=11 | s94910 150d nat=false win=false wave=3 deaths=3 | s94911 150d nat=false win=false wave=2 deaths=0 | s94912 150d nat=false win=false wave=3 deaths=9 | s94913 150d nat=false win=false wave=2 deaths=6 | s94914 150d nat=false win=false wave=3 deaths=5 | s94915 150d nat=false win=false wave=4 deaths=14 | s94916 125d nat=false win=false wave=4 deaths=16 | s94917 150d nat=false win=false wave=3 deaths=16 | s94918 150d nat=false win=false wave=3 deaths=11 | s94919 150d nat=false win=false wave=4 deaths=17 | s94920 150d nat=false win=false wave=4 deaths=3 | s94921 150d nat=false win=false wave=3 deaths=25 | s94922 137d nat=false win=false wave=3 deaths=20 | s94923 150d nat=false win=false wave=4 deaths=18 | s94924 150d nat=false win=false wave=4 deaths=7
+WALL SUMMARY: median survival 150d max 150d national 0/16 wins 0/16 wave w1=16 w2=16 w3=14 w4=6 w5=0
+DEATH-CAUSE SHARES (pooled): the arena=82 monster=34 sickness=17 contest=10 ambush=7 a wound that wouldn't close=7 dehydration=5 starvation=5 combat=4 a toad like a war drum, throat s=2 the night=2 alien=2 the static kite=1 loud-eyes=1 speedbump=1 extended warranty=1
+MEALS: away 5585/5590 (0.999) haven 13010/13137 (0.990)
+DRAW DAYS: 1230 self-fed away 4360 pack rows 1235 without-draw-day 5 draw-days-without-packMeal-row 0 take-vs-drawn mismatches 0
+DRAW_DAY_COVERAGE=1230/1230 (1.000)
+BINDING DAYS (dawn pack < dayWant, draw days only): n=282 (22.9% of draw days)
+BINDING COVERAGE (drawn/dayWant): n=282 median=1.000 mean=0.993 q1=1.000 q3=1.000 share==1.0=0.989 min=0.231 max=1.000
+BINDING PACK/NEED (diagnostic): n=282 median=0.371 q1=0.313 q3=0.428 median dawn pack=800 median dayWant=1098.9983339146152
+STREAKS: per-villager max median=0 global max=1 villagers=266
+STARVATION DEATHS (villagers): n=4 full-pantry-away n=0 preceded by >=3 inadequate away days: 0
+  s94916 d125 Franco (app_mgpspi0j335) class=A sub=away-at-death pantry=0kcal fresh=0d awayAtDeath=true trailing=1 sinceAdequate=1
+    quote[say]: d125 Franco is showing Adriana how to tie a snare. Hands patient. It takes three tries.
+  s94917 d35 Aroha (aroha_ngata) class=C sub=not-away-at-death pantry=0kcal fresh=0d awayAtDeath=false trailing=0 sinceAdequate=3
+    quote[say]: d35 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+  s94921 d145 Virgínia (visjoin_126) class=A sub=away-at-death pantry=0kcal fresh=0d awayAtDeath=true trailing=1 sinceAdequate=1
+    quote[say]: d145 Kristina is staring into the fire like it owes them answers.
+  s94922 d37 Sam (sam_wilson) class=A sub=away-at-death pantry=0kcal fresh=0d awayAtDeath=true trailing=1 sinceAdequate=1
+    quote[say]: d37 ⚠ STARVING: health and energy falling. The spiral has started.
+SENSE WINDOWS (ARMED starvation deaths):
+  --- s94916 d125 Franco trailing=1 ---
+    say: d125 Ants march past your boot, laden. You follow them to a seep. +1L water (risky). (ant_trail)
+    say: d125 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d125 ⚠ DEHYDRATED: find and treat water today.
+    say: d125 No food in the pantry. The village is hungry.
+    say: d125 🩹 You make rounds — Adriana gets bound up properly. (61 → 76 HP)
+    say: d125 Franco is showing Adriana how to tie a snare. Hands patient. It takes three tries.
+    say: d125 Adriana traded something with someone for something else. The barter economy stirs.
+    say: d125 Adriana came back with 400 kcal of something edible. The pantry breathes.
+    tele: d124 villager_level_up {"vid":"app_mgpspi5y306","track":"field","level":1,"pick":"echo_location","replaced":null,"offers":["lucky_rock","echo_location","dowsing"]}
+    tele: d124 trust {"who":"app_mgpspi5y306","delta":1,"reason":"worked the garden"}
+    tele: d124 show_aired {"id":"shelter_swap","who":"app_mgpspi5y306","why":"fresh"}
+    tele: d125 trust {"who":"app_mgpspi5y306","delta":1,"reason":"worked the garden"}
+    tele: d125 forage {"tile":"forest_floor","epithet":"forest floor","plants":["sunchoke"],"cells":1,"kcal":800,"cost":60}
+    tele: d125 death {"kind":"monster","who":"mirrormoth","cause":"villager combat","wave":1,"player":false}
+    tele: d125 trust {"who":"app_mgpspi0j335","delta":3,"reason":"stood down a monster for the village"}
+    tele: d125 eat {"ateKcal":800,"spoiled":0}
+  --- s94917 d35 Aroha trailing=0 ---
+    say: d35 ◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)
+    say: d35 🧳 A traveler passed through yesterday, talking about a village to the northeast called The Red Table II. The region is bigger than your fire.
+    say: d35 They waited three days at the edge of your fire. Nobody called the moot. Darius nods — not angry, just done — and they walk.
+    say: d35 Word later: they walked to The Red Table II. Another fire in the world, whether you wanted it or not.
+    say: d35 Word will travel: Haven is clean hands. (Opinion +2 with every village that knows you.)
+    say: d35 A lean scout waits a while, then moves on down the road. Word travels about that, too.
+    say: d35 ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+    say: d35 You camp wild tonight — no pantry meal. Eat from your pack.
+    tele: d35 trust {"who":"mateo_alvarez","delta":1,"reason":"foraged the wilds for the village"}
+    tele: d35 eat {"ateKcal":500,"spoiled":0}
+    tele: d35 eat {"ateKcal":42,"spoiled":0}
+    tele: d35 forage {"tile":"meadow","epithet":"open meadow","plants":["goldenrod"],"cells":1,"kcal":0,"cost":60}
+    tele: d35 trust {"who":"nora_wilson","delta":1,"reason":"stood down a monster and walked home"}
+    tele: d35 combat_start {"vs":"sunback","wave":1,"pack":1,"php":100,"maxhp":100}
+    tele: d35 death {"kind":"monster","who":"sunback","cause":"combat","wave":1,"player":false}
+    tele: d35 combat_end {"result":"won","php":100}
+  --- s94921 d145 Virgínia trailing=1 ---
+    say: d145 Kristina is staring into the fire like it owes them answers.
+    say: d145 Kristina spends the afternoon with the tree with lobed leaves and oval nuts in scaly caps — look, smell, the smallest taste, then waiting. Raw, it knots the stomach. Cook
+    say: d145 From the lumped bag: White Oak Acorns — named, and out.
+    say: d145 ★ IDENTIFIED: White Oak Acorns. White oak acorn. Lobed leaves, sweet acorns. Uses unknown — harvest, taste, and learn.
+    say: d145 💡 You see it again in your mind: a tree with lobed leaves and oval nuts in scaly caps. Kristina's words land on the memory like a label. White Oak Acorns. Of course.
+    say: d145 SYSTEM: Oh! It has a NAME. You all love names.
+    say: d145 The Codex notes it: White Oak Acorns — cook it, or else. (Kristina tested it.)
+    say: d145 Kristina came back with 341 kcal of something edible. The pantry breathes.
+    tele: d145 ability_used {"id":"green_whisper","action":"cultivate","ok":true}
+    tele: d145 loot_taken {"id":"alien_tick_trophy_0","alien":false}
+    tele: d145 loot_taken {"id":"alien_tick_trophy_1","alien":false}
+    tele: d145 counter_discovered {"id":"glasswing","via":"taught"}
+    tele: d145 trust {"who":"visjoin_126","delta":1,"reason":"worked the creek for fish"}
+    tele: d145 trust {"who":"visjoin_107","delta":1,"reason":"worked the creek for fish"}
+    tele: d145 integrate {"amount":2,"reason":"monster named","total":100}
+    tele: d145 integrate {"amount":3,"reason":"discovery","total":100}
+  --- s94922 d37 Sam trailing=1 ---
+    say: d37 You catch fragments by the fire — Nora telling Miguel about Candela. The story's getting bigger than what happened.
+    say: d37 🥣 Darius of Emberhold walks into your firelight alone, thinner than you remember. "Our jars are empty," they say. No preamble. "I'm asking for food."
+    say: d37 ⚠ STARVING: health and energy falling. The spiral has started.
+    say: d37 Village meal: +2616 kcal, +1L water from the communal pantry.
+    say: d37 🩹 You make rounds — Nora gets bound up properly. (34 → 49 HP)
+    say: d37 The fire is quiet today. Nobody's talking much.
+    say: d37 Marcus traded something with someone for something else. The barter economy stirs.
+    say: d37 Nora traded something with someone for something else. The barter economy stirs.
+    tele: d37 trust {"who":"dmitri_sokolov","delta":1,"reason":"heading out together"}
+    tele: d37 trust {"who":"dmitri_sokolov","delta":1,"reason":"ran into each other out there"}
+    tele: d37 trust {"who":"marcus_webb","delta":1,"reason":"foraged the wilds for the village"}
+    tele: d37 trust {"who":"gen_kq5mj64","delta":1,"reason":"worked the creek for fish"}
+    tele: d37 trust {"who":"dmitri_sokolov","delta":1,"reason":"worked the creek for fish"}
+    tele: d37 trust {"who":"sam_wilson","delta":1,"reason":"kept the haven fed"}
+    tele: d37 trust {"who":"sam_wilson","delta":2,"reason":"kept the haven work going"}
+    tele: d37 contest_fired {"id":"echo"}
+SWEEP-COMPARE (baseline vs armed, identical starting seeds, distributional only):
+  binding-day coverage median: 0.772 (n=191) -> 1.000 (n=282) bar >= 0.90
+  binding-day coverage mean: 0.747 -> 0.993
+  binding share==1.0: 0.000 -> 0.989
+  binding pack/need median (diagnostic): 0.381 -> 0.371
+  draw-day capture: 1.000 -> 1.000 (bar == 1.000)
+  median survival: 150d -> 150d (ratio 1.000, bar >= 0.8)
+  full-pantry away starvation deaths: 4 -> 0 (bar <= baseline+2)
+  armed-only death causes: the static kite=1 loud-eyes=1 alien=2 speedbump=1 extended warranty=1 (blockers >=3 deaths: none)
+  wall national: 0/16 -> 0/16 wins: 0/16 -> 0/16 wave4: 6/16 -> 6/16 wave5: 0/16 -> 0/16 (reported, not judged)
+VERDICT: GO (armedMedianBindingCov=1.000>=0.90:true armedBindingN=282>=30:true seedsComplete:true capture=1.000/1.000==1.000:true survivalRatio=1.000>=0.8:true fpAwayStarv 0<=6:true armedOnlyBlockers=0==0:true)
+END REPORT
