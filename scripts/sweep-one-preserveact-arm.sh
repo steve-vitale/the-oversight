@@ -38,10 +38,14 @@ RUNDIR="$WT/bisect-scratch/$ARM"
 rm -rf "$RUNDIR"; mkdir -p "$RUNDIR"
 (cd "$WT" && git archive HEAD | tar -x -C "$RUNDIR") || { echo "EXTRACT FAIL LOUDLY $ARM $BASE"; exit 2; }
 if [ "$ARM" = "off" ]; then
-  # (1) The patch must name exactly one file, src/js/food.js.
-  NHDR=$(grep -c "^diff --git" "$WT/scripts/preserveact-off.patch" || true)
-  [ "$NHDR" = "1" ] || { echo "PATCH SHAPE FAIL LOUDLY: expected 1 diff header, got $NHDR"; exit 2; }
-  grep -q "^diff --git a/src/js/food.js b/src/js/food.js" "$WT/scripts/preserveact-off.patch" || { echo "PATCH SHAPE FAIL LOUDLY: patch does not target src/js/food.js"; exit 2; }
+  # (1) The patch must name exactly one file, src/js/food.js. NOTE: the
+  # patch is plain `diff -u` output, NOT git-style, so it carries
+  # ---/+++ file headers and no "diff --git" header — count those.
+  NHDR=$(grep -c "^--- " "$WT/scripts/preserveact-off.patch" || true)
+  NHDR2=$(grep -c "^+++ " "$WT/scripts/preserveact-off.patch" || true)
+  [ "$NHDR" = "1" ] && [ "$NHDR2" = "1" ] || { echo "PATCH SHAPE FAIL LOUDLY: expected 1 file header pair, got $NHDR/$NHDR2"; exit 2; }
+  grep -q "^--- a/src/js/food.js" "$WT/scripts/preserveact-off.patch" || { echo "PATCH SHAPE FAIL LOUDLY: patch does not target src/js/food.js"; exit 2; }
+  grep -q "^+++ b/src/js/food.js" "$WT/scripts/preserveact-off.patch" || { echo "PATCH SHAPE FAIL LOUDLY: patch does not target src/js/food.js"; exit 2; }
   # (2) Apply; (3) reverse-check proves food.js is in the post-patch state.
   (cd "$RUNDIR" && git apply --check "$WT/scripts/preserveact-off.patch" && git apply "$WT/scripts/preserveact-off.patch" && git apply --check --reverse "$WT/scripts/preserveact-off.patch") || { echo "OFF PATCH FAIL LOUDLY"; exit 2; }
   echo "tree verified: OFF differs from ON only in src/js/food.js (single-file patch + reverse-check)"

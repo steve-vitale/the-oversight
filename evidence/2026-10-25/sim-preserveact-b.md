@@ -282,7 +282,10 @@ is ~2.1GB (the evidence tree), and the diff ran 10+ minutes I/O-bound
 while thrashing the disk, with zero sweep configs run. The runner was
 killed, the scratch trees deleted, and the verification replaced with
 the equivalent cheap proof: (1) the patch names exactly one file
-(src/js/food.js, header count checked); (2) git apply --check +
+(src/js/food.js, ---/+++ header pair count checked — the patch is
+plain diff -u output, not git-style, so it carries no "diff --git"
+header; the first version of the check looked for one and failed
+loudly on a good patch, before any sim ran); (2) git apply --check +
 git apply succeed, so the OFF tree is archive(HEAD) plus that patch
 and nothing else; (3) git apply --check --reverse succeeds
 afterwards, proving the tree's food.js is exactly in the post-patch
