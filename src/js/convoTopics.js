@@ -229,10 +229,12 @@
         out.push({ id: 'ask:' + def.id, label: this.topic2Label(vid, def.id), _t2: def.id });
       }
       // Priority: live events first, then fresh topics, then the rest.
+      // (r51: a changed 'others' sorts as fresh, not discussed.)
       const said = c.said || {};
+      const fresh = (t) => (typeof this.t2topicFresh === 'function') ? this.t2topicFresh(vid, t) : !(said['t2:' + t] || []).length;
       out.sort((a, b) => {
-        const pa = a._t2 === 'lately' ? 0 : ((said['t2:' + a._t2] || []).length ? 2 : 1);
-        const pb = b._t2 === 'lately' ? 0 : ((said['t2:' + b._t2] || []).length ? 2 : 1);
+        const pa = a._t2 === 'lately' ? 0 : (fresh(a._t2) ? 1 : 2);
+        const pb = b._t2 === 'lately' ? 0 : (fresh(b._t2) ? 1 : 2);
         return pa - pb;
       });
       return out.map(({ _t2, ...rest }) => rest);
@@ -903,11 +905,46 @@
       } catch (e) {}
       return { id: roster[Math.floor(Math.random() * roster.length)], why: 'neutral' };
     },
+    // OTHERS RE-OFFER (journey-social r51 2026-10-24): a spent 'others'
+    // counts fresh again when its pick CHANGED — new person or new why —
+    // because the read is dynamic (deepest bond, newest grievance), so
+    // "discussed once" is the wrong freshness key. Neutral random picks
+    // are noise, not news, and never re-open the topic. Legacy servings
+    // (said, but no t2otherServed recorded) stay one-shot: safe default.
+    t2othersChanged(vid) {
+      try {
+        const c = this.convoGet(vid);
+        const last = c && c.t2otherServed;
+        if (!last) return false;
+        // menuCheck marker: this call READS the pick for menu-building, it
+        // is not a serving. Instrumentation wrapping t2pickOther must skip
+        // marker calls, or menu checks pollute serving counts (the r50
+        // driver's wrap assumed call == serving — true until this fix).
+        const pick = this.t2pickOther(vid, { menuCheck: true });
+        if (!pick || pick.why === 'neutral') return false;
+        return pick.id !== last.id || pick.why !== last.why;
+      } catch (e) { return false; }
+    },
+    // Freshness for menu ordering: never-discussed, 'lately' (live
+    // events), or 'others' whose pick changed since it was last served.
+    t2topicFresh(vid, tid) {
+      if (tid === 'lately') return true;
+      const c = this.convoGet(vid);
+      const said = (c && c.said) || {};
+      if (!(said['t2:' + tid] || []).length) return true;
+      if (tid === 'others') return this.t2othersChanged(vid);
+      return false;
+    },
     t2gen_others(vid) {
       const pick = this.t2pickOther(vid);
       if (!pick) return ['"It\'s just us, really. The others are... elsewhere."'];
       const c = this.convoGet(vid);
       c.t2other = pick.id;
+      // OTHERS RE-OFFER (journey-social r51 2026-10-24): remember the LAST
+      // SERVED pick (person + why) on the persistent convo state — never
+      // reset at startConvo, so a later menu can tell whether the pick
+      // CHANGED. The served pick is the freshness key for re-offers.
+      c.t2otherServed = { id: pick.id, why: pick.why };
       // firstRef (dialogue rethink, Steve 2026-10-07): displayName is
       // knowledge-gated — split(' ')[0] on "A person, maybe 30s" produced the
       // broken bare "A". firstRef never collapses to "A" (game.js).

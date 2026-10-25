@@ -4618,8 +4618,11 @@
       // both the subject menu and the opener below).
       const t2said = (this.convoGet(vid).said || {});
       const t2list = this.topic2Asks ? this.topic2Asks(vid) : [];
-      const t2fresh = t2list.filter(a => { const tid = a.id.slice(4); return tid === 'lately' || !(t2said['t2:' + tid] || []).length; });
-      const t2discussed = t2list.filter(a => { const tid = a.id.slice(4); return tid !== 'lately' && (t2said['t2:' + tid] || []).length; });
+      // (r51 re-offer: a changed 'others' is fresh; it must leave the
+      // discussed list too, or the main menu would offer it twice.)
+      const t2FreshFn = (tid) => (typeof this.t2topicFresh === 'function') ? this.t2topicFresh(vid, tid) : (tid === 'lately' || !(t2said['t2:' + tid] || []).length);
+      const t2fresh = t2list.filter(a => t2FreshFn(a.id.slice(4)));
+      const t2discussed = t2list.filter(a => { const tid = a.id.slice(4); return tid !== 'lately' && (t2said['t2:' + tid] || []).length && !t2FreshFn(tid); });
       const freshCap = topicCapMood <= 2 ? 1 : 2;
 
       // SUBJECT MENU (Steve 2026-10-06): after "can I ask you something
