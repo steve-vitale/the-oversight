@@ -144,12 +144,19 @@ are not traces and are reported separately below):
   haul by construction. What remains unproven for this class
   is only an instance recorded by the haulinvert recorder
   itself (invHaul flag) — the pilot watches for one.
-  Corroboration (not traces): spoilage narration in 6
+  Corroboration (not traces): spoilage narration in 8
   pitstaff/w5gate/awayvoice files ("The village threw out
   spoiled stores: Foraged food, Expedition meat, Expedition
   haul...") proves Expedition meat items sat in pantries
   long enough to spoil — the deposit story, not a deposit
-  event.
+  event. Aggregate label totals in 4 more files prove the
+  same deposits happened without dating them: contestgrant
+  after/before-lead.json (influx Expedition meat 70 and 75;
+  pantry-by-label total 700), rotdiff lead.json (writeNames
+  total 1050), draworder leadfeast-armed.json (writeNames
+  totals 75 and 1050). Transcript narration (social
+  r15–r20 and endgame r21–r51 .txt transcripts) mentions
+  Expedition meat in passing — narration, not a trace.
 - Buried cache: ZERO deposit traces. 13 mentions across 7
   JSON files, all corroboration, none a deposit event:
   spoilage narration (journey-social-life-r6-30303.json:
@@ -161,6 +168,10 @@ are not traces and are reported separately below):
   prove a Buried cache item reached a pantry in scripted
   replay runs — but no recorder ever captured its deposit
   event, and no haulinvert/haulcount trace contains it.
+  Transcript narration adds more of the same kind of
+  corroboration (Buried cache spoken of in social r15–r20
+  and endgame r39–r51 .txt transcripts) — still narration,
+  still not a deposit event.
 - Genesis fruit: ZERO traces, ZERO mentions in all 23,286
   JSON files. No deposit event, no pantry item, no narration
   line anywhere in the committed corpora. (Outside JSON,
