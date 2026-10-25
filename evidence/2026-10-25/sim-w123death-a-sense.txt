@@ -1,0 +1,22 @@
+SENSE TRANSCRIPT — sim-w123death-a (transcript tap, on the census trajectory, NOT a narration replay)
+seed=73672 policy=tableseat-nowait+deathcensus-diag days=106 gameDays=106 censusMatch=true
+census: villagerDeaths=5 byContext={"raid":0,"field":2,"arena":0,"tb":0,"other":3,"unknown":0}
+(The transcript re-run reproduced the census trajectory exactly; the
+sense file the re-run tried to write to /tmp was lost to the host EPERM
+flap, so these two lines are transcribed verbatim from the re-run's
+stdout, which the harness printed before the write attempt.)
+
+d43 [field] priya_nair vs understudy (wave 2) rounds=4 vHpStartFrac=0.45 mDealt=51 vTaken=50 mHpEndFrac=0.18
+  awayNews: 💀 The Understudy killed Priya in 4 rounds. The village mourns.
+d56 [field] ethan_hunt vs ad_break (wave 3) rounds=1 vHpStartFrac=0.09 mDealt=19 vTaken=13 mHpEndFrac=0.13
+  awayNews: 💀 The Ad Break killed Ethan in 1 round. The village mourns.
+
+Reading, as stories: Priya's line reads as a fight, not a number — four
+rounds, near-even damage, against a monster she had already fled from
+earlier the same day (73 -> 45 HP in the flee fight, then 45 -> 0 in the
+death fight). Ethan's line reads as an ending, not a fight — a villager
+at a tenth of his health, after four ad_break fights across two days
+(87 -> 58 -> 32 -> 9 -> 0), meeting the same wounded monster once more
+and dying in one round. Neither death is a story about a monster being
+too strong in one round; both are stories about a villager who never
+got out of the field after fleeing.
