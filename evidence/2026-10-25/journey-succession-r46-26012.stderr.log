@@ -1,0 +1,26 @@
+
+ORGANIC DEATH d8: Amara -> Dorothy, topTrust=[{"id":"Carmen","t":40},{"id":"Chester","t":34},{"id":"Devon","t":27},{"id":"Dorothy","t":24}]
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d8 (organic (phase A)): Amara -> Dorothy | passed=true lin=true mo=true trust=24 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Carmen (refused=false)
+  CONVO d+3 with Chester (refused=false)
+  CONVO d+7 with Carmen (refused=false)
+  CONVO d+7 with Chester (refused=false)
+  CONVO d+14 with Chester (refused=false)
+  CONVO d+14 with Ignacio (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=23 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+SUCCESSOR-LIFE: dayAdv=22 signals={"levelUp":true,"systemVoice":41,"offerLines":16,"codexPlantsDelta":7,"codexSkillsDelta":6,"codexAbilitiesDelta":10,"xpDelta":42,"any":true} pantry 21650->0
+TRUST-DIALS: office 24->32 (+8, climb) | villageMean 22.1->54.5 (+32.4, climb) | ge60 0->2 | movers>=5: [{"id":"Chester","from":34,"to":90,"delta":56},{"id":"Ignacio","from":24,"to":61,"delta":37},{"id":"Boris","from":17,"to":50,"delta":33},{"id":"Vasyl","from":18,"to":45,"delta":27},{"id":"Ella","from":12,"to":34,"delta":22},{"id":"Devon","from":27,"to":47,"delta":20}]
+DEED-LEDGER: calls=6 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=30 alive=6 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=22
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=true(deedCalls=6) trustVerdict={"readable":true,"officeMantle":24,"officeLast":32,"officeDelta":8,"officeClass":"climb","villageMantle":22.1,"villageLast":54.5,"villageDelta":32.4,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":2,"movers":[{"id":"Chester","from":34,"to":90,"delta":56},{"id":"Ignacio","from":24,"to":61,"delta":37},{"id":"Boris","from":17,"to":50,"delta":33},{"id":"Vasyl","from":18,"to":45,"delta":27},{"id":"Ella","from":12,"to":34,"delta":22},{"id":"Devon","from":27,"to":47,"delta":20}]}
+E6/CALLCHECK: e6={"callMoves":2,"withCensus":2,"chainHandoffs":1,"trustMoves":1} callCheck={"dailyMoveDays":2,"callMoveDays":2,"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":24,"moves":2}

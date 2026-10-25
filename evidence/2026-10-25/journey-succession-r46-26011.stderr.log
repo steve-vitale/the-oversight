@@ -1,0 +1,28 @@
+
+ORGANIC DEATH d9: Riley -> Abigail, topTrust=[{"id":"Alejandra","t":30},{"id":"Sofia","t":27},{"id":"Terrence","t":26},{"id":"Aria","t":26}]
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d9 (organic (phase A)): Riley -> Abigail | passed=true lin=true mo=true trust=24 vouchers=0
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Terrence (refused=false)
+  CONVO d+3 with Alejandra (refused=false)
+  CONVO d+7 with Terrence (refused=false)
+  CONVO d+7 with Alejandra (refused=false)
+  CONVO d+14 with Terrence (refused=false)
+  CONVO d+14 with Alejandra (refused=false)
+  CONVO d+30 with Terrence (refused=false)
+  CONVO d+30 with Wei (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=30 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+SUCCESSOR-LIFE: dayAdv=30 signals={"levelUp":true,"systemVoice":39,"offerLines":28,"codexPlantsDelta":14,"codexSkillsDelta":4,"codexAbilitiesDelta":10,"xpDelta":28,"any":true} pantry 27950->15114
+TRUST-DIALS: office 24->61 (+37, climb) | villageMean 22.9->70.6 (+47.7, climb) | ge60 0->6 | movers>=5: [{"id":"Wei","from":21,"to":90,"delta":69},{"id":"Hye-yoon","from":16,"to":84,"delta":68},{"id":"Theo","from":18,"to":85,"delta":67},{"id":"Terrence","from":26,"to":90,"delta":64},{"id":"Sofia","from":27,"to":68,"delta":41},{"id":"Ivy","from":24,"to":63,"delta":39},{"id":"Vasyl","from":19,"to":56,"delta":37},{"id":"Sam","from":22,"to":48,"delta":26},{"id":"Aria","from":26,"to":51,"delta":25}]
+DEED-LEDGER: calls=18 summary={"teachPlant":{"calls":13,"ok":13,"deltaSum":0,"deltaN":13,"positive":0,"meanDelta":0},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=39 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=30
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+30) t2=true(deedCalls=18) trustVerdict={"readable":true,"officeMantle":24,"officeLast":61,"officeDelta":37,"officeClass":"climb","villageMantle":22.9,"villageLast":70.6,"villageDelta":47.7,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":6,"movers":[{"id":"Wei","from":21,"to":90,"delta":69},{"id":"Hye-yoon","from":16,"to":84,"delta":68},{"id":"Theo","from":18,"to":85,"delta":67},{"id":"Terrence","from":26,"to":90,"delta":64},{"id":"Sofia","from":27,"to":68,"delta":41},{"id":"Ivy","from":24,"to":63,"delta":39},{"id":"Vasyl","from":19,"to":56,"delta":37},{"id":"Sam","from":22,"to":48,"delta":26},{"id":"Aria","from":26,"to":51,"delta":25}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":1,"trustMoves":2} callCheck={"dailyMoveDays":3,"callMoveDays":2,"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=2, excludedLoot=1))
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":31,"moves":3}
