@@ -1,0 +1,138 @@
+diff --git a/src/js/fieldFights.js b/src/js/fieldFights.js
+index d5e6f1f0e..d2ae94ae1 100644
+--- a/src/js/fieldFights.js
++++ b/src/js/fieldFights.js
+@@ -485,6 +485,7 @@
+         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
+         allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
+         everWinning: false, everHopeless: false, minHpFrac: 1,
++        oneShotCapFires: 0, oneShotCapped: 0, boughtStrikeFires: 0, boughtStrikeBonus: 0,
+       };
+       // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
+       // It's much less risky to learn about a monster (observe, track,
+@@ -522,6 +523,31 @@
+       var vHpStart = vHp;
+       var vBeamTaken = 0; // landed light, after all defenses; not raw attack damage
+       if (vHp > vHpMax) vHpMax = vHp;
++      // BOUGHTSTRIKE (sim-boughtstrike-a 2026-10-25, scale-onramp): the
++      // second half of the 0730Z next blank (1) — a companion with a
++      // SPENDABLE bought round, as an alternative to the sibling flee arm.
++      // Two parts, one flag: (a) the oneshotcap one-shot cap — a single
++      // round's damage to the villager is capped below half max HP, so a
++      // healthy villager cannot be flattened in one round; (b) the bought
++      // round is spent striking back — the villager's next attack, in
++      // round 2 only, deals 2x damage. No other change: a villager who
++      // still dies in round 2 dies, measured, not hidden.
++      // SCOPE (flag-gated, fieldguard pattern): fires ONLY when the
++      // caller passes opts.boughtStrike — the wild-encounter router
++      // (non-raid, non-aid) and expedition meetings. Raid (opts.raid),
++      // arena (opts.noFlee), contest, aid, sortie, alien, patrol, and
++      // tb routes never carry the flag, and the defense-in-depth checks
++      // below would refuse them anyway. Wave-4+ only (the 0644Z
++      // one-shots are all wave-4; wave-1/2/3 are NOT softened). The
++      // scholar (vid === villagerId) is never guarded: player fights
++      // are the player's own. The cap sits at the single villager
++      // damage-application point, AFTER armor, worn avoidance, and
++      // ability reductions, and accumulates across pack members within
++      // the round (abRoundTaken) — it trims a round's damage, it never
++      // replaces a fight with a roll.
++      var bsActive = !!opts.boughtStrike && !opts.raid && !opts.noFlee && vid !== this.villagerId && wave >= 4;
++      var bsBudget = Math.floor((vHpMax - 1) / 2); // 100 max HP -> 49
++      var bsBoost = false; // armed by a round-1 cap, spent by a round-2 strike, then gone
+       // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat 3 was
+       // a lie — villagers move at different paces. villagerSpeed derives
+       // initiative from age, wounds, and temperament (2..4), on the same
+@@ -856,6 +882,10 @@
+       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
+         rec.rounds = round;
+         abRoundTaken = 0;
++        // BOUGHTSTRIKE expiry: an unspent round-2 boost dies here — a
++        // villager who healed, aimed, or worked a trick in round 2
++        // instead of striking does not carry the boost into round 3.
++        if (round > 2) bsBoost = false;
+         // ABILITY — HAYMAKER (throw_haymaker): every 3rd round the villager
+         // winds up — the strike below lands double, but the windup leaves
+         // them open (the monster's hits land +2 this round). The telegraph
+@@ -1095,6 +1125,24 @@
+                   total = Math.max(1, Math.round(total * 0.75));
+                   if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
+                 }
++                // BOUGHTSTRIKE cap: a single round's damage to the
++                // villager is capped below half max HP. Applied AFTER
++                // every reduction above, on the round's running total
++                // (abRoundTaken) — a pack's second blow in the same
++                // round spends the same budget, it does not get a fresh
++                // one. A round-1 cap arms the round-2 strike-back
++                // (bsBoost); a cap in any later round arms nothing —
++                // the boost is round 2 only. The cap line is narrated
++                // in the fight log before the hit line lands, so the
++                // save is never silent.
++                if (bsActive && total > 0 && abRoundTaken + total > bsBudget) {
++                  var _bsPre = total;
++                  total = Math.max(0, bsBudget - abRoundTaken);
++                  rec.oneShotCapFires++;
++                  rec.oneShotCapped += (_bsPre - total);
++                  rec.log.push('R' + round + ': ' + rAtkName + "'s blow would have taken " + _bsPre + " — but no single round takes half a villager's health in the wild. Capped to " + total + '. (One-shot cap)');
++                  if (round === 1) bsBoost = true;
++                }
+                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
+                 vBeamTaken += Math.max(0, Math.min(total, Math.round(total * beamShare)));
+                 if (_wardVia && allyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === allyVid))
+@@ -1396,6 +1444,24 @@
+               try { (rec.actionKinds || (rec.actionKinds = [])).push('strike'); } catch (e) {}
+               rec.strikesThrown = (rec.strikesThrown | 0) + 1;
+               if (gpF) { try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } }
++              // BOUGHTSTRIKE spend: a round-1 cap bought this round, and
++              // the villager spends it striking back — the round-2
++              // strike, and only the round-2 strike, deals 2x damage.
++              // Applies to the villager's own strike only (never the
++              // ally's), only when there is a real strike to double
++              // (vd > 0 — a mirage miss or a cut swing spends nothing),
++              // and only once: the flag clears whether or not the
++              // strike lands, and any unspent boost dies at round 3
++              // (cleared at the top of the round loop below).
++              if (bsBoost && round === 2 && vd > 0) {
++                var _bsBase = vd;
++                vd = vd * 2;
++                rec.boughtStrikeFires++;
++                rec.boughtStrikeBonus += (vd - _bsBase);
++                abNote += ' (bought round — strike back x2)';
++                rec.log.push('R' + round + ': ' + vName + ' strikes back twice as hard — the bought round, spent.');
++              }
++              if (bsBoost && round === 2) bsBoost = false;
+               lead.hp -= vd; rec.mDealt += vd;
+               if (lead.hp <= 0) lead.alive = false;
+               rec.log.push('R' + round + ': ' + vName + ' strikes for ' + vd + abNote + ' (' + Math.max(0, lead.hp) + ' left)');
+diff --git a/src/js/game.js b/src/js/game.js
+index ecadca554..205523885 100644
+--- a/src/js/game.js
++++ b/src/js/game.js
+@@ -19554,7 +19554,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       // through aidFight, allies at the door in the fight from round one.
+       let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
++      // BOUGHTSTRIKE (sim-boughtstrike-a): the wild-encounter router
++      // passes the flag ONLY on the non-raid, non-aid field path. Raid
++      // defenders (opts.raid) and aid-crisis fights take the other
++      // branches and never carry the flag, so raid defense is untouched
++      // (wAidTried remembers an aid attempt even if aidFight returned
++      // null, so the fallback fieldFight stays unflagged too).
++      const wAidTried = wViaAid;
++      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids, boughtStrike: (!opts.raid && !wAidTried) }); }
+       const summary = this.fieldFightSummary(rec, name, mName);
+       if (rec.outcome === 'alreadyDead') {
+         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
+diff --git a/src/js/villager-agency.js b/src/js/villager-agency.js
+index 8afd2956e..aa655ee35 100644
+--- a/src/js/villager-agency.js
++++ b/src/js/villager-agency.js
+@@ -366,7 +366,7 @@
+       // don't. The depth probe measured calledHelp 0/531 before this.
+       var allyVids = [];
+       try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
+-      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids });
++      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids, boughtStrike: true });
+       // The village hears about a rescue — gossip fodder, honestly sourced.
+       // "Mara ran into the treeline when she heard James scream."
+       if (rec.calledHelp && rec.allyVid) {
