@@ -708,6 +708,26 @@ function scoreTableOption(Game, o, T) {
 // CAPABLE_GREEDY_RECKLESS=1 drops the strength checks (waits to the cap or
 // the horizon): the pure cost of Overtime. Off by default: the tuning
 // dashboard measures the plain bot.
+// VETGUARD (CAPABLE_VETGUARD=1, journey-endgame r49, lane B 2026-10-24):
+// r46/r47/r48's law of the leg: the veterans bar demands LIVING killers,
+// and the endgame's own arena/combat mortality eats them during the
+// deferral window (Camila d90 contest, Aria, Adel d103 arena — three
+// evaporations in three runs). A player holding a living veteran stops
+// risking them: once waveCombatReadiness(5) counts >= 1 living veteran,
+// greedy stops waiting and sits at once — the window is spent defending
+// the killer, not making a second one. This is a SIT rule only: it never
+// forces a wait, never overrides the other sit guards (key, tier-cap,
+// horizon, losses, roster, hp all still sit first), and it is OFF unless
+// the env gate is set, so every existing greedy road is byte-identical.
+// It does NOT stand down vetcommit's hunt (that bar wants 2 veterans);
+// the sit itself ends the hunt. The tradeoff is deliberate and named:
+// banking ONE veteran at the table vs pursuing the second for wave 5.
+function livingVeterans(Game) {
+  try {
+    const rd = (typeof Game.waveCombatReadiness === 'function') ? Game.waveCombatReadiness(5) : null;
+    return rd ? (rd.veterans | 0) : 0;
+  } catch (e) { return 0; }
+}
 function greedyWaits(Game, pv) {
   if (process.env.CAPABLE_GREEDY !== '1') return false;
   if (pv.key) return false;
@@ -720,6 +740,7 @@ function greedyWaits(Game, pv) {
   try { roster = ((Game.state.village || {}).roster || []).length; } catch (e) { roster = 0; }
   if (roster < 5) return false;
   if (hpFrac(Game) < 0.4) return false;
+  if (process.env.CAPABLE_VETGUARD === '1' && livingVeterans(Game) >= 1) return false;
   return true;
 }
 function tableRoad(Game, ctx) {
