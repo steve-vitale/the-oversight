@@ -362,7 +362,8 @@ where rot moved?"), not adjudication for this one.
 
 ### Metric review (filled after the verdict, §14 — revisions apply to the NEXT run, this verdict is NOT re-scored)
 
-- (to be filled after results)
+- See the "Metric review" subsection under RESULTS below (filled
+  after the verdict; the verdict above is NOT re-scored by it).
 
 ### Scope
 
@@ -374,4 +375,451 @@ merged locally, pending ship, by the coordinator.
 
 ## RESULTS (appended after the pre-registration above; verdict judged ONLY on the fresh 9500-9515 corpus)
 
-(to be filled after the sweep)
+### Corpus completeness
+
+- 64/64 per-seed files (16 seeds x {pd0, pd1} x {parent, commit}),
+  all parsing, all anchorCommit tags + seeds + contrast matching.
+  Analyzer exits 0; proof test in corpus mode: 33 PASS, 0 FAIL
+  (25 synthetic + 8 corpus checks: rows, fatal-empty, counts sum,
+  no ambiguous, GO computable, wall configs, haul medians, wrappers
+  present on every cell). Pilot mode earlier: 34 PASS (the extra
+  check is the pilot invHaul > 0 bar).
+- Corpus dir also holds 4 sweep summaries (one per anchor/side),
+  8 trace files (seeds 9514 + 9504, all 4 cells each, from
+  HAULCOUNT_TRACE=1 re-runs) and 4 trace sweep summaries. Trace
+  re-runs' per-seed files byte-compare to the corpus files
+  (md5-verified 8/8) — the traces are deterministic re-reads,
+  not new runs.
+- Validity preconditions all hold: 64/64 files, 16/16 seeds
+  classified, 0 ambiguous. There IS a verdict, and it is below.
+
+### DECIDING VERDICT (binding G1+G2+G3, judged ONLY on 9500-9515)
+
+- Median abs pd1: 7,380 -> 9,353 (x1.267 — the typical depri-side
+  village rotted MORE on commit, not less).
+- Median abs pd0: 33,089 -> 24,264 (x0.733 — the typical no-depri
+  village rotted LESS on commit).
+- Down-move split: genuine 0, denominator-driven 1, mixed 0.
+- G1: FAIL (9,353 > 0.95 x 7,380 = 7,011). G2: FAIL (genuine 0 <
+  denominator-driven + mixed = 1). G3: HOLD (24,264 <= 1.10 x
+  33,089 = 36,398).
+- VERDICT: **NO-GO, failed=G1,G2.** The denominator guard held
+  and the split failed cleanly — this is not a borderline call:
+  there is not one genuine down-move in the corpus, and the
+  typical depri-side village rotted 27% more, not less.
+- The structural rule fires on the only down-move: seed 9514's
+  step is denominator-driven (below), so it does NOT count as GO
+  under any reading of the header.
+
+### Diagnostics (reported, never re-scored)
+
+- Ratio medians (diagnostic only): M(parent) = 0.297,
+  M(commit) = 0.171, median step 0.574. The ratio steps DOWN on
+  this corpus — and the verdict is still NO-GO, because the GO
+  rule judges absolute rot, not the ratio. A reader who only saw
+  "ratio 0.574x" would call this a win; the absolutes refuse it.
+  That refusal is the instrument working as designed.
+- Companion word (governing=STEP supplied, diagnostic only):
+  DENOMINATOR-DRIVEN — median pd1 abs rose, same rule as
+  rotcompanion, same word as on both prior corpora. It agrees
+  with the G1 failure; it does not override the GO rule.
+- Ratio medians exclude the 6 degenerate seeds (govern
+  convention); abs medians include all 16 seeds per column
+  (companion convention). The GO rule uses abs medians only, so
+  the heavy degenerate count (6/16) cannot move the verdict —
+  but it does blind the ratio diagnostic on more than a third
+  of the corpus (see metric review).
+
+### Per-seed classification table — every seed (9500-9515)
+
+r = abs(pd1)/abs(pd0). abs = rot per 100 village-days.
+"Cells ident." = all four cells equal parent->commit.
+
+Seed | class | step | r(parent) | r(commit) | pd0 abs p->c | pd1 abs p->c | cells ident. | daysChanged
+9500 | identical | 1.000 | 1.261 | 1.261 | 9,921->9,921 | 12,512->12,512 | yes | no
+9501 | identical | 1.000 | 0.101 | 0.101 | 34,360->34,360 | 3,462->3,462 | no (depri/haul wiggle only) | no
+9502 | identical | 1.000 | 0.297 | 0.297 | 31,817->31,817 | 9,455->9,455 | yes | no
+9503 | up mild | 1.212 | 0.627 | 0.759 | 279,175->179,734 | 174,961->136,492 | no | no
+9504 | up sharp | 5.664 | 0.042 | 0.237 | 78,748->16,710 | 3,300->3,966 | no | no
+9505 | degenerate (undefined-ratio) | n/a | 1.854 | n/a | 24,258->0 | 44,966->39,522 | no | YES (pd0 99->100)
+9506 | identical | 1.000 | 0.019 | 0.019 | 94,120->94,120 | 1,751->1,751 | yes | no
+9507 | identical | 1.000 | 0.050 | 0.050 | 172,724->172,724 | 8,646->8,646 | yes | no
+9508 | degenerate (undefined-ratio) | n/a | n/a | n/a | 0->0 | 0->0 | no | YES (pd0 27->40)
+9509 | degenerate (undefined-ratio) | n/a | 16.507 | n/a | 6,413->0 | 105,853->37,011 | no | YES (both sides lived longer)
+9510 | degenerate (undefined-ratio) | n/a | n/a | n/a | 0->0 | 2,100->2,100 | yes | no
+9511 | up (up-from-zero) | n/a | 0.000 | 0.100 | 17,955->92,839 | 0->9,251 | no | no
+9512 | identical | 1.000 | 0.993 | 0.993 | 52,478->52,478 | 52,124->52,124 | yes | no
+9513 | degenerate (undefined-ratio) | n/a | 0.090 | n/a | 67,752->0 | 6,113->15,871 | no | YES (pd0 77->39, pd1 100->79)
+9514 | denominator-driven sharp | 0.240 | 0.434 | 0.104 | 67,894->402,985 | 29,474->41,924 | no | no
+9515 | degenerate (undefined-ratio) | n/a | n/a | n/a | 0->0 | 0->0 | yes | no
+
+Counts: identical 6, up 3 (1 mild, 1 sharp, 1 up-from-zero),
+degenerate 6 (all undefined-ratio by the classifier's precedence
+— see note), denominator-driven 1, genuine 0, mixed 0.
+DEGENERATE NOTE: the classifier checks undefined-ratio before
+pd1-zero-both, so seeds 9508 and 9515 (pd1 rot 0 on BOTH anchors
+AND pd0 rot 0 on an anchor) are reported as undefined-ratio;
+they would also qualify as pd1-zero-both. The reason order is
+the rotcompanion code's order, not a new judgment.
+
+### Per-seed HAUL/PRESERVE table — PRIMARY invHaul (every seed)
+
+invHaulKcal pd0 p->c | pd1 p->c ; villager resolutions pd1 p->c ;
+depri pd1 p->c. Scholar attempts/successes are 0->0 on every cell
+in this corpus (leadfeast never preserves — expected, not a
+finding); villager batches are 0->0 on every cell (tap absent at
+both anchors — pre-registered, never read as "nothing preserved").
+
+Seed | class | invHaulKcal pd0 | invHaulKcal pd1 | villRes pd1 | depri pd1
+9500 | identical | 67,470->67,470 | 107,206->107,206 | 44->44 | 88,696->88,696
+9501 | identical | 141,832->141,832 | 113,976->111,827 | 34->31 | 113,429->111,380
+9502 | identical | 94,348->94,348 | 105,019->105,019 | 29->29 | 138,900->138,900
+9503 | up | 148,252->50,785 | 338,023->291,978 | 40->39 | 411,592->418,565
+9504 | up | 213,454->123,318 | 131,371->78,098 | 46->32 | 62,192->105,575
+9505 | degenerate | 74,318->61,619 | 56,732->41,883 | 64->56 | 349,646->279,005
+9506 | identical | 34,464->34,464 | 80,092->80,092 | 38->38 | 122,894->122,894
+9507 | identical | 93,127->93,127 | 74,238->74,238 | 33->33 | 249,863->249,863
+9508 | degenerate | 31,717->58,071 | 28,339->28,339 | 0->0 | 43,914->43,914
+9509 | degenerate | 97,051->92,428 | 147,055->263,414 | 26->44 | 280,991->233,533
+9510 | degenerate | 109,981->109,981 | 145,989->145,989 | 24->24 | 168,100->168,100
+9511 | up | 201,318->91,894 | 257,542->97,629 | 24->28 | 2,360->137,762
+9512 | identical | 64,828->64,828 | 92,686->92,686 | 45->45 | 357,297->357,297
+9513 | degenerate | 52,247->49,513 | 80,041->76,891 | 39->25 | 362,863->197,456
+9514 | denominator-driven | 64,449->211,791 | 100,584->111,916 | 41->64 | 371,127->357,905
+9515 | degenerate | 187,082->187,082 | 42,122->42,122 | 0->0 | 14,137->14,137
+
+### Haul/preserve medians (diagnostic only — never overturn the verdict)
+
+- PRIMARY invHaul actions: pd0 217->211, pd1 200->200.
+  invHaul kcal: pd0 93,738->92,161, pd1 102,802->95,158.
+  The typical village hauled slightly LESS on commit, on both
+  sides — the corpus-level haul story is flat-to-down, not a
+  haul boom. The boom lives in one seed (9514), not the median.
+- Census cross-check: census haul medians are IDENTICAL to
+  invHaul medians, and census == invHaul on ALL 64 files
+  (0 mismatches, actions and kcal). The inversion's delta is
+  +0/+0 on this corpus too — same as the haulinvert pilot. The
+  code-proven new haul classes (Expedition meat, Buried cache,
+  Genesis fruit, custom haulLabels) fired in NO traced event
+  (0 predicate disagreements across all 8 traces). They remain
+  code-proven, not event-proven.
+- Scholar preserve medians: attempts 0->0, success items 0->0
+  on both sides (leadfeast policy, expected).
+- Villager resolutions medians: pd0 39->35, pd1 36->33 — the
+  typical village's cooks were credited slightly FEWER times on
+  commit. Villager batches 0->0 (tap absent, pre-registered).
+- Bucket closure holds on all 64 files (analyzer FATALs on any
+  break; none). Foreign bucket 0 on all 8 traces (no non-home
+  pieces deposit fired). Stock-excluded names are the justified
+  aid/System names; home-excluded is tribute grain throughout
+  (9514 commit pd0 alone: 13 actions / 50,600 kcal of tribute
+  grain — the deposit gap on that file is tribute, not aid).
+
+### The attribution answer (what the new columns bought)
+
+The one down-move, 9514, is now attributable instead of merely
+classified. The commit's no-depri village hauled 3.3x more food
+(64,449 -> 211,791 kcal) and rotted 5.9x more (67,894 -> 402,985
+abs; raw fresh rot 65,894 -> 381,553, fresh share 0.97 -> 0.95),
+while its depri sibling hauled slightly more (100,584 ->
+111,916) and rotted more too (29,474 -> 41,924), and its cooks
+were credited MORE on the depri side (41 -> 64 resolutions).
+The trace names the surge: Fish catch events on the no-depri
+side go 2 -> 118, Snared meat 14 -> 44, while Foraged food falls
+153 -> 110. This is a FISHING BOOM the village could not keep:
+an enormous fresh catch rotting, not a preserve collapse — the
+cooks preserved more, the village hauled far more than it could
+keep. That answers rotcompanion's open question for this seed,
+on the "hauled far more fresh food" side, with event names.
+- The mirror, 9504 (up sharp): the no-depri village's rot
+  COLLAPSED (78,748 -> 16,710) while its haul fell (213,454 ->
+  123,318) and its cooks were credited less (48 -> 35). The
+  ratio "worsened" 5.664x because the no-depri village improved
+  dramatically — a good village scored as an up-move. Ratio
+  direction is not village welfare, in either direction.
+- 9503 (up mild): both sides rotted less (pd0 279,175 ->
+  179,734; pd1 174,961 -> 136,492) and hauled less (pd0 148,252
+  -> 50,785; pd1 338,023 -> 291,978), but the no-depri side fell
+  faster, so the ratio rose. Again: a better village, an "up".
+- 9511 (up-from-zero): the parent depri village rotted NOTHING
+  while hauling 257,542 kcal and deprioritizing only 2,360 —
+  it ate or kept everything it hauled. On commit it hauled far
+  less (97,629), deprioritized 137,762, and rotted 9,251, while
+  its no-depri sibling's rot exploded (17,955 -> 92,839) and its
+  national standing fell true -> false on both sides. The
+  parent's zero-rot cell is the corpus's strangest village, and
+  it is a parent cell, not a commit effect.
+- 9509 (degenerate, hidden improvement): the ratio is undefined
+  on commit because the no-depri village's rot hit ZERO (5,579
+  -> 0, living 87 -> 100 days) — but the depri village hauled far
+  more (147,055 -> 263,414) and rotted far less (105,853 ->
+  37,011 abs; raw 95,268 -> 37,011). A genuine depri-side
+  improvement sits inside a degenerate seed, invisible to the
+  ratio. The abs columns show it; the GO rule's medians already
+  count it (it pulls the pd1 median down, not up — and the
+  median still rose, which is how decisive the rest of the
+  corpus is).
+- 9508 / 9515 (zero-rot curiosities): 9508 rotted nothing on any
+  of its four cells — villages that died at 26-40 days, before
+  food could spoil (hauled 28k-58k, deprioritized 43,914 on the
+  depri side). 9515's no-depri village lived all 100 days,
+  hauled 187,082 kcal, and rotted nothing on either anchor —
+  everything hauled was eaten or kept, with no rot to measure.
+  Neither is a capture failure (sibling seeds show large rot
+  through the same instrument); both are villages with nothing
+  to spoil or nothing left to spoil.
+- 9510 (degenerate AND untouched): every cell byte-identical
+  parent->commit (pd0: 66 days, 0 rot, 109,981 haul; pd1: 100
+  days, 2,100 rot, 145,989 haul) yet classified degenerate
+  because pd0 rot is 0 on both anchors. Untouched-ness and
+  degenerate-ness are independent properties; this seed is both.
+
+### Wall numbers (from this corpus only)
+
+- Configs 64, national 44/64 (69%), table 0/64, wins 0/64.
+  Per side: parent pd0 national 10/16, parent pd1 12/16; commit
+  pd0 national 10/16, commit pd1 12/16 — the commit moved NO
+  village across the national line in either direction.
+- Wave max: wave 4 in 24, wave 3 in 26, wave 2 in 12, wave 1 in 2;
+  no config reached wave 5. (Per-cell wave max distribution;
+  waveReach lists run 1..max.)
+- Median daysAlive 100 (the 100d horizon cap); 18 cells ended
+  early: parent pd0 9505 (99d), 9506 (95d), 9508 (27d), 9509
+  (87d), 9510 (66d), 9513 (77d); parent pd1 9502 (91d), 9508
+  (26d), 9509 (90d), 9515 (23d); commit pd0 9506 (95d), 9508
+  (40d), 9510 (66d), 9513 (39d); commit pd1 9502 (91d), 9508
+  (26d), 9513 (79d), 9515 (23d). The paired early endings on
+  both anchors (9506, 9508, 9510, 9515) show the horizon is
+  death-aware, not a fixed run length.
+- Death causes, 534 deaths: combat 234 (43.8%), sickness 83
+  (15.5%), monster 71 (13.3%), starvation 39 (7.3%), a wound that
+  wouldn't close 33 (6.2%), ambush 23, contest 14, dehydration
+  13, named monsters and oddities scattered (choir toad 6,
+  cliffhanger 2, inspiration 2, a moth the size of a dinner
+  plate 2, lockjaw 2, ugly-eyes 2, white noise 1, the loud beast
+  1, the understudy 1, alien 3, the eater 1, the landlord 1).
+  Table 0 is a construction fact (SEATDRIVE=0), not a
+  scale-wall finding — the table is unreachable by design in
+  this contrast, exactly as in leg2decide.
+
+### SENSE-TESTING: per-seed stories in plain words
+
+- 9514, the only down-move (denominator-driven). The no-depri
+  village on the commit is drowning in fish: 118 fish deposits
+  where the parent had 2, 44 snare returns, 279 hauls totalling
+  211,791 kcal — and 402,985 kcal of rot, nearly all fresh.
+  Its cooks worked (56 resolutions, same as the parent's 58)
+  and its depri sibling's cooks worked harder (41 -> 64), but
+  no cook crew keeps up with a catch that big. The village
+  also lost ground: no-depri wave 4 -> 3, depri wave 4 -> 2,
+  while staying national. The ratio calls this a step down;
+  the village would call it a glut it could not keep.
+- 9504, up sharp (the mirror). The no-depri village on the
+  parent rotted 78,748 and never reached national; on the commit
+  it rotted 16,710, reached national, and fought to wave 4 —
+  hauling less (213,454 -> 123,318) and cooking less (48 -> 35
+  resolutions). It got better by handling less food better.
+  The ratio calls this 5.664x worse because the denominator
+  collapsed. The village disagrees.
+- 9511, up-from-zero (the strange parent). The parent depri
+  village hauled 257,542 kcal — the largest haul in the corpus
+  — rotted nothing, and threw away only 2,360 to depri. It ate
+  its mountain. On the commit the same village hauled 97,629,
+  threw away 137,762, rotted 9,251, and fell out of national
+  standing on both sides while sickness deaths piled up (9 on
+  the depri side). Whatever the parent village did with its
+  mountain, the commit village does not do it.
+- 9500 / 9502 / 9506 / 9507 / 9512, identical (the untouched).
+  Five villages where the preserver widening changed literally
+  nothing in any of the four cells — same rot, same haul, same
+  lifespan, same standing, same waves. Together with 9501's
+  ratio-identical-but-wiggled cells, 6 of 16 seeds never felt
+  the change. The widening binds rarely, and when it binds it
+  binds through fish.
+- Villager behavior sample (from fields + traces, not dialogue):
+  deaths spread across combat, sickness, monster, starvation,
+  wounds, ambush, contest, dehydration, and named monsters in
+  both anchors; villages diverge in rank, wave, and lifespan in
+  ways that track their food story (9514's glut village loses
+  waves; 9504's leaner village gains national). Traces show
+  foragers, fishers, snare-keepers, and pit trappers by name
+  (Foraged food, Fish catch, Snared meat, Pit meat (Raccoon /
+  Virginia Opossum / Wild Boar / White-tailed Deer), Expedition
+  haul), homecomings unloading named plants (Blackberry,
+  Burdock, Pawpaw, Muscadine Grapes, Spicebush, Staghorn Sumac,
+  Wild Strawberry, Wood Sorrel, Wild Onion), aid arriving from
+  named villages (Thornfield, Emberhold, The Red Table), and
+  tribute grain leaving for named villages (Emberhold,
+  Stonebridge, Thornfield, The Red Table, The Hungry Road).
+  Nothing reads robotic: the same village fishes, traps, and
+  trades differently on the two anchors because its food story
+  changed, not because a script repeated. LIMIT RESTATED:
+  no dialogue, goals, or routines are captured by this
+  instrument — the behavior sample is event-level, and a
+  transcript-capture arm remains a separate instrument.
+
+### Balanced panel (§15)
+
+- ATTEMPTED, FAILED IN THE PRE-REGISTERED CLASS: `node
+  scripts/balance-panel.js compare --before <parent per-seed
+  row> --after <commit per-seed row> --out /tmp/rotdecide2-panel-attempt`
+  exits with `TypeError: Cannot read properties of undefined
+  (reading 'days')` at `scripts/lib/balance-scorecard.js
+  comparePanels` (balance-panel.js:279). The scorer expects
+  panel cases (with options/days structure from the panel
+  driver); a per-seed recorder row has no such structure, so
+  ingestion fails before any comparison is computed. No compare
+  .md was produced. FAILURE CLASS: recorder-row ingestion, as
+  pre-registered. The analyzer's paired tables in this file ARE
+  the attached sweep-compare table (§15 fallback, as in
+  leg2decide / rotragged). The tooling failure does not block
+  or re-score the verdict: NO-GO stands on the analyzer rows.
+- No panel.json.gz exists for either anchor (the panel driver
+  runs sweep-compare policies, not the leadfeast/dg1 anchor
+  contrast), so a panel compare cannot be built from this
+  corpus without running a different experiment. That is a
+  scope statement, not a gap to fill mid-run.
+
+### Village assessment, in plain words
+
+The villages in this corpus look like ordinary mid-game villages
+on a 100-day clock: most reach national standing, none reach
+the table, none win, none get past wave 4 — the familiar scale
+wall in miniature, unchanged by the commit (national 10/12 on
+both sides, both anchors). What preserver widening changed is
+not survival or standing in aggregate but food handling, and it
+changed it unevenly: most villages noticed nothing (6 identical,
+6 degenerate — the degenerate ones mostly because some village
+rotted nothing at all), three villages' ratios rose while their
+villages mostly improved, and exactly one village's ratio fell
+because its no-depri side drowned in fish it could not keep.
+The honest summary is not "villages preserve better now" and
+not "villages preserve worse now" but "on fresh seeds, the
+preserver widening did not make the typical depri-side village
+rot less — it rotted 27% more at the median, with zero clean
+improvements — and the one place it moved the ratio down, it
+did so by hauling far more fish than the village could keep."
+The blank this run filled is the attribution blank rotcompanion
+left open: for this corpus's down-move, the cause is haul
+surge (fishing), not preserve collapse — proven by haul counts
+and event names, not inferred from rot alone.
+
+### Metric review (filled after the verdict, §14 — revisions apply to the NEXT run, this verdict is NOT re-scored)
+
+- THE GO RULE WORKED AS WRITTEN, NO MID-RUN REPAIR. G1, G2, and
+  G3 separated cleanly: G3 held (pd0 median fell) while G1 and
+  G2 failed outright (pd1 median rose 27%, genuine 0). The rule
+  can therefore pass a guard while failing the improvement —
+  it is not a single-threshold rubber stamp, and it decided
+  this corpus without ambiguity. No threshold was moved, no
+  metric re-scored, no band re-cut.
+- DEGENERATE-HEAVY CORPORA BLIND THE RATIO (6/16 here, vs 1/16
+  primary and 4/16 cross-check before). The ratio diagnostic
+  loses more than a third of the corpus whenever a no-depri
+  village rots zero — and zero-rot villages are common (short
+  lives, eat-everything villages, keep-everything villages).
+  PROPOSED FOR THE NEXT RUN: keep the GO rule on abs medians
+  (it is immune to this by construction), and pre-register a
+  degenerate-handling note for any ratio diagnostic — e.g. a
+  minimum non-degenerate seed count below which the ratio
+  medians are reported as "not computable at corpus level"
+  rather than printed as if they covered the corpus. This run's
+  ratio medians (0.297 -> 0.171) cover only the 10
+  non-degenerate seeds, and the evidence should have said so
+  next to the numbers, not three sections later.
+- HAUL COLUMNS EARNED THEIR KEEP; KEEP THEM MANDATORY. The
+  9514 attribution (fish boom, not preserve collapse) is
+  exactly the question the old corpora could not answer, and
+  it came from haul counts + event names, not from rot. A
+  future deciding corpus without haul columns would be a
+  step backward. PROPOSED: the next rot pre-registration
+  should require invHaul medians beside the rot medians as a
+  validity condition (like the 64/64 file condition), not as
+  an optional diagnostic.
+- FISH IS THE SWING HAUL. The largest haul moves in this corpus
+  are fishing moves (9514 pd0 Fish catch 2 -> 118 events;
+  9504 pd1 Fish catch 102 -> 44). PROPOSED FOR THE NEXT RUN:
+  report Fish catch event counts (and, if the instrument can
+  carry it, fish kcal) as a first-class haul split, so a future
+  fishing-driven blowup is visible in the medians, not only in
+  a trace sample.
+- VILLAGER BATCHES STAY BLIND AT OLD ANCHORS. Batches read 0/0
+  by construction (tap absent at both anchors) — resolutions
+  are the live signal, and they moved informatively here
+  (9514 pd1 41 -> 64). PROPOSED: a future corpus on anchors
+  that POSTDATE the tap should read batches as the primary
+  villager signal and resolutions as the cross-check; until
+  then, never print batches without the tap-absent caveat.
+- SCHOLAR PRESERVE PATH UNTESTED BY THIS CONTRAST. Scholar
+  attempts are 0 under leadfeast by policy, so the scholar
+  preserve verbs (smoke/render/pemmican item-state deltas)
+  were wrapped but never exercised. PROPOSED: a future run
+  that wants the scholar path needs a preserving policy, not
+  more leadfeast seeds.
+- DAYS-CHANGED RULE HELD (9513): a degenerate seed where the
+  commit village died much earlier (pd0 77 -> 39 days, pd1 100
+  -> 79) with rot moving on lifespan as well as handling. The
+  seed kept its computed class with the lifespan note attached,
+  per the template — no reclassification, no hidden adjustment.
+- WHAT THIS VERDICT DOES NOT DO: it does not overturn
+  leg2decide's STEP CONFIRMED (0.404x) or rotdecide-govern's
+  STEP (CONTESTED) (0.645x). Those verdicts are ratio verdicts
+  on their own corpora, and they stand. What this corpus adds
+  is a fresh-seed, abs-judged verdict on the same pair: NO-GO
+  (G1+G2 failed). Read together, the three corpora say: the
+  ratio steps on old seeds, the companion qualifies those steps
+  as denominator-driven, and on fresh seeds the absolute
+  improvement is absent. The next run that wants to overturn
+  anything must say which verdict system it is overturning,
+  on which corpus, before sweeping — not after.
+
+### Proof
+
+- node scripts/test-rotdecide2-b.js => 25 PASS, 0 FAIL
+  (synthetic, before the sweep: T1 classification incl. all
+  classes and both degenerate reasons, T2 GO rule incl. the
+  prior-corpus shape that must NO-GO on all three conditions,
+  T3 abs/median/closure arithmetic).
+- node scripts/test-rotdecide2-b.js --corpus
+  evidence/2026-10-25/rotdecide2-b-corpus --seeds 9500-9507
+  --pilot => 34 PASS, 0 FAIL (pilot bar: 32/32 files, tags,
+  8/8 classifications, 0 ambiguous, invHaul > 0 on all 32 cells,
+  wrappers present).
+- node scripts/test-rotdecide2-b.js --corpus
+  evidence/2026-10-25/rotdecide2-b-corpus --seeds 9500-9515
+  => 33 PASS, 0 FAIL (full corpus: 64/64 files, 16/16 seeds,
+  0 ambiguous, GO computable, wall configs, haul medians,
+  wrappers present, bucket closure via the loader).
+- node scripts/analyze-rotdecide2-b.js --corpus
+  evidence/2026-10-25/rotdecide2-b-corpus --seeds 9500-9515
+  => exit 0, 16 seeds, GO VERDICT NO-GO failed=G1,G2 (see above).
+- Determinism: 8/8 trace re-run per-seed files byte-identical
+  to the corpus files (md5-verified); trace totals reproduce
+  the per-seed totals exactly (trace files carry the same
+  totals block as the per-seed files).
+- Node harness: the sweep uses scripts/sim-harness.js
+  (loadGame/setupGame/runDays) exactly as leg2drift/haulinvert
+  do; Math.random is seeded before eval by the harness. No
+  Game.save stub. No jest run (no jest suites touch this
+  instrument; the proof test is the designated suite).
+- Standing verdicts re-judged: NONE. leg2decide STEP CONFIRMED
+  0.404x, rotdecide-govern STEP (CONTESTED) 0.645x, rotcompanion
+  DENOMINATOR-DRIVEN qualifiers, haulinvert instrument GO —
+  all stand. This corpus's NO-GO is a new verdict on fresh
+  seeds under a new (abs-judged) rule, not a re-judgment of any
+  of them.
+
+### Scope compliance
+
+Zero src/js game changes. New files only: scripts/sweep-rotdecide2-b.js,
+scripts/analyze-rotdecide2-b.js, scripts/test-rotdecide2-b.js,
+scripts/sweep-one-rotdecide2-anchor.sh,
+scripts/sweep-one-rotdecide2-trace.sh,
+evidence/2026-10-25/rotdecide2-b-corpus/ (64 per-seed files,
+4 sweep summaries, 8 trace files, 4 trace summaries),
+evidence/2026-10-25/sim-rotdecide2-b.md (this file).
+Instrument commit 969e97f9e8a403fa2a9e96aa42bda68abd461b22
+(pre-registration + instruments, committed BEFORE the sweep).
+No push, no version bump, no live verification. Merged locally,
+pending ship, by the coordinator.
+
