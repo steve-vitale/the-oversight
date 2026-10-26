@@ -1,0 +1,188 @@
+== REGIMES ==
+seed 26031: scripted=true deathDay=6 cause=a hushwolf Eli -> Boris trustMantle=17
+seed 26032: scripted=true deathDay=5 cause=a hushwolf Felipe -> Lorenzo trustMantle=19
+seed 26033: scripted=false deathDay=18 cause=organic (phase A) Karen -> Ruth trustMantle=26
+seed 26034: scripted=false deathDay=12 cause=organic (phase A) Michelle -> Greta trustMantle=29
+seed 26035: scripted=true deathDay=40 cause=a hushwolf Roman -> Priya trustMantle=47
+
+== V1 VOUCH SNAPSHOT (mature seeds first: eligibleAtDeath > 0) ==
+seed 26035: rule=snapshot verdict=PASS-fired eligibleAtDeath=["Zoltan"] alivePostDeath=["Zoltan"] diedBetween=[] vouchLines=1
+seed 26031: rule=snapshot verdict=n/a-none-eligible eligibleAtDeath=[] alivePostDeath=[] diedBetween=[] vouchLines=0
+seed 26032: rule=snapshot verdict=n/a-none-eligible eligibleAtDeath=[] alivePostDeath=[] diedBetween=[] vouchLines=0
+seed 26033: rule=organic-n/a verdict=n/a-organic eligibleAtDeath=undefined alivePostDeath=undefined diedBetween=undefined vouchLines=undefined
+seed 26034: rule=organic-n/a verdict=n/a-organic eligibleAtDeath=undefined alivePostDeath=undefined diedBetween=undefined vouchLines=undefined
+
+== C1v2 CALL + CONVO-WINDOW ATTRIBUTION ==
+seed 26031: callCheck ok=true dailyMoveDays=0 callMoveDays=0 convoWindowDays=0 convoCoveredDays=[] missing=[]
+seed 26032: callCheck ok=true dailyMoveDays=12 callMoveDays=11 convoWindowDays=0 convoCoveredDays=[] missing=[]
+seed 26033: callCheck ok=true dailyMoveDays=2 callMoveDays=2 convoWindowDays=0 convoCoveredDays=[] missing=[]
+seed 26034: callCheck ok=false dailyMoveDays=3 callMoveDays=1 convoWindowDays=2 convoCoveredDays=[] missing=[20,27]
+    CONVO-WINDOW d19 d+7 Greta->Greta 29->27 (-2) convoLines=21
+      | "We never finished talking about what's been happening — we left it mid-thought, 4 days back. 'They glance at the fire, then back. The quiet doesn't seem to bot
+      | "I keep turning over the last thing Michelle said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+      | "The fire feels smaller without Michelle. The rest of us will have to be bigger."
+      | "Still on what's been happening. I mean it."
+    CONVO-WINDOW d26 d+14 Greta->Greta 24->22 (-2) convoLines=21
+      | "You've been singing in the creek. Badly, by your own admission. Heard anything worth stealing yet?"
+      | "Anyway." A small smile.
+      | "Still on that personal stuff."
+      | "...Sorry, lost my train of thought."
+seed 26035: callCheck ok=true dailyMoveDays=5 callMoveDays=4 convoWindowDays=0 convoCoveredDays=[] missing=[]
+
+== S1 BEARER-OWN DELTA (carried) ==
+seed 26031: trustMoves=0 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=0 other=0 (other-mover singles: [] )
+seed 26032: trustMoves=12 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=3 other=1 (other-mover singles: [{"day":25,"delta":2,"movers":[{"id":"Thabo","from":2,"to":17,"delta":15}]}] )
+seed 26033: trustMoves=1 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=0 other=0 (other-mover singles: [] )
+seed 26034: trustMoves=1 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=0 other=0 (other-mover singles: [] )
+seed 26035: trustMoves=5 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=3 other=0 (other-mover singles: [] )
+
+== E1b MOVER-NAMING CROSS-TAB (r48) ==
+seed 26031: {}
+  diffuse moves: 0, of which mover-named=0 unnamed=0
+  concentrated+single moves: 0, of which mover-named=0 unnamed=0
+  top-mover named: 0, top-mover unnamed: 0 (of 0 trust moves)
+seed 26032: {"concentrated|mover-named":5,"diffuse|mover-named":3,"single|unnamed":4}
+  diffuse moves: 3, of which mover-named=3 unnamed=0
+  concentrated+single moves: 9, of which mover-named=5 unnamed=4
+  top-mover named: 5, top-mover unnamed: 7 (of 12 trust moves)
+    d7 d+2 19->20 (+1) movers=["Addison:3","Everett:3"] named=["Addison"] topNamed=true e1b=mover-named oldEvent=both
+    d11 d+6 20->0 (-20) movers=["Addison:-20","Dmitri:-19","Thabo:-19","Everett:4","Aidan:4"] named=["Addison","Dmitri","Thabo","Everett","Aidan"] topNamed=true e1b=mover-named oldEvent=both
+    d24 d+19 0->3 (+3) movers=["Ermek:5","Jorge:5","Addison:3"] named=["Ermek","Jorge"] topNamed=true e1b=mover-named oldEvent=both
+    d25 d+20 3->11 (+8) movers=["Addison:8","Jorge:4"] named=["Jorge"] topNamed=false e1b=mover-named oldEvent=both
+    d25 d+20 11->13 (+2) movers=["Thabo:15"] named=[] topNamed=false e1b=unnamed oldEvent=deed-only
+    d27 d+22 13->22 (+9) movers=["Addison:9","Jorge:6","Dmitri:4","Aidan:3","Grace:3"] named=["Jorge","Dmitri","Aidan","Grace"] topNamed=false e1b=mover-named oldEvent=both
+    d28 d+23 22->29 (+7) movers=["Addison:7"] named=[] topNamed=false e1b=unnamed oldEvent=both
+    d29 d+24 29->38 (+9) movers=["Addison:9","Dmitri:6"] named=["Addison","Dmitri"] topNamed=true e1b=mover-named oldEvent=both
+    d30 d+25 38->45 (+7) movers=["Addison:7"] named=[] topNamed=false e1b=unnamed oldEvent=both
+    d31 d+26 45->54 (+9) movers=["Addison:9","Grace:7"] named=["Grace"] topNamed=false e1b=mover-named oldEvent=both
+    d31 d+26 54->57 (+3) movers=["Addison:3"] named=[] topNamed=false e1b=unnamed oldEvent=deed-only
+    d34 d+29 57->60 (+3) movers=["Zoe:4","Addison:3"] named=["Zoe","Addison"] topNamed=true e1b=mover-named oldEvent=both
+seed 26033: {"diffuse|mover-named":1}
+  diffuse moves: 1, of which mover-named=1 unnamed=0
+  concentrated+single moves: 0, of which mover-named=0 unnamed=0
+  top-mover named: 1, top-mover unnamed: 0 (of 1 trust moves)
+    d28 d+10 36->28 (-8) movers=["Lucas:-58","Freya:-52","Hassan:-31","Leah:-8","Farid:-8","Sanne:-8","Yuying:-5"] named=["Lucas","Freya","Hassan","Farid","Sanne","Yuying"] topNamed=true e1b=mover-named oldEvent=both
+seed 26034: {"diffuse|mover-named":1}
+  diffuse moves: 1, of which mover-named=1 unnamed=0
+  concentrated+single moves: 0, of which mover-named=0 unnamed=0
+  top-mover named: 1, top-mover unnamed: 0 (of 1 trust moves)
+    d25 d+13 27->24 (-3) movers=["Regina:8","Theo:4","Pietro:4","Greta:-3","Lena:3","Somchai:3"] named=["Regina","Theo","Pietro","Greta","Lena","Somchai"] topNamed=true e1b=mover-named oldEvent=both
+seed 26035: {"concentrated|mover-named":1,"single|unnamed":2,"single|mover-named":1,"diffuse|mover-named":1}
+  diffuse moves: 1, of which mover-named=1 unnamed=0
+  concentrated+single moves: 4, of which mover-named=2 unnamed=2
+  top-mover named: 2, top-mover unnamed: 3 (of 5 trust moves)
+    d56 d+16 47->56 (+9) movers=["Priya:9","Lena:3"] named=["Lena"] topNamed=false e1b=mover-named oldEvent=deed-only
+    d58 d+18 56->59 (+3) movers=["Priya:3"] named=[] topNamed=false e1b=unnamed oldEvent=both
+    d60 d+20 59->64 (+5) movers=["Priya:5"] named=["Priya"] topNamed=true e1b=mover-named oldEvent=both
+    d62 d+22 64->67 (+3) movers=["Lena:4","Amina:4","Priya:3"] named=["Lena","Amina","Priya"] topNamed=true e1b=mover-named oldEvent=both
+    d62 d+22 67->70 (+3) movers=["Priya:3"] named=[] topNamed=false e1b=unnamed oldEvent=deed-only
+
+== E1 EVENT-VS-DEED (carried for continuity) ==
+seed 26031: {"event-only":0,"deed-only":0,"both":0,"neither":0}
+seed 26032: {"event-only":0,"deed-only":2,"both":10,"neither":0}
+seed 26033: {"event-only":0,"deed-only":0,"both":1,"neither":0}
+seed 26034: {"event-only":0,"deed-only":0,"both":1,"neither":0}
+seed 26035: {"event-only":0,"deed-only":2,"both":3,"neither":0}
+
+== A1 ARMOR INTRADAY MAPS (bark_armor counts per location) ==
+seed 26031: 6 snapshots
+  pre-death d6: barkTotal=0 armorTotal=37 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d6: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d8: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d9: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d13: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d20: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":["work_gloves","flannel_shirt"],"scholarWorn":[],"scholarPrepStash":[],"pantry":[],"livingWorn":["flannel_shirt","denim_jacket","work_gloves","rain_shell","running_shoes","flannel_shirt","work_gloves","denim_jacket","work_gloves","work_gloves","good_boots","knit_cap","camo_jacket","denim_jacket","wool_socks","denim_jacket"],"livingPack":["flannel_shirt","work_gloves","denim_jacket","running_shoes","rain_shell","work_gloves","flannel_shirt","denim_jacket","work_gloves","good_boots","work_gloves","camo_jacket","knit_cap","denim_jacket","wool_socks","denim_jacket"],"deadWorn":[],"deadPack":[],"corpses":[],"stashed":["work_gloves"]}
+seed 26032: 9 snapshots
+  pre-death d5: barkTotal=2 armorTotal=26 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d5: barkTotal=1 armorTotal=25 {"scholarPack":1,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0} | bark total 2->1 gains[scholarPack+1] losses[livingWorn-1,livingPack-1]  <-- UNACCOUNTED DROP
+  d+2 d7: barkTotal=1 armorTotal=25 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0} | bark total 1->1 gains[scholarWorn+1] losses[scholarPack-1]
+  d+2 d7: barkTotal=1 armorTotal=25 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  chain-handoff d9: barkTotal=1 armorTotal=24 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0} | bark total 1->1 gains[corpses+1] losses[scholarWorn-1]
+  ledger-d+7 d12: barkTotal=2 armorTotal=25 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0} | bark total 1->2 gains[scholarWorn+1] losses[]  <-- UNACCOUNTED GAIN
+  ledger-d+14 d20: barkTotal=2 armorTotal=25 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0}
+  ledger-d+30 d35: barkTotal=2 armorTotal=25 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0}
+  end d36: barkTotal=2 armorTotal=25 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":[],"scholarWorn":[],"scholarPrepStash":[],"pantry":[],"livingWorn":["work_gloves","work_gloves","work_gloves","rain_shell","good_boots","death_mask","flannel_shirt","canvas_pants","rain_shell","canvas_pants","denim_jacket","good_boots"],"livingPack":["work_gloves","work_gloves","work_gloves","rain_shell","good_boots","death_mask","flannel_shirt","canvas_pants","canvas_pants","rain_shell","denim_jacket","good_boots"],"deadWorn":[],"deadPack":[],"corpses":[],"stashed":[]}
+seed 26033: 5 snapshots
+  post-handoff d19: barkTotal=4 armorTotal=30 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":4,"stashed":0}
+  d+2 d20: barkTotal=4 armorTotal=31 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":4,"stashed":0}
+  d+3 d21: barkTotal=5 armorTotal=34 {"scholarPack":1,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":4,"stashed":0} | bark total 4->5 gains[scholarPack+1] losses[]  <-- UNACCOUNTED GAIN
+  chain-handoff d25: barkTotal=5 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":5,"stashed":0} | bark total 5->5 gains[corpses+1] losses[scholarPack-1]
+  ledger-d+7 d25: barkTotal=5 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":5,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":["hide_armor"],"scholarWorn":[],"scholarPrepStash":[],"pantry":[],"livingWorn":["rain_shell","lifebound_vestments","rain_shell","good_boots","canvas_pants","work_gloves","canvas_pants","good_boots","flannel_shirt","work_gloves"],"livingPack":["rain_shell","lifebound_vestments","good_boots","rain_shell","canvas_pants","work_gloves","good_boots","canvas_pants","flannel_shirt","work_gloves"],"deadWorn":[],"deadPack":[],"corpses":["good_boots","canvas_pants","good_boots","canvas_pants","rain_poncho"],"stashed":[]}
+seed 26034: 7 snapshots
+  post-handoff d13: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d14: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d15: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d19: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d26: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+30 d42: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  end d43: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":["wool_socks"],"scholarWorn":["rain_shell"],"scholarPrepStash":[],"pantry":[],"livingWorn":["good_boots","rain_poncho","work_gloves","flannel_shirt","work_gloves","bloodplate","swat_vest","farstrider_boots","ghost_camo","work_gloves","alien_helm","flannel_shirt","wool_socks"],"livingPack":["good_boots","rain_poncho","work_gloves","work_gloves","flannel_shirt","bloodplate","hide_armor","swat_vest","farstrider_boots","ghost_camo","work_gloves","alien_helm","flannel_shirt","wool_socks"],"deadWorn":[],"deadPack":[],"corpses":["rain_shell"],"stashed":["flannel_shirt","work_gloves","good_boots"]}
+seed 26035: 8 snapshots
+  pre-death d40: barkTotal=2 armorTotal=47 {"scholarPack":1,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0}
+  post-handoff d40: barkTotal=2 armorTotal=45 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0} | bark total 2->2 gains[corpses+1] losses[scholarPack-1]
+  d+2 d42: barkTotal=2 armorTotal=45 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  d+2 d42: barkTotal=2 armorTotal=45 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  ledger-d+7 d47: barkTotal=2 armorTotal=45 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  ledger-d+14 d55: barkTotal=2 armorTotal=45 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  ledger-d+30 d70: barkTotal=2 armorTotal=48 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  end d71: barkTotal=2 armorTotal=48 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":["flannel_shirt","wool_socks"],"scholarWorn":[],"scholarPrepStash":[],"pantry":[],"livingWorn":["knit_cap","alien_carapace","rain_poncho","work_gloves","scar_tissue_wraps","skull_helm","padded_cloth","work_gloves","canvas_pants","running_shoes","commanders_coat","good_boots","rain_shell","wool_socks"],"livingPack":["alien_carapace","knit_cap","rain_poncho","work_gloves","scar_tissue_wraps","skull_helm","padded_cloth","work_gloves","canvas_pants","running_shoes","commanders_coat","good_boots","rain_shell","wool_socks"],"deadWorn":[],"deadPack":[],"corpses":["work_gloves","denim_jacket","shelter_cloak","work_gloves","flannel_shirt","running_shoes","work_gloves","flannel_shirt","running_shoes","denim_jacket","shelter_cloak"],"stashed":["work_gloves","knit_cap"]}
+
+== BINDING METRICS ==
+seed 26031: M3v2=1 M3v2b=1 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=24
+seed 26032: M3v2=3 M3v2b=3 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) chainDeaths=1 chainKnown=1 identityTrips=1 dayAdv=31
+seed 26033: M3v2=4 M3v2b=3 (bar >=2, excludedLoot=1) M1=true M4=true MG2=false (viol=1) chainDeaths=1 chainKnown=1 identityTrips=0 dayAdv=13
+seed 26034: M3v2=6 M3v2b=6 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=31
+seed 26035: M3v2=5 M3v2b=5 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=31
+
+== TRANSCRIPTS (people check inventory) ==
+34 transcripts
+  journey-succession-r48-transcript-26031-dplus14-Alfredo.txt
+  journey-succession-r48-transcript-26031-dplus14-Cheryl.txt
+  journey-succession-r48-transcript-26031-dplus3-Alfredo.txt
+  journey-succession-r48-transcript-26031-dplus3-Cheryl.txt
+  journey-succession-r48-transcript-26031-dplus7-Alfredo.txt
+  journey-succession-r48-transcript-26031-dplus7-Cheryl.txt
+  journey-succession-r48-transcript-26032-dplus15-Aidan.txt
+  journey-succession-r48-transcript-26032-dplus15-Everett.txt
+  journey-succession-r48-transcript-26032-dplus30-Everett.txt
+  journey-succession-r48-transcript-26032-dplus30-Jorge.txt
+  journey-succession-r48-transcript-26032-dplus4-Everett.txt
+  journey-succession-r48-transcript-26032-dplus4-Jorge.txt
+  journey-succession-r48-transcript-26032-dplus7-Everett.txt
+  journey-succession-r48-transcript-26032-dplus7-Jorge.txt
+  journey-succession-r48-transcript-26033-dplus3-Farid.txt
+  journey-succession-r48-transcript-26033-dplus3-Leah.txt
+  journey-succession-r48-transcript-26033-dplus7-Farid.txt
+  journey-succession-r48-transcript-26033-dplus7-Lucas.txt
+  journey-succession-r48-transcript-26034-dplus14-Phong.txt
+  journey-succession-r48-transcript-26034-dplus14-Pietro.txt
+  journey-succession-r48-transcript-26034-dplus3-Phong.txt
+  journey-succession-r48-transcript-26034-dplus3-Pietro.txt
+  journey-succession-r48-transcript-26034-dplus30-Regina.txt
+  journey-succession-r48-transcript-26034-dplus30-Theo.txt
+  journey-succession-r48-transcript-26034-dplus7-Phong.txt
+  journey-succession-r48-transcript-26034-dplus7-Pietro.txt
+  journey-succession-r48-transcript-26035-dplus15-Ava.txt
+  journey-succession-r48-transcript-26035-dplus15-Zoltan.txt
+  journey-succession-r48-transcript-26035-dplus30-Chloe.txt
+  journey-succession-r48-transcript-26035-dplus30-Miguel.txt
+  journey-succession-r48-transcript-26035-dplus4-Ava.txt
+  journey-succession-r48-transcript-26035-dplus4-Zoltan.txt
+  journey-succession-r48-transcript-26035-dplus7-Ava.txt
+  journey-succession-r48-transcript-26035-dplus7-Zoltan.txt
+
+== VILLAGE END STATE ==
+seed 26031: Eli -> Boris d6 trustMantle=17 officeEnd=17 villageMeanEnd=35.9 pantryEnd=0 ledgerAlive=11 ledgerPantry=9250
+seed 26032: Felipe -> Lorenzo d5 trustMantle=19 officeEnd=60 villageMeanEnd=50.6 pantryEnd=37802 ledgerAlive=10 ledgerPantry=37802
+seed 26033: Karen -> Ruth d18 trustMantle=26 officeEnd=36 villageMeanEnd=35.8 pantryEnd=0 ledgerAlive=7 ledgerPantry=3860
+seed 26034: Michelle -> Greta d12 trustMantle=29 officeEnd=22 villageMeanEnd=69.6 pantryEnd=27956 ledgerAlive=10 ledgerPantry=27956
+seed 26035: Roman -> Priya d40 trustMantle=47 officeEnd=70 villageMeanEnd=78.6 pantryEnd=42622 ledgerAlive=9 ledgerPantry=42622

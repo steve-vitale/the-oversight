@@ -1,0 +1,27 @@
+
+PRE-DEATH d6: bearer <redacted>, topTrust=[{"id":"Boris","t":27},{"id":"Cheryl","t":25},{"id":"Alfredo","t":23},{"id":"Petra","t":17}], roster=12
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d6 (a hushwolf, scripted): Eli -> Boris | passed=true lin=true mo=true trust=17 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Cheryl (refused=false)
+  CONVO d+3 with Alfredo (refused=false)
+  CONVO d+7 with Alfredo (refused=false)
+  CONVO d+7 with Cheryl (refused=false)
+  CONVO d+14 with Cheryl (refused=false)
+  CONVO d+14 with Alfredo (refused=false)
+
+FUNERAL: deathBeat=1 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=24 violations=0 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+SUCCESSOR-LIFE: dayAdv=24 signals={"levelUp":true,"systemVoice":39,"offerLines":22,"codexPlantsDelta":11,"codexSkillsDelta":2,"codexAbilitiesDelta":4,"xpDelta":24,"any":true} pantry 27700->0
+TRUST-DIALS: office 17->17 (+0, flat) | villageMean 13.6->35.9 (+22.3, climb) | ge60 0->2 | movers>=5: [{"id":"Cheryl","from":25,"to":83,"delta":58},{"id":"Alfredo","from":23,"to":75,"delta":52},{"id":"Illari","from":12,"to":41,"delta":29},{"id":"Sean","from":8,"to":35,"delta":27},{"id":"Petra","from":17,"to":38,"delta":21},{"id":"Ava","from":8,"to":25,"delta":17},{"id":"Greta","from":12,"to":23,"delta":11},{"id":"Emma","from":11,"to":18,"delta":7},{"id":"Fausto","from":8,"to":13,"delta":5}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=30 alive=9 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=24
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":17,"officeLast":17,"officeDelta":0,"officeClass":"flat","villageMantle":13.6,"villageLast":35.9,"villageDelta":22.3,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":2,"movers":[{"id":"Cheryl","from":25,"to":83,"delta":58},{"id":"Alfredo","from":23,"to":75,"delta":52},{"id":"Illari","from":12,"to":41,"delta":29},{"id":"Sean","from":8,"to":35,"delta":27},{"id":"Petra","from":17,"to":38,"delta":21},{"id":"Ava","from":8,"to":25,"delta":17},{"id":"Greta","from":12,"to":23,"delta":11},{"id":"Emma","from":11,"to":18,"delta":7},{"id":"Fausto","from":8,"to":13,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":0,"withCensus":0,"chainHandoffs":0,"trustMoves":0} callCheck={"dailyMoveDays":0,"callMoveDays":0,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":1,"teleWeek2":2,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":25,"moves":0}

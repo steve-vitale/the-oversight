@@ -1,0 +1,26 @@
+
+ORGANIC DEATH d19: Karen -> Ruth, topTrust=[{"id":"Farid","t":39},{"id":"Leah","t":34},{"id":"Lucas","t":33},{"id":"Hassan","t":31}]
+PARITY readable=true equal=true inherited=[] pre=["night_eyes"] post=["night_eyes"]
+DEATH d18 (organic (phase A)): Karen -> Ruth | passed=true lin=true mo=true trust=26 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Leah (refused=false)
+  CONVO d+3 with Farid (refused=false)
+  CONVO d+7 with Lucas (refused=false)
+  CONVO d+7 with Farid (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=0 (eligible=0) echo=2 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=12 violations=1 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+  VIOLATION d+12: Leah trust=28 kcal=1278 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=13 signals={"levelUp":false,"systemVoice":7,"offerLines":8,"codexPlantsDelta":6,"codexSkillsDelta":6,"codexAbilitiesDelta":1,"xpDelta":16,"any":true} pantry 11510->0
+TRUST-DIALS: office 26->36 (+10, climb) | villageMean 29.7->35.8 (+6.1, climb) | ge60 0->0 | movers>=5: [{"id":"Freya","from":16,"to":44,"delta":28},{"id":"Lucas","from":33,"to":48,"delta":15},{"id":"Farid","from":39,"to":45,"delta":6}]
+DEED-LEDGER: calls=5 summary={"teachPlant":{"calls":5,"ok":5,"deltaSum":0,"deltaN":5,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=31 alive=4 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=13
+T-METRICS: t1=false(panels=d+0,d+7) t2=true(deedCalls=5) trustVerdict={"readable":true,"officeMantle":26,"officeLast":36,"officeDelta":10,"officeClass":"climb","villageMantle":29.7,"villageLast":35.8,"villageDelta":6.1,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":0,"movers":[{"id":"Freya","from":16,"to":44,"delta":28},{"id":"Lucas","from":33,"to":48,"delta":15},{"id":"Farid","from":39,"to":45,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":2,"withCensus":2,"chainHandoffs":1,"trustMoves":1} callCheck={"dailyMoveDays":2,"callMoveDays":2,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=4, excludedLoot=1))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":13,"moves":2}
