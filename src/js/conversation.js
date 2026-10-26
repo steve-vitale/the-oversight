@@ -6695,7 +6695,23 @@
       // handlers (convo-dialogue.js) call it too, so the energy budget binds
       // every verb, not just the ones that reach this tail.
       const wdEnd = this.convoMaybeWinddown(vid);
-      if (wdEnd) return wdEnd;
+      if (wdEnd) {
+        // WIND-DOWN GRACE BEAT (journey-landing r54 2026-10-25): the
+        // winddown menu's non-leave picks run their branch and EMIT the
+        // beat to the transcript, but this tail used to return endConvo's
+        // quiet-close (goodbyeSaid -> line null) INSTEAD of the turn's
+        // line — the player picked "One more thing —" and saw silence,
+        // then the sitting closed (r53 seed 638 day 5, Jorge: winddown
+        // 'more' -> THEM: (no line)). The grace beat IS the turn's
+        // answer: end the sitting WITH it as the closing line, not
+        // behind it. Scoped to the winddown menu's non-leave picks;
+        // 'leave' returns earlier via endConvo('left'), and a falsy line
+        // keeps the old quiet close.
+        if (line && ['more', 'agree', 'joke', 'silence', 'nv:nod'].includes(choiceId)) {
+          return { ...wdEnd, line };
+        }
+        return wdEnd;
+      }
       // LEDGER (Steve 2026-10-07): the turn's beat lands on the current
       // thread — topic memory + subject-change detection. (dlg: turns speak
       // through sayLine instead; both collapse consecutive duplicates.)
