@@ -338,19 +338,20 @@ function analyze(opts) {
       };
       // Surplus-class detail for the day-29 first-cook calls.
       // Fresh loss uses the fresh class key; preserved surplus
-      // uses the smoked name ('Foraged food (dried)', spoilDay
-      // 44 = day 29 + 15 rough), because conversion renames
-      // the stack — the fresh key can never match a preserved
-      // stack. Total preserved vs parsed keptKcal stays a
-      // diagnostic (per-stack rounding can differ by a few
-      // kcal); the gated exact numbers are surplus fresh
-      // 1400, surplus preserved 1120, parsed keptKcal 1737.
+      // uses the smoked form of the surplus class: 'Foraged
+      // food (dried)', kcalEach 160 = 200 x 0.80 rough yield,
+      // spoilDay 44 = day 29 + 15 rough days. The 15-day stamp
+      // proves the rough yield, so 160 is the yield-linked
+      // value, not a picked constant. The name-prefix-only
+      // rule over-sums: the same call also smokes other
+      // Foraged-food stacks (500 -> 400, 271 -> 217), which
+      // share the name and stamp but not the 160 kcalEach.
       const surplusKey = classKey5('Foraged food', 200, 31, null, null);
       let sFresh = 0, sPres = 0;
       for (const rec of focus.workedDay29.recs) {
         for (const dl of (rec.deltas || [])) {
           if (itemClass(dl) === surplusKey && (dl.deltaKcal || 0) < 0) sFresh += -(dl.deltaKcal || 0);
-          if (dl.foodState === 'preserved' && dl.spoilDay === 44 &&
+          if (dl.foodState === 'preserved' && dl.spoilDay === 44 && dl.kcalEach === 160 &&
               typeof dl.name === 'string' && dl.name.indexOf('Foraged food') === 0 &&
               (dl.deltaKcal || 0) > 0) sPres += (dl.deltaKcal || 0);
         }
