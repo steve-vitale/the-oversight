@@ -1622,16 +1622,30 @@ function counterPlay(Game, ctx) {
             freshKcal += (it.kcalEach || 0) * (it.units || 1);
         }
         if (freshKcal > 1500) {
-          let best = null, bestSkill = -1;
-          for (const id of freeVillagers(Game)) {
+          // STAFFING FALLBACK (longsim food 2026-10-25, sim-stafffallback-b):
+          // the old code picked the single highest-preserver free villager
+          // and never fell through: on seed 9754 the widening made Rosa
+          // Mendez (skill 2) the permanent pick, and she refuses cook duty
+          // every time (cook gates at trust 20), so no cook was ever
+          // staffed and nothing was ever smoked. Try down the skill list
+          // until someone says yes; a refusal moves to the next candidate,
+          // and if nobody accepts no cook is staffed (honest, not forced).
+          // Ties keep roster order (stable sort), as the old strict-> pick did.
+          const cands = freeVillagers(Game).map((id) => {
             let sk = 0;
             try { sk = Game.specialistSkill ? Game.specialistSkill(Game.getPerson(id) || {}, 'preserver') : 0; }
             catch (e) {}
-            if (sk > bestSkill) { bestSkill = sk; best = id; }
-          }
-          if (best) {
-            try { Game.assignTask(best, 'cook', { via: 'in-person' }); ctx.cookStaffed = (ctx.cookStaffed || 0) + 1; }
-            catch (e) {}
+            return { id, sk };
+          }).sort((a, b) => b.sk - a.sk);
+          for (let ci = 0; ci < cands.length; ci++) {
+            let res = null;
+            try { res = Game.assignTask(cands[ci].id, 'cook', { via: 'in-person' }); }
+            catch (e) { res = null; }
+            if (res && res.ok) {
+              ctx.cookStaffed = (ctx.cookStaffed || 0) + 1;
+              if (ci > 0) ctx.cookStaffFallback = (ctx.cookStaffFallback || 0) + 1;
+              break;
+            }
           }
         }
       }
