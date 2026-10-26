@@ -7242,11 +7242,51 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // per-cook-per-day rule for regression testing only.
             var _rfv = this._racksFullVoice || (this._racksFullVoice = {});
             var _rgOff = false;
+            var _remOff = false;
             try { _rgOff = (typeof process !== 'undefined' && process.env && process.env.RACKSVOICE_GATE === '0'); } catch (e) {}
+            try { _remOff = (typeof process !== 'undefined' && process.env && process.env.RACKSVOICE_REMINDER === '0'); } catch (e) {}
             if (_rgOff) {
               if (_rfv[vid] !== day) {
                 _rfv[vid] = day;
                 preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
+              }
+            } else if (!_remOff) {
+              // RACKSVOICE-REMINDER (sim-reminder-b, 2026-10-26, rule R,
+              // LANDED: pilot GO + confirm GO on identical seeds, so
+              // rule R is the default; RACKSVOICE_REMINDER=0 restores
+              // gate B for regression testing only).
+              // Gate B's day slot plus per-cook change memory plus a
+              // frozen-stretch reminder: the first eligible racks-full
+              // candidate each day speaks when its figure changed
+              // since THAT cook's last spoken figure, otherwise counts
+              // a silent racks-bound day and speaks a reminder on the
+              // Nth silent day (N=7, one in-game week). Voice only:
+              // the fullness computation above still runs every
+              // resolution, silenced complaints become the plain
+              // frame, and no game state besides these voice markers
+              // is written here.
+              var _remDay = this._racksFullReminderDay;
+              if (_remDay !== day) {
+                this._racksFullReminderDay = day;
+                var _remLast = this._racksFullReminderLast || (this._racksFullReminderLast = {});
+                var _fig = Math.round(preservedKcal);
+                var _silent = this._racksFullReminderSilent || 0;
+                if (_remLast[vid] === undefined || _remLast[vid] !== _fig) {
+                  _remLast[vid] = _fig;
+                  this._racksFullReminderSilent = 0;
+                  this._racksFullVoiceDay = day;
+                  preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
+                } else {
+                  _silent += 1;
+                  if (_silent >= 7) {
+                    _remLast[vid] = _fig;
+                    this._racksFullReminderSilent = 0;
+                    this._racksFullVoiceDay = day;
+                    preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
+                  } else {
+                    this._racksFullReminderSilent = _silent;
+                  }
+                }
               }
             } else if (this._racksFullVoiceDay !== day) {
               this._racksFullVoiceDay = day;
