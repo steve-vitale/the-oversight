@@ -4806,7 +4806,17 @@
           choices.push(a); topicsAdded++;
         }
         for (const a of t2discussed) {
-          if (a.id === threadAsk || topicsAdded >= topicCapMood || choices.length >= MAXC) continue;
+          // R55 MAIN-MENU DISCUSSED-'OTHERS' EXEMPTION (journey-social r54
+          // split verdict): the main menu is where natural picks happen,
+          // but fresh + asks fill topicCapMood first, so this loop never
+          // fired for 'others' late in a run — the subject-menu re-list
+          // (r54) cannot fix picks that never visit the subject menu.
+          // 'others' ONLY, mirroring the r53 fresh exemption: it rides
+          // past the topicsAdded cap, still bounded by MAXC (the view's
+          // room) and the threadAsk exclusion, and never while it IS the
+          // current thread. Other discussed topics stay behind by design.
+          const othersExempt = a.id === 'ask:others' && c.thread !== 'others';
+          if (a.id === threadAsk || (!othersExempt && topicsAdded >= topicCapMood) || choices.length >= MAXC) continue;
           choices.push(a); topicsAdded++;
         }
         // GOSSIP VERBS (fix 2026-10-07): same starvation as the subject menu —
