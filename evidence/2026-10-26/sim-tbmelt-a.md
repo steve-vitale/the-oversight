@@ -479,3 +479,37 @@ applies (DIAG-only, no narration or behavior added).
   zero src/js diff. Ready for coordinator merge; NOT pushed,
   NOT bumped, live NOT verified (coordinator/ship-loop
   line, not this arm's).
+
+## ADDENDUM — coordinator follow-up (control-drift confirmation, legs unchanged)
+
+The coordinator's follow-up note (sibling feastdraw arm) is
+confirmed by this arm's own numbers, and no pre-registered
+leg changed:
+
+- The sibling arm independently reproduced the IDENTICAL
+  deviation on current master 4f5f3b614: deaths 260 vs 234,
+  national-ever 6/8 vs 7/8, median 143d vs 135d, pool 1,527
+  vs 1,494 — exactly this arm's band numbers. Two arms,
+  same deviation, same seeds: the published control band is
+  stale on current master, not this arm's census.
+- Recorder-free baseline proof is now complete on BOTH
+  moved seeds (the original evidence proved 73675 only):
+  73674 recorder-free (nonworldkill sweep, no tbmelt) gives
+  days 163, won 1, wave 4, arc 4, deaths 30, 18 TB starts,
+  31 spawns — identical to the tbmelt-armed row, starts
+  identical string-for-string. 73675 was already proven
+  twice the same way (180d, won 0, 21 starts, 49 spawns,
+  starts identical). The recorder is excluded on both moved
+  seeds; the deviation is base drift, unbisected, exactly as
+  the coordinator framed it (drift between nonworldkill-a's
+  base and current master; this arm's earlier r48 note names
+  one gameplay change inside that gap, not a bisected cause).
+- Legs (a)–(d) are judged on the current-base corpus, NOT
+  against the stale control, per the follow-up: (a) 8/8
+  mismatch lifts classified; (b) 88/88 lifts accounted;
+  (c) melt rate + wave breakdown computed, wave-4 melts none;
+  (d) all 5 known mismatch fights reproduce (table above) —
+  NONE moved, so no leg-(d) deviation attribution is needed;
+  had any moved, it would have been attributed to the drift,
+  not to the recorder, for the same recorder-free reason.
+- No match was forced, no metric re-scored, no leg changed.
