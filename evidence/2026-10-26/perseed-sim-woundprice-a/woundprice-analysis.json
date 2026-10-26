@@ -1,0 +1,288 @@
+{
+ "label": "sim-woundprice-a Stage-1 re-derivation + pricing inputs",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "corpusDir": "evidence/2026-10-26/perseed-sim-woundprice-a",
+ "gates": {
+  "problems": [],
+  "pass": true
+ },
+ "neutrality": {
+  "control": {
+   "raids": 85,
+   "raiders": 361,
+   "deaths": 234,
+   "nationalEver": 7,
+   "wins": 4,
+   "medianDays": 135,
+   "poolTotal": 1494,
+   "poolW3": 107
+  },
+  "observed": {
+   "n": 8,
+   "won": 1,
+   "medianDays": 174,
+   "nationalEver": 7,
+   "deathTotal": 336,
+   "raids": 98,
+   "raiders": 407,
+   "poolTotal": 1552,
+   "poolW3": 225
+  },
+  "exact": false
+ },
+ "band": {
+  "n": 8,
+  "won": 1,
+  "medianDays": 174,
+  "nationalEver": 7,
+  "deathTotal": 336,
+  "raids": 98,
+  "raiders": 407,
+  "poolTotal": 1552,
+  "poolW3": 225
+ },
+ "stage1": {
+  "defenderFights": 311,
+  "defenderByOutcome": {
+   "mFlee": 243,
+   "vFlee": 32,
+   "vKill": 34,
+   "vDie": 2
+  },
+  "defenderStartBelowLine": 196,
+  "mFleeBelowLine": 240,
+  "manufactured": 44,
+  "manufacturedByWave": {
+   "w1": 29,
+   "w2": 14,
+   "w3": 1
+  },
+  "preWounded": 196,
+  "preWoundedByWave": {
+   "w1": 133,
+   "w2": 57,
+   "w3": 6
+  },
+  "untaggedBelowLine": 0,
+  "otherBelowLineEnds": 0,
+  "fieldMFleeBelowLine": 467,
+  "fieldManufactured": 78,
+  "fieldPreWounded": 389,
+  "remeetAll": {
+   "events": 240,
+   "distinctEntities": 103,
+   "reMetAtLeastOnce": 199,
+   "totalReMeets": 881,
+   "finishedEntities": 0,
+   "rounds0ReMeets": 881,
+   "hpRiseEvents": 0
+  },
+  "remeetManufactured": {
+   "events": 44,
+   "reMetAtLeastOnce": 38,
+   "totalReMeets": 207,
+   "finishedEntities": 0
+  },
+  "remeetPreWounded": {
+   "events": 196,
+   "reMetAtLeastOnce": 161,
+   "totalReMeets": 674,
+   "finishedEntities": 0
+  },
+  "fates": {
+   "removed:player-fight-melt": 16,
+   "still-present": 53,
+   "removed:player-fight-kill": 28,
+   "removed:departure-lost-trail": 6
+  }
+ },
+ "perSeed": [
+  {
+   "seed": 73671,
+   "days": 177,
+   "endReason": "village-lost",
+   "won": 0,
+   "defenderFights": 48,
+   "byOutcome": {
+    "mFlee": 42,
+    "vFlee": 4,
+    "vKill": 2
+   },
+   "mFleeBelowLine": 41,
+   "manufactured": 11,
+   "preWounded": 30,
+   "vKill": 2
+  },
+  {
+   "seed": 73672,
+   "days": 116,
+   "endReason": "village-lost",
+   "won": 0,
+   "defenderFights": 19,
+   "byOutcome": {
+    "mFlee": 13,
+    "vFlee": 6
+   },
+   "mFleeBelowLine": 13,
+   "manufactured": 3,
+   "preWounded": 10,
+   "vKill": 0
+  },
+  {
+   "seed": 73673,
+   "days": 97,
+   "endReason": "over-other",
+   "won": 1,
+   "defenderFights": 27,
+   "byOutcome": {
+    "vKill": 3,
+    "mFlee": 20,
+    "vFlee": 4
+   },
+   "mFleeBelowLine": 19,
+   "manufactured": 1,
+   "preWounded": 18,
+   "vKill": 3
+  },
+  {
+   "seed": 73674,
+   "days": 175,
+   "endReason": "village-lost",
+   "won": 0,
+   "defenderFights": 50,
+   "byOutcome": {
+    "mFlee": 43,
+    "vKill": 2,
+    "vFlee": 4,
+    "vDie": 1
+   },
+   "mFleeBelowLine": 43,
+   "manufactured": 6,
+   "preWounded": 37,
+   "vKill": 2
+  },
+  {
+   "seed": 73675,
+   "days": 180,
+   "endReason": "survived",
+   "won": 0,
+   "defenderFights": 61,
+   "byOutcome": {
+    "vFlee": 5,
+    "mFlee": 51,
+    "vKill": 5
+   },
+   "mFleeBelowLine": 51,
+   "manufactured": 6,
+   "preWounded": 45,
+   "vKill": 5
+  },
+  {
+   "seed": 73676,
+   "days": 156,
+   "endReason": "village-lost",
+   "won": 0,
+   "defenderFights": 28,
+   "byOutcome": {
+    "vKill": 6,
+    "mFlee": 19,
+    "vFlee": 2,
+    "vDie": 1
+   },
+   "mFleeBelowLine": 19,
+   "manufactured": 6,
+   "preWounded": 13,
+   "vKill": 6
+  },
+  {
+   "seed": 73677,
+   "days": 174,
+   "endReason": "village-lost",
+   "won": 0,
+   "defenderFights": 37,
+   "byOutcome": {
+    "mFlee": 27,
+    "vFlee": 4,
+    "vKill": 6
+   },
+   "mFleeBelowLine": 26,
+   "manufactured": 3,
+   "preWounded": 23,
+   "vKill": 6
+  },
+  {
+   "seed": 73678,
+   "days": 106,
+   "endReason": "village-lost",
+   "won": 0,
+   "defenderFights": 41,
+   "byOutcome": {
+    "mFlee": 28,
+    "vKill": 10,
+    "vFlee": 3
+   },
+   "mFleeBelowLine": 28,
+   "manufactured": 8,
+   "preWounded": 20,
+   "vKill": 10
+  }
+ ],
+ "manufacturedRounds": {
+  "n": 44,
+  "hist": {
+   "1": 6,
+   "2": 12,
+   "3": 9,
+   "4": 10,
+   "5": 4,
+   "6": 1,
+   "7": 1,
+   "9": 1
+  },
+  "median": 3,
+  "mean": 3.16,
+  "min": 1,
+  "max": 9,
+  "bySeed": {
+   "73671": 11,
+   "73672": 3,
+   "73673": 1,
+   "73674": 6,
+   "73675": 6,
+   "73676": 6,
+   "73677": 3,
+   "73678": 8
+  },
+  "extraRoundsIfPlus1": 44,
+  "meanRelativeLengthening": 0.317
+ },
+ "metRounds": {
+  "n": 196,
+  "hist": {
+   "0": 196
+  }
+ },
+ "vKillStartFracMin": null,
+ "residual": {
+  "preWoundedEvents": 196,
+  "preWoundedByWave": {
+   "w1": 133,
+   "w2": 57,
+   "w3": 6
+  },
+  "defenderStartBelowLine": 196,
+  "preWoundedReMeets": 674,
+  "preWoundedReMetEvents": 161,
+  "preWoundedFinished": 0,
+  "preWoundedRounds0ReMeets": 674
+ }
+}
