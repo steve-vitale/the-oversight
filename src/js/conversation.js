@@ -5944,6 +5944,31 @@
             } else {
               const opener = this.convoWantOpener ? this.convoWantOpener(vid, c.want) : null;
               wline = opener && opener.line;
+              // STAGE-0 RE-ASK (journey-deepening r53 2026-10-26): a
+              // stage-0 ask_favor opener can draw a favor-line variant
+              // that is already in the 48-entry run ledger — the variant
+              // space is small (food_share: 3 openers x 3 details x 2
+              // anchors), so a variant spoken in a recent sitting
+              // collides often. Without this guard sayLine dry-replaces
+              // the ask with "...Sorry, lost my train of thought." and
+              // the player never hears the ask (probe: test-journey-
+              // deepening-r53-stage0-ask). Stage 1-2 already escapes via
+              // engageBeat; stage 0 gets the same escape here: a fresh
+              // re-ask phrasing (convoFavorFollowup), else the favor's
+              // whyLine. If both are blocked too, the original stands
+              // and sayLine dries honestly — no silent beat, no fake
+              // line. The ledgers themselves are untouched: parrot
+              // protection still applies to every other beat.
+              if (wline && c.want && c.want.id === 'ask_favor' &&
+                  typeof this.convoWouldBlock === 'function' &&
+                  this.convoWouldBlock(vid, wline)) {
+                const fav = (c.want && c.want.favor) ||
+                  (typeof this.convoGetFavor === 'function' ? this.convoGetFavor(vid) : null);
+                let alt = null;
+                try { if (fav && typeof this.convoFavorFollowup === 'function') alt = this.convoFavorFollowup(vid, fav); } catch (e) { alt = null; }
+                if (alt && !this.convoWouldBlock(vid, alt)) wline = alt;
+                else if (fav && fav.whyLine && !this.convoWouldBlock(vid, fav.whyLine)) wline = fav.whyLine;
+              }
             }
             if (c.want) c.want.stage = Math.max(c.want.stage || 0, 1);
           } catch (e) {}

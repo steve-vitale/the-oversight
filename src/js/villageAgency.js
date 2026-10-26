@@ -478,7 +478,7 @@
       var nv = {
         id: id,
         name: this._vaUniqueVillageName(banner),
-        x: Math.min(8, (v.x || 4) + 1), y: v.y || 4,
+        x: Math.min(8, (v.x ?? 4) + 1), y: v.y ?? 4,
         day: 0,
         population: Math.max(2, remainers.length),
         pantryKcal: Math.max(0, kcal || 0),
@@ -1321,7 +1321,7 @@
       var faces = this.ensureFaces(v) || { leader: { name: 'Ash' }, speaker: { name: 'Ash' }, champion: { name: 'Ash' } };
       var nm = v.name || 'a village';
       var dir = 'the wilds';
-      try { dir = this.directionTo(4, 4, v.x || 4, v.y || 4); } catch (e) {}
+      try { dir = this.directionTo(4, 4, v.x ?? 4, v.y ?? 4); } catch (e) {}
       if (kind === 'famine') {
         if (wrong) return `A traveler swears ${nm}, ${dir}, is feasting — a whole elk, they say. (They're wrong. ${nm} is starving.)`;
         return `A traveler from ${dir} says ${nm} is starving — ${faces.speaker.name}'s been seen counting empty jars, and the kids have gone quiet.`;
