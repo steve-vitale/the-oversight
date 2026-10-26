@@ -315,3 +315,33 @@ Deviation check vs telemetry-baselines/social.json:
   proof script, so the adoption commit was rebased onto master in the
   worktree, proof tests re-run, and only then merged --ff-only.
   (Post-rebase verification results appended below before landing.)
+
+## Adoption verification (this run, post-rebase)
+
+- Rebase onto master be8541647: CLEAN, 1 commit replayed as
+  71ba413b5, worktree status clean. No conflicts (the 12 master-ahead
+  commits touch neither conversation.js nor the r54 proof script).
+- Proof tests post-rebase: r55 main-menu proof GREEN (exit 0), r54
+  subject-menu proof GREEN (exit 0) — the subject-menu fix is intact
+  alongside the main-menu exemption on the new base.
+- Telemetry re-check (this run): 1 LOUD line — l3.deep2 newly
+  appeared (baseline 0 -> current pooled 108, n=4 files); l3.bonds
+  quiet (baseline 318 vs pooled 335). Verdict: EXPLAINED schema
+  artifact, not a bug — deep2 is the current formation key the old
+  baseline predates (same practice as r54/r55). Baseline NOT rolled.
+- check.js --quick on the rebased tree (evidence/2026-10-26/
+  r55-check-quick-adopt.log): 279 passed, 8 failed in 1090s —
+  EXACTLY the standing profile, file-for-file the same 8
+  pre-existing failures as r55's original run and lane A's
+  just-finished check (hide-discovery, measurement-comparison,
+  measurement-proof-update, measurement-workflow,
+  mobile-combat-cadence, occupation-panels, phone-frame-proof,
+  parity-20261014). Zero conversation/gossip/moot failures; the
+  nonzero exit is the standing set's, not a new break.
+  (A first attempt via `check.js --help` was killed on discovery
+  that check.js ignores --help and runs the suite: wrong
+  invocation, no cache flag, output truncated by head, and
+  concurrent with lane A's live check — the concurrent-jest
+  pattern is forbidden. The real run used --quick +
+  --cacheDirectory=/tmp/jest-cache-playtest2, after lane A
+  finished; lane A's own check also landed 279/8.)
