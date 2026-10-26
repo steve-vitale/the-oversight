@@ -235,4 +235,13 @@ No other src/js change this run (game.js guard only, 14 insertions).
 
 ## Landing note
 
-[TBD at landing: commit hash, master movement, re-verification.]
+Master moved during this run (2ae24d410 -> ac98043a1, sibling
+sim-food/scale landings + a version bump). The branch was rebased in
+the worktree onto ac98043a1 with zero conflicts; the proof test was
+re-run green on the rebased tree (fix present, both guards). Commit
+e68a15e5f, merged locally with --ff-only, pending ship (ship loop
+owns bumps/pushes/live verification). Safe-commit index clobber
+struck once on the first commit (all 5 new files staged-deleted,
+game.js MM) and was repaired with the documented cacheinfo recipe;
+status + diff HEAD verified empty before the rebase. The commit
+itself was correct throughout.
