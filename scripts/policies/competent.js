@@ -1554,7 +1554,19 @@ function assignBest(Game, task, occWords) {
 
 // assignAnother: like assignBest but allows MULTIPLE villagers on the same
 // task (the creek crew, not a lone fisher).
-function assignAnother(Game, task, occWords) {
+// FISH STAFFING FALLBACK (longsim food 2026-10-26, sim-fishfallback-b):
+// the old code asked ONLY the top scorer and reported success even when
+// they refused (assignTask's {ok:false} was never checked), so one
+// refuser — e.g. Rosa Mendez on the trust gate — absorbed every creek
+// ask while the creek stayed thin, and ctx.fishStaffed counted refusals
+// as staffed slots. Mirror the landed cook fallback (commit 908ad0f12):
+// walk down the scored list until someone accepts; a refusal, a null,
+// or an exception moves to the next candidate; if nobody accepts, return
+// false (no fisher staffed — honest, not forced) and the fish loop breaks
+// for that day's remaining slots (same free pool, same answer). Slots
+// staffed by a non-top candidate count ctx.fishStaffFallback, mirroring
+// ctx.cookStaffFallback. Ties keep roster order (stable sort), as before.
+function assignAnother(Game, task, occWords, ctx) {
   try {
     const v = Game.state.village || {};
     const free = freeVillagers(Game);
@@ -1570,8 +1582,16 @@ function assignAnother(Game, task, occWords) {
       return s;
     };
     free.sort((a, b) => score(b) - score(a));
-    try { Game.assignTask(free[0], task, { via: 'in-person' }); return true; }
-    catch (e) { return false; }
+    for (let ci = 0; ci < free.length; ci++) {
+      let res = null;
+      try { res = Game.assignTask(free[ci], task, { via: 'in-person' }); }
+      catch (e) { res = null; }
+      if (res && res.ok) {
+        if (ctx && ci > 0 && task === 'fish') ctx.fishStaffFallback = (ctx.fishStaffFallback || 0) + 1;
+        return true;
+      }
+    }
+    return false;
   } catch (e) { return false; }
 }
 
@@ -1593,7 +1613,7 @@ function counterPlay(Game, ctx) {
       const day = (Game.state.scholar || {}).day || 0;
       const wantFishers = pantryKcal < 15000 ? 3 : (pantryKcal < 30000 || day <= 5) ? 2 : 1;
       for (let i = fishers; i < wantFishers; i++) {
-        if (assignAnother(Game, 'fish', ['fisherman', 'fishing guide', 'sailor', 'hunter', 'cook']))
+        if (assignAnother(Game, 'fish', ['fisherman', 'fishing guide', 'sailor', 'hunter', 'cook'], ctx))
           ctx.fishStaffed = (ctx.fishStaffed || 0) + 1;
         else break;
       }
@@ -3202,3 +3222,4 @@ module.exports.gearUp = gearUp;
 
 module.exports.workGarden = workGarden;
 module.exports.donateSurplus = donateSurplus;
+module.exports.assignAnother = assignAnother; // sim-fishfallback-b proof test
