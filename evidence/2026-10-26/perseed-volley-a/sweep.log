@@ -1,0 +1,56 @@
+--- baseline seed 73671 ---
+  [baseline seed 73671] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=national natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=48
+--- baseline seed 73672 ---
+  [baseline seed 73672] days=180 gameDays=180 end=survived wave=4 arc=4 finalRank=regional natEver=0 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=51
+--- baseline seed 73673 ---
+  [baseline seed 73673] days=124 gameDays=124 end=village-lost wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=32
+--- baseline seed 73674 ---
+  [baseline seed 73674] days=142 gameDays=142 end=over-other wave=3 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=28
+--- baseline seed 73675 ---
+  [baseline seed 73675] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=26
+--- baseline seed 73676 ---
+  [baseline seed 73676] days=144 gameDays=144 end=over-other wave=4 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=43
+--- baseline seed 73677 ---
+  [baseline seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41
+--- baseline seed 73678 ---
+  [baseline seed 73678] days=104 gameDays=104 end=village-lost wave=3 arc=3 finalRank=regional natEver=0 natFinal=0 table=0 entered=0 won=0 starv=1 deaths=38
+--- armed seed 73671 ---
+  [armed seed 73671] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=national natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=48 fieldAll=158 field4=3 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73672 ---
+  [armed seed 73672] days=180 gameDays=180 end=survived wave=4 arc=4 finalRank=regional natEver=0 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=51 fieldAll=162 field4=5 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73673 ---
+  [armed seed 73673] days=124 gameDays=124 end=village-lost wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=32 fieldAll=176 field4=2 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73674 ---
+  [armed seed 73674] days=142 gameDays=142 end=over-other wave=3 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=28 fieldAll=175 field4=0 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73675 ---
+  [armed seed 73675] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=26 fieldAll=168 field4=1 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73676 ---
+  [armed seed 73676] days=144 gameDays=144 end=over-other wave=4 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=43 fieldAll=129 field4=0 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73677 ---
+  [armed seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41 fieldAll=110 field4=1 fullyDecomposed=true diagErrs=0 noRecord=0
+--- armed seed 73678 ---
+  [armed seed 73678] days=104 gameDays=104 end=village-lost wave=3 arc=3 finalRank=regional natEver=0 natFinal=0 table=0 entered=0 won=0 starv=1 deaths=38 fieldAll=101 field4=0 fullyDecomposed=true diagErrs=0 noRecord=0
+
+=== sim-volley-a ===
+  baseline: n=8 won=2 medD=152 natEver=6 natFinal=5 table=4 entered=2 wave4=6 wave5=0 starv=1 deaths=307
+  armed:    n=8 won=2 medD=152 natEver=6 natFinal=5 table=4 entered=2 wave4=6 wave5=0 starv=1 deaths=307
+  rebaseline vs 1920Z: EXACT
+  G2 recorder neutrality: PASS (8/8; faced 8/8, kills 8/8)
+  corpus: PASS; costBar starvationOk=true medianOk=true
+  seed 73671: fieldAll=158 field4=3 fullyDecomposed=true gates4={"G2-no-ranged-equipped":2,"G6-bow-no-ammo":1} intent4={"learn":3} party4={"solo-potential":3}
+  seed 73672: fieldAll=162 field4=5 fullyDecomposed=true gates4={"G2-no-ranged-equipped":5} intent4={"learn":4,"engage":1} party4={"solo-potential":5}
+  seed 73673: fieldAll=176 field4=2 fullyDecomposed=true gates4={"G6-bow-no-ammo":1,"G5-ammo-field-missing":1} intent4={"learn":2} party4={"solo-potential":2}
+  seed 73674: fieldAll=175 field4=0 fullyDecomposed=true gates4={} intent4={} party4={}
+  seed 73675: fieldAll=168 field4=1 fullyDecomposed=true gates4={"G2-no-ranged-equipped":1} intent4={"engage":1} party4={"called":1}
+  seed 73676: fieldAll=129 field4=0 fullyDecomposed=true gates4={} intent4={} party4={}
+  seed 73677: fieldAll=110 field4=1 fullyDecomposed=true gates4={"G2-no-ranged-equipped":1} intent4={"learn":1} party4={"solo-potential":1}
+  seed 73678: fieldAll=101 field4=0 fullyDecomposed=true gates4={} intent4={} party4={}
+  band gates ALL (1179): {"G2-no-ranged-equipped":518,"G6-bow-no-ammo":389,"G5-ammo-field-missing":226,"G0-preempt-evade":46}
+  band gates W4 (12): {"G2-no-ranged-equipped":9,"G6-bow-no-ammo":2,"G5-ammo-field-missing":1}
+  band intent ALL: {"engage":977,"learn":202} why: {"good-exchange":135,"learn-first":202,"trick-known":822,"party":20}
+  band intent W4: {"learn":10,"engage":2} why: {"learn-first":10,"trick-known":1,"party":1} repro10/2=true
+  band party ALL: {"solo-potential":1148,"potential-never-hopeless":26,"called":5}
+  band party W4: {"solo-potential":11,"called":1}
+  band optsAllies ALL: {"0":1148,"1":7,"2":24} W4: {"0":11,"1":1}
+  fullyDecomposed seeds: 8/8 -> VERDICT DIAG-GO
+  -> /home/hatch/workspace/worktrees/sim-volley-a/evidence/2026-10-26/perseed-volley-a/summary.json
