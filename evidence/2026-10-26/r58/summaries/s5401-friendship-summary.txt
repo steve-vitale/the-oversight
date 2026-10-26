@@ -1,0 +1,130 @@
+# SURFACE+SEEDED — seed 5401 (142d, 8 alive)
+
+npcPairs=65 deep2=32 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=83 closeReadsServed=19 grievanceServes=3 othersSteered=1
+COND-TP: firstDeep2Day=30 lateClose=54 lateTP=39 lateNull=0 condRate=72.2% pooledTP=39/65 pooledRate=60.0% grievReadsByWhy={"grievance":8,"vgrievance":1}
+FUNNEL (natural): convos=414 subject=414 offered=179 picked=82 classes={"subject-no-offer":235,"offered-not-picked":97,"picked-others":82}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=235 rate=56.8% offered=179 mainOffered=0 subjectOffered=179 picked=82 latePicks=9 latePicksMain=0 latePicksSubject=9
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Ivy / Jovan / Austin — "Majda talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Liam / Majda — "Kate found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Ivy / Jovan / Valeria — "that stray dog — the one that bit two people — lets Liam touch it."
+REOFFER: offers=158 picks=72 latePicks=9 missedChangedNotOffered=0
+WRAPSERVE: convos=9 matcherHits=3 matcherServes=3 classes={"grievance-line":3,"deflection":2,"other":4}
+FUNNEL-PROBE (subject-no-offer turns): turns=446 menuProblem=426 pickProblem=20
+SEEDED-DAILY: [{"day":29,"v":44,"depth":3},{"day":30,"v":48,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":56,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":64,"depth":3},{"day":35,"v":64,"depth":3},{"day":36,"v":68,"depth":3},{"day":37,"v":72,"depth":3},{"day":38,"v":76,"depth":3},{"day":39,"v":76,"depth":3},{"day":40,"v":76,"depth":3},{"day":41,"v":80,"depth":3},{"day":42,"v":84,"depth":3}] class=rise
+GOSSIP: totalPicks=384 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=27 31-60=30 61-90=16 91-120=4 121+=5 naturalPicks=82 seededPicks=1 gossipPicks=384
+SEEDED: {"pair":{"a":"gen_i5ux3gk","b":"gen_mjzi8tt","aName":"Liam","bName":"Kate"},"day":28,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":29,"v":44,"depth":3},{"day":30,"v":48,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":56,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":64,"depth":3},{"day":35,"v":64,"depth":3},{"day":36,"v":68,"depth":3},{"day":37,"v":72,"depth":3},{"day":38,"v":76,"depth":3},{"day":39,"v":76,"depth":3},{"day":40,"v":76,"depth":3},{"day":41,"v":80,"depth":3},{"day":42,"v":84,"depth":3}],"crackTraceClass":"rise","vAt7":64,"depthAt7":3,"vDrop":-12,"depthDrop":-1,"crack7":false,"firstServe":{"day":31,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":31,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Liam <> Kate — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Liam <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Liam <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Kate <> Nathan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d85: Liam <> Jovan — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d55: Liam <> Rosa — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Liam <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Austin <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Austin <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Aria <> Austin — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d40: Austin <> Kate — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Majda <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Majda <> Kate — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d110: Aria <> Majda — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d35: Aria <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Austin <> Ivy — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d120: Nathan <> Valeria — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d70: Austin <> Majda — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Austin <> Nathan — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d75: Aria <> Kate — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d85: Aria <> Valeria — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d80: Kate <> Valeria — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d75: Kate <> Ivy — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d105: Majda <> Ivy — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d90: Majda <> Rosa — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d90: Sandra <> Ivy — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d90: Sandra <> Austin — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d90: Sandra <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Sandra <> Jovan — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d90: Sandra <> Valeria — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d90: Sandra <> Rosa — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d100: Sandra <> Kate — maxDepth 2, final 2 (v=69), dropped 0
+  CLOSE-READ d16: Austin about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Aria about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Austin about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Aria about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Majda about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Ivy about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Liam about Kate — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Valeria about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Aria about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Rosa about Bakhyt — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Aria about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Aria about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Austin about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Majda about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Jovan about Majda — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Aria about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Nathan about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Aria about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Austin about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Majda about Liam — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Nathan about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Kate about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Nathan about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Rosa about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Aria about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Aria about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d54: Aria about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Aria about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Aria about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Majda about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Jovan about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Aria about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Jovan about Majda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d69: Majda about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Aria about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Jovan about Liam — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Jovan about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Liam about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Austin about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Nathan about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d6: Valeria about Ivy (why=grievance)
+  GRIEV-READ d9: Kate about Bakhyt (why=grievance)
+  GRIEV-READ d16: Ivy about Valeria (why=grievance)
+  GRIEV-READ d17: Bakhyt about Kate (why=grievance)
+  GRIEV-READ d21: Bakhyt about Kate (why=grievance)
+  GRIEV-READ d24: Bakhyt about Kate (why=grievance)
+  KNACK d11 Valeria: "Aria talks to the garden. The garden listens. I've seen it."
+  KNACK d14 Majda: "that stray dog — the one that bit two people — lets Ivy touch it."
+  KNACK d20 Aria: "Um — that stray dog — the one that bit two people — lets Austin touch it."
+  KNACK d22 Liam: "Nathan talks to the garden. The garden listens. I've seen it, as it were."
+  KNACK d25 Ivy: "Majda talks to the garden. The garden listens. I've seen it."
+  KNACK d28 Nathan: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Liam touch it."
+  KNACK d30 Liam: "Kate found a lost knife by smell last week. By SMELL."
+  KNACK d34 Majda: "Nathan talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"a wound that wouldn't close":1,"contest":1,"dehydration":1}

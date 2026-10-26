@@ -1,0 +1,118 @@
+# SURFACE+SEEDED — seed 5403 (141d, 9 alive)
+
+npcPairs=64 deep2=26 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=92 closeReadsServed=26 grievanceServes=9 othersSteered=9
+COND-TP: firstDeep2Day=35 lateClose=47 lateTP=39 lateNull=0 condRate=83.0% pooledTP=39/57 pooledRate=68.4% grievReadsByWhy={"grievance":0,"vgrievance":9}
+FUNNEL (natural): convos=414 subject=411 offered=170 picked=83 classes={"subject-no-offer":241,"picked-others":83,"offered-not-picked":87,"no-subject-no-ans":3}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=241 rate=58.2% offered=170 mainOffered=3 subjectOffered=169 picked=83 latePicks=22 latePicksMain=2 latePicksSubject=20
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=5
+  KNACK-CIRCULATION: Stan / Tashi / Caleb — "cuts close faster when Mara wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Stan / Caleb — "Jorge sees in the dark. Not well — but better than you. Better than me."
+  KNACK-CIRCULATION: Stan / Masego / Mara — "Tashi found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Naran / Caleb — "You want to know about that? Okay." "Tashi found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Mara / Jorge — "Good question." "Caleb sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=165 picks=80 latePicks=19 missedChangedNotOffered=3
+WRAPSERVE: convos=9 matcherHits=9 matcherServes=9 classes={"grievance-line":9,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=468 menuProblem=314 pickProblem=154
+SEEDED-DAILY: [{"day":23,"v":42,"depth":2},{"day":24,"v":44,"depth":2},{"day":25,"v":44,"depth":2},{"day":26,"v":46,"depth":2},{"day":27,"v":46,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":46,"depth":2},{"day":30,"v":49,"depth":2},{"day":31,"v":49,"depth":2},{"day":32,"v":51,"depth":3},{"day":33,"v":51,"depth":3},{"day":34,"v":51,"depth":3},{"day":35,"v":51,"depth":3},{"day":36,"v":51,"depth":3}] class=no-drop
+GOSSIP: totalPicks=378 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=23 31-60=19 61-90=19 91-120=14 121+=8 naturalPicks=83 seededPicks=9 gossipPicks=378
+SEEDED: {"pair":{"a":"gen_0pye7we","b":"gen_x1ehp5i","aName":"Carmine","bName":"Nassim"},"day":22,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":23,"v":42,"depth":2},{"day":24,"v":44,"depth":2},{"day":25,"v":44,"depth":2},{"day":26,"v":46,"depth":2},{"day":27,"v":46,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":46,"depth":2},{"day":30,"v":49,"depth":2},{"day":31,"v":49,"depth":2},{"day":32,"v":51,"depth":3},{"day":33,"v":51,"depth":3},{"day":34,"v":51,"depth":3},{"day":35,"v":51,"depth":3},{"day":36,"v":51,"depth":3}],"crackTraceClass":"no-drop","vAt7":null,"depthAt7":null,"vDrop":null,"depthDrop":null,"crack7":false,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":9,"servesAll":[{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":51,"why":"vgrievance"}],"effect":true}
+  FRIEND d50: Masego <> Nassim — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d80: Carmine <> Jorge — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d80: Carmine <> Stan — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d40: Nassim <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Carmine <> Masego — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d35: Nassim <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Jorge <> Tashi — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d95: Masego <> Tashi — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d80: Carmine <> Tashi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Masego <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Carmine <> Naran — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d100: Masego <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Masego <> Mara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Naran <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Jorge <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Nassim <> Tashi — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d35: Nassim <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Mara <> Naran — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d65: Nassim <> Mara — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d90: Masego <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Stan <> Tashi — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d100: Jorge <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Carmine <> Mara — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d105: Jorge <> Mara — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d140: Mara <> Stan — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d80: Caleb <> Carmine — maxDepth 2, final 2 (v=69), dropped 0
+  CLOSE-READ d17: Stan about Nassim — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Stan about Nassim — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Nassim about Carmine — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Stan about Nassim — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Stan about Carmine — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Nassim about Stan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Jorge about Nassim — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Naran about Nassim — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Masego about Nassim — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Masego about Nassim — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Stan about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Tashi about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Stan about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Stan about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Mara about Nassim — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Mara about Nassim — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Tashi about Nassim — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Masego about Nassim — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Stan about Nassim — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Mara about Nassim — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Masego about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Masego about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Masego about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Mara about Nassim — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Masego about Nassim — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Stan about Nassim — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Stan about Nassim — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Masego about Nassim — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Nassim about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Mara about Nassim — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Masego about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Naran about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d83: Stan about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Masego about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Jorge about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Masego about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Tashi about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Masego about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Masego about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Masego about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Tashi about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Masego about Jorge — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Mara about Masego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Masego about Jorge — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Masego about Jorge — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Masego about Jorge — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Naran about Jorge — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Masego about Jorge — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Jorge about Masego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Masego about Jorge — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Naran about Masego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d28: Carmine about Nassim (why=vgrievance)
+  GRIEV-READ d29: Carmine about Nassim (why=vgrievance)
+  GRIEV-READ d35: Carmine about Nassim (why=vgrievance)
+  GRIEV-READ d37: Carmine about Nassim (why=vgrievance)
+  GRIEV-READ d38: Carmine about Nassim (why=vgrievance)
+  GRIEV-READ d39: Carmine about Nassim (why=vgrievance)
+  KNACK d9 Stan: "cuts close faster when Mara wraps them. Don't ask me how."
+  KNACK d10 Stan: "Naran talks to the garden. The garden listens. I've seen it."
+  KNACK d11 Stan: "Jorge sees in the dark. Not well — but better than you. Better than me."
+  KNACK d17 Masego: "cuts close faster when Carmine wraps them. Don't ask me how."
+  KNACK d20 Stan: "Tashi found a lost knife by smell last week. By SMELL."
+  KNACK d23 Carmine: "Nassim ate something last month that should've killed them. They're fine."
+  KNACK d23 Tashi: "Good question." "Masego talks to the garden. The garden listens. I've seen it. Anyway."
+  KNACK d25 Naran: "You want to know about that? Okay." "Tashi found a lost knife by smell last week. By SMELL."
+
+deathCauses: {"monster":2,"the arena":2,"contest":1,"a wound that wouldn't close":1}

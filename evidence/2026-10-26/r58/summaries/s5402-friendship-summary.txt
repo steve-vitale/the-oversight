@@ -1,0 +1,89 @@
+# SURFACE+SEEDED — seed 5402 (90d, 3 alive)
+
+npcPairs=55 deep2=19 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=67 closeReadsServed=17 grievanceServes=1 othersSteered=1
+COND-TP: firstDeep2Day=20 lateClose=41 lateTP=30 lateNull=0 condRate=73.2% pooledTP=31/42 pooledRate=73.8% grievReadsByWhy={"grievance":0,"vgrievance":1}
+FUNNEL (natural): convos=245 subject=240 offered=103 picked=70 classes={"picked-others":70,"no-subject-no-ans":5,"subject-no-offer":137,"offered-not-picked":33}
+FUNNEL-UNSTEERED (r55 strict): convos=245 subjectNoOffer=137 rate=55.9% offered=103 mainOffered=0 subjectOffered=103 picked=70 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Henry / Raj — "that stray dog — the one that bit two people — lets Autumn touch it."
+  KNACK-CIRCULATION: Elif / Tom — "Henry talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Henry / Autumn — "Lena ate something last month that should've killed them. They're fine."
+REOFFER: offers=83 picks=62 latePicks=0 missedChangedNotOffered=2
+WRAPSERVE: convos=1 matcherHits=1 matcherServes=1 classes={"grievance-line":1,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=304 menuProblem=227 pickProblem=77
+SEEDED-DAILY: [{"day":19,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":38,"depth":2},{"day":22,"v":42,"depth":2},{"day":23,"v":48,"depth":2},{"day":24,"v":54,"depth":3},{"day":25,"v":60,"depth":3},{"day":26,"v":64,"depth":3},{"day":27,"v":64,"depth":3},{"day":28,"v":64,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":73,"depth":3},{"day":31,"v":77,"depth":3},{"day":32,"v":81,"depth":3}] class=rise
+GOSSIP: totalPicks=211 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=26 31-60=28 61-90=12 91-120=0 121+=0 naturalPicks=66 seededPicks=1 gossipPicks=211
+SEEDED: {"pair":{"a":"gen_h1ofyug","b":"gen_m3og914","aName":"Autumn","bName":"Francisco"},"day":18,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":19,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":38,"depth":2},{"day":22,"v":42,"depth":2},{"day":23,"v":48,"depth":2},{"day":24,"v":54,"depth":3},{"day":25,"v":60,"depth":3},{"day":26,"v":64,"depth":3},{"day":27,"v":64,"depth":3},{"day":28,"v":64,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":73,"depth":3},{"day":31,"v":77,"depth":3},{"day":32,"v":81,"depth":3}],"crackTraceClass":"rise","vAt7":60,"depthAt7":3,"vDrop":-10,"depthDrop":-1,"crack7":false,"firstServe":{"day":19,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":19,"why":"vgrievance"}],"effect":true}
+  FRIEND d60: Cheyenne <> Francisco — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d80: Cheyenne <> Delali — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d40: Francisco <> Delali — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Cheyenne <> Raj — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d60: Cheyenne <> Henry — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d60: Cheyenne <> Hannah — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d75: Raj <> Tom — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d60: Cheyenne <> Autumn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Autumn <> Francisco — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Autumn <> Hannah — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d40: Autumn <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Henry <> Raj — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d50: Elif <> Autumn — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d25: Autumn <> Delali — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Delali <> Hannah — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d35: Autumn <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Autumn <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Delali <> Raj — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d60: Cheyenne <> Tom — maxDepth 2, final 2 (v=52), dropped 0
+  CLOSE-READ d18: Autumn about Francisco — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d20: Francisco about Autumn — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d22: Henry about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Raj about Autumn — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Delali about Autumn — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Henry about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Tom about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Francisco about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Henry about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Henry about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Henry about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Francisco about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Tom about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Hannah about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Elif about Francisco — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Henry about Autumn — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Henry about Autumn — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Tom about Autumn — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Tom about Autumn — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Elif about Francisco — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Henry about Autumn — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Henry about Autumn — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Tom about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Henry about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Henry about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Delali about Francisco — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Henry about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Francisco about Delali — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Tom about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Autumn about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Delali about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Elif about Autumn — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Elif about Autumn — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Tom about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Henry about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Elif about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Elif about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Tom about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Tom about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Elif about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Tom about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Elif about Autumn — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d19: Autumn about Francisco (why=vgrievance)
+  KNACK d4 Henry: "that stray dog — the one that bit two people — lets Autumn touch it."
+  KNACK d10 Tom: "Good question." "Lena ate something last month that should've killed them. They're fine."
+  KNACK d12 Francisco: "that stray dog — the one that bit two people — lets Tom touch it. That's my read."
+  KNACK d19 Delali: "that stray dog — the one that bit two people — lets Hannah touch it."
+  KNACK d23 Elif: "Henry talks to the garden. The garden listens. I've seen it."
+  KNACK d26 Autumn: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Hannah touch it."
+  KNACK d31 Henry: "Lena ate something last month that should've killed them. They're fine."
+  KNACK d35 Autumn: "You want to know about that? Okay." "cuts close faster when Raj wraps them. Don't ask me how."
+
+deathCauses: {"ambush":1,"the arena":7,"The Mountain Lord":1,"combat":1,"monster":3}
