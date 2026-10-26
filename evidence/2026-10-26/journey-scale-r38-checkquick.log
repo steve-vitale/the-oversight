@@ -1,0 +1,116 @@
+check.js: 287 scripts, 2 parallel (quick)
+...............................................................................F...............................F..F..F.F..F.........F.......................................................................................................................F..................................
+
+  FAIL scripts/godpath/test-hide-discovery.js (exit 1, 6.1s)
+        FAIL counter butchering keeps material and lesson on the counter until pickup
+        ok   taking the real butchered hide completes the discovery path
+        ok   blind public trial risks actual hide and lashing supplies
+        ok   only a real successful trial advances the outline to L2
+        ok   maker handles visible spare hide then attempts its earned outline
+        ok   wrong visible lashing guess preserves stock and reveals no hidden ingredient list
+        ok   repeated upkeep cannot spam blind recipe probes
+        ok   passing days does not repeat an unchanged rejected guess
+        ok   new visible supplies permit a real funded trial without a skipped-probe cooldown
+      
+      hide-discovery: 24 passed, 1 failed, 0 todo (phase 0)
+      failing: counter butchering keeps material and lesson on the counter until pickup
+
+  FAIL scripts/godpath/test-measurement-comparison.js (exit 1, 15.1s)
+          at summarizeValidated (/home/hatch/workspace/worktrees/journey-scale/scripts/balance-windows.js:46:46)
+          at Object.summarizeHarnessRevision (/home/hatch/workspace/worktrees/journey-scale/scripts/balance-windows.js:40:10)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/godpath/test-measurement-comparison.js:5:1161)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 5.2s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey-scale/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 2.6s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        FAIL proof declares every collector and contract input rather than silently omitting one
+        FAIL collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        FAIL every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 5 passed, 4 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs | proof declares every collector and contract input rather than silently omitting one | collector and contract have
+
+  FAIL scripts/godpath/test-mobile-combat-cadence.js (exit 1, 4.7s)
+        ok   hand-back follows resolution
+        ok   superseded announcement cannot perform a stale enemy action
+        ok   save retains the announced but unresolved actor
+        ok   Continue resolves the pending enemy exactly once
+        FAIL Continue does not wrap the announced round a second time
+        ok   Continue hands control back with fresh player inputs
+        ok   enemy-phase endings publish the terminal state to the browser
+        ok   faster opening enemy is announced before acting
+        ok   each faster opening enemy acts once before usable player controls
+      
+      mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+      failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 1.8s)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/godpath/test-occupation-panels.js:17:14)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 5.5s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/carexplore.js,src/js/codex-people.js,src/js/c
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-parity-20261014.js (exit 1, 7.5s)
+        ok   objectives call villagerSeekKnowledge / villagerNeedTrack
+        ok   playerDeath calls mantleBecome
+        ok   endDay village tick calls villagerBuildDay
+        ok   knacks pick by pickVillagerKnack
+        ok   conversation teaches (npcLearnFromTalk)
+        ok   field fights teach witnesses (npcWitnessAbility)
+        ok   the capable bot uses the same brain
+        ok   villager-build.js loads from index.html
+        ok   no player-only XP scale left in tracks.js
+      
+      test-parity-20261014: 59 passed, 1 failed, 0 todo (phase 0)
+      failing: gear: they still wear their spear and jacket
+
+  slowest: scripts/godpath/test-trust-observer-neutrality.js 73s, scripts/test-synergy-stall.js 72s, scripts/test-capable-bot-20261014.js 69s
+
+check.js: 279 passed, 8 failed in 1526s
+EXIT=1
