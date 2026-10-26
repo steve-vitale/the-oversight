@@ -1,0 +1,91 @@
+# SURFACE+SEEDED — seed 5202 (87d, 0 alive)
+
+npcPairs=98 deep2=20 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=62 closeReadsServed=28 grievanceServes=3 othersSteered=60
+COND-TP: firstDeep2Day=20 lateClose=40 lateTP=18 lateNull=0 condRate=45.0% pooledTP=18/41 pooledRate=43.9% grievReadsByWhy={"grievance":5,"vgrievance":0}
+FUNNEL (natural): convos=246 subject=221 offered=134 picked=62 classes={"subject-no-offer":87,"offered-not-picked":51,"picked-others":62,"no-subject-ans":5,"no-subject-no-ans":20,"offered-capped":21}
+FUNNEL-UNSTEERED (r55 strict): convos=186 subjectNoOffer=87 rate=46.8% offered=74 mainOffered=0 subjectOffered=74 picked=2 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Amina / Ellis — "Nora ate something last month that should've killed them. They're fine."
+REOFFER: offers=88 picks=46 latePicks=0 missedChangedNotOffered=2
+WRAPSERVE: convos=5 matcherHits=3 matcherServes=3 classes={"grievance-line":3,"deflection":2,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=208 menuProblem=173 pickProblem=35
+SEEDED-DAILY: [{"day":19,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":38,"depth":2},{"day":22,"v":42,"depth":2},{"day":23,"v":46,"depth":2},{"day":24,"v":50,"depth":3},{"day":25,"v":50,"depth":3},{"day":26,"v":50,"depth":3},{"day":27,"v":50,"depth":3},{"day":28,"v":50,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":54,"depth":3},{"day":32,"v":54,"depth":3}] class=no-drop
+GOSSIP: totalPicks=145 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=18 31-60=22 61-90=22 91-120=0 121+=0 naturalPicks=62 seededPicks=0 gossipPicks=145
+SEEDED: {"pair":{"a":"gen_n0999i2","b":"gen_nhwypv6","aName":"Thao","bName":"Eduardo"},"day":18,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":19,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":38,"depth":2},{"day":22,"v":42,"depth":2},{"day":23,"v":46,"depth":2},{"day":24,"v":50,"depth":3},{"day":25,"v":50,"depth":3},{"day":26,"v":50,"depth":3},{"day":27,"v":50,"depth":3},{"day":28,"v":50,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":54,"depth":3},{"day":32,"v":54,"depth":3}],"crackTraceClass":"no-drop","vAt7":50,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":null,"serveWithin30":false,"serves":0,"servesAll":[],"effect":false}
+  FRIEND d20: Thao <> Eduardo — maxDepth 3, final 3 (v=63), dropped 0
+  FRIEND d45: Amina <> Thao — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Thao <> Lena — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d45: Thao <> Nora — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d30: Eduardo <> Nora — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d40: Thao <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d87: Thao <> Nino — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d35: Eduardo <> Vasyl — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d65: Nora <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Amina <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Nino <> Vasyl — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d70: Amina <> Nora — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d65: Lena <> Nora — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d87: Thao <> Nina — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d75: Nina <> Vasyl — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d87: Thao <> Rosa — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d87: Amina <> Nina — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d85: Rosa <> Vasyl — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d65: Chris <> Vasyl — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d87: Chris <> Thao — maxDepth 3, final 3 (v=96), dropped 0
+  CLOSE-READ d16: Eduardo about Thao — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Vasyl about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Nancy about Thao — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Nino about Eduardo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Lena about Eduardo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Vasyl about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Amina about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Vasyl about Eduardo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Amina about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Amina about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Vasyl about Eduardo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Efraín about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Ruby about Eduardo — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Vasyl about Thao — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Lena about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Vasyl about Thao — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Nino about Thao — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Vasyl about Thao — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Vasyl about Thao — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Vasyl about Thao — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Vasyl about Thao — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Thao about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Nora about Thao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Vasyl about Thao — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Nora about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Amina about Vasyl — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Nina about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Vasyl about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Vasyl about Amina — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Rosa about Vasyl — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Vasyl about Amina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Aria about Vasyl — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d81: Ellis about Vasyl — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d81: Neirys about Vasyl — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Nino about Vasyl — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Nina about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Nino about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Amina about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d5: Thao about A woman, maybe 60s, with grey-streaked hair (why=grievance)
+  GRIEV-READ d9: Lena about Eduardo (why=grievance)
+  GRIEV-READ d11: Nora about Thao (why=grievance)
+  GRIEV-READ d17: Nora about Thao (why=grievance)
+  GRIEV-READ d21: Nora about Thao (why=grievance)
+  KNACK d4 Thao: "Chris talks to the garden. The garden listens. I've seen it."
+  KNACK d8 Nancy: "that stray dog — the one that bit two people — lets Lena touch it. That's where we are."
+  KNACK d15 Amina: "Nora ate something last month that should've killed them. They're fine."
+  KNACK d20 Ruby: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Thao touch it."
+  KNACK d25 Amina: "Ruby sees in the dark. Not well — but better than you. Better than me."
+  KNACK d48 Thao: "You want to know about that? Okay." "We need to — Nora ate something last month that should've killed them. They're fin
+  KNACK d51 Nina: "that stray dog — the one that bit two people — lets Thao touch it."
+  KNACK d61 Vasyl: "Good question." "Nina talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the arena":9,"Inspiration":1,"contest":1,"monster":1,"combat":1}

@@ -1,0 +1,99 @@
+# SURFACE+SEEDED — seed 5204 (99d, 0 alive)
+
+npcPairs=50 deep2=16 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=93 closeReadsServed=28 grievanceServes=16 othersSteered=13
+COND-TP: firstDeep2Day=30 lateClose=40 lateTP=22 lateNull=0 condRate=55.0% pooledTP=22/51 pooledRate=43.1% grievReadsByWhy={"grievance":1,"vgrievance":23}
+FUNNEL (natural): convos=257 subject=257 offered=119 picked=80 classes={"subject-no-offer":138,"picked-others":80,"offered-not-picked":39}
+FUNNEL-UNSTEERED (r55 strict): convos=257 subjectNoOffer=138 rate=53.7% offered=119 mainOffered=5 subjectOffered=117 picked=80 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Ivy / Sanne — "Devon ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Nasimiyu / Devon — "Good question." "that stray dog — the one that bit two people — lets Ivy touch it."
+REOFFER: offers=109 picks=83 latePicks=0 missedChangedNotOffered=1
+WRAPSERVE: convos=24 matcherHits=16 matcherServes=16 classes={"grievance-line":16,"deflection":0,"other":8}
+FUNNEL-PROBE (subject-no-offer turns): turns=331 menuProblem=282 pickProblem=49
+SEEDED-DAILY: [{"day":29,"v":40,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":46,"depth":2},{"day":32,"v":50,"depth":3},{"day":33,"v":52,"depth":3},{"day":34,"v":54,"depth":3},{"day":35,"v":58,"depth":3},{"day":36,"v":60,"depth":3},{"day":37,"v":62,"depth":3},{"day":38,"v":66,"depth":3},{"day":39,"v":68,"depth":3},{"day":40,"v":70,"depth":3},{"day":41,"v":74,"depth":3},{"day":42,"v":74,"depth":3}] class=rise
+GOSSIP: totalPicks=231 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=32 31-60=35 61-90=13 91-120=0 121+=0 naturalPicks=80 seededPicks=13 gossipPicks=231
+SEEDED: {"pair":{"a":"gen_8ebvdl9","b":"gen_z24e6ld","aName":"Gloria","bName":"Benjamin"},"day":28,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":29,"v":40,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":46,"depth":2},{"day":32,"v":50,"depth":3},{"day":33,"v":52,"depth":3},{"day":34,"v":54,"depth":3},{"day":35,"v":58,"depth":3},{"day":36,"v":60,"depth":3},{"day":37,"v":62,"depth":3},{"day":38,"v":66,"depth":3},{"day":39,"v":68,"depth":3},{"day":40,"v":70,"depth":3},{"day":41,"v":74,"depth":3},{"day":42,"v":74,"depth":3}],"crackTraceClass":"rise","vAt7":58,"depthAt7":3,"vDrop":-8,"depthDrop":-1,"crack7":false,"firstServe":{"day":29,"why":"vgrievance"},"serveWithin30":true,"serves":23,"servesAll":[{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"}],"effect":true}
+  FRIEND d40: Theo <> Benjamin — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d55: Nasimiyu <> Theo — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d30: Gloria <> Benjamin — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d40: Gloria <> Theo — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d55: Theo <> Ivy — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d50: Theo <> Mia — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d35: Devon <> Benjamin — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d35: Devon <> Gloria — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d40: Devon <> Theo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Benjamin <> Sanne — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d60: Theo <> Sanne — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d40: Benjamin <> Mia — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d60: Ivy <> Liam — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d45: Benjamin <> Ivy — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d75: Ivy <> Sanne — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d65: Devon <> Ivy — maxDepth 3, final 3 (v=96), dropped 0
+  CLOSE-READ d17: Benjamin about Devon — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Devon about Benjamin — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Gloria about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Benjamin about Gloria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Gloria about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Gloria about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Liam about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Gloria about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Ivy about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Gloria about Benjamin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Theo about Devon — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Sanne about Benjamin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Mia about Benjamin — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Nasimiyu about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Theo about Benjamin — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Nasimiyu about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Devon about Gloria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Theo about Benjamin — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Sanne about Benjamin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Devon about Gloria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Nasimiyu about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Nasimiyu about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Devon about Gloria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Sanne about Benjamin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Nasimiyu about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Devon about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Ivy about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Nasimiyu about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Liam about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Mia about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Sanne about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Devon about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Sanne about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Liam about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Sanne about Theo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Sanne about Theo — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Nasimiyu about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Theo about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Nasimiyu about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Nasimiyu about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ivy about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Theo about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ivy about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Theo about Sanne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d10: Gloria about Xavier (why=grievance)
+  GRIEV-READ d29: Gloria about Benjamin (why=vgrievance)
+  GRIEV-READ d30: Gloria about Benjamin (why=vgrievance)
+  GRIEV-READ d30: Gloria about Benjamin (why=vgrievance)
+  GRIEV-READ d32: Gloria about Benjamin (why=vgrievance)
+  GRIEV-READ d32: Gloria about Benjamin (why=vgrievance)
+  KNACK d4 Susan: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Xavier touch it."
+  KNACK d10 Xavier: "Why do you ask? Devon ate something last month that should've killed them. They're fine."
+  KNACK d11 Benjamin: "You want to know about that? Okay." "Devon ate something last month that should've killed them. They're fine."
+  KNACK d16 Theo: "Devon ate something last month that should've killed them. They're fine. Makes sense to me."
+  KNACK d25 Ivy: "Devon ate something last month that should've killed them. They're fine."
+  KNACK d27 Liam: "Good question." "Devon ate something last month that should've killed them. They're fine."
+  KNACK d41 Sanne: "Devon ate something last month that should've killed them. They're fine."
+  KNACK d44 Nasimiyu: "Good question." "that stray dog — the one that bit two people — lets Ivy touch it."
+
+deathCauses: {"ambush":1,"a wound that wouldn't close":3,"Old Loud":1,"monster":2,"sickness":5}

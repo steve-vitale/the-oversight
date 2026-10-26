@@ -1,0 +1,121 @@
+# SURFACE+SEEDED — seed 5203 (141d, 7 alive)
+
+npcPairs=74 deep2=24 cracks=0 vCracks=0 friendGriev=0 stateGriev=10 stateFriend=0 stateVCrack=0 t2picks=110 closeReadsServed=25 grievanceServes=10 othersSteered=7
+COND-TP: firstDeep2Day=25 lateClose=62 lateTP=49 lateNull=0 condRate=79.0% pooledTP=49/63 pooledRate=77.8% grievReadsByWhy={"grievance":5,"vgrievance":10}
+FUNNEL (natural): convos=414 subject=414 offered=205 picked=103 classes={"subject-no-offer":209,"offered-not-picked":102,"picked-others":103}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=209 rate=50.5% offered=205 mainOffered=8 subjectOffered=204 picked=103 latePicks=42 latePicksMain=1 latePicksSubject=41
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Fritz / Wanjiru — "Valeria ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Keegan / Valeria / Wanjiru — "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK-CIRCULATION: Zoe / Riwai / Cesar — "You want to know about that? Okay." "Boris ate something last month that should've killed them. The
+  KNACK-CIRCULATION: Cesar / Renato / Boris / Valeria — "cuts close faster when Keegan wraps them. Don't ask me how."
+REOFFER: offers=192 picks=96 latePicks=39 missedChangedNotOffered=2
+WRAPSERVE: convos=15 matcherHits=10 matcherServes=10 classes={"grievance-line":10,"deflection":2,"other":3}
+FUNNEL-PROBE (subject-no-offer turns): turns=429 menuProblem=343 pickProblem=86
+SEEDED-DAILY: [{"day":24,"v":44,"depth":3},{"day":25,"v":48,"depth":3},{"day":26,"v":52,"depth":3},{"day":27,"v":56,"depth":3},{"day":28,"v":62,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":72,"depth":3},{"day":31,"v":76,"depth":3},{"day":32,"v":80,"depth":3},{"day":33,"v":86,"depth":3},{"day":34,"v":86,"depth":3},{"day":35,"v":86,"depth":3},{"day":36,"v":86,"depth":3},{"day":37,"v":90,"depth":3}] class=rise
+GOSSIP: totalPicks=384 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=15 31-60=23 61-90=23 91-120=26 121+=16 naturalPicks=103 seededPicks=7 gossipPicks=384
+SEEDED: {"pair":{"a":"gen_r3g5vkm","b":"gen_sffrdwx","aName":"Fritz","bName":"Renato"},"day":23,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":24,"v":44,"depth":3},{"day":25,"v":48,"depth":3},{"day":26,"v":52,"depth":3},{"day":27,"v":56,"depth":3},{"day":28,"v":62,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":72,"depth":3},{"day":31,"v":76,"depth":3},{"day":32,"v":80,"depth":3},{"day":33,"v":86,"depth":3},{"day":34,"v":86,"depth":3},{"day":35,"v":86,"depth":3},{"day":36,"v":86,"depth":3},{"day":37,"v":90,"depth":3}],"crackTraceClass":"rise","vAt7":72,"depthAt7":3,"vDrop":-20,"depthDrop":-1,"crack7":false,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":10,"servesAll":[{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":53,"why":"vgrievance"}],"effect":true}
+  FRIEND d120: Carmen <> Fritz — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Fritz <> Renato — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Renato <> Wanjiru — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Boris <> Fritz — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Fritz <> Wanjiru — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Keegan <> Fritz — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Boris <> Wanjiru — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d110: Boris <> Keegan — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d75: Boris <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Keegan <> Renato — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Valeria <> Wanjiru — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d110: Keegan <> Valeria — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d115: Boris <> Zoe — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d120: Fritz <> Zoe — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d30: Fritz <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Wanjiru <> Zoe — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d60: Boris <> Renato — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Renato <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Renato <> Zoe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Keegan <> Zoe — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d120: Cesar <> Boris — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d75: Cesar <> Renato — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Cesar <> Valeria — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d120: Cesar <> Fritz — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d21: Wanjiru about Fritz — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Valeria about Fritz — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Renato about Fritz — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d31: Renato about Fritz — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d32: Valeria about Fritz — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Valeria about Fritz — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Renato about Wanjiru — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Valeria about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Wanjiru about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Boris about Renato — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Keegan about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Boris about Valeria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Valeria about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Boris about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d62: Cesar about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d64: Zoe about Wanjiru — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d67: Cesar about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Cesar about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Cesar about Renato — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Cesar about Renato — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Cesar about Renato — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Cesar about Renato — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Cesar about Renato — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Cesar about Renato — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Cesar about Renato — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Cesar about Renato — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Cesar about Renato — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Cesar about Renato — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Zoe about Wanjiru — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Zoe about Renato — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Zoe about Renato — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Zoe about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Zoe about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Zoe about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Cesar about Renato — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Boris about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Wanjiru about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Zoe about Wanjiru — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Valeria about Boris — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Cesar about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Zoe about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Cesar about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Cesar about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Cesar about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Cesar about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Cesar about Boris — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d7: Emma about Nina (why=grievance)
+  GRIEV-READ d12: Keegan about Boris (why=grievance)
+  GRIEV-READ d14: Keegan about Boris (why=grievance)
+  GRIEV-READ d17: Boris about Keegan (why=grievance)
+  GRIEV-READ d28: Fritz about Renato (why=vgrievance)
+  GRIEV-READ d29: Fritz about Renato (why=vgrievance)
+  KNACK d4 Renato: "Good question." "the woman in her 30s, with weathered hands talks to the garden. The garden listens. I've seen it."
+  KNACK d10 Keegan: "Boris ate something last month that should've killed them. They're fine."
+  KNACK d13 Boris: "Renato talks to the garden. The garden listens. I've seen it."
+  KNACK d18 Fritz: "Valeria ate something last month that should've killed them. They're fine."
+  KNACK d18 Keegan: "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK d24 Valeria: "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK d27 Wanjiru: "Valeria ate something last month that should've killed them. They're fine."
+  KNACK d32 Keegan: "Fritz talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"monster":2,"the arena":3,"The Heckler":1,"Hushpuppy":1,"dehydration":2}

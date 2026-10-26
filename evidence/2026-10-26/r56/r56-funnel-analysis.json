@@ -1,0 +1,974 @@
+{
+ "seeds": {
+  "5201": {
+   "probes": 200,
+   "counts": {
+    "never-served": 2,
+    "served-same-pick": 139,
+    "served-changed-pick": 13,
+    "no-pick": 46,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 2,
+     "false": 0,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 17,
+     "false": 122,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 4,
+     "false": 9,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 16,
+     "false": 30,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 2
+    },
+    "served-same-pick": {
+     "true": 15,
+     "false": 124
+    },
+    "served-changed-pick": {
+     "true": 10,
+     "false": 3
+    },
+    "no-pick": {
+     "true": 5,
+     "false": 41
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 139,
+   "correctNonOffer": 15,
+   "changedMenuMore": {
+    "true": 8,
+    "false": 5
+   },
+   "freshMenuMore": {
+    "true": 2,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "served-changed-pick",
+     "seed": 5201,
+     "day": 19,
+     "speaker": "Rory",
+     "lastServed": "Raul/neutral d14",
+     "probePick": "gen_f8ml4vc/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5201,
+     "day": 22,
+     "speaker": "Zhigang",
+     "lastServed": "Enzo/grievance d17",
+     "probePick": "gen_f8ml4vc/close",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5201,
+     "day": 22,
+     "speaker": "Zhigang",
+     "lastServed": "Enzo/grievance d17",
+     "probePick": "gen_f8ml4vc/close",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "never-served",
+     "seed": 5201,
+     "day": 30,
+     "speaker": "Raul",
+     "pick": "gen_f8ml4vc/close",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5201,
+     "day": 63,
+     "speaker": "Dobrawa",
+     "pick": "gen_f8ml4vc/close",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    }
+   ],
+   "residual": {
+    "total": 122,
+    "questionOwned": 0,
+    "threadGuard": 12,
+    "gated": 11,
+    "unexplained": 99
+   },
+   "residualExamples": [
+    {
+     "seed": 5201,
+     "day": 9,
+     "speaker": "Enzo",
+     "pick": "gen_cwjy5v4/grievance",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5201,
+     "day": 17,
+     "speaker": "Aria",
+     "pick": "gen_f8ml4vc/close",
+     "thread": "request",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5201,
+     "day": 20,
+     "speaker": "Aria",
+     "pick": "gen_f8ml4vc/close",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5201,
+     "day": 20,
+     "speaker": "Aria",
+     "pick": "gen_f8ml4vc/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5201,
+     "day": 24,
+     "speaker": "Aria",
+     "pick": "gen_f8ml4vc/close",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  },
+  "5202": {
+   "probes": 200,
+   "counts": {
+    "never-served": 3,
+    "served-same-pick": 152,
+    "served-changed-pick": 11,
+    "no-pick": 34,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 1,
+     "false": 2,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 25,
+     "false": 127,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 5,
+     "false": 6,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 23,
+     "false": 11,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 3
+    },
+    "served-same-pick": {
+     "true": 10,
+     "false": 142
+    },
+    "served-changed-pick": {
+     "true": 7,
+     "false": 4
+    },
+    "no-pick": {
+     "true": 2,
+     "false": 32
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 156,
+   "correctNonOffer": 10,
+   "changedMenuMore": {
+    "true": 7,
+    "false": 4
+   },
+   "freshMenuMore": {
+    "true": 3,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5202,
+     "day": 4,
+     "speaker": "A person, maybe 50s",
+     "pick": "nora_wilson/grievance",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5202,
+     "day": 6,
+     "speaker": "A woman, maybe 60s, with grey-streaked hair",
+     "pick": "gen_n0999i2/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5202,
+     "day": 16,
+     "speaker": "Eduardo",
+     "pick": "gen_n0999i2/close",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5202,
+     "day": 22,
+     "speaker": "Vasyl",
+     "lastServed": "Nancy/neutral d14",
+     "probePick": "gen_n0999i2/close",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5202,
+     "day": 28,
+     "speaker": "Lena",
+     "lastServed": "Eduardo/grievance d9",
+     "probePick": "gen_nhwypv6/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5202,
+     "day": 39,
+     "speaker": "Lena",
+     "lastServed": "Eduardo/close d28",
+     "probePick": "gen_n0999i2/close",
+     "menuMore": false,
+     "freshTopics": 4,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 127,
+    "questionOwned": 0,
+    "threadGuard": 12,
+    "gated": 7,
+    "unexplained": 108
+   },
+   "residualExamples": [
+    {
+     "seed": 5202,
+     "day": 10,
+     "speaker": "Thao",
+     "pick": "nora_wilson/grievance",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5202,
+     "day": 11,
+     "speaker": "Thao",
+     "pick": "nora_wilson/grievance",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 4,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5202,
+     "day": 13,
+     "speaker": "Thao",
+     "pick": "nora_wilson/grievance",
+     "thread": "request",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 4,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5202,
+     "day": 13,
+     "speaker": "Lena",
+     "pick": "gen_nhwypv6/grievance",
+     "thread": "request",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5202,
+     "day": 13,
+     "speaker": "Lena",
+     "pick": "gen_nhwypv6/grievance",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  },
+  "5203": {
+   "probes": 200,
+   "counts": {
+    "never-served": 4,
+    "served-same-pick": 126,
+    "served-changed-pick": 20,
+    "no-pick": 50,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 1,
+     "false": 3,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 6,
+     "false": 120,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 2,
+     "false": 18,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 14,
+     "false": 36,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 4
+    },
+    "served-same-pick": {
+     "true": 8,
+     "false": 118
+    },
+    "served-changed-pick": {
+     "true": 14,
+     "false": 6
+    },
+    "no-pick": {
+     "true": 10,
+     "false": 40
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 142,
+   "correctNonOffer": 8,
+   "changedMenuMore": {
+    "true": 13,
+    "false": 7
+   },
+   "freshMenuMore": {
+    "true": 4,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5203,
+     "day": 6,
+     "speaker": "Boris",
+     "pick": "gen_dh889vl/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5203,
+     "day": 8,
+     "speaker": "Nina",
+     "pick": "emma_larsen/grievance",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5203,
+     "day": 8,
+     "speaker": "Nina",
+     "pick": "emma_larsen/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5203,
+     "day": 19,
+     "speaker": "Fritz",
+     "lastServed": "Valeria/neutral d17",
+     "probePick": "gen_sffrdwx/close",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5203,
+     "day": 23,
+     "speaker": "Fritz",
+     "lastServed": "Valeria/neutral d17",
+     "probePick": "gen_sffrdwx/close",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5203,
+     "day": 27,
+     "speaker": "Valeria",
+     "lastServed": "Keegan/neutral d18",
+     "probePick": "gen_r3g5vkm/close",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 120,
+    "questionOwned": 0,
+    "threadGuard": 14,
+    "gated": 0,
+    "unexplained": 106
+   },
+   "residualExamples": [
+    {
+     "seed": 5203,
+     "day": 19,
+     "speaker": "Boris",
+     "pick": "gen_dh889vl/grievance",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5203,
+     "day": 20,
+     "speaker": "Keegan",
+     "pick": "boris_kowalski/grievance",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5203,
+     "day": 23,
+     "speaker": "Boris",
+     "pick": "gen_dh889vl/grievance",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5203,
+     "day": 23,
+     "speaker": "Boris",
+     "pick": "gen_dh889vl/grievance",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5203,
+     "day": 23,
+     "speaker": "Keegan",
+     "pick": "boris_kowalski/grievance",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  },
+  "5204": {
+   "probes": 200,
+   "counts": {
+    "never-served": 0,
+    "served-same-pick": 143,
+    "served-changed-pick": 10,
+    "no-pick": 47,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 19,
+     "false": 124,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 1,
+     "false": 9,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 8,
+     "false": 39,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 0
+    },
+    "served-same-pick": {
+     "true": 28,
+     "false": 115
+    },
+    "served-changed-pick": {
+     "true": 7,
+     "false": 3
+    },
+    "no-pick": {
+     "true": 6,
+     "false": 41
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 125,
+   "correctNonOffer": 28,
+   "changedMenuMore": {
+    "true": 5,
+    "false": 5
+   },
+   "freshMenuMore": {
+    "true": 0,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "served-changed-pick",
+     "seed": 5204,
+     "day": 22,
+     "speaker": "Benjamin",
+     "lastServed": "Devon/close d17",
+     "probePick": "gen_8ebvdl9/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5204,
+     "day": 26,
+     "speaker": "Ivy",
+     "lastServed": "Benjamin/neutral d14",
+     "probePick": "gen_z24e6ld/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5204,
+     "day": 26,
+     "speaker": "Ivy",
+     "lastServed": "Benjamin/neutral d14",
+     "probePick": "gen_z24e6ld/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 124,
+    "questionOwned": 0,
+    "threadGuard": 28,
+    "gated": 8,
+    "unexplained": 88
+   },
+   "residualExamples": [
+    {
+     "seed": 5204,
+     "day": 20,
+     "speaker": "Benjamin",
+     "pick": "devon_okafor/close",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5204,
+     "day": 20,
+     "speaker": "Benjamin",
+     "pick": "devon_okafor/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5204,
+     "day": 26,
+     "speaker": "Liam",
+     "pick": "gen_z24e6ld/close",
+     "thread": "taughtref",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5204,
+     "day": 27,
+     "speaker": "Liam",
+     "pick": "gen_z24e6ld/close",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "seed": 5204,
+     "day": 28,
+     "speaker": "Benjamin",
+     "pick": "gen_8ebvdl9/close",
+     "thread": "request",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  }
+ },
+ "pooled": {
+  "never-served": 9,
+  "served-same-pick": 560,
+  "served-changed-pick": 54,
+  "no-pick": 177,
+  "unknown-speaker": 0
+ },
+ "pooledMenuProblem": 623,
+ "pooledShares": {
+  "never-served": 0.014446227929373997,
+  "served-same-pick": 0.898876404494382,
+  "served-changed-pick": 0.08667736757624397,
+  "no-pick": 0.2841091492776886,
+  "unknown-speaker": 0
+ },
+ "pooledGenuineMiss": 562,
+ "pooledCorrectNonOffer": 61,
+ "pooledResidual": {
+  "total": 493,
+  "questionOwned": 0,
+  "threadGuard": 66,
+  "gated": 26,
+  "unexplained": 401
+ },
+ "pooledResidualShares": {
+  "questionOwned": 0,
+  "threadGuard": 0.13387423935091278,
+  "gated": 0.05273833671399594,
+  "unexplained": 0.8133874239350912
+ },
+ "pooledFlagCoverage": 1,
+ "menuSplit": {
+  "perSeed": {
+   "5201": {
+    "arm": "control",
+    "lingerPicks": 0,
+    "totalNaturalUnsteered": 306,
+    "subjectNoOffer": 198,
+    "subjectNoOfferRate": 0.6470588235294118,
+    "offered": 98,
+    "mainOffered": 10,
+    "subjectOffered": 89,
+    "picked": 1,
+    "latePicks": 0,
+    "latePicksMain": 0,
+    "latePicksSubject": 0,
+    "classes": {
+     "subject-no-offer": 198,
+     "offered-not-picked": 56,
+     "no-subject-no-ans": 10,
+     "offered-capped": 41,
+     "picked-others": 1
+    }
+   },
+   "5202": {
+    "arm": "control",
+    "lingerPicks": 0,
+    "totalNaturalUnsteered": 186,
+    "subjectNoOffer": 87,
+    "subjectNoOfferRate": 0.46774193548387094,
+    "offered": 74,
+    "mainOffered": 0,
+    "subjectOffered": 74,
+    "picked": 2,
+    "latePicks": 0,
+    "latePicksMain": 0,
+    "latePicksSubject": 0,
+    "classes": {
+     "subject-no-offer": 87,
+     "offered-not-picked": 51,
+     "picked-others": 2,
+     "no-subject-ans": 5,
+     "no-subject-no-ans": 20,
+     "offered-capped": 21
+    }
+   },
+   "5203": {
+    "arm": "linger",
+    "lingerPicks": 103,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 209,
+    "subjectNoOfferRate": 0.5048309178743962,
+    "offered": 205,
+    "mainOffered": 8,
+    "subjectOffered": 204,
+    "picked": 103,
+    "latePicks": 42,
+    "latePicksMain": 1,
+    "latePicksSubject": 41,
+    "classes": {
+     "subject-no-offer": 209,
+     "offered-not-picked": 102,
+     "picked-others": 103
+    }
+   },
+   "5204": {
+    "arm": "linger",
+    "lingerPicks": 80,
+    "totalNaturalUnsteered": 257,
+    "subjectNoOffer": 138,
+    "subjectNoOfferRate": 0.5369649805447471,
+    "offered": 119,
+    "mainOffered": 5,
+    "subjectOffered": 117,
+    "picked": 80,
+    "latePicks": 0,
+    "latePicksMain": 0,
+    "latePicksSubject": 0,
+    "classes": {
+     "subject-no-offer": 138,
+     "picked-others": 80,
+     "offered-not-picked": 39
+    }
+   }
+  },
+  "pooled": {
+   "totalNaturalUnsteered": 1163,
+   "subjectNoOffer": 632,
+   "offered": 496,
+   "mainOffered": 23,
+   "subjectOffered": 484,
+   "picked": 186,
+   "latePicks": 42,
+   "latePicksMain": 1,
+   "latePicksSubject": 41,
+   "subjectNoOfferRate": 0.5434221840068788
+  },
+  "byArm": {
+   "control": {
+    "seeds": 2,
+    "offered": 172,
+    "picked": 3,
+    "latePicks": 0,
+    "offeredNotFresh": 0,
+    "conversion": 0.01744186046511628,
+    "freshCeilingDenom": 172,
+    "conversionFreshCeiling": 0.01744186046511628
+   },
+   "linger": {
+    "seeds": 2,
+    "offered": 324,
+    "picked": 183,
+    "latePicks": 42,
+    "offeredNotFresh": 0,
+    "conversion": 0.5648148148148148,
+    "freshCeilingDenom": 324,
+    "conversionFreshCeiling": 0.5648148148148148
+   }
+  }
+ }
+}

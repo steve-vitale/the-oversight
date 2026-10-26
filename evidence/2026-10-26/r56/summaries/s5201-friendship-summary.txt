@@ -1,0 +1,166 @@
+# SURFACE+SEEDED — seed 5201 (141d, 9 alive)
+
+npcPairs=106 deep2=27 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=128 closeReadsServed=32 grievanceServes=3 othersSteered=127
+COND-TP: firstDeep2Day=35 lateClose=98 lateTP=81 lateNull=0 condRate=82.7% pooledTP=82/107 pooledRate=76.6% grievReadsByWhy={"grievance":3,"vgrievance":1}
+FUNNEL (natural): convos=414 subject=403 offered=206 picked=109 classes={"subject-no-offer":198,"offered-not-picked":56,"no-subject-no-ans":10,"picked-others":109,"offered-capped":41}
+FUNNEL-UNSTEERED (r55 strict): convos=306 subjectNoOffer=198 rate=64.7% offered=98 mainOffered=10 subjectOffered=89 picked=1 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Zhigang / Yuki / Dobrawa — "cuts close faster when Onni wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Scott / Zoe — "You want to know about that? Okay." "Yuki talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Onni / Yuki / Fatima — "Zoe ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Dobrawa / Amina — "Yuki talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=176 picks=112 latePicks=43 missedChangedNotOffered=0
+WRAPSERVE: convos=4 matcherHits=3 matcherServes=3 classes={"grievance-line":3,"deflection":0,"other":1}
+FUNNEL-PROBE (subject-no-offer turns): turns=430 menuProblem=384 pickProblem=46
+SEEDED-DAILY: [{"day":34,"v":42,"depth":3},{"day":35,"v":44,"depth":3},{"day":36,"v":48,"depth":3},{"day":37,"v":48,"depth":3},{"day":38,"v":52,"depth":3},{"day":40,"v":60,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":64,"depth":3},{"day":43,"v":66,"depth":3},{"day":43,"v":68,"depth":3},{"day":44,"v":70,"depth":3},{"day":45,"v":70,"depth":3},{"day":46,"v":70,"depth":3},{"day":47,"v":70,"depth":3}] class=rise
+GOSSIP: totalPicks=352 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=15 31-60=26 61-90=25 91-120=26 121+=17 naturalPicks=109 seededPicks=19 gossipPicks=352
+SEEDED: {"pair":{"a":"gen_f8ml4vc","b":"gen_kxv5mqo","aName":"Scott","bName":"Raul"},"day":33,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":34,"v":42,"depth":3},{"day":35,"v":44,"depth":3},{"day":36,"v":48,"depth":3},{"day":37,"v":48,"depth":3},{"day":38,"v":52,"depth":3},{"day":40,"v":60,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":64,"depth":3},{"day":43,"v":66,"depth":3},{"day":43,"v":68,"depth":3},{"day":44,"v":70,"depth":3},{"day":45,"v":70,"depth":3},{"day":46,"v":70,"depth":3},{"day":47,"v":70,"depth":3}],"crackTraceClass":"rise","vAt7":44,"depthAt7":3,"vDrop":8,"depthDrop":-1,"crack7":false,"firstServe":{"day":35,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":35,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Scott <> Raul — maxDepth 3, final 3 (v=70), dropped 0
+  FRIEND d35: Rory <> Scott — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d45: Rory <> Raul — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d45: Raul <> Yuki — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d65: Omar <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aria <> Raul — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d35: Zhigang <> Scott — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d45: Scott <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aria <> Scott — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d55: Scott <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Rory <> Zhigang — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d60: Scott <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Onni <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Fatima <> Yuki — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d80: Fatima <> Scott — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Fatima <> Onni — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d105: Scott <> Zoe — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d115: Dobrawa <> Fatima — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d80: Dobrawa <> Scott — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Catalina <> Scott — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Amina <> Scott — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Amina <> Yuki — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d140: Onni <> Tashi — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d80: Scott <> Tashi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Tashi <> Yuki — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d140: Amina <> Dobrawa — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d120: Amina <> Fatima — maxDepth 2, final 2 (v=64), dropped 0
+  CLOSE-READ d15: Aria about Scott — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d19: Rory about Scott — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Zhigang about Scott — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Scott about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Yuki about Scott — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Onni about Raul — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Onni about Raul — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Zhigang about Scott — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Zhigang about Scott — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Yuki about Raul — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Raul about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Scott about Rory — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Enzo about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Scott about Rory — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Omar about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Omar about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Omar about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Yuki about Scott — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Onni about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Scott about Zhigang — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Scott about Zhigang — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Scott about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Scott about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Scott about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Scott about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Fatima about Scott — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Tashi about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Amina about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Dobrawa about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Amina about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Zoe about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Amina about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Dobrawa about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d78: Dobrawa about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Catalina about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Tashi about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Dobrawa about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Zoe about Scott — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Dobrawa about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Tashi about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Catalina about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Yuki about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Tashi about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Amina about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Omar about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Tashi about Scott — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Amina about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Tashi about Scott — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Yuki about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Catalina about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Amina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Amina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Catalina about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Catalina about Scott — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Amina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Catalina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Amina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Catalina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Zoe about Scott — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Scott about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Amina about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Zoe about Scott — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Dobrawa about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Zoe about Scott — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d7: Zhigang about Enzo (why=grievance)
+  GRIEV-READ d8: Enzo about Zhigang (why=grievance)
+  GRIEV-READ d17: Zhigang about Enzo (why=grievance)
+  GRIEV-READ d35: Scott about Raul (why=vgrievance)
+  KNACK d4 A man, maybe 30s: "Good question." "that stray dog — the one that bit two people — lets the person in their 30s, with a nervous tic touch 
+  KNACK d13 Rory: "Elijah talks to the garden. The garden listens. I've seen it."
+  KNACK d18 Raul: "Yuki talks to the garden. The garden listens. I've seen it. Funny how that works."
+  KNACK d22 Zhigang: "cuts close faster when Onni wraps them. Don't ask me how."
+  KNACK d27 Onni: "that stray dog — the one that bit two people — lets Katarina touch it."
+  KNACK d27 Aria: "You want to know about that? Okay." "Zhigang talks to the garden. The garden listens. I've seen it."
+  KNACK d36 Scott: "You want to know about that? Okay." "Yuki talks to the garden. The garden listens. I've seen it."
+  KNACK d43 Aria: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Rory touch it."
+
+deathCauses: {"monster":2,"dehydration":1,"combat":2,"the arena":1,"contest":1}
