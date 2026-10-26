@@ -553,3 +553,89 @@ toward monsters and meetings are tile/cell coincidences.
 The wall did not move; this arm measured exactly how it is
 manned, tile by tile.
 
+### COORDINATOR ADDENDUM — relation to journey-scale r41 spawnfate (master 628ceb21e)
+
+The r41 spawnfate evidence WAS located (not missing): commit
+628ceb21e, evidence/2026-10-26/journey-scale-r41.md +
+journey-scale-r41-prereg.md + journey-scale-r41-spawnfate/
+rows, on base master@6ef77e3e7 (the 1920Z base). No merge or
+rebase was performed by this arm — the coordinator owns
+landing, and the final proof re-run on the merge base is the
+coordinator's step (see the landing note below).
+
+(1) Baseline reporting, as pre-registered: the RE-BASELINE
+section above already reports this arm's baseline against
+the 1920 table on THIS arm's own base (c1e8329e) — EXACT on
+every field, band and per-seed. That requirement is met
+without touching r41's numbers.
+
+(2) How the opportunity classes relate to spawnfate (not a
+duplication): r41's fate classes are about END STATE
+(alive-at-end vs vanished); this arm's opportunity classes
+are about OPPORTUNITY HISTORY (ever in meeting range or
+contact or not). They CROSS, and the cross-tab is the check
+that neither arm re-proves the other:
+
+| r41 fate | this arm's opportunity class | count |
+|---|---|---|
+| alive-at-end | never-in-range | 19 |
+| alive-at-end | contact-without-fight | 2 |
+| vanished-near-player | never-in-range | 3 |
+
+Agreement on every shared number: 33 spawns, 24 never-fought,
+9 fought (field 3, tb 2, both 4), 21 alive-at-end, 3
+vanished-near-player, vanished-interior 0. Two independent
+instruments on two bases (r41: 6ef77e3e7; this arm:
+c1e8329e, re-baseline EXACT) reproduce the same band.
+
+What r41 already proved, NOT re-proven here: the monsters
+still stand there. "Alive-at-end 21/24 (87.5%)" is r41's
+standing result — this arm does not re-derive standing as
+its question; its present-at-end 21/24 is the same fact
+arrived at by a second recorder, reported as agreement, not
+as a new claim.
+
+What this arm adds, sharply, per the addendum's reframing:
+- WHY villagers never go to them: no engine path sends a
+  villager TO a monster (npcNodeTravel is objective-driven);
+  monsters spawn close (mean 2.0 tiles from Haven) and
+  persist for weeks (mean 25.3 days) without ever sharing a
+  tile with an eligible villager (22/24).
+- WHY meeting rules never trigger: villager meetings need
+  same-tile co-location at a worldTick, and worldTick runs
+  ONLY on player tile entry; player meetings need same tile
+  PLUS same grid cell (players shared tiles with never-
+  fought monsters repeatedly, minPlayerTiles 0, without ever
+  sharing a cell). The 2 contacts show the rules working as
+  written (one coin flip lost, one grid cell never shared at
+  a behavior step) — no hidden blocker.
+- CLOSING r41's open hole: r41 left 1/33 unexplained (73677
+  eulogy, single-day spawn, no captured removal) and named
+  the next work as "wrap removeWorldMonster with a
+  stack-hinted removal log." This arm built exactly that
+  recorder for the whole band: the 73677 eulogy was removed
+  d121 during a monster turn (monsterTurn stack hint) —
+  fled/gone, not fought. The hole is closed; no removal in
+  this band is unexplained.
+- CONFIRMING r41's explained hole with a second instrument:
+  the 73675 eater + eulogy arena-collateral deletions are
+  confirmed here via removal hints (startCombat) PLUS the
+  d145 arena start rows (tileMonster seqs 28/31 carried
+  into wave-1 arena fights), alongside r41's code-read
+  mechanism (startCombat lifts the tile monster; tbEnd
+  restores it only on fled/lost, never on 'won'). The
+  bystander-deletion mechanism stands on two instruments.
+- R41's journey leg (seeds 85001-85004, lesser seats 3/4)
+  is a separate batch on different seeds/policy and does not
+  overlap this arm's band; it is noted here only to avoid
+  confusion, not compared.
+
+Landing note: this arm performed NO merge and NO rebase,
+per the addendum. scripts/test-w4opp-a.js is base-agnostic
+(it re-derives every number from the rows + summary rather
+than hardcoding band outcomes), so the coordinator's
+merge-base proof re-run validates whatever corpus the merge
+base produces — but if the merge base moves trajectories,
+that is a re-sweep, not just a re-proof, and the summary
+must be rebuilt from the new rows before the proof is run.
+
