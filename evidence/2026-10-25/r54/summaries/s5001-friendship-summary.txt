@@ -1,0 +1,79 @@
+# SURFACE+SEEDED — seed 5001 (96d, 0 alive)
+
+npcPairs=73 deep2=15 cracks=0 vCracks=1 friendGriev=0 stateGriev=9 stateFriend=0 stateVCrack=0 t2picks=59 closeReadsServed=15 grievanceServes=2 othersSteered=63
+COND-TP: firstDeep2Day=35 lateClose=29 lateTP=26 lateNull=0 condRate=89.7% pooledTP=26/35 pooledRate=74.3% grievReadsByWhy={"grievance":1,"vgrievance":1}
+FUNNEL (natural): convos=245 subject=219 offered=116 picked=62 classes={"offered-not-picked":40,"subject-no-offer":103,"picked-others":62,"offered-capped":14,"no-subject-no-ans":26}
+FUNNEL-UNSTEERED (r54 strict): convos=183 subjectNoOffer=103 rate=56.3% offered=54 picked=0 latePicks=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Sreyashi / Mia — "Harper talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Neema / Sigrun / Valeria / Mia — "that stray dog — the one that bit two people — lets Penelope touch it."
+REOFFER: offers=77 picks=44 latePicks=0 missedChangedNotOffered=6
+WRAPSERVE: convos=2 matcherHits=2 matcherServes=2 classes={"grievance-line":2,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=232 menuProblem=176 pickProblem=56
+SEEDED-DAILY: [{"day":34,"v":40,"depth":2},{"day":35,"v":43,"depth":2},{"day":36,"v":45,"depth":2},{"day":38,"v":49,"depth":2},{"day":38,"v":49,"depth":2},{"day":39,"v":53,"depth":3},{"day":40,"v":57,"depth":3},{"day":41,"v":61,"depth":3},{"day":42,"v":64,"depth":3},{"day":43,"v":66,"depth":3},{"day":44,"v":70,"depth":3},{"day":45,"v":72,"depth":3},{"day":46,"v":74,"depth":3},{"day":47,"v":78,"depth":3}] class=rise
+GOSSIP: totalPicks=143 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=18 61-90=18 91-120=0 121+=0 naturalPicks=58 seededPicks=1 gossipPicks=143
+SEEDED: {"pair":{"a":"nathan_lee","b":"valeria_quispe","aName":"Nathan","bName":"Valeria"},"day":33,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":34,"v":40,"depth":2},{"day":35,"v":43,"depth":2},{"day":36,"v":45,"depth":2},{"day":38,"v":49,"depth":2},{"day":38,"v":49,"depth":2},{"day":39,"v":53,"depth":3},{"day":40,"v":57,"depth":3},{"day":41,"v":61,"depth":3},{"day":42,"v":64,"depth":3},{"day":43,"v":66,"depth":3},{"day":44,"v":70,"depth":3},{"day":45,"v":72,"depth":3},{"day":46,"v":74,"depth":3},{"day":47,"v":78,"depth":3}],"crackTraceClass":"rise","vAt7":57,"depthAt7":3,"vDrop":-7,"depthDrop":-1,"crack7":false,"firstServe":{"day":34,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":34,"why":"vgrievance"}],"effect":true}
+  FRIEND d75: Nathan <> Sigrun — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d45: Harper <> Penelope — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Nathan <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Penelope <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Sigrun <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Penelope <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Penelope <> Miguel — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d65: Penelope <> Sigrun — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d80: Mia <> Valeria — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d75: Penelope <> Theo — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d80: Gerald <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Gerald <> Penelope — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d80: Gerald <> Valeria — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d80: Gerald <> Miguel — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d85: Gerald <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  VCRACK d12: Valeria vs Hattie (ambushed) v 14 -> 2 (depth 0 -> 0)
+  CLOSE-READ d15: Neema about Valeria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Nathan about Valeria — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Valeria about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Miguel about Penelope — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Penelope about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Sigrun about Valeria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Valeria about Sigrun — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Penelope about Valeria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Valeria about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Harper about Penelope — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Harper about Penelope — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Harper about Penelope — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Penelope about Harper — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Harper about Penelope — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Mia about Valeria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d61: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Farid about Valeria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Harper about Penelope — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Harper about Penelope — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Harper about Penelope — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Sigrun about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Mia about Nathan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d11: Hattie about Valeria (why=grievance)
+  GRIEV-READ d34: Nathan about Valeria (why=vgrievance)
+  KNACK d4 Sreyashi: "Harper talks to the garden. The garden listens. I've seen it."
+  KNACK d12 Neema: "that stray dog — the one that bit two people — lets Penelope touch it."
+  KNACK d21 Valeria: "Sreyashi ate something last month that should've killed them. They're fine."
+  KNACK d24 Sigrun: "that stray dog — the one that bit two people — lets Penelope touch it."
+  KNACK d33 Valeria: "that stray dog — the one that bit two people — lets Penelope touch it."
+  KNACK d37 Nathan: "Good question." "Sigrun talks to the garden. The garden listens. I've seen it. ...sorry."
+  KNACK d50 Theo: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Nathan touch it."
+  KNACK d52 Harper: "Good question." "Miguel talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":1,"monster":4,"combat":1,"the arena":9}

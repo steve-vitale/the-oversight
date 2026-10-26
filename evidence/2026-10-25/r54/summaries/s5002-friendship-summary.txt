@@ -1,0 +1,113 @@
+# SURFACE+SEEDED — seed 5002 (111d, 0 alive)
+
+npcPairs=64 deep2=25 cracks=0 vCracks=0 friendGriev=0 stateGriev=12 stateFriend=0 stateVCrack=0 t2picks=84 closeReadsServed=14 grievanceServes=16 othersSteered=80
+COND-TP: firstDeep2Day=25 lateClose=52 lateTP=41 lateNull=0 condRate=78.8% pooledTP=41/56 pooledRate=73.2% grievReadsByWhy={"grievance":4,"vgrievance":16}
+FUNNEL (natural): convos=313 subject=298 offered=149 picked=73 classes={"subject-no-offer":149,"picked-others":73,"offered-capped":24,"no-subject-ans":1,"offered-not-picked":52,"no-subject-no-ans":14}
+FUNNEL-UNSTEERED (r54 strict): convos=244 subjectNoOffer=149 rate=61.1% offered=80 picked=4 latePicks=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Nino / Benoit — "Good question." "Fernando found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Dwayne / Liz — "You want to know about that? Okay." "Landon talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=152 picks=74 latePicks=14 missedChangedNotOffered=3
+WRAPSERVE: convos=20 matcherHits=16 matcherServes=16 classes={"grievance-line":16,"deflection":1,"other":3}
+FUNNEL-PROBE (subject-no-offer turns): turns=296 menuProblem=272 pickProblem=24
+SEEDED-DAILY: [{"day":22,"v":38,"depth":2},{"day":23,"v":42,"depth":2},{"day":24,"v":42,"depth":2},{"day":25,"v":42,"depth":2},{"day":26,"v":48,"depth":2},{"day":27,"v":52,"depth":3},{"day":28,"v":52,"depth":3},{"day":29,"v":58,"depth":3},{"day":30,"v":58,"depth":3},{"day":31,"v":58,"depth":3},{"day":32,"v":62,"depth":3},{"day":33,"v":68,"depth":3},{"day":34,"v":74,"depth":3},{"day":35,"v":74,"depth":3},{"day":36,"v":78,"depth":3}] class=rise
+GOSSIP: totalPicks=248 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=19 61-90=18 91-120=14 121+=0 naturalPicks=73 seededPicks=11 gossipPicks=248
+SEEDED: {"pair":{"a":"gen_ljdeq95","b":"gen_rkqz3sw","aName":"Landon","bName":"Dwayne"},"day":22,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":22,"v":38,"depth":2},{"day":23,"v":42,"depth":2},{"day":24,"v":42,"depth":2},{"day":25,"v":42,"depth":2},{"day":26,"v":48,"depth":2},{"day":27,"v":52,"depth":3},{"day":28,"v":52,"depth":3},{"day":29,"v":58,"depth":3},{"day":30,"v":58,"depth":3},{"day":31,"v":58,"depth":3},{"day":32,"v":62,"depth":3},{"day":33,"v":68,"depth":3},{"day":34,"v":74,"depth":3},{"day":35,"v":74,"depth":3},{"day":36,"v":78,"depth":3}],"crackTraceClass":"rise","vAt7":42,"depthAt7":2,"vDrop":8,"depthDrop":0,"crack7":false,"firstServe":{"day":23,"why":"vgrievance"},"serveWithin30":true,"serves":16,"servesAll":[{"day":23,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":56,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Landon <> Dwayne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Liz <> Dwayne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Dwayne <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Dale <> Dwayne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Dale <> Liz — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d60: Dwayne <> Nino — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Dwayne <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Benoit <> Dwayne — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d40: Fernando <> Dwayne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Daniel <> Dwayne — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d65: Liz <> Landon — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d55: Fernando <> Landon — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d100: Landon <> Sigrun — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d60: Dale <> Landon — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d60: Liz <> Sigrun — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d110: Dale <> Sigrun — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d110: Nino <> Petra — maxDepth 3, final 3 (v=25), dropped 0
+  FRIEND d95: Liz <> Nino — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d110: Petra <> Sigrun — maxDepth 2, final 2 (v=18), dropped 0
+  FRIEND d105: Daniel <> Alejandro — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d105: Dwayne <> Alejandro — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d105: Landon <> Alejandro — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Alejandro <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Alejandro <> Nino — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d110: Dale <> Alejandro — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d19: Landon about Dwayne — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Dwayne about Landon — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Sigrun about Dwayne — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Petra about Dwayne — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Daniel about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Dwayne about Landon — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d28: Dale about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Liz about Dwayne — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Nino about Dwayne — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Nino about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Fernando about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Sigrun about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Sigrun about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Nino about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Dwayne about Landon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Nino about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Sigrun about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Fernando about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Nino about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Sigrun about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Nino about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Benoit about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Nino about Dwayne — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Nino about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Benoit about Dwayne — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Fernando about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Nino about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Dwayne about Landon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Fernando about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Benoit about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Nino about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Nino about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Benoit about Dwayne — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Dwayne about Landon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Dwayne about Landon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Dwayne about Landon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Sigrun about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Nino about Dwayne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d6: Dale about A man, maybe 50s, with ink-stained fingers (why=grievance)
+  GRIEV-READ d9: Nino about Ava (why=grievance)
+  GRIEV-READ d16: Nino about Ava (why=grievance)
+  GRIEV-READ d17: Fernando about Dale (why=grievance)
+  GRIEV-READ d23: Landon about Dwayne (why=vgrievance)
+  GRIEV-READ d27: Landon about Dwayne (why=vgrievance)
+  KNACK d7 A man, maybe 50s, with ink-stained fingers: "Maybe — Liz found a lost knife by smell last week. By SMELL."
+  KNACK d29 Liz: "You want to know about that? Okay." "Benoit ate something last month that should've killed them. They're fine."
+  KNACK d31 Landon: "You want to know about that? Okay." "Liz found a lost knife by smell last week. By SMELL."
+  KNACK d34 Petra: "Good question." "Dale talks to the garden. The garden listens. I've seen it."
+  KNACK d34 Dwayne: "Fernando found a lost knife by smell last week. By SMELL."
+  KNACK d39 Benoit: "Huh. Let me think about that." "Petra talks to the garden. The garden listens. I've seen it."
+  KNACK d40 Nino: "Good question." "Fernando found a lost knife by smell last week. By SMELL."
+  KNACK d49 Landon: "Huh. Let me think about that." "Dwayne talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":1,"a wound that wouldn't close":1,"monster":1,"the arena":5,"contest":1}

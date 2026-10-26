@@ -4162,7 +4162,11 @@
       const rank=ch=>/^(betrayal:|confront:|agency:)/.test(ch.id)?0:
         /^(alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay)/.test(ch.id)?1:
         /^(ask:goal$|offer_help$)/.test(ch.id)?2:
-        /^(teach|trade|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|ask:gossip$|ask:spread_rumor$)/.test(ch.id)?3:4;
+        // R54 OTHERS RANK (journey-social r53 funnel fix): 'ask:others'
+        // was rank 4 (default, sorts last), so a fresh 'others' in a long
+        // menu paged to page 2+ almost always (~32% of r53 menu-problem
+        // turns). It pages with the other social verbs now.
+        /^(teach|trade|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|ask:gossip$|ask:spread_rumor$|ask:others$)/.test(ch.id)?3:4;
       if(content.length+navigation.length<=7){c.menuPage=0;c.menuPages=1;return full;}
       content.sort((a,b)=>rank(a)-rank(b));
       const size=Math.max(1,7-navigation.length-1),pages=Math.ceil(content.length/size);
@@ -4646,6 +4650,20 @@
         for (const a of asks) {
           if (a.id === threadAsk || n >= topicCapMood) continue;
           sub.push(a); n++;
+        }
+        // R54 DISCUSSED-'OTHERS' RE-LIST (journey-social r53 funnel fix):
+        // the subject menu never listed t2discussed, so a discussed-and-
+        // unchanged 'others' (67.8% of r53 menu-problem turns) could never
+        // surface — no freshCap-scoped fix can reach it. 'others' ONLY:
+        // discussed topics generally stay behind by design, but 'others'
+        // is dynamic (the pick recomputes; lines come through the
+        // said-ledger, so a re-serving is never a verbatim repeat). It
+        // rides after the capped topics, like the gossip verbs below —
+        // never while it IS the current thread.
+        if (c.thread !== 'others') {
+          for (const a of t2discussed) {
+            if (a.id === 'ask:others' && !sub.some(s => s.id === a.id)) sub.push(a);
+          }
         }
         // Memories and unfinished business are deliberate topic choices,
         // not replies inserted over the NPC's current thought.

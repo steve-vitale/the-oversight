@@ -1,0 +1,17 @@
+check.js: 9 scripts, 2 parallel (only "moot")
+.F.......
+
+  FAIL scripts/test-moot-justice-aftermath.js (exit 1, 2.9s)
+      <anonymous_script>:1037
+              const pb = Text.proBundle(pro);
+                         ^
+      
+      ReferenceError: Text is not defined
+          at Object.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/test-moot-justice-aftermath.js:18:82), <anonymous>:1037:20)
+          at Object.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/test-moot-justice-aftermath.js:18:82), <anonymous>:1670:25)
+          at boot (/home/hatch/workspace/worktrees/journey2-social/scripts/test-moot-justice-aftermath.js:28:8)
+          at async /home/hatch/workspace/worktrees/journey2-social/scripts/test-moot-justice-aftermath.js:56:5
+      
+      Node.js v24.22.1
+
+check.js: 8 passed, 1 failed in 28s

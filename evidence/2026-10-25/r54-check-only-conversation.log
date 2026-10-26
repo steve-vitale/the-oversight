@@ -1,0 +1,18 @@
+check.js: 7 scripts, 2 parallel (only "conversation")
+....FF.
+
+  FAIL scripts/test-conversation-depth-gaps.js (exit 2, 0.9s)
+      HARNESS CRASH: Cannot read properties of null (reading 'village')
+
+  FAIL scripts/test-conversation-feel.js (exit 1, 1.1s)
+      <anonymous_script>:98
+            return (this.state.village.roster || []).filter(id => id !== this.villagerId);
+                               ^
+      
+      TypeError: Cannot read properties of null (reading 'village')
+          at Object.npcIds (eval at <anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/test-conversation-feel.js:12:64), <anonymous>:98:26)
+          at /home/hatch/workspace/worktrees/journey2-social/scripts/test-conversation-feel.js:25:26
+      
+      Node.js v24.22.1
+
+check.js: 5 passed, 2 failed in 6s

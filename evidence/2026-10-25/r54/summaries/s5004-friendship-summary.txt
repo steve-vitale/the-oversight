@@ -1,0 +1,119 @@
+# SURFACE+SEEDED — seed 5004 (141d, 4 alive)
+
+npcPairs=60 deep2=32 cracks=0 vCracks=0 friendGriev=1 stateGriev=2 stateFriend=1 stateVCrack=0 t2picks=79 closeReadsServed=13 grievanceServes=3 othersSteered=76
+COND-TP: firstDeep2Day=20 lateClose=50 lateTP=41 lateNull=0 condRate=82.0% pooledTP=41/52 pooledRate=78.8% grievReadsByWhy={"grievance":4,"vgrievance":2}
+FUNNEL (natural): convos=414 subject=409 offered=155 picked=79 classes={"subject-no-offer":254,"offered-not-picked":58,"picked-others":79,"offered-capped":18,"no-subject-no-ans":5}
+FUNNEL-UNSTEERED (r54 strict): convos=338 subjectNoOffer=254 rate=75.1% offered=79 picked=3 latePicks=0
+STEERING-ARM: steering=false knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Caleb / Elena — "Good question." "Jerome found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Hermann / Quinn / Meera — "Omar ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Hermann / Quinn — "that stray dog — the one that bit two people — lets Giulia touch it."
+REOFFER: offers=133 picks=69 latePicks=26 missedChangedNotOffered=1
+WRAPSERVE: convos=6 matcherHits=3 matcherServes=3 classes={"grievance-line":3,"deflection":1,"other":2}
+FUNNEL-PROBE (subject-no-offer turns): turns=470 menuProblem=439 pickProblem=31
+SEEDED-DAILY: [{"day":21,"v":42,"depth":3},{"day":22,"v":48,"depth":3},{"day":23,"v":50,"depth":3},{"day":24,"v":50,"depth":3},{"day":25,"v":50,"depth":3},{"day":26,"v":54,"depth":3},{"day":27,"v":54,"depth":3},{"day":28,"v":60,"depth":3},{"day":29,"v":66,"depth":3},{"day":30,"v":66,"depth":3},{"day":31,"v":72,"depth":3},{"day":32,"v":76,"depth":3},{"day":33,"v":76,"depth":3},{"day":34,"v":80,"depth":3}] class=rise
+GOSSIP: totalPicks=373 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=14 61-90=17 91-120=13 121+=13 naturalPicks=79 seededPicks=0 gossipPicks=373
+SEEDED: {"pair":{"a":"gen_4pr5e6f","b":"gen_spvol3r","aName":"Arthur","bName":"Hermann"},"day":20,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":21,"v":42,"depth":3},{"day":22,"v":48,"depth":3},{"day":23,"v":50,"depth":3},{"day":24,"v":50,"depth":3},{"day":25,"v":50,"depth":3},{"day":26,"v":54,"depth":3},{"day":27,"v":54,"depth":3},{"day":28,"v":60,"depth":3},{"day":29,"v":66,"depth":3},{"day":30,"v":66,"depth":3},{"day":31,"v":72,"depth":3},{"day":32,"v":76,"depth":3},{"day":33,"v":76,"depth":3},{"day":34,"v":80,"depth":3}],"crackTraceClass":"rise","vAt7":50,"depthAt7":3,"vDrop":2,"depthDrop":-1,"crack7":false,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":2,"servesAll":[{"day":28,"why":"vgrievance"},{"day":31,"why":"vgrievance"}],"effect":true}
+  FRIEND d45: Hermann <> Jerome — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Arthur <> Hermann — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Arthur <> Jerome — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d25: Hermann <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Elena <> Hermann — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Hermann <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Hermann <> Quinn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Hermann <> Nino — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Elena <> Arthur — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Jerome <> Omar — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d65: Arthur <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Caleb <> Hermann — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d110: Arthur <> Quinn — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d75: Arthur <> Omar — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d100: Giulia <> Omar — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d130: Omar <> Quinn — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d105: Jerome <> Giulia — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d110: Elena <> Giulia — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d110: Elena <> Omar — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d90: Elena <> Quinn — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d75: Giulia <> Quinn — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d110: Elena <> Nino — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d115: Giulia <> Nino — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d140: Elena <> Amy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Amy <> Hermann — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d140: Amy <> Jerome — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Amy <> Quinn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Amy <> Meera — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d140: Amy <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Arthur <> Amy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Amy <> Nino — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d141: Amy <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND-GRIEV d20: Arthur vs Hermann (ambushed) depth 2 v 52 -> 50
+  CLOSE-READ d14: Hermann about Arthur — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Elena about Hermann — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Quinn about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Quinn about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Caleb about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Quinn about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Jerome about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Hermann about Arthur — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Hermann about Arthur — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Omar about Hermann — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Giulia about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Quinn about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Nino about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Hermann about Arthur — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Hermann about Arthur — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Nino about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Nino about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d64: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Hermann about Arthur — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Nino about Hermann — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Nino about Hermann — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Nino about Hermann — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Hermann about Jerome — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Hermann about Jerome — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Nino about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Hermann about Jerome — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Nino about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Nino about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Hermann about Jerome — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Hermann about Jerome — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Nino about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Omar about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Hermann about Arthur — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Nino about Hermann — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d21 (betrayal): Arthur vs Hermann (ambushed) depth 2 v 52 -> 50
+  GRIEV-READ d6: Omar about A woman, maybe 60s, with a buzz cut (why=grievance)
+  GRIEV-READ d12: Omar about Giulia (why=grievance)
+  GRIEV-READ d19: Giulia about Omar (why=grievance)
+  GRIEV-READ d28: Arthur about Hermann (why=vgrievance)
+  GRIEV-READ d31: Arthur about Hermann (why=vgrievance)
+  GRIEV-READ d36: Omar about Giulia (why=grievance)
+  KNACK d12 Omar: "Huh. Let me think about that." "Nino ate something last month that should've killed them. They're fine."
+  KNACK d23 Jerome: "Good question." "Caleb talks to the garden. The garden listens. I've seen it."
+  KNACK d29 Arthur: "Good question." "Omar ate something last month that should've killed them. They're fine."
+  KNACK d30 Elena: "Huh. Let me think about that." "Caleb talks to the garden. The garden listens. I've seen it."
+  KNACK d32 Caleb: "Good question." "Jerome found a lost knife by smell last week. By SMELL."
+  KNACK d34 Hermann: "Omar ate something last month that should've killed them. They're fine."
+  KNACK d36 Omar: "Huh. Let me think about that." "Meera talks to the garden. The garden listens. I've seen it. That is all."
+  KNACK d39 Giulia: "Jerome found a lost knife by smell last week. By SMELL."
+
+deathCauses: {"monster":1,"mosquito":1,"combat":1,"the arena":3}
