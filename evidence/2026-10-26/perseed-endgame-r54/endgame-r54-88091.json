@@ -1,0 +1,698 @@
+{
+ "seed": 88091,
+ "days": 180,
+ "gameDays": 96,
+ "deferDays": 6,
+ "greedy": {
+  "waits": 6,
+  "maxTier": 0,
+  "seatDay": 96,
+  "seatKind": "lesser"
+ },
+ "armory": {
+  "donations": 0,
+  "craftDonations": 0,
+  "donatedBonus": 0,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 1,
+  "errors": 0,
+  "unitsAtEnd": 0
+ },
+ "guardTrace": [
+  {
+   "day": 90,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 91,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 92,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 93,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 94,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 95,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 96,
+   "decision": "hp",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  }
+ ],
+ "windowEndGuard": "hp",
+ "announceCapIdx": 11850,
+ "overtimeLines": 0,
+ "plan": "waves",
+ "fullseat": {
+  "days": 96,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 12,
+   "w2": 11,
+   "w3": 4,
+   "w4": 3,
+   "w5": 0,
+   "contests": 8,
+   "crises": 4,
+   "stage": 3,
+   "foodShared": 62,
+   "score": 135,
+   "standing": 199
+  },
+  "sentDay": 12,
+  "surgeDay": 42,
+  "firstLesserDay": 68,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": 96,
+  "winSeat": {
+   "day": 96,
+   "seat": "lesser",
+   "wavesOk": false,
+   "contestsOk": true,
+   "crisesOk": true,
+   "stageOk": true,
+   "foodDeedsOk": true,
+   "binding": [
+    "w5"
+   ],
+   "worst": "w5",
+   "unlock": {
+    "standing": 199,
+    "t4": 100,
+    "t5": 200,
+    "unlockedWave": 4,
+    "w4faced": true,
+    "holdKind": "defer5",
+    "rd5short": [
+     "veterans"
+    ]
+   }
+  }
+ },
+ "endReason": "over-other",
+ "won": true,
+ "announceDay": 90,
+ "satDay": 96,
+ "satSeatKind": "lesser",
+ "satWaves": {
+  "w1": 12,
+  "w2": 11,
+  "w3": 4,
+  "w4": 3,
+  "w5": 0
+ },
+ "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — global standing, waves 1–3 faced (12/11/4), with 3 wave-4 fought, 8 contests survived, 4 crises weathered. The table does not rise. It prices.",
+ "auditNamed": true,
+ "satPenalty": {
+  "tier": 0,
+  "losses": 0,
+  "penalty": 0
+ },
+ "maxTier": 0,
+ "otMismatch": null,
+ "walkedPath": "beloved",
+ "walkedBranch": "light",
+ "instrumentErrors": 0,
+ "telemetry": [
+  {
+   "type": "table_entered",
+   "day": 96,
+   "moral": null
+  },
+  {
+   "type": "table_won",
+   "day": 96,
+   "moral": "light",
+   "ending": "god:living_garden",
+   "endingKind": "coda"
+  }
+ ],
+ "rg": null,
+ "noticedCount": 0,
+ "noticeLines": [],
+ "ledgerLine": "The table has read your ledger. The protected outnumber the killed; the food truth was shared; promises kept. The light road is open.",
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": false,
+  "leanAtSit": 0,
+  "bandAtSit": "grey",
+  "bondAtSit": 0,
+  "groundingAtSit": 100,
+  "capClaimed": 0,
+  "capAppointed": 3,
+  "capAnswers": 0,
+  "capCommunes": 0,
+  "capReroutes": 0,
+  "doorsOffered": [
+   "path:feared",
+   "path:beloved",
+   "path:witness",
+   "path:assimilated",
+   "path:defiant",
+   "path:relay"
+  ],
+  "doorWalked": "beloved"
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 56,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 63,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 70,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 77,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 84,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 91,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  }
+ ],
+ "finalBeat": true,
+ "finalOptsCount": 2,
+ "finalPickId": "final:audience",
+ "finalLabel": "Let the audience speak.",
+ "finalResolved": true,
+ "finalOutcomeLines": [
+  "◈ THE BELOVED — \"Let the audience speak.\"",
+  "◈ THE ARCHITECT — Petra Novak ascended through doors you built: relay. The galaxy will remember the god's name. The village will remember who built the door. Both are true. Neither is small.",
+  "◈ THE OVERSIGHT —"
+ ],
+ "promptFrameCount": 5,
+ "dispatchCount": 5,
+ "weekly": [],
+ "fightCensus": {
+  "fights": [
+   {
+    "monsters": [
+     "suburb"
+    ],
+    "startDay": 65,
+    "endDay": 65,
+    "turns": 5,
+    "turnsObserved": true,
+    "outcome": "mFlee",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": true,
+    "escapeKind": "designed",
+    "openDriver": "engine",
+    "source": "engine+policy",
+    "committed": true,
+    "arenaMention": false,
+    "deathCauses": [],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": true,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   },
+   {
+    "monsters": [
+     "audit"
+    ],
+    "startDay": 70,
+    "endDay": 70,
+    "turns": 7,
+    "turnsObserved": true,
+    "outcome": "vKill",
+    "killFlag": true,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine+policy",
+    "committed": true,
+    "arenaMention": false,
+    "deathCauses": [],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.982,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.982,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": true,
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   },
+   {
+    "monsters": [
+     "audit"
+    ],
+    "startDay": 91,
+    "endDay": 91,
+    "turns": 1,
+    "turnsObserved": false,
+    "outcome": "talkDown",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": true,
+    "gotAway": true,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": false,
+    "deathCauses": [],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.864,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": null,
+    "ctxCommitAtFirstObserve": null,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   },
+   {
+    "monsters": [
+     "eulogy"
+    ],
+    "startDay": 96,
+    "endDay": 96,
+    "turns": 5,
+    "turnsObserved": true,
+    "outcome": "mFlee",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": true,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine+policy",
+    "committed": true,
+    "arenaMention": false,
+    "deathCauses": [],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.545,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.545,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": true,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   }
+  ],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 4,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 9,
+  "dead": 0,
+  "people": [
+   {
+    "id": "gen_7kadaz6",
+    "name": "Violet Novak",
+    "dead": false,
+    "occupation": "line cook",
+    "npcAbilities": 0
+   },
+   {
+    "id": "gen_b4ah3rj",
+    "name": "Josue Murhula",
+    "dead": false,
+    "occupation": "Sailor",
+    "npcAbilities": 4
+   },
+   {
+    "id": "adaeze_nwosu",
+    "name": "Adaeze Nwosu",
+    "dead": false,
+    "occupation": "ESL teacher",
+    "npcAbilities": 4
+   },
+   {
+    "id": "priya_nair",
+    "name": "Priya Nair",
+    "dead": false,
+    "occupation": "emergency dispatcher",
+    "npcAbilities": 6
+   },
+   {
+    "id": "jovan_milic",
+    "name": "Jovan Milic",
+    "dead": false,
+    "occupation": "tattoo artist",
+    "npcAbilities": 4
+   },
+   {
+    "id": "petra_novak",
+    "name": "Petra Novak",
+    "dead": false,
+    "occupation": "glazier",
+    "npcAbilities": 4
+   },
+   {
+    "id": "elif_demir",
+    "name": "Elif Demir",
+    "dead": false,
+    "occupation": "hotel housekeeper",
+    "npcAbilities": 1
+   },
+   {
+    "id": "stan_kowalski",
+    "name": "Stan Kowalski",
+    "dead": false,
+    "occupation": "exterminator",
+    "npcAbilities": 1
+   },
+   {
+    "id": "dale_hoffman",
+    "name": "Dale Hoffman",
+    "dead": false,
+    "occupation": "rail conductor",
+    "npcAbilities": 3
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Easton",
+    "day": 23,
+    "cause": "the night"
+   },
+   {
+    "id": null,
+    "name": "Siobhan",
+    "day": 66,
+    "cause": "The Congregation"
+   }
+  ],
+  "pantryKcal": 21224,
+  "scale": "global",
+  "mantle": "Violet Novak"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 1,
+  "killers": {
+   "gen_0hrdq1c": {
+    "kills": 1,
+    "types": [],
+    "days": [
+     70
+    ]
+   }
+  },
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 17,
+  "vetFirstDay": 65,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "gen_dn6tz0q",
+   "name": "Easton Peters",
+   "cause": "the night",
+   "day": 23,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_oqw1dsq",
+   "name": "Siobhan Becker",
+   "cause": "The Congregation",
+   "day": 66,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "maya_singh",
+   "name": "Maya",
+   "cause": "alien",
+   "day": 67,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_0hrdq1c",
+   "name": "Huguette",
+   "cause": "alien",
+   "day": 72,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Static stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Static",
+   "capIdx": 3817
+  },
+  {
+   "line": "The Big Big stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Big",
+   "capIdx": 4775
+  },
+  {
+   "line": "The Chorus Line stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Chorus Line",
+   "capIdx": 8014
+  },
+  {
+   "line": "The Lockpick stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Lockpick",
+   "capIdx": 8395
+  },
+  {
+   "line": "The Lockpick stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Lockpick",
+   "capIdx": 10053
+  },
+  {
+   "line": "The Lockpick stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Lockpick",
+   "capIdx": 10370
+  }
+ ]
+}
