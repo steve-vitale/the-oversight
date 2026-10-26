@@ -1,0 +1,82 @@
+variants found: B, B-confirm, BC, C, base, base-confirm
+  B seeds: 9750,9751,9752,9753,9754,9755,9756,9757
+  B-confirm seeds: 9760,9761,9762,9763,9764,9765,9766,9767,9768,9769,9770,9771,9772,9773,9774,9775
+  BC seeds: 9750,9751,9752,9753,9754,9755,9756,9757
+  C seeds: 9750,9751,9752,9753,9754,9755,9756,9757
+  base seeds: 9750,9751,9752,9753,9754,9755,9756,9757
+  base-confirm seeds: 9760,9761,9762,9763,9764,9765,9766,9767,9768,9769,9770,9771,9772,9773,9774,9775
+
+=== base vs B,C,BC ===
+seed | base rf/plain/say | B rf/plain/say | C rf/plain/say | BC rf/plain/say
+9750 | 33/86/171 | 19/100/171 | 13/106/171 | 13/106/171
+9751 | 4/12/70 | 4/12/70 | 3/13/70 | 3/13/70
+9752 | 37/31/118 | 37/31/118 | 12/56/118 | 12/56/118
+9753 | 64/209/335 | 51/222/335 | 36/237/335 | 30/243/335
+9754 | 0/11/45 | 0/11/45 | 0/11/45 | 0/11/45
+9755 | 4/88/112 | 2/90/112 | 1/91/112 | 1/91/112
+9756 | 17/51/129 | 17/51/129 | 19/49/129 | 17/51/129
+9757 | 106/221/370 | 55/272/370 | 29/298/370 | 25/302/370
+TOTAL | base 265/709/1350 | B 185/789/1350 | C 113/861/1350 | BC 101/873/1350
+numerics-identity guard failures: 0
+simulation-vs-actual B: mismatches=0
+SIM MISMATCH C s9753: sim=31 actual=36
+SIM MISMATCH C s9756: sim=17 actual=19
+SIM MISMATCH C s9757: sim=29 actual=29
+simulation-vs-actual C: mismatches=3
+SIM MISMATCH BC s9753: sim=30 actual=30
+SIM MISMATCH BC s9757: sim=25 actual=25
+simulation-vs-actual BC: mismatches=2
+B+C risk (baseline days where a moved figure is silenced after a voice spoke): events=6 days=6
+same-day multi-figure baseline days (any seed): 10
+GO B: 9757=55 (<=60) total=185 (<=212) voiceDaysEq=true => GO
+GO C: total=113 (<=150) 9756=19 (==17) consecZero=true => NO-GO
+GO BC: total=101 (<=120) 9757=25 (<=35) 9756=17 (==17) riskEvents=6 (==0) => NO-GO
+WALL (base): national=6/8 table/wins=0/8 medianDays=100 maxDays=100 waves={4,3,2,3,3,4,4,4}
+DETAIL s9750: base rf=33 days=19 distinctKcal=13 firstDay=56 lastDay=77 B rf=19 days=19 distinctKcal=13 C rf=13 days=13 distinctKcal=13 BC rf=13 days=13 distinctKcal=13
+DETAIL s9751: base rf=4 days=4 distinctKcal=3 firstDay=66 lastDay=93 B rf=4 days=4 distinctKcal=3 C rf=3 days=3 distinctKcal=3 BC rf=3 days=3 distinctKcal=3
+DETAIL s9752: base rf=37 days=37 distinctKcal=12 firstDay=30 lastDay=90 B rf=37 days=37 distinctKcal=12 C rf=12 days=12 distinctKcal=12 BC rf=12 days=12 distinctKcal=12
+DETAIL s9753: base rf=64 days=51 distinctKcal=31 firstDay=37 lastDay=96 B rf=51 days=51 distinctKcal=30 C rf=36 days=28 distinctKcal=36 BC rf=30 days=30 distinctKcal=30
+DETAIL s9754: base rf=0 days=0 distinctKcal=0 firstDay=- lastDay=- B rf=0 days=0 distinctKcal=0 C rf=0 days=0 distinctKcal=0 BC rf=0 days=0 distinctKcal=0
+DETAIL s9755: base rf=4 days=2 distinctKcal=1 firstDay=53 lastDay=54 B rf=2 days=2 distinctKcal=1 C rf=1 days=1 distinctKcal=1 BC rf=1 days=1 distinctKcal=1
+DETAIL s9756: base rf=17 days=17 distinctKcal=17 firstDay=34 lastDay=77 B rf=17 days=17 distinctKcal=17 C rf=19 days=17 distinctKcal=19 BC rf=17 days=17 distinctKcal=17
+DETAIL s9757: base rf=106 days=55 distinctKcal=29 firstDay=44 lastDay=100 B rf=55 days=55 distinctKcal=22 C rf=29 days=25 distinctKcal=29 BC rf=25 days=25 distinctKcal=25
+
+=== base-confirm vs B-confirm ===
+seed | base rf/plain/say | B-confirm rf/plain/say
+9760 | 54/130/252 | 32/152/252
+9761 | 1/7/42 | 1/7/42
+9762 | 61/189/297 | 55/195/297
+9763 | 87/163/305 | 47/203/305
+9764 | 10/21/55 | 10/21/55
+9765 | 16/4/78 | 16/4/78
+9766 | 37/107/188 | 37/107/188
+9767 | 97/51/194 | 61/87/194
+9768 | 4/13/43 | 4/13/43
+9769 | 21/11/79 | 21/11/79
+9770 | 14/7/80 | 14/7/80
+9771 | 1/5/26 | 1/5/26
+9772 | 31/8/76 | 31/8/76
+9773 | 19/11/82 | 19/11/82
+9774 | 18/11/53 | 18/11/53
+9775 | 38/65/148 | 37/66/148
+TOTAL | base-confirm 509/803/1998 | B-confirm 404/908/1998
+numerics-identity guard failures: 0
+B+C risk (baseline days where a moved figure is silenced after a voice spoke): events=4 days=4
+same-day multi-figure baseline days (any seed): 8
+WALL (base-confirm): national=16/16 table/wins=0/16 medianDays=100 maxDays=100 waves={4,4,4,2,4,4,4,2,4,3,2,4,4,3,4,4}
+DETAIL s9760: base rf=54 days=32 distinctKcal=24 firstDay=39 lastDay=95 B-confirm rf=32 days=32 distinctKcal=20
+DETAIL s9761: base rf=1 days=1 distinctKcal=1 firstDay=71 lastDay=71 B-confirm rf=1 days=1 distinctKcal=1
+DETAIL s9762: base rf=61 days=55 distinctKcal=47 firstDay=22 lastDay=77 B-confirm rf=55 days=55 distinctKcal=47
+DETAIL s9763: base rf=87 days=47 distinctKcal=27 firstDay=49 lastDay=100 B-confirm rf=47 days=47 distinctKcal=27
+DETAIL s9764: base rf=10 days=10 distinctKcal=6 firstDay=47 lastDay=58 B-confirm rf=10 days=10 distinctKcal=6
+DETAIL s9765: base rf=16 days=16 distinctKcal=7 firstDay=50 lastDay=93 B-confirm rf=16 days=16 distinctKcal=7
+DETAIL s9766: base rf=37 days=37 distinctKcal=31 firstDay=39 lastDay=76 B-confirm rf=37 days=37 distinctKcal=31
+DETAIL s9767: base rf=97 days=61 distinctKcal=25 firstDay=36 lastDay=99 B-confirm rf=61 days=61 distinctKcal=25
+DETAIL s9768: base rf=4 days=4 distinctKcal=3 firstDay=61 lastDay=68 B-confirm rf=4 days=4 distinctKcal=3
+DETAIL s9769: base rf=21 days=21 distinctKcal=17 firstDay=40 lastDay=81 B-confirm rf=21 days=21 distinctKcal=17
+DETAIL s9770: base rf=14 days=14 distinctKcal=10 firstDay=41 lastDay=100 B-confirm rf=14 days=14 distinctKcal=10
+DETAIL s9771: base rf=1 days=1 distinctKcal=1 firstDay=72 lastDay=72 B-confirm rf=1 days=1 distinctKcal=1
+DETAIL s9772: base rf=31 days=31 distinctKcal=18 firstDay=45 lastDay=93 B-confirm rf=31 days=31 distinctKcal=18
+DETAIL s9773: base rf=19 days=19 distinctKcal=14 firstDay=53 lastDay=89 B-confirm rf=19 days=19 distinctKcal=14
+DETAIL s9774: base rf=18 days=18 distinctKcal=10 firstDay=32 lastDay=60 B-confirm rf=18 days=18 distinctKcal=10
+DETAIL s9775: base rf=38 days=37 distinctKcal=18 firstDay=41 lastDay=95 B-confirm rf=37 days=37 distinctKcal=18

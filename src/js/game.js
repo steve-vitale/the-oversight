@@ -7227,12 +7227,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
             // ~3x/day, so the identical racks-full line fired per resolution
             // (3x "the racks are already full" in one day's stream — r20
-            // seed 61 day 25). Voice once per cook-day; the underlying
-            // fullness is still computed every resolution (FOODVOICE2
-            // pattern: the measure stays truthful, only the voice is gated).
+            // seed 61 day 25). The underlying fullness is still computed
+            // every resolution (FOODVOICE2 pattern: the measure stays
+            // truthful, only the voice is gated).
+            // RACKSVOICE-GATE (sim-racksvoice-gate-b, 2026-10-26, winner
+            // variant B, village-level first complaint): only the FIRST
+            // racks-full complaint each day speaks; later cooks that day
+            // get the plain frame, exactly like a 2nd/3rd resolution
+            // today. Measured on identical seeds: pilot 9757 106 -> 55,
+            // band 265 -> 185, daily signal kept on every seed; confirm
+            // band 509 -> 404. Variants C and B+C were measured and
+            // killed (see evidence/2026-10-26/sim-racksvoice-gate-b.md)
+            // and leave no code here. RACKSVOICE_GATE=0 restores the old
+            // per-cook-per-day rule for regression testing only.
             var _rfv = this._racksFullVoice || (this._racksFullVoice = {});
-            if (_rfv[vid] !== day) {
-              _rfv[vid] = day;
+            var _rgOff = false;
+            try { _rgOff = (typeof process !== 'undefined' && process.env && process.env.RACKSVOICE_GATE === '0'); } catch (e) {}
+            if (_rgOff) {
+              if (_rfv[vid] !== day) {
+                _rfv[vid] = day;
+                preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
+              }
+            } else if (this._racksFullVoiceDay !== day) {
+              this._racksFullVoiceDay = day;
               preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
             }
           }
