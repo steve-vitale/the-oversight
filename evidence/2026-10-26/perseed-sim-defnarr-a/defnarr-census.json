@@ -1,0 +1,669 @@
+{
+ "label": "sim-defnarr-a defender census",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "defFights": 311,
+ "recorded": 297,
+ "dropped": 14,
+ "droppedShare": 0.04501607717041801,
+ "outcomeCount": {
+  "mFlee": 243,
+  "vFlee": 32,
+  "vKill": 34,
+  "vDie": 2
+ },
+ "bySeed": {
+  "73671": {
+   "fights": 48,
+   "recorded": 48,
+   "dropped": 0,
+   "byOutcome": {
+    "mFlee": 42,
+    "vFlee": 4,
+    "vKill": 2
+   }
+  },
+  "73672": {
+   "fights": 19,
+   "recorded": 19,
+   "dropped": 0,
+   "byOutcome": {
+    "mFlee": 13,
+    "vFlee": 6
+   }
+  },
+  "73673": {
+   "fights": 27,
+   "recorded": 27,
+   "dropped": 0,
+   "byOutcome": {
+    "vKill": 3,
+    "mFlee": 20,
+    "vFlee": 4
+   }
+  },
+  "73674": {
+   "fights": 50,
+   "recorded": 50,
+   "dropped": 0,
+   "byOutcome": {
+    "mFlee": 43,
+    "vKill": 2,
+    "vFlee": 4,
+    "vDie": 1
+   }
+  },
+  "73675": {
+   "fights": 61,
+   "recorded": 61,
+   "dropped": 0,
+   "byOutcome": {
+    "vFlee": 5,
+    "mFlee": 51,
+    "vKill": 5
+   }
+  },
+  "73676": {
+   "fights": 28,
+   "recorded": 23,
+   "dropped": 5,
+   "byOutcome": {
+    "vKill": 6,
+    "mFlee": 19,
+    "vFlee": 2,
+    "vDie": 1
+   }
+  },
+  "73677": {
+   "fights": 37,
+   "recorded": 37,
+   "dropped": 0,
+   "byOutcome": {
+    "mFlee": 27,
+    "vFlee": 4,
+    "vKill": 6
+   }
+  },
+  "73678": {
+   "fights": 41,
+   "recorded": 32,
+   "dropped": 9,
+   "byOutcome": {
+    "mFlee": 28,
+    "vKill": 10,
+    "vFlee": 3
+   }
+  }
+ },
+ "templates": [
+  {
+   "template": "{NAME} stared down {MONSTER} and it backed off — {N} rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 190,
+   "share": 0.6397306397306397
+  },
+  {
+   "template": "{NAME} stood down {MONSTER} and kept walking — {N} rounds, bloodied but breathing. It's still out there, somewhere.",
+   "count": 36,
+   "share": 0.12121212121212122
+  },
+  {
+   "template": "The {MONSTER} mauled {NAME} (-{N} health) over {N} rounds. They're lucky to be breathing.",
+   "count": 23,
+   "share": 0.07744107744107744
+  },
+  {
+   "template": "{NAME} killed {MONSTER} alone — {N} rounds, {N} taken. Word travels fast. The village cheers.",
+   "count": 19,
+   "share": 0.06397306397306397
+  },
+  {
+   "template": "{NAME} killed {MONSTER} alone — {N} round, {N} taken. Word travels fast. The village cheers.",
+   "count": 7,
+   "share": 0.02356902356902357
+  },
+  {
+   "template": "{NAME} stood down {MONSTER} and kept walking — {N} round, bloodied but breathing. It's still out there, somewhere.",
+   "count": 7,
+   "share": 0.02356902356902357
+  },
+  {
+   "template": "The {MONSTER} mauled {NAME} (-{N} health) over {N} rounds. They're lucky to be breathing. [rest]",
+   "count": 4,
+   "share": 0.013468013468013467
+  },
+  {
+   "template": "{NAME} killed {MONSTER} alone — {N} rounds, {N} taken. Word travels fast. [loot] The village cheers.",
+   "count": 4,
+   "share": 0.013468013468013467
+  },
+  {
+   "template": "The {MONSTER} mauled {NAME} (-{N} health) over {N} round. They're lucky to be breathing.",
+   "count": 2,
+   "share": 0.006734006734006734
+  },
+  {
+   "template": "{NAME} killed {MONSTER} alone — {N} round, {N} taken. Word travels fast. [loot] The village cheers.",
+   "count": 2,
+   "share": 0.006734006734006734
+  },
+  {
+   "template": "The {MONSTER} killed {NAME} in {N} rounds. The village mourns.",
+   "count": 1,
+   "share": 0.003367003367003367
+  },
+  {
+   "template": "The {MONSTER} came for {NAME} and missed — they got clear over {N} rounds, unharmed. They're lucky to be breathing.",
+   "count": 1,
+   "share": 0.003367003367003367
+  },
+  {
+   "template": "The {MONSTER} killed {NAME} in {N} round. The village mourns.",
+   "count": 1,
+   "share": 0.003367003367003367
+  }
+ ],
+ "shapes": [
+  {
+   "shape": "{NAME} stared down {MONSTER} and it backed off — {N} round(s), not a scratch on them. It's still out there, somewhere.",
+   "count": 190,
+   "share": 0.6397306397306397
+  },
+  {
+   "shape": "{NAME} stood down {MONSTER} and kept walking — {N} round(s), bloodied but breathing. It's still out there, somewhere.",
+   "count": 43,
+   "share": 0.1447811447811448
+  },
+  {
+   "shape": "{NAME} killed {MONSTER} alone — {N} round(s), {N} taken. Word travels fast. The village cheers.",
+   "count": 26,
+   "share": 0.08754208754208755
+  },
+  {
+   "shape": "The {MONSTER} mauled {NAME} (-{N} health) over {N} round(s). They're lucky to be breathing.",
+   "count": 25,
+   "share": 0.08417508417508418
+  },
+  {
+   "shape": "{NAME} killed {MONSTER} alone — {N} round(s), {N} taken. Word travels fast. [loot] The village cheers.",
+   "count": 6,
+   "share": 0.020202020202020204
+  },
+  {
+   "shape": "The {MONSTER} mauled {NAME} (-{N} health) over {N} round(s). They're lucky to be breathing. [rest]",
+   "count": 4,
+   "share": 0.013468013468013467
+  },
+  {
+   "shape": "The {MONSTER} killed {NAME} in {N} round(s). The village mourns.",
+   "count": 2,
+   "share": 0.006734006734006734
+  },
+  {
+   "shape": "The {MONSTER} came for {NAME} and missed — they got clear over {N} round(s), unharmed. They're lucky to be breathing.",
+   "count": 1,
+   "share": 0.003367003367003367
+  }
+ ],
+ "topTemplateShare": 0.6397306397306397,
+ "topTemplate": "{NAME} stared down {MONSTER} and it backed off — {N} rounds, not a scratch on them. It's still out there, somewhere.",
+ "verbatimTop": [
+  {
+   "line": "⚔️ Elena stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 4
+  },
+  {
+   "line": "⚔️ Elena stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 3
+  },
+  {
+   "line": "⚔️ Nina stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 3
+  },
+  {
+   "line": "⚔️ Gonzalo stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 3
+  },
+  {
+   "line": "⚔️ Meera stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 3
+  },
+  {
+   "line": "⚔️ Michael stared down the Heckler and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 3
+  },
+  {
+   "line": "⚔️ Imke stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 3
+  },
+  {
+   "line": "⚔️ Sigrid stared down the Big Loud and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Owen stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Tesfaye stared down the Nevermore and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Gustavo stared down the Lockpick and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Chantal stared down the Ugly-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Hannah stared down the Ugly Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Ekow stared down the Understudy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Ekow stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Raj stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Santiago stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Hannah stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Aisha stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  },
+  {
+   "line": "⚔️ Brayan stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "count": 2
+  }
+ ],
+ "distinctVerbatim": 260,
+ "identicalLineRepeats": 66,
+ "chainTop": [
+  {
+   "seed": 73675,
+   "seq": 9,
+   "mid": "gallowdeer",
+   "line": "⚔️ Elena stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 3,
+   "days": [
+    48,
+    74,
+    81
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 21,
+   "mid": "voice_mimic_radio",
+   "line": "⚔️ Nina stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 3,
+   "days": [
+    81,
+    104,
+    125
+   ]
+  },
+  {
+   "seed": 73677,
+   "seq": 14,
+   "mid": "heckler",
+   "line": "⚔️ Michael stared down the Heckler and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 3,
+   "days": [
+    36,
+    87,
+    94
+   ]
+  },
+  {
+   "seed": 73677,
+   "seq": 22,
+   "mid": "moderator",
+   "line": "⚔️ Imke stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 3,
+   "days": [
+    48,
+    87,
+    94
+   ]
+  },
+  {
+   "seed": 73671,
+   "seq": 2,
+   "mid": "cliffhanger",
+   "line": "⚔️ Sigrid stared down the Big Loud and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    26,
+    100
+   ]
+  },
+  {
+   "seed": 73671,
+   "seq": 21,
+   "mid": "understudy",
+   "line": "⚔️ Owen stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    46,
+    57
+   ]
+  },
+  {
+   "seed": 73671,
+   "seq": 18,
+   "mid": "nevermore",
+   "line": "⚔️ Tesfaye stared down the Nevermore and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    69,
+    109
+   ]
+  },
+  {
+   "seed": 73672,
+   "seq": 2,
+   "mid": "lockpick_raccoon",
+   "line": "⚔️ Gustavo stared down the Lockpick and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    28,
+    61
+   ]
+  },
+  {
+   "seed": 73673,
+   "seq": 3,
+   "mid": "belltoad",
+   "line": "⚔️ Chantal stared down the Ugly-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    66,
+    73
+   ]
+  },
+  {
+   "seed": 73674,
+   "seq": 17,
+   "mid": "understudy",
+   "line": "⚔️ Ekow stared down the Understudy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    37,
+    66
+   ]
+  },
+  {
+   "seed": 73674,
+   "seq": 23,
+   "mid": "moderator",
+   "line": "⚔️ Hannah stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    86,
+    105
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 10,
+   "mid": "hushwolf",
+   "line": "⚔️ Aisha stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    19,
+    48
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 12,
+   "mid": "hushwolf",
+   "line": "⚔️ Brayan stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    19,
+    48
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 9,
+   "mid": "gallowdeer",
+   "line": "⚔️ Nina stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    66,
+    96
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 14,
+   "mid": "murkcap",
+   "line": "⚔️ Gonzalo stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    96,
+    104
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 8,
+   "mid": "murkcap",
+   "line": "⚔️ Meera stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    96,
+    170
+   ]
+  },
+  {
+   "seed": 73675,
+   "seq": 23,
+   "mid": "moderator",
+   "line": "⚔️ Gonzalo stared down the Big Loud and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    125,
+    170
+   ]
+  },
+  {
+   "seed": 73677,
+   "seq": 2,
+   "mid": "nightcourt",
+   "line": "⚔️ Imke stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    56,
+    69
+   ]
+  },
+  {
+   "seed": 73678,
+   "seq": 18,
+   "mid": "paparazzo",
+   "line": "⚔️ Elif stared down the Paparazzo and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 2,
+   "days": [
+    47,
+    74
+   ]
+  },
+  {
+   "seed": 73671,
+   "seq": 2,
+   "mid": "cliffhanger",
+   "line": "⚔️ Brunhilde stared down the Cliffhanger and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.",
+   "n": 1,
+   "days": [
+    9
+   ]
+  }
+ ],
+ "instanceTop": [
+  {
+   "seed": 73675,
+   "seq": 9,
+   "mid": "gallowdeer",
+   "defenderLines": 8,
+   "distinctLines": 5,
+   "lines": {
+    "🩸 The Highbeam Deer mauled Elena (-48 health) over 2 rounds. They're lucky to be breathing.": 1,
+    "⚔️ Meera stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Elena stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 3,
+    "⚔️ Nina stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 2,
+    "⚔️ Aisha stared down the Highbeam Deer and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73675,
+   "seq": 21,
+   "mid": "voice_mimic_radio",
+   "defenderLines": 7,
+   "distinctLines": 5,
+   "lines": {
+    "⚔️ Elena stood down the Static and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.": 1,
+    "⚔️ Nina stared down the Static and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Nina stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 3,
+    "⚔️ Brayan stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Elena stared down the Loud Beast and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73675,
+   "seq": 14,
+   "mid": "murkcap",
+   "defenderLines": 6,
+   "distinctLines": 5,
+   "lines": {
+    "⚔️ Elena stared down the Murkcap and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Aisha stared down the Murkcap and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Gonzalo stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 2,
+    "⚔️ Meera stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Elena stared down the Big Ugly and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73677,
+   "seq": 2,
+   "mid": "nightcourt",
+   "defenderLines": 6,
+   "distinctLines": 5,
+   "lines": {
+    "⚔️ Liam stood down the Judge Hoot and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere.": 1,
+    "⚔️ Amara stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ James stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Imke stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 2,
+    "⚔️ Sigrun stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73677,
+   "seq": 22,
+   "mid": "moderator",
+   "defenderLines": 6,
+   "distinctLines": 4,
+   "lines": {
+    "⚔️ Liam stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Imke stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 3,
+    "⚔️ James stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Naran stared down the Moderator and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73671,
+   "seq": 12,
+   "mid": "nightcourt",
+   "defenderLines": 5,
+   "distinctLines": 5,
+   "lines": {
+    "⚔️ Sigrid stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Daniela stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Tesfaye stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Owen stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Ursula stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73671,
+   "seq": 18,
+   "mid": "nevermore",
+   "defenderLines": 5,
+   "distinctLines": 4,
+   "lines": {
+    "⚔️ Brian stood down the Nevermore and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere.": 1,
+    "⚔️ Sigrid stared down the Nevermore and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Tesfaye stared down the Nevermore and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 2,
+    "⚔️ Daniela stared down the Nevermore and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73674,
+   "seq": 1,
+   "mid": "nightcourt",
+   "defenderLines": 5,
+   "distinctLines": 5,
+   "lines": {
+    "⚔️ Ekow stood down the absence of sound and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere.": 1,
+    "⚔️ Consuelo stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Hannah stared down the Night Court and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Consuelo stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Theo stared down the Judge Hoot and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73674,
+   "seq": 14,
+   "mid": "hushwolf",
+   "defenderLines": 5,
+   "distinctLines": 5,
+   "lines": {
+    "⚔️ Santiago stood down the Big-Eyes and kept walking — 1 round, bloodied but breathing. It's still out there, somewhere.": 1,
+    "⚔️ Raj stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Ekow stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Santiago stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Ruth stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  },
+  {
+   "seed": 73675,
+   "seq": 10,
+   "mid": "hushwolf",
+   "defenderLines": 5,
+   "distinctLines": 4,
+   "lines": {
+    "⚔️ Aisha stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 2,
+    "⚔️ Elena stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Willow stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1,
+    "⚔️ Elena stared down the Big-Eyes and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.": 1
+   }
+  }
+ ],
+ "instancesWithLines": 167,
+ "unmatched": [],
+ "unmatchedCount": 0,
+ "generated": "2026-10-26T13:10:52.263Z"
+}
