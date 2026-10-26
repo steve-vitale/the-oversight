@@ -1,0 +1,1190 @@
+{
+ "label": "sim-tbmelt-a analysis",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "perSeed": [
+  {
+   "seed": 73671,
+   "analysis": {
+    "liftsTotal": 15,
+    "lifted": 12,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 3,
+    "byFate": {
+     "melted": 2,
+     "melted-fought": 5,
+     "killed": 4,
+     "restored": 1
+    },
+    "byDoor": {
+     "wanderer-pending": 2,
+     "world-bump": 9,
+     "contest-arena": 1
+    },
+    "mismatch": 2,
+    "meltsTotal": 2,
+    "meltsByDoor": {
+     "wanderer-pending": 1,
+     "contest-arena": 1
+    },
+    "meltsByWave": {
+     "w1": 1,
+     "w2": 1
+    },
+    "meltsPerInitiation": 0.13333333333333333,
+    "initiations": 15,
+    "meltRows": [
+     {
+      "day": 9,
+      "tileId": "murkcap",
+      "tileWave": 1,
+      "tileTitan": false,
+      "tileLingering": false,
+      "tileVeteran": false,
+      "tileHp": 42,
+      "fightMid": "anaconda_empress",
+      "fightWave": 1,
+      "door": "wanderer-pending",
+      "sub": null,
+      "initiator": "harness-fallback",
+      "result": "lost",
+      "fighters": [
+       {
+        "key": "p",
+        "kind": "player",
+        "monsterId": null,
+        "villagerId": null,
+        "hp": 91,
+        "maxHp": 110,
+        "alive": true,
+        "fled": false
+       },
+       {
+        "key": "m_0",
+        "kind": "monster",
+        "monsterId": "anaconda_empress",
+        "villagerId": null,
+        "hp": 112,
+        "maxHp": 112,
+        "alive": true,
+        "fled": false
+       }
+      ]
+     },
+     {
+      "day": 114,
+      "tileId": "bright_idea",
+      "tileWave": 2,
+      "tileTitan": false,
+      "tileLingering": true,
+      "tileVeteran": false,
+      "tileHp": 1,
+      "fightMid": "moderator",
+      "fightWave": 2,
+      "door": "contest-arena",
+      "sub": null,
+      "initiator": "arena-unknown",
+      "result": "routed",
+      "fighters": null
+     }
+    ],
+    "restoredRows": [
+     {
+      "day": 178,
+      "tileId": "moderator",
+      "tileWave": 2,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "moderator",
+      "door": "world-bump",
+      "result": "lost"
+     }
+    ],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 15,
+    "cross": {
+     "nwkMismatch": 1,
+     "tbmeltMismatch": 2,
+     "missing": [],
+     "extra": [
+      "114|bright_idea|moderator"
+     ],
+     "extraExplained": [
+      {
+       "key": "114|bright_idea|moderator",
+       "adopted": true,
+       "nwkUnresolved": true,
+       "nwkArg": "moderator"
+      }
+     ],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73672,
+   "analysis": {
+    "liftsTotal": 14,
+    "lifted": 12,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 2,
+    "byFate": {
+     "melted": 1,
+     "melted-fought": 7,
+     "killed": 4
+    },
+    "byDoor": {
+     "wanderer-pending": 3,
+     "world-bump": 9
+    },
+    "mismatch": 1,
+    "meltsTotal": 1,
+    "meltsByDoor": {
+     "wanderer-pending": 1
+    },
+    "meltsByWave": {
+     "w1": 1
+    },
+    "meltsPerInitiation": 0.07142857142857142,
+    "initiations": 14,
+    "meltRows": [
+     {
+      "day": 10,
+      "tileId": "hushwolf",
+      "tileWave": 1,
+      "tileTitan": false,
+      "tileLingering": false,
+      "tileVeteran": false,
+      "tileHp": 29,
+      "fightMid": "living_wire",
+      "fightWave": 1,
+      "door": "wanderer-pending",
+      "sub": null,
+      "initiator": "harness-fallback",
+      "result": "routed",
+      "fighters": null
+     }
+    ],
+    "restoredRows": [],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 14,
+    "cross": {
+     "nwkMismatch": 0,
+     "tbmeltMismatch": 1,
+     "missing": [],
+     "extra": [
+      "10|hushwolf|living_wire"
+     ],
+     "extraExplained": [
+      {
+       "key": "10|hushwolf|living_wire",
+       "adopted": true,
+       "nwkUnresolved": true,
+       "nwkArg": "living_wire"
+      }
+     ],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73673,
+   "analysis": {
+    "liftsTotal": 9,
+    "lifted": 6,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 3,
+    "byFate": {
+     "killed": 3,
+     "restored": 2,
+     "melted-fought": 1
+    },
+    "byDoor": {
+     "world-bump": 6
+    },
+    "mismatch": 0,
+    "meltsTotal": 0,
+    "meltsByDoor": {},
+    "meltsByWave": {},
+    "meltsPerInitiation": 0,
+    "initiations": 9,
+    "meltRows": [],
+    "restoredRows": [
+     {
+      "day": 108,
+      "tileId": "focus_group",
+      "tileWave": 3,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "focus_group",
+      "door": "world-bump",
+      "result": "lost"
+     },
+     {
+      "day": 109,
+      "tileId": "focus_group",
+      "tileWave": 3,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "focus_group",
+      "door": "world-bump",
+      "result": "lost"
+     }
+    ],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 9,
+    "cross": {
+     "nwkMismatch": 0,
+     "tbmeltMismatch": 0,
+     "missing": [],
+     "extra": [],
+     "extraExplained": [],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73674,
+   "analysis": {
+    "liftsTotal": 18,
+    "lifted": 9,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 9,
+    "byFate": {
+     "melted-fought": 3,
+     "melted": 2,
+     "killed": 4
+    },
+    "byDoor": {
+     "world-bump": 7,
+     "wanderer-pending": 1,
+     "contest-arena": 1
+    },
+    "mismatch": 2,
+    "meltsTotal": 2,
+    "meltsByDoor": {
+     "wanderer-pending": 1,
+     "contest-arena": 1
+    },
+    "meltsByWave": {
+     "w1": 1,
+     "w2": 1
+    },
+    "meltsPerInitiation": 0.1111111111111111,
+    "initiations": 18,
+    "meltRows": [
+     {
+      "day": 18,
+      "tileId": "anaconda_empress",
+      "tileWave": 1,
+      "tileTitan": false,
+      "tileLingering": false,
+      "tileVeteran": false,
+      "tileHp": 65,
+      "fightMid": "hushwolf",
+      "fightWave": 1,
+      "door": "wanderer-pending",
+      "sub": null,
+      "initiator": "harness-fallback",
+      "result": "lost",
+      "fighters": [
+       {
+        "key": "p",
+        "kind": "player",
+        "monsterId": null,
+        "villagerId": null,
+        "hp": 9,
+        "maxHp": 100,
+        "alive": true,
+        "fled": false
+       },
+       {
+        "key": "m_0",
+        "kind": "monster",
+        "monsterId": "hushwolf",
+        "villagerId": null,
+        "hp": 57,
+        "maxHp": 57,
+        "alive": true,
+        "fled": false
+       }
+      ]
+     },
+     {
+      "day": 162,
+      "tileId": "moderator",
+      "tileWave": 2,
+      "tileTitan": false,
+      "tileLingering": false,
+      "tileVeteran": false,
+      "tileHp": 1,
+      "fightMid": "warranty_caller",
+      "fightWave": 2,
+      "door": "contest-arena",
+      "sub": null,
+      "initiator": "arena-unknown",
+      "result": "won",
+      "fighters": [
+       {
+        "key": "p",
+        "kind": "player",
+        "monsterId": null,
+        "villagerId": null,
+        "hp": 77,
+        "maxHp": 100,
+        "alive": true,
+        "fled": false
+       },
+       {
+        "key": "m_0",
+        "kind": "monster",
+        "monsterId": "warranty_caller",
+        "villagerId": null,
+        "hp": 108,
+        "maxHp": 108,
+        "alive": true,
+        "fled": false
+       }
+      ]
+     }
+    ],
+    "restoredRows": [],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 18,
+    "cross": {
+     "nwkMismatch": 2,
+     "tbmeltMismatch": 2,
+     "missing": [],
+     "extra": [],
+     "extraExplained": [],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73675,
+   "analysis": {
+    "liftsTotal": 21,
+    "lifted": 14,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 7,
+    "byFate": {
+     "restored": 2,
+     "killed": 7,
+     "melted-fought": 5
+    },
+    "byDoor": {
+     "wanderer-pending": 2,
+     "world-bump": 12
+    },
+    "mismatch": 1,
+    "meltsTotal": 0,
+    "meltsByDoor": {},
+    "meltsByWave": {},
+    "meltsPerInitiation": 0,
+    "initiations": 21,
+    "meltRows": [],
+    "restoredRows": [
+     {
+      "day": 9,
+      "tileId": "white_noise_heron",
+      "tileWave": 1,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "sanjun",
+      "door": "wanderer-pending",
+      "result": "lost"
+     },
+     {
+      "day": 100,
+      "tileId": "moderator",
+      "tileWave": 2,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "moderator",
+      "door": "world-bump",
+      "result": "lost"
+     }
+    ],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 21,
+    "cross": {
+     "nwkMismatch": 1,
+     "tbmeltMismatch": 1,
+     "missing": [],
+     "extra": [],
+     "extraExplained": [],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73676,
+   "analysis": {
+    "liftsTotal": 13,
+    "lifted": 9,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 4,
+    "byFate": {
+     "killed": 7,
+     "melted-fought": 1,
+     "restored": 1
+    },
+    "byDoor": {
+     "world-bump": 9
+    },
+    "mismatch": 0,
+    "meltsTotal": 0,
+    "meltsByDoor": {},
+    "meltsByWave": {},
+    "meltsPerInitiation": 0,
+    "initiations": 13,
+    "meltRows": [],
+    "restoredRows": [
+     {
+      "day": 70,
+      "tileId": "hushwolf",
+      "tileWave": 1,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "hushwolf",
+      "door": "world-bump",
+      "result": "lost"
+     }
+    ],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 13,
+    "cross": {
+     "nwkMismatch": 0,
+     "tbmeltMismatch": 0,
+     "missing": [],
+     "extra": [],
+     "extraExplained": [],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73677,
+   "analysis": {
+    "liftsTotal": 22,
+    "lifted": 16,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 6,
+    "byFate": {
+     "melted": 2,
+     "melted-fought": 3,
+     "killed": 5,
+     "restored": 6
+    },
+    "byDoor": {
+     "wanderer-pending": 2,
+     "world-bump": 13,
+     "contest-arena": 1
+    },
+    "mismatch": 2,
+    "meltsTotal": 2,
+    "meltsByDoor": {
+     "wanderer-pending": 1,
+     "contest-arena": 1
+    },
+    "meltsByWave": {
+     "w1": 1,
+     "w3": 1
+    },
+    "meltsPerInitiation": 0.09090909090909091,
+    "initiations": 22,
+    "meltRows": [
+     {
+      "day": 15,
+      "tileId": "living_wire",
+      "tileWave": 1,
+      "tileTitan": false,
+      "tileLingering": false,
+      "tileVeteran": false,
+      "tileHp": 46,
+      "fightMid": "anaconda_empress",
+      "fightWave": 1,
+      "door": "wanderer-pending",
+      "sub": null,
+      "initiator": "harness-fallback",
+      "result": "won",
+      "fighters": [
+       {
+        "key": "p",
+        "kind": "player",
+        "monsterId": null,
+        "villagerId": null,
+        "hp": 102,
+        "maxHp": 110,
+        "alive": true,
+        "fled": false
+       },
+       {
+        "key": "v_sigrun_eiriksdottir",
+        "kind": "villager",
+        "monsterId": null,
+        "villagerId": "sigrun_eiriksdottir",
+        "hp": 100,
+        "maxHp": 100,
+        "alive": true,
+        "fled": false
+       },
+       {
+        "key": "m_0",
+        "kind": "monster",
+        "monsterId": "anaconda_empress",
+        "villagerId": null,
+        "hp": 107,
+        "maxHp": 107,
+        "alive": true,
+        "fled": false
+       }
+      ]
+     },
+     {
+      "day": 63,
+      "tileId": "spool",
+      "tileWave": 3,
+      "tileTitan": false,
+      "tileLingering": false,
+      "tileVeteran": false,
+      "tileHp": 170,
+      "fightMid": "bulldozer",
+      "fightWave": 1,
+      "door": "contest-arena",
+      "sub": null,
+      "initiator": "arena-unknown",
+      "result": "won",
+      "fighters": [
+       {
+        "key": "p",
+        "kind": "player",
+        "monsterId": null,
+        "villagerId": null,
+        "hp": 100,
+        "maxHp": 100,
+        "alive": true,
+        "fled": false
+       },
+       {
+        "key": "m_0",
+        "kind": "monster",
+        "monsterId": "bulldozer",
+        "villagerId": null,
+        "hp": 74,
+        "maxHp": 74,
+        "alive": true,
+        "fled": false
+       }
+      ]
+     }
+    ],
+    "restoredRows": [
+     {
+      "day": 139,
+      "tileId": "suburb",
+      "tileWave": 4,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "suburb",
+      "door": "world-bump",
+      "result": "lost"
+     },
+     {
+      "day": 140,
+      "tileId": "suburb",
+      "tileWave": 4,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "suburb",
+      "door": "world-bump",
+      "result": "lost"
+     },
+     {
+      "day": 140,
+      "tileId": "suburb",
+      "tileWave": 4,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "suburb",
+      "door": "world-bump",
+      "result": "lost"
+     },
+     {
+      "day": 140,
+      "tileId": "suburb",
+      "tileWave": 4,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "suburb",
+      "door": "world-bump",
+      "result": "lost"
+     },
+     {
+      "day": 142,
+      "tileId": "suburb",
+      "tileWave": 4,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "suburb",
+      "door": "world-bump",
+      "result": "lost"
+     },
+     {
+      "day": 143,
+      "tileId": "suburb",
+      "tileWave": 4,
+      "tileTitan": false,
+      "tileLingering": true,
+      "fightMid": "suburb",
+      "door": "world-bump",
+      "result": "lost"
+     }
+    ],
+    "unaccounted": 0,
+    "directBuildEnds": 2,
+    "directBuildEndRows": [
+     {
+      "day": 41,
+      "fightId": "fmgpspi1m_ekw1z6",
+      "result": "lost"
+     },
+     {
+      "day": 99,
+      "fightId": "fmgpspim0_27o15v",
+      "result": "lost"
+     }
+    ],
+    "endsTotal": 24,
+    "cross": {
+     "nwkMismatch": 2,
+     "tbmeltMismatch": 2,
+     "missing": [],
+     "extra": [],
+     "extraExplained": [],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  },
+  {
+   "seed": 73678,
+   "analysis": {
+    "liftsTotal": 16,
+    "lifted": 10,
+    "refused": 0,
+    "thrown": 0,
+    "nullOriginStarts": 6,
+    "byFate": {
+     "melted-fought": 3,
+     "killed": 7
+    },
+    "byDoor": {
+     "wanderer-pending": 1,
+     "world-bump": 9
+    },
+    "mismatch": 0,
+    "meltsTotal": 0,
+    "meltsByDoor": {},
+    "meltsByWave": {},
+    "meltsPerInitiation": 0,
+    "initiations": 16,
+    "meltRows": [],
+    "restoredRows": [],
+    "unaccounted": 0,
+    "directBuildEnds": 0,
+    "directBuildEndRows": [],
+    "endsTotal": 16,
+    "cross": {
+     "nwkMismatch": 0,
+     "tbmeltMismatch": 0,
+     "missing": [],
+     "extra": [],
+     "extraExplained": [],
+     "extraUnexplained": [],
+     "agree": true
+    }
+   }
+  }
+ ],
+ "band": {
+  "melts": 7,
+  "lifted": 88,
+  "mismatch": 8,
+  "restored": 12,
+  "unaccounted": 0,
+  "killed": 41,
+  "foughtMelts": 28,
+  "initiations": 128,
+  "meltsByDoor": {
+   "wanderer-pending": 4,
+   "contest-arena": 3
+  },
+  "meltsByWave": {
+   "w1": 4,
+   "w2": 2,
+   "w3": 1
+  },
+  "meltRows": [
+   {
+    "seed": 73671,
+    "day": 9,
+    "tileId": "murkcap",
+    "tileWave": 1,
+    "tileTitan": false,
+    "tileLingering": false,
+    "tileVeteran": false,
+    "tileHp": 42,
+    "fightMid": "anaconda_empress",
+    "fightWave": 1,
+    "door": "wanderer-pending",
+    "sub": null,
+    "initiator": "harness-fallback",
+    "result": "lost",
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 91,
+      "maxHp": 110,
+      "alive": true,
+      "fled": false
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "anaconda_empress",
+      "villagerId": null,
+      "hp": 112,
+      "maxHp": 112,
+      "alive": true,
+      "fled": false
+     }
+    ]
+   },
+   {
+    "seed": 73671,
+    "day": 114,
+    "tileId": "bright_idea",
+    "tileWave": 2,
+    "tileTitan": false,
+    "tileLingering": true,
+    "tileVeteran": false,
+    "tileHp": 1,
+    "fightMid": "moderator",
+    "fightWave": 2,
+    "door": "contest-arena",
+    "sub": null,
+    "initiator": "arena-unknown",
+    "result": "routed",
+    "fighters": null
+   },
+   {
+    "seed": 73672,
+    "day": 10,
+    "tileId": "hushwolf",
+    "tileWave": 1,
+    "tileTitan": false,
+    "tileLingering": false,
+    "tileVeteran": false,
+    "tileHp": 29,
+    "fightMid": "living_wire",
+    "fightWave": 1,
+    "door": "wanderer-pending",
+    "sub": null,
+    "initiator": "harness-fallback",
+    "result": "routed",
+    "fighters": null
+   },
+   {
+    "seed": 73674,
+    "day": 18,
+    "tileId": "anaconda_empress",
+    "tileWave": 1,
+    "tileTitan": false,
+    "tileLingering": false,
+    "tileVeteran": false,
+    "tileHp": 65,
+    "fightMid": "hushwolf",
+    "fightWave": 1,
+    "door": "wanderer-pending",
+    "sub": null,
+    "initiator": "harness-fallback",
+    "result": "lost",
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 9,
+      "maxHp": 100,
+      "alive": true,
+      "fled": false
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "hushwolf",
+      "villagerId": null,
+      "hp": 57,
+      "maxHp": 57,
+      "alive": true,
+      "fled": false
+     }
+    ]
+   },
+   {
+    "seed": 73674,
+    "day": 162,
+    "tileId": "moderator",
+    "tileWave": 2,
+    "tileTitan": false,
+    "tileLingering": false,
+    "tileVeteran": false,
+    "tileHp": 1,
+    "fightMid": "warranty_caller",
+    "fightWave": 2,
+    "door": "contest-arena",
+    "sub": null,
+    "initiator": "arena-unknown",
+    "result": "won",
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 77,
+      "maxHp": 100,
+      "alive": true,
+      "fled": false
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "warranty_caller",
+      "villagerId": null,
+      "hp": 108,
+      "maxHp": 108,
+      "alive": true,
+      "fled": false
+     }
+    ]
+   },
+   {
+    "seed": 73677,
+    "day": 15,
+    "tileId": "living_wire",
+    "tileWave": 1,
+    "tileTitan": false,
+    "tileLingering": false,
+    "tileVeteran": false,
+    "tileHp": 46,
+    "fightMid": "anaconda_empress",
+    "fightWave": 1,
+    "door": "wanderer-pending",
+    "sub": null,
+    "initiator": "harness-fallback",
+    "result": "won",
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 102,
+      "maxHp": 110,
+      "alive": true,
+      "fled": false
+     },
+     {
+      "key": "v_sigrun_eiriksdottir",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "sigrun_eiriksdottir",
+      "hp": 100,
+      "maxHp": 100,
+      "alive": true,
+      "fled": false
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "anaconda_empress",
+      "villagerId": null,
+      "hp": 107,
+      "maxHp": 107,
+      "alive": true,
+      "fled": false
+     }
+    ]
+   },
+   {
+    "seed": 73677,
+    "day": 63,
+    "tileId": "spool",
+    "tileWave": 3,
+    "tileTitan": false,
+    "tileLingering": false,
+    "tileVeteran": false,
+    "tileHp": 170,
+    "fightMid": "bulldozer",
+    "fightWave": 1,
+    "door": "contest-arena",
+    "sub": null,
+    "initiator": "arena-unknown",
+    "result": "won",
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100,
+      "alive": true,
+      "fled": false
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "bulldozer",
+      "villagerId": null,
+      "hp": 74,
+      "maxHp": 74,
+      "alive": true,
+      "fled": false
+     }
+    ]
+   }
+  ],
+  "restoredRows": [
+   {
+    "seed": 73671,
+    "day": 178,
+    "tileId": "moderator",
+    "tileWave": 2,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "moderator",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73673,
+    "day": 108,
+    "tileId": "focus_group",
+    "tileWave": 3,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "focus_group",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73673,
+    "day": 109,
+    "tileId": "focus_group",
+    "tileWave": 3,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "focus_group",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73675,
+    "day": 9,
+    "tileId": "white_noise_heron",
+    "tileWave": 1,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "sanjun",
+    "door": "wanderer-pending",
+    "result": "lost"
+   },
+   {
+    "seed": 73675,
+    "day": 100,
+    "tileId": "moderator",
+    "tileWave": 2,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "moderator",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73676,
+    "day": 70,
+    "tileId": "hushwolf",
+    "tileWave": 1,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "hushwolf",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73677,
+    "day": 139,
+    "tileId": "suburb",
+    "tileWave": 4,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "suburb",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73677,
+    "day": 140,
+    "tileId": "suburb",
+    "tileWave": 4,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "suburb",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73677,
+    "day": 140,
+    "tileId": "suburb",
+    "tileWave": 4,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "suburb",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73677,
+    "day": 140,
+    "tileId": "suburb",
+    "tileWave": 4,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "suburb",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73677,
+    "day": 142,
+    "tileId": "suburb",
+    "tileWave": 4,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "suburb",
+    "door": "world-bump",
+    "result": "lost"
+   },
+   {
+    "seed": 73677,
+    "day": 143,
+    "tileId": "suburb",
+    "tileWave": 4,
+    "tileTitan": false,
+    "tileLingering": true,
+    "fightMid": "suburb",
+    "door": "world-bump",
+    "result": "lost"
+   }
+  ],
+  "unaccountedRows": [],
+  "seeds": 8,
+  "meltsPerInitiation": 0.0546875,
+  "meltsPerSeed": 0.875
+ },
+ "known5": [
+  {
+   "seed": 73671,
+   "day": 9,
+   "tileId": "murkcap",
+   "expected": "melted",
+   "reproduced": true,
+   "actual": "melted",
+   "door": "wanderer-pending",
+   "fightMid": "anaconda_empress"
+  },
+  {
+   "seed": 73674,
+   "day": 18,
+   "tileId": "anaconda_empress",
+   "expected": "melted",
+   "reproduced": true,
+   "actual": "melted",
+   "door": "wanderer-pending",
+   "fightMid": "hushwolf"
+  },
+  {
+   "seed": 73677,
+   "day": 15,
+   "tileId": "living_wire",
+   "expected": "melted",
+   "reproduced": true,
+   "actual": "melted",
+   "door": "wanderer-pending",
+   "fightMid": "anaconda_empress"
+  },
+  {
+   "seed": 73677,
+   "day": 63,
+   "tileId": "spool",
+   "expected": "melted",
+   "reproduced": true,
+   "actual": "melted",
+   "door": "contest-arena",
+   "fightMid": "bulldozer"
+  },
+  {
+   "seed": 73675,
+   "day": 9,
+   "tileId": "white_noise_heron",
+   "expected": "restored",
+   "reproduced": true,
+   "actual": "restored",
+   "door": "wanderer-pending",
+   "fightMid": "sanjun"
+  }
+ ],
+ "generated": "2026-10-26T01:11:58.498Z"
+}
