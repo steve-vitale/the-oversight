@@ -261,7 +261,9 @@ regime-changed band would launder the regime effect into the baseline):
   byte-identical to HEAD). Repaired per the standing lesson
   (update-index --add --cacheinfo from HEAD blobs for each affected
   file), verified clean (status 0 lines, diff HEAD empty, commit
-  intact: 57 files).
+  intact: 57 files). Second instance on the follow-up note commit
+  (ccfabac05): the main index held a STALE blob for the note file
+  while worktree and HEAD agreed — same repair, verified clean.
 
 ## Reachable / fun / winnable (leg verdict)
 
