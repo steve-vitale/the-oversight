@@ -273,8 +273,12 @@ r57's metric set):
 - NO src/js change in this run (driver + analyzer + proof
   of instrument only), so no game regression is possible
   from this run's files.
-- check.js --quick (journey2-social-r58-checkquick.log):
-  [TO FILL WHEN CHECK COMPLETES]
+- check.js --quick (recovery run by parent after the 3600s timeout,
+  1265s): 278 passed, 9 failed — count matches the standing 278/9
+  profile exactly; visible failures are standing-profile members
+  (parity-20261014, establishment-r20-fixes). This run touches zero
+  src/js, so it introduces no new failure surface. NO-REGRESSION
+  certified at the standing profile.
 
 ## Files landed (tooling + evidence, zero src/js)
 
