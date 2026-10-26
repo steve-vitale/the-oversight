@@ -18174,7 +18174,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const aid = unknown[Math.floor(Math.random() * unknown.length)];
           const adef = (this.data.animals || []).find(a => a.id === aid) || {};
           const teacher = this.displayName(vAnim[aid].learnedBy || '');
-          if (this.grantKnowledge('animal', aid, 1, { type: 'taught', by: teacher })) {
+          // DEAD TEACHERS DON'T TEACH (journey crisis r51 2026-10-26): the
+          // story is told by its learner — a dead learner tells no stories.
+          let aTeacherDead = false;
+          try { const avp = this.vpOf ? this.vpOf(vAnim[aid].learnedBy) : null; aTeacherDead = !!(avp && avp.dead); } catch (e) {}
+          if (!aTeacherDead && this.grantKnowledge('animal', aid, 1, { type: 'taught', by: teacher })) {
             this.say(`🐾 ${teacher} is telling hunting stories by the fire — the ${adef.name || aid}, how it moves, where it feeds. You listen. Now you know it too.`);
           }
         }
@@ -18203,6 +18207,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // someone shares what they learned, by the fire, in words
       const pid = taught[Math.floor(Math.random() * taught.length)];
       const entry = shared[pid];
+      // DEAD TEACHERS DON'T TEACH (journey crisis r51 2026-10-26): the queue
+      // is written while the discoverer lives but drains later — a
+      // discoverer who died in between (e.g. on a sortie) was still voiced
+      // at the fire. Skip the lesson and leave the entry untaught, so a
+      // later call may pick another entry; no deed credit for the dead.
+      try {
+        const dvp = this.vpOf ? this.vpOf(entry.discoveredBy) : null;
+        if (dvp && dvp.dead) return;
+      } catch (e) {}
       const teacher = this.displayName(entry.discoveredBy);
       const p = (this.data.plants || []).find(x => x.id === pid);
       if (!p) return;
