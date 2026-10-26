@@ -1,0 +1,1346 @@
+{
+ "seeds": {
+  "5301": {
+   "probes": 200,
+   "counts": {
+    "never-served": 0,
+    "served-same-pick": 173,
+    "served-changed-pick": 11,
+    "no-pick": 16,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 50,
+     "false": 123,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 1,
+     "false": 10,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 1,
+     "false": 15,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 0
+    },
+    "served-same-pick": {
+     "true": 38,
+     "false": 135
+    },
+    "served-changed-pick": {
+     "true": 9,
+     "false": 2
+    },
+    "no-pick": {
+     "true": 7,
+     "false": 9
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 146,
+   "correctNonOffer": 38,
+   "changedMenuMore": {
+    "true": 5,
+    "false": 6
+   },
+   "freshMenuMore": {
+    "true": 0,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "served-changed-pick",
+     "seed": 5301,
+     "day": 9,
+     "speaker": "Ming",
+     "lastServed": "Cu/neutral d8",
+     "probePick": "devon_okafor/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5301,
+     "day": 13,
+     "speaker": "Karl",
+     "lastServed": "Ivy/neutral d8",
+     "probePick": "gen_s9mdpci/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5301,
+     "day": 17,
+     "speaker": "Senam",
+     "lastServed": "Devon/neutral d12",
+     "probePick": "gen_s9mdpci/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 123,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 34,
+    "gated": 17,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 72,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {}
+   },
+   "residualExamples": [
+    {
+     "seed": 5301,
+     "day": 15,
+     "speaker": "Ivy",
+     "pick": "gen_s9mdpci/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "cautious",
+      "moodBand": "friendly",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5301,
+     "day": 16,
+     "speaker": "Ivy",
+     "pick": "gen_s9mdpci/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "cautious",
+      "moodBand": "friendly",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5301,
+     "day": 21,
+     "speaker": "Senam",
+     "pick": "gen_s9mdpci/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "dry",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5301,
+     "day": 21,
+     "speaker": "Senam",
+     "pick": "gen_s9mdpci/close",
+     "thread": "lately",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "dry",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5301,
+     "day": 21,
+     "speaker": "Ivy",
+     "pick": "gen_s9mdpci/close",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "cautious",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  },
+  "5302": {
+   "probes": 200,
+   "counts": {
+    "never-served": 14,
+    "served-same-pick": 135,
+    "served-changed-pick": 8,
+    "no-pick": 43,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 3,
+     "false": 11,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 29,
+     "false": 106,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 0,
+     "false": 8,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 7,
+     "false": 36,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 14
+    },
+    "served-same-pick": {
+     "true": 16,
+     "false": 119
+    },
+    "served-changed-pick": {
+     "true": 8,
+     "false": 0
+    },
+    "no-pick": {
+     "true": 2,
+     "false": 41
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 141,
+   "correctNonOffer": 16,
+   "changedMenuMore": {
+    "true": 7,
+    "false": 1
+   },
+   "freshMenuMore": {
+    "true": 14,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5302,
+     "day": 4,
+     "speaker": "A person, maybe 30s",
+     "pick": "gen_v774www/grievance",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5302,
+     "day": 4,
+     "speaker": "A person, maybe 30s",
+     "pick": "gen_v774www/grievance",
+     "menuMore": true,
+     "freshTopics": 5,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5302,
+     "day": 4,
+     "speaker": "Cheryl",
+     "pick": "gen_4k18s9q/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5302,
+     "day": 24,
+     "speaker": "Cheryl",
+     "lastServed": "Oscar/grievance d13",
+     "probePick": "gen_qbzr5x2/close",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5302,
+     "day": 24,
+     "speaker": "Oscar",
+     "lastServed": "Cheryl/grievance d14",
+     "probePick": "gen_qbzr5x2/close",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5302,
+     "day": 24,
+     "speaker": "Oscar",
+     "lastServed": "Cheryl/grievance d14",
+     "probePick": "gen_qbzr5x2/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 106,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 15,
+    "gated": 10,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 81,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {}
+   },
+   "residualExamples": [
+    {
+     "seed": 5302,
+     "day": 20,
+     "speaker": "Otto",
+     "pick": "gen_aap3b33/vgrievance",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "anxious",
+      "moodBand": "friendly",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5302,
+     "day": 21,
+     "speaker": "Otto",
+     "pick": "gen_aap3b33/vgrievance",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "anxious",
+      "moodBand": "friendly",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5302,
+     "day": 22,
+     "speaker": "Otto",
+     "pick": "gen_aap3b33/vgrievance",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "anxious",
+      "moodBand": "neutral",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5302,
+     "day": 22,
+     "speaker": "Otto",
+     "pick": "gen_aap3b33/vgrievance",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "anxious",
+      "moodBand": "cool",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5302,
+     "day": 23,
+     "speaker": "Otto",
+     "pick": "gen_aap3b33/vgrievance",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "anxious",
+      "moodBand": "neutral",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  },
+  "5303": {
+   "probes": 200,
+   "counts": {
+    "never-served": 2,
+    "served-same-pick": 166,
+    "served-changed-pick": 6,
+    "no-pick": 26,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 2,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 25,
+     "false": 141,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 0,
+     "false": 6,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 6,
+     "false": 20,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 2
+    },
+    "served-same-pick": {
+     "true": 20,
+     "false": 146
+    },
+    "served-changed-pick": {
+     "true": 4,
+     "false": 2
+    },
+    "no-pick": {
+     "true": 3,
+     "false": 23
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 154,
+   "correctNonOffer": 20,
+   "changedMenuMore": {
+    "true": 4,
+    "false": 2
+   },
+   "freshMenuMore": {
+    "true": 2,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5303,
+     "day": 5,
+     "speaker": "Kavya",
+     "pick": "nikos_papadopoulos/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5303,
+     "day": 10,
+     "speaker": "Nikos",
+     "pick": "gen_agepf5p/grievance",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5303,
+     "day": 16,
+     "speaker": "Yara",
+     "lastServed": "Lucas/neutral d8",
+     "probePick": "gen_z0o52dr/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5303,
+     "day": 19,
+     "speaker": "Aiswarya",
+     "lastServed": "Marta/neutral d10",
+     "probePick": "gen_z0o52dr/close",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5303,
+     "day": 25,
+     "speaker": "Marta",
+     "lastServed": "Yara/close d20",
+     "probePick": "gen_g6a3jps/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 141,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 13,
+    "gated": 10,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 118,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {}
+   },
+   "residualExamples": [
+    {
+     "seed": 5303,
+     "day": 18,
+     "speaker": "Marta",
+     "pick": "gen_sklzy04/close",
+     "thread": "secret",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "gentle",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5303,
+     "day": 22,
+     "speaker": "Wanjiru",
+     "pick": "gen_z0o52dr/close",
+     "thread": "want",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "warm",
+      "moodBand": "friendly",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5303,
+     "day": 22,
+     "speaker": "Wanjiru",
+     "pick": "gen_z0o52dr/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "warm",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5303,
+     "day": 26,
+     "speaker": "Marta",
+     "pick": "gen_g6a3jps/close",
+     "thread": "secret",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "gentle",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5303,
+     "day": 29,
+     "speaker": "Wanjiru",
+     "pick": "gen_z0o52dr/close",
+     "thread": "grief",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "warm",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  },
+  "5304": {
+   "probes": 200,
+   "counts": {
+    "never-served": 2,
+    "served-same-pick": 152,
+    "served-changed-pick": 13,
+    "no-pick": 33,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 1,
+     "false": 1,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 14,
+     "false": 138,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 1,
+     "false": 12,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 2,
+     "false": 31,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 2
+    },
+    "served-same-pick": {
+     "true": 9,
+     "false": 143
+    },
+    "served-changed-pick": {
+     "true": 10,
+     "false": 3
+    },
+    "no-pick": {
+     "true": 1,
+     "false": 32
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 158,
+   "correctNonOffer": 9,
+   "changedMenuMore": {
+    "true": 9,
+    "false": 4
+   },
+   "freshMenuMore": {
+    "true": 2,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5304,
+     "day": 4,
+     "speaker": "Wei",
+     "pick": "gen_hphqavp/grievance",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5304,
+     "day": 4,
+     "speaker": "Isa",
+     "pick": "gen_pd61k9d/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5304,
+     "day": 22,
+     "speaker": "Somchai",
+     "lastServed": "David/neutral d15",
+     "probePick": "gen_hphqavp/close",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5304,
+     "day": 22,
+     "speaker": "Somchai",
+     "lastServed": "David/neutral d15",
+     "probePick": "gen_hphqavp/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5304,
+     "day": 23,
+     "speaker": "Jude",
+     "lastServed": "Hannah/neutral d8",
+     "probePick": "gen_hphqavp/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 138,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 10,
+    "gated": 3,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 125,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {}
+   },
+   "residualExamples": [
+    {
+     "seed": 5304,
+     "day": 20,
+     "speaker": "Amanda",
+     "pick": "gen_gv4lpbz/close",
+     "thread": "taughtref",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "steady",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5304,
+     "day": 20,
+     "speaker": "Amanda",
+     "pick": "gen_gv4lpbz/close",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "steady",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5304,
+     "day": 21,
+     "speaker": "Wei",
+     "pick": "gen_hphqavp/vgrievance",
+     "thread": "recall",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "gentle",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5304,
+     "day": 22,
+     "speaker": "Wei",
+     "pick": "gen_hphqavp/vgrievance",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "gentle",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    },
+    {
+     "seed": 5304,
+     "day": 23,
+     "speaker": "Wei",
+     "pick": "gen_hphqavp/vgrievance",
+     "thread": "gossip",
+     "reactiveQ": null,
+     "genericQ": null,
+     "pendingQ": false,
+     "inT2list": true,
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": false,
+     "r57": {
+      "othersFresh": false,
+      "othersFreshIndex": -1,
+      "freshBeforeOthers": null,
+      "topicCapMood": 5,
+      "temper": "gentle",
+      "moodBand": "warm",
+      "pendingQAlone": false,
+      "windingDown": false,
+      "closingBeat": false,
+      "ambushThread": false,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "invitationBeat": false,
+      "pagerOwns": "none",
+      "spentOthers": false,
+      "prevMenuSame": false
+     }
+    }
+   ],
+   "flagsPresent": 200,
+   "flagCoverage": 1
+  }
+ },
+ "pooled": {
+  "never-served": 18,
+  "served-same-pick": 626,
+  "served-changed-pick": 38,
+  "no-pick": 118,
+  "unknown-speaker": 0
+ },
+ "pooledMenuProblem": 682,
+ "pooledShares": {
+  "never-served": 0.026392961876832845,
+  "served-same-pick": 0.9178885630498533,
+  "served-changed-pick": 0.05571847507331378,
+  "no-pick": 0.17302052785923755,
+  "unknown-speaker": 0
+ },
+ "pooledGenuineMiss": 599,
+ "pooledCorrectNonOffer": 83,
+ "pooledResidual": {
+  "total": 508,
+  "pendingQAlone": 0,
+  "pagerOwns": 0,
+  "threadGuard": 72,
+  "gated": 40,
+  "freshCapped": 0,
+  "cacheSuspect": 0,
+  "unexplained": 396,
+  "memoFreshCappedBroad": 0,
+  "memoSpentOthers": 0
+ },
+ "pooledResidualShares": {
+  "pendingQAlone": 0,
+  "pagerOwns": 0,
+  "threadGuard": 0.14173228346456693,
+  "gated": 0.07874015748031496,
+  "freshCapped": 0,
+  "cacheSuspect": 0,
+  "unexplained": 0.7795275590551181,
+  "memoFreshCappedBroad": 0,
+  "memoSpentOthers": 0
+ },
+ "pooledFlagCoverage": 1,
+ "menuSplit": {
+  "perSeed": {
+   "5301": {
+    "arm": "linger",
+    "lingerPicks": 126,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 197,
+    "subjectNoOfferRate": 0.4758454106280193,
+    "offered": 217,
+    "mainOffered": 2,
+    "subjectOffered": 216,
+    "picked": 126,
+    "latePicks": 24,
+    "latePicksMain": 0,
+    "latePicksSubject": 24,
+    "classes": {
+     "offered-not-picked": 91,
+     "subject-no-offer": 197,
+     "picked-others": 126
+    }
+   },
+   "5302": {
+    "arm": "linger",
+    "lingerPicks": 117,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 191,
+    "subjectNoOfferRate": 0.4613526570048309,
+    "offered": 217,
+    "mainOffered": 0,
+    "subjectOffered": 217,
+    "picked": 117,
+    "latePicks": 49,
+    "latePicksMain": 0,
+    "latePicksSubject": 49,
+    "classes": {
+     "subject-no-offer": 191,
+     "offered-not-picked": 100,
+     "picked-others": 117,
+     "no-subject-no-ans": 6
+    }
+   },
+   "5303": {
+    "arm": "linger",
+    "lingerPicks": 109,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 202,
+    "subjectNoOfferRate": 0.48792270531400966,
+    "offered": 205,
+    "mainOffered": 2,
+    "subjectOffered": 204,
+    "picked": 109,
+    "latePicks": 35,
+    "latePicksMain": 0,
+    "latePicksSubject": 35,
+    "classes": {
+     "offered-not-picked": 96,
+     "subject-no-offer": 202,
+     "picked-others": 109,
+     "no-subject-no-ans": 7
+    }
+   },
+   "5304": {
+    "arm": "linger",
+    "lingerPicks": 65,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 251,
+    "subjectNoOfferRate": 0.606280193236715,
+    "offered": 146,
+    "mainOffered": 5,
+    "subjectOffered": 145,
+    "picked": 65,
+    "latePicks": 22,
+    "latePicksMain": 3,
+    "latePicksSubject": 19,
+    "classes": {
+     "subject-no-offer": 251,
+     "picked-others": 65,
+     "offered-not-picked": 81,
+     "no-subject-no-ans": 17
+    }
+   }
+  },
+  "pooled": {
+   "totalNaturalUnsteered": 1656,
+   "subjectNoOffer": 841,
+   "offered": 785,
+   "mainOffered": 9,
+   "subjectOffered": 782,
+   "picked": 417,
+   "latePicks": 130,
+   "latePicksMain": 3,
+   "latePicksSubject": 127,
+   "subjectNoOfferRate": 0.5078502415458938
+  },
+  "byArm": {
+   "linger": {
+    "seeds": 4,
+    "offered": 785,
+    "picked": 417,
+    "latePicks": 130,
+    "offeredNotFresh": 0,
+    "conversion": 0.5312101910828025,
+    "freshCeilingDenom": 785,
+    "conversionFreshCeiling": 0.5312101910828025
+   }
+  }
+ }
+}

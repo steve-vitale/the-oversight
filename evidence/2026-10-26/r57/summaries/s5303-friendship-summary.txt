@@ -1,0 +1,169 @@
+# SURFACE+SEEDED — seed 5303 (141d, 8 alive)
+
+npcPairs=65 deep2=39 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=111 closeReadsServed=19 grievanceServes=4 othersSteered=2
+COND-TP: firstDeep2Day=30 lateClose=85 lateTP=77 lateNull=0 condRate=90.6% pooledTP=77/95 pooledRate=81.1% grievReadsByWhy={"grievance":2,"vgrievance":4}
+FUNNEL (natural): convos=414 subject=407 offered=205 picked=109 classes={"offered-not-picked":96,"subject-no-offer":202,"picked-others":109,"no-subject-no-ans":7}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=202 rate=48.8% offered=205 mainOffered=2 subjectOffered=204 picked=109 latePicks=35 latePicksMain=0 latePicksSubject=35
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=5
+  KNACK-CIRCULATION: Morne / Lucas — "Huh. Let me think about that." "Nikos talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Zoe / Morne — "cuts close faster when Aiswarya wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Wanjiru / Somchai / Arnold — "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK-CIRCULATION: Arnold / Wanjiru — "Morne ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Arnold / Wanjiru / Yara / Zoe / Marta — "Nikos talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=183 picks=100 latePicks=35 missedChangedNotOffered=2
+WRAPSERVE: convos=6 matcherHits=4 matcherServes=4 classes={"grievance-line":4,"deflection":1,"other":1}
+FUNNEL-PROBE (subject-no-offer turns): turns=465 menuProblem=439 pickProblem=26
+SEEDED-DAILY: [{"day":27,"v":40,"depth":3},{"day":28,"v":40,"depth":3},{"day":29,"v":40,"depth":3},{"day":30,"v":44,"depth":3},{"day":31,"v":44,"depth":3},{"day":32,"v":44,"depth":3},{"day":34,"v":48,"depth":3},{"day":34,"v":48,"depth":3},{"day":35,"v":52,"depth":3},{"day":37,"v":56,"depth":3},{"day":37,"v":56,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":56,"depth":3},{"day":40,"v":60,"depth":3}] class=no-drop
+GOSSIP: totalPicks=383 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=26 31-60=30 61-90=18 91-120=24 121+=11 naturalPicks=109 seededPicks=2 gossipPicks=383
+SEEDED: {"pair":{"a":"gen_g6a3jps","b":"gen_z0o52dr","aName":"Aiswarya","bName":"Marta"},"day":26,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":27,"v":40,"depth":3},{"day":28,"v":40,"depth":3},{"day":29,"v":40,"depth":3},{"day":30,"v":44,"depth":3},{"day":31,"v":44,"depth":3},{"day":32,"v":44,"depth":3},{"day":34,"v":48,"depth":3},{"day":34,"v":48,"depth":3},{"day":35,"v":52,"depth":3},{"day":37,"v":56,"depth":3},{"day":37,"v":56,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":56,"depth":3},{"day":40,"v":60,"depth":3}],"crackTraceClass":"no-drop","vAt7":44,"depthAt7":3,"vDrop":8,"depthDrop":-1,"crack7":false,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":4,"servesAll":[{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"}],"effect":true}
+  FRIEND d90: Nikos <> Yara — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d120: Kavya <> Marta — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Morne <> Marta — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Aiswarya <> Morne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Aiswarya <> Marta — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Marta <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Marta <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Yara <> Zoe — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d40: Marta <> Wanjiru — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Morne <> Nikos — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d75: Aiswarya <> Somchai — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d95: Wanjiru <> Zoe — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d120: Arnold <> Kavya — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d60: Arnold <> Morne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Morne <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Kavya <> Lucas — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d120: Kavya <> Zoe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Morne <> Wanjiru — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d35: Marta <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Arnold <> Marta — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Marta <> Zoe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Kavya <> Nikos — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d120: Kavya <> Morne — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d120: Kavya <> Aiswarya — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aiswarya <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Arnold <> Yara — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d110: Aiswarya <> Lucas — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d120: Morne <> Somchai — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d120: Kavya <> Somchai — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d85: Morne <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Kavya <> Yara — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d40: Marta <> Nikos — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Arnold <> Aiswarya — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d100: Lucas <> Yara — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d85: Arnold <> Somchai — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d65: Aiswarya <> Wanjiru — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d130: Arnold <> Zoe — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d105: Arnold <> Lucas — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d135: Somchai <> Zoe — maxDepth 2, final 2 (v=58), dropped 0
+  CLOSE-READ d14: Marta about Morne — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Yara about Marta — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Marta about Yara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Wanjiru about Marta — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Yara about Marta — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Lucas about Marta — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Aiswarya about Marta — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Marta about Aiswarya — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Nikos about Yara — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Somchai about Marta — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Nikos about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Lucas about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Yara about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Morne about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Morne about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Somchai about Marta — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d35: Lucas about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Morne about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Zoe about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Somchai about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Arnold about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Lucas about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Yara about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Marta about Morne — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Yara about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Yara about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Arnold about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Arnold about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Arnold about Marta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Somchai about Marta — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Somchai about Marta — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Somchai about Marta — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Arnold about Marta — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Arnold about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Arnold about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Arnold about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Arnold about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Arnold about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Morne about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Yara about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Lucas about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Arnold about Morne — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Arnold about Morne — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d141: Somchai about Marta — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d141: Arnold about Morne — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d9: Kavya about Nikos (why=grievance)
+  GRIEV-READ d12: Nikos about Kavya (why=grievance)
+  GRIEV-READ d28: Aiswarya about Marta (why=vgrievance)
+  GRIEV-READ d28: Aiswarya about Marta (why=vgrievance)
+  GRIEV-READ d29: Aiswarya about Marta (why=vgrievance)
+  GRIEV-READ d30: Aiswarya about Marta (why=vgrievance)
+  KNACK d7 Zoe: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Wanjiru touch it."
+  KNACK d11 Morne: "Huh. Let me think about that." "Nikos talks to the garden. The garden listens. I've seen it."
+  KNACK d13 Zoe: "cuts close faster when Aiswarya wraps them. Don't ask me how."
+  KNACK d13 Arnold: "Good question." "cuts close faster when Marta wraps them. Don't ask me how. I won't forget that."
+  KNACK d14 Nikos: "Good question." "that stray dog — the one that bit two people — lets Yara touch it."
+  KNACK d18 Lucas: "that stray dog — the one that bit two people — lets Wanjiru touch it."
+  KNACK d24 Aiswarya: "Hah. that stray dog — the one that bit two people — lets Wanjiru touch it."
+  KNACK d24 Aiswarya: "Maybe it's only me — Arnold ate something last month that should've killed them. They're fine."
+
+deathCauses: {"sickness":1,"the arena":2}
