@@ -17,7 +17,13 @@
 // A transformation is:
 //   - an in-place conversion: a live stack present before AND after
 //     whose name gains a trailing ' (dried)' / ' (smoked)', or whose
-//     foodState becomes 'preserved'; or
+//     foodState becomes 'preserved'. The converted PORTION is the
+//     post-call units: the racks' reserve split carves a fresh share
+//     off the same stack inside the same call (pre units 8, post
+//     units 2), so preKcal is post.units x pre.kcalEach — NOT the
+//     whole pre-call stack kcal, which would count the surviving
+//     fresh share as "lost". The fresh share stays in the pantry
+//     under the base name and is counted in closing stock.
 //   - a split-created conversion: a NEW live stack after the call
 //     with foodState 'preserved' and a dried/smoked name, linked to
 //     the pre-call source stack with the same base name whose units
@@ -112,10 +118,13 @@ function diffContainer(pre, post, meta) {
     const nameGained = isDriedName(po.channel) && !isDriedName(pr.channel);
     const stateGained = po.foodState === 'preserved' && pr.foodState !== 'preserved';
     if (!nameGained && !stateGained) continue;
+    // Converted portion = post-call units (see header: the reserve
+    // split carves a fresh share off inside the same call).
+    const preKcal = po.units * pr.kcalEach;
     events.push(Object.assign({}, meta, {
       kind: 'in-place',
       before: stripStack(pr), after: stripStack(po),
-      preKcal: pr.kcal, postKcal: po.kcal, lossKcal: pr.kcal - po.kcal,
+      preKcal, postKcal: po.kcal, lossKcal: preKcal - po.kcal,
       linked: true,
     }));
   }
