@@ -359,6 +359,46 @@ committed the arm, rebased it onto current master, re-ran the
 proof on the rebased tree, and merged it. Final code check on
 the winner: env unset 9757 racksFull 55 / 9753 51 (B active),
 env RACKSVOICE_GATE=0 9757 106 / 9753 64 (baseline restored);
-check.js --quick in the rebased tree shows the standing
-pre-existing failure profile (7 F, same count as the worker's
-pre-rebase log), no new failures attributed to this change.
+check.js --quick verification is in the post-rebase section below
+(this adoption note was first drafted with the worker's dot-count
+of 7 F; the verified counts below supersede it).
+
+### Post-rebase verification (adoption run, on master cc3c5cd9c)
+
+- Proof test on the rebased tree: 274 PASS / 0 FAIL (same as
+  pre-rebase).
+- Fresh paired runs on the rebased tree (seeds 9757, 9753, same
+  sweep, SWEEP_CENSUS stdout): default mode == explicit
+  RACKSVOICE_GATE=B exactly (JSONs identical ignoring the ms
+  timing field): 9757 racksFull 68 / say 425 / deaths 1, 9753
+  racksFull 49 / say 350 / deaths 2. The default is B, not the
+  old gate. NOTE: these differ from the old-base corpus
+  (9757 B 55 / say 370 / deaths 3) because the sibling
+  fishfallback arm changed the shared policy module
+  (scripts/policies/competent.js assignAnother) between the
+  tree base and current master — a substrate shift, not a gate
+  change. The arm's GO verdict rests on its identical-seed
+  paired corpus on one base, which the proof test re-verifies;
+  fresh runs on a new base are not a re-verdict.
+- check.js --quick, rebased tree WITH the arm: 279 passed,
+  8 failed (490s). check.js --quick, current master WITHOUT
+  the arm: 279 passed, 8 failed (278s) — identical counts.
+  The 8 failures on master (no arm) are: test-hide-discovery,
+  test-measurement-comparison, test-measurement-proof-update,
+  test-measurement-workflow, test-mobile-combat-cadence,
+  test-occupation-panels, test-phone-frame-proof,
+  test-parity-20261014 — none touches racks voice, cooking,
+  or preservation, and the rebased tree's run ended on the
+  same failing categories (occupation panels, phone-frame
+  proof, parity gear). Conclusion: the 8 failures are
+  pre-existing on current master; the arm adds none. A second
+  tree rerun saving its full log was LOST to a /tmp wipe
+  mid-run (the sibling-cleanup class; /tmp was found empty,
+  session tracking reset) and was NOT repeated: identical
+  counts plus matching tail categories plus unrelated
+  failure domains already settle attribution, and a third
+  run would only re-confirm the same 8.
+- The worker's pre-rebase check-quick.log dot-count of 7 F
+  is NOT used as evidence anywhere in this verdict: that log
+  carries no failing-script names, and both post-rebase runs
+  (with and without the arm) show 8.
