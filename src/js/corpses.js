@@ -230,8 +230,10 @@
         // (villager-vs-monster field fights) register where they happened,
         // not where the player stands — corpses are node-scoped (corpseAt).
         node: opts.node || { x: this.map.px, y: this.map.py },
-        mx: opts.mx != null ? opts.mx : (s.mx || 4),
-        my: opts.my != null ? opts.my : (s.my || 4),
+        // R52 FIX (journey-deepening r52, same falsy-0 class as r51):
+        // a scholar at edge 0 spawned the corpse at the center (4,4).
+        mx: opts.mx != null ? opts.mx : (s.mx ?? 4),
+        my: opts.my != null ? opts.my : (s.my ?? 4),
         dayDied: s.day || 0,
         cause: opts.cause || 'combat',
         killerId: opts.killerId || null,

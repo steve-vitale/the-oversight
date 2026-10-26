@@ -983,7 +983,10 @@
       if (!c || c.buried) continue;
       var n = c.node || {};
       if (n.x !== px || n.y !== py) continue;
-      if (Math.max(Math.abs((c.mx || 4) - (s.mx || 4)), Math.abs((c.my || 0) - (s.my || 4))) > 1) continue;
+      // R52 FIX (journey-deepening r52, same falsy-0 class as r51's
+      // corpses.js fix): 0 is a real edge cell. (c.my || 0) already keeps
+      // 0 and is left alone.
+      if (Math.max(Math.abs((c.mx ?? 4) - (s.mx ?? 4)), Math.abs((c.my || 0) - (s.my ?? 4))) > 1) continue;
       return c;
     }
     return null;
