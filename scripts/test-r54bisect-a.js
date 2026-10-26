@@ -141,9 +141,21 @@ function main() {
     ['CONFIRMED', 'EXONERATED', 'INCONCLUSIVE'].indexOf(summary.verdict) >= 0, summary.verdict);
 
   // (1) Inverse identity, per row.
+  // Rows record the HEAD they swept under; that HEAD moves when this
+  // arm commits (and again when the coordinator merges), so the leg
+  // must NOT require head == current HEAD. Instead: every row shares
+  // one head, and that head is an ancestor of the current HEAD
+  // (the sweep base the branch grew from).
+  const sweepHeads = new Set([...rowsA, ...rowsB].map(r => r.head));
+  check('all rows share one sweep head', sweepHeads.size === 1, [...sweepHeads].join(','));
+  let headIsAncestor = false;
+  try {
+    execFileSync('git', ['merge-base', '--is-ancestor', [...sweepHeads][0], 'HEAD'], { cwd: REPO, encoding: 'utf8' });
+    headIsAncestor = true;
+  } catch (e) { headIsAncestor = false; }
+  check('sweep head is an ancestor of current HEAD', headIsAncestor, [...sweepHeads].join(','));
   for (const r of rowsA) {
     check(`colA s${r.seed} conversationSha == HEAD sha`, r.conversationSha === headSha);
-    check(`colA s${r.seed} head matches worktree HEAD`, r.head === execFileSync('git', ['rev-parse', 'HEAD'], { cwd: REPO, encoding: 'utf8' }).trim());
   }
   if (inverseSha) {
     for (const r of rowsB) {
