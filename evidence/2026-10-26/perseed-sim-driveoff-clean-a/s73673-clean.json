@@ -1,0 +1,2111 @@
+{
+ "policy": "clean",
+ "seed": 73673,
+ "days": 129,
+ "gameDays": 129,
+ "endReason": "village-lost",
+ "won": 0,
+ "waveReach": 4,
+ "maxArc": 4,
+ "finalRank": "regional",
+ "maxRank": "regional",
+ "nationalEver": 0,
+ "nationalFinal": 0,
+ "table": 1,
+ "entered": 0,
+ "deaths": {
+  "villager:expedition": 5,
+  "villager:villager combat": 8,
+  "villager:a wound that wouldn't close": 1,
+  "player:lockjaw": 1,
+  "villager:combat": 14,
+  "villager:ambush": 1,
+  "player:the arena": 8,
+  "villager:The Redactor": 1,
+  "villager:monster": 1
+ },
+ "deathTotal": 40,
+ "starvationDeaths": 0,
+ "starvationDetail": [],
+ "ts": {
+  "fdCleanIntercept": 1,
+  "fdCleanChecks": [
+   {
+    "day": 38,
+    "monsterId": "cliffhanger",
+    "where": "intercept",
+    "post": {
+     "pendingEncounter": false,
+     "pendingMonsterId": null,
+     "feastDraw": null
+    },
+    "phantom": false
+   }
+  ],
+  "tsNationalDay": 86
+ },
+ "finalPop": 2,
+ "finalPantry": 200,
+ "finalKnown": 60,
+ "ctxFd": {
+  "fdCleanIntercept": 1,
+  "fdCleanChecks": [
+   {
+    "day": 38,
+    "monsterId": "cliffhanger",
+    "where": "intercept",
+    "post": {
+     "pendingEncounter": false,
+     "pendingMonsterId": null,
+     "feastDraw": null
+    },
+    "phantom": false
+   }
+  ],
+  "tsNationalDay": 86
+ },
+ "patrol": {
+  "byDay": {
+   "38": 3
+  },
+  "total": 3,
+  "days": 1
+ },
+ "sayLines": [
+  {
+   "day": 38,
+   "text": "🌙 The cookfire's smell carried further than the laughter did — smoke and grease on the night wind. Cliffhanger is circling the edge of the light. It followed the feast here. (A scavenger, drawn by the feast. Face it while the feast is in you — or let the watch drive it off.)"
+  },
+  {
+   "day": 38,
+   "text": "🔥 Li takes up a brand and Pamela follows — they meet it at the edge of the light with noise and fire. Cliffhanger was never brave. It melts back into the dark. (The watch drove off the feast's scavenger. The devotion stays armed; the feast's fire still burns in you.)"
+  }
+ ],
+ "feastdraw": {
+  "grants": [
+   {
+    "day": 38,
+    "granted": true,
+    "refreshed": false,
+    "mult": 2.03,
+    "quality": 1,
+    "why": null,
+    "drawMonsterId": "cliffhanger",
+    "preDraw": null,
+    "preBuff": null,
+    "postDraw": {
+     "monsterId": "cliffhanger",
+     "veteran": true,
+     "day": 38
+    },
+    "threw": null
+   }
+  ],
+  "draws": [
+   {
+    "day": 38,
+    "drawn": true,
+    "monsterId": "cliffhanger",
+    "veteran": true,
+    "wave": 1,
+    "why": null,
+    "grantIdx": 0,
+    "threw": null
+   }
+  ],
+  "faces": [],
+  "driveoffs": [
+   {
+    "day": 38,
+    "ok": true,
+    "drivenOff": true,
+    "monsterId": "cliffhanger",
+    "preDraw": {
+     "monsterId": "cliffhanger",
+     "veteran": true,
+     "day": 38
+    },
+    "why": null,
+    "threw": null
+   }
+  ],
+  "clears": [
+   {
+    "day": 40,
+    "expired": true,
+    "preDraw": null,
+    "preBuff": {
+     "quality": 1,
+     "mult": 2.03,
+     "untilDay": 40,
+     "used": true
+    },
+    "threw": null
+   }
+  ],
+  "diag": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {
+    "grants": 0,
+    "draws": 0,
+    "faces": 0,
+    "driveoffs": 0,
+    "clears": 0
+   },
+   "installed": true
+  }
+ },
+ "nonworldkill": {
+  "starts": [
+   {
+    "day": 36,
+    "arg": "paparazzo",
+    "mid": "paparazzo",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspi4p_corfj2",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "paparazzo",
+     "seq": null,
+     "src": null,
+     "hp": 38,
+     "maxHp": 70,
+     "titan": false,
+     "lingering": false
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "paparazzo",
+      "villagerId": null,
+      "hp": 87,
+      "maxHp": 87
+     }
+    ]
+   },
+   {
+    "day": 39,
+    "arg": "giant_mosquito",
+    "mid": "giant_mosquito",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspi68_1vz4hh",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "giant_mosquito",
+     "seq": null,
+     "src": null,
+     "hp": 30,
+     "maxHp": 30,
+     "titan": false,
+     "lingering": false
+    },
+    "playerTile": [
+     5,
+     2
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w,feastFightRoad",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22588:18)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 97,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "giant_mosquito",
+      "villagerId": null,
+      "hp": 35,
+      "maxHp": 35
+     }
+    ]
+   },
+   {
+    "day": 41,
+    "arg": "sweeps_week",
+    "mid": "sweeps_week",
+    "wave": 1,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspi7c_9ax1iq",
+    "fightIdSource": "tbfight",
+    "origin": "null-origin",
+    "tileMonster": null,
+    "playerTile": [
+     5,
+     2
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "gauntlet",
+     "waves": [
+      "sweeps_week",
+      "focus_group",
+      "focus_group"
+     ],
+     "waveIdx": 0
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,w,driveContestsImpl,run,withOrigin,driveContests",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArena (src/js/contests.js:4755:12)",
+     "at G.contestChoose (src/js/contests.js:4433:19)",
+     "at Object.w [as contestChoose] (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/sim-harness.js:515:25)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 94,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "sweeps_week",
+      "villagerId": null,
+      "hp": 97,
+      "maxHp": 97
+     }
+    ]
+   },
+   {
+    "day": 41,
+    "arg": "focus_group",
+    "mid": "focus_group",
+    "wave": 3,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspi7g_718fqp",
+    "fightIdSource": "tbfight",
+    "origin": "null-origin",
+    "tileMonster": null,
+    "playerTile": [
+     5,
+     2
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "gauntlet",
+     "waves": [
+      "sweeps_week",
+      "focus_group",
+      "focus_group"
+     ],
+     "waveIdx": 1
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,Game,tbEnd,endWrapped",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArenaAfter (src/js/contests.js:4779:20)",
+     "at Game.<computed> [as _contestArenaAfter] (src/js/progression.js:1235:24)",
+     "at Object.tbEnd (src/js/game.js:43900:67)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 80,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "focus_group",
+      "villagerId": null,
+      "hp": 258,
+      "maxHp": 258
+     }
+    ]
+   },
+   {
+    "day": 43,
+    "arg": "review_drone",
+    "mid": "review_drone",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspi8o_78obvb",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "review_drone",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 80,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "v_chantal_mukendi",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "chantal_mukendi",
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "review_drone",
+      "villagerId": null,
+      "hp": 86,
+      "maxHp": 86
+     }
+    ]
+   },
+   {
+    "day": 67,
+    "arg": "chorus_line",
+    "mid": "chorus_line",
+    "wave": 3,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiiz_8nn7ny",
+    "fightIdSource": "tbfight",
+    "origin": "null-origin",
+    "tileMonster": null,
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "siege",
+     "waves": [
+      "chorus_line",
+      "review_drone",
+      "bulldozer"
+     ],
+     "waveIdx": 0
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,w,driveContestsImpl,run,withOrigin,driveContests",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArena (src/js/contests.js:4755:12)",
+     "at G.contestChoose (src/js/contests.js:4433:19)",
+     "at Object.w [as contestChoose] (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/sim-harness.js:515:25)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "chorus_line",
+      "villagerId": null,
+      "hp": 320,
+      "maxHp": 320
+     }
+    ]
+   },
+   {
+    "day": 67,
+    "arg": "review_drone",
+    "mid": "review_drone",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspij5_aq1cld",
+    "fightIdSource": "tbfight",
+    "origin": "null-origin",
+    "tileMonster": null,
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "siege",
+     "waves": [
+      "chorus_line",
+      "review_drone",
+      "bulldozer"
+     ],
+     "waveIdx": 1
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,Game,tbEnd,endWrapped",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArenaAfter (src/js/contests.js:4779:20)",
+     "at Game.<computed> [as _contestArenaAfter] (src/js/progression.js:1235:24)",
+     "at Object.tbEnd (src/js/game.js:43900:67)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 84,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "review_drone",
+      "villagerId": null,
+      "hp": 90,
+      "maxHp": 90
+     }
+    ]
+   },
+   {
+    "day": 67,
+    "arg": "bulldozer",
+    "mid": "bulldozer",
+    "wave": 1,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspija_g1hnsr",
+    "fightIdSource": "tbfight",
+    "origin": "null-origin",
+    "tileMonster": null,
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "siege",
+     "waves": [
+      "chorus_line",
+      "review_drone",
+      "bulldozer"
+     ],
+     "waveIdx": 2
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,Game,tbEnd,endWrapped",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArenaAfter (src/js/contests.js:4779:20)",
+     "at Game.<computed> [as _contestArenaAfter] (src/js/progression.js:1235:24)",
+     "at Object.tbEnd (src/js/game.js:43900:67)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 84,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "bulldozer",
+      "villagerId": null,
+      "hp": 72,
+      "maxHp": 72
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "arg": "murkcap",
+    "mid": "murkcap",
+    "wave": 1,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspikj_q25t4",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "murkcap",
+     "seq": null,
+     "src": null,
+     "hp": 45,
+     "maxHp": 60,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "murkcap",
+      "villagerId": null,
+      "hp": 74,
+      "maxHp": 74
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "arg": "nightcourt",
+    "mid": "nightcourt",
+    "wave": 1,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspikq_fmfacs",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "nightcourt",
+     "seq": null,
+     "src": null,
+     "hp": 41,
+     "maxHp": 55,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "nightcourt",
+      "villagerId": null,
+      "hp": 66,
+      "maxHp": 66
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "arg": "heckler",
+    "mid": "heckler",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspikw_9kgtr0",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "heckler",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 85,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "v_gen_vg0le65",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "gen_vg0le65",
+      "hp": 79,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "heckler",
+      "villagerId": null,
+      "hp": 80,
+      "maxHp": 88
+     }
+    ]
+   },
+   {
+    "day": 71,
+    "arg": "audit",
+    "mid": "audit",
+    "wave": 4,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspil7_gihm0k",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "audit",
+     "seq": null,
+     "src": null,
+     "hp": 825,
+     "maxHp": 1100,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "v_somchai_prasert",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "somchai_prasert",
+      "hp": 76,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "audit",
+      "villagerId": null,
+      "hp": 1253,
+      "maxHp": 1259
+     }
+    ]
+   },
+   {
+    "day": 86,
+    "arg": "gallowdeer",
+    "mid": "gallowdeer",
+    "wave": 1,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspinn_dtxqo5",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "gallowdeer",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 150,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "v_james_okonkwo",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "james_okonkwo",
+      "hp": 75,
+      "maxHp": 100
+     },
+     {
+      "key": "v_gen_vg0le65",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "gen_vg0le65",
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "gallowdeer",
+      "villagerId": null,
+      "hp": 148,
+      "maxHp": 159
+     }
+    ]
+   },
+   {
+    "day": 93,
+    "arg": "spool",
+    "mid": "spool",
+    "wave": 3,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspipy_2xhj8n",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "spool",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 280,
+     "titan": false,
+     "lingering": false
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "v_tashi_sherpa",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "tashi_sherpa",
+      "hp": 98,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "spool",
+      "villagerId": null,
+      "hp": 295,
+      "maxHp": 306
+     }
+    ]
+   },
+   {
+    "day": 95,
+    "arg": "cliffhanger",
+    "mid": "cliffhanger",
+    "wave": 1,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiq6_1r7ub8",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "cliffhanger",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 70,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22588:18)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "cliffhanger",
+      "villagerId": null,
+      "hp": 81,
+      "maxHp": 81
+     }
+    ]
+   },
+   {
+    "day": 96,
+    "arg": "statickite",
+    "mid": "statickite",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiqg_53ezlq",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "statickite",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 80,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "statickite",
+      "villagerId": null,
+      "hp": 85,
+      "maxHp": 85
+     }
+    ]
+   },
+   {
+    "day": 96,
+    "arg": "reunion",
+    "mid": "reunion",
+    "wave": 4,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiql_8glozq",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "reunion",
+     "seq": null,
+     "src": null,
+     "hp": 600,
+     "maxHp": 1200,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 92,
+      "maxHp": 100
+     },
+     {
+      "key": "v_james_okonkwo",
+      "kind": "villager",
+      "monsterId": null,
+      "villagerId": "james_okonkwo",
+      "hp": 82,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "reunion",
+      "villagerId": null,
+      "hp": 1340,
+      "maxHp": 1353
+     },
+     {
+      "key": "m_1",
+      "kind": "monster",
+      "monsterId": "reunion",
+      "villagerId": null,
+      "hp": 1312,
+      "maxHp": 1312
+     }
+    ]
+   },
+   {
+    "day": 97,
+    "arg": "reunion",
+    "mid": "reunion",
+    "wave": 4,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspirq_2l80c9",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "reunion",
+     "seq": null,
+     "src": null,
+     "hp": 1200,
+     "maxHp": 1200,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 43,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "reunion",
+      "villagerId": null,
+      "hp": 1521,
+      "maxHp": 1521
+     }
+    ]
+   },
+   {
+    "day": 98,
+    "arg": "reunion",
+    "mid": "reunion",
+    "wave": 4,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspis6_3wqjbf",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "reunion",
+     "seq": null,
+     "src": null,
+     "hp": 1200,
+     "maxHp": 1200,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "reunion",
+      "villagerId": null,
+      "hp": 1594,
+      "maxHp": 1594
+     }
+    ]
+   },
+   {
+    "day": 99,
+    "arg": "reunion",
+    "mid": "reunion",
+    "wave": 4,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiso_10o9yx",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "reunion",
+     "seq": null,
+     "src": null,
+     "hp": 1200,
+     "maxHp": 1200,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "reunion",
+      "villagerId": null,
+      "hp": 1734,
+      "maxHp": 1734
+     }
+    ]
+   },
+   {
+    "day": 100,
+    "arg": "review_drone",
+    "mid": "review_drone",
+    "wave": 2,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspitt_2enf2e",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin-mismatch",
+    "tileMonster": {
+     "id": "reunion",
+     "seq": null,
+     "src": null,
+     "hp": 1200,
+     "maxHp": 1200,
+     "titan": false,
+     "lingering": false
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "pit",
+     "waves": [
+      "review_drone"
+     ],
+     "waveIdx": 0
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,w,driveContestsImpl,run,withOrigin,driveContests",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArena (src/js/contests.js:4755:12)",
+     "at G.contestChoose (src/js/contests.js:4433:19)",
+     "at Object.w [as contestChoose] (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/sim-harness.js:515:25)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "review_drone",
+      "villagerId": null,
+      "hp": 98,
+      "maxHp": 98
+     }
+    ]
+   },
+   {
+    "day": 113,
+    "arg": "living_wire",
+    "mid": null,
+    "wave": null,
+    "waveSource": null,
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiwb_3ip5ut",
+    "fightIdSource": "end-row",
+    "origin": "world-origin-unresolved",
+    "tileMonster": {
+     "id": "living_wire",
+     "seq": null,
+     "src": null,
+     "hp": 1,
+     "maxHp": 60,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": null
+   },
+   {
+    "day": 114,
+    "arg": "spool",
+    "mid": "spool",
+    "wave": 3,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiwg_7flyxj",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "spool",
+     "seq": null,
+     "src": null,
+     "hp": 210,
+     "maxHp": 280,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22659:48)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "spool",
+      "villagerId": null,
+      "hp": 327,
+      "maxHp": 327
+     }
+    ]
+   },
+   {
+    "day": 115,
+    "arg": "influencer",
+    "mid": "influencer",
+    "wave": 4,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiwu_6m6c8u",
+    "fightIdSource": "tbfight",
+    "origin": "world-origin",
+    "tileMonster": {
+     "id": "influencer",
+     "seq": null,
+     "src": null,
+     "hp": 637,
+     "maxHp": 850,
+     "titan": false,
+     "lingering": true
+    },
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": null,
+    "activeContestArena": false,
+    "doorFled": null,
+    "stack": "startCombat,monsterTurn,tickAction,game,doAction,Game,w",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at Object.monsterTurn (src/js/game.js:22626:42)",
+     "at Object.tickAction (src/js/game.js:19144:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 100,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "influencer",
+      "villagerId": null,
+      "hp": 1766,
+      "maxHp": 1766
+     },
+     {
+      "key": "m_crew_1",
+      "kind": "monster",
+      "monsterId": "influencer",
+      "villagerId": null,
+      "hp": 1736,
+      "maxHp": 1736
+     }
+    ]
+   },
+   {
+    "day": 126,
+    "arg": "buffering",
+    "mid": "buffering",
+    "wave": 3,
+    "waveSource": "def",
+    "tableTrial": false,
+    "refused": false,
+    "threw": null,
+    "fightId": "fmgpspiyb_6eoglz",
+    "fightIdSource": "tbfight",
+    "origin": "null-origin",
+    "tileMonster": null,
+    "playerTile": [
+     4,
+     4
+    ],
+    "pendingEncounter": false,
+    "pendingMonsterId": null,
+    "pendingInTent": false,
+    "feastDraw": null,
+    "tentBreach": false,
+    "tentBreachAt": null,
+    "arenaContest": {
+     "contestId": "siege",
+     "waves": [
+      "buffering",
+      "speedbump_turtle",
+      "sunback"
+     ],
+     "waveIdx": 0
+    },
+    "activeContestArena": true,
+    "doorFled": null,
+    "stack": "startCombat,G,w,driveContestsImpl,run,withOrigin,driveContests",
+    "stackLines": [
+     "Error",
+     "at Object.startCombat (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/policies/nonworldkill-diag.js:220:18)",
+     "at G._contestArena (src/js/contests.js:4755:12)",
+     "at G.contestChoose (src/js/contests.js:4433:19)",
+     "at Object.w [as contestChoose] (/home/hatch/workspace/worktrees/sim-driveoff-clean-a/scripts/sim-harness.js:515:25)"
+    ],
+    "fighters": [
+     {
+      "key": "p",
+      "kind": "player",
+      "monsterId": null,
+      "villagerId": null,
+      "hp": 66,
+      "maxHp": 100
+     },
+     {
+      "key": "m_0",
+      "kind": "monster",
+      "monsterId": "buffering",
+      "villagerId": null,
+      "hp": 321,
+      "maxHp": 321
+     }
+    ]
+   }
+  ],
+  "ends": [
+   {
+    "day": 36,
+    "fightId": "fmgpspi4p_corfj2",
+    "result": "won",
+    "logLenBefore": 10,
+    "logLenAfter": 11,
+    "newLog": [
+     {
+      "d": 36,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "gen_g8b3byj",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 39,
+    "fightId": "fmgpspi68_1vz4hh",
+    "result": "won",
+    "logLenBefore": 11,
+    "logLenAfter": 12,
+    "newLog": [
+     {
+      "d": 39,
+      "mid": "giant_mosquito",
+      "w": 2,
+      "by": "gen_g8b3byj",
+      "via": "player",
+      "trick": "strike_recovery"
+     }
+    ]
+   },
+   {
+    "day": 41,
+    "fightId": "fmgpspi7c_9ax1iq",
+    "result": "won",
+    "logLenBefore": 12,
+    "logLenAfter": 13,
+    "newLog": [
+     {
+      "d": 41,
+      "mid": "sweeps_week",
+      "w": 1,
+      "by": "gen_g8b3byj",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 41,
+    "fightId": "fmgpspi7g_718fqp",
+    "result": "lost",
+    "logLenBefore": 13,
+    "logLenAfter": 14,
+    "newLog": [
+     {
+      "d": 41,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "james_okonkwo",
+      "via": "contest",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 43,
+    "fightId": "fmgpspi8o_78obvb",
+    "result": "routed",
+    "logLenBefore": 14,
+    "logLenAfter": 14,
+    "newLog": []
+   },
+   {
+    "day": 67,
+    "fightId": "fmgpspiiz_8nn7ny",
+    "result": "won",
+    "logLenBefore": 16,
+    "logLenAfter": 17,
+    "newLog": [
+     {
+      "d": 67,
+      "mid": "chorus_line",
+      "w": 3,
+      "by": "gen_te50r63",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 67,
+    "fightId": "fmgpspij5_aq1cld",
+    "result": "won",
+    "logLenBefore": 17,
+    "logLenAfter": 18,
+    "newLog": [
+     {
+      "d": 67,
+      "mid": "review_drone",
+      "w": 2,
+      "by": "gen_te50r63",
+      "via": "player",
+      "trick": "move_x2,move_x2"
+     }
+    ]
+   },
+   {
+    "day": 67,
+    "fightId": "fmgpspija_g1hnsr",
+    "result": "won",
+    "logLenBefore": 18,
+    "logLenAfter": 21,
+    "newLog": [
+     {
+      "d": 67,
+      "mid": "bulldozer",
+      "w": 1,
+      "by": "gen_te50r63",
+      "via": "player",
+      "trick": null
+     },
+     {
+      "d": 67,
+      "mid": "giant_mosquito",
+      "w": 2,
+      "by": "james_okonkwo",
+      "via": "contest",
+      "trick": null
+     },
+     {
+      "d": 67,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "james_okonkwo",
+      "via": "contest",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "fightId": "fmgpspikj_q25t4",
+    "result": "won",
+    "logLenBefore": 21,
+    "logLenAfter": 22,
+    "newLog": [
+     {
+      "d": 70,
+      "mid": "murkcap",
+      "w": 1,
+      "by": "gen_te50r63",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "fightId": "fmgpspikq_fmfacs",
+    "result": "won",
+    "logLenBefore": 22,
+    "logLenAfter": 23,
+    "newLog": [
+     {
+      "d": 70,
+      "mid": "nightcourt",
+      "w": 1,
+      "by": "gen_te50r63",
+      "via": "player",
+      "trick": "move_x2,move_x2"
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "fightId": "fmgpspikw_9kgtr0",
+    "result": "won",
+    "logLenBefore": 23,
+    "logLenAfter": 24,
+    "newLog": [
+     {
+      "d": 70,
+      "mid": "heckler",
+      "w": 2,
+      "by": "gen_te50r63",
+      "via": "player",
+      "trick": "wait"
+     }
+    ]
+   },
+   {
+    "day": 71,
+    "fightId": "fmgpspil7_gihm0k",
+    "result": "routed",
+    "logLenBefore": 24,
+    "logLenAfter": 24,
+    "newLog": []
+   },
+   {
+    "day": 86,
+    "fightId": "fmgpspinn_dtxqo5",
+    "result": "lost",
+    "logLenBefore": 24,
+    "logLenAfter": 24,
+    "newLog": []
+   },
+   {
+    "day": 93,
+    "fightId": "fmgpspipy_2xhj8n",
+    "result": "won",
+    "logLenBefore": 24,
+    "logLenAfter": 25,
+    "newLog": [
+     {
+      "d": 93,
+      "mid": "spool",
+      "w": 3,
+      "by": "desmond_clarke",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 95,
+    "fightId": "fmgpspiq6_1r7ub8",
+    "result": "won",
+    "logLenBefore": 25,
+    "logLenAfter": 26,
+    "newLog": [
+     {
+      "d": 95,
+      "mid": "cliffhanger",
+      "w": 1,
+      "by": "desmond_clarke",
+      "via": "player",
+      "trick": "eyes,eyes"
+     }
+    ]
+   },
+   {
+    "day": 96,
+    "fightId": "fmgpspiqg_53ezlq",
+    "result": "won",
+    "logLenBefore": 26,
+    "logLenAfter": 27,
+    "newLog": [
+     {
+      "d": 96,
+      "mid": "statickite",
+      "w": 2,
+      "by": "desmond_clarke",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 96,
+    "fightId": "fmgpspiql_8glozq",
+    "result": "lost",
+    "logLenBefore": 27,
+    "logLenAfter": 27,
+    "newLog": []
+   },
+   {
+    "day": 97,
+    "fightId": "fmgpspirq_2l80c9",
+    "result": "lost",
+    "logLenBefore": 27,
+    "logLenAfter": 27,
+    "newLog": []
+   },
+   {
+    "day": 98,
+    "fightId": "fmgpspis6_3wqjbf",
+    "result": "lost",
+    "logLenBefore": 27,
+    "logLenAfter": 27,
+    "newLog": []
+   },
+   {
+    "day": 99,
+    "fightId": "fmgpspiso_10o9yx",
+    "result": "lost",
+    "logLenBefore": 27,
+    "logLenAfter": 27,
+    "newLog": []
+   },
+   {
+    "day": 100,
+    "fightId": "fmgpspitt_2enf2e",
+    "result": "won",
+    "logLenBefore": 27,
+    "logLenAfter": 28,
+    "newLog": [
+     {
+      "d": 100,
+      "mid": "review_drone",
+      "w": 2,
+      "by": "gen_vg0le65",
+      "via": "player",
+      "trick": "move_x2,move_x2"
+     }
+    ]
+   },
+   {
+    "day": 113,
+    "fightId": "fmgpspiwb_3ip5ut",
+    "result": "routed",
+    "logLenBefore": 29,
+    "logLenAfter": 29,
+    "newLog": []
+   },
+   {
+    "day": 114,
+    "fightId": "fmgpspiwg_7flyxj",
+    "result": "won",
+    "logLenBefore": 29,
+    "logLenAfter": 30,
+    "newLog": [
+     {
+      "d": 114,
+      "mid": "spool",
+      "w": 3,
+      "by": "gen_vg0le65",
+      "via": "player",
+      "trick": null
+     }
+    ]
+   },
+   {
+    "day": 115,
+    "fightId": "fmgpspiwu_6m6c8u",
+    "result": "lost",
+    "logLenBefore": 30,
+    "logLenAfter": 30,
+    "newLog": []
+   },
+   {
+    "day": 126,
+    "fightId": "fmgpspiyb_6eoglz",
+    "result": "lost",
+    "logLenBefore": 30,
+    "logLenAfter": 30,
+    "newLog": []
+   }
+  ],
+  "diag": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {
+    "starts": 0,
+    "ends": 0
+   },
+   "installed": true
+  }
+ }
+}

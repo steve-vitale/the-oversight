@@ -1,0 +1,882 @@
+{
+ "label": "sim-driveoff-clean-a",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "days": 180,
+ "control": {
+  "band": {
+   "n": 8,
+   "won": 4,
+   "medianDays": 143,
+   "nationalEver": 6,
+   "nationalFinal": 5,
+   "table": 4,
+   "entered": 4,
+   "wave3": 8,
+   "wave4": 5,
+   "wave5": 0,
+   "starvationTotal": 9,
+   "deathTotal": 260
+  },
+  "feastdraw": {
+   "grants": 12,
+   "fresh": 5,
+   "refreshed": 0,
+   "refused": 7,
+   "spawned": 5,
+   "notSpawned": 0,
+   "notSpawnedByWhy": {},
+   "outcomes": {
+    "faced-face": 5
+   },
+   "faced": 5,
+   "facedFace": 5,
+   "facedHarness": 0,
+   "drivenOff": 0,
+   "unmet": 0,
+   "facedWithKill": 4,
+   "totalKills": 4,
+   "wave4Draws": 1,
+   "wave4Kills": 1,
+   "castVeteranDraws": 3,
+   "waveDist": {
+    "w3": 1,
+    "w2": 2,
+    "w1": 1,
+    "w4": 1
+   },
+   "unclassified": 0,
+   "drawOutcomes": [
+    {
+     "seed": 73672,
+     "day": 60,
+     "monsterId": "buffering",
+     "wave": 3,
+     "veteran": false,
+     "grantIdx": 0,
+     "outcome": "faced-face",
+     "faceDay": 60,
+     "driveDay": null,
+     "startDay": 60,
+     "startArg": "buffering",
+     "startMid": "buffering",
+     "fightId": "fmgpspi6e_ehlmon",
+     "endResult": "won",
+     "kills": [
+      {
+       "d": 60,
+       "mid": "buffering",
+       "w": 3,
+       "by": "gen_2awrsoi",
+       "via": "player",
+       "trick": null
+      }
+     ],
+     "wave4Kills": [],
+     "killCount": 1,
+     "hasKill": true
+    },
+    {
+     "seed": 73672,
+     "day": 67,
+     "monsterId": "memory_projector",
+     "wave": 2,
+     "veteran": true,
+     "grantIdx": 1,
+     "outcome": "faced-face",
+     "faceDay": 67,
+     "driveDay": null,
+     "startDay": 67,
+     "startArg": "memory_projector",
+     "startMid": "memory_projector",
+     "fightId": "fmgpspi7m_5sziva",
+     "endResult": "won",
+     "kills": [
+      {
+       "d": 67,
+       "mid": "memory_projector",
+       "w": 2,
+       "by": "gen_2awrsoi",
+       "via": "player",
+       "trick": null
+      }
+     ],
+     "wave4Kills": [],
+     "killCount": 1,
+     "hasKill": true
+    },
+    {
+     "seed": 73673,
+     "day": 38,
+     "monsterId": "cliffhanger",
+     "wave": 1,
+     "veteran": true,
+     "grantIdx": 0,
+     "outcome": "faced-face",
+     "faceDay": 38,
+     "driveDay": null,
+     "startDay": 38,
+     "startArg": "cliffhanger",
+     "startMid": "cliffhanger",
+     "fightId": "fmgpspi5q_6b1z9s",
+     "endResult": "lost",
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73674,
+     "day": 162,
+     "monsterId": "mirror_stag",
+     "wave": 2,
+     "veteran": true,
+     "grantIdx": 3,
+     "outcome": "faced-face",
+     "faceDay": 162,
+     "driveDay": null,
+     "startDay": 162,
+     "startArg": "mirror_stag",
+     "startMid": "mirror_stag",
+     "fightId": "fmgpspit9_8hnqax",
+     "endResult": "won",
+     "kills": [
+      {
+       "d": 162,
+       "mid": "mirror_stag",
+       "w": 2,
+       "by": "theo_lindqvist",
+       "via": "player",
+       "trick": null
+      }
+     ],
+     "wave4Kills": [],
+     "killCount": 1,
+     "hasKill": true
+    },
+    {
+     "seed": 73678,
+     "day": 115,
+     "monsterId": "strike",
+     "wave": 4,
+     "veteran": false,
+     "grantIdx": 1,
+     "outcome": "faced-face",
+     "faceDay": 115,
+     "driveDay": null,
+     "startDay": 115,
+     "startArg": "strike",
+     "startMid": "strike",
+     "fightId": "fmgpspioy_8fe9s5",
+     "endResult": "won",
+     "kills": [
+      {
+       "d": 115,
+       "mid": "strike",
+       "w": 4,
+       "by": "elif_demir",
+       "via": "player",
+       "trick": null
+      }
+     ],
+     "wave4Kills": [
+      {
+       "d": 115,
+       "mid": "strike",
+       "w": 4,
+       "by": "elif_demir",
+       "via": "player",
+       "trick": null
+      }
+     ],
+     "killCount": 1,
+     "hasKill": true
+    }
+   ],
+   "drivenOffWithFight": 0,
+   "fallbackForDrivenOff": 0,
+   "drawsPerFreshGrant": 1,
+   "facedRate": 1,
+   "drivenOffRate": 0,
+   "killRate": 0.8,
+   "veteransPerDraw": 0.2,
+   "phantomChecks": [],
+   "phantomCount": 0
+  }
+ },
+ "clean": {
+  "band": {
+   "n": 8,
+   "won": 0,
+   "medianDays": 180,
+   "nationalEver": 5,
+   "nationalFinal": 3,
+   "table": 1,
+   "entered": 0,
+   "wave3": 8,
+   "wave4": 6,
+   "wave5": 0,
+   "starvationTotal": 11,
+   "deathTotal": 295
+  },
+  "feastdraw": {
+   "grants": 22,
+   "fresh": 10,
+   "refreshed": 0,
+   "refused": 12,
+   "spawned": 10,
+   "notSpawned": 0,
+   "notSpawnedByWhy": {},
+   "outcomes": {
+    "driven-off": 10
+   },
+   "faced": 0,
+   "facedFace": 0,
+   "facedHarness": 0,
+   "drivenOff": 10,
+   "unmet": 0,
+   "facedWithKill": 0,
+   "totalKills": 0,
+   "wave4Draws": 4,
+   "wave4Kills": 0,
+   "castVeteranDraws": 4,
+   "waveDist": {
+    "w3": 2,
+    "w2": 3,
+    "w4": 4,
+    "w1": 1
+   },
+   "unclassified": 0,
+   "drawOutcomes": [
+    {
+     "seed": 73672,
+     "day": 60,
+     "monsterId": "buffering",
+     "wave": 3,
+     "veteran": false,
+     "grantIdx": 0,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 60,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73672,
+     "day": 67,
+     "monsterId": "spool",
+     "wave": 3,
+     "veteran": false,
+     "grantIdx": 1,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 67,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73672,
+     "day": 74,
+     "monsterId": "voice_mimic_radio",
+     "wave": 2,
+     "veteran": true,
+     "grantIdx": 2,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 74,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73672,
+     "day": 81,
+     "monsterId": "bright_idea",
+     "wave": 2,
+     "veteran": true,
+     "grantIdx": 3,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 81,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73672,
+     "day": 88,
+     "monsterId": "suburb",
+     "wave": 4,
+     "veteran": false,
+     "grantIdx": 4,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 88,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73672,
+     "day": 178,
+     "monsterId": "eater",
+     "wave": 4,
+     "veteran": false,
+     "grantIdx": 10,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 178,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73673,
+     "day": 38,
+     "monsterId": "cliffhanger",
+     "wave": 1,
+     "veteran": true,
+     "grantIdx": 0,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 38,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73674,
+     "day": 162,
+     "monsterId": "mirror_stag",
+     "wave": 2,
+     "veteran": true,
+     "grantIdx": 3,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 162,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73674,
+     "day": 172,
+     "monsterId": "herald",
+     "wave": 4,
+     "veteran": false,
+     "grantIdx": 4,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 172,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    },
+    {
+     "seed": 73678,
+     "day": 115,
+     "monsterId": "strike",
+     "wave": 4,
+     "veteran": false,
+     "grantIdx": 1,
+     "outcome": "driven-off",
+     "faceDay": null,
+     "driveDay": 115,
+     "startDay": null,
+     "startArg": null,
+     "startMid": null,
+     "fightId": null,
+     "endResult": null,
+     "kills": [],
+     "wave4Kills": [],
+     "killCount": 0,
+     "hasKill": false
+    }
+   ],
+   "drivenOffWithFight": 0,
+   "fallbackForDrivenOff": 0,
+   "drawsPerFreshGrant": 1,
+   "facedRate": 0,
+   "drivenOffRate": 1,
+   "killRate": null,
+   "veteransPerDraw": 0,
+   "phantomChecks": [
+    {
+     "seed": 73672,
+     "day": 60,
+     "monsterId": "buffering",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73672,
+     "day": 67,
+     "monsterId": "spool",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73672,
+     "day": 74,
+     "monsterId": "voice_mimic_radio",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73672,
+     "day": 81,
+     "monsterId": "bright_idea",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73672,
+     "day": 88,
+     "monsterId": "suburb",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73672,
+     "day": 178,
+     "monsterId": "eater",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73673,
+     "day": 38,
+     "monsterId": "cliffhanger",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73674,
+     "day": 162,
+     "monsterId": "mirror_stag",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73674,
+     "day": 172,
+     "monsterId": "herald",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    },
+    {
+     "seed": 73678,
+     "day": 115,
+     "monsterId": "strike",
+     "where": "intercept",
+     "post": {
+      "pendingEncounter": false,
+      "pendingMonsterId": null,
+      "feastDraw": null
+     },
+     "phantom": false
+    }
+   ],
+   "phantomCount": 0
+  }
+ },
+ "subsequent": {
+  "clean": {
+   "afterDrivenOff": [
+    {
+     "seed": 73672,
+     "drawDay": 60,
+     "monsterId": "buffering",
+     "outcome": "driven-off",
+     "nextGrantDay": 67,
+     "nextFresh": true,
+     "nextRefreshed": false,
+     "nextGranted": true
+    },
+    {
+     "seed": 73672,
+     "drawDay": 67,
+     "monsterId": "spool",
+     "outcome": "driven-off",
+     "nextGrantDay": 74,
+     "nextFresh": true,
+     "nextRefreshed": false,
+     "nextGranted": true
+    },
+    {
+     "seed": 73672,
+     "drawDay": 74,
+     "monsterId": "voice_mimic_radio",
+     "outcome": "driven-off",
+     "nextGrantDay": 81,
+     "nextFresh": true,
+     "nextRefreshed": false,
+     "nextGranted": true
+    },
+    {
+     "seed": 73672,
+     "drawDay": 81,
+     "monsterId": "bright_idea",
+     "outcome": "driven-off",
+     "nextGrantDay": 88,
+     "nextFresh": true,
+     "nextRefreshed": false,
+     "nextGranted": true
+    },
+    {
+     "seed": 73672,
+     "drawDay": 88,
+     "monsterId": "suburb",
+     "outcome": "driven-off",
+     "nextGrantDay": 102,
+     "nextFresh": false,
+     "nextRefreshed": false,
+     "nextGranted": false
+    },
+    {
+     "seed": 73672,
+     "drawDay": 178,
+     "monsterId": "eater",
+     "outcome": "driven-off",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    },
+    {
+     "seed": 73673,
+     "drawDay": 38,
+     "monsterId": "cliffhanger",
+     "outcome": "driven-off",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    },
+    {
+     "seed": 73674,
+     "drawDay": 162,
+     "monsterId": "mirror_stag",
+     "outcome": "driven-off",
+     "nextGrantDay": 172,
+     "nextFresh": true,
+     "nextRefreshed": false,
+     "nextGranted": true
+    },
+    {
+     "seed": 73674,
+     "drawDay": 172,
+     "monsterId": "herald",
+     "outcome": "driven-off",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    },
+    {
+     "seed": 73678,
+     "drawDay": 115,
+     "monsterId": "strike",
+     "outcome": "driven-off",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    }
+   ],
+   "afterFaced": []
+  },
+  "control": {
+   "afterDrivenOff": [],
+   "afterFaced": [
+    {
+     "seed": 73672,
+     "drawDay": 60,
+     "monsterId": "buffering",
+     "outcome": "faced-face",
+     "nextGrantDay": 67,
+     "nextFresh": true,
+     "nextRefreshed": false,
+     "nextGranted": true
+    },
+    {
+     "seed": 73672,
+     "drawDay": 67,
+     "monsterId": "memory_projector",
+     "outcome": "faced-face",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    },
+    {
+     "seed": 73673,
+     "drawDay": 38,
+     "monsterId": "cliffhanger",
+     "outcome": "faced-face",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    },
+    {
+     "seed": 73674,
+     "drawDay": 162,
+     "monsterId": "mirror_stag",
+     "outcome": "faced-face",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    },
+    {
+     "seed": 73678,
+     "drawDay": 115,
+     "monsterId": "strike",
+     "outcome": "faced-face",
+     "nextGrantDay": null,
+     "nextFresh": null,
+     "nextRefreshed": null,
+     "nextGranted": null
+    }
+   ]
+  }
+ },
+ "perSeedStarvExcess": [
+  {
+   "seed": 73671,
+   "control": 0,
+   "clean": 0,
+   "excess": 0
+  },
+  {
+   "seed": 73672,
+   "control": 0,
+   "clean": 0,
+   "excess": 0
+  },
+  {
+   "seed": 73673,
+   "control": 0,
+   "clean": 0,
+   "excess": 0
+  },
+  {
+   "seed": 73674,
+   "control": 0,
+   "clean": 0,
+   "excess": 0
+  },
+  {
+   "seed": 73675,
+   "control": 4,
+   "clean": 4,
+   "excess": 0
+  },
+  {
+   "seed": 73676,
+   "control": 4,
+   "clean": 4,
+   "excess": 0
+  },
+  {
+   "seed": 73677,
+   "control": 0,
+   "clean": 0,
+   "excess": 0
+  },
+  {
+   "seed": 73678,
+   "control": 1,
+   "clean": 3,
+   "excess": 2
+  }
+ ],
+ "maxExcess": 2,
+ "cost": {
+  "starvTotalOk": true,
+  "starvPerSeedOk": true,
+  "medianOk": true,
+  "winsOk": false,
+  "nationalOk": true,
+  "allOk": false
+ },
+ "funnel": {
+  "unclassifiedOk": true,
+  "drivenOffRateOk": true,
+  "facedZeroOk": true,
+  "fallbackOk": true,
+  "drivenFightOk": true,
+  "phantomOk": true,
+  "errsOk": true,
+  "allOk": true
+ },
+ "patrol": {
+  "controlTotal": 0,
+  "cleanTotal": 30,
+  "cleanBySeed": [
+   {
+    "seed": 73671,
+    "patrol": 0,
+    "patrolDays": 0,
+    "drivenOff": 0
+   },
+   {
+    "seed": 73672,
+    "patrol": 18,
+    "patrolDays": 6,
+    "drivenOff": 6
+   },
+   {
+    "seed": 73673,
+    "patrol": 3,
+    "patrolDays": 1,
+    "drivenOff": 1
+   },
+   {
+    "seed": 73674,
+    "patrol": 6,
+    "patrolDays": 2,
+    "drivenOff": 2
+   },
+   {
+    "seed": 73675,
+    "patrol": 0,
+    "patrolDays": 0,
+    "drivenOff": 0
+   },
+   {
+    "seed": 73676,
+    "patrol": 0,
+    "patrolDays": 0,
+    "drivenOff": 0
+   },
+   {
+    "seed": 73677,
+    "patrol": 0,
+    "patrolDays": 0,
+    "drivenOff": 0
+   },
+   {
+    "seed": 73678,
+    "patrol": 3,
+    "patrolDays": 1,
+    "drivenOff": 1
+   }
+  ],
+  "cleanDrivenSeedPatrolled": true,
+  "ok": true
+ },
+ "verdict": "NO-GO (funnel priced, cost bar missed)",
+ "corpusOk": true,
+ "generated": "2026-10-26T03:20:33.121Z"
+}
