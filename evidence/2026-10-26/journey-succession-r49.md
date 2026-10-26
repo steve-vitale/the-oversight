@@ -256,9 +256,12 @@ regime-changed band would launder the regime effect into the baseline):
   transcripts deleted after GREEN).
 - No sibling landed mid-run (master stayed edbfeda03 from registration
   through the seed batch); no rebase needed at landing.
-- Safe-commit index clobber: check `git status --short` after the
-  commit and repair per the standing lesson if it strikes (see below
-  for the actual result — recorded after the commit runs).
+- Safe-commit index clobber: STRUCK on the 57-file commit (all files
+  shown staged-as-deleted after commit a669375e, worktree files
+  byte-identical to HEAD). Repaired per the standing lesson
+  (update-index --add --cacheinfo from HEAD blobs for each affected
+  file), verified clean (status 0 lines, diff HEAD empty, commit
+  intact: 57 files).
 
 ## Reachable / fun / winnable (leg verdict)
 
