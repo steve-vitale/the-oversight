@@ -441,8 +441,13 @@
 
     _corpseCheckRange(c, quiet) {
       const s = this.state.scholar;
+      // R51 FIX (journey-deepening r51, arm-proven): s.mx/s.my are cell
+      // coordinates where 0 is a real edge cell, not "missing" — the old
+      // `|| 4` fallback read a scholar at (4,0) as standing at the center
+      // (4,4), so a corpse 4 cells away passed the range gate (d37: the
+      // take then failed on weight instead of range). `??` keeps 0.
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) > 1) {
+          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
         if (!quiet) this.say('Too far — get closer to the body.');
         return false;
       }
@@ -678,8 +683,10 @@
       if (!c || c.buried) { this.say('Nothing there.'); return null; }
       // must be close: same node, adjacent cell
       const s = this.state.scholar;
+      // R51 FIX: same falsy-0 bug as _corpseCheckRange (see there) — a
+      // scholar on row/col 0 was read as standing at the center (4,4).
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) > 1) {
+          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
         this.say('Too far — get closer to the body.'); return null;
       }
       const st = this.corpseStageInfo(c);
