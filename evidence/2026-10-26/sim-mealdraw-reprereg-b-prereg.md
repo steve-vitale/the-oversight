@@ -19,12 +19,31 @@ HEAD first, then re-judge the residual pair.
 
 Pinned base commit: f89a9b32d5c652e046caf27c25d2220212673988
 ("journey-social r57", branch sim-mealdraw-reprereg-b at
-prereg time). `git rev-parse HEAD` MUST equal this hash
-before the control sweep, between the sweeps, and after the
-judged sweep. If it differs at any of those checks, the run
-STOPS: no judgment is made, the verdict is NO-GO with leg 0
-named, and the evidence reports the base move. No sweep in
-this arm runs on any other commit.
+prereg time). The pin is on the GAME TREE at that commit, not
+on the branch tip: committing this prereg itself advances
+HEAD by an evidence-only commit, so a literal HEAD-equality
+check would fail on the prereg commit and would prove
+nothing about trajectories. Leg 0 therefore checks, before
+the control sweep, between the sweeps, and after the judged
+sweep: (a) the pinned commit is an ancestor of HEAD, and
+(b) `git diff <pin> HEAD -- src/ index.html
+scripts/sweep-stockdoor-b.js scripts/sweep-mealdraw-b.js
+scripts/mealdraw-capture.js scripts/stockdoor-capture.js
+scripts/substrate-capture.js scripts/inflow-capture.js
+scripts/preservesched-resid-capture.js scripts/sim-harness.js
+scripts/policies/` is EMPTY (no game-code or
+sweep/capture change since the pin), and (c) the worktree
+holds no uncommitted change under those paths. If any of
+(a)–(c) fails at any check, the run STOPS: no judgment is
+made, the verdict is NO-GO with leg 0 named, and the
+evidence reports the base move. No sweep in this arm runs
+on any other game tree. (Correction note, made before any
+sweep runs: the first draft of this prereg required literal
+HEAD equality; that draft was committed as fd95c270 and is
+superseded by this correction, which is itself committed
+before any sweep. The game tree never changed — the only
+difference between the pin and the prereg commit is this
+evidence file.)
 
 ## Instrument (reused UNCHANGED)
 
@@ -90,8 +109,11 @@ night's gross write is NEVER quoted as its surviving pile.
 
 GO threshold — ALL of the following must hold:
 
-0. Base pin: HEAD equals the pinned hash at all three
-   checks (before control, between sweeps, after judged).
+0. Base pin: the pinned commit is an ancestor of HEAD and
+   the game-tree diff to the pin (paths listed under
+   "Base pin") is empty at all three checks (before
+   control, between sweeps, after judged), with no
+   uncommitted change under those paths.
 1. Control gate: the stockdoor-only control sweep
    completes 8/8 seeds with no truncation flag on any file
    (inflow, resid, stockdoor, cook, event) and no write
@@ -156,8 +178,8 @@ GO threshold — ALL of the following must hold:
 6. Confirm (ONLY if legs 0–5 pass; otherwise NO confirm
    spend — the pilot gate binds): confirm band seeds
    9780–9795 (16 seeds), same policy/horizon/CAP, control
-   + judged sweeps on the pinned HEAD (HEAD re-verified
-   before each), into
+   + judged sweeps on the pinned HEAD (pin re-verified
+   per leg 0 before each), into
    sim-mealdraw-reprereg-b-confirm-control-corpus/ and
    sim-mealdraw-reprereg-b-confirm-corpus/. Confirm GO
    requires: (a) neutrality judged==control on all 16
