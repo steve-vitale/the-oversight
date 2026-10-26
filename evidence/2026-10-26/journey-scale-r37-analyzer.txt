@@ -1,0 +1,211 @@
+seed 85001: day=71 over=true pop=0/0 rank=regional nat=null glob=null totalVill=6 knownEnd=6 primLinks=1 covLinks=3 seasonedCov=3 maxPeers=5 proposed=1 proposedPeer=4 pilgrimages=1 studies=1 barelyKnow=0 declinesCov=0 counters=0 poolDrawn=0 poorDays=10 pilgPoor=1 propPoor=4 BLOCKER=opinion<10
+   end villages: village_0 known=true op=29 codex=false link=primary-sub | village_1 known=true op=28 codex=false link=covenant | village_2 known=true op=37 codex=false link=covenant | village_3 known=true op=29 codex=false link=covenant | village_spl_21_63485 known=true op=33 codex=false link=trade | village_spl_30_70849 known=true op=9 codex=true link=-
+   unknown=0 belowBar=1 atBarUnlinked=0
+   TRUST primary-sub village_0: first=40@d28 peak=40@d28(age 3) final=24@d70(age 45) ever40=true samples=7
+   TRUST covenant village_1: first=40@d28 peak=53@d63(age 37) final=51@d70(age 44) ever40=true samples=7
+   TRUST covenant village_2: first=40@d28 peak=53@d63(age 36) final=51@d70(age 43) ever40=true samples=7
+   TRUST covenant village_3: first=30@d28 peak=53@d63(age 35) final=51@d70(age 42) ever40=true samples=7
+   TRUST trade village_spl_21_63485: first=40@d35 peak=51@d63(age 34) final=49@d70(age 41) ever40=true samples=6
+   TRUST34 poolLiveDay=null snapshots=220 events=63
+   TRUST34 village_0|primary-sub: first=30@d25 last=24@d70 peak=41 ever40=true prePoolNet=-6 (weeks 7) postPoolNet=0 (weeks 0) weekDeltas={w3:10 w4:-3 w5:-5 w6:1 w7:-3 w8:-2 w9:-4} events={"formed":1,"accord":1,"tribute":6,"succession":5,"aid":1,"renegotiation":1}
+   EVENTS village_0|primary-sub: d25[formed] d26[accord] d28[tribute] d30[succession] d33[aid] d35[tribute] d37[renegotiation] d42[tribute] d49[tribute] d54[succession] d56[tribute] d58[succession] d63[tribute] d68[succession] d70[succession]
+   TRUST34 village_1|covenant: first=30@d26 last=51@d70 peak=55 ever40=true prePoolNet=21 (weeks 8) postPoolNet=0 (weeks 0) weekDeltas={w3:10 w4:2 w5:2 w6:4 w7:2 w8:3 w9:0 w10:-2} events={"formed":1,"accord":1,"crisis":10}
+   EVENTS village_1|covenant: d26[formed] d27[accord] d30[crisis] d30[crisis] d54[crisis] d54[crisis] d58[crisis] d58[crisis] d68[crisis] d68[crisis] d70[crisis] d70[crisis]
+   TRUST34 village_2|covenant: first=30@d27 last=51@d70 peak=55 ever40=true prePoolNet=21 (weeks 7) postPoolNet=0 (weeks 0) weekDeltas={w4:12 w5:2 w6:4 w7:2 w8:3 w9:0 w10:-2} events={"formed":1,"accord":1,"crisis":10}
+   EVENTS village_2|covenant: d27[formed] d28[accord] d30[crisis] d30[crisis] d54[crisis] d54[crisis] d58[crisis] d58[crisis] d68[crisis] d68[crisis] d70[crisis] d70[crisis]
+   TRUST34 village_3|covenant: first=30@d28 last=51@d70 peak=55 ever40=true prePoolNet=21 (weeks 7) postPoolNet=0 (weeks 0) weekDeltas={w4:12 w5:2 w6:4 w7:2 w8:3 w9:0 w10:-2} events={"formed":1,"accord":1,"crisis":10}
+   EVENTS village_3|covenant: d28[formed] d29[accord] d30[crisis] d30[crisis] d54[crisis] d54[crisis] d58[crisis] d58[crisis] d68[crisis] d68[crisis] d70[crisis] d70[crisis]
+   TRUST34 village_spl_21_63485|trade: first=30@d29 last=49@d70 peak=53 ever40=true prePoolNet=19 (weeks 7) postPoolNet=0 (weeks 0) weekDeltas={w4:10 w5:2 w6:4 w7:2 w8:3 w9:0 w10:-2} events={"formed":1,"crisis":10,"accord":1}
+   EVENTS village_spl_21_63485|trade: d29[formed] d30[crisis] d30[accord] d30[crisis] d54[crisis] d54[crisis] d58[crisis] d58[crisis] d68[crisis] d68[crisis] d70[crisis] d70[crisis]
+   TRUST35 setterEvents=147 sites={"answerAccord":5,"linkTick":5,"covenantTick":21,"recordDeed":59,"successionCrisis":3,"covenantCrisis":24,"answerCovenantCrisis":20,"answerAidBeg":1,"tradeTick":6,"_resolveRenegotiation":1,"answerAidOffer":2} drops<=-4=28
+   DROP primary-sub village_0: d30 41->33 (delta -8) site=successionCrisis
+   DROP covenant village_1: d30 43->33 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d30 43->33 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d30 43->33 (delta -10) site=covenantCrisis
+   DROP trade village_spl_21_63485: d30 31->21 (delta -10) site=covenantCrisis
+   DROP primary-sub village_0: d37 38->32 (delta -6) site=_resolveRenegotiation
+   DROP primary-sub village_0: d54 38->30 (delta -8) site=successionCrisis
+   DROP covenant village_1: d54 51->41 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d54 51->41 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d54 51->41 (delta -10) site=covenantCrisis
+   DROP trade village_spl_21_63485: d54 49->39 (delta -10) site=covenantCrisis
+   DROP covenant village_1: d58 51->41 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d58 51->41 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d58 51->41 (delta -10) site=covenantCrisis
+   DROP trade village_spl_21_63485: d58 49->39 (delta -10) site=covenantCrisis
+   DROP primary-sub village_0: d68 32->24 (delta -8) site=successionCrisis
+   DROP covenant village_1: d68 55->45 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d68 55->45 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d68 55->45 (delta -10) site=covenantCrisis
+   DROP trade village_spl_21_63485: d68 53->43 (delta -10) site=covenantCrisis
+   DROP covenant village_1: d70 53->43 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d70 53->43 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d70 53->43 (delta -10) site=covenantCrisis
+   DROP trade village_spl_21_63485: d70 51->41 (delta -10) site=covenantCrisis
+   DROP covenant village_1: d71 52->42 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d71 52->42 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d71 52->42 (delta -10) site=covenantCrisis
+   DROP trade village_spl_21_63485: d71 50->40 (delta -10) site=covenantCrisis
+   TRUST35 reconcile-daylabel: matchedLinkDays=38 mismatchedLinkDays=48
+   MISMATCH village_0|primary-sub d29 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d34 snapDelta=4 setterSum=0
+   MISMATCH village_0|primary-sub d36 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d38 snapDelta=-6 setterSum=0
+   MISMATCH village_0|primary-sub d43 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d50 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d57 snapDelta=-2 setterSum=0
+   MISMATCH village_1|covenant d30 snapDelta=-1 setterSum=-2
+   MISMATCH village_1|covenant d34 snapDelta=1 setterSum=0
+   MISMATCH village_1|covenant d36 snapDelta=2 setterSum=1
+   TRUST35 reconcile-order: explainedLinks=5/5 bad=[]
+   POSTNAT nationalDay=null finalDay=71 postNatDays=null poolLiveDaysAfterNational=0
+   BOOK-TITAN site=titanEscalate delta=-5 events=0 booked=0 unbooked=0
+   BOOK-POOL site=covenantTick delta=-4 events=0 booked=0 unbooked=0
+   BOOK-POOL note: covenantTick -4 total=0 (pool-join booked 0)
+   BETRAY accepts=0 subjects=0 snaps=0
+seed 85002: day=86 over=true pop=8/8 rank=regional nat=null glob=null totalVill=5 knownEnd=4 primLinks=1 covLinks=0 seasonedCov=0 maxPeers=4 proposed=1 proposedPeer=0 pilgrimages=29 studies=29 barelyKnow=0 declinesCov=0 counters=0 poolDrawn=0 poorDays=10 pilgPoor=5 propPoor=0 BLOCKER=unknown-village
+   end villages: village_0 known=true op=23 codex=false link=primary-sub | village_1 known=true op=9 codex=false link=- | village_2 known=false op=2 codex=false link=- | village_spl_28_61917 known=true op=9 codex=true link=- | village_spl_29_56583 known=true op=5 codex=false link=-
+   unknown=1 belowBar=3 atBarUnlinked=0
+   TRUST primary-sub village_0: first=44@d28 peak=45@d35(age 10) final=34@d84(age 59) ever40=true samples=9
+   TRUST34 poolLiveDay=null snapshots=62 events=20
+   TRUST34 village_0|primary-sub: first=30@d25 last=35@d86 peak=48 ever40=true prePoolNet=5 (weeks 10) postPoolNet=0 (weeks 0) weekDeltas={w3:14 w4:1 w5:-3 w6:-1 w7:-7 w8:4 w9:5 w10:-3 w11:-5 w12:0} events={"formed":1,"accord":1,"tribute":9,"succession":5,"renegotiation":1,"titan":2,"drift":1}
+   EVENTS village_0|primary-sub: d25[formed] d26[accord] d28[tribute] d35[tribute] d37[succession] d42[tribute] d44[renegotiation] d49[tribute] d55[succession] d56[tribute] d63[tribute] d70[tribute] d75[succession] d75[succession] d77[succession] d77[tribute] d79[titan] d79[drift] d84[titan] d84[tribute]
+   TRUST35 setterEvents=21 sites={"answerAidOffer":7,"answerAccord":1,"linkTick":7,"successionCrisis":3,"_resolveRenegotiation":1,"titanEscalate":2} drops<=-4=6
+   DROP primary-sub village_0: d37 46->38 (delta -8) site=successionCrisis
+   DROP primary-sub village_0: d44 47->41 (delta -6) site=_resolveRenegotiation
+   DROP primary-sub village_0: d55 42->34 (delta -8) site=successionCrisis
+   DROP primary-sub village_0: d75 48->40 (delta -8) site=successionCrisis
+   DROP primary-sub village_0: d79 40->35 (delta -5) site=titanEscalate
+   DROP primary-sub village_0: d84 35->30 (delta -5) site=titanEscalate
+   TRUST35 reconcile-daylabel: matchedLinkDays=9 mismatchedLinkDays=9
+   MISMATCH village_0|primary-sub d29 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d36 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d43 snapDelta=5 setterSum=4
+   MISMATCH village_0|primary-sub d45 snapDelta=-6 setterSum=0
+   MISMATCH village_0|primary-sub d50 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d64 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d71 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d84 snapDelta=-1 setterSum=0
+   MISMATCH village_0|primary-sub d85 snapDelta=1 setterSum=0
+   TRUST35 reconcile-order: explainedLinks=1/1 bad=[]
+   POSTNAT nationalDay=null finalDay=86 postNatDays=null poolLiveDaysAfterNational=0
+   BOOK-TITAN site=titanEscalate delta=-5 events=2 booked=2 unbooked=0
+   BOOK-POOL site=covenantTick delta=-4 events=0 booked=0 unbooked=0
+   BOOK-POOL note: covenantTick -4 total=0 (pool-join booked 0)
+   BETRAY accepts=0 subjects=0 snaps=0
+seed 85003: day=110 over=true pop=7/7 rank=regional nat=null glob=null totalVill=6 knownEnd=5 primLinks=1 covLinks=2 seasonedCov=0 maxPeers=5 proposed=1 proposedPeer=2 pilgrimages=7 studies=1 barelyKnow=0 declinesCov=0 counters=0 poolDrawn=0 poorDays=19 pilgPoor=3 propPoor=0 BLOCKER=unknown-village
+   end villages: village_0 known=true op=15 codex=false link=primary-sub | village_1 known=true op=4 codex=false link=- | village_2 known=true op=14 codex=false link=covenant | village_3 known=true op=14 codex=false link=covenant | village_spl_31_4642 known=false op=0 codex=false link=- | village_spl_35_92653 known=true op=10 codex=true link=-
+   unknown=1 belowBar=1 atBarUnlinked=1
+   PICK journey-scale-r37-transcript-85003-day90.txt: picks=gq:yn:unsure,dlg:commit maxStretch=0 postDeflectGoon=0
+   TRUST primary-sub village_0: first=40@d28 peak=53@d63(age 38) final=36@d105(age 80) ever40=true samples=12
+   TRUST covenant village_2: first=28@d91 peak=28@d91(age 3) final=25@d105(age 17) ever40=false samples=3
+   TRUST covenant village_3: first=30@d91 peak=30@d91(age 2) final=27@d105(age 16) ever40=false samples=3
+   TRUST34 poolLiveDay=null snapshots=131 events=36
+   TRUST34 village_0|primary-sub: first=30@d25 last=36@d110 peak=54 ever40=true prePoolNet=6 (weeks 11) postPoolNet=0 (weeks 0) weekDeltas={w3:10 w4:1 w5:1 w6:5 w7:1 w8:5 w9:1 w10:-8 w11:1 w12:-7 w13:-4} events={"formed":1,"accord":1,"tribute":12,"succession":5,"drift":1}
+   EVENTS village_0|primary-sub: d25[formed] d26[accord] d28[tribute] d35[tribute] d42[tribute] d49[tribute] d56[tribute] d63[tribute] d70[succession] d70[tribute] d77[tribute] d84[tribute] d89[succession] d91[tribute] d96[succession] d96[drift] d98[succession] d98[tribute] d101[succession] d105[tribute]
+   TRUST34 village_2|covenant: first=30@d88 last=26@d110 peak=30 ever40=false prePoolNet=-4 (weeks 4) postPoolNet=0 (weeks 0) weekDeltas={w12:-2 w13:0 w14:-3 w15:1} events={"formed":1,"crisis":8}
+   EVENTS village_2|covenant: d88[formed] d89[crisis] d89[crisis] d96[crisis] d97[crisis] d98[crisis] d99[crisis] d101[crisis] d101[crisis]
+   TRUST34 village_3|covenant: first=30@d89 last=28@d110 peak=32 ever40=false prePoolNet=-2 (weeks 3) postPoolNet=0 (weeks 0) weekDeltas={w13:0 w14:-3 w15:1} events={"formed":1,"crisis":6}
+   EVENTS village_3|covenant: d89[formed] d96[crisis] d97[crisis] d98[crisis] d99[crisis] d101[crisis] d101[crisis]
+   TRUST35 setterEvents=37 sites={"answerAccord":1,"linkTick":8,"answerAidOffer":3,"successionCrisis":3,"covenantCrisis":7,"answerCovenantCrisis":7,"covenantTick":6,"recordDeed":2} drops<=-4=10
+   DROP primary-sub village_0: d70 54->46 (delta -8) site=successionCrisis
+   DROP primary-sub village_0: d89 48->40 (delta -8) site=successionCrisis
+   DROP covenant village_2: d89 30->20 (delta -10) site=covenantCrisis
+   DROP primary-sub village_0: d96 44->36 (delta -8) site=successionCrisis
+   DROP covenant village_2: d96 30->20 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d96 32->22 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d98 28->18 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d98 30->20 (delta -10) site=covenantCrisis
+   DROP covenant village_2: d101 27->17 (delta -10) site=covenantCrisis
+   DROP covenant village_3: d101 29->19 (delta -10) site=covenantCrisis
+   TRUST35 reconcile-daylabel: matchedLinkDays=7 mismatchedLinkDays=19
+   MISMATCH village_0|primary-sub d29 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d36 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d43 snapDelta=5 setterSum=4
+   MISMATCH village_0|primary-sub d50 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d57 snapDelta=5 setterSum=4
+   MISMATCH village_0|primary-sub d64 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d78 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d85 snapDelta=1 setterSum=0
+   MISMATCH village_0|primary-sub d97 snapDelta=-8 setterSum=0
+   MISMATCH village_2|covenant d92 snapDelta=1 setterSum=0
+   TRUST35 reconcile-order: explainedLinks=3/3 bad=[]
+   BETRAY journey-scale-r37-transcript-85003-day90.txt: want=seek_taken (stage 1) betrayPicks=none driverDrop=false picks=gq:yn:unsure,dlg:commit
+   POSTNAT nationalDay=null finalDay=110 postNatDays=null poolLiveDaysAfterNational=0
+   BOOK-TITAN site=titanEscalate delta=-5 events=0 booked=0 unbooked=0
+   BOOK-POOL site=covenantTick delta=-4 events=0 booked=0 unbooked=0
+   BOOK-POOL note: covenantTick -4 total=0 (pool-join booked 0)
+   BETRAY accepts=0 subjects=0 snaps=0
+seed 85004: day=181 over=false pop=5/5 rank=regional nat=null glob=null totalVill=8 knownEnd=8 primLinks=0 covLinks=1 seasonedCov=0 maxPeers=8 proposed=1 proposedPeer=1 pilgrimages=11 studies=0 barelyKnow=0 declinesCov=0 counters=1 poolDrawn=0 poorDays=100 pilgPoor=7 propPoor=0 BLOCKER=declined/countered-or-other
+   end villages: village_0 known=true op=6 codex=false link=covenant | village_1 known=true op=2 codex=false link=- | village_2 known=true op=1 codex=false link=primary-sub | village_3 known=true op=26 codex=false link=- | village_spl_27_240 known=true op=22 codex=false link=- | village_spl_28_2894 known=true op=-3 codex=false link=- | village_spl_33_68782 known=true op=19 codex=false link=- | village_spl_34_49713 known=true op=7 codex=false link=-
+   unknown=0 belowBar=3 atBarUnlinked=3
+   PICK journey-scale-r37-transcript-85004-day120.txt: picks=betrayal:accept,dlg:more,dlg:react,dlg:more,dlg:react,dlg:more maxStretch=1 postDeflectGoon=0
+   PICK journey-scale-r37-transcript-85004-day90.txt: picks=ans:q_regret:a_tell,goon maxStretch=1 postDeflectGoon=0
+   TRUST covenant village_0: first=27@d77 peak=34@d119(age 48) final=8@d175(age 104) ever40=false samples=15
+   TRUST34 poolLiveDay=null snapshots=208 events=67
+   TRUST34 village_2|primary-sub: first=40@d26 last=26@d123 peak=74 ever40=true prePoolNet=-14 (weeks 13) postPoolNet=0 (weeks 0) weekDeltas={w3:1 w4:-2 w5:-3 w6:8 w7:6 w8:13 w9:5 w10:1 w12:-3 w14:-2 w15:-25 w16:-2 w17:-11} events={"formed":1,"accord":1,"succession":4,"worth":2,"arrears":5,"aid":6,"tribute":8,"renegotiation":1,"demand":2,"titan":1}
+   EVENTS village_2|primary-sub: d26[formed] d26[accord] d32[succession] d32[worth] d35[arrears] d36[aid] d38[tribute] d39[renegotiation] d42[tribute] d48[aid] d49[tribute] d56[tribute] d61[aid] d61[worth] d63[tribute] d70[tribute] d71[succession] d74[succession] d76[aid] d77[tribute] d84[tribute] d87[succession] d98[arrears] d99[aid] d105[arrears] d105[demand] d106[demand] d112[arrears] d115[aid] d119[arrears] d122[titan]
+   TRUST34 village_0|covenant: first=30@d71 last=4@d180 peak=34 ever40=false prePoolNet=-26 (weeks 16) postPoolNet=0 (weeks 0) weekDeltas={w10:-3 w11:2 w12:0 w13:1 w14:1 w15:2 w16:1 w17:-3 w18:-6 w19:-4 w20:-5 w21:-4 w22:-4 w23:0 w24:0 w25:-4} events={"formed":1,"crisis":24,"titan":11}
+   EVENTS village_0|covenant: d71[formed] d71[crisis] d72[crisis] d74[crisis] d74[crisis] d87[crisis] d88[crisis] d119[crisis] d120[crisis] d124[crisis] d124[crisis] d127[titan] d127[crisis] d127[crisis] d137[titan] d140[crisis] d140[crisis] d142[titan] d152[titan] d157[titan] d160[crisis] d160[crisis] d162[titan] d166[titan] d167[titan] d167[crisis] d167[crisis] d168[crisis] d168[crisis] d169[crisis] d169[crisis] d171[titan] d172[titan] d172[crisis] d172[crisis] d177[titan]
+   TRUST35 setterEvents=100 sites={"proveWorth":14,"linkTick":12,"successionCrisis":4,"answerAidBeg":7,"payTribute":7,"_resolveRenegotiation":1,"covenantCrisis":10,"answerCovenantCrisis":12,"recordDeed":5,"covenantTick":15,"answerDemand":1,"titanEscalate":12} drops<=-4=33
+   DROP primary-sub village_2: d32 42->34 (delta -8) site=successionCrisis
+   DROP primary-sub village_2: d35 40->34 (delta -6) site=linkTick
+   DROP primary-sub village_2: d39 42->36 (delta -6) site=_resolveRenegotiation
+   DROP primary-sub village_2: d71 73->65 (delta -8) site=successionCrisis
+   DROP covenant village_0: d71 30->20 (delta -10) site=covenantCrisis
+   DROP covenant village_0: d74 28->18 (delta -10) site=covenantCrisis
+   DROP primary-sub village_2: d87 74->66 (delta -8) site=successionCrisis
+   DROP covenant village_0: d87 31->21 (delta -10) site=covenantCrisis
+   DROP primary-sub village_2: d98 66->60 (delta -6) site=linkTick
+   DROP primary-sub village_2: d105 65->59 (delta -6) site=linkTick
+   DROP primary-sub village_2: d106 59->44 (delta -15) site=answerDemand
+   DROP primary-sub village_2: d109 44->39 (delta -5) site=answerAidBeg
+   DROP primary-sub village_2: d112 39->33 (delta -6) site=linkTick
+   DROP primary-sub village_2: d119 37->31 (delta -6) site=linkTick
+   DROP covenant village_0: d119 35->25 (delta -10) site=covenantCrisis
+   DROP primary-sub village_2: d122 31->26 (delta -5) site=titanEscalate
+   DROP primary-sub village_2: d124 26->18 (delta -8) site=successionCrisis
+   DROP covenant village_0: d124 33->23 (delta -10) site=covenantCrisis
+   DROP covenant village_0: d127 32->27 (delta -5) site=titanEscalate
+   DROP covenant village_0: d127 27->17 (delta -10) site=covenantCrisis
+   DROP covenant village_0: d137 26->21 (delta -5) site=titanEscalate
+   DROP covenant village_0: d140 21->11 (delta -10) site=covenantCrisis
+   DROP covenant village_0: d142 20->15 (delta -5) site=titanEscalate
+   DROP covenant village_0: d152 17->12 (delta -5) site=titanEscalate
+   DROP covenant village_0: d157 13->8 (delta -5) site=titanEscalate
+   DROP covenant village_0: d160 8->0 (delta -8) site=covenantCrisis
+   DROP covenant village_0: d162 9->4 (delta -5) site=titanEscalate
+   DROP covenant village_0: d166 4->0 (delta -4) site=titanEscalate
+   DROP covenant village_0: d168 8->0 (delta -8) site=covenantCrisis
+   DROP covenant village_0: d169 9->0 (delta -9) site=covenantCrisis
+   DROP covenant village_0: d171 8->3 (delta -5) site=titanEscalate
+   DROP covenant village_0: d177 9->4 (delta -5) site=titanEscalate
+   DROP covenant village_0: d181 4->0 (delta -4) site=titanEscalate
+   TRUST35 reconcile-daylabel: matchedLinkDays=25 mismatchedLinkDays=45
+   MISMATCH village_2|primary-sub d27 snapDelta=1 setterSum=0
+   MISMATCH village_2|primary-sub d29 snapDelta=1 setterSum=0
+   MISMATCH village_2|primary-sub d35 snapDelta=1 setterSum=-5
+   MISMATCH village_2|primary-sub d36 snapDelta=-2 setterSum=4
+   MISMATCH village_2|primary-sub d39 snapDelta=1 setterSum=-5
+   MISMATCH village_2|primary-sub d40 snapDelta=-6 setterSum=0
+   MISMATCH village_2|primary-sub d42 snapDelta=3 setterSum=4
+   MISMATCH village_2|primary-sub d43 snapDelta=1 setterSum=0
+   MISMATCH village_2|primary-sub d49 snapDelta=4 setterSum=5
+   MISMATCH village_2|primary-sub d50 snapDelta=1 setterSum=0
+   TRUST35 reconcile-order: explainedLinks=2/2 bad=[]
+   BETRAY journey-scale-r37-transcript-85004-day120.txt: want=ask_favor (stage 2) betrayPicks=betrayal:accept driverDrop=false picks=betrayal:accept,dlg:more,dlg:react,dlg:more,dlg:react,dlg:more
+   BETRAY journey-scale-r37-transcript-85004-day90.txt: want=curious (stage 1) betrayPicks=none driverDrop=false picks=ans:q_regret:a_tell,goon
+   POSTNAT nationalDay=null finalDay=181 postNatDays=null poolLiveDaysAfterNational=0
+   BOOK-TITAN site=titanEscalate delta=-5 events=9 booked=9 unbooked=0
+   BOOK-POOL site=covenantTick delta=-4 events=0 booked=0 unbooked=0
+   BOOK-POOL note: covenantTick -4 total=0 (pool-join booked 0)
+   BETRAY accepts=1 subjects=1 snaps=61
+   BETRAY-ACCEPT Dorothy (gen_xu3lbui) want=ask_favor stage=3 acceptDay=120 acceptState dead=false trust=90 inRoster=true
+   BETRAY-TRAJ Dorothy: +7=d127 dead=true trust=86 inRoster=false +14=d134 dead=true trust=86 inRoster=false final=d180 dead=true trust=86 inRoster=false snaps=61
+   BETRAY-DEATH Dorothy: d127 cause=the arena
+   BETRAY-MENTIONS Dorothy: 28
+   BETRAY-MENTION 🍽️ Dorothy takes one look at the full shelves and unshoulders the pack. "Leave the wild standing. Hauling water for the cistern."
+   BETRAY-MENTION You catch fragments by the fire — Dorothy telling Mara about you. The truth left this story two fires ago. What's left is better theater.
+   BETRAY-MENTION You catch fragments by the fire — Dorothy telling Wei about you. The truth left this story two fires ago. What's left is better theater.
+   BETRAY-MENTION 🍽️ Dorothy leaves the surplus by the fire for whoever's hungry. "The pantry can't take it. We can."
+   BETRAY-MENTION You catch fragments by the fire — Dorothy telling Mara about you. The truth left this story two fires ago. What's left is better theater.
