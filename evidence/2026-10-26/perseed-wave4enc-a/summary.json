@@ -1,0 +1,1312 @@
+{
+ "label": "sim-wave4enc-a",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "days": 180,
+ "perSeed": [
+  {
+   "seed": 73671,
+   "spawns4": 4,
+   "field4": 3,
+   "ffField4": 3,
+   "tbInits4": 2,
+   "directW4Ends": 0,
+   "neverFought": 2,
+   "neverFoughtWithTypeTb": 1,
+   "foughtSpawns": 2,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {
+    "vDie": 2,
+    "vFlee": 1
+   },
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {
+    "field-lose": 2,
+    "field-flee-villager": 1
+   },
+   "tbClasses": {
+    "player-tb-lose-or-rout": 2
+   },
+   "classes": {
+    "field-lose": 2,
+    "field-flee-villager": 1,
+    "player-tb-lose-or-rout": 2,
+    "spawned-never-fought": 2
+   },
+   "partitionTotal": 7,
+   "dominant": "field-lose",
+   "dominantN": 2,
+   "faced4Types": [
+    "influencer",
+    "suburb"
+   ],
+   "facedCovered": {
+    "influencer": true,
+    "suburb": true
+   },
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [
+    {
+     "day": 174,
+     "arg": "influencer",
+     "mid": "influencer",
+     "door": "world-bump",
+     "tileSeq": 40,
+     "tileMid": "influencer",
+     "fightId": "fmgpspj3z_5b2rif",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 179,
+     "arg": "suburb",
+     "mid": "suburb",
+     "door": "world-bump",
+     "tileSeq": 38,
+     "tileMid": "suburb",
+     "fightId": "fmgpspj5s_29wiex",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    }
+   ],
+   "perTypeSummary": {
+    "influencer": {
+     "fieldFights": 1,
+     "byOutcome": {
+      "vDie": 1
+     },
+     "spawns": 1,
+     "firstSpawnDay": 168,
+     "firstFightDay": 172,
+     "seqLinked": 1
+    },
+    "suburb": {
+     "fieldFights": 2,
+     "byOutcome": {
+      "vDie": 1,
+      "vFlee": 1
+     },
+     "spawns": 2,
+     "firstSpawnDay": 162,
+     "firstFightDay": 176,
+     "seqLinked": 2
+    }
+   },
+   "neverFoughtDetail": [
+    {
+     "day": 179,
+     "seq": 41,
+     "type": "suburb",
+     "src": "maintain",
+     "typeTbAfter": true
+    },
+    {
+     "day": 179,
+     "seq": 42,
+     "type": "audit",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    }
+   ],
+   "spawns4Detail": [
+    {
+     "day": 162,
+     "seq": 38,
+     "type": "suburb",
+     "src": "tile-entry"
+    },
+    {
+     "day": 168,
+     "seq": 40,
+     "type": "influencer",
+     "src": "tile-entry"
+    },
+    {
+     "day": 179,
+     "seq": 41,
+     "type": "suburb",
+     "src": "maintain"
+    },
+    {
+     "day": 179,
+     "seq": 42,
+     "type": "audit",
+     "src": "tile-entry"
+    }
+   ]
+  },
+  {
+   "seed": 73672,
+   "spawns4": 8,
+   "field4": 5,
+   "ffField4": 5,
+   "tbInits4": 2,
+   "directW4Ends": 0,
+   "neverFought": 6,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 2,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {
+    "vFlee": 5
+   },
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {
+    "field-flee-villager": 5
+   },
+   "tbClasses": {
+    "player-tb-lose-or-rout": 2
+   },
+   "classes": {
+    "field-flee-villager": 5,
+    "player-tb-lose-or-rout": 2,
+    "spawned-never-fought": 6
+   },
+   "partitionTotal": 13,
+   "dominant": "spawned-never-fought",
+   "dominantN": 6,
+   "faced4Types": [
+    "audit",
+    "herald",
+    "influencer"
+   ],
+   "facedCovered": {
+    "audit": true,
+    "herald": true,
+    "influencer": true
+   },
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [
+    {
+     "day": 100,
+     "arg": "audit",
+     "mid": "audit",
+     "door": "contest-arena",
+     "tileSeq": null,
+     "tileMid": null,
+     "fightId": "fmgpspin7_52s1s0",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 148,
+     "arg": "influencer",
+     "mid": "influencer",
+     "door": "world-bump",
+     "tileSeq": 51,
+     "tileMid": "influencer",
+     "fightId": "fmgpspj2a_8cpgkp",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    }
+   ],
+   "perTypeSummary": {
+    "herald": {
+     "fieldFights": 3,
+     "byOutcome": {
+      "vFlee": 3
+     },
+     "spawns": 1,
+     "firstSpawnDay": 109,
+     "firstFightDay": 137,
+     "seqLinked": 3
+    },
+    "influencer": {
+     "fieldFights": 2,
+     "byOutcome": {
+      "vFlee": 2
+     },
+     "spawns": 2,
+     "firstSpawnDay": 131,
+     "firstFightDay": 139,
+     "seqLinked": 2
+    }
+   },
+   "neverFoughtDetail": [
+    {
+     "day": 111,
+     "seq": 44,
+     "type": "reunion",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 127,
+     "seq": 48,
+     "type": "algorithm",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 164,
+     "seq": 59,
+     "type": "reunion",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 164,
+     "seq": 60,
+     "type": "eater",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 176,
+     "seq": 62,
+     "type": "influencer",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 180,
+     "seq": 63,
+     "type": "suburb",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    }
+   ],
+   "spawns4Detail": [
+    {
+     "day": 109,
+     "seq": 43,
+     "type": "herald",
+     "src": "scripted-titan"
+    },
+    {
+     "day": 111,
+     "seq": 44,
+     "type": "reunion",
+     "src": "tile-entry"
+    },
+    {
+     "day": 127,
+     "seq": 48,
+     "type": "algorithm",
+     "src": "tile-entry"
+    },
+    {
+     "day": 131,
+     "seq": 51,
+     "type": "influencer",
+     "src": "tile-entry"
+    },
+    {
+     "day": 164,
+     "seq": 59,
+     "type": "reunion",
+     "src": "tile-entry"
+    },
+    {
+     "day": 164,
+     "seq": 60,
+     "type": "eater",
+     "src": "tile-entry"
+    },
+    {
+     "day": 176,
+     "seq": 62,
+     "type": "influencer",
+     "src": "tile-entry"
+    },
+    {
+     "day": 180,
+     "seq": 63,
+     "type": "suburb",
+     "src": "tile-entry"
+    }
+   ]
+  },
+  {
+   "seed": 73673,
+   "spawns4": 5,
+   "field4": 2,
+   "ffField4": 2,
+   "tbInits4": 6,
+   "directW4Ends": 0,
+   "neverFought": 3,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 2,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {
+    "vFlee": 1,
+    "vDie": 1
+   },
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {
+    "field-flee-villager": 1,
+    "field-lose": 1
+   },
+   "tbClasses": {
+    "player-tb-lose-or-rout": 6
+   },
+   "classes": {
+    "field-flee-villager": 1,
+    "field-lose": 1,
+    "player-tb-lose-or-rout": 6,
+    "spawned-never-fought": 3
+   },
+   "partitionTotal": 11,
+   "dominant": "player-tb-lose-or-rout",
+   "dominantN": 6,
+   "faced4Types": [
+    "algorithm"
+   ],
+   "facedCovered": {
+    "algorithm": true
+   },
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [
+    {
+     "day": 112,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 45,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspiq0_1dgo6l",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 112,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 45,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspiq6_dkt53y",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 112,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 45,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspiqm_a25245",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 112,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 45,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspiqx_2m2gdm",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 112,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 45,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspir5_4smnnn",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    },
+    {
+     "day": 112,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 45,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspira_35ouxj",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    }
+   ],
+   "perTypeSummary": {
+    "algorithm": {
+     "fieldFights": 1,
+     "byOutcome": {
+      "vFlee": 1
+     },
+     "spawns": 1,
+     "firstSpawnDay": 105,
+     "firstFightDay": 105,
+     "seqLinked": 1
+    },
+    "eater": {
+     "fieldFights": 1,
+     "byOutcome": {
+      "vDie": 1
+     },
+     "spawns": 2,
+     "firstSpawnDay": 100,
+     "firstFightDay": 122,
+     "seqLinked": 1
+    }
+   },
+   "neverFoughtDetail": [
+    {
+     "day": 100,
+     "seq": 44,
+     "type": "eater",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 116,
+     "seq": 47,
+     "type": "herald",
+     "src": "scripted-titan",
+     "typeTbAfter": false
+    },
+    {
+     "day": 121,
+     "seq": 50,
+     "type": "eulogy",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    }
+   ],
+   "spawns4Detail": [
+    {
+     "day": 100,
+     "seq": 44,
+     "type": "eater",
+     "src": "tile-entry"
+    },
+    {
+     "day": 105,
+     "seq": 45,
+     "type": "algorithm",
+     "src": "tile-entry"
+    },
+    {
+     "day": 116,
+     "seq": 47,
+     "type": "herald",
+     "src": "scripted-titan"
+    },
+    {
+     "day": 116,
+     "seq": 48,
+     "type": "eater",
+     "src": "tile-entry"
+    },
+    {
+     "day": 121,
+     "seq": 50,
+     "type": "eulogy",
+     "src": "tile-entry"
+    }
+   ]
+  },
+  {
+   "seed": 73674,
+   "spawns4": 0,
+   "field4": 0,
+   "ffField4": 0,
+   "tbInits4": 0,
+   "directW4Ends": 0,
+   "neverFought": 0,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 0,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {},
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {},
+   "tbClasses": {},
+   "classes": {
+    "spawned-never-fought": 0
+   },
+   "partitionTotal": 0,
+   "dominant": null,
+   "dominantN": 0,
+   "faced4Types": [],
+   "facedCovered": {},
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [],
+   "perTypeSummary": {},
+   "neverFoughtDetail": [],
+   "spawns4Detail": []
+  },
+  {
+   "seed": 73675,
+   "spawns4": 7,
+   "field4": 1,
+   "ffField4": 1,
+   "tbInits4": 1,
+   "directW4Ends": 0,
+   "neverFought": 6,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 1,
+   "fieldUnlinked": 1,
+   "fieldByOutcome": {
+    "vFlee": 1
+   },
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {
+    "field-flee-villager": 1
+   },
+   "tbClasses": {
+    "player-tb-lose-or-rout": 1
+   },
+   "classes": {
+    "field-flee-villager": 1,
+    "player-tb-lose-or-rout": 1,
+    "spawned-never-fought": 6
+   },
+   "partitionTotal": 8,
+   "dominant": "spawned-never-fought",
+   "dominantN": 6,
+   "faced4Types": [
+    "influencer",
+    "algorithm"
+   ],
+   "facedCovered": {
+    "influencer": true,
+    "algorithm": true
+   },
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [
+    {
+     "day": 146,
+     "arg": "algorithm",
+     "mid": "algorithm",
+     "door": "world-bump",
+     "tileSeq": 32,
+     "tileMid": "algorithm",
+     "fightId": "fmgpspitn_cwmh3v",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    }
+   ],
+   "perTypeSummary": {
+    "influencer": {
+     "fieldFights": 1,
+     "byOutcome": {
+      "vFlee": 1
+     },
+     "spawns": 0,
+     "firstSpawnDay": null,
+     "firstFightDay": 90,
+     "seqLinked": 0
+    }
+   },
+   "neverFoughtDetail": [
+    {
+     "day": 101,
+     "seq": 26,
+     "type": "herald",
+     "src": "scripted-titan",
+     "typeTbAfter": false
+    },
+    {
+     "day": 103,
+     "seq": 27,
+     "type": "reunion",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 106,
+     "seq": 28,
+     "type": "eater",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 123,
+     "seq": 29,
+     "type": "congregation",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 133,
+     "seq": 30,
+     "type": "eulogy",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 139,
+     "seq": 31,
+     "type": "eulogy",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    }
+   ],
+   "spawns4Detail": [
+    {
+     "day": 101,
+     "seq": 26,
+     "type": "herald",
+     "src": "scripted-titan"
+    },
+    {
+     "day": 103,
+     "seq": 27,
+     "type": "reunion",
+     "src": "tile-entry"
+    },
+    {
+     "day": 106,
+     "seq": 28,
+     "type": "eater",
+     "src": "tile-entry"
+    },
+    {
+     "day": 123,
+     "seq": 29,
+     "type": "congregation",
+     "src": "tile-entry"
+    },
+    {
+     "day": 133,
+     "seq": 30,
+     "type": "eulogy",
+     "src": "tile-entry"
+    },
+    {
+     "day": 139,
+     "seq": 31,
+     "type": "eulogy",
+     "src": "tile-entry"
+    },
+    {
+     "day": 139,
+     "seq": 32,
+     "type": "algorithm",
+     "src": "tile-entry"
+    }
+   ]
+  },
+  {
+   "seed": 73676,
+   "spawns4": 2,
+   "field4": 0,
+   "ffField4": 0,
+   "tbInits4": 1,
+   "directW4Ends": 0,
+   "neverFought": 1,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 1,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {},
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {},
+   "tbClasses": {
+    "player-tb-lose-or-rout": 1
+   },
+   "classes": {
+    "player-tb-lose-or-rout": 1,
+    "spawned-never-fought": 1
+   },
+   "partitionTotal": 2,
+   "dominant": "player-tb-lose-or-rout",
+   "dominantN": 1,
+   "faced4Types": [
+    "suburb"
+   ],
+   "facedCovered": {
+    "suburb": true
+   },
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [
+    {
+     "day": 142,
+     "arg": "suburb",
+     "mid": "suburb",
+     "door": "feast-draw",
+     "tileSeq": 41,
+     "tileMid": "suburb",
+     "fightId": "fmgpspiys_8ikewi",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    }
+   ],
+   "perTypeSummary": {},
+   "neverFoughtDetail": [
+    {
+     "day": 137,
+     "seq": 42,
+     "type": "reunion",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    }
+   ],
+   "spawns4Detail": [
+    {
+     "day": 134,
+     "seq": 41,
+     "type": "suburb",
+     "src": "tile-entry"
+    },
+    {
+     "day": 137,
+     "seq": 42,
+     "type": "reunion",
+     "src": "tile-entry"
+    }
+   ]
+  },
+  {
+   "seed": 73677,
+   "spawns4": 7,
+   "field4": 1,
+   "ffField4": 1,
+   "tbInits4": 1,
+   "directW4Ends": 0,
+   "neverFought": 6,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 1,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {
+    "vDie": 1
+   },
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {
+    "field-lose": 1
+   },
+   "tbClasses": {
+    "player-tb-lose-or-rout": 1
+   },
+   "classes": {
+    "field-lose": 1,
+    "player-tb-lose-or-rout": 1,
+    "spawned-never-fought": 6
+   },
+   "partitionTotal": 8,
+   "dominant": "spawned-never-fought",
+   "dominantN": 6,
+   "faced4Types": [
+    "audit"
+   ],
+   "facedCovered": {
+    "audit": true
+   },
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [
+    {
+     "day": 113,
+     "arg": "audit",
+     "mid": "audit",
+     "door": "feast-draw",
+     "tileSeq": null,
+     "tileMid": null,
+     "fightId": "fmgpspikz_b5of27",
+     "endResult": "lost",
+     "killsW4": 0,
+     "cls": "player-tb-lose-or-rout"
+    }
+   ],
+   "perTypeSummary": {
+    "eulogy": {
+     "fieldFights": 1,
+     "byOutcome": {
+      "vDie": 1
+     },
+     "spawns": 4,
+     "firstSpawnDay": 120,
+     "firstFightDay": 151,
+     "seqLinked": 1
+    }
+   },
+   "neverFoughtDetail": [
+    {
+     "day": 112,
+     "seq": 31,
+     "type": "herald",
+     "src": "scripted-titan",
+     "typeTbAfter": false
+    },
+    {
+     "day": 120,
+     "seq": 32,
+     "type": "eulogy",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 123,
+     "seq": 33,
+     "type": "eulogy",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 135,
+     "seq": 34,
+     "type": "eulogy",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 135,
+     "seq": 35,
+     "type": "reunion",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    },
+    {
+     "day": 152,
+     "seq": 38,
+     "type": "audit",
+     "src": "tile-entry",
+     "typeTbAfter": false
+    }
+   ],
+   "spawns4Detail": [
+    {
+     "day": 112,
+     "seq": 31,
+     "type": "herald",
+     "src": "scripted-titan"
+    },
+    {
+     "day": 120,
+     "seq": 32,
+     "type": "eulogy",
+     "src": "tile-entry"
+    },
+    {
+     "day": 123,
+     "seq": 33,
+     "type": "eulogy",
+     "src": "tile-entry"
+    },
+    {
+     "day": 135,
+     "seq": 34,
+     "type": "eulogy",
+     "src": "tile-entry"
+    },
+    {
+     "day": 135,
+     "seq": 35,
+     "type": "reunion",
+     "src": "tile-entry"
+    },
+    {
+     "day": 149,
+     "seq": 37,
+     "type": "eulogy",
+     "src": "tile-entry"
+    },
+    {
+     "day": 152,
+     "seq": 38,
+     "type": "audit",
+     "src": "tile-entry"
+    }
+   ]
+  },
+  {
+   "seed": 73678,
+   "spawns4": 0,
+   "field4": 0,
+   "ffField4": 0,
+   "tbInits4": 0,
+   "directW4Ends": 0,
+   "neverFought": 0,
+   "neverFoughtWithTypeTb": 0,
+   "foughtSpawns": 0,
+   "fieldUnlinked": 0,
+   "fieldByOutcome": {},
+   "mfleeSub": {
+    "r0BelowLine": 0,
+    "r0Other": 0,
+    "inRound": 0,
+    "volleyDriveOff": 0
+   },
+   "fieldClasses": {},
+   "tbClasses": {},
+   "classes": {
+    "spawned-never-fought": 0
+   },
+   "partitionTotal": 0,
+   "dominant": null,
+   "dominantN": 0,
+   "faced4Types": [],
+   "facedCovered": {},
+   "kills4": 0,
+   "killsUnmatched": [],
+   "fieldfinish": {
+    "belowLineArrivals": 0,
+    "zeroRoundFlights": 0,
+    "oneHpArrivals": 0,
+    "oneHpZeroFlights": 0,
+    "strictWoundedRepeats": 0,
+    "strictDetail": [],
+    "answerYes": false
+   },
+   "checks": {
+    "killsMatched": true,
+    "facedCovered": true,
+    "fieldCountMatch": true,
+    "diagClean": true
+   },
+   "fullyTraced": true,
+   "diagErrs": 0,
+   "overflowN": 0,
+   "tbDetail": [],
+   "perTypeSummary": {},
+   "neverFoughtDetail": [],
+   "spawns4Detail": []
+  }
+ ],
+ "gates": {
+  "g2RecorderNeutrality": [
+   {
+    "seed": 73671,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 180,
+    "aDays": 180,
+    "cGameDays": 181,
+    "aGameDays": 181
+   },
+   {
+    "seed": 73672,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 180,
+    "aDays": 180,
+    "cGameDays": 180,
+    "aGameDays": 180
+   },
+   {
+    "seed": 73673,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 124,
+    "aDays": 124,
+    "cGameDays": 124,
+    "aGameDays": 124
+   },
+   {
+    "seed": 73674,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 142,
+    "aDays": 142,
+    "cGameDays": 142,
+    "aGameDays": 142
+   },
+   {
+    "seed": 73675,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 180,
+    "aDays": 180,
+    "cGameDays": 181,
+    "aGameDays": 181
+   },
+   {
+    "seed": 73676,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 144,
+    "aDays": 144,
+    "cGameDays": 144,
+    "aGameDays": 144
+   },
+   {
+    "seed": 73677,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 152,
+    "aDays": 152,
+    "cGameDays": 152,
+    "aGameDays": 152
+   },
+   {
+    "seed": 73678,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 104,
+    "aDays": 104,
+    "cGameDays": 104,
+    "aGameDays": 104
+   }
+  ],
+  "g2Pass": true,
+  "corpusOk": true,
+  "rebaselineExact": false,
+  "diffVs1816": {
+   "wins": 0,
+   "nationalEver": 0,
+   "nationalFinal": 0,
+   "entered": 0,
+   "wave4": 0,
+   "wave5": 0,
+   "medianDays": -14,
+   "deaths": -31,
+   "starvation": 0
+  },
+  "costBar": {
+   "starvationOk": true,
+   "medianOk": true,
+   "armedOnlyDeathsNote": "armed vs baseline deaths are compared seed-by-seed in G2; identical trajectories imply zero armed-only deaths"
+  }
+ },
+ "baselineBand": {
+  "n": 8,
+  "won": 2,
+  "medianDays": 152,
+  "maxDays": 180,
+  "nationalEver": 6,
+  "nationalFinal": 5,
+  "table": 4,
+  "entered": 2,
+  "wave3": 8,
+  "wave4": 6,
+  "wave5": 0,
+  "maxArc": 4,
+  "starvationTotal": 1,
+  "deathTotal": 307
+ },
+ "armedBand": {
+  "n": 8,
+  "won": 2,
+  "medianDays": 152,
+  "maxDays": 180,
+  "nationalEver": 6,
+  "nationalFinal": 5,
+  "table": 4,
+  "entered": 2,
+  "wave3": 8,
+  "wave4": 6,
+  "wave5": 0,
+  "maxArc": 4,
+  "starvationTotal": 1,
+  "deathTotal": 307
+ },
+ "band1816": {
+  "wins": 2,
+  "nationalEver": 6,
+  "nationalFinal": 5,
+  "entered": 2,
+  "wave4": 6,
+  "wave5": 0,
+  "medianDays": 166,
+  "deaths": 338,
+  "starvation": 1
+ },
+ "bandClasses": {
+  "field-lose": 4,
+  "field-flee-villager": 8,
+  "player-tb-lose-or-rout": 13,
+  "spawned-never-fought": 24
+ },
+ "bandDominant": "spawned-never-fought",
+ "bandDominantN": 24,
+ "ffTotals": {
+  "belowLineArrivals": 0,
+  "zeroRoundFlights": 0,
+  "oneHpArrivals": 0,
+  "oneHpZeroFlights": 0,
+  "strictWoundedRepeats": 0
+ },
+ "fullyTracedSeeds": 8,
+ "verdict": "DIAG-GO",
+ "verdictRule": "DIAG-GO iff fully-traced seeds >= 6 (every faced wave-4 entity traced to exactly one class under the partition) AND dominant class named with per-seed counts AND fieldfinish question answered yes/no with counts.",
+ "generated": "2026-10-26T19:32:44.930Z"
+}
