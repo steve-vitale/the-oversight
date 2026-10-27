@@ -1,0 +1,53 @@
+FAIL corpus has 1 judged, 8 pilot, or 12 confirm per-seed files — 40 files
+PASS corpus files valid (policy, stockdoorsOn, raiddorOn, no truncation, opening + dried + stockdoor + direct + raid present)
+PASS all 7 direct methods wrapped, none missing, on every seed
+PASS corpus first seed present (det-gate seed) — seed 10100
+INFO corpus reproduction vs residualhunt skipped (no matched seeds — confirm band)
+done seed=10100 days=100 end=survived rank=village wave=3 deaths=7 sweeps=99 driedEvents=89 spoilDays=100 mealDraw=1171 inflows=148 stockdoor=674 direct=87 raid=1 (1702ms)
+wrote 1 files to stdout
+done seed=10100 days=100 end=survived rank=village wave=3 deaths=7 sweeps=99 driedEvents=89 spoilDays=100 mealDraw=1171 inflows=148 stockdoor=674 direct=87 raid=0 (1702ms)
+wrote 1 files to stdout
+PASS det-gate runs completed — both runs ok
+PASS det-gate byte-identical (stockdoors + raiddor fields + ms excluded)
+PASS det-gate inflow records identical
+PASS det-gate mealdraw records identical
+PASS det-gate spoilvol records identical
+PASS det-gate driedpath records identical
+PASS det-gate death lists identical
+PASS det-gate wall fields identical
+PASS det-gate run reproduces corpus first-seed counts — det-gate 148/1171/7/89 vs corpus 148/1171/7/89
+PASS det-gate on-run recorded stockdoor + direct records — stockdoor=674 direct=87
+PASS det-gate off-run keeps stockdoors fields (STOCKDOORS stays 1 in both runs; only RAIDDOORS toggles)
+PASS det-gate on-run recorded raid records array (raiddorOn true) — raid=1 raiddorOn=true
+PASS det-gate off-run recorded no raiddor fields
+PASS independent named pooled residual matches analyzer — ind resid=5558 in=1554660 17/19 vs analyzer resid=5558 in=1554660 17/19
+PASS independent generic pooled residual matches analyzer — ind resid=13023 in=11939861 38/40 vs analyzer resid=13023 in=11939861 38/40
+PASS independent dried pooled residual matches analyzer — ind driedResid=10047 transPost=3364094 vs analyzer driedResid=10047 transPost=3364094
+PASS independent boundary named pooled residual matches analyzer — indB resid=8 in=1554660 19/19 vs analyzer resid=8 in=1554660 19/19
+PASS independent boundary generic pooled residual matches analyzer — indB resid=3218 in=11939861 38/40 vs analyzer resid=3218 in=11939861 38/40
+PASS independent boundary dried pooled residual matches analyzer — indB driedResid=-17816 transPost=3364094 vs analyzer driedResid=-17816 transPost=3364094
+PASS independent raiddor named pooled residual matches analyzer — indR resid=8 in=1554660 19/19 vs analyzer resid=8 in=1554660 19/19
+PASS independent raiddor generic pooled residual matches analyzer — indR resid=4452 in=11939861 38/40 vs analyzer resid=4452 in=11939861 38/40
+PASS independent raiddor dried pooled residual matches analyzer — indR driedResid=-16582 transPost=3364094 vs analyzer driedResid=-16582 transPost=3364094
+INFO raiddor legs: leg1=true leg2=true leg3r=true leg4r=true leg5r=true => verdict=GO
+INFO boundary legs (control): leg3b=true leg4b=true leg5b=true
+INFO old-boundary legs (control): leg3=true leg4=true leg5=true => verdict=GO
+PASS verdict follows from legs — verdict=GO (judged in evidence file, not asserted GO here; on a 1-seed judged corpus leg2 coverage is not applicable — the raidday100 GO is the day-100 exercise in section 3d)
+FAIL judged corpus contains a surviving day-100 raid seed (lastSnapDay == 100 with a raid dated == 100) — day100 seeds: none
+FAIL day-100 raid touches at least one focal family-seed row — none
+FAIL touched focal rows close WITH the post-snapshot adjustment (within 1%) — none
+PASS WITHOUT the adjustment every focal row is off by exactly its day-100 raid amount (total + dried) — all focal rows checked; touched: 
+INFO day-100 exercise: day100Seeds=[] touchedFocal=[]
+PASS stockdoor invariant holds (spoilDay = vDay + 3, name Foraged food)
+PASS event-take retMismatch count is 0 — 0 mismatches
+PASS no direct record claims an unknown path — none
+PASS raid record item sums equal returned kcal (retMismatch 0) — 0 mismatches
+PASS no raid record claims an unknown path or wrong caller — none
+PASS raid door disjoint from direct door (no shared day/name/spoilDay/units tuple) — none
+INFO trajectory vs driedpath corpus (base moved — observation, not verdict input): 
+INFO control OLD-definition pooled on this head: resid=10153140 inflow=3033908 share=3.346555004304679 driedShare=0.07808461951419907 (driedpath corpus: pooled 90.42% / dried 8.78%)
+PASS zero src/js files modified — none
+PASS zero sibling capture files modified — none
+PASS no modified tracked file outside this run's own files — none
+INFO git diff vs HEAD (uncommitted): (none — all committed)
+PROOF FAILED: 4 failure(s)
