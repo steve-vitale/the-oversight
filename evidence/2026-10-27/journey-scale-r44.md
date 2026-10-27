@@ -170,4 +170,9 @@ into a number.
   the two r43 open items instead of burning four identical seeds.
 
 ## LANDING STATUS
-- (pending)
+MERGED LOCALLY, PENDING SHIP. Commit a37e31c34 (journey-scale r44, 18 files)
+merged --ff-only to master (master unmoved during the run — no rebase needed;
+base 2097f7f04 still the tip at merge time). This note's landing edit is a
+second commit on the same branch, merged the same way. No version bump, no
+push — the batch ship loop owns bumps, pushes, and live verification (Vercel
+build-cost control). Rotation 3→0 written on completion; playtest lock deleted.
