@@ -287,7 +287,13 @@ const NAMED = ["Lamb's Quarters", 'Burdock', 'Muscadine Grapes', 'Purslane'];
   }
   const siblingModified = diffNames.filter(n => ['scripts/inflow-capture.js', 'scripts/mealdraw-capture.js', 'scripts/spoilvol-capture.js', 'scripts/driedpath-capture.js', 'scripts/stockdoor-capture.js'].indexOf(n) >= 0);
   const allowedModified = new Set(['scripts/sweep-residualhunt-b.js', 'scripts/analyze-residualhunt-b.js', 'scripts/test-residualhunt-b.js', 'scripts/stockdoors-capture-residualhunt.js', 'scripts/trace-residualhunt-b.js', 'evidence/2026-10-27/sim-residualhunt-b.md', 'evidence/2026-10-27/sim-residualhunt-b-prereg.md']);
-  const outsideModified = diffNames.filter(n => !allowedModified.has(n));
+  let outsideModified = diffNames.filter(n => !allowedModified.has(n));
+  // Pinned-base allowance (same rule as the src/js check above): the
+  // pinned game.js is the run's base, not an outside modification.
+  if (pinBlob && outsideModified.indexOf('src/js/game.js') >= 0) {
+    const curBlob2 = execSync('git hash-object src/js/game.js', { cwd: ROOT, encoding: 'utf8' }).trim();
+    if (curBlob2 === pinBlob) outsideModified = outsideModified.filter(n => n !== 'src/js/game.js');
+  }
   check('zero src/js files modified', srcModified.length === 0, srcModified.join(',') || 'none');
   check('zero sibling capture files modified', siblingModified.length === 0, siblingModified.join(',') || 'none');
   check('no modified tracked file outside this run\'s own files', outsideModified.length === 0, outsideModified.join(',') || 'none');
