@@ -6,6 +6,11 @@ const K = require('./lib'), T = K.reporter('table-sheet-handoff');
 (async () => {
   const G = await K.load({ seed: Number(process.env.SEED || 7) }); K.newRun(G);
   const s = G.state.scholar; s.day = 100; G.state.systemArrived = true;
+  // Full seat requires national standing since the Steve 2026-10-27 ruling
+  // (sim-scalegate-a): without it deedGateReady().ok is false and there is
+  // no Table setting to hand off. Same fixture class as the
+  // test-fullseat-superset-20261014 update in that arm.
+  G.state.nationalLive = true;
   s.abilityChoices = null; s.knackChoices = null; s.relicChoices = null;
   s.integration=40;s.insideHaven=true;G.playerTile().type='haven';
   const pg=G.progState();pg.arc=4;pg.tableWaiting=true;pg.tableDone=false;pg.table={};
