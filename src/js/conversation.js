@@ -5527,6 +5527,10 @@
           // FALLBACK (journey-social 2026-10-11): a blocked goodbye must not
           // go silent — the conversation is ending either way.
           fallback: '"Right. Back to it, then."',
+          // CLOSING BEATS ARE GRAMMAR (dryfall-gap 2026-10-27, B7): the
+          // unilateral winddown line is the same goodbye beat the
+          // continuer speaks above — exempt from the run ledger like it.
+          structural: true,
         });
         const wdChoices = (typeof this.convoWinddownChoices === 'function')
           ? this.convoWinddownChoices(vid)
@@ -5610,7 +5614,7 @@
             c.traderMentioned = true;
             c.thread = 'trade'; c.depth = 0;
           }
-          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing' } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : { foreign: hb.foreign });
+          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing', structural: true } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : hb.moodBeat ? { structural: true, foreign: hb.foreign } : { foreign: hb.foreign });
           queueTraderIntro(c);
           done(hb.text, gl);
           if (hb.winddown) {
@@ -6866,7 +6870,15 @@
       // THE WANT'S CLOSING BEAT (convo rebuild 2026-10-11): the goodbye
       // names the resolution — promised, deflected, comforted, heeded.
       // Resolved/planted/owed, never evaporated.
-      if (wantClose) this.sayLine(vid, wantClose);
+      // CLOSING BEATS ARE GRAMMAR (dryfall-gap 2026-10-27, B7): the
+      // want's closing beat, the thread close/lapse beat and the mood
+      // goodbye are all spoken at the goodbye, from small shared pools
+      // (the curious want's engaged close is a single fixed line) — the
+      // same class as the exit line above, already exempt. The run
+      // ledger was replacing these goodbyes with dry lines, which is
+      // why stalls end conversations. Content lines keep full ledger
+      // protection; only the goodbye beats are exempt here.
+      if (wantClose) this.sayLine(vid, wantClose, { structural: true });
       // WORDS ONLY GO SO FAR: talk caps at 40. Beyond that, do something real.
       // MOOD LINGERS (convo-mood.js): how the conversation felt sticks to
       // the relationship — ending warm earns a little trust, ending tense
@@ -6929,7 +6941,7 @@
         const lapseBeat = closeBeat ? null : ((typeof this.convoLapseLine === 'function') ? this.convoLapseLine(vid) : null);
         const cbeat = closeBeat || lapseBeat;
         if (cbeat) {
-          this.sayLine(vid, cbeat);
+          this.sayLine(vid, cbeat, { structural: true });
         }
       } catch (e) {}
       // (exit line already emitted via sayLine above — single emission point,
@@ -6938,7 +6950,7 @@
       try {
         const mgb = this.convoMoodGoodbye(vid);
         if (mgb) {
-          this.sayLine(vid, mgb);
+          this.sayLine(vid, mgb, { structural: true });
         }
       } catch (e) {}
       return { line, choices: [], ended: true, transcript: c.transcript.slice() };

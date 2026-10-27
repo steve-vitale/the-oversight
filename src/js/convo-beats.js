@@ -504,8 +504,13 @@
         const bridge = this.bridgeLine(vid, fromTopic);
         // REBUILD 2026-10-11: sayLine is the single emission choke point —
         // it pushes the transcript entry. The manual push above is gone.
+        // BRIDGES ARE GRAMMAR (dryfall-gap 2026-10-27, B7 layer 2): a
+        // topic-shift connector from a 2-line shared pool ("Sure — what's
+        // on your mind?" blocked 61 times in one instrumented panel) is
+        // not content — exempt from the run ledger like the other
+        // grammar beats, or every subject change after the first stalls.
         c.choosingSubject = true;
-        if (typeof this.sayLine === 'function') this.sayLine(vid, bridge, { tag: 'prompt' });
+        if (typeof this.sayLine === 'function') this.sayLine(vid, bridge, { tag: 'prompt', structural: true });
         return { line: bridge, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
       return prevTurn.call(this, vid, choiceId);

@@ -157,7 +157,11 @@
     const beat = c.moodBeat;
     c.moodBeat = null;
     c.heldBeats = c.heldBeats || [];
-    c.heldBeats.push({ text: beat });
+    // MOOD BEATS ARE GRAMMAR (dryfall-gap 2026-10-27, B7 layer 2):
+    // stage directions from 2-line pools ("Something eases in their
+    // shoulders.") — flagged here so the continuer exempts them from
+    // the run ledger like the other grammar beats.
+    c.heldBeats.push({ text: beat, moodBeat: true });
   };
 
   // convoMoodBeat: one stage direction when the temperature visibly changes.

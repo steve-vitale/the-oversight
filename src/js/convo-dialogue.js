@@ -333,7 +333,12 @@
           '"Well." A breath. "That\'s where things stand."',
           'They nod slowly, not quite done, not quite continuing.',
         ]) || '"Anyway." A small smile.';
-        this.sayLine(vid, line);
+        // DEAD-REACT FILLER IS GRAMMAR (dryfall-gap 2026-10-27, B7
+        // layer 2): a 4-line pooled filler for a dry thread, not content
+        // — exempt from the run ledger like the mood-silence and exit
+        // beats, or a second villager's dead thread stalls instead of
+        // shrugging. The per-villager cycle still spaces repeats.
+        this.sayLine(vid, line, { structural: true });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
