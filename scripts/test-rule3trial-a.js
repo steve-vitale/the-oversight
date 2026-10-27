@@ -147,7 +147,7 @@ function main() {
     console.log(`    trials baseline: ${JSON.stringify(b.trials.baseline)} armed: ${JSON.stringify(b.trials.armed)}`);
     const courtSum = (pid) => {
       let proposed = 0, counters = 0, tended = 0;
-      for (const seed of seeds) {
+      for (const seed of (b.seeds || [])) {
         const r = loadRow(seed, pid); if (!r || !r.ctxExtra) continue;
         proposed += r.ctxExtra.proposedLead || 0; counters += r.ctxExtra.courtCounters || 0; tended += r.ctxExtra.tended || 0;
       }

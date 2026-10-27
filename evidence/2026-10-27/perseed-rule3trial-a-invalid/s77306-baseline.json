@@ -1,0 +1,115 @@
+{
+ "policy": "baseline",
+ "seed": 77306,
+ "days": 36,
+ "gameDays": 36,
+ "endReason": "village-lost",
+ "won": 0,
+ "waveReach": 2,
+ "maxArc": 3,
+ "finalRank": "village",
+ "maxRank": "village",
+ "nationalEver": 0,
+ "nationalFinal": 0,
+ "table": 0,
+ "entered": 0,
+ "enteredPath": null,
+ "doorRule": null,
+ "fallbackFeared": 0,
+ "tableState": {
+  "path": null,
+  "branch": null,
+  "phase": null,
+  "seat": null
+ },
+ "tableFull": "{}",
+ "progTable": "{}",
+ "deaths": {
+  "villager:villager combat": 1,
+  "villager:combat": 2,
+  "villager:expedition": 1,
+  "villager:Sweeps Week": 1,
+  "villager:sickness": 2,
+  "villager:starvation": 3
+ },
+ "deathTotal": 10,
+ "starvationDeaths": 3,
+ "starvationDetail": [
+  {
+   "day": 32,
+   "who": "gen_9ik1ycr",
+   "cause": "starvation",
+   "player": false
+  },
+  {
+   "day": 32,
+   "who": "nadia_khoury",
+   "cause": "starvation",
+   "player": false
+  },
+  {
+   "day": 35,
+   "who": "gen_25wewg0",
+   "cause": "starvation",
+   "player": false
+  }
+ ],
+ "ts": {},
+ "dp": {},
+ "tr": {
+  "trTrials": [
+   {
+    "key": "identify:13",
+    "kind": "identify",
+    "need": 3,
+    "expires": 13,
+    "offeredDay": 10,
+    "defiance0": 0,
+    "showmanship0": 3,
+    "outcome": "expired",
+    "endDay": 15,
+    "defianceDelta": 1,
+    "showmanshipDelta": 0
+   },
+   {
+    "key": "pantry:19",
+    "kind": "pantry",
+    "need": 1000,
+    "expires": 19,
+    "offeredDay": 16,
+    "defiance0": 1,
+    "showmanship0": 5,
+    "outcome": "expired",
+    "endDay": 21,
+    "defianceDelta": 1,
+    "showmanshipDelta": 0
+   },
+   {
+    "key": "pantry:29",
+    "kind": "pantry",
+    "need": 3000,
+    "expires": 29,
+    "offeredDay": 26,
+    "defiance0": 2,
+    "showmanship0": 5,
+    "outcome": "expired",
+    "endDay": 31,
+    "defianceDelta": 1,
+    "showmanshipDelta": 0
+   }
+  ],
+  "trChaseIdentify": 4,
+  "trPantryGain": 1980,
+  "trExpired": 3,
+  "trChasePantry": 8
+ },
+ "ctxExtra": {
+  "forageTrips": 92,
+  "sorted": 5,
+  "donated": 2,
+  "donatedKcal": 1980
+ },
+ "finalPop": 10,
+ "finalPantry": 750,
+ "finalKnown": 21
+}
