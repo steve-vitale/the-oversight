@@ -1,0 +1,79 @@
+--- baseline seed 73671 ---
+  [baseline seed 73671] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=national natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=48
+--- baseline seed 73672 ---
+  [baseline seed 73672] days=180 gameDays=180 end=survived wave=4 arc=4 finalRank=regional natEver=0 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=51
+--- baseline seed 73673 ---
+  [baseline seed 73673] days=124 gameDays=124 end=village-lost wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=32
+--- baseline seed 73674 ---
+  [baseline seed 73674] days=142 gameDays=142 end=over-other wave=3 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=28
+--- baseline seed 73675 ---
+  [baseline seed 73675] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=26
+--- baseline seed 73676 ---
+  [baseline seed 73676] days=144 gameDays=144 end=over-other wave=4 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=43
+--- baseline seed 73677 ---
+  [baseline seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41
+--- baseline seed 73678 ---
+  [baseline seed 73678] days=104 gameDays=104 end=village-lost wave=3 arc=3 finalRank=regional natEver=0 natFinal=0 table=0 entered=0 won=0 starv=1 deaths=38
+--- armed seed 73671 ---
+  [armed seed 73671] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=national natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=48 ticks=179 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+--- armed seed 73672 ---
+  [armed seed 73672] days=180 gameDays=180 end=survived wave=4 arc=4 finalRank=regional natEver=0 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=51 ticks=179 seq51obs=22 seq51steps=3 windowSteps=2 unaccDrops=0
+--- armed seed 73673 ---
+  [armed seed 73673] days=124 gameDays=124 end=village-lost wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=32 ticks=123 seq51obs=1 seq51steps=0 windowSteps=0 unaccDrops=0
+--- armed seed 73674 ---
+  [armed seed 73674] days=142 gameDays=142 end=over-other wave=3 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=28 ticks=141 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+--- armed seed 73675 ---
+  [armed seed 73675] days=180 gameDays=181 end=survived wave=4 arc=3 finalRank=global natEver=1 natFinal=1 table=0 entered=0 won=0 starv=0 deaths=26 ticks=179 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+--- armed seed 73676 ---
+  [armed seed 73676] days=144 gameDays=144 end=over-other wave=4 arc=4 finalRank=national natEver=1 natFinal=1 table=1 entered=1 won=1 starv=0 deaths=43 ticks=143 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+--- armed seed 73677 ---
+  [armed seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41 ticks=151 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+--- armed seed 73678 ---
+  [armed seed 73678] days=104 gameDays=104 end=village-lost wave=3 arc=3 finalRank=regional natEver=0 natFinal=0 table=0 entered=0 won=0 starv=1 deaths=38 ticks=103 seq51obs=2 seq51steps=0 windowSteps=0 unaccDrops=0
+
+=== sim-seq51gap-a ===
+  baseline: n=8 won=2 medD=152 natEver=6 natFinal=5 table=4 entered=2 wave4=6 wave5=0 starv=1 deaths=307
+  armed:    n=8 won=2 medD=152 natEver=6 natFinal=5 table=4 entered=2 wave4=6 wave5=0 starv=1 deaths=307
+  rebaseline vs 1920Z: EXACT
+  G2 recorder neutrality: PASS (8/8; faced 8/8, kills 8/8)
+  corpus: PASS; costBar starvationOk=true medianOk=true
+  seed 73671: field4=3 waveField4=3 match=true tbInits4=2 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs=38,40,41,42 unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73672: field4=5 waveField4=5 match=true tbInits4=2 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs=43,44,48,51,59,60,62,63 unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73673: field4=2 waveField4=2 match=true tbInits4=6 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs=44,45,47,48,50 unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73674: field4=0 waveField4=0 match=true tbInits4=0 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs= unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73675: field4=1 waveField4=1 match=true tbInits4=1 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs=26,27,28,29,30,31,32 unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73676: field4=0 waveField4=0 match=true tbInits4=1 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs=41,42 unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73677: field4=1 waveField4=1 match=true tbInits4=1 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs=31,32,33,34,35,37,38 unaccDrops=0 unaccRises=0 w4kills=0
+  seed 73678: field4=0 waveField4=0 match=true tbInits4=0 unjoined=0 diagErrs=0 overflow=0 sumFail=0 seqs= unaccDrops=0 unaccRises=0 w4kills=0
+  TARGET 73672 seq51 window d143-d148: daysPresent=[143,144,145,146,147,148] complete=true
+    window step field-start d143 823 -> field-end d143 799 (-24) C1-field-fight :: field end d143 influencer visjoin_119 dmg=24 outcome=vFlee; start 823 (a.kind=field-start)
+    window step tick d144 799 -> tick d145 586 (-213) C2-palisade-wall :: lastRaidDay 136 -> 144 (raid day 144); post-wall HP 586 == b.hp (wall 213, a.hp 799); havenTier 3; lingering false -> true lingerSince 144; tile at next tick 3,2 (post-wander drift, not the dawn pin)
+  TARGET full seq51 obs (d131-d150):
+    obs d131 tick hp=850 maxHp=850 tile=3,4 ling=false raidDay=120 tier=3
+    obs d132 tick hp=850 maxHp=850 tile=2,4 ling=false raidDay=120 tier=3
+    obs d133 tick hp=850 maxHp=850 tile=2,4 ling=false raidDay=120 tier=3
+    obs d134 tick hp=850 maxHp=850 tile=3,4 ling=false raidDay=133 tier=3
+    obs d135 tick hp=850 maxHp=850 tile=5,5 ling=false raidDay=133 tier=3
+    obs d136 tick hp=850 maxHp=850 tile=7,4 ling=false raidDay=133 tier=3
+    obs d137 tick hp=850 maxHp=850 tile=6,4 ling=false raidDay=136 tier=3
+    obs d138 tick hp=850 maxHp=850 tile=5,4 ling=false raidDay=136 tier=3
+    obs d139 field-start hp=850 maxHp=850 tile=undefined,undefined ling=undefined raidDay=undefined tier=undefined
+    obs d139 field-end hp=823 maxHp=850 tile=undefined,undefined ling=undefined raidDay=undefined tier=undefined
+    obs d139 tick hp=823 maxHp=850 tile=5,3 ling=false raidDay=136 tier=3
+    obs d140 tick hp=823 maxHp=850 tile=5,4 ling=false raidDay=136 tier=3
+    obs d141 tick hp=823 maxHp=850 tile=5,5 ling=false raidDay=136 tier=3
+    obs d142 tick hp=823 maxHp=850 tile=5,5 ling=false raidDay=136 tier=3
+    obs d143 field-start hp=823 maxHp=850 tile=undefined,undefined ling=undefined raidDay=undefined tier=undefined
+    obs d143 field-end hp=799 maxHp=850 tile=undefined,undefined ling=undefined raidDay=undefined tier=undefined
+    obs d143 tick hp=799 maxHp=850 tile=5,5 ling=false raidDay=136 tier=3
+    obs d144 tick hp=799 maxHp=850 tile=4,5 ling=false raidDay=136 tier=3
+    obs d145 tick hp=586 maxHp=850 tile=3,2 ling=true raidDay=144 tier=3
+    obs d146 tick hp=586 maxHp=850 tile=3,3 ling=true raidDay=144 tier=3
+    obs d147 tick hp=586 maxHp=850 tile=5,5 ling=true raidDay=144 tier=3
+    obs d148 tb-start-tile hp=586 maxHp=850 tile=undefined,undefined ling=true raidDay=undefined tier=undefined
+  TARGET seq51 steps (all):
+    step field-start d139 850 -> field-end d139 823 (-27) C1-field-fight
+    step field-start d143 823 -> field-end d143 799 (-24) C1-field-fight
+    step tick d144 799 -> tick d145 586 (-213) C2-palisade-wall
+  band unaccounted: drops=0 rises=0
+  VERDICT DIAG-GO (fully-accounted) -> evidence/2026-10-27/perseed-raidtrace-a/summary.json
