@@ -568,7 +568,7 @@ and instant settlements, with no refusal rows at all.
   5ae68a0c4 (alone, before any sweep); instruments + corpus
   97f64c1b (22 files: recorder, sweep, validator, sense,
   16 corpus rows + summary + sense replay); evidence
-  TO-FILL-EVIDENCE-HASH (this file, after the sweep).
+  716b6c9bdf0e3f044a8f62dc2534e799d19a9844 (this file, after the sweep).
 
 ## METRIC REVIEW (§14 — binding, no mid-run re-scores)
 
