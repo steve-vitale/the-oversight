@@ -1,0 +1,32 @@
+
+ORGANIC DEATH d8: Evelyn -> Elena, topTrust=[{"id":"Asher","t":38},{"id":"Sofia","t":32},{"id":"Elena","t":24},{"id":"Henry","t":21}]
+PARITY readable=true equal=false inherited=[] pre=["green_whisper"] post=["green_whisper","survivor"]
+DEATH d8 (organic (phase A)): Evelyn -> Elena | passed=true lin=true mo=true trust=24 vouchers=0
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Asher (refused=false)
+  CONVO d+3 with Sofia (refused=false)
+  CONVO d+7 with Asher (refused=false)
+  CONVO d+7 with Michael (refused=false)
+  CONVO d+14 with Michael (refused=false)
+  CONVO d+14 with Asher (refused=false)
+  CONVO d+30 with Michael (refused=false)
+  CONVO d+30 with Asher (refused=false)
+  CONVO d+45 with Michael (refused=false)
+  CONVO d+45 with Asher (refused=false)
+
+FUNERAL: deathBeat=2 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=45 signals={"levelUp":true,"systemVoice":68,"offerLines":55,"codexPlantsDelta":13,"codexSkillsDelta":8,"codexAbilitiesDelta":13,"xpDelta":71,"any":true} pantry 31940->95500
+TRUST-DIALS: office 24->61 (+37, climb) | villageMean 21.1->82 (+60.9, climb) | ge60 0->9 | movers>=5: [{"id":"Imani","from":14,"to":90,"delta":76},{"id":"Hassan","from":17,"to":90,"delta":73},{"id":"Michael","from":18,"to":90,"delta":72},{"id":"Marcus","from":18,"to":88,"delta":70},{"id":"Anna","from":20,"to":89,"delta":69},{"id":"Sofia","from":32,"to":90,"delta":58},{"id":"Henry","from":21,"to":76,"delta":55},{"id":"Asher","from":38,"to":90,"delta":52},{"id":"Rafael","from":16,"to":66,"delta":50},{"id":"Meera","from":17,"to":51,"delta":34}]
+DEED-LEDGER: calls=31 summary={"teachPlant":{"calls":23,"ok":23,"deltaSum":0,"deltaN":23,"positive":0,"meanDelta":0},"donateToPantry":{"calls":8,"ok":8,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=53 alive=11 over=false
+anomalies: 0
+S-METRICS: s1=true s2=false s3=true s4=true s5=true dayAdv=45
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+45) t2=true(deedCalls=31) trustVerdict={"readable":true,"officeMantle":24,"officeLast":61,"officeDelta":37,"officeClass":"climb","villageMantle":21.1,"villageLast":82,"villageDelta":60.9,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":9,"movers":[{"id":"Imani","from":14,"to":90,"delta":76},{"id":"Hassan","from":17,"to":90,"delta":73},{"id":"Michael","from":18,"to":90,"delta":72},{"id":"Marcus","from":18,"to":88,"delta":70},{"id":"Anna","from":20,"to":89,"delta":69},{"id":"Sofia","from":32,"to":90,"delta":58},{"id":"Henry","from":21,"to":76,"delta":55},{"id":"Asher","from":38,"to":90,"delta":52},{"id":"Rafael","from":16,"to":66,"delta":50},{"id":"Meera","from":17,"to":51,"delta":34}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":0,"trustMoves":6} callCheck={"dailyMoveDays":6,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=2, excludedLoot=1))
+E7/R47: e7={"trustMoves":6,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":46,"moves":6}
