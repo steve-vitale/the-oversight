@@ -383,6 +383,11 @@ counter-case, repeated).
   scripts. (The r56 run itself died during its own check-quick
   run at 10:55 UTC with only a truncated log; this result is
   the adoption run's post-rebase re-run, not the dead run's.)
+  Second rebase (sibling landing 043a3dec5 forced a rebase
+  before the merge): re-ran check-quick, 278 passed, 9 failed
+  in 352s, same 9 scripts in the same order (runtimes only
+  differ), and the analyzer + telemetry re-runs stayed
+  identical — the final profile on the merged base.
 
 ## Telemetry deviation check (2026-10-27)
 
