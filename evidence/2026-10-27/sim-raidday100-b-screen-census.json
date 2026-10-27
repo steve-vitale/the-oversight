@@ -1,0 +1,2424 @@
+{
+ "arm": "sim-raidday100-b",
+ "screenRange": "10100-10139",
+ "screenCap": 40,
+ "screenedCount": 40,
+ "summary": {
+  "day100RaidSeeds": [],
+  "deathDayRaidSeeds": [],
+  "totalRaidRecords": 52,
+  "totalRaidKcal": 51484,
+  "seedsWithZeroRaids": [
+   10102,
+   10108,
+   10110,
+   10111,
+   10113,
+   10115,
+   10120,
+   10121,
+   10126,
+   10130,
+   10131,
+   10137,
+   10138,
+   10139
+  ],
+  "maxRaidDay": 99,
+  "raidDaysSorted": [
+   16,
+   21,
+   22,
+   29,
+   36,
+   41,
+   42,
+   45,
+   46,
+   47,
+   49,
+   50,
+   51,
+   53,
+   55,
+   58,
+   59,
+   60,
+   61,
+   62,
+   65,
+   66,
+   68,
+   69,
+   72,
+   73,
+   75,
+   77,
+   78,
+   79,
+   80,
+   81,
+   83,
+   84,
+   87,
+   91,
+   93,
+   96,
+   97,
+   99
+  ],
+  "nearestToDay100": [
+   91,
+   93,
+   96,
+   97,
+   99
+  ],
+  "national": 0,
+  "table": 0,
+  "wins": 0,
+  "wave4or5": 0,
+  "waveReachCounts": {
+   "3": 28,
+   "2": 11,
+   "1": 1
+  },
+  "medianSurvivalDays": 100.0,
+  "totalDeaths": 177,
+  "deathCauses": {
+   "ambush": 20,
+   "the arena": 78,
+   "mosquito": 1,
+   "hushpuppy": 1,
+   "a monitor lizard the size of a c": 1,
+   "monster": 18,
+   "big ugly": 1,
+   "choir toad": 2,
+   "sickness": 15,
+   "combat": 2,
+   "starvation": 10,
+   "a wound that wouldn't close": 12,
+   "contest": 8,
+   "lockjaw": 1,
+   "the heckler": 1,
+   "dehydration": 3,
+   "grief counselor": 1,
+   "the loud beast": 1,
+   "the expedition": 1
+  },
+  "survivedTo100": 39
+ },
+ "policies": "competent-nofeast (COMPETENT_FEAST=0, SEATDRIVE=0, PLENTYDEPRI=0, DEPOSITGATE=1, FEASTSCALE_R13 off)",
+ "base": "current master HEAD at screen time 6ae5049d88d6c22192489dca51a5160d90606daf (no pin)",
+ "instrument": "scripts/sweep-raidday100-b.js + scripts/stockdoors-capture-raidday100.js (vendored from raiddor)",
+ "screenCorpusDir": "evidence/2026-10-27/sim-raidday100-b-screen-corpus/",
+ "note": "Screening only: these seeds are spent-but-unjudged. No judged sweep exists because no day-100 raid was found; a later arm must not re-spend 10100-10139 blind, and must not cite screen trajectories as judged.",
+ "seeds": [
+  {
+   "seed": 10100,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 7,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 5,
+    "mosquito": 1
+   },
+   "raidRecords": [
+    {
+     "day": 36,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 36,
+     "line": "\ud83c\udf19 You weren't at the treeline. Andre of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10101,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "the arena": 3
+   },
+   "raidRecords": [
+    {
+     "day": 16,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 81,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 16,
+     "line": "\ud83c\udf19 You weren't at the treeline. Tariq of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 81,
+     "line": "\ud83c\udf19 You weren't at the treeline. Grace of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10102,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "hushpuppy": 1,
+    "the arena": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10103,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "the arena": 4,
+    "ambush": 1
+   },
+   "raidRecords": [
+    {
+     "day": 84,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 84,
+     "line": "\ud83c\udf19 You weren't at the treeline. Mei of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10104,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 7,
+   "deathCauses": {
+    "a monitor lizard the size of a c": 1,
+    "the arena": 6
+   },
+   "raidRecords": [
+    {
+     "day": 29,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 45,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 29,
+     "line": "\ud83c\udf19 You weren't at the treeline. Ben of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 45,
+     "line": "\ud83c\udf19 You weren't at the treeline. Ben of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10105,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "ambush": 2,
+    "monster": 1,
+    "big ugly": 1,
+    "the arena": 1
+   },
+   "raidRecords": [
+    {
+     "day": 49,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 820,
+     "totalKcal": 820,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 2,
+       "kcalEach": 250,
+       "kcal": 500,
+       "spoilDay": 366,
+       "foodState": null
+      },
+      {
+       "name": "Foraged food (dried)",
+       "units": 2,
+       "kcalEach": 160,
+       "kcal": 320,
+       "spoilDay": 60,
+       "foodState": "preserved"
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 49,
+     "line": "\ud83c\udf19 You weren't at the treeline. Felix of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 820 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10106,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "the arena": 2,
+    "choir toad": 1
+   },
+   "raidRecords": [
+    {
+     "day": 62,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 96,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 62,
+     "line": "\ud83c\udf19 You weren't at the treeline. Darius of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 96,
+     "line": "\ud83c\udf19 You weren't at the treeline. Andre of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10107,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 3,
+    "monster": 1
+   },
+   "raidRecords": [
+    {
+     "day": 61,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 61,
+     "line": "\ud83c\udf19 You weren't at the treeline. Amara of The Hungry Road didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10108,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "sickness": 1,
+    "the arena": 3,
+    "combat": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10109,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 1,
+    "sickness": 1
+   },
+   "raidRecords": [
+    {
+     "day": 99,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 99,
+     "line": "\ud83c\udf19 You weren't at the treeline. Dmitri of The Bloodied didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10110,
+   "daysAlive": 24,
+   "endReason": "village-lost",
+   "lastSnapDay": 24,
+   "spoilDaysCount": 24,
+   "waveReach": [
+    1
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 6,
+   "deathCauses": {
+    "sickness": 2,
+    "the arena": 1,
+    "starvation": 3
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10111,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "monster": 1,
+    "ambush": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10112,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 9,
+   "deathCauses": {
+    "ambush": 1,
+    "a wound that wouldn't close": 3,
+    "the arena": 3,
+    "contest": 1,
+    "monster": 1
+   },
+   "raidRecords": [
+    {
+     "day": 55,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 83,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 55,
+     "line": "\ud83c\udf19 You weren't at the treeline. Zoe of The Bloodied didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 83,
+     "line": "\ud83c\udf19 You weren't at the treeline. Theo of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10113,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "sickness": 1,
+    "the arena": 2
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10114,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 6,
+   "deathCauses": {
+    "monster": 1,
+    "ambush": 1,
+    "the arena": 4
+   },
+   "raidRecords": [
+    {
+     "day": 97,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 97,
+     "line": "\ud83c\udf19 You weren't at the treeline. Jesse of The Red Table didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10115,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 3,
+    "contest": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10116,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "a wound that wouldn't close": 1,
+    "the arena": 1
+   },
+   "raidRecords": [
+    {
+     "day": 49,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 49,
+     "line": "\ud83c\udf19 You weren't at the treeline. Zoe of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10117,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "the arena": 1,
+    "ambush": 1,
+    "a wound that wouldn't close": 1,
+    "sickness": 1,
+    "contest": 1
+   },
+   "raidRecords": [
+    {
+     "day": 55,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 87,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 55,
+     "line": "\ud83c\udf19 You weren't at the treeline. Darius of The Red Table didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 87,
+     "line": "\ud83c\udf19 You weren't at the treeline. June of Thornfield didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10118,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 1,
+    "sickness": 1
+   },
+   "raidRecords": [
+    {
+     "day": 41,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 58,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 77,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 87,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 910,
+     "totalKcal": 910,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 3,
+       "kcalEach": 250,
+       "kcal": 750,
+       "spoilDay": 366,
+       "foodState": null
+      },
+      {
+       "name": "Foraged food (dried)",
+       "units": 1,
+       "kcalEach": 160,
+       "kcal": 160,
+       "spoilDay": 102,
+       "foodState": "preserved"
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 41,
+     "line": "\ud83c\udf19 You weren't at the treeline. Omar of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 58,
+     "line": "\ud83c\udf19 You weren't at the treeline. Omar of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 77,
+     "line": "\ud83c\udf19 You weren't at the treeline. Talia of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 87,
+     "line": "\ud83c\udf19 You weren't at the treeline. Darius of The Bloodied II didn't wait \u2014 they hit the stores and melted back into the dark with 910 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10119,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "the arena": 1,
+    "monster": 2
+   },
+   "raidRecords": [
+    {
+     "day": 55,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 91,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 55,
+     "line": "\ud83c\udf19 You weren't at the treeline. Ines of Thornfield didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 91,
+     "line": "\ud83c\udf19 You weren't at the treeline. Felix of The Red Table II didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10120,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 1,
+   "deathCauses": {
+    "the arena": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10121,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 2,
+    "lockjaw": 1,
+    "the heckler": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10122,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "monster": 1,
+    "the arena": 2,
+    "contest": 1
+   },
+   "raidRecords": [
+    {
+     "day": 72,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 78,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 72,
+     "line": "\ud83c\udf19 You weren't at the treeline. Omar of Thornfield didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 78,
+     "line": "\ud83c\udf19 You weren't at the treeline. Andre of The Red Table didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10123,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 1,
+   "deathCauses": {
+    "ambush": 1
+   },
+   "raidRecords": [
+    {
+     "day": 80,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 80,
+     "line": "\ud83c\udf19 You weren't at the treeline. Victor of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10124,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "sickness": 1,
+    "ambush": 1,
+    "dehydration": 1,
+    "a wound that wouldn't close": 1,
+    "the arena": 1
+   },
+   "raidRecords": [
+    {
+     "day": 50,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 50,
+     "line": "\ud83c\udf19 You weren't at the treeline. Peter of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10125,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "the arena": 2,
+    "sickness": 1
+   },
+   "raidRecords": [
+    {
+     "day": 49,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 59,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 910,
+     "totalKcal": 910,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 3,
+       "kcalEach": 250,
+       "kcal": 750,
+       "spoilDay": 366,
+       "foodState": null
+      },
+      {
+       "name": "Foraged food (dried)",
+       "units": 1,
+       "kcalEach": 160,
+       "kcal": 160,
+       "spoilDay": 74,
+       "foodState": "preserved"
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 49,
+     "line": "\ud83c\udf19 You weren't at the treeline. Maya of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 59,
+     "line": "\ud83c\udf19 You weren't at the treeline. June of The Red Table II didn't wait \u2014 they hit the stores and melted back into the dark with 910 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10126,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 6,
+   "deathCauses": {
+    "ambush": 1,
+    "choir toad": 1,
+    "a wound that wouldn't close": 1,
+    "starvation": 1,
+    "the arena": 2
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10127,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 6,
+   "deathCauses": {
+    "dehydration": 1,
+    "the arena": 2,
+    "ambush": 1,
+    "monster": 2
+   },
+   "raidRecords": [
+    {
+     "day": 55,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 65,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 55,
+     "line": "\ud83c\udf19 You weren't at the treeline. Rosa of The Red Table didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 65,
+     "line": "\ud83c\udf19 You weren't at the treeline. Fatima of Thornfield didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10128,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 1
+   },
+   "raidRecords": [
+    {
+     "day": 22,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 60,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 79,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 22,
+     "line": "\ud83c\udf19 You weren't at the treeline. Marcus of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 60,
+     "line": "\ud83c\udf19 You weren't at the treeline. Marcus of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 79,
+     "line": "\ud83c\udf19 You weren't at the treeline. Lena of The Hungry Road didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10129,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 6,
+   "deathCauses": {
+    "the arena": 1,
+    "sickness": 2,
+    "a wound that wouldn't close": 2,
+    "contest": 1
+   },
+   "raidRecords": [
+    {
+     "day": 21,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 68,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 84,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 844,
+     "totalKcal": 844,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 1,
+       "kcalEach": 250,
+       "kcal": 250,
+       "spoilDay": 366,
+       "foodState": null
+      },
+      {
+       "name": "Foraged food (dried)",
+       "units": 3,
+       "kcalEach": 198,
+       "kcal": 594,
+       "spoilDay": 112,
+       "foodState": "preserved"
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 21,
+     "line": "\ud83c\udf19 You weren't at the treeline. Priya of Thornfield didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 68,
+     "line": "\ud83c\udf19 You weren't at the treeline. Andre of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 84,
+     "line": "\ud83c\udf19 You weren't at the treeline. Andre of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 844 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10130,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "ambush": 1,
+    "starvation": 1,
+    "the arena": 3
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10131,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "the arena": 1,
+    "monster": 1,
+    "contest": 1,
+    "grief counselor": 1,
+    "sickness": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10132,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 1,
+    "the arena": 1,
+    "a wound that wouldn't close": 1
+   },
+   "raidRecords": [
+    {
+     "day": 69,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 73,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 75,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 69,
+     "line": "\ud83c\udf19 You weren't at the treeline. Sofia of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 73,
+     "line": "\ud83c\udf19 You weren't at the treeline. Yuki of The Bloodied didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 75,
+     "line": "\ud83c\udf19 You weren't at the treeline. Zoe of The Red Table didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10133,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 2,
+    "a wound that wouldn't close": 1,
+    "contest": 1
+   },
+   "raidRecords": [
+    {
+     "day": 65,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 69,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 73,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 65,
+     "line": "\ud83c\udf19 You weren't at the treeline. Maya of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 69,
+     "line": "\ud83c\udf19 You weren't at the treeline. Sofia of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 73,
+     "line": "\ud83c\udf19 You weren't at the treeline. Peter of The Bloodied II didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10134,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "monster": 1,
+    "the arena": 1
+   },
+   "raidRecords": [
+    {
+     "day": 46,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 53,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 93,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 96,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 46,
+     "line": "\ud83c\udf19 You weren't at the treeline. Omar of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 53,
+     "line": "\ud83c\udf19 You weren't at the treeline. Dmitri of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 93,
+     "line": "\ud83c\udf19 You weren't at the treeline. Dmitri of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 96,
+     "line": "\ud83c\udf19 You weren't at the treeline. Omar of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10135,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "sickness": 1,
+    "combat": 1,
+    "monster": 1
+   },
+   "raidRecords": [
+    {
+     "day": 66,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 66,
+     "line": "\ud83c\udf19 You weren't at the treeline. Maya of Emberhold didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10136,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "ambush": 1,
+    "the loud beast": 1
+   },
+   "raidRecords": [
+    {
+     "day": 42,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 47,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 51,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    },
+    {
+     "day": 58,
+     "caller": "villageAgencyDaily",
+     "path": "raid-unanswered",
+     "asked": 800,
+     "retTaken": 1000,
+     "totalKcal": 1000,
+     "items": [
+      {
+       "name": "Canned soup",
+       "units": 4,
+       "kcalEach": 250,
+       "kcal": 1000,
+       "spoilDay": 366,
+       "foodState": null
+      }
+     ],
+     "dayEqualsClosing": false
+    }
+   ],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": [
+    {
+     "day": 42,
+     "line": "\ud83c\udf19 You weren't at the treeline. Theo of The Red Table didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 47,
+     "line": "\ud83c\udf19 You weren't at the treeline. Marcus of Ashford didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 51,
+     "line": "\ud83c\udf19 You weren't at the treeline. Tom\u00e1s of The Bloodied didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 58,
+     "line": "\ud83c\udf19 You weren't at the treeline. Talia of Stonebridge didn't wait \u2014 they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+    }
+   ]
+  },
+  {
+   "seed": 10137,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "monster": 1,
+    "dehydration": 1,
+    "the arena": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10138,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 7,
+   "deathCauses": {
+    "the expedition": 1,
+    "monster": 1,
+    "a wound that wouldn't close": 1,
+    "starvation": 3,
+    "contest": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  },
+  {
+   "seed": 10139,
+   "daysAlive": 100,
+   "endReason": "village-lost",
+   "lastSnapDay": 99,
+   "spoilDaysCount": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 16,
+   "deathCauses": {
+    "the arena": 10,
+    "sickness": 2,
+    "ambush": 1,
+    "starvation": 2,
+    "monster": 1
+   },
+   "raidRecords": [],
+   "day100Raid": false,
+   "deathDayRaid": false,
+   "raidSayDidntWait": []
+  }
+ ]
+}
