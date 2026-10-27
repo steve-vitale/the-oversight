@@ -221,4 +221,10 @@ rolled. See metric review.
   a question for the conversation owner, not a fix from this loop.
 
 ## LANDING STATUS
-MERGE PENDING — updated after step 8.
+MERGED LOCALLY, PENDING SHIP. Commit a33fe3c74 (journey-scale r43, 69
+files) merged --ff-only to master (rebased onto 5c3c80013 mid-run after
+two sibling evidence-only landings; proof test re-run green on the
+rebased tree). This note's landing edit is a second commit on the same
+branch, merged the same way. No version bump, no push — the batch ship
+loop owns bumps, pushes, and live verification (Vercel build-cost control).
+Rotation 3→0 written on completion; playtest lock deleted.
