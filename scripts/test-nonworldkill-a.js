@@ -188,5 +188,50 @@ check('refused call adopts nothing', (() => {
   return st.starts.length === 1 && st.starts[0].refused === true && st.starts[0].fightId === null && st.ends.length === 0;
 })());
 
+// Corpus proof (run fleshout-20261027T0525Z): when EVID points at a
+// committed corpus dir with s<seed>-armed.json rows, run the analyzer
+// over the real corpus and assert the verdict fields — kill count
+// partition, channel-assignment completeness, and the non-world
+// channel count/yield. Structural assertions only: no count from a
+// prior run is baked in, so a moved base fails loudly instead of
+// passing on stale expectations. When EVID has no rows, this block
+// is skipped (unit tests above still run).
+(function corpusProof() {
+  const fs = require('fs');
+  const path = require('path');
+  const evid = process.env.EVID || '';
+  if (!evid) return;
+  const seeds = [73671, 73672, 73673, 73674, 73675, 73676, 73677, 73678];
+  const rows = [];
+  for (const s of seeds) {
+    const p = path.join(evid, `s${s}-armed.json`);
+    if (!fs.existsSync(p)) return; // corpus not present: unit-only run
+    rows.push(JSON.parse(fs.readFileSync(p, 'utf8')));
+  }
+  let bandOther = 0, bandW4 = 0, bandNullW4 = 0, bandStarts = 0;
+  let allW4Joined = true, allW4Doored = true, allW4Partitioned = true;
+  const KNOWN = ['contest-arena', 'feast-draw', 'tent-intruder', 'door-flee-reengage', 'glasswing-trap', 'world-bump', 'wanderer-pending', 'policy-direct'];
+  for (const r of rows) {
+    check(`corpus seed ${r.seed} recorder errs 0`, r.nonworldkill.diag.errs === 0);
+    check(`corpus seed ${r.seed} recorder overflow 0`, Object.values(r.nonworldkill.diag.overflow || {}).every(v => (v | 0) === 0));
+    const an = analyzeNonworldkill(r.nonworldkill);
+    bandOther += an.unclassifiedInitiations;
+    bandStarts += an.initiations;
+    for (const k of an.wave4Kills) {
+      bandW4++;
+      if (!k.startDay && k.startDay !== 0) allW4Joined = false;
+      if (!k.startArg) allW4Joined = false;
+      if (KNOWN.indexOf(k.door) < 0) allW4Doored = false;
+      if (k.origin === 'null-origin') bandNullW4++;
+      else if (k.origin !== 'world-origin' && k.origin !== 'world-origin-mismatch' && k.origin !== 'world-origin-unresolved') allW4Partitioned = false;
+    }
+  }
+  check('corpus band unclassified initiations 0', bandOther === 0, { bandOther });
+  check('corpus every wave-4 TB kill joins a start row', allW4Joined, { bandW4 });
+  check('corpus every wave-4 TB kill has a known (non-other) door', allW4Doored, { bandW4 });
+  check('corpus wave-4 kills partition by origin (null vs world-side)', allW4Partitioned, { bandW4, bandNullW4 });
+  console.log(`corpus proof: seeds=${rows.length} initiations=${bandStarts} wave4TBKills=${bandW4} nullOriginWave4Kills=${bandNullW4} unclassified=${bandOther}`);
+})();
+
 console.log(`test-nonworldkill-a: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
