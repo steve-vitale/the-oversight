@@ -1927,6 +1927,7 @@ Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
+- return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
 
 **Consumes:** village.roster, village.away, village.nodePos, village.gossip, npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds, npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
 

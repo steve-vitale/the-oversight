@@ -1,0 +1,765 @@
+Individual re-runs on restored gap-route code, sequential, one process at a time
+Started: 2026-10-27T17:18:42Z
+
+===== scripts/godpath/test-between-deed.js =====
+  ok   Between declares a completed actual escape deed
+  ok   missing history queries are pure
+  ok   old age and synergy do not substitute for escape
+  ok   opening uses the real larger monster body
+  ok   a real barrier crossing withdraws the player
+  ok   living escape earns the original persons receipt
+  ok   real load restores the immutable escape receipt
+  ok   escaping a smaller foe does not qualify
+  ok   a sealed barrier attempt cannot earn flight
+  ok   a result label without actual personal flight cannot earn a deed
+  ok   leaving an already defeated foe cannot earn escape
+  ok   the door or barrier does not credit companions left outside
+  ok   a real NPC reactive retreat is an individual escape
+  ok   sealed NPC flight is refused with no receipt
+  ok   real pre-contact evasion avoids the larger living foe
+  ok   a real field evade belongs to its NPC
+  ok   a sealed field label cannot mint an escape deed
+  ok   an already wounded opening cannot invent fresh encounter evidence
+  ok   unknown old opening maximum cannot invent a deed
+  ok   actual saved opening evidence survives Continue before the escape
+  ok   old fight without opening evidence gets no retroactive accomplishment
+  ok   actual escape and full prepared build reach the player ceremony
+  ok   old active gods need no retroactive flight
+  ok   real escape cannot bypass day80
+  ok   real escape cannot bypass the build and payoff
+  ok   known class gets its fitting objective
+  ok   unknown class does not reveal the objective
+  ok   save/load preserves the first receipt exactly
+  ok   successor cannot borrow the escaped predecessors deed
+  ok   NPC real flight and the same prepared full build reach ceremony
+  ok   a stale fighter cannot credit a dead person
+  ok   real wild withdrawal can qualify after contact
+  ok   sealed combat or judge outcome gives no flight accomplishment
+  ok   an existing corpse is no encounter to evade
+  ok   restored pre-contact wounds invalidate tactical freshness
+  ok   own real encounter damage preserves the unwounded opening
+  ok   an echoed body earns no living personal escape
+  ok   a dead bearer record cannot claim through a stale body
+  ok   receipt uses original full capacity, never current wounded capacity
+  ok   changing a fighter identity cannot transfer the opening
+  ok   an arena escape label cannot create a wild deed
+  ok   prey equal to full human capacity is insufficient
+  ok   smaller full field prey cannot qualify
+  ok   a later actual escape cannot overwrite the first receipt
+  ok   qualification reads neither write state nor draw randomness
+  ok   Continue preserves a sealed encounter and cannot create an escape
+
+between-deed: 46 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/godpath/test-between-deed.js exit=0 secs=14 -----
+
+===== scripts/godpath/test-comfort-arc.js =====
+ok first comfort engages
+ok stage2 asks for follow-through rather than asking again
+ok empathic follow-through resolves as comforted
+ok want and generic feeling menus retire all completed comfort actions
+ok other choices remain available
+comfort-empathy: 5 passed, 0 failed
+ok stale dlg:comfort has no conversation payout or exchange
+ok stale dlg:empathize has no conversation payout or exchange
+ok stale dlg:stay has no conversation payout or exchange
+comfort-stale: 3 passed, 0 failed
+ok stale opener at stage2 pays no trust or exchange
+comfort-opening-replay: 1 passed, 0 failed
+ok leaving before engagement does not complete comfort
+comfort-early-leave: 1 passed, 0 failed
+ok existing four stays still resolve comfort
+ok resolved stay retires generic empathy too
+comfort-stay: 2 passed, 0 failed
+ok honest refusal remains deflected
+ok refused comfort is not re-offered on its thread
+comfort-deflect: 2 passed, 0 failed
+ok another feeling thread can still offer comfort
+ok other-thread comfort still responds, without changing the completed want
+comfort-other-thread: 2 passed, 0 failed
+ok comfort on a different thread does not engage an unrelated want
+comfort-other-want: 1 passed, 0 failed
+ok words and goodbye still obey40 trust cap
+ok goodbye preserves comforted resolution and consumes seed
+comfort-cap-and-close: 2 passed, 0 failed
+comfort-arc: 9 passed, 0 failed (isolated cases)
+----- RESULT scripts/godpath/test-comfort-arc.js exit=0 secs=22 -----
+
+===== scripts/godpath/test-hide-discovery.js =====
+  ok   counter stock alone does not grant knowledge
+  ok   actual counter pickup teaches the existing L1 outline only
+  ok   repeat handling neither promotes nor rewrites the known outline
+  ok   an empty legacy hide cannot teach through nonexistent handling
+  ok   nonfinite hide stock cannot teach through nonexistent handling
+  ok   unrelated material does not teach hide armor
+  ok   ordinary real material acquisition teaches the same L1 outline
+  ok   public communal take has the same handling lesson
+  ok   actual single corpse take still teaches after its source is emptied
+  ok   actual batch corpse take still teaches after its source is emptied
+  ok   legacy corpse take also teaches for the one real unit transferred
+  ok   legacy looting cannot take or learn from explicit empty hide
+  ok   legacy singleton body stock is consumed once without becoming NaN loot
+  ok   handling never downgrades or bypasses existing higher knowledge
+  ok   direct pack butchering teaches when the actual hide reaches hands
+  ok   real specialist pack butchering follows the same handling lesson
+  FAIL counter butchering keeps material and lesson on the counter until pickup
+  ok   taking the real butchered hide completes the discovery path
+  ok   blind public trial risks actual hide and lashing supplies
+  ok   only a real successful trial advances the outline to L2
+  ok   maker handles visible spare hide then attempts its earned outline
+  ok   wrong visible lashing guess preserves stock and reveals no hidden ingredient list
+  ok   repeated upkeep cannot spam blind recipe probes
+  ok   passing days does not repeat an unchanged rejected guess
+  ok   new visible supplies permit a real funded trial without a skipped-probe cooldown
+
+hide-discovery: 24 passed, 1 failed, 0 todo (phase 0)
+failing: counter butchering keeps material and lesson on the counter until pickup
+----- RESULT scripts/godpath/test-hide-discovery.js exit=1 secs=3 -----
+
+===== scripts/godpath/test-measurement-comparison.js =====
+  ok   the ordinary comparator still rejects changed harnesses
+  FAIL the explicit lane labels methodology and preserves all23 metric vectors
+  ok   a declared comparison does not rewrite either source identity
+  ok   omitting the declaration remains invalid
+  ok   incorrect exact source identities remain invalid
+  ok   even declared extra Game changes cannot use the harness-only lane
+  ok   different horizons cannot hide behind a harness declaration
+  ok   incomplete observations cannot be interpreted as a harness effect
+  ok   policy experiments retain their own explicit label and all23 metrics
+  ok   a policy declaration cannot admit a changed harness
+  ok   ordinary Game-only scoring still rejects declared policy changes
+  ok   ordinary calendar windows still reject changed methodology
+/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:46
+  if (validity.decision === 'invalid') throw Error(validity.errors.join('; '));
+                                       ^
+
+Error: Metric contract does not match this comparator; Policy/harness changed: scripts/sim-harness.js
+    at summarizeValidated (/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:46:46)
+    at Object.summarizeHarnessRevision (/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:40:10)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-measurement-comparison.js:5:1161)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+----- RESULT scripts/godpath/test-measurement-comparison.js exit=1 secs=7 -----
+
+===== scripts/godpath/test-measurement-driver.js =====
+  ok   explicit region reaches the actual newly started expedition
+  ok   explicit origin reaches the actual expedition home origin
+  ok   driver setup does not choose the idle controller opening
+  ok   configuration support is declared for external collectors
+  ok   a separate actual startup rejects an unplayable region
+  ok   importing the seed-list module does not start a simulation
+
+measurement driver configuration: 6 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/godpath/test-measurement-driver.js exit=0 secs=5 -----
+
+===== scripts/godpath/test-measurement-proof-update.js =====
+/home/hatch/workspace/worktrees/gap-route/scripts/balance-proof-update.js:8
+ if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Proof source inputs are not current');
+                                                                     ^
+
+Error: Proof source inputs are not current
+    at Object.validate (/home/hatch/workspace/worktrees/gap-route/scripts/balance-proof-update.js:8:76)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-measurement-proof-update.js:4:40)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+----- RESULT scripts/godpath/test-measurement-proof-update.js exit=1 secs=4 -----
+
+===== scripts/godpath/test-measurement-workflow.js =====
+  ok   metric IDs are unique and every contract declares units, direction and tolerance
+  ok   sampling and confirmation settings remain valid
+  ok   retained real panel matches its proof digest
+  FAIL retained neutrality proof covers the current Game/controller/harness inputs
+  FAIL proof declares every collector and contract input rather than silently omitting one
+  FAIL collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+  FAIL every retained real observation emits exactly the contracted metrics, with explicit unknowns
+  ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+  ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+
+measurement-workflow: 5 passed, 4 failed, 0 todo (phase 0)
+failing: retained neutrality proof covers the current Game/controller/harness inputs | proof declares every collector and contract input rather than silently omitting one | collector and contract have a current proof (see SIMULATING.md: Maintaining measurement) | every retained real observation emits exactly the contracted metrics, with explicit unknowns
+----- RESULT scripts/godpath/test-measurement-workflow.js exit=1 secs=3 -----
+
+===== scripts/godpath/test-occupation-panels.js =====
+Error: node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module './lib/luck-instrument'
+Require stack:
+- /tmp/oversight-cohort-r1fsbu/observer/scripts/balance-panel.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/tmp/oversight-cohort-r1fsbu/observer/scripts/balance-panel.js:5:140)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/tmp/oversight-cohort-r1fsbu/observer/scripts/balance-panel.js' ]
+}
+
+Node.js v24.22.1
+
+    at run (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-occupation-panels.js:15:25)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-occupation-panels.js:17:14)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  FAIL real CLI workflow completed
+
+occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+failing: real CLI workflow completed
+----- RESULT scripts/godpath/test-occupation-panels.js exit=1 secs=1 -----
+
+===== scripts/godpath/test-mobile-combat-cadence.js =====
+  ok   Wait accepts zero movement with unused action
+  FAIL enemy is announced before its action runs
+  ok   announcement leaves a real browser task before resolution
+  ok   exactly one enemy action resolves before hand-back
+  ok   resolved board gets its own presentation event
+  ok   player returns with usable action and fresh movement
+  ok   hand-back follows resolution
+  ok   superseded announcement cannot perform a stale enemy action
+  ok   save retains the announced but unresolved actor
+  ok   Continue resolves the pending enemy exactly once
+  FAIL Continue does not wrap the announced round a second time
+  ok   Continue hands control back with fresh player inputs
+  ok   enemy-phase endings publish the terminal state to the browser
+  ok   faster opening enemy is announced before acting
+  ok   each faster opening enemy acts once before usable player controls
+
+mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+----- RESULT scripts/godpath/test-mobile-combat-cadence.js exit=1 secs=1 -----
+
+===== scripts/godpath/test-measurement-cache-flags.js =====
+  ok   both actual CLI configurations complete valid neutral panels
+  ok   two flags create four independent observer-on/off cache entries
+  ok   cache identities retain each actual SIMOPT value
+  ok   repeating the same setting reuses its two verified cases
+
+measurement cache flag isolation: 4 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/godpath/test-measurement-cache-flags.js exit=0 secs=20 -----
+
+===== scripts/godpath/test-phone-frame-proof.js =====
+  ok   both actual target phone sizes are retained
+  FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/abilityActions.js,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/carexplore.js,src/js/codex-people.js,src/js/comms.js,src/js/contests.js,src/js/conversation.js,src/js/convo-beats.js,src/js/convo-dialogue.js,src/js/convo-wants.js,src/js/convoTopics.js,src/js/corpses.js,src/js/corruption.js,src/js/encounters.js,src/js/engine/state.js,src/js/fieldFights.js,src/js/food.js,src/js/game.js,src/js/havenGrowth.js,src/js/hierarchy.js,src/js/journal.js,src/js/justice.js,src/js/ledger.js,src/js/lifeseed.js,src/js/metaProgression.js,src/js/party-formal.js,src/js/party.js,src/js/perceive.js,src/js/progression.js,src/js/safetynets.js,src/js/scaleDiscovery.js,src/js/skill-teaching.js,src/js/spawn-knack.js,src/js/standing.js,src/js/statusEffects.js,src/js/storage.js,src/js/table-witness.js,src/js/table.js,src/js/telemetry-hooks.js,src/js/titans.js,src/js/truth.js,src/js/villageAgency.js,src/js/villager-agency.js,src/js/villager-build.js,src/js/villager-objectives.js
+  FAIL all current boot inputs are covered
+  ok   receipt identity declares portable text normalization
+  ok   retained receipt hash 736
+  FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+
+Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+----- RESULT scripts/godpath/test-phone-frame-proof.js exit=1 secs=1 -----
+
+===== scripts/godpath/test-phase-shawl.js =====
+  ok   authored effect is exactly 25 percent and a shared accessory
+  ok   carried gear does not protect or draw
+  ok   actual Wear moves the existing item into acc1
+  ok   wearing does not reveal the hidden effect early
+  ok   below quarter phases a real incoming hit
+  ok   actual successful use reveals the player item
+  ok   quarter boundary lets the full hit through
+  ok   duplicates do not multiply the probability or draws
+  ok   zero and healing draw nothing
+  ok   full accessory slots refuse without replacing gear
+  ok   actual player world damage can phase
+  ok   actual player world failure applies damage
+  ok   actual NPC world damage uses its own worn item
+  ok   NPC failure has the same boundary
+  ok   an NPC cannot borrow the bearer shawl
+  ok   unavoidable tactical hit phases with honest zero return
+  ok   failed tactical phase returns actual damage
+  ok   resolved damage is applied without a second phase roll
+[gear] stale or mismatched damage settlement
+  ok   resolved damage cannot be applied twice
+[gear] stale or mismatched damage settlement
+  ok   another person cannot consume a settlement
+[gear] stale or mismatched damage settlement
+  ok   wrong amount cannot consume a settlement
+  ok   failed mismatches leave the real settlement available
+[gear] stale or mismatched damage settlement
+  ok   a copied result cannot forge a settlement
+[gear] stale or mismatched damage settlement
+  ok   Continue invalidates a previous state result
+  ok   actual Continue preserves worn gear
+  ok   saved worn effect remains live
+  ok   taking it off removes the protection
+  ok   real field hits use NPC worn gear before outcomes
+  ok   real unphased field hits accumulate actual damage
+  ok   a real field result settles without another chance
+  ok   actual duel uses its deterministic stream, not global RNG
+  ok   unchanged duel inputs replay exactly even with worn phases
+  ok   actual duel settles each persons resolved damage exactly once
+  ok   real seeded duel hits exercise the worn avoidance branch
+  ok   player alias phases against the canonical bearer pool and updates its mirror
+  ok   zero incoming damage still synchronizes the bearer mirror
+  ok   an unworn player alias takes honest canonical damage
+  ok   actual NPC tactical damage phases using its own worn item
+  ok   an echoed body cannot borrow a living persons gear
+  ok   a mismatched actual body cannot borrow the bearer gear
+  ok   a stale fallen body cannot phase damage
+  ok   real gavel field signature phases before local outcomes
+  ok   real focus_group field signature phases before local outcomes
+  ok   overnight hunger and thirst are two separate incoming hits
+  ok   phasing overnight HP preserves food water energy and hunger costs
+  ok   phased hunger narration does not claim lost health
+  ok   unprotected overnight thirst still has its actual lethal cause
+  ok   unprotected overnight hunger keeps actual lethal cause
+  ok   real player poison tick phases without curing or freezing duration
+  ok   carried shawl cannot avoid a real poison tick
+  ok   real lockjaw tick and spasm phase separately
+  ok   real heatstroke still drains hydration while its HP tick phases
+  ok   real NPC fighter bleed phases using its own equipped gear
+  ok   monster status cannot borrow another persons shawl
+  ok   actual endDay routes both metabolic hits through equipped protection
+  ok   actual first corpse stack phases illness and still transfers loot with trauma
+  ok   another stack from the same corpse cannot reroll first-touch illness
+  ok   carried shawl leaves actual corpse illness damage intact
+  ok   corpse illness phase keeps actual tactical and scholar pools synchronized
+  ok   unphased first-touch illness reaches the actual fighter too
+  ok   actual burial can phase illness while retaining burial trauma and time
+  ok   unworn actual burial still loses its authored illness HP
+  ok   legacy actual corpse loot reports zero actual HP lost when phased
+  ok   actual counter illness phases but eating still consumes the bite and time
+  ok   unworn actual counter bite loses exactly its authored HP
+  ok   real shellgut immunity skips illness without inventing a worn phase
+  ok   actual world avoidance describes harm without inventing a blow
+  ok   real endDay extreme weather checks the NPCs own worn gear
+  ok   same actual cold dawn still damages an unprotected living NPC
+  ok   actual beam phase returns zero and preserves both player HP pools
+  ok   real tbDamage beam wrapper grants one phase and no second settlement roll
+  ok   unprotected beam prices actual fighter capacity and syncs canonical health
+  ok   actual NPC beam phases against its own worn item
+  ok   NPC beam cannot borrow bearer resistance or capacity or horror state
+  ok   NPC beam resistance uses its own canonical worn armor including ID saves
+  ok   an echoed body cannot borrow the living persons shawl or beam armor
+  ok   missing beam target returns zero without random draws or a phantom hit
+  ok   fallen beam target returns zero without draws or resurrection
+  ok   exhausted beam armor units cannot grant resistance
+  ok   actual escape nick phases while preserving aftermath and trauma
+  ok   carried shawl leaves real escape nick and wound receipt intact
+  ok   actual failed-flight catch can phase without resolving the plot early
+  ok   actual ambush return swing phases without deleting outgoing plot progress
+  ok   actual knockout HP hit phases while case and trauma still settle
+  ok   nonlethal knockout receipt records only actual HP lost at its floor
+  ok   a zero HP debit at the nonlethal floor creates no avoidance or wounds
+  ok   canonical HP method honors a supplied incoming-hit RNG instead of global luck
+  ok   explicit nonlethal floor caps the hit without a second zero-debit roll
+  ok   actual ambush HP hit stays synchronized during an active tactical fight
+  ok   actual Suburb wrapper still halves positive healing
+  ok   same Suburb wrapper forwards the incoming hit options intact
+  ok   invalid settlement controls reached explicit refusals
+
+phase-shawl: 92 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/godpath/test-phase-shawl.js exit=0 secs=18 -----
+
+===== scripts/godpath/test-solo-campaign-endings.js =====
+  ok   a recovered community retains the previously established loss
+  ok   unknown population reads cannot become measured survival
+  ok   actual engine community loss survives unknown observation coverage
+  ok   a malformed or missing current history is an observer error
+  ok   old village-dead records retain explicit historical-rule coverage
+  ok   the living solo bearer continues beyond the former ten-iteration cutoff
+  ok   the longer solo observation remains active at its explicit cap
+  ok   sustained empty-community history remains distinct from an active game
+  ok   a controlled roster-recovery fixture preserves collapse history
+  ok   a real death path without successors stops immediately at an engine ending
+  ok   real runner rows forward current stop/history and collector coverage
+  ok   passive observation preserves complete solo state, outcome and all23
+  ok   the exact solo policy/RNG/clock prefix and full cap boundary continue
+  ok   retained prefix state payloads reproduce their producer hashes
+  ok   diagnostic snapshots neither hydrate people nor initialize agency
+
+Solo campaign endings: 15 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/godpath/test-solo-campaign-endings.js exit=0 secs=8 -----
+
+===== scripts/godpath/test-time-save-crashes.js =====
+Recovered precore-request day2
+Recovered postcore-request day2
+Recovered commit-before day2
+Recovered commit-after day3
+Recovered index-before day3
+Time-save abrupt exits: 5/5 independent recovery processes passed
+----- RESULT scripts/godpath/test-time-save-crashes.js exit=0 secs=7 -----
+
+===== scripts/godpath/test-trust-observer-neutrality.js =====
+  ok   seed 11 actual full state and outcome stay exact
+  ok   seed 11 random continuation stays exact
+  ok   seed 11 samples retain monotonic exact write boundaries
+  ok   seed 42 actual full state and outcome stay exact
+  ok   seed 42 random continuation stays exact
+  ok   seed 42 samples retain monotonic exact write boundaries
+
+trust observer neutrality: 6 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/godpath/test-trust-observer-neutrality.js exit=0 secs=10 -----
+
+===== scripts/test-synergy-stall.js =====
+=== abilities held ===
+  green_whisper L1
+  lucky_rock L1
+  rage L1
+  pocket_sand L1
+  scream_cheese L1
+=== synergyAttempts ===
+{
+ "blood_tracker": 3,
+ "blood_tracker_teased_1": 1,
+ "blood_tracker_teased_2": 1,
+ "clean_kill": 3,
+ "clean_kill_teased_1": 1,
+ "clean_kill_teased_2": 1,
+ "airtight": 1,
+ "airtight_teased_1": 1
+}
+=== synergies discovered === ["blood_tracker","clean_kill"]
+=== abilityUseLog tail (last 15) ===
+  patient_aim day87 part3 
+  game_sense day88 part3 
+  patient_aim day88 part3 
+  game_sense day89 part3 
+  patient_aim day89 part3 
+  game_sense day90 part3 
+  patient_aim day90 part3 
+  game_sense day91 part3 
+  patient_aim day91 part3 
+  game_sense day92 part3 
+  patient_aim day92 part3 
+  game_sense day93 part3 
+  patient_aim day93 part3 
+  game_sense day94 part3 
+  patient_aim day94 part3 
+=== held-leg synergies with zero attempts ===
+=== ability_granted telemetry ===
+  1 green_whisper villager:gen_t3bf5ig
+  1 green_whisper villager:gen_wzgmk8a
+  1 green_whisper villager:gen_fbp7lss
+  1 night_eyes villager:gen_p5pe7yj
+  1 green_whisper villager:gen_j8r7aw6
+  1 iron_stomach villager:nina_petrova
+  1 green_whisper villager:thabo_maseko
+  1 night_eyes villager:liam_davis
+  1 night_eyes villager:aki_tanaka
+  1 green_whisper villager:emma_larsen
+  1 iron_stomach villager:marcus_webb
+  8 survivor player
+  10 beard_moss villager:gen_t3bf5ig
+  17 lucky_rock villager:aki_tanaka
+  18 villager_use gen_fbp7lss
+total ability_granted events: 72
+----- RESULT scripts/test-synergy-stall.js exit=0 secs=13 -----
+
+===== scripts/test-throttlefeast-20261014.js =====
+R1: throttle-off wrap honesty
+  PASS pristine prodThrottleEngaged is a function
+  PASS lean pantry: gate disengaged (false)
+  PASS fixture pantry is >4 fresh days (14.5)
+  PASS RED-probe: pristine gate ENGAGES on stocked pantry (true)
+  PASS OFF wrap neutralizes the gate (false)
+R2: oneRun feast-road measurement (OFF arm, 20d)
+  PASS run completed (days>0)
+  PASS throttle tag is off
+  PASS feasts is numeric
+  PASS plentyMax is numeric
+  PASS plentyFinal is numeric
+  PASS redirects is numeric
+  PASS OFF arm never redirects under the wrap (redirects===0)
+  PASS wall fields present (national/table/won/exiled)
+R3: OFF vs ON contract (20d, seed 11)
+  PASS OFF run tagged off
+  PASS ON run tagged on
+  PASS arms differ ONLY by the wrap: same policy, same seed, same days
+  PASS FEASTSCALE_R13 stayed armed across both arms
+  INFO off: feasts=0 plentyMax=0 redirects=0
+  INFO on:  feasts=0 plentyMax=0 redirects=60
+
+17 pass, 0 fail
+----- RESULT scripts/test-throttlefeast-20261014.js exit=0 secs=10 -----
+
+===== scripts/test-parity-20261014.js =====
+
+one XP scale
+  ok   player thresholds === villager thresholds === tracks.json
+  ok   no playerScale in the data
+  ok   a level is the same XP for both
+  ok   occupation lean is on the shared scale (below the first threshold, not trivially small)
+
+same deed, same XP, same cap
+  ok   foraging x3: player and villager gain the same (cap 2/day each)
+  ok   fight_won: same n for both
+  ok   the bearer's villager id credits the player
+  ok   villager cook duty credits the cooking deed (craft +1)
+
+the villager's first ability works like the player's
+  ok   every starting villager has a magic knack
+  ok   the knack is the buildScore pick of the 3 choices
+  ok   old-save skill knack is re-chosen from the magic pool and slotted
+  ok   gossip has no lines for skill ids
+
+villager level-up: 1 of 3, picked by buildScore (knowledge + technology)
+  ok   offers = the 3 unheld entries of the (pinned) strange kit, in kit order
+  ok   setup: a ranged weapon is their technology
+  ok   buildScore ranks X above the kit-order default
+  ok   crossing a threshold resolves a sheet of 3
+  ok   they picked X, not the kit-order default
+  ok   without the knowledge and the bow, X is not their pick
+  ok   without the knowledge and the bow, X scores lower
+
+knows too little: defers and seeks
+  ok   the sheet waits (no ability taken)
+  ok   they want knowledge for the sheet
+  ok   the agency picks a SEEK objective
+  ok   the seek taught them something (tele villager_seek_knowledge)
+  ok   with enough knowledge, the sheet is chosen
+  ok   after 3 days the sheet resolves anyway
+
+swap or keep (villagers, the player's rule)
+  ok   full + weak offers: KEEP (nothing changes)
+  ok   buildDecide replaces when the offer beats the weakest by > 1
+  ok   ...and the villager swapped: 6 held, the pick in, the weakest out
+  ok   kept + swapped both happen (one of each across the two setups)
+
+gear: villagers take the better weapon and it changes their fights
+  ok   the armory machete went to the villager who needed it
+  ok   their old weapon went back on the pile
+  ok   fieldFight: the armed villager leaves the beast with less HP
+
+any village death feeds the strange track — player and villagers alike
+  ok   the player gets death_in_family
+  ok   a villager gets the same
+
+the mantle: you become that villager
+  ok   the heir is the bearer
+  ok   abilities: theirs (echo_location, bloodhound) + nothing of the predecessor's
+  ok   tracks: their own XP, not the predecessor's
+  ok   their earned levels are not re-offered
+  ok   skills: their own know-how is in the Codex
+  FAIL gear: they still wear their spear and jacket — {}
+  ok   the predecessor's machete is not on them
+  ok   integration (the office) is unchanged
+  ok   the heir has no villager records left
+  ok   the mantle deed lands on the heir's own strange track
+
+save / load round trip
+  ok   save/load ok
+  ok   villager knowledge survives
+  ok   pending villager sheets survive
+  ok   knacks stay slotted (load migration idempotent)
+
+old saves migrate
+  ok   old villager XP is rescaled: level 2 stays level 2
+  ok   the migration is idempotent
+
+wired
+  ok   tracks queue villager sheets -> villagerResolveLevelUps
+  ok   objectives call villagerSeekKnowledge / villagerNeedTrack
+  ok   playerDeath calls mantleBecome
+  ok   endDay village tick calls villagerBuildDay
+  ok   knacks pick by pickVillagerKnack
+  ok   conversation teaches (npcLearnFromTalk)
+  ok   field fights teach witnesses (npcWitnessAbility)
+  ok   the capable bot uses the same brain
+  ok   villager-build.js loads from index.html
+  ok   no player-only XP scale left in tracks.js
+
+test-parity-20261014: 59 passed, 1 failed, 0 todo (phase 0)
+failing: gear: they still wear their spear and jacket
+----- RESULT scripts/test-parity-20261014.js exit=1 secs=0 -----
+
+===== scripts/test-capable-bot-20261014.js =====
+
+1. real flee exits the fight
+  ok   flee decided
+  ok   pushed through the barrier
+  ok   fight exited (not just walked to the edge)
+  ok   left the node havenward
+  ok   no policy errors
+
+2. abilities fire in combat through useAbility
+  ok   capAbilityUses > 0
+  ok   ability_used telemetry > 0
+  ok   hunger gate respected (no use at kcal 300)
+
+3. choices are scored, not option 0
+  ok   offer scoring: synergy leg echo_location beats game_sense
+  ok   upkeep took the synergy leg (not card 0)
+  ok   Table seat taken when tablePreview().ready
+  ok   Table seat NOT taken before day 90 (ready=false)
+  ok   trial by combat scored below every other beat
+  ok   path scored by earned strength, not position
+
+4. a conversation is held (real turns), target by need
+  ok   held at least one conversation
+  ok   real exchanges taken (deepTurns > 0)
+
+5. competent.beastStrikeTarget steps within moveLeft
+  ok   moved
+  ok   destination within this turn's 3 squares (was 5 away: "Too far" no-op)
+
+6. no fight left live at bedtime (sleep would refuse: a lost game day)
+  ok   fight resolved by the end of daily
+
+7. capable food chain and the reactor tradeoff
+  ok   fixture holds a real unchanneled keepsake
+  ok   lesson and mastered gifts arm devotion without setting deed flags
+  ok   pre-reactor chain has no reactor
+  ok   real donation clears the policy contribution bar
+  ok   capable upkeep actually hosts a feast
+  ok   feast spends its reported real pantry calories
+  ok   paid feast actually grants the buff
+  ok   capable faces the actual feast draw
+  ok   real capable player combat earns the food deed at first use
+  ok   earned food deed persists through combat settlement
+  ok   combat spends devotion only on actual use
+  ok   food chain has no policy errors
+  ok   online reactor refuses the otherwise armed grant honestly
+  ok   reactor refusal invents neither feast buff nor food deed
+
+short sims: 2 seeds x 40 days
+  ok   seed 42: qualified observed feast plans receive an actual host attempt
+  ok   seed 42: host attempts return a real feast or explicit refusal
+  INFO original campaign seed=42 foodDeeds=true grants=[{"day":35,"granted":true}]
+  ok   seed 1234: qualified observed feast plans receive an actual host attempt
+  ok   seed 1234: host attempts return a real feast or explicit refusal
+  INFO original campaign seed=1234 foodDeeds=true grants=[{"day":27,"granted":true},{"day":28,"granted":true},{"day":36,"granted":true}]
+  ok   runs completed
+  ok   game days keep pace with loop days (no fight left live at sleep)
+  INFO original two-seed food-deed count=2; capability required by controlled real-combat proof above
+  ok   contest choices taken by scoring
+  ok   conversations held in-sim
+  ok   no policy-side errors
+
+test-capable-bot-20261014: 42 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/test-capable-bot-20261014.js exit=0 secs=19 -----
+
+===== scripts/test-first-ability-magic-20261014.js =====
+test-first-ability-magic-20261014: 23 passed, 0 failed
+----- RESULT scripts/test-first-ability-magic-20261014.js exit=0 secs=7 -----
+
+===== scripts/test-establishment-r20-fixes-20261020.js =====
+FIX 1 — preserver recognized on cook duty (real villagerCompetence, OLD vs NEW)
+  PASS NEW fisherman (preserver 3) -> 1.3
+  PASS OLD fisherman (preserver 3) -> 1
+  PASS NEW truck driver (no skill) -> 1
+  PASS OLD truck driver (no skill) -> 1
+  PASS NEW chef (cook 3, keeps 1.4 priority) -> 1.4
+  PASS OLD chef (cook 3, keeps 1.4 priority) -> 1.4
+  PASS NEW farmer (unchanged 1.2) -> 1.2
+  PASS OLD farmer (unchanged 1.2) -> 1.2
+  PASS NEW park ranger (preserver 1 — below threshold) -> 1
+  PASS OLD park ranger (preserver 1 — below threshold) -> 1
+  PASS NEW line cook (keyword match unchanged) -> 1.4
+  PASS OLD line cook (keyword match unchanged) -> 1.4
+  PASS fisherman earns the ⭐ natural tag
+FIX 2 — racks-full voice gated per cook-day (real resolveOneAssignment, OLD vs NEW)
+  PASS NEW: 3 same-day resolutions -> 1 racks-full line
+  FAIL NEW: next day voices once more (gate resets daily): expected 2, got 1
+  PASS NEW: preserved stock still counted
+  PASS OLD: 3 same-day resolutions -> 3 identical lines (the bug)
+  PASS OLD: next day adds a 4th
+  PASS OLD: preserved stock still counted
+
+1 FAILURES
+----- RESULT scripts/test-establishment-r20-fixes-20261020.js exit=1 secs=0 -----
+
+===== scripts/test-table-endings-20261014.js =====
+
+1. The key: relative until the seat, locked at it
+  ok   before the seat: no locked key
+  ok   live key reads the build (track, class, subclass)
+  ok   relative: the live key follows the build as it changes (now a god, apocalypse slain)
+  ok   a lapsed class does not count (if you don't know it, it doesn't show)
+  ok   taking the seat locks the build half
+  ok   after the lock the build half never moves
+  ok   table_entered carries the key
+  ok   entering a door fills the path and the moral the Table earned
+  ok   a downgrade re-fills the path half; the doors are remembered
+
+2. Lookup order and fallbacks
+  ok   selectors: god > class/subclass > class > track > default
+  ok   endingSelectors() is the same order
+  ok   data loaded (table-beats.json, table-endings.json)
+  ok   ending: showrunner on Beloved resolves its bespoke slice, light and dark
+  ok   ending: demagogue without a bespoke slice gets its own class coda
+  ok   ending: a berserker on Defiant falls back one level to the brawler slice
+  ok   ending: a bespoke path entry wins over a god coda (god on Defiant -> the brawler slice)
+  ok   coda: no bespoke entry -> the god coda (god on Beloved, light and dark)
+  ok   coda: god > class/subclass (a keeper who ascended plays the god coda)
+  ok   coda: class/subclass > track (keeper, combat track -> the keeper coda)
+  ok   coda: completed subclass text wins over the track (berserker on Beloved)
+  ok   coda: track-only runs get the track coda on every path
+  ok   none: no build still gets the final alone; a named social class gets its coda
+  ok   grey relay: the coda reads the forward hand (lean > 0 light, < 0 dark, 0 light)
+  ok   exactly one coda: the god coda alone, its own lines
+  ok   beat: showrunner on Beloved plays its bespoke option
+  ok   beat: demagogue on Beloved plays the class template
+  ok   beat: a god plays its verb (god template) on every path
+  ok   beat: no class, no god -> the path default (exists for every path and moral)
+
+3. The scenario plays the build
+  ok   beat one (not the build beat) has no build option
+  ok   the build beat offers the showrunner's own option (light)
+  ok   the prompt names the build
+  ok   the stake is legible on the option
+  ok   the same class reads differently on the dark side (moral changes the option)
+  ok   playing it moves the path meter by its data (dark +4) and records the play
+  ok   a class with no bespoke beat still gets an option in its own name
+  ok   a god unlocks its verb as the option
+  ok   the titan finale feeds the beat (apocalypse line in the prompt)
+  ok   odds: god level (+2) and the slain apocalypse (+1) add to the default gain (+2)
+  ok   defiant x brawler (dark): the collector's hands
+  ok   the build option fails if the room is not yours yet (stake: audience 3 < 4) -> downgrade, never a wipe
+
+4. Every path losable and winnable, for every fixture key
+  ok   losable: every path x moral x fixture key can fail (105 walks)
+  ok   winnable: every path x moral reaches its finals with every key, including no class and no god
+
+5. Never a gate
+  ok   the doors and their standing are identical with and without a god
+  ok   table*.js still never reads god-path state (the key is handed in by endingKey.js)
+  ok   endingKey.js never touches seat pricing or the earned doors
+
+6. Endings resolve by key, in play
+  ok   beloved x showrunner x light: the bespoke final replaces the outcome and the coda plays
+  ok   {name} is filled with the bearer's name
+  ok   the win lands and the resolved ending is noted
+  ok   table_won carries the key and which ending resolved
+  ok   beloved x showrunner x dark: its own cut
+  ok   defiant x brawler x light: THE DOORWAY
+  ok   defiant x brawler x dark: THE SALTED ROAD
+  ok   new class coda follows the path's light outcome without replacing it
+
+7. Composed endings in play: the path's final + one coda
+  ok   track coda: the path's own final plays, then the coda after it
+  ok   {path} fills with the path's name and {name} with the bearer's
+  ok   exactly one coda: no god or class coda lines alongside it
+  ok   the resolved coda is noted
+  ok   table_won records which coda resolved
+  ok   god coda in play: Beloved's final, then the god's light coda with {god} filled
+  ok   class coda in play: the keeper's light coda
+  ok   grey relay in play: the coda follows relayLean, {path} = the Relay
+
+table-endings: 61 passed, 0 failed, 0 todo (phase 0)
+----- RESULT scripts/test-table-endings-20261014.js exit=0 secs=11 -----
+Finished: 2026-10-27T17:21:46Z

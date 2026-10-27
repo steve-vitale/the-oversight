@@ -18,6 +18,7 @@
 //   - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
+//   - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
@@ -34,9 +35,11 @@
  * with OBJECTIVES and gives away-movement a target plus meander:
  *
  * 1. OBJECTIVES — each villager holds one: FORAGE, WATER, TRAPS, VISIT,
- *    HAVEN_CHORE, EXPLORE, REST, EAT, LEAVE (escape). Re-picked at dawn and when
- *    idle. Outdoor kinds carry a target node and a tightness (max nodes out,
- *    max parts). Indoor kinds keep people home with real lives.
+ *    HAVEN_CHORE, EXPLORE, REST, EAT, LEAVE (escape), HUNT (return-to-fight:
+ *    back to a tile where that villager already fought a living monster).
+ *    Re-picked at dawn and when idle. Outdoor kinds carry a target node
+ *    and a tightness (max nodes out, max parts). Indoor kinds keep people
+ *    home with real lives.
  * 2. DEPARTURE DANGER CHECK — before leaving: recent monster activity (from
  *    village gossip), rain, distance, temperament. GO / ASK (find a companion
  *    — both go, gossiped) / TIGHTEN (short nearby errand only) / DEFER (stay,
@@ -266,6 +269,7 @@
       try { vp = this.vpOf(vid) || {}; } catch (e) {}
       if (vp.dead) { o.kind = 'idle'; o.state = 'idle'; return o; }
       o.tightened = false; // fresh pick: not a danger-tightened trip
+      o.huntMid = null; o.huntTx = null; o.huntTy = null; o.huntDay = null; // fresh pick: a stale hunt provenance must not linger on a new errand
       o.chore = null; // fresh pick: a stale chore label must not linger on
       // non-chore objectives (longsim agency 2026-10-11: census showed
       // VISIT/out(fire), GUARD/out(teach) — old chore tags on new errands)
@@ -460,6 +464,15 @@
         hw *= gwHaulMul; // DORMANT MOTIVATIONS (rogue P1): survive/peace avoid the haul
         cands.push({ kind: 'HAUL', w: hw, site: haulSite });
       }
+      // HUNT (return-to-fight, gap-routing 2026-10-27): a villager with a
+      // fresh fight memory may be offered the trip back to that fight's
+      // tile. objHuntCandidate enforces every gate (fresh memory, armed,
+      // in range, not sheltering, not resting off a bad flee); this is
+      // only a lottery weight, never a guarantee — food, water, and hall
+      // life still compete, and the departure gates still decide.
+      var huntSite = null;
+      try { huntSite = this.objHuntCandidate ? this.objHuntCandidate(vid, hx, hy) : null; } catch (e) {}
+      if (huntSite) cands.push({ kind: 'HUNT', w: 2.0, site: huntSite });
       // VISIT — go find someone specific. Social, uses real familiarity.
       // Tight goals: don't cross the world for a chat — the target must be
       // within this villager's range (homebodies visit at home, not abroad).
@@ -523,6 +536,9 @@
       } else if (chosen.kind === 'EXPLORE') {
         o.purpose = 'explore'; dist = 1 + Math.floor(R() * Math.max(1, maxD));
         o.partsLeft = 3 + Math.floor(R() * 4); o.tightness = dist;
+      } else if (chosen.kind === 'HUNT') {
+        this.objHuntFromSite(vid, hx, hy, o, chosen.site);
+        return o;
       } else if (chosen.kind === 'HAUL') {
         this.objHaulFromSite(vid, hx, hy, o, chosen.site);
         return o;
@@ -614,6 +630,134 @@
           try { this.mapmemTell(vid, _mates[_ti]); } catch (e) {}
         }
       } catch (e) {}
+      return o;
+    },
+    // RETURN-TO-FIGHT (gap-routing 2026-10-27): the fight-memory store and
+    // the hunt offer. The store is per-villager, on the village record:
+    // state.village.monsterSightings[vid] = [{mid, tx, ty, day, part}].
+    // A memory is earned only by actually fighting a living world monster
+    // at that tile (recorded from resolveWildMonsterEncounter in game.js
+    // — never from a mere sighting, never from gossip, never from the
+    // monster list). It is never shared with villagers who were not
+    // there, and it carries no live-monster lookup: the hunt target is
+    // the remembered tile, whether or not the beast is still on it when
+    // the villager arrives. That is the whole knowledge gate — a villager
+    // goes back to where they fought, never to a tile the game knows
+    // about but they do not.
+    // objNoteMonsterSighting(vid, mid, tx, ty): record or refresh one
+    // memory. Cap 4 per villager, oldest dropped first. Returns the
+    // entry, or null on bad input. Never throws into the caller.
+    objNoteMonsterSighting(vid, mid, tx, ty) {
+      try {
+        if (!vid || !mid || tx == null || ty == null) return null;
+        if (vid === this.villagerId) return null; // the player is not a routed villager
+        var v = this.state.village;
+        v.monsterSightings = v.monsterSightings || {};
+        var list = v.monsterSightings[vid] || (v.monsterSightings[vid] = []);
+        var day = 0, part = 0;
+        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+        try { part = this.dayPart || 0; } catch (e) {}
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] && list[i].mid === mid && list[i].tx === tx && list[i].ty === ty) {
+            list[i].day = day; list[i].part = part;
+            return list[i];
+          }
+        }
+        var entry = { mid: mid, tx: tx, ty: ty, day: day, part: part };
+        list.push(entry);
+        while (list.length > 4) list.shift();
+        return entry;
+      } catch (e) { return null; }
+    },
+    // objDropMonsterSighting(vid, mid, tx, ty): remove one memory — used
+    // when a hunter reaches the remembered tile and the quarry is gone
+    // (they checked; it is gone). Returns true when something was removed.
+    objDropMonsterSighting(vid, mid, tx, ty) {
+      try {
+        var v = this.state.village;
+        var list = (v.monsterSightings || {})[vid] || [];
+        var kept = [], dropped = false;
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] && list[i].mid === mid && list[i].tx === tx && list[i].ty === ty) { dropped = true; continue; }
+          kept.push(list[i]);
+        }
+        if (v.monsterSightings) v.monsterSightings[vid] = kept;
+        return dropped;
+      } catch (e) { return false; }
+    },
+    // objVillagerArmed(vid): the readiness gate's weapon test, reused
+    // (standing.js waveCombatReadiness): a weapon equipped, or a weapon
+    // item carried. Fail-closed: any read error means unarmed.
+    objVillagerArmed(vid) {
+      try {
+        var vp = this.vpOf ? this.vpOf(vid) : null;
+        if (!vp || vp.dead) return false;
+        var S = (typeof globalThis !== 'undefined' && globalThis.Scattering) || {};
+        var eq = S.equipment || null;
+        if (eq) {
+          if (typeof eq.meleeWeaponOf === 'function' && eq.meleeWeaponOf(vp)) return true;
+          if (typeof eq.rangedWeaponOf === 'function' && eq.rangedWeaponOf(vp)) return true;
+        }
+        var itemDefs = (this.data && this.data.items) || [];
+        var items = vp.items || [];
+        for (var i = 0; i < items.length; i++) {
+          var e = items[i];
+          var iid = (typeof e === 'string') ? e : (e && (e.itemId || e.id));
+          if (!iid) continue;
+          for (var j = 0; j < itemDefs.length; j++) {
+            if (itemDefs[j] && itemDefs[j].id === iid && itemDefs[j].weapon) return true;
+          }
+        }
+        return false;
+      } catch (e) { return false; }
+    },
+    // objHuntCandidate(vid, hx, hy): the best fresh fight memory that may
+    // be offered as a HUNT errand, or null. Gates, all of them:
+    // fresh (no older than 3 days), armed, within roaming range, not
+    // sheltering, not resting off today's bad flee. Nearest fresh memory
+    // wins — the shortest walk to the most recent fight.
+    objHuntCandidate(vid, hx, hy) {
+      try {
+        if (!vid || vid === this.villagerId) return null;
+        var vp = this.vpOf ? this.vpOf(vid) : null;
+        if (!vp || vp.dead) return null;
+        try { if (this.isSheltered && this.isSheltered(vid)) return null; } catch (e) {}
+        try { if (this.isPostFleeResting && this.isPostFleeResting(vid)) return null; } catch (e) {}
+        if (!this.objVillagerArmed(vid)) return null;
+        var maxD = 0;
+        try { maxD = Math.max(0, this.npcMaxDist(vid)); } catch (e) { return null; }
+        if (maxD < 1) return null;
+        var list = (((this.state || {}).village || {}).monsterSightings || {})[vid] || [];
+        if (!list.length) return null;
+        var day = 0;
+        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+        var best = null, bestDist = 1e9;
+        for (var i = 0; i < list.length; i++) {
+          var s = list[i];
+          if (!s || !s.mid) continue;
+          var age = day - (s.day || 0);
+          if (age < 0 || age > 3) continue; // stale: older than 3 days is not hunted on
+          var d = this.objDist(s.tx, s.ty, hx, hy);
+          if (d < 1 || d > maxD) continue;
+          if (d < bestDist) { bestDist = d; best = s; }
+        }
+        if (!best) return null;
+        return { mid: best.mid, tx: best.tx, ty: best.ty, day: best.day };
+      } catch (e) { return null; }
+    },
+    // objHuntFromSite(vid, hx, hy, o, site): build the HUNT objective for
+    // a fight memory. Same shape as objHaulFromSite: a real remembered
+    // node, a tightness, a clock. The provenance rides on the objective
+    // (huntMid/huntTx/huntTy/huntDay) so any reader — including the
+    // panel — can check the route against the memory it came from.
+    objHuntFromSite(vid, hx, hy, o, site) {
+      o.purpose = 'hunt'; o.state = 'ready'; o.indoor = false;
+      o.tx = site.tx; o.ty = site.ty;
+      o.huntMid = site.mid; o.huntTx = site.tx; o.huntTy = site.ty; o.huntDay = site.day;
+      var hdist = this.objDist(hx, hy, site.tx, site.ty);
+      o.tightness = Math.max(1, hdist);
+      o.partsLeft = 2 * hdist + 3;
+      o.targetVid = null; o.companion = null;
       return o;
     },
     // VISIT target: someone they actually know — same fire-group, or someone
@@ -864,6 +1008,10 @@
         // haulLabel is monsterDisplayName — proper names keep casing ("The
         // Loud Beast"), descriptors carry articles. Never "the The X".
         haul: 'sets out for ' + (this.articlePhrase ? this.articlePhrase(obj.haulLabel || 'carcass') : 'the ' + (obj.haulLabel || 'carcass')) + '. "Meat\'s meat. Back with it or not at all."',
+        // RETURN-TO-FIGHT (gap-routing 2026-10-27): the hunt line names
+        // the beast the way the village knows it (monsterDisplayName:
+        // descriptor or village name, never the true name pre-System).
+        hunt: 'sets out to hunt ' + (function () { try { var _mn = this.monsterDisplayName ? this.monsterDisplayName(obj.huntMid) : 'the beast'; return this.articlePhrase ? this.articlePhrase(_mn) : _mn; } catch (e) { return 'the beast'; } }.call(this)) + '. "It was there. Going back for it."',
       }[obj.purpose] || 'heads out.';
       }
       if (playerAtHaven) this.say((obj.companion ? '👥 ' : '') + nm + ' ' + purposeLine);
@@ -926,7 +1074,11 @@
         // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers deprioritize
         // companions (o.solo, set in objPick) — they tighten or stay rather
         // than bring company. Same fallthrough as the no-companion case.
-        var cid = o.solo ? null : this.objAskCompanion(rid, o, hx, hy);
+        // RETURN-TO-FIGHT (gap-routing 2026-10-27): a HUNT is the knower's
+        // own errand — it never drags along a villager who has not seen
+        // the beast, so a hunt also takes the no-companion fallthrough
+        // (tighten or stay) instead of asking for company.
+        var cid = (o.solo || o.kind === 'HUNT') ? null : this.objAskCompanion(rid, o, hx, hy);
         if (cid) {
           // HEAL GATE (2026-10-13): gate rid first — a sat-out rid must not
           // strand a departed companion. Companion sat out -> rid tightens
@@ -1055,6 +1207,18 @@
       // objective to returning (meat carried as objective state).
       if (o && o.state === 'out' && o.kind === 'HAUL' && nx === o.tx && ny === o.ty) {
         try { this.mapmemHaulAt(rid); } catch (e) { o.state = 'returning'; }
+      }
+      // RETURN-TO-FIGHT arrival (gap-routing 2026-10-27): at the hunt tile
+      // with the quarry gone, the memory is spent — they checked, it is
+      // not there, so it must not keep offering hunts to an empty tile.
+      // When the quarry is still there, the memory stays: the world tick
+      // may start the real fight from here, and that fight records a
+      // fresh memory of its own.
+      if (o && o.state === 'out' && o.kind === 'HUNT' && nx === o.tx && ny === o.ty) {
+        try {
+          var _qm = this.monsterAt ? this.monsterAt(nx, ny) : null;
+          if ((!_qm || _qm.id !== o.huntMid) && this.objDropMonsterSighting) this.objDropMonsterSighting(rid, o.huntMid, o.tx, o.ty);
+        } catch (e) {}
       }
       // MAP MEMORY (villager-mapmem 2026-10-13): they notice what's on the
       // node they're standing on — fresh corpses become remembered sites.

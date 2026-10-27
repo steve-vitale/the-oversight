@@ -1,0 +1,274 @@
+check.js: 287 scripts, 8 parallel (quick)
+...................................F.........F..............................F.................................F.FF.FF..F.....F......F.....................F.........F..............F.F................................................F...............F...F................F....F.....F....F...
+
+  FAIL scripts/godpath/test-between-deed.js (exit null, 120.3s)
+        ok   own real encounter damage preserves the unwounded opening
+        ok   an echoed body earns no living personal escape
+        ok   a dead bearer record cannot claim through a stale body
+        ok   receipt uses original full capacity, never current wounded capacity
+        ok   changing a fighter identity cannot transfer the opening
+        ok   an arena escape label cannot create a wild deed
+        ok   prey equal to full human capacity is insufficient
+        ok   smaller full field prey cannot qualify
+        ok   a later actual escape cannot overwrite the first receipt
+        ok   qualification reads neither write state nor draw randomness
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-comfort-arc.js (exit null, 120.1s)
+      ok stale opener at stage2 pays no trust or exchange
+      comfort-opening-replay: 1 passed, 0 failed
+      ok leaving before engagement does not complete comfort
+      comfort-early-leave: 1 passed, 0 failed
+      ok existing four stays still resolve comfort
+      ok resolved stay retires generic empathy too
+      comfort-stay: 2 passed, 0 failed
+      ok honest refusal remains deflected
+      ok refused comfort is not re-offered on its thread
+      comfort-deflect: 2 passed, 0 failed
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-hide-discovery.js (exit 1, 13.1s)
+        FAIL counter butchering keeps material and lesson on the counter until pickup
+        ok   taking the real butchered hide completes the discovery path
+        ok   blind public trial risks actual hide and lashing supplies
+        ok   only a real successful trial advances the outline to L2
+        ok   maker handles visible spare hide then attempts its earned outline
+        ok   wrong visible lashing guess preserves stock and reveals no hidden ingredient list
+        ok   repeated upkeep cannot spam blind recipe probes
+        ok   passing days does not repeat an unchanged rejected guess
+        ok   new visible supplies permit a real funded trial without a skipped-probe cooldown
+      
+      hide-discovery: 24 passed, 1 failed, 0 todo (phase 0)
+      failing: counter butchering keeps material and lesson on the counter until pickup
+
+  FAIL scripts/godpath/test-measurement-comparison.js (exit 1, 37.8s)
+          at summarizeValidated (/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:46:46)
+          at Object.summarizeHarnessRevision (/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:40:10)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-measurement-comparison.js:5:1161)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-driver.js (exit 1, 41.5s)
+      ok   explicit region reaches the actual newly started expedition
+        ok   explicit origin reaches the actual expedition home origin
+        ok   driver setup does not choose the idle controller opening
+        ok   configuration support is declared for external collectors
+        FAIL a separate actual startup rejects an unplayable region
+        ok   importing the seed-list module does not start a simulation
+      
+      measurement driver configuration: 5 passed, 1 failed, 0 todo (phase 0)
+      failing: a separate actual startup rejects an unplayable region
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 21.3s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/gap-route/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 19.2s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        FAIL proof declares every collector and contract input rather than silently omitting one
+        FAIL collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        FAIL every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 5 passed, 4 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs | proof declares every collector and contract input rather than silently omitting one | collector and contract have
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 4.8s)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-occupation-panels.js:17:14)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+  FAIL scripts/godpath/test-mobile-combat-cadence.js (exit 1, 18.5s)
+        ok   hand-back follows resolution
+        ok   superseded announcement cannot perform a stale enemy action
+        ok   save retains the announced but unresolved actor
+        ok   Continue resolves the pending enemy exactly once
+        FAIL Continue does not wrap the announced round a second time
+        ok   Continue hands control back with fresh player inputs
+        ok   enemy-phase endings publish the terminal state to the browser
+        ok   faster opening enemy is announced before acting
+        ok   each faster opening enemy acts once before usable player controls
+      
+      mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+      failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 94.3s)
+      FAIL both actual CLI configurations complete valid neutral panels
+        FAIL two flags create four independent observer-on/off cache entries
+        FAIL cache identities retain each actual SIMOPT value
+        FAIL repeating the same setting reuses its two verified cases
+      
+      measurement cache flag isolation: 0 passed, 4 failed, 0 todo (phase 0)
+      failing: both actual CLI configurations complete valid neutral panels | two flags create four independent observer-on/off cache entries | cache identities retain each actual SIMOPT value | repeating t
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 14.6s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/abilityActions.js,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/carexplore.js,src/js
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-phase-shawl.js (exit null, 120.3s)
+        ok   actual world avoidance describes harm without inventing a blow
+        ok   real endDay extreme weather checks the NPCs own worn gear
+        ok   same actual cold dawn still damages an unprotected living NPC
+        ok   actual beam phase returns zero and preserves both player HP pools
+        ok   real tbDamage beam wrapper grants one phase and no second settlement roll
+        ok   unprotected beam prices actual fighter capacity and syncs canonical health
+        ok   actual NPC beam phases against its own worn item
+        ok   NPC beam cannot borrow bearer resistance or capacity or horror state
+        ok   NPC beam resistance uses its own canonical worn armor including ID saves
+        ok   an echoed body cannot borrow the living persons shawl or beam armor
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-solo-campaign-endings.js (exit null, 120.1s)
+        ok   unknown population reads cannot become measured survival
+        ok   actual engine community loss survives unknown observation coverage
+        ok   a malformed or missing current history is an observer error
+        ok   old village-dead records retain explicit historical-rule coverage
+        ok   the living solo bearer continues beyond the former ten-iteration cutoff
+        ok   the longer solo observation remains active at its explicit cap
+        ok   sustained empty-community history remains distinct from an active game
+        ok   a controlled roster-recovery fixture preserves collapse history
+        ok   a real death path without successors stops immediately at an engine ending
+        ok   real runner rows forward current stop/history and collector coverage
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-time-save-crashes.js (exit null, 120.2s)
+      Recovered precore-request day2
+      Recovered postcore-request day2
+      Recovered commit-before day2
+      Recovered commit-after day3
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-trust-observer-neutrality.js (exit 1, 118.5s)
+      Error
+          at /home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-trust-observer-neutrality.js:16:265
+          at Array.map (<anonymous>)
+          at /home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-trust-observer-neutrality.js:16:27
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-trust-observer-neutrality.js:22:3)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+  FAIL scripts/test-synergy-stall.js (exit null, 120.2s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-throttlefeast-20261014.js (exit null, 120.7s)
+      R2: oneRun feast-road measurement (OFF arm, 20d)
+        PASS run completed (days>0)
+        PASS throttle tag is off
+        PASS feasts is numeric
+        PASS plentyMax is numeric
+        PASS plentyFinal is numeric
+        PASS redirects is numeric
+        PASS OFF arm never redirects under the wrap (redirects===0)
+        PASS wall fields present (national/table/won/exiled)
+      R3: OFF vs ON contract (20d, seed 11)
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-parity-20261014.js (exit 1, 17.5s)
+        ok   objectives call villagerSeekKnowledge / villagerNeedTrack
+        ok   playerDeath calls mantleBecome
+        ok   endDay village tick calls villagerBuildDay
+        ok   knacks pick by pickVillagerKnack
+        ok   conversation teaches (npcLearnFromTalk)
+        ok   field fights teach witnesses (npcWitnessAbility)
+        ok   the capable bot uses the same brain
+        ok   villager-build.js loads from index.html
+        ok   no player-only XP scale left in tracks.js
+      
+      test-parity-20261014: 59 passed, 1 failed, 0 todo (phase 0)
+      failing: gear: they still wear their spear and jacket
+
+  FAIL scripts/test-capable-bot-20261014.js (exit null, 120.2s)
+        ok   paid feast actually grants the buff
+        ok   capable faces the actual feast draw
+        ok   real capable player combat earns the food deed at first use
+        ok   earned food deed persists through combat settlement
+        ok   combat spends devotion only on actual use
+        ok   food chain has no policy errors
+        ok   online reactor refuses the otherwise armed grant honestly
+        ok   reactor refusal invents neither feast buff nor food deed
+      
+      short sims: 2 seeds x 40 days
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-first-ability-magic-20261014.js (exit null, 120.2s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-establishment-r20-fixes-20261020.js (exit 1, 7.7s)
+        PASS NEW line cook (keyword match unchanged) -> 1.4
+        PASS OLD line cook (keyword match unchanged) -> 1.4
+        PASS fisherman earns the ⭐ natural tag
+      FIX 2 — racks-full voice gated per cook-day (real resolveOneAssignment, OLD vs NEW)
+        PASS NEW: 3 same-day resolutions -> 1 racks-full line
+        FAIL NEW: next day voices once more (gate resets daily): expected 2, got 1
+        PASS NEW: preserved stock still counted
+        PASS OLD: 3 same-day resolutions -> 3 identical lines (the bug)
+        PASS OLD: next day adds a 4th
+        PASS OLD: preserved stock still counted
+      
+      1 FAILURES
+
+  FAIL scripts/test-table-endings-20261014.js (exit null, 120.2s)
+        ok   the same class reads differently on the dark side (moral changes the option)
+        ok   playing it moves the path meter by its data (dark +4) and records the play
+        ok   a class with no bespoke beat still gets an option in its own name
+        ok   a god unlocks its verb as the option
+        ok   the titan finale feeds the beat (apocalypse line in the prompt)
+        ok   odds: god level (+2) and the slain apocalypse (+1) add to the default gain (+2)
+        ok   defiant x brawler (dark): the collector's hands
+        ok   the build option fails if the room is not yours yet (stake: audience 3 < 4) -> downgrade, never a wipe
+      
+      4. Every path losable and winnable, for every fixture key
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/test-throttlefeast-20261014.js 121s, scripts/godpath/test-between-deed.js 120s, scripts/godpath/test-phase-shawl.js 120s
+
+check.js: 265 passed, 22 failed in 1146s

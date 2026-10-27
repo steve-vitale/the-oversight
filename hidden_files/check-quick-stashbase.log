@@ -1,0 +1,288 @@
+Stash-base (pristine HEAD 60e260dc0) re-runs of the 9 scripts that still failed alone on the restored code
+Started: 2026-10-27T17:22:47Z
+
+===== scripts/godpath/test-hide-discovery.js =====
+  ok   counter stock alone does not grant knowledge
+  ok   actual counter pickup teaches the existing L1 outline only
+  ok   repeat handling neither promotes nor rewrites the known outline
+  ok   an empty legacy hide cannot teach through nonexistent handling
+  ok   nonfinite hide stock cannot teach through nonexistent handling
+  ok   unrelated material does not teach hide armor
+  ok   ordinary real material acquisition teaches the same L1 outline
+  ok   public communal take has the same handling lesson
+  ok   actual single corpse take still teaches after its source is emptied
+  ok   actual batch corpse take still teaches after its source is emptied
+  ok   legacy corpse take also teaches for the one real unit transferred
+  ok   legacy looting cannot take or learn from explicit empty hide
+  ok   legacy singleton body stock is consumed once without becoming NaN loot
+  ok   handling never downgrades or bypasses existing higher knowledge
+  ok   direct pack butchering teaches when the actual hide reaches hands
+  ok   real specialist pack butchering follows the same handling lesson
+  FAIL counter butchering keeps material and lesson on the counter until pickup
+  ok   taking the real butchered hide completes the discovery path
+  ok   blind public trial risks actual hide and lashing supplies
+  ok   only a real successful trial advances the outline to L2
+  ok   maker handles visible spare hide then attempts its earned outline
+  ok   wrong visible lashing guess preserves stock and reveals no hidden ingredient list
+  ok   repeated upkeep cannot spam blind recipe probes
+  ok   passing days does not repeat an unchanged rejected guess
+  ok   new visible supplies permit a real funded trial without a skipped-probe cooldown
+
+hide-discovery: 24 passed, 1 failed, 0 todo (phase 0)
+failing: counter butchering keeps material and lesson on the counter until pickup
+----- RESULT scripts/godpath/test-hide-discovery.js exit=1 secs=1 -----
+
+===== scripts/godpath/test-measurement-comparison.js =====
+  ok   the ordinary comparator still rejects changed harnesses
+  FAIL the explicit lane labels methodology and preserves all23 metric vectors
+  ok   a declared comparison does not rewrite either source identity
+  ok   omitting the declaration remains invalid
+  ok   incorrect exact source identities remain invalid
+  ok   even declared extra Game changes cannot use the harness-only lane
+  ok   different horizons cannot hide behind a harness declaration
+  ok   incomplete observations cannot be interpreted as a harness effect
+  ok   policy experiments retain their own explicit label and all23 metrics
+  ok   a policy declaration cannot admit a changed harness
+  ok   ordinary Game-only scoring still rejects declared policy changes
+  ok   ordinary calendar windows still reject changed methodology
+/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:46
+  if (validity.decision === 'invalid') throw Error(validity.errors.join('; '));
+                                       ^
+
+Error: Metric contract does not match this comparator; Policy/harness changed: scripts/sim-harness.js
+    at summarizeValidated (/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:46:46)
+    at Object.summarizeHarnessRevision (/home/hatch/workspace/worktrees/gap-route/scripts/balance-windows.js:40:10)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-measurement-comparison.js:5:1161)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+----- RESULT scripts/godpath/test-measurement-comparison.js exit=1 secs=2 -----
+
+===== scripts/godpath/test-measurement-proof-update.js =====
+/home/hatch/workspace/worktrees/gap-route/scripts/balance-proof-update.js:8
+ if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Proof source inputs are not current');
+                                                                     ^
+
+Error: Proof source inputs are not current
+    at Object.validate (/home/hatch/workspace/worktrees/gap-route/scripts/balance-proof-update.js:8:76)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-measurement-proof-update.js:4:40)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+----- RESULT scripts/godpath/test-measurement-proof-update.js exit=1 secs=1 -----
+
+===== scripts/godpath/test-measurement-workflow.js =====
+  ok   metric IDs are unique and every contract declares units, direction and tolerance
+  ok   sampling and confirmation settings remain valid
+  ok   retained real panel matches its proof digest
+  FAIL retained neutrality proof covers the current Game/controller/harness inputs
+  FAIL proof declares every collector and contract input rather than silently omitting one
+  FAIL collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+  FAIL every retained real observation emits exactly the contracted metrics, with explicit unknowns
+  ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+  ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+
+measurement-workflow: 5 passed, 4 failed, 0 todo (phase 0)
+failing: retained neutrality proof covers the current Game/controller/harness inputs | proof declares every collector and contract input rather than silently omitting one | collector and contract have a current proof (see SIMULATING.md: Maintaining measurement) | every retained real observation emits exactly the contracted metrics, with explicit unknowns
+----- RESULT scripts/godpath/test-measurement-workflow.js exit=1 secs=1 -----
+
+===== scripts/godpath/test-occupation-panels.js =====
+Error: node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module './lib/luck-instrument'
+Require stack:
+- /tmp/oversight-cohort-DTMhDV/observer/scripts/balance-panel.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/tmp/oversight-cohort-DTMhDV/observer/scripts/balance-panel.js:5:140)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/tmp/oversight-cohort-DTMhDV/observer/scripts/balance-panel.js' ]
+}
+
+Node.js v24.22.1
+
+    at run (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-occupation-panels.js:15:25)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/gap-route/scripts/godpath/test-occupation-panels.js:17:14)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  FAIL real CLI workflow completed
+
+occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+failing: real CLI workflow completed
+----- RESULT scripts/godpath/test-occupation-panels.js exit=1 secs=0 -----
+
+===== scripts/godpath/test-mobile-combat-cadence.js =====
+  ok   Wait accepts zero movement with unused action
+  FAIL enemy is announced before its action runs
+  ok   announcement leaves a real browser task before resolution
+  ok   exactly one enemy action resolves before hand-back
+  ok   resolved board gets its own presentation event
+  ok   player returns with usable action and fresh movement
+  ok   hand-back follows resolution
+  ok   superseded announcement cannot perform a stale enemy action
+  ok   save retains the announced but unresolved actor
+  ok   Continue resolves the pending enemy exactly once
+  FAIL Continue does not wrap the announced round a second time
+  ok   Continue hands control back with fresh player inputs
+  ok   enemy-phase endings publish the terminal state to the browser
+  ok   faster opening enemy is announced before acting
+  ok   each faster opening enemy acts once before usable player controls
+
+mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+----- RESULT scripts/godpath/test-mobile-combat-cadence.js exit=1 secs=2 -----
+
+===== scripts/godpath/test-phone-frame-proof.js =====
+  ok   both actual target phone sizes are retained
+  FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/abilityActions.js,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/carexplore.js,src/js/codex-people.js,src/js/comms.js,src/js/contests.js,src/js/conversation.js,src/js/convo-beats.js,src/js/convo-dialogue.js,src/js/convo-wants.js,src/js/convoTopics.js,src/js/corpses.js,src/js/corruption.js,src/js/encounters.js,src/js/engine/state.js,src/js/fieldFights.js,src/js/food.js,src/js/game.js,src/js/havenGrowth.js,src/js/hierarchy.js,src/js/journal.js,src/js/justice.js,src/js/ledger.js,src/js/lifeseed.js,src/js/metaProgression.js,src/js/party-formal.js,src/js/party.js,src/js/perceive.js,src/js/progression.js,src/js/safetynets.js,src/js/scaleDiscovery.js,src/js/skill-teaching.js,src/js/spawn-knack.js,src/js/standing.js,src/js/statusEffects.js,src/js/storage.js,src/js/table-witness.js,src/js/table.js,src/js/telemetry-hooks.js,src/js/titans.js,src/js/truth.js,src/js/villageAgency.js,src/js/villager-agency.js,src/js/villager-build.js,src/js/villager-objectives.js
+  FAIL all current boot inputs are covered
+  ok   receipt identity declares portable text normalization
+  ok   retained receipt hash 736
+  FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+
+Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+----- RESULT scripts/godpath/test-phone-frame-proof.js exit=1 secs=1 -----
+
+===== scripts/test-parity-20261014.js =====
+
+one XP scale
+  ok   player thresholds === villager thresholds === tracks.json
+  ok   no playerScale in the data
+  ok   a level is the same XP for both
+  ok   occupation lean is on the shared scale (below the first threshold, not trivially small)
+
+same deed, same XP, same cap
+  ok   foraging x3: player and villager gain the same (cap 2/day each)
+  ok   fight_won: same n for both
+  ok   the bearer's villager id credits the player
+  ok   villager cook duty credits the cooking deed (craft +1)
+
+the villager's first ability works like the player's
+  ok   every starting villager has a magic knack
+  ok   the knack is the buildScore pick of the 3 choices
+  ok   old-save skill knack is re-chosen from the magic pool and slotted
+  ok   gossip has no lines for skill ids
+
+villager level-up: 1 of 3, picked by buildScore (knowledge + technology)
+  ok   offers = the 3 unheld entries of the (pinned) strange kit, in kit order
+  ok   setup: a ranged weapon is their technology
+  ok   buildScore ranks X above the kit-order default
+  ok   crossing a threshold resolves a sheet of 3
+  ok   they picked X, not the kit-order default
+  ok   without the knowledge and the bow, X is not their pick
+  ok   without the knowledge and the bow, X scores lower
+
+knows too little: defers and seeks
+  ok   the sheet waits (no ability taken)
+  ok   they want knowledge for the sheet
+  ok   the agency picks a SEEK objective
+  ok   the seek taught them something (tele villager_seek_knowledge)
+  ok   with enough knowledge, the sheet is chosen
+  ok   after 3 days the sheet resolves anyway
+
+swap or keep (villagers, the player's rule)
+  ok   full + weak offers: KEEP (nothing changes)
+  ok   buildDecide replaces when the offer beats the weakest by > 1
+  ok   ...and the villager swapped: 6 held, the pick in, the weakest out
+  ok   kept + swapped both happen (one of each across the two setups)
+
+gear: villagers take the better weapon and it changes their fights
+  ok   the armory machete went to the villager who needed it
+  ok   their old weapon went back on the pile
+  ok   fieldFight: the armed villager leaves the beast with less HP
+
+any village death feeds the strange track — player and villagers alike
+  ok   the player gets death_in_family
+  ok   a villager gets the same
+
+the mantle: you become that villager
+  ok   the heir is the bearer
+  ok   abilities: theirs (echo_location, bloodhound) + nothing of the predecessor's
+  ok   tracks: their own XP, not the predecessor's
+  ok   their earned levels are not re-offered
+  ok   skills: their own know-how is in the Codex
+  FAIL gear: they still wear their spear and jacket — {}
+  ok   the predecessor's machete is not on them
+  ok   integration (the office) is unchanged
+  ok   the heir has no villager records left
+  ok   the mantle deed lands on the heir's own strange track
+
+save / load round trip
+  ok   save/load ok
+  ok   villager knowledge survives
+  ok   pending villager sheets survive
+  ok   knacks stay slotted (load migration idempotent)
+
+old saves migrate
+  ok   old villager XP is rescaled: level 2 stays level 2
+  ok   the migration is idempotent
+
+wired
+  ok   tracks queue villager sheets -> villagerResolveLevelUps
+  ok   objectives call villagerSeekKnowledge / villagerNeedTrack
+  ok   playerDeath calls mantleBecome
+  ok   endDay village tick calls villagerBuildDay
+  ok   knacks pick by pickVillagerKnack
+  ok   conversation teaches (npcLearnFromTalk)
+  ok   field fights teach witnesses (npcWitnessAbility)
+  ok   the capable bot uses the same brain
+  ok   villager-build.js loads from index.html
+  ok   no player-only XP scale left in tracks.js
+
+test-parity-20261014: 59 passed, 1 failed, 0 todo (phase 0)
+failing: gear: they still wear their spear and jacket
+----- RESULT scripts/test-parity-20261014.js exit=1 secs=1 -----
+
+===== scripts/test-establishment-r20-fixes-20261020.js =====
+FIX 1 — preserver recognized on cook duty (real villagerCompetence, OLD vs NEW)
+  PASS NEW fisherman (preserver 3) -> 1.3
+  PASS OLD fisherman (preserver 3) -> 1
+  PASS NEW truck driver (no skill) -> 1
+  PASS OLD truck driver (no skill) -> 1
+  PASS NEW chef (cook 3, keeps 1.4 priority) -> 1.4
+  PASS OLD chef (cook 3, keeps 1.4 priority) -> 1.4
+  PASS NEW farmer (unchanged 1.2) -> 1.2
+  PASS OLD farmer (unchanged 1.2) -> 1.2
+  PASS NEW park ranger (preserver 1 — below threshold) -> 1
+  PASS OLD park ranger (preserver 1 — below threshold) -> 1
+  PASS NEW line cook (keyword match unchanged) -> 1.4
+  PASS OLD line cook (keyword match unchanged) -> 1.4
+  PASS fisherman earns the ⭐ natural tag
+FIX 2 — racks-full voice gated per cook-day (real resolveOneAssignment, OLD vs NEW)
+  PASS NEW: 3 same-day resolutions -> 1 racks-full line
+  FAIL NEW: next day voices once more (gate resets daily): expected 2, got 1
+  PASS NEW: preserved stock still counted
+  PASS OLD: 3 same-day resolutions -> 3 identical lines (the bug)
+  PASS OLD: next day adds a 4th
+  PASS OLD: preserved stock still counted
+
+1 FAILURES
+----- RESULT scripts/test-establishment-r20-fixes-20261020.js exit=1 secs=0 -----
+Finished: 2026-10-27T17:22:56Z

@@ -19817,6 +19817,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
       if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
       const summary = this.fieldFightSummary(rec, name, mName);
+      // RETURN-TO-FIGHT (gap-routing 2026-10-27): a villager who actually
+      // fought a living world monster remembers the fight's tile, so the
+      // village can later send that villager — and only that villager —
+      // back to it. Recorded here, at the fight's tile, before any branch
+      // moves or removes the monster. Mere sightings never count (an
+      // 'evade' is no fight, an 'alreadyDead' is a corpse, not a beast),
+      // and a raid at the haven door never counts (defence, not a place
+      // to return to). An ally the fight record names as answering the
+      // shout remembers it too; the rest of the crew does not.
+      try {
+        if (!opts.raid && rec && ['vKill', 'mFlee', 'vFlee', 'vDie'].indexOf(rec.outcome) >= 0 && this.objNoteMonsterSighting) {
+          this.objNoteMonsterSighting(vid, m.id, m.tx, m.ty);
+          if (rec.allyVid) this.objNoteMonsterSighting(rec.allyVid, m.id, m.tx, m.ty);
+        }
+      } catch (e) {}
       if (rec.outcome === 'alreadyDead') {
         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
         // coinciding with the lead falling). It's a corpse, not a fight —
