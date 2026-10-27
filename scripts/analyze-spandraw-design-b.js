@@ -42,11 +42,19 @@ function dataActions() {
   return out;
 }
 
-// Impl keys known from the code read (abilityActions.js IMPLS +
-// gardenCultivation cultivate registrations + keepsake/god
-// registrations). Verified at build time against the live table
-// where loadable; the analyzer does not re-derive wiring from
-// probe outcomes (a refused probe must not re-define wiring).
+// Impl keys: abilityActions.js IMPLS (51) + gardenCultivation
+// cultivate registrations (2) + godpath.js registerVerbs generic
+// impls for every data action declaring `do` (15). CORRECTION
+// (2026-10-27, probe evidence): the prereg inventory listed those
+// 15 as "unwired" because the IMPLS literal does not contain them.
+// The probe disproved that: long_table.share_pot FIRED through
+// useAbility in every boundary instance, and registerVerbs (which
+// runs at Game.init, i.e. inside setupGame) registers a generic
+// impl + precheck for every `do` action. Wired total is therefore
+// 68/68, not 53/68. The analyzer's wiring table is a code-read
+// table, not a probe-outcome table — but a code read that misses
+// a whole registration site is a wrong code read, and the probe
+// is what caught it. See evidence metric review.
 const IMPL_KEYS = new Set([
   'game_sense.read_sign', 'game_sense.read_stance', 'patient_aim.take_aim',
   'patient_aim.clean_shot', 'field_dressing.dress_game', 'tracker.track',
@@ -68,6 +76,13 @@ const IMPL_KEYS = new Set([
   'peacemaker.make_friends', 'water_breathing.dive_deep',
   'retribution.unleash', 'trophy_room.mark',
   'green_thumb.cultivate', 'green_whisper.cultivate',
+  // godpath registerVerbs (`do` actions; generic impl + precheck):
+  'aegis_link.link', 'raise_earth.raise', 'gravity_well.pull',
+  'landslide.quake', 'pack_hunt.sic', 'mending_hands.mend',
+  'blink.blink', 'switcheroo.swap', 'foresight.foresee',
+  'live_broadcast.go_live', 'the_crowd_moves.command',
+  'stoke.stoke', 'coin_guard.coins', 'bribe.pay_off',
+  'long_table.share_pot',
 ]);
 
 function classifyRefusal(inst) {
@@ -150,9 +165,14 @@ function analyzeDir(dir) {
     let section, classification;
     if (probed) { section = 'probed-noncombat'; classification = probed.summary.classification; }
     else if (a.context === 'combat') {
-      section = wired ? 'combat-wired-structural' : 'combat-unwired';
+      // All 44 combat actions are wired (hand-written or verb
+      // generic); the structural rule is what bars day-crossing,
+      // not wiring. A combat row can never read 'unwired' here:
+      // if wired is false for a combat key, the table above is
+      // stale and the row must be investigated, not labeled.
+      section = wired ? 'combat-wired-structural' : 'combat-WIRING-TABLE-STALE';
       classification = wired ? 'DAY-CROSSING-IMPOSSIBLE-BY-CONSTRUCTION'
-        : 'NOT-PROBED (unwired combat action: useAbility refuses before payment)';
+        : 'NOT-PROBED (wiring table disagrees with data — investigate)';
     } else if (a.automatic) { section = 'automatic'; classification = 'NOT-PROBED (automatic trigger, not a tap)'; }
     else { section = 'noncombat-unprobed'; classification = 'NOT-PROBED (missing from probe corpus — LEG 1 failure if pilot)'; }
     return { key, ability: a.ability, action: a.action, context: a.context,
