@@ -1,0 +1,41 @@
+corpus: evidence/2026-10-27/sim-raidday100-general-b-corpus (1 seeds)
+
+seed 20118: days=100 deaths=2 wave=2 rank=village events=120 spoilSweeps=100 openingTotal=47,250 stockdoorRecs=861 stockdoorKcal=344,600 directRecs=235 directKcal=28,438 wrapped=["npcTakeAction","npcChildAction","apPlaygroundRaid","useAbility","_evTakePantryKcal","takeFromPantry","takeFromPantryBulk"] missing=[]
+  direct byPath: {"player-take":232,"npc-adult-pantry":3} kcal: {"player-take":27988,"npc-adult-pantry":450} calls: {"player-take":272,"npc-adult-pantry":74,"green_thumb.cultivate":87} retMismatches=0
+  Foraged food: open=0 inOLD=38,026 inNEW=382,626 drawsOLD=133,206 drawsNEW=146,939 (spoiled=0 direct=13,733) sweep=184,505 loss=772 close=52,159 residOLD=332,616 (874.71%) residNEW=1,749 (0.46%) driedResidOLD=-13,733 driedResidNEW=0
+  Blackberry: open=0 inOLD=292,890 inNEW=292,890 drawsOLD=60,362 drawsNEW=68,938 (spoiled=0 direct=8,576) sweep=195,171 loss=653 close=28,128 residOLD=-8,576 (2.93%) residNEW=0 (0.00%) driedResidOLD=-8,576 driedResidNEW=0
+  Expedition haul: open=0 inOLD=16,646 inNEW=16,646 drawsOLD=10,492 drawsNEW=12,859 (spoiled=0 direct=2,367) sweep=3,736 loss=51 close=0 residOLD=-2,367 (14.22%) residNEW=0 (0.00%) driedResidOLD=-2,367 driedResidNEW=0
+  Muscadine Grapes: open=0 inOLD=15,660 inNEW=15,660 drawsOLD=6,030 drawsNEW=7,098 (spoiled=0 direct=1,068) sweep=3,690 loss=66 close=6,606 residOLD=732 (4.67%) residNEW=1,800 (11.49%) driedResidOLD=-1,068 driedResidNEW=0
+  Winner's share (alien rations): open=0 inOLD=6,600 inNEW=6,600 drawsOLD=0 drawsNEW=1,188 (spoiled=0 direct=1,188) sweep=3,900 loss=27 close=1,485 residOLD=-1,188 (18.00%) residNEW=0 (0.00%) driedResidOLD=-1,188 driedResidNEW=0
+  Snared meat: open=0 inOLD=2,546 inNEW=2,546 drawsOLD=932 drawsNEW=1,238 (spoiled=0 direct=306) sweep=574 loss=8 close=726 residOLD=-306 (12.02%) residNEW=0 (0.00%) driedResidOLD=-306 driedResidNEW=0
+
+LEG 2 coverage: stockdoorSeeds=1/1 (bar >=7) driedEventsSeeds=1/1 (bar >=7) driedStockNoEvent=[] linkedShare=100.0% (bar >=95%) => FAIL
+LEG 3 named closure: counted=1 passed=0 rate=0.0% (bar >=80%) pooledResid=1,800 pooledInflow=15,660 pooledShare=11.494% (bar <=1%) => FAIL
+  named 20118 Muscadine Grapes: in=15,660 resid=1,800 (11.49%) FAIL
+LEG 4 generic closure: counted=1 passed=1 rate=100.0% (bar >=80%) pooledResid=1,749 pooledInflow=382,626 pooledShare=0.457% (bar <=1%) => PASS
+  generic 20118 Foraged food: in=382,626 resid=1,749 (0.46%) PASS
+LEG 5 dried-channel closure: pooledDriedResidNEW=0 pooledTransPost=132,518 share=0.00% (bar <=2%) => PASS
+BOUNDARY LEG 3 named closure: counted=1 passed=1 rate=100.0% (bar >=80%) pooledResid=0 pooledInflow=15,660 pooledShare=0.000% (bar <=1%) => PASS
+  boundary named 20118 Muscadine Grapes: in=15,660 resid=0 (0.00%) PASS
+BOUNDARY LEG 4 generic closure: counted=1 passed=1 rate=100.0% (bar >=80%) pooledResid=-191 pooledInflow=382,626 pooledShare=0.050% (bar <=1%) => PASS
+  boundary generic 20118 Foraged food: in=382,626 resid=-191 (0.05%) PASS
+BOUNDARY LEG 5 dried-channel closure: pooledDriedResidBOUNDARY=0 pooledTransPost=132,518 share=0.00% (bar <=2%) => PASS
+BOUNDARY VERDICT (legs 2 + boundary 3-5; leg 1 det-gate in test): NO-GO
+RAID-DOOR LEG 3 named closure: counted=1 passed=1 rate=100.0% (bar >=80%) pooledResid=0 pooledInflow=15,660 pooledShare=0.000% (bar <=1%) => PASS
+  raiddor named 20118 Muscadine Grapes: in=15,660 resid=0 (0.00%) PASS
+RAID-DOOR LEG 4 generic closure: counted=1 passed=1 rate=100.0% (bar >=80%) pooledResid=-191 pooledInflow=382,626 pooledShare=0.050% (bar <=1%) => PASS
+  raiddor generic 20118 Foraged food: in=382,626 resid=-191 (0.05%) PASS
+RAID-DOOR LEG 5 dried-channel closure: pooledDriedResidRAIDDOR=0 pooledTransPost=132,518 share=0.00% (bar <=2%) => PASS
+RAID-DOOR VERDICT (legs 2 + raiddor 3-5; leg 1 det-gate in test): NO-GO
+  raid census seed 20118: records=1 kcal=1,000 byPath={"raid-unanswered":1} kcalByPath={"raid-unanswered":1000} unanswered=1 recs / 1,000 kcal, raiddorOn=true, lastSnapDay=100
+CONTROL (OLD definition, this head): pooledResid=333,348 pooledInflow=53,686 pooledShare=620.922% pooledDriedResid=-14,801 driedShare=11.17% (driedpath corpus was pooled 90.42% / dried 8.78% — compare as observation, not verdict input)
+
+WALL: national=0/1 table=0/1 wins=0/1 wave4-5=0/1 medianSurvival=100d deaths=2 causes={"ambush":1,"the night":1}
+
+SENSE first direct event (seed 20118): day 4, path npc-adult-pantry, eater A man, maybe 30s: 1u x 150 Dried beans (spoilDay 366) = 150 kcal total 150 kcal
+SENSE first stockSurplus (seed 20118): day 2 vDay 2 give 40 stored 200 spoilDay 5
+SENSE smoke-rack say (seed 20118, day 18): 🍲 Yesenia cooked for the haven — meals stretched. Yesenia worked the smoke racks too — 1 batch preserved (~2475 kcal, keeps for weeks).
+SENSE first unanswered-raid take (seed 20118): day 100, caller villageAgencyDaily, asked 800, taken 1000 kcal: 4u x 250 Canned soup (spoilDay 366) = 1,000 kcal
+SENSE treeline say (seed 20118, day 1): 📓 Journal: Food won't come to Haven. Walk past the treeline — learn what grows out there, bring it back, and get it named at camp.
+
+VERDICT (legs 2-5; leg 1 det-gate in test): NO-GO
