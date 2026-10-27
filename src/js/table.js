@@ -8,7 +8,10 @@
 //   - tableRegisterPath(def)
 //   - tableScene()
 //   - tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14)
-//   - tableSeatTaker(), tableSeatTakerOptions(), tableChooseSeatTaker(id), tableOfferSeatTaker() — the seat-taker choice (Steve 2026-10-26, item 495): the player chooses who sits, their own character or another villager, BEFORE the sitting locks. The sitter varies the beats; the path choice stays player-only. Champion / god-raising are philosophy labels here, not systems — nothing below builds them.
+//   - tableSeatTaker()
+//   - tableSeatTakerOptions()
+//   - tableChooseSeatTaker(id)
+//   - tableOfferSeatTaker()
 //   - tableActive()
 //   - tableEntryBlock()
 //   - chooseTableOption(id)
