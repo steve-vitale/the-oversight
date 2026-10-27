@@ -1,0 +1,2350 @@
+{
+ "policy": "armed",
+ "seed": 73673,
+ "days": 32,
+ "gameDays": 32,
+ "endReason": "village-lost",
+ "won": 0,
+ "waveReach": 3,
+ "maxArc": 3,
+ "finalRank": "village",
+ "maxRank": "village",
+ "nationalEver": 0,
+ "nationalFinal": 0,
+ "table": 0,
+ "entered": 0,
+ "deaths": {
+  "villager:expedition": 3,
+  "villager:villager combat": 6,
+  "villager:a wound that wouldn't close": 1,
+  "villager:ambush": 2,
+  "player:the arena": 2,
+  "villager:combat": 4,
+  "villager:sickness": 1
+ },
+ "deathTotal": 19,
+ "starvationDeaths": 0,
+ "starvationDetail": [],
+ "ts": {},
+ "finalPop": 7,
+ "finalPantry": 0,
+ "finalKnown": 24,
+ "finalPresent": [
+  {
+   "seq": 4,
+   "src": "maintain",
+   "type": "nightcourt",
+   "wave": 1,
+   "hp": 55
+  },
+  {
+   "seq": 6,
+   "src": "tile-entry",
+   "type": "living_wire",
+   "wave": 1,
+   "hp": 10
+  },
+  {
+   "seq": 9,
+   "src": "maintain",
+   "type": "cliffhanger",
+   "wave": 1,
+   "hp": 11
+  },
+  {
+   "seq": 10,
+   "src": "tile-entry",
+   "type": "drumbelly_tanuki",
+   "wave": 1,
+   "hp": 7
+  },
+  {
+   "seq": 11,
+   "src": "maintain",
+   "type": "moderator",
+   "wave": 2,
+   "hp": 150
+  },
+  {
+   "seq": 12,
+   "src": "tile-entry",
+   "type": "voice_mimic_radio",
+   "wave": 2,
+   "hp": 65
+  },
+  {
+   "seq": 13,
+   "src": "tile-entry",
+   "type": "paparazzo",
+   "wave": 2,
+   "hp": 6
+  },
+  {
+   "seq": 14,
+   "src": "scripted-hushwolf",
+   "type": "hushwolf",
+   "wave": 1,
+   "hp": 6
+  },
+  {
+   "seq": 15,
+   "src": "scripted-hushwolf",
+   "type": "hushwolf",
+   "wave": 1,
+   "hp": 12
+  },
+  {
+   "seq": 16,
+   "src": "scripted-hushwolf",
+   "type": "hushwolf",
+   "wave": 1,
+   "hp": 3
+  },
+  {
+   "seq": 17,
+   "src": "tile-entry",
+   "type": "warranty_caller",
+   "wave": 2,
+   "hp": 4
+  },
+  {
+   "seq": 20,
+   "src": "tile-entry",
+   "type": "hummice",
+   "wave": 1,
+   "hp": 10
+  },
+  {
+   "seq": 21,
+   "src": "tile-entry",
+   "type": "callback",
+   "wave": 3,
+   "hp": 260
+  }
+ ],
+ "raftdraft": {
+  "raids": [
+   {
+    "day": 13,
+    "returned": true,
+    "pantry": 18941,
+    "havenTier": 1,
+    "palisade": false,
+    "raidN": 4,
+    "hx": 4,
+    "hy": 4,
+    "poolN": 7,
+    "livingN": 7,
+    "poolByWave": {
+     "1": 7
+    },
+    "draftedByWave": {
+     "1": 4
+    },
+    "farthestByWave": {
+     "1": 4
+    },
+    "draftedMeanDist": 2.25,
+    "poolMeanDist": 3.7142857142857144,
+    "w3plusMeanDist": null,
+    "w12MeanDist": 3.7142857142857144,
+    "raiders": [
+     {
+      "rank": 0,
+      "type": "cliffhanger",
+      "wave": 1,
+      "dist": 1,
+      "preTx": 4,
+      "preTy": 5,
+      "preHp": 11,
+      "maxHp": 70,
+      "wall": 0,
+      "postTollHp": 11,
+      "postTollExactly1": false,
+      "postCallHp": null,
+      "postCallTx": null,
+      "postCallTy": null,
+      "postMatch": "gone"
+     },
+     {
+      "rank": 1,
+      "type": "drumbelly_tanuki",
+      "wave": 1,
+      "dist": 1,
+      "preTx": 4,
+      "preTy": 3,
+      "preHp": 45,
+      "maxHp": 45,
+      "wall": 0,
+      "postTollHp": 45,
+      "postTollExactly1": false,
+      "postCallHp": null,
+      "postCallTx": null,
+      "postCallTy": null,
+      "postMatch": "gone"
+     },
+     {
+      "rank": 2,
+      "type": "murkcap",
+      "wave": 1,
+      "dist": 3,
+      "preTx": 3,
+      "preTy": 2,
+      "preHp": 60,
+      "maxHp": 60,
+      "wall": 0,
+      "postTollHp": 60,
+      "postTollExactly1": false,
+      "postCallHp": null,
+      "postCallTx": null,
+      "postCallTy": null,
+      "postMatch": "gone"
+     },
+     {
+      "rank": 3,
+      "type": "gallowdeer",
+      "wave": 1,
+      "dist": 4,
+      "preTx": 5,
+      "preTy": 1,
+      "preHp": 93,
+      "maxHp": 150,
+      "wall": 0,
+      "postTollHp": 93,
+      "postTollExactly1": false,
+      "postCallHp": 78,
+      "postCallTx": 4,
+      "postCallTy": 4,
+      "postMatch": "haven-tile-unique"
+     }
+    ],
+    "w3plusPool": []
+   },
+   {
+    "day": 25,
+    "returned": true,
+    "pantry": 9504,
+    "havenTier": 1,
+    "palisade": false,
+    "raidN": 3,
+    "hx": 4,
+    "hy": 4,
+    "poolN": 12,
+    "livingN": 12,
+    "poolByWave": {
+     "1": 8,
+     "2": 4
+    },
+    "draftedByWave": {
+     "1": 3
+    },
+    "farthestByWave": {
+     "1": 2,
+     "2": 1
+    },
+    "draftedMeanDist": 2,
+    "poolMeanDist": 4,
+    "w3plusMeanDist": null,
+    "w12MeanDist": 4,
+    "raiders": [
+     {
+      "rank": 0,
+      "type": "hushwolf",
+      "wave": 1,
+      "dist": 1,
+      "preTx": 4,
+      "preTy": 5,
+      "preHp": 50,
+      "maxHp": 50,
+      "wall": 0,
+      "postTollHp": 50,
+      "postTollExactly1": false,
+      "postCallHp": 3,
+      "postCallTx": 5,
+      "postCallTy": 4,
+      "postMatch": "same-index"
+     },
+     {
+      "rank": 1,
+      "type": "hushwolf",
+      "wave": 1,
+      "dist": 2,
+      "preTx": 5,
+      "preTy": 3,
+      "preHp": 12,
+      "maxHp": 50,
+      "wall": 0,
+      "postTollHp": 12,
+      "postTollExactly1": false,
+      "postCallHp": 12,
+      "postCallTx": 5,
+      "postCallTy": 4,
+      "postMatch": "same-index"
+     },
+     {
+      "rank": 2,
+      "type": "belltoad",
+      "wave": 1,
+      "dist": 3,
+      "preTx": 4,
+      "preTy": 7,
+      "preHp": 20,
+      "maxHp": 45,
+      "wall": 0,
+      "postTollHp": 20,
+      "postTollExactly1": false,
+      "postCallHp": 12,
+      "postCallTx": 4,
+      "postCallTy": 4,
+      "postMatch": "same-index"
+     }
+    ],
+    "w3plusPool": []
+   }
+  ],
+  "calls": [
+   {
+    "day": 1,
+    "fired": false,
+    "returned": false,
+    "poolN": 0,
+    "livingN": 0,
+    "pantry": 47250,
+    "havenTier": 0,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "pool"
+   },
+   {
+    "day": 2,
+    "fired": false,
+    "returned": false,
+    "poolN": 0,
+    "livingN": 0,
+    "pantry": 40550,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "pool"
+   },
+   {
+    "day": 3,
+    "fired": false,
+    "returned": false,
+    "poolN": 4,
+    "livingN": 4,
+    "pantry": 33450,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 4,
+    "fired": false,
+    "returned": false,
+    "poolN": 5,
+    "livingN": 5,
+    "pantry": 32377,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 5,
+    "fired": false,
+    "returned": false,
+    "poolN": 5,
+    "livingN": 5,
+    "pantry": 28950,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 6,
+    "fired": false,
+    "returned": false,
+    "poolN": 6,
+    "livingN": 6,
+    "pantry": 28866,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 7,
+    "fired": false,
+    "returned": false,
+    "poolN": 6,
+    "livingN": 6,
+    "pantry": 26313,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 8,
+    "fired": false,
+    "returned": false,
+    "poolN": 6,
+    "livingN": 6,
+    "pantry": 25119,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 9,
+    "fired": false,
+    "returned": false,
+    "poolN": 6,
+    "livingN": 6,
+    "pantry": 22848,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 10,
+    "fired": false,
+    "returned": false,
+    "poolN": 6,
+    "livingN": 6,
+    "pantry": 22308,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 11,
+    "fired": false,
+    "returned": false,
+    "poolN": 7,
+    "livingN": 7,
+    "pantry": 21924,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 12,
+    "fired": false,
+    "returned": false,
+    "poolN": 7,
+    "livingN": 7,
+    "pantry": 21136,
+    "havenTier": 1,
+    "lastRaidDay": 0,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 14,
+    "fired": false,
+    "returned": false,
+    "poolN": 7,
+    "livingN": 7,
+    "pantry": 18016,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 15,
+    "fired": false,
+    "returned": false,
+    "poolN": 8,
+    "livingN": 8,
+    "pantry": 16708,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 16,
+    "fired": false,
+    "returned": false,
+    "poolN": 8,
+    "livingN": 8,
+    "pantry": 17008,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 17,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 15104,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 18,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 13055,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 19,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 10619,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 20,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 9374,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 21,
+    "fired": false,
+    "returned": false,
+    "poolN": 13,
+    "livingN": 13,
+    "pantry": 14724,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 22,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 18007,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 23,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 12303,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 24,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 11059,
+    "havenTier": 1,
+    "lastRaidDay": 13,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "roll-or-other"
+   },
+   {
+    "day": 26,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 7650,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 27,
+    "fired": false,
+    "returned": false,
+    "poolN": 12,
+    "livingN": 12,
+    "pantry": 6600,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 28,
+    "fired": false,
+    "returned": false,
+    "poolN": 13,
+    "livingN": 13,
+    "pantry": 5380,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 29,
+    "fired": false,
+    "returned": false,
+    "poolN": 13,
+    "livingN": 13,
+    "pantry": 4763,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "cooldown"
+   },
+   {
+    "day": 30,
+    "fired": false,
+    "returned": false,
+    "poolN": 13,
+    "livingN": 13,
+    "pantry": 2490,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "pantry"
+   },
+   {
+    "day": 31,
+    "fired": false,
+    "returned": false,
+    "poolN": 13,
+    "livingN": 13,
+    "pantry": 2158,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "pantry"
+   },
+   {
+    "day": 32,
+    "fired": false,
+    "returned": false,
+    "poolN": 13,
+    "livingN": 13,
+    "pantry": 1201,
+    "havenTier": 1,
+    "lastRaidDay": 25,
+    "cooldownDays": 7,
+    "knobSrc": "base",
+    "gateHint": "pantry"
+   }
+  ],
+  "fieldFights": [
+   {
+    "day": 3,
+    "vid": "gen_vt9nswl",
+    "mid": "belltoad",
+    "wave": 1,
+    "startHp": 45,
+    "startMax": 45,
+    "endHp": 20,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 25
+   },
+   {
+    "day": 4,
+    "vid": "gen_g8b3byj",
+    "mid": "mirrormoth",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 45,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 50
+   },
+   {
+    "day": 4,
+    "vid": "jorge_silva",
+    "mid": "nightlight_catfish",
+    "wave": 1,
+    "startHp": 22,
+    "startMax": 22,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 22
+   },
+   {
+    "day": 4,
+    "vid": "onni_korhonen",
+    "mid": "gallowdeer",
+    "wave": 1,
+    "startHp": 150,
+    "startMax": 150,
+    "endHp": 114,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 36
+   },
+   {
+    "day": 6,
+    "vid": "gen_g8b3byj",
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 70,
+    "endHp": 12,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 48
+   },
+   {
+    "day": 6,
+    "vid": "gen_g8b3byj",
+    "mid": "rut_king",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 85,
+    "endHp": 75,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 6,
+    "vid": "gen_te50r63",
+    "mid": "sanjun",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 100,
+    "endHp": 11,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 70
+   },
+   {
+    "day": 6,
+    "vid": "gen_te50r63",
+    "mid": "dustboar",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 85,
+    "endHp": 10,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 67
+   },
+   {
+    "day": 7,
+    "vid": "gen_vt9nswl",
+    "mid": "living_wire",
+    "wave": 1,
+    "startHp": 60,
+    "startMax": 60,
+    "endHp": 10,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 50
+   },
+   {
+    "day": 7,
+    "vid": "gen_in9ciwi",
+    "mid": "living_wire",
+    "wave": 1,
+    "startHp": 10,
+    "startMax": 60,
+    "endHp": 10,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 7,
+    "vid": "gen_vt9nswl",
+    "mid": "nevermore",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 60,
+    "endHp": 45,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 7,
+    "vid": "gen_te50r63",
+    "mid": "nightlight_catfish",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 32,
+    "endHp": 24,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 7,
+    "vid": "gen_vt9nswl",
+    "mid": "sweeps_week",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 100,
+    "endHp": 77,
+    "outcome": "vFlee",
+    "rounds": 1,
+    "mDealt": 11
+   },
+   {
+    "day": 8,
+    "vid": "gen_te50r63",
+    "mid": "bulldozer",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 90,
+    "endHp": 21,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 66
+   },
+   {
+    "day": 8,
+    "vid": "gen_te50r63",
+    "mid": "gallowdeer",
+    "wave": 1,
+    "startHp": 114,
+    "startMax": 150,
+    "endHp": 93,
+    "outcome": "vFlee",
+    "rounds": 1,
+    "mDealt": 21
+   },
+   {
+    "day": 9,
+    "vid": "jorge_silva",
+    "mid": "hummice",
+    "wave": 1,
+    "startHp": 10,
+    "startMax": 10,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 20
+   },
+   {
+    "day": 9,
+    "vid": "chantal_mukendi",
+    "mid": "glasswing",
+    "wave": 1,
+    "startHp": 18,
+    "startMax": 18,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 24
+   },
+   {
+    "day": 13,
+    "vid": "tashi_sherpa",
+    "mid": "cliffhanger",
+    "wave": 1,
+    "startHp": 70,
+    "startMax": 70,
+    "endHp": 11,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 59
+   },
+   {
+    "day": 13,
+    "vid": "gen_te50r63",
+    "mid": "cliffhanger",
+    "wave": 1,
+    "startHp": 11,
+    "startMax": 70,
+    "endHp": 11,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 13,
+    "vid": "gen_vg0le65",
+    "mid": "drumbelly_tanuki",
+    "wave": 1,
+    "startHp": 45,
+    "startMax": 45,
+    "endHp": 7,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 38
+   },
+   {
+    "day": 13,
+    "vid": "jorge_silva",
+    "mid": "murkcap",
+    "wave": 1,
+    "startHp": 60,
+    "startMax": 60,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 67
+   },
+   {
+    "day": 13,
+    "vid": "chantal_mukendi",
+    "mid": "gallowdeer",
+    "wave": 1,
+    "startHp": 93,
+    "startMax": 150,
+    "endHp": 78,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 15
+   },
+   {
+    "day": 15,
+    "vid": "gen_te50r63",
+    "mid": "cliffhanger",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 90,
+    "endHp": 5,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 69
+   },
+   {
+    "day": 15,
+    "vid": "gen_te50r63",
+    "mid": "giant_mosquito",
+    "wave": 2,
+    "startHp": null,
+    "startMax": 42,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 46
+   },
+   {
+    "day": 16,
+    "vid": "gen_te50r63",
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 70,
+    "endHp": 50,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 17,
+    "vid": "onni_korhonen",
+    "mid": "paparazzo",
+    "wave": 2,
+    "startHp": 70,
+    "startMax": 70,
+    "endHp": 6,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 64
+   },
+   {
+    "day": 17,
+    "vid": "onni_korhonen",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 50,
+    "startMax": 50,
+    "endHp": 12,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 38
+   },
+   {
+    "day": 18,
+    "vid": "jorge_silva",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 50,
+    "startMax": 50,
+    "endHp": 6,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 44
+   },
+   {
+    "day": 18,
+    "vid": "desmond_clarke",
+    "mid": "warranty_caller",
+    "wave": 2,
+    "startHp": 80,
+    "startMax": 80,
+    "endHp": 4,
+    "outcome": "mFlee",
+    "rounds": 8,
+    "mDealt": 76
+   },
+   {
+    "day": 18,
+    "vid": "gen_te50r63",
+    "mid": "warranty_caller",
+    "wave": 2,
+    "startHp": 80,
+    "startMax": 80,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 88
+   },
+   {
+    "day": 19,
+    "vid": "tashi_sherpa",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 12,
+    "startMax": 50,
+    "endHp": 12,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 21,
+    "vid": "jorge_silva",
+    "mid": "paparazzo",
+    "wave": 2,
+    "startHp": null,
+    "startMax": 90,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 93
+   },
+   {
+    "day": 22,
+    "vid": "jorge_silva",
+    "mid": "belltoad",
+    "wave": 1,
+    "startHp": null,
+    "startMax": 60,
+    "endHp": 54,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 22,
+    "vid": "tashi_sherpa",
+    "mid": "warranty_caller",
+    "wave": 2,
+    "startHp": 80,
+    "startMax": 80,
+    "endHp": 0,
+    "outcome": "vKill",
+    "rounds": 5,
+    "mDealt": 80
+   },
+   {
+    "day": 25,
+    "vid": "tashi_sherpa",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 12,
+    "startMax": 50,
+    "endHp": 12,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 25,
+    "vid": "gen_te50r63",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 50,
+    "startMax": 50,
+    "endHp": 3,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 47
+   },
+   {
+    "day": 25,
+    "vid": "gen_vg0le65",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 12,
+    "startMax": 50,
+    "endHp": 12,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0
+   },
+   {
+    "day": 25,
+    "vid": "desmond_clarke",
+    "mid": "belltoad",
+    "wave": 1,
+    "startHp": 20,
+    "startMax": 45,
+    "endHp": 12,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 8
+   },
+   {
+    "day": 31,
+    "vid": "olivia_bennett",
+    "mid": "hushwolf",
+    "wave": 1,
+    "startHp": 6,
+    "startMax": 50,
+    "endHp": 6,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0
+   }
+  ],
+  "faced": {
+   "belltoad": 1,
+   "mirrormoth": 1,
+   "nightlight_catfish": 1,
+   "gallowdeer": 1,
+   "speedbump_turtle": 1,
+   "sanjun": 1,
+   "dustboar": 1,
+   "living_wire": 1,
+   "sweeps_week": 1,
+   "bulldozer": 1,
+   "hummice": 1,
+   "glasswing": 1,
+   "cliffhanger": 1,
+   "drumbelly_tanuki": 1,
+   "murkcap": 1,
+   "giant_mosquito": 2,
+   "paparazzo": 2,
+   "hushwolf": 1,
+   "warranty_caller": 2,
+   "voice_mimic_radio": 2
+  },
+  "facedErrs": 0,
+  "facedError": null,
+  "logEntries": [
+   {
+    "d": 4,
+    "mid": "mirrormoth",
+    "w": 1,
+    "by": "gen_g8b3byj",
+    "via": "agency",
+    "trick": null
+   },
+   {
+    "d": 4,
+    "mid": "nightlight_catfish",
+    "w": 1,
+    "by": "jorge_silva",
+    "via": "wild",
+    "trick": null
+   },
+   {
+    "d": 9,
+    "mid": "hummice",
+    "w": 1,
+    "by": "jorge_silva",
+    "via": "wild",
+    "trick": null
+   },
+   {
+    "d": 9,
+    "mid": "glasswing",
+    "w": 1,
+    "by": "chantal_mukendi",
+    "via": "wild",
+    "trick": null
+   },
+   {
+    "d": 13,
+    "mid": "murkcap",
+    "w": 1,
+    "by": "jorge_silva",
+    "via": "wild",
+    "trick": null
+   },
+   {
+    "d": 15,
+    "mid": "giant_mosquito",
+    "w": 2,
+    "by": "gen_te50r63",
+    "via": "agency",
+    "trick": null
+   },
+   {
+    "d": 18,
+    "mid": "warranty_caller",
+    "w": 2,
+    "by": "gen_te50r63",
+    "via": "wild",
+    "trick": null
+   },
+   {
+    "d": 21,
+    "mid": "paparazzo",
+    "w": 2,
+    "by": "jorge_silva",
+    "via": "agency",
+    "trick": null
+   },
+   {
+    "d": 22,
+    "mid": "warranty_caller",
+    "w": 2,
+    "by": "tashi_sherpa",
+    "via": "wild",
+    "trick": null
+   },
+   {
+    "d": 23,
+    "mid": "voice_mimic_radio",
+    "w": 2,
+    "by": "gen_g8b3byj",
+    "via": "player",
+    "trick": null
+   },
+   {
+    "d": 26,
+    "mid": "hushwolf",
+    "w": 1,
+    "by": "gen_g8b3byj",
+    "via": "player",
+    "trick": null
+   },
+   {
+    "d": 26,
+    "mid": "belltoad",
+    "w": 1,
+    "by": "gen_g8b3byj",
+    "via": "player",
+    "trick": "shout,shout"
+   }
+  ],
+  "logErrs": 0,
+  "logError": null,
+  "diag": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  }
+ },
+ "spawnsrc": {
+  "raids": [
+   {
+    "day": 13,
+    "poolN": 7,
+    "livingN": 7,
+    "cap": 5,
+    "poolByWave": {
+     "1": 7
+    },
+    "poolBySrc": {
+     "maintain": 4,
+     "tile-entry": 3
+    },
+    "poolBySrcWave": {
+     "maintain:w1": 4,
+     "tile-entry:w1": 3
+    },
+    "pool": [
+     {
+      "type": "murkcap",
+      "wave": 1,
+      "dist": 3,
+      "src": "maintain",
+      "seq": 1,
+      "hp": 60
+     },
+     {
+      "type": "belltoad",
+      "wave": 1,
+      "dist": 6,
+      "src": "maintain",
+      "seq": 3,
+      "hp": 20
+     },
+     {
+      "type": "nightcourt",
+      "wave": 1,
+      "dist": 7,
+      "src": "maintain",
+      "seq": 4,
+      "hp": 55
+     },
+     {
+      "type": "gallowdeer",
+      "wave": 1,
+      "dist": 4,
+      "src": "tile-entry",
+      "seq": 5,
+      "hp": 93
+     },
+     {
+      "type": "living_wire",
+      "wave": 1,
+      "dist": 4,
+      "src": "tile-entry",
+      "seq": 6,
+      "hp": 10
+     },
+     {
+      "type": "cliffhanger",
+      "wave": 1,
+      "dist": 1,
+      "src": "maintain",
+      "seq": 9,
+      "hp": 11
+     },
+     {
+      "type": "drumbelly_tanuki",
+      "wave": 1,
+      "dist": 1,
+      "src": "tile-entry",
+      "seq": 10,
+      "hp": 45
+     }
+    ]
+   },
+   {
+    "day": 25,
+    "poolN": 12,
+    "livingN": 12,
+    "cap": 8,
+    "poolByWave": {
+     "1": 8,
+     "2": 4
+    },
+    "poolBySrc": {
+     "maintain": 4,
+     "tile-entry": 5,
+     "scripted-hushwolf": 3
+    },
+    "poolBySrcWave": {
+     "maintain:w1": 3,
+     "tile-entry:w1": 2,
+     "maintain:w2": 1,
+     "tile-entry:w2": 3,
+     "scripted-hushwolf:w1": 3
+    },
+    "pool": [
+     {
+      "type": "belltoad",
+      "wave": 1,
+      "dist": 3,
+      "src": "maintain",
+      "seq": 3,
+      "hp": 20
+     },
+     {
+      "type": "nightcourt",
+      "wave": 1,
+      "dist": 6,
+      "src": "maintain",
+      "seq": 4,
+      "hp": 55
+     },
+     {
+      "type": "living_wire",
+      "wave": 1,
+      "dist": 4,
+      "src": "tile-entry",
+      "seq": 6,
+      "hp": 10
+     },
+     {
+      "type": "cliffhanger",
+      "wave": 1,
+      "dist": 5,
+      "src": "maintain",
+      "seq": 9,
+      "hp": 11
+     },
+     {
+      "type": "drumbelly_tanuki",
+      "wave": 1,
+      "dist": 3,
+      "src": "tile-entry",
+      "seq": 10,
+      "hp": 7
+     },
+     {
+      "type": "moderator",
+      "wave": 2,
+      "dist": 5,
+      "src": "maintain",
+      "seq": 11,
+      "hp": 150
+     },
+     {
+      "type": "voice_mimic_radio",
+      "wave": 2,
+      "dist": 6,
+      "src": "tile-entry",
+      "seq": 12,
+      "hp": 65
+     },
+     {
+      "type": "paparazzo",
+      "wave": 2,
+      "dist": 4,
+      "src": "tile-entry",
+      "seq": 13,
+      "hp": 6
+     },
+     {
+      "type": "hushwolf",
+      "wave": 1,
+      "dist": 6,
+      "src": "scripted-hushwolf",
+      "seq": 14,
+      "hp": 6
+     },
+     {
+      "type": "hushwolf",
+      "wave": 1,
+      "dist": 2,
+      "src": "scripted-hushwolf",
+      "seq": 15,
+      "hp": 12
+     },
+     {
+      "type": "hushwolf",
+      "wave": 1,
+      "dist": 1,
+      "src": "scripted-hushwolf",
+      "seq": 16,
+      "hp": 50
+     },
+     {
+      "type": "warranty_caller",
+      "wave": 2,
+      "dist": 3,
+      "src": "tile-entry",
+      "seq": 17,
+      "hp": 4
+     }
+    ]
+   }
+  ],
+  "spawns": [
+   {
+    "day": 3,
+    "seq": 1,
+    "src": "maintain",
+    "type": "murkcap",
+    "wave": 1,
+    "tx": 7,
+    "ty": 6,
+    "hint": "spawnWorldMonster,maintainWorldMonsters,worldTick,checkEncounter,G,Game"
+   },
+   {
+    "day": 3,
+    "seq": 2,
+    "src": "maintain",
+    "type": "nightlight_catfish",
+    "wave": 1,
+    "tx": 5,
+    "ty": 6,
+    "hint": "spawnWorldMonster,maintainWorldMonsters,worldTick,checkEncounter,G,Game"
+   },
+   {
+    "day": 3,
+    "seq": 3,
+    "src": "maintain",
+    "type": "belltoad",
+    "wave": 1,
+    "tx": 2,
+    "ty": 3,
+    "hint": "spawnWorldMonster,maintainWorldMonsters,worldTick,checkEncounter,G,Game"
+   },
+   {
+    "day": 3,
+    "seq": 4,
+    "src": "maintain",
+    "type": "nightcourt",
+    "wave": 1,
+    "tx": 1,
+    "ty": 1,
+    "hint": "spawnWorldMonster,maintainWorldMonsters,worldTick,checkEncounter,G,Game"
+   },
+   {
+    "day": 4,
+    "seq": 5,
+    "src": "tile-entry",
+    "type": "gallowdeer",
+    "wave": 1,
+    "tx": 4,
+    "ty": 3,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 4,
+    "seq": 6,
+    "src": "tile-entry",
+    "type": "living_wire",
+    "wave": 1,
+    "tx": 3,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 6,
+    "seq": 7,
+    "src": "tile-entry",
+    "type": "hummice",
+    "wave": 1,
+    "tx": 3,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 9,
+    "seq": 8,
+    "src": "tile-entry",
+    "type": "glasswing",
+    "wave": 1,
+    "tx": 3,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 9,
+    "seq": 9,
+    "src": "maintain",
+    "type": "cliffhanger",
+    "wave": 1,
+    "tx": 6,
+    "ty": 5,
+    "hint": "spawnWorldMonster,maintainWorldMonsters,worldTick,checkEncounter,G,Game"
+   },
+   {
+    "day": 11,
+    "seq": 10,
+    "src": "tile-entry",
+    "type": "drumbelly_tanuki",
+    "wave": 1,
+    "tx": 4,
+    "ty": 3,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 14,
+    "seq": 11,
+    "src": "maintain",
+    "type": "moderator",
+    "wave": 2,
+    "tx": 5,
+    "ty": 2,
+    "hint": "spawnWorldMonster,maintainWorldMonsters,worldTick,checkEncounter,G,Game"
+   },
+   {
+    "day": 14,
+    "seq": 12,
+    "src": "tile-entry",
+    "type": "voice_mimic_radio",
+    "wave": 2,
+    "tx": 3,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 15,
+    "seq": 13,
+    "src": "tile-entry",
+    "type": "paparazzo",
+    "wave": 2,
+    "tx": 5,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 16,
+    "seq": 14,
+    "src": "scripted-hushwolf",
+    "type": "hushwolf",
+    "wave": 1,
+    "tx": 5,
+    "ty": 4,
+    "hint": "spawnWorldMonster,evQuietWoods,triggerEvent,checkTimedEvents,endDay,Game"
+   },
+   {
+    "day": 16,
+    "seq": 15,
+    "src": "scripted-hushwolf",
+    "type": "hushwolf",
+    "wave": 1,
+    "tx": 5,
+    "ty": 4,
+    "hint": "spawnWorldMonster,evQuietWoods,triggerEvent,checkTimedEvents,endDay,Game"
+   },
+   {
+    "day": 16,
+    "seq": 16,
+    "src": "scripted-hushwolf",
+    "type": "hushwolf",
+    "wave": 1,
+    "tx": 5,
+    "ty": 4,
+    "hint": "spawnWorldMonster,evQuietWoods,triggerEvent,checkTimedEvents,endDay,Game"
+   },
+   {
+    "day": 17,
+    "seq": 17,
+    "src": "tile-entry",
+    "type": "warranty_caller",
+    "wave": 2,
+    "tx": 3,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 18,
+    "seq": 18,
+    "src": "tile-entry",
+    "type": "warranty_caller",
+    "wave": 2,
+    "tx": 4,
+    "ty": 3,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 21,
+    "seq": 19,
+    "src": "tile-entry",
+    "type": "warranty_caller",
+    "wave": 2,
+    "tx": 4,
+    "ty": 3,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 26,
+    "seq": 20,
+    "src": "tile-entry",
+    "type": "hummice",
+    "wave": 1,
+    "tx": 4,
+    "ty": 3,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   },
+   {
+    "day": 28,
+    "seq": 21,
+    "src": "tile-entry",
+    "type": "callback",
+    "wave": 3,
+    "tx": 3,
+    "ty": 4,
+    "hint": "spawnWorldMonster,checkEncounter,G,Game,travelTo,game"
+   }
+  ],
+  "diag": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  }
+ },
+ "tbstarts": {
+  "starts": [
+   {
+    "day": 14,
+    "callIdx": 0,
+    "arg": "cliffhanger",
+    "preId": null,
+    "preOver": null,
+    "preToken": null,
+    "preFighters": [],
+    "tileMon": {
+     "seq": 5,
+     "type": "gallowdeer",
+     "wave": 1,
+     "hp": 78,
+     "maxHp": 150,
+     "titan": false,
+     "lingering": false,
+     "lingerSince": null,
+     "tx": 4,
+     "ty": 4
+    },
+    "stack": [
+     "scripts/sim-harness.js:807:12",
+     "scripts/sim-harness.js:774:21",
+     "scripts/sim-harness.js:414:18",
+     "scripts/sim-harness.js:775:41",
+     "scripts/sim-harness.js:582:5",
+     "scripts/sim-harness.js:57:22"
+    ],
+    "titanMuster": null,
+    "postId": null,
+    "postOver": null,
+    "postToken": null,
+    "postFighters": [],
+    "lifted": false,
+    "worldOriginSet": false,
+    "worldOriginSeq": null,
+    "refused": false,
+    "retNull": true,
+    "retId": null,
+    "newOutcomes": []
+   },
+   {
+    "day": 14,
+    "callIdx": 1,
+    "arg": "gallowdeer",
+    "preId": null,
+    "preOver": null,
+    "preToken": null,
+    "preFighters": [],
+    "tileMon": {
+     "seq": 5,
+     "type": "gallowdeer",
+     "wave": 1,
+     "hp": 78,
+     "maxHp": 150,
+     "titan": false,
+     "lingering": false,
+     "lingerSince": null,
+     "tx": 4,
+     "ty": 4
+    },
+    "stack": [
+     "src/js/game.js:22696:42",
+     "src/js/game.js:19214:35",
+     "src/js/favor-company.js:187:34",
+     "src/js/timeSettlement.js:39:33",
+     "src/js/game.js:26342:25",
+     "src/js/journal.js:1444:28"
+    ],
+    "titanMuster": null,
+    "postId": "fmgpsphmw_crm3dt",
+    "postOver": false,
+    "postToken": 2,
+    "postFighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 92
+     },
+     {
+      "kind": "monster",
+      "id": "gallowdeer",
+      "key": "m_0",
+      "alive": true,
+      "hp": 161
+     }
+    ],
+    "lifted": true,
+    "worldOriginSet": false,
+    "worldOriginSeq": null,
+    "refused": false,
+    "retNull": false,
+    "retId": "fmgpsphmw_crm3dt",
+    "newOutcomes": []
+   },
+   {
+    "day": 23,
+    "callIdx": 2,
+    "arg": "voice_mimic_radio",
+    "preId": null,
+    "preOver": null,
+    "preToken": null,
+    "preFighters": [],
+    "tileMon": null,
+    "stack": [
+     "src/js/feastBuff.js:515:20",
+     "scripts/sim-harness.js:515:25",
+     "scripts/policies/competent.js:511:38",
+     "scripts/policies/competent.js:2774:5",
+     "scripts/sim-harness.js:557:102",
+     "scripts/sim-harness.js:414:18"
+    ],
+    "titanMuster": null,
+    "postId": "fmgpsphs3_2j2011",
+    "postOver": false,
+    "postToken": 3,
+    "postFighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 93
+     },
+     {
+      "kind": "monster",
+      "id": "voice_mimic_radio",
+      "key": "m_0",
+      "alive": true,
+      "hp": 70
+     }
+    ],
+    "lifted": null,
+    "worldOriginSet": false,
+    "worldOriginSeq": null,
+    "refused": false,
+    "retNull": false,
+    "retId": "fmgpsphs3_2j2011",
+    "newOutcomes": []
+   },
+   {
+    "day": 26,
+    "callIdx": 3,
+    "arg": "hushwolf",
+    "preId": null,
+    "preOver": null,
+    "preToken": null,
+    "preFighters": [],
+    "tileMon": {
+     "seq": 3,
+     "type": "belltoad",
+     "wave": 1,
+     "hp": 12,
+     "maxHp": 45,
+     "titan": false,
+     "lingering": false,
+     "lingerSince": null,
+     "tx": 4,
+     "ty": 4
+    },
+    "stack": [
+     "scripts/sim-harness.js:807:12",
+     "scripts/sim-harness.js:774:21",
+     "scripts/sim-harness.js:414:18",
+     "scripts/sim-harness.js:775:41",
+     "scripts/sim-harness.js:582:5",
+     "scripts/sim-harness.js:57:22"
+    ],
+    "titanMuster": null,
+    "postId": "fmgpsphtm_27wu9v",
+    "postOver": false,
+    "postToken": 4,
+    "postFighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 91
+     },
+     {
+      "kind": "monster",
+      "id": "hushwolf",
+      "key": "m_0",
+      "alive": true,
+      "hp": 59
+     }
+    ],
+    "lifted": false,
+    "worldOriginSet": false,
+    "worldOriginSeq": null,
+    "refused": false,
+    "retNull": false,
+    "retId": "fmgpsphtm_27wu9v",
+    "newOutcomes": []
+   },
+   {
+    "day": 26,
+    "callIdx": 4,
+    "arg": "belltoad",
+    "preId": null,
+    "preOver": null,
+    "preToken": null,
+    "preFighters": [],
+    "tileMon": {
+     "seq": 3,
+     "type": "belltoad",
+     "wave": 1,
+     "hp": 12,
+     "maxHp": 45,
+     "titan": false,
+     "lingering": false,
+     "lingerSince": null,
+     "tx": 4,
+     "ty": 4
+    },
+    "stack": [
+     "src/js/game.js:22729:48",
+     "src/js/game.js:19214:35",
+     "src/js/favor-company.js:187:34",
+     "src/js/timeSettlement.js:39:33",
+     "src/js/game.js:26342:25",
+     "src/js/journal.js:1444:28"
+    ],
+    "titanMuster": null,
+    "postId": "fmgpsphtt_2tjd9g",
+    "postOver": false,
+    "postToken": 5,
+    "postFighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 91
+     },
+     {
+      "kind": "monster",
+      "id": "belltoad",
+      "key": "m_0",
+      "alive": true,
+      "hp": 54
+     }
+    ],
+    "lifted": true,
+    "worldOriginSet": false,
+    "worldOriginSeq": null,
+    "refused": false,
+    "retNull": false,
+    "retId": "fmgpsphtt_2tjd9g",
+    "newOutcomes": []
+   }
+  ],
+  "ends": [
+   {
+    "day": 14,
+    "activeStart": 0,
+    "result": "routed",
+    "id": "fmgpsphmt_fht03a",
+    "token": 1,
+    "fighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 92
+     },
+     {
+      "kind": "monster",
+      "id": "cliffhanger",
+      "key": "m_0",
+      "alive": true,
+      "hp": 84
+     }
+    ],
+    "postId": null
+   },
+   {
+    "day": 14,
+    "activeStart": null,
+    "result": "lost",
+    "id": "fmgpsphmw_crm3dt",
+    "token": 2,
+    "fighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": false,
+      "hp": -5
+     },
+     {
+      "kind": "monster",
+      "id": "gallowdeer",
+      "key": "m_0",
+      "alive": true,
+      "hp": 110
+     }
+    ],
+    "postId": null
+   },
+   {
+    "day": 23,
+    "activeStart": null,
+    "result": "won",
+    "id": "fmgpsphs3_2j2011",
+    "token": 3,
+    "fighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 93
+     },
+     {
+      "kind": "monster",
+      "id": "voice_mimic_radio",
+      "key": "m_0",
+      "alive": false,
+      "hp": -21
+     }
+    ],
+    "postId": null
+   },
+   {
+    "day": 26,
+    "activeStart": null,
+    "result": "won",
+    "id": "fmgpsphtm_27wu9v",
+    "token": 4,
+    "fighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": true,
+      "hp": 91
+     },
+     {
+      "kind": "monster",
+      "id": "hushwolf",
+      "key": "m_0",
+      "alive": false,
+      "hp": -1
+     }
+    ],
+    "postId": null
+   },
+   {
+    "day": 26,
+    "activeStart": null,
+    "result": "lost",
+    "id": "fmgpsphtt_2tjd9g",
+    "token": 5,
+    "fighters": [
+     {
+      "kind": "player",
+      "id": "p",
+      "key": "p",
+      "alive": false,
+      "hp": -2
+     },
+     {
+      "kind": "monster",
+      "id": "belltoad",
+      "key": "m_0",
+      "alive": false,
+      "hp": -6
+     },
+     {
+      "kind": "monster",
+      "id": "belltoad",
+      "key": "m_spawn_1",
+      "alive": false,
+      "hp": -11
+     },
+     {
+      "kind": "monster",
+      "id": "belltoad",
+      "key": "m_spawn_2",
+      "alive": true,
+      "hp": 4
+     },
+     {
+      "kind": "monster",
+      "id": "belltoad",
+      "key": "m_spawn_3",
+      "alive": true,
+      "hp": 49
+     }
+    ],
+    "postId": null
+   }
+  ],
+  "dissolves": [],
+  "throws": [],
+  "daily": [
+   {
+    "day": 2,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 2,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 4,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 4,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 5,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 6,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 7,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 8,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 9,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 10,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 11,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 12,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 13,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 14,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 15,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 16,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 17,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 18,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 19,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 20,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 21,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 22,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 23,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 24,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 25,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 26,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 27,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 28,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 29,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 30,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 31,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   },
+   {
+    "day": 32,
+    "fightId": null,
+    "over": null,
+    "result": null,
+    "fighterKinds": []
+   }
+  ],
+  "diag": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  }
+ }
+}
