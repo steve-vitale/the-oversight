@@ -145,6 +145,16 @@ function main() {
     if (b.status === 'not-run') { console.log(`  band ${letter}: not run`); continue; }
     console.log(`  band ${letter}: seated=${b.seatedCount} noDefianceSeated=${b.noDefianceCount} (${JSON.stringify(b.noDefianceSeated)}) qualifies=${b.qualifies} fallbackFeared=${b.fallbackFeared.length} won=${b.phase2.fallbackFearedWon} costBar=${b.phase2.costBar} GO-input=${b.phase2.go}`);
     console.log(`    trials baseline: ${JSON.stringify(b.trials.baseline)} armed: ${JSON.stringify(b.trials.armed)}`);
+    const courtSum = (pid) => {
+      let proposed = 0, counters = 0, tended = 0;
+      for (const seed of seeds) {
+        const r = loadRow(seed, pid); if (!r || !r.ctxExtra) continue;
+        proposed += r.ctxExtra.proposedLead || 0; counters += r.ctxExtra.courtCounters || 0; tended += r.ctxExtra.tended || 0;
+      }
+      return { proposed, counters, tended };
+    };
+    const cb = courtSum('baseline'), ca = courtSum('armed');
+    console.log(`    COURTSHIP-ACTIVATION baseline: ${JSON.stringify(cb)} armed: ${JSON.stringify(ca)}${(cb.proposed === 0 && ca.proposed === 0) ? '  <-- WARNING: no courtship proposals on either leg; substrate may not have activated (cf. invalid first sweep)' : ''}`);
     for (const o of b.gOffer) console.log(`    seed ${o.seed}: offered=${JSON.stringify(o.offered)} defiance=${o.defianceOffered ? o.defianceValue : 'NOT-OFFERED'} picked=${o.picked} rule=${o.rule} won=${o.won}`);
     if (b.gLeak.length) console.log(`    G-leak comparable seeds: ${b.gLeak.length}, all-ok=${b.gLeak.every(x => x.ok)}`);
   }

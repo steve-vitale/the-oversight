@@ -125,6 +125,12 @@ async function runOne(pid, seed, days, evidDir) {
   // (courtship + seat legs shared exactly); TABLETRIALDOOR=1 only for armed.
   // Both policy gates read env per daily call, so setting env between
   // configs in one process is safe.
+  // COURTSHIP ACTIVATION (fix 2026-10-27, after the invalid first sweep):
+  // tableseat-nowait MEANS leanlinkrescue courtship + seat legs; the
+  // courtship itself gates on LEANLINKRESCUE=1. Omitting it silently
+  // runs competent-only (no courtship, no national, no seats) — the
+  // first sweep's failure mode. Both legs set it identically.
+  process.env.LEANLINKRESCUE = '1';
   process.env.TABLESEATNOWAIT = '1';
   process.env.TRIALCHASE = '1';
   if (pid === 'armed') { process.env.TABLETRIALDOOR = '1'; }
@@ -259,6 +265,9 @@ function aggregate(rows, pid) {
     chasePantryDays: rs.reduce((t, r) => t + (r.tr.trChasePantry || 0), 0),
     chaseIdentifyDays: rs.reduce((t, r) => t + (r.tr.trChaseIdentify || 0), 0),
     eatL2Bites: rs.reduce((t, r) => t + (r.tr.trEatL2Bites || 0), 0),
+    courtProposed: rs.reduce((t, r) => t + ((r.ctxExtra || {}).proposedLead || 0), 0),
+    courtCounters: rs.reduce((t, r) => t + ((r.ctxExtra || {}).courtCounters || 0), 0),
+    courtTended: rs.reduce((t, r) => t + ((r.ctxExtra || {}).tended || 0), 0),
     l2toL3: rs.reduce((t, r) => t + (r.tr.trL2toL3 || 0), 0),
   };
 }
@@ -325,7 +334,7 @@ async function sweepMode() {
   console.log('\n=== sim-rule3trial-a pilot ===');
   for (const pid of ['baseline', 'armed']) {
     const b = byPolicy[pid];
-    console.log(`  ${pid}: n=${b.n} won=${b.won} medD=${b.medianDays} medGameD=${b.medianGameDays} maxD=${b.maxDays} natEver=${b.nationalEver} natFinal=${b.nationalFinal} table=${b.table} entered=${b.entered} enteredByPath=${JSON.stringify(b.enteredByPath)} wonByPath=${JSON.stringify(b.wonByPath)} defiantEntered=${b.defiantEntered} defiantWon=${b.defiantWon} fallbackNonFeared=${b.fallbackNonFeared} fallbackFeared=${b.fallbackFeared} wave4=${b.wave4} wave5=${b.wave5} maxArc=${b.maxArc} starvTotal=${b.starvationTotal} seatAttempts=${b.seatAttempts} seatTaken=${b.seatTaken} seatFailed=${b.seatFailed} previewSeen=${b.previewSeen} previewNotReady=${b.previewNotReady} tableAnswers=${b.tableAnswers} trialsSeen=${b.trialsSeen} trialsCompleted=${b.trialsCompleted} trialsExpired=${b.trialsExpired} chasePantry=${b.chasePantryDays} chaseIdentify=${b.chaseIdentifyDays} eatL2=${b.eatL2Bites} l2toL3=${b.l2toL3}`);
+    console.log(`  ${pid}: n=${b.n} won=${b.won} medD=${b.medianDays} medGameD=${b.medianGameDays} maxD=${b.maxDays} natEver=${b.nationalEver} natFinal=${b.nationalFinal} table=${b.table} entered=${b.entered} enteredByPath=${JSON.stringify(b.enteredByPath)} wonByPath=${JSON.stringify(b.wonByPath)} defiantEntered=${b.defiantEntered} defiantWon=${b.defiantWon} fallbackNonFeared=${b.fallbackNonFeared} fallbackFeared=${b.fallbackFeared} wave4=${b.wave4} wave5=${b.wave5} maxArc=${b.maxArc} starvTotal=${b.starvationTotal} seatAttempts=${b.seatAttempts} seatTaken=${b.seatTaken} seatFailed=${b.seatFailed} previewSeen=${b.previewSeen} previewNotReady=${b.previewNotReady} tableAnswers=${b.tableAnswers} trialsSeen=${b.trialsSeen} trialsCompleted=${b.trialsCompleted} trialsExpired=${b.trialsExpired} courtProposed=${b.courtProposed} courtCounters=${b.courtCounters} courtTended=${b.courtTended} chasePantry=${b.chasePantryDays} chaseIdentify=${b.chaseIdentifyDays} eatL2=${b.eatL2Bites} l2toL3=${b.l2toL3}`);
   }
   console.log(`  arm-only starvation: ${armOnlyStarv}`);
   console.log(`  G2 non-seated leak gate: ${g2Pass === null ? 'n/a (every seed seated in some arm)' : (g2Pass ? 'PASS' : 'FAIL')} (${g2.length} comparable seeds)`);
@@ -343,6 +352,13 @@ async function detgateMode() {
   // DETGATE 1 (door-off): armed POLICY under baseline-style env:
   // TRIALCHASE=1, TABLETRIALDOOR unset — must delegate to
   // tableseat-trialchase.
+  // COURTSHIP ACTIVATION (fix 2026-10-27, after the invalid first sweep):
+  // tableseat-nowait MEANS leanlinkrescue courtship + seat legs; the
+  // courtship itself gates on LEANLINKRESCUE=1. Omitting it silently
+  // runs competent-only (no courtship, no national, no seats) — the
+  // first sweep's failure mode. Both legs set it identically.
+  process.env.LEANLINKRESCUE = '1';
+  process.env.LEANLINKRESCUE = '1';
   process.env.TABLESEATNOWAIT = '1';
   process.env.TRIALCHASE = '1';
   delete process.env.TABLETRIALDOOR;
@@ -363,6 +379,7 @@ async function detgateMode() {
   if (!ok) process.exit(1);
   // DETGATE 2 (trial-off): tableseat-trialchase with TRIALCHASE unset must
   // delegate to tableseat-nowait exactly (TABLESEATNOWAIT=1 both runs).
+  process.env.LEANLINKRESCUE = '1';
   process.env.TABLESEATNOWAIT = '1';
   delete process.env.TRIALCHASE;
   delete process.env.TABLETRIALDOOR;
@@ -387,6 +404,13 @@ async function senseMode(seedArg) {
   const seed = parseInt(process.env.SENSE_SEED || seedArg || '77301', 10);
   const days = parseInt(process.env.DAYS || '180', 10) || 180;
   const out = process.env.SENSE_OUT || path.join(REPO, 'evidence', '2026-10-27', 'sim-rule3trial-a-sense.txt');
+  // COURTSHIP ACTIVATION (fix 2026-10-27, after the invalid first sweep):
+  // tableseat-nowait MEANS leanlinkrescue courtship + seat legs; the
+  // courtship itself gates on LEANLINKRESCUE=1. Omitting it silently
+  // runs competent-only (no courtship, no national, no seats) — the
+  // first sweep's failure mode. Both legs set it identically.
+  process.env.LEANLINKRESCUE = '1';
+  process.env.LEANLINKRESCUE = '1';
   process.env.TABLESEATNOWAIT = '1';
   process.env.TRIALCHASE = '1';
   process.env.TABLETRIALDOOR = '1';
