@@ -190,7 +190,14 @@
         return { ok: true, msg: line };
       }
 
-      // Acceptance: trust helps, personality and goals decide.
+      // Acceptance: the shared character decision (tackle-invite
+      // 2026-10-27) — temperament, trust, the bond built during the
+      // run, the stakes of joining (party size, fear), goal and mood,
+      // clamped 5-95. The weights below are the fallback only, used
+      // if the decision function is unavailable; they mirror the
+      // pre-tackle-invite formula exactly.
+      let decision = null;
+      try { decision = (this.npcInviteDecision && this.npcInviteDecision(vid, this.villagerId, { kind: 'party' })) || null; } catch (e) { decision = null; }
       let chance = 35 + trust * 0.4;
       if (temp === 'bold' || temp === 'warm') chance += 15;
       if (temp === 'prickly' || temp === 'withdrawn') chance -= 20;
@@ -202,7 +209,7 @@
       if (mood === 'cheerful') chance += 10;
       chance = Math.max(5, Math.min(95, chance));
 
-      if (Math.random() * 100 < chance) {
+      if (decision ? decision.accept : (Math.random() * 100 < chance)) {
         v.party.push(vid);
         v.followers = (v.followers || []).filter(id => id !== vid);
         this.setEngaged(vid, 2);
