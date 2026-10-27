@@ -13,6 +13,9 @@
 // stockdoor-capture.js + direct-consumption snapshot-diff wrappers).
 // Opening-stock snapshot after setupGame, before the first policy day.
 // Day-end snapshots use spoilvol-capture's snapshotPantry.
+// 2030Z ADDITION (prereg evidence/2026-10-27/sim-stockdoors-b-prereg.md):
+// oneRun also records finalPantry, a post-runDays spoilvol snapshot —
+// the boundary-aware closing. Pure read, present in both det-gate runs.
 //
 // Env (all asserted FATAL):
 //   COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1
@@ -168,6 +171,15 @@ async function oneRun(seed) {
   const t0 = Date.now();
   const result = await runDays(Game, wrappedPolicy, { days: DAYS, manifest: null });
   const ms = Date.now() - t0;
+  // POST-RUN CLOSING SNAPSHOT (sim-stockdoors-b-2030 prereg, 2026-10-27):
+  // the closing boundary the 0530Z metric review ordered. Taken AFTER
+  // runDays returns, via the already-installed spoilvol snapshotPantry
+  // (pure read, no Game.state write, no RNG, no say/log). Present in
+  // BOTH det-gate runs (STOCKDOORS on and off), so the det-gate compares
+  // it: any difference is a neutrality failure. Basis: post-run (see
+  // prereg snapshot-basis note — distinct from the day-end basis of
+  // spoilDays and the opening basis of openingStock).
+  const finalPantry = (() => { try { return spoilvol.snapshotPantry(); } catch (e) { return null; } })();
   const deathCauses = {};
   for (const d of deaths) deathCauses[d.cause] = (deathCauses[d.cause] || 0) + 1;
   const rank = (() => { try { return String(Game.scaleRank()); } catch (e) { return '?'; } })();
@@ -185,6 +197,7 @@ async function oneRun(seed) {
     endReason: result.endReason, ms,
     openingStock,
     spoilDays, smokeSayLines,
+    finalPantry,
     driedEvents: driedpath.events.events,
     driedCounters: driedpath.counters,
     spoilEvents: spoilvol.events, spoilCounters: spoilvol.counters,
