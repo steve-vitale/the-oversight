@@ -54,7 +54,7 @@ One principle settles both unless Steve splits them: does the table protect you,
   - The table protects (arrival brings safety).
   - The table stays exposed (arrival is not safety).
 - My take: No blanket protection. The table is the endgame stage, and its risks are the point — but its danger should come from table stakes (contests, deals), not ambient monster pressure, which table sanctity already suspends. The question worth auditing next is whether the nine table deaths were fair table-stakes losses, not whether the table should be safe.
-- Status: [ ] UNRULED
+- Status: [x] RULED (Steve 2026-10-27): No protection. The table does not protect the scholar or village; exposure is the price ("idk why they need protection at the endgame table").
 
 ### 311 — Should the table waiting period carry protection?
 
@@ -64,7 +64,7 @@ One principle settles both unless Steve splits them: does the table protect you,
   - The waiting period carries protection.
   - The waiting period stays exposed — exposure is the price of an early arrival.
 - My take: Keep it exposed. Protection would make "defer and wait" strictly better than "sit now," which kills the decision. What the game owes the player is honesty about the risk, not safety from it.
-- Status: [ ] UNRULED
+- Status: [x] RULED (Steve 2026-10-27): No protection in the waiting period; same principle as 136 — exposure is the price of an early arrival.
 
 ---
 
@@ -241,6 +241,12 @@ These are all "which verb exists" questions. 163 and 256 are the same siege ques
   - A wider walk-by radius for remembering corpses.
 - My take: Witness memory. It is the smallest change that joins the two disjoint populations — the scholar's kills become village knowledge — without reworking expedition rates or spoil clocks.
 - Status: [ ] UNRULED
+
+### (new) — Monster-meat testing and cooking: villagers should test and cook monster meat
+
+- Question: Unknown flesh never reaches a meal — it arrives at zero food value, the pantry draw filters it out, the once-a-day experiment beat never picks it, and with no spoil day it piles up as clutter. Why aren't villagers testing and cooking it?
+- Why it matters: The whole monster-meat channel (haul, reveal, test, cook) is decorative if nothing ever reaches a meal, and quirk meats are a designed min-max building block.
+- Status: [x] RULED (Steve 2026-10-27, direction): Villagers should test and cook monster meat — the channel is to be made working end to end. Mechanism per the existing candidates (away-from-home experiments, spoil day on hauled unknown flesh, competent-policy test drive), measured before landing. Item 284 (which haul fix) stays open.
 
 ### 292 — Should a dehydration death trigger water-duty assignment?
 
@@ -475,7 +481,7 @@ Each stands alone. 415 is flagged: it revises Steve's own prior ruling.
   - Design a mechanism (to be explored, not built yet).
   - Leave it as direction only for now.
 - My take: Explore, do not build yet — the item itself says so. The mechanism question worth answering first is narrow: when an NPC takes a seat, does the player's run continue, and what does the player do then? Answer that before designing the competition.
-- Status: [ ] UNRULED
+- Status: [x] RULED (Steve 2026-10-26, two parts): (1) path choice is player-only — NPCs never choose the path. (2) seat-taker choice: the player chooses who takes the seat, their own player character OR another villager, and plays out the scenario as that villager (normal seat, trial-by-combat, etc.). Champion + god-raising are philosophy labels (village-as-protagonist; villagers can achieve like the player), not new systems.
 
 ### 512 — Witness exposure sources beyond truth-practice?
 
@@ -584,7 +590,7 @@ The first six came out of Phase 2 gap closure as (d)-to-(c) candidates. The seve
   - Defenders leave them; only real fights resolve crippled beasts, and the echoes continue.
   - Finish only under conditions (for example, only beasts below a wound line, or only when the defender can afford the fight).
 - My take: Leave them for now. The Stage 2 finish rule just showed finishing costs lives, and the meet path is unmeasured — a meet-finish rule is a new kill source feeding the binding leg without a cost guard. If it goes ahead, it needs its own pre-registered cost guard and its own loot scale, proven on the meet path, and it should wait until the wave-4 funnel question (carried item 1 from the same round) is answered, since both feed the same kill economy.
-- Status: [ ] UNRULED
+- Status: [x] RULED (Steve 2026-10-27): Defenders weigh scenario risk and finish a crippled beast they meet if they can — a risk-weighted, conditional finish, not an unconditional one. This supersedes the "leave for now" take; it is the narrower meet-path rule, distinct from the Stage-2 finish rule killed on cost (deaths 234 to 316). Any implementation needs its own pre-registered cost guard on the meet path.
 
 ---
 
@@ -636,4 +642,4 @@ These were filtered OUT of the pack. One line each, no re-argument. Directive co
 ### Misclassified — not steve-calls at all (2)
 
 - 604 → Already resolved: kill record documents pit_overhear as vestigial-by-design; the remaining doc note is bookkeeping, not a decision.
-- 759 → Already decided: the 2026-10-13 STANDING change (full-seat national bar) stands; TABLE.md vs progression.js is a doc sync, not a call.
+- 759 → RULED (Steve 2026-10-27): National standing IS required for the full seat. deedGateReady must enforce scale in ok — currently scale is computed and reported but NOT in ok ("Scale is NOT added here (open design question)" in progression.js). This is a code fix, superseding the earlier "doc sync" framing.
