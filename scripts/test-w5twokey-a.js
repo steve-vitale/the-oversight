@@ -184,8 +184,10 @@ function blockerCounts(rows) {
     const g = r.gate, de = g.deedEnd;
     if (!de) { v4d = false; console.log(`  G4 seed ${r.seed} missing deedEnd`); continue; }
     if ((de.w4 | 0) !== (g.w4faced | 0)) { v4d = false; console.log(`  G4 seed ${r.seed} deed w4=${de.w4} vs waveEngaged(4)=${g.w4faced}`); }
-    const fc = {};
-    for (const mid of Object.keys(g.wavesFaced || {})) { const w = g.wavesFaced[mid] | 0; fc[w] = (fc[w] || 0) + 1; }
+    // NOTE: gate.wavesFaced is ALREADY counts-per-wave (the sweep's
+    // wavesFacedCounts tallies deedState().wavesFaced per wave), not the
+    // mid->wave map — compare deed counts against it directly.
+    const fc = g.wavesFaced || {};
     if ((de.w1 | 0) !== (fc[1] || 0) || (de.w2 | 0) !== (fc[2] || 0) || (de.w3 | 0) !== (fc[3] || 0) || (de.w4 | 0) !== (fc[4] || 0) || (de.w5 | 0) !== (fc[5] || 0)) {
       v4d = false; console.log(`  G4 seed ${r.seed} deed w-counts ${de.w1}/${de.w2}/${de.w3}/${de.w4}/${de.w5} vs wavesFaced-derived ${fc[1]||0}/${fc[2]||0}/${fc[3]||0}/${fc[4]||0}/${fc[5]||0}`);
     }
