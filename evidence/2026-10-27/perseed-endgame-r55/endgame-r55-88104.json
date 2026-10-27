@@ -1,0 +1,1044 @@
+{
+ "seed": 88104,
+ "days": 180,
+ "gameDays": 62,
+ "deferDays": null,
+ "greedy": {
+  "waits": 0,
+  "maxTier": 0,
+  "seatDay": null,
+  "seatKind": null
+ },
+ "armory": {
+  "donations": 0,
+  "craftDonations": 0,
+  "donatedBonus": 0,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 0,
+  "errors": 0,
+  "unitsAtEnd": 0
+ },
+ "guardTrace": [],
+ "windowEndGuard": null,
+ "announceCapIdx": null,
+ "overtimeLines": 0,
+ "plan": "forcedrift",
+ "fullseat": {
+  "days": 62,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 15,
+   "w2": 5,
+   "w3": 4,
+   "w4": 2,
+   "w5": 0,
+   "contests": 2,
+   "crises": 3,
+   "stage": 3,
+   "foodShared": 56,
+   "score": 240,
+   "standing": 199
+  },
+  "sentDay": 17,
+  "surgeDay": 28,
+  "firstLesserDay": 60,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": null,
+  "winSeat": null
+ },
+ "endReason": "village-lost",
+ "won": false,
+ "announceDay": null,
+ "satDay": null,
+ "satSeatKind": null,
+ "satWaves": null,
+ "auditLine": null,
+ "auditNamed": null,
+ "satPenalty": null,
+ "maxTier": 0,
+ "otMismatch": null,
+ "walkedPath": null,
+ "walkedBranch": null,
+ "instrumentErrors": 0,
+ "telemetry": [],
+ "rg": {
+  "active": true,
+  "claimDone": true,
+  "claimDay": 62,
+  "claimTried": 5,
+  "claimWaiting": 47,
+  "firstAvailableDay": 48,
+  "deepens": 1,
+  "rerouteEff": 9,
+  "rerouteHon": 0,
+  "verbs": 12,
+  "communes": 2,
+  "floorStops": 0,
+  "doorRelay": 0,
+  "doorDelegated": 0,
+  "cockpitPicks": {},
+  "finalPick": null,
+  "leanTrace": [
+   {
+    "day": 49,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 0
+   },
+   {
+    "day": 50,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 1
+   },
+   {
+    "day": 51,
+    "lean": 3,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 2
+   },
+   {
+    "day": 52,
+    "lean": 1,
+    "band": "grey",
+    "grounding": 97,
+    "bond": 2
+   },
+   {
+    "day": 53,
+    "lean": -1,
+    "band": "grey",
+    "grounding": 96,
+    "bond": 2
+   },
+   {
+    "day": 55,
+    "lean": -3,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 2
+   },
+   {
+    "day": 56,
+    "lean": -5,
+    "band": "grey",
+    "grounding": 98,
+    "bond": 2
+   },
+   {
+    "day": 57,
+    "lean": -2,
+    "band": "grey",
+    "grounding": 98,
+    "bond": 3
+   },
+   {
+    "day": 58,
+    "lean": -4,
+    "band": "grey",
+    "grounding": 97,
+    "bond": 3
+   },
+   {
+    "day": 59,
+    "lean": -6,
+    "band": "grey",
+    "grounding": 96,
+    "bond": 3
+   }
+  ],
+  "communeLean": [
+   {
+    "day": 50,
+    "choice": "engage",
+    "lean": 5,
+    "before": 0,
+    "after": 5
+   },
+   {
+    "day": 56,
+    "choice": "engage",
+    "lean": 5,
+    "before": -5,
+    "after": 0
+   }
+  ],
+  "rgError": 0,
+  "leanTraceHead": [
+   {
+    "day": 49,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 0
+   },
+   {
+    "day": 50,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 1
+   },
+   {
+    "day": 51,
+    "lean": 3,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 2
+   }
+  ],
+  "leanTraceTail": [
+   {
+    "day": 51,
+    "lean": 3,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 2
+   },
+   {
+    "day": 52,
+    "lean": 1,
+    "band": "grey",
+    "grounding": 97,
+    "bond": 2
+   },
+   {
+    "day": 53,
+    "lean": -1,
+    "band": "grey",
+    "grounding": 96,
+    "bond": 2
+   },
+   {
+    "day": 55,
+    "lean": -3,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 2
+   },
+   {
+    "day": 56,
+    "lean": -5,
+    "band": "grey",
+    "grounding": 98,
+    "bond": 2
+   },
+   {
+    "day": 57,
+    "lean": -2,
+    "band": "grey",
+    "grounding": 98,
+    "bond": 3
+   },
+   {
+    "day": 58,
+    "lean": -4,
+    "band": "grey",
+    "grounding": 97,
+    "bond": 3
+   },
+   {
+    "day": 59,
+    "lean": -6,
+    "band": "grey",
+    "grounding": 96,
+    "bond": 3
+   }
+  ],
+  "atSit": null
+ },
+ "noticedCount": 0,
+ "noticeLines": [],
+ "ledgerLine": null,
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": true,
+  "leanAtSit": -2,
+  "bandAtSit": "grey",
+  "bondAtSit": 3,
+  "groundingAtSit": 99,
+  "capClaimed": 0,
+  "capAppointed": 0,
+  "capAnswers": 0,
+  "capCommunes": 0,
+  "capReroutes": 0,
+  "doorsOffered": null,
+  "doorWalked": null
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 96,
+   "bond": 1,
+   "held": true
+  },
+  {
+   "day": 56,
+   "lean": -2,
+   "band": "grey",
+   "grounding": 99,
+   "bond": 3,
+   "held": true
+  }
+ ],
+ "finalBeat": false,
+ "finalOptsCount": 0,
+ "finalPickId": null,
+ "finalLabel": null,
+ "finalResolved": false,
+ "finalOutcomeLines": [],
+ "promptFrameCount": 0,
+ "dispatchCount": 0,
+ "weekly": [],
+ "fightCensus": {
+  "fights": [
+   {
+    "monsters": [
+     "eulogy"
+    ],
+    "startDay": 54,
+    "endDay": 54,
+    "turns": 7,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "gen_grjhiau"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_grjhiau",
+      "name": "Ada Song",
+      "cause": "the arena",
+      "day": 54,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "eulogy",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 60,
+    "endDay": 60,
+    "turns": 21,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.77,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.77,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "gen_d8g5ci7"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_d8g5ci7",
+      "name": "Rafael Wojcik",
+      "cause": "the arena",
+      "day": 60,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "influencer",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 61,
+    "endDay": 61,
+    "turns": 20,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.979,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.979,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "gen_5zdf4d2",
+     "emma_larsen",
+     "victor_lopez"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "victor_lopez",
+      "name": "Victor Lopez",
+      "cause": "the arena",
+      "day": 61,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "influencer",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 61,
+    "endDay": 61,
+    "turns": 19,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": false,
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "gen_5zdf4d2",
+     "emma_larsen"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "emma_larsen",
+      "name": "Emma Larsen",
+      "cause": "the arena",
+      "day": 61,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "influencer",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 61,
+    "endDay": 61,
+    "turns": 18,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "gen_5zdf4d2"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_5zdf4d2",
+      "name": "Jamal Ruiz",
+      "cause": "the arena",
+      "day": 61,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "influencer",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 61,
+    "endDay": 61,
+    "turns": 1,
+    "turnsObserved": false,
+    "outcome": "otherEnd",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "designed",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": false,
+    "deathCauses": [],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": null,
+    "ctxCommitAtFirstObserve": null,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-end",
+    "diedInFight": [],
+    "causalDeaths": [],
+    "causalFlag": false
+   },
+   {
+    "monsters": [
+     "influencer"
+    ],
+    "startDay": 61,
+    "endDay": 62,
+    "turns": 12,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": true,
+    "deathCauses": [
+     "the arena"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": false,
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-boundary",
+    "diedInFight": [
+     "vasyl_shevchenko"
+    ],
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "vasyl_shevchenko",
+      "name": "Vasyl Shevchenko",
+      "cause": "the arena",
+      "day": 61,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "influencer",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true
+   }
+  ],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 7,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 3,
+  "dead": 0,
+  "people": [
+   {
+    "id": "gen_0l87mjk",
+    "name": "Pitcha Samakkhi",
+    "dead": false,
+    "occupation": "taxi driver",
+    "npcAbilities": 0
+   },
+   {
+    "id": "gen_hqe463q",
+    "name": "Armin Thaler",
+    "dead": false,
+    "occupation": "Pharmacist",
+    "npcAbilities": 2
+   },
+   {
+    "id": "desmond_clarke",
+    "name": "Desmond Clarke",
+    "dead": false,
+    "occupation": "sign painter",
+    "npcAbilities": 3
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Benjamin",
+    "day": 8,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Somchai",
+    "day": 51,
+    "cause": "a wound that wouldn't close"
+   },
+   {
+    "id": null,
+    "name": "Ada",
+    "day": 54,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Rafael",
+    "day": 60,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Victor",
+    "day": 61,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Emma",
+    "day": 61,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Jamal",
+    "day": 61,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Vasyl",
+    "day": 61,
+    "cause": "the arena"
+   }
+  ],
+  "pantryKcal": 0,
+  "scale": "regional",
+  "mantle": "Pitcha Samakkhi"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "armor",
+   "weapons",
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 0,
+  "killers": {},
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 0,
+  "vetFirstDay": null,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "gen_x5tay9z",
+   "name": "Benjamin Cisse",
+   "cause": "the arena",
+   "day": 8,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "gallowdeer",
+     "wave": 1
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "cause": "alien",
+   "day": 45,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "somchai_prasert",
+   "name": "Somchai Prasert",
+   "cause": "a wound that wouldn't close",
+   "day": 51,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_grjhiau",
+   "name": "Ada Song",
+   "cause": "the arena",
+   "day": 54,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "eulogy",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_d8g5ci7",
+   "name": "Rafael Wojcik",
+   "cause": "the arena",
+   "day": 60,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "influencer",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "victor_lopez",
+   "name": "Victor Lopez",
+   "cause": "the arena",
+   "day": 61,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "influencer",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "emma_larsen",
+   "name": "Emma Larsen",
+   "cause": "the arena",
+   "day": 61,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "influencer",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_5zdf4d2",
+   "name": "Jamal Ruiz",
+   "cause": "the arena",
+   "day": 61,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "influencer",
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "vasyl_shevchenko",
+   "name": "Vasyl Shevchenko",
+   "cause": "the arena",
+   "day": 61,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "influencer",
+     "wave": 4
+    }
+   ]
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Sweeps Week stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Sweeps Week",
+   "capIdx": 3778
+  },
+  {
+   "line": "The Reunion stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "reunion",
+   "rawName": "The Reunion",
+   "capIdx": 6806
+  },
+  {
+   "line": "The Influencer stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Influencer",
+   "capIdx": 7413
+  },
+  {
+   "line": "The Influencer stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "influencer",
+   "rawName": "The Influencer",
+   "capIdx": 7914
+  },
+  {
+   "line": "The Ugly Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Ugly Beast",
+   "capIdx": 8225
+  }
+ ]
+}
