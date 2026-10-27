@@ -5,6 +5,10 @@
 // only, so a run with every wave faced but integration stage 0 and no food
 // deeds sat at the FULL seat while missing bars the LESSER seat requires.
 // (Scale is untouched: the full seat still has no rank bar — design question.)
+// UPDATE 2026-10-27 (sim-scalegate-a, Steve ruling): the design question is
+// answered — the full seat now REQUIRES national/global scale, so the
+// fixture below sets nationalLive before asserting full. The scale term
+// itself is proven exhaustively by scripts/test-scalegate-a.js.
 'use strict';
 const K = require('./godpath/lib');
 (async () => {
@@ -33,9 +37,11 @@ const K = require('./godpath/lib');
   pg.sentimentTaught = true; Game.state.scholar.prog.feastSurgeUsed = true;
   T.ok('food deeds but stage 0 -> not full', !Game.deedGateReady().ok);
 
-  // stage 2 + food deeds -> full
+  // stage 2 + food deeds -> full (national standing required since 2026-10-27)
   Game.state.systemArrived = true; Game.state.scholar.integration = 45;
+  Game.state.nationalLive = true;
   T.ok('setup: integration stage 2', Game.integrationStage() === 2);
+  T.ok('setup: scaleRank national', Game.scaleRank() === 'national');
   T.ok('stage 2 + food deeds + bars -> full', Game.deedGateReady().ok && Game.tableSeat().seat === 'full');
 
   // stage 2 but missing a food deed -> not full

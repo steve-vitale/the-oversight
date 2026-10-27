@@ -67,10 +67,10 @@
     // ============ THE SEAT: full / lesser / none ============
     // Steve 2026-10-11: the table PRICES the run, never gates on godhood.
     // deedGateReady() is the FULL seat (all wave bars 5/5/4/3/2, 3 contests,
-    // 3 crises, stage>=2, food-thesis deeds; no scale bar since the
-    // 2026-10-13 Standing change — the lesser seat still needs regional+,
-    // an open asymmetry flagged 2026-10-14). The LESSER
-    // seat is the reachable bar for competent non-god play — priced
+    // 3 crises, stage>=2, food-thesis deeds, national/global scale per the
+    // Steve 2026-10-27 ruling — the lesser seat still needs regional+,
+    // so the full seat is no longer easier on scale than the lesser one).
+    // The LESSER seat is the reachable bar for competent non-god play — priced
     // honestly, fewer paths open, weaker terms. Below it the table does
     // not come (ledger.js's withdrawal beat handles that case).
     tableSeat() {
