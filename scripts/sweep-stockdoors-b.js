@@ -71,21 +71,34 @@ function realSleepMs(ms) {
   try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); }
   catch (e) { try { require('child_process').execSync('sleep ' + (ms / 1000)); } catch (e2) {} }
 }
-function writeRobust(filePath, data) {
-  for (let i = 0; i < 60; i++) {
+function tryWrite(filePath, data, attempts) {
+  // Transport note (2026-10-27, post-prereg, not a judged definition):
+  // the container EPERM write flap blocks evidence writes for 10+
+  // minutes at a time (five failed sweeps this run, each dying on the
+  // FIRST per-seed file — and the 150-retry edit never took effect,
+  // because the exit check still read i === 59). A sweep that exits
+  // on the first failed write loses every seed's compute, so the
+  // sweep now KEEPS failed per-seed payloads in memory, finishes
+  // all seeds, and flushes pending files until a quiet window opens
+  // (deadline 45 min); only a deadline exhaustion writes the staging
+  // fallback and exits loudly. Recorded bytes are identical either
+  // way — this changes transport, never content.
+  for (let i = 0; i < attempts; i++) {
     try {
       fs.mkdirSync(path.dirname(filePath), { recursive: true });
       fs.writeFileSync(filePath, data);
       const back = fs.readFileSync(filePath, 'utf8');
       if (back !== data) throw new Error('readback mismatch');
       JSON.parse(back);
-      return;
+      return true;
     } catch (e) {
-      if (i === 59) { console.error('WRITE FAIL LOUDLY', filePath, e.code || e.message); process.exit(2); }
+      if (i === attempts - 1) return false;
       realSleepMs(2000);
     }
   }
+  return false;
 }
+const STAGING_DIR = path.join(__dirname, '..', '.stockdoors-staging');
 
 function canonCause(c) {
   c = String(c || '?').toLowerCase();
@@ -188,6 +201,7 @@ async function oneRun(seed) {
 }
 
 (async () => {
+  const pending = [];
   for (const seed of SEEDS) {
     const perSeed = await oneRun(seed);
     const name = `stockdoors-b-${POLICY_ID}-s${seed}.json`;
@@ -201,10 +215,47 @@ async function oneRun(seed) {
       process.stdout.write(JSON.stringify(perSeed) + '\n');
       console.error(summary);
     } else {
-      writeRobust(path.join(PERSEED_DIR, name), JSON.stringify(perSeed));
-      console.log(summary);
+      const data = JSON.stringify(perSeed);
+      // Short initial window on purpose: the end-flush loop does the
+      // long waiting for ALL seeds at once; burning 5 min per seed
+      // here would serialize the flap wait 8 times.
+      if (tryWrite(path.join(PERSEED_DIR, name), data, 6)) {
+        console.log(summary + ' written');
+      } else {
+        pending.push({ name, data });
+        console.error(summary + ' WRITE PENDING (EPERM flap) — kept in memory, will flush at end');
+      }
     }
   }
-  if (process.env.SWEEP_STDOUT_JSON === '1') console.error('wrote ' + SEEDS.length + ' files to stdout');
-  else console.log('wrote ' + SEEDS.length + ' files to ' + PERSEED_DIR);
+  if (process.env.SWEEP_STDOUT_JSON === '1') {
+    console.error('wrote ' + SEEDS.length + ' files to stdout');
+  } else if (pending.length) {
+    // Flush loop: a seconds-long quiet window is all a flush needs.
+    // Deadline 45 min; between passes, sleep 30s (quiet gaps recur).
+    const deadline = Date.now() + 45 * 60 * 1000;
+    while (pending.length && Date.now() < deadline) {
+      for (let i = pending.length - 1; i >= 0; i--) {
+        if (tryWrite(path.join(PERSEED_DIR, pending[i].name), pending[i].data, 5)) {
+          console.log('flushed pending ' + pending[i].name);
+          pending.splice(i, 1);
+        }
+      }
+      if (pending.length && Date.now() < deadline) realSleepMs(30000);
+    }
+    if (pending.length) {
+      // Last resort: staging inside this worktree (never /tmp), so
+      // the compute survives even a deadline exhaustion; the
+      // coordinator copies staging -> evidence and the corpus is
+      // still verified byte-for-byte before any judging.
+      for (const p of pending) {
+        if (tryWrite(path.join(STAGING_DIR, p.name), p.data, 30)) console.error('STAGED (not evidence) ' + p.name);
+        else console.error('STAGE FAIL LOUDLY ' + p.name);
+      }
+      console.error('PENDING STAGED: ' + pending.length + ' files in ' + STAGING_DIR + ' — copy to ' + PERSEED_DIR + ' before judging');
+      process.exit(3);
+    }
+    console.log('wrote ' + SEEDS.length + ' files to ' + PERSEED_DIR + ' (after flush)');
+  } else {
+    console.log('wrote ' + SEEDS.length + ' files to ' + PERSEED_DIR);
+  }
 })().catch(e => { console.error('SWEEP CRASH', e); process.exit(2); });
