@@ -5858,6 +5858,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 (requested.kind === 'water_haul' && opts?.waterFavorId === requested.id &&
                   requested.waterRun?.returned && requested.waterRun.deliveredLiters >= 4 &&
                   requested.waterRun.bearer === this.villagerId) ||
+                (requested.kind === 'forage_help' && opts?.forageFavorId === requested.id &&
+                  requested.forageRun?.returned && (requested.forageRun.deliveredKcal || 0) > 0 &&
+                  requested.forageRun.bearer === this.villagerId) ||
                 (requested.kind === 'stay_close' && this.companyFavorReceipt?.(pid,requested,opts))))) continue;
           p.kept = true;
           // FAVOR OBLIGATIONS (convo favor system 2026-10-11): mark the

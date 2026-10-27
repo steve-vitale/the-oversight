@@ -59,11 +59,21 @@ const K=require('./lib'),T=K.reporter('Favor journal lifecycle');
    const result=G.convoPerformFavor(vid,favor);
    T.ok('care crossing nightfall does not turn an expired promise into success',v.promises[vid].kept==='broken'&&favor.state==='broken'&&/deadline/.test(result.line),JSON.stringify({promise:v.promises[vid],state:favor.state,result}));
   }
-  for(const kind of ['snare_mend','watch_shift','forage_help']){
+  for(const kind of ['snare_mend','watch_shift']){
    const {v,s,vid,favor}=scene(kind);favor.state='promised';
    v.promises[vid]={goal:favor.goal,day:s.day,kept:false,maker:G.villagerId,favorId:favor.id,favorTask:favor.task,favorDeadline:favor.deadline};s.day+=100;G.checkPromises();
    const row=G.journalPromises(vid).find(p=>p.favorId===favor.id);
    T.ok(kind+' remains explicitly unavailable without a misleading expired deadline',!v.promises[vid].kept&&row.status==='unavailable'&&/no penalty/i.test(row.deadlineLabel),JSON.stringify(row));
+  }
+  {
+   // JOINT OUTING (tackle-outing 2026-10-27): forage_help is PLAYABLE now,
+   // so an ignored outing rots like any real job instead of sitting
+   // unavailable forever. The full outing is proved in
+   // scripts/test-joint-outing-20261027.js.
+   const {v,s,vid,favor}=scene('forage_help');favor.state='promised';
+   v.promises[vid]={goal:favor.goal,day:s.day,kept:false,maker:G.villagerId,favorId:favor.id,favorTask:favor.task,favorDeadline:favor.deadline};s.day+=100;G.checkPromises();
+   const row=G.journalPromises(vid).find(p=>p.favorId===favor.id);
+   T.ok('forage_help playable job expires on its deadline like other real jobs',v.promises[vid].kept==='broken'&&row.status==='expired',JSON.stringify(row));
   }
   for(const kind of ['food_share','heal_help','sick_help']){
    const {v,s,vid,favor}=scene(kind);G.convoFavorCommit(vid,favor);const before=JSON.stringify(G.state);

@@ -174,6 +174,8 @@
         const promise = this.state.village.promises?.[vid];
         if (dlg === 'favor_cancel' && favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
           result = this.performWaterFavor(vid, favor, true);
+        } else if (dlg === 'favor_cancel' && favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          result = this.performForageFavor(vid, favor, true);
         } else if (dlg === 'favor_cancel' && favor?.kind === 'stay_close' && this.performCompanyFavor && !status.unsupported) {
           result = this.performCompanyFavor(vid, favor, true);
         } else if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
@@ -235,6 +237,19 @@
         c.replyMenu = null;
         this.save();
         return { line, choices: this.convoChoices(vid), ended: !!this.over, transcript: c.transcript.slice() };
+      }
+
+      if (dlg === 'forage_talk') {
+        // Trail talk during a joint outing: a spoken exchange, not a
+        // promise-keeper and not a conversation-ender. The talk itself is
+        // the content — the menu rebuilds so the outing actions stay open.
+        const favor = c.want?.favor || this.convoGetFavor(vid);
+        c.transcript.push({ who: 'you', text: c.offeredReplies?.[choiceId] || 'Talk on the trail for a while' });
+        const result = this.performForageTalk ? this.performForageTalk(vid, favor) : { ok: false, line: 'You are not out together right now.' };
+        this.sayLine(vid, result.line, { diegeticAct: true });
+        c.replyMenu = null;
+        this.save();
+        return { line: result.line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
       if (dlg === 'subject') {

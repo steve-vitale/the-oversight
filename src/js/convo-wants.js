@@ -934,6 +934,10 @@
           if (c.want) c.want.favor = favor;
           return this.waterFavorOpening(vid)?.line || '"We still have a creek trip to finish."';
         }
+        if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          if (c.want) c.want.favor = favor;
+          return this.forageFavorOpening(vid)?.line || '"We still have the outing to finish."';
+        }
         // Obligation still open — a reminder naming the task, not a new ask.
         if (open && open.favorTask && favor && favor.id === open.favorId) {
           if (c.want) c.want.favor = favor;
@@ -1580,6 +1584,10 @@
         v.promises[vid].waterHaulVersion = 1;
         favor.meetDay = day + 1;
       }
+      if (favor.kind === 'forage_help') {
+        v.promises[vid].forageVersion = 1;
+        favor.meetDay = day + 1;
+      }
       if (favor.kind === 'stay_close') {
         v.promises[vid].companyVersion=1;v.promises[vid].companyNight=favor.companyNight;
         favor.company=null;
@@ -1597,6 +1605,7 @@
       const blocked = reason => ({ ready: false, reason });
       if (!favor || favor.vid !== vid) return blocked('There is no current request to act on.');
       if (favor.kind === 'water_haul' && this.waterFavorAction) return this.waterFavorAction(vid, favor);
+      if (favor.kind === 'forage_help' && this.forageFavorAction) return this.forageFavorAction(vid, favor);
       if (favor.kind === 'stay_close' && this.companyFavorAction) return this.companyFavorAction(vid, favor);
       if (!['asked', 'promised'].includes(favor.state)) return blocked('This request is already closed.');
       const unavailable = {
@@ -1637,12 +1646,15 @@
       const promise = this.state.village.promises?.[vid];
       if (status.unsupported && promise?.favorId === favor?.id && !promise.kept) out.push({ id: 'dlg:favor_cancel', labels: ['Close this unavailable job (no penalty)'], temper: 'neutral' });
       if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && this.waterFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:favor_cancel', labels: ['End trip and unload what we have (break unfinished promise)'], temper: 'neutral' });
+      if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && this.forageFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:favor_cancel', labels: ['End outing and unload what we have (break unfinished promise)'], temper: 'neutral' });
+      if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && this.forageFavorTalkReady?.(vid,favor)) out.push({ id: 'dlg:forage_talk', labels: ['Talk on the trail for a while'], temper: 'kind' });
       if (favor?.kind === 'stay_close' && promise?.favorId === favor.id && !promise.kept && !status.unsupported) out.push({ id:'dlg:favor_cancel',labels:['Break tonight’s company promise'],temper:'neutral' });
       return out;
     },
 
     convoPerformFavor(vid, favor) {
       if (favor?.kind === 'water_haul' && this.performWaterFavor) return this.performWaterFavor(vid, favor);
+      if (favor?.kind === 'forage_help' && this.performForageFavor) return this.performForageFavor(vid, favor);
       if (favor?.kind === 'stay_close' && this.performCompanyFavor) return this.performCompanyFavor(vid, favor);
       const status = this.convoFavorAction(vid, favor);
       if (!status.ready) return { ok: false, line: status.reason };
@@ -1729,6 +1741,7 @@
     // names it — never resets it, never re-asks verbatim.
     convoFavorFollowup(vid, favor) {
       if (favor?.kind === 'stay_close' && this.companyFavorOpening) {const line=this.companyFavorOpening(vid,favor);if(line)return line;}
+      if (favor?.kind === 'forage_help' && this.forageFavorOpening) {const open=this.forageFavorOpening(vid);if(open)return open.line;}
       const day = (this.state.scholar || {}).day || 0;
       const open = this.openFavorObligation(vid);
       if (favor.state === 'promised' && open) {
@@ -1812,6 +1825,8 @@
     convoSelectWant(vid) {
       const water = this.waterFavorOpening?.(vid);
       if (water) return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: this.convoGetFavor(vid).id };
+      const forage = this.forageFavorOpening?.(vid);
+      if (forage) return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: this.convoGetFavor(vid).id };
       const seed = this.convoCheckSeeds(vid);
       if (seed && WANTS[seed.wantId]) {
         return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null, seedQid: seed.qid || null };

@@ -5189,7 +5189,7 @@
         // An outing is physical work already under way. Its current-phase
         // opening keeps the actual collect/unload action reachable through
         // Continue and repeat visits, instead of replacing it with small talk.
-        const jointWork = this.waterFavorOpening?.(vid);
+        const jointWork = this.waterFavorOpening?.(vid) || this.forageFavorOpening?.(vid);
         if (jointWork && c.want?.id === 'repay') {
           c.want.favor = this.convoGetFavor(vid);
           return jointWork;

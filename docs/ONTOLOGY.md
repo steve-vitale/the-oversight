@@ -646,6 +646,20 @@ A specific night by a shared fire, with physical attendance, saved progress and 
 
 **Consumes:** state.village, state.scholar, tickAction(n), checkPromises(kind, vid, opts), journalFavorPromise(vid, promise, opts)
 
+### favor-forage (`favor-forage.js`)
+Joint foraging outings for a promised pantry run: travel together, forage the same patch, split the haul, talk, bring both shares home.
+
+**Provides:** forageFavorCompanions() -> living temporary outing companions for this bearer, forageFavorWaiting(vid) -> requester waiting at home for the agreed dawn, forageFavorOpening(vid) -> structural, current-phase joint-work opening, forageFavorAction(vid, favor, ending) -> pure readiness and progress, performForageFavor(vid, favor, ending) -> checked departure, joint forage, or shared delivery, forageFavorTalkReady(vid, favor) -> whether trail talk is available, performForageTalk(vid, favor) -> a spoken trail exchange during the outing, migrateForageFavors() -> give previously unplayable saved promises a fair window once
+
+**Rules:**
+- actual_joint_deed: only food actually gathered together and delivered at home keeps the favor (code: performForageFavor, game.js checkPromises)
+- shared_not_solo: one solo-rule forage press is split about half and half; the player's pack never keeps the whole sweep (code: performForageFavor)
+- known_food_only_split: plants nobody knows stay lumped in the player's bag and are never split as food; wood and crafting bits stay with the player (code: performForageFavor)
+- temporary_companion: no permanent party membership or successor escort (code: forageFavorCompanions, travelingWith wrapper)
+- no_gate_change: this module sets no deed, scale, stage, readiness, or table price (code: this file, convo-wants.js dispatch only)
+
+**Consumes:** state.village, state.scholar, doAction('forage'), depositPantryPieces(v, item, pieceKcal), checkPromises(kind, vid, opts), travelingWith(), placePartyAtPlayer()
+
 ### favor-water (`favor-water.js`)
 Joint dawn creek favors: temporary companion, real bottled cargo and home cistern settlement.
 
