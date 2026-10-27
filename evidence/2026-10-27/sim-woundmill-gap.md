@@ -331,10 +331,12 @@ can pick it up exactly, and §3 specifies it completely.
   (8 per-seed JSONs) + `evidence/2026-10-27/woundmill-control-sweep.log`
 - Armed corpus: `evidence/2026-10-27/perseed-woundmill-armed/`
   (8 per-seed JSONs) + `evidence/2026-10-27/woundmill-armed-sweep.log`
-- Branch: gap-woundmill. Commits: (to be filled with hashes —
-  first commit = full work incl. game code + proof test;
-  tip commit = revert of game code + proof-test removal,
-  leaving record only).
+- Branch: gap-woundmill. First commit 7e9a2bb871ab6b93907c029b46fb0a3e6fb09a7b
+  (full work: game code + proof test + analyzer + this evidence).
+  Tip commit (this commit): game code + proof test reverted,
+  leaving record only — evidence + analyzer + corpora + sweep
+  logs, zero `src/` change vs the pre-work base (verified:
+  `git diff 60e260dc0 -- src/js/` empty).
 
 ## 6. VERDICT
 
