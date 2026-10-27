@@ -31,16 +31,26 @@ catch (e) { redReason = e && e.message ? e.message : String(e); }
 
 // ---------------------------------------------------------------------------
 // Mock-Game fixtures: crafted engine states, component by component.
+// NOTE (2026-10-27 scale ruling, sim-fullseatfixture-a): the mock gate
+// below MUST mirror the real deedGateReady() contract, including scale —
+// the full seat requires national/global standing. Before this fix the
+// mock computed old-ok from the deed bars alone, so a regional village
+// meeting every bar read as full-seat-ready here while the real gate
+// (and tableSeat) said lesser. That was the future-reader trap: this
+// mock is the gate's stand-in for the diag instrument, not a deliberate
+// isolation of another term, so it carries the scale term.
 // ---------------------------------------------------------------------------
 function mockGame(f) {
   const faced = {};
   for (const [mid, w] of (f.faced || [])) faced[mid] = w;
+  const scale = f.rank === 'national' || f.rank === 'global';
   const gate = {
     ok: !!(f.w1 >= 5 && f.w2 >= 5 && f.w3 >= 4 && f.w4 >= 3 && f.w5 >= 2 &&
-      f.contests >= 3 && f.crises >= 3 && f.stage >= 2 && f.sentiment && f.surge),
+      f.contests >= 3 && f.crises >= 3 && f.stage >= 2 && f.sentiment && f.surge &&
+      (f.rank === 'national' || f.rank === 'global')),
     w1: f.w1 | 0, w2: f.w2 | 0, w3: f.w3 | 0, w4: f.w4 | 0, w5: f.w5 | 0,
     contestsN: f.contests | 0, crisesN: f.crises | 0, stage: f.stage | 0,
-    foodDeeds: !!(f.sentiment && f.surge), rank: f.rank || 'village',
+    foodDeeds: !!(f.sentiment && f.surge), scale: scale, rank: f.rank || 'village',
   };
   return {
     state: { scholar: { day: f.day || 1, prog: { feastSurgeUsed: !!f.surge } } },

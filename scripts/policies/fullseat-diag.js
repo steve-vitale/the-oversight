@@ -12,8 +12,11 @@
 //
 // FULL SEAT (deedGateReady().ok): w1>=5, w2>=5, w3>=4, w4>=3, w5>=2
 // distinct fought blow-by-blow; contests>=3; crises>=3; stage>=2;
-// foodDeeds (sentimentTaught && feastSurgeUsed). Scale (national/global)
-// is REPORTED but NOT gating since the 2026-10-13 Standing change.
+// foodDeeds (sentimentTaught && feastSurgeUsed); AND scale national/global
+// (Steve ruling 2026-10-27, sim-scalegate-a — scale IS enforced in `ok`,
+// not merely reported; the 2026-10-13 "reported but not gating" reading
+// is superseded). This instrument reads `ok` and the seat from the real
+// gate, so it reports the new truth with no logic change here.
 // INDISPENSABLE (table-indispensable.js prereq): (a) full seat,
 // (b) foodShared>0, (c) brokerage+might+foodShared>=10.
 //
@@ -34,7 +37,12 @@
 // policy byte-identically (the proof's guard pins that).
 function layerOn() { return process.env.FULLSEAT === '1'; }
 
-// The full-seat bars, exactly as coded in progression.js:613.
+// The full-seat bars, exactly as coded in progression.js:613. Scale
+// (national/global, enforced in `ok` since the 2026-10-27 ruling) is
+// NOT a distance bar here: snapFullSeat reads `ok`, the seat, and the
+// rank straight from the real gate, so a sub-national village meeting
+// every bar below still reports seat 'lesser' with ok false — the
+// binding list below names deed components only, never scale.
 const BARS = { w1: 5, w2: 5, w3: 4, w4: 3, w5: 2, contests: 3, crises: 3, stage: 2 };
 const ORDER = ['w1', 'w2', 'w3', 'w4', 'w5', 'contests', 'crises', 'stage', 'foodDeeds'];
 
