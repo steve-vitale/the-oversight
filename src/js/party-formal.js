@@ -685,11 +685,19 @@
         // No room — but naming the party / assigning roles outranks small
         // talk. Splice in near the top ('more'/invite territory), displace
         // the last non-'leave' choice, keep 'leave' last and the list bounded.
+        // ASK-OTHERS PROTECTION (journey social r59, 2026-10-26): the trim
+        // used to eat 'ask:others' whenever a party member's subject menu
+        // ran long (r58: 1008 displaced probes, all in-party) — the
+        // village-talk verb is how the village remembers each other, and
+        // a one-tap party item must not outrank it. Victims skip
+        // 'ask:others': if every displaceable row is protected, the loop
+        // breaks and the menu keeps one extra row rather than losing the
+        // verb (reactive menus already vary MAXC, so one extra row is
+        // display-safe).
         choices.splice(1, 0, item);
         while (choices.length > MAXC) {
-          const li = choices.findIndex(c => c.id === 'leave');
           let rm = choices.length - 1;
-          if (li === choices.length - 1) rm = choices.length - 2;
+          while (rm > 1 && (choices[rm].id === 'leave' || choices[rm].id === 'ask:others')) rm--;
           if (rm <= 1) break;
           choices.splice(rm, 1);
         }

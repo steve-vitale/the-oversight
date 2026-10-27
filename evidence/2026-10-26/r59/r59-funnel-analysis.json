@@ -1,0 +1,1785 @@
+{
+ "seeds": {
+  "5401": {
+   "probes": 201,
+   "counts": {
+    "never-served": 4,
+    "served-same-pick": 162,
+    "served-changed-pick": 10,
+    "no-pick": 25,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 4,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 72,
+     "false": 90,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 1,
+     "false": 9,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 6,
+     "false": 19,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 4
+    },
+    "served-same-pick": {
+     "true": 86,
+     "false": 76
+    },
+    "served-changed-pick": {
+     "true": 6,
+     "false": 4
+    },
+    "no-pick": {
+     "true": 7,
+     "false": 18
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 90,
+   "correctNonOffer": 86,
+   "changedMenuMore": {
+    "true": 6,
+    "false": 4
+   },
+   "freshMenuMore": {
+    "true": 4,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5401,
+     "day": 4,
+     "speaker": "A woman, maybe 30s",
+     "pick": "valeria_quispe/grievance",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5401,
+     "day": 5,
+     "speaker": "Kate",
+     "pick": "gen_el98wp4/grievance",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5401,
+     "day": 5,
+     "speaker": "Kate",
+     "pick": "gen_el98wp4/grievance",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5401,
+     "day": 21,
+     "speaker": "Liam",
+     "lastServed": "Ivy/close d14",
+     "probePick": "ivy_wang/vgrievance",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5401,
+     "day": 22,
+     "speaker": "Majda",
+     "lastServed": "Ivy/neutral d14",
+     "probePick": "gen_i5ux3gk/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5401,
+     "day": 22,
+     "speaker": "Majda",
+     "lastServed": "Ivy/neutral d14",
+     "probePick": "gen_i5ux3gk/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 90,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 36,
+    "gated": 54,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 0,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {},
+    "memoCacheHits": 90,
+    "memoOriginDiffers": 7,
+    "v3pendingQ": 0,
+    "v3closing": 0,
+    "v3nonverbal": 0,
+    "v3ambush": 0,
+    "v3invitation": 0,
+    "v3trade": 0,
+    "v3hawk": 0,
+    "v3rumor": 0,
+    "v3answers": 0,
+    "v3finalize": 0,
+    "v3threadGuard": 36,
+    "v3gated": 54,
+    "v3displacedParty": 0,
+    "v3displacedOther": 0,
+    "v3freshCap": 0,
+    "v3spent": 0,
+    "v3unexplained": 0,
+    "v3noTrace": 0,
+    "v3error": 0
+   },
+   "residualExamples": [],
+   "v3ClassExamples": {
+    "threadGuard": {
+     "seed": 5401,
+     "day": 9,
+     "speaker": "Valeria",
+     "pick": "ivy_wang/grievance",
+     "thread": "others",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "others",
+      "depth": 1,
+      "spokenBeatTag": "endtopic",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "others",
+       "depth": 1,
+       "spokenBeatTag": "endtopic",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 14,
+       "outCount": 15
+      },
+      "hasOthers": false,
+      "offeredCount": 15,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:personal",
+       "ask:gossip",
+       "ask:spread_rumor",
+       "alive:event:tension",
+       "invite_party",
+       "teach",
+       "skill_teach:gossip_network",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "alive:want:ask_favor",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:personal",
+      "ask:gossip",
+      "ask:spread_rumor",
+      "alive:event:tension",
+      "invite_party",
+      "teach",
+      "skill_teach:gossip_network",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "alive:want:ask_favor",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:personal",
+      "ask:gossip",
+      "ask:spread_rumor",
+      "alive:event:tension",
+      "invite_party",
+      "teach",
+      "skill_teach:gossip_network",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "alive:want:ask_favor",
+      "leave",
+      "silence"
+     ],
+     "deliveredIds": [
+      "alive:event:tension",
+      "alive:want:ask_favor",
+      "ask:gossip",
+      "ask:spread_rumor",
+      "invite_party",
+      "menu:more",
+      "leave",
+      "silence"
+     ],
+     "inParty": false
+    },
+    "gated": {
+     "seed": 5401,
+     "day": 26,
+     "speaker": "Ivy",
+     "pick": "valeria_quispe/grievance",
+     "thread": "gossip",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "gossip",
+      "depth": 3,
+      "spokenBeatTag": "prompt",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "gossip",
+       "depth": 3,
+       "spokenBeatTag": "prompt",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 17,
+       "outCount": 18
+      },
+      "hasOthers": false,
+      "offeredCount": 18,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:spread_rumor",
+       "alive:event:show",
+       "alive:thread:want",
+       "alive:memory:deflected",
+       "teach",
+       "skill_learn:read_people",
+       "skill_teach:steady_hands",
+       "trade",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "alive:want:curious",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:spread_rumor",
+      "alive:event:show",
+      "alive:thread:want",
+      "alive:memory:deflected",
+      "teach",
+      "skill_learn:read_people",
+      "skill_teach:steady_hands",
+      "trade",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "alive:want:curious",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:spread_rumor",
+      "alive:event:show",
+      "alive:thread:want",
+      "alive:memory:deflected",
+      "teach",
+      "skill_learn:read_people",
+      "skill_teach:steady_hands",
+      "trade",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "alive:want:curious",
+      "leave",
+      "silence"
+     ],
+     "deliveredIds": [
+      "alive:event:show",
+      "alive:thread:want",
+      "alive:memory:deflected",
+      "alive:want:curious",
+      "ask:goal",
+      "menu:more",
+      "leave",
+      "silence"
+     ],
+     "inParty": false
+    }
+   },
+   "v3Examples": [],
+   "unexplainedByThread": {},
+   "traceCoverage": 1,
+   "traceCount": 201,
+   "flagsPresent": 201,
+   "flagCoverage": 1
+  },
+  "5402": {
+   "probes": 155,
+   "counts": {
+    "never-served": 0,
+    "served-same-pick": 104,
+    "served-changed-pick": 8,
+    "no-pick": 43,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 20,
+     "false": 84,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 0,
+     "false": 8,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 12,
+     "false": 31,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 0
+    },
+    "served-same-pick": {
+     "true": 80,
+     "false": 24
+    },
+    "served-changed-pick": {
+     "true": 5,
+     "false": 3
+    },
+    "no-pick": {
+     "true": 14,
+     "false": 29
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 32,
+   "correctNonOffer": 80,
+   "changedMenuMore": {
+    "true": 7,
+    "false": 1
+   },
+   "freshMenuMore": {
+    "true": 0,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "served-changed-pick",
+     "seed": 5402,
+     "day": 20,
+     "speaker": "Francisco",
+     "lastServed": "Tom/neutral d13",
+     "probePick": "gen_h1ofyug/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5402,
+     "day": 25,
+     "speaker": "Raj",
+     "lastServed": "Lena/neutral d21",
+     "probePick": "gen_h1ofyug/close",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5402,
+     "day": 25,
+     "speaker": "Raj",
+     "lastServed": "Lena/neutral d21",
+     "probePick": "gen_h1ofyug/close",
+     "menuMore": true,
+     "freshTopics": 3,
+     "convoSawOthers": false
+    }
+   ],
+   "residual": {
+    "total": 84,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 32,
+    "gated": 52,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 0,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {},
+    "memoCacheHits": 84,
+    "memoOriginDiffers": 3,
+    "v3pendingQ": 0,
+    "v3closing": 0,
+    "v3nonverbal": 0,
+    "v3ambush": 0,
+    "v3invitation": 0,
+    "v3trade": 0,
+    "v3hawk": 0,
+    "v3rumor": 0,
+    "v3answers": 0,
+    "v3finalize": 0,
+    "v3threadGuard": 32,
+    "v3gated": 52,
+    "v3displacedParty": 0,
+    "v3displacedOther": 0,
+    "v3freshCap": 0,
+    "v3spent": 0,
+    "v3unexplained": 0,
+    "v3noTrace": 0,
+    "v3error": 0
+   },
+   "residualExamples": [],
+   "v3ClassExamples": {
+    "threadGuard": {
+     "seed": 5402,
+     "day": 26,
+     "speaker": "Delali",
+     "pick": "gen_h1ofyug/close",
+     "thread": "others",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "others",
+      "depth": 1,
+      "spokenBeatTag": "endtopic",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "others",
+       "depth": 1,
+       "spokenBeatTag": "endtopic",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 14,
+       "outCount": 15
+      },
+      "hasOthers": false,
+      "offeredCount": 15,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:gossip",
+       "alive:event:show",
+       "alive:thread:grief",
+       "ask:spread_rumor",
+       "skill_learn:animal_behavior",
+       "skill_teach:field_dressing",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "alive:event:show",
+      "alive:thread:grief",
+      "ask:spread_rumor",
+      "skill_learn:animal_behavior",
+      "skill_teach:field_dressing",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "deliveredIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "inParty": true
+    },
+    "gated": {
+     "seed": 5402,
+     "day": 26,
+     "speaker": "Henry",
+     "pick": "gen_h1ofyug/close",
+     "thread": "taughtref",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "taughtref",
+      "depth": 1,
+      "spokenBeatTag": "endtopic",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "taughtref",
+       "depth": 1,
+       "spokenBeatTag": "endtopic",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 16,
+       "outCount": 17
+      },
+      "hasOthers": false,
+      "offeredCount": 17,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:gossip",
+       "alive:event:show",
+       "alive:thread:gossip",
+       "alive:want:ask_favor",
+       "ask:spread_rumor",
+       "teach",
+       "skill_learn:pathfinder",
+       "skill_teach:gossip_network",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "alive:event:show",
+      "alive:thread:gossip",
+      "alive:want:ask_favor",
+      "ask:spread_rumor",
+      "teach",
+      "skill_learn:pathfinder",
+      "skill_teach:gossip_network",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "deliveredIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "inParty": true
+    }
+   },
+   "v3Examples": [],
+   "unexplainedByThread": {},
+   "traceCoverage": 1,
+   "traceCount": 155,
+   "flagsPresent": 155,
+   "flagCoverage": 1
+  },
+  "5403": {
+   "probes": 248,
+   "counts": {
+    "never-served": 1,
+    "served-same-pick": 192,
+    "served-changed-pick": 4,
+    "no-pick": 51,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 1,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 49,
+     "false": 143,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 0,
+     "false": 4,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 5,
+     "false": 46,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 1
+    },
+    "served-same-pick": {
+     "true": 131,
+     "false": 61
+    },
+    "served-changed-pick": {
+     "true": 4,
+     "false": 0
+    },
+    "no-pick": {
+     "true": 30,
+     "false": 21
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 66,
+   "correctNonOffer": 131,
+   "changedMenuMore": {
+    "true": 1,
+    "false": 3
+   },
+   "freshMenuMore": {
+    "true": 1,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5403,
+     "day": 4,
+     "speaker": "Stan",
+     "pick": "gen_45bfj0w/grievance",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5403,
+     "day": 24,
+     "speaker": "Nassim",
+     "lastServed": "Stan/close d20",
+     "probePick": "stan_kowalski/vgrievance",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5403,
+     "day": 36,
+     "speaker": "Mara",
+     "lastServed": "Jorge/neutral d19",
+     "probePick": "gen_x1ehp5i/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5403,
+     "day": 118,
+     "speaker": "Jorge",
+     "lastServed": "Nassim/close d111",
+     "probePick": "gen_poijlqd/close",
+     "menuMore": false,
+     "freshTopics": 5,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 143,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 60,
+    "gated": 83,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 0,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {},
+    "memoCacheHits": 143,
+    "memoOriginDiffers": 0,
+    "v3pendingQ": 0,
+    "v3closing": 0,
+    "v3nonverbal": 0,
+    "v3ambush": 0,
+    "v3invitation": 0,
+    "v3trade": 0,
+    "v3hawk": 0,
+    "v3rumor": 0,
+    "v3answers": 0,
+    "v3finalize": 0,
+    "v3threadGuard": 60,
+    "v3gated": 83,
+    "v3displacedParty": 0,
+    "v3displacedOther": 0,
+    "v3freshCap": 0,
+    "v3spent": 0,
+    "v3unexplained": 0,
+    "v3noTrace": 0,
+    "v3error": 0
+   },
+   "residualExamples": [],
+   "v3ClassExamples": {
+    "gated": {
+     "seed": 5403,
+     "day": 23,
+     "speaker": "Tashi",
+     "pick": "gen_x1ehp5i/close",
+     "thread": "grief",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "grief",
+      "depth": 1,
+      "spokenBeatTag": "comfort",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "grief",
+       "depth": 1,
+       "spokenBeatTag": "comfort",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 14,
+       "outCount": 15
+      },
+      "hasOthers": false,
+      "offeredCount": 15,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:gossip",
+       "alive:event:show",
+       "alive:thread:taughtref",
+       "alive:memory:gift",
+       "alive:want:ask_favor",
+       "ask:spread_rumor",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "alive:event:show",
+      "alive:thread:taughtref",
+      "alive:memory:gift",
+      "alive:want:ask_favor",
+      "ask:spread_rumor",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "deliveredIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "inParty": true
+    },
+    "threadGuard": {
+     "seed": 5403,
+     "day": 25,
+     "speaker": "Nassim",
+     "pick": "stan_kowalski/vgrievance",
+     "thread": "others",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "others",
+      "depth": 1,
+      "spokenBeatTag": "endtopic",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "others",
+       "depth": 1,
+       "spokenBeatTag": "endtopic",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 14,
+       "outCount": 15
+      },
+      "hasOthers": false,
+      "offeredCount": 15,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:gossip",
+       "alive:event:show",
+       "alive:want:ask_favor",
+       "ask:spread_rumor",
+       "skill_learn:steady_hands",
+       "skill_teach:weather_read",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "alive:event:show",
+      "alive:want:ask_favor",
+      "ask:spread_rumor",
+      "skill_learn:steady_hands",
+      "skill_teach:weather_read",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "deliveredIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "inParty": true
+    }
+   },
+   "v3Examples": [],
+   "unexplainedByThread": {},
+   "traceCoverage": 1,
+   "traceCount": 248,
+   "flagsPresent": 248,
+   "flagCoverage": 1
+  },
+  "5404": {
+   "probes": 163,
+   "counts": {
+    "never-served": 5,
+    "served-same-pick": 114,
+    "served-changed-pick": 17,
+    "no-pick": 27,
+    "unknown-speaker": 0
+   },
+   "inBuiltByCat": {
+    "never-served": {
+     "true": 0,
+     "false": 5,
+     "null": 0
+    },
+    "served-same-pick": {
+     "true": 41,
+     "false": 73,
+     "null": 0
+    },
+    "served-changed-pick": {
+     "true": 0,
+     "false": 17,
+     "null": 0
+    },
+    "no-pick": {
+     "true": 10,
+     "false": 17,
+     "null": 0
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0,
+     "null": 0
+    }
+   },
+   "sawByCat": {
+    "never-served": {
+     "true": 2,
+     "false": 3
+    },
+    "served-same-pick": {
+     "true": 71,
+     "false": 43
+    },
+    "served-changed-pick": {
+     "true": 14,
+     "false": 3
+    },
+    "no-pick": {
+     "true": 6,
+     "false": 21
+    },
+    "unknown-speaker": {
+     "true": 0,
+     "false": 0
+    }
+   },
+   "genuineMiss": 65,
+   "correctNonOffer": 71,
+   "changedMenuMore": {
+    "true": 11,
+    "false": 6
+   },
+   "freshMenuMore": {
+    "true": 5,
+    "false": 0
+   },
+   "examples": [
+    {
+     "cat": "never-served",
+     "seed": 5404,
+     "day": 4,
+     "speaker": "A person, maybe 50s",
+     "pick": "gen_nta4h5w/grievance",
+     "menuMore": true,
+     "freshTopics": 1,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5404,
+     "day": 4,
+     "speaker": "A person, maybe 50s",
+     "pick": "gen_nta4h5w/grievance",
+     "menuMore": true,
+     "freshTopics": 0,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "never-served",
+     "seed": 5404,
+     "day": 4,
+     "speaker": "A person, maybe 50s",
+     "pick": "gen_nta4h5w/grievance",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": false
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5404,
+     "day": 17,
+     "speaker": "Quinn",
+     "lastServed": "Lizelle/neutral d13",
+     "probePick": "gen_dmnvqt5/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5404,
+     "day": 23,
+     "speaker": "Dmitri",
+     "lastServed": "Carlos/close d22",
+     "probePick": "gen_nta4h5w/vgrievance",
+     "menuMore": false,
+     "freshTopics": 4,
+     "convoSawOthers": true
+    },
+    {
+     "cat": "served-changed-pick",
+     "seed": 5404,
+     "day": 24,
+     "speaker": "Caleb",
+     "lastServed": "A woman, maybe 30s, with calloused knuckles/neutral d6",
+     "probePick": "gen_nta4h5w/close",
+     "menuMore": true,
+     "freshTopics": 2,
+     "convoSawOthers": true
+    }
+   ],
+   "residual": {
+    "total": 73,
+    "pendingQAlone": 0,
+    "pagerOwns": 0,
+    "threadGuard": 23,
+    "gated": 50,
+    "freshCapped": 0,
+    "cacheSuspect": 0,
+    "unexplained": 0,
+    "memoFreshCappedBroad": 0,
+    "memoSpentOthers": 0,
+    "memoPagerBreakdown": {},
+    "memoCacheHits": 73,
+    "memoOriginDiffers": 4,
+    "v3pendingQ": 0,
+    "v3closing": 0,
+    "v3nonverbal": 0,
+    "v3ambush": 0,
+    "v3invitation": 0,
+    "v3trade": 0,
+    "v3hawk": 0,
+    "v3rumor": 0,
+    "v3answers": 0,
+    "v3finalize": 0,
+    "v3threadGuard": 23,
+    "v3gated": 50,
+    "v3displacedParty": 0,
+    "v3displacedOther": 0,
+    "v3freshCap": 0,
+    "v3spent": 0,
+    "v3unexplained": 0,
+    "v3noTrace": 0,
+    "v3error": 0
+   },
+   "residualExamples": [],
+   "v3ClassExamples": {
+    "gated": {
+     "seed": 5404,
+     "day": 31,
+     "speaker": "Dmitri",
+     "pick": "gen_nta4h5w/vgrievance",
+     "thread": "recall",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "recall",
+      "depth": 1,
+      "spokenBeatTag": "prompt",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "recall",
+       "depth": 1,
+       "spokenBeatTag": "prompt",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 15,
+       "outCount": 16
+      },
+      "hasOthers": false,
+      "offeredCount": 16,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:gossip",
+       "alive:event:gratitude",
+       "alive:memory:deflected",
+       "alive:memory:gift",
+       "ask:spread_rumor",
+       "skill_learn:steady_hands",
+       "skill_teach:read_people",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "alive:event:gratitude",
+      "alive:memory:deflected",
+      "alive:memory:gift",
+      "ask:spread_rumor",
+      "skill_learn:steady_hands",
+      "skill_teach:read_people",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "deliveredIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "inParty": true
+    },
+    "threadGuard": {
+     "seed": 5404,
+     "day": 32,
+     "speaker": "Dmitri",
+     "pick": "gen_nta4h5w/vgrievance",
+     "thread": "others",
+     "buildsThisCall": 1,
+     "entry": {
+      "choosingSubject": true,
+      "thread": "others",
+      "depth": 1,
+      "spokenBeatTag": "endtopic",
+      "windingDown": false,
+      "pendingQ": false,
+      "reactiveQ": null,
+      "reactiveDef": false,
+      "genericQ": null,
+      "pendingTrade": false,
+      "pendingHawk": false,
+      "rumorDone": false,
+      "heldBeats": 0,
+      "spentOthers": false,
+      "gqActive": false
+     },
+     "finalize": null,
+     "cacheHit": true,
+     "origin": {
+      "entry": {
+       "choosingSubject": true,
+       "thread": "others",
+       "depth": 1,
+       "spokenBeatTag": "endtopic",
+       "windingDown": false,
+       "pendingQ": false,
+       "reactiveQ": null,
+       "reactiveDef": false,
+       "genericQ": null,
+       "pendingTrade": false,
+       "pendingHawk": false,
+       "rumorDone": false,
+       "heldBeats": 0,
+       "spentOthers": false,
+       "gqActive": false
+      },
+      "cacheHit": false,
+      "error": false,
+      "finalize": {
+       "ran": true,
+       "inHasOthers": false,
+       "outHasOthers": false,
+       "inCount": 16,
+       "outCount": 17
+      },
+      "hasOthers": false,
+      "offeredCount": 17,
+      "offeredIds": [
+       "ask:lately",
+       "ask:you",
+       "ask:goal",
+       "ask:personal",
+       "ask:gossip",
+       "alive:event:gratitude",
+       "alive:thread:recall",
+       "alive:memory:deflected",
+       "alive:memory:gift",
+       "ask:spread_rumor",
+       "skill_learn:steady_hands",
+       "skill_teach:read_people",
+       "compare_maps",
+       "observe",
+       "theorize",
+       "leave",
+       "silence"
+      ],
+      "origin": null
+     },
+     "baseIds": [
+      "ask:lately",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "alive:event:gratitude",
+      "alive:thread:recall",
+      "alive:memory:deflected",
+      "alive:memory:gift",
+      "ask:spread_rumor",
+      "skill_learn:steady_hands",
+      "skill_teach:read_people",
+      "compare_maps",
+      "observe",
+      "theorize",
+      "leave",
+      "silence"
+     ],
+     "baseHasOthers": false,
+     "fullIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "deliveredIds": [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     "inParty": true
+    }
+   },
+   "v3Examples": [],
+   "unexplainedByThread": {},
+   "traceCoverage": 1,
+   "traceCount": 163,
+   "flagsPresent": 163,
+   "flagCoverage": 1
+  }
+ },
+ "pooled": {
+  "never-served": 10,
+  "served-same-pick": 572,
+  "served-changed-pick": 39,
+  "no-pick": 146,
+  "unknown-speaker": 0
+ },
+ "pooledMenuProblem": 621,
+ "pooledShares": {
+  "never-served": 0.01610305958132045,
+  "served-same-pick": 0.9210950080515298,
+  "served-changed-pick": 0.06280193236714976,
+  "no-pick": 0.23510466988727857,
+  "unknown-speaker": 0
+ },
+ "pooledGenuineMiss": 253,
+ "pooledCorrectNonOffer": 368,
+ "pooledResidual": {
+  "total": 390,
+  "pendingQAlone": 0,
+  "pagerOwns": 0,
+  "threadGuard": 151,
+  "gated": 239,
+  "freshCapped": 0,
+  "cacheSuspect": 0,
+  "unexplained": 0,
+  "memoFreshCappedBroad": 0,
+  "memoSpentOthers": 0,
+  "memoCacheHits": 390,
+  "memoOriginDiffers": 14,
+  "v3pendingQ": 0,
+  "v3closing": 0,
+  "v3nonverbal": 0,
+  "v3ambush": 0,
+  "v3invitation": 0,
+  "v3trade": 0,
+  "v3hawk": 0,
+  "v3rumor": 0,
+  "v3answers": 0,
+  "v3finalize": 0,
+  "v3threadGuard": 151,
+  "v3gated": 239,
+  "v3displacedParty": 0,
+  "v3displacedOther": 0,
+  "v3freshCap": 0,
+  "v3spent": 0,
+  "v3unexplained": 0,
+  "v3noTrace": 0,
+  "v3error": 0
+ },
+ "pooledResidualShares": {
+  "pendingQAlone": 0,
+  "pagerOwns": 0,
+  "threadGuard": 0.3871794871794872,
+  "gated": 0.6128205128205129,
+  "freshCapped": 0,
+  "cacheSuspect": 0,
+  "unexplained": 0,
+  "memoFreshCappedBroad": 0,
+  "memoSpentOthers": 0,
+  "memoCacheHits": 1,
+  "memoOriginDiffers": 0.035897435897435895,
+  "v3pendingQ": 0,
+  "v3closing": 0,
+  "v3nonverbal": 0,
+  "v3ambush": 0,
+  "v3invitation": 0,
+  "v3trade": 0,
+  "v3hawk": 0,
+  "v3rumor": 0,
+  "v3answers": 0,
+  "v3finalize": 0,
+  "v3threadGuard": 0.3871794871794872,
+  "v3gated": 0.6128205128205129,
+  "v3displacedParty": 0,
+  "v3displacedOther": 0,
+  "v3freshCap": 0,
+  "v3spent": 0,
+  "v3unexplained": 0,
+  "v3noTrace": 0,
+  "v3error": 0
+ },
+ "pooledFlagCoverage": 1,
+ "menuSplit": {
+  "perSeed": {
+   "5401": {
+    "arm": "linger",
+    "lingerPicks": 262,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 54,
+    "subjectNoOfferRate": 0.13043478260869565,
+    "offered": 360,
+    "mainOffered": 12,
+    "subjectOffered": 355,
+    "picked": 262,
+    "latePicks": 110,
+    "latePicksMain": 2,
+    "latePicksSubject": 108,
+    "classes": {
+     "subject-no-offer": 54,
+     "offered-not-picked": 98,
+     "picked-others": 262
+    }
+   },
+   "5402": {
+    "arm": "linger",
+    "lingerPicks": 294,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 24,
+    "subjectNoOfferRate": 0.057971014492753624,
+    "offered": 388,
+    "mainOffered": 0,
+    "subjectOffered": 388,
+    "picked": 294,
+    "latePicks": 112,
+    "latePicksMain": 0,
+    "latePicksSubject": 112,
+    "classes": {
+     "picked-others": 294,
+     "no-subject-no-ans": 2,
+     "subject-no-offer": 24,
+     "offered-not-picked": 94
+    }
+   },
+   "5403": {
+    "arm": "linger",
+    "lingerPicks": 276,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 41,
+    "subjectNoOfferRate": 0.09903381642512077,
+    "offered": 369,
+    "mainOffered": 0,
+    "subjectOffered": 369,
+    "picked": 276,
+    "latePicks": 109,
+    "latePicksMain": 0,
+    "latePicksSubject": 109,
+    "classes": {
+     "subject-no-offer": 41,
+     "picked-others": 276,
+     "offered-not-picked": 93,
+     "no-subject-no-ans": 4
+    }
+   },
+   "5404": {
+    "arm": "linger",
+    "lingerPicks": 269,
+    "totalNaturalUnsteered": 414,
+    "subjectNoOffer": 33,
+    "subjectNoOfferRate": 0.07971014492753623,
+    "offered": 378,
+    "mainOffered": 0,
+    "subjectOffered": 378,
+    "picked": 269,
+    "latePicks": 97,
+    "latePicksMain": 0,
+    "latePicksSubject": 97,
+    "classes": {
+     "subject-no-offer": 33,
+     "offered-not-picked": 109,
+     "picked-others": 269,
+     "no-subject-no-ans": 3
+    }
+   }
+  },
+  "pooled": {
+   "totalNaturalUnsteered": 1656,
+   "subjectNoOffer": 152,
+   "offered": 1495,
+   "mainOffered": 12,
+   "subjectOffered": 1490,
+   "picked": 1101,
+   "latePicks": 428,
+   "latePicksMain": 2,
+   "latePicksSubject": 426,
+   "subjectNoOfferRate": 0.09178743961352658
+  },
+  "byArm": {
+   "linger": {
+    "seeds": 4,
+    "offered": 1495,
+    "picked": 1101,
+    "latePicks": 428,
+    "offeredNotFresh": 0,
+    "conversion": 0.7364548494983277,
+    "freshCeilingDenom": 1495,
+    "conversionFreshCeiling": 0.7364548494983277
+   }
+  }
+ }
+}
