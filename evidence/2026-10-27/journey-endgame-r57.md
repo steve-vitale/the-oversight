@@ -268,7 +268,19 @@ Two finals read end to end, 0 senseless flags:
 - ANALYZER: exit 1 = verdicts (PRIMARY NO-GO | ALL NO-GO),
   not a crash; verdicts identical on re-run.
 - CHECK-QUICK (adoption completion, post-commit, 2026-10-27):
-  [to be filled after the run — see below]
+  pre-rebase 278 passed, 9 failed in 367s; post-rebase 278 passed,
+  9 failed in 584s — IDENTICAL script list both times and identical
+  to r56's standing profile (hide-discovery, measurement
+  comparison/proof-update/workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof, parity-20261014 gear
+  spear+jacket, establishment-r20-fixes racks-full next-day
+  voice). This run changed zero src/js, so the 9 are
+  pre-existing on current master, not a regression from this
+  commit; check.js does not execute this run's probe/analyzer
+  scripts. (Two sibling landings forced two rebases between
+  the pre- and post-rebase runs; the post-rebase run is the
+  final profile on the merged base, and the analyzer verdicts
+  stayed identical across both rebases.)
 
 ## Telemetry deviation check (2026-10-27)
 
