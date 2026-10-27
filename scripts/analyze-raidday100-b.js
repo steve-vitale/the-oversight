@@ -30,6 +30,7 @@
 // Usage: node scripts/analyze-ledgerbound-b.js [corpusDir]
 // When required, exports { computeLegs, perSeed, famOf } for the proof.
 'use strict';
+const { spanDedupSummary, applySpanDedupToFams, applySpanDedupToBoundary } = require('./dedupspan-apply-b.js'); // SPAN-DEDUP wiring (sim-dedupspan-wire-b): subtract span-internal meal draws from the direct leg; see dedupspan-apply-b.js for the status contract.
 const fs = require('fs');
 const path = require('path');
 
@@ -187,6 +188,12 @@ function perSeed(ps) {
       if (isDried(it.name)) f.newDriedDraws += kcal;
     }
   }
+  // SPAN-DEDUP (sim-dedupspan-wire-b): a useAbility span that swallows an endDay
+  // double-counts its span-internal meal draws as direct draws. Subtract the
+  // rule's exclusions from the direct side BEFORE residuals are computed.
+  // directKcal stays raw; newDrawsPreDedup / spanDedupKcal keep it auditable.
+  const spanDedup = spanDedupSummary(ps, famOf, isDried);
+  applySpanDedupToFams(fams, spanDedup);
   for (const rec of fams.values()) {
     rec.transformEvents = rec.transformEvents || 0; rec.transformPre = rec.transformPre || 0;
     rec.transformPost = rec.transformPost || 0; rec.transformLoss = rec.transformLoss || 0;
@@ -271,6 +278,9 @@ function perSeed(ps) {
     const a = bFGet(famOf(nm)); a.post += e.postKcal || 0;
     if (e.linked && e.lossKcal != null) a.loss += e.lossKcal || 0;
   }
+  // SPAN-DEDUP boundary leg: boundary flows are dated <= 100, so only
+  // day-<=100 exclusions enter bDraws (rB/cB legs derive from bDraws).
+  applySpanDedupToBoundary(bFam, spanDedup);
   for (const rec of fams.values()) {
     const b = bFam.get(rec.family) || { inflow: 0, draws: 0, sweep: 0, loss: 0, post: 0, dIn: 0, dDraws: 0, dSweep: 0 };
     const adj = bDraw100.get(rec.family) || { meal: 0, mealDried: 0, stock: 0 };
@@ -327,7 +337,7 @@ function perSeed(ps) {
   }
   return { seed: ps.seed, daysAlive: ps.daysAlive, deaths: ps.deaths, deathCauses: ps.deathCauses,
     waveReach: ps.waveReach, rank: ps.rank, national: ps.national, table: ps.table, win: ps.win,
-    fams, events, anyDriedStock, stockdoor, direct,
+    fams, spanDedup, events, anyDriedStock, stockdoor, direct,
     openingTotal: [...opening.values()].reduce((t, k) => t + k, 0),
     driedInflowRecords: (ps.inflows || []).filter(r => isDried(r.name) &&
       !(r.door === 'stock' && !(r.kcal > 0)) && !(r.door === 'pantryAdd' && !r.added)),

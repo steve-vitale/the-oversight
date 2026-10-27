@@ -174,6 +174,7 @@ function applySpanDedup(payload) {
       const kcal = take * (it.kcalEach || 0);
       const generic = isGeneric(it);
       base.exclusions.push({
+        directIndex: idx,
         directSeq: direct[idx].seq != null ? direct[idx].seq : null,
         directPath: direct[idx].path || null, mealSeq: d.mealSeq,
         spanAbility: d.span.ability, spanAction: d.span.action,
@@ -226,13 +227,15 @@ function main() {
     const analyzer = require('./analyze-raidcallers-b.js');
     const fam = analyzer.perSeed(payload).fams.get('Foraged food');
     if (fam) {
-      console.log('analyzer generic old: newDraws=' + fam.newDraws + ' cBResidual(boundary)=' + fam.cBResidual +
+      // WIRED (sim-dedupspan-wire-b): perSeed now returns deduped
+      // figures; the pre-dedup figures come from its preDedup fields.
+      console.log('analyzer generic wired (deduped): newDraws=' + fam.newDraws + ' cBResidual(boundary)=' + fam.cBResidual +
         ' newResidual=' + fam.newResidual);
-      console.log('analyzer generic deduped: newDraws=' + (fam.newDraws - out.totalExcludedGenericKcal) +
-        ' cBResidual(boundary)=' + (fam.cBResidual - out.totalExcludedGenericKcal));
+      console.log('analyzer generic pre-dedup: newDraws=' + fam.newDrawsPreDedup +
+        ' cBResidual(boundary)=' + (fam.cBResidual + out.totalExcludedGenericKcal));
     }
   } catch (e) { console.log('analyzer perSeed unavailable: ' + e.message); }
 }
 
-if (require.main === module) main();
 module.exports = { applySpanDedup, famOf, isDried };
+if (require.main === module) main();

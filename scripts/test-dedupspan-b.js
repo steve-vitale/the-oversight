@@ -83,17 +83,27 @@ const CORRECT_ALIGNMENT_INPUT = 3800; // perstack closed figure, input not re-ju
 const dedupedCorrect = CORRECT_ALIGNMENT_INPUT - out.totalExcludedGenericKcal;
 check('GO3 deduped correct-alignment generic residual 0', dedupedCorrect === 0,
   'dedupedCorrect=' + dedupedCorrect);
+// WIRED UPDATE (sim-dedupspan-wire-b): perSeed now returns DEDUPED
+// figures by design (the wiring this test's successor arm landed).
+// The old figures are therefore asserted via the pre-dedup fields,
+// not via perSeed output: preDedup newDraws 202259, old boundary
+// residual 3700 (= wired -100 + 3800). This is an intentional
+// behavior change, not a loosened assertion: every number below is
+// exact, and the old 3700 is still recoverable from the wired
+// record.
 const fam = analyzer.perSeed(cult).fams.get('Foraged food');
-console.log('ANALYZER generic old: newDraws=' + (fam && fam.newDraws) + ' cBResidual(boundary)=' + (fam && fam.cBResidual));
-check('GO3 analyzer old boundary residual 3700 (consistency)', !!fam && fam.cBResidual === 3700,
+console.log('ANALYZER generic wired: newDraws=' + (fam && fam.newDraws) + ' cBResidual(boundary)=' + (fam && fam.cBResidual) +
+  ' newDrawsPreDedup=' + (fam && fam.newDrawsPreDedup) + ' spanDedupKcal=' + (fam && fam.spanDedupKcal));
+check('GO3 analyzer wired boundary residual -100 (deduped)', !!fam && fam.cBResidual === -100,
   fam ? 'cBResidual=' + fam.cBResidual : 'no fam');
-const dedupedBoundary = fam ? fam.cBResidual - out.totalExcludedGenericKcal : null;
-check('GO3 boundary shifts by exactly -excludedGeneric', !!fam && dedupedBoundary === fam.cBResidual - out.totalExcludedGenericKcal,
-  'dedupedBoundary=' + dedupedBoundary);
-check('GO3 deduped boundary remainder -100 (proven day-100 timing only)', dedupedBoundary === -100,
-  'dedupedBoundary=' + dedupedBoundary);
-check('GO3 deduped generic newDraws = old - 3800', !!fam && fam.newDraws - out.totalExcludedGenericKcal === fam.newDraws - 3800,
-  'old=' + (fam && fam.newDraws));
+check('GO3 analyzer pre-dedup boundary residual 3700 (consistency)', !!fam && fam.cBResidual + out.totalExcludedGenericKcal === 3700,
+  fam ? 'cBResidual+excluded=' + (fam.cBResidual + out.totalExcludedGenericKcal) : 'no fam');
+check('GO3 analyzer wired generic newDraws 198459', !!fam && fam.newDraws === 198459,
+  fam ? 'newDraws=' + fam.newDraws : 'no fam');
+check('GO3 analyzer pre-dedup generic newDraws 202259', !!fam && fam.newDrawsPreDedup === 202259,
+  fam ? 'newDrawsPreDedup=' + fam.newDrawsPreDedup : 'no fam');
+check('GO3 analyzer spanDedupKcal 3800', !!fam && fam.spanDedupKcal === 3800,
+  fam ? 'spanDedupKcal=' + fam.spanDedupKcal : 'no fam');
 
 // ---- GO4: no-span-data guard on the bare raidcallers corpus ----
 const bare = applySpanDedup(raid);
