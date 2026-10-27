@@ -7501,6 +7501,144 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
 
+    // VILLAGER POCKET AMMO (gap-ammo 2026-10-27, Triage A4): the departure
+    // half of the volley. The volley engine (fieldFights.js) already fires
+    // when the fighter CARRIES matching ammo — but villagerGearUp never
+    // moved ammo into a pack, so 0/1,179 measured fights ever had any
+    // (sim-ammostorage-a: communal stone median 189, fighter packs 0).
+    // A fighter going out now pockets, in order:
+    //   1. their OWN stashed ammo (own property — gearUp already moves own
+    //      stashed weapons the same way; nobody else's stash is touched),
+    //   2. sling stones from the communal pile (stones are the pile's one
+    //      ammo reservoir; the take is ledgered like an armory borrow),
+    //   3. ONE craft attempt per departure for bow/crossbow ammo from the
+    //      communal pile, using the EXISTING arrow/bolt recipes and the
+    //      player's craft odds exactly (blind 35%, learned 85%; a blind
+    //      success teaches, the PRACTICE rule). Knowledge follows the
+    //      armor-craft precedent (villagerArmorCraftDay): carrying the
+    //      ranged weapon IS the showing — no new knowledge system.
+    // Numbers (named, modest): sling tops up to 6 stones; arrows/bolts
+    // top up to one recipe batch (5, the recipe's makesUnits). Volley
+    // shots cap at 4 per fight, so a full quiver covers a fight plus a
+    // second meeting, not a campaign.
+    // Called ONLY from departure sites (patrol, expedition) AFTER gear-up
+    // and AFTER the sit-out checks — never mid-fight (fieldFight's
+    // acquire=false gear-up must not teleport ammo to a far-off fighter),
+    // and never for the player (the player pockets/crafts through the UI).
+    // Nothing here touches monster stats, wave pacing, or damage formulas.
+    villagerPocketAmmo(vid) {
+      const out = { pocketed: 0, crafted: 0, craftedOk: false, ammoId: null };
+      try {
+        if (!vid || vid === this.villagerId) return out;
+        const person = this.getPerson ? this.getPerson(vid) : null;
+        if (!person || person.dead) return out;
+        const S = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+        let rw = null;
+        try { rw = (S.equipment && S.equipment.rangedWeaponOf) ? S.equipment.rangedWeaponOf(person, this.data.items) : null; } catch (e) {}
+        if (!rw) rw = (person.equipped || {}).ranged || null;
+        if (!rw) return out;
+        const rwId = rw.itemId || rw.id;
+        const def = (this.data.items || []).find(d => d.id === rwId);
+        const ammoId = (def && def.weapon && def.weapon.ammo) || null;
+        if (!ammoId) return out;
+        out.ammoId = ammoId;
+        person.items = person.items || [];
+        const carried = () => {
+          let n = 0;
+          for (const e of person.items) {
+            const eid = (typeof e === 'string') ? e : (e && (e.itemId || e.id || e.material));
+            if (eid === ammoId) n += (typeof e === 'string') ? 1 : (e.units || 1);
+          }
+          return n;
+        };
+        const addCarried = (n) => {
+          if (n <= 0) return;
+          for (const e of person.items) {
+            if (e && typeof e !== 'string' && (e.itemId === ammoId || e.id === ammoId || e.material === ammoId)) {
+              e.units = (e.units || 1) + n; out.pocketed += n; return;
+            }
+          }
+          const adef = (this.data.items || []).find(d => d.id === ammoId) || {};
+          person.items.push({ itemId: ammoId, material: ammoId, units: n, name: adef.name || ammoId, kcalEach: 0, kg: adef.kg || 0.1 });
+          out.pocketed += n;
+        };
+        // Cap per ammo kind: stones top up to 6, crafted ammo to one batch (5).
+        const cap = ammoId === 'stone' ? 6 : 5;
+        // 1. Own stashed ammo first.
+        try {
+          const stash = person.stashed || [];
+          for (let i = stash.length - 1; i >= 0 && carried() < cap; i--) {
+            const e = stash[i];
+            const eid = (typeof e === 'string') ? e : (e && (e.itemId || e.id || e.material));
+            if (eid !== ammoId) continue;
+            const want = cap - carried();
+            if (typeof e === 'string') { stash.splice(i, 1); addCarried(1); }
+            else {
+              const take = Math.min(e.units || 1, want);
+              e.units = (e.units || 1) - take;
+              if (e.units <= 0) stash.splice(i, 1);
+              addCarried(take);
+            }
+          }
+        } catch (e) {}
+        if (carried() >= cap) return out;
+        // 2. Communal pile.
+        let st = null;
+        try { st = (this.stashState) ? this.stashState() : null; } catch (e) {}
+        if (!st) return out;
+        const mats = st.materials || {};
+        if (ammoId === 'stone') {
+          const have = mats.stone || 0;
+          const take = Math.min(cap - carried(), have);
+          if (take > 0) {
+            mats.stone = have - take;
+            try { if (this.stashLog) this.stashLog('take', 'Stone', take, vid); } catch (e2) {}
+            addCarried(take);
+          }
+          return out;
+        }
+        // 3. One craft attempt per departure (arrow/bolt only — other ammo
+        // kinds have no pile recipe and are left alone, never invented).
+        if (ammoId !== 'arrow' && ammoId !== 'bolt') return out;
+        const recipe = (this.data.recipes || []).find(r => r.id === ammoId);
+        if (!recipe || !recipe.materials) return out;
+        let ok = true;
+        for (const [m, need] of Object.entries(recipe.materials)) {
+          if ((mats[m] || 0) < need) { ok = false; break; }
+        }
+        if (!ok) return out;
+        for (const [m, need] of Object.entries(recipe.materials)) mats[m] -= need;
+        const v = this.state.village || {};
+        v.ammoCraft = v.ammoCraft || {};
+        const lv = v.ammoCraft[vid] = v.ammoCraft[vid] || {};
+        const level = lv[ammoId] || 1;
+        const rate = level >= 2 ? 0.85 : 0.35;
+        const success = Math.random() < rate;
+        out.crafted = 1;
+        out.craftedOk = success;
+        if (success) {
+          if (level < 2) lv[ammoId] = 2;
+          const made = recipe.makesUnits || 1;
+          const adef = (this.data.items || []).find(d => d.id === ammoId) || {};
+          // The full batch lands — capping the placement would silently
+          // drop units. The cap gates the ATTEMPT (carried < 5), not the
+          // batch, so pile cost and product stay exactly accounted.
+          let placed = false;
+          for (const e of person.items) {
+            if (e && typeof e !== 'string' && (e.itemId === ammoId || e.id === ammoId || e.material === ammoId)) {
+              e.units = (e.units || 1) + made; placed = true; break;
+            }
+          }
+          if (!placed) person.items.push({ itemId: ammoId, material: ammoId, units: made, name: adef.name || ammoId, kcalEach: 0, kg: adef.kg || 0.1 });
+          try { if (this.stashLog) this.stashLog('take', adef.name || recipe.name || ammoId, made, vid); } catch (e2) {}
+          try { if (this.tele) this.tele('ammo_craft', { vid: vid, item: ammoId, ok: true }); } catch (e3) {}
+        } else {
+          try { if (this.tele) this.tele('ammo_craft', { vid: vid, item: ammoId, ok: false }); } catch (e3) {}
+        }
+      } catch (e) {}
+      return out;
+    },
+
     // VILLAGER KILL LOOT (Steve 2026-10-09): "they need a chance for upgraded
     // weapons and gear from wave 1 enemies." A villager's real kill rolls the
     // same alien loot table as yours — the System's gift goes into the
@@ -7689,6 +7827,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // walk out hurt when help is at hand. Same rule as expeditions.
       try { this.villagerGearUp(vid, true); } catch (e) {}
       try { if (this.villagerHealCheck(vid, first)) return; } catch (e) {}
+      // AMMO (gap-ammo 2026-10-27): the patroller is really going out —
+      // pocket stones / craft a batch from the pile before leaving.
+      try { if (this.villagerPocketAmmo) this.villagerPocketAmmo(vid); } catch (e) {}
       // WORLD MONSTERS (Steve 2026-10-06): patrols hunt the nearest roaming
       // threat to Haven, not a single player-tethered monster.
       const hx = (this.state.village || {}).px ?? 4, hy = (this.state.village || {}).py ?? 4;

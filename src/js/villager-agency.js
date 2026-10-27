@@ -260,6 +260,9 @@
       try { if ((this.state.village.sick || {})[vid]) return; } catch (e) {}
       var maxD = this.npcMaxDist(vid);
       if (maxD < 1) return;
+      // AMMO (gap-ammo 2026-10-27): the expedition is really launching —
+      // pocket stones / craft a batch from the pile before leaving.
+      try { if (this.villagerPocketAmmo) this.villagerPocketAmmo(vid); } catch (e) {}
       // target: a node out there, at real distance
       var dist = 1 + Math.floor(R() * maxD);
       var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
