@@ -1,0 +1,841 @@
+{
+ "arm": "sim-day99demand-b",
+ "screenRange": "20100-20123",
+ "screenCap": 64,
+ "screenedCount": 24,
+ "stoppedAfterChunk": "20116-20123 (HIT found; per prereg no further chunks)",
+ "summary": {
+  "hitSeeds": [
+   20118
+  ],
+  "partialSeeds": [],
+  "totalDemands": 55,
+  "totalTakes": 53,
+  "totalTakeKcal": 51194,
+  "hangingDemands": [
+   [
+    20115,
+    [
+     100
+    ]
+   ],
+   [
+    20117,
+    [
+     100
+    ]
+   ]
+  ],
+  "seedsWithZeroRaids": [
+   20109,
+   20119
+  ],
+  "national": 0,
+  "table": 0,
+  "wins": 0,
+  "wave4or5": 0,
+  "waveReachCounts": {
+   "2": 6,
+   "3": 18
+  },
+  "medianSurvivalDays": 100.0,
+  "survivedTo100": 22,
+  "totalDeaths": 116,
+  "deathCauses": {
+   "the arena": 41,
+   "sickness": 15,
+   "starvation": 9,
+   "monster": 8,
+   "contest": 7,
+   "highbeam deer": 1,
+   "combat": 6,
+   "dehydration": 4,
+   "alien": 2,
+   "a wound that wouldn't close": 8,
+   "ambush": 10,
+   "lockjaw": 1,
+   "big big": 1,
+   "the night": 2,
+   "rut king": 1
+  }
+ },
+ "policies": "competent-nofeast (COMPETENT_FEAST=0, SEATDRIVE=0, PLENTYDEPRI=0, DEPOSITGATE=1, FEASTSCALE_R13 off)",
+ "base": "worktree HEAD at prereg time 4728c2cdd2ca044ab16134d51362a608bf0b693 (no pin); prereg commit ec59cc195",
+ "instrument": "scripts/sweep-day99demand-b.js + scripts/stockdoors-capture-day99demand.js (vendored from raidday100; registerDeath-suppressing death wrapper, disclosed in prereg)",
+ "screenCorpusDir": "evidence/2026-10-27/sim-day99demand-b-screen-corpus/",
+ "note": "Screening only for the non-hit seeds; seed 20118 is the supplied HIT seed. The judged analyzer run on 20118 is the next arm's work, not this run's claim.",
+ "seeds": [
+  {
+   "seed": 20100,
+   "daysAlive": 29,
+   "endReason": "village-lost",
+   "lastSnapDay": 29,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 1,
+    "sickness": 1,
+    "starvation": 2
+   },
+   "demandDays": [
+    28
+   ],
+   "takeDays": [
+    29
+   ],
+   "takeKcal": 960,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20101,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 6,
+   "deathCauses": {
+    "monster": 1,
+    "contest": 1,
+    "highbeam deer": 1,
+    "combat": 1,
+    "the arena": 1,
+    "sickness": 1
+   },
+   "demandDays": [
+    14,
+    16,
+    30,
+    53,
+    90
+   ],
+   "takeDays": [
+    15,
+    17,
+    31,
+    54,
+    91
+   ],
+   "takeKcal": 5000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20102,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 9,
+   "deathCauses": {
+    "the arena": 5,
+    "dehydration": 2,
+    "alien": 2
+   },
+   "demandDays": [
+    25,
+    34,
+    40,
+    89
+   ],
+   "takeDays": [
+    26,
+    35,
+    41,
+    90
+   ],
+   "takeKcal": 4000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20103,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "sickness": 2,
+    "combat": 1,
+    "a wound that wouldn't close": 2
+   },
+   "demandDays": [
+    59,
+    95
+   ],
+   "takeDays": [
+    60,
+    96
+   ],
+   "takeKcal": 2000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20104,
+   "daysAlive": 94,
+   "endReason": "village-lost",
+   "lastSnapDay": 94,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 13,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 4,
+    "sickness": 5,
+    "combat": 1,
+    "a wound that wouldn't close": 1,
+    "starvation": 1
+   },
+   "demandDays": [
+    19,
+    27,
+    48
+   ],
+   "takeDays": [
+    20,
+    28,
+    49
+   ],
+   "takeKcal": 3000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20105,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 1,
+   "deathCauses": {
+    "the arena": 1
+   },
+   "demandDays": [
+    38,
+    72
+   ],
+   "takeDays": [
+    39,
+    73
+   ],
+   "takeKcal": 2000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20106,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 3,
+   "deathCauses": {
+    "sickness": 1,
+    "contest": 1,
+    "dehydration": 1
+   },
+   "demandDays": [
+    74,
+    98
+   ],
+   "takeDays": [
+    75,
+    99
+   ],
+   "takeKcal": 2000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20107,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 4
+   },
+   "demandDays": [
+    44,
+    71
+   ],
+   "takeDays": [
+    45,
+    72
+   ],
+   "takeKcal": 2000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20108,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 1,
+    "the arena": 3
+   },
+   "demandDays": [
+    27,
+    32,
+    39
+   ],
+   "takeDays": [
+    28,
+    33,
+    40
+   ],
+   "takeKcal": 2800,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20109,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 7,
+   "deathCauses": {
+    "the arena": 3,
+    "ambush": 1,
+    "a wound that wouldn't close": 2,
+    "monster": 1
+   },
+   "demandDays": [],
+   "takeDays": [],
+   "takeKcal": 0,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20110,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "ambush": 1,
+    "lockjaw": 1,
+    "monster": 1,
+    "big big": 1
+   },
+   "demandDays": [
+    19,
+    82,
+    87
+   ],
+   "takeDays": [
+    20,
+    83,
+    88
+   ],
+   "takeKcal": 3000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20111,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 2,
+    "contest": 1,
+    "monster": 1
+   },
+   "demandDays": [
+    15,
+    31
+   ],
+   "takeDays": [
+    16,
+    32
+   ],
+   "takeKcal": 2000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20112,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "ambush": 1,
+    "sickness": 1,
+    "the arena": 2
+   },
+   "demandDays": [
+    60
+   ],
+   "takeDays": [
+    61
+   ],
+   "takeKcal": 1000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20113,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 1,
+   "deathCauses": {
+    "the arena": 1
+   },
+   "demandDays": [
+    93
+   ],
+   "takeDays": [
+    94
+   ],
+   "takeKcal": 1000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20114,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 10,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 2,
+    "a wound that wouldn't close": 3,
+    "sickness": 1,
+    "starvation": 3
+   },
+   "demandDays": [
+    38,
+    57,
+    95
+   ],
+   "takeDays": [
+    39,
+    58,
+    96
+   ],
+   "takeKcal": 2709,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20115,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "ambush": 1,
+    "the arena": 1,
+    "sickness": 1,
+    "contest": 1
+   },
+   "demandDays": [
+    36,
+    82,
+    100
+   ],
+   "takeDays": [
+    37,
+    83
+   ],
+   "takeKcal": 1698,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20116,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 10,
+   "deathCauses": {
+    "combat": 2,
+    "the arena": 3,
+    "sickness": 2,
+    "starvation": 2,
+    "contest": 1
+   },
+   "demandDays": [
+    68,
+    77,
+    94,
+    96
+   ],
+   "takeDays": [
+    69,
+    78,
+    95,
+    97
+   ],
+   "takeKcal": 3200,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20117,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 7,
+   "deathCauses": {
+    "starvation": 1,
+    "ambush": 1,
+    "the arena": 3,
+    "contest": 2
+   },
+   "demandDays": [
+    41,
+    47,
+    66,
+    84,
+    100
+   ],
+   "takeDays": [
+    42,
+    48,
+    67,
+    85
+   ],
+   "takeKcal": 4000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20118,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "ambush": 1,
+    "the night": 1
+   },
+   "demandDays": [
+    99
+   ],
+   "takeDays": [
+    100
+   ],
+   "takeKcal": 1000,
+   "hit": true,
+   "partial": false
+  },
+  {
+   "seed": 20119,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 4,
+   "deathCauses": {
+    "the arena": 3,
+    "ambush": 1
+   },
+   "demandDays": [],
+   "takeDays": [],
+   "takeKcal": 0,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20120,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 5,
+   "deathCauses": {
+    "rut king": 1,
+    "monster": 2,
+    "the arena": 1,
+    "the night": 1
+   },
+   "demandDays": [
+    53,
+    98
+   ],
+   "takeDays": [
+    54,
+    99
+   ],
+   "takeKcal": 1827,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20121,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 1,
+   "deathCauses": {
+    "monster": 1
+   },
+   "demandDays": [
+    34,
+    50,
+    93,
+    98
+   ],
+   "takeDays": [
+    35,
+    51,
+    94,
+    99
+   ],
+   "takeKcal": 4000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20122,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 1,
+   "deathCauses": {
+    "dehydration": 1
+   },
+   "demandDays": [
+    90
+   ],
+   "takeDays": [
+    91
+   ],
+   "takeKcal": 1000,
+   "hit": false,
+   "partial": false
+  },
+  {
+   "seed": 20123,
+   "daysAlive": 100,
+   "endReason": "survived",
+   "lastSnapDay": 100,
+   "waveReach": [
+    1,
+    2,
+    3
+   ],
+   "rank": "village",
+   "national": false,
+   "table": false,
+   "win": false,
+   "deaths": 2,
+   "deathCauses": {
+    "combat": 1,
+    "the arena": 1
+   },
+   "demandDays": [
+    81
+   ],
+   "takeDays": [
+    82
+   ],
+   "takeKcal": 1000,
+   "hit": false,
+   "partial": false
+  }
+ ]
+}
