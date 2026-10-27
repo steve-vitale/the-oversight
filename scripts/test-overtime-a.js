@@ -288,10 +288,23 @@ function blockerCounts(rows) {
   for (const r of rows) {
     const ts = r.ts || {};
     const hasTs = Object.keys(ts).some(k => k.indexOf('ts') === 0);
-    const dp = r.dp || {};
-    const hasCourt = (r.ts && (r.ts.tsPreviewSeen != null)) || Object.keys(dp).length > 0;
-    // w5seq rows carry ts* in ts and court counters are inside tableseat ctx? tableseat ctx keys are ts*; leanlink court counters live in the same ctx object but w5seq sweep only copied ts*/dp*. So activation here = ts keys present (policy daily ran) — courtship proven by national reach in aggregate.
-    if (!hasTs && !hasCourt) { v11 = false; console.log(`  G11 seed ${r.seed} no policy ctx counters (ts keys: ${Object.keys(ts).join(',')})`); }
+    // CORRECTED (validator fix, corpus untouched): tableseat's preview leg
+    // only runs at national+ (tsDriveSeat is gated on rank>=2, and
+    // tablePreview() returns null while tableWaiting is false), so a seed
+    // that never reaches national EXPECTEDLY has empty ts counters — that
+    // is not a substrate failure. For national seeds, tsNationalDay must
+    // be present (policy daily ran and saw national). For never-national
+    // seeds, substrate-run evidence is the daily rank series itself:
+    // the village must have progressed past village rank (regional at
+    // some point) via the courtship substrate, or died before day 25
+    // (before proposing even starts) — neither excuses a flat village-only
+    // run past day 25. 75005 (died d75, regional d47) passes on the rank
+    // proxy; its empty ts is the expected never-national shape.
+    const d = r.daily || [];
+    const maxRankDaily = d.length ? Math.max.apply(null, d.map(x => x.rank | 0)) : 0;
+    const reachedNational = (r.nationalEver | 0) === 1;
+    if (reachedNational && !hasTs) { v11 = false; console.log(`  G11 seed ${r.seed} reached national but has no policy ts counters`); }
+    if (!reachedNational && maxRankDaily < 1 && (r.days | 0) >= 25) { v11 = false; console.log(`  G11 seed ${r.seed} never national and never left village rank (days=${r.days}) — substrate may not have run`); }
     const nullOt = (r.daily || []).filter(x => !x.ot || x.ot.tier == null).length;
     if (nullOt > 0) { v11 = false; console.log(`  G11 seed ${r.seed} ${nullOt} daily points with null ot`); }
   }
