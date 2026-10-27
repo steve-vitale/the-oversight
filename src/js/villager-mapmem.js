@@ -515,6 +515,10 @@
           edible: false, kcalEach: 0, hiddenKcal: ugross,
           units: uunits, unit: 'portion',
           kg: Math.max(0.01, (Number(meat.kg) || 0.5) * HAUL_YIELD),
+          // MEAT CHANNEL (2026-10-27): cleaned flesh keeps ~2 days
+          // (PRESERVATION.md) — without a clock, untested and poison-tested
+          // flesh sat in the pantry forever as immortal 0-kcal clutter.
+          spoilDay: day + 2,
           prep: '⚠️ Unknown flesh. You have no idea if this is food or poison. Test it cautiously, or ask someone who knows.',
           diseaseRisk: 'rawMeat',
         };

@@ -28825,6 +28825,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // per-portion value; the cook's contribution is safety.
             effectiveKcal = item.kcalEach; cooked = true;
           }
+          // MEAT CHANNEL (2026-10-27): the village cook cooks monster meat
+          // too — the batch claim holds even when hiddenKcal is absent
+          // (revealed meat always carries it in practice; the claim must not
+          // hinge on it). Normal meat is untouched here: this flip is scoped
+          // to monster-gated meat only, so ordinary pantry clocks never move.
+          if (item.foodKind === 'meat' && item.foodState === 'cleaned' &&
+              this.monsterMeatGated && this.monsterMeatGated((item.plantId || '').replace(/^meat_/, ''))) {
+            cooked = true;
+          }
         }
         if (effectiveKcal <= 0) continue;
         // ROUNDING (meals-like-people 2026-10-08): the player's draw ceils
@@ -28851,6 +28860,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         need -= units * effectiveKcal;
         drewAny = true;
         if (item.units <= 0) { const ix = v.pantry.indexOf(item); if (ix >= 0) v.pantry.splice(ix, 1); }
+        // MEAT CHANNEL (2026-10-27): the cook worked the whole batch, not
+        // one portion — what the meal didn't eat stays cooked. Same claim
+        // cookFood makes when cooked through: the 5-day cooked shelf, raw
+        // risk cleared, parasites dead (smoking alone never does this, and
+        // an undercooked flip would silently skip the worm roll — the
+        // break-it disease r10 trap). Monster-gated meat only; the
+        // village-cook abstraction already claimed cooked=true above.
+        else if (cooked && item.foodKind === 'meat' && item.foodState === 'cleaned' &&
+            this.monsterMeatGated && this.monsterMeatGated((item.plantId || '').replace(/^meat_/, ''))) {
+          item.foodState = 'cooked';
+          item.spoilDay = ((this.state.scholar || {}).day || 0) + 5;
+          item.diseaseRisk = null;
+          delete item.parasiteRisk;
+        }
       }
       // shortOfFresh: genuine exhaustion only — need remains AND the
       // fresh candidates can't cover it. A single-stack loop ends after one
@@ -45643,6 +45666,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             it.edible = true;
             it.kcalEach = per;
             it.prep = '⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.';
+            // MEAT CHANNEL (2026-10-27): a reveal must not leave clock-less
+            // meat behind — flesh that arrived before the haul clock (or by
+            // any clock-less path) gets the cleaned-meat shelf from today.
+            // An existing clock is never shortened or extended.
+            if (it.spoilDay === undefined || it.spoilDay === null) {
+              it.spoilDay = ((this.state.scholar || {}).day || 0) + 2;
+            }
           }
         }
       };

@@ -21,9 +21,15 @@
 'use strict';
 const { competent } = require('./competent');
 
-// FIND-UNKNOWN-FLESH: scan pack then prepStash for undiscovered monster flesh
-// (foodKind 'meat', edible===false, plantId 'meat_<mid>', monster def, not yet
-// monsterFoodSafe). Returns {idx, container, mid} or null.
+// FIND-UNKNOWN-FLESH: scan pack then prepStash then the village pantry for
+// undiscovered monster flesh (foodKind 'meat', edible===false, plantId
+// 'meat_<mid>', monster def, not yet monsterFoodSafe). Returns
+// {idx, container, mid} or null. The pantry scan is the haul case: hauled
+// flesh lands in the pantry, not the pack, and no pack verb reaches it —
+// but the pantry is only tried when the player is actually at haven (the
+// flesh is at the fire; the story waits until you're there, same presence
+// rule as the villagers' own experiment beat). Packing unknowns stays
+// gated — testing the pile at the fire is not packing it.
 function findUnknownFlesh(Game) {
   try {
     const mons = Game.data.monsters || [];
@@ -45,6 +51,15 @@ function findUnknownFlesh(Game) {
     let hit = scan(s.inventory || []);
     if (!hit) {
       try { hit = scan((Game.prepStash && Game.prepStash()) || []); } catch (e) {}
+    }
+    if (!hit) {
+      // Pantry flesh is only tryable at haven; away from home the pile is
+      // out of reach, and an unknown location defaults to "not there".
+      let atHaven = false;
+      try { atHaven = !!(Game.playerAtHaven && Game.playerAtHaven()); } catch (e) {}
+      if (atHaven) {
+        try { hit = scan((Game.state.village || {}).pantry || []); } catch (e) {}
+      }
     }
     return hit;
   } catch (e) { return null; }
@@ -83,6 +98,11 @@ const meatseek = Object.assign({}, competent, {
     // the day; the afternoon test is the honest next beat). Runs even while
     // recovering — a hurt player can still taste a strip of flesh at camp.
     testUnknownMeat(Game, ctx);
+    // cook AFTER the test: revealed cleaned monster meat in the pack or on
+    // the counter goes over the fire while it is still fresh. Unknown flesh
+    // is never batch-cooked (the cautious-test gate holds — cookAll says
+    // the same); only meat the village already knows is food.
+    cookMonsterMeat(Game, ctx);
     try {
       const known = Game.state.codex && Game.state.codex.monsters
         ? Object.keys(Game.state.codex.monsters).filter(m => (Game.state.codex.monsters[m] || {}).foodSafe).length
@@ -92,4 +112,35 @@ const meatseek = Object.assign({}, competent, {
   },
 });
 
-module.exports = { meatseek, findUnknownFlesh, testUnknownMeat };
+// COOK-REVEALED-MONSTER-MEAT: the player-side cook path for the channel.
+// A human with revealed cleaned monster meat and a fire can already press
+// Cook in the pack UI; the baseline policy never does (its cook sweep only
+// touches foodState 'raw'). This drives the same verb, same fire, same
+// outcome — revealed monster meat only, spoiled skipped, at most 6 stacks
+// so the fire-tending never eats the whole day-part.
+function cookMonsterMeat(Game, ctx) {
+  if (process.env.MEATSEEK_COOK === '0') return; // before/after harness gate
+  try {
+    if (!Game.nearFire || !Game.nearFire()) return;
+    const s = Game.state.scholar; if (!s) return;
+    let cooked = 0;
+    const sweep = (cont) => {
+      if (!cont || cooked >= 6) return;
+      for (let i = cont.length - 1; i >= 0 && cooked < 6; i--) {
+        const it = cont[i];
+        if (!it || it.foodKind !== 'meat' || it.foodState !== 'cleaned') continue;
+        if (it.edible === false || (it.kcalEach || 0) <= 0) continue; // unknown: test first
+        const mid = String(it.plantId || '').replace(/^meat_/, '');
+        try { if (!(Game.data.monsters || []).some(m => m.id === mid)) continue; } catch (e) { continue; }
+        try { if (Game.monsterFoodSafe && !Game.monsterFoodSafe(mid)) continue; } catch (e) { continue; }
+        try { if (Game.isSpoiled && Game.isSpoiled(it)) continue; } catch (e) {}
+        try { Game.cookFood(i, cont); cooked++; } catch (e) {}
+      }
+    };
+    sweep(s.inventory || []);
+    try { sweep((Game.prepStash && Game.prepStash()) || []); } catch (e) {}
+    if (cooked) ctx.monsterCooked = (ctx.monsterCooked || 0) + cooked;
+  } catch (e) {}
+}
+
+module.exports = { meatseek, findUnknownFlesh, testUnknownMeat, cookMonsterMeat };
