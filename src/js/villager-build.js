@@ -480,7 +480,19 @@
           if (!best || sc > best.sc) best = { id, sc };
         }
         if (!best) return null;
-        this.npcLearnAbility(learnerVid, best.id, 2, 'talk:' + (teacherId || 'player'));
+        if (!this.npcLearnAbility(learnerVid, best.id, 2, 'talk:' + (teacherId || 'player'))) return null;
+        // TACKLE-TEACH 2026-10-27: a conversation teach used to be invisible
+        // — no tele event, no journal note, nothing any measurement could
+        // count, and nothing the player could read back. Ledger it like
+        // the seek path ledgers its lessons: who taught whom what. The
+        // lesson itself is unchanged; only its record is new.
+        try { this.tele('villager_talk_teach', { vid: learnerVid, teacher: teacherId || 'player', ability: best.id, level: 2 }); } catch (e) { warn('tele talk teach', e); }
+        try {
+          const nm = (id) => { try { return this.displayName ? this.displayName(id) : 'Someone'; } catch (e) { return 'Someone'; } };
+          const an = ((this.abilityDef && this.abilityDef(best.id)) || {}).name || best.id;
+          const who = (!teacherId || teacherId === 'player') ? 'you' : nm(teacherId);
+          if (this.journalNote) this.journalNote('village', 'talk-teach:' + learnerVid + ':' + best.id, `${nm(learnerVid)} picked up ${an} from talking with ${who} — what it does, and what it might go with.`);
+        } catch (e) { warn('journal talk teach', e); }
         return best.id;
       } catch (e) { warn('npcLearnFromTalk', e); return null; }
     },
