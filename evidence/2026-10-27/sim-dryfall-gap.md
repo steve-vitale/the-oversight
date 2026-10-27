@@ -303,11 +303,12 @@ carried-forward question. Nothing here changes a bar above.]
 ## COMMIT
 
 Branch gap-social, worktree ~/workspace/worktrees/gap-social.
+Commit 980c5aa1740154846354be60d63ba44fa61a189b
+("Triage B7 dry-fallback frequency: exempt conversation grammar
+from the run ledger [needs-eyes]").
 Files: src/js/conversation.js, src/js/convo-beats.js,
 src/js/convo-dialogue.js, src/js/convo-mood.js,
 scripts/test-dryfall-probe.js, evidence/2026-10-27/sim-dryfall-gap.md.
-Commit hash filled after safe-commit runs; message carries
-[needs-eyes] (conversation feel change). Panel scratch outputs
-(hidden_files/dryfall-panel-*) are intentionally left uncommitted.
-No merge, no push, no version bump, no live verification —
-the parent handles merge + ship.
+Panel scratch outputs (hidden_files/dryfall-panel-*) are
+intentionally left uncommitted. No merge, no push, no version
+bump, no live verification — the parent handles merge + ship.
