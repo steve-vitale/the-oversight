@@ -62,7 +62,7 @@ function isKillOutcome(o) {
     || o === 'killed-by-defender-fight' || o === 'killed-other-cause';
 }
 function kindChannel(kind) {
-  if (kind === 'player-fight-kill' || kind === 'player-fight-melt') return 'player-tb-world';
+  if (kind === 'player-fight-kill' || kind === 'player-fight-melt' || kind === 're-entry') return 'player-tb-world';
   if (kind === 'villager-fight-kill') return 'villager-field';
   if (kind === 'raid-defense-kill') return 'raid-defender';
   if (kind === 'trap-capture') return 'trap';
@@ -129,14 +129,27 @@ function analyzeSeed(row) {
   for (const e of nwkEnds) if (e.fightId) endByFightId.set(e.fightId, e);
   const startByFightId = new Map();
   for (const s of nwkStarts) if (s.fightId) startByFightId.set(s.fightId, s);
-  // Pair tbEnds to nwk starts: same day + type + result, unique only.
+  // Pair tbEnds to nwk starts by SEQ (the lift identity), preferring
+  // same day, then the nearest earlier start with that seq (a fight's
+  // settlement can land the next day — 75104's reunion d165 tbEnd
+  // settles a d164 start). Pairing only dedupes events: the start's
+  // own channel is what survives, so order among same-seq starts
+  // cannot change any channel. A tbEnd paired to a MISMATCH start
+  // is still that start's lift settlement (the bystander), not a
+  // second fight — dedup is correct there too; engagement uses the
+  // origin rule below, never the pairing.
   const tbUsed = new Set();
   const startTbEnd = new Map(); // fightId -> tbEnd
-  for (const s of nwkStarts) {
-    const end = s.fightId ? endByFightId.get(s.fightId) : null;
-    const result = end ? end.result : null;
-    const cands = tbEnds.filter(t => !tbUsed.has(t) && (t.day | 0) === (s.day | 0) && t.type === s.mid && (result == null || t.result === result));
-    if (cands.length === 1) { tbUsed.add(cands[0]); startTbEnd.set(s.fightId, cands[0]); }
+  for (const t of tbEnds) {
+    const cands = nwkStarts.filter(st => !startTbEnd.has(st.fightId) && st.tileMonster && st.tileMonster.seq != null && st.tileMonster.seq === t.seq);
+    if (!cands.length) continue;
+    cands.sort((a, b) => {
+      const da = Math.abs((a.day | 0) - (t.day | 0)), db = Math.abs((b.day | 0) - (t.day | 0));
+      if (da !== db) return da - db;
+      return ((a.day | 0) <= (t.day | 0) ? 0 : 1) - ((b.day | 0) <= (t.day | 0) ? 0 : 1);
+    });
+    const pick = cands[0];
+    tbUsed.add(t); startTbEnd.set(pick.fightId, t);
   }
   const unpairedTbEnds = tbEnds.filter(t => !tbUsed.has(t));
 
@@ -162,10 +175,18 @@ function analyzeSeed(row) {
   const tbSeqs = new Set();
   for (const s of nwkStarts) {
     const ch = tbChannel(s);
-    const seq = (s.tileMonster && s.tileMonster.seq != null) ? s.tileMonster.seq : null;
+    // SEQ-LINKAGE RULE (corrected): the tileMonster is the FOUGHT
+    // monster ONLY when origin is world-origin. On a mismatch the
+    // tileMonster is the BYSTANDER (its lift melts/restores while
+    // the fight is about another monster) — linking it would falsely
+    // engage the bystander's arrival (e.g. 75101's eulogy seq 31
+    // under a feast-draw suburb fight and a contest algorithm fight).
+    // Bystander seq is recorded, never linked.
+    const seq = (s.origin === 'world-origin' && s.tileMonster && s.tileMonster.seq != null) ? s.tileMonster.seq : null;
+    const bystanderSeq = (s.origin !== 'world-origin' && s.tileMonster && s.tileMonster.seq != null) ? s.tileMonster.seq : null;
     if (seq != null) tbSeqs.add(seq);
     const end = s.fightId ? endByFightId.get(s.fightId) : null;
-    addEvent({ source: 'nwk-tb', day: s.day, vid: null, mid: s.mid, seq, channel: ch.channel, door: ch.door, origin: ch.origin, sub: ch.sub, flag: ch.flag || null, result: end ? end.result : null, fightId: s.fightId || null, tbEndPaired: s.fightId ? startTbEnd.has(s.fightId) : false });
+    addEvent({ source: 'nwk-tb', day: s.day, vid: null, mid: s.mid, seq, bystanderSeq, channel: ch.channel, door: ch.door, origin: ch.origin, sub: ch.sub, flag: ch.flag || null, result: end ? end.result : null, fightId: s.fightId || null, tbEndPaired: s.fightId ? startTbEnd.has(s.fightId) : false });
   }
   // Unpaired tbEnds: TB events the nwk start did not capture (or pairing failed).
   for (const t of unpairedTbEnds) {
