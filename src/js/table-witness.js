@@ -11,6 +11,27 @@
   function meterLine(T) {
     return `swing ${((T.meters || {}).swing | 0)}`;
   }
+  // SEAT-TAKER VARIATION (Steve 2026-10-26, item 495): the Witness trial
+  // turns on WHO is in the seat, so its beats vary by sitter while the
+  // choices, the swing meter, and the convict-mid-trial tripwire stay
+  // exactly the same. The sitter is read from the sitting (pg.table.
+  // seatTaker, set by the seat-taker choice before the sitting locks);
+  // with no sitter recorded the seat is the player character and every
+  // beat below returns today's text unchanged. A villager sitter is
+  // never their own witness: witnesses() excludes the sitter's id.
+  function seatTakerOf(T) {
+    try {
+      const st = (T && T.seatTaker) || null;
+      if (st && st.id && st.id !== Game.villagerId) {
+        return { id: st.id, name: st.name || 'someone', self: false };
+      }
+    } catch (e) {}
+    return { id: Game.villagerId, name: null, self: true };
+  }
+  function sitterFirst(T) {
+    const st = seatTakerOf(T);
+    return st.self ? null : (st.name || 'someone').split(' ')[0];
+  }
   // The defense's witnesses: two villagers who testify about YOUR
   // leadership — in their own words, through their own personality, honest
   // to the vector. You don't control what they say.
@@ -20,7 +41,7 @@
   // promise ("in their own words", "sampled by personality"). Now each witness
   // testifies from their occupation, temperament, trust, and the dead they
   // carry; the two witnesses never repeat each other.
-  function witnesses() {
+  function witnesses(sitterId) {
     try {
       const L = (typeof Game.ledger === 'function') ? Game.ledger() : {};
       const trust = (((Game.state || {}).village || {}).trust) || {};
@@ -30,7 +51,10 @@
         return (dv.name || '').split(' ')[0];
       }).filter(n => n);
       const deadName = deadNames.length ? deadNames[(Math.random() * deadNames.length) | 0] : null;
-      const ids = ((Game.data.villagers || []).map(v => v.id) || []).filter(id => id && id !== Game.villagerId).slice(0, 2);
+      // SEAT-TAKER: the sitter never testifies about themselves. With no
+      // sitter passed the exclusion is the player character, as today.
+      const excluded = sitterId || Game.villagerId;
+      const ids = ((Game.data.villagers || []).map(v => v.id) || []).filter(id => id && id !== Game.villagerId && id !== excluded).slice(0, 2);
       const used = {};
       return ids.map((id, wi) => {
         const v = (Game.data.villagers || []).find(x => x.id === id) || {};
@@ -166,9 +190,22 @@
     },
     beats: [
       {
-        say: function () {
+        say: function (T) {
           const L = (typeof Game.ledger === 'function') ? Game.ledger() : {};
-          const lines = [`OPENING — THE CHARGES. ${L.exposed | 0} exposures. Bribes, buried plots, rounding errors — the moots heard them first, and the moots remember. The judges sit very still. Beings of light can flinch; you're about to see it. How do you read them?`];
+          // V1 — the opening is read BY the sitter. Self: today's text.
+          const first = sitterFirst(T);
+          const lines = first
+            ? [`OPENING — THE CHARGES. ${L.exposed | 0} exposures. Bribes, buried plots, rounding errors — the moots heard them first, and the moots remember. The judges sit very still. Beings of light can flinch; ${first} reads them now. How does ${first} read them?`]
+            : [`OPENING — THE CHARGES. ${L.exposed | 0} exposures. Bribes, buried plots, rounding errors — the moots heard them first, and the moots remember. The judges sit very still. Beings of light can flinch; you're about to see it. How do you read them?`];
+          // The sitter's own standing, from their real ascension score —
+          // named only when the score's own notes say it.
+          try {
+            if (first) {
+              const st = seatTakerOf(T);
+              const sc = (typeof Game.villagerAscensionScore === 'function') ? Game.villagerAscensionScore(st.id) : null;
+              if (sc && sc.notes && sc.notes.length) lines.push(`The table notes ${first}'s standing: ${sc.notes.join('; ')}.`);
+            }
+          } catch (e) {}
           // THE LIST IS REAL (sim-witnesource 2026-10-17): the opening
           // charges name the actual kept-list entries — who exposed whom
           // for what, when. No vibes; the docket is the record.
@@ -186,9 +223,15 @@
         ],
       },
       {
-        say: function () {
-          const w = witnesses();
-          const lines = ['THE DEFENSE — calls YOUR villagers. This is the part the table warned you about: the defense doesn\'t argue the charges. It argues *you*. Two of your own take the stand, and you don\'t control what they say.'];
+        say: function (T) {
+          // V2 — the defense argues the sitter, and the sitter is never
+          // their own witness. Self: today's framing, today's witnesses.
+          const first = sitterFirst(T);
+          const st = seatTakerOf(T);
+          const w = witnesses(st.self ? Game.villagerId : st.id);
+          const lines = first
+            ? [`THE DEFENSE — calls the village's own. This is the part the table warned you about: the defense doesn't argue the charges. It argues *${first}*. Two villagers take the stand, and ${first} doesn't control what they say.`]
+            : ['THE DEFENSE — calls YOUR villagers. This is the part the table warned you about: the defense doesn\'t argue the charges. It argues *you*. Two of your own take the stand, and you don\'t control what they say.'];
           w.forEach(x => lines.push(`${x.name}, sworn: ${x.line}`));
           // PODS WEIGHT (2026-10-11, KIN canon): broken promises surface
           // where it hurts most. The defense found the mourners.
@@ -222,7 +265,14 @@
       },
       {
         say: function (T) {
-          if ((T.branch || 'light') === 'light') return ['THE SETTLEMENT — the judges confer, and then the eldest does something unprecedented: it offers a private settlement. Justice, or quiet. "NAME YOUR TERMS," it says, "AND WE WILL VANISH INTO THEM." The audience leans so far forward the light bends.'];
+          // V3 — the final beat addresses the sitter by name. Self:
+          // today's text, both branches, unchanged.
+          const first = sitterFirst(T);
+          if ((T.branch || 'light') === 'light') {
+            if (first) return [`THE SETTLEMENT — the judges confer, and then the eldest does something unprecedented: it offers ${first} a private settlement. Justice, or quiet. "NAME YOUR TERMS," it says to ${first}, "AND WE WILL VANISH INTO THEM." The audience leans so far forward the light bends.`];
+            return ['THE SETTLEMENT — the judges confer, and then the eldest does something unprecedented: it offers a private settlement. Justice, or quiet. "NAME YOUR TERMS," it says, "AND WE WILL VANISH INTO THEM." The audience leans so far forward the light bends.'];
+          }
+          if (first) return [`THE CHANT — the audience has started chanting. Not words — it isn't a language with words — but ${first} knows the feeling, and so does the table. They want blood. The gavel is heavy in ${first}'s hand. Give them what they chant for, or disappoint trillions.`];
           return ['THE CHANT — the audience has started chanting. Not words — it isn\'t a language with words — but you know the feeling, and so does the table. They want blood. The gavel is heavy in your hand. Give them what they chant for, or disappoint trillions.'];
         },
         meterLine,

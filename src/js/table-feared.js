@@ -143,6 +143,22 @@
     },
     tableTrialByCombat() {
       const T = this.tableState();
+      // SEAT-TAKER GUARD (Steve 2026-10-26, item 495): the champion's
+      // fight is staged for the player character. A villager sitter has
+      // no champion's fight staged yet, and the bearer must never fight
+      // in the sitter's name — so the trial door withdraws for that
+      // walk, said aloud, and the calibration continues without it
+      // (the same honest-withdrawal pattern as a champion who does not
+      // come, below). A real sitter trial fight is remainder work.
+      const _st = (T && T.seatTaker) || null;
+      if (_st && _st.id && _st.id !== this.villagerId) {
+        const _nm = (String(_st.name || 'the sitter')).split(' ')[0];
+        T.trialRefused = true;
+        this.say(`◈ TRIAL WITHHELD — the champion fights the sitter, and ${_nm} has no champion's fight staged here yet. The table withdraws the trial for this walk; the calibration continues without it.`);
+        this.tableRunBeat();
+        try { this.save(); } catch (e) {}
+        return;
+      }
       T.trialPending = true;
       const me = this.villagerId;
       T.trialBearer = me;

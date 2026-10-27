@@ -16952,7 +16952,7 @@
     // accord: the state drives the panel, the buttons drive the answer.
     document.querySelectorAll('[data-national]').forEach(b => b.onclick = () => { Game.answerNationalChoice(b.dataset.national); refresh(); });
     document.querySelectorAll('[data-global]').forEach(b => b.onclick = () => { Game.answerGlobalChoice(b.dataset.global); refresh(); });
-    document.querySelectorAll('[data-table-seat]').forEach(b => b.onclick = () => { const r = Game.tableTakeSeat(); if (r && !r.ok && r.msg) Game.say(r.msg); refresh(); });
+    document.querySelectorAll('[data-table-seat]').forEach(b => b.onclick = () => { const r = Game.tableOfferSeatTaker ? Game.tableOfferSeatTaker() : Game.tableTakeSeat(); if (r && !r.ok && r.msg) Game.say(r.msg); refresh(); });
     // Alliance: the understanding (regional audit 2026-10-09 — was engine-only).
     document.querySelectorAll('[data-ally-propose]').forEach(b => b.onclick = () => { Game.proposeAlliance(b.dataset.allyPropose); refresh(); });
     document.querySelectorAll('[data-demand-yes]').forEach(b => b.onclick = () => { Game.answerDemand(b.dataset.demandYes, true); refresh(); });

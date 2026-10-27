@@ -8,6 +8,7 @@
 //   - tableRegisterPath(def)
 //   - tableScene()
 //   - tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14)
+//   - tableSeatTaker(), tableSeatTakerOptions(), tableChooseSeatTaker(id), tableOfferSeatTaker() — the seat-taker choice (Steve 2026-10-26, item 495): the player chooses who sits, their own character or another villager, BEFORE the sitting locks. The sitter varies the beats; the path choice stays player-only. Champion / god-raising are philosophy labels here, not systems — nothing below builds them.
 //   - tableActive()
 //   - tableEntryBlock()
 //   - chooseTableOption(id)
@@ -723,6 +724,16 @@
       }
       pg.tableDone = true;
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
+      // SEAT-TAKER DEFAULT (Steve 2026-10-26, item 495): a sitting that
+      // starts without a choice (an older flow, a debug scene, a direct
+      // tableScene call) sits as the player character — the unchanged
+      // default. A chosen sitter survives here untouched: this block
+      // never overwrites T.seatTaker, and the sitter locks for the
+      // sitting (tableChooseSeatTaker refuses changes from here on).
+      if (!T.seatTaker || !T.seatTaker.id) {
+        const bearer = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
+        T.seatTaker = { id: this.villagerId, name: bearer.name || 'the Bearer', self: true };
+      }
       // A new sitting: no door has failed yet (the downgrade cycle-breaker
       // in tableFail tracks per-sitting failures here).
       T.failedDoors = [];
@@ -747,6 +758,17 @@
       // the voicing is proof-testable; wave-4/5 deeds are named when nonzero.)
       const seatLine = this.tableSeatLine(seat);
       this.say(`◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. ${seatLine}`);
+      // SEAT-TAKER VOICE: a villager sitter is named aloud at the sitting,
+      // once. A self-sitter adds no line — the self flow's transcript is
+      // unchanged. (The sitter's scenario beats vary in the path modules;
+      // the audit itself still prices the village's run, not the sitter.)
+      try {
+        const st = T.seatTaker;
+        if (st && !st.self && st.id !== this.villagerId) {
+          const nm = (st.name || 'someone').split(' ')[0];
+          this.say(`◈ THE SEAT — ${nm} sits at the ring, not the Bearer. The case is the village's; the voice the galaxy hears is ${nm}'s.`);
+        }
+      } catch (e) {}
       // TABLE-DEED VOICE (2026-10-21, backlog #738): the audit names the
       // village's real wave-4+ deeds from its own logs (kills by name,
       // killer and day; titan encounters; readiness bars as they stood).
@@ -829,14 +851,116 @@
         return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
-    // tableTakeSeat(): the player sits — this locks the seat (tableScene);
-    // tableStartPath locks the branch.
-    tableTakeSeat() {
+    // ============ THE SEAT-TAKER CHOICE (Steve 2026-10-26, item 495) ============
+    // The player chooses WHO takes the seat — their own character, or
+    // another villager — and plays the scenario out as that villager.
+    // The choice point is the Haven seat button (tableOfferSeatTaker,
+    // wired in app.js): it asks before anything locks. tableTakeSeat
+    // keeps its old contract (sit at once, as the player character
+    // unless a sitter was already chosen or is passed in), so debug
+    // scenes, bot policies, and existing seat tests keep working.
+    // What the choice does NOT do: it never picks a path, never starts
+    // a challenge, never changes an earned path or a meter, and never
+    // waives the seat's price. The seat still has to be earned
+    // (tablePreview gates it, as before), and the challenge still has
+    // to be played and can still be lost. A different sitter changes
+    // whose story the beats tell — never whether the table is earned.
+    // Eligibility: a living villager, present (not away), other than
+    // the player character. Dead villagers never sit — the same
+    // liveness rule as ascension (tableAscended). The player character
+    // is always an option, and is the default when a sitting starts
+    // without a choice (older flows, debug scenes, direct tableScene).
+    // The choice locks for the sitting: once the doors are offered or
+    // a challenge runs, the sitter cannot be swapped mid-sitting.
+    tableSeatTaker() {
+      try {
+        const T = this.tableState();
+        const st = T && T.seatTaker;
+        if (st && st.id) return { id: st.id, name: st.name || 'someone', self: !!st.self };
+      } catch (e) {}
+      try {
+        const me = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
+        return { id: this.villagerId, name: me.name || 'the Bearer', self: true };
+      } catch (e) { return { id: this.villagerId, name: 'the Bearer', self: true }; }
+    },
+    tableSeatTakerOptions() {
+      const out = [];
+      try {
+        // The self option is always the player character — build it
+        // directly so the list is stable while a choice is being made,
+        // even when a sitter was already recorded for this sitting.
+        const bearer = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
+        out.push({ id: 'self', name: bearer.name || 'the Bearer', self: true, score: null, notes: [] });
+        const away = ((this.state.village || {}).away) || {};
+        for (const v of (this.data.villagers || [])) {
+          if (!v || !v.id || v.id === this.villagerId || v.dead || away[v.id]) continue;
+          let sc = { score: 0, notes: [], name: v.name || 'someone' };
+          try { if (typeof this.villagerAscensionScore === 'function') sc = this.villagerAscensionScore(v.id); } catch (e) {}
+          out.push({ id: v.id, name: sc.name || v.name || 'someone', self: false, score: sc.score | 0, notes: sc.notes || [] });
+        }
+      } catch (e) {}
+      return out;
+    },
+    tableChooseSeatTaker(id) {
+      try {
+        const T = this.tableState();
+        const pg = this.progState();
+        const lockedPhases = ['paths', 'challenge', 'finals', 'downgrade', 'conscript', 'demand-price'];
+        if ((pg && pg.tableDone) || (T && lockedPhases.indexOf(T.phase) >= 0)) {
+          return { ok: false, msg: 'The seat is already taken — the sitter cannot be changed mid-sitting.' };
+        }
+        if (!id || id === 'self' || id === this.villagerId) {
+          const bearer = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
+          T.seatTaker = { id: this.villagerId, name: bearer.name || 'the Bearer', self: true };
+          try { this.save(); } catch (e) {}
+          return { ok: true, msg: '' };
+        }
+        const opt = this.tableSeatTakerOptions().find(o => o.id === id && !o.self);
+        if (!opt) return { ok: false, msg: 'That villager cannot take the seat.' };
+        T.seatTaker = { id: opt.id, name: opt.name, self: false };
+        try { this.save(); } catch (e) {}
+        return { ok: true, msg: '' };
+      } catch (e) { return { ok: false, msg: 'The seat-taker choice could not be recorded.' }; }
+    },
+    // tableOfferSeatTaker(): the Haven seat button's entry. Same gates
+    // as tableTakeSeat (preview + entry block), then the choice sheet
+    // instead of the sitting. Returns choosingSeat when the sheet is up.
+    tableOfferSeatTaker() {
       const pv = this.tablePreview();
       if (!pv) return { ok: false, msg: '' };
       const why = this.tableEntryBlock();
       if (why) return { ok: false, msg: why };
       if (!pv.ready) return { ok: false, msg: pv.why };
+      const T = this.tableState();
+      T.phase = 'seat-taker';
+      const opts = this.tableSeatTakerOptions();
+      const lines = opts.map(o => {
+        if (o.self) return `<p><b>${this.escHtml(o.name)}</b> — sit yourself, as today.</p>`;
+        const standing = (o.notes && o.notes.length) ? this.escHtml(o.notes.join('; ')) : 'a villager, unascended';
+        return `<p><b>${this.escHtml(o.name)}</b> — ${standing}.</p>`;
+      }).join('');
+      const prompt = `<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>` +
+        `<p>Before the table sits, one choice is yours alone: <b>who takes the seat?</b> The case is the village's either way — but the voice at the ring, and the story the beats tell, will be theirs.</p>` + lines;
+      const options = opts.map(o => ({ id: 'seat:' + o.id, label: o.self ? 'Sit yourself.' : `Send ${o.name} to the seat.` }));
+      this.tablePrompt(prompt, options, 'the Table');
+      try { this.save(); } catch (e) {}
+      return { ok: true, choosingSeat: true, msg: '' };
+    },
+    // tableTakeSeat(): the player sits — this locks the seat (tableScene);
+    // tableStartPath locks the branch. With a sitter id passed (or one
+    // already chosen through the seat-taker sheet), the sitting plays
+    // as that sitter; without one it sits as the player character, as
+    // it always has.
+    tableTakeSeat(sitterId) {
+      const pv = this.tablePreview();
+      if (!pv) return { ok: false, msg: '' };
+      const why = this.tableEntryBlock();
+      if (why) return { ok: false, msg: why };
+      if (!pv.ready) return { ok: false, msg: pv.why };
+      if (sitterId != null) {
+        const r = this.tableChooseSeatTaker(sitterId);
+        if (!r.ok) return r;
+      }
       this.tableScene();
       const committed = !!this.progState().tableDone;
       return { ok: committed, msg: committed ? '' : 'Your seat could not be taken. Your case is still being priced.' };
@@ -868,6 +992,19 @@
       const T = this.tableState();
       try {
         if (!id) return null;
+        // SEAT-TAKER CHOICE (Steve 2026-10-26, item 495): choosing a
+        // sitter sets WHO sits and nothing else — the table is still in
+        // its no-path-chosen state afterwards, and only the player's
+        // door pick below can start a path. A villager can never start
+        // a path through this entry point: seat ids are not path ids,
+        // and no code path here maps a sitter to a path.
+        if (id.indexOf('seat:') === 0 && T.phase === 'seat-taker') {
+          const r = this.tableChooseSeatTaker(id.slice(5));
+          if (r && r.ok) { this.tableScene(); return null; }
+          if (r && r.msg) this.say(r.msg);
+          this.tableOfferSeatTaker();
+          return null;
+        }
         if (id.indexOf('path:') === 0 && T.phase === 'paths') { this.tableStartPath(id.slice(5)); return null; }
         if (id.indexOf('downgrade:') === 0 && T.phase === 'downgrade') { this.tableDowngradePick(id.slice(10)); return null; }
         if (T.phase === 'challenge') { this.tableChoose(id); return null; }
