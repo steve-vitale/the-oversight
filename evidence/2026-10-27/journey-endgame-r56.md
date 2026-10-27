@@ -371,8 +371,18 @@ counter-case, repeated).
   collapses early with or without instrumentation).
 - ANALYZER: exit 1 = verdicts (PRIMARY NO-GO | ALL NO-GO),
   not a crash; verdicts identical on re-run.
-- CHECK-QUICK: [TO BE FILLED — running at note draft time;
-  result appended before commit.]
+- CHECK-QUICK (adoption completion, post-rebase, 2026-10-27):
+  278 passed, 9 failed in 474s — IDENTICAL script list to
+  r55's standing profile (hide-discovery, measurement
+  comparison/proof-update/workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof, parity-20261014 gear
+  spear+jacket, establishment-r20-fixes racks-full next-day
+  voice). This run changed zero src/js, so the 9 are
+  pre-existing on current master, not a regression from this
+  commit; check.js does not execute this run's probe/analyzer
+  scripts. (The r56 run itself died during its own check-quick
+  run at 10:55 UTC with only a truncated log; this result is
+  the adoption run's post-rebase re-run, not the dead run's.)
 
 ## Telemetry deviation check (2026-10-27)
 
