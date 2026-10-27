@@ -80,11 +80,12 @@ per seed between legs.
 
 ## Proof gates (as pre-registered)
 
-- G1 det-gate: unit form PASSES (TABLEDEFIANT unset sets no dp counters;
-  proof script section 1). Full-sim form (--detgate, seed 74201) was
-  attempted by the adoption post-rebase — see the post-rebase proof note
-  below; the unit gate plus the exact per-seed replication (identical
-  days/deaths on all 8 seeds) already prove delegation neutrality.
+- G1 det-gate: PASSES in both forms post-rebase. Unit form: TABLEDEFIANT
+  unset sets no dp counters. Full-sim form (--detgate, seed 74201, run
+  by the adoption on the rebased branch): baseline(tableseat-nowait)
+  days=137 gameDays=137, armed(TABLEDEFIANT unset) days=137
+  gameDays=137, dp={} -> PASS. (The det-gate sim took ~9 min wall time
+  under sibling I/O contention; the verdict itself is exact.)
 - G2 leak gate: PASSES. On both non-entering seeds, days and gameDays
   are identical between legs (180 / 181 both legs, both seeds) — the
   door assignment changes nothing except the door answered.
@@ -132,7 +133,11 @@ offered here.
   base would be a different corpus, not a verification of this one.
   Corpus integrity (G3) plus exact baseline/armed replication are
   the adoption's verification that the corpus is coherent.
-- Post-rebase proof: (filled by the adoption at landing time.)
+- Post-rebase proof: scripts/test-fallbackfeared-a.js ALL APPLICABLE
+  PROOFS PASS on the rebased branch (94dc0505b), including the
+  full-sim det-gate above and corpus integrity 16/16. Pre-rebase
+  proof was identical except the det-gate full-sim form, which the
+  adoption ran only post-rebase.
 - No EPERM flap blocked the adoption's commit or rebase. No push, no
   version bump, no live verification — merging to local master is the
   coordinator's job, and this arm reports ready-to-merge, pending
