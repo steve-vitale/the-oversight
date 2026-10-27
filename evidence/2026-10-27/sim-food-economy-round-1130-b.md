@@ -158,8 +158,15 @@ rows, not top-level paths). No exiled LOUD line. Baseline NOT rolled.
   31/31, both re-run on merged master).
 - Safe-commit index clobber hit both worker commits (committed files
   staged-as-deleted); repaired via the documented cacheinfo route,
-  commits verified correct. No clobber on the coordinator commit
-  (verified below).
+  commits verified correct. CORRECTION (coordinator addendum, same run):
+  the safe-commit index clobber DID hit the coordinator evidence commit
+  too (staged-deletion variant: the committed file showed staged-as-
+  deleted + untracked, worktree file byte-identical to HEAD). Repaired
+  via --add --cacheinfo from the HEAD blob; verified afterwards with
+  `git status --short` empty, `git diff HEAD` empty, and hash-object
+  matching the HEAD blob (bfbe0cb97344b6c180a03db764ad77d8a3b45424).
+  The commit itself (90a97ea23, 1 file, 192 insertions) was always
+  correct.
 - No EPERM flap blocked this run's writes. No jest run (proofs are node
   scripts; nothing jest-testable in either arm). check.js --quick NOT
   re-run: zero src/js, zero green-list files; arm proofs are the
