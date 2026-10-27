@@ -33078,7 +33078,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // face to face: the ambiguity does NOT end. Descriptor and dread, not a name.
       try { this.identifyMonster(mdef.id); } catch (e) {}
       const _origin = tableTrial ? null : this.playerMonster();
-      this.removeWorldMonster(_origin); // it's in the fight now, not wandering
+      // BYSTANDER HOLD (journey-scale r42): startCombat used to lift the
+      // player-tile monster on EVERY tb fight, but a contest/trial fight's
+      // monsters are its own waves — not the tile monster. Lifting a
+      // bystander and never restoring it on 'won' silently deleted
+      // full-health wave-4 lingerers (r41 gauntlet day: s19/s28/s31 on
+      // d145, confirmed by removal rows in r42). Only lift when the tile
+      // monster IS one of this fight's monsters; a bystander stays on
+      // its tile, and no worldOrigin is recorded for it.
+      let _originIsFighter = false;
+      try {
+        const _fids = ((this.tbfight && this.tbfight.fighters) || []).filter(f => f && f.kind === 'monster').map(f => ((f.mdef || {}).id || f.monsterId || f.id));
+        _originIsFighter = !!(_origin && (_fids.indexOf(_origin.id) >= 0 || (mdef && _origin.id === mdef.id)));
+      } catch (e) {}
+      if (_origin && _originIsFighter) this.removeWorldMonster(_origin); // it's in the fight now, not wandering
       // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15): a
       // titan or campaign piece (spawned with titan:true) remembers its map
       // object, so tbEnd can put it back when it wasn't beaten.
@@ -33088,7 +33101,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // to delete the siege: the entity was removed at fight start and never
       // restored, so bumping into a lingerer and running cleared it from the
       // world and the endure/sortie choice never got its say.
-      if (_origin && (_origin.titan || _origin.lingering) && this.tbfight) this.tbfight.worldOrigin = _origin;
+      if (_origin && _originIsFighter && (_origin.titan || _origin.lingering) && this.tbfight) this.tbfight.worldOrigin = _origin;
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
