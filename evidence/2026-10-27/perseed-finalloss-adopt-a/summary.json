@@ -1,0 +1,2239 @@
+{
+ "label": "sim-finalloss-adopt-a",
+ "seeds": [
+  73671,
+  73672,
+  73673,
+  73674,
+  73675,
+  73676,
+  73677,
+  73678
+ ],
+ "days": 180,
+ "perSeed": [
+  {
+   "seed": 73671,
+   "field4": 4,
+   "waveField4": 4,
+   "fieldCountMatch": true,
+   "tbInits4": 6,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 34,
+   "finRemovals": 28,
+   "finNoOrigin": 17,
+   "chains": 17,
+   "finals": [
+    {
+     "seed": 73671,
+     "seqKey": 23,
+     "seq": 23,
+     "id": "buffering",
+     "day": 74,
+     "fightId": "fmgpspicb_c7c434",
+     "result": "lost",
+     "round": 19,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspicb_c7c434"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 32,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 32,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 74,
+     "tickPresent": true,
+     "staleTickSkipped": 0,
+     "verdict": "RESTORED (F6)",
+     "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 3
+    },
+    {
+     "seed": 73671,
+     "seqKey": 43,
+     "seq": 43,
+     "id": "eulogy",
+     "day": 138,
+     "fightId": "fmgpspiu4_32io8u",
+     "result": "lost",
+     "round": 6,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspiu4_32io8u"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 612,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 612,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 138,
+     "tickPresent": true,
+     "staleTickSkipped": 0,
+     "verdict": "RESTORED (F6)",
+     "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73671,
+     "seqKey": 43,
+     "seq": 43,
+     "id": "eulogy",
+     "day": 139,
+     "fightId": "fmgpspiul_d22v8y",
+     "result": "lost",
+     "round": 4,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspiul_d22v8y"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 900,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 900,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 139,
+     "tickPresent": true,
+     "staleTickSkipped": 0,
+     "verdict": "RESTORED (F6)",
+     "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73671,
+     "seqKey": 43,
+     "seq": 43,
+     "id": "eulogy",
+     "day": 140,
+     "fightId": "fmgpspiv4_2wjn4u",
+     "result": "lost",
+     "round": 6,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspiv4_2wjn4u"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 663,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 663,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 140,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "REMOVED-AFTERWARDS (F8)",
+     "verdictDetail": "removal day 140 stack=Game,monsterTurn,tickAction,game,doAction,w lines=[\"Error\",\"at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)\",\"at Object.monsterTurn (src/js/game.js:22561:16)\",\"at Object.tickAction (src/js/game.js:19214:35)\",\"at game.tickAction (src/js/favor-company.js:187:34)\",\"at game.<computed> [as tickAction] (src/js/timeSettlement.js:39:33)\"] remover=monsterTurn.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": {
+      "day": 140,
+      "rowIdx": 50,
+      "stack": "Game,monsterTurn,tickAction,game,doAction,w",
+      "stackLines": [
+       "Error",
+       "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+       "at Object.monsterTurn (src/js/game.js:22561:16)",
+       "at Object.tickAction (src/js/game.js:19214:35)",
+       "at game.tickAction (src/js/favor-company.js:187:34)",
+       "at game.<computed> [as tickAction] (src/js/timeSettlement.js:39:33)"
+      ],
+      "remover": "monsterTurn",
+      "entity": {
+       "id": "eulogy",
+       "seq": 43,
+       "src": "tile-entry",
+       "hp": 663,
+       "maxHp": 900,
+       "tx": 4,
+       "ty": 4,
+       "lingering": true,
+       "titan": false,
+       "veteran": false
+      },
+      "stillPresent": false
+     },
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73671,
+     "seqKey": 27,
+     "seq": 27,
+     "id": "moderator",
+     "day": 167,
+     "fightId": "fmgpspj1c_dx2n6n",
+     "result": "lost",
+     "round": 16,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspj1c_dx2n6n"
+     ],
+     "leg": "F1",
+     "legDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=47 hp=900",
+     "predicted": {
+      "hp": 150,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": false,
+     "postHp": 1,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 167,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "BLOCKED (F1)",
+     "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=47 hp=900; verdict tick absent, as expected for a blocked restore.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 2
+    },
+    {
+     "seed": 73671,
+     "seqKey": 47,
+     "seq": 47,
+     "id": "reunion",
+     "day": 167,
+     "fightId": "fmgpspj1j_8m2vbw",
+     "result": "lost",
+     "round": 3,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspj1j_8m2vbw"
+     ],
+     "leg": "F1",
+     "legDetail": "origin tile (4,4) occupied at tbEnd by id=chorus_line seq=51 hp=225",
+     "predicted": {
+      "hp": 1200,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": false,
+     "postHp": 900,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 167,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "BLOCKED (F1)",
+     "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=chorus_line seq=51 hp=225; verdict tick absent, as expected for a blocked restore.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73671,
+     "seqKey": 51,
+     "seq": 51,
+     "id": "chorus_line",
+     "day": 167,
+     "fightId": "fmgpspj1u_9hv598",
+     "result": "lost",
+     "round": 12,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspj1u_9hv598"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 243,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 243,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 168,
+     "tickPresent": false,
+     "staleTickSkipped": 1,
+     "verdict": "REMOVED-AFTERWARDS (F8)",
+     "verdictDetail": "removal day 167 stack=Game,startCombat,G,wrapped lines=[\"Error\",\"at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)\",\"at Object.startCombat (src/js/game.js:33094:45)\",\"at Game.startCombat (src/js/party.js:1138:31)\",\"at Game.startCombat (src/js/party-formal.js:779:31)\",\"at Game.<computed> (src/js/progression.js:1235:24)\"] remover=startCombat. A tbEnd row for this seq follows the removal before the tick (fmgpspj28_d0t199:won), so this is F8 not F9.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": {
+      "day": 167,
+      "rowIdx": 58,
+      "stack": "Game,startCombat,G,wrapped",
+      "stackLines": [
+       "Error",
+       "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+       "at Object.startCombat (src/js/game.js:33094:45)",
+       "at Game.startCombat (src/js/party.js:1138:31)",
+       "at Game.startCombat (src/js/party-formal.js:779:31)",
+       "at Game.<computed> (src/js/progression.js:1235:24)"
+      ],
+      "remover": "startCombat",
+      "entity": {
+       "id": "chorus_line",
+       "seq": 51,
+       "src": "tile-entry",
+       "hp": 243,
+       "maxHp": 300,
+       "tx": 4,
+       "ty": 4,
+       "lingering": true,
+       "titan": false,
+       "veteran": false
+      },
+      "stillPresent": false
+     },
+     "intermediate": [],
+     "wave": 3
+    }
+   ],
+   "verdictCounts": {
+    "RESTORED (F6)": 3,
+    "REMOVED-AFTERWARDS (F8)": 2,
+    "BLOCKED (F1)": 2
+   },
+   "w4kills": 1,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": []
+  },
+  {
+   "seed": 73672,
+   "field4": 2,
+   "waveField4": 2,
+   "fieldCountMatch": true,
+   "tbInits4": 0,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 17,
+   "finRemovals": 15,
+   "finNoOrigin": 11,
+   "chains": 6,
+   "finals": [],
+   "verdictCounts": {},
+   "w4kills": 0,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    118
+   ]
+  },
+  {
+   "seed": 73673,
+   "field4": 0,
+   "waveField4": 0,
+   "fieldCountMatch": true,
+   "tbInits4": 0,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 5,
+   "finRemovals": 8,
+   "finNoOrigin": 5,
+   "chains": 0,
+   "finals": [],
+   "verdictCounts": {},
+   "w4kills": 0,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    32
+   ]
+  },
+  {
+   "seed": 73674,
+   "field4": 0,
+   "waveField4": 0,
+   "fieldCountMatch": true,
+   "tbInits4": 0,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 14,
+   "finRemovals": 13,
+   "finNoOrigin": 12,
+   "chains": 2,
+   "finals": [],
+   "verdictCounts": {},
+   "w4kills": 0,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    118
+   ]
+  },
+  {
+   "seed": 73675,
+   "field4": 1,
+   "waveField4": 1,
+   "fieldCountMatch": true,
+   "tbInits4": 9,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 28,
+   "finRemovals": 26,
+   "finNoOrigin": 9,
+   "chains": 16,
+   "finals": [
+    {
+     "seed": 73675,
+     "seqKey": 28,
+     "seq": 28,
+     "id": "eater",
+     "day": 145,
+     "fightId": "fmgpspitp_d2ei71",
+     "result": "lost",
+     "round": 6,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspitp_d2ei71"
+     ],
+     "leg": "F1",
+     "legDetail": "origin tile (4,4) occupied at tbEnd by id=eulogy seq=31 hp=675",
+     "predicted": {
+      "hp": 549,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": false,
+     "postHp": 712,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 145,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "BLOCKED (F1)",
+     "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=eulogy seq=31 hp=675; verdict tick absent, as expected for a blocked restore.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73675,
+     "seqKey": 31,
+     "seq": 31,
+     "id": "eulogy",
+     "day": 145,
+     "fightId": "fmgpspiud_8eikrm",
+     "result": "lost",
+     "round": 4,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspiud_8eikrm"
+     ],
+     "leg": "F1",
+     "legDetail": "origin tile (4,4) occupied at tbEnd by id=algorithm seq=32 hp=750",
+     "predicted": {
+      "hp": 900,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": false,
+     "postHp": 675,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 145,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "BLOCKED (F1)",
+     "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=algorithm seq=32 hp=750; verdict tick absent, as expected for a blocked restore.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73675,
+     "seqKey": 36,
+     "seq": 36,
+     "id": "suburb",
+     "day": 167,
+     "fightId": "fmgpspixn_49now0",
+     "result": "lost",
+     "round": 19,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspixn_49now0"
+     ],
+     "leg": "F1",
+     "legDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=38 hp=900",
+     "predicted": {
+      "hp": 543,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": false,
+     "postHp": 975,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 167,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "BLOCKED (F1)",
+     "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=38 hp=900; verdict tick absent, as expected for a blocked restore.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73675,
+     "seqKey": 38,
+     "seq": 38,
+     "id": "reunion",
+     "day": 167,
+     "fightId": "fmgpspiyt_b06umz",
+     "result": "lost",
+     "round": 5,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspiyt_b06umz"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 1184,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 1184,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 167,
+     "tickPresent": true,
+     "staleTickSkipped": 0,
+     "verdict": "RESTORED (F6)",
+     "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73675,
+     "seqKey": 38,
+     "seq": 38,
+     "id": "reunion",
+     "day": 168,
+     "fightId": "fmgpspizl_434uza",
+     "result": "lost",
+     "round": 4,
+     "chainLength": 2,
+     "chainResults": [
+      "lost",
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspizf_6h8s22",
+      "fmgpspizl_434uza"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 1200,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 1200,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 169,
+     "tickPresent": false,
+     "staleTickSkipped": 1,
+     "verdict": "LIFTED-WITHOUT-TBEND (F9)",
+     "verdictDetail": "removal day 169 stack names startCombat (lift for a new fight) with no tbEnd row for this seq afterwards before the verdict tick; remover=startCombat.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": {
+      "day": 169,
+      "rowIdx": 52,
+      "stack": "Game,startCombat,G,wrapped",
+      "stackLines": [
+       "Error",
+       "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+       "at Object.startCombat (src/js/game.js:33094:45)",
+       "at Game.startCombat (src/js/party.js:1138:31)",
+       "at Game.startCombat (src/js/party-formal.js:779:31)",
+       "at Game.<computed> (src/js/progression.js:1235:24)"
+      ],
+      "remover": "startCombat",
+      "entity": {
+       "id": "reunion",
+       "seq": 38,
+       "src": "tile-entry",
+       "hp": 1200,
+       "maxHp": 1200,
+       "tx": 3,
+       "ty": 4,
+       "lingering": true,
+       "titan": false,
+       "veteran": false
+      },
+      "stillPresent": false
+     },
+     "intermediate": [
+      {
+       "fightId": "fmgpspizf_6h8s22",
+       "result": "lost",
+       "leg": "ELIGIBLE",
+       "predicted": {
+        "hp": 1083,
+        "tile": [
+         4,
+         4
+        ],
+        "isLingerer": true
+       },
+       "postPresent": true,
+       "postHp": 1083,
+       "postTile": [
+        4,
+        4
+       ],
+       "restoredExact": true
+      }
+     ],
+     "wave": 4
+    },
+    {
+     "seed": 73675,
+     "seqKey": 38,
+     "seq": 38,
+     "id": "reunion",
+     "day": 169,
+     "fightId": "fmgpspj04_6rwvac",
+     "result": "lost",
+     "round": 4,
+     "chainLength": 3,
+     "chainResults": [
+      "lost",
+      "lost",
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspizt_ebynzg",
+      "fmgpspizy_1ywlm2",
+      "fmgpspj04_6rwvac"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 1200,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 1200,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 169,
+     "tickPresent": true,
+     "staleTickSkipped": 1,
+     "verdict": "RESTORED (F6)",
+     "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [
+      {
+       "fightId": "fmgpspizt_ebynzg",
+       "result": "lost",
+       "leg": "ELIGIBLE",
+       "predicted": {
+        "hp": 1200,
+        "tile": [
+         4,
+         4
+        ],
+        "isLingerer": true
+       },
+       "postPresent": true,
+       "postHp": 1200,
+       "postTile": [
+        4,
+        4
+       ],
+       "restoredExact": true
+      },
+      {
+       "fightId": "fmgpspizy_1ywlm2",
+       "result": "lost",
+       "leg": "ELIGIBLE",
+       "predicted": {
+        "hp": 1200,
+        "tile": [
+         4,
+         4
+        ],
+        "isLingerer": true
+       },
+       "postPresent": true,
+       "postHp": 1200,
+       "postTile": [
+        4,
+        4
+       ],
+       "restoredExact": true
+      }
+     ],
+     "wave": 4
+    }
+   ],
+   "verdictCounts": {
+    "BLOCKED (F1)": 3,
+    "RESTORED (F6)": 2,
+    "LIFTED-WITHOUT-TBEND (F9)": 1
+   },
+   "w4kills": 0,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    169
+   ]
+  },
+  {
+   "seed": 73676,
+   "field4": 0,
+   "waveField4": 0,
+   "fieldCountMatch": true,
+   "tbInits4": 0,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 13,
+   "finRemovals": 18,
+   "finNoOrigin": 12,
+   "chains": 1,
+   "finals": [],
+   "verdictCounts": {},
+   "w4kills": 0,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    144
+   ]
+  },
+  {
+   "seed": 73677,
+   "field4": 1,
+   "waveField4": 1,
+   "fieldCountMatch": true,
+   "tbInits4": 3,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 18,
+   "finRemovals": 31,
+   "finNoOrigin": 6,
+   "chains": 12,
+   "finals": [
+    {
+     "seed": 73677,
+     "seqKey": 39,
+     "seq": 39,
+     "id": "influencer",
+     "day": 112,
+     "fightId": "fmgpspijb_4ilh19",
+     "result": "lost",
+     "round": 15,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspijb_4ilh19"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 388,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 388,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 113,
+     "tickPresent": false,
+     "staleTickSkipped": 1,
+     "verdict": "REMOVED-AFTERWARDS (F8)",
+     "verdictDetail": "removal day 112 stack=Game,startCombat,G,wrapped lines=[\"Error\",\"at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)\",\"at Object.startCombat (src/js/game.js:33094:45)\",\"at Game.startCombat (src/js/party.js:1138:31)\",\"at Game.startCombat (src/js/party-formal.js:779:31)\",\"at Game.<computed> (src/js/progression.js:1235:24)\"] remover=startCombat. A tbEnd row for this seq follows the removal before the tick (fmgpspijk_flgohj:won), so this is F8 not F9.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": {
+      "day": 112,
+      "rowIdx": 34,
+      "stack": "Game,startCombat,G,wrapped",
+      "stackLines": [
+       "Error",
+       "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+       "at Object.startCombat (src/js/game.js:33094:45)",
+       "at Game.startCombat (src/js/party.js:1138:31)",
+       "at Game.startCombat (src/js/party-formal.js:779:31)",
+       "at Game.<computed> (src/js/progression.js:1235:24)"
+      ],
+      "remover": "startCombat",
+      "entity": {
+       "id": "influencer",
+       "seq": 39,
+       "src": "tile-entry",
+       "hp": 388,
+       "maxHp": 850,
+       "tx": 4,
+       "ty": 4,
+       "lingering": true,
+       "titan": false,
+       "veteran": false
+      },
+      "stillPresent": false
+     },
+     "intermediate": [],
+     "wave": 4
+    },
+    {
+     "seed": 73677,
+     "seqKey": 42,
+     "seq": 42,
+     "id": "suburb",
+     "day": 123,
+     "fightId": "fmgpspimf_ceuag4",
+     "result": "lost",
+     "round": 6,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspimf_ceuag4"
+     ],
+     "leg": "F1",
+     "legDetail": "origin tile (4,4) occupied at tbEnd by id=redactor seq=43 hp=195",
+     "predicted": {
+      "hp": 1153,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": false,
+     "postHp": 975,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 123,
+     "tickPresent": false,
+     "staleTickSkipped": 0,
+     "verdict": "BLOCKED (F1)",
+     "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=redactor seq=43 hp=195; verdict tick absent, as expected for a blocked restore.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 4
+    }
+   ],
+   "verdictCounts": {
+    "REMOVED-AFTERWARDS (F8)": 1,
+    "BLOCKED (F1)": 1
+   },
+   "w4kills": 1,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    130
+   ]
+  },
+  {
+   "seed": 73678,
+   "field4": 0,
+   "waveField4": 0,
+   "fieldCountMatch": true,
+   "tbInits4": 0,
+   "tbUnjoined": [],
+   "finUnjoined": [],
+   "diagErrs": 0,
+   "overflowN": 0,
+   "sumFail": 0,
+   "finTbEnds": 27,
+   "finRemovals": 37,
+   "finNoOrigin": 18,
+   "chains": 9,
+   "finals": [
+    {
+     "seed": 73678,
+     "seqKey": 45,
+     "seq": 45,
+     "id": "terms_of_service",
+     "day": 121,
+     "fightId": "fmgpspixw_d9la3l",
+     "result": "lost",
+     "round": 5,
+     "chainLength": 1,
+     "chainResults": [
+      "lost"
+     ],
+     "chainFightIds": [
+      "fmgpspixw_d9la3l"
+     ],
+     "leg": "ELIGIBLE",
+     "legDetail": "eligible and unblocked at tbEnd",
+     "predicted": {
+      "hp": 267,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 267,
+     "postTile": [
+      4,
+      4
+     ],
+     "titanWarns": [],
+     "verdictTickDay": 121,
+     "tickPresent": true,
+     "staleTickSkipped": 0,
+     "verdict": "RESTORED (F6)",
+     "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+     "mismatch": false,
+     "epochFallback": false,
+     "removal": null,
+     "intermediate": [],
+     "wave": 3
+    }
+   ],
+   "verdictCounts": {
+    "RESTORED (F6)": 1
+   },
+   "w4kills": 0,
+   "tickGaps": [
+    {
+     "from": 2,
+     "to": 4,
+     "missing": [
+      3
+     ]
+    }
+   ],
+   "tickDupDays": [
+    122
+   ]
+  }
+ ],
+ "gates": {
+  "g2RecorderNeutrality": [
+   {
+    "seed": 73671,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 180,
+    "aDays": 180,
+    "cGameDays": 181,
+    "aGameDays": 181
+   },
+   {
+    "seed": 73672,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 118,
+    "aDays": 118,
+    "cGameDays": 118,
+    "aGameDays": 118
+   },
+   {
+    "seed": 73673,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 32,
+    "aDays": 32,
+    "cGameDays": 32,
+    "aGameDays": 32
+   },
+   {
+    "seed": 73674,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 118,
+    "aDays": 118,
+    "cGameDays": 118,
+    "aGameDays": 118
+   },
+   {
+    "seed": 73675,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 169,
+    "aDays": 169,
+    "cGameDays": 169,
+    "aGameDays": 169
+   },
+   {
+    "seed": 73676,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 144,
+    "aDays": 144,
+    "cGameDays": 144,
+    "aGameDays": 144
+   },
+   {
+    "seed": 73677,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 130,
+    "aDays": 130,
+    "cGameDays": 130,
+    "aGameDays": 130
+   },
+   {
+    "seed": 73678,
+    "ok": true,
+    "facedOk": true,
+    "killsOk": true,
+    "cDays": 122,
+    "aDays": 122,
+    "cGameDays": 122,
+    "aGameDays": 122
+   }
+  ],
+  "g2Pass": true,
+  "corpusOk": true,
+  "rebaselineExact1920": false,
+  "diffVs1920": {
+   "wins": 2,
+   "nationalEver": 1,
+   "nationalFinal": 0,
+   "table": 1,
+   "entered": 2,
+   "wave4": -1,
+   "wave5": 0,
+   "medianDays": -22,
+   "deaths": -23,
+   "starvation": 1
+  },
+  "rebaselineExact0525": true,
+  "diffVs0525": {
+   "wins": 0,
+   "nationalEver": 0,
+   "nationalFinal": 0,
+   "table": 0,
+   "entered": 0,
+   "wave4": 0,
+   "wave5": 0,
+   "medianDays": 0,
+   "deaths": 0,
+   "starvation": 0
+  },
+  "costBar": {
+   "starvationOk": true,
+   "medianOk": true
+  },
+  "detgate": {
+   "seed": 73671,
+   "pass": true,
+   "baselineDays": 180,
+   "baselineGameDays": 181,
+   "wrappedDays": 180,
+   "wrappedGameDays": 181,
+   "tsEqual": true,
+   "diagSurface": false,
+   "wrapsInstalled": false,
+   "gapTicks": 0,
+   "finRows": 0
+  },
+  "detPass": true
+ },
+ "baselineBand": {
+  "n": 8,
+  "won": 4,
+  "medianDays": 130,
+  "maxDays": 180,
+  "nationalEver": 7,
+  "nationalFinal": 5,
+  "table": 5,
+  "entered": 4,
+  "wave3": 8,
+  "wave4": 5,
+  "wave5": 0,
+  "maxArc": 4,
+  "starvationTotal": 2,
+  "deathTotal": 284
+ },
+ "armedBand": {
+  "n": 8,
+  "won": 4,
+  "medianDays": 130,
+  "maxDays": 180,
+  "nationalEver": 7,
+  "nationalFinal": 5,
+  "table": 5,
+  "entered": 4,
+  "wave3": 8,
+  "wave4": 5,
+  "wave5": 0,
+  "maxArc": 4,
+  "starvationTotal": 2,
+  "deathTotal": 284
+ },
+ "band1920": {
+  "wins": 2,
+  "nationalEver": 6,
+  "nationalFinal": 5,
+  "table": 4,
+  "entered": 2,
+  "wave4": 6,
+  "wave5": 0,
+  "medianDays": 152,
+  "deaths": 307,
+  "starvation": 1
+ },
+ "band0525": {
+  "wins": 4,
+  "nationalEver": 7,
+  "nationalFinal": 5,
+  "table": 5,
+  "entered": 4,
+  "wave4": 5,
+  "wave5": 0,
+  "medianDays": 130,
+  "deaths": 284,
+  "starvation": 2
+ },
+ "known": {
+  "seq51": {
+   "seed": 73672,
+   "day": 148,
+   "maxHp": 850,
+   "found": []
+  },
+  "seq45": {
+   "seed": 73673,
+   "day": 112,
+   "maxHp": 1000,
+   "found": []
+  }
+ },
+ "knownOk": false,
+ "allClassified": true,
+ "allFinals": [
+  {
+   "seed": 73671,
+   "seqKey": 23,
+   "seq": 23,
+   "id": "buffering",
+   "day": 74,
+   "fightId": "fmgpspicb_c7c434",
+   "result": "lost",
+   "round": 19,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspicb_c7c434"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 32,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 32,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 74,
+   "tickPresent": true,
+   "staleTickSkipped": 0,
+   "verdict": "RESTORED (F6)",
+   "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 3
+  },
+  {
+   "seed": 73671,
+   "seqKey": 43,
+   "seq": 43,
+   "id": "eulogy",
+   "day": 138,
+   "fightId": "fmgpspiu4_32io8u",
+   "result": "lost",
+   "round": 6,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspiu4_32io8u"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 612,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 612,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 138,
+   "tickPresent": true,
+   "staleTickSkipped": 0,
+   "verdict": "RESTORED (F6)",
+   "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73671,
+   "seqKey": 43,
+   "seq": 43,
+   "id": "eulogy",
+   "day": 139,
+   "fightId": "fmgpspiul_d22v8y",
+   "result": "lost",
+   "round": 4,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspiul_d22v8y"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 900,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 900,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 139,
+   "tickPresent": true,
+   "staleTickSkipped": 0,
+   "verdict": "RESTORED (F6)",
+   "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73671,
+   "seqKey": 43,
+   "seq": 43,
+   "id": "eulogy",
+   "day": 140,
+   "fightId": "fmgpspiv4_2wjn4u",
+   "result": "lost",
+   "round": 6,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspiv4_2wjn4u"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 663,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 663,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 140,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "REMOVED-AFTERWARDS (F8)",
+   "verdictDetail": "removal day 140 stack=Game,monsterTurn,tickAction,game,doAction,w lines=[\"Error\",\"at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)\",\"at Object.monsterTurn (src/js/game.js:22561:16)\",\"at Object.tickAction (src/js/game.js:19214:35)\",\"at game.tickAction (src/js/favor-company.js:187:34)\",\"at game.<computed> [as tickAction] (src/js/timeSettlement.js:39:33)\"] remover=monsterTurn.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": {
+    "day": 140,
+    "rowIdx": 50,
+    "stack": "Game,monsterTurn,tickAction,game,doAction,w",
+    "stackLines": [
+     "Error",
+     "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+     "at Object.monsterTurn (src/js/game.js:22561:16)",
+     "at Object.tickAction (src/js/game.js:19214:35)",
+     "at game.tickAction (src/js/favor-company.js:187:34)",
+     "at game.<computed> [as tickAction] (src/js/timeSettlement.js:39:33)"
+    ],
+    "remover": "monsterTurn",
+    "entity": {
+     "id": "eulogy",
+     "seq": 43,
+     "src": "tile-entry",
+     "hp": 663,
+     "maxHp": 900,
+     "tx": 4,
+     "ty": 4,
+     "lingering": true,
+     "titan": false,
+     "veteran": false
+    },
+    "stillPresent": false
+   },
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73671,
+   "seqKey": 27,
+   "seq": 27,
+   "id": "moderator",
+   "day": 167,
+   "fightId": "fmgpspj1c_dx2n6n",
+   "result": "lost",
+   "round": 16,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspj1c_dx2n6n"
+   ],
+   "leg": "F1",
+   "legDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=47 hp=900",
+   "predicted": {
+    "hp": 150,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": false,
+   "postHp": 1,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 167,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "BLOCKED (F1)",
+   "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=47 hp=900; verdict tick absent, as expected for a blocked restore.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 2
+  },
+  {
+   "seed": 73671,
+   "seqKey": 47,
+   "seq": 47,
+   "id": "reunion",
+   "day": 167,
+   "fightId": "fmgpspj1j_8m2vbw",
+   "result": "lost",
+   "round": 3,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspj1j_8m2vbw"
+   ],
+   "leg": "F1",
+   "legDetail": "origin tile (4,4) occupied at tbEnd by id=chorus_line seq=51 hp=225",
+   "predicted": {
+    "hp": 1200,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": false,
+   "postHp": 900,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 167,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "BLOCKED (F1)",
+   "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=chorus_line seq=51 hp=225; verdict tick absent, as expected for a blocked restore.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73671,
+   "seqKey": 51,
+   "seq": 51,
+   "id": "chorus_line",
+   "day": 167,
+   "fightId": "fmgpspj1u_9hv598",
+   "result": "lost",
+   "round": 12,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspj1u_9hv598"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 243,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 243,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 168,
+   "tickPresent": false,
+   "staleTickSkipped": 1,
+   "verdict": "REMOVED-AFTERWARDS (F8)",
+   "verdictDetail": "removal day 167 stack=Game,startCombat,G,wrapped lines=[\"Error\",\"at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)\",\"at Object.startCombat (src/js/game.js:33094:45)\",\"at Game.startCombat (src/js/party.js:1138:31)\",\"at Game.startCombat (src/js/party-formal.js:779:31)\",\"at Game.<computed> (src/js/progression.js:1235:24)\"] remover=startCombat. A tbEnd row for this seq follows the removal before the tick (fmgpspj28_d0t199:won), so this is F8 not F9.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": {
+    "day": 167,
+    "rowIdx": 58,
+    "stack": "Game,startCombat,G,wrapped",
+    "stackLines": [
+     "Error",
+     "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+     "at Object.startCombat (src/js/game.js:33094:45)",
+     "at Game.startCombat (src/js/party.js:1138:31)",
+     "at Game.startCombat (src/js/party-formal.js:779:31)",
+     "at Game.<computed> (src/js/progression.js:1235:24)"
+    ],
+    "remover": "startCombat",
+    "entity": {
+     "id": "chorus_line",
+     "seq": 51,
+     "src": "tile-entry",
+     "hp": 243,
+     "maxHp": 300,
+     "tx": 4,
+     "ty": 4,
+     "lingering": true,
+     "titan": false,
+     "veteran": false
+    },
+    "stillPresent": false
+   },
+   "intermediate": [],
+   "wave": 3
+  },
+  {
+   "seed": 73675,
+   "seqKey": 28,
+   "seq": 28,
+   "id": "eater",
+   "day": 145,
+   "fightId": "fmgpspitp_d2ei71",
+   "result": "lost",
+   "round": 6,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspitp_d2ei71"
+   ],
+   "leg": "F1",
+   "legDetail": "origin tile (4,4) occupied at tbEnd by id=eulogy seq=31 hp=675",
+   "predicted": {
+    "hp": 549,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": false,
+   "postHp": 712,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 145,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "BLOCKED (F1)",
+   "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=eulogy seq=31 hp=675; verdict tick absent, as expected for a blocked restore.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73675,
+   "seqKey": 31,
+   "seq": 31,
+   "id": "eulogy",
+   "day": 145,
+   "fightId": "fmgpspiud_8eikrm",
+   "result": "lost",
+   "round": 4,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspiud_8eikrm"
+   ],
+   "leg": "F1",
+   "legDetail": "origin tile (4,4) occupied at tbEnd by id=algorithm seq=32 hp=750",
+   "predicted": {
+    "hp": 900,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": false,
+   "postHp": 675,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 145,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "BLOCKED (F1)",
+   "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=algorithm seq=32 hp=750; verdict tick absent, as expected for a blocked restore.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73675,
+   "seqKey": 36,
+   "seq": 36,
+   "id": "suburb",
+   "day": 167,
+   "fightId": "fmgpspixn_49now0",
+   "result": "lost",
+   "round": 19,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspixn_49now0"
+   ],
+   "leg": "F1",
+   "legDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=38 hp=900",
+   "predicted": {
+    "hp": 543,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": false,
+   "postHp": 975,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 167,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "BLOCKED (F1)",
+   "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=reunion seq=38 hp=900; verdict tick absent, as expected for a blocked restore.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73675,
+   "seqKey": 38,
+   "seq": 38,
+   "id": "reunion",
+   "day": 167,
+   "fightId": "fmgpspiyt_b06umz",
+   "result": "lost",
+   "round": 5,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspiyt_b06umz"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 1184,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 1184,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 167,
+   "tickPresent": true,
+   "staleTickSkipped": 0,
+   "verdict": "RESTORED (F6)",
+   "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73675,
+   "seqKey": 38,
+   "seq": 38,
+   "id": "reunion",
+   "day": 168,
+   "fightId": "fmgpspizl_434uza",
+   "result": "lost",
+   "round": 4,
+   "chainLength": 2,
+   "chainResults": [
+    "lost",
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspizf_6h8s22",
+    "fmgpspizl_434uza"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 1200,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 1200,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 169,
+   "tickPresent": false,
+   "staleTickSkipped": 1,
+   "verdict": "LIFTED-WITHOUT-TBEND (F9)",
+   "verdictDetail": "removal day 169 stack names startCombat (lift for a new fight) with no tbEnd row for this seq afterwards before the verdict tick; remover=startCombat.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": {
+    "day": 169,
+    "rowIdx": 52,
+    "stack": "Game,startCombat,G,wrapped",
+    "stackLines": [
+     "Error",
+     "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+     "at Object.startCombat (src/js/game.js:33094:45)",
+     "at Game.startCombat (src/js/party.js:1138:31)",
+     "at Game.startCombat (src/js/party-formal.js:779:31)",
+     "at Game.<computed> (src/js/progression.js:1235:24)"
+    ],
+    "remover": "startCombat",
+    "entity": {
+     "id": "reunion",
+     "seq": 38,
+     "src": "tile-entry",
+     "hp": 1200,
+     "maxHp": 1200,
+     "tx": 3,
+     "ty": 4,
+     "lingering": true,
+     "titan": false,
+     "veteran": false
+    },
+    "stillPresent": false
+   },
+   "intermediate": [
+    {
+     "fightId": "fmgpspizf_6h8s22",
+     "result": "lost",
+     "leg": "ELIGIBLE",
+     "predicted": {
+      "hp": 1083,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 1083,
+     "postTile": [
+      4,
+      4
+     ],
+     "restoredExact": true
+    }
+   ],
+   "wave": 4
+  },
+  {
+   "seed": 73675,
+   "seqKey": 38,
+   "seq": 38,
+   "id": "reunion",
+   "day": 169,
+   "fightId": "fmgpspj04_6rwvac",
+   "result": "lost",
+   "round": 4,
+   "chainLength": 3,
+   "chainResults": [
+    "lost",
+    "lost",
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspizt_ebynzg",
+    "fmgpspizy_1ywlm2",
+    "fmgpspj04_6rwvac"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 1200,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 1200,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 169,
+   "tickPresent": true,
+   "staleTickSkipped": 1,
+   "verdict": "RESTORED (F6)",
+   "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [
+    {
+     "fightId": "fmgpspizt_ebynzg",
+     "result": "lost",
+     "leg": "ELIGIBLE",
+     "predicted": {
+      "hp": 1200,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 1200,
+     "postTile": [
+      4,
+      4
+     ],
+     "restoredExact": true
+    },
+    {
+     "fightId": "fmgpspizy_1ywlm2",
+     "result": "lost",
+     "leg": "ELIGIBLE",
+     "predicted": {
+      "hp": 1200,
+      "tile": [
+       4,
+       4
+      ],
+      "isLingerer": true
+     },
+     "postPresent": true,
+     "postHp": 1200,
+     "postTile": [
+      4,
+      4
+     ],
+     "restoredExact": true
+    }
+   ],
+   "wave": 4
+  },
+  {
+   "seed": 73677,
+   "seqKey": 39,
+   "seq": 39,
+   "id": "influencer",
+   "day": 112,
+   "fightId": "fmgpspijb_4ilh19",
+   "result": "lost",
+   "round": 15,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspijb_4ilh19"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 388,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 388,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 113,
+   "tickPresent": false,
+   "staleTickSkipped": 1,
+   "verdict": "REMOVED-AFTERWARDS (F8)",
+   "verdictDetail": "removal day 112 stack=Game,startCombat,G,wrapped lines=[\"Error\",\"at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)\",\"at Object.startCombat (src/js/game.js:33094:45)\",\"at Game.startCombat (src/js/party.js:1138:31)\",\"at Game.startCombat (src/js/party-formal.js:779:31)\",\"at Game.<computed> (src/js/progression.js:1235:24)\"] remover=startCombat. A tbEnd row for this seq follows the removal before the tick (fmgpspijk_flgohj:won), so this is F8 not F9.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": {
+    "day": 112,
+    "rowIdx": 34,
+    "stack": "Game,startCombat,G,wrapped",
+    "stackLines": [
+     "Error",
+     "at Game.removeWorldMonster (/home/hatch/workspace/worktrees/sim-finalloss-adopt/scripts/policies/finalloss-diag.js:218:22)",
+     "at Object.startCombat (src/js/game.js:33094:45)",
+     "at Game.startCombat (src/js/party.js:1138:31)",
+     "at Game.startCombat (src/js/party-formal.js:779:31)",
+     "at Game.<computed> (src/js/progression.js:1235:24)"
+    ],
+    "remover": "startCombat",
+    "entity": {
+     "id": "influencer",
+     "seq": 39,
+     "src": "tile-entry",
+     "hp": 388,
+     "maxHp": 850,
+     "tx": 4,
+     "ty": 4,
+     "lingering": true,
+     "titan": false,
+     "veteran": false
+    },
+    "stillPresent": false
+   },
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73677,
+   "seqKey": 42,
+   "seq": 42,
+   "id": "suburb",
+   "day": 123,
+   "fightId": "fmgpspimf_ceuag4",
+   "result": "lost",
+   "round": 6,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspimf_ceuag4"
+   ],
+   "leg": "F1",
+   "legDetail": "origin tile (4,4) occupied at tbEnd by id=redactor seq=43 hp=195",
+   "predicted": {
+    "hp": 1153,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": false,
+   "postHp": 975,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 123,
+   "tickPresent": false,
+   "staleTickSkipped": 0,
+   "verdict": "BLOCKED (F1)",
+   "verdictDetail": "origin tile (4,4) occupied at tbEnd by id=redactor seq=43 hp=195; verdict tick absent, as expected for a blocked restore.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 4
+  },
+  {
+   "seed": 73678,
+   "seqKey": 45,
+   "seq": 45,
+   "id": "terms_of_service",
+   "day": 121,
+   "fightId": "fmgpspixw_d9la3l",
+   "result": "lost",
+   "round": 5,
+   "chainLength": 1,
+   "chainResults": [
+    "lost"
+   ],
+   "chainFightIds": [
+    "fmgpspixw_d9la3l"
+   ],
+   "leg": "ELIGIBLE",
+   "legDetail": "eligible and unblocked at tbEnd",
+   "predicted": {
+    "hp": 267,
+    "tile": [
+     4,
+     4
+    ],
+    "isLingerer": true
+   },
+   "postPresent": true,
+   "postHp": 267,
+   "postTile": [
+    4,
+    4
+   ],
+   "titanWarns": [],
+   "verdictTickDay": 121,
+   "tickPresent": true,
+   "staleTickSkipped": 0,
+   "verdict": "RESTORED (F6)",
+   "verdictDetail": "post-tbEnd present at predicted HP/tile and verdict tick present — not a disappearance.",
+   "mismatch": false,
+   "epochFallback": false,
+   "removal": null,
+   "intermediate": [],
+   "wave": 3
+  }
+ ],
+ "verdict": "DIAG-NO-GO",
+ "verdictDetail": "allClassified=true knownOk=false g2Pass=true detPass=true",
+ "verdictRule": "DIAG-GO iff every FINAL-LOSS INSTANCE is classified into exactly one verdict (RESTORED / BLOCKED / THROWN / REMOVED-AFTERWARDS / UNOBSERVABLE-REMOVAL / UNEXPLAINED / RESTORED-PRESENT-MISMATCH / EXPECTED-NO-RESTORE-F10), BOTH known instances are re-derived and classified from this corpus, G2 neutrality holds, G1 det-gate passes, and recorder errors/overflow are zero. An honest F11/F12 remainder still counts as classified only with its full pre snapshot reported and no instance dropped.",
+ "generated": "2026-10-27T07:33:41.492Z"
+}
