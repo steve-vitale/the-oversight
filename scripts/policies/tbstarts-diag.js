@@ -53,6 +53,17 @@
 // threshold, or seed changed; the prereg's DIAG-GO rule is
 // untouched.
 //
+// B16 NOTE (gap-instruments, 2026-10-27, d94 finding 1213): the
+// startCombat wrap above cannot see direct-build alien duels —
+// encounters.js startAlienCombat builds the fight directly instead
+// of via Game.startCombat, so the 73671 d94 duel produced a tbEnd
+// row with no start row. The startAlienCombat wrap below records
+// the same start-row shape (via:'startAlienCombat', alien:true) so
+// a duel start joins its tbEnd by fight id AND token, the exact
+// join the d94 end failed. Observation-only, same as the rest of
+// this file: it reads, appends to its own store, returns the
+// original value untouched.
+//
 // READS (pure, never writes to game state): draws no RNG, throws
 // nothing into the engine (recording errors are counted), returns
 // every original value untouched. A startCombat call that throws
@@ -280,6 +291,65 @@ function installTbstartsDiag(Game, store) {
         newOutcomes: newOutcomes,
       });
     } catch (e) { noteErr(store, 'startCombat.post', e); }
+    return r;
+  });
+
+  wrap('startAlienCombat', (orig) => function (fighter) {
+    const callIdx = store._callIdx++;
+    let pre = null, preFight = null;
+    try {
+      preFight = this.tbfight || Game.tbfight || null;
+      pre = {
+        arg: (fighter && (fighter.alienPid || fighter.name)) ? String(fighter.alienPid || fighter.name) : null,
+        preId: fightIdOf(preFight), preOver: preFight ? !!preFight.over : null,
+        preToken: nextToken(store, preFight),
+        preFighters: fighterSummary(preFight),
+        stack: stackTop(),
+      };
+    } catch (e) { noteErr(store, 'startAlienCombat.pre', e); }
+    let r;
+    store._activeCall = callIdx;
+    try { r = orig.apply(this, arguments); } catch (e) {
+      try {
+        pushCapped(store, 'throws', {
+          day: dayOf(Game), callIdx: callIdx, via: 'startAlienCombat',
+          arg: pre ? pre.arg : null, preId: pre ? pre.preId : null,
+          message: String((e && e.message) || e).slice(0, 120),
+        });
+      } catch (e2) { noteErr(store, 'startAlienCombat.throw-record', e2); }
+      store._activeCall = null;
+      throw e;
+    }
+    store._activeCall = null;
+    try {
+      let tf = null;
+      try { tf = this.tbfight || Game.tbfight || null; } catch (e2) { noteErr(store, 'startAlienCombat.post-fight', e2); }
+      // REFUSED (same token rule as startCombat): the direct-build call
+      // returns null while a live fight survives when it is refused by
+      // the inCombat guard — the same fight object, not a new duel.
+      const refused = !!(pre && pre.preOver === false && pre.preToken !== null
+        && nextToken(store, tf) === pre.preToken);
+      pushCapped(store, 'starts', {
+        day: dayOf(Game), callIdx: callIdx, via: 'startAlienCombat', alien: true,
+        arg: pre ? pre.arg : null,
+        preId: pre ? pre.preId : null, preOver: pre ? pre.preOver : null,
+        preToken: pre ? pre.preToken : null,
+        preFighters: pre ? pre.preFighters : [],
+        tileMon: null,
+        stack: pre ? pre.stack : [],
+        titanMuster: null,
+        postId: fightIdOf(tf), postOver: tf ? !!tf.over : null,
+        postToken: nextToken(store, tf),
+        postFighters: fighterSummary(tf),
+        lifted: null,
+        worldOriginSet: !!(tf && tf.worldOrigin),
+        worldOriginSeq: (tf && tf.worldOrigin) ? seqOf(tf.worldOrigin) : null,
+        refused: refused,
+        retNull: (r === null || r === undefined),
+        retId: fightIdOf(r),
+        newOutcomes: [],
+      });
+    } catch (e) { noteErr(store, 'startAlienCombat.post', e); }
     return r;
   });
 

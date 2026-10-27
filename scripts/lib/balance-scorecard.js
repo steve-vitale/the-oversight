@@ -37,7 +37,101 @@ function compareMetric(before, after, spec, key) {
     worse: spec.direction === 'neutral' ? null : diffs.filter(d => d * orientation < 0).length, tied: diffs.filter(d => d === 0).length };
 }
 const caseKey = r => r.row.policy + ':' + r.row.seed;
+// ---- Per-seed sweep-corpus ingestion (gap-instruments B12, 2026-10-27) ----
+// Workers kept feeding per-seed sweep corpora (flat rows:
+// {policy, seed, won, entered, ...}, no .options) into the panel compare,
+// which dereferenced undefined.options and threw TypeError at line 44.
+// The strict panel path below is a safety property (digest/validity
+// gates) and is NOT weakened: a sweep-shaped input is routed to a
+// separately labeled comparison that pairs rows by policy+seed and
+// reuses compareMetric, mapping ONLY the contract metrics whose
+// sweep-row definition matches the panel definition exactly (see
+// sweepMetric). Every other contract metric is null -> not_observed,
+// never invented. A sweep-corpus report is never a balanced-panel
+// verdict; its note says so.
+const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+function asBinary(v) {
+  if (v === true) return 1;
+  if (v === false) return 0;
+  if (typeof v === 'number' && Number.isFinite(v)) return v ? 1 : 0;
+  return null;
+}
+function playerDeathsOf(row) {
+  const d = row.deaths;
+  if (Array.isArray(d)) {
+    if (!d.every(x => x && typeof x.player === 'boolean')) return null;
+    return d.filter(x => x.player).length;
+  }
+  if (d && typeof d === 'object') {
+    let n = 0;
+    for (const [k, v] of Object.entries(d)) {
+      if (!k.startsWith('player:')) continue;
+      if (typeof v !== 'number' || !Number.isFinite(v)) return null;
+      n += v;
+    }
+    return n;
+  }
+  return null;
+}
+function sweepMetric(row, id) {
+  if (!row || typeof row !== 'object') return null;
+  switch (id) {
+    case 'won': return asBinary(row.won);
+    case 'entered': return asBinary(row.entered);
+    case 'table': return row.table != null ? asBinary(row.table) : asBinary(row.tableInvited);
+    case 'national': {
+      if (row.national != null) return asBinary(row.national);
+      if (row.nationalEver != null) return asBinary(row.nationalEver);
+      if (typeof row.maxRank === 'string') {
+        const r = RANK_ORDER[row.maxRank];
+        return r == null ? null : (r >= 2 ? 1 : 0);
+      }
+      return null;
+    }
+    case 'playerDeaths': return playerDeathsOf(row);
+    default: return null;
+  }
+}
+const policyOfSweepRow = r => (r.policy != null ? String(r.policy) : String(r.arm));
+const sweepKey = r => policyOfSweepRow(r) + ':' + r.seed;
+function isSweepRow(row) {
+  return !!row && typeof row === 'object' && !row.row && !row.metrics
+    && (row.policy != null || row.arm != null) && row.seed != null;
+}
+function rowsOfSweepDoc(doc) {
+  if (Array.isArray(doc)) return doc;
+  if (doc && Array.isArray(doc.rows)) return doc.rows;
+  if (doc && (doc.policy != null || doc.arm != null) && doc.seed != null) return [doc];
+  return null;
+}
+function isSweepCorpus(doc) {
+  const rows = rowsOfSweepDoc(doc);
+  return !!rows && rows.length > 0 && rows.every(isSweepRow);
+}
+function compareSweepCorpora(beforeDoc, afterDoc) {
+  const bRows = rowsOfSweepDoc(beforeDoc), aRows = rowsOfSweepDoc(afterDoc);
+  const bm = new Map(bRows.map(r => [sweepKey(r), r]));
+  const policies = [...new Set(aRows.map(policyOfSweepRow))];
+  const out = policies.map(policy => {
+    const all = aRows.filter(r => policyOfSweepRow(r) === policy), rs = all.filter(r => bm.has(sweepKey(r)));
+    const metrics = contract.metrics.map(m => compareMetric(rs.map(r => sweepMetric(bm.get(sweepKey(r)), m.id)), rs.map(r => sweepMetric(r, m.id)), m, policy + '/' + m.id));
+    const review = metrics.filter(m => !['descriptive', 'no_material_signal'].includes(m.status));
+    return { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
+  });
+  return { schemaVersion: 1, source: 'sweep-corpus', decision: out.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies: out,
+    note: 'Sweep-corpus comparison, NOT a balanced-panel verdict: rows paired by policy+seed; only won/entered/table/national/playerDeaths are carried by per-seed sweep rows, and every other contract metric is not_observed, never imputed. For a §15 panel verdict, build real panels with scripts/balance-panel.js.' };
+}
+function isPanelShape(p) {
+  return !!p && typeof p === 'object' && !!p.options && Array.isArray(p.rows)
+    && !!p.sources && typeof p.sources === 'object'
+    && !!p.validity && Array.isArray(p.validity.neutrality);
+}
 function comparePanels(before, after) {
+  if (isSweepCorpus(before) || isSweepCorpus(after)) {
+    if (!isSweepCorpus(before) || !isSweepCorpus(after)) return { decision: 'invalid', errors: ['Cannot compare a sweep corpus against a balanced panel; convert both sides to the same shape'], policies: [] };
+    return compareSweepCorpora(before, after);
+  }
+  if (!isPanelShape(before) || !isPanelShape(after)) return { decision: 'invalid', errors: ['Not a balanced panel (missing options/rows/sources/validity); per-seed sweep corpora are compared via the sweep-corpus path'], policies: [] };
   const errors = [];
   if (before.contractDigest !== contractDigest || after.contractDigest !== contractDigest) errors.push('Metric contract does not match this comparator');
   for (const field of ['schemaVersion', 'observerDigest', 'contractDigest']) if (before[field] !== after[field]) errors.push('Different ' + field);
@@ -74,7 +168,7 @@ function comparePanels(before, after) {
     note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' };
 }
 function markdown(report) {
-  const lines = ['# Balanced campaign comparison', '', '**Decision: ' + report.decision + '**', '', ...(report.errors || []).map(e => '- ' + e)];
+  const lines = [(report.source === 'sweep-corpus' ? '# Sweep-corpus comparison (not a balanced-panel verdict)' : '# Balanced campaign comparison'), '', '**Decision: ' + report.decision + '**', '', ...(report.errors || []).map(e => '- ' + e)];
   for (const p of report.policies) {
     if (p.cohort) lines.push('', `Occupation ${p.cohort.occupation}: before ${p.cohort.before.played}/${p.cohort.before.attempted} played (${p.cohort.before.excluded} excluded); after ${p.cohort.after.played}/${p.cohort.after.attempted} played (${p.cohort.after.excluded} excluded). Only ${p.cohort.pairedPlayed} matched played cases enter metrics. Availability/roster changes: ${JSON.stringify({ unavailableBefore: p.cohort.unavailableBefore, unavailableAfter: p.cohort.unavailableAfter, rosterChanged: p.cohort.rosterChanged })}.`);
     lines.push('', '## ' + p.policy, '', `${p.cases} paired cases; ${p.confirmationSized ? 'confirmation-sized' : 'screen only'}; ${p.decision}.`, '', '| Metric | Before | After | Paired delta | 95% exploratory interval | Pairs | Status |', '| --- | ---: | ---: | ---: | --- | ---: | --- |');
@@ -84,4 +178,4 @@ function markdown(report) {
   lines.push('', report.note || 'Invalid comparisons must be repaired before interpretation.', '');
   return lines.join('\n');
 }
-module.exports = { mean, quantile, interval, compareMetric, comparePanels, markdown, contract, contractDigest };
+module.exports = { mean, quantile, interval, compareMetric, comparePanels, compareSweepCorpora, isSweepCorpus, sweepMetric, markdown, contract, contractDigest };
