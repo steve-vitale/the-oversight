@@ -245,7 +245,13 @@ rule is altered by the sitter choice.
 - No balance numbers changed: no path strength, meter, price, or
   failure rule moves with the sitter. No champion system, no
   god-raising system, no stage-bar change, no Loop A/B file touched.
-- Commit(s): (to fill in at commit time)
+- Commit(s): 474b32ed8 (branch gap-seattaker) — "Seat-taker choice +
+  seat-varying Witness beats (Triage A6) [needs-eyes]". Note: the
+  safe-commit run hit the known main-index clobber (bogus staged
+  deletions/modifications after a correct commit); repaired with
+  `update-index --add --cacheinfo` per file after hash-object
+  verification, and re-verified `git status` empty and `git diff
+  HEAD` empty.
 
 ## 5. Proof results
 
