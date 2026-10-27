@@ -19815,7 +19815,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // skipped: the guard exempts opts.raid and the aid path.
       if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
+      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids, raid: !!opts.raid }); }
       const summary = this.fieldFightSummary(rec, name, mName);
       // RETURN-TO-FIGHT (gap-routing 2026-10-27): a villager who actually
       // fought a living world monster remembers the fight's tile, so the

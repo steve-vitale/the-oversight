@@ -610,6 +610,40 @@
         full: m && m.hp != null ? Number.isFinite(m.maxHp) && m.hp === m.maxHp : true } };
       rec.packCount = packN;
       var mBreak = wave >= 2 ? 0.15 : 0.25; // nastier things hold longer
+      // MEET-FINISH (Steve 2026-10-27, Triage A1 wound-mill): a raid
+      // defender who MEETS a beast already crippled weighs the risk of
+      // the moment and finishes it only if every leg below holds. This
+      // is NOT the killed Stage-2 defender-finish rule (that finished
+      // beasts the defender's own fight dropped below the line; it cost
+      // lives — deaths 234->316 on its band — and its code was
+      // reverted). This gate reads the PRE-fight fraction only, so a
+      // beast dropped below the line DURING this fight is untouched
+      // (Stage-2 scope stays dead), and field meetings (no opts.raid)
+      // are untouched. When the gate holds, the break-line flee is
+      // suppressed for this fight only and the fight runs real rounds
+      // — it may end vKill, vFlee, vDie, or at the round cap. Nothing
+      // is scripted: a committed fight is never a guaranteed kill.
+      // Legs (all must hold; any failure leaves the rounds-0 mFlee):
+      //   cripple line: starts at or below 10% of max health (stricter
+      //     than the break line — wounded is not crippled);
+      //   defender health: at or above 75% of max;
+      //   defender armed: weapon bonus above zero;
+      //   numbers: the beast comes alone (pack size 1, drawn company
+      //     included — a crippled lead with fresh pack mates behind
+      //     it is not affordable);
+      //   worst hit: the beast's hardest single hit is at most half
+      //     the defender's current health (two worst hits survivable);
+      //   Haven closeness: raid scope only — raid defenders fight at
+      //     the Haven door, where help is near.
+      var meetStartFrac = (m && m.hp !== undefined && m.hp !== null && m.maxHp) ? (m.hp / m.maxHp) : null;
+      var meetFinish = !!(opts.raid && m && m.hp > 0 && meetStartFrac !== null
+        && meetStartFrac < mBreak && meetStartFrac <= 0.10
+        && (vHp / vHpMax) >= 0.75 && wb > 0 && packN === 1
+        && dmgRange[1] <= 0.5 * vHpStart);
+      if (meetFinish) {
+        rec.meetFinish = true;
+        rec.log.push(vName + ' finds ' + mPhrase + ' crippled and close to home — hurt bad, alone, and they can take it. They move in to finish it.');
+      }
 
       var vAlive = vHp > 0;
       var mName = 'something';
@@ -798,8 +832,14 @@
         for (var _vj = 0; _vj < members.length; _vj++) { members[_vj].hp = 0; members[_vj].alive = false; }
         rec.log.push('The lead never reached ' + vName + ' — it fell to the volley, and the pack\'s coordination shatters with it.');
       } else if ((members[0].hp / members[0].maxHp) < mBreak) {
-        rec.outcome = 'mFlee';
-        rec.log.push(vName + ' drove ' + mPhrase + ' off with the bow — it broke before it ever closed.');
+        if (meetFinish) {
+          // MEET-FINISH: a met crippled beast the defender can afford
+          // does not scatter at range — the fight goes to rounds.
+          rec.log.push(vName + ' holds the line instead — a crippled beast this close to home does not get away.');
+        } else {
+          rec.outcome = 'mFlee';
+          rec.log.push(vName + ' drove ' + mPhrase + ' off with the bow — it broke before it ever closed.');
+        }
       }
 
       // ---- rounds ----
@@ -1585,7 +1625,9 @@
           rec.log.push('The lead falls — the pack\'s coordination shatters. The rest scatter or die.');
           break;
         }
-        if ((members[0].hp / members[0].maxHp) < mBreak) { rec.outcome = 'mFlee'; break; }
+        // MEET-FINISH: a committed meet-finish fight does not break on
+        // the line — it runs to a real end (vKill, vFlee, vDie, cap).
+        if (!meetFinish && (members[0].hp / members[0].maxHp) < mBreak) { rec.outcome = 'mFlee'; break; }
         // ABILITY bookkeeping: the debt of this round settles the next.
         abLastRoundTaken = abRoundTaken;
       }
