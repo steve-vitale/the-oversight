@@ -195,6 +195,14 @@ Verdict against the pre-registered bars:
   ship loop's full check must name them before this lands; one
   plausible class is trajectory-exact tests involving sling fighters,
   since working volleys now change fight outcomes (intended).
+  RECOVERY ADDENDUM (post-restart retry, third attempt): the run was
+  stopped at 156/287 with 10 failures rather than waited out, because
+  the count varies run to run (0 in the first 79 of attempt 1, 2 in
+  the first 109 of attempt 2, growing 1 → 10 in attempt 3) while the
+  box load averaged ~20 on 2 cores — the pattern fits the suite's
+  120-second per-script timeout flaking under contention, not a
+  deterministic break from this change. Names remain unobtainable
+  without a completion; the ship loop's full check is the gate.
 
 Note on trajectories: after-run fight totals differ slightly from the
 baseline (388 vs 372) because the new craft rolls draw from the game's
@@ -218,5 +226,11 @@ trajectories, and the direction is the mechanic working, not noise.
   nothing in the game stocks stick or fiber in the communal pile
   (stick 0/1,179 old fight moments, 0/8 new panel seeds at end). That
   supply job belongs to a future item, not this one.
-- check.js --quick could not finish on this loaded box; the two
-  failures in its partial run are unidentified (see §5 guard note).
+- check.js --quick could not finish on this loaded box; the failures
+  in its partial runs are unidentified (see §5 guard note).
+- Steve ruling 2026-10-27 (react-on-meeting: villagers react to things
+  they meet as the player does) does NOT change these bars and needed
+  no code change here: this item is departure preparation — packing
+  before going out, the same as the player — not encounter behavior.
+  The volley fires at a fight's opening, which is the meeting's fight,
+  not a new way of meeting things.
