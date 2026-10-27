@@ -50,7 +50,7 @@ for (const leg of ['control', 'test']) {
   // Within-mode byte-equality (reported, not averaged away).
   const cSame = [1, 2].every(i => loadRaw(d, `s73677-census-rep${i + 1}.json`) === loadRaw(d, 's73677-census-rep1.json'));
   const tSame = [1, 2].every(i => loadRaw(d, `s73677-transcript-armed-rep${i + 1}.json`) === loadRaw(d, 's73677-transcript-armed-rep1.json'));
-  const dSame = [1, 2].every(i => docs[i + 1] === docs[0]);
+  const dSame = [1, 2].every(i => docs[i] === docs[0]);
   console.log(`WITHIN-MODE ${leg}: census byte-identical=${cSame} transcript-armed byte-identical=${tSame} transcript-doc byte-identical=${dSame}`);
   ok(cSame && tSame, `${leg} within-mode variance is zero on armed rows`, `census=${cSame} transcript=${tSame}`);
   // Per-rep summaries + cross-mode diffs.

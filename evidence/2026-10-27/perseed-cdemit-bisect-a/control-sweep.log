@@ -1,0 +1,36 @@
+=== CONTROL LEG c8770e7f ===
+DETGATE seed=73677 baseline days=152 gameDays=152 ts={"tsNationalDay":77} | wrapped(recorders OFF) days=152 gameDays=152 ts={"tsNationalDay":77} diagSurface=false wrapsInstalled=false gapTicks=0 -> PASS
+DETGATE-RAIDTRACE seed=73677 plain days=168 gameDays=168 ts={"tsNationalDay":77} starv=0 | wrapOff days=168 gameDays=168 ts={"tsNationalDay":77} starv=0 wrapped=false installed=false lines=0 -> PASS
+--- census rep1 ---
+  [armed seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41 ticks=151 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+--- transcript rep1 ---
+  [transcript seed 73677] days=168 gameDays=168 end=village-lost wave=4 won=0 starv=0 deaths=44 ticks=167 raidDays=16 totalLines=16099 retainedWindowLines=3336 palisadeRaidLines=16 ownWalls=2 diagErrs=0
+--- census rep2 ---
+  [armed seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41 ticks=151 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+cp: error writing 'evidence/2026-10-27/perseed-cdemit-bisect-a/control/s73677-census-rep2.json': Operation not permitted
+--- transcript rep2 ---
+  [transcript seed 73677] days=168 gameDays=168 end=village-lost wave=4 won=0 starv=0 deaths=44 ticks=167 raidDays=16 totalLines=16099 retainedWindowLines=3336 palisadeRaidLines=16 ownWalls=2 diagErrs=0
+cp: error writing 'evidence/2026-10-27/perseed-cdemit-bisect-a/control/s73677-transcript-armed-rep2.json': Operation not permitted
+cp: error writing 'evidence/2026-10-27/perseed-cdemit-bisect-a/control/s73677-transcript-doc-rep2.json': Operation not permitted
+--- census rep3 ---
+  [armed seed 73677] days=152 gameDays=152 end=village-lost wave=4 arc=4 finalRank=regional natEver=1 natFinal=0 table=1 entered=0 won=0 starv=0 deaths=41 ticks=151 seq51obs=0 seq51steps=0 windowSteps=0 unaccDrops=0
+cp: error writing 'evidence/2026-10-27/perseed-cdemit-bisect-a/control/s73677-census-rep3.json': Operation not permitted
+--- transcript rep3 ---
+  [transcript seed 73677] days=168 gameDays=168 end=village-lost wave=4 won=0 starv=0 deaths=44 ticks=167 raidDays=16 totalLines=16099 retainedWindowLines=3336 palisadeRaidLines=16 ownWalls=2 diagErrs=0
+cp: error writing 'evidence/2026-10-27/perseed-cdemit-bisect-a/control/s73677-transcript-armed-rep3.json': Operation not permitted
+cp: error writing 'evidence/2026-10-27/perseed-cdemit-bisect-a/control/s73677-transcript-doc-rep3.json': Operation not permitted
+=== CONTROL DONE ===
+total 5112
+drwxrws--- 1 root nogroup     610 Oct 27 06:36 .
+drwxrws--- 1 root nogroup      48 Oct 27 06:30 ..
+-rw-rw---- 1 root nogroup  962898 Oct 27 06:35 s73677-armed.json
+-rw-rw---- 1 root nogroup  962898 Oct 27 06:32 s73677-census-rep1.json
+-rw-rw---- 1 root nogroup       0 Oct 27 06:35 s73677-census-rep3.json
+-rw-rw---- 1 root nogroup 1059118 Oct 27 06:33 s73677-transcript-armed-rep1.json
+-rw-rw---- 1 root nogroup       0 Oct 27 06:35 s73677-transcript-armed-rep2.json
+-rw-rw---- 1 root nogroup       0 Oct 27 06:36 s73677-transcript-armed-rep3.json
+-rw-rw---- 1 root nogroup 1059118 Oct 27 06:36 s73677-transcript-armed.json
+-rw-rw---- 1 root nogroup  588788 Oct 27 06:33 s73677-transcript-doc-rep1.json
+-rw-rw---- 1 root nogroup       0 Oct 27 06:35 s73677-transcript-doc-rep2.json
+-rw-rw---- 1 root nogroup       0 Oct 27 06:36 s73677-transcript-doc-rep3.json
+-rw-rw---- 1 root nogroup  588788 Oct 27 06:36 s73677-transcript.json

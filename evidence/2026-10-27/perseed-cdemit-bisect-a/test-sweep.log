@@ -1,0 +1,14 @@
+=== TEST LEG c04d4e0cb ===
+DETGATE seed=73677 baseline days=130 gameDays=130 ts={"tsNationalDay":77,"tsPreviewSeen":1,"tsSeatAttempts":1,"tsSeatTaken":1,"tsSeatDay":130,"tsSeatKind":"lesser","tsTableAnswers":5,"tsTablePath":"feared"} | wrapped(recorders OFF) days=130 gameDays=130 ts={"tsNationalDay":77,"tsPreviewSeen":1,"tsSeatAttempts":1,"tsSeatTaken":1,"tsSeatDay":130,"tsSeatKind":"lesser","tsTableAnswers":5,"tsTablePath":"feared"} diagSurface=false wrapsInstalled=false gapTicks=0 -> PASS
+=== TEST LEG c04d4e0cb (rerun) ===
+DETGATE seed=73677 baseline days=130 gameDays=130 ts={"tsNationalDay":77,"tsPreviewSeen":1,"tsSeatAttempts":1,"tsSeatTaken":1,"tsSeatDay":130,"tsSeatKind":"lesser","tsTableAnswers":5,"tsTablePath":"feared"} | wrapped(recorders OFF) days=130 gameDays=130 ts={"tsNationalDay":77,"tsPreviewSeen":1,"tsSeatAttempts":1,"tsSeatTaken":1,"tsSeatDay":130,"tsSeatKind":"lesser","tsTableAnswers":5,"tsTablePath":"feared"} diagSurface=false wrapsInstalled=false gapTicks=0 -> PASS
+DETGATE-RAIDTRACE seed=73677 plain days=130 gameDays=130 ts={"tsNationalDay":77,"tsPreviewSeen":1,"tsSeatAttempts":1,"tsSeatTaken":1,"tsSeatDay":130,"tsSeatKind":"lesser","tsTableAnswers":5,"tsTablePath":"feared"} starv=0 | wrapOff days=130 gameDays=130 ts={"tsNationalDay":77,"tsPreviewSeen":1,"tsSeatAttempts":1,"tsSeatTaken":1,"tsSeatDay":130,"tsSeatKind":"lesser","tsTableAnswers":5,"tsTablePath":"feared"} starv=0 wrapped=false installed=false lines=0 -> PASS
+--- census rep1 ---
+    at async oneMode (/home/hatch/workspace/worktrees/sim-cdemit-bisect/scripts/test-seq51gap-diag-sweep.js:621:15)
+d41d8cd98f00b204e9800998ecf8427e  evidence/2026-10-27/perseed-cdemit-bisect-a/test/s73677-census-rep1.json
+--- transcript rep1 ---
+    at async transcriptMode (/home/hatch/workspace/worktrees/sim-cdemit-bisect/scripts/test-raidtrace-a-sweep.js:261:31)
+cp: cannot stat 'evidence/2026-10-27/perseed-cdemit-bisect-a/test/s73677-transcript.json': No such file or directory
+CP-FAIL transcript rep1
+--- census rep2 ---
+probe
