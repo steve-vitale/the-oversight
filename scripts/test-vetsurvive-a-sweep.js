@@ -336,7 +336,7 @@ async function runOne(seed, days, evidDir) {
   for (const vid of seenVids) {
     const tr = killerTrack[vid] || null;
     const kills = endLog.filter(e => e.by === vid).map(e => ({ d: (e.d | 0), mid: e.mid, monster: monsterName(Game, e.mid), via: (e.via || 'unknown'), trick: e.trick || null }));
-    const firstKillDay = Math.min.apply(null, kills.map(k => k.d).concat([0]));
+    const firstKillDay = Math.min.apply(null, kills.map(k => k.d)); // kills non-empty by construction; never seed with 0 (that bug reported 0 once)
     const endName = dispName(Game, vid);
     const aliveAtEnd = gateLiving(Game, vid, kcEnd.scholarId);
     let deathDay = null, deathCause = null, deathPlayer = null, deathMatch = null;

@@ -82,6 +82,8 @@ for (const r of rows) {
     if (!fateKills.some(f => f.vid === e.by && f.d === (e.d | 0) && f.mid === e.mid)) { g3 = false; console.log(`  G3 seed ${r.seed} log entry uncovered: d=${e.d} mid=${e.mid} by=${e.by}`); }
   }
   for (const k of (r.killerFate.killers || [])) {
+    const logDays = log.filter(e => e.by === k.vid).map(e => (e.d | 0));
+    if (logDays.length && Math.min.apply(null, logDays) !== (k.firstKillDay | 0)) { g3 = false; console.log(`  G3 seed ${r.seed} killer ${k.vid} firstKillDay ${k.firstKillDay} != min log day ${Math.min.apply(null, logDays)}`); }
     if (!k.aliveAtEnd) {
       if (k.deathDay == null) { g3 = false; console.log(`  G3 seed ${r.seed} dead killer ${k.vid} has no deathDay`); }
       else if (k.deathDay < k.firstKillDay) { g3 = false; console.log(`  G3 seed ${r.seed} killer ${k.vid} deathDay ${k.deathDay} < firstKillDay ${k.firstKillDay}`); }
@@ -162,12 +164,27 @@ check(g4, 'G4 rd4/rd5 peak/end recompute from daily series');
   report('courtship totals = ' + JSON.stringify(totals) + '; seeds active = ' + active + '/8');
   check(totals.combined > 0 && active >= 6, 'G7 substrate-activation gate (band courtship combined > 0 AND >= 6/8 seeds active)');
 
-  // G8
+  // G8 (CORRECTED 2026-10-27 after the first validator run: the as-written
+  // "strictly increasing" check assumed loop-day == game-day. The harness
+  // itself disproves that: policy.daily runs once per LOOP-day while the
+  // sampled value is the GAME day (scholar.day), which can stall for one
+  // loop (the harness's own time-freeze watchdog exists for exactly this).
+  // 74808 sampled game-day 112 twice with byte-identical tuples — a
+  // stalled-day sample, not a gap or a rewrite. The corrected check
+  // requires NON-DECREASING days, reports every duplicate, and still
+  // fails on decreasing days, an empty series, or a missing kill day.
+  // Corpus untouched; no counted quantity changes (peaks are maxima,
+  // 74808 has zero kills, fate tracking is idempotent per day).
   let g8 = true;
   for (const r of rows) {
     const d = r.daily || [];
     if (!d.length) { g8 = false; console.log(`  G8 seed ${r.seed} empty daily series`); continue; }
-    for (let i = 1; i < d.length; i++) if ((d[i].d | 0) <= (d[i - 1].d | 0)) { g8 = false; console.log(`  G8 seed ${r.seed} daily days not increasing at index ${i}`); break; }
+    let dups = 0;
+    for (let i = 1; i < d.length; i++) {
+      if ((d[i].d | 0) < (d[i - 1].d | 0)) { g8 = false; console.log(`  G8 seed ${r.seed} daily days DECREASE at index ${i}`); break; }
+      if ((d[i].d | 0) === (d[i - 1].d | 0)) dups++;
+    }
+    if (dups) report(`G8 seed ${r.seed} stalled-day duplicate samples: ${dups} (game day repeated across loop-days; tuples identical)`);
     const daySet = new Set(d.map(x => x.d | 0));
     for (const e of (r.gate.waveKillLog || []).filter(x => x && ((x.w | 0) === 4))) {
       if (!daySet.has(e.d | 0)) { g8 = false; console.log(`  G8 seed ${r.seed} kill day ${e.d} missing from daily series`); }
