@@ -10,8 +10,20 @@
 //     direct overtime-tier record by fightId;
 //   - direct tier == ratio-inferred tier AND startMax ==
 //     round(constrMax * (1 + 0.25*t_rec)) exactly;
-//   - opening damage (startMax - startHp) == fighterconstruct
-//     opening tbDamage sum for m_0 on that fightId exactly;
+//   - startHp == round((constrHp - openingDamage) *
+//     (1 + 0.25*t_rec)) exactly, where openingDamage is the
+//     fighterconstruct opening tbDamage sum for m_0 on that
+//     fightId. ORDER MATTERS (world-HP rule fa3516cc1, current
+//     master): the fighter is built at the WORLD hp (so
+//     construction hp is BELOW max whenever the world monster
+//     was wounded), opening turns inside startCombat deal
+//     damage FIRST, and the overtime wrapper scales the
+//     POST-OPENING hp after startCombat returns. startMax -
+//     startHp is therefore the SCALED WORLD WOUND plus
+//     opening damage, never opening damage alone — the
+//     first analyzer version used that wrong identity and
+//     failed loudly on all 24 fights, which is what exposed
+//     the correction. See evidence metric review.
 //   - the additive identities tile->end and construction->end
 //     hold per fight (a failed identity is a hard failure);
 //   - in-fight maxHp growth (endMax - startMax) is reported
@@ -85,6 +97,7 @@ function main() {
   const rows = [];
   const gaps = [];
   const fights = [];
+  let sameCallTotal = 0;
   let corpusOk = true;
   const recorderNames = ['raftdraft', 'spawnsrc', 'oldcore', 'w5births', 'defwound', 'nonworldkill', 'tbdmg', 'w4damage', 'fighterconstruct', 'tbovertime'];
   for (const seed of SEEDS) {
@@ -121,7 +134,18 @@ function main() {
     const tierById = new Map();
     for (const s of (tbov.starts || [])) {
       if (s.liveFightPre) continue; // refused call: describes the old live fight, not a new one
-      if (!s.fightId) { gaps.push(`seed ${seed}: tbovertime start with no fightId (arg ${s.arg})`); continue; }
+      if (!s.fightId) {
+        // Same-call start-and-end fights (nonworldkill fightIdSource
+        // 'end-row', wave None): the fight starts AND ends inside
+        // one startCombat call, so no post snapshot exists. These
+        // are explained recorder rows, never unit fights, and
+        // never unexplained gaps — but only when the row itself
+        // carries the same-call signature (endedInCall + null
+        // result + no live fight before the call).
+        if (s.endedInCall && s.resultNull && !s.liveFightPre) { sameCallTotal++; continue; }
+        gaps.push(`seed ${seed}: tbovertime start with no fightId (arg ${s.arg})`);
+        continue;
+      }
       if (tierById.has(s.fightId)) gaps.push(`seed ${seed}: duplicate tbovertime start fightId ${s.fightId}`);
       else tierById.set(s.fightId, s);
     }
@@ -162,8 +186,13 @@ function main() {
         row.tierInf = Math.round((row.startMaxHp / row.constrMaxHp - 1) / 0.25);
         row.predStartMax = Math.round(row.constrMaxHp * (1 + 0.25 * row.tierRec));
         row.tierAgree = (row.tierRec === row.tierInf) && (row.predStartMax === row.startMaxHp) && (row.tierPre === row.tierRec) && (row.tierAtEnd === row.tierRec || row.tierAtEnd === null);
-        row.openingFromStart = row.startMaxHp - row.startHp;
-        row.openingAgree = (row.openingFromStart === row.openingSum);
+        // Correct opening identity (see header): opening turns
+        // run BEFORE the overtime wrapper scales, so the
+        // predicted start HP scales the POST-OPENING hp.
+        row.predStartHp = Math.round((row.constrHp - row.openingSum) * (1 + 0.25 * row.tierRec));
+        row.openingAgree = (row.predStartHp === row.startHp);
+        // Overtime HP gain: scaling applied to post-opening hp.
+        row.overtimeHpGain = row.startHp - (row.constrHp - row.openingSum);
         row.tileToConstr = row.constrHp - row.tileHp;
         row.preFightScaling = row.startMaxHp - row.constrMaxHp;
         row.preFightNet = row.startHp - row.constrHp;
@@ -172,11 +201,11 @@ function main() {
         row.tileToEnd = row.endHp - row.tileHp;
         row.constrToEnd = row.endHp - row.constrHp;
         row.identityTile = (row.tileToEnd === row.tileToConstr + row.preFightNet + row.inFightChange);
-        row.identityConstr = (row.constrToEnd === row.preFightScaling - row.openingFromStart + row.inFightChange);
+        row.identityConstr = (row.constrToEnd === row.overtimeHpGain - row.openingSum + row.inFightChange);
         row.defRange = defs[s.mid] ? defs[s.mid].hp : null;
         row.constrInDefRange = row.defRange ? (row.constrMaxHp >= row.defRange[0] && row.constrMaxHp <= row.defRange[1]) : null;
         if (!row.tierAgree) gaps.push(`seed ${seed} d${s.day} ${s.mid}: tier disagreement rec=${row.tierRec} pre=${row.tierPre} end=${row.tierAtEnd} inf=${row.tierInf} predStartMax=${row.predStartMax} startMax=${row.startMaxHp}`);
-        if (!row.openingAgree) gaps.push(`seed ${seed} d${s.day} ${s.mid}: opening disagreement startMax-startHp=${row.openingFromStart} fcSum=${row.openingSum} events=${row.openingEvents}`);
+        if (!row.openingAgree) gaps.push(`seed ${seed} d${s.day} ${s.mid}: opening disagreement predStartHp=${row.predStartHp} startHp=${row.startHp} fcSum=${row.openingSum} events=${row.openingEvents}`);
         if (!row.identityTile || !row.identityConstr) gaps.push(`seed ${seed} d${s.day} ${s.mid}: sum identity failed`);
         if (row.tierAtEnd !== null && row.tierAtEnd !== row.tierRec) gaps.push(`seed ${seed} d${s.day} ${s.mid}: tier moved during fight pre/post=${row.tierRec} end=${row.tierAtEnd}`);
       } else {
@@ -200,7 +229,8 @@ function main() {
     total, joined, joinedPct,
     scaledFights: scaled.length,
     totalPreFightScaling: agg(f => f.preFightScaling),
-    totalOpeningDamage: agg(f => f.openingFromStart),
+    totalOvertimeHpGain: agg(f => f.overtimeHpGain),
+    totalOpeningDamage: agg(f => f.openingSum),
     totalInFightChange: agg(f => f.inFightChange),
     totalInFightMaxGrowth: agg(f => f.inFightMaxGrowth),
     totalTileToConstr: agg(f => f.tileToConstr),
@@ -208,11 +238,14 @@ function main() {
     totalConstrToEnd: agg(f => f.constrToEnd),
     scalesUpFights: scalesUp.length,
     scalesUpPreFightScaling: scalesUp.reduce((t, f) => t + f.preFightScaling, 0),
-    scalesUpOpeningDamage: scalesUp.reduce((t, f) => t + f.openingFromStart, 0),
+    scalesUpOvertimeHpGain: scalesUp.reduce((t, f) => t + f.overtimeHpGain, 0),
+    scalesUpOpeningDamage: scalesUp.reduce((t, f) => t + f.openingSum, 0),
     scalesUpInFightChange: scalesUp.reduce((t, f) => t + f.inFightChange, 0),
     scalesUpConstrToEnd: scalesUp.reduce((t, f) => t + f.constrToEnd, 0),
     maxGrowthNonzero: fights.filter(f => f.joined && f.inFightMaxGrowth !== 0).length,
     inFightPositive: fights.filter(f => f.joined && f.inFightChange > 0).length,
+    constrEqualsTile: fights.filter(f => f.joined && f.tileToConstr === 0).length,
+    constrBelowMax: fights.filter(f => f.joined && f.constrHp < f.constrMaxHp).length,
   };
   // Parity vs fighterconstruct corpus.
   let parityPass = true;
@@ -238,22 +271,22 @@ function main() {
     label: 'sim-tbovertime-a TB overtime decomposition',
     seeds: SEEDS, corpusOk, parityPass, parityDiffs, substrateOk,
     courtship: { combined: courtTotals, seedsActive: courtSeedsActive },
-    aggregates, gaps, fights, mechanicalPass,
+    aggregates, gaps, fights, sameCallEnded: sameCallTotal, mechanicalPass,
     generated: new Date().toISOString(),
   };
   const args = process.argv.slice(2);
   const outIdx = args.indexOf('--out');
   if (outIdx >= 0 && args[outIdx + 1]) fs.writeFileSync(args[outIdx + 1], JSON.stringify(out, null, 1) + '\n');
   console.log('=== sim-tbovertime-a decomposition ===');
-  console.log(`  fights total=${total} joined=${joined} (${joinedPct.toFixed(1)}%) tierDisagreements=${tierDis} openingDisagreements=${openDis} identityFailures=${identFail} unexplainedGaps=${unexplained}`);
-  console.log(`  aggregates: preFightScaling=${aggregates.totalPreFightScaling} openingDamage=${aggregates.totalOpeningDamage} inFightChange=${aggregates.totalInFightChange} inFightMaxGrowth=${aggregates.totalInFightMaxGrowth} tileToConstr=${aggregates.totalTileToConstr} tileToEnd=${aggregates.totalTileToEnd} constrToEnd=${aggregates.totalConstrToEnd}`);
-  console.log(`  scales-up set (constrToEnd>0): n=${aggregates.scalesUpFights} preFightScaling=${aggregates.scalesUpPreFightScaling} opening=${aggregates.scalesUpOpeningDamage} inFight=${aggregates.scalesUpInFightChange} constrToEnd=${aggregates.scalesUpConstrToEnd}`);
+  console.log(`  fights total=${total} joined=${joined} (${joinedPct.toFixed(1)}%) tierDisagreements=${tierDis} openingDisagreements=${openDis} identityFailures=${identFail} unexplainedGaps=${unexplained} sameCallEndedExplained=${sameCallTotal}`);
+  console.log(`  aggregates: preFightScalingMax=${aggregates.totalPreFightScaling} overtimeHpGain=${aggregates.totalOvertimeHpGain} openingDamage=${aggregates.totalOpeningDamage} inFightChange=${aggregates.totalInFightChange} inFightMaxGrowth=${aggregates.totalInFightMaxGrowth} tileToConstr=${aggregates.totalTileToConstr} tileToEnd=${aggregates.totalTileToEnd} constrToEnd=${aggregates.totalConstrToEnd} constrEqualsTile=${aggregates.constrEqualsTile} constrBelowMax=${aggregates.constrBelowMax}`);
+  console.log(`  scales-up set (constrToEnd>0): n=${aggregates.scalesUpFights} preFightScalingMax=${aggregates.scalesUpPreFightScaling} overtimeHpGain=${aggregates.scalesUpOvertimeHpGain} opening=${aggregates.scalesUpOpeningDamage} inFight=${aggregates.scalesUpInFightChange} constrToEnd=${aggregates.scalesUpConstrToEnd}`);
   console.log(`  scaled fights: ${scaled.length}; inFightMaxGrowth nonzero rows: ${aggregates.maxGrowthNonzero}; inFightChange positive rows: ${aggregates.inFightPositive}`);
   console.log(`  parity: ${parityPass ? 'PASS' : 'FAIL'} ${parityDiffs.join(' | ')}`);
   console.log(`  substrate: combined=${courtTotals} seedsActive=${courtSeedsActive} ok=${substrateOk}`);
   console.log(`  MECHANICAL: ${mechanicalPass ? 'PASS' : 'FAIL'}`);
   for (const f of fights) {
-    console.log(`  [${f.seed} d${f.day} ${f.monster}] tile=${f.tileHp}/${f.tileMaxHp} constr=${f.constrHp}/${f.constrMaxHp} start=${f.startHp}/${f.startMaxHp} end=${f.endHp}/${f.endMaxHp} tierRec=${f.tierRec} tierInf=${f.tierInf} scaling=${f.preFightScaling} opening=${f.openingFromStart} inFight=${f.inFightChange} maxGrowth=${f.inFightMaxGrowth} result=${f.endResult} round=${f.endRound} crewStart=${(f.crewStart || []).length} joined=${f.joined}`);
+    console.log(`  [${f.seed} d${f.day} ${f.monster}] tile=${f.tileHp}/${f.tileMaxHp} constr=${f.constrHp}/${f.constrMaxHp} start=${f.startHp}/${f.startMaxHp} end=${f.endHp}/${f.endMaxHp} tierRec=${f.tierRec} tierInf=${f.tierInf} scaling=${f.preFightScaling} opening=${f.openingSum} inFight=${f.inFightChange} maxGrowth=${f.inFightMaxGrowth} result=${f.endResult} round=${f.endRound} crewStart=${(f.crewStart || []).length} joined=${f.joined}`);
   }
   if (gaps.length) { console.log('  GAPS:'); for (const g of gaps) console.log('    ' + g); }
   if (!mechanicalPass) process.exit(1);
