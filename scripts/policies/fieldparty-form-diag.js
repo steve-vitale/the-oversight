@@ -260,6 +260,32 @@ function installFieldpartyDiag(Game, store) {
           });
         }
       }
+      // CO-DEPARTURE STAMP lens (sim-perceptform-a, additive only):
+      // the leader's own departure record at fight time, read purely.
+      // partners carry their pure nodePos read + same-tile flag so the
+      // analyzer can audit same-outing + same-tile + same-person
+      // without re-deriving anything from the crew list.
+      let stamp = null;
+      try {
+        const cd = Game._coDepart || {};
+        const entry = cd[vid] || null;
+        if (entry) {
+          stamp = {
+            day: (entry.day != null) ? entry.day : null,
+            part: (entry.part != null) ? entry.part : null,
+            task: entry.task || null,
+            partners: (entry.partners || []).map(pid => {
+              const np = nodePos[pid] || null;
+              return {
+                vid: String(pid),
+                node: np ? { nx: np.nx, ny: np.ny } : null,
+                sameTileAsMonster: !!(mTile && np && np.nx === mTile.tx && np.ny === mTile.ty),
+                inCrewRaw: crewRaw.indexOf(pid) >= 0,
+              };
+            }),
+          };
+        }
+      } catch (e) { stamp = null; }
       // Village-wide armed / armored counts (living roster, gear read).
       let vArmed = 0, vArmored10 = 0, vKnown = 0, vVeterans = 0;
       for (const v of roster) {
@@ -292,6 +318,7 @@ function installFieldpartyDiag(Game, store) {
         crewRaw: crewRaw.map(v => (v != null ? String(v) : null)),
         crew: crew,
         tile: tile, tileUnknown: tileUnknown,
+        stamp: stamp,
         villageArmed: vArmed, villageArmored10: vArmored10, villageKnown: vKnown, villageVeterans: vVeterans,
         readiness: readiness, trickKnown: trickKnown,
         engineAllies: (opts && opts.allies != null) ? (opts.allies | 0) : null,
