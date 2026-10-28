@@ -79,10 +79,13 @@ in ledger.js `tableScene` stays as the no-seat path).
 **Per-path minimum seat:**
 - indispensable: FULL only (the galaxy must actually need you)
 - feared / beloved / witness / defiant / assimilated: lesser+
-- relay: lesser+ by deeds OR stage ≥ 3 regardless of scale — the matrix
-  doesn't care about your kingdom; it cares how deep you are. This is
-  the relay's distinctness: the only path qualified by integration
-  depth instead of territory.
+- relay: lesser+ seat AND (stage ≥ 3, OR stage 2 + a relay office
+  held). The prereq itself checks no territory — that is the
+  relay's distinctness, the only path whose prereq is integration
+  depth instead of territory — but the door is only offered on a
+  lesser+ seat, and the lesser seat itself needs regional+ scale
+  and deeds. "Regardless of scale" describes the prereq, not the
+  offered door: a stage-3 village with no seat gets no door.
 
 The pricing beat reads the run aloud — the audit. The table states,
 on the record, what you built and which seats are open. Unearned paths
@@ -240,9 +243,20 @@ The flagship new path. Distinct from the other six: there the System is
 *terrain* (a component you use); here it is the *relationship*. The
 matrix doesn't care about your kingdom — it cares how deep you are.
 
-- **Earned by:** integration stage ≥ 3 (neural), OR stage 2 + holding
-  the relay office. sysBond (System relationship) ≥ 2 (curious).
-  Scale-independent.
+- **Earned by:** integration stage ≥ 3 (neural), OR stage 2 + a relay
+  office held (by the Bearer or an appointed villager — the code
+  checks the office exists, not whose hands hold it) — AND a
+  lesser-or-better seat at the table (the seat floor in
+  `tableEarnedPaths`: no seat, no door, whatever the stage).
+  sysBond (System relationship) does NOT gate the door: it prices
+  the door's standing (stage 3: 40 + 10 per bond; stage 2 + office:
+  25 + 5 per bond) and gates relay ABILITIES inside the arc
+  (relay-sight at bond 2, sanctuary/advocate at 3 — see
+  `relayUnlockCheck`), not entry. A stage-3 door has opened at
+  sysBond 0 in sims (evidence 2026-10-28 sim-sysbond-a). The
+  prereq itself checks no territory, but the seat it rides on
+  does (regional+ scale, deeds) — so "scale-independent" describes
+  the prereq, not the offered door.
 - **Played challenge — the cockpit:** Haven's switchboard becomes the
   instrument. Verbs (comms.js): probe (push a button — discovery or
   backfire), reroute (redirect message flows — efficiency vs honesty),
@@ -422,7 +436,8 @@ correct for an endgame. Known gaps filed in evidence (not solved here):
 waves 4–5 unreachable in sims (scale on-ramp — playtest loop's domain);
 full seat therefore currently aspirational; relay path's stage-3
 qualification is the most reachable route by design (integration is
-earned through play, not territory).
+earned through play, not territory — the door still needs a lesser
+seat, per the per-path minimum above).
 
 ## Overtime, the Network, and THE HOSTS (2026-10-14)
 
