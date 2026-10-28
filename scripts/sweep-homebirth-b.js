@@ -32,6 +32,15 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+// POLICY VARIANT ORDER FIX (homebirth-b, warmoff-v1 was invalid):
+// policies/competent.js reads COMPETENT_WARM ONCE at require time, so
+// the warmoff assignment MUST precede the require — v1 set it after
+// the require and silently re-ran the primary policy under a warmoff
+// label (first 3 seeds byte-identical to primary; killed, deleted,
+// re-run under this fix). The FATAL gates below check env the shell
+// already set, so their position after the requires is harmless.
+const POLICY_EARLY = process.env.POLICY || 'competent';
+if (POLICY_EARLY === 'competent-warmoff') process.env.COMPETENT_WARM = '0';
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { competent } = require('./policies/competent');
 
@@ -40,9 +49,8 @@ if (process.env.COMPETENT_FEAST !== '0') { console.error('FATAL: COMPETENT_FEAST
 if (process.env.SEATDRIVE !== '0') { console.error('FATAL: SEATDRIVE=0 required'); process.exit(2); }
 if (process.env.PLENTYDEPRI !== '0') { console.error('FATAL: PLENTYDEPRI=0 required'); process.exit(2); }
 if (process.env.DEPOSITGATE !== '1') { console.error('FATAL: DEPOSITGATE=1 required'); process.exit(2); }
-const POLICY = process.env.POLICY || 'competent';
+const POLICY = POLICY_EARLY;
 if (POLICY !== 'competent' && POLICY !== 'competent-warmoff') { console.error('FATAL: POLICY must be competent or competent-warmoff'); process.exit(2); }
-if (POLICY === 'competent-warmoff') process.env.COMPETENT_WARM = '0';
 const POLICY_ID = POLICY === 'competent' ? 'competent-nofeast' : 'competent-nofeast-warmoff';
 const SEEDS = (process.env.SEEDS || '10510,10511,10512,10513,10514,10515,10516,10517')
   .split(',').map(s => parseInt(s.trim(), 10)).filter(Boolean);
