@@ -1,0 +1,117 @@
+{
+  "seed": 10400,
+  "setup": {
+    "day": 1,
+    "kcal": 2200,
+    "insideHaven": true,
+    "px": 4,
+    "py": 4,
+    "tileType": "haven",
+    "mx": 4,
+    "my": 4,
+    "plots": [],
+    "tickFields": {
+      "dayTicks": 0
+    }
+  },
+  "grantOk": true,
+  "legA": {
+    "cultResult": false,
+    "cultError": null,
+    "lines": [
+      "Step outside the hall to work the garden. (Cultivate the beds)"
+    ],
+    "gate": {
+      "ok": false,
+      "short": "step outside",
+      "reason": "Step outside the hall to work the garden."
+    },
+    "zeroChange": true,
+    "pre": {
+      "day": 1,
+      "kcal": 2200,
+      "insideHaven": true,
+      "px": 4,
+      "py": 4,
+      "tileType": "haven",
+      "mx": 4,
+      "my": 4,
+      "plots": [],
+      "tickFields": {
+        "dayTicks": 0
+      }
+    },
+    "post": {
+      "day": 1,
+      "kcal": 2200,
+      "insideHaven": true,
+      "px": 4,
+      "py": 4,
+      "tileType": "haven",
+      "mx": 4,
+      "my": 4,
+      "plots": [],
+      "tickFields": {
+        "dayTicks": 0
+      }
+    }
+  },
+  "legA2": {
+    "makeInside": null,
+    "makeInsideError": null,
+    "lines": [
+      "Step outside the hall to work the garden."
+    ],
+    "zeroChange": true
+  },
+  "legB": {
+    "exitResult": true,
+    "exitError": null,
+    "lines": [
+      "You push through the doors into open air. Haven grounds — tents, a fire pit, worn paths. The world is that way."
+    ],
+    "afterExit": {
+      "day": 1,
+      "kcal": 2200,
+      "insideHaven": false,
+      "px": 4,
+      "py": 4,
+      "tileType": "haven",
+      "mx": 4,
+      "my": 5,
+      "plots": [],
+      "tickFields": {
+        "dayTicks": 0
+      }
+    },
+    "gate": {
+      "ok": true
+    }
+  },
+  "legB2": {
+    "makeOutside": "fired",
+    "makeOutsideError": null,
+    "lines": [
+      "You break ground behind the hall — bed 1 of 2, turned and ready. Sow seed to start a crop."
+    ],
+    "plotsBefore": 0,
+    "plotsAfter": 1,
+    "plotsDelta": 1,
+    "kcalBefore": 2200,
+    "kcalAfter": 2080,
+    "kcalDelta": -120
+  },
+  "legB3": {
+    "magicGate": {
+      "ok": false,
+      "why": "No growing bed can take more magic today. Harvest ripe crops or return tomorrow."
+    }
+  },
+  "judgement": {
+    "a0": true,
+    "a1": true,
+    "b1": true,
+    "b2": true,
+    "go": true
+  }
+}
