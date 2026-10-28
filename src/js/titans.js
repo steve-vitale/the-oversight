@@ -152,7 +152,10 @@
       var rankOk4 = ['regional', 'national', 'global'].indexOf(rank) >= 0;
       var rankOk5 = ['national', 'global'].indexOf(rank) >= 0;
       if (wave >= 4 && rankOk4) titanMaybeOmen(cast.herald, day, 0.10);
-      if (wave >= 5 && rankOk5) titanMaybeOmen(cast.apocalypse, day, 0.08);
+      // P2 (eggomen 2026-10-26, landed 2026-10-28): the FINALE's omen needs only regional.
+      // A nielsen cast keeps the national leg — nielsen omens untouched.
+      var rankOkApoc = (cast.apocalypse === 'finale') ? rankOk4 : rankOk5;
+      if (wave >= 5 && rankOkApoc) titanMaybeOmen(cast.apocalypse, day, 0.08);
       // OVERTIME (Steve 2026-10-14: "waiting should have a cost"): a run
       // that keeps the Table waiting gets the OTHER climax too — the
       // apocalypse this run did not cast airs as a rerun. Without it,
