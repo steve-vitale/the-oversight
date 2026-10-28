@@ -1060,12 +1060,23 @@
         try {
           var convos = (v && v.conv) || {};
           for (var cid in convos) {
-            if (convos[cid] && convos[cid].active && (v.roster || []).indexOf(cid) >= 0 && cid !== game.villagerId) { vid = cid; break; }
+            if (!convos[cid] || !convos[cid].active) continue;
+            if ((v.roster || []).indexOf(cid) < 0 || cid === game.villagerId) continue;
+            // LIVENESS (sim-liveness-b 2026-10-28): a dead conversation
+            // partner is not an audience — skip them, don't resolve to them.
+            var _cp = null;
+            try { _cp = game.getPerson ? game.getPerson(cid) : null; } catch (e2) {}
+            if (_cp && _cp.dead) continue;
+            vid = cid; break;
           }
         } catch (e) {}
       }
       var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
-      if (!onRoster) return { ok: false, why: 'A challenge needs someone to challenge — and they have to be here, alive, and one of yours. Talk to them first.' };
+      // LIVENESS (sim-liveness-b 2026-10-28): an explicit dead-flag target
+      // is not "alive", so it refuses with the same audience sentence.
+      var _deadTarget = false;
+      try { var _pp = game.getPerson ? game.getPerson(vid) : null; _deadTarget = !!(_pp && _pp.dead); } catch (e) {}
+      if (!onRoster || _deadTarget) return { ok: false, why: 'A challenge needs someone to challenge — and they have to be here, alive, and one of yours. Talk to them first.' };
       var postDay = _onceADayPostPaymentDay(game, 'war_cry', 'challenge');
       if (postDay !== null && game.state.scholar.challengeDay === postDay)
         return { ok: false, why: 'You already threw down a challenge today. The village is still talking about it — another one just looks desperate.' };
@@ -1078,12 +1089,23 @@
         try {
           var convos = (v && v.conv) || {};
           for (var cid in convos) {
-            if (convos[cid] && convos[cid].active && (v.roster || []).indexOf(cid) >= 0 && cid !== game.villagerId) { vid = cid; break; }
+            if (!convos[cid] || !convos[cid].active) continue;
+            if ((v.roster || []).indexOf(cid) < 0 || cid === game.villagerId) continue;
+            // LIVENESS (sim-liveness-b 2026-10-28): a dead conversation
+            // partner is not an audience — skip them, don't resolve to them.
+            var _cp2 = null;
+            try { _cp2 = game.getPerson ? game.getPerson(cid) : null; } catch (e2) {}
+            if (_cp2 && _cp2.dead) continue;
+            vid = cid; break;
           }
         } catch (e) {}
       }
       var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
-      if (!onRoster) return { ok: false, why: 'Posturing needs an audience — someone whose dispute you are ending. Talk to them first.' };
+      // LIVENESS (sim-liveness-b 2026-10-28): an explicit dead-flag target
+      // is not "alive", so it refuses with the same audience sentence.
+      var _deadTarget2 = false;
+      try { var _pp2 = game.getPerson ? game.getPerson(vid) : null; _deadTarget2 = !!(_pp2 && _pp2.dead); } catch (e) {}
+      if (!onRoster || _deadTarget2) return { ok: false, why: 'Posturing needs an audience — someone whose dispute you are ending. Talk to them first.' };
       var postDayP = _onceADayPostPaymentDay(game, 'intimidating_presence', 'end_it_before');
       if (postDayP !== null && game.state.scholar.postureDay === postDayP)
         return { ok: false, why: 'You already threw your weight around today. Doing it twice makes you the bully, not the legend.' };
@@ -1535,12 +1557,22 @@
         try {
           var convos = (v && v.conv) || {}; // socialite r11 2026-10-10: was the plural key (dead; convoGet stores v.conv) — the active-partner default never found anyone
           for (var cid in convos) {
-            if (convos[cid] && convos[cid].active && (v.roster || []).indexOf(cid) >= 0 && cid !== game.villagerId) { vid = cid; break; }
+            if (!convos[cid] || !convos[cid].active) continue;
+            if ((v.roster || []).indexOf(cid) < 0 || cid === game.villagerId) continue;
+            // LIVENESS (sim-liveness-b 2026-10-28): skip dead partners, mirroring the precheck.
+            var _cp = null;
+            try { _cp = game.getPerson ? game.getPerson(cid) : null; } catch (e2) {}
+            if (_cp && _cp.dead) continue;
+            vid = cid; break;
           }
         } catch (e) {}
       }
       var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
-      if (!onRoster) {
+      // LIVENESS (sim-liveness-b 2026-10-28): mirror the precheck — an
+      // explicit dead-flag target is not "alive" and refuses the same way.
+      var _deadTarget = false;
+      try { var _pp = game.getPerson ? game.getPerson(vid) : null; _deadTarget = !!(_pp && _pp.dead); } catch (e) {}
+      if (!onRoster || _deadTarget) {
         game.say('A challenge needs someone to challenge — and they have to be here, alive, and one of yours. Talk to them first. (Issue Challenge)');
         return false;
       }
@@ -1721,12 +1753,22 @@
         try {
           var convos = (v && v.conv) || {}; // socialite r11 2026-10-10: was the plural key (dead; convoGet stores v.conv) — the active-partner default never found anyone
           for (var cid in convos) {
-            if (convos[cid] && convos[cid].active && (v.roster || []).indexOf(cid) >= 0 && cid !== game.villagerId) { vid = cid; break; }
+            if (!convos[cid] || !convos[cid].active) continue;
+            if ((v.roster || []).indexOf(cid) < 0 || cid === game.villagerId) continue;
+            // LIVENESS (sim-liveness-b 2026-10-28): skip dead partners, mirroring the precheck.
+            var _cp = null;
+            try { _cp = game.getPerson ? game.getPerson(cid) : null; } catch (e2) {}
+            if (_cp && _cp.dead) continue;
+            vid = cid; break;
           }
         } catch (e) {}
       }
       var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
-      if (!onRoster) {
+      // LIVENESS (sim-liveness-b 2026-10-28): mirror the precheck — an
+      // explicit dead-flag target is not "alive" and refuses the same way.
+      var _deadTarget2 = false;
+      try { var _pp2 = game.getPerson ? game.getPerson(vid) : null; _deadTarget2 = !!(_pp2 && _pp2.dead); } catch (e) {}
+      if (!onRoster || _deadTarget2) {
         game.say('Posturing needs an audience — someone whose dispute you are ending. Talk to them first. (End It Before It Starts)');
         return false;
       }
