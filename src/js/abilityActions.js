@@ -761,6 +761,27 @@
     if (ticks > 0 && ((s.dayTicks || 0) + ticks) >= perDay) return s.day + 1;
     return s.day;
   }
+  // CALM SCAN-DEFAULT (sim-calmbeast-b 2026-10-28): the action bar never
+  // passes a target, so the old calm_beast precheck (tbFighter(null))
+  // refused every bar tap. Mirrors war_cry.challenge's pattern: when the
+  // target is null, resolve it by scanning the live fight. The predicate
+  // is exactly the precheck's own eligibility test (alive, kind not
+  // monster / player / villager) — no new eligibility, so monsters stay
+  // uncalmable and the impl's monster refusal still stands. Returns the
+  // fighter's key, or null. (Fled is not excluded here, matching the
+  // explicit-target path, which also attempts on a fled key — a known
+  // edge, same class before and after, not a new behaviour.)
+  function _calmableFighter(game) {
+    var f = game.tbfight;
+    if (!f || f.over || !f.fighters) return null;
+    for (var i = 0; i < f.fighters.length; i++) {
+      var m = f.fighters[i];
+      if (!m || !m.alive) continue;
+      if (m.kind === 'monster' || m.kind === 'player' || m.kind === 'villager') continue;
+      return m.key;
+    }
+    return null;
+  }
   var ABILITY_ACTION_PRECHECKS = {
     'game_sense.read_stance': function (game) {
       var fid = game.tbfight ? game.tbfight.id : null;
@@ -822,9 +843,13 @@
       return { ok: false, why: 'No one adjacent to take it — the stored fury stays stored.' };
     },
     'animal_ken.calm_beast': function (game, target) {
-      // The bar passes no target (self/none actions); the impl needs a live
-      // non-monster fighter key. Refuse before the turn is spent, not after.
-      var m = game.tbFighter ? game.tbFighter(target) : null;
+      // The bar passes no target (self/none actions); the old code looked
+      // up tbFighter(null) and refused every bar tap. With no target,
+      // scan the live fight for someone calmable (challenge pattern);
+      // an explicit target keeps the old key lookup untouched.
+      // Refuse before the turn is spent, not after.
+      var key = target || _calmableFighter(game);
+      var m = key && game.tbFighter ? game.tbFighter(key) : null;
       if (!m || !m.alive || m.kind === 'monster' || m.kind === 'player' || m.kind === 'villager')
         return { ok: false, why: 'Nothing here to calm.' };
       return { ok: true };
@@ -1321,7 +1346,13 @@
     },
 
     'animal_ken.calm_beast': function (game, target) {
-      var m = game.tbFighter(target);
+      // Scan-default (sim-calmbeast-b): a bar tap carries no target, so
+      // resolve one from the live fight (challenge pattern); an explicit
+      // target keeps the old lookup. Without a target AND without a
+      // calmable fighter, the precheck above normally refuses first —
+      // this is the defensive echo of that refusal, not a new path.
+      var key = target || _calmableFighter(game);
+      var m = key ? game.tbFighter(key) : null;
       if (!m) {
         game.say('Nothing here to calm. (Calm)');
         return false;
