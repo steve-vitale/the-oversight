@@ -969,6 +969,55 @@
       if (s.diveDayTiles && s.diveDayTiles[key]) return { ok: false, why: 'Already worked this water today.' };
       return { ok: true };
     },
+    // ---- REFUSALPRECHECK 2026-10-27 (sim-refusalprecheck-b): the three
+    // post-payment refusals now refuse BEFORE payment, like the five
+    // above. Each mirrors its impl's WORLD-STATE condition exactly
+    // (audience resolution, kill record) — code, not narration: no
+    // liveness check, no target-type validation for trophy mark.
+    // Deliberately NOT prechecked: the once-a-day flags. The impl
+    // checks them against the POST-payment day, so a boundary tap
+    // (payment rolls the day) is that new day's dare/posture and
+    // succeeds — a pre-payment flag===day check would refuse a tap
+    // the impl accepts. Once-a-day stays a post-payment refusal
+    // (pinned by test-refusalprecheck-b.js R13/R14). The why strings
+    // reuse the impls' refusal sentences so the narrated refusal is
+    // unchanged; useAbility appends ' (action name)' as usual.
+    'war_cry.challenge': function (game, target) {
+      var v = game.state.village;
+      var vid = target;
+      if (!vid) {
+        try {
+          var convos = (v && v.conv) || {};
+          for (var cid in convos) {
+            if (convos[cid] && convos[cid].active && (v.roster || []).indexOf(cid) >= 0 && cid !== game.villagerId) { vid = cid; break; }
+          }
+        } catch (e) {}
+      }
+      var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
+      if (!onRoster) return { ok: false, why: 'A challenge needs someone to challenge — and they have to be here, alive, and one of yours. Talk to them first.' };
+      return { ok: true };
+    },
+    'intimidating_presence.end_it_before': function (game, target) {
+      var v = game.state.village;
+      var vid = target;
+      if (!vid) {
+        try {
+          var convos = (v && v.conv) || {};
+          for (var cid in convos) {
+            if (convos[cid] && convos[cid].active && (v.roster || []).indexOf(cid) >= 0 && cid !== game.villagerId) { vid = cid; break; }
+          }
+        } catch (e) {}
+      }
+      var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
+      if (!onRoster) return { ok: false, why: 'Posturing needs an audience — someone whose dispute you are ending. Talk to them first.' };
+      return { ok: true };
+    },
+    'trophy_room.mark': function (game, target) {
+      var kills = game.state.villageSlain || {};
+      var types = Object.keys(kills).filter(function (k) { return kills[k] > 0; });
+      if (!types.length) return { ok: false, why: 'Trophy Room: no kills recorded yet — hunt something first, then mark it.' };
+      return { ok: true };
+    },
   };
   // _graveRobberCorpse: nearest unburied corpse in reach (same node,
   // adjacent cell) — the same reach rule lootCorpse enforces. Shared by the
