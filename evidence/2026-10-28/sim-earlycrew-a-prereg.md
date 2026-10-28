@@ -202,6 +202,33 @@ be RUN where its inputs fit, and any verdict — including an
 invalid/quirky one — will be reported honestly, not hidden
 and not faked into a census artifact.
 
+## Amendment (BEFORE any judged sweep — Steve ruling, not results)
+
+2026-10-28 12:48 CDT, after this prereg's first commit and before
+any judged run: Steve ruled the PERCEPTION LAW — villagers know
+who is around only through their own senses (seeing someone in
+the same place, hearing a shout, following someone they have
+seen); no global roster or "who is around" list fed into a
+decision; the field-feed fix stays reverted; list-feed arms stop.
+
+Consequence for this arm, applied before judging: the prereg's
+tile-pair preference (scanning state.village.nodePos to choose
+the pair) is REMOVED. That scan is exactly a global "who is
+around" list feeding a decision, and it does not survive the
+ruling. The policy reverts to trust-descending pair selection
+(the scholar sends two people out together — an in-person
+leadership verb, not a map scan). The TILE lens survives as
+MEASUREMENT only: the recorder reads nodePos for the census
+after the fight, never to decide anything in the game. The
+question itself is now perception-framed: a crew-mate standing
+on the tile IS seen, so a from-start join for that mate would be
+perception-consistent — which makes the measured from-start 0
+(if it holds) a cleaner finding, not a weaker one: the gap is a
+missing perception-based join rule, not a missing list. No
+threshold, guard, floor, or judged-set definition changes with
+this amendment; ecNodePairs counts 0 throughout (the key is
+collected but never incremented) and is reported as such.
+
 ## Commit discipline
 
 Policy file is default-OFF (EARLYCREW=1 only). A GO verdict
