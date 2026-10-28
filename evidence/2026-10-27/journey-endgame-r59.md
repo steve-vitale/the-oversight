@@ -383,8 +383,38 @@ was built to produce.
   not a crash; verdicts identical on re-run after rebase (see
   landing record below).
 - CHECK-QUICK (pre-merge, in the worktree, post-rebase):
-  [TO FILL after rebase: passed/failed, standing profile
-  comparison.]
+  278 passed, 9 failed in 512s — same totals as r56/r57/r58's
+  standing profile (278/9). The 9 are the current base's known
+  pre-existing set: hide-discovery, measurement
+  comparison/proof-update/workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof, sw-audio-cache,
+  establishment-r20-fixes (next-day voice). Set shift vs r58,
+  explained, not a regression: the parity-20261014 gear failure
+  is GONE on this base and sw-audio-cache is new — both base
+  changes documented in the 2026-10-27 memory log (scale r46
+  note). This run changed zero src/js, so none of the 9 is
+  attributable to it.
+
+## Landing record
+
+- Rebase onto master 3264dbb80 (journey-landing r63) clean: 4
+  commits replayed (r58 evidence ×2, r58 ONTOLOGY recovery, r59
+  evidence + instruments), worktree clean after, no conflicts.
+- Analyzer identical post-rebase (same verdict lines, exit 1 =
+  verdicts, not a crash).
+- Check-quick post-rebase: 278 passed, 9 failed (see above).
+- Safe-commit index clobber hit the r59 commit (staged-deletion
+  form); repaired via HEAD-blob cacheinfo, verified status
+  empty + diff HEAD empty + hash-object matches before rebase.
+- One transient EPERM flap on a main-tree git status refresh
+  (journey2-endgame index.lock write denied, no lock file left
+  behind); retry seconds later was clean — no ref surgery, no
+  force, nothing lost.
+- Merge: ff-only into master after this note-fill commit; the
+  merge sha is recorded in this run's memory-log entry and the
+  run report (the note header's "merged locally, pending ship"
+  stands; no bump, no push, no live check — the ship loop owns
+  those).
 
 ## Telemetry deviation check (2026-10-27)
 
