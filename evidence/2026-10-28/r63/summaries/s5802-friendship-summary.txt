@@ -1,0 +1,264 @@
+# SURFACE+SEEDED — seed 5802 (141d, 7 alive)
+
+npcPairs=59 deep2=25 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=277 closeReadsServed=27 grievanceServes=45 othersSteered=21
+COND-TP: firstDeep2Day=30 lateClose=182 lateTP=157 lateNull=0 condRate=86.3% pooledTP=159/199 pooledRate=79.9% grievReadsByWhy={"grievance":11,"vgrievance":48}
+FUNNEL (natural): convos=414 subject=414 offered=373 picked=256 classes={"subject-no-offer":41,"picked-others":256,"offered-not-picked":117}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=41 rate=9.9% offered=373 mainOffered=7 subjectOffered=370 picked=256 latePicks=90 latePicksMain=0 latePicksSubject=90
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Christian / Desmond — "Petra ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Hassan / Christian / Ruby — "Desmond talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Hassan / Ruby — "that stray dog — the one that bit two people — lets Jude touch it."
+REOFFER: offers=373 picks=266 latePicks=90 missedChangedNotOffered=7
+WRAPSERVE: convos=59 matcherHits=45 matcherServes=45 classes={"grievance-line":45,"deflection":3,"other":11}
+FUNNEL-PROBE (subject-no-offer turns): turns=134 menuProblem=102 pickProblem=32
+INVITE (r63 wrap): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":6,"accepts":6,"acceptRate":1,"vetoes":{},"chanceMin":37.4,"chanceMax":86.8,"chanceMean":65} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=2
+  INVITE-DEC d8 party: Ananya -> Petra chance=37.4 accept=true veto=- inputs={"temp":"steady","goal":"legacy","mood":"grieving","fear":4,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31","grieving mood (-10)"]
+  INVITE-DEC d9 party: Ananya -> Zhanar chance=54.6 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":12,"trust":49,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 49"]
+  INVITE-DEC d15 party: Ananya -> Ines chance=86.8 accept=true veto=- inputs={"temp":"warm","goal":"protect","mood":"steady","fear":12,"trust":42,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)","warm temperament (+15)","protect goal (+15)"]
+  INVITE-DEC d31 party: Ananya -> Desmond chance=71.6 accept=true veto=- inputs={"temp":"restless","goal":"prove","mood":"steady","fear":4,"trust":54,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 54","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d56 party: Ananya -> Hassan chance=73.2 accept=true veto=- inputs={"temp":"steady","goal":"family","mood":"grieving","fear":13,"trust":83,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d65 party: Petra -> Jude chance=66.4 accept=true veto=- inputs={"temp":"restless","goal":"record","mood":"grieving","fear":16,"trust":91,"bond":{"v":94,"depth":3},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","sick (-20)","restless temperament (+10)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":58,"depth":3},{"day":33,"v":58,"depth":3},{"day":34,"v":62,"depth":3},{"day":35,"v":62,"depth":3},{"day":36,"v":62,"depth":3},{"day":37,"v":66,"depth":3},{"day":38,"v":66,"depth":3},{"day":39,"v":70,"depth":3},{"day":40,"v":74,"depth":3}] class=rise
+GOSSIP: totalPicks=220 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=46 31-60=61 61-90=59 91-120=55 121+=35 naturalPicks=256 seededPicks=21 gossipPicks=220
+SEEDED: {"pair":{"a":"desmond_clarke","b":"gen_02lrm8p","aName":"Desmond","bName":"Jude"},"day":26,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":58,"depth":3},{"day":33,"v":58,"depth":3},{"day":34,"v":62,"depth":3},{"day":35,"v":62,"depth":3},{"day":36,"v":62,"depth":3},{"day":37,"v":66,"depth":3},{"day":38,"v":66,"depth":3},{"day":39,"v":70,"depth":3},{"day":40,"v":74,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":34,"why":"vgrievance"},"serveWithin30":true,"serves":48,"servesAll":[{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":95,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":101,"why":"vgrievance"},{"day":102,"why":"vgrievance"},{"day":107,"why":"vgrievance"},{"day":113,"why":"vgrievance"},{"day":124,"why":"vgrievance"},{"day":129,"why":"vgrievance"},{"day":132,"why":"vgrievance"},{"day":134,"why":"vgrievance"},{"day":137,"why":"vgrievance"}],"effect":true}
+  FRIEND d40: Stanley <> Paola — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d40: Jude <> Paola — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d40: Jude <> Zhanar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Zhanar <> Paola — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d40: Jude <> Ines — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Zhanar <> Ines — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Jude <> Hassan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Paola <> Hassan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d30: Desmond <> Jude — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Desmond <> Paola — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d35: Zhanar <> Hassan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Desmond <> Zhanar — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d60: Jude <> Stanley — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d105: Jude <> Christian — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d40: Jude <> Petra — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d110: Jude <> Ruby — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d50: Paola <> Petra — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d130: Christian <> Zhanar — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d85: Hassan <> Ines — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d135: Desmond <> Ines — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d120: Desmond <> Hassan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d95: Christian <> Ruby — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d115: Ines <> Ruby — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d65: Desmond <> Ananya — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Ananya <> Ines — maxDepth 2, final 2 (v=58), dropped 0
+  CLOSE-READ d19: Zhanar about Jude — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Ines about Jude — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Ines about Jude — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Jude about Desmond — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Zhanar about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Ines about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Paola about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Jude about Desmond — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Jude about Desmond — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Desmond about Jude — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Paola about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Ines about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Petra about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Zhanar about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Zhanar about Jude — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Stanley about Paola — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Hassan about Zhanar — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Paola about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Ines about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Petra about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Zhanar about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Ines about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Zhanar about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Paola about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Ines about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Petra about Paola — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Zhanar about Hassan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Petra about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Petra about Paola — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Stanley about Paola — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Ines about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Zhanar about Hassan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Christian about Paola — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Paola about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Zhanar about Hassan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Christian about Paola — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Stanley about Paola — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Paola about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Stanley about Paola — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Paola about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Hassan about Zhanar — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Ines about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Jude about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Zhanar about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Stanley about Paola — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Paola about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Ines about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Paola about Jude — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Stanley about Paola — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Ines about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Ines about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Christian about Paola — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Christian about Ruby — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Ines about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Ines about Jude — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Petra about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Ruby about Christian — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d59: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ines about Jude — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Hassan about Zhanar — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Jude about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Christian about Ruby — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Christian about Ruby — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d64: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Ruby about Christian — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d66: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Ruby about Jude — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d73: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Ruby about Christian — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d79: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Christian about Ruby — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d80: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Ruby about Christian — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d83: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Ruby about Christian — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Christian about Ruby — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ruby about Christian — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Christian about Jude — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ruby about Christian — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ruby about Christian — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Hassan about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ines about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ruby about Christian — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Jude about Zhanar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Zhanar about Jude — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d7: Paola about Hassan (why=grievance)
+  GRIEV-READ d9: Stanley about Jude (why=grievance)
+  GRIEV-READ d10: Paola about Hassan (why=grievance)
+  GRIEV-READ d11: Hassan about Paola (why=grievance)
+  GRIEV-READ d11: Stanley about Jude (why=grievance)
+  GRIEV-READ d13: Stanley about Jude (why=grievance)
+  KNACK d19 Christian: "Petra ate something last month that should've killed them. They're fine."
+  KNACK d21 Hassan: "Desmond talks to the garden. The garden listens. I've seen it."
+  KNACK d21 Hassan: "that stray dog — the one that bit two people — lets Jude touch it."
+  KNACK d27 Ruby: "that stray dog — the one that bit two people — lets Jude touch it."
+  KNACK d28 Desmond: "that stray dog — the one that bit two people — lets Stanley touch it."
+  KNACK d28 Desmond: "Petra ate something last month that should've killed them. They're fine."
+  KNACK d32 Christian: "Desmond talks to the garden. The garden listens. I've seen it."
+  KNACK d42 Paola: "Ines ate something last month that should've killed them. They're fine."
+
+deathCauses: {"sickness":2,"a wound that wouldn't close":1,"contest":1}

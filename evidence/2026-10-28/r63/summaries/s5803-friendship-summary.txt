@@ -1,0 +1,236 @@
+# SURFACE+SEEDED — seed 5803 (142d, 5 alive)
+
+npcPairs=77 deep2=18 cracks=0 vCracks=0 friendGriev=1 stateGriev=7 stateFriend=1 stateVCrack=0 t2picks=298 closeReadsServed=21 grievanceServes=7 othersSteered=30
+COND-TP: firstDeep2Day=25 lateClose=153 lateTP=130 lateNull=0 condRate=85.0% pooledTP=130/161 pooledRate=80.7% grievReadsByWhy={"grievance":39,"vgrievance":6}
+FUNNEL (natural): convos=414 subject=382 offered=329 picked=268 classes={"offered-not-picked":61,"subject-no-offer":53,"picked-others":268,"no-subject-no-ans":32}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=53 rate=12.8% offered=329 mainOffered=17 subjectOffered=318 picked=268 latePicks=97 latePicksMain=7 latePicksSubject=90
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Omar / Miguel — "Good question." "Nikolai talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Ivy / Miguel — "Aki sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=327 picks=284 latePicks=96 missedChangedNotOffered=0
+WRAPSERVE: convos=45 matcherHits=7 matcherServes=7 classes={"grievance-line":7,"deflection":4,"other":34}
+FUNNEL-PROBE (subject-no-offer turns): turns=169 menuProblem=125 pickProblem=44
+INVITE (r63 wrap): lure={"n":4,"accepts":2,"acceptRate":0.5,"vetoes":{},"chanceMin":35,"chanceMax":57,"chanceMean":40.5} party={"n":18,"accepts":9,"acceptRate":0.5,"vetoes":{},"chanceMin":32,"chanceMax":71.8,"chanceMean":53.3} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+  INVITE-DEC d6 lure: Aki -> Omar chance=35 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d7 lure: Aki -> Omar chance=35 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d8 party: Eli -> Deborah chance=51.400000000000006 accept=true veto=- inputs={"temp":"sardonic","goal":"remember","mood":"steady","fear":4,"trust":41,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 41"]
+  INVITE-DEC d8 party: Eli -> Arturo chance=63.6 accept=true veto=- inputs={"temp":"sardonic","goal":"protect","mood":"steady","fear":4,"trust":34,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 34","protect goal (+15)"]
+  INVITE-DEC d8 party: Eli -> Omar chance=32 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":4,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30","wants out (-15)"]
+  INVITE-DEC d8 lure: Aki -> Omar chance=35 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d10 lure: Ivy -> Howard chance=57 accept=true veto=- inputs={"temp":"dry","goal":"lead","mood":"hungry","fear":0,"affinity":8} reasons=["relationship with inviter (+2)","wants to lead (+10)"]
+  INVITE-DEC d15 party: Eli -> Yevgenia chance=71.8 accept=true veto=- inputs={"temp":"anxious","goal":"feed","mood":"hungry","fear":0,"trust":42,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)","feed goal (+15)"]
+  INVITE-DEC d24 party: Eli -> Devon chance=54.8 accept=false veto=- inputs={"temp":"anxious","goal":"family","mood":"grieving","fear":0,"trust":62,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 62","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d25 party: Eli -> Devon chance=55.2 accept=true veto=- inputs={"temp":"anxious","goal":"family","mood":"grieving","fear":4,"trust":63,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 63","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Eli -> Nikolai chance=36 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"steady","fear":0,"trust":40,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d31 party: Eli -> Tanisha chance=66.6 accept=true veto=- inputs={"temp":"earnest","goal":"protect","mood":"hungry","fear":12,"trust":29,"bond":null,"partySize":4} reasons=["trust 29","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d55 party: Eli -> Ivy chance=43.6 accept=false veto=- inputs={"temp":"cautious","goal":"understand","mood":"grieving","fear":4,"trust":59,"bond":{"v":17,"depth":0},"partySize":4} reasons=["trust 59","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d57 party: Eli -> Ivy chance=45.2 accept=true veto=- inputs={"temp":"cautious","goal":"understand","mood":"grieving","fear":40,"trust":63,"bond":{"v":19,"depth":0},"partySize":4} reasons=["trust 63","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d82 party: Eli -> Nikolai chance=60.8 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"steady","fear":0,"trust":77,"bond":{"v":66,"depth":2},"partySize":4} reasons=["trust 77","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d82 party: Eli -> Miguel chance=61.2 accept=true veto=- inputs={"temp":"intense","goal":"answers","mood":"steady","fear":0,"trust":53,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 53","a big party is safer (+5)"]
+  INVITE-DEC d89 party: Nikolai -> Omar chance=42.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":12,"trust":69,"bond":null,"partySize":3} reasons=["trust 69","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d90 party: Nikolai -> Omar chance=42.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":4,"trust":69,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d92 party: Nikolai -> Omar chance=62.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"cheerful","fear":4,"trust":69,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)","wants out (-15)","cheerful mood (+10)"]
+  INVITE-DEC d93 party: Nikolai -> Omar chance=52.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":0,"trust":69,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d121 party: Omar -> Salvador chance=51.6 accept=false veto=- inputs={"temp":"stoic","goal":"remember","mood":"steady","fear":0,"trust":29,"bond":null,"partySize":3} reasons=["trust 29","a big party is safer (+5)"]
+  INVITE-DEC d122 party: Omar -> Salvador chance=66 accept=true veto=- inputs={"temp":"stoic","goal":"remember","mood":"cheerful","fear":11,"trust":40,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","cheerful mood (+10)"]
+SEEDED-DAILY: [{"day":26,"v":42,"depth":2},{"day":27,"v":46,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":50,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":60,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":66,"depth":3},{"day":34,"v":70,"depth":3},{"day":35,"v":74,"depth":3},{"day":36,"v":74,"depth":3},{"day":37,"v":74,"depth":3},{"day":38,"v":74,"depth":3},{"day":39,"v":74,"depth":3}] class=rise
+GOSSIP: totalPicks=186 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=45 31-60=61 61-90=65 91-120=59 121+=38 naturalPicks=268 seededPicks=30 gossipPicks=186
+SEEDED: {"pair":{"a":"devon_okafor","b":"gen_z7afy52","aName":"Devon","bName":"Arturo"},"day":25,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":26,"v":42,"depth":2},{"day":27,"v":46,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":50,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":60,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":66,"depth":3},{"day":34,"v":70,"depth":3},{"day":35,"v":74,"depth":3},{"day":36,"v":74,"depth":3},{"day":37,"v":74,"depth":3},{"day":38,"v":74,"depth":3},{"day":39,"v":74,"depth":3}],"crackTraceClass":"rise","vAt7":54,"depthAt7":3,"vDrop":-4,"depthDrop":-1,"crack7":false,"firstServe":{"day":49,"why":"vgrievance"},"serveWithin30":true,"serves":6,"servesAll":[{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Arturo <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Devon <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Arturo <> Hassan — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d25: Devon <> Arturo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Hassan <> Ivy — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d115: Aki <> Devon — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d95: Devon <> Nikolai — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d95: Aki <> Ivy — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d70: Tanisha <> Ivy — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d95: Ivy <> Nikolai — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d100: Ivy <> Miguel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Eli <> Ivy — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d90: Eli <> Arturo — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d90: Devon <> Eli — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Eli <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Aki <> Eli — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d90: Tanisha <> Eli — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d95: Eli <> Nikolai — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND-GRIEV d25: Devon vs Arturo (ambushed) depth 2 v 50 -> 54
+  CLOSE-READ d16: Deborah about Arturo — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Yevgenia about Deborah — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Yevgenia about Devon — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Arturo about Devon — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Yevgenia about Devon — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Arturo about Devon — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Arturo about Devon — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Arturo about Devon — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Arturo about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d26: Ivy about Arturo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Arturo about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d28: Ivy about Arturo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Ivy about Arturo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Arturo about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Arturo about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Arturo about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Arturo about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Hassan about Arturo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Arturo about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Hassan about Arturo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Nikolai about Arturo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Nikolai about Arturo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Ivy about Arturo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Aki about Arturo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Devon about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Hassan about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Devon about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Ivy about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Devon about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Devon about Ivy — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Tanisha about Ivy — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Tanisha about Ivy — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Tanisha about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Tanisha about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Tanisha about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Tanisha about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Tanisha about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Aki about Devon — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Tanisha about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Aki about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Aki about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Tanisha about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Tanisha about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Aki about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Tanisha about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Aki about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d97: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Miguel about Ivy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Miguel about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Miguel about Ivy — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Miguel about Ivy — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ivy about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Miguel about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Devon about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d26 (betrayal): Devon vs Arturo (ambushed) depth 2 v 50 -> 54
+  GRIEV-READ d5: Howard about Omar (why=grievance)
+  GRIEV-READ d7: Omar about Howard (why=grievance)
+  GRIEV-READ d7: Devon about Hassan (why=grievance)
+  GRIEV-READ d21: Devon about Hassan (why=grievance)
+  GRIEV-READ d25: Devon about Hassan (why=grievance)
+  GRIEV-READ d26: Devon about Hassan (why=grievance)
+  KNACK d15 Ivy: "You want to know about that? Okay." "Omar talks to the garden. The garden listens. I've seen it."
+  KNACK d15 Ivy: "Deborah ate something last month that should've killed them. They're fine."
+  KNACK d20 Yevgenia: "Good question." "Ivy talks to the garden. The garden listens. I've seen it."
+  KNACK d29 Nikolai: "You want to know about that? Okay." "Ivy talks to the garden. The garden listens. I've seen it."
+  KNACK d38 Ivy: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Devon touch it. I mean it."
+  KNACK d43 Hassan: "You want to know about that? Okay." "Nikolai talks to the garden. The garden listens. I've seen it."
+  KNACK d50 Hassan: "Huh. Let me think about that." "Tanisha sees in the dark. Not well — but better than you. Better than me."
+  KNACK d50 Arturo: "that stray dog — the one that bit two people — lets Hassan touch it."
+
+deathCauses: {"ambush":1,"sickness":2,"combat":1,"a wound that wouldn't close":1,"monster":3,"alien":1,"the arena":2}

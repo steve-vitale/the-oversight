@@ -1,0 +1,360 @@
+# SURFACE+SEEDED — seed 5804 (142d, 6 alive)
+
+npcPairs=91 deep2=19 cracks=0 vCracks=0 friendGriev=0 stateGriev=9 stateFriend=0 stateVCrack=0 t2picks=334 closeReadsServed=31 grievanceServes=9 othersSteered=29
+COND-TP: firstDeep2Day=20 lateClose=280 lateTP=241 lateNull=0 condRate=86.1% pooledTP=242/282 pooledRate=85.8% grievReadsByWhy={"grievance":8,"vgrievance":8}
+FUNNEL (natural): convos=414 subject=404 offered=370 picked=305 classes={"subject-no-offer":34,"no-subject-no-ans":10,"offered-not-picked":65,"picked-others":305}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=34 rate=8.2% offered=370 mainOffered=0 subjectOffered=370 picked=305 latePicks=114 latePicksMain=0 latePicksSubject=114
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Sofia / Olivia — "that stray dog — the one that bit two people — lets Sam touch it."
+  KNACK-CIRCULATION: Sam / Sofia — "Olivia ate something last month that should've killed them. They're fine."
+REOFFER: offers=364 picks=318 latePicks=110 missedChangedNotOffered=3
+WRAPSERVE: convos=16 matcherHits=9 matcherServes=9 classes={"grievance-line":9,"deflection":1,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=119 menuProblem=102 pickProblem=17
+INVITE (r63 wrap): lure={"n":5,"accepts":3,"acceptRate":0.6,"vetoes":{},"chanceMin":25,"chanceMax":70,"chanceMean":34} party={"n":21,"accepts":11,"acceptRate":0.5238095238095238,"vetoes":{},"chanceMin":5,"chanceMax":92.8,"chanceMean":43.2} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+  INVITE-DEC d8 party: Austin -> Caroline chance=69.2 accept=true veto=- inputs={"temp":"gentle","goal":"belong","mood":"steady","fear":13,"trust":48,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 48","belong goal (+15)"]
+  INVITE-DEC d8 party: Austin -> Nadia chance=46 accept=false veto=- inputs={"temp":"warm","goal":"prove","mood":"steady","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 40","sick (-20)","warm temperament (+15)"]
+  INVITE-DEC d9 party: Austin -> Nino chance=33.8 accept=true veto=- inputs={"temp":"prickly","goal":"heal","mood":"steady","fear":0,"trust":47,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 47","prickly temperament (-20)"]
+  INVITE-DEC d9 lure: Khe -> Nino chance=25 accept=false veto=- inputs={"temp":"prickly","goal":"heal","mood":"hungry","fear":4,"affinity":0} reasons=["prickly temperament (-20)"]
+  INVITE-DEC d10 lure: Khe -> Nino chance=25 accept=false veto=- inputs={"temp":"prickly","goal":"heal","mood":"hungry","fear":0,"affinity":0} reasons=["prickly temperament (-20)"]
+  INVITE-DEC d11 lure: Khe -> Nino chance=25 accept=true veto=- inputs={"temp":"prickly","goal":"heal","mood":"hungry","fear":4,"affinity":0} reasons=["prickly temperament (-20)"]
+  INVITE-DEC d12 lure: Khe -> Nino chance=25 accept=true veto=- inputs={"temp":"prickly","goal":"heal","mood":"hungry","fear":0,"affinity":0} reasons=["prickly temperament (-20)"]
+  INVITE-DEC d13 party: Austin -> Ava chance=41 accept=false veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":5,"trust":40,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 40","grieving mood (-10)"]
+  INVITE-DEC d13 party: Austin -> Sofia chance=28.6 accept=false veto=- inputs={"temp":"cautious","goal":"survive","mood":"grieving","fear":5,"trust":34,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 34","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d14 party: Austin -> Nadia chance=36.400000000000006 accept=false veto=- inputs={"temp":"warm","goal":"prove","mood":"grieving","fear":0,"trust":41,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 41","sick (-20)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Austin -> Nadia chance=46 accept=true veto=- inputs={"temp":"warm","goal":"prove","mood":"cold","fear":4,"trust":40,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 40","sick (-20)","warm temperament (+15)"]
+  INVITE-DEC d15 party: Austin -> Cooper chance=56.400000000000006 accept=true veto=- inputs={"temp":"intense","goal":"home","mood":"steady","fear":4,"trust":41,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 41","a big party is safer (+5)"]
+  INVITE-DEC d18 party: Austin -> Sofia chance=35.2 accept=false veto=- inputs={"temp":"cautious","goal":"survive","mood":"grieving","fear":1,"trust":38,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 38","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d19 party: Austin -> Sam chance=64.6 accept=true veto=- inputs={"temp":"restless","goal":"feed","mood":"grieving","fear":4,"trust":24,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 24","a big party is safer (+5)","restless temperament (+10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d25 lure: Willie -> Caroline chance=70 accept=true veto=- inputs={"temp":"gentle","goal":"belong","mood":"hungry","fear":4,"affinity":60} reasons=["relationship with inviter (+15)","belong goal (+10)"]
+  INVITE-DEC d26 party: Austin -> Sofia chance=16.400000000000006 accept=true veto=- inputs={"temp":"cautious","goal":"survive","mood":"grieving","fear":9,"trust":41,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 41","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Austin -> Ava chance=37.2 accept=false veto=- inputs={"temp":"gentle","goal":"family","mood":"steady","fear":4,"trust":43,"bond":{"v":5,"depth":0},"partySize":4} reasons=["trust 43","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d32 party: Austin -> Dale chance=49.6 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":0,"trust":24,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 24","a big party is safer (+5)"]
+  INVITE-DEC d77 party: Austin -> Olivia chance=64.2 accept=false veto=- inputs={"temp":"warm","goal":"joy","mood":"steady","fear":4,"trust":23,"bond":null,"partySize":3} reasons=["trust 23","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d78 party: Austin -> Olivia chance=68.2 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"steady","fear":0,"trust":33,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 33","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d94 party: Austin -> Bakhyt chance=28.799999999999997 accept=false veto=- inputs={"temp":"withdrawn","goal":"family","mood":"steady","fear":0,"trust":22,"bond":null,"partySize":4} reasons=["trust 22","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d97 party: Austin -> Bakhyt chance=33.2 accept=true veto=- inputs={"temp":"withdrawn","goal":"family","mood":"steady","fear":12,"trust":33,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 33","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d127 party: Austin -> Zulfadli chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"grieving","fear":12,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d130 party: Austin -> Zahra chance=92.8 accept=true veto=- inputs={"temp":"bold","goal":"protect","mood":"steady","fear":12,"trust":57,"bond":{"v":10,"depth":0},"partySize":4} reasons=["trust 57","a big party is safer (+5)","bold temperament (+15)","protect goal (+15)"]
+  INVITE-DEC d135 party: Sam -> Zulfadli chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"grieving","fear":5,"trust":28,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 28","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d136 party: Sam -> Jawad chance=50.400000000000006 accept=true veto=- inputs={"temp":"sardonic","goal":"remember","mood":"grieving","fear":4,"trust":51,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 51","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":19,"v":44,"depth":3},{"day":20,"v":48,"depth":3},{"day":21,"v":48,"depth":3},{"day":22,"v":52,"depth":3},{"day":23,"v":56,"depth":3},{"day":24,"v":60,"depth":3},{"day":25,"v":64,"depth":3},{"day":26,"v":64,"depth":3},{"day":27,"v":64,"depth":3},{"day":28,"v":64,"depth":3},{"day":29,"v":64,"depth":3},{"day":30,"v":64,"depth":3},{"day":31,"v":64,"depth":3},{"day":32,"v":64,"depth":3}] class=rise
+GOSSIP: totalPicks=131 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=38 31-60=77 61-90=76 91-120=72 121+=42 naturalPicks=305 seededPicks=29 gossipPicks=131
+SEEDED: {"pair":{"a":"gen_22hphyq","b":"gen_jz0jwpn","aName":"Willie","bName":"Caroline"},"day":18,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":19,"v":44,"depth":3},{"day":20,"v":48,"depth":3},{"day":21,"v":48,"depth":3},{"day":22,"v":52,"depth":3},{"day":23,"v":56,"depth":3},{"day":24,"v":60,"depth":3},{"day":25,"v":64,"depth":3},{"day":26,"v":64,"depth":3},{"day":27,"v":64,"depth":3},{"day":28,"v":64,"depth":3},{"day":29,"v":64,"depth":3},{"day":30,"v":64,"depth":3},{"day":31,"v":64,"depth":3},{"day":32,"v":64,"depth":3}],"crackTraceClass":"rise","vAt7":64,"depthAt7":3,"vDrop":-12,"depthDrop":-1,"crack7":false,"firstServe":{"day":19,"why":"vgrievance"},"serveWithin30":true,"serves":8,"servesAll":[{"day":19,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":21,"why":"vgrievance"},{"day":21,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"}],"effect":true}
+  FRIEND d20: Willie <> Caroline — maxDepth 3, final 3 (v=64), dropped 0
+  FRIEND d25: Willie <> Viola — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d30: Willie <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Willie <> Sam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Willie <> Cooper — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d25: Ava <> Willie — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d70: Sam <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Dale <> Sam — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d80: Dale <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Dale <> Willie — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d115: Sam <> Olivia — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d110: Sofia <> Olivia — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d130: Sofia <> Bakhyt — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d135: Austin <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Willie <> Austin — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Cooper <> Austin — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d135: Dale <> Austin — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Austin <> Olivia — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d135: Austin <> Bakhyt — maxDepth 2, final 2 (v=52), dropped 0
+  CLOSE-READ d18: Willie about Caroline — live depth=2 ledger depth=1 class=TP late=false inGroup=true speakerHasDeep2=true
+  CLOSE-READ d18: Sofia about Willie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Sofia about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Ingrid about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Ava about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Ava about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Sofia about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Sofia about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Sofia about Willie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Sofia about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Cooper about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Sofia about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Cooper about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Sofia about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Ava about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Cooper about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Sofia about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Sofia about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Cooper about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Cooper about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Cooper about Willie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Cooper about Willie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Cooper about Willie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Cooper about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Dale about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Dale about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Cooper about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Willie about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Dale about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Dale about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Dale about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Dale about Willie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Dale about Willie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Dale about Willie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Dale about Willie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Dale about Willie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Sam about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Willie about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Sofia about Willie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Dale about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Sam about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Sofia about Sam — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Sam about Sofia — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Sofia about Sam — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Dale about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Dale about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Sofia about Sam — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Dale about Sam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Dale about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d94: Dale about Sofia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Olivia about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Olivia about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d97: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Olivia about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d98: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Olivia about Sam — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d99: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Olivia about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d106: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Olivia about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Olivia about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Olivia about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Olivia about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Bakhyt about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d126: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Bakhyt about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d129: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Bakhyt about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d130: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Sam about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Bakhyt about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Bakhyt about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Sofia about Sam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Jawad about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d136: Bakhyt about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Jawad about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d137: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Sofia about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Bakhyt about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Jawad about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d140: Bakhyt about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Sofia about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Jawad about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d141: Bakhyt about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Dale about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d8: Caroline about Sam (why=grievance)
+  GRIEV-READ d9: Nino about Viola (why=grievance)
+  GRIEV-READ d9: Caroline about Sam (why=grievance)
+  GRIEV-READ d11: Nino about Viola (why=grievance)
+  GRIEV-READ d13: Caroline about Sam (why=grievance)
+  GRIEV-READ d17: Caroline about Sam (why=grievance)
+  KNACK d10 Sofia: "that stray dog — the one that bit two people — lets Sam touch it."
+  KNACK d12 Ava: "Caroline sees in the dark. Not well — but better than you. Better than me."
+  KNACK d16 Viola: "You want to know about that? Okay." "I, uh — that stray dog — the one that bit two people — lets Nadia touch it."
+  KNACK d27 Sam: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Sofia touch it."
+  KNACK d39 Ava: "that stray dog — the one that bit two people — lets Dale touch it."
+  KNACK d50 Willie: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Dale touch it."
+  KNACK d84 Olivia: "that stray dog — the one that bit two people — lets Sam touch it."
+  KNACK d90 Dale: "Huh. Let me think about that." "Hah. that stray dog — the one that bit two people — lets Sam touch it."
+
+deathCauses: {"ambush":2,"sickness":3,"a wound that wouldn't close":1,"monster":1,"contest":1}

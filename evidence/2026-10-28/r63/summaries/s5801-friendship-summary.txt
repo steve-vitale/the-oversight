@@ -1,0 +1,336 @@
+# SURFACE+SEEDED — seed 5801 (141d, 7 alive)
+
+npcPairs=74 deep2=22 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=324 closeReadsServed=33 grievanceServes=10 othersSteered=30
+COND-TP: firstDeep2Day=30 lateClose=242 lateTP=220 lateNull=0 condRate=90.9% pooledTP=222/255 pooledRate=87.1% grievReadsByWhy={"grievance":30,"vgrievance":11}
+FUNNEL (natural): convos=414 subject=406 offered=371 picked=294 classes={"offered-not-picked":77,"subject-no-offer":35,"picked-others":294,"no-subject-no-ans":8}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=35 rate=8.5% offered=371 mainOffered=18 subjectOffered=355 picked=294 latePicks=112 latePicksMain=2 latePicksSubject=110
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Grace / Thabo — "David ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Armando / Nino / Lucas — "that stray dog — the one that bit two people — lets Adaeze touch it."
+REOFFER: offers=372 picks=310 latePicks=111 missedChangedNotOffered=2
+WRAPSERVE: convos=41 matcherHits=10 matcherServes=10 classes={"grievance-line":10,"deflection":1,"other":30}
+FUNNEL-PROBE (subject-no-offer turns): turns=191 menuProblem=163 pickProblem=28
+INVITE (r63 wrap): lure={"n":7,"accepts":1,"acceptRate":0.14285714285714285,"vetoes":{"sick":5},"chanceMin":0,"chanceMax":46,"chanceMean":13.1} party={"n":19,"accepts":9,"acceptRate":0.47368421052631576,"vetoes":{},"chanceMin":5,"chanceMax":70.2,"chanceMean":48.6} partyProbe={"n":2,"accepts":1,"acceptRate":0.5} partyProbeConvos=2 convosWithInviteOffer=8
+  INVITE-DEC d8 party: Shanice -> Zuri chance=20.6 accept=true veto=- inputs={"temp":"dry","goal":"alone","mood":"steady","fear":0,"trust":64,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 64","wants to be alone (-40)"]
+  INVITE-DEC d8 party: Shanice -> Juan chance=70 accept=false veto=- inputs={"temp":"warm","goal":"record","mood":"steady","fear":0,"trust":50,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 50","warm temperament (+15)"]
+  INVITE-DEC d8 lure: Violeta -> Adaeze chance=46 accept=false veto=- inputs={"temp":"anxious","goal":"legacy","mood":"hungry","fear":4,"affinity":2} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d9 party: Shanice -> Omar chance=64.4 accept=true veto=- inputs={"temp":"dry","goal":"protect","mood":"steady","fear":4,"trust":36,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 36","protect goal (+15)"]
+  INVITE-DEC d9 party: Shanice -> Adaeze chance=44.2 accept=false veto=- inputs={"temp":"anxious","goal":"legacy","mood":"hungry","fear":4,"trust":23,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 23"]
+  INVITE-DEC d9 lure: Violeta -> Adaeze chance=46 accept=true veto=- inputs={"temp":"anxious","goal":"legacy","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d10 party: Shanice -> Violeta chance=66.4 accept=false veto=- inputs={"temp":"anxious","goal":"protect","mood":"steady","fear":12,"trust":41,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 41","protect goal (+15)"]
+  INVITE-DEC d10 party: Shanice -> Luis chance=54.6 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":12,"trust":49,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 49"]
+  INVITE-DEC d11 party: Shanice -> Ihaia chance=67 accept=true veto=- inputs={"temp":"bold","goal":"belong","mood":"grieving","fear":92,"trust":55,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 55","bold temperament (+15)","belong goal (+15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d12 lure: Violeta -> Adaeze chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"legacy","mood":"grieving","fear":60} reasons=["sick — stays by the fire"]
+  INVITE-DEC d13 lure: Violeta -> Adaeze chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"legacy","mood":"grieving","fear":32} reasons=["sick — stays by the fire"]
+  INVITE-DEC d14 lure: Violeta -> Adaeze chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"legacy","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d15 party-probe: Shanice -> Adaeze chance=37.6 accept=false veto=- inputs={"temp":"anxious","goal":"legacy","mood":"steady","fear":0,"trust":44,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 44","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d15 party: Shanice -> Violeta chance=66.6 accept=false veto=- inputs={"temp":"anxious","goal":"protect","mood":"steady","fear":0,"trust":29,"bond":{"v":0,"depth":0},"partySize":3} reasons=["trust 29","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d15 lure: Violeta -> Adaeze chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"legacy","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d16 party: Shanice -> Nino chance=5 accept=false veto=- inputs={"temp":"prickly","goal":"alone","mood":"steady","fear":4,"trust":46,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 46","a big party is safer (+5)","prickly temperament (-20)","wants to be alone (-40)"]
+  INVITE-DEC d16 party: Shanice -> Violeta chance=70.2 accept=true veto=- inputs={"temp":"anxious","goal":"protect","mood":"steady","fear":4,"trust":38,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 38","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d16 lure: Violeta -> Adaeze chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"legacy","mood":"hungry","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d17 party: Shanice -> Nino chance=5 accept=false veto=- inputs={"temp":"prickly","goal":"alone","mood":"grieving","fear":21,"trust":38,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 38","a big party is safer (+5)","prickly temperament (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d18 party: Shanice -> Adaeze chance=46 accept=false veto=- inputs={"temp":"anxious","goal":"legacy","mood":"grieving","fear":4,"trust":40,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d18 party: Shanice -> Somchai chance=56 accept=false veto=- inputs={"temp":"restless","goal":"understand","mood":"grieving","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d19 party: Shanice -> Adaeze chance=46 accept=true veto=- inputs={"temp":"anxious","goal":"legacy","mood":"grieving","fear":12,"trust":40,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party-probe: Shanice -> Grace chance=66.2 accept=true veto=- inputs={"temp":"warm","goal":"understand","mood":"steady","fear":4,"trust":28,"bond":{"v":-5,"depth":0},"partySize":4} reasons=["trust 28","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d53 party: Shanice -> David chance=28.4 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"grieving","fear":0,"trust":21,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 21","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d57 party: Shanice -> Lucas chance=49.6 accept=true veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":0,"trust":24,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 24","a big party is safer (+5)"]
+  INVITE-DEC d124 party: Shanice -> David chance=59.599999999999994 accept=true veto=- inputs={"temp":"cautious","goal":"legacy","mood":"grieving","fear":25,"trust":74,"bond":{"v":58,"depth":2},"partySize":4} reasons=["trust 74","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":29,"v":40,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":44,"depth":2},{"day":32,"v":46,"depth":2},{"day":33,"v":48,"depth":2},{"day":34,"v":48,"depth":2},{"day":35,"v":52,"depth":3},{"day":36,"v":54,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":54,"depth":3},{"day":39,"v":54,"depth":3},{"day":40,"v":58,"depth":3},{"day":41,"v":64,"depth":3},{"day":42,"v":66,"depth":3}] class=rise
+GOSSIP: totalPicks=234 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=52 31-60=64 61-90=66 91-120=71 121+=41 naturalPicks=294 seededPicks=30 gossipPicks=234
+SEEDED: {"pair":{"a":"adaeze_nwosu","b":"somchai_prasert","aName":"Adaeze","bName":"Somchai"},"day":28,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":29,"v":40,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":44,"depth":2},{"day":32,"v":46,"depth":2},{"day":33,"v":48,"depth":2},{"day":34,"v":48,"depth":2},{"day":35,"v":52,"depth":3},{"day":36,"v":54,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":54,"depth":3},{"day":39,"v":54,"depth":3},{"day":40,"v":58,"depth":3},{"day":41,"v":64,"depth":3},{"day":42,"v":66,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":-2,"depthDrop":-1,"crack7":false,"firstServe":{"day":38,"why":"vgrievance"},"serveWithin30":true,"serves":11,"servesAll":[{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Esmeralda <> Somchai — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d30: Adaeze <> Somchai — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d90: Adaeze <> Nino — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d40: Esmeralda <> Grace — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d35: Zuri <> Somchai — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d40: Adaeze <> Esmeralda — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d65: Adaeze <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Esmeralda <> Zuri — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d35: Zuri <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Zuri <> Ihaia — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d45: Zuri <> Grace — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Adaeze <> Zuri — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Grace <> Omar — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d60: Zuri <> Nino — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Nino <> Omar — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d100: Adaeze <> Grace — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d75: David <> Zuri — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: David <> Omar — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d70: Zuri <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Lucas <> Omar — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d140: David <> Lucas — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d135: Adaeze <> David — maxDepth 2, final 2 (v=54), dropped 0
+  CLOSE-READ d15: Violeta about Esmeralda — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Zuri about Esmeralda — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Zuri about Esmeralda — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Omar about Zuri — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Grace about Esmeralda — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Omar about Zuri — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Omar about Zuri — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Omar about Zuri — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Zuri about Esmeralda — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Somchai about Adaeze — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Ihaia about Esmeralda — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Nino about Esmeralda — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Somchai about Adaeze — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Ihaia about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Omar about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Zuri about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Grace about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Zuri about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Grace about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Omar about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Zuri about Somchai — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Omar about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Ihaia about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Omar about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Omar about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Nino about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Grace about Esmeralda — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Zuri about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Zuri about Omar — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Zuri about Omar — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Omar about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Ihaia about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d41: Zuri about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Zuri about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Grace about Zuri — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Zuri about Somchai — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Ihaia about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Ihaia about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Adaeze about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Adaeze about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Nino about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Adaeze about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Grace about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Adaeze about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Omar about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Adaeze about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Zuri about Omar — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Adaeze about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Adaeze about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Ihaia about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Adaeze about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Grace about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Grace about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Grace about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Grace about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Grace about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Grace about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Grace about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Lucas about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: David about Zuri — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: David about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Lucas about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Lucas about Zuri — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: David about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: David about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Lucas about Zuri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: David about Zuri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d73: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: David about Zuri — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Lucas about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Lucas about Zuri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Nino about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Nino about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Nino about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Omar about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Adaeze about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Adaeze about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Grace about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Adaeze about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Adaeze about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Adaeze about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Adaeze about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Nino about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: David about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Adaeze about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Omar about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Lucas about Zuri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Zuri about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d6: Adaeze about Esmeralda (why=grievance)
+  GRIEV-READ d15: Adaeze about Esmeralda (why=grievance)
+  GRIEV-READ d18: Adaeze about Esmeralda (why=grievance)
+  GRIEV-READ d20: Adaeze about Esmeralda (why=grievance)
+  GRIEV-READ d20: Esmeralda about Adaeze (why=grievance)
+  GRIEV-READ d21: Adaeze about Esmeralda (why=grievance)
+  KNACK d4 A man, maybe 50s: "Good question." "that stray dog — the one that bit two people — lets Adaeze touch it."
+  KNACK d7 Violeta: "Practical view: Zuri talks to the garden. The garden listens. I've seen it."
+  KNACK d13 Esmeralda: "I'll tell you plain — Zuri talks to the garden. The garden listens. I've seen it."
+  KNACK d23 Somchai: "Huh. Let me think about that." "cuts close faster when Nino wraps them. Don't ask me how."
+  KNACK d28 Adaeze: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Somchai touch it."
+  KNACK d32 Adaeze: "Omar talks to the garden. The garden listens. I've seen it."
+  KNACK d53 Zuri: "What's this about? Lucas talks to the garden. The garden listens. I've seen it."
+  KNACK d73 Nino: "Zuri talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"monster":4,"combat":1,"a wound that wouldn't close":2,"sickness":2}
