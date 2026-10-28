@@ -223,5 +223,5 @@ documenting, not by fixing.
 ## Commits (branch sim-onceaday-scope-b, no push, no bump, no live check)
 
 - adf0853 — prereg (committed before judged fixtures).
-- (this run) — scripts/test-onceaday-scope-b.js + this evidence file.
+- 5bcbec3f — scripts/test-onceaday-scope-b.js + this evidence file.
   Worktree clean at handoff; all work committed on the branch.
