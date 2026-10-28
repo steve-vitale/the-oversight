@@ -1,0 +1,34 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Lillian","t":90},{"id":"Zoltan","t":90},{"id":"Wanjiru","t":90},{"id":"Abaynesh","t":78}], roster=12
+INH readable=true scripted=true deadItems=7 distinct=7 transferred=0 vanished=0 keptPlants=18 inheritedPlants=4 keptSkills=9 inheritedSkills=10 succTrustPre=90 succTrustPost=76
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","lucky_rock"] post=["bloodhound","lucky_rock"]
+DEATH d41 (a hushwolf, scripted): Amara -> Wanjiru | passed=true lin=true mo=true trust=76 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=0 of 7 distinct dead-bearer items
+  CONVO d+3 with Lillian (refused=false)
+  CONVO d+3 with Zoltan (refused=false)
+  BOND-CONVO d+3 with Mai (depth=1 v=32 refused=false)
+  CONVO d+7 with Lillian (refused=false)
+  CONVO d+7 with Zoltan (refused=false)
+  CONVO d+14 with Lillian (refused=false)
+  CONVO d+14 with Abaynesh (refused=false)
+  BOND-CONVO d+14 with Mai (depth=1 v=32 refused=false)
+  CONVO d+30 with Mai (refused=false)
+  CONVO d+30 with Lillian (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=8) echo=7 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=44 signals={"levelUp":true,"systemVoice":38,"offerLines":50,"codexPlantsDelta":9,"codexSkillsDelta":7,"codexAbilitiesDelta":5,"xpDelta":63,"any":true} pantry 63210->53288
+TRUST-DIALS: office 76->86 (+10, climb) | villageMean 66.6->84.8 (+18.2, climb) | ge60 8->8 | movers>=5: [{"id":"Tapash","from":15,"to":50,"delta":35},{"id":"Daniyar","from":50,"to":85,"delta":35},{"id":"Jacob","from":64,"to":90,"delta":26},{"id":"Emma","from":65,"to":90,"delta":25},{"id":"Mai","from":73,"to":88,"delta":15},{"id":"Tashi","from":77,"to":90,"delta":13},{"id":"Abaynesh","from":78,"to":90,"delta":12}]
+DEED-LEDGER: calls=10 summary={"donateToPantry":{"calls":10,"ok":10,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=85 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=44
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+44) t2=true(deedCalls=10) trustVerdict={"readable":true,"officeMantle":76,"officeLast":86,"officeDelta":10,"officeClass":"climb","villageMantle":66.6,"villageLast":84.8,"villageDelta":18.2,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":8,"movers":[{"id":"Tapash","from":15,"to":50,"delta":35},{"id":"Daniyar","from":50,"to":85,"delta":35},{"id":"Jacob","from":64,"to":90,"delta":26},{"id":"Emma","from":65,"to":90,"delta":25},{"id":"Mai","from":73,"to":88,"delta":15},{"id":"Tashi","from":77,"to":90,"delta":13},{"id":"Abaynesh","from":78,"to":90,"delta":12}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":0,"trustMoves":10} callCheck={"dailyMoveDays":10,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=9, excludedLoot=1))
+E7/R47: e7={"trustMoves":10,"soloOffice":7,"soloOfficeDeltas":[1,1,1,1,1,1,1],"soloBearerDeltaExact":[1,1,1,1,1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":4,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":9,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":46,"moves":10}

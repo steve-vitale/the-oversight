@@ -1,0 +1,670 @@
+== REGIMES ==
+seed 26121: scripted=true deathDay=5 cause=a hushwolf Vito -> Esther trustMantle=16
+seed 26122: scripted=true deathDay=6 cause=a hushwolf Aidan -> Miguel trustMantle=20
+seed 26123: scripted=true deathDay=41 cause=a hushwolf Dominic -> Owen trustMantle=66
+seed 26124: scripted=true deathDay=41 cause=a hushwolf Keisha -> Catalina trustMantle=63
+seed 26125: scripted=true deathDay=41 cause=a hushwolf Amara -> Wanjiru trustMantle=76
+
+== INH SUCCESSOR INHERITANCE (r54 headline) ==
+seed 26121: class=mixed readable=true scripted=true Vito -> Esther
+  succPre: pack=["winter_coat_button","home_key","dog_tags","field_suture_kit","locket","camo_jacket","kitchen_knife"] worn=["kitchen_knife","winter_coat_button","camo_jacket","home_key","dog_tags","field_suture_kit","locket"] plants=["hanza","maypop","muscadine","pawpaw"] skills=["wound_care","steady_hands","calm_panic","fear_manage"] abilities=["iron_stomach"] trust=25
+  bearerCorpse@handoff: found=true items=[]
+  bearerCorpse@d+3: found=true items=[]
+  succPost: inv=["field_sutures","kitchen_knife","winter_coat_button","camo_jacket","home_key","dog_tags","field_suture_kit","locket"] plants=["blackberry","plantain_leaf","groundnut","chickweed","hanza","muscadine","pawpaw","chrysanthemum_greens","serviceberry","wild_onion","stinging_nettle","wood_sorrel","maypop"] skills=["research","diplomat","gossip_network","wound_care","steady_hands","calm_panic","fear_manage"] abilities=["iron_stomach"] trust=16
+  deadPre: inv=["dispatchers_headset","home_key","dog_tags","mixtape","field_suture_kit"] plants=["blackberry","plantain_leaf","groundnut","chickweed","hanza","muscadine","pawpaw","chrysanthemum_greens"] skills=["research","diplomat","gossip_network"] abilities=[] trust=15
+  deadPre sentimental flags: {"dispatchers_headset":true,"home_key":true,"dog_tags":true,"mixtape":true,"field_suture_kit":true}
+  keptPlants=["hanza","muscadine","pawpaw","maypop"] inheritedPlants=["blackberry","plantain_leaf","groundnut","chickweed","chrysanthemum_greens"] keptSkills=["wound_care","steady_hands","calm_panic","fear_manage"] inheritedSkills=["research","diplomat","gossip_network"]
+  disposition@handoff: transferred=["home_key","dog_tags","field_suture_kit"] vanished=[] distinct=5
+  disposition@d+3: transferred=["home_key","dog_tags","field_suture_kit"] vanished=[]
+    dispatchers_headset: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    home_key: preN=1 succ=1 corpse=0 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    dog_tags: preN=1 succ=1 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    mixtape: preN=1 succ=0 corpse=0 pantry=0 living=4 prep=0 stashed=0 vanished=false
+    field_suture_kit: preN=1 succ=1 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+  parity: equal=true inheritedAbilities=[]
+seed 26122: class=mixed readable=true scripted=true Aidan -> Miguel
+  succPre: pack=["dispatchers_headset","knife_roll","lucky_coin","tote_bag","photo_album","flannel_shirt","kitchen_knife","crossbow"] worn=["kitchen_knife","crossbow","dispatchers_headset","flannel_shirt","knife_roll","lucky_coin","tote_bag","photo_album"] plants=["banyan_fig","burdock","sassafras","muscadine"] skills=["field_dressing","steady_hands","anatomy","preserve_food","wound_care"] abilities=["beast_calm"] trust=35
+  bearerCorpse@handoff: found=true items=["Stick"]
+  bearerCorpse@d+3: found=true items=["Stick"]
+  succPost: inv=["grandfathers_knife","kitchen_knife","crossbow","dispatchers_headset","flannel_shirt","knife_roll","lucky_coin","tote_bag","photo_album"] plants=["sunchoke","stinging_nettle","wild_strawberry","burdock","sassafras","muscadine","hickory_nut","spicebush","purslane","goldenrod","banyan_fig"] skills=["steady_hands","gossip_network","field_dressing","anatomy","preserve_food","wound_care"] abilities=["beast_calm"] trust=20
+  deadPre: inv=["mixtape","dispatchers_headset","search_locket","hoodie","dog_tags"] plants=["sunchoke","stinging_nettle","wild_strawberry","burdock","sassafras","muscadine","hickory_nut"] skills=["steady_hands","gossip_network"] abilities=[] trust=15
+  deadPre sentimental flags: {"mixtape":true,"dispatchers_headset":true,"search_locket":true,"hoodie":true,"dog_tags":true}
+  keptPlants=["burdock","sassafras","muscadine","banyan_fig"] inheritedPlants=["sunchoke","stinging_nettle","wild_strawberry","hickory_nut"] keptSkills=["steady_hands","field_dressing","anatomy","preserve_food","wound_care"] inheritedSkills=["gossip_network"]
+  disposition@handoff: transferred=["dispatchers_headset"] vanished=["search_locket","hoodie"] distinct=5
+  disposition@d+3: transferred=["dispatchers_headset"] vanished=["search_locket","hoodie"]
+    mixtape: preN=1 succ=0 corpse=0 pantry=0 living=8 prep=0 stashed=0 vanished=false
+    dispatchers_headset: preN=1 succ=1 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    search_locket: preN=1 succ=0 corpse=0 pantry=0 living=0 prep=0 stashed=0 vanished=true
+    hoodie: preN=1 succ=0 corpse=0 pantry=0 living=0 prep=0 stashed=0 vanished=true
+    dog_tags: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+  parity: equal=true inheritedAbilities=[]
+seed 26123: class=mixed readable=true scripted=true Dominic -> Owen
+  succPre: pack=["mixtape","spare_socks","hunting_spear","military_vest","sharpened_stick","audience_token"] worn=["sharpened_stick","hunting_spear","mixtape","military_vest","spare_socks","audience_token"] plants=["sandbox_tree","acorn_white_oak","mayapple","murumuru","blackberry","chrysanthemum_greens","goldenrod","papaya","cowpea","death_cap","maypop","wild_carrot","peepal_fig","jewelweed","asian_persimmon","jamun","houttuynia","brazil_nut","wild_strawberry"] skills=["track_read","patient_aim","animal_behavior","snare_wire","come_get_some","scarecrow","soft_step","field_dressing"] abilities=["bloodhound","echo_location","dowsing","green_whisper"] trust=91
+  bearerCorpse@handoff: found=true items=["Sinew cord","gravity_hook","Stripped hide","Sinew cord","Fan care package (unopened)","hunting_spear","hunting_spear","hunting_spear","investigators_coat"]
+  bearerCorpse@d+3: found=true items=["Sinew cord","gravity_hook","Stripped hide","Sinew cord","Fan care package (unopened)","hunting_spear","hunting_spear","hunting_spear","investigators_coat"]
+  succPost: inv=["camo_jacket","snare_wire","grandfathers_knife","sharpened_stick","hunting_spear","mixtape","military_vest","spare_socks","audience_token"] plants=["greenbrier","rare_herb","pawpaw","acorn_white_oak","mayapple","sandbox_tree","murumuru","blackberry","dandelion","chrysanthemum_greens","goldenrod","papaya","cowpea","death_cap","maypop","wild_carrot","peepal_fig","jewelweed","asian_persimmon","jamun","houttuynia","brazil_nut","wild_strawberry","prickly_pear"] skills=["read_people","calm_panic","mediate","morale_keep","diplomat","gossip_network","navigation","forecast","wound_care","ant_trail","signal_tech","pathfinder","silver_tongue","fear_manage","patient_aim","track_read","animal_behavior","snare_wire","come_get_some","scarecrow","soft_step","field_dressing"] abilities=["bloodhound","echo_location","dowsing","green_whisper"] trust=66
+  deadPre: inv=["gravity_hook","mothers_ring","hunting_spear","hunting_spear","trail_compass","tasting_spoon","dispatchers_headset","daughters_drawing","hunting_spear","investigators_coat"] plants=["greenbrier","rare_herb","pawpaw","acorn_white_oak","mayapple","sandbox_tree","murumuru","blackberry","dandelion","chrysanthemum_greens","goldenrod","papaya","cowpea","death_cap","maypop","wild_carrot","peepal_fig","jewelweed","asian_persimmon","jamun","houttuynia","brazil_nut","wild_strawberry"] skills=["read_people","calm_panic","mediate","morale_keep","diplomat","gossip_network","navigation","forecast","wound_care","ant_trail","signal_tech","pathfinder","silver_tongue","fear_manage","patient_aim"] abilities=["translator","adrenaline_surge"] trust=24
+  deadPre sentimental flags: {"gravity_hook":false,"mothers_ring":true,"hunting_spear":false,"trail_compass":true,"tasting_spoon":true,"dispatchers_headset":true,"daughters_drawing":true,"investigators_coat":false}
+  keptPlants=["acorn_white_oak","mayapple","sandbox_tree","murumuru","blackberry","chrysanthemum_greens","goldenrod","papaya","cowpea","death_cap","maypop","wild_carrot","peepal_fig","jewelweed","asian_persimmon","jamun","houttuynia","brazil_nut","wild_strawberry"] inheritedPlants=["greenbrier","rare_herb","pawpaw","dandelion"] keptSkills=["patient_aim","track_read","animal_behavior","snare_wire","come_get_some","scarecrow","soft_step","field_dressing"] inheritedSkills=["read_people","calm_panic","mediate","morale_keep","diplomat","gossip_network","navigation","forecast","wound_care","ant_trail","signal_tech","pathfinder","silver_tongue","fear_manage"]
+  disposition@handoff: transferred=["hunting_spear"] vanished=[] distinct=8
+  disposition@d+3: transferred=["hunting_spear"] vanished=[]
+    gravity_hook: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    mothers_ring: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    hunting_spear: preN=3 succ=1 corpse=3 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    trail_compass: preN=1 succ=0 corpse=0 pantry=0 living=6 prep=0 stashed=0 vanished=false
+    tasting_spoon: preN=1 succ=0 corpse=0 pantry=0 living=1 prep=0 stashed=0 vanished=false
+    dispatchers_headset: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    daughters_drawing: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    investigators_coat: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+  parity: equal=true inheritedAbilities=[]
+seed 26124: class=mixed readable=true scripted=true Keisha -> Catalina
+  succPre: pack=["lucky_coin","boot_stone","crude_bow","swat_vest","sharpened_stick"] worn=["sharpened_stick","crude_bow","lucky_coin","swat_vest","boot_stone"] plants=["rose_hip","muscadine","pawpaw","cowpea","cattail","staghorn_sumac","spicebush","cow_parsley","curry_leaf","chickweed","hickory_nut","sandbox_tree","burdock","peanut","death_cap","wild_garlic","peepal_fig","blackberry","lambs_quarters","maypop","aconite","crab_apple","bitter_cassava"] skills=["track_read","patient_aim","weather_read","animal_behavior","snare_wire","fishing"] abilities=["bloodhound","echo_location"] trust=88
+  bearerCorpse@handoff: found=true items=["Stick","Stick","Stick","Stick","audience_token","Stone","Vine","Vine","work_gloves","camp_pot","sanctuary_bell","Teeth","Gland sac","Fan care package (unopened)","stone_knife","hunting_spear","spare_battery","machete","flannel_shirt","hunting_spear"]
+  bearerCorpse@d+3: found=true items=["Stick","Stick","Stick","Stick","audience_token","Stone","Vine","Vine","work_gloves","camp_pot","sanctuary_bell","Teeth","Gland sac","Fan care package (unopened)","stone_knife","hunting_spear","spare_battery","machete","flannel_shirt","hunting_spear"]
+  succPost: inv=["rain_poncho","fishing_line","snare_wire","sharpened_stick","crude_bow","lucky_coin","swat_vest","boot_stone"] plants=["mayapple","persimmon","american_ginseng","rose_hip","muscadine","pawpaw","cowpea","spicebush","cattail","staghorn_sumac","cow_parsley","hickory_nut","chickweed","burdock","sandbox_tree","peanut","death_cap","wild_garlic","peepal_fig","blackberry","lambs_quarters","maypop","aconite","crab_apple","bitter_cassava","sugar_maple","curry_leaf"] skills=["ritual_meaning","thief","scrounger","gossip_network","tracking","old_world_cache","scarecrow","track_read","patient_aim","weather_read","animal_behavior","snare_wire","fishing"] abilities=["bloodhound","echo_location"] trust=63
+  deadPre: inv=["audience_token","work_gloves","camp_pot","sanctuary_bell","trail_compass","stone_knife","hunting_spear","spare_battery","dog_tags","wedding_ring","buskers_harmonica","boot_stone","machete","flannel_shirt","hunting_spear"] plants=["mayapple","persimmon","american_ginseng","rose_hip","muscadine","pawpaw","cowpea","spicebush","cattail","staghorn_sumac","cow_parsley","hickory_nut","chickweed","burdock","sandbox_tree","peanut","death_cap","wild_garlic","peepal_fig","blackberry","lambs_quarters","maypop","aconite","crab_apple","bitter_cassava"] skills=["ritual_meaning","thief","scrounger","gossip_network","tracking","old_world_cache","scarecrow"] abilities=["green_thumb","lucky_rock","echo_location","pocket_sand","fusion_reactor"] trust=23
+  deadPre sentimental flags: {"audience_token":false,"work_gloves":false,"camp_pot":false,"sanctuary_bell":false,"trail_compass":true,"stone_knife":false,"hunting_spear":false,"spare_battery":false,"dog_tags":true,"wedding_ring":true,"buskers_harmonica":true,"boot_stone":true,"machete":false,"flannel_shirt":false}
+  keptPlants=["rose_hip","muscadine","pawpaw","cowpea","spicebush","cattail","staghorn_sumac","cow_parsley","hickory_nut","chickweed","burdock","sandbox_tree","peanut","death_cap","wild_garlic","peepal_fig","blackberry","lambs_quarters","maypop","aconite","crab_apple","bitter_cassava","curry_leaf"] inheritedPlants=["mayapple","persimmon","american_ginseng"] keptSkills=["track_read","patient_aim","weather_read","animal_behavior","snare_wire","fishing"] inheritedSkills=["ritual_meaning","thief","scrounger","gossip_network","tracking","old_world_cache","scarecrow"]
+  disposition@handoff: transferred=["boot_stone"] vanished=["dog_tags"] distinct=14
+  disposition@d+3: transferred=["boot_stone"] vanished=["dog_tags"]
+    audience_token: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    work_gloves: preN=1 succ=0 corpse=1 pantry=0 living=6 prep=0 stashed=0 vanished=false
+    camp_pot: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    sanctuary_bell: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    trail_compass: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    stone_knife: preN=1 succ=0 corpse=1 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    hunting_spear: preN=2 succ=0 corpse=2 pantry=0 living=4 prep=0 stashed=0 vanished=false
+    spare_battery: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    dog_tags: preN=1 succ=0 corpse=0 pantry=0 living=0 prep=0 stashed=0 vanished=true
+    wedding_ring: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    buskers_harmonica: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    boot_stone: preN=1 succ=1 corpse=0 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    machete: preN=1 succ=0 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    flannel_shirt: preN=1 succ=0 corpse=1 pantry=0 living=4 prep=0 stashed=0 vanished=false
+  parity: equal=true inheritedAbilities=[]
+seed 26125: class=mixed readable=true scripted=true Amara -> Wanjiru
+  succPre: pack=["paperback","notebook","sling","rain_shell","wool_socks","sharpened_stick","stone","contract_quill"] worn=["sharpened_stick","sling","paperback","rain_shell","wool_socks","notebook","stone","contract_quill"] plants=["bacaba","desert_date","muscadine","bitter_cassava","good_king_henry","burdock","tea_leaf","hickory_nut","european_hazelnut","papaya","guava","field_mustard","biriba","sweet_potato","tamarind","stinging_nettle","fly_agaric","bamboo_shoot"] skills=["scrounger","herbal_medicine","snare_wire","forage_sense","foraging","wound_care","steady_hands","camp_cooking","field_dressing"] abilities=["bloodhound","lucky_rock"] trust=90
+  bearerCorpse@handoff: found=true items=["Branch","Bark strip","Stick","Stone","Stick","audience_token","Stick","System Field Manual: Small Game (Rev. 5)","Stick","Fan care package (unopened)","stone_knife"]
+  bearerCorpse@d+3: found=true items=["Branch","Bark strip","Stick","Stone","Stick","audience_token","Stick","System Field Manual: Small Game (Rev. 5)","Stick","Fan care package (unopened)","stone_knife"]
+  succPost: inv=["trail_mix","hiking_backpack","snare_wire","sharpened_stick","sling","paperback","rain_shell","wool_socks","notebook","stone","contract_quill"] plants=["wild_strawberry","purslane","serviceberry","muscadine","good_king_henry","burdock","desert_date","hickory_nut","tea_leaf","european_hazelnut","bitter_cassava","papaya","guava","field_mustard","yarrow","biriba","sweet_potato","stinging_nettle","tamarind","fly_agaric","bamboo_shoot","jackfruit","bacaba"] skills=["weld","steady_hands","gossip_network","old_world_cache","food","calm_panic","pattern_recognition","read_people","improvise_weapon","field_dressing","track_read","camp_cooking","water_systems","herbal_medicine","scrounger","snare_wire","forage_sense","foraging","wound_care"] abilities=["bloodhound","lucky_rock"] trust=76
+  deadPre: inv=["audience_token","carpenters_square","mixtape","knife_roll","wedding_ring","spare_socks","stone_knife"] plants=["wild_strawberry","purslane","serviceberry","muscadine","good_king_henry","burdock","desert_date","hickory_nut","tea_leaf","european_hazelnut","bitter_cassava","papaya","guava","field_mustard","yarrow","biriba","sweet_potato","stinging_nettle","tamarind","fly_agaric","bamboo_shoot"] skills=["weld","steady_hands","gossip_network","old_world_cache","food","calm_panic","pattern_recognition","read_people","improvise_weapon","field_dressing","track_read","camp_cooking","water_systems","herbal_medicine"] abilities=["green_thumb","long_table","lucky_rock"] trust=51
+  deadPre sentimental flags: {"audience_token":false,"carpenters_square":true,"mixtape":true,"knife_roll":true,"wedding_ring":true,"spare_socks":true,"stone_knife":false}
+  keptPlants=["muscadine","good_king_henry","burdock","desert_date","hickory_nut","tea_leaf","european_hazelnut","bitter_cassava","papaya","guava","field_mustard","biriba","sweet_potato","stinging_nettle","tamarind","fly_agaric","bamboo_shoot","bacaba"] inheritedPlants=["wild_strawberry","purslane","serviceberry","yarrow"] keptSkills=["steady_hands","field_dressing","camp_cooking","herbal_medicine","scrounger","snare_wire","forage_sense","foraging","wound_care"] inheritedSkills=["weld","gossip_network","old_world_cache","food","calm_panic","pattern_recognition","read_people","improvise_weapon","track_read","water_systems"]
+  disposition@handoff: transferred=[] vanished=[] distinct=7
+  disposition@d+3: transferred=["audience_token","stone_knife"] vanished=[]
+    audience_token: preN=1 succ=1 corpse=1 pantry=0 living=0 prep=0 stashed=0 vanished=false
+    carpenters_square: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    mixtape: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    knife_roll: preN=1 succ=0 corpse=0 pantry=0 living=4 prep=0 stashed=0 vanished=false
+    wedding_ring: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    spare_socks: preN=1 succ=0 corpse=0 pantry=0 living=2 prep=0 stashed=0 vanished=false
+    stone_knife: preN=1 succ=1 corpse=1 pantry=0 living=2 prep=0 stashed=0 vanished=false
+  parity: equal=true inheritedAbilities=[]
+
+== INH POOLED ==
+classes: {"mixed":5}
+scripted seeds with full dead-bearer side: 5/5
+vanished@handoff: 26122:search_locket, 26122:hoodie, 26124:dog_tags
+vanished@d+3: 26122:search_locket, 26122:hoodie, 26124:dog_tags
+
+== REL SUCCESSOR RELATIONSHIPS + HISTORY (r55 headline) ==
+seed 26121: Vito -> Esther scripted=true relPre=same-day relPost=true relD14=true relEnd=true
+  succBonds: pre=8 post=8 (survived=8) d14=9 end=9 (survived=8)
+  topBond: pre=Luis depth=0 v=8 post=Luis depth=0 v=8 end=Emilio depth=0 v=14
+  deadBearerBonds (phantom check): pre=0 post=0 end=0
+  groupsWithSucc: pre=1 post=1 end=0 | conflicts: pre=1 post=1 end=0 | grievances: pre=0 post=0 end=3
+  personDeeds succ: pre=NO-ENTRY post=NO-ENTRY end=snap-missing
+  codexDeeds rows for succ: pre=0 post=0 (end roll-off-prone, cap 40: end=0)
+  affinity top: pre={"partner":"Luis","score":29} post={"partner":"Luis","score":29} end=null
+  bond convos: 0 []
+seed 26122: Aidan -> Miguel scripted=true relPre=same-day relPost=true relD14=true relEnd=true
+  succBonds: pre=10 post=10 (survived=10) d14=10 end=10 (survived=10)
+  topBond: pre=Ellis depth=0 v=20 post=Ellis depth=0 v=20 end=Tanisha depth=0 v=24
+  deadBearerBonds (phantom check): pre=0 post=0 end=0
+  groupsWithSucc: pre=1 post=1 end=1 | conflicts: pre=0 post=0 end=0 | grievances: pre=0 post=0 end=3
+  personDeeds succ: pre=0 post=0 end=0
+  codexDeeds rows for succ: pre=0 post=0 (end roll-off-prone, cap 40: end=0)
+  affinity top: pre={"partner":"Lars","score":29} post={"partner":"Lars","score":29} end={"partner":"Lars","score":23.5}
+  bond convos: 0 []
+seed 26123: Dominic -> Owen scripted=true relPre=same-day relPost=true relD14=true relEnd=true
+  succBonds: pre=8 post=8 (survived=8) d14=8 end=8 (survived=8)
+  topBond: pre=Vincent depth=1 v=48 post=Vincent depth=1 v=48 end=Vincent depth=2 v=66
+  deadBearerBonds (phantom check): pre=3 post=3 end=3
+  groupsWithSucc: pre=1 post=1 end=1 | conflicts: pre=0 post=0 end=0 | grievances: pre=0 post=0 end=0
+  personDeeds succ: pre=8 post=8 end=8
+    pre-deed: Owen found someone lost out past the ridge and walked them to shelter. (d32)
+    pre-deed: Owen found a cache out there — enough to matter. (d30)
+    pre-deed: Owen found someone lost out past the ridge and walked them to shelter. (d29)
+    pre-deed: Owen stood down The Heckler and kept walking. 3 rounds, 17 taken. (d23)
+  codexDeeds rows for succ: pre=8 post=8 (end roll-off-prone, cap 40: end=0)
+  affinity top: pre={"partner":"Hector","score":41} post={"partner":"Hector","score":41} end={"partner":"Hector","score":42.5}
+  bond convos: 0 []
+seed 26124: Keisha -> Catalina scripted=true relPre=same-day relPost=true relD14=true relEnd=true
+  succBonds: pre=8 post=8 (survived=8) d14=8 end=8 (survived=8)
+  topBond: pre=Andres depth=1 v=38 post=Andres depth=1 v=38 end=Andres depth=3 v=88
+  deadBearerBonds (phantom check): pre=0 post=0 end=0
+  groupsWithSucc: pre=1 post=1 end=1 | conflicts: pre=0 post=0 end=0 | grievances: pre=0 post=0 end=0
+  personDeeds succ: pre=2 post=2 end=2
+    pre-deed: Catalina found a cache out there — enough to matter. (d10)
+    pre-deed: Catalina killed Choir Toad out past the ridge — alone — and walked home. 2 rounds, 18 taken. (d10)
+  codexDeeds rows for succ: pre=2 post=2 (end roll-off-prone, cap 40: end=2)
+  affinity top: pre={"partner":"Andres","score":46} post={"partner":"Andres","score":46} end={"partner":"Andres","score":60}
+  bond convos: 0 []
+seed 26125: Amara -> Wanjiru scripted=true relPre=same-day relPost=true relD14=true relEnd=true
+  succBonds: pre=11 post=11 (survived=11) d14=11 end=11 (survived=11)
+  topBond: pre=Mai depth=1 v=32 post=Mai depth=1 v=32 end=Mai depth=1 v=39
+  deadBearerBonds (phantom check): pre=1 post=1 end=1
+  groupsWithSucc: pre=1 post=1 end=1 | conflicts: pre=0 post=0 end=0 | grievances: pre=0 post=0 end=0
+  personDeeds succ: pre=7 post=7 end=7
+    pre-deed: Wanjiru found a cache out there — enough to matter. (d39)
+    pre-deed: Wanjiru stood down The Landlord and kept walking. 6 rounds, 92 taken. (d25)
+    pre-deed: Wanjiru found a cache out there — enough to matter. (d25)
+    pre-deed: Wanjiru showed Tashi the snare — the loop, the trigger stick, where the run narrows. The beginner's wire. (d11)
+  codexDeeds rows for succ: pre=7 post=7 (end roll-off-prone, cap 40: end=3)
+  affinity top: pre={"partner":"Emma","score":40} post={"partner":"Emma","score":40} end={"partner":"Emma","score":42}
+  bond convos: 2 ["d+3 Mai depth=1 refused=false","d+14 Mai depth=1 refused=false"]
+
+== REL POOLED ==
+successor bonds survived to handoff: 45/45 | dead-bearer bonds lingering post=4 end=4
+
+== V1 VOUCH SNAPSHOT (mature seeds first: eligibleAtDeath > 0) ==
+seed 26123: rule=snapshot verdict=PASS-fired eligibleAtDeath=["Vincent","Hector","Amelia","Luis","Jovan","Miguel","Sofia","James"] alivePostDeath=["Vincent","Hector","Amelia","Luis","Jovan","Miguel","Sofia","James"] diedBetween=[] vouchLines=1
+seed 26124: rule=snapshot verdict=PASS-fired eligibleAtDeath=["Andres","Eduardo","Axel","Jolie","Xavier","Nina","Greta"] alivePostDeath=["Andres","Eduardo","Axel","Jolie","Xavier","Nina","Greta"] diedBetween=[] vouchLines=1
+seed 26125: rule=snapshot verdict=PASS-fired eligibleAtDeath=["Mai","Lillian","Abaynesh","Zoltan","Emma","Tashi"] alivePostDeath=["Mai","Lillian","Abaynesh","Zoltan","Emma","Tashi"] diedBetween=[] vouchLines=1
+seed 26121: rule=snapshot verdict=n/a-none-eligible eligibleAtDeath=[] alivePostDeath=[] diedBetween=[] vouchLines=0
+seed 26122: rule=snapshot verdict=n/a-none-eligible eligibleAtDeath=[] alivePostDeath=[] diedBetween=[] vouchLines=0
+
+== C1v2 (DROPPED r51 — r50 was its final run; C1v3 below is the transition rule) ==
+
+== S1 BEARER-OWN DELTA (carried) ==
+seed 26121: trustMoves=9 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=0 other=2 (other-mover singles: [{"day":42,"delta":1,"movers":[{"id":"Ava","from":26,"to":32,"delta":6}]},{"day":50,"delta":1,"movers":[{"id":"Sofia","from":54,"to":57,"delta":3}]}] )
+seed 26122: trustMoves=0 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=0 other=0 (other-mover singles: [] )
+seed 26123: trustMoves=1 soloOffice=0 soloDeltas=[] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=1 other=0 (other-mover singles: [] )
+seed 26124: trustMoves=16 soloOffice=11 soloDeltas=[1,1,2,1,1,1,1,1,2,2,2] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=2 other=2 (other-mover singles: [{"day":55,"delta":2,"movers":[{"id":"Meera","from":50,"to":53,"delta":3}]},{"day":66,"delta":1,"movers":[{"id":"Meera","from":61,"to":64,"delta":3}]}] )
+seed 26125: trustMoves=10 soloOffice=7 soloDeltas=[1,1,1,1,1,1,1] badSolo(|d|>2)=0 missingExact=0
+  single-mover: bearer=0 other=1 (other-mover singles: [{"day":66,"delta":1,"movers":[{"id":"Mai","from":82,"to":85,"delta":3}]}] )
+
+== E1b MOVER-NAMING CROSS-TAB (r48) ==
+seed 26121: {"diffuse|mover-named":3,"concentrated|mover-named":4,"single|mover-named":2}
+  diffuse moves: 3, of which mover-named=3 unnamed=0
+  concentrated+single moves: 6, of which mover-named=6 unnamed=0
+  top-mover named: 9, top-mover unnamed: 0 (of 9 trust moves)
+    d7 d+2 16->17 (+1) movers=["Anderson:-8","Luis:6","Emilio:4"] named=["Anderson","Luis","Emilio"] topNamed=true e1b=mover-named oldEvent=both
+    d14 d+9 17->20 (+3) movers=["Luis:-14","Emilio:-12","Esther:3","Boris:3"] named=["Luis","Emilio","Esther","Boris"] topNamed=true e1b=mover-named oldEvent=both
+    d23 d+18 20->23 (+3) movers=["Fernanda:6","Esther:3","Sofia:-3"] named=["Fernanda","Esther","Sofia"] topNamed=true e1b=mover-named oldEvent=neither
+    d26 d+21 23->15 (-8) movers=["Luis:-90","Emilio:-14","Esther:-8","Fatima:-7","Devon:-7","Sofia:-7","Boris:-7","Fernanda:-5","Lena:-5"] named=["Luis","Emilio","Esther","Fatima","Devon","Sofia","Boris","Fernanda","Lena"] topNamed=true e1b=mover-named oldEvent=both
+    d30 d+25 15->16 (+1) movers=["Fernanda:3","Fatima:3","Sofia:3"] named=["Fernanda","Fatima","Sofia"] topNamed=true e1b=mover-named oldEvent=event-only
+    d42 d+37 56->57 (+1) movers=["Ava:6"] named=["Ava"] topNamed=true e1b=mover-named oldEvent=both
+    d48 d+43 57->87 (+30) movers=["Fatima:30","Devon:6","Lena:4"] named=["Fatima","Devon","Lena"] topNamed=true e1b=mover-named oldEvent=event-only
+    d49 d+44 87->89 (+2) movers=["Ava:-8","Lena:3","Devon:3"] named=["Ava","Lena","Devon"] topNamed=true e1b=mover-named oldEvent=deed-only
+    d50 d+45 89->90 (+1) movers=["Sofia:3"] named=["Sofia"] topNamed=true e1b=mover-named oldEvent=neither
+seed 26122: {}
+  diffuse moves: 0, of which mover-named=0 unnamed=0
+  concentrated+single moves: 0, of which mover-named=0 unnamed=0
+  top-mover named: 0, top-mover unnamed: 0 (of 0 trust moves)
+seed 26123: {"single|mover-named":1}
+  diffuse moves: 0, of which mover-named=0 unnamed=0
+  concentrated+single moves: 1, of which mover-named=1 unnamed=0
+  top-mover named: 1, top-mover unnamed: 0 (of 1 trust moves)
+    d71 d+30 66->96 (+30) movers=["Owen:30"] named=["Owen"] topNamed=true e1b=mover-named oldEvent=both
+seed 26124: {"solo|unnamed":11,"single|mover-named":3,"single|unnamed":1,"concentrated|mover-named":1}
+  diffuse moves: 0, of which mover-named=0 unnamed=0
+  concentrated+single moves: 5, of which mover-named=4 unnamed=1
+  top-mover named: 4, top-mover unnamed: 1 (of 16 trust moves)
+    d53 d+12 63->64 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+    d55 d+14 64->66 (+2) movers=["Meera:3"] named=["Meera"] topNamed=true e1b=mover-named oldEvent=both
+    d56 d+15 66->69 (+3) movers=["Catalina:3"] named=["Catalina"] topNamed=true e1b=mover-named oldEvent=both
+    d57 d+16 69->72 (+3) movers=["Catalina:3"] named=[] topNamed=false e1b=unnamed oldEvent=both
+    d63 d+22 72->73 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d64 d+23 73->75 (+2) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d66 d+25 75->76 (+1) movers=["Meera:3"] named=["Meera"] topNamed=true e1b=mover-named oldEvent=deed-only
+    d67 d+26 76->77 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d69 d+28 77->78 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+    d70 d+29 78->79 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+    d71 d+30 79->80 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d72 d+31 80->81 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+seed 26125: {"concentrated|mover-named":2,"single|mover-named":1,"solo|unnamed":7}
+  diffuse moves: 0, of which mover-named=0 unnamed=0
+  concentrated+single moves: 3, of which mover-named=3 unnamed=0
+  top-mover named: 3, top-mover unnamed: 0 (of 10 trust moves)
+    d63 d+22 76->77 (+1) movers=["Lillian:5","Abaynesh:3"] named=["Lillian","Abaynesh"] topNamed=true e1b=mover-named oldEvent=both
+    d66 d+25 77->78 (+1) movers=["Mai:3"] named=["Mai"] topNamed=true e1b=mover-named oldEvent=both
+    d68 d+27 78->79 (+1) movers=["Mai:3","Daniyar:3"] named=["Mai","Daniyar"] topNamed=true e1b=mover-named oldEvent=both
+    d69 d+28 79->80 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d73 d+32 80->81 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+    d76 d+35 81->82 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d79 d+38 82->83 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+    d81 d+40 83->84 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+    d83 d+42 84->85 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=both
+    d85 d+44 85->86 (+1) movers=[] named=[] topNamed=null e1b=unnamed oldEvent=deed-only
+
+== E1 EVENT-VS-DEED (carried for continuity) ==
+seed 26121: {"event-only":2,"deed-only":1,"both":4,"neither":2}
+seed 26122: {"event-only":0,"deed-only":0,"both":0,"neither":0}
+seed 26123: {"event-only":0,"deed-only":0,"both":1,"neither":0}
+seed 26124: {"event-only":0,"deed-only":5,"both":11,"neither":0}
+seed 26125: {"event-only":0,"deed-only":4,"both":6,"neither":0}
+
+== A1 ARMOR INTRADAY MAPS (bark_armor counts per location) ==
+seed 26121: 10 snapshots
+  pre-death d5: barkTotal=2 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d5: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d7: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d8: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d12: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d19: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":1,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":1,"stashed":0} | bark total 2->2 gains[scholarWorn+1,corpses+1] losses[livingWorn-1,livingPack-1]
+  chain-handoff d35: barkTotal=2 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0} | bark total 2->2 gains[corpses+1] losses[scholarWorn-1]
+  ledger-d+30 d35: barkTotal=2 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  chain-handoff d38: barkTotal=2 armorTotal=31 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  end d50: barkTotal=2 armorTotal=40 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":2,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":[],"scholarWorn":["camo_jacket"],"scholarPrepStash":[],"pantry":[],"livingWorn":["rain_poncho","work_gloves","flannel_shirt","witness_coat","good_boots","rain_poncho","good_boots","good_boots","denim_jacket","running_shoes","knit_cap","flannel_shirt","running_shoes","flannel_shirt","work_gloves"],"livingPack":["rain_poncho","work_gloves","flannel_shirt","witness_coat","good_boots","rain_poncho","good_boots","good_boots","denim_jacket","running_shoes","flannel_shirt","running_shoes","knit_cap","flannel_shirt","work_gloves"],"deadWorn":[],"deadPack":[],"corpses":[],"stashed":["camo_jacket"]}
+seed 26122: 8 snapshots
+  pre-death d6: barkTotal=0 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d6: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d8: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d9: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d13: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d20: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+30 d36: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  end d51: barkTotal=0 armorTotal=33 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":[],"scholarWorn":["flannel_shirt"],"scholarPrepStash":[],"pantry":[],"livingWorn":["leather_jacket","canvas_pants","good_boots","work_gloves","flannel_shirt","flannel_shirt","work_gloves","rain_shell","wool_socks","canvas_pants","work_gloves","flannel_shirt","work_gloves","knit_cap","flannel_shirt","swat_vest"],"livingPack":["canvas_pants","leather_jacket","good_boots","work_gloves","flannel_shirt","flannel_shirt","work_gloves","rain_shell","wool_socks","work_gloves","canvas_pants","work_gloves","flannel_shirt","flannel_shirt","knit_cap","swat_vest"],"deadWorn":[],"deadPack":[],"corpses":[],"stashed":[]}
+seed 26123: 9 snapshots
+  pre-death d41: barkTotal=4 armorTotal=36 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d41: barkTotal=4 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+1 d42: barkTotal=4 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d43: barkTotal=4 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d44: barkTotal=4 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d48: barkTotal=4 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d55: barkTotal=4 armorTotal=37 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+30 d71: barkTotal=4 armorTotal=47 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  end d86: barkTotal=4 armorTotal=49 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":2,"livingPack":2,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":["camo_jacket"],"scholarWorn":["military_vest"],"scholarPrepStash":[],"pantry":[],"livingWorn":["farstrider_boots","work_gloves","work_gloves","canvas_pants","work_gloves","good_boots","bloodplate","alien_helm","work_gloves","knit_cap","flannel_shirt","canvas_pants","canvas_pants"],"livingPack":["farstrider_boots","work_gloves","work_gloves","good_boots","work_gloves","canvas_pants","bloodplate","alien_helm","work_gloves","flannel_shirt","knit_cap","canvas_pants","canvas_pants"],"deadWorn":[],"deadPack":[],"corpses":["rain_poncho","investigators_coat"],"stashed":["stormcloak"]}
+seed 26124: 10 snapshots
+  pre-death d41: barkTotal=2 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d41: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+1 d42: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d43: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d44: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d44: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d48: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d55: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+30 d71: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  end d85: barkTotal=2 armorTotal=34 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":1,"livingPack":1,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":["rain_poncho"],"scholarWorn":["swat_vest"],"scholarPrepStash":[],"pantry":[],"livingWorn":["wool_socks","deep_earth_boots","work_gloves","work_gloves","flannel_shirt","running_shoes","denim_jacket","work_gloves","flannel_shirt","running_shoes","rain_shell","wool_socks"],"livingPack":["wool_socks","deep_earth_boots","work_gloves","work_gloves","flannel_shirt","running_shoes","denim_jacket","work_gloves","flannel_shirt","running_shoes","rain_shell","wool_socks"],"deadWorn":[],"deadPack":[],"corpses":["flannel_shirt","work_gloves","work_gloves","flannel_shirt"],"stashed":["rain_shell","wool_socks"]}
+seed 26125: 10 snapshots
+  pre-death d41: barkTotal=0 armorTotal=37 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff d41: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+1 d42: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+2 d43: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d44: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  d+3 d44: barkTotal=0 armorTotal=35 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+7 d48: barkTotal=0 armorTotal=36 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+14 d55: barkTotal=0 armorTotal=38 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  ledger-d+30 d71: barkTotal=0 armorTotal=39 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  end d85: barkTotal=0 armorTotal=40 {"scholarPack":0,"scholarWorn":0,"scholarPrepStash":0,"pantry":0,"livingWorn":0,"livingPack":0,"deadWorn":0,"deadPack":0,"corpses":0,"stashed":0}
+  post-handoff non-bark armor: {"scholarPack":[],"scholarWorn":["rain_shell","wool_socks"],"scholarPrepStash":[],"pantry":[],"livingWorn":["flannel_shirt","flannel_shirt","work_gloves","work_gloves","flannel_shirt","work_gloves","rain_poncho","work_gloves","work_gloves","good_boots","leather_jacket","good_boots","denim_jacket","living_soil_robes","work_gloves","wool_socks"],"livingPack":["flannel_shirt","work_gloves","flannel_shirt","work_gloves","flannel_shirt","work_gloves","work_gloves","rain_poncho","good_boots","work_gloves","leather_jacket","good_boots","denim_jacket","living_soil_robes","work_gloves","wool_socks"],"deadWorn":[],"deadPack":[],"corpses":[],"stashed":["rain_poncho"]}
+
+== C1v3 TRANSITION RULE (r49) ==
+seed 26121: transitions=11 byCall=11 byConvoPrev=0 missing=[] ok=true
+seed 26122: transitions=0 byCall=0 byConvoPrev=0 missing=[] ok=true
+seed 26123: transitions=1 byCall=1 byConvoPrev=0 missing=[] ok=true
+seed 26124: transitions=16 byCall=16 byConvoPrev=0 missing=[] ok=true
+seed 26125: transitions=10 byCall=10 byConvoPrev=0 missing=[] ok=true
+
+== MG2v2 MEAL-LINE ONLY (r49) ==
+seed 26121: mg2(old)=true (viol=0) mg2v2=true (violMeal=0) auditDays=45
+seed 26122: mg2(old)=true (viol=0) mg2v2=true (violMeal=0) auditDays=45
+seed 26123: mg2(old)=true (viol=0) mg2v2=true (violMeal=0) auditDays=45
+seed 26124: mg2(old)=true (viol=0) mg2v2=true (violMeal=0) auditDays=45
+seed 26125: mg2(old)=true (viol=0) mg2v2=true (violMeal=0) auditDays=45
+
+== A1v2 ARMOR HOLDER IDENTITY (r49) ==
+seed 26121 pre-death d5: barkHolders={"Ethan":{"worn":1,"pack":1}} barkCorpse={} focusAccess=null
+seed 26121 post-handoff d5: barkHolders={"Ethan":{"worn":1,"pack":1}} barkCorpse={} focusAccess={"found":true,"dead":true,"worn":[],"pack":[]}
+  bark holder totals pre=2+corpse0 post=2+corpse0
+seed 26122 pre-death d6: barkHolders={} barkCorpse={} focusAccess=null
+seed 26122 post-handoff d6: barkHolders={} barkCorpse={} focusAccess={"found":true,"dead":true,"worn":[],"pack":[]}
+  bark holder totals pre=0+corpse0 post=0+corpse0
+seed 26123 pre-death d41: barkHolders={"Vincent":{"worn":1,"pack":1},"James":{"worn":1,"pack":1}} barkCorpse={} focusAccess=null
+seed 26123 post-handoff d41: barkHolders={"Vincent":{"worn":1,"pack":1},"James":{"worn":1,"pack":1}} barkCorpse={} focusAccess={"found":true,"dead":true,"worn":[],"pack":[]}
+  bark holder totals pre=4+corpse0 post=4+corpse0
+seed 26124 pre-death d41: barkHolders={"Andres":{"worn":1,"pack":1}} barkCorpse={} focusAccess=null
+seed 26124 post-handoff d41: barkHolders={"Andres":{"worn":1,"pack":1}} barkCorpse={} focusAccess={"found":true,"dead":true,"worn":[],"pack":[]}
+  bark holder totals pre=2+corpse0 post=2+corpse0
+seed 26125 pre-death d41: barkHolders={} barkCorpse={} focusAccess=null
+seed 26125 post-handoff d41: barkHolders={} barkCorpse={} focusAccess={"found":true,"dead":true,"worn":[],"pack":[]}
+  bark holder totals pre=0+corpse0 post=0+corpse0
+
+== WRITER-SITE SPIKE (r49, exploratory) ==
+seed 26121: trustMoves=9 withSameDayDeed=1 noSameDayDeed=8 deedNames={"donateToPantry":2}
+  NO-DEED d7 d+2 16->17 (+1) movers=["Anderson:-8","Luis:6","Emilio:4"]
+  NO-DEED d14 d+9 17->20 (+3) movers=["Luis:-14","Emilio:-12","Esther:3","Boris:3"]
+  NO-DEED d23 d+18 20->23 (+3) movers=["Fernanda:6","Esther:3","Sofia:-3"]
+  NO-DEED d26 d+21 23->15 (-8) movers=["Luis:-90","Emilio:-14","Esther:-8","Fatima:-7","Devon:-7","Sofia:-7","Boris:-7","Fernanda:-5","Lena:-5"]
+  NO-DEED d30 d+25 15->16 (+1) movers=["Fernanda:3","Fatima:3","Sofia:3"]
+  NO-DEED d42 d+37 56->57 (+1) movers=["Ava:6"]
+seed 26122: trustMoves=0 withSameDayDeed=0 noSameDayDeed=0 deedNames={}
+seed 26123: trustMoves=1 withSameDayDeed=0 noSameDayDeed=1 deedNames={}
+  NO-DEED d71 d+30 66->96 (+30) movers=["Owen:30"]
+seed 26124: trustMoves=16 withSameDayDeed=9 noSameDayDeed=7 deedNames={"donateToPantry":19}
+  NO-DEED d53 d+12 63->64 (+1) movers=[]
+  NO-DEED d57 d+16 69->72 (+3) movers=["Catalina:3"]
+  NO-DEED d64 d+23 73->75 (+2) movers=[]
+  NO-DEED d67 d+26 76->77 (+1) movers=[]
+  NO-DEED d69 d+28 77->78 (+1) movers=[]
+  NO-DEED d70 d+29 78->79 (+1) movers=[]
+seed 26125: trustMoves=10 withSameDayDeed=2 noSameDayDeed=8 deedNames={"donateToPantry":2}
+  NO-DEED d63 d+22 76->77 (+1) movers=["Lillian:5","Abaynesh:3"]
+  NO-DEED d66 d+25 77->78 (+1) movers=["Mai:3"]
+  NO-DEED d68 d+27 78->79 (+1) movers=["Mai:3","Daniyar:3"]
+  NO-DEED d73 d+32 80->81 (+1) movers=[]
+  NO-DEED d76 d+35 81->82 (+1) movers=[]
+  NO-DEED d79 d+38 82->83 (+1) movers=[]
+
+== W1 MUTATION-SITE CLASSIFICATION (r50) ==
+seed 26121: transitions=11 classes={"bump":9,"deed":0,"direct":0,"handoff":2,"unexplained":0} noDeed=10 noDeedBump=8 W1b(strict, incl handoffs)=0.8 W1b(trust-moves only)=1 (noDeedMoves=8 bump=8) bumpLogTotal=534 bumpWithReason=527
+  NON-BUMP entryD35 16->50 (+34) cls=handoff cover=none movers=[] bumpWhy=[]
+  NON-BUMP entryD38 50->56 (+6) cls=handoff cover=none movers=[] bumpWhy=[]
+  bump reasons (top 12): [["fetched creek water",63],["ran into each other out there",58],["pried stone from the creek bed",47],["hauled wood for the pile",46],["foraged the wilds for the village",44],["stood down a monster and walked home",35],["worked the creek for fish",28],["kept the haven fed",26],["kept the haven work going",26],["hauled clean water home",25],["they walk out with me",23],["heading out together",23]]
+  bump sites (top 8): [["src/js/game.js:6981:14",63],["src/js/game.js:6930:14",47],["src/js/game.js:6917:14",46],["src/js/game.js:16460:20",44],["src/js/game.js:19909:20",35],["src/js/villager-objectives.js:1234:16",29],["src/js/villager-objectives.js:1234:73",29],["src/js/game.js:7054:16",28]]
+seed 26122: transitions=0 classes={"bump":0,"deed":0,"direct":0,"handoff":0,"unexplained":0} noDeed=0 noDeedBump=0 W1b(strict, incl handoffs)=null W1b(trust-moves only)=null (noDeedMoves=0 bump=0) bumpLogTotal=1214 bumpWithReason=1208
+  bump reasons (top 12): [["pried stone from the creek bed",252],["hauled wood for the pile",251],["kept the haven fed",114],["kept the haven work going",114],["ran into each other out there",78],["fetched creek water",76],["gave orders over a contender",74],["stood down a monster and walked home",52],["hauled clean water home",46],["taught a villager their craft",24],["learned a craft from a villager",24],["they walk out with me",22]]
+  bump sites (top 8): [["src/js/game.js:6930:14",252],["src/js/game.js:6917:14",251],["src/js/game.js:7299:22",114],["src/js/game.js:7304:14",114],["src/js/game.js:6981:14",76],["src/js/game.js:17675:16",74],["src/js/game.js:19909:20",52],["src/js/villager-objectives.js:1524:20",46]]
+seed 26123: transitions=1 classes={"bump":0,"deed":0,"direct":1,"handoff":0,"unexplained":0} noDeed=1 noDeedBump=0 W1b(strict, incl handoffs)=0 W1b(trust-moves only)=0 (noDeedMoves=1 bump=0) bumpLogTotal=1371 bumpWithReason=1365
+  NON-BUMP entryD71 66->96 (+30) cls=direct cover=call movers=["Owen"] bumpWhy=[]
+  bump reasons (top 12): [["pried stone from the creek bed",271],["hauled wood for the pile",271],["kept the haven fed",198],["kept the haven work going",198],["fetched creek water",85],["gave orders over a contender",68],["ran into each other out there",56],["stood down a monster and walked home",44],["taught a villager their craft",31],["learned a craft from a villager",31],["they walk out with me",25],["heading out together",25]]
+  bump sites (top 8): [["src/js/game.js:6930:14",271],["src/js/game.js:6917:14",271],["src/js/game.js:7299:22",198],["src/js/game.js:7304:14",198],["src/js/game.js:6981:14",85],["src/js/game.js:17675:16",68],["src/js/game.js:19909:20",44],["src/js/villager-objectives.js:1353:26",31]]
+seed 26124: transitions=16 classes={"bump":6,"deed":4,"direct":2,"handoff":0,"unexplained":4} noDeed=7 noDeedBump=2 W1b(strict, incl handoffs)=0.29 W1b(trust-moves only)=0.29 (noDeedMoves=7 bump=2) bumpLogTotal=688 bumpWithReason=686
+  NON-BUMP entryD56 66->69 (+3) cls=direct cover=call movers=["Catalina"] bumpWhy=[]
+  NON-BUMP entryD57 69->72 (+3) cls=direct cover=call movers=["Catalina"] bumpWhy=[]
+  NON-BUMP entryD63 72->73 (+1) cls=deed cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD64 73->75 (+2) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD67 76->77 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD69 77->78 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD72 80->81 (+1) cls=deed cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD73 81->83 (+2) cls=deed cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD74 83->85 (+2) cls=deed cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD76 88->90 (+2) cls=unexplained cover=call movers=[] bumpWhy=[]
+  bump reasons (top 12): [["ran into each other out there",96],["fetched creek water",87],["pried stone from the creek bed",58],["hauled wood for the pile",57],["stood down a monster and walked home",56],["they walk out with me",51],["heading out together",51],["hauled clean water home",45],["kept the haven fed",44],["kept the haven work going",44],["foraged the wilds for the village",29],["worked the garden",10]]
+  bump sites (top 8): [["src/js/game.js:6981:14",87],["src/js/game.js:6930:14",58],["src/js/game.js:6917:14",57],["src/js/game.js:19909:20",56],["src/js/villager-objectives.js:1094:24",51],["src/js/villager-objectives.js:1094:73",51],["src/js/villager-objectives.js:1234:16",48],["src/js/villager-objectives.js:1234:73",48]]
+seed 26125: transitions=10 classes={"bump":3,"deed":2,"direct":0,"handoff":0,"unexplained":5} noDeed=8 noDeedBump=3 W1b(strict, incl handoffs)=0.38 W1b(trust-moves only)=0.38 (noDeedMoves=8 bump=3) bumpLogTotal=741 bumpWithReason=728
+  NON-BUMP entryD69 79->80 (+1) cls=deed cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD73 80->81 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD76 81->82 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD79 82->83 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD81 83->84 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD83 84->85 (+1) cls=unexplained cover=call movers=[] bumpWhy=[]
+  NON-BUMP entryD85 85->86 (+1) cls=deed cover=call movers=[] bumpWhy=[]
+  bump reasons (top 12): [["ran into each other out there",88],["fetched creek water",78],["pried stone from the creek bed",76],["hauled wood for the pile",76],["hauled clean water home",67],["they walk out with me",57],["heading out together",57],["stood down a monster and walked home",54],["kept the haven fed",44],["kept the haven work going",44],["foraged the wilds for the village",31],["(no-reason)",13]]
+  bump sites (top 8): [["src/js/game.js:6981:14",78],["src/js/game.js:6930:14",76],["src/js/game.js:6917:14",76],["src/js/villager-objectives.js:1524:20",67],["src/js/villager-objectives.js:1094:24",57],["src/js/villager-objectives.js:1094:73",57],["src/js/game.js:19909:20",54],["src/js/game.js:7299:22",44]]
+
+== W1d DONATION-JOIN (r53: TIGHTENED subset binds, POOLED headline) ==
+seed 26121: transitions labels={"donation":1,"bump":8,"deed":0,"direct":0,"handoff":2,"unexplained":0} bump∩donation=1 r51-subset(direct+deed-day-solo)=0 subsetWithDonation=0 W1d(r51)=null TIGHTENED(direct+deed-class-solo)=0 tightWithDonation=0 W1d-tight(BINDS)=null
+seed 26122: transitions labels={"donation":0,"bump":0,"deed":0,"direct":0,"handoff":0,"unexplained":0} bump∩donation=0 r51-subset(direct+deed-day-solo)=0 subsetWithDonation=0 W1d(r51)=null TIGHTENED(direct+deed-class-solo)=0 tightWithDonation=0 W1d-tight(BINDS)=null
+seed 26123: transitions labels={"donation":0,"bump":0,"deed":0,"direct":1,"handoff":0,"unexplained":0} bump∩donation=0 r51-subset(direct+deed-day-solo)=1 subsetWithDonation=0 W1d(r51)=0 TIGHTENED(direct+deed-class-solo)=1 tightWithDonation=0 W1d-tight(BINDS)=0
+  SUBSET entryD71 66->96 r50=direct donation=false lines=[]
+seed 26124: transitions labels={"donation":13,"bump":3,"deed":0,"direct":0,"handoff":0,"unexplained":0} bump∩donation=3 r51-subset(direct+deed-day-solo)=7 subsetWithDonation=6 W1d(r51)=0.86 TIGHTENED(direct+deed-class-solo)=6 tightWithDonation=6 W1d-tight(BINDS)=1
+  SUBSET entryD56 66->69 r50=direct donation=true lines=["Donated American Persimmon (+390 kcal). Trust +1. They'll remember this.","Donated Staghorn Sumac (+60 kcal). Trust +1. They'll remember this."]
+  SUBSET entryD57 69->72 r50=direct donation=true lines=["Donated Muscadine Grapes (+630 kcal). Trust +1. They'll remember this.","Donated Pawpaw (+240 kcal). Trust +1. They'll remember this."]
+  SUBSET entryD63 72->73 r50=deed donation=true lines=["Donated Muscadine Grapes (+270 kcal). Trust +1. They'll remember this."]
+  SUBSET entryD71 79->80 r50=bump donation=false lines=[]
+  SUBSET entryD72 80->81 r50=deed donation=true lines=["Donated Muscadine Grapes (+540 kcal). Trust +1. They'll remember this."]
+  SUBSET entryD73 81->83 r50=deed donation=true lines=["Donated Staghorn Sumac (+600 kcal). Trust +1. They'll remember this.","Donated Spicebush (+240 kcal). Trust +1. They'll remember this."]
+  SUBSET entryD74 83->85 r50=deed donation=true lines=["Donated American Persimmon (+260 kcal). Trust +1. They'll remember this.","Donated Chickweed (+60 kcal). Trust +1. They'll remember this."]
+seed 26125: transitions labels={"donation":10,"bump":0,"deed":0,"direct":0,"handoff":0,"unexplained":0} bump∩donation=3 r51-subset(direct+deed-day-solo)=2 subsetWithDonation=2 W1d(r51)=1 TIGHTENED(direct+deed-class-solo)=2 tightWithDonation=2 W1d-tight(BINDS)=1
+  SUBSET entryD69 79->80 r50=deed donation=true lines=["Donated Burdock (+630 kcal). Trust +1. They'll remember this."]
+  SUBSET entryD85 85->86 r50=deed donation=true lines=["Donated Burdock (+270 kcal). Trust +1. They'll remember this."]
+POOLED W1d-tight: 8/9 = 0.89
+
+== DEED-THIN (r51, exploratory) ==
+seed 26121: deeds=2 byBand={"thin":0,"fed":2,"unknown":0} byWindow={"d+1-10":0,"d+11-45":2,"other":0} pantryTrajectory(first=31000 min=6050 last=22279) pantryEnd=22279
+  DEED d48 d+43 donateToPantry pantry=21242 band=fed
+  DEED d48 d+43 donateToPantry pantry=21242 band=fed
+seed 26122: deeds=25 byBand={"thin":0,"fed":25,"unknown":0} byWindow={"d+1-10":8,"d+11-45":17,"other":0} pantryTrajectory(first=31800 min=21819 last=41361) pantryEnd=41361
+  DEED d8 d+2 teachPlant pantry=29650 band=fed
+  DEED d10 d+4 teachPlant pantry=27129 band=fed
+  DEED d11 d+5 teachPlant pantry=26915 band=fed
+  DEED d11 d+5 teachPlant pantry=26915 band=fed
+  DEED d13 d+7 teachPlant pantry=27049 band=fed
+  DEED d14 d+8 teachPlant pantry=26125 band=fed
+  DEED d14 d+8 teachPlant pantry=26125 band=fed
+  DEED d16 d+10 teachPlant pantry=25835 band=fed
+  DEED d17 d+11 teachPlant pantry=24400 band=fed
+  DEED d17 d+11 teachPlant pantry=24400 band=fed
+  DEED d19 d+13 teachPlant pantry=22615 band=fed
+  DEED d20 d+14 teachPlant pantry=22200 band=fed
+  DEED d20 d+14 teachPlant pantry=22200 band=fed
+  DEED d22 d+16 teachPlant pantry=21819 band=fed
+  DEED d23 d+17 teachPlant pantry=23939 band=fed
+  DEED d23 d+17 teachPlant pantry=23939 band=fed
+  DEED d25 d+19 teachPlant pantry=26838 band=fed
+  DEED d26 d+20 teachPlant pantry=28610 band=fed
+  DEED d26 d+20 teachPlant pantry=28610 band=fed
+  DEED d28 d+22 teachPlant pantry=30908 band=fed
+  DEED d29 d+23 teachPlant pantry=30908 band=fed
+  DEED d29 d+23 teachPlant pantry=30908 band=fed
+  DEED d31 d+25 teachPlant pantry=33310 band=fed
+  DEED d32 d+26 teachPlant pantry=35238 band=fed
+  DEED d32 d+26 teachPlant pantry=35238 band=fed
+seed 26123: deeds=2 byBand={"thin":0,"fed":2,"unknown":0} byWindow={"d+1-10":0,"d+11-45":1,"other":1} pantryTrajectory(first=34129 min=6136 last=11906) pantryEnd=11906
+  DEED d41 d+0 teachPlant pantry=34129 band=fed
+  DEED d53 d+12 teachPlant pantry=39518 band=fed
+seed 26124: deeds=41 byBand={"thin":2,"fed":39,"unknown":0} byWindow={"d+1-10":4,"d+11-45":37,"other":0} pantryTrajectory(first=16572 min=11728 last=23498) pantryEnd=23498
+  DEED d42 d+1 teachPlant pantry=13839 band=thin
+  DEED d45 d+4 teachPlant pantry=11728 band=thin
+  DEED d48 d+7 teachPlant pantry=16577 band=fed
+  DEED d51 d+10 teachPlant pantry=24376 band=fed
+  DEED d54 d+13 donateToPantry pantry=27385 band=fed
+  DEED d54 d+13 donateToPantry pantry=27385 band=fed
+  DEED d55 d+14 donateToPantry pantry=25809 band=fed
+  DEED d55 d+14 donateToPantry pantry=25809 band=fed
+  DEED d55 d+14 donateToPantry pantry=25809 band=fed
+  DEED d56 d+15 donateToPantry pantry=26247 band=fed
+  DEED d56 d+15 donateToPantry pantry=26247 band=fed
+  DEED d56 d+15 donateToPantry pantry=26247 band=fed
+  DEED d62 d+21 donateToPantry pantry=25639 band=fed
+  DEED d63 d+22 donateToPantry pantry=25398 band=fed
+  DEED d63 d+22 donateToPantry pantry=25398 band=fed
+  DEED d65 d+24 donateToPantry pantry=21944 band=fed
+  DEED d66 d+25 donateToPantry pantry=21141 band=fed
+  DEED d68 d+27 donateToPantry pantry=21738 band=fed
+  DEED d71 d+30 donateToPantry pantry=24598 band=fed
+  DEED d72 d+31 donateToPantry pantry=25357 band=fed
+  DEED d72 d+31 donateToPantry pantry=25357 band=fed
+  DEED d73 d+32 donateToPantry pantry=25276 band=fed
+  DEED d73 d+32 donateToPantry pantry=25276 band=fed
+  DEED d74 d+33 donateToPantry pantry=24486 band=fed
+  DEED d74 d+33 donateToPantry pantry=24486 band=fed
+  DEED d74 d+33 donateToPantry pantry=24486 band=fed
+  DEED d75 d+34 donateToPantry pantry=22562 band=fed
+  DEED d75 d+34 donateToPantry pantry=22562 band=fed
+  DEED d77 d+36 donateToPantry pantry=20669 band=fed
+  DEED d77 d+36 donateToPantry pantry=20669 band=fed
+seed 26125: deeds=10 byBand={"thin":0,"fed":10,"unknown":0} byWindow={"d+1-10":0,"d+11-45":10,"other":0} pantryTrajectory(first=63210 min=52109 last=53288) pantryEnd=53288
+  DEED d62 d+21 donateToPantry pantry=54968 band=fed
+  DEED d65 d+24 donateToPantry pantry=54014 band=fed
+  DEED d67 d+26 donateToPantry pantry=52109 band=fed
+  DEED d69 d+28 donateToPantry pantry=68115 band=fed
+  DEED d72 d+31 donateToPantry pantry=67382 band=fed
+  DEED d75 d+34 donateToPantry pantry=67426 band=fed
+  DEED d78 d+37 donateToPantry pantry=70201 band=fed
+  DEED d80 d+39 donateToPantry pantry=63761 band=fed
+  DEED d82 d+41 donateToPantry pantry=58248 band=fed
+  DEED d85 d+44 donateToPantry pantry=53018 band=fed
+
+== DEED-TRIGGER (r52, finding bar) ==
+seed 26121: deedContextDays=45 deedDays=1 noDeedDays=44 totalDeeds=2
+  DEED days: teachablePairs[mean=138 min=138 max=138 n=1] kcalGateOpen=0 hallGated=0 packKcal[mean=3180 min=3180 max=3180 n=1] pantry[mean=21242 min=21242 max=21242 n=1]
+  NO-DEED days: teachablePairs[mean=92 min=63 max=145 n=44] kcalGateOpen=0 hallGated=0.27 packKcal[mean=1183.1 min=0 max=10710 n=44] pantry[mean=16939.6 min=6050 max=27950 n=44]
+  NO-DEED closed-gate shares: teachablePairs=0:0 kcalGateClosed:1 hallGated:0.27 packEmpty:0.34
+  DEED donateToPantry: {"calls":2,"args":{"[\"8\",\"6\"]":1,"[\"7\",\"15\"]":1},"targetKnowsTrue":0,"targetKnowsFalse":0,"kcalGateOpen":0,"kcalGateClosed":2,"hallGated":0}
+seed 26122: deedContextDays=45 deedDays=19 noDeedDays=26 totalDeeds=25
+  DEED days: teachablePairs[mean=42.7 min=34 max=69 n=19] kcalGateOpen=0 hallGated=0.89 packKcal[mean=146.3 min=0 max=440 n=19] pantry[mean=26973.5 min=21819 max=35238 n=19]
+  NO-DEED days: teachablePairs[mean=36.4 min=31 max=65 n=26] kcalGateOpen=0 hallGated=0.23 packKcal[mean=650.4 min=0 max=1410 n=26] pantry[mean=36182.2 min=22550 max=44492 n=26]
+  NO-DEED closed-gate shares: teachablePairs=0:0 kcalGateClosed:1 hallGated:0.23 packEmpty:0.15
+  DEED teachPlant: {"calls":25,"args":{"[\"gen_wq5tyey\",\"hickory_nut\"]":2,"[\"gen_wq5tyey\",\"acorn_white_oak\"]":3,"[\"gen_16ae9i2\",\"acorn_white_oak\"]":13,"[\"gen_16ae9i2\",\"hickory_nut\"]":7},"targetKnowsTrue":25,"targetKnowsFalse":0,"kcalGateOpen":0,"kcalGateClosed":0,"hallGated":0}
+seed 26123: deedContextDays=45 deedDays=1 noDeedDays=44 totalDeeds=2
+  DEED days: teachablePairs[mean=42 min=42 max=42 n=1] kcalGateOpen=0 hallGated=0 packKcal[mean=0 min=0 max=0 n=1] pantry[mean=39518 min=39518 max=39518 n=1]
+  NO-DEED days: teachablePairs[mean=34.2 min=31 max=43 n=44] kcalGateOpen=0 hallGated=0 packKcal[mean=293.4 min=0 max=1440 n=44] pantry[mean=28266.2 min=6136 max=38417 n=44]
+  NO-DEED closed-gate shares: teachablePairs=0:0 kcalGateClosed:1 hallGated:0 packEmpty:0.73
+  DEED teachPlant: {"calls":2,"args":{"[\"sofia_chen\",\"acorn_white_oak\"]":2},"targetKnowsTrue":2,"targetKnowsFalse":0,"kcalGateOpen":0,"kcalGateClosed":0,"hallGated":0}
+seed 26124: deedContextDays=45 deedDays=23 noDeedDays=22 totalDeeds=41
+  DEED days: teachablePairs[mean=44.5 min=43 max=50 n=23] kcalGateOpen=0 hallGated=0 packKcal[mean=1919.1 min=510 max=2410 n=23] pantry[mean=23191.3 min=13839 max=27385 n=23]
+  NO-DEED days: teachablePairs[mean=46.3 min=43 max=56 n=22] kcalGateOpen=0 hallGated=0 packKcal[mean=1776.4 min=720 max=2410 n=22] pantry[mean=21042.5 min=11728 max=26273 n=22]
+  NO-DEED closed-gate shares: teachablePairs=0:0 kcalGateClosed:1 hallGated:0 packEmpty:0
+  DEED teachPlant: {"calls":4,"args":{"[\"gen_kgmchc7\",\"hickory_nut\"]":4},"targetKnowsTrue":4,"targetKnowsFalse":0,"kcalGateOpen":0,"kcalGateClosed":0,"hallGated":0}
+  DEED donateToPantry: {"calls":37,"args":{"[\"19\",\"3\"]":1,"[\"18\",\"1\"]":2,"[\"20\",\"3\"]":3,"[\"17\",\"1\"]":1,"[\"21\",\"7\"]":1,"[\"16\",\"1\"]":1,"[\"23\",\"6\"]":1,"[\"22\",\"6\"]":1,"[\"23\",\"7\"]":1,"[\"23\",\"1\"]":1,"[\"26\",\"7\"]":1,"[\"26\",\"6\"]":1,"[\"28\",\"10\"]":1,"[\"27\",\"8\"]":1,"[\"28\",\"2\"]":1,"[\"27\",\"2\"]":1,"[\"29\",\"8\"]":1,"[\"28\",\"8\"]":1,"[\"22\",\"1\"]":1,"[\"29\",\"6\"]":1,"[\"28\",\"1\"]":1,"[\"32\",\"8\"]":1,"[\"31\",\"6\"]":1,"[\"32\",\"5\"]":1,"[\"31\",\"1\"]":1,"[\"34\",\"13\"]":1,"[\"33\",\"9\"]":1,"[\"30\",\"1\"]":1,"[\"35\",\"13\"]":1,"[\"34\",\"8\"]":1,"[\"35\",\"8\"]":1,"[\"34\",\"3\"]":1,"[\"36\",\"13\"]":1,"[\"35\",\"10\"]":1},"targetKnowsTrue":0,"targetKnowsFalse":0,"kcalGateOpen":0,"kcalGateClosed":37,"hallGated":0}
+seed 26125: deedContextDays=45 deedDays=10 noDeedDays=35 totalDeeds=10
+  DEED days: teachablePairs[mean=32.7 min=32 max=37 n=10] kcalGateOpen=0 hallGated=0 packKcal[mean=2061 min=1710 max=2430 n=10] pantry[mean=62515.2 min=53018 max=70201 n=10]
+  NO-DEED days: teachablePairs[mean=41.2 min=32 max=60 n=35] kcalGateOpen=0 hallGated=0 packKcal[mean=1748.6 min=90 max=14040 n=35] pantry[mean=58198.5 min=52109 max=69952 n=35]
+  NO-DEED closed-gate shares: teachablePairs=0:0 kcalGateClosed:1 hallGated:0 packEmpty:0
+  DEED donateToPantry: {"calls":10,"args":{"[\"26\",\"3\"]":1,"[\"27\",\"3\"]":1,"[\"28\",\"37\"]":1,"[\"30\",\"7\"]":1,"[\"31\",\"5\"]":1,"[\"31\",\"1\"]":1,"[\"33\",\"9\"]":1,"[\"36\",\"3\"]":1,"[\"36\",\"2\"]":1,"[\"37\",\"3\"]":1},"targetKnowsTrue":0,"targetKnowsFalse":0,"kcalGateOpen":0,"kcalGateClosed":10,"hallGated":0}
+
+== SOLO-CREEP LONG WINDOW (r50) ==
+seed 26121: soloCount=0 soloCumDelta=0 windows={"1-10":{"n":0,"sum":0},"11-20":{"n":0,"sum":0},"21-30":{"n":0,"sum":0},"31-45":{"n":0,"sum":0},"46+":{"n":0,"sum":0}} soloWithBearerBump=0/0
+seed 26122: soloCount=0 soloCumDelta=0 windows={"1-10":{"n":0,"sum":0},"11-20":{"n":0,"sum":0},"21-30":{"n":0,"sum":0},"31-45":{"n":0,"sum":0},"46+":{"n":0,"sum":0}} soloWithBearerBump=0/0
+seed 26123: soloCount=0 soloCumDelta=0 windows={"1-10":{"n":0,"sum":0},"11-20":{"n":0,"sum":0},"21-30":{"n":0,"sum":0},"31-45":{"n":0,"sum":0},"46+":{"n":0,"sum":0}} soloWithBearerBump=0/0
+seed 26124: soloCount=11 soloCumDelta=15 windows={"1-10":{"n":0,"sum":0},"11-20":{"n":1,"sum":1},"21-30":{"n":6,"sum":7},"31-45":{"n":4,"sum":7},"46+":{"n":0,"sum":0}} soloWithBearerBump=3/11
+  SOLO d53 d+12 63->64 (+1) bearerDeltaExact=1 bearerBumps=["1(they came all this way to visit)"] deedThatDay=false
+  SOLO d63 d+22 72->73 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=true
+  SOLO d64 d+23 73->75 (+2) bearerDeltaExact=2 bearerBumps=[] deedThatDay=false
+  SOLO d67 d+26 76->77 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d69 d+28 77->78 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d70 d+29 78->79 (+1) bearerDeltaExact=1 bearerBumps=["1(they came all this way to visit)"] deedThatDay=false
+  SOLO d71 d+30 79->80 (+1) bearerDeltaExact=1 bearerBumps=["1(they came all this way to visit)"] deedThatDay=true
+  SOLO d72 d+31 80->81 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=true
+  SOLO d73 d+32 81->83 (+2) bearerDeltaExact=2 bearerBumps=[] deedThatDay=true
+  SOLO d74 d+33 83->85 (+2) bearerDeltaExact=2 bearerBumps=[] deedThatDay=true
+  SOLO d76 d+35 88->90 (+2) bearerDeltaExact=2 bearerBumps=[] deedThatDay=false
+seed 26125: soloCount=7 soloCumDelta=7 windows={"1-10":{"n":0,"sum":0},"11-20":{"n":0,"sum":0},"21-30":{"n":1,"sum":1},"31-45":{"n":6,"sum":6},"46+":{"n":0,"sum":0}} soloWithBearerBump=0/7
+  SOLO d69 d+28 79->80 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=true
+  SOLO d73 d+32 80->81 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d76 d+35 81->82 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d79 d+38 82->83 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d81 d+40 83->84 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d83 d+42 84->85 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=false
+  SOLO d85 d+44 85->86 (+1) bearerDeltaExact=1 bearerBumps=[] deedThatDay=true
+
+== OVER-CAUSE (r49) ==
+seed 26121: over=false villageLost=false won=false alive=8 pantryEnd=22279
+  | d50: Harvest: 40× Muscadine Grapes. About 3600 kcal before preparation.
+  | d50: 📋 Fernanda — 🎣 Fish. Fernanda nods eagerly. They'll report back by next part.
+  | d50: 📋 Lena — 🎣 Fish. Lena nods eagerly. They'll report back by next part.
+  | d50: 📋 Devon — 🍲 Cook. Devon nods eagerly. They'll report back by next part.
+  | d50: Dawn's an hour off — too late for real sleep. Rest a while instead, or wait for morning.
+seed 26122: over=false villageLost=false won=false alive=10 pantryEnd=41361
+  | d51: The fire burns low. One new line in the journal: Hickory Nuts — mastered.
+  | d51: Tanisha Sethi reads the sky: clear tomorrow, cold.
+  | d51: Dawn. You wake rested. (+30 health, energy restored. By the fire. Good enough.)
+  | d51: 📓 Codex: Ellis picked up Fusion Reactor from talking with you — what it does, and what it might go with.
+  | d51: 📓 Codex: Tanisha picked up Lucky Rock from talking with you — what it does, and what it might go with.
+seed 26123: over=false villageLost=false won=false alive=9 pantryEnd=11906
+  | d86: The village threw out spoiled stores: Foraged food. (pantry)
+  | d86: 💬 Amelia says: "If they're watching, let them watch me work. That's all I've got."
+  | d86: Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)
+  | d86: 📓 Codex: Vincent picked up Bloodhound from talking with you — what it does, and what it might go with.
+  | d86: 📓 Codex: Amelia picked up Fusion Reactor from talking with you — what it does, and what it might go with.
+seed 26124: over=false villageLost=false won=false alive=10 pantryEnd=23498
+  | d85: You sow Staghorn Sumac: 730 days to first harvest. Later harvests need 60 days of regrowth. Tend daily; garden magic can accelerate growth. (2 units sown.)
+  | d85: 📋 Greta — 🎣 Fish. (a natural — good pick) Greta nods eagerly. They'll report back by next part.
+  | d85: 📋 Andres — 🎣 Fish. Andres nods eagerly. They'll report back by next part.
+  | d85: 📋 Eduardo — 🍲 Cook. Eduardo nods eagerly. They'll report back by next part.
+  | d85: Dawn's an hour off — too late for real sleep. Rest a while instead, or wait for morning.
+seed 26125: over=false villageLost=false won=false alive=10 pantryEnd=53288
+  | d85: You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)
+  | d85: You sow Burdock: 90 days to first harvest. Harvest removes the crop; sow new seed afterward. Tend daily; garden magic can accelerate growth. (2 units sown.)
+  | d85: 📋 Mai — 🎣 Fish. Mai nods eagerly. They'll report back by next part.
+  | d85: 📋 Zoltan — 🍲 Cook. Zoltan nods eagerly. They'll report back by next part.
+  | d85: Dawn's an hour off — too late for real sleep. Rest a while instead, or wait for morning.
+\n== DEED-CALLER (r53, finding bar) ==
+seed 26121: deeds=2 byPath={"donateToPantry:haul-donate":2}
+  teachPlant: total=0 knowsBefore true=0 FALSE(new)=0 null=0
+  census days: deedDays=1 noDeedDays=36 deedsByPathOnDeedDays={"haul-donate":2}
+seed 26122: deeds=25 byPath={"teachPlant:haul-teach":25}
+  teachPlant: total=25 knowsBefore true=25 FALSE(new)=0 null=0
+  census days: deedDays=15 noDeedDays=22 deedsByPathOnDeedDays={"haul-teach":22}
+seed 26123: deeds=2 byPath={"teachPlant:haul-teach":2}
+  teachPlant: total=2 knowsBefore true=2 FALSE(new)=0 null=0
+  census days: deedDays=1 noDeedDays=41 deedsByPathOnDeedDays={"haul-teach":1}
+seed 26124: deeds=41 byPath={"teachPlant:haul-teach":4,"donateToPantry:haul-donate":37}
+  teachPlant: total=4 knowsBefore true=4 FALSE(new)=0 null=0
+  census days: deedDays=21 noDeedDays=17 deedsByPathOnDeedDays={"haul-teach":3,"haul-donate":35}
+seed 26125: deeds=10 byPath={"donateToPantry:haul-donate":10}
+  teachPlant: total=0 knowsBefore true=0 FALSE(new)=0 null=0
+  census days: deedDays=8 noDeedDays=29 deedsByPathOnDeedDays={"haul-donate":8}
+BAND TEACH-NEW: targetKnowsBefore=false total=0 (known=31 null=0)
+\n== STAGING RATE (r53: mature regime is an aspiration, not a guarantee) ==
+young (day-5): 2/2 scripted (organic 0); mature (day-40 aspiration): 3/3 scripted (organic 0)
+seed 26121: scripted=true deathDay=5
+seed 26122: scripted=true deathDay=6
+seed 26123: scripted=true deathDay=41
+seed 26124: scripted=true deathDay=41
+seed 26125: scripted=true deathDay=41
+\n== BINDING METRICS ==
+seed 26121: M3v2=3 M3v2b=3 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) MG2v2=true (violMeal=0) C1v3ok=true overCause=false chainDeaths=2 chainKnown=2 identityTrips=0 dayAdv=45
+seed 26122: M3v2=3 M3v2b=3 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) MG2v2=true (violMeal=0) C1v3ok=true overCause=false chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=45
+seed 26123: M3v2=3 M3v2b=3 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) MG2v2=true (violMeal=0) C1v3ok=true overCause=false chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=45
+seed 26124: M3v2=5 M3v2b=5 (bar >=2, excludedLoot=0) M1=true M4=true MG2=true (viol=0) MG2v2=true (violMeal=0) C1v3ok=true overCause=false chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=44
+seed 26125: M3v2=9 M3v2b=8 (bar >=2, excludedLoot=1) M1=true M4=true MG2=true (viol=0) MG2v2=true (violMeal=0) C1v3ok=true overCause=false chainDeaths=0 chainKnown=0 identityTrips=0 dayAdv=44
+
+== TRANSCRIPTS (people check inventory) ==
+48 transcripts
+  journey-succession-r55-transcript-26121-dplus14-Emilio.txt
+  journey-succession-r55-transcript-26121-dplus14-Luis.txt
+  journey-succession-r55-transcript-26121-dplus3-Fatima.txt
+  journey-succession-r55-transcript-26121-dplus3-Luis.txt
+  journey-succession-r55-transcript-26121-dplus30-Fatima.txt
+  journey-succession-r55-transcript-26121-dplus30-Fernanda.txt
+  journey-succession-r55-transcript-26121-dplus45-Fernanda.txt
+  journey-succession-r55-transcript-26121-dplus45-Lena.txt
+  journey-succession-r55-transcript-26121-dplus7-Emilio.txt
+  journey-succession-r55-transcript-26121-dplus7-Luis.txt
+  journey-succession-r55-transcript-26122-dplus14-Ellis.txt
+  journey-succession-r55-transcript-26122-dplus14-Tanisha.txt
+  journey-succession-r55-transcript-26122-dplus3-Ellis.txt
+  journey-succession-r55-transcript-26122-dplus3-Tanisha.txt
+  journey-succession-r55-transcript-26122-dplus30-Ellis.txt
+  journey-succession-r55-transcript-26122-dplus30-Tanisha.txt
+  journey-succession-r55-transcript-26122-dplus45-Ellis.txt
+  journey-succession-r55-transcript-26122-dplus45-Tanisha.txt
+  journey-succession-r55-transcript-26122-dplus7-Ellis.txt
+  journey-succession-r55-transcript-26122-dplus7-Tanisha.txt
+  journey-succession-r55-transcript-26123-dplus14-Amelia.txt
+  journey-succession-r55-transcript-26123-dplus14-Vincent.txt
+  journey-succession-r55-transcript-26123-dplus3-Amelia.txt
+  journey-succession-r55-transcript-26123-dplus3-Vincent.txt
+  journey-succession-r55-transcript-26123-dplus30-Amelia.txt
+  journey-succession-r55-transcript-26123-dplus30-Vincent.txt
+  journey-succession-r55-transcript-26123-dplus45-Amelia.txt
+  journey-succession-r55-transcript-26123-dplus45-Vincent.txt
+  journey-succession-r55-transcript-26123-dplus7-Amelia.txt
+  journey-succession-r55-transcript-26123-dplus7-Vincent.txt
+  journey-succession-r55-transcript-26124-dplus14-Andres.txt
+  journey-succession-r55-transcript-26124-dplus14-Eduardo.txt
+  journey-succession-r55-transcript-26124-dplus3-Andres.txt
+  journey-succession-r55-transcript-26124-dplus3-Eduardo.txt
+  journey-succession-r55-transcript-26124-dplus30-Andres.txt
+  journey-succession-r55-transcript-26124-dplus30-Eduardo.txt
+  journey-succession-r55-transcript-26124-dplus7-Andres.txt
+  journey-succession-r55-transcript-26124-dplus7-Eduardo.txt
+  journey-succession-r55-transcript-26125-dplus14-Abaynesh.txt
+  journey-succession-r55-transcript-26125-dplus14-Lillian.txt
+  journey-succession-r55-transcript-26125-dplus14-Mai.txt
+  journey-succession-r55-transcript-26125-dplus3-Lillian.txt
+  journey-succession-r55-transcript-26125-dplus3-Mai.txt
+  journey-succession-r55-transcript-26125-dplus3-Zoltan.txt
+  journey-succession-r55-transcript-26125-dplus30-Lillian.txt
+  journey-succession-r55-transcript-26125-dplus30-Mai.txt
+  journey-succession-r55-transcript-26125-dplus7-Lillian.txt
+  journey-succession-r55-transcript-26125-dplus7-Zoltan.txt
+
+== VILLAGE END STATE ==
+seed 26121: Vito -> Esther d5 trustMantle=16 officeEnd=90 villageMeanEnd=59.3 pantryEnd=22279 ledgerAlive=8 ledgerPantry=22279
+seed 26122: Aidan -> Miguel d6 trustMantle=20 officeEnd=20 villageMeanEnd=67.6 pantryEnd=41361 ledgerAlive=10 ledgerPantry=41361
+seed 26123: Dominic -> Owen d41 trustMantle=66 officeEnd=96 villageMeanEnd=91.9 pantryEnd=11906 ledgerAlive=9 ledgerPantry=11906
+seed 26124: Keisha -> Catalina d41 trustMantle=63 officeEnd=90 villageMeanEnd=81.2 pantryEnd=23498 ledgerAlive=10 ledgerPantry=23498
+seed 26125: Amara -> Wanjiru d41 trustMantle=76 officeEnd=86 villageMeanEnd=84.8 pantryEnd=53288 ledgerAlive=10 ledgerPantry=53288

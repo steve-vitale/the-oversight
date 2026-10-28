@@ -1,0 +1,119 @@
+
+PRE-DEATH d6: bearer <redacted>, topTrust=[{"id":"Pearl","t":32},{"id":"Ray","t":28},{"id":"Chloe","t":21},{"id":"Shengli","t":16}], roster=12
+INH readable=true scripted=true deadItems=5 distinct=5 transferred=0 vanished=3 keptPlants=6 inheritedPlants=3 keptSkills=2 inheritedSkills=5 succTrustPre=32 succTrustPost=19
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d6 (a hushwolf, scripted): Liam -> Pearl | passed=true lin=true mo=true trust=19 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=0 vanished=3 of 5 distinct dead-bearer items
+  CONVO d+3 with Ray (refused=false)
+  CONVO d+3 with Chloe (refused=false)
+  CONVO d+7 with Ray (refused=false)
+  CONVO d+7 with Chloe (refused=false)
+  CONVO d+14 with Ray (refused=false)
+  CONVO d+14 with Chloe (refused=false)
+  CONVO d+30 with Vincent (refused=false)
+  CONVO d+30 with Ray (refused=false)
+
+FUNERAL: deathBeat=1 recover=1 vouch=0 (eligible=0) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=30 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=30 signals={"levelUp":true,"systemVoice":36,"offerLines":25,"codexPlantsDelta":9,"codexSkillsDelta":6,"codexAbilitiesDelta":10,"xpDelta":58,"any":true} pantry 24450->46005
+TRUST-DIALS: office 19->55 (+36, climb) | villageMean 15.3->62.9 (+47.6, climb) | ge60 0->4 | movers>=5: [{"id":"Vincent","from":13,"to":90,"delta":77},{"id":"Owen","from":13,"to":87,"delta":74},{"id":"Chloe","from":21,"to":90,"delta":69},{"id":"Ray","from":28,"to":90,"delta":62},{"id":"Shengli","from":16,"to":59,"delta":43},{"id":"Sophia","from":11,"to":50,"delta":39},{"id":"Devon","from":13,"to":49,"delta":36},{"id":"Ingrid","from":11,"to":25,"delta":14},{"id":"Mara","from":12,"to":26,"delta":14}]
+DEED-LEDGER: calls=22 summary={"teachPlant":{"calls":9,"ok":9,"deltaSum":0,"deltaN":9,"positive":0,"meanDelta":0},"donateToPantry":{"calls":13,"ok":13,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=36 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=30
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+30) t2=true(deedCalls=22) trustVerdict={"readable":true,"officeMantle":19,"officeLast":55,"officeDelta":36,"officeClass":"climb","villageMantle":15.3,"villageLast":62.9,"villageDelta":47.6,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":4,"movers":[{"id":"Vincent","from":13,"to":90,"delta":77},{"id":"Owen","from":13,"to":87,"delta":74},{"id":"Chloe","from":21,"to":90,"delta":69},{"id":"Ray","from":28,"to":90,"delta":62},{"id":"Shengli","from":16,"to":59,"delta":43},{"id":"Sophia","from":11,"to":50,"delta":39},{"id":"Devon","from":13,"to":49,"delta":36},{"id":"Ingrid","from":11,"to":25,"delta":14},{"id":"Mara","from":12,"to":26,"delta":14}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":0,"trustMoves":7} callCheck={"dailyMoveDays":7,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":2,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":4,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":1,"teleWeek2":2,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":31,"moves":7}
+PASS RED lacks rec.relPost/relD14/relEnd
+PASS RED run is genuinely r54 (inh present, rel absent)
+
+PRE-DEATH d6: bearer <redacted>, topTrust=[{"id":"Pearl","t":32},{"id":"Ray","t":28},{"id":"Chloe","t":21},{"id":"Shengli","t":16}], roster=12
+INH readable=true scripted=true deadItems=5 distinct=5 transferred=0 vanished=3 keptPlants=6 inheritedPlants=3 keptSkills=2 inheritedSkills=5 succTrustPre=32 succTrustPost=19
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d6 (a hushwolf, scripted): Liam -> Pearl | passed=true lin=true mo=true trust=19 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=0 vanished=3 of 5 distinct dead-bearer items
+  CONVO d+3 with Ray (refused=false)
+  CONVO d+3 with Chloe (refused=false)
+  BOND-CONVO d+3 with Sophia (depth=0 v=14 refused=false)
+  CONVO d+7 with Ray (refused=false)
+  CONVO d+7 with Chloe (refused=false)
+  CONVO d+14 with Chloe (refused=false)
+  CONVO d+14 with Ray (refused=false)
+  BOND-CONVO d+14 with Sophia (depth=0 v=14 refused=false)
+  CONVO d+30 with Vincent (refused=false)
+  CONVO d+30 with Ray (refused=false)
+
+FUNERAL: deathBeat=1 recover=1 vouch=0 (eligible=0) echo=4 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=30 violations=0 noMealDays=5 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=30 signals={"levelUp":true,"systemVoice":29,"offerLines":23,"codexPlantsDelta":12,"codexSkillsDelta":5,"codexAbilitiesDelta":9,"xpDelta":48,"any":true} pantry 24450->25048
+TRUST-DIALS: office 19->19 (+0, flat) | villageMean 15.3->66.5 (+51.2, climb) | ge60 0->6 | movers>=5: [{"id":"Vincent","from":13,"to":90,"delta":77},{"id":"Shengli","from":16,"to":90,"delta":74},{"id":"Chloe","from":21,"to":90,"delta":69},{"id":"Ray","from":28,"to":90,"delta":62},{"id":"Ethan","from":15,"to":69,"delta":54},{"id":"Sophia","from":11,"to":62,"delta":51},{"id":"Owen","from":13,"to":52,"delta":39},{"id":"Devon","from":13,"to":46,"delta":33},{"id":"Mara","from":12,"to":41,"delta":29},{"id":"Ingrid","from":11,"to":35,"delta":24}]
+DEED-LEDGER: calls=7 summary={"teachPlant":{"calls":7,"ok":7,"deltaSum":0,"deltaN":7,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=36 alive=11 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=30
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+30) t2=true(deedCalls=7) trustVerdict={"readable":true,"officeMantle":19,"officeLast":19,"officeDelta":0,"officeClass":"flat","villageMantle":15.3,"villageLast":66.5,"villageDelta":51.2,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":6,"movers":[{"id":"Vincent","from":13,"to":90,"delta":77},{"id":"Shengli","from":16,"to":90,"delta":74},{"id":"Chloe","from":21,"to":90,"delta":69},{"id":"Ray","from":28,"to":90,"delta":62},{"id":"Ethan","from":15,"to":69,"delta":54},{"id":"Sophia","from":11,"to":62,"delta":51},{"id":"Owen","from":13,"to":52,"delta":39},{"id":"Devon","from":13,"to":46,"delta":33},{"id":"Mara","from":12,"to":41,"delta":29},{"id":"Ingrid","from":11,"to":35,"delta":24}]}
+E6/CALLCHECK: e6={"callMoves":0,"withCensus":0,"chainHandoffs":0,"trustMoves":0} callCheck={"dailyMoveDays":0,"callMoveDays":0,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":1,"teleWeek2":2,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":31,"moves":0}
+PASS GREEN scripted kill staged on proof seed (5 phase-A calls from day 1 land the kill on day 6) — death={"scripted":true,"day":6}
+PASS GREEN convoWindowMoves is an array (may be empty on the proof seed) — moves=0
+PASS GREEN officeDailyPostConvo is an array with one entry per post-loop day — entries=30
+PASS GREEN every callMove carries moverNamedN + e1bClass + topMoverNamed — moves=0
+PASS GREEN mover-named counts are consistent (named <= movers, top flag agrees with the list) — moves=0
+PASS GREEN armorMaps present with pre-death + post-handoff snapshots — maps=["pre-death","post-handoff","d+1","d+2","d+3","ledger-d+7","ledger-d+14","ledger-d+30","end"]
+PASS GREEN every armorMap entry carries all 10 location keys in locs and bark — maps=9
+PASS GREEN armor d+1/d+2/d+3 snapshots present — maps=["pre-death","post-handoff","d+1","d+2","d+3","ledger-d+7","ledger-d+14","ledger-d+30","end"]
+PASS GREEN C1v2 cross-check ok (every daily move day has a callMove or a convoWindowMove) — {"dailyMoveDays":0,"callMoveDays":0,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true}
+PASS GREEN tele counts match the raw arrays directly (not finish-time objects) — tele={"cw":0,"mn":0,"am":9}
+PASS GREEN r47 fields still present (no regression) — e7={"solo":0}
+PASS GREEN every callMove bucketed and summing to its call total (carried) — moves=0
+PASS GREEN every mealAudit entry carries halfVoiceMeal (boolean) — auditDays=30
+PASS GREEN callCheckV3 present with a boolean ok — {"transitions":0,"coveredByCall":0,"coveredByConvoPrev":0,"missing":[],"missingDays":[],"ok":true}
+PASS GREEN mg2v2 present (boolean) — mg2v2=true mg2=true
+PASS GREEN overCause present with over boolean — {"over":false,"villageLost":false}
+PASS GREEN every armorMap carries holders + barkHolders + focusAccess keys — maps=9
+PASS GREEN post-handoff focusAccess names the dead bearer record — focusAccess={"found":true,"dead":true,"worn":[],"pack":[]}
+PASS GREEN tele armorHolders + mealAuditDays match the raw arrays — tele={"ah":9,"mad":30}
+PASS GREEN bumpLog present with day/vid/before/after/delta consistent (delta === after-before) — bumpCalls=475
+PASS GREEN every callMove carries a bumpEntries array — moves=0
+PASS GREEN every convoWindowMove carries a bumpEntries array — moves=0
+PASS GREEN tele bumpCalls + callMovesWithBump match the raw arrays — tele={"bc":475,"cmwb":0}
+PASS GREEN r50 fields still present (no regression) — v3ok=true
+PASS GREEN v2b <= v2
+PASS GREEN m3v2b present — m3v2b=true (echoV2b=5 (v2=5, excludedLoot=0))
+PASS GREEN every callMove carries a donationLines array (may be empty) — moves=0
+PASS GREEN every donationLine matches the donation voice — donationLines=0
+PASS GREEN every officeDaily entry carries a numeric pantryKcal — entries=31
+PASS GREEN tele callMovesWithDonation matches the raw array count — tele={"cmd":0}
+PASS GREEN deedContext present with one entry per post-loop day — days=30
+PASS GREEN every deedContext entry carries numeric gates + boolean gates — days=30
+PASS GREEN every deedLedger entry carries argsJson + scholarKcal + pantryKcalAtCall — deeds=7
+PASS GREEN tele deedContextDays matches the raw array count — tele={"dcd":30}
+PASS GREEN r51 fields still present (no regression) — moves=0
+PASS GREEN every deedLedger entry carries site + siteRaw + stackHead — deeds=7
+PASS GREEN every deed with a site has a non-empty stackHead — deeds=7
+PASS GREEN r52 fields still present (no regression) — deedCtx=30
+PASS GREEN rec.inh present and readable (successor-side snapshot exists) — readable=true scripted=true
+PASS GREEN succPre carries invPack/invWorn/plantKnow/trust — succPre={"inv":["photo_album","dispatchers_headset","dog_tags","search_locket","unnamed_photo","stone_knife","denim_jacket","stone_knife","photo_album","denim_jacket","dispatchers_headset","dog_tags","search_locket","unnamed_photo"],"plants":["saw_palmetto","colocasia","bilberry","lambs_quarters","hickory_nut","maracuja"],"trust":32}
+PASS GREEN scripted proof seed carries deadBearerPre + disposition covering every distinct dead-bearer item — distinct=5 disp=5
+PASS GREEN inhD3 present (d+3 disposition re-check fired) — dplus=3
+PASS GREEN succPost carries inv/codexPlants/codexSkills/trust — succPost trust=19
+PASS GREEN relPre/relPreDeath/relPost/relD14/relEnd all present with bond arrays — bonds pre=24 post=25
+PASS GREEN relPost.selfId is the new bearer (a string id) and personDeeds is keyed by villager id — selfId=gen_i2q6vjr
+PASS GREEN every rel snapshot carries groups/conflicts/grievances/codexDeeds/affinity — snaps=5
+PASS GREEN personDeeds entries never claim a created record: count is a number or null with noEntry — entries=11
+PASS GREEN tele relSnapshots + relBondsPost match the raw arrays — tele={"rs":5,"rbp":25}
+PASS GREEN r54 fields still present (no regression) — inh readable=true
+
+ALL GREEN
