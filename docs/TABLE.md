@@ -58,7 +58,10 @@ papered over.
 `tableSeat()` prices the invitation. The 2026-10-10 deed gate
 (`deedGateReady()`) becomes the **full seat** — national/global scale,
 all wave bars (5/5/4/3/2 distinct fought), 3+ contests survived, 3+
-crises, stage ≥ 3, food-thesis deeds. Authority for the change below:
+crises, stage ≥ 2, food-thesis deeds (the full seat carries the lesser
+seat's stage ≥ 2 bar — a full seat is never easier than a lesser one
+on stage; fixture proof: evidence/2026-10-28/sim-fullseat-stage-a).
+Authority for the change below:
 Steve 2026-10-11 — "the table prices the run, never gates on godhood;
 reachable by competent non-god play" — supersedes the national-only bar
 for the *lesser* seat only. The full seat keeps the national bar.
