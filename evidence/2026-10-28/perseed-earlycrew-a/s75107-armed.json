@@ -1,0 +1,6691 @@
+{
+ "policy": "armed",
+ "seed": 75107,
+ "days": 129,
+ "gameDays": 129,
+ "endReason": "village-lost",
+ "won": 0,
+ "waveReach": 4,
+ "maxArc": 3,
+ "finalRank": "regional",
+ "maxRank": "regional",
+ "nationalEver": 0,
+ "nationalFinal": 0,
+ "table": 0,
+ "entered": 0,
+ "deaths": {
+  "villager:expedition": 2,
+  "villager:villager combat": 6,
+  "villager:monster": 2,
+  "villager:combat": 9,
+  "villager:Speedbump": 1,
+  "villager:a wound that wouldn't close": 1,
+  "player:the arena": 7
+ },
+ "deathTotal": 28,
+ "starvationDeaths": 0,
+ "starvationDetail": [],
+ "ts": {},
+ "ec": {
+  "ecUpkeeps": 206,
+  "ecAssigned": 383,
+  "ecRefused": 165,
+  "ecPairs": 188,
+  "ecSingles": 7,
+  "ecEmptyParts": 11,
+  "ecNodePairs": 0
+ },
+ "ecKeysPresent": [
+  "ecUpkeeps",
+  "ecAssigned",
+  "ecRefused",
+  "ecEmptyParts",
+  "ecLastDay",
+  "ecSingles",
+  "ecPairs"
+ ],
+ "finalPop": 7,
+ "finalPantry": 11873,
+ "finalKnown": 64,
+ "tableState": {
+  "path": null,
+  "branch": null,
+  "phase": null,
+  "seat": null
+ },
+ "courtship": {
+  "courtCounters": 0,
+  "courtAccords": 2,
+  "courtNational": 0,
+  "courtGlobal": 0,
+  "tended": 0,
+  "defenseCalls": 0,
+  "proposedLead": 3,
+  "combined": 5
+ },
+ "fieldparty": {
+  "meetings": [
+   {
+    "day": 4,
+    "part": 13,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "nightlight_catfish",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 0,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 22,
+    "vTaken": 10,
+    "mHpLeft": 3,
+    "intent": "learn",
+    "intentWhy": "learn-first",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 4,
+    "part": 15,
+    "vid": "gen_ajypq2z",
+    "seq": null,
+    "mid": "mirrormoth",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 35,
+    "leader": {
+     "vid": "gen_ajypq2z",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 0,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 32,
+    "vTaken": 24,
+    "mHpLeft": 3,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 5,
+    "part": 16,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "belltoad",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m"
+    ],
+    "crew": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 0,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 48,
+    "vTaken": 45,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 6,
+    "part": 22,
+    "vid": "lucas_brown",
+    "seq": null,
+    "mid": "drumbelly_tanuki",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 45,
+    "leader": {
+     "vid": "lucas_brown",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 10,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 1,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 40,
+    "vTaken": 29,
+    "mHpLeft": 5,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 6,
+    "part": 22,
+    "vid": "aria_thompson",
+    "seq": null,
+    "mid": "hummice",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 10,
+    "leader": {
+     "vid": "aria_thompson",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 1,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 12,
+    "vTaken": 18,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 6,
+    "part": 22,
+    "vid": "lucas_brown",
+    "seq": null,
+    "mid": "drumbelly_tanuki",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 5,
+    "leader": {
+     "vid": "lucas_brown",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 10,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 1,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 5,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 6,
+    "part": 22,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "white_noise_heron",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 60,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 5
+      },
+      "sameTileAsMonster": true
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 2,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 57,
+    "vTaken": 74,
+    "mHpLeft": 3,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 8,
+    "part": 31,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "white_noise_heron",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 3,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": true
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_ajypq2z",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 3,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 3,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 8,
+    "part": 31,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "drumbelly_tanuki",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 5,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": true
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_ajypq2z",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 4,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 5,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 8,
+    "part": 31,
+    "vid": "gen_v0dsfw1",
+    "seq": null,
+    "mid": "lockpick_raccoon",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 40,
+    "leader": {
+     "vid": "gen_v0dsfw1",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 0,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": true
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_ajypq2z",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 4,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 45,
+    "vTaken": 37,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 8,
+    "part": 31,
+    "vid": "gen_ajypq2z",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 90,
+    "leader": {
+     "vid": "gen_ajypq2z",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": true
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 4,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 20,
+    "vTaken": 26,
+    "mHpLeft": 70,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": true,
+    "calledHelp": true,
+    "joinedAllyVid": "aria_thompson",
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 9,
+    "part": 34,
+    "vid": "gen_v0dsfw1",
+    "seq": null,
+    "mid": "white_noise_heron",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 4
+    },
+    "mHpStart": 3,
+    "leader": {
+     "vid": "gen_v0dsfw1",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 0,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_839u64m"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 4,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 3,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 9,
+    "part": 34,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 70,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_839u64m"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 4,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 52,
+    "vTaken": 27,
+    "mHpLeft": 18,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": true,
+    "joinedAllyVid": "aria_thompson",
+    "allyDealt": 9,
+    "allyTaken": 29
+   },
+   {
+    "day": 12,
+    "part": 47,
+    "vid": "valeria_quispe",
+    "seq": null,
+    "mid": "rut_king",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 65,
+    "leader": {
+     "vid": "valeria_quispe",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 30,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_839u64m"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 3,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 6,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 54,
+    "vTaken": 29,
+    "mHpLeft": 11,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 13,
+    "part": 51,
+    "vid": "gen_v0dsfw1",
+    "seq": null,
+    "mid": "rut_king",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 4
+    },
+    "mHpStart": 11,
+    "leader": {
+     "vid": "gen_v0dsfw1",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 0,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 6,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_839u64m",
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 11,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 16,
+    "part": 63,
+    "vid": "lucas_brown",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 5
+    },
+    "mHpStart": 60,
+    "leader": {
+     "vid": "lucas_brown",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 10,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 3,
+       "ny": 5
+      },
+      "sameTileAsMonster": true
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 7,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 50,
+    "vTaken": 52,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 17,
+    "part": 67,
+    "vid": "gen_ajypq2z",
+    "seq": null,
+    "mid": "hushwolf",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 50,
+    "leader": {
+     "vid": "gen_ajypq2z",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 7,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 50,
+    "vTaken": 73,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": true,
+    "joinedAllyVid": "aria_thompson",
+    "allyDealt": 11,
+    "allyTaken": 29
+   },
+   {
+    "day": 17,
+    "part": 67,
+    "vid": "gen_ajypq2z",
+    "seq": null,
+    "mid": "hushwolf",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 50,
+    "leader": {
+     "vid": "gen_ajypq2z",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 12,
+    "villageArmored10": 3,
+    "villageKnown": 12,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 12,
+     "tricks": 7,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vDie",
+    "rounds": 1,
+    "mDealt": 0,
+    "vTaken": 32,
+    "mHpLeft": 50,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 17,
+    "part": 67,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "hushwolf",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 37,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 8,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 22,
+    "vTaken": 54,
+    "mHpLeft": 15,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": true,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": true,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 17,
+    "part": 67,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "hushwolf",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 37,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 8,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 35,
+    "vTaken": 55,
+    "mHpLeft": 2,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 17,
+    "part": 67,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 8,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "learn",
+    "intentWhy": "learn-first",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 17,
+    "part": 67,
+    "vid": "gen_v0dsfw1",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 52,
+    "leader": {
+     "vid": "gen_v0dsfw1",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 0,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 9,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 42,
+    "vTaken": 49,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "good-exchange",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 18,
+    "part": 71,
+    "vid": "valeria_quispe",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 10,
+    "leader": {
+     "vid": "valeria_quispe",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 30,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 3
+      },
+      "sameTileAsMonster": true
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 9,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 18,
+    "part": 71,
+    "vid": "nikos_papadopoulos",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "nikos_papadopoulos",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 44,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 10,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 19,
+    "part": 75,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 3
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_h2hib7j",
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 10,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_h2hib7j",
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 20,
+    "part": 79,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 6
+    },
+    "mHpStart": 18,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 0
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 10,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 18,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 20,
+    "part": 79,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 0
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 6
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 10,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 21,
+    "part": 83,
+    "vid": "aria_thompson",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 18,
+    "leader": {
+     "vid": "aria_thompson",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_h2hib7j",
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 2,
+       "ny": 6
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 10,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 18,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 22,
+    "part": 85,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "giant_mosquito",
+    "wave": 2,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 3,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 10,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 53,
+    "vTaken": 22,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 23,
+    "part": 91,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 18,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 8,
+       "ny": 0
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 18,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 23,
+    "part": 91,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "alien_tick",
+    "wave": 2,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 55,
+    "intent": "learn",
+    "intentWhy": "learn-first",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 24,
+    "part": 93,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 78,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 25,
+    "part": 99,
+    "vid": "aria_thompson",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 18,
+    "leader": {
+     "vid": "aria_thompson",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 6,
+       "ny": 2
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_h2hib7j",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 7,
+       "ny": 1
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 18,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 26,
+    "part": 103,
+    "vid": "aria_thompson",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 10,
+    "leader": {
+     "vid": "aria_thompson",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "gen_839u64m"
+    ],
+    "crew": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 2,
+       "ny": 6
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_4ihzodd",
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 26,
+    "part": 103,
+    "vid": "aria_thompson",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 10,
+    "leader": {
+     "vid": "aria_thompson",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "gen_839u64m"
+    ],
+    "crew": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 2,
+       "ny": 6
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_4ihzodd",
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 26,
+    "part": 103,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "sweeps_week",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 96,
+    "vTaken": 53,
+    "mHpLeft": 4,
+    "intent": "engage",
+    "intentWhy": "good-exchange",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 27,
+    "part": 106,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "hushwolf",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_839u64m",
+     "gen_h2hib7j"
+    ],
+    "crew": [
+     {
+      "vid": "gen_839u64m",
+      "armed": true,
+      "armorP": 6,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 2,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_839u64m"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 48,
+    "vTaken": 49,
+    "mHpLeft": 4,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": true,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": true,
+    "calledHelp": true,
+    "joinedAllyVid": "gen_839u64m",
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 27,
+    "part": 107,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 69,
+    "intent": "learn",
+    "intentWhy": "learn-first",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 28,
+    "part": 108,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "gallowdeer",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 3,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 5,
+    "mDealt": 134,
+    "vTaken": 93,
+    "mHpLeft": 19,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": true,
+    "calledHelp": true,
+    "joinedAllyVid": "aria_thompson",
+    "allyDealt": 6,
+    "allyTaken": 0
+   },
+   {
+    "day": 28,
+    "part": 111,
+    "vid": "gen_h2hib7j",
+    "seq": null,
+    "mid": "gallowdeer",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_h2hib7j",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 158,
+    "intent": "learn",
+    "intentWhy": "learn-first",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 28,
+    "part": 111,
+    "vid": "gen_v0dsfw1",
+    "seq": null,
+    "mid": "anaconda_empress",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "gen_v0dsfw1",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 0,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 28,
+    "part": 111,
+    "vid": "valeria_quispe",
+    "seq": null,
+    "mid": "living_wire",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 45,
+    "leader": {
+     "vid": "valeria_quispe",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 30,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 44,
+    "vTaken": 25,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "good-exchange",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 28,
+    "part": 111,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "bright_idea",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 41,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 46,
+    "vTaken": 18,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "good-exchange",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 29,
+    "part": 113,
+    "vid": "gen_839u64m",
+    "seq": null,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,expeditionMonster,expeditionLeg,agencyTick,G,advancePart",
+    "channel": "other",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "gen_839u64m",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 6,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "gen_v0dsfw1"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 11,
+    "villageArmored10": 3,
+    "villageKnown": 11,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 11,
+     "tricks": 11,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "gen_v0dsfw1"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vDie",
+    "rounds": 1,
+    "mDealt": 25,
+    "vTaken": 16,
+    "mHpLeft": 44,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 31,
+    "part": 123,
+    "vid": "lucas_brown",
+    "seq": null,
+    "mid": "rut_king",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 5
+    },
+    "mHpStart": 11,
+    "leader": {
+     "vid": "lucas_brown",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 10,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 3,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 3,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_4ihzodd",
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 11,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 32,
+    "part": 127,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "white_noise_heron",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 3
+    },
+    "mHpStart": 60,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "aria_thompson"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 5,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "aria_thompson"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 3,
+    "mDealt": 40,
+    "vTaken": 54,
+    "mHpLeft": 20,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 37,
+    "part": 146,
+    "vid": "gen_v0dsfw1",
+    "seq": null,
+    "mid": "giant_mosquito",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 4
+    },
+    "mHpStart": 30,
+    "leader": {
+     "vid": "gen_v0dsfw1",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 0,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 26,
+    "vTaken": 20,
+    "mHpLeft": 4,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 38,
+    "part": 151,
+    "vid": "nikos_papadopoulos",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 3
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "nikos_papadopoulos",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 44,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 38,
+    "part": 151,
+    "vid": "nikos_papadopoulos",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 3
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "nikos_papadopoulos",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 44,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 39,
+    "part": 155,
+    "vid": "aria_thompson",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "aria_thompson",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 39,
+    "part": 155,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "speedbump_turtle",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 37,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 28,
+    "vTaken": 37,
+    "mHpLeft": 9,
+    "intent": "engage",
+    "intentWhy": "good-exchange",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 39,
+    "part": 155,
+    "vid": "valeria_quispe",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "valeria_quispe",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 30,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 39,
+    "part": 155,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "giant_mosquito",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,havenRaidTick,Game",
+    "channel": "raid",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [],
+    "crew": [],
+    "tile": [
+     {
+      "vid": "gen_ehlp65f",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": false,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "valeria_quispe",
+      "armed": true,
+      "armorP": 30,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "yara_haddad",
+      "armed": true,
+      "armorP": 5,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     },
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 44,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 0,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 42,
+    "part": 166,
+    "vid": "valeria_quispe",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 5
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "valeria_quispe",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 30,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 42,
+    "part": 166,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 5
+    },
+    "mHpStart": 10,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "crew": [
+     {
+      "vid": "aria_thompson",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "lucas_brown",
+      "armed": true,
+      "armorP": 10,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "aria_thompson",
+     "lucas_brown"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 45,
+    "part": 179,
+    "vid": "yara_haddad",
+    "seq": null,
+    "mid": "white_noise_heron",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 2
+    },
+    "mHpStart": 20,
+    "leader": {
+     "vid": "yara_haddad",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 5,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_4ihzodd",
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 24,
+    "vTaken": 15,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 46,
+    "part": 182,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "giant_mosquito",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 5
+    },
+    "mHpStart": 30,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 26,
+    "vTaken": 24,
+    "mHpLeft": 4,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 61,
+    "part": 243,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 10,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "gen_v0dsfw1"
+    ],
+    "crew": [
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_v0dsfw1"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 10,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 62,
+    "part": 246,
+    "vid": "nikos_papadopoulos",
+    "seq": null,
+    "mid": "memory_projector",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 3
+    },
+    "mHpStart": 65,
+    "leader": {
+     "vid": "nikos_papadopoulos",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 44,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "gen_v0dsfw1"
+    ],
+    "crew": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 5
+      },
+      "sameTileAsMonster": false
+     },
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": true
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "inCrewRaw": true
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": false,
+    "engineAllies": 2,
+    "allyVids": [
+     "gen_4ihzodd",
+     "gen_v0dsfw1"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 84,
+    "vTaken": 4,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 62,
+    "part": 246,
+    "vid": "gen_4ihzodd",
+    "seq": null,
+    "mid": "murkcap",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "gen_4ihzodd",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "gen_4ihzodd",
+     "gen_v0dsfw1"
+    ],
+    "crew": [
+     {
+      "vid": "gen_v0dsfw1",
+      "armed": true,
+      "armorP": 0,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": null,
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 9,
+    "villageArmored10": 3,
+    "villageKnown": 9,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "ready": false
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "gen_v0dsfw1"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 82,
+    "part": 326,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "aid",
+    "stack": "classifyCaller,fieldFight,aidFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 9,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 3,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "nikos_papadopoulos",
+      "armed": true,
+      "armorP": 49,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "fish",
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 4,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 4,
+     "armed": 8,
+     "tricks": 16,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 83,
+    "part": 328,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "mirrormoth",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,_cxBlood,eval,_cxWithSeed,contestResolveVillager,G,metaWrapped",
+    "channel": "field",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 4,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 4,
+     "armed": 8,
+     "tricks": 16,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": null,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 28,
+    "vTaken": 18,
+    "mHpLeft": 11,
+    "intent": "engage",
+    "intentWhy": "good-exchange",
+    "everHopeless": false,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 83,
+    "part": 328,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "nightlight_catfish",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,_cxBlood,eval,_cxWithSeed,contestResolveVillager,G,metaWrapped",
+    "channel": "field",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 4,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 4,
+     "armed": 8,
+     "tricks": 17,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": null,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 31,
+    "vTaken": 8,
+    "mHpLeft": 0,
+    "intent": "learn",
+    "intentWhy": "learn-first",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 83,
+    "part": 328,
+    "vid": "luis_fernandez",
+    "seq": null,
+    "mid": "hummice",
+    "wave": 1,
+    "caller": "other",
+    "stack": "classifyCaller,fieldFight,_cxBlood,eval,_cxWithSeed,contestResolveVillager,G,metaWrapped",
+    "channel": "field",
+    "mTile": null,
+    "mHpStart": null,
+    "leader": {
+     "vid": "luis_fernandez",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 9,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 4,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 4,
+     "armed": 8,
+     "tricks": 17,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": true,
+    "engineAllies": null,
+    "allyVids": [],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 16,
+    "vTaken": 25,
+    "mHpLeft": 0,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 88,
+    "part": 351,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "cliffhanger",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 26,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 5,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 18,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 103,
+    "part": 411,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "living_wire",
+    "wave": 1,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 3,
+     "ty": 4
+    },
+    "mHpStart": 1,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 26,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 5,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 18,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "vTaken": 0,
+    "mHpLeft": 1,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 104,
+    "part": 415,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "moderator",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 4
+    },
+    "mHpStart": 74,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 26,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 3,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [
+     {
+      "vid": "gen_4ihzodd",
+      "armed": true,
+      "armorP": 4,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "fish",
+      "inCrewRaw": false
+     }
+    ],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 19,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 65,
+    "vTaken": 61,
+    "mHpLeft": 9,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": true,
+    "joinedAllyVid": "luis_fernandez",
+    "allyDealt": 15,
+    "allyTaken": 6
+   },
+   {
+    "day": 109,
+    "part": 435,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "understudy",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 105,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 26,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 19,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 3,
+    "mDealt": 32,
+    "vTaken": 47,
+    "mHpLeft": 73,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": true,
+    "calledHelp": true,
+    "joinedAllyVid": "luis_fernandez",
+    "allyDealt": 6,
+    "allyTaken": 0
+   },
+   {
+    "day": 109,
+    "part": 435,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "understudy",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 73,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 26,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 4,
+       "ny": 3
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 19,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 10,
+    "vTaken": 39,
+    "mHpLeft": 63,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": true,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": true,
+    "calledHelp": true,
+    "joinedAllyVid": "luis_fernandez",
+    "allyDealt": 0,
+    "allyTaken": 0
+   },
+   {
+    "day": 110,
+    "part": 439,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "understudy",
+    "wave": 2,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 5,
+     "ty": 3
+    },
+    "mHpStart": 63,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 26,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 4,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 20,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": true,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 49,
+    "vTaken": 54,
+    "mHpLeft": 14,
+    "intent": "engage",
+    "intentWhy": "trick-known",
+    "everHopeless": true,
+    "everWinning": true,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": true,
+    "joinedAllyVid": "luis_fernandez",
+    "allyDealt": 9,
+    "allyTaken": 21
+   },
+   {
+    "day": 118,
+    "part": 471,
+    "vid": "app_mgpsphp0348",
+    "seq": null,
+    "mid": "eulogy",
+    "wave": 4,
+    "caller": "resolve",
+    "stack": "classifyCaller,fieldFight,resolveWildMonsterEncounter,villagerMonsterTick,worldTick,checkEncounter,G,Game,travelTo",
+    "channel": "field",
+    "mTile": {
+     "tx": 4,
+     "ty": 5
+    },
+    "mHpStart": 900,
+    "leader": {
+     "vid": "app_mgpsphp0348",
+     "isScholar": false,
+     "armed": true,
+     "armorP": 4,
+     "veteranW3": false
+    },
+    "crewRaw": [
+     "luis_fernandez"
+    ],
+    "crew": [
+     {
+      "vid": "luis_fernandez",
+      "armed": true,
+      "armorP": 40,
+      "veteranW3": false,
+      "deadKnown": null,
+      "assignmentTask": "forage",
+      "node": {
+       "nx": 5,
+       "ny": 4
+      },
+      "sameTileAsMonster": false
+     }
+    ],
+    "tile": [],
+    "tileUnknown": 0,
+    "villageArmed": 8,
+    "villageArmored10": 5,
+    "villageKnown": 8,
+    "villageVeterans": 0,
+    "readiness": {
+     "armored": 5,
+     "armed": 8,
+     "tricks": 20,
+     "veterans": 1,
+     "ready": true
+    },
+    "trickKnown": false,
+    "engineAllies": 1,
+    "allyVids": [
+     "luis_fernandez"
+    ],
+    "cornered": false,
+    "allyFromStart": false,
+    "outcome": "vDie",
+    "rounds": 2,
+    "mDealt": 12,
+    "vTaken": 110,
+    "mHpLeft": 888,
+    "intent": "engage",
+    "intentWhy": "party",
+    "everHopeless": false,
+    "everWinning": false,
+    "fleeLearn": false,
+    "fleeHopeless": false,
+    "calledHelp": false,
+    "joinedAllyVid": null,
+    "allyDealt": 0,
+    "allyTaken": 0
+   }
+  ],
+  "partCounter": 516,
+  "diag": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  }
+ }
+}

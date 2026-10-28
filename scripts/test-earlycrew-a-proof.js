@@ -1,22 +1,23 @@
 #!/usr/bin/env node
-// scripts/test-earlycrew-a-proof.js — sim-earlycrew-a mechanism proof.
-// Proves, in one seeded harness process:
-//   (A) the earlycrew policy layer, ON, assigns a forage pair through
-//       the engine's own assignTask verb and counts ec* ctx surface;
-//       OFF, it assigns nothing and adds no ec* surface (det-gate
-//       shape; the full 180d det-gate lives in test-earlycrew-a-sweep.js
-//       --detgate).
-//   (B) the from-start question at code level: a wild meeting whose
-//       crew-mate is BOTH in _outdoorCrew AND standing on the monster
-//       tile (nodePos set in the fixture — test setup only, never
-//       policy behaviour) still receives NO allyFromStart flag from
-//       resolveWildMonsterEncounter: the wild router never passes it.
-//       Only aidFight sets it.
-//   (C) positive control: fieldFight called DIRECTLY with
-//       allyFromStart:true DOES put the ally in from round 1 (log
-//       line "already at the door"), so (B) is a router gap, not a
-//       missing engine capability.
-//   (D) solo control: crew cleared, same wild call passes allies 0.
+// scripts/test-earlycrew-a-proof.js — sim-earlycrew-a mechanism proof
+// (post-verdict form). Proves the CREW PATH + ROUTER GAP the arm
+// measured, with direct engine assignments, so it stays green on the
+// final tree after the NO-GO policy variant was deleted (the
+// policy-pair form of this proof ran PROOF-GREEN before deletion —
+// policy ON assigned a pair via upkeep (ecPairs 1, ecAssigned 2),
+// policy OFF clean, snapshot carried the pair, tile-present crewed
+// wild meeting passed allies=1 with the mate named and
+// allyFromStart=false, direct allyFromStart worked, solo control
+// allies=0 — quoted in evidence/2026-10-28/sim-earlycrew-a.md).
+// Fixture (single process, seeded harness): trusted villagers +
+// Game.assignTask (the engine's own willingness verb) must (1)
+// assign a forage pair, (2) snapshot it into Game._outdoorCrew at
+// resolveAssignments, and (3) feed a resolveWildMonsterEncounter
+// whose crew-mate ALSO stands on the monster tile — which must
+// still receive NO allyFromStart flag (the wild router never passes
+// it; only aidFight sets it). (4) Positive control: fieldFight
+// called DIRECTLY with allyFromStart:true DOES put the ally in from
+// round 1. (5) Solo control: crew cleared, same call passes allies 0.
 // No src/js change; the fixture only sets trust (a precondition the
 // engine's own obedience gate requires) and reads/captures engine calls.
 'use strict';
@@ -38,30 +39,17 @@ async function main() {
   if (pool.length < 4) fail('pool too small');
   v.trust = v.trust || {};
   for (const id of pool) v.trust[id] = 60;
-  // (A) Policy layer ON assigns a pair; OFF assigns nothing.
-  process.env.EARLYCREW = '1';
-  const { earlycrew } = require('./policies/earlycrew');
-  const ctx = {};
-  // upkeep needs the scholar at Haven; the harness starts there.
-  try { earlycrew.upkeep(Game, ctx); } catch (e) { fail('upkeep ON threw: ' + e.message); }
-  const asgOn = Object.keys(Game.state.village.assignments || {}).filter(id => (Game.state.village.assignments[id] || {}).task === 'forage');
-  console.log(`policy ON: forageAssigned=${JSON.stringify(asgOn)} ecPairs=${ctx.ecPairs | 0} ecAssigned=${ctx.ecAssigned | 0}`);
-  if (asgOn.length < 2) fail('policy ON assigned fewer than 2 forage');
-  if ((ctx.ecPairs | 0) < 1) fail('policy ON counted no ecPairs');
-  delete process.env.EARLYCREW;
-  const ctxOff = {};
-  // Clear assignments so the OFF upkeep is judged on its own output.
-  try { Game.state.village.assignments = {}; } catch (e) {}
-  try { earlycrew.upkeep(Game, ctxOff); } catch (e) { fail('upkeep OFF threw: ' + e.message); }
-  const ecKeysOff = Object.keys(ctxOff).filter(k => k.indexOf('ec') === 0);
-  const asgOff = Object.keys(Game.state.village.assignments || {}).filter(id => (Game.state.village.assignments[id] || {}).task === 'forage');
-  console.log(`policy OFF: forageAssigned=${JSON.stringify(asgOff)} ecKeys=${JSON.stringify(ecKeysOff)}`);
-  if (asgOff.length !== 0 || ecKeysOff.length !== 0) fail('policy OFF leaked assignments or ec* surface');
-  // (B) + (D) setup: trusted pair, snapshot, mate on the monster tile.
-  const leader = pool[0], mate = pool[1];
-  for (const id of [leader, mate]) {
-    try { Game.assignTask(id, 'forage', { via: 'in-person' }); } catch (e) {}
+  // (1) Assign a forage pair through the engine's own verb.
+  const assigned0 = [];
+  for (const id of pool) {
+    if (assigned0.length >= 2) break;
+    try { Game.assignTask(id, 'forage', { via: 'in-person' }); } catch (e) { continue; }
+    if ((Game.state.village.assignments || {})[id] && Game.state.village.assignments[id].task === 'forage') assigned0.push(id);
   }
+  console.log(`assign: forageAssigned=${JSON.stringify(assigned0)}`);
+  if (assigned0.length < 2) fail('fewer than 2 forage assignments');
+  // (2) Snapshot carries the pair; leader/mate are the assigned pair.
+  const leader = assigned0[0], mate = assigned0[1];
   try { Game.resolveAssignments(); } catch (e) { fail('resolveAssignments threw: ' + e.message); }
   const crew = (Game._outdoorCrew || []).slice();
   console.log(`snapshot: _outdoorCrew=${JSON.stringify(crew)}`);
@@ -111,6 +99,6 @@ async function main() {
   console.log(`solo control: captured=${JSON.stringify(capturedSolo)}`);
   if (!capturedSolo) fail('solo fieldFight was not called');
   if (capturedSolo.allies !== 0 || capturedSolo.allyVids.length !== 0) fail('solo control passed allies: ' + JSON.stringify(capturedSolo));
-  console.log('PROOF-GREEN: policy ON pairs / OFF clean; tile-present crewed wild meeting passes NO allyFromStart (router gap proven); direct allyFromStart works (capability exists); solo control allies 0');
+  console.log('PROOF-GREEN: pair assigned, snapshot fed, tile-present crewed wild meeting passes NO allyFromStart (router gap proven); direct allyFromStart works (capability exists); solo control allies 0');
 }
 main().catch(e => { console.error(e); process.exit(1); });
