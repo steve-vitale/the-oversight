@@ -102,4 +102,37 @@
       return cands.slice(0, 2).map((c) => c.rid);
     } catch (e) { return []; }
   };
+
+  // presentFightAllies(vid): the wild/patrol feed (sim-fieldfeed-a
+  // 2026-10-28). villagerFightAllies answers "who'd run to the
+  // shout"; the wild routers need "who's actually here". Same trust
+  // order, same floor (>= 15), same cap (2) — filtered to villagers
+  // standing on or adjacent to the fighter's own node (Chebyshev
+  // distance <= 1, the earshot radius villagerFightAllies already
+  // defines; no new radius invented). A crew member on an outdoor
+  // task but standing elsewhere is NOT fed: no radar, no
+  // teleporting, no routing anyone to a monster tile nobody fought
+  // on. The node read is the village nodePos map AFTER the
+  // villagerFightAllies call, so a villager the engine itself places
+  // (npcNode's Haven default) reads the same as the engine sees.
+  Game.presentFightAllies = function (vid) {
+    const self = this;
+    try {
+      const cands = (typeof self.villagerFightAllies === 'function') ? self.villagerFightAllies(vid) : [];
+      if (!cands.length) return [];
+      const nodePos = (self.state && self.state.village && self.state.village.nodePos) || {};
+      const me = nodePos[vid];
+      if (!me || typeof me.nx !== 'number' || typeof me.ny !== 'number') return [];
+      const out = [];
+      for (const rid of cands) {
+        const n = nodePos[rid];
+        if (!n || typeof n.nx !== 'number' || typeof n.ny !== 'number') continue;
+        if (Math.max(Math.abs(n.nx - me.nx), Math.abs(n.ny - me.ny)) <= 1) out.push(rid);
+      }
+      return out;
+    } catch (e) {
+      try { console.warn('[fieldfeed] presentFightAllies failed: ' + ((e && e.message) || e)); } catch (e2) { /* warn best-effort */ }
+      return [];
+    }
+  };
 })();
