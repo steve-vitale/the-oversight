@@ -64,6 +64,7 @@ function buildFights(row, damageOptional) {
   const nwk = row.nonworldkill || {};
   const tbd = row.tbdmg || null;
   const starts = (nwk.starts || []).filter(s => (s.wave | 0) === 4);
+  const killLog4 = ((row.raftdraft || {}).logEntries || []).filter(e => (e.w | 0) === 4);
   let excluded = 0;
   for (const st of starts) {
     const cls = classifyStart(st);
@@ -75,6 +76,16 @@ function buildFights(row, damageOptional) {
     }
     let dmg = null;
     if (end) dmg = deriveTbDamage(st.fighters, end.fighters);
+    // Kill join (prereg: closest loss is NON-KILL): the fight's own
+    // nonworldkill end row newLog entries with w==4, or an endHp
+    // at/below zero (overkill end-state). A kill fight is never a
+    // "closest loss" candidate, whatever its HP left reads.
+    let killJoin = false;
+    if (st.fightId) {
+      const ne = (nwk.ends || []).find(e => e.fightId === st.fightId);
+      if (ne && (ne.newLog || []).some(k => (k.w | 0) === 4)) killJoin = true;
+    }
+    const isKill = killJoin || (dmg !== null && dmg.endHp <= 0);
     tb.push({
       kind: 'tb', seed: row.seed, day: st.day, channel: tbChannel(st, cls),
       door: cls.door, origin: st.origin, monster: (dmg && dmg.monsterId) || st.mid || null,
@@ -87,6 +98,7 @@ function buildFights(row, damageOptional) {
       fightId: st.fightId || null, endJoin: endJoin,
       complete: damageOptional ? true : (dmg !== null),
       endFighters: end ? end.fighters : null,
+      isKill: isKill, killJoin: killJoin,
     });
   }
   const field = [];
@@ -100,6 +112,11 @@ function buildFights(row, damageOptional) {
       if (cands.length === 1) { s = cands[0]; join = 'fallback'; }
     }
     const evade = (r.rounds | 0) === 0 && (r.mDealt | 0) === 0;
+    // Field kill join (approximate, flagged): a wave-4 kill-log entry
+    // on the same day for the same monster type. Field kills are 0
+    // on this band; the flag exists so a future field kill can never
+    // be ranked as a "closest loss".
+    const killJoinF = killLog4.some(k => (k.d | 0) === (r.day | 0) && k.mid === r.mid);
     field.push({
       kind: 'field', seed: row.seed, day: r.day,
       channel: r.context === 'raid' ? 'raid-defender' : 'villager-field',
@@ -113,6 +130,7 @@ function buildFights(row, damageOptional) {
       fightId: null, endJoin: join, evade: evade,
       complete: (r.mDealt != null && r.mHpLeft != null && r.mHpMax != null && r.rounds != null),
       suppGap: !s,
+      isKill: killJoinF || (r.mHpLeft != null && r.mHpLeft <= 0), killJoin: killJoinF,
     });
   }
   return { tb: tb, field: field, excluded: excluded };
@@ -171,7 +189,7 @@ function main() {
     perSeed.push({ seed: r.seed, days: r.days, gameDays: r.gameDays, endReason: r.endReason, won: r.won,
       waveReach: r.waveReach, maxArc: r.maxArc, finalRank: r.finalRank, maxRank: r.maxRank,
       nationalEver: r.nationalEver, nationalFinal: r.nationalFinal, table: r.table, entered: r.entered,
-      deaths: r.deathTotal, starvation: r.starvationDeaths, courtshipCombined: (r.courtship && r.courtship.combined) || 0,
+      deaths: r.deathTotal, deathTotal: r.deathTotal, starvation: r.starvationDeaths, courtshipCombined: (r.courtship && r.courtship.combined) || 0,
       seat: (r.tableState && r.tableState.seat) || null,
       tbFights: f.tb.length, fieldFights: f.field.length, fights: fights.length,
       tbIncomplete: f.tb.filter(x => !x.complete).length,
@@ -209,9 +227,16 @@ function main() {
     if (mine.fightsDetail.length !== cfights.length) parityDivs.push(`seed ${seed} fight total: lethality=${mine.fightsDetail.length} channel=${cfights.length}`);
   }
   const legC = parityDivs.length === 0;
-  // Distribution + closest loss + >50% (non-evade, non-kill fights only;
-  // kills are 0 on this band, but the filter is kept explicit).
-  const ranked = allFights.filter(f => !f.evade && f.complete && f.damage != null && f.maxHp);
+  // Distribution + closest loss + >50%: ranked = NON-KILL, non-evade,
+  // complete fights (prereg CLOSEST LOSS definition). Kill fights are
+  // reported separately and never ranked as losses. The >50% question
+  // is answered BOTH ways: literally (all complete non-evade fights,
+  // kills included) and substantively (non-kill fights only) — the
+  // literal answer is trivially yes whenever a kill exists, so the
+  // non-kill answer is the one that measures the damage gap.
+  const ranked = allFights.filter(f => !f.evade && !f.isKill && f.complete && f.damage != null && f.maxHp);
+  const killFights = allFights.filter(f => f.isKill && f.complete && f.damage != null && f.maxHp);
+  const allComplete = allFights.filter(f => !f.evade && f.complete && f.damage != null && f.maxHp);
   const pcts = ranked.map(f => f.pctOfMax).sort((a, b) => a - b);
   const byChannel = {};
   for (const f of ranked) {
@@ -224,6 +249,7 @@ function main() {
   }
   const over50max = ranked.filter(f => f.pctOfMax > 0.5);
   const over50start = ranked.filter(f => f.startHp && f.damage / f.startHp > 0.5);
+  const over50maxAll = allComplete.filter(f => f.pctOfMax > 0.5);
   const closestByHp = ranked.slice().sort((a, b) => (a.endHp - b.endHp) || (a.pctLeft - b.pctLeft) || (a.seed - b.seed) || (a.day - b.day))[0] || null;
   const closestByPct = ranked.slice().sort((a, b) => (a.pctLeft - b.pctLeft) || (a.endHp - b.endHp) || (a.seed - b.seed) || (a.day - b.day))[0] || null;
   // Wall numbers (this band only).
@@ -256,7 +282,9 @@ function main() {
     d_distribution: { n: ranked.length, pctSorted: pcts, maxPct: pcts.length ? pcts[pcts.length - 1] : null, medianPct: medianConv(pcts),
       closestByHp: closestByHp, closestByPct: closestByPct },
     e_over50: { over50max: over50max.length, over50start: over50start.length, byChannel: byChannel,
-      over50maxDetail: over50max, over50startDetail: over50start },
+      over50maxDetail: over50max, over50startDetail: over50start,
+      over50maxLiteral: over50maxAll.length, over50maxLiteralDetail: over50maxAll },
+    kills: killFights,
   };
   const analysis = { label: 'sim-w4lethality analysis', seeds: SEEDS, perSeed: perSeed,
     fights: { total: allFights.length, tb: tbAll.length, field: fieldAll.length, evades: allFights.filter(f => f.evade).length, channelCounts: channelCounts },
@@ -275,7 +303,10 @@ function main() {
   console.log(`  leg (d) distribution: ranked=${ranked.length} maxPct=${legs.d_distribution.maxPct} medianPct=${legs.d_distribution.medianPct}`);
   if (closestByHp) console.log(`  closest loss (by HP left): seed ${closestByHp.seed} d${closestByHp.day} ${closestByHp.monster} [${closestByHp.channel}] damage=${closestByHp.damage} maxHp=${closestByHp.maxHp} hpLeft=${closestByHp.endHp} (${(closestByHp.pctLeft * 100).toFixed(1)}% left) rounds=${closestByHp.rounds} fighterHpLeft=${closestByHp.fighterHpLeft}`);
   if (closestByPct && (!closestByHp || closestByPct.fightId !== closestByHp.fightId || closestByPct.day !== closestByHp.day || closestByPct.monster !== closestByHp.monster)) console.log(`  closest loss (by % left): seed ${closestByPct.seed} d${closestByPct.day} ${closestByPct.monster} [${closestByPct.channel}] damage=${closestByPct.damage} maxHp=${closestByPct.maxHp} hpLeft=${closestByPct.endHp} (${(closestByPct.pctLeft * 100).toFixed(1)}% left) rounds=${closestByPct.rounds}`);
-  console.log(`  leg (e) >50%: of max ${over50max.length}/${ranked.length}, of start ${over50start.length}/${ranked.length}, byChannel=${JSON.stringify(byChannel)}`);
+  console.log(`  kills: ${killFights.length} (all complete non-evade fights incl kills: ${allComplete.length})`);
+  for (const k of killFights) console.log(`    kill: seed ${k.seed} d${k.day} ${k.monster} [${k.channel}] damage=${k.damage} maxHp=${k.maxHp} endHp=${k.endHp} rounds=${k.rounds}`);
+  console.log(`  leg (e) >50% non-kill: of max ${over50max.length}/${ranked.length}, of start ${over50start.length}/${ranked.length}, byChannel=${JSON.stringify(byChannel)}`);
+  console.log(`  leg (e) >50% literal (kills incl): of max ${over50maxAll.length}/${allComplete.length}`);
   console.log(`  -> ${outPath}`);
   if (unitFails.length || !g1 || !substrateOk || !legB || !legC) { console.error('PROOF GATE FAILURE'); process.exit(1); }
 }
