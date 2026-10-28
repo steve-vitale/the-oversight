@@ -158,7 +158,37 @@
     return vl;
   }
 
+  // legSeedForRegion(regionId): the leg board's seed, derived from the RUN
+  // seed mixed with the region id — never from the previous leg's board
+  // seed, so two entries to the same region in one run generate the same
+  // ground. (fixall-map slice 1b, design §D: a leg is a PLACE on the
+  // shared map, not a fresh random board; the seedless genMap() teleport
+  // goes away.) Seed priority: the run's worldSeed when the save carries
+  // one; else the road's stashed runSeed (captured at the first leg entry
+  // BEFORE genMap overwrites the board seed — without the stash, the
+  // fallback would read the previous leg's board seed and drift per leg,
+  // which is exactly the bug this function exists to kill); else the
+  // current board's worldSeed (thin rigs, single entry).
+  function legSeedForRegion(regionId) {
+    let base = 1;
+    try {
+      const r = road();
+      base = ((Game.state && Game.state.worldSeed) || (r && r.runSeed) || (Game.map && Game.map.worldSeed) || 1) >>> 0 || 1;
+    } catch (e) { base = 1; }
+    let h = (base ^ 0x9e3779b9) >>> 0;
+    const s = String(regionId || '');
+    for (let i = 0; i < s.length; i++) {
+      h = Math.imul(h ^ s.charCodeAt(i), 0x85ebca6b); h ^= h >>> 13;
+    }
+    h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16;
+    return (h >>> 0) || 1;
+  }
+
   const nomad = {
+    // Exposed for the leg-determinism proof (and any later leg work):
+    // the seed enterLeg() will generate this region's board from.
+    legSeedForRegion,
+
     onRoad() {
       const r = road();
       return !!(r && r.active);
@@ -283,7 +313,19 @@
         const def = Game.regionDef(leg.regionId);
         rname = (def && def.name) || leg.regionId;
         Game.state.region = leg.regionId;
-        if (typeof Game.genMap === 'function') Game.genMap();
+        // LEG-MAP UNIFICATION (fixall-map slice 1b): the leg board is
+        // generated from the region's seed, not a fresh random roll — the
+        // same region in the same run is the same ground on re-entry.
+        // Stash the run seed BEFORE genMap replaces the board seed, so
+        // the next leg derives from the run, not from this leg's board.
+        // Nothing else about the road changes here: gate, party, forfeit,
+        // and the 3-day living/search wait are untouched (design §D).
+        if (typeof Game.genMap === 'function') {
+          try {
+            if (!(Game.state && Game.state.worldSeed) && r && !r.runSeed && Game.map) r.runSeed = Game.map.worldSeed;
+          } catch (e2) { /* stash is best-effort; the fallback chain covers it */ }
+          Game.genMap(legSeedForRegion(leg.regionId));
+        }
       } catch (e) { /* the map is best-effort in thin rigs */ }
       log(`entered ${rname}.`);
       const disp = String(rname).replace(/^(the|a|an)\s+/i, '');
