@@ -5,7 +5,7 @@ Pre-registration: evidence/2026-10-28/journey-endgame-r61-prereg.md
 (written AND committed BEFORE any play: commit 57818037). Instrument +
 evidence only, zero src/js changes. Gating freeze (Steve 2026-10-27 16:53)
 stands: no gating change in this run, whatever the chase finds.
-Merged locally, pending ship (landing record below).
+Merge pending — see landing record (recovery blocked by hot tree).
 
 Canon read before play: docs/CANON.md + docs/TABLE.md (the table prices
 the run, never gates on godhood; full seat keeps the national bar) +
@@ -479,6 +479,6 @@ Seams and label notes (none blocking, all recorded):
 - Rebase: worktree rebased onto master 9e3c7f152 (includes the liveness dead-flag fix e1a86b20c); branch tip before note-fill 43523fd5c.
 - Check-quick (post-rebase, recovery run in the worktree): 284 passed, 6 failed in 1416s. The failing scripts visible in the run tail are standing families from this note's pre-merge check (occupation-panels, phone-frame-proof, establishment-r20-fixes next-day voice); the count matches the 284/6 standing pattern. Zero r61-attributable failures — this run changed zero src/js and zero test files.
 - Safe-commit: note-fill committed via scripts/safe-commit.sh; main-index state verified immediately after the commit (git status --short checked first; any clobber repaired via cacheinfo before proceeding).
-- Merge: ff-only to master; master HEAD after merge = this branch tip (the note-fill commit).
+- Merge: PENDING at recovery closeout — ff-only merge blocked three times by master moving under recovery (072bc4750, ddf4f5786, 6c59c5aea); merge at a quiet moment via ff-only, then master HEAD = this branch tip. Do NOT release the worktree or advance rotation-b until the merge lands.
 - Second rebase (recovery): master moved to 072bc4750 (evidence-only coordinator record, zero src/js) during the full check-quick, so the first ff-only attempt failed with diverging branches — no force used. The branch rebased cleanly onto 072bc4750 (3 commits replayed, no conflicts). Targeted re-proof after rebase: measurement subset 5 passed, 2 failed, both standing failures (measurement proof-update, measurement-workflow); no new failure. The full check-quick 284/6 on the substantively identical tree stands — the rebase delta is one evidence markdown file, non-executable.
 - Third rebase (recovery): master moved to ddf4f5786 (evidence + corpus, zero src/js) during the second merge attempt; branch rebased cleanly onto it (4 commits replayed, no conflicts). Measurement re-proof again 5 passed, 2 failed, same standing failures; no new failure.
