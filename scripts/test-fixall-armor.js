@@ -281,6 +281,16 @@ function stashMaterials(Game) {
         const strip = (arr) => { if (Array.isArray(arr)) for (let i = arr.length - 1; i >= 0; i--) { const it = arr[i]; if ((it && (it.itemId || it.id)) === 'bark_armor') arr.splice(i, 1); } };
         strip(rp.items); strip(rp.stashed);
       }
+      // TIGHTENED (E6 must not pass vacuously): strip bark_armor spares from
+      // EVERY villager's carried/stashed gear, so the pile piece is the only
+      // unworn bark_armor in the world. Worn copies stay (spares flow skips
+      // the worn copy), but no second copy may flow to the recipient.
+      for (const id of npcs) {
+        const p = Game.getPerson ? Game.getPerson(id) : null;
+        if (!p) continue;
+        const stripAll = (arr) => { if (Array.isArray(arr)) for (let i = arr.length - 1; i >= 0; i--) { const it = arr[i]; if ((it && (it.itemId || it.id)) === 'bark_armor') arr.splice(i, 1); } };
+        stripAll(p.items); stripAll(p.stashed);
+      }
       ok(!!rp && !armorWorn(rp), 'unarmored recipient ready (no armor worn or carried)', `recip=${recipId}`);
       if (rp) {
         if (v.away) delete v.away[recipId];
@@ -293,7 +303,9 @@ function stashMaterials(Game) {
         const beforeWorn = wornIds(rp).has('bark_armor');
         try { Game.villagerGearDay(); } catch (e) { console.log('  gear day threw: ' + e.message); }
         const pileAfter = st ? (st.armor || []).filter(e => (e.itemId || e.id) === 'bark_armor').reduce((t, e) => t + (e.units || 1), 0) : -1;
-        ok(!beforeWorn && wornIds(rp).has('bark_armor'), 'deposited bark armor is drawn from the pile and worn, no flag', `recip=${recipId} pileAfter=${pileAfter}`);
+        // Gated on the pile being drawn: the recipient must wear it AND the
+        // pile must be empty — otherwise the piece came from elsewhere.
+        ok(!beforeWorn && wornIds(rp).has('bark_armor') && pileAfter === 0, 'deposited bark armor is drawn from the pile and worn, no flag', `recip=${recipId} pileAfter=${pileAfter}`);
       }
     }
   }
