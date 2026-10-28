@@ -5048,6 +5048,10 @@
       // (pool draws rely on it), but the "I just said" fallback is only
       // honest within one sitting — reset the sitting ledger here.
       c.saidLinesConvo = [];
+      // CASE FRAMING (journey-landing r64 2026-10-28): per-sitting record
+      // of which cases have been framed — a new sitting re-frames, like
+      // the other per-sitting ledgers reset here.
+      c.caseFramed = {};
       // SPENT (journey-succession 2026-10-12): reset the per-conversation
       // spent-choice ledger — a new sitting, fresh offers.
       c.spent = {};

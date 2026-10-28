@@ -4188,6 +4188,60 @@
   },
 
   // ---------- 12. INTEGRATION WRAPS ----------
+  // CASE FRAMING (journey-landing r64 2026-10-28): the unintroduced case
+  // menu (r63 carried blank, 677 d10 + 680 d11). A conversation menu
+  // offered case actions (site / witnesses / investigate / moot / letlie /
+  // expose) with no spoken line introducing the case — worst at the
+  // opening, where the menu led with "Call a moot — put the ambush of
+  // Valeria to the village" while talking TO Valeria, on generic beats
+  // alone. Same defect class as the invitation-blind-accept fixed by the
+  // SPOKEN LURE (landing r7/r8): a menu must not ask the player to act on
+  // something nobody has said (CONVERSATIONS.md: replies belong to the
+  // spoken exchange). When the OFFERED menu first contains a case action
+  // for a case in a sitting, speak a framing line naming the charge +
+  // target first. Per-case flag, reset per sitting in startConvo, so a
+  // second case's first appearance gets its own framing and a new sitting
+  // re-frames. Hooked on the offered menu (convoMenuPage's output), not
+  // on menu construction: the outermost wrap re-runs convoMenuPage's
+  // question-ownership filter, which drops case actions from question /
+  // trade / hawk / want-stage menus — framing at construction time would
+  // speak about a case whose actions never appear (speak-without-menu,
+  // the mirror defect). Never in nonverbal or ambush-thread
+  // conversations; the framing beat is load-bearing for menu honesty
+  // (same exemption class as the invite beat) so the no-repeat ledgers
+  // cannot dry-line it away. Presentation only: no case mechanics, no
+  // gating, no option-set change.
+  betrayalCaseFrame(vid, offered) {
+    let c = null;
+    try { c = this.convoGet(vid); } catch (e) { return; }
+    if (!c || !c.active) return;
+    if (c.thread === 'ambush' || c.thread === 'nonverbal') return;
+    const list = offered || [];
+    let cases = null;
+    try { cases = (this.betrayalState().cases || []); } catch (e) { return; }
+    c.caseFramed = c.caseFramed || {};
+    for (const ch of list) {
+      if (!ch || typeof ch.id !== 'string') continue;
+      const m = /^betrayal:(site|witnesses|investigate|moot|letlie|expose):(.+)$/.exec(ch.id);
+      if (!m) continue;
+      const caseId = m[2];
+      if (c.caseFramed[caseId]) continue;
+      const cs = cases.find(x => x && x.id === caseId);
+      if (!cs) continue;
+      c.caseFramed[caseId] = true;
+      const charge = cs.charge || 'theft';
+      let line;
+      if (vid === cs.target) {
+        line = `"Nobody's settled the ${charge} against me yet."`;
+      } else {
+        let tname = '';
+        try { tname = this.disp(cs.target); } catch (e) { tname = ''; }
+        line = `"There's still the matter of the ${charge} of ${tname}. Nobody's settled it."`;
+      }
+      try { this.sayLine(vid, line, { diegeticAct: true }); }
+      catch (e) { console.warn('[betrayal] case framing sayLine', e); }
+    }
+  },
   betrayalChoices(vid) {
     const out = [];
     let c = null;
@@ -5383,8 +5437,17 @@
     try {
       const extra = this.betrayalChoices(vid);
       if (extra && extra.length) return [...extra, ...base];
-    } catch (e) {}
+    } catch (e) { console.warn('[betrayal] convoChoices extra', e); }
     return base;
+  };
+  // CASE FRAMING (journey-landing r64): frame at the OFFERED menu — the
+  // output of convoMenuPage is what the player actually sees, after the
+  // outermost wrap's question-ownership filter. See betrayalCaseFrame.
+  const _convoMenuPage = Game.convoMenuPage;
+  Game.convoMenuPage = function (vid, choices) {
+    const out = _convoMenuPage ? _convoMenuPage.call(this, vid, choices) : choices;
+    try { this.betrayalCaseFrame(vid, out); } catch (e) { console.warn('[betrayal] case framing', e); }
+    return out;
   };
   const _convoTurn = Game.convoTurn;
   Game.convoTurn = function (vid, choiceId) {
