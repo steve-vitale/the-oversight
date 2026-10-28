@@ -491,6 +491,11 @@
         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
         allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
+        // PARTY SIZE (sim-partyfinish-a, 2026-10-28): the mustered party
+        // (leader + opts.allies) for honest kill narration — a party kill
+        // must never read as a solo kill (fieldFightSummary used to say
+        // "alone" for every vKill, including 3-fighter sortie kills).
+        partySize: Math.max(1, (opts.allies || 0) + 1),
       };
       // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
       // It's much less risky to learn about a monster (observe, track,
@@ -799,8 +804,29 @@
         for (var _vj = 0; _vj < members.length; _vj++) { members[_vj].hp = 0; members[_vj].alive = false; }
         rec.log.push('The lead never reached ' + vName + ' — it fell to the volley, and the pack\'s coordination shatters with it.');
       } else if ((members[0].hp / members[0].maxHp) < mBreak) {
-        rec.outcome = 'mFlee';
-        rec.log.push(vName + ' drove ' + mPhrase + ' off with the bow — it broke before it ever closed.');
+        // CORNERED PARTY HOLD (sim-partyfinish-a, 2026-10-28): a beast
+        // already below the break line when a mustered, armed party
+        // corners it at the treeline (opts.cornered, set ONLY by
+        // lingererSortie) does not get the free zero-round flight —
+        // provided nobody has dealt damage yet this fight (rec.mDealt
+        // === 0, so a volley drive-off still flees: the bow itself
+        // dropped it below the line). The hold lasts exactly one
+        // round: the in-round break check after round 1, vFlee, vDie,
+        // and every signature path are untouched, and arena (noFlee)
+        // fights never reach this branch's hold. Risk-weighted
+        // finish (Steve 2026-10-27), not unconditional: the party
+        // still has to survive round 1, and a beast the party cannot
+        // kill in that round flees after it, as before. Wild chance
+        // meetings (cornered unset) keep the free flee exactly.
+        var _corneredHold = !!opts.cornered && (opts.allies || 0) >= 1 && wb > 0
+          && rec.mDealt === 0 && !opts.noFlee;
+        if (_corneredHold) {
+          rec.corneredHold = true;
+          rec.log.push(vName + ' and their party have ' + mPhrase + ' cornered at the treeline — broken, but it cannot simply slip away before a blow.');
+        } else {
+          rec.outcome = 'mFlee';
+          rec.log.push(vName + ' drove ' + mPhrase + ' off with the bow — it broke before it ever closed.');
+        }
       }
 
       // ---- rounds ----
@@ -1761,8 +1787,14 @@
       var The = 'The ' + bare, the = 'the ' + bare;
       if (rec.outcome === 'alreadyDead')
         return The + ' was already dead when ' + vName + ' found it — old news, not a kill.';
-      if (rec.outcome === 'vKill')
-        return vName + ' killed ' + the + ' alone — ' + rounds + ', ' + rec.vTaken + ' taken. Word travels fast.';
+      if (rec.outcome === 'vKill') {
+        // PARTY HONESTY (sim-partyfinish-a, 2026-10-28): a kill by a
+        // party reads as a party kill; recs without party info (old
+        // callers, unit fixtures) keep the exact old "alone" line.
+        var _party = (rec.partySize | 0) >= 2 ? ' with their party' : ' alone';
+        var _corner = rec.corneredHold ? ' Cornered at the treeline, it could not slip away before a blow.' : '';
+        return vName + ' killed ' + the + _party + ' — ' + rounds + ', ' + rec.vTaken + ' taken. Word travels fast.' + _corner;
+      }
       if (rec.outcome === 'mFlee') {
         // HONEST (flesh-out r16 arm C 2026-10-13, SENSE-TESTING): an mFlee
         // with no damage taken is not a mauling — 237/8-run "bloodied but

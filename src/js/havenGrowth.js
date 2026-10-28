@@ -785,7 +785,7 @@
         // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class).
         const mPhrase = this.articlePhrase ? this.articlePhrase(mName) : mName;
         let rec = null;
-        try { rec = this.fieldFight(leader, mdef, m, { allies: allyVids.length, allyVids: allyVids.slice() }); }
+        try { rec = this.fieldFight(leader, mdef, m, { allies: allyVids.length, allyVids: allyVids.slice(), cornered: true }); }
         catch (e) { console.warn('lingererSortie fight', e); }
         if (!rec || !rec.outcome) continue;
         let summary = `${refName(leader)} fought ${mPhrase}`;
