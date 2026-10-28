@@ -246,3 +246,57 @@ the comparison without re-running.
   scripts are the attributable verification; no src/js changed,
   so check.js is not the gate here — stated, not claimed).
 - Heartbeat kept on the registered tree during the run.
+
+## Adoption re-verification (fleshout-loop-b-20261028T1030Z, axis food-economy)
+
+Adopted from the dead 0805Z run (stale heartbeat, adoption
+authorized): branch sim-wave4flip-b, pre-rebase commits 1adc45be7
+(prereg + instruments) and c4f4a2fb8 (this evidence). Worktree
+verified clean before work; docs/CANON.md + docs/MONSTER-WAVES.md
+re-read; no main-tree touch, no push, no bump, no live
+verification. Rebased inside this worktree only onto current
+master 5ddd06a84 (tackle-map; picks up calmbeast, journey r60,
+tackle-map since the arm's base) — clean replay, no conflicts,
+new commits 8511b2033 (prereg + instruments) + 545c45b99
+(evidence). No src/js changes in this adoption (measurement only,
+as before).
+
+Post-rebase proofs, seed 10421, competent policy, 100d cap —
+VERDICT REPRODUCED EXACTLY, no evidence change needed to the
+verdict above:
+
+- scripts/test-wave4flip-b.js 10421: days=100 end=survived wave=3
+  arc=3 rank=village national=0 table=0 won=0 — identical to the
+  pre-rebase run on c4f4a2fb8.
+- scripts/test-wave4flip-frame-b.js 10421: wave=3, framing lines
+  day 12 (Hanan), days 30/54/58 (Ivy) — identical to pre-rebase.
+- scripts/test-wave4flip-diverge-b.js 10421: every snapshot
+  identical to pre-rebase — day-71 kills 12 roster 8 ledger
+  [10,4,0]; day-81 kills 14 roster 8 ledger [10,5,0] armed 8
+  tricks 19; day-91 gated 45 (war 25 + plenty 20) veterans 1 ready
+  true; day-100 gated 65 (war 25 + plenty 40) WAVE 3 veterans 0
+  roster 7 kills 15 ready false.
+
+So calmbeast, journey r60, and tackle-map did not move seed
+10421 at all: the W3/post-r64 side of the bisection still ends
+wave 3 with the same divergence shape, and the ANSWERED
+attribution (r64 flips 10421 wave 4->3) stands on current master.
+
+Infrastructure note: the rebase was blocked ~25 min by the
+intermittent container EPERM flap on write(2) (same class as the
+2026-10-23 flap in AGENTS.md; overlayfs metacopy mount, writes
+flap OK/EPERM across seconds — git's loose-object and
+rebase-state writes failed while plain probes intermittently
+succeeded). No ref surgery was performed during the flap; the
+only state removed was the rebase's own empty partial
+rebase-merge dir (0-byte head-name/interactive, HEAD unmoved),
+and the rebase was retried until a clean write window let both
+commits replay. The flap also wiped /tmp scratch mid-run (loop
+script + draft addendum lost, both recreated under
+~/workspace/adoption-scratch/); nothing in the worktree was lost.
+
+Branch state at handoff: ready to merge, pending coordinator
+merge. No jest/check.js run for this adoption commit: the change
+is evidence-only (this section), no src/js changed, and the
+arm's attributable verification is the three proof scripts
+above, all re-run post-rebase — stated, not claimed.
