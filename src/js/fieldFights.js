@@ -6,6 +6,7 @@
 // rules:
 //   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
 //   - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
+//   - field wounds carry (code: fieldFight): a Haven ally enters at their real village.health and a surviving ally's wounds settle through the fight's sealed record, so wounds carry into the next fight, including turn-based fights (tackle-wound2 2026-10-27; Muse call under standing intent, NOT a Steve ruling).
 //   - morale: flee is driven by wounds + bravery + temperament, never a flat roll. (code: fieldFight)
 //   - arena: opts.noFlee seals a contest arena — no mid-fight flight; hopeless/low-HP no longer auto-flee, the fight runs to vKill/vDie/mFlee, and the round cap becomes a judges' call for the less-bloodied. Wild fights keep the believable flight. (code: fieldFight, Gap 4 2026-10-10)
 //   - pack: the lead IS the world-monster entity (members[0]) — wound it and the pack breaks, kill it and the pack dies/scatters with it; members never promote. (code: fieldFight)
@@ -843,12 +844,36 @@
       var helpCalled = false, allyIn = false, allyHp = 0;
       var wardCarries = [];
       var allyMax = 70, allyVid = null, allyName = 'Someone';
+      // FIELD-WOUND CARRYOVER (tackle-wound2, 2026-10-27): a field-fight ally
+      // is a real villager body, not a fixed 70-health extra. A Haven ally
+      // enters at their real village.health (default 100, the game's usual
+      // default for a villager with no health entry) so the wounds they take
+      // are wounds to that body — and at the fight's end the surviving
+      // ally's wounds settle through the same once-only sealed record the
+      // lead uses, so they carry into whatever fight comes next, including
+      // turn-based fights (whose entry already reads village.health).
+      // Foreign allies keep the old 70 body: their health lives in another
+      // village, not in village.health, so there is nothing honest to carry.
+      // This is a Muse call under standing intent (villagers follow the
+      // same rules as the player), NOT a Steve ruling — Steve can overrule it.
+      var allyEntryHp = 0;
+      var allyBody = function (id) {
+        try {
+          if ((opts.foreignAllies || {})[id]) return { entry: 70, max: 70 };
+          var hv = ((_G.state.village || {}).health || {})[id];
+          if (hv === undefined || hv === null) return { entry: 100, max: 100 };
+          var e = Number(hv);
+          if (!Number.isFinite(e) || e <= 0) return { entry: 100, max: 100 };
+          return { entry: e, max: Math.max(100, e) };
+        } catch (e) { return { entry: 70, max: 70 }; }
+      };
       // AID (comms 2026-10-10): allied parties already at the door join from
       // round 1 — they came to fight, not to watch. A new combatant, same as
       // the hopeless-branch ally below.
       if (opts.allyFromStart && allies > 0 && allyVids.length) {
-        helpCalled = true; allyIn = true; allyHp = allyMax;
+        helpCalled = true; allyIn = true;
         allyVid = allyVids.shift(); allies--;
+        var _ab0 = allyBody(allyVid); allyHp = _ab0.entry; allyMax = _ab0.max; allyEntryHp = _ab0.entry;
         try {
           var _fa0 = (opts.foreignAllies || {})[allyVid];
           allyName = (_fa0 && _fa0.name) || opts.allyName || refName(allyVid);
@@ -1506,8 +1531,9 @@
         if (winning) {
           fleeAt = 0.05;
         } else if (hopeless && !helpCalled && allies > 0 && allyVids.length && rec.intent !== 'learn') {
-          helpCalled = true; allyIn = true; allyHp = allyMax;
+          helpCalled = true; allyIn = true;
           allyVid = allyVids.shift(); allies--;
+          var _ab1 = allyBody(allyVid); allyHp = _ab1.entry; allyMax = _ab1.max; allyEntryHp = _ab1.entry;
           // AID (comms 2026-10-10): foreign allies carry their own names.
           try {
             var _fa2 = (opts.foreignAllies || {})[allyVid];
@@ -1694,8 +1720,34 @@
       try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
         { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
       catch (e) { console.warn('[godpath] field hunt outcome', e); }
-      return this.sealDamageResult(rec, [[vid, rec.vTaken,
-        vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]]);
+      // FIELD-WOUND CARRYOVER (tackle-wound2): the surviving Haven ally's
+      // wounds settle here, through the same once-only sealed record as the
+      // lead's — one entry per person, so a caller settling the lead can
+      // never double-apply the ally, and a later caller settling the ally
+      // finds the entry already used. A downed ally is excluded: their fall
+      // already settled as the flat 30 during the fight. Foreign allies,
+      // the player, and the lead themselves are excluded (the lead's entry
+      // is the one above; the player's wounds travel through scholar.health).
+      var allyTaken = 0, allySettles = false;
+      try {
+        var _roster = ((this.state.village || {}).roster || []);
+        allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
+        allySettles = !!(helpCalled && allyIn && allyHp > 0 && allyVid && allyVid !== vid &&
+          allyVid !== this.villagerId && !(opts.foreignAllies || {})[allyVid] &&
+          _roster.indexOf(allyVid) >= 0 && allyTaken > 0);
+      } catch (e) { allySettles = false; }
+      rec.allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
+      rec.allyHpLeft = helpCalled ? Math.max(0, allyHp) : null;
+      rec.allyEntryHp = helpCalled ? allyEntryHp : null;
+      rec.allyWoundsSettled = allySettles;
+      var _sealEntries = [[vid, rec.vTaken,
+        vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
+      if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);
+      var _sealed = this.sealDamageResult(rec, _sealEntries);
+      if (allySettles) {
+        try { this.hurtVillager(allyVid, allyTaken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
+      }
+      return _sealed;
     },
 
     // fieldFightSummary(rec, vName, mName) -> one honest sentence for gossip/news
