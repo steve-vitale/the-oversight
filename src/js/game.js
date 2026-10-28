@@ -168,10 +168,12 @@
   const TILE_GLYPH = {
     forest_floor: '🟫', grove: '🌳', meadow: '🌾', thicket: '🌿',
     wetland: '💧', creek: '🌊', trail_edge: '🟨', ruin: '🏚️', haven: '🏫',
+    building: '🏢',
   };
   const TILE_NAME = {
     forest_floor: 'forest floor', grove: 'grove', meadow: 'meadow', thicket: 'thicket',
     wetland: 'wetland', creek: 'creek', trail_edge: 'trail edge', ruin: 'ruin', haven: 'Haven',
+    building: 'building',
   };
   // REGIONS (docs/WORLD-REGIONS.md): the region every old save and every
   // region-less harness belongs to. Today's whole environment lives in
@@ -9237,6 +9239,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.sweepHavenApproachBlockages(); } catch (e) {}
       const r = s.run;
       this.map = r.map; this.dayPart = r.dayPart; this.location = r.location;
+      // BEYOND EDGE: pre-slice saves have no beyond store — start empty.
+      // No migration: home-board coordinates are unchanged (C1).
+      if (this.map && !this.map.beyond) this.map.beyond = {};
       this.departed = r.departed;
       // ONE TEXT STREAM (2026-10-11): pre-stream saves stored bare strings.
       this.log = this.normalizeLogEntries(r.log);
@@ -10780,7 +10785,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // otherwise pond nets are silently, permanently fishless)
         t.wildlife = this.initTileWildlife(t.type === 'pond' ? 'creek' : t.type, R);
       }
-      this.map = { tiles, px: 4, py: 4, worldSeed, worldSize: 9 };
+      this.map = { tiles, px: 4, py: 4, worldSeed, worldSize: 9, beyond: {} };
       // STRICT FOG: at start you see haven and the ground south of it — the
       // door faces south, so south is all you can see. Everything else is
       // dark until you walk there. (reveal() is still used on travel: arriving
@@ -11056,9 +11061,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         bridge = horizontal ? [{ x: bi, y: rc }, { x: bi, y: rc + 1 }]
                             : [{ x: rc, y: bi }, { x: rc + 1, y: bi }];
       }
+      // BEYOND EDGE: neighbors past the home board may be ungenerated —
+      // tileAt returns undefined there, and the old bounds check only
+      // covered 0..8, so detail generation on a beyond tile crashed on
+      // its north/south neighbors. An ungenerated neighbor blends as the
+      // tile's own kind; behavior on home tiles is identical.
       const nType = (dx, dy) => {
         const nx = x + dx, ny = y + dy;
-        return (nx < 0 || ny < 0 || nx > 8 || ny > 8) ? t.type : this.tileAt(nx, ny).type; // 9x9 world (2026-10-07)
+        const nt = this.tileAt(nx, ny);
+        return (nt && nt.type) || t.type;
       };
       // base cell picker by tile type
       const pick = (type) => {
@@ -11074,7 +11085,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           case 'creek': return r < 0.55 ? 'grass' : r < 0.65 ? 'plant' : 'dirt'; // river is the water, not random puddles
           case 'forest_floor': return r < 0.18 ? 'tree' : r < 0.3 ? 'plant' : r < 0.6 ? 'dirt' : 'grass';
           case 'trail_edge': return r < 0.4 ? 'dirt' : r < 0.7 ? 'grass' : r < 0.8 ? 'plant' : 'bush';
-          case 'ruin': return r < 0.25 ? 'rubble' : r < 0.37 ? 'wall' : r < 0.5 ? 'plant' : r < 0.75 ? 'dirt' : 'grass';
+          case 'ruin': case 'building': return r < 0.25 ? 'rubble' : r < 0.37 ? 'wall' : r < 0.5 ? 'plant' : r < 0.75 ? 'dirt' : 'grass';
           case 'haven': return r < 0.08 ? 'tent' : r < 0.12 ? 'fire' : r < 0.5 ? 'dirt' : 'grass';
           default: return 'grass';
         }
@@ -11284,10 +11295,101 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         if (Math.abs(x - cx) + Math.abs(y - cy) <= 2) this.map.tiles[y][x].revealed = true;
       }
+      // BEYOND EDGE: the home-board loop above cannot reach a beyond tile,
+      // but standing on ground reveals it — mark the destination itself.
+      const dt = this.tileAt(cx, cy);
+      if (dt) dt.revealed = true;
     },
 
-    tileAt(x, y) { return this.map.tiles[y]?.[x]; },
+    // BEYOND EDGE (tackle-map 2026-10-28): the home board is tiles 0..8, but
+    // world coordinates keep going. Generated beyond tiles live sparsely in
+    // map.beyond (never a pre-built giant board); ungenerated coordinates
+    // still return undefined, so every existing edge probe keeps its meaning.
+    tileAt(x, y) {
+      const t = this.map.tiles[y]?.[x];
+      if (t) return t;
+      const b = (this.map && this.map.beyond) || {};
+      return b[x + ',' + y];
+    },
     playerTile() { return this.tileAt(this.map.px, this.map.py); },
+
+    // beyondTile(x, y): generate-or-return the tile past the home board.
+    // DETERMINISTIC: a pure function of (worldSeed, x, y) — same seed and
+    // coordinates regenerate the same kind, stock, wildlife, and loot on
+    // every load, so a tile nobody has visited costs nothing and a tile
+    // once visited never changes under you. Kinds are the biome's wild
+    // kinds plus a standing `building` (the slice's one city tile); home
+    // ruins are NOT repeated out here — the fringe holds buildings, not
+    // farmhouses. No entry blockages and no hard-creek bridge rule out
+    // here yet (coord-map-design C4): travelTo's intermediate-blockage
+    // scan only covers the home board, so generating blockages beyond it
+    // would let multi-tile jumps slip past them dishonestly.
+    beyondTile(x, y) {
+      const m = this.map;
+      if (!m) return null;
+      m.beyond = m.beyond || {};
+      const k = x + ',' + y;
+      if (m.beyond[k]) return m.beyond[k];
+      const seed = (m.worldSeed >>> 0) || 1;
+      let h = (seed ^ 0x9e3779b9) >>> 0;
+      h = Math.imul(h ^ (x >>> 0), 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16;
+      h = Math.imul(h ^ (y >>> 0), 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16;
+      const R = this.mulberry32((h >>> 0) || 1);
+      const bio = this.biome();
+      const wild = (((bio && bio.tileTypes) || []).filter(t => t !== 'haven' && t !== 'ruin').length
+        ? (bio.tileTypes || []).filter(t => t !== 'haven' && t !== 'ruin')
+        : ['forest_floor', 'grove', 'meadow', 'thicket', 'wetland', 'creek', 'trail_edge']);
+      const type = R() < 0.10 ? 'building' : wild[Math.floor(R() * wild.length)];
+      const RICH = { grove: 1.5, wetland: 1.4, creek: 1.3, meadow: 1.3, thicket: 1.2, trail_edge: 1.0, forest_floor: 0.8, building: 1.0 };
+      let r = (RICH[type] || 1) * (this.locParams().stockMult ?? 1);
+      const tile = {
+        type, revealed: false, visited: false,
+        maxStock: r >= 1.5 ? 3 : r >= 1.0 ? 2 : 1,
+        stock: 0,
+        wildlife: this.initTileWildlife ? this.initTileWildlife(type, R) : {},
+      };
+      tile.stock = tile.maxStock;
+      if (type === 'building') {
+        const scav = this.regionScavenge();
+        const common = scav.filter(s => !s.rare);
+        const rare = scav.filter(s => s.rare);
+        tile.loot = [];
+        for (let i = 0; i < 3 + Math.floor(R() * 3) && common.length; i++) {
+          tile.loot.push(common[Math.floor(R() * common.length)].id);
+        }
+        if (R() < 0.08 && rare.length) tile.loot.push(rare[Math.floor(R() * rare.length)].id);
+      }
+      m.beyond[k] = tile;
+      return tile;
+    },
+
+    // mapWindow(): the visible 9x9 viewport, centered on the player, in
+    // world coordinates. At home (4,4) this is exactly today's 0..8 board;
+    // past the edge it slides with you (coord-map-design C2). Tiles never
+    // re-index — only the window moves. Ungenerated beyond coordinates
+    // report tile: null (fog), never generated by looking.
+    mapWindow() {
+      const px = this.map.px, py = this.map.py;
+      const rows = [];
+      for (let y = py - 4; y <= py + 4; y++) {
+        const row = [];
+        for (let x = px - 4; x <= px + 4; x++) row.push({ x, y, tile: this.tileAt(x, y) || null });
+        rows.push(row);
+      }
+      return rows;
+    },
+
+    // homeVector(): the compass's way home, as data — direction arrow and
+    // Chebyshev distance from the player to haven (village px/py, default
+    // 4,4). The overlay's compass line renders this value, so the reported
+    // direction is the tested direction.
+    homeVector() {
+      const v = this.state.village || {};
+      const hx = v.px ?? 4, hy = v.py ?? 4;
+      const dx = hx - this.map.px, dy = hy - this.map.py;
+      const arrow = { '-1,-1': '↖', '0,-1': '↑', '1,-1': '↗', '-1,0': '←', '0,0': '⊙', '1,0': '→', '-1,1': '↙', '0,1': '↓', '1,1': '↘' }[Math.sign(dx) + ',' + Math.sign(dy)] || '·';
+      return { dx, dy, dist: Math.max(Math.abs(dx), Math.abs(dy)), arrow };
+    },
 
     // MAP KNOWLEDGE (Steve 2026-10-06): the world map shows ONLY what the
     // player has seen — tiles they've stood on, plus tiles learned by
@@ -11562,6 +11664,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // revealed within 3, OR adjacent unrevealed (walking into fog)
         if (d > 0 && (d <= 3 && t.revealed || d === 1)) out.push({ x, y, d, unknown: !t.revealed });
       }
+      // BEYOND EDGE: adjacent ground past the home board is walkable into
+      // the unknown. Offered WITHOUT generating — looking at the map must
+      // not create ground. Already-generated beyond tiles report honestly.
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const x = this.map.px + dx, y = this.map.py + dy;
+        if (y >= 0 && y < this.map.tiles.length && x >= 0 && x < (this.map.tiles[y] || []).length) continue;
+        const t = this.tileAt(x, y);
+        out.push({ x, y, d: 1, unknown: !(t && t.revealed) });
+      }
       return out;
     },
 
@@ -11573,6 +11684,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // player's current tile. Used by travelTo's intermediate-tile check.
     travelBlockage(x, y, fx, fy) {
       const dest = this.tileAt(x, y);
+      // BEYOND EDGE: no tile exists for unoffered coordinates (previously a
+      // crash on dest.blockFrom). No tile means no blockage — callers that
+      // offer a coordinate generate it first (travelTo, tryNodeExit).
+      if (!dest) return null;
       const sx = (fx === undefined) ? this.map.px : fx;
       const sy = (fy === undefined) ? this.map.py : fy;
       const dx = Math.sign(x - sx), dy = Math.sign(y - sy);
@@ -11980,15 +12095,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const inside = s.insideHaven && this.playerTile().type === 'haven';
       if (inside) return null;
       const nx = this.map.px + ex.dx, ny = this.map.py + ex.dy;
-      // WORLD EDGE (explorer loop 2026-10-06): the known world ends at the
-      // map border. NO SILENT ACTIONS — say so once per game, not on every
-      // hold-to-walk bump into the edge.
-      if (nx < 0 || nx > 8 || ny < 0 || ny > 8) { // 9x9 world (2026-10-07)
-        if (!this.state.worldEdgeTold) {
-          this.state.worldEdgeTold = true;
-          this.say('The known world ends here — beyond is unmapped, no path. Turn back.');
+      // BEYOND EDGE (tackle-map 2026-10-28): the old world-end refusal is
+      // gone — the world keeps going. Stepping past the home board
+      // generates the next tile from the world seed and crosses onto it.
+      // NO SILENT ACTIONS — the first crossing says so, once per game, and
+      // names the way home. Beyond tiles are open ground (no blockages),
+      // so the blockage + travelTo path below runs unchanged.
+      if (nx < 0 || nx > 8 || ny < 0 || ny > 8) { // past the 9x9 home board
+        this.beyondTile(nx, ny);
+        if (!this.state.worldBeyondTold) {
+          this.state.worldBeyondTold = true;
+          this.say('New ground — the world keeps going past the old edge. The compass still knows the way home.');
         }
-        return null;
       }
       const block = this.travelBlockage(nx, ny);
       if (block) return { blocked: block, dir: ex.dir };
@@ -12066,6 +12184,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const t = this.travelTargets().find(t => t.x === x && t.y === y);
       if (!t) return null;
+      // BEYOND EDGE: an offered beyond coordinate has no tile until the
+      // crossing generates it — generate before the blockage check reads it.
+      if (!this.tileAt(x, y)) this.beyondTile(x, y);
       // NO PHANTOM TENT ROOMS (break-it camps-8 2026-10-09): node travel
       // moves the player to another tile — the tent-room screen keys off
       // insideTent alone, so a stale insideTent would render the old tent's
@@ -23032,6 +23153,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!t.visited) return { name: epithet, text: 'Pre-Burn ruin. You haven\'t worked this ground — no idea what\'s left inside yet.' };
         return { name: epithet, text: (t.loot || []).length ? 'Pre-Burn ruin. There might be cans left.' : 'Pre-Burn ruin. Picked clean.' };
       }
+      if (t.type === 'building') {
+        // Same interior-knowledge rule as ruins: a building's remaining
+        // supplies are known only once you've walked the ground.
+        if (!t.visited) return { name: epithet, text: 'A standing building. You haven\'t worked this ground — no idea what\'s left inside yet.' };
+        return { name: epithet, text: (t.loot || []).length ? 'A standing building. There might be supplies left.' : 'A standing building. Picked clean.' };
+      }
       if (t.knownPlant) {
         const kp = this.data.plants.find(p => p.id === t.knownPlant);
         if (kp) {
@@ -23128,7 +23255,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         type: t.type, title: arr.title, epithet: this.nodeEpithet(this.map.px, this.map.py),
         text: t.ruinStory || this.arrivalTextFor(t), here,
         isRuin: t.type === 'ruin',
-        canForage: t.type === 'ruin' ? (t.loot || []).length > 0 : S.forage.canForage(t),
+        canForage: (t.type === 'ruin' || t.type === 'building') ? (t.loot || []).length > 0 : S.forage.canForage(t),
         canTreat: t.type === 'creek' || t.type === 'wetland',
       };
     },
@@ -26033,13 +26160,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
         const mx = scholar.mx ?? 4, my = scholar.my ?? 4;
-        // ruins: scavenge finite loot, not plants
+        // ruins + buildings: scavenge finite loot, not plants. A building
+        // is the city's version of a ruin — manufactured goods, finite,
+        // never regrowing (tackle-map 2026-10-28). Same branch, own words.
         // BOOKS (gap-breadth 2026-10-10): treasure, not routine. Canon:
         // books are treasure troves unlocking big codex chunks. One roll
         // on the FIRST search of each ruin — 30%, a real find — then the
         // ruin is just loot. The old 10%-after-loot-exhausted roll meant
         // ~0.1 books per run; books never fed breadth.
-        if (t.type === 'ruin') {
+        if (t.type === 'ruin' || t.type === 'building') {
+          const isBld = t.type === 'building';
           if (S.buildarounds) S.buildarounds.onForage(this, false);
           if (!t.bookChecked) {
             t.bookChecked = true;
@@ -26082,7 +26212,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
           }
           if (!t.loot || !t.loot.length) {
-            this.say('Picked clean. The houses fed someone — not you.'); return null;
+            this.say(isBld ? 'Picked clean. Nothing left in this building.' : 'Picked clean. The houses fed someone — not you.'); return null;
           }
           const lootId = t.loot.shift();
           if (this.state.scholar.week1) this.state.scholar.week1.scavenge++;
@@ -26118,7 +26248,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             } else if (bonus) t.loot.unshift(bonusId);
           }
           scholar.kcal -= 100;
-          msg = `You pry open a cupboard: ${item.name}${item.kcal ? ` (+${item.kcal} kcal)` : ''}. ${item.text}` + (t.loot.length ? '' : ' That\'s everything. This house is done.');
+          msg = `You pry open a ${isBld ? 'cabinet' : 'cupboard'}: ${item.name}${item.kcal ? ` (+${item.kcal} kcal)` : ''}. ${item.text}` + (t.loot.length ? '' : (isBld ? ' That\'s everything. This building is done.' : ' That\'s everything. This house is done.'));
           this.say(msg);
           this.tele('scavenge', { item: item.name, kcal: item.kcal, lootLeft: t.loot.length, packKg: Math.round(this.packWeight() * 10) / 10 });
           // ACTION CLOCK: searching a ruin = 2 chunks (64 ticks). 100 kcal effort above.

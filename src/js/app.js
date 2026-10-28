@@ -19119,13 +19119,13 @@
       const nodeName = Game.nodeDetail ? Game.nodeDetail().epithet : 'field';
       parts.push(`📍 ${esc(nodeName.split('—')[0].trim())}`);
     } catch (e) { parts.push('📍 here'); }
-    // Haven (home)
+    // Haven (home) — BEYOND EDGE (tackle-map 2026-10-28): the compass
+    // always reports the way home now (Game.homeVector, the tested seam),
+    // at any distance past the edge. The old line only rendered when
+    // village.px happened to be set, which a fresh game never does.
     try {
-      const hv = Game.state.village;
-      if (hv && hv.px !== undefined) {
-        const d = dist(hv.px, hv.py);
-        if (d > 0) parts.push(`🏘️ ${dirArrow(hv.px - px, hv.py - py)}${d}`);
-      }
+      const hv = Game.homeVector ? Game.homeVector() : null;
+      if (hv && hv.dist > 0) parts.push(`🏘️ ${hv.arrow}${hv.dist}`);
     } catch (e) {}
     // (No travel-destination marker: the old destination hook was removed.
     // The compass marks haven, discovered villages, and the revealed beast —
@@ -19173,9 +19173,17 @@
     let _stage = 0;
     try { _stage = Game.presentationStage ? Game.presentationStage() : 0; } catch (e) { console.warn('[map] stage', e && e.message); }
     const _pal = (type) => { try { return (TS && TS.palette) ? TS.palette(type || 'meadow', _stage).base : null; } catch (e) { console.warn('[map] palette', e && e.message); return null; } };
-    for (let y = 0; y < 9; y++) {
+    // BEYOND EDGE (tackle-map 2026-10-28): render the 9x9 viewport centered
+    // on the player (world coordinates), not the fixed home board — past
+    // the edge the window slides with you. At home this is exactly the old
+    // 0..8 board. data-x/data-y carry world coords; tile taps already read
+    // through Game.tileAt, which resolves beyond tiles.
+    const _win = (Game.mapWindow ? Game.mapWindow() : null);
+    for (let _ry = 0; _ry < 9; _ry++) {
       html += '<div class="mrow">';
-      for (let x = 0; x < 9; x++) {
+      for (let _rx = 0; _rx < 9; _rx++) {
+        const x = _win ? _win[_ry][_rx].x : _rx;
+        const y = _win ? _win[_ry][_rx].y : _ry;
         // FOG OF WAR (Steve 2026-10-06): only tiles you've WALKED IN reveal.
         // Check seenTiles for visited status. No hardcoded visibility.
         // FOG DEPTH (break-it travel r4 2026-10-09): 'shared' tiles render
@@ -19191,17 +19199,16 @@
           if (_e && _e.k === 'v') _seenSimple = true;
         } catch (e) {}
         if (_seenSimple) {
-          // Get tile type
+          // Get tile type (tileAt resolves beyond tiles; the direct board
+          // lookup below would miss them and render meadow instead)
           let _tl = null, _ttype = 'meadow';
           try {
-            const _tiles = Game.map && Game.map.tiles;
-            if (_tiles && _tiles[y] && _tiles[y][x]) {
-              _tl = _tiles[y][x];
-              if (_tl.type) _ttype = _tl.type;
-            }
+            _tl = Game.tileAt(x, y);
+            if (_tl && _tl.type) _ttype = _tl.type;
           } catch (e) {}
-          // Haven always shows 🏘️ (Steve 2026-10-06) — center of 9x9
-          if (x === 4 && y === 4) {
+          // Haven always shows 🏘️ (Steve 2026-10-06) — by tile kind now,
+          // not by 4,4: past the edge haven sits elsewhere in the window
+          if (_ttype === 'haven') {
             html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_pal('haven') || '#7cbd6b'};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">🏘️</div></div>`;
             continue;
           }
@@ -19233,7 +19240,7 @@
               creek: ['#4a9ad0', '💧'], water: ['#4a9ad0', '🌊'],
               river: ['#4a9ad0', '🌊'], trail_edge: ['#c0a060', '🟫'],
               trail: ['#c0a060', '🟫'], path: ['#c0a060', '🟫'],
-              ruin: ['#9a9a9a', '🏚️'],
+              ruin: ['#9a9a9a', '🏚️'], building: ['#9a9a9a', '🏢'],
             };
             const _t = _terrain[_ttype] || _terrain['meadow'];
             html += `<div class="tile" data-x="${x}" data-y="${y}"${_tilePos}><div style="background:${_pal(_ttype) || _t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div>${_bridgeBadge}</div>`;
@@ -19360,7 +19367,7 @@
                 wetland: '#5aa0b0', swamp: '#5aa0b0', creek: '#4a9ad0',
                 water: '#4a9ad0', river: '#4a9ad0', trail_edge: '#c0a060',
                 trail: '#c0a060', path: '#c0a060', ruin: '#9a9a9a',
-                haven: '#7cbd6b'
+                building: '#9a9a9a', haven: '#7cbd6b'
               };
               // If no tile data, use bright meadow default (Steve 2026-10-06).
               // Explored tiles must NEVER be dark.
