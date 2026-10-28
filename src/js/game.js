@@ -43904,6 +43904,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
 
+    // ARENA-LABEL (sim-arenalabel-b 2026-10-28): the death cause for a
+    // tbEnd('lost') loss, by fight origin — label-only, no mechanics.
+    // A contest-arena fight still has state.arenaContest live at tbEnd
+    // time (_contestArena sets it before startCombat; the tbEnd
+    // finally-hook clears it only AFTER the loss branch runs), so it
+    // keeps 'the arena'. A proven wild fight — at least one monster
+    // fighter, no hostile (human/alien) fighter, and none of the
+    // betrayal / table-trial / coalition-arena flags — reads
+    // 'the wild' (ledger.js's own wild fallback word). Every other
+    // origin falls back to 'the arena' unchanged: betrayal,
+    // table-trial, titan coalition-arena, and alien-hostile losses
+    // are NOT silently relabeled by this arm (documented limit).
+    // All death records (registerDeath, fallen, lineage, telemetry,
+    // death line) derive from this one argument, so they agree.
+    tbFightDeathCause(f) {
+      try {
+        if (this.state && this.state.arenaContest) return 'the arena';
+        const fight = f || this.tbfight || {};
+        if (fight.betrayal || fight.tableTrial || fight.coalitionArena) return 'the arena';
+        const fighters = fight.fighters || [];
+        const hasMonster = fighters.some(x => x && x.kind === 'monster');
+        const hasHostile = fighters.some(x => x && x.kind === 'hostile');
+        if (hasMonster && !hasHostile) return 'the wild';
+      } catch (e) {}
+      return 'the arena';
+    },
+
     tbEnd(result) {
       const f = this.tbfight;
       if (!f || f.over) return;
@@ -44247,10 +44274,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               try { this._contestResolveOthers(contest); }
               catch (e) { console.warn('[arena] co-taken fates', e); }
             }
-            // GAP-W4-NARR #107: this is the arena loss path (Blood
-            // pit/gauntlet/siege) — report it as such, not generic
-            // 'combat', so succession sweeps can split arena deaths out.
-            try { this.playerDeath('the arena'); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
+            // GAP-W4-NARR #107, origin-labeled (sim-arenalabel-b):
+            // the arena loss path (Blood pit/gauntlet/siege) still
+            // reports 'the arena'; a proven wild fight reports
+            // 'the wild' instead, so succession sweeps can split
+            // arena deaths out without mislabeling wild losses.
+            // tbFightDeathCause is label-only — nothing else here
+            // changes (lifeline, co-taken fates, contest resume).
+            try { this.playerDeath(this.tbFightDeathCause(f)); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
           }
         }
       }
