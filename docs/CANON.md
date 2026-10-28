@@ -25,6 +25,7 @@ twice in one day (2026-10-09).
 | docs/BALANCING.md | numbers, levers, targets | any balance change |
 | docs/TIME-ECONOMY.md | ticks, day-parts, pacing | action costs, durations |
 | docs/KIN.md | the Taking: half of adults taken at the Scattering, kids in stasis, return reserved for good table path | the taking, missing relatives, stasis kids, table kid-return |
+| docs/MAP.md | one map: home board, beyond tiles, leg boards, macro map, region registry, way home | any map, travel, beyond-edge, leg-board, or way-home work |
 | docs/FANS.md | the audience gets faces: named alien fan personas with arcs | fans, audience, care packages, fan clubs, table testimony |
 | docs/ABILITY-REFUSALS.md | ability-action refusals (timing, button honesty, once-a-day day-roll) and pantry ledger accounting (closing, doors, span dedup, raid loot) | any ability refusal, button why, once-a-day gate, pantry number, ledger instrument |
 
