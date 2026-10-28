@@ -7863,42 +7863,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class): never
       // compose "the "+monsterNoun blindly — proper names keep their casing.
       const mPhrase = this.articlePhrase ? this.articlePhrase(mName) : mName;
-      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): a lingering raider at
-      // Haven during an aid crisis is the crisis fight — route through
-      // aidFight so allies at the door join as real combatants (it scores
-      // the kill itself, channel 'aid-crisis', and resolves the crisis).
-      // (Computed before PARTY-UP: the field feed below exempts aid
-      // fights, which keep their own from-start ally routing.)
-      let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
       // PARTY-UP (Steve 2026-10-09): the outdoor crew is out there together —
       // a jumped patroller can call for help instead of fleeing alone.
       // PARTY WIRING (Steve 2026-10-12): the trusted answer first — a
       // stranger doesn't sprint into the treeline for you; a friend does.
-      // FIELD FEED (sim-fieldfeed-a 2026-10-28): same presence feed as
-      // the wild router — presentFightAllies (party-wiring) filters
-      // the trust-ordered answer list to earshot of the patroller's
-      // node. Aid-crisis fights keep the legacy crew-only feed below.
       let pAllies = 0; const pAllyVids = [];
       try {
-        if (!pViaAid && this.presentFightAllies) {
-          for (const rid of this.presentFightAllies(vid)) {
-            pAllies++;
-            if (pAllyVids.length < 2) pAllyVids.push(rid);
-          }
-        } else {
-          const _pt = (this.state.village || {}).trust || {};
-          const _tOf = (rid) => (_pt[rid] === undefined ? 10 : _pt[rid]);
-          const _crew = [];
-          for (const rid of (this._outdoorCrew || [])) {
-            if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
-          }
-          _crew.sort((a, b) => _tOf(b) - _tOf(a));
-          for (const rid of _crew) {
-            pAllies++;
-            if (pAllyVids.length < 2) pAllyVids.push(rid);
-          }
+        const _pt = (this.state.village || {}).trust || {};
+        const _tOf = (rid) => (_pt[rid] === undefined ? 10 : _pt[rid]);
+        const _crew = [];
+        for (const rid of (this._outdoorCrew || [])) {
+          if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
+        }
+        _crew.sort((a, b) => _tOf(b) - _tOf(a));
+        for (const rid of _crew) {
+          pAllies++;
+          if (pAllyVids.length < 2) pAllyVids.push(rid);
         }
       } catch (e) {}
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): a lingering raider at
+      // Haven during an aid crisis is the crisis fight — route through
+      // aidFight so allies at the door join as real combatants (it scores
+      // the kill itself, channel 'aid-crisis', and resolves the crisis).
+      let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
       let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
       if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
       const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought ${mPhrase}`;
@@ -19940,44 +19927,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
       let mdef = {};
       try { mdef = (this.data.monsters || []).find(x => x.id === m.id) || {}; } catch (e) {}
-      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
-      // resolvePatrol — a lingering raider during an aid crisis is fought
-      // through aidFight, allies at the door in the fight from round one.
-      // (Computed before PARTY-UP: the field feed below exempts aid
-      // fights, which keep their own from-start ally routing.)
-      let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
       // PARTY-UP (Steve 2026-10-09): same outdoor-crew rule as patrols — a
       // villager jumped in the wild can call to whoever's out there with them.
       // PARTY WIRING (Steve 2026-10-12): trust-ordered — friends answer first.
-      // FIELD FEED (sim-fieldfeed-a 2026-10-28): wild meetings fight
-      // with the villagers physically present — presentFightAllies
-      // (party-wiring) filters the trust-ordered answer list to
-      // earshot of the fighter's node. The old crew-only feed was
-      // empty on 0/1,272 meetings (1528Z): the party never formed
-      // because the input was never fed, not because nobody was
-      // there. Raid defense (opts.raid) and aid-crisis fights keep
-      // the legacy crew-only feed below — out of this arm's scope.
       let wAllies = 0; const wAllyVids = [];
       try {
-        if (!opts.raid && !wViaAid && this.presentFightAllies) {
-          for (const rid of this.presentFightAllies(vid)) {
-            wAllies++;
-            if (wAllyVids.length < 2) wAllyVids.push(rid);
-          }
-        } else {
-          const _wt = (this.state.village || {}).trust || {};
-          const _tOf = (rid) => (_wt[rid] === undefined ? 10 : _wt[rid]);
-          const _crew = [];
-          for (const rid of (this._outdoorCrew || [])) {
-            if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
-          }
-          _crew.sort((a, b) => _tOf(b) - _tOf(a));
-          for (const rid of _crew) {
-            wAllies++;
-            if (wAllyVids.length < 2) wAllyVids.push(rid);
-          }
+        const _wt = (this.state.village || {}).trust || {};
+        const _tOf = (rid) => (_wt[rid] === undefined ? 10 : _wt[rid]);
+        const _crew = [];
+        for (const rid of (this._outdoorCrew || [])) {
+          if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
+        }
+        _crew.sort((a, b) => _tOf(b) - _tOf(a));
+        for (const rid of _crew) {
+          wAllies++;
+          if (wAllyVids.length < 2) wAllyVids.push(rid);
         }
       } catch (e) {}
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
+      // resolvePatrol — a lingering raider during an aid crisis is fought
+      // through aidFight, allies at the door in the fight from round one.
+      let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
       // POST-FLEE REST: a critically wounded fleer hides for the rest of
       // the day — no new fight is rolled, nothing relocates, no HP
       // restored. Raid defense and lingering-raider aid fights are never
