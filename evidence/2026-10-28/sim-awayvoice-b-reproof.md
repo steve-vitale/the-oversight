@@ -121,4 +121,111 @@ landed beat, not as a new arm verdict.
 
 ## Results — RE-PROOF (filled after sims; judged against the bar above)
 
-(TBD — appended after the proof test and the fresh-band sweep run.)
+- Proof test: scripts/test-awayvoice-b.js 10/10 legs green on current
+  HEAD (L1–L5 live harness, A1–A3 analyzer, S1–S2 sweep guards) —
+  re-proof leg 1 PASS.
+- Fresh-band sweep: 8/8 seeds complete (competent, 150d death-aware,
+  PLENTYDEPRI=1/DEPOSITGATE=1). Days: 150×6, 126 (96007, village-lost),
+  106 (96008, village-lost); median survival 150d. Deaths total 52.
+  Wall numbers (competent-only, not win-seeking): national 0/8,
+  table 0/8, wins 0/8, wave-4 6/8, wave-5 0/8. Corpus:
+  evidence/2026-10-28/sim-awayvoice-b-reproof-corpus/ (8 per-seed
+  files + sweep-reproof.json). Wall-clock slowness was sibling CPU
+  contention (load ~9–11; per-seed sim time itself 1.6–2.7s); no
+  EPERM flap blocked this run.
+- Analyzer (scripts/analyze-awayvoice-reproof-b.js):
+
+| seed | days | away packCalls | low (<=7) | low fired | healthy (>=50) | healthy fired | borrow |
+| 96001 | 150 | 62 | 1 | 1 | 50 | 0 | 0 |
+| 96002 | 150 | 135 | 1 | 1 | 120 | 0 | 0 |
+| 96003 | 150 | 73 | 1 | 1 | 56 | 0 | 0 |
+| 96004 | 150 | 156 | 1 | 1 | 141 | 0 | 0 |
+| 96005 | 150 | 60 | 1 | 1 | 42 | 0 | 0 |
+| 96006 | 150 | 199 | 3 | 3 | 131 | 0 | 0 |
+| 96007 | 126 | 108 | 0 | 0 | 99 | 0 | 0 |
+| 96008 | 106 | 71 | 0 | 0 | 56 | 0 | 0 |
+| TOTAL | — | 864 | 8 | 8 | 695 | 0 | 0 |
+
+- Re-proof legs: (2) fire rate 8/8 = 1.000 >= 0.80 PASS; (3) healthy
+  fires 0/695 PASS; (4) name-borrowing 0 PASS; (5) zero src/js diff
+  from this run PASS (git diff HEAD -- src/js/ empty; the only
+  committed files are this evidence file, the two new scripts, and
+  the corpus).
+- RE-PROOF VERDICT: PASS — the landed beat still fires on every
+  low-health away day on fresh seeds, stays silent on healthy away
+  days, and names its own traveler every time.
+- Observation (not a failure): all 8 fires in this band are the
+  ADEQUATE variant (take == want) — with the packtail top-up live,
+  low-health away meals now meet want from the pantry top-up, so
+  no short-meal or empty-pack variant fired here. The short (30)
+  and empty (1) variants were already proven at pilot + confirm;
+  this band proves the adequate variant's honesty: it claims no
+  shortfall it does not have, it reports hurt + away + pack.
+- Coverage limit (honest, same class as pilot): the band holds
+  only 1 starvation death, and it is a HAVEN death (Arnold, s96003
+  d10, away=false) — so no away-starvation death-day beat could
+  be sampled here. The beat's work in this band is decline arcs,
+  not death days (see SENSE). The David health-8 edge did not
+  recur as a sampled case and is NOT re-tuned, per prereg.
+
+## SENSE (SENSE-TESTING LAW — one voiced away decline, read in full)
+
+KURT, s96006 (the trough-and-recovery arc the beat exists for):
+health 38 (d15, away, silent — above the line) → 24 (d16, away,
+silent) → 3 (d17, away, BEAT) → 21 (d18, haven) → 49 (d19, away,
+silent) → 77 (d20, haven). The beat fires exactly at the trough
+and nowhere else on the arc; the recovery days stay silent, as
+they should — the line marks the danger, not every away day.
+
+Quoted beat (d17, from the say log, with its neighbours — the old
+Miguel contrast, now answered):
+
+> "d17 Village meal: +1000 kcal, +1L water from the communal pantry.
+> (Half ration — they don't trust you yet.)"
+> "d17 Kurt eats away from the haven — 1220 kcal from the pack —
+> while hurt (health 3/100), far from the haven's shelves."
+
+The haven eats on-screen AND Kurt's own away meal is now named in
+the same window: traveler, pack amount, hurt health, distance from
+the shelves. Nothing is invented — take (1220) equals want (1220)
+and the line claims no shortfall. A player reading d17 knows Kurt
+was away, hurt, and fed from his pack while the village ate at
+home. The decline that was silent for Miguel is legible here.
+PASS.
+
+## Metric review (post-run)
+
+- No metric was re-scored mid-run. The re-proof bar was written
+  before the sweep and judged as written.
+- The single-cell design (no beat-stripped baseline) is a stated
+  limit, not a gap: narration-only identity was proven at pilot +
+  confirm, and re-running a stripped baseline would re-litigate a
+  landed verdict. What this run proves is current-master firing
+  behavior on fresh seeds, which is the question a duplicate
+  dispatch actually needs answered.
+- Freshness check limit: the full-content corpus grep was killed
+  as too slow; freshness rests on per-seed filenames + dated-note
+  mentions (the 2026-10-25 confirm's own standard). A filename
+  collision inside a corpus JSON's body (not its name) would not
+  have been caught — but the sweep writes its own per-seed files
+  under new names, so no judged file was overwritten.
+- Balanced panel §15: N/A as pre-registered (no comparison arm, no
+  panel metric for voice). Not run, not faked.
+- Open items for the coordinator backlog (NOT chased here):
+  (a) David health-8 threshold edge — still a next-run
+  metric-review proposal, not a change; (b) the haven-beat
+  name-borrowing line ("Theo paces the hall…") still appears
+  beside away beats in the same window — the voice beat
+  out-informs it but does not remove it (landed arm's own
+  backlog item, still open).
+
+## Verdict
+
+DUPLICATE DISPATCH RESOLVED AS RE-PROOF, NOT A LANDING: the
+away-hunger voice beat was already landed 2026-10-25 and is
+verified alive on current master (proof 10/10, fresh-band fire
+rate 1.000, healthy silence 0/695, zero borrowing, zero src/js
+change). NOTHING TO MERGE AS A GAME CHANGE — the branch carries
+only this evidence file, the re-proof sweep + analyzer, and the
+fresh-band corpus. Coordinator action: close the duplicate arm;
+do not re-land the beat.
