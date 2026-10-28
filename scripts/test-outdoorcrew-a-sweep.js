@@ -27,7 +27,15 @@ const path = require('path');
 const REPO = path.join(__dirname, '..');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { tableseatNowait } = require('./policies/tableseat-nowait');
-const { outdoorcrew } = require('./policies/outdoorcrew');
+// NO-GO verdict: the outdoorcrew policy variant was deleted from the
+// final tree (evidence/2026-10-28/sim-outdoorcrew-a.md). To re-run
+// this sweep, restore it from branch history (commit 4fd54f3e).
+let outdoorcrew = null;
+try { outdoorcrew = require('./policies/outdoorcrew').outdoorcrew; }
+catch (e) {
+  console.error('OUTDOORCREW POLICY DELETED (NO-GO verdict): restore scripts/policies/outdoorcrew.js from commit 4fd54f3e to re-run this sweep.');
+  process.exit(1);
+}
 const {
   newStore: newFieldpartyStore, installFieldpartyDiag, withFieldpartyDiag,
 } = require('./policies/fieldparty-form-diag');

@@ -1,0 +1,39 @@
+=== sim-outdoorcrew-a analyzer ===
+corpus: rows=8/8 ok=true 
+meetings: all=907 judged(w4 field resolve/patrol/aid, villager-led)=19
+PRIMARY: FORMED=0 (GO>=1) FAIL
+MECHANISM: CREWED judged=17 raw=17; CREWED all-waves=629 raw=633 (control raw 0/1272)
+SECONDARY: PARTYSIZE2 judged=17 tile-could-form=13 outcomes={"vDie":10,"vFlee":9}
+CONTRAST wave-3 field: n=16 formed=8
+OUTINGS: pairs=1881 singles=77 assigned=3839 refused=1181 emptyParts=60 upkeeps=2018
+WALL: won=2 (ctl 3) natEver=6 (ctl 7) natFinal=4 (ctl 6) table=3 (ctl 4) entered=2 (ctl 3) wave4=7 (ctl 6) wave5=0 (ctl 0) median=118 (ctl 146, guard>=117 PASS) starv=1 (ctl 1, guard<=2 PASS) deaths=306 (ctl 286)
+GUARDS: PASS
+CHANNELS (all meetings): {"field/resolve":{"n":494,"vKill":39,"vDie":10,"vFlee":46,"mFlee":399},"other/other":{"n":106,"vKill":9,"vDie":4,"vFlee":8,"mFlee":24},"raid/resolve":{"n":239,"vKill":34,"vDie":3,"vFlee":19,"mFlee":183},"field/aid":{"n":35,"vKill":2,"vDie":6,"vFlee":5,"mFlee":22},"field/other":{"n":33,"vKill":18,"vDie":0,"vFlee":0,"mFlee":15}}
+PER-SEED:
+  s75101 days=92 won=1 wave=4 judged=0 crewed=0 formed=0 ocPairs=170 ocAssigned=350 ocRefused=138 starv=0 deaths=35 courtCombined=21
+  s75102 days=107 won=0 wave=4 judged=0 crewed=0 formed=0 ocPairs=132 ocAssigned=275 ocRefused=139 starv=0 deaths=47 courtCombined=12
+  s75103 days=109 won=0 wave=4 judged=14 crewed=12 formed=0 ocPairs=146 ocAssigned=300 ocRefused=147 starv=1 deaths=42 courtCombined=14
+  s75104 days=90 won=1 wave=3 judged=0 crewed=0 formed=0 ocPairs=251 ocAssigned=514 ocRefused=118 starv=0 deaths=22 courtCombined=26
+  s75105 days=165 won=0 wave=4 judged=3 crewed=3 formed=0 ocPairs=304 ocAssigned=618 ocRefused=119 starv=0 deaths=49 courtCombined=8
+  s75106 days=180 won=0 wave=4 judged=0 crewed=0 formed=0 ocPairs=459 ocAssigned=929 ocRefused=199 starv=0 deaths=29 courtCombined=8
+  s75107 days=129 won=0 wave=4 judged=1 crewed=1 formed=0 ocPairs=188 ocAssigned=383 ocRefused=165 starv=0 deaths=28 courtCombined=5
+  s75108 days=118 won=0 wave=4 judged=1 crewed=1 formed=0 ocPairs=231 ocAssigned=470 ocRefused=156 starv=0 deaths=54 courtCombined=14
+CREWED-BUT-UNFORMED MEETINGS (why no shout):
+  s75103 d64 leader=tom_baker monster=audit caller=resolve crew=["olivia_bennett"] outcome=vDie rounds=2 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d66 leader=app_mgpsphhk307 monster=audit caller=resolve crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d67 leader=app_mgpspinu86 monster=algorithm caller=aid crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d67 leader=app_mgpspinu86 monster=algorithm caller=aid crew=["olivia_bennett"] outcome=vDie rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d68 leader=app_mgpspilr428 monster=algorithm caller=aid crew=["olivia_bennett"] outcome=vDie rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d68 leader=thabo_maseko monster=algorithm caller=aid crew=["olivia_bennett"] outcome=vDie rounds=2 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d68 leader=app_mgpsphhk307 monster=algorithm caller=aid crew=["olivia_bennett"] outcome=vDie rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d69 leader=luis_fernandez monster=algorithm caller=aid crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d72 leader=luis_fernandez monster=algorithm caller=resolve crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d80 leader=mia_andersson monster=suburb caller=resolve crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d81 leader=mia_andersson monster=suburb caller=resolve crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75103 d88 leader=mia_andersson monster=suburb caller=resolve crew=["olivia_bennett"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75105 d146 leader=visjoin_143 monster=suburb caller=resolve crew=["ruth_goldstein"] outcome=vFlee rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75105 d147 leader=visjoin_143 monster=suburb caller=resolve crew=["ruth_goldstein"] outcome=vDie rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75105 d148 leader=visjoin_136 monster=suburb caller=resolve crew=["ruth_goldstein"] outcome=vDie rounds=1 intent=engage everHopeless=false calledHelp=false joined=null
+  s75107 d118 leader=app_mgpsphp0348 monster=eulogy caller=resolve crew=["luis_fernandez"] outcome=vDie rounds=2 intent=engage everHopeless=false calledHelp=false joined=null
+  s75108 d96 leader=app_mgpspit7437 monster=eater caller=resolve crew=["ines_duarte","ursula_weber"] outcome=vDie rounds=2 intent=engage everHopeless=false calledHelp=false joined=null
+VERDICT: NO-GO (FED-NO-FORM: crew fed, no shout ever answered)
