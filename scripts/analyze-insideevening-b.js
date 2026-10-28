@@ -15,9 +15,9 @@
 const fs = require('fs');
 const path = require('path');
 const arg = (n, f) => { const i = process.argv.indexOf('--' + n); return i < 0 ? f : process.argv[i + 1]; };
-const beforeDir = arg('--before', null), afterDir = arg('--after', null);
-const barPass = parseInt(arg('--bar-pass', '6'), 10);
-const outFile = arg('--out', null);
+const beforeDir = arg('before', null), afterDir = arg('after', null);
+const barPass = parseInt(arg('bar-pass', '6'), 10);
+const outFile = arg('out', null);
 if (!beforeDir || !afterDir) { console.error('usage: --before <dir> --after <dir> [--bar-pass N] [--out <file>]'); process.exit(2); }
 
 function loadDir(dir) {

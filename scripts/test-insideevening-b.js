@@ -26,8 +26,8 @@ const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 const arg = (n, f) => { const i = process.argv.indexOf('--' + n); return i < 0 ? f : process.argv[i + 1]; };
-const beforeDir = arg('--before', null), afterDir = arg('--after', null);
-const seeds = arg('--seeds', '10700,10701,10702,10703,10704,10705,10706,10707')
+const beforeDir = arg('before', null), afterDir = arg('after', null);
+const seeds = arg('seeds', '10700,10701,10702,10703,10704,10705,10706,10707')
   .split(',').map((s) => parseInt(s.trim(), 10)).filter(Boolean);
 if (!beforeDir || !afterDir) { console.error('usage: --before <dir> --after <dir> [--seeds ...]'); process.exit(2); }
 
