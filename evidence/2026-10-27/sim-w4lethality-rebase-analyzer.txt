@@ -1,0 +1,14 @@
+=== sim-w4lethality-rebase analysis ===
+  unitChecks: PASS
+  G1 corpus: PASS
+  substrate: combined=121 seedsActive=8 -> PASS
+  wall: n=8 won=3 medUpper=162 medConv=154 natEver=7 natFinal=5 table=6 entered=3 wave4=5 wave5=0 starv=2 deaths=299 seats={"lesser":3,"none":5}
+  fights: total=67 tb=28 field=39 evades=0 channels={"non-world-TB":2,"player-tb-world":25,"villager-field":35,"raid-defender":4,"other":1}
+  leg (b) complete: tbIncomplete=0 fieldIncomplete=0 fieldSuppGaps=0 -> PASS
+  leg (c) parity: PASS (exact)
+  leg (d) distribution: ranked=67 maxPct=0.6889632107023411 medianPct=0.015833333333333335
+  closest loss (by HP left): seed 75101 d131 influencer [non-world-TB] damage=618 maxHp=897 hpLeft=279 (31.1% left) rounds=9 fighterHpLeft=-36
+  kills: 0 (all complete non-evade fights incl kills: 67)
+  leg (e) >50% non-kill: of max 2/67, of start 2/67, byChannel={"non-world-TB":{"fights":2,"over50max":1,"over50start":1,"maxPct":0.6889632107023411},"player-tb-world":{"fights":25,"over50max":1,"over50start":1,"maxPct":0.5889621087314663},"villager-field":{"fights":35,"over50max":0,"over50start":0,"maxPct":0.03176470588235294},"raid-defender":{"fights":4,"over50max":0,"over50start":0,"maxPct":0.03529411764705882},"other":{"fights":1,"over50max":0,"over50start":0,"maxPct":0.12095531587057011}}
+  leg (e) >50% literal (kills incl): of max 2/67
+  -> /home/hatch/workspace/worktrees/sim-w4lethality-rebase/evidence/2026-10-27/perseed-w4lethality-rebase/analysis.json
