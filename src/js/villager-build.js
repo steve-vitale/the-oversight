@@ -27,7 +27,7 @@
 //   - knowledge_gates_planning: an ability nobody told them about scores 0; the sheet shows its offers (L2), held = L3 (code: abilityKnowledge, buildScore)
 //   - seek_not_drift: a villager whose build knowledge is too thin defers a sheet (max 3 days) and seeks knowledge instead (code: villagerResolveLevelUps, villagerSeekKnowledge)
 //   - swap_or_keep_same_rule: full slots -> the best offer replaces the weakest held only if it beats it by more than 1, else keep (code: buildDecide)
-//   - you_become_that_villager: on the mantle, scholar.abilities/tracks/levelUpQueue/deedDay/godhood/inventory/equipped are REPLACED by the successor's own villager records (npcAbilities, npcXp + pending sheets, npcDeedDay, npcGodhood, person.items/equipped); integration, slots, Codex knowledge, ledger, trust and village state stay with the office (code: mantleBecome, ledger.js playerDeath)
+//   - you_become_that_villager: on the mantle, scholar.abilities/tracks/levelUpQueue/deedDay/godhood/inventory/equipped/languages are REPLACED by the successor's own villager records (npcAbilities, npcXp + pending sheets, npcDeedDay, npcGodhood, person.items/equipped/stashed, person.languages + occupation polyglot); integration, slots, Codex knowledge, ledger, trust and village state stay with the office (code: mantleBecome, ledger.js playerDeath)
 //   - gear_greedy_no_hoard: equipped gear is never taken; spares go to whoever gains most; armory weapons go to the biggest gain first, one per villager per day, the old weapon goes back (code: villagerGearDay)
 // consumes:
 //   - Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.items
@@ -531,8 +531,12 @@
     //   scholar.levelUpQueue  <- their pending sheets; a predecessor's open level-up sheet closes
     //   scholar.deedDay       <- npcDeedDay[newId] (today's caps are per person)
     //   scholar.godhood       <- npcGodhood[newId] (recognition is of a build, a person's)
-    //   scholar.inventory / equipped <- person.items / person.equipped (weapons and
-    //                            body slots stay worn; keepsakes via migrateKeepsakes)
+    //   scholar.inventory / equipped <- person.items / person.equipped / person.stashed
+    //                            (body AND accessory slots stay worn exactly as worn;
+    //                            stashed belongings ride in the pack; keepsakes via
+    //                            migrateKeepsakes into any still-free accessory slot)
+    //   scholar.languages     <- their own tongues (npcLangs + occupation polyglot),
+    //                            never the predecessor's (tackle-succession 2026-10-27)
     //   codex.abilities       += npcKnow[newId] (the Codex is the office's: it keeps
     //                            what it knew and learns what they knew)
     //   codex.skills          += npcSkills[newId] (their know-how, taught into the Codex)
@@ -618,15 +622,24 @@
         const person = this.getPerson ? this.getPerson(newId) : null;
         const personItems = ((person && person.items) || []).slice();
         const BODY = ['melee', 'ranged', 'head', 'torso', 'legs', 'hands', 'shoes'];
+        const WORN_SLOTS = BODY.concat(['acc1', 'acc2', 'acc3', 'acc4']);
+        // Pool items are usually BARE STRING ids (choosePersonalFive) — the
+        // old match read (itemId||id) off every pool entry, so a string
+        // never matched and NO worn slot ever carried: the successor woke
+        // up with an empty equipped set and everything in the pack, and the
+        // keepsake migration then re-wore a reshuffled accessory set.
+        // (tackle-succession 2026-10-27: what they wore stays worn, in the
+        // same slot — body and accessory alike.)
+        const idOfItem = (it) => (typeof it === 'string' ? it : (it && (it.itemId || it.id)));
         // Pool carries the source OBJECTS (not bare ids) so the inventory
         // map below keeps each copy's own units/kcalEach — duplicate ids
         // (two stone knives) must not collapse onto the first copy.
         const pool = personItems.slice();
         s.equipped = {};
-        for (const sl of BODY) {
+        for (const sl of WORN_SLOTS) {
           const e = ((person && person.equipped) || {})[sl];
           if (!e || !e.itemId) continue;
-          const i = pool.findIndex(it => (it && (it.itemId || it.id)) === e.itemId);
+          const i = pool.findIndex(it => idOfItem(it) === e.itemId);
           if (i < 0) continue;
           pool.splice(i, 1);
           s.equipped[sl] = Object.assign({}, e);
@@ -635,7 +648,7 @@
         // to its id and rebuilt units:1/kcalEach:0 — a 6-strip dried-meat
         // stack became one 0-kcal strip on succession. Carry the source
         // object's own units and kcalEach (def as fallback).
-        s.inventory = pool.map(srcIt => {
+        const toScholarItem = (srcIt) => {
           const id = (srcIt && (srcIt.itemId || srcIt.id)) || srcIt;
           const def = defs.find(d => d.id === id) || {};
           const personal = ((person && person.itemPersonal) || {})[id];
@@ -646,8 +659,27 @@
             flavor: personal ? personal.flavor : def.flavor, owner: newId,
             bonded: true, bond: 0, bondOffered: [], enhancements: [],
           };
-        });
-        if (person) { person.items = []; person.equipped = {}; } // the bearer's kit lives on scholar.* now — never counted twice
+        };
+        // STASHED BELONGINGS (tackle-succession 2026-10-27): person.stashed
+        // is their own things at their space — but after the mantle npcIds
+        // excludes the bearer, so no player path ever reads it again, and
+        // the next death's death pack (scholar only) deletes it outright.
+        // Their things ride in their pack now, like their carried things.
+        s.inventory = pool.map(toScholarItem)
+          .concat(((person && person.stashed) || []).map(toScholarItem));
+        // LANGUAGES (tackle-succession 2026-10-27): scholar.languages was
+        // never set on the mantle, so the successor woke up speaking the
+        // dead bearer's tongues. Mirror newGame: the heir's own languages,
+        // plus their occupation's polyglot tongues at fluent.
+        try {
+          const langSrc = (typeof this.npcLangs === 'function') ? this.npcLangs(newId) : ((person && person.languages) || null);
+          const plv = (typeof this.levelsOf === 'function') ? this.levelsOf(langSrc) : { english: 2 };
+          const occL = (((this.data.characterGen || {}).occupations) || []).find(o => o.id === ((person && person.occupationId) || null)) || {};
+          for (const l of (occL.polyglot || [])) plv[l] = 2;
+          s.languages = plv;
+          s.englishLevel = plv.english != null ? plv.english : 2;
+        } catch (e) { warn('mantle languages', e); }
+        if (person) { person.items = []; person.equipped = {}; person.stashed = []; } // the bearer's kit lives on scholar.* now — never counted twice
         // they are the bearer now: no villager records
         for (const k of ['npcAbilities', 'npcXp', 'npcSkills', 'npcKnow', 'npcBuild', 'npcDeedDay', 'npcGodpath']) { if (v[k]) delete v[k][newId]; }
         try { if (this.recomputeActiveSynergies) this.recomputeActiveSynergies(); } catch (e) { warn('mantle synergies', e); }
