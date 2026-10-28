@@ -86,15 +86,59 @@ function traceGap(row, gap) {
     if (defKeys.has(defKey(f.day, f.mHpStart))) continue;
     bypass.push(f);
   }
+  // RaidTick changes, SPLIT: a raidTick window can contain defender
+  // fights (havenRaidTick drives the defense beat inside the tick —
+  // the ffInWindow fight's stack shows havenRaidTick as its caller).
+  // The post-read then conflates toll + fight damage. The toll
+  // component is -wall when the in-window fight for the seq starts
+  // at exactly preHp - wall (that fight is itself a defwound row —
+  // the gap's next row or later — so its damage belongs to that
+  // row, never to the gap). Only the toll component counts here.
   const tolls = [];
   for (const t of (w4.raidTicks || [])) {
     if (!(t.day >= gap.prevDay && t.day <= gap.nextDay)) continue;
     for (const c of (t.changes || [])) {
       if (c.seq === gap.seq && (c.delta | 0) !== 0) {
-        tolls.push(Object.assign({ raidDay: t.day }, c));
+        const inWin = (t.ffInWindow || []).filter(f => f.seq === gap.seq);
+        const matchedFight = inWin.find(f => {
+          const defMatch = defRows.find(d => d.day === t.day && d.mHpStart === (c.preHp - c.wall));
+          return !!defMatch;
+        });
+        const tollPart = (c.wall > 0 && (c.tollExact || matchedFight)) ? -c.wall : c.delta;
+        tolls.push(Object.assign({ raidDay: t.day }, c, { tollPart: tollPart, fightPart: c.delta - tollPart, inWindowFight: !!matchedFight }));
       }
     }
   }
+  // TB lingerer-restore events: a lost/fled TB fight whose world
+  // origin is a lingerer restores the world object to the standing
+  // fighter's end HP (game.js tbEnd: o.hp = min(o.maxHp,
+  // standing fighter hp)). That is a WRITE-BACK, not damage — it
+  // can partly undo a toll inside a gap interval. Join NWK starts
+  // (pre-fight world hp, tileMonster seq) to tbdmg ends (monster
+  // fighter end hp) by fightId, with oldcore tbEnds (kind re-entry)
+  // confirming the restore happened.
+  const restores = [];
+  try {
+    const starts = ((row.nonworldkill || {}).starts || []).filter(s => s.tileMonster && s.tileMonster.seq === gap.seq);
+    const endsById = {};
+    for (const e of ((row.tbdmg || {}).tbEnds || [])) if (e.fightId) endsById[e.fightId] = e;
+    const oldReentries = (((row.oldcore || {}).tbEnds) || []).filter(e => e.seq === gap.seq && e.kind === 're-entry');
+    for (const s of starts) {
+      if (!(s.day >= gap.prevDay && s.day <= gap.nextDay)) continue;
+      const e = s.fightId ? endsById[s.fightId] : null;
+      if (!e) continue;
+      const mf = (e.fighters || []).find(f => f.kind === 'monster');
+      if (!mf || mf.hp == null) continue;
+      const reentry = oldReentries.find(o => o.day === s.day);
+      if (!reentry) continue;
+      const worldMax = s.tileMonster.maxHp;
+      const restored = Math.max(1, Math.min(worldMax || mf.hp, mf.hp));
+      const preHp = s.tileMonster.hp;
+      if (restored !== preHp) {
+        restores.push({ kind: 'tbRestore-lingerer', day: s.day, fightId: s.fightId, preHp: preHp, fighterEndHp: mf.hp, restoredHp: restored, delta: restored - preHp });
+      }
+    }
+  } catch (e) { /* restore join best-effort; a failed join leaves the gap UNNAMED, never guessed */ }
   // Snapshot bracket: last snapshot at-or-before prevDay's row vs
   // first snapshot at-or-after nextDay — reported for context, not
   // used to name a source (snapshots bracket, events name).
@@ -111,13 +155,17 @@ function traceGap(row, gap) {
     }
   }
   for (const t of tolls) {
-    named.push({ kind: 'raidTick', raidDay: t.raidDay, preHp: t.preHp, postHp: t.postHp, delta: t.delta, wall: t.wall, tollExact: !!t.tollExact });
-    explained += (t.delta | 0);
+    named.push({ kind: 'raidTick', raidDay: t.raidDay, preHp: t.preHp, postHp: t.postHp, delta: t.delta, wall: t.wall, tollExact: !!t.tollExact, tollPart: t.tollPart, fightPart: t.fightPart });
+    explained += (t.tollPart | 0);
+  }
+  for (const rs of restores) {
+    named.push(rs);
+    explained += (rs.delta | 0);
   }
   const traced = named.length > 0 && explained === gap.delta;
   const partial = named.length > 0 && explained !== gap.delta;
   return {
-    gap: gap, bypass: bypass, tolls: tolls, snapshots: snaps,
+    gap: gap, bypass: bypass, tolls: tolls, restores: restores, snapshots: snaps,
     namedEvents: named, explainedDelta: explained,
     verdict: traced ? 'TRACED' : (partial ? 'PARTIAL' : 'UNNAMED'),
   };
