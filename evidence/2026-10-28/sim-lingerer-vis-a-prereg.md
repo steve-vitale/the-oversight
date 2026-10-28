@@ -343,6 +343,33 @@ nationalEver/entered/won, not top-level national/table/
 wins paths — say which artifact class applies, or
 investigate if a line fits neither).
 
+## AMENDMENT (instrument fix, made after the CONTROL pilot band, BEFORE the game change and BEFORE the ARMED band — disclosed, not hidden)
+
+- WHAT CHANGED: the engagement/finish window. The prereg as first
+  written said "day >= linger-start day" in the census definitions
+  while also saying raid-night defender fights on the toll day are
+  NEVER counted. Those two rules collide when the first lingering
+  snapshot falls on the toll day itself (snapshot after the raid):
+  toll-day defender fights would then count as "engagements",
+  inflating the metric with the raid itself. The analyzer now uses
+  day STRICTLY AFTER the toll day for both engagements and
+  finishes. Linger-start remains the birth witness (first
+  lingering snapshot >= toll day); it is no longer the window
+  edge. This is conservative: a genuine same-evening meeting on
+  the toll day is now excluded too, identically on both bands.
+- WHAT DID NOT CHANGE: the corpus rows (untouched), the GO
+  thresholds (engaged >= control + 1, finished >= control, cost
+  bar, substrate gate, detgate), the population definition
+  (tollExact row + later lingering snapshot), or the change
+  itself. The fix is applied identically to CONTROL and ARMED by
+  the same analyzer run, so the comparison stays paired.
+- WHY IT IS ALLOWED NOW: the pilot (CONTROL band) exposed the
+  collision before any judged comparison existed — the ARMED
+  band has not run and the game change has not been written.
+  Per the prereg's own pilot-gate rule, an instrument bug found
+  in the pilot is fixed, re-proved (analyzer re-run on CONTROL
+  below), and disclosed here; the original pilot rows are kept.
+
 ## Metric review (to be filled at judging time, not before)
 
 - (pending at pre-registration; doubts arising during the run go
