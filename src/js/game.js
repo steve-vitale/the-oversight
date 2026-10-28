@@ -11391,6 +11391,66 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return { dx, dy, dist: Math.max(Math.abs(dx), Math.abs(dy)), arrow };
     },
 
+    // walkHome(): the compass's way home, as an ACTION (fixall-map slice
+    // 1a, design §D). The compass line already reports direction +
+    // distance; this walks it — tile by tile, through the same travelTo
+    // pipeline as walking out, so the cost is exactly the outbound cost
+    // (node travel is FREE by the standing rule; the world ticks and
+    // encounters on each step exactly as a manual walk would meet them).
+    // NO TELEPORT: every step moves at most one tile, orthogonally, so
+    // every step is a travelTargets-offered step (home tiles at d==1 and
+    // orthogonal-adjacent beyond tiles are always offered). On a blocked
+    // step it tries the other axis, then stops honestly with the block
+    // named and the position unchanged by the refused step. Combat, death,
+    // or the step cap stop the walk mid-way with reached=false — tap
+    // again after the fight. Returns {reached, steps, path, blocked,
+    // interrupted}. No silent actions: start, arrival, block, and
+    // interruption all say so.
+    walkHome(maxSteps) {
+      const v = this.state.village || {};
+      const hx = v.px ?? 4, hy = v.py ?? 4;
+      const cap = (maxSteps >>> 0) || 200;
+      const path = [{ x: this.map.px, y: this.map.py }];
+      if (this.map.px === hx && this.map.py === hy) return { reached: true, steps: 0, path, blocked: null, interrupted: null };
+      if (this.over) return { reached: false, steps: 0, path, blocked: null, interrupted: 'over' };
+      if (this.inCombat && this.inCombat()) return { reached: false, steps: 0, path, blocked: null, interrupted: 'combat' };
+      this.say('Heading home — following the compass back, one tile at a time.');
+      let steps = 0, blocked = null, interrupted = null;
+      while (this.map.px !== hx || this.map.py !== hy) {
+        if (steps >= cap) { interrupted = 'cap'; break; }
+        if (this.over) { interrupted = 'over'; break; }
+        if (this.inCombat && this.inCombat()) { interrupted = 'combat'; break; }
+        const px = this.map.px, py = this.map.py;
+        const dx = hx - px, dy = hy - py;
+        // Try the longer axis first, then the other; a refused step costs
+        // nothing and moves nothing (travelTo reports the block).
+        const axes = Math.abs(dx) >= Math.abs(dy)
+          ? [[Math.sign(dx), 0], [0, Math.sign(dy)]]
+          : [[0, Math.sign(dy)], [Math.sign(dx), 0]];
+        let moved = false;
+        for (const [sx, sy] of axes) {
+          if (sx === 0 && sy === 0) continue;
+          const nx = px + sx, ny = py + sy;
+          const before = { x: this.map.px, y: this.map.py };
+          const res = this.travelTo(nx, ny);
+          if (this.map.px !== before.x || this.map.py !== before.y) { moved = true; break; }
+          // Refused: remember the block if travelTo named one, try other axis.
+          if (res && res.blocked) blocked = res.blocked;
+          else if (res && res.kind === 'blockage') blocked = res;
+          else if (res && res.blockType) blocked = res;
+        }
+        if (!moved) { interrupted = blocked ? 'blocked' : 'refused'; break; }
+        steps++;
+        path.push({ x: this.map.px, y: this.map.py });
+        if (this.inCombat && this.inCombat()) { interrupted = 'combat'; break; }
+      }
+      const reached = this.map.px === hx && this.map.py === hy;
+      if (reached) this.say('Home — the lodge fire, the hall, your people. The walk back is done.');
+      else if (interrupted === 'blocked' && blocked) this.say(`The way home is blocked (${blocked.blockType || 'the path'}). Clear it, bridge it, or go around — then walk home again.`);
+      else if (interrupted === 'combat') this.say('Something found you on the way home. Deal with it, then walk home again.');
+      return { reached, steps, path, blocked, interrupted };
+    },
+
     // MAP KNOWLEDGE (Steve 2026-10-06): the world map shows ONLY what the
     // player has seen — tiles they've stood on, plus tiles learned by
     // comparing maps with villagers. Separate from tile.revealed, which

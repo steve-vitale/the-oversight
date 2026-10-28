@@ -16660,6 +16660,13 @@
     const compass = document.getElementById('compass');
     const overlay = document.getElementById('mapoverlay');
     if (compass && overlay) {
+      // WALK HOME button (fixall-map slice 1a): walks, never opens the map.
+      const whBtn = compass.querySelector('[data-walkhome]');
+      if (whBtn) whBtn.onclick = (ev) => {
+        ev.stopPropagation();
+        try { if (Game.walkHome) Game.walkHome(); } catch (e) { console.warn('[walkhome]', e); }
+        try { rerender(); } catch (e2) { console.warn('[walkhome rerender]', e2); }
+      };
       compass.onclick = () => {
         try { if (Game.backfillSeen) Game.backfillSeen(); } catch (e) {}
         const st = Game.state;
@@ -19126,6 +19133,16 @@
     try {
       const hv = Game.homeVector ? Game.homeVector() : null;
       if (hv && hv.dist > 0) parts.push(`🏘️ ${hv.arrow}${hv.dist}`);
+    } catch (e) {}
+    // WALK HOME (fixall-map slice 1a): the compass reports the way home;
+    // this button WALKS it, tile by tile through Game.walkHome() — no
+    // teleport, no map-travel. Wired beside the compass tap handler with
+    // stopPropagation, so it never opens the map overlay by accident.
+    // [needs-eyes]: the engine method is node-proven; this button's feel
+    // on a phone is for Steve's pass, not claimed here.
+    try {
+      const hv2 = Game.homeVector ? Game.homeVector() : null;
+      if (hv2 && hv2.dist > 0 && Game.walkHome) parts.push(`<button class="btn sm" data-walkhome="1" title="Walk home, one tile at a time">🏠 Walk home</button>`);
     } catch (e) {}
     // (No travel-destination marker: the old destination hook was removed.
     // The compass marks haven, discovered villages, and the revealed beast —
