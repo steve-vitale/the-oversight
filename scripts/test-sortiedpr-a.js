@@ -45,8 +45,11 @@ function sortieStats(fights, label) {
   const fought = fights.filter(f => (f.rounds | 0) >= 1);
   const round0 = fights.filter(f => (f.rounds | 0) === 0);
   const dprs = fought.map(f => f.mDealt / f.rounds);
-  const leaderShare = fought.map(f => (f.mDealt - (f.allyDealt || 0)) / f.rounds);
-  const allyShare = fought.map(f => (f.allyDealt || 0) / f.rounds);
+  // allyDealt === null means the recorder does not carry the split
+  // (partyfinish corpus): shares are n/a there, never silently 0.
+  const splitKnown = fought.filter(f => f.allyDealt != null);
+  const leaderShare = splitKnown.map(f => (f.mDealt - (f.allyDealt || 0)) / f.rounds);
+  const allyShare = splitKnown.map(f => (f.allyDealt || 0) / f.rounds);
   const roundsByOutcome = {};
   for (const f of fought) {
     const o = f.outcome || 'OTHER';
@@ -57,8 +60,11 @@ function sortieStats(fights, label) {
     roundsSummary[o] = { n: rs.length, median: med(rs), max: Math.max(...rs), min: Math.min(...rs) };
   }
   const mustered = fights.map(f => (f.engineAllies != null ? f.engineAllies + 1 : (f.partySize || null)));
-  const joined = fights.map(f => (f.joinedAllyVid != null ? 2 : 1));
-  const joinedRate = fights.length ? fights.filter(f => f.joinedAllyVid != null).length / fights.length : null;
+  // joinedAllyVid === undefined means the recorder does not carry it
+  // (partyfinish corpus): joined count is UNKNOWN there, never 1.
+  const joinedKnown = fights.filter(f => f.joinedAllyVid !== undefined);
+  const joined = joinedKnown.map(f => (f.joinedAllyVid != null ? 2 : 1));
+  const joinedRate = joinedKnown.length ? joinedKnown.filter(f => f.joinedAllyVid != null).length / joinedKnown.length : null;
   const medianDpr = med(dprs);
   const capFit = medianDpr ? { at850: 850 / medianDpr, at1100: 1100 / medianDpr } : null;
   const waves = dist(fights.map(f => f.wave));
@@ -70,7 +76,7 @@ function sortieStats(fights, label) {
     console.log(`sustained DPR (mDealt/rounds): median=${fmt(medianDpr)} q25=${fmt(q(dprs, 0.25))} q75=${fmt(q(dprs, 0.75))} min=${fmt(Math.min(...dprs))} max=${fmt(Math.max(...dprs))}`);
     console.log(`leader share/round: median=${fmt(med(leaderShare))}  ally share/round: median=${fmt(med(allyShare))}  (ally share 0 = ally never joined or never struck)`);
     console.log(`survival rounds by outcome: ${JSON.stringify(roundsSummary)}`);
-    console.log(`mustered size: ${JSON.stringify(dist(mustered))}  joined fighters: ${JSON.stringify(dist(joined))}  joined-ally rate=${joinedRate == null ? 'n/a' : (joinedRate * 100).toFixed(0) + '%'}`);
+    console.log(`mustered size: ${JSON.stringify(dist(mustered))}  joined fighters: ${joinedKnown.length ? JSON.stringify(dist(joined)) : 'UNKNOWN (recorder carries no joined-ally field)'}  joined-ally rate=${joinedRate == null ? 'n/a' : (joinedRate * 100).toFixed(0) + '%'}`);
     console.log(`mHpStart: median=${fmt(med(hpStarts), 0)} min=${hpStarts.length ? Math.min(...hpStarts) : 'n/a'} max=${hpStarts.length ? Math.max(...hpStarts) : 'n/a'}`);
     if (capFit) console.log(`cap-fit at median DPR: 850 HP needs ${fmt(capFit.at850)} rounds (cap 15: ${capFit.at850 <= 15 ? 'FITS' : 'OVER'}), 1100 HP needs ${fmt(capFit.at1100)} rounds (cap 15: ${capFit.at1100 <= 15 ? 'FITS' : 'OVER'})`);
   }
@@ -82,7 +88,9 @@ function sortieStats(fights, label) {
   console.log(`per-fight (seed day mid wave hpStart->hpLeft rounds mDealt allyDealt DPR mustered joined outcome):`);
   for (const f of fought) {
     const mus = (f.engineAllies != null ? f.engineAllies + 1 : (f.partySize || '?'));
-    console.log(`  s${f.seed} d${f.day} ${f.mid} w${f.wave} ${f.mHpStart}->${f.mHpLeft} r${f.rounds} dmg${f.mDealt} ally${f.allyDealt || 0} dpr${fmt(f.mDealt / f.rounds)} mus${mus} joined${f.joinedAllyVid != null ? 2 : 1} ${f.outcome}${f.corneredHold ? ' HOLD' : ''}`);
+    const jn = f.joinedAllyVid === undefined ? '?' : (f.joinedAllyVid != null ? 2 : 1);
+    const al = f.allyDealt == null ? '?' : f.allyDealt;
+    console.log(`  s${f.seed} d${f.day} ${f.mid} w${f.wave} ${f.mHpStart}->${f.mHpLeft} r${f.rounds} dmg${f.mDealt} ally${al} dpr${fmt(f.mDealt / f.rounds)} mus${mus} joined${jn} ${f.outcome}${f.corneredHold ? ' HOLD' : ''}`);
   }
   return { n: fights.length, fought: fought.length, round0: round0.length, byOutcome,
     medianDpr, q25: q(dprs, 0.25), q75: q(dprs, 0.75),
@@ -142,7 +150,9 @@ function main() {
         if (f.caller !== 'sortie') continue;
         fights.push({ seed, day: f.day, mid: f.mid, wave: f.wave, mHpStart: f.mHpStart, mHpLeft: f.mHpLeft,
           rounds: f.rounds, mDealt: f.mDealt, allyDealt: null, outcome: f.outcome,
-          engineAllies: null, partySize: f.partySize, joinedAllyVid: null, corneredHold: !!f.corneredHold });
+          engineAllies: null, partySize: f.partySize, corneredHold: !!f.corneredHold });
+        // NOTE: no joinedAllyVid key — that recorder does not carry it,
+        // so the analyzer reports joined fighters as UNKNOWN, never 1.
       }
     }
     console.log(`=== secondary: partyfinish armed corpus (gated driver contrast, NEVER pooled) ===`);
