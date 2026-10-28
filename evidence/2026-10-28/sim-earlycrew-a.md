@@ -225,6 +225,80 @@ here. This arm's measurement stands either way: tile presence
 — the perception-correct case — was tested directly, and it
 does not start a party fight under current code.
 
+## Canon section — NO MAGIC LISTS / PERCEPTION LAW (Steve 2026-10-28 12:48 CDT, coordinator update)
+
+Ruling, as received from the coordinator (standing, applies to
+this arm): villagers are real people with eyes — they know who
+is around only through their own senses: seeing someone in the
+same place, hearing a shout, following someone they have seen.
+No global roster or "who is around" list fed into a decision.
+The field-feed fix was that pattern and stays reverted;
+list-feed arms stop. Party formation must be solved through
+perception, not lists. This fits Steve's standing "if you don't
+know, it doesn't show."
+
+What it means for THIS arm (coordinator's framing, adopted
+here): a crew that walks out together and is in the same place
+sees each other — that is legitimate perception, not a list
+feed — so this arm's walked-out-together design stays in scope
+as framed. But crew presence must come from actually being
+together (same outing, same tile), and the measurement must
+show presence that way. If the engine can only express "crew
+present" via a roster list, that is documented here as
+perception-blocked rather than used as presence.
+
+Perception-legitimate re-read of the pilot corpus (supplementary
+to the prereg verdict, never a re-score of it — the prereg's
+crew-present definition and NO-GO verdict stand as judged; this
+section shows the verdict is unchanged under the stricter
+perception definition, because both numerators are 0):
+
+| presence class (judged set, n=19) | n | fought | from-start |
+|---|---|---|---|
+| SAME OUTING + SAME TILE, SAME PERSON (tile entry is itself a crew-mate: the fighter could SEE their outing partner on the tile) | 5 | 0 | 0 |
+| Crew-list-only (crew-mate in the _outdoorCrew list, NO crew-mate on the tile — the fighter could not see them) | 12 | 0 | 0 |
+| Tile-only (someone on the tile, no crew at all — a seen bystander, not an outing partner) | 2 | 0 | 0 |
+
+The 5 perception-legitimate meetings are all 75103, all
+Olivia Bennett as the outing partner, all 1 round, all
+everHopeless=false: d66 audit (vFlee), d67 algorithm x2
+(vFlee, vDie), d68 algorithm x2 (vDie, vDie). All-waves, the
+same-person tile+outing class is 83/907 meetings. The
+perception-legitimate subset clears no floor of its own (the
+prereg's floor leg applied to the judged set, 19, and is
+unchanged), but 0/5 with 1-round fights is the same shape as
+0/19 — presence the fighter could see still starts no party
+fight.
+
+Perception-blocked, documented (not used): the engine can only
+express "crew present" to a fight via the _outdoorCrew roster
+list — resolveWildMonsterEncounter / resolvePatrol build
+allyVids SOLELY from that list, and fieldFight has no
+tile-seen input at all. So (a) the 12 crew-list-only meetings
+do NOT count as "present" under the perception law (same
+outing list, different ground — the fighter sees nobody), and
+(b) even the 2 tile-only seen bystanders have no engine path
+into the fight, because the wild router never reads the tile.
+The recorder's tile lens is measurement only: it reads nodePos
+after the fight to census what happened; it never feeds a
+game decision, and it must never be mistaken for a game input.
+This arm's policy already complied with the law as amended
+(no node scan, pair via the in-person assign verb); the only
+list in play is the engine's own _outdoorCrew input, which
+this arm measures but does not create beyond the outing
+assignments themselves (the assignments ARE the outing).
+
+Consequence, restated for the next arm: the from-start join
+this arm proves missing must key on a SEEN tile-mate (same
+place, same moment — the 5-meeting class above is its exact
+test set), not on any list. A rule that joins "whoever is in
+the crew list" would violate this canon even if it formed
+parties; a rule that joins "the outing partner standing on
+the tile with you" would satisfy it. The proof test's router
+gap (allyFromStart never passed by the wild router) is
+therefore also the perception gap: there is currently no
+seen-mate input to fieldFight at all.
+
 ## Sense note (75103, NON-MEASURED replay, window d60–d107)
 
 The replay's taps land on the corpus's meetings (the
