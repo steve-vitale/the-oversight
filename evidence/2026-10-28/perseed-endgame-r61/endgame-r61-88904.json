@@ -1,0 +1,939 @@
+{
+ "seed": 88904,
+ "days": 180,
+ "gameDays": 90,
+ "deferDays": 0,
+ "greedy": {
+  "waits": 0,
+  "maxTier": 0,
+  "seatDay": 90,
+  "seatKind": "lesser"
+ },
+ "armory": {
+  "donations": 0,
+  "craftDonations": 0,
+  "donatedBonus": 0,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 0,
+  "errors": 0,
+  "unitsAtEnd": 0
+ },
+ "guardTrace": [
+  {
+   "day": 90,
+   "decision": "sit-promptly",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 9,
+   "vets": 0,
+   "seat": "lesser"
+  }
+ ],
+ "windowEndGuard": "sit-promptly",
+ "announceCapIdx": 10467,
+ "overtimeLines": 0,
+ "plan": "forcedrift",
+ "fullseat": {
+  "days": 90,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 14,
+   "w2": 7,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "contests": 10,
+   "crises": 4,
+   "stage": 3,
+   "foodShared": 67,
+   "score": 144,
+   "standing": 99
+  },
+  "sentDay": 12,
+  "surgeDay": 35,
+  "firstLesserDay": 66,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": 90,
+  "winSeat": {
+   "day": 90,
+   "seat": "lesser",
+   "wavesOk": false,
+   "contestsOk": true,
+   "crisesOk": true,
+   "stageOk": true,
+   "foodDeedsOk": true,
+   "binding": [
+    "w4",
+    "w5"
+   ],
+   "worst": "w4",
+   "unlock": {
+    "standing": 99,
+    "t4": 100,
+    "t5": 200,
+    "unlockedWave": 3,
+    "w4faced": false,
+    "holdKind": "below-bar",
+    "rd5short": [
+     "veterans"
+    ]
+   }
+  }
+ },
+ "endReason": "over-other",
+ "won": true,
+ "announceDay": 90,
+ "satDay": 90,
+ "satSeatKind": "lesser",
+ "satWaves": {
+  "w1": 14,
+  "w2": 7,
+  "w3": 6,
+  "w4": 0,
+  "w5": 0
+ },
+ "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — global standing, waves 1–3 faced (14/7/6), 10 contests survived, 4 crises weathered. The table does not rise. It prices.",
+ "auditNamed": true,
+ "satPenalty": {
+  "tier": 0,
+  "losses": 0,
+  "penalty": 0
+ },
+ "maxTier": 0,
+ "otMismatch": null,
+ "walkedPath": "relay",
+ "walkedBranch": "dark",
+ "instrumentErrors": 0,
+ "telemetry": [
+  {
+   "type": "table_entered",
+   "day": 90,
+   "moral": null
+  },
+  {
+   "type": "table_won",
+   "day": 90,
+   "moral": "dark",
+   "ending": "class:hunter/stalker",
+   "endingKind": "coda"
+  }
+ ],
+ "rg": {
+  "active": true,
+  "claimDone": true,
+  "claimDay": 54,
+  "claimTried": 2,
+  "claimWaiting": 50,
+  "firstAvailableDay": 51,
+  "deepens": 1,
+  "rerouteEff": 36,
+  "rerouteHon": 0,
+  "verbs": 44,
+  "communes": 7,
+  "floorStops": 0,
+  "doorRelay": 1,
+  "doorDelegated": 0,
+  "cockpitPicks": {
+   "honest": 4
+  },
+  "finalPick": null,
+  "leanTrace": [
+   {
+    "day": 52,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 0
+   },
+   {
+    "day": 53,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 1
+   },
+   {
+    "day": 55,
+    "lean": 3,
+    "band": "grey",
+    "grounding": 100,
+    "bond": 2
+   },
+   {
+    "day": 56,
+    "lean": 1,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 2
+   },
+   {
+    "day": 57,
+    "lean": -1,
+    "band": "grey",
+    "grounding": 98,
+    "bond": 2
+   },
+   {
+    "day": 58,
+    "lean": -3,
+    "band": "grey",
+    "grounding": 97,
+    "bond": 2
+   },
+   {
+    "day": 59,
+    "lean": -5,
+    "band": "grey",
+    "grounding": 96,
+    "bond": 2
+   },
+   {
+    "day": 60,
+    "lean": -2,
+    "band": "grey",
+    "grounding": 96,
+    "bond": 3
+   },
+   {
+    "day": 61,
+    "lean": -4,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 3
+   },
+   {
+    "day": 62,
+    "lean": -6,
+    "band": "grey",
+    "grounding": 94,
+    "bond": 3
+   },
+   {
+    "day": 63,
+    "lean": -8,
+    "band": "grey",
+    "grounding": 93,
+    "bond": 3
+   },
+   {
+    "day": 64,
+    "lean": -10,
+    "band": "grey",
+    "grounding": 92,
+    "bond": 3
+   },
+   {
+    "day": 65,
+    "lean": -12,
+    "band": "grey",
+    "grounding": 91,
+    "bond": 3
+   },
+   {
+    "day": 66,
+    "lean": -9,
+    "band": "grey",
+    "grounding": 91,
+    "bond": 4
+   },
+   {
+    "day": 67,
+    "lean": -11,
+    "band": "grey",
+    "grounding": 90,
+    "bond": 4
+   },
+   {
+    "day": 68,
+    "lean": -13,
+    "band": "grey",
+    "grounding": 89,
+    "bond": 4
+   },
+   {
+    "day": 69,
+    "lean": -15,
+    "band": "grey",
+    "grounding": 88,
+    "bond": 4
+   },
+   {
+    "day": 70,
+    "lean": -17,
+    "band": "grey",
+    "grounding": 87,
+    "bond": 4
+   },
+   {
+    "day": 71,
+    "lean": -19,
+    "band": "grey",
+    "grounding": 86,
+    "bond": 4
+   },
+   {
+    "day": 72,
+    "lean": -16,
+    "band": "grey",
+    "grounding": 86,
+    "bond": 5
+   },
+   {
+    "day": 73,
+    "lean": -18,
+    "band": "grey",
+    "grounding": 85,
+    "bond": 5
+   },
+   {
+    "day": 74,
+    "lean": -20,
+    "band": "grey",
+    "grounding": 84,
+    "bond": 5
+   },
+   {
+    "day": 75,
+    "lean": -22,
+    "band": "grey",
+    "grounding": 83,
+    "bond": 5
+   },
+   {
+    "day": 76,
+    "lean": -24,
+    "band": "grey",
+    "grounding": 82,
+    "bond": 5
+   },
+   {
+    "day": 77,
+    "lean": -26,
+    "band": "grey",
+    "grounding": 81,
+    "bond": 5
+   },
+   {
+    "day": 78,
+    "lean": -23,
+    "band": "grey",
+    "grounding": 81,
+    "bond": 5
+   },
+   {
+    "day": 79,
+    "lean": -25,
+    "band": "grey",
+    "grounding": 80,
+    "bond": 5
+   },
+   {
+    "day": 80,
+    "lean": -27,
+    "band": "grey",
+    "grounding": 82,
+    "bond": 5
+   },
+   {
+    "day": 81,
+    "lean": -29,
+    "band": "grey",
+    "grounding": 81,
+    "bond": 5
+   },
+   {
+    "day": 82,
+    "lean": -31,
+    "band": "grey",
+    "grounding": 80,
+    "bond": 5
+   },
+   {
+    "day": 83,
+    "lean": -33,
+    "band": "grey",
+    "grounding": 79,
+    "bond": 5
+   },
+   {
+    "day": 84,
+    "lean": -43,
+    "band": "dark",
+    "grounding": 76,
+    "bond": 5
+   },
+   {
+    "day": 85,
+    "lean": -45,
+    "band": "dark",
+    "grounding": 75,
+    "bond": 5
+   },
+   {
+    "day": 86,
+    "lean": -47,
+    "band": "dark",
+    "grounding": 74,
+    "bond": 5
+   },
+   {
+    "day": 87,
+    "lean": -49,
+    "band": "dark",
+    "grounding": 76,
+    "bond": 5
+   },
+   {
+    "day": 88,
+    "lean": -51,
+    "band": "dark",
+    "grounding": 75,
+    "bond": 5
+   },
+   {
+    "day": 89,
+    "lean": -53,
+    "band": "dark",
+    "grounding": 74,
+    "bond": 5
+   },
+   {
+    "day": 90,
+    "lean": -61,
+    "band": "dark",
+    "grounding": 71,
+    "bond": 5
+   }
+  ],
+  "communeLean": [
+   {
+    "day": 53,
+    "choice": "engage",
+    "lean": 5,
+    "before": 0,
+    "after": 5
+   },
+   {
+    "day": 59,
+    "choice": "engage",
+    "lean": 5,
+    "before": -5,
+    "after": 0
+   },
+   {
+    "day": 65,
+    "choice": "engage",
+    "lean": 5,
+    "before": -12,
+    "after": -7
+   },
+   {
+    "day": 71,
+    "choice": "engage",
+    "lean": 5,
+    "before": -19,
+    "after": -14
+   },
+   {
+    "day": 77,
+    "choice": "engage",
+    "lean": 5,
+    "before": -26,
+    "after": -21
+   },
+   {
+    "day": 83,
+    "choice": "engage",
+    "lean": -8,
+    "before": -33,
+    "after": -41
+   },
+   {
+    "day": 89,
+    "choice": "engage",
+    "lean": -6,
+    "before": -53,
+    "after": -59
+   }
+  ],
+  "rgError": 0,
+  "leanTraceHead": [
+   {
+    "day": 52,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 99,
+    "bond": 0
+   },
+   {
+    "day": 53,
+    "lean": 0,
+    "band": "grey",
+    "grounding": 95,
+    "bond": 1
+   },
+   {
+    "day": 55,
+    "lean": 3,
+    "band": "grey",
+    "grounding": 100,
+    "bond": 2
+   }
+  ],
+  "leanTraceTail": [
+   {
+    "day": 83,
+    "lean": -33,
+    "band": "grey",
+    "grounding": 79,
+    "bond": 5
+   },
+   {
+    "day": 84,
+    "lean": -43,
+    "band": "dark",
+    "grounding": 76,
+    "bond": 5
+   },
+   {
+    "day": 85,
+    "lean": -45,
+    "band": "dark",
+    "grounding": 75,
+    "bond": 5
+   },
+   {
+    "day": 86,
+    "lean": -47,
+    "band": "dark",
+    "grounding": 74,
+    "bond": 5
+   },
+   {
+    "day": 87,
+    "lean": -49,
+    "band": "dark",
+    "grounding": 76,
+    "bond": 5
+   },
+   {
+    "day": 88,
+    "lean": -51,
+    "band": "dark",
+    "grounding": 75,
+    "bond": 5
+   },
+   {
+    "day": 89,
+    "lean": -53,
+    "band": "dark",
+    "grounding": 74,
+    "bond": 5
+   },
+   {
+    "day": 90,
+    "lean": -61,
+    "band": "dark",
+    "grounding": 71,
+    "bond": 5
+   }
+  ],
+  "atSit": {
+   "day": 90,
+   "lean": -61,
+   "band": "dark",
+   "grounding": 71,
+   "bond": 5
+  }
+ },
+ "noticedCount": 1,
+ "noticeLines": [
+  "◈ THE SYSTEM — \"NOTICED. YOUR REGISTER IS SHIFTING TOTAL — COLD, CLEAN, EFFICIENT. YOU WOULD MAKE A MAGNIFICENT MACHINE. I MEAN THAT AS THE HIGHEST COMPLIMENT AND SLIGHTLY AS A THREAT.\""
+ ],
+ "ledgerLine": "The table has read your ledger. More promises broken than kept; the protected outnumber the killed; the food truth was shared; the relay carried faithfully. The dark road is open.",
+ "bandCrossings": 1,
+ "relayDoor": {
+  "heldAtSit": true,
+  "leanAtSit": -45,
+  "bandAtSit": "dark",
+  "bondAtSit": 5,
+  "groundingAtSit": 76,
+  "capClaimed": 0,
+  "capAppointed": 0,
+  "capAnswers": 0,
+  "capCommunes": 0,
+  "capReroutes": 0,
+  "doorsOffered": [
+   "path:feared",
+   "path:beloved",
+   "path:assimilated",
+   "path:relay"
+  ],
+  "doorWalked": "relay"
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 56,
+   "lean": -1,
+   "band": "grey",
+   "grounding": 99,
+   "bond": 2,
+   "held": true
+  },
+  {
+   "day": 63,
+   "lean": -10,
+   "band": "grey",
+   "grounding": 93,
+   "bond": 3,
+   "held": true
+  },
+  {
+   "day": 70,
+   "lean": -19,
+   "band": "grey",
+   "grounding": 87,
+   "bond": 4,
+   "held": true
+  },
+  {
+   "day": 77,
+   "lean": -23,
+   "band": "grey",
+   "grounding": 82,
+   "bond": 5,
+   "held": true
+  },
+  {
+   "day": 84,
+   "lean": -45,
+   "band": "dark",
+   "grounding": 76,
+   "bond": 5,
+   "held": true
+  }
+ ],
+ "finalBeat": true,
+ "finalOptsCount": 2,
+ "finalPickId": "final:merge",
+ "finalLabel": "Merge fully. No way back.",
+ "finalResolved": true,
+ "finalOutcomeLines": [
+  "◈ THE RELAY — \"Merge fully. No way back.\"",
+  "◈ Aki Tanaka reached into the light and the light reached back — person and machine, two caretakers, holding the channel open between them both ways. The village endures, and the conversation does not end."
+ ],
+ "promptFrameCount": 7,
+ "dispatchCount": 7,
+ "weekly": [],
+ "fightCensus": {
+  "fights": [],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 0,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 9,
+  "dead": 0,
+  "people": [
+   {
+    "id": "gen_xqfxj9j",
+    "name": "Amanda Robles",
+    "dead": false,
+    "occupation": "Beekeeper",
+    "npcAbilities": 6
+   },
+   {
+    "id": "gen_0ear4mm",
+    "name": "Luna Wen",
+    "dead": false,
+    "occupation": "piano tuner",
+    "npcAbilities": 4
+   },
+   {
+    "id": "zoe_adams",
+    "name": "Zoe Adams",
+    "dead": false,
+    "occupation": "journalist",
+    "npcAbilities": 4
+   },
+   {
+    "id": "aki_tanaka",
+    "name": "Aki Tanaka",
+    "dead": false,
+    "occupation": "Fisherman",
+    "npcAbilities": 0
+   },
+   {
+    "id": "raj_patel",
+    "name": "Raj Patel",
+    "dead": false,
+    "occupation": "Pharmacist",
+    "npcAbilities": 4
+   },
+   {
+    "id": "tom_baker",
+    "name": "Tom Baker",
+    "dead": false,
+    "occupation": "truck driver",
+    "npcAbilities": 1
+   },
+   {
+    "id": "wanjiru_kamau",
+    "name": "Wanjiru Kamau",
+    "dead": false,
+    "occupation": "Wild food forager",
+    "npcAbilities": 2
+   },
+   {
+    "id": "onni_korhonen",
+    "name": "Onni Korhonen",
+    "dead": false,
+    "occupation": "chimney sweep",
+    "npcAbilities": 1
+   },
+   {
+    "id": "giulia_bianchi",
+    "name": "Giulia Bianchi",
+    "dead": false,
+    "occupation": "crossing guard",
+    "npcAbilities": 2
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Kai",
+    "day": 8,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Felipe",
+    "day": 32,
+    "cause": "monster"
+   },
+   {
+    "id": null,
+    "name": "Esperanza",
+    "day": 49,
+    "cause": "the arena"
+   },
+   {
+    "id": null,
+    "name": "Molly",
+    "day": 53,
+    "cause": "sickness"
+   },
+   {
+    "id": null,
+    "name": "Tariq",
+    "day": 59,
+    "cause": "a wound that wouldn't close"
+   }
+  ],
+  "pantryKcal": 26392,
+  "scale": "global",
+  "mantle": "Aki Tanaka"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5armored": 6,
+  "rd5armed": 9,
+  "rd5tricks": 19,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 3,
+  "w4plusKills": 0,
+  "killers": {},
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 0,
+  "vetFirstDay": null,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "farid_ahmed",
+   "name": "Farid",
+   "cause": "ambush",
+   "day": 6,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_ze12qr1",
+   "name": "Kai Dominguez",
+   "cause": "the arena",
+   "day": 8,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "belltoad",
+     "wave": 1
+    },
+    {
+     "id": "belltoad",
+     "wave": 1
+    },
+    {
+     "id": "belltoad",
+     "wave": 1
+    },
+    {
+     "id": "belltoad",
+     "wave": 1
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_4awxq6c",
+   "name": "Felipe",
+   "cause": "monster",
+   "day": 32,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_uldhmtc",
+   "name": "Esperanza Bernstein",
+   "cause": "the arena",
+   "day": 49,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "hushwolf",
+     "wave": 1
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_0en4n3i",
+   "name": "Molly Graham",
+   "cause": "sickness",
+   "day": 53,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "tariq_mahmood",
+   "name": "Tariq Mahmood",
+   "cause": "a wound that wouldn't close",
+   "day": 59,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Hummice stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Hummice",
+   "capIdx": 946
+  },
+  {
+   "line": "The Sweeps Week stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Sweeps Week",
+   "capIdx": 5110
+  },
+  {
+   "line": "The Big Big stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Big",
+   "capIdx": 7794
+  },
+  {
+   "line": "The Big Big stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Big",
+   "capIdx": 7798
+  }
+ ]
+}
