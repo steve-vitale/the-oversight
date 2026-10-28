@@ -64,8 +64,12 @@ bearer cannot supply a free escort or fabricated delivery.
 Previously accepted, unplayable water promises get one persisted migration
 window: at least two days from their first new-version Continue, with a dawn
 meeting on the following day. Further Continue does not extend it. Closed
-promises stay closed. Snare repair, watch shift and joint foraging remain
-unavailable; the company activity above has its own runtime and evidence.
+promises stay closed. Snare repair and watch shift remain unavailable;
+joint foraging is playable since tackle-outing (7f0e1dc41) — a promised
+forage_help favour runs dawn start beside the partner, forage together,
+trail talk, deliver both shares — and was scored in the wild in journey
+social r64 (2026-10-28). The company activity above has its own runtime
+and evidence.
 Telemetry records actual departure, collected liters and returned clean/risky
 liters plus kept/early-end status (`favor_water_*`); water acquisition is not
 proof of drinking, successful purification or a balanced survival improvement.
@@ -89,7 +93,7 @@ can still help the person, but does not earn kept-promise credit or rewrite
 the expired task as completed. Deadline text uses the resolver's effective
 due day, including the existing minimum one-day window for legacy promises.
 
-The three other unimplemented joint jobs remain unavailable, with no active deadline
+The two other unimplemented joint jobs (snare repair, watch shift) remain unavailable, with no active deadline
 or broken-promise penalty. Old accepted instances explain that limitation and
 offer a no-penalty close. This journal work does not implement those jobs.
 The lifecycle regression uses the shared harness; the retained touch journey
@@ -245,8 +249,9 @@ local adjacency are checked at dispatch. Completion cannot replay the deed.
 A future promise remains distinct from performing the action; ready actions stay
 available immediately after committing and on later promise reminders.
 
-Four authored jobs still lack an executable joint activity: shared snare
-repair, watch handover, overnight company and joint foraging. Creek hauling
+Three authored jobs still lack an executable joint activity: shared snare
+repair, watch handover and overnight company. (Joint foraging left this
+list with tackle-outing.) Creek hauling
 now uses the physical trip contract above.
 Their menus explicitly explain this and offer no new unkeepable promise. Old
 open jobs have a no-penalty close route, no completion reward, and no deadline

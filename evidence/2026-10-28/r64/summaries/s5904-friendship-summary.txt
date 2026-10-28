@@ -1,0 +1,289 @@
+# SURFACE+SEEDED — seed 5904 (141d, 4 alive)
+
+npcPairs=68 deep2=22 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=1 stateVCrack=0 t2picks=316 closeReadsServed=37 grievanceServes=28 othersSteered=30
+COND-TP: firstDeep2Day=30 lateClose=154 lateTP=123 lateNull=0 condRate=79.9% pooledTP=123/160 pooledRate=76.9% grievReadsByWhy={"grievance":16,"vgrievance":30}
+FUNNEL (natural): convos=414 subject=405 offered=368 picked=286 classes={"subject-no-offer":37,"offered-not-picked":82,"picked-others":286,"no-subject-no-ans":9}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=37 rate=8.9% offered=368 mainOffered=0 subjectOffered=368 picked=286 latePicks=119 latePicksMain=0 latePicksSubject=119
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Sari / Somchai — "that stray dog — the one that bit two people — lets Dante touch it."
+  KNACK-CIRCULATION: Diana / Rabia / Nikos — "that stray dog — the one that bit two people — lets Vasyl touch it."
+  KNACK-CIRCULATION: Somchai / Vasyl — "Nikos talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=366 picks=302 latePicks=118 missedChangedNotOffered=1
+WRAPSERVE: convos=46 matcherHits=28 matcherServes=28 classes={"grievance-line":28,"deflection":1,"other":17}
+FUNNEL-PROBE (subject-no-offer turns): turns=131 menuProblem=71 pickProblem=60
+INVITE (wrap, carried from r63): lure={"n":1,"accepts":1,"acceptRate":1,"vetoes":{},"chanceMin":52,"chanceMax":52,"chanceMean":52} party={"n":21,"accepts":10,"acceptRate":0.47619047619047616,"vetoes":{},"chanceMin":9.399999999999999,"chanceMax":84.6,"chanceMean":43.9} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=2
+FAVOR (r64): funnel={"offers":40,"forageOffers":8,"otherFavorOffers":32,"accepts":8,"acceptAttempts":8,"waits":6,"starts":1,"startBlocked":14,"forages":1,"forageNodeBarren":1,"forageBarren":0,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":1,"keptMatched":1}
+OUTING END STATES: [{"vid":"gen_c8movf7","vidName":"Rabia","favorId":"favor-gen_c8movf7-35-10","state":"thanked","promisedDay":35,"meetDay":36,"deadline":37,"promiseKept":true,"startedDay":36,"forageCount":1,"playerKcal":180,"partnerKcal":270,"deliveredKcal":450,"returnedDay":36,"talkCount":1}]
+  FAVOR-OFFER d4: Rabia kind=forage_help favorId=favor-gen_c8movf7-4-1 task=forage with Rabia tomorrow to rebuild the pantry
+  FAVOR-OFFER d7: Dante kind=food_share favorId=favor-gen_xuxa07o-7-2 task=share food with Dante — they're going hungry
+  FAVOR-OFFER d10: Dante kind=forage_help favorId=favor-gen_xuxa07o-10-3 task=forage with Dante tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-20-4 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Wanjiru kind=sick_help favorId=favor-wanjiru_kamau-28-5 task=help Wanjiru with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d30: Rabia kind=forage_help favorId=favor-gen_c8movf7-30-6 task=forage with Rabia tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Diana kind=forage_help favorId=favor-diana_osei-30-7 task=forage with Diana tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-31-8 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d33: Wanjiru kind=sick_help favorId=favor-wanjiru_kamau-33-9 task=help Wanjiru with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d35: Rabia kind=forage_help favorId=favor-gen_c8movf7-35-10 task=forage with Rabia tomorrow to rebuild the pantry
+  FAVOR-OFFER d36: Colton kind=food_share favorId=favor-gen_epexm6j-36-11 task=share food with Colton — they're going hungry
+  FAVOR-OFFER d37: Wanjiru kind=heal_help favorId=favor-wanjiru_kamau-37-12 task=help Wanjiru with their injury
+  FAVOR-OFFER d40: Colton kind=food_share favorId=favor-gen_epexm6j-40-13 task=share food with Colton — they're going hungry
+  FAVOR-OFFER d42: Vasyl kind=sick_help favorId=favor-vasyl_shevchenko-42-14 task=help Vasyl with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d44: Colton kind=food_share favorId=favor-gen_epexm6j-44-15 task=share food with Colton — they're going hungry
+  FAVOR-OFFER d47: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-47-16 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d50: Dante kind=food_share favorId=favor-gen_xuxa07o-50-17 task=share food with Dante — they're going hungry
+  FAVOR-OFFER d52: Ruby kind=food_share favorId=favor-ruby_callaghan-52-18 task=share food with Ruby — they're past hungry
+  FAVOR-OFFER d54: Liam kind=food_share favorId=favor-liam_davis-54-19 task=share food with Liam — they're going hungry
+  FAVOR-OFFER d56: Ruby kind=food_share favorId=favor-ruby_callaghan-56-20 task=share food with Ruby — they're going hungry
+  FAVOR-OFFER d56: Vasyl kind=food_share favorId=favor-vasyl_shevchenko-56-21 task=share food with Vasyl — they're running on empty
+  FAVOR-OFFER d65: Vasyl kind=sick_help favorId=favor-vasyl_shevchenko-65-22 task=help Vasyl with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d73: Somchai kind=food_share favorId=favor-somchai_prasert-72-23 task=share food with Somchai — they're going hungry
+  FAVOR-OFFER d82: Diana kind=food_share favorId=favor-diana_osei-82-24 task=share food with Diana — they're running on empty
+  FAVOR-OFFER d87: Dante kind=sick_help favorId=favor-gen_xuxa07o-87-25 task=help Dante with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d95: Chantal kind=heal_help favorId=favor-chantal_mukendi-95-26 task=help Chantal with their injury
+  FAVOR-OFFER d99: Chantal kind=heal_help favorId=favor-chantal_mukendi-99-27 task=help Chantal with their injury
+  FAVOR-OFFER d102: Chantal kind=heal_help favorId=favor-chantal_mukendi-102-28 task=help Chantal with their injury
+  FAVOR-OFFER d113: Dante kind=food_share favorId=favor-gen_xuxa07o-113-29 task=share food with Dante — they're past hungry
+  FAVOR-OFFER d116: Nikos kind=heal_help favorId=favor-nikos_papadopoulos-116-30 task=help Nikos with their injury
+  FAVOR-OFFER d123: Diana kind=heal_help favorId=favor-diana_osei-123-31 task=help Diana with their injury
+  FAVOR-OFFER d125: Dante kind=heal_help favorId=favor-gen_xuxa07o-125-32 task=help Dante with their injury
+  FAVOR-OFFER d126: Diana kind=heal_help favorId=favor-diana_osei-126-33 task=help Diana with their injury
+  FAVOR-OFFER d128: Nikos kind=heal_help favorId=favor-nikos_papadopoulos-128-34 task=help Nikos with their injury
+  FAVOR-OFFER d131: Diana kind=sick_help favorId=favor-diana_osei-131-35 task=help Diana with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d133: Somchai kind=sick_help favorId=favor-somchai_prasert-133-36 task=help Somchai with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d134: Diana kind=food_share favorId=favor-diana_osei-134-37 task=share food with Diana — they're running on empty
+  FAVOR-OFFER d139: Nikos kind=food_share favorId=favor-nikos_papadopoulos-139-38 task=share food with Nikos — they're running on empty
+  FAVOR-OFFER d139: Joana kind=sick_help favorId=favor-visjoin_132-139-39 task=help Joana with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d141: Joana kind=food_share favorId=favor-visjoin_132-141-40 task=share food with Joana — they're past hungry
+  FAVOR-ACCEPT d4: Rabia favorId=favor-gen_c8movf7-4-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d10: Dante favorId=favor-gen_xuxa07o-10-3 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d20: Vasyl favorId=favor-vasyl_shevchenko-20-4 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d30: Rabia favorId=favor-gen_c8movf7-30-6 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d30: Diana favorId=favor-diana_osei-30-7 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d31: Vasyl favorId=favor-vasyl_shevchenko-31-8 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d35: Rabia favorId=favor-gen_c8movf7-35-10 accepted=true state=promised meetDay=36
+  FAVOR-ACCEPT d47: Vasyl favorId=favor-vasyl_shevchenko-47-16 accepted=true state=promised meetDay=48
+  INVITE-DEC d8 party: Daniel -> Victor chance=53.400000000000006 accept=true veto=- inputs={"temp":"stoic","goal":"home","mood":"steady","fear":4,"trust":46,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 46"]
+  INVITE-DEC d11 lure: Colton -> Victor chance=52 accept=true veto=- inputs={"temp":"stoic","goal":"home","mood":"steady","fear":4,"affinity":29} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d15 party: Ingrid -> Wanjiru chance=51.2 accept=true veto=- inputs={"temp":"warm","goal":"escape","mood":"grieving","fear":41,"trust":53,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 53","a big party is safer (+5)","warm temperament (+15)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d25 party: Victor -> Ruby chance=76.2 accept=true veto=- inputs={"temp":"bold","goal":"remember","mood":"grieving","fear":0,"trust":78,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 78","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Victor -> Vasyl chance=28.200000000000003 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"cheerful","fear":0,"trust":33,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 33","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)","cheerful mood (+10)"]
+  INVITE-DEC d32 party: Victor -> Liam chance=84 accept=true veto=- inputs={"temp":"steady","goal":"joy","mood":"steady","fear":4,"trust":85,"bond":{"v":26,"depth":1},"partySize":4} reasons=["trust 85","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d38 party: Victor -> Dante chance=73.2 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"grieving","fear":9,"trust":83,"bond":{"v":26,"depth":1},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d56 party: Victor -> Diana chance=84.6 accept=true veto=- inputs={"temp":"bold","goal":"survive","mood":"grieving","fear":0,"trust":74,"bond":{"v":49,"depth":1},"partySize":4} reasons=["trust 74","a real bond (+10)","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d58 party: Ruby -> Vasyl chance=9.399999999999999 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"grieving","fear":5,"trust":36,"bond":null,"partySize":4} reasons=["trust 36","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d59 party: Ruby -> Nikos chance=23.4 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":4,"trust":21,"bond":null,"partySize":4} reasons=["trust 21","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d59 party: Ruby -> Vasyl chance=11.400000000000006 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"grieving","fear":4,"trust":41,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 41","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d60 party: Ruby -> Chantal chance=38.8 accept=false veto=- inputs={"temp":"steady","goal":"home","mood":"grieving","fear":0,"trust":22,"bond":null,"partySize":4} reasons=["trust 22","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d61 party: Ruby -> Vasyl chance=21 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"steady","fear":12,"trust":40,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)"]
+  INVITE-DEC d61 party: Ruby -> Chantal chance=51.2 accept=true veto=- inputs={"temp":"steady","goal":"home","mood":"steady","fear":12,"trust":28,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 28","a big party is safer (+5)"]
+  INVITE-DEC d106 party: Rabia -> Nikos chance=50.599999999999994 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":0,"trust":89,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 89","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d107 party: Rabia -> Somchai chance=52.599999999999994 accept=true veto=- inputs={"temp":"restless","goal":"escape","mood":"steady","fear":4,"trust":44,"bond":null,"partySize":4} reasons=["trust 44","a big party is safer (+5)","restless temperament (+10)","wants out (-15)"]
+  INVITE-DEC d121 party: Liam -> Nikos chance=51 accept=true veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":5,"trust":90,"bond":null,"partySize":4} reasons=["trust 90","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d123 party: Liam -> Vasyl chance=28.599999999999994 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"grieving","fear":25,"trust":84,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 84","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d125 party: Liam -> Vasyl chance=39.80000000000001 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"steady","fear":12,"trust":87,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 87","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)"]
+  INVITE-DEC d127 party: Liam -> Vasyl chance=27.80000000000001 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"grieving","fear":9,"trust":82,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 82","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d128 party: Liam -> Vasyl chance=29 accept=false veto=- inputs={"temp":"withdrawn","goal":"escape","mood":"grieving","fear":4,"trust":85,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 85","a big party is safer (+5)","withdrawn temperament (-20)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d139 party: Vasyl -> Joana chance=37.2 accept=true veto=- inputs={"temp":"gentle","goal":"heal","mood":"steady","fear":4,"trust":43,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","sick (-20)"]
+SEEDED-DAILY: [{"day":30,"v":38,"depth":2},{"day":31,"v":38,"depth":2},{"day":32,"v":38,"depth":2},{"day":33,"v":38,"depth":2},{"day":34,"v":38,"depth":2},{"day":35,"v":42,"depth":2},{"day":36,"v":46,"depth":2},{"day":37,"v":50,"depth":3},{"day":38,"v":54,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":66,"depth":3},{"day":42,"v":70,"depth":3},{"day":43,"v":74,"depth":3}] class=no-drop
+GOSSIP: totalPicks=164 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=40 31-60=63 61-90=64 91-120=70 121+=49 naturalPicks=286 seededPicks=30 gossipPicks=164
+SEEDED: {"pair":{"a":"gen_c8movf7","b":"gen_epexm6j","aName":"Rabia","bName":"Colton"},"day":29,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":30,"v":38,"depth":2},{"day":31,"v":38,"depth":2},{"day":32,"v":38,"depth":2},{"day":33,"v":38,"depth":2},{"day":34,"v":38,"depth":2},{"day":35,"v":42,"depth":2},{"day":36,"v":46,"depth":2},{"day":37,"v":50,"depth":3},{"day":38,"v":54,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":66,"depth":3},{"day":42,"v":70,"depth":3},{"day":43,"v":74,"depth":3}],"crackTraceClass":"no-drop","vAt7":42,"depthAt7":2,"vDrop":8,"depthDrop":0,"crack7":false,"firstServe":{"day":30,"why":"vgrievance"},"serveWithin30":true,"serves":30,"servesAll":[{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"}],"effect":true}
+  FRIEND d60: Colton <> Victor — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d60: Victor <> Dante — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d105: Liam <> Ruby — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d30: Rabia <> Colton — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Colton <> Dante — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d70: Rabia <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Rabia <> Ruby — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d60: Diana <> Rabia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Rabia <> Victor — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Rabia <> Dante — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Colton <> Sari — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d60: Diana <> Victor — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d95: Dante <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Victor <> Liam — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d105: Dante <> Ruby — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d105: Victor <> Ruby — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d110: Diana <> Dante — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d100: Diana <> Liam — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d105: Diana <> Ruby — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d85: Chantal <> Rabia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Chantal <> Dante — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d105: Chantal <> Ruby — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d10: Dante about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d11: Rabia about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d13: Rabia about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Rabia about Colton — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Colton about Rabia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Rabia about Colton — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Dante about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Colton about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Colton about Rabia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Dante about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Diana about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Ruby about Colton — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Liam about Sari — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Dante about Colton — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Ruby about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Liam about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Liam about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Dante about Colton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Dante about Colton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Ruby about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Ruby about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Liam about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Dante about Colton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Colton about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Liam about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Ruby about Colton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Rabia about Dante — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Dante about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Rabia about Dante — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Rabia about Dante — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ruby about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Rabia about Dante — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Ruby about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Liam about Rabia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Dante about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Rabia about Dante — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Dante about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Liam about Rabia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Rabia about Dante — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Liam about Rabia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Rabia about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Dante about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Diana about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Rabia about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Dante about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Diana about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Rabia about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Liam about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Liam about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Rabia about Dante — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Dante about Rabia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Diana about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Liam about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Rabia about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Chantal about Rabia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Chantal about Rabia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Rabia about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Chantal about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Liam about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Chantal about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Diana about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Chantal about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Liam about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Diana about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Chantal about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Chantal about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d80: Rabia about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Chantal about Rabia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d80: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Chantal about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Diana about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Chantal about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Liam about Rabia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Chantal about Rabia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Diana about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Rabia about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Diana about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Rabia about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Liam about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Liam about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Chantal about Rabia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Rabia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Chantal about Rabia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Diana about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Chantal about Rabia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Liam about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Rabia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Liam about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Diana about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Liam about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Diana about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Rabia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Chantal about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Dante about Rabia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Dante about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Liam about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Diana about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Liam about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Dante about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Chantal about Dante — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Dante about Liam — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Diana about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Chantal about Dante — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Liam about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Chantal about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Diana about Dante — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Liam about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Dante about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Chantal about Dante — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Diana about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Diana about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Dante about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Diana about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Diana about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Dante about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Diana about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Diana about Dante — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d30 (betrayal): Rabia vs Colton (ambushed) depth 2 v 38 -> 42
+  GRIEV-READ d11: Ingrid about Victor (why=grievance)
+  GRIEV-READ d15: Wanjiru about Vasyl (why=grievance)
+  GRIEV-READ d18: Wanjiru about Vasyl (why=grievance)
+  GRIEV-READ d20: Vasyl about Wanjiru (why=grievance)
+  GRIEV-READ d21: Wanjiru about Vasyl (why=grievance)
+  GRIEV-READ d22: Wanjiru about Vasyl (why=grievance)
+  KNACK d7 A person, maybe 40s, with restless hands: "that stray dog — the one that bit two people — lets Colton touch it."
+  KNACK d7 Ruby: "You want to know about that? Okay." "Sari sees in the dark. Not well — but better than you. Better than me."
+  KNACK d12 Dante: "Sari sees in the dark. Not well — but better than you. Better than me."
+  KNACK d14 Wanjiru: "that stray dog — the one that bit two people — lets Liam touch it."
+  KNACK d21 Sari: "that stray dog — the one that bit two people — lets Dante touch it."
+  KNACK d27 Diana: "that stray dog — the one that bit two people — lets Vasyl touch it."
+  KNACK d38 Dante: "Rabia talks to the garden. The garden listens. I've seen it. You'd know about that."
+  KNACK d45 Colton: "Rabia talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the arena":2,"a wound that wouldn't close":2,"alien":3,"contest":2,"dehydration":1,"the night":1}

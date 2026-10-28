@@ -1,0 +1,323 @@
+# SURFACE+SEEDED — seed 5903 (142d, 7 alive)
+
+npcPairs=86 deep2=43 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=240 closeReadsServed=45 grievanceServes=30 othersSteered=18
+COND-TP: firstDeep2Day=25 lateClose=169 lateTP=138 lateNull=0 condRate=81.7% pooledTP=139/184 pooledRate=75.5% grievReadsByWhy={"grievance":4,"vgrievance":32}
+FUNNEL (natural): convos=414 subject=412 offered=365 picked=222 classes={"subject-no-offer":47,"offered-not-picked":143,"picked-others":222,"no-subject-no-ans":2}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=47 rate=11.4% offered=365 mainOffered=0 subjectOffered=365 picked=222 latePicks=88 latePicksMain=0 latePicksSubject=88
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Mario / Chloe — "Hassan talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Valentin / Heinrich — "that stray dog — the one that bit two people — lets Noah touch it."
+  KNACK-CIRCULATION: Hassan / Xia — "Mario ate something last month that should've killed them. They're fine."
+REOFFER: offers=358 picks=227 latePicks=86 missedChangedNotOffered=2
+WRAPSERVE: convos=36 matcherHits=30 matcherServes=30 classes={"grievance-line":30,"deflection":2,"other":4}
+FUNNEL-PROBE (subject-no-offer turns): turns=159 menuProblem=140 pickProblem=19
+INVITE (wrap, carried from r63): lure={"n":6,"accepts":1,"acceptRate":0.16666666666666666,"vetoes":{},"chanceMin":45,"chanceMax":56,"chanceMean":47.3} party={"n":15,"accepts":8,"acceptRate":0.5333333333333333,"vetoes":{},"chanceMin":25.200000000000003,"chanceMax":95,"chanceMean":56.1} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r64): funnel={"offers":29,"forageOffers":9,"otherFavorOffers":20,"accepts":10,"acceptAttempts":10,"waits":7,"starts":2,"startBlocked":12,"forages":1,"forageNodeBarren":3,"forageBarren":0,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":1,"keptMatched":3}
+OUTING END STATES: [{"vid":"elif_demir","vidName":"Elif","favorId":"favor-elif_demir-133-27","state":"promised","promisedDay":141,"meetDay":142,"deadline":141,"promiseKept":false,"startedDay":134,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_vg5u6g9","vidName":"Mario","favorId":"favor-gen_vg5u6g9-133-26","state":"moot","promisedDay":133,"meetDay":134,"deadline":135,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"aki_tanaka","vidName":"Aki","favorId":"favor-aki_tanaka-123-18","state":"fulfilled","promisedDay":123,"meetDay":124,"deadline":125,"promiseKept":true,"startedDay":124,"forageCount":4,"playerKcal":605,"partnerKcal":650,"deliveredKcal":1255,"returnedDay":125,"talkCount":1},{"vid":"chloe_dubois","vidName":"Chloe","favorId":"favor-chloe_dubois-133-25","state":"asked","promisedDay":133,"meetDay":134,"deadline":135,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Dale kind=forage_help favorId=favor-dale_hoffman-2-1 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Elif kind=sick_help favorId=favor-elif_demir-10-2 task=help Elif with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d12: Elif kind=forage_help favorId=favor-elif_demir-12-3 task=forage with Elif tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Heinrich kind=forage_help favorId=favor-gen_mk13ort-16-5 task=forage with Heinrich tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Xia kind=heal_help favorId=favor-gen_kj917p1-17-6 task=help Xia with their injury
+  FAVOR-OFFER d18: Hassan kind=forage_help favorId=favor-hassan_ali-18-7 task=forage with Hassan tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Mario kind=food_share favorId=favor-gen_vg5u6g9-19-8 task=share food with Mario — they're going hungry
+  FAVOR-OFFER d50: Noah kind=sick_help favorId=favor-gen_dmsb14p-50-9 task=help Noah with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d68: Mario kind=sick_help favorId=favor-gen_vg5u6g9-67-10 task=help Mario with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d92: Diana kind=food_share favorId=favor-diana_osei-92-11 task=share food with Diana — they're past hungry
+  FAVOR-OFFER d100: Diana kind=food_share favorId=favor-diana_osei-98-12 task=share food with Diana — they're going hungry
+  FAVOR-OFFER d101: Dale kind=food_share favorId=favor-dale_hoffman-101-13 task=share food with Dale — they're running on empty
+  FAVOR-OFFER d105: Dale kind=heal_help favorId=favor-dale_hoffman-104-14 task=help Dale with their injury
+  FAVOR-OFFER d117: Heinrich kind=water_haul favorId=favor-gen_mk13ort-117-15 task=bring four liters home from the creek with Heinrich; set out at dawn
+  FAVOR-OFFER d118: Hassan kind=water_haul favorId=favor-hassan_ali-118-16 task=bring four liters home from the creek with Hassan; set out at dawn
+  FAVOR-OFFER d122: Mario kind=water_haul favorId=favor-gen_vg5u6g9-122-17 task=bring four liters home from the creek with Mario; set out at dawn
+  FAVOR-OFFER d123: Aki kind=forage_help favorId=favor-aki_tanaka-123-18 task=forage with Aki tomorrow to rebuild the pantry
+  FAVOR-OFFER d123: Heinrich kind=forage_help favorId=favor-gen_mk13ort-123-19 task=forage with Heinrich tomorrow to rebuild the pantry
+  FAVOR-OFFER d125: Chloe kind=water_haul favorId=favor-chloe_dubois-125-20 task=bring four liters home from the creek with Chloe; set out at dawn
+  FAVOR-OFFER d126: Mario kind=stay_close favorId=favor-gen_vg5u6g9-126-21 task=stay close to Mario tonight
+  FAVOR-OFFER d128: Chloe kind=food_share favorId=favor-chloe_dubois-128-22 task=share food with Chloe — they're past hungry
+  FAVOR-OFFER d130: Heinrich kind=water_haul favorId=favor-gen_mk13ort-130-24 task=bring four liters home from the creek with Heinrich; set out at dawn
+  FAVOR-OFFER d131: Elif kind=stay_close favorId=favor-elif_demir-129-23 task=stay close to Elif tonight
+  FAVOR-OFFER d133: Chloe kind=forage_help favorId=favor-chloe_dubois-133-25 task=forage with Chloe tomorrow to rebuild the pantry
+  FAVOR-OFFER d133: Mario kind=forage_help favorId=favor-gen_vg5u6g9-133-26 task=forage with Mario tomorrow to rebuild the pantry
+  FAVOR-OFFER d133: Elif kind=forage_help favorId=favor-elif_demir-133-27 task=forage with Elif tomorrow to rebuild the pantry
+  FAVOR-OFFER d134: Heinrich kind=food_share favorId=favor-gen_mk13ort-134-28 task=share food with Heinrich — they're past hungry
+  FAVOR-OFFER d137: Víctor kind=heal_help favorId=favor-app_mgpspj9z557-137-29 task=help Víctor with their injury
+  FAVOR-OFFER d138: Heinrich kind=food_share favorId=favor-gen_mk13ort-138-30 task=share food with Heinrich — they're past hungry
+  FAVOR-ACCEPT d4: Dale favorId=favor-dale_hoffman-2-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d12: Elif favorId=favor-elif_demir-12-3 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d16: Heinrich favorId=favor-gen_mk13ort-16-5 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d18: Hassan favorId=favor-hassan_ali-18-7 accepted=true state=promised meetDay=19
+  FAVOR-ACCEPT d123: Aki favorId=favor-aki_tanaka-123-18 accepted=true state=promised meetDay=124
+  FAVOR-ACCEPT d123: Heinrich favorId=favor-gen_mk13ort-123-19 accepted=true state=promised meetDay=124
+  FAVOR-ACCEPT d133: Chloe favorId=favor-chloe_dubois-133-25 accepted=true state=promised meetDay=134
+  FAVOR-ACCEPT d133: Mario favorId=favor-gen_vg5u6g9-133-26 accepted=true state=promised meetDay=134
+  FAVOR-ACCEPT d133: Elif favorId=favor-elif_demir-133-27 accepted=true state=promised meetDay=134
+  FAVOR-ACCEPT d141: Elif favorId=favor-elif_demir-133-27 accepted=true state=promised meetDay=142
+  INVITE-DEC d6 lure: A woman, maybe 40s -> Chloe chance=45 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"hungry","fear":0,"affinity":1} reasons=[]
+  INVITE-DEC d7 lure: Xia -> Chloe chance=45 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"hungry","fear":4,"affinity":1} reasons=[]
+  INVITE-DEC d8 party: Aubrey -> Mario chance=25.200000000000003 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"trust":38,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 38","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d8 party: Aubrey -> Heinrich chance=51.400000000000006 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":4,"trust":41,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 41"]
+  INVITE-DEC d8 party: Aubrey -> Hassan chance=47.8 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":4,"trust":32,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 32"]
+  INVITE-DEC d8 lure: Xia -> Chloe chance=46 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"steady","fear":0,"affinity":2} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d9 party: Aubrey -> Aki chance=42.4 accept=false veto=- inputs={"temp":"prickly","goal":"protect","mood":"steady","fear":12,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31","prickly temperament (-20)","protect goal (+15)"]
+  INVITE-DEC d9 party: Aubrey -> Diana chance=63.6 accept=true veto=- inputs={"temp":"bold","goal":"remember","mood":"steady","fear":12,"trust":34,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 34","bold temperament (+15)"]
+  INVITE-DEC d9 party: Aubrey -> Mario chance=26.400000000000006 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":12,"trust":41,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 41","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d9 lure: Xia -> Chloe chance=46 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"steady","fear":4,"affinity":2} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d10 lure: Xia -> Chloe chance=56 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"cheerful","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","cheerful mood (+10)"]
+  INVITE-DEC d12 lure: Hassan -> Chloe chance=46 accept=true veto=- inputs={"temp":"dry","goal":"peace","mood":"steady","fear":4,"affinity":2} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d16 party: Aubrey -> Aki chance=36.6 accept=true veto=- inputs={"temp":"prickly","goal":"protect","mood":"steady","fear":12,"trust":54,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 54","a big party is safer (+5)","sick (-20)","prickly temperament (-20)","protect goal (+15)"]
+  INVITE-DEC d31 party: Aubrey -> Noah chance=66 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":12,"trust":90,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d94 party: Aubrey -> Elif chance=52.80000000000001 accept=true veto=- inputs={"temp":"prickly","goal":"answers","mood":"grieving","fear":25,"trust":82,"bond":{"v":58,"depth":2},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d126 party: Aki -> Hassan chance=36.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"grieving","fear":92,"trust":91,"bond":{"v":21,"depth":0},"partySize":3} reasons=["trust 91","a big party is safer (+5)","sick (-20)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d126 party: Aki -> Heinrich chance=62.400000000000006 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":92,"trust":81,"bond":{"v":48,"depth":1},"partySize":3} reasons=["trust 81","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d128 party: Aki -> Xia chance=77.2 accept=true veto=- inputs={"temp":"anxious","goal":"survive","mood":"grieving","fear":45,"trust":93,"bond":{"v":50,"depth":2},"partySize":4} reasons=["trust 93","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d136 party: Xia -> Conn chance=71 accept=false veto=- inputs={"temp":"fidgety","goal":"feed","mood":"grieving","fear":32,"trust":65,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 65","a big party is safer (+5)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d139 party: Xia -> Hassan chance=86.80000000000001 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":4,"trust":92,"bond":{"v":90,"depth":3},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d141 party: Xia -> Conn chance=95 accept=true veto=- inputs={"temp":"fidgety","goal":"feed","mood":"cheerful","fear":29,"trust":75,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 75","a big party is safer (+5)","feed goal (+15)","cheerful mood (+10)"]
+SEEDED-DAILY: [{"day":22,"v":40,"depth":3},{"day":23,"v":44,"depth":3},{"day":24,"v":48,"depth":3},{"day":25,"v":52,"depth":3},{"day":26,"v":56,"depth":3},{"day":27,"v":60,"depth":3},{"day":28,"v":60,"depth":3},{"day":29,"v":60,"depth":3},{"day":30,"v":64,"depth":3},{"day":31,"v":68,"depth":3},{"day":32,"v":72,"depth":3},{"day":33,"v":72,"depth":3},{"day":34,"v":72,"depth":3},{"day":35,"v":76,"depth":3}] class=rise
+GOSSIP: totalPicks=290 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=43 31-60=47 61-90=44 91-120=46 121+=42 naturalPicks=222 seededPicks=18 gossipPicks=290
+SEEDED: {"pair":{"a":"gen_dmsb14p","b":"gen_vg5u6g9","aName":"Noah","bName":"Mario"},"day":21,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":22,"v":40,"depth":3},{"day":23,"v":44,"depth":3},{"day":24,"v":48,"depth":3},{"day":25,"v":52,"depth":3},{"day":26,"v":56,"depth":3},{"day":27,"v":60,"depth":3},{"day":28,"v":60,"depth":3},{"day":29,"v":60,"depth":3},{"day":30,"v":64,"depth":3},{"day":31,"v":68,"depth":3},{"day":32,"v":72,"depth":3},{"day":33,"v":72,"depth":3},{"day":34,"v":72,"depth":3},{"day":35,"v":76,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":23,"why":"vgrievance"},"serveWithin30":true,"serves":26,"servesAll":[{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":59,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Noah <> Mario — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Heinrich <> Mario — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Noah <> Valentin — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d70: Xia <> Mario — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Noah <> Xia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Noah <> Hassan — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d85: Heinrich <> Hassan — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d25: Dale <> Noah — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Chloe <> Noah — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Aki <> Heinrich — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d130: Diana <> Mario — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d40: Noah <> Heinrich — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Xia <> Heinrich — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Mario <> Hassan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Aki <> Xia — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d50: Diana <> Noah — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d75: Elif <> Noah — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d85: Dale <> Mario — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Chloe <> Xia — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d125: Chloe <> Heinrich — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d60: Chloe <> Mario — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Dale <> Heinrich — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d130: Chloe <> Dale — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d85: Elif <> Mario — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aki <> Noah — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d125: Aki <> Mario — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d80: Xia <> Hassan — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d110: Chloe <> Hassan — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d130: Dale <> Hassan — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d135: Aki <> Chloe — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d100: Dale <> Xia — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d130: Dale <> Diana — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d135: Aki <> Dale — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d110: Heinrich <> Aubrey — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d110: Noah <> Aubrey — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Mario <> Aubrey — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d110: Diana <> Aubrey — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d110: Chloe <> Aubrey — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d110: Aki <> Aubrey — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d110: Aubrey <> Hassan — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d110: Xia <> Aubrey — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d110: Elif <> Aubrey — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d130: Dale <> Aubrey — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d11: Noah about Xia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d14: Noah about Xia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Dale about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Noah about Xia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Dale about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Xia about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Mario about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Mario about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Hassan about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Xia about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Heinrich about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Dale about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Dale about Noah — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d24: Xia about Noah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Diana about Noah — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Dale about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Diana about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Diana about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Hassan about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Diana about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Dale about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Dale about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Aki about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Diana about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Aki about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Xia about Noah — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Hassan about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Dale about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Heinrich about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Dale about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Heinrich about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Aki about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Xia about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Diana about Noah — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Diana about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Hassan about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Diana about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Diana about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Diana about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Diana about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Aki about Noah — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Elif about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Aki about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Hassan about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Valentin about Noah — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Elif about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Aki about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Hassan about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Valentin about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Hassan about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Diana about Noah — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Elif about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Hassan about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Elif about Noah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Aki about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Xia about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Heinrich about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Heinrich about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Diana about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Aki about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Elif about Noah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Diana about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Chloe about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Aki about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Dale about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Xia about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Diana about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Aki about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Diana about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Mario about Noah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Heinrich about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Dale about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Dale about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Dale about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Dale about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Dale about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Dale about Mario — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Dale about Mario — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Dale about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Dale about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d108: Aki about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Elif about Mario — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Xia about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Diana about Heinrich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Elif about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Aki about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d114: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Elif about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d116: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d118: Xia about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d119: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d121: Aki about Xia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Aki about Xia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Aki about Xia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Diana about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d124: Xia about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Diana about Mario — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d125: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Heinrich about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Heinrich about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Heinrich about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Heinrich about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Hassan about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Heinrich about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Chloe about Mario — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Mario about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Hassan about Xia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Heinrich about Xia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Xia about Heinrich — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Hassan about Xia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Heinrich about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Heinrich about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Heinrich about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Chloe about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Heinrich about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Heinrich about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Chloe about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Heinrich about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d11: Valentin about Chloe (why=grievance)
+  GRIEV-READ d22: Valentin about Chloe (why=grievance)
+  GRIEV-READ d23: Noah about Mario (why=vgrievance)
+  GRIEV-READ d24: Noah about Mario (why=vgrievance)
+  GRIEV-READ d25: Noah about Mario (why=vgrievance)
+  GRIEV-READ d26: Valentin about Chloe (why=grievance)
+  KNACK d4 A person, maybe 50s: "Good question." "cuts close faster when Elif wraps them. Don't ask me how."
+  KNACK d8 Mario: "Hassan talks to the garden. The garden listens. I've seen it."
+  KNACK d14 Valentin: "Good question." "cuts close faster when Elif wraps them. Don't ask me how. Hm."
+  KNACK d15 Noah: "You want to know about that? Okay." "Valentin talks to the garden. The garden listens. I've seen it."
+  KNACK d23 Chloe: "Hassan talks to the garden. The garden listens. I've seen it."
+  KNACK d26 Valentin: "Huh. Let me think about that." "Mario ate something last month that should've killed them. They're fine. Anyway, that's
+  KNACK d31 Valentin: "Chloe talks to the garden. The garden listens. I've seen it. I mean it."
+  KNACK d34 Valentin: "that stray dog — the one that bit two people — lets Noah touch it."
+
+deathCauses: {"Sunback":1,"monster":1,"the arena":4,"the night":1}

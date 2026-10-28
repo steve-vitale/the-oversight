@@ -1,0 +1,70 @@
+# SURFACE+SEEDED — seed 5905 (31d, 8 alive)
+
+npcPairs=64 deep2=3 cracks=0 vCracks=0 friendGriev=0 stateGriev=8 stateFriend=0 stateVCrack=0 t2picks=33 closeReadsServed=8 grievanceServes=11 othersSteered=33
+COND-TP: firstDeep2Day=20 lateClose=7 lateTP=4 lateNull=0 condRate=57.1% pooledTP=5/12 pooledRate=41.7% grievReadsByWhy={"grievance":3,"vgrievance":12}
+FUNNEL (natural): convos=84 subject=70 offered=52 picked=23 classes={"subject-no-offer":18,"offered-not-picked":17,"picked-others":23,"offered-capped":12,"no-subject-no-ans":14}
+FUNNEL-UNSTEERED (r55 strict): convos=61 subjectNoOffer=18 rate=29.5% offered=29 mainOffered=0 subjectOffered=29 picked=0 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=39 picks=25 latePicks=0 missedChangedNotOffered=1
+WRAPSERVE: convos=15 matcherHits=11 matcherServes=11 classes={"grievance-line":11,"deflection":2,"other":2}
+FUNNEL-PROBE (subject-no-offer turns): turns=41 menuProblem=30 pickProblem=11
+INVITE (wrap, carried from r63): lure={"n":6,"accepts":4,"acceptRate":0.6666666666666666,"vetoes":{},"chanceMin":45,"chanceMax":56,"chanceMean":52} party={"n":8,"accepts":4,"acceptRate":0.5,"vetoes":{},"chanceMin":27.6,"chanceMax":66,"chanceMean":51.8} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r64): funnel={"offers":8,"forageOffers":4,"otherFavorOffers":4,"accepts":4,"acceptAttempts":4,"waits":6,"starts":1,"startBlocked":6,"forages":1,"forageNodeBarren":3,"forageBarren":1,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":1,"keptMatched":3}
+OUTING END STATES: [{"vid":"nina_petrova","vidName":"Nina","favorId":"favor-nina_petrova-17-5","state":"acknowledged","promisedDay":17,"meetDay":18,"deadline":19,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"chloe_dubois","vidName":"Chloe","favorId":"favor-chloe_dubois-13-4","state":"broken","promisedDay":17,"meetDay":18,"deadline":19,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_knzkart","vidName":"Austin","favorId":"favor-gen_knzkart-21-6","state":"thanked","promisedDay":21,"meetDay":22,"deadline":23,"promiseKept":true,"startedDay":22,"forageCount":1,"playerKcal":160,"partnerKcal":160,"deliveredKcal":320,"returnedDay":23,"talkCount":1}]
+  FAVOR-OFFER d4: Jesse kind=sick_help favorId=favor-jesse_cortez-4-1 task=help Jesse with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d8: Aria kind=food_share favorId=favor-aria_thompson-8-2 task=share food with Aria — they're going hungry
+  FAVOR-OFFER d10: Nina kind=forage_help favorId=favor-nina_petrova-10-3 task=forage with Nina tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Nina kind=forage_help favorId=favor-nina_petrova-17-5 task=forage with Nina tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Chloe kind=forage_help favorId=favor-chloe_dubois-13-4 task=forage with Chloe tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Austin kind=forage_help favorId=favor-gen_knzkart-21-6 task=forage with Austin tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Aria kind=food_share favorId=favor-aria_thompson-22-7 task=share food with Aria — they're going hungry
+  FAVOR-OFFER d24: David kind=heal_help favorId=favor-david_kim-24-8 task=help David with their injury
+  FAVOR-ACCEPT d10: Nina favorId=favor-nina_petrova-10-3 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d17: Nina favorId=favor-nina_petrova-17-5 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d17: Chloe favorId=favor-chloe_dubois-13-4 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d21: Austin favorId=favor-gen_knzkart-21-6 accepted=true state=promised meetDay=22
+  INVITE-DEC d8 party: Ashley -> Aria chance=63.2 accept=false veto=- inputs={"temp":"gentle","goal":"feed","mood":"hungry","fear":4,"trust":33,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 33","feed goal (+15)"]
+  INVITE-DEC d8 lure: Chloe -> Aria chance=55 accept=false veto=- inputs={"temp":"gentle","goal":"feed","mood":"hungry","fear":0,"affinity":1} reasons=["feed goal (+10)"]
+  INVITE-DEC d9 party: Ashley -> Chloe chance=59.6 accept=false veto=- inputs={"temp":"dry","goal":"protect","mood":"steady","fear":0,"trust":24,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 24","protect goal (+15)"]
+  INVITE-DEC d9 lure: Chloe -> Aria chance=55 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"hungry","fear":4,"affinity":1} reasons=["feed goal (+10)"]
+  INVITE-DEC d11 party: Ashley -> Meera chance=66 accept=true veto=- inputs={"temp":"warm","goal":"lead","mood":"steady","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 40","warm temperament (+15)"]
+  INVITE-DEC d11 lure: Chloe -> Aria chance=55 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"hungry","fear":4,"affinity":1} reasons=["feed goal (+10)"]
+  INVITE-DEC d13 lure: Chloe -> Aria chance=45 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"grieving","fear":29,"affinity":1} reasons=["feed goal (+10)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Vanessa -> Aria chance=63.2 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"grieving","fear":1,"trust":58,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 58","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Vanessa -> Jesse chance=27.6 accept=false veto=- inputs={"temp":"withdrawn","goal":"understand","mood":"grieving","fear":1,"trust":44,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 44","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d15 lure: Austin -> Aria chance=46 accept=false veto=- inputs={"temp":"gentle","goal":"feed","mood":"grieving","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","feed goal (+10)","grieving mood (-10)"]
+  INVITE-DEC d16 lure: Austin -> Aria chance=56 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"steady","fear":0,"affinity":2} reasons=["relationship with inviter (+1)","feed goal (+10)"]
+  INVITE-DEC d20 party: Vanessa -> Nina chance=51 accept=true veto=- inputs={"temp":"dry","goal":"peace","mood":"grateful","fear":0,"trust":40,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 40"]
+  INVITE-DEC d20 party: Vanessa -> Austin chance=40.8 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"steady","fear":4,"trust":27,"bond":{"v":-19,"depth":0},"partySize":3} reasons=["trust 27","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d21 party: Vanessa -> Austin chance=43.2 accept=true veto=- inputs={"temp":"cautious","goal":"joy","mood":"steady","fear":4,"trust":33,"bond":{"v":-17,"depth":0},"partySize":3} reasons=["trust 33","a big party is safer (+5)","cautious temperament (-10)"]
+SEEDED-DAILY: [{"day":18,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":44,"depth":2},{"day":22,"v":48,"depth":2},{"day":23,"v":52,"depth":3},{"day":24,"v":56,"depth":3},{"day":25,"v":60,"depth":3},{"day":26,"v":64,"depth":3},{"day":27,"v":72,"depth":3},{"day":28,"v":74,"depth":3},{"day":29,"v":78,"depth":3},{"day":30,"v":78,"depth":3},{"day":31,"v":82,"depth":3}] class=rise
+GOSSIP: totalPicks=39 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=1 61-90=0 91-120=0 121+=0 naturalPicks=23 seededPicks=10 gossipPicks=39
+SEEDED: {"pair":{"a":"gen_knzkart","b":"gen_ktpp1eb","aName":"Austin","bName":"Meera"},"day":17,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":18,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":44,"depth":2},{"day":22,"v":48,"depth":2},{"day":23,"v":52,"depth":3},{"day":24,"v":56,"depth":3},{"day":25,"v":60,"depth":3},{"day":26,"v":64,"depth":3},{"day":27,"v":72,"depth":3},{"day":28,"v":74,"depth":3},{"day":29,"v":78,"depth":3},{"day":30,"v":78,"depth":3},{"day":31,"v":82,"depth":3}],"crackTraceClass":"rise","vAt7":38,"depthAt7":2,"vDrop":12,"depthDrop":0,"crack7":true,"firstServe":{"day":20,"why":"vgrievance"},"serveWithin30":true,"serves":12,"servesAll":[{"day":20,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Iver <> Meera — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d30: Meera <> Jesse — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d20: Austin <> Meera — maxDepth 3, final 3 (v=82), dropped 0
+  CLOSE-READ d7: Iver about Meera — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d11: Meera about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d13: Austin about Meera — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Meera about Austin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Meera about Austin — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d20: Meera about Austin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d22: Iver about Meera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Meera about Austin — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Meera about Austin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: David about Meera — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Iver about Meera — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Aria about Meera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d5: Pearl about Aria (why=grievance)
+  GRIEV-READ d15: Aria about Pearl (why=grievance)
+  GRIEV-READ d17: Pearl about Aria (why=grievance)
+  GRIEV-READ d20: Austin about Meera (why=vgrievance)
+  GRIEV-READ d22: Austin about Meera (why=vgrievance)
+  GRIEV-READ d23: Austin about Meera (why=vgrievance)
+  KNACK d11 Austin: "Aria sees in the dark. Not well — but better than you. Better than me."
+  KNACK d15 Jesse: "Huh. Let me think about that." "David ate something last month that should've killed them. They're fine."
+  KNACK d17 Pearl: "You want to know about that? Okay." "Iver talks to the garden. The garden listens. I've seen it."
+  KNACK d31 Nina: "You want to know about that? Okay." "Yuki found a lost knife by smell last week. By SMELL."
+
+deathCauses: {"sickness":1}

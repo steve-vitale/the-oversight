@@ -1,0 +1,314 @@
+# SURFACE+SEEDED — seed 5902 (142d, 10 alive)
+
+npcPairs=65 deep2=40 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=1 stateVCrack=0 t2picks=242 closeReadsServed=27 grievanceServes=22 othersSteered=8
+COND-TP: firstDeep2Day=35 lateClose=182 lateTP=155 lateNull=0 condRate=85.2% pooledTP=156/196 pooledRate=79.6% grievReadsByWhy={"grievance":8,"vgrievance":21}
+FUNNEL (natural): convos=414 subject=409 offered=368 picked=234 classes={"subject-no-offer":41,"offered-not-picked":134,"picked-others":234,"no-subject-no-ans":5}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=41 rate=9.9% offered=368 mainOffered=0 subjectOffered=368 picked=234 latePicks=94 latePicksMain=0 latePicksSubject=94
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Raj / Pavel — "that stray dog — the one that bit two people — lets Priya touch it."
+  KNACK-CIRCULATION: Pavel / Raj / Sari — "Victor ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Maisie / Raj / Sari — "Tawadros sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=371 picks=231 latePicks=94 missedChangedNotOffered=3
+WRAPSERVE: convos=29 matcherHits=22 matcherServes=22 classes={"grievance-line":22,"deflection":3,"other":4}
+FUNNEL-PROBE (subject-no-offer turns): turns=112 menuProblem=91 pickProblem=21
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":0,"acceptRate":0,"vetoes":{},"chanceMin":36,"chanceMax":36,"chanceMean":36} party={"n":11,"accepts":5,"acceptRate":0.45454545454545453,"vetoes":{},"chanceMin":18,"chanceMax":79.8,"chanceMean":53.2} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=2
+FAVOR (r64): funnel={"offers":20,"forageOffers":5,"otherFavorOffers":15,"accepts":5,"acceptAttempts":5,"waits":4,"starts":0,"startBlocked":8,"forages":0,"forageNodeBarren":0,"forageBarren":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"keptMatched":0}
+OUTING END STATES: []
+  FAVOR-OFFER d11: Tomas kind=forage_help favorId=favor-gen_k18xjlb-11-2 task=forage with Tomas tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Victor kind=forage_help favorId=favor-victor_lopez-9-1 task=forage with Victor tomorrow to rebuild the pantry
+  FAVOR-OFFER d15: Tomas kind=forage_help favorId=favor-gen_k18xjlb-15-3 task=forage with Tomas tomorrow to rebuild the pantry
+  FAVOR-OFFER d23: Jesse kind=heal_help favorId=favor-jesse_cortez-23-5 task=help Jesse with their injury
+  FAVOR-OFFER d23: Tomas kind=forage_help favorId=favor-gen_k18xjlb-23-6 task=forage with Tomas tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Tawadros kind=heal_help favorId=favor-gen_gkoog03-23-4 task=help Tawadros with their injury
+  FAVOR-OFFER d31: Casey kind=forage_help favorId=favor-gen_ni579cf-30-7 task=forage with Casey tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Victor kind=food_share favorId=favor-victor_lopez-46-8 task=share food with Victor — they're going hungry
+  FAVOR-OFFER d47: Casey kind=food_share favorId=favor-gen_ni579cf-47-9 task=share food with Casey — they're running on empty
+  FAVOR-OFFER d55: Stan kind=food_share favorId=favor-stan_kowalski-55-10 task=share food with Stan — they're running on empty
+  FAVOR-OFFER d66: Tomas kind=food_share favorId=favor-gen_k18xjlb-64-11 task=share food with Tomas — they're running on empty
+  FAVOR-OFFER d71: Tawadros kind=food_share favorId=favor-gen_gkoog03-70-12 task=share food with Tawadros — they're going hungry
+  FAVOR-OFFER d74: Casey kind=food_share favorId=favor-gen_ni579cf-74-13 task=share food with Casey — they're running on empty
+  FAVOR-OFFER d79: Tawadros kind=heal_help favorId=favor-gen_gkoog03-79-14 task=help Tawadros with their injury
+  FAVOR-OFFER d90: Casey kind=food_share favorId=favor-gen_ni579cf-90-15 task=share food with Casey — they're running on empty
+  FAVOR-OFFER d93: Casey kind=food_share favorId=favor-gen_ni579cf-93-16 task=share food with Casey — they're running on empty
+  FAVOR-OFFER d103: Stan kind=heal_help favorId=favor-stan_kowalski-103-17 task=help Stan with their injury
+  FAVOR-OFFER d121: Victor kind=heal_help favorId=favor-victor_lopez-121-18 task=help Victor with their injury
+  FAVOR-OFFER d121: Casey kind=food_share favorId=favor-gen_ni579cf-121-19 task=share food with Casey — they're past hungry
+  FAVOR-OFFER d131: Sari kind=sick_help favorId=favor-sari_wulandari-131-20 task=help Sari with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-ACCEPT d11: Tomas favorId=favor-gen_k18xjlb-11-2 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d12: Victor favorId=favor-victor_lopez-9-1 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d15: Tomas favorId=favor-gen_k18xjlb-15-3 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d23: Tomas favorId=favor-gen_k18xjlb-23-6 accepted=true state=promised meetDay=24
+  FAVOR-ACCEPT d31: Casey favorId=favor-gen_ni579cf-30-7 accepted=true state=promised meetDay=32
+  INVITE-DEC d6 lure: Priya -> Raj chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d7 lure: Priya -> Raj chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"hungry","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d8 party: Malik -> Priya chance=67.6 accept=true veto=- inputs={"temp":"intense","goal":"feed","mood":"steady","fear":4,"trust":44,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 44","feed goal (+15)"]
+  INVITE-DEC d8 party: Malik -> Casey chance=51.8 accept=true veto=- inputs={"temp":"sardonic","goal":"answers","mood":"steady","fear":4,"trust":42,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 42"]
+  INVITE-DEC d8 party: Malik -> Stan chance=27 accept=true veto=- inputs={"temp":"dry","goal":"family","mood":"steady","fear":4,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30","sick (-20)"]
+  INVITE-DEC d8 lure: Priya -> Raj chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d9 lure: Priya -> Raj chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d10 lure: Priya -> Raj chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"hungry","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d15 party: Malik -> Jesse chance=18 accept=false veto=- inputs={"temp":"withdrawn","goal":"survive","mood":"steady","fear":0,"trust":45,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 45","a big party is safer (+5)","sick (-20)","withdrawn temperament (-20)"]
+  INVITE-DEC d31 party: Malik -> Sari chance=64 accept=false veto=- inputs={"temp":"steady","goal":"answers","mood":"steady","fear":0,"trust":60,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 60","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Malik -> Maisie chance=54.8 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"steady","fear":0,"trust":62,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 62","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d32 party: Malik -> Tawadros chance=79.8 accept=true veto=- inputs={"temp":"anxious","goal":"protect","mood":"steady","fear":12,"trust":62,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 62","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d44 party: Priya -> Maisie chance=63.2 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"grieving","fear":17,"trust":83,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Priya -> Raj chance=49.599999999999994 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"grieving","fear":17,"trust":74,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 74","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Priya -> Sari chance=44.80000000000001 accept=false veto=- inputs={"temp":"steady","goal":"answers","mood":"grieving","fear":17,"trust":87,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 87","a big party is safer (+5)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Priya -> Victor chance=64.4 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":17,"trust":86,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 86","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":35,"v":38,"depth":2},{"day":36,"v":40,"depth":2},{"day":37,"v":42,"depth":2},{"day":38,"v":42,"depth":2},{"day":39,"v":44,"depth":2},{"day":40,"v":48,"depth":2},{"day":41,"v":48,"depth":2},{"day":42,"v":48,"depth":2},{"day":43,"v":48,"depth":2},{"day":44,"v":48,"depth":2},{"day":45,"v":48,"depth":2},{"day":46,"v":50,"depth":3},{"day":47,"v":50,"depth":3},{"day":48,"v":50,"depth":3}] class=no-drop
+GOSSIP: totalPicks=257 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=31 31-60=57 61-90=52 91-120=58 121+=36 naturalPicks=234 seededPicks=8 gossipPicks=257
+SEEDED: {"pair":{"a":"gen_7j99hv8","b":"gen_ni579cf","aName":"Maisie","bName":"Casey"},"day":34,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":35,"v":38,"depth":2},{"day":36,"v":40,"depth":2},{"day":37,"v":42,"depth":2},{"day":38,"v":42,"depth":2},{"day":39,"v":44,"depth":2},{"day":40,"v":48,"depth":2},{"day":41,"v":48,"depth":2},{"day":42,"v":48,"depth":2},{"day":43,"v":48,"depth":2},{"day":44,"v":48,"depth":2},{"day":45,"v":48,"depth":2},{"day":46,"v":50,"depth":3},{"day":47,"v":50,"depth":3},{"day":48,"v":50,"depth":3}],"crackTraceClass":"no-drop","vAt7":48,"depthAt7":2,"vDrop":2,"depthDrop":0,"crack7":false,"firstServe":{"day":40,"why":"vgrievance"},"serveWithin30":true,"serves":21,"servesAll":[{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":86,"why":"vgrievance"},{"day":105,"why":"vgrievance"},{"day":106,"why":"vgrievance"},{"day":112,"why":"vgrievance"},{"day":113,"why":"vgrievance"},{"day":114,"why":"vgrievance"},{"day":132,"why":"vgrievance"},{"day":137,"why":"vgrievance"},{"day":141,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Maisie <> Casey — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Tawadros <> Casey — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Tawadros <> Stan — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d80: Maisie <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Maisie <> Victor — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d60: Casey <> Sari — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Jesse <> Sari — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d65: Casey <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Maisie <> Pavel — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d60: Casey <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Tomas <> Casey — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Tawadros <> Tomas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Casey <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Tomas <> Stan — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d65: Casey <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Casey <> Victor — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Raj <> Victor — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d80: Maisie <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Tawadros <> Pavel — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d40: Maisie <> Tawadros — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Tawadros <> Jesse — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d110: Sari <> Victor — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d120: Tawadros <> Sari — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d105: Stan <> Victor — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d120: Jesse <> Raj — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d80: Pavel <> Stan — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d105: Sari <> Stan — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d125: Raj <> Sari — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d80: Maisie <> Tomas — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d90: Maisie <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Tomas <> Jesse — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d65: Tomas <> Sari — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Tomas <> Raj — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d95: Jesse <> Stan — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d90: Tomas <> Victor — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d120: Jesse <> Victor — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d140: Tawadros <> Raj — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d70: Tawadros <> Victor — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d95: Maisie <> Sari — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d120: Tomas <> Pavel — maxDepth 3, final 3 (v=76), dropped 0
+  CLOSE-READ d16: Casey about Maisie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Casey about Maisie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Casey about Maisie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Casey about Maisie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Priya about Maisie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Priya about Maisie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Pavel about Casey — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Priya about Tawadros — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Jesse about Priya — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Casey about Maisie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Tawadros about Casey — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Pavel about Casey — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Maisie about Casey — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Priya about Maisie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Tawadros about Maisie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Casey about Tawadros — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Priya about Tawadros — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Raj about Casey — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Sari about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Tawadros about Maisie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Casey about Tawadros — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Priya about Tawadros — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Tomas about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Pavel about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Victor about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Tawadros about Maisie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Victor about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Victor about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Sari about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Victor about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Casey about Maisie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Victor about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Tawadros about Maisie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Casey about Maisie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Tomas about Tawadros — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Pavel about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Tomas about Tawadros — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Raj about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d53: Victor about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Tawadros about Maisie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Stan about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d56: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Stan about Casey — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Pavel about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Victor about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Tomas about Tawadros — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Tawadros about Maisie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Tomas about Tawadros — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Tawadros about Maisie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Raj about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Tomas about Tawadros — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Victor about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Stan about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Raj about Casey — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Stan about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Tawadros about Maisie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Pavel about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Tomas about Tawadros — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Victor about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Raj about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Victor about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Stan about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Raj about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Tawadros about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Tomas about Tawadros — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Raj about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Tawadros about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Stan about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Stan about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Raj about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Tomas about Tawadros — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Sari about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Raj about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Victor about Casey — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Victor about Casey — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Tawadros about Tomas — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Tawadros about Tomas — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Pavel about Casey — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Tawadros about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Tawadros about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Tawadros about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Pavel about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Pavel about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Raj about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Sari about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Sari about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Raj about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Tomas about Tawadros — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Sari about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Raj about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Tomas about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Pavel about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Sari about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Pavel about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Pavel about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Raj about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Raj about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Stan about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Casey about Maisie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Tomas about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Tawadros about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Tomas about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Sari about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Victor about Casey — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d35 (betrayal): Maisie vs Casey (ambushed) depth 2 v 38 -> 48
+  GRIEV-READ d6: Raj about Sari (why=grievance)
+  GRIEV-READ d6: Sari about Raj (why=grievance)
+  GRIEV-READ d9: Raj about Sari (why=grievance)
+  GRIEV-READ d11: Maisie about Tawadros (why=grievance)
+  GRIEV-READ d13: Maisie about Tawadros (why=grievance)
+  GRIEV-READ d24: Tawadros about Maisie (why=grievance)
+  KNACK d14 Pavel: "You want to know about that? Okay." "Hah. Tomas found a lost knife by smell last week. By SMELL."
+  KNACK d14 Pavel: "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d15 Raj: "that stray dog — the one that bit two people — lets Priya touch it."
+  KNACK d17 Maisie: "Probably — cuts close faster when Jesse wraps them. Don't ask me how."
+  KNACK d22 Pavel: "Victor ate something last month that should've killed them. They're fine."
+  KNACK d23 Jesse: "You want to know about that? Okay." "Tomas found a lost knife by smell last week. By SMELL."
+  KNACK d31 Casey: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Stan touch it."
+  KNACK d33 Raj: "Good question." "Tomas found a lost knife by smell last week. By SMELL."
+
+deathCauses: {"contest":1}

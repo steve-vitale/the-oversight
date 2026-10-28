@@ -1,0 +1,448 @@
+# SURFACE+SEEDED — seed 5901 (142d, 5 alive)
+
+npcPairs=108 deep2=36 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=279 closeReadsServed=49 grievanceServes=3 othersSteered=25
+COND-TP: firstDeep2Day=20 lateClose=237 lateTP=187 lateNull=0 condRate=78.9% pooledTP=189/242 pooledRate=78.1% grievReadsByWhy={"grievance":7,"vgrievance":1}
+FUNNEL (natural): convos=414 subject=401 offered=350 picked=254 classes={"subject-no-offer":51,"offered-not-picked":96,"picked-others":254,"no-subject-no-ans":13}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=51 rate=12.3% offered=350 mainOffered=0 subjectOffered=350 picked=254 latePicks=109 latePicksMain=0 latePicksSubject=109
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Sigrun / Werner — "Sanne talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Ksenia / Werner — "that stray dog — the one that bit two people — lets Ava touch it."
+  KNACK-CIRCULATION: Ava / Ksenia — "Pavel found a lost knife by smell last week. By SMELL."
+REOFFER: offers=338 picks=261 latePicks=106 missedChangedNotOffered=6
+WRAPSERVE: convos=8 matcherHits=3 matcherServes=3 classes={"grievance-line":3,"deflection":3,"other":2}
+FUNNEL-PROBE (subject-no-offer turns): turns=181 menuProblem=152 pickProblem=29
+INVITE (wrap, carried from r63): lure={"n":8,"accepts":3,"acceptRate":0.375,"vetoes":{},"chanceMin":35,"chanceMax":41,"chanceMean":36.5} party={"n":35,"accepts":15,"acceptRate":0.42857142857142855,"vetoes":{},"chanceMin":7,"chanceMax":91,"chanceMean":46.5} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=13
+FAVOR (r64): funnel={"offers":69,"forageOffers":22,"otherFavorOffers":47,"accepts":22,"acceptAttempts":22,"waits":32,"starts":7,"startBlocked":28,"forages":7,"forageNodeBarren":0,"forageBarren":0,"talks":7,"delivers":7,"deliverBlocked":0,"completeOutings":3,"keptMatched":5}
+OUTING END STATES: [{"vid":"gen_vih4gga","vidName":"Molly","favorId":"favor-gen_vih4gga-13-5","state":"thanked","promisedDay":13,"meetDay":14,"deadline":15,"promiseKept":true,"startedDay":14,"forageCount":1,"playerKcal":450,"partnerKcal":540,"deliveredKcal":990,"returnedDay":14,"talkCount":1},{"vid":"ava_garcia","vidName":"Ava","favorId":"favor-ava_garcia-89-53","state":"broken","promisedDay":89,"meetDay":90,"deadline":91,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"sigrun_eiriksdottir","vidName":"Sigrun","favorId":"favor-sigrun_eiriksdottir-57-37","state":"acknowledged","promisedDay":57,"meetDay":58,"deadline":59,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"chloe_dubois","vidName":"Chloe","favorId":"favor-chloe_dubois-90-54","state":"thanked","promisedDay":91,"meetDay":92,"deadline":92,"promiseKept":true,"startedDay":92,"forageCount":1,"playerKcal":740,"partnerKcal":900,"deliveredKcal":1640,"returnedDay":92,"talkCount":1},{"vid":"petra_novak","vidName":"Petra","favorId":"favor-petra_novak-119-69","state":"thanked","promisedDay":119,"meetDay":120,"deadline":121,"promiseKept":true,"startedDay":120,"forageCount":1,"playerKcal":1260,"partnerKcal":1350,"deliveredKcal":2610,"returnedDay":120,"talkCount":1}]
+  FAVOR-OFFER d6: Thabo kind=sick_help favorId=favor-thabo_maseko-6-2 task=help Thabo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d6: Miguel kind=food_share favorId=favor-miguel_santos-6-1 task=share food with Miguel — they're going hungry
+  FAVOR-OFFER d9: Thabo kind=forage_help favorId=favor-thabo_maseko-9-3 task=forage with Thabo tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Sanne kind=forage_help favorId=favor-sanne_bakker-10-4 task=forage with Sanne tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Molly kind=forage_help favorId=favor-gen_vih4gga-13-5 task=forage with Molly tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Ksenia kind=sick_help favorId=favor-gen_om33le1-19-6 task=help Ksenia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d21: Debbie kind=food_share favorId=favor-gen_4mh6cy0-21-7 task=share food with Debbie — they're running on empty
+  FAVOR-OFFER d21: Debbie kind=food_share favorId=favor-gen_4mh6cy0-21-8 task=share food with Debbie — they're running on empty
+  FAVOR-OFFER d23: Ksenia kind=sick_help favorId=favor-gen_om33le1-23-9 task=help Ksenia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d24: Debbie kind=food_share favorId=favor-gen_4mh6cy0-24-10 task=share food with Debbie — they're going hungry
+  FAVOR-OFFER d24: Ava kind=forage_help favorId=favor-ava_garcia-24-11 task=forage with Ava tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Ksenia kind=sick_help favorId=favor-gen_om33le1-24-12 task=help Ksenia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d25: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-25-13 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d27: Ksenia kind=heal_help favorId=favor-gen_om33le1-27-14 task=help Ksenia with their injury
+  FAVOR-OFFER d28: Werner kind=forage_help favorId=favor-gen_2x3nd2r-28-15 task=forage with Werner tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-28-16 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Debbie kind=food_share favorId=favor-gen_4mh6cy0-31-17 task=share food with Debbie — they're running on empty
+  FAVOR-OFFER d32: Sanne kind=sick_help favorId=favor-sanne_bakker-32-18 task=help Sanne with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d32: Ksenia kind=heal_help favorId=favor-gen_om33le1-32-19 task=help Ksenia with their injury
+  FAVOR-OFFER d33: Ksenia kind=heal_help favorId=favor-gen_om33le1-33-20 task=help Ksenia with their injury
+  FAVOR-OFFER d35: Debbie kind=food_share favorId=favor-gen_4mh6cy0-35-22 task=share food with Debbie — they're going hungry
+  FAVOR-OFFER d38: Debbie kind=forage_help favorId=favor-gen_4mh6cy0-38-23 task=forage with Debbie tomorrow to rebuild the pantry
+  FAVOR-OFFER d39: Thabo kind=heal_help favorId=favor-thabo_maseko-39-24 task=help Thabo with their injury
+  FAVOR-OFFER d40: Werner kind=forage_help favorId=favor-gen_2x3nd2r-35-21 task=forage with Werner tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Ava kind=sick_help favorId=favor-ava_garcia-43-25 task=help Ava with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d43: Thabo kind=food_share favorId=favor-thabo_maseko-43-26 task=share food with Thabo — they're going hungry
+  FAVOR-OFFER d45: Ksenia kind=heal_help favorId=favor-gen_om33le1-45-27 task=help Ksenia with their injury
+  FAVOR-OFFER d45: Pavel kind=sick_help favorId=favor-pavel_dubinin-45-28 task=help Pavel with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d48: Debbie kind=heal_help favorId=favor-gen_4mh6cy0-48-29 task=help Debbie with their injury
+  FAVOR-OFFER d49: Pavel kind=food_share favorId=favor-pavel_dubinin-49-31 task=share food with Pavel — they're going hungry
+  FAVOR-OFFER d50: Werner kind=food_share favorId=favor-gen_2x3nd2r-50-32 task=share food with Werner — they're going hungry
+  FAVOR-OFFER d51: Debbie kind=heal_help favorId=favor-gen_4mh6cy0-51-33 task=help Debbie with their injury
+  FAVOR-OFFER d52: Thabo kind=heal_help favorId=favor-thabo_maseko-49-30 task=help Thabo with their injury
+  FAVOR-OFFER d53: Pavel kind=sick_help favorId=favor-pavel_dubinin-53-34 task=help Pavel with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d55: Debbie kind=heal_help favorId=favor-gen_4mh6cy0-55-36 task=help Debbie with their injury
+  FAVOR-OFFER d55: Werner kind=forage_help favorId=favor-gen_2x3nd2r-54-35 task=forage with Werner tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-57-37 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d58: Debbie kind=food_share favorId=favor-gen_4mh6cy0-58-38 task=share food with Debbie — they're past hungry
+  FAVOR-OFFER d59: Pavel kind=food_share favorId=favor-pavel_dubinin-59-39 task=share food with Pavel — they're past hungry
+  FAVOR-OFFER d64: Pavel kind=sick_help favorId=favor-pavel_dubinin-62-40 task=help Pavel with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d67: Werner kind=forage_help favorId=favor-gen_2x3nd2r-66-41 task=forage with Werner tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Pavel kind=food_share favorId=favor-pavel_dubinin-69-42 task=share food with Pavel — they're running on empty
+  FAVOR-OFFER d70: Werner kind=sick_help favorId=favor-gen_2x3nd2r-70-43 task=help Werner with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d72: Debbie kind=sick_help favorId=favor-gen_4mh6cy0-72-44 task=help Debbie with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d74: Ava kind=food_share favorId=favor-ava_garcia-74-45 task=share food with Ava — they're past hungry
+  FAVOR-OFFER d77: Thabo kind=forage_help favorId=favor-thabo_maseko-77-46 task=forage with Thabo tomorrow to rebuild the pantry
+  FAVOR-OFFER d77: Debbie kind=food_share favorId=favor-gen_4mh6cy0-77-47 task=share food with Debbie — they're past hungry
+  FAVOR-OFFER d77: Stan kind=food_share favorId=favor-stan_kowalski-77-48 task=share food with Stan — they're running on empty
+  FAVOR-OFFER d80: Ava kind=food_share favorId=favor-ava_garcia-80-49 task=share food with Ava — they're running on empty
+  FAVOR-OFFER d83: Ava kind=food_share favorId=favor-ava_garcia-83-50 task=share food with Ava — they're past hungry
+  FAVOR-OFFER d86: Thabo kind=food_share favorId=favor-thabo_maseko-86-51 task=share food with Thabo — they're going hungry
+  FAVOR-OFFER d89: Ava kind=forage_help favorId=favor-ava_garcia-89-53 task=forage with Ava tomorrow to rebuild the pantry
+  FAVOR-OFFER d90: Debbie kind=heal_help favorId=favor-gen_4mh6cy0-89-52 task=help Debbie with their injury
+  FAVOR-OFFER d91: Chloe kind=forage_help favorId=favor-chloe_dubois-90-54 task=forage with Chloe tomorrow to rebuild the pantry
+  FAVOR-OFFER d93: Thabo kind=food_share favorId=favor-thabo_maseko-93-55 task=share food with Thabo — they're going hungry
+  FAVOR-OFFER d94: Ksenia kind=food_share favorId=favor-gen_om33le1-94-56 task=share food with Ksenia — they're going hungry
+  FAVOR-OFFER d98: Petra kind=forage_help favorId=favor-petra_novak-98-57 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Stan kind=forage_help favorId=favor-stan_kowalski-98-58 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d99: Debbie kind=food_share favorId=favor-gen_4mh6cy0-99-59 task=share food with Debbie — they're running on empty
+  FAVOR-OFFER d101: Stan kind=forage_help favorId=favor-stan_kowalski-101-60 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d101: Petra kind=forage_help favorId=favor-petra_novak-101-61 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d102: Thabo kind=forage_help favorId=favor-thabo_maseko-102-62 task=forage with Thabo tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Thabo kind=sick_help favorId=favor-thabo_maseko-106-63 task=help Thabo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d108: Amina kind=sick_help favorId=favor-amina_diallo-107-64 task=help Amina with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d109: Debbie kind=food_share favorId=favor-gen_4mh6cy0-109-65 task=share food with Debbie — they're past hungry
+  FAVOR-OFFER d117: Petra kind=forage_help favorId=favor-petra_novak-117-67 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d118: Stan kind=food_share favorId=favor-stan_kowalski-118-68 task=share food with Stan — they're running on empty
+  FAVOR-OFFER d119: Petra kind=forage_help favorId=favor-petra_novak-119-69 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d120: Amina kind=food_share favorId=favor-amina_diallo-120-70 task=share food with Amina — they're past hungry
+  FAVOR-ACCEPT d9: Thabo favorId=favor-thabo_maseko-9-3 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d10: Sanne favorId=favor-sanne_bakker-10-4 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d13: Molly favorId=favor-gen_vih4gga-13-5 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d24: Ava favorId=favor-ava_garcia-24-11 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d25: Sigrun favorId=favor-sigrun_eiriksdottir-25-13 accepted=true state=promised meetDay=26
+  FAVOR-ACCEPT d28: Werner favorId=favor-gen_2x3nd2r-28-15 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d28: Sigrun favorId=favor-sigrun_eiriksdottir-28-16 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d38: Debbie favorId=favor-gen_4mh6cy0-38-23 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d40: Werner favorId=favor-gen_2x3nd2r-35-21 accepted=true state=promised meetDay=41
+  FAVOR-ACCEPT d55: Werner favorId=favor-gen_2x3nd2r-54-35 accepted=true state=promised meetDay=56
+  FAVOR-ACCEPT d57: Sigrun favorId=favor-sigrun_eiriksdottir-57-37 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d67: Werner favorId=favor-gen_2x3nd2r-66-41 accepted=true state=promised meetDay=68
+  FAVOR-ACCEPT d77: Thabo favorId=favor-thabo_maseko-77-46 accepted=true state=promised meetDay=78
+  FAVOR-ACCEPT d89: Ava favorId=favor-ava_garcia-89-53 accepted=true state=promised meetDay=90
+  FAVOR-ACCEPT d91: Chloe favorId=favor-chloe_dubois-90-54 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d98: Petra favorId=favor-petra_novak-98-57 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d98: Stan favorId=favor-stan_kowalski-98-58 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d101: Stan favorId=favor-stan_kowalski-101-60 accepted=true state=promised meetDay=102
+  FAVOR-ACCEPT d101: Petra favorId=favor-petra_novak-101-61 accepted=true state=promised meetDay=102
+  FAVOR-ACCEPT d102: Thabo favorId=favor-thabo_maseko-102-62 accepted=true state=promised meetDay=103
+  FAVOR-ACCEPT d117: Petra favorId=favor-petra_novak-117-67 accepted=true state=promised meetDay=118
+  FAVOR-ACCEPT d119: Petra favorId=favor-petra_novak-119-69 accepted=true state=promised meetDay=120
+  INVITE-DEC d8 party: Lucas -> Molly chance=70.4 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":4,"trust":51,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 51","warm temperament (+15)"]
+  INVITE-DEC d9 party: Lucas -> Miguel chance=30 accept=false veto=- inputs={"temp":"intense","goal":"escape","mood":"steady","fear":4,"trust":25,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 25","wants out (-15)"]
+  INVITE-DEC d10 party: Lucas -> Ksenia chance=7 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":0,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30","wants to be alone (-40)"]
+  INVITE-DEC d10 party: Lucas -> Ava chance=47.8 accept=false veto=- inputs={"temp":"gentle","goal":"remember","mood":"steady","fear":0,"trust":32,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 32"]
+  INVITE-DEC d10 lure: Ksenia -> Miguel chance=35 accept=false veto=- inputs={"temp":"intense","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d11 party: Lucas -> Natnael chance=51 accept=true veto=- inputs={"temp":"anxious","goal":"peace","mood":"steady","fear":12,"trust":40,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 40"]
+  INVITE-DEC d11 lure: Ksenia -> Miguel chance=35 accept=false veto=- inputs={"temp":"intense","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d12 lure: Ksenia -> Miguel chance=35 accept=false veto=- inputs={"temp":"intense","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d13 lure: Ksenia -> Miguel chance=35 accept=true veto=- inputs={"temp":"intense","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d15 party: Lucas -> Ava chance=56 accept=false veto=- inputs={"temp":"gentle","goal":"remember","mood":"steady","fear":0,"trust":40,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)"]
+  INVITE-DEC d16 lure: Ksenia -> Miguel chance=35 accept=false veto=- inputs={"temp":"intense","goal":"escape","mood":"hungry","fear":6,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d17 lure: Ksenia -> Miguel chance=35 accept=true veto=- inputs={"temp":"intense","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d18 lure: Debbie -> Natnael chance=41 accept=false veto=- inputs={"temp":"anxious","goal":"peace","mood":"grieving","fear":1,"affinity":23} reasons=["relationship with inviter (+6)","grieving mood (-10)"]
+  INVITE-DEC d19 lure: Debbie -> Natnael chance=41 accept=true veto=- inputs={"temp":"anxious","goal":"peace","mood":"grieving","fear":0,"affinity":25} reasons=["relationship with inviter (+6)","grieving mood (-10)"]
+  INVITE-DEC d21 party: Lucas -> Ava chance=46 accept=false veto=- inputs={"temp":"gentle","goal":"remember","mood":"grieving","fear":0,"trust":40,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d22 party: Lucas -> Sanne chance=70.6 accept=true veto=- inputs={"temp":"dry","goal":"belong","mood":"steady","fear":0,"trust":39,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 39","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d42 party: Lucas -> Pavel chance=46.6 accept=true veto=- inputs={"temp":"dry","goal":"feed","mood":"grieving","fear":25,"trust":54,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 54","a big party is safer (+5)","sick (-20)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d50 party: Lucas -> Ksenia chance=12.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":13,"trust":56,"bond":{"v":7,"depth":0},"partySize":4} reasons=["trust 56","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d51 party: Lucas -> Sigrun chance=35.2 accept=true veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"grieving","fear":4,"trust":38,"bond":{"v":48,"depth":1},"partySize":4} reasons=["trust 38","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d69 party: Sigrun -> Ava chance=35 accept=false veto=- inputs={"temp":"gentle","goal":"remember","mood":"grieving","fear":17,"trust":50,"bond":{"v":48,"depth":1},"partySize":2} reasons=["trust 50","a real bond (+10)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d71 party: Sigrun -> Ksenia chance=36 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":4,"trust":90,"bond":{"v":52,"depth":2},"partySize":3} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d73 party: Werner -> Ksenia chance=18.200000000000003 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":22,"trust":83,"bond":{"v":22,"depth":0},"partySize":1} reasons=["trust 83","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d73 party: Werner -> Debbie chance=63.8 accept=false veto=- inputs={"temp":"restless","goal":"prove","mood":"grieving","fear":22,"trust":47,"bond":{"v":100,"depth":3},"partySize":1} reasons=["trust 47","a real bond (+10)","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d73 party: Werner -> Petra chance=35.4 accept=false veto=- inputs={"temp":"steady","goal":"peace","mood":"grieving","fear":22,"trust":26,"bond":null,"partySize":1} reasons=["trust 26","grieving mood (-10)"]
+  INVITE-DEC d74 party: Werner -> Ava chance=43.8 accept=true veto=- inputs={"temp":"gentle","goal":"remember","mood":"grieving","fear":4,"trust":47,"bond":{"v":12,"depth":0},"partySize":1} reasons=["trust 47","grieving mood (-10)"]
+  INVITE-DEC d74 party: Werner -> Petra chance=38.2 accept=false veto=- inputs={"temp":"steady","goal":"peace","mood":"grieving","fear":4,"trust":33,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 33","grieving mood (-10)"]
+  INVITE-DEC d74 party: Werner -> Debbie chance=65.8 accept=true veto=- inputs={"temp":"restless","goal":"prove","mood":"grieving","fear":4,"trust":52,"bond":{"v":100,"depth":3},"partySize":2} reasons=["trust 52","a real bond (+10)","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d75 party: Werner -> Stan chance=41.2 accept=true veto=- inputs={"temp":"dry","goal":"understand","mood":"grieving","fear":12,"trust":28,"bond":null,"partySize":3} reasons=["trust 28","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d76 party: Werner -> Petra chance=55.6 accept=false veto=- inputs={"temp":"steady","goal":"peace","mood":"steady","fear":4,"trust":39,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 39","a big party is safer (+5)"]
+  INVITE-DEC d79 party: Werner -> Ksenia chance=36 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":12,"trust":90,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d79 party: Werner -> Chloe chance=48.8 accept=false veto=- inputs={"temp":"dry","goal":"legacy","mood":"steady","fear":12,"trust":22,"bond":null,"partySize":4} reasons=["trust 22","a big party is safer (+5)"]
+  INVITE-DEC d82 party: Werner -> Chloe chance=54 accept=false veto=- inputs={"temp":"dry","goal":"legacy","mood":"steady","fear":0,"trust":35,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 35","a big party is safer (+5)"]
+  INVITE-DEC d84 party: Werner -> Ksenia chance=46 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":0,"trust":90,"bond":{"v":26,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d85 party: Werner -> Ksenia chance=46 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":4,"trust":90,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d86 party: Werner -> Amina chance=26.200000000000003 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":0,"trust":28,"bond":null,"partySize":4} reasons=["trust 28","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d86 party: Werner -> Chloe chance=56.400000000000006 accept=true veto=- inputs={"temp":"dry","goal":"legacy","mood":"steady","fear":0,"trust":41,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 41","a big party is safer (+5)"]
+  INVITE-DEC d107 party: Werner -> Valentin chance=91 accept=true veto=- inputs={"temp":"anxious","goal":"belong","mood":"steady","fear":0,"trust":90,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d108 party: Werner -> Petra chance=65.2 accept=true veto=- inputs={"temp":"steady","goal":"peace","mood":"grieving","fear":37,"trust":63,"bond":{"v":54,"depth":2},"partySize":4} reasons=["trust 63","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d111 party: Debbie -> Amina chance=32.599999999999994 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":17,"trust":44,"bond":{"v":68,"depth":2},"partySize":4} reasons=["trust 44","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d131 party: Stan -> Ksenia chance=36.400000000000006 accept=true veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":56,"trust":91,"bond":{"v":75,"depth":3},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d132 party: Stan -> Lucas chance=49.6 accept=false veto=- inputs={"temp":"steady","goal":"answers","mood":"grieving","fear":69,"trust":49,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 49","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Stan -> Wei chance=66 accept=true veto=- inputs={"temp":"gentle","goal":"remember","mood":"grieving","fear":25,"trust":90,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d137 party: Ksenia -> Lucas chance=67.6 accept=true veto=- inputs={"temp":"steady","goal":"answers","mood":"grieving","fear":28,"trust":69,"bond":{"v":54,"depth":2},"partySize":4} reasons=["trust 69","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":19,"v":42,"depth":2},{"day":20,"v":42,"depth":2},{"day":21,"v":42,"depth":2},{"day":22,"v":42,"depth":2},{"day":23,"v":42,"depth":2},{"day":24,"v":42,"depth":2},{"day":25,"v":42,"depth":2},{"day":26,"v":42,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":42,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":42,"depth":2},{"day":32,"v":42,"depth":2}] class=no-drop
+GOSSIP: totalPicks=207 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=32 31-60=55 61-90=58 91-120=63 121+=46 naturalPicks=254 seededPicks=25 gossipPicks=207
+SEEDED: {"pair":{"a":"gen_4mh6cy0","b":"gen_qed965u","aName":"Debbie","bName":"Natnael"},"day":18,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":19,"v":42,"depth":2},{"day":20,"v":42,"depth":2},{"day":21,"v":42,"depth":2},{"day":22,"v":42,"depth":2},{"day":23,"v":42,"depth":2},{"day":24,"v":42,"depth":2},{"day":25,"v":42,"depth":2},{"day":26,"v":42,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":42,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":42,"depth":2},{"day":32,"v":42,"depth":2}],"crackTraceClass":"no-drop","vAt7":42,"depthAt7":2,"vDrop":8,"depthDrop":0,"crack7":false,"firstServe":{"day":19,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":19,"why":"vgrievance"}],"effect":true}
+  FRIEND d20: Debbie <> Natnael — maxDepth 2, final 2 (v=42), dropped 0
+  FRIEND d25: Debbie <> Ksenia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Debbie <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Ava <> Debbie — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Ava <> Ksenia — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d30: Debbie <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Debbie <> Thabo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Debbie <> Sanne — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d40: Werner <> Debbie — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Ava <> Sigrun — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d115: Werner <> Thabo — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d100: Ksenia <> Thabo — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d30: Debbie <> Molly — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d110: Ava <> Thabo — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d75: Ksenia <> Sigrun — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d70: Ava <> Lucas — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d70: Debbie <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Lucas <> Thabo — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d70: Lucas <> Pavel — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d75: Lucas <> Sigrun — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d105: Debbie <> Petra — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d105: Debbie <> Stan — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d115: Ksenia <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Petra <> Stan — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d105: Valentin <> Debbie — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d140: Valentin <> Chloe — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d110: Chloe <> Debbie — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d105: Amina <> Debbie — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Valentin <> Ksenia — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d115: Chloe <> Ksenia — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d120: Amina <> Ksenia — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d125: Ksenia <> Stan — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d115: Werner <> Petra — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d115: Werner <> Stan — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d135: Wei <> Ksenia — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d135: Ksenia <> Lucas — maxDepth 2, final 2 (v=50), dropped 0
+  CLOSE-READ d14: Natnael about Debbie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Natnael about Debbie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Debbie about Natnael — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d19: Natnael about Debbie — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d19: Ksenia about Debbie — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Debbie about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Debbie about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Debbie about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Debbie about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Debbie about Sigrun — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d23: Pavel about Debbie — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Debbie about Sigrun — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d25: Debbie about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d25: Sigrun about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d25: Ksenia about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d26: Sigrun about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Ava about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Debbie about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d27: Debbie about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d27: Ava about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Werner about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Debbie about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d29: Ava about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Debbie about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d30: Debbie about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d31: Debbie about Ksenia — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d31: Werner about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Thabo about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Debbie about Ksenia — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d32: Sanne about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Ksenia about Debbie — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Ksenia about Debbie — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Debbie about Ksenia — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Sigrun about Debbie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Ava about Debbie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d35: Molly about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Molly about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Thabo about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Sanne about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Ksenia about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Ksenia about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Thabo about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Werner about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Ksenia about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Pavel about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Pavel about Debbie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Werner about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Molly about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Werner about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Werner about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Werner about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Werner about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Ksenia about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Werner about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Werner about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Werner about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Werner about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Sigrun about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Werner about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Ksenia about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Pavel about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Stan about Debbie — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d91: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d94: Petra about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Amina about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Valentin about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d97: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ava about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d99: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Stan about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Chloe about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Stan about Debbie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Petra about Debbie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Amina about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Chloe about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Petra about Debbie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Stan about Debbie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Petra about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Thabo about Debbie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Stan about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Chloe about Debbie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d107: Petra about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Amina about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Chloe about Debbie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Debbie about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Petra about Debbie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Amina about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Chloe about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Amina about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Stan about Ksenia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Amina about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Petra about Ksenia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Stan about Ksenia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d114: Chloe about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Petra about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Stan about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d116: Chloe about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Petra about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Stan about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d119: Petra about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Chloe about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ksenia about Petra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Petra about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Chloe about Ksenia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Stan about Ksenia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Wei about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d125: Chloe about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Stan about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Wei about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Petra about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Lucas about Ksenia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d129: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Petra about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Wei about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d130: Amina about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Stan about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Chloe about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ksenia about Chloe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Amina about Ksenia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Chloe about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Amina about Ksenia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Chloe about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Wei about Ksenia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d134: Ksenia about Chloe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Amina about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Ksenia about Chloe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Wei about Ksenia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Chloe about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Amina about Ksenia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Valentin about Chloe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Chloe about Valentin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d139: Wei about Valentin — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d139: Amina about Chloe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d140: Valentin about Chloe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Amina about Chloe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d140: Chloe about Valentin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Amina about Chloe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d141: Valentin about Chloe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Wei about Valentin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d142: Lucas about Wei — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d142: Wei about Valentin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d142: Amina about Valentin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d5: Molly about Sanne (why=grievance)
+  GRIEV-READ d9: Miguel about Debbie (why=grievance)
+  GRIEV-READ d12: Sanne about Molly (why=grievance)
+  GRIEV-READ d13: Molly about Sanne (why=grievance)
+  GRIEV-READ d19: Debbie about Natnael (why=vgrievance)
+  GRIEV-READ d22: Sanne about Molly (why=grievance)
+  KNACK d19 Sanne: "You know — Pavel found a lost knife by smell last week. By SMELL."
+  KNACK d21 Ksenia: "cuts close faster when Thabo wraps them. Don't ask me how."
+  KNACK d24 Pavel: "Molly talks to the garden. The garden listens. I've seen it."
+  KNACK d29 Ava: "Huh. Let me think about that." "Ksenia ate something last month that should've killed them. They're fine."
+  KNACK d29 Ava: "You know — Molly talks to the garden. The garden listens. I've seen it."
+  KNACK d30 Sigrun: "You want to know about that? Okay." "cuts close faster when Thabo wraps them. Don't ask me how."
+  KNACK d33 Sigrun: "Sanne talks to the garden. The garden listens. I've seen it."
+  KNACK d34 Ksenia: "Sigrun talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":2,"alien":4,"the arena":3,"sickness":2,"dehydration":1}
