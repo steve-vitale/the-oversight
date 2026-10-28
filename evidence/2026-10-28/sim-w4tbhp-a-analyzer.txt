@@ -1,0 +1,42 @@
+analysis -> evidence/2026-10-28/perseed-w4tbhp-a/analysis.json
+
+=== sim-w4tbhp-a TB-start-HP comparison ===
+  pre: fights=35 complete=35 excluded=0 refused=0 incomplete=0 recorderErrs=0 corpusOk=true
+    player below-max: 10/35 medianFrac=1 minFrac=0.46
+    monster below-max (control): 3/35 medianFrac=1 minFrac=0.9413707679603633
+    byChannel: {"player-tb-world":{"fights":31,"pBelow":9,"mBelow":2},"non-world-TB":{"fights":2,"pBelow":0,"mBelow":0},"other":{"fights":2,"pBelow":1,"mBelow":1}}
+    wall: won=3 natEver=8 natFinal=5 table=6 entered=3 wave4=5 wave5=0 medUpper=166 medConv=164 deaths=328 courtCombined=122 courtActive=8/8 seats={"lesser":3,"none":5}
+  armed: fights=28 complete=28 excluded=0 refused=0 incomplete=0 recorderErrs=0 corpusOk=true
+    player below-max: 10/28 medianFrac=1 minFrac=0.09
+    monster below-max (control): 2/28 medianFrac=1 minFrac=0.9413707679603633
+    byChannel: {"non-world-TB":{"fights":2,"pBelow":1,"mBelow":0},"player-tb-world":{"fights":25,"pBelow":9,"mBelow":1},"other":{"fights":1,"pBelow":0,"mBelow":1}}
+    wall: won=3 natEver=7 natFinal=5 table=6 entered=3 wave4=5 wave5=0 medUpper=162 medConv=154 deaths=299 courtCombined=121 courtActive=8/8 seats={"lesser":3,"none":5}
+  parity post-vs-rebaseline: EXACT
+  --- player below-max fights (POST) ---
+    POST s75101 d131 influencer [non-world-TB] player 75/100 (75.0%) monster 897/897 world null/null
+    POST s75102 d177 suburb [player-tb-world] player 78/100 (78.0%) monster 1380/1380 world 975/1300
+    POST s75103 d117 audit [player-tb-world] player 80/100 (80.0%) monster 1214/1214 world 825/1100
+    POST s75103 d129 suburb [player-tb-world] player 95/100 (95.0%) monster 1438/1438 world 975/1300
+    POST s75103 d159 algorithm [player-tb-world] player 98/100 (98.0%) monster 2374/2374 world 750/1000
+    POST s75103 d178 suburb [player-tb-world] player 77/100 (77.0%) monster 3688/3688 world 975/1300
+    POST s75106 d89 eulogy [player-tb-world] player 46/100 (46.0%) monster 999/999 world 675/900
+    POST s75106 d99 algorithm [player-tb-world] player 90/100 (90.0%) monster 1002/1002 world 719/1000
+    POST s75108 d100 reunion [player-tb-world] player 57/100 (57.0%) monster 1214/1214 world 854/1200
+    POST s75108 d110 eulogy [player-tb-world] player 9/100 (9.0%) monster 1034/1034 world 900/900
+  --- player below-max fights (PRE) ---
+    PRE s75101 d140 reunion [player-tb-world] player 67/100 (67.0%) monster 1265/1265 world 1200/1200
+    PRE s75102 d177 suburb [player-tb-world] player 78/100 (78.0%) monster 1380/1380 world 975/1300
+    PRE s75103 d117 audit [player-tb-world] player 80/100 (80.0%) monster 1214/1214 world 825/1100
+    PRE s75103 d129 suburb [player-tb-world] player 95/100 (95.0%) monster 1438/1438 world 975/1300
+    PRE s75103 d159 algorithm [player-tb-world] player 98/100 (98.0%) monster 2374/2374 world 750/1000
+    PRE s75103 d178 suburb [player-tb-world] player 77/100 (77.0%) monster 3688/3688 world 975/1300
+    PRE s75106 d89 eulogy [player-tb-world] player 46/100 (46.0%) monster 999/999 world 675/900
+    PRE s75106 d99 algorithm [player-tb-world] player 90/100 (90.0%) monster 1002/1002 world 719/1000
+    PRE s75108 d65 congregation [other] player 98/100 (98.0%) monster 1049/1049 world 1/45
+    PRE s75108 d98 eulogy [player-tb-world] player 97/100 (97.0%) monster 1065/1065 world 900/900
+  --- monster below-max fights (control, both sides) ---
+    POST s75102 d166 audit [player-tb-world] monster 1140/1211 (94.1%)
+    POST s75106 d143 audit [other] monster 1268/1298 (97.7%)
+    PRE s75102 d166 audit [player-tb-world] monster 1140/1211 (94.1%)
+    PRE s75106 d143 audit [other] monster 1268/1298 (97.7%)
+    PRE s75108 d94 eulogy [player-tb-world] monster 910/928 (98.1%)
