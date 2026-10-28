@@ -543,20 +543,26 @@ neither a re-score:
   status clean + diff HEAD empty, before any sweep ran on
   the affected state. The final commit below must be
   checked the same way before this run is called done.
-- check.js --quick: ABORTED BY THIS WORKER, with reason
-  stated, not silently skipped — a sibling run's
-  check.js --quick was observed in flight in another
-  worktree (journey2-endgame) while this suite ran, and
-  the repo rule is never concurrent jest (concurrent runs
-  have produced phantom failures). This worker killed
-  its OWN suite only; the sibling's run was not touched.
-  The suite's result would have been unreliable under
-  concurrency in any case. This arm touches no src/ (the
-  policy is deleted) and adds no existing-test files, so
-  the proofs of record are the analyzer (exit 0), the
-  detgate (PASS), the sweep corpus gates (PASS both
-  bands), and the proof test (GREEN pre-deletion) —
-  not the quick suite.
+- check.js --quick: CORRECTION to the first version of
+  this note (which said aborted — see commit history).
+  This worker DID issue a kill on its own suite after
+  observing a sibling run's check.js --quick in flight in
+  another worktree (journey2-endgame; the repo rule is
+  never concurrent jest, since concurrent runs have
+  produced phantom failures; the sibling's run was not
+  touched). The suite nevertheless printed a completion
+  summary — evidently racing natural completion — of
+  279 passed, 8 failed in 955s, the same COUNTS as
+  linger-vis reported (279/8). The tail-only output does
+  not name the 8 failures, so their identities are NOT
+  asserted here as the pre-existing set, and the
+  concurrency caveat stands: the counts match linger-vis
+  exactly, but a concurrent-jest run cannot certify the
+  failure list. This arm touches no src/ (the policy is
+  deleted) and adds no existing-test files, so the proofs
+  of record remain the analyzer (exit 0), the detgate
+  (PASS), the sweep corpus gates (PASS both bands), and
+  the proof test (GREEN pre-deletion).
 - Branch ready, pending coordinator merge; NOT pushed, NOT
   bumped, live NOT verified (coordinator/ship-loop line,
   not this arm's).
