@@ -209,7 +209,6 @@ function main() {
     }
     if (parts.length) console.log(`wall: ${parts.join(' ')} (${rows.length} seeds, ${skipped} non-row files skipped)`);
   }
-  }
   const loud = [];
   for (const m of metrics) {
     const b = baseline[m] == null ? 0 : baseline[m];
