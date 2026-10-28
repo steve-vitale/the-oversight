@@ -32823,6 +32823,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.health = v.health || {}; v.health[f.villagerId] = Math.max(0,f.hp);
       if (v.betrayalWounds && v.betrayalWounds[f.villagerId] !== undefined) delete v.betrayalWounds[f.villagerId];
     },
+    // TB WORLD-HP (sim-w4tbkill-a phase B, 2026-10-28): the primary
+    // fighter for a lifted world monster enters at the WORLD
+    // monster's current hp/maxHp, not at a fresh roll from mdef.hp.
+    // Player and villager fighters already enter at current health;
+    // the monster was the only side that entered fresh, so wall
+    // tolls and field chips never carried into the fight that was
+    // supposed to finish it. Returns null (roll as before) when
+    // there is no lifted world monster, when the alias is a
+    // bystander (id != mid), when the monster is a veteran
+    // (veteran +50% HP is canon hardening and is not baked into
+    // world HP), or when HP is non-finite. Titans are not
+    // special-cased here: a titan that is also a lifted world
+    // monster with a matching id goes through the same rule, and
+    // its tbEnd full restore is untouched by this change.
+    tbWorldHpFor(mid, worldMonster, isVeteran) {
+      if (!worldMonster || isVeteran) return null;
+      if (worldMonster.id !== mid) return null;
+      const hp = Number(worldMonster.hp), maxHp = Number(worldMonster.maxHp);
+      if (!Number.isFinite(hp) || hp <= 0 || !Number.isFinite(maxHp) || maxHp <= 0) return null;
+      return { hp: hp, maxHp: maxHp };
+    },
     startCombat(monsterId, options) {
       // NO SILENT CLOBBER (break-it combat 2026-10-09): re-entering a live
       // fight rebuilt the fighters from stale scholar.health — a free heal
@@ -33045,6 +33066,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         let spd = mdef.speed || 3;
         const vName2 = veteranVariant ? (veteranVariant === 'pack-leader' ? 'Pack-leader ' : veteranVariant === 'elder' ? 'Elder ' : 'Scarred ') : (isVeteran ? 'Veteran ' : '');
         if (isVeteran) { hp = Math.round(hp * 1.5); spd += 1; }
+        // TB WORLD-HP (sim-w4tbkill-a phase B): the primary fighter
+        // (i == 0) for a lifted world monster enters at that
+        // monster's world HP, so prior damage accumulates instead
+        // of re-rolling fresh. Packmates/crew roll as before.
+        // Note: the fighter's maxHp is set to hp below in the
+        // push, so a world-HP fighter's maxHp must be the world
+        // maxHp, not its current HP — handled by stashing the
+        // world maxHp and applying it after the push's maxHp: hp.
+        let _worldMaxHp = null;
+        // Wave-4+ gate (scope correction before the judged sweep):
+        // this arm targets wave-4 scaling only. Wave 1-3 fighters
+        // roll exactly as before, so their trajectories (and the
+        // 75101 detgate, which has no wave-4 world spawn) are
+        // untouched by this change.
+        if (i === 0 && (mdef.wave || 1) >= 4 && typeof this.tbWorldHpFor === 'function') {
+          const _wh = this.tbWorldHpFor(mid, worldMonster, isVeteran);
+          if (_wh) { hp = _wh.hp; _worldMaxHp = _wh.maxHp; }
+        }
         // PACK-LEADER: brings 1 extra packmate (applied after fighter creation)
         const extraPackmate = (veteranVariant === 'pack-leader' && i === 0);
         fighters.push({
@@ -33066,6 +33105,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // ELDER: can't be stunned — has seen it all
           elderCalm: veteranVariant === 'elder',
         });
+        if (_worldMaxHp != null) fighters[fighters.length - 1].maxHp = _worldMaxHp;
         // PACK-LEADER extra packmate: a second fighter of the same type
         if (extraPackmate) {
           const pmSpot = freeSpotNear(srcMx, srcMy, takenSpots);
