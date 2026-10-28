@@ -1540,6 +1540,36 @@
             if (hopeless) rec.everHopeless = true;
           }
         }
+        // FIRST-EXCHANGE SHOUT (shoutgate-a 2026-10-28): the round>=2
+        // gate above never fires on a fight that ends in round 1, and a
+        // round-2 death preempts it (vHp<=0 breaks before morale) — so
+        // a villager mauled in the first exchange never gets to shout
+        // even with help standing by (outdoorcrew-a: 13 of 17 crewed
+        // wave-4 meetings ended round 1, everHopeless false throughout).
+        // At round 1 ONLY, and ONLY for the shout path (never the flee
+        // path, never winning, never learn-withdrawal): if the first
+        // exchange already satisfies the hopeless formula AND already
+        // took more than half the villager's health, they call for help
+        // at once instead of waiting a round to bleed out or flee.
+        // A one-exchange trajectory is noisy, so the bar is deliberately
+        // catastrophic (losing the race AND halved) — a merely losing
+        // first exchange still waits for round 2, as before. Same log
+        // line, same single-ally join, same trust bump as the round>=2
+        // shout below; nothing that populates allyVids changes.
+        var shoutNow = false;
+        if (round === 1 && !helpCalled && allies > 0 && allyVids.length && rec.intent !== 'learn') {
+          var mlead1 = null;
+          for (var lj1 = 0; lj1 < members.length; lj1++) { if (members[lj1].hp > 0) { mlead1 = members[lj1]; break; } }
+          if (mlead1) {
+            var vDpr1 = rec.mDealt / 1, mDpr1 = rec.vTaken / 1;
+            var rtk1 = mlead1.hp / Math.max(1, vDpr1);
+            var rtd1 = vHp / Math.max(1, mDpr1);
+            shoutNow = rtd1 < rtk1 * 0.85;
+            if (shoutNow && rec.trickLog && rec.trickLog.length && vHp > vHpMax * 0.25) shoutNow = false;
+            if (shoutNow && vHp >= vHpMax * 0.5) shoutNow = false;
+            if (shoutNow) rec.everHopeless = true;
+          }
+        }
         // LEARN-VS-FIGHT (Steve 2026-10-13): the situational override. A
         // learning villager reads the first exchange — good odds → commit
         // to the kill. Not winning after the opening → withdraw with the
@@ -1556,7 +1586,7 @@
         }
         if (winning) {
           fleeAt = 0.05;
-        } else if (hopeless && !helpCalled && allies > 0 && allyVids.length && rec.intent !== 'learn') {
+        } else if ((hopeless || shoutNow) && !helpCalled && allies > 0 && allyVids.length && rec.intent !== 'learn') {
           helpCalled = true; allyIn = true;
           allyVid = allyVids.shift(); allies--;
           var _ab1 = allyBody(allyVid); allyHp = _ab1.entry; allyMax = _ab1.max; allyEntryHp = _ab1.entry;
