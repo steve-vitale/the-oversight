@@ -992,7 +992,17 @@
       var tt = tile && tile.type;
       if (tt !== 'creek' && tt !== 'wetland') return { ok: false, why: 'Need a creek or wetland under you.' };
       var s = game.state.scholar;
-      var key = game.map.px + ',' + game.map.py + ':' + s.day;
+      // DAY-ROLL-AWARE (sim-divedeep-fix-b 2026-10-28): the impl keys the
+      // once-per-tile-per-day flag on the POST-payment day, and dive costs
+      // time_min 30 -> 15 ticks, so a tap at dayTicks >= 497 rolls the day.
+      // A pre-payment-day comparison refuses a tap the impl would accept
+      // as tomorrow's dive — the same class onceaday-b fixed for
+      // challenge/posture. Predict the post-payment day the same way;
+      // null (def unreadable) falls back to the pre-payment day, which
+      // preserves baseline behaviour rather than guessing a refusal.
+      var postDay = _onceADayPostPaymentDay(game, 'water_breathing', 'dive_deep');
+      var dayKey = (postDay === null) ? s.day : postDay;
+      var key = game.map.px + ',' + game.map.py + ':' + dayKey;
       if (s.diveDayTiles && s.diveDayTiles[key]) return { ok: false, why: 'Already worked this water today.' };
       return { ok: true };
     },
