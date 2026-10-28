@@ -247,7 +247,7 @@ async function main() {
   } else if (args[0] === '--summary') {
     await summaryMode();
   } else if (args[0] === '--detgate') {
-    await quietLog(async () => { await detgateMode(); });
+    await detgateMode();
   } else {
     console.error('usage: --one armed|control <seed> | --summary | --detgate (read the header — do not probe with --help)');
     process.exit(2);
