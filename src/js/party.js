@@ -149,6 +149,12 @@
     inviteToParty(vid) {
       const v = this.partyState();
       const dname = this.displayName(vid);
+      // SELF-INVITE GUARD (journey establishment r51, 2026-10-28): the
+      // roster includes the bearer, so nothing upstream stops vid from
+      // being the bearer — and the decision path happily accepts, pushing
+      // you into your own party. You are already the one doing the
+      // inviting; refuse before any system/trust/decision check.
+      if (vid === this.villagerId) return { ok: false, msg: `That's you. You're already the one doing the inviting.` };
       if (!this.state.systemArrived || !v.partyUnlocked) {
         return { ok: false, msg: 'There\'s no formal party yet. People just... come with you, or don\'t. (The System hasn\'t gamified friendship.)' };
       }
