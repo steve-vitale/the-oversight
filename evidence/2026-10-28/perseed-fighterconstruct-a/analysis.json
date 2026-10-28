@@ -1,0 +1,2705 @@
+{
+ "label": "sim-fighterconstruct-a audit",
+ "seeds": [
+  75101,
+  75102,
+  75103,
+  75104,
+  75105,
+  75106,
+  75107,
+  75108
+ ],
+ "census": {
+  "fights": 28,
+  "fighters": 36,
+  "belowMax": 2,
+  "traced": 2,
+  "unexplained": 0,
+  "unclassified": 0,
+  "reinforcementFull": 7,
+  "incomplete": 0,
+  "constructionBelowMax": 0,
+  "byMonster": {
+   "influencer": {
+    "fights": 1,
+    "below": 0
+   },
+   "audit": {
+    "fights": 3,
+    "below": 2
+   },
+   "reunion": {
+    "fights": 10,
+    "below": 0
+   },
+   "eulogy": {
+    "fights": 7,
+    "below": 0
+   },
+   "suburb": {
+    "fights": 9,
+    "below": 0
+   },
+   "eater": {
+    "fights": 2,
+    "below": 0
+   },
+   "algorithm": {
+    "fights": 4,
+    "below": 0
+   }
+  },
+  "postJoinMismatches": 0,
+  "orphanMonsterEvents": 0
+ },
+ "starts": [
+  {
+   "seed": 75101,
+   "day": 131,
+   "fightId": "fmgpspj6p_3hgvpx",
+   "fightIdSource": "tbfight",
+   "door": "feast-draw",
+   "origin": "null-origin",
+   "channel": "non-world-TB",
+   "monster": "influencer",
+   "fighterKey": "m_0",
+   "hp": 897,
+   "maxHp": 897,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    850,
+    1050
+   ],
+   "vetRange": [
+    1275,
+    1574
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": null,
+   "worldMaxHp": null,
+   "worldDeficit": null,
+   "worldIdMatches": null,
+   "constructionHp": 897,
+   "constructionMaxHp": 897,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 166,
+   "fightId": "fmgpspixa_54orrt",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1140,
+   "maxHp": 1211,
+   "deficit": 71,
+   "belowMax": true,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 825,
+   "worldMaxHp": 1100,
+   "worldDeficit": 275,
+   "worldIdMatches": true,
+   "constructionHp": 1211,
+   "constructionMaxHp": 1211,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "v_gen_ayapunj",
+    "v_elena_petrova",
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 3,
+   "monsterIdx": 2,
+   "beforePlayer": [
+    {
+     "key": "v_gen_ayapunj",
+     "kind": "villager",
+     "speed": 3,
+     "hp": 100,
+     "maxHp": 100
+    },
+    {
+     "key": "v_elena_petrova",
+     "kind": "villager",
+     "speed": 3,
+     "hp": 100,
+     "maxHp": 100
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 2,
+     "hp": 1211,
+     "maxHp": 1211
+    }
+   ],
+   "openingSum": 71,
+   "openingResidual": 0,
+   "openingEvents": [
+    {
+     "sourceKey": "v_gen_ayapunj",
+     "sourceLabel": "Gabriela",
+     "preHp": 1211,
+     "postHp": 1163,
+     "returned": 48
+    },
+    {
+     "sourceKey": "v_elena_petrova",
+     "sourceLabel": "Elena",
+     "preHp": 1163,
+     "postHp": 1140,
+     "returned": 23
+    }
+   ],
+   "contribKinds": {
+    "villager": 2
+   },
+   "classification": "TRACED",
+   "tracedInput": "C8-opening-turns",
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 172,
+   "fightId": "fmgpspiz8_9nlc3x",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1203,
+   "maxHp": 1203,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1203,
+   "constructionMaxHp": 1203,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 172,
+   "fightId": "fmgpspize_4d64ik",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1367,
+   "maxHp": 1367,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1367,
+   "constructionMaxHp": 1367,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 172,
+   "fightId": "fmgpspizl_f5ogun",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1342,
+   "maxHp": 1342,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1342,
+   "constructionMaxHp": 1342,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 172,
+   "fightId": "fmgpspizr_adzbpn",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1362,
+   "maxHp": 1362,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1362,
+   "constructionMaxHp": 1362,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 172,
+   "fightId": "fmgpspizy_6skf50",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1329,
+   "maxHp": 1329,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1329,
+   "constructionMaxHp": 1329,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 174,
+   "fightId": "fmgpspj0f_3v8n0w",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1200,
+   "maxHp": 1200,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1200,
+   "constructionMaxHp": 1200,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "v_elena_petrova",
+    "m_0",
+    "m_1"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 2,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 174,
+   "fightId": "fmgpspj0f_3v8n0w",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_1",
+   "hp": 1345,
+   "maxHp": 1345,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 300,
+   "worldMaxHp": 1200,
+   "worldDeficit": 900,
+   "worldIdMatches": true,
+   "constructionHp": 1345,
+   "constructionMaxHp": 1345,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "v_elena_petrova",
+    "m_0",
+    "m_1"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 3,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 176,
+   "fightId": "fmgpspj0x_5jvn8p",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 974,
+   "maxHp": 974,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 675,
+   "worldMaxHp": 900,
+   "worldDeficit": 225,
+   "worldIdMatches": true,
+   "constructionHp": 974,
+   "constructionMaxHp": 974,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75102,
+   "day": 177,
+   "fightId": "fmgpspj1c_fd7kzc",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_0",
+   "hp": 1380,
+   "maxHp": 1380,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 975,
+   "worldMaxHp": 1300,
+   "worldDeficit": 325,
+   "worldIdMatches": true,
+   "constructionHp": 1380,
+   "constructionMaxHp": 1380,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 117,
+   "fightId": "fmgpspivw_dr4rt",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1214,
+   "maxHp": 1214,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 825,
+   "worldMaxHp": 1100,
+   "worldDeficit": 275,
+   "worldIdMatches": true,
+   "constructionHp": 1214,
+   "constructionMaxHp": 1214,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "v_gen_hhpsohv",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 2,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 118,
+   "fightId": "fmgpspixz_gh6ehg",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eater",
+   "fighterKey": "m_0",
+   "hp": 1060,
+   "maxHp": 1060,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    950,
+    1150
+   ],
+   "vetRange": [
+    1425,
+    1724
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 712,
+   "worldMaxHp": 950,
+   "worldDeficit": 238,
+   "worldIdMatches": true,
+   "constructionHp": 1060,
+   "constructionMaxHp": 1060,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "m_0",
+    "p",
+    "v_gen_hhpsohv"
+   ],
+   "playerIdx": 1,
+   "monsterIdx": 0,
+   "beforePlayer": [
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 4,
+     "hp": 1060,
+     "maxHp": 1060
+    }
+   ],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 126,
+   "fightId": "fmgpspizn_5bfqrk",
+   "fightIdSource": "tbfight",
+   "door": "feast-draw",
+   "origin": "null-origin",
+   "channel": "non-world-TB",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 1095,
+   "maxHp": 1095,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": null,
+   "worldMaxHp": null,
+   "worldDeficit": null,
+   "worldIdMatches": null,
+   "constructionHp": 1095,
+   "constructionMaxHp": 1095,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "v_gen_hhpsohv",
+    "v_ella_johnson",
+    "v_dale_hoffman",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 4,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 129,
+   "fightId": "fmgpspj15_3cixy5",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_0",
+   "hp": 1438,
+   "maxHp": 1438,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 975,
+   "worldMaxHp": 1300,
+   "worldDeficit": 325,
+   "worldIdMatches": true,
+   "constructionHp": 1438,
+   "constructionMaxHp": 1438,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 159,
+   "fightId": "fmgpspj9l_21pv2g",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "algorithm",
+   "fighterKey": "m_0",
+   "hp": 2374,
+   "maxHp": 2374,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "vetRange": [
+    1500,
+    1799
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 750,
+   "worldMaxHp": 1000,
+   "worldDeficit": 250,
+   "worldIdMatches": true,
+   "constructionHp": 1187,
+   "constructionMaxHp": 1187,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 159,
+   "fightId": "fmgpspj9l_21pv2g",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "algorithm",
+   "fighterKey": "m_crew_1",
+   "hp": 2232,
+   "maxHp": 2232,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "vetRange": [
+    1500,
+    1799
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 750,
+   "worldMaxHp": 1000,
+   "worldDeficit": 250,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 159,
+   "fightId": "fmgpspj9l_21pv2g",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "algorithm",
+   "fighterKey": "m_crew_2",
+   "hp": 2376,
+   "maxHp": 2376,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "vetRange": [
+    1500,
+    1799
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 750,
+   "worldMaxHp": 1000,
+   "worldDeficit": 250,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 160,
+   "fightId": "fmgpspja8_5h3k3s",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_0",
+   "hp": 2638,
+   "maxHp": 2638,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 954,
+   "worldMaxHp": 1300,
+   "worldDeficit": 346,
+   "worldIdMatches": true,
+   "constructionHp": 1319,
+   "constructionMaxHp": 1319,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 160,
+   "fightId": "fmgpspja8_5h3k3s",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_crew_1",
+   "hp": 2934,
+   "maxHp": 2934,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 954,
+   "worldMaxHp": 1300,
+   "worldDeficit": 346,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 160,
+   "fightId": "fmgpspja8_5h3k3s",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_crew_2",
+   "hp": 2882,
+   "maxHp": 2882,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 954,
+   "worldMaxHp": 1300,
+   "worldDeficit": 346,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 178,
+   "fightId": "fmgpspjh1_7rgkqv",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_0",
+   "hp": 3688,
+   "maxHp": 3688,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 975,
+   "worldMaxHp": 1300,
+   "worldDeficit": 325,
+   "worldIdMatches": true,
+   "constructionHp": 1475,
+   "constructionMaxHp": 1475,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 178,
+   "fightId": "fmgpspjh1_7rgkqv",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_crew_1",
+   "hp": 3648,
+   "maxHp": 3648,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 975,
+   "worldMaxHp": 1300,
+   "worldDeficit": 325,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 178,
+   "fightId": "fmgpspjh1_7rgkqv",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_crew_2",
+   "hp": 3265,
+   "maxHp": 3265,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 975,
+   "worldMaxHp": 1300,
+   "worldDeficit": 325,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75103,
+   "day": 178,
+   "fightId": "fmgpspjh1_7rgkqv",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "suburb",
+   "fighterKey": "m_crew_3",
+   "hp": 3358,
+   "maxHp": 3358,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "vetRange": [
+    1950,
+    2249
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 975,
+   "worldMaxHp": 1300,
+   "worldDeficit": 325,
+   "worldIdMatches": true,
+   "constructionHp": null,
+   "constructionMaxHp": null,
+   "constructionDeficit": null,
+   "constructionMissing": true,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": -1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full-reinforcement",
+   "tracedInput": "post-startCombat-injection-hp-eq-maxHp",
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 89,
+   "fightId": "fmgpspi9h_b3jegf",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 999,
+   "maxHp": 999,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 675,
+   "worldMaxHp": 900,
+   "worldDeficit": 225,
+   "worldIdMatches": true,
+   "constructionHp": 999,
+   "constructionMaxHp": 999,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 90,
+   "fightId": "fmgpspia0_cwnivc",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1208,
+   "maxHp": 1208,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 900,
+   "worldMaxHp": 1200,
+   "worldDeficit": 300,
+   "worldIdMatches": true,
+   "constructionHp": 1208,
+   "constructionMaxHp": 1208,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 91,
+   "fightId": "fmgpspiah_4wd0x1",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1325,
+   "maxHp": 1325,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 900,
+   "worldMaxHp": 1200,
+   "worldDeficit": 300,
+   "worldIdMatches": true,
+   "constructionHp": 1325,
+   "constructionMaxHp": 1325,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 1,
+   "monsterIdx": 0,
+   "beforePlayer": [
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 3,
+     "hp": 1325,
+     "maxHp": 1325
+    }
+   ],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 99,
+   "fightId": "fmgpspido_24r3u9",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "algorithm",
+   "fighterKey": "m_0",
+   "hp": 1002,
+   "maxHp": 1002,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "vetRange": [
+    1500,
+    1799
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 719,
+   "worldMaxHp": 1000,
+   "worldDeficit": 281,
+   "worldIdMatches": true,
+   "constructionHp": 1002,
+   "constructionMaxHp": 1002,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 1,
+   "monsterIdx": 0,
+   "beforePlayer": [
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 3,
+     "hp": 1002,
+     "maxHp": 1002
+    }
+   ],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 129,
+   "fightId": "fmgpspipy_49dzce",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 914,
+   "maxHp": 914,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 675,
+   "worldMaxHp": 900,
+   "worldDeficit": 225,
+   "worldIdMatches": true,
+   "constructionHp": 914,
+   "constructionMaxHp": 914,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 130,
+   "fightId": "fmgpspiqs_4jsyll",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 1072,
+   "maxHp": 1072,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 675,
+   "worldMaxHp": 900,
+   "worldDeficit": 225,
+   "worldIdMatches": true,
+   "constructionHp": 1072,
+   "constructionMaxHp": 1072,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 143,
+   "fightId": "fmgpspivc_f2yh24",
+   "fightIdSource": "tbfight",
+   "door": "feast-draw",
+   "origin": "world-origin-mismatch",
+   "channel": "other",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1268,
+   "maxHp": 1298,
+   "deficit": 30,
+   "belowMax": true,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 1,
+   "worldMaxHp": 70,
+   "worldDeficit": 69,
+   "worldIdMatches": false,
+   "constructionHp": 1298,
+   "constructionMaxHp": 1298,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "v_visjoin_115",
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 2,
+   "monsterIdx": 1,
+   "beforePlayer": [
+    {
+     "key": "v_visjoin_115",
+     "kind": "villager",
+     "speed": 4,
+     "hp": 98,
+     "maxHp": 100
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 2,
+     "hp": 1298,
+     "maxHp": 1298
+    }
+   ],
+   "openingSum": 30,
+   "openingResidual": 0,
+   "openingEvents": [
+    {
+     "sourceKey": "v_visjoin_115",
+     "sourceLabel": "Dihya",
+     "preHp": 1298,
+     "postHp": 1268,
+     "returned": 30
+    }
+   ],
+   "contribKinds": {
+    "villager": 1
+   },
+   "classification": "TRACED",
+   "tracedInput": "C8-opening-turns",
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 145,
+   "fightId": "fmgpspix9_4k8plk",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 1158,
+   "maxHp": 1158,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 675,
+   "worldMaxHp": 900,
+   "worldDeficit": 225,
+   "worldIdMatches": true,
+   "constructionHp": 926,
+   "constructionMaxHp": 926,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 146,
+   "fightId": "fmgpspiy0_ex4r38",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eater",
+   "fighterKey": "m_0",
+   "hp": 1281,
+   "maxHp": 1281,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    950,
+    1150
+   ],
+   "vetRange": [
+    1425,
+    1724
+   ],
+   "maxHpInDefRange": false,
+   "worldHp": 702,
+   "worldMaxHp": 950,
+   "worldDeficit": 248,
+   "worldIdMatches": true,
+   "constructionHp": 1025,
+   "constructionMaxHp": 1025,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 1,
+   "monsterIdx": 0,
+   "beforePlayer": [
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 4,
+     "hp": 1025,
+     "maxHp": 1025
+    }
+   ],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75108,
+   "day": 100,
+   "fightId": "fmgpspitj_9ysr68",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "reunion",
+   "fighterKey": "m_0",
+   "hp": 1214,
+   "maxHp": 1214,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "vetRange": [
+    1800,
+    2099
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 854,
+   "worldMaxHp": 1200,
+   "worldDeficit": 346,
+   "worldIdMatches": true,
+   "constructionHp": 1214,
+   "constructionMaxHp": 1214,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  },
+  {
+   "seed": 75108,
+   "day": 110,
+   "fightId": "fmgpspiw6_dd6fy6",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "eulogy",
+   "fighterKey": "m_0",
+   "hp": 1034,
+   "maxHp": 1034,
+   "deficit": 0,
+   "belowMax": false,
+   "defRange": [
+    900,
+    1100
+   ],
+   "vetRange": [
+    1350,
+    1649
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 900,
+   "worldMaxHp": 900,
+   "worldDeficit": 0,
+   "worldIdMatches": true,
+   "constructionHp": 1034,
+   "constructionMaxHp": 1034,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "p",
+    "m_0"
+   ],
+   "playerIdx": 0,
+   "monsterIdx": 1,
+   "beforePlayer": [],
+   "openingSum": 0,
+   "openingResidual": 0,
+   "openingEvents": [],
+   "contribKinds": {},
+   "classification": "full",
+   "tracedInput": null,
+   "incomplete": false
+  }
+ ],
+ "incompleteStarts": [],
+ "belowMaxRows": [
+  {
+   "seed": 75102,
+   "day": 166,
+   "fightId": "fmgpspixa_54orrt",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1140,
+   "maxHp": 1211,
+   "deficit": 71,
+   "belowMax": true,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 825,
+   "worldMaxHp": 1100,
+   "worldDeficit": 275,
+   "worldIdMatches": true,
+   "constructionHp": 1211,
+   "constructionMaxHp": 1211,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "v_gen_ayapunj",
+    "v_elena_petrova",
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 3,
+   "monsterIdx": 2,
+   "beforePlayer": [
+    {
+     "key": "v_gen_ayapunj",
+     "kind": "villager",
+     "speed": 3,
+     "hp": 100,
+     "maxHp": 100
+    },
+    {
+     "key": "v_elena_petrova",
+     "kind": "villager",
+     "speed": 3,
+     "hp": 100,
+     "maxHp": 100
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 2,
+     "hp": 1211,
+     "maxHp": 1211
+    }
+   ],
+   "openingSum": 71,
+   "openingResidual": 0,
+   "openingEvents": [
+    {
+     "sourceKey": "v_gen_ayapunj",
+     "sourceLabel": "Gabriela",
+     "preHp": 1211,
+     "postHp": 1163,
+     "returned": 48
+    },
+    {
+     "sourceKey": "v_elena_petrova",
+     "sourceLabel": "Elena",
+     "preHp": 1163,
+     "postHp": 1140,
+     "returned": 23
+    }
+   ],
+   "contribKinds": {
+    "villager": 2
+   },
+   "classification": "TRACED",
+   "tracedInput": "C8-opening-turns",
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 143,
+   "fightId": "fmgpspivc_f2yh24",
+   "fightIdSource": "tbfight",
+   "door": "feast-draw",
+   "origin": "world-origin-mismatch",
+   "channel": "other",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1268,
+   "maxHp": 1298,
+   "deficit": 30,
+   "belowMax": true,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 1,
+   "worldMaxHp": 70,
+   "worldDeficit": 69,
+   "worldIdMatches": false,
+   "constructionHp": 1298,
+   "constructionMaxHp": 1298,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "v_visjoin_115",
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 2,
+   "monsterIdx": 1,
+   "beforePlayer": [
+    {
+     "key": "v_visjoin_115",
+     "kind": "villager",
+     "speed": 4,
+     "hp": 98,
+     "maxHp": 100
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 2,
+     "hp": 1298,
+     "maxHp": 1298
+    }
+   ],
+   "openingSum": 30,
+   "openingResidual": 0,
+   "openingEvents": [
+    {
+     "sourceKey": "v_visjoin_115",
+     "sourceLabel": "Dihya",
+     "preHp": 1298,
+     "postHp": 1268,
+     "returned": 30
+    }
+   ],
+   "contribKinds": {
+    "villager": 1
+   },
+   "classification": "TRACED",
+   "tracedInput": "C8-opening-turns",
+   "incomplete": false
+  }
+ ],
+ "tracedRows": [
+  {
+   "seed": 75102,
+   "day": 166,
+   "fightId": "fmgpspixa_54orrt",
+   "fightIdSource": "tbfight",
+   "door": "world-bump",
+   "origin": "world-origin",
+   "channel": "player-tb-world",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1140,
+   "maxHp": 1211,
+   "deficit": 71,
+   "belowMax": true,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 825,
+   "worldMaxHp": 1100,
+   "worldDeficit": 275,
+   "worldIdMatches": true,
+   "constructionHp": 1211,
+   "constructionMaxHp": 1211,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "v_gen_ayapunj",
+    "v_elena_petrova",
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 3,
+   "monsterIdx": 2,
+   "beforePlayer": [
+    {
+     "key": "v_gen_ayapunj",
+     "kind": "villager",
+     "speed": 3,
+     "hp": 100,
+     "maxHp": 100
+    },
+    {
+     "key": "v_elena_petrova",
+     "kind": "villager",
+     "speed": 3,
+     "hp": 100,
+     "maxHp": 100
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 2,
+     "hp": 1211,
+     "maxHp": 1211
+    }
+   ],
+   "openingSum": 71,
+   "openingResidual": 0,
+   "openingEvents": [
+    {
+     "sourceKey": "v_gen_ayapunj",
+     "sourceLabel": "Gabriela",
+     "preHp": 1211,
+     "postHp": 1163,
+     "returned": 48
+    },
+    {
+     "sourceKey": "v_elena_petrova",
+     "sourceLabel": "Elena",
+     "preHp": 1163,
+     "postHp": 1140,
+     "returned": 23
+    }
+   ],
+   "contribKinds": {
+    "villager": 2
+   },
+   "classification": "TRACED",
+   "tracedInput": "C8-opening-turns",
+   "incomplete": false
+  },
+  {
+   "seed": 75106,
+   "day": 143,
+   "fightId": "fmgpspivc_f2yh24",
+   "fightIdSource": "tbfight",
+   "door": "feast-draw",
+   "origin": "world-origin-mismatch",
+   "channel": "other",
+   "monster": "audit",
+   "fighterKey": "m_0",
+   "hp": 1268,
+   "maxHp": 1298,
+   "deficit": 30,
+   "belowMax": true,
+   "defRange": [
+    1100,
+    1300
+   ],
+   "vetRange": [
+    1650,
+    1949
+   ],
+   "maxHpInDefRange": true,
+   "worldHp": 1,
+   "worldMaxHp": 70,
+   "worldDeficit": 69,
+   "worldIdMatches": false,
+   "constructionHp": 1298,
+   "constructionMaxHp": 1298,
+   "constructionDeficit": 0,
+   "constructionMissing": false,
+   "order": [
+    "v_visjoin_115",
+    "m_0",
+    "p"
+   ],
+   "playerIdx": 2,
+   "monsterIdx": 1,
+   "beforePlayer": [
+    {
+     "key": "v_visjoin_115",
+     "kind": "villager",
+     "speed": 4,
+     "hp": 98,
+     "maxHp": 100
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "speed": 2,
+     "hp": 1298,
+     "maxHp": 1298
+    }
+   ],
+   "openingSum": 30,
+   "openingResidual": 0,
+   "openingEvents": [
+    {
+     "sourceKey": "v_visjoin_115",
+     "sourceLabel": "Dihya",
+     "preHp": 1298,
+     "postHp": 1268,
+     "returned": 30
+    }
+   ],
+   "contribKinds": {
+    "villager": 1
+   },
+   "classification": "TRACED",
+   "tracedInput": "C8-opening-turns",
+   "incomplete": false
+  }
+ ],
+ "unexplainedRows": [],
+ "unclassifiedRows": [],
+ "perSeed": [
+  {
+   "seed": 75101,
+   "days": 132,
+   "starts": 1,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 7
+  },
+  {
+   "seed": 75102,
+   "days": 177,
+   "starts": 10,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 8
+  },
+  {
+   "seed": 75103,
+   "days": 180,
+   "starts": 14,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 8
+  },
+  {
+   "seed": 75104,
+   "days": 90,
+   "starts": 0,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 24
+  },
+  {
+   "seed": 75105,
+   "days": 162,
+   "starts": 0,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 27
+  },
+  {
+   "seed": 75106,
+   "days": 146,
+   "starts": 9,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 23
+  },
+  {
+   "seed": 75107,
+   "days": 180,
+   "starts": 0,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 12
+  },
+  {
+   "seed": 75108,
+   "days": 114,
+   "starts": 2,
+   "excluded": 0,
+   "refused": 0,
+   "incomplete": 0,
+   "postJoinMismatches": 0,
+   "orphanMonsterEvents": 0,
+   "courtshipCombined": 12
+  }
+ ],
+ "parity": [
+  {
+   "seed": 75101,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 132,
+    "defW4": {},
+    "nwkW4": 1,
+    "spawnSeqs": []
+   },
+   "pri": {
+    "days": 132,
+    "defW4": {},
+    "nwkW4": 1,
+    "spawnSeqs": []
+   }
+  },
+  {
+   "seed": 75102,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 177,
+    "defW4": {},
+    "nwkW4": 9,
+    "spawnSeqs": [
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28
+    ]
+   },
+   "pri": {
+    "days": 177,
+    "defW4": {},
+    "nwkW4": 9,
+    "spawnSeqs": [
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28
+    ]
+   }
+  },
+  {
+   "seed": 75103,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 180,
+    "defW4": {
+     "field": 6,
+     "raid": 1
+    },
+    "nwkW4": 7,
+    "spawnSeqs": [
+     35,
+     39,
+     41,
+     43,
+     44,
+     45,
+     48,
+     50,
+     52,
+     53,
+     56,
+     59,
+     60,
+     63,
+     64
+    ]
+   },
+   "pri": {
+    "days": 180,
+    "defW4": {
+     "field": 6,
+     "raid": 1
+    },
+    "nwkW4": 7,
+    "spawnSeqs": [
+     35,
+     39,
+     41,
+     43,
+     44,
+     45,
+     48,
+     50,
+     52,
+     53,
+     56,
+     59,
+     60,
+     63,
+     64
+    ]
+   }
+  },
+  {
+   "seed": 75104,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 90,
+    "defW4": {},
+    "nwkW4": 0,
+    "spawnSeqs": []
+   },
+   "pri": {
+    "days": 90,
+    "defW4": {},
+    "nwkW4": 0,
+    "spawnSeqs": []
+   }
+  },
+  {
+   "seed": 75105,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 162,
+    "defW4": {},
+    "nwkW4": 0,
+    "spawnSeqs": []
+   },
+   "pri": {
+    "days": 162,
+    "defW4": {},
+    "nwkW4": 0,
+    "spawnSeqs": []
+   }
+  },
+  {
+   "seed": 75106,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 146,
+    "defW4": {
+     "field": 15,
+     "raid": 1
+    },
+    "nwkW4": 9,
+    "spawnSeqs": [
+     42,
+     43,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     55,
+     56,
+     57,
+     58,
+     59
+    ]
+   },
+   "pri": {
+    "days": 146,
+    "defW4": {
+     "field": 15,
+     "raid": 1
+    },
+    "nwkW4": 9,
+    "spawnSeqs": [
+     42,
+     43,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     55,
+     56,
+     57,
+     58,
+     59
+    ]
+   }
+  },
+  {
+   "seed": 75107,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 180,
+    "defW4": {},
+    "nwkW4": 0,
+    "spawnSeqs": []
+   },
+   "pri": {
+    "days": 180,
+    "defW4": {},
+    "nwkW4": 0,
+    "spawnSeqs": []
+   }
+  },
+  {
+   "seed": 75108,
+   "pass": true,
+   "checks": {
+    "days": true,
+    "gameDays": true,
+    "won": true,
+    "waveReach": true,
+    "nationalEver": true,
+    "nationalFinal": true,
+    "table": true,
+    "entered": true,
+    "deathTotal": true,
+    "courtship": true,
+    "defW4ByContext": true,
+    "nwkW4Starts": true,
+    "spawnSeqSet": true
+   },
+   "cur": {
+    "days": 114,
+    "defW4": {
+     "raid": 2,
+     "field": 14
+    },
+    "nwkW4": 2,
+    "spawnSeqs": [
+     25,
+     26,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     39,
+     41,
+     42,
+     43
+    ]
+   },
+   "pri": {
+    "days": 114,
+    "defW4": {
+     "raid": 2,
+     "field": 14
+    },
+    "nwkW4": 2,
+    "spawnSeqs": [
+     25,
+     26,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     39,
+     41,
+     42,
+     43
+    ]
+   }
+  }
+ ],
+ "corpusOk": true,
+ "parityPass": true,
+ "substrateOk": true,
+ "courtship": {
+  "combined": 121,
+  "seedsActive": 8
+ },
+ "wall": {
+  "75101": {
+   "days": 132,
+   "won": 1,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 1,
+   "entered": 1,
+   "deathTotal": 34
+  },
+  "75102": {
+   "days": 177,
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 0,
+   "entered": 0,
+   "deathTotal": 42
+  },
+  "75103": {
+   "days": 180,
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 0,
+   "table": 1,
+   "entered": 0,
+   "deathTotal": 50
+  },
+  "75104": {
+   "days": 90,
+   "won": 1,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 1,
+   "entered": 1,
+   "deathTotal": 24
+  },
+  "75105": {
+   "days": 162,
+   "won": 1,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 1,
+   "entered": 1,
+   "deathTotal": 36
+  },
+  "75106": {
+   "days": 146,
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 0,
+   "table": 1,
+   "entered": 0,
+   "deathTotal": 40
+  },
+  "75107": {
+   "days": 180,
+   "won": 0,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 0,
+   "entered": 0,
+   "deathTotal": 31
+  },
+  "75108": {
+   "days": 114,
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 0,
+   "nationalFinal": 0,
+   "table": 1,
+   "entered": 0,
+   "deathTotal": 42
+  }
+ },
+ "generated": "2026-10-28T05:51:35.675Z"
+}
