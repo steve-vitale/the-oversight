@@ -82,8 +82,10 @@ const KNOWN_DIRECT = new Set(['npc-adult-pantry', 'npc-child-pantry', 'alien-rai
 
 (function main() {
   // 1. Corpus validity.
-  const files = fs.existsSync(CORPUS) ? fs.readdirSync(CORPUS).filter(f => f.startsWith('raidcapture-b-') && f.endsWith('.json')).sort() : [];
+  const allFiles = fs.existsSync(CORPUS) ? fs.readdirSync(CORPUS).filter(f => f.startsWith('raidcapture-b-') && f.endsWith('.json')).sort() : [];
+  const files = allFiles.filter(f => PILOT_SEEDS.some(s => f === `raidcapture-b-competent-nofeast-s${s}.json`));
   check('corpus has 3 pilot per-seed files', files.length === 3, files.length + ' files');
+  check('corpus has 10 raidcapture files (pilot 9738/9735 + confirm 9820-9827, 9825 shared)', allFiles.length === 10, allFiles.length + ' raidcapture files');
   check('true-control pre-fold reference file present', fs.existsSync(path.join(CORPUS, 'truecontrol-pre-fold-s9738.json')));
   let corpusOk = true, wrappedOk = true;
   for (const f of files) {
@@ -159,7 +161,7 @@ const KNOWN_DIRECT = new Set(['npc-adult-pantry', 'npc-child-pantry', 'alien-rai
     }
   }
   check('pre-existing instrument never wrapped _removePantryKcal (frozen stockdoors corpora)', !oldWrappedHasRemove);
-  for (const f of files) {
+  for (const f of allFiles) {
     const j = JSON.parse(fs.readFileSync(path.join(CORPUS, f), 'utf8'));
     for (const r of (j.directRecords || [])) {
       if (!KNOWN_DIRECT.has(r.path) && !/^[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*$/.test(r.path)) badPaths.push(r.path);

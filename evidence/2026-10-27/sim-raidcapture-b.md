@@ -289,9 +289,16 @@ investigation item.
 - Prereg committed BEFORE any judged sweep (49ec16f03, including
   the legs, horizons, seeds, and the RAIDCAPTURE det-gate design).
   The judged pilot and confirm sweeps ran on the folded code.
-- Proof scripts/test-raidcapture-b.js: see the run output (run
-  after commit; its det-gate re-runs seed 9820 on/off). Existing
-  proofs scripts/test-stockdoors-b.js and
+- Proof scripts/test-raidcapture-b.js: run after commit; its det-gate
+  re-runs seed 9820 on/off. CORRECTION (follow-up commit, same run):
+  the test as first committed miscounted corpus files (it counted
+  the confirm files as pilot files, then miscounted the shared 9825
+  file) — two test-only fixes, no sweep/analyzer/capture change, and
+  the proof is GREEN on the fixed test (all legs pass, det-gate
+  byte-identical, true-control take identity exact). The evidence
+  verdicts above are unaffected: they were computed by the analyzer,
+  not the test's file counter.
+- Existing proofs scripts/test-stockdoors-b.js and
   scripts/test-driedhunt-b.js: run after commit, results reported
   in the run's final report (their headline gates touch the same
   stale baseline and are reported, not waived, if they fail).
