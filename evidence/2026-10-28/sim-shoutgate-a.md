@@ -63,22 +63,76 @@ the design record is the fieldFights.js PARTY-UP comment (Steve
 near, they shout instead of scattering"), which this change
 preserves and only accelerates.
 
-## Perception-law note (Steve 2026-10-28 12:48 CDT, landed mid-run)
+## Canon — perception law (Steve 2026-10-28 12:48 CDT)
 
-NO MAGIC LISTS / PERCEPTION LAW: villagers know who is around
-only through their own senses; no global roster or "who is
-around" list fed into a decision; the field-feed fix stays
-reverted; list-feed arms stop. This arm's relationship, stated
-in the prereg before measuring: the gate change adds NO list,
-NO roster read, NO new feed — it only changes WHEN the
-existing shout fires, and the shout is itself a perception
-channel (hearing). The measurement substrate is scaffolding
-only, deleted at closeout, never proposed to land. Whether a
-landed gate fix is compatible with the law as a whole (the
-ally list still comes from the engine's crew snapshot
-upstream) is a coordinator/Steve call — moot for this arm
-since the change is reverted on NO-GO, but recorded for any
-future gate arm.
+RULING (recorded here as canon, per the coordinator update;
+first noted in the prereg when it landed mid-run): NO MAGIC
+LISTS / PERCEPTION LAW. Villagers are real people with eyes —
+they know who's around only through their own senses: seeing
+someone in the same place, hearing a shout, following someone
+they've seen. No global roster or "who is around" list fed
+into a decision. The field-feed fix was that pattern and stays
+reverted; list-feed arms stop. Party formation must be solved
+through perception, not lists. This fits his standing "if you
+don't know, it doesn't show."
+
+COMPLIANCE OF THIS ARM (verified at closeout + re-verified
+for this canon amendment, 2026-10-28):
+- The field-feed change was NOT revived: the reverted game
+  change touched ONLY the fieldFights.js morale block (one
+  round-1 branch + one branch condition, 31 insertions, 1
+  deletion — commit 8d4b45af) and its proof test. It added no
+  feed, no roster read, no presence function.
+- No presentFightAllies-style feed was reintroduced or built
+  on: zero presentFightAllies references in src/js in the
+  final tree, and zero src/js diff vs the branch base
+  (3f3275a0d) — the branch ends evidence + instruments only.
+- The shout itself is legitimate perception under the ruling:
+  a shout that is actually heard is hearing, not a list. The
+  gate fix is feed-agnostic — it only changes WHEN the
+  existing shout fires, given allies the engine already
+  names (aidFight's at-the-door joins, raid defense, player
+  party, or any future perception-based formation). Its proof
+  drove fieldFight directly with explicit opts — no feed
+  involved. Investigating/fixing the hopeless-shout branch
+  stays in scope on this reading, and this arm stayed inside
+  it.
+- The measurement substrate is disclosed, not hidden: the
+  pilot/control bands rode on the engine's PRE-EXISTING crew
+  snapshot (_outdoorCrew → wild PARTY-UP), populated for
+  measurement by the outdoorcrew policy. That snapshot IS
+  list-mediated as implemented — it names everyone assigned
+  an outdoor task, trust-sorted and capped, with no proximity
+  check — so a villager on the far side of the map can be
+  named as an ally. The policy was scaffolding only, deleted
+  at closeout, never proposed to land. But the disclosure
+  cuts both ways (see below).
+
+PERCEPTION-BLOCKED ASSESSMENT (coordinator update's NO-GO
+rule, applied to this arm):
+- The game-change verdict is NO-GO on its primary already
+  (0 non-retreating parties/kills), so no landing is at stake
+  here and the perception question does not change the
+  verdict.
+- For any FUTURE arm that wants to land this gate fix: the
+  fix itself is not perception-blocked, but its effect in
+  WILD meetings currently depends on a list-mediated ally
+  supply (the base-code crew snapshot). Until party formation
+  is solved through perception — allies the leader actually
+  saw, heard, or walked out with, on the tile, not a snapshot
+  roster — a landed gate fix would be a dead letter in the
+  wild: the shout would be legitimate, but there would be no
+  legitimate hearer standing by. That ally-discovery half is
+  perception-blocked and must be solved first; the gate fix
+  (in git history at 8d4b45af) can then be re-applied as
+  substrate behind a perception-based formation arm. A future
+  arm must NOT shortcut this by reviving a list feed and
+  calling it perception.
+- The prereg's earlier wording ("moot for this arm since the
+  change is reverted") is superseded by this section: the
+  question is not moot, it is answered — gate legitimate,
+  wild ally supply blocked, landing requires a perception
+  formation first.
 
 ## Proof (on the armed code, before revert)
 
