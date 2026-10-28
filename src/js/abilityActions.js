@@ -728,6 +728,33 @@
   // known no-op. Same class as round-1's unwired turn-eaters. Prechecks run
   // BEFORE payment in useAbility, and drive the button's disabled state via
   // _actionAvailable. Each receives (game, target); returns {ok, why}.
+  // ONCE-A-DAY DAY-ROLL PREDICTOR (sim-onceaday-b 2026-10-27): the
+  // challenge/posture impls check their flag against the POST-payment
+  // day, and payment for these social actions is a time cost
+  // (time_min -> ticks via COST_HANDLERS.time_min: max(1, round(min/2))).
+  // tickAction rolls the day iff dayTicks + ticks >= TICKS_PER_DAY, and
+  // no-ops entirely under a fight or a nested tick (and never rolls when
+  // the game is over). Mirror that exactly and return the day the impl
+  // will see. Pure reads only. Returns null when the action def cannot
+  // be read at all — the caller then passes through rather than
+  // guessing a refusal (a guessed refusal could regress a success;
+  // a pass-through preserves baseline behaviour).
+  function _onceADayPostPaymentDay(game, abilityId, actionId) {
+    var s = game.state && game.state.scholar;
+    if (!s || typeof s.day !== 'number') return null;
+    var ticks = 0;
+    try {
+      var def = game.abilityActionDef(abilityId, actionId);
+      if (!def || !def.action) return null;
+      var cost = def.action.cost || {};
+      if (typeof cost.time_min === 'number' && isFinite(cost.time_min))
+        ticks = Math.max(1, Math.round(cost.time_min / 2));
+    } catch (e) { return null; }
+    if (game.tbfight || game._ticking || game.over) return s.day;
+    var perDay = (game.TIME && game.TIME.TICKS_PER_DAY) || 512;
+    if (ticks > 0 && ((s.dayTicks || 0) + ticks) >= perDay) return s.day + 1;
+    return s.day;
+  }
   var ABILITY_ACTION_PRECHECKS = {
     'game_sense.read_stance': function (game) {
       var fid = game.tbfight ? game.tbfight.id : null;
@@ -974,12 +1001,15 @@
     // above. Each mirrors its impl's WORLD-STATE condition exactly
     // (audience resolution, kill record) — code, not narration: no
     // liveness check, no target-type validation for trophy mark.
-    // Deliberately NOT prechecked: the once-a-day flags. The impl
+    // ONCE-A-DAY (sim-onceaday-b 2026-10-27): the once-a-day flags ARE
+    // now prechecked, but DAY-ROLL-AWARE, not flag===day. The impl
     // checks them against the POST-payment day, so a boundary tap
     // (payment rolls the day) is that new day's dare/posture and
-    // succeeds — a pre-payment flag===day check would refuse a tap
-    // the impl accepts. Once-a-day stays a post-payment refusal
-    // (pinned by test-refusalprecheck-b.js R13/R14). The why strings
+    // succeeds — a naive pre-payment flag===day check would refuse a
+    // tap the impl accepts. Each entry below refuses only when the
+    // flag equals _onceADayPostPaymentDay's predicted post-payment
+    // day. Non-boundary taps (payment cannot roll the day) now refuse
+    // before payment: no ticks, no kcal tier burn. The why strings
     // reuse the impls' refusal sentences so the narrated refusal is
     // unchanged; useAbility appends ' (action name)' as usual.
     'war_cry.challenge': function (game, target) {
@@ -995,6 +1025,9 @@
       }
       var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
       if (!onRoster) return { ok: false, why: 'A challenge needs someone to challenge — and they have to be here, alive, and one of yours. Talk to them first.' };
+      var postDay = _onceADayPostPaymentDay(game, 'war_cry', 'challenge');
+      if (postDay !== null && game.state.scholar.challengeDay === postDay)
+        return { ok: false, why: 'You already threw down a challenge today. The village is still talking about it — another one just looks desperate.' };
       return { ok: true };
     },
     'intimidating_presence.end_it_before': function (game, target) {
@@ -1010,6 +1043,9 @@
       }
       var onRoster = vid && (v.roster || []).indexOf(vid) >= 0 && vid !== game.villagerId;
       if (!onRoster) return { ok: false, why: 'Posturing needs an audience — someone whose dispute you are ending. Talk to them first.' };
+      var postDayP = _onceADayPostPaymentDay(game, 'intimidating_presence', 'end_it_before');
+      if (postDayP !== null && game.state.scholar.postureDay === postDayP)
+        return { ok: false, why: 'You already threw your weight around today. Doing it twice makes you the bully, not the legend.' };
       return { ok: true };
     },
     'trophy_room.mark': function (game, target) {
