@@ -26,6 +26,7 @@ twice in one day (2026-10-09).
 | docs/TIME-ECONOMY.md | ticks, day-parts, pacing | action costs, durations |
 | docs/KIN.md | the Taking: half of adults taken at the Scattering, kids in stasis, return reserved for good table path | the taking, missing relatives, stasis kids, table kid-return |
 | docs/FANS.md | the audience gets faces: named alien fan personas with arcs | fans, audience, care packages, fan clubs, table testimony |
+| docs/ABILITY-REFUSALS.md | ability-action refusals (timing, button honesty, once-a-day day-roll) and pantry ledger accounting (closing, doors, span dedup, raid loot) | any ability refusal, button why, once-a-day gate, pantry number, ledger instrument |
 
 ## Standing rules that keep getting violated (read twice)
 
@@ -61,3 +62,9 @@ twice in one day (2026-10-09).
   taken at the Scattering day zero, not after week one; taken half's kids in
   stasis; the System never confirms the taken dead or alive; kids' return
   reserved for the good galactic table path.
+- 2026-10-28: docs/ABILITY-REFUSALS.md — refusal + pantry-ledger canon
+  (sim-refusalcanon-b), grounded only in the 2026-10-27/28 refusal and
+  ledger evidence arms plus landed code; closes tracker blank 5
+  (no canon doc covered ability-action refusals or pantry ledger
+  accounting). Still-open items live in the doc's §8, including the
+  pantry-lift conversation line (Steve-call).
