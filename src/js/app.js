@@ -1585,7 +1585,14 @@
       acts.map(a => {
         const _def = _abDef(a.id);
         const _path = _def.path || '';
-        return `<button class="ab-btn" data-ab="${a.id}" data-path="${_path}" ${a.available || a.choiceAvailable ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}</button>`;
+        // BAR-WHY (2026-10-28): a disabled button says WHY it cannot be used
+        // (its existing why reason, verbatim) — the reason used to exist only
+        // as internal state, narrated on a refusing tap. Enabled buttons never
+        // carry a why: a choiceAvailable button counts as enabled here too.
+        const _disabled = !(a.available || a.choiceAvailable);
+        const _why = (_disabled && a.why) ? `<span class="ctx-why"> — ${esc(a.why)}</span>` : '';
+        const _title = esc((a.desc || a.name) + (_disabled && a.why ? ` — ${a.why}` : ''));
+        return `<button class="ab-btn" data-ab="${a.id}" data-path="${_path}" ${_disabled ? 'disabled' : ''} title="${_title}">⚡ ${esc(a.name)}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}${_why}</button>`;
       }).join('') +
       `</div>`;
   }

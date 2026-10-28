@@ -624,12 +624,15 @@
         var bpUses = (s.bloodPriceDayPart === bpKey) ? (s.bloodPriceUses || 0) : 0;
         var bpCapped = bpUses >= 2;
         var bpWoundRefused = (s.bloodPriceWound || 0) >= 50;
+        var bpAvail = !bpCapped && !bpWoundRefused && (s.health || 0) > bc;
         out.push({
           abilityId: 'blood_magic', actionId: null, id: 'blood_magic',
           target: 'self', name: 'Blood Price',
           desc: 'Spend ' + bc + ' HP to gain 500 kcal. Also reduces maximum HP until you recover 10 per night. Twice each part of the day; unavailable at 50 wound damage.',
-          available: !bpCapped && !bpWoundRefused && (s.health || 0) > bc,
-          why: bpCapped ? 'Used twice this day part.' : (bpWoundRefused ? 'Recover wound damage overnight before using again.' : 'Need at least ' + (bc + 1) + ' HP.')
+          available: bpAvail,
+          // BAR-WHY: an enabled row carries no refusal sentence; the reason
+          // appears only when the button is actually disabled.
+          why: bpAvail ? null : (bpCapped ? 'Used twice this day part.' : (bpWoundRefused ? 'Recover wound damage overnight before using again.' : 'Need at least ' + (bc + 1) + ' HP.'))
         });
       }
       if (hasAb('time_skip')) {
@@ -640,7 +643,7 @@
           abilityId: 'time_skip', actionId: null, id: 'time_skip',
           target: 'none', name: 'Time Skip',
           desc: 'Skip to the next day part instantly. Time passes — food spoils forward, calories burn, the world moves without you. 1/day.',
-          available: !tsUsed, why: 'Used today.'
+          available: !tsUsed, why: tsUsed ? 'Used today.' : null
         });
       }
       if (hasAb('dowsing')) out.push({
@@ -652,7 +655,7 @@
         abilityId: 'echo_location', actionId: null, id: 'echo_location',
         target: 'none', name: 'Echo-locate',
         desc: 'Clap once: sense the 3x3 around you. 1/day.',
-        available: s.echoDay !== s.day, why: 'Used today.', combat: true
+        available: s.echoDay !== s.day, why: s.echoDay === s.day ? 'Used today.' : null, combat: true
       });
       if (hasAb('field_medicine')) {
         var used = s.fieldMedDayPart === (s.day + '-' + this.dayPart);
@@ -665,32 +668,35 @@
           }
         }
         if ((s.bloodPriceWound || 0) > 0) medicineDesc += ' Cannot restore maximum HP lost to Blood Price; it recovers 10 per night.';
+        var fmAvail = !used && (s.health || 0) < this.maxHealth();
         out.push({
           abilityId: 'field_medicine', actionId: null, id: 'field_medicine',
           target: 'self', name: 'Field Medicine',
           desc: medicineDesc,
-          available: !used && (s.health || 0) < this.maxHealth(),
-          why: used ? 'Used this day part.' : 'Already at full health.', combat: true
+          available: fmAvail,
+          why: fmAvail ? null : (used ? 'Used this day part.' : 'Already at full health.'), combat: true
         });
       }
       if (hasAb('herbal_remedy')) {
         var sick = (s.diseases || []).length > 0;
+        var hrAvail = sick && s.herbalDay !== s.day;
         out.push({
           abilityId: 'herbal_remedy', actionId: null, id: 'herbal_remedy',
           target: 'self', name: 'Herbal Remedy',
           desc: 'Treat illness: cure some diseases and reduce symptoms of others. Some require a diagnosis first. Once per day.',
-          available: sick && s.herbalDay !== s.day,
-          why: !sick ? 'Not sick.' : 'Used today.'
+          available: hrAvail,
+          why: hrAvail ? null : (!sick ? 'Not sick.' : 'Used today.')
         });
       }
       if (hasAb('purify')) {
         var poisoned = (s.poisons || []).length > 0;
+        var pfAvail = poisoned && s.purifyDay !== s.day;
         out.push({
           abilityId: 'purify', actionId: null, id: 'purify',
           target: 'self', name: 'Purify',
           desc: 'Use magic to remove poison. Once per day.',
-          available: poisoned && s.purifyDay !== s.day,
-          why: !poisoned ? 'Not poisoned.' : 'Used today.'
+          available: pfAvail,
+          why: pfAvail ? null : (!poisoned ? 'Not poisoned.' : 'Used today.')
         });
       }
       if (hasAb('compost_king')) {
@@ -699,7 +705,7 @@
           abilityId: 'compost_king', actionId: null, id: 'compost_king',
           target: 'none', name: 'Bury Food',
           desc: 'Bury food as fertilizer: +10% forage on this tile.',
-          available: !!food, why: 'No food to bury.'
+          available: !!food, why: food ? null : 'No food to bury.'
         });
       }
       // RED HUNGER (Steve 2026-10-09): pipeline shortcut, not a free lunch.
