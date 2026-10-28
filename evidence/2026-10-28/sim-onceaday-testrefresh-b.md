@@ -130,6 +130,14 @@ until after that commit landed — the prereg's ordering rule holds.
   only that file. The commit itself was verified correct first
   (`git show --stat`, HEAD blob hash == worktree hash-object).
   The same check will be run after the final commit below.
+- Second clobber occurrence, on the final commit itself
+  (02006f941): the main index showed a bogus staged deletion of
+  this evidence file plus an MM state on the test file, while both
+  worktree files were byte-identical to their HEAD blobs
+  (hash-object matched HEAD blobs 8f024d0b / 17f3381b). Repaired
+  the same way (update-index --cacheinfo for both paths) and
+  verified `git status` empty and `git diff HEAD` empty before
+  handoff. The commit was correct throughout; only the index lied.
 
 ## Sense note (what a refused repeat tap now costs the player)
 
