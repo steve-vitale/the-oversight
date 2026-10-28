@@ -35,7 +35,13 @@ const path = require('path');
 const REPO = path.join(__dirname, '..');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { tableseatNowait } = require('./policies/tableseat-nowait');
-const { tableseatLingerfinish } = require('./policies/lingerfinish');
+// KILLED-ARM NOTE (sim-lingerfinish-a verdict NO-GO): the lingerfinish policy
+// file was DELETED before commit per the binding prereg. The driver keeps
+// running its BASELINE mode cleanly; ARMED mode now fails fast with a clear
+// error instead of a require crash. Detgate already passed before deletion
+// and is recorded in the evidence file.
+let tableseatLingerfinish = null;
+try { tableseatLingerfinish = require('./policies/lingerfinish').tableseatLingerfinish; } catch (e) { /* killed arm: armed mode unavailable */ }
 const { copyKillLog } = require('./policies/vetkill-diag');
 const {
   newStore: newRaftStore, installRaftdraftDiag, withRaftdraftDiag,
@@ -190,6 +196,7 @@ async function runOne(pid, seed, days, evidDir, storeHolder) {
   if (pid === 'armed') process.env.LINGERFINISH = '1'; else delete process.env.LINGERFINISH;
   raftStore = newRaftStore(); spawnStore = newSpawnStore(); oldStore = newOldStore(); w5Store = newW5Store(); defStore = newDefStore(); nwkStore = newNwkStore(); tbdmgStore = newTbdmgStore(); w4dmgStore = newW4dmgStore();
   if (storeHolder) { storeHolder.raftStore = raftStore; storeHolder.spawnStore = spawnStore; storeHolder.oldStore = oldStore; storeHolder.w5Store = w5Store; storeHolder.defStore = defStore; storeHolder.nwkStore = nwkStore; storeHolder.tbdmgStore = tbdmgStore; storeHolder.w4dmgStore = w4dmgStore; }
+  if (pid === 'armed' && !tableseatLingerfinish) throw new Error('lingerfinish policy deleted (killed arm NO-GO); armed mode unavailable');
   const policyBase = pid === 'armed' ? tableseatLingerfinish : tableseatNowait;
   const base = withW4damageDiag(withTbdmgDiag(withNonworldkillDiag(withW5birthsDiag(withDefwoundDiag(withOldcoreDiag(withSpawnsrcDiag(withRaftdraftDiag(policyBase, 'raftdraft-diag', 'lingerfinish-band + raid draft census', raftStore), 'spawnsrc-diag', 'lingerfinish-band + spawn-source census', spawnStore), 'oldcore-diag', 'lingerfinish-band + old-core turnover census', oldStore), 'defwound-diag', 'lingerfinish-band + defender wound census', defStore), 'w5births-diag', 'lingerfinish-band + wave-5 birth-gate census', w5Store), 'nonworldkill-diag', 'lingerfinish-band + TB initiation census', nwkStore), 'tbdmg-rebase-diag', 'lingerfinish-band + TB/field damage census', tbdmgStore), 'w4damage-diag', 'lingerfinish-band + inter-fight damage tracer', w4dmgStore);
   const { Game } = await loadGame({ seed, mode: 'lingerfinish-a-' + pid, fullTelemetry: false });
@@ -424,6 +431,7 @@ async function detgateMode() {
   // WRAPPED-OFF: recorder stack over lingerfinish policy, ALL guards off.
   delete process.env.RAFTDRAFT; delete process.env.SPAWNSRC; delete process.env.OLDCORE; delete process.env.W5BIRTHS; delete process.env.DEFWOUND; delete process.env.NONWORLDKILL; delete process.env.TBDMG; delete process.env.W4DMG; delete process.env.LINGERFINISH;
   process.env.LEANLINKRESCUE = '1'; process.env.TABLESEATNOWAIT = '1';
+  if (!tableseatLingerfinish) throw new Error('lingerfinish policy deleted (killed arm NO-GO); detgate unavailable post-deletion (it passed pre-deletion, see evidence)');
   const raftStore = newRaftStore(), spawnStore = newSpawnStore(), oldStore = newOldStore(), w5Store = newW5Store(), defStore = newDefStore(), nwkStore = newNwkStore(), tbdmgStore = newTbdmgStore(), w4dmgStore = newW4dmgStore();
   const wrapped = withW4damageDiag(withTbdmgDiag(withNonworldkillDiag(withW5birthsDiag(withDefwoundDiag(withOldcoreDiag(withSpawnsrcDiag(withRaftdraftDiag(tableseatLingerfinish, 'raftdraft-diag', 'lingerfinish-band + raid draft census', raftStore), 'spawnsrc-diag', 'lingerfinish-band + spawn-source census', spawnStore), 'oldcore-diag', 'lingerfinish-band + old-core turnover census', oldStore), 'defwound-diag', 'lingerfinish-band + defender wound census', defStore), 'w5births-diag', 'lingerfinish-band + wave-5 birth-gate census', w5Store), 'nonworldkill-diag', 'lingerfinish-band + TB initiation census', nwkStore), 'tbdmg-rebase-diag', 'lingerfinish-band + TB/field damage census', tbdmgStore), 'w4damage-diag', 'lingerfinish-band + inter-fight damage tracer', w4dmgStore);
   const { Game } = await loadGame({ seed, mode: 'lingerfinish-a-detgate', fullTelemetry: false });
@@ -456,5 +464,5 @@ async function main() {
   console.error('usage: --one <pid> <seed> | --summary | --detgate');
   process.exit(2);
 }
-if (require.main === module) main().catch(e => { console.error('W4DAMAGE SWEEP FAILED:', (e && e.stack) || e); process.exit(1); });
+if (require.main === module) main().catch(e => { console.error('LINGERFINISH SWEEP FAILED:', (e && e.stack) || e); process.exit(1); });
 module.exports = { runOne, CONTROL, SEEDS };
