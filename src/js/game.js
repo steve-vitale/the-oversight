@@ -43904,29 +43904,39 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
 
-    // ARENA-LABEL (sim-arenalabel-b 2026-10-28): the death cause for a
+    // ARENA-LABEL (sim-arenalabel-b 2026-10-28) + ARENA-FALLBACK
+    // (sim-arenafallback-b 2026-10-28): the death cause for a
     // tbEnd('lost') loss, by fight origin — label-only, no mechanics.
     // A contest-arena fight still has state.arenaContest live at tbEnd
     // time (_contestArena sets it before startCombat; the tbEnd
     // finally-hook clears it only AFTER the loss branch runs), so it
-    // keeps 'the arena'. A proven wild fight — at least one monster
-    // fighter, no hostile (human/alien) fighter, and none of the
-    // betrayal / table-trial / coalition-arena flags — reads
-    // 'the wild' (ledger.js's own wild fallback word). Every other
-    // origin falls back to 'the arena' unchanged: betrayal,
-    // table-trial, titan coalition-arena, and alien-hostile losses
-    // are NOT silently relabeled by this arm (documented limit).
+    // keeps 'the arena'. Each former fallback origin now names itself:
+    // betrayal -> 'betrayal', table trial -> 'the table trial',
+    // titan coalition arena -> 'the coalition arena'. A proven wild
+    // fight — at least one monster fighter, no hostile (human/alien)
+    // fighter, and none of the flags above — reads 'the wild'
+    // (ledger.js's own wild fallback word). An alien-hostile fight
+    // (kind:'hostile' fighter with alienPid, no flag above) reads
+    // 'a stranger', NOT 'an alien': pre-reveal the fighter is named
+    // 'Stranger' (alienPlayers.js apBuildFighter), and the cause must
+    // not leak a truth the player has not learned ("if you don't know,
+    // it doesn't show"). Betrayal-hostile fights are caught by the
+    // betrayal branch first, so this branch is alien-only in practice.
+    // Everything else still falls back to 'the arena' unchanged.
     // All death records (registerDeath, fallen, lineage, telemetry,
     // death line) derive from this one argument, so they agree.
     tbFightDeathCause(f) {
       try {
         if (this.state && this.state.arenaContest) return 'the arena';
         const fight = f || this.tbfight || {};
-        if (fight.betrayal || fight.tableTrial || fight.coalitionArena) return 'the arena';
+        if (fight.betrayal) return 'betrayal';
+        if (fight.tableTrial) return 'the table trial';
+        if (fight.coalitionArena) return 'the coalition arena';
         const fighters = fight.fighters || [];
         const hasMonster = fighters.some(x => x && x.kind === 'monster');
         const hasHostile = fighters.some(x => x && x.kind === 'hostile');
         if (hasMonster && !hasHostile) return 'the wild';
+        if (fighters.some(x => x && x.kind === 'hostile' && x.alienPid)) return 'a stranger';
       } catch (e) {}
       return 'the arena';
     },

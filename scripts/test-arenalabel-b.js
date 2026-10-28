@@ -6,10 +6,13 @@
 // with fabricated fight objects (no full fight needed):
 //   L1 arenaContest present -> 'the arena' (unchanged)
 //   L2 proven wild (monster fighter, no hostile, no flags) -> 'the wild'
-//   L3 betrayal fight -> 'the arena' (conservative unchanged fallback)
-//   L4 tableTrial fight -> 'the arena' (unchanged fallback)
-//   L5 coalitionArena fight -> 'the arena' (unchanged fallback)
-//   L6 hostile-only fight (alien/betrayal human) -> 'the arena' (unchanged)
+//   L3 betrayal fight -> 'betrayal' (SUPERSEDED by sim-arenafallback-b
+//     2026-10-28: fallback origins now name themselves; see
+//     scripts/test-arenafallback-b.js for the full origin set)
+//   L4 tableTrial fight -> 'the table trial' (superseded, as L3)
+//   L5 coalitionArena fight -> 'the coalition arena' (superseded, as L3)
+//   L6 hostile-only fight (alien human) -> 'a stranger' (superseded, as L3;
+//     knowledge-gated: pre-reveal the fighter is 'Stranger', never 'an alien')
 // Legs L7–L8 are harness integrations through the REAL tbEnd:
 //   L7 real wild fight forced to 'lost' -> playerDeath 'the wild',
 //      and registerDeath / fallen / telemetry / lineage / death
@@ -50,11 +53,12 @@ function wildFight() {
   // L2: proven wild -> 'the wild'
   ok('L2 proven wild monster fight -> the wild', Game.tbFightDeathCause(wildFight()) === 'the wild');
 
-  // L3–L6: conservative fallbacks stay 'the arena'
-  ok('L3 betrayal fight -> the arena (unchanged)', Game.tbFightDeathCause({ betrayal: true, fighters: wildFight().fighters }) === 'the arena');
-  ok('L4 tableTrial fight -> the arena (unchanged)', Game.tbFightDeathCause({ tableTrial: true, fighters: wildFight().fighters }) === 'the arena');
-  ok('L5 coalitionArena fight -> the arena (unchanged)', Game.tbFightDeathCause({ coalitionArena: {}, fighters: wildFight().fighters }) === 'the arena');
-  ok('L6 hostile-only fight -> the arena (unchanged)', Game.tbFightDeathCause({ fighters: [{ key: 'p', kind: 'player' }, { key: 'h_0', kind: 'hostile', alienPid: 'x' }] }) === 'the arena');
+  // L3–L6: SUPERSEDED by sim-arenafallback-b — fallback origins now
+  // name themselves (label-only change, design change on purpose).
+  ok('L3 betrayal fight -> betrayal (arenafallback-b)', Game.tbFightDeathCause({ betrayal: true, fighters: wildFight().fighters }) === 'betrayal');
+  ok('L4 tableTrial fight -> the table trial (arenafallback-b)', Game.tbFightDeathCause({ tableTrial: true, fighters: wildFight().fighters }) === 'the table trial');
+  ok('L5 coalitionArena fight -> the coalition arena (arenafallback-b)', Game.tbFightDeathCause({ coalitionArena: {}, fighters: wildFight().fighters }) === 'the coalition arena');
+  ok('L6 alien-hostile fight -> a stranger (arenafallback-b)', Game.tbFightDeathCause({ fighters: [{ key: 'p', kind: 'player' }, { key: 'h_0', kind: 'hostile', alienPid: 'x' }] }) === 'a stranger');
   ok('L6b no-monster fight -> the arena (unchanged)', Game.tbFightDeathCause({ fighters: [{ key: 'p', kind: 'player' }] }) === 'the arena');
 
   // Harness legs: capture playerDeath + say lines through the real path.
