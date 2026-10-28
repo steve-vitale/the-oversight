@@ -1,0 +1,22 @@
+=== seed 85003 day 120 — conversation with Thabo (thabo_maseko) ===
+occupation=taxi driver temperament=dry trust=90 dead=false
+want: ask_favor (stage 2)
+picker: control
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Did you hear? You won Riddle Me This on the cameras. People are still talking about it."
+YOU: [dlg:more] "Tell me more."
+THEM: "Something's off with Hassan. I mentioned it to the others and they went quiet, which tells you everything."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "I’m listening."
+THEM: "Alfredo headed out to find someone."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [dlg:more] "I’m listening."
+THEM: "Alright — I should get back to it."
+YOU: (leave)
