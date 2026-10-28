@@ -16060,7 +16060,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (Math.random() < 0.5) {
             this.say('You palm the food cleanly. No one sees.');
           } else {
-            v.trust[vid] = Math.max(0, (v.trust[vid] || 15) - 20);
+            // CAUGHT-LIFT FIX (sim-caughtlift-fix-b 2026-10-28): same
+            // booking as the ability lift — the old direct write never
+            // fired tele('trust') and never called observe(). Route
+            // through bumpTrust with a reason (50 -> 30 exactly; unset
+            // still floors at 0, see abilityActions.js note) and let
+            // witnesses read it via observe. Narration line unchanged.
+            try { this.bumpTrust(vid, -20, 'caught stealing from the pantry'); } catch (e) {}
+            try { this.observe('caught_you_stealing'); } catch (e) {}
             this.say('Caught red-handed! They saw you steal. Trust -20.');
           }
         } else {
@@ -17024,6 +17031,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // THEFT: hands in someone's pack. The village hates thieves more
         // than cowards — trust is the currency and you counterfeited it.
         theft: { honest: -25, generous: -15, brave: -3, competent: 0 },
+        // CAUGHT STEALING (sim-caughtlift-fix-b 2026-10-28): the pantry
+        // lift/take caught branches call observe('caught_you_stealing'),
+        // but this table had no entry, so observe() returned before the
+        // witness loop, gossip seeding, and rep move — a full no-op.
+        // Same dims as 'theft': same act, read by witnesses. Rep only,
+        // never trust directly; the player's own -20 comes from
+        // bumpTrust in the calling branch.
+        caught_you_stealing: { honest: -25, generous: -15, brave: -3, competent: 0 },
         // INTIMIDATION: "your food, now." Some read it as strength; most
         // read it as the thing it is. The victim's fear is the real tell.
         intimidation: { honest: -15, generous: -8, brave: 3, competent: 0 },

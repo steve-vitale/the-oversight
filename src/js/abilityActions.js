@@ -1760,8 +1760,15 @@
       var caught = Math.random() < 0.5;
       if (caught) {
         var vid = s.villagerId;
-        v.trust = v.trust || {};
-        v.trust[vid] = Math.max(0, (v.trust[vid] || 15) - 20);
+        // CAUGHT-LIFT FIX (sim-caughtlift-fix-b 2026-10-28): the -20 used
+        // to be written directly onto v.trust, bypassing bumpTrust, so no
+        // tele('trust') event, reason, or milestone check ever fired, and
+        // the observe() call below was a no-op (no table entry). Route
+        // through bumpTrust: losses land whole, so 50 -> 30 exactly, and
+        // an unset villager still floors at 0 (bumpTrust default 10 vs
+        // the old || 15: max(0, 10-20) == max(0, 15-20) == 0 — no reachable
+        // value changes). Narration line unchanged, verbatim.
+        try { game.bumpTrust(vid, -20, 'caught stealing from the pantry'); } catch (e) {}
         try { game.observe('caught_you_stealing'); } catch (e) {}
         game.say('A hand closes on your wrist. "Really?" -20 trust. The pantry remembers. (Light Fingers — caught.)');
       } else {
