@@ -1,0 +1,37 @@
+# sim-perceptform-a sense log — EXCERPTS from the live replay run (NON-MEASURED)
+
+Run: SEED=75101 DAYS=75 FROM_DAY=65, scripts/test-perceptform-a-sense.js,
+armed code (stamp + router wiring) + earlycrew substrate. Narration
+replays never enter the census. The d69 tap reproduces the corpus's
+d69 kill exactly (same seed, same fight); the d74 tap shows the
+rule's negative working in the wild.
+
+--- outing narration hits (excerpt) ---
+  [d65] 📋 Oliver — 🌿 Forage. Oliver nods eagerly. They'll report back by next part.
+  [d65] Oliver heads out to forage. "Out for a forage. If I'm late, start without me."
+  [d66] 📋 Oliver — 🌿 Forage. Oliver nods eagerly. They'll report back by next part.
+  [d66] 📋 Emma — 🌿 Forage. Emma nods eagerly. They'll report back by next part.
+  [d66] 🌿 Oliver returns with foraged food: +390 kcal to the pantry. 1 area stripped bare the near wilds.
+  [d66] 🌿 Emma returns with foraged food: +611 kcal to the pantry.
+  [d66] 🌿 Oliver returns with foraged food: +371 kcal to the pantry. 3 areas stripped bare the near wilds.
+  [d66] 🌿 Emma returns with foraged food: +377 kcal to the pantry. Emma also learned to recognize a medium tree with glossy oval leaves and round orange fruit like small apples — village knowledge grows.
+  [d68] 📋 Oliver — 🌿 Forage. Oliver nods eagerly. They'll report back by next part.
+  [d68] 📋 Emma — 🌿 Forage. Emma nods eagerly. They'll report back by next part.
+
+--- fieldFight taps in window (excerpt) ---
+  [d67] leader=app_mgpspikx432 monster=giant_mosquito crew=["emma_larsen","desmond_clarke"] stampPartners=null allyFromStart=false allies=0 outcome=mFlee rounds=2 calledHelp=false allyVid=null
+  [d69] leader=oliver_moore monster=alien_tick crew=["emma_larsen"] stampPartners=["emma_larsen"] allyFromStart=true allies=1 outcome=vKill rounds=2 calledHelp=true allyVid=emma_larsen
+  [d69] leader=desmond_clarke monster=mirrormoth crew=["oliver_moore","emma_larsen"] stampPartners=null allyFromStart=false allies=2 outcome=mFlee rounds=0 calledHelp=false allyVid=null
+  [d74] leader=oliver_moore monster=spool crew=["vasyl_shevchenko","gen_vx3kzuu"] stampPartners=null allyFromStart=false allies=2 outcome=vFlee rounds=5 calledHelp=true allyVid=vasyl_shevchenko
+  [d74] leader=gen_vx3kzuu monster=spool crew=["vasyl_shevchenko"] stampPartners=["vasyl_shevchenko"] allyFromStart=false allies=1 outcome=vFlee rounds=5 calledHelp=true allyVid=vasyl_shevchenko
+  [d74] leader=farid_ahmed monster=spool crew=["vasyl_shevchenko","gen_vx3kzuu"] stampPartners=null allyFromStart=false allies=2 outcome=vFlee rounds=6 calledHelp=false allyVid=null
+  [d74] leader=oliver_moore monster=spool crew=["vasyl_shevchenko","gen_vx3kzuu"] stampPartners=null allyFromStart=false allies=2 outcome=vDie rounds=6 calledHelp=true allyVid=vasyl_shevchenko
+
+Reading: the d69 from-start kill is the rule working (stamp partner on
+the tile joins from round 1, 2-round kill). The d74 gen_vx3kzuu tap is
+the rule refusing honestly (stamp partner exists but is not on the
+monster tile, so no from-start join; the partner later joins via the
+shout). Outing narration stays singular ("Oliver heads out", "Emma
+returns") — no joint-outing line. The from-start log line itself is
+aid-flavored ("already at the door") for a field fight; see the
+evidence file's sense note.
