@@ -1152,14 +1152,25 @@
       var leashed = !!(o && o.tightened); // danger-tightened: short leash, no meander
       var ox = nx, oy = ny; // pre-step position (for the tightness guard)
       if (nx !== tx || ny !== ty) {
-        if (!leashed && R() < 0.35) {
-          // meander: a step somewhere adjacent
+        if (!returning && !leashed && R() < 0.35) {
+          // meander: a step somewhere adjacent (outbound only — a walker
+          // heading home does not wander, and a clamped meander step from
+          // a beyond position would snap them to the rim: a teleport).
           var dx = Math.floor(R() * 3) - 1, dy = Math.floor(R() * 3) - 1;
           if (dx || dy) { nx = clampN(nx + dx); ny = clampN(ny + dy); }
         } else {
-          // pursue: one step toward the target
-          nx = clampN(nx + Math.sign(tx - nx));
-          ny = clampN(ny + Math.sign(ty - ny));
+          // pursue: one step toward the target. The RETURN walk is
+          // UNCLAMPED (fixall-map slice 2): a villager beyond the edge
+          // steps home through beyond coordinates, retracing ground they
+          // already stand on. Outbound pursuit stays clamped — no errand,
+          // expedition, or meander ever leaves the board through here.
+          if (returning) {
+            nx = nx + Math.sign(tx - nx);
+            ny = ny + Math.sign(ty - ny);
+          } else {
+            nx = clampN(nx + Math.sign(tx - nx));
+            ny = clampN(ny + Math.sign(ty - ny));
+          }
         }
       } else if (!returning && !leashed && o && o.partsLeft > 1 && R() < 0.5) {
         // AT THE SITE, clock still running: work the area instead of standing
@@ -1177,7 +1188,10 @@
       if (!returning && o && o.tightness != null) {
         if (this.objDist(nx, ny, hx, hy) > o.tightness) { nx = ox; ny = oy; }
       }
-      if (nx !== ox || ny !== oy) this.npcSetNode(rid, nx, ny);
+      // allowBeyond ONLY on the return walk (see npcSetNode): the step
+      // above is already clamped for every outbound walker, so the flag
+      // changes nothing for them and unblocks only the walk home.
+      if (nx !== ox || ny !== oy) this.npcSetNode(rid, nx, ny, returning);
       // the walk costs: hunger up, energy down (npcNeeds is the engine's ledger)
       try {
         var nn = this.npcNeeds(rid);

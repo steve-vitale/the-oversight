@@ -16503,10 +16503,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // npcSetNode: move an NPC to a different world node. Their grid position
     // is cleared — it'll be assigned when someone (you) is on that node.
-    npcSetNode(vid, nx, ny) {
+    // allowBeyond (fixall-map slice 2): opt-in ONLY for a villager's
+    // RETURN walk (objAwayStep's returning branch). Every existing caller
+    // keeps the 0..8 clamp — departures, expeditions, and meandering never
+    // step past the edge through this function. A returning villager steps
+    // through beyond coordinates because they retrace ground they already
+    // stand on; nothing else may place a villager beyond the board.
+    npcSetNode(vid, nx, ny, allowBeyond) {
       const v = this.state.village;
       v.nodePos = v.nodePos || {};
-      nx = Math.max(0, Math.min(8, nx)); ny = Math.max(0, Math.min(8, ny)); // 9x9 world (2026-10-07)
+      if (!allowBeyond) { nx = Math.max(0, Math.min(8, nx)); ny = Math.max(0, Math.min(8, ny)); } // 9x9 world (2026-10-07)
       v.nodePos[vid] = { nx, ny };
       if (v.positions) delete v.positions[vid];
     },
