@@ -657,8 +657,38 @@
         try { this.recordWaveKill(mdef && mdef.id, vid, 'aid-crisis', this.trickSummary ? this.trickSummary(rec) : null); } catch (e2) {}
       }
       if (crisis && rec && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
-        this.say('The teeth break. The door holds — with ' + (present.length ? present.map(function (q) { return q.leader; }).join(' and ') + ' standing in Haven\'s dirt' : 'nobody\'s help but Haven\'s own') + '.');
-        this.resolveAidCrisis('fought');
+        // LINGERERS FIRST (journey crisis r59): the tick and the sortie
+        // only call the door quiet when no living lingerer holds the
+        // treeline — killing or driving off ONE beast while others
+        // still gorge is not the door holding. A fled lingerer counts
+        // as a threat: it did not leave the siege (it keeps lingering
+        // and is re-pinned at dawn; only the sortie clears lingering
+        // on a drive-off). A killed beast is NOT counted even though
+        // its world hp is still pre-fight: fieldFight writes wounds
+        // back onto m.hp only when the monster lives (fieldFights.js),
+        // and the caller removes the corpse only AFTER aidFight
+        // returns — so the corpse is excluded here by identity, not
+        // by hp. The mid-fight guard mirrors commsTick.
+        var threat = false, threatN = 0;
+        try {
+          var lings = this.lingeringRaiders ? this.lingeringRaiders() : [];
+          for (var li = 0; li < lings.length; li++) {
+            if (!lings[li] || (lings[li].hp || 0) <= 0) continue;
+            if (rec.outcome === 'vKill' && lings[li] === m) continue;
+            threat = true; threatN++;
+          }
+          if (!threat) {
+            var tf = this.tbfight;
+            if (tf && !tf.over && tf.worldOrigin && tf.worldOrigin.lingering) threat = true;
+          }
+        } catch (e) {}
+        if (threat) {
+          var holdWord = threatN === 1 ? ' still holds' : ' still hold';
+          this.say('One down — but ' + (threatN ? threatN + holdWord : 'teeth still hold') + ' the treeline. The gorge goes on.');
+        } else {
+          this.say('The teeth break. The door holds — with ' + (present.length ? present.map(function (q) { return q.leader; }).join(' and ') + ' standing in Haven\'s dirt' : 'nobody\'s help but Haven\'s own') + '.');
+          this.resolveAidCrisis('fought');
+        }
       }
       return rec;
     },
