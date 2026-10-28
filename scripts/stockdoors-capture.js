@@ -57,6 +57,29 @@
 // A path with zero calls on the band is reported as zero, not as a
 // claim.
 //
+// FOLDED DOOR (sim-raidcapture-b, 2026-10-27): Game._removePantryKcal
+// (hierarchy.js ~867 — the pantry take used by payTribute, tendLink,
+// linkTick arrears, accord gifts/sweeteners, betrayal and comms takes,
+// lingererSortie rations, and villageAgencyDaily unanswered-raid takes
+// at 800 kcal). sim-driedhunt-b proved this was the ONE pantry-removal
+// method no capture wrapped, so raid loot was invisible to every
+// ledger. It is now a directRecord path ('remove-pantry-kcal') in
+// this instrument, reusing the snapshot-diff machinery below plus the
+// driedhunt caller-stack capture (caller function + full frames +
+// asked + returned amount). scripts/driedhunt-capture.js is now a thin
+// reuse adapter over the shared installer exported here — one wrapper,
+// never two: the wrapper holds a subscriber list, so the stockdoors
+// install and a driedhunt install in the same process each receive
+// every take, while the GAME method is wrapped exactly once. The two
+// record views (directRecords vs driedhunt takes) are the SAME events
+// viewed twice — a ledger must count one view, never sum both.
+//
+// Disjointness of the folded door: _removePantryKcal mutates the pantry
+// inline (sort + whole-unit decrements + splice) and calls NO other
+// wrapped method, and no previously wrapped method calls it or is it,
+// so no kcal is recorded by both the folded wrapper and any
+// pre-existing instrument. The proof asserts the method sets disjoint.
+//
 // Per direct record: {seq, day, path, vid, villager, items:
 //   [{name, kcalEach, units, kcal, spoilDay, granaryDays, foodState}],
 //   totalKcal, retTaken (event-take only), retMismatch (event-take only)}.
@@ -111,6 +134,98 @@ function stripItem(s) {
   const o = {};
   for (const k of Object.keys(s)) if (k !== '_ref') o[k] = s[k];
   return o;
+}
+
+// Caller-stack capture (from driedhunt-capture.js, folded here so the
+// wrapper logic lives in exactly one place). Frames are read-only
+// diagnostics: no state write, no RNG use. The caller is the first
+// frame outside this instrument's own files.
+function callerFrames() {
+  try {
+    const st = new Error().stack || '';
+    return st.split('\n').slice(1, 10).map(s => s.trim());
+  } catch (e) { return []; }
+}
+
+function callerOf(frames) {
+  for (const ln of frames) {
+    if (/stockdoors-capture|driedhunt-capture/.test(ln)) continue;
+    if (/callerOf|callerFrames|wrapRemovePantryKcal/.test(ln)) continue;
+    const m = /at\s+([A-Za-z_$][\w$.<>]*)/.exec(ln);
+    if (!m) continue;
+    const name = m[1];
+    if (name === 'Object.<anonymous>') continue;
+    return name;
+  }
+  return null;
+}
+
+// Shared _removePantryKcal wrapper (the folded door). Snapshot-diff
+// around the call, exactly like the direct-consumption wrappers below:
+// snapshots BEFORE, delegates with identical arguments / `this` /
+// return value, snapshots AFTER, and notifies every subscriber with
+// {day, caller, frames, asked, ret, items} — items are the per-stack
+// decreases (pre-call kcalEach / spoilDay), possibly empty. Every
+// subscriber is notified on every call (even zero-decrease calls, so
+// call counts are honest); subscribers that only care about takes
+// filter on items.length themselves. The GAME method is wrapped at
+// most once per Game object: a second installer subscribes instead of
+// re-wrapping, so no take is ever recorded twice by one instrument.
+// Returns false when the method is absent, 'subscribed' when attaching
+// to an existing wrapper, true when wrapping fresh.
+function wrapRemovePantryKcal(Game, onTake) {
+  const orig = Game._removePantryKcal;
+  if (typeof orig !== 'function') return false;
+  if (orig.__stockdoorsRemoveInstalled) {
+    const subs = orig.__stockdoorsRemoveSubscribers;
+    if (Array.isArray(subs)) { subs.push(onTake); return 'subscribed'; }
+    throw new Error('stockdoors-capture: Game._removePantryKcal already wrapped without subscriber list');
+  }
+  const subscribers = [onTake];
+  const wrapped = function (...args) {
+    const pre = pantrySnap(Game);
+    let day = null;
+    try { day = branchDay(Game); } catch (e) { day = (Game.state.scholar || {}).day || 0; }
+    const frames = callerFrames();
+    const caller = callerOf(frames);
+    const asked = Math.round(args[0] || 0);
+    const ret = orig.apply(this, args);
+    let items = [];
+    try { items = diffDecreases(pre, pantrySnap(Game)); } catch (e) { items = []; }
+    const evt = { day, caller, frames, asked, ret: Math.round(ret || 0),
+      items: items.map(stripItem) };
+    for (const sub of subscribers) { try { sub(evt); } catch (e) {} }
+    return ret;
+  };
+  wrapped.__stockdoorsRemoveInstalled = true;
+  wrapped.__stockdoorsRemoveSubscribers = subscribers;
+  Game._removePantryKcal = wrapped;
+  return true;
+}
+
+// Standalone installer for the folded door alone (the shape
+// driedhunt-capture.js used to build itself). Re-installing on the
+// same Game object returns the SAME takes array, never a second
+// subscription — idempotent by construction.
+function installRemovePantryKcalCapture(Game) {
+  const cur = Game._removePantryKcal;
+  if (cur && cur.__driedhuntSubscribed) {
+    return { takes: cur.__driedhuntTakes || [], wrapped: true,
+      snapshotStacks: () => pantrySnap(Game).map(stripItem) };
+  }
+  const takes = [];
+  const res = wrapRemovePantryKcal(Game, (evt) => {
+    if (evt.items.length) {
+      takes.push({ day: evt.day, caller: evt.caller, stack: evt.frames,
+        asked: evt.asked, ret: evt.ret, items: evt.items });
+    }
+  });
+  if (res !== false) {
+    Game._removePantryKcal.__driedhuntSubscribed = true;
+    Game._removePantryKcal.__driedhuntTakes = takes;
+  }
+  return { takes, wrapped: res !== false,
+    snapshotStacks: () => pantrySnap(Game).map(stripItem) };
 }
 
 function installStockdoorsCapture(Game, opts) {
@@ -225,6 +340,35 @@ function installStockdoorsCapture(Game, opts) {
   wrapMethod('takeFromPantryBulk', () => 'player-take-bulk', {
     meta: () => ({ vid: null, villager: 'player' }),
   });
+  // FOLDED DOOR (sim-raidcapture-b): raid / tribute / gift takes via
+  // Game._removePantryKcal. One directRecord per take (path
+  // 'remove-pantry-kcal'), with the caller function, full frames,
+  // asked amount, and returned amount as extras — the driedhunt
+  // record shape, inside the stockdoors ledger. ON by default;
+  // opts.removePantryKcal === false disables ONLY this door (the
+  // det-gate control). Idempotent on re-install: a second
+  // installStockdoorsCapture on the same Game object does not
+  // subscribe a second time.
+  if (opts.removePantryKcal !== false) {
+    const cur = Game._removePantryKcal;
+    if (cur && cur.__stockdoorsDirectSubscribed) {
+      counters.wrappedPaths.push('_removePantryKcal');
+    } else {
+      const res = wrapRemovePantryKcal(Game, (evt) => {
+        bump(counters.calls, 'remove-pantry-kcal');
+        if (!evt.items.length) return;
+        const sum = evt.items.reduce((t, i) => t + (i.kcal || 0), 0);
+        recordDecrease('remove-pantry-kcal', { vid: null, villager: null },
+          evt.items, { caller: evt.caller, callerFrames: evt.frames,
+            asked: evt.asked, retTaken: evt.ret, retMismatch: (sum !== evt.ret) });
+      });
+      if (res === false) counters.missingPaths.push('_removePantryKcal');
+      else {
+        counters.wrappedPaths.push('_removePantryKcal');
+        Game._removePantryKcal.__stockdoorsDirectSubscribed = true;
+      }
+    }
+  }
 
   return {
     stockdoorRecords: stockdoor.stockdoorRecords,
@@ -238,4 +382,4 @@ function installStockdoorsCapture(Game, opts) {
   };
 }
 
-module.exports = { installStockdoorsCapture, pantrySnap, diffDecreases };
+module.exports = { installStockdoorsCapture, installRemovePantryKcalCapture, pantrySnap, diffDecreases };
