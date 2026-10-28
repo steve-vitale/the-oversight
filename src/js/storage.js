@@ -1323,9 +1323,26 @@
       const lvl = this.villageTrustLevel();
       const st = this.stashState();
       // OPEN village: people contribute. Someone leaves wood by the pile.
+      // ARMOR-CRAFT INFLOW (tackle-armor-r2 2026-10-28, port of the
+      // 2026-10-27 fix that never landed): villagers bring home what they
+      // handle — bark from trees, vine from bushes, hide from game — not
+      // just branch/wood. The NPC armor-craft beat was substrate-starved:
+      // bark/vine/hide sat at 0 on every village-day, so no craft ever
+      // attempted, no matter how many villagers wore armor. Same trigger
+      // (open village, 6% per batch), same amount (1–3), same ledger line,
+      // same RNG draw count (one draw picks the material) — only the mix
+      // changes, with wood/branch still dominant (55%) and hide rarest
+      // (hunting, not every outing). Craft odds, cooldown, knowledge,
+      // recipes and all gating thresholds are untouched.
+      // FIXALL-ARMOR ROUND 3: bark widened 15% -> 30% (taken from
+      // branch/wood; vine/hide shares frozen, total rate frozen). Bark is
+      // the binding material — the only recipe needing 3 of one unit — and
+      // its slow random arrival raced knower mortality: in the r2 band a
+      // village's bark reached 3 only after its last bark-wearer died.
       if (lvl === 'open' && roster.length && Math.random() < 0.06) {
         const giver = roster[Math.floor(Math.random() * roster.length)];
-        const mat = Math.random() < 0.6 ? 'branch' : 'wood';
+        const _roll = Math.random();
+        const mat = _roll < 0.35 ? 'branch' : _roll < 0.55 ? 'wood' : _roll < 0.85 ? 'bark' : _roll < 0.95 ? 'vine' : 'hide';
         const n = 1 + Math.floor(Math.random() * 3);
         st.materials[mat] = (st.materials[mat] || 0) + n;
         this.stashLog('give', MAT_DEFS[mat].name, n, giver);

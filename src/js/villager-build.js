@@ -838,14 +838,15 @@
             try { this.tele('villager_gear', { vid: w.vid, item: w.id, via: 'armory' }); } catch (e) { warn('tele', e); }
           }
         }
-        // 3b. the armory — ARMOR (armorvillage 2026-10-23, ARMORVILLAGE=1):
-        // the pile's deposited armor, deposit-is-consent, mirrored exactly on
-        // the weapons pattern above: biggest gains first, one per villager per
-        // day; the armor they replace goes back on the pile. The ledger
-        // remembers the giver. (Gate: control = no structure.)
+        // 3b. the armory — ARMOR (armorvillage 2026-10-23; LIVE-ENABLED by
+        // fixall-armor round 3): the pile's deposited armor,
+        // deposit-is-consent, mirrored exactly on the weapons pattern above:
+        // biggest gains first, one per villager per day; the armor they
+        // replace goes back on the pile. The ledger remembers the giver.
+        // Formerly gated on ARMORVILLAGE=1, which no browser game can set
+        // (no process.env there) — the same dead gate r2 removed from the
+        // craft beat. The weapons pile above is ungated; armor now matches.
         try {
-          const _avOn = (typeof process !== 'undefined' && process.env && process.env.ARMORVILLAGE === '1');
-          if (_avOn) {
             let apile = [];
             try { const st2 = this.stashState ? this.stashState() : null; apile = (st2 && st2.armor) || []; } catch (e2) { warn('stashStateArmor', e2); }
             if (apile.length) {
@@ -890,7 +891,6 @@
                 try { this.tele('villager_gear', { vid: w.vid, item: w.id, via: 'armor_pile' }); } catch (e2) { warn('tele', e2); }
               }
             }
-          }
         } catch (e) { warn('gear armor pile', e); }
       } catch (e) { warn('villagerGearDay', e); }
       return moved;
@@ -928,13 +928,23 @@
     // (materials at risk), L2+ 85%; a successful blind craft teaches L2 (the
     // PRACTICE rule). ≤1 attempt per villager per 3 days. The piece is THEIRS
     // (individual ownership) — it enters their spares, and villagerGearDay's
-    // spares flow moves it to whoever gains most. Gated on ARMORVILLAGE=1
-    // (control = no structure). Returns the number of pieces crafted.
+    // spares flow moves it to whoever gains most. Formerly gated on
+    // ARMORVILLAGE=1; live-enabled by tackle-armor-r2 (see inside).
+    // Returns the number of pieces crafted.
     villagerArmorCraftDay() {
       let made = 0;
       try {
-        const _avOn = (typeof process !== 'undefined' && process.env && process.env.ARMORVILLAGE === '1');
-        if (!_avOn) return 0;
+        // LIVE ENABLE (tackle-armor-r2 2026-10-28): the ARMORVILLAGE
+        // process-env gate is removed. It could never be set in the browser
+        // game (no process.env there), so this beat — called every day by
+        // villagerBuildDay — returned 0 in live play even with materials on
+        // hand. The beat now runs exactly as it ran in flag-on sims; odds,
+        // cooldown, knowledge and recipes are untouched. (The armory-pile
+        // draw in villagerGearDay step 3b was live-enabled by fixall-armor
+        // round 3 on the same argument; crafted pieces also reach others
+        // through the ungated spares flow in step 2.)
+        // Gated on ARMORVILLAGE=1 (control = no structure) — NO LONGER:
+        // see live-enable note above.
         const v = this.state.village || {};
         const day = (this.state.scholar || {}).day || 0;
         const defs = this.data.items || [];
