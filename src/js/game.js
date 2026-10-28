@@ -43765,7 +43765,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const stillUp = !mine.length || standing.length > 0;
             if (stillUp && this.worldMonsters().indexOf(o) < 0 && !this.monsterAt(o.tx, o.ty)) {
               if (isLingerer) {
-                o.hp = Math.max(1, Math.min(o.maxHp || o.hp, (standing[0] && standing[0].hp) || 1));
+                // WALL-WOUNDS (sim-wallwounds-a 2026-10-28): a lost/fled
+                // fight against a lingering raider must never heal the
+                // wounds it went into the fight with — the wall's toll
+                // included. The lifted world object is untouched during
+                // the fight (the fighter is a fresh copy built from
+                // mdef range), so o.hp here IS the pre-fight world HP;
+                // cap the restore at it, not at maxHp. A fight that hurt
+                // the monster below its pre-fight wounds still deepens
+                // them (min takes the fighter's end HP then). Fall back
+                // to maxHp only when o.hp is not finite (never NaN).
+                const _preHp = (o.hp != null && isFinite(o.hp)) ? o.hp : (o.maxHp || 1);
+                o.hp = Math.max(1, Math.min(_preHp, (standing[0] && standing[0].hp) || 1));
                 try {
                   const vv = this.state.village || {};
                   o.tx = (vv.px !== undefined && vv.px !== null) ? vv.px : 4;
