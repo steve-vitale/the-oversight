@@ -1,0 +1,3519 @@
+{
+  "verdict": {
+    "seeds": 16,
+    "barPass": 12,
+    "p1Num": 71,
+    "p1Den": 71,
+    "p1": 1,
+    "p1Go": true,
+    "p2Num": 76,
+    "p2Den": 80,
+    "p2": 0.95,
+    "p2Go": true,
+    "p3Pass": 15,
+    "p3Bar": 12,
+    "p3Go": true,
+    "m1Pass": 16,
+    "m1Bar": 12,
+    "medianDaysControl": 30,
+    "medianDaysPolicy": 30,
+    "g1": true,
+    "starvationControl": 1,
+    "starvationPolicy": 2,
+    "g2": true,
+    "go": true,
+    "policyTapByAccess": {
+      "none": 9,
+      "inside": 71
+    },
+    "policyTapByStage": {
+      "<3": 76,
+      ">=3": 4
+    },
+    "policyAccessXStage": {
+      "none/<3": 9,
+      "inside/<3": 67,
+      "inside/>=3": 4
+    },
+    "policyTapClasses": {
+      "button-refused:Running on empty — eat first. (Abilities need 500+ kcal.)": 6,
+      "other-refusal": 4,
+      "success-caught": 37,
+      "success-clean": 30,
+      "impl-refused-hall": 3
+    },
+    "controlTapByAccess": {
+      "none": 80
+    },
+    "controlTapByStage": {
+      "<3": 80
+    },
+    "controlAccessXStage": {
+      "none/<3": 80
+    },
+    "controlTapClasses": {
+      "button-refused:Running on empty — eat first. (Abilities need 500+ kcal.)": 2,
+      "other-refusal": 13,
+      "impl-refused-hall": 65
+    },
+    "policyEveningOutcomes": {
+      "already-inside": 51,
+      "completed": 406,
+      "not-attempted-away": 19,
+      "blocked-combat": 4
+    },
+    "controlEveningOutcomes": {
+      "already-inside": 32,
+      "outside-at-haven": 438,
+      "not-attempted-away": 10
+    },
+    "maxWavePolicy": {
+      "10910": 2,
+      "10911": 2,
+      "10912": 1,
+      "10913": 2,
+      "10914": 1,
+      "10915": 2,
+      "10916": 2,
+      "10917": 1,
+      "10918": 2,
+      "10919": 2,
+      "10920": 2,
+      "10921": 2,
+      "10922": 2,
+      "10923": 2,
+      "10924": 2,
+      "10925": 3
+    },
+    "maxWaveControl": {
+      "10910": 2,
+      "10911": 2,
+      "10912": 2,
+      "10913": 2,
+      "10914": 2,
+      "10915": 2,
+      "10916": 2,
+      "10917": 2,
+      "10918": 2,
+      "10919": 1,
+      "10920": 1,
+      "10921": 1,
+      "10922": 1,
+      "10923": 2,
+      "10924": 1,
+      "10925": 2
+    }
+  },
+  "rows": {
+    "before": {
+      "10910": {
+        "seed": 10910,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 27,
+        "inside": 2,
+        "rate": 0.07407407407407407,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 3,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "button-refused:Running on empty — eat first. (Abilities need 500+ kcal.)": 2,
+          "other-refusal": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 25,
+          "not-attempted-away": 3
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 8,
+        "starvationDeaths": 1,
+        "deathCauses": [
+          "starvation",
+          "combat",
+          "monster",
+          "villager combat",
+          "expedition",
+          "expedition",
+          "expedition",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10911": {
+        "seed": 10911,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 6,
+          "2": 2
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 3,
+          "other-refusal": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 10,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "the wild",
+          "expedition",
+          "expedition",
+          "villager combat",
+          "monster",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10912": {
+        "seed": 10912,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 7
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 2,
+        "deaths": 8,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "combat",
+          "villager combat",
+          "expedition",
+          "monster",
+          "combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10913": {
+        "seed": 10913,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 9,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 2,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "expedition",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "expedition",
+          "villager combat",
+          "combat",
+          "monster",
+          "villager combat",
+          "combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10914": {
+        "seed": 10914,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 4,
+        "deaths": 6,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "the wild",
+          "the arena",
+          "villager combat",
+          "combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10915": {
+        "seed": 10915,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 9
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 4,
+          "other-refusal": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 4,
+        "deaths": 14,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "expedition",
+          "a dog-shaped silence at the treeline",
+          "expedition",
+          "expedition",
+          "expedition",
+          "villager combat",
+          "villager combat",
+          "the wild",
+          "combat",
+          "combat",
+          "villager combat",
+          "ambush",
+          "combat",
+          "the night"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10916": {
+        "seed": 10916,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "other-refusal": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 6,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "the wild",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10917": {
+        "seed": 10917,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 4,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 2,
+        "deaths": 6,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "monster",
+          "combat",
+          "villager combat",
+          "villager combat",
+          "combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10918": {
+        "seed": 10918,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 2,
+        "deaths": 9,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10919": {
+        "seed": 10919,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 4
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 7,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "ambush",
+          "villager combat",
+          "the wild",
+          "villager combat",
+          "combat",
+          "sickness"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10920": {
+        "seed": 10920,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 2
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 2,
+        "deaths": 2,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10921": {
+        "seed": 10921,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 2
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 3,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "ambush",
+          "the wild"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10922": {
+        "seed": 10922,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 4
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 4,
+          "other-refusal": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 7,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "monster",
+          "the wild",
+          "combat",
+          "ambush",
+          "combat",
+          "combat",
+          "combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10923": {
+        "seed": 10923,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5
+        },
+        "evenings": 30,
+        "atHaven": 23,
+        "inside": 2,
+        "rate": 0.08695652173913043,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 4,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 4,
+          "other-refusal": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 21,
+          "not-attempted-away": 7
+        },
+        "mornings": 29,
+        "morningsInside": 4,
+        "deaths": 7,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "expedition",
+          "villager combat",
+          "dehydration",
+          "combat",
+          "lockjaw",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10924": {
+        "seed": 10924,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 3
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 3,
+        "deaths": 5,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "ambush",
+          "combat",
+          "villager combat",
+          "contest",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      },
+      "10925": {
+        "seed": 10925,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 6
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 2,
+        "rate": 0.06666666666666667,
+        "m1Pass": false,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 0,
+        "tapRate": 0,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "outside-at-haven": 28
+        },
+        "mornings": 29,
+        "morningsInside": 2,
+        "deaths": 8,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "the expedition",
+          "monster",
+          "villager combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          }
+        ]
+      }
+    },
+    "after": {
+      "10910": {
+        "seed": 10910,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 6,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 25,
+        "inside": 25,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 2,
+        "tapInside": 2,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 2,
+        "p3Pass": true,
+        "byAccess": {
+          "none": 3,
+          "inside": 2
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 3,
+          "inside/<3": 2
+        },
+        "tapClasses": {
+          "button-refused:Running on empty — eat first. (Abilities need 500+ kcal.)": 3,
+          "other-refusal": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 23,
+          "not-attempted-away": 5
+        },
+        "mornings": 29,
+        "morningsInside": 25,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "combat",
+          "ambush",
+          "expedition",
+          "the wild",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "combat",
+          "combat",
+          "combat",
+          "the wild"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10911": {
+        "seed": 10911,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 3,
+          ">=3": 2
+        },
+        "accessXStage": {
+          "inside/<3": 3,
+          "inside/>=3": 2
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 12,
+          "completed": 18
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "expedition",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "ambush",
+          "villager combat",
+          "the wild",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 3,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 3,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10912": {
+        "seed": 10912,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 4
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-clean": 4,
+          "success-caught": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 6,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "combat",
+          "villager combat",
+          "expedition",
+          "Hummice",
+          "sickness"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          }
+        ]
+      },
+      "10913": {
+        "seed": 10913,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 6,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 13,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "ambush",
+          "the wild",
+          "combat",
+          "combat",
+          "the wild",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "expedition",
+          "the wild",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          }
+        ]
+      },
+      "10914": {
+        "seed": 10914,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 2
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-clean": 2,
+          "success-caught": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 28,
+        "deaths": 3,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "ambush"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10915": {
+        "seed": 10915,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 10,
+          "2": 2
+        },
+        "evenings": 30,
+        "atHaven": 29,
+        "inside": 29,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 27,
+          "blocked-combat": 1
+        },
+        "mornings": 29,
+        "morningsInside": 28,
+        "deaths": 15,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "expedition",
+          "villager combat",
+          "expedition",
+          "ambush",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "villager combat",
+          "expedition",
+          "expedition",
+          "villager combat",
+          "lockjaw",
+          "the wild",
+          "combat",
+          "combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          }
+        ]
+      },
+      "10916": {
+        "seed": 10916,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 29,
+        "inside": 29,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 4,
+        "tapInside": 4,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 4,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 4,
+          "none": 1
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 4,
+          "none/<3": 1
+        },
+        "tapClasses": {
+          "success-clean": 2,
+          "impl-refused-hall": 1,
+          "other-refusal": 2
+        },
+        "outcomes": {
+          "already-inside": 9,
+          "completed": 20,
+          "not-attempted-away": 1
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "combat",
+          "combat",
+          "combat",
+          "the wild",
+          "villager combat",
+          "combat",
+          "monster",
+          "combat",
+          "combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "forest_floor",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "other-refusal",
+            "why": null
+          }
+        ]
+      },
+      "10917": {
+        "seed": 10917,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 3
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 6,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "ambush",
+          "monster",
+          "Highbeam Deer",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10918": {
+        "seed": 10918,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 4,
+          "success-clean": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 8,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "ambush",
+          "combat",
+          "villager combat",
+          "combat",
+          "the wild",
+          "villager combat",
+          "lockjaw"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10919": {
+        "seed": 10919,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 4
+        },
+        "evenings": 30,
+        "atHaven": 25,
+        "inside": 25,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-clean": 2,
+          "success-caught": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 23,
+          "blocked-combat": 1,
+          "not-attempted-away": 4
+        },
+        "mornings": 29,
+        "morningsInside": 25,
+        "deaths": 10,
+        "starvationDeaths": 2,
+        "deathCauses": [
+          "expedition",
+          "expedition",
+          "villager combat",
+          "the wild",
+          "combat",
+          "sickness",
+          "ambush",
+          "starvation",
+          "starvation",
+          "sickness"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          }
+        ]
+      },
+      "10920": {
+        "seed": 10920,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 9
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 29,
+        "rate": 0.9666666666666667,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-clean": 2,
+          "success-caught": 3
+        },
+        "outcomes": {
+          "already-inside": 4,
+          "completed": 25,
+          "blocked-combat": 1
+        },
+        "mornings": 29,
+        "morningsInside": 28,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "ambush",
+          "villager combat",
+          "combat",
+          "combat",
+          "villager combat",
+          "combat",
+          "the wild"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10921": {
+        "seed": 10921,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 1
+        },
+        "evenings": 30,
+        "atHaven": 27,
+        "inside": 27,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 2,
+          "success-clean": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 25,
+          "blocked-combat": 1,
+          "not-attempted-away": 2
+        },
+        "mornings": 29,
+        "morningsInside": 27,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "the wild",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "ambush",
+          "villager combat",
+          "combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10922": {
+        "seed": 10922,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 2
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "combat",
+          "villager combat",
+          "combat",
+          "expedition",
+          "expedition",
+          "the wild",
+          "combat",
+          "combat",
+          "combat",
+          "expedition",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          }
+        ]
+      },
+      "10923": {
+        "seed": 10923,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 2
+        },
+        "evenings": 30,
+        "atHaven": 23,
+        "inside": 23,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 0,
+        "tapInside": 0,
+        "tapRate": null,
+        "tapDays": 5,
+        "insideTaps": 0,
+        "p3Pass": false,
+        "byAccess": {
+          "none": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "none/<3": 5
+        },
+        "tapClasses": {
+          "impl-refused-hall": 2,
+          "button-refused:Running on empty — eat first. (Abilities need 500+ kcal.)": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 21,
+          "not-attempted-away": 7
+        },
+        "mornings": 29,
+        "morningsInside": 23,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "dehydration",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "expedition",
+          "combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "grove",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "none",
+            "stage": 1,
+            "inside": false,
+            "tile": "grove",
+            "outcome": "attempted",
+            "cls": "impl-refused-hall",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "grove",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 11,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "grove",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          },
+          {
+            "loopDay": 12,
+            "access": "none",
+            "stage": 2,
+            "inside": false,
+            "tile": "grove",
+            "outcome": "button-refused",
+            "cls": null,
+            "why": "Running on empty — eat first. (Abilities need 500+ kcal.)"
+          }
+        ]
+      },
+      "10924": {
+        "seed": 10924,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5,
+          "2": 4
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 5
+        },
+        "accessXStage": {
+          "inside/<3": 5
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 9,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "combat",
+          "expedition",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 1,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          }
+        ]
+      },
+      "10925": {
+        "seed": 10925,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "waveKills": {
+          "1": 7,
+          "2": 5
+        },
+        "evenings": 30,
+        "atHaven": 30,
+        "inside": 30,
+        "rate": 1,
+        "m1Pass": true,
+        "tapEvenings": 5,
+        "tapAtHaven": 5,
+        "tapInside": 5,
+        "tapRate": 1,
+        "tapDays": 5,
+        "insideTaps": 5,
+        "p3Pass": true,
+        "byAccess": {
+          "inside": 5
+        },
+        "byStage": {
+          "<3": 3,
+          ">=3": 2
+        },
+        "accessXStage": {
+          "inside/<3": 3,
+          "inside/>=3": 2
+        },
+        "tapClasses": {
+          "success-caught": 3,
+          "success-clean": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "mornings": 29,
+        "morningsInside": 29,
+        "deaths": 14,
+        "starvationDeaths": 0,
+        "deathCauses": [
+          "villager combat",
+          "expedition",
+          "villager combat",
+          "expedition",
+          "villager combat",
+          "villager combat",
+          "combat",
+          "the wild",
+          "villager combat",
+          "ambush",
+          "villager combat",
+          "villager combat",
+          "villager combat",
+          "villager combat"
+        ],
+        "grantOk": true,
+        "tapStageDist": [
+          {
+            "loopDay": 8,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 9,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          },
+          {
+            "loopDay": 10,
+            "access": "inside",
+            "stage": 2,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 11,
+            "access": "inside",
+            "stage": 3,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-caught",
+            "why": null
+          },
+          {
+            "loopDay": 12,
+            "access": "inside",
+            "stage": 3,
+            "inside": true,
+            "tile": "haven",
+            "outcome": "attempted",
+            "cls": "success-clean",
+            "why": null
+          }
+        ]
+      }
+    }
+  }
+}
