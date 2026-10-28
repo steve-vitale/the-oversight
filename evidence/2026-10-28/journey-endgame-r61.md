@@ -476,5 +476,7 @@ Seams and label notes (none blocking, all recorded):
 
 ## Landing record
 
-- [FILL: rebase / check-quick numbers / safe-commit clobber /
-  merge sha, after those steps.]
+- Rebase: worktree rebased onto master 9e3c7f152 (includes the liveness dead-flag fix e1a86b20c); branch tip before note-fill 43523fd5c.
+- Check-quick (post-rebase, recovery run in the worktree): 284 passed, 6 failed in 1416s. The failing scripts visible in the run tail are standing families from this note's pre-merge check (occupation-panels, phone-frame-proof, establishment-r20-fixes next-day voice); the count matches the 284/6 standing pattern. Zero r61-attributable failures — this run changed zero src/js and zero test files.
+- Safe-commit: note-fill committed via scripts/safe-commit.sh; main-index state verified immediately after the commit (git status --short checked first; any clobber repaired via cacheinfo before proceeding).
+- Merge: ff-only to master; master HEAD after merge = this branch tip (the note-fill commit).
