@@ -198,7 +198,10 @@ number.
   the ship cycle — left for the coordinator, not chased here.
 
 ## LANDING STATUS
-- (to be filled: commit via safe-commit in the worktree, merge --ff-only
-  in the main tree, release + remove the worktree, rotation 3→0, lock
-  deleted. Merged locally, pending ship. No version bump, no push —
-  the batch ship loop owns bumps, pushes, and live verification.)
+- Commit 28373b7c4 (evidence + r46 driver + r46 compare, zero src/js) merged
+  --ff-only to master in the main tree; main tree verified clean after.
+  Safe-commit index clobber hit commit 28373b7c4 (all files staged-as-deleted
+  post-commit) — repaired via HEAD-blob cacheinfo, verified status + diff
+  HEAD empty before merging. No version bump, no push — the batch ship loop
+  owns bumps, pushes, and live verification. Merged locally, pending ship.
+  Rotation 3→0 written, lock deleted, worktree released at closeout.
