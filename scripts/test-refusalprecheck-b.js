@@ -24,18 +24,27 @@
 // refusal, and a pre-payment day-equality check would wrongly refuse
 // it (see DECISION below). R10 same for end_it. R11 challenge
 // self-target refusal; R12 trophy kills + explicit passed type
-// success; R13/R14 once-a-day at a NON-boundary position: the impl
-// refuses post-payment (the flag matches the still-current day) —
-// the documented residual: once-a-day is NOT prechecked by this arm.
+// success; R13/R14 once-a-day at a NON-boundary position: the
+// day-roll-aware precheck refuses PRE-payment (the flag matches the
+// predicted post-payment day, which at a non-boundary position is
+// still the current day) — no ticks consumed, no kcal burned, flag
+// unchanged. See evidence/2026-10-28/sim-onceaday-scope-b.md §1 and
+// docs/ABILITY-REFUSALS.md §5.
 //
-// DECISION (from pilot data, not from the prereg's assumption): the
-// once-a-day condition is evaluated against the POST-payment day, so
-// it is not faithfully knowable pre-payment. A naive precheck
-// (flag === current day) would refuse boundary taps the impl accepts
-// (baseline R9/R10: result true, flag 1 -> 2) — a success-path
-// regression under leg (b). So this arm prechecks ONLY the
-// world-state conditions (audience, kills). Once-a-day stays
-// post-payment, pinned by R13/R14 so it cannot silently change.
+// DECISION, REFRESHED (sim-onceaday-testrefresh-b): the
+// refusalprecheck-era decision above is superseded. Landed
+// sim-onceaday-b work added the day-roll-aware precheck
+// (_onceADayPostPaymentDay): the once-a-day condition IS knowable
+// pre-payment, judged against the predicted post-payment day. A
+// boundary tap therefore succeeds as the new day's action (R9/R10:
+// result true, flag 1 -> 2), and a non-boundary reuse refuses
+// pre-payment (R13/R14). The old residual — a post-payment refusal
+// that consumed ticks and silently burned the 40 kcal tier cost —
+// is gone: the precheck returns before payActionCost, so a refused
+// repeat tap now costs the player nothing. R13/R14 pin that
+// pre-payment refusal so it cannot silently regress. The
+// _actionAvailable (button) read is recorded per row as a diagnostic
+// only and is not asserted here.
 // NOTE (spandraw probe flaw this script corrects): the spandraw
 // probe's "villager-targeted" attempt picks roster[0], which IS the
 // scholar on fresh setup — so its targeted attempts for these two
@@ -137,8 +146,8 @@ const FIXTURES = [
   { id: 'R10', ability: 'intimidating_presence', action: 'end_it_before', partner: 'explicit', flag: 'postureDay', expect: 'success-boundary-onceaday' },
   { id: 'R11', ability: 'war_cry', action: 'challenge', partner: 'self', expect: 'refuse-audience' },
   { id: 'R12', ability: 'trophy_room', action: 'mark', partner: 'explicit', kills: true, expect: 'success' },
-  { id: 'R13', ability: 'war_cry', action: 'challenge', partner: 'explicit', flag: 'challengeDay', posTicks: 100, expect: 'refuse-postpay-onceaday' },
-  { id: 'R14', ability: 'intimidating_presence', action: 'end_it_before', partner: 'explicit', flag: 'postureDay', posTicks: 100, expect: 'refuse-postpay-onceaday' },
+  { id: 'R13', ability: 'war_cry', action: 'challenge', partner: 'explicit', flag: 'challengeDay', posTicks: 100, expect: 'refuse-prepay-onceaday' },
+  { id: 'R14', ability: 'intimidating_presence', action: 'end_it_before', partner: 'explicit', flag: 'postureDay', posTicks: 100, expect: 'refuse-prepay-onceaday' },
 ];
 
 const REFUSAL_SENTENCE = {
@@ -177,20 +186,22 @@ const SUCCESS_MARK = {
   const failures = [];
   for (const r of rows) {
     const say = r.sayLines.join('\n');
-    if (r.expect === 'refuse-postpay-onceaday') {
-      // Residual, pinned: non-boundary once-a-day still refuses AFTER
-      // payment (ticks consumed, day unchanged, sentence present, flag kept).
+    if (r.expect === 'refuse-prepay-onceaday') {
+      // Refreshed (sim-onceaday-testrefresh-b): non-boundary once-a-day
+      // refuses BEFORE payment — result false, day unchanged, ticks
+      // unchanged, kcal unchanged, flag unchanged, sentence present.
+      // The refusalprecheck-era residual (ticks consumed + silent
+      // 40 kcal tier burn via payActionCost before dispatch) is gone:
+      // the day-roll-aware precheck returns before payActionCost, so
+      // a refused repeat tap costs the player nothing. The
+      // _actionAvailable button read (r.availOk) is diagnostic only
+      // and is deliberately NOT asserted here.
       if (r.result !== false) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day should refuse, got ${r.result}`);
       if (r.dayAfter !== r.dayBefore) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day crossed day`);
-      if (r.dayTicksAfter === r.dayTicksBefore) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day should still pay ticks (residual), ticks unchanged`);
-      // Residual cost, pinned: the post-payment refusal ALSO burns the
-      // foodPower tier injection (40 kcal at level 1) silently — the
-      // payActionCost wrapper deducts before dispatch, and the
-      // useAbility wrapper only suppresses the burn NARRATION on
-      // result===false. (The "refused tap never burns" comment in
-      // foodPower.js holds only for precheck refusals, which return
-      // before payActionCost.) Pre-payment refusals pay none of this.
-      if (r.kcalAfter !== r.kcalBefore - 40) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day should still burn the silent 40 kcal tier cost, got ${r.kcalBefore}->${r.kcalAfter}`);
+      if (r.dayTicksAfter !== r.dayTicksBefore) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day consumed ticks ${r.dayTicksBefore}->${r.dayTicksAfter}`);
+      if (r.kcalAfter !== r.kcalBefore) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day changed kcal ${r.kcalBefore}->${r.kcalAfter}`);
+      if (r.ability === 'war_cry' && r.challengeDayAfter !== r.challengeDayBefore) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day moved challengeDay ${r.challengeDayBefore}->${r.challengeDayAfter}`);
+      if (r.ability === 'intimidating_presence' && r.postureDayAfter !== r.postureDayBefore) failures.push(`${r.fixture} seed=${r.seed}: non-boundary once-a-day moved postureDay ${r.postureDayBefore}->${r.postureDayAfter}`);
       const sentence = REFUSAL_SENTENCE['refuse-onceaday-' + r.ability];
       if (!say.includes(sentence)) failures.push(`${r.fixture} seed=${r.seed}: once-a-day sentence missing (${sentence})`);
     } else if (r.expect === 'success-boundary-onceaday') {
