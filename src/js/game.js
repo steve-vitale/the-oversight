@@ -6518,6 +6518,35 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this._outdoorCrew = Object.keys(asg0).filter(rid =>
           ['patrol', 'scout', 'hunt', 'forage'].includes((asg0[rid] || {}).task));
       } catch (e) { this._outdoorCrew = []; }
+      // CO-DEPARTURE STAMP (sim-perceptform-a, 2026-10-28): who walked
+      // out together this part, recorded per person. Rebuilt every
+      // part at the same point as the crew snapshot above: partners
+      // are the OTHER assignees holding the SAME outdoor task in the
+      // same pre-resolution assignments. This records DEPARTURE only
+      // — it never says where anyone is now; the router checks the
+      // tile separately. A villager with no outdoor assignment this
+      // part gets no entry (the rebuild clears stale entries).
+      // Perception law (Steve 2026-10-28): the fighter's own
+      // remembered outing, not a "who is around" list — the router
+      // reads only the leader's entry and checks each named
+      // partner's tile one by one. Never read as presence, never
+      // scanned for who is around.
+      try {
+        const _cd = {};
+        const _outTasks = ['patrol', 'scout', 'hunt', 'forage'];
+        const _day = (this.state.scholar || {}).day || 0;
+        const _part = this.dayPart || 0;
+        const _asg = v.assignments || {};
+        for (const rid of Object.keys(_asg)) {
+          const _t = (_asg[rid] || {}).task;
+          if (_outTasks.indexOf(_t) < 0) continue;
+          _cd[rid] = {
+            day: _day, part: _part, task: _t,
+            partners: Object.keys(_asg).filter(o => o !== rid && (_asg[o] || {}).task === _t),
+          };
+        }
+        this._coDepart = _cd;
+      } catch (e) { this._coDepart = {}; }
       // TASK LEADS: domains you yielded run themselves. The lead works their
       // domain every part — building their own power base, on your behalf.
       // That's the trade you made.
@@ -7885,9 +7914,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Haven during an aid crisis is the crisis fight — route through
       // aidFight so allies at the door join as real combatants (it scores
       // the kill itself, channel 'aid-crisis', and resolves the crisis).
+      // PERCEPTION FROM-START (sim-perceptform-a): a stamp partner the
+      // patroller can SEE on the monster's tile joins from round 1.
+      // Eligibility reads only the patroller's own stamp + that named
+      // partner's tile — never the crew list. The crew list above
+      // survives only for the untouched hopeless-shout fallback. The
+      // aid-crisis call below is untouched (aidFight sets its own
+      // from-start flag); the perceived wiring applies only to the
+      // plain fieldFight call.
+      let pPerceived = null;
+      try { pPerceived = this.perceivedFromStartAlly ? this.perceivedFromStartAlly(vid, m) : null; } catch (e) { pPerceived = null; }
+      if (pPerceived && !(pAllies > 0)) pPerceived = null;
       let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
       let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
-      if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
+      if (!rec) {
+        pViaAid = false;
+        const _pAllyVids = pPerceived ? [pPerceived].concat(pAllyVids.filter(a => a !== pPerceived)) : pAllyVids;
+        rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: _pAllyVids, allyFromStart: !!pPerceived });
+      }
       const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought ${mPhrase}`;
       const killCorpse = () => {
         // the carcass stays where it died — same as your kills, same as the
@@ -19904,6 +19948,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.resolveWildMonsterEncounter(vid, m);
       }
     },
+    // PERCEPTION FROM-START ALLY (sim-perceptform-a, 2026-10-28):
+    // the one villager this fighter can SEE standing with them on
+    // the monster's tile who also walked out on the same outing.
+    // Reads ONLY the fighter's own co-departure stamp, then checks
+    // each named partner one by one: still on the roster, not known
+    // dead, and a PURE nodePos read (never npcNode(), which creates
+    // default entries) equal to the monster's tile. No crew-list
+    // read, no roster scan for who is around, no adjacent/earshot
+    // radius, no trust or gear gate. Returns the partner's id, or
+    // null when nobody perceived is on the tile. Both wild routers
+    // call this helper; the aid-crisis path never does (aidFight
+    // sets its own from-start flag for parties at the door).
+    perceivedFromStartAlly(vid, m) {
+      try {
+        const stamp = (this._coDepart || {})[vid];
+        if (!stamp || !Array.isArray(stamp.partners)) return null;
+        if (!m || typeof m.tx !== 'number' || typeof m.ty !== 'number') return null;
+        const roster = (this.state.village || {}).roster || [];
+        const nodePos = (this.state.village || {}).nodePos || {};
+        for (const pid of stamp.partners) {
+          if (pid === vid) continue;
+          if (roster.indexOf(pid) < 0) continue;
+          try { const p = this.getPerson ? this.getPerson(pid) : null; if (p && p.dead) continue; } catch (e) {}
+          const np = nodePos[pid];
+          if (!np || np.nx !== m.tx || np.ny !== m.ty) continue;
+          return pid;
+        }
+      } catch (e) {}
+      return null;
+    },
+
     // FIELD FIGHTS (Steve 2026-10-08): villager-vs-monster is a real
     // blow-by-blow fight — real stats, the monster's real attack data —
     // never an outcome table. fieldFight() resolves rounds; this method
@@ -19953,8 +20028,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // restored. Raid defense and lingering-raider aid fights are never
       // skipped: the guard exempts opts.raid and the aid path.
       if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
+      // PERCEPTION FROM-START (sim-perceptform-a): same rule as
+      // patrols — a stamp partner the fighter can SEE on the
+      // monster's tile joins from round 1. Raid defense is exempt
+      // (opts.raid): raids have their own muster logic and are not
+      // wild field meetings. The aid-crisis call is untouched.
+      let wPerceived = null;
+      try { wPerceived = (!opts.raid && this.perceivedFromStartAlly) ? this.perceivedFromStartAlly(vid, m) : null; } catch (e) { wPerceived = null; }
+      if (wPerceived && !(wAllies > 0)) wPerceived = null;
       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
+      if (!rec) {
+        wViaAid = false;
+        const _wAllyVids = wPerceived ? [wPerceived].concat(wAllyVids.filter(a => a !== wPerceived)) : wAllyVids;
+        rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: _wAllyVids, allyFromStart: !!wPerceived });
+      }
       const summary = this.fieldFightSummary(rec, name, mName);
       // RETURN-TO-FIGHT (gap-routing 2026-10-27): a villager who actually
       // fought a living world monster remembers the fight's tile, so the
