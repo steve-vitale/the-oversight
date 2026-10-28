@@ -1,0 +1,429 @@
+{
+ "verdict": "DIAG-GO",
+ "legs": [
+  {
+   "name": "detgate",
+   "pass": true,
+   "detail": "seed 75101 baseline == recorders-OFF"
+  },
+  {
+   "name": "complete",
+   "pass": true,
+   "detail": "8/8 rows, days>0, all 9 recorders errs 0, no overflow"
+  },
+  {
+   "name": "substrate",
+   "pass": true,
+   "detail": "courtship combined=110, active 8/8"
+  },
+  {
+   "name": "reconciliation",
+   "pass": true,
+   "detail": "field 27=27 (field 24 + raid 2 + other 1); TB starts 26=26 (world 24 + nonworld 2); unmatched TB ends 0; refused/threw/failed starts 0; unresolved TB 0"
+  },
+  {
+   "name": "unclassified-accounted",
+   "pass": true,
+   "detail": "0 unclassified rows, all with missing fields named"
+  },
+  {
+   "name": "cornered-dormancy",
+   "pass": true,
+   "detail": "0 cornered wave-4 fights (mechanism dormant, as expected)"
+  },
+  {
+   "name": "demand-table",
+   "pass": true,
+   "detail": "50 classified world wave-4 fights; per-channel meet shares + outcome table computed"
+  },
+  {
+   "name": "parity-control",
+   "pass": true,
+   "detail": "EXACT vs partyfinish CONTROL on all 8 seeds x 9 fields + w4 defwound/nwk/spawn checks"
+  }
+ ],
+ "wall": {
+  "nationalEver": 7,
+  "nationalFinal": 6,
+  "table": 4,
+  "entered": 3,
+  "won": 3,
+  "wave4": 6,
+  "wave5": 0,
+  "medianDays": 146,
+  "deathTotal": 286,
+  "seats": {
+   "lesser": 3,
+   "none": 5
+  }
+ },
+ "deathCauses": {
+  "villager:villager combat": 80,
+  "player:the arena": 43,
+  "villager:combat": 110,
+  "villager:expedition": 22,
+  "villager:alien": 1,
+  "villager:ambush": 4,
+  "player:the night": 2,
+  "villager:a toad like a war drum, throat swelling": 1,
+  "villager:monster": 14,
+  "player:sickness": 2,
+  "villager:sickness": 3,
+  "player:contest": 2,
+  "villager:starvation": 1,
+  "villager:thirst": 1
+ },
+ "perSeed": {
+  "75101": {
+   "field": 0,
+   "raid": 0,
+   "TB": 0,
+   "other": 0,
+   "TBnonworld": 1,
+   "unclassified": 0
+  },
+  "75102": {
+   "field": 0,
+   "raid": 0,
+   "TB": 11,
+   "other": 1,
+   "TBnonworld": 0,
+   "unclassified": 0
+  },
+  "75103": {
+   "field": 0,
+   "raid": 0,
+   "TB": 2,
+   "other": 0,
+   "TBnonworld": 0,
+   "unclassified": 0
+  },
+  "75104": {
+   "field": 0,
+   "raid": 0,
+   "TB": 0,
+   "other": 0,
+   "TBnonworld": 0,
+   "unclassified": 0
+  },
+  "75105": {
+   "field": 0,
+   "raid": 0,
+   "TB": 0,
+   "other": 0,
+   "TBnonworld": 0,
+   "unclassified": 0
+  },
+  "75106": {
+   "field": 15,
+   "raid": 1,
+   "TB": 8,
+   "other": 0,
+   "TBnonworld": 1,
+   "unclassified": 0
+  },
+  "75107": {
+   "field": 0,
+   "raid": 0,
+   "TB": 0,
+   "other": 0,
+   "TBnonworld": 0,
+   "unclassified": 0
+  },
+  "75108": {
+   "field": 9,
+   "raid": 1,
+   "TB": 3,
+   "other": 0,
+   "TBnonworld": 0,
+   "unclassified": 0
+  }
+ },
+ "demandTables": {
+  "field": {
+   "n": 24,
+   "partyRate": 0,
+   "fullArmingRate": 1,
+   "armored1Rate": 0.4583333333333333,
+   "veteranRate": 0,
+   "tricks3Rate": 1,
+   "demandMet": 0,
+   "partyOnly": 0,
+   "gearedParty": 0,
+   "fullGateInFight": 0
+  },
+  "raid": {
+   "n": 2,
+   "partyRate": 0,
+   "fullArmingRate": 1,
+   "armored1Rate": 1,
+   "veteranRate": 0,
+   "tricks3Rate": 1,
+   "demandMet": 0,
+   "partyOnly": 0,
+   "gearedParty": 0,
+   "fullGateInFight": 0
+  },
+  "TB": {
+   "n": 24,
+   "partyRate": 0.125,
+   "fullArmingRate": 1,
+   "armored1Rate": 0.75,
+   "veteranRate": 0.16666666666666666,
+   "tricks3Rate": 1,
+   "demandMet": 0.08333333333333333,
+   "partyOnly": 0.125,
+   "gearedParty": 0.125,
+   "fullGateInFight": 0.041666666666666664
+  },
+  "ALL": {
+   "n": 50,
+   "partyRate": 0.06,
+   "fullArmingRate": 1,
+   "armored1Rate": 0.62,
+   "veteranRate": 0.08,
+   "tricks3Rate": 1,
+   "demandMet": 0.04,
+   "partyOnly": 0.06,
+   "gearedParty": 0.06,
+   "fullGateInFight": 0.02
+  }
+ },
+ "outcomes": {
+  "field": {
+   "met": {},
+   "notmet": {
+    "vDie": 8,
+    "vFlee": 16
+   },
+   "unclassified": {}
+  },
+  "raid": {
+   "met": {},
+   "notmet": {
+    "vFlee": 2
+   },
+   "unclassified": {}
+  },
+  "TB": {
+   "met": {
+    "lost": 2
+   },
+   "notmet": {
+    "lost": 20,
+    "won": 2
+   },
+   "unclassified": {}
+  }
+ },
+ "unclassified": [],
+ "tolled": {
+  "events": 16,
+  "distinctSeqs": 14,
+  "eventsBySeed": {
+   "75102": 7,
+   "75103": 2,
+   "75106": 6,
+   "75108": 1
+  }
+ },
+ "tbUnmatchedEnds": 0,
+ "tbStartsOther": [],
+ "tbUnresolved": [],
+ "tbNonworld": [
+  {
+   "seed": 75101,
+   "day": 131,
+   "mid": "influencer",
+   "originSeq": null,
+   "originType": null,
+   "outcome": "lost",
+   "classified": true
+  },
+  {
+   "seed": 75106,
+   "day": 143,
+   "mid": "audit",
+   "originSeq": 3,
+   "originType": "cliffhanger",
+   "outcome": "lost",
+   "classified": true
+  }
+ ],
+ "otherChannel": [
+  {
+   "seed": 75102,
+   "day": 146,
+   "mid": "suburb",
+   "caller": "other",
+   "outcome": "evade",
+   "classified": true
+  }
+ ],
+ "participants": {
+  "total": 54,
+  "armed": 54,
+  "armoredP10": 35,
+  "partyHist": {
+   "1": 47,
+   "2": 2,
+   "3": 1
+  }
+ },
+ "villageReadinessAtFights": {
+  "armored": "2.88 (n=50)",
+  "armed": "6.00 (n=50)",
+  "tricks": "20.42 (n=50)",
+  "veterans": "0.12 (n=50)"
+ },
+ "engineMismatch": {
+  "total": 0,
+  "engineBigger": 0
+ },
+ "fightingPartyDiagnostic": {
+  "n": 26,
+  "metRate": 0,
+  "soloFought": 26
+ },
+ "parityDiffs": [],
+ "crossArmed": [
+  {
+   "seed": 75101,
+   "mineDays": 132,
+   "armedDays": 162,
+   "mineWon": 1,
+   "armedWon": 1,
+   "mineDeaths": 34,
+   "armedDeaths": 39
+  },
+  {
+   "seed": 75102,
+   "mineDays": 180,
+   "armedDays": 180,
+   "mineWon": 0,
+   "armedWon": 0,
+   "mineDeaths": 44,
+   "armedDeaths": 33
+  },
+  {
+   "seed": 75103,
+   "mineDays": 132,
+   "armedDays": 132,
+   "mineWon": 1,
+   "armedWon": 1,
+   "mineDeaths": 28,
+   "armedDeaths": 28
+  },
+  {
+   "seed": 75104,
+   "mineDays": 90,
+   "armedDays": 131,
+   "mineWon": 1,
+   "armedWon": 0,
+   "mineDeaths": 24,
+   "armedDeaths": 46
+  },
+  {
+   "seed": 75105,
+   "mineDays": 180,
+   "armedDays": 180,
+   "mineWon": 0,
+   "armedWon": 0,
+   "mineDeaths": 48,
+   "armedDeaths": 75
+  },
+  {
+   "seed": 75106,
+   "mineDays": 146,
+   "armedDays": 90,
+   "mineWon": 0,
+   "armedWon": 1,
+   "mineDeaths": 40,
+   "armedDeaths": 19
+  },
+  {
+   "seed": 75107,
+   "mineDays": 180,
+   "armedDays": 134,
+   "mineWon": 0,
+   "armedWon": 1,
+   "mineDeaths": 31,
+   "armedDeaths": 31
+  },
+  {
+   "seed": 75108,
+   "mineDays": 102,
+   "armedDays": 140,
+   "mineWon": 0,
+   "armedWon": 1,
+   "mineDeaths": 37,
+   "armedDeaths": 41
+  }
+ ],
+ "eraW4convertRows": [
+  {
+   "seed": 75101,
+   "days": 132,
+   "won": 1,
+   "deaths": 34,
+   "wave": 4
+  },
+  {
+   "seed": 75102,
+   "days": 177,
+   "won": 0,
+   "deaths": 42,
+   "wave": 4
+  },
+  {
+   "seed": 75103,
+   "days": 180,
+   "won": 0,
+   "deaths": 50,
+   "wave": 4
+  },
+  {
+   "seed": 75104,
+   "days": 90,
+   "won": 1,
+   "deaths": 24,
+   "wave": 3
+  },
+  {
+   "seed": 75105,
+   "days": 162,
+   "won": 1,
+   "deaths": 36,
+   "wave": 3
+  },
+  {
+   "seed": 75106,
+   "days": 146,
+   "won": 0,
+   "deaths": 40,
+   "wave": 4
+  },
+  {
+   "seed": 75107,
+   "days": 180,
+   "won": 0,
+   "deaths": 31,
+   "wave": 3
+  },
+  {
+   "seed": 75108,
+   "days": 114,
+   "won": 0,
+   "deaths": 42,
+   "wave": 4
+  }
+ ],
+ "eraNote": {
+  "note": "w4convert analysis.json keys: label,seeds,band,bandChannels,perSeed,parity,corpusOk,parityPass,substrateOk,courtship,senseSeed,generated"
+ },
+ "courtship": {
+  "combined": 110,
+  "active": 8
+ },
+ "generated": "2026-10-28T14:56:04.637Z"
+}
