@@ -356,11 +356,23 @@ claim — neither guard failed, so none was run.
   analysis evidence/2026-10-28/
   sim-insideevening-b-confirm-analysis.json.
 - `node --check` clean on all four new scripts.
-  `node scripts/check.js --quick` (290 scripts) was
-  started during this run and was still running when
-  this evidence was written (see note below); the
-  arm's binding proofs are the node proof tests
-  above, and no src/js file was touched (proof T7).
+  `node scripts/check.js --quick` (290 scripts) finished
+  after this evidence was drafted: 283 passed, 7 failed
+  (a second interleaved run in the same log tallied
+  284 passed, 6 failed). The named failures are
+  scripts/godpath/test-measurement-proof-update.js,
+  test-measurement-workflow.js,
+  test-mobile-combat-cadence.js,
+  test-occupation-panels.js, test-phone-frame-proof.js,
+  and scripts/test-establishment-r20-fixes-20261020.js
+  — none references this arm's files (grep-verified),
+  and the branch diff vs its base is additions-only
+  (57 files added, 0 modified, 0 src/js touched), so
+  none is a regression from this arm; they are
+  pre-existing branch failures (stale retained proofs /
+  stale phone evidence / unrelated combat and
+  establishment tests). The arm's binding proofs are
+  the node proof tests above (PROOF-GREEN both bands).
 - No [needs-eyes]: policy-side arm, nothing
   player-visible by default (the policy ships only
   if a driver adopts it; no default flips here).
@@ -394,12 +406,15 @@ claim — neither guard failed, so none was run.
   from the start, rather than moving this arm's
   window after the fact.
 - [infrastructure] check.js --quick: 290 scripts,
-  still running when this evidence was written; the
-  run's FAIL lines (if any) are not yet known and
-  are NOT claimed here. The coordinator should read
-  the run's final tally before treating check.js as
-  green for this branch. (This arm's own proofs are
-  PROOF-GREEN on both bands; no src/js was touched.)
+  finished 283 passed / 7 failed (see Proof above);
+  the failures are pre-existing branch failures in
+  godpath/measurement/phone-frame/establishment tests
+  with no reference to this arm's files, and the
+  branch diff is additions-only — not regressions
+  from this arm. The coordinator should NOT treat
+  check.js as green for this branch on this arm's
+  account; this arm's own proofs are PROOF-GREEN on
+  both bands, and no src/js was touched.
 
 ## Convergence line
 
