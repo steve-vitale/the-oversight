@@ -83,7 +83,7 @@ function main() {
   for (const f of files) {
     const r = analyzeFile(path.join(DIR, f));
     perFile.push(r);
-    if (!perKey[r.key]) perKey[r.key] = { key: r.key, instances: 0, attempted: 0, succeeded: 0, buttonRefused: 0, costRefused: 0, skipped: 0, spans: 0, crossingSpans: 0, internalDraws: 0, endDayDraws: 0, exclKcal: 0, seedsWithTaps: new Set(), seedsWithExcl: new Set(), buttonWhys: {}, skipReasons: {}, tapPositions: [] };
+    if (!perKey[r.key]) perKey[r.key] = { key: r.key, instances: 0, attempted: 0, succeeded: 0, buttonRefused: 0, implRefused: 0, skipped: 0, spans: 0, crossingSpans: 0, internalDraws: 0, endDayDraws: 0, exclKcal: 0, seedsWithTaps: new Set(), seedsWithExcl: new Set(), buttonWhys: {}, skipReasons: {}, tapPositions: [] };
     const row = perKey[r.key]; row.instances++;
     for (const t of r.taps) {
       totalTaps++;
@@ -92,7 +92,7 @@ function main() {
         row.seedsWithTaps.add(r.seed);
         if (t.exclKcal > 0) row.seedsWithExcl.add(r.seed);
         if (t.tapResult === true) row.succeeded++;
-        if (t.tapResult === false) row.costRefused++;
+        if (t.tapResult === false) row.implRefused++;
         row.tapPositions.push(t.dayTicksBefore);
       } else if (t.outcome === 'button-refused') {
         row.buttonRefused++;
@@ -110,7 +110,7 @@ function main() {
     else if (r.crossingSpans > 0 && r.internalDraws === 0 && r.exclKcal === 0) classification = 'SPAN-CROSSES-DAY-NO-DRAW';
     else if (r.attempted === 0) classification = 'NOT-TAPPED';
     else classification = 'MIXED-NEEDS-READ';
-    return { key: r.key, instances: r.instances, attempted: r.attempted, succeeded: r.succeeded, buttonRefused: r.buttonRefused, costRefused: r.costRefused, skipped: r.skipped, spans: r.spans, crossingSpans: r.crossingSpans, internalDraws: r.internalDraws, endDayDraws: r.endDayDraws, exclKcal: r.exclKcal, seedsWithTaps: [...r.seedsWithTaps].sort((a, b) => a - b), seedsWithExcl: [...r.seedsWithExcl].sort((a, b) => a - b), classification, buttonWhys: r.buttonWhys, skipReasons: r.skipReasons, tapPositions: r.tapPositions };
+    return { key: r.key, instances: r.instances, attempted: r.attempted, succeeded: r.succeeded, buttonRefused: r.buttonRefused, implRefused: r.implRefused, skipped: r.skipped, spans: r.spans, crossingSpans: r.crossingSpans, internalDraws: r.internalDraws, endDayDraws: r.endDayDraws, exclKcal: r.exclKcal, seedsWithTaps: [...r.seedsWithTaps].sort((a, b) => a - b), seedsWithExcl: [...r.seedsWithExcl].sort((a, b) => a - b), classification, buttonWhys: r.buttonWhys, skipReasons: r.skipReasons, tapPositions: r.tapPositions };
   });
   console.log(JSON.stringify({ corpusDir: DIR, files: files.length, totalTaps, perKey: table, perFile }, null, 2));
 }
