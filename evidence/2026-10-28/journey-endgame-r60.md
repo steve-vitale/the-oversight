@@ -460,6 +460,10 @@ fights; it is starved of kills.
 - evidence/2026-10-28/journey-endgame-r60-prereg.md
 - evidence/2026-10-28/perseed-endgame-r60/endgame-r60-{88601..88607}.json
 - evidence/2026-10-28/perseed-endgame-r60/endgame-r60-{88601..88607}-transcript.txt
+  (size note: 88606's transcript is ~5MB / 88k lines because a
+  null-announce seed's window is the whole run's SAY lines —
+  88,287 SAY lines, stated in its header — not a dump error;
+  88607's is ~360KB on the same rule)
 - journey2-endgame-r60-pilot.log (in goal hidden_files; NOT
   committed to the repo: sweep stdout is per-run bookkeeping)
 - journey2-endgame-r60-sweep.log (in goal hidden_files; NOT
