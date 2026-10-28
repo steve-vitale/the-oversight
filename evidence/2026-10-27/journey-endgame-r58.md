@@ -375,10 +375,18 @@ finding).
   12705 both sides).
 - ANALYZER: exit 1 = verdicts (PRIMARY NO-GO | ALL NO-GO),
   not a crash; verdicts identical on re-run.
-- CHECK-QUICK: run after commit/merge (see below); this
-  run changed zero src/js, so any failures are
-  pre-existing on current master, not a regression from
-  this commit.
+- CHECK-QUICK (pre-merge, in the worktree, 2026-10-28):
+  278 passed, 9 failed in 468s — IDENTICAL script set to
+  r56/r57's standing profile (hide-discovery, measurement
+  comparison/proof-update/workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof, parity-20261014
+  gear spear+jacket, establishment-r20-fixes racks-full
+  next-day voice). This run changed zero src/js, so the
+  9 are pre-existing on current master, not a regression
+  from this commit; check.js does not execute this run's
+  probe/analyzer scripts. A post-merge re-run is due only
+  if master moves under the branch before landing (see
+  landing record below).
 
 ## Telemetry deviation check (2026-10-27)
 
