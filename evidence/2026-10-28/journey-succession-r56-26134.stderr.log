@@ -1,0 +1,35 @@
+
+ORGANIC DEATH d21: George -> Khaled, topTrust=[{"id":"Aki","t":55},{"id":"Khaled","t":39},{"id":"Miriam","t":38},{"id":"Linh","t":35}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=15 inheritedPlants=0 keptSkills=8 inheritedSkills=0 succTrustPre=80 succTrustPost=39
+PARITY readable=true equal=true inherited=[] pre=["night_eyes"] post=["night_eyes"]
+DEATH d20 (organic (phase A)): George -> Khaled | passed=true lin=true mo=true trust=39 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Aki (refused=false)
+  CONVO d+3 with Miriam (refused=false)
+  BOND-CONVO d+3 with Linh (depth=0 v=12 refused=false)
+  CONVO d+7 with Aki (refused=false)
+  CONVO d+7 with Miriam (refused=false)
+  CONVO d+14 with Aki (refused=false)
+  CONVO d+14 with Liam (refused=false)
+  BOND-CONVO d+14 with Leonor (depth=0 v=10 refused=false)
+  CONVO d+30 with Leonor (refused=false)
+  CONVO d+30 with Aki (refused=false)
+  CONVO d+45 with Liam (refused=false)
+  CONVO d+45 with Miriam (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=0 (eligible=0) echo=5 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=45 violations=0 noMealDays=8 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=46 signals={"levelUp":true,"systemVoice":37,"offerLines":51,"codexPlantsDelta":13,"codexSkillsDelta":9,"codexAbilitiesDelta":10,"xpDelta":30,"any":true} pantry 25600->3850
+TRUST-DIALS: office 39->79 (+40, climb) | villageMean 28.1->65.3 (+37.2, climb) | ge60 0->4 | movers>=5: [{"id":"Pavel","from":20,"to":85,"delta":65},{"id":"Liam","from":32,"to":90,"delta":58},{"id":"Thabo","from":10,"to":63,"delta":53},{"id":"Miriam","from":38,"to":89,"delta":51},{"id":"Henry","from":15,"to":39,"delta":24}]
+DEED-LEDGER: calls=27 summary={"teachPlant":{"calls":10,"ok":10,"deltaSum":0,"deltaN":10,"positive":0,"meanDelta":0},"donateToPantry":{"calls":17,"ok":17,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=66 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=46
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+46) t2=true(deedCalls=27) trustVerdict={"readable":true,"officeMantle":39,"officeLast":79,"officeDelta":40,"officeClass":"climb","villageMantle":28.1,"villageLast":65.3,"villageDelta":37.2,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":4,"movers":[{"id":"Pavel","from":20,"to":85,"delta":65},{"id":"Liam","from":32,"to":90,"delta":58},{"id":"Thabo","from":10,"to":63,"delta":53},{"id":"Miriam","from":38,"to":89,"delta":51},{"id":"Henry","from":15,"to":39,"delta":24}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":2,"trustMoves":2} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":46,"moves":4}
