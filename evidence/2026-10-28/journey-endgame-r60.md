@@ -385,11 +385,34 @@ fights; it is starved of kills.
   not a crash; verdicts identical on re-run after rebase (see
   landing record below).
 - CHECK-QUICK (pre-merge, in the worktree, post-rebase):
-  <to fill after run>.
+  279 passed, 8 failed in 990s — the 8 are within r59's standing
+  pre-existing set: hide-discovery, measurement
+  comparison/proof-update/workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof, establishment-r20-fixes
+  (next-day voice). Set shift vs r59, explained, not a
+  regression: r59's 9th failure (sw-audio-cache, new on that
+  base) now PASSES on this base, and the parity-20261014 gear
+  failure stays gone. This run changed zero src/js, so none of
+  the 8 is attributable to it.
 
 ## Landing record
 
-- <to fill after rebase + check-quick + merge>.
+- Rebase onto master 0761aab9b (sim-divedeep-fix-b landing) clean:
+  2 commits replayed (r60 evidence + instruments, r60 note
+  footnote), worktree clean after, no conflicts. New shas:
+  8a4226cd5, 0e826e595.
+- Analyzer identical post-rebase (same verdict lines, exit 1 =
+  verdicts, not a crash).
+- Check-quick post-rebase: 279 passed, 8 failed (see above).
+- Safe-commit index clobber hit BOTH r60 commits (staged-deletion
+  form on the first, backward-staged MM on the second); repaired
+  via HEAD-blob cacheinfo each time, verified status empty +
+  diff HEAD empty + hash-object matches before rebasing.
+- Merge: ff-only into master after this note-fill commit; the
+  merge sha is recorded in this run's memory-log entry and the
+  run report (the note header's "merged locally, pending ship"
+  stands; no bump, no push, no live check — the ship loop owns
+  those).
 
 ## Telemetry deviation check (2026-10-28)
 
