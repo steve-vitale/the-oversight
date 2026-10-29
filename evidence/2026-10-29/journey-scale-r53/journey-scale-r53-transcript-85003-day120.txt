@@ -1,0 +1,30 @@
+=== seed 85003 day 120 — conversation with Bernardo (app_mgpsphi1795) ===
+occupation=cook temperament=restless trust=31 dead=false
+want: ask_favor (stage 2)
+picker: subject-first
+
+THEM: "About this wound — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(turn1 choices: alive:event:mourning, ask:others, ask:gossip, ask:spread_rumor, invite_party, menu:more, leave, silence)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Something's off with Hassan. I mentioned it to the others and they went quiet, which tells you everything."
+(turn2 choices: goon, dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "I’m listening."
+THEM: "Raj? A Pharmacist, back before. Solid person."
+(turn3 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+(turn4 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "Hassan headed out for water."
+(turn5 choices: goon, dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:react] (listen)
+THEM: "That was me — headed out to check the snares."
+(turn6 choices: goon, dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "Moving! But — good talk! More later!"
+(turn7 choices: leave, silence)
+YOU: (leave)
