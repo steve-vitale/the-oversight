@@ -1,0 +1,1911 @@
+{
+  "band": "build-armor seeding",
+  "prereg": "evidence/2026-10-29/build-armor-prereg.md",
+  "anchorCommit": "ac8867633f382bdf621dfed3d9202cbdbd5c6cdc",
+  "policy": "leadfeast via AD.armedFor + AV.armedFor (AV inert without flag; effective stack leadfeast + armorydrive)",
+  "days": 180,
+  "env": {
+    "FEASTSCALE_R13": "1",
+    "TRIBFLOOR": "1",
+    "WINPURSUIT": "1",
+    "WINDEFER": "1",
+    "SEATDRIVE": "0",
+    "KILLDISC": "1",
+    "ARMORYDRIVE": "1",
+    "ARMORVILLAGE": "(unset — live condition)"
+  },
+  "summary": {
+    "seeds": 12,
+    "seedsWithAttempts": 12,
+    "seedsWithCrafts": 8,
+    "seedsWithHomeKnower": 12,
+    "seedsWithStayingKnower": 12,
+    "seedsGranted": 9,
+    "totalAttempts": 150,
+    "totalCrafts": 83,
+    "totalDeaths": 540,
+    "totalSurvivalDays": 1841,
+    "starvationDeaths": 3,
+    "survivedTo180": 6,
+    "deathCauses": {
+      "villager combat": 128,
+      "combat": 272,
+      "monster": 12,
+      "a wound that wouldn't close": 6,
+      "the arena": 7,
+      "the wild": 74,
+      "expedition": 18,
+      "starvation": 3,
+      "ambush": 4,
+      "contest": 5,
+      "a stranger": 2,
+      "sickness": 6,
+      "dehydration": 1,
+      "The Congregation": 1,
+      "The Algorithm": 1
+    },
+    "finalWornArmor": {
+      "bark_armor": 27,
+      "work_gloves": 14,
+      "riot_gear": 1,
+      "knit_cap": 2,
+      "good_boots": 3,
+      "alien_gauntlets": 1,
+      "skull_helm": 1,
+      "hide_armor": 1,
+      "scar_tissue_wraps": 2,
+      "deep_earth_boots": 2,
+      "canvas_pants": 8,
+      "alien_helm": 1,
+      "wool_socks": 3,
+      "living_soil_robes": 4,
+      "wardens_cloak": 1,
+      "second_skin_suit": 1,
+      "shelter_cloak": 3,
+      "farstrider_boots": 2,
+      "investigators_coat": 1,
+      "alien_boots": 1,
+      "death_mask": 2,
+      "alien_greaves": 2,
+      "flannel_shirt": 2,
+      "running_shoes": 2,
+      "menders_apron": 1,
+      "stormcloak": 1,
+      "adaptive_dermis": 1,
+      "military_vest": 1
+    }
+  },
+  "perSeed": [
+    {
+      "seed": 67701,
+      "daysObserved": 180,
+      "survivalDays": 181,
+      "endReason": "survived",
+      "attempts": 22,
+      "crafts": 14,
+      "deaths": 57,
+      "deathCauses": {
+        "villager combat": 18,
+        "combat": 28,
+        "monster": 2,
+        "a wound that wouldn't close": 1,
+        "the arena": 2,
+        "the wild": 4,
+        "expedition": 2
+      },
+      "coincidenceDays": 12,
+      "knowersDays": 165,
+      "stayingKnowersDays": 165,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 36,
+      "firstCraftDay": 42,
+      "barkWearersDays": 165,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 151,
+        "vine": 83,
+        "hide": 150,
+        "branch": 137,
+        "wood": 152
+      },
+      "craftEvents": [
+        {
+          "day": 36,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 42,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 52,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 54,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_zpa6o3x"
+        },
+        {
+          "day": 60,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 61,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_v9og7tm"
+        },
+        {
+          "day": 63,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_zpa6o3x"
+        },
+        {
+          "day": 73,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 73,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "xavier_dubois"
+        },
+        {
+          "day": 104,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 114,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 117,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 117,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_v9og7tm"
+        },
+        {
+          "day": 127,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 150,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 160,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_sw0ehby"
+        },
+        {
+          "day": 161,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "dmitri_sokolov"
+        },
+        {
+          "day": 162,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "mia_andersson"
+        },
+        {
+          "day": 164,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "visjoin_150"
+        },
+        {
+          "day": 164,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "app_mgpsphiu526"
+        }
+      ],
+      "saySample": [
+        "Andres left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Saul spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Ella left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Saul spent the afternoon at the workbench and sewed a Bark armor that holds together. Saul wears it now.",
+        "Matheus left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Sbu left 3 branches by the stash. No announcement. That's how it works here.",
+        "Ivy left 3 branches by the stash. No announcement. That's how it works here.",
+        "Ivy left 3 branches by the stash. No announcement. That's how it works here.",
+        "Andres left 3 rawhides by the stash. No announcement. That's how it works here.",
+        "Saul left 1 branch by the stash. No announcement. That's how it works here.",
+        "Kennedy left 2 vines by the stash. No announcement. That's how it works here.",
+        "Saul spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted."
+      ],
+      "finalStash": {
+        "bark": 35,
+        "vine": 1,
+        "hide": 19
+      },
+      "finalWornArmor": {
+        "bark_armor": 5,
+        "work_gloves": 3,
+        "riot_gear": 1,
+        "knit_cap": 1,
+        "good_boots": 1
+      },
+      "setup": {
+        "armorSeedVid": "gen_sw0ehby",
+        "wearers": [
+          {
+            "vid": "gen_sw0ehby",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          },
+          {
+            "vid": "gen_zpa6o3x",
+            "item": "bark_armor",
+            "goal": "prove",
+            "away": false
+          },
+          {
+            "vid": "gen_v9og7tm",
+            "item": "bark_armor",
+            "goal": "record",
+            "away": false
+          },
+          {
+            "vid": "zoltan_nagy",
+            "item": "bark_armor",
+            "goal": "escape",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67702,
+      "daysObserved": 180,
+      "survivalDays": 181,
+      "endReason": "survived",
+      "attempts": 18,
+      "crafts": 9,
+      "deaths": 31,
+      "deathCauses": {
+        "combat": 25,
+        "starvation": 1,
+        "villager combat": 3,
+        "the wild": 2
+      },
+      "coincidenceDays": 10,
+      "knowersDays": 163,
+      "stayingKnowersDays": 163,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 27,
+      "firstCraftDay": 37,
+      "barkWearersDays": 160,
+      "hideWearersDays": 76,
+      "stashDays": {
+        "bark": 153,
+        "vine": 56,
+        "hide": 103,
+        "branch": 157,
+        "wood": 153
+      },
+      "craftEvents": [
+        {
+          "day": 27,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_3n51ofr"
+        },
+        {
+          "day": 37,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_xptrdd4"
+        },
+        {
+          "day": 46,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_cpvvijj"
+        },
+        {
+          "day": 46,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_xptrdd4"
+        },
+        {
+          "day": 64,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_3n51ofr"
+        },
+        {
+          "day": 84,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_3n51ofr"
+        },
+        {
+          "day": 94,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_cpvvijj"
+        },
+        {
+          "day": 103,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_u51jffs"
+        },
+        {
+          "day": 103,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_cpvvijj"
+        },
+        {
+          "day": 110,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_3n51ofr"
+        },
+        {
+          "day": 133,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_u51jffs"
+        },
+        {
+          "day": 140,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_u51jffs"
+        },
+        {
+          "day": 142,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_cpvvijj"
+        },
+        {
+          "day": 144,
+          "ok": false,
+          "item": "hide_armor",
+          "vid": "giulia_bianchi"
+        },
+        {
+          "day": 151,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_cpvvijj"
+        },
+        {
+          "day": 151,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_xptrdd4"
+        },
+        {
+          "day": 163,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_cpvvijj"
+        },
+        {
+          "day": 163,
+          "ok": false,
+          "item": "hide_armor",
+          "vid": "giulia_bianchi"
+        }
+      ],
+      "saySample": [
+        "Nora left 1 branch by the stash. No announcement. That's how it works here.",
+        "Ursula left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Kelly spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Nina left 3 wood logs by the stash. No announcement. That's how it works here.",
+        "Aubrey left 3 branches by the stash. No announcement. That's how it works here.",
+        "Mia left 3 wood logs by the stash. No announcement. That's how it works here.",
+        "Mia left 1 branch by the stash. No announcement. That's how it works here.",
+        "Nina left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Mia left 3 vines by the stash. No announcement. That's how it works here.",
+        "Rahaf left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Giulia left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Ursula left 1 branch by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 23,
+        "vine": 0,
+        "hide": 4
+      },
+      "finalWornArmor": {
+        "bark_armor": 7,
+        "alien_gauntlets": 1,
+        "skull_helm": 1,
+        "hide_armor": 1,
+        "work_gloves": 3,
+        "scar_tissue_wraps": 1,
+        "deep_earth_boots": 1,
+        "canvas_pants": 2,
+        "alien_helm": 1,
+        "wool_socks": 1
+      },
+      "setup": {
+        "armorSeedVid": null,
+        "wearers": [
+          {
+            "vid": "giulia_bianchi",
+            "item": "hide_armor",
+            "goal": "protect",
+            "away": false
+          }
+        ],
+        "stayingWearers": 1
+      }
+    },
+    {
+      "seed": 67703,
+      "daysObserved": 180,
+      "survivalDays": 181,
+      "endReason": "survived",
+      "attempts": 24,
+      "crafts": 12,
+      "deaths": 57,
+      "deathCauses": {
+        "the wild": 3,
+        "ambush": 1,
+        "villager combat": 19,
+        "combat": 27,
+        "expedition": 4,
+        "contest": 1,
+        "the arena": 2
+      },
+      "coincidenceDays": 16,
+      "knowersDays": 166,
+      "stayingKnowersDays": 166,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 29,
+      "firstCraftDay": 37,
+      "barkWearersDays": 166,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 146,
+        "vine": 51,
+        "hide": 152,
+        "branch": 145,
+        "wood": 153
+      },
+      "craftEvents": [
+        {
+          "day": 29,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 31,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_hqx1cmj"
+        },
+        {
+          "day": 37,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 63,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 72,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 73,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_hqx1cmj"
+        },
+        {
+          "day": 89,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_isks3sk"
+        },
+        {
+          "day": 89,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_hqx1cmj"
+        },
+        {
+          "day": 97,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 98,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_hqx1cmj"
+        },
+        {
+          "day": 99,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_isks3sk"
+        },
+        {
+          "day": 99,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_dej3uij"
+        },
+        {
+          "day": 112,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 115,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_l2kcx77"
+        },
+        {
+          "day": 115,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_isks3sk"
+        },
+        {
+          "day": 134,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "victor_lopez"
+        },
+        {
+          "day": 141,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "app_mgpsphcm533"
+        },
+        {
+          "day": 158,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "app_mgpspizj20"
+        },
+        {
+          "day": 160,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "ivy_wang"
+        },
+        {
+          "day": 163,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "ivy_wang"
+        }
+      ],
+      "saySample": [
+        "Marcus left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Jorge left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Marcus left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Jorge left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Pablo spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Araceli left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Michelle spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Pablo left 1 vine by the stash. No announcement. That's how it works here.",
+        "Victor left 2 branches by the stash. No announcement. That's how it works here.",
+        "Pablo spent the afternoon at the workbench and sewed a Bark armor that holds together. Pablo wears it now.",
+        "Devon left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Araceli left 2 rawhides by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 12,
+        "vine": 0,
+        "hide": 11
+      },
+      "finalWornArmor": {
+        "living_soil_robes": 1,
+        "work_gloves": 3,
+        "wool_socks": 1,
+        "wardens_cloak": 1,
+        "canvas_pants": 2,
+        "scar_tissue_wraps": 1,
+        "second_skin_suit": 1,
+        "bark_armor": 4,
+        "shelter_cloak": 1
+      },
+      "setup": {
+        "armorSeedVid": "gen_l2kcx77",
+        "wearers": [
+          {
+            "vid": "gen_l2kcx77",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          },
+          {
+            "vid": "gen_isks3sk",
+            "item": "bark_armor",
+            "goal": "survive",
+            "away": false
+          },
+          {
+            "vid": "gen_hqx1cmj",
+            "item": "bark_armor",
+            "goal": "answers",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67704,
+      "daysObserved": 110,
+      "survivalDays": 110,
+      "endReason": "village-lost",
+      "attempts": 4,
+      "crafts": 0,
+      "deaths": 37,
+      "deathCauses": {
+        "villager combat": 10,
+        "the wild": 9,
+        "combat": 10,
+        "ambush": 1,
+        "contest": 1,
+        "monster": 6
+      },
+      "coincidenceDays": 3,
+      "knowersDays": 61,
+      "stayingKnowersDays": 61,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 43,
+      "firstCraftDay": null,
+      "barkWearersDays": 38,
+      "hideWearersDays": 23,
+      "stashDays": {
+        "bark": 35,
+        "vine": 74,
+        "hide": 35,
+        "branch": 77,
+        "wood": 78
+      },
+      "craftEvents": [
+        {
+          "day": 43,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_dtzzwlh"
+        },
+        {
+          "day": 54,
+          "ok": false,
+          "item": "hide_armor",
+          "vid": "daniyar_askarov"
+        },
+        {
+          "day": 65,
+          "ok": false,
+          "item": "hide_armor",
+          "vid": "daniyar_askarov"
+        },
+        {
+          "day": 93,
+          "ok": false,
+          "item": "hide_armor",
+          "vid": "daniyar_askarov"
+        }
+      ],
+      "saySample": [
+        "Nora left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Miguel left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Antwi spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Miguel left 3 vines by the stash. No announcement. That's how it works here.",
+        "Gianna left 2 rawhides by the stash. No announcement. That's how it works here.",
+        "Daniyar spent the afternoon sewing, and the Hide armor came apart in their hands. The bark strips are wasted.",
+        "Matahi left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Gianna left 3 rawhides by the stash. No announcement. That's how it works here.",
+        "Daniyar spent the afternoon sewing, and the Hide armor came apart in their hands. The bark strips are wasted.",
+        "Daniyar left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Matahi left 3 wood logs by the stash. No announcement. That's how it works here.",
+        "Valentina left 3 branches by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 9,
+        "vine": 16,
+        "hide": 0
+      },
+      "finalWornArmor": {
+        "farstrider_boots": 1
+      },
+      "setup": {
+        "armorSeedVid": "gen_61ix8gf",
+        "wearers": [
+          {
+            "vid": "gen_61ix8gf",
+            "item": "bark_armor",
+            "goal": "home",
+            "away": false
+          },
+          {
+            "vid": "gen_g4slkaj",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          },
+          {
+            "vid": "gen_dtzzwlh",
+            "item": "bark_armor",
+            "goal": "legacy",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67705,
+      "daysObserved": 125,
+      "survivalDays": 125,
+      "endReason": "village-lost",
+      "attempts": 12,
+      "crafts": 6,
+      "deaths": 47,
+      "deathCauses": {
+        "villager combat": 9,
+        "ambush": 1,
+        "combat": 21,
+        "the wild": 13,
+        "expedition": 1,
+        "a stranger": 1,
+        "the arena": 1
+      },
+      "coincidenceDays": 4,
+      "knowersDays": 115,
+      "stayingKnowersDays": 115,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 41,
+      "firstCraftDay": 41,
+      "barkWearersDays": 115,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 101,
+        "vine": 43,
+        "hide": 99,
+        "branch": 100,
+        "wood": 98
+      },
+      "craftEvents": [
+        {
+          "day": 41,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_5qcc7wv"
+        },
+        {
+          "day": 52,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "nikolai_volkov"
+        },
+        {
+          "day": 56,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_5qcc7wv"
+        },
+        {
+          "day": 67,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_99swdq6"
+        },
+        {
+          "day": 82,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_99swdq6"
+        },
+        {
+          "day": 92,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_99swdq6"
+        },
+        {
+          "day": 92,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "nikolai_volkov"
+        },
+        {
+          "day": 95,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_99swdq6"
+        },
+        {
+          "day": 109,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "nikolai_volkov"
+        },
+        {
+          "day": 110,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "raj_patel"
+        },
+        {
+          "day": 110,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "david_kim"
+        },
+        {
+          "day": 115,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "nikolai_volkov"
+        }
+      ],
+      "saySample": [
+        "Riley left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Nikolai left 3 branches by the stash. No announcement. That's how it works here.",
+        "Riley left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Kofi left 2 rawhides by the stash. No announcement. That's how it works here.",
+        "Victor left 1 branch by the stash. No announcement. That's how it works here.",
+        "Yamila left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Nikolai left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Nikolai left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Yamila left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Nikos left 2 branches by the stash. No announcement. That's how it works here.",
+        "Grace left 2 rawhides by the stash. No announcement. That's how it works here.",
+        "Grace left 3 branches by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 22,
+        "vine": 0,
+        "hide": 10
+      },
+      "finalWornArmor": {},
+      "setup": {
+        "armorSeedVid": "gen_cws9u3j",
+        "wearers": [
+          {
+            "vid": "gen_cws9u3j",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          },
+          {
+            "vid": "gen_5qcc7wv",
+            "item": "bark_armor",
+            "goal": "peace",
+            "away": false
+          },
+          {
+            "vid": "gen_99swdq6",
+            "item": "bark_armor",
+            "goal": "heal",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67706,
+      "daysObserved": 148,
+      "survivalDays": 148,
+      "endReason": "village-lost",
+      "attempts": 3,
+      "crafts": 0,
+      "deaths": 50,
+      "deathCauses": {
+        "combat": 19,
+        "villager combat": 16,
+        "a wound that wouldn't close": 1,
+        "expedition": 2,
+        "monster": 1,
+        "the wild": 9,
+        "the arena": 1,
+        "a stranger": 1
+      },
+      "coincidenceDays": 3,
+      "knowersDays": 22,
+      "stayingKnowersDays": 22,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 33,
+      "firstCraftDay": null,
+      "barkWearersDays": 22,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 119,
+        "vine": 104,
+        "hide": 121,
+        "branch": 122,
+        "wood": 110
+      },
+      "craftEvents": [
+        {
+          "day": 33,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "owen_smith"
+        },
+        {
+          "day": 42,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "owen_smith"
+        },
+        {
+          "day": 47,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "owen_smith"
+        }
+      ],
+      "saySample": [
+        "Petra left 2 branches by the stash. No announcement. That's how it works here.",
+        "Emma left 3 vines by the stash. No announcement. That's how it works here.",
+        "Arjun left 3 rawhides by the stash. No announcement. That's how it works here.",
+        "Aki left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Petra left 1 rawhide by the stash. No announcement. That's how it works here.",
+        "Brian left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Owen spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Owen left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Senyo left 3 branches by the stash. No announcement. That's how it works here.",
+        "Brian left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Emma left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Omar left 3 vines by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 94,
+        "vine": 21,
+        "hide": 11
+      },
+      "finalWornArmor": {},
+      "setup": {
+        "armorSeedVid": null,
+        "wearers": [
+          {
+            "vid": "owen_smith",
+            "item": "bark_armor",
+            "goal": "belong",
+            "away": false
+          }
+        ],
+        "stayingWearers": 1
+      }
+    },
+    {
+      "seed": 67707,
+      "daysObserved": 180,
+      "survivalDays": 181,
+      "endReason": "survived",
+      "attempts": 16,
+      "crafts": 9,
+      "deaths": 75,
+      "deathCauses": {
+        "combat": 47,
+        "expedition": 4,
+        "villager combat": 11,
+        "sickness": 6,
+        "ambush": 1,
+        "a wound that wouldn't close": 3,
+        "monster": 1,
+        "contest": 2
+      },
+      "coincidenceDays": 11,
+      "knowersDays": 164,
+      "stayingKnowersDays": 164,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 50,
+      "firstCraftDay": 84,
+      "barkWearersDays": 164,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 142,
+        "vine": 103,
+        "hide": 127,
+        "branch": 149,
+        "wood": 147
+      },
+      "craftEvents": [
+        {
+          "day": 50,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_iky35er"
+        },
+        {
+          "day": 50,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_vqb2844"
+        },
+        {
+          "day": 62,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_iky35er"
+        },
+        {
+          "day": 84,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_iky35er"
+        },
+        {
+          "day": 85,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "mia_andersson"
+        },
+        {
+          "day": 97,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_iky35er"
+        },
+        {
+          "day": 97,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "mia_andersson"
+        },
+        {
+          "day": 107,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "elijah_scott"
+        },
+        {
+          "day": 114,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "mia_andersson"
+        },
+        {
+          "day": 125,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "ursula_weber"
+        },
+        {
+          "day": 127,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "mia_andersson"
+        },
+        {
+          "day": 129,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "elijah_scott"
+        },
+        {
+          "day": 132,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "elijah_scott"
+        },
+        {
+          "day": 162,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "elif_demir"
+        },
+        {
+          "day": 165,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "elif_demir"
+        },
+        {
+          "day": 168,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "elif_demir"
+        }
+      ],
+      "saySample": [
+        "Zahra left 3 branches by the stash. No announcement. That's how it works here.",
+        "Ursula left 2 branches by the stash. No announcement. That's how it works here.",
+        "Zahra left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Pasquale left 2 branches by the stash. No announcement. That's how it works here.",
+        "Ursula left 1 vine by the stash. No announcement. That's how it works here.",
+        "Nolan left 1 branch by the stash. No announcement. That's how it works here.",
+        "Pasquale left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Aki left 2 branches by the stash. No announcement. That's how it works here.",
+        "Nolan left 1 branch by the stash. No announcement. That's how it works here.",
+        "Pasquale left 1 branch by the stash. No announcement. That's how it works here.",
+        "Zahra left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Aki left 3 vines by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 28,
+        "vine": 0,
+        "hide": 14
+      },
+      "finalWornArmor": {
+        "living_soil_robes": 1,
+        "investigators_coat": 1,
+        "alien_boots": 1,
+        "death_mask": 1,
+        "bark_armor": 1,
+        "alien_greaves": 1,
+        "work_gloves": 1
+      },
+      "setup": {
+        "armorSeedVid": "gen_iky35er",
+        "wearers": [
+          {
+            "vid": "gen_iky35er",
+            "item": "bark_armor",
+            "goal": "remember",
+            "away": false
+          },
+          {
+            "vid": "gen_tewl5or",
+            "item": "bark_armor",
+            "goal": "remember",
+            "away": false
+          },
+          {
+            "vid": "gen_vqb2844",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67708,
+      "daysObserved": 125,
+      "survivalDays": 125,
+      "endReason": "village-lost",
+      "attempts": 5,
+      "crafts": 0,
+      "deaths": 30,
+      "deathCauses": {
+        "villager combat": 14,
+        "combat": 6,
+        "the arena": 1,
+        "expedition": 2,
+        "the wild": 6,
+        "starvation": 1
+      },
+      "coincidenceDays": 2,
+      "knowersDays": 69,
+      "stayingKnowersDays": 69,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 32,
+      "firstCraftDay": null,
+      "barkWearersDays": 69,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 97,
+        "vine": 42,
+        "hide": 93,
+        "branch": 96,
+        "wood": 94
+      },
+      "craftEvents": [
+        {
+          "day": 32,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_a8ui08b"
+        },
+        {
+          "day": 41,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_a8ui08b"
+        },
+        {
+          "day": 51,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_jq22isp"
+        },
+        {
+          "day": 64,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_jq22isp"
+        },
+        {
+          "day": 89,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_jq22isp"
+        }
+      ],
+      "saySample": [
+        "Aonghus left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Nina left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Gabriela spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Amina left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Sukit left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Aonghus left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Mateo left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Gabriela spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Mateo left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Sukit left 1 vine by the stash. No announcement. That's how it works here.",
+        "Jude spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Amina left 2 branches by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 61,
+        "vine": 7,
+        "hide": 6
+      },
+      "finalWornArmor": {
+        "flannel_shirt": 2,
+        "wool_socks": 1,
+        "work_gloves": 1
+      },
+      "setup": {
+        "armorSeedVid": "gen_jq22isp",
+        "wearers": [
+          {
+            "vid": "gen_jq22isp",
+            "item": "bark_armor",
+            "goal": "record",
+            "away": false
+          },
+          {
+            "vid": "gen_m7hhlid",
+            "item": "bark_armor",
+            "goal": "understand",
+            "away": false
+          },
+          {
+            "vid": "gen_a8ui08b",
+            "item": "bark_armor",
+            "goal": "survive",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67709,
+      "daysObserved": 138,
+      "survivalDays": 138,
+      "endReason": "village-lost",
+      "attempts": 3,
+      "crafts": 0,
+      "deaths": 53,
+      "deathCauses": {
+        "villager combat": 2,
+        "the wild": 11,
+        "combat": 35,
+        "dehydration": 1,
+        "starvation": 1,
+        "contest": 1,
+        "monster": 1,
+        "a wound that wouldn't close": 1
+      },
+      "coincidenceDays": 2,
+      "knowersDays": 59,
+      "stayingKnowersDays": 59,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 44,
+      "firstCraftDay": null,
+      "barkWearersDays": 59,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 110,
+        "vine": 95,
+        "hide": 108,
+        "branch": 109,
+        "wood": 99
+      },
+      "craftEvents": [
+        {
+          "day": 44,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_2etj4mx"
+        },
+        {
+          "day": 66,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_2etj4mx"
+        },
+        {
+          "day": 71,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_2etj4mx"
+        }
+      ],
+      "saySample": [
+        "Sujinda left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Luis left 3 branches by the stash. No announcement. That's how it works here.",
+        "Sari left 3 branches by the stash. No announcement. That's how it works here.",
+        "Amina left 2 branches by the stash. No announcement. That's how it works here.",
+        "Amina left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Amina left 3 vines by the stash. No announcement. That's how it works here.",
+        "Regina spent the afternoon sewing, and the Bark armor came apart in their hands. The bark strips are wasted.",
+        "Luis left 2 branches by the stash. No announcement. That's how it works here.",
+        "Sari left 3 wood logs by the stash. No announcement. That's how it works here.",
+        "Fatima left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Fatima left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Sari left 1 branch by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 30,
+        "vine": 7,
+        "hide": 6
+      },
+      "finalWornArmor": {},
+      "setup": {
+        "armorSeedVid": "gen_2etj4mx",
+        "wearers": [
+          {
+            "vid": "gen_2etj4mx",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          },
+          {
+            "vid": "gen_xhqjh6x",
+            "item": "bark_armor",
+            "goal": "legacy",
+            "away": false
+          },
+          {
+            "vid": "gen_weoouwv",
+            "item": "bark_armor",
+            "goal": "belong",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67710,
+      "daysObserved": 108,
+      "survivalDays": 109,
+      "endReason": "village-lost",
+      "attempts": 12,
+      "crafts": 11,
+      "deaths": 40,
+      "deathCauses": {
+        "villager combat": 4,
+        "combat": 20,
+        "expedition": 2,
+        "the wild": 12,
+        "The Congregation": 1,
+        "monster": 1
+      },
+      "coincidenceDays": 8,
+      "knowersDays": 84,
+      "stayingKnowersDays": 84,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 28,
+      "firstCraftDay": 28,
+      "barkWearersDays": 84,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 65,
+        "vine": 44,
+        "hide": 52,
+        "branch": 84,
+        "wood": 84
+      },
+      "craftEvents": [
+        {
+          "day": 28,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 38,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 45,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 57,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 62,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 65,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 66,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_t7pnzos"
+        },
+        {
+          "day": 88,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 91,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_oynmkh4"
+        },
+        {
+          "day": 101,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 106,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_tu058hl"
+        },
+        {
+          "day": 106,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_oynmkh4"
+        }
+      ],
+      "saySample": [
+        "Diana left 1 vine by the stash. No announcement. That's how it works here.",
+        "Dante left 2 branches by the stash. No announcement. That's how it works here.",
+        "Emma left 2 vines by the stash. No announcement. That's how it works here.",
+        "Sidney left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Evelyn spent the afternoon at the workbench and sewed a Bark armor that holds together. Evelyn wears it now.",
+        "Zoltan left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Emma left 3 wood logs by the stash. No announcement. That's how it works here.",
+        "Evelyn left 3 vines by the stash. No announcement. That's how it works here.",
+        "Oduor left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Emma left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Evelyn spent the afternoon at the workbench and sewed a Bark armor that holds together. Evelyn wears it now.",
+        "Emma left 2 branches by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 9,
+        "vine": 0,
+        "hide": 6
+      },
+      "finalWornArmor": {},
+      "setup": {
+        "armorSeedVid": "gen_tu058hl",
+        "wearers": [
+          {
+            "vid": "gen_tu058hl",
+            "item": "bark_armor",
+            "goal": "lead",
+            "away": false
+          },
+          {
+            "vid": "gen_blnchku",
+            "item": "bark_armor",
+            "goal": "peace",
+            "away": false
+          },
+          {
+            "vid": "gen_t7pnzos",
+            "item": "bark_armor",
+            "goal": "record",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    },
+    {
+      "seed": 67711,
+      "daysObserved": 180,
+      "survivalDays": 181,
+      "endReason": "survived",
+      "attempts": 21,
+      "crafts": 13,
+      "deaths": 26,
+      "deathCauses": {
+        "combat": 7,
+        "villager combat": 17,
+        "expedition": 1,
+        "The Algorithm": 1
+      },
+      "coincidenceDays": 10,
+      "knowersDays": 139,
+      "stayingKnowersDays": 139,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 26,
+      "firstCraftDay": 26,
+      "barkWearersDays": 139,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 110,
+        "vine": 154,
+        "hide": 158,
+        "branch": 154,
+        "wood": 158
+      },
+      "craftEvents": [
+        {
+          "day": 26,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "owen_smith"
+        },
+        {
+          "day": 32,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_7fx18wn"
+        },
+        {
+          "day": 34,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "owen_smith"
+        },
+        {
+          "day": 51,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_7fx18wn"
+        },
+        {
+          "day": 52,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_j2t7837"
+        },
+        {
+          "day": 66,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 72,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 77,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_j2t7837"
+        },
+        {
+          "day": 82,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_4haljef"
+        },
+        {
+          "day": 83,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 94,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_4haljef"
+        },
+        {
+          "day": 103,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 112,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 115,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 122,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_7f7ace1"
+        },
+        {
+          "day": 123,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_3k8sbrh"
+        },
+        {
+          "day": 128,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "gen_7f7ace1"
+        },
+        {
+          "day": 147,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_7f7ace1"
+        },
+        {
+          "day": 165,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_7f7ace1"
+        },
+        {
+          "day": 167,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "sanne_bakker"
+        }
+      ],
+      "saySample": [
+        "📖 LEARNED: Sewing & Textiles (Level 2). Patch and reinforce — layered cloth, waxed thread, stress points doubled.",
+        "🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Sewing & Textiles, Reading the Land. Your Codex overflows.",
+        "Reagan left 2 rawhides by the stash. No announcement. That's how it works here.",
+        "Giancarlo left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Owen left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Ramiro left 3 vines by the stash. No announcement. That's how it works here.",
+        "Owen spent the afternoon at the workbench and sewed a Bark armor that holds together. Owen wears it now.",
+        "Elijah left 3 branches by the stash. No announcement. That's how it works here.",
+        "Ramiro left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Heidi left 3 branches by the stash. No announcement. That's how it works here.",
+        "Ramiro left 3 vines by the stash. No announcement. That's how it works here.",
+        "Elijah left 2 branches by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 3,
+        "vine": 14,
+        "hide": 14
+      },
+      "finalWornArmor": {
+        "shelter_cloak": 1,
+        "deep_earth_boots": 1,
+        "bark_armor": 7,
+        "farstrider_boots": 1,
+        "work_gloves": 2,
+        "living_soil_robes": 2,
+        "canvas_pants": 3,
+        "good_boots": 1,
+        "running_shoes": 1
+      },
+      "setup": {
+        "armorSeedVid": null,
+        "wearers": [
+          {
+            "vid": "owen_smith",
+            "item": "bark_armor",
+            "goal": "joy",
+            "away": false
+          }
+        ],
+        "stayingWearers": 1
+      }
+    },
+    {
+      "seed": 67712,
+      "daysObserved": 180,
+      "survivalDays": 181,
+      "endReason": "survived",
+      "attempts": 10,
+      "crafts": 9,
+      "deaths": 37,
+      "deathCauses": {
+        "combat": 27,
+        "the wild": 5,
+        "villager combat": 5
+      },
+      "coincidenceDays": 8,
+      "knowersDays": 139,
+      "stayingKnowersDays": 139,
+      "firstKnowerDay": 2,
+      "firstAttemptDay": 34,
+      "firstCraftDay": 34,
+      "barkWearersDays": 139,
+      "hideWearersDays": 0,
+      "stashDays": {
+        "bark": 158,
+        "vine": 85,
+        "hide": 159,
+        "branch": 156,
+        "wood": 154
+      },
+      "craftEvents": [
+        {
+          "day": 34,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_a2rc62h"
+        },
+        {
+          "day": 69,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_a2rc62h"
+        },
+        {
+          "day": 70,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "hannah_kim"
+        },
+        {
+          "day": 71,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_kafv5x8"
+        },
+        {
+          "day": 97,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_a2rc62h"
+        },
+        {
+          "day": 100,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_a2rc62h"
+        },
+        {
+          "day": 122,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_a2rc62h"
+        },
+        {
+          "day": 122,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "gen_kafv5x8"
+        },
+        {
+          "day": 170,
+          "ok": true,
+          "item": "bark_armor",
+          "vid": "hannah_kim"
+        },
+        {
+          "day": 175,
+          "ok": false,
+          "item": "bark_armor",
+          "vid": "hannah_kim"
+        }
+      ],
+      "saySample": [
+        "Zoe left 2 rawhides by the stash. No announcement. That's how it works here.",
+        "Aria left 1 bark strip by the stash. No announcement. That's how it works here.",
+        "Aurora left 2 bark strips by the stash. No announcement. That's how it works here.",
+        "Yara left 1 branch by the stash. No announcement. That's how it works here.",
+        "📖 LEARNED: Sewing & Textiles (Level 2). Patch and reinforce — layered cloth, waxed thread, stress points doubled.",
+        "🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Locks & Mechanisms, Sewing & Textiles, Research & Records. Your Codex overflows.",
+        "Minh left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Aurora left 1 wood log by the stash. No announcement. That's how it works here.",
+        "Nia left 2 wood logs by the stash. No announcement. That's how it works here.",
+        "Lena left 3 bark strips by the stash. No announcement. That's how it works here.",
+        "Hannah left 3 branches by the stash. No announcement. That's how it works here.",
+        "Yara left 3 vines by the stash. No announcement. That's how it works here."
+      ],
+      "finalStash": {
+        "bark": 65,
+        "vine": 0,
+        "hide": 26
+      },
+      "finalWornArmor": {
+        "shelter_cloak": 1,
+        "menders_apron": 1,
+        "good_boots": 1,
+        "stormcloak": 1,
+        "alien_greaves": 1,
+        "running_shoes": 1,
+        "bark_armor": 3,
+        "canvas_pants": 1,
+        "death_mask": 1,
+        "adaptive_dermis": 1,
+        "knit_cap": 1,
+        "work_gloves": 1,
+        "military_vest": 1
+      },
+      "setup": {
+        "armorSeedVid": "gen_f6od9kh",
+        "wearers": [
+          {
+            "vid": "gen_f6od9kh",
+            "item": "bark_armor",
+            "goal": "belong",
+            "away": false
+          },
+          {
+            "vid": "gen_a2rc62h",
+            "item": "bark_armor",
+            "goal": "survive",
+            "away": false
+          },
+          {
+            "vid": "gen_ku5npo9",
+            "item": "bark_armor",
+            "goal": "home",
+            "away": false
+          }
+        ],
+        "stayingWearers": 3
+      }
+    }
+  ]
+}
