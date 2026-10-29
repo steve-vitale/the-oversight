@@ -42,13 +42,19 @@ function medianOf(arr) {
 }
 function sleepMs(ms) { try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {} }
 function writeFileRetry(p, body) {
+  // FLAP FIX 2026-10-29 (adopting worker): the container EPERM write flap
+  // holds for 30s+ at a stretch, so the original 8 attempts / ~28s span
+  // failed twice on seed 75114 even though the sim itself completed.
+  // 60 attempts with up to 30s sleeps spans ~20 min worst case; the
+  // row content is untouched (sim is deterministic; only write timing
+  // changes), and the determinism gate (75106 scratch re-run) proves it.
   let lastErr = null;
-  for (let a = 1; a <= 8; a++) {
+  for (let a = 1; a <= 60; a++) {
     try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return; }
     catch (e) {
       lastErr = e;
       console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
-      if (a < 8) sleepMs(Math.min(10000, 1000 * a));
+      if (a < 60) sleepMs(Math.min(30000, 2000 * a));
     }
   }
   throw lastErr;
@@ -140,7 +146,15 @@ async function runOne(seed, days, evidDir) {
       diag: { errs: dpStore.errs, errors: dpStore.errors, overflow: dpStore.overflow, installed: dpStore.installed },
     } : null,
   };
-  if (evidDir) {
+  if (process.env.W4DPR_STDOUT === '1') {
+    // FLAP BYPASS 2026-10-29 (adopting worker): the container EPERM flap
+    // denies write(2) inside the long-running sweep process even while
+    // fresh processes write fine, so the row is emitted on stdout and
+    // the CALLER's shell redirection (a fresh bash write) lands the file.
+    // Bytes are JSON.stringify(row) verbatim — identical to the file mode.
+    process.stdout.write(JSON.stringify(row, null, 1) + '\n');
+    row.corpusFile = '(stdout)';
+  } else if (evidDir) {
     const fn = path.join(evidDir, `s${seed}-fresh.json`);
     writeFileRetry(fn, JSON.stringify(row, null, 1) + '\n');
     row.corpusFile = fn;
@@ -219,7 +233,8 @@ async function main() {
   if (args[0] === '--one') {
     const seed = parseInt(args[1], 10);
     const row = await runOne(seed, days, evidDir);
-    console.log(`  [fresh seed ${seed}] days=${row.days} end=${row.endReason} wave=${row.waveReach} won=${row.won} natEver=${row.nationalEver} starv=${row.starvationDeaths} deaths=${row.deathTotal} fpMeetings=${row.fieldparty.meetings.length} dpMeetings=${row.w4dpr.meetings.length} fpErrs=${row.fieldparty.diag.errs} dpErrs=${row.w4dpr.diag.errs}`);
+    // In stdout mode the summary line must not corrupt the JSON stream.
+    (process.env.W4DPR_STDOUT === '1' ? console.error : console.log)(`  [fresh seed ${seed}] days=${row.days} end=${row.endReason} wave=${row.waveReach} won=${row.won} natEver=${row.nationalEver} starv=${row.starvationDeaths} deaths=${row.deathTotal} fpMeetings=${row.fieldparty.meetings.length} dpMeetings=${row.w4dpr.meetings.length} fpErrs=${row.fieldparty.diag.errs} dpErrs=${row.w4dpr.diag.errs}`);
     return;
   }
   for (const seed of SEEDS) {
