@@ -1,0 +1,346 @@
+# SURFACE+SEEDED — seed 6001 (141d, 9 alive)
+
+npcPairs=63 deep2=29 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=1 stateVCrack=0 t2picks=281 closeReadsServed=35 grievanceServes=56 othersSteered=19
+COND-TP: firstDeep2Day=20 lateClose=155 lateTP=142 lateNull=0 condRate=91.6% pooledTP=142/160 pooledRate=88.8% grievReadsByWhy={"grievance":43,"vgrievance":63}
+FUNNEL (natural): convos=414 subject=402 offered=363 picked=262 classes={"subject-no-offer":39,"offered-not-picked":101,"no-subject-no-ans":12,"picked-others":262}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=39 rate=9.4% offered=363 mainOffered=0 subjectOffered=363 picked=262 latePicks=102 latePicksMain=0 latePicksSubject=102
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Farid / Henry — "David ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Nikolai / Otto — "Mara talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Farid / Nikolai — "that stray dog — the one that bit two people — lets Henry touch it."
+REOFFER: offers=369 picks=271 latePicks=100 missedChangedNotOffered=8
+WRAPSERVE: convos=106 matcherHits=56 matcherServes=56 classes={"grievance-line":56,"deflection":2,"other":48}
+FUNNEL-PROBE (subject-no-offer turns): turns=223 menuProblem=209 pickProblem=14
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":1,"acceptRate":0.2,"vetoes":{},"chanceMin":21,"chanceMax":42,"chanceMean":25.6} party={"n":12,"accepts":6,"acceptRate":0.5,"vetoes":{},"chanceMin":23.799999999999997,"chanceMax":72.4,"chanceMean":53.2} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":73,"forageOffers":29,"otherFavorOffers":44,"accepts":30,"acceptAttempts":30,"waits":40,"starts":9,"startBlocked":42,"forages":7,"forageNodeBarren":22,"forageBarren":5,"talks":7,"delivers":7,"deliverBlocked":0,"completeOutings":2,"keptMatched":5}
+OUTING END STATES: [{"vid":"olivia_bennett","vidName":"Olivia","favorId":"favor-olivia_bennett-4-1","state":"moot","promisedDay":4,"meetDay":5,"deadline":6,"promiseKept":true,"startedDay":5,"forageCount":1,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_tcq4v35","vidName":"Hazel","favorId":"favor-gen_tcq4v35-107-60","state":"moot","promisedDay":131,"meetDay":132,"deadline":133,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"mara_vasquez","vidName":"Mara","favorId":"favor-mara_vasquez-105-58","state":"broken","promisedDay":105,"meetDay":106,"deadline":107,"promiseKept":true,"startedDay":106,"forageCount":3,"playerKcal":270,"partnerKcal":270,"deliveredKcal":540,"returnedDay":109,"talkCount":1},{"vid":"gen_dgi48ba","vidName":"Otto","favorId":"favor-gen_dgi48ba-120-67","state":"moot","promisedDay":120,"meetDay":121,"deadline":122,"promiseKept":true,"startedDay":121,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_oxnxtph","vidName":"Jan","favorId":"favor-gen_oxnxtph-129-70","state":"acknowledged","promisedDay":130,"meetDay":131,"deadline":131,"promiseKept":true,"startedDay":131,"forageCount":1,"playerKcal":135,"partnerKcal":135,"deliveredKcal":270,"returnedDay":132,"talkCount":1}]
+  FAVOR-OFFER d4: Olivia kind=forage_help favorId=favor-olivia_bennett-4-1 task=forage with Olivia tomorrow to rebuild the pantry
+  FAVOR-OFFER d4: Hazel kind=forage_help favorId=favor-gen_tcq4v35-4-2 task=forage with Hazel tomorrow to rebuild the pantry
+  FAVOR-OFFER d5: Carol kind=heal_help favorId=favor-gen_uyywhv6-5-3 task=help Carol with their injury
+  FAVOR-OFFER d7: Mara kind=sick_help favorId=favor-mara_vasquez-7-4 task=help Mara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d11: Farid kind=forage_help favorId=favor-farid_ahmed-11-5 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Henry kind=forage_help favorId=favor-henry_zhang-12-6 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d18: Henry kind=forage_help favorId=favor-henry_zhang-18-7 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Farid kind=forage_help favorId=favor-farid_ahmed-22-8 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Nikolai kind=forage_help favorId=favor-nikolai_volkov-29-9 task=forage with Nikolai tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: David kind=forage_help favorId=favor-david_kim-30-10 task=forage with David tomorrow to rebuild the pantry
+  FAVOR-OFFER d33: David kind=forage_help favorId=favor-david_kim-33-11 task=forage with David tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: David kind=food_share favorId=favor-david_kim-34-13 task=share food with David — they're going hungry
+  FAVOR-OFFER d34: Jan kind=food_share favorId=favor-gen_oxnxtph-34-14 task=share food with Jan — they're going hungry
+  FAVOR-OFFER d37: Farid kind=forage_help favorId=favor-farid_ahmed-37-15 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Henry kind=sick_help favorId=favor-henry_zhang-38-16 task=help Henry with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d38: Otto kind=food_share favorId=favor-gen_dgi48ba-34-12 task=share food with Otto — they're running on empty
+  FAVOR-OFFER d41: Mara kind=heal_help favorId=favor-mara_vasquez-41-17 task=help Mara with their injury
+  FAVOR-OFFER d45: Henry kind=forage_help favorId=favor-henry_zhang-45-18 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d47: Hazel kind=forage_help favorId=favor-gen_tcq4v35-47-19 task=forage with Hazel tomorrow to rebuild the pantry
+  FAVOR-OFFER d48: David kind=food_share favorId=favor-david_kim-48-20 task=share food with David — they're running on empty
+  FAVOR-OFFER d51: David kind=forage_help favorId=favor-david_kim-51-21 task=forage with David tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Jan kind=heal_help favorId=favor-gen_oxnxtph-53-22 task=help Jan with their injury
+  FAVOR-OFFER d59: David kind=sick_help favorId=favor-david_kim-59-23 task=help David with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d59: Farid kind=forage_help favorId=favor-farid_ahmed-59-24 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d61: Mara kind=food_share favorId=favor-mara_vasquez-61-25 task=share food with Mara — they're running on empty
+  FAVOR-OFFER d62: Jan kind=heal_help favorId=favor-gen_oxnxtph-62-26 task=help Jan with their injury
+  FAVOR-OFFER d63: Hazel kind=heal_help favorId=favor-gen_tcq4v35-63-27 task=help Hazel with their injury
+  FAVOR-OFFER d63: Henry kind=forage_help favorId=favor-henry_zhang-63-28 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d64: Farid kind=forage_help favorId=favor-farid_ahmed-64-29 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d66: Henry kind=water_haul favorId=favor-henry_zhang-66-31 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d67: Mara kind=water_haul favorId=favor-mara_vasquez-67-32 task=bring four liters home from the creek with Mara; set out at dawn
+  FAVOR-OFFER d68: Henry kind=sick_help favorId=favor-henry_zhang-68-33 task=help Henry with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d68: Otto kind=heal_help favorId=favor-gen_dgi48ba-66-30 task=help Otto with their injury
+  FAVOR-OFFER d69: Farid kind=forage_help favorId=favor-farid_ahmed-69-35 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d70: Jan kind=food_share favorId=favor-gen_oxnxtph-69-34 task=share food with Jan — they're running on empty
+  FAVOR-OFFER d74: Otto kind=water_haul favorId=favor-gen_dgi48ba-74-37 task=bring four liters home from the creek with Otto; set out at dawn
+  FAVOR-OFFER d75: David kind=food_share favorId=favor-david_kim-75-38 task=share food with David — they're going hungry
+  FAVOR-OFFER d75: Hazel kind=water_haul favorId=favor-gen_tcq4v35-72-36 task=bring four liters home from the creek with Hazel; set out at dawn
+  FAVOR-OFFER d76: Henry kind=forage_help favorId=favor-henry_zhang-76-39 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d77: Nikolai kind=water_haul favorId=favor-nikolai_volkov-77-40 task=bring four liters home from the creek with Nikolai; set out at dawn
+  FAVOR-OFFER d79: Mara kind=food_share favorId=favor-mara_vasquez-79-41 task=share food with Mara — they're going hungry
+  FAVOR-OFFER d80: Hazel kind=water_haul favorId=favor-gen_tcq4v35-80-42 task=bring four liters home from the creek with Hazel; set out at dawn
+  FAVOR-OFFER d85: Mara kind=forage_help favorId=favor-mara_vasquez-85-44 task=forage with Mara tomorrow to rebuild the pantry
+  FAVOR-OFFER d86: Otto kind=forage_help favorId=favor-gen_dgi48ba-82-43 task=forage with Otto tomorrow to rebuild the pantry
+  FAVOR-OFFER d87: Hazel kind=forage_help favorId=favor-gen_tcq4v35-87-45 task=forage with Hazel tomorrow to rebuild the pantry
+  FAVOR-OFFER d90: Nikolai kind=water_haul favorId=favor-nikolai_volkov-90-46 task=bring four liters home from the creek with Nikolai; set out at dawn
+  FAVOR-OFFER d91: Henry kind=water_haul favorId=favor-henry_zhang-91-47 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d93: Henry kind=forage_help favorId=favor-henry_zhang-93-48 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d94: Jan kind=sick_help favorId=favor-gen_oxnxtph-94-49 task=help Jan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d95: Nikolai kind=water_haul favorId=favor-nikolai_volkov-95-50 task=bring four liters home from the creek with Nikolai; set out at dawn
+  FAVOR-OFFER d96: Otto kind=water_haul favorId=favor-gen_dgi48ba-96-51 task=bring four liters home from the creek with Otto; set out at dawn
+  FAVOR-OFFER d96: Henry kind=water_haul favorId=favor-henry_zhang-96-52 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d96: David kind=water_haul favorId=favor-david_kim-96-53 task=bring four liters home from the creek with David; set out at dawn
+  FAVOR-OFFER d99: Hazel kind=food_share favorId=favor-gen_tcq4v35-97-54 task=share food with Hazel — they're running on empty
+  FAVOR-OFFER d101: Nikolai kind=forage_help favorId=favor-nikolai_volkov-101-55 task=forage with Nikolai tomorrow to rebuild the pantry
+  FAVOR-OFFER d104: Otto kind=water_haul favorId=favor-gen_dgi48ba-104-57 task=bring four liters home from the creek with Otto; set out at dawn
+  FAVOR-OFFER d104: Henry kind=water_haul favorId=favor-henry_zhang-104-56 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d105: Mara kind=forage_help favorId=favor-mara_vasquez-105-58 task=forage with Mara tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Jan kind=food_share favorId=favor-gen_oxnxtph-106-59 task=share food with Jan — they're running on empty
+  FAVOR-OFFER d109: Farid kind=forage_help favorId=favor-farid_ahmed-109-61 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d110: Jan kind=food_share favorId=favor-gen_oxnxtph-110-62 task=share food with Jan — they're running on empty
+  FAVOR-OFFER d114: Nikolai kind=forage_help favorId=favor-nikolai_volkov-114-63 task=forage with Nikolai tomorrow to rebuild the pantry
+  FAVOR-OFFER d119: Henry kind=water_haul favorId=favor-henry_zhang-119-65 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d119: Nikolai kind=water_haul favorId=favor-nikolai_volkov-119-66 task=bring four liters home from the creek with Nikolai; set out at dawn
+  FAVOR-OFFER d120: Otto kind=forage_help favorId=favor-gen_dgi48ba-120-67 task=forage with Otto tomorrow to rebuild the pantry
+  FAVOR-OFFER d121: Jan kind=water_haul favorId=favor-gen_oxnxtph-119-64 task=bring four liters home from the creek with Jan; set out at dawn
+  FAVOR-OFFER d124: David kind=water_haul favorId=favor-david_kim-124-68 task=bring four liters home from the creek with David; set out at dawn
+  FAVOR-OFFER d128: Farid kind=food_share favorId=favor-farid_ahmed-128-69 task=share food with Farid — they're going hungry
+  FAVOR-OFFER d130: Jan kind=forage_help favorId=favor-gen_oxnxtph-129-70 task=forage with Jan tomorrow to rebuild the pantry
+  FAVOR-OFFER d131: Hazel kind=forage_help favorId=favor-gen_tcq4v35-107-60 task=forage with Hazel tomorrow to rebuild the pantry
+  FAVOR-OFFER d134: David kind=water_haul favorId=favor-david_kim-133-71 task=bring four liters home from the creek with David; set out at dawn
+  FAVOR-OFFER d140: Nathan kind=heal_help favorId=favor-nathan_lee-140-72 task=help Nathan with their injury
+  FAVOR-OFFER d140: Farid kind=water_haul favorId=favor-farid_ahmed-140-73 task=bring four liters home from the creek with Farid; set out at dawn
+  FAVOR-ACCEPT d4: Olivia favorId=favor-olivia_bennett-4-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d4: Hazel favorId=favor-gen_tcq4v35-4-2 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d11: Farid favorId=favor-farid_ahmed-11-5 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d12: Henry favorId=favor-henry_zhang-12-6 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d15: Hazel favorId=favor-gen_tcq4v35-4-2 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d18: Henry favorId=favor-henry_zhang-18-7 accepted=true state=promised meetDay=19
+  FAVOR-ACCEPT d22: Farid favorId=favor-farid_ahmed-22-8 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d29: Nikolai favorId=favor-nikolai_volkov-29-9 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d30: David favorId=favor-david_kim-30-10 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d33: David favorId=favor-david_kim-33-11 accepted=true state=promised meetDay=34
+  FAVOR-ACCEPT d37: Farid favorId=favor-farid_ahmed-37-15 accepted=true state=promised meetDay=38
+  FAVOR-ACCEPT d45: Henry favorId=favor-henry_zhang-45-18 accepted=true state=promised meetDay=46
+  FAVOR-ACCEPT d47: Hazel favorId=favor-gen_tcq4v35-47-19 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d51: David favorId=favor-david_kim-51-21 accepted=true state=promised meetDay=52
+  FAVOR-ACCEPT d59: Farid favorId=favor-farid_ahmed-59-24 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d63: Henry favorId=favor-henry_zhang-63-28 accepted=true state=promised meetDay=64
+  FAVOR-ACCEPT d64: Farid favorId=favor-farid_ahmed-64-29 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d69: Farid favorId=favor-farid_ahmed-69-35 accepted=true state=promised meetDay=70
+  FAVOR-ACCEPT d76: Henry favorId=favor-henry_zhang-76-39 accepted=true state=promised meetDay=77
+  FAVOR-ACCEPT d85: Mara favorId=favor-mara_vasquez-85-44 accepted=true state=promised meetDay=86
+  FAVOR-ACCEPT d86: Otto favorId=favor-gen_dgi48ba-82-43 accepted=true state=promised meetDay=87
+  FAVOR-ACCEPT d87: Hazel favorId=favor-gen_tcq4v35-87-45 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d93: Henry favorId=favor-henry_zhang-93-48 accepted=true state=promised meetDay=94
+  FAVOR-ACCEPT d101: Nikolai favorId=favor-nikolai_volkov-101-55 accepted=true state=promised meetDay=102
+  FAVOR-ACCEPT d105: Mara favorId=favor-mara_vasquez-105-58 accepted=true state=promised meetDay=106
+  FAVOR-ACCEPT d109: Farid favorId=favor-farid_ahmed-109-61 accepted=true state=promised meetDay=110
+  FAVOR-ACCEPT d114: Nikolai favorId=favor-nikolai_volkov-114-63 accepted=true state=promised meetDay=115
+  FAVOR-ACCEPT d120: Otto favorId=favor-gen_dgi48ba-120-67 accepted=true state=promised meetDay=121
+  FAVOR-ACCEPT d130: Jan favorId=favor-gen_oxnxtph-129-70 accepted=true state=promised meetDay=131
+  FAVOR-ACCEPT d131: Hazel favorId=favor-gen_tcq4v35-107-60 accepted=true state=promised meetDay=132
+  INVITE-DEC d7 lure: Jan -> Nikolai chance=21 accept=false veto=- inputs={"temp":"prickly","goal":"heal","mood":"grieving","fear":4,"affinity":25} reasons=["relationship with inviter (+6)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Carol -> Henry chance=23.799999999999997 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"grieving","fear":70,"trust":22,"bond":null,"partySize":1} reasons=["trust 22","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Carol -> Hazel chance=31.799999999999997 accept=true veto=- inputs={"temp":"gentle","goal":"home","mood":"grieving","fear":76,"trust":42,"bond":{"v":8,"depth":0},"partySize":1} reasons=["trust 42","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d8 lure: Jan -> Nikolai chance=21 accept=false veto=- inputs={"temp":"prickly","goal":"heal","mood":"grieving","fear":62,"affinity":25} reasons=["relationship with inviter (+6)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d9 lure: Jan -> Nikolai chance=22 accept=false veto=- inputs={"temp":"prickly","goal":"heal","mood":"grieving","fear":42,"affinity":27} reasons=["relationship with inviter (+7)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d10 lure: Jan -> Nikolai chance=22 accept=false veto=- inputs={"temp":"prickly","goal":"heal","mood":"grieving","fear":22,"affinity":27} reasons=["relationship with inviter (+7)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d11 lure: Jan -> Nikolai chance=42 accept=true veto=- inputs={"temp":"prickly","goal":"heal","mood":"lonely","fear":4,"affinity":27} reasons=["relationship with inviter (+7)","prickly temperament (-20)","lonely mood (+10)"]
+  INVITE-DEC d15 party: Carol -> Henry chance=45.6 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"grateful","fear":12,"trust":39,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 39","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d15 party: Carol -> Jan chance=72.4 accept=true veto=- inputs={"temp":"mischievous","goal":"record","mood":"cheerful","fear":12,"trust":56,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 56","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d31 party: Carol -> David chance=62.400000000000006 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"grateful","fear":12,"trust":56,"bond":{"v":54,"depth":2},"partySize":4} reasons=["trust 56","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d31 party: Carol -> Henry chance=56 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":12,"trust":40,"bond":{"v":48,"depth":1},"partySize":4} reasons=["trust 40","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d32 party: Carol -> David chance=64 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"grateful","fear":12,"trust":60,"bond":{"v":58,"depth":2},"partySize":4} reasons=["trust 60","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d33 party: Carol -> David chance=58 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"grateful","fear":12,"trust":45,"bond":{"v":60,"depth":2},"partySize":4} reasons=["trust 45","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d122 party: Otto -> Farid chance=64.4 accept=false veto=- inputs={"temp":"cautious","goal":"survive","mood":"grieving","fear":58,"trust":86,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 86","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d123 party: Otto -> Farid chance=66 accept=true veto=- inputs={"temp":"cautious","goal":"survive","mood":"grieving","fear":38,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Hazel -> Henry chance=66 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"grieving","fear":48,"trust":90,"bond":{"v":100,"depth":3},"partySize":3} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d137 party: Hazel -> Habiba chance=28.4 accept=true veto=- inputs={"temp":"prickly","goal":"legacy","mood":"steady","fear":0,"trust":21,"bond":null,"partySize":4} reasons=["trust 21","a big party is safer (+5)","prickly temperament (-20)"]
+SEEDED-DAILY: [{"day":20,"v":40,"depth":3},{"day":21,"v":40,"depth":3},{"day":22,"v":44,"depth":3},{"day":23,"v":44,"depth":3},{"day":24,"v":44,"depth":3},{"day":25,"v":46,"depth":3},{"day":26,"v":48,"depth":3},{"day":27,"v":52,"depth":3},{"day":28,"v":54,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":60,"depth":3}] class=no-drop
+GOSSIP: totalPicks=217 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=39 31-60=58 61-90=63 91-120=62 121+=40 naturalPicks=262 seededPicks=19 gossipPicks=217
+SEEDED: {"pair":{"a":"david_kim","b":"gen_dgi48ba","aName":"David","bName":"Otto"},"day":19,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":20,"v":40,"depth":3},{"day":21,"v":40,"depth":3},{"day":22,"v":44,"depth":3},{"day":23,"v":44,"depth":3},{"day":24,"v":44,"depth":3},{"day":25,"v":46,"depth":3},{"day":26,"v":48,"depth":3},{"day":27,"v":52,"depth":3},{"day":28,"v":54,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":60,"depth":3}],"crackTraceClass":"no-drop","vAt7":46,"depthAt7":3,"vDrop":6,"depthDrop":-1,"crack7":false,"firstServe":{"day":21,"why":"vgrievance"},"serveWithin30":true,"serves":63,"servesAll":[{"day":21,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":73,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":81,"why":"vgrievance"},{"day":82,"why":"vgrievance"},{"day":83,"why":"vgrievance"},{"day":84,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":91,"why":"vgrievance"},{"day":96,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":98,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":102,"why":"vgrievance"},{"day":105,"why":"vgrievance"},{"day":106,"why":"vgrievance"},{"day":107,"why":"vgrievance"},{"day":108,"why":"vgrievance"},{"day":113,"why":"vgrievance"},{"day":114,"why":"vgrievance"},{"day":115,"why":"vgrievance"},{"day":120,"why":"vgrievance"}],"effect":true}
+  FRIEND d135: Otto <> Carol — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Otto <> Hazel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Jan <> Hazel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Farid <> Hazel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Farid <> Otto — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Hazel <> Nikolai — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d90: David <> Farid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: David <> Carol — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: David <> Henry — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d25: Otto <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Otto <> Jan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: David <> Otto — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Hazel <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Hazel <> Mara — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d135: Farid <> Jan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d45: Otto <> Nikolai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: David <> Hazel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: David <> Mara — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d55: Otto <> Mara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Jan <> Carol — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Jan <> Nikolai — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d85: Farid <> Nikolai — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d120: Farid <> Henry — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d135: David <> Jan — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d125: Farid <> Carol — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d125: Hazel <> Carol — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Carol <> Mara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Carol <> Nikolai — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d125: Carol <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d10: David about Otto — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d14: Otto about Hazel — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Farid about Otto — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: David about Otto — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: David about Otto — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Otto about David — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d24: Otto about David — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Otto about David — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Jan about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Nikolai about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Jan about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Mara about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Mara about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Jan about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Mara about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Jan about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Jan about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Mara about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Mara about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Nikolai about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Farid about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Jan about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Farid about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Mara about Otto — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Nikolai about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Jan about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Jan about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Jan about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Farid about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Farid about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Jan about Otto — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Jan about Otto — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Farid about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Nikolai about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Farid about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Nikolai about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Nikolai about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Nikolai about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Mara about Otto — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Mara about Otto — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Mara about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Mara about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Jan about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Hazel about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Nikolai about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Otto about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Henry about Otto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Hazel about Farid — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Jan about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: David about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Hazel about Farid — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Mara about Hazel — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Hazel about Farid — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: David about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Henry about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Jan about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Jan about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Farid about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: David about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Jan about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Mara about Hazel — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Henry about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Hazel about Jan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Jan about Hazel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: David about Farid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Jan about Nikolai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Jan about Nikolai — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: David about Farid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Henry about David — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Jan about Nikolai — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Henry about David — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Farid about David — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Henry about David — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d20 (betrayal): David vs Otto (ambushed) depth 3 v 40 -> 46
+  GRIEV-READ d8: Henry about Hazel (why=grievance)
+  GRIEV-READ d8: Hazel about Henry (why=grievance)
+  GRIEV-READ d9: Hazel about Henry (why=grievance)
+  GRIEV-READ d11: Henry about Hazel (why=grievance)
+  GRIEV-READ d15: Hazel about Henry (why=grievance)
+  GRIEV-READ d18: Henry about Hazel (why=grievance)
+  KNACK d7 Jan: "Good question." "Nikolai sees in the dark. Not well — but better than you. Better than me. Doesn't matter now."
+  KNACK d9 Hazel: "Good question." "that stray dog — the one that bit two people — lets Otto touch it."
+  KNACK d14 Jan: "Real talk — that stray dog — the one that bit two people — lets Hazel touch it."
+  KNACK d15 Henry: "Good question." "that stray dog — the one that bit two people — lets Hazel touch it."
+  KNACK d17 Farid: "David ate something last month that should've killed them. They're fine."
+  KNACK d20 David: "Farid talks to the garden. The garden listens. I've seen it."
+  KNACK d24 David: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Hazel touch it."
+  KNACK d36 Nikolai: "Mara talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":4,"Static":1,"combat":1}

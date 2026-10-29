@@ -1,0 +1,229 @@
+# SURFACE+SEEDED — seed 6002 (140d, 8 alive)
+
+npcPairs=66 deep2=34 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=173 closeReadsServed=17 grievanceServes=31 othersSteered=8
+COND-TP: firstDeep2Day=25 lateClose=113 lateTP=99 lateNull=0 condRate=87.6% pooledTP=99/121 pooledRate=81.8% grievReadsByWhy={"grievance":18,"vgrievance":28}
+FUNNEL (natural): convos=414 subject=328 offered=258 picked=165 classes={"no-subject-no-ans":86,"offered-not-picked":93,"subject-no-offer":70,"picked-others":165}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=70 rate=16.9% offered=258 mainOffered=0 subjectOffered=258 picked=165 latePicks=57 latePicksMain=0 latePicksSubject=57
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Bridget / Luis — "cuts close faster when Albina wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Bernadette / Bridget / Luis — "Eric ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Eric / Luis — "Tashi found a lost knife by smell last week. By SMELL."
+REOFFER: offers=247 picks=162 latePicks=57 missedChangedNotOffered=5
+WRAPSERVE: convos=46 matcherHits=31 matcherServes=31 classes={"grievance-line":31,"deflection":2,"other":13}
+FUNNEL-PROBE (subject-no-offer turns): turns=202 menuProblem=193 pickProblem=9
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":11,"accepts":6,"acceptRate":0.5454545454545454,"vetoes":{},"chanceMin":11,"chanceMax":78,"chanceMean":60.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=9
+FAVOR (r65): funnel={"offers":19,"forageOffers":8,"otherFavorOffers":11,"accepts":8,"acceptAttempts":8,"waits":11,"starts":2,"startBlocked":13,"forages":1,"forageNodeBarren":0,"forageBarren":56,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":0,"keptMatched":2}
+OUTING END STATES: [{"vid":"tashi_sherpa","vidName":"Tashi","favorId":"favor-tashi_sherpa-120-17","state":"broken","promisedDay":120,"meetDay":121,"deadline":122,"promiseKept":true,"startedDay":121,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_ye0t93k","vidName":"Albina","favorId":"favor-gen_ye0t93k-17-4","state":"acknowledged","promisedDay":17,"meetDay":18,"deadline":19,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d7: Tashi kind=forage_help favorId=favor-tashi_sherpa-7-1 task=forage with Tashi tomorrow to rebuild the pantry
+  FAVOR-OFFER d8: Bridget kind=forage_help favorId=favor-gen_voi9ed1-8-2 task=forage with Bridget tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Tashi kind=forage_help favorId=favor-tashi_sherpa-13-3 task=forage with Tashi tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Albina kind=forage_help favorId=favor-gen_ye0t93k-17-4 task=forage with Albina tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Eric kind=forage_help favorId=favor-gen_c0f69al-22-5 task=forage with Eric tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Luis kind=sick_help favorId=favor-luis_fernandez-24-6 task=help Luis with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d25: Giulia kind=food_share favorId=favor-giulia_bianchi-25-7 task=share food with Giulia — they're running on empty
+  FAVOR-OFFER d31: Samuel kind=food_share favorId=favor-gen_om41agc-31-8 task=share food with Samuel — they're running on empty
+  FAVOR-OFFER d33: Eric kind=sick_help favorId=favor-gen_c0f69al-33-9 task=help Eric with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d49: Bernadette kind=sick_help favorId=favor-gen_g4exlgb-49-10 task=help Bernadette with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d56: Bridget kind=sick_help favorId=favor-gen_voi9ed1-56-11 task=help Bridget with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d90: Bridget kind=sick_help favorId=favor-gen_voi9ed1-90-12 task=help Bridget with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d104: Samuel kind=heal_help favorId=favor-gen_om41agc-104-13 task=help Samuel with their injury
+  FAVOR-OFFER d111: Samuel kind=heal_help favorId=favor-gen_om41agc-111-14 task=help Samuel with their injury
+  FAVOR-OFFER d115: Luis kind=forage_help favorId=favor-luis_fernandez-115-15 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d117: Samuel kind=food_share favorId=favor-gen_om41agc-117-16 task=share food with Samuel — they're past hungry
+  FAVOR-OFFER d120: Tashi kind=forage_help favorId=favor-tashi_sherpa-120-17 task=forage with Tashi tomorrow to rebuild the pantry
+  FAVOR-OFFER d121: Luis kind=forage_help favorId=favor-luis_fernandez-121-18 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d138: Luis kind=sick_help favorId=favor-luis_fernandez-138-19 task=help Luis with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-ACCEPT d7: Tashi favorId=favor-tashi_sherpa-7-1 accepted=true state=promised meetDay=8
+  FAVOR-ACCEPT d8: Bridget favorId=favor-gen_voi9ed1-8-2 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d13: Tashi favorId=favor-tashi_sherpa-13-3 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d17: Albina favorId=favor-gen_ye0t93k-17-4 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d22: Eric favorId=favor-gen_c0f69al-22-5 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d115: Luis favorId=favor-luis_fernandez-115-15 accepted=true state=promised meetDay=116
+  FAVOR-ACCEPT d120: Tashi favorId=favor-tashi_sherpa-120-17 accepted=true state=promised meetDay=121
+  FAVOR-ACCEPT d121: Luis favorId=favor-luis_fernandez-121-18 accepted=true state=promised meetDay=122
+  INVITE-DEC d8 party: Scarlett -> Samuel chance=70.8 accept=false veto=- inputs={"temp":"gentle","goal":"feed","mood":"steady","fear":0,"trust":52,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 52","feed goal (+15)"]
+  INVITE-DEC d8 party: Scarlett -> Ingrid chance=11 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40","wants to be alone (-40)"]
+  INVITE-DEC d11 party: Scarlett -> Eric chance=49 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":4,"trust":60,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 60","cautious temperament (-10)"]
+  INVITE-DEC d11 party: Scarlett -> Emma chance=64.8 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"steady","fear":4,"trust":37,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 37","warm temperament (+15)"]
+  INVITE-DEC d12 party: Scarlett -> Tashi chance=40.6 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":4,"trust":64,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 64","sick (-20)"]
+  INVITE-DEC d13 party: Scarlett -> Samuel chance=78 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"steady","fear":0,"trust":70,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 70","feed goal (+15)"]
+  INVITE-DEC d15 party: Scarlett -> Giulia chance=74.6 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"steady","fear":4,"trust":49,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 49","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d32 party: Scarlett -> Eric chance=56 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":12,"trust":90,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)"]
+  INVITE-DEC d32 party: Scarlett -> Albina chance=76.4 accept=true veto=- inputs={"temp":"earnest","goal":"prove","mood":"steady","fear":12,"trust":91,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 91","a big party is safer (+5)"]
+  INVITE-DEC d51 party: Emma -> Eric chance=66 accept=true veto=- inputs={"temp":"cautious","goal":"answers","mood":"grieving","fear":52,"trust":90,"bond":{"v":52,"depth":2},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d105 party: Bridget -> Tashi chance=76.80000000000001 accept=true veto=- inputs={"temp":"steady","goal":"family","mood":"grieving","fear":12,"trust":92,"bond":{"v":38,"depth":1},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":24,"v":44,"depth":3},{"day":25,"v":44,"depth":3},{"day":26,"v":48,"depth":3},{"day":27,"v":48,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":48,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":56,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":64,"depth":3},{"day":35,"v":64,"depth":3},{"day":36,"v":68,"depth":3},{"day":37,"v":70,"depth":3}] class=no-drop
+GOSSIP: totalPicks=234 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=28 31-60=48 61-90=32 91-120=34 121+=23 naturalPicks=165 seededPicks=8 gossipPicks=234
+SEEDED: {"pair":{"a":"gen_c0f69al","b":"gen_om41agc","aName":"Eric","bName":"Samuel"},"day":23,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":24,"v":44,"depth":3},{"day":25,"v":44,"depth":3},{"day":26,"v":48,"depth":3},{"day":27,"v":48,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":48,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":56,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":64,"depth":3},{"day":35,"v":64,"depth":3},{"day":36,"v":68,"depth":3},{"day":37,"v":70,"depth":3}],"crackTraceClass":"no-drop","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":41,"why":"vgrievance"},"serveWithin30":true,"serves":28,"servesAll":[{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":79,"why":"vgrievance"},{"day":80,"why":"vgrievance"},{"day":82,"why":"vgrievance"},{"day":88,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":101,"why":"vgrievance"},{"day":104,"why":"vgrievance"},{"day":110,"why":"vgrievance"},{"day":112,"why":"vgrievance"},{"day":116,"why":"vgrievance"},{"day":120,"why":"vgrievance"},{"day":122,"why":"vgrievance"},{"day":128,"why":"vgrievance"},{"day":134,"why":"vgrievance"},{"day":136,"why":"vgrievance"},{"day":140,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Eric <> Samuel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Eric <> Bernadette — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Samuel <> Albina — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d35: Eric <> Ingrid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Eric <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Eric <> Tashi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Emma <> Ingrid — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d50: Emma <> Eric — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Emma <> Luis — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d35: Eric <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Emma <> Samuel — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d40: Eric <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Samuel <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Giulia <> Tashi — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d80: Samuel <> Luis — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d65: Eric <> Jovan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Samuel <> Ingrid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Albina <> Giulia — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d115: Samuel <> Tashi — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d125: Ingrid <> Luis — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d70: Bernadette <> Samuel — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d75: Bernadette <> Giulia — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d75: Eric <> Albina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Giulia <> Luis — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d120: Giulia <> Ingrid — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d75: Bernadette <> Tashi — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d105: Emma <> Giulia — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d105: Emma <> Bernadette — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d115: Albina <> Jovan — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d105: Emma <> Albina — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d135: Luis <> Tashi — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d105: Emma <> Jovan — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d135: Ingrid <> Tashi — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d55: Eric <> Scarlett — maxDepth 3, final 3 (v=86), dropped 0
+  CLOSE-READ d16: Samuel about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Giulia about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Bernadette about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Tashi about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Samuel about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Giulia about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Giulia about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Luis about Eric — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Giulia about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Giulia about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Bernadette about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Ingrid about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Giulia about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Emma about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Bernadette about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Luis about Eric — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Giulia about Eric — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Ingrid about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Jovan about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Giulia about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Albina about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Emma about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Emma about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Albina about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Giulia about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Bridget about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Bernadette about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Emma about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Giulia about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Albina about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Bernadette about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Emma about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Jovan about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Albina about Eric — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Giulia about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Bridget about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Luis about Eric — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Bridget about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Bridget about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Bridget about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Bridget about Eric — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Ingrid about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ingrid about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ingrid about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Ingrid about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Bridget about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Ingrid about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ingrid about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Luis about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Samuel about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Tashi about Eric — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d11: Eric about Bridget (why=grievance)
+  GRIEV-READ d14: Eric about Bridget (why=grievance)
+  GRIEV-READ d15: Eric about Bridget (why=grievance)
+  GRIEV-READ d18: Bridget about Eric (why=grievance)
+  GRIEV-READ d19: Bridget about Eric (why=grievance)
+  GRIEV-READ d24: Eric about Bridget (why=grievance)
+  KNACK d8 Bridget: "cuts close faster when Albina wraps them. Don't ask me how."
+  KNACK d11 Emma: "Giulia talks to the garden. The garden listens. I've seen it."
+  KNACK d15 Giulia: "Luis talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Eric: "Good question." "Ingrid talks to the garden. The garden listens. I've seen it."
+  KNACK d27 Ingrid: "You want to know about that? Okay." "Jovan talks to the garden. The garden listens. I've seen it."
+  KNACK d28 Luis: "cuts close faster when Albina wraps them. Don't ask me how."
+  KNACK d31 Bernadette: "Eric ate something last month that should've killed them. They're fine."
+  KNACK d32 Eric: "Tashi found a lost knife by smell last week. By SMELL."
+
+deathCauses: {"the wild":2,"monster":1}

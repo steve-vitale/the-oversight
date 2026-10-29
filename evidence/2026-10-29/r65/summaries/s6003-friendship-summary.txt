@@ -1,0 +1,231 @@
+# SURFACE+SEEDED — seed 6003 (140d, 7 alive)
+
+npcPairs=58 deep2=34 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=256 closeReadsServed=21 grievanceServes=67 othersSteered=29
+COND-TP: firstDeep2Day=30 lateClose=115 lateTP=103 lateNull=0 condRate=89.6% pooledTP=104/124 pooledRate=83.9% grievReadsByWhy={"grievance":11,"vgrievance":73}
+FUNNEL (natural): convos=414 subject=414 offered=358 picked=227 classes={"subject-no-offer":56,"picked-others":227,"offered-not-picked":131}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=56 rate=13.5% offered=358 mainOffered=0 subjectOffered=358 picked=227 latePicks=89 latePicksMain=0 latePicksSubject=89
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=352 picks=245 latePicks=89 missedChangedNotOffered=10
+WRAPSERVE: convos=84 matcherHits=67 matcherServes=67 classes={"grievance-line":67,"deflection":3,"other":14}
+FUNNEL-PROBE (subject-no-offer turns): turns=155 menuProblem=112 pickProblem=43
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":15,"accepts":6,"acceptRate":0.4,"vetoes":{},"chanceMin":17.400000000000006,"chanceMax":73.2,"chanceMean":48.3} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":20,"forageOffers":5,"otherFavorOffers":15,"accepts":5,"acceptAttempts":5,"waits":5,"starts":3,"startBlocked":5,"forages":2,"forageNodeBarren":6,"forageBarren":2,"talks":2,"delivers":2,"deliverBlocked":0,"completeOutings":1,"keptMatched":2}
+OUTING END STATES: [{"vid":"desmond_clarke","vidName":"Desmond","favorId":"favor-desmond_clarke-20-5","state":"thanked","promisedDay":20,"meetDay":21,"deadline":22,"promiseKept":true,"startedDay":22,"forageCount":1,"playerKcal":520,"partnerKcal":520,"deliveredKcal":1040,"returnedDay":22,"talkCount":1},{"vid":"gen_wj6b8ov","vidName":"Harold","favorId":"favor-gen_wj6b8ov-87-7","state":"acknowledged","promisedDay":87,"meetDay":88,"deadline":89,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Devon kind=food_share favorId=favor-devon_okafor-4-1 task=share food with Devon — they're past hungry
+  FAVOR-OFFER d9: Manuel kind=forage_help favorId=favor-gen_os9brdw-9-2 task=forage with Manuel tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Sanne kind=forage_help favorId=favor-sanne_bakker-10-3 task=forage with Sanne tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Joaquin kind=sick_help favorId=favor-gen_lfzctst-17-4 task=help Joaquin with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d20: Desmond kind=forage_help favorId=favor-desmond_clarke-20-5 task=forage with Desmond tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Oliver kind=food_share favorId=favor-oliver_moore-23-6 task=share food with Oliver — they're going hungry
+  FAVOR-OFFER d87: Harold kind=forage_help favorId=favor-gen_wj6b8ov-87-7 task=forage with Harold tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Manuel kind=forage_help favorId=favor-gen_os9brdw-91-8 task=forage with Manuel tomorrow to rebuild the pantry
+  FAVOR-OFFER d111: Manuel kind=heal_help favorId=favor-gen_os9brdw-111-10 task=help Manuel with their injury
+  FAVOR-OFFER d112: Sanne kind=heal_help favorId=favor-sanne_bakker-110-9 task=help Sanne with their injury
+  FAVOR-OFFER d113: Oliver kind=food_share favorId=favor-oliver_moore-113-11 task=share food with Oliver — they're running on empty
+  FAVOR-OFFER d115: Manuel kind=heal_help favorId=favor-gen_os9brdw-115-12 task=help Manuel with their injury
+  FAVOR-OFFER d120: Manuel kind=food_share favorId=favor-gen_os9brdw-120-13 task=share food with Manuel — they're past hungry
+  FAVOR-OFFER d124: Carolina kind=heal_help favorId=favor-gen_jblkmyi-124-14 task=help Carolina with their injury
+  FAVOR-OFFER d129: Elif kind=sick_help favorId=favor-elif_demir-129-15 task=help Elif with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d133: Carolina kind=water_haul favorId=favor-gen_jblkmyi-133-16 task=bring four liters home from the creek with Carolina; set out at dawn
+  FAVOR-OFFER d133: Manuel kind=water_haul favorId=favor-gen_os9brdw-133-17 task=bring four liters home from the creek with Manuel; set out at dawn
+  FAVOR-OFFER d137: Oliver kind=water_haul favorId=favor-oliver_moore-137-18 task=bring four liters home from the creek with Oliver; set out at dawn
+  FAVOR-OFFER d138: Sanne kind=water_haul favorId=favor-sanne_bakker-138-20 task=bring four liters home from the creek with Sanne; set out at dawn
+  FAVOR-OFFER d138: Ava kind=water_haul favorId=favor-ava_garcia-138-19 task=bring four liters home from the creek with Ava; set out at dawn
+  FAVOR-ACCEPT d9: Manuel favorId=favor-gen_os9brdw-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d10: Sanne favorId=favor-sanne_bakker-10-3 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d20: Desmond favorId=favor-desmond_clarke-20-5 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d87: Harold favorId=favor-gen_wj6b8ov-87-7 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d92: Manuel favorId=favor-gen_os9brdw-91-8 accepted=true state=promised meetDay=93
+  INVITE-DEC d8 party: Maricela -> Manuel chance=47 accept=true veto=- inputs={"temp":"mischievous","goal":"prove","mood":"steady","fear":0,"trust":30,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 30"]
+  INVITE-DEC d8 party: Maricela -> Harold chance=53.400000000000006 accept=false veto=- inputs={"temp":"gentle","goal":"joy","mood":"steady","fear":0,"trust":46,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 46"]
+  INVITE-DEC d8 party: Maricela -> Ava chance=47.4 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":0,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31"]
+  INVITE-DEC d9 party: Maricela -> Desmond chance=58.6 accept=true veto=- inputs={"temp":"restless","goal":"home","mood":"cold","fear":4,"trust":34,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 34","restless temperament (+10)"]
+  INVITE-DEC d9 party: Maricela -> Oliver chance=29.6 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":4,"trust":24,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 24","wants out (-15)"]
+  INVITE-DEC d12 party: Maricela -> Devon chance=55.6 accept=false veto=- inputs={"temp":"anxious","goal":"belong","mood":"cheerful","fear":12,"trust":39,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 39","sick (-20)","belong goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d12 party: Maricela -> Sanne chance=17.400000000000006 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grateful","fear":12,"trust":56,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 56","wants to be alone (-40)"]
+  INVITE-DEC d13 party: Maricela -> Devon chance=66.8 accept=true veto=- inputs={"temp":"anxious","goal":"belong","mood":"steady","fear":0,"trust":42,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 42","belong goal (+15)"]
+  INVITE-DEC d15 party: Maricela -> Elif chance=36.8 accept=false veto=- inputs={"temp":"prickly","goal":"understand","mood":"steady","fear":12,"trust":42,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d15 party: Maricela -> Oliver chance=37.4 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":12,"trust":31,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 31","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d16 party: Maricela -> Harold chance=68 accept=false veto=- inputs={"temp":"gentle","goal":"joy","mood":"steady","fear":0,"trust":70,"bond":{"v":11,"depth":0},"partySize":3} reasons=["trust 70","a big party is safer (+5)"]
+  INVITE-DEC d17 party: Maricela -> Oliver chance=39.8 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":4,"trust":37,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 37","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d32 party: Maricela -> Ava chance=73.2 accept=true veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":0,"trust":83,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 83","a big party is safer (+5)"]
+  INVITE-DEC d111 party: Desmond -> Carolina chance=38 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"grieving","fear":38,"trust":95,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 95","a real bond (+10)","a big party is safer (+5)","sick (-20)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d111 party: Desmond -> Elif chance=56 accept=true veto=- inputs={"temp":"prickly","goal":"understand","mood":"grieving","fear":41,"trust":90,"bond":{"v":45,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":29,"v":40,"depth":3},{"day":30,"v":40,"depth":3},{"day":31,"v":40,"depth":3},{"day":32,"v":46,"depth":3},{"day":33,"v":46,"depth":3},{"day":34,"v":52,"depth":3},{"day":35,"v":52,"depth":3},{"day":36,"v":56,"depth":3},{"day":37,"v":60,"depth":3},{"day":38,"v":60,"depth":3},{"day":39,"v":60,"depth":3},{"day":40,"v":60,"depth":3},{"day":41,"v":64,"depth":3},{"day":42,"v":64,"depth":3}] class=no-drop
+GOSSIP: totalPicks=261 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=40 31-60=49 61-90=49 91-120=50 121+=39 naturalPicks=227 seededPicks=29 gossipPicks=261
+SEEDED: {"pair":{"a":"devon_okafor","b":"gen_jblkmyi","aName":"Devon","bName":"Carolina"},"day":28,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":29,"v":40,"depth":3},{"day":30,"v":40,"depth":3},{"day":31,"v":40,"depth":3},{"day":32,"v":46,"depth":3},{"day":33,"v":46,"depth":3},{"day":34,"v":52,"depth":3},{"day":35,"v":52,"depth":3},{"day":36,"v":56,"depth":3},{"day":37,"v":60,"depth":3},{"day":38,"v":60,"depth":3},{"day":39,"v":60,"depth":3},{"day":40,"v":60,"depth":3},{"day":41,"v":64,"depth":3},{"day":42,"v":64,"depth":3}],"crackTraceClass":"no-drop","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":29,"why":"vgrievance"},"serveWithin30":true,"serves":73,"servesAll":[{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":84,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":86,"why":"vgrievance"},{"day":88,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":93,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":96,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":98,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":101,"why":"vgrievance"},{"day":104,"why":"vgrievance"},{"day":106,"why":"vgrievance"},{"day":107,"why":"vgrievance"},{"day":108,"why":"vgrievance"},{"day":111,"why":"vgrievance"},{"day":112,"why":"vgrievance"},{"day":114,"why":"vgrievance"},{"day":116,"why":"vgrievance"},{"day":118,"why":"vgrievance"},{"day":119,"why":"vgrievance"},{"day":121,"why":"vgrievance"},{"day":124,"why":"vgrievance"},{"day":130,"why":"vgrievance"},{"day":136,"why":"vgrievance"}],"effect":true}
+  FRIEND d40: Carolina <> Manuel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Carolina <> Harold — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Francois <> Harold — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d55: Ava <> Manuel — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d75: Elif <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Devon <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Desmond <> Harold — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d50: Desmond <> Devon — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Carolina <> Sanne — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Desmond <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Francois <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Ava <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Ava <> Harold — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d85: Desmond <> Manuel — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d55: Devon <> Elif — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Ava <> Devon — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Devon <> Sanne — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d120: Ava <> Elif — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d85: Manuel <> Harold — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d75: Elif <> Manuel — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d85: Devon <> Harold — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d75: Francois <> Manuel — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d90: Devon <> Manuel — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d105: Ava <> Sanne — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d100: Elif <> Maricela — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d100: Maricela <> Carolina — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d100: Maricela <> Manuel — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d100: Maricela <> Oliver — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d100: Devon <> Maricela — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Desmond <> Maricela — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d100: Ava <> Maricela — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d100: Maricela <> Francois — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d100: Maricela <> Sanne — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d115: Maricela <> Harold — maxDepth 2, final 2 (v=73), dropped 0
+  CLOSE-READ d17: Joaquin about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Devon about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Manuel about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Harold about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Harold about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Devon about Carolina — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Francois about Harold — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Manuel about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Desmond about Carolina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Sanne about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Desmond about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Ava about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Francois about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Harold about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Manuel about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Elif about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Sanne about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Sanne about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Ava about Carolina — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Desmond about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Desmond about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Ava about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Manuel about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Ava about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Manuel about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Desmond about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Harold about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Ava about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Manuel about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Ava about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Harold about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Desmond about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Desmond about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Harold about Carolina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Sanne about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Desmond about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Desmond about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Carolina about Ava — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Francois about Carolina — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Harold about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Carolina about Ava — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Desmond about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Harold about Carolina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Carolina about Ava — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Desmond about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Sanne about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Harold about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Desmond about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Desmond about Devon — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Sanne about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Elif about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Sanne about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Elif about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Elif about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Elif about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Elif about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Elif about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Carolina about Manuel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Ava about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Manuel about Carolina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d7: Francois about Desmond (why=grievance)
+  GRIEV-READ d8: Ava about Oliver (why=grievance)
+  GRIEV-READ d9: Desmond about Francois (why=grievance)
+  GRIEV-READ d9: Oliver about Ava (why=grievance)
+  GRIEV-READ d11: Desmond about Francois (why=grievance)
+  GRIEV-READ d15: Oliver about Ava (why=grievance)
+  KNACK d13 Harold: "Devon talks to the garden. The garden listens. I've seen it."
+  KNACK d18 Manuel: "You want to know about that? Okay." "Oliver talks to the garden. The garden listens. I've seen it."
+  KNACK d21 Francois: "Good question." "Devon talks to the garden. The garden listens. I've seen it."
+  KNACK d23 Ava: "that stray dog — the one that bit two people — lets Carolina touch it."
+  KNACK d26 Carolina: "Sanne talks to the garden. The garden listens. I've seen it."
+  KNACK d37 Sanne: "Harold ate something last month that should've killed them. They're fine."
+  KNACK d46 Devon: "You want to know about that? Okay." "Francois talks to the garden. The garden listens. I've seen it."
+  KNACK d52 Carolina: "Good question." "Harold ate something last month that should've killed them. They're fine."
+
+deathCauses: {"monster":1,"a stranger":1,"contest":1,"the wild":1}

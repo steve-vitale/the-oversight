@@ -1,0 +1,306 @@
+# SURFACE+SEEDED — seed 6004 (133d, 0 alive)
+
+npcPairs=84 deep2=23 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=219 closeReadsServed=35 grievanceServes=2 othersSteered=1
+COND-TP: firstDeep2Day=25 lateClose=160 lateTP=92 lateNull=0 condRate=57.5% pooledTP=93/168 pooledRate=55.4% grievReadsByWhy={"grievance":1,"vgrievance":1}
+FUNNEL (natural): convos=341 subject=338 offered=310 picked=234 classes={"subject-no-offer":28,"picked-others":234,"offered-not-picked":76,"no-subject-no-ans":3}
+FUNNEL-UNSTEERED (r55 strict): convos=341 subjectNoOffer=28 rate=8.2% offered=310 mainOffered=0 subjectOffered=310 picked=234 latePicks=72 latePicksMain=0 latePicksSubject=72
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Emilly / Onni — "that stray dog — the one that bit two people — lets Greta touch it."
+REOFFER: offers=283 picks=222 latePicks=71 missedChangedNotOffered=1
+WRAPSERVE: convos=2 matcherHits=2 matcherServes=2 classes={"grievance-line":2,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=132 menuProblem=95 pickProblem=37
+INVITE (wrap, carried from r63): lure={"n":4,"accepts":2,"acceptRate":0.5,"vetoes":{},"chanceMin":60,"chanceMax":62,"chanceMean":61} party={"n":19,"accepts":11,"acceptRate":0.5789473684210527,"vetoes":{},"chanceMin":17.4,"chanceMax":79.6,"chanceMean":52.7} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=9
+FAVOR (r65): funnel={"offers":46,"forageOffers":16,"otherFavorOffers":30,"accepts":16,"acceptAttempts":16,"waits":15,"starts":9,"startBlocked":15,"forages":9,"forageNodeBarren":3,"forageBarren":3,"talks":9,"delivers":9,"deliverBlocked":0,"completeOutings":3,"keptMatched":5}
+OUTING END STATES: [{"vid":"gen_abe4qb7","vidName":"Harper","favorId":"favor-gen_abe4qb7-7-3","state":"acknowledged","promisedDay":10,"meetDay":11,"deadline":12,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"quinn_murphy","vidName":"Quinn","favorId":"favor-quinn_murphy-13-4","state":"broken","promisedDay":13,"meetDay":14,"deadline":15,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_w6834hk","vidName":"Álvaro","favorId":"favor-gen_w6834hk-55-18","state":"fulfilled","promisedDay":55,"meetDay":56,"deadline":57,"promiseKept":true,"startedDay":56,"forageCount":1,"playerKcal":60,"partnerKcal":90,"deliveredKcal":150,"returnedDay":56,"talkCount":1},{"vid":"gen_nheilac","vidName":"Victor","favorId":"favor-gen_nheilac-64-21","state":"thanked","promisedDay":64,"meetDay":65,"deadline":66,"promiseKept":true,"startedDay":65,"forageCount":1,"playerKcal":195,"partnerKcal":280,"deliveredKcal":475,"returnedDay":66,"talkCount":1},{"vid":"app_mgpsphm5148","vidName":"Emilly","favorId":"favor-app_mgpsphm5148-105-38","state":"thanked","promisedDay":105,"meetDay":106,"deadline":107,"promiseKept":true,"startedDay":106,"forageCount":1,"playerKcal":325,"partnerKcal":370,"deliveredKcal":695,"returnedDay":106,"talkCount":1}]
+  FAVOR-OFFER d6: Onni kind=forage_help favorId=favor-onni_korhonen-6-2 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Harper kind=forage_help favorId=favor-gen_abe4qb7-7-3 task=forage with Harper tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: Rosa kind=forage_help favorId=favor-rosa_mendez-2-1 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Quinn kind=forage_help favorId=favor-quinn_murphy-13-4 task=forage with Quinn tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Nino kind=food_share favorId=favor-nino_kapanadze-14-5 task=share food with Nino — they're going hungry
+  FAVOR-OFFER d15: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-15-6 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Álvaro kind=forage_help favorId=favor-gen_w6834hk-31-7 task=forage with Álvaro tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Petra kind=forage_help favorId=favor-petra_novak-34-8 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Nino kind=food_share favorId=favor-nino_kapanadze-38-9 task=share food with Nino — they're running on empty
+  FAVOR-OFFER d38: Victor kind=heal_help favorId=favor-gen_nheilac-38-10 task=help Victor with their injury
+  FAVOR-OFFER d39: Petra kind=heal_help favorId=favor-petra_novak-39-11 task=help Petra with their injury
+  FAVOR-OFFER d43: Onni kind=forage_help favorId=favor-onni_korhonen-43-12 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Rosa kind=forage_help favorId=favor-rosa_mendez-43-13 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Victor kind=heal_help favorId=favor-gen_nheilac-44-14 task=help Victor with their injury
+  FAVOR-OFFER d48: Victor kind=forage_help favorId=favor-gen_nheilac-48-15 task=forage with Victor tomorrow to rebuild the pantry
+  FAVOR-OFFER d49: Petra kind=food_share favorId=favor-petra_novak-49-16 task=share food with Petra — they're going hungry
+  FAVOR-OFFER d52: Petra kind=sick_help favorId=favor-petra_novak-52-17 task=help Petra with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d55: Álvaro kind=forage_help favorId=favor-gen_w6834hk-55-18 task=forage with Álvaro tomorrow to rebuild the pantry
+  FAVOR-OFFER d55: Rosa kind=sick_help favorId=favor-rosa_mendez-55-19 task=help Rosa with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d58: Nino kind=forage_help favorId=favor-nino_kapanadze-58-20 task=forage with Nino tomorrow to rebuild the pantry
+  FAVOR-OFFER d64: Victor kind=forage_help favorId=favor-gen_nheilac-64-21 task=forage with Victor tomorrow to rebuild the pantry
+  FAVOR-OFFER d70: Petra kind=food_share favorId=favor-petra_novak-70-22 task=share food with Petra — they're past hungry
+  FAVOR-OFFER d75: Emilly kind=forage_help favorId=favor-app_mgpsphm5148-75-23 task=forage with Emilly tomorrow to rebuild the pantry
+  FAVOR-OFFER d76: Rosa kind=food_share favorId=favor-rosa_mendez-76-24 task=share food with Rosa — they're going hungry
+  FAVOR-OFFER d76: Petra kind=water_haul favorId=favor-petra_novak-76-25 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d78: Nino kind=water_haul favorId=favor-nino_kapanadze-78-26 task=bring four liters home from the creek with Nino; set out at dawn
+  FAVOR-OFFER d80: Onni kind=food_share favorId=favor-onni_korhonen-80-27 task=share food with Onni — they're past hungry
+  FAVOR-OFFER d84: Petra kind=water_haul favorId=favor-petra_novak-84-28 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d90: Greta kind=food_share favorId=favor-greta_hansen-90-29 task=share food with Greta — they're running on empty
+  FAVOR-OFFER d92: Vasyl kind=food_share favorId=favor-vasyl_shevchenko-92-30 task=share food with Vasyl — they're running on empty
+  FAVOR-OFFER d95: Greta kind=forage_help favorId=favor-greta_hansen-95-31 task=forage with Greta tomorrow to rebuild the pantry
+  FAVOR-OFFER d96: Vasyl kind=food_share favorId=favor-vasyl_shevchenko-96-32 task=share food with Vasyl — they're going hungry
+  FAVOR-OFFER d96: Onni kind=food_share favorId=favor-onni_korhonen-96-33 task=share food with Onni — they're going hungry
+  FAVOR-OFFER d97: Greta kind=sick_help favorId=favor-greta_hansen-97-34 task=help Greta with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d98: Emilly kind=food_share favorId=favor-app_mgpsphm5148-98-35 task=share food with Emilly — they're going hungry
+  FAVOR-OFFER d102: Emilly kind=food_share favorId=favor-app_mgpsphm5148-102-36 task=share food with Emilly — they're going hungry
+  FAVOR-OFFER d102: Greta kind=food_share favorId=favor-greta_hansen-102-37 task=share food with Greta — they're going hungry
+  FAVOR-OFFER d105: Emilly kind=forage_help favorId=favor-app_mgpsphm5148-105-38 task=forage with Emilly tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Onni kind=food_share favorId=favor-onni_korhonen-106-39 task=share food with Onni — they're past hungry
+  FAVOR-OFFER d108: Greta kind=food_share favorId=favor-greta_hansen-108-40 task=share food with Greta — they're past hungry
+  FAVOR-OFFER d111: Greta kind=food_share favorId=favor-greta_hansen-111-41 task=share food with Greta — they're going hungry
+  FAVOR-OFFER d113: Onni kind=food_share favorId=favor-onni_korhonen-113-42 task=share food with Onni — they're going hungry
+  FAVOR-OFFER d117: Onni kind=water_haul favorId=favor-onni_korhonen-117-43 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d120: Onni kind=food_share favorId=favor-onni_korhonen-120-44 task=share food with Onni — they're past hungry
+  FAVOR-OFFER d123: Onni kind=food_share favorId=favor-onni_korhonen-123-45 task=share food with Onni — they're going hungry
+  FAVOR-OFFER d126: Onni kind=water_haul favorId=favor-onni_korhonen-126-46 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-ACCEPT d6: Onni favorId=favor-onni_korhonen-6-2 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d10: Harper favorId=favor-gen_abe4qb7-7-3 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d12: Rosa favorId=favor-rosa_mendez-2-1 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d13: Quinn favorId=favor-quinn_murphy-13-4 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d15: Vasyl favorId=favor-vasyl_shevchenko-15-6 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d31: Álvaro favorId=favor-gen_w6834hk-31-7 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d34: Petra favorId=favor-petra_novak-34-8 accepted=true state=promised meetDay=35
+  FAVOR-ACCEPT d43: Onni favorId=favor-onni_korhonen-43-12 accepted=true state=promised meetDay=44
+  FAVOR-ACCEPT d43: Rosa favorId=favor-rosa_mendez-43-13 accepted=true state=promised meetDay=44
+  FAVOR-ACCEPT d48: Victor favorId=favor-gen_nheilac-48-15 accepted=true state=promised meetDay=49
+  FAVOR-ACCEPT d55: Álvaro favorId=favor-gen_w6834hk-55-18 accepted=true state=promised meetDay=56
+  FAVOR-ACCEPT d58: Nino favorId=favor-nino_kapanadze-58-20 accepted=true state=promised meetDay=59
+  FAVOR-ACCEPT d64: Victor favorId=favor-gen_nheilac-64-21 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d75: Emilly favorId=favor-app_mgpsphm5148-75-23 accepted=true state=promised meetDay=76
+  FAVOR-ACCEPT d95: Greta favorId=favor-greta_hansen-95-31 accepted=true state=promised meetDay=96
+  FAVOR-ACCEPT d105: Emilly favorId=favor-app_mgpsphm5148-105-38 accepted=true state=promised meetDay=106
+  INVITE-DEC d7 lure: Vasyl -> Rosa chance=60 accept=false veto=- inputs={"temp":"bold","goal":"legacy","mood":"steady","fear":0,"affinity":0} reasons=["bold temperament (+15)"]
+  INVITE-DEC d8 party: Marisol -> Victor chance=69.6 accept=false veto=- inputs={"temp":"sardonic","goal":"belong","mood":"steady","fear":4,"trust":49,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 49","belong goal (+15)"]
+  INVITE-DEC d8 lure: Vasyl -> Rosa chance=60 accept=true veto=- inputs={"temp":"bold","goal":"legacy","mood":"steady","fear":0,"affinity":0} reasons=["bold temperament (+15)"]
+  INVITE-DEC d9 party: Marisol -> Petra chance=59.8 accept=false veto=- inputs={"temp":"steady","goal":"survive","mood":"cheerful","fear":12,"trust":37,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 37","cheerful mood (+10)"]
+  INVITE-DEC d9 party: Marisol -> Victor chance=79.6 accept=true veto=- inputs={"temp":"sardonic","goal":"belong","mood":"cheerful","fear":12,"trust":49,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 49","belong goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d10 party: Landon -> Nino chance=17.4 accept=false veto=- inputs={"temp":"prickly","goal":"peace","mood":"grieving","fear":5,"trust":31,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 31","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d11 party: Landon -> Rosa chance=60 accept=true veto=- inputs={"temp":"bold","goal":"legacy","mood":"grieving","fear":4,"trust":50,"bond":null,"partySize":1} reasons=["trust 50","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d12 party: Landon -> Nino chance=29.799999999999997 accept=false veto=- inputs={"temp":"prickly","goal":"peace","mood":"steady","fear":0,"trust":37,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 37","prickly temperament (-20)"]
+  INVITE-DEC d12 party: Landon -> Onni chance=38.2 accept=false veto=- inputs={"temp":"cautious","goal":"understand","mood":"steady","fear":0,"trust":33,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 33","cautious temperament (-10)"]
+  INVITE-DEC d13 party: Landon -> Onni chance=40.6 accept=false veto=- inputs={"temp":"cautious","goal":"understand","mood":"steady","fear":4,"trust":39,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 39","cautious temperament (-10)"]
+  INVITE-DEC d13 party: Landon -> Quinn chance=30 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"trust":50,"bond":null,"partySize":2} reasons=["trust 50","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d14 party: Landon -> Nino chance=35 accept=true veto=- inputs={"temp":"prickly","goal":"peace","mood":"hungry","fear":4,"trust":50,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 50","prickly temperament (-20)"]
+  INVITE-DEC d15 party: Landon -> Álvaro chance=75 accept=true veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":12,"trust":50,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 50","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d22 lure: Harper -> Victor chance=62 accept=false veto=- inputs={"temp":"sardonic","goal":"belong","mood":"hungry","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","belong goal (+10)"]
+  INVITE-DEC d23 lure: Harper -> Victor chance=62 accept=true veto=- inputs={"temp":"sardonic","goal":"belong","mood":"hungry","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","belong goal (+10)"]
+  INVITE-DEC d31 party: Landon -> Petra chance=64 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":12,"trust":60,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 60","a big party is safer (+5)"]
+  INVITE-DEC d66 party: Landon -> Quinn chance=39 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":78,"trust":85,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 85","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d71 party: Quinn -> Onni chance=59.599999999999994 accept=false veto=- inputs={"temp":"cautious","goal":"understand","mood":"steady","fear":8,"trust":74,"bond":{"v":20,"depth":0},"partySize":3} reasons=["trust 74","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d72 party: Quinn -> Vasyl chance=56 accept=true veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"grieving","fear":29,"trust":90,"bond":{"v":31,"depth":1},"partySize":3} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d72 party: Quinn -> Onni chance=49.599999999999994 accept=true veto=- inputs={"temp":"cautious","goal":"understand","mood":"grieving","fear":29,"trust":74,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 74","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d82 party: Rosa -> Greta chance=72.4 accept=true veto=- inputs={"temp":"bold","goal":"belong","mood":"grieving","fear":5,"trust":31,"bond":null,"partySize":4} reasons=["trust 31","a big party is safer (+5)","bold temperament (+15)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d90 party: Petra -> Emilly chance=75.4 accept=true veto=- inputs={"temp":"restless","goal":"protect","mood":"grieving","fear":72,"trust":76,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 76","a big party is safer (+5)","restless temperament (+10)","protect goal (+15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d107 party: Petra -> Franz chance=50 accept=true veto=- inputs={"temp":"stoic","goal":"answers","mood":"steady","fear":0,"trust":25,"bond":null,"partySize":4} reasons=["trust 25","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":23,"v":40,"depth":3},{"day":24,"v":40,"depth":3},{"day":25,"v":40,"depth":3},{"day":26,"v":40,"depth":3},{"day":27,"v":40,"depth":3},{"day":28,"v":40,"depth":3},{"day":29,"v":40,"depth":3},{"day":30,"v":40,"depth":3},{"day":31,"v":40,"depth":3},{"day":33,"v":40,"depth":3},{"day":33,"v":40,"depth":3},{"day":34,"v":40,"depth":3},{"day":35,"v":40,"depth":3},{"day":36,"v":40,"depth":3}] class=stick
+GOSSIP: totalPicks=167 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=37 31-60=63 61-90=62 91-120=56 121+=0 naturalPicks=218 seededPicks=1 gossipPicks=167
+SEEDED: {"pair":{"a":"gen_abe4qb7","b":"gen_nheilac","aName":"Harper","bName":"Victor"},"day":22,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":23,"v":40,"depth":3},{"day":24,"v":40,"depth":3},{"day":25,"v":40,"depth":3},{"day":26,"v":40,"depth":3},{"day":27,"v":40,"depth":3},{"day":28,"v":40,"depth":3},{"day":29,"v":40,"depth":3},{"day":30,"v":40,"depth":3},{"day":31,"v":40,"depth":3},{"day":33,"v":40,"depth":3},{"day":33,"v":40,"depth":3},{"day":34,"v":40,"depth":3},{"day":35,"v":40,"depth":3},{"day":36,"v":40,"depth":3}],"crackTraceClass":"stick","vAt7":40,"depthAt7":3,"vDrop":12,"depthDrop":-1,"crack7":true,"firstServe":{"day":23,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":23,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Harper <> Victor — maxDepth 3, final 3 (v=40), dropped 0
+  FRIEND d35: Victor <> Álvaro — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Álvaro <> Vasyl — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d50: Victor <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Onni <> Petra — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d45: Victor <> Nino — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d45: Victor <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Victor <> Quinn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Onni <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Nino <> Petra — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d45: Victor <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Nino <> Onni — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d80: Nino <> Vasyl — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d65: Victor <> Rosa — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d115: Petra <> Vasyl — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d70: Landon <> Onni — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d70: Landon <> Nino — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d70: Landon <> Victor — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d70: Landon <> Álvaro — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d70: Landon <> Rosa — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d70: Landon <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Emilly <> Vasyl — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d105: Greta <> Vasyl — maxDepth 2, final 2 (v=63), dropped 0
+  CLOSE-READ d11: Victor about Harper — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d13: Victor about Harper — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Onni about Harper — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Quinn about Harper — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Victor about Harper — live depth=3 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d23: Vasyl about Harper — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Petra about Harper — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Álvaro about Victor — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Álvaro about Harper — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Victor about Álvaro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Álvaro about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Nino about Victor — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Nino about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Álvaro about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Victor about Álvaro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Álvaro about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Onni about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Álvaro about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Nino about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Quinn about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Onni about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Nino about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Victor about Álvaro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Álvaro about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Petra about Victor — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Nino about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Victor about Álvaro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Petra about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Rosa about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Onni about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Petra about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Onni about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Quinn about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Petra about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Rosa about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Petra about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Victor about Álvaro — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Nino about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Petra about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Victor about Álvaro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Petra about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Onni about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Rosa about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Petra about Victor — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Petra about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Onni about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Petra about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Nino about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Petra about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Quinn about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Nino about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Petra about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Rosa about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Victor about Álvaro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Rosa about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Petra about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Onni about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Nino about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Petra about Victor — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Quinn about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Petra about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Petra about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Rosa about Victor — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Nino about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Victor about Álvaro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Álvaro about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Nino about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Victor about Álvaro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Petra about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Victor about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Petra about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Nino about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Victor about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Rosa about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Victor about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Nino about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Rosa about Victor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Quinn about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Petra about Onni — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d69: Petra about Nino — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Onni about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Rosa about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Petra about Nino — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Petra about Nino — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d73: Onni about Vasyl — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Onni about Vasyl — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Rosa about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Petra about Nino — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Nino about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Rosa about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Petra about Nino — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Rosa about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d78: Nino about Vasyl — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Onni about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Onni about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Nino about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Petra about Nino — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d81: Rosa about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Nino about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Nino about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Petra about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Vasyl about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Nino about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Petra about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Petra about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Vasyl about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Petra about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Onni about Vasyl — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Onni about Vasyl — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Petra about Vasyl — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Onni about Vasyl — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Emilly about Vasyl — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d94: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d98: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Greta about Vasyl — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d99: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Greta about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Greta about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Greta about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Greta about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d105: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d106: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d107: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Emilly about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d108: Greta about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Greta about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Vasyl about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Onni about Vasyl — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Greta about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d12: Rosa about Harper (why=grievance)
+  GRIEV-READ d23: Harper about Victor (why=vgrievance)
+  KNACK d4 A person, maybe 60s: "You want to know about that? Okay." "Here's the thing — the woman in her 60s, with tattooed arms talks to the garden. T
+  KNACK d9 Victor: "Harper talks to the garden. The garden listens. I've seen it."
+  KNACK d14 Petra: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Quinn touch it."
+  KNACK d15 Álvaro: "Rosa talks to the garden. The garden listens. I've seen it."
+  KNACK d20 Petra: "You want to know about that? Okay." "Nino talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Onni: "Good question." "cuts close faster when Victor wraps them. Don't ask me how."
+  KNACK d29 Quinn: "Vasyl talks to the garden. The garden listens. I've seen it."
+  KNACK d53 Vasyl: "Good question." "cuts close faster when Álvaro wraps them. Don't ask me how."
+
+deathCauses: {"betrayal":1,"The Eulogy":1,"the wild":5,"monster":2,"a stranger":1,"the arena":2,"contest":1}
