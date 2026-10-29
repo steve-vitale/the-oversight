@@ -11381,6 +11381,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // tables say in future data: streets and plazas are bare ground.
       if (type === 'street' || type === 'plaza') { tile.maxStock = 0; tile.stock = 0; tile.wildlife = {}; }
       if (district) tile.district = district;
+      // BLOCKAGE/BRIDGE PARITY (fixall-map slice 4, pre-registered
+      // evidence/2026-10-28/sim-fixall-map-slice4-blockage.md): deeper
+      // wild ground plays by the same obstruction rules as home ground —
+      // the same 0.12 blockage rate and 0.35 creek-bridge rate home
+      // generation uses. Exempt: the first ring (Chebyshev <= 5, the
+      // slice-1 crossing step), all city tiles (open ground by design),
+      // and structures (a building/cache is entered, not walked through).
+      // Draws happen after every slice-3 field, so near tiles and all
+      // previously generated fields are byte-identical to slice 3.
+      if (!district && cheb0 > 5 && type !== 'building' && type !== 'cache') {
+        if (R() < 0.12) {
+          const DIRS4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+          const od = DIRS4[Math.floor(R() * 4)];
+          const br = R();
+          tile.blockFrom = { dx: od[0], dy: od[1], type: br < 0.4 ? 'fallen_tree' : br < 0.7 ? 'rubble' : 'washed_out' };
+        }
+        if (type === 'creek' && R() < 0.35) tile.needsBridge = true;
+      }
       if (type === 'building' || type === 'cache') {
         const scav = this.regionScavenge();
         const common = scav.filter(s => !s.rare);
@@ -12329,16 +12347,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const px0 = this.map.px, py0 = this.map.py;
         const dTot = Math.abs(x - px0) + Math.abs(y - py0);
         if (dTot > 1) {
-          for (let ty = 0; ty < 9; ty++) for (let tx = 0; tx < 9; tx++) {
+          // BLOCKAGE PARITY (fixall-map slice 4): the scan used to cover
+          // only the 0..8 home board, so a jump from beyond onto a home
+          // tile skipped its beyond intermediates clean over. Scan the
+          // path bounding box instead — home paths are unaffected (their
+          // box sits inside 0..8) and the shortest-path filters below are
+          // unchanged, so the bounds change only which tiles are iterated,
+          // never which tiles can refuse. Beyond intermediates are
+          // generated before the check: an ungenerated tile must not read
+          // as "no blockage".
+          const bx0 = Math.min(px0, x) - 1, bx1 = Math.max(px0, x) + 1;
+          const by0 = Math.min(py0, y) - 1, by1 = Math.max(py0, y) + 1;
+          for (let ty = by0; ty <= by1; ty++) for (let tx = bx0; tx <= bx1; tx++) {
             if ((tx === px0 && ty === py0) || (tx === x && ty === y)) continue;
             const dS = Math.abs(tx - px0) + Math.abs(ty - py0);
             const dT = Math.abs(x - tx) + Math.abs(y - ty);
             if (dS === 0 || dS + dT !== dTot) continue; // not on a shortest path
             for (const [ox, oy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
               const ex = tx + ox, ey = ty + oy;
-              if (ex < 0 || ey < 0 || ex > 8 || ey > 8) continue;
+              if (ex < bx0 || ex > bx1 || ey < by0 || ey > by1) continue;
               const dE = Math.abs(ex - px0) + Math.abs(ey - py0);
               if (dE !== dS - 1 || dE + 1 + dT !== dTot) continue; // entry not on a shortest path
+              if ((tx < 0 || tx > 8 || ty < 0 || ty > 8) && !this.tileAt(tx, ty)) this.beyondTile(tx, ty);
               const ib = this.travelBlockage(tx, ty, ex, ey);
               if (ib) {
                 const what = ib.blockType === 'creek' ? 'The creek runs fast here — no crossing without a bridge or a swim.'
