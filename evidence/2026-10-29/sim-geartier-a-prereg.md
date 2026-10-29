@@ -109,24 +109,26 @@ general abilities-strength pass, not just the new tier).
 - ACTION (src/js/fieldFights.js only, keyed on the equipped acc
   item id — the file's existing per-id branch pattern; no new
   item field, no strike-formula change, no wb/power/mult change):
-  once per fight, in the villager phase AFTER a trick or godpath
-  verb has had its chance (tricks and verbs keep priority), if
-  the leader wears the Tangle Line, round <= 11, lead HP > 150,
-  and lead max HP >= 200 (big-beast tool, not a rabbit tool):
-  the leader spends the round setting the line instead of
-  striking (the ally still strikes that round, as on trick
-  rounds). From the next round on, while the line holds (rest
-  of the fight): (i) the tangled lead takes lroll([10,14])
-  snare damage at the start of each villager phase, counted in
-  rec.mDealt and logged (a NEW damage stream, like bird
-  harry/pack harry — not a multiplier on any strike); (ii) the
-  lead's attacks land at half strength (floor), logged (control,
-  like the shout-disrupt halving — the beast still fights,
-  still wounds, still kills). The line does NOT touch trickLog
+  AMENDED 2026-10-29T04:30Z, BEFORE any game code and before any
+  judged run (see Amendment A below — the set-round design was
+  killed by the baseline fixture, not by opinion). The line is
+  set in the OPENING, alongside the volley (the volley/ambush
+  family: a free opening for gear carried ready, not a round
+  spent): if the leader wears the Tangle Line and the lead's
+  max HP >= 200 (big-beast tool, not a rabbit tool — wave-2
+  max 170 never triggers it), the line is set before round 1
+  and logged. While the line holds (rest of the fight):
+  (i) the tangled lead takes lroll([10,14]) snare damage at
+  the start of each villager phase, counted in rec.mDealt and
+  logged (a NEW damage stream, like bird harry/pack harry —
+  not a multiplier on any strike); (ii) the lead's attacks
+  land at half strength (floor), logged (control, like the
+  shout-disrupt halving — the beast still fights, still
+  wounds, still kills). The line does NOT touch trickLog
   (no free trick-aware morale hold), break lines, flee lines,
-  or the 15-round cap. Cost: the set round's strike + the acc
-  slot, every fight it is worn. No kcal cost (it is gear, not
-  an ability; the volley precedent is ammo, the snare is
+  or the 15-round cap. Cost: the acc slot, every fight it is
+  worn, and big-beast-only scope. No kcal cost (it is gear,
+  not an ability; the volley precedent is ammo, the snare is
   reusable line). Dinner test: it grants no food, reduces no
   food need, and cannot skip dinner.
 - EARN PATHS (all pre-existing pools, zero gate retunes — adding
@@ -247,12 +249,19 @@ INSTRUMENTS (new, scripts/ only, no policy defaults changed):
   fails while P1+P2 pass, the verdict is ACTION-GO /
   EARN-NO-GO and the code is HELD (not merged) with the earn
   fix named — the action is not smuggled in on a failed earn.
-- P4 (abilities pass): >= 2 of 3 fixtures improve on their
-  named metric vs CONTROL (bird: vTaken/round down >= 10%
-  or median rounds up >= 1; broadcast: allyDealt up >= 25%
-  or median rounds up >= 1; mending: allyHpLeft up or
-  median rounds up >= 1) AND none of the three regresses
-  mDealt by > 10%.
+- P4 (abilities pass): judged POST-vs-PRE per ability on its
+  OWN fixture shape (baseline fixtures run pre-build, same
+  script, same seeds — see Amendment A), >= 2 of 3 improve
+  on their named metric (bird, shout-join shape: vTaken/round
+  down >= 10% or median rounds up >= 1; broadcast, aid shape
+  (ally from round 1 — a shout-joined ally arrives on the
+  last round, so the 2-round embolden is unmeasurable there):
+  allyDealt up >= 25% or median rounds up >= 1; mending, aid
+  shape with leader entering at 55 HP (a hurt fighter — the
+  shout-join shape never drops the leader below the 50%
+  mend gate, so the verb never fires there): allyHpLeft
+  median up or median rounds up >= 1) AND none of the three
+  regresses mDealt by > 10% vs its own pre-change cell.
 - GUARDS (reported, not judged, except the crash rule):
   wall numbers (national ever/final, table invited/entered,
   wins incl. full seat, wave-4 reach, wave-5) per arm;
@@ -275,6 +284,47 @@ same thresholds judged on the 16-seed set (fixtures stand
 from pilot; confirm re-runs the fixture script for stability
 and reports any drift). If confirm fails any leg, that leg's
 code is killed and the pilot GO is withdrawn in the report.
+
+## Amendment A (2026-10-29T04:30Z, before any game code, before any judged run)
+
+Baseline fixtures (control + ability cells, pre-build, same
+script/seeds as the judged fixtures) killed two design details:
+
+1. SNARE SET-ROUND -> OPENING. Baseline: every shout-join
+   fixture fight ends vFlee at exactly round 3 (hopeless
+   trajectory: round-3 mDealt ~160 vs 850 HP, rtk ~14 vs rtd
+   ~3.5 — the party runs while running works, whatever it
+   holds). A set round loses a ~44 strike and buys back only
+   ~24 ticks over the 2 remaining rounds: net ~control damage,
+   no wounding gain, no chain shortening. The set-round design
+   is therefore dead on arrival and is replaced, BEFORE
+   building, by the opening design above (volley/ambush
+   family). Thresholds P1/P2 are UNCHANGED — the amendment
+   changes the mechanism, not the bar. The opening design's
+   claim is checkable in the fixture: round-3 mDealt must
+   reach the winning band (mDealt >= ~196 for an 850 beast
+   at halved incoming) so the trajectory flips to winning
+   and the party commits instead of fleeing at round 3.
+2. ABILITY FIXTURE SHAPES. Baseline: bird fires round 1 but
+   nets -30% mDealt (a strike ~44 traded for ~17-20 bird
+   damage over the 3-round fight — the verb-cost problem,
+   verbatim); mending NEVER fires in the shout-join shape
+   (leader never drops below 50% in 3 rounds); broadcast's
+   2-round embolden cannot be measured in the shout-join
+   shape (the ally arrives on the final round). Hence the
+   per-ability shapes in P4 above. Pre-change baselines for
+   the new shapes (broadcast-aid, mending-aid-hurt) are run
+   before building and frozen as the P4 comparison numbers.
+   No threshold was lowered: P4 still requires >= 2 of 3
+   improvements and no > 10% mDealt regression, now judged
+   post-vs-pre per shape instead of vs a control cell that
+   could not measure two of the three verbs.
+
+What did NOT change: the item, the pools, the earn paths,
+P1/P2/P3 thresholds, the severability rule, the gating
+freeze, the forbidden files. No judged run (pilot/confirm
+sweep, post-build fixture) has run; only pre-build baseline
+fixtures, which are controls by definition.
 
 ## Files this arm will NOT touch
 
