@@ -2546,6 +2546,12 @@
         }
         if (npcLeads.length > 2) npcLeads.slice(2).forEach(id => setGoal(id, 'prove'));
       }
+      // ARMOR SEEDING (build-armor 2026-10-29): first armor-wearers for the
+      // NPC sewing loop — see seedArmorWearer. Runs after goals are final
+      // (leadership fix-up above can change a goal) and before play starts.
+      // Self-guarding: it never throws, and a null return just means the
+      // village already had a durable seed or had no grantee.
+      if (this.seedArmorWearer) this.seedArmorWearer();
       // SOCIAL GROUPS: informal circles. Your actions ripple through them.
       this.genGroups();
       // OLD WOUNDS: deep conflicts between peoples, hidden at first. They simmer.
@@ -17165,6 +17171,93 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         /* unified: getPerson */ || {};
       if (v.goal) return v.goal;
       return (this.state.village.bgGoals || {})[vid] || null;
+    },
+    // ARMOR SEEDING (build-armor 2026-10-29, adopts fixall-armor): a fresh
+    // village needs FIRST armor-wearers or the NPC sewing loop can never
+    // start — NPC craft knowledge comes only from wearing, wearing needs a
+    // piece, and no path introduces the first piece in play where nobody
+    // crafts one (fixall-armor confirm: 6/12 fresh villages attempted, 4/12
+    // crafted, because half never gained a home knower). So at village
+    // creation, if no staying villager already carries bark or hide armor
+    // in their own kit, up to THREE generated villagers' kits gain a bark
+    // armor, worn from day 0. Three, not one: a single wearer proved too
+    // fragile in scratch (seed 67703 trace: the grantee was home+wearing
+    // on only 17 days, died around day 36, and vine never reached 2 while
+    // he was home, so the loop never fired once; seed 67701's only wearer
+    // left on day 1 and never returned). Villagers are away most days on
+    // short objectives and die young — redundancy across three wearers is
+    // what makes a home knower overlap the slow material window (trust
+    // opens, then bark 3 + vine 2). This is generation, not a mid-game
+    // grant: the pieces are those people's own starting gear, exactly like
+    // every other generated kit item, and they then move only through the
+    // existing paths (wearing, spares flow, the armory pile). It never
+    // touches the player's kit, never scans for a decision (it runs once at
+    // creation, before play), and draws no RNG — the picks are
+    // deterministic in roster order, so generation streams are unchanged.
+    // A villager whose goal is to leave ('escape') does not count as a
+    // durable seed and is picked last: the seed must be someone staying.
+    // Returns the first grantee id, or null when a durable seed already
+    // exists (or no grantee is available). Never throws: a seeding failure
+    // must not break village creation — it just leaves the village
+    // unseeded.
+    seedArmorWearer() {
+      try {
+        const v = this.state.village || {};
+        const rc = v.rosterChars || {};
+        const defs = this.data.items || [];
+        const defOf = (id) => defs.find(d => d.id === id) || null;
+        const idOf = (it) => (it && (it.itemId || it.id)) || it;
+        const carriesArmor = (p) => {
+          if (!p) return false;
+          const ids = (p.items || []).concat(p.stashed || []).map(idOf);
+          return ids.includes('bark_armor') || ids.includes('hide_armor');
+        };
+        const torsoProt = (p) => {
+          try {
+            const t = (p.equipped || {}).torso;
+            if (!t || !t.itemId) return 0;
+            return ((defOf(t.itemId) || {}).armor || {}).protection || 0;
+          } catch (e) { return 0; }
+        };
+        const npcIds = (v.roster || []).filter(id => id !== this.villagerId);
+        // Durable seed: a staying villager who already carries armor.
+        for (const id of npcIds) {
+          const p = rc[id];
+          if (p && !p.dead && carriesArmor(p) && this.npcGoal(id) !== 'escape') return null;
+        }
+        // Grantees: the generated cast first (full kits, goals on the
+        // person); any roster villager with a person object as fallback.
+        // Villagers who already carry armor add nothing as grantees, so
+        // they are excluded from the pool (an escape-goal carrier is not a
+        // durable seed, but they already hold a piece — the grant goes to
+        // someone without one).
+        let genIds = (this.generatedRoster || []).map(c => c.id).filter(id => id !== this.villagerId && rc[id]);
+        if (!genIds.length) genIds = npcIds.filter(id => rc[id]);
+        if (!genIds.length) return null;
+        let pool = genIds.filter(id => !carriesArmor(rc[id]));
+        if (!pool.length) pool = genIds;
+        const staying = (id) => this.npcGoal(id) !== 'escape';
+        const rank = (id) => (staying(id) ? 0 : 2) + (torsoProt(rc[id]) < 10 ? 0 : 1);
+        const ordered = pool.slice().sort((a, b) => rank(a) - rank(b));
+        const grantees = ordered.slice(0, 3);
+        if (!grantees.length) return null;
+        for (const gid of grantees) {
+          const p = rc[gid];
+          if (!p) continue;
+          p.items = p.items || [];
+          const hasBark = p.items.map(idOf).includes('bark_armor') || (p.stashed || []).map(idOf).includes('bark_armor');
+          if (!hasBark) p.items.push('bark_armor');
+          try {
+            const EQ = (typeof globalThis !== 'undefined' && globalThis.Scattering && globalThis.Scattering.equipment) || null;
+            if (EQ) EQ.autoEquip(p, defs);
+          } catch (e) { /* carried, not worn: gear day still equips it */ }
+        }
+        v.armorSeedVid = grantees[0];
+        return grantees[0];
+      } catch (e) {
+        try { if (typeof console !== 'undefined') console.warn('[armor-seed]', e); } catch (e2) {}
+        return null;
+      }
     },
     // DARK: roll a rare dark trait. ~2.5% benign (weird, unsettling, harmless),
     // ~1.5% malicious (dangerous, hidden). Returns {kind, tell, _tell} or null.
