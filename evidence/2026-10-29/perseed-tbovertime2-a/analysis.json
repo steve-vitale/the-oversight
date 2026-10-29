@@ -1,0 +1,1607 @@
+{
+ "label": "sim-tbovertime2-a TB tier-2+ overtime decomposition",
+ "seeds": [
+  75101,
+  75102,
+  75103,
+  75104,
+  75105,
+  75106,
+  75107,
+  75108
+ ],
+ "corpusOk": true,
+ "parityPass": false,
+ "parityDiffs": [
+  "seed 75101: days this=157 prior=132",
+  "seed 75101: gameDays this=156 prior=132",
+  "seed 75101: won this=0 prior=1",
+  "seed 75101: nationalFinal this=0 prior=1",
+  "seed 75101: entered this=0 prior=1",
+  "seed 75101: deathTotal this=45 prior=34",
+  "seed 75101: courtship this=22 prior=7",
+  "seed 75101: w4world fightId set differs",
+  "seed 75102: gameDays this=181 prior=180",
+  "seed 75102: waveReach this=3 prior=4",
+  "seed 75102: deathTotal this=32 prior=44",
+  "seed 75102: courtship this=18 prior=8",
+  "seed 75102: w4world fightId set differs",
+  "seed 75103: days this=178 prior=132",
+  "seed 75103: gameDays this=177 prior=132",
+  "seed 75103: won this=0 prior=1",
+  "seed 75103: nationalFinal this=0 prior=1",
+  "seed 75103: entered this=0 prior=1",
+  "seed 75103: deathTotal this=61 prior=28",
+  "seed 75103: w4world fightId set differs",
+  "seed 75104: days this=180 prior=90",
+  "seed 75104: gameDays this=181 prior=90",
+  "seed 75104: won this=0 prior=1",
+  "seed 75104: waveReach this=4 prior=3",
+  "seed 75104: nationalFinal this=0 prior=1",
+  "seed 75104: entered this=0 prior=1",
+  "seed 75104: deathTotal this=44 prior=24",
+  "seed 75104: courtship this=40 prior=24",
+  "seed 75104: w4world fightId set differs",
+  "seed 75105: days this=120 prior=180",
+  "seed 75105: gameDays this=120 prior=181",
+  "seed 75105: nationalFinal this=0 prior=1",
+  "seed 75105: table this=1 prior=0",
+  "seed 75105: deathTotal this=46 prior=48",
+  "seed 75105: courtship this=52 prior=16",
+  "seed 75105: w4world fightId set differs",
+  "seed 75106: days this=180 prior=146",
+  "seed 75106: gameDays this=180 prior=146",
+  "seed 75106: deathTotal this=60 prior=40",
+  "seed 75106: courtship this=17 prior=23",
+  "seed 75106: w4world fightId set differs",
+  "seed 75107: gameDays this=180 prior=181",
+  "seed 75107: waveReach this=4 prior=3",
+  "seed 75107: table this=1 prior=0",
+  "seed 75107: deathTotal this=42 prior=31"
+ ],
+ "substrateOk": true,
+ "courtship": {
+  "combined": 181,
+  "seedsActive": 8
+ },
+ "aggregates": {
+  "total": 22,
+  "joined": 22,
+  "joinedPct": 100,
+  "scaledFights": 19,
+  "totalPreFightScaling": 18925,
+  "totalOvertimeHpGain": 11267,
+  "totalOpeningDamage": 0,
+  "totalInFightChange": -1978,
+  "totalInFightMaxGrowth": 0,
+  "totalTileToConstr": 0,
+  "totalTileToEnd": 9289,
+  "totalConstrToEnd": 9289,
+  "scalesUpFights": 19,
+  "scalesUpPreFightScaling": 18925,
+  "scalesUpOvertimeHpGain": 11267,
+  "scalesUpOpeningDamage": 0,
+  "scalesUpInFightChange": -1009,
+  "scalesUpConstrToEnd": 10258,
+  "maxGrowthNonzero": 0,
+  "inFightPositive": 0,
+  "constrEqualsTile": 22,
+  "constrBelowMax": 20
+ },
+ "byTier": {
+  "0": {
+   "n": 3,
+   "preFightScalingMax": 0,
+   "overtimeHpGain": 0,
+   "openingDamage": 0,
+   "inFightChange": -969,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": -969,
+   "crewStartN": 0,
+   "crewEndN": 0,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 0
+  },
+  "1": {
+   "n": 3,
+   "preFightScalingMax": 675,
+   "overtimeHpGain": 507,
+   "openingDamage": 0,
+   "inFightChange": -325,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": 182,
+   "crewStartN": 0,
+   "crewEndN": 0,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 3
+  },
+  "2": {
+   "n": 1,
+   "preFightScalingMax": 475,
+   "overtimeHpGain": 233,
+   "openingDamage": 0,
+   "inFightChange": -115,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": 118,
+   "crewStartN": 1,
+   "crewEndN": 1,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 1
+  },
+  "3": {
+   "n": 2,
+   "preFightScalingMax": 1425,
+   "overtimeHpGain": 1425,
+   "openingDamage": 0,
+   "inFightChange": -48,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": 1377,
+   "crewStartN": 2,
+   "crewEndN": 2,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 2
+  },
+  "4": {
+   "n": 6,
+   "preFightScalingMax": 5700,
+   "overtimeHpGain": 1284,
+   "openingDamage": 0,
+   "inFightChange": -271,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": 1013,
+   "crewStartN": 12,
+   "crewEndN": 12,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 6
+  },
+  "5": {
+   "n": 0,
+   "preFightScalingMax": 0,
+   "overtimeHpGain": 0,
+   "openingDamage": 0,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": 0,
+   "crewStartN": 0,
+   "crewEndN": 0,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 0
+  },
+  "6": {
+   "n": 7,
+   "preFightScalingMax": 10650,
+   "overtimeHpGain": 7818,
+   "openingDamage": 0,
+   "inFightChange": -250,
+   "inFightMaxGrowth": 0,
+   "constrToEnd": 7568,
+   "crewStartN": 21,
+   "crewEndN": 21,
+   "maxGrowthNonzero": 0,
+   "scalesUp": 7
+  }
+ },
+ "judgedAgg": {
+  "n": 16,
+  "preFightScalingMax": 18250,
+  "overtimeHpGain": 10760,
+  "openingDamage": 0,
+  "inFightChange": -684,
+  "inFightMaxGrowth": 0,
+  "constrToEnd": 10076,
+  "crewStartN": 36,
+  "maxGrowthNonzero": 0,
+  "scalesUp": 16
+ },
+ "controlMode": false,
+ "gaps": [],
+ "fights": [
+  {
+   "seed": 75101,
+   "day": 134,
+   "monster": "eulogy",
+   "fightId": "fmgpspj9h_8s0ki1",
+   "tileHp": 900,
+   "tileMaxHp": 900,
+   "constrHp": 900,
+   "constrMaxHp": 900,
+   "startHp": 1575,
+   "startMaxHp": 1575,
+   "endHp": 1527,
+   "endMaxHp": 1575,
+   "endResult": "lost",
+   "endRound": 2,
+   "tierRec": 3,
+   "tierPre": 3,
+   "tierAtEnd": 3,
+   "fightOtTier": 3,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 1733,
+     "maxHp": 1733
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 1733,
+     "maxHp": 1733
+    }
+   ],
+   "joined": true,
+   "tierInf": 3,
+   "predStartMax": 1575,
+   "tierAgree": true,
+   "predStartHp": 1575,
+   "openingAgree": true,
+   "overtimeHpGain": 675,
+   "tileToConstr": 0,
+   "preFightScaling": 675,
+   "preFightNet": 675,
+   "inFightChange": -48,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 627,
+   "constrToEnd": 627,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    900,
+    1100
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75101,
+   "day": 136,
+   "monster": "algorithm",
+   "fightId": "fmgpspjb4_ar8ru7",
+   "tileHp": 1000,
+   "tileMaxHp": 1000,
+   "constrHp": 1000,
+   "constrMaxHp": 1000,
+   "startHp": 1750,
+   "startMaxHp": 1750,
+   "endHp": 1750,
+   "endMaxHp": 1750,
+   "endResult": "lost",
+   "endRound": 3,
+   "tierRec": 3,
+   "tierPre": 3,
+   "tierAtEnd": 3,
+   "fightOtTier": 3,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 1957,
+     "maxHp": 1957
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 1957,
+     "maxHp": 1957
+    }
+   ],
+   "joined": true,
+   "tierInf": 3,
+   "predStartMax": 1750,
+   "tierAgree": true,
+   "predStartHp": 1750,
+   "openingAgree": true,
+   "overtimeHpGain": 750,
+   "tileToConstr": 0,
+   "preFightScaling": 750,
+   "preFightNet": 750,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 750,
+   "constrToEnd": 750,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75101,
+   "day": 155,
+   "monster": "eulogy",
+   "fightId": "fmgpspjhv_3086yv",
+   "tileHp": 675,
+   "tileMaxHp": 900,
+   "constrHp": 675,
+   "constrMaxHp": 900,
+   "startHp": 1688,
+   "startMaxHp": 2250,
+   "endHp": 1678,
+   "endMaxHp": 2250,
+   "endResult": "lost",
+   "endRound": 2,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2508,
+     "maxHp": 2508
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2385,
+     "maxHp": 2385
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2695,
+     "maxHp": 2695
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2508,
+     "maxHp": 2508
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2385,
+     "maxHp": 2385
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2695,
+     "maxHp": 2695
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 2250,
+   "tierAgree": true,
+   "predStartHp": 1688,
+   "openingAgree": true,
+   "overtimeHpGain": 1013,
+   "tileToConstr": 0,
+   "preFightScaling": 1350,
+   "preFightNet": 1013,
+   "inFightChange": -10,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1003,
+   "constrToEnd": 1003,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    900,
+    1100
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75103,
+   "day": 141,
+   "monster": "reunion",
+   "fightId": "fmgpspj14_38ykpw",
+   "tileHp": 900,
+   "tileMaxHp": 1200,
+   "constrHp": 900,
+   "constrMaxHp": 1200,
+   "startHp": 2250,
+   "startMaxHp": 3000,
+   "endHp": 2170,
+   "endMaxHp": 3000,
+   "endResult": "lost",
+   "endRound": 2,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 3443,
+     "maxHp": 3443
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 3425,
+     "maxHp": 3425
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 3218,
+     "maxHp": 3218
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 3443,
+     "maxHp": 3443
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 3425,
+     "maxHp": 3425
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 3218,
+     "maxHp": 3218
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 3000,
+   "tierAgree": true,
+   "predStartHp": 2250,
+   "openingAgree": true,
+   "overtimeHpGain": 1350,
+   "tileToConstr": 0,
+   "preFightScaling": 1800,
+   "preFightNet": 1350,
+   "inFightChange": -80,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1270,
+   "constrToEnd": 1270,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1200,
+    1400
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75103,
+   "day": 173,
+   "monster": "algorithm",
+   "fightId": "fmgpspja1_fplfln",
+   "tileHp": 727,
+   "tileMaxHp": 1000,
+   "constrHp": 727,
+   "constrMaxHp": 1000,
+   "startHp": 1818,
+   "startMaxHp": 2500,
+   "endHp": 1668,
+   "endMaxHp": 2500,
+   "endResult": "lost",
+   "endRound": 4,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2940,
+     "maxHp": 2940
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2548,
+     "maxHp": 2548
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2628,
+     "maxHp": 2628
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2940,
+     "maxHp": 2940
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2548,
+     "maxHp": 2548
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2628,
+     "maxHp": 2628
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 2500,
+   "tierAgree": true,
+   "predStartHp": 1818,
+   "openingAgree": true,
+   "overtimeHpGain": 1091,
+   "tileToConstr": 0,
+   "preFightScaling": 1500,
+   "preFightNet": 1091,
+   "inFightChange": -150,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 941,
+   "constrToEnd": 941,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75103,
+   "day": 173,
+   "monster": "algorithm",
+   "fightId": "fmgpspja7_4ktdbe",
+   "tileHp": 727,
+   "tileMaxHp": 1000,
+   "constrHp": 727,
+   "constrMaxHp": 1000,
+   "startHp": 1818,
+   "startMaxHp": 2500,
+   "endHp": 1818,
+   "endMaxHp": 2500,
+   "endResult": "lost",
+   "endRound": 2,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2715,
+     "maxHp": 2715
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2593,
+     "maxHp": 2593
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2540,
+     "maxHp": 2540
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2715,
+     "maxHp": 2715
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2593,
+     "maxHp": 2593
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2540,
+     "maxHp": 2540
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 2500,
+   "tierAgree": true,
+   "predStartHp": 1818,
+   "openingAgree": true,
+   "overtimeHpGain": 1091,
+   "tileToConstr": 0,
+   "preFightScaling": 1500,
+   "preFightNet": 1091,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1091,
+   "constrToEnd": 1091,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75103,
+   "day": 173,
+   "monster": "algorithm",
+   "fightId": "fmgpspjaf_1qd19b",
+   "tileHp": 727,
+   "tileMaxHp": 1000,
+   "constrHp": 727,
+   "constrMaxHp": 1000,
+   "startHp": 1818,
+   "startMaxHp": 2500,
+   "endHp": 1818,
+   "endMaxHp": 2500,
+   "endResult": "lost",
+   "endRound": 2,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2810,
+     "maxHp": 2810
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2648,
+     "maxHp": 2648
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2773,
+     "maxHp": 2773
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2810,
+     "maxHp": 2810
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2648,
+     "maxHp": 2648
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2773,
+     "maxHp": 2773
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 2500,
+   "tierAgree": true,
+   "predStartHp": 1818,
+   "openingAgree": true,
+   "overtimeHpGain": 1091,
+   "tileToConstr": 0,
+   "preFightScaling": 1500,
+   "preFightNet": 1091,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1091,
+   "constrToEnd": 1091,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75103,
+   "day": 173,
+   "monster": "algorithm",
+   "fightId": "fmgpspjal_boj6fo",
+   "tileHp": 727,
+   "tileMaxHp": 1000,
+   "constrHp": 727,
+   "constrMaxHp": 1000,
+   "startHp": 1818,
+   "startMaxHp": 2500,
+   "endHp": 1818,
+   "endMaxHp": 2500,
+   "endResult": "lost",
+   "endRound": 2,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2510,
+     "maxHp": 2510
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2560,
+     "maxHp": 2560
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2530,
+     "maxHp": 2530
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2510,
+     "maxHp": 2510
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2560,
+     "maxHp": 2560
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2530,
+     "maxHp": 2530
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 2500,
+   "tierAgree": true,
+   "predStartHp": 1818,
+   "openingAgree": true,
+   "overtimeHpGain": 1091,
+   "tileToConstr": 0,
+   "preFightScaling": 1500,
+   "preFightNet": 1091,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1091,
+   "constrToEnd": 1091,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75103,
+   "day": 173,
+   "monster": "algorithm",
+   "fightId": "fmgpspjat_6sw76j",
+   "tileHp": 727,
+   "tileMaxHp": 1000,
+   "constrHp": 727,
+   "constrMaxHp": 1000,
+   "startHp": 1818,
+   "startMaxHp": 2500,
+   "endHp": 1808,
+   "endMaxHp": 2500,
+   "endResult": "lost",
+   "endRound": 3,
+   "tierRec": 6,
+   "tierPre": 6,
+   "tierAtEnd": 6,
+   "fightOtTier": 6,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2923,
+     "maxHp": 2923
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2800,
+     "maxHp": 2800
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2940,
+     "maxHp": 2940
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2923,
+     "maxHp": 2923
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2800,
+     "maxHp": 2800
+    },
+    {
+     "key": "m_crew_3",
+     "hp": 2940,
+     "maxHp": 2940
+    }
+   ],
+   "joined": true,
+   "tierInf": 6,
+   "predStartMax": 2500,
+   "tierAgree": true,
+   "predStartHp": 1818,
+   "openingAgree": true,
+   "overtimeHpGain": 1091,
+   "tileToConstr": 0,
+   "preFightScaling": 1500,
+   "preFightNet": 1091,
+   "inFightChange": -10,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1081,
+   "constrToEnd": 1081,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1000,
+    1200
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75104,
+   "day": 122,
+   "monster": "eulogy",
+   "fightId": "fmgpspiw4_5do87i",
+   "tileHp": 675,
+   "tileMaxHp": 900,
+   "constrHp": 675,
+   "constrMaxHp": 900,
+   "startHp": 844,
+   "startMaxHp": 1125,
+   "endHp": 819,
+   "endMaxHp": 1125,
+   "endResult": "lost",
+   "endRound": 4,
+   "tierRec": 1,
+   "tierPre": 1,
+   "tierAtEnd": 1,
+   "fightOtTier": 1,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [],
+   "crewEnd": [],
+   "joined": true,
+   "tierInf": 1,
+   "predStartMax": 1125,
+   "tierAgree": true,
+   "predStartHp": 844,
+   "openingAgree": true,
+   "overtimeHpGain": 169,
+   "tileToConstr": 0,
+   "preFightScaling": 225,
+   "preFightNet": 169,
+   "inFightChange": -25,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 144,
+   "constrToEnd": 144,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    900,
+    1100
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75104,
+   "day": 122,
+   "monster": "eulogy",
+   "fightId": "fmgpspiwi_8jp13c",
+   "tileHp": 675,
+   "tileMaxHp": 900,
+   "constrHp": 675,
+   "constrMaxHp": 900,
+   "startHp": 844,
+   "startMaxHp": 1125,
+   "endHp": 712,
+   "endMaxHp": 1125,
+   "endResult": "lost",
+   "endRound": 5,
+   "tierRec": 1,
+   "tierPre": 1,
+   "tierAtEnd": 1,
+   "fightOtTier": 1,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [],
+   "crewEnd": [],
+   "joined": true,
+   "tierInf": 1,
+   "predStartMax": 1125,
+   "tierAgree": true,
+   "predStartHp": 844,
+   "openingAgree": true,
+   "overtimeHpGain": 169,
+   "tileToConstr": 0,
+   "preFightScaling": 225,
+   "preFightNet": 169,
+   "inFightChange": -132,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 37,
+   "constrToEnd": 37,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    900,
+    1100
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75104,
+   "day": 123,
+   "monster": "eulogy",
+   "fightId": "fmgpspix6_2e6zrc",
+   "tileHp": 675,
+   "tileMaxHp": 900,
+   "constrHp": 675,
+   "constrMaxHp": 900,
+   "startHp": 844,
+   "startMaxHp": 1125,
+   "endHp": 676,
+   "endMaxHp": 1125,
+   "endResult": "lost",
+   "endRound": 4,
+   "tierRec": 1,
+   "tierPre": 1,
+   "tierAtEnd": 1,
+   "fightOtTier": 1,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [],
+   "crewEnd": [],
+   "joined": true,
+   "tierInf": 1,
+   "predStartMax": 1125,
+   "tierAgree": true,
+   "predStartHp": 844,
+   "openingAgree": true,
+   "overtimeHpGain": 169,
+   "tileToConstr": 0,
+   "preFightScaling": 225,
+   "preFightNet": 169,
+   "inFightChange": -168,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 1,
+   "constrToEnd": 1,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    900,
+    1100
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75105,
+   "day": 119,
+   "monster": "eater",
+   "fightId": "fmgpspixm_8wxvl8",
+   "tileHp": 214,
+   "tileMaxHp": 950,
+   "constrHp": 214,
+   "constrMaxHp": 950,
+   "startHp": 428,
+   "startMaxHp": 1900,
+   "endHp": 373,
+   "endMaxHp": 1900,
+   "endResult": "lost",
+   "endRound": 3,
+   "tierRec": 4,
+   "tierPre": 4,
+   "tierAtEnd": 4,
+   "fightOtTier": 4,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2106,
+     "maxHp": 2106
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2290,
+     "maxHp": 2290
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2106,
+     "maxHp": 2106
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2290,
+     "maxHp": 2290
+    }
+   ],
+   "joined": true,
+   "tierInf": 4,
+   "predStartMax": 1900,
+   "tierAgree": true,
+   "predStartHp": 428,
+   "openingAgree": true,
+   "overtimeHpGain": 214,
+   "tileToConstr": 0,
+   "preFightScaling": 950,
+   "preFightNet": 214,
+   "inFightChange": -55,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 159,
+   "constrToEnd": 159,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75105,
+   "day": 119,
+   "monster": "eater",
+   "fightId": "fmgpspixt_ea6thy",
+   "tileHp": 214,
+   "tileMaxHp": 950,
+   "constrHp": 214,
+   "constrMaxHp": 950,
+   "startHp": 428,
+   "startMaxHp": 1900,
+   "endHp": 428,
+   "endMaxHp": 1900,
+   "endResult": "lost",
+   "endRound": 3,
+   "tierRec": 4,
+   "tierPre": 4,
+   "tierAtEnd": 4,
+   "fightOtTier": 4,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 1926,
+     "maxHp": 1926
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 1978,
+     "maxHp": 1978
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 1926,
+     "maxHp": 1926
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 1978,
+     "maxHp": 1978
+    }
+   ],
+   "joined": true,
+   "tierInf": 4,
+   "predStartMax": 1900,
+   "tierAgree": true,
+   "predStartHp": 428,
+   "openingAgree": true,
+   "overtimeHpGain": 214,
+   "tileToConstr": 0,
+   "preFightScaling": 950,
+   "preFightNet": 214,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 214,
+   "constrToEnd": 214,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75105,
+   "day": 119,
+   "monster": "eater",
+   "fightId": "fmgpspiy7_c74ib8",
+   "tileHp": 214,
+   "tileMaxHp": 950,
+   "constrHp": 214,
+   "constrMaxHp": 950,
+   "startHp": 428,
+   "startMaxHp": 1900,
+   "endHp": 345,
+   "endMaxHp": 1900,
+   "endResult": "lost",
+   "endRound": 4,
+   "tierRec": 4,
+   "tierPre": 4,
+   "tierAtEnd": 4,
+   "fightOtTier": 4,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2290,
+     "maxHp": 2290
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2246,
+     "maxHp": 2246
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2219,
+     "maxHp": 2290
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2246,
+     "maxHp": 2246
+    }
+   ],
+   "joined": true,
+   "tierInf": 4,
+   "predStartMax": 1900,
+   "tierAgree": true,
+   "predStartHp": 428,
+   "openingAgree": true,
+   "overtimeHpGain": 214,
+   "tileToConstr": 0,
+   "preFightScaling": 950,
+   "preFightNet": 214,
+   "inFightChange": -83,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 131,
+   "constrToEnd": 131,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75105,
+   "day": 120,
+   "monster": "eater",
+   "fightId": "fmgpspiyi_g9k3d3",
+   "tileHp": 214,
+   "tileMaxHp": 950,
+   "constrHp": 214,
+   "constrMaxHp": 950,
+   "startHp": 428,
+   "startMaxHp": 1900,
+   "endHp": 324,
+   "endMaxHp": 1900,
+   "endResult": "lost",
+   "endRound": 3,
+   "tierRec": 4,
+   "tierPre": 4,
+   "tierAtEnd": 4,
+   "fightOtTier": 4,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2270,
+     "maxHp": 2270
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2294,
+     "maxHp": 2294
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2270,
+     "maxHp": 2270
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2294,
+     "maxHp": 2294
+    }
+   ],
+   "joined": true,
+   "tierInf": 4,
+   "predStartMax": 1900,
+   "tierAgree": true,
+   "predStartHp": 428,
+   "openingAgree": true,
+   "overtimeHpGain": 214,
+   "tileToConstr": 0,
+   "preFightScaling": 950,
+   "preFightNet": 214,
+   "inFightChange": -104,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 110,
+   "constrToEnd": 110,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75105,
+   "day": 120,
+   "monster": "eater",
+   "fightId": "fmgpspiyn_5bztw6",
+   "tileHp": 214,
+   "tileMaxHp": 950,
+   "constrHp": 214,
+   "constrMaxHp": 950,
+   "startHp": 428,
+   "startMaxHp": 1900,
+   "endHp": 428,
+   "endMaxHp": 1900,
+   "endResult": "lost",
+   "endRound": 4,
+   "tierRec": 4,
+   "tierPre": 4,
+   "tierAtEnd": 4,
+   "fightOtTier": 4,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2054,
+     "maxHp": 2054
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2004,
+     "maxHp": 2004
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2054,
+     "maxHp": 2054
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2004,
+     "maxHp": 2004
+    }
+   ],
+   "joined": true,
+   "tierInf": 4,
+   "predStartMax": 1900,
+   "tierAgree": true,
+   "predStartHp": 428,
+   "openingAgree": true,
+   "overtimeHpGain": 214,
+   "tileToConstr": 0,
+   "preFightScaling": 950,
+   "preFightNet": 214,
+   "inFightChange": 0,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 214,
+   "constrToEnd": 214,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75105,
+   "day": 120,
+   "monster": "eater",
+   "fightId": "fmgpspiyt_1cbelw",
+   "tileHp": 214,
+   "tileMaxHp": 950,
+   "constrHp": 214,
+   "constrMaxHp": 950,
+   "startHp": 428,
+   "startMaxHp": 1900,
+   "endHp": 399,
+   "endMaxHp": 1900,
+   "endResult": "lost",
+   "endRound": 3,
+   "tierRec": 4,
+   "tierPre": 4,
+   "tierAtEnd": 4,
+   "fightOtTier": 4,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 2086,
+     "maxHp": 2086
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2076,
+     "maxHp": 2076
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 2086,
+     "maxHp": 2086
+    },
+    {
+     "key": "m_crew_2",
+     "hp": 2076,
+     "maxHp": 2076
+    }
+   ],
+   "joined": true,
+   "tierInf": 4,
+   "predStartMax": 1900,
+   "tierAgree": true,
+   "predStartHp": 428,
+   "openingAgree": true,
+   "overtimeHpGain": 214,
+   "tileToConstr": 0,
+   "preFightScaling": 950,
+   "preFightNet": 214,
+   "inFightChange": -29,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 185,
+   "constrToEnd": 185,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75106,
+   "day": 139,
+   "monster": "eater",
+   "fightId": "fmgpspj4r_4eldtz",
+   "tileHp": 466,
+   "tileMaxHp": 950,
+   "constrHp": 466,
+   "constrMaxHp": 950,
+   "startHp": 699,
+   "startMaxHp": 1425,
+   "endHp": 584,
+   "endMaxHp": 1425,
+   "endResult": "lost",
+   "endRound": 4,
+   "tierRec": 2,
+   "tierPre": 2,
+   "tierAtEnd": 2,
+   "fightOtTier": 2,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [
+    {
+     "key": "m_crew_1",
+     "hp": 1710,
+     "maxHp": 1710
+    }
+   ],
+   "crewEnd": [
+    {
+     "key": "m_crew_1",
+     "hp": 1710,
+     "maxHp": 1710
+    }
+   ],
+   "joined": true,
+   "tierInf": 2,
+   "predStartMax": 1425,
+   "tierAgree": true,
+   "predStartHp": 699,
+   "openingAgree": true,
+   "overtimeHpGain": 233,
+   "tileToConstr": 0,
+   "preFightScaling": 475,
+   "preFightNet": 233,
+   "inFightChange": -115,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": 118,
+   "constrToEnd": 118,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    950,
+    1150
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75108,
+   "day": 94,
+   "monster": "suburb",
+   "fightId": "fmgpspipl_21p2si",
+   "tileHp": 975,
+   "tileMaxHp": 1300,
+   "constrHp": 975,
+   "constrMaxHp": 1300,
+   "startHp": 975,
+   "startMaxHp": 1300,
+   "endHp": 832,
+   "endMaxHp": 1300,
+   "endResult": "lost",
+   "endRound": 5,
+   "tierRec": 0,
+   "tierPre": 0,
+   "tierAtEnd": 0,
+   "fightOtTier": null,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [],
+   "crewEnd": [],
+   "joined": true,
+   "tierInf": 0,
+   "predStartMax": 1300,
+   "tierAgree": true,
+   "predStartHp": 975,
+   "openingAgree": true,
+   "overtimeHpGain": 0,
+   "tileToConstr": 0,
+   "preFightScaling": 0,
+   "preFightNet": 0,
+   "inFightChange": -143,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": -143,
+   "constrToEnd": -143,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75108,
+   "day": 95,
+   "monster": "suburb",
+   "fightId": "fmgpspiqm_g274of",
+   "tileHp": 799,
+   "tileMaxHp": 1300,
+   "constrHp": 799,
+   "constrMaxHp": 1300,
+   "startHp": 799,
+   "startMaxHp": 1300,
+   "endHp": 507,
+   "endMaxHp": 1300,
+   "endResult": "lost",
+   "endRound": 7,
+   "tierRec": 0,
+   "tierPre": 0,
+   "tierAtEnd": 0,
+   "fightOtTier": null,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [],
+   "crewEnd": [],
+   "joined": true,
+   "tierInf": 0,
+   "predStartMax": 1300,
+   "tierAgree": true,
+   "predStartHp": 799,
+   "openingAgree": true,
+   "overtimeHpGain": 0,
+   "tileToConstr": 0,
+   "preFightScaling": 0,
+   "preFightNet": 0,
+   "inFightChange": -292,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": -292,
+   "constrToEnd": -292,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "constrInDefRange": true
+  },
+  {
+   "seed": 75108,
+   "day": 95,
+   "monster": "suburb",
+   "fightId": "fmgpspiqw_fqe76b",
+   "tileHp": 507,
+   "tileMaxHp": 1300,
+   "constrHp": 507,
+   "constrMaxHp": 1300,
+   "startHp": 507,
+   "startMaxHp": 1300,
+   "endHp": -27,
+   "endMaxHp": 1300,
+   "endResult": "won",
+   "endRound": 6,
+   "tierRec": 0,
+   "tierPre": 0,
+   "tierAtEnd": 0,
+   "fightOtTier": null,
+   "openingSum": 0,
+   "openingReturnedSum": 0,
+   "openingEvents": 0,
+   "crewStart": [],
+   "crewEnd": [],
+   "joined": true,
+   "tierInf": 0,
+   "predStartMax": 1300,
+   "tierAgree": true,
+   "predStartHp": 507,
+   "openingAgree": true,
+   "overtimeHpGain": 0,
+   "tileToConstr": 0,
+   "preFightScaling": 0,
+   "preFightNet": 0,
+   "inFightChange": -534,
+   "inFightMaxGrowth": 0,
+   "tileToEnd": -534,
+   "constrToEnd": -534,
+   "identityTile": true,
+   "identityConstr": true,
+   "defRange": [
+    1300,
+    1500
+   ],
+   "constrInDefRange": true
+  }
+ ],
+ "sameCallEnded": 315,
+ "mechanicalPass": true,
+ "generated": "2026-10-29T16:40:55.380Z"
+}
