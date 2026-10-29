@@ -423,5 +423,33 @@ Seams and label notes (none blocking, all recorded):
 
 ## Landing record
 
-- PENDING — check-quick, telemetry verdict, safe-commit,
-  ff-only merge, release, rotation-b 4→5.
+- Check-quick (pre-merge): 284 passed, 6 failed in 663s — the
+  standing set only (see Gates + checks).
+- Telemetry: LOUD on both metrics, EXPLAINED, baseline NOT
+  rolled (see Telemetry deviation check).
+- Safe-commit: prereg + probe + analyzer (040d68371), then note
+  + 7 per-seed JSONs + 7 transcripts (4531198b1). Index clobber
+  struck on BOTH safe-commits (committed files shown as staged
+  deletions in the worktree index, files byte-identical to HEAD)
+  and was repaired via cacheinfo both times; status verified
+  clean + diff HEAD empty after each repair.
+- Merge: ff-only failed on first attempt (master had moved to
+  c3b5a187b under the run: 9 sibling commits, zero src/js —
+  adjacenttile/eveningdetour instruments, pickdepart diag,
+  scale r51 evidence). Branch rebased cleanly onto c3b5a187b
+  (2 commits replayed, no conflicts; worktree clean). Targeted
+  re-proof after rebase: analyzer verdict lines diff-identical
+  to the saved analyzer log (PRIMARY NO-GO | ALL NO-GO, same
+  four NO-GOs); probe + analyzer node --check clean. Full
+  check-quick 284/6 stands: it ran on the substantively
+  identical tree, and the rebase delta is instrument + evidence
+  only with zero src/js, so no fresh 11-min full run was burned
+  to re-prove an evidence-only delta.
+- Merge (post-rebase) + release + rotation: NEXT — ff-only
+  merge immediately after this note-fill commit, then release,
+  then rotation-b 4→5. Do NOT push: the ship loop owns pushes.
+  Target state: merged locally, pending ship — no version tag.
+  (This note-fill commit itself is the last branch commit; the
+  merge result is recorded in the run's closing record, not by
+  editing this note after the merge — the note must not claim a
+  merge that has not happened yet.)
