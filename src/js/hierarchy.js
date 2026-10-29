@@ -96,7 +96,7 @@
 //   - conquest_is_blood: raidVillage/answerRaid is the force path — casualties via registerDeath, wounds marked, loot as real food, subjugation at trust 15 / opinion -40 / 7,000 kcal duress tribute. Conquered links can sabotage or revolt while trust < 30; mercy converts them to courtship links. Distinct from bidForPrimacy's courtship climb. (code: hierarchy.js)
 //   - league_pool_is_real_food: covenant pool contributions leave the pantry weekly; draws move real kcal back; shorts are said aloud and cost trust. Trade tariff income arrives as real food; route upkeep is real food out. (code: hierarchy.js)
 //   - trade_has_no_swords: trade-league help requests carry no defense obligation — Haven may refuse aloud (small trust cost, the charter said so) or send help as a priced favor. Covenant defense calls are obligations: sending costs a party, refusing costs trust league-wide. (code: hierarchy.js)
-//   - knowledge_never_gates_the_scale: peer proposals, raids, and all four new national beats are never knowledge-gated — force and trade don't ask what you know. (code: hierarchy.js)
+//   - knowledge_never_gates_the_scale: raids and all four new national beats are never knowledge-gated — force doesn't ask what you know. Peer proposals (covenant/trade) ARE knowledge-gated since 2026-10-29 (gaps2-knower decided call, Steve may overrule): a polity-level bond must not form with a village never heard of or visited — the audit's seed-99 Stonebridge covenant proved the old split. (code: hierarchy.js)
 //   - foreign_fires_climb_too: known villages bind among themselves off-screen — a slow background drift (~12%/wk) PLUS engagement-driven acceleration off stirRegion beats (trade caravans, aid sent, crises answered, contests watched abroad, new courtships); Haven hears through traders — delayed, possibly wrong, never omniscience. (code: hierarchy.js)
 //   - region_moves_on_engagement: foreign-realm growth is engagement-driven, not clock-driven — waiting banks nothing; playing advances the arc. Haven-linked villages are NOT excluded from candidacy (the old exclusion punished courting: the more Haven courted, the slower the region climbed). Still earned: momentum is deed-gated, a 4-realm takes weeks of real beats, never a calendar path. (code: hierarchy.js)
 //   - grief_coalesces: one funeral doesn't become five — a link already grieving (young-link beat staged, or inside the mourning window) takes no new haircut, beat, or leverage grab from a further death; the first death keeps full force. The neglect snap still runs mid-grief. (code: hierarchy.js)
@@ -111,7 +111,7 @@
 //   - binding_walk_refuses_the_scale: walking from the Binding breaks the link as a clean walk (opinion -10, not the gambit) AND refuses the scale permanently with it (docs/SCALE.md) — a walk that could re-court and hit national next season was a canon violation. (code: hierarchy.js)
 //   - grief_beats_feed_the_choke: the young-link renegotiation answers route trust through _trustGain — the mourning choke stays single and every fed gesture stamps lastKeptDay. (code: hierarchy.js)
 //   - the_table_is_weekly: renegotiateLink/bidForPrimacy are one hard conversation per week (lastTableWeek) — the climb is paced in weeks, not ground out in an afternoon. (code: hierarchy.js)
-//   - diplomacy_is_knowledge_gated: proposeLink/proposeAlliance refuse villages the player never heard of or visited (knowsVillage). (code: hierarchy.js)
+//   - diplomacy_is_knowledge_gated: proposeLink/proposeAlliance AND peer proposals (proposeCovenant/proposeTrade) refuse villages the player never heard of or visited (knower-traced knowsVillage, 2026-10-29). (code: hierarchy.js)
 //   - trust_drift_is_voiced: when a seasoned-age (30+ days) Haven link's trust crosses BELOW the trust-40 bar trending down, the village says the bond is cooling — once per crossing, re-arming only above the bar; no numbers, only what the village can know; conquered links skip it; the policy-side tend-skip is engine-invisible by design. (code: hierarchy.js)
 // consumes:
 //   - state.otherVillages
@@ -339,15 +339,128 @@
       } catch (e) { return null; }
     },
 
-    // knowsVillage: the knowledge gate for diplomacy. You've HEARD of them
-    // (a traveler's rumor reached you — rumored) or you've BEEN there
-    // (approach runs the catch-up sim and sets generated). Broadcast-deed
-    // opinion from afar does NOT count — a name you never heard is not
-    // knowledge, and never a button. (Regional audit 2026-10-09: the Haven
-    // panel used to list every village on the map, met or not.)
-    knowsVillage(v) {
+    // ---------- KNOWER LEDGER (2026-10-29, gaps2-knower) ----------
+    // Village knowledge belongs to a KNOWER, never to the world (MAP.md §5,
+    // Steve's perception law 2026-10-28: villagers know who's around only
+    // through their own senses — no magic roster/list feed). The store
+    // mirrors villager map memory (villager-mapmem.js):
+    //   state.village.villageLore[knowerId][villageId] =
+    //     { how, day, toldBy, secondhand }
+    // how: 'visit' (face-to-face at their fire — also the mirror entry a
+    //   visited village holds about Haven), 'seen-nearby' (smoke on the
+    //   horizon from 2 tiles — you saw them, you did not meet them),
+    //   'rumor' (a traveler's word, granted only when DELIVERED/read),
+    //   'told' (gossip from a named teller, secondhand), 'link' (a sworn
+    //   bond — the whole fire knows its allies). Strength ranks
+    //   visit/link (3) > seen-nearby (2) > rumor/told (1): a later visit
+    //   upgrades a rumor; a rumor never downgrades a visit. First entry at
+    //   a rank wins (the earliest telling is the provenance).
+    // Knower ids are villager ids (the player is this.villagerId) plus
+    // polity knowers 'village:<id>' — a foreign village's own knowledge
+    // of Haven, traced to a meeting, a delivered rumor's returning
+    // traveler, or a sworn bond. A polity knower is not a person, but it
+    // is a traced event, never a bare flag.
+    // PLAYER LEGACY (old saves, debug fixtures): the player gate ALSO
+    // counts a visit flag (generated — set only by the player's own
+    // approach/joined ticks, so it IS player-traced) and a rumor flag
+    // ONLY when a delivered village rumor for that village sits in
+    // scholar.rumors (the old "heard" state, reconstructed). A bare
+    // rumored flag — a roll queued but never read — opens NOTHING.
+    // Non-player knowers are STRICT lore only: no legacy, ever.
+    playerKnowerId() {
+      try { return this.villagerId || 'player'; } catch (e) { return 'player'; }
+    },
+
+    villageLoreOf(knowerId) {
+      try {
+        var vil = this.state.village || (this.state.village = {});
+        var lore = vil.villageLore || (vil.villageLore = {});
+        if (!knowerId) knowerId = this.playerKnowerId();
+        return lore[knowerId] || (lore[knowerId] = {});
+      } catch (e) { return {}; }
+    },
+
+    villageLoreEntry(knowerId, villageId) {
+      try {
+        if (!knowerId || !villageId) return null;
+        var m = this.villageLoreOf(knowerId);
+        return m[villageId] || null;
+      } catch (e) { return null; }
+    },
+
+    recordVillageLore(knowerId, villageId, entry) {
+      try {
+        if (!knowerId || !villageId || !entry || !entry.how) return null;
+        var m = this.villageLoreOf(knowerId);
+        var old = m[villageId];
+        var rank = { visit: 3, link: 3, 'seen-nearby': 2, rumor: 1, told: 1 };
+        if (old && (rank[old.how] || 0) >= (rank[entry.how] || 0)) return old;
+        var day = 0;
+        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+        var rec = {
+          how: entry.how, day: day,
+          toldBy: entry.toldBy || null,
+          secondhand: !!entry.secondhand,
+        };
+        m[villageId] = rec;
+        return rec;
+      } catch (e) { return null; }
+    },
+
+    // tellVillageLore(tellerId, listenerId, villageId): gossip spread,
+    // modeled on mapmemTell. The listener gains the village secondhand
+    // from a NAMED teller — never from the bare flag. Returns the new (or
+    // existing) entry, or null when the teller does not know it.
+    // wired-exempt: spread primitive for conversation-gossip wiring (next slice); proven directly by test-knower-ledger.js.
+    tellVillageLore(tellerId, listenerId, villageId) {
+      try {
+        if (!tellerId || !listenerId || tellerId === listenerId || !villageId) return null;
+        var known = this.knowsVillage({ id: villageId }, tellerId);
+        if (!known) return null;
+        var old = this.villageLoreEntry(listenerId, villageId);
+        if (old) return old;
+        return this.recordVillageLore(listenerId, villageId,
+          { how: 'told', toldBy: tellerId, secondhand: true });
+      } catch (e) { return null; }
+    },
+
+    // villageKnowsVillage(villageId, targetId): the polity-knower read —
+    // what a foreign village itself knows (about Haven, usually). Strict
+    // lore only; a village that never met Haven, never got a traveler's
+    // word back, and never swore a bond does not act as if it had.
+    villageKnowsVillage(villageId, targetId) {
+      try {
+        if (!villageId || !targetId) return false;
+        if (villageId === targetId) return true;
+        return !!this.villageLoreEntry('village:' + villageId, targetId);
+      } catch (e) { return false; }
+    },
+
+    // knowsVillage: the knowledge gate for diplomacy. Knower-traced
+    // (2026-10-29): knowsVillage(v, knowerId) reads that knower's lore.
+    // With no knower argument it reads the PLAYER's lore, plus the player
+    // legacy above (visit flag, or rumor flag + delivered rumor).
+    // Broadcast-deed opinion from afar does NOT count — a name you never
+    // heard is not knowledge, and never a button. (Regional audit
+    // 2026-10-09: the Haven panel used to list every village on the map,
+    // met or not.)
+    knowsVillage(v, knowerId) {
       if (!v || v.id === 'haven') return true;
-      return !!(v.generated || v.rumored);
+      var k = knowerId || this.playerKnowerId();
+      if (this.villageLoreEntry(k, v.id)) return true;
+      if (k === this.playerKnowerId()) {
+        if (v.generated) return true;
+        if (v.rumored) {
+          try {
+            var rumors = (this.state.scholar || {}).rumors || [];
+            for (var i = 0; i < rumors.length; i++) {
+              if (rumors[i] && rumors[i].type === 'village' &&
+                  rumors[i].villageId === v.id && rumors[i].delivered) return true;
+            }
+          } catch (e) {}
+        }
+      }
+      return false;
     },
 
     // ---------- OPINION (the courtship currency) ----------
@@ -647,6 +760,13 @@
       };
       this.hierarchyState().push(link);
       this._designateSpeaker(link);
+      // KNOWER LEDGER (2026-10-29): a sworn bond is public knowledge —
+      // both fires know each other from the bond itself (a 'link' entry
+      // never overwrites a stronger-or-equal 'visit': first-strongest-wins).
+      try {
+        this.recordVillageLore(this.playerKnowerId(), targetId, { how: 'link' });
+        this.recordVillageLore('village:' + targetId, 'haven', { how: 'link' });
+      } catch (e) {}
       // LINK DAY (bal-scale 2026-10-10): the System leans in when the village
       // moves — link formation weights the system-quest offer chance.
       try { this.state.lastLinkDay = (this.state.scholar || {}).day || 0; } catch (e) {}
@@ -2065,7 +2185,11 @@
         for (var i = 0; i < oV.length; i++) {
           var v = oV[i];
           if (!v || v.id === 'haven') continue;
-          try { if (!this.knowsVillage(v)) continue; } catch (e) { continue; }
+          // KNOWER LEDGER (2026-10-29): the hearers are the villages that
+          // know HAVEN (their own traced lore), not the villages the
+          // player happens to know — the old bare-flag read let a rumor
+          // about them count as knowledge by them.
+          try { if (!this.villageKnowsVillage(v.id, 'haven')) continue; } catch (e) { continue; }
           heard++;
           if (outcome === 'won') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, 2, 'broadcast'); } catch (e2) {} }
           else if (outcome === 'died') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, -2, 'contest-death'); } catch (e2) {} }
@@ -2099,7 +2223,12 @@
         for (var i = 0; i < oV.length; i++) {
           var v = oV[i];
           if (!v || v.id === 'haven') continue;
-          if (!this.knowsVillage(v)) continue;
+          // KNOWER LEDGER (2026-10-29): candidacy reads the village's own
+          // traced knowledge of Haven, not the player's flag. The set is
+          // the same in practice (visited / rumor-delivered / bonded
+          // villages) once the mirror entries exist — only the trace
+          // changed, not the pacing.
+          if (!this.villageKnowsVillage(v.id, 'haven')) continue;
           var inFp = false;
           for (var j = 0; j < fps.length; j++) {
             if (fps[j].primary === v.id || fps[j].subs.indexOf(v.id) >= 0) { inFp = true; break; }
@@ -2815,8 +2944,11 @@
         this.state._lastWorldFeedWeek = wk;
         var oV = this.state.otherVillages || [];
         var known = [];
+        // KNOWER LEDGER (2026-10-29): the feed is the PLAYER's view, so
+        // the knower is explicitly the player — the bare-flag read is gone,
+        // the audience is unchanged (visited / delivered-rumor villages).
         for (var i = 0; i < oV.length; i++) {
-          if (oV[i] && oV[i].id !== 'haven' && this.knowsVillage(oV[i])) known.push(oV[i]);
+          if (oV[i] && oV[i].id !== 'haven' && this.knowsVillage(oV[i], this.playerKnowerId())) known.push(oV[i]);
         }
         if (!known.length) return;
         var v = pick(known);
@@ -2864,15 +2996,22 @@
     _proposePeer(targetId, kind) {
       var ov = this._otherVillage(targetId);
       if (!ov || targetId === HOME) { this.say('No one to bind.'); return null; }
+      // KNOWER LEDGER (2026-10-29, decided call — Steve may overrule):
+      // peer proposals are knowledge-gated like proposeLink. The old split
+      // let opinion alone form a covenant with a village never heard of
+      // (audit seed 99: Stonebridge). Knowledge first, then courtship.
+      if (!this.knowsVillage(ov, this.playerKnowerId())) { this.say('You don\'t know them well enough to propose anything.'); return null; }
       if (this.linkWith(targetId)) { this.say('There is already a link. One organization, one link — tend it.'); return null; }
       if (this.state.pendingCounter) { this.say('There is already an offer on the table — answer it first.'); return 'counter'; }
       var opinion0 = ov.opinion || 0;
       var kindName0 = kind === 'covenant' ? 'covenant' : 'charter';
-      // PEER BINDING NEEDS COURTSHIP (scale-pacing 2026-10-11): knowsVillage
-      // alone unlocked polity-level proposals — three cold accepts in three
-      // days was a nation. A league is a relationship: they need to know
-      // Haven's name (opinion 10+) before the binding is even proposed.
-      // This is a prerequisite, not an ask — no proposal, no -5.
+      // PEER BINDING NEEDS COURTSHIP (scale-pacing 2026-10-11): opinion
+      // alone used to unlock polity-level proposals — three cold accepts in
+      // three days was a nation. A league is a relationship: they need to
+      // know Haven's name (opinion 10+) before the binding is even proposed.
+      // This is a prerequisite, not an ask — no proposal, no -5. And since
+      // 2026-10-29 the knowledge gate above applies first: opinion about
+      // a village never heard of buys nothing.
       if (opinion0 < 10) {
         this.say(`${ov.name || 'They'} barely know Haven's name — and a ${kindName0} is a relationship, not a handshake. Sit with them first: walk to their fire and study their codex, win where the region hears it, give it weeks. Come back when they know what Haven is.`);
         return null;
@@ -2953,6 +3092,12 @@
       }
       this.hierarchyState().push(link);
       this._designateSpeaker(link);
+      // KNOWER LEDGER (2026-10-29): a sworn bond is public knowledge —
+      // both fires know each other from the bond itself (see _formLink).
+      try {
+        this.recordVillageLore(this.playerKnowerId(), targetId, { how: 'link' });
+        this.recordVillageLore('village:' + targetId, 'haven', { how: 'link' });
+      } catch (e) {}
       // LINK DAY (bal-scale 2026-10-10): peer links count as the village
       // moving too — the System's offer cadence weights on it.
       try { this.state.lastLinkDay = (this.state.scholar || {}).day || 0; } catch (e) {}
@@ -3533,6 +3678,13 @@
     // maybeVillageRumor queued "a village to the north called X" and nobody
     // ever spoke it, so "heard of them" could never become true. One per
     // day, at the day boundary, with a journal line.
+    // KNOWER LEDGER (2026-10-29): delivery IS the grant. Reading the rumor
+    // here — and only here — writes the player's lore entry (how 'rumor',
+    // toldBy 'traveler-anonymous': the teller is anonymous by construction,
+    // so this entry never counts as an introduction for courtship credit)
+    // and the mirror entry: the traveler passed through Haven, so their
+    // village gains Haven lore on the return leg. The roll in
+    // maybeVillageRumor grants nothing.
     deliverVillageRumors() {
       try {
         var s = this.state.scholar || {};
@@ -3543,6 +3695,16 @@
             r.delivered = true;
             this.say(`🧳 ${r.text} The region is bigger than your fire.`);
             try { if (this.journalNote) this.journalNote('village', 'rumor', r.text); } catch (e) {}
+            try {
+              if (r.villageId) {
+                this.recordVillageLore(this.playerKnowerId(), r.villageId,
+                  { how: 'rumor', toldBy: 'traveler-anonymous', secondhand: true });
+                this.recordVillageLore('village:' + r.villageId, 'haven',
+                  { how: 'rumor', toldBy: 'traveler-anonymous', secondhand: true });
+                var ov = this._otherVillage ? this._otherVillage(r.villageId) : null;
+                if (ov) ov.rumorDay = (this.state.scholar || {}).day || 0;
+              }
+            } catch (e) {}
             return true;
           }
         }

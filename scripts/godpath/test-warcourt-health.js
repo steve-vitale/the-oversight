@@ -16,7 +16,10 @@ async function main(){
   G.state.pendingNational=null;G.state.nationalLive=null;
   G.state.village.pantry=[{units:1,kcalEach:50000}];
   assert(G.state.village.roster.filter(id=>!G.getPerson(id).dead).length>=4,'real living roster');
-  for(const v of G.state.otherVillages)v.rumored=true;
+  // KNOWER LEDGER (2026-10-29): a bare rumored flag no longer counts as
+  // known (a roll queued but never read opens nothing) — the test needs
+  // known raid targets, so mark them visited (player legacy), not rumored.
+  for(const v of G.state.otherVillages)v.generated=true;
   assert(G.state.otherVillages.some(v=>v.id!=='haven'&&G.knowsVillage(v)),'real known target');
   G.regionalStanding=()=>1000;G.villageStandingOf=()=>10;
   let attempts=0,answers=[],warnings=[];

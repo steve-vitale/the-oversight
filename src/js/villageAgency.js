@@ -301,8 +301,12 @@
       }
 
       // FAMINE ACTS: beg or raid. Played beats, throttled.
+      // KNOWER LEDGER (2026-10-29): the actor is the foreign village —
+      // it begs/raids Haven only if IT knows Haven (its own traced lore:
+      // a visit, a returned traveler, a bond). The old read of the
+      // player's flag let a village that never met Haven act on Haven.
       if (v.famine) {
-        try { if (this.knowsVillage(v)) this._vaFamineAct(v); } catch (e) {}
+        try { if (this.villageKnowsVillage(v.id, 'haven')) this._vaFamineAct(v); } catch (e) {}
       }
     },
 
@@ -1005,8 +1009,11 @@
         for (var i = 0; i < ovs.length; i++) {
           var vv = ovs[i];
           if (!vv || vv.id === pet.originVillage) continue;
+          // KNOWER LEDGER (2026-10-29): "every village that knows you"
+          // means villages whose own lore holds Haven — not villages the
+          // player happens to know.
           var known = false;
-          try { known = this.knowsVillage(vv); } catch (e) {}
+          try { known = this.villageKnowsVillage(vv.id, 'haven'); } catch (e) {}
           if (!known) continue;
           try { if (this._nudgeOpinion) this._nudgeOpinion(vv.id, delta); } catch (e) {}
         }
@@ -1297,8 +1304,12 @@
       var v = null;
       try { v = this._otherVillage(villageId); } catch (e) {}
       if (!v) return null;
+      // KNOWER LEDGER (2026-10-29): the hearer here IS the player — event
+      // rumors arrive at Haven's fire — so the knower is explicitly the
+      // player. The bare-flag read is gone; the audience is unchanged
+      // (visited / delivered-rumor villages).
       var known = false;
-      try { known = this.knowsVillage(v); } catch (e) {}
+      try { known = this.knowsVillage(v, (typeof this.playerKnowerId === 'function') ? this.playerKnowerId() : undefined); } catch (e) {}
       if (!known) return null; // never omniscience
       var day = 0;
       try { day = (this.state.scholar || {}).day || 0; } catch (e) {}

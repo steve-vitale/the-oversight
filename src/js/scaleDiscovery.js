@@ -148,8 +148,11 @@
       try {
         var oV = this.state.otherVillages || [];
         var self = this;
+        // KNOWER LEDGER (2026-10-29): scale pointers are the PLAYER's
+        // view, so the knower is explicitly the player.
         return oV.filter(function (v) {
-          return v && v.id !== HOME && self.knowsVillage(v);
+          return v && v.id !== HOME && self.knowsVillage(v,
+            (typeof self.playerKnowerId === 'function') ? self.playerKnowerId() : undefined);
         });
       } catch (e) { return []; }
     },

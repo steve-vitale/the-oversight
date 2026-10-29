@@ -50,6 +50,16 @@ if (process.env.DEPOSITGATE !== '1') { console.error('FATAL: DEPOSITGATE=1 must 
 if (process.env.POLICY !== 'insideevening') { console.error('FATAL: POLICY must be insideevening (policy-leg tracer only)'); process.exit(2); }
 
 const RECORDER_ON = process.env.FIGHTORIGIN !== '0';
+// COLLISION TRACE (sim-raidname-collision-b 2026-10-29): extra
+// recorder layers, OFF by default. When ON, the driver additionally
+// logs Game.raidPendingMonsterId transitions (shadowLog, via a
+// value-preserving accessor intercept in the same pattern as the
+// pending interceptors) and snapshots, at each startCombat entry,
+// the live shadow + the player-tile world monster (originAtEntry,
+// read directly off worldMonsters() so no game state is written).
+// OFF corpora are byte-shape-identical to pre-collision corpora:
+// new fields appear ONLY when this flag is on.
+const COLLISION_ON = process.env.COLLISION_TRACE === '1';
 const SEEDS = (process.env.SEEDS || '10710,10711,10712,10713,10714,10715,10716,10717,10718,10719,10720,10721,10722,10723,10724,10725')
   .split(',').map((s) => parseInt(s.trim(), 10)).filter(Boolean);
 const DAYS = parseInt(process.env.DAYS || '30', 10);
@@ -184,6 +194,8 @@ async function oneInstance(seed, defs) {
   // other; seq still brackets them against moves/checkpoints.
   const pendingLog = []; // pendingEncounter/pendingMonsterId transitions (setter log)
   let pendingLogError = null;
+  const shadowLog = []; // COLLISION_TRACE only: raidPendingMonsterId transitions
+  let shadowLogError = null;
   const fightCreations = []; // startCombat successes, by ordinal
   const fightAttempts = []; // refused/failed startCombat calls
   const fightDrives = []; // first policy.fight call per drive epoch
@@ -317,11 +329,13 @@ async function oneInstance(seed, defs) {
         throw new Error('pending property non-configurable');
       }
       const logTransition = (why) => {
-        pendingLog.push({
+        const entry = {
           seq: seq, foSeq: ++foSeq, loopDay: callIdx + 1, phase, slot, why,
           pendingEncounter: _pe, pendingMonsterId: _pm, pendingInTent: _pit,
           stackFrames: stackFrames(),
-        });
+        };
+        if (COLLISION_ON) entry.stackLines = stackLines();
+        pendingLog.push(entry);
       };
       Object.defineProperty(Game, 'pendingEncounter', {
         configurable: true, enumerable: true,
@@ -334,6 +348,35 @@ async function oneInstance(seed, defs) {
         set(v) { const nv = (v === null || v === undefined) ? null : v; if (nv !== _pm) { _pm = nv; logTransition('pendingMonsterId'); } else _pm = nv; },
       });
     } catch (e) { pendingLogError = String(e && e.message).slice(0, 160); }
+  }
+  // COLLISION TRACE: raidPendingMonsterId transition log. Same
+  // value-preserving accessor pattern as the pending interceptors:
+  // the setter stores exactly the assigned value and logs; it never
+  // changes what the game reads or writes. If installation fails,
+  // the run stops loudly (shadowLogError is fatal in the driver
+  // footer check below) — no fallback instrument.
+  if (COLLISION_ON) {
+    try {
+      let _rpm = Game.raidPendingMonsterId;
+      if (_rpm === undefined) _rpm = null;
+      const descRPM = Object.getOwnPropertyDescriptor(Game, 'raidPendingMonsterId');
+      if (descRPM && !descRPM.configurable) throw new Error('raidPendingMonsterId non-configurable');
+      Object.defineProperty(Game, 'raidPendingMonsterId', {
+        configurable: true, enumerable: true,
+        get() { return _rpm; },
+        set(v) {
+          const nv = (v === null || v === undefined) ? null : v;
+          if (nv !== _rpm) {
+            const old = _rpm; _rpm = nv;
+            shadowLog.push({
+              seq: seq, foSeq: ++foSeq, loopDay: callIdx + 1, phase, slot,
+              why: 'raidPendingMonsterId', oldValue: old, newValue: nv,
+              stackFrames: stackFrames(), stackLines: stackLines(),
+            });
+          } else _rpm = nv;
+        },
+      });
+    } catch (e) { shadowLogError = String(e && e.message).slice(0, 160); }
   }
   // FIGHT-ORIGIN: startCombat wrapper (pure reads around the
   // original call exactly once). Installed before runDays so
@@ -349,6 +392,26 @@ async function oneInstance(seed, defs) {
           const pendBefore = pendingSnap();
           const hadLive = !!(Game.tbfight && !Game.tbfight.over);
           const sayBeforeIdx = sayLines.length;
+          // COLLISION TRACE entry snapshot (pure reads only):
+          // live shadow + player-tile world monster, BEFORE the
+          // original call lifts/removes anything. originAtEntry
+          // is read straight off worldMonsters() (the same value
+          // playerMonster() returns in sims) so the debug-adoption
+          // write branch of playerMonster() is never taken here.
+          let shadowAtEntry = null, originAtEntry = null;
+          if (COLLISION_ON) {
+            try { shadowAtEntry = Game.raidPendingMonsterId || null; } catch (e) {}
+            try {
+              const wms = (typeof Game.worldMonsters === 'function') ? Game.worldMonsters() : [];
+              const mp = Game.map || {};
+              const o = (wms || []).find((m) => m && m.tx === mp.px && m.ty === mp.py) || null;
+              originAtEntry = o ? {
+                id: o.id || null, raidBorn: !!o.raidBorn, lingering: !!o.lingering,
+                hp: (o.hp === undefined ? null : o.hp), tx: (o.tx === undefined ? null : o.tx),
+                ty: (o.ty === undefined ? null : o.ty),
+              } : null;
+            } catch (e) { originAtEntry = null; }
+          }
           let ret = null, err = null;
           try { ret = origStartCombat.apply(this, args); } catch (e) { err = String(e && e.message).slice(0, 160); }
           const liveNow = !!(Game.tbfight && !Game.tbfight.over);
@@ -356,21 +419,54 @@ async function oneInstance(seed, defs) {
             creationOrdinal++;
             if (pendBefore.pendingEncounter) slot = slot + '-pending-resolved';
             bumpEpoch();
-            fightCreations.push({
+            const creation = {
               seq: seq, foSeq: ++foSeq, ordinal: creationOrdinal, loopDay: callIdx + 1,
               phase, slot, argMonsterId: (args[0] === null || args[0] === undefined) ? null : String(args[0]).slice(0, 80),
               pendingBefore: pendBefore, pendingAfter: pendingSnap(),
               fighters: snapFighters(), fightOver: !!Game.tbfight.over,
               pos: snapPos(Game), stackFrames: stackFrames(), stackLines: stackLines(),
               sayTail: sayLines.slice(sayBeforeIdx).map((x) => x.line).slice(-12),
-            });
+            };
+            if (COLLISION_ON) {
+              const mons = [...new Set((creation.fighters || []).filter((x) => x.monsterId).map((x) => x.monsterId))];
+              const fightSpecies = mons.length ? mons[0] : null;
+              creation.shadowAtEntry = shadowAtEntry;
+              creation.originAtEntry = originAtEntry;
+              creation.fightSpecies = fightSpecies;
+              creation.raidLineFired = (creation.sayTail || []).some((l) => l.includes('This one came with the raid on Haven'));
+              creation.pendingMatch = !!(shadowAtEntry && fightSpecies && shadowAtEntry === fightSpecies);
+              creation.entityMatchCandidate = !!(originAtEntry && originAtEntry.raidBorn && fightSpecies && originAtEntry.id === fightSpecies);
+            }
+            fightCreations.push(creation);
           } else {
-            fightAttempts.push({
+            // COLLISION AMENDMENT (sim-raidname-collision-b): a
+            // fight that ENDS INSIDE startCombat (monster flees in
+            // the opening turns, which run synchronously in node)
+            // lands here (hadLive=false, liveNow=false) with the
+            // raid line in its sayTail — it IS a fight, and the
+            // census must classify it. Refused calls (hadLive)
+            // return before the raid block and carry no line.
+            const attempt = {
               seq: seq, foSeq: ++foSeq, loopDay: callIdx + 1, phase, slot,
               argMonsterId: (args[0] === null || args[0] === undefined) ? null : String(args[0]).slice(0, 80),
               pendingBefore: pendBefore, hadLive, liveNow, err,
               sayTail: sayLines.slice(sayBeforeIdx).map((x) => x.line).slice(-12),
-            });
+            };
+            if (COLLISION_ON) {
+              const fightersNow = hadLive ? null : snapFighters();
+              const monsNow = fightersNow ? [...new Set(fightersNow.filter((x) => x.monsterId).map((x) => x.monsterId))] : [];
+              const sp = monsNow.length ? monsNow[0] : (attempt.argMonsterId || null);
+              attempt.shadowAtEntry = shadowAtEntry;
+              attempt.originAtEntry = originAtEntry;
+              attempt.pos = snapPos(Game);
+              attempt.fightSpecies = hadLive ? null : sp;
+              attempt.raidLineFired = (attempt.sayTail || []).some((l) => l.includes('This one came with the raid on Haven'));
+              attempt.pendingMatch = !!(shadowAtEntry && sp && !hadLive && shadowAtEntry === sp);
+              attempt.entityMatchCandidate = !!(originAtEntry && originAtEntry.raidBorn && sp && !hadLive && originAtEntry.id === sp);
+              attempt.stackFrames = stackFrames();
+              attempt.stackLines = stackLines();
+            }
+            fightAttempts.push(attempt);
           }
           if (err) throw new Error(err);
           return ret;
@@ -549,6 +645,7 @@ async function oneInstance(seed, defs) {
     fightCreations, fightAttempts, fightDrives,
     pendingLog, pendingLogError,
     recorderOn: RECORDER_ON,
+    ...(COLLISION_ON ? { shadowLog, shadowLogError, collisionTraceOn: true } : {}),
   };
 }
 
@@ -558,6 +655,10 @@ async function oneInstance(seed, defs) {
   let done = 0;
   for (const seed of SEEDS) {
     const inst = await oneInstance(seed, defs);
+    if (COLLISION_ON && inst.shadowLogError) {
+      console.error('FATAL: raidPendingMonsterId interceptor failed on seed ' + seed + ': ' + inst.shadowLogError);
+      process.exit(2);
+    }
     done++;
     const ins = inst.evenings.filter((e) => e.inside === true && e.tile === 'haven').length;
     const att = inst.taps.filter((t) => t.outcome === 'attempted').length;

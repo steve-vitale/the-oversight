@@ -106,6 +106,18 @@ walk everywhere. Nothing teleports.
   possibly wrong, never instantly to all. Any future far-village ledger
   or leg-village link work must trace to a specific knower (the villager
   who met them, or who was told by a named teller) or it does not ship.
+- LANDED 2026-10-29 (gaps2-knower): the knower ledger IS built now.
+  `state.village.villageLore[knowerId][villageId] = { how, day, toldBy,
+  secondhand }` — `how` is 'visit' / 'seen-nearby' / 'rumor' (granted only
+  on delivery/read) / 'told' / 'link'; foreign villages hold polity
+  lore as `'village:<id>'` about Haven. The registry's `known` flags
+  are still village-level, but learned region grants now record
+  `knowerId`/`toldBy` (hearOfRegion opts). Peer proposals (covenant/
+  trade) are knowledge-gated like proposeLink (decided call, Steve may
+  overrule). What is NOT built yet: auto-spread of told lore through
+  conversation gossip (the `tellVillageLore` primitive exists, unwired
+  by design), per-knower region display gating, and anything touching
+  the road's ending (still waits on Q0(a)).
 
 ## 6. The way home (information became action)
 
