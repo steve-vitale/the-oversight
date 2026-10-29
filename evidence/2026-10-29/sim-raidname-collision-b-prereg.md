@@ -515,6 +515,55 @@ instrument is the collision corpus on identical
 seeds, and the pre-registered DIAG thresholds
 above are the judge.
 
+## AMENDMENT 2026-10-29 (pre-v2-judging, instrument correction — no threshold, band, substrate, or collision definition changes)
+
+The v1 instrument classified ONLY fight creations
+(wrapper records a creation when a live fight exists
+after startCombat returns). The v1 pilot + confirm
+legs ran under it (40 seeds, corpus preserved as
+sim-raidname-collision-b-corpus-v1, analysis as
+sim-raidname-collision-b-analysis-v1.json). Inspecting
+the v1 shadow lifetimes exposed the blind spot: a
+fight that ENDS INSIDE startCombat — in node the
+opening turns run synchronously in the same call,
+and a monster that flees in the opening turns leaves
+tbfight.over true at return — is recorded as a
+fight ATTEMPT (hadLive=false, liveNow=false), not a
+creation, yet the raid line is said LAST in
+startCombat, AFTER the fight ended, so it appears in
+the attempt's sayTail. The v1 band holds 11 such
+attempts, 9 carrying the raid line. A census over
+creations only therefore misses real fights' naming
+decisions — the same blind spot the raidname census
+inherited from fightorigin, now corrected here.
+
+CORRECTED: a FIGHT is a creation OR an ended-inside
+attempt (hadLive=false, liveNow=false). Refused
+attempts (hadLive=true, a fight already live) are
+NOT fights: startCombat returns before the raid
+block, so no line can be said; any refused attempt
+carrying a line is an instrument finding, reported
+not judged. The driver is extended (COLLISION_TRACE
+only) to record on every attempt the entry snapshot
+(shadowAtEntry, originAtEntry), the post-call
+fighter species (fallback: the call's monsterId
+arg), the raid-line flag, pendingMatch /
+entityMatchCandidate, and the caller stacks; the
+analyzer classifies attempts with the SAME
+provenance / COLLISION-A / COLLISION-B / SAME-RAID
+rules, with previous-event foSeq advancing over
+attempts as well as creations (a pending resolved
+at an attempt cannot resolve again later —
+startCombat clears pending for every fight). The
+v1 legs are NOT judged for the verdict (their
+creation-only numbers are reported as the v1
+instrument's output, not hidden); the JUDGED band
+is the v2 re-run (same 40 seeds, same substrate /
+policy / days, fixed instrument). No threshold
+moves: COLLISION-PROVEN / MECHANISM-PROVEN /
+CAVEAT-CLOSED / INSUFFICIENT-DATA apply to the v2
+all-fights census exactly as written above.
+
 ## Metric review (mandatory section in the evidence file)
 
 Every evidence file carries a metric review:
