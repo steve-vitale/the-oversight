@@ -262,6 +262,43 @@ available but is not required for the bar).
   adjacent step on enough seeds) — the run
   reports the staging failure, not a verdict.
 
+## Amendment A (pilot-stage, committed BEFORE any nopath verdict)
+
+Pilot battery seed 20101 (corpus s20101.json, kept as
+superseded data, NOT counted toward any bar):
+
+- The Track N creek construction FAILED to enclose:
+  the seed-20101 bearer has the swimmer skill lane, so
+  travelBlockage passes unbridged creek tiles
+  (verified directly: blockage null on a staged creek
+  tile). The N leg rescued via (3,5)->(4,5) instead of
+  going no-path. The creek construction is therefore
+  RETIRED for all later legs — it proves only that
+  creek enclosure is swimmer-dependent, which is
+  engine law, not a branch firing.
+- Replacement construction (cage, swimmer-proof):
+  haven entry blocked from the player's side as
+  before, PLUS each of the player's other three
+  neighbours gets a blockFrom guarding entry from
+  the player tile itself (bf = P-Q for neighbour Q).
+  BFS from the player then has no exit at all and
+  must return null. Bar unchanged (nopath fires
+  with guards holding); only the staging geometry
+  changed, before any nopath verdict exists.
+- The C2/C3 wanderer staging on s20101 wrote to
+  Game.state.wanderer, but the engine reads
+  Game-level this.wanderer — so wanderer contact was
+  never staged on that leg. C2/C3 results from
+  s20101 are NOT counted as wanderer-contact
+  attempts. The battery now stages Game.wanderer.
+  C1 (monster-on-path) staging was correct and its
+  s20101 result stands as an attempt (0 combat
+  steps across a 4-step detour over staged tiles).
+
+No bar, guard, or verdict rule changed by this
+amendment. Judged N/C2/C3 legs are the re-runs
+after this commit.
+
 ## Horizon + why (death-aware, never a fixed 200d)
 
 Natural sweep: 30 loop-days, same as the
