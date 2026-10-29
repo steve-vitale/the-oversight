@@ -1789,7 +1789,7 @@
             rec.log.push(_rearNames.join(' and ') + ' stood the rear through it, watching the treeline behind them.');
           }
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[rearGuard]', e); }
       var _sealEntries = [[vid, rec.vTaken,
         vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
       if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);
