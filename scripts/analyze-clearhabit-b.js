@@ -111,7 +111,7 @@ function perSeedBefore(j) {
 function perSeedAfter(j) {
   const evs = (j.evenings || []).filter((e) => e.eveningOutcome !== 'game-over');
   const outcomes = {};
-  let away = 0, opportunity = 0, rescued = 0, blockedGuardAway = 0, havenUnknownAway = 0, outOfReachAway = 0, otherAway = 0;
+  let away = 0, opportunity = 0, rescued = 0, blockedGuardAway = 0, havenUnknownAway = 0, outOfReachAway = 0, otherAway = 0, awayOpp = 0;
   const statusCounts = {};
   const remedyCounts = {};
   const kcalCleared = [], kcalUnaffordable = [];
@@ -145,7 +145,7 @@ function perSeedAfter(j) {
     if (e.eveningOutcome === 'blocked-combat' || e.eveningOutcome === 'blocked-tent') { blockedGuardAway++; continue; }
     if (e.eveningOutcome === 'haven-unknown') { havenUnknownAway++; continue; }
     if (e.eveningOutcome === 'out-of-reach') { outOfReachAway++; continue; }
-    if (isOpp) continue;
+    if (isOpp) { awayOpp++; continue; }
     otherAway++;
   }
   const streakList = streaksOf(evs, (e) => {
@@ -175,8 +175,8 @@ function perSeedAfter(j) {
     seed: j.seed, daysAlive: j.daysAlive, endReason: j.endReason, maxWaveUnlocked: j.maxWaveUnlocked,
     evenings: evs.length, outcomes, away, opportunity, rescued,
     rescueRate: opportunity ? rescued / opportunity : null,
-    blockedGuardAway, havenUnknownAway, outOfReachAway, otherAway,
-    awayPartitionOk: (blockedGuardAway + havenUnknownAway + outOfReachAway + opportunity + otherAway) === away,
+    blockedGuardAway, havenUnknownAway, outOfReachAway, otherAway, awayOpp,
+    awayPartitionOk: (blockedGuardAway + havenUnknownAway + outOfReachAway + awayOpp + otherAway) === away,
     statusCounts, remedyCounts, kcalCleared, kcalUnaffordable, woodSpent,
     g3, clearingLoopDays, causalStarv, causalDetails, unmappedDeaths,
     streakMean: streakLens.length ? streakLens.reduce((a, b) => a + b, 0) / streakLens.length : null,
