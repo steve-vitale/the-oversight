@@ -1,0 +1,177 @@
+{
+  "seeds": [
+    11524,
+    11540,
+    11553
+  ],
+  "scan": {
+    "range": "11520-11579",
+    "n": 60,
+    "qualifiers": [
+      {
+        "seed": 11524,
+        "scanRefused": 4
+      },
+      {
+        "seed": 11540,
+        "scanRefused": 2
+      },
+      {
+        "seed": 11553,
+        "scanRefused": 3
+      }
+    ]
+  },
+  "before": {
+    "11524": {
+      "refused": 4,
+      "detours": 0,
+      "rescued": 0,
+      "stopped": 0,
+      "nopath": 0,
+      "steps": 0,
+      "combatSteps": 0,
+      "paths": [],
+      "daysAlive": 30,
+      "deaths": 9,
+      "starvationDeaths": 0,
+      "maxWaveUnlocked": 2
+    },
+    "11540": {
+      "refused": 2,
+      "detours": 0,
+      "rescued": 0,
+      "stopped": 0,
+      "nopath": 0,
+      "steps": 0,
+      "combatSteps": 0,
+      "paths": [],
+      "daysAlive": 30,
+      "deaths": 10,
+      "starvationDeaths": 0,
+      "maxWaveUnlocked": 2
+    },
+    "11553": {
+      "refused": 3,
+      "detours": 0,
+      "rescued": 0,
+      "stopped": 0,
+      "nopath": 0,
+      "steps": 0,
+      "combatSteps": 0,
+      "paths": [],
+      "daysAlive": 30,
+      "deaths": 11,
+      "starvationDeaths": 0,
+      "maxWaveUnlocked": 2
+    }
+  },
+  "after": {
+    "11524": {
+      "refused": 1,
+      "detours": 1,
+      "rescued": 1,
+      "stopped": 0,
+      "nopath": 0,
+      "steps": 3,
+      "combatSteps": 0,
+      "paths": [
+        [
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      ],
+      "daysAlive": 30,
+      "deaths": 8,
+      "starvationDeaths": 0,
+      "maxWaveUnlocked": 2
+    },
+    "11540": {
+      "refused": 1,
+      "detours": 1,
+      "rescued": 1,
+      "stopped": 0,
+      "nopath": 0,
+      "steps": 2,
+      "combatSteps": 0,
+      "paths": [
+        [
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      ],
+      "daysAlive": 30,
+      "deaths": 9,
+      "starvationDeaths": 0,
+      "maxWaveUnlocked": 2
+    },
+    "11553": {
+      "refused": 1,
+      "detours": 1,
+      "rescued": 1,
+      "stopped": 0,
+      "nopath": 0,
+      "steps": 5,
+      "combatSteps": 0,
+      "paths": [
+        [
+          [
+            7,
+            5
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      ],
+      "daysAlive": 30,
+      "deaths": 5,
+      "starvationDeaths": 0,
+      "maxWaveUnlocked": 1
+    }
+  },
+  "guards": {
+    "G1_medianDays": "30 vs 30",
+    "G2_starvation": "0 vs 0",
+    "G3_teleportSteps": 0,
+    "G3_rescuedOffHaven": 0,
+    "G3_combatThenInside": 0,
+    "G3_stillRefusedMoved": "0 of 9"
+  },
+  "totals": {
+    "beforeRefused": 9,
+    "afterDetours": 3,
+    "afterRescued": 3,
+    "afterSteps": 10,
+    "afterCombatSteps": 0
+  }
+}

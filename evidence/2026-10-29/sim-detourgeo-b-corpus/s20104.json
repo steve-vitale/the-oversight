@@ -1,0 +1,770 @@
+{
+  "seed": 20104,
+  "mode": "battery",
+  "tracks": {
+    "N": {
+      "dirTried": [
+        {
+          "dir": "W",
+          "staged": false
+        },
+        {
+          "dir": "N",
+          "staged": true
+        }
+      ],
+      "gateOn": {
+        "seed": 20104,
+        "gateOn": true,
+        "staged": true,
+        "staging": {
+          "dirName": "N",
+          "hx": 4,
+          "hy": 4,
+          "px": 4,
+          "py": 3,
+          "walked": [
+            {
+              "x": 4,
+              "y": 4
+            },
+            {
+              "x": 4,
+              "y": 3
+            }
+          ],
+          "caged": [
+            [
+              5,
+              3
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              2
+            ]
+          ],
+          "havenBlockFrom": {
+            "dx": 0,
+            "dy": -1,
+            "type": "rubble"
+          },
+          "construction": "cage"
+        },
+        "outcome": "detour-nopath",
+        "stoppedReason": "no-path",
+        "detourAttempted": true,
+        "travelOffered": true,
+        "havenDistance": 1,
+        "detourPath": null,
+        "detourSteps": [],
+        "posBefore": {
+          "mapPx": 4,
+          "mapPy": 3,
+          "tile": "creek",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "posAfter": {
+          "mapPx": 4,
+          "mapPy": 3,
+          "tile": "creek",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "sayTail": [
+          "Rubble chokes the path."
+        ],
+        "guards": {
+          "H1_orthogonal": true,
+          "H1_chain": true,
+          "chainEnd": {
+            "x": 4,
+            "y": 3
+          },
+          "H2_arrivalEqDeparture": true,
+          "H4_alive": true,
+          "H4_kcalDelta": 0
+        }
+      },
+      "gateOff": {
+        "seed": 20104,
+        "gateOn": false,
+        "staged": true,
+        "staging": {
+          "dirName": "N",
+          "hx": 4,
+          "hy": 4,
+          "px": 4,
+          "py": 3,
+          "walked": [
+            {
+              "x": 4,
+              "y": 4
+            },
+            {
+              "x": 4,
+              "y": 3
+            }
+          ],
+          "caged": [
+            [
+              5,
+              3
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              2
+            ]
+          ],
+          "havenBlockFrom": {
+            "dx": 0,
+            "dy": -1,
+            "type": "rubble"
+          },
+          "construction": "cage"
+        },
+        "outcome": "travel-refused",
+        "stoppedReason": null,
+        "detourAttempted": false,
+        "travelOffered": true,
+        "havenDistance": 1,
+        "detourPath": null,
+        "detourSteps": null,
+        "stepsWalked": null,
+        "posBefore": {
+          "mapPx": 4,
+          "mapPy": 3,
+          "tile": "creek",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "posAfter": {
+          "mapPx": 4,
+          "mapPy": 3,
+          "tile": "creek",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "sayTail": [
+          "Rubble chokes the path."
+        ],
+        "guards": null
+      }
+    },
+    "C_stage": {
+      "dirName": "N",
+      "predicted": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    "C1_monsterOnPath": {
+      "staged": true,
+      "staging": {
+        "dirName": "N",
+        "hx": 4,
+        "hy": 4,
+        "mx": 4,
+        "my": 3,
+        "px": 4,
+        "py": 2,
+        "walked": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "middleBlockFrom": {
+          "dx": 0,
+          "dy": -1,
+          "type": "rubble"
+        },
+        "predicted": [
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "stagedTiles": [
+        [
+          5,
+          2,
+          true
+        ],
+        [
+          5,
+          3,
+          true
+        ],
+        [
+          4,
+          3,
+          true
+        ]
+      ],
+      "outcome": "completed",
+      "stoppedReason": null,
+      "detourPath": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "detourSteps": [
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 2
+          },
+          "to": {
+            "mapPx": 5,
+            "mapPy": 2
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 5,
+            "mapPy": 2
+          },
+          "to": {
+            "mapPx": 5,
+            "mapPy": 3
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 5,
+            "mapPy": 3
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 3
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 3
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 4
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        }
+      ],
+      "stepsWalked": 4,
+      "pathTilesHitByInstrument": 3,
+      "posBefore": {
+        "mapPx": 4,
+        "mapPy": 2,
+        "tile": "creek",
+        "inside": false,
+        "insideTent": false,
+        "kcal": 2200,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "posAfter": {
+        "mapPx": 4,
+        "mapPy": 4,
+        "tile": "haven",
+        "inside": true,
+        "insideTent": false,
+        "kcal": 2190,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "sayTail": [
+        "Rubble chokes the path.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nSaplings push up through last year's deadfall, racing each other for the light. The forest never stops trying.",
+        "Movement — a waddling porcupine, quills rattling softly.",
+        "👁 Never grab it barehanded. A bow works clean; hands get quills. Flip it with a long stick if you must.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nLeaf litter, birdcall, the smell of rot becoming soil. The woods, being the woods.",
+        "Movement — a black bear, powerful and intelligent-eyed.",
+        "👁 It's not scared — it's DECIDING. Two hundred pounds of deciding. Give it the exit, never the corner; noise and bigness buy you the day.",
+        "Travel 1 tile to creek.",
+        "Travel 1 tile to Haven.",
+        "You keep a day's food (1400 kcal) — nothing extra for the pantry this time.",
+        "You walk back into Haven. 3 Codex entries. The village is glad to see you.",
+        "Walking 5 squares (10 kcal)…",
+        "You step into the Haven hall."
+      ],
+      "guards": {
+        "H1_orthogonal": true,
+        "H1_chain": true,
+        "chainEnd": {
+          "x": 4,
+          "y": 4
+        },
+        "H4_alive": true,
+        "H4_kcalDelta": -10
+      }
+    },
+    "C2_wandererOnPath": {
+      "staged": true,
+      "staging": {
+        "dirName": "N",
+        "hx": 4,
+        "hy": 4,
+        "mx": 4,
+        "my": 3,
+        "px": 4,
+        "py": 2,
+        "walked": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "middleBlockFrom": {
+          "dx": 0,
+          "dy": -1,
+          "type": "rubble"
+        },
+        "predicted": [
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "wandererSet": [
+        5,
+        2
+      ],
+      "outcome": "completed",
+      "stoppedReason": null,
+      "detourPath": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "detourSteps": [
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 2
+          },
+          "to": {
+            "mapPx": 5,
+            "mapPy": 2
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 5,
+            "mapPy": 2
+          },
+          "to": {
+            "mapPx": 5,
+            "mapPy": 3
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 5,
+            "mapPy": 3
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 3
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 3
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 4
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        }
+      ],
+      "stepsWalked": 4,
+      "posBefore": {
+        "mapPx": 4,
+        "mapPy": 2,
+        "tile": "creek",
+        "inside": false,
+        "insideTent": false,
+        "kcal": 2200,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "posAfter": {
+        "mapPx": 4,
+        "mapPy": 4,
+        "tile": "haven",
+        "inside": true,
+        "insideTent": false,
+        "kcal": 2190,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "sayTail": [
+        "Rubble chokes the path.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nSaplings push up through last year's deadfall, racing each other for the light. The forest never stops trying.",
+        "Something big is HERE. In the grid with you. You can see it. It can see you.",
+        "Movement — a chipmunk, cheeks already full.",
+        "👁 Spook it and it's down a hole you never saw. Block the burrow mouth, or hunt it in the open where the hole can't help.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nLeaf litter, birdcall, the smell of rot becoming soil. The woods, being the woods.",
+        "Movement — a black bear, powerful and intelligent-eyed.",
+        "👁 It's not scared — it's DECIDING. Two hundred pounds of deciding. Give it the exit, never the corner; noise and bigness buy you the day.",
+        "Travel 1 tile to creek.",
+        "Travel 1 tile to Haven.",
+        "You keep a day's food (1400 kcal) — nothing extra for the pantry this time.",
+        "You walk back into Haven. 3 Codex entries. The village is glad to see you.",
+        "Walking 5 squares (10 kcal)…",
+        "You step into the Haven hall."
+      ],
+      "guards": {
+        "H1_orthogonal": true,
+        "H1_chain": true,
+        "chainEnd": {
+          "x": 4,
+          "y": 4
+        },
+        "H4_alive": true,
+        "H4_kcalDelta": -10
+      }
+    },
+    "C3_busyWorld": {
+      "staged": true,
+      "staging": {
+        "dirName": "N",
+        "hx": 4,
+        "hy": 4,
+        "mx": 4,
+        "my": 3,
+        "px": 4,
+        "py": 2,
+        "walked": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "middleBlockFrom": {
+          "dx": 0,
+          "dy": -1,
+          "type": "rubble"
+        },
+        "predicted": [
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "stagedTiles": [
+        [
+          5,
+          2,
+          true
+        ],
+        [
+          5,
+          3,
+          true
+        ],
+        [
+          4,
+          3,
+          true
+        ]
+      ],
+      "wandererSet": [
+        5,
+        2
+      ],
+      "outcome": "completed",
+      "stoppedReason": null,
+      "detourPath": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "detourSteps": [
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 2
+          },
+          "to": {
+            "mapPx": 5,
+            "mapPy": 2
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 5,
+            "mapPy": 2
+          },
+          "to": {
+            "mapPx": 5,
+            "mapPy": 3
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 5,
+            "mapPy": 3
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 3
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 3
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 4
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        }
+      ],
+      "stepsWalked": 4,
+      "posBefore": {
+        "mapPx": 4,
+        "mapPy": 2,
+        "tile": "creek",
+        "inside": false,
+        "insideTent": false,
+        "kcal": 2200,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "posAfter": {
+        "mapPx": 4,
+        "mapPy": 4,
+        "tile": "haven",
+        "inside": true,
+        "insideTent": false,
+        "kcal": 2190,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "sayTail": [
+        "Rubble chokes the path.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nSaplings push up through last year's deadfall, racing each other for the light. The forest never stops trying.",
+        "Something big pads at the edge of the clearing — then thinks better of it. This ground is already claimed.",
+        "Movement — a waddling porcupine, quills rattling softly.",
+        "👁 Never grab it barehanded. A bow works clean; hands get quills. Flip it with a long stick if you must.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nLeaf litter, birdcall, the smell of rot becoming soil. The woods, being the woods.",
+        "Movement — a black bear, powerful and intelligent-eyed.",
+        "👁 It's not scared — it's DECIDING. Two hundred pounds of deciding. Give it the exit, never the corner; noise and bigness buy you the day.",
+        "Travel 1 tile to creek.",
+        "Travel 1 tile to Haven.",
+        "You keep a day's food (1400 kcal) — nothing extra for the pantry this time.",
+        "You walk back into Haven. 3 Codex entries. The village is glad to see you.",
+        "Walking 5 squares (10 kcal)…",
+        "You step into the Haven hall."
+      ],
+      "guards": {
+        "H1_orthogonal": true,
+        "H1_chain": true,
+        "chainEnd": {
+          "x": 4,
+          "y": 4
+        },
+        "H4_alive": true,
+        "H4_kcalDelta": -10
+      }
+    }
+  },
+  "guardProblems": [],
+  "batteryOk": true
+}

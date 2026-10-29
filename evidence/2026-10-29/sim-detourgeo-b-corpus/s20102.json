@@ -1,0 +1,768 @@
+{
+  "seed": 20102,
+  "mode": "battery",
+  "tracks": {
+    "N": {
+      "dirTried": [
+        {
+          "dir": "W",
+          "staged": true
+        }
+      ],
+      "gateOn": {
+        "seed": 20102,
+        "gateOn": true,
+        "staged": true,
+        "staging": {
+          "dirName": "W",
+          "hx": 4,
+          "hy": 4,
+          "px": 3,
+          "py": 4,
+          "walked": [
+            {
+              "x": 4,
+              "y": 4
+            },
+            {
+              "x": 3,
+              "y": 4
+            }
+          ],
+          "caged": [
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "havenBlockFrom": {
+            "dx": -1,
+            "dy": 0,
+            "type": "rubble"
+          },
+          "construction": "cage"
+        },
+        "outcome": "detour-nopath",
+        "stoppedReason": "no-path",
+        "detourAttempted": true,
+        "travelOffered": true,
+        "havenDistance": 1,
+        "detourPath": null,
+        "detourSteps": [],
+        "posBefore": {
+          "mapPx": 3,
+          "mapPy": 4,
+          "tile": "grove",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "posAfter": {
+          "mapPx": 3,
+          "mapPy": 4,
+          "tile": "grove",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "sayTail": [
+          "Rubble chokes the path."
+        ],
+        "guards": {
+          "H1_orthogonal": true,
+          "H1_chain": true,
+          "chainEnd": {
+            "x": 3,
+            "y": 4
+          },
+          "H2_arrivalEqDeparture": true,
+          "H4_alive": true,
+          "H4_kcalDelta": 0
+        }
+      },
+      "gateOff": {
+        "seed": 20102,
+        "gateOn": false,
+        "staged": true,
+        "staging": {
+          "dirName": "W",
+          "hx": 4,
+          "hy": 4,
+          "px": 3,
+          "py": 4,
+          "walked": [
+            {
+              "x": 4,
+              "y": 4
+            },
+            {
+              "x": 3,
+              "y": 4
+            }
+          ],
+          "caged": [
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "havenBlockFrom": {
+            "dx": -1,
+            "dy": 0,
+            "type": "rubble"
+          },
+          "construction": "cage"
+        },
+        "outcome": "travel-refused",
+        "stoppedReason": null,
+        "detourAttempted": false,
+        "travelOffered": true,
+        "havenDistance": 1,
+        "detourPath": null,
+        "detourSteps": null,
+        "stepsWalked": null,
+        "posBefore": {
+          "mapPx": 3,
+          "mapPy": 4,
+          "tile": "grove",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "posAfter": {
+          "mapPx": 3,
+          "mapPy": 4,
+          "tile": "grove",
+          "inside": false,
+          "insideTent": false,
+          "kcal": 2200,
+          "hp": 100,
+          "gameOver": false,
+          "inCombat": false,
+          "pendingEncounter": false
+        },
+        "sayTail": [
+          "Rubble chokes the path."
+        ],
+        "guards": null
+      }
+    },
+    "C_stage": {
+      "dirName": "W",
+      "predicted": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    "C1_monsterOnPath": {
+      "staged": true,
+      "staging": {
+        "dirName": "W",
+        "hx": 4,
+        "hy": 4,
+        "mx": 3,
+        "my": 4,
+        "px": 2,
+        "py": 4,
+        "walked": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ],
+        "middleBlockFrom": {
+          "dx": -1,
+          "dy": 0,
+          "type": "rubble"
+        },
+        "predicted": [
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "stagedTiles": [
+        [
+          2,
+          5,
+          true
+        ],
+        [
+          3,
+          5,
+          true
+        ],
+        [
+          4,
+          5,
+          true
+        ]
+      ],
+      "outcome": "completed",
+      "stoppedReason": null,
+      "detourPath": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "detourSteps": [
+        {
+          "from": {
+            "mapPx": 2,
+            "mapPy": 4
+          },
+          "to": {
+            "mapPx": 2,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 2,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 3,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 3,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 4
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        }
+      ],
+      "stepsWalked": 4,
+      "pathTilesHitByInstrument": 3,
+      "posBefore": {
+        "mapPx": 2,
+        "mapPy": 4,
+        "tile": "forest_floor",
+        "inside": false,
+        "insideTent": false,
+        "kcal": 2200,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "posAfter": {
+        "mapPx": 4,
+        "mapPy": 4,
+        "tile": "haven",
+        "inside": true,
+        "insideTent": false,
+        "kcal": 2192,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "sayTail": [
+        "Rubble chokes the path.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nOld growth. The canopy closes overhead and the light comes down in shafts. Something rustled, and decided not to be seen.",
+        "📖 LEARNED: Old World Caches (Level 1). You know where people hid things: under floorboards, in hollow trees, behind loose bricks.",
+        "You've learned Old World Caches — it carries Eagle Eye.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nMushrooms thumb up through the duff in a ring — a fairy ring, old as the path. You step around it, not through it. Some rules are older than knowledge.",
+        "Travel 1 tile to trail edge.\n— An old trail —\nThe trail splits around a boulder and rejoins — the world's oldest traffic decision. You follow the deeper-worn side.",
+        "You see smoke on the horizon. Stonebridge — 11 people, 1 day in. foragers, by the look of it. They know 2 plants — 2 new to you. They've been here the whole time.",
+        "You see smoke on the horizon. Ashford — 12 people, 1 day in. foragers, by the look of it. They know 4 plants — 4 new to you. They've been here the whole time.",
+        "Travel 1 tile to Haven.",
+        "You keep a day's food (1400 kcal) — nothing extra for the pantry this time.",
+        "You walk back into Haven. 3 Codex entries. The village is glad to see you.",
+        "Walking 4 squares (8 kcal)…",
+        "You step into the Haven hall."
+      ],
+      "guards": {
+        "H1_orthogonal": true,
+        "H1_chain": true,
+        "chainEnd": {
+          "x": 4,
+          "y": 4
+        },
+        "H4_alive": true,
+        "H4_kcalDelta": -8
+      }
+    },
+    "C2_wandererOnPath": {
+      "staged": true,
+      "staging": {
+        "dirName": "W",
+        "hx": 4,
+        "hy": 4,
+        "mx": 3,
+        "my": 4,
+        "px": 2,
+        "py": 4,
+        "walked": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ],
+        "middleBlockFrom": {
+          "dx": -1,
+          "dy": 0,
+          "type": "rubble"
+        },
+        "predicted": [
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "wandererSet": [
+        2,
+        5
+      ],
+      "outcome": "completed",
+      "stoppedReason": null,
+      "detourPath": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "detourSteps": [
+        {
+          "from": {
+            "mapPx": 2,
+            "mapPy": 4
+          },
+          "to": {
+            "mapPx": 2,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 2,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 3,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 3,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 4
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        }
+      ],
+      "stepsWalked": 4,
+      "posBefore": {
+        "mapPx": 2,
+        "mapPy": 4,
+        "tile": "forest_floor",
+        "inside": false,
+        "insideTent": false,
+        "kcal": 2200,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "posAfter": {
+        "mapPx": 4,
+        "mapPy": 4,
+        "tile": "haven",
+        "inside": true,
+        "insideTent": false,
+        "kcal": 2192,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "sayTail": [
+        "Rubble chokes the path.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nOld growth. The canopy closes overhead and the light comes down in shafts. Something rustled, and decided not to be seen.",
+        "Something big is HERE. In the grid with you. You can see it. It can see you.",
+        "📖 LEARNED: Old World Caches (Level 1). You know where people hid things: under floorboards, in hollow trees, behind loose bricks.",
+        "You've learned Old World Caches — it carries Eagle Eye.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nSaplings push up through last year's deadfall, racing each other for the light. The forest never stops trying.",
+        "Travel 1 tile to trail edge.\n— An old trail —\nThe trail splits around a boulder and rejoins — the world's oldest traffic decision. You follow the deeper-worn side.",
+        "You see smoke on the horizon. Stonebridge — 11 people, 1 day in. foragers, by the look of it. They know 4 plants — 4 new to you. They've been here the whole time.",
+        "You see smoke on the horizon. Ashford — 12 people, 1 day in. foragers, by the look of it. They know 4 plants — 4 new to you. They've been here the whole time.",
+        "Travel 1 tile to Haven.",
+        "You keep a day's food (1400 kcal) — nothing extra for the pantry this time.",
+        "You walk back into Haven. 3 Codex entries. The village is glad to see you.",
+        "Walking 4 squares (8 kcal)…",
+        "You step into the Haven hall."
+      ],
+      "guards": {
+        "H1_orthogonal": true,
+        "H1_chain": true,
+        "chainEnd": {
+          "x": 4,
+          "y": 4
+        },
+        "H4_alive": true,
+        "H4_kcalDelta": -8
+      }
+    },
+    "C3_busyWorld": {
+      "staged": true,
+      "staging": {
+        "dirName": "W",
+        "hx": 4,
+        "hy": 4,
+        "mx": 3,
+        "my": 4,
+        "px": 2,
+        "py": 4,
+        "walked": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ],
+        "middleBlockFrom": {
+          "dx": -1,
+          "dy": 0,
+          "type": "rubble"
+        },
+        "predicted": [
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "stagedTiles": [
+        [
+          2,
+          5,
+          true
+        ],
+        [
+          3,
+          5,
+          true
+        ],
+        [
+          4,
+          5,
+          true
+        ]
+      ],
+      "wandererSet": [
+        2,
+        5
+      ],
+      "outcome": "completed",
+      "stoppedReason": null,
+      "detourPath": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "detourSteps": [
+        {
+          "from": {
+            "mapPx": 2,
+            "mapPy": 4
+          },
+          "to": {
+            "mapPx": 2,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 2,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 3,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 3,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 5
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        },
+        {
+          "from": {
+            "mapPx": 4,
+            "mapPy": 5
+          },
+          "to": {
+            "mapPx": 4,
+            "mapPy": 4
+          },
+          "moved": true,
+          "combatLive": false,
+          "stepError": null
+        }
+      ],
+      "stepsWalked": 4,
+      "posBefore": {
+        "mapPx": 2,
+        "mapPy": 4,
+        "tile": "forest_floor",
+        "inside": false,
+        "insideTent": false,
+        "kcal": 2200,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "posAfter": {
+        "mapPx": 4,
+        "mapPy": 4,
+        "tile": "haven",
+        "inside": true,
+        "insideTent": false,
+        "kcal": 2192,
+        "hp": 100,
+        "gameOver": false,
+        "inCombat": false,
+        "pendingEncounter": false
+      },
+      "sayTail": [
+        "Rubble chokes the path.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nOld growth. The canopy closes overhead and the light comes down in shafts. Something rustled, and decided not to be seen.",
+        "Something big is HERE. In the grid with you. You can see it. It can see you.",
+        "📖 LEARNED: Old World Caches (Level 1). You know where people hid things: under floorboards, in hollow trees, behind loose bricks.",
+        "You've learned Old World Caches — it carries Eagle Eye.",
+        "Travel 1 tile to forest floor.\n— Under the canopy —\nSaplings push up through last year's deadfall, racing each other for the light. The forest never stops trying.",
+        "Travel 1 tile to trail edge.\n— An old trail —\nWhere the trail crosses bare rock, someone scratched a mark — an arrow, or a tally, or a prayer. Pre-Burn. You add nothing. You remember it.",
+        "Movement — an armadillo rooting in the leaf litter, armor clanking.",
+        "👁 It doesn't run — the armor IS the plan. It'll hunch down and dare you. The armor turns a blow; grab the soft underbelly, or trap the grub trail at night.",
+        "You see smoke on the horizon. Stonebridge — 11 people, 1 day in. foragers, by the look of it. They know 3 plants — 3 new to you. They've been here the whole time.",
+        "You see smoke on the horizon. Ashford — 12 people, 1 day in. foragers, by the look of it. They know 2 plants — 2 new to you. They've been here the whole time.",
+        "Travel 1 tile to Haven.",
+        "You keep a day's food (1400 kcal) — nothing extra for the pantry this time.",
+        "You walk back into Haven. 3 Codex entries. The village is glad to see you.",
+        "Walking 4 squares (8 kcal)…",
+        "You step into the Haven hall."
+      ],
+      "guards": {
+        "H1_orthogonal": true,
+        "H1_chain": true,
+        "chainEnd": {
+          "x": 4,
+          "y": 4
+        },
+        "H4_alive": true,
+        "H4_kcalDelta": -8
+      }
+    }
+  },
+  "guardProblems": [],
+  "batteryOk": true
+}
