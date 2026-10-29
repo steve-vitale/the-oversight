@@ -51,17 +51,21 @@ function med(arr) {
 // across /tmp and workspace dirs): retry file writes instead of losing
 // a completed matrix to a single denied write. Print first, write second.
 function sleepMs(ms) { try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {} }
+// Flap fallback, same philosophy as the sweep: the printed summaries
+// above ARE the stage record, so a denied --out write must never turn a
+// completed matrix into a failure. Return false instead of throwing;
+// the caller prints the skip note and exits 0.
 function writeFileRetry(p, body) {
   let lastErr = null;
   for (let a = 1; a <= 8; a++) {
-    try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return; }
+    try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return true; }
     catch (e) {
       lastErr = e;
       console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
       if (a < 8) sleepMs(Math.min(10000, 1000 * a));
     }
   }
-  throw lastErr;
+  return false;
 }
 
 async function fightCell(mid, hp, maxHp, party, rngSeed, wantLog) {
@@ -190,8 +194,8 @@ async function main() {
   console.log(`SOLO-FRESH: kills=${s.soloFresh.kills}/40 roundsMed=${s.soloFresh.roundsMed} mDealtMed=${s.soloFresh.mDealtMed}`);
   console.log(`PARTY-HOLD lines fired: ${s.partyHoldCount} party fights`);
   if (outPath) {
-    writeFileRetry(outPath, JSON.stringify({ summary: s, cells }, null, 1) + '\n');
-    console.log('wrote ' + outPath);
+    if (writeFileRetry(outPath, JSON.stringify({ summary: s, cells }, null, 1) + '\n')) console.log('wrote ' + outPath);
+    else console.log('OUT-SKIPPED (flap; printed summaries above are the stage record)');
   }
   if (args.indexOf('--gate') >= 0) {
     let identity = null;

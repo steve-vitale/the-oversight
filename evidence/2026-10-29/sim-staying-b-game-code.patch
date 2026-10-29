@@ -1,0 +1,423 @@
+diff --git a/src/js/fieldFights.js b/src/js/fieldFights.js
+index 28c775040..a3018cc26 100644
+--- a/src/js/fieldFights.js
++++ b/src/js/fieldFights.js
+@@ -496,6 +496,14 @@
+         // must never read as a solo kill (fieldFightSummary used to say
+         // "alone" for every vKill, including 3-fighter sortie kills).
+         partySize: Math.max(1, (opts.allies || 0) + 1),
++        // STAYING-B (sim-staying-b, 2026-10-29): tile-party record. On base
++        // code these stay at their init values (the recorder reads nulls);
++        // tile parties fill them: alliesJoined in join order, tileJoined =
++        // allies who joined from the tile, partySizeAchieved = fighters who
++        // ever stood in the fight (leader + joined), partyHold = the party
++        // hopelessness hold fired (stage 4; false before).
++        tileAllies: opts.tileAllies ? opts.tileAllies.slice() : [],
++        alliesJoined: [], tileJoined: 0, partySizeAchieved: 0, partyHold: false,
+       };
+       // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
+       // It's much less risky to learn about a monster (observe, track,
+@@ -840,7 +848,8 @@
+       var holdBonus = 0;
+       if (wb > 0) holdBonus += 0.08;                        // armed: trust the gear
+       var allies = Math.max(0, opts.allies || 0);
+-      var allyVids = (opts.allyVids || []).slice(0, 2);
++      // STAYING-B: tile parties carry the whole tile, not the old 2-cap.
++      var allyVids = opts.tileParty ? (opts.allyVids || []).slice() : (opts.allyVids || []).slice(0, 2);
+       holdBonus += Math.min(0.12, allies * 0.04);            // allies nearby steady them
+       // PARTY-BOND (2026-10-12): bond with the people beside you steadies
+       // further — earned, not given. Capped; the ward's village pool stacks.
+@@ -893,21 +902,77 @@
+           return { entry: e, max: Math.max(100, e) };
+         } catch (e) { return { entry: 70, max: 70 }; }
+       };
++      // STAYING-B (stage 1, tile joining): the scalar ally view (allyVid /
++      // allyHp / allyName / allyIn) is the FIRST LIVE entry of allyList —
++      // every old scalar read keeps working, and a second tile ally steps
++      // into the scalar view when the first goes down. Solo fights have an
++      // empty list, so every scalar read below is byte-identical to base.
++      var allyList = [];
++      // STAYING-B (stage 4): the party-hold log line fires once per fight.
++      var partyHoldLogged = false;
++      var liveAllies = function () {
++        var out = [];
++        for (var _li = 0; _li < allyList.length; _li++) {
++          var _e = allyList[_li];
++          if (_e && !_e.down && _e.hp > 0) out.push(_e);
++        }
++        return out;
++      };
++      var allySync = function () {
++        var _live = liveAllies();
++        if (_live.length) {
++          var _f = _live[0];
++          allyVid = _f.vid; allyName = _f.name; allyHp = _f.hp; allyMax = _f.max; allyEntryHp = _f.entry;
++          allyIn = true;
++        } else {
++          allyIn = false; allyHp = 0;
++        }
++      };
++      // STAYING-B (stage 2, party wound floor): the live party's HP
++      // fraction — leader + live allies over their maxima. A downed ally
++      // leaves both numerator and denominator the next round. Solo fights
++      // have no live allies, so the floor check below is unchanged there.
++      var partyHpFrac = function () {
++        var _hp = vHp, _max = vHpMax;
++        var _live = liveAllies();
++        for (var _pi = 0; _pi < _live.length; _pi++) { _hp += _live[_pi].hp; _max += _live[_pi].max; }
++        return _max > 0 ? _hp / _max : 0;
++      };
++      var allyJoin = function (id, fromTile, logLine, trustReason) {
++        var _ab = allyBody(id);
++        var _nm = 'Someone';
++        try {
++          var _fa = (opts.foreignAllies || {})[id];
++          _nm = (_fa && _fa.name) || (fromTile ? refName(id) : (opts.allyName || refName(id)));
++        } catch (e) {}
++        allyList.push({ vid: id, name: _nm, entry: _ab.entry, max: _ab.max, hp: _ab.entry, down: false, fromTile: !!fromTile });
++        helpCalled = true;
++        rec.calledHelp = true;
++        rec.alliesJoined.push(id);
++        if (fromTile) rec.tileJoined++;
++        if (!rec.allyVid) rec.allyVid = id;
++        if (logLine) rec.log.push(logLine.replace('{ally}', _nm));
++        try { if (this.bumpTrust) this.bumpTrust(id, 1, trustReason); } catch (e) {}
++        allySync();
++      }.bind(this);
+       // AID (comms 2026-10-10): allied parties already at the door join from
+       // round 1 — they came to fight, not to watch. A new combatant, same as
+       // the hopeless-branch ally below.
++      // STAYING-B: a tile party joins EVERY tile ally from round 1 (they
++      // are already here); any other from-start party joins one, as before.
+       if (opts.allyFromStart && allies > 0 && allyVids.length) {
+-        helpCalled = true; allyIn = true;
+-        allyVid = allyVids.shift(); allies--;
+-        var _ab0 = allyBody(allyVid); allyHp = _ab0.entry; allyMax = _ab0.max; allyEntryHp = _ab0.entry;
+-        try {
+-          var _fa0 = (opts.foreignAllies || {})[allyVid];
+-          allyName = (_fa0 && _fa0.name) || opts.allyName || refName(allyVid);
+-        } catch (e) {}
+-        rec.calledHelp = true;
+-        rec.allyVid = allyVid;
+-        rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
+-        try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
++        if (opts.tileParty) {
++          var _tj = 0;
++          while (allyVids.length) {
++            var _tid = allyVids.shift();
++            allyJoin(_tid, true, '{ally} is already here — charges in with ' + vName + '!', undefined);
++            _tj++;
++          }
++          allies = Math.max(0, allies - _tj);
++        } else {
++          allyJoin(allyVids.shift(), false, '{ally} is already at the door — charges in with ' + vName + '!', undefined);
++          allies--;
++        }
+       }
+       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
+         rec.rounds = round;
+@@ -934,10 +999,26 @@
+         var mInit = mSpeed + RR() * 2, vInit = vSpeed + RR() * 2;
+         var mFirst = mInit >= vInit;
+         var acted = [mFirst ? 'm' : 'v', mFirst ? 'v' : 'm'];
++        // STAYING-B (stage 5, simultaneity): when live allies stand at the
++        // START of a round, the party strikes before the monster acts that
++        // round. No strike numbers change, only the order of a round both
++        // sides already act in — so a fighter the monster would have
++        // dropped before their strike still gets that strike in. Solo
++        // rounds keep initiative order.
++        if (liveAllies().length) acted = ['v', 'm'];
+         for (var ai = 0; ai < 2; ai++) {
++          // STAYING-B: re-point the scalar ally view at the start of each
++          // phase, so a downed ally's successor strikes / rallies this
++          // round instead of next. No-op when nothing changed.
++          allySync();
+           if (acted[ai] === 'm' && !mStunnedThisRound) {
+             // every live pack member acts — pack hunters hunt as a pack
+             for (var mi = 0; mi < members.length; mi++) {
++              // STAYING-B (stage 3): re-point the scalar ally view per
++              // member-hit, so a pack member striking after the first ally
++              // went down targets among the CURRENT live fighters, not a
++              // stale scalar. No-op for solo and single-ally fights.
++              allySync();
+               // the lead fell earlier this round: the pack's coordination is
+               // gone — the rest scatter, they don't keep swinging (2026-10-14)
+               if (members[mi].hp <= 0 || !vAlive || vHp <= 0 || members[0].hp <= 0) continue;
+@@ -1079,7 +1160,27 @@
+                 rec.log.push(vName + ' draws its eye — "Me. I\'m the problem." The beast turns.');
+               }
+               var _allyRoll = allyIn && allyHp > 0 ? RR() : 1;
+-              var hittingAlly = allyIn && allyHp > 0 && _allyRoll < _allyShare;
++              // STAYING-B (stage 3, shared blows): when live allies stand
++              // and nothing modified the share (draw_fire / godpath fall
++              // back to the old roll below), the blow targets UNIFORMLY
++              // among live fighters — leader + live allies — instead of
++              // leader 60% / first ally 40%. Total damage per round is
++              // unchanged; only WHO takes it changes. One RR draw either
++              // way (the pick reuses _allyRoll), so the stream shape holds.
++              var _liveFight = liveAllies();
++              var _targetAlly = null;
++              var hittingAlly = false;
++              if (_liveFight.length >= 1 && _allyShare === 0.4) {
++                var _pick = Math.min(_liveFight.length, Math.floor(_allyRoll * (_liveFight.length + 1)));
++                if (_pick > 0) {
++                  _targetAlly = _liveFight[_pick - 1];
++                  hittingAlly = true;
++                  allyVid = _targetAlly.vid; allyName = _targetAlly.name; allyHp = _targetAlly.hp; allyMax = _targetAlly.max; allyEntryHp = _targetAlly.entry;
++                }
++              } else {
++                hittingAlly = allyIn && allyHp > 0 && _allyRoll < _allyShare;
++                if (hittingAlly) _targetAlly = _liveFight[0] || null;
++              }
+               if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) _wardVia = 'aegis_link';
+               // TANK — BODYGUARD (2026-10-12): once per fight, a blow falling
+               // on the ally lands on the guard instead. "Not them."
+@@ -1109,13 +1210,24 @@
+               total = this.wornDamage(hittingAlly ? allyVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
+               if (hittingAlly) {
+                 allyHp -= total;
++                // STAYING-B: the scalar ally's entry tracks the scalar HP,
++                // so the list view and the scalar view never diverge.
++                try { for (var _eh = 0; _eh < allyList.length; _eh++) if (allyList[_eh].vid === allyVid) allyList[_eh].hp = allyHp; } catch (e) {}
+                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
+                 if (allyHp <= 0 && gpF) {
+                   try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
++                  // STAYING-B: a godpath hold that keeps them up must also
++                  // keep the entry up — otherwise the list would drop a
++                  // standing ally at the next sync.
++                  try { for (var _eh2 = 0; _eh2 < allyList.length; _eh2++) if (allyList[_eh2].vid === allyVid) allyList[_eh2].hp = allyHp; } catch (e) {}
+                 }
+                 if (allyHp <= 0) {
+                   huntOpening.lost = true;
+                   allyIn = false;
++                  // STAYING-B: mark the downed entry (godpath hold above
++                  // already had its chance to keep them up); the next
++                  // allySync steps the scalar view to the next live ally.
++                  try { for (var _ed = 0; _ed < allyList.length; _ed++) if (allyList[_ed].vid === allyVid) { allyList[_ed].down = true; allyList[_ed].hp = 0; } } catch (e) {}
+                   rec.log.push(allyName + ' goes down!');
+                   // AID (comms 2026-10-10): a foreign ally's fall lands on the
+                   // link — trust, gossip, debt forgiven in blood — not on a
+@@ -1465,14 +1577,23 @@
+             }
+             // the ally fights too — a second pair of hands, off-balance from
+             // rushing in. A new combatant, not a buff to anyone's stats.
+-            if (allyIn && allyHp > 0 && lead.hp > 0) {
++            // STAYING-B: EVERY live ally strikes (gear-blind [3,6] each, as
++            // the single ally always did); solo and single-ally fights draw
++            // exactly the old strikes in the old order.
++            var _liveStrike = liveAllies();
++            for (var _si = 0; _si < _liveStrike.length && lead.hp > 0; _si++) {
++              var _sa = _liveStrike[_si];
+               var ad = lroll([3, 6]);
+               lead.hp -= ad; rec.mDealt += ad; rec.allyDealt += ad;
+               if (lead.hp <= 0) lead.alive = false;
+-              rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + ' (' + Math.max(0, lead.hp) + ' left)');
++              rec.log.push('R' + round + ': ' + _sa.name + ' strikes for ' + ad + ' (' + Math.max(0, lead.hp) + ' left)');
+             }
+           }
+         }
++        // STAYING-B: final scalar re-point before morale reads allyIn
++        // (rally) — a monster phase that downed the first ally must not
++        // hide a standing second ally from the morale branches.
++        allySync();
+         // ---- morale: situational, never a flat roll ----
+         // KNOWLEDGE AGGREGATOR (2026-10-12): the village learns together — a
+         // villager who lives through the round brings the monster's move home.
+@@ -1557,19 +1678,10 @@
+         if (winning) {
+           fleeAt = 0.05;
+         } else if (hopeless && !helpCalled && allies > 0 && allyVids.length && rec.intent !== 'learn') {
+-          helpCalled = true; allyIn = true;
+-          allyVid = allyVids.shift(); allies--;
+-          var _ab1 = allyBody(allyVid); allyHp = _ab1.entry; allyMax = _ab1.max; allyEntryHp = _ab1.entry;
+-          // AID (comms 2026-10-10): foreign allies carry their own names.
+-          try {
+-            var _fa2 = (opts.foreignAllies || {})[allyVid];
+-            allyName = (_fa2 && _fa2.name) || opts.allyName || refName(allyVid);
+-          } catch (e) {}
+-          rec.calledHelp = true;
+-          rec.allyVid = allyVid;
+-          rec.log.push(vName + ' is losing — shouts for help! ' + allyName + ' charges in!');
+-          // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+-          try { if (this.bumpTrust) this.bumpTrust(allyVid, 1, 'answered a call for help'); } catch (e) {}
++          // STAYING-B: one shout-join per fight, as before — now through
++          // the ally list so a later tile ally can step into the scalar view.
++          var _shoutId = allyVids.shift(); allies--;
++          allyJoin(_shoutId, false, vName + ' is losing — shouts for help! {ally} charges in!', 'answered a call for help');
+         } else if (hopeless) {
+           // HOPELESS AND ALONE (break-it contests r11 2026-10-10): the
+           // trajectory is legible (drops long before the lead falls) and no
+@@ -1599,6 +1711,19 @@
+             rec.log.push(vName + ' BELLOWS — not volume, a promise. ' + mPhraseCap + ' falters. They hold the line a little longer. (War Cry)');
+           } else if (opts.noFlee) {
+             if (!rec.gateShut) { rec.gateShut = true; rec.log.push(vName + ' sees how this ends — but the gate is shut. No running.'); }
++          } else if (liveAllies().length) {
++            // STAYING-B (stage 4, party hopelessness): a party does not
++            // hopeless-flee. Rally / War Cry above already had their
++            // chance; with allies standing, the party HOLDS for this round
++            // — the wound floor below, not hopelessness, decides whether
++            // they break. Solo hopeless flight is unchanged (no live
++            // allies → the flee branch below). Logged once per fight.
++            rec.partyHold = true;
++            if (!partyHoldLogged) {
++              partyHoldLogged = true;
++              var _holdNames = liveAllies().map(function (e) { return e.name; }).join(', ');
++              rec.log.push(vName + ' looks at ' + _holdNames + ' standing with them — and does not run. Not while they stand.');
++            }
+           } else {
+             rec.outcome = 'vFlee'; rec.fleeHopeless = true; rec.fleeHpFrac = vHp / vHpMax;
+             if (rec.intent === 'learn') rec.fleeLearn = true;
+@@ -1606,7 +1731,13 @@
+             break;
+           }
+         }
+-        if ((vHp / vHpMax) < fleeAt) {
++        // STAYING-B (stage 2): when live allies stand, the round-end floor
++        // compares the live PARTY fraction against the same fleeAt line,
++        // instead of the leader fraction alone. Leader death still ends
++        // the fight at once (vDie, above). rec.fleeHpFrac stays the leader
++        // fraction for comparability with base corpora.
++        var _floorFrac = liveAllies().length ? partyHpFrac() : (vHp / vHpMax);
++        if (_floorFrac < fleeAt) {
+           // ABILITY — SCREAM CHEESE (scream): once per fight, hurting, the
+           // scream comes out — "AAAAA! The milk is cheese now!" — and the
+           // monster reels, dizzy. It loses its next attack. The throat
+@@ -1725,18 +1856,22 @@
+       // bonds scale by survivors/party. Grief, not amnesia.
+       // SHIELDBEARER PATH (2026-10-12 rework): the System watches who bleeds
+       // beside whom — bond thresholds earn the path's abilities.
++      // STAYING-B: scalar view is current (allySync before morale), and
++      // bonds/grief now walk the whole ally list — a tile party bonds and
++      // grieves per fighter, not just per first ally.
++      allySync();
+       try {
+         if (vid && vid !== 'player') {
+-          var _allyAlive = helpCalled && allyIn && allyHp > 0 && allyVid;
+-          var _allyDied = helpCalled && !allyIn && allyHp <= 0 && allyVid;
++          var _liveVids = liveAllies().map(function (e) { return e.vid; });
++          var _downVids = allyList.filter(function (e) { return e.down; }).map(function (e) { return e.vid; });
+           if (rec.outcome === 'vKill' || rec.outcome === 'mFlee' || rec.outcome === 'vFlee') {
+-            if (_allyAlive && this.noteSharedFight) this.noteSharedFight([vid, allyVid]);
++            if (_liveVids.length && this.noteSharedFight) this.noteSharedFight([vid].concat(_liveVids));
+             if (this.noteShieldbearerOffer) this.noteShieldbearerOffer(vid);
+             if (this.noteVillageBondFight) this.noteVillageBondFight();
+           } else if (rec.outcome === 'vDie') {
+-            if (this.noteBondGrief) this.noteBondGrief(vid, _allyAlive ? [allyVid] : []);
++            if (this.noteBondGrief) this.noteBondGrief(vid, _liveVids);
+           }
+-          if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
++          if (this.noteBondGrief) for (var _gi = 0; _gi < _downVids.length; _gi++) this.noteBondGrief(_downVids[_gi], [vid]);
+         }
+       } catch (e) {}
+       try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field escape', e); }
+@@ -1754,24 +1889,38 @@
+       // already settled as the flat 30 during the fight. Foreign allies,
+       // the player, and the lead themselves are excluded (the lead's entry
+       // is the one above; the player's wounds travel through scholar.health).
++      // STAYING-B: per-ally settlement. A downed ally is excluded (their
++      // fall already settled as the flat 30 during the fight); each LIVE
++      // ally settles their own wounds through the same once-only sealed
++      // record. Scalar rec fields keep their old meanings, generalized:
++      // allyTaken = total ally damage absorbed, allyHpLeft/allyEntryHp =
++      // first ally's view, partySizeAchieved = everyone who ever stood.
+       var allyTaken = 0, allySettles = false;
++      var _settleList = [];
+       try {
+         var _roster = ((this.state.village || {}).roster || []);
+-        allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
+-        allySettles = !!(helpCalled && allyIn && allyHp > 0 && allyVid && allyVid !== vid &&
+-          allyVid !== this.villagerId && !(opts.foreignAllies || {})[allyVid] &&
+-          _roster.indexOf(allyVid) >= 0 && allyTaken > 0);
+-      } catch (e) { allySettles = false; }
+-      rec.allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
+-      rec.allyHpLeft = helpCalled ? Math.max(0, allyHp) : null;
+-      rec.allyEntryHp = helpCalled ? allyEntryHp : null;
++        for (var _sj = 0; _sj < allyList.length; _sj++) {
++          var _se = allyList[_sj];
++          var _taken = Math.max(0, _se.entry - Math.max(0, _se.hp));
++          allyTaken += _taken;
++          if (!_se.down && _se.hp > 0 && _se.vid !== vid && _se.vid !== this.villagerId &&
++              !(opts.foreignAllies || {})[_se.vid] && _roster.indexOf(_se.vid) >= 0 && _taken > 0)
++            _settleList.push({ vid: _se.vid, taken: _taken, start: _se.entry, end: Math.max(0, _se.hp) });
++        }
++        allySettles = _settleList.length > 0;
++      } catch (e) { allySettles = false; _settleList = []; }
++      rec.allyTaken = helpCalled ? allyTaken : 0;
++      rec.allyHpLeft = helpCalled ? (liveAllies().length ? liveAllies()[0].hp : 0) : null;
++      rec.allyEntryHp = helpCalled ? (allyList.length ? allyList[0].entry : null) : null;
+       rec.allyWoundsSettled = allySettles;
++      rec.partySizeAchieved = 1 + allyList.length;
+       var _sealEntries = [[vid, rec.vTaken,
+         vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
+-      if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);
++      for (var _sk = 0; _sk < _settleList.length; _sk++)
++        _sealEntries.push([_settleList[_sk].vid, _settleList[_sk].taken, { start: _settleList[_sk].start, end: _settleList[_sk].end }]);
+       var _sealed = this.sealDamageResult(rec, _sealEntries);
+-      if (allySettles) {
+-        try { this.hurtVillager(allyVid, allyTaken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
++      for (var _sh = 0; _sh < _settleList.length; _sh++) {
++        try { this.hurtVillager(_settleList[_sh].vid, _settleList[_sh].taken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
+       }
+       return _sealed;
+     },
+diff --git a/src/js/game.js b/src/js/game.js
+index 0b00c22f2..069ae303f 100644
+--- a/src/js/game.js
++++ b/src/js/game.js
+@@ -7887,7 +7887,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       // the kill itself, channel 'aid-crisis', and resolves the crisis).
+       let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+       let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
+-      if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
++      // STAYING-B: wave-4+ patrol fights — villagers standing on the
++      // monster's tile at fight time REPLACE the outdoor-crew list.
++      // Aid-crisis fights keep their door party (aidFight above, untouched).
++      const pTile = this.tilePresentAllies ? this.tilePresentAllies(vid, m) : [];
++      const pTileParty = pTile.length && ((mdef.wave | 0) >= 4);
++      if (!rec) { pViaAid = false; rec = pTileParty
++        ? this.fieldFight(vid, mdef, m, { allies: pTile.length, allyVids: pTile.slice(), tileParty: true, tileAllies: pTile.slice(), allyFromStart: true })
++        : this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
+       const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought ${mPhrase}`;
+       const killCorpse = () => {
+         // the carcass stays where it died — same as your kills, same as the
+@@ -16462,6 +16469,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       });
+     },
+ 
++    // STAYING-B (sim-staying-b, 2026-10-29): tile presence for wave-4+
++    // field fights — the ONLY input is who stands on the monster's tile
++    // at fight time, read exactly as villagerMonsterTick reads its fighter
++    // list (roster, not sheltered, not post-flee-resting), minus the
++    // fighter. Perception-lawful: no roster feed, no crew list, no
++    // co-departure stamp — same-tile presence at fight time, nothing else.
++    // There is no separate dead predicate in game.js; the fighter list
++    // above is the game's own live-body accounting for this tile.
++    tilePresentAllies(vid, m) {
++      try {
++        if (!m || typeof m.tx !== 'number' || typeof m.ty !== 'number') return [];
++        const v = this.state.village || {};
++        return this.npcsOnNode(m.tx, m.ty).filter(id =>
++          id !== vid && (v.roster || []).includes(id) &&
++          !(this.isSheltered && this.isSheltered(id)) &&
++          !(this.isPostFleeResting && this.isPostFleeResting(id)));
++      } catch (e) { return []; }
++    },
++
+     // npcInside: the inside/outside sub-state. Haven interior and Haven grounds
+     // are the SAME node — the hall and the grounds are one place with a door
+     // between them, not two places. Each villager has their own sub-state:
+@@ -19954,7 +19980,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       // skipped: the guard exempts opts.raid and the aid path.
+       if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
+       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
++      // STAYING-B: wave-4+ wild fights — same tile rule as patrols.
++      // Aid fights keep their door party (aidFight above, untouched).
++      const wTile = this.tilePresentAllies ? this.tilePresentAllies(vid, m) : [];
++      const wTileParty = wTile.length && ((mdef.wave | 0) >= 4);
++      if (!rec) { wViaAid = false; rec = wTileParty
++        ? this.fieldFight(vid, mdef, m, { allies: wTile.length, allyVids: wTile.slice(), tileParty: true, tileAllies: wTile.slice(), allyFromStart: true })
++        : this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
+       const summary = this.fieldFightSummary(rec, name, mName);
+       // RETURN-TO-FIGHT (gap-routing 2026-10-27): a villager who actually
+       // fought a living world monster remembers the fight's tile, so the
