@@ -1237,10 +1237,16 @@ function walkHome(Game, hx, hy) {
 // fired, trip returned to an away origin, trip return failed) simply stays
 // away, even starving with a clear hop home (10772 day 11). This step runs
 // at the END of daily(): still away from haven -> walk home via walkHome
-// (Arm B's detour HOW, this step's WHEN). Guards: already home (tile or
-// playerAtHaven) -> skip; game over / combat -> skip; inside a tent (a
+// (Arm B's detour HOW, this step's WHEN). Guards: already home (TILE
+// CHECK ALONE) -> skip; game over / combat -> skip; inside a tent (a
 // deliberate camp) -> skip; haven tile not on this board (player traveled
-// to another node) -> skip. Perception-lawful: own tile, home haven
+// to another node) -> skip. ADJACENT-TILE FIX (sim-adjacenttile-b): the
+// old guard ALSO skipped when Game.playerAtHaven() was true, but that is
+// a narration-presence gate (Manhattan distance <= 1 counts as "at
+// haven") — a villager standing one tile from home was never walked in
+// (10772 days 10-11, starved on the spot). The tile check alone is the
+// already-home guard now; playerAtHaven is NOT consulted here (and is
+// NOT changed in src/js). Perception-lawful: own tile, home haven
 // (lived in), engine-offered adjacent steps only. Banks ctx counters the
 // census reads (standingHomeDays, standingHomeDetours).
 function standingHomeOn() { return process.env.COMPETENT_STANDING_HOME === '1'; }
@@ -1251,9 +1257,6 @@ function goHomeStanding(Game, ctx) {
     const v = (Game.state || {}).village || {};
     const hx = (v.px === undefined ? 4 : v.px), hy = (v.py === undefined ? 4 : v.py);
     if (Game.map && Game.map.px === hx && Game.map.py === hy) return 0;
-    let atHaven = false;
-    try { atHaven = !!(Game.playerAtHaven && Game.playerAtHaven()); } catch (e) { atHaven = false; }
-    if (atHaven) return 0;
     const s = (Game.state || {}).scholar || {};
     if (s.insideTent) return 0;
     let ht = null;
