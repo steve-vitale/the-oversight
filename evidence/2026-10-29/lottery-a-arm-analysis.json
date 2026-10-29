@@ -1,0 +1,176 @@
+{
+ "corpusOk": true,
+ "problems": [],
+ "joinErrors": [],
+ "detDiffs": null,
+ "judgedA": 5,
+ "triples": [
+  {
+   "seed": 75101,
+   "vid": "app_mgpspim3522",
+   "mid": "suburb",
+   "anchorDay": 92,
+   "anchorPart": 367,
+   "stage": "S1",
+   "cls": "GATE-BLOCKED-AT-PICK",
+   "sub": "pick d93 reasons=OUT-OF-RANGE candidate=null",
+   "counts": {
+    "picks": 3,
+    "offered": 0,
+    "takes": 0,
+    "departures": 0,
+    "pickLinkedDepartures": 0,
+    "dropsMid": 0,
+    "laterMeetings": 0
+   },
+   "offeredByAge": {},
+   "takesByAge": {},
+   "chosenKinds": {},
+   "offeredPicks": [],
+   "takesDetail": [],
+   "departuresDetail": []
+  },
+  {
+   "seed": 75101,
+   "vid": "diana_osei",
+   "mid": "suburb",
+   "anchorDay": 92,
+   "anchorPart": 367,
+   "stage": "S1",
+   "cls": "GATE-BLOCKED-AT-PICK",
+   "sub": "pick d92 reasons=OUT-OF-RANGE candidate=null",
+   "counts": {
+    "picks": 5,
+    "offered": 0,
+    "takes": 0,
+    "departures": 0,
+    "pickLinkedDepartures": 0,
+    "dropsMid": 0,
+    "laterMeetings": 0
+   },
+   "offeredByAge": {},
+   "takesByAge": {},
+   "chosenKinds": {},
+   "offeredPicks": [],
+   "takesDetail": [],
+   "departuresDetail": []
+  },
+  {
+   "seed": 75104,
+   "vid": "nikos_papadopoulos",
+   "mid": "eulogy",
+   "anchorDay": 170,
+   "anchorPart": 679,
+   "stage": "S3",
+   "cls": "PICKED-NEVER-DEPARTED",
+   "sub": "pick d172 huntDay=170 superseded by HUNT pick d173",
+   "counts": {
+    "picks": 12,
+    "offered": 3,
+    "takes": 2,
+    "departures": 0,
+    "pickLinkedDepartures": 0,
+    "dropsMid": 0,
+    "laterMeetings": 0
+   },
+   "offeredByAge": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "takesByAge": {
+    "2": 1,
+    "3": 1
+   },
+   "chosenKinds": {
+    "HAVEN_CHORE": 1,
+    "HUNT": 2
+   },
+   "offeredPicks": [
+    {
+     "day": 171,
+     "part": 681,
+     "age": 1,
+     "chosen": "HAVEN_CHORE",
+     "huntDay": null
+    },
+    {
+     "day": 172,
+     "part": 685,
+     "age": 2,
+     "chosen": "HUNT",
+     "huntDay": 170
+    },
+    {
+     "day": 173,
+     "part": 690,
+     "age": 3,
+     "chosen": "HUNT",
+     "huntDay": 170
+    }
+   ],
+   "takesDetail": [
+    {
+     "day": 172,
+     "part": 685,
+     "huntDay": 170
+    },
+    {
+     "day": 173,
+     "part": 690,
+     "huntDay": 170
+    }
+   ],
+   "departuresDetail": []
+  }
+ ],
+ "classCounts": {
+  "GATE-BLOCKED-AT-PICK": 2,
+  "PICKED-NEVER-DEPARTED": 1
+ },
+ "offered": 3,
+ "takes": 2,
+ "takeRate": 0.6666666666666666,
+ "departures": 0,
+ "pickLinkedDepartures": 0,
+ "corpusW4": {
+  "departures": 0,
+  "drops": 0
+ },
+ "wall": {
+  "won": 5,
+  "wonFull": 0,
+  "medianDays": 119,
+  "nationalEver": 7,
+  "nationalFinal": 7,
+  "table": 5,
+  "entered": 5,
+  "wave4": 5,
+  "wave5": 0,
+  "starvationTotal": 1,
+  "deathTotal": 248
+ },
+ "deathsByCause": {
+  "villager:villager combat": 74,
+  "villager:expedition": 16,
+  "villager:monster": 11,
+  "villager:combat": 91,
+  "player:the wild": 31,
+  "player:a stranger": 2,
+  "villager:ambush": 3,
+  "player:the night": 1,
+  "villager:Hushpuppy": 1,
+  "villager:a toad like a war drum, throat swelling": 1,
+  "player:the arena": 3,
+  "villager:Cliffhanger": 1,
+  "villager:sickness": 6,
+  "villager:starvation": 1,
+  "villager:a wound that wouldn't close": 3,
+  "villager:Choir Toad": 1,
+  "player:sickness": 1,
+  "player:the expedition": 1
+ },
+ "goTake": true,
+ "goDeps": false,
+ "goDet": true
+}
