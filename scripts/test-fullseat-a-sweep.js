@@ -16,6 +16,12 @@
 //     (FULLSEAT=1, pure-read recorder).
 //   ON  = scripts/policies/fullseat-pursuit.js (LEANLINKRESCUE=1,
 //     FULLSEATPURSUIT=1) wrapped with fullseat-diag (FULLSEAT=1).
+//   NOTE (post-pilot, NO-GO landing rule): the pursuit policy file was
+//   DELETED after the pilot (killed arms leave no trace); this sweep
+//   therefore requires restoring it from git history (commit 0afa37a8)
+//   before any re-run. The corpus in evidence/2026-10-29/
+//   perseed-fullseat-a/ is the pilot's record and does not need the
+//   policy to be read (see scripts/analyze-fullseat-a.js).
 // Courtship shared exactly (ON runs leanlinkrescue.daily directly, not
 // tableseat-nowait.daily, so the seat-leg delta is only the full-only
 // gate). Fight behavior identical both arms (competent.fight; neither
@@ -283,7 +289,7 @@ function aggregate(rows, pid) {
     gateFullEver: rs.reduce((t, r) => t + r.gateFullEver, 0),
     wave4: wave(4), wave5: wave(5),
     maxArc: Math.max.apply(null, rs.map(r => r.maxArc).concat([1])),
-    starvationTotal: rs.reduce((t, r) => t + r.starvationTotal, 0),
+    starvationTotal: rs.reduce((t, r) => t + r.starvationDeaths, 0),
     starvationBySeed: starvBySeed,
     seatTaken: rs.reduce((t, r) => t + ((r.policy === 'on' ? (r.fsc.fsSeatTaken || 0) : (r.ts.tsSeatTaken || 0))), 0),
     seatAttempts: rs.reduce((t, r) => t + ((r.policy === 'on' ? (r.fsc.fsSeatAttempts || 0) : (r.ts.tsSeatAttempts || 0))), 0),
