@@ -275,15 +275,21 @@ function classifyTriple(trace) {
     }
     return { stage: 'S4', cls: 'DEPARTED-NO-MEETING', sub: `pick d${j.pick ? j.pick.day : '?'} huntDay=${j.dep.objective.huntDay} dep d${j.dep.day} no drop, no meeting`, detail };
   }
-  // S3: HUNT picked, never departed.
+  // S3: HUNT picked, never departed. Sub-cause priority (corrected
+  // during sense review, class unchanged): a later pick record
+  // PROVES the villager lived past the HUNT pick, so supersession
+  // outranks a later death — the old died-first order misread
+  // visjoin_113 (HUNT d135, superseded d136, died d145) as
+  // died-while-holding. Died-while-holding applies only when no
+  // later pick exists.
   if (huntPicks.length) {
     const pk = huntPicks[0];
     const pkIdx = pickIndex.get(pk);
     const nextPick = (picks || [])[pkIdx + 1];
     const diedAfter = (deaths || []).filter(d => d.day >= pk.day);
     let sub;
-    if (diedAfter.length) sub = `pick d${pk.day} huntDay=${pk.chosen.huntDay} died d${diedAfter[0].day}${diedAfter[0].day === pk.day ? ' (SAME-DAY-AMBIGUOUS)' : ''} cause=${diedAfter[0].cause}`;
-    else if (nextPick) sub = `pick d${pk.day} huntDay=${pk.chosen.huntDay} superseded by ${nextPick.chosen ? nextPick.chosen.kind : '?'} pick d${nextPick.day}`;
+    if (nextPick) sub = `pick d${pk.day} huntDay=${pk.chosen.huntDay} superseded by ${nextPick.chosen ? nextPick.chosen.kind : '?'} pick d${nextPick.day}${diedAfter.length ? ` (later died d${diedAfter[0].day})` : ''}`;
+    else if (diedAfter.length) sub = `pick d${pk.day} huntDay=${pk.chosen.huntDay} died d${diedAfter[0].day}${diedAfter[0].day === pk.day ? ' (SAME-DAY-AMBIGUOUS)' : ''} cause=${diedAfter[0].cause}`;
     else sub = `pick d${pk.day} huntDay=${pk.chosen.huntDay} held to horizon end`;
     return { stage: 'S3', cls: 'PICKED-NEVER-DEPARTED', sub, detail };
   }

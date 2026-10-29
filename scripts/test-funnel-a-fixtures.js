@@ -143,6 +143,17 @@ check('S4 DEPARTED-NO-MEETING', classifyTriple(baseTrace({
   picks: [pick(101, 1001, { pre: [EULOGY_53], chosen: { kind: 'HUNT', purpose: 'hunt', state: 'ready', tx: 5, ty: 3, huntMid: 'eulogy', huntTx: 5, huntTy: 3, huntDay: 100, indoor: false, targetVid: null } })],
   departures: [dep(101, 1002, 'HUNT', 'eulogy', 100, 5, 3)],
 })).cls, 'DEPARTED-NO-MEETING');
+// S3 sub-priority: a later pick outranks a later death (visjoin_113:
+// HUNT d135, superseded d136, died d145 — superseded, not
+// died-while-holding).
+check('S3 superseded outranks later death', classifyTriple(baseTrace({
+  notes: [note(100, 1000, [EULOGY_53])],
+  picks: [
+    pick(101, 1001, { pre: [EULOGY_53], chosen: { kind: 'HUNT', purpose: 'hunt', state: 'ready', tx: 5, ty: 3, huntMid: 'eulogy', huntTx: 5, huntTy: 3, huntDay: 100, indoor: false, targetVid: null } }),
+    pick(102, 1020, { pre: [EULOGY_53] }),
+  ],
+  deaths: [{ day: 105, who: 'v1', cause: 'monster', player: false }],
+})).sub.indexOf('superseded') >= 0, true);
 // S5 deliberate meeting beats a departure.
 check('S5 DELIBERATE-MEETING', classifyTriple(baseTrace({
   notes: [note(100, 1000, [EULOGY_53])],
