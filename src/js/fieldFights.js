@@ -1766,6 +1766,30 @@
       rec.allyHpLeft = helpCalled ? Math.max(0, allyHp) : null;
       rec.allyEntryHp = helpCalled ? allyEntryHp : null;
       rec.allyWoundsSettled = allySettles;
+      // REAR GUARD (sim-gaps-ghost, 2026-10-29): the mustered fighters
+      // who never joined the blows are not ghosts — they marched, and
+      // they stood the rear through the fight. allyVids here holds
+      // exactly the leftovers: every join path shifts its fighter out
+      // (allyFromStart, hopeless shout), so what remains never got a
+      // "charges in!" line. Name them once, at the close, so a reader
+      // of the fight log can account for every named marcher. Sortie
+      // (cornered) fights only — no other caller sets cornered, and
+      // no other fight's narration changes. Log + record field only:
+      // no RNG, no stat, no outcome touched, and nothing in the engine
+      // reads rec.log to decide anything, so this cannot move a number.
+      try {
+        if (opts.cornered && allyVids && allyVids.length) {
+          var _rearVids = [], _rearNames = [];
+          for (var _ri = 0; _ri < allyVids.length; _ri++) {
+            var _rn = refName(allyVids[_ri]);
+            if (_rn && _rn !== 'Someone') { _rearVids.push(allyVids[_ri]); _rearNames.push(_rn); }
+          }
+          if (_rearNames.length) {
+            rec.rearGuard = _rearVids.slice();
+            rec.log.push(_rearNames.join(' and ') + ' stood the rear through it, watching the treeline behind them.');
+          }
+        }
+      } catch (e) {}
       var _sealEntries = [[vid, rec.vTaken,
         vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
       if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);
