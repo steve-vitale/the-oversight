@@ -29,7 +29,7 @@ const FIGHT_RE = /Turn-based now/i;
 
 (async () => {
   process.env.LEANLINKRESCUE = '1';
-  process.env.TABLESEATNOWAIT = '1';
+  delete process.env.TABLESEATNOWAIT; // tbovertime2 sense: SAME no-seat substrate as the corpus, else the replay sits and never reaches tier 3
   const { Game } = await loadGame({ seed: SEED, mode: 'tbovertime2-a-sense', fullTelemetry: false, narration: true });
   await setupGame(Game);
   const hits = [];
