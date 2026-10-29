@@ -201,7 +201,20 @@ async function main() {
           // Attempt-only fields (ON only): caller stacks + post-call
           // position on attempt records (attempts carry hadLive).
           // Creation stacks/positions exist OFF and ON and are kept.
+          // This check MUST precede the stackLines normalization
+          // below, or attempt stacks would be kept (normalized)
+          // instead of stripped and OFF/ON would differ.
           if (o.hadLive !== undefined && (k === 'stackFrames' || k === 'stackLines' || k === 'pos')) continue;
+          // Creation stackLines carry source line numbers, which
+          // shift with ANY driver edit (v2 amended driver: the
+          // runDays call moved 608 -> 630) — an edit artifact,
+          // same class as test-raidname-b.js's stackLines strip.
+          // Normalize trailing :line:col; file + function names
+          // (what provenance classification reads) are preserved.
+          if (k === 'stackLines' && Array.isArray(val)) {
+            out[k] = val.map((s) => (typeof s === 'string' ? s.replace(/:\d+:\d+\)$/, ')').replace(/:\d+:\d+$/, '') : s));
+            continue;
+          }
           // foSeq is the SHARED fight-origin order counter: the ON
           // instrument adds shadow transitions to that order, so
           // ON foSeq values run ahead of OFF values after the
@@ -220,7 +233,7 @@ async function main() {
     };
     const files = fs.readdirSync(corpus).filter((f) => f.endsWith('.json')).sort();
     const baseFiles = fs.readdirSync(baseCorpus).filter((f) => f.endsWith('.json')).sort();
-    let neutBad = 0, integBad = 0, shadowSets = 0;
+    let neutBad = 0, neutCompared = 0, integBad = 0, shadowSets = 0;
     const pilotMoves = { 10710: 328, 10711: 283, 10712: 230, 10713: 281, 10714: 225, 10715: 214, 10716: 182, 10717: 261 };
     let movesBad = 0;
     for (const f of files) {
@@ -237,11 +250,12 @@ async function main() {
       }
       if (pilotMoves[on.seed] !== undefined && on.moves.length !== pilotMoves[on.seed]) movesBad++;
       if (!baseFiles.includes(f)) continue;
+      neutCompared++;
       const base = JSON.parse(fs.readFileSync(path.join(baseCorpus, f), 'utf8'));
       if (JSON.stringify(stripCollision(base)) !== JSON.stringify(stripCollision(on))) neutBad++;
     }
     ok(integBad === 0, `instrument integrity: shadowLog + collision fields present on all ON files/creations (bad=${integBad})`);
-    ok(neutBad === 0, `OFF/ON neutrality: shared fields deep-equal (${files.length - neutBad}/${files.length} ON files matched to OFF)`);
+    ok(neutBad === 0, `OFF/ON neutrality: shared fields deep-equal (${neutCompared - neutBad}/${neutCompared} pilot files with OFF counterparts; other ON files have no OFF counterpart by design)`);
     ok(movesBad === 0, `pilot move counts match raidname band (bad=${movesBad})`);
     ok(shadowSets > 0, `shadowLog records raid shadows on the band (sets=${shadowSets})`);
     if (analysis) {
