@@ -192,7 +192,9 @@
           t.level = Math.min(2, t.level + 1);
         }
         if (t.level >= 2 && facts.entry.region && Game.hearOfRegion) {
-          try { Game.hearOfRegion(facts.entry.region, 'trail'); } catch (e) { warn('hearOfRegion: ' + e.message); }
+          // KNOWER LEDGER (2026-10-29): the trail's owner is the knower
+          // who learned the region — not the village at large.
+          try { Game.hearOfRegion(facts.entry.region, 'trail', { knowerId: ownerId || Game.villagerId }); } catch (e) { warn('hearOfRegion: ' + e.message); }
         }
         const ownerName = (ownerId && ownerId !== Game.villagerId) ? personName(ownerId) : null;
         const out = { ok: true, level: t.level, text: trailText(facts, t.level, ownerName) };

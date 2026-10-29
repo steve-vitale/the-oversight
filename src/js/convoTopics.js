@@ -1036,7 +1036,13 @@
     // ovOpinionExplain (memdepth.js).
     t2gen_neighbors(vid) {
       try {
-        const ovs = (this.state.otherVillages || []).filter(ov => ov && this.knowsVillage && this.knowsVillage(ov));
+        // KNOWER LEDGER (2026-10-29): the SPEAKER is the knower — a
+        // villager discusses only villages they themselves know (their
+        // lore, or a sworn bond: a link is public, the whole fire knows
+        // its allies). The old bare-flag read let any villager discuss a
+        // village only the player had heard of.
+        const ovs = (this.state.otherVillages || []).filter(ov => ov && this.knowsVillage &&
+          (this.knowsVillage(ov, vid) || (typeof this.linkWith === 'function' && !!this.linkWith(ov.id))));
         if (!ovs.length) return [];
         // prefer villages with fresh grievance events, then lowest opinion
         const day = (this.state.scholar || {}).day || 0;

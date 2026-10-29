@@ -266,6 +266,12 @@
     },
     // hearOfRegion(id, why): the village hears of a region (a rumor, a
     // broadcast, a keepsake clue, a traveller). Returns true when new.
+    // KNOWER LEDGER (2026-10-29): learned grants carry their knower —
+    // opts.knowerId (who heard it) and opts.toldBy (who told them, when
+    // secondhand). System facts ('landing'/'origin') stay knower-less by
+    // design: they are not learned knowledge. The registry's `known`
+    // flag itself stays village-level (the index); the provenance is
+    // what was missing, and it is now recorded.
     hearOfRegion(id, why, opts) {
       const st = this.state;
       if (!st || !this.regionDef(id)) return false;
@@ -275,6 +281,8 @@
       e.known = true;
       e.heardDay = (st.scholar && st.scholar.day) || 0;
       e.heardWhy = why || null;
+      if (opts && opts.knowerId) e.knowerId = opts.knowerId;
+      if (opts && opts.toldBy) e.toldBy = opts.toldBy;
       if (!(opts && opts.silent)) {
         try { this.tele('region_heard', { region: id, why: why || null }); } catch (err) { warn('tele region_heard: ' + err.message); }
       }

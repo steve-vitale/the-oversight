@@ -96,6 +96,10 @@ function pantryHas(nameRe) {
   const ovs = () => (Game.state.otherVillages || []).filter(v => v && v.id !== 'haven');
   const A = ovs()[0], B = ovs()[1], C = ovs()[2];
   if (!A || !B || !C) { console.log('  FAIL need 3 villages, got ' + ovs().length); process.exit(1); }
+  // KNOWER LEDGER (2026-10-29): peer proposals are knowledge-gated like
+  // proposeLink now — these arcs test earned courtship, so the targets
+  // must be known (visited), not unheard-of.
+  A.generated = true; C.generated = true;
 
   console.log('== 1. UI wiring exists (source-level: buttons reach the engine) ==');
   const appSrc = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
@@ -202,6 +206,10 @@ function pantryHas(nameRe) {
   const D = ovs().find(v => v.id !== A.id && v.id !== B.id && v.id !== C.id && !Game.linkWith(v.id));
   if (!D) { console.log('  SKIP no unlinked village for exile-guard test'); }
   else {
+    // KNOWER LEDGER (2026-10-29): D must be KNOWN too — otherwise the
+    // knowledge gate (not exile) refuses, and the guard test passes
+    // spuriously. Known + courted: only exile can refuse.
+    D.generated = true;
     D.opinion = 80; // courted: the proposal WOULD land without the guard
     Game.state.scholar.exiled = true;
     const pc0 = Game.proposeCovenant(D.id);

@@ -9931,7 +9931,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // LIVING WORLD: their knowledge EMERGES from who they are, where they are,
     // and what they've actually been doing. A fishing village knows fish.
     // A farming village knows crops. This isn't assigned — it's simulated.
-    catchUpSim(village) {
+    catchUpSim(village, opts) {
+      // KNOWER LEDGER (2026-10-29): approaching IS knowledge, traced.
+      // how 'visit' by default (face-to-face verbs, joined ticks — the
+      // player met them); checkVillageProximity passes 'seen-nearby' for
+      // a 2-tile smoke sighting, which must NOT count as a visit (audit
+      // §1.5: radius generation would otherwise over-credit arrival
+      // courtship). A visit ALSO teaches the village about Haven — the
+      // mirror entry; a mere sighting does not. Recorded before the
+      // daysToSim early return so a re-approach still traces.
+      try {
+        if (village && village.id && this.recordVillageLore) {
+          const how = (opts && opts.how) || 'visit';
+          this.recordVillageLore(this.playerKnowerId(), village.id, { how: how });
+          if (how === 'visit') {
+            this.recordVillageLore('village:' + village.id, 'haven', { how: 'visit' });
+          }
+        }
+      } catch (e) {}
       const targetDay = this.state.scholar.day;
       const daysToSim = targetDay - village.day;
       if (daysToSim <= 0) return;
@@ -10204,7 +10221,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // The design comment always said travelers bring word to YOU first.)
     // Called from endDay(); never from simVillageDay.
     maybeVillageRumor(village) {
-      if (!village || village.rumored || village.generated) return false;
+      // KNOWER LEDGER (2026-10-29): the roll QUEUES a rumor; it grants
+      // NOTHING. village.rumored now means only "a traveler rumor about
+      // this village is in flight" — the gate reads the knower ledger, and
+      // the ledger entry is written when deliverVillageRumors actually
+      // speaks the rumor (how 'rumor', toldBy 'traveler-anonymous').
+      // Never re-roll for a village the player already knows, or one with
+      // a rumor already queued or delivered.
+      if (!village || village.generated) return false;
+      try {
+        if (this.villageLoreEntry && this.villageLoreEntry(this.playerKnowerId(), village.id)) return false;
+        const queued = (this.state.scholar || {}).rumors || [];
+        for (const r of queued) {
+          if (r && r.type === 'village' && r.villageId === village.id) return false;
+        }
+      } catch (e) {}
       const hx = 4, hy = 4; // haven at center of 9x9
       const dist = Math.abs(village.x - hx) + Math.abs(village.y - hy);
       // Closer = more likely to hear about. 2 tiles: ~5%/day. 8 tiles: ~1%/day.
@@ -10219,8 +10250,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (day < 15 && dist <= 4) rumorChance = Math.max(rumorChance, 0.28);
       if (Math.random() < rumorChance) {
         village.rumored = true;
-        village.rumorDay = this.state.scholar.day;
-        // queue the rumor for the player (delivered via gossip or map)
+        // queue the rumor for the player (delivered via gossip or map);
+        // rumorDay is stamped at DELIVERY (deliverVillageRumors), not here.
         const s = this.state.scholar;
         s.rumors = s.rumors || [];
         const dir = this.directionTo(hx, hy, village.x, village.y);
@@ -10229,6 +10260,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           villageId: village.id,
           text: `A traveler passed through yesterday, talking about a village to the ${dir} called ${village.name}.`,
           day: this.state.scholar.day,
+          delivered: false,
         });
         return true;
       }
@@ -10404,7 +10436,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const dist = Math.abs(v.x - px) + Math.abs(v.y - py);
         if (dist <= 2) {
           const firstSight = !v.generated;
-          this.catchUpSim(v);
+          // KNOWER LEDGER (2026-10-29): at their fire (dist <= 1) is a
+          // visit; smoke on the horizon (dist 2) is only seen-nearby.
+          this.catchUpSim(v, { how: dist <= 1 ? 'visit' : 'seen-nearby' });
           if (!firstSight) continue;
           const prof = v.knowledgeProfile || {};
           const nPlants = Object.keys(prof.plants || {}).length;
