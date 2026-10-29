@@ -1,0 +1,692 @@
+{
+ "corpusOk": true,
+ "neutralityPass": true,
+ "neutralityDiffs": [],
+ "wall": {
+  "won": 4,
+  "wonFull": 0,
+  "nationalEver": 13,
+  "nationalFinal": 9,
+  "table": 10,
+  "entered": 4,
+  "wave4": 11,
+  "wave5": 0,
+  "medianDays": 180,
+  "starvationTotal": 4,
+  "deathTotal": 600
+ },
+ "funnelTriples": 19,
+ "tripleClassCounts": {
+  "LOTTERY-LOST": 9,
+  "PICKED-NEVER-DEPARTED": 1,
+  "DEPARTED-EMPTY-TILE": 1,
+  "GATE-BLOCKED-AT-PICK": 2,
+  "DIED-BEFORE-PICK": 5,
+  "MEMORY-OVERWRITTEN": 1
+ },
+ "otherCount": 0,
+ "villagerDist": {
+  "0": 2,
+  "1": 7,
+  ">=3": 2
+ },
+ "villagerCount": 11,
+ "heldAtPick": {
+  "total": 14,
+  "homebody": 2,
+  "homebodyList": [
+   {
+    "seed": 75109,
+    "vid": "visjoin_138",
+    "mid": "algorithm"
+   },
+   {
+    "seed": 75109,
+    "vid": "visjoin_174",
+    "mid": "eulogy"
+   }
+  ]
+ },
+ "formed": {
+  "total": 32,
+  "knownTotal": 17,
+  "knownHomebody": 2,
+  "knownHomebodyList": [
+   {
+    "seed": 75109,
+    "vid": "visjoin_138",
+    "mid": "algorithm"
+   },
+   {
+    "seed": 75109,
+    "vid": "visjoin_174",
+    "mid": "eulogy"
+   }
+  ]
+ },
+ "offeredByClass": {
+  "0": {
+   "picks": 59,
+   "offered": 0,
+   "huntChosenAmongOffered": 0
+  },
+  "1": {
+   "picks": 101,
+   "offered": 45,
+   "huntChosenAmongOffered": 7
+  },
+  ">=3": {
+   "picks": 23,
+   "offered": 12,
+   "huntChosenAmongOffered": 2
+  }
+ },
+ "offeredMaxD0": 0,
+ "tripleRanges": [
+  {
+   "seed": 75106,
+   "vid": "catalina_reyes",
+   "mid": "influencer",
+   "anchorDay": 97,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=2 chosen={\"EAT\":2} first d100",
+   "funnelCounts": {
+    "picks": 21,
+    "huntPicks": 0,
+    "offeredPicks": 2,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 7,
+    "laterMeetings": 1
+   },
+   "villagerMaxD": ">=3",
+   "picksWithMid": 21,
+   "freshPicks": 5,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": true,
+   "otherGateFresh": true,
+   "offeredFresh": 2,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OUT-OF-RANGE"
+  },
+  {
+   "seed": 75106,
+   "vid": "catalina_reyes",
+   "mid": "eulogy",
+   "anchorDay": 111,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=2 chosen={\"FORAGE\":2} first d112",
+   "funnelCounts": {
+    "picks": 7,
+    "huntPicks": 0,
+    "offeredPicks": 2,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 3,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": ">=3",
+   "picksWithMid": 7,
+   "freshPicks": 2,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 2,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "eulogy",
+   "anchorDay": 104,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=3 chosen={\"WATER\":3} first d105",
+   "funnelCounts": {
+    "picks": 23,
+    "huntPicks": 0,
+    "offeredPicks": 3,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 9,
+    "laterMeetings": 2
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 23,
+   "freshPicks": 3,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 3,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "eulogy",
+   "anchorDay": 132,
+   "funnelCls": "PICKED-NEVER-DEPARTED",
+   "funnelStage": "S3",
+   "funnelSub": "pick d135 huntDay=132 superseded by EAT pick d135 (later died d145)",
+   "funnelCounts": {
+    "picks": 17,
+    "huntPicks": 1,
+    "offeredPicks": 6,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 2,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 17,
+   "freshPicks": 6,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 6,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_115",
+   "mid": "eulogy",
+   "anchorDay": 127,
+   "funnelCls": "DEPARTED-EMPTY-TILE",
+   "funnelStage": "S4",
+   "funnelSub": "pick d135 huntDay=132 dep d137 drop d137 @(5,3)",
+   "funnelCounts": {
+    "picks": 20,
+    "huntPicks": 1,
+    "offeredPicks": 8,
+    "huntDepartures": 1,
+    "dropsW4mid": 1,
+    "notes": 3,
+    "laterMeetings": 2
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 20,
+   "freshPicks": 10,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": true,
+   "otherGateFresh": true,
+   "offeredFresh": 8,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OUT-OF-RANGE"
+  },
+  {
+   "seed": 75108,
+   "vid": "app_mgpsphm923",
+   "mid": "eulogy",
+   "anchorDay": 88,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=1 chosen={\"WATER\":1} first d89",
+   "funnelCounts": {
+    "picks": 2,
+    "huntPicks": 0,
+    "offeredPicks": 1,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 4,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 2,
+   "freshPicks": 1,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 1,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75108,
+   "vid": "app_mgpsphm923",
+   "mid": "reunion",
+   "anchorDay": 93,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=1 chosen={\"HAVEN_CHORE\":1} first d94",
+   "funnelCounts": {
+    "picks": 1,
+    "huntPicks": 0,
+    "offeredPicks": 1,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 2,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 1,
+   "freshPicks": 1,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 1,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75108,
+   "vid": "ava_garcia",
+   "mid": "eulogy",
+   "anchorDay": 87,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=3 chosen={\"EAT\":1,\"VISIT\":1,\"WATER\":1} first d88",
+   "funnelCounts": {
+    "picks": 7,
+    "huntPicks": 0,
+    "offeredPicks": 3,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 2,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 7,
+   "freshPicks": 4,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": true,
+   "offeredFresh": 3,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OTHER-GATE"
+  },
+  {
+   "seed": 75108,
+   "vid": "diana_osei",
+   "mid": "eulogy",
+   "anchorDay": 86,
+   "funnelCls": "GATE-BLOCKED-AT-PICK",
+   "funnelStage": "S1",
+   "funnelSub": "pick d86 reasons=POST-FLEE candidate=null",
+   "funnelCounts": {
+    "picks": 2,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 4,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": ">=3",
+   "picksWithMid": 2,
+   "freshPicks": 2,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": true,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OTHER-GATE"
+  },
+  {
+   "seed": 75108,
+   "vid": "diana_osei",
+   "mid": "reunion",
+   "anchorDay": 87,
+   "funnelCls": "DIED-BEFORE-PICK",
+   "funnelStage": "S0",
+   "funnelSub": "died d87 (SAME-DAY-AMBIGUOUS) cause=thirst",
+   "funnelCounts": {
+    "picks": 0,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 1,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": ">=3",
+   "picksWithMid": 0,
+   "freshPicks": 0,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "NO-FRESH-PICK"
+  },
+  {
+   "seed": 75109,
+   "vid": "visjoin_109",
+   "mid": "suburb",
+   "anchorDay": 112,
+   "funnelCls": "DIED-BEFORE-PICK",
+   "funnelStage": "S0",
+   "funnelSub": "died d112 (SAME-DAY-AMBIGUOUS) cause=monster",
+   "funnelCounts": {
+    "picks": 0,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 2,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "unknown",
+   "picksWithMid": 0,
+   "freshPicks": 0,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "NO-FRESH-PICK"
+  },
+  {
+   "seed": 75109,
+   "vid": "visjoin_138",
+   "mid": "algorithm",
+   "anchorDay": 141,
+   "funnelCls": "MEMORY-OVERWRITTEN",
+   "funnelStage": "S1",
+   "funnelSub": "last episode d141..d176 closed by eviction, 5 notes",
+   "funnelCounts": {
+    "picks": 54,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 5,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "0",
+   "picksWithMid": 54,
+   "freshPicks": 4,
+   "homebodyFreshBlocked": true,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [
+    {
+     "day": 142,
+     "part": 565,
+     "maxD": 0,
+     "candidate": null,
+     "distances": [
+      1
+     ]
+    },
+    {
+     "day": 143,
+     "part": 569,
+     "maxD": 0,
+     "candidate": null,
+     "distances": [
+      1
+     ]
+    },
+    {
+     "day": 144,
+     "part": 574,
+     "maxD": 0,
+     "candidate": null,
+     "distances": [
+      1
+     ]
+    }
+   ],
+   "rangeVerdict": "HOMEBODY-RANGE"
+  },
+  {
+   "seed": 75109,
+   "vid": "visjoin_156",
+   "mid": "eulogy",
+   "anchorDay": 171,
+   "funnelCls": "DIED-BEFORE-PICK",
+   "funnelStage": "S0",
+   "funnelSub": "died d171 (SAME-DAY-AMBIGUOUS) cause=monster",
+   "funnelCounts": {
+    "picks": 0,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 2,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "unknown",
+   "picksWithMid": 0,
+   "freshPicks": 0,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "NO-FRESH-PICK"
+  },
+  {
+   "seed": 75109,
+   "vid": "visjoin_174",
+   "mid": "eulogy",
+   "anchorDay": 176,
+   "funnelCls": "GATE-BLOCKED-AT-PICK",
+   "funnelStage": "S1",
+   "funnelSub": "pick d177 reasons=OUT-OF-RANGE candidate=null",
+   "funnelCounts": {
+    "picks": 5,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 1,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "0",
+   "picksWithMid": 5,
+   "freshPicks": 3,
+   "homebodyFreshBlocked": true,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [
+    {
+     "day": 177,
+     "part": 706,
+     "maxD": 0,
+     "candidate": null,
+     "distances": [
+      1
+     ]
+    },
+    {
+     "day": 179,
+     "part": 712,
+     "maxD": 0,
+     "candidate": null,
+     "distances": [
+      1
+     ]
+    },
+    {
+     "day": 179,
+     "part": 715,
+     "maxD": 0,
+     "candidate": null,
+     "distances": [
+      1
+     ]
+    }
+   ],
+   "rangeVerdict": "HOMEBODY-RANGE"
+  },
+  {
+   "seed": 75115,
+   "vid": "app_mgpspj23354",
+   "mid": "algorithm",
+   "anchorDay": 104,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=2 chosen={\"WATER\":1,\"EAT\":1} first d105",
+   "funnelCounts": {
+    "picks": 29,
+    "huntPicks": 0,
+    "offeredPicks": 2,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 6,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 29,
+   "freshPicks": 3,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": true,
+   "offeredFresh": 2,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OTHER-GATE"
+  },
+  {
+   "seed": 75115,
+   "vid": "app_mgpspj23354",
+   "mid": "reunion",
+   "anchorDay": 112,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=5 chosen={\"EAT\":3,\"HAVEN_CHORE\":1,\"VISIT\":1} first d113",
+   "funnelCounts": {
+    "picks": 19,
+    "huntPicks": 0,
+    "offeredPicks": 5,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 4,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 19,
+   "freshPicks": 5,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 5,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75115,
+   "vid": "chantal_mukendi",
+   "mid": "reunion",
+   "anchorDay": 113,
+   "funnelCls": "LOTTERY-LOST",
+   "funnelStage": "S2",
+   "funnelSub": "offered picks=3 chosen={\"EAT\":3} first d114",
+   "funnelCounts": {
+    "picks": 3,
+    "huntPicks": 0,
+    "offeredPicks": 3,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 2,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "1",
+   "picksWithMid": 3,
+   "freshPicks": 3,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 3,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "OFFERED"
+  },
+  {
+   "seed": 75115,
+   "vid": "priya_nair",
+   "mid": "reunion",
+   "anchorDay": 123,
+   "funnelCls": "DIED-BEFORE-PICK",
+   "funnelStage": "S0",
+   "funnelSub": "died d123 (SAME-DAY-AMBIGUOUS) cause=starvation",
+   "funnelCounts": {
+    "picks": 0,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 1,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "unknown",
+   "picksWithMid": 0,
+   "freshPicks": 0,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "NO-FRESH-PICK"
+  },
+  {
+   "seed": 75116,
+   "vid": "app_mgpsphcq161",
+   "mid": "reunion",
+   "anchorDay": 131,
+   "funnelCls": "DIED-BEFORE-PICK",
+   "funnelStage": "S0",
+   "funnelSub": "died d131 (SAME-DAY-AMBIGUOUS) cause=monster",
+   "funnelCounts": {
+    "picks": 0,
+    "huntPicks": 0,
+    "offeredPicks": 0,
+    "huntDepartures": 0,
+    "dropsW4mid": 0,
+    "notes": 3,
+    "laterMeetings": 0
+   },
+   "villagerMaxD": "unknown",
+   "picksWithMid": 0,
+   "freshPicks": 0,
+   "homebodyFreshBlocked": false,
+   "outOfRangeFreshBlocked": false,
+   "otherGateFresh": false,
+   "offeredFresh": 0,
+   "freshHomebodyExamples": [],
+   "rangeVerdict": "NO-FRESH-PICK"
+  }
+ ],
+ "upperBound": [
+  {
+   "seed": 75109,
+   "vid": "visjoin_138",
+   "mid": "algorithm",
+   "funnelCls": "MEMORY-OVERWRITTEN"
+  },
+  {
+   "seed": 75109,
+   "vid": "visjoin_174",
+   "mid": "eulogy",
+   "funnelCls": "GATE-BLOCKED-AT-PICK"
+  }
+ ],
+ "upperBoundCount": 2,
+ "maxD0TripleCount": 2,
+ "tripleWindowOfferedByClass": {
+  "0": {
+   "triples": 2,
+   "offeredPicks": 0
+  },
+  "1": {
+   "triples": 9,
+   "offeredPicks": 32
+  },
+  ">=3": {
+   "triples": 4,
+   "offeredPicks": 4
+  },
+  "unknown": {
+   "triples": 4,
+   "offeredPicks": 0
+  }
+ },
+ "goLeg1": true,
+ "goLeg3": true
+}
