@@ -1,0 +1,477 @@
+{
+  "primary": {
+    "base": {
+      "dir": "evidence/2026-10-29/perseed-lottery-base",
+      "picks": [
+        {
+          "seed": 75106,
+          "day": 135,
+          "part": 536,
+          "vid": "visjoin_113",
+          "mid": "eulogy",
+          "huntDay": 132,
+          "wave": 4,
+          "cls": "superseded-by-needs-pick",
+          "reason": "first later pick d135 part 539 chose EAT (lag 0d)",
+          "dep": null,
+          "firstLater": {
+            "day": 135,
+            "part": 539,
+            "chosen": "EAT",
+            "candidate": {
+              "mid": "eulogy",
+              "tx": 5,
+              "ty": 3,
+              "day": 132
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 135,
+          "part": 536,
+          "vid": "visjoin_115",
+          "mid": "eulogy",
+          "huntDay": 132,
+          "wave": 4,
+          "cls": "departed-pick-linked",
+          "reason": "dep d137 part 544 (lag 2d, 8 parts), no intervening pick",
+          "dep": {
+            "day": 137,
+            "part": 544,
+            "dayPart": 0,
+            "vid": "visjoin_115",
+            "objective": {
+              "kind": "HUNT",
+              "purpose": "hunt",
+              "state": "out",
+              "tx": 5,
+              "ty": 3,
+              "huntMid": "eulogy",
+              "huntTx": 5,
+              "huntTy": 3,
+              "huntDay": 132,
+              "indoor": false,
+              "targetVid": null
+            }
+          },
+          "firstLater": null,
+          "closedGates": null
+        }
+      ],
+      "counts": {
+        "superseded-by-needs-pick": 1,
+        "departed-pick-linked": 1
+      },
+      "unknown": []
+    },
+    "arm": {
+      "dir": "evidence/2026-10-29/perseed-lottery-arm",
+      "picks": [
+        {
+          "seed": 75104,
+          "day": 172,
+          "part": 685,
+          "vid": "nikos_papadopoulos",
+          "mid": "eulogy",
+          "huntDay": 170,
+          "wave": 4,
+          "cls": "superseded-by-re-pick",
+          "reason": "first later pick d173 part 690 chose HUNT while candidate still eulogy",
+          "dep": null,
+          "firstLater": {
+            "day": 173,
+            "part": 690,
+            "chosen": "HUNT",
+            "candidate": {
+              "mid": "eulogy",
+              "tx": 3,
+              "ty": 4,
+              "day": 170
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75104,
+          "day": 173,
+          "part": 690,
+          "vid": "nikos_papadopoulos",
+          "mid": "eulogy",
+          "huntDay": 170,
+          "wave": 4,
+          "cls": "candidate-null-after-pick",
+          "reason": "first later pick d174 part 692 chose SEEK, candidate null; closed gate(s): age=4 (>3, stale)",
+          "dep": null,
+          "firstLater": {
+            "day": 174,
+            "part": 692,
+            "chosen": "SEEK",
+            "candidate": null
+          },
+          "closedGates": [
+            "age=4 (>3, stale)"
+          ]
+        }
+      ],
+      "counts": {
+        "superseded-by-re-pick": 1,
+        "candidate-null-after-pick": 1
+      },
+      "unknown": []
+    },
+    "pooled": {
+      "superseded-by-needs-pick": 1,
+      "departed-pick-linked": 1,
+      "superseded-by-re-pick": 1,
+      "candidate-null-after-pick": 1
+    },
+    "total": 4
+  },
+  "secondaryAllWave": {
+    "base": {
+      "dir": "evidence/2026-10-29/perseed-lottery-base",
+      "picks": [
+        {
+          "seed": 75106,
+          "day": 107,
+          "part": 424,
+          "vid": "catalina_reyes",
+          "mid": "hushwolf",
+          "huntDay": 105,
+          "wave": 1,
+          "cls": "departed-pick-linked",
+          "reason": "dep d107 part 424 (lag 0d, 0 parts), no intervening pick",
+          "dep": {
+            "day": 107,
+            "part": 424,
+            "dayPart": 0,
+            "vid": "catalina_reyes",
+            "objective": {
+              "kind": "HUNT",
+              "purpose": "hunt",
+              "state": "out",
+              "tx": 4,
+              "ty": 6,
+              "huntMid": "hushwolf",
+              "huntTx": 4,
+              "huntTy": 6,
+              "huntDay": 105,
+              "indoor": false,
+              "targetVid": null
+            }
+          },
+          "firstLater": null,
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 108,
+          "part": 428,
+          "vid": "visjoin_102",
+          "mid": "murkcap",
+          "huntDay": 106,
+          "wave": 1,
+          "cls": "superseded-by-re-pick",
+          "reason": "first later pick d108 part 431 chose HUNT while candidate still murkcap",
+          "dep": null,
+          "firstLater": {
+            "day": 108,
+            "part": 431,
+            "chosen": "HUNT",
+            "candidate": {
+              "mid": "murkcap",
+              "tx": 5,
+              "ty": 4,
+              "day": 106
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 108,
+          "part": 431,
+          "vid": "visjoin_102",
+          "mid": "murkcap",
+          "huntDay": 106,
+          "wave": 1,
+          "cls": "superseded-by-re-pick",
+          "reason": "first later pick d109 part 435 chose FORAGE while candidate still murkcap",
+          "dep": null,
+          "firstLater": {
+            "day": 109,
+            "part": 435,
+            "chosen": "FORAGE",
+            "candidate": {
+              "mid": "murkcap",
+              "tx": 5,
+              "ty": 4,
+              "day": 106
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 118,
+          "part": 468,
+          "vid": "catalina_reyes",
+          "mid": "focus_group",
+          "huntDay": 117,
+          "wave": 3,
+          "cls": "departed-pick-linked",
+          "reason": "dep d118 part 469 (lag 0d, 1 parts), no intervening pick",
+          "dep": {
+            "day": 118,
+            "part": 469,
+            "dayPart": 1,
+            "vid": "catalina_reyes",
+            "objective": {
+              "kind": "HUNT",
+              "purpose": "hunt",
+              "state": "out",
+              "tx": 1,
+              "ty": 7,
+              "huntMid": "focus_group",
+              "huntTx": 1,
+              "huntTy": 7,
+              "huntDay": 117,
+              "indoor": false,
+              "targetVid": null
+            }
+          },
+          "firstLater": null,
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 120,
+          "part": 476,
+          "vid": "visjoin_102",
+          "mid": "statickite",
+          "huntDay": 117,
+          "wave": 2,
+          "cls": "superseded-by-needs-pick",
+          "reason": "first later pick d120 part 479 chose EAT (lag 0d)",
+          "dep": null,
+          "firstLater": {
+            "day": 120,
+            "part": 479,
+            "chosen": "EAT",
+            "candidate": {
+              "mid": "statickite",
+              "tx": 4,
+              "ty": 5,
+              "day": 117
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 135,
+          "part": 536,
+          "vid": "visjoin_113",
+          "mid": "eulogy",
+          "huntDay": 132,
+          "wave": 4,
+          "cls": "superseded-by-needs-pick",
+          "reason": "first later pick d135 part 539 chose EAT (lag 0d)",
+          "dep": null,
+          "firstLater": {
+            "day": 135,
+            "part": 539,
+            "chosen": "EAT",
+            "candidate": {
+              "mid": "eulogy",
+              "tx": 5,
+              "ty": 3,
+              "day": 132
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 135,
+          "part": 536,
+          "vid": "visjoin_115",
+          "mid": "eulogy",
+          "huntDay": 132,
+          "wave": 4,
+          "cls": "departed-pick-linked",
+          "reason": "dep d137 part 544 (lag 2d, 8 parts), no intervening pick",
+          "dep": {
+            "day": 137,
+            "part": 544,
+            "dayPart": 0,
+            "vid": "visjoin_115",
+            "objective": {
+              "kind": "HUNT",
+              "purpose": "hunt",
+              "state": "out",
+              "tx": 5,
+              "ty": 3,
+              "huntMid": "eulogy",
+              "huntTx": 5,
+              "huntTy": 3,
+              "huntDay": 132,
+              "indoor": false,
+              "targetVid": null
+            }
+          },
+          "firstLater": null,
+          "closedGates": null
+        },
+        {
+          "seed": 75106,
+          "day": 136,
+          "part": 540,
+          "vid": "visjoin_113",
+          "mid": "gallowdeer",
+          "huntDay": 133,
+          "wave": 1,
+          "cls": "departed-pick-linked",
+          "reason": "dep d136 part 540 (lag 0d, 0 parts), no intervening pick",
+          "dep": {
+            "day": 136,
+            "part": 540,
+            "dayPart": 0,
+            "vid": "visjoin_113",
+            "objective": {
+              "kind": "HUNT",
+              "purpose": "hunt",
+              "state": "out",
+              "tx": 3,
+              "ty": 4,
+              "huntMid": "gallowdeer",
+              "huntTx": 3,
+              "huntTy": 4,
+              "huntDay": 133,
+              "indoor": false,
+              "targetVid": null
+            }
+          },
+          "firstLater": null,
+          "closedGates": null
+        }
+      ],
+      "counts": {
+        "departed-pick-linked": 4,
+        "superseded-by-re-pick": 2,
+        "superseded-by-needs-pick": 2
+      },
+      "unknown": []
+    },
+    "arm": {
+      "dir": "evidence/2026-10-29/perseed-lottery-arm",
+      "picks": [
+        {
+          "seed": 75104,
+          "day": 172,
+          "part": 685,
+          "vid": "nikos_papadopoulos",
+          "mid": "eulogy",
+          "huntDay": 170,
+          "wave": 4,
+          "cls": "superseded-by-re-pick",
+          "reason": "first later pick d173 part 690 chose HUNT while candidate still eulogy",
+          "dep": null,
+          "firstLater": {
+            "day": 173,
+            "part": 690,
+            "chosen": "HUNT",
+            "candidate": {
+              "mid": "eulogy",
+              "tx": 3,
+              "ty": 4,
+              "day": 170
+            }
+          },
+          "closedGates": null
+        },
+        {
+          "seed": 75104,
+          "day": 173,
+          "part": 690,
+          "vid": "nikos_papadopoulos",
+          "mid": "eulogy",
+          "huntDay": 170,
+          "wave": 4,
+          "cls": "candidate-null-after-pick",
+          "reason": "first later pick d174 part 692 chose SEEK, candidate null; closed gate(s): age=4 (>3, stale)",
+          "dep": null,
+          "firstLater": {
+            "day": 174,
+            "part": 692,
+            "chosen": "SEEK",
+            "candidate": null
+          },
+          "closedGates": [
+            "age=4 (>3, stale)"
+          ]
+        },
+        {
+          "seed": 75104,
+          "day": 177,
+          "part": 706,
+          "vid": "nikos_papadopoulos",
+          "mid": "callback",
+          "huntDay": 176,
+          "wave": 3,
+          "cls": "departed-pick-linked",
+          "reason": "dep d178 part 708 (lag 1d, 2 parts), no intervening pick",
+          "dep": {
+            "day": 178,
+            "part": 708,
+            "dayPart": 0,
+            "vid": "nikos_papadopoulos",
+            "objective": {
+              "kind": "HUNT",
+              "purpose": "hunt",
+              "state": "out",
+              "tx": 4,
+              "ty": 3,
+              "huntMid": "callback",
+              "huntTx": 4,
+              "huntTy": 3,
+              "huntDay": 176,
+              "indoor": false,
+              "targetVid": null
+            }
+          },
+          "firstLater": null,
+          "closedGates": null
+        }
+      ],
+      "counts": {
+        "superseded-by-re-pick": 1,
+        "candidate-null-after-pick": 1,
+        "departed-pick-linked": 1
+      },
+      "unknown": []
+    }
+  },
+  "guards": {
+    "base": {
+      "seeds": 8,
+      "medianDays": 146,
+      "starvationDeaths": 1,
+      "deathTotal": 286,
+      "wave4Reach": "6/8",
+      "wins": 3,
+      "nationalEver": 7
+    },
+    "arm": {
+      "seeds": 8,
+      "medianDays": 119,
+      "starvationDeaths": 1,
+      "deathTotal": 248,
+      "wave4Reach": "5/8",
+      "wins": 5,
+      "nationalEver": 7
+    }
+  }
+}
