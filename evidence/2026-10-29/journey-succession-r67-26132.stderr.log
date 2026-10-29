@@ -1,0 +1,38 @@
+
+ORGANIC DEATH d16: Robin -> Enzo, topTrust=[{"id":"Maya","t":37},{"id":"Sanne","t":34},{"id":"Enzo","t":33},{"id":"Vasyl","t":31}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=11 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=60 succTrustPost=33
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d16 (organic (phase A)): Robin -> Enzo | passed=true lin=true mo=true trust=33 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Maya (refused=false)
+  CONVO d+3 with Dante (refused=false)
+  BOND-CONVO d+3 with Dineo (depth=1 v=28 refused=false)
+  CONVO d+7 with Dante (refused=false)
+  CONVO d+7 with Dineo (refused=false)
+  CONVO d+14 with Dante (refused=false)
+  CONVO d+14 with Somchai (refused=false)
+  BOND-CONVO d+14 with Vasyl (depth=1 v=28 refused=false)
+
+SECOND-KILL d+20: Enzo -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Enzo -> Dante passed=true lin=true mo=true
+  CONVO d+30 with Somchai (refused=false)
+  CONVO d+30 with Maya (refused=false)
+  CONVO d+45 with Vasyl (refused=false)
+  CONVO d+45 with Yuki (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=0 (eligible=0) echo=6 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=45 signals={"levelUp":true,"systemVoice":49,"offerLines":53,"codexPlantsDelta":19,"codexSkillsDelta":18,"codexAbilitiesDelta":13,"xpDelta":96,"any":true} pantry 17200->26872
+TRUST-DIALS: office 33->65 (+32, climb) | villageMean 28.5->85.1 (+56.6, climb) | ge60 0->7 | movers>=5: [{"id":"Valeria","from":22,"to":90,"delta":68},{"id":"Yuki","from":25,"to":91,"delta":66},{"id":"Somchai","from":29,"to":90,"delta":61},{"id":"Vasyl","from":31,"to":91,"delta":60},{"id":"Sanne","from":34,"to":90,"delta":56},{"id":"Maya","from":37,"to":89,"delta":52}]
+DEED-LEDGER: calls=32 summary={"teachPlant":{"calls":27,"ok":27,"deltaSum":0,"deltaN":27,"positive":0,"meanDelta":0},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=61 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=45
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+45) t2=true(deedCalls=32) trustVerdict={"readable":true,"officeMantle":33,"officeLast":65,"officeDelta":32,"officeClass":"climb","villageMantle":28.5,"villageLast":85.1,"villageDelta":56.6,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":7,"movers":[{"id":"Valeria","from":22,"to":90,"delta":68},{"id":"Yuki","from":25,"to":91,"delta":66},{"id":"Somchai","from":29,"to":90,"delta":61},{"id":"Vasyl","from":31,"to":91,"delta":60},{"id":"Sanne","from":34,"to":90,"delta":56},{"id":"Maya","from":37,"to":89,"delta":52}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":1,"trustMoves":5} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":46,"moves":6}
