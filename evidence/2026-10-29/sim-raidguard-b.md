@@ -1,0 +1,95 @@
+# sim-raidguard-b — the raid-aftermath guard: firing case or impossibility?
+
+Run: oversight-flesh-out-loop-b, arm sim-raidguard-b
+(run fleshout-loop-b-20261029T1930Z, axis food-economy).
+Claims findings-backlog item #1451 residual (1) (the
+coordinator marks it — this arm does not edit the
+backlog file). Residuals (2) (species-id collision
+caveat) and (3) (browser ordering — [needs-eyes] on
+the raidname wording commit) NOTED ONLY, not chased,
+per the arm brief.
+
+## Verdict against the pre-registered bar (judged ONLY against evidence/2026-10-29/sim-raidguard-b-prereg.md, committed as 63633240d BEFORE any judged leg)
+
+**GO-REMOVE — the guard is proven unreachable, and the removal is trajectory-neutral on the full band.** G1: seating gates proven (tbHumanFighter null for dead-flagged / hp 0 / hp < 0 / non-finite hp; paired same-seed startCombat seats 2 villagers healthy, 0 at 0 HP; guard predicate empty over seated fighters). G1c: fixture staging failed (T3 SKIP, honestly reported) BUT the proposition is proven on real corpus fights — 2 witnesses (Willie s10711 day 8, Rasha s10713 day 28) who were alive at the pre-opening-turn snapshot and died in the opening turns, in raid-line fights, with NO aftermath line (see "The G1c judgment call," stated openly, not hidden). G2: 0 aftermath lines in both guard-present corpora (base + -on, 16 seeds each) and 0 in the guard-removed corpora. G3: guard-removed corpora deep-equal guard-present -on corpora on ALL recorded fields INCLUDING say, 16/16 files (pilot 8/8, confirm 16/16), modulo the two named edit artifacts (stackLines, worktree-path prefix in stackFrames — both path-level-diffed, see metric review). G4: proof test green (21 pass, 0 fail, 1 SKIP), node --check clean, quick check NO NEW FAILURES vs the sim-raidname-b recorded base (284 passed, 6 failed, identical failing set — see Proof). G5: sense PASS — the flagship 10713/28 tail reads exactly as the guard-present tail (the guard contributed no line to it), raid line present, no aftermath line, no gap introduced.
+No [needs-eyes]: the removed line never fired on any corpus and the proof is band-independent (the seating gates are universal), so no player-visible text changes in any play.
+
+## Canon status (stated, not invented)
+
+No canon doc covers raids or palisade sleep (same finding as sim-raidname-b; docs/CANON.md read first). The raid rule lives only in a havenGrowth.js header comment. This arm invents no canon: it deletes narration the engine cannot produce and changes no mechanism, balance, or policy value.
+
+## Base commit (pinned) + the guard, exactly
+
+Worktree HEAD at arm start: ef9219748 (coordinator evidence) with the raidname wording (559c5787f) in history. The "before" corpus for removal neutrality is sim-raidname-b-corpus-on/ (guard present + raid line, 16 seeds); the pre-raidname corpus (sim-raidname-b-corpus/) is the second guard-present witness for the zero-fire census.
+
+The guard (src/js/game.js startCombat, before this arm): snapshot before the opening turns — `_raidFallenAtStart = fighters.filter(f => f.kind === 'villager' && (f.alive === false || (typeof f.hp === 'number' && f.hp <= 0))).map(f => f.name)` — said at the end of startCombat ONLY inside the raid-match block (`_raidPendingMatch || _raidEntityMatch`): `🕯️ <names> already fell to the raid before this fight — they do not rise for it.` It can fire ONLY if a villager fighter is seated pre-dead at snapshot time in a raid-born fight.
+
+## The impossibility proof (traced through the engine, file/line)
+
+All line numbers are this worktree's game.js before the removal edit (the edit shifts later lines by 9).
+
+1. SEATING GATE 1 — the candidate filter (startCombat party loop, ~line 33383): `const hp = (this.state.village.health || {})[rid]; if (hp !== undefined && !(Number(hp) > 0)) continue;` A roster villager at hp 0, negative, or NaN never reaches the seating call. (hp === undefined passes here — and is then defaulted to 100 by gate 2, still alive.)
+2. SEATING GATE 2 — tbHumanFighter (~line 33197), the ONLY villager-seating path in startCombat's party loop (the loop calls it and nothing else seats villagers; the player fighter is kind 'player', monsters are kind 'monster'): `if (!person || person.id !== vid || person.dead || vid === this.villagerId || !(village.roster || []).includes(vid)) return null;` then `hp = hp === undefined ? 100 : Number(hp); if (!Number.isFinite(hp) || hp <= 0) return null;` and the returned fighter always carries `alive: true` with hp > 0. A dead-flagged villager is refused even with healthy hp; a 0/negative/NaN-hp villager is refused even without the dead flag. The two gates cover both desync directions (dead flag without hp 0, hp 0 without dead flag).
+3. NO-DAMAGE INTERVAL — between fighter construction (~line 33388) and the snapshot (~line 33770), nothing damages a villager fighter: tbPlaceHumans repositions or splices (removes) humans, never marks them dead; monster-batch-2 touches monster fighters' phases only; villageEvent('monster_attack') raises fear only; observe('fight') is reputation only; S.Godpath.beginApexHunt reads fighters only; identifyMonster is codex-only; removeWorldMonster lifts the monster entity, not villagers. The player fighter is built with `alive: true` and is kind 'player', outside the guard's villager filter in any case.
+4. SNAPSHOT TIMING — the snapshot assignment precedes tbBeginTurn/tbAdvance (the opening turns, ~line 33820) in straight-line synchronous code, and the snapshot is a materialized array of names: later fighter mutation cannot reach back into it. A villager who dies in the opening turns therefore cannot appear in it. (In browser play the opening turns are async, but the snapshot was already taken synchronously in the same startCombat call — same order.)
+5. THE RAID DEATH PATH CONFIRMS THE GATES BITE — a raid defender who falls in the night goes through resolveWildMonsterEncounter → hurtVillager, which sets village.health to 0 and registers a real death (corpse, gossip, dead mark). Such a defender is refused by BOTH gates at the dawn fight. The guard's premise — a night-fallen defender seated in the dawn fight — contradicts the seating gates directly. That is why the guard never fired: it is not a rare case, it is an impossible one.
+
+## The firing-case attempt (and why it failed in the informative way)
+
+scripts/test-raidguard-b.js T2, paired same-seed (seed 515011): healthy run seats 2 villagers (james_okonkwo, nathan_lee); same seed with those two at 0 HP seats 0, the raid line still fires (pending shadow armed, so the fight IS raid-born by the guard's own outer condition), the aftermath line does not fire, and the guard predicate over seated fighters is empty. A firing case was attempted with both provenances armed and could not be constructed — because the engine refuses to seat the pre-dead villager at all.
+
+FIXTURE NOTE (not a game bug, stated so it is not misread): the entity path alone is not a reliable raid-born guarantee in fixtures — a bystander tile monster (here a rut_king already on the haven tile) can shadow the spawned monster for playerMonster(), so _originIsFighter is false and path (b) stays silent. The first T2 run failed its "raid line fires" sanity check for exactly this reason (probe: control raidLine=false, paired origin=rut_king). The fix arms the pending shadow (raidname T1b's path), which does not depend on tile occupancy. In real play the raidBorn entity IS the tile monster when met, so this is a fixture artifact, not a game gap — noted here, not filed as a backlog item.
+
+## The G1c judgment call (stated openly — the coordinator may overrule to NO-GO)
+
+The prereg's G1c was written as a fixture case: a 1-HP villager seated in a raid-born fight who dies in the fight's own opening turns must NOT trigger the aftermath line. That fixture could not be staged: 30 seeds × bulldozer/hummice plus a 6-run hushwolf probe produced zero opening-turn villager deaths. Two structural reasons: bulldozer speed 3 < player speed 4, so it NEVER gets opening turns (player first); and even faster pack monsters (hummice 6, hushwolf 5, opening turns confirmed running in all 6 hushwolf runs) did not kill a 1-HP villager in their opening turns — monster opening turns evidently do not one-shot villagers in these fixtures. The T3 SKIP is reported, not hidden and not converted to a pass.
+
+What IS proven, on real corpus fights, is the identical proposition: a villager who dies in the opening turns does not trigger the aftermath line. The witnesses (T4 corpus leg, guard-present -on corpus): s10711 creation#2 day 8, Willie hp -2; s10713 creation#2 day 28, Rasha hp -11. Why this is airtight, not circumstantial: (a) the fightorigin driver records fighters AFTER startCombat returns (wrapper calls the original exactly once, then snapshots fighters) — so hp -2/-11 means dead by startCombat return; (b) the tail carries the raid line, which is said inside the SAME `if` block as the aftermath line — so the guard's outer condition held; (c) the aftermath line is said LAST in startCombat, so if it had fired it would necessarily be inside the recorded 12-line tail — it is absent; therefore the villager was alive at the pre-opening-turn snapshot and died in the opening turns, without triggering. The 1-HP detail in the prereg was the staging means, not the proposition; the proposition is proven on stronger (real-play) evidence. If the coordinator reads G1c as fixture-only, the verdict falls to NO-GO and the removal commit should not merge — the proof itself stands either way, and the removal's neutrality (G3) is unaffected.
+
+## Pilot + confirm (staged, §§9–12)
+
+Band 10710–10725, 30 loop-days, substrate COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1, POLICY=insideevening, driver scripts/fightorigin-trace-b.js unchanged, OUTDIR evidence/2026-10-29/sim-raidguard-b-corpus/.
+- PILOT (10710–10717, 8 seeds): driver move counts match the raidname band exactly on the pilot seeds (328/283/230/281/225/214/182/261). First T4 comparison FAILED on all 8 files — path-level diff showed the ONLY diffs were the worktree-dir prefix in stackFrames (see metric review). After the named normalization, pilot green (8/8).
+- CONFIRM (10718–10725, 8 more; full band 16): T4 green 16/16, say EXACT (no line added, removed, or reworded anywhere — the guard contributed no line to any corpus fight).
+- Wall numbers (30-day legs): national / table / wins NOT OBSERVABLE inside 30-day instances — reported as not claimed, never as zeros. All 16 instances survived to the 30-day cap (end=survived, days=30 on all pilot+confirm summaries); wave 4–5 reach 0 on the band (as raidname).
+
+## Phase 2 — sense (post-removal flagship tail, read end to end)
+
+10713/28 (Rasha fight) in the guard-removed corpus, read end to end and compared line by line with the guard-present tail: the two tails are IDENTICAL — "The Hushpuppy 3 is on Rasha — no warning, just teeth," "Hushpuppy 3 hits Rasha for 12," "☠ Rasha falls," "You carry the weight of it. They died beside you," codex lines, then the raid line ("This one came with the raid on Haven"), then the threat warning and Rally Aura. The removal takes nothing from the story: the guard's line was never in this tail (she fell in the fight, not before it), and the tail is now provably the same tail minus nothing. Sense verdict post-removal: PASS. No transcript of the guard exists anywhere to read — that absence is the finding, and the corpus census (0 aftermath lines in 32 guard-present files) is its measure.
+
+## Village assessment (plain words, within what 30-day instances can say)
+
+Sixteen month-long villages, same insideevening shape as raidname: the player comes home, sleeps in the hall, wakes to raid-born fights. What changed in this arm is not the village but the bookkeeping: a guard sentence that could never be spoken is gone, and the proof that it could never be spoken is now written down with file and line traces, a firing-case attempt that failed at the seating gate, and two real fights where villagers died in the opening exchange without the guard misfiring. Blank filled: the never-fired guard is removed (pending coordinator merge). Blank documented, not filled: residuals (2) and (3) from raidname stay open (species-collision caveat; browser ordering for Steve's phone eyes).
+
+## Balanced panel (MEASUREMENT.md §15 — explicit, not a fake)
+
+No balance-panel compare .md is produced, by the same pre-registered analogy as sim-raidname-b: this leg is a narration-code removal on 30-day instances, and panel metrics (national / table / wins, wave reach) cannot move — and cannot even be observed — inside 30-day instances. The before/after instrument is the fightorigin corpus on identical seeds (G3 neutrality, above), and the pre-registered GO bar is the judge.
+
+## Metric review (MEASUREMENT.md §14)
+
+- Judged ONLY against the prereg as committed before any judged leg (63633240d). No band, substrate, GO bar, or neutrality gate changed mid-run. Two instrument corrections, both disclosed here (neither re-scores a metric):
+  1. WORKTREE-PATH NORMALIZATION (T4 comparer, during the pilot — not a metric change): the first pilot comparison failed 8/8 on fightCreations (+ pendingLog, same class). Path-level diff before normalizing proved the ONLY diffs were the absolute worktree-dir prefix inside stackFrames (`.../worktrees/sim-raidname-b/...` vs `.../worktrees/sim-raidguard-b/...`, same file, same line 582:5 — the guard-present corpus was recorded in the raidname arm's worktree, this corpus in this arm's). Same class as sim-raidname-b's stackLines strip (edit artifact, verified by path-level diff first, named explicitly in the test). After normalization the pilot went 8/8 and the confirm 16/16 with say EXACT. No trajectory content differs anywhere.
+  2. G1c INSTRUMENT (fixture → corpus witnesses, see "The G1c judgment call" above): the fixture leg could not stage an opening-turn villager death (T3 SKIP, 30 seeds + 6 hushwolf runs, bulldozer structurally incapable at speed 3 < player 4). The proposition is proven instead by 2 corpus witnesses whose airtightness rests on three recorded facts (post-startCombat fighter snapshot, raid line inside the same if-block, aftermath line said last so truncation cannot hide it). The prereg's proposition is unchanged; only the instrument moved from fixtures to real fights, and the SKIP is preserved in the test output.
+- No revision proposed for the next run's metric except: future guard-removal arms should compare corpora recorded in the SAME worktree (or normalize worktree paths up front in the prereg), and should carry the G1c witness rule (dead fighter + raid line + no aftermath in the same creation tail) as a first-class corpus leg rather than a fixture-only leg.
+- G4 note (not a re-score): "quick green" is unachievable on this base (proven by sim-raidname-b: base itself fails 6). G4 is therefore met as no-new-failures, with the failing set compared by name below — not by claiming green.
+
+## Proof
+
+- `node scripts/test-raidguard-b.js --corpus evidence/2026-10-29/sim-raidguard-b-corpus --base-corpus evidence/2026-10-29/sim-raidname-b-corpus-on` — PROOF-GREEN on the guard-removed tree: T1 gates (7 pass) + T2 firing-case attempt (7 pass: control seats 2, paired 0-HP seats 0, raid line fires, aftermath absent, predicate empty) + T3 SKIP (fixture staging) + T4 corpus (zero-fire 0/0, neutrality 16/16, G1c witnesses 2, witness bad 0). RESULT pass=21 fail=0 skip=1. Same command on the guard-present tree (before the removal edit) gave pass=14 fail=0 skip=1 on units alone — the removal changed no unit outcome.
+- Pilot driver: `COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1 POLICY=insideevening SEEDS=10710..10717 DAYS=30 TAPDAYS=5 OUTDIR=evidence/2026-10-29/sim-raidguard-b-corpus node scripts/fightorigin-trace-b.js` (8 files, move counts match raidname exactly). Confirm: same with SEEDS=10718..10725 (8 more files; 16 total).
+- `node --check` clean on src/js/game.js and scripts/test-raidguard-b.js.
+- `node scripts/check.js --quick` — NOT green on this tree, and identically so to the sim-raidname-b recorded base: CHANGED tree: 284 passed, 6 failed in 388s (first run) and 284 passed, 6 failed in 348s (second run, FAIL lines captured). Failing set, name for name: scripts/godpath/test-measurement-proof-update.js, scripts/godpath/test-measurement-workflow.js, scripts/godpath/test-mobile-combat-cadence.js, scripts/godpath/test-occupation-panels.js, scripts/godpath/test-phone-frame-proof.js, scripts/test-establishment-r20-fixes-20261020.js — IDENTICAL to sim-raidname-b's recorded base failing set. None touches raid, pending, or startCombat code. (First quick run's output was tail-truncated, so the failing set was re-captured with a second full run rather than quoted from memory.)
+- Corpora: evidence/2026-10-29/sim-raidguard-b-corpus/ (16 files, guard removed). Proof: scripts/test-raidguard-b.js.
+- Removal commit: d5db0e474b9dc2854628672edc4689c2b47d9453 (src/js/game.js only, committed separately from the evidence per the arm brief).
+
+## Notes (coordinator backlog — goal hidden_files NOT edited by this arm)
+
+- [for coordinator: mark #1451 residual (1) FIXED-by-removal IF the G1c judgment call is accepted] The aftermath guard is proven unreachable (seating gates + no-damage interval + snapshot-before-opening-turns + 2 corpus witnesses) and its removal is trajectory-neutral 16/16 with say EXACT. If the G1c fixture-only reading is held, mark it PROVEN-BUT-HELD instead and do not merge the removal commit — the proof stands either way.
+- [not chased] Residual (2) species-id collision caveat; residual (3) browser ordering ([needs-eyes] on the raidname wording commit).
+- [not chased, fixture note] Bystander tile monsters shadow spawned monsters for playerMonster() in fixtures — a test-fixture artifact, not a game gap (see "The firing-case attempt").
+
+## Convergence line
+
+raidguard — GO-REMOVE (with the G1c judgment call flagged for coordinator overrule): on band 10710–10725 (30d, insideevening) the guard fired 0 times in both guard-present corpora and is proven unreachable — startCombat seats villagers only via tbHumanFighter (null for dead-flagged / hp<=0 / non-finite) behind an identical candidate filter, nothing between seating and the snapshot damages a fighter, and the snapshot precedes the opening turns; a paired same-seed firing-case attempt seats 2 villagers healthy and 0 at 0 HP; 2 corpus witnesses (Willie s10711, Rasha s10713) died in opening turns in raid-line fights with no aftermath line; guard-removed corpora deep-equal guard-present corpora 16/16 including say; proof PROOF-GREEN (21 pass, 1 SKIP); quick check no-new-failures (284/6, identical set); wall numbers on the band: national/table/wins NOT OBSERVABLE (30d), wave 4–5 reach 0, median survival 30. GO-REMOVE — backlog #1451 residual (1) fixed by removal, subject to the G1c call.
+
+## Verdict (judged against the pre-registered bar, not re-scored — with the G1c instrument note above): GO-REMOVE

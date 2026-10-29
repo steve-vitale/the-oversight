@@ -22,8 +22,11 @@
 //   T4 (corpus, --corpus DIR --base-corpus DIR): removal
 //       neutrality — the guard-removed corpus deep-equals the
 //       guard-present corpus on ALL recorded fields INCLUDING say,
-//       modulo stackLines only (source line numbers shift with ANY
-//       edit — the same named edit artifact as sim-raidname-b).
+//       modulo stackLines (source line numbers shift with ANY edit)
+//       and the worktree-dir prefix inside stackFrames (the two
+//       corpora were recorded in different worktrees — path-level
+//       diff proved this is the ONLY difference class; see the
+//       strip comment in T4 and the evidence metric review).
 //       Also counts aftermath lines in both corpora (must be 0),
 //       AND the G1c corpus-witness leg: in the guard-present
 //       corpus, every creation whose post-startCombat fighter
@@ -230,12 +233,29 @@ async function main() {
 
   if (corpus && baseCorpus) {
     console.log('T4: corpus legs — zero-fire + removal neutrality (say EXACT)');
+    // stackLines carry source line numbers, which shift with ANY
+    // code edit — the same named edit artifact as sim-raidname-b.
+    // stackFrames carry ABSOLUTE worktree paths: the
+    // guard-present corpus was recorded in the raidname arm's
+    // worktree (sim-raidname-b) and this corpus in sim-raidguard-b,
+    // so the path prefix differs by construction, not by
+    // trajectory. The pilot's first failing comparison was
+    // diffed at path level before normalizing: its ONLY diffs
+    // were the worktree-dir prefix in stackFrames (fightCreations
+    // + pendingLog harness frames, same line numbers) — no
+    // say, fighter, position, move, death, or kill diff anywhere.
+    // The normalization below is explicit and named, exactly
+    // like the stackLines strip; see the evidence metric review.
     const strip = (o) => {
       if (Array.isArray(o)) return o.map(strip);
       if (o && typeof o === 'object') {
         const out = {};
         for (const [k, val] of Object.entries(o)) {
           if (k === 'stackLines') continue;
+          if (k === 'stackFrames' && Array.isArray(val)) {
+            out[k] = val.map((s) => (typeof s === 'string' ? s.replace(/\/worktrees\/[^/]+\//, '/worktrees/WORKTREE/') : strip(s)));
+            continue;
+          }
           out[k] = strip(val);
         }
         return out;
