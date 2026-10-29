@@ -69,3 +69,38 @@ slice closes).
   and 0.35 bridge rate mirror home generation exactly (not new balance
   numbers); the 5-tile exemption ring is the one new call, documented
   here for Steve's overrule.
+
+## Result (filled after the run)
+- AFTER (slice-4 code): PASS on seeds 7, 42, 99, 0 failures. Every bar
+  held: destination refusal (fallen_tree/rubble by seed), creek bridge
+  refusal, intermediate refusal with the intermediate's block
+  (e.g. {"x":9,"y":4,"blockType":"fallen_tree"}), first-ring 40/40
+  unblocked, city cells 0 blocked, regen blockFrom/needsBridge matched,
+  home regression refused with the home intermediate's block.
+- BEFORE (slice-3 commit 71310a24, same proof copied into a git-archive
+  scratch copy): 12 failures, all in the expected places — per seed,
+  no beyond blocked tile exists, no beyond needsBridge creek exists,
+  and the intermediate jump SUCCEEDS (travelTo returns undefined, the
+  player moves onto the home tile). The hole was real, and this slice
+  closes it without touching home behavior (home regression passes on
+  both base and slice-4 code).
+- No threshold was moved mid-run. The intermediate scenario's blockFrom
+  is set by the proof (to isolate the SCAN from generation); generation
+  of beyond blockages is proven separately by bars 1a/1b/5.
+
+## Amendment (same slice, found by the slice-1a guard re-run)
+- Slice 4 changed what walkHome can meet: a straight-line return can
+  now hit a fallen tree, and the slice-1a walkHome had no second
+  homeward axis on axis-aligned returns — it stopped at the first
+  block. walkHome now sidesteps perpendicular (toward-home side first,
+  never revisiting a tile on the walk, narrated once) and stops honestly
+  only when homeward steps AND both sidesteps refuse; on success the
+  returned `blocked` is null (a bypassed block is not a stopping block).
+- The slice-1a blocked proof was updated to match: it now boxes the far
+  position on all four sides instead of blocking only the homeward
+  candidates. The slice-1a bar (iv) is therefore read as "a fully
+  boxed-in return stops honestly", and the slice-1a proof + slice-4
+  proof + city proof + slice-1 guard all re-ran green after the change.
+  This is a documented evolution of the walkHome rule under slice 4's
+  new reality, not a loosened assertion: the blocked-stop behavior is
+  still proven, under strictly harder conditions (a full box).

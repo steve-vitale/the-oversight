@@ -77,12 +77,27 @@ async function runSeed(seed) {
   if (Game.map.px === 4 && Game.map.py === 4) { failures.push('crossing did not move off the rim'); return; }
   outTrace.push({ x: Game.map.px, y: Game.map.py });
   if (Game.inCombat && Game.inCombat()) { failures.push('combat engaged on the crossing'); return; }
-  // March 4 more orthogonal steps away from haven (beyond tiles offer
-  // orthogonal-adjacent steps), so the return is a real multi-tile walk.
+  // March further away from haven (so the return is a real multi-tile
+  // walk), routing AROUND blockages: since slice 4, deeper beyond tiles
+  // can carry a fallen tree / rubble / washed-out blockage, and a fixed
+  // straight march would stall on one honestly. BFS over offered steps
+  // (generating beyond tiles as it explores, skipping blocked entries)
+  // finds a walkable route to a far tile, exactly as a player would.
   const ox = Game.map.px > 4 ? 1 : Game.map.px < 4 ? -1 : 0;
   const oy = Game.map.px === 4 ? (Game.map.py > 4 ? 1 : -1) : 0;
-  for (let i = 0; i < 4; i++) {
-    Game.travelTo(Game.map.px + ox, Game.map.py + oy);
+  const farTarget = { x: Game.map.px + ox * 8, y: Game.map.py + oy * 8 };
+  const marchPassable = (from, nx, ny) => {
+    if (nx < 0 || nx > 8 || ny < 0 || ny > 8) Game.beyondTile(nx, ny);
+    if (Game.monsterAt && Game.monsterAt(nx, ny)) return false;
+    try { return !Game.travelBlockage(nx, ny, from.x, from.y); } catch (e) { return false; }
+  };
+  const marchPath = bfsPath(Game, { x: Game.map.px, y: Game.map.py }, p => p.x === farTarget.x && p.y === farTarget.y, marchPassable,
+    { x0: Math.min(Game.map.px, farTarget.x) - 2, x1: Math.max(Game.map.px, farTarget.x) + 2, y0: Math.min(Game.map.py, farTarget.y) - 2, y1: Math.max(Game.map.py, farTarget.y) + 2 });
+  check(!!marchPath, `BFS found an outward march route to (${farTarget.x},${farTarget.y})`);
+  if (!marchPath) return;
+  for (let i = 1; i < marchPath.length; i++) {
+    Game.travelTo(marchPath[i].x, marchPath[i].y);
+    if (Game.map.px !== marchPath[i].x || Game.map.py !== marchPath[i].y) { failures.push(`march step ${i} to (${marchPath[i].x},${marchPath[i].y}) failed`); return; }
     if (Game.inCombat && Game.inCombat()) { failures.push('combat engaged on the outward march'); return; }
     outTrace.push({ x: Game.map.px, y: Game.map.py });
   }
@@ -124,21 +139,22 @@ async function runSeed(seed) {
   check(lines.join('\n').includes('Home —'), 'transcript: arrival announced');
 
   // BAR 4: blocked return. Walk out again along the same outbound trace
-  // (travelTo steps; the trace is known-good ground), then block BOTH
-  // homeward candidate tiles from the far position's approach sides.
+  // (travelTo steps; the trace is known-good ground), then box the far
+  // position in on ALL FOUR sides. (Since slice 4, walkHome sidesteps
+  // around a single blocked homeward tile — blocking only the homeward
+  // candidates no longer stops it, by design. A walk stops honestly only
+  // when homeward steps AND both sidesteps refuse, i.e. the box.)
   for (let i = 1; i < outTrace.length; i++) {
     Game.travelTo(outTrace[i].x, outTrace[i].y);
     if (Game.inCombat && Game.inCombat()) { failures.push('combat engaged on the second walk out'); return; }
   }
   check(Game.map.px === far.x && Game.map.py === far.y, 'second walk out returned to the far tile');
   const px = Game.map.px, py = Game.map.py;
-  const sdx = Math.sign(4 - px), sdy = Math.sign(4 - py);
   const blockTile = (nx, ny, sx, sy) => {
     const t = Game.tileAt(nx, ny) || Game.beyondTile(nx, ny);
     t.blockFrom = { dx: -sx, dy: -sy, type: 'fallen_tree' };
   };
-  if (sdx !== 0) blockTile(px + sdx, py, sdx, 0);
-  if (sdy !== 0) blockTile(px, py + sdy, 0, sdy);
+  for (const [bx, by] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) blockTile(px + bx, py + by, bx, by);
   const blocked = Game.walkHome();
   check(!blocked.reached && blocked.interrupted === 'blocked', `blocked walk stops honestly: reached=${blocked.reached} interrupted=${blocked.interrupted}`);
   check(Game.map.px === px && Game.map.py === py, 'blocked walk left the player unmoved');

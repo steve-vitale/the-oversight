@@ -11457,12 +11457,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // NO TELEPORT: every step moves at most one tile, orthogonally, so
     // every step is a travelTargets-offered step (home tiles at d==1 and
     // orthogonal-adjacent beyond tiles are always offered). On a blocked
-    // step it tries the other axis, then stops honestly with the block
-    // named and the position unchanged by the refused step. Combat, death,
+    // step it tries the other homeward axis, then sidesteps perpendicular
+    // (toward-home side first, never onto a tile already on this walk's
+    // path), and only stops honestly — block named, position unchanged
+    // by the refused steps — when every escape is refused. Combat, death,
     // or the step cap stop the walk mid-way with reached=false — tap
     // again after the fight. Returns {reached, steps, path, blocked,
-    // interrupted}. No silent actions: start, arrival, block, and
-    // interruption all say so.
+    // interrupted}; blocked is null on success (a bypassed block is not
+    // a stopping block). No silent actions: start, arrival, detour,
+    // block, and interruption all say so.
     walkHome(maxSteps) {
       const v = this.state.village || {};
       const hx = v.px ?? 4, hy = v.py ?? 4;
@@ -11472,7 +11475,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.over) return { reached: false, steps: 0, path, blocked: null, interrupted: 'over' };
       if (this.inCombat && this.inCombat()) return { reached: false, steps: 0, path, blocked: null, interrupted: 'combat' };
       this.say('Heading home — following the compass back, one tile at a time.');
-      let steps = 0, blocked = null, interrupted = null;
+      let steps = 0, blocked = null, interrupted = null, sidestepSaid = false;
       while (this.map.px !== hx || this.map.py !== hy) {
         if (steps >= cap) { interrupted = 'cap'; break; }
         if (this.over) { interrupted = 'over'; break; }
@@ -11484,17 +11487,39 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const axes = Math.abs(dx) >= Math.abs(dy)
           ? [[Math.sign(dx), 0], [0, Math.sign(dy)]]
           : [[0, Math.sign(dy)], [Math.sign(dx), 0]];
-        let moved = false;
-        for (const [sx, sy] of axes) {
-          if (sx === 0 && sy === 0) continue;
-          const nx = px + sx, ny = py + sy;
+        const tryStep = (sx, sy) => {
+          if (sx === 0 && sy === 0) return false;
           const before = { x: this.map.px, y: this.map.py };
-          const res = this.travelTo(nx, ny);
-          if (this.map.px !== before.x || this.map.py !== before.y) { moved = true; break; }
-          // Refused: remember the block if travelTo named one, try other axis.
+          const res = this.travelTo(px + sx, py + sy);
+          if (this.map.px !== before.x || this.map.py !== before.y) return true;
+          // Refused: remember the block if travelTo named one.
           if (res && res.blocked) blocked = res.blocked;
           else if (res && res.kind === 'blockage') blocked = res;
           else if (res && res.blockType) blocked = res;
+          return false;
+        };
+        let moved = false;
+        for (const [sx, sy] of axes) { if (tryStep(sx, sy)) { moved = true; break; } }
+        if (!moved) {
+          // SIDESTEP (fixall-map slice 4): an axis-aligned return has no
+          // second homeward axis, so one fallen tree on the straight line
+          // used to end the walk. Step perpendicular instead — still one
+          // real tile at a time, still through travelTo — then re-aim
+          // home from the new row/column. Never onto a tile already on
+          // this walk's path (no oscillation), and only while the walk
+          // has steps left. If both sidesteps refuse, the walk stops
+          // honestly with the block named.
+          // Toward-home perpendicular first, so a sidestep never raises
+          // the compass distance (the return trace stays non-increasing).
+          const perp = Math.abs(dx) >= Math.abs(dy)
+            ? [[0, Math.sign(dy) || 1], [0, -(Math.sign(dy) || 1)]]
+            : [[Math.sign(dx) || 1, 0], [-(Math.sign(dx) || 1), 0]];
+          for (const [sx, sy] of perp) {
+            const nx = px + sx, ny = py + sy;
+            if (path.some(p => p.x === nx && p.y === ny)) continue;
+            if (tryStep(sx, sy)) { moved = true; break; }
+          }
+          if (moved && !sidestepSaid) { sidestepSaid = true; this.say('The way home is blocked here — stepping around it.'); }
         }
         if (!moved) { interrupted = blocked ? 'blocked' : 'refused'; break; }
         steps++;
@@ -11505,7 +11530,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (reached) this.say('Home — the lodge fire, the hall, your people. The walk back is done.');
       else if (interrupted === 'blocked' && blocked) this.say(`The way home is blocked (${blocked.blockType || 'the path'}). Clear it, bridge it, or go around — then walk home again.`);
       else if (interrupted === 'combat') this.say('Something found you on the way home. Deal with it, then walk home again.');
-      return { reached, steps, path, blocked, interrupted };
+      // A bypassed block is not a stopping block: on success, blocked is
+      // null (the walk detoured around it); on a stop, it names the obstacle.
+      return { reached, steps, path, blocked: reached ? null : blocked, interrupted };
     },
 
     // MAP KNOWLEDGE (Steve 2026-10-06): the world map shows ONLY what the

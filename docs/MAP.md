@@ -48,12 +48,15 @@ walk everywhere. Nothing teleports.
   into fog) plus orthogonal-adjacent beyond tiles. Stepping past the rim
   (`tryNodeExit`) generates the next tile and crosses onto it; the first
   crossing says so, once per game, and names the way home.
-- LIMIT (slice-1 truth, not a design goal): beyond tiles currently have
-  NO blockages and NO hard-creek bridge rule, and `travelTo`'s
-  intermediate-blockage scan only covers the home board. The "same" walk
-  is therefore obstructed at home and open past the edge. Closing that
-  asymmetry is planned blockage/bridge parity work, not live behavior —
-  do not quote beyond ground as blockage-checked until that slice lands.
+- Blockage/bridge parity (fixall-map slice 4): deeper wild ground plays
+  by the same obstruction rules as home ground — ~12% of wild beyond
+  tiles past the first ring carry a fallen-tree / rubble / washed-out
+  blockage guarding one approach side, and ~35% of wild beyond creek
+  tiles need a bridge or a swimmer. `travelTo`'s intermediate-blockage
+  scan covers the path bounding box, not just the home board, so a jump
+  from beyond onto a home tile can no longer skip its beyond
+  intermediates. Exempt by design: the first ring (Chebyshev <= 5, the
+  crossing step) stays open ground, and all city tiles stay open.
 
 ## 3. Nomad leg boards (regions of the same world)
 
@@ -112,8 +115,10 @@ walk everywhere. Nothing teleports.
 - `walkHome()` is the action: it walks the player home tile by tile
   through the same `travelTo` pipeline as walking out — orthogonal
   steps only, so every step is a `travelTargets`-offered step; a blocked
-  step tries the other axis, then stops honestly with the block named
-  and the player unmoved; combat, death, or the step cap stop the walk
+  step tries the other homeward axis, then sidesteps perpendicular
+  (toward-home side first, never revisiting a tile on this walk), and
+  only stops honestly with the block named and the player unmoved when
+  every escape refuses; combat, death, or the step cap stop the walk
   mid-way with `reached=false` (tap again after the fight). The compass
   line's "Walk home" button calls it (phone feel is [needs-eyes]).
 - COST: walk-home charges exactly what walking out charges. Node travel
@@ -129,7 +134,9 @@ walk everywhere. Nothing teleports.
 - City districts as beyond tiles (streets / buildings / plazas / caches
   with a city people layer) — planned, not built. Urban play is
   currently one tile kind (`building`) searched like a ruin.
-- Blockage/bridge parity past the edge (§2 limit) — planned.
+- Blockage/bridge parity past the edge — LANDED (fixall-map slice 4,
+  see §2). What remains open is the city-people layer and dens (see
+  below), not the walk rules.
 - Villager movement past the edge: every villager system still targets
   0..8; only a villager's RETURN walk may step through beyond
   coordinates (fixall-map slice 2), and only because return retraces
