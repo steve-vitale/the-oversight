@@ -1,0 +1,1004 @@
+{
+  "instrument": "scripts/test-w5ready-a.js (DIAG only, corpus recompute)",
+  "corpus": "evidence/2026-10-29/perseed-fullseat-a",
+  "n": 16,
+  "demandW5": {
+    "armored": 4,
+    "armorP": 15,
+    "armed": 6,
+    "tricks": 3,
+    "veterans": 2
+  },
+  "demandSource": "src/js/standing.js standingCfg().readyDemand[5]",
+  "unclassified": [],
+  "rows": [
+    {
+      "seed": 76001,
+      "policy": "off",
+      "days": 129,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 127,
+      "distT5": 73,
+      "holdKind": "below-bar",
+      "raw": 127,
+      "war": 25,
+      "diplomacy": 102,
+      "plenty": 0,
+      "capped": 127,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": true,
+      "w2points": 11,
+      "unlockedWave": 4,
+      "peakStanding": 127,
+      "peakGap": 73,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:veterans",
+        "w4faced-missing"
+      ]
+    },
+    {
+      "seed": 76001,
+      "policy": "on",
+      "days": 107,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 199,
+      "distT5": 1,
+      "holdKind": "defer5",
+      "raw": 207,
+      "war": 25,
+      "diplomacy": 102,
+      "plenty": 80,
+      "capped": 207,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 6,
+      "unlockedWave": 4,
+      "peakStanding": 199,
+      "peakGap": 1,
+      "endVsPeakDelta": 0,
+      "pin199End": true,
+      "pin199Peak": true,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 3,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76002,
+      "policy": "off",
+      "days": 118,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 100,
+      "distT5": 100,
+      "holdKind": "below-bar",
+      "raw": 90,
+      "war": 50,
+      "diplomacy": 0,
+      "plenty": 40,
+      "capped": 90,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 7,
+      "unlockedWave": 4,
+      "peakStanding": 147,
+      "peakGap": 53,
+      "endVsPeakDelta": -47,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 4,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76002,
+      "policy": "on",
+      "days": 155,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 100,
+      "distT5": 100,
+      "holdKind": "below-bar",
+      "raw": 70,
+      "war": 50,
+      "diplomacy": 0,
+      "plenty": 20,
+      "capped": 70,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 14,
+      "unlockedWave": 4,
+      "peakStanding": 172,
+      "peakGap": 28,
+      "endVsPeakDelta": -72,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 1,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76003,
+      "policy": "off",
+      "days": 180,
+      "endReason": "survived",
+      "waveReach": 3,
+      "gatedStanding": 99,
+      "distT5": 101,
+      "holdKind": "below-bar",
+      "raw": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "capped": 102,
+      "rd5ready": false,
+      "rd5short": [
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": true,
+      "w2points": 5,
+      "unlockedWave": 3,
+      "peakStanding": 99,
+      "peakGap": 101,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:veterans",
+        "w4faced-missing"
+      ]
+    },
+    {
+      "seed": 76003,
+      "policy": "on",
+      "days": 180,
+      "endReason": "survived",
+      "waveReach": 4,
+      "gatedStanding": 100,
+      "distT5": 100,
+      "holdKind": "below-bar",
+      "raw": 95,
+      "war": 75,
+      "diplomacy": 0,
+      "plenty": 20,
+      "capped": 95,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 11,
+      "unlockedWave": 4,
+      "peakStanding": 197,
+      "peakGap": 3,
+      "endVsPeakDelta": -97,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 8,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76004,
+      "policy": "off",
+      "days": 180,
+      "endReason": "survived",
+      "waveReach": 4,
+      "gatedStanding": 177,
+      "distT5": 23,
+      "holdKind": "below-bar",
+      "raw": 177,
+      "war": 75,
+      "diplomacy": 102,
+      "plenty": 0,
+      "capped": 177,
+      "rd5ready": false,
+      "rd5short": [
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 6,
+      "unlockedWave": 4,
+      "peakStanding": 177,
+      "peakGap": 23,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 1,
+      "blockers": [
+        "standing",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76004,
+      "policy": "on",
+      "days": 89,
+      "endReason": "village-lost",
+      "waveReach": 3,
+      "gatedStanding": 99,
+      "distT5": 101,
+      "holdKind": "below-bar",
+      "raw": 122,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 20,
+      "capped": 122,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": true,
+      "w2points": 5,
+      "unlockedWave": 3,
+      "peakStanding": 99,
+      "peakGap": 101,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:veterans",
+        "w4faced-missing"
+      ]
+    },
+    {
+      "seed": 76005,
+      "policy": "off",
+      "days": 103,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 152,
+      "distT5": 48,
+      "holdKind": "below-bar",
+      "raw": 152,
+      "war": 50,
+      "diplomacy": 102,
+      "plenty": 0,
+      "capped": 152,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 7,
+      "unlockedWave": 4,
+      "peakStanding": 152,
+      "peakGap": 48,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 1,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76005,
+      "policy": "on",
+      "days": 167,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 110,
+      "distT5": 90,
+      "holdKind": "below-bar",
+      "raw": 110,
+      "war": 50,
+      "diplomacy": 0,
+      "plenty": 60,
+      "capped": 110,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 13,
+      "unlockedWave": 4,
+      "peakStanding": 192,
+      "peakGap": 8,
+      "endVsPeakDelta": -82,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 4,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76006,
+      "policy": "off",
+      "days": 40,
+      "endReason": "village-lost",
+      "waveReach": 2,
+      "gatedStanding": 0,
+      "distT5": 200,
+      "holdKind": "below-bar",
+      "raw": 0,
+      "war": 0,
+      "diplomacy": 0,
+      "plenty": 0,
+      "capped": 0,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": false,
+      "w2points": 1,
+      "unlockedWave": 2,
+      "peakStanding": 0,
+      "peakGap": 200,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:veterans",
+        "w4faced-missing",
+        "w3rung-missing"
+      ]
+    },
+    {
+      "seed": 76006,
+      "policy": "on",
+      "days": 180,
+      "endReason": "survived",
+      "waveReach": 4,
+      "gatedStanding": 110,
+      "distT5": 90,
+      "holdKind": "below-bar",
+      "raw": 110,
+      "war": 50,
+      "diplomacy": 0,
+      "plenty": 60,
+      "capped": 110,
+      "rd5ready": false,
+      "rd5short": [
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 11,
+      "unlockedWave": 4,
+      "peakStanding": 110,
+      "peakGap": 90,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 2,
+      "blockers": [
+        "standing",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76007,
+      "policy": "off",
+      "days": 90,
+      "endReason": "over-other",
+      "waveReach": 4,
+      "gatedStanding": 199,
+      "distT5": 1,
+      "holdKind": "defer5",
+      "raw": 227,
+      "war": 25,
+      "diplomacy": 102,
+      "plenty": 100,
+      "capped": 227,
+      "rd5ready": false,
+      "rd5short": [
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": true,
+      "w2points": 10,
+      "unlockedWave": 4,
+      "peakStanding": 199,
+      "peakGap": 1,
+      "endVsPeakDelta": 0,
+      "pin199End": true,
+      "pin199Peak": true,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:veterans",
+        "w4faced-missing"
+      ]
+    },
+    {
+      "seed": 76007,
+      "policy": "on",
+      "days": 120,
+      "endReason": "village-lost",
+      "waveReach": 4,
+      "gatedStanding": 199,
+      "distT5": 1,
+      "holdKind": "defer5",
+      "raw": 280,
+      "war": 100,
+      "diplomacy": 0,
+      "plenty": 180,
+      "capped": 200,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": true,
+      "w3rung": true,
+      "w2points": 6,
+      "unlockedWave": 4,
+      "peakStanding": 199,
+      "peakGap": 1,
+      "endVsPeakDelta": 0,
+      "pin199End": true,
+      "pin199Peak": true,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 2,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans"
+      ]
+    },
+    {
+      "seed": 76008,
+      "policy": "off",
+      "days": 171,
+      "endReason": "over-other",
+      "waveReach": 4,
+      "gatedStanding": 192,
+      "distT5": 8,
+      "holdKind": "below-bar",
+      "raw": 192,
+      "war": 50,
+      "diplomacy": 102,
+      "plenty": 40,
+      "capped": 192,
+      "rd5ready": false,
+      "rd5short": [
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": true,
+      "w2points": 5,
+      "unlockedWave": 4,
+      "peakStanding": 192,
+      "peakGap": 8,
+      "endVsPeakDelta": 0,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:veterans",
+        "w4faced-missing"
+      ]
+    },
+    {
+      "seed": 76008,
+      "policy": "on",
+      "days": 180,
+      "endReason": "survived",
+      "waveReach": 3,
+      "gatedStanding": 20,
+      "distT5": 180,
+      "holdKind": "below-bar",
+      "raw": 20,
+      "war": 0,
+      "diplomacy": 0,
+      "plenty": 20,
+      "capped": 20,
+      "rd5ready": false,
+      "rd5short": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5deficitBound": {
+        "armor": [
+          1,
+          4
+        ],
+        "weapons": [
+          1,
+          6
+        ],
+        "veterans": [
+          1,
+          2
+        ]
+      },
+      "w4faced": false,
+      "w3rung": true,
+      "w2points": 9,
+      "unlockedWave": 3,
+      "peakStanding": 99,
+      "peakGap": 101,
+      "endVsPeakDelta": -79,
+      "pin199End": false,
+      "pin199Peak": false,
+      "deedW5EndDist": 2,
+      "deedW5MaxDist": 2,
+      "deedW4EndCount": 0,
+      "blockers": [
+        "standing",
+        "readiness:armor",
+        "readiness:weapons",
+        "readiness:veterans",
+        "w4faced-missing"
+      ]
+    }
+  ],
+  "barCount": {
+    "armor": 11,
+    "weapons": 9,
+    "tricks": 0,
+    "veterans": 16
+  },
+  "byPolicy": {
+    "off": {
+      "n": 8,
+      "veteransShort": 8,
+      "armorShort": 4,
+      "weaponsShort": 2,
+      "tricksShort": 0,
+      "standingBlocked": 8,
+      "w4facedMissing": 5,
+      "w3rungMissing": 1,
+      "defer5": 1,
+      "belowBar": 7,
+      "medianDistT5": 73
+    },
+    "on": {
+      "n": 8,
+      "veteransShort": 8,
+      "armorShort": 7,
+      "weaponsShort": 7,
+      "tricksShort": 0,
+      "standingBlocked": 8,
+      "w4facedMissing": 2,
+      "w3rungMissing": 0,
+      "defer5": 2,
+      "belowBar": 6,
+      "medianDistT5": 100
+    }
+  },
+  "movement": [
+    {
+      "seed": 76001,
+      "rd5shortOff": [
+        "armor",
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 1,
+      "peakDelta": 72,
+      "distT5Delta": -72,
+      "w4facedOff": false,
+      "w4facedOn": true
+    },
+    {
+      "seed": 76002,
+      "rd5shortOff": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 0,
+      "peakDelta": 25,
+      "distT5Delta": 0,
+      "w4facedOff": true,
+      "w4facedOn": true
+    },
+    {
+      "seed": 76003,
+      "rd5shortOff": [
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 2,
+      "peakDelta": 98,
+      "distT5Delta": -1,
+      "w4facedOff": false,
+      "w4facedOn": true
+    },
+    {
+      "seed": 76004,
+      "rd5shortOff": [
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "veterans"
+      ],
+      "shortCountDelta": 1,
+      "peakDelta": -78,
+      "distT5Delta": 78,
+      "w4facedOff": true,
+      "w4facedOn": false
+    },
+    {
+      "seed": 76005,
+      "rd5shortOff": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 0,
+      "peakDelta": 40,
+      "distT5Delta": 42,
+      "w4facedOff": true,
+      "w4facedOn": true
+    },
+    {
+      "seed": 76006,
+      "rd5shortOff": [
+        "armor",
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 0,
+      "peakDelta": 110,
+      "distT5Delta": -110,
+      "w4facedOff": false,
+      "w4facedOn": true
+    },
+    {
+      "seed": 76007,
+      "rd5shortOff": [
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 2,
+      "peakDelta": 0,
+      "distT5Delta": 0,
+      "w4facedOff": false,
+      "w4facedOn": true
+    },
+    {
+      "seed": 76008,
+      "rd5shortOff": [
+        "veterans"
+      ],
+      "rd5shortOn": [
+        "armor",
+        "weapons",
+        "veterans"
+      ],
+      "shortCountDelta": 2,
+      "peakDelta": -93,
+      "distT5Delta": 172,
+      "w4facedOff": false,
+      "w4facedOn": false
+    }
+  ],
+  "seed76003": [
+    {
+      "policy": "off",
+      "peakStanding": 99,
+      "endGated": 99,
+      "endRaw": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "capped": 102,
+      "delta": 0
+    },
+    {
+      "policy": "on",
+      "peakStanding": 197,
+      "endGated": 100,
+      "endRaw": 95,
+      "war": 75,
+      "diplomacy": 0,
+      "plenty": 20,
+      "capped": 95,
+      "delta": -97
+    }
+  ],
+  "tallies": {
+    "standingGapRows": 16,
+    "w4facedMissing": 7,
+    "w3rungMissing": 1,
+    "defer5": 3,
+    "belowBar": 13,
+    "pin199End": 3,
+    "pin199Peak": 3,
+    "rd5readyAny": 0,
+    "unlockedWave5Any": 0
+  },
+  "corpusGap": "exact readiness counts (armored/armed/tricks/veterans) NOT recorded in corpus; deficits reported as bounded intervals only"
+}
