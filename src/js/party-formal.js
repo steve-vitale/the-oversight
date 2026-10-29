@@ -674,32 +674,52 @@
         if (!this.inParty || !this.inParty(vid)) return;
         if (!Array.isArray(choices)) return;
         const v = this.partyFormalState();
-        const item = !v.partyName
-          ? { id: 'party_name', label: '"We should name this. Us."' }
-          : { id: 'party_role', label: '"Let\'s talk roles."' };
-        if (choices.some(c => c.id === item.id)) return;
-        if (choices.length < MAXC) {
-          choices.push(item);
-          return;
+        const c = this.convoGet ? this.convoGet(vid) : null;
+        // JOURNEY SOCIAL r67 (2026-10-29): the name/role sub-menus must
+        // be offered by the menu itself, not only in one convoTurn
+        // return value. Before this fix the wrapper returned
+        // party_namepick:* / party_rolepick:* options that no menu
+        // builder ever reproduced, so chatChoice (which renders
+        // convoChoices, not the returned choices) never showed them:
+        // party_name was offered 192 times on one wild seed, added
+        // nothing to the transcript, and could never complete.
+        // While a sub-menu is pending, offer its picks INSTEAD of the
+        // opener, so the beat completes through the normal menu path.
+        let items;
+        if (!v.partyName && c && Array.isArray(c.pendingPartyNames) && c.pendingPartyNames.length) {
+          items = c.pendingPartyNames.map((n, i) => ({ id: 'party_namepick:' + i, label: `"${n}."` }));
+        } else if (!v.partyName) {
+          items = [{ id: 'party_name', label: '"We should name this. Us."' }];
+        } else if (c && c.pendingPartyRole) {
+          items = Object.keys(PARTY_ROLES).map(k => ({ id: 'party_rolepick:' + k, label: `${PARTY_ROLES[k].icon} ${PARTY_ROLES[k].name}` }));
+        } else {
+          items = [{ id: 'party_role', label: '"Let\'s talk roles."' }];
         }
-        // No room — but naming the party / assigning roles outranks small
-        // talk. Splice in near the top ('more'/invite territory), displace
-        // the last non-'leave' choice, keep 'leave' last and the list bounded.
-        // ASK-OTHERS PROTECTION (journey social r59, 2026-10-26): the trim
-        // used to eat 'ask:others' whenever a party member's subject menu
-        // ran long (r58: 1008 displaced probes, all in-party) — the
-        // village-talk verb is how the village remembers each other, and
-        // a one-tap party item must not outrank it. Victims skip
-        // 'ask:others': if every displaceable row is protected, the loop
-        // breaks and the menu keeps one extra row rather than losing the
-        // verb (reactive menus already vary MAXC, so one extra row is
-        // display-safe).
-        choices.splice(1, 0, item);
-        while (choices.length > MAXC) {
-          let rm = choices.length - 1;
-          while (rm > 1 && (choices[rm].id === 'leave' || choices[rm].id === 'ask:others')) rm--;
-          if (rm <= 1) break;
-          choices.splice(rm, 1);
+        for (const item of items) {
+          if (choices.some(ch => ch.id === item.id)) continue;
+          if (choices.length < MAXC) {
+            choices.push(item);
+            continue;
+          }
+          // No room — but naming the party / assigning roles outranks small
+          // talk. Splice in near the top ('more'/invite territory), displace
+          // the last non-'leave' choice, keep 'leave' last and the list bounded.
+          // ASK-OTHERS PROTECTION (journey social r59, 2026-10-26): the trim
+          // used to eat 'ask:others' whenever a party member's subject menu
+          // ran long (r58: 1008 displaced probes, all in-party) — the
+          // village-talk verb is how the village remembers each other, and
+          // a one-tap party item must not outrank it. Victims skip
+          // 'ask:others': if every displaceable row is protected, the loop
+          // breaks and the menu keeps one extra row rather than losing the
+          // verb (reactive menus already vary MAXC, so one extra row is
+          // display-safe).
+          choices.splice(1, 0, item);
+          while (choices.length > MAXC) {
+            let rm = choices.length - 1;
+            while (rm > 1 && (choices[rm].id === 'leave' || choices[rm].id === 'ask:others')) rm--;
+            if (rm <= 1) break;
+            choices.splice(rm, 1);
+          }
         }
       } catch (e) {}
     },
@@ -728,9 +748,15 @@
         if (!name) return { line: '"...Never mind."', youSaid: null };
         const r = this.nameParty(name);
         try { this.convoDeepTick(vid); } catch (e) {}
+        // r67: a completed pick clears the pending sub-menu, so the menu
+        // stops offering name picks and moves on to roles.
+        if (r.ok) c.pendingPartyNames = null;
         return { line: r.ok ? null : r.msg, youSaid: `"${name}."` };
       }
       if (choiceId === 'party_role') {
+        // r67: remember the open sub-menu so the menu builder can offer
+        // the role picks on the next render (see partyConvoChoices).
+        c.pendingPartyRole = true;
         const roles = Object.keys(PARTY_ROLES).map(k => {
           const holder = Object.keys(v.partyRoles).find(id => v.partyRoles[id] === k);
           const held = holder && holder !== vid ? ` (held by ${this.displayName(holder).split(' ')[0]})` : '';
@@ -748,6 +774,8 @@
         const role = choiceId.split(':')[1];
         const r = this.assignRole(vid, role);
         try { this.convoDeepTick(vid); } catch (e) {}
+        // r67: a completed pick clears the pending sub-menu.
+        if (r.ok) c.pendingPartyRole = false;
         return { line: r.ok ? null : r.msg, youSaid: `"${role}."` };
       }
       return null;
@@ -983,6 +1011,16 @@
       try { if (typeof this.convoDropUnspoken === 'function') this.convoDropUnspoken(vid, choiceId); } catch (e) {}
       const res = this.partyConvoTurn(vid, choiceId, c);
       if (!res) return origConvoTurn.call(this, vid, choiceId);
+      // r67: the beat must ENTER the transcript. Before this fix the
+      // wrapper returned the line without appending it, so chatChoice —
+      // which anchors on transcript entries — re-landed on the previous
+      // message and the tap looked dead (192 such turns on one wild
+      // seed). Append your line, then theirs, exactly as the dialogue
+      // handlers do for their own beats.
+      try {
+        if (res.youSaid) c.transcript.push({ who: 'you', text: res.youSaid });
+        if (res.line) c.transcript.push({ who: 'them', text: res.line });
+      } catch (e) {}
       // name-pick / role-pick present sub-choices instead of ending the beat
       if (res._partyNamePick) {
         const opts = (c.pendingPartyNames || []).map((n, i) => ({ id: 'party_namepick:' + i, label: `"${n}."` }));

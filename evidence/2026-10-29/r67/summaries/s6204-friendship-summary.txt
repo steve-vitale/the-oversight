@@ -1,0 +1,315 @@
+# SURFACE+SEEDED — seed 6204 (141d, 9 alive)
+
+npcPairs=65 deep2=37 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=250 closeReadsServed=20 grievanceServes=16 othersSteered=24
+COND-TP: firstDeep2Day=25 lateClose=159 lateTP=150 lateNull=0 condRate=94.3% pooledTP=150/170 pooledRate=88.2% grievReadsByWhy={"grievance":51,"vgrievance":14}
+FUNNEL (natural): convos=414 subject=414 offered=369 picked=226 classes={"picked-others":226,"offered-not-picked":143,"subject-no-offer":45}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=45 rate=10.9% offered=369 mainOffered=0 subjectOffered=369 picked=226 latePicks=86 latePicksMain=0 latePicksSubject=86
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Obsa / Yara — "Theo sees in the dark. Not well — but better than you. Better than me."
+  KNACK-CIRCULATION: Yara / Ingrid — "Naran talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Ingrid / Yara / Priya — "Ray ate something last month that should've killed them. They're fine."
+REOFFER: offers=367 picks=239 latePicks=86 missedChangedNotOffered=2
+WRAPSERVE: convos=65 matcherHits=16 matcherServes=16 classes={"grievance-line":16,"deflection":3,"other":46}
+FUNNEL-PROBE (subject-no-offer turns): turns=153 menuProblem=145 pickProblem=8
+INVITE (wrap, carried from r63): lure={"n":3,"accepts":1,"acceptRate":0.3333333333333333,"vetoes":{},"chanceMin":37,"chanceMax":47,"chanceMean":40.3} party={"n":12,"accepts":5,"acceptRate":0.4166666666666667,"vetoes":{},"chanceMin":5,"chanceMax":76.80000000000001,"chanceMean":48.3} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=1
+FAVOR (r65): funnel={"offers":42,"forageOffers":15,"otherFavorOffers":27,"accepts":15,"acceptAttempts":15,"waits":19,"starts":2,"startBlocked":24,"forages":0,"forageNodeBarren":0,"forageBarren":87,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"keptMatched":3}
+OUTING END STATES: [{"vid":"priya_nair","vidName":"Priya","favorId":"favor-priya_nair-102-32","state":"acknowledged","promisedDay":102,"meetDay":103,"deadline":104,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"yara_haddad","vidName":"Yara","favorId":"favor-yara_haddad-105-36","state":"acknowledged","promisedDay":105,"meetDay":106,"deadline":107,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"theo_lindqvist","vidName":"Theo","favorId":"favor-theo_lindqvist-92-28","state":"broken","promisedDay":92,"meetDay":93,"deadline":94,"promiseKept":true,"startedDay":93,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d5: Sung kind=forage_help favorId=favor-gen_jlcvi3w-5-1 task=forage with Sung tomorrow to rebuild the pantry
+  FAVOR-OFFER d6: Priya kind=sick_help favorId=favor-priya_nair-6-2 task=help Priya with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d7: Yara kind=heal_help favorId=favor-yara_haddad-7-3 task=help Yara with their injury
+  FAVOR-OFFER d8: Yara kind=heal_help favorId=favor-yara_haddad-8-4 task=help Yara with their injury
+  FAVOR-OFFER d9: Priya kind=sick_help favorId=favor-priya_nair-9-6 task=help Priya with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d10: Theo kind=forage_help favorId=favor-theo_lindqvist-10-7 task=forage with Theo tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: Caitlin kind=forage_help favorId=favor-gen_gckmffg-9-5 task=forage with Caitlin tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Ray kind=heal_help favorId=favor-gen_7g9tcu5-16-8 task=help Ray with their injury
+  FAVOR-OFFER d16: Naran kind=forage_help favorId=favor-naran_tumen-16-9 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Ray kind=sick_help favorId=favor-gen_7g9tcu5-21-10 task=help Ray with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d21: Theo kind=heal_help favorId=favor-theo_lindqvist-21-11 task=help Theo with their injury
+  FAVOR-OFFER d25: Caitlin kind=heal_help favorId=favor-gen_gckmffg-25-12 task=help Caitlin with their injury
+  FAVOR-OFFER d25: Theo kind=food_share favorId=favor-theo_lindqvist-25-13 task=share food with Theo — they're running on empty
+  FAVOR-OFFER d27: Ray kind=forage_help favorId=favor-gen_7g9tcu5-27-14 task=forage with Ray tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Caitlin kind=heal_help favorId=favor-gen_gckmffg-28-15 task=help Caitlin with their injury
+  FAVOR-OFFER d30: Theo kind=forage_help favorId=favor-theo_lindqvist-30-16 task=forage with Theo tomorrow to rebuild the pantry
+  FAVOR-OFFER d36: Caitlin kind=forage_help favorId=favor-gen_gckmffg-36-17 task=forage with Caitlin tomorrow to rebuild the pantry
+  FAVOR-OFFER d40: Caitlin kind=forage_help favorId=favor-gen_gckmffg-40-18 task=forage with Caitlin tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Yara kind=sick_help favorId=favor-yara_haddad-44-19 task=help Yara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d49: Caitlin kind=food_share favorId=favor-gen_gckmffg-49-20 task=share food with Caitlin — they're going hungry
+  FAVOR-OFFER d53: Caitlin kind=food_share favorId=favor-gen_gckmffg-53-21 task=share food with Caitlin — they're going hungry
+  FAVOR-OFFER d66: Naran kind=heal_help favorId=favor-naran_tumen-66-23 task=help Naran with their injury
+  FAVOR-OFFER d68: Sung kind=heal_help favorId=favor-gen_jlcvi3w-65-22 task=help Sung with their injury
+  FAVOR-OFFER d73: Yara kind=water_haul favorId=favor-yara_haddad-73-25 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d83: Sergio kind=heal_help favorId=favor-gen_6kosaf8-83-26 task=help Sergio with their injury
+  FAVOR-OFFER d91: Naran kind=food_share favorId=favor-naran_tumen-89-27 task=share food with Naran — they're running on empty
+  FAVOR-OFFER d92: Theo kind=forage_help favorId=favor-theo_lindqvist-92-28 task=forage with Theo tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Ray kind=food_share favorId=favor-gen_7g9tcu5-92-29 task=share food with Ray — they're past hungry
+  FAVOR-OFFER d94: Priya kind=forage_help favorId=favor-priya_nair-93-30 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d100: Ray kind=food_share favorId=favor-gen_7g9tcu5-99-31 task=share food with Ray — they're past hungry
+  FAVOR-OFFER d102: Priya kind=forage_help favorId=favor-priya_nair-102-32 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d102: Yara kind=forage_help favorId=favor-yara_haddad-102-33 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d103: Ray kind=food_share favorId=favor-gen_7g9tcu5-103-34 task=share food with Ray — they're running on empty
+  FAVOR-OFFER d103: Naran kind=forage_help favorId=favor-naran_tumen-103-35 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d105: Yara kind=forage_help favorId=favor-yara_haddad-105-36 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d107: Sergio kind=heal_help favorId=favor-gen_6kosaf8-107-37 task=help Sergio with their injury
+  FAVOR-OFFER d108: Sergio kind=heal_help favorId=favor-gen_6kosaf8-108-38 task=help Sergio with their injury
+  FAVOR-OFFER d109: Naran kind=food_share favorId=favor-naran_tumen-109-39 task=share food with Naran — they're running on empty
+  FAVOR-OFFER d112: Ray kind=food_share favorId=favor-gen_7g9tcu5-112-40 task=share food with Ray — they're going hungry
+  FAVOR-OFFER d116: Ray kind=forage_help favorId=favor-gen_7g9tcu5-115-41 task=forage with Ray tomorrow to rebuild the pantry
+  FAVOR-OFFER d121: Ray kind=sick_help favorId=favor-gen_7g9tcu5-121-42 task=help Ray with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d124: Ray kind=food_share favorId=favor-gen_7g9tcu5-124-43 task=share food with Ray — they're going hungry
+  FAVOR-ACCEPT d5: Sung favorId=favor-gen_jlcvi3w-5-1 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d10: Theo favorId=favor-theo_lindqvist-10-7 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d11: Caitlin favorId=favor-gen_gckmffg-9-5 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d16: Naran favorId=favor-naran_tumen-16-9 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d27: Ray favorId=favor-gen_7g9tcu5-27-14 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d30: Theo favorId=favor-theo_lindqvist-30-16 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d36: Caitlin favorId=favor-gen_gckmffg-36-17 accepted=true state=promised meetDay=37
+  FAVOR-ACCEPT d40: Caitlin favorId=favor-gen_gckmffg-40-18 accepted=true state=promised meetDay=41
+  FAVOR-ACCEPT d92: Theo favorId=favor-theo_lindqvist-92-28 accepted=true state=promised meetDay=93
+  FAVOR-ACCEPT d94: Priya favorId=favor-priya_nair-93-30 accepted=true state=promised meetDay=95
+  FAVOR-ACCEPT d102: Priya favorId=favor-priya_nair-102-32 accepted=true state=promised meetDay=103
+  FAVOR-ACCEPT d102: Yara favorId=favor-yara_haddad-102-33 accepted=true state=promised meetDay=103
+  FAVOR-ACCEPT d103: Naran favorId=favor-naran_tumen-103-35 accepted=true state=promised meetDay=104
+  FAVOR-ACCEPT d105: Yara favorId=favor-yara_haddad-105-36 accepted=true state=promised meetDay=106
+  FAVOR-ACCEPT d116: Ray favorId=favor-gen_7g9tcu5-115-41 accepted=true state=promised meetDay=117
+  INVITE-DEC d8 party: Mariana -> Ray chance=53 accept=true veto=- inputs={"temp":"mischievous","goal":"prove","mood":"steady","fear":0,"trust":45,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 45"]
+  INVITE-DEC d8 party: Mariana -> Yara chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":0,"trust":26,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 26","sick (-20)","cautious temperament (-10)","wants to be alone (-40)"]
+  INVITE-DEC d8 lure: Sigrun -> Sergio chance=37 accept=false veto=- inputs={"temp":"restless","goal":"alone","mood":"steady","fear":4,"affinity":29} reasons=["relationship with inviter (+7)","restless temperament (+10)","wants to be alone (-25)"]
+  INVITE-DEC d9 party: Mariana -> Naran chance=47 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"hungry","fear":4,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30"]
+  INVITE-DEC d9 lure: Sigrun -> Sergio chance=37 accept=false veto=- inputs={"temp":"restless","goal":"alone","mood":"steady","fear":0,"affinity":29} reasons=["relationship with inviter (+7)","restless temperament (+10)","wants to be alone (-25)"]
+  INVITE-DEC d10 lure: Sigrun -> Sergio chance=47 accept=true veto=- inputs={"temp":"restless","goal":"alone","mood":"lonely","fear":0,"affinity":29} reasons=["relationship with inviter (+7)","restless temperament (+10)","wants to be alone (-25)","lonely mood (+10)"]
+  INVITE-DEC d15 party: Mariana -> Theo chance=35.2 accept=false veto=- inputs={"temp":"restless","goal":"alone","mood":"steady","fear":0,"trust":63,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 63","a big party is safer (+5)","restless temperament (+10)","wants to be alone (-40)"]
+  INVITE-DEC d15 party: Mariana -> Caitlin chance=76 accept=true veto=- inputs={"temp":"stoic","goal":"record","mood":"steady","fear":0,"trust":90,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 90","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Mariana -> Naran chance=62 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"steady","fear":4,"trust":55,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 55","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Mariana -> Sergio chance=46 accept=true veto=- inputs={"temp":"restless","goal":"alone","mood":"steady","fear":4,"trust":90,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","restless temperament (+10)","wants to be alone (-40)"]
+  INVITE-DEC d83 party: Sung -> Yara chance=16 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":5,"trust":90,"bond":{"v":21,"depth":0},"partySize":3} reasons=["trust 90","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d84 party: Sung -> Obsa chance=76.80000000000001 accept=false veto=- inputs={"temp":"fidgety","goal":"lead","mood":"grieving","fear":0,"trust":92,"bond":{"v":44,"depth":1},"partySize":3} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d84 party: Sung -> Theo chance=48.400000000000006 accept=true veto=- inputs={"temp":"restless","goal":"alone","mood":"grieving","fear":0,"trust":96,"bond":{"v":28,"depth":1},"partySize":3} reasons=["trust 96","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d86 party: Sung -> Priya chance=37.599999999999994 accept=false veto=- inputs={"temp":"intense","goal":"alone","mood":"steady","fear":4,"trust":94,"bond":{"v":15,"depth":0},"partySize":4} reasons=["trust 94","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d86 party: Sung -> Naran chance=76 accept=true veto=- inputs={"temp":"dry","goal":"home","mood":"steady","fear":4,"trust":90,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":24,"v":38,"depth":2},{"day":25,"v":40,"depth":2},{"day":26,"v":40,"depth":2},{"day":27,"v":40,"depth":2},{"day":28,"v":40,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":48,"depth":2},{"day":31,"v":48,"depth":2},{"day":32,"v":48,"depth":2},{"day":33,"v":50,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":50,"depth":3},{"day":36,"v":56,"depth":3},{"day":37,"v":56,"depth":3}] class=no-drop
+GOSSIP: totalPicks=278 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=41 31-60=49 61-90=50 91-120=51 121+=35 naturalPicks=226 seededPicks=24 gossipPicks=278
+SEEDED: {"pair":{"a":"gen_gckmffg","b":"ingrid_vik","aName":"Caitlin","bName":"Ingrid"},"day":23,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":24,"v":38,"depth":2},{"day":25,"v":40,"depth":2},{"day":26,"v":40,"depth":2},{"day":27,"v":40,"depth":2},{"day":28,"v":40,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":48,"depth":2},{"day":31,"v":48,"depth":2},{"day":32,"v":48,"depth":2},{"day":33,"v":50,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":50,"depth":3},{"day":36,"v":56,"depth":3},{"day":37,"v":56,"depth":3}],"crackTraceClass":"no-drop","vAt7":48,"depthAt7":2,"vDrop":2,"depthDrop":0,"crack7":false,"firstServe":{"day":25,"why":"grievance"},"serveWithin30":true,"serves":50,"servesAll":[{"day":25,"why":"grievance"},{"day":25,"why":"grievance"},{"day":26,"why":"grievance"},{"day":27,"why":"grievance"},{"day":28,"why":"grievance"},{"day":29,"why":"grievance"},{"day":31,"why":"grievance"},{"day":32,"why":"grievance"},{"day":32,"why":"grievance"},{"day":33,"why":"grievance"},{"day":33,"why":"grievance"},{"day":34,"why":"grievance"},{"day":35,"why":"grievance"},{"day":35,"why":"grievance"},{"day":36,"why":"grievance"},{"day":37,"why":"grievance"},{"day":38,"why":"grievance"},{"day":39,"why":"grievance"},{"day":40,"why":"grievance"},{"day":41,"why":"grievance"},{"day":43,"why":"grievance"},{"day":44,"why":"grievance"},{"day":44,"why":"grievance"},{"day":45,"why":"grievance"},{"day":48,"why":"grievance"},{"day":49,"why":"grievance"},{"day":50,"why":"grievance"},{"day":50,"why":"grievance"},{"day":51,"why":"grievance"},{"day":52,"why":"grievance"},{"day":53,"why":"grievance"},{"day":55,"why":"grievance"},{"day":59,"why":"grievance"},{"day":65,"why":"grievance"},{"day":66,"why":"grievance"},{"day":68,"why":"grievance"},{"day":79,"why":"vgrievance"},{"day":82,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":93,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":101,"why":"vgrievance"},{"day":108,"why":"vgrievance"},{"day":109,"why":"vgrievance"},{"day":117,"why":"vgrievance"},{"day":125,"why":"vgrievance"},{"day":126,"why":"vgrievance"},{"day":133,"why":"vgrievance"},{"day":135,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Ray <> Caitlin — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Sergio <> Caitlin — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Sergio <> Obsa — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Caitlin <> Obsa — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Caitlin <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Sergio <> Theo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Obsa <> Theo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Caitlin <> Theo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Ingrid <> Theo — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d30: Caitlin <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Naran <> Theo — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d65: Caitlin <> Priya — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d35: Caitlin <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Theo <> Yara — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d110: Ray <> Theo — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d25: Caitlin <> Ingrid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Ingrid <> Naran — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d60: Naran <> Sigrun — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d35: Caitlin <> Sung — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d90: Sergio <> Ray — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Ray <> Yara — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d120: Obsa <> Yara — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d115: Sergio <> Naran — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d90: Sergio <> Yara — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d130: Sergio <> Ingrid — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d130: Obsa <> Naran — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d120: Ray <> Naran — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d105: Ingrid <> Yara — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d140: Ray <> Ingrid — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d120: Obsa <> Ingrid — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d110: Ray <> Obsa — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d140: Ray <> Priya — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d85: Mariana <> Theo — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d85: Sergio <> Mariana — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d85: Ray <> Mariana — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d85: Caitlin <> Mariana — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Mariana <> Priya — maxDepth 2, final 2 (v=52), dropped 0
+  CLOSE-READ d16: Ray about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Sung about Caitlin — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Ray about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Sung about Caitlin — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d19: Sigrun about Caitlin — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Yara about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Ray about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Theo about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Theo about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Sergio about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Obsa about Caitlin — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Theo about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Theo about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Ray about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Sung about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Sung about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Yara about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Sung about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Yara about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Naran about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Ray about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Sergio about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Theo about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Sung about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Theo about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Sigrun about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Ray about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Sung about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Ray about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Sung about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Ray about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Naran about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Sigrun about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Obsa about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Sung about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Ray about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Priya about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Sergio about Caitlin — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Priya about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Ray about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Priya about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Sung about Caitlin — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Sigrun about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Naran about Caitlin — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Obsa about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Sung about Caitlin — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Sergio about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Priya about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Priya about Caitlin — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d61: Priya about Caitlin — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Sigrun about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Sergio about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Sigrun about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Priya about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Sigrun about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Priya about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Priya about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ingrid about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Sung about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Sergio about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Theo about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Priya about Caitlin — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Ingrid about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ingrid about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Sergio about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ingrid about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Sergio about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Priya about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Ingrid about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Ingrid about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Yara about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Naran about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Obsa about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Theo about Sergio — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Priya about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ray about Caitlin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d4: Ray about Sergio (why=grievance)
+  GRIEV-READ d6: Ingrid about Caitlin (why=grievance)
+  GRIEV-READ d11: Caitlin about Ingrid (why=grievance)
+  GRIEV-READ d15: Caitlin about Ingrid (why=grievance)
+  GRIEV-READ d20: Ingrid about Caitlin (why=grievance)
+  GRIEV-READ d22: Caitlin about Ingrid (why=grievance)
+  KNACK d4 A man, maybe 50s: "Priya talks to the garden. The garden listens. I've seen it."
+  KNACK d5 Sung: "that stray dog — the one that bit two people — lets Caitlin touch it."
+  KNACK d14 Ray: "Well — Sigrun talks to the garden. The garden listens. I've seen it."
+  KNACK d15 Theo: "Sigrun talks to the garden. The garden listens. I've seen it."
+  KNACK d17 Obsa: "Good question." "cuts close faster when Sung wraps them. Don't ask me how."
+  KNACK d17 Obsa: "Theo sees in the dark. Not well — but better than you. Better than me."
+  KNACK d21 Obsa: "Ingrid talks to the garden. The garden listens. I've seen it."
+  KNACK d27 Yara: "Naran talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"alien":1,"betrayal":1}

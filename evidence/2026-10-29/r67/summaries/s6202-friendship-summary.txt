@@ -1,0 +1,303 @@
+# SURFACE+SEEDED — seed 6202 (143d, 9 alive)
+
+npcPairs=49 deep2=30 cracks=0 vCracks=0 friendGriev=0 stateGriev=10 stateFriend=0 stateVCrack=0 t2picks=259 closeReadsServed=26 grievanceServes=38 othersSteered=18
+COND-TP: firstDeep2Day=30 lateClose=190 lateTP=170 lateNull=0 condRate=89.5% pooledTP=170/200 pooledRate=85.0% grievReadsByWhy={"grievance":7,"vgrievance":40}
+FUNNEL (natural): convos=414 subject=400 offered=338 picked=241 classes={"subject-no-offer":62,"no-subject-no-ans":14,"offered-not-picked":97,"picked-others":241}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=62 rate=15.0% offered=338 mainOffered=0 subjectOffered=338 picked=241 latePicks=103 latePicksMain=0 latePicksSubject=103
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Mia / Vikram — "Valeria ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Leah / Davut — "Mia found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Brian / Vikram — "that stray dog — the one that bit two people — lets Saul touch it."
+REOFFER: offers=335 picks=249 latePicks=103 missedChangedNotOffered=2
+WRAPSERVE: convos=47 matcherHits=38 matcherServes=38 classes={"grievance-line":38,"deflection":2,"other":7}
+FUNNEL-PROBE (subject-no-offer turns): turns=186 menuProblem=165 pickProblem=21
+INVITE (wrap, carried from r63): lure={"n":7,"accepts":5,"acceptRate":0.7142857142857143,"vetoes":{},"chanceMin":35,"chanceMax":70,"chanceMean":58.1} party={"n":8,"accepts":4,"acceptRate":0.5,"vetoes":{},"chanceMin":17.799999999999997,"chanceMax":71.6,"chanceMean":43.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":18,"forageOffers":4,"otherFavorOffers":14,"accepts":4,"acceptAttempts":4,"waits":5,"starts":0,"startBlocked":8,"forages":0,"forageNodeBarren":0,"forageBarren":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"keptMatched":1}
+OUTING END STATES: [{"vid":"mia_andersson","vidName":"Mia","favorId":"favor-mia_andersson-17-5","state":"acknowledged","promisedDay":17,"meetDay":18,"deadline":19,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Boris kind=forage_help favorId=favor-boris_kowalski-6-1 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d8: Jorge kind=forage_help favorId=favor-jorge_silva-8-2 task=forage with Jorge tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Clara kind=sick_help favorId=favor-gen_ldqa3x4-14-3 task=help Clara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d15: Clara kind=food_share favorId=favor-gen_ldqa3x4-15-4 task=share food with Clara — they're past hungry
+  FAVOR-OFFER d17: Mia kind=forage_help favorId=favor-mia_andersson-17-5 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d27: Valeria kind=forage_help favorId=favor-valeria_quispe-27-6 task=forage with Valeria tomorrow to rebuild the pantry
+  FAVOR-OFFER d121: Brian kind=sick_help favorId=favor-brian_otieno-121-7 task=help Brian with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d129: Brian kind=water_haul favorId=favor-brian_otieno-129-9 task=bring four liters home from the creek with Brian; set out at dawn
+  FAVOR-OFFER d129: Jorge kind=water_haul favorId=favor-jorge_silva-129-10 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-OFFER d133: Jorge kind=water_haul favorId=favor-jorge_silva-133-11 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-OFFER d133: Saul kind=water_haul favorId=favor-gen_tud2gao-133-12 task=bring four liters home from the creek with Saul; set out at dawn
+  FAVOR-OFFER d133: Brian kind=water_haul favorId=favor-brian_otieno-133-13 task=bring four liters home from the creek with Brian; set out at dawn
+  FAVOR-OFFER d135: Boris kind=water_haul favorId=favor-boris_kowalski-135-14 task=bring four liters home from the creek with Boris; set out at dawn
+  FAVOR-OFFER d140: Jorge kind=water_haul favorId=favor-jorge_silva-140-15 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-OFFER d141: Saul kind=water_haul favorId=favor-gen_tud2gao-141-16 task=bring four liters home from the creek with Saul; set out at dawn
+  FAVOR-OFFER d142: Valeria kind=water_haul favorId=favor-valeria_quispe-142-17 task=bring four liters home from the creek with Valeria; set out at dawn
+  FAVOR-OFFER d142: Davut kind=water_haul favorId=favor-gen_se86npj-142-18 task=bring four liters home from the creek with Davut; set out at dawn
+  FAVOR-OFFER d143: Jorge kind=water_haul favorId=favor-jorge_silva-143-19 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-ACCEPT d6: Boris favorId=favor-boris_kowalski-6-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d8: Jorge favorId=favor-jorge_silva-8-2 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d17: Mia favorId=favor-mia_andersson-17-5 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d27: Valeria favorId=favor-valeria_quispe-27-6 accepted=true state=promised meetDay=28
+  INVITE-DEC d7 lure: Clara -> Diana chance=70 accept=true veto=- inputs={"temp":"bold","goal":"feed","mood":"steady","fear":4,"affinity":0} reasons=["bold temperament (+15)","feed goal (+10)"]
+  INVITE-DEC d8 party: Camila -> Vikram chance=65.4 accept=true veto=- inputs={"temp":"restless","goal":"heal","mood":"steady","fear":4,"trust":51,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 51","restless temperament (+10)"]
+  INVITE-DEC d8 lure: Clara -> Diana chance=70 accept=true veto=- inputs={"temp":"bold","goal":"feed","mood":"steady","fear":0,"affinity":0} reasons=["bold temperament (+15)","feed goal (+10)"]
+  INVITE-DEC d9 party: Camila -> Brian chance=39 accept=false veto=- inputs={"temp":"gentle","goal":"peace","mood":"grieving","fear":13,"trust":35,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 35","grieving mood (-10)"]
+  INVITE-DEC d10 lure: Leah -> Boris chance=35 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":4,"affinity":1} reasons=["grieving mood (-10)"]
+  INVITE-DEC d13 party: Camila -> Brian chance=52.6 accept=false veto=- inputs={"temp":"gentle","goal":"peace","mood":"steady","fear":4,"trust":44,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 44"]
+  INVITE-DEC d14 party: Camila -> Jorge chance=17.799999999999997 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":12,"trust":57,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 57","wants to be alone (-40)"]
+  INVITE-DEC d15 party: Camila -> Jorge chance=19 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":12,"trust":60,"bond":{"v":14,"depth":0},"partySize":2} reasons=["trust 60","wants to be alone (-40)"]
+  INVITE-DEC d18 party: Camila -> Brian chance=54.2 accept=true veto=- inputs={"temp":"gentle","goal":"peace","mood":"steady","fear":12,"trust":48,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 48"]
+  INVITE-DEC d18 party: Camila -> Jorge chance=27.599999999999994 accept=true veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":12,"trust":69,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d31 lure: Vikram -> Leah chance=58 accept=true veto=- inputs={"temp":"sardonic","goal":"family","mood":"steady","fear":4,"affinity":51} reasons=["relationship with inviter (+13)"]
+  INVITE-DEC d32 party: Camila -> Valeria chance=71.6 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":12,"trust":54,"bond":{"v":25,"depth":1},"partySize":4} reasons=["trust 54","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d32 lure: Vikram -> Leah chance=58 accept=false veto=- inputs={"temp":"sardonic","goal":"family","mood":"steady","fear":4,"affinity":51} reasons=["relationship with inviter (+13)"]
+  INVITE-DEC d33 lure: Vikram -> Leah chance=58 accept=false veto=- inputs={"temp":"sardonic","goal":"family","mood":"steady","fear":4,"affinity":51} reasons=["relationship with inviter (+13)"]
+  INVITE-DEC d34 lure: Vikram -> Leah chance=58 accept=true veto=- inputs={"temp":"sardonic","goal":"family","mood":"steady","fear":4,"affinity":51} reasons=["relationship with inviter (+13)"]
+SEEDED-DAILY: [{"day":28,"v":42,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":44,"depth":2},{"day":31,"v":44,"depth":2},{"day":32,"v":44,"depth":2},{"day":33,"v":44,"depth":2},{"day":34,"v":44,"depth":2},{"day":35,"v":46,"depth":2},{"day":37,"v":48,"depth":2},{"day":38,"v":48,"depth":2},{"day":39,"v":50,"depth":3},{"day":40,"v":54,"depth":3},{"day":41,"v":58,"depth":3}] class=no-drop
+GOSSIP: totalPicks=225 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=25 31-60=60 61-90=53 91-120=53 121+=50 naturalPicks=241 seededPicks=18 gossipPicks=225
+SEEDED: {"pair":{"a":"gen_jauvx6k","b":"gen_ndh3g00","aName":"Vikram","bName":"Leah"},"day":27,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":28,"v":42,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":44,"depth":2},{"day":31,"v":44,"depth":2},{"day":32,"v":44,"depth":2},{"day":33,"v":44,"depth":2},{"day":34,"v":44,"depth":2},{"day":35,"v":46,"depth":2},{"day":37,"v":48,"depth":2},{"day":38,"v":48,"depth":2},{"day":39,"v":50,"depth":3},{"day":40,"v":54,"depth":3},{"day":41,"v":58,"depth":3}],"crackTraceClass":"no-drop","vAt7":44,"depthAt7":2,"vDrop":6,"depthDrop":0,"crack7":false,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":40,"servesAll":[{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":92,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":100,"why":"vgrievance"},{"day":103,"why":"vgrievance"},{"day":117,"why":"vgrievance"},{"day":124,"why":"vgrievance"},{"day":130,"why":"vgrievance"},{"day":133,"why":"vgrievance"},{"day":139,"why":"vgrievance"},{"day":140,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Vikram <> Saul — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Vikram <> Leah — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Leah <> Saul — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Davut <> Saul — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Brian <> Vikram — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Brian <> Davut — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d40: Saul <> Mia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Boris <> Davut — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d60: Boris <> Vikram — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Vikram <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Brian <> Saul — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Boris <> Saul — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Saul <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Vikram <> Davut — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Boris <> Valeria — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d120: Brian <> Jorge — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d80: Boris <> Jorge — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d40: Leah <> Davut — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Vikram <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Davut <> Mia — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d80: Vikram <> Mia — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d110: Boris <> Leah — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d70: Saul <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Boris <> Brian — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d80: Leah <> Mia — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d120: Brian <> Valeria — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d100: Leah <> Jorge — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d125: Davut <> Jorge — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d95: Brian <> Leah — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d125: Brian <> Mia — maxDepth 2, final 2 (v=50), dropped 0
+  CLOSE-READ d17: Vikram about Saul — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Saul about Vikram — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Mia about Saul — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Vikram about Leah — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Leah about Vikram — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Saul about Vikram — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Jorge about Vikram — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Jorge about Vikram — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Brian about Vikram — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Jorge about Vikram — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Valeria about Saul — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Brian about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Jorge about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Brian about Saul — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Saul about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Brian about Saul — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Brian about Saul — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Jorge about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Jorge about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d41: Valeria about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Jorge about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Brian about Saul — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Brian about Saul — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Brian about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Valeria about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Brian about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Brian about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d50: Valeria about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Brian about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Leah about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Brian about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Valeria about Saul — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Mia about Saul — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Brian about Saul — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Brian about Saul — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Jorge about Vikram — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Jorge about Vikram — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Brian about Saul — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Valeria about Saul — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Jorge about Vikram — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Mia about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Valeria about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Valeria about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Valeria about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Mia about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Boris about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Leah about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Jorge about Vikram — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Leah about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Davut about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Brian about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Valeria about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Mia about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Davut about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Boris about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Boris about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Davut about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Davut about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Mia about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Jorge about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Davut about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Leah about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Mia about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Davut about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Brian about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d141: Saul about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d142: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d142: Valeria about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d143: Boris about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d143: Jorge about Vikram — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d20: Boris about Davut (why=grievance)
+  GRIEV-READ d28: Vikram about Leah (why=vgrievance)
+  GRIEV-READ d28: Vikram about Leah (why=vgrievance)
+  GRIEV-READ d31: Vikram about Leah (why=vgrievance)
+  GRIEV-READ d32: Vikram about Leah (why=vgrievance)
+  GRIEV-READ d32: Davut about Boris (why=grievance)
+  KNACK d27 Valeria: "Good question." "Brian found a lost knife by smell last week. By SMELL."
+  KNACK d38 Valeria: "Good question." "that stray dog — the one that bit two people — lets Jorge touch it. Good talking."
+  KNACK d40 Mia: "Valeria ate something last month that should've killed them. They're fine."
+  KNACK d41 Vikram: "You want to know about that? Okay." "Davut talks to the garden. The garden listens. I've seen it."
+  KNACK d43 Leah: "Mia found a lost knife by smell last week. By SMELL."
+  KNACK d47 Davut: "Vikram ate something last month that should've killed them. They're fine."
+  KNACK d48 Mia: "Huh. Let me think about that." "Boris talks to the garden. The garden listens. I've seen it."
+  KNACK d51 Mia: "that stray dog — the one that bit two people — lets Jorge touch it."
+
+deathCauses: {"ambush":1,"Choir Toad":1}

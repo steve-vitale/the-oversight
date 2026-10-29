@@ -5043,6 +5043,13 @@
       // (endConvo resets inv.spoken), not in this hold — clearing it here
       // preserves that design and kills the double-serve.
       c.invitePending = null;
+      // PARTY SUB-MENUS (journey-social r67 2026-10-29): a name/role
+      // pick pending from an earlier sitting must not leak into a fresh
+      // sitting's menu without its spoken beat. partyConvoChoices only
+      // offers picks while these are set, so clearing here is the
+      // staleness guard (same pattern as invitePending above).
+      c.pendingPartyNames = null;
+      c.pendingPartyRole = false;
       // PER-SITTING said-lines (journey-social r16 2026-10-15): the
       // no-repeat ledger (c.saidLines) persists across sittings by design
       // (pool draws rely on it), but the "I just said" fallback is only

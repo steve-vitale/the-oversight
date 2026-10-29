@@ -1,0 +1,389 @@
+# SURFACE+SEEDED — seed 6203 (141d, 7 alive)
+
+npcPairs=89 deep2=33 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=305 closeReadsServed=45 grievanceServes=2 othersSteered=22
+COND-TP: firstDeep2Day=25 lateClose=253 lateTP=216 lateNull=0 condRate=85.4% pooledTP=216/266 pooledRate=81.2% grievReadsByWhy={"grievance":1,"vgrievance":2}
+FUNNEL (natural): convos=414 subject=414 offered=358 picked=283 classes={"subject-no-offer":56,"picked-others":283,"offered-not-picked":75}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=56 rate=13.5% offered=358 mainOffered=30 subjectOffered=337 picked=283 latePicks=110 latePicksMain=10 latePicksSubject=100
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Tom / Ava — "Good question." "Thabo ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Adaeze / Lorenzo / Thabo / Ava — "Ruth found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Adaeze / Grace — "Thabo ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Thabo / Ruth — "Adaeze talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=357 picks=292 latePicks=107 missedChangedNotOffered=7
+WRAPSERVE: convos=3 matcherHits=2 matcherServes=2 classes={"grievance-line":2,"deflection":0,"other":1}
+FUNNEL-PROBE (subject-no-offer turns): turns=318 menuProblem=286 pickProblem=32
+INVITE (wrap, carried from r63): lure={"n":6,"accepts":1,"acceptRate":0.16666666666666666,"vetoes":{"sick":5},"chanceMin":0,"chanceMax":61,"chanceMean":10.2} party={"n":13,"accepts":7,"acceptRate":0.5384615384615384,"vetoes":{},"chanceMin":16,"chanceMax":81,"chanceMean":51.5} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":29,"forageOffers":8,"otherFavorOffers":21,"accepts":8,"acceptAttempts":8,"waits":11,"starts":2,"startBlocked":13,"forages":1,"forageNodeBarren":39,"forageBarren":13,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":0,"keptMatched":3}
+OUTING END STATES: [{"vid":"rafael_torres","vidName":"Rafael","favorId":"favor-rafael_torres-24-5","state":"broken","promisedDay":24,"meetDay":25,"deadline":26,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"ruth_goldstein","vidName":"Ruth","favorId":"favor-ruth_goldstein-128-27","state":"acknowledged","promisedDay":128,"meetDay":129,"deadline":130,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_qcixlsw","vidName":"Adil","favorId":"favor-gen_qcixlsw-124-26","state":"broken","promisedDay":124,"meetDay":125,"deadline":126,"promiseKept":true,"startedDay":125,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d12: Rafael kind=forage_help favorId=favor-rafael_torres-12-1 task=forage with Rafael tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Ruth kind=food_share favorId=favor-ruth_goldstein-13-2 task=share food with Ruth — they're running on empty
+  FAVOR-OFFER d16: Tom kind=sick_help favorId=favor-gen_duw9anx-16-3 task=help Tom with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d22: Thabo kind=forage_help favorId=favor-thabo_maseko-22-4 task=forage with Thabo tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Rafael kind=forage_help favorId=favor-rafael_torres-24-5 task=forage with Rafael tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Tom kind=heal_help favorId=favor-gen_duw9anx-28-6 task=help Tom with their injury
+  FAVOR-OFFER d45: Tom kind=food_share favorId=favor-gen_duw9anx-45-7 task=share food with Tom — they're going hungry
+  FAVOR-OFFER d46: Adil kind=sick_help favorId=favor-gen_qcixlsw-46-8 task=help Adil with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d46: Yasmin kind=food_share favorId=favor-gen_a1cr7zz-46-9 task=share food with Yasmin — they're going hungry
+  FAVOR-OFFER d62: Adil kind=sick_help favorId=favor-gen_qcixlsw-62-10 task=help Adil with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d63: Tom kind=sick_help favorId=favor-gen_duw9anx-63-11 task=help Tom with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d70: Tom kind=forage_help favorId=favor-gen_duw9anx-67-12 task=forage with Tom tomorrow to rebuild the pantry
+  FAVOR-OFFER d70: Yasmin kind=food_share favorId=favor-gen_a1cr7zz-70-13 task=share food with Yasmin — they're going hungry
+  FAVOR-OFFER d74: Ava kind=sick_help favorId=favor-ava_garcia-74-14 task=help Ava with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d82: Ava kind=sick_help favorId=favor-ava_garcia-82-16 task=help Ava with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d87: Tom kind=heal_help favorId=favor-gen_duw9anx-82-15 task=help Tom with their injury
+  FAVOR-OFFER d91: Thabo kind=forage_help favorId=favor-thabo_maseko-91-17 task=forage with Thabo tomorrow to rebuild the pantry
+  FAVOR-OFFER d99: Tom kind=food_share favorId=favor-gen_duw9anx-98-18 task=share food with Tom — they're running on empty
+  FAVOR-OFFER d104: Lorenzo kind=sick_help favorId=favor-gen_eyrnjs6-104-19 task=help Lorenzo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d108: Thabo kind=water_haul favorId=favor-thabo_maseko-107-20 task=bring four liters home from the creek with Thabo; set out at dawn
+  FAVOR-OFFER d114: Ruth kind=water_haul favorId=favor-ruth_goldstein-114-21 task=bring four liters home from the creek with Ruth; set out at dawn
+  FAVOR-OFFER d114: Ava kind=water_haul favorId=favor-ava_garcia-114-22 task=bring four liters home from the creek with Ava; set out at dawn
+  FAVOR-OFFER d117: Lorenzo kind=food_share favorId=favor-gen_eyrnjs6-117-24 task=share food with Lorenzo — they're running on empty
+  FAVOR-OFFER d120: Raj kind=food_share favorId=favor-raj_patel-117-23 task=share food with Raj — they're going hungry
+  FAVOR-OFFER d123: Raj kind=heal_help favorId=favor-raj_patel-123-25 task=help Raj with their injury
+  FAVOR-OFFER d124: Adil kind=forage_help favorId=favor-gen_qcixlsw-124-26 task=forage with Adil tomorrow to rebuild the pantry
+  FAVOR-OFFER d128: Ruth kind=forage_help favorId=favor-ruth_goldstein-128-27 task=forage with Ruth tomorrow to rebuild the pantry
+  FAVOR-OFFER d133: Lorenzo kind=forage_help favorId=favor-gen_eyrnjs6-133-28 task=forage with Lorenzo tomorrow to rebuild the pantry
+  FAVOR-OFFER d138: Lorenzo kind=food_share favorId=favor-gen_eyrnjs6-138-29 task=share food with Lorenzo — they're running on empty
+  FAVOR-ACCEPT d12: Rafael favorId=favor-rafael_torres-12-1 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d22: Thabo favorId=favor-thabo_maseko-22-4 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d24: Rafael favorId=favor-rafael_torres-24-5 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d70: Tom favorId=favor-gen_duw9anx-67-12 accepted=true state=promised meetDay=71
+  FAVOR-ACCEPT d91: Thabo favorId=favor-thabo_maseko-91-17 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d124: Adil favorId=favor-gen_qcixlsw-124-26 accepted=true state=promised meetDay=125
+  FAVOR-ACCEPT d128: Ruth favorId=favor-ruth_goldstein-128-27 accepted=true state=promised meetDay=129
+  FAVOR-ACCEPT d133: Lorenzo favorId=favor-gen_eyrnjs6-133-28 accepted=true state=promised meetDay=134
+  INVITE-DEC d7 lure: Lorenzo -> Ava chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"home","mood":"hungry","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d8 party: Jesse -> Ruth chance=27 accept=true veto=- inputs={"temp":"dry","goal":"remember","mood":"grieving","fear":75,"trust":30,"bond":null,"partySize":0} reasons=["trust 30","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d8 lure: Lorenzo -> Ava chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"home","mood":"grieving","fear":67} reasons=["sick — stays by the fire"]
+  INVITE-DEC d9 party: Jesse -> Adil chance=32 accept=true veto=- inputs={"temp":"sardonic","goal":"protect","mood":"grieving","fear":55,"trust":30,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 30","sick (-20)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d9 party: Jesse -> Meera chance=59.2 accept=false veto=- inputs={"temp":"anxious","goal":"belong","mood":"grieving","fear":55,"trust":48,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 48","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d9 lure: Lorenzo -> Ava chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"home","mood":"grieving","fear":47} reasons=["sick — stays by the fire"]
+  INVITE-DEC d10 lure: Lorenzo -> Ava chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"home","mood":"grieving","fear":19} reasons=["sick — stays by the fire"]
+  INVITE-DEC d11 lure: Lorenzo -> Ava chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"home","mood":"steady","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d15 party: Jesse -> Tom chance=64.8 accept=false veto=- inputs={"temp":"anxious","goal":"joy","mood":"steady","fear":4,"trust":62,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 62","a big party is safer (+5)"]
+  INVITE-DEC d16 party: Jesse -> Tom chance=56.400000000000006 accept=true veto=- inputs={"temp":"anxious","goal":"joy","mood":"cheerful","fear":0,"trust":66,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 66","a big party is safer (+5)","sick (-20)","cheerful mood (+10)"]
+  INVITE-DEC d18 lure: Adaeze -> Meera chance=61 accept=true veto=- inputs={"temp":"anxious","goal":"belong","mood":"hungry","fear":0,"affinity":24} reasons=["relationship with inviter (+6)","belong goal (+10)"]
+  INVITE-DEC d31 party: Jesse -> Adaeze chance=71.6 accept=true veto=- inputs={"temp":"anxious","goal":"joy","mood":"steady","fear":0,"trust":54,"bond":{"v":33,"depth":1},"partySize":4} reasons=["trust 54","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d108 party: Yasmin -> Lorenzo chance=66 accept=true veto=- inputs={"temp":"mischievous","goal":"home","mood":"grieving","fear":76,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d109 party: Tom -> Ava chance=38.8 accept=false veto=- inputs={"temp":"gentle","goal":"home","mood":"grieving","fear":73,"trust":72,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 72","a real bond (+10)","a big party is safer (+5)","sick (-20)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d111 party: Tom -> Ava chance=58 accept=false veto=- inputs={"temp":"gentle","goal":"home","mood":"hungry","fear":37,"trust":70,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 70","a real bond (+10)","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d112 party: Tom -> Ava chance=58.8 accept=false veto=- inputs={"temp":"gentle","goal":"home","mood":"scared","fear":83,"trust":72,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 72","a real bond (+10)","a big party is safer (+5)","scared mood (-10)","afraid (-10)"]
+  INVITE-DEC d112 party: Tom -> Raj chance=40.4 accept=true veto=- inputs={"temp":"cautious","goal":"understand","mood":"steady","fear":58,"trust":26,"bond":null,"partySize":4} reasons=["trust 26","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d137 party: Ruth -> Sriyono chance=16 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":9,"trust":90,"bond":{"v":9,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d137 party: Ruth -> Grace chance=81 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"grieving","fear":9,"trust":90,"bond":{"v":19,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":18,"v":40,"depth":2},{"day":19,"v":40,"depth":2},{"day":21,"v":40,"depth":2},{"day":22,"v":40,"depth":2},{"day":23,"v":40,"depth":2},{"day":24,"v":40,"depth":2},{"day":25,"v":40,"depth":2},{"day":26,"v":40,"depth":2},{"day":27,"v":40,"depth":2},{"day":28,"v":40,"depth":2},{"day":29,"v":40,"depth":2},{"day":30,"v":40,"depth":2},{"day":31,"v":40,"depth":2}] class=stick
+GOSSIP: totalPicks=284 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=50 31-60=62 61-90=61 91-120=62 121+=48 naturalPicks=283 seededPicks=22 gossipPicks=284
+SEEDED: {"pair":{"a":"adaeze_nwosu","b":"gen_wahdl8x","aName":"Adaeze","bName":"Meera"},"day":17,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":18,"v":40,"depth":2},{"day":19,"v":40,"depth":2},{"day":21,"v":40,"depth":2},{"day":22,"v":40,"depth":2},{"day":23,"v":40,"depth":2},{"day":24,"v":40,"depth":2},{"day":25,"v":40,"depth":2},{"day":26,"v":40,"depth":2},{"day":27,"v":40,"depth":2},{"day":28,"v":40,"depth":2},{"day":29,"v":40,"depth":2},{"day":30,"v":40,"depth":2},{"day":31,"v":40,"depth":2}],"crackTraceClass":"stick","vAt7":null,"depthAt7":null,"vDrop":null,"depthDrop":null,"crack7":false,"firstServe":{"day":18,"why":"vgrievance"},"serveWithin30":true,"serves":2,"servesAll":[{"day":18,"why":"vgrievance"},{"day":18,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Tom <> Meera — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d40: Lorenzo <> Adil — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Yasmin <> Lorenzo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Adaeze <> Meera — maxDepth 2, final 2 (v=40), dropped 0
+  FRIEND d45: Adaeze <> Lorenzo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Lorenzo <> Ruth — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Ava <> Lorenzo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Lorenzo <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Adaeze <> Ava — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d45: Tom <> Adil — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Tom <> Lorenzo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Ruth <> Thabo — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d60: Yasmin <> Tom — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d55: Adil <> Ruth — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Ava <> Ruth — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d30: Adaeze <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Ava <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Lorenzo <> Thabo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Adaeze <> Adil — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Tom <> Ruth — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Adil <> Thabo — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d100: Ava <> Thabo — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d65: Ava <> Adil — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Adaeze <> Thabo — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d60: Adaeze <> Ruth — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Tom <> Thabo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Adil <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Ava <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Jesse <> Ruth — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Yasmin <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Jesse <> Thabo — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d110: Adaeze <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Tom <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d8: Tom about Meera — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d13: Meera about Tom — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Adaeze about Meera — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Tom about Meera — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Lorenzo about Meera — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d17: Rafael about Meera — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Lorenzo about Meera — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Tom about Adaeze — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Adaeze about Tom — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Tom about Adaeze — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Adaeze about Tom — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Adaeze about Tom — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Adaeze about Tom — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Adaeze about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Adaeze about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Adil about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Lorenzo about Adil — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Yasmin about Tom — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Adaeze about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Tom about Adaeze — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Ruth about Lorenzo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Adaeze about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Thabo about Ruth — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Tom about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Ruth about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Adil about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Ruth about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Adil about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Adaeze about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Adaeze about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Ruth about Thabo — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Adaeze about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Adaeze about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Ruth about Adil — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Ava about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Ava about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Lorenzo about Adil — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Ava about Adil — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Adil about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Ruth about Thabo — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Ruth about Thabo — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Ava about Adil — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Ruth about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Ava about Adil — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Adil about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Yasmin about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d53: Ava about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Adil about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Ruth about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Ava about Adil — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d56: Ava about Tom — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Ava about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Adil about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ava about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Yasmin about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Yasmin about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Adil about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Tom about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Adil about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Yasmin about Lorenzo — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Yasmin about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ruth about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ava about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Thabo about Tom — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Ava about Tom — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Yasmin about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Adil about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Yasmin about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Ava about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ava about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ava about Tom — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Yasmin about Lorenzo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Adaeze about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Thabo about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Tom about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Ruth about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Ava about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Yasmin about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Thabo about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Thabo about Ruth — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Thabo about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Thabo about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Thabo about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Thabo about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ruth about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Grace about Adil — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Adaeze about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Adil about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Lorenzo about Adil — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Ava about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Raj about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d6: Ava about Jesse (why=grievance)
+  GRIEV-READ d18: Adaeze about Meera (why=vgrievance)
+  GRIEV-READ d18: Adaeze about Meera (why=vgrievance)
+  KNACK d16 Tom: "Good question." "Thabo ate something last month that should've killed them. They're fine."
+  KNACK d21 Adaeze: "Good question." "Rafael talks to the garden. The garden listens. I've seen it."
+  KNACK d26 Adaeze: "Ruth found a lost knife by smell last week. By SMELL."
+  KNACK d26 Adaeze: "Thabo ate something last month that should've killed them. They're fine."
+  KNACK d31 Ava: "You want to know about that? Okay." "Yasmin talks to the garden. The garden listens. I've seen it. It'll pass."
+  KNACK d38 Ruth: "cuts close faster when Tom wraps them. Don't ask me how, as it were."
+  KNACK d40 Rafael: "You want to know about that? Okay." "Hah. Lorenzo talks to the garden. The garden listens. I've seen it."
+  KNACK d41 Thabo: "You want to know about that? Okay." "Adil ate something last month that should've killed them. They're fine."
+
+deathCauses: {"the wild":2,"ambush":1,"Glasswing Darter":1,"the arena":1,"alien":1,"starvation":1}
