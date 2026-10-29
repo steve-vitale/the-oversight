@@ -131,9 +131,12 @@ walk everywhere. Nothing teleports.
 
 ## 7. What is still open (honest ledger, not promises)
 
-- City districts as beyond tiles (streets / buildings / plazas / caches
-  with a city people layer) — planned, not built. Urban play is
-  currently one tile kind (`building`) searched like a ruin.
+- City districts as beyond tiles (streets / buildings / plazas / caches)
+  — LANDED (fixall-map slice 3): districts generate deterministically
+  past the 12-tile wilderness ring, with finite-scavenge buildings and
+  caches and walkable pavement. Still open: dens and the city people
+  layer (residents/hosts/markets) — held, because both need a
+  perception-traced mechanism, not a spawn (see §5).
 - Blockage/bridge parity past the edge — LANDED (fixall-map slice 4,
   see §2). What remains open is the city-people layer and dens (see
   below), not the walk rules.

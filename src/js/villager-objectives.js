@@ -1152,10 +1152,17 @@
       var leashed = !!(o && o.tightened); // danger-tightened: short leash, no meander
       var ox = nx, oy = ny; // pre-step position (for the tightness guard)
       if (nx !== tx || ny !== ty) {
-        if (!returning && !leashed && R() < 0.35) {
-          // meander: a step somewhere adjacent (outbound only — a walker
-          // heading home does not wander, and a clamped meander step from
-          // a beyond position would snap them to the rim: a teleport).
+        // BEYOND-BOARD GUARD (fixall-map slice 2, narrowed after the
+        // balanced-panel comparison): home-board walkers keep their exact
+        // old wander — returning or not, the meander roll is consumed and
+        // the step meanders as before, so panel games are bit-identical
+        // to base until a villager actually stands beyond the edge. Only
+        // a BEYOND-board returner skips meander: a clamped meander step
+        // from a beyond position would snap them to the rim (a teleport),
+        // and wandering farther from home is not a return walk anyway.
+        var beyondBoard = nx < 0 || nx > 8 || ny < 0 || ny > 8;
+        if (!leashed && !beyondBoard && R() < 0.35) {
+          // meander: a step somewhere adjacent
           var dx = Math.floor(R() * 3) - 1, dy = Math.floor(R() * 3) - 1;
           if (dx || dy) { nx = clampN(nx + dx); ny = clampN(ny + dy); }
         } else {
