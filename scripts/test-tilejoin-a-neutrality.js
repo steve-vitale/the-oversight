@@ -47,6 +47,11 @@ function main() {
   const a = JSON.parse(fs.readFileSync(fileA, 'utf8'));
   const b = JSON.parse(fs.readFileSync(fileB, 'utf8'));
   delete a.tilejoin; delete b.tilejoin;
+  // tilejoinLeg is the recorder's own leg label (off/on/skip), not
+  // game state — same category as the tilejoin store itself. The
+  // first neutrality run showed exactly this one diff and zero
+  // game-content diffs; excluding the label is the correction.
+  delete a.tilejoinLeg; delete b.tilejoinLeg;
   const sa = strip(a), sb = strip(b);
   const diffs = [];
   diff(sa, sb, 'row', diffs);

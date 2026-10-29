@@ -327,12 +327,18 @@ function installTilejoinDiag(Game, store) {
           const log = (rec && Array.isArray(rec.log)) ? rec.log.slice(0, MAX_LOG_LINES).map(l => String(l)) : [];
           const head = { seed: null, day: pre.day, vid: pre.vid, mid: pre.mid, wave: pre.wave,
             caller: pre.caller, rounds: pre.rounds, outcome: pre.outcome,
-            fedVids: pre.fedVids, joinedAllyVid: pre.joinedAllyVid,
+            fed: pre.fed, fedVids: pre.fedVids, joinedAllyVid: pre.joinedAllyVid,
             mDealt: pre.mDealt, vTaken: pre.vTaken, allyDealt: pre.allyDealt, allyTaken: pre.allyTaken, log: log };
-          if (pre.calledHelp && pre.joinedAllyVid && !store.sense.joined) store.sense.joined = head;
-          else if (pre.calledHelp && !store.sense.shouted) store.sense.shouted = head;
-          else if (!pre.calledHelp && pre.outcome === 'vFlee' && pre.everHopeless &&
-            pre.tileFed.length && !store.sense.tileHopelessFlee) store.sense.tileHopelessFlee = head;
+          // Sense slots are PROTOTYPE fights only (pre.fed): engine
+          // crew joins on non-U channels (e.g. expedition shouts)
+          // are not tilejoin evidence and must not fill these slots
+          // (the first version of this block recorded them, and the
+          // s75101 day-8 Jorge/Emma expedition shout filled the ON
+          // joined slot — corrected before judging, corpus re-run).
+          if (pre.fed && pre.calledHelp && pre.joinedAllyVid && !store.sense.joined) store.sense.joined = head;
+          else if (pre.fed && pre.calledHelp && !store.sense.shouted) store.sense.shouted = head;
+          else if (pre.fed && !pre.calledHelp && pre.outcome === 'vFlee' && pre.everHopeless &&
+            !store.sense.tileHopelessFlee) store.sense.tileHopelessFlee = head;
         } catch (e) { noteErr(store, 'fieldFight.sense', e); }
       }
     } catch (e) { noteErr(store, 'fieldFight.rec', e); }
