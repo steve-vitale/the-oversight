@@ -55,6 +55,7 @@
 'use strict';
 const { competent } = require('./competent');
 const { eveningStep, snapPos } = require('./insideevening');
+const { homewardClear } = require('./clearhabit');
 
 function havenCoords(Game) {
   try {
@@ -251,6 +252,12 @@ const nighttravel = Object.assign({}, competent, {
   daily(Game, ctx) {
     competent.daily(Game, ctx);
     if (Game.over) { ctx._ntLast = { outcome: 'game-over', method: null }; return; }
+    // HOMEWARD CLEARING HABIT (sim-clearhabit-b, gate
+    // COMPETENT_HOMEWARD_CLEAR=1, default OFF): the day's closing
+    // roadwork, BEFORE the evening hop is ever attempted — clear
+    // the hop's own blocked tile when the kcal floor holds. Never
+    // pooled with the evening detour (that gate stays OFF here).
+    try { homewardClear(Game, ctx); } catch (e) { try { ctx._chLast = { status: 'habit-error', error: String(e && e.message).slice(0, 120) }; } catch (e2) {} }
     const rec = nightStep(Game, ctx);
     ctx._ntLast = rec;
     ctx.ntEvenings = ctx.ntEvenings || {};
