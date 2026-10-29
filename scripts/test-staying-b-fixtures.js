@@ -47,6 +47,22 @@ function med(arr) {
   const s = arr.slice().sort((a, b) => a - b);
   return s[Math.floor(s.length / 2)];
 }
+// EPERM flap (2026-10-28/29 class: write(2) returns EPERM intermittently,
+// across /tmp and workspace dirs): retry file writes instead of losing
+// a completed matrix to a single denied write. Print first, write second.
+function sleepMs(ms) { try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {} }
+function writeFileRetry(p, body) {
+  let lastErr = null;
+  for (let a = 1; a <= 8; a++) {
+    try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return; }
+    catch (e) {
+      lastErr = e;
+      console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
+      if (a < 8) sleepMs(Math.min(10000, 1000 * a));
+    }
+  }
+  throw lastErr;
+}
 
 async function fightCell(mid, hp, maxHp, party, rngSeed, wantLog) {
   const { Game: G, loadFails } = await loadGame({ seed: 75106, mode: 'staying-b-fixtures', fullTelemetry: false });
@@ -150,11 +166,18 @@ async function main() {
   if (args.indexOf('--write-base-solo') >= 0) {
     const cells = await runCells();
     const s = summarize(cells);
-    fs.mkdirSync(path.dirname(baseSoloPath), { recursive: true });
-    fs.writeFileSync(baseSoloPath, JSON.stringify({ soloKey: s.soloKey, soloCells: cells.filter(c => !c.party) }, null, 1) + '\n');
+    console.log(`partyWounded kills=${s.partyWounded.kills}/40 drives=${s.partyWounded.drives} dies=${s.partyWounded.dies} roundsMed=${s.partyWounded.roundsMed} mDealtMed=${s.partyWounded.mDealtMed} (base-code party cell: old-rule from-start party)`);
+    console.log(`partyFresh kills=${s.partyFresh.kills}/40 drives=${s.partyFresh.drives} dies=${s.partyFresh.dies} roundsMed=${s.partyFresh.roundsMed} mDealtMed=${s.partyFresh.mDealtMed}`);
+    console.log(`soloWounded kills=${s.soloWounded.kills}/40 roundsMed=${s.soloWounded.roundsMed} mDealtMed=${s.soloWounded.mDealtMed}`);
+    console.log(`soloFresh kills=${s.soloFresh.kills}/40 roundsMed=${s.soloFresh.roundsMed} mDealtMed=${s.soloFresh.mDealtMed}`);
+    // Print the solo key to stdout too, so a write-flap failure cannot
+    // lose the identity baseline: it can be reconstructed from the log.
+    console.log('SOLOKEY-BEGIN');
+    console.log(s.soloKey);
+    console.log('SOLOKEY-END');
+    writeFileRetry(baseSoloPath, JSON.stringify({ soloKey: s.soloKey, soloCells: cells.filter(c => !c.party) }, null, 1) + '\n');
     console.log('BASE-SOLO-WRITTEN ' + baseSoloPath);
-    console.log(`partyWounded kills=${s.partyWounded.kills}/40 roundsMed=${s.partyWounded.roundsMed} (base-code party cell: old-rule from-start party)`);
-    console.log(`partyFresh kills=${s.partyFresh.kills}/40 roundsMed=${s.partyFresh.roundsMed}`);
+    if (outPath) writeFileRetry(outPath, JSON.stringify({ summary: s, cells }, null, 1) + '\n');
     return;
   }
   const cells = await runCells();
@@ -167,18 +190,18 @@ async function main() {
   console.log(`SOLO-FRESH: kills=${s.soloFresh.kills}/40 roundsMed=${s.soloFresh.roundsMed} mDealtMed=${s.soloFresh.mDealtMed}`);
   console.log(`PARTY-HOLD lines fired: ${s.partyHoldCount} party fights`);
   if (outPath) {
-    fs.mkdirSync(path.dirname(outPath), { recursive: true });
-    fs.writeFileSync(outPath, JSON.stringify({ summary: s, cells }, null, 1) + '\n');
+    writeFileRetry(outPath, JSON.stringify({ summary: s, cells }, null, 1) + '\n');
     console.log('wrote ' + outPath);
   }
   if (args.indexOf('--gate') >= 0) {
     let identity = null;
     if (fs.existsSync(baseSoloPath)) {
       const base = JSON.parse(fs.readFileSync(baseSoloPath, 'utf8'));
-      identity = (base.soloKey === s.soloKey);
+      const baseKey = base.soloKey != null ? base.soloKey : (Array.isArray(base.soloLines) ? base.soloLines.join('\n') : null);
+      identity = (baseKey === s.soloKey);
       console.log(`SOLO-IDENTITY: ${identity ? 'PASS (solo fixtures byte-identical to base)' : 'FAIL (solo fixtures differ from base — see evidence)'}`);
       if (!identity) {
-        const bl = base.soloKey.split('\n'), cl = s.soloKey.split('\n');
+        const bl = (baseKey || '').split('\n'), cl = s.soloKey.split('\n');
         for (let i = 0; i < Math.max(bl.length, cl.length); i++) if (bl[i] !== cl[i]) console.log(`  DIFF row ${i}: base=${bl[i]} armed=${cl[i]}`);
       }
     } else {

@@ -33,17 +33,25 @@ function medianOf(arr) {
   return s[Math.floor(s.length / 2)];
 }
 function sleepMs(ms) { try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {} }
+// EPERM flap (2026-10-29 class: write(2) returns EPERM for minutes at a
+// time, across dirs, for every exec-side channel — /tmp, workspace,
+// /dev/shm, and .git objects all denied alike; only the file-tool
+// channel still writes). During a flap, disk writes are futile, so
+// retry briefly (a clear moment may land) and then NEVER lose a
+// computed seed: on final failure the full row JSON goes to stdout
+// (ROWJSON-BEGIN/END) so it can be reconstructed by hand, and the
+// sweep continues to the next seed instead of aborting.
 function writeFileRetry(p, body) {
   let lastErr = null;
-  for (let a = 1; a <= 8; a++) {
-    try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return; }
+  for (let a = 1; a <= 4; a++) {
+    try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return true; }
     catch (e) {
       lastErr = e;
       console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
-      if (a < 8) sleepMs(Math.min(10000, 1000 * a));
+      if (a < 4) sleepMs(Math.min(8000, 2000 * a));
     }
   }
-  throw lastErr;
+  return false;
 }
 function snap(Game) {
   const out = { won: false, arc: 1, tableWaiting: false, tableEntered: false, rank: 'village' };
@@ -133,8 +141,34 @@ async function runOne(seed, days, evidDir) {
   };
   if (evidDir) {
     const fn = path.join(evidDir, `s${seed}-${TAG}.json`);
-    writeFileRetry(fn, JSON.stringify(row, null, 1) + '\n');
-    row.corpusFile = fn;
+    const ok = writeFileRetry(fn, JSON.stringify(row, null, 1) + '\n');
+    if (ok) row.corpusFile = fn;
+    else {
+      // FLAP FALLBACK: the full row is ~130KB of lens detail and cannot
+      // be hand-copied, so print only what the judgment needs, verbatim
+      // from the recorders: the judgedA staying-b rows, the wall fields,
+      // and the recorder counts (including the fieldparty judgedA count
+      // for the control-shape cross-check). The run is deterministic, so
+      // a later clear-window --one re-run reproduces the full row.
+      row.writeFailed = true;
+      const sbJudged = (sbStore.meetings || []).filter(m => (m.wave | 0) === 4 && m.channel === 'field'
+        && ['resolve', 'patrol', 'aid'].indexOf(m.caller) >= 0 && !m.leaderIsScholar);
+      const fpJudged = (fpStore.meetings || []).filter(m => (m.wave | 0) === 4 && m.channel === 'field'
+        && ['resolve', 'patrol', 'aid'].indexOf(m.caller) >= 0 && !(m.leader && m.leader.isScholar));
+      const extract = { seed, tag: TAG,
+        wall: { days: row.days, gameDays: row.gameDays, endReason: row.endReason, won: row.won,
+          waveReach: row.waveReach, maxRank: row.maxRank, finalRank: row.finalRank,
+          nationalEver: row.nationalEver, nationalFinal: row.nationalFinal,
+          table: row.table, entered: row.entered, deathTotal: row.deathTotal,
+          starvationDeaths: row.starvationDeaths, deaths: row.deaths },
+        counts: { fpMeetings: (fpStore.meetings || []).length, sbMeetings: (sbStore.meetings || []).length,
+          fpJudgedA: fpJudged.length, sbJudgedA: sbJudged.length,
+          fpErrs: fpStore.diag ? fpStore.diag.errs : fpStore.errs, sbErrs: sbStore.diag ? sbStore.diag.errs : sbStore.errs },
+        judged: sbJudged };
+      console.log(`JUDGEDJSON-BEGIN s${seed}-${TAG}`);
+      console.log(JSON.stringify(extract));
+      console.log(`JUDGEDJSON-END s${seed}-${TAG}`);
+    }
   }
   return row;
 }
@@ -201,7 +235,11 @@ async function summaryMode() {
     soloDeaths: soloWild.filter(m => m.outcome === 'vDie').length,
     judgedPartyDeaths: judgedA.filter(m => m.outcome === 'vDie').length,
     corpusOk, tag: TAG };
-  writeFileRetry(path.join(evidDir, `summary-${TAG}.json`), JSON.stringify(summary, null, 1) + '\n');
+  if (!writeFileRetry(path.join(evidDir, `summary-${TAG}.json`), JSON.stringify(summary, null, 1) + '\n')) {
+    console.log(`SUMMARYJSON-BEGIN ${TAG}`);
+    console.log(JSON.stringify(summary));
+    console.log(`SUMMARYJSON-END ${TAG}`);
+  }
   console.log(`=== sim-staying-b ${TAG} band ===`);
   console.log(`corpus: rows=${rows.length}/${SEEDS.length} ok=${corpusOk} fpMeetings=${fpMeetings.length} sbMeetings=${meetings.length}`);
   console.log(`judgedA=${judgedA.length} judgedWild=${judgedWild.length} foughtA=${foughtA.length} tileParty=${tileParty.length} tileKills=${tileKills.length} tileDrive=${tileDrive.length} tileDeaths=${tileDeaths.length}`);
@@ -230,8 +268,9 @@ async function main() {
   }
   for (const seed of SEEDS) {
     const row = await runOne(seed, days, evidDir);
-    console.log(`  [${TAG} seed ${seed}] days=${row.days} end=${row.endReason} wave=${row.waveReach} won=${row.won} natEver=${row.nationalEver} starv=${row.starvationDeaths} deaths=${row.deathTotal} fpMeetings=${row.fieldparty.meetings.length} sbMeetings=${row.stayingb.meetings.length} fpErrs=${row.fieldparty.diag.errs} sbErrs=${row.stayingb.diag.errs}`);
+    console.log(`  [${TAG} seed ${seed}] days=${row.days} end=${row.endReason} wave=${row.waveReach} won=${row.won} natEver=${row.nationalEver} starv=${row.starvationDeaths} deaths=${row.deathTotal} fpMeetings=${row.fieldparty.meetings.length} sbMeetings=${row.stayingb.meetings.length} fpErrs=${row.fieldparty.diag.errs} sbErrs=${row.stayingb.diag.errs} writeFailed=${!!row.writeFailed}`);
   }
-  await summaryMode();
+  try { await summaryMode(); }
+  catch (e) { console.log('SUMMARY-SKIPPED (row files incomplete — flap fallback; judge from JUDGEDJSON extracts instead): ' + String((e && e.message) || e).slice(0, 200)); }
 }
 main().catch(e => { console.error('SWEEP-FAIL', e && e.stack || e); process.exit(1); });
