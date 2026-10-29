@@ -113,12 +113,16 @@ async function oneInstance(seed) {
       const prevPx = Game2.map ? Game2.map.px : null;
       const prevPy = Game2.map ? Game2.map.py : null;
       const prevDetours = (ctx && ctx.tripHomeDetours) || 0;
+      const prevStandingDays = (ctx && ctx.standingHomeDays) || 0;
+      const prevStandingDetours = (ctx && ctx.standingHomeDetours) || 0;
       basePolicy.daily(Game2, ctx);
       const pos = snapPos(Game2);
       const row = { loopDay: callIdx, ...pos,
         movedDuringDay: (prevPx === null || prevPy === null) ? null :
           (pos.mapPx !== prevPx || pos.mapPy !== prevPy),
-        tripHomeDetours: ((ctx && ctx.tripHomeDetours) || 0) - prevDetours };
+        tripHomeDetours: ((ctx && ctx.tripHomeDetours) || 0) - prevDetours,
+        standingHomeDays: ((ctx && ctx.standingHomeDays) || 0) - prevStandingDays,
+        standingHomeDetours: ((ctx && ctx.standingHomeDetours) || 0) - prevStandingDetours };
       if (Game2.over) {
         row.probe = 'game-over';
       } else {
