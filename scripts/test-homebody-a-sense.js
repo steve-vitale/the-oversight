@@ -34,7 +34,7 @@ function fmtNote(n) {
 let fail = false;
 for (const [seed, vid, mid, label] of [
   [75109, 'visjoin_174', 'eulogy', 'S1-primary homebody-blocked triple'],
-  [75109, 'visjoin_138', 'algorithm', 'S1-second homebody triple (fresh window only: first 6 picks)'],
+  [75109, 'visjoin_138', 'algorithm', 'S1-second homebody triple (first 6 picks: 4 fresh, then 2 stale)'],
 ]) {
   const { picks, notes } = trace(seed, vid, mid);
   console.log(`=== ${label}: s${seed} ${vid}/${mid} ===`);
@@ -48,19 +48,25 @@ for (const [seed, vid, mid, label] of [
 console.log(`
 SENSE JUDGMENT (plain words):
 visjoin_174 fought a eulogy, came home with the memory still fresh,
-and picked twice while it was fresh — and both times the game
-offered her nothing, because her roaming range is zero tiles and
-no distance satisfies 1 <= d <= 0. That reads as a person kept
+and picked three times while it was fresh (d177, d179 twice) —
+and all three times the game offered her nothing, because her
+roaming range is zero tiles and no distance satisfies
+1 <= d <= 0. That reads as a person kept
 home by range: she is at haven, she is armed, she is not resting
 off a fright, the memory is days old, and the only gate failing
 is the range gate. It does not read as an artifact — the
 candidate recompute returns null for exactly the reason the
 range rule names, and the same villager's other picks show the
 same maxD 0, not a one-off null.
-visjoin_138 is the same shape with a longer tail: fresh picks
-with maxD 0 and candidate null, then stale picks, then an
-eviction weeks later. The eviction is an epilogue, not the
-block — her funnel died in the fresh window, on range.
+visjoin_138 is the same shape with a longer tail: four fresh
+picks (d142, d143, d144 twice) with maxD 0 and candidate null,
+then stale picks, then an eviction weeks later. The eviction is
+an epilogue, not the block — her funnel died in the fresh
+window, on range. Both blocked memories sit ONE tile from
+haven (174: (5,4); 138: (3,4) against haven (4,4)) — the
+closest possible fight, still un-offerable. This is not a
+story about distant beasts; it is a story about a range of
+zero.
 Neither trace shows a villager refusing a hunt, forgetting a
 beast, or failing a lottery. Both show a villager who was never
 asked.`);
