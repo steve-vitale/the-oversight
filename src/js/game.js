@@ -23858,6 +23858,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       this.pendingEncounter = true;
       this.pendingMonsterId = monsterId;
+      // RAID-NAMING (sim-raidname-b 2026-10-29): a wanderer
+      // pending overwrites any raid pending — clear the shadow.
+      this.raidPendingMonsterId = null;
       return true;
     },
     // WANDERER TENT BREACH: it found you. Small things come through the flap —
@@ -23875,6 +23878,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         s.tentSmoke = 0;
         this.pendingEncounter = true;
         this.pendingMonsterId = monsterId;
+        // RAID-NAMING (sim-raidname-b 2026-10-29): tent-breach
+        // pending overwrites any raid pending — clear the shadow.
+        this.raidPendingMonsterId = null;
         this.say(`Your back-eyes catch it first — ${mname}, at the flap, coming IN. You're out the other side before it gets inside. (no ambush)`);
         return;
       }
@@ -23888,6 +23894,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         s.tentSmoke = 0;
         this.pendingEncounter = true;
         this.pendingMonsterId = monsterId;
+        // RAID-NAMING (sim-raidname-b 2026-10-29): tent-breach
+        // pending overwrites any raid pending — clear the shadow.
+        this.raidPendingMonsterId = null;
         this.say(`Your skin prickles — warmth, moving, close, on the wrong side of the canvas. The sensory hairs knew before your eyes did. You're out the other side before it gets inside. (no ambush — the hairs knew first)`);
         return;
       }
@@ -23902,12 +23911,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         s.health = Math.max(1, Math.round(s.health || 0) - 5);
         this.pendingEncounter = true;
         this.pendingMonsterId = monsterId;
+        // RAID-NAMING (sim-raidname-b 2026-10-29): tent-breach
+        // pending overwrites any raid pending — clear the shadow.
+        this.raidPendingMonsterId = null;
         this.say(`The canvas EXPLODES inward — poles snapping, a weight like a falling tree. You're thrown clear, sprawling in the dirt (-5 health). The tent is wreckage. And ${mname} is still coming.`);
         return;
       }
       this.pendingEncounter = true;
       this.pendingInTent = true;
       this.pendingMonsterId = monsterId;
+      // RAID-NAMING (sim-raidname-b 2026-10-29): tent-breach
+      // pending overwrites any raid pending — clear the shadow.
+      this.raidPendingMonsterId = null;
       this.say(`The flap stirs. A shape detaches from the dark inside your tent — eyes catching the firelight. ${mname} is IN here with you.`);
     },
     // campTentStanding(tx, ty): does an intact YOURS tent still stand on this
@@ -33748,6 +33763,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
+      // RAID-NAMING (sim-raidname-b 2026-10-29): snapshot villagers
+      // already dead as the fight opens — a raid defender who fell
+      // in the night's raid is seated in the dawn fight, and the
+      // opening turns then narrate their fall as if it happened
+      // here. Captured BEFORE the opening turns below, said at
+      // the end of startCombat as raid aftermath (not this
+      // fight's casualty). Read-only snapshot; no state touched.
+      let _raidFallenAtStart = [];
+      try { _raidFallenAtStart = fighters.filter(f => f.kind === 'villager' && (f.alive === false || (typeof f.hp === 'number' && f.hp <= 0))).map(f => f.name); } catch (e) {}
       if (hasFear) this.say('Something about you is wrong. It hesitates. (fear_aura)');
       if (hasSand) this.say('You fling a handful of grit into its eyes. (pocket_sand: blinded)');
       this.say('Turn-based now. Tap a tile to move — speed is squares. Then act.');
@@ -33794,6 +33818,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (typeof window !== 'undefined' && typeof setTimeout !== 'undefined') this.tbAdvanceAsync();
         else this.tbAdvance();
       }
+      // RAID-NAMING (sim-raidname-b 2026-10-29): say so at fight
+      // start when the fight is raid-born, by either of two
+      // provenances: (a) the pending shadow — havenRaidTick
+      // set raidPendingMonsterId for the player-target raider,
+      // and this fight's mid matches it (pending-resolved
+      // fights are instantiated by species id, NOT lifted from
+      // the world entity, which wanders off the haven tile
+      // before morning — the entity flag alone named only
+      // 4/25 dawn-raid fights); or (b) the lifted tile monster
+      // itself carries raidBorn (a lingering raider met later).
+      // The generic BREACH beat fires for ANY haven fight —
+      // and only once per run (fireCrisis dedupes) — so
+      // without this line a dawn raid fight reads exactly like
+      // a monster wandering in. NARRATION ONLY: no spawn,
+      // draft, damage, crisis, or economy value is touched.
+      // Said LAST so it survives the fight-start window
+      // (opening turns narrate inside this same call in node).
+      // (b) is gated on _originIsFighter so a bystander tile
+      // monster never mislabels a fight it is not in; table
+      // trials never carry the line. (a) is consumed here so
+      // it can never stale-match a later same-species fight.
+      try {
+        const _raidPendingMatch = !tableTrial && !!this.raidPendingMonsterId && mid === this.raidPendingMonsterId;
+        const _raidEntityMatch = !tableTrial && _originIsFighter && _origin && _origin.raidBorn;
+        if (_raidPendingMatch || _raidEntityMatch) {
+          this.say(`🐗 This one came with the raid on Haven — it was with the teeth at the door, not a lone wanderer.`);
+          if (_raidFallenAtStart.length) {
+            this.say(`🕯️ ${_raidFallenAtStart.join(', ')} already fell to the raid before this fight — they do not rise for it.`);
+          }
+          if (_raidPendingMatch) this.raidPendingMonsterId = null;
+        }
+      } catch (e) {}
       return this.tbfight;
     },
 

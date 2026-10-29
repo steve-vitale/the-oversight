@@ -535,6 +535,11 @@
         try { return this.monsterDisplayName(m.id) || 'something'; } catch (e) { return 'something'; }
       };
       for (const m of raiders) {
+        // RAID-NAMING (sim-raidname-b 2026-10-29): mark the drafted
+        // entity as raid-born so a later fight against it can say
+        // so at fight start (game.js startCombat). Fact about
+        // origin, like veteran — no spawn/damage/crisis value here.
+        m.raidBorn = true;
         m.tx = hx; m.ty = hy;
         if (palisade) {
           const wall = Math.round(((m.maxHp || m.hp || 20)) * 0.25);
@@ -702,6 +707,20 @@
           this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on your bedroll.`);
           this.pendingEncounter = true;
           this.pendingMonsterId = m.id;
+          // RAID-NAMING (sim-raidname-b 2026-10-29): shadow the
+          // pending with its raid provenance. Pending-resolved
+          // fights are instantiated by species id (startCombat
+          // builds fighters from the def), NOT lifted from the
+          // world entity — the drafted raiders wander off the
+          // haven tile before morning, so the entity flag alone
+          // cannot name the fight. This id survives the harness
+          // pending-clear (which clears only the two pending
+          // fields) so startCombat can match mid against it.
+          // Cleared on consume (startCombat) and on any non-raid
+          // pending overwrite (feast draw, wanderer, tent
+          // breach); a lingering raider met later is still
+          // named via its entity raidBorn flag.
+          this.raidPendingMonsterId = m.id;
         } else {
           this.say(`The defenders met them at the treeline — nothing reached your bedroll.`);
         }

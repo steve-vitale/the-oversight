@@ -462,6 +462,11 @@
         s.feastDraw = { monsterId: mid, veteran, day: s.day || 0 };
         this.pendingEncounter = true;
         this.pendingMonsterId = mid;
+        // RAID-NAMING (sim-raidname-b 2026-10-29): a feast-draw
+        // pending overwrites any raid pending — the raid
+        // provenance shadow goes with it, never stale-matches
+        // a later same-species fight.
+        this.raidPendingMonsterId = null;
         let mname = 'something out there';
         try { mname = (typeof this.monsterDisplayName === 'function' && this.monsterDisplayName(mid)) || mname; } catch (e) {}
         const cap = String(mname); const shown = cap[0].toUpperCase() + cap.slice(1);
