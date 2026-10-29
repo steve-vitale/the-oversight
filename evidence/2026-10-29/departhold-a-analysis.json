@@ -1,0 +1,503 @@
+{
+ "seeds": [
+  75101,
+  75102,
+  75103,
+  75104,
+  75105,
+  75106,
+  75107,
+  75108
+ ],
+ "primary": [
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "eulogy",
+   "wave": 4,
+   "pickDay": 135,
+   "pickPart": 536,
+   "pickDayPart": 0,
+   "huntDay": 132,
+   "huntTx": 5,
+   "huntTy": 3,
+   "cls": "superseded-by-needs-pick",
+   "reason": "first later pick part=539 day=135 chose EAT",
+   "evalCount": 0,
+   "evalChain": []
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_115",
+   "mid": "eulogy",
+   "wave": 4,
+   "pickDay": 135,
+   "pickPart": 536,
+   "pickDayPart": 0,
+   "huntDay": 132,
+   "huntTx": 5,
+   "huntTy": 3,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=544 day=137",
+   "evalCount": 6,
+   "evalChain": [
+    {
+     "part": 537,
+     "day": 135,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "heal": [],
+     "tighten": [],
+     "depart": []
+    },
+    {
+     "part": 538,
+     "day": 135,
+     "dayPart": 2,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "heal": [],
+     "tighten": [],
+     "depart": []
+    },
+    {
+     "part": 540,
+     "day": 136,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "heal": [],
+     "tighten": [],
+     "depart": []
+    },
+    {
+     "part": 541,
+     "day": 136,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "heal": [],
+     "tighten": [],
+     "depart": []
+    },
+    {
+     "part": 542,
+     "day": 136,
+     "dayPart": 2,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "heal": [],
+     "tighten": [],
+     "depart": []
+    },
+    {
+     "part": 544,
+     "day": 137,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "departed",
+     "sub": null,
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 1
+      }
+     ],
+     "heal": [
+      {
+       "satOut": false,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": true,
+       "postState": "out"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "secondary": [
+  {
+   "seed": 75106,
+   "vid": "catalina_reyes",
+   "mid": "hushwolf",
+   "wave": 1,
+   "pickDay": 107,
+   "pickPart": 424,
+   "pickDayPart": 0,
+   "huntDay": 105,
+   "huntTx": 4,
+   "huntTy": 6,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=424 day=107",
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 424,
+     "day": 107,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": true,
+     "action": "departed",
+     "sub": null,
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 1
+      }
+     ],
+     "heal": [
+      {
+       "satOut": false,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": true,
+       "postState": "out"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "murkcap",
+   "wave": 1,
+   "pickDay": 108,
+   "pickPart": 428,
+   "pickDayPart": 0,
+   "huntDay": 106,
+   "huntTx": 5,
+   "huntTy": 4,
+   "cls": "overwritten-danger",
+   "reason": "eval part=429 day=108 danger=tighten/4 sub=tighten-overwrite",
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 429,
+     "day": 108,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "overwritten",
+     "sub": "tighten-overwrite",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "tighten",
+       "score": 4
+      }
+     ],
+     "heal": [],
+     "tighten": [
+      {
+       "preKind": "HUNT",
+       "postKind": "HAVEN_CHORE",
+       "postState": "indoor"
+      }
+     ],
+     "depart": []
+    }
+   ]
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "murkcap",
+   "wave": 1,
+   "pickDay": 108,
+   "pickPart": 431,
+   "pickDayPart": 3,
+   "huntDay": 106,
+   "huntTx": 5,
+   "huntTy": 4,
+   "cls": "overwritten-danger",
+   "reason": "eval part=432 day=109 danger=tighten/5 sub=tighten-overwrite",
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 432,
+     "day": 109,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "overwritten",
+     "sub": "tighten-overwrite",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "tighten",
+       "score": 5
+      }
+     ],
+     "heal": [],
+     "tighten": [
+      {
+       "preKind": "HUNT",
+       "postKind": "HAVEN_CHORE",
+       "postState": "indoor"
+      }
+     ],
+     "depart": []
+    }
+   ]
+  },
+  {
+   "seed": 75106,
+   "vid": "catalina_reyes",
+   "mid": "focus_group",
+   "wave": 3,
+   "pickDay": 118,
+   "pickPart": 468,
+   "pickDayPart": 0,
+   "huntDay": 117,
+   "huntTx": 1,
+   "huntTy": 7,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=469 day=118",
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 469,
+     "day": 118,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "departed",
+     "sub": null,
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 0
+      }
+     ],
+     "heal": [
+      {
+       "satOut": false,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": true,
+       "postState": "out"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "statickite",
+   "wave": 2,
+   "pickDay": 120,
+   "pickPart": 476,
+   "pickDayPart": 0,
+   "huntDay": 117,
+   "huntTx": 4,
+   "huntTy": 5,
+   "cls": "superseded-by-needs-pick",
+   "reason": "first later pick part=479 day=120 chose EAT",
+   "evalCount": 0,
+   "evalChain": []
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "pickDay": 136,
+   "pickPart": 540,
+   "pickDayPart": 0,
+   "huntDay": 133,
+   "huntTx": 3,
+   "huntTy": 4,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=540 day=136",
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 540,
+     "day": 136,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": true,
+     "action": "departed",
+     "sub": null,
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 0
+      }
+     ],
+     "heal": [
+      {
+       "satOut": false,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": true,
+       "postState": "out"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": {
+  "superseded-by-needs-pick": 1,
+  "departed-pick-linked": 1
+ },
+ "classesByCorpus": {},
+ "unknown": 0,
+ "leg2": {
+  "wave4Evals": 6,
+  "otherEvals": 0,
+  "otherHeldEvals": 0,
+  "overwriteWithoutVerdict": 0,
+  "outside": {
+   "dangerOutside": 788,
+   "departOutside": 0,
+   "healOutside": 0,
+   "tightenOutside": 0
+  }
+ },
+ "perturbation": {
+  "diffs": [],
+  "equal": true
+ },
+ "drift": {
+  "lotteryPrimary": 2,
+  "lotteryDeparted": 1,
+  "freshPrimary": 2,
+  "freshDeparted": 1
+ },
+ "guards": {
+  "off": {
+   "starvation": 1,
+   "deaths": 286,
+   "medianDays": 146,
+   "wave4": 6,
+   "wins": 3
+  },
+  "on": {
+   "starvation": 1,
+   "deaths": 286,
+   "medianDays": 146,
+   "wave4": 6,
+   "wins": 3
+  },
+  "lotteryBase": {
+   "starvation": 1,
+   "deaths": 286,
+   "medianDays": 146,
+   "wave4": 6,
+   "wins": 3
+  }
+ },
+ "hygiene": {
+  "75101": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75102": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75103": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75104": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75105": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75106": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75107": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  },
+  "75108": {
+   "errs": 0,
+   "errors": [],
+   "overflow": {},
+   "installed": true
+  }
+ },
+ "unknownWave": [],
+ "secondaryClasses": {
+  "departed-pick-linked": 3,
+  "overwritten-danger": 2,
+  "superseded-by-needs-pick": 1
+ },
+ "orphanOverwrites": 0,
+ "wave4OverwrittenEvals": 0,
+ "legs": {
+  "leg1_completeness": true,
+  "leg2_noUnrecordedOverwrites": true,
+  "leg3_overwriteAnswered": true,
+  "leg3a_recordedOverwrite": false,
+  "leg4_perturbation": true,
+  "verdict": "DIAG-GO"
+ }
+}
