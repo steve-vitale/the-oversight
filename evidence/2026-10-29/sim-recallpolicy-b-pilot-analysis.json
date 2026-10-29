@@ -1,0 +1,624 @@
+{
+ "seeds": [
+  68101,
+  68102,
+  68103,
+  68104,
+  68105,
+  68106,
+  68107,
+  68108
+ ],
+ "nSeeds": 8,
+ "triggers": {
+  "on": 8,
+  "off": 15
+ },
+ "rescuedStrict": 0,
+ "rescueRate": 0,
+ "starvation": {
+  "on": 8,
+  "off": 8,
+  "triggeredStarvedOn": 0,
+  "triggeredStarvedOff": 0
+ },
+ "guards": {
+  "G1_medianSurvival": {
+   "on": 101,
+   "off": 133.5,
+   "pass": false
+  },
+  "G2_starvationTotals": {
+   "on": 8,
+   "off": 8,
+   "pass": true
+  },
+  "G3_illegalMoves": {
+   "n": 0,
+   "pass": true
+  }
+ },
+ "instrumentErrors": {
+  "on": 0,
+  "off": 0
+ },
+ "illegalMoves": [],
+ "pilotGate": false,
+ "primary": "NO-GO",
+ "wall": {
+  "off": {
+   "n": 8,
+   "national": 2,
+   "everNational": 3,
+   "table": 5,
+   "won": 0,
+   "wave4": 4,
+   "wave5": 0,
+   "medianSurvival": 133.5
+  },
+  "on": {
+   "n": 8,
+   "national": 1,
+   "everNational": 4,
+   "table": 6,
+   "won": 0,
+   "wave4": 6,
+   "wave5": 0,
+   "medianSurvival": 101
+  }
+ },
+ "episodes": [
+  {
+   "seed": 68101,
+   "leg": "on",
+   "vid": "gen_9a2i7h6",
+   "name": "Mainul",
+   "fireDay": 34,
+   "fireDist": 2,
+   "outcome": "natural-duration-node-wild",
+   "outcomeDay": 38,
+   "death": {
+    "day": 111,
+    "cause": "the arena",
+    "pclass": "combat-moderator"
+   },
+   "steps": 1
+  },
+  {
+   "seed": 68101,
+   "leg": "on",
+   "vid": "thabo_maseko",
+   "name": "Thabo",
+   "fireDay": 50,
+   "fireDist": 2,
+   "outcome": "scope-excluded",
+   "outcomeDay": 50,
+   "death": {
+    "day": 139,
+    "cause": "the wild",
+    "pclass": "combat-eulogy"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68101,
+   "leg": "off",
+   "vid": "gen_9a2i7h6",
+   "name": "Mainul",
+   "fireDay": 34,
+   "fireDist": 2,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68101,
+   "leg": "off",
+   "vid": "gen_9a2i7h6",
+   "name": "Mainul",
+   "fireDay": 67,
+   "fireDist": 2,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68101,
+   "leg": "off",
+   "vid": "gen_jfc3tqj",
+   "name": "Jimena",
+   "fireDay": 80,
+   "fireDist": 6,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68101,
+   "leg": "off",
+   "vid": "gen_9ov3ati",
+   "name": "Esteban",
+   "fireDay": 99,
+   "fireDist": 2,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68101,
+   "leg": "off",
+   "vid": "jovan_milic",
+   "name": "Jovan",
+   "fireDay": 164,
+   "fireDist": 1,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68103,
+   "leg": "on",
+   "vid": "hannah_kim",
+   "name": "Hannah",
+   "fireDay": 6,
+   "fireDist": 6,
+   "outcome": "scope-excluded",
+   "outcomeDay": 6,
+   "death": {
+    "day": 17,
+    "cause": "monster",
+    "pclass": "combat-anaconda_empress"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68103,
+   "leg": "on",
+   "vid": "gen_f7bnfcl",
+   "name": "Misky",
+   "fireDay": 39,
+   "fireDist": 1,
+   "outcome": "arrived-after-schedule",
+   "outcomeDay": 42,
+   "death": {
+    "day": 74,
+    "cause": "the wild",
+    "pclass": "combat-terms_of_service"
+   },
+   "steps": 1
+  },
+  {
+   "seed": 68103,
+   "leg": "off",
+   "vid": "hannah_kim",
+   "name": "Hannah",
+   "fireDay": 6,
+   "fireDist": 6,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 17,
+    "cause": "monster",
+    "pclass": "combat-anaconda_empress"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68103,
+   "leg": "off",
+   "vid": "gen_f7bnfcl",
+   "name": "Misky",
+   "fireDay": 39,
+   "fireDist": 1,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 64,
+    "cause": "the wild",
+    "pclass": "combat-redactor"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68103,
+   "leg": "off",
+   "vid": "tom_baker",
+   "name": "Tom",
+   "fireDay": 79,
+   "fireDist": 1,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 117,
+    "cause": "the wild",
+    "pclass": "combat-callback"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "on",
+   "vid": "gen_8qdn599",
+   "name": "A person, maybe 60s",
+   "fireDay": 4,
+   "fireDist": 3,
+   "outcome": "scope-excluded",
+   "outcomeDay": 4,
+   "death": {
+    "day": 5,
+    "cause": "monster",
+    "pclass": "combat-murkcap"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "on",
+   "vid": "gen_whn026v",
+   "name": "Evelyn",
+   "fireDay": 17,
+   "fireDist": 4,
+   "outcome": "natural-duration",
+   "outcomeDay": 21,
+   "death": {
+    "day": 80,
+    "cause": "the wild",
+    "pclass": "combat-suburb"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "on",
+   "vid": "gen_rxk3734",
+   "name": "Michael",
+   "fireDay": 65,
+   "fireDist": 2,
+   "outcome": "arrived-after-schedule",
+   "outcomeDay": 67,
+   "death": {
+    "day": 74,
+    "cause": "the wild",
+    "pclass": "combat-eulogy"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "off",
+   "vid": "gen_8qdn599",
+   "name": "A person, maybe 60s",
+   "fireDay": 4,
+   "fireDist": 3,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 5,
+    "cause": "monster",
+    "pclass": "combat-murkcap"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "off",
+   "vid": "gen_whn026v",
+   "name": "Evelyn",
+   "fireDay": 17,
+   "fireDist": 4,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 105,
+    "cause": "the wild",
+    "pclass": "combat-reunion"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "off",
+   "vid": "gen_rxk3734",
+   "name": "Michael",
+   "fireDay": 65,
+   "fireDist": 2,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 101,
+    "cause": "the wild",
+    "pclass": "combat-understudy"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68104,
+   "leg": "off",
+   "vid": "somchai_prasert",
+   "name": "Somchai",
+   "fireDay": 86,
+   "fireDist": 2,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 109,
+    "cause": "the wild",
+    "pclass": "combat-gavel"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68105,
+   "leg": "on",
+   "vid": "gen_uh0o1ed",
+   "name": "Hugo",
+   "fireDay": 38,
+   "fireDist": 3,
+   "outcome": "natural-duration",
+   "outcomeDay": 41,
+   "death": {
+    "day": 49,
+    "cause": "the wild",
+    "pclass": "combat-eater"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68105,
+   "leg": "off",
+   "vid": "gen_uh0o1ed",
+   "name": "Hugo",
+   "fireDay": 38,
+   "fireDist": 3,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 49,
+    "cause": "the wild",
+    "pclass": "combat-eater"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68106,
+   "leg": "on",
+   "vid": "gen_yv80m3z",
+   "name": "Noella",
+   "fireDay": 4,
+   "fireDist": 6,
+   "outcome": "scope-excluded",
+   "outcomeDay": 4,
+   "death": {
+    "day": 5,
+    "cause": "monster",
+    "pclass": "combat-gallowdeer"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68106,
+   "leg": "on",
+   "vid": "gen_8tbw23t",
+   "name": "Natalia",
+   "fireDay": 7,
+   "fireDist": 6,
+   "outcome": "natural-duration",
+   "outcomeDay": 9,
+   "death": {
+    "day": 10,
+    "cause": "sickness",
+    "pclass": "sickness-sickness"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68106,
+   "leg": "off",
+   "vid": "gen_yv80m3z",
+   "name": "Noella",
+   "fireDay": 4,
+   "fireDist": 6,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 5,
+    "cause": "monster",
+    "pclass": "combat-gallowdeer"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68106,
+   "leg": "off",
+   "vid": "gen_8tbw23t",
+   "name": "Natalia",
+   "fireDay": 7,
+   "fireDist": 6,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 10,
+    "cause": "sickness",
+    "pclass": "sickness-sickness"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "on",
+   "vid": "sam_wilson",
+   "name": "Sam",
+   "fireDay": 60,
+   "fireDist": 2,
+   "outcome": "natural-duration-node-wild",
+   "outcomeDay": 63,
+   "death": {
+    "day": 68,
+    "cause": "sickness",
+    "pclass": "sickness-sickness"
+   },
+   "steps": 1
+  },
+  {
+   "seed": 68107,
+   "leg": "on",
+   "vid": "mateo_alvarez",
+   "name": "Mateo",
+   "fireDay": 154,
+   "fireDist": 3,
+   "outcome": "died-en-route",
+   "outcomeDay": 156,
+   "death": {
+    "day": 155,
+    "cause": "The Algorithm",
+    "pclass": "combat-algorithm"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "on",
+   "vid": "visjoin_145",
+   "name": "Wanda",
+   "fireDay": 158,
+   "fireDist": 2,
+   "outcome": "scope-excluded",
+   "outcomeDay": 158,
+   "death": {
+    "day": 165,
+    "cause": "the wild",
+    "pclass": "combat-eater"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "off",
+   "vid": "sam_wilson",
+   "name": "Sam",
+   "fireDay": 60,
+   "fireDist": 2,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "off",
+   "vid": "nina_petrova",
+   "name": "Nina",
+   "fireDay": 88,
+   "fireDist": 4,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "off",
+   "vid": "sam_wilson",
+   "name": "Sam",
+   "fireDay": 128,
+   "fireDist": 3,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "off",
+   "vid": "sam_wilson",
+   "name": "Sam",
+   "fireDay": 153,
+   "fireDist": 4,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68107,
+   "leg": "off",
+   "vid": "nina_petrova",
+   "name": "Nina",
+   "fireDay": 162,
+   "fireDist": 6,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": null,
+   "steps": 0
+  },
+  {
+   "seed": 68108,
+   "leg": "on",
+   "vid": "gen_bv7owv5",
+   "name": "Sayri",
+   "fireDay": 47,
+   "fireDist": 4,
+   "outcome": "scope-excluded",
+   "outcomeDay": 47,
+   "death": {
+    "day": 57,
+    "cause": "monster",
+    "pclass": "combat-heckler"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68108,
+   "leg": "on",
+   "vid": "sari_wulandari",
+   "name": "Sari",
+   "fireDay": 110,
+   "fireDist": 6,
+   "outcome": "scope-excluded",
+   "outcomeDay": 110,
+   "death": {
+    "day": 112,
+    "cause": "sickness",
+    "pclass": "sickness-sickness"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68108,
+   "leg": "off",
+   "vid": "gen_bv7owv5",
+   "name": "Sayri",
+   "fireDay": 47,
+   "fireDist": 4,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 57,
+    "cause": "monster",
+    "pclass": "combat-heckler"
+   },
+   "steps": 0
+  },
+  {
+   "seed": 68108,
+   "leg": "off",
+   "vid": "sari_wulandari",
+   "name": "Sari",
+   "fireDay": 110,
+   "fireDist": 6,
+   "outcome": null,
+   "outcomeDay": null,
+   "death": {
+    "day": 112,
+    "cause": "sickness",
+    "pclass": "sickness-sickness"
+   },
+   "steps": 0
+  }
+ ]
+}
