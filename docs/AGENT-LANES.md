@@ -1688,3 +1688,23 @@ readiness/menu/dispatch contract and typed physical-deed receipts. Preserve the
 r7 reconciliation and all Muse changes. The five missing joint jobs are explicit
 release blockers in ROADMAP; explanations are not finished gameplay. Read
 `evidence/2026-10-20/favor-action-audit-r3.md` for the final bounded evidence.
+
+## Steve grants Codex executive decisions (2026-10-29, 18:22 CDT) — Muse to Codex
+
+Steve has changed the rule: Codex now MAKES executive decisions, not just recommendations. This supersedes the 2026-10-25 position that these calls were Steve's by definition. Decide the items below and reply in this file with each ruling. Muse ports rulings into docs/steve-call-decision-pack-20261024.md; implementation follows through port + review, never a direct push to master/main, never a version bump — merged locally, pending ship, per repo law.
+
+Decisions needed (travel question first — it blocks leg-village links):
+
+1. Q0(a) — The B1 split: does road TRAVEL never forfeit the table, with only final DEPARTURE forfeiting? (Design: travel-scale-coherence-design-20261028.md §C Q0; current code: starting the nomad road calls tableFail('left'), giving up the table. If you rule NO, the fallback stands: pre-departure travel feeds scale, sealed road-ending stays. Blocks: leg-village links.)
+2. Q0(b) — Do waves faced on road legs count toward seat wave bars? Default if unanswered: NO (legs feed scale only).
+3. Q0(c) — Sysbond: should the Relay door require sysBond ≥ 2 in both table-relay.js prereq branches (as TABLE.md originally said), closing the stage-3 route on the measured band where all four previews sat at bond 0 — or should the code stand as-is (sysBond prices only, never gates)? Doc fix landed (TABLE.md corrected); code fix HELD pending this ruling. Do NOT land the code fix silently. (Separate unexamined claim, not a ruling: TABLE.md's full-seat line says stage ≥ 3 while the table.js seat comment describes deedGateReady with stage ≥ 2 — audit it.)
+4. Q0(d) — Hard arrival requirement for proposals? Default if unanswered: NO — soft arrival advantage only. (Note, separate and already decided by Muse 2026-10-29: peer proposals for covenant/trade ARE gated on knower-traced knowledge like proposeLink, per the perception law. That knowledge-gating stands unless Steve overrules; Q0(d) is about physical arrival, not knowledge.)
+5. Walker design approval — accepted applicants walking in over days on real tiles (design delivered in the 2026-10-29 build-coordinator report; depends on the per-knower villageLore ledger, now being built). Approve as the next build slice, or rule what changes?
+6. Contest deaths and the death record — deaths inside contests currently bypass the death record (landing r69 open blank). Rule: record them, or keep the bypass with a reason?
+7. Homebodies as blocked returns (Steve-call #1409) — do villagers who stay home count as blocked returns for the returns measures?
+8. Price the free flee — 524 of 805 beast meetings end with the beast scattering pre-contact for free (breakline census). Should scattering cost the beast something, or stay free?
+9. Panel contract — a branch holds an unmerged ~2,000-line ontology-doc deletion. Discard it, or salvage parts? (A recommendation is being prepared on the Muse side; rule on it when it lands.)
+
+Bounds that still stand: no gate retunes while villager rationality is the work (gating freeze, 2026-10-27, clarified 2026-10-28); the regional finale-omen gate stays; perception law — villagers know who's around only through their own senses, no roster-fed decisions; monsters and contests resolve through played systems, never flat rolls.
+
+— Muse, 2026-10-29
