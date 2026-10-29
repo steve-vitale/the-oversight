@@ -1,0 +1,779 @@
+{
+ "seeds": [
+  75101,
+  75102,
+  75103,
+  75104,
+  75105,
+  75106,
+  75107,
+  75108
+ ],
+ "confirm": false,
+ "primaryOff": [
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "eulogy",
+   "wave": 4,
+   "pickDay": 135,
+   "pickPart": 536,
+   "pickDayPart": 0,
+   "huntDay": 132,
+   "huntTx": 5,
+   "huntTy": 3,
+   "cls": "superseded-by-needs-pick",
+   "reason": "first later pick part=539 day=135 chose EAT",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "freshPickOverwrite": false,
+   "evalCount": 0,
+   "evalChain": []
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_115",
+   "mid": "eulogy",
+   "wave": 4,
+   "pickDay": 135,
+   "pickPart": 536,
+   "pickDayPart": 0,
+   "huntDay": 132,
+   "huntTx": 5,
+   "huntTy": 3,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=544 day=137",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "freshPickOverwrite": false,
+   "evalCount": 6,
+   "evalChain": [
+    {
+     "part": 537,
+     "day": 135,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "dangerRawCount": 0,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": false
+    },
+    {
+     "part": 538,
+     "day": 135,
+     "dayPart": 2,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "dangerRawCount": 0,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": false
+    },
+    {
+     "part": 540,
+     "day": 136,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "dangerRawCount": 0,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": false
+    },
+    {
+     "part": 541,
+     "day": 136,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "dangerRawCount": 0,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": false
+    },
+    {
+     "part": 542,
+     "day": 136,
+     "dayPart": 2,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "no-attempt-early-return",
+     "reason": "sick",
+     "danger": [],
+     "dangerRawCount": 0,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": false
+    },
+    {
+     "part": 544,
+     "day": 137,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "departed",
+     "sub": null,
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 1
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [
+      {
+       "satOut": false,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": true,
+       "postState": "out"
+      }
+     ],
+     "heldByLever": false
+    }
+   ]
+  }
+ ],
+ "primaryOn": [
+  {
+   "seed": 75107,
+   "vid": "visjoin_171",
+   "mid": "influencer",
+   "wave": 4,
+   "pickDay": 176,
+   "pickPart": 700,
+   "pickDayPart": 0,
+   "huntDay": 174,
+   "huntTx": 4,
+   "huntTy": 5,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=701 day=176",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "freshPickOverwrite": false,
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 701,
+     "day": 176,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "departed",
+     "sub": null,
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 1
+      }
+     ],
+     "dangerRawCount": 2,
+     "heal": [
+      {
+       "satOut": false,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": true,
+       "postState": "out"
+      }
+     ],
+     "heldByLever": false
+    }
+   ]
+  },
+  {
+   "seed": 75107,
+   "vid": "visjoin_171",
+   "mid": "influencer",
+   "wave": 4,
+   "pickDay": 177,
+   "pickPart": 706,
+   "pickDayPart": 2,
+   "huntDay": 176,
+   "huntTx": 4,
+   "huntTy": 5,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=708 day=178",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "freshPickOverwrite": false,
+   "evalCount": 0,
+   "evalChain": []
+  }
+ ],
+ "secondaryOn": [],
+ "classesOff": {
+  "superseded-by-needs-pick": 1,
+  "departed-pick-linked": 1
+ },
+ "classesOn": {
+  "departed-pick-linked": 2
+ },
+ "secondaryClassesOn": {},
+ "unknown": 0,
+ "unknownWave": [],
+ "instrument": {
+  "onOther": 0,
+  "onOtherHeldUnexplained": 0,
+  "offOtherHeldUnexplained": 0,
+  "onOverwriteWithoutVerdict": 0
+ },
+ "heldStarvation": [],
+ "guards": {
+  "off": {
+   "starvation": 1,
+   "deaths": 286,
+   "medianDays": 146,
+   "wave4": 6,
+   "wins": 3
+  },
+  "on": {
+   "starvation": 2,
+   "deaths": 236,
+   "medianDays": 153,
+   "wave4": 4,
+   "wins": 3
+  }
+ },
+ "hygiene": {
+  "off": {
+   "75101": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75102": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75103": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75104": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75105": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75106": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75107": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75108": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   }
+  },
+  "on": {
+   "75101": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75102": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75103": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75104": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75105": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75106": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75107": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75108": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   }
+  }
+ },
+ "drift": {
+  "departholdOnPrimary": 2,
+  "departholdOnDeparted": 1,
+  "freshOffPrimary": 2,
+  "freshOffDeparted": 1
+ },
+ "hygieneOk": true,
+ "counts": {
+  "offDeparted": 1,
+  "onDeparted": 2,
+  "mechanismHeldThenDeparted": false
+ },
+ "legs": {
+  "p1_mechanism": false,
+  "p2_count": true,
+  "p3_completenessInstrument": true,
+  "p4_hygiene": true,
+  "g1_starvation": false,
+  "g2_wall": false,
+  "g3_noHeldStarvation": true,
+  "verdict": "NO-GO"
+ },
+ "secondaryHeld": {
+  "picksWithHolds": 0,
+  "heldThenDeparted": 0,
+  "heldBeforeOverwrite": 0,
+  "freshPickOverwrites": 0
+ },
+ "primaryHeld": {
+  "picksWithHolds": 0,
+  "heldThenDeparted": 0,
+  "heldBeforeOverwrite": 0,
+  "freshPickOverwrites": 0
+ }
+}
