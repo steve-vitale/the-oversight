@@ -253,6 +253,45 @@ National / table / wins: NOT OBSERVABLE inside
 as zeros. Wave 4–5 reach, median survival reported
 from the corpora as observed.
 
+## AMENDMENT 2026-10-29 (pre-judging, instrument correction — no census number has been judged yet)
+
+Two defects in the Phase 1 census definition, found while
+inspecting the raw corpus before running the analyzer:
+1. BREACH is once-per-run. progression.js crisis_once:
+fireCrisis dedupes via pg.crises keys, one per kind per
+run. startCombat fires fireCrisis('breach') for every
+haven fight, but only the run's FIRST haven fight
+actually says the BREACH lines; later dawn-raid fights
+have BREACH suppressed by dedup, not absent from the
+mechanism. Prereg clause (b) ("sayTail contains the
+BREACH lines") therefore cannot be a required leg for
+repeat fights — it would exclude the flagship 10713/28
+fight, whose run already spent its BREACH at loop-day
+11. CORRECTED: the census discriminator is (a)
+raid-pending + (c) hall fight + morning-interval
+membership; BREACH status is REPORTED per fight as
+in-tail / suppressed-by-dedup (run already fired
+'breach' on an earlier haven fight) / truncated (the
+creation sayTail is only the last 12 lines of
+startCombat's own say window, so absence from the
+tail alone never proves absence from the stream).
+2. The creation sayTail is the last 12 lines of
+startCombat's own say window (fightorigin driver:
+slice(-12)). Fight-intro lines can be pushed out of
+it, and the tail is the instrumented waking window,
+not the full say stream. Phase 1 "raid-named" is
+therefore judged on the recorded tail exactly as
+defined, with this truncation stated — and G1
+(post-change) requires the new raid line to survive
+that same 12-line window, verified empirically on
+the post-change corpus, not assumed from code
+position.
+This amendment changes no band, substrate, GO bar, or
+neutrality gate. It corrects a mechanical
+misdescription of the engine before any census number
+is judged, in the same class as the fightorigin
+pre-confirm amendment.
+
 ## Metric review (mandatory section in the evidence file)
 
 Every evidence file carries a metric review: whether
