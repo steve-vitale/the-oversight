@@ -47,7 +47,9 @@ function mean(a) { return a.length ? a.reduce((t, x) => t + x, 0) / a.length : 0
 function med(a) { const s = a.slice().sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : 0; }
 
 async function fightCell(cfg, beast, rngSeed) {
-  const { Game: G, loadFails } = await loadGame({ seed: 75106, mode: 'geartier-a', fullTelemetry: false });
+  // Fresh-seed re-run support (P4 rerun prereg): env overrides, defaults
+  // reproduce the original geartier-a run exactly (load 75106, base 9100).
+  const { Game: G, loadFails } = await loadGame({ seed: Number(process.env.GEARTIER_LOAD_SEED || 75106), mode: 'geartier-a', fullTelemetry: false });
   if (loadFails.length) throw new Error('loadFails: ' + loadFails.join('; '));
   await setupGame(G);
   try { G.state.scholar.day = 120; } catch (e) {}
@@ -132,6 +134,7 @@ async function main() {
   if (outIdx >= 0) { outPath = args[outIdx + 1]; args.splice(outIdx, 2); }
   const wanted = args.length ? args.filter(a => CELLS[a]) : Object.keys(CELLS);
   if (!wanted.length) { console.error('no known cells requested'); process.exit(2); }
+  console.log(`GEARTIER seeds: load=${process.env.GEARTIER_LOAD_SEED || 75106} fightBase=${process.env.GEARTIER_SEED_BASE || 9100}`);
   const results = {};
   for (const name of wanted) {
     const cfg = CELLS[name];
@@ -140,7 +143,7 @@ async function main() {
       for (let s = 0; s < 5; s++) {
         // PAIRED seeds: identical across cells (beast + index only), so
         // post-vs-pre and cell-vs-cell comparisons share RNG streams.
-        const c = await fightCell(cfg, beast, 9100 + s * 131 + beast.hp);
+        const c = await fightCell(cfg, beast, Number(process.env.GEARTIER_SEED_BASE || 9100) + s * 131 + beast.hp);
         c.cfg = name;
         cells.push(c);
       }
