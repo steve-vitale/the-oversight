@@ -1,0 +1,993 @@
+{
+  "verdict": {
+    "seeds": 8,
+    "seedList": [
+      11031,
+      11077,
+      11149,
+      11299,
+      11360,
+      11384,
+      11390,
+      11439
+    ],
+    "primary": {
+      "refusedN": 15,
+      "rescuedN": 15,
+      "rate": 1,
+      "bar": 0.5,
+      "minN": 8,
+      "minNMet": true
+    },
+    "g1": {
+      "medianBefore": 30,
+      "medianAfter": 30,
+      "pass": true
+    },
+    "g2": {
+      "starvationBefore": 2,
+      "starvationAfter": 4,
+      "pass": true
+    },
+    "g3": {
+      "violations": 0,
+      "pass": true
+    },
+    "verdict": "GO",
+    "go": true,
+    "beforeRefused": 84,
+    "afterDetourAttempted": 15,
+    "afterDetourStopped": 0,
+    "afterDetourNopath": 0,
+    "afterDetourDied": 0,
+    "afterDetourStepsTotal": 45,
+    "afterDetourStepsCombat": 0,
+    "afterDetourEncounterRatePerStep": 0,
+    "streakBeforeMean": 6,
+    "streakBeforeMax": 9,
+    "streakAfterMean": null,
+    "streakAfterMax": 0,
+    "rescuedMorningInside": 14,
+    "rescuedWithMorning": 15,
+    "partitionHolds": true,
+    "gateOffDetourAttempted": 0,
+    "wave4_5": {
+      "before": 0,
+      "after": 0
+    }
+  },
+  "rows": {
+    "before": {
+      "11031": {
+        "seed": 11031,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 17,
+        "refused": 17,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 17,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 3,
+        "streakList": [
+          {
+            "startDay": 4,
+            "endDay": 10,
+            "evenings": 7
+          },
+          {
+            "startDay": 16,
+            "endDay": 19,
+            "evenings": 4
+          },
+          {
+            "startDay": 24,
+            "endDay": 29,
+            "evenings": 6
+          }
+        ],
+        "streakMean": 5.666666666666667,
+        "streakMax": 7,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 12,
+        "starvationDeaths": 1,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 11,
+          "travel-refused": 17
+        },
+        "grantOk": true
+      },
+      "11077": {
+        "seed": 11077,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 7,
+        "refused": 7,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 7,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 1,
+        "streakList": [
+          {
+            "startDay": 4,
+            "endDay": 10,
+            "evenings": 7
+          }
+        ],
+        "streakMean": 7,
+        "streakMax": 7,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 10,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8
+        },
+        "outcomes": {
+          "already-inside": 4,
+          "completed": 19,
+          "travel-refused": 7
+        },
+        "grantOk": true
+      },
+      "11149": {
+        "seed": 11149,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 18,
+        "refused": 18,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 18,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 3,
+        "streakList": [
+          {
+            "startDay": 4,
+            "endDay": 10,
+            "evenings": 7
+          },
+          {
+            "startDay": 13,
+            "endDay": 21,
+            "evenings": 9
+          },
+          {
+            "startDay": 29,
+            "endDay": 30,
+            "evenings": 2
+          }
+        ],
+        "streakMean": 6,
+        "streakMax": 9,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 6,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 10,
+          "travel-refused": 18
+        },
+        "grantOk": true
+      },
+      "11299": {
+        "seed": 11299,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 7,
+        "refused": 6,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 1,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 7,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 1,
+        "streakList": [
+          {
+            "startDay": 11,
+            "endDay": 16,
+            "evenings": 6
+          }
+        ],
+        "streakMean": 6,
+        "streakMax": 6,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 4
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 21,
+          "travel-refused": 6,
+          "blocked-combat": 1
+        },
+        "grantOk": true
+      },
+      "11360": {
+        "seed": 11360,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 8,
+        "refused": 8,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 8,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 1,
+        "streakList": [
+          {
+            "startDay": 8,
+            "endDay": 15,
+            "evenings": 8
+          }
+        ],
+        "streakMean": 8,
+        "streakMax": 8,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 8,
+        "starvationDeaths": 1,
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 5
+        },
+        "outcomes": {
+          "already-inside": 3,
+          "completed": 19,
+          "travel-refused": 8
+        },
+        "grantOk": true
+      },
+      "11384": {
+        "seed": 11384,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 8,
+        "refused": 8,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 8,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 1,
+        "streakList": [
+          {
+            "startDay": 8,
+            "endDay": 15,
+            "evenings": 8
+          }
+        ],
+        "streakMean": 8,
+        "streakMax": 8,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 8,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 19,
+          "travel-refused": 8,
+          "walk-interrupted-combat": 1
+        },
+        "grantOk": true
+      },
+      "11390": {
+        "seed": 11390,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 10,
+        "refused": 10,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 10,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 2,
+        "streakList": [
+          {
+            "startDay": 14,
+            "endDay": 16,
+            "evenings": 3
+          },
+          {
+            "startDay": 22,
+            "endDay": 28,
+            "evenings": 7
+          }
+        ],
+        "streakMean": 5,
+        "streakMax": 7,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 14,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 6
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 18,
+          "travel-refused": 10
+        },
+        "grantOk": true
+      },
+      "11439": {
+        "seed": 11439,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 10,
+        "refused": 10,
+        "rescued": 0,
+        "rescueRate": 0,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 10,
+        "detourAttempted": 0,
+        "detourRescued": 0,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 0,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": null,
+        "detourPathLenMean": null,
+        "detourPathLenHist": {},
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 2,
+        "streakList": [
+          {
+            "startDay": 4,
+            "endDay": 9,
+            "evenings": 6
+          },
+          {
+            "startDay": 12,
+            "endDay": 15,
+            "evenings": 4
+          }
+        ],
+        "streakMean": 5,
+        "streakMax": 6,
+        "rescuedMorningInside": 0,
+        "rescuedWithMorning": 0,
+        "deaths": 10,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 18,
+          "travel-refused": 10
+        },
+        "grantOk": true
+      }
+    },
+    "after": {
+      "11031": {
+        "seed": 11031,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 5,
+        "refused": 5,
+        "rescued": 5,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 5,
+        "detourAttempted": 5,
+        "detourRescued": 5,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 14,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 2.8,
+        "detourPathLenHist": {
+          "2": 3,
+          "4": 2
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 5,
+        "rescuedWithMorning": 5,
+        "deaths": 7,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5,
+          "2": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      },
+      "11077": {
+        "seed": 11077,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 1,
+        "refused": 1,
+        "rescued": 1,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 1,
+        "detourAttempted": 1,
+        "detourRescued": 1,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 2,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 2,
+        "detourPathLenHist": {
+          "2": 1
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 1,
+        "rescuedWithMorning": 1,
+        "deaths": 8,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      },
+      "11149": {
+        "seed": 11149,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 2,
+        "refused": 2,
+        "rescued": 2,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 2,
+        "detourAttempted": 2,
+        "detourRescued": 2,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 4,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 2,
+        "detourPathLenHist": {
+          "2": 2
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 2,
+        "rescuedWithMorning": 2,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      },
+      "11299": {
+        "seed": 11299,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 1,
+        "refused": 1,
+        "rescued": 1,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 1,
+        "detourAttempted": 1,
+        "detourRescued": 1,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 3,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 3,
+        "detourPathLenHist": {
+          "3": 1
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 1,
+        "rescuedWithMorning": 1,
+        "deaths": 10,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 7
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      },
+      "11360": {
+        "seed": 11360,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 9,
+        "refused": 2,
+        "rescued": 2,
+        "rescueRate": 1,
+        "blockedGuardAway": 1,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 6,
+        "otherAway": 0,
+        "partitionSum": 9,
+        "detourAttempted": 2,
+        "detourRescued": 2,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 8,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 4,
+        "detourPathLenHist": {
+          "4": 2
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 1,
+        "rescuedWithMorning": 2,
+        "deaths": 9,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 5,
+          "2": 1
+        },
+        "outcomes": {
+          "already-inside": 4,
+          "completed": 19,
+          "out-of-reach": 6,
+          "blocked-combat": 1
+        },
+        "grantOk": true
+      },
+      "11384": {
+        "seed": 11384,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 1,
+        "refused": 1,
+        "rescued": 1,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 1,
+        "detourAttempted": 1,
+        "detourRescued": 1,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 3,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 3,
+        "detourPathLenHist": {
+          "3": 1
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 1,
+        "rescuedWithMorning": 1,
+        "deaths": 11,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 2,
+        "waveKills": {
+          "1": 8,
+          "2": 1
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      },
+      "11390": {
+        "seed": 11390,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 2,
+        "refused": 2,
+        "rescued": 2,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 2,
+        "detourAttempted": 2,
+        "detourRescued": 2,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 8,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 4,
+        "detourPathLenHist": {
+          "4": 2
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 2,
+        "rescuedWithMorning": 2,
+        "deaths": 10,
+        "starvationDeaths": 4,
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 3
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      },
+      "11439": {
+        "seed": 11439,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "evenings": 30,
+        "away": 1,
+        "refused": 1,
+        "rescued": 1,
+        "rescueRate": 1,
+        "blockedGuardAway": 0,
+        "havenUnknownAway": 0,
+        "outOfReachAway": 0,
+        "otherAway": 0,
+        "partitionSum": 1,
+        "detourAttempted": 1,
+        "detourRescued": 1,
+        "detourStopped": 0,
+        "detourNopath": 0,
+        "detourDied": 0,
+        "detourStepsTotal": 3,
+        "detourStepsCombat": 0,
+        "detourEncounterRatePerStep": 0,
+        "detourPathLenMean": 3,
+        "detourPathLenHist": {
+          "3": 1
+        },
+        "g3Violations": 0,
+        "g3": {
+          "teleportSteps": 0,
+          "rescuedOffHaven": 0,
+          "combatThenInside": 0,
+          "stillRefusedMoved": 0,
+          "details": []
+        },
+        "detourAttemptedGateOff": 0,
+        "streakCount": 0,
+        "streakList": [],
+        "streakMean": null,
+        "streakMax": 0,
+        "rescuedMorningInside": 1,
+        "rescuedWithMorning": 1,
+        "deaths": 2,
+        "starvationDeaths": 0,
+        "maxWaveUnlocked": 1,
+        "waveKills": {
+          "1": 2
+        },
+        "outcomes": {
+          "already-inside": 2,
+          "completed": 28
+        },
+        "grantOk": true
+      }
+    }
+  }
+}

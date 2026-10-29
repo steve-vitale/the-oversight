@@ -85,6 +85,44 @@ function combatLive(Game) {
   return false;
 }
 
+// EVENING DETOUR (sim-eveningdetour-b, gate COMPETENT_EVENING_DETOUR=1,
+// default OFF): on a travel-refused evening, walk the BFS route-around
+// path home — orthogonal travelTo steps, each travelBlockage-clean,
+// exactly Arm B's routeAround mechanics (competent.js routeAround,
+// mirrored here, not imported: competent.js is owned by a sibling
+// worker this run and is NOT touched). No clearing, no force, no
+// bridge-building, no detour narration (separate named blank). If
+// any step refuses or combat starts mid-detour, stop honestly where
+// you stand: the caller counts the evening NOT rescued.
+function eveningDetourOn() { return process.env.COMPETENT_EVENING_DETOUR === '1'; }
+function bfsDetourPath(Game, hx, hy) {
+  try {
+    const N = (Game.map && Game.map.worldSize) || 9;
+    const sx = Game.map.px, sy = Game.map.py;
+    const key = (x, y) => x + ',' + y;
+    const prev = {}; prev[key(sx, sy)] = null;
+    const q = [[sx, sy]];
+    while (q.length) {
+      const [x, y] = q.shift();
+      if (x === hx && y === hy) break;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N || key(nx, ny) in prev) continue;
+        let blocked = true;
+        try { blocked = !!Game.travelBlockage(nx, ny, x, y); } catch (e) { blocked = true; }
+        if (blocked) continue;
+        prev[key(nx, ny)] = [x, y];
+        q.push([nx, ny]);
+      }
+    }
+    if (!(key(hx, hy) in prev)) return null;
+    const path = [];
+    let cur = [hx, hy];
+    while (!(cur[0] === sx && cur[1] === sy)) { path.unshift(cur); cur = prev[key(cur[0], cur[1])]; }
+    return path;
+  } catch (e) { return null; }
+}
+
 // The night step. Returns a record; the driver cross-checks it
 // against its own position snapshots (pre-travel, post-step).
 function nightStep(Game, ctx) {
@@ -143,7 +181,53 @@ function nightStep(Game, ctx) {
       hops: 1, forced: false,
     };
     if (Game.over) { rec.outcome = 'travel-died'; return rec; }
-    if (afterHop.mapPx !== hx || afterHop.mapPy !== hy) { rec.outcome = 'travel-refused'; return rec; }
+    if (afterHop.mapPx !== hx || afterHop.mapPy !== hy) {
+      // Hop refused. Gate OFF: the verdict behavior, unchanged.
+      if (!eveningDetourOn()) { rec.outcome = 'travel-refused'; return rec; }
+      // Gate ON: walk the BFS route-around path home, step by step.
+      const detour = { attempted: true, path: null, steps: [], stoppedReason: null };
+      rec.detour = detour; rec.detourAttempted = true;
+      const kcalBeforeDetour = afterHop.kcal, ticksBeforeDetour = afterHop.dayTicks;
+      detour.kcalBeforeDetour = kcalBeforeDetour; detour.ticksBeforeDetour = ticksBeforeDetour;
+      const path = bfsDetourPath(Game, hx, hy);
+      detour.path = path;
+      if (!path) { rec.outcome = 'detour-nopath'; detour.stoppedReason = 'no-path'; return rec; }
+      let reached = false;
+      for (const [tx, ty] of path) {
+        if (Game.over) { rec.outcome = 'detour-died'; detour.stoppedReason = 'died'; break; }
+        if (combatLive(Game)) { rec.outcome = 'detour-stopped'; detour.stoppedReason = 'combat'; break; }
+        const fx = Game.map.px, fy = Game.map.py;
+        let stepErr = null;
+        try { Game.travelTo(tx, ty); } catch (e) { stepErr = String(e && e.message).slice(0, 120); }
+        const afterStep = fullSnap(Game);
+        const moved = afterStep.mapPx === tx && afterStep.mapPy === ty;
+        const stepCombat = combatLive(Game);
+        detour.steps.push({
+          from: { mapPx: fx, mapPy: fy }, to: { mapPx: tx, mapPy: ty },
+          moved, combatLive: stepCombat, stepError: stepErr,
+        });
+        if (Game.over) { rec.outcome = 'detour-died'; detour.stoppedReason = 'died'; break; }
+        if (!moved) { rec.outcome = 'detour-stopped'; detour.stoppedReason = 'step-refused'; break; }
+        if (stepCombat) { rec.outcome = 'detour-stopped'; detour.stoppedReason = 'combat'; break; }
+        if (tx === hx && ty === hy) reached = true;
+      }
+      detour.stepsWalked = detour.steps.filter((s) => s.moved).length;
+      detour.kcalAfterDetour = fullSnap(Game).kcal;
+      if (!reached) {
+        if (!rec.outcome || rec.outcome === 'travel-refused') { rec.outcome = 'detour-stopped'; detour.stoppedReason = detour.stoppedReason || 'not-reached'; }
+        return rec;
+      }
+      // Reached haven, outside, not in combat: the insideevening leg.
+      const ie2 = eveningStep(Game, ctx);
+      rec.outcome = ie2.outcome; rec.method = ie2.method;
+      rec.delegated = ie2;
+      rec.travelledHome = true;
+      detour.rescued = (ie2.outcome === 'completed' || ie2.outcome === 'already-inside');
+      const after2 = fullSnap(Game);
+      detour.kcalAfterEntry = after2.kcal;
+      detour.ticksAfterEntry = after2.dayTicks;
+      return rec;
+    }
     if (combatLive(Game)) { rec.outcome = 'travel-arrived-combat'; return rec; }
     // Arrived home, outside, not in combat: the insideevening leg.
     const ie = eveningStep(Game, ctx);
