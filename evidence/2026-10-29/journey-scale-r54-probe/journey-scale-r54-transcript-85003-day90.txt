@@ -1,0 +1,26 @@
+(pre-talk seed: seek_taken planted d90; takenWantDay=90; convoCount=13)
+=== seed 85003 day 90 — conversation with Joshua (gen_ywl213c) ===
+occupation=arborist temperament=earnest trust=90 dead=false
+want: seek_taken (stage 0)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Someone has to make decisions here. I'm just saying — it might as well be someone who knows how.
+(turn0 choices: dlg:more, dlg:react, dlg:doubt, dlg:invite, dlg:subject, confront:d_v52gphq, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "If I don't step up, someone worse will. That's not ambition, that's arithmetic."
+YOU: [dlg:react] (listen)
+THEM: "Power's a trap. Responsibility's a duty. I know the difference."
+YOU: [dlg:more] "Go on."
+THEM: "Decisions don't make themselves. I learned that watching a group freeze once. Never again."
+YOU: [dlg:react] (listen)
+THEM: "Leadership isn't a title. It's the person who stays up wondering if everyone ate."
+YOU: [dlg:more] "I’m listening."
+THEM: "Leadership is mostly listening, then deciding. People forget the listening part."
+YOU: [dlg:react] (listen)
+THEM: "I don't need to be followed. I need us to not wander in circles."
+YOU: [dlg:more] "I’m listening."
+THEM: "Someone asked me yesterday what the plan was. I had one. That's new. That's — something."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread goal
+closing line: "Good talk."
