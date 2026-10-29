@@ -6575,7 +6575,22 @@
       if (line == null) line = '"..."';
       // A required answer acknowledgment is dialogue grammar. Replacing it
       // with amnesia because another NPC acknowledged a reply is misleading.
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric }) || line;
+      // INVITE OUTCOME IS A DIEGETIC ACT (fix-all succession seam,
+      // 2026-10-28): the invite_party line IS the party decision — accept
+      // pushes the villager into the party, decline is the spoken refusal.
+      // Emitting it through sayLine without the diegeticAct exemption let
+      // the run-wide no-repeat ledger block it whenever another villager
+      // had recently spoken the same accept/decline line, substituting
+      // the first dry line ("...Sorry, lost my train of thought.") — the
+      // r54/r55/r56 dropped-request seam, reproduced on master (A speaks
+      // the decline, B's identical decline dissolves). Same exemption
+      // class as invitation beats (r7) and betrayal-menu outcomes (r25):
+      // a speech act, not flavor. A repeated decision line reads as the
+      // same answer from another person, not a parrot bug. Scoped to
+      // invite_party only: teach / tell-me drops share the ledger but
+      // ride different handlers and are not touched here.
+      const inviteOutcome = choiceId === 'invite_party';
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
