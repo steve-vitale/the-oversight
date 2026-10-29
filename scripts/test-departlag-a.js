@@ -17,13 +17,19 @@ const path = require('path');
 const REPO = path.join(__dirname, '..');
 const SEEDS = [75101, 75102, 75103, 75104, 75105, 75106, 75107, 75108, 75109, 75110, 75111, 75112, 75113, 75114, 75115, 75116];
 const WAVE4 = new Set();
+const WAVEMAP = {};
 try {
   const mons = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'data', 'monsters.json'), 'utf8'));
   const list = Array.isArray(mons) ? mons : (mons.monsters || []);
-  for (const m of list) if ((m.wave | 0) === 4) WAVE4.add(m.id);
+  for (const m of list) { WAVEMAP[m.id] = (m.wave | 0); if ((m.wave | 0) === 4) WAVE4.add(m.id); }
 } catch (e) { /* wave lookup failure surfaces as unknownWave below */ }
 
-function waveOf(mid) { return WAVE4.has(mid) ? 4 : null; }
+// Wave of a monster id: a number when the id exists in
+// monsters.json (any wave), null ONLY when the id is absent.
+// (An earlier draft returned null for every non-wave-4 id, which
+// wrongly pushed wave-1/2/3 picks into unknownWave and collapsed
+// the secondary census onto the primary one.)
+function waveOf(mid) { return Object.prototype.hasOwnProperty.call(WAVEMAP, mid) ? WAVEMAP[mid] : null; }
 
 // Classify ONE pick against one seed row's channels. Pure function,
 // shared with the fixtures script via module.exports.
