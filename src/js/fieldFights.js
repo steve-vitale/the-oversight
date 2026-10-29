@@ -1187,6 +1187,10 @@
               try {
                 gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken, beamTaken: vBeamTaken }));
                 if (gpOut.vHp != null) vHp = gpOut.vHp;
+                // GEARTIER-A (abilities pass): a mend that runs to the
+                // ally lands on the ally's real body, capped by the
+                // fight's allyMax (the ally block below reads allyHp).
+                if (gpOut.allyHp != null && allyIn) allyHp = gpOut.allyHp;
                 if (gpOut.abStun) abStun += gpOut.abStun;
                 if (gpOut.dealt) rec.mDealt += gpOut.dealt;
                 if (gpOut.extraAlly && allyIn && allyHp > 0) {
@@ -1470,6 +1474,18 @@
               lead.hp -= ad; rec.mDealt += ad; rec.allyDealt += ad;
               if (lead.hp <= 0) lead.alive = false;
               rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + ' (' + Math.max(0, lead.hp) + ' left)');
+              // GEARTIER-A (abilities pass): Live Broadcast — the ally
+              // fights louder for two rounds. The counter is set by
+              // fieldAct on the call round and consumed here, one
+              // extra strike per round, so the call round counts as
+              // round one of the two.
+              if (gpF && gpF.broadcastN > 0 && lead.hp > 0) {
+                gpF.broadcastN--;
+                var _bd = lroll([3, 6]);
+                lead.hp -= _bd; rec.mDealt += _bd; rec.allyDealt += _bd;
+                if (lead.hp <= 0) lead.alive = false;
+                rec.log.push('R' + round + ': ' + allyName + ' strikes again, louder — ' + _bd + ' (' + Math.max(0, lead.hp) + ' left). (Live Broadcast)');
+              }
             }
           }
         }

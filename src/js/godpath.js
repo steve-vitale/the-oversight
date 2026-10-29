@@ -1481,7 +1481,15 @@
       if (h.mending_hands && hp < 0.5 && u('mending_hands') < 2 && fieldPay(G, 'mending_hands', 'mend')) {
         const amt = c.lroll([12, 18]);
         out.vHp = Math.min(c.vHpMax, c.vHp + amt);
-        L.push('R' + c.round + ': ' + c.vName + ' presses the wound and it knits: +' + (out.vHp - c.vHp) + ' HP. (Mending Hands)');
+        // GEARTIER-A (abilities pass): the mend runs to the fighting
+        // ally too, when the ally is wounded — two bodies kept up,
+        // not one number. Same kcal, same turn, same uses cap.
+        let allyBit = '';
+        if (c.allyIn && c.allyHp > 0 && c.allyHp < (c.allyMax || 70)) {
+          out.allyHp = Math.min(c.allyMax || 70, c.allyHp + amt);
+          allyBit = ' The thread runs to their ally: +' + (out.allyHp - c.allyHp) + ' HP.';
+        }
+        L.push('R' + c.round + ': ' + c.vName + ' presses the wound and it knits: +' + (out.vHp - c.vHp) + ' HP. (Mending Hands)' + allyBit);
         out.consumed = true; return out;
       }
       const pw = G.power || 1;
@@ -1507,6 +1515,11 @@
       }
       if (h.bird_strike && !u('bird_strike') && fieldPay(G, 'bird_strike', 'call')) {
         G.birds = 3;
+        // GEARTIER-A (abilities pass): the card promises a blind in
+        // tactical; the field port had none. While the birds harry
+        // (call round + 2), the beast's blows miss 25% (fieldIncoming
+        // below). Damage stream unchanged (8-12/round x3).
+        G.birdsUntil = c.round + 2;
         L.push('R' + c.round + ': ' + c.vName + ' whistles up the birds — they harry the ' + c.mName + '. (Bird Strike)');
         out.consumed = true; return out;
       }
@@ -1568,7 +1581,12 @@
           out.extraAlly = 2;
           L.push('R' + c.round + ': ' + c.vName + ' says one word. "NOW." (The Crowd Moves)');
         } else if (h.live_broadcast && !u('live_broadcast') && fieldPay(G, 'live_broadcast', 'go_live')) {
-          out.extraAlly = 1;
+          // GEARTIER-A (abilities pass): the ally fights louder for
+          // TWO rounds (one extra strike per round), not one extra
+          // strike once. fieldFights' ally block consumes the
+          // counter (broadcastN); the call round is round one of
+          // the two. Same kcal, same turn, same once-per-fight gate.
+          G.broadcastN = 2;
           L.push('R' + c.round + ': ' + c.vName + ' goes LIVE — the ally fights louder. (Live Broadcast)');
         } else if (h.aegis_link && !u('aegis_link') && c.allyHp < (c.allyMax || 70) * 0.5 && fieldPay(G, 'aegis_link', 'link')) {
           G.aegis = 3;
@@ -1604,6 +1622,9 @@
       if (!G || !(total > 0)) return total;
       const rr = () => (c.RR ? c.RR() : Math.random());
       if (G.blindUntil >= c.round && rr() < 0.5) { c.log.push('  half-blind, it swings wide. (Pocket Sand)'); return 0; }
+      // GEARTIER-A (abilities pass): birds in its eyes — while the
+      // birds harry, the beast's blows miss 25%.
+      if (G.birdsUntil >= c.round && rr() < 0.25) { c.log.push('  the birds are in its eyes — it swings wide. (Bird Strike)'); return 0; }
       if (G.dodge > 0 && rr() < G.dodge) { c.log.push('  ' + c.vName + ' is already moving — it misses. (Adrenaline Surge)'); return 0; }
       if (G.missUntil >= c.round && rr() < G.missP) { c.log.push('  ' + c.vName + ' saw it coming and isn\'t there. (' + (G.held.prophecy ? 'Prophecy' : 'Foresight') + ')'); return 0; }
       if (G.absorb > 0) { const took = Math.min(total, G.absorbCap); G.absorb--; c.log.push('  a coin turns the blow (' + took + ' absorbed).'); return total - took; }
