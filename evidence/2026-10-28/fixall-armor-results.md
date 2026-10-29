@@ -216,6 +216,29 @@ overrule and order the revert. Next round's work, in order: (1) seeding
 decision (see steve-calls); (2) split bars in pre-reg (seeding rate +
 conversion-among-opportunity); (3) transient-home-window instrument fix.
 
+## Closeout checks (after the verdict — not bars)
+
+- Proof test: scripts/test-fixall-armor.js 32 passed, 0 failed on
+  post-fix code (run: worktree fixall-armor, no ARMORVILLAGE flag).
+- scripts/check.js --quick (worktree fixall-armor, base: branch tip
+  9f900219d incl. the game change): 284 passed, 6 failed in 288s
+  (second run, full capture; first run 284/6 in 327s). The 6 failures
+  are PRE-EXISTING on the base, verified by re-running all 6 with the
+  two game files restored to base commit 3a5c49f49 (all 6 still fail):
+  godpath/test-measurement-proof-update.js (proof inputs not current),
+  godpath/test-measurement-workflow.js (neutrality proof vs current
+  inputs), godpath/test-mobile-combat-cadence.js (Continue wrap),
+  godpath/test-occupation-panels.js (CLI workflow),
+  godpath/test-phone-frame-proof.js (receipt staleness),
+  test-establishment-r20-fixes-20261020.js (racks-full voice gate).
+  None touches armor code; none is caused by this change. Game files
+  were restored to the branch tip afterward (hashes verified) and the
+  proof test re-run green (32/32).
+- Main tree at closeout: clean; HEAD moved during this run from
+  3a5c49f49 to 11ef0c0fa (sibling coordinator-evidence landing) — that
+  landing did not touch src/js/storage.js or src/js/villager-build.js.
+  Nothing from this branch was merged; master carries zero trace of it.
+
 ## Steve-calls (need Steve's ruling — NOT decided here)
 
 1. **(steve-call) Seeding rule for fresh villages.** About half of fresh
