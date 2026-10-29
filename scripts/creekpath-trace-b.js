@@ -107,9 +107,18 @@ async function oneInstance(seed) {
   const policy = Object.assign({}, basePolicy, {
     daily(Game2, ctx) {
       callIdx++;
+      // Arm B instrument fields (non-destructive reads only): tile before
+      // the day runs, and the detour counter the policy accumulates in
+      // ctx (0 under pristine competent, which has no such counter).
+      const prevPx = Game2.map ? Game2.map.px : null;
+      const prevPy = Game2.map ? Game2.map.py : null;
+      const prevDetours = (ctx && ctx.tripHomeDetours) || 0;
       basePolicy.daily(Game2, ctx);
       const pos = snapPos(Game2);
-      const row = { loopDay: callIdx, ...pos };
+      const row = { loopDay: callIdx, ...pos,
+        movedDuringDay: (prevPx === null || prevPy === null) ? null :
+          (pos.mapPx !== prevPx || pos.mapPy !== prevPy),
+        tripHomeDetours: ((ctx && ctx.tripHomeDetours) || 0) - prevDetours };
       if (Game2.over) {
         row.probe = 'game-over';
       } else {

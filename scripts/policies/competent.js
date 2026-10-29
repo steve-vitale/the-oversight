@@ -541,7 +541,7 @@ function feastFightRoad(Game, ctx) {
         if (Game.over || Game.tbfight) break;
       }
     }
-    if (!Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} }
+    if (!Game.tbfight) { ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy); }
     if (ctx._feastFightDay === day) ctx._feastFightSweeps = (ctx._feastFightSweeps || 0) + sweeps;
     else { ctx._feastFightDay = day; ctx._feastFightSweeps = sweeps; }
   } catch (e) {}
@@ -1166,7 +1166,11 @@ function walkTo(Game, hx, hy) {
       if (Game.map.px === px0 && Game.map.py === py0) {
         // refused: stay put, safely — or (opt-in) go around, as the
         // blockage card's own "Go around" button offers a human.
-        if (routeAroundOn() && routeAround(Game, hx, hy)) continue;
+        // (tripHomeDetour: Arm B return legs detour without the global flag.)
+        if ((routeAroundOn() || tripHomeDetour) && routeAround(Game, hx, hy)) {
+          if (tripHomeDetour) tripHomeDetourSteps++;
+          continue;
+        }
         break;
       }
     }
@@ -1206,6 +1210,26 @@ function routeAround(Game, hx, hy) {
     try { Game.travelTo(cur[0], cur[1]); } catch (e) { return false; }
     return Game.map.px !== sx || Game.map.py !== sy;
   } catch (e) { return false; }
+}
+// TRIP-HOME DETOUR (creekpath Arm B, gate COMPETENT_TRIPHOME_ROUTE_AROUND=1,
+// default off): trip return legs walk home via walkTo with route-around
+// enabled ONLY for that leg. Arm A proved walkTo legs alone don't fix the
+// strand — forageTripSeedFirst's final return used a direct travelTo that
+// never tried the detour. walkHome confines the detour to the return: the
+// flag is set, walkTo runs, the flag clears, and the count of route-around
+// steps actually taken is returned (callers bank it in ctx.tripHomeDetours
+// for the census). No other walkTo caller gains route-around from this
+// gate. Perception-lawful: own tile, home haven, engine-offered steps only.
+let tripHomeDetour = false;
+let tripHomeDetourSteps = 0;
+function tripHomeRouteAroundOn() { return process.env.COMPETENT_TRIPHOME_ROUTE_AROUND === '1'; }
+function walkHome(Game, hx, hy) {
+  try {
+    if (!tripHomeRouteAroundOn()) { walkTo(Game, hx, hy); return 0; }
+    tripHomeDetour = true; tripHomeDetourSteps = 0;
+    try { walkTo(Game, hx, hy); } finally { tripHomeDetour = false; }
+    return tripHomeDetourSteps;
+  } catch (e) { tripHomeDetour = false; return 0; }
 }
 // nearest rubble-choked path in travel reach (from the player's tile)
 function nearestRubble(Game) {
@@ -1405,7 +1429,7 @@ function forageTripSeedFirst(Game, ctx) {
       const res = keepKnifeOn
         ? Game.travelTo(pick.x, pick.y)
         : Game.travelTo(pick.x, pick.y, pick.blocked); // legacy: gate-off behavior
-      if (Game.over || Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} return 0; }
+      if (Game.over || Game.tbfight) { ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy); return 0; }
       if (Game.map.px !== pick.x || Game.map.py !== pick.y) {
         // STONE RUN (food r6): rubble on the path and the knife needs its
         // stone half — do the roadwork (clearRubbleForStone: a day-part,
@@ -1414,7 +1438,7 @@ function forageTripSeedFirst(Game, ctx) {
         if (keepKnifeOn && res && res.blockType === 'rubble' && knifeWantsStone(Game, ctx)) {
           if (clearRubbleForStone(Game, ctx, res.x, res.y)) {
             const res2 = Game.travelTo(pick.x, pick.y);
-            if (Game.over || Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} return 0; }
+            if (Game.over || Game.tbfight) { ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy); return 0; }
             if (Game.map.px !== pick.x || Game.map.py !== pick.y) continue;
           } else continue;
         } else continue;
@@ -1423,7 +1447,7 @@ function forageTripSeedFirst(Game, ctx) {
       try { ok = Game.doAction('forage', {}); ctx.forageTrips = (ctx.forageTrips || 0) + 1; } catch (e) {}
       if (ok) { foraged = 1; workTraplineSet(Game, ctx); break; }
     }
-    try { Game.travelTo(hx, hy); } catch (e) {}
+    ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy);
     return foraged;
   } catch (e) { try { Game.travelTo(Game.map.px, Game.map.py); } catch (e2) {} return 0; }
 }
@@ -3214,7 +3238,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
