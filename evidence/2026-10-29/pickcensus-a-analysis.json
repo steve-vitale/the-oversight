@@ -1,0 +1,277 @@
+{
+  "prereg": "evidence/2026-10-29/sim-pickcensus-a-prereg.md",
+  "dedup": {
+    "pass": true,
+    "rows": [
+      {
+        "file": "s75101-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75102-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75103-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75104-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75105-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75106-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75107-fresh.json",
+        "byteIdenticalToFunnelA": true
+      },
+      {
+        "file": "s75108-fresh.json",
+        "byteIdenticalToFunnelA": true
+      }
+    ],
+    "note": "lottery-base excluded from pooled count (duplicate band)"
+  },
+  "reproofPickdepart": {
+    "pass": true,
+    "base": {
+      "superseded-by-needs-pick": 1,
+      "departed-pick-linked": 1
+    },
+    "arm": {
+      "superseded-by-re-pick": 1,
+      "candidate-null-after-pick": 1
+    },
+    "expected": {
+      "base": {
+        "superseded-by-needs-pick": 1,
+        "departed-pick-linked": 1
+      },
+      "arm": {
+        "superseded-by-re-pick": 1,
+        "candidate-null-after-pick": 1
+      }
+    }
+  },
+  "primary": {
+    "funnelA": {
+      "counts": {
+        "superseded-by-needs-pick": 1,
+        "departed-pick-linked": 1
+      },
+      "shares": {
+        "departed-pick-linked": "1/2 = 0.500",
+        "superseded-by-needs-pick": "1/2 = 0.500"
+      },
+      "total": 2,
+      "unknown": 0,
+      "picks": [
+        {
+          "seed": 75106,
+          "day": 135,
+          "part": 536,
+          "vid": "visjoin_113",
+          "mid": "eulogy",
+          "huntDay": 132,
+          "wave": 4,
+          "cls": "superseded-by-needs-pick",
+          "reason": "first later pick d135 part 539 chose EAT (lag 0d)",
+          "dep": null,
+          "firstLater": {
+            "day": 135,
+            "part": 539,
+            "chosen": "EAT",
+            "candidate": {
+              "mid": "eulogy",
+              "tx": 5,
+              "ty": 3,
+              "day": 132
+            }
+          },
+          "closedGates": null,
+          "evictionInGap": null
+        },
+        {
+          "seed": 75106,
+          "day": 135,
+          "part": 536,
+          "vid": "visjoin_115",
+          "mid": "eulogy",
+          "huntDay": 132,
+          "wave": 4,
+          "cls": "departed-pick-linked",
+          "reason": "dep d137 part 544 (lag 2d, 8 parts), no intervening pick",
+          "dep": {
+            "day": 137,
+            "part": 544
+          },
+          "firstLater": {
+            "day": 138,
+            "part": 549,
+            "chosen": "HAVEN_CHORE",
+            "candidate": null
+          },
+          "closedGates": null,
+          "evictionInGap": null
+        }
+      ]
+    },
+    "lotteryArm": {
+      "counts": {
+        "superseded-by-re-pick": 1,
+        "candidate-null-after-pick": 1
+      },
+      "shares": {
+        "candidate-null-after-pick": "1/2 = 0.500",
+        "superseded-by-re-pick": "1/2 = 0.500"
+      },
+      "total": 2,
+      "unknown": 0,
+      "picks": [
+        {
+          "seed": 75104,
+          "day": 172,
+          "part": 685,
+          "vid": "nikos_papadopoulos",
+          "mid": "eulogy",
+          "huntDay": 170,
+          "wave": 4,
+          "cls": "superseded-by-re-pick",
+          "reason": "first later pick d173 part 690 chose HUNT while candidate still eulogy",
+          "dep": null,
+          "firstLater": {
+            "day": 173,
+            "part": 690,
+            "chosen": "HUNT",
+            "candidate": {
+              "mid": "eulogy",
+              "tx": 3,
+              "ty": 4,
+              "day": 170
+            }
+          },
+          "closedGates": null,
+          "evictionInGap": null
+        },
+        {
+          "seed": 75104,
+          "day": 173,
+          "part": 690,
+          "vid": "nikos_papadopoulos",
+          "mid": "eulogy",
+          "huntDay": 170,
+          "wave": 4,
+          "cls": "candidate-null-after-pick",
+          "reason": "first later pick d174 part 692 chose SEEK, candidate null; closed gate(s): age=4 (>3, stale)",
+          "dep": null,
+          "firstLater": {
+            "day": 174,
+            "part": 692,
+            "chosen": "SEEK",
+            "candidate": null
+          },
+          "closedGates": [
+            "age=4 (>3, stale)"
+          ],
+          "evictionInGap": null
+        }
+      ]
+    },
+    "pooled": {
+      "counts": {
+        "superseded-by-needs-pick": 1,
+        "departed-pick-linked": 1,
+        "superseded-by-re-pick": 1,
+        "candidate-null-after-pick": 1
+      },
+      "shares": {
+        "candidate-null-after-pick": "1/4 = 0.250",
+        "departed-pick-linked": "1/4 = 0.250",
+        "superseded-by-needs-pick": "1/4 = 0.250",
+        "superseded-by-re-pick": "1/4 = 0.250"
+      },
+      "total": 4,
+      "unknown": 0,
+      "maxClass": {
+        "cls": "superseded-by-needs-pick",
+        "n": 1
+      },
+      "maxShare": 0.25,
+      "tied": true,
+      "replacedBeforeDeparture": 3,
+      "replacedShare": 0.75,
+      "departed": 1,
+      "departedShare": 0.25
+    },
+    "legs": {
+      "completeness": {
+        "pass": true,
+        "unknown": 0
+      },
+      "dominance": {
+        "pass": false,
+        "n": 4,
+        "maxShare": 0.25,
+        "bar": "n>=10 AND max class share>=0.50"
+      }
+    },
+    "verdict": "DIAG-NO-GO"
+  },
+  "secondaryAllWave": {
+    "funnelA": {
+      "counts": {
+        "departed-pick-linked": 5,
+        "superseded-by-re-pick": 2,
+        "superseded-by-needs-pick": 2
+      },
+      "total": 9
+    },
+    "lotteryArm": {
+      "counts": {
+        "superseded-by-re-pick": 1,
+        "candidate-null-after-pick": 1,
+        "departed-pick-linked": 1
+      },
+      "total": 3
+    },
+    "pooled": {
+      "counts": {
+        "departed-pick-linked": 6,
+        "superseded-by-re-pick": 3,
+        "superseded-by-needs-pick": 2,
+        "candidate-null-after-pick": 1
+      },
+      "total": 12
+    }
+  },
+  "evictionFlags": {
+    "count": 0,
+    "picks": []
+  },
+  "guards": {
+    "funnelA": {
+      "seeds": 16,
+      "medianDays": 180,
+      "starvationDeaths": 4,
+      "deathTotal": 600,
+      "wave4Reach": "11/16",
+      "wins": 4,
+      "nationalEver": 13
+    },
+    "lotteryArm": {
+      "seeds": 8,
+      "medianDays": 119,
+      "starvationDeaths": 1,
+      "deathTotal": 248,
+      "wave4Reach": "5/8",
+      "wins": 5,
+      "nationalEver": 7
+    }
+  }
+}
