@@ -1,0 +1,322 @@
+#!/usr/bin/env node
+// scripts/test-tbovertime2.js — sim-tbovertime2-a tier-2+ decomposition
+// analyzer / proof validator (DIAG ONLY, zero src/js changes).
+//
+// Reads evidence/2026-10-29/perseed-tbovertime2-a/s*-armed.json (control mode: the tbovertime-a corpus)
+// (no re-simulation), builds the construction -> start -> end
+// join for world-origin wave-4 TB fights exactly per
+// evidence/2026-10-28/sim-tbovertime-a-prereg.md, and checks:
+//   - every unit fight joins construction + start + end +
+//     direct overtime-tier record by fightId;
+//   - direct tier == ratio-inferred tier AND startMax ==
+//     round(constrMax * (1 + 0.25*t_rec)) exactly;
+//   - startHp == round((constrHp - openingDamage) *
+//     (1 + 0.25*t_rec)) exactly, where openingDamage is the
+//     fighterconstruct opening tbDamage sum for m_0 on that
+//     fightId. ORDER MATTERS (world-HP rule fa3516cc1, current
+//     master): the fighter is built at the WORLD hp (so
+//     construction hp is BELOW max whenever the world monster
+//     was wounded), opening turns inside startCombat deal
+//     damage FIRST, and the overtime wrapper scales the
+//     POST-OPENING hp after startCombat returns. startMax -
+//     startHp is therefore the SCALED WORLD WOUND plus
+//     opening damage, never opening damage alone — the
+//     first analyzer version used that wrong identity and
+//     failed loudly on all 24 fights, which is what exposed
+//     the correction. See evidence metric review.
+//   - the additive identities tile->end and construction->end
+//     hold per fight (a failed identity is a hard failure);
+//   - in-fight maxHp growth (endMax - startMax) is reported
+//     per fight (predicted 0 everywhere);
+//   - parity vs the fighterconstruct corpus (per-seed days,
+//     gameDays, won, waveReach, nationalEver/Final, table,
+//     entered, deathTotal, courtship combined, and the
+//     world-origin wave-4 fightId sets).
+// Exit 0 only when corpusOk && substrateOk &&
+// joined == total && tierDisagreements == 0 &&
+// openingDisagreements == 0 && identityFailures == 0 &&
+// unexplainedGaps == 0. Parity vs the fighterconstruct corpus
+// is PRINTED separately (parityPass + parityDiffs) and is NOT
+// a mechanical gate: the prereg's parity rule allows a
+// divergence diagnosed with a detgate PASS (base drift —
+// here, the world-HP TB rule fa3516cc1 landed between the
+// two corpora) to be reported as a diagnosis, never hidden.
+// The analyzer never re-scores a
+// verdict: it prints the tables; the evidence judges them
+// against the prereg. In-fight maxHp growth, if any, is
+// REPORTED (it would be a mechanism finding, not a gate
+// failure by itself — but it must be cited per fight).
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const REPO = path.join(__dirname, '..');
+let CORPUS = process.env.EVID || path.join(REPO, 'evidence', '2026-10-29', 'perseed-tbovertime2-a');
+const CONTROL_CORPUS = path.join(REPO, 'evidence', '2026-10-28', 'perseed-tbovertime-a');
+const PRIOR = process.env.PRIOR || path.join(REPO, 'evidence', '2026-10-28', 'perseed-tbovertime-a');
+const SEEDS = (process.env.SEEDS || '75101,75102,75103,75104,75105,75106,75107,75108')
+  .split(',').map(s => parseInt(s.trim(), 10)).filter(Number.isFinite);
+
+function loadRow(dir, seed) { return JSON.parse(fs.readFileSync(path.join(dir, `s${seed}-armed.json`), 'utf8')); }
+function loadDefs() {
+  const raw = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'data', 'monsters.json'), 'utf8'));
+  const list = Array.isArray(raw) ? raw : (raw.monsters || []);
+  const m = {};
+  for (const d of list) if (d && d.id) m[d.id] = d;
+  return m;
+}
+function f0(fighters) {
+  if (!Array.isArray(fighters)) return null;
+  return fighters.find(f => f && f.key === 'm_0') || null;
+}
+function crewOf(fighters) {
+  if (!Array.isArray(fighters)) return [];
+  return fighters.filter(f => f && typeof f.key === 'string' && f.key.indexOf('m_crew_') === 0);
+}
+function unitChecks() {
+  const fails = [];
+  const chk = (name, cond) => { if (!cond) fails.push(name); };
+  // Synthetic decomposition identity: tile 975, constr 1475,
+  // tier 6 -> startMax 3688, opening 0, end 3688.
+  const T = 975, C = 1475, t = 6, Smax = Math.round(C * (1 + 0.25 * t));
+  chk('synthetic startMax 3688', Smax === 3688);
+  const S = Smax, E = 3688;
+  chk('synthetic tile->end identity', (E - T) === (C - T) + (S - C) + (E - S));
+  chk('synthetic constr->end identity', (E - C) === (Smax - C) - (Smax - S) + (E - S));
+  chk('synthetic inferred tier 6', Math.round((Smax / C - 1) / 0.25) === 6);
+  // Synthetic unscaled + opening: constr 1211, opening 71.
+  const C2 = 1211, Smax2 = 1211, S2 = 1140, E2 = 832;
+  chk('synthetic opening 71', Smax2 - S2 === 71);
+  chk('synthetic unscaled identity', (E2 - 825) === (C2 - 825) + (S2 - C2) + (E2 - S2));
+  chk('synthetic inferred tier 0', Math.round((Smax2 / C2 - 1) / 0.25) === 0);
+  // Synthetic tier-2 case (tbovertime2): constr 1000, tier 2 -> startMax 1500, crew floor(2/2)=1.
+  const C3 = 1000, t3 = 2, Smax3 = Math.round(C3 * (1 + 0.25 * t3));
+  chk('synthetic tier-2 startMax 1500', Smax3 === 1500);
+  chk('synthetic tier-2 inferred tier 2', Math.round((Smax3 / C3 - 1) / 0.25) === 2);
+  chk('synthetic tier-2 crew 1', Math.floor(t3 / 2) === 1);
+  chk('synthetic tier-6 crew 3', Math.floor(6 / 2) === 3);
+  return fails;
+}
+
+function main() {
+  const argv0 = process.argv.slice(2);
+  const controlMode = argv0.includes('--control');
+  let unitWaves = [4, 5];
+  if (controlMode) { CORPUS = CONTROL_CORPUS; unitWaves = [4]; }
+  const fails = unitChecks();
+  if (fails.length) { console.error('UNIT CHECK FAILURES:', fails.join(', ')); process.exit(1); }
+  const defs = loadDefs();
+  const rows = [];
+  const gaps = [];
+  const fights = [];
+  let sameCallTotal = 0;
+  let corpusOk = true;
+  const recorderNames = ['raftdraft', 'spawnsrc', 'oldcore', 'w5births', 'defwound', 'nonworldkill', 'tbdmg', 'w4damage', 'fighterconstruct', 'tbovertime'];
+  for (const seed of SEEDS) {
+    const r = loadRow(CORPUS, seed);
+    rows.push(r);
+    if (!(r.days > 0)) { corpusOk = false; gaps.push(`seed ${seed}: days not > 0`); }
+    for (const name of recorderNames) {
+      const rec = r[name];
+      if (!rec || !rec.diag || rec.diag.errs !== 0) { corpusOk = false; gaps.push(`seed ${seed}: ${name} errs != 0 or missing`); }
+      else if (rec.diag.overflow && Object.values(rec.diag.overflow).some(v => (v | 0) !== 0)) { corpusOk = false; gaps.push(`seed ${seed}: ${name} overflow`); }
+    }
+    const nw = r.nonworldkill, fc = r.fighterconstruct, tb = r.tbdmg, tbov = r.tbovertime;
+    const constrById = new Map();
+    for (const c of (fc.constructions || [])) {
+      if (!c.fightId) continue;
+      if (constrById.has(c.fightId)) gaps.push(`seed ${seed}: duplicate construction fightId ${c.fightId}`);
+      else constrById.set(c.fightId, c);
+    }
+    const openingById = new Map();
+    for (const ev of (fc.openingDamage || [])) {
+      if (ev.targetKey !== 'm_0' || !ev.fightId) continue;
+      const cur = openingById.get(ev.fightId) || { sum: 0, returnedSum: 0, n: 0 };
+      cur.sum += ((ev.preHp == null || ev.postHp == null) ? 0 : (ev.preHp - ev.postHp));
+      cur.returnedSum += (ev.returned == null ? 0 : ev.returned);
+      cur.n++;
+      openingById.set(ev.fightId, cur);
+    }
+    const endById = new Map();
+    for (const e of (tb.tbEnds || [])) {
+      if (!e.fightId) continue;
+      if (endById.has(e.fightId)) gaps.push(`seed ${seed}: duplicate tbEnd fightId ${e.fightId}`);
+      else endById.set(e.fightId, e);
+    }
+    const tierById = new Map();
+    for (const s of (tbov.starts || [])) {
+      if (s.liveFightPre) continue; // refused call: describes the old live fight, not a new one
+      if (!s.fightId) {
+        // Same-call start-and-end fights (nonworldkill fightIdSource
+        // 'end-row', wave None): the fight starts AND ends inside
+        // one startCombat call, so no post snapshot exists. These
+        // are explained recorder rows, never unit fights, and
+        // never unexplained gaps — but only when the row itself
+        // carries the same-call signature (endedInCall + null
+        // result + no live fight before the call).
+        if (s.endedInCall && s.resultNull && !s.liveFightPre) { sameCallTotal++; continue; }
+        gaps.push(`seed ${seed}: tbovertime start with no fightId (arg ${s.arg})`);
+        continue;
+      }
+      if (tierById.has(s.fightId)) gaps.push(`seed ${seed}: duplicate tbovertime start fightId ${s.fightId}`);
+      else tierById.set(s.fightId, s);
+    }
+    const tbovEndById = new Map();
+    for (const e of (tbov.ends || [])) {
+      if (!e.fightId) continue;
+      if (!tbovEndById.has(e.fightId)) tbovEndById.set(e.fightId, e);
+    }
+    for (const s of (nw.starts || [])) {
+      if (unitWaves.indexOf(s.wave) < 0 || s.origin !== 'world-origin') continue;
+      if (s.refused) { gaps.push(`seed ${seed}: refused world-origin w4 start ${s.fightId}`); continue; }
+      if (s.tableTrial) continue;
+      const fid = s.fightId;
+      const sm = f0(s.fighters);
+      const c = constrById.get(fid);
+      const cm = c ? f0(c.fighters) : null;
+      const e = endById.get(fid);
+      const em = e ? f0(e.fighters) : null;
+      const tv = tierById.get(fid);
+      const te = tbovEndById.get(fid);
+      const op = openingById.get(fid) || { sum: 0, returnedSum: 0, n: 0 };
+      const tile = s.tileMonster || null;
+      const row = {
+        seed, day: s.day, monster: s.mid, fightId: fid,
+        tileHp: tile ? tile.hp : null, tileMaxHp: tile ? tile.maxHp : null,
+        constrHp: cm ? cm.hp : null, constrMaxHp: cm ? cm.maxHp : null,
+        startHp: sm ? sm.hp : null, startMaxHp: sm ? sm.maxHp : null,
+        endHp: em ? em.hp : null, endMaxHp: em ? em.maxHp : null,
+        endResult: e ? e.result : null, endRound: e ? e.round : null,
+        tierRec: tv ? tv.tierPost : null, tierPre: tv ? tv.tierPre : null,
+        tierAtEnd: te ? te.tierAtEnd : null, fightOtTier: tv ? tv.fightOtTier : null,
+        openingSum: op.sum, openingReturnedSum: op.returnedSum, openingEvents: op.n,
+        crewStart: crewOf(s.fighters).map(f => ({ key: f.key, hp: f.hp, maxHp: f.maxHp, otTier: f.otTier })),
+        crewEnd: e ? crewOf(e.fighters).map(f => ({ key: f.key, hp: f.hp, maxHp: f.maxHp })) : null,
+        joined: !!(c && cm && sm && e && em && tv),
+      };
+      if (row.joined) {
+        row.tierInf = Math.round((row.startMaxHp / row.constrMaxHp - 1) / 0.25);
+        row.predStartMax = Math.round(row.constrMaxHp * (1 + 0.25 * row.tierRec));
+        row.tierAgree = (row.tierRec === row.tierInf) && (row.predStartMax === row.startMaxHp) && (row.tierPre === row.tierRec) && (row.tierAtEnd === row.tierRec || row.tierAtEnd === null);
+        // Correct opening identity (see header): opening turns
+        // run BEFORE the overtime wrapper scales, so the
+        // predicted start HP scales the POST-OPENING hp.
+        row.predStartHp = Math.round((row.constrHp - row.openingSum) * (1 + 0.25 * row.tierRec));
+        row.openingAgree = (row.predStartHp === row.startHp);
+        // Overtime HP gain: scaling applied to post-opening hp.
+        row.overtimeHpGain = row.startHp - (row.constrHp - row.openingSum);
+        row.tileToConstr = row.constrHp - row.tileHp;
+        row.preFightScaling = row.startMaxHp - row.constrMaxHp;
+        row.preFightNet = row.startHp - row.constrHp;
+        row.inFightChange = row.endHp - row.startHp;
+        row.inFightMaxGrowth = row.endMaxHp - row.startMaxHp;
+        row.tileToEnd = row.endHp - row.tileHp;
+        row.constrToEnd = row.endHp - row.constrHp;
+        row.identityTile = (row.tileToEnd === row.tileToConstr + row.preFightNet + row.inFightChange);
+        row.identityConstr = (row.constrToEnd === row.overtimeHpGain - row.openingSum + row.inFightChange);
+        row.defRange = defs[s.mid] ? defs[s.mid].hp : null;
+        row.constrInDefRange = row.defRange ? (row.constrMaxHp >= row.defRange[0] && row.constrMaxHp <= row.defRange[1]) : null;
+        if (!row.tierAgree) gaps.push(`seed ${seed} d${s.day} ${s.mid}: tier disagreement rec=${row.tierRec} pre=${row.tierPre} end=${row.tierAtEnd} inf=${row.tierInf} predStartMax=${row.predStartMax} startMax=${row.startMaxHp}`);
+        if (!row.openingAgree) gaps.push(`seed ${seed} d${s.day} ${s.mid}: opening disagreement predStartHp=${row.predStartHp} startHp=${row.startHp} fcSum=${row.openingSum} events=${row.openingEvents}`);
+        if (!row.identityTile || !row.identityConstr) gaps.push(`seed ${seed} d${s.day} ${s.mid}: sum identity failed`);
+        if (row.tierAtEnd !== null && row.tierAtEnd !== row.tierRec) gaps.push(`seed ${seed} d${s.day} ${s.mid}: tier moved during fight pre/post=${row.tierRec} end=${row.tierAtEnd}`);
+      } else {
+        gaps.push(`seed ${seed} d${s.day} ${s.mid} ${fid}: UNJOINED constr=${!!cm} start=${!!sm} end=${!!em} tier=${!!tv}`);
+      }
+      fights.push(row);
+    }
+  }
+  const total = fights.length;
+  const joined = fights.filter(f => f.joined).length;
+  const joinedPct = total ? (joined / total) * 100 : 0;
+  const tierDis = fights.filter(f => f.joined && !f.tierAgree).length;
+  const openDis = fights.filter(f => f.joined && !f.openingAgree).length;
+  const identFail = fights.filter(f => f.joined && (!f.identityTile || !f.identityConstr)).length;
+  const unexplained = gaps.length;
+  // Aggregates (joined fights only).
+  const agg = (fn) => fights.filter(f => f.joined).reduce((t, f) => t + fn(f), 0);
+  const scaled = fights.filter(f => f.joined && f.preFightScaling > 0);
+  const scalesUp = fights.filter(f => f.joined && f.constrToEnd > 0);
+  const byTier = {};
+  for (let t = 0; t <= 6; t++) {
+    const fs = fights.filter(f => f.joined && f.tierRec === t);
+    byTier[t] = { n: fs.length, preFightScalingMax: fs.reduce((a, f) => a + f.preFightScaling, 0), overtimeHpGain: fs.reduce((a, f) => a + f.overtimeHpGain, 0), openingDamage: fs.reduce((a, f) => a + f.openingSum, 0), inFightChange: fs.reduce((a, f) => a + f.inFightChange, 0), inFightMaxGrowth: fs.reduce((a, f) => a + f.inFightMaxGrowth, 0), constrToEnd: fs.reduce((a, f) => a + f.constrToEnd, 0), crewStartN: fs.reduce((a, f) => a + (f.crewStart || []).length, 0), crewEndN: fs.reduce((a, f) => a + (f.crewEnd || []).length, 0), maxGrowthNonzero: fs.filter(f => f.inFightMaxGrowth !== 0).length, scalesUp: fs.filter(f => f.constrToEnd > 0).length };
+  }
+  const judged = fights.filter(f => f.joined && f.tierRec >= 2);
+  const judgedAgg = { n: judged.length, preFightScalingMax: judged.reduce((a, f) => a + f.preFightScaling, 0), overtimeHpGain: judged.reduce((a, f) => a + f.overtimeHpGain, 0), openingDamage: judged.reduce((a, f) => a + f.openingSum, 0), inFightChange: judged.reduce((a, f) => a + f.inFightChange, 0), inFightMaxGrowth: judged.reduce((a, f) => a + f.inFightMaxGrowth, 0), constrToEnd: judged.reduce((a, f) => a + f.constrToEnd, 0), crewStartN: judged.reduce((a, f) => a + (f.crewStart || []).length, 0), maxGrowthNonzero: judged.filter(f => f.inFightMaxGrowth !== 0).length, scalesUp: judged.filter(f => f.constrToEnd > 0).length };
+  const aggregates = {
+    total, joined, joinedPct,
+    scaledFights: scaled.length,
+    totalPreFightScaling: agg(f => f.preFightScaling),
+    totalOvertimeHpGain: agg(f => f.overtimeHpGain),
+    totalOpeningDamage: agg(f => f.openingSum),
+    totalInFightChange: agg(f => f.inFightChange),
+    totalInFightMaxGrowth: agg(f => f.inFightMaxGrowth),
+    totalTileToConstr: agg(f => f.tileToConstr),
+    totalTileToEnd: agg(f => f.tileToEnd),
+    totalConstrToEnd: agg(f => f.constrToEnd),
+    scalesUpFights: scalesUp.length,
+    scalesUpPreFightScaling: scalesUp.reduce((t, f) => t + f.preFightScaling, 0),
+    scalesUpOvertimeHpGain: scalesUp.reduce((t, f) => t + f.overtimeHpGain, 0),
+    scalesUpOpeningDamage: scalesUp.reduce((t, f) => t + f.openingSum, 0),
+    scalesUpInFightChange: scalesUp.reduce((t, f) => t + f.inFightChange, 0),
+    scalesUpConstrToEnd: scalesUp.reduce((t, f) => t + f.constrToEnd, 0),
+    maxGrowthNonzero: fights.filter(f => f.joined && f.inFightMaxGrowth !== 0).length,
+    inFightPositive: fights.filter(f => f.joined && f.inFightChange > 0).length,
+    constrEqualsTile: fights.filter(f => f.joined && f.tileToConstr === 0).length,
+    constrBelowMax: fights.filter(f => f.joined && f.constrHp < f.constrMaxHp).length,
+  };
+  // Parity vs fighterconstruct corpus.
+  let parityPass = true;
+  const parityDiffs = [];
+  const PAR_KEYS = ['days', 'gameDays', 'won', 'waveReach', 'nationalEver', 'nationalFinal', 'table', 'entered', 'deathTotal'];
+  for (const seed of SEEDS) {
+    let pr;
+    try { pr = loadRow(PRIOR, seed); } catch (e) { parityPass = false; parityDiffs.push(`seed ${seed}: prior row unreadable`); continue; }
+    const r = rows.find(x => x.seed === seed);
+    for (const k of PAR_KEYS) {
+      if (r[k] !== pr[k]) { parityPass = false; parityDiffs.push(`seed ${seed}: ${k} this=${r[k]} prior=${pr[k]}`); }
+    }
+    const court = (x) => (x.courtship && x.courtship.combined) | 0;
+    if (court(r) !== court(pr)) { parityPass = false; parityDiffs.push(`seed ${seed}: courtship this=${court(r)} prior=${court(pr)}`); }
+    const ids = (x) => (x.nonworldkill.starts || []).filter(s => s.wave === 4 && s.origin === 'world-origin' && !s.refused && !s.tableTrial).map(s => s.fightId).sort().join(','); // diagnostic only: wave-4 set vs tbovertime-a
+    if (ids(r) !== ids(pr)) { parityPass = false; parityDiffs.push(`seed ${seed}: w4world fightId set differs`); }
+  }
+  const courtTotals = rows.reduce((t, r) => t + ((r.courtship && r.courtship.combined) | 0), 0);
+  const courtSeedsActive = rows.filter(r => r.courtship && r.courtship.combined > 0).length;
+  const substrateOk = courtTotals > 0 && courtSeedsActive >= 6;
+  const mechanicalPass = corpusOk && substrateOk && joined === total && tierDis === 0 && openDis === 0 && identFail === 0 && unexplained === 0;
+  const out = {
+    label: 'sim-tbovertime2-a TB tier-2+ overtime decomposition',
+    seeds: SEEDS, corpusOk, parityPass, parityDiffs, substrateOk,
+    courtship: { combined: courtTotals, seedsActive: courtSeedsActive },
+    aggregates, byTier, judgedAgg, controlMode, gaps, fights, sameCallEnded: sameCallTotal, mechanicalPass,
+    generated: new Date().toISOString(),
+  };
+  const args = process.argv.slice(2);
+  const outIdx = args.indexOf('--out');
+  if (outIdx >= 0 && args[outIdx + 1]) fs.writeFileSync(args[outIdx + 1], JSON.stringify(out, null, 1) + '\n');
+  console.log('=== sim-tbovertime2-a tier-2+ decomposition' + (controlMode ? ' [CONTROL MODE: tbovertime-a corpus, wave-4 filter]' : '') + ' ===');
+  console.log(`  byTier: ${Object.keys(byTier).map(t => `t${t}:n=${byTier[t].n},scalingMax=${byTier[t].preFightScalingMax},otHp=${byTier[t].overtimeHpGain},open=${byTier[t].openingDamage},inFight=${byTier[t].inFightChange},maxGrowth=${byTier[t].inFightMaxGrowth},constrToEnd=${byTier[t].constrToEnd},crewStart=${byTier[t].crewStartN},crewEnd=${byTier[t].crewEndN},scalesUp=${byTier[t].scalesUp}`).join(' | ')}`);
+  console.log(`  JUDGED tier>=2: n=${judgedAgg.n} scalingMax=${judgedAgg.preFightScalingMax} otHp=${judgedAgg.overtimeHpGain} open=${judgedAgg.openingDamage} inFight=${judgedAgg.inFightChange} maxGrowth=${judgedAgg.inFightMaxGrowth} constrToEnd=${judgedAgg.constrToEnd} crewStart=${judgedAgg.crewStartN} maxGrowthNonzero=${judgedAgg.maxGrowthNonzero} scalesUp=${judgedAgg.scalesUp}`);
+  if (controlMode) {
+    const exp = { total: 24, joined: 24, tier0: 22, tier1: 2, preFightScalingMax: 463, overtimeHpGain: 345, openingDamage: 71, inFightChange: -3187, inFightMaxGrowth: 0, scaledFights: 2, scalesUpFights: 2, scalesUpConstrToEnd: 288, crewStartN: 0, tierDis: 0, openDis: 0, identFail: 0, unexplained: 0 };
+    const got = { total, joined, tier0: byTier[0].n, tier1: byTier[1].n, preFightScalingMax: aggregates.totalPreFightScaling, overtimeHpGain: aggregates.totalOvertimeHpGain, openingDamage: aggregates.totalOpeningDamage, inFightChange: aggregates.totalInFightChange, inFightMaxGrowth: aggregates.totalInFightMaxGrowth, scaledFights: aggregates.scaledFights, scalesUpFights: aggregates.scalesUpFights, scalesUpConstrToEnd: aggregates.scalesUpConstrToEnd, crewStartN: byTier[0].crewStartN + byTier[1].crewStartN, tierDis, openDis, identFail, unexplained };
+    const diffs = Object.keys(exp).filter(k => exp[k] !== got[k]).map(k => `${k}: got ${got[k]} want ${exp[k]}`);
+    console.log(`  CONTROL vs published tbovertime-a: ${diffs.length ? 'FAIL ' + diffs.join(' | ') : 'PASS (exact reproduction)'}`);
+    if (diffs.length) process.exit(1);
+  }
+  console.log(`  fights total=${total} joined=${joined} (${joinedPct.toFixed(1)}%) tierDisagreements=${tierDis} openingDisagreements=${openDis} identityFailures=${identFail} unexplainedGaps=${unexplained} sameCallEndedExplained=${sameCallTotal}`);
+  console.log(`  aggregates: preFightScalingMax=${aggregates.totalPreFightScaling} overtimeHpGain=${aggregates.totalOvertimeHpGain} openingDamage=${aggregates.totalOpeningDamage} inFightChange=${aggregates.totalInFightChange} inFightMaxGrowth=${aggregates.totalInFightMaxGrowth} tileToConstr=${aggregates.totalTileToConstr} tileToEnd=${aggregates.totalTileToEnd} constrToEnd=${aggregates.totalConstrToEnd} constrEqualsTile=${aggregates.constrEqualsTile} constrBelowMax=${aggregates.constrBelowMax}`);
+  console.log(`  scales-up set (constrToEnd>0): n=${aggregates.scalesUpFights} preFightScalingMax=${aggregates.scalesUpPreFightScaling} overtimeHpGain=${aggregates.scalesUpOvertimeHpGain} opening=${aggregates.scalesUpOpeningDamage} inFight=${aggregates.scalesUpInFightChange} constrToEnd=${aggregates.scalesUpConstrToEnd}`);
+  console.log(`  scaled fights: ${scaled.length}; inFightMaxGrowth nonzero rows: ${aggregates.maxGrowthNonzero}; inFightChange positive rows: ${aggregates.inFightPositive}`);
+  console.log(`  parity: ${parityPass ? 'PASS' : 'FAIL'} ${parityDiffs.join(' | ')}`);
+  console.log(`  substrate: combined=${courtTotals} seedsActive=${courtSeedsActive} ok=${substrateOk}`);
+  console.log(`  MECHANICAL: ${mechanicalPass ? 'PASS' : 'FAIL'}`);
+  for (const f of fights) {
+    console.log(`  [${f.seed} d${f.day} ${f.monster}] tile=${f.tileHp}/${f.tileMaxHp} constr=${f.constrHp}/${f.constrMaxHp} start=${f.startHp}/${f.startMaxHp} end=${f.endHp}/${f.endMaxHp} tierRec=${f.tierRec} tierInf=${f.tierInf} scaling=${f.preFightScaling} opening=${f.openingSum} inFight=${f.inFightChange} maxGrowth=${f.inFightMaxGrowth} result=${f.endResult} round=${f.endRound} crewStart=${(f.crewStart || []).length} joined=${f.joined}`);
+  }
+  if (gaps.length) { console.log('  GAPS:'); for (const g of gaps) console.log('    ' + g); }
+  if (!mechanicalPass) process.exit(1);
+}
+if (require.main === module) main();
+module.exports = { unitChecks };
