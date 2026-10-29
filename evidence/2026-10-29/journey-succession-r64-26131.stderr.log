@@ -1,0 +1,38 @@
+
+ORGANIC DEATH d10: Aurora -> Ava, topTrust=[{"id":"Jorge","t":29},{"id":"Pelageya","t":25},{"id":"Bessie","t":24},{"id":"Lauren","t":24}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=7 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=27 succTrustPost=19
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d10 (organic (phase A)): Aurora -> Ava | passed=true lin=true mo=true trust=19 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Jorge (refused=false)
+  CONVO d+3 with Bessie (refused=false)
+  BOND-CONVO d+3 with Patricia (depth=0 v=12 refused=false)
+  CONVO d+7 with Bessie (refused=false)
+  CONVO d+7 with Jorge (refused=false)
+  CONVO d+14 with Bessie (refused=false)
+  CONVO d+14 with Jorge (refused=false)
+  BOND-CONVO d+14 with Patricia (depth=0 v=12 refused=false)
+
+SECOND-KILL d+20: Ava -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Ava -> Jorge passed=true lin=true mo=true
+  CONVO d+30 with Bessie (refused=false)
+  CONVO d+30 with Lauren (refused=false)
+  CONVO d+45 with Bessie (refused=false)
+  CONVO d+45 with Lauren (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=45 signals={"levelUp":true,"systemVoice":52,"offerLines":46,"codexPlantsDelta":26,"codexSkillsDelta":14,"codexAbilitiesDelta":9,"xpDelta":73,"any":true} pantry 23500->26894
+TRUST-DIALS: office 19->54 (+35, climb) | villageMean 19.3->70.4 (+51.1, climb) | ge60 0->7 | movers>=5: [{"id":"Natcha","from":12,"to":90,"delta":78},{"id":"Stan","from":16,"to":84,"delta":68},{"id":"Mia","from":19,"to":86,"delta":67},{"id":"Bessie","from":24,"to":90,"delta":66},{"id":"Lauren","from":24,"to":90,"delta":66},{"id":"Aria","from":19,"to":69,"delta":50},{"id":"Pelageya","from":25,"to":70,"delta":45},{"id":"Patricia","from":19,"to":47,"delta":28}]
+DEED-LEDGER: calls=12 summary={"teachPlant":{"calls":12,"ok":12,"deltaSum":0,"deltaN":12,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=55 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=45
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+45) t2=true(deedCalls=12) trustVerdict={"readable":true,"officeMantle":19,"officeLast":54,"officeDelta":35,"officeClass":"climb","villageMantle":19.3,"villageLast":70.4,"villageDelta":51.1,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":7,"movers":[{"id":"Natcha","from":12,"to":90,"delta":78},{"id":"Stan","from":16,"to":84,"delta":68},{"id":"Mia","from":19,"to":86,"delta":67},{"id":"Bessie","from":24,"to":90,"delta":66},{"id":"Lauren","from":24,"to":90,"delta":66},{"id":"Aria","from":19,"to":69,"delta":50},{"id":"Pelageya","from":25,"to":70,"delta":45},{"id":"Patricia","from":19,"to":47,"delta":28}]}
+E6/CALLCHECK: e6={"callMoves":1,"withCensus":1,"chainHandoffs":1,"trustMoves":0} callCheck={"dailyMoveDays":1,"callMoveDays":1,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":46,"moves":1}
