@@ -1,0 +1,87 @@
+diff --git a/scripts/creekpath-trace-b.js b/scripts/creekpath-trace-b.js
+index bdf6fd182..6747b42c8 100644
+--- a/scripts/creekpath-trace-b.js
++++ b/scripts/creekpath-trace-b.js
+@@ -113,12 +113,16 @@ async function oneInstance(seed) {
+       const prevPx = Game2.map ? Game2.map.px : null;
+       const prevPy = Game2.map ? Game2.map.py : null;
+       const prevDetours = (ctx && ctx.tripHomeDetours) || 0;
++      const prevStandingDays = (ctx && ctx.standingHomeDays) || 0;
++      const prevStandingDetours = (ctx && ctx.standingHomeDetours) || 0;
+       basePolicy.daily(Game2, ctx);
+       const pos = snapPos(Game2);
+       const row = { loopDay: callIdx, ...pos,
+         movedDuringDay: (prevPx === null || prevPy === null) ? null :
+           (pos.mapPx !== prevPx || pos.mapPy !== prevPy),
+-        tripHomeDetours: ((ctx && ctx.tripHomeDetours) || 0) - prevDetours };
++        tripHomeDetours: ((ctx && ctx.tripHomeDetours) || 0) - prevDetours,
++        standingHomeDays: ((ctx && ctx.standingHomeDays) || 0) - prevStandingDays,
++        standingHomeDetours: ((ctx && ctx.standingHomeDetours) || 0) - prevStandingDetours };
+       if (Game2.over) {
+         row.probe = 'game-over';
+       } else {
+diff --git a/scripts/policies/competent.js b/scripts/policies/competent.js
+index 9b7da3597..7f5c23c21 100644
+--- a/scripts/policies/competent.js
++++ b/scripts/policies/competent.js
+@@ -1231,6 +1231,39 @@ function walkHome(Game, hx, hy) {
+     return tripHomeDetourSteps;
+   } catch (e) { tripHomeDetour = false; return 0; }
+ }
++// STANDING GO-HOME (creekpath Arm C, gate COMPETENT_STANDING_HOME=1,
++// default off): Arm B proved trips home detour, but the policy had NO
++// standing "go home" rule — a villager who ends the day away (no trip
++// fired, trip returned to an away origin, trip return failed) simply stays
++// away, even starving with a clear hop home (10772 day 11). This step runs
++// at the END of daily(): still away from haven -> walk home via walkHome
++// (Arm B's detour HOW, this step's WHEN). Guards: already home (tile or
++// playerAtHaven) -> skip; game over / combat -> skip; inside a tent (a
++// deliberate camp) -> skip; haven tile not on this board (player traveled
++// to another node) -> skip. Perception-lawful: own tile, home haven
++// (lived in), engine-offered adjacent steps only. Banks ctx counters the
++// census reads (standingHomeDays, standingHomeDetours).
++function standingHomeOn() { return process.env.COMPETENT_STANDING_HOME === '1'; }
++function goHomeStanding(Game, ctx) {
++  try {
++    if (!standingHomeOn()) return 0;
++    if (!Game || Game.over || Game.tbfight) return 0;
++    const v = (Game.state || {}).village || {};
++    const hx = (v.px === undefined ? 4 : v.px), hy = (v.py === undefined ? 4 : v.py);
++    if (Game.map && Game.map.px === hx && Game.map.py === hy) return 0;
++    let atHaven = false;
++    try { atHaven = !!(Game.playerAtHaven && Game.playerAtHaven()); } catch (e) { atHaven = false; }
++    if (atHaven) return 0;
++    const s = (Game.state || {}).scholar || {};
++    if (s.insideTent) return 0;
++    let ht = null;
++    try { ht = Game.tileAt(hx, hy); } catch (e) { return 0; }
++    if (!ht || ht.type !== 'haven') return 0;
++    const d = walkHome(Game, hx, hy);
++    if (ctx) { ctx.standingHomeDays = (ctx.standingHomeDays || 0) + 1; ctx.standingHomeDetours = (ctx.standingHomeDetours || 0) + d; }
++    return d;
++  } catch (e) { return 0; }
++}
+ // nearest rubble-choked path in travel reach (from the player's tile)
+ function nearestRubble(Game) {
+   let best = null;
+@@ -2928,6 +2961,11 @@ const competent = {
+     // haul — the player was sleeping (and starving) on foraged food still
+     // in the pack. Eat after the day's work, before the harness sleeps.
+     competentEat(Game);
++    // STANDING GO-HOME (creekpath Arm C, gate COMPETENT_STANDING_HOME=1):
++    // end the day away -> walk home now, not never. Covers no-trip days,
++    // away-origin trip returns, and failed trip returns alike: the
++    // villager is away at day's end and home is known.
++    goHomeStanding(Game, ctx);
+   },
+   // Fight only with advantage: assess at fight START and walk away from bad
+   // ones (an experienced player doesn't take 3:1 fights). Below 35% HP,
+@@ -3238,7 +3276,7 @@ const competent = {
+   },
+ };
+ 
+-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
++module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+ 
+ 
+ // The public shared gearing routine, also used by prepared policy proofs.

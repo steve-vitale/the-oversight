@@ -1,0 +1,14 @@
+(pre-talk seed: none; takenWantDay=90; convoCount=14)
+=== seed 85003 day 91 — conversation with Joshua (gen_ywl213c) ===
+occupation=arborist temperament=earnest trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Water's almost gone — 1 liters. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Take care of yourself."
