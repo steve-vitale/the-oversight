@@ -33763,15 +33763,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
-      // RAID-NAMING (sim-raidname-b 2026-10-29): snapshot villagers
-      // already dead as the fight opens — a raid defender who fell
-      // in the night's raid is seated in the dawn fight, and the
-      // opening turns then narrate their fall as if it happened
-      // here. Captured BEFORE the opening turns below, said at
-      // the end of startCombat as raid aftermath (not this
-      // fight's casualty). Read-only snapshot; no state touched.
-      let _raidFallenAtStart = [];
-      try { _raidFallenAtStart = fighters.filter(f => f.kind === 'villager' && (f.alive === false || (typeof f.hp === 'number' && f.hp <= 0))).map(f => f.name); } catch (e) {}
       if (hasFear) this.say('Something about you is wrong. It hesitates. (fear_aura)');
       if (hasSand) this.say('You fling a handful of grit into its eyes. (pocket_sand: blinded)');
       this.say('Turn-based now. Tap a tile to move — speed is squares. Then act.');
@@ -33844,9 +33835,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const _raidEntityMatch = !tableTrial && _originIsFighter && _origin && _origin.raidBorn;
         if (_raidPendingMatch || _raidEntityMatch) {
           this.say(`🐗 This one came with the raid on Haven — it was with the teeth at the door, not a lone wanderer.`);
-          if (_raidFallenAtStart.length) {
-            this.say(`🕯️ ${_raidFallenAtStart.join(', ')} already fell to the raid before this fight — they do not rise for it.`);
-          }
+          // RAIDGUARD REMOVED (sim-raidguard-b 2026-10-29): the
+          // pre-dead-villager aftermath line lived here. Proven
+          // unreachable: startCombat seats villagers only via
+          // tbHumanFighter (null for dead-flagged, hp<=0, or
+          // non-finite hp) behind a candidate filter with the
+          // same gate, nothing between seating and the snapshot
+          // damages a fighter, and the snapshot precedes the
+          // opening turns — so no seated villager can be
+          // pre-dead, and opening-turn deaths correctly stay
+          // unnamed as aftermath (corpus witnesses: Willie
+          // s10711, Rasha s10713). Do not re-add without a
+          // firing case.
           if (_raidPendingMatch) this.raidPendingMonsterId = null;
         }
       } catch (e) {}
