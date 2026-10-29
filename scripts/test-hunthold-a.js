@@ -70,14 +70,19 @@ function dedupeDanger(danger) {
   return out;
 }
 
-// The lever's hold, as recorded: the recorder's 'other-held'
-// action (post still 'ready', danger present, no heal sat-out)
-// with every danger verdict in {ask, tighten}. The engine
-// alone never produces this: on 'go' it departs, on non-'go'
-// it overwrites for HUNT, and the heal sat-out path records
-// held-ready/heal-sat-out instead.
+// The lever's hold, as recorded: the recorder's 'held-ready'
+// action with sub 'other-held' (post still 'ready', danger
+// present, no heal sat-out) with every danger verdict in
+// {ask, tighten}. The engine alone never produces this: on
+// 'go' it departs, on non-'go' it overwrites for HUNT, and
+// the heal sat-out path records held-ready/heal-sat-out
+// instead. (CORRECTION, pre-run: the recorder's
+// deriveMaybeAction returns action 'held-ready', sub
+// 'other-held' — 'other-held' is a SUB, not an action. The
+// departhold analyzer's own leg2 counts it the same way:
+// action held-ready AND sub other-held.)
 function heldByLever(ev) {
-  if (!ev || ev.action !== 'other-held') return false;
+  if (!ev || ev.action !== 'held-ready' || ev.sub !== 'other-held') return false;
   const dg = dedupeDanger(ev.danger);
   if (!dg.length) return false;
   return dg.every(d => d.verdict === 'ask' || d.verdict === 'tighten');
@@ -299,9 +304,9 @@ function main() {
         if (label === 'on') {
           if (e.action === 'other') out.instrument.onOther++;
           if (e.action === 'overwritten' && !dedupeDanger(e.danger).length) out.instrument.onOverwriteWithoutVerdict++;
-          if (e.action === 'other-held' && !heldByLever(e)) out.instrument.onOtherHeldUnexplained++;
+          if (e.action === 'held-ready' && e.sub === 'other-held' && !heldByLever(e)) out.instrument.onOtherHeldUnexplained++;
         } else {
-          if (e.action === 'other-held') out.instrument.offOtherHeldUnexplained++;
+          if (e.action === 'held-ready' && e.sub === 'other-held') out.instrument.offOtherHeldUnexplained++;
         }
       }
     }

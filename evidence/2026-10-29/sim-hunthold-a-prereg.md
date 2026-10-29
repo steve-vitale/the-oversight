@@ -185,10 +185,13 @@ input is the engine's pre-existing input, not a new feed.
   Install order in the sweep: hunthold FIRST, then the
   recorders — so the departhold recorder wraps OUTSIDE the
   lever and records held evaluations. A held evaluation
-  records as the recorder's 'other-held' action (post still
-  'ready', danger present, no heal sat-out); the analyzer
-  maps other-held + ask/tighten danger to held-by-lever
-  (see below). Delegated evaluations in the ON corpus may
+  records as the recorder's 'held-ready' action with sub
+  'other-held' (post still 'ready', danger present, no heal
+  sat-out); the analyzer maps held-ready/other-held +
+  ask/tighten danger to held-by-lever (see below).
+  (CORRECTION, pre-run — see the correction note at the
+  end of this file: 'other-held' is a recorder SUB, not
+  an action.) Delegated evaluations in the ON corpus may
   carry a duplicated danger record (the lever's pre-check
   plus the engine's identical re-check — objDanger is
   pure: it reads gossip/weather/distance/temperament/goal
@@ -226,12 +229,13 @@ adapted ONLY as follows (all adaptations pre-registered
 here, before seeing any ON number):
 
 - HELD-BY-LEVER: an evaluation with recorder action
-  'other-held' whose danger records are non-empty and
-  every record's verdict is in {ask, tighten} counts as
-  a lever hold. (The engine alone never produces
-  other-held with a danger record: on 'go' it departs,
-  on non-'go' it overwrites for HUNT, and the heal
-  sat-out path records held-ready/heal-sat-out instead.)
+  'held-ready' and sub 'other-held' whose danger records
+  are non-empty and every record's verdict is in {ask,
+  tighten} counts as a lever hold. (The engine alone never
+  produces held-ready/other-held with a danger record: on
+  'go' it departs, on non-'go' it overwrites for HUNT, and
+  the heal sat-out path records held-ready/heal-sat-out
+  instead.)
   A pick's chain notes: heldLeverEvals (count),
   heldThenDeparted (class departed-pick-linked AND
   heldLeverEvals > 0 before the departure),
@@ -242,13 +246,14 @@ here, before seeing any ON number):
   linked departure, no overwrite, alive at corpus end,
   classes as held-ready-at-end with the lever flag (it
   survived to the end still waiting under the lever).
-- UNEXPLAINED other-held: any other-held evaluation whose
-  danger records are empty, or contain a verdict outside
-  {ask, tighten} (defer, go, unknown), is unexplained and
-  breaks the instrument leg (P3). In the OFF corpus ANY
-  other-held evaluation on a wave-4 HUNT objective is
-  unexplained (the lever is off; the engine should never
-  produce one) and likewise breaks P3.
+- UNEXPLAINED other-held: any held-ready/other-held
+  evaluation whose danger records are empty, or contain
+  a verdict outside {ask, tighten} (defer, go, unknown),
+  is unexplained and breaks the instrument leg (P3). In
+  the OFF corpus ANY held-ready/other-held evaluation on
+  a wave-4 HUNT objective is unexplained (the lever is
+  off; the engine should never produce one) and likewise
+  breaks P3.
 
 SECONDARY CENSUS (reported, not judged, except the
 held-starvation guard which spans all waves): the same
@@ -400,3 +405,27 @@ is too weak a pilot bar when the primary universe is
 n = 2, and whether the confirm band should be 16 or 24
 seeds; (e) whether a held hunt should say its waiting
 line every dawn rather than once per objective.
+
+## CORRECTION (pre-run, before any judged band)
+
+The original draft of this prereg described the recorder's
+hold record as "action 'other-held'". That is wrong as
+written: scripts/policies/departhold-diag.js
+deriveMaybeAction returns action 'held-ready' with sub
+'other-held' for a post-still-ready HUNT with a danger
+record and no heal sat-out — 'other-held' is a SUB, and
+the departhold analyzer's own leg 2 counts it exactly
+that way (action held-ready AND sub other-held). The
+smoke seed (75106, scratch corpora, NOT a judged band)
+confirmed it empirically: the ON smoke row carries 48
+held-ready/other-held evaluations against a lever store
+count of exactly 48 holds, with danger records
+tighten/4, ask/2, tighten/5, ask/3. Every "other-held"
+in this prereg therefore means held-ready action with
+sub other-held, as now stated in the install-order and
+taxonomy sections above. The substance of the mapping
+is unchanged — only the action/sub naming is corrected
+— and no judged number existed when the correction was
+made: the judged OFF/ON bands had not run. The analyzer
+(test-hunthold-a.js heldByLever) and the fixtures were
+corrected to the same reading in the same commit.

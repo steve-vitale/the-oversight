@@ -293,7 +293,7 @@ async function summaryMode() {
     dhOver += evs.filter(e => e.action === 'overwritten').length;
     dhDep += evs.filter(e => e.action === 'departed').length;
     dhHeld += evs.filter(e => e.action === 'held-ready').length;
-    dhOtherHeld += evs.filter(e => e.action === 'other-held').length;
+    dhOtherHeld += evs.filter(e => e.action === 'held-ready' && e.sub === 'other-held').length;
     dhOut += ((r.departhold || {}).dangerOutside || []).length + ((r.departhold || {}).departOutside || []).length
       + ((r.departhold || {}).healOutside || []).length + ((r.departhold || {}).tightenOutside || []).length;
     if (r.hunthold) { hhHolds += r.hunthold.holds | 0; hhExhausted += r.hunthold.exhausted | 0; hhNarrated += r.hunthold.narrated | 0; }

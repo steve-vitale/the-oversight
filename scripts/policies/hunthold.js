@@ -48,9 +48,10 @@
 // RECORDING NOTE: the departhold recorder wraps OUTSIDE this
 // lever (the sweep installs hunthold first, then the
 // recorders), so a held evaluation records as the recorder's
-// 'other-held' action (post still 'ready', danger present, no
-// heal sat-out), and the analyzer maps other-held +
-// ask/tighten danger to held-by-lever. Delegated evaluations
+// 'held-ready' action with sub 'other-held' (post still
+// 'ready', danger present, no heal sat-out), and the analyzer
+// maps held-ready/other-held + ask/tighten danger to
+// held-by-lever. Delegated evaluations
 // in the ON corpus may carry a duplicated danger record (the
 // lever's pre-check plus the engine's identical re-check —
 // objDanger is pure: it reads gossip/weather/distance/

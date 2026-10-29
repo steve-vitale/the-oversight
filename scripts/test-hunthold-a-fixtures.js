@@ -283,17 +283,21 @@ check('install idempotent for same store', () => {
   assert.strictEqual(Game.objMaybeDepart, wrapped);
 });
 
-// 13. Analyzer mapping: heldByLever.
+// 13. Analyzer mapping: heldByLever. The recorder's hold
+// record is action 'held-ready' with SUB 'other-held'
+// (deriveMaybeAction) — 'other-held' is a sub, not an action.
 check('heldByLever mapping: ask/tighten held, defer/go/empty not', () => {
-  const mk = (action, danger) => ({ action, danger });
-  assert.strictEqual(heldByLever(mk('other-held', [{ verdict: 'ask', score: 3 }])), true);
-  assert.strictEqual(heldByLever(mk('other-held', [{ verdict: 'tighten', score: 5 }])), true);
-  assert.strictEqual(heldByLever(mk('other-held', [{ verdict: 'ask', score: 2 }, { verdict: 'ask', score: 2 }])), true, 'duplicated pre-check + engine records still held');
-  assert.strictEqual(heldByLever(mk('other-held', [{ verdict: 'defer', score: 7 }])), false);
-  assert.strictEqual(heldByLever(mk('other-held', [{ verdict: 'go', score: 1 }])), false);
-  assert.strictEqual(heldByLever(mk('other-held', [])), false);
-  assert.strictEqual(heldByLever(mk('held-ready', [{ verdict: 'tighten', score: 4 }])), false);
-  assert.strictEqual(heldByLever(mk('departed', [{ verdict: 'go', score: 1 }])), false);
+  const mk = (action, sub, danger) => ({ action, sub, danger });
+  assert.strictEqual(heldByLever(mk('held-ready', 'other-held', [{ verdict: 'ask', score: 3 }])), true);
+  assert.strictEqual(heldByLever(mk('held-ready', 'other-held', [{ verdict: 'tighten', score: 5 }])), true);
+  assert.strictEqual(heldByLever(mk('held-ready', 'other-held', [{ verdict: 'ask', score: 2 }, { verdict: 'ask', score: 2 }])), true, 'duplicated pre-check + engine records still held');
+  assert.strictEqual(heldByLever(mk('held-ready', 'other-held', [{ verdict: 'defer', score: 7 }])), false);
+  assert.strictEqual(heldByLever(mk('held-ready', 'other-held', [{ verdict: 'go', score: 1 }])), false);
+  assert.strictEqual(heldByLever(mk('held-ready', 'other-held', [])), false);
+  assert.strictEqual(heldByLever(mk('held-ready', 'no-attempt-early-return', [{ verdict: 'tighten', score: 4 }])), false);
+  assert.strictEqual(heldByLever(mk('held-ready', 'heal-sat-out', [{ verdict: 'tighten', score: 4 }])), false);
+  assert.strictEqual(heldByLever(mk('other-held', null, [{ verdict: 'ask', score: 3 }])), false, 'other-held as an ACTION is not a recorder record');
+  assert.strictEqual(heldByLever(mk('departed', null, [{ verdict: 'go', score: 1 }])), false);
 });
 
 console.log(failures === 0 ? 'ALL HUNTHOLD FIXTURES PASS' : `${failures} FIXTURE(S) FAILED`);
