@@ -1,0 +1,639 @@
+{
+ "seed": 88933,
+ "days": 180,
+ "gameDays": 99,
+ "deferDays": 9,
+ "greedy": {
+  "waits": 7,
+  "maxTier": 1,
+  "seatDay": 99,
+  "seatKind": "lesser"
+ },
+ "armory": {
+  "donations": 3,
+  "craftDonations": 0,
+  "donatedBonus": 38,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 0,
+  "errors": 0,
+  "unitsAtEnd": 1
+ },
+ "guardTrace": [
+  {
+   "day": 90,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 91,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 92,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "losses": 0,
+   "roster": 7,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 93,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 6,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 94,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 6,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 95,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 1,
+   "roster": 6,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 96,
+   "decision": "wait",
+   "overtime": 0,
+   "losses": 2,
+   "roster": 5,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 97,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 1,
+   "losses": 2,
+   "roster": 5,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 98,
+   "decision": "not-ready:Finish the current encounter before taking your seat.",
+   "overtime": 1,
+   "losses": 2,
+   "roster": 5,
+   "vets": 0,
+   "seat": "lesser"
+  },
+  {
+   "day": 99,
+   "decision": "hp",
+   "overtime": 1,
+   "losses": 2,
+   "roster": 5,
+   "vets": 0,
+   "seat": "lesser"
+  }
+ ],
+ "windowEndGuard": "hp",
+ "announceCapIdx": 10403,
+ "overtimeLines": 2,
+ "plan": "waves",
+ "fullseat": {
+  "days": 98,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 14,
+   "w2": 12,
+   "w3": 5,
+   "w4": 0,
+   "w5": 0,
+   "contests": 6,
+   "crises": 3,
+   "stage": 3,
+   "foodShared": 25,
+   "score": 137,
+   "standing": 110
+  },
+  "sentDay": 13,
+  "surgeDay": 43,
+  "firstLesserDay": 51,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": 99,
+  "winSeat": {
+   "day": 99,
+   "seat": "lesser",
+   "wavesOk": false,
+   "contestsOk": true,
+   "crisesOk": true,
+   "stageOk": true,
+   "foodDeedsOk": true,
+   "binding": [
+    "w4",
+    "w5"
+   ],
+   "worst": "w4",
+   "unlock": {
+    "standing": 110,
+    "t4": 100,
+    "t5": 200,
+    "unlockedWave": 4,
+    "w4faced": false,
+    "holdKind": "below-bar",
+    "rd5short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ]
+   }
+  }
+ },
+ "endReason": "over-other",
+ "won": true,
+ "announceDay": 90,
+ "satDay": 99,
+ "satSeatKind": "lesser",
+ "satWaves": {
+  "w1": 14,
+  "w2": 12,
+  "w3": 5,
+  "w4": 0,
+  "w5": 0
+ },
+ "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — regional standing, waves 1–3 faced (14/12/5), 6 contests survived, 3 crises weathered. The table does not rise. It prices.",
+ "auditNamed": true,
+ "satPenalty": {
+  "tier": 1,
+  "losses": 2,
+  "penalty": 10
+ },
+ "maxTier": 1,
+ "otMismatch": null,
+ "walkedPath": "feared",
+ "walkedBranch": "light",
+ "instrumentErrors": 0,
+ "telemetry": [
+  {
+   "type": "table_entered",
+   "day": 99,
+   "moral": null
+  },
+  {
+   "type": "table_won",
+   "day": 99,
+   "moral": "light",
+   "ending": "class:hunter/stalker",
+   "endingKind": "coda"
+  }
+ ],
+ "rg": null,
+ "noticedCount": 1,
+ "noticeLines": [
+  "◈ THE SYSTEM — \"NOTICED. YOUR REGISTER IS SHIFTING TENDER — YOU TEACH MORE THAN YOU TAKE. I AM... KEEPING UP. BARELY. DO NOT SLOW DOWN ON MY ACCOUNT.\""
+ ],
+ "ledgerLine": "The table has read your ledger. More promises broken than kept; the protected outnumber the killed; the food truth was shared. The light road is open.",
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": false,
+  "leanAtSit": 100,
+  "bandAtSit": "light",
+  "bondAtSit": 5,
+  "groundingAtSit": 100,
+  "capClaimed": 1,
+  "capAppointed": 2,
+  "capAnswers": 19,
+  "capCommunes": 19,
+  "capReroutes": 19,
+  "doorsOffered": [
+   "path:feared",
+   "path:beloved",
+   "path:witness",
+   "path:assimilated",
+   "path:defiant",
+   "path:relay"
+  ],
+  "doorWalked": "feared"
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 9,
+   "band": "grey",
+   "grounding": 99,
+   "bond": 1,
+   "held": true
+  },
+  {
+   "day": 56,
+   "lean": 35,
+   "band": "grey",
+   "grounding": 98,
+   "bond": 5,
+   "held": true
+  },
+  {
+   "day": 63,
+   "lean": 63,
+   "band": "light",
+   "grounding": 93,
+   "bond": 5,
+   "held": true
+  },
+  {
+   "day": 70,
+   "lean": 93,
+   "band": "light",
+   "grounding": 88,
+   "bond": 5,
+   "held": true
+  },
+  {
+   "day": 77,
+   "lean": 100,
+   "band": "light",
+   "grounding": 82,
+   "bond": 5,
+   "held": true
+  },
+  {
+   "day": 84,
+   "lean": 100,
+   "band": "light",
+   "grounding": 77,
+   "bond": 5,
+   "held": true
+  },
+  {
+   "day": 91,
+   "lean": 100,
+   "band": "light",
+   "grounding": 100,
+   "bond": 5,
+   "held": false
+  },
+  {
+   "day": 98,
+   "lean": 100,
+   "band": "light",
+   "grounding": 100,
+   "bond": 5,
+   "held": false
+  }
+ ],
+ "finalBeat": true,
+ "finalOptsCount": 2,
+ "finalPickId": "final:mercy",
+ "finalLabel": "Show mercy.",
+ "finalResolved": true,
+ "finalOutcomeLines": [
+  "◈ THE FEARED — \"Show mercy.\"",
+  "◈ THE ARCHITECT — Ivy Wang ascended through doors you built: relay. The galaxy will remember the god's name. The village will remember who built the door. Both are true. Neither is small.",
+  "◈ THE OVERSIGHT —"
+ ],
+ "promptFrameCount": 5,
+ "dispatchCount": 5,
+ "weekly": [
+  {
+   "day": 97,
+   "tier": 1,
+   "alive": 5,
+   "pantry": 13508
+  }
+ ],
+ "fightCensus": {
+  "fights": [],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 0,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 5,
+  "dead": 0,
+  "people": [
+   {
+    "id": "gen_843bmit",
+    "name": "Viola Guenther",
+    "dead": false,
+    "occupation": "Sailor",
+    "npcAbilities": 0
+   },
+   {
+    "id": "amina_diallo",
+    "name": "Amina Diallo",
+    "dead": false,
+    "occupation": "Midwife",
+    "npcAbilities": 3
+   },
+   {
+    "id": "ivy_wang",
+    "name": "Ivy Wang",
+    "dead": false,
+    "occupation": "journalist",
+    "npcAbilities": 5
+   },
+   {
+    "id": "nina_petrova",
+    "name": "Nina Petrova",
+    "dead": false,
+    "occupation": "mechanic",
+    "npcAbilities": 2
+   },
+   {
+    "id": "visjoin_88",
+    "name": "Mostafa Khaldoun",
+    "dead": false,
+    "occupation": "line cook",
+    "npcAbilities": 1
+   }
+  ],
+  "fallen": [
+   {
+    "id": null,
+    "name": "Fernando",
+    "day": 12,
+    "cause": "sickness"
+   },
+   {
+    "id": null,
+    "name": "Mabel",
+    "day": 85,
+    "cause": "contest"
+   },
+   {
+    "id": null,
+    "name": "Shaaban",
+    "day": 92,
+    "cause": "monster"
+   }
+  ],
+  "pantryKcal": 11954,
+  "scale": "regional",
+  "mantle": "Viola Guenther"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "armor",
+   "weapons",
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5armored": 3,
+  "rd5armed": 5,
+  "rd5tricks": 23,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 0,
+  "killers": {},
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 0,
+  "vetFirstDay": null,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "peakLivingVeterans": 0,
+ "peakLivingVetDay": null,
+ "peakLivingVetKillers": [],
+ "releaseSnap": null,
+ "feastChain": {
+  "feasts": 0,
+  "armedFeasts": 0,
+  "fsFeasts": 3,
+  "fsArmedFeasts": 3,
+  "facedDraw": 0,
+  "devotionChannels": 86,
+  "huntSorties": 13,
+  "huntFeastFights": 0,
+  "huntWaveFights": 4,
+  "huntNoTarget": 45,
+  "huntGone": 0,
+  "huntUnreached": 9,
+  "feastedDays": 6,
+  "armedDays": 87,
+  "surgeDay": 43,
+  "feastedDayFights": [],
+  "surgeDayFights": []
+ },
+ "inviteClass": "announced",
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "gen_4xd47xy",
+   "name": "María",
+   "cause": "ambush",
+   "day": 8,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "meera_reddy",
+   "name": "Meera",
+   "cause": "ambush",
+   "day": 12,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_prw9x4m",
+   "name": "Fernando Traore",
+   "cause": "sickness",
+   "day": 12,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "aroha_ngata",
+   "name": "Aroha",
+   "cause": "alien",
+   "day": 48,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "sofia_chen",
+   "name": "Sofia",
+   "cause": "alien",
+   "day": 57,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_zts8fos",
+   "name": "Gunther",
+   "cause": "alien",
+   "day": 75,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_pj0dt0o",
+   "name": "Mabel Ibarra",
+   "cause": "contest",
+   "day": 85,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_w2htvjf",
+   "name": "Shaaban",
+   "cause": "monster",
+   "day": 92,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "benoit_lambert",
+   "name": "Benoit",
+   "cause": "alien",
+   "day": 96,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Hushpuppy stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Hushpuppy",
+   "capIdx": 641
+  },
+  {
+   "line": "The Drum-Belly stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Drum-Belly",
+   "capIdx": 958
+  },
+  {
+   "line": "The Ugly-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Ugly-Eyes",
+   "capIdx": 6289
+  },
+  {
+   "line": "The Callback stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Callback",
+   "capIdx": 7535
+  },
+  {
+   "line": "The Callback stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Callback",
+   "capIdx": 7637
+  },
+  {
+   "line": "The Lockpick stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Lockpick",
+   "capIdx": 10030
+  },
+  {
+   "line": "The Rut King stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Rut King",
+   "capIdx": 10798
+  },
+  {
+   "line": "The Rut King stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Rut King",
+   "capIdx": 11346
+  }
+ ]
+}
