@@ -1,0 +1,463 @@
+{
+ "rows": 16,
+ "problems": [],
+ "wall": {
+  "won": 4,
+  "wonFull": 0,
+  "nationalEver": 13,
+  "nationalFinal": 9,
+  "table": 10,
+  "entered": 4,
+  "wave4": 11,
+  "wave5": 0,
+  "medianDays": 180,
+  "deaths": 600,
+  "starvation": 4,
+  "judgedA": 42,
+  "huntDepartures": 326,
+  "huntTrueDrops": 297
+ },
+ "wallDiffs": [],
+ "neuDiffs": [],
+ "legs": {
+  "joinCompleteness": true,
+  "neutrality": true,
+  "determinismNote": "checked separately by the evidence run (seed 75106 scratch re-run, cmp)"
+ },
+ "primary": {
+  "n": 2,
+  "by": {
+   "SUPERSEDED": 1,
+   "DEPARTED": 1
+  },
+  "departed": {
+   "lagDays": {
+    "n": 1,
+    "values": [
+     2
+    ],
+    "median": 2,
+    "q1": 2,
+    "q3": 2
+   },
+   "lagParts": {
+    "n": 1,
+    "values": [
+     8
+    ],
+    "median": 8,
+    "q1": 8,
+    "q3": 8
+   },
+   "sameDayShare": 0,
+   "twoPlusShare": 1,
+   "ageAtPick": {
+    "n": 1,
+    "values": [
+     3
+    ],
+    "median": 3,
+    "q1": 3,
+    "q3": 3
+   },
+   "ageAtDeparture": {
+    "n": 1,
+    "values": [
+     5
+    ],
+    "median": 5,
+    "q1": 5,
+    "q3": 5
+   },
+   "staleShare": 1,
+   "staleCount": 1,
+   "droppedCount": 1,
+   "lagBuckets": {
+    "0d": 0,
+    "1d": 0,
+    "2+d": 1
+   },
+   "bucketDrops": {
+    "0d": {
+     "n": 0,
+     "dropped": 0
+    },
+    "1d": {
+     "n": 0,
+     "dropped": 0
+    },
+    "2+d": {
+     "n": 1,
+     "dropped": 1
+    }
+   }
+  },
+  "superseded": {
+   "bySubKind": {
+    "NEEDS": 1
+   },
+   "lagDays": {
+    "n": 1,
+    "values": [
+     0
+    ],
+    "median": 0,
+    "q1": 0,
+    "q3": 0
+   },
+   "lagParts": {
+    "n": 1,
+    "values": [
+     3
+    ],
+    "median": 3,
+    "q1": 3,
+    "q3": 3
+   }
+  },
+  "diedHolding": 0,
+  "heldToHorizon": 0,
+  "unknown": 0
+ },
+ "primaryPicks": [
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "eulogy",
+   "huntDay": 132,
+   "pickDay": 135,
+   "pickPart": 536,
+   "ageAtPick": 3,
+   "cls": "SUPERSEDED",
+   "subKind": "NEEDS",
+   "nextKind": "EAT",
+   "nextDay": 135,
+   "nextPart": 539,
+   "lagDays": 0,
+   "lagParts": 3,
+   "sub": "superseded d135 by EAT (NEEDS) lag=0d/3p later died d145 cause=the wild"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_115",
+   "mid": "eulogy",
+   "huntDay": 132,
+   "pickDay": 135,
+   "pickPart": 536,
+   "ageAtPick": 3,
+   "cls": "DEPARTED",
+   "depDay": 137,
+   "depPart": 544,
+   "lagDays": 2,
+   "lagParts": 8,
+   "ageAtDeparture": 5,
+   "staleAtDeparture": true,
+   "dropped": true,
+   "dropDay": 137,
+   "dropPart": 545,
+   "sub": "departed d137 part=544 lag=2d/8p age 5 (pick age 3) true drop d137"
+  }
+ ],
+ "secondary": {
+  "n": 9,
+  "by": {
+   "DEPARTED": 5,
+   "SUPERSEDED": 4
+  },
+  "departed": {
+   "lagDays": {
+    "n": 5,
+    "values": [
+     0,
+     0,
+     0,
+     0,
+     2
+    ],
+    "median": 0,
+    "q1": 0,
+    "q3": 0
+   },
+   "lagParts": {
+    "n": 5,
+    "values": [
+     0,
+     0,
+     1,
+     1,
+     8
+    ],
+    "median": 1,
+    "q1": 0,
+    "q3": 1
+   },
+   "sameDayShare": 0.8,
+   "twoPlusShare": 0.2,
+   "ageAtPick": {
+    "n": 5,
+    "values": [
+     1,
+     1,
+     2,
+     3,
+     3
+    ],
+    "median": 2,
+    "q1": 1,
+    "q3": 3
+   },
+   "ageAtDeparture": {
+    "n": 5,
+    "values": [
+     1,
+     1,
+     2,
+     3,
+     5
+    ],
+    "median": 2,
+    "q1": 1,
+    "q3": 3
+   },
+   "staleShare": 0.2,
+   "staleCount": 1,
+   "droppedCount": 5,
+   "lagBuckets": {
+    "0d": 4,
+    "1d": 0,
+    "2+d": 1
+   },
+   "bucketDrops": {
+    "0d": {
+     "n": 4,
+     "dropped": 4
+    },
+    "1d": {
+     "n": 0,
+     "dropped": 0
+    },
+    "2+d": {
+     "n": 1,
+     "dropped": 1
+    }
+   }
+  },
+  "superseded": {
+   "bySubKind": {
+    "RE-PICK": 1,
+    "OTHER": 1,
+    "NEEDS": 2
+   },
+   "lagDays": {
+    "n": 4,
+    "values": [
+     0,
+     0,
+     0,
+     1
+    ],
+    "median": 0,
+    "q1": 0,
+    "q3": 0
+   },
+   "lagParts": {
+    "n": 4,
+    "values": [
+     3,
+     3,
+     3,
+     4
+    ],
+    "median": 3,
+    "q1": 3,
+    "q3": 3
+   }
+  },
+  "diedHolding": 0,
+  "heldToHorizon": 0,
+  "unknown": 0
+ },
+ "secondaryPicks": [
+  {
+   "seed": 75106,
+   "vid": "catalina_reyes",
+   "mid": "hushwolf",
+   "huntDay": 105,
+   "pickDay": 107,
+   "pickPart": 424,
+   "ageAtPick": 2,
+   "cls": "DEPARTED",
+   "depDay": 107,
+   "depPart": 424,
+   "lagDays": 0,
+   "lagParts": 0,
+   "ageAtDeparture": 2,
+   "staleAtDeparture": false,
+   "dropped": true,
+   "dropDay": 107,
+   "dropPart": 426,
+   "sub": "departed d107 part=424 lag=0d/0p age 2 (pick age 2) true drop d107"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "murkcap",
+   "huntDay": 106,
+   "pickDay": 108,
+   "pickPart": 428,
+   "ageAtPick": 2,
+   "cls": "SUPERSEDED",
+   "subKind": "RE-PICK",
+   "nextKind": "HUNT",
+   "nextDay": 108,
+   "nextPart": 431,
+   "lagDays": 0,
+   "lagParts": 3,
+   "sub": "superseded d108 by HUNT (RE-PICK) lag=0d/3p later died d129 cause=monster"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "murkcap",
+   "huntDay": 106,
+   "pickDay": 108,
+   "pickPart": 431,
+   "ageAtPick": 2,
+   "cls": "SUPERSEDED",
+   "subKind": "OTHER",
+   "nextKind": "FORAGE",
+   "nextDay": 109,
+   "nextPart": 435,
+   "lagDays": 1,
+   "lagParts": 4,
+   "sub": "superseded d109 by FORAGE (OTHER) lag=1d/4p later died d129 cause=monster"
+  },
+  {
+   "seed": 75106,
+   "vid": "catalina_reyes",
+   "mid": "focus_group",
+   "huntDay": 117,
+   "pickDay": 118,
+   "pickPart": 468,
+   "ageAtPick": 1,
+   "cls": "DEPARTED",
+   "depDay": 118,
+   "depPart": 469,
+   "lagDays": 0,
+   "lagParts": 1,
+   "ageAtDeparture": 1,
+   "staleAtDeparture": false,
+   "dropped": true,
+   "dropDay": 118,
+   "dropPart": 471,
+   "sub": "departed d118 part=469 lag=0d/1p age 1 (pick age 1) true drop d118"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_102",
+   "mid": "statickite",
+   "huntDay": 117,
+   "pickDay": 120,
+   "pickPart": 476,
+   "ageAtPick": 3,
+   "cls": "SUPERSEDED",
+   "subKind": "NEEDS",
+   "nextKind": "EAT",
+   "nextDay": 120,
+   "nextPart": 479,
+   "lagDays": 0,
+   "lagParts": 3,
+   "sub": "superseded d120 by EAT (NEEDS) lag=0d/3p later died d129 cause=monster"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "eulogy",
+   "huntDay": 132,
+   "pickDay": 135,
+   "pickPart": 536,
+   "ageAtPick": 3,
+   "cls": "SUPERSEDED",
+   "subKind": "NEEDS",
+   "nextKind": "EAT",
+   "nextDay": 135,
+   "nextPart": 539,
+   "lagDays": 0,
+   "lagParts": 3,
+   "sub": "superseded d135 by EAT (NEEDS) lag=0d/3p later died d145 cause=the wild"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_115",
+   "mid": "eulogy",
+   "huntDay": 132,
+   "pickDay": 135,
+   "pickPart": 536,
+   "ageAtPick": 3,
+   "cls": "DEPARTED",
+   "depDay": 137,
+   "depPart": 544,
+   "lagDays": 2,
+   "lagParts": 8,
+   "ageAtDeparture": 5,
+   "staleAtDeparture": true,
+   "dropped": true,
+   "dropDay": 137,
+   "dropPart": 545,
+   "sub": "departed d137 part=544 lag=2d/8p age 5 (pick age 3) true drop d137"
+  },
+  {
+   "seed": 75106,
+   "vid": "visjoin_113",
+   "mid": "gallowdeer",
+   "huntDay": 133,
+   "pickDay": 136,
+   "pickPart": 540,
+   "ageAtPick": 3,
+   "cls": "DEPARTED",
+   "depDay": 136,
+   "depPart": 540,
+   "lagDays": 0,
+   "lagParts": 0,
+   "ageAtDeparture": 3,
+   "staleAtDeparture": false,
+   "dropped": true,
+   "dropDay": 136,
+   "dropPart": 541,
+   "sub": "departed d136 part=540 lag=0d/0p age 3 (pick age 3) true drop d136"
+  },
+  {
+   "seed": 75115,
+   "vid": "app_mgpspj23354",
+   "mid": "anaconda_empress",
+   "huntDay": 111,
+   "pickDay": 112,
+   "pickPart": 444,
+   "ageAtPick": 1,
+   "cls": "DEPARTED",
+   "depDay": 112,
+   "depPart": 445,
+   "lagDays": 0,
+   "lagParts": 1,
+   "ageAtDeparture": 1,
+   "staleAtDeparture": false,
+   "dropped": true,
+   "dropDay": 113,
+   "dropPart": 449,
+   "sub": "departed d112 part=445 lag=0d/1p age 1 (pick age 1) true drop d113"
+  }
+ ],
+ "unknownWave": [],
+ "wave4Ids": [
+  "algorithm",
+  "audit",
+  "congregation",
+  "eater",
+  "eulogy",
+  "herald",
+  "influencer",
+  "reunion",
+  "strike",
+  "suburb"
+ ]
+}
