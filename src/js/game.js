@@ -168,12 +168,12 @@
   const TILE_GLYPH = {
     forest_floor: '🟫', grove: '🌳', meadow: '🌾', thicket: '🌿',
     wetland: '💧', creek: '🌊', trail_edge: '🟨', ruin: '🏚️', haven: '🏫',
-    building: '🏢',
+    building: '🏢', street: '🛣️', plaza: '⛲', cache: '📦',
   };
   const TILE_NAME = {
     forest_floor: 'forest floor', grove: 'grove', meadow: 'meadow', thicket: 'thicket',
     wetland: 'wetland', creek: 'creek', trail_edge: 'trail edge', ruin: 'ruin', haven: 'Haven',
-    building: 'building',
+    building: 'building', street: 'street', plaza: 'plaza', cache: 'buried cache',
   };
   // REGIONS (docs/WORLD-REGIONS.md): the region every old save and every
   // region-less harness belongs to. Today's whole environment lives in
@@ -11085,7 +11085,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           case 'creek': return r < 0.55 ? 'grass' : r < 0.65 ? 'plant' : 'dirt'; // river is the water, not random puddles
           case 'forest_floor': return r < 0.18 ? 'tree' : r < 0.3 ? 'plant' : r < 0.6 ? 'dirt' : 'grass';
           case 'trail_edge': return r < 0.4 ? 'dirt' : r < 0.7 ? 'grass' : r < 0.8 ? 'plant' : 'bush';
-          case 'ruin': case 'building': return r < 0.25 ? 'rubble' : r < 0.37 ? 'wall' : r < 0.5 ? 'plant' : r < 0.75 ? 'dirt' : 'grass';
+          case 'ruin': case 'building': case 'cache': return r < 0.25 ? 'rubble' : r < 0.37 ? 'wall' : r < 0.5 ? 'plant' : r < 0.75 ? 'dirt' : 'grass';
+          case 'street': return r < 0.8 ? 'dirt' : 'grass';
+          case 'plaza': return r < 0.6 ? 'dirt' : 'grass';
           case 'haven': return r < 0.08 ? 'tent' : r < 0.12 ? 'fire' : r < 0.5 ? 'dirt' : 'grass';
           default: return 'grass';
         }
@@ -11339,7 +11341,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const wild = (((bio && bio.tileTypes) || []).filter(t => t !== 'haven' && t !== 'ruin').length
         ? (bio.tileTypes || []).filter(t => t !== 'haven' && t !== 'ruin')
         : ['forest_floor', 'grove', 'meadow', 'thicket', 'wetland', 'creek', 'trail_edge']);
-      const type = R() < 0.10 ? 'building' : wild[Math.floor(R() * wild.length)];
+      // CITY DISTRICTS (fixall-map slice 3, pre-registered
+      // evidence/2026-10-28/sim-fixall-map-slice3-city.md): past the
+      // 12-tile wilderness ring, coarse 8x8 cells are city cells on a
+      // deterministic hash (~1 in 8). Inside a city cell the ground reads
+      // as a city, not the wild: a 2x2 plaza at the center, cross streets
+      // through it, buildings and buried caches elsewhere. Home board and
+      // near fringe generation are untouched (this branch only runs past
+      // the ring, and wild tiles keep the exact old draws).
+      let district = null;
+      let type;
+      const v0 = this.state.village || {};
+      const hx0 = v0.px ?? 4, hy0 = v0.py ?? 4;
+      const cheb0 = Math.max(Math.abs(x - hx0), Math.abs(y - hy0));
+      if (cheb0 > 12) {
+        const cx = Math.floor(x / 8), cy = Math.floor(y / 8);
+        let dh = (seed ^ 0x85ebca6b) >>> 0;
+        dh = Math.imul(dh ^ (cx >>> 0), 0xc2b2ae35); dh ^= dh >>> 13; dh = Math.imul(dh, 0x27d4eb2f); dh ^= dh >>> 16;
+        dh = Math.imul(dh ^ (cy >>> 0), 0xc2b2ae35); dh ^= dh >>> 13; dh = Math.imul(dh, 0x27d4eb2f); dh ^= dh >>> 16;
+        if (((dh >>> 0) % 1000) / 1000 < 0.12) {
+          district = cx + ',' + cy;
+          const lx = x - cx * 8, ly = y - cy * 8;
+          if (lx >= 3 && lx <= 4 && ly >= 3 && ly <= 4) type = 'plaza';
+          else if ((lx >= 3 && lx <= 4) || (ly >= 3 && ly <= 4)) type = 'street';
+          else { const rr = R(); type = rr < 0.70 ? 'building' : rr < 0.85 ? 'cache' : 'street'; }
+        }
+      }
+      if (!district) type = R() < 0.10 ? 'building' : wild[Math.floor(R() * wild.length)];
       const RICH = { grove: 1.5, wetland: 1.4, creek: 1.3, meadow: 1.3, thicket: 1.2, trail_edge: 1.0, forest_floor: 0.8, building: 1.0 };
       let r = (RICH[type] || 1) * (this.locParams().stockMult ?? 1);
       const tile = {
@@ -11349,15 +11377,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         wildlife: this.initTileWildlife ? this.initTileWildlife(type, R) : {},
       };
       tile.stock = tile.maxStock;
-      if (type === 'building') {
+      // Pavement grows nothing and holds no wildlife, whatever the animal
+      // tables say in future data: streets and plazas are bare ground.
+      if (type === 'street' || type === 'plaza') { tile.maxStock = 0; tile.stock = 0; tile.wildlife = {}; }
+      if (district) tile.district = district;
+      if (type === 'building' || type === 'cache') {
         const scav = this.regionScavenge();
         const common = scav.filter(s => !s.rare);
         const rare = scav.filter(s => s.rare);
         tile.loot = [];
-        for (let i = 0; i < 3 + Math.floor(R() * 3) && common.length; i++) {
-          tile.loot.push(common[Math.floor(R() * common.length)].id);
+        if (type === 'cache') {
+          // A stash, not a house: 1-2 common goods, no rare roll.
+          for (let i = 0; i < 1 + Math.floor(R() * 2) && common.length; i++) {
+            tile.loot.push(common[Math.floor(R() * common.length)].id);
+          }
+        } else {
+          for (let i = 0; i < 3 + Math.floor(R() * 3) && common.length; i++) {
+            tile.loot.push(common[Math.floor(R() * common.length)].id);
+          }
+          if (R() < 0.08 && rare.length) tile.loot.push(rare[Math.floor(R() * rare.length)].id);
         }
-        if (R() < 0.08 && rare.length) tile.loot.push(rare[Math.floor(R() * rare.length)].id);
       }
       m.beyond[k] = tile;
       return tile;
@@ -12361,7 +12400,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!tile.visited) {
         tile.visited = true;
         const arr = this.arrivalPoolFor(tile.type);
-        msg += `\n— ${arr.title} —\n${tile.ruinStory || this.arrivalTextFor(tile)}`;
+        // ARRIVAL-POOL GUARD (fixall-map slice 3): a tile type with no
+        // arrival pool used to crash travelTo on arr.title — the city
+        // kinds found it first. Unknown types now arrive without a title
+        // line instead of throwing (arrivalTextFor already tolerates null).
+        if (arr) msg += `\n— ${arr.title} —\n${tile.ruinStory || this.arrivalTextFor(tile)}`;
         // no free lessons on arrival — the land teaches when you work it, not when you walk in.
       }
       // Walking into fog: the wanderer system (checkEncounter) handles "something is there."
@@ -23225,6 +23268,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!t.visited) return { name: epithet, text: 'A standing building. You haven\'t worked this ground — no idea what\'s left inside yet.' };
         return { name: epithet, text: (t.loot || []).length ? 'A standing building. There might be supplies left.' : 'A standing building. Picked clean.' };
       }
+      // CITY GROUND (fixall-map slice 3): streets and plazas are pavement
+      // (nothing grows, nothing to take); a cache is a finite stash with
+      // the same interior-knowledge rule as a building.
+      if (t.type === 'street') return { name: epithet, text: 'A paved street. Bare pavement — nothing grows here.' };
+      if (t.type === 'plaza') return { name: epithet, text: 'An open plaza. Once, people gathered here. Now: open ground.' };
+      if (t.type === 'cache') {
+        if (!t.visited) return { name: epithet, text: 'A buried cache. You haven\'t worked this ground — no idea what\'s left inside yet.' };
+        return { name: epithet, text: (t.loot || []).length ? 'A buried cache. There might be supplies left.' : 'A buried cache. Picked clean.' };
+      }
       if (t.knownPlant) {
         const kp = this.data.plants.find(p => p.id === t.knownPlant);
         if (kp) {
@@ -23254,6 +23306,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         case 'thicket': return (x === 0 || y === 0 || x === 6 || y === 6) ? 'edge thicket' : 'heart thicket';
         case 'ruin': return 'the old place';
         case 'trail_edge': return 'the old trail';
+        case 'street': return 'the old street';
+        case 'plaza': return 'the old plaza';
+        case 'cache': return 'a buried cache';
         default: return 'forest floor';
       }
     },
@@ -23321,7 +23376,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         type: t.type, title: arr.title, epithet: this.nodeEpithet(this.map.px, this.map.py),
         text: t.ruinStory || this.arrivalTextFor(t), here,
         isRuin: t.type === 'ruin',
-        canForage: (t.type === 'ruin' || t.type === 'building') ? (t.loot || []).length > 0 : S.forage.canForage(t),
+        canForage: (t.type === 'ruin' || t.type === 'building' || t.type === 'cache') ? (t.loot || []).length > 0 : S.forage.canForage(t),
         canTreat: t.type === 'creek' || t.type === 'wetland',
       };
     },
@@ -26234,10 +26289,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // on the FIRST search of each ruin — 30%, a real find — then the
         // ruin is just loot. The old 10%-after-loot-exhausted roll meant
         // ~0.1 books per run; books never fed breadth.
-        if (t.type === 'ruin' || t.type === 'building') {
+        if (t.type === 'ruin' || t.type === 'building' || t.type === 'cache') {
           const isBld = t.type === 'building';
+          const isCache = t.type === 'cache';
           if (S.buildarounds) S.buildarounds.onForage(this, false);
-          if (!t.bookChecked) {
+          // A cache is a stash, not a house shelf: no book roll on it.
+          if (!isCache && !t.bookChecked) {
             t.bookChecked = true;
             if (this.data.books.length && Math.random() < 0.30) {
               // FIELD SHELF (TRAP REACHABILITY, structural 2026-10-10): the
@@ -26278,7 +26335,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
           }
           if (!t.loot || !t.loot.length) {
-            this.say(isBld ? 'Picked clean. Nothing left in this building.' : 'Picked clean. The houses fed someone — not you.'); return null;
+            this.say(isCache ? 'Picked clean. Nothing left in this cache.' : isBld ? 'Picked clean. Nothing left in this building.' : 'Picked clean. The houses fed someone — not you.'); return null;
           }
           const lootId = t.loot.shift();
           if (this.state.scholar.week1) this.state.scholar.week1.scavenge++;
@@ -26314,12 +26371,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             } else if (bonus) t.loot.unshift(bonusId);
           }
           scholar.kcal -= 100;
-          msg = `You pry open a ${isBld ? 'cabinet' : 'cupboard'}: ${item.name}${item.kcal ? ` (+${item.kcal} kcal)` : ''}. ${item.text}` + (t.loot.length ? '' : (isBld ? ' That\'s everything. This building is done.' : ' That\'s everything. This house is done.'));
+          msg = `You ${isCache ? 'dig out the stash' : 'pry open a ' + (isBld ? 'cabinet' : 'cupboard')}: ${item.name}${item.kcal ? ` (+${item.kcal} kcal)` : ''}. ${item.text}` + (t.loot.length ? '' : (isCache ? ' That\'s everything. This cache is done.' : isBld ? ' That\'s everything. This building is done.' : ' That\'s everything. This house is done.'));
           this.say(msg);
           this.tele('scavenge', { item: item.name, kcal: item.kcal, lootLeft: t.loot.length, packKg: Math.round(this.packWeight() * 10) / 10 });
           // ACTION CLOCK: searching a ruin = 2 chunks (64 ticks). 100 kcal effort above.
           return this.tickAction(64) || this.status();
         }
+        // CITY PAVEMENT (fixall-map slice 3): streets and plazas never
+        // regrow — "nothing left today" would lie about tomorrow. Name it.
+        if (t.type === 'street' || t.type === 'plaza') { if (S.buildarounds) S.buildarounds.onForage(this, false); this.say('Bare pavement — nothing grows here.'); return null; }
         if (!S.forage.canForage(t)) { if (S.buildarounds) S.buildarounds.onForage(this, false); this.say('Nothing left to take here today.'); return null; }
         // AREA SWEEP (Steve): forage is an area action, not a tile action. One
         // press works the patch around you — your cell + the 8 around it. The
