@@ -1,0 +1,312 @@
+# SURFACE+SEEDED — seed 6102 (142d, 5 alive)
+
+npcPairs=86 deep2=39 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=268 closeReadsServed=44 grievanceServes=44 othersSteered=29
+COND-TP: firstDeep2Day=20 lateClose=175 lateTP=143 lateNull=0 condRate=81.7% pooledTP=143/180 pooledRate=79.4% grievReadsByWhy={"grievance":6,"vgrievance":50}
+FUNNEL (natural): convos=414 subject=396 offered=345 picked=239 classes={"subject-no-offer":51,"no-subject-no-ans":18,"offered-not-picked":106,"picked-others":239}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=51 rate=12.3% offered=345 mainOffered=0 subjectOffered=345 picked=239 latePicks=105 latePicksMain=0 latePicksSubject=105
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Paolo / Rowan — "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK-CIRCULATION: Caleb / Mara / Elif — "that stray dog — the one that bit two people — lets Leo touch it."
+REOFFER: offers=339 picks=254 latePicks=102 missedChangedNotOffered=13
+WRAPSERVE: convos=56 matcherHits=44 matcherServes=44 classes={"grievance-line":44,"deflection":2,"other":10}
+FUNNEL-PROBE (subject-no-offer turns): turns=163 menuProblem=134 pickProblem=29
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":18,"accepts":9,"acceptRate":0.5,"vetoes":{},"chanceMin":22.4,"chanceMax":91,"chanceMean":52.1} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":31,"forageOffers":9,"otherFavorOffers":22,"accepts":9,"acceptAttempts":9,"waits":9,"starts":4,"startBlocked":10,"forages":4,"forageNodeBarren":2,"forageBarren":0,"talks":4,"delivers":4,"deliverBlocked":0,"completeOutings":2,"keptMatched":3}
+OUTING END STATES: [{"vid":"elif_demir","vidName":"Elif","favorId":"favor-elif_demir-21-7","state":"acknowledged","promisedDay":21,"meetDay":22,"deadline":23,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"caleb_jones","vidName":"Caleb","favorId":"favor-caleb_jones-121-24","state":"thanked","promisedDay":121,"meetDay":122,"deadline":123,"promiseKept":true,"startedDay":122,"forageCount":1,"playerKcal":260,"partnerKcal":360,"deliveredKcal":620,"returnedDay":122,"talkCount":1},{"vid":"mara_vasquez","vidName":"Mara","favorId":"favor-mara_vasquez-138-31","state":"thanked","promisedDay":138,"meetDay":139,"deadline":140,"promiseKept":true,"startedDay":140,"forageCount":1,"playerKcal":270,"partnerKcal":270,"deliveredKcal":540,"returnedDay":140,"talkCount":1}]
+  FAVOR-OFFER d4: Elif kind=forage_help favorId=favor-elif_demir-4-1 task=forage with Elif tomorrow to rebuild the pantry
+  FAVOR-OFFER d5: Moshe kind=sick_help favorId=favor-gen_ouhx327-5-2 task=help Moshe with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d10: Ramatu kind=forage_help favorId=favor-gen_3a9lq7q-10-3 task=forage with Ramatu tomorrow to rebuild the pantry
+  FAVOR-OFFER d15: Moshe kind=forage_help favorId=favor-gen_ouhx327-15-4 task=forage with Moshe tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Stefany kind=forage_help favorId=favor-gen_c263jnj-17-5 task=forage with Stefany tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Elif kind=forage_help favorId=favor-elif_demir-21-7 task=forage with Elif tomorrow to rebuild the pantry
+  FAVOR-OFFER d23: Caleb kind=forage_help favorId=favor-caleb_jones-21-6 task=forage with Caleb tomorrow to rebuild the pantry
+  FAVOR-OFFER d27: Quinn kind=food_share favorId=favor-quinn_murphy-27-8 task=share food with Quinn — they're past hungry
+  FAVOR-OFFER d50: Quinn kind=sick_help favorId=favor-quinn_murphy-50-9 task=help Quinn with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d64: Stefany kind=sick_help favorId=favor-gen_c263jnj-63-10 task=help Stefany with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d68: Moshe kind=sick_help favorId=favor-gen_ouhx327-68-11 task=help Moshe with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d80: Quinn kind=water_haul favorId=favor-quinn_murphy-80-12 task=bring four liters home from the creek with Quinn; set out at dawn
+  FAVOR-OFFER d82: Rowan kind=water_haul favorId=favor-gen_ua8k3yj-82-13 task=bring four liters home from the creek with Rowan; set out at dawn
+  FAVOR-OFFER d82: Mara kind=sick_help favorId=favor-mara_vasquez-82-14 task=help Mara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d82: Sigrun kind=water_haul favorId=favor-sigrun_eiriksdottir-82-15 task=bring four liters home from the creek with Sigrun; set out at dawn
+  FAVOR-OFFER d83: Caleb kind=water_haul favorId=favor-caleb_jones-83-16 task=bring four liters home from the creek with Caleb; set out at dawn
+  FAVOR-OFFER d86: Leo kind=water_haul favorId=favor-leo_martin-86-17 task=bring four liters home from the creek with Leo; set out at dawn
+  FAVOR-OFFER d87: Quinn kind=water_haul favorId=favor-quinn_murphy-87-19 task=bring four liters home from the creek with Quinn; set out at dawn
+  FAVOR-OFFER d88: Rowan kind=water_haul favorId=favor-gen_ua8k3yj-87-18 task=bring four liters home from the creek with Rowan; set out at dawn
+  FAVOR-OFFER d94: Stefany kind=water_haul favorId=favor-gen_c263jnj-94-20 task=bring four liters home from the creek with Stefany; set out at dawn
+  FAVOR-OFFER d107: Mara kind=water_haul favorId=favor-mara_vasquez-107-21 task=bring four liters home from the creek with Mara; set out at dawn
+  FAVOR-OFFER d113: Rowan kind=food_share favorId=favor-gen_ua8k3yj-113-22 task=share food with Rowan — they're running on empty
+  FAVOR-OFFER d117: Caleb kind=food_share favorId=favor-caleb_jones-117-23 task=share food with Caleb — they're running on empty
+  FAVOR-OFFER d121: Caleb kind=forage_help favorId=favor-caleb_jones-121-24 task=forage with Caleb tomorrow to rebuild the pantry
+  FAVOR-OFFER d123: Ramatu kind=forage_help favorId=favor-gen_3a9lq7q-123-25 task=forage with Ramatu tomorrow to rebuild the pantry
+  FAVOR-OFFER d129: Mara kind=food_share favorId=favor-mara_vasquez-129-26 task=share food with Mara — they're going hungry
+  FAVOR-OFFER d130: Younes kind=food_share favorId=favor-visjoin_120-130-27 task=share food with Younes — they're going hungry
+  FAVOR-OFFER d133: Ramatu kind=water_haul favorId=favor-gen_3a9lq7q-133-28 task=bring four liters home from the creek with Ramatu; set out at dawn
+  FAVOR-OFFER d134: Younes kind=food_share favorId=favor-visjoin_120-134-29 task=share food with Younes — they're going hungry
+  FAVOR-OFFER d136: Jana kind=heal_help favorId=favor-visjoin_134-136-30 task=help Jana with their injury
+  FAVOR-OFFER d138: Mara kind=forage_help favorId=favor-mara_vasquez-138-31 task=forage with Mara tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d4: Elif favorId=favor-elif_demir-4-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d10: Ramatu favorId=favor-gen_3a9lq7q-10-3 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d15: Moshe favorId=favor-gen_ouhx327-15-4 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d17: Stefany favorId=favor-gen_c263jnj-17-5 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d21: Elif favorId=favor-elif_demir-21-7 accepted=true state=promised meetDay=22
+  FAVOR-ACCEPT d23: Caleb favorId=favor-caleb_jones-21-6 accepted=true state=promised meetDay=24
+  FAVOR-ACCEPT d121: Caleb favorId=favor-caleb_jones-121-24 accepted=true state=promised meetDay=122
+  FAVOR-ACCEPT d123: Ramatu favorId=favor-gen_3a9lq7q-123-25 accepted=true state=promised meetDay=124
+  FAVOR-ACCEPT d138: Mara favorId=favor-mara_vasquez-138-31 accepted=true state=promised meetDay=139
+  INVITE-DEC d8 party: Carolina -> Quinn chance=76 accept=true veto=- inputs={"temp":"warm","goal":"survive","mood":"cheerful","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 40","warm temperament (+15)","cheerful mood (+10)"]
+  INVITE-DEC d16 party: Carolina -> Rowan chance=48.400000000000006 accept=true veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"steady","fear":4,"trust":71,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 71","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d31 party: Carolina -> Stefany chance=91 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":0,"trust":90,"bond":{"v":23,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d95 party: Elif -> Ramatu chance=36.400000000000006 accept=false veto=- inputs={"temp":"withdrawn","goal":"understand","mood":"grieving","fear":53,"trust":91,"bond":{"v":70,"depth":2},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","sick (-20)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d96 party: Elif -> Ramatu chance=56.400000000000006 accept=true veto=- inputs={"temp":"withdrawn","goal":"understand","mood":"grieving","fear":33,"trust":91,"bond":{"v":72,"depth":2},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d102 party: Paolo -> Mara chance=78 accept=true veto=- inputs={"temp":"intense","goal":"legacy","mood":"grieving","fear":40,"trust":95,"bond":{"v":31,"depth":1},"partySize":4} reasons=["trust 95","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d104 party: Quinn -> Caleb chance=76 accept=false veto=- inputs={"temp":"steady","goal":"joy","mood":"grieving","fear":63,"trust":90,"bond":{"v":42,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d105 party: Quinn -> Caleb chance=76 accept=true veto=- inputs={"temp":"steady","goal":"joy","mood":"grieving","fear":47,"trust":90,"bond":{"v":44,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d112 party: Quinn -> Carlos chance=22.4 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":4,"trust":31,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 31","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d114 party: Sigrun -> Carlos chance=24.4 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":0,"trust":36,"bond":null,"partySize":4} reasons=["trust 36","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d115 party: Sigrun -> Carlos chance=26 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d117 party: Sigrun -> Carlos chance=37.2 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"steady","fear":12,"trust":43,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 43","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d118 party: Sigrun -> Carlos chance=38 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"steady","fear":12,"trust":45,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 45","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d121 party: Sigrun -> Carlos chance=42.400000000000006 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"steady","fear":4,"trust":56,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 56","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d123 party: Sigrun -> Younes chance=69.8 accept=true veto=- inputs={"temp":"warm","goal":"remember","mood":"steady","fear":4,"trust":37,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 37","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d129 party: Rowan -> Carlos chance=42 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":90,"trust":80,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 80","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d130 party: Rowan -> Carlos chance=52.400000000000006 accept=true veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":58,"trust":81,"bond":{"v":36,"depth":1},"partySize":4} reasons=["trust 81","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d136 party: Rowan -> Jana chance=44.2 accept=true veto=- inputs={"temp":"fidgety","goal":"protect","mood":"grieving","fear":90,"trust":23,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 23","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)","afraid (-10)"]
+SEEDED-DAILY: [{"day":17,"v":38,"depth":2},{"day":18,"v":38,"depth":2},{"day":19,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":38,"depth":2},{"day":22,"v":38,"depth":2},{"day":23,"v":38,"depth":2},{"day":24,"v":44,"depth":2},{"day":25,"v":48,"depth":2},{"day":26,"v":48,"depth":2},{"day":27,"v":48,"depth":2},{"day":28,"v":52,"depth":3},{"day":29,"v":56,"depth":3},{"day":30,"v":56,"depth":3}] class=fade
+GOSSIP: totalPicks=205 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=35 31-60=50 61-90=49 91-120=59 121+=46 naturalPicks=239 seededPicks=29 gossipPicks=205
+SEEDED: {"pair":{"a":"gen_ouhx327","b":"leo_martin","aName":"Moshe","bName":"Leo"},"day":16,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":17,"v":38,"depth":2},{"day":18,"v":38,"depth":2},{"day":19,"v":38,"depth":2},{"day":20,"v":38,"depth":2},{"day":21,"v":38,"depth":2},{"day":22,"v":38,"depth":2},{"day":23,"v":38,"depth":2},{"day":24,"v":44,"depth":2},{"day":25,"v":48,"depth":2},{"day":26,"v":48,"depth":2},{"day":27,"v":48,"depth":2},{"day":28,"v":52,"depth":3},{"day":29,"v":56,"depth":3},{"day":30,"v":56,"depth":3}],"crackTraceClass":"fade","vAt7":38,"depthAt7":2,"vDrop":12,"depthDrop":0,"crack7":true,"firstServe":{"day":17,"why":"vgrievance"},"serveWithin30":true,"serves":50,"servesAll":[{"day":17,"why":"vgrievance"},{"day":18,"why":"vgrievance"},{"day":19,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":21,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":86,"why":"vgrievance"},{"day":88,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":98,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Moshe <> Rowan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Stefany <> Rowan — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d30: Ramatu <> Moshe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Moshe <> Quinn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Elif <> Ramatu — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d110: Stefany <> Sigrun — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d130: Mara <> Sigrun — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d20: Paolo <> Moshe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Moshe <> Leo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Ramatu <> Rowan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Ramatu <> Quinn — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d80: Caleb <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Moshe <> Mara — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d80: Stefany <> Moshe — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d80: Elif <> Moshe — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d30: Moshe <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Paolo <> Rowan — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d100: Ramatu <> Paolo — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d115: Caleb <> Quinn — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d45: Caleb <> Moshe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Paolo <> Quinn — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d110: Caleb <> Rowan — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d105: Rowan <> Leo — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d80: Paolo <> Leo — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d115: Ramatu <> Mara — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d115: Caleb <> Ramatu — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d130: Ramatu <> Sigrun — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d140: Caleb <> Mara — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d95: Stefany <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Carolina <> Rowan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Carolina <> Moshe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Paolo <> Carolina — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d95: Caleb <> Carolina — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d95: Carolina <> Leo — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d95: Carolina <> Quinn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Ramatu <> Carolina — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d95: Carolina <> Mara — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d95: Carolina <> Sigrun — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d100: Elif <> Carolina — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d11: Moshe about Paolo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d14: Moshe about Leo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d15: Moshe about Leo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d17: Ramatu about Moshe — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Quinn about Moshe — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Quinn about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Caleb about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Paolo about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d28: Sigrun about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Mara about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Sigrun about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Mara about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Caleb about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Sigrun about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Caleb about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Ramatu about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Sigrun about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Ramatu about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Stefany about Rowan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Mara about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Caleb about Moshe — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Ramatu about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Ramatu about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Stefany about Rowan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Mara about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Ramatu about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Elif about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Quinn about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Stefany about Rowan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d50: Sigrun about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Sigrun about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Elif about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d53: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Leo about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Elif about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Elif about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Elif about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d60: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Elif about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Caleb about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Stefany about Moshe — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Sigrun about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Paolo about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Paolo about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Sigrun about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Stefany about Moshe — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Elif about Ramatu — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Mara about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Stefany about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Elif about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Sigrun about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Elif about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Stefany about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ramatu about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Leo about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Caleb about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ramatu about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Caleb about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Stefany about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Stefany about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Elif about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Mara about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Sigrun about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Elif about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Caleb about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Stefany about Moshe — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Quinn about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Rowan about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Mara about Moshe — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Quinn about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Quinn about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Stefany about Rowan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Quinn about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Caleb about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Mara about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d107: Caleb about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Mara about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Caleb about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Caleb about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Mara about Ramatu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Caleb about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Caleb about Rowan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Mara about Ramatu — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Caleb about Rowan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Caleb about Rowan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Caleb about Rowan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Rowan about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Caleb about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Caleb about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Caleb about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Caleb about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Carlos about Rowan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Caleb about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ramatu about Rowan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Carlos about Rowan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d129: Ramatu about Caleb — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ramatu about Caleb — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ramatu about Caleb — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Caleb about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Mara about Ramatu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Caleb about Ramatu — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ramatu about Caleb — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ramatu about Caleb — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Ramatu about Caleb — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Mara about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Mara about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Caleb about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Ramatu about Caleb — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Caleb about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Caleb about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Mara about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Mara about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ramatu about Caleb — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Mara about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Caleb about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Mara about Ramatu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Ramatu about Caleb — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d13: Rowan about Leo (why=grievance)
+  GRIEV-READ d16: Rowan about Leo (why=grievance)
+  GRIEV-READ d17: Moshe about Leo (why=vgrievance)
+  GRIEV-READ d18: Moshe about Leo (why=vgrievance)
+  GRIEV-READ d18: Rowan about Leo (why=grievance)
+  GRIEV-READ d19: Moshe about Leo (why=vgrievance)
+  KNACK d9 Paolo: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK d21 Ramatu: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK d34 Caleb: "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK d37 Mara: "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK d43 Elif: "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK d49 Rowan: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Leo touch it."
+  KNACK d105 Caleb: "Huh. Let me think about that." "Sigrun talks to the garden. The garden listens. I've seen it."
+  KNACK d112 Mara: "Sigrun talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":4,"combat":1,"the arena":1,"monster":3,"alien":1,"contest":1}

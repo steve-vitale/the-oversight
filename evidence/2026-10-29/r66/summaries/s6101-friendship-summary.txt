@@ -1,0 +1,360 @@
+# SURFACE+SEEDED — seed 6101 (141d, 7 alive)
+
+npcPairs=64 deep2=32 cracks=0 vCracks=1 friendGriev=0 stateGriev=4 stateFriend=1 stateVCrack=1 t2picks=274 closeReadsServed=31 grievanceServes=25 othersSteered=23
+COND-TP: firstDeep2Day=25 lateClose=215 lateTP=179 lateNull=0 condRate=83.3% pooledTP=179/223 pooledRate=80.3% grievReadsByWhy={"grievance":2,"vgrievance":28}
+FUNNEL (natural): convos=414 subject=389 offered=347 picked=251 classes={"no-subject-no-ans":25,"subject-no-offer":42,"picked-others":251,"offered-not-picked":96}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=42 rate=10.1% offered=347 mainOffered=0 subjectOffered=347 picked=251 latePicks=89 latePicksMain=0 latePicksSubject=89
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Ursula / James — "Gus talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=349 picks=264 latePicks=89 missedChangedNotOffered=24
+WRAPSERVE: convos=30 matcherHits=25 matcherServes=25 classes={"grievance-line":25,"deflection":0,"other":5}
+FUNNEL-PROBE (subject-no-offer turns): turns=184 menuProblem=163 pickProblem=21
+INVITE (wrap, carried from r63): lure={"n":1,"accepts":1,"acceptRate":1,"vetoes":{},"chanceMin":45,"chanceMax":45,"chanceMean":45} party={"n":8,"accepts":4,"acceptRate":0.5,"vetoes":{},"chanceMin":23,"chanceMax":95,"chanceMean":47.9} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":38,"forageOffers":21,"otherFavorOffers":17,"accepts":21,"acceptAttempts":21,"waits":27,"starts":7,"startBlocked":27,"forages":5,"forageNodeBarren":17,"forageBarren":5,"talks":5,"delivers":5,"deliverBlocked":0,"completeOutings":0,"keptMatched":7}
+OUTING END STATES: [{"vid":"ursula_weber","vidName":"Ursula","favorId":"favor-ursula_weber-115-30","state":"broken","promisedDay":115,"meetDay":116,"deadline":117,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"james_okonkwo","vidName":"James","favorId":"favor-james_okonkwo-125-34","state":"acknowledged","promisedDay":125,"meetDay":126,"deadline":127,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"dmitri_sokolov","vidName":"Dmitri","favorId":"favor-dmitri_sokolov-38-6","state":"acknowledged","promisedDay":38,"meetDay":39,"deadline":40,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_74zw40u","vidName":"Michelle","favorId":"favor-gen_74zw40u-128-36","state":"acknowledged","promisedDay":130,"meetDay":131,"deadline":130,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_7r2cz2p","vidName":"Erich","favorId":"favor-gen_7r2cz2p-45-8","state":"moot","promisedDay":45,"meetDay":46,"deadline":47,"promiseKept":true,"startedDay":47,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"priya_nair","vidName":"Priya","favorId":"favor-priya_nair-137-39","state":"broken","promisedDay":137,"meetDay":138,"deadline":139,"promiseKept":true,"startedDay":138,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_hn42rt3","vidName":"Gus","favorId":"favor-gen_hn42rt3-136-38","state":"acknowledged","promisedDay":136,"meetDay":137,"deadline":138,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d14: Ursula kind=forage_help favorId=favor-ursula_weber-14-1 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d25: Sofia kind=sick_help favorId=favor-sofia_chen-25-2 task=help Sofia with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d30: Ursula kind=forage_help favorId=favor-ursula_weber-30-3 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Sofia kind=food_share favorId=favor-sofia_chen-31-4 task=share food with Sofia — they're going hungry
+  FAVOR-OFFER d37: James kind=sick_help favorId=favor-james_okonkwo-37-5 task=help James with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d38: Dmitri kind=forage_help favorId=favor-dmitri_sokolov-38-6 task=forage with Dmitri tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Michelle kind=forage_help favorId=favor-gen_74zw40u-42-7 task=forage with Michelle tomorrow to rebuild the pantry
+  FAVOR-OFFER d45: Erich kind=forage_help favorId=favor-gen_7r2cz2p-45-8 task=forage with Erich tomorrow to rebuild the pantry
+  FAVOR-OFFER d54: Priya kind=heal_help favorId=favor-priya_nair-52-9 task=help Priya with their injury
+  FAVOR-OFFER d57: Priya kind=food_share favorId=favor-priya_nair-57-10 task=share food with Priya — they're past hungry
+  FAVOR-OFFER d62: Michelle kind=food_share favorId=favor-gen_74zw40u-61-11 task=share food with Michelle — they're going hungry
+  FAVOR-OFFER d64: Sofia kind=forage_help favorId=favor-sofia_chen-64-12 task=forage with Sofia tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Priya kind=food_share favorId=favor-priya_nair-65-13 task=share food with Priya — they're running on empty
+  FAVOR-OFFER d68: Gus kind=forage_help favorId=favor-gen_hn42rt3-68-14 task=forage with Gus tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Sofia kind=food_share favorId=favor-sofia_chen-69-15 task=share food with Sofia — they're running on empty
+  FAVOR-OFFER d72: Priya kind=sick_help favorId=favor-priya_nair-72-16 task=help Priya with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d78: Michelle kind=sick_help favorId=favor-gen_74zw40u-78-17 task=help Michelle with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d82: Priya kind=forage_help favorId=favor-priya_nair-82-18 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d85: Sofia kind=forage_help favorId=favor-sofia_chen-85-19 task=forage with Sofia tomorrow to rebuild the pantry
+  FAVOR-OFFER d87: Michelle kind=food_share favorId=favor-gen_74zw40u-87-20 task=share food with Michelle — they're going hungry
+  FAVOR-OFFER d89: Ursula kind=forage_help favorId=favor-ursula_weber-89-22 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d97: Ursula kind=forage_help favorId=favor-ursula_weber-95-23 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d101: Sofia kind=sick_help favorId=favor-sofia_chen-100-24 task=help Sofia with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d103: Marina kind=food_share favorId=favor-gen_4njzxwh-103-25 task=share food with Marina — they're going hungry
+  FAVOR-OFFER d103: Ursula kind=forage_help favorId=favor-ursula_weber-103-26 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d111: Michelle kind=heal_help favorId=favor-gen_74zw40u-111-27 task=help Michelle with their injury
+  FAVOR-OFFER d114: James kind=forage_help favorId=favor-james_okonkwo-114-29 task=forage with James tomorrow to rebuild the pantry
+  FAVOR-OFFER d115: Ursula kind=forage_help favorId=favor-ursula_weber-115-30 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d116: Gus kind=forage_help favorId=favor-gen_hn42rt3-113-28 task=forage with Gus tomorrow to rebuild the pantry
+  FAVOR-OFFER d117: Marina kind=forage_help favorId=favor-gen_4njzxwh-117-31 task=forage with Marina tomorrow to rebuild the pantry
+  FAVOR-OFFER d120: Priya kind=forage_help favorId=favor-priya_nair-120-32 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d124: Michelle kind=food_share favorId=favor-gen_74zw40u-124-33 task=share food with Michelle — they're running on empty
+  FAVOR-OFFER d125: James kind=forage_help favorId=favor-james_okonkwo-125-34 task=forage with James tomorrow to rebuild the pantry
+  FAVOR-OFFER d127: Marina kind=food_share favorId=favor-gen_4njzxwh-127-35 task=share food with Marina — they're running on empty
+  FAVOR-OFFER d129: Priya kind=sick_help favorId=favor-priya_nair-129-37 task=help Priya with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d130: Michelle kind=forage_help favorId=favor-gen_74zw40u-128-36 task=forage with Michelle tomorrow to rebuild the pantry
+  FAVOR-OFFER d136: Gus kind=forage_help favorId=favor-gen_hn42rt3-136-38 task=forage with Gus tomorrow to rebuild the pantry
+  FAVOR-OFFER d137: Priya kind=forage_help favorId=favor-priya_nair-137-39 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d14: Ursula favorId=favor-ursula_weber-14-1 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d30: Ursula favorId=favor-ursula_weber-30-3 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d38: Dmitri favorId=favor-dmitri_sokolov-38-6 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d42: Michelle favorId=favor-gen_74zw40u-42-7 accepted=true state=promised meetDay=43
+  FAVOR-ACCEPT d45: Erich favorId=favor-gen_7r2cz2p-45-8 accepted=true state=promised meetDay=46
+  FAVOR-ACCEPT d64: Sofia favorId=favor-sofia_chen-64-12 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d68: Gus favorId=favor-gen_hn42rt3-68-14 accepted=true state=promised meetDay=69
+  FAVOR-ACCEPT d82: Priya favorId=favor-priya_nair-82-18 accepted=true state=promised meetDay=83
+  FAVOR-ACCEPT d85: Sofia favorId=favor-sofia_chen-85-19 accepted=true state=promised meetDay=86
+  FAVOR-ACCEPT d89: Ursula favorId=favor-ursula_weber-89-22 accepted=true state=promised meetDay=90
+  FAVOR-ACCEPT d97: Ursula favorId=favor-ursula_weber-95-23 accepted=true state=promised meetDay=98
+  FAVOR-ACCEPT d103: Ursula favorId=favor-ursula_weber-103-26 accepted=true state=promised meetDay=104
+  FAVOR-ACCEPT d114: James favorId=favor-james_okonkwo-114-29 accepted=true state=promised meetDay=115
+  FAVOR-ACCEPT d115: Ursula favorId=favor-ursula_weber-115-30 accepted=true state=promised meetDay=116
+  FAVOR-ACCEPT d116: Gus favorId=favor-gen_hn42rt3-113-28 accepted=true state=promised meetDay=117
+  FAVOR-ACCEPT d117: Marina favorId=favor-gen_4njzxwh-117-31 accepted=true state=promised meetDay=118
+  FAVOR-ACCEPT d120: Priya favorId=favor-priya_nair-120-32 accepted=true state=promised meetDay=121
+  FAVOR-ACCEPT d125: James favorId=favor-james_okonkwo-125-34 accepted=true state=promised meetDay=126
+  FAVOR-ACCEPT d130: Michelle favorId=favor-gen_74zw40u-128-36 accepted=true state=promised meetDay=131
+  FAVOR-ACCEPT d136: Gus favorId=favor-gen_hn42rt3-136-38 accepted=true state=promised meetDay=137
+  FAVOR-ACCEPT d137: Priya favorId=favor-priya_nair-137-39 accepted=true state=promised meetDay=138
+  INVITE-DEC d6 lure: Ursula -> Marina chance=45 accept=true veto=- inputs={"temp":"intense","goal":"joy","mood":"hungry","fear":0,"affinity":1} reasons=[]
+  INVITE-DEC d8 party: Katarina -> Marina chance=26.200000000000003 accept=true veto=- inputs={"temp":"intense","goal":"joy","mood":"grieving","fear":82,"trust":28,"bond":null,"partySize":0} reasons=["trust 28","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d9 party: Katarina -> Erich chance=57.8 accept=false veto=- inputs={"temp":"restless","goal":"record","mood":"grieving","fear":68,"trust":57,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 57","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d9 party: Katarina -> Sofia chance=23 accept=false veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":58,"trust":20,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 20","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d10 party: Katarina -> Michelle chance=38.6 accept=false veto=- inputs={"temp":"earnest","goal":"prove","mood":"grieving","fear":48,"trust":34,"bond":null,"partySize":2} reasons=["trust 34","grieving mood (-10)"]
+  INVITE-DEC d10 party: Katarina -> Sofia chance=25.4 accept=true veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":38,"trust":26,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 26","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Katarina -> Michelle chance=58.400000000000006 accept=true veto=- inputs={"temp":"earnest","goal":"prove","mood":"steady","fear":4,"trust":46,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 46","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Katarina -> Erich chance=95 accept=true veto=- inputs={"temp":"restless","goal":"record","mood":"steady","fear":12,"trust":90,"bond":{"v":26,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d49 party: Erich -> Ursula chance=58.8 accept=false veto=- inputs={"temp":"gentle","goal":"home","mood":"grieving","fear":12,"trust":47,"bond":{"v":77,"depth":3},"partySize":4} reasons=["trust 47","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":25,"v":40,"depth":2},{"day":26,"v":44,"depth":2},{"day":27,"v":48,"depth":2},{"day":29,"v":50,"depth":3},{"day":29,"v":50,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":58,"depth":3},{"day":32,"v":58,"depth":3},{"day":33,"v":62,"depth":3},{"day":34,"v":66,"depth":3},{"day":35,"v":71,"depth":3},{"day":36,"v":73,"depth":3},{"day":37,"v":75,"depth":3},{"day":38,"v":75,"depth":3}] class=rise
+GOSSIP: totalPicks=228 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=44 31-60=55 61-90=63 91-120=52 121+=37 naturalPicks=251 seededPicks=23 gossipPicks=228
+SEEDED: {"pair":{"a":"gen_7r2cz2p","b":"sofia_chen","aName":"Erich","bName":"Sofia"},"day":24,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":25,"v":40,"depth":2},{"day":26,"v":44,"depth":2},{"day":27,"v":48,"depth":2},{"day":29,"v":50,"depth":3},{"day":29,"v":50,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":58,"depth":3},{"day":32,"v":58,"depth":3},{"day":33,"v":62,"depth":3},{"day":34,"v":66,"depth":3},{"day":35,"v":71,"depth":3},{"day":36,"v":73,"depth":3},{"day":37,"v":75,"depth":3},{"day":38,"v":75,"depth":3}],"crackTraceClass":"rise","vAt7":54,"depthAt7":3,"vDrop":-4,"depthDrop":-1,"crack7":false,"firstServe":{"day":27,"why":"vgrievance"},"serveWithin30":true,"serves":28,"servesAll":[{"day":27,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":54,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Erich <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: James <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Dmitri <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Marina <> James — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d55: Marina <> Priya — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: James <> Priya — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d135: Marina <> Ursula — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d65: Dmitri <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Erich <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Michelle <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Dmitri <> Erich — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Erich <> James — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Gus <> James — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d105: James <> Ursula — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d30: Erich <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Marina <> Michelle — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d90: Dmitri <> Ursula — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d80: Gus <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d141: Erich <> Priya — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d141: Michelle <> Erich — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Marina <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Gus <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Dmitri <> James — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d75: Sofia <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Gus <> Priya — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d125: Michelle <> Ursula — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d100: Marina <> Sofia — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d120: Michelle <> Sofia — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d115: Priya <> Sofia — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d50: Katarina <> Sofia — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d50: Michelle <> Katarina — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d141: Erich <> Katarina — maxDepth 3, final 3 (v=81), dropped 0
+  VCRACK d6: Marina vs Rafael (ambushed) v 6 -> -4 (depth 0 -> 0)
+  CLOSE-READ d16: Sofia about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Sofia about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Sofia about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Sofia about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Sofia about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Ursula about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Sofia about Erich — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Priya about Marina — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Sofia about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Sofia about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Dmitri about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Michelle about Erich — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Dmitri about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: James about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Sofia about Erich — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Dmitri about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Sofia about Erich — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Ursula about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d32: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Dmitri about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Marina about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Dmitri about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Sofia about Erich — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Dmitri about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: James about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: James about Erich — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Michelle about Erich — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: James about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Priya about Marina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: James about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Marina about Priya — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Michelle about Gus — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Sofia about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Michelle about Gus — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Priya about Marina — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: James about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Ursula about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Michelle about Gus — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Sofia about Dmitri — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: James about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Sofia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ursula about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Michelle about Gus — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: James about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: James about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Michelle about Gus — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Gus about Dmitri — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: James about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Sofia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Sofia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Gus about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Sofia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Michelle about Gus — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Sofia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Gus about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Gus about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Priya about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Marina about Priya — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Michelle about Gus — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Michelle about Gus — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: James about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Priya about Marina — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Marina about Priya — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Gus about Marina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Ursula about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: James about Sofia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Michelle about Gus — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ursula about Sofia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Gus about Michelle — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Gus about Michelle — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Gus about Michelle — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Marina about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Sofia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Marina about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Gus about Michelle — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Gus about Michelle — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Marina about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Ursula about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Marina about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Ursula about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Marina about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Ursula about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Ursula about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: James about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ursula about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Gus about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Michelle about Gus — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Gus about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Ursula about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Priya about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Gus about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d141: Sofia about James — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Marina about Priya — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d25 (betrayal): Erich vs Sofia (ambushed) depth 2 v 40 -> 54
+  STATE-VCRACK d7 (betrayal): Marina vs Rafael (ambushed) v 6 -> -4 (depth 0 -> 0)
+  GRIEV-READ d5: Rafael about Marina (why=grievance)
+  GRIEV-READ d5: Erich about A woman, maybe 30s, with a gap-toothed grin (why=grievance)
+  GRIEV-READ d27: Erich about Sofia (why=vgrievance)
+  GRIEV-READ d29: Erich about Sofia (why=vgrievance)
+  GRIEV-READ d29: Erich about Sofia (why=vgrievance)
+  GRIEV-READ d30: Erich about Sofia (why=vgrievance)
+  KNACK d12 Michelle: "Huh. Let me think about that." "Gus talks to the garden. The garden listens. I've seen it."
+  KNACK d12 Michelle: "that stray dog — the one that bit two people — lets Erich touch it."
+  KNACK d13 Erich: "Huh. Let me think about that." "We need to — Gus talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Gus: "You want to know about that? Okay." "Michelle talks to the garden. The garden listens. I've seen it."
+  KNACK d25 Dmitri: "Good question." "Gus talks to the garden. The garden listens. I've seen it."
+  KNACK d30 Ursula: "Gus talks to the garden. The garden listens. I've seen it."
+  KNACK d45 Dmitri: "James ate something last month that should've killed them. They're fine."
+  KNACK d49 Ursula: "It's just — that stray dog — the one that bit two people — lets Priya touch it."
+
+deathCauses: {"the wild":2,"a stranger":1}

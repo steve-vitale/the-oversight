@@ -1,0 +1,384 @@
+# SURFACE+SEEDED — seed 6104 (140d, 8 alive)
+
+npcPairs=63 deep2=28 cracks=0 vCracks=0 friendGriev=1 stateGriev=6 stateFriend=1 stateVCrack=0 t2picks=299 closeReadsServed=28 grievanceServes=31 othersSteered=9
+COND-TP: firstDeep2Day=30 lateClose=180 lateTP=169 lateNull=0 condRate=93.9% pooledTP=169/197 pooledRate=85.8% grievReadsByWhy={"grievance":21,"vgrievance":28}
+FUNNEL (natural): convos=414 subject=414 offered=385 picked=290 classes={"picked-others":290,"subject-no-offer":29,"offered-not-picked":95}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=29 rate=7.0% offered=385 mainOffered=2 subjectOffered=384 picked=290 latePicks=110 latePicksMain=0 latePicksSubject=110
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Diego / Ursula — "Desmond talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Ursula / Albertine — "Lucas sees in the dark. Not well — but better than you. Better than me."
+  KNACK-CIRCULATION: Jae / Albertine / Nadia / Benjamin — "Somchai found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Somchai / Benjamin — "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Nadia touc
+REOFFER: offers=379 picks=288 latePicks=110 missedChangedNotOffered=1
+WRAPSERVE: convos=49 matcherHits=31 matcherServes=31 classes={"grievance-line":31,"deflection":3,"other":15}
+FUNNEL-PROBE (subject-no-offer turns): turns=196 menuProblem=164 pickProblem=32
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":1,"acceptRate":0.2,"vetoes":{},"chanceMin":21,"chanceMax":21,"chanceMean":21} party={"n":20,"accepts":7,"acceptRate":0.35,"vetoes":{},"chanceMin":14.200000000000003,"chanceMax":92.2,"chanceMean":57} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=11
+FAVOR (r65): funnel={"offers":73,"forageOffers":22,"otherFavorOffers":51,"accepts":22,"acceptAttempts":22,"waits":18,"starts":10,"startBlocked":22,"forages":9,"forageNodeBarren":8,"forageBarren":2,"talks":9,"delivers":9,"deliverBlocked":0,"completeOutings":1,"keptMatched":4}
+OUTING END STATES: [{"vid":"lucas_brown","vidName":"Lucas","favorId":"favor-lucas_brown-137-72","state":"acknowledged","promisedDay":137,"meetDay":138,"deadline":139,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"catalina_reyes","vidName":"Catalina","favorId":"favor-catalina_reyes-61-40","state":"promised","promisedDay":62,"meetDay":63,"deadline":63,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_6vpogdg","vidName":"Benjamin","favorId":"favor-gen_6vpogdg-137-71","state":"broken","promisedDay":137,"meetDay":138,"deadline":139,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_eybhlmv","vidName":"Diego","favorId":"favor-gen_eybhlmv-75-47","state":"thanked","promisedDay":75,"meetDay":76,"deadline":77,"promiseKept":true,"startedDay":76,"forageCount":1,"playerKcal":360,"partnerKcal":390,"deliveredKcal":750,"returnedDay":76,"talkCount":1}]
+  FAVOR-OFFER d6: Lucas kind=forage_help favorId=favor-lucas_brown-5-1 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Ursula kind=forage_help favorId=favor-ursula_weber-9-2 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Jae kind=forage_help favorId=favor-gen_75nx4jd-9-3 task=forage with Jae tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Catalina kind=forage_help favorId=favor-catalina_reyes-14-4 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d18: Jae kind=heal_help favorId=favor-gen_75nx4jd-18-5 task=help Jae with their injury
+  FAVOR-OFFER d22: Catalina kind=forage_help favorId=favor-catalina_reyes-22-6 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d26: Cillian kind=heal_help favorId=favor-gen_wh9qupl-26-7 task=help Cillian with their injury
+  FAVOR-OFFER d27: Nadia kind=heal_help favorId=favor-nadia_khoury-27-8 task=help Nadia with their injury
+  FAVOR-OFFER d28: Jae kind=heal_help favorId=favor-gen_75nx4jd-28-9 task=help Jae with their injury
+  FAVOR-OFFER d29: Nadia kind=heal_help favorId=favor-nadia_khoury-29-10 task=help Nadia with their injury
+  FAVOR-OFFER d33: Somchai kind=food_share favorId=favor-somchai_prasert-33-11 task=share food with Somchai — they're running on empty
+  FAVOR-OFFER d37: Albertine kind=sick_help favorId=favor-gen_qja0olf-37-12 task=help Albertine with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d37: Somchai kind=food_share favorId=favor-somchai_prasert-37-13 task=share food with Somchai — they're going hungry
+  FAVOR-OFFER d38: Jae kind=sick_help favorId=favor-gen_75nx4jd-38-15 task=help Jae with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d39: Lucas kind=food_share favorId=favor-lucas_brown-39-16 task=share food with Lucas — they're past hungry
+  FAVOR-OFFER d43: Desmond kind=food_share favorId=favor-desmond_clarke-43-17 task=share food with Desmond — they're going hungry
+  FAVOR-OFFER d43: Albertine kind=heal_help favorId=favor-gen_qja0olf-43-18 task=help Albertine with their injury
+  FAVOR-OFFER d43: Somchai kind=food_share favorId=favor-somchai_prasert-43-19 task=share food with Somchai — they're running on empty
+  FAVOR-OFFER d44: Albertine kind=heal_help favorId=favor-gen_qja0olf-44-20 task=help Albertine with their injury
+  FAVOR-OFFER d44: Diego kind=heal_help favorId=favor-gen_eybhlmv-44-21 task=help Diego with their injury
+  FAVOR-OFFER d45: Diego kind=heal_help favorId=favor-gen_eybhlmv-45-22 task=help Diego with their injury
+  FAVOR-OFFER d45: Benjamin kind=food_share favorId=favor-gen_6vpogdg-38-14 task=share food with Benjamin — they're going hungry
+  FAVOR-OFFER d46: Diego kind=heal_help favorId=favor-gen_eybhlmv-46-23 task=help Diego with their injury
+  FAVOR-OFFER d46: Lucas kind=heal_help favorId=favor-lucas_brown-46-24 task=help Lucas with their injury
+  FAVOR-OFFER d48: Diego kind=heal_help favorId=favor-gen_eybhlmv-48-25 task=help Diego with their injury
+  FAVOR-OFFER d48: Ursula kind=food_share favorId=favor-ursula_weber-48-26 task=share food with Ursula — they're running on empty
+  FAVOR-OFFER d49: Diego kind=heal_help favorId=favor-gen_eybhlmv-49-27 task=help Diego with their injury
+  FAVOR-OFFER d49: Diego kind=heal_help favorId=favor-gen_eybhlmv-49-28 task=help Diego with their injury
+  FAVOR-OFFER d50: Catalina kind=forage_help favorId=favor-catalina_reyes-50-29 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Diego kind=heal_help favorId=favor-gen_eybhlmv-52-30 task=help Diego with their injury
+  FAVOR-OFFER d53: Diego kind=forage_help favorId=favor-gen_eybhlmv-53-31 task=forage with Diego tomorrow to rebuild the pantry
+  FAVOR-OFFER d54: Desmond kind=food_share favorId=favor-desmond_clarke-54-33 task=share food with Desmond — they're going hungry
+  FAVOR-OFFER d55: Lucas kind=food_share favorId=favor-lucas_brown-55-34 task=share food with Lucas — they're past hungry
+  FAVOR-OFFER d55: Ursula kind=forage_help favorId=favor-ursula_weber-54-32 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d55: Nadia kind=heal_help favorId=favor-nadia_khoury-55-35 task=help Nadia with their injury
+  FAVOR-OFFER d56: Somchai kind=food_share favorId=favor-somchai_prasert-56-36 task=share food with Somchai — they're going hungry
+  FAVOR-OFFER d56: Nadia kind=heal_help favorId=favor-nadia_khoury-56-37 task=help Nadia with their injury
+  FAVOR-OFFER d57: Diego kind=heal_help favorId=favor-gen_eybhlmv-57-38 task=help Diego with their injury
+  FAVOR-OFFER d60: Desmond kind=forage_help favorId=favor-desmond_clarke-60-39 task=forage with Desmond tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Albertine kind=heal_help favorId=favor-gen_qja0olf-62-42 task=help Albertine with their injury
+  FAVOR-OFFER d62: Catalina kind=forage_help favorId=favor-catalina_reyes-61-40 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Desmond kind=forage_help favorId=favor-desmond_clarke-62-41 task=forage with Desmond tomorrow to rebuild the pantry
+  FAVOR-OFFER d67: Ursula kind=sick_help favorId=favor-ursula_weber-67-43 task=help Ursula with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d72: Ursula kind=forage_help favorId=favor-ursula_weber-72-44 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d73: Lucas kind=food_share favorId=favor-lucas_brown-73-45 task=share food with Lucas — they're going hungry
+  FAVOR-OFFER d74: Benjamin kind=forage_help favorId=favor-gen_6vpogdg-74-46 task=forage with Benjamin tomorrow to rebuild the pantry
+  FAVOR-OFFER d75: Diego kind=forage_help favorId=favor-gen_eybhlmv-75-47 task=forage with Diego tomorrow to rebuild the pantry
+  FAVOR-OFFER d76: Desmond kind=food_share favorId=favor-desmond_clarke-76-48 task=share food with Desmond — they're past hungry
+  FAVOR-OFFER d87: Ursula kind=forage_help favorId=favor-ursula_weber-87-49 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d88: Benjamin kind=food_share favorId=favor-gen_6vpogdg-88-50 task=share food with Benjamin — they're running on empty
+  FAVOR-OFFER d91: Somchai kind=forage_help favorId=favor-somchai_prasert-91-51 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d91: Ursula kind=sick_help favorId=favor-ursula_weber-91-52 task=help Ursula with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d92: Desmond kind=food_share favorId=favor-desmond_clarke-92-53 task=share food with Desmond — they're running on empty
+  FAVOR-OFFER d94: Albertine kind=sick_help favorId=favor-gen_qja0olf-94-54 task=help Albertine with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d97: Lucas kind=heal_help favorId=favor-lucas_brown-97-55 task=help Lucas with their injury
+  FAVOR-OFFER d104: Benjamin kind=forage_help favorId=favor-gen_6vpogdg-104-57 task=forage with Benjamin tomorrow to rebuild the pantry
+  FAVOR-OFFER d105: Somchai kind=heal_help favorId=favor-somchai_prasert-105-59 task=help Somchai with their injury
+  FAVOR-OFFER d106: Ursula kind=forage_help favorId=favor-ursula_weber-105-58 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d107: Nadia kind=food_share favorId=favor-nadia_khoury-107-61 task=share food with Nadia — they're running on empty
+  FAVOR-OFFER d109: Nadia kind=sick_help favorId=favor-nadia_khoury-109-62 task=help Nadia with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d109: Ursula kind=forage_help favorId=favor-ursula_weber-109-63 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d109: Lucas kind=sick_help favorId=favor-lucas_brown-106-60 task=help Lucas with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d110: Albertine kind=sick_help favorId=favor-gen_qja0olf-110-64 task=help Albertine with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d113: Lucas kind=sick_help favorId=favor-lucas_brown-113-65 task=help Lucas with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d127: Lucas kind=heal_help favorId=favor-lucas_brown-127-66 task=help Lucas with their injury
+  FAVOR-OFFER d128: Benjamin kind=food_share favorId=favor-gen_6vpogdg-128-67 task=share food with Benjamin — they're going hungry
+  FAVOR-OFFER d132: Ursula kind=forage_help favorId=favor-ursula_weber-132-68 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d134: Nadia kind=food_share favorId=favor-nadia_khoury-134-69 task=share food with Nadia — they're going hungry
+  FAVOR-OFFER d134: Benjamin kind=food_share favorId=favor-gen_6vpogdg-134-70 task=share food with Benjamin — they're going hungry
+  FAVOR-OFFER d137: Benjamin kind=forage_help favorId=favor-gen_6vpogdg-137-71 task=forage with Benjamin tomorrow to rebuild the pantry
+  FAVOR-OFFER d137: Lucas kind=forage_help favorId=favor-lucas_brown-137-72 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d138: Nadia kind=food_share favorId=favor-nadia_khoury-138-73 task=share food with Nadia — they're going hungry
+  FAVOR-OFFER d140: Ursula kind=food_share favorId=favor-ursula_weber-140-74 task=share food with Ursula — they're going hungry
+  FAVOR-ACCEPT d6: Lucas favorId=favor-lucas_brown-5-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d9: Ursula favorId=favor-ursula_weber-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d9: Jae favorId=favor-gen_75nx4jd-9-3 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d14: Catalina favorId=favor-catalina_reyes-14-4 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d22: Catalina favorId=favor-catalina_reyes-22-6 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d50: Catalina favorId=favor-catalina_reyes-50-29 accepted=true state=promised meetDay=51
+  FAVOR-ACCEPT d53: Diego favorId=favor-gen_eybhlmv-53-31 accepted=true state=promised meetDay=54
+  FAVOR-ACCEPT d55: Ursula favorId=favor-ursula_weber-54-32 accepted=true state=promised meetDay=56
+  FAVOR-ACCEPT d60: Desmond favorId=favor-desmond_clarke-60-39 accepted=true state=promised meetDay=61
+  FAVOR-ACCEPT d62: Catalina favorId=favor-catalina_reyes-61-40 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d62: Desmond favorId=favor-desmond_clarke-62-41 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d72: Ursula favorId=favor-ursula_weber-72-44 accepted=true state=promised meetDay=73
+  FAVOR-ACCEPT d74: Benjamin favorId=favor-gen_6vpogdg-74-46 accepted=true state=promised meetDay=75
+  FAVOR-ACCEPT d75: Diego favorId=favor-gen_eybhlmv-75-47 accepted=true state=promised meetDay=76
+  FAVOR-ACCEPT d87: Ursula favorId=favor-ursula_weber-87-49 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d91: Somchai favorId=favor-somchai_prasert-91-51 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d104: Benjamin favorId=favor-gen_6vpogdg-104-57 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d106: Ursula favorId=favor-ursula_weber-105-58 accepted=true state=promised meetDay=107
+  FAVOR-ACCEPT d109: Ursula favorId=favor-ursula_weber-109-63 accepted=true state=promised meetDay=110
+  FAVOR-ACCEPT d132: Ursula favorId=favor-ursula_weber-132-68 accepted=true state=promised meetDay=133
+  FAVOR-ACCEPT d137: Benjamin favorId=favor-gen_6vpogdg-137-71 accepted=true state=promised meetDay=138
+  FAVOR-ACCEPT d137: Lucas favorId=favor-lucas_brown-137-72 accepted=true state=promised meetDay=138
+  INVITE-DEC d8 party: Gina -> Diego chance=49.8 accept=false veto=- inputs={"temp":"fidgety","goal":"record","mood":"steady","fear":4,"trust":37,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 37"]
+  INVITE-DEC d8 party: Gina -> Nadia chance=64 accept=false veto=- inputs={"temp":"warm","goal":"remember","mood":"steady","fear":4,"trust":35,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 35","warm temperament (+15)"]
+  INVITE-DEC d9 party: Gina -> Ursula chance=51 accept=false veto=- inputs={"temp":"gentle","goal":"prove","mood":"steady","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40"]
+  INVITE-DEC d9 party: Gina -> Lucas chance=35 accept=false veto=- inputs={"temp":"steady","goal":"home","mood":"hungry","fear":0,"trust":50,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 50","sick (-20)"]
+  INVITE-DEC d10 party: Gina -> Desmond chance=60.6 accept=true veto=- inputs={"temp":"restless","goal":"family","mood":"steady","fear":4,"trust":39,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 39","restless temperament (+10)"]
+  INVITE-DEC d10 party: Gina -> Catalina chance=66.4 accept=false veto=- inputs={"temp":"bold","goal":"remember","mood":"steady","fear":4,"trust":41,"bond":null,"partySize":1} reasons=["trust 41","bold temperament (+15)"]
+  INVITE-DEC d11 party: Gina -> Benjamin chance=51.2 accept=true veto=- inputs={"temp":"stoic","goal":"escape","mood":"steady","fear":0,"trust":78,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 78","wants out (-15)"]
+  INVITE-DEC d11 party: Gina -> Cillian chance=14.200000000000003 accept=false veto=- inputs={"temp":"intense","goal":"alone","mood":"cold","fear":0,"trust":48,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 48","wants to be alone (-40)"]
+  INVITE-DEC d11 party: Gina -> Ursula chance=57.8 accept=false veto=- inputs={"temp":"gentle","goal":"prove","mood":"grateful","fear":0,"trust":57,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 57"]
+  INVITE-DEC d12 party: Gina -> Catalina chance=67.6 accept=true veto=- inputs={"temp":"bold","goal":"remember","mood":"steady","fear":4,"trust":44,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 44","bold temperament (+15)"]
+  INVITE-DEC d15 party: Gina -> Lucas chance=62 accept=false veto=- inputs={"temp":"steady","goal":"home","mood":"steady","fear":4,"trust":55,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 55","a big party is safer (+5)"]
+  INVITE-DEC d16 party: Gina -> Diego chance=57.2 accept=false veto=- inputs={"temp":"fidgety","goal":"record","mood":"steady","fear":4,"trust":43,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)"]
+  INVITE-DEC d16 party: Gina -> Ursula chance=58.400000000000006 accept=false veto=- inputs={"temp":"gentle","goal":"prove","mood":"steady","fear":4,"trust":46,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 46","a big party is safer (+5)"]
+  INVITE-DEC d17 party: Gina -> Lucas chance=62 accept=true veto=- inputs={"temp":"steady","goal":"home","mood":"steady","fear":4,"trust":55,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 55","a big party is safer (+5)"]
+  INVITE-DEC d17 lure: Ursula -> Cillian chance=21 accept=false veto=- inputs={"temp":"intense","goal":"alone","mood":"steady","fear":0,"affinity":2} reasons=["relationship with inviter (+1)","wants to be alone (-25)"]
+  INVITE-DEC d18 lure: Ursula -> Cillian chance=21 accept=false veto=- inputs={"temp":"intense","goal":"alone","mood":"hungry","fear":13,"affinity":2} reasons=["relationship with inviter (+1)","wants to be alone (-25)"]
+  INVITE-DEC d19 lure: Ursula -> Cillian chance=21 accept=false veto=- inputs={"temp":"intense","goal":"alone","mood":"steady","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","wants to be alone (-25)"]
+  INVITE-DEC d20 lure: Ursula -> Cillian chance=21 accept=false veto=- inputs={"temp":"intense","goal":"alone","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","wants to be alone (-25)"]
+  INVITE-DEC d21 lure: Ursula -> Cillian chance=21 accept=true veto=- inputs={"temp":"intense","goal":"alone","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","wants to be alone (-25)"]
+  INVITE-DEC d31 party: Gina -> Diego chance=64.4 accept=false veto=- inputs={"temp":"fidgety","goal":"record","mood":"steady","fear":4,"trust":61,"bond":{"v":7,"depth":0},"partySize":4} reasons=["trust 61","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Gina -> Ursula chance=56 accept=true veto=- inputs={"temp":"gentle","goal":"prove","mood":"steady","fear":4,"trust":40,"bond":{"v":3,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)"]
+  INVITE-DEC d63 party: Gina -> Diego chance=72.80000000000001 accept=true veto=- inputs={"temp":"fidgety","goal":"record","mood":"grieving","fear":37,"trust":82,"bond":{"v":91,"depth":3},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d128 party: Diego -> Nadia chance=92.2 accept=true veto=- inputs={"temp":"warm","goal":"remember","mood":"grieving","fear":9,"trust":93,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 93","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d138 party: Desmond -> Onni chance=44.4 accept=false veto=- inputs={"temp":"cautious","goal":"prove","mood":"steady","fear":4,"trust":36,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 36","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d140 party: Desmond -> Ismael chance=52.8 accept=false veto=- inputs={"temp":"earnest","goal":"answers","mood":"steady","fear":4,"trust":32,"bond":null,"partySize":4} reasons=["trust 32","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":31,"v":42,"depth":3},{"day":32,"v":42,"depth":3},{"day":33,"v":46,"depth":3},{"day":34,"v":46,"depth":3},{"day":35,"v":50,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":62,"depth":3},{"day":40,"v":66,"depth":3},{"day":41,"v":72,"depth":3},{"day":42,"v":72,"depth":3},{"day":43,"v":78,"depth":3},{"day":44,"v":82,"depth":3}] class=rise
+GOSSIP: totalPicks=224 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=50 31-60=67 61-90=63 91-120=66 121+=44 naturalPicks=290 seededPicks=9 gossipPicks=224
+SEEDED: {"pair":{"a":"gen_eybhlmv","b":"somchai_prasert","aName":"Diego","bName":"Somchai"},"day":30,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":31,"v":42,"depth":3},{"day":32,"v":42,"depth":3},{"day":33,"v":46,"depth":3},{"day":34,"v":46,"depth":3},{"day":35,"v":50,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":62,"depth":3},{"day":40,"v":66,"depth":3},{"day":41,"v":72,"depth":3},{"day":42,"v":72,"depth":3},{"day":43,"v":78,"depth":3},{"day":44,"v":82,"depth":3}],"crackTraceClass":"rise","vAt7":50,"depthAt7":3,"vDrop":2,"depthDrop":-1,"crack7":false,"firstServe":{"day":33,"why":"vgrievance"},"serveWithin30":true,"serves":28,"servesAll":[{"day":33,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":79,"why":"vgrievance"},{"day":80,"why":"vgrievance"},{"day":81,"why":"vgrievance"},{"day":87,"why":"vgrievance"},{"day":93,"why":"vgrievance"},{"day":95,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":103,"why":"vgrievance"},{"day":104,"why":"vgrievance"},{"day":105,"why":"vgrievance"},{"day":111,"why":"vgrievance"},{"day":117,"why":"vgrievance"},{"day":119,"why":"vgrievance"},{"day":123,"why":"vgrievance"},{"day":127,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Jae <> Diego — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d35: Diego <> Albertine — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Albertine <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Desmond <> Diego — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Desmond <> Albertine — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Desmond <> Jae — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d30: Diego <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Diego <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Diego <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Diego <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Desmond <> Nadia — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d75: Albertine <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Albertine <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Somchai <> Ursula — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d130: Lucas <> Somchai — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d85: Albertine <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Desmond <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Lucas <> Ursula — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d100: Nadia <> Ursula — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d130: Desmond <> Gina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Benjamin <> Gina — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d130: Gina <> Lucas — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d130: Gina <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Gina <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Gina <> Nadia — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d130: Gina <> Albertine — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d130: Catalina <> Gina — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d140: Diego <> Gina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND-GRIEV d30: Diego vs Somchai (ambushed) depth 2 v 52 -> 50
+  CLOSE-READ d20: Nadia about Albertine — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Somchai about Diego — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Desmond about Diego — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Desmond about Albertine — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Lucas about Albertine — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Desmond about Diego — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Desmond about Diego — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Ursula about Diego — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Cillian about Jae — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Diego about Somchai — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Nadia about Albertine — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Jae about Desmond — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Lucas about Albertine — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Jae about Desmond — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Nadia about Albertine — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Lucas about Albertine — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Somchai about Diego — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Jae about Desmond — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Nadia about Albertine — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Cillian about Jae — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Somchai about Diego — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Lucas about Diego — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Lucas about Diego — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Desmond about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Lucas about Diego — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Lucas about Diego — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Desmond about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Nadia about Albertine — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Lucas about Diego — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Desmond about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Desmond about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Nadia about Albertine — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Ursula about Diego — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Nadia about Albertine — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Desmond about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Desmond about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Lucas about Diego — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Nadia about Albertine — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Lucas about Diego — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Nadia about Albertine — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Ursula about Diego — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Desmond about Diego — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Desmond about Diego — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Nadia about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Ursula about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Lucas about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Ursula about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Nadia about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ursula about Diego — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Nadia about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Nadia about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Catalina about Diego — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Albertine about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Catalina about Diego — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Albertine about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Albertine about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Albertine about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Somchai about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Desmond about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Ursula about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Lucas about Diego — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Desmond about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Desmond about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Ursula about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Somchai about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ursula about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Desmond about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Lucas about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ursula about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Desmond about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ursula about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Lucas about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ursula about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Somchai about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Lucas about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Nadia about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Lucas about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ursula about Albertine — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d31 (betrayal): Diego vs Somchai (ambushed) depth 2 v 52 -> 50
+  GRIEV-READ d5: Diego about Cillian (why=grievance)
+  GRIEV-READ d8: Diego about Cillian (why=grievance)
+  GRIEV-READ d12: Catalina about Albertine (why=grievance)
+  GRIEV-READ d12: Albertine about Catalina (why=grievance)
+  GRIEV-READ d14: Catalina about Albertine (why=grievance)
+  GRIEV-READ d14: Cillian about Diego (why=grievance)
+  KNACK d10 Catalina: "that stray dog — the one that bit two people — lets Nadia touch it. Just... be straight with me."
+  KNACK d16 Diego: "Desmond talks to the garden. The garden listens. I've seen it."
+  KNACK d16 Ursula: "You want to know about that? Okay." "Catalina found a lost knife by smell last week. By SMELL."
+  KNACK d20 Ursula: "Lucas sees in the dark. Not well — but better than you. Better than me."
+  KNACK d24 Albertine: "Jae talks to the garden. The garden listens. I've seen it."
+  KNACK d33 Diego: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Nadia touch it."
+  KNACK d34 Jae: "Somchai found a lost knife by smell last week. By SMELL."
+  KNACK d38 Jae: "Ursula talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"sickness":1,"a wound that wouldn't close":1,"The Mountain Lord":1,"contest":1,"a stranger":1}
