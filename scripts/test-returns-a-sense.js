@@ -77,7 +77,11 @@ async function main() {
 
   // ---- S2: mechanism fixture ----
   console.log('=== S2: HUNT offer lottery fixture (fresh armed memory, base code) ===');
-  const { Game: G, loadFails } = await loadGame({ seed: 75106, mode: 'returns-a-sense', fullTelemetry: false });
+  // narration:true is REQUIRED to quote a departure line: sim-harness
+  // stubs G.say to a no-op by default (telemetry + state carry the
+  // signal in sweeps). This fixture only demonstrates the mechanism
+  // and the line; the census sweep keeps narration off, as chainkill did.
+  const { Game: G, loadFails } = await loadGame({ seed: 75106, mode: 'returns-a-sense', fullTelemetry: false, narration: true });
   if (loadFails.length) throw new Error('loadFails: ' + loadFails.join('; '));
   await setupGame(G);
   const roster = ((G.state.village || {}).roster || []).filter(id => id && id !== G.villagerId);
