@@ -81,11 +81,9 @@ scripts/test-fightorigin-b.js.
 Provenance classification (closed taxonomy, fixed here —
 no new class may be invented mid-run; a record matching
 none of these is UNCLASSIFIED and breaks GO):
-- pending-resolved: pendingEncounter was true before the
-  linked creation (startCombat consumed the pending slot),
-  OR pendingEncounter was true at the post-sleep checkpoint
-  and the creation happened in the post-sleep-contest-drive
-  slot.
+- pending-resolved: see AMENDMENT below (supersedes the
+  original pending-before clause, which the pilot proved
+  mechanically impossible for harness resolutions).
 - direct-live: pendingEncounter was false before the
   linked creation AND the fight was already live at the
   drive entry (created in an earlier slot than the drive).
@@ -211,6 +209,60 @@ and at drive entry. Missing any of (a)–(d) = UNCLASSIFIED.
 - G4: no src/js file modified in this arm's commits
   (additions under scripts/ + evidence/ only). Violation
   = stop and report.
+
+## AMENDMENT 2026-10-29 (pre-confirm, pilot-diagnosed — the
+## judged confirm run has NOT happened yet; the pilot is
+## instrument sanity only, so this correction is made before
+## judging, not mid-judging)
+
+Pilot diagnosis: the pilot's 10712 miss fight (murkcap,
+loop-day 21) has creation stack naming driveContestsImpl
+directly — the harness pending-resolution block — yet
+pendingEncounter was FALSE before its startCombat call.
+That is mechanically necessary, not a contradiction:
+scripts/sim-harness.js driveContestsImpl clears
+pendingEncounter=false and pendingMonsterId=null BEFORE
+calling Game.startCombat(mid) (the only harness
+startCombat call site). The original pending-resolved
+clause ("pendingEncounter was true before the linked
+creation") can therefore never fire for a harness pending
+resolution, and would have misclassified every such fight
+as direct-live/same-slot-live. The driver was extended
+before confirm with a pending-transition log (setter
+interception on pendingEncounter/pendingMonsterId, pure
+observation) and full caller-stack lines on creation
+records, and the taxonomy is corrected as follows
+(superseding the original clause; all other prereg text
+stands, including the closed-taxonomy rule and the GO bar):
+
+- pending-resolved: EITHER (a) the pending-transition log
+  shows pendingEncounter=true with pendingMonsterId equal
+  to the creation's monster (argMonsterId or the monster
+  fighter's monsterId) at some point after the previous
+  fight's end (or instance start) and before this
+  creation, AND the creation's caller stack names the
+  harness pending-resolution call site (driveContestsImpl);
+  OR (b) pendingEncounter was true immediately before
+  the creation (a direct startCombat while pending was
+  still set, e.g. a game/policy path that does not clear
+  the flags first). If the setter log failed to install
+  (pendingLogError set), (a) falls back to checkpoint
+  pending flags + the caller stack, and the fallback is
+  named in the evidence file — it is not silent.
+- direct-live and same-slot-live are unchanged, except
+  that a creation matching pending-resolved is never
+  also counted as direct-live/same-slot-live (pending
+  check comes first).
+- A FULL record now additionally requires the creation's
+  caller-stack lines to be present (they are the
+  provenance for the slot claim); a creation with no
+  stack lines is UNCLASSIFIED.
+
+This amendment does not change the target set, the bands,
+the GO threshold (100%), the neutrality/determinism
+guards, or the base-movement branch. It corrects a
+mechanical misdescription of the engine before any
+judged leg runs.
 
 ## Metric review (mandatory section in the evidence file)
 
