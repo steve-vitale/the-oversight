@@ -49,6 +49,39 @@ const { leanlink } = require('./policies/leanlink');
 
 const POLICY_MAP = { competent, leanlink };
 
+// writeRetry: the container EPERM flap (AGENTS.md 2026-10-23/24) kills
+// single writeFileSync calls mid-sweep (this run: competent seed 9915
+// died on its per-seed write after 40 x 15s of retries, and the failed
+// attempts left 0-byte files for 9915/9916/9917 — a truncated write
+// throws AFTER truncating).
+// ATOMIC: write to file+'.tmp' with retries, then rename into place,
+// so a failed write never leaves a 0-byte final file behind.
+// STICKY-DENIAL LESSON (this run, 15:26–15:34): once a long-running
+// sweep process takes its first EPERM, its later writes keep failing
+// for 10+ minutes while FRESH processes write the same directory
+// fine in the same minute. A long in-process retry budget is therefore
+// futile — it burns wall-clock while the process stays denied. Budget
+// is deliberately SHORT (6 x 5s): on failure the caller DEFERS (the
+// row stays in memory, the run continues) and the end-of-run flush
+// plus stdout dump is the recovery path — the coordinator rebuilds
+// the file from the dump with a fresh process. Sleep is Atomics.wait:
+// sync, no extra process, no re-run.
+function writeRetry(file, data) {
+  const tmp = file + '.tmp';
+  let lastErr = null;
+  for (let i = 0; i < 6; i++) {
+    try { fs.writeFileSync(tmp, data); break; } catch (e) { lastErr = e; }
+    try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000); } catch (e) {}
+    if (i === 5) throw lastErr;
+  }
+  lastErr = null;
+  for (let i = 0; i < 6; i++) {
+    try { fs.renameSync(tmp, file); return; } catch (e) { lastErr = e; }
+    try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000); } catch (e) {}
+    if (i === 5) throw lastErr;
+  }
+}
+
 function pantryKcal(Game) {
   try {
     return ((Game.state.village || {}).pantry || [])
@@ -311,10 +344,37 @@ async function main() {
   }
   if (perSeedDir) fs.mkdirSync(perSeedDir, { recursive: true });
   const runs = [];
+  const failedWrites = [];
   for (const seed of seeds) {
     const row = await runSeed(seed, policyId, days);
     runs.push(row);
-    if (perSeedDir) fs.writeFileSync(path.join(perSeedDir, `seed-${seed}.json`), JSON.stringify(row, null, 1) + '\n');
+    if (perSeedDir) {
+      try {
+        writeRetry(path.join(perSeedDir, `seed-${seed}.json`), JSON.stringify(row, null, 1) + '\n');
+      } catch (e) {
+        // Do NOT die on one seed's write: the flap is host-wide and
+        // time-boxed, and dying here loses every later seed's sim too.
+        // The row stays in memory; it gets a fresh flush attempt below,
+        // and as a last resort is dumped to stdout for reconstruction.
+        console.log(`  [WARN seed ${seed}] per-seed write failed (${e.code || e.message}); deferred to end-of-run flush.`);
+        failedWrites.push(seed);
+      }
+    }
+  }
+  for (const seed of failedWrites.slice()) {
+    const row = runs.find(r => r.seed === seed);
+    try {
+      writeRetry(path.join(perSeedDir, `seed-${seed}.json`), JSON.stringify(row, null, 1) + '\n');
+      failedWrites.splice(failedWrites.indexOf(seed), 1);
+      console.log(`  [flush seed ${seed}] deferred write recovered.`);
+    } catch (e) { console.log(`  [flush seed ${seed}] STILL failing; row will be dumped to stdout.`); }
+  }
+  if (failedWrites.length) {
+    for (const seed of failedWrites) {
+      const row = runs.find(r => r.seed === seed);
+      console.log('@@ROW_JSON@@' + seed + ' ' + JSON.stringify(row));
+    }
+    throw new Error('per-seed writes still failing after flush for seeds: ' + failedWrites.join(',') + ' (rows dumped to stdout above for reconstruction)');
   }
   const totalDeaths = (rs) => rs.reduce((t, r) => t + r.deathLogCount, 0);
   const report = { label: 'sim-tributecost-a', policy: policyId, seeds, days,
@@ -336,7 +396,15 @@ async function main() {
       courtCalls: runs.reduce((t, r) => t + r.courtCalls.length, 0),
     },
   };
-  if (out) { fs.writeFileSync(out, JSON.stringify(report, null, 1) + '\n'); console.log('wrote ' + out); }
+  if (out) {
+    try { writeRetry(out, JSON.stringify(report, null, 1) + '\n'); console.log('wrote ' + out); }
+    catch (e) {
+      // Aggregate is rebuildable from per-seed files; still, never
+      // lose it silently: dump it for fresh-process reconstruction.
+      console.log('@@AGGREGATE_JSON@@' + JSON.stringify(report));
+      throw new Error('aggregate write failed (dumped to stdout for reconstruction): ' + (e.code || e.message));
+    }
+  }
   return report;
 }
 
