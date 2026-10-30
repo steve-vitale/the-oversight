@@ -173,6 +173,7 @@ function smFight(o) {
 function determinism(seed) {
   const scratch = path.join(REPO, 'evidence', '2026-10-30', `perseed-removal-a-det-${seed}`);
   const corpusDir = path.join(REPO, 'evidence', '2026-10-30', 'perseed-removal-a');
+  let pass = false;
   try {
     fs.rmSync(scratch, { recursive: true, force: true });
     const env = Object.assign({}, process.env, { EVID: scratch });
@@ -180,14 +181,18 @@ function determinism(seed) {
     const rowSame = fs.readFileSync(path.join(scratch, `s${seed}-fresh.json`)).equals(fs.readFileSync(path.join(corpusDir, `s${seed}-fresh.json`)));
     const cenSame = fs.readFileSync(path.join(scratch, `census-s${seed}.json`)).equals(fs.readFileSync(path.join(corpusDir, `census-s${seed}.json`)));
     console.log(`DETERMINISM seed=${seed} row=${rowSame ? 'IDENTICAL' : 'DIFFERS'} census=${cenSame ? 'IDENTICAL' : 'DIFFERS'}`);
-    console.log(rowSame && cenSame ? 'DETERMINISM-PASS' : 'DETERMINISM-FAIL');
-    process.exit(rowSame && cenSame ? 0 : 1);
+    pass = rowSame && cenSame;
   } catch (e) {
     console.log('DETERMINISM-FAIL', String((e && e.message) || e).slice(0, 300));
-    process.exit(1);
+    pass = false;
   } finally {
+    // NOTE: process.exit() inside try would skip this finally block
+    // (the first determinism run left its scratch behind for exactly
+    // that reason). Exit only AFTER the finally has run.
     try { fs.rmSync(scratch, { recursive: true, force: true }); } catch (e) {}
   }
+  console.log(pass ? 'DETERMINISM-PASS' : 'DETERMINISM-FAIL');
+  process.exit(pass ? 0 : 1);
 }
 
 function main() {

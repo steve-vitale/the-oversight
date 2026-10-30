@@ -495,7 +495,7 @@ function main() {
   console.log(`fates: ${JSON.stringify(res.fateCounts)}`);
   console.log(`vanished (${res.chainEnds.length}): setAgreesRecurrence=${res.vanishedSetAgrees} unclassified=${res.unclassifiedVanishedN}`);
   for (const c of res.chainEnds) console.log(`  VANISHED s${c.seed} ${c.mid} hp=${c.remainingHp} lastDay=${c.lastDay} lastSeen=${c.lastSeen} firstAbsent=${c.firstAbsentDay} pinnedUid=${c.pinnedUid} verdict=${c.verdict}${c.verdictEdge ? ' (EDGE)' : ''} smFight=${c.verdictSmFightSeq}`);
-  console.log(`band wild w4 removals: ${res.bandRemovalN} spawns: ${res.bandSpawnN} byClass: ${JSON.stringify(res.bandRemovalCounts)}`);
+  console.log(`band wave-4 removal rows (all channels/flags, not wild-only): ${res.bandRemovalN} spawns: ${res.bandSpawnN} byClass: ${JSON.stringify(res.bandRemovalCounts)}`);
   console.log(`uid drops: ${res.drops.length} per-id drops: ${res.perIdDrops.length}`);
   for (const d of res.namedDrops) console.log(`  DROP s${d.seed} ${d.mid} ${d.fromHp}->${d.toHp} reproduced=${d.reproduced} method=${d.method || '-'} days=${d.fromDay != null ? d.fromDay + '->' + d.toDay : '-'} class=${d.cls}`);
   for (const c of res.namedChains) console.log(`  NAMED-CHAIN s${c.seed} ${c.mid} hp=${c.hp} found=${c.found} verdict=${c.verdict}${c.verdictEdge ? ' (EDGE)' : ''}`);
