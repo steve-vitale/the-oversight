@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d91; takenWantDay=0; convoCount=9)
+=== seed 85001 day 91 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the creek water run — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "See you at the fire."

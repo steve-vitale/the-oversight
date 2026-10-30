@@ -1,0 +1,26 @@
+(pre-talk seed: ask_favor planted d101; takenWantDay=0; convoCount=13)
+=== seed 85001 day 105 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: subject-first
+
+THEM: I'd walk through anything to get to them. That's not courage. That's just... math.
+(turn0 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Quinn is back. Walked in like they'd never left."
+YOU: [dlg:more] "Tell me more."
+THEM: "Jovan hums at the beans and they climb faster. Laugh if you want. I've watched."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "Funny you should ask." Irving glances over their shoulder. "Quinn's been polishing that story. The unpolished version: from Dublin, Ireland. Keep my name out of it."
+YOU: [dlg:react] (listen)
+THEM: "That was me — headed out for water."
+YOU: [dlg:more] "Tell me more."
+THEM: "Desmond is back. Walked in like they'd never left."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "Don't be a stranger."

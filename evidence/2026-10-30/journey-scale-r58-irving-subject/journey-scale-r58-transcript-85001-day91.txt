@@ -1,0 +1,26 @@
+(pre-talk seed: ask_favor planted d91; takenWantDay=0; convoCount=9)
+=== seed 85001 day 91 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: subject-first
+
+THEM: "About the creek water run — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I dreamed August was still here. Woke up angry at the dream. Stupid."
+YOU: [dlg:more] "Tell me more."
+THEM: "I keep turning over the last thing August said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without August. The rest of us will have to be bigger."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "I do push-ups at dawn for August, now. Feels right. Feels like the least I can do."
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "Anyway — I should get going."
+pre-close: want ask_favor stage 2 thread lately

@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d93; takenWantDay=0; convoCount=11)
+=== seed 85001 day 97 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: subject-first
+
+THEM: "About the creek water run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, goon, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread want
+closing line: "Alright. Back to work."

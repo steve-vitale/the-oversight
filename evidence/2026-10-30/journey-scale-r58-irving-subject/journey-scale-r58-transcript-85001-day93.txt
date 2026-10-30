@@ -1,0 +1,18 @@
+(pre-talk seed: ask_favor planted d91; takenWantDay=0; convoCount=10)
+=== seed 85001 day 93 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: subject-first
+
+THEM: "About the creek water run — still need hands. Are you in?"
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, goon, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Huh. I answered that once — back when the answer was simpler." "August is gone and the world just... continues. That's the part I can't stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread lately
+closing line: "Steady as she goes. We'll talk again."

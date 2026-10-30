@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d85; takenWantDay=0; convoCount=7)
+=== seed 85001 day 90 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 0)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: I keep their faces in my head like photographs. If I stop looking, I might lose them.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Irving shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:more] "I’m listening."
+THEM: "I keep them in my head like a photograph. Smiling. It has to be enough for now."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "If they're out there, they're looking for me too. I have to be findable. Alive, and findable."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "Blood first. Then the family you choose. I'm building the second kind here, too."
+YOU: (leave)
+pre-close: want ask_favor stage 0 thread goal
+closing line: "Alright. Back to it."

@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d116; takenWantDay=0; convoCount=10)
+=== seed 85002 day 120 — conversation with Sanne (sanne_bakker) ===
+occupation=Vintner temperament=dry trust=95 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "I'm going to go stare at something else now."

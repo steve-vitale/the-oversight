@@ -1,0 +1,25 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=15)
+=== seed 85004 day 120 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=90 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Nora headed out to forage. ...sorry."
+YOU: [dlg:more] "Tell me more."
+THEM: "The way I read it — Word is you told it straight."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "Word is you know what you're doing out there. You'd know about that."
+YOU: [dlg:react] (listen)
+THEM: "Between us — Quiet lately. Too quiet, maybe."
+YOU: [dlg:more] "Tell me more."
+THEM: "I should go. You know where to find me."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
