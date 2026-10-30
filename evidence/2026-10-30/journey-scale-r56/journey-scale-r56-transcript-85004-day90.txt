@@ -1,0 +1,14 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=8)
+=== seed 85004 day 90 — conversation with Neomar (gen_13t7rdk) ===
+occupation=Vintner temperament=fidgety trust=84 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I hate to ask, but have you got anything to spare? Anything? I can't keep going like this."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Good talking. We'll figure it out."

@@ -1,0 +1,16 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=14)
+=== seed 85002 day 90 — conversation with Jian (gen_92l0vdn) ===
+occupation=trail crew lead temperament=warm trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Then it’s set. The east treeline, before the dew dries. Two packs between us."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Later."
