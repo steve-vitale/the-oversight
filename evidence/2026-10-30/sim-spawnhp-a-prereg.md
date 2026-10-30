@@ -164,14 +164,21 @@ same seed. Every verdict carries its evidence fields.
    meeting AND a census sighting with day <= first meeting day
    shows hp == maxHp == opening HP. Evidence: sighting day/hp/maxHp.
    (World spawn at the floor, seen unwounded before first contact.)
-3. SPAWN-VARIANCE — opening HP < def floor AND a census sighting
-   (day <= first meeting day, or the entity's first sighting
-   overall when no pre-meeting sighting exists but the sighting's
-   hp/maxHp equal the opening trajectory) shows maxHp == opening
-   HP < floor with hp == maxHp. Evidence: sighting day/hp/maxHp.
-   (The entity's own maxHp is below the floor — wounds lower hp,
-   never maxHp on the fieldFight path — so the spawn itself was
-   below floor.)
+3. SPAWN-VARIANCE — opening HP < def floor AND a trajectory-
+   consistent census sighting shows maxHp == opening HP < floor.
+   Trajectory-consistent means pre-meeting hp == opening, or
+   post-meeting hp == the meeting's mHpLeft (the sighting belongs
+   to this entity's wound trajectory, not merely the same type).
+   CORRECTION (pre-sweep, before any judged analysis — the prereg
+   as first committed demanded hp == maxHp for this class, which
+   a post-meeting sighting cannot satisfy by construction: the
+   meeting itself wounds hp below maxHp. The spawn evidence is
+   maxHp, which fieldFight never lowers, so the corrected rule
+   demands maxHp == opening on a trajectory-consistent sighting
+   and hp == maxHp only for a pre-meeting unwounded sighting.)
+   Evidence: sighting day/hp/maxHp. (The entity's own maxHp is
+   below the floor — wounds lower hp, never maxHp on the
+   fieldFight path — so the spawn itself was below floor.)
 4. OFF-CORPUS-WOUNDED — no prior in-corpus meeting, and either
    (a) a census sighting before the first meeting shows hp >
    opening HP (wounded between sighting and meeting by a channel
