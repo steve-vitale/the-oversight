@@ -1,0 +1,23 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 85003 day 90 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=22 dead=false
+want: ask_favor (stage 0)
+open thread: recall fromSeed=false
+picker: control
+
+THEM: "You said patience was your old-life superpower — really waiting, without fidgeting. Still your answer?"
+(turn0 choices: dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [teach] "Mind if I show you something I learned?"
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [teach] "Mind if I show you something I learned?"
+THEM: You show them Pawpaw — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Let me sit with all that. We'll pick it up later."
+YOU: (leave)
+pre-close: want ask_favor stage 0 thread recall

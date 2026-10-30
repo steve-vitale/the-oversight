@@ -1,0 +1,26 @@
+(pre-talk seed: ask_favor planted d118; takenWantDay=0; convoCount=14)
+=== seed 85004 day 120 — conversation with Dorothy (gen_xu3lbui) ===
+occupation=mechanic temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: I'm not running from something. I'm running toward something. There's a difference.
+(turn0 choices: dlg:more, dlg:doubt, dlg:invite, dlg:subject, confront:d_5997vkh, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "It's not about running away. It's about running toward. The direction matters."
+YOU: [dlg:react] (listen)
+THEM: "I pack light. Always have. Makes leaving easier. Makes staying harder, too."
+YOU: [dlg:more] "I’m listening."
+THEM: "There's a way out. There's always a way out. I just haven't found the door yet."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Go on."
+THEM: "Don't get comfortable. Comfortable people stop looking for the door."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Go on."
+THEM: "Every map I draw has an X on it. The X moves. That's the point."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Steady as she goes. We'll talk again."

@@ -1,0 +1,20 @@
+(pre-talk seed: curious planted d116; takenWantDay=0; convoCount=22)
+=== seed 85002 day 120 — conversation with Jian (gen_92l0vdn) ===
+occupation=trail crew lead temperament=warm trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About your first memory — What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Murumuru. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [goon] "And?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "See you at the fire."

@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d89; takenWantDay=0; convoCount=10)
+=== seed 85001 day 90 — conversation with Irving (gen_oqbl010) ===
+occupation=Baker temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Family isn't just blood. But blood's a good place to start looking.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "All right —" Irving starts to stand, then sinks back down. "Maybe not today. The fire's got me."
+YOU: [dlg:more] "Tell me more."
+THEM: "Don't tell the others how much I talk about her. They'll think I'm not coping. They're right."
+YOU: [dlg:react] (listen)
+THEM: "I keep them in my head like a photograph. Smiling. It has to be enough for now."
+YOU: [dlg:more] "Tell me more."
+THEM: "If I ever get a real lead I'm gone that same day. I need you to know that about me."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "Blood first. Then the family you choose. I'm building the second kind here, too."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Good talk."
