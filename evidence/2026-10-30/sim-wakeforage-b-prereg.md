@@ -24,6 +24,20 @@ does foraging on the wake tile itself yield — known-edible
 kcal, unknown items, or nothing — and does any morning's
 known-edible yield cover a day's need?
 
+## PRE-LEG AMENDMENT (committed before any judged leg; no leg has run)
+
+The Y* verdict below needs walk steps, which the sweep
+recorder deliberately does not compute (its neutrality bar
+is creek/still/rescued only). Amendment: the REPLAY snap
+additionally records nearest-cut walk steps via the
+engine's own pure reads (findPath + cellProps — the
+walktree passability instrument, no verbs, no state
+edits), solely to re-derive Y* per fresh morning. The
+recorder driver is unchanged; the replay press, the
+control-snap equality gate, and every bar below are
+unchanged. This amendment is part of the binding prereg
+because it precedes all judged legs.
+
 ## Canon (read before judging)
 
 - docs/CANON.md read first, then docs/MAP.md (one map; creeks
