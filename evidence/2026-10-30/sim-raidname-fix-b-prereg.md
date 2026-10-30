@@ -248,3 +248,67 @@ the before leg fails to reproduce (base drift
 since b1), the run stops and the evidence file
 says so; the bar is NOT lowered to fit a weaker
 before leg.
+
+## AMENDMENT 1 (committed BEFORE any after-leg judging; bars UNCHANGED)
+
+Discovery during the audit, after the before leg
+ran (before leg: 16 seeds, 9 staged, 9 misfires,
+0 unclassified, determinism clean — reproduction
+gate PASSED, identical counts to b1): the sim
+harness pending block (scripts/sim-harness.js
+driveContestsImpl) PRE-CLEARS pendingEncounter /
+pendingMonsterId and then calls startCombat(mid),
+while EVERY game resolver arrives at startCombat
+with the pending live — the app "Face it" button
+(app.js p-face: startCombat() with no id, no
+pre-clear), faceTentIntruder (clears only
+pendingInTent), and faceFeastDraw (clears only
+the feastDraw marker, after). Consequence: a pure
+startCombat entry-gate cannot see harness-resolved
+pendings — and the staged leg itself resolves
+through the harness block. The prereg's fix design
+as written would pass live play and fail its own
+regression instrument.
+
+Design correction (mechanism only; primary bar,
+neutrality gate, and sense bar all UNCHANGED):
+(a) startCombat entry-gate exactly as preregistered
+(pending live at entry + mid === pending id =
+pending-resolved); (b) HARNESS ALIGNMENT: the
+driveContests pending block stops pre-clearing and
+calls startCombat(mid) with the pending live, so
+sim resolution matches the live Face-it path and
+startCombat's own pending-clear (unchanged code)
+is the single clearer. Net sim behavior is
+identical except on a startCombat throw, where the
+pending now survives instead of being eaten —
+more correct, and matching the live button, whose
+panel survives a throw. This is test-tooling
+alignment, not a game-mechanism change.
+
+Confound analysis (why the harness change cannot
+fake a pass): on clean game code, the harness
+change alters no naming logic and no RNG — the
+old (b) path still fires for a staged fight. The
+control leg below proves this instead of asserting
+it.
+
+CONTROL LEG (before the after leg, not judged):
+aligned harness + CLEAN game code, pilot 8 seeds
+(10710–10717) ON only, analyzed against the
+before OFF pilot corpus. Expectation: 4/4
+misfires, same as the before pilot (harness change
+alone fixes nothing). If the control shows 0
+misfires, STOP — the instrument, not the fix, is
+doing the work, and the run reports that instead
+of judging the after leg.
+
+Instrument note: scripts/stage-raidname-b1-b.js
+and scripts/analyze-raidname-b1-b.js stay
+UNCHANGED. The driver wraps startCombat and
+records shadowAtEntry / originAtEntry; neither
+field is affected by who clears the pending, and
+staged-event linkage (argMonsterId === staged
+species) is unchanged because the harness still
+calls startCombat(mid). The analyzer's
+classification is likewise untouched.
