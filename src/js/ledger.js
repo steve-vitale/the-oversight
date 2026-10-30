@@ -742,6 +742,10 @@
       try {
         if (s.insideTent) { s.insideTent = null; s.tentSmoke = 0; }
         this.pendingEncounter = false; this.pendingMonsterId = null; this.pendingInTent = false;
+        // RAID-PROVENANCE (sim-raidname-fix-b): succession ends
+        // the pending — its shadow dies with it, never
+        // stale-matches a later same-species fight.
+        this.raidPendingMonsterId = null;
         // SANCTUARY (design call 3, Steve 2026-10-16): the door-flee stash is
         // the DEAD bearer's — it must not re-engage the successor through the
         // fire. Backfill legacy untagged entries with the dead bearer, and

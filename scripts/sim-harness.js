@@ -803,7 +803,16 @@ function driveContestsImpl(Game, policy, ctx) {
   if (Game.pendingEncounter && Game.pendingMonsterId) {
     try {
       const mid = Game.pendingMonsterId;
-      Game.pendingEncounter = false; Game.pendingMonsterId = null;
+      // RAID-PROVENANCE (sim-raidname-fix-b 2026-10-30): do NOT
+      // pre-clear the pending — startCombat is the single
+      // pending-clearer, exactly like the live Face-it button
+      // (app.js p-face calls startCombat() with the pending
+      // live). Pre-clearing hid pending-resolved provenance
+      // from startCombat's raid-naming gate: a pending-resolved
+      // fight must never read the tile entity's raidBorn flag.
+      // startCombat clears the pending fields unconditionally,
+      // so net behavior is identical except on a startCombat
+      // throw, where the pending now survives (as live).
       Game.startCombat(mid);
       driveFights(Game, policy, ctx);
     } catch (e) {}

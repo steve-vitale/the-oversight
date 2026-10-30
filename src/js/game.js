@@ -2805,6 +2805,10 @@
       this.dayPart = 1; this.ap = 1; this.over = false; this.won = false;
       this.state.scholar.dayTicks = 192; this.state.scholar.actionClock = 0; // action clock: fresh budget
       this.villageLost = false; this.wanderer = null; this.fight = null; this.pendingEncounter = false; this.pendingMonsterId = null;
+      // RAID-PROVENANCE (sim-raidname-fix-b): a fresh run starts
+      // with no raid shadow — a stale one must never survive
+      // onto a new run on this Game object.
+      this.raidPendingMonsterId = null;
       this.encounterDone = false; this.log = [];
       // (say AFTER the log reset above — anything said before it is wiped and
       // the player never sees it.)
@@ -9268,6 +9272,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.pendingEncounter && this.pendingMonsterId &&
           !(this.data.monsters || []).some(m => m.id === this.pendingMonsterId)) {
         this.pendingEncounter = false; this.pendingMonsterId = null; this.pendingInTent = false;
+        // RAID-PROVENANCE (sim-raidname-fix-b): the phantom
+        // pending dies — its shadow (the same unmatchable id)
+        // dies with it, by uniformity with every other
+        // pending-clear site.
+        this.raidPendingMonsterId = null;
         this.say('The shape in the dark was gone when you came back — only the wind. (A saved encounter named a monster that no longer exists; it was cleared, not left as a phantom.)');
       }
       // re-inject the generated cast: they live in the save, not in the JSON
@@ -33322,6 +33331,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say('Already in a fight — finish this one first. (startCombat refused: a fight is live.)');
         return;
       }
+      // RAID-PROVENANCE (sim-raidname-fix-b 2026-10-30): capture
+      // the pending/contest provenance BEFORE anything in this
+      // call can clear it. Every game resolver (Face-it button,
+      // faceTentIntruder, faceFeastDraw) arrives with the pending
+      // live, and the sim harness was aligned to do the same
+      // (it used to pre-clear). A fight that resolves a pending
+      // is instantiated by species id, NOT lifted from the tile
+      // entity — so the tile entity's raidBorn flag is not
+      // this fight's provenance (see the naming block below).
+      const _raidPendingLiveAtEntry = !!this.pendingEncounter;
+      const _raidPendingIdAtEntry = this.pendingMonsterId || null;
+      const _raidContestAtEntry = !!((this.state || {}).arenaContest);
       // CRISIS (Steve 2026-10-09): the breach — a hostile got INSIDE the
       // haven. The safe place isn't.
       const tableTrial = !!(monsterId === 'finale' && options && options.tableTrial);
@@ -33767,6 +33788,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.pendingEncounter = false;
       this.pendingMonsterId = null;
       this.pendingInTent = false;
+      // RAID-PROVENANCE (sim-raidname-fix-b 2026-10-30): the
+      // pending dies here on EVERY startCombat. Keep its shadow
+      // ONLY when this fight IS the shadow's own pending
+      // resolution (a pending was live at entry and mid is the
+      // shadow); the naming block below then consumes it on
+      // match. Any other fight clears the shadow with the
+      // pending — a mismatch fight (orphan route A1), a fight
+      // with no live pending but a live orphan shadow, a table
+      // trial. A live shadow with no live pending is by
+      // definition an orphan: its pending died earlier, so
+      // clearing it can never remove a genuine line.
+      if (!(_raidPendingLiveAtEntry && this.raidPendingMonsterId && mid === this.raidPendingMonsterId)) this.raidPendingMonsterId = null;
       // face to face: the ambiguity does NOT end. Descriptor and dread, not a name.
       try { this.identifyMonster(mdef.id); } catch (e) {}
       const _origin = tableTrial ? null : this.playerMonster();
@@ -33864,9 +33897,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // monster never mislabels a fight it is not in; table
       // trials never carry the line. (a) is consumed here so
       // it can never stale-match a later same-species fight.
+      // RAID-PROVENANCE (sim-raidname-fix-b 2026-10-30): (b)
+      // is additionally gated on provenance — a
+      // pending-resolved fight (pending live at entry and mid
+      // is that pending's id) is instantiated by species id,
+      // NOT lifted from the tile entity, so the tile entity's
+      // flag must not name it (staged-B1 misfire, 9/9 pre-fix:
+      // a wanderer pending resolving while a raidBorn lingerer
+      // of the same species sat on the player tile said the
+      // raid line for a fresh instantiation). A bump fight
+      // whose mid differs from a live pending's id is NOT
+      // pending-resolved, so a genuine direct fight against a
+      // raidBorn bumper still names itself. Contest-arena
+      // fights (state.arenaContest live at entry) never read
+      // either provenance: the beast is the arena's own, even
+      // on a species coincidence with a live raid shadow.
       try {
-        const _raidPendingMatch = !tableTrial && !!this.raidPendingMonsterId && mid === this.raidPendingMonsterId;
-        const _raidEntityMatch = !tableTrial && _originIsFighter && _origin && _origin.raidBorn;
+        const _raidPendingResolved = _raidPendingLiveAtEntry && _raidPendingIdAtEntry && mid === _raidPendingIdAtEntry;
+        const _raidPendingMatch = !tableTrial && !_raidContestAtEntry && !!this.raidPendingMonsterId && mid === this.raidPendingMonsterId;
+        const _raidEntityMatch = !tableTrial && !_raidContestAtEntry && !_raidPendingResolved && _originIsFighter && _origin && _origin.raidBorn;
         if (_raidPendingMatch || _raidEntityMatch) {
           this.say(`🐗 This one came with the raid on Haven — it was with the teeth at the door, not a lone wanderer.`);
           // RAIDGUARD REMOVED (sim-raidguard-b 2026-10-29): the

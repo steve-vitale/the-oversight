@@ -2242,6 +2242,10 @@
         this.say('You crawl out of the tent — canvas, poles, your fire pan. It stays pitched behind you; maybe you\'ll walk back for it. The road takes everything else.');
       }
       this.pendingEncounter = false; this.pendingMonsterId = null; this.pendingInTent = false;
+      // RAID-PROVENANCE (sim-raidname-fix-b): exile ends the
+      // pending — its shadow dies with it, never stale-matches
+      // a later same-species fight.
+      this.raidPendingMonsterId = null;
     } catch (e) {}
     // EXILE LEAVES THE HALL (break-it social r11 2026-10-10): exilePlayer
     // never cleared s.insideHaven — an exiled player kept 'inside' pantry

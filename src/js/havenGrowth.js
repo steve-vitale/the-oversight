@@ -707,18 +707,23 @@
           this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on your bedroll.`);
           this.pendingEncounter = true;
           this.pendingMonsterId = m.id;
-          // RAID-NAMING (sim-raidname-b 2026-10-29): shadow the
+          // RAID-NAMING (sim-raidname-b 2026-10-29; provenance
+          // gate sim-raidname-fix-b 2026-10-30): shadow the
           // pending with its raid provenance. Pending-resolved
           // fights are instantiated by species id (startCombat
           // builds fighters from the def), NOT lifted from the
           // world entity — the drafted raiders wander off the
           // haven tile before morning, so the entity flag alone
-          // cannot name the fight. This id survives the harness
-          // pending-clear (which clears only the two pending
-          // fields) so startCombat can match mid against it.
-          // Cleared on consume (startCombat) and on any non-raid
-          // pending overwrite (feast draw, wanderer, tent
-          // breach); a lingering raider met later is still
+          // cannot name the fight. startCombat keeps this id
+          // only when the fight IS this pending's resolution
+          // (pending live at entry and mid matches it) and
+          // consumes it on match; every other startCombat
+          // pending-clear drops it, as do the exile,
+          // succession, new-run, and load-validation pending
+          // clears and any non-raid pending overwrite (feast
+          // draw, wanderer, tent breach). A lingering raider
+          // met later in a DIRECT tile fight (not
+          // pending-resolved, not a contest fight) is still
           // named via its entity raidBorn flag.
           this.raidPendingMonsterId = m.id;
         } else {
