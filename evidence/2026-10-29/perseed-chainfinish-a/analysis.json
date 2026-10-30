@@ -1,0 +1,806 @@
+{
+ "corpusOk": true,
+ "joinTotal": 975,
+ "joinErrors": 0,
+ "mDealtMismatches": 85,
+ "srChecked": 368,
+ "census": {
+  "wild": 11,
+  "raid": 2,
+  "other": 0,
+  "otherChannels": {}
+ },
+ "wildN": 11,
+ "beastZeroN": 4,
+ "zeroByCause": {
+  "NARRATION-SUPPRESSED": 2,
+  "NO-USABLE-WEAPON": 2
+ },
+ "otherZero": 0,
+ "leaderZeroAllyPosN": 0,
+ "leaderZeroAllyPos": [],
+ "beastZeroDetail": [
+  {
+   "seed": 75102,
+   "day": 57,
+   "part": 227,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "aria_thompson",
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "intent": "engage",
+   "mHpStart": 853,
+   "mHpLeft": 853,
+   "vTaken": 82,
+   "allyDealt": 0,
+   "zeroCls": "NARRATION-SUPPRESSED",
+   "zeroEvidence": "log/trickLog contradicts-narration",
+   "tileCount": 4,
+   "calledHelp": false,
+   "joinedAllyVid": null,
+   "loadoutPost": {
+    "melee": "kitchen_knife",
+    "ranged": null,
+    "carriedWeapons": [
+     "kitchen_knife"
+    ]
+   },
+   "armed": true
+  },
+  {
+   "seed": 75102,
+   "day": 59,
+   "part": 234,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "intent": "engage",
+   "mHpStart": 853,
+   "mHpLeft": 853,
+   "vTaken": 30,
+   "allyDealt": 0,
+   "zeroCls": "NARRATION-SUPPRESSED",
+   "zeroEvidence": "log/trickLog contradicts-narration",
+   "tileCount": 1,
+   "calledHelp": false,
+   "joinedAllyVid": null,
+   "loadoutPost": {
+    "melee": null,
+    "ranged": "sling",
+    "carriedWeapons": [
+     "sling"
+    ]
+   },
+   "armed": true
+  },
+  {
+   "seed": 75102,
+   "day": 67,
+   "part": 267,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "intent": "engage",
+   "mHpStart": 971,
+   "mHpLeft": 971,
+   "vTaken": 66,
+   "allyDealt": 0,
+   "zeroCls": "NO-USABLE-WEAPON",
+   "zeroEvidence": "armed=true melee=null ranged=sling noArrows=true carried=[\"sling\"]",
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null,
+   "loadoutPost": {
+    "melee": null,
+    "ranged": "sling",
+    "carriedWeapons": [
+     "sling"
+    ]
+   },
+   "armed": true
+  },
+  {
+   "seed": 75102,
+   "day": 71,
+   "part": 283,
+   "mid": "algorithm",
+   "caller": "resolve",
+   "leaderVid": "ursula_weber",
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "intent": "engage",
+   "mHpStart": 959,
+   "mHpLeft": 959,
+   "vTaken": 161,
+   "allyDealt": 0,
+   "zeroCls": "NO-USABLE-WEAPON",
+   "zeroEvidence": "armed=true melee=null ranged=bow noArrows=true carried=[\"bow\"]",
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null,
+   "loadoutPost": {
+    "melee": null,
+    "ranged": "bow",
+    "carriedWeapons": [
+     "bow"
+    ]
+   },
+   "armed": true
+  }
+ ],
+ "chains": [
+  {
+   "mid": "algorithm",
+   "seed": 75102,
+   "openingHp": 1000,
+   "breakReason": null,
+   "healedFlag": false,
+   "n": 4,
+   "dealt": [
+    29,
+    0,
+    12,
+    0
+   ],
+   "medianRate": 6,
+   "bestRate": 29,
+   "remainingHp": 959,
+   "meetingsToFinishMedian": 160,
+   "meetingsToFinishBest": 34,
+   "intervals": [
+    2,
+    3,
+    1
+   ],
+   "meetings": [
+    {
+     "day": 65,
+     "part": 258,
+     "caller": "aid",
+     "leaderVid": "daniyar_askarov",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "mHpStart": 1000,
+     "mHpLeft": 971,
+     "mDealt": 29,
+     "zeroCls": null
+    },
+    {
+     "day": 67,
+     "part": 267,
+     "caller": "aid",
+     "leaderVid": "daniyar_askarov",
+     "outcome": "vDie",
+     "rounds": 2,
+     "mHpStart": 971,
+     "mHpLeft": 971,
+     "mDealt": 0,
+     "zeroCls": "NO-USABLE-WEAPON"
+    },
+    {
+     "day": 70,
+     "part": 279,
+     "caller": "aid",
+     "leaderVid": "dmitri_sokolov",
+     "outcome": "vDie",
+     "rounds": 1,
+     "mHpStart": 971,
+     "mHpLeft": 959,
+     "mDealt": 12,
+     "zeroCls": null
+    },
+    {
+     "day": 71,
+     "part": 283,
+     "caller": "resolve",
+     "leaderVid": "ursula_weber",
+     "outcome": "vDie",
+     "rounds": 2,
+     "mHpStart": 959,
+     "mHpLeft": 959,
+     "mDealt": 0,
+     "zeroCls": "NO-USABLE-WEAPON"
+    }
+   ]
+  },
+  {
+   "mid": "audit",
+   "seed": 75102,
+   "openingHp": 1066,
+   "breakReason": null,
+   "healedFlag": false,
+   "n": 1,
+   "dealt": [
+    58
+   ],
+   "medianRate": 58,
+   "bestRate": 58,
+   "remainingHp": 1008,
+   "meetingsToFinishMedian": null,
+   "meetingsToFinishBest": null,
+   "intervals": [],
+   "meetings": [
+    {
+     "day": 74,
+     "part": 295,
+     "caller": "resolve",
+     "leaderVid": "mateo_alvarez",
+     "outcome": "vDie",
+     "rounds": 3,
+     "mHpStart": 1066,
+     "mHpLeft": 1008,
+     "mDealt": 58,
+     "zeroCls": null
+    }
+   ]
+  },
+  {
+   "mid": "eulogy",
+   "seed": 75102,
+   "openingHp": 900,
+   "breakReason": null,
+   "healedFlag": false,
+   "n": 4,
+   "dealt": [
+    23,
+    24,
+    0,
+    0
+   ],
+   "medianRate": 11.5,
+   "bestRate": 24,
+   "remainingHp": 853,
+   "meetingsToFinishMedian": 75,
+   "meetingsToFinishBest": 36,
+   "intervals": [
+    1,
+    1,
+    2
+   ],
+   "meetings": [
+    {
+     "day": 55,
+     "part": 219,
+     "caller": "resolve",
+     "leaderVid": "aria_thompson",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "mHpStart": 900,
+     "mHpLeft": 877,
+     "mDealt": 23,
+     "zeroCls": null
+    },
+    {
+     "day": 56,
+     "part": 222,
+     "caller": "aid",
+     "leaderVid": "daniyar_askarov",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "mHpStart": 877,
+     "mHpLeft": 853,
+     "mDealt": 24,
+     "zeroCls": null
+    },
+    {
+     "day": 57,
+     "part": 227,
+     "caller": "aid",
+     "leaderVid": "aria_thompson",
+     "outcome": "vDie",
+     "rounds": 2,
+     "mHpStart": 853,
+     "mHpLeft": 853,
+     "mDealt": 0,
+     "zeroCls": "NARRATION-SUPPRESSED"
+    },
+    {
+     "day": 59,
+     "part": 234,
+     "caller": "aid",
+     "leaderVid": "daniyar_askarov",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "mHpStart": 853,
+     "mHpLeft": 853,
+     "mDealt": 0,
+     "zeroCls": "NARRATION-SUPPRESSED"
+    }
+   ]
+  },
+  {
+   "mid": "herald",
+   "seed": 75102,
+   "openingHp": 700,
+   "breakReason": null,
+   "healedFlag": false,
+   "n": 1,
+   "dealt": [
+    21
+   ],
+   "medianRate": 21,
+   "bestRate": 21,
+   "remainingHp": 679,
+   "meetingsToFinishMedian": null,
+   "meetingsToFinishBest": null,
+   "intervals": [],
+   "meetings": [
+    {
+     "day": 74,
+     "part": 295,
+     "caller": "aid",
+     "leaderVid": "app_mgpspifd159",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "mHpStart": 700,
+     "mHpLeft": 679,
+     "mDealt": 21,
+     "zeroCls": null
+    }
+   ]
+  },
+  {
+   "mid": "reunion",
+   "seed": 75102,
+   "openingHp": 1200,
+   "breakReason": null,
+   "healedFlag": false,
+   "n": 1,
+   "dealt": [
+    15
+   ],
+   "medianRate": 15,
+   "bestRate": 15,
+   "remainingHp": 1185,
+   "meetingsToFinishMedian": null,
+   "meetingsToFinishBest": null,
+   "intervals": [],
+   "meetings": [
+    {
+     "day": 79,
+     "part": 315,
+     "caller": "resolve",
+     "leaderVid": "app_mgpspiho509",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "mHpStart": 1200,
+     "mHpLeft": 1185,
+     "mDealt": 15,
+     "zeroCls": null
+    }
+   ]
+  }
+ ],
+ "intervals": [
+  2,
+  3,
+  1,
+  1,
+  1,
+  2
+ ],
+ "intervalMedian": 1.5,
+ "chainsPriced": 2,
+ "perSeedWild": {
+  "75101": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  },
+  "75102": {
+   "n": 11,
+   "beastZero": 4,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {
+    "vFlee": 6,
+    "vDie": 5
+   }
+  },
+  "75103": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  },
+  "75104": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  },
+  "75105": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  },
+  "75106": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  },
+  "75107": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  },
+  "75108": {
+   "n": 0,
+   "beastZero": 0,
+   "leaderZeroAllyPos": 0,
+   "byOutcome": {}
+  }
+ },
+ "wildDetail": [
+  {
+   "seed": 75102,
+   "day": 55,
+   "part": 219,
+   "mid": "eulogy",
+   "caller": "resolve",
+   "leaderVid": "aria_thompson",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 2,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 900,
+   "mHpLeft": 877,
+   "mDealt": 23,
+   "allyDealt": 0,
+   "leaderDealt": 23,
+   "vTaken": 75,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 56,
+   "part": 222,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 877,
+   "mHpLeft": 853,
+   "mDealt": 24,
+   "allyDealt": 6,
+   "leaderDealt": 18,
+   "vTaken": 88,
+   "tileCount": 3,
+   "calledHelp": true,
+   "joinedAllyVid": "gen_ucx78a7"
+  },
+  {
+   "seed": 75102,
+   "day": 57,
+   "part": 227,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "aria_thompson",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 853,
+   "mHpLeft": 853,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 82,
+   "tileCount": 4,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 59,
+   "part": 234,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 853,
+   "mHpLeft": 853,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 30,
+   "tileCount": 1,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 65,
+   "part": 258,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 1000,
+   "mHpLeft": 971,
+   "mDealt": 29,
+   "allyDealt": 5,
+   "leaderDealt": 24,
+   "vTaken": 96,
+   "tileCount": 1,
+   "calledHelp": true,
+   "joinedAllyVid": "stan_kowalski"
+  },
+  {
+   "seed": 75102,
+   "day": 67,
+   "part": 267,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 971,
+   "mHpLeft": 971,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 66,
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 70,
+   "part": 279,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "dmitri_sokolov",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 1,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 971,
+   "mHpLeft": 959,
+   "mDealt": 12,
+   "allyDealt": 0,
+   "leaderDealt": 12,
+   "vTaken": 100,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 71,
+   "part": 283,
+   "mid": "algorithm",
+   "caller": "resolve",
+   "leaderVid": "ursula_weber",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 959,
+   "mHpLeft": 959,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 161,
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 74,
+   "part": 295,
+   "mid": "herald",
+   "caller": "aid",
+   "leaderVid": "app_mgpspifd159",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 700,
+   "mHpLeft": 679,
+   "mDealt": 21,
+   "allyDealt": 0,
+   "leaderDealt": 21,
+   "vTaken": 15,
+   "tileCount": 4,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 74,
+   "part": 295,
+   "mid": "audit",
+   "caller": "resolve",
+   "leaderVid": "mateo_alvarez",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 3,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 1066,
+   "mHpLeft": 1008,
+   "mDealt": 58,
+   "allyDealt": 4,
+   "leaderDealt": 54,
+   "vTaken": 100,
+   "tileCount": 4,
+   "calledHelp": true,
+   "joinedAllyVid": "gen_ucx78a7"
+  },
+  {
+   "seed": 75102,
+   "day": 79,
+   "part": 315,
+   "mid": "reunion",
+   "caller": "resolve",
+   "leaderVid": "app_mgpspiho509",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 1200,
+   "mHpLeft": 1185,
+   "mDealt": 15,
+   "allyDealt": 0,
+   "leaderDealt": 15,
+   "vTaken": 70,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  }
+ ],
+ "wall": {
+  "won": 6,
+  "wonFull": 0,
+  "nationalEver": 6,
+  "nationalFinal": 6,
+  "table": 7,
+  "entered": 6,
+  "wave1reach": 8,
+  "wave2reach": 8,
+  "wave3reach": 7,
+  "wave4reach": 5,
+  "wave5reach": 0,
+  "medianDays": 114,
+  "daysSorted": [
+   31,
+   86,
+   90,
+   101,
+   114,
+   115,
+   115,
+   165
+  ],
+  "deaths": 232,
+  "deathsByCause": {
+   "villager:villager combat": 73,
+   "player:the wild": 23,
+   "villager:expedition": 15,
+   "villager:combat": 90,
+   "player:the arena": 2,
+   "villager:alien": 1,
+   "player:the night": 1,
+   "villager:sickness": 4,
+   "villager:ambush": 3,
+   "villager:monster": 11,
+   "villager:a red moon rising between the trees, breathing": 1,
+   "villager:Big Ugly": 1,
+   "villager:a wound that wouldn't close": 1,
+   "player:a stranger": 2,
+   "player:contest": 1,
+   "villager:Highbeam Deer": 1,
+   "villager:starvation": 2
+  }
+ },
+ "completeness": false,
+ "perSeedRows": [
+  {
+   "seed": 75101,
+   "days": 115,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "deaths": 26,
+   "fpMeetings": 150
+  },
+  {
+   "seed": 75102,
+   "days": 86,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 0,
+   "deaths": 45,
+   "fpMeetings": 90
+  },
+  {
+   "seed": 75103,
+   "days": 90,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "deaths": 16,
+   "fpMeetings": 123
+  },
+  {
+   "seed": 75104,
+   "days": 101,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "deaths": 31,
+   "fpMeetings": 150
+  },
+  {
+   "seed": 75105,
+   "days": 165,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "deaths": 59,
+   "fpMeetings": 122
+  },
+  {
+   "seed": 75106,
+   "days": 115,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "deaths": 26,
+   "fpMeetings": 195
+  },
+  {
+   "seed": 75107,
+   "days": 114,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "deaths": 20,
+   "fpMeetings": 118
+  },
+  {
+   "seed": 75108,
+   "days": 31,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 2,
+   "nationalEver": 0,
+   "deaths": 9,
+   "fpMeetings": 27
+  }
+ ]
+}
