@@ -272,3 +272,25 @@ two records stapled together? Report the sense verdict per
 chain in plain words, including the node-sim limitation
 (Game.say stubbed to no-op, so no say transcript exists —
 evidence is the structured trace).
+
+## PREREG CORRECTION #1 (committed before the pilot run and before
+any judged analysis — determinism comparison only)
+
+The determinism gate as first written ("row + census byte-
+identical") cannot hold literally across worktrees: removal and
+fieldparty stack frames embed the WORKTREE-ABSOLUTE harness path
+(e.g. .../worktrees/sim-sameday-a/scripts/policies/... in the
+committed corpus vs .../worktrees/sim-uidmatcher-a/... in this
+worktree's re-run). Removal-a disclosed exactly this limitation
+(determinism holds within one worktree). The gate is therefore
+restated, before any judged analysis, as: the scratch re-run's
+row, with the two worktree-absolute harness path strings (the
+committed corpus's worktree path and this worktree's path)
+normalized to one placeholder, must be byte-identical to the
+committed sameday row for seed 75102; the census must be
+byte-identical UNMODIFIED (it carries no paths); and the
+scratch dir must be removed. The test script reports raw
+equality AND normalized equality separately, and fails unless
+every raw difference is a path-string difference. No metric,
+window, matcher rule, or GO leg changes — this is a comparison
+normalization for a known path artifact, not a verdict change.
