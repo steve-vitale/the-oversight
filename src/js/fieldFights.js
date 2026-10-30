@@ -1531,6 +1531,10 @@
         // them). Hopeless and alone -> believable flight. Hopeless with help
         // near -> shout instead of scattering.
         var fleeAt = vBreak, hopeless = false, winning = false;
+        // SHOUTREC (sim-shoutrec-a, 2026-10-29): per-round cumulative
+        // damage totals at morale entry (after the action phase).
+        // Record only — no RNG, no stat, no decision reads this array.
+        try { (rec.roundTotals = rec.roundTotals || []).push({ round: round, mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, allyTaken: rec.allyTaken }); } catch (e) {}
         if (round >= 2) {
           var mlead = null;
           for (var lj = 0; lj < members.length; lj++) { if (members[lj].hp > 0) { mlead = members[lj]; break; } }
@@ -1584,6 +1588,24 @@
           rec.calledHelp = true;
           rec.allyVid = allyVid;
           rec.log.push(vName + ' is losing — shouts for help! ' + allyName + ' charges in!');
+          // SHOUTREC (sim-shoutrec-a, 2026-10-29): shout-moment
+          // snapshot — the engine's own morale inputs at the shout.
+          // Record only; nothing in the engine reads these fields.
+          try {
+            var _sm = null;
+            for (var _sj = 0; _sj < members.length; _sj++) { if (members[_sj].hp > 0) { _sm = members[_sj]; break; } }
+            rec.shoutRound = round;
+            rec.shoutMhp = _sm ? _sm.hp : null;
+            rec.shoutMmax = _sm ? _sm.maxHp : null;
+            rec.shoutVhp = vHp;
+            rec.shoutVhpMax = vHpMax;
+            rec.shoutMdealt = rec.mDealt;
+            rec.shoutVtaken = rec.vTaken;
+            rec.shoutAllyDealt = rec.allyDealt;
+            rec.shoutMbreak = mBreak;
+            rec.shoutFleeAt = fleeAt;
+            rec.shoutVbreak = vBreak;
+          } catch (e) {}
           // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
           try { if (this.bumpTrust) this.bumpTrust(allyVid, 1, 'answered a call for help'); } catch (e) {}
         } else if (hopeless) {
