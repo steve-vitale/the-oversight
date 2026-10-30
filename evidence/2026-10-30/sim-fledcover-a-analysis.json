@@ -1,0 +1,299 @@
+{
+ "corpusDir": "perseed-fledcover-a",
+ "seeds": [
+  75201,
+  75202,
+  75203,
+  75204,
+  75205,
+  75206,
+  75207,
+  75208
+ ],
+ "corpusValid": true,
+ "corpusProblems": [],
+ "perSeed": {
+  "75201": {
+   "days": 180,
+   "endReason": "survived",
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 0,
+   "table": 1,
+   "entered": 0,
+   "deaths": 39,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 9,
+   "scholarmeltMeetings": 22
+  },
+  "75202": {
+   "days": 180,
+   "endReason": "survived",
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 0,
+   "table": 0,
+   "entered": 0,
+   "deaths": 53,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 5,
+   "scholarmeltMeetings": 19
+  },
+  "75203": {
+   "days": 180,
+   "endReason": "survived",
+   "won": 0,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 0,
+   "entered": 0,
+   "deaths": 24,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 4,
+   "scholarmeltMeetings": 14
+  },
+  "75204": {
+   "days": 164,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 1,
+   "entered": 1,
+   "deaths": 36,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 1,
+   "scholarmeltMeetings": 21
+  },
+  "75205": {
+   "days": 39,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 2,
+   "nationalEver": 0,
+   "nationalFinal": 0,
+   "table": 0,
+   "entered": 0,
+   "deaths": 10,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 0,
+   "scholarmeltMeetings": 3
+  },
+  "75206": {
+   "days": 158,
+   "endReason": "over-other",
+   "won": 1,
+   "waveReach": 3,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 1,
+   "entered": 1,
+   "deaths": 32,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 3,
+   "scholarmeltMeetings": 15
+  },
+  "75207": {
+   "days": 180,
+   "endReason": "survived",
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 0,
+   "table": 1,
+   "entered": 0,
+   "deaths": 36,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 9,
+   "scholarmeltMeetings": 16
+  },
+  "75208": {
+   "days": 94,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "nationalEver": 1,
+   "nationalFinal": 1,
+   "table": 0,
+   "entered": 0,
+   "deaths": 57,
+   "tbendFled": 0,
+   "tbendFledLingerer": 0,
+   "scholarmeltFled": 0,
+   "tbendTotal": 23,
+   "scholarmeltMeetings": 90
+  }
+ },
+ "legN": {
+  "tbendByResult": {
+   "won": 25,
+   "routed": 9,
+   "lost": 20
+  },
+  "fledTbend": [],
+  "fledTbendLingerer": 0,
+  "scholarmeltByResult": {
+   "lost": 44,
+   "won": 75,
+   "routed": 26,
+   "dissolved-no-tbend": 55
+  },
+  "fledMeetings": []
+ },
+ "legS": {
+  "seed": 75102,
+  "scenarios": [
+   {
+    "scenario": "S-clear",
+    "production": "FLED-LINGERER",
+    "classification": "RESTORED",
+    "fledVia": "door",
+    "barrierCrossings": 0,
+    "damagingStrikes": 2,
+    "strikeDealt": [
+     18,
+     13
+    ],
+    "origin": {
+     "id": "gallowdeer",
+     "lingering": true,
+     "titan": false,
+     "tx": 4,
+     "ty": 4,
+     "hp": 400
+    },
+    "originHpAfter": 130,
+    "occupantAfter": {
+     "id": "gallowdeer",
+     "hp": 130,
+     "wave": 1,
+     "lingering": true,
+     "raidBorn": true,
+     "tx": 4,
+     "ty": 4,
+     "sameAsOrigin": true
+    },
+    "restoreCapCheck": {
+     "expected": 130,
+     "actual": 130,
+     "match": true
+    },
+    "playerHpEnd": 44
+   },
+   {
+    "scenario": "S-blocked",
+    "production": "FLED-LINGERER",
+    "classification": "BLOCKED",
+    "fledVia": "door",
+    "barrierCrossings": 0,
+    "damagingStrikes": 2,
+    "strikeDealt": [
+     18,
+     13
+    ],
+    "origin": {
+     "id": "gallowdeer",
+     "lingering": true,
+     "titan": false,
+     "tx": 4,
+     "ty": 4,
+     "hp": 400
+    },
+    "originHpAfter": null,
+    "occupantAfter": {
+     "id": "callback",
+     "hp": 200,
+     "wave": 3,
+     "lingering": true,
+     "raidBorn": true,
+     "tx": 4,
+     "ty": 4,
+     "sameAsOrigin": false
+    },
+    "restoreCapCheck": null,
+    "playerHpEnd": 44
+   },
+   {
+    "scenario": "S-chase",
+    "production": "FLED-LINGERER",
+    "classification": "RESTORED",
+    "fledVia": "barrier",
+    "barrierCrossings": 2,
+    "damagingStrikes": 2,
+    "strikeDealt": [
+     5,
+     8
+    ],
+    "origin": {
+     "id": "bulldozer",
+     "lingering": true,
+     "titan": false,
+     "tx": 4,
+     "ty": 4,
+     "hp": 400
+    },
+    "originHpAfter": 68,
+    "occupantAfter": {
+     "id": "bulldozer",
+     "hp": 68,
+     "wave": 1,
+     "lingering": true,
+     "raidBorn": true,
+     "tx": 4,
+     "ty": 4,
+     "sameAsOrigin": true
+    },
+    "restoreCapCheck": {
+     "expected": 68,
+     "actual": 68,
+     "match": true
+    },
+    "playerHpEnd": 100
+   }
+  ],
+  "fledLingererScenarios": 3
+ },
+ "fledLingererTotal": 3,
+ "verdict": "DIAG-GO-STRONG",
+ "wall": {
+  "n": 8,
+  "won": 2,
+  "wonFull": 0,
+  "nationalEver": 7,
+  "nationalFinal": 4,
+  "table": 4,
+  "entered": 2,
+  "waveReach": {
+   "w4": 4,
+   "w3": 3,
+   "w2": 1
+  },
+  "medianDays": 180,
+  "deaths": 287
+ },
+ "waveReachAtLeast": [
+  8,
+  8,
+  7,
+  4,
+  0
+ ]
+}

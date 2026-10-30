@@ -1,0 +1,270 @@
+{
+ "seed": 75102,
+ "scenarios": [
+  {
+   "scenario": "S-clear",
+   "monster": "gallowdeer",
+   "blockerPre": null,
+   "origin": {
+    "id": "gallowdeer",
+    "lingering": true,
+    "titan": false,
+    "tx": 4,
+    "ty": 4,
+    "hp": 400
+   },
+   "fighters": [
+    "player:p",
+    "monster:m_0"
+   ],
+   "strikes": [
+    {
+     "round": 1,
+     "ok": true,
+     "dealt": 18,
+     "monsterHp": "161->143",
+     "playerHp": 88
+    },
+    {
+     "round": 2,
+     "ok": true,
+     "dealt": 13,
+     "monsterHp": "143->130",
+     "playerHp": 66
+    }
+   ],
+   "steps": [
+    {
+     "move": [
+      4,
+      6
+     ],
+     "now": "4,6",
+     "over": true,
+     "result": "fled"
+    }
+   ],
+   "fledVia": "door",
+   "barrierCrossings": 0,
+   "result": "fled",
+   "over": true,
+   "damagingStrikes": 2,
+   "playerHpEnd": 44,
+   "fighterEndHp": 130,
+   "originInWorld": true,
+   "originHpAfter": 130,
+   "originTileAfter": "4,4",
+   "occupantAfter": {
+    "id": "gallowdeer",
+    "hp": 130,
+    "wave": 1,
+    "lingering": true,
+    "raidBorn": true,
+    "tx": 4,
+    "ty": 4,
+    "sameAsOrigin": true
+   },
+   "restoreCapCheck": {
+    "expected": 130,
+    "actual": 130,
+    "match": true
+   },
+   "classification": "RESTORED",
+   "production": "FLED-LINGERER"
+  },
+  {
+   "scenario": "S-blocked",
+   "monster": "gallowdeer",
+   "blockerPre": {
+    "id": "callback",
+    "hp": 200,
+    "maxHp": 200,
+    "wave": 3,
+    "lingering": true,
+    "raidBorn": true,
+    "tx": 4,
+    "ty": 4
+   },
+   "origin": {
+    "id": "gallowdeer",
+    "lingering": true,
+    "titan": false,
+    "tx": 4,
+    "ty": 4,
+    "hp": 400
+   },
+   "fighters": [
+    "player:p",
+    "monster:m_0"
+   ],
+   "strikes": [
+    {
+     "round": 1,
+     "ok": true,
+     "dealt": 18,
+     "monsterHp": "161->143",
+     "playerHp": 88
+    },
+    {
+     "round": 2,
+     "ok": true,
+     "dealt": 13,
+     "monsterHp": "143->130",
+     "playerHp": 66
+    }
+   ],
+   "steps": [
+    {
+     "move": [
+      4,
+      6
+     ],
+     "now": "4,6",
+     "over": true,
+     "result": "fled"
+    }
+   ],
+   "fledVia": "door",
+   "barrierCrossings": 0,
+   "result": "fled",
+   "over": true,
+   "damagingStrikes": 2,
+   "playerHpEnd": 44,
+   "fighterEndHp": 130,
+   "originInWorld": false,
+   "originHpAfter": null,
+   "originTileAfter": null,
+   "occupantAfter": {
+    "id": "callback",
+    "hp": 200,
+    "wave": 3,
+    "lingering": true,
+    "raidBorn": true,
+    "tx": 4,
+    "ty": 4,
+    "sameAsOrigin": false
+   },
+   "restoreCapCheck": null,
+   "classification": "BLOCKED",
+   "production": "FLED-LINGERER"
+  },
+  {
+   "scenario": "S-chase",
+   "monster": "bulldozer",
+   "blockerPre": null,
+   "origin": {
+    "id": "bulldozer",
+    "lingering": true,
+    "titan": false,
+    "tx": 4,
+    "ty": 4,
+    "hp": 400
+   },
+   "fighters": [
+    "player:p",
+    "monster:m_0"
+   ],
+   "strikes": [
+    {
+     "round": 1,
+     "action": "approach",
+     "to": [
+      7,
+      4
+     ],
+     "now": "7,4",
+     "playerHp": 100
+    },
+    {
+     "round": 2,
+     "ok": true,
+     "dealt": 5,
+     "monsterHp": "81->76",
+     "playerHp": 100
+    },
+    {
+     "round": 3,
+     "ok": true,
+     "dealt": 8,
+     "monsterHp": "76->68",
+     "playerHp": 100
+    }
+   ],
+   "steps": [
+    {
+     "move": [
+      4,
+      4
+     ],
+     "now": "4,4",
+     "moveLeft": 0
+    },
+    {
+     "move": [
+      1,
+      3
+     ],
+     "now": "1,3",
+     "moveLeft": 0
+    },
+    {
+     "move": [
+      0,
+      3
+     ],
+     "now": "0,3",
+     "moveLeft": 2
+    },
+    {
+     "at": "1,4",
+     "barrierExit": true,
+     "over": false,
+     "result": null,
+     "map": "3,4"
+    },
+    {
+     "move": [
+      0,
+      4
+     ],
+     "now": "0,4",
+     "moveLeft": 2
+    },
+    {
+     "at": "0,4",
+     "barrierExit": true,
+     "over": true,
+     "result": "fled",
+     "map": "2,4"
+    }
+   ],
+   "fledVia": "barrier",
+   "barrierCrossings": 2,
+   "result": "fled",
+   "over": true,
+   "damagingStrikes": 2,
+   "playerHpEnd": 100,
+   "fighterEndHp": 68,
+   "originInWorld": true,
+   "originHpAfter": 68,
+   "originTileAfter": "4,4",
+   "occupantAfter": {
+    "id": "bulldozer",
+    "hp": 68,
+    "wave": 1,
+    "lingering": true,
+    "raidBorn": true,
+    "tx": 4,
+    "ty": 4,
+    "sameAsOrigin": true
+   },
+   "restoreCapCheck": {
+    "expected": 68,
+    "actual": 68,
+    "match": true
+   },
+   "classification": "RESTORED",
+   "production": "FLED-LINGERER"
+  }
+ ]
+}
