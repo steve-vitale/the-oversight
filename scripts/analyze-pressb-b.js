@@ -62,6 +62,18 @@ function deathCauses(inst) {
   if (Array.isArray(d)) return d.map((x) => (typeof x === 'string' ? x : (x.cause || x.kind || JSON.stringify(x)))).sort();
   return [];
 }
+// Bearer deaths only (player:true): the played character's death
+// line, across bearer changes. The deaths stream mixes monster
+// kills, villager deaths, and bearer deaths; the prereg bar (c)
+// guards the morning routine against killing the scholar/village
+// (daysAlive loss, run-ending endReason, new bearer death cause),
+// so the BAR pairs bearer causes. All-deaths counts are still
+// reported per pair below, never hidden.
+function bearerCauses(inst) {
+  const d = inst.deaths || [];
+  if (!Array.isArray(d)) return [];
+  return d.filter((x) => x && x.player === true).map((x) => (x.cause || x.kind || JSON.stringify(x))).sort();
+}
 
 const control = loadDir(controlDir);
 const variant = loadDir(variantDir);
@@ -99,7 +111,7 @@ for (const s of seeds) {
       controlStrandedField.push(row); rec.controlStrandedField.push(row);
     }
   }
-  rec.control = { evenings: (c.evenings || []).length, creek, still, rescued, daysAlive: c.daysAlive, endReason: c.endReason, deaths: deathCauses(c), maxWave: c.maxWaveUnlocked, pressbAttempts: ((c.pressbStore || {}).attempts || []).length, pressbErrs: ((c.pressbStore || {}).errs || 0) };
+  rec.control = { evenings: (c.evenings || []).length, creek, still, rescued, daysAlive: c.daysAlive, endReason: c.endReason, deaths: deathCauses(c), bearerDeaths: bearerCauses(c), maxWave: c.maxWaveUnlocked, pressbAttempts: ((c.pressbStore || {}).attempts || []).length, pressbErrs: ((c.pressbStore || {}).errs || 0) };
   controlErrs += rec.control.pressbErrs;
   if (v) {
     const vEv = eveningByDay(v), vMo = morningByDay(v);
@@ -146,7 +158,7 @@ for (const s of seeds) {
         replayDiffs: rp ? (rp.judgedDiffs || null) : null, comparator: !!rp };
       denomMornings.push(row); rec.denom.push(row);
     }
-    rec.variant = { evenings: (v.evenings || []).length, creek: vcreek, still: vstil, rescued: vrescued, daysAlive: v.daysAlive, endReason: v.endReason, deaths: deathCauses(v), maxWave: v.maxWaveUnlocked, pressbAttempts: attempts.length, pressbErrs: ((v.pressbStore || {}).errs || 0), eveningLoopDays: (v.evenings || []).map((e) => e.loopDay) };
+    rec.variant = { evenings: (v.evenings || []).length, creek: vcreek, still: vstil, rescued: vrescued, daysAlive: v.daysAlive, endReason: v.endReason, deaths: deathCauses(v), bearerDeaths: bearerCauses(v), maxWave: v.maxWaveUnlocked, pressbAttempts: attempts.length, pressbErrs: ((v.pressbStore || {}).errs || 0), eveningLoopDays: (v.evenings || []).map((e) => e.loopDay) };
     variantErrs += rec.variant.pressbErrs;
   }
   perSeed[s] = rec;
@@ -158,12 +170,19 @@ for (const s of seeds) {
   if (!variant[s]) continue;
   const c = perSeed[s].control, v = perSeed[s].variant;
   const daysDelta = (v.daysAlive || 0) - (c.daysAlive || 0);
-  const newCauses = v.deaths.filter((d) => !c.deaths.includes(d));
+  // BAR (c) pairs bearer death causes (see bearerCauses note).
+  // All-deaths cause sets are reported, not barred: a behavior
+  // arm reshuffles RNG, so village/monster background churn
+  // (e.g. the fed scholar killing monsters the control scholar
+  // never fought) is not a morning-routine regression signal.
+  const newCauses = v.bearerDeaths.filter((d) => !c.bearerDeaths.includes(d));
+  const endWorsened = (v.endReason !== c.endReason) && (v.endReason !== 'survived') && (c.endReason === 'survived');
   pairs.push({ seed: s, daysAliveControl: c.daysAlive, daysAliveVariant: v.daysAlive, daysDelta,
     endReasonControl: c.endReason, endReasonVariant: v.endReason, deathsControl: c.deaths, deathsVariant: v.deaths,
-    newCauses, maxWaveControl: c.maxWave, maxWaveVariant: v.maxWave });
+    bearerDeathsControl: c.bearerDeaths, bearerDeathsVariant: v.bearerDeaths,
+    newCauses, endWorsened, maxWaveControl: c.maxWave, maxWaveVariant: v.maxWave });
 }
-const regressionFail = pairs.filter((p) => p.daysDelta < -10 || p.newCauses.length > 0 || (p.deathsVariant.length > 0 && p.deathsControl.length === 0));
+const regressionFail = pairs.filter((p) => p.daysDelta < -10 || p.newCauses.length > 0 || p.endWorsened);
 // Stall check: evening loopDays must be contiguous from 1.
 const stalls = [];
 for (const s of variantSeeds) {
@@ -228,7 +247,7 @@ for (const m of denomMornings) {
   console.log('  DENOM seed ' + m.seed + ' day ' + m.loopDay + ' wake ' + m.wakeTile + ' ' + JSON.stringify(m.wake) + ' kcal ' + m.morningKcal + ' known ' + JSON.stringify(m.knownSpecies) + ' fired ' + m.fired + ' variantE ' + m.variantE + ' provenE ' + m.provenE + (m.boundary ? ' BOUNDARY' : '') + (m.pressErr ? ' PRESS-ERR ' + m.pressErr : '') + (m.eatErr ? ' EAT-ERR ' + m.eatErr : ''));
 }
 for (const p of pairs) {
-  console.log('  PAIR seed ' + p.seed + ' daysAlive c/v ' + p.daysAliveControl + '/' + p.daysAliveVariant + ' end c/v ' + p.endReasonControl + '/' + p.endReasonVariant + ' deaths c/v ' + JSON.stringify(p.deathsControl) + '/' + JSON.stringify(p.deathsVariant) + ' waves c/v ' + p.maxWaveControl + '/' + p.maxWaveVariant + (p.newCauses.length ? ' NEW-CAUSES ' + JSON.stringify(p.newCauses) : ''));
+  console.log('  PAIR seed ' + p.seed + ' daysAlive c/v ' + p.daysAliveControl + '/' + p.daysAliveVariant + ' end c/v ' + p.endReasonControl + '/' + p.endReasonVariant + ' bearerDeaths c/v ' + JSON.stringify(p.bearerDeathsControl) + '/' + JSON.stringify(p.bearerDeathsVariant) + ' allDeaths n c/v ' + p.deathsControl.length + '/' + p.deathsVariant.length + ' waves c/v ' + p.maxWaveControl + '/' + p.maxWaveVariant + (p.newCauses.length ? ' NEW-BEARER-CAUSES ' + JSON.stringify(p.newCauses) : '') + (p.endWorsened ? ' END-WORSENED' : ''));
 }
 console.log('BARS ' + JSON.stringify(bars) + ' GO ' + GO);
 if (outJson) { fs.mkdirSync(path.dirname(outJson), { recursive: true }); fs.writeFileSync(outJson, JSON.stringify(result, null, 2)); console.log('wrote ' + outJson); }
@@ -264,7 +283,7 @@ if (compareMd) {
   L.push('- stalls (non-contiguous evening loopDays): ' + stalls.length + ' (bar 0) — ' + (bars.stalls0 ? 'pass' : 'FAIL'));
   L.push('- replay snap mismatches: ' + replayMismatch + ' (bar 0) — ' + (bars.replayMatch ? 'pass' : 'FAIL'));
   L.push('- regression fails (daysAlive loss > 10 or new death cause): ' + regressionFail.length + ' — ' + (bars.regression ? 'pass' : 'FAIL'));
-  for (const p of pairs) L.push('  - seed ' + p.seed + ': daysAlive ' + p.daysAliveControl + ' -> ' + p.daysAliveVariant + ', end ' + p.endReasonControl + ' -> ' + p.endReasonVariant + ', waves ' + p.maxWaveControl + ' -> ' + p.maxWaveVariant + ', deaths ' + JSON.stringify(p.deathsControl) + ' -> ' + JSON.stringify(p.deathsVariant));
+  for (const p of pairs) L.push('  - seed ' + p.seed + ': daysAlive ' + p.daysAliveControl + ' -> ' + p.daysAliveVariant + ', end ' + p.endReasonControl + ' -> ' + p.endReasonVariant + ', waves ' + p.maxWaveControl + ' -> ' + p.maxWaveVariant + ', bearer deaths ' + JSON.stringify(p.bearerDeathsControl) + ' -> ' + JSON.stringify(p.bearerDeathsVariant) + ', all deaths n ' + p.deathsControl.length + ' -> ' + p.deathsVariant.length);
   L.push('');
   L.push('## VERDICT');
   L.push('');

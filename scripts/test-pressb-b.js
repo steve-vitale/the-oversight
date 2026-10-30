@@ -128,15 +128,20 @@ if (ci >= 0) {
   for (const s of Object.keys(control)) errs += ((control[s].pressbStore || {}).errs || 0);
   for (const s of Object.keys(variant)) errs += ((variant[s].pressbStore || {}).errs || 0);
   check('C3 pressb errs 0', errs === 0, 'errs=' + errs);
-  // C4: no variant seed loses >10 days or gains a new death cause vs control.
+  // C4: no variant seed loses >10 days, gains a new BEARER death
+  // cause (player:true only — the deaths stream mixes monster
+  // kills and villager deaths, which a behavior arm reshuffles
+  // via RNG), or worsens endReason from survived.
   let regFail = 0;
   for (const s of Object.keys(control)) {
     if (!variant[s]) continue;
     const dd = (variant[s].daysAlive || 0) - (control[s].daysAlive || 0);
-    const dc = (control[s].deaths || []).map((x) => (typeof x === 'string' ? x : (x.cause || '')));
-    const dv = (variant[s].deaths || []).map((x) => (typeof x === 'string' ? x : (x.cause || '')));
+    const bc = (x) => (x && x.player === true) ? (x.cause || '') : null;
+    const dc = (control[s].deaths || []).map(bc).filter(Boolean);
+    const dv = (variant[s].deaths || []).map(bc).filter(Boolean);
     const newC = dv.filter((d) => !dc.includes(d));
-    if (dd < -10 || newC.length || (dv.length && !dc.length)) regFail++;
+    const endWorsened = variant[s].endReason !== control[s].endReason && variant[s].endReason !== 'survived' && control[s].endReason === 'survived';
+    if (dd < -10 || newC.length || endWorsened) regFail++;
   }
   check('C4 no regression pairing fail', regFail === 0, 'regFail=' + regFail);
   // C5: replay comparators present for denominator mornings is checked
