@@ -1,0 +1,644 @@
+{
+  "corpora": {
+    "competent": {
+      "label": "sim-vests-b",
+      "policy": "competent",
+      "seeds": [
+        9911,
+        9912,
+        9913,
+        9914,
+        9915,
+        9916,
+        9917,
+        9918
+      ],
+      "days": 180
+    },
+    "leanlink": {
+      "label": "sim-vests-b",
+      "policy": "leanlink",
+      "seeds": [
+        9911,
+        9912,
+        9913,
+        9914,
+        9915,
+        9916,
+        9917,
+        9918
+      ],
+      "days": 180
+    },
+    "seedPairingConfirmed": true
+  },
+  "lossInventory": [
+    {
+      "seed": 9911,
+      "competent": null,
+      "leanlink": {
+        "days": 166,
+        "bucket": "late (>150d)",
+        "national": 0,
+        "table": 1,
+        "maxRank": "regional",
+        "wave": 4,
+        "arc": 4,
+        "deaths": {
+          "monster:combat": 17,
+          "monster:villager combat": 4,
+          "monster:expedition": 2,
+          "player:the wild": 7,
+          "player:the night": 1,
+          "player:contest": 1,
+          "person:combat": 1,
+          "villager:monster": 4,
+          "player:the arena": 1
+        },
+        "deathSummary": {
+          "total": 38,
+          "byClass": {
+            "monster-combat": 27,
+            "player-field": 9,
+            "player-arena-contest": 2
+          },
+          "ranked": [
+            [
+              "monster-combat",
+              27
+            ],
+            [
+              "player-field",
+              9
+            ],
+            [
+              "player-arena-contest",
+              2
+            ]
+          ],
+          "primary": "monster-combat",
+          "margin": 18,
+          "top": "monster-combat",
+          "second": "player-field"
+        },
+        "court": {
+          "proposedLead": 9,
+          "courtCounters": 2,
+          "courtAccords": 3
+        },
+        "endGateRank": "regional",
+        "endGateLinks": [
+          {
+            "primary": "haven",
+            "subordinate": "village_1",
+            "trust": 18,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_3",
+            "trust": 25,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_spl_29_27683",
+            "trust": 21,
+            "ageDays": null,
+            "conquered": false
+          }
+        ]
+      }
+    },
+    {
+      "seed": 9912,
+      "competent": null,
+      "leanlink": {
+        "days": 139,
+        "bucket": "mid-ambition (100-150d)",
+        "national": 1,
+        "table": 0,
+        "maxRank": "global",
+        "wave": 4,
+        "arc": 3,
+        "deaths": {
+          "monster:villager combat": 11,
+          "monster:combat": 13,
+          "villager:monster": 5,
+          "player:the arena": 2,
+          "player:the wild": 7,
+          "villager:thirst": 1
+        },
+        "deathSummary": {
+          "total": 39,
+          "byClass": {
+            "monster-combat": 29,
+            "player-arena-contest": 2,
+            "player-field": 7,
+            "sustenance-disease": 1
+          },
+          "ranked": [
+            [
+              "monster-combat",
+              29
+            ],
+            [
+              "player-field",
+              7
+            ],
+            [
+              "player-arena-contest",
+              2
+            ],
+            [
+              "sustenance-disease",
+              1
+            ]
+          ],
+          "primary": "monster-combat",
+          "margin": 22,
+          "top": "monster-combat",
+          "second": "player-field"
+        },
+        "court": {
+          "proposedLead": 3,
+          "courtAccords": 3,
+          "courtNational": 1,
+          "courtGlobal": 1
+        },
+        "endGateRank": "regional",
+        "endGateLinks": [
+          {
+            "primary": "haven",
+            "subordinate": "village_0",
+            "trust": 77,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_1",
+            "trust": 43,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_2",
+            "trust": 45,
+            "ageDays": null,
+            "conquered": false
+          }
+        ]
+      }
+    },
+    {
+      "seed": 9913,
+      "competent": {
+        "days": 86,
+        "bucket": "early (<100d)",
+        "national": 0,
+        "table": 0,
+        "maxRank": "village",
+        "wave": 4,
+        "arc": 3,
+        "deaths": {
+          "monster:villager combat": 10,
+          "monster:expedition": 2,
+          "player:the wild": 5,
+          "monster:combat": 13,
+          "villager:monster": 1
+        },
+        "deathSummary": {
+          "total": 31,
+          "byClass": {
+            "monster-combat": 26,
+            "player-field": 5
+          },
+          "ranked": [
+            [
+              "monster-combat",
+              26
+            ],
+            [
+              "player-field",
+              5
+            ]
+          ],
+          "primary": "monster-combat",
+          "margin": 21,
+          "top": "monster-combat",
+          "second": "player-field"
+        },
+        "court": {},
+        "endGateRank": "village"
+      },
+      "leanlink": {
+        "days": 129,
+        "bucket": "mid-ambition (100-150d)",
+        "national": 1,
+        "table": 1,
+        "maxRank": "global",
+        "wave": 4,
+        "arc": 4,
+        "deaths": {
+          "monster:villager combat": 17,
+          "monster:expedition": 2,
+          "player:the wild": 6,
+          "monster:combat": 7,
+          "villager:monster": 4,
+          "player:the night": 1,
+          "player:the arena": 3,
+          "player:a stranger": 1,
+          "villager:thirst": 1
+        },
+        "deathSummary": {
+          "total": 42,
+          "byClass": {
+            "monster-combat": 30,
+            "player-field": 8,
+            "player-arena-contest": 3,
+            "sustenance-disease": 1
+          },
+          "ranked": [
+            [
+              "monster-combat",
+              30
+            ],
+            [
+              "player-field",
+              8
+            ],
+            [
+              "player-arena-contest",
+              3
+            ],
+            [
+              "sustenance-disease",
+              1
+            ]
+          ],
+          "primary": "monster-combat",
+          "margin": 22,
+          "top": "monster-combat",
+          "second": "player-field"
+        },
+        "court": {
+          "proposedLead": 3,
+          "courtAccords": 3,
+          "courtNational": 1,
+          "courtGlobal": 1
+        },
+        "endGateRank": "regional",
+        "endGateLinks": [
+          {
+            "primary": "haven",
+            "subordinate": "village_0",
+            "trust": 45,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_2",
+            "trust": 65,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_3",
+            "trust": 39,
+            "ageDays": null,
+            "conquered": false
+          }
+        ]
+      }
+    },
+    {
+      "seed": 9918,
+      "competent": null,
+      "leanlink": {
+        "days": 159,
+        "bucket": "late (>150d)",
+        "national": 1,
+        "table": 1,
+        "maxRank": "national",
+        "wave": 4,
+        "arc": 4,
+        "deaths": {
+          "monster:villager combat": 10,
+          "monster:combat": 19,
+          "monster:expedition": 2,
+          "villager:a wound that wouldn't close": 2,
+          "player:the wild": 12,
+          "villager:sickness": 6,
+          "player:contest": 1,
+          "villager:monster": 2,
+          "player:the arena": 1
+        },
+        "deathSummary": {
+          "total": 55,
+          "byClass": {
+            "monster-combat": 33,
+            "sustenance-disease": 8,
+            "player-field": 12,
+            "player-arena-contest": 2
+          },
+          "ranked": [
+            [
+              "monster-combat",
+              33
+            ],
+            [
+              "player-field",
+              12
+            ],
+            [
+              "sustenance-disease",
+              8
+            ],
+            [
+              "player-arena-contest",
+              2
+            ]
+          ],
+          "primary": "monster-combat",
+          "margin": 21,
+          "top": "monster-combat",
+          "second": "player-field"
+        },
+        "court": {
+          "proposedLead": 3,
+          "courtAccords": 3,
+          "courtNational": 1
+        },
+        "endGateRank": "regional",
+        "endGateLinks": [
+          {
+            "primary": "haven",
+            "subordinate": "village_0",
+            "trust": 70,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_1",
+            "trust": 22,
+            "ageDays": null,
+            "conquered": false
+          },
+          {
+            "primary": "haven",
+            "subordinate": "village_2",
+            "trust": 1,
+            "ageDays": null,
+            "conquered": false
+          }
+        ]
+      }
+    }
+  ],
+  "lossDays": {
+    "competent": [
+      86
+    ],
+    "leanlink": [
+      129,
+      139,
+      159,
+      166
+    ],
+    "competentBuckets": {
+      "early (<100d)": 1,
+      "mid-ambition (100-150d)": 0,
+      "late (>150d)": 0
+    },
+    "leanlinkBuckets": {
+      "early (<100d)": 0,
+      "mid-ambition (100-150d)": 2,
+      "late (>150d)": 2
+    }
+  },
+  "paired": [
+    {
+      "seed": 9911,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 166,
+      "leanlinkEnd": "village-lost",
+      "dayDeltaLeanMinusComp": -14,
+      "competentDeaths": 35,
+      "leanlinkDeaths": 38,
+      "deathDeltaLeanMinusComp": 3,
+      "competentNational": 0,
+      "leanlinkNational": 0,
+      "competentTable": 0,
+      "leanlinkTable": 1,
+      "competentRank": "village",
+      "leanlinkRank": "regional",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 9,
+        "courtCounters": 2,
+        "courtAccords": 3
+      }
+    },
+    {
+      "seed": 9912,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 139,
+      "leanlinkEnd": "village-lost",
+      "dayDeltaLeanMinusComp": -41,
+      "competentDeaths": 44,
+      "leanlinkDeaths": 39,
+      "deathDeltaLeanMinusComp": -5,
+      "competentNational": 0,
+      "leanlinkNational": 1,
+      "competentTable": 0,
+      "leanlinkTable": 0,
+      "competentRank": "village",
+      "leanlinkRank": "global",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 3,
+        "courtNational": 1,
+        "courtGlobal": 1
+      }
+    },
+    {
+      "seed": 9913,
+      "competentDays": 86,
+      "competentEnd": "village-lost",
+      "leanlinkDays": 129,
+      "leanlinkEnd": "village-lost",
+      "dayDeltaLeanMinusComp": 43,
+      "competentDeaths": 31,
+      "leanlinkDeaths": 42,
+      "deathDeltaLeanMinusComp": 11,
+      "competentNational": 0,
+      "leanlinkNational": 1,
+      "competentTable": 0,
+      "leanlinkTable": 1,
+      "competentRank": "village",
+      "leanlinkRank": "global",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 3,
+        "courtNational": 1,
+        "courtGlobal": 1
+      }
+    },
+    {
+      "seed": 9914,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 180,
+      "leanlinkEnd": "survived",
+      "dayDeltaLeanMinusComp": 0,
+      "competentDeaths": 34,
+      "leanlinkDeaths": 32,
+      "deathDeltaLeanMinusComp": -2,
+      "competentNational": 0,
+      "leanlinkNational": 1,
+      "competentTable": 0,
+      "leanlinkTable": 0,
+      "competentRank": "village",
+      "leanlinkRank": "national",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 3,
+        "courtNational": 1
+      }
+    },
+    {
+      "seed": 9915,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 180,
+      "leanlinkEnd": "survived",
+      "dayDeltaLeanMinusComp": 0,
+      "competentDeaths": 34,
+      "leanlinkDeaths": 26,
+      "deathDeltaLeanMinusComp": -8,
+      "competentNational": 0,
+      "leanlinkNational": 0,
+      "competentTable": 0,
+      "leanlinkTable": 0,
+      "competentRank": "village",
+      "leanlinkRank": "regional",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 3
+      }
+    },
+    {
+      "seed": 9916,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 180,
+      "leanlinkEnd": "survived",
+      "dayDeltaLeanMinusComp": 0,
+      "competentDeaths": 46,
+      "leanlinkDeaths": 48,
+      "deathDeltaLeanMinusComp": 2,
+      "competentNational": 0,
+      "leanlinkNational": 0,
+      "competentTable": 0,
+      "leanlinkTable": 1,
+      "competentRank": "village",
+      "leanlinkRank": "regional",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 3
+      }
+    },
+    {
+      "seed": 9917,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 180,
+      "leanlinkEnd": "survived",
+      "dayDeltaLeanMinusComp": 0,
+      "competentDeaths": 40,
+      "leanlinkDeaths": 37,
+      "deathDeltaLeanMinusComp": -3,
+      "competentNational": 0,
+      "leanlinkNational": 1,
+      "competentTable": 0,
+      "leanlinkTable": 0,
+      "competentRank": "village",
+      "leanlinkRank": "national",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 2,
+        "courtNational": 1
+      }
+    },
+    {
+      "seed": 9918,
+      "competentDays": 180,
+      "competentEnd": "survived",
+      "leanlinkDays": 159,
+      "leanlinkEnd": "village-lost",
+      "dayDeltaLeanMinusComp": -21,
+      "competentDeaths": 54,
+      "leanlinkDeaths": 55,
+      "deathDeltaLeanMinusComp": 1,
+      "competentNational": 0,
+      "leanlinkNational": 1,
+      "competentTable": 0,
+      "leanlinkTable": 1,
+      "competentRank": "village",
+      "leanlinkRank": "national",
+      "competentCourt": {},
+      "leanlinkCourt": {
+        "proposedLead": 3,
+        "courtAccords": 3,
+        "courtNational": 1
+      }
+    }
+  ],
+  "columnDeathClassTotals": {
+    "competent": {
+      "monster-combat": 258,
+      "player-field": 31,
+      "other-named": 2,
+      "player-arena-contest": 12,
+      "sustenance-disease": 15
+    },
+    "leanlink": {
+      "monster-combat": 238,
+      "player-field": 51,
+      "player-arena-contest": 10,
+      "sustenance-disease": 15,
+      "other-named": 3
+    }
+  },
+  "courtTotals": {
+    "competent": {},
+    "leanlink": {
+      "proposedLead": 30,
+      "courtCounters": 2,
+      "courtAccords": 23,
+      "courtNational": 5,
+      "courtGlobal": 2
+    }
+  },
+  "gaps": [
+    "No pantry time series in either corpus: tribute kcal actually paid cannot be quantified from the corpus.",
+    "No proposal/tribute event log in either corpus: proposal timing vs loss timing cannot be established.",
+    "No timestamped death log and no terminal-cause field: primary-cause attribution is by aggregate dominant share only, not proven terminal cause.",
+    "No population time series: the final-decline shape (slow bleed vs sudden wipe) cannot be reconstructed."
+  ]
+}
