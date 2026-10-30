@@ -19,6 +19,7 @@
 //   - villagerGearFit(vid, itemId) -> multiplier for how well an item fits their build
 //   - villagerGearDay() -> greedy daily gear allocation (own stash, gifts of spares, armory)
 //   - vesselStashFetch() -> {item, slot} | null; the vessel's own-stash weapon fetch, once a day at haven
+//   - vesselArmorFetch() -> {item, slot} | null; the vessel's own-stash armor fetch, once a day at haven (mirror of the weapon fetch)
 //   - villagerBuildDay() -> the daily tick: gear, pending sheets
 //   - pickVillagerKnack(vid, choices) -> knack id chosen by buildScore
 //   - mantleBecome(oldId, newId) -> the new bearer keeps THEIR OWN tracks, XP, abilities, skills, knowledge, godhood and gear; the predecessor's do not pass (Steve 2026-10-14: "No I don't think you should take your XP or the abilities. You become that villager.")
@@ -781,6 +782,79 @@
       } catch (e) { warn('vesselStashFetch', e); return null; }
     },
 
+    // vesselArmorFetch(): ARMOR-FETCH (sim-armorfetch-b 2026-10-30).
+    // Mirror of vesselStashFetch for ARMOR: the vessel's own stashed
+    // armor never reached the vessel's hands (stashfetch evidence:
+    // 16103's swat_vest sat beside the hatchet and never moved).
+    // Once a day, at haven, the vessel fetches their own best stashed
+    // armor into the pack when it beats what they wear in its slot
+    // (empty counts as beaten). ARMOR ONLY, own stash only — nothing
+    // granted, nothing generated, no communal draw. Ordering is the
+    // gear path's own reading: per-slot def.armor.protection via
+    // equipment.slotForItem, largest GAIN first (candidate minus worn
+    // in its slot, tie-broken by higher protection — villagerGearDay's
+    // "biggest gains first" armory rule). Wearing stays on the normal
+    // path (policy gearUp in sims, player UI in live play): the fix
+    // OFFERS the choice, it does not force the wear. Own day flag
+    // (_armorFetchDay) so it can never block the weapon fetch on a
+    // night both apply. Narrated, never silent.
+    // Returns {item, slot} or null.
+    vesselArmorFetch() {
+      try {
+        if (this.over) return null;
+        const s = this.state.scholar;
+        if (!s) return null;
+        if (s._armorFetchDay != null && s._armorFetchDay === s.day) return null; // one armor fetch per day
+        const vid = this.villagerId;
+        if (!vid) return null;
+        let atHaven = true;
+        try { if (this.playerAtHaven) atHaven = this.playerAtHaven(); } catch (e) {}
+        if (!atHaven) return null; // a fetch from their space in haven while away would be a teleport
+        const person = this.getPerson ? this.getPerson(vid) : null;
+        if (!person || person.dead) return null;
+        const stash = person.stashed || [];
+        if (!stash.length) return null;
+        const eq = EQ();
+        if (!eq) return null;
+        const defs = this.data.items || [];
+        const defOf = (id) => defs.find(d => d.id === id) || null;
+        const idOf = (it) => (it && (it.itemId || it.id)) || it;
+        const invIds = new Set((s.inventory || []).map(idOf));
+        const eqIds = new Set(Object.values(s.equipped || {}).map(e => e && e.itemId).filter(Boolean));
+        let best = null, bestGain = -1, bestProt = -1, bestIdx = -1, bestSlot = null;
+        for (let i = 0; i < stash.length; i++) {
+          const gid = idOf(stash[i]);
+          const def = defOf(gid);
+          if (!def || !def.armor) continue;
+          if (invIds.has(gid) || eqIds.has(gid)) continue; // already carried/worn: no duplicate
+          let slot = null;
+          try { slot = eq.slotForItem ? eq.slotForItem(def) : null; } catch (e2) {}
+          if (!slot) continue;
+          const cur = (s.equipped || {})[slot];
+          const curP = cur && cur.itemId ? ((defOf(cur.itemId) || {}).armor || {}).protection || 0 : 0;
+          const p = def.armor.protection || 0;
+          const gain = p - curP;
+          if (gain > 0 && (gain > bestGain || (gain === bestGain && p > bestProt))) {
+            bestGain = gain; bestProt = p; best = gid; bestIdx = i; bestSlot = slot;
+          }
+        }
+        if (!best) return null;
+        stash.splice(bestIdx, 1);
+        const def = defOf(best);
+        const personal = ((person.itemPersonal || {})[best]) || null;
+        s.inventory = s.inventory || [];
+        s.inventory.push({ itemId: best, units: 1, kcalEach: 0,
+          kg: def.kg != null ? def.kg : 0.2,
+          name: personal ? personal.name : (def.name || best),
+          flavor: personal ? personal.flavor : def.flavor, owner: vid,
+          bonded: true, bond: 0, bondOffered: [], enhancements: [] });
+        s._armorFetchDay = s.day;
+        try { this.say(`You remember the ${def.name || best} at your space in the haven and fetch it — it rides in your pack now.`); } catch (e2) {}
+        try { if (this.tele) this.tele('vessel_armor_fetch', { item: best, via: 'own_stash', slot: bestSlot }); } catch (e2) {}
+        return { item: best, slot: bestSlot };
+      } catch (e) { warn('vesselArmorFetch', e); return null; }
+    },
+
     // villagerGearDay(): daily, cheap, greedy. Every villager at home:
     //  1. wears the best of their own things (autoEquip) and fetches upgrades
     //     from their own stash;
@@ -973,6 +1047,9 @@
         // vesselStashFetch) — offer the choice once a day, at haven,
         // from their own stash only.
         try { if (this.vesselStashFetch) this.vesselStashFetch(); } catch (e) { warn('stashfetch', e); }
+        // ARMOR-FETCH (sim-armorfetch-b 2026-10-30): mirror of the weapon
+        // fetch for armor — own stash only, one armor fetch per day.
+        try { if (this.vesselArmorFetch) this.vesselArmorFetch(); } catch (e) { warn('armorfetch', e); }
         // ARMOR CRAFT (armorvillage 2026-10-23): NPC armor-craft beats —
         // villagers who demonstrably know an armor recipe sew for themselves.
         try { if (this.villagerArmorCraftDay) this.villagerArmorCraftDay(); } catch (e) { warn('armorcraft', e); }
