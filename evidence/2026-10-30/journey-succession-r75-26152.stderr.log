@@ -1,0 +1,44 @@
+
+ORGANIC DEATH d16: Violet -> Fritz, topTrust=[{"id":"Tomas","t":63},{"id":"Catalina","t":61},{"id":"Meiling","t":60},{"id":"Fritz","t":44}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=4 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=54 succTrustPost=44
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d16 (organic (phase A)): Violet -> Fritz | passed=true lin=true mo=true trust=44 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Tomas (refused=false)
+  CONVO d+3 with Meiling (refused=false)
+  CONVO d+7 with Tomas (refused=false)
+  CONVO d+7 with Meiling (refused=false)
+  CONVO d+14 with Tomas (refused=false)
+  CONVO d+14 with Catalina (refused=false)
+
+SECOND-KILL d+21: Fritz -> ? (scripted r64 chain probe)
+SECOND DEATH d+21: Fritz -> Meiling passed=true lin=true mo=true
+  CONVO d+30 with Tomas (refused=false)
+  CONVO d+30 with Catalina (refused=false)
+
+THIRD-KILL d+20 since second death: Meiling -> ? (scripted r75 chain probe)
+THIRD DEATH d+20 since second death: Meiling -> Tomas passed=true lin=true mo=true
+  CONVO d+45 with Christian (refused=false)
+  CONVO d+45 with Adaeze (refused=false)
+
+FOURTH-KILL d+10 since third death: Tomas -> ? (scripted r75 chain probe)
+FOURTH DEATH d+10 since third death: Tomas -> Catalina passed=true lin=true mo=true
+  CONVO d+53 with Yuki (refused=false)
+  CONVO d+53 with Dmitri (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=3) echo=6 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=55 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=55 signals={"levelUp":true,"systemVoice":35,"offerLines":53,"codexPlantsDelta":29,"codexSkillsDelta":13,"codexAbilitiesDelta":12,"xpDelta":44,"any":true} pantry 10630->40488
+TRUST-DIALS: office 44->90 (+46, climb) | villageMean 36.5->88.4 (+51.9, climb) | ge60 3->7 | movers>=5: [{"id":"Christian","from":17,"to":90,"delta":73},{"id":"Martyna","from":20,"to":90,"delta":70},{"id":"Dmitri","from":21,"to":90,"delta":69},{"id":"Zoltan","from":21,"to":90,"delta":69},{"id":"Yuki","from":26,"to":91,"delta":65},{"id":"Farid","from":34,"to":82,"delta":48},{"id":"Adaeze","from":42,"to":86,"delta":44}]
+DEED-LEDGER: calls=10 summary={"donateToPantry":{"calls":10,"ok":10,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=71 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=55
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+55) t2=true(deedCalls=10) trustVerdict={"readable":true,"officeMantle":44,"officeLast":90,"officeDelta":46,"officeClass":"climb","villageMantle":36.5,"villageLast":88.4,"villageDelta":51.9,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":7,"movers":[{"id":"Christian","from":17,"to":90,"delta":73},{"id":"Martyna","from":20,"to":90,"delta":70},{"id":"Dmitri","from":21,"to":90,"delta":69},{"id":"Zoltan","from":21,"to":90,"delta":69},{"id":"Yuki","from":26,"to":91,"delta":65},{"id":"Farid","from":34,"to":82,"delta":48},{"id":"Adaeze","from":42,"to":86,"delta":44}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":3,"trustMoves":7} callCheck={"dailyMoveDays":9,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":4,"soloOfficeDeltas":[2,2,2,1],"soloBearerDeltaExact":[2,2,2,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":56,"moves":9}
