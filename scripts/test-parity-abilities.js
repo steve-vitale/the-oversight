@@ -97,7 +97,22 @@ function fightStats(Game, vid, mdef, abilities, n, seedBase) {
         `${withAb.mDealt.toFixed(1)} vs ${base.mDealt.toFixed(1)}`);
   check('kit kills at least as often', withAb.vKill >= base.vKill,
         `${withAb.vKill} vs ${base.vKill}`);
-  check('Take Aim fires (patient_aim)', withAb.aimLogs > N * 0.2, `${withAb.aimLogs}/${N} fights`);
+  // TAKE AIM BAR, RECALIBRATED (drift determination 2026-10-30): the old
+  // >20%-of-all-fights bar was calibrated to the pre-2026-10-13 flat-3
+  // initiative (villager first ~50% of rounds). Since blitz-combatstats
+  // (2026-10-13) initiative is speed vs speed: this test's villager
+  // (Luz, villagerSpeed 2) vs a default-speed-3 bulldozer wins R1 only
+  // 1/8 of rounds, and ~47% of fights evade outright (0 rounds, aiming
+  // impossible). Take Aim also gates on full HP + monster >50% HP, so it
+  // can only fire on a villager-first R1. Expected rate is therefore
+  // ~9–12% of CONTACT fights (observed 6/64), and the old >20%-of-120
+  // bar is structurally unachievable for this pair (ceiling ~8/120) —
+  // not a patient_aim regression: the 6 aim fights all show the R1
+  // villager-first Take Aim line and the aimed 2.5x follow-through.
+  // Denominator is contact fights, since evade fights have no round 1.
+  const kitContact = N - withAb.evade;
+  check('Take Aim fires (patient_aim)', withAb.aimLogs > kitContact * 0.05,
+        `${withAb.aimLogs}/${N} fights (${kitContact} contact)`);
   check('ambush opening strike fires', withAb.ambushLogs > N * 0.3, `${withAb.ambushLogs}/${N} fights`);
   check('HAYMAKER fires (every 3rd round)', withAb.haymakerLogs > N * 0.4, `${withAb.haymakerLogs}/${N} fights`);
 
@@ -199,15 +214,40 @@ function fightStats(Game, vid, mdef, abilities, n, seedBase) {
       clearLog();
       const landed = Game.tbDamage(ally.key, 20, 'test claws', foe.key, { quiet: true });
       const braceLine = logLines.some(l => /braces/i.test(l));
+      // BRACE MATH, EXACT (drift determination 2026-10-30): tbDamage
+      // applies worn armor FIRST, then the 60% brace. The old band
+      // (6–19, "20 → ~8") assumed an unarmored ally, but since build-armor
+      // (2026-10-29) seeds up to three starting villagers wearing bark
+      // armor, this ally has varmor 12: 20 → gear absorbs 8 → 12 → brace
+      // ×0.4 → 5. The brace itself is exact (12 → 5); the old band was
+      // stale, not the ability. So assert the exact value derived from
+      // the observed absorb, which tracks any future armor change and
+      // still fails if the brace ratio moves. In STRIP mode the brace is
+      // absent, so the expectation is the armor-only value.
+      let absorb = 0;
+      const absorbLine = logLines.find(l => /absorbs (\d+)/.test(l));
+      if (absorbLine) absorb = parseInt(/absorbs (\d+)/.exec(absorbLine)[1], 10);
+      const expected = STRIP ? (20 - absorb) : Math.round((20 - absorb) * 0.4);
       check('tactical unbreakable brace fires', STRIP ? !braceLine : braceLine,
-        'landed=' + landed + ' (20 → ~8 expected)');
-      check('tactical unbreakable reduces the hit', STRIP ? landed === 20 : landed < 20 && landed >= 6,
-        'landed=' + landed);
+        'landed=' + landed + ' (20 → ' + expected + ' expected)');
+      check('tactical unbreakable reduces the hit', landed === expected,
+        'landed=' + landed + ' absorb=' + absorb + ' expected=' + expected);
       // HAYMAKER: run real rounds; every 3rd villager strike should HAYMAKER
       // (make the ally brave so they close to melee — helpful AIs harry at range)
       v2.npcAbilities[vid2] = STRIP ? [] : ['haymaker'];
       ally.ai = 'brave';
       ally.hp = 100; // reset
+      // FRESH FOE (drift determination 2026-10-30): this leg measures the
+      // haymaker rhythm, which needs the foe alive for 3 ally swings. Two
+      // later changes broke the old setup: gap-phase2 W1 (2026-10-24)
+      // joins up to 4 nearby allies (party damage ~33/round), and
+      // sim-w4tbkill-a phase B (2026-10-28) enters world monsters at
+      // their wounded world HP — here 55/81, dead in 2 rounds before
+      // swing 3. Restoring the foe to full HP (the pre-world-HP
+      // assumption; world-HP honoring has its own proof elsewhere) lets
+      // the rhythm show: 81 → ~48 → ~15 → 3rd swing HAYMAKERs in round 3.
+      // The haymaker mechanism itself is proven working, not bypassed.
+      foe.hp = foe.maxHp;
       clearLog();
       let rounds = 0;
       try {
