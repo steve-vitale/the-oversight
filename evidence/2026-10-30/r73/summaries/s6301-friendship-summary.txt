@@ -1,0 +1,352 @@
+# SURFACE+SEEDED — seed 6301 (141d, 6 alive)
+
+npcPairs=106 deep2=28 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=252 closeReadsServed=43 grievanceServes=27 othersSteered=28
+COND-TP: firstDeep2Day=25 lateClose=171 lateTP=136 lateNull=0 condRate=79.5% pooledTP=137/190 pooledRate=72.1% grievReadsByWhy={"grievance":0,"vgrievance":35}
+FUNNEL (natural): convos=414 subject=346 offered=296 picked=224 classes={"subject-no-offer":50,"offered-not-picked":72,"no-subject-no-ans":68,"picked-others":224}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=50 rate=12.1% offered=296 mainOffered=1 subjectOffered=295 picked=224 latePicks=93 latePicksMain=1 latePicksSubject=92
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Gleb / Ravi — "Marina talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Marina / Amina — "that stray dog — the one that bit two people — lets Somchai touch it."
+REOFFER: offers=297 picks=239 latePicks=92 missedChangedNotOffered=26
+WRAPSERVE: convos=35 matcherHits=27 matcherServes=27 classes={"grievance-line":27,"deflection":0,"other":8}
+FUNNEL-PROBE (subject-no-offer turns): turns=141 menuProblem=119 pickProblem=22
+INVITE (wrap, carried from r63): lure={"n":1,"accepts":1,"acceptRate":1,"vetoes":{},"chanceMin":45,"chanceMax":45,"chanceMean":45} party={"n":25,"accepts":13,"acceptRate":0.52,"vetoes":{},"chanceMin":19.799999999999997,"chanceMax":85.8,"chanceMean":49.1} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=17
+FAVOR (r65): funnel={"offers":54,"forageOffers":19,"otherFavorOffers":35,"accepts":19,"acceptAttempts":19,"waits":21,"starts":11,"startBlocked":16,"forages":9,"forageNodeBarren":11,"forageBarren":6,"talks":9,"delivers":9,"deliverBlocked":0,"completeOutings":0,"keptMatched":4}
+OUTING END STATES: [{"vid":"gen_od02gc4","vidName":"Marina","favorId":"favor-gen_od02gc4-47-14","state":"acknowledged","promisedDay":47,"meetDay":48,"deadline":49,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_mxddqlz","vidName":"Gleb","favorId":"favor-gen_mxddqlz-32-9","state":"asked","promisedDay":32,"meetDay":33,"deadline":34,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_trrhfm3","vidName":"Ella","favorId":"favor-gen_trrhfm3-64-20","state":"moot","promisedDay":64,"meetDay":65,"deadline":66,"promiseKept":true,"startedDay":66,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"somchai_prasert","vidName":"Somchai","favorId":"favor-somchai_prasert-46-13","state":"acknowledged","promisedDay":46,"meetDay":47,"deadline":48,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d10: Marina kind=forage_help favorId=favor-gen_od02gc4-10-1 task=forage with Marina tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: Gleb kind=forage_help favorId=favor-gen_mxddqlz-11-2 task=forage with Gleb tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Stan kind=food_share favorId=favor-stan_kowalski-12-3 task=share food with Stan — they're going hungry
+  FAVOR-OFFER d14: Ella kind=sick_help favorId=favor-gen_trrhfm3-14-4 task=help Ella with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d14: Tashi kind=heal_help favorId=favor-tashi_sherpa-14-5 task=help Tashi with their injury
+  FAVOR-OFFER d20: Gleb kind=forage_help favorId=favor-gen_mxddqlz-20-6 task=forage with Gleb tomorrow to rebuild the pantry
+  FAVOR-OFFER d23: Tashi kind=heal_help favorId=favor-tashi_sherpa-23-7 task=help Tashi with their injury
+  FAVOR-OFFER d30: Marina kind=forage_help favorId=favor-gen_od02gc4-30-8 task=forage with Marina tomorrow to rebuild the pantry
+  FAVOR-OFFER d32: Gleb kind=forage_help favorId=favor-gen_mxddqlz-32-9 task=forage with Gleb tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Ella kind=food_share favorId=favor-gen_trrhfm3-34-10 task=share food with Ella — they're running on empty
+  FAVOR-OFFER d35: Amina kind=forage_help favorId=favor-amina_diallo-35-11 task=forage with Amina tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Marina kind=food_share favorId=favor-gen_od02gc4-37-12 task=share food with Marina — they're running on empty
+  FAVOR-OFFER d46: Somchai kind=forage_help favorId=favor-somchai_prasert-46-13 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d47: Marina kind=forage_help favorId=favor-gen_od02gc4-47-14 task=forage with Marina tomorrow to rebuild the pantry
+  FAVOR-OFFER d47: Ella kind=food_share favorId=favor-gen_trrhfm3-47-15 task=share food with Ella — they're going hungry
+  FAVOR-OFFER d50: Ella kind=food_share favorId=favor-gen_trrhfm3-50-16 task=share food with Ella — they're going hungry
+  FAVOR-OFFER d54: Ella kind=heal_help favorId=favor-gen_trrhfm3-54-17 task=help Ella with their injury
+  FAVOR-OFFER d56: Amina kind=forage_help favorId=favor-amina_diallo-56-18 task=forage with Amina tomorrow to rebuild the pantry
+  FAVOR-OFFER d60: Ella kind=sick_help favorId=favor-gen_trrhfm3-60-19 task=help Ella with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d64: Ella kind=forage_help favorId=favor-gen_trrhfm3-64-20 task=forage with Ella tomorrow to rebuild the pantry
+  FAVOR-OFFER d75: Jesse kind=forage_help favorId=favor-jesse_cortez-75-21 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d77: Amina kind=forage_help favorId=favor-amina_diallo-77-22 task=forage with Amina tomorrow to rebuild the pantry
+  FAVOR-OFFER d77: Ravi kind=food_share favorId=favor-app_mgpsphu2499-77-23 task=share food with Ravi — they're past hungry
+  FAVOR-OFFER d80: Manuel kind=heal_help favorId=favor-app_mgpspiga527-79-24 task=help Manuel with their injury
+  FAVOR-OFFER d84: Jesse kind=forage_help favorId=favor-jesse_cortez-84-25 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d87: Jesse kind=forage_help favorId=favor-jesse_cortez-87-26 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d90: Jesse kind=forage_help favorId=favor-jesse_cortez-90-28 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Amina kind=sick_help favorId=favor-amina_diallo-89-27 task=help Amina with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d95: Jesse kind=forage_help favorId=favor-jesse_cortez-95-29 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Jesse kind=forage_help favorId=favor-jesse_cortez-98-30 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d103: Jesse kind=food_share favorId=favor-jesse_cortez-103-31 task=share food with Jesse — they're going hungry
+  FAVOR-OFFER d104: Amina kind=forage_help favorId=favor-amina_diallo-104-32 task=forage with Amina tomorrow to rebuild the pantry
+  FAVOR-OFFER d105: Ravi kind=water_haul favorId=favor-app_mgpsphu2499-105-33 task=bring four liters home from the creek with Ravi; set out at dawn
+  FAVOR-OFFER d106: Amina kind=food_share favorId=favor-amina_diallo-106-34 task=share food with Amina — they're going hungry
+  FAVOR-OFFER d108: Jesse kind=water_haul favorId=favor-jesse_cortez-107-35 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d109: Amina kind=water_haul favorId=favor-amina_diallo-109-36 task=bring four liters home from the creek with Amina; set out at dawn
+  FAVOR-OFFER d113: Manuel kind=water_haul favorId=favor-app_mgpspiga527-113-37 task=bring four liters home from the creek with Manuel; set out at dawn
+  FAVOR-OFFER d115: Amina kind=water_haul favorId=favor-amina_diallo-115-38 task=bring four liters home from the creek with Amina; set out at dawn
+  FAVOR-OFFER d118: Amina kind=water_haul favorId=favor-amina_diallo-118-39 task=bring four liters home from the creek with Amina; set out at dawn
+  FAVOR-OFFER d119: Manuel kind=forage_help favorId=favor-app_mgpspiga527-119-40 task=forage with Manuel tomorrow to rebuild the pantry
+  FAVOR-OFFER d122: Jesse kind=food_share favorId=favor-jesse_cortez-122-42 task=share food with Jesse — they're going hungry
+  FAVOR-OFFER d122: Amina kind=food_share favorId=favor-amina_diallo-122-43 task=share food with Amina — they're going hungry
+  FAVOR-OFFER d123: Ravi kind=food_share favorId=favor-app_mgpsphu2499-122-41 task=share food with Ravi — they're going hungry
+  FAVOR-OFFER d125: Jesse kind=water_haul favorId=favor-jesse_cortez-125-44 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d127: Murilo kind=water_haul favorId=favor-visjoin_110-127-45 task=bring four liters home from the creek with Murilo; set out at dawn
+  FAVOR-OFFER d128: Jesse kind=water_haul favorId=favor-jesse_cortez-128-47 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d128: Amina kind=food_share favorId=favor-amina_diallo-128-48 task=share food with Amina — they're going hungry
+  FAVOR-OFFER d129: Manuel kind=food_share favorId=favor-app_mgpspiga527-128-46 task=share food with Manuel — they're going hungry
+  FAVOR-OFFER d131: Ravi kind=water_haul favorId=favor-app_mgpsphu2499-131-49 task=bring four liters home from the creek with Ravi; set out at dawn
+  FAVOR-OFFER d132: Jesse kind=water_haul favorId=favor-jesse_cortez-132-51 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d134: Amina kind=water_haul favorId=favor-amina_diallo-132-50 task=bring four liters home from the creek with Amina; set out at dawn
+  FAVOR-OFFER d134: Manuel kind=water_haul favorId=favor-app_mgpspiga527-135-52 task=bring four liters home from the creek with Manuel; set out at dawn
+  FAVOR-OFFER d135: Ravi kind=water_haul favorId=favor-app_mgpsphu2499-135-53 task=bring four liters home from the creek with Ravi; set out at dawn
+  FAVOR-OFFER d141: Amina kind=food_share favorId=favor-amina_diallo-141-54 task=share food with Amina — they're going hungry
+  FAVOR-ACCEPT d10: Marina favorId=favor-gen_od02gc4-10-1 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d11: Gleb favorId=favor-gen_mxddqlz-11-2 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d20: Gleb favorId=favor-gen_mxddqlz-20-6 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d30: Marina favorId=favor-gen_od02gc4-30-8 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d32: Gleb favorId=favor-gen_mxddqlz-32-9 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d35: Amina favorId=favor-amina_diallo-35-11 accepted=true state=promised meetDay=36
+  FAVOR-ACCEPT d46: Somchai favorId=favor-somchai_prasert-46-13 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d47: Marina favorId=favor-gen_od02gc4-47-14 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d56: Amina favorId=favor-amina_diallo-56-18 accepted=true state=promised meetDay=57
+  FAVOR-ACCEPT d64: Ella favorId=favor-gen_trrhfm3-64-20 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d75: Jesse favorId=favor-jesse_cortez-75-21 accepted=true state=promised meetDay=76
+  FAVOR-ACCEPT d77: Amina favorId=favor-amina_diallo-77-22 accepted=true state=promised meetDay=78
+  FAVOR-ACCEPT d84: Jesse favorId=favor-jesse_cortez-84-25 accepted=true state=promised meetDay=85
+  FAVOR-ACCEPT d87: Jesse favorId=favor-jesse_cortez-87-26 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d90: Jesse favorId=favor-jesse_cortez-90-28 accepted=true state=promised meetDay=91
+  FAVOR-ACCEPT d95: Jesse favorId=favor-jesse_cortez-95-29 accepted=true state=promised meetDay=96
+  FAVOR-ACCEPT d98: Jesse favorId=favor-jesse_cortez-98-30 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d104: Amina favorId=favor-amina_diallo-104-32 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d119: Manuel favorId=favor-app_mgpspiga527-119-40 accepted=true state=promised meetDay=120
+  INVITE-DEC d6 lure: Hector -> Daniyar chance=45 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":0,"affinity":1} reasons=[]
+  INVITE-DEC d8 party: Regina -> Stan chance=38.2 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"grieving","fear":12,"trust":33,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 33","grieving mood (-10)"]
+  INVITE-DEC d8 party: Regina -> Atlas chance=41 accept=true veto=- inputs={"temp":"mischievous","goal":"remember","mood":"grieving","fear":12,"trust":40,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 40","grieving mood (-10)"]
+  INVITE-DEC d10 party: Regina -> Tashi chance=48.6 accept=false veto=- inputs={"temp":"steady","goal":"heal","mood":"steady","fear":4,"trust":34,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 34"]
+  INVITE-DEC d11 party: Regina -> Tashi chance=51 accept=false veto=- inputs={"temp":"steady","goal":"heal","mood":"steady","fear":12,"trust":40,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 40"]
+  INVITE-DEC d12 party: Regina -> Tashi chance=51.400000000000006 accept=true veto=- inputs={"temp":"steady","goal":"heal","mood":"steady","fear":4,"trust":41,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 41"]
+  INVITE-DEC d14 party: Atlas -> Ella chance=31.400000000000006 accept=false veto=- inputs={"temp":"fidgety","goal":"record","mood":"grieving","fear":51,"trust":66,"bond":{"v":16,"depth":0},"partySize":2} reasons=["trust 66","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d14 party: Atlas -> Gleb chance=19.799999999999997 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"grieving","fear":51,"trust":37,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 37","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Atlas -> Ella chance=33 accept=true veto=- inputs={"temp":"fidgety","goal":"record","mood":"grieving","fear":27,"trust":70,"bond":{"v":18,"depth":0},"partySize":2} reasons=["trust 70","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Atlas -> Marina chance=47.4 accept=false veto=- inputs={"temp":"cautious","goal":"feed","mood":"grieving","fear":27,"trust":31,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 31","a big party is safer (+5)","cautious temperament (-10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d17 party: Atlas -> Jesse chance=44.8 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"steady","fear":12,"trust":62,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 62","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d18 party: Atlas -> Jesse chance=45.599999999999994 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"steady","fear":12,"trust":64,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 64","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d18 party: Atlas -> Gleb chance=36 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":12,"trust":40,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d19 party: Atlas -> Marina chance=60.6 accept=true veto=- inputs={"temp":"cautious","goal":"feed","mood":"steady","fear":4,"trust":39,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 39","a big party is safer (+5)","cautious temperament (-10)","feed goal (+15)"]
+  INVITE-DEC d26 party: Atlas -> Gleb chance=29.6 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"grieving","fear":36,"trust":49,"bond":{"v":23,"depth":0},"partySize":3} reasons=["trust 49","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Atlas -> Nina chance=74.8 accept=true veto=- inputs={"temp":"dry","goal":"family","mood":"cheerful","fear":6,"trust":62,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 62","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d34 party: Stan -> Jesse chance=45.599999999999994 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"grieving","fear":4,"trust":89,"bond":{"v":11,"depth":0},"partySize":4} reasons=["trust 89","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d35 party: Stan -> Amina chance=65.4 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"steady","fear":4,"trust":26,"bond":null,"partySize":4} reasons=["trust 26","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d39 party: Stan -> Ravi chance=58.599999999999994 accept=true veto=- inputs={"temp":"bold","goal":"family","mood":"grieving","fear":29,"trust":34,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 34","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Marina -> Jesse chance=46.400000000000006 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"grieving","fear":13,"trust":91,"bond":{"v":21,"depth":0},"partySize":4} reasons=["trust 91","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d48 party: Marina -> Jesse chance=56.400000000000006 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"steady","fear":0,"trust":91,"bond":{"v":23,"depth":0},"partySize":4} reasons=["trust 91","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d51 party: Marina -> Somchai chance=85.8 accept=true veto=- inputs={"temp":"restless","goal":"belong","mood":"steady","fear":0,"trust":52,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 52","a big party is safer (+5)","restless temperament (+10)","belong goal (+15)"]
+  INVITE-DEC d67 party: Ella -> Jesse chance=56 accept=false veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"grieving","fear":0,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d68 party: Ella -> Jesse chance=56 accept=true veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"grieving","fear":4,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d82 party: Ella -> Manuel chance=40.4 accept=true veto=- inputs={"temp":"sardonic","goal":"peace","mood":"grieving","fear":4,"trust":26,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 26","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d137 party: Somchai -> Murilo chance=64 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":47,"trust":85,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 85","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":22,"v":42,"depth":2},{"day":23,"v":42,"depth":2},{"day":24,"v":46,"depth":2},{"day":25,"v":50,"depth":3},{"day":26,"v":51,"depth":3},{"day":27,"v":55,"depth":3},{"day":28,"v":59,"depth":3},{"day":29,"v":59,"depth":3},{"day":30,"v":63,"depth":3},{"day":31,"v":67,"depth":3},{"day":32,"v":71,"depth":3},{"day":33,"v":75,"depth":3},{"day":33,"v":75,"depth":3},{"day":34,"v":79,"depth":3},{"day":35,"v":83,"depth":3}] class=rise
+GOSSIP: totalPicks=135 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=40 31-60=44 61-90=47 91-120=52 121+=41 naturalPicks=224 seededPicks=28 gossipPicks=135
+SEEDED: {"pair":{"a":"gen_od02gc4","b":"gen_trrhfm3","aName":"Marina","bName":"Ella"},"day":21,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":22,"v":42,"depth":2},{"day":23,"v":42,"depth":2},{"day":24,"v":46,"depth":2},{"day":25,"v":50,"depth":3},{"day":26,"v":51,"depth":3},{"day":27,"v":55,"depth":3},{"day":28,"v":59,"depth":3},{"day":29,"v":59,"depth":3},{"day":30,"v":63,"depth":3},{"day":31,"v":67,"depth":3},{"day":32,"v":71,"depth":3},{"day":33,"v":75,"depth":3},{"day":33,"v":75,"depth":3},{"day":34,"v":79,"depth":3},{"day":35,"v":83,"depth":3}],"crackTraceClass":"rise","vAt7":50,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":22,"why":"vgrievance"},"serveWithin30":true,"serves":35,"servesAll":[{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Gleb <> Ella — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d30: Ella <> Nina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Ella <> Stan — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d25: Ella <> Tashi — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d30: Ella <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Atlas <> Marina — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d25: Marina <> Ella — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Atlas <> Ella — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d70: Jesse <> Nina — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d50: Ella <> Somchai — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d90: Jesse <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Amina <> Ella — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Amina <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Ravi <> Ella — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Jesse <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Ella <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Amina <> Somchai — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d80: Nina <> Somchai — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d115: Ravi <> Jesse — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d80: Nina <> Vasyl — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d95: Ravi <> Somchai — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d100: Amina <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Amina <> Ravi — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d100: Fernando <> Jesse — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d135: Manuel <> Vasyl — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d120: Manuel <> Jesse — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d135: Jesse <> Murilo — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d140: Manuel <> Ella — maxDepth 2, final 2 (v=55), dropped 0
+  CLOSE-READ d14: Ella about Gleb — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d14: Gleb about Ella — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Ella about Gleb — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Ella about Gleb — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Tashi about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Jesse about Ella — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Ella about Gleb — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Jesse about Ella — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Ella about Marina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Tashi about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Ella about Marina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Marina about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Stan about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Stan about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Jesse about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Ella about Marina — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d23: Tashi about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Jesse about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Stan about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Ella about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Gleb about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Ella about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Nina about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Stan about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Jesse about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Ella about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Gleb about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Jesse about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Nina about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Gleb about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Gleb about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Ella about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Ella about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Ella about Marina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Amina about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Jesse about Ella — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Amina about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Amina about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Ravi about Ella — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Amina about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Amina about Ella — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Somchai about Ella — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ravi about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Amina about Ella — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Amina about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Somchai about Ella — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Amina about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Ravi about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Ravi about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Ella about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Somchai about Ella — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Amina about Somchai — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Jesse about Nina — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Jesse about Nina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Amina about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d73: Amina about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Jesse about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Amina about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Jesse about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Nina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Jesse about Nina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Jesse about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Amina about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d84: Jesse about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Jesse about Amina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Amina about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Jesse about Amina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Amina about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Jesse about Amina — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Jesse about Amina — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Amina about Jesse — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Jesse about Amina — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Amina about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Ravi about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Amina about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Jesse about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Jesse about Amina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Jesse about Somchai — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Amina about Jesse — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Jesse about Somchai — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Manuel about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Manuel about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d107: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Manuel about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Manuel about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Ravi about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Manuel about Jesse — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Manuel about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Manuel about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Murilo about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Manuel about Jesse — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Manuel about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Manuel about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Manuel about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Jesse about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ravi about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Jesse about Amina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ravi about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Murilo about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Jesse about Amina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Ravi about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Amina about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d22: Marina about Ella (why=vgrievance)
+  GRIEV-READ d23: Marina about Ella (why=vgrievance)
+  GRIEV-READ d24: Marina about Ella (why=vgrievance)
+  GRIEV-READ d25: Marina about Ella (why=vgrievance)
+  GRIEV-READ d25: Marina about Ella (why=vgrievance)
+  GRIEV-READ d26: Marina about Ella (why=vgrievance)
+  KNACK d11 Tashi: "that stray dog — the one that bit two people — lets Stan touch it."
+  KNACK d22 Ella: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Stan touch it. Let's move."
+  KNACK d23 Gleb: "Marina talks to the garden. The garden listens. I've seen it."
+  KNACK d28 Nina: "cuts close faster when Jesse wraps them. Don't ask me how."
+  KNACK d37 Ravi: "Marina talks to the garden. The garden listens. I've seen it."
+  KNACK d37 Jesse: "cuts close faster when Ella wraps them. Don't ask me how."
+  KNACK d39 Marina: "that stray dog — the one that bit two people — lets Somchai touch it."
+  KNACK d49 Ella: "Nina talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":1,"the wild":2,"combat":1,"a stranger":2,"alien":1,"dehydration":1,"monster":1}

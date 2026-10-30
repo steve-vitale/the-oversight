@@ -1,0 +1,130 @@
+# SURFACE+SEEDED — seed 6302 (45d, 3 alive)
+
+npcPairs=60 deep2=5 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=81 closeReadsServed=15 grievanceServes=10 othersSteered=10
+COND-TP: firstDeep2Day=30 lateClose=25 lateTP=17 lateNull=0 condRate=68.0% pooledTP=21/46 pooledRate=45.7% grievReadsByWhy={"grievance":2,"vgrievance":11}
+FUNNEL (natural): convos=126 subject=123 offered=99 picked=71 classes={"subject-no-offer":24,"offered-not-picked":28,"picked-others":71,"no-subject-no-ans":3}
+FUNNEL-UNSTEERED (r55 strict): convos=126 subjectNoOffer=24 rate=19.0% offered=99 mainOffered=2 subjectOffered=97 picked=71 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=84 picks=70 latePicks=0 missedChangedNotOffered=4
+WRAPSERVE: convos=13 matcherHits=10 matcherServes=10 classes={"grievance-line":10,"deflection":1,"other":2}
+FUNNEL-PROBE (subject-no-offer turns): turns=63 menuProblem=28 pickProblem=35
+INVITE (wrap, carried from r63): lure={"n":9,"accepts":2,"acceptRate":0.2222222222222222,"vetoes":{"sick":5},"chanceMin":0,"chanceMax":69,"chanceMean":28.4} party={"n":12,"accepts":8,"acceptRate":0.6666666666666666,"vetoes":{},"chanceMin":39.2,"chanceMax":71,"chanceMean":55.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+FAVOR (r65): funnel={"offers":24,"forageOffers":3,"otherFavorOffers":21,"accepts":3,"acceptAttempts":3,"waits":5,"starts":1,"startBlocked":4,"forages":1,"forageNodeBarren":0,"forageBarren":0,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":0,"keptMatched":2}
+OUTING END STATES: [{"vid":"gen_9scgpef","vidName":"Harper","favorId":"favor-gen_9scgpef-8-1","state":"broken","promisedDay":8,"meetDay":9,"deadline":10,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"theo_lindqvist","vidName":"Theo","favorId":"favor-theo_lindqvist-14-2","state":"acknowledged","promisedDay":14,"meetDay":15,"deadline":16,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d8: Harper kind=forage_help favorId=favor-gen_9scgpef-8-1 task=forage with Harper tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Theo kind=forage_help favorId=favor-theo_lindqvist-14-2 task=forage with Theo tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Sean kind=heal_help favorId=favor-gen_9l5b0vf-14-3 task=help Sean with their injury
+  FAVOR-OFFER d17: Kyeremaa kind=food_share favorId=favor-gen_8dqy4xh-17-4 task=share food with Kyeremaa — they're going hungry
+  FAVOR-OFFER d23: Aria kind=food_share favorId=favor-gen_jxrpy16-23-5 task=share food with Aria — they're going hungry
+  FAVOR-OFFER d23: Elif kind=heal_help favorId=favor-elif_demir-23-6 task=help Elif with their injury
+  FAVOR-OFFER d24: Kyeremaa kind=sick_help favorId=favor-gen_8dqy4xh-24-7 task=help Kyeremaa with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d25: Jesse kind=heal_help favorId=favor-jesse_cortez-25-8 task=help Jesse with their injury
+  FAVOR-OFFER d25: Elif kind=heal_help favorId=favor-elif_demir-25-9 task=help Elif with their injury
+  FAVOR-OFFER d26: Jorge kind=sick_help favorId=favor-jorge_silva-26-10 task=help Jorge with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d27: Kyeremaa kind=sick_help favorId=favor-gen_8dqy4xh-27-11 task=help Kyeremaa with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d27: Aria kind=food_share favorId=favor-gen_jxrpy16-27-12 task=share food with Aria — they're past hungry
+  FAVOR-OFFER d30: Kyeremaa kind=food_share favorId=favor-gen_8dqy4xh-30-13 task=share food with Kyeremaa — they're running on empty
+  FAVOR-OFFER d30: Jorge kind=food_share favorId=favor-jorge_silva-30-14 task=share food with Jorge — they're running on empty
+  FAVOR-OFFER d30: Jorge kind=food_share favorId=favor-jorge_silva-30-15 task=share food with Jorge — they're running on empty
+  FAVOR-OFFER d33: Kyeremaa kind=sick_help favorId=favor-gen_8dqy4xh-33-16 task=help Kyeremaa with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d36: Aria kind=sick_help favorId=favor-gen_jxrpy16-36-17 task=help Aria with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d38: Elif kind=heal_help favorId=favor-elif_demir-38-18 task=help Elif with their injury
+  FAVOR-OFFER d39: Ella kind=food_share favorId=favor-ella_johnson-39-20 task=share food with Ella — they're past hungry
+  FAVOR-OFFER d39: Elif kind=heal_help favorId=favor-elif_demir-39-19 task=help Elif with their injury
+  FAVOR-OFFER d40: Aria kind=sick_help favorId=favor-gen_jxrpy16-40-22 task=help Aria with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d40: Jovan kind=forage_help favorId=favor-jovan_milic-40-21 task=forage with Jovan tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Jovan kind=food_share favorId=favor-jovan_milic-42-23 task=share food with Jovan — they're running on empty
+  FAVOR-OFFER d44: Aria kind=food_share favorId=favor-gen_jxrpy16-44-24 task=share food with Aria — they're past hungry
+  FAVOR-ACCEPT d8: Harper favorId=favor-gen_9scgpef-8-1 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d14: Theo favorId=favor-theo_lindqvist-14-2 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d40: Jovan favorId=favor-jovan_milic-40-21 accepted=true state=promised meetDay=41
+  INVITE-DEC d6 lure: A woman, maybe 50s, with deep-set eyes -> A man, maybe 20s chance=0 accept=false veto=sick inputs={"temp":"restless","goal":"protect","mood":"steady","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d7 lure: Elif -> A man, maybe 20s chance=0 accept=false veto=sick inputs={"temp":"restless","goal":"protect","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d8 party: Vy -> Aria chance=51.6 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"hungry","fear":19,"trust":54,"bond":{"v":7,"depth":0},"partySize":0} reasons=["trust 54","sick (-20)","warm temperament (+15)"]
+  INVITE-DEC d8 party: Vy -> Elif chance=42.4 accept=false veto=- inputs={"temp":"prickly","goal":"feed","mood":"steady","fear":19,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31","prickly temperament (-20)","feed goal (+15)"]
+  INVITE-DEC d8 lure: Elif -> Theo chance=0 accept=false veto=sick inputs={"temp":"restless","goal":"protect","mood":"steady","fear":11} reasons=["sick — stays by the fire"]
+  INVITE-DEC d9 party: Vy -> Jovan chance=66 accept=false veto=- inputs={"temp":"bold","goal":"heal","mood":"steady","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 40","bold temperament (+15)"]
+  INVITE-DEC d9 party: Vy -> Ella chance=46.2 accept=false veto=- inputs={"temp":"dry","goal":"remember","mood":"steady","fear":4,"trust":28,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 28"]
+  INVITE-DEC d9 lure: Elif -> Theo chance=0 accept=false veto=sick inputs={"temp":"restless","goal":"protect","mood":"hungry","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d10 party: Vy -> Kyeremaa chance=50.4 accept=true veto=- inputs={"temp":"cautious","goal":"belong","mood":"steady","fear":0,"trust":26,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 26","cautious temperament (-10)","belong goal (+15)"]
+  INVITE-DEC d10 party: Vy -> Jorge chance=45.8 accept=true veto=- inputs={"temp":"steady","goal":"remember","mood":"steady","fear":0,"trust":27,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 27"]
+  INVITE-DEC d10 lure: Elif -> Theo chance=0 accept=false veto=sick inputs={"temp":"restless","goal":"protect","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d15 party: Vy -> Ella chance=66 accept=true veto=- inputs={"temp":"dry","goal":"remember","mood":"cheerful","fear":4,"trust":40,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d31 lure: Kyeremaa -> Aria chance=69 accept=false veto=- inputs={"temp":"warm","goal":"peace","mood":"hungry","fear":4,"affinity":34} reasons=["relationship with inviter (+9)","warm temperament (+15)"]
+  INVITE-DEC d32 party: Vy -> Jesse chance=56 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":4,"trust":90,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d32 lure: Kyeremaa -> Aria chance=69 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"hungry","fear":0,"affinity":36} reasons=["relationship with inviter (+9)","warm temperament (+15)"]
+  INVITE-DEC d33 party: Vy -> Jovan chance=61 accept=true veto=- inputs={"temp":"bold","goal":"heal","mood":"grieving","fear":13,"trust":40,"bond":{"v":10,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d34 lure: Kyeremaa -> Aria chance=59 accept=false veto=- inputs={"temp":"warm","goal":"peace","mood":"grieving","fear":4,"affinity":36} reasons=["relationship with inviter (+9)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d35 lure: Kyeremaa -> Aria chance=59 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"grieving","fear":0,"affinity":36} reasons=["relationship with inviter (+9)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d37 party: Vy -> Theo chance=71 accept=false veto=- inputs={"temp":"restless","goal":"protect","mood":"grieving","fear":34,"trust":40,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","restless temperament (+10)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d38 party: Vy -> Theo chance=71 accept=true veto=- inputs={"temp":"restless","goal":"protect","mood":"grieving","fear":2,"trust":40,"bond":{"v":24,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","restless temperament (+10)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d43 party: Vy -> Yasmin chance=39.2 accept=true veto=- inputs={"temp":"anxious","goal":"record","mood":"grieving","fear":4,"trust":23,"bond":null,"partySize":3} reasons=["trust 23","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":27,"v":42,"depth":3},{"day":28,"v":46,"depth":3},{"day":29,"v":50,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":64,"depth":3},{"day":35,"v":68,"depth":3},{"day":35,"v":68,"depth":3},{"day":36,"v":72,"depth":3},{"day":37,"v":76,"depth":3},{"day":38,"v":76,"depth":3},{"day":39,"v":76,"depth":3},{"day":40,"v":76,"depth":3}] class=rise
+GOSSIP: totalPicks=67 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=41 31-60=30 61-90=0 91-120=0 121+=0 naturalPicks=71 seededPicks=10 gossipPicks=67
+SEEDED: {"pair":{"a":"gen_8dqy4xh","b":"gen_jxrpy16","aName":"Kyeremaa","bName":"Aria"},"day":26,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":27,"v":42,"depth":3},{"day":28,"v":46,"depth":3},{"day":29,"v":50,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":64,"depth":3},{"day":35,"v":68,"depth":3},{"day":35,"v":68,"depth":3},{"day":36,"v":72,"depth":3},{"day":37,"v":76,"depth":3},{"day":38,"v":76,"depth":3},{"day":39,"v":76,"depth":3},{"day":40,"v":76,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":27,"why":"vgrievance"},"serveWithin30":true,"serves":11,"servesAll":[{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Kyeremaa <> Aria — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d30: Aria <> Jorge — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d35: Ella <> Aria — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d30: Aria <> Jesse — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d40: Aria <> Theo — maxDepth 3, final 3 (v=86), dropped 0
+  CLOSE-READ d13: Aria about Kyeremaa — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Aria about Kyeremaa — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Kyeremaa about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Aria about Kyeremaa — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Kyeremaa about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Aria about Kyeremaa — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Sean about Rosa — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Aria about Kyeremaa — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Jorge about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Kyeremaa about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Jorge about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Kyeremaa about Aria — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Jorge about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Jesse about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Aria about Kyeremaa — live depth=3 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Jesse about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Ella about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Jorge about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Jesse about Aria — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Aria about Kyeremaa — live depth=3 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Jorge about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Jorge about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Ella about Aria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Jorge about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Jesse about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Ella about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Ella about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Aria about Kyeremaa — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Jesse about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Aria about Theo — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Ella about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Elif about Aria — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Theo about Aria — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Aria about Theo — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Ella about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Jovan about Aria — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Aria about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Jovan about Aria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Aria about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Jovan about Aria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Aria about Theo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Jovan about Aria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Jovan about Aria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Jovan about Aria — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Aria about Theo — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Aria about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d12: Theo about Kyeremaa (why=grievance)
+  GRIEV-READ d12: Kyeremaa about Theo (why=grievance)
+  GRIEV-READ d27: Kyeremaa about Aria (why=vgrievance)
+  GRIEV-READ d28: Kyeremaa about Aria (why=vgrievance)
+  GRIEV-READ d29: Kyeremaa about Aria (why=vgrievance)
+  GRIEV-READ d30: Kyeremaa about Aria (why=vgrievance)
+  KNACK d15 Sean: "Jesse ate something last month that should've killed them. They're fine."
+  KNACK d16 Jovan: "Jorge found a lost knife by smell last week. By SMELL."
+  KNACK d21 Jorge: "that stray dog — the one that bit two people — lets Ella touch it."
+  KNACK d25 Jesse: "You want to know about that? Okay." "Aria sees in the dark. Not well — but better than you. Better than me."
+  KNACK d32 Theo: "Huh. Let me think about that." "Jorge found a lost knife by smell last week. By SMELL. You'd know about that."
+  KNACK d40 Elif: "Aria sees in the dark. Not well — but better than you. Better than me."
+
+deathCauses: {"sickness":5,"The Mountain Lord":1,"starvation":1}

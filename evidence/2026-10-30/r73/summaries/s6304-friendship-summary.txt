@@ -1,0 +1,376 @@
+# SURFACE+SEEDED — seed 6304 (141d, 6 alive)
+
+npcPairs=60 deep2=8 cracks=0 vCracks=0 friendGriev=0 stateGriev=10 stateFriend=1 stateVCrack=0 t2picks=344 closeReadsServed=20 grievanceServes=6 othersSteered=24
+COND-TP: firstDeep2Day=25 lateClose=204 lateTP=158 lateNull=0 condRate=77.5% pooledTP=158/214 pooledRate=73.8% grievReadsByWhy={"grievance":3,"vgrievance":6}
+FUNNEL (natural): convos=414 subject=402 offered=377 picked=320 classes={"no-subject-no-ans":12,"picked-others":320,"subject-no-offer":25,"offered-not-picked":57}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=25 rate=6.0% offered=377 mainOffered=0 subjectOffered=377 picked=320 latePicks=138 latePicksMain=0 latePicksSubject=138
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Ingrid / Daniyar / Meles — "Patricia ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Lucas / Meles — "that stray dog — the one that bit two people — lets Ursula touch it."
+REOFFER: offers=374 picks=327 latePicks=137 missedChangedNotOffered=0
+WRAPSERVE: convos=9 matcherHits=6 matcherServes=6 classes={"grievance-line":6,"deflection":1,"other":2}
+FUNNEL-PROBE (subject-no-offer turns): turns=168 menuProblem=94 pickProblem=74
+INVITE (wrap, carried from r63): lure={"n":9,"accepts":3,"acceptRate":0.3333333333333333,"vetoes":{},"chanceMin":25,"chanceMax":45,"chanceMean":35} party={"n":29,"accepts":14,"acceptRate":0.4827586206896552,"vetoes":{},"chanceMin":20,"chanceMax":85.8,"chanceMean":48.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=11
+FAVOR (r65): funnel={"offers":64,"forageOffers":17,"otherFavorOffers":47,"accepts":16,"acceptAttempts":16,"waits":15,"starts":2,"startBlocked":27,"forages":0,"forageNodeBarren":0,"forageBarren":118,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"keptMatched":3}
+OUTING END STATES: [{"vid":"miguel_santos","vidName":"Miguel","favorId":"favor-miguel_santos-22-13","state":"broken","promisedDay":22,"meetDay":23,"deadline":24,"promiseKept":true,"startedDay":23,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"lucas_brown","vidName":"Lucas","favorId":"favor-lucas_brown-68-32","state":"acknowledged","promisedDay":68,"meetDay":69,"deadline":70,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"ursula_weber","vidName":"Ursula","favorId":"favor-ursula_weber-76-35","state":"broken","promisedDay":76,"meetDay":77,"deadline":78,"promiseKept":true,"startedDay":77,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"visjoin_63","vidName":"Meles","favorId":"favor-visjoin_63-139-64","state":"promised","promisedDay":139,"meetDay":140,"deadline":141,"promiseKept":false,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Addison kind=sick_help favorId=favor-gen_gobrxju-2-1 task=help Addison with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d5: Angelo kind=forage_help favorId=favor-gen_1lx2nya-5-2 task=forage with Angelo tomorrow to rebuild the pantry
+  FAVOR-OFFER d6: Maya kind=sick_help favorId=favor-maya_singh-6-3 task=help Maya with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d11: Addison kind=heal_help favorId=favor-gen_gobrxju-9-4 task=help Addison with their injury
+  FAVOR-OFFER d12: Amel kind=water_haul favorId=favor-gen_td0ubvm-12-5 task=bring four liters home from the creek with Amel; set out at dawn
+  FAVOR-OFFER d13: Angelo kind=water_haul favorId=favor-gen_1lx2nya-13-6 task=bring four liters home from the creek with Angelo; set out at dawn
+  FAVOR-OFFER d14: Miguel kind=water_haul favorId=favor-miguel_santos-14-7 task=bring four liters home from the creek with Miguel; set out at dawn
+  FAVOR-OFFER d15: Theo kind=water_haul favorId=favor-theo_lindqvist-15-8 task=bring four liters home from the creek with Theo; set out at dawn
+  FAVOR-OFFER d17: Miguel kind=food_share favorId=favor-miguel_santos-17-10 task=share food with Miguel — they're running on empty
+  FAVOR-OFFER d19: Angelo kind=food_share favorId=favor-gen_1lx2nya-17-9 task=share food with Angelo — they're going hungry
+  FAVOR-OFFER d21: Nina kind=food_share favorId=favor-nina_petrova-21-11 task=share food with Nina — they're going hungry
+  FAVOR-OFFER d22: Miguel kind=forage_help favorId=favor-miguel_santos-22-13 task=forage with Miguel tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Ingrid kind=heal_help favorId=favor-gen_f1i453f-24-14 task=help Ingrid with their injury
+  FAVOR-OFFER d24: Nina kind=heal_help favorId=favor-nina_petrova-24-15 task=help Nina with their injury
+  FAVOR-OFFER d25: Addison kind=forage_help favorId=favor-gen_gobrxju-25-16 task=forage with Addison tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Lucas kind=food_share favorId=favor-lucas_brown-30-17 task=share food with Lucas — they're past hungry
+  FAVOR-OFFER d32: Ingrid kind=heal_help favorId=favor-gen_f1i453f-32-18 task=help Ingrid with their injury
+  FAVOR-OFFER d35: Ingrid kind=heal_help favorId=favor-gen_f1i453f-35-19 task=help Ingrid with their injury
+  FAVOR-OFFER d37: Addison kind=food_share favorId=favor-gen_gobrxju-37-20 task=share food with Addison — they're running on empty
+  FAVOR-OFFER d43: Addison kind=food_share favorId=favor-gen_gobrxju-43-22 task=share food with Addison — they're going hungry
+  FAVOR-OFFER d44: Lucas kind=food_share favorId=favor-lucas_brown-40-21 task=share food with Lucas — they're running on empty
+  FAVOR-OFFER d50: Addison kind=sick_help favorId=favor-gen_gobrxju-50-23 task=help Addison with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d53: Addison kind=sick_help favorId=favor-gen_gobrxju-53-25 task=help Addison with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d53: Lucas kind=forage_help favorId=favor-lucas_brown-53-26 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d55: Setor kind=sick_help favorId=favor-app_mgpsphjb620-55-27 task=help Setor with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d56: Patricia kind=food_share favorId=favor-visjoin_33-52-24 task=share food with Patricia — they're past hungry
+  FAVOR-OFFER d61: Ursula kind=food_share favorId=favor-ursula_weber-61-28 task=share food with Ursula — they're past hungry
+  FAVOR-OFFER d64: Ursula kind=food_share favorId=favor-ursula_weber-64-29 task=share food with Ursula — they're running on empty
+  FAVOR-OFFER d66: Patricia kind=food_share favorId=favor-visjoin_33-66-30 task=share food with Patricia — they're running on empty
+  FAVOR-OFFER d67: Daniyar kind=food_share favorId=favor-daniyar_askarov-67-31 task=share food with Daniyar — they're going hungry
+  FAVOR-OFFER d68: Lucas kind=forage_help favorId=favor-lucas_brown-68-32 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Ursula kind=food_share favorId=favor-ursula_weber-69-33 task=share food with Ursula — they're going hungry
+  FAVOR-OFFER d71: Daniyar kind=food_share favorId=favor-daniyar_askarov-71-34 task=share food with Daniyar — they're going hungry
+  FAVOR-OFFER d76: Ursula kind=forage_help favorId=favor-ursula_weber-76-35 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d78: Patricia kind=forage_help favorId=favor-visjoin_33-78-36 task=forage with Patricia tomorrow to rebuild the pantry
+  FAVOR-OFFER d81: Daniyar kind=forage_help favorId=favor-daniyar_askarov-81-37 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d84: Daniyar kind=heal_help favorId=favor-daniyar_askarov-84-38 task=help Daniyar with their injury
+  FAVOR-OFFER d89: Meles kind=food_share favorId=favor-visjoin_63-89-39 task=share food with Meles — they're running on empty
+  FAVOR-OFFER d93: Meles kind=forage_help favorId=favor-visjoin_63-93-40 task=forage with Meles tomorrow to rebuild the pantry
+  FAVOR-OFFER d95: Daniyar kind=forage_help favorId=favor-daniyar_askarov-95-41 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Daniyar kind=forage_help favorId=favor-daniyar_askarov-98-42 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Patricia kind=food_share favorId=favor-visjoin_33-98-43 task=share food with Patricia — they're going hungry
+  FAVOR-OFFER d102: Meles kind=forage_help favorId=favor-visjoin_63-102-44 task=forage with Meles tomorrow to rebuild the pantry
+  FAVOR-OFFER d104: Daniyar kind=forage_help favorId=favor-daniyar_askarov-104-45 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Daniyar kind=food_share favorId=favor-daniyar_askarov-106-46 task=share food with Daniyar — they're going hungry
+  FAVOR-OFFER d106: Patricia kind=heal_help favorId=favor-visjoin_33-106-47 task=help Patricia with their injury
+  FAVOR-OFFER d109: Patricia kind=heal_help favorId=favor-visjoin_33-109-48 task=help Patricia with their injury
+  FAVOR-OFFER d110: Daniyar kind=food_share favorId=favor-daniyar_askarov-110-49 task=share food with Daniyar — they're running on empty
+  FAVOR-OFFER d112: Patricia kind=food_share favorId=favor-visjoin_33-112-50 task=share food with Patricia — they're going hungry
+  FAVOR-OFFER d113: Meles kind=forage_help favorId=favor-visjoin_63-113-51 task=forage with Meles tomorrow to rebuild the pantry
+  FAVOR-OFFER d115: Patricia kind=food_share favorId=favor-visjoin_33-115-52 task=share food with Patricia — they're going hungry
+  FAVOR-OFFER d117: Meles kind=forage_help favorId=favor-visjoin_63-117-53 task=forage with Meles tomorrow to rebuild the pantry
+  FAVOR-OFFER d117: Daniyar kind=forage_help favorId=favor-daniyar_askarov-117-54 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d120: Meles kind=food_share favorId=favor-visjoin_63-120-55 task=share food with Meles — they're going hungry
+  FAVOR-OFFER d124: Meles kind=heal_help favorId=favor-visjoin_63-124-57 task=help Meles with their injury
+  FAVOR-OFFER d124: Weidong kind=heal_help favorId=favor-visjoin_122-124-56 task=help Weidong with their injury
+  FAVOR-OFFER d127: Daniyar kind=food_share favorId=favor-daniyar_askarov-127-58 task=share food with Daniyar — they're going hungry
+  FAVOR-OFFER d127: Meles kind=water_haul favorId=favor-visjoin_63-127-59 task=bring four liters home from the creek with Meles; set out at dawn
+  FAVOR-OFFER d131: Meles kind=water_haul favorId=favor-visjoin_63-131-60 task=bring four liters home from the creek with Meles; set out at dawn
+  FAVOR-OFFER d133: Patricia kind=water_haul favorId=favor-visjoin_33-133-61 task=bring four liters home from the creek with Patricia; set out at dawn
+  FAVOR-OFFER d134: Daniyar kind=food_share favorId=favor-daniyar_askarov-134-62 task=share food with Daniyar — they're past hungry
+  FAVOR-OFFER d137: Daniyar kind=water_haul favorId=favor-daniyar_askarov-137-63 task=bring four liters home from the creek with Daniyar; set out at dawn
+  FAVOR-OFFER d139: Meles kind=forage_help favorId=favor-visjoin_63-139-64 task=forage with Meles tomorrow to rebuild the pantry
+  FAVOR-OFFER d140: Daniyar kind=water_haul favorId=favor-daniyar_askarov-140-65 task=bring four liters home from the creek with Daniyar; set out at dawn
+  FAVOR-ACCEPT d5: Angelo favorId=favor-gen_1lx2nya-5-2 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d22: Miguel favorId=favor-miguel_santos-22-13 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d25: Addison favorId=favor-gen_gobrxju-25-16 accepted=true state=promised meetDay=26
+  FAVOR-ACCEPT d53: Lucas favorId=favor-lucas_brown-53-26 accepted=true state=promised meetDay=54
+  FAVOR-ACCEPT d68: Lucas favorId=favor-lucas_brown-68-32 accepted=true state=promised meetDay=69
+  FAVOR-ACCEPT d76: Ursula favorId=favor-ursula_weber-76-35 accepted=true state=promised meetDay=77
+  FAVOR-ACCEPT d78: Patricia favorId=favor-visjoin_33-78-36 accepted=true state=promised meetDay=79
+  FAVOR-ACCEPT d81: Daniyar favorId=favor-daniyar_askarov-81-37 accepted=true state=promised meetDay=82
+  FAVOR-ACCEPT d93: Meles favorId=favor-visjoin_63-93-40 accepted=true state=promised meetDay=94
+  FAVOR-ACCEPT d95: Daniyar favorId=favor-daniyar_askarov-95-41 accepted=true state=promised meetDay=96
+  FAVOR-ACCEPT d98: Daniyar favorId=favor-daniyar_askarov-98-42 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d102: Meles favorId=favor-visjoin_63-102-44 accepted=true state=promised meetDay=103
+  FAVOR-ACCEPT d113: Meles favorId=favor-visjoin_63-113-51 accepted=true state=promised meetDay=114
+  FAVOR-ACCEPT d117: Meles favorId=favor-visjoin_63-117-53 accepted=true state=promised meetDay=118
+  FAVOR-ACCEPT d117: Daniyar favorId=favor-daniyar_askarov-117-54 accepted=true state=promised meetDay=118
+  FAVOR-ACCEPT d139: Meles favorId=favor-visjoin_63-139-64 accepted=true state=promised meetDay=140
+  INVITE-DEC d6 lure: Theo -> Lucas chance=35 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d7 lure: Theo -> Lucas chance=35 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d8 lure: Theo -> Lucas chance=35 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d8 lure: Theo -> Lucas chance=25 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"grieving","fear":25,"affinity":0} reasons=["wants out (-10)","grieving mood (-10)"]
+  INVITE-DEC d9 party: Omar -> Lucas chance=20 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"grieving","fear":53,"trust":25,"bond":null,"partySize":0} reasons=["trust 25","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d9 lure: Theo -> Lucas chance=25 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"grieving","fear":45,"affinity":0} reasons=["wants out (-10)","grieving mood (-10)"]
+  INVITE-DEC d10 party: Omar -> Lucas chance=22.799999999999997 accept=true veto=- inputs={"temp":"steady","goal":"escape","mood":"grieving","fear":33,"trust":32,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 32","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d10 lure: Theo -> Lucas chance=25 accept=true veto=- inputs={"temp":"steady","goal":"escape","mood":"grieving","fear":25,"affinity":0} reasons=["wants out (-10)","grieving mood (-10)"]
+  INVITE-DEC d11 party: Omar -> Addison chance=22.6 accept=false veto=- inputs={"temp":"withdrawn","goal":"legacy","mood":"grieving","fear":13,"trust":44,"bond":{"v":8,"depth":0},"partySize":1} reasons=["trust 44","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d12 lure: Maya -> Miguel chance=45 accept=false veto=- inputs={"temp":"intense","goal":"home","mood":"steady","fear":4,"affinity":1} reasons=[]
+  INVITE-DEC d13 lure: Maya -> Miguel chance=45 accept=true veto=- inputs={"temp":"intense","goal":"home","mood":"steady","fear":4,"affinity":1} reasons=[]
+  INVITE-DEC d14 party: Omar -> Maya chance=85.8 accept=true veto=- inputs={"temp":"bold","goal":"protect","mood":"steady","fear":4,"trust":52,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 52","bold temperament (+15)","protect goal (+15)"]
+  INVITE-DEC d14 party: Omar -> Amel chance=33.400000000000006 accept=false veto=- inputs={"temp":"withdrawn","goal":"joy","mood":"steady","fear":4,"trust":46,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 46","withdrawn temperament (-20)"]
+  INVITE-DEC d15 party: Omar -> Amel chance=34.2 accept=false veto=- inputs={"temp":"withdrawn","goal":"joy","mood":"steady","fear":12,"trust":48,"bond":{"v":14,"depth":0},"partySize":2} reasons=["trust 48","withdrawn temperament (-20)"]
+  INVITE-DEC d15 lure: Lucas -> Miguel chance=45 accept=true veto=- inputs={"temp":"intense","goal":"home","mood":"steady","fear":4,"affinity":0} reasons=[]
+  INVITE-DEC d17 party: Omar -> Theo chance=53.4 accept=true veto=- inputs={"temp":"restless","goal":"understand","mood":"steady","fear":6,"trust":21,"bond":{"v":-2,"depth":0},"partySize":1} reasons=["trust 21","restless temperament (+10)"]
+  INVITE-DEC d18 party: Omar -> Addison chance=38.2 accept=false veto=- inputs={"temp":"withdrawn","goal":"legacy","mood":"steady","fear":12,"trust":58,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 58","withdrawn temperament (-20)"]
+  INVITE-DEC d20 party: Omar -> Addison chance=40.2 accept=false veto=- inputs={"temp":"withdrawn","goal":"legacy","mood":"steady","fear":0,"trust":63,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 63","withdrawn temperament (-20)"]
+  INVITE-DEC d21 party: Omar -> Nina chance=63 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"hungry","fear":4,"trust":70,"bond":{"v":18,"depth":0},"partySize":2} reasons=["trust 70"]
+  INVITE-DEC d22 party: Omar -> Miguel chance=50.8 accept=true veto=- inputs={"temp":"intense","goal":"home","mood":"steady","fear":0,"trust":27,"bond":{"v":-5,"depth":0},"partySize":3} reasons=["trust 27","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Omar -> Addison chance=52 accept=true veto=- inputs={"temp":"withdrawn","goal":"legacy","mood":"grieving","fear":13,"trust":80,"bond":{"v":42,"depth":1},"partySize":3} reasons=["trust 80","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d35 party: Omar -> Setor chance=48.8 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":12,"trust":22,"bond":null,"partySize":3} reasons=["trust 22","a big party is safer (+5)"]
+  INVITE-DEC d35 party: Omar -> Patricia chance=33.4 accept=false veto=- inputs={"temp":"earnest","goal":"escape","mood":"steady","fear":12,"trust":21,"bond":null,"partySize":3} reasons=["trust 21","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d39 party: Omar -> Setor chance=51.6 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":12,"trust":29,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 29","a big party is safer (+5)"]
+  INVITE-DEC d41 party: Omar -> Ursula chance=50 accept=false veto=- inputs={"temp":"gentle","goal":"legacy","mood":"steady","fear":4,"trust":25,"bond":null,"partySize":3} reasons=["trust 25","a big party is safer (+5)"]
+  INVITE-DEC d41 party: Omar -> Setor chance=54.4 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":4,"trust":36,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 36","a big party is safer (+5)"]
+  INVITE-DEC d42 party: Omar -> Farid chance=71 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"cheerful","fear":12,"trust":40,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d42 party: Omar -> Setor chance=66.4 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"cheerful","fear":12,"trust":41,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 41","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d45 party: Omar -> Patricia chance=28.200000000000003 accept=true veto=- inputs={"temp":"earnest","goal":"escape","mood":"grieving","fear":4,"trust":33,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 33","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d55 party: Omar -> Ursula chance=46.8 accept=false veto=- inputs={"temp":"gentle","goal":"legacy","mood":"grieving","fear":34,"trust":42,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 42","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d57 party: Omar -> Ursula chance=37.4 accept=false veto=- inputs={"temp":"gentle","goal":"legacy","mood":"grieving","fear":30,"trust":31,"bond":{"v":14,"depth":0},"partySize":2} reasons=["trust 31","grieving mood (-10)"]
+  INVITE-DEC d58 party: Omar -> Ursula chance=41 accept=true veto=- inputs={"temp":"gentle","goal":"legacy","mood":"grieving","fear":4,"trust":40,"bond":{"v":16,"depth":0},"partySize":2} reasons=["trust 40","grieving mood (-10)"]
+  INVITE-DEC d60 party: Omar -> Daniyar chance=48.4 accept=true veto=- inputs={"temp":"gentle","goal":"survive","mood":"steady","fear":4,"trust":21,"bond":null,"partySize":3} reasons=["trust 21","a big party is safer (+5)"]
+  INVITE-DEC d67 party: Omar -> Meles chance=69.4 accept=true veto=- inputs={"temp":"bold","goal":"family","mood":"steady","fear":4,"trust":36,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 36","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d124 party: Omar -> Weidong chance=61.6 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"cheerful","fear":15,"trust":29,"bond":null,"partySize":4} reasons=["trust 29","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d126 party: Omar -> Weidong chance=56 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)"]
+  INVITE-DEC d127 party: Omar -> Weidong chance=56.400000000000006 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":12,"trust":41,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 41","a big party is safer (+5)"]
+  INVITE-DEC d139 party: Omar -> Rabab chance=73 accept=true veto=- inputs={"temp":"dry","goal":"feed","mood":"steady","fear":12,"trust":45,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 45","a big party is safer (+5)","feed goal (+15)"]
+SEEDED-DAILY: [{"day":25,"v":42,"depth":3},{"day":26,"v":44,"depth":3},{"day":27,"v":48,"depth":3},{"day":28,"v":50,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":54,"depth":3},{"day":32,"v":54,"depth":3},{"day":33,"v":54,"depth":3},{"day":34,"v":54,"depth":3},{"day":35,"v":54,"depth":3},{"day":36,"v":54,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":54,"depth":3}] class=rise
+GOSSIP: totalPicks=188 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=40 31-60=61 61-90=81 91-120=82 121+=56 naturalPicks=320 seededPicks=24 gossipPicks=188
+SEEDED: {"pair":{"a":"gen_gobrxju","b":"nina_petrova","aName":"Addison","bName":"Nina"},"day":24,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":25,"v":42,"depth":3},{"day":26,"v":44,"depth":3},{"day":27,"v":48,"depth":3},{"day":28,"v":50,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":54,"depth":3},{"day":31,"v":54,"depth":3},{"day":32,"v":54,"depth":3},{"day":33,"v":54,"depth":3},{"day":34,"v":54,"depth":3},{"day":35,"v":54,"depth":3},{"day":36,"v":54,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":54,"depth":3}],"crackTraceClass":"rise","vAt7":54,"depthAt7":3,"vDrop":-2,"depthDrop":-1,"crack7":false,"firstServe":{"day":25,"why":"vgrievance"},"serveWithin30":true,"serves":6,"servesAll":[{"day":25,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Ingrid <> Addison — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d25: Addison <> Nina — maxDepth 3, final 3 (v=54), dropped 0
+  FRIEND d35: Addison <> Theo — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d45: Ingrid <> Miguel — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d55: Setor <> Addison — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d75: Daniyar <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Ursula <> Meles — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d135: Daniyar <> Meles — maxDepth 2, final 2 (v=50), dropped 0
+  CLOSE-READ d15: Theo about Addison — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d17: Ingrid about Addison — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Theo about Addison — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Ingrid about Addison — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Addison about Nina — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Ingrid about Addison — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Theo about Addison — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Nina about Addison — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Theo about Addison — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Ingrid about Addison — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Theo about Addison — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Nina about Addison — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Miguel about Ingrid — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Nina about Addison — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Theo about Addison — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Miguel about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Ingrid about Addison — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Miguel about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Addison about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Ingrid about Addison — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Miguel about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Miguel about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Miguel about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Ingrid about Addison — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Miguel about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Miguel about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Addison about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Addison about Ingrid — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Setor about Addison — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Farid about Addison — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Setor about Addison — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Setor about Addison — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Ingrid about Addison — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Farid about Addison — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Addison about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Setor about Addison — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Setor about Addison — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Addison about Setor — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Ursula about Daniyar — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d67: Ursula about Daniyar — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d67: Daniyar about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Ursula about Daniyar — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Daniyar about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Ursula about Daniyar — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Daniyar about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Ursula about Daniyar — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Daniyar about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Ursula about Daniyar — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Daniyar about Ursula — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Daniyar about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Ursula about Daniyar — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ursula about Daniyar — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Ursula about Daniyar — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Daniyar about Ursula — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Ursula about Daniyar — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Meles about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d91: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d97: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d99: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d105: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d108: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d108: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Meles about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d116: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Meles about Ursula — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Meles about Ursula — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Meles about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Daniyar about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ursula about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d25 (betrayal): Addison vs Nina (ambushed) depth 3 v 42 -> 54
+  GRIEV-READ d8: Lucas about Ruby (why=grievance)
+  GRIEV-READ d14: Amel about Miguel (why=grievance)
+  GRIEV-READ d15: Amel about Miguel (why=grievance)
+  GRIEV-READ d25: Addison about Nina (why=vgrievance)
+  GRIEV-READ d25: Addison about Nina (why=vgrievance)
+  GRIEV-READ d26: Addison about Nina (why=vgrievance)
+  KNACK d8 Angelo: "Huh. Let me think about that." "Lucas talks to the garden. The garden listens. I've seen it."
+  KNACK d10 Amel: "Angelo sees in the dark. Not well — but better than you. Better than me."
+  KNACK d21 Ingrid: "Good question." "Angelo sees in the dark. Not well — but better than you. Better than me."
+  KNACK d21 Nina: "You want to know about that? Okay." "Angelo sees in the dark. Not well — but better than you. Better than me."
+  KNACK d42 Farid: "that stray dog — the one that bit two people — lets Setor touch it."
+  KNACK d42 Patricia: "Addison ate something last month that should've killed them. They're fine."
+  KNACK d43 Ursula: "Miguel ate something last month that should've killed them. They're fine."
+  KNACK d47 Ingrid: "Patricia ate something last month that should've killed them. They're fine."
+
+deathCauses: {"dehydration":1,"combat":2,"monster":3,"a wound that wouldn't close":2,"sickness":4}

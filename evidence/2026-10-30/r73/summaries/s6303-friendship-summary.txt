@@ -1,0 +1,197 @@
+# SURFACE+SEEDED — seed 6303 (133d, 9 alive)
+
+npcPairs=50 deep2=16 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=248 closeReadsServed=13 grievanceServes=57 othersSteered=25
+COND-TP: firstDeep2Day=50 lateClose=76 lateTP=75 lateNull=0 condRate=98.7% pooledTP=80/97 pooledRate=82.5% grievReadsByWhy={"grievance":6,"vgrievance":67}
+FUNNEL (natural): convos=414 subject=353 offered=289 picked=223 classes={"subject-no-offer":64,"no-subject-no-ans":61,"offered-not-picked":66,"picked-others":223}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=64 rate=15.5% offered=289 mainOffered=1 subjectOffered=289 picked=223 latePicks=74 latePicksMain=0 latePicksSubject=74
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Giulia / Mia — "Good question." "cuts close faster when Sulastri wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Chris / Daniyar — "You want to know about that? Okay." "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Raj / Daniyar — "cuts close faster when Amina wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Daniyar / Raj — "that stray dog — the one that bit two people — lets Mia touch it."
+REOFFER: offers=294 picks=238 latePicks=74 missedChangedNotOffered=32
+WRAPSERVE: convos=73 matcherHits=57 matcherServes=57 classes={"grievance-line":57,"deflection":1,"other":15}
+FUNNEL-PROBE (subject-no-offer turns): turns=180 menuProblem=110 pickProblem=70
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":12,"accepts":6,"acceptRate":0.5,"vetoes":{},"chanceMin":34.2,"chanceMax":69.2,"chanceMean":49.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=5
+FAVOR (r65): funnel={"offers":22,"forageOffers":13,"otherFavorOffers":9,"accepts":13,"acceptAttempts":13,"waits":14,"starts":7,"startBlocked":13,"forages":7,"forageNodeBarren":0,"forageBarren":0,"talks":7,"delivers":7,"deliverBlocked":0,"completeOutings":0,"keptMatched":3}
+OUTING END STATES: [{"vid":"mia_andersson","vidName":"Mia","favorId":"favor-mia_andersson-81-20","state":"broken","promisedDay":81,"meetDay":82,"deadline":83,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"giulia_bianchi","vidName":"Giulia","favorId":"favor-giulia_bianchi-20-6","state":"broken","promisedDay":20,"meetDay":21,"deadline":22,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_lbyfkt9","vidName":"Vincent","favorId":"favor-gen_lbyfkt9-40-10","state":"moot","promisedDay":40,"meetDay":41,"deadline":42,"promiseKept":true,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Mia kind=forage_help favorId=favor-mia_andersson-6-3 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d7: Amina kind=food_share favorId=favor-amina_diallo-6-2 task=share food with Amina — they're going hungry
+  FAVOR-OFFER d10: Daniyar kind=food_share favorId=favor-daniyar_askarov-4-1 task=share food with Daniyar — they're going hungry
+  FAVOR-OFFER d13: Mia kind=forage_help favorId=favor-mia_andersson-13-4 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Daniyar kind=heal_help favorId=favor-daniyar_askarov-18-5 task=help Daniyar with their injury
+  FAVOR-OFFER d20: Giulia kind=forage_help favorId=favor-giulia_bianchi-20-6 task=forage with Giulia tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Nathan kind=food_share favorId=favor-nathan_lee-21-7 task=share food with Nathan — they're past hungry
+  FAVOR-OFFER d29: Raj kind=forage_help favorId=favor-raj_patel-29-8 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Nathan kind=food_share favorId=favor-nathan_lee-30-9 task=share food with Nathan — they're past hungry
+  FAVOR-OFFER d40: Vincent kind=forage_help favorId=favor-gen_lbyfkt9-40-10 task=forage with Vincent tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Mia kind=forage_help favorId=favor-mia_andersson-43-11 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d48: Raj kind=forage_help favorId=favor-raj_patel-48-12 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Mia kind=forage_help favorId=favor-mia_andersson-57-13 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d59: Mia kind=food_share favorId=favor-mia_andersson-59-14 task=share food with Mia — they're going hungry
+  FAVOR-OFFER d60: Nathan kind=forage_help favorId=favor-nathan_lee-60-15 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Nathan kind=forage_help favorId=favor-nathan_lee-62-16 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Mia kind=forage_help favorId=favor-mia_andersson-63-17 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Mia kind=forage_help favorId=favor-mia_andersson-65-18 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d66: Nathan kind=food_share favorId=favor-nathan_lee-66-19 task=share food with Nathan — they're past hungry
+  FAVOR-OFFER d81: Mia kind=forage_help favorId=favor-mia_andersson-81-20 task=forage with Mia tomorrow to rebuild the pantry
+  FAVOR-OFFER d104: Amina kind=food_share favorId=favor-amina_diallo-104-21 task=share food with Amina — they're past hungry
+  FAVOR-OFFER d123: Raj kind=heal_help favorId=favor-raj_patel-123-22 task=help Raj with their injury
+  FAVOR-ACCEPT d6: Mia favorId=favor-mia_andersson-6-3 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d13: Mia favorId=favor-mia_andersson-13-4 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d20: Giulia favorId=favor-giulia_bianchi-20-6 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d29: Raj favorId=favor-raj_patel-29-8 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d40: Vincent favorId=favor-gen_lbyfkt9-40-10 accepted=true state=promised meetDay=41
+  FAVOR-ACCEPT d43: Mia favorId=favor-mia_andersson-43-11 accepted=true state=promised meetDay=44
+  FAVOR-ACCEPT d48: Raj favorId=favor-raj_patel-48-12 accepted=true state=promised meetDay=49
+  FAVOR-ACCEPT d57: Mia favorId=favor-mia_andersson-57-13 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d60: Nathan favorId=favor-nathan_lee-60-15 accepted=true state=promised meetDay=61
+  FAVOR-ACCEPT d62: Nathan favorId=favor-nathan_lee-62-16 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d63: Mia favorId=favor-mia_andersson-63-17 accepted=true state=promised meetDay=64
+  FAVOR-ACCEPT d65: Mia favorId=favor-mia_andersson-65-18 accepted=true state=promised meetDay=66
+  FAVOR-ACCEPT d81: Mia favorId=favor-mia_andersson-81-20 accepted=true state=promised meetDay=82
+  INVITE-DEC d8 party: Enrique -> Chris chance=53.400000000000006 accept=false veto=- inputs={"temp":"earnest","goal":"answers","mood":"steady","fear":0,"trust":46,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 46"]
+  INVITE-DEC d8 party: Enrique -> Amina chance=50.599999999999994 accept=true veto=- inputs={"temp":"warm","goal":"escape","mood":"steady","fear":0,"trust":39,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 39","warm temperament (+15)","wants out (-15)"]
+  INVITE-DEC d9 party: Enrique -> Raj chance=37 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"steady","fear":4,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30","cautious temperament (-10)"]
+  INVITE-DEC d10 party: Enrique -> Nathan chance=47.4 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"cheerful","fear":12,"trust":31,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 31","cautious temperament (-10)","cheerful mood (+10)"]
+  INVITE-DEC d10 party: Enrique -> Daniyar chance=38.4 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"cheerful","fear":12,"trust":21,"bond":null,"partySize":2} reasons=["trust 21","wants out (-15)","cheerful mood (+10)"]
+  INVITE-DEC d11 party: Enrique -> Vincent chance=65.8 accept=true veto=- inputs={"temp":"earnest","goal":"heal","mood":"steady","fear":0,"trust":77,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 77"]
+  INVITE-DEC d13 party: Enrique -> Davide chance=69.2 accept=true veto=- inputs={"temp":"mischievous","goal":"protect","mood":"steady","fear":0,"trust":48,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 48","protect goal (+15)"]
+  INVITE-DEC d15 party: Enrique -> Nathan chance=46 accept=true veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":0,"trust":40,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d31 party: Asher -> Raj chance=59.2 accept=true veto=- inputs={"temp":"cautious","goal":"legacy","mood":"grateful","fear":4,"trust":73,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 73","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d41 party: Vincent -> Daniyar chance=34.2 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":0,"trust":48,"bond":null,"partySize":4} reasons=["trust 48","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d42 party: Vincent -> Mia chance=41 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":4,"trust":90,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d43 party: Vincent -> Mia chance=51 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"trust":90,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)"]
+SEEDED-DAILY: [{"day":42,"v":42,"depth":2},{"day":43,"v":44,"depth":2},{"day":44,"v":44,"depth":2},{"day":46,"v":44,"depth":2},{"day":46,"v":44,"depth":2},{"day":47,"v":46,"depth":2},{"day":48,"v":48,"depth":2},{"day":49,"v":48,"depth":2},{"day":50,"v":48,"depth":2},{"day":51,"v":48,"depth":2},{"day":52,"v":52,"depth":3},{"day":53,"v":52,"depth":3},{"day":54,"v":52,"depth":3},{"day":55,"v":52,"depth":3}] class=no-drop
+GOSSIP: totalPicks=180 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=49 31-60=48 61-90=52 91-120=53 121+=21 naturalPicks=223 seededPicks=25 gossipPicks=180
+SEEDED: {"pair":{"a":"mia_andersson","b":"nathan_lee","aName":"Mia","bName":"Nathan"},"day":41,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":42,"v":42,"depth":2},{"day":43,"v":44,"depth":2},{"day":44,"v":44,"depth":2},{"day":46,"v":44,"depth":2},{"day":46,"v":44,"depth":2},{"day":47,"v":46,"depth":2},{"day":48,"v":48,"depth":2},{"day":49,"v":48,"depth":2},{"day":50,"v":48,"depth":2},{"day":51,"v":48,"depth":2},{"day":52,"v":52,"depth":3},{"day":53,"v":52,"depth":3},{"day":54,"v":52,"depth":3},{"day":55,"v":52,"depth":3}],"crackTraceClass":"no-drop","vAt7":null,"depthAt7":null,"vDrop":null,"depthDrop":null,"crack7":false,"firstServe":{"day":42,"why":"vgrievance"},"serveWithin30":true,"serves":67,"servesAll":[{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":81,"why":"vgrievance"},{"day":84,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":89,"why":"vgrievance"},{"day":92,"why":"vgrievance"},{"day":93,"why":"vgrievance"},{"day":96,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":98,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":101,"why":"vgrievance"},{"day":104,"why":"vgrievance"},{"day":106,"why":"vgrievance"},{"day":107,"why":"vgrievance"},{"day":108,"why":"vgrievance"},{"day":110,"why":"vgrievance"},{"day":115,"why":"vgrievance"},{"day":116,"why":"vgrievance"},{"day":117,"why":"vgrievance"},{"day":119,"why":"vgrievance"},{"day":121,"why":"vgrievance"},{"day":124,"why":"vgrievance"},{"day":125,"why":"vgrievance"},{"day":128,"why":"vgrievance"},{"day":129,"why":"vgrievance"},{"day":130,"why":"vgrievance"}],"effect":true}
+  FRIEND d60: Chris <> Davide — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Sulastri <> Davide — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Sulastri <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Sulastri <> Mia — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d50: Mia <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Sulastri <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Nathan <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Sulastri <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Chris <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Giulia <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Chris <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Chris <> Mia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Chris <> Sulastri — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Davide <> Nathan — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d115: Mia <> Raj — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d65: Chris <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d21: Raj about Nathan — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Nathan about Mia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Nathan about Mia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Mia about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Raj about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Nathan about Mia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Nathan about Mia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Giulia about Chris — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Vincent about Chris — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Nathan about Mia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Giulia about Chris — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Mia about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Vincent about Chris — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Raj about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Nathan about Mia — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Raj about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Nathan about Mia — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Nathan about Mia — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Raj about Nathan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Nathan about Sulastri — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Nathan about Sulastri — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Nathan about Sulastri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Raj about Nathan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Nathan about Sulastri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Nathan about Mia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Nathan about Mia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Raj about Nathan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Raj about Nathan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Raj about Nathan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Raj about Nathan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Raj about Nathan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Nathan about Mia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Chris about Davide — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Raj about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Raj about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Raj about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Nathan about Sulastri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d10: Nathan about Sulastri (why=grievance)
+  GRIEV-READ d15: Nathan about Sulastri (why=grievance)
+  GRIEV-READ d16: Nathan about Sulastri (why=grievance)
+  GRIEV-READ d18: Nathan about Sulastri (why=grievance)
+  GRIEV-READ d21: Nathan about Sulastri (why=grievance)
+  GRIEV-READ d22: Nathan about Sulastri (why=grievance)
+  KNACK d12 Mia: "Daniyar talks to the garden. The garden listens. I've seen it."
+  KNACK d17 Giulia: "Good question." "cuts close faster when Sulastri wraps them. Don't ask me how."
+  KNACK d17 Giulia: "Nathan talks to the garden. The garden listens. I've seen it."
+  KNACK d23 Chris: "You want to know about that? Okay." "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d31 Raj: "Good question." "Daniyar talks to the garden. The garden listens. I've seen it."
+  KNACK d43 Mia: "Good question." "that stray dog — the one that bit two people — lets Giulia touch it."
+  KNACK d48 Raj: "cuts close faster when Amina wraps them. Don't ask me how."
+  KNACK d48 Nathan: "Good question." "Chris sees in the dark. Not well — but better than you. Better than me."
+
+deathCauses: {"dehydration":1,"a stranger":1}
