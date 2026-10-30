@@ -5099,6 +5099,13 @@
       // here — the teach skill is sticky WITHIN a conversation, not forever,
       // and "one lesson per conversation" means per conversation.
       c.teachSkill = null; c.learnedOnce = false; c.learnedWhat = null;
+      // LESSON-REPEAT (journey-establishment r61 2026-10-30): skillLessonDone
+      // is the same per-conversation flag with the same meaning — it was
+      // added by the skill-teaching module but never joined this reset list,
+      // so it behaved as one lesson per villager EVER (deepening r67 found
+      // it; r61 reproduced it 3/4 seeds). Reset here; the per-day half of
+      // the rule still holds via canTeachSkill 'today' (skillLessonDay).
+      c.skillLessonDone = false;
       c.over = false; c.offeredHelp = false; c.askedTopics = [];
       // EXILE COLD SHOULDER: per-sitting reset; the initiation gate above
       // sets it when a loyal villager breaks the shoulder.
