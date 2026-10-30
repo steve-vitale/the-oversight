@@ -1,0 +1,377 @@
+{
+ "seeds": [
+  75101,
+  75102,
+  75103,
+  75104,
+  75105,
+  75106,
+  75107,
+  75108,
+  75109,
+  75110,
+  75111,
+  75112,
+  75113,
+  75114,
+  75115,
+  75116
+ ],
+ "corpusOk": true,
+ "censusFilesOk": true,
+ "substrateOk": true,
+ "substrate": {
+  "75101": true,
+  "75102": true,
+  "75103": true,
+  "75104": true,
+  "75105": true,
+  "75106": true,
+  "75107": true,
+  "75108": true,
+  "75109": true,
+  "75110": true,
+  "75111": true,
+  "75112": true,
+  "75113": true,
+  "75114": true,
+  "75115": true,
+  "75116": true
+ },
+ "joinErrors": 0,
+ "meetingJoinErrors": 0,
+ "fightJoinErrors": 0,
+ "fateCounts": {
+  "BEAST-VANISHED": 4,
+  "NEVER-CROSSED": 4,
+  "VILLAGE-GONE": 2
+ },
+ "wildChains": 10,
+ "vanishedChains": [
+  "75102|algorithm",
+  "75102|eulogy",
+  "75116|audit",
+  "75116|suburb"
+ ],
+ "vanishedSetAgreement": true,
+ "uidIdConflicts": [],
+ "judgments": [
+  {
+   "seed": 75102,
+   "mid": "algorithm",
+   "n": 4,
+   "firstDay": 65,
+   "lastDay": 71,
+   "remainingHp": 959,
+   "uid": 26,
+   "resolutionStatus": "RESOLVED",
+   "fabUid": 72,
+   "fabHp": 72,
+   "windowUpper": 72,
+   "verdict": "SCHOLAR-MELT (uid-first)",
+   "verdictWhy": "uid-linked fightSeq 21 d71 result lost, fate SCHOLAR-FLEE-MELT, lift 959",
+   "missingLink": null,
+   "fight": {
+    "fightSeq": 21,
+    "dayStart": 71,
+    "result": "lost",
+    "fate": "SCHOLAR-FLEE-MELT",
+    "fateSub": "melt",
+    "fateWhy": "lifted, monster alive at end, absent post-end, result lost",
+    "liftHp": 959,
+    "liftTile": [
+     4,
+     4
+    ],
+    "liftLingering": false,
+    "restoredIdentity": false,
+    "restoredEntry": false,
+    "restoredHp": null,
+    "linkFailed": [],
+    "bridge": null,
+    "removalSeq": 47,
+    "stampOrder": {
+     "order": "ORDER-PROVEN",
+     "why": "meeting seq 98 < fight seq 99 and meeting dayPart 3 <= fight dayPart 3"
+    },
+    "meetingStamp": {
+     "seq": 98,
+     "day": 71,
+     "dayPart": 3
+    },
+    "fightStamp": {
+     "seq": 99,
+     "day": 71,
+     "dayPart": 3
+    }
+   },
+   "removal": null
+  },
+  {
+   "seed": 75102,
+   "mid": "eulogy",
+   "n": 4,
+   "firstDay": 55,
+   "lastDay": 59,
+   "remainingHp": 853,
+   "uid": 25,
+   "resolutionStatus": "RESOLVED",
+   "fabUid": 62,
+   "fabHp": 62,
+   "windowUpper": 62,
+   "verdict": "LOSTSIGHT-REMOVE",
+   "verdictWhy": "no uid-linked fight; uid removal seq 41 d62 class LOSTSIGHT-REMOVE: monsterTurn lostSight=7 > 6",
+   "missingLink": null,
+   "fight": null,
+   "removal": {
+    "seq": 41,
+    "day": 62,
+    "cls": "LOSTSIGHT-REMOVE",
+    "evidence": "monsterTurn lostSight=7 > 6"
+   }
+  },
+  {
+   "seed": 75116,
+   "mid": "audit",
+   "n": 1,
+   "firstDay": 139,
+   "lastDay": 139,
+   "remainingHp": 785,
+   "uid": 28,
+   "resolutionStatus": "RESOLVED",
+   "fabUid": 140,
+   "fabHp": 140,
+   "windowUpper": 140,
+   "verdict": "SCHOLAR-MELT (uid-first)",
+   "verdictWhy": "uid-linked fightSeq 21 d140 result lost, fate SCHOLAR-FLEE-MELT, lift 785",
+   "missingLink": null,
+   "fight": {
+    "fightSeq": 21,
+    "dayStart": 140,
+    "result": "lost",
+    "fate": "SCHOLAR-FLEE-MELT",
+    "fateSub": "melt",
+    "fateWhy": "lifted, monster alive at end, absent post-end, result lost",
+    "liftHp": 785,
+    "liftTile": [
+     4,
+     4
+    ],
+    "liftLingering": false,
+    "restoredIdentity": false,
+    "restoredEntry": false,
+    "restoredHp": null,
+    "linkFailed": [],
+    "bridge": null,
+    "removalSeq": 48,
+    "stampOrder": null,
+    "meetingStamp": {
+     "seq": 195,
+     "day": 139,
+     "dayPart": 3
+    },
+    "fightStamp": {
+     "seq": 196,
+     "day": 140,
+     "dayPart": 0
+    }
+   },
+   "removal": null
+  },
+  {
+   "seed": 75116,
+   "mid": "suburb",
+   "n": 1,
+   "firstDay": 140,
+   "lastDay": 140,
+   "remainingHp": 1285,
+   "uid": 29,
+   "resolutionStatus": "RESOLVED",
+   "fabUid": 159,
+   "fabHp": 159,
+   "windowUpper": 159,
+   "verdict": "SCHOLAR-MELT (uid-first)",
+   "verdictWhy": "uid-linked fightSeq 23 d159 result lost, fate SCHOLAR-FLEE-MELT, lift 960 (bridge 1285→960, toll-shaped)",
+   "missingLink": null,
+   "fight": {
+    "fightSeq": 23,
+    "dayStart": 159,
+    "result": "lost",
+    "fate": "SCHOLAR-FLEE-MELT",
+    "fateSub": "melt",
+    "fateWhy": "lifted, monster alive at end, absent post-end, result lost",
+    "liftHp": 960,
+    "liftTile": [
+     4,
+     4
+    ],
+    "liftLingering": true,
+    "restoredIdentity": false,
+    "restoredEntry": false,
+    "restoredHp": null,
+    "linkFailed": [],
+    "bridge": {
+     "chainHp": 1285,
+     "liftHp": 960,
+     "tollShaped": true
+    },
+    "removalSeq": 59,
+    "stampOrder": null,
+    "meetingStamp": {
+     "seq": 198,
+     "day": 140,
+     "dayPart": 3
+    },
+    "fightStamp": {
+     "seq": 211,
+     "day": 159,
+     "dayPart": 2
+    }
+   },
+   "removal": null
+  }
+ ],
+ "drops": {
+  "uidCount": 29,
+  "perIdCount": 28,
+  "uidOnlyDrops": [
+   {
+    "seed": 75102,
+    "mid": "reunion",
+    "uid": 34,
+    "uidFrom": 34,
+    "uidTo": 34,
+    "uidChanged": false,
+    "fromDay": 79,
+    "toDay": 80,
+    "fromHp": 1200,
+    "toHp": 1185,
+    "fromTile": "4,5",
+    "toTile": "3,6",
+    "maxHp": 1200,
+    "method": "uid",
+    "cls": "DROP-VILLAGER-FIGHT",
+    "evidence": "fieldparty meeting day=79 channel=field outcome=vFlee closes 1185",
+    "missingInstrument": null,
+    "inPerId": false
+   }
+  ],
+  "perIdOnlyDrops": [],
+  "clsCounts": {
+   "DROP-VILLAGER-FIGHT": 7,
+   "DROP-SCHOLAR-RESTORED-WOUND": 4,
+   "DROP-RAID-TOLL": 18
+  },
+  "unclassified": 0
+ },
+ "draftedInstances": [
+  {
+   "seed": 75105,
+   "mid": "suburb",
+   "uid": 36,
+   "tollDrop": "1300→975 d122→d123",
+   "fightSeq": 25,
+   "fightDay": 128,
+   "liftHp": 975
+  },
+  {
+   "seed": 75110,
+   "mid": "eulogy",
+   "uid": 23,
+   "tollDrop": "900→675 d67→d68",
+   "fightSeq": 10,
+   "fightDay": 77,
+   "liftHp": 675
+  },
+  {
+   "seed": 75110,
+   "mid": "algorithm",
+   "uid": 24,
+   "tollDrop": "1000→750 d79→d80",
+   "fightSeq": 13,
+   "fightDay": 81,
+   "liftHp": 750
+  },
+  {
+   "seed": 75110,
+   "mid": "eater",
+   "uid": 25,
+   "tollDrop": "950→712 d79→d80",
+   "fightSeq": 14,
+   "fightDay": 81,
+   "liftHp": 712
+  },
+  {
+   "seed": 75110,
+   "mid": "strike",
+   "uid": 26,
+   "tollDrop": "1000→750 d79→d80",
+   "fightSeq": 15,
+   "fightDay": 82,
+   "liftHp": 750
+  },
+  {
+   "seed": 75110,
+   "mid": "audit",
+   "uid": 34,
+   "tollDrop": "1100→825 d104→d105",
+   "fightSeq": 26,
+   "fightDay": 111,
+   "liftHp": 825
+  },
+  {
+   "seed": 75114,
+   "mid": "reunion",
+   "uid": 40,
+   "tollDrop": "1200→900 d120→d121",
+   "fightSeq": 28,
+   "fightDay": 125,
+   "liftHp": 900
+  },
+  {
+   "seed": 75114,
+   "mid": "algorithm",
+   "uid": 45,
+   "tollDrop": "1000→750 d157→d158",
+   "fightSeq": 42,
+   "fightDay": 159,
+   "liftHp": 750
+  },
+  {
+   "seed": 75116,
+   "mid": "suburb",
+   "uid": 25,
+   "tollDrop": "1300→975 d121→d122",
+   "fightSeq": 18,
+   "fightDay": 128,
+   "liftHp": 975
+  },
+  {
+   "seed": 75116,
+   "mid": "eulogy",
+   "uid": 35,
+   "tollDrop": "900→675 d158→d159",
+   "fightSeq": 27,
+   "fightDay": 162,
+   "liftHp": 675
+  }
+ ],
+ "wall": {
+  "wins": 9,
+  "n": 16,
+  "nationalEver": 13,
+  "nationalFinal": 11,
+  "tableReached": 12,
+  "tableEntered": 9,
+  "waveReach": [
+   16,
+   16,
+   14,
+   9,
+   0
+  ],
+  "medianDays": 118,
+  "maxDays": 180,
+  "deathTotal": 527
+ }
+}
