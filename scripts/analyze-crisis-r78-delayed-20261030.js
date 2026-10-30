@@ -1,0 +1,283 @@
+#!/usr/bin/env node
+// analyze-crisis-r78-delayed-20261030.js — LANE B crisis r78 analyzer (r57 verbatim EXCEPT glob + refused-book + bloodied checks).
+// Reads journey-crisis-r78-delayed-seed*.json from the evidence dir and
+// prints panel verdicts for the pre-registered metrics D1-D6:
+// D1 snapshot completeness, D2 crisis-at-clear classification, D3 drift
+// label counts (unknown must be 0), D4 people check, D5 price honesty,
+// D6 episode-keyed gorge-after.
+// Usage: node scripts/analyze-crisis-r78-delayed-20261030.js [EVIDDIR]
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const EVID = process.argv[2] || '/home/hatch/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-10-30';
+const files = fs.readdirSync(EVID).filter(f => /^journey-crisis-r78-delayed-seed\d+\.json$/.test(f)).sort();
+const recs = files.map(f => JSON.parse(fs.readFileSync(path.join(EVID, f), 'utf8')));
+function gorgeKcal(line) { const m = /([\d,]+) kcal/.exec(line); return m ? parseInt(m[1].replace(/,/g, ''), 10) : 0; }
+function crisisClass(c) {
+  if (c === null || c === undefined) return 'none';
+  if (c.error) return 'error';
+  return c.raiders ? 'live-raiders' : 'live-nonraiders';
+}
+let attempts = 0, ok = 0, refused = 0, cleared = 0, deltaExact = 0;
+const deltaBad = [];
+let gorgeNights = 0, gorgeKcalTot = 0, convos = 0, fab = 0, sortieFights = 0;
+let snapMissing = 0, snapTotal = 0;
+const clearTable = [];
+const driftCounts = {};
+const driftUnknown = [];
+let deadInMuster = 0, gorgeAfterCleared = 0;
+const out = [];
+for (const d of recs) {
+  gorgeNights += d.gorgeNights.length;
+  gorgeKcalTot += d.gorgeNights.reduce((t, g) => t + gorgeKcal(g.line), 0);
+  convos += d.convosDriven.length; fab += d.fabricHits.length;
+  for (const s of d.sorties) {
+    attempts++;
+    snapTotal++;
+    if (!('crisisBefore' in s) || !('crisisAfter' in s)) snapMissing++;
+    const r = s.ret || {};
+    if (r.ok) {
+      ok++;
+      if (s.pantryDelta === -(r.paid || 0)) deltaExact++; else deltaBad.push({ seed: d.seed, day: s.day, delta: s.pantryDelta, paid: r.paid });
+      if (r.remaining === 0) {
+        cleared++;
+        // Same-day tick resolutions AFTER the sortie call (not in
+        // resolutionsDuring): commsTick can resolve later that day.
+        const duringKeys = new Set((s.resolutionsDuring || []).map(x => x.day + '|' + x.how + '|' + x.during));
+        const laterSameDay = (d.aidResolutions || []).filter(a => a.day === s.day && !duringKeys.has(a.day + '|' + a.how + '|' + a.during));
+        clearTable.push({
+          seed: d.seed, day: s.day, nightsWaited: s.nightsWaited,
+          crisisBefore: crisisClass(s.crisisBefore), crisisBeforeName: s.crisisBefore && s.crisisBefore.name,
+          crisisBeforeSince: s.crisisBefore && s.crisisBefore.sinceDay,
+          crisisAfter: crisisClass(s.crisisAfter),
+          resolutionsDuring: (s.resolutionsDuring || []).map(x => x.how + '(' + x.during + ')'),
+          laterSameDay: laterSameDay.map(x => x.how + '(' + x.during + ')'),
+        });
+      }
+      sortieFights += s.fights.length;
+      if (s.deadInMusterLine && s.deadInMusterLine.length) deadInMuster += s.deadInMusterLine.length;
+    } else refused++;
+  }
+  for (const c of (d.clearedGorgeAfter || [])) {
+    if (c.gorgeAfterNameMatched && c.gorgeAfterNameMatched.length) gorgeAfterCleared += c.gorgeAfterNameMatched.length;
+  }
+  for (const dr of (d.drifts || [])) {
+    driftCounts[dr.label] = (driftCounts[dr.label] || 0) + 1;
+    if (dr.label === 'unknown') driftUnknown.push({ seed: d.seed, ...dr });
+  }
+  out.push({ seed: d.seed, days: d.days, end: d.endReason, raids: d.raids.length, gorge: d.gorgeNights.length, sorties: d.sorties.length, convos: d.convosDriven.length, drifts: (d.drifts || []).length, resolutions: (d.aidResolutions || []).map(a => 'd' + a.day + ':' + a.how + '(' + a.during + ')'), alive: d.census ? d.census.aliveCount : null, pantry: d.census ? d.census.pantryKcal : null });
+}
+console.log('PANEL seeds=' + recs.map(d => d.seed).join(','));
+console.log(JSON.stringify(out, null, 1));
+console.log('attempts=' + attempts + ' ok=' + ok + ' refused=' + refused + ' cleared(remaining0)=' + cleared + ' deltaExact=' + deltaExact + ' deltaBad=' + JSON.stringify(deltaBad));
+console.log('gorgeNights=' + gorgeNights + ' gorgeKcal=' + gorgeKcalTot + ' convos=' + convos + ' fabricHits=' + fab + ' sortieFights=' + sortieFights);
+console.log('D1 snapshots: total=' + snapTotal + ' missing=' + snapMissing);
+console.log('D2 crisis-at-clear table:');
+console.log(JSON.stringify(clearTable, null, 1));
+console.log('D3 drift labels: ' + JSON.stringify(driftCounts));
+console.log('D3 drift unknown: ' + JSON.stringify(driftUnknown, null, 1));
+console.log('D5 deltaBad=' + JSON.stringify(deltaBad));
+console.log('deadInMusterLines=' + deadInMuster + ' gorgeAfterCleared(name-matched)=' + gorgeAfterCleared);
+console.log('D1 delayed>=3 attempts: ' + recs.flatMap(d => d.sorties).filter(s => s.nightsWaited >= 3).length + '/' + attempts);
+console.log('D2 clear rate ok: ' + cleared + '/' + ok);
+console.log('D4 convos=' + convos + ' fab=' + fab);
+
+// R57 additions: early-resolution census (D2/D7), death mismatches
+// (D3), episode resets + old-vs-new nightsWaited (D1), convo contest
+// snapshots (D4).
+const earlyRes = [];
+const earlyResLegacy = [];
+const deathMismatch = [];
+const episodeResets = [];
+let convoSnapMissing = 0, convoSnapTotal = 0, driftOldNewDiff = 0, resLingeringMissing = 0;
+for (const d of recs) {
+  for (const a of (d.aidResolutions || [])) {
+    if (!('lingeringAtResolution' in a)) resLingeringMissing++;
+    // R59: TRUE count excludes the not-yet-removed corpse on an
+    // aidFight vKill; legacy count keeps r57/r58 comparability.
+    const trueCount = ('lingeringAtResolutionTrue' in a) ? a.lingeringAtResolutionTrue : a.lingeringAtResolution;
+    if (a.how === 'fought' && (a.lingeringAtResolution || 0) > 0) {
+      earlyResLegacy.push({ seed: d.seed, day: a.day, lingeringAtResolution: a.lingeringAtResolution });
+    }
+    if (a.how === 'fought' && (trueCount || 0) > 0) {
+      const gorgeAfter = (d.gorgeNights || []).filter(g => g.day > a.day);
+      const sortiesAfter = (d.sorties || []).filter(s => s.day > a.day);
+      earlyRes.push({ seed: d.seed, day: a.day, during: a.during, lingeringAtResolution: a.lingeringAtResolution, lingeringAtResolutionTrue: trueCount, crisisName: a.crisisBefore && a.crisisBefore.name, gorgeAfterNights: gorgeAfter.length, gorgeAfterKcal: gorgeAfter.reduce((t, g) => t + gorgeKcal(g.line), 0), sortiesAfter: sortiesAfter.length, beat: (gorgeAfter.length > 0 || sortiesAfter.length > 0) ? 'beat-alive' : 'beat-dead' });
+    }
+  }
+  for (const s of (d.sorties || [])) {
+    const sayNames = new Set((s.deathsDuringSay || []).flatMap(x => x.names || []));
+    const rosterNames = new Set(s.deathsDuring || []);
+    for (const nm of sayNames) {
+      if (!rosterNames.has(nm)) deathMismatch.push({ seed: d.seed, day: s.day, name: nm, deathsDuring: s.deathsDuring, sayLines: (s.deathsDuringSay || []).filter(x => (x.names || []).includes(nm)).map(x => x.line) });
+    }
+    if ((s.episodeInfo || []).some(e => e.episode > 1)) episodeResets.push({ seed: d.seed, day: s.day, episodeInfo: s.episodeInfo });
+  }
+  for (const dr of (d.drifts || [])) {
+    if (dr.nightsWaitedOld !== null && dr.nightsWaitedOld !== undefined && dr.nightsWaitedOld !== dr.nightsWaited) driftOldNewDiff++;
+  }
+  for (const b of (d.lingerBook || [])) if (b.episode > 1) episodeResets.push({ seed: d.seed, book: b });
+  for (const c of (d.convosDriven || [])) { convoSnapTotal++; if (!c.playerContests) convoSnapMissing++; }
+}
+console.log('R57 D2 early-resolution census (fought with lingerers remaining):');
+console.log(JSON.stringify(earlyRes, null, 1));
+console.log('R59 legacy early count (r57/r58 corpse-counting method): ' + earlyResLegacy.length + ' ' + JSON.stringify(earlyResLegacy.map(e => e.seed + ' d' + e.day + ':' + e.lingeringAtResolution)));
+console.log('R59 TRUE early count (corpse excluded on aidFight vKill): ' + earlyRes.length);
+console.log('R57 D7 beat classification: ' + JSON.stringify(earlyRes.map(e => e.seed + ' d' + e.day + ':' + e.beat)));
+console.log('R57 D2 resolutions missing lingeringAtResolution: ' + resLingeringMissing);
+console.log('R57 D3 death mismatches (say-only names): ' + JSON.stringify(deathMismatch, null, 1));
+console.log('R57 D1 episode resets: ' + JSON.stringify(episodeResets, null, 1));
+console.log('R57 D1 drift old-vs-new nightsWaited diffs: ' + driftOldNewDiff);
+console.log('R57 D4 convo contest snapshots: total=' + convoSnapTotal + ' missing=' + convoSnapMissing);
+
+// R57 additions: muster-aware death attribution (r54 metric review §2).
+// Legacy roster-only mismatch above stays for comparison; the R57
+// verdict uses roster ∪ muster: a say name is a mismatch ONLY if it
+// is in neither deathsDuring (roster diff) nor the sortie's
+// musterNames. Names explained by the muster are the Dina class,
+// closed. Death-pattern lines with zero matched names are the
+// residual unattributed set.
+let musterParsed = 0, musterSortieLines = 0, musterNoLine = 0;
+const r57Mismatch = [], musterExplained = [], unattributedDeathLines = [];
+for (const d of recs) {
+  for (const s of (d.sorties || [])) {
+    const muster = new Set(s.musterNames || []);
+    const rosterDiff = new Set(s.deathsDuring || []);
+    if (s.sortieLine) {
+      musterSortieLines++;
+      if ((s.musterNames || []).length) musterParsed++;
+    } else musterNoLine++;
+    for (const x of (s.deathsDuringSay || [])) {
+      if (!x.names || !x.names.length) unattributedDeathLines.push({ seed: d.seed, day: s.day, line: x.line });
+      for (const nm of (x.names || [])) {
+        if (rosterDiff.has(nm)) continue;
+        if (muster.has(nm)) musterExplained.push({ seed: d.seed, day: s.day, name: nm, line: x.line });
+        else r57Mismatch.push({ seed: d.seed, day: s.day, name: nm, deathsDuring: s.deathsDuring, musterNames: s.musterNames, line: x.line });
+      }
+    }
+  }
+}
+console.log('R57 muster parse: sortieLines=' + musterSortieLines + ' parsed=' + musterParsed + ' noSortieLine=' + musterNoLine);
+console.log('R57 D3 muster-aware mismatches (say name in neither roster diff nor muster): ' + JSON.stringify(r57Mismatch, null, 1));
+console.log('R57 D3 muster-explained (Dina class, closed): ' + JSON.stringify(musterExplained, null, 1));
+console.log('R57 D3 unattributed death lines (zero names matched): ' + JSON.stringify(unattributedDeathLines, null, 1));
+
+
+// R58 checks: (a) refused-sortie book entries — a refused entry must NOT have
+// moved its targets' book sorties/lastSortieDay to that day; (b) bloodied lines
+// must be absent from deathsDuringSay.
+console.log('R58 refused-sortie book check:');
+for (const d of recs) {
+  const book = new Map((d.lingerBook || []).map(b => [b.id, b]));
+  for (const s of (d.sorties || [])) {
+    if (s.ret && s.ret.ok) continue;
+    for (const t of (s.targets || [])) {
+      const b = book.get(t.id);
+      console.log(JSON.stringify({ seed: d.seed, day: s.day, target: t.name, retOk: s.ret ? s.ret.ok : null, bookSorties: b ? b.sorties : null, bookLastSortieDay: b ? b.lastSortieDay : null, refusedDayIsLastSortie: b ? b.lastSortieDay === s.day : null }));
+    }
+  }
+}
+let bloodiedLines = 0;
+for (const d of recs) for (const s of (d.sorties || [])) for (const x of (s.deathsDuringSay || [])) if (/bloodied/i.test(x.line)) { bloodiedLines++; console.log('R58 bloodied deathsDuringSay line: ' + JSON.stringify({ seed: d.seed, day: s.day, line: x.line })); }
+console.log('R58 bloodied deathsDuringSay lines: ' + bloodiedLines);
+
+
+// R70 additions: phoenix burn-chain census, linger-conditional
+// gorge/sortie judgment (prereg C2b), days-tail wobble (prereg C6).
+console.log('R70 phoenix burn-chain census:');
+for (const d of recs) {
+  const burns = d.phoenixBurns || [];
+  const byFight = {};
+  for (const b of burns) {
+    const k = (b.fight === null || b.fight === undefined) ? 'outside-fight' : ('fight#' + b.fight);
+    byFight[k] = (byFight[k] || 0) + 1;
+  }
+  const fightCounts = Object.entries(byFight).filter(([k]) => k !== 'outside-fight').map(([, v]) => v);
+  const maxSayDay = (d.sayLines || []).reduce((m, s) => Math.max(m, s.day || 0), 0);
+  const lastDeathDay = (d.deaths || []).reduce((m, x) => Math.max(m, x.day || 0), 0);
+  console.log(JSON.stringify({
+    seed: d.seed, end: d.endReason, daysField: d.days, maxSayDay, lastDeathDay,
+    wrapMissing: !!d.phoenixBurnWrapMissing,
+    burnsTotal: burns.length,
+    burnsWilling: burns.filter(b => b.willing).length,
+    burnsOutsideFight: byFight['outside-fight'] || 0,
+    maxBurnsOneFight: fightCounts.length ? Math.max(...fightCounts) : 0,
+    fightsWith2Plus: fightCounts.filter(v => v >= 2).length,
+    fightsWith6Plus: fightCounts.filter(v => v >= 6).length,
+    burnsByDay: burns.reduce((acc, b) => { acc[b.day] = (acc[b.day] || 0) + 1; return acc; }, {}),
+    burns: burns.map(b => 'd' + b.day + ':' + b.victim + (b.willing ? '(willing)' : '') + (b.fight === null ? '(outside)' : '(f#' + b.fight + ')')),
+  }));
+}
+console.log('R70 linger-conditional gorge/sortie judgment (prereg C2b):');
+for (const d of recs) {
+  const lingered = ((d.lingerDaily || []).some(x => x.n > 0)) || ((d.lingerBook || []).length > 0);
+  console.log(JSON.stringify({
+    seed: d.seed, lingererSetFormed: lingered,
+    gorgeNights: (d.gorgeNights || []).length, sorties: (d.sorties || []).length,
+    verdict: lingered ? 'judged on gorge+sorties' : 'PASS episodes-fire on raids+resolutions alone (no lingerers to gorge/sortie)',
+  }));
+}
+
+// R77 additions: D1 speaker-fought regression, V1 defender voice,
+// V2 favor call-time probe. Transcript files live in EVID alongside
+// the JSONs; convo records carry latelyPicks + favorCallsDuring +
+// per-convo favorCalls slices from the r78 driver.
+// 'graz' added after the panel read: 9407-d25's lately reply ("the spot
+// where it grazed me") is a wound from the raid discussed two turns
+// earlier in the same convo — squarely the prereg's "(a wound...)"
+// category, which the first regex missed, flipping V1 to a false NO-GO.
+const FIGHT_TERMS = /(monster|door|treeline|wound|graz|scar|raid|defend|fought|fight|beast|siege|night|afraid|fear|hurt|blood)/i;
+function readTranscript(file) {
+  try { return fs.readFileSync(path.join(EVID, file), 'utf8'); } catch (e) { return null; }
+}
+console.log('R77 D1 speaker-fought (DEFENDER transcript speaker must have a defendedFight on fight day = convo day - 1):');
+let d1Total = 0, d1Pass = 0; const d1Fail = [];
+for (const d of recs) {
+  for (const c of (d.convosDriven || [])) {
+    if (!/DEFENDER/.test(c.tag || '')) continue;
+    d1Total++;
+    const fought = (d.defendedFights || []).some(f => String(f.vid) === String(c.vid) && f.day === c.day - 1);
+    if (fought) d1Pass++; else d1Fail.push({ seed: d.seed, day: c.day, vid: c.vid, file: c.file });
+  }
+}
+console.log('D1: ' + d1Pass + '/' + d1Total + ' fail=' + JSON.stringify(d1Fail));
+console.log('R77 V1 defender voice (steered DEFENDER transcript: ask:lately picked AND following NPC reply references the fight in specific terms):');
+let v1Pass = 0; const v1Rows = [];
+for (const d of recs) {
+  for (const c of (d.convosDriven || [])) {
+    if (!/DEFENDER/.test(c.tag || '')) continue;
+    const txt = readTranscript(c.file);
+    if (txt === null) { v1Rows.push({ seed: d.seed, day: c.day, file: c.file, latelyPicks: c.latelyPicks || 0, error: 'transcript missing' }); continue; }
+    const lines = txt.split('\n');
+    let replyFight = null;
+    for (let i = 0; i < lines.length; i++) {
+      if (/^> YOU PICK \[(ask:lately|alive:thread:lately)\]/.test(lines[i])) {
+        const npc = lines.slice(i + 1).find(l => l.startsWith('NPC: '));
+        if (npc && FIGHT_TERMS.test(npc)) { replyFight = npc.slice(0, 300); break; }
+      }
+    }
+    const ok = (c.latelyPicks || 0) > 0 && !!replyFight;
+    if (ok) v1Pass++;
+    v1Rows.push({ seed: d.seed, day: c.day, file: c.file, latelyPicks: c.latelyPicks || 0, fightReply: replyFight });
+  }
+}
+console.log('V1 rows: ' + JSON.stringify(v1Rows, null, 1));
+console.log('V1: ' + (v1Pass >= 1 ? 'GO' : 'NO-GO') + ' (' + v1Pass + ' steered DEFENDER transcript(s) with a fight-referencing lately reply)');
+console.log('R77 V2 favor call-time probe:');
+let v2CallsDuring = 0, v2TotalCalls = 0, v2WrapMissing = 0; const v2LineRows = [];
+for (const d of recs) {
+  v2TotalCalls += (d.favorCalls || []).length;
+  if (d.favorWrapMissing) v2WrapMissing++;
+  for (const c of (d.convosDriven || [])) {
+    v2CallsDuring += c.favorCallsDuring || 0;
+    const txt = readTranscript(c.file);
+    if (txt !== null && /no longer available/.test(txt)) {
+      const named = (c.favorCalls || []).filter(fc => fc.reason === 'They are no longer available to receive help.');
+      v2LineRows.push({ seed: d.seed, day: c.day, file: c.file, callsNamingDisjunct: named.map(fc => ({ day: fc.day, vid: fc.vid, rosterIncludes: fc.rosterIncludes, isPlayer: fc.isPlayer, personExists: fc.personExists, personDead: fc.personDead, vpDead: fc.vpDead })) });
+    }
+  }
+}
+console.log('V2: wrapMissingSeeds=' + v2WrapMissing + ' totalFavorCalls=' + v2TotalCalls + ' favorCallsDuringDrivenConvos=' + v2CallsDuring);
+console.log('V2(i) instrument live: ' + (v2CallsDuring >= 1 ? 'GO' : 'NO-GO') + ' (needs >=1 call during a driven convo)');
+console.log('V2(ii) no-longer-available transcripts with a call-time disjunct record: ' + JSON.stringify(v2LineRows, null, 1));
+console.log('V2(ii): ' + (v2LineRows.length === 0 ? 'VACUOUS PASS (line never fired; blank still held, not closed)' : (v2LineRows.every(r => r.callsNamingDisjunct.length >= 1) ? 'GO' : 'NO-GO')));
