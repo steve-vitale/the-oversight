@@ -221,10 +221,12 @@ present), entryMaxSeq (the maximum fightSeq present, or -1), the
 entryMaxRow (the row with entryMaxSeq, or null), and
 entryMaxRowOpen (whether entryMaxRow.result == null at entry).
 At window close, the buffer claims every meeting row r such that
-r is NOT in `claimed` AND (r is NOT in entryRows OR (r ===
-entryMaxRow AND entryMaxRowOpen)). Claimed rows are added to
-`claimed` and counted in store.attached. Cases, stated so the
-fixtures can check each:
+r is NOT in `claimed` AND (r is NOT in entryRows OR
+(buffersAtEntry == 0 AND r === entryMaxRow AND
+entryMaxRowOpen)), where buffersAtEntry is the number of probe
+buffers already open when this buffer opens (0 for an outermost
+window). Claimed rows are added to `claimed` and counted in
+store.attached. Cases, stated so the fixtures can check each:
 
 - Probe OUTSIDE recorder (the sweep order): the new row is pushed
   by the recorder pre AFTER the probe entry, so it is not in
@@ -232,10 +234,15 @@ fixtures can check each:
 - Probe INSIDE recorder (fixture order only): the new row is
   pushed by the outer recorder pre BEFORE the probe entry, so it
   IS entryMaxRow with result null at entry → claimed. Exact.
-- Nested startCombat windows: the inner buffer closes first and
-  claims its row; the outer buffer's close skips it via
-  `claimed`. The outer window's true log is therefore never
-  attached to the inner row, and vice versa.
+- Nested startCombat windows (sweep order, probe outside): the
+  inner buffer closes first and claims ONLY its own new row
+  (its entryMaxRow is the still-open outer row, but
+  buffersAtEntry == 1 disables the entryMaxRow exception, so
+  the inner buffer cannot steal the outer row); the outer
+  buffer's close then claims the outer row (not in ITS
+  entryRows) and skips the already-claimed inner row. The
+  outer window's true log is therefore never attached to the
+  inner row, and vice versa.
 - Orphan-end rows (a tbEnd for a fight whose start was not
   recorded, created OUTSIDE any probe window): present at the
   next window's entry, with a result already recorded (not the
@@ -245,6 +252,25 @@ fixtures can check each:
 - A pending dissolved row left over from an earlier window was
   already claimed by its own window's close → skipped via
   `claimed` at every later window.
+
+## AMENDMENT (pre-analysis, committed before any fixture or sweep)
+
+The entryMaxRow exception above originally read without the
+buffersAtEntry guard. Reasoning through the nested case before
+writing any code showed the unguarded rule over-claims: in sweep
+order (probe outside), a nested window's entryMaxRow is the
+still-open OUTER row (result null at entry), so the inner buffer
+would claim the outer row as well as its own, misattributing the
+inner log to the outer row. The guard (exception only for
+outermost windows, buffersAtEntry == 0) closes exactly that case
+and preserves every other prereg case. KNOWN LIMITATION, stated
+not hidden: probe-INSIDE nested windows are not claimed by this
+rule (the inner row is in entryRows and the guard disables the
+exception) — probe-inside order is a fixture order only, tested
+on single windows, never the sweep order, so no judged sweep row
+is affected. No judged bar, rate, band, or gate rule changes in
+this amendment; only the attach exception's scope is narrowed,
+before any fixture or judged number exists.
 
 ## Corpus and substrate (binding)
 
