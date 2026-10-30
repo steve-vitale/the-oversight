@@ -325,6 +325,33 @@ Report-only: no lever is judged on them here.
    this branch — rebase cleanly at the end and re-run the
    proof; rebase conflict = FAIL LOUDLY, no force, no merge).
 
+## CORRECTION #1 (after pilot seed 75102, before the judged sweep)
+
+The pilot exposed an instrument artifact, not a game finding: with
+the sameday wrap installed LAST (outermost over fieldFight), the
+fieldparty recorder's captured caller stack lost its trailing
+frame (classifyCaller keeps the first 20 stack function names, so
+one extra wrapper frame at the top pushes the 20th name off).
+Every game field on the pilot seed was identical to chainclose;
+only that diagnostic stack tail differed — but the substrate leg
+as written requires row byte-identity, so the install order is
+corrected here, before any judged analysis: the sameday recorder
+is installed FIRST at setup (innermost for fieldFight and for
+startCombat), so fieldparty's stack is captured with the sameday
+wrap not yet in the call chain above it (exactly as in
+chainclose), and scholarmelt's pre-record runs before the
+sameday pre-record for startCombat. Stamp semantics are
+UNCHANGED by this correction: the sameday pre-record still runs
+before the wrapped original executes in both cases (fieldFight:
+after the fieldparty/w4dpr pre-records, before the fight itself;
+startCombat: after scholarmelt's pre-record, before the fight
+itself), so a meeting's stamp still precedes a later fight's
+stamp in execution order, and the STAMPED-ORDER RULE, the match
+window, the joins, and every GO leg above stand exactly as
+written. The pilot seed must be re-run after this correction
+and must pass row byte-identity before the full sweep proceeds.
+No metric was re-scored; no judged analysis has been run.
+
 ## Node harness
 
 Eval the FULL src/js/*.js list in index.html order (minus DOM-only
