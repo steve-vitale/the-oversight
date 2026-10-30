@@ -13,6 +13,14 @@
 // row-minus-scholarmelt is byte-identical to the draftflag rows
 // modulo recorded worktree paths and recorder wrapper frames
 // (substrate leg, checked by scripts/analyze-refusalsay-a.js).
+// PLUS one infrastructure delta, disclosed: writeFileRetry uses
+// dense 1s retries (900 attempts) instead of the inherited
+// 30s-capped backoff (60 attempts), because the container's write
+// EPERM flap flickers on a seconds timescale and the sparse backoff
+// missed every clear window on seed 75104 twice, losing the
+// in-memory row. Write timing only; sim semantics and row content
+// are untouched, and the pilot rows for seeds 75101-75103 were
+// written by the pre-delta code (identical content path).
 // Every other line is byte-identical to the dissolveprobe sweep.
 // Original draftflag header, retained for provenance:
 // scripts/sweep-draftflag-a.js — sim-draftflag-a band. VERBATIM COPY of
@@ -102,14 +110,21 @@ function medianOf(arr) {
   return s[Math.floor(s.length / 2)];
 }
 function sleepMs(ms) { try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {} }
+// FLAP WORKAROUND (sim-refusalsay-a, 2026-10-30): the container's
+// write EPERM flap flickers on a seconds timescale — clear windows
+// are brief, so the inherited 30s-capped backoff (60 attempts) can
+// miss every window while the sim's in-memory row is lost. Dense
+// 1s retries (900 attempts, ~15 min max) hit a brief clear window
+// quickly. This changes ONLY write timing, never sim semantics or
+// row content; disclosed in the evidence file, not hidden.
 function writeFileRetry(p, body) {
   let lastErr = null;
-  for (let a = 1; a <= 60; a++) {
+  for (let a = 1; a <= 900; a++) {
     try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, body); return; }
     catch (e) {
       lastErr = e;
-      console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
-      if (a < 60) sleepMs(Math.min(30000, 2000 * a));
+      if (a % 10 === 1 || a < 5) console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
+      if (a < 900) sleepMs(1000);
     }
   }
   throw lastErr;
