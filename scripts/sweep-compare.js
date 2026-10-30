@@ -69,6 +69,11 @@ try { const h = require('./policies/helpcost'); POLICY_REGISTRY['leadcost'] = h.
 // §15 balanced-panel before/after (gate-off vs SPEARFUND=1). Additive;
 // zero behavior change to existing entries.
 try { const l = require('./policies/leadcourt'); POLICY_REGISTRY['leadcourt'] = l.leadcourt; } catch (e) {}
+// vest-census instrument (sim-vests-b, DIAG only): leanlink in the
+// registry so the balanced panel can build the courting column. Additive;
+// zero behavior change to existing entries (leanlink itself stays
+// default-OFF behind LEANLINK=1; see scripts/policies/leanlink.js).
+try { const ll = require('./policies/leanlink'); POLICY_REGISTRY['leanlink'] = ll.leanlink; } catch (e) {}
 try { const p = require('./policies/spearfund'); POLICY_REGISTRY['spearfund-lead'] = p.spearfundLead; } catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
