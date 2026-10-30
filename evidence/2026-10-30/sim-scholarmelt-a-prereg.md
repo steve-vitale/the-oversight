@@ -146,9 +146,34 @@ no Date.now, no object references):
   fields only and never overwrites end fields. Joining is by pending
   stack order in the recorder, never by tbfight.id.
 
+## CORRECTION (pre-sweep, committed before any judged analysis)
+
+The fate list below omitted a code path found while writing the
+recorder: the game dissolves some fights silently (game.js: tbfight
+over=true, result='dissolved', tbfight=null — no tbEnd call), and the
+dissolve comment states the monsters "melt back into the wilds like
+any other fight that ends without a victor". A start whose fight is
+gone without a tbEnd is therefore NOT simply UNENDED: the recorder
+flushes it as dissolved when a later non-refused start, or sweep-end
+finalize with no live fight, proves no fight is live. The flushed
+row's melt verdict reads off the identity world check (tbEnd is the
+only restore path, so a lifted object absent by identity has melted;
+dayEnd on a flushed row is the FLUSH day, not the dissolve day, and
+chain matching uses startDay, never dayEnd). Fate rule 1b is added
+below; the sink size counts SCHOLAR-FLEE-MELT + DISSOLVED-MELT
+together (reported split). Everything else in this prereg stands.
+
 FATE CLASSIFICATION (priority order, first match; every fight gets
 exactly one fate):
-1. UNENDED — start with no tbEnd by run end.
+1. UNENDED — start with no tbEnd by run end AND a fight still live
+   at sweep end (finalize leaves it pending).
+1b. DISSOLVED-MELT — start flushed as dissolved (result
+   'dissolved-no-tbend'), lifted == true, restoredIdentity false
+   (the melt family; result verbatim). A flushed dissolved row with
+   restoredIdentity true is SCHOLAR-RESTORED (dissolved subflag),
+   and one with no lift is SPAWN-ENDED (dissolved subflag) — the
+   flush proves the fight ended, the identity check proves the
+   world outcome.
 2. ORPHAN-END-RESOLVED / ORPHAN-END-UNRESOLVED — tbEnd with no start
    record: resolved iff its monster fighters are readable (then
    classified by rules 3-6 below with lift=null, i.e. lift unknown);
