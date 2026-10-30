@@ -70,14 +70,23 @@ into any decision.
 - Sweep: scripts/sweep-chainclose-a.js run VERBATIM with EVID pointed
   at evidence/2026-10-30/perseed-recurrence-a (the script reads EVID;
   its row stores only the BASENAME, so rows are comparable file to
-  file). NO copy of the sweep with edited defaults: editing defaults
-  is how comparability silently breaks. The ONLY new sweep code is
-  scripts/sweep-recurrence-a.js, a thin wrapper that (a) sets EVID to
-  perseed-recurrence-a, (b) additionally snapshots the world-monster
-  census once per simulated day (see below), and (c) delegates every
-  seed run to the chainclose sweep's runOne. If the wrapper's
-  presence changes any fieldparty row, the SUBSTRATE-EQUIVALENCE leg
-  fails and the run stops — the census must be provably non-perturbing.
+  file). CORRECTION (pre-sweep, disclosed — the prereg as first
+  committed said the new sweep would "delegate to runOne", but
+  sweep-chainclose-a.js calls main() unconditionally and exports
+  nothing, so delegation is impossible without editing it, which
+  this arm will not do): scripts/sweep-recurrence-a.js is a VERBATIM
+  COPY of scripts/sweep-chainclose-a.js with exactly three deltas,
+  all disclosed here: (a) the default EVID dir is
+  perseed-recurrence-a instead of perseed-chainclose-a; (b) the
+  daily hook additionally snapshots the world-monster census (see
+  below) and the run writes census-s<seed>.json beside the row;
+  (c) summary mode additionally reports census presence/counts (it
+  never alters row content). No seed, env, policy, recorder, mode
+  string, or harness call is changed. If the copy's presence changes
+  any fieldparty row, the SUBSTRATE-EQUIVALENCE leg fails and the
+  run stops — the census must be provably non-perturbing. A diff of
+  the two sweep files is part of the instrument commit's proof (it
+  must show only these deltas).
 - NEW INSTRUMENT (additive, record-only, never a game change):
   the world-monster census. Once per simulated day, inside the sweep
   wrapper's daily hook (which runs before sleep rolls the day, per
