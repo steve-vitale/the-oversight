@@ -1,0 +1,370 @@
+{
+  "seeds": 8,
+  "seedList": [
+    76101,
+    76102,
+    76103,
+    76104,
+    76105,
+    76106,
+    76107,
+    76108
+  ],
+  "headline": {
+    "peakAlliedReach": "2/8",
+    "peakTotalReach": "2/8",
+    "peakAlliedRate": 0.25,
+    "peakTotalRate": 0.25,
+    "medianPeakAllied": 6,
+    "meanPeakAllied": 6.5,
+    "medianPeakTotal": 8,
+    "medianPeakLinks": 3
+  },
+  "classifiable": "7/8",
+  "classVotes": {
+    "REFUSALS": 1,
+    "FREE-FACES": 2,
+    "REACHED": 2,
+    "LINK-COUNT": 3
+  },
+  "shortfallSeeds": 6,
+  "majorityConstraint": "LINK-COUNT",
+  "majorityShare": 0.5,
+  "diagGo": false,
+  "diagNote": "DIAG-GO requires >= 12 classifiable (pilot band of 8 cannot satisfy it alone; the 16-seed confirm decides it) AND a strict-majority constraint.",
+  "offerable": {
+    "peak": 0,
+    "final": 4
+  },
+  "counterfactualReach": {
+    "allTrusted": 2,
+    "noRefusals": 3,
+    "noCap": 4,
+    "allFixed": 6
+  },
+  "whatItWouldTake": {
+    "linksNeededAlliedOnlyBase": 5,
+    "linksNeededWithHaven3Base": 4,
+    "linksNeededAlliedOnlyTrusted": 2,
+    "medianTrustGapSub70": 11,
+    "meanTrustGapSub70": 15,
+    "medianOpinionGapSub10": 6,
+    "totalFreeFaceCappedLossAtPeak": 14
+  },
+  "wall": {
+    "won": "0/8",
+    "nationalEver": "7/8",
+    "nationalFinal": "7/8",
+    "tableWaiting": "2/8",
+    "tableEntered": "0/8",
+    "wave4": "7/8",
+    "wave5": "0/8",
+    "medianSurvival": 146,
+    "maxSurvival": 201,
+    "deaths": 307,
+    "deathCauses": {
+      "ambush": 4,
+      "villager combat": 82,
+      "combat": 104,
+      "sickness": 14,
+      "a wound that wouldn't close": 6,
+      "contest": 3,
+      "monster": 9,
+      "the wild": 56,
+      "Ugly-Eyes": 1,
+      "expedition": 13,
+      "a stranger": 3,
+      "the arena": 5,
+      "dehydration": 1,
+      "starvation": 4,
+      "the night": 2
+    }
+  },
+  "perSeed": [
+    {
+      "seed": 76101,
+      "gameDays": 181,
+      "endReason": "village-lost",
+      "peakDay": 112,
+      "peakAllied": 6,
+      "peakTotal": 8,
+      "peakLinks": 3,
+      "maxTotalOverRun": 9,
+      "maxTotalDay": 117,
+      "peakClass": "REFUSALS",
+      "peakOfferable": false,
+      "finalAllied": 2,
+      "finalTotal": 3,
+      "finalLinks": 3,
+      "finalOfferable": true,
+      "omenSeen": {
+        "0": 125,
+        "1": 131,
+        "2": 135
+      },
+      "finalOmen": {
+        "stage": 2,
+        "day": 135
+      },
+      "maxRank": "global",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 45,
+      "counterfactual": {
+        "allTrusted": 6,
+        "noRefusals": 12,
+        "noCap": 6,
+        "allFixed": 18
+      }
+    },
+    {
+      "seed": 76102,
+      "gameDays": 146,
+      "endReason": "village-lost",
+      "peakDay": 55,
+      "peakAllied": 6,
+      "peakTotal": 8,
+      "peakLinks": 3,
+      "maxTotalOverRun": 9,
+      "maxTotalDay": 56,
+      "peakClass": "FREE-FACES",
+      "peakOfferable": false,
+      "finalAllied": 6,
+      "finalTotal": 6,
+      "finalLinks": 3,
+      "finalOfferable": true,
+      "omenSeen": {
+        "0": 91,
+        "1": 97,
+        "2": 102
+      },
+      "finalOmen": {
+        "stage": 2,
+        "day": 102
+      },
+      "maxRank": "national",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 41,
+      "counterfactual": {
+        "allTrusted": 6,
+        "noRefusals": 6,
+        "noCap": 10,
+        "allFixed": 18
+      }
+    },
+    {
+      "seed": 76103,
+      "gameDays": 115,
+      "endReason": "village-lost",
+      "peakDay": 50,
+      "peakAllied": 6,
+      "peakTotal": 9,
+      "peakLinks": 3,
+      "maxTotalOverRun": 9,
+      "maxTotalDay": 50,
+      "peakClass": "FREE-FACES",
+      "peakOfferable": false,
+      "finalAllied": 6,
+      "finalTotal": 6,
+      "finalLinks": 3,
+      "finalOfferable": true,
+      "omenSeen": {
+        "0": 73,
+        "1": 77,
+        "2": 85
+      },
+      "finalOmen": {
+        "stage": 2,
+        "day": 85
+      },
+      "maxRank": "global",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 51,
+      "counterfactual": {
+        "allTrusted": 6,
+        "noRefusals": 6,
+        "noCap": 10,
+        "allFixed": 18
+      }
+    },
+    {
+      "seed": 76104,
+      "gameDays": 201,
+      "endReason": "survived",
+      "peakDay": 77,
+      "peakAllied": 18,
+      "peakTotal": 21,
+      "peakLinks": 3,
+      "maxTotalOverRun": 21,
+      "maxTotalDay": 77,
+      "peakClass": "REACHED",
+      "peakOfferable": false,
+      "finalAllied": 18,
+      "finalTotal": 21,
+      "finalLinks": 3,
+      "finalOfferable": false,
+      "omenSeen": {
+        "0": 193,
+        "1": 200
+      },
+      "finalOmen": {
+        "stage": 1,
+        "day": 193
+      },
+      "maxRank": "global",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 25,
+      "counterfactual": {
+        "allTrusted": 18,
+        "noRefusals": 18,
+        "noCap": 18,
+        "allFixed": 18
+      }
+    },
+    {
+      "seed": 76105,
+      "gameDays": 102,
+      "endReason": "village-lost",
+      "peakDay": 56,
+      "peakAllied": 12,
+      "peakTotal": 14,
+      "peakLinks": 3,
+      "maxTotalOverRun": 15,
+      "maxTotalDay": 63,
+      "peakClass": "REACHED",
+      "peakOfferable": false,
+      "finalAllied": 12,
+      "finalTotal": 12,
+      "finalLinks": 3,
+      "finalOfferable": false,
+      "omenSeen": {
+        "0": 97
+      },
+      "finalOmen": {
+        "stage": 1,
+        "day": 97
+      },
+      "maxRank": "global",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 43,
+      "counterfactual": {
+        "allTrusted": 12,
+        "noRefusals": 12,
+        "noCap": 14,
+        "allFixed": 18
+      }
+    },
+    {
+      "seed": 76106,
+      "gameDays": 155,
+      "endReason": "village-lost",
+      "peakDay": 74,
+      "peakAllied": 4,
+      "peakTotal": 5,
+      "peakLinks": 2,
+      "maxTotalOverRun": 7,
+      "maxTotalDay": 76,
+      "peakClass": "LINK-COUNT",
+      "peakOfferable": false,
+      "finalAllied": 4,
+      "finalTotal": 4,
+      "finalLinks": 3,
+      "finalOfferable": true,
+      "omenSeen": {
+        "0": 111,
+        "1": 119,
+        "2": 120
+      },
+      "finalOmen": {
+        "stage": 2,
+        "day": 120
+      },
+      "maxRank": "global",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 42,
+      "counterfactual": {
+        "allTrusted": 4,
+        "noRefusals": 4,
+        "noCap": 8,
+        "allFixed": 12
+      }
+    },
+    {
+      "seed": 76107,
+      "gameDays": 44,
+      "endReason": "village-lost",
+      "peakDay": 2,
+      "peakAllied": 0,
+      "peakTotal": 3,
+      "peakLinks": 0,
+      "maxTotalOverRun": 3,
+      "maxTotalDay": 2,
+      "peakClass": "LINK-COUNT",
+      "peakOfferable": false,
+      "finalAllied": 0,
+      "finalTotal": 3,
+      "finalLinks": 0,
+      "finalOfferable": false,
+      "omenSeen": {},
+      "finalOmen": null,
+      "maxRank": "village",
+      "nationalEver": false,
+      "won": false,
+      "waveUnlocked": 2,
+      "deathCount": 17,
+      "counterfactual": {
+        "allTrusted": 0,
+        "noRefusals": 0,
+        "noCap": 0,
+        "allFixed": 0
+      }
+    },
+    {
+      "seed": 76108,
+      "gameDays": 145,
+      "endReason": "village-lost",
+      "peakDay": 2,
+      "peakAllied": 0,
+      "peakTotal": 3,
+      "peakLinks": 0,
+      "maxTotalOverRun": 3,
+      "maxTotalDay": 2,
+      "peakClass": "LINK-COUNT",
+      "peakOfferable": false,
+      "finalAllied": 0,
+      "finalTotal": 0,
+      "finalLinks": 3,
+      "finalOfferable": false,
+      "omenSeen": {
+        "0": 135,
+        "1": 139
+      },
+      "finalOmen": {
+        "stage": 1,
+        "day": 135
+      },
+      "maxRank": "national",
+      "nationalEver": true,
+      "won": false,
+      "waveUnlocked": 4,
+      "deathCount": 43,
+      "counterfactual": {
+        "allTrusted": 0,
+        "noRefusals": 0,
+        "noCap": 0,
+        "allFixed": 0
+      }
+    }
+  ]
+}
