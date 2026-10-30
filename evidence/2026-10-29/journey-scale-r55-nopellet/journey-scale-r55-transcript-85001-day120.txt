@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d113; takenWantDay=0; convoCount=16)
+=== seed 85001 day 120 — conversation with Tupaq (gen_8r0xb0v) ===
+occupation=plumber temperament=mischievous trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Good. That's settled, then. Onward."

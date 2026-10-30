@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d119; takenWantDay=0; convoCount=13)
+=== seed 85004 day 120 — conversation with Dorothy (gen_xu3lbui) ===
+occupation=mechanic temperament=anxious trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: This place is a camp, not a home. There's somewhere better. There has to be.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Dorothy stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [dlg:more] "Go on."
+THEM: "There's a way out. There's always a way out. I just haven't found the door yet."
+YOU: [dlg:react] (listen)
+THEM: "There's a place. I don't know where. But this — all this — isn't it."
+YOU: [dlg:more] "Tell me more."
+THEM: "I pack light. Always have. Makes leaving easier. Makes staying harder, too."
+YOU: [dlg:react] (listen)
+THEM: "It's not about running away. It's about running toward. The direction matters."
+YOU: [dlg:more] "Tell me more."
+THEM: "There's a way out of this. There has to be. I'm going to find it or die mapping the edges."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Good talking. We'll figure it out."
