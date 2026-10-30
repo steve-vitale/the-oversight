@@ -22,6 +22,13 @@
 #     (work preserved as a branch; anyone can re-checkout it)
 # NEVER touches: trees with uncommitted changes (LOUD), active trees with a
 # fresh heartbeat (< 4h).
+#
+# REGISTRY SAFETY (2026-10-30): the registry is NEVER rewritten in place.
+# Every save goes to a temp file in the same directory (fsynced) and is then
+# os.replace()d onto the live file, so a writer killed mid-save (or hit by a
+# write refusal) leaves the old registry intact. A missing, empty, or corrupt
+# registry is a loud failure — cleanup cannot run until the registry is
+# rebuilt — never a silent fresh start (which would drop every live entry).
 set -u
 REPO=~/workspace/the-scattering
 WTBASE=~/workspace/worktrees
@@ -43,11 +50,29 @@ def sh(*args, cwd=repo):
     r = subprocess.run(args, cwd=cwd, capture_output=True, text=True)
     return r.returncode, r.stdout.strip(), r.stderr.strip()
 
-try:
-    with open(reg) as f:
-        data = json.load(f)
-except FileNotFoundError:
-    data = {"cap": 6, "trees": []}
+def atomic_write_json(reg, data):
+    tmp = reg + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(data, f, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, reg)
+
+def load_registry(reg, what):
+    try:
+        with open(reg) as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"FAIL: registry missing: {reg} — {what}", file=sys.stderr); sys.exit(1)
+    except json.JSONDecodeError:
+        print(f"FAIL: registry unreadable (empty or corrupt): {reg} — {what}", file=sys.stderr); sys.exit(1)
+    except OSError as e:
+        print(f"FAIL: cannot read registry {reg}: {e} — {what}", file=sys.stderr); sys.exit(1)
+    if not isinstance(data, dict) or not isinstance(data.get("trees"), list):
+        print(f"FAIL: registry malformed (no trees list): {reg} — {what}", file=sys.stderr); sys.exit(1)
+    return data
+
+data = load_registry(reg, "cleanup cannot run until the registry is rebuilt")
 
 merged = set()
 rc, out, _ = sh("git", "branch", "--merged", "master", "--format=%(refname:short)")
@@ -119,8 +144,7 @@ for t in data["trees"]:
 # Drop fully-gone entries, keep branch-kept ones as records
 data["trees"] = [t for t in data["trees"] if t.get("status") != "gone"]
 if not dry:
-    with open(reg, "w") as f:
-        json.dump(data, f, indent=2)
+    atomic_write_json(reg, data)
 sh("git", "worktree", "prune")
 
 print("=== worktree-reap ===")

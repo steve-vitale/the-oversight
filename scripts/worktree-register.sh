@@ -9,6 +9,13 @@
 # slug already registered, worktree creation fails.
 # On success prints the worktree path. Registry: ~/workspace/worktrees/REGISTRY.json
 # (Steve 2026-10-08: "We need more worktree slots and a better cleanup system.")
+#
+# REGISTRY SAFETY (2026-10-30): the registry is NEVER rewritten in place.
+# Every save goes to a temp file in the same directory (fsynced) and is then
+# os.replace()d onto the live file, so a writer killed mid-save (or hit by a
+# write refusal) leaves the old registry intact. A missing, empty, or corrupt
+# registry is a loud failure, never a silent fresh start — silently
+# recreating it would drop every live worktree's entry.
 set -u
 REPO=~/workspace/the-scattering
 WTBASE=~/workspace/worktrees
@@ -40,12 +47,30 @@ import json, os, subprocess, sys, datetime
 slug, owner, purpose, repo, wtbase, reg = sys.argv[1:7]
 now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
+def atomic_write_json(reg, data):
+    tmp = reg + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(data, f, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, reg)
+
+def load_registry(reg, what):
+    try:
+        with open(reg) as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"FAIL: registry missing: {reg} — {what}", file=sys.stderr); sys.exit(1)
+    except json.JSONDecodeError:
+        print(f"FAIL: registry unreadable (empty or corrupt): {reg} — {what}", file=sys.stderr); sys.exit(1)
+    except OSError as e:
+        print(f"FAIL: cannot read registry {reg}: {e} — {what}", file=sys.stderr); sys.exit(1)
+    if not isinstance(data, dict) or not isinstance(data.get("trees"), list):
+        print(f"FAIL: registry malformed (no trees list): {reg} — {what}", file=sys.stderr); sys.exit(1)
+    return data
+
 os.makedirs(wtbase, exist_ok=True)
-if os.path.exists(reg):
-    with open(reg) as f:
-        data = json.load(f)
-else:
-    data = {"cap": 6, "trees": []}
+data = load_registry(reg, "cannot register until the registry is rebuilt")
 cap = data.get("cap", 6)
 trees = data["trees"]
 
@@ -75,8 +100,7 @@ trees.append({
     "purpose": purpose, "created_at": now, "heartbeat_at": now,
     "status": "active",
 })
-with open(reg, "w") as f:
-    json.dump(data, f, indent=2)
+atomic_write_json(reg, data)
 print(path)
 EOF
 rc=$?
