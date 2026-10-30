@@ -285,7 +285,7 @@ function analyze(evidDir) {
     mHpStart: j.bl.mHpStart, mHpLeft: j.bl.mHpLeft, mDealt: j.bl.mDealt,
     vTaken: j.bl.vTaken, party: j.party, tileCount: j.tileCount,
     tileUnknown: j.fp.tileUnknown, crewSize: (j.fp.crew || []).length,
-    engineAllies: j.bl.engineAllies, allyFromStart: j.bl.allyFromStart,
+    engineAllies: j.fp.engineAllies, allyFromStart: j.bl.allyFromStart,
     calledHelp: j.bl.calledHelp, joinedAllyVid: j.bl.joinedAllyVid,
     allyDealt: j.bl.allyDealt, allyTaken: j.bl.allyTaken,
     intent: j.bl.intent, intentWhy: j.fp.intentWhy, gear: j.gear,
