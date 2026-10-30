@@ -1,0 +1,37 @@
+
+ORGANIC DEATH d25: Nancy -> Blanca, topTrust=[{"id":"Dmitri","t":54},{"id":"Hayden","t":48},{"id":"Adaeze","t":48},{"id":"David","t":41}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=17 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=90 succTrustPost=40
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","green_whisper"] post=["beast_calm","green_whisper"]
+DEATH d24 (organic (phase A)): Nancy -> Blanca | passed=true lin=true mo=true trust=40 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Hayden (refused=false)
+  CONVO d+3 with Dmitri (refused=false)
+  BOND-CONVO d+3 with Jada (depth=1 v=40 refused=false)
+  CONVO d+7 with Hayden (refused=false)
+  CONVO d+7 with Adaeze (refused=false)
+  CONVO d+14 with Hayden (refused=false)
+  CONVO d+14 with Adaeze (refused=false)
+  BOND-CONVO d+14 with Jada (depth=1 v=40 refused=false)
+  CONVO d+30 with Adaeze (refused=false)
+  CONVO d+30 with Hayden (refused=false)
+  CONVO d+45 with Adaeze (refused=false)
+  CONVO d+45 with Hayden (refused=false)
+  CONVO d+53 with Adaeze (refused=false)
+  CONVO d+53 with Hayden (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=0 (eligible=0) echo=2 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=55 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=56 signals={"levelUp":true,"systemVoice":45,"offerLines":70,"codexPlantsDelta":14,"codexSkillsDelta":11,"codexAbilitiesDelta":9,"xpDelta":92,"any":true} pantry 12100->27366
+TRUST-DIALS: office 40->28 (-12, fall) | villageMean 39.4->67.4 (+28, climb) | ge60 0->6 | movers>=5: [{"id":"Devon","from":30,"to":85,"delta":55},{"id":"Adaeze","from":48,"to":100,"delta":52},{"id":"Issam","from":40,"to":90,"delta":50},{"id":"Hayden","from":48,"to":90,"delta":42},{"id":"Dmitri","from":54,"to":90,"delta":36},{"id":"David","from":41,"to":71,"delta":30},{"id":"Yara","from":39,"to":46,"delta":7},{"id":"Jada","from":24,"to":30,"delta":6},{"id":"Omar","from":31,"to":5,"delta":-26}]
+DEED-LEDGER: calls=26 summary={"donateToPantry":{"calls":21,"ok":21,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"teachPlant":{"calls":5,"ok":5,"deltaSum":0,"deltaN":5,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=80 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=56
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+56) t2=true(deedCalls=26) trustVerdict={"readable":true,"officeMantle":40,"officeLast":28,"officeDelta":-12,"officeClass":"fall","villageMantle":39.4,"villageLast":67.4,"villageDelta":28,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":6,"movers":[{"id":"Devon","from":30,"to":85,"delta":55},{"id":"Adaeze","from":48,"to":100,"delta":52},{"id":"Issam","from":40,"to":90,"delta":50},{"id":"Hayden","from":48,"to":90,"delta":42},{"id":"Dmitri","from":54,"to":90,"delta":36},{"id":"David","from":41,"to":71,"delta":30},{"id":"Yara","from":39,"to":46,"delta":7},{"id":"Jada","from":24,"to":30,"delta":6},{"id":"Omar","from":31,"to":5,"delta":-26}]}
+E6/CALLCHECK: e6={"callMoves":14,"withCensus":14,"chainHandoffs":0,"trustMoves":14} callCheck={"dailyMoveDays":14,"callMoveDays":13,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":14,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":5,"both":9,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":56,"moves":14}
