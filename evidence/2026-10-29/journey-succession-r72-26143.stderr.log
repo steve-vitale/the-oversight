@@ -1,0 +1,41 @@
+
+ORGANIC DEATH d17: Arlo -> Seymour, topTrust=[{"id":"Ruth","t":50},{"id":"Somchai","t":50},{"id":"Seymour","t":42},{"id":"Aaliyah","t":41}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=90 succTrustPost=42
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach"] post=["iron_stomach"]
+DEATH d17 (organic (phase A)): Arlo -> Seymour | passed=true lin=true mo=true trust=42 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Ruth (refused=false)
+  CONVO d+3 with Somchai (refused=false)
+  BOND-CONVO d+3 with Ute (depth=1 v=48 refused=false)
+  CONVO d+7 with Ruth (refused=false)
+  CONVO d+7 with Somchai (refused=false)
+  CONVO d+14 with Ruth (refused=false)
+  CONVO d+14 with Nurzhan (refused=false)
+  BOND-CONVO d+14 with Ute (depth=1 v=48 refused=false)
+
+SECOND-KILL d+20: Seymour -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Seymour -> Somchai passed=true lin=true mo=true
+  CONVO d+30 with Ruth (refused=false)
+  CONVO d+30 with Aaliyah (refused=false)
+
+THIRD-KILL d+20 since second death: Somchai -> ? (scripted r72 chain probe)
+THIRD DEATH d+20 since second death: Somchai -> Ute passed=true lin=true mo=true
+  CONVO d+45 with Ruth (refused=false)
+  CONVO d+45 with Aaliyah (refused=false)
+
+FUNERAL: deathBeat=2 recover=1 vouch=0 (eligible=0) echo=4 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=45 signals={"levelUp":true,"systemVoice":47,"offerLines":48,"codexPlantsDelta":17,"codexSkillsDelta":10,"codexAbilitiesDelta":15,"xpDelta":46,"any":true} pantry 7900->58821
+TRUST-DIALS: office 42->88 (+46, climb) | villageMean 34->81.9 (+47.9, climb) | ge60 0->7 | movers>=5: [{"id":"Mia","from":21,"to":87,"delta":66},{"id":"Victor","from":27,"to":90,"delta":63},{"id":"Xavier","from":33,"to":90,"delta":57},{"id":"Zoe","from":34,"to":90,"delta":56},{"id":"Nurzhan","from":40,"to":90,"delta":50},{"id":"Aaliyah","from":41,"to":90,"delta":49},{"id":"Ruth","from":50,"to":90,"delta":40},{"id":"Thabo","from":19,"to":28,"delta":9}]
+DEED-LEDGER: calls=14 summary={"teachPlant":{"calls":12,"ok":12,"deltaSum":0,"deltaN":12,"positive":0,"meanDelta":0},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=62 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=45
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+45) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":42,"officeLast":88,"officeDelta":46,"officeClass":"climb","villageMantle":34,"villageLast":81.9,"villageDelta":47.9,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":7,"movers":[{"id":"Mia","from":21,"to":87,"delta":66},{"id":"Victor","from":27,"to":90,"delta":63},{"id":"Xavier","from":33,"to":90,"delta":57},{"id":"Zoe","from":34,"to":90,"delta":56},{"id":"Nurzhan","from":40,"to":90,"delta":50},{"id":"Aaliyah","from":41,"to":90,"delta":49},{"id":"Ruth","from":50,"to":90,"delta":40},{"id":"Thabo","from":19,"to":28,"delta":9}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":2,"trustMoves":4} callCheck={"dailyMoveDays":5,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":2,"soloOfficeDeltas":[1,2],"soloBearerDeltaExact":[1,2],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":46,"moves":5}

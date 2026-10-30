@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d11: Declan -> Jorge, topTrust=[{"id":"Landon","t":41},{"id":"Arlo","t":36},{"id":"Jovan","t":30},{"id":"Ella","t":28}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=9 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=47 succTrustPost=25
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d10 (organic (phase A)): Declan -> Jorge | passed=true lin=true mo=true trust=25 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Arlo (refused=false)
+  CONVO d+3 with Landon (refused=false)
+  CONVO d+7 with Arlo (refused=false)
+  CONVO d+7 with Jovan (refused=false)
+  CONVO d+14 with Arlo (refused=false)
+  CONVO d+14 with Jovan (refused=false)
+
+SECOND-KILL d+20: Jorge -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Jorge -> Landon passed=true lin=true mo=true
+  CONVO d+30 with Luis (refused=false)
+  CONVO d+30 with Jovan (refused=false)
+
+THIRD-KILL d+20 since second death: Landon -> ? (scripted r72 chain probe)
+THIRD DEATH d+20 since second death: Landon -> Luis passed=true lin=true mo=true
+  CONVO d+45 with Ella (refused=false)
+  CONVO d+45 with Jovan (refused=false)
+
+FUNERAL: deathBeat=2 recover=1 vouch=0 (eligible=0) echo=2 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=45 signals={"levelUp":true,"systemVoice":42,"offerLines":34,"codexPlantsDelta":31,"codexSkillsDelta":13,"codexAbilitiesDelta":10,"xpDelta":54,"any":true} pantry 24241->10418
+TRUST-DIALS: office 25->68 (+43, climb) | villageMean 26.3->49.4 (+23.1, climb) | ge60 0->3 | movers>=5: [{"id":"Ella","from":28,"to":90,"delta":62},{"id":"Jovan","from":30,"to":82,"delta":52},{"id":"Elif","from":12,"to":63,"delta":51},{"id":"Naran","from":17,"to":35,"delta":18},{"id":"Giulia","from":27,"to":14,"delta":-13}]
+DEED-LEDGER: calls=2 summary={"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=55 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=45
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+45) t2=true(deedCalls=2) trustVerdict={"readable":true,"officeMantle":25,"officeLast":68,"officeDelta":43,"officeClass":"climb","villageMantle":26.3,"villageLast":49.4,"villageDelta":23.1,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":3,"movers":[{"id":"Ella","from":28,"to":90,"delta":62},{"id":"Jovan","from":30,"to":82,"delta":52},{"id":"Elif","from":12,"to":63,"delta":51},{"id":"Naran","from":17,"to":35,"delta":18},{"id":"Giulia","from":27,"to":14,"delta":-13}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":2,"trustMoves":5} callCheck={"dailyMoveDays":7,"callMoveDays":7,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":1,"soloOfficeDeltas":[2],"soloBearerDeltaExact":[2],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":46,"moves":7}

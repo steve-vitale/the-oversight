@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d14: Kenneth -> Deirdre, topTrust=[{"id":"Morgan","t":68},{"id":"Jesse","t":44},{"id":"Anton","t":40},{"id":"Deirdre","t":39}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=13 inheritedPlants=0 keptSkills=2 inheritedSkills=0 succTrustPre=63 succTrustPost=39
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d14 (organic (phase A)): Kenneth -> Deirdre | passed=true lin=true mo=true trust=39 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Morgan (refused=false)
+  CONVO d+3 with Jesse (refused=false)
+  CONVO d+7 with Morgan (refused=false)
+  CONVO d+7 with Jesse (refused=false)
+  CONVO d+14 with Nomsa (refused=false)
+  CONVO d+14 with Jesse (refused=false)
+  BOND-CONVO d+14 with Anton (depth=1 v=34 refused=false)
+
+SECOND-KILL d+20: Morgan -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Morgan -> Nomsa passed=true lin=true mo=true
+  CONVO d+30 with Jesse (refused=false)
+  CONVO d+30 with Layla (refused=false)
+
+THIRD-KILL d+20 since second death: Nomsa -> ? (scripted r72 chain probe)
+THIRD DEATH d+20 since second death: Nomsa -> Jesse passed=true lin=true mo=true
+  CONVO d+45 with Layla (refused=false)
+  CONVO d+45 with Anton (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=1) echo=4 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=46 signals={"levelUp":true,"systemVoice":46,"offerLines":47,"codexPlantsDelta":15,"codexSkillsDelta":20,"codexAbilitiesDelta":12,"xpDelta":52,"any":true} pantry 29894->13150
+TRUST-DIALS: office 39->90 (+51, climb) | villageMean 33.9->67.6 (+33.7, climb) | ge60 1->5 | movers>=5: [{"id":"Greta","from":28,"to":90,"delta":62},{"id":"Marcus","from":28,"to":88,"delta":60},{"id":"Layla","from":38,"to":90,"delta":52},{"id":"Anton","from":40,"to":90,"delta":50},{"id":"Lena","from":18,"to":67,"delta":49}]
+DEED-LEDGER: calls=15 summary={"teachPlant":{"calls":13,"ok":13,"deltaSum":0,"deltaN":13,"positive":0,"meanDelta":0},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=60 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=46
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+46) t2=true(deedCalls=15) trustVerdict={"readable":true,"officeMantle":39,"officeLast":90,"officeDelta":51,"officeClass":"climb","villageMantle":33.9,"villageLast":67.6,"villageDelta":33.7,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":5,"movers":[{"id":"Greta","from":28,"to":90,"delta":62},{"id":"Marcus","from":28,"to":88,"delta":60},{"id":"Layla","from":38,"to":90,"delta":52},{"id":"Anton","from":40,"to":90,"delta":50},{"id":"Lena","from":18,"to":67,"delta":49}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":3,"trustMoves":4} callCheck={"dailyMoveDays":7,"callMoveDays":7,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":46,"moves":7}
