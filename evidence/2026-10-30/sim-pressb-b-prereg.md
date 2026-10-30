@@ -215,6 +215,20 @@ breaking the morning routine.
   whose pre-press snap mismatches its control morning is
   UNMEASURED (counts against the banking denominator's
   coverage, never replaced).
+
+## PRE-LEG AMENDMENT (committed before any judged leg; no leg has run)
+
+The SECONDARY naive depletion table (variant total pressE vs
+control total over ALL control stranded field mornings) needs
+same-base proven totals for control mornings the variant
+SKIPS by depletion (e.g. consecutive-east second mornings),
+not only for denominator mornings. Amendment: replay
+comparators run for EVERY control-leg (WOODWARM=1) stranded
+field morning (wakeforage definition: same-day evening bucket
+creek + rescued false, wake tile not haven), not only for
+variant denominator mornings. Same driver, same equality gate,
+same corpus dir. This amendment is part of the binding prereg
+because it precedes all judged legs; no bar changes.
 - PROOF: scripts/test-pressb-b.js — pure-gate unit tests
   (pressDecision on stub Games: stranded+known fires,
   west-corner no-known skips, haven skips, non-stranded skips,
