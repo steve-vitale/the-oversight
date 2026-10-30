@@ -241,6 +241,7 @@ function installScholarmeltDiag(Game, store) {
         scholarHpStart: null, scholarHpEnd: null,
         restoredIdentity: null, restoredEntry: null, restoredHp: null,
         threw: false, sameCallRouted: false, orphan: false, dissolvedFlushed: false,
+        startPostFightGone: false, postStartPresent: null,
       };
       try { const sc = (Game.state || {}).scholar || {}; rec.scholarHpStart = roundHp(sc.health); } catch (e) {}
       if (tm.mon) st.refs.set(seq, tm.mon);
@@ -274,7 +275,7 @@ function installScholarmeltDiag(Game, store) {
       if (rec) {
         // If tbEnd already ran inside orig (same-call routed fight),
         // the end fields are filled; fill start fields only.
-        if (rec.result == null && !(Game.tbfight && Game.tbfight.over)) {
+        if (rec.result == null && Game.tbfight && !Game.tbfight.over) {
           const fight = Game.tbfight || null;
           if (fight) {
             rec.fightersStart = fighterMonsters(fight);
@@ -289,18 +290,33 @@ function installScholarmeltDiag(Game, store) {
               rec.lifted = isFighter && !stillThere;
               rec.bystander = !isFighter;
             } else { rec.lifted = false; rec.bystander = false; }
-          } else {
-            // No live fight after a non-throwing start: the fight
-            // resolved inside the call without a tbEnd record (or
-            // tbfight was cleared another way). Mark it; the
-            // analyzer treats missing end as UNENDED only when no
-            // result was recorded — sameCallRouted is set by the
-            // tbEnd path when it adopts, so here result==null
-            // means genuinely no tbEnd was seen.
-            rec.fightersStart = null;
-            if (rec.lift) { rec.lifted = null; rec.bystander = null; }
-            else { rec.lifted = false; rec.bystander = false; }
           }
+        } else if (rec.result == null) {
+          // CORRECTION #2: fight already over (or null) at
+          // post-record with NO tbEnd seen — the fight resolved
+          // inside startCombat (the herald pattern: 120 dissolved
+          // rows left lifted null by the old code). No fighter list
+          // is trustworthy here, but lift presence IS observable:
+          // present at call return => never removed by this fight
+          // (lifted=false); absent => removed during the call with
+          // no restore yet (lifted=true). The flush-time identity
+          // check later decides melt vs restored; the sink answer
+          // for a present object is "not this fight's melt" either
+          // way. bystander stays null (fighter list unavailable).
+          rec.startPostFightGone = true;
+          const fight = Game.tbfight || null;
+          if (fight) {
+            rec.fightersStart = fighterMonsters(fight);
+            try { rec.worldOrigin = fight.worldOrigin ? snapMonster(fight.worldOrigin) : null; } catch (e) { rec.worldOrigin = null; }
+          }
+          if (rec.lift) {
+            const ref = st.refs.get(rec.fightSeq);
+            let present = false;
+            try { const list = (typeof Game.worldMonsters === 'function') ? Game.worldMonsters() : []; present = ref ? list.indexOf(ref) >= 0 : false; } catch (e) {}
+            rec.postStartPresent = present;
+            rec.lifted = !present;
+            rec.bystander = null;
+          } else { rec.lifted = false; rec.bystander = false; }
         } else if (rec.result != null) {
           rec.sameCallRouted = true;
           // Start fighters are unrecoverable (tbEnd pre-call saw end

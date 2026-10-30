@@ -146,6 +146,38 @@ no Date.now, no object references):
   fields only and never overwrites end fields. Joining is by pending
   stack order in the recorder, never by tbfight.id.
 
+## CORRECTION #2 (pre-re-run, committed before any judged evidence)
+
+After the first sweep, the recorder was found to leave `lifted` NULL
+for every fight whose tbfight was already over (or null) when
+startCombat returned — 120 dissolved herald fights, all UNCLASSIFIED
+under the classifier, because the start post-record only filled
+lift fields for live fights and same-call tbEnd fights. That is an
+instrument gap, not a game finding: the prereg's dissolved rule
+already assumes lifted is recorded. The fix (recorder only, zero
+src/js): when tbfight is over/null at start post-record and no tbEnd
+was seen, record post-start world presence of the lift object —
+present ⇒ lifted=false (never removed by this fight), absent ⇒
+lifted=true (removed during the call, no restore yet) — and mark
+startPostFightGone. The dissolved classification order is clarified
+to restored-first (an object back in the world by identity is not a
+melt, whatever the lift flag says): restored (identity or entry) >
+melt (lifted, absent) > spawned (no lift) > never-lifted (lift
+present, lifted false). The substrate legs are unchanged and must
+still pass on the re-run (row-minus-scholarmelt byte-identical,
+census byte-identical); the first sweep's corpus is superseded by
+the re-run's corpus, and the first sweep's analyzer output is
+discarded (it judged a broken instrument, not the game). The 3
+empty-fighter orphan tbEnd rows (no monster fighter, no lift, no
+worldOrigin — provably no beast involved) are NOT reclassified by
+this correction: prereg rule 2 calls fighters-unreadable orphans
+UNCLASSIFIED, and they stay so. Likewise the strict matching window
+(lastDay < dayStart) is NOT widened by this correction: a same-day
+scholar fight found in the first sweep (s75102 algorithm, d71,
+hp-exact 959 melt) stays a near-miss observation, not a judged
+match — widening the window mid-run would be re-scoring, and the
+same-day rule belongs in the NEXT run's prereg.
+
 ## CORRECTION (pre-sweep, committed before any judged analysis)
 
 The fate list below omitted a code path found while writing the

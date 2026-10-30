@@ -58,6 +58,12 @@ function lift(id, hp, extra) {
   eq('dissolved-restored', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: true, lift: lift('audit', 1042), fightersEnd: [], restoredIdentity: true })).fate, 'SCHOLAR-RESTORED');
   eq('dissolved-spawned', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: false, lift: null, fightersEnd: [] })).fate, 'SPAWN-ENDED');
   eq('dissolved-bystander', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: false, lift: lift('audit', 1042), bystander: true, fightersEnd: [] })).fate, 'BYSTANDER-OR-NONMONSTER');
+  // CORRECTION #2: restored-first for dissolved rows (alias adoption
+  // can restore without tbEnd), and never-lifted dissolved rows.
+  eq('dissolved-restored-beats-lifted-null', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: null, lift: lift('herald', 700), fightersEnd: [], restoredIdentity: true, restoredEntry: true })).fate, 'SCHOLAR-RESTORED');
+  eq('dissolved-restored-entry-only', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: true, lift: lift('herald', 700), fightersEnd: [], restoredIdentity: false, restoredEntry: true })).fate, 'SCHOLAR-RESTORED');
+  eq('dissolved-never-lifted', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: false, lift: lift('herald', 700), fightersEnd: [], restoredIdentity: false, restoredEntry: false })).fate, 'BYSTANDER-OR-NONMONSTER');
+  eq('dissolved-never-lifted sub', classifyFight(fight({ result: 'dissolved-no-tbend', lifted: false, lift: lift('herald', 700), fightersEnd: [], restoredIdentity: false, restoredEntry: false })).sub, 'dissolved-never-lifted');
   eq('orphan-unreadable', classifyFight(fight({ kind: 'orphan-end', result: 'won', orphan: true, fightersEnd: [] })).fate, 'UNCLASSIFIED');
   eq('orphan-kill', classifyFight(fight({ kind: 'orphan-end', result: 'won', orphan: true, fightersEnd: [mon('audit', 0, false)] })).fate, 'SCHOLAR-KILL');
   eq('orphan-alive subflag', classifyFight(fight({ kind: 'orphan-end', result: 'fled', orphan: true, fightersEnd: [mon('audit', 900, true)] })).sub, 'orphan-lift-unknown');

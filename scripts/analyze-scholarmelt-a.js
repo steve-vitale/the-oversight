@@ -78,9 +78,15 @@ function classifyFight(f) {
   if (f.kind === 'refused') return { fate: 'EXCLUDED-REFUSED', sub: 'refused', why: 'startCombat refused (fight already live); nothing lifted' };
   if (f.result == null) return { fate: 'UNENDED', sub: 'live-at-end', why: 'start with no tbEnd by run end, fight still live at sweep end' };
   if (f.result === 'dissolved-no-tbend') {
-    if (f.lifted && !f.restoredIdentity) return { fate: 'DISSOLVED-MELT', sub: 'dissolved', why: 'flushed dissolved; lifted and absent by identity (tbEnd is the only restore path)' };
-    if (f.lifted && f.restoredIdentity) return { fate: 'SCHOLAR-RESTORED', sub: 'dissolved-restored', why: 'flushed dissolved but lifted object is back by identity' };
-    if (!f.lifted && !f.lift) return { fate: 'SPAWN-ENDED', sub: 'dissolved-spawned', why: 'flushed dissolved; no lift (spawned fight)' };
+    // CORRECTION #2: restored-first. An object back in the world by
+    // identity (or id+tile entry) is not a melt, whatever the lift
+    // flag says — alias adoption can put a lifted titan back without
+    // tbEnd. Only then does lifted decide melt vs never-lifted.
+    if (f.restoredIdentity) return { fate: 'SCHOLAR-RESTORED', sub: 'dissolved-restored', why: 'flushed dissolved but lifted object is back by identity' };
+    if (f.restoredEntry) return { fate: 'SCHOLAR-RESTORED', sub: 'dissolved-restored-entry', why: 'flushed dissolved; id+tile entry present post-end (identity absent)' };
+    if (f.lifted === true) return { fate: 'DISSOLVED-MELT', sub: 'dissolved', why: 'flushed dissolved; lifted and absent (tbEnd is the only restore path)' };
+    if (f.lifted === false && !f.lift) return { fate: 'SPAWN-ENDED', sub: 'dissolved-spawned', why: 'flushed dissolved; no lift (spawned fight)' };
+    if (f.lifted === false) return { fate: 'BYSTANDER-OR-NONMONSTER', sub: 'dissolved-never-lifted', why: 'flushed dissolved; lift object present at start post-record — this fight never removed it' };
     if (f.bystander) return { fate: 'BYSTANDER-OR-NONMONSTER', sub: 'dissolved-bystander', why: 'flushed dissolved; tile monster was a bystander, not a fighter' };
     return { fate: 'UNCLASSIFIED', sub: 'dissolved-ambiguous', why: 'flushed dissolved with ambiguous lift/restore state' };
   }
