@@ -65,14 +65,35 @@ for (const [nm, c] of [['guard', recGuard], ['on', recOn]]) {
   check(nm + ' no press aborts', field.filter((m) => m.yield && m.yield.mode === 'press-aborted').length === 0, '');
   check(nm + ' no control mismatches', c.totals.controlMismatch === 0, 'mismatch=' + c.totals.controlMismatch);
   check(nm + ' no press mismatches', c.totals.pressMismatch === 0, 'mismatch=' + c.totals.pressMismatch);
-  // E cross-check: E == sum over added items edible units*kcalEach
+  // E cross-check: E == sum over added items + merged-stack deltas
+  // (the replay press file carries addedItems; merged deltas live
+  // in its changedItems — but the census join does not carry
+  // changedItems, so this check re-reads the press files).
   let eOk = true, eDetail = '';
-  for (const m of withYield) {
-    const sum = (m.yield.addedItems || []).filter((it) => it.plantId && it.edible === true)
-      .reduce((a, it) => a + (it.units || 0) * (it.kcalEach || 0), 0);
-    if (sum !== m.yield.E) { eOk = false; eDetail = 'seed ' + m.seed + ' day ' + m.loopDay + ' E ' + m.yield.E + ' sum ' + sum; }
+  {
+    const fs2 = require('fs');
+    const repDir = path.join(E, 'sim-wakeforage-b-corpus-replay');
+    for (const m of withYield) {
+      const f = path.join(repDir, 'wakeforage-replay-press-s' + m.seed + '-d' + m.loopDay + '-' + nm + '.json');
+      if (!fs2.existsSync(f)) { eOk = false; eDetail = 'missing press file ' + f; continue; }
+      const r = JSON.parse(fs2.readFileSync(f, 'utf8'));
+      let sum = (r.addedItems || []).filter((it) => it.plantId && it.edible === true)
+        .reduce((a, it) => a + (it.units || 0) * (it.kcalEach || 0), 0);
+      for (const c of (r.changedItems || [])) {
+        const du = (c.after.units || 0) - (c.before.units || 0);
+        if (du > 0 && c.after.plantId && c.after.edible === true) sum += du * (c.after.kcalEach || 0);
+      }
+      if (sum !== m.yield.E) { eOk = false; eDetail = 'seed ' + m.seed + ' day ' + m.loopDay + ' E ' + m.yield.E + ' sum ' + sum; }
+      let uSum = (r.addedItems || []).filter((it) => it.foodState === 'unknown')
+        .reduce((a, it) => a + (it.units || 0), 0);
+      for (const c of (r.changedItems || [])) {
+        const du = (c.after.units || 0) - (c.before.units || 0);
+        if (du > 0 && c.after.foodState === 'unknown') uSum += du;
+      }
+      if (uSum !== m.yield.unknownUnits) { eOk = false; eDetail = 'seed ' + m.seed + ' day ' + m.loopDay + ' unknown ' + m.yield.unknownUnits + ' sum ' + uSum; }
+    }
   }
-  check(nm + ' E == added-items sum', eOk, eDetail);
+  check(nm + ' E + unknown == inventory-diff sum', eOk, eDetail);
   // Verdict arithmetic cross-check on one row per leg is covered by
   // full re-computation below.
   let vOk = true, vDetail = '';

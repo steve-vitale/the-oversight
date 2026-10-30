@@ -54,7 +54,7 @@ function realSleepMs(ms) {
 function tryWrite(filePath, data, attempts) {
   for (let i = 0; i < attempts; i++) {
     try {
-      fs.mkdirSync(path.dirname(filePath), 'recursive');
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
       fs.writeFileSync(filePath, data);
       const back = fs.readFileSync(filePath, 'utf8');
       if (back !== data) throw new Error('readback mismatch');
@@ -260,17 +260,27 @@ function snapEqual(a, b) {
         for (let i = 0; i < Math.min(invBefore.length, invAfter.length); i++) {
           if (JSON.stringify(invBefore[i]) !== JSON.stringify(invAfter[i])) changed.push({ idx: i, before: invBefore[i], after: invAfter[i] });
         }
-        let knownEdibleKcal = 0, knownInedibleHiddenKcal = 0, unknownUnits = 0;
+        let knownEdibleKcal = 0, knownInedibleHiddenKcal = 0, unknownUnits = 0, mergedDeltaUnits = 0;
         const unknownForms = [], deadfall = { branches: 0, bark: 0, fiber: 0, sticks: 0, vines: 0 };
-        for (const it of added) {
-          if (it.plantId && it.edible === true) knownEdibleKcal += (it.units || 0) * (it.kcalEach || 0);
-          else if (it.plantId && it.edible === false && it.hiddenKcal) knownInedibleHiddenKcal += (it.units || 0) * (it.hiddenKcal || 0);
-          else if (it.foodState === 'unknown') { unknownUnits += (it.units || 0); unknownForms.push(it.name); }
-          else if (it.material === 'branch') deadfall.branches += (it.units || 0);
-          else if (it.material === 'bark') deadfall.bark += (it.units || 0);
-          else if (it.material === 'fiber') deadfall.fiber += (it.units || 0);
-          else if (it.material === 'stick') deadfall.sticks += (it.units || 0);
-          else if (it.material === 'vine') deadfall.vines += (it.units || 0);
+        // Totals count BOTH new stacks (added) and growth of
+        // pre-existing stacks (changed with a positive unit delta):
+        // the engine's addUnknownToLump merges into an existing
+        // lump stack, so a new-stack-only diff undercounts unknowns
+        // (found on 15215 ON day 14: berries +5 into a 5-stack).
+        const classify = (it, mult) => {
+          if (it.plantId && it.edible === true) knownEdibleKcal += mult * (it.kcalEach || 0);
+          else if (it.plantId && it.edible === false && it.hiddenKcal) knownInedibleHiddenKcal += mult * (it.hiddenKcal || 0);
+          else if (it.foodState === 'unknown') { unknownUnits += mult; unknownForms.push(it.name); }
+          else if (it.material === 'branch') deadfall.branches += mult;
+          else if (it.material === 'bark') deadfall.bark += mult;
+          else if (it.material === 'fiber') deadfall.fiber += mult;
+          else if (it.material === 'stick') deadfall.sticks += mult;
+          else if (it.material === 'vine') deadfall.vines += mult;
+        };
+        for (const it of added) classify(it, it.units || 0);
+        for (const c of changed) {
+          const du = (c.after.units || 0) - (c.before.units || 0);
+          if (du > 0) { mergedDeltaUnits += du; classify(c.after, du); }
         }
         const kcalAfter = Math.round((Game2.state.scholar || {}).kcal || 0);
         const out = { seed: TARGET_SEED, leg: (process.env.WOODWARM === '1' ? 'on' : 'guard'),
@@ -278,7 +288,7 @@ function snapEqual(a, b) {
           kcalBefore, kcalAfter, ticksBefore, dayTicksAfter: ((Game2.state.scholar || {}).dayTicks || 0),
           pressSay, pressErr, retNull: (ret === null || ret === undefined),
           addedItems: added, changedItems: changed,
-          totals: { knownEdibleKcal, knownInedibleHiddenKcal, unknownUnits, unknownForms, deadfall } };
+          totals: { knownEdibleKcal, knownInedibleHiddenKcal, unknownUnits, unknownForms, deadfall, mergedDeltaUnits } };
         if (!tryWrite(path.join(OUTDIR, name), JSON.stringify(out), 6)) { console.error('REPLAY WRITE FAIL ' + name); process.exit(3); }
         console.log('replay press seed=' + TARGET_SEED + ' day=' + TARGET_DAY + ' leg=' + out.leg + ' E=' + knownEdibleKcal + ' unknownUnits=' + unknownUnits + ' say=' + JSON.stringify(pressSay.slice(0, 2)));
         done = true;
