@@ -147,7 +147,7 @@ function morningWood(Game) {
 // scholar first and only falls back to getPerson(villagerId), the
 // already-materialized player character. Returns nulls + error
 // string on failure, never throws into the driver.
-function axeSnap(Game) {
+function axeSnap(Game, withPool) {
   try {
     const sch = (Game.state || {}).scholar || {};
     const invItems = sch.inventory || [];
@@ -161,13 +161,22 @@ function axeSnap(Game) {
     try { const ci = (typeof Game.cutInfo === 'function') ? Game.cutInfo('bigtree') : null; if (ci) canFell = !!ci.canFell; } catch (e) {}
     let occupation = null;
     try { occupation = sch.occupationId || sch.occupation || null; } catch (e) {}
-    if (!occupation) {
-      try { const pp = (typeof Game.getPerson === 'function' && Game.villagerId) ? Game.getPerson(Game.villagerId) : null; if (pp) occupation = pp.occupationId || pp.formerOccupation || null; } catch (e) {}
+    let villagerId = null;
+    try { villagerId = Game.villagerId || null; } catch (e) {}
+    let pool = null;
+    if (withPool) {
+      try {
+        const pp = (typeof Game.getPerson === 'function' && villagerId) ? Game.getPerson(villagerId) : null;
+        if (pp) {
+          if (!occupation) occupation = pp.occupationId || pp.formerOccupation || null;
+          pool = { fullPool: Array.isArray(pp.fullPool) ? pp.fullPool.slice() : null, stashed: Array.isArray(pp.stashed) ? pp.stashed.slice() : null };
+        }
+      } catch (e) { pool = { error: String((e && (e.message || e)) || e).slice(0, 200) }; }
     }
     const hasHatchet = inv.includes('hatchet') || eqIds.includes('hatchet') ||
       invNames.some((n) => String(n).toLowerCase() === 'hatchet') ||
       eqNames.some((n) => String(n).toLowerCase() === 'hatchet');
-    return { gameDay: sch.day || 0, inv, invNames, eq: eqIds, eqNames, hasHatchet, tier, toolName, canFell, occupation };
+    return { gameDay: sch.day || 0, villagerId, inv, invNames, eq: eqIds, eqNames, hasHatchet, tier, toolName, canFell, occupation, pool };
   } catch (e) { return { error: String((e && (e.message || e)) || e).slice(0, 200) }; }
 }
 
@@ -312,7 +321,7 @@ async function oneInstance(seed) {
     }
   }
   await setupGame(Game);
-  const spawnSnap = axeSnap(Game);
+  const spawnSnap = axeSnap(Game, true);
 
   const evenings = [], mornings = [];
   let callIdx = 0;

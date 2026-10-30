@@ -90,11 +90,12 @@ function partA() {
 }
 
 function synthSeed(seed, opts) {
-  // opts: {spawnHatchet, mornings:[{loopDay,hasHatchet,canFell}], evenings:[{loopDay,hatchetLines}], endReason}
-  const spawn = { gameDay: 0, inv: opts.spawnHatchet ? ['hatchet'] : ['stone_knife'], invNames: opts.spawnHatchet ? ['Hatchet'] : ['Stone knife'], eq: [], eqNames: [], hasHatchet: !!opts.spawnHatchet, tier: opts.spawnHatchet ? 'fell' : 'whittle', toolName: opts.spawnHatchet ? 'Hatchet' : 'Stone knife', canFell: !!opts.spawnHatchet, occupation: 'carpenter' };
-  const mornings = (opts.mornings || []).map((m) => ({ loopDay: m.loopDay, axe: { gameDay: m.loopDay, inv: m.hasHatchet ? ['hatchet'] : ['stone_knife'], invNames: [], eq: [], eqNames: [], hasHatchet: !!m.hasHatchet, tier: m.canFell ? 'fell' : 'whittle', toolName: m.canFell ? 'Hatchet' : 'Stone knife', canFell: !!m.canFell, occupation: 'carpenter' } }));
-  const evenings = (opts.evenings || []).map((e) => ({ loopDay: e.loopDay, hatchetLines: e.hatchetLines || [] }));
-  return { seed, spawnSnap: spawn, mornings, evenings, daysAlive: opts.daysAlive || 30, endReason: opts.endReason || 'survived', gameDays: 30, maxWaveUnlocked: 1, waveKills: {}, endState: { won: false, villageLost: false, scaleRank: 'village', stage: null, standing: 0 } };
+  // opts: {spawnHatchet, mornings:[{loopDay,hasHatchet,canFell,villagerId}],
+  //   evenings:[{loopDay,hatchetLines,eveningSayTail}], endReason, deaths}
+  const spawn = { gameDay: 0, villagerId: 'v1', inv: opts.spawnHatchet ? ['hatchet'] : ['stone_knife'], invNames: opts.spawnHatchet ? ['Hatchet'] : ['Stone knife'], eq: [], eqNames: [], hasHatchet: !!opts.spawnHatchet, tier: opts.spawnHatchet ? 'fell' : 'whittle', toolName: opts.spawnHatchet ? 'Hatchet' : 'Stone knife', canFell: !!opts.spawnHatchet, occupation: 'carpenter' };
+  const mornings = (opts.mornings || []).map((m) => ({ loopDay: m.loopDay, axe: { gameDay: m.loopDay, villagerId: m.villagerId || 'v1', inv: m.hasHatchet ? ['hatchet'] : ['stone_knife'], invNames: [], eq: [], eqNames: [], hasHatchet: !!m.hasHatchet, tier: m.canFell ? 'fell' : 'whittle', toolName: m.canFell ? 'Hatchet' : 'Stone knife', canFell: !!m.canFell, occupation: 'carpenter' } }));
+  const evenings = (opts.evenings || []).map((e) => ({ loopDay: e.loopDay, hatchetLines: e.hatchetLines || [], eveningSayTail: e.eveningSayTail || [] }));
+  return { seed, spawnSnap: spawn, mornings, evenings, deaths: opts.deaths || [], daysAlive: opts.daysAlive || 30, endReason: opts.endReason || 'survived', gameDays: 30, maxWaveUnlocked: 1, waveKills: {}, endState: { won: false, villageLost: false, scaleRank: 'village', stage: null, standing: 0 } };
 }
 
 function partB() {
@@ -108,6 +109,8 @@ function partB() {
       { name: 'blocked-survived', inst: synthSeed(4, { mornings: [{ loopDay: 2, hasHatchet: false, canFell: false }], evenings: [] }) },
       { name: 'blocked-died', inst: synthSeed(5, { mornings: [{ loopDay: 2, hasHatchet: false, canFell: false }], evenings: [], endReason: 'village-lost' }) },
       { name: 'mismatch', inst: synthSeed(6, { mornings: [{ loopDay: 2, hasHatchet: false, canFell: true }], evenings: [] }) },
+      { name: 'loot-taken', inst: synthSeed(7, { mornings: [{ loopDay: 2, hasHatchet: false, canFell: false }, { loopDay: 5, hasHatchet: true, canFell: true }], evenings: [{ loopDay: 4, hatchetLines: ['Taken: Bow x1, Hatchet x1, Denim Jacket x1.', 'You take bow, hatchet, denim jacket from Nina.'], eveningSayTail: ['The body is stripped.'] }] }) },
+      { name: 'succession', inst: synthSeed(8, { mornings: [{ loopDay: 2, hasHatchet: false, canFell: false }, { loopDay: 5, villagerId: 'v2', hasHatchet: true, canFell: true }], evenings: [{ loopDay: 4, hatchetLines: [] }], deaths: [{ day: 5, player: true, who: 'owen_smith', cause: 'the wild' }] }) },
     ];
     for (const c of cases) fs.writeFileSync(path.join(scratch, 'axeacq-b-nighttravel-s' + c.inst.seed + '.json'), JSON.stringify(c.inst));
     const out = JSON.parse(execFileSync('node', [path.join(__dirname, 'analyze-axeacq-b.js'), scratch], { encoding: 'utf8' }));
@@ -118,7 +121,9 @@ function partB() {
     check('synth never + survived -> BLOCKED-survived', bySeed.get(4).classification === 'BLOCKED-survived-without-acquisition', bySeed.get(4).classification);
     check('synth never + village-lost -> BLOCKED-died', bySeed.get(5).classification === 'BLOCKED-died-before-acquisition', bySeed.get(5).classification);
     check('synth canFell-without-hatchet -> mismatch recorded, still ACQUIRED', !!bySeed.get(6).mismatch && bySeed.get(6).classification === 'ACQUIRED', bySeed.get(6));
-    check('synth summary counts', out.summary.acquired === 4 && out.summary.blocked === 2 && out.summary.unclassified === 0, out.summary);
+    check('synth Taken:+from -> loot source', bySeed.get(7).classification === 'ACQUIRED' && bySeed.get(7).firstAxe.source === 'loot', bySeed.get(7).firstAxe);
+    check('synth vessel change + no lines -> succession, death corroborated', bySeed.get(8).classification === 'ACQUIRED' && bySeed.get(8).firstAxe.source === 'succession' && bySeed.get(8).firstAxe.succession && bySeed.get(8).firstAxe.succession.death && bySeed.get(8).firstAxe.succession.death.who === 'owen_smith', bySeed.get(8).firstAxe);
+    check('synth summary counts', out.summary.acquired === 6 && out.summary.blocked === 2 && out.summary.unclassified === 0 && out.summary.successionAcquisitions === 1, out.summary);
   } finally {
     try { fs.rmSync(scratch, { recursive: true, force: true }); } catch (e) {}
     check('proof scratch dir removed', !fs.existsSync(scratch));

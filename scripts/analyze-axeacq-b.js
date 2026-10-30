@@ -16,12 +16,28 @@ const dir = process.argv[2];
 const bankMode = process.argv.includes('--bank');
 if (!dir) { console.error('usage: analyze-axeacq-b.js <corpus-dir> [--bank]'); process.exit(2); }
 
-function classifySource(lines) {
+function classifySource(lines, tailLines) {
+  // lines: the day's hatchet-naming lines. tailLines: the evening's
+  // last-30 say lines (context: 'The body is stripped' carries no
+  // 'hatchet' literal, so it never appears in lines).
+  // Corpse-loot-as-action reads, in order:
+  //   'You take bow, hatchet, ... from Nina.' (from-line) and/or
+  //   'Taken: Bow x1, Hatchet x1, ...' (take summary) paired with a
+  //   from-line or a 'body is stripped' line in the tail.
+  const all = (lines || []).concat(tailLines || []);
+  const pick = (re) => (lines || []).find((l) => re.test(l)) || null;
+  if ((lines || []).some((l) => /you take .* from /i.test(l))) {
+    return { source: 'loot', line: pick(/you take .* from /i) };
+  }
+  if ((lines || []).some((l) => /^taken:/i.test(l)) &&
+      all.some((l) => /from \w+/i.test(l) || /body is stripped/i.test(l))) {
+    return { source: 'loot', line: pick(/^taken:/i) };
+  }
+  if ((lines || []).some((l) => /corpse|looted|loot(ed)?\b|stripped/i.test(l))) {
+    return { source: 'loot', line: pick(/corpse|looted|loot(ed)?\b|stripped/i) };
+  }
   if (!lines || !lines.length) return { source: 'unrecorded', line: null };
-  const joined = lines.join(' | ');
-  const pick = (re) => lines.find((l) => re.test(l)) || null;
   let line = null;
-  if ((line = pick(/corpse|looted|loot(ed)?\b|took .* off the body|stripped/i))) return { source: 'loot', line };
   if ((line = pick(/ruin|scaveng/i))) return { source: 'find', line };
   if ((line = pick(/grant|System .* giv|contest .* prize|reward/i))) return { source: 'grant', line };
   if ((line = pick(/\bgiv(e|es|ing)\b|trade|gift|hand(s|ed)? .* (the )?hatchet/i))) return { source: 'trade/gift', line };
@@ -55,11 +71,38 @@ function analyzeSeed(inst) {
         // morning's own day lines (loopDay k runs after the snap).
         const prev = evByLoop.get(m.loopDay - 1);
         const lines = (prev && prev.hatchetLines) ? prev.hatchetLines.slice() : [];
-        const cls = classifySource(lines);
+        const tail = (prev && prev.eveningSayTail) ? prev.eveningSayTail.slice() : [];
+        const cls = classifySource(lines, tail);
         first = { loopDay: m.loopDay, gameDay: m.axe.gameDay, source: cls.source, line: cls.line, carrier: 'vessel', priorLoopDay: m.loopDay - 1 };
         break;
       }
     }
+  }
+  // Succession signal: the vessel id at the first-axe morning vs the
+  // previous morning snap (or spawn). A vessel change with no
+  // loot/grant/find/trade line that day means the NEW vessel arrived
+  // already carrying axe-tier — acquisition by succession, not by
+  // the original bot's effort. Corroborated from the deaths sample
+  // (player:true near the acquisition gameDay) when present.
+  let succession = null;
+  if (first && first.loopDay > 0) {
+    const snaps = [spawn].concat(mornings.map((m) => m.axe));
+    const idx = mornings.findIndex((m) => m.loopDay === first.loopDay);
+    const prevSnap = idx > 0 ? mornings[idx - 1].axe : spawn;
+    const curSnap = mornings[idx] ? mornings[idx].axe : null;
+    if (prevSnap && curSnap && prevSnap.villagerId && curSnap.villagerId &&
+        prevSnap.villagerId !== curSnap.villagerId) {
+      const death = (inst.deaths || []).find((dd) => dd.player &&
+        Math.abs((dd.day || 0) - (first.gameDay || 0)) <= 1);
+      succession = { fromVessel: prevSnap.villagerId, toVessel: curSnap.villagerId,
+        death: death ? { day: death.day, who: death.who, cause: death.cause } : null };
+    }
+  }
+  if (first && succession && (first.source === 'unrecorded' || first.source === 'other-named')) {
+    first.source = 'succession';
+    first.succession = succession;
+  } else if (first && succession) {
+    first.succession = succession;
   }
   const classification = first
     ? 'ACQUIRED'
@@ -72,6 +115,13 @@ function analyzeSeed(inst) {
     spawnTier: (spawn && spawn.tier) || null,
     spawnTool: (spawn && spawn.toolName) || null,
     spawnHasHatchet: !!(spawn && spawn.hasHatchet),
+    spawnPool: (spawn && spawn.pool) || null,
+    spawnPoolHatchet: (spawn && spawn.pool && Array.isArray(spawn.pool.fullPool)) ? spawn.pool.fullPool.includes('hatchet') : null,
+    spawnStashedHatchet: (spawn && spawn.pool && Array.isArray(spawn.pool.stashed)) ? spawn.pool.stashed.includes('hatchet') : null,
+    successionCount: mornings.reduce((n, m, i) => {
+      const prev = i === 0 ? spawn : mornings[i - 1].axe;
+      return n + ((prev && m.axe && prev.villagerId && m.axe.villagerId && prev.villagerId !== m.axe.villagerId) ? 1 : 0);
+    }, 0),
     firstAxe: first,
     classification,
     endReason: inst.endReason || null,
@@ -140,6 +190,9 @@ const out = {
   summary: {
     acquired: acquired.length, blocked: rows.length - acquired.length,
     spawnHatchet: spawnCount,
+    spawnPoolHatchet: rows.filter((r) => r.spawnPoolHatchet === true).length,
+    spawnStashedHatchet: rows.filter((r) => r.spawnStashedHatchet === true).length,
+    successionAcquisitions: rows.filter((r) => r.firstAxe && r.firstAxe.source === 'succession').length,
     firstAxeGameDaysNonSpawn: firstDays,
     medianFirstAxeGameDayNonSpawn: median(firstDays),
     unclassified: rows.filter((r) => r.classification !== 'ACQUIRED' && !r.classification.startsWith('BLOCKED')).length,
