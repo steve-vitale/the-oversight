@@ -98,11 +98,21 @@ function analyze(dir, seeds) {
     const events = df.events || [];
     const tbends = events.filter(e => e.type === 'tbend');
     const cInfo = censusInfo(census, row.days);
-    // Floor corroboration: draft rows per uid with hpAfter == 1.
-    const floorUids = new Set();
+    // Floor corroboration, TIME-ORDERED (sim-floortime-a): draft rows
+    // per uid with hpAfter == 1, keyed by raid day. A draft counts for
+    // a tbend only if its day is strictly before the tbend day — a
+    // later draft cannot corroborate the blocker's state at block
+    // time (counterexample: s75113 anaconda, block d61, floor draft
+    // d64). Same-day drafts do not count: the corpus records days,
+    // not intra-day order.
+    const floorDaysByUid = new Map();
     for (const e of events) {
       if (e.type !== 'raid') continue;
-      for (const d of (e.drafts || [])) if (d.hpAfter === 1) floorUids.add(d.uid);
+      for (const d of (e.drafts || [])) {
+        if (d.hpAfter !== 1) continue;
+        if (!floorDaysByUid.has(d.uid)) floorDaysByUid.set(d.uid, []);
+        floorDaysByUid.get(d.uid).push(e.day);
+      }
     }
     // Scholarmelt populations.
     const meetings = (row.scholarmelt && row.scholarmelt.meetings) || [];
@@ -121,7 +131,11 @@ function analyze(dir, seeds) {
           lingering: !!ev.origin.lingering, raidBorn: !!ev.origin.raidBorn, titan: !!ev.origin.titan },
         restored: !!ev.restored, blocker: blockerOf(ev) };
       if (cls === 'BLOCKED') {
-        rec.blocker.floorDraftRow = floorUids.has(ev.occupantBefore.uid);
+        const days = floorDaysByUid.get(ev.occupantBefore.uid) || [];
+        rec.blocker.floorDraftRow = days.some(d => d < ev.day);
+        // Time-ordered detail (for the evidence): the earliest floor
+        // draft day, and whether any floor draft postdates the block.
+        rec.blocker.floorDraftDays = days.slice().sort((a, b) => a - b);
         blockedRows.push(rec);
       }
       if (ev.result === 'lost') {
