@@ -1,0 +1,869 @@
+{
+ "seeds": [
+  75101,
+  75102,
+  75103,
+  75104,
+  75105,
+  75106,
+  75107,
+  75108,
+  75109,
+  75110,
+  75111,
+  75112,
+  75113,
+  75114,
+  75115,
+  75116
+ ],
+ "corpusDir": "/home/hatch/workspace/worktrees/sim-draftflag-a/evidence/2026-10-30/perseed-draftflag-a",
+ "targets": [
+  {
+   "spec": {
+    "seed": 75116,
+    "id": "suburb",
+    "removalUid": 29,
+    "spawnDay": 140,
+    "spawnHp": 1300,
+    "spawnMaxHp": 1300,
+    "preHp": 1285,
+    "postHp": 960
+   },
+   "resolvedUid": 29,
+   "removalCorpusUid": 29,
+   "uidMatchesRemovalCorpus": true,
+   "spawn": {
+    "seq": 49,
+    "day": 140,
+    "hp": 1300,
+    "maxHp": 1300
+   },
+   "removals": [
+    {
+     "seq": 59,
+     "day": 159,
+     "hp": 960,
+     "tile": [
+      4,
+      4
+     ],
+     "lingering": true
+    }
+   ],
+   "trajectoryDays": [
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158
+   ],
+   "draftCandidates": [
+    {
+     "seq": 26,
+     "day": 158,
+     "palisade": true,
+     "haven": {
+      "hx": 4,
+      "hy": 4
+     },
+     "hpBefore": 1285,
+     "hpAfter": 960,
+     "toll": 325,
+     "tollExpected": 325,
+     "tollExact": true,
+     "tileBefore": [
+      6,
+      4
+     ],
+     "tileAfter": [
+      4,
+      4
+     ],
+     "lingeringBefore": false,
+     "lingeringAfter": true,
+     "raidBornBefore": false,
+     "raidBornAfter": true
+    }
+   ],
+   "judged": [
+    {
+     "seq": 26,
+     "day": 158,
+     "palisade": true,
+     "hpBefore": 1285,
+     "hpAfter": 960,
+     "toll": 325,
+     "tollExpected": 325,
+     "tollExact": true
+    }
+   ],
+   "preCensus": {
+    "day": 158,
+    "hp": 1285,
+    "tile": [
+     6,
+     4
+    ],
+    "lingering": false
+   },
+   "postCensus": null,
+   "palisadeConfirmed": true,
+   "tollConfirmed": true,
+   "verdict": "DATED",
+   "reason": null
+  },
+  {
+   "spec": {
+    "seed": 75116,
+    "id": "audit",
+    "removalUid": 28,
+    "spawnDay": 132,
+    "spawnHp": 1100,
+    "spawnMaxHp": 1100,
+    "preHp": 1100,
+    "postHp": 825
+   },
+   "resolvedUid": 28,
+   "removalCorpusUid": 28,
+   "uidMatchesRemovalCorpus": true,
+   "spawn": {
+    "seq": 46,
+    "day": 132,
+    "hp": 1100,
+    "maxHp": 1100
+   },
+   "removals": [
+    {
+     "seq": 48,
+     "day": 140,
+     "hp": 785,
+     "tile": [
+      4,
+      4
+     ],
+     "lingering": false
+    }
+   ],
+   "trajectoryDays": [
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139
+   ],
+   "draftCandidates": [
+    {
+     "seq": 21,
+     "day": 132,
+     "palisade": true,
+     "haven": {
+      "hx": 4,
+      "hy": 4
+     },
+     "hpBefore": 1100,
+     "hpAfter": 825,
+     "toll": 275,
+     "tollExpected": 275,
+     "tollExact": true,
+     "tileBefore": [
+      3,
+      4
+     ],
+     "tileAfter": [
+      4,
+      4
+     ],
+     "lingeringBefore": false,
+     "lingeringAfter": true,
+     "raidBornBefore": false,
+     "raidBornAfter": true
+    }
+   ],
+   "judged": [
+    {
+     "seq": 21,
+     "day": 132,
+     "palisade": true,
+     "hpBefore": 1100,
+     "hpAfter": 825,
+     "toll": 275,
+     "tollExpected": 275,
+     "tollExact": true
+    }
+   ],
+   "preCensus": null,
+   "postCensus": {
+    "day": 133,
+    "hp": 825,
+    "tile": [
+     4,
+     4
+    ],
+    "lingering": true
+   },
+   "palisadeConfirmed": true,
+   "tollConfirmed": true,
+   "verdict": "DATED",
+   "reason": null
+  }
+ ],
+ "secondaryFightSeq23": {
+  "spec": {
+   "uid": 29,
+   "id": "suburb",
+   "liftHp": 960,
+   "dayLo": 158,
+   "dayHi": 160
+  },
+  "tbends": [
+   {
+    "seq": 27,
+    "day": 159,
+    "result": "lost",
+    "origin": {
+     "hp": 960,
+     "tile": [
+      4,
+      4
+     ],
+     "lingering": true
+    },
+    "occupantBefore": {
+     "uid": 33,
+     "id": "callback",
+     "hp": 1
+    },
+    "occupantAfter": {
+     "uid": 33,
+     "id": "callback",
+     "hp": 1
+    },
+    "restored": false
+   }
+  ],
+  "fights": [
+   {
+    "fightSeq": 23,
+    "dayStart": 159,
+    "result": "lost",
+    "liftHp": 960,
+    "lingering": true,
+    "restoredIdentity": false,
+    "restoredHp": null
+   }
+  ]
+ },
+ "band": {
+  "raidEvents": 180,
+  "raidDraftRows": 785,
+  "palisadeTrueRaids": 139,
+  "palisadeFalseRaids": 41,
+  "wildWave4Instances": 38,
+  "lingeringFlipInstances": 15,
+  "lingeringFlipTransitions": 17,
+  "tollDrops": 16,
+  "tollDropUids": 14,
+  "tollDropsMatched": 16,
+  "tollDropsUnmatched": 0
+ },
+ "lingeringFlipTransitionList": [
+  {
+   "seed": 75102,
+   "uid": 26,
+   "id": "algorithm",
+   "fromDay": 64,
+   "toDay": 65
+  },
+  {
+   "seed": 75105,
+   "uid": 36,
+   "id": "suburb",
+   "fromDay": 122,
+   "toDay": 123
+  },
+  {
+   "seed": 75105,
+   "uid": 39,
+   "id": "eater",
+   "fromDay": 149,
+   "toDay": 150
+  },
+  {
+   "seed": 75105,
+   "uid": 39,
+   "id": "eater",
+   "fromDay": 156,
+   "toDay": 157
+  },
+  {
+   "seed": 75105,
+   "uid": 42,
+   "id": "strike",
+   "fromDay": 149,
+   "toDay": 150
+  },
+  {
+   "seed": 75105,
+   "uid": 42,
+   "id": "strike",
+   "fromDay": 156,
+   "toDay": 157
+  },
+  {
+   "seed": 75105,
+   "uid": 43,
+   "id": "suburb",
+   "fromDay": 149,
+   "toDay": 150
+  },
+  {
+   "seed": 75110,
+   "uid": 23,
+   "id": "eulogy",
+   "fromDay": 67,
+   "toDay": 68
+  },
+  {
+   "seed": 75110,
+   "uid": 24,
+   "id": "algorithm",
+   "fromDay": 79,
+   "toDay": 80
+  },
+  {
+   "seed": 75110,
+   "uid": 25,
+   "id": "eater",
+   "fromDay": 79,
+   "toDay": 80
+  },
+  {
+   "seed": 75110,
+   "uid": 26,
+   "id": "strike",
+   "fromDay": 79,
+   "toDay": 80
+  },
+  {
+   "seed": 75110,
+   "uid": 34,
+   "id": "audit",
+   "fromDay": 104,
+   "toDay": 105
+  },
+  {
+   "seed": 75113,
+   "uid": 47,
+   "id": "eulogy",
+   "fromDay": 112,
+   "toDay": 113
+  },
+  {
+   "seed": 75114,
+   "uid": 40,
+   "id": "reunion",
+   "fromDay": 120,
+   "toDay": 121
+  },
+  {
+   "seed": 75114,
+   "uid": 45,
+   "id": "algorithm",
+   "fromDay": 157,
+   "toDay": 158
+  },
+  {
+   "seed": 75116,
+   "uid": 25,
+   "id": "suburb",
+   "fromDay": 121,
+   "toDay": 122
+  },
+  {
+   "seed": 75116,
+   "uid": 35,
+   "id": "eulogy",
+   "fromDay": 158,
+   "toDay": 159
+  }
+ ],
+ "tollDropList": [
+  {
+   "seed": 75105,
+   "uid": 36,
+   "id": "suburb",
+   "fromDay": 122,
+   "toDay": 123,
+   "fromHp": 1300,
+   "toHp": 975,
+   "maxHp": 1300,
+   "fromTile": [
+    4,
+    3
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 15,
+     "day": 122,
+     "palisade": true,
+     "toll": 325,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75105,
+   "uid": 39,
+   "id": "eater",
+   "fromDay": 149,
+   "toDay": 150,
+   "fromHp": 950,
+   "toHp": 712,
+   "maxHp": 950,
+   "fromTile": [
+    3,
+    6
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 23,
+     "day": 149,
+     "palisade": true,
+     "toll": 238,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75105,
+   "uid": 39,
+   "id": "eater",
+   "fromDay": 156,
+   "toDay": 157,
+   "fromHp": 712,
+   "toHp": 474,
+   "maxHp": 950,
+   "fromTile": [
+    4,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 24,
+     "day": 156,
+     "palisade": true,
+     "toll": 238,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75105,
+   "uid": 42,
+   "id": "strike",
+   "fromDay": 149,
+   "toDay": 150,
+   "fromHp": 1000,
+   "toHp": 750,
+   "maxHp": 1000,
+   "fromTile": [
+    5,
+    3
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 23,
+     "day": 149,
+     "palisade": true,
+     "toll": 250,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75105,
+   "uid": 42,
+   "id": "strike",
+   "fromDay": 156,
+   "toDay": 157,
+   "fromHp": 750,
+   "toHp": 500,
+   "maxHp": 1000,
+   "fromTile": [
+    4,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 24,
+     "day": 156,
+     "palisade": true,
+     "toll": 250,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75105,
+   "uid": 43,
+   "id": "suburb",
+   "fromDay": 149,
+   "toDay": 150,
+   "fromHp": 1300,
+   "toHp": 975,
+   "maxHp": 1300,
+   "fromTile": [
+    3,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 23,
+     "day": 149,
+     "palisade": true,
+     "toll": 325,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75110,
+   "uid": 23,
+   "id": "eulogy",
+   "fromDay": 67,
+   "toDay": 68,
+   "fromHp": 900,
+   "toHp": 675,
+   "maxHp": 900,
+   "fromTile": [
+    5,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 6,
+     "day": 67,
+     "palisade": true,
+     "toll": 225,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75110,
+   "uid": 24,
+   "id": "algorithm",
+   "fromDay": 79,
+   "toDay": 80,
+   "fromHp": 1000,
+   "toHp": 750,
+   "maxHp": 1000,
+   "fromTile": [
+    6,
+    5
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 7,
+     "day": 79,
+     "palisade": true,
+     "toll": 250,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75110,
+   "uid": 25,
+   "id": "eater",
+   "fromDay": 79,
+   "toDay": 80,
+   "fromHp": 950,
+   "toHp": 712,
+   "maxHp": 950,
+   "fromTile": [
+    5,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 7,
+     "day": 79,
+     "palisade": true,
+     "toll": 238,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75110,
+   "uid": 26,
+   "id": "strike",
+   "fromDay": 79,
+   "toDay": 80,
+   "fromHp": 1000,
+   "toHp": 750,
+   "maxHp": 1000,
+   "fromTile": [
+    4,
+    2
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 7,
+     "day": 79,
+     "palisade": true,
+     "toll": 250,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75110,
+   "uid": 34,
+   "id": "audit",
+   "fromDay": 104,
+   "toDay": 105,
+   "fromHp": 1100,
+   "toHp": 825,
+   "maxHp": 1100,
+   "fromTile": [
+    5,
+    3
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 19,
+     "day": 104,
+     "palisade": true,
+     "toll": 275,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75113,
+   "uid": 47,
+   "id": "eulogy",
+   "fromDay": 112,
+   "toDay": 113,
+   "fromHp": 900,
+   "toHp": 675,
+   "maxHp": 900,
+   "fromTile": [
+    3,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 19,
+     "day": 112,
+     "palisade": true,
+     "toll": 225,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75114,
+   "uid": 40,
+   "id": "reunion",
+   "fromDay": 120,
+   "toDay": 121,
+   "fromHp": 1200,
+   "toHp": 900,
+   "maxHp": 1200,
+   "fromTile": [
+    6,
+    4
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 21,
+     "day": 120,
+     "palisade": true,
+     "toll": 300,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75114,
+   "uid": 45,
+   "id": "algorithm",
+   "fromDay": 157,
+   "toDay": 158,
+   "fromHp": 1000,
+   "toHp": 750,
+   "maxHp": 1000,
+   "fromTile": [
+    4,
+    5
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 35,
+     "day": 157,
+     "palisade": true,
+     "toll": 250,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75116,
+   "uid": 25,
+   "id": "suburb",
+   "fromDay": 121,
+   "toDay": 122,
+   "fromHp": 1300,
+   "toHp": 975,
+   "maxHp": 1300,
+   "fromTile": [
+    4,
+    2
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 16,
+     "day": 121,
+     "palisade": true,
+     "toll": 325,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  },
+  {
+   "seed": 75116,
+   "uid": 35,
+   "id": "eulogy",
+   "fromDay": 158,
+   "toDay": 159,
+   "fromHp": 900,
+   "toHp": 675,
+   "maxHp": 900,
+   "fromTile": [
+    3,
+    5
+   ],
+   "toTile": [
+    4,
+    4
+   ],
+   "matchedDrafts": [
+    {
+     "seq": 26,
+     "day": 158,
+     "palisade": true,
+     "toll": 225,
+     "tollExact": true
+    }
+   ],
+   "matched": true
+  }
+ ],
+ "unexplainedTransitions": [],
+ "wall": {
+  "wins": 9,
+  "wonFull": 0,
+  "nationalEver": 13,
+  "nationalFinal": 11,
+  "table": 12,
+  "entered": 9,
+  "wave4": 9,
+  "wave5": 0,
+  "medianDays": 118,
+  "deathTotal": 527
+ }
+}
