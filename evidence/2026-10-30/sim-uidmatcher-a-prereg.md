@@ -294,3 +294,36 @@ equality AND normalized equality separately, and fails unless
 every raw difference is a path-string difference. No metric,
 window, matcher rule, or GO leg changes — this is a comparison
 normalization for a known path artifact, not a verdict change.
+
+## PREREG CORRECTION #2 (committed after the pilot run, before the
+full 16-seed run — chain→uid resolution rule only)
+
+The pilot run exposed a gap in Step 1 rule (d): the s75116 suburb
+chain has exactly one meeting, on the day its beast SPAWNED
+(d140) — so no start-of-day census entry for that uid exists on
+the meeting day, and the rule as written left the chain
+UNRESOLVED (both candidate uids: no-census-hit-on-meeting-day),
+even though the spawn event itself carries the pre-meeting hp.
+The rule is extended, before the full run, as follows (no other
+rule changes; the pilot judgments for algorithm, eulogy, and
+audit are unaffected — they resolve under both versions, and
+the pilot suburb result under the original rule is disclosed
+here as UNRESOLVED for that reason):
+- For each meeting, the hp check passes by EITHER (a) the
+  original same-day census check (census entry on the meeting
+  day with hp == mHpStart), OR (b) a spawn-day check, used only
+  when no census entry for that uid exists on the meeting day:
+  the uid's first spawn event falls on the meeting day with
+  spawn hp == mHpStart, AND the next-day census entry for that
+  uid has hp == mHpLeft (the post-meeting hp). The spawn event
+  is the pre-meeting state for a beast born that day, so (b) is
+  the same start-of-day logic with the birth as the start.
+- A same-day census entry that MISMATCHES still vetoes the
+  candidate (no fallback to (b) for that meeting). A meeting
+  with neither a census entry nor a passing spawn-day check is
+  simply unchecked — it neither proves nor vetoes; rule (d)
+  still requires at least one CHECKED meeting (by (a) or (b)).
+- The suburb pilot case under the corrected rule is expected to
+  resolve to the uid whose spawn day is d140 at hp 1300 with a
+  d141 census at 1285; any other candidate that also passes is
+  reported, and two passing candidates remain AMBIGUOUS.
