@@ -321,10 +321,26 @@ an identical quad would be a no-op anyway).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
-Master at worktree creation: 359a384cc. Master did NOT move during
-the run (verified 359a384cc still HEAD at closeout) — no rebase
-needed. Proof re-run after the suite: `node --check` on driver +
-analyzer still clean; measured files untouched by the suite (only
+Master at worktree creation: 359a384cc. Master DID move during the
+run (siblings landed; HEAD was c2d707a4b at the first merge attempt,
+then b7d50b357, then ca8c40d85 at rebase time), so the first
+`git merge --ff-only journey-scale` FAILED (loud, not forced) and
+the body's rebase path was taken instead — with one recovery
+complication, documented here, not hidden: the closeout command
+chain ran `worktree-release.sh journey-scale merged` and
+`worktree remove --force` AFTER the failed merge, so the worktree
+was removed and the registry entry cleared while the branch was
+still unmerged. The branch itself was intact (both commits on top
+of 359a384cc), so recovery was: re-register journey-scale, restart
+the heartbeat loop with an absolute script path (the first two
+restarted loops failed with a stale-cwd error because the old
+worktree directory had been deleted under them — absolute path
+fixed it, verified by registry heartbeat), rebase onto master
+ca8c40d85 (clean, no conflicts, tree clean), re-run proofs
+(`node --check` on driver + analyzer clean; analyzer reproduces
+both quad census tables byte-for-byte after the rebase; `git diff
+master -- src/js/` 0 lines), then merge --ff-only. Proof re-run
+after the suite: measured files untouched by the suite (only
 docs/ONTOLOGY.md was suite-touched, reverted above).
 Merged locally, pending ship (no bump, no push, no live verify —
 ship loop owns those).
