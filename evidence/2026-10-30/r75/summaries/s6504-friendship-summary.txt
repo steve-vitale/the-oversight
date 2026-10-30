@@ -1,0 +1,382 @@
+# SURFACE+SEEDED — seed 6504 (142d, 7 alive)
+
+npcPairs=82 deep2=28 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=319 closeReadsServed=35 grievanceServes=29 othersSteered=15
+COND-TP: firstDeep2Day=35 lateClose=213 lateTP=204 lateNull=0 condRate=95.8% pooledTP=204/229 pooledRate=89.1% grievReadsByWhy={"grievance":12,"vgrievance":29}
+FUNNEL (natural): convos=414 subject=414 offered=371 picked=304 classes={"offered-not-picked":67,"subject-no-offer":43,"picked-others":304}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=43 rate=10.4% offered=371 mainOffered=4 subjectOffered=370 picked=304 latePicks=123 latePicksMain=1 latePicksSubject=122
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Oliver / Diana — "Good question." "Lauren ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Stan / Nadia — "Good question." "Niamh talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Nadia / Lauren — "Wei sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=369 picks=304 latePicks=121 missedChangedNotOffered=3
+WRAPSERVE: convos=41 matcherHits=29 matcherServes=29 classes={"grievance-line":29,"deflection":2,"other":10}
+FUNNEL-PROBE (subject-no-offer turns): turns=184 menuProblem=145 pickProblem=39
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":25,"accepts":9,"acceptRate":0.36,"vetoes":{},"chanceMin":5,"chanceMax":91,"chanceMean":40.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":50,"forageOffers":14,"otherFavorOffers":36,"accepts":14,"acceptAttempts":14,"waits":9,"starts":8,"startBlocked":8,"forages":6,"forageNodeBarren":18,"forageBarren":3,"forageBarrenTravel":0,"forageBarrenNode":3,"forageTravelBlocked":0,"forageTravelWalked":9,"stepRetries":2,"retryAssigned":2,"retryStarts":2,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":6,"keptMatched":0,"keptMatchedStrict":0}
+OUTING END STATES: [{"vid":"naran_tumen","vidName":"Naran","favorId":"favor-naran_tumen-140-51","state":"promised","promisedDay":140,"meetDay":141,"deadline":142,"promiseKept":false,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Stan kind=forage_help favorId=favor-stan_kowalski-6-1 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Diana kind=food_share favorId=favor-gen_f1rpe9f-9-2 task=share food with Diana — they're going hungry
+  FAVOR-OFFER d14: Wei kind=food_share favorId=favor-chen_wei-14-3 task=share food with Wei — they're going hungry
+  FAVOR-OFFER d17: Diana kind=forage_help favorId=favor-gen_f1rpe9f-17-4 task=forage with Diana tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Niamh kind=heal_help favorId=favor-gen_gbdybll-20-5 task=help Niamh with their injury
+  FAVOR-OFFER d38: Diana kind=forage_help favorId=favor-gen_f1rpe9f-38-6 task=forage with Diana tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Wei kind=forage_help favorId=favor-chen_wei-38-7 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d39: Stan kind=food_share favorId=favor-stan_kowalski-39-8 task=share food with Stan — they're running on empty
+  FAVOR-OFFER d44: Stan kind=forage_help favorId=favor-stan_kowalski-44-9 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Lauren kind=food_share favorId=favor-gen_r1np4fm-46-10 task=share food with Lauren — they're going hungry
+  FAVOR-OFFER d47: Stan kind=food_share favorId=favor-stan_kowalski-47-11 task=share food with Stan — they're past hungry
+  FAVOR-OFFER d51: Wei kind=sick_help favorId=favor-chen_wei-51-12 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d52: Naran kind=forage_help favorId=favor-naran_tumen-52-13 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Arlo kind=heal_help favorId=favor-visjoin_49-52-14 task=help Arlo with their injury
+  FAVOR-OFFER d53: Arlo kind=heal_help favorId=favor-visjoin_49-53-15 task=help Arlo with their injury
+  FAVOR-OFFER d58: Lauren kind=food_share favorId=favor-gen_r1np4fm-58-17 task=share food with Lauren — they're running on empty
+  FAVOR-OFFER d59: Stan kind=food_share favorId=favor-stan_kowalski-58-16 task=share food with Stan — they're past hungry
+  FAVOR-OFFER d59: Naran kind=forage_help favorId=favor-naran_tumen-59-18 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Lauren kind=food_share favorId=favor-gen_r1np4fm-62-19 task=share food with Lauren — they're going hungry
+  FAVOR-OFFER d64: Stan kind=forage_help favorId=favor-stan_kowalski-63-20 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d66: Wei kind=forage_help favorId=favor-chen_wei-64-21 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Stan kind=heal_help favorId=favor-stan_kowalski-68-22 task=help Stan with their injury
+  FAVOR-OFFER d70: Lauren kind=food_share favorId=favor-gen_r1np4fm-70-23 task=share food with Lauren — they're going hungry
+  FAVOR-OFFER d71: Wei kind=sick_help favorId=favor-chen_wei-71-24 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d76: Lauren kind=sick_help favorId=favor-gen_r1np4fm-76-25 task=help Lauren with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d83: Stan kind=heal_help favorId=favor-stan_kowalski-83-26 task=help Stan with their injury
+  FAVOR-OFFER d88: Naran kind=heal_help favorId=favor-naran_tumen-88-27 task=help Naran with their injury
+  FAVOR-OFFER d99: Lauren kind=food_share favorId=favor-gen_r1np4fm-99-28 task=share food with Lauren — they're running on empty
+  FAVOR-OFFER d101: Wei kind=heal_help favorId=favor-chen_wei-101-29 task=help Wei with their injury
+  FAVOR-OFFER d102: Lauren kind=food_share favorId=favor-gen_r1np4fm-102-30 task=share food with Lauren — they're going hungry
+  FAVOR-OFFER d103: Naran kind=heal_help favorId=favor-naran_tumen-103-31 task=help Naran with their injury
+  FAVOR-OFFER d108: Wei kind=sick_help favorId=favor-chen_wei-108-32 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d111: Naran kind=water_haul favorId=favor-naran_tumen-111-33 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d111: Stan kind=water_haul favorId=favor-stan_kowalski-111-34 task=bring four liters home from the creek with Stan; set out at dawn
+  FAVOR-OFFER d113: Wei kind=forage_help favorId=favor-chen_wei-113-35 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d116: Stan kind=water_haul favorId=favor-stan_kowalski-115-36 task=bring four liters home from the creek with Stan; set out at dawn
+  FAVOR-OFFER d120: Lauren kind=forage_help favorId=favor-gen_r1np4fm-120-38 task=forage with Lauren tomorrow to rebuild the pantry
+  FAVOR-OFFER d121: Diana kind=water_haul favorId=favor-gen_f1rpe9f-116-37 task=bring four liters home from the creek with Diana; set out at dawn
+  FAVOR-OFFER d123: Lauren kind=water_haul favorId=favor-gen_r1np4fm-123-40 task=bring four liters home from the creek with Lauren; set out at dawn
+  FAVOR-OFFER d123: Wei kind=sick_help favorId=favor-chen_wei-123-41 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d124: Stan kind=sick_help favorId=favor-stan_kowalski-124-42 task=help Stan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d127: Diana kind=forage_help favorId=favor-gen_f1rpe9f-126-43 task=forage with Diana tomorrow to rebuild the pantry
+  FAVOR-OFFER d128: Wei kind=sick_help favorId=favor-chen_wei-128-45 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d128: Naran kind=forage_help favorId=favor-naran_tumen-128-44 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d130: Diana kind=food_share favorId=favor-gen_f1rpe9f-130-46 task=share food with Diana — they're going hungry
+  FAVOR-OFFER d133: Wei kind=food_share favorId=favor-chen_wei-133-47 task=share food with Wei — they're going hungry
+  FAVOR-OFFER d133: Naran kind=water_haul favorId=favor-naran_tumen-133-48 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d134: Ekow kind=water_haul favorId=favor-visjoin_101-134-49 task=bring four liters home from the creek with Ekow; set out at dawn
+  FAVOR-OFFER d136: Stan kind=water_haul favorId=favor-stan_kowalski-136-50 task=bring four liters home from the creek with Stan; set out at dawn
+  FAVOR-OFFER d140: Naran kind=forage_help favorId=favor-naran_tumen-140-51 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d6: Stan favorId=favor-stan_kowalski-6-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d17: Diana favorId=favor-gen_f1rpe9f-17-4 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d38: Diana favorId=favor-gen_f1rpe9f-38-6 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d38: Wei favorId=favor-chen_wei-38-7 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d44: Stan favorId=favor-stan_kowalski-44-9 accepted=true state=promised meetDay=45
+  FAVOR-ACCEPT d52: Naran favorId=favor-naran_tumen-52-13 accepted=true state=promised meetDay=53
+  FAVOR-ACCEPT d59: Naran favorId=favor-naran_tumen-59-18 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d64: Stan favorId=favor-stan_kowalski-63-20 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d66: Wei favorId=favor-chen_wei-64-21 accepted=true state=promised meetDay=67
+  FAVOR-ACCEPT d115: Wei favorId=favor-chen_wei-113-35 accepted=true state=promised meetDay=116
+  FAVOR-ACCEPT d120: Lauren favorId=favor-gen_r1np4fm-120-38 accepted=true state=promised meetDay=121
+  FAVOR-ACCEPT d127: Diana favorId=favor-gen_f1rpe9f-126-43 accepted=true state=promised meetDay=128
+  FAVOR-ACCEPT d128: Naran favorId=favor-naran_tumen-128-44 accepted=true state=promised meetDay=129
+  FAVOR-ACCEPT d140: Naran favorId=favor-naran_tumen-140-51 accepted=true state=promised meetDay=141
+  INVITE-DEC d8 party: Gabriela -> Stan chance=38.6 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"grieving","fear":4,"trust":34,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 34","grieving mood (-10)"]
+  INVITE-DEC d8 party: Gabriela -> Theo chance=60.8 accept=true veto=- inputs={"temp":"restless","goal":"feed","mood":"grieving","fear":4,"trust":27,"bond":{"v":16,"depth":0},"partySize":0} reasons=["trust 27","restless temperament (+10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d9 party: Gabriela -> Diana chance=5 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"hungry","fear":0,"trust":20,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 20","wants to be alone (-40)"]
+  INVITE-DEC d9 party: Gabriela -> Stan chance=41.400000000000006 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"cheerful","fear":0,"trust":41,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 41","sick (-20)","cheerful mood (+10)"]
+  INVITE-DEC d10 party: Gabriela -> Zuri chance=66 accept=false veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":12,"trust":40,"bond":{"v":8,"depth":0},"partySize":1} reasons=["trust 40","bold temperament (+15)"]
+  INVITE-DEC d10 party: Gabriela -> Wei chance=47 accept=true veto=- inputs={"temp":"gentle","goal":"record","mood":"steady","fear":12,"trust":30,"bond":{"v":8,"depth":0},"partySize":1} reasons=["trust 30"]
+  INVITE-DEC d10 party: Gabriela -> Lauren chance=31.400000000000006 accept=false veto=- inputs={"temp":"prickly","goal":"family","mood":"steady","fear":12,"trust":41,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 41","prickly temperament (-20)"]
+  INVITE-DEC d11 party: Gabriela -> Oliver chance=47.4 accept=false veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":12,"trust":31,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 31"]
+  INVITE-DEC d11 party: Gabriela -> Mateo chance=66.8 accept=true veto=- inputs={"temp":"bold","goal":"prove","mood":"steady","fear":12,"trust":42,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 42","bold temperament (+15)"]
+  INVITE-DEC d15 party: Zuri -> Oliver chance=48 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"grieving","fear":5,"trust":45,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 45","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d18 party: Zuri -> Stan chance=42.4 accept=true veto=- inputs={"temp":"dry","goal":"home","mood":"grieving","fear":37,"trust":31,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 31","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Theo -> Lauren chance=56.80000000000001 accept=false veto=- inputs={"temp":"prickly","goal":"family","mood":"grieving","fear":24,"trust":92,"bond":{"v":25,"depth":1},"partySize":3} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Theo -> Niamh chance=19.200000000000003 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":24,"trust":73,"bond":{"v":24,"depth":0},"partySize":3} reasons=["trust 73","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Theo -> Naran chance=58.400000000000006 accept=true veto=- inputs={"temp":"dry","goal":"family","mood":"grieving","fear":24,"trust":71,"bond":{"v":21,"depth":0},"partySize":3} reasons=["trust 71","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d32 party: Theo -> Diana chance=7.200000000000003 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"grieving","fear":0,"trust":43,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 43","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d32 party: Theo -> Lauren chance=56.80000000000001 accept=true veto=- inputs={"temp":"prickly","goal":"family","mood":"grieving","fear":0,"trust":92,"bond":{"v":27,"depth":1},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d46 party: Oliver -> Diana chance=14 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"grieving","fear":0,"trust":60,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 60","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d46 party: Oliver -> Diana chance=14 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"grieving","fear":0,"trust":60,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 60","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d47 party: Oliver -> Diana chance=14.400000000000006 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"grieving","fear":4,"trust":61,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 61","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d49 party: Oliver -> Diana chance=34.400000000000006 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"steady","fear":0,"trust":61,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 61","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d50 party: Oliver -> Diana chance=34.8 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"steady","fear":4,"trust":62,"bond":{"v":32,"depth":1},"partySize":4} reasons=["trust 62","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d50 party: Oliver -> Niamh chance=48.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":4,"trust":96,"bond":{"v":46,"depth":1},"partySize":4} reasons=["trust 96","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d53 party: Oliver -> Diana chance=35.2 accept=false veto=- inputs={"temp":"stoic","goal":"alone","mood":"steady","fear":4,"trust":63,"bond":{"v":40,"depth":1},"partySize":4} reasons=["trust 63","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d53 party: Oliver -> Diana chance=35.599999999999994 accept=true veto=- inputs={"temp":"stoic","goal":"alone","mood":"steady","fear":4,"trust":64,"bond":{"v":42,"depth":1},"partySize":4} reasons=["trust 64","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d129 party: Lauren -> Nadia chance=91 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"grieving","fear":42,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":32,"v":40,"depth":2},{"day":33,"v":44,"depth":2},{"day":34,"v":48,"depth":2},{"day":35,"v":48,"depth":2},{"day":37,"v":54,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":58,"depth":3},{"day":39,"v":58,"depth":3},{"day":41,"v":60,"depth":3},{"day":41,"v":60,"depth":3},{"day":42,"v":60,"depth":3},{"day":43,"v":60,"depth":3},{"day":44,"v":62,"depth":3},{"day":45,"v":66,"depth":3}] class=rise
+GOSSIP: totalPicks=214 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=51 31-60=63 61-90=67 91-120=71 121+=52 naturalPicks=304 seededPicks=15 gossipPicks=214
+SEEDED: {"pair":{"a":"gen_f1rpe9f","b":"gen_gbdybll","aName":"Diana","bName":"Niamh"},"day":31,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":32,"v":40,"depth":2},{"day":33,"v":44,"depth":2},{"day":34,"v":48,"depth":2},{"day":35,"v":48,"depth":2},{"day":37,"v":54,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":58,"depth":3},{"day":39,"v":58,"depth":3},{"day":41,"v":60,"depth":3},{"day":41,"v":60,"depth":3},{"day":42,"v":60,"depth":3},{"day":43,"v":60,"depth":3},{"day":44,"v":62,"depth":3},{"day":45,"v":66,"depth":3}],"crackTraceClass":"rise","vAt7":48,"depthAt7":2,"vDrop":2,"depthDrop":0,"crack7":false,"firstServe":{"day":41,"why":"vgrievance"},"serveWithin30":true,"serves":29,"servesAll":[{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":80,"why":"vgrievance"},{"day":83,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":86,"why":"vgrievance"},{"day":88,"why":"vgrievance"},{"day":92,"why":"vgrievance"},{"day":98,"why":"vgrievance"}],"effect":true}
+  FRIEND d45: Diana <> Lauren — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Wei <> Diana — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Lauren <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Wei <> Stan — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d35: Zuri <> Oliver — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d50: Diana <> Theo — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d90: Naran <> Stan — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d105: Oliver <> Stan — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d45: Niamh <> Lauren — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Niamh <> Oliver — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d55: Niamh <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Niamh <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Wei <> Lauren — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Diana <> Niamh — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Naran <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Wei <> Niamh — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Diana <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Diana <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Wei <> Oliver — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d105: Lauren <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Lauren <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Diana <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Wei <> Naran — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d50: Lauren <> Theo — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d130: Niamh <> Nadia — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d115: Wei <> Nadia — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d85: Lauren <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Diana <> Nadia — maxDepth 3, final 3 (v=78), dropped 0
+  CLOSE-READ d23: Niamh about Diana — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Stan about Lauren — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Stan about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Stan about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Stan about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Oliver about Niamh — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Niamh about Diana — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Oliver about Niamh — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Wei about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Oliver about Niamh — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Oliver about Niamh — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Stan about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Oliver about Niamh — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Lauren about Stan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Wei about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Stan about Lauren — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Stan about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Oliver about Niamh — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Wei about Lauren — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Oliver about Niamh — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Wei about Lauren — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Wei about Lauren — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Stan about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Naran about Lauren — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Niamh about Diana — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Stan about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Wei about Lauren — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Oliver about Niamh — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Stan about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Wei about Lauren — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Stan about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Wei about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Naran about Lauren — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Stan about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Naran about Lauren — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Wei about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Naran about Lauren — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Naran about Lauren — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Lauren about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Wei about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Wei about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Lauren about Stan — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Wei about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Naran about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Lauren about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Lauren about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Lauren about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Naran about Lauren — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Lauren about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Naran about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Nadia about Lauren — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Naran about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Naran about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Nadia about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Stan about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Nadia about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Niamh about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Nadia about Lauren — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Stan about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Stan about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Nadia about Lauren — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Stan about Niamh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Nadia about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Wei about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Stan about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Diana about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Lauren about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Naran about Lauren — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Stan about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Nadia about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Naran about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Stan about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Naran about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Naran about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Nadia about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Stan about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Naran about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Naran about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Wei about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Diana about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Stan about Diana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Nadia about Wei — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d4: Gabriela about Stan (why=grievance)
+  GRIEV-READ d14: Naran about Diana (why=grievance)
+  GRIEV-READ d18: Naran about Diana (why=grievance)
+  GRIEV-READ d20: Naran about Diana (why=grievance)
+  GRIEV-READ d22: Diana about Naran (why=grievance)
+  GRIEV-READ d23: Naran about Diana (why=grievance)
+  KNACK d4 A man, maybe 60s: "Good question." "the woman in her 60s talks to the garden. The garden listens. I've seen it."
+  KNACK d20 Lauren: "Good question." "that stray dog — the one that bit two people — lets Naran touch it."
+  KNACK d22 Oliver: "Good question." "Lauren ate something last month that should've killed them. They're fine."
+  KNACK d29 Naran: "Huh. Let me think about that." "So. Theo sees in the dark. Not well — but better than you. Better than me."
+  KNACK d36 Diana: "Stan found a lost knife by smell last week. By SMELL. It is what it is."
+  KNACK d40 Lauren: "You want to know about that? Okay." "Stan found a lost knife by smell last week. By SMELL."
+  KNACK d44 Stan: "Good question." "Niamh talks to the garden. The garden listens. I've seen it."
+  KNACK d45 Lauren: "Oliver talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":3,"a stranger":2,"monster":2,"the night":1}

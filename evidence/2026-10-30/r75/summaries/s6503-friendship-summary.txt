@@ -1,0 +1,270 @@
+# SURFACE+SEEDED — seed 6503 (112d, 0 alive)
+
+npcPairs=65 deep2=32 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=237 closeReadsServed=47 grievanceServes=33 othersSteered=30
+COND-TP: firstDeep2Day=30 lateClose=165 lateTP=128 lateNull=0 condRate=77.6% pooledTP=129/171 pooledRate=75.4% grievReadsByWhy={"grievance":7,"vgrievance":38}
+FUNNEL (natural): convos=327 subject=327 offered=282 picked=208 classes={"subject-no-offer":45,"offered-not-picked":74,"picked-others":208}
+FUNNEL-UNSTEERED (r55 strict): convos=327 subjectNoOffer=45 rate=13.8% offered=282 mainOffered=0 subjectOffered=282 picked=208 latePicks=56 latePicksMain=0 latePicksSubject=56
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Valeria / Ramadan / Vera — "Greta talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Omar / Priya — "Good question." "Vera talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Ramadan / Greta — "You want to know about that? Okay." "Ezra found a lost knife by smell last week. By SMELL."
+REOFFER: offers=283 picks=227 latePicks=56 missedChangedNotOffered=5
+WRAPSERVE: convos=45 matcherHits=33 matcherServes=33 classes={"grievance-line":33,"deflection":3,"other":9}
+FUNNEL-PROBE (subject-no-offer turns): turns=143 menuProblem=114 pickProblem=29
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":15,"accepts":9,"acceptRate":0.6,"vetoes":{},"chanceMin":25.4,"chanceMax":91,"chanceMean":62.8} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=3
+FAVOR (r65): funnel={"offers":15,"forageOffers":1,"otherFavorOffers":14,"accepts":1,"acceptAttempts":1,"waits":0,"starts":0,"startBlocked":2,"forages":0,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":0,"retryAssigned":0,"retryStarts":0,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0}
+OUTING END STATES: [{"vid":"gen_i3w9naf","vidName":"Ezra","favorId":"favor-gen_i3w9naf-17-1","state":"acknowledged","promisedDay":17,"meetDay":18,"deadline":19,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d17: Ezra kind=forage_help favorId=favor-gen_i3w9naf-17-1 task=forage with Ezra tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Priya kind=food_share favorId=favor-priya_nair-53-2 task=share food with Priya — they're going hungry
+  FAVOR-OFFER d59: Valeria kind=food_share favorId=favor-valeria_quispe-59-3 task=share food with Valeria — they're running on empty
+  FAVOR-OFFER d65: Priya kind=water_haul favorId=favor-priya_nair-65-5 task=bring four liters home from the creek with Priya; set out at dawn
+  FAVOR-OFFER d65: Valeria kind=water_haul favorId=favor-valeria_quispe-65-4 task=bring four liters home from the creek with Valeria; set out at dawn
+  FAVOR-OFFER d74: Priya kind=water_haul favorId=favor-priya_nair-68-6 task=bring four liters home from the creek with Priya; set out at dawn
+  FAVOR-OFFER d82: Valeria kind=water_haul favorId=favor-valeria_quispe-82-7 task=bring four liters home from the creek with Valeria; set out at dawn
+  FAVOR-OFFER d96: Greta kind=water_haul favorId=favor-greta_hansen-96-8 task=bring four liters home from the creek with Greta; set out at dawn
+  FAVOR-OFFER d96: Valeria kind=sick_help favorId=favor-valeria_quispe-96-9 task=help Valeria with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d100: Greta kind=heal_help favorId=favor-greta_hansen-100-10 task=help Greta with their injury
+  FAVOR-OFFER d103: Omar kind=water_haul favorId=favor-omar_farouk-103-11 task=bring four liters home from the creek with Omar; set out at dawn
+  FAVOR-OFFER d106: Aroha kind=water_haul favorId=favor-aroha_ngata-106-12 task=bring four liters home from the creek with Aroha; set out at dawn
+  FAVOR-OFFER d106: Omar kind=food_share favorId=favor-omar_farouk-106-13 task=share food with Omar — they're past hungry
+  FAVOR-OFFER d109: Greta kind=water_haul favorId=favor-greta_hansen-109-14 task=bring four liters home from the creek with Greta; set out at dawn
+  FAVOR-OFFER d110: Vera kind=water_haul favorId=favor-gen_veby60n-110-15 task=bring four liters home from the creek with Vera; set out at dawn
+  FAVOR-ACCEPT d17: Ezra favorId=favor-gen_i3w9naf-17-1 accepted=true state=promised meetDay=18
+  INVITE-DEC d8 party: Cheryl -> Omar chance=25.4 accept=false veto=- inputs={"temp":"dry","goal":"answers","mood":"grieving","fear":75,"trust":26,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 26","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d8 party: Cheryl -> Ramadan chance=26.200000000000003 accept=false veto=- inputs={"temp":"sardonic","goal":"family","mood":"grieving","fear":75,"trust":28,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 28","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d9 party: Cheryl -> Vera chance=36.2 accept=false veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":51,"trust":28,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 28","grieving mood (-10)"]
+  INVITE-DEC d9 party: Cheryl -> Ezra chance=49.2 accept=true veto=- inputs={"temp":"mischievous","goal":"belong","mood":"grieving","fear":51,"trust":23,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 23","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d10 party: Cheryl -> Esmeralda chance=49.8 accept=true veto=- inputs={"temp":"sardonic","goal":"understand","mood":"grieving","fear":31,"trust":62,"bond":null,"partySize":2} reasons=["trust 62","grieving mood (-10)"]
+  INVITE-DEC d15 party: Cheryl -> Nikos chance=58 accept=true veto=- inputs={"temp":"gentle","goal":"heal","mood":"steady","fear":4,"trust":45,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 45","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Cheryl -> Aroha chance=83.8 accept=true veto=- inputs={"temp":"warm","goal":"understand","mood":"steady","fear":12,"trust":72,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 72","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d57 party: Esmeralda -> Valeria chance=66 accept=true veto=- inputs={"temp":"steady","goal":"heal","mood":"grieving","fear":91,"trust":90,"bond":{"v":68,"depth":2},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d88 party: Esmeralda -> Omar chance=72.80000000000001 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"grieving","fear":52,"trust":82,"bond":{"v":95,"depth":3},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d90 party: Priya -> Greta chance=80.2 accept=false veto=- inputs={"temp":"bold","goal":"legacy","mood":"grieving","fear":9,"trust":88,"bond":{"v":11,"depth":0},"partySize":4} reasons=["trust 88","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d91 party: Priya -> Ramadan chance=74.80000000000001 accept=false veto=- inputs={"temp":"sardonic","goal":"family","mood":"grieving","fear":0,"trust":87,"bond":{"v":39,"depth":1},"partySize":4} reasons=["trust 87","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d96 party: Priya -> Greta chance=91 accept=true veto=- inputs={"temp":"bold","goal":"legacy","mood":"steady","fear":12,"trust":90,"bond":{"v":15,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d100 party: Ezra -> Ramadan chance=66 accept=false veto=- inputs={"temp":"sardonic","goal":"family","mood":"grieving","fear":89,"trust":90,"bond":{"v":90,"depth":3},"partySize":3} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d101 party: Ezra -> Vera chance=76 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":69,"trust":90,"bond":{"v":64,"depth":2},"partySize":3} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d104 party: Ezra -> Ramadan chance=86 accept=true veto=- inputs={"temp":"sardonic","goal":"family","mood":"steady","fear":12,"trust":90,"bond":{"v":94,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":26,"v":40,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":54,"depth":3},{"day":33,"v":58,"depth":3},{"day":34,"v":58,"depth":3},{"day":35,"v":58,"depth":3},{"day":36,"v":63,"depth":3},{"day":38,"v":67,"depth":3},{"day":38,"v":67,"depth":3},{"day":39,"v":67,"depth":3},{"day":40,"v":67,"depth":3}] class=rise
+GOSSIP: totalPicks=182 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=35 31-60=53 61-90=64 91-120=55 121+=0 naturalPicks=207 seededPicks=30 gossipPicks=182
+SEEDED: {"pair":{"a":"gen_cgrc3cq","b":"gen_p47ipht","aName":"Esmeralda","bName":"Ramadan"},"day":26,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":26,"v":40,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":54,"depth":3},{"day":33,"v":58,"depth":3},{"day":34,"v":58,"depth":3},{"day":35,"v":58,"depth":3},{"day":36,"v":63,"depth":3},{"day":38,"v":67,"depth":3},{"day":38,"v":67,"depth":3},{"day":39,"v":67,"depth":3},{"day":40,"v":67,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":26,"why":"vgrievance"},"serveWithin30":true,"serves":38,"servesAll":[{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"}],"effect":true}
+  FRIEND d65: Ezra <> Ramadan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Ramadan <> Nikos — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d80: Ezra <> Nikos — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d75: Ramadan <> Valeria — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d112: Aroha <> Ezra — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d70: Ramadan <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Ezra <> Greta — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d35: Esmeralda <> Ezra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Esmeralda <> Ramadan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Esmeralda <> Nikos — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Esmeralda <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Aroha <> Ramadan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Aroha <> Esmeralda — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Esmeralda <> Omar — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d30: Esmeralda <> Vera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Aroha <> Vera — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d90: Esmeralda <> Greta — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d60: Cheryl <> Priya — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d50: Ramadan <> Vera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Ezra <> Vera — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d60: Vera <> Nikos — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d70: Vera <> Valeria — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d112: Ezra <> Valeria — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d100: Aroha <> Valeria — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d65: Aroha <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Ezra <> Priya — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d112: Ezra <> Omar — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d100: Esmeralda <> Priya — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d90: Vera <> Omar — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d60: Cheryl <> Nikos — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d60: Ezra <> Cheryl — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d90: Esmeralda <> Cheryl — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d25: Esmeralda about Ramadan — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Omar about Esmeralda — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Valeria about Esmeralda — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Omar about Esmeralda — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Vera about Esmeralda — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Ezra about Esmeralda — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Valeria about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Vera about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Nikos about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Ezra about Esmeralda — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Vera about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Ezra about Esmeralda — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d35: Valeria about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Omar about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Ramadan about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Ezra about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Valeria about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Nikos about Esmeralda — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Aroha about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Aroha about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Ezra about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Ezra about Esmeralda — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Greta about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Aroha about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Priya about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Priya about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Ramadan about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Nikos about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Priya about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Ezra about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Nikos about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Priya about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Ramadan about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Vera about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Aroha about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Ezra about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Ezra about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Greta about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Nikos about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Ezra about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Omar about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Priya about Esmeralda — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Valeria about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ramadan about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ezra about Esmeralda — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Nikos about Esmeralda — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Priya about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Greta about Ezra — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d61: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d61: Ezra about Greta — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Priya about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d62: Vera about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Greta about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Ezra about Greta — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d64: Priya about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d65: Priya about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d65: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Valeria about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Priya about Ramadan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d67: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Priya about Ezra — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Ramadan about Vera — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Valeria about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Ezra about Greta — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Valeria about Vera — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Ezra about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Aroha about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Priya about Ezra — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Priya about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Priya about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Ezra about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Valeria about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Aroha about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Nikos about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Omar about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Nikos about Ramadan — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ezra about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Priya about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Nikos about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Priya about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Valeria about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Nikos about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Priya about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Priya about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Greta about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Nikos about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Nikos about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Valeria about Ramadan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Valeria about Ramadan — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Greta about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Greta about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Valeria about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Valeria about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Greta about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Valeria about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Ezra about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Valeria about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Ramadan about Aroha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Greta about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Greta about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Greta about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Ramadan about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Ramadan about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Greta about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d106: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Greta about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d107: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Ramadan about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Aroha about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Omar about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Ramadan about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Greta about Aroha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Ramadan about Omar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Greta about Aroha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Vera about Ramadan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Greta about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d111: Vera about Greta — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d11: Aroha about Esmeralda (why=grievance)
+  GRIEV-READ d12: Aroha about Esmeralda (why=grievance)
+  GRIEV-READ d16: Esmeralda about Aroha (why=grievance)
+  GRIEV-READ d17: Aroha about Esmeralda (why=grievance)
+  GRIEV-READ d18: Esmeralda about Aroha (why=grievance)
+  GRIEV-READ d20: Esmeralda about Aroha (why=grievance)
+  KNACK d8 Ramadan: "that stray dog — the one that bit two people — lets Priya touch it."
+  KNACK d21 Greta: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Priya touch it."
+  KNACK d22 Valeria: "Huh. Let me think about that." "Omar ate something last month that should've killed them. They're fine."
+  KNACK d29 Aroha: "that stray dog — the one that bit two people — lets Esmeralda touch it, friend."
+  KNACK d35 Valeria: "Greta talks to the garden. The garden listens. I've seen it."
+  KNACK d40 Vera: "Good question." "Ramadan ate something last month that should've killed them. They're fine."
+  KNACK d44 Omar: "You want to know about that? Okay." "What's this about? Ezra found a lost knife by smell last week. By SMELL."
+  KNACK d52 Omar: "Good question." "Vera talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":6,"monster":1,"the night":1,"combat":2}

@@ -1,0 +1,356 @@
+# SURFACE+SEEDED — seed 6502 (143d, 3 alive)
+
+npcPairs=100 deep2=18 cracks=0 vCracks=1 friendGriev=0 stateGriev=7 stateFriend=1 stateVCrack=0 t2picks=298 closeReadsServed=56 grievanceServes=19 othersSteered=25
+COND-TP: firstDeep2Day=30 lateClose=182 lateTP=106 lateNull=0 condRate=58.2% pooledTP=107/196 pooledRate=54.6% grievReadsByWhy={"grievance":3,"vgrievance":29}
+FUNNEL (natural): convos=403 subject=391 offered=338 picked=273 classes={"subject-no-offer":53,"picked-others":273,"offered-not-picked":65,"no-subject-no-ans":12}
+FUNNEL-UNSTEERED (r55 strict): convos=403 subjectNoOffer=53 rate=13.2% offered=338 mainOffered=17 subjectOffered=337 picked=273 latePicks=127 latePicksMain=0 latePicksSubject=127
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=321 picks=280 latePicks=124 missedChangedNotOffered=29
+WRAPSERVE: convos=32 matcherHits=19 matcherServes=19 classes={"grievance-line":19,"deflection":1,"other":12}
+FUNNEL-PROBE (subject-no-offer turns): turns=164 menuProblem=127 pickProblem=37
+INVITE (wrap, carried from r63): lure={"n":8,"accepts":1,"acceptRate":0.125,"vetoes":{},"chanceMin":35,"chanceMax":36,"chanceMean":35.6} party={"n":29,"accepts":16,"acceptRate":0.5517241379310345,"vetoes":{},"chanceMin":5,"chanceMax":86,"chanceMean":48.3} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=13
+FAVOR (r65): funnel={"offers":55,"forageOffers":15,"otherFavorOffers":40,"accepts":15,"acceptAttempts":15,"waits":13,"starts":8,"startBlocked":17,"forages":8,"forageNodeBarren":28,"forageBarren":6,"forageBarrenTravel":0,"forageBarrenNode":6,"forageTravelBlocked":0,"forageTravelWalked":22,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":8,"delivers":8,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":8,"keptMatched":1,"keptMatchedStrict":1}
+OUTING END STATES: [{"vid":"aroha_ngata","vidName":"Aroha","favorId":"favor-aroha_ngata-31-17","state":"acknowledged","promisedDay":31,"meetDay":32,"deadline":33,"promiseKept":"broken","startedDay":33,"forageCount":2,"playerKcal":375,"partnerKcal":480,"deliveredKcal":855,"returnedDay":34,"talkCount":1},{"vid":"gen_tf5rheu","vidName":"Othmane","favorId":"favor-gen_tf5rheu-28-13","state":"acknowledged","promisedDay":28,"meetDay":29,"deadline":30,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"ingrid_vik","vidName":"Ingrid","favorId":"favor-ingrid_vik-139-55","state":"thanked","promisedDay":139,"meetDay":140,"deadline":141,"promiseKept":true,"startedDay":140,"forageCount":1,"playerKcal":140,"partnerKcal":210,"deliveredKcal":210,"returnedDay":140,"talkCount":1}]
+  FAVOR-OFFER d6: Daniyar kind=forage_help favorId=favor-daniyar_askarov-6-1 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d6: Aroha kind=forage_help favorId=favor-aroha_ngata-6-2 task=forage with Aroha tomorrow to rebuild the pantry
+  FAVOR-OFFER d8: Thao kind=food_share favorId=favor-gen_xrbslro-8-3 task=share food with Thao — they're running on empty
+  FAVOR-OFFER d10: Boris kind=forage_help favorId=favor-boris_kowalski-10-4 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Othmane kind=forage_help favorId=favor-gen_tf5rheu-13-5 task=forage with Othmane tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Rachel kind=food_share favorId=favor-gen_hjkcc90-14-6 task=share food with Rachel — they're running on empty
+  FAVOR-OFFER d17: Quinn kind=forage_help favorId=favor-quinn_murphy-17-7 task=forage with Quinn tomorrow to rebuild the pantry
+  FAVOR-OFFER d18: Milton kind=food_share favorId=favor-gen_rxha0yu-18-8 task=share food with Milton — they're past hungry
+  FAVOR-OFFER d21: Quinn kind=sick_help favorId=favor-quinn_murphy-21-9 task=help Quinn with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d24: Othmane kind=sick_help favorId=favor-gen_tf5rheu-24-10 task=help Othmane with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d26: Rachel kind=food_share favorId=favor-gen_hjkcc90-26-11 task=share food with Rachel — they're going hungry
+  FAVOR-OFFER d27: Owen kind=forage_help favorId=favor-owen_smith-27-12 task=forage with Owen tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Daniyar kind=forage_help favorId=favor-daniyar_askarov-28-14 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Othmane kind=forage_help favorId=favor-gen_tf5rheu-28-13 task=forage with Othmane tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Rachel kind=heal_help favorId=favor-gen_hjkcc90-30-15 task=help Rachel with their injury
+  FAVOR-OFFER d31: Aroha kind=forage_help favorId=favor-aroha_ngata-31-17 task=forage with Aroha tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Daniyar kind=forage_help favorId=favor-daniyar_askarov-31-18 task=forage with Daniyar tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Daniyar kind=food_share favorId=favor-daniyar_askarov-35-19 task=share food with Daniyar — they're past hungry
+  FAVOR-OFFER d38: Daniyar kind=food_share favorId=favor-daniyar_askarov-38-20 task=share food with Daniyar — they're past hungry
+  FAVOR-OFFER d41: Owen kind=forage_help favorId=favor-owen_smith-41-21 task=forage with Owen tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Daniyar kind=sick_help favorId=favor-daniyar_askarov-44-22 task=help Daniyar with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d46: Boris kind=sick_help favorId=favor-boris_kowalski-46-23 task=help Boris with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d52: Daniyar kind=food_share favorId=favor-daniyar_askarov-52-24 task=share food with Daniyar — they're going hungry
+  FAVOR-OFFER d75: Owen kind=snare_mend favorId=favor-owen_smith-75-25 task=help Owen re-tie the snare line tomorrow
+  FAVOR-OFFER d83: Ingrid kind=heal_help favorId=favor-ingrid_vik-83-26 task=help Ingrid with their injury
+  FAVOR-OFFER d87: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-87-27 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d89: Boris kind=water_haul favorId=favor-boris_kowalski-89-28 task=bring four liters home from the creek with Boris; set out at dawn
+  FAVOR-OFFER d98: Ingrid kind=forage_help favorId=favor-ingrid_vik-98-30 task=forage with Ingrid tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Sigrun kind=food_share favorId=favor-sigrun_eiriksdottir-98-29 task=share food with Sigrun — they're running on empty
+  FAVOR-OFFER d99: Mariana kind=water_haul favorId=favor-visjoin_88-99-31 task=bring four liters home from the creek with Mariana; set out at dawn
+  FAVOR-OFFER d104: Sigrun kind=food_share favorId=favor-sigrun_eiriksdottir-104-32 task=share food with Sigrun — they're running on empty
+  FAVOR-OFFER d108: Ingrid kind=food_share favorId=favor-ingrid_vik-108-33 task=share food with Ingrid — they're running on empty
+  FAVOR-OFFER d112: Chadrack kind=food_share favorId=favor-visjoin_86-112-34 task=share food with Chadrack — they're going hungry
+  FAVOR-OFFER d113: Chadrack kind=water_haul favorId=favor-visjoin_86-113-36 task=bring four liters home from the creek with Chadrack; set out at dawn
+  FAVOR-OFFER d113: Ingrid kind=water_haul favorId=favor-ingrid_vik-113-35 task=bring four liters home from the creek with Ingrid; set out at dawn
+  FAVOR-OFFER d116: Chadrack kind=food_share favorId=favor-visjoin_86-116-37 task=share food with Chadrack — they're going hungry
+  FAVOR-OFFER d118: Ingrid kind=food_share favorId=favor-ingrid_vik-118-38 task=share food with Ingrid — they're past hungry
+  FAVOR-OFFER d119: Olzhas kind=water_haul favorId=favor-visjoin_115-119-39 task=bring four liters home from the creek with Olzhas; set out at dawn
+  FAVOR-OFFER d120: Chadrack kind=food_share favorId=favor-visjoin_86-120-40 task=share food with Chadrack — they're running on empty
+  FAVOR-OFFER d121: Ingrid kind=food_share favorId=favor-ingrid_vik-121-41 task=share food with Ingrid — they're running on empty
+  FAVOR-OFFER d124: Chadrack kind=food_share favorId=favor-visjoin_86-124-42 task=share food with Chadrack — they're going hungry
+  FAVOR-OFFER d124: Olzhas kind=sick_help favorId=favor-visjoin_115-124-43 task=help Olzhas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d125: Ingrid kind=water_haul favorId=favor-ingrid_vik-125-44 task=bring four liters home from the creek with Ingrid; set out at dawn
+  FAVOR-OFFER d127: Chadrack kind=forage_help favorId=favor-visjoin_86-127-46 task=forage with Chadrack tomorrow to rebuild the pantry
+  FAVOR-OFFER d127: Olzhas kind=heal_help favorId=favor-visjoin_115-127-45 task=help Olzhas with their injury
+  FAVOR-OFFER d128: Ingrid kind=food_share favorId=favor-ingrid_vik-128-47 task=share food with Ingrid — they're going hungry
+  FAVOR-OFFER d131: Olzhas kind=water_haul favorId=favor-visjoin_115-131-48 task=bring four liters home from the creek with Olzhas; set out at dawn
+  FAVOR-OFFER d132: Ingrid kind=water_haul favorId=favor-ingrid_vik-132-49 task=bring four liters home from the creek with Ingrid; set out at dawn
+  FAVOR-OFFER d132: Chadrack kind=water_haul favorId=favor-visjoin_86-132-50 task=bring four liters home from the creek with Chadrack; set out at dawn
+  FAVOR-OFFER d134: Olzhas kind=water_haul favorId=favor-visjoin_115-134-51 task=bring four liters home from the creek with Olzhas; set out at dawn
+  FAVOR-OFFER d136: Chadrack kind=food_share favorId=favor-visjoin_86-136-52 task=share food with Chadrack — they're going hungry
+  FAVOR-OFFER d136: Ingrid kind=water_haul favorId=favor-ingrid_vik-136-53 task=bring four liters home from the creek with Ingrid; set out at dawn
+  FAVOR-OFFER d138: Olzhas kind=heal_help favorId=favor-visjoin_115-138-54 task=help Olzhas with their injury
+  FAVOR-OFFER d139: Ingrid kind=forage_help favorId=favor-ingrid_vik-139-55 task=forage with Ingrid tomorrow to rebuild the pantry
+  FAVOR-OFFER d141: Chadrack kind=food_share favorId=favor-visjoin_86-141-56 task=share food with Chadrack — they're running on empty
+  FAVOR-ACCEPT d6: Daniyar favorId=favor-daniyar_askarov-6-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d6: Aroha favorId=favor-aroha_ngata-6-2 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d10: Boris favorId=favor-boris_kowalski-10-4 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d13: Othmane favorId=favor-gen_tf5rheu-13-5 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d17: Quinn favorId=favor-quinn_murphy-17-7 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d27: Owen favorId=favor-owen_smith-27-12 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d28: Daniyar favorId=favor-daniyar_askarov-28-14 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d28: Othmane favorId=favor-gen_tf5rheu-28-13 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d31: Aroha favorId=favor-aroha_ngata-31-17 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d31: Daniyar favorId=favor-daniyar_askarov-31-18 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d41: Owen favorId=favor-owen_smith-41-21 accepted=true state=promised meetDay=42
+  FAVOR-ACCEPT d87: Sigrun favorId=favor-sigrun_eiriksdottir-87-27 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d98: Ingrid favorId=favor-ingrid_vik-98-30 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d127: Chadrack favorId=favor-visjoin_86-127-46 accepted=true state=promised meetDay=128
+  FAVOR-ACCEPT d139: Ingrid favorId=favor-ingrid_vik-139-55 accepted=true state=promised meetDay=140
+  INVITE-DEC d6 lure: Owen -> Quinn chance=35 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"affinity":1} reasons=["warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d7 lure: Owen -> Quinn chance=35 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"hungry","fear":0,"affinity":1} reasons=["warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d8 party: Sam -> Milton chance=81 accept=true veto=- inputs={"temp":"warm","goal":"feed","mood":"hungry","fear":12,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40","warm temperament (+15)","feed goal (+15)"]
+  INVITE-DEC d8 party: Sam -> Thao chance=55.400000000000006 accept=false veto=- inputs={"temp":"intense","goal":"family","mood":"hungry","fear":12,"trust":51,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 51"]
+  INVITE-DEC d8 party: Sam -> Owen chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":12,"trust":20,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 20","withdrawn temperament (-20)","wants to be alone (-40)"]
+  INVITE-DEC d8 lure: Owen -> Quinn chance=35 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"hungry","fear":4,"affinity":1} reasons=["warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d9 party: Sam -> Aroha chance=63.6 accept=false veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":12,"trust":34,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 34","warm temperament (+15)"]
+  INVITE-DEC d9 lure: Owen -> Quinn chance=36 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d10 lure: Owen -> Quinn chance=36 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d11 party: Sam -> Rachel chance=62 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":0,"trust":30,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 30","bold temperament (+15)"]
+  INVITE-DEC d11 party: Sam -> Othmane chance=33.8 accept=false veto=- inputs={"temp":"earnest","goal":"family","mood":"hungry","fear":0,"trust":47,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 47","sick (-20)"]
+  INVITE-DEC d11 party: Sam -> Aroha chance=67.2 accept=false veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":0,"trust":43,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 43","warm temperament (+15)"]
+  INVITE-DEC d12 party: Sam -> Daniyar chance=60.2 accept=true veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4,"trust":63,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 63"]
+  INVITE-DEC d12 lure: Owen -> Quinn chance=36 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"hungry","fear":0,"affinity":2} reasons=["relationship with inviter (+1)","warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d13 lure: Owen -> Quinn chance=36 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"hungry","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d14 lure: Owen -> Quinn chance=36 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"hungry","fear":0,"affinity":2} reasons=["relationship with inviter (+1)","warm temperament (+15)","wants to be alone (-25)"]
+  INVITE-DEC d15 party: Sam -> Quinn chance=33 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"cheerful","fear":0,"trust":20,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 20","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","cheerful mood (+10)"]
+  INVITE-DEC d22 party: Sam -> Reagan chance=40 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":12,"trust":50,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 50","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Sam -> Aroha chance=82.6 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":19,"trust":69,"bond":{"v":15,"depth":0},"partySize":4} reasons=["trust 69","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d32 party: Sam -> Boris chance=60.400000000000006 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":25,"trust":76,"bond":{"v":19,"depth":0},"partySize":4} reasons=["trust 76","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d48 party: Milton -> Thao chance=77.2 accept=true veto=- inputs={"temp":"intense","goal":"family","mood":"grieving","fear":59,"trust":93,"bond":{"v":32,"depth":1},"partySize":4} reasons=["trust 93","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d55 party: Daniyar -> Othmane chance=49.2 accept=true veto=- inputs={"temp":"earnest","goal":"family","mood":"grieving","fear":56,"trust":98,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 98","a big party is safer (+5)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d56 party: Othmane -> Owen chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"grieving","fear":73,"trust":94,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 94","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d58 party: Othmane -> Owen chance=7.200000000000003 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"grieving","fear":25,"trust":93,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 93","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d60 party: Othmane -> Owen chance=17.200000000000003 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":12,"trust":93,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 93","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)"]
+  INVITE-DEC d61 party: Othmane -> Owen chance=17.200000000000003 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":0,"trust":93,"bond":{"v":18,"depth":0},"partySize":3} reasons=["trust 93","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)"]
+  INVITE-DEC d62 party: Othmane -> Dale chance=79.8 accept=true veto=- inputs={"temp":"dry","goal":"feed","mood":"cheerful","fear":11,"trust":37,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 37","a big party is safer (+5)","feed goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d63 party: Othmane -> Devon chance=86 accept=true veto=- inputs={"temp":"anxious","goal":"peace","mood":"steady","fear":0,"trust":90,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d80 party: Reagan -> Owen chance=9.599999999999994 accept=true veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"grieving","fear":74,"trust":99,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 99","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d83 party: Reagan -> Ingrid chance=38 accept=false veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":25,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d84 party: Owen -> Ingrid chance=37 accept=false veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":53,"trust":30,"bond":{"v":5,"depth":0},"partySize":2} reasons=["trust 30","grieving mood (-10)"]
+  INVITE-DEC d84 party: Owen -> Sigrun chance=37.8 accept=true veto=- inputs={"temp":"withdrawn","goal":"legacy","mood":"grieving","fear":53,"trust":57,"bond":{"v":31,"depth":1},"partySize":2} reasons=["trust 57","a real bond (+10)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d85 party: Owen -> Ingrid chance=44 accept=true veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":29,"trust":35,"bond":{"v":7,"depth":0},"partySize":3} reasons=["trust 35","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d88 party: Owen -> Chadrack chance=64.2 accept=false veto=- inputs={"temp":"warm","goal":"prove","mood":"steady","fear":4,"trust":23,"bond":null,"partySize":4} reasons=["trust 23","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d93 party: Boris -> Chadrack chance=64.2 accept=true veto=- inputs={"temp":"warm","goal":"prove","mood":"grieving","fear":44,"trust":48,"bond":{"v":15,"depth":0},"partySize":3} reasons=["trust 48","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d99 party: Dale -> Mariana chance=79 accept=true veto=- inputs={"temp":"bold","goal":"legacy","mood":"steady","fear":4,"trust":60,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 60","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d103 party: Dale -> Theo chance=43.4 accept=false veto=- inputs={"temp":"withdrawn","goal":"feed","mood":"steady","fear":0,"trust":21,"bond":null,"partySize":4} reasons=["trust 21","a big party is safer (+5)","withdrawn temperament (-20)","feed goal (+15)"]
+SEEDED-DAILY: [{"day":30,"v":40,"depth":2},{"day":31,"v":40,"depth":2},{"day":32,"v":40,"depth":2},{"day":33,"v":40,"depth":2},{"day":34,"v":40,"depth":2},{"day":35,"v":44,"depth":2},{"day":36,"v":44,"depth":2},{"day":38,"v":48,"depth":2},{"day":38,"v":48,"depth":2},{"day":39,"v":48,"depth":2},{"day":40,"v":48,"depth":2},{"day":41,"v":48,"depth":2},{"day":42,"v":48,"depth":2}] class=no-drop
+GOSSIP: totalPicks=167 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=36 31-60=61 61-90=49 91-120=65 121+=62 naturalPicks=273 seededPicks=25 gossipPicks=167
+SEEDED: {"pair":{"a":"daniyar_askarov","b":"gen_rxha0yu","aName":"Daniyar","bName":"Milton"},"day":28,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":30,"v":40,"depth":2},{"day":31,"v":40,"depth":2},{"day":32,"v":40,"depth":2},{"day":33,"v":40,"depth":2},{"day":34,"v":40,"depth":2},{"day":35,"v":44,"depth":2},{"day":36,"v":44,"depth":2},{"day":38,"v":48,"depth":2},{"day":38,"v":48,"depth":2},{"day":39,"v":48,"depth":2},{"day":40,"v":48,"depth":2},{"day":41,"v":48,"depth":2},{"day":42,"v":48,"depth":2}],"crackTraceClass":"no-drop","vAt7":44,"depthAt7":2,"vDrop":6,"depthDrop":0,"crack7":false,"firstServe":{"day":30,"why":"vgrievance"},"serveWithin30":true,"serves":28,"servesAll":[{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":47,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Reagan <> Milton — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d50: Reagan <> Owen — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aroha <> Milton — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d55: Boris <> Milton — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d30: Daniyar <> Milton — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d55: Devon <> Milton — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d55: Othmane <> Thao — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d60: Boris <> Reagan — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d85: Reagan <> Othmane — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d55: Aroha <> Reagan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Devon <> Othmane — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d85: Aroha <> Boris — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d50: Devon <> Reagan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Boris <> Owen — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d70: Devon <> Owen — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d50: Daniyar <> Sam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Owen <> Sigrun — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d115: Ingrid <> Chadrack — maxDepth 3, final 3 (v=94), dropped 0
+  VCRACK d14: Quinn vs Thao (ambushed) v 4 -> -6 (depth 0 -> 0)
+  CLOSE-READ d13: Daniyar about Milton — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Milton about Daniyar — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Milton about Daniyar — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Daniyar about Milton — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Thao about Rachel — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Aroha about Rachel — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Milton about Daniyar — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Reagan about Milton — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Rachel about Aroha — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Devon about Rachel — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Rachel about Thao — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Boris about Milton — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Devon about Rachel — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Daniyar about Milton — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Rachel about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Boris about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Owen about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Aroha about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Owen about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Owen about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Milton about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Devon about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Milton about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Owen about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Boris about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Devon about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Owen about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Aroha about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Owen about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Boris about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Owen about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Aroha about Milton — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Othmane about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Othmane about Thao — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Thao about Othmane — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Milton about Daniyar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Boris about Milton — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Reagan about Milton — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Devon about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Aroha about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Boris about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Aroha about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d50: Devon about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Aroha about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Thao about Othmane — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Aroha about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Devon about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Othmane about Thao — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Devon about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d53: Owen about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Devon about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d54: Daniyar about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Thao about Othmane — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Othmane about Thao — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Aroha about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Owen about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Boris about Reagan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Owen about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Owen about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Boris about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Aroha about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Aroha about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Boris about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Owen about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Owen about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Aroha about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Devon about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Devon about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Boris about Reagan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Owen about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Devon about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Devon about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Aroha about Reagan — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Devon about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Owen about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Boris about Reagan — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Devon about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Aroha about Reagan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Sigrun about Reagan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d80: Devon about Owen — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Owen about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Boris about Aroha — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Aroha about Boris — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Dale about Aroha — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Owen about Devon — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Devon about Owen — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Dale about Boris — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d84: Boris about Dale — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Boris about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Dale about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Dale about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Boris about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Sigrun about Dale — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Dale about Sigrun — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Boris about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Sigrun about Dale — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Boris about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Sigrun about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Dale about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d91: Sigrun about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Dale about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Sigrun about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Dale about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Dale about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Sigrun about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Ingrid about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Ingrid about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Sigrun about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Ingrid about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Ingrid about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Sigrun about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d105: Sigrun about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d105: Ingrid about Sigrun — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Chadrack about Ingrid — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Ingrid about Chadrack — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Ingrid about Chadrack — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Chadrack about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d111: Chadrack about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d111: Ingrid about Chadrack — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Ingrid about Chadrack — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Chadrack about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Chadrack about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Ingrid about Chadrack — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d114: Ingrid about Chadrack — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d114: Chadrack about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Chadrack about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Ingrid about Chadrack — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d142: Chadrack about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d142: Ingrid about Chadrack — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d30 (betrayal): Daniyar vs Milton (ambushed) depth 2 v 40 -> 44
+  GRIEV-READ d9: Milton about Boris (why=grievance)
+  GRIEV-READ d16: Thao about Quinn (why=grievance)
+  GRIEV-READ d17: Quinn about Thao (why=grievance)
+  GRIEV-READ d21: Quinn about Thao (why=vgrievance)
+  GRIEV-READ d30: Daniyar about Milton (why=vgrievance)
+  GRIEV-READ d31: Daniyar about Milton (why=vgrievance)
+  KNACK d8 Thao: "Quinn talks to the garden. The garden listens. I've seen it."
+  KNACK d15 Quinn: "Thao talks to the garden. The garden listens. I've seen it."
+  KNACK d31 Othmane: "Good question." "that stray dog — the one that bit two people — lets Boris touch it."
+  KNACK d42 Owen: "Milton talks to the garden. The garden listens. I've seen it."
+  KNACK d45 Thao: "Huh. Let me think about that." "Why do you ask? Daniyar ate something last month that should've killed them. They're fi
+  KNACK d46 Reagan: "You want to know about that? Okay." "Owen talks to the garden. The garden listens. I've seen it."
+  KNACK d46 Reagan: "that stray dog — the one that bit two people — lets Devon touch it."
+  KNACK d50 Aroha: "Daniyar ate something last month that should've killed them. They're fine."
+
+deathCauses: {"sickness":1,"monster":2,"the arena":2,"the wild":5,"combat":3,"a stranger":2}

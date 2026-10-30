@@ -1,0 +1,112 @@
+SEEDS: 6501 143d, 6502 143d, 6503 112d, 6504 142d
+  funnel seed 6501: {"offers":40,"forageOffers":7,"otherFavorOffers":33,"accepts":7,"acceptAttempts":7,"waits":5,"starts":3,"startBlocked":12,"forages":3,"forageNodeBarren":6,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":3,"delivers":3,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":3,"keptMatched":0,"keptMatchedStrict":0}
+  funnel seed 6502: {"offers":55,"forageOffers":15,"otherFavorOffers":40,"accepts":15,"acceptAttempts":15,"waits":13,"starts":8,"startBlocked":17,"forages":8,"forageNodeBarren":28,"forageBarren":6,"forageBarrenTravel":0,"forageBarrenNode":6,"forageTravelBlocked":0,"forageTravelWalked":22,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":8,"delivers":8,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":8,"keptMatched":1,"keptMatchedStrict":1}
+  funnel seed 6503: {"offers":15,"forageOffers":1,"otherFavorOffers":14,"accepts":1,"acceptAttempts":1,"waits":0,"starts":0,"startBlocked":2,"forages":0,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":0,"retryAssigned":0,"retryStarts":0,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0}
+  funnel seed 6504: {"offers":50,"forageOffers":14,"otherFavorOffers":36,"accepts":14,"acceptAttempts":14,"waits":9,"starts":8,"startBlocked":8,"forages":6,"forageNodeBarren":18,"forageBarren":3,"forageBarrenTravel":0,"forageBarrenNode":3,"forageTravelBlocked":0,"forageTravelWalked":9,"stepRetries":2,"retryAssigned":2,"retryStarts":2,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":6,"keptMatched":0,"keptMatchedStrict":0}
+
+DAWN ATTEMPTS pooled: 58 (starts 19, blocked 39, waits 27)
+BLOCKED by adjFail: {"no-micro-pos":8,"away":21,"node-elsewhere":6,"micro-far":2,"non-adjacency":2}
+BLOCKED by status reason: {"Move next to your partner, on the same side of the Haven door.":37,"Meet at Haven at dawn on day 18. Two pairs of eyes, twice the ground.":1,"Finish your current outing before starting another.":1}
+BLOCKED with NO diag: 0 / 39
+DAWN CENSUS over 58 diag-carrying attempts:
+  playerAtHome: 51
+  partnerNodeAtHome: 39
+  insideMatch (partnerInside===playerInside): 53
+  partnerAway: 21
+  partnerPos null: 28
+  partnerNode defaulted (no nodePos): 0
+
+FORAGE-NODE-BARREN pooled: 52
+  by targetCanForage: {"true":28,"false":24}
+FORAGE-CELL-BLOCKED pooled: 154
+  by status reason: {"You carry 0 kcal; your partner carries 0 kcal. Nothing left to take here today — walk to another green patch.":153,"Finish the fight before foraging together.":1}
+
+PER-FAVOR TIMELINES (accepted forage favors):
+  {"seed":6501,"vidName":"Sari","favorId":"favor-sari_wulandari-4-1","acceptDay":4,"meetDay":5,"attempts":2,"startDay":5,"forages":1,"nodeBarren":4,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":6,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6501,"vidName":"Claire","favorId":"favor-gen_4sih1nz-4-2","acceptDay":4,"meetDay":5,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6501,"vidName":"Pavel","favorId":"favor-pavel_dubinin-8-4","acceptDay":8,"meetDay":9,"attempts":2,"startDay":9,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":10,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6501,"vidName":"Nikos","favorId":"favor-nikos_papadopoulos-13-6","acceptDay":13,"meetDay":14,"attempts":3,"startDay":15,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":15,"firstKeptStep":"deliver","adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6501,"vidName":"Claire","favorId":"favor-gen_4sih1nz-13-7","acceptDay":13,"meetDay":14,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6501,"vidName":"Devon","favorId":"favor-devon_okafor-20-9","acceptDay":20,"meetDay":21,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":6501,"vidName":"Sari","favorId":"favor-sari_wulandari-30-11","acceptDay":30,"meetDay":31,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6502,"vidName":"Daniyar","favorId":"favor-daniyar_askarov-6-1","acceptDay":6,"meetDay":7,"attempts":2,"startDay":7,"forages":1,"nodeBarren":5,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":8,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6502,"vidName":"Aroha","favorId":"favor-aroha_ngata-6-2","acceptDay":6,"meetDay":7,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"node-elsewhere":1}}
+  {"seed":6502,"vidName":"Boris","favorId":"favor-boris_kowalski-10-4","acceptDay":10,"meetDay":11,"attempts":2,"startDay":11,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":12,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6502,"vidName":"Othmane","favorId":"favor-gen_tf5rheu-13-5","acceptDay":13,"meetDay":14,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6502,"vidName":"Quinn","favorId":"favor-quinn_murphy-17-7","acceptDay":17,"meetDay":18,"attempts":2,"startDay":18,"forages":1,"nodeBarren":10,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"non-adjacency":1}}
+  {"seed":6502,"vidName":"Owen","favorId":"favor-owen_smith-27-12","acceptDay":27,"meetDay":28,"attempts":2,"startDay":28,"forages":1,"nodeBarren":4,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":29,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6502,"vidName":"Daniyar","favorId":"favor-daniyar_askarov-28-14","acceptDay":28,"meetDay":29,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":1}}
+  {"seed":6502,"vidName":"Othmane","favorId":"favor-gen_tf5rheu-28-13","acceptDay":28,"meetDay":29,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+  {"seed":6502,"vidName":"Aroha","favorId":"favor-aroha_ngata-31-17","acceptDay":31,"meetDay":32,"attempts":2,"startDay":33,"forages":1,"nodeBarren":2,"delivers":1,"endState":"acknowledged","promiseKept":"broken","startedDay":33,"deliveredKcal":855,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"non-adjacency":1}}
+  {"seed":6502,"vidName":"Daniyar","favorId":"favor-daniyar_askarov-31-18","acceptDay":31,"meetDay":32,"attempts":1,"startDay":32,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":32,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6502,"vidName":"Owen","favorId":"favor-owen_smith-41-21","acceptDay":41,"meetDay":42,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6502,"vidName":"Sigrun","favorId":"favor-sigrun_eiriksdottir-87-27","acceptDay":87,"meetDay":88,"attempts":1,"startDay":88,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":88,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6502,"vidName":"Ingrid","favorId":"favor-ingrid_vik-98-30","acceptDay":98,"meetDay":99,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6502,"vidName":"Chadrack","favorId":"favor-visjoin_86-127-46","acceptDay":127,"meetDay":128,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"away":1}}
+  {"seed":6502,"vidName":"Ingrid","favorId":"favor-ingrid_vik-139-55","acceptDay":139,"meetDay":140,"attempts":1,"startDay":140,"forages":1,"nodeBarren":2,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":140,"deliveredKcal":210,"firstKeptDay":140,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6503,"vidName":"Ezra","favorId":"favor-gen_i3w9naf-17-1","acceptDay":17,"meetDay":18,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6504,"vidName":"Stan","favorId":"favor-stan_kowalski-6-1","acceptDay":6,"meetDay":7,"attempts":0,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6504,"vidName":"Diana","favorId":"favor-gen_f1rpe9f-17-4","acceptDay":17,"meetDay":18,"attempts":2,"startDay":18,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":18,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6504,"vidName":"Diana","favorId":"favor-gen_f1rpe9f-38-6","acceptDay":38,"meetDay":39,"attempts":2,"startDay":39,"forages":1,"nodeBarren":5,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":40,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6504,"vidName":"Wei","favorId":"favor-chen_wei-38-7","acceptDay":38,"meetDay":39,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"node-elsewhere":1}}
+  {"seed":6504,"vidName":"Stan","favorId":"favor-stan_kowalski-44-9","acceptDay":44,"meetDay":45,"attempts":1,"startDay":45,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6504,"vidName":"Naran","favorId":"favor-naran_tumen-52-13","acceptDay":52,"meetDay":53,"attempts":1,"startDay":53,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":53,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6504,"vidName":"Naran","favorId":"favor-naran_tumen-59-18","acceptDay":59,"meetDay":60,"attempts":1,"startDay":60,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":60,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6504,"vidName":"Stan","favorId":"favor-stan_kowalski-63-20","acceptDay":64,"meetDay":65,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":1}}
+  {"seed":6504,"vidName":"Wei","favorId":"favor-chen_wei-64-21","acceptDay":66,"meetDay":67,"attempts":1,"startDay":67,"forages":1,"nodeBarren":2,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":67,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6504,"vidName":"Wei","favorId":"favor-chen_wei-113-35","acceptDay":115,"meetDay":116,"attempts":1,"startDay":116,"forages":1,"nodeBarren":8,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6504,"vidName":"Lauren","favorId":"favor-gen_r1np4fm-120-38","acceptDay":120,"meetDay":121,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6504,"vidName":"Diana","favorId":"favor-gen_f1rpe9f-126-43","acceptDay":127,"meetDay":128,"attempts":1,"startDay":128,"forages":0,"nodeBarren":2,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6504,"vidName":"Naran","favorId":"favor-naran_tumen-128-44","acceptDay":128,"meetDay":129,"attempts":0,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6504,"vidName":"Naran","favorId":"favor-naran_tumen-140-51","acceptDay":140,"meetDay":141,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"promised","promiseKept":false,"startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+
+KEPT-WITHOUT-START: 0
+
+BARREN SPLIT (forage-barren days): 10
+  by barrenKind: {"node-barren":10}
+TRAVEL-BLOCKED entries: 0 (walkAttempted: 0, pathFound: 0)
+TRAVEL-WALKED entries: 32
+ESCALATIONS: ended-stuck 0, end-blocked 0
+
+RAW-KEPT AUDIT:
+  deliver events ok: 17; missed-line-but-kept-true (must be 0): 0
+  funnel completes: events vs snapshot per seed:
+    seed 6501: events=3 snapshot=0 keptStrict=0 keptMatched=0
+    seed 6502: events=8 snapshot=2 keptStrict=1 keptMatched=1
+    seed 6503: events=0 snapshot=0 keptStrict=0 keptMatched=0
+    seed 6504: events=6 snapshot=0 keptStrict=0 keptMatched=0
+
+POSITION HISTORY (no-micro-pos blocks: ever vs never before):
+  no-micro-pos blocks: ever-before=3 never-before=0 same-day-ambiguous=5
+    seed 6501: posHistory villagers=9
+    seed 6502: posHistory villagers=16
+    seed 6503: posHistory villagers=9
+    seed 6504: posHistory villagers=8
+
+DAWN STEP-FIRST RETRIES: 8
+  stepOk: 8, stepAssigned: 8, retryStarted: 8
+  retryStarted without stepAssigned (must be 0): 0
+  retries by dayPartAfter: {"0":8}
+  retries missing stepAssigned field (binding miss if >0): 0
+
+NO-HOME ENTRIES (must all carry walk detail): 0
+  missing walkPathFound (binding miss if >0): 0
+  by step: {}
+  by walkRefusedReason: {}
+TRAVEL-WALKED entries: 32
+TRAVEL-BLOCKED refusals naming a step (walkRefusedAt present): 0 / 0
+TRAVEL-BLOCKED missing blockage read (binding miss if >0): 0
+
+POST-ENDING STARTS (a start dated after an ending in the same seed):
+  seed 6501: no endings
+  seed 6502: no endings
+  seed 6503: no endings
+  seed 6504: no endings
+
+MIDDAY POSITIONS (no-micro-pos dawn blocks vs midday history):
+  seed 6501: midday-ever=3 midday-never=0 midday villagers=17
+  seed 6502: midday-ever=3 midday-never=0 midday villagers=17
+  seed 6503: midday-ever=0 midday-never=0 midday villagers=10
+  seed 6504: midday-ever=2 midday-never=0 midday villagers=14
+
+DRIVER VERDICTS FILE: [{"seed":6501,"steering":true,"arm":"linger","alive":7,"deep2":25,"cracks":0,"vCracks":2,"friendGrievances":0,"stateGrievances":8,"stateFriend":1,"stateVCracks":1,"t2picks":248,"closeReads":167,"grievReads":21,"grievReadsByWhy":{"grievance":15,"vgrievance":6},"firstDeep2Day":30,"lateClose":154,"lateTP":133,"lateNull":0,"condRate":0.8636363636363636,"pooledTP":134,"pooledRate":0.8023952095808383,"othersSteered":4,"lingerPicks":244,"knack":22,"dryCensus":{"totalConvos":444,"deepConvos":444,"totalDryLines":89,"dry9Lines":89,"self3Lines":0,"convosWithDry":70,"shareWithDry":0.15765765765765766,"dryPerConvo":0.20045045045045046,"convosEndingOnDry":0,"shareEndingOnDry":0,"hist":{"0":374,"1":52,"2":17,"3":1,"4":0,"5+":0},"prePick":{"other":24,"topic":65},"prePick9":{"other":24,"topic":65},"followCounts":{"question":49,"other":39,"recap":1},"noFollow":0,"follows":[{"day":11,"name":"Liam","who":"you","text":"\"Can I ask you something else?\""},{"day":13,"name":"Synnøve","who":"you","text":"\"Can I ask you something else?\""},{"day":13,"name":"Nikos","who":"you","text":"\"...\""},{"day":16,"name":"Devon","who":"you","text":"\"Can I ask you something else?\""},{"day":19,"name":"Maya","who":"you","text":"\"Let's talk roles.\""},{"day":19,"name":"Aroha","who":"you","text":"\"Can I ask you something else?\""},{"day":20,"name":"Nikos","who":"you","text":"\"...\""},{"day":20,"name":"Nikos","who":"you","text":"\"Can I ask you something else?\""},{"day":22,"name":"Synnøve","who":"you","text":"\"...\""},{"day":24,"name":"Synnøve","who":"you","text":"\"Take your time. I've got nowhere to be.\""},{"day":24,"name":"Amelia","who":"you","text":"\"...\""},{"day":24,"name":"Amelia","who":"you","text":"\"Let's talk roles.\""},{"day":24,"name":"Aroha","who":"you","text":"\"Can I ask you something else?\""},{"day":29,"name":"Aroha","who":"you","text":"\"Can I ask you something else?\""},{"day":32,"name":"Liam","who":"you","text":"\"Can I ask you something else?\""},{"day":32,"name":"Nikos","who"

@@ -1,0 +1,314 @@
+# SURFACE+SEEDED — seed 6501 (143d, 7 alive)
+
+npcPairs=98 deep2=25 cracks=0 vCracks=2 friendGriev=0 stateGriev=8 stateFriend=1 stateVCrack=1 t2picks=248 closeReadsServed=40 grievanceServes=8 othersSteered=4
+COND-TP: firstDeep2Day=30 lateClose=154 lateTP=133 lateNull=0 condRate=86.4% pooledTP=134/167 pooledRate=80.2% grievReadsByWhy={"grievance":15,"vgrievance":6}
+FUNNEL (natural): convos=414 subject=376 offered=309 picked=244 classes={"subject-no-offer":67,"offered-not-picked":65,"picked-others":244,"no-subject-no-ans":38}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=67 rate=16.2% offered=309 mainOffered=0 subjectOffered=309 picked=244 latePicks=99 latePicksMain=0 latePicksSubject=99
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Amelia / Nikos / Hernán — "Hassan talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Liam / Nikos — "that stray dog — the one that bit two people — lets Pavel touch it."
+REOFFER: offers=277 picks=230 latePicks=95 missedChangedNotOffered=33
+WRAPSERVE: convos=21 matcherHits=8 matcherServes=8 classes={"grievance-line":8,"deflection":3,"other":10}
+FUNNEL-PROBE (subject-no-offer turns): turns=170 menuProblem=114 pickProblem=56
+INVITE (wrap, carried from r63): lure={"n":12,"accepts":2,"acceptRate":0.16666666666666666,"vetoes":{},"chanceMin":35,"chanceMax":62,"chanceMean":38.1} party={"n":24,"accepts":12,"acceptRate":0.5,"vetoes":{},"chanceMin":11.200000000000003,"chanceMax":90.6,"chanceMean":53.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=11
+FAVOR (r65): funnel={"offers":40,"forageOffers":7,"otherFavorOffers":33,"accepts":7,"acceptAttempts":7,"waits":5,"starts":3,"startBlocked":12,"forages":3,"forageNodeBarren":6,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":3,"delivers":3,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":3,"keptMatched":0,"keptMatchedStrict":0}
+OUTING END STATES: [{"vid":"sari_wulandari","vidName":"Sari","favorId":"favor-sari_wulandari-30-11","state":"acknowledged","promisedDay":30,"meetDay":31,"deadline":32,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"devon_okafor","vidName":"Devon","favorId":"favor-devon_okafor-20-9","state":"acknowledged","promisedDay":20,"meetDay":21,"deadline":22,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Sari kind=forage_help favorId=favor-sari_wulandari-4-1 task=forage with Sari tomorrow to rebuild the pantry
+  FAVOR-OFFER d4: Claire kind=forage_help favorId=favor-gen_4sih1nz-4-2 task=forage with Claire tomorrow to rebuild the pantry
+  FAVOR-OFFER d6: Aroha kind=heal_help favorId=favor-aroha_ngata-6-3 task=help Aroha with their injury
+  FAVOR-OFFER d8: Pavel kind=forage_help favorId=favor-pavel_dubinin-8-4 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Nikos kind=forage_help favorId=favor-nikos_papadopoulos-13-6 task=forage with Nikos tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Claire kind=forage_help favorId=favor-gen_4sih1nz-13-7 task=forage with Claire tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Amelia kind=food_share favorId=favor-gen_0ajjvrf-13-5 task=share food with Amelia — they're going hungry
+  FAVOR-OFFER d18: Maya kind=heal_help favorId=favor-gen_m1q1dq6-18-8 task=help Maya with their injury
+  FAVOR-OFFER d20: Devon kind=forage_help favorId=favor-devon_okafor-20-9 task=forage with Devon tomorrow to rebuild the pantry
+  FAVOR-OFFER d26: Synnøve kind=food_share favorId=favor-gen_jj1ddli-25-10 task=share food with Synnøve — they're going hungry
+  FAVOR-OFFER d30: Sari kind=forage_help favorId=favor-sari_wulandari-30-11 task=forage with Sari tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Synnøve kind=food_share favorId=favor-gen_jj1ddli-34-12 task=share food with Synnøve — they're going hungry
+  FAVOR-OFFER d40: Pavel kind=food_share favorId=favor-pavel_dubinin-40-13 task=share food with Pavel — they're going hungry
+  FAVOR-OFFER d41: Liam kind=food_share favorId=favor-gen_qt5wg6b-41-14 task=share food with Liam — they're going hungry
+  FAVOR-OFFER d45: Liam kind=food_share favorId=favor-gen_qt5wg6b-45-15 task=share food with Liam — they're running on empty
+  FAVOR-OFFER d50: Liam kind=food_share favorId=favor-gen_qt5wg6b-50-16 task=share food with Liam — they're going hungry
+  FAVOR-OFFER d53: Synnøve kind=food_share favorId=favor-gen_jj1ddli-53-17 task=share food with Synnøve — they're going hungry
+  FAVOR-OFFER d60: Liam kind=food_share favorId=favor-gen_qt5wg6b-60-19 task=share food with Liam — they're going hungry
+  FAVOR-OFFER d62: Synnøve kind=food_share favorId=favor-gen_jj1ddli-60-18 task=share food with Synnøve — they're going hungry
+  FAVOR-OFFER d64: Amelia kind=food_share favorId=favor-gen_0ajjvrf-64-20 task=share food with Amelia — they're going hungry
+  FAVOR-OFFER d68: Synnøve kind=food_share favorId=favor-gen_jj1ddli-68-21 task=share food with Synnøve — they're running on empty
+  FAVOR-OFFER d70: Nikos kind=food_share favorId=favor-nikos_papadopoulos-70-22 task=share food with Nikos — they're past hungry
+  FAVOR-OFFER d74: Nikos kind=sick_help favorId=favor-nikos_papadopoulos-74-23 task=help Nikos with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d76: Synnøve kind=food_share favorId=favor-gen_jj1ddli-76-24 task=share food with Synnøve — they're running on empty
+  FAVOR-OFFER d78: Pavel kind=food_share favorId=favor-pavel_dubinin-78-25 task=share food with Pavel — they're past hungry
+  FAVOR-OFFER d79: Nikos kind=food_share favorId=favor-nikos_papadopoulos-79-26 task=share food with Nikos — they're past hungry
+  FAVOR-OFFER d83: Amelia kind=food_share favorId=favor-gen_0ajjvrf-83-28 task=share food with Amelia — they're going hungry
+  FAVOR-OFFER d84: Synnøve kind=food_share favorId=favor-gen_jj1ddli-80-27 task=share food with Synnøve — they're going hungry
+  FAVOR-OFFER d86: Pavel kind=food_share favorId=favor-pavel_dubinin-86-29 task=share food with Pavel — they're going hungry
+  FAVOR-OFFER d92: Synnøve kind=food_share favorId=favor-gen_jj1ddli-92-30 task=share food with Synnøve — they're going hungry
+  FAVOR-OFFER d99: Claire kind=food_share favorId=favor-gen_4sih1nz-99-31 task=share food with Claire — they're going hungry
+  FAVOR-OFFER d100: Synnøve kind=food_share favorId=favor-gen_jj1ddli-100-32 task=share food with Synnøve — they're running on empty
+  FAVOR-OFFER d101: Nikos kind=food_share favorId=favor-nikos_papadopoulos-101-33 task=share food with Nikos — they're going hungry
+  FAVOR-OFFER d109: Somchai kind=food_share favorId=favor-somchai_prasert-109-34 task=share food with Somchai — they're going hungry
+  FAVOR-OFFER d129: Claire kind=heal_help favorId=favor-gen_4sih1nz-129-35 task=help Claire with their injury
+  FAVOR-OFFER d133: Claire kind=heal_help favorId=favor-gen_4sih1nz-133-36 task=help Claire with their injury
+  FAVOR-OFFER d138: Claire kind=food_share favorId=favor-gen_4sih1nz-138-37 task=share food with Claire — they're running on empty
+  FAVOR-OFFER d138: Yacine kind=food_share favorId=favor-app_mgpsphve193-138-38 task=share food with Yacine — they're going hungry
+  FAVOR-OFFER d142: Claire kind=heal_help favorId=favor-gen_4sih1nz-142-40 task=help Claire with their injury
+  FAVOR-OFFER d142: Theo kind=water_haul favorId=favor-theo_lindqvist-142-41 task=bring four liters home from the creek with Theo; set out at dawn
+  FAVOR-ACCEPT d4: Sari favorId=favor-sari_wulandari-4-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d4: Claire favorId=favor-gen_4sih1nz-4-2 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d8: Pavel favorId=favor-pavel_dubinin-8-4 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d13: Nikos favorId=favor-nikos_papadopoulos-13-6 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d13: Claire favorId=favor-gen_4sih1nz-13-7 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d20: Devon favorId=favor-devon_okafor-20-9 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d30: Sari favorId=favor-sari_wulandari-30-11 accepted=true state=promised meetDay=31
+  INVITE-DEC d7 lure: Hassan -> Claire chance=35 accept=true veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d8 party: Caroline -> Maya chance=51 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 40"]
+  INVITE-DEC d8 party: Caroline -> Claire chance=28 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":4,"trust":20,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 20","wants out (-15)"]
+  INVITE-DEC d10 party: Caroline -> Amelia chance=35 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"hungry","fear":0,"trust":25,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 25","cautious temperament (-10)"]
+  INVITE-DEC d11 party: Caroline -> Synnøve chance=40.2 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":4,"trust":38,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 38","cautious temperament (-10)"]
+  INVITE-DEC d12 party: Caroline -> Nikos chance=44.2 accept=false veto=- inputs={"temp":"gentle","goal":"peace","mood":"steady","fear":0,"trust":23,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 23"]
+  INVITE-DEC d12 party: Caroline -> Amelia chance=41 accept=true veto=- inputs={"temp":"cautious","goal":"legacy","mood":"hungry","fear":0,"trust":40,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 40","cautious temperament (-10)"]
+  INVITE-DEC d13 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d14 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grateful","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d15 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grateful","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d16 party: Caroline -> Claire chance=41 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grateful","fear":0,"trust":40,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d16 party: Caroline -> Devon chance=11.200000000000003 accept=false veto=- inputs={"temp":"anxious","goal":"alone","mood":"steady","fear":0,"trust":28,"bond":{"v":-5,"depth":0},"partySize":3} reasons=["trust 28","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d16 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grateful","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d17 party: Caroline -> Aroha chance=67.8 accept=false veto=- inputs={"temp":"warm","goal":"prove","mood":"steady","fear":0,"trust":32,"bond":{"v":-7,"depth":0},"partySize":3} reasons=["trust 32","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d17 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d18 party: Caroline -> Synnøve chance=52 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":0,"trust":55,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 55","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d19 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d20 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d21 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d22 lure: Devon -> Claire chance=45 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"lonely","fear":0,"affinity":0} reasons=["wants out (-10)","lonely mood (+10)"]
+  INVITE-DEC d23 lure: Devon -> Claire chance=35 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d29 lure: Maya -> Liam chance=62 accept=true veto=- inputs={"temp":"steady","goal":"lead","mood":"hungry","fear":0,"affinity":29} reasons=["relationship with inviter (+7)","wants to lead (+10)"]
+  INVITE-DEC d32 party: Caroline -> Liam chance=61.6 accept=false veto=- inputs={"temp":"steady","goal":"lead","mood":"steady","fear":0,"trust":54,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 54","a big party is safer (+5)"]
+  INVITE-DEC d32 party: Caroline -> Nikos chance=70.8 accept=true veto=- inputs={"temp":"gentle","goal":"peace","mood":"hungry","fear":0,"trust":77,"bond":{"v":20,"depth":0},"partySize":3} reasons=["trust 77","a big party is safer (+5)"]
+  INVITE-DEC d33 party: Caroline -> Hassan chance=77.2 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"steady","fear":31,"trust":93,"bond":{"v":1,"depth":0},"partySize":4} reasons=["trust 93","a big party is safer (+5)"]
+  INVITE-DEC d36 party: Sari -> Liam chance=63.2 accept=true veto=- inputs={"temp":"steady","goal":"lead","mood":"grieving","fear":12,"trust":83,"bond":{"v":23,"depth":0},"partySize":4} reasons=["trust 83","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d64 party: Sari -> Pavel chance=73.2 accept=true veto=- inputs={"temp":"dry","goal":"legacy","mood":"grieving","fear":0,"trust":83,"bond":{"v":36,"depth":1},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d104 party: Pavel -> Claire chance=51 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grieving","fear":62,"trust":90,"bond":null,"partySize":4} reasons=["trust 90","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d104 party: Pavel -> Yacine chance=58.8 accept=false veto=- inputs={"temp":"stoic","goal":"peace","mood":"grieving","fear":62,"trust":72,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 72","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d105 party: Pavel -> Somchai chance=90.6 accept=true veto=- inputs={"temp":"restless","goal":"feed","mood":"grieving","fear":30,"trust":89,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 89","a big party is safer (+5)","restless temperament (+10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d116 party: Pavel -> Claire chance=47.80000000000001 accept=false veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grieving","fear":43,"trust":82,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 82","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d117 party: Pavel -> Claire chance=37.80000000000001 accept=true veto=- inputs={"temp":"sardonic","goal":"escape","mood":"grieving","fear":73,"trust":82,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 82","a big party is safer (+5)","wants out (-15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d118 party: Amelia -> Yacine chance=61.599999999999994 accept=true veto=- inputs={"temp":"stoic","goal":"peace","mood":"grieving","fear":100,"trust":79,"bond":{"v":34,"depth":1},"partySize":3} reasons=["trust 79","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d118 party: Amelia -> Hannah chance=64.4 accept=false veto=- inputs={"temp":"intense","goal":"record","mood":"grieving","fear":100,"trust":86,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 86","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d121 party: Synnøve -> Frank chance=48 accept=true veto=- inputs={"temp":"sardonic","goal":"remember","mood":"steady","fear":0,"trust":20,"bond":null,"partySize":3} reasons=["trust 20","a big party is safer (+5)"]
+  INVITE-DEC d124 party: Synnøve -> Hernán chance=63 accept=true veto=- inputs={"temp":"bold","goal":"remember","mood":"steady","fear":12,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","bold temperament (+15)"]
+SEEDED-DAILY: [{"day":29,"v":46,"depth":3},{"day":29,"v":46,"depth":3},{"day":30,"v":34,"depth":3},{"day":32,"v":34,"depth":3},{"day":33,"v":34,"depth":3},{"day":33,"v":34,"depth":3},{"day":34,"v":34,"depth":3},{"day":35,"v":34,"depth":3},{"day":36,"v":34,"depth":3},{"day":37,"v":34,"depth":3},{"day":38,"v":34,"depth":3},{"day":39,"v":34,"depth":3},{"day":40,"v":34,"depth":3},{"day":41,"v":34,"depth":3}] class=stick
+GOSSIP: totalPicks=188 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=35 31-60=58 61-90=52 91-120=49 121+=50 naturalPicks=244 seededPicks=4 gossipPicks=188
+SEEDED: {"pair":{"a":"gen_m1q1dq6","b":"gen_qt5wg6b","aName":"Maya","bName":"Liam"},"day":27,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":29,"v":46,"depth":3},{"day":29,"v":46,"depth":3},{"day":30,"v":34,"depth":3},{"day":32,"v":34,"depth":3},{"day":33,"v":34,"depth":3},{"day":33,"v":34,"depth":3},{"day":34,"v":34,"depth":3},{"day":35,"v":34,"depth":3},{"day":36,"v":34,"depth":3},{"day":37,"v":34,"depth":3},{"day":38,"v":34,"depth":3},{"day":39,"v":34,"depth":3},{"day":40,"v":34,"depth":3},{"day":41,"v":34,"depth":3}],"crackTraceClass":"stick","vAt7":34,"depthAt7":3,"vDrop":18,"depthDrop":-1,"crack7":true,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":6,"servesAll":[{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Maya <> Liam — maxDepth 3, final 3 (v=34), dropped 0
+  FRIEND d30: Synnøve <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Amelia <> Liam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Liam <> Pavel — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d105: Liam <> Sari — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d120: Pavel <> Sari — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d120: Hassan <> Pavel — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d45: Liam <> Hassan — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d65: Synnøve <> Hassan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Amelia <> Sari — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d40: Liam <> Nikos — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d40: Amelia <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Amelia <> Nikos — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d85: Amelia <> Hassan — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d65: Synnøve <> Pavel — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d65: Synnøve <> Nikos — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Synnøve <> Sari — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d100: Nikos <> Pavel — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d55: Amelia <> Synnøve — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Hassan <> Sari — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d110: Hassan <> Nikos — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d105: Nikos <> Sari — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d100: Yacine <> Synnøve — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d130: Yacine <> Hassan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Synnøve <> Somchai — maxDepth 2, final 2 (v=56), dropped 0
+  VCRACK d27: Maya vs Liam (ambushed) v 48 -> 34 (depth 1 -> 3)
+  VCRACK d29: Liam vs Maya (ambushed) v 48 -> 34 (depth 1 -> 3)
+  CLOSE-READ d13: Synnøve about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Amelia about Pavel — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Pavel about Amelia — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Maya about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Maya about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Amelia about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Synnøve about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Nikos about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Liam about Maya — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Amelia about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Synnøve about Liam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Maya about Liam — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Hassan about Liam — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Liam about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Sari about Amelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Nikos about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Sari about Amelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Synnøve about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Sari about Amelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Nikos about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Liam about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Amelia about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Liam about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Liam about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Synnøve about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Liam about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Amelia about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Nikos about Liam — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Liam about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Liam about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Amelia about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Liam about Amelia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Liam about Amelia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Amelia about Liam — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Liam about Amelia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Synnøve about Liam — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Liam about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Amelia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Liam about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Amelia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Liam about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Nikos about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Nikos about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Liam about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Amelia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Pavel about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Nikos about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Pavel about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Pavel about Liam — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Amelia about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Nikos about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Liam about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Synnøve about Liam — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Pavel about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Synnøve about Amelia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Nikos about Synnøve — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Amelia about Synnøve — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Synnøve about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Synnøve about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Synnøve about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Nikos about Synnøve — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Nikos about Synnøve — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Synnøve about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Yacine about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Synnøve about Nikos — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Synnøve about Nikos — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Amelia about Pavel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Amelia about Pavel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Amelia about Pavel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Yacine about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Pavel about Amelia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Somchai about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Hannah about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d105: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Yacine about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Hannah about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d106: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Hannah about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d107: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Yacine about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Somchai about Synnøve — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Yacine about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Hannah about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Hannah about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Somchai about Synnøve — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Amelia about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Nikos about Synnøve — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Synnøve about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Hannah about Synnøve — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d119: Yacine about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d120: Yacine about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d121: Yacine about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d123: Yacine about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Yacine about Hassan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Yacine about Hassan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Frank about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d136: Frank about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Yacine about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Yacine about Hassan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Frank about Hassan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  STATE-FRIEND-GRIEV d30 (betrayal): Liam vs Maya (ambushed) depth 3 v 34 -> 34
+  STATE-VCRACK d29 (betrayal): Maya vs Liam (ambushed) v 48 -> 34 (depth 1 -> 3)
+  GRIEV-READ d8: Claire about Aroha (why=grievance)
+  GRIEV-READ d9: Devon about Sari (why=grievance)
+  GRIEV-READ d9: Aroha about Claire (why=grievance)
+  GRIEV-READ d10: Sari about Devon (why=grievance)
+  GRIEV-READ d16: Devon about Sari (why=grievance)
+  GRIEV-READ d16: Sari about Devon (why=grievance)
+  KNACK d5 Claire: "Huh. Let me think about that." "the woman in her 30s ate something last month that should've killed them. They're fine.
+  KNACK d12 Amelia: "Good question." "Aroha ate something last month that should've killed them. They're fine."
+  KNACK d12 Amelia: "Hassan talks to the garden. The garden listens. I've seen it."
+  KNACK d13 Claire: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Nikos touch it."
+  KNACK d21 Claire: "Maya talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Liam: "that stray dog — the one that bit two people — lets Pavel touch it."
+  KNACK d29 Aroha: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Claire touch it."
+  KNACK d29 Nikos: "Huh. Let me think about that." "Sari sees in the dark. Not well — but better than you. Better than me."
+
+deathCauses: {"a stranger":1,"Choir Toad":1,"contest":1,"The Eater":1,"the wild":4}
