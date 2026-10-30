@@ -68,7 +68,28 @@ function warmDecision(o) {
   return { act: true };
 }
 
-function withWoodwarm(inner, store) {
+// Pure restraint gate (sim-warmthrestr2-b, opt-in only). Applies AFTER
+// warmDecision returns act, BEFORE makeFire. Bridge cost B = 4.
+//   R1 (bridge-feasibility): act only if woodBefore - 1 >= 4, i.e. >= 5.
+//   R2 (bridge-already-lost): act only if woodBefore < 4 (window 1..3,
+//     since warmDecision already requires wood >= 1).
+//   null / 'off' / undefined: no restraint (unconditional behavior).
+//   unknown restraint string: fail closed (miss).
+function restraintDecision(restraint, wood) {
+  if (!restraint || restraint === 'off') return { act: true };
+  if (restraint === 'R1') {
+    if (wood !== null && wood !== undefined && wood >= 5) return { act: true };
+    return { miss: 'restraint-r1' };
+  }
+  if (restraint === 'R2') {
+    if (wood !== null && wood !== undefined && wood < 4) return { act: true };
+    return { miss: 'restraint-r2' };
+  }
+  return { miss: 'restraint-unknown' };
+}
+
+function withWoodwarm(inner, store, opts) {
+  const restraint = (opts && opts.restraint) || null;
   const st = store || newStore();
   let call = 0;
   return Object.assign({}, inner, {
@@ -134,6 +155,13 @@ function withWoodwarm(inner, store) {
               woodBefore: wood, branchesBefore: branches, ticksLeft, fireCost,
               ground: ground ? (ground.cx + ',' + ground.cy) : null };
             st.missed++;
+          } else if (!restraintDecision(restraint, wood).act) {
+            const rdec = restraintDecision(restraint, wood);
+            warmRec = { acted: false, miss: rdec.miss, purpose: 'warmth', loopDay,
+              restraint: restraint, woodBefore: wood, branchesBefore: branches,
+              ticksLeft, fireCost,
+              ground: ground ? (ground.cx + ',' + ground.cy) : null };
+            st.missed++;
           } else {
             const woodBefore = wood, kcalBefore = Math.round(sch.kcal || 0), ticksBefore = ticksLeft;
             let fireErr = null;
@@ -167,4 +195,4 @@ function withWoodwarm(inner, store) {
   });
 }
 
-module.exports = { woodwarmOn, newStore, warmDecision, withWoodwarm };
+module.exports = { woodwarmOn, newStore, warmDecision, restraintDecision, withWoodwarm };
