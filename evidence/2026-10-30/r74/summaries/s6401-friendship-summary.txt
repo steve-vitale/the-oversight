@@ -1,0 +1,334 @@
+# SURFACE+SEEDED — seed 6401 (140d, 8 alive)
+
+npcPairs=91 deep2=33 cracks=0 vCracks=0 friendGriev=1 stateGriev=3 stateFriend=1 stateVCrack=0 t2picks=310 closeReadsServed=35 grievanceServes=6 othersSteered=30
+COND-TP: firstDeep2Day=20 lateClose=192 lateTP=154 lateNull=0 condRate=80.2% pooledTP=154/192 pooledRate=80.2% grievReadsByWhy={"grievance":64,"vgrievance":0}
+FUNNEL (natural): convos=414 subject=413 offered=374 picked=280 classes={"subject-no-offer":39,"picked-others":280,"offered-not-picked":94,"no-subject-no-ans":1}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=39 rate=9.4% offered=374 mainOffered=30 subjectOffered=357 picked=280 latePicks=99 latePicksMain=6 latePicksSubject=93
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Pavel / Luis — "Victor talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Priya / Victor — "Teo sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=359 picks=296 latePicks=97 missedChangedNotOffered=1
+WRAPSERVE: convos=64 matcherHits=6 matcherServes=6 classes={"grievance-line":6,"deflection":4,"other":54}
+FUNNEL-PROBE (subject-no-offer turns): turns=264 menuProblem=185 pickProblem=79
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":15,"accepts":10,"acceptRate":0.6666666666666666,"vetoes":{},"chanceMin":7.799999999999997,"chanceMax":92,"chanceMean":51.1} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=8
+FAVOR (r65): funnel={"offers":40,"forageOffers":17,"otherFavorOffers":23,"accepts":17,"acceptAttempts":17,"waits":20,"starts":7,"startBlocked":18,"forages":6,"forageNodeBarren":8,"forageBarren":5,"forageBarrenTravel":0,"forageBarrenNode":5,"forageTravelBlocked":10,"forageTravelWalked":0,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":6,"keptMatched":0,"keptMatchedStrict":0}
+OUTING END STATES: [{"vid":"priya_nair","vidName":"Priya","favorId":"favor-priya_nair-68-26","state":"broken","promisedDay":68,"meetDay":69,"deadline":70,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"ursula_weber","vidName":"Ursula","favorId":"favor-ursula_weber-94-32","state":"acknowledged","promisedDay":94,"meetDay":95,"deadline":96,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"victor_lopez","vidName":"Victor","favorId":"favor-victor_lopez-91-31","state":"acknowledged","promisedDay":91,"meetDay":92,"deadline":93,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Ivy kind=forage_help favorId=favor-ivy_wang-2-2 task=forage with Ivy tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Priya kind=forage_help favorId=favor-priya_nair-10-4 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: Leo kind=forage_help favorId=favor-gen_0wmxwk7-11-5 task=forage with Leo tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Pavel kind=forage_help favorId=favor-pavel_dubinin-9-3 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d15: Leo kind=food_share favorId=favor-gen_0wmxwk7-15-6 task=share food with Leo — they're running on empty
+  FAVOR-OFFER d16: Leo kind=food_share favorId=favor-gen_0wmxwk7-16-7 task=share food with Leo — they're going hungry
+  FAVOR-OFFER d22: Leo kind=heal_help favorId=favor-gen_0wmxwk7-22-8 task=help Leo with their injury
+  FAVOR-OFFER d25: Leo kind=heal_help favorId=favor-gen_0wmxwk7-25-9 task=help Leo with their injury
+  FAVOR-OFFER d29: Ursula kind=forage_help favorId=favor-ursula_weber-29-10 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Leo kind=forage_help favorId=favor-gen_0wmxwk7-31-11 task=forage with Leo tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Priya kind=food_share favorId=favor-priya_nair-34-12 task=share food with Priya — they're going hungry
+  FAVOR-OFFER d35: Leo kind=food_share favorId=favor-gen_0wmxwk7-35-13 task=share food with Leo — they're running on empty
+  FAVOR-OFFER d40: Leo kind=food_share favorId=favor-gen_0wmxwk7-40-14 task=share food with Leo — they're going hungry
+  FAVOR-OFFER d41: Victor kind=forage_help favorId=favor-victor_lopez-41-15 task=forage with Victor tomorrow to rebuild the pantry
+  FAVOR-OFFER d41: Ursula kind=forage_help favorId=favor-ursula_weber-41-16 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Priya kind=forage_help favorId=favor-priya_nair-43-17 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d45: Alfredo kind=heal_help favorId=favor-gen_noiwohl-45-18 task=help Alfredo with their injury
+  FAVOR-OFFER d46: Leo kind=food_share favorId=favor-gen_0wmxwk7-46-20 task=share food with Leo — they're going hungry
+  FAVOR-OFFER d46: Teo kind=forage_help favorId=favor-gen_fq5gz6h-46-19 task=forage with Teo tomorrow to rebuild the pantry
+  FAVOR-OFFER d49: DeAndre kind=food_share favorId=favor-gen_2mk588b-49-21 task=share food with DeAndre — they're going hungry
+  FAVOR-OFFER d50: Leo kind=food_share favorId=favor-gen_0wmxwk7-50-23 task=share food with Leo — they're past hungry
+  FAVOR-OFFER d50: Ursula kind=food_share favorId=favor-ursula_weber-50-22 task=share food with Ursula — they're running on empty
+  FAVOR-OFFER d56: Ivy kind=forage_help favorId=favor-ivy_wang-56-24 task=forage with Ivy tomorrow to rebuild the pantry
+  FAVOR-OFFER d59: Ivy kind=forage_help favorId=favor-ivy_wang-59-25 task=forage with Ivy tomorrow to rebuild the pantry
+  FAVOR-OFFER d68: Priya kind=forage_help favorId=favor-priya_nair-68-26 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Ursula kind=heal_help favorId=favor-ursula_weber-69-27 task=help Ursula with their injury
+  FAVOR-OFFER d82: Victor kind=sick_help favorId=favor-victor_lopez-82-28 task=help Victor with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d89: Liam kind=food_share favorId=favor-liam_davis-86-29 task=share food with Liam — they're going hungry
+  FAVOR-OFFER d91: Victor kind=forage_help favorId=favor-victor_lopez-91-31 task=forage with Victor tomorrow to rebuild the pantry
+  FAVOR-OFFER d93: Teo kind=forage_help favorId=favor-gen_fq5gz6h-90-30 task=forage with Teo tomorrow to rebuild the pantry
+  FAVOR-OFFER d94: Ursula kind=forage_help favorId=favor-ursula_weber-94-32 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d94: Pavel kind=food_share favorId=favor-pavel_dubinin-94-33 task=share food with Pavel — they're running on empty
+  FAVOR-OFFER d95: Ivy kind=forage_help favorId=favor-ivy_wang-95-34 task=forage with Ivy tomorrow to rebuild the pantry
+  FAVOR-OFFER d96: Alfredo kind=food_share favorId=favor-gen_noiwohl-96-35 task=share food with Alfredo — they're past hungry
+  FAVOR-OFFER d101: Pavel kind=food_share favorId=favor-pavel_dubinin-100-36 task=share food with Pavel — they're going hungry
+  FAVOR-OFFER d104: Teo kind=food_share favorId=favor-gen_fq5gz6h-104-37 task=share food with Teo — they're going hungry
+  FAVOR-OFFER d116: Tika kind=food_share favorId=favor-visjoin_76-116-38 task=share food with Tika — they're past hungry
+  FAVOR-OFFER d127: Pavel kind=sick_help favorId=favor-pavel_dubinin-127-39 task=help Pavel with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d135: Pavel kind=water_haul favorId=favor-pavel_dubinin-135-40 task=bring four liters home from the creek with Pavel; set out at dawn
+  FAVOR-OFFER d137: Liam kind=water_haul favorId=favor-liam_davis-137-41 task=bring four liters home from the creek with Liam; set out at dawn
+  FAVOR-ACCEPT d6: Ivy favorId=favor-ivy_wang-2-2 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d10: Priya favorId=favor-priya_nair-10-4 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d11: Leo favorId=favor-gen_0wmxwk7-11-5 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d12: Pavel favorId=favor-pavel_dubinin-9-3 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d29: Ursula favorId=favor-ursula_weber-29-10 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d31: Leo favorId=favor-gen_0wmxwk7-31-11 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d41: Victor favorId=favor-victor_lopez-41-15 accepted=true state=promised meetDay=42
+  FAVOR-ACCEPT d41: Ursula favorId=favor-ursula_weber-41-16 accepted=true state=promised meetDay=42
+  FAVOR-ACCEPT d43: Priya favorId=favor-priya_nair-43-17 accepted=true state=promised meetDay=44
+  FAVOR-ACCEPT d46: Teo favorId=favor-gen_fq5gz6h-46-19 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d56: Ivy favorId=favor-ivy_wang-56-24 accepted=true state=promised meetDay=57
+  FAVOR-ACCEPT d59: Ivy favorId=favor-ivy_wang-59-25 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d68: Priya favorId=favor-priya_nair-68-26 accepted=true state=promised meetDay=69
+  FAVOR-ACCEPT d91: Victor favorId=favor-victor_lopez-91-31 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d93: Teo favorId=favor-gen_fq5gz6h-90-30 accepted=true state=promised meetDay=94
+  FAVOR-ACCEPT d94: Ursula favorId=favor-ursula_weber-94-32 accepted=true state=promised meetDay=95
+  FAVOR-ACCEPT d95: Ivy favorId=favor-ivy_wang-95-34 accepted=true state=promised meetDay=96
+  INVITE-DEC d8 party: Rosa -> DeAndre chance=46.8 accept=true veto=- inputs={"temp":"fidgety","goal":"feed","mood":"steady","fear":4,"trust":42,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 42","sick (-20)","feed goal (+15)"]
+  INVITE-DEC d8 party: Rosa -> Ursula chance=44.6 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4,"trust":24,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 24"]
+  INVITE-DEC d9 party: Rosa -> Lucas chance=7.799999999999997 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"steady","fear":12,"trust":32,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 32","wants to be alone (-40)"]
+  INVITE-DEC d9 party: Rosa -> Ivy chance=48 accept=false veto=- inputs={"temp":"cautious","goal":"protect","mood":"grateful","fear":12,"trust":20,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 20","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d9 party: Rosa -> Ivy chance=48.4 accept=false veto=- inputs={"temp":"cautious","goal":"protect","mood":"grateful","fear":12,"trust":21,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 21","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d10 party: Rosa -> Teo chance=48.2 accept=false veto=- inputs={"temp":"sardonic","goal":"peace","mood":"steady","fear":0,"trust":33,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 33"]
+  INVITE-DEC d10 party: Rosa -> Priya chance=56.6 accept=true veto=- inputs={"temp":"intense","goal":"lead","mood":"steady","fear":0,"trust":54,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 54"]
+  INVITE-DEC d11 party: Rosa -> Leo chance=54.2 accept=true veto=- inputs={"temp":"fidgety","goal":"family","mood":"steady","fear":4,"trust":48,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 48"]
+  INVITE-DEC d15 party: Vy -> Ursula chance=46 accept=true veto=- inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":4,"trust":40,"bond":{"v":24,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Vy -> Ivy chance=69.4 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"steady","fear":12,"trust":36,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 36","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d54 party: Leo -> Teo chance=76 accept=true veto=- inputs={"temp":"sardonic","goal":"peace","mood":"grieving","fear":4,"trust":90,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d72 party: DeAndre -> Pavel chance=19.200000000000003 accept=true veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":22,"trust":48,"bond":{"v":40,"depth":1},"partySize":3} reasons=["trust 48","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d75 party: DeAndre -> Alfredo chance=92 accept=true veto=- inputs={"temp":"restless","goal":"record","mood":"steady","fear":0,"trust":80,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 80","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d114 party: Alfredo -> Tika chance=43.2 accept=true veto=- inputs={"temp":"intense","goal":"understand","mood":"grieving","fear":100,"trust":58,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 58","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d115 party: Alfredo -> Liam chance=66 accept=true veto=- inputs={"temp":"steady","goal":"joy","mood":"grieving","fear":80,"trust":90,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+SEEDED-DAILY: [{"day":21,"v":46,"depth":3},{"day":22,"v":48,"depth":3},{"day":23,"v":48,"depth":3},{"day":24,"v":54,"depth":3},{"day":25,"v":60,"depth":3},{"day":26,"v":66,"depth":3},{"day":27,"v":72,"depth":3},{"day":28,"v":78,"depth":3},{"day":29,"v":78,"depth":3},{"day":30,"v":84,"depth":3},{"day":31,"v":84,"depth":3},{"day":32,"v":90,"depth":3},{"day":33,"v":94,"depth":3},{"day":34,"v":100,"depth":3}] class=rise
+GOSSIP: totalPicks=274 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=45 31-60=64 61-90=72 91-120=61 121+=38 naturalPicks=280 seededPicks=30 gossipPicks=274
+SEEDED: {"pair":{"a":"gen_0wmxwk7","b":"gen_noiwohl","aName":"Leo","bName":"Alfredo"},"day":20,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":21,"v":46,"depth":3},{"day":22,"v":48,"depth":3},{"day":23,"v":48,"depth":3},{"day":24,"v":54,"depth":3},{"day":25,"v":60,"depth":3},{"day":26,"v":66,"depth":3},{"day":27,"v":72,"depth":3},{"day":28,"v":78,"depth":3},{"day":29,"v":78,"depth":3},{"day":30,"v":84,"depth":3},{"day":31,"v":84,"depth":3},{"day":32,"v":90,"depth":3},{"day":33,"v":94,"depth":3},{"day":34,"v":100,"depth":3}],"crackTraceClass":"rise","vAt7":60,"depthAt7":3,"vDrop":-8,"depthDrop":-1,"crack7":false,"firstServe":null,"serveWithin30":false,"serves":0,"servesAll":[],"effect":false}
+  FRIEND d85: Teo <> Pavel — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d75: Leo <> Vy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Vy <> Teo — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d55: Vy <> Ursula — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d135: Ivy <> Pavel — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d55: Vy <> Alfredo — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d25: DeAndre <> Alfredo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Leo <> Alfredo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Leo <> DeAndre — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: DeAndre <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Alfredo <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Alfredo <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: DeAndre <> Pavel — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d105: Teo <> Ivy — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d45: Teo <> Alfredo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Alfredo <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Teo <> Ursula — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d40: Alfredo <> Victor — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Teo <> Victor — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d110: Ursula <> Victor — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Leo <> Teo — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d115: DeAndre <> Ivy — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d135: Pavel <> Victor — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d75: Leo <> Ursula — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d85: Ivy <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Alfredo <> Priya — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d75: Leo <> Ivy — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d60: DeAndre <> Teo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Ivy <> Victor — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d115: Pavel <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: DeAndre <> Victor — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d135: Liam <> Ursula — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d115: DeAndre <> Tika — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND-GRIEV d20: Leo vs Alfredo (ambushed) depth 2 v 52 -> 60
+  CLOSE-READ d21: Teo about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: DeAndre about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Victor about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Teo about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: DeAndre about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d30: Victor about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Teo about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Teo about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Priya about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Priya about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Priya about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Ivy about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Ursula about Alfredo — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Ursula about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Ursula about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Teo about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Ursula about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Ursula about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Ivy about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Ivy about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Ursula about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Ursula about Alfredo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Teo about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Ivy about Alfredo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Priya about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Ivy about Alfredo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Pavel about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Pavel about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Pavel about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Teo about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Priya about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Teo about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Alfredo about DeAndre — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Teo about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Alfredo about DeAndre — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Pavel about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Priya about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Priya about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Alfredo about DeAndre — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: DeAndre about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Alfredo about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Alfredo about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Alfredo about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Alfredo about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Alfredo about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Alfredo about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Liam about Teo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Ivy about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Teo about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Ursula about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Liam about Alfredo — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Victor about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Pavel about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Pavel about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d115: Pavel about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Ursula about Ivy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ivy about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Pavel about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Ursula about Ivy — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Ursula about Ivy — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ursula about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Pavel about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Liam about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Liam about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Ursula about Ivy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Liam about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d123: Pavel about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Tika about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d124: Ivy about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Victor about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Tika about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d126: Ivy about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Liam about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d127: Pavel about Ursula — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Pavel about Ursula — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Liam about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d129: Pavel about Ursula — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Liam about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d130: Ivy about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Liam about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d131: Victor about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Tika about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d132: Liam about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d133: Luis about Ursula — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d134: Ivy about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ursula about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Pavel about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Ivy about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Ursula about Victor — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Luis about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d136: Victor about Ursula — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Thabo about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d137: Liam about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Luis about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Liam about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Tika about Ursula — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d139: Liam about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d21 (betrayal): Leo vs Alfredo (ambushed) depth 2 v 52 -> 60
+  GRIEV-READ d6: Ivy about Ursula (why=grievance)
+  GRIEV-READ d6: Pavel about Leo (why=grievance)
+  GRIEV-READ d9: Ivy about Ursula (why=grievance)
+  GRIEV-READ d13: Leo about Pavel (why=grievance)
+  GRIEV-READ d15: Leo about Pavel (why=grievance)
+  GRIEV-READ d16: Leo about Pavel (why=grievance)
+  KNACK d8 DeAndre: "Huh. Let me think about that." "Ursula ate something last month that should've killed them. They're fine."
+  KNACK d19 Ivy: "DeAndre ate something last month that should've killed them. They're fine. Doesn't matter now."
+  KNACK d29 Priya: "that stray dog — the one that bit two people — lets Alfredo touch it."
+  KNACK d32 Teo: "Good question." "Leo found a lost knife by smell last week. By SMELL."
+  KNACK d38 Teo: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Priya touch it. — or so they tell m
+  KNACK d38 Teo: "Well — Victor talks to the garden. The garden listens. I've seen it."
+  KNACK d45 DeAndre: "that stray dog — the one that bit two people — lets Priya touch it."
+  KNACK d48 Pavel: "Victor talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":1,"a wound that wouldn't close":1,"a stranger":1,"alien":1,"sickness":1,"the arena":1,"Sweeps Week":1}

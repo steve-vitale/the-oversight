@@ -1,0 +1,184 @@
+# SURFACE+SEEDED — seed 6404 (91d, 0 alive)
+
+npcPairs=99 deep2=4 cracks=0 vCracks=0 friendGriev=1 stateGriev=13 stateFriend=1 stateVCrack=0 t2picks=174 closeReadsServed=21 grievanceServes=33 othersSteered=27
+COND-TP: firstDeep2Day=40 lateClose=39 lateTP=21 lateNull=0 condRate=53.8% pooledTP=21/69 pooledRate=30.4% grievReadsByWhy={"grievance":6,"vgrievance":47}
+FUNNEL (natural): convos=229 subject=223 offered=194 picked=153 classes={"subject-no-offer":29,"offered-not-picked":41,"picked-others":153,"no-subject-no-ans":6}
+FUNNEL-UNSTEERED (r55 strict): convos=229 subjectNoOffer=29 rate=12.7% offered=194 mainOffered=7 subjectOffered=193 picked=153 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Chloe / Aroha — "Brendan talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=176 picks=161 latePicks=0 missedChangedNotOffered=0
+WRAPSERVE: convos=53 matcherHits=33 matcherServes=33 classes={"grievance-line":33,"deflection":1,"other":19}
+FUNNEL-PROBE (subject-no-offer turns): turns=155 menuProblem=73 pickProblem=82
+INVITE (wrap, carried from r63): lure={"n":7,"accepts":4,"acceptRate":0.5714285714285714,"vetoes":{"sick":1},"chanceMin":0,"chanceMax":77,"chanceMean":38.9} party={"n":28,"accepts":12,"acceptRate":0.42857142857142855,"vetoes":{},"chanceMin":5,"chanceMax":85,"chanceMean":34.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=13
+FAVOR (r65): funnel={"offers":34,"forageOffers":6,"otherFavorOffers":28,"accepts":6,"acceptAttempts":6,"waits":6,"starts":4,"startBlocked":3,"forages":4,"forageNodeBarren":1,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":4,"delivers":4,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":4,"keptMatched":2,"keptMatchedStrict":2}
+OUTING END STATES: [{"vid":"pavel_dubinin","vidName":"Pavel","favorId":"favor-pavel_dubinin-19-4","state":"fulfilled","promisedDay":19,"meetDay":20,"deadline":21,"promiseKept":true,"startedDay":20,"forageCount":1,"playerKcal":180,"partnerKcal":270,"deliveredKcal":450,"returnedDay":20,"talkCount":1},{"vid":"chloe_dubois","vidName":"Chloe","favorId":"favor-chloe_dubois-24-9","state":"thanked","promisedDay":24,"meetDay":25,"deadline":26,"promiseKept":true,"startedDay":25,"forageCount":3,"playerKcal":180,"partnerKcal":270,"deliveredKcal":450,"returnedDay":26,"talkCount":1},{"vid":"visjoin_68","vidName":"Amal","favorId":"favor-visjoin_68-71-29","state":"acknowledged","promisedDay":72,"meetDay":73,"deadline":73,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Dmitri kind=food_share favorId=favor-dmitri_sokolov-4-1 task=share food with Dmitri — they're running on empty
+  FAVOR-OFFER d7: Pavel kind=food_share favorId=favor-pavel_dubinin-7-2 task=share food with Pavel — they're running on empty
+  FAVOR-OFFER d13: Chloe kind=forage_help favorId=favor-chloe_dubois-9-3 task=forage with Chloe tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Pavel kind=forage_help favorId=favor-pavel_dubinin-19-4 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Jason kind=heal_help favorId=favor-gen_h7wmaai-20-5 task=help Jason with their injury
+  FAVOR-OFFER d21: Yuki kind=forage_help favorId=favor-yuki_mori-21-6 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Benoit kind=heal_help favorId=favor-benoit_lambert-21-7 task=help Benoit with their injury
+  FAVOR-OFFER d23: Benoit kind=heal_help favorId=favor-benoit_lambert-23-8 task=help Benoit with their injury
+  FAVOR-OFFER d24: Chloe kind=forage_help favorId=favor-chloe_dubois-24-9 task=forage with Chloe tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Sofia kind=food_share favorId=favor-gen_yxrya3r-31-10 task=share food with Sofia — they're going hungry
+  FAVOR-OFFER d32: Brendan kind=food_share favorId=favor-gen_w974jca-32-11 task=share food with Brendan — they're running on empty
+  FAVOR-OFFER d37: Sofia kind=sick_help favorId=favor-gen_yxrya3r-37-12 task=help Sofia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d37: Elijah kind=forage_help favorId=favor-elijah_scott-37-13 task=forage with Elijah tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Yuki kind=food_share favorId=favor-yuki_mori-38-14 task=share food with Yuki — they're running on empty
+  FAVOR-OFFER d41: Brendan kind=food_share favorId=favor-gen_w974jca-41-15 task=share food with Brendan — they're past hungry
+  FAVOR-OFFER d42: Elijah kind=food_share favorId=favor-elijah_scott-42-16 task=share food with Elijah — they're going hungry
+  FAVOR-OFFER d44: Brendan kind=food_share favorId=favor-gen_w974jca-44-17 task=share food with Brendan — they're running on empty
+  FAVOR-OFFER d46: Elijah kind=sick_help favorId=favor-elijah_scott-46-18 task=help Elijah with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d51: Brendan kind=food_share favorId=favor-gen_w974jca-51-19 task=share food with Brendan — they're going hungry
+  FAVOR-OFFER d53: Elijah kind=sick_help favorId=favor-elijah_scott-53-21 task=help Elijah with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d56: Elijah kind=heal_help favorId=favor-elijah_scott-56-22 task=help Elijah with their injury
+  FAVOR-OFFER d57: Jason kind=food_share favorId=favor-gen_h7wmaai-57-23 task=share food with Jason — they're going hungry
+  FAVOR-OFFER d60: Jason kind=food_share favorId=favor-gen_h7wmaai-60-24 task=share food with Jason — they're going hungry
+  FAVOR-OFFER d63: Brendan kind=food_share favorId=favor-gen_w974jca-63-25 task=share food with Brendan — they're going hungry
+  FAVOR-OFFER d64: Aroha kind=heal_help favorId=favor-aroha_ngata-64-26 task=help Aroha with their injury
+  FAVOR-OFFER d65: Jason kind=food_share favorId=favor-gen_h7wmaai-65-27 task=share food with Jason — they're going hungry
+  FAVOR-OFFER d70: Bijou kind=heal_help favorId=favor-visjoin_59-70-28 task=help Bijou with their injury
+  FAVOR-OFFER d71: Sari kind=food_share favorId=favor-sari_wulandari-71-30 task=share food with Sari — they're running on empty
+  FAVOR-OFFER d72: Amal kind=forage_help favorId=favor-visjoin_68-71-29 task=forage with Amal tomorrow to rebuild the pantry
+  FAVOR-OFFER d72: Brendan kind=sick_help favorId=favor-gen_w974jca-72-31 task=help Brendan with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d73: Jason kind=food_share favorId=favor-gen_h7wmaai-73-32 task=share food with Jason — they're going hungry
+  FAVOR-OFFER d77: Jason kind=heal_help favorId=favor-gen_h7wmaai-77-33 task=help Jason with their injury
+  FAVOR-OFFER d80: Jason kind=food_share favorId=favor-gen_h7wmaai-80-34 task=share food with Jason — they're going hungry
+  FAVOR-OFFER d84: Pietro kind=heal_help favorId=favor-visjoin_78-84-35 task=help Pietro with their injury
+  FAVOR-ACCEPT d13: Chloe favorId=favor-chloe_dubois-9-3 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d19: Pavel favorId=favor-pavel_dubinin-19-4 accepted=true state=promised meetDay=20
+  FAVOR-ACCEPT d21: Yuki favorId=favor-yuki_mori-21-6 accepted=true state=promised meetDay=22
+  FAVOR-ACCEPT d24: Chloe favorId=favor-chloe_dubois-24-9 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d37: Elijah favorId=favor-elijah_scott-37-13 accepted=true state=promised meetDay=38
+  FAVOR-ACCEPT d72: Amal favorId=favor-visjoin_68-71-29 accepted=true state=promised meetDay=73
+  INVITE-DEC d6 lure: Yuki -> A man, maybe 40s, with a long braid chance=0 accept=false veto=sick inputs={"temp":"dry","goal":"heal","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d7 lure: Yuki -> Pavel chance=45 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"hungry","fear":0,"affinity":0} reasons=[]
+  INVITE-DEC d8 party: Austin -> Sofia chance=51.400000000000006 accept=false veto=- inputs={"temp":"mischievous","goal":"answers","mood":"steady","fear":0,"trust":41,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 41"]
+  INVITE-DEC d8 lure: Dmitri -> Pavel chance=45 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":4,"affinity":1} reasons=[]
+  INVITE-DEC d9 party: Austin -> Yuki chance=33 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"steady","fear":4,"trust":20,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 20","cautious temperament (-10)"]
+  INVITE-DEC d9 party: Austin -> Dmitri chance=10.200000000000003 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"steady","fear":4,"trust":38,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 38","wants to be alone (-40)"]
+  INVITE-DEC d12 lure: Yuki -> Pavel chance=35 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":47,"affinity":1} reasons=["grieving mood (-10)"]
+  INVITE-DEC d13 party: Howard -> Sofia chance=50.2 accept=true veto=- inputs={"temp":"mischievous","goal":"answers","mood":"grieving","fear":19,"trust":63,"bond":{"v":8,"depth":0},"partySize":1} reasons=["trust 63","grieving mood (-10)"]
+  INVITE-DEC d13 party: Howard -> Chloe chance=48.6 accept=true veto=- inputs={"temp":"dry","goal":"peace","mood":"grieving","fear":19,"trust":59,"bond":{"v":21,"depth":0},"partySize":2} reasons=["trust 59","grieving mood (-10)"]
+  INVITE-DEC d13 lure: Yuki -> Pavel chance=35 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":11,"affinity":1} reasons=["grieving mood (-10)"]
+  INVITE-DEC d14 lure: Yuki -> Pavel chance=35 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":4,"affinity":1} reasons=["grieving mood (-10)"]
+  INVITE-DEC d15 party: Howard -> Benoit chance=36.400000000000006 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"steady","fear":4,"trust":41,"bond":{"v":11,"depth":0},"partySize":3} reasons=["trust 41","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d16 party: Howard -> Brendan chance=85 accept=true veto=- inputs={"temp":"fidgety","goal":"feed","mood":"steady","fear":4,"trust":50,"bond":{"v":26,"depth":1},"partySize":3} reasons=["trust 50","a real bond (+10)","a big party is safer (+5)","feed goal (+15)"]
+  INVITE-DEC d18 lure: Yuki -> Jason chance=77 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":0,"affinity":26} reasons=["relationship with inviter (+7)","bold temperament (+15)","wants to lead (+10)"]
+  INVITE-DEC d22 party: Howard -> Clarisse chance=56.8 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"steady","fear":0,"trust":42,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Howard -> Benoit chance=5 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"grieving","fear":4,"trust":32,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 32","a big party is safer (+5)","sick (-20)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d32 party: Howard -> Dmitri chance=20 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":4,"trust":75,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 75","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d33 party: Howard -> Benoit chance=5 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"grieving","fear":1,"trust":27,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 27","a big party is safer (+5)","sick (-20)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d34 party: Howard -> Yuki chance=33.6 accept=true veto=- inputs={"temp":"cautious","goal":"heal","mood":"grieving","fear":9,"trust":34,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 34","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d34 party: Howard -> Dmitri chance=17.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":9,"trust":69,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 69","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d36 party: Howard -> Dmitri chance=18 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":4,"trust":70,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 70","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d37 party: Howard -> Elijah chance=84.4 accept=true veto=- inputs={"temp":"warm","goal":"protect","mood":"steady","fear":4,"trust":36,"bond":null,"partySize":4} reasons=["trust 36","a big party is safer (+5)","warm temperament (+15)","protect goal (+15)"]
+  INVITE-DEC d40 party: Howard -> Dmitri chance=5 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":17,"trust":62,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 62","a big party is safer (+5)","sick (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d42 party: Howard -> Dmitri chance=5.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":13,"trust":64,"bond":{"v":26,"depth":1},"partySize":4} reasons=["trust 64","a real bond (+10)","a big party is safer (+5)","sick (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d48 party: Howard -> Siya chance=32.8 accept=true veto=- inputs={"temp":"withdrawn","goal":"remember","mood":"steady","fear":4,"trust":32,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 32","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d50 party: Howard -> Pradapdao chance=49.6 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"steady","fear":4,"trust":24,"bond":null,"partySize":4} reasons=["trust 24","a big party is safer (+5)"]
+  INVITE-DEC d58 party: Howard -> Sari chance=48.400000000000006 accept=true veto=- inputs={"temp":"steady","goal":"legacy","mood":"grieving","fear":1,"trust":46,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 46","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d62 party: Howard -> Aroha chance=57.8 accept=true veto=- inputs={"temp":"warm","goal":"answers","mood":"grieving","fear":48,"trust":32,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 32","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d70 party: Howard -> Amal chance=41.2 accept=false veto=- inputs={"temp":"mischievous","goal":"peace","mood":"grieving","fear":12,"trust":28,"bond":null,"partySize":3} reasons=["trust 28","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d70 party: Howard -> Bijou chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":23,"trust":36,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 36","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d71 party: Howard -> Bijou chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"cheerful","fear":18,"trust":35,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 35","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","wants to be alone (-40)","cheerful mood (+10)"]
+  INVITE-DEC d72 party: Howard -> Amal chance=51.2 accept=false veto=- inputs={"temp":"mischievous","goal":"peace","mood":"grieving","fear":5,"trust":53,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 53","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d73 party: Howard -> Amal chance=56 accept=true veto=- inputs={"temp":"mischievous","goal":"peace","mood":"grieving","fear":4,"trust":65,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 65","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d81 party: Howard -> Pietro chance=23 accept=false veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":29,"trust":20,"bond":null,"partySize":0} reasons=["trust 20","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d81 party: Howard -> Pietro chance=28.6 accept=true veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":9,"trust":34,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 34","cautious temperament (-10)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":41,"v":44,"depth":3},{"day":42,"v":48,"depth":3},{"day":43,"v":52,"depth":3},{"day":44,"v":56,"depth":3},{"day":45,"v":58,"depth":3},{"day":46,"v":60,"depth":3},{"day":47,"v":64,"depth":3},{"day":48,"v":66,"depth":3},{"day":49,"v":68,"depth":3},{"day":50,"v":72,"depth":3},{"day":51,"v":76,"depth":3},{"day":52,"v":80,"depth":3},{"day":53,"v":82,"depth":3},{"day":54,"v":90,"depth":3}] class=rise
+GOSSIP: totalPicks=130 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=41 31-60=71 61-90=35 91-120=0 121+=0 naturalPicks=147 seededPicks=27 gossipPicks=130
+SEEDED: {"pair":{"a":"gen_h7wmaai","b":"gen_w974jca","aName":"Jason","bName":"Brendan"},"day":40,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":41,"v":44,"depth":3},{"day":42,"v":48,"depth":3},{"day":43,"v":52,"depth":3},{"day":44,"v":56,"depth":3},{"day":45,"v":58,"depth":3},{"day":46,"v":60,"depth":3},{"day":47,"v":64,"depth":3},{"day":48,"v":66,"depth":3},{"day":49,"v":68,"depth":3},{"day":50,"v":72,"depth":3},{"day":51,"v":76,"depth":3},{"day":52,"v":80,"depth":3},{"day":53,"v":82,"depth":3},{"day":54,"v":90,"depth":3}],"crackTraceClass":"rise","vAt7":58,"depthAt7":3,"vDrop":-6,"depthDrop":-1,"crack7":false,"firstServe":{"day":41,"why":"vgrievance"},"serveWithin30":true,"serves":47,"servesAll":[{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":73,"why":"vgrievance"}],"effect":true}
+  FRIEND d40: Jason <> Brendan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Brendan <> Yuki — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d60: Elijah <> Brendan — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d75: Brendan <> Sari — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND-GRIEV d40: Jason vs Brendan (ambushed) depth 2 v 52 -> 58
+  CLOSE-READ d20: Brendan about Sofia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Brendan about Sofia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Brendan about Sofia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Clarisse about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Jason about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Jason about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Jason about Sofia — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Brendan about Clarisse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Dmitri about Brendan — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Brendan about Sofia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Yuki about Brendan — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Dmitri about Brendan — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Brendan about Sofia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Jason about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Yuki about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Jason about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Yuki about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Dmitri about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Sofia about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Brendan about Jason — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Jason about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Brendan about Jason — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Yuki about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Yuki about Brendan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Jason about Brendan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Dmitri about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Yuki about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Brendan about Jason — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Brendan about Jason — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Brendan about Jason — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Brendan about Jason — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Elijah about Brendan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Elijah about Brendan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Elijah about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Elijah about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Elijah about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Sari about Brendan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Sari about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d64: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Sari about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Sari about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Sari about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Sari about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Sari about Brendan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Sari about Brendan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Brendan about Jason — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Sari about Brendan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Sari about Jason — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Jason about Sari — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Jason about Sari — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Sari about Jason — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  STATE-FRIEND-GRIEV d41 (betrayal): Jason vs Brendan (ambushed) depth 2 v 52 -> 58
+  GRIEV-READ d8: Pavel about Jason (why=grievance)
+  GRIEV-READ d12: Pavel about Jason (why=grievance)
+  GRIEV-READ d14: Pavel about Jason (why=grievance)
+  GRIEV-READ d15: Pavel about Jason (why=grievance)
+  GRIEV-READ d16: Pavel about Jason (why=grievance)
+  GRIEV-READ d19: Pavel about Jason (why=grievance)
+  KNACK d9 Jason: "that stray dog — the one that bit two people — lets Pavel touch it."
+  KNACK d13 Chloe: "Brendan talks to the garden. The garden listens. I've seen it."
+  KNACK d14 Dmitri: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Clarisse touch it."
+  KNACK d15 Brendan: "You want to know about that? Okay." "Yuki sees in the dark. Not well — but better than you. Better than me."
+  KNACK d30 Dmitri: "Huh. Let me think about that." "Jason talks to the garden. The garden listens. I've seen it."
+  KNACK d34 Yuki: "Sofia talks to the garden. The garden listens. I've seen it."
+  KNACK d41 Jason: "Huh. Let me think about that." "Elijah talks to the garden. The garden listens. I've seen it. Doesn't matter now."
+  KNACK d46 Brendan: "Elijah talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":1,"a wound that wouldn't close":4,"experiment":8,"sickness":3,"monster":3}

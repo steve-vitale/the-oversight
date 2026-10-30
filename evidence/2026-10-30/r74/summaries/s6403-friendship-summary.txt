@@ -1,0 +1,389 @@
+# SURFACE+SEEDED — seed 6403 (141d, 9 alive)
+
+npcPairs=87 deep2=28 cracks=0 vCracks=0 friendGriev=0 stateGriev=11 stateFriend=0 stateVCrack=0 t2picks=310 closeReadsServed=35 grievanceServes=19 othersSteered=16
+COND-TP: firstDeep2Day=20 lateClose=256 lateTP=214 lateNull=0 condRate=83.6% pooledTP=215/259 pooledRate=83.0% grievReadsByWhy={"grievance":5,"vgrievance":20}
+FUNNEL (natural): convos=414 subject=410 offered=376 picked=294 classes={"subject-no-offer":34,"offered-not-picked":82,"picked-others":294,"no-subject-no-ans":4}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=34 rate=8.2% offered=376 mainOffered=5 subjectOffered=375 picked=294 latePicks=114 latePicksMain=0 latePicksSubject=114
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Luis / Giulia / Leah — "You want to know about that? Okay." "Benoit talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Werner / Josefina / Dmitri — "Benoit talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=351 picks=297 latePicks=112 missedChangedNotOffered=1
+WRAPSERVE: convos=25 matcherHits=19 matcherServes=19 classes={"grievance-line":19,"deflection":2,"other":4}
+FUNNEL-PROBE (subject-no-offer turns): turns=126 menuProblem=84 pickProblem=42
+INVITE (wrap, carried from r63): lure={"n":14,"accepts":5,"acceptRate":0.35714285714285715,"vetoes":{"sick":3},"chanceMin":0,"chanceMax":62,"chanceMean":41} party={"n":11,"accepts":7,"acceptRate":0.6363636363636364,"vetoes":{},"chanceMin":29.6,"chanceMax":84.2,"chanceMean":63.2} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+FAVOR (r65): funnel={"offers":39,"forageOffers":3,"otherFavorOffers":36,"accepts":3,"acceptAttempts":3,"waits":3,"starts":1,"startBlocked":3,"forages":0,"forageNodeBarren":0,"forageBarren":7,"forageBarrenTravel":7,"forageBarrenNode":0,"forageTravelBlocked":21,"forageTravelWalked":0,"outingsEndedStuck":1,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0}
+OUTING END STATES: [{"vid":"gen_44wvfiq","vidName":"Earl","favorId":"favor-gen_44wvfiq-4-1","state":"acknowledged","promisedDay":4,"meetDay":5,"deadline":6,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Earl kind=forage_help favorId=favor-gen_44wvfiq-4-1 task=forage with Earl tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Jorge kind=forage_help favorId=favor-jorge_silva-20-3 task=forage with Jorge tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Marcus kind=food_share favorId=favor-marcus_webb-21-4 task=share food with Marcus — they're running on empty
+  FAVOR-OFFER d22: Valeria kind=forage_help favorId=favor-valeria_quispe-20-2 task=forage with Valeria tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Giulia kind=sick_help favorId=favor-giulia_bianchi-46-5 task=help Giulia with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d66: Giulia kind=heal_help favorId=favor-giulia_bianchi-66-6 task=help Giulia with their injury
+  FAVOR-OFFER d71: Giulia kind=sick_help favorId=favor-giulia_bianchi-70-7 task=help Giulia with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d72: Leah kind=sick_help favorId=favor-gen_rsa0p48-72-8 task=help Leah with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d73: Valeria kind=sick_help favorId=favor-valeria_quispe-73-9 task=help Valeria with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d77: Jorge kind=heal_help favorId=favor-jorge_silva-77-10 task=help Jorge with their injury
+  FAVOR-OFFER d91: Valeria kind=sick_help favorId=favor-valeria_quispe-91-11 task=help Valeria with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d95: Leah kind=sick_help favorId=favor-gen_rsa0p48-95-12 task=help Leah with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d96: Marcus kind=water_haul favorId=favor-marcus_webb-96-13 task=bring four liters home from the creek with Marcus; set out at dawn
+  FAVOR-OFFER d98: Giulia kind=water_haul favorId=favor-giulia_bianchi-98-15 task=bring four liters home from the creek with Giulia; set out at dawn
+  FAVOR-OFFER d99: Leah kind=water_haul favorId=favor-gen_rsa0p48-99-16 task=bring four liters home from the creek with Leah; set out at dawn
+  FAVOR-OFFER d100: Benoit kind=water_haul favorId=favor-benoit_lambert-97-14 task=bring four liters home from the creek with Benoit; set out at dawn
+  FAVOR-OFFER d101: Jorge kind=water_haul favorId=favor-jorge_silva-101-17 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-OFFER d101: Giulia kind=food_share favorId=favor-giulia_bianchi-101-18 task=share food with Giulia — they're going hungry
+  FAVOR-OFFER d102: Marcus kind=food_share favorId=favor-marcus_webb-102-19 task=share food with Marcus — they're past hungry
+  FAVOR-OFFER d104: Leah kind=water_haul favorId=favor-gen_rsa0p48-104-20 task=bring four liters home from the creek with Leah; set out at dawn
+  FAVOR-OFFER d105: Valeria kind=heal_help favorId=favor-valeria_quispe-105-21 task=help Valeria with their injury
+  FAVOR-OFFER d106: Benoit kind=food_share favorId=favor-benoit_lambert-106-22 task=share food with Benoit — they're going hungry
+  FAVOR-OFFER d107: Leah kind=water_haul favorId=favor-gen_rsa0p48-107-23 task=bring four liters home from the creek with Leah; set out at dawn
+  FAVOR-OFFER d107: Jorge kind=water_haul favorId=favor-jorge_silva-107-24 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-OFFER d107: Marcus kind=water_haul favorId=favor-marcus_webb-107-25 task=bring four liters home from the creek with Marcus; set out at dawn
+  FAVOR-OFFER d108: Luis kind=water_haul favorId=favor-luis_fernandez-108-27 task=bring four liters home from the creek with Luis; set out at dawn
+  FAVOR-OFFER d109: Valeria kind=heal_help favorId=favor-valeria_quispe-108-26 task=help Valeria with their injury
+  FAVOR-OFFER d110: Leah kind=sick_help favorId=favor-gen_rsa0p48-110-28 task=help Leah with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d111: Giulia kind=water_haul favorId=favor-giulia_bianchi-111-29 task=bring four liters home from the creek with Giulia; set out at dawn
+  FAVOR-OFFER d112: Benoit kind=water_haul favorId=favor-benoit_lambert-112-30 task=bring four liters home from the creek with Benoit; set out at dawn
+  FAVOR-OFFER d114: Leah kind=sick_help favorId=favor-gen_rsa0p48-114-31 task=help Leah with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d116: Luis kind=water_haul favorId=favor-luis_fernandez-116-32 task=bring four liters home from the creek with Luis; set out at dawn
+  FAVOR-OFFER d117: Leah kind=sick_help favorId=favor-gen_rsa0p48-117-33 task=help Leah with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d118: Marcus kind=food_share favorId=favor-marcus_webb-118-34 task=share food with Marcus — they're going hungry
+  FAVOR-OFFER d121: Marcus kind=food_share favorId=favor-marcus_webb-121-35 task=share food with Marcus — they're going hungry
+  FAVOR-OFFER d131: Marcus kind=heal_help favorId=favor-marcus_webb-131-37 task=help Marcus with their injury
+  FAVOR-OFFER d134: Marcus kind=heal_help favorId=favor-marcus_webb-134-38 task=help Marcus with their injury
+  FAVOR-OFFER d136: Jorge kind=heal_help favorId=favor-jorge_silva-130-36 task=help Jorge with their injury
+  FAVOR-OFFER d138: Marcus kind=water_haul favorId=favor-marcus_webb-138-39 task=bring four liters home from the creek with Marcus; set out at dawn
+  FAVOR-ACCEPT d4: Earl favorId=favor-gen_44wvfiq-4-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d20: Jorge favorId=favor-jorge_silva-20-3 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d22: Valeria favorId=favor-valeria_quispe-20-2 accepted=true state=promised meetDay=23
+  INVITE-DEC d6 lure: Josefina -> Earl chance=62 accept=true veto=- inputs={"temp":"restless","goal":"understand","mood":"grateful","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","restless temperament (+10)"]
+  INVITE-DEC d8 party: Soo -> Leah chance=49.4 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":23,"trust":36,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 36"]
+  INVITE-DEC d8 lure: Yasmina -> Leah chance=47 accept=true veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":15,"affinity":6} reasons=["relationship with inviter (+2)"]
+  INVITE-DEC d12 party: Soo -> Giulia chance=84.2 accept=true veto=- inputs={"temp":"warm","goal":"belong","mood":"steady","fear":4,"trust":48,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 48","warm temperament (+15)","belong goal (+15)"]
+  INVITE-DEC d13 lure: Yasmina -> Leah chance=47 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":4,"affinity":8} reasons=["relationship with inviter (+2)"]
+  INVITE-DEC d14 lure: Yasmina -> Leah chance=47 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"hungry","fear":4,"affinity":9} reasons=["relationship with inviter (+2)"]
+  INVITE-DEC d15 party: Soo -> Jorge chance=56 accept=true veto=- inputs={"temp":"steady","goal":"joy","mood":"steady","fear":4,"trust":40,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)"]
+  INVITE-DEC d15 lure: Yasmina -> Leah chance=47 accept=true veto=- inputs={"temp":"anxious","goal":"home","mood":"hungry","fear":0,"affinity":9} reasons=["relationship with inviter (+2)"]
+  INVITE-DEC d17 party: Earl -> Marcus chance=79.2 accept=true veto=- inputs={"temp":"bold","goal":"feed","mood":"grieving","fear":52,"trust":48,"bond":null,"partySize":3} reasons=["trust 48","a big party is safer (+5)","bold temperament (+15)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d19 lure: Werner -> Leah chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"home","mood":"grieving","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d20 lure: Werner -> Leah chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"home","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d21 lure: Werner -> Leah chance=0 accept=false veto=sick inputs={"temp":"anxious","goal":"home","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d22 lure: Werner -> Leah chance=54 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":0,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d23 lure: Werner -> Leah chance=54 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":4,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d27 lure: Werner -> Leah chance=54 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"hungry","fear":4,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d28 lure: Werner -> Leah chance=54 accept=false veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":4,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d29 lure: Werner -> Leah chance=54 accept=true veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":0,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d31 party: Earl -> Yasmina chance=29.6 accept=true veto=- inputs={"temp":"withdrawn","goal":"home","mood":"steady","fear":0,"trust":24,"bond":{"v":13,"depth":0},"partySize":4} reasons=["trust 24","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d32 lure: Werner -> Leah chance=54 accept=true veto=- inputs={"temp":"anxious","goal":"home","mood":"hungry","fear":0,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d34 party: Earl -> Leah chance=81.2 accept=true veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":0,"trust":78,"bond":{"v":40,"depth":1},"partySize":3} reasons=["trust 78","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d35 party: Earl -> Valeria chance=58.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":4,"trust":46,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 46","a big party is safer (+5)"]
+  INVITE-DEC d37 party: Earl -> Valeria chance=62 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":12,"trust":55,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 55","a big party is safer (+5)"]
+  INVITE-DEC d40 party: Earl -> Benoit chance=48.400000000000006 accept=true veto=- inputs={"temp":"prickly","goal":"record","mood":"steady","fear":12,"trust":71,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 71","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d113 party: Earl -> Valeria chance=72.80000000000001 accept=false veto=- inputs={"temp":"steady","goal":"family","mood":"grieving","fear":29,"trust":82,"bond":{"v":80,"depth":3},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d115 party: Earl -> Valeria chance=74 accept=true veto=- inputs={"temp":"steady","goal":"family","mood":"grieving","fear":4,"trust":85,"bond":{"v":84,"depth":3},"partySize":4} reasons=["trust 85","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":19,"v":44,"depth":2},{"day":20,"v":50,"depth":3},{"day":21,"v":54,"depth":3},{"day":22,"v":60,"depth":3},{"day":23,"v":64,"depth":3},{"day":24,"v":70,"depth":3},{"day":25,"v":74,"depth":3},{"day":26,"v":78,"depth":3},{"day":27,"v":78,"depth":3},{"day":28,"v":78,"depth":3},{"day":29,"v":84,"depth":3},{"day":30,"v":84,"depth":3},{"day":31,"v":84,"depth":3},{"day":32,"v":88,"depth":3}] class=rise
+GOSSIP: totalPicks=169 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=39 31-60=70 61-90=71 91-120=74 121+=40 naturalPicks=294 seededPicks=16 gossipPicks=169
+SEEDED: {"pair":{"a":"gen_ntupn5k","b":"gen_rsa0p48","aName":"Werner","bName":"Leah"},"day":18,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":19,"v":44,"depth":2},{"day":20,"v":50,"depth":3},{"day":21,"v":54,"depth":3},{"day":22,"v":60,"depth":3},{"day":23,"v":64,"depth":3},{"day":24,"v":70,"depth":3},{"day":25,"v":74,"depth":3},{"day":26,"v":78,"depth":3},{"day":27,"v":78,"depth":3},{"day":28,"v":78,"depth":3},{"day":29,"v":84,"depth":3},{"day":30,"v":84,"depth":3},{"day":31,"v":84,"depth":3},{"day":32,"v":88,"depth":3}],"crackTraceClass":"rise","vAt7":74,"depthAt7":3,"vDrop":-24,"depthDrop":-1,"crack7":false,"firstServe":{"day":19,"why":"vgrievance"},"serveWithin30":true,"serves":20,"servesAll":[{"day":19,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":21,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"}],"effect":true}
+  FRIEND d20: Werner <> Leah — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d120: Earl <> Werner — maxDepth 3, final 3 (v=46), dropped 0
+  FRIEND d120: Earl <> Leah — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Werner <> Yasmina — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d35: Werner <> Valeria — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d35: Werner <> Giulia — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d130: Jorge <> Marcus — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d35: Leah <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Luis <> Valeria — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Giulia <> Marcus — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d120: Earl <> Valeria — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d120: Earl <> Giulia — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d120: Benoit <> Earl — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d70: Benoit <> Leah — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Leah <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Leah <> Marcus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Luis <> Marcus — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d55: Giulia <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Jorge <> Valeria — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d85: Giulia <> Jorge — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d120: Earl <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Leah <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Marcus <> Valeria — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d135: Benoit <> Marcus — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d141: Benoit <> Valeria — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d55: Leah <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Earl <> Marcus — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d140: Leah <> Lucas — maxDepth 2, final 2 (v=50), dropped 0
+  CLOSE-READ d11: Werner about Leah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Werner about Leah — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Werner about Leah — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d22: Luis about Werner — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Leah about Werner — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d24: Jorge about Werner — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Josefina about Werner — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Josefina about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Jorge about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Luis about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Jorge about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Giulia about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Yasmina about Werner — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d28: Jorge about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Giulia about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Valeria about Werner — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Josefina about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Yasmina about Werner — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Josefina about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Jorge about Werner — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Leah about Valeria — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d35: Leah about Valeria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d35: Valeria about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Leah about Valeria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Marcus about Giulia — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Giulia about Marcus — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Leah about Valeria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Marcus about Giulia — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Leah about Valeria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Giulia about Marcus — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Leah about Valeria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Giulia about Luis — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Jorge about Leah — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Jorge about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Giulia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Jorge about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Giulia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Jorge about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Giulia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Giulia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Jorge about Leah — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d49: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Jorge about Leah — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Giulia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d53: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Jorge about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Benoit about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Giulia about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Jorge about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Benoit about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d60: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Benoit about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Giulia about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Jorge about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Jorge about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d66: Giulia about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Marcus about Giulia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d68: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Giulia about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Giulia about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Jorge about Leah — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Giulia about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Giulia about Leah — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Luis about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Benoit about Leah — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Luis about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Marcus about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Marcus about Giulia — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Giulia about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Giulia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Giulia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Marcus about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Marcus about Leah — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Luis about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Luis about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Giulia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Luis about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Lucas about Leah — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Benoit about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Leah about Valeria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Lucas about Leah — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d137: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Jorge about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Valeria about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Marcus about Leah — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d5: Earl about A person, maybe 40s, with thick glasses (why=grievance)
+  GRIEV-READ d8: Leah about Earl (why=grievance)
+  GRIEV-READ d8: Earl about Leah (why=grievance)
+  GRIEV-READ d13: Earl about Leah (why=grievance)
+  GRIEV-READ d16: Earl about Leah (why=grievance)
+  GRIEV-READ d19: Werner about Leah (why=vgrievance)
+  KNACK d10 Luis: "You want to know about that? Okay." "Benoit talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Valeria: "Good question." "Benoit talks to the garden. The garden listens. I've seen it."
+  KNACK d26 Werner: "Benoit talks to the garden. The garden listens. I've seen it."
+  KNACK d32 Josefina: "Benoit talks to the garden. The garden listens. I've seen it."
+  KNACK d36 Giulia: "You want to know about that? Okay." "Benoit talks to the garden. The garden listens. I've seen it."
+  KNACK d86 Benoit: "that stray dog — the one that bit two people — lets Jorge touch it. Not that it matters."
+  KNACK d108 Leah: "Okay, so — Giulia found a lost knife by smell last week. By SMELL. Don't say I told you."
+  KNACK d111 Leah: "You want to know about that? Okay." "Benoit talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"the wild":2,"alien":1}
