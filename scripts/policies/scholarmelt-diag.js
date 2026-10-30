@@ -60,6 +60,43 @@
 // scholar tb fights have NO say transcript in this corpus; the trace
 // (lift snapshot, fighter HP path, tb result, post-end world check)
 // IS the transcript-equivalent evidence, and the prereg says so.
+//
+// DISSOLVE-CAUSE (sim-dissolvecause-a, 2026-10-30, flesh-out loop,
+// axis scale-onramp): the dissolved population's FATE is settled
+// (dissolve-a: 75 restored, 45 spawn-ended, 0 melts) but its CAUSE
+// was unmeasured — no call-site field existed. This recorder now
+// carries one, still policy-side and still zero src/js changes:
+//   - dissolveCause / dissolveObservedAt / scholarHpAtDissolve on
+//     every dissolved row (null on non-dissolved rows). The cause
+//     is set at the moment the dissolve is OBSERVED and never
+//     overwritten by a later flush: 'start-post-gone' (fight gone
+//     at startCombat post-record, no tbEnd seen — the prior
+//     corpus's only branch), 'flush-next-start' /
+//     'flush-tbend-mismatch' / 'flush-sweep-end' (a pending row
+//     flushed later by that trigger), or 'barrier-death' (the
+//     tbBarrierExit wrap below observed the barrier-death
+//     condition for that fight before its flush; the trigger is
+//     kept in dissolveObservedAt so the overwrite is auditable).
+//   - scholarHpAtDissolve is EXACT dissolve-time HP on
+//     start-post rows (the post-record runs immediately after
+//     the dissolving call returns, with no intervening action)
+//     and FIRST-OBSERVATION HP on flush rows (a bound, not
+//     exact: actions between dissolve and flush may have moved
+//     HP). The analyzer must never blend the two.
+//   - dissolveProbe (start-post rows): bearer/villagerId and
+//     Game.over before vs after the dissolving call, scholar HP
+//     before vs after, scholar.monster / pendingMonsterId after,
+//     and the tbfight state seen ('null' | 'over'). This is what
+//     discriminates the barrier-death lead (which needs a live
+//     fight, a player turn, and a crossing) from an in-call
+//     vanish (bearer unchanged, over false, tbfight null).
+//   - tbBarrierExit wrap: delegate, record after, never throw
+//     into the engine. It stamps ONLY the live fight's row (top
+//     of the pending stack) when the post-call fight is gone
+//     with no tbEnd result recorded AND the bearer changed or
+//     Game.over is set — the barrier-death signature. Normal
+//     barrier paths call tbEnd('fled'), which the tbEnd wrap
+//     records, so they never stamp.
 'use strict';
 
 const MAX_EVENTS = 20000;
@@ -67,6 +104,7 @@ const MAX_EVENTS = 20000;
 function layerOn() { try { return process.env.SCHOLARMELT === '1'; } catch (e) { return false; } }
 function dayOf(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
 function roundHp(x) { return (x != null && isFinite(x)) ? Math.round(x) : null; }
+function scholarHp(Game) { try { return roundHp(((Game.state || {}).scholar || {}).health); } catch (e) { return null; } }
 
 function newStore() {
   return { meetings: [], errs: 0, errors: [], overflow: {}, installed: false };
@@ -86,11 +124,13 @@ function pushCapped(store, list, item) {
 }
 
 // Module-side state per store (never serialized): pending start seqs
-// in start order, and lifted-object references by fightSeq.
+// in start order, lifted-object references by fightSeq, and
+// start-pre snapshots (bearer/over/HP at startCombat pre-record,
+// consumed by the post-record probe, never serialized).
 const sideState = new WeakMap();
 function side(store) {
   let s = sideState.get(store);
-  if (!s) { s = { nextSeq: 1, pending: [], refs: new Map() }; sideState.set(store, s); }
+  if (!s) { s = { nextSeq: 1, pending: [], refs: new Map(), pre: new Map() }; sideState.set(store, s); }
   return s;
 }
 
@@ -157,7 +197,7 @@ function worldCheck(Game, ref, snap) {
   return out;
 }
 
-function flushDissolved(Game, store, st, seq, day) {
+function flushDissolved(Game, store, st, seq, day, trigger) {
   // A pending start whose fight is gone without a tbEnd (the game
   // dissolves some fights silently: tbfight.over=true,
   // result='dissolved', tbfight=null — no tbEnd call). The melt
@@ -166,6 +206,13 @@ function flushDissolved(Game, store, st, seq, day) {
   // world list by identity has melted. dayEnd here is the FLUSH day
   // (a later start, or sweep-end finalize), not the dissolve day;
   // chain matching uses startDay, never dayEnd, so this is safe.
+  // DISSOLVE-CAUSE (sim-dissolvecause-a): a flush NEVER overwrites
+  // a cause observed earlier (a start-post observation, or a
+  // barrier-death stamp). It only fills the cause when unset:
+  // barrier-stamped rows become 'barrier-death' with the stamp-time
+  // HP (exact for the barrier site: stamped in the dissolving
+  // call's own aftermath); unstamped rows become
+  // 'flush-<trigger>' with first-observation HP (a bound).
   try {
     const rec = (store.meetings || []).find(r => r && r.fightSeq === seq) || null;
     if (!rec) return;
@@ -178,9 +225,20 @@ function flushDissolved(Game, store, st, seq, day) {
       rec.restoredIdentity = wc.restoredIdentity;
       rec.restoredEntry = wc.restoredEntry;
       rec.restoredHp = wc.restoredHp;
+      if (rec.dissolveCause == null) {
+        if (rec.barrierDeathStamp) {
+          rec.dissolveCause = 'barrier-death';
+          rec.scholarHpAtDissolve = rec.barrierStampHp;
+        } else {
+          rec.dissolveCause = 'flush-' + (trigger || 'unknown');
+          rec.scholarHpAtDissolve = scholarHp(Game);
+        }
+        rec.dissolveObservedAt = trigger || 'unknown';
+      }
     }
     const ix = st.pending.indexOf(seq);
     if (ix >= 0) st.pending.splice(ix, 1);
+    try { st.pre.delete(seq); } catch (e2) {}
   } catch (e) { noteErr(store, 'flushDissolved', e); }
 }
 
@@ -199,7 +257,7 @@ function finalizeScholarmeltDiag(Game, store) {
     const st = side(store);
     if (Game.tbfight && !Game.tbfight.over) return;
     const day = dayOf(Game);
-    for (const seq of st.pending.slice()) flushDissolved(Game, store, st, seq, day);
+    for (const seq of st.pending.slice()) flushDissolved(Game, store, st, seq, day, 'sweep-end');
   } catch (e) { noteErr(store, 'finalize', e); }
 }
 
@@ -242,13 +300,19 @@ function installScholarmeltDiag(Game, store) {
         restoredIdentity: null, restoredEntry: null, restoredHp: null,
         threw: false, sameCallRouted: false, orphan: false, dissolvedFlushed: false,
         startPostFightGone: false, postStartPresent: null,
+        dissolveCause: null, dissolveObservedAt: null, scholarHpAtDissolve: null,
+        dissolveProbe: null, barrierDeathStamp: false, barrierStampHp: null,
+        barrierStampDay: null, barrierStampBearerChanged: null, barrierStampGameOver: null,
       };
       try { const sc = (Game.state || {}).scholar || {}; rec.scholarHpStart = roundHp(sc.health); } catch (e) {}
       if (tm.mon) st.refs.set(seq, tm.mon);
       if (!live) {
         // A non-refused start proves no earlier fight is live: any
         // pending row left over ended without tbEnd (dissolved).
-        for (const oldSeq of st.pending.slice()) flushDissolved(Game, store, st, oldSeq, dayOf(Game));
+        for (const oldSeq of st.pending.slice()) flushDissolved(Game, store, st, oldSeq, dayOf(Game), 'next-start');
+        // DISSOLVE-CAUSE pre snapshot (module-side, never
+        // serialized): bearer/over/HP for the post-record probe.
+        try { st.pre.set(seq, { bearer: Game.villagerId, over: !!Game.over, hp: scholarHp(Game) }); } catch (e) {}
         st.pending.push(seq);
         // Hold the row in the store immediately so a same-call tbEnd
         // can adopt it from the meetings array via the pending stack.
@@ -267,6 +331,7 @@ function installScholarmeltDiag(Game, store) {
           rec.threw = true;
           const ix = st.pending.indexOf(rec.fightSeq);
           if (ix >= 0) st.pending.splice(ix, 1);
+          st.pre.delete(rec.fightSeq);
         }
       } catch (e2) { noteErr(store, 'startCombat.throwRec', e2); }
       throw e;
@@ -317,6 +382,36 @@ function installScholarmeltDiag(Game, store) {
             rec.lifted = !present;
             rec.bystander = null;
           } else { rec.lifted = false; rec.bystander = false; }
+          // DISSOLVE-CAUSE start-post observation (exact HP: this
+          // post-record runs immediately after the dissolving call
+          // returns, with no intervening action). Never overwrites
+          // a barrier stamp (defensive: a stamp cannot pre-exist
+          // here, since the fight never had turns — but if one
+          // did, the flush resolves it to 'barrier-death').
+          if (rec.dissolveCause == null && !rec.barrierDeathStamp) {
+            const pre = st.pre.get(rec.fightSeq) || {};
+            let bearerAfter = null, overAfter = false, monAfter = null, pendAfter = null;
+            try { bearerAfter = Game.villagerId; } catch (e) {}
+            try { overAfter = !!Game.over; } catch (e) {}
+            try { const s = (Game.state || {}).scholar || {}; monAfter = s.monster ? String(s.monster.id) : null; } catch (e) {}
+            try { pendAfter = Game.pendingMonsterId != null ? String(Game.pendingMonsterId) : null; } catch (e) {}
+            const hpAfter = scholarHp(Game);
+            rec.dissolveCause = 'start-post-gone';
+            rec.dissolveObservedAt = 'start-post';
+            rec.scholarHpAtDissolve = hpAfter;
+            rec.dissolveProbe = {
+              tbfightState: Game.tbfight ? 'over' : 'null',
+              bearerBefore: (pre.bearer !== undefined ? pre.bearer : null),
+              bearerAfter: bearerAfter,
+              bearerChanged: (pre.bearer !== undefined ? (pre.bearer !== bearerAfter) : null),
+              gameOverBefore: (pre.over !== undefined ? !!pre.over : null),
+              gameOverAfter: overAfter,
+              scholarHpBefore: (pre.hp !== undefined ? pre.hp : null),
+              scholarHpAfter: hpAfter,
+              scholarMonsterAfter: monAfter,
+              pendingMonsterIdAfter: pendAfter,
+            };
+          }
         } else if (rec.result != null) {
           rec.sameCallRouted = true;
           // Start fighters are unrecoverable (tbEnd pre-call saw end
@@ -336,6 +431,7 @@ function installScholarmeltDiag(Game, store) {
             rec.bystander = !isFighter;
           } else if (!rec.lift) { rec.lifted = false; rec.bystander = false; }
         }
+        try { st.pre.delete(rec.fightSeq); } catch (e) {}
       }
     } catch (e) { noteErr(store, 'startCombat.post', e); }
     return ret;
@@ -360,7 +456,7 @@ function installScholarmeltDiag(Game, store) {
           const matches = cand.lift ? (ids.has(String(cand.lift.id)) || ids.has(String(cand.intendedMid)))
             : ids.has(String(cand.intendedMid));
           if (matches) break;
-          flushDissolved(Game, store, st, top, dayOf(Game));
+          flushDissolved(Game, store, st, top, dayOf(Game), 'tbend-mismatch');
         }
         const seq = st.pending.length ? st.pending[st.pending.length - 1] : null;
         if (seq != null) {
@@ -383,6 +479,9 @@ function installScholarmeltDiag(Game, store) {
             result: null, scholarHpStart: null, scholarHpEnd: null,
             restoredIdentity: null, restoredEntry: null, restoredHp: null,
             threw: false, sameCallRouted: false, orphan: true, dissolvedFlushed: false,
+            dissolveCause: null, dissolveObservedAt: null, scholarHpAtDissolve: null,
+            dissolveProbe: null, barrierDeathStamp: false, barrierStampHp: null,
+            barrierStampDay: null, barrierStampBearerChanged: null, barrierStampGameOver: null,
           };
           pushCapped(store, 'meetings', rec);
         }
@@ -423,8 +522,46 @@ function installScholarmeltDiag(Game, store) {
           // Orphan ends have no lift snapshot; their monster
           // fighters' waves are computed by the analyzer from mdef.
         }
+        try { st.pre.delete(rec.fightSeq); } catch (e) {}
       }
     } catch (e) { noteErr(store, 'tbEnd.post', e); }
+    return ret;
+  });
+
+  // DISSOLVE-CAUSE barrier-death stamp (sim-dissolvecause-a).
+  // The only non-tbEnd dissolve site in game code is tbBarrierExit's
+  // death-mid-crossing branch (tbfight nulled, no tbEnd). Stamp ONLY
+  // the live fight's row (top of the pending stack — a new start
+  // flushes stale pendings first, so the top row is this fight's
+  // row) when the post-call fight is gone with no tbEnd result
+  // recorded AND the bearer changed or Game.over is set. Normal
+  // barrier paths call tbEnd('fled'), which the tbEnd wrap records,
+  // so the result==null guard never stamps them. Delegate first,
+  // record after, never throw into the engine.
+  wrap('tbBarrierExit', (orig) => function () {
+    let preBearer = null;
+    try { preBearer = Game.villagerId; } catch (e) {}
+    let ret = null;
+    try { ret = orig.apply(this, arguments); }
+    catch (e) { throw e; }
+    try {
+      const bearerAfter = Game.villagerId;
+      const overAfter = !!Game.over;
+      const fightGone = !(Game.tbfight && !Game.tbfight.over);
+      if (fightGone && (bearerAfter !== preBearer || overAfter)) {
+        const top = st.pending.length ? st.pending[st.pending.length - 1] : null;
+        if (top != null) {
+          const r = (store.meetings || []).find(x => x && x.fightSeq === top) || null;
+          if (r && r.result == null && r.kind !== 'refused' && !r.barrierDeathStamp) {
+            r.barrierDeathStamp = true;
+            r.barrierStampHp = scholarHp(Game);
+            r.barrierStampDay = dayOf(Game);
+            r.barrierStampBearerChanged = (bearerAfter !== preBearer);
+            r.barrierStampGameOver = overAfter;
+          }
+        }
+      }
+    } catch (e) { noteErr(store, 'tbBarrierExit.post', e); }
     return ret;
   });
 
