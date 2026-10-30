@@ -1,0 +1,6761 @@
+{
+  "seed": 10102,
+  "days": 180,
+  "endReason": "survived",
+  "deaths": [
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "person",
+      "who": "gen_hahp26c",
+      "cause": "ambush",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "villager",
+      "who": "gen_zvmikco",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 55,
+      "kind": "villager",
+      "who": "gen_k2gqoog",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 77,
+      "kind": "villager",
+      "who": "gen_nc2npas",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 88,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 168,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 168,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 168,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "combat",
+      "player": false
+    }
+  ],
+  "tickInvocations": [
+    {
+      "seq": 0,
+      "day": 1,
+      "dayPart": null,
+      "hurtStart": 0,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 5,
+      "hurtEnd": 0,
+      "sickAfter": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 5
+    },
+    {
+      "seq": 1,
+      "day": 2,
+      "dayPart": null,
+      "hurtStart": 0,
+      "sickBefore": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 5,
+      "hurtEnd": 1,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 5
+    },
+    {
+      "seq": 2,
+      "day": 3,
+      "dayPart": null,
+      "hurtStart": 2,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 2,
+      "sickAfter": {
+        "hannah_kim": {
+          "name": "wound fever",
+          "severity": 2,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 3,
+      "day": 4,
+      "dayPart": null,
+      "hurtStart": 2,
+      "sickBefore": {
+        "hannah_kim": {
+          "name": "wound fever",
+          "severity": 2,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 3,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 4,
+      "day": 5,
+      "dayPart": null,
+      "hurtStart": 5,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 5,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 5,
+      "day": 6,
+      "dayPart": null,
+      "hurtStart": 6,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 5,
+      "hurtEnd": 6,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 5
+    },
+    {
+      "seq": 6,
+      "day": 7,
+      "dayPart": null,
+      "hurtStart": 11,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 11,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 7,
+      "day": 8,
+      "dayPart": null,
+      "hurtStart": 12,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 12,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 8,
+      "day": 9,
+      "dayPart": null,
+      "hurtStart": 13,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 13,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 9,
+      "day": 10,
+      "dayPart": null,
+      "hurtStart": 16,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 16,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 10,
+      "day": 11,
+      "dayPart": null,
+      "hurtStart": 19,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 19,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 11,
+      "day": 12,
+      "dayPart": null,
+      "hurtStart": 19,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 19,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 12,
+      "day": 13,
+      "dayPart": null,
+      "hurtStart": 19,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 19,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 13,
+      "day": 14,
+      "dayPart": null,
+      "hurtStart": 26,
+      "sickBefore": {
+        "gen_nc2npas": {
+          "name": "bad belly",
+          "severity": 1,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 27,
+      "sickAfter": {
+        "gen_nc2npas": {
+          "name": "bad belly",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 14,
+      "day": 15,
+      "dayPart": null,
+      "hurtStart": 30,
+      "sickBefore": {
+        "gen_nc2npas": {
+          "name": "bad belly",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 31,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 15,
+      "day": 16,
+      "dayPart": null,
+      "hurtStart": 32,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 32,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 16,
+      "day": 17,
+      "dayPart": null,
+      "hurtStart": 35,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 5,
+      "hurtEnd": 35,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 5
+    },
+    {
+      "seq": 17,
+      "day": 18,
+      "dayPart": null,
+      "hurtStart": 36,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 10,
+      "hurtEnd": 36,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 10
+    },
+    {
+      "seq": 18,
+      "day": 19,
+      "dayPart": null,
+      "hurtStart": 38,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 7,
+      "hurtEnd": 38,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 7
+    },
+    {
+      "seq": 19,
+      "day": 20,
+      "dayPart": null,
+      "hurtStart": 41,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 41,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 20,
+      "day": 21,
+      "dayPart": null,
+      "hurtStart": 44,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 4,
+      "hurtEnd": 44,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 4
+    },
+    {
+      "seq": 21,
+      "day": 22,
+      "dayPart": null,
+      "hurtStart": 45,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "bad belly",
+          "severity": 1,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 3,
+      "hurtEnd": 46,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "bad belly",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 3
+    },
+    {
+      "seq": 22,
+      "day": 23,
+      "dayPart": null,
+      "hurtStart": 48,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "bad belly",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 3,
+      "hurtEnd": 49,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 3
+    },
+    {
+      "seq": 23,
+      "day": 24,
+      "dayPart": null,
+      "hurtStart": 50,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 3,
+      "hurtEnd": 50,
+      "sickAfter": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 3
+    },
+    {
+      "seq": 24,
+      "day": 25,
+      "dayPart": null,
+      "hurtStart": 53,
+      "sickBefore": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 5,
+      "hurtEnd": 54,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 5
+    },
+    {
+      "seq": 25,
+      "day": 26,
+      "dayPart": null,
+      "hurtStart": 54,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 8,
+      "hurtEnd": 54,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 8
+    },
+    {
+      "seq": 26,
+      "day": 27,
+      "dayPart": null,
+      "hurtStart": 54,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 7,
+      "hurtEnd": 55,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 7
+    },
+    {
+      "seq": 27,
+      "day": 28,
+      "dayPart": null,
+      "hurtStart": 56,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 11,
+      "hurtEnd": 56,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 11
+    },
+    {
+      "seq": 28,
+      "day": 29,
+      "dayPart": null,
+      "hurtStart": 56,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 14,
+      "hurtEnd": 56,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 14
+    },
+    {
+      "seq": 29,
+      "day": 30,
+      "dayPart": null,
+      "hurtStart": 56,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 12,
+      "hurtEnd": 56,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 12
+    },
+    {
+      "seq": 30,
+      "day": 31,
+      "dayPart": null,
+      "hurtStart": 56,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 15,
+      "hurtEnd": 56,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 15
+    },
+    {
+      "seq": 31,
+      "day": 32,
+      "dayPart": null,
+      "hurtStart": 58,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 19,
+      "hurtEnd": 58,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 19
+    },
+    {
+      "seq": 32,
+      "day": 33,
+      "dayPart": null,
+      "hurtStart": 62,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 20,
+      "hurtEnd": 62,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 20
+    },
+    {
+      "seq": 33,
+      "day": 34,
+      "dayPart": null,
+      "hurtStart": 63,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 13,
+      "hurtEnd": 63,
+      "sickAfter": {
+        "gen_nc2npas": {
+          "name": "wound fever",
+          "severity": 2,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 13
+    },
+    {
+      "seq": 34,
+      "day": 35,
+      "dayPart": null,
+      "hurtStart": 63,
+      "sickBefore": {
+        "gen_nc2npas": {
+          "name": "wound fever",
+          "severity": 2,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 16,
+      "hurtEnd": 64,
+      "sickAfter": {
+        "gen_nc2npas": {
+          "name": "wound fever",
+          "severity": 2,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": null,
+        "here": null
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 16
+    },
+    {
+      "seq": 35,
+      "day": 36,
+      "dayPart": null,
+      "hurtStart": 64,
+      "sickBefore": {
+        "gen_nc2npas": {
+          "name": "wound fever",
+          "severity": 2,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 19,
+      "hurtEnd": 65,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 19
+    },
+    {
+      "seq": 36,
+      "day": 37,
+      "dayPart": null,
+      "hurtStart": 65,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 22,
+      "hurtEnd": 65,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 22
+    },
+    {
+      "seq": 37,
+      "day": 38,
+      "dayPart": null,
+      "hurtStart": 65,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 26,
+      "hurtEnd": 65,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 26
+    },
+    {
+      "seq": 38,
+      "day": 39,
+      "dayPart": null,
+      "hurtStart": 65,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 21,
+      "hurtEnd": 65,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 21
+    },
+    {
+      "seq": 39,
+      "day": 40,
+      "dayPart": null,
+      "hurtStart": 65,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 29,
+      "hurtEnd": 65,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 29
+    },
+    {
+      "seq": 40,
+      "day": 41,
+      "dayPart": null,
+      "hurtStart": 67,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 30,
+      "hurtEnd": 67,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 30
+    },
+    {
+      "seq": 41,
+      "day": 42,
+      "dayPart": null,
+      "hurtStart": 67,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 33,
+      "hurtEnd": 67,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 33
+    },
+    {
+      "seq": 42,
+      "day": 43,
+      "dayPart": null,
+      "hurtStart": 67,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 32,
+      "hurtEnd": 67,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 32
+    },
+    {
+      "seq": 43,
+      "day": 44,
+      "dayPart": null,
+      "hurtStart": 67,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 37,
+      "hurtEnd": 67,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 37
+    },
+    {
+      "seq": 44,
+      "day": 45,
+      "dayPart": null,
+      "hurtStart": 73,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 42,
+      "hurtEnd": 73,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 42
+    },
+    {
+      "seq": 45,
+      "day": 46,
+      "dayPart": null,
+      "hurtStart": 73,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 39,
+      "hurtEnd": 73,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 39
+    },
+    {
+      "seq": 46,
+      "day": 47,
+      "dayPart": null,
+      "hurtStart": 74,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 36,
+      "hurtEnd": 74,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 36
+    },
+    {
+      "seq": 47,
+      "day": 48,
+      "dayPart": null,
+      "hurtStart": 75,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 40,
+      "hurtEnd": 75,
+      "sickAfter": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 40
+    },
+    {
+      "seq": 48,
+      "day": 49,
+      "dayPart": null,
+      "hurtStart": 75,
+      "sickBefore": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 39,
+      "hurtEnd": 76,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 39
+    },
+    {
+      "seq": 49,
+      "day": 50,
+      "dayPart": null,
+      "hurtStart": 76,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 40,
+      "hurtEnd": 76,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 40
+    },
+    {
+      "seq": 50,
+      "day": 51,
+      "dayPart": null,
+      "hurtStart": 77,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 39,
+      "hurtEnd": 77,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 39
+    },
+    {
+      "seq": 51,
+      "day": 52,
+      "dayPart": null,
+      "hurtStart": 77,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 38,
+      "hurtEnd": 77,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 38
+    },
+    {
+      "seq": 52,
+      "day": 53,
+      "dayPart": null,
+      "hurtStart": 77,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 39,
+      "hurtEnd": 77,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 39
+    },
+    {
+      "seq": 53,
+      "day": 54,
+      "dayPart": null,
+      "hurtStart": 77,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 40,
+      "hurtEnd": 77,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 40
+    },
+    {
+      "seq": 54,
+      "day": 55,
+      "dayPart": null,
+      "hurtStart": 77,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 25,
+      "hurtEnd": 77,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 25
+    },
+    {
+      "seq": 55,
+      "day": 56,
+      "dayPart": null,
+      "hurtStart": 82,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 26,
+      "hurtEnd": 82,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 26
+    },
+    {
+      "seq": 56,
+      "day": 57,
+      "dayPart": null,
+      "hurtStart": 82,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 27,
+      "hurtEnd": 82,
+      "sickAfter": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 27
+    },
+    {
+      "seq": 57,
+      "day": 58,
+      "dayPart": null,
+      "hurtStart": 82,
+      "sickBefore": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 31,
+      "hurtEnd": 83,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 31
+    },
+    {
+      "seq": 58,
+      "day": 59,
+      "dayPart": null,
+      "hurtStart": 83,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 32,
+      "hurtEnd": 83,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 32
+    },
+    {
+      "seq": 59,
+      "day": 60,
+      "dayPart": null,
+      "hurtStart": 85,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 33,
+      "hurtEnd": 85,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 33
+    },
+    {
+      "seq": 60,
+      "day": 61,
+      "dayPart": null,
+      "hurtStart": 85,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 32,
+      "hurtEnd": 85,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 32
+    },
+    {
+      "seq": 61,
+      "day": 62,
+      "dayPart": null,
+      "hurtStart": 87,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 34,
+      "hurtEnd": 87,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 34
+    },
+    {
+      "seq": 62,
+      "day": 63,
+      "dayPart": null,
+      "hurtStart": 87,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 32,
+      "hurtEnd": 87,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 32
+    },
+    {
+      "seq": 63,
+      "day": 64,
+      "dayPart": null,
+      "hurtStart": 87,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 33,
+      "hurtEnd": 87,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 33
+    },
+    {
+      "seq": 64,
+      "day": 65,
+      "dayPart": null,
+      "hurtStart": 87,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 33,
+      "hurtEnd": 87,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 33
+    },
+    {
+      "seq": 65,
+      "day": 66,
+      "dayPart": null,
+      "hurtStart": 91,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 33,
+      "hurtEnd": 91,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 33
+    },
+    {
+      "seq": 66,
+      "day": 67,
+      "dayPart": null,
+      "hurtStart": 92,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 28,
+      "hurtEnd": 92,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 28
+    },
+    {
+      "seq": 67,
+      "day": 68,
+      "dayPart": null,
+      "hurtStart": 92,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 28,
+      "hurtEnd": 92,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 28
+    },
+    {
+      "seq": 68,
+      "day": 69,
+      "dayPart": null,
+      "hurtStart": 92,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 29,
+      "hurtEnd": 92,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 29
+    },
+    {
+      "seq": 69,
+      "day": 70,
+      "dayPart": null,
+      "hurtStart": 92,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 31,
+      "hurtEnd": 92,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 31
+    },
+    {
+      "seq": 70,
+      "day": 71,
+      "dayPart": null,
+      "hurtStart": 92,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 32,
+      "hurtEnd": 92,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 4,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 32
+    },
+    {
+      "seq": 71,
+      "day": 72,
+      "dayPart": null,
+      "hurtStart": 92,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 4,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 28,
+      "hurtEnd": 93,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 28
+    },
+    {
+      "seq": 72,
+      "day": 73,
+      "dayPart": null,
+      "hurtStart": 93,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 26,
+      "hurtEnd": 94,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 26
+    },
+    {
+      "seq": 73,
+      "day": 74,
+      "dayPart": null,
+      "hurtStart": 95,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 24,
+      "hurtEnd": 95,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 24
+    },
+    {
+      "seq": 74,
+      "day": 75,
+      "dayPart": null,
+      "hurtStart": 95,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 22,
+      "hurtEnd": 95,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "raj_patel",
+        "here": "raj_patel"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 22
+    },
+    {
+      "seq": 75,
+      "day": 76,
+      "dayPart": null,
+      "hurtStart": 95,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 22,
+      "hurtEnd": 95,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_eg198xp",
+        "here": "gen_eg198xp"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 22
+    },
+    {
+      "seq": 76,
+      "day": 77,
+      "dayPart": null,
+      "hurtStart": 95,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 13,
+      "hurtEnd": 95,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 13
+    },
+    {
+      "seq": 77,
+      "day": 78,
+      "dayPart": null,
+      "hurtStart": 95,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 14,
+      "hurtEnd": 95,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 14
+    },
+    {
+      "seq": 78,
+      "day": 79,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 18,
+      "hurtEnd": 101,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 18
+    },
+    {
+      "seq": 79,
+      "day": 80,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 19,
+      "hurtEnd": 101,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 19
+    },
+    {
+      "seq": 80,
+      "day": 81,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 24,
+      "hurtEnd": 101,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 24
+    },
+    {
+      "seq": 81,
+      "day": 82,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 23,
+      "hurtEnd": 101,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 23
+    },
+    {
+      "seq": 82,
+      "day": 83,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 25,
+      "hurtEnd": 101,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 25
+    },
+    {
+      "seq": 83,
+      "day": 84,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 29,
+      "hurtEnd": 101,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 4,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 29
+    },
+    {
+      "seq": 84,
+      "day": 85,
+      "dayPart": null,
+      "hurtStart": 101,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 4,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 31,
+      "hurtEnd": 102,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 31
+    },
+    {
+      "seq": 85,
+      "day": 86,
+      "dayPart": null,
+      "hurtStart": 111,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 39,
+      "hurtEnd": 112,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 39
+    },
+    {
+      "seq": 86,
+      "day": 87,
+      "dayPart": null,
+      "hurtStart": 112,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 39,
+      "hurtEnd": 112,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 39
+    },
+    {
+      "seq": 87,
+      "day": 88,
+      "dayPart": null,
+      "hurtStart": 113,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 37,
+      "hurtEnd": 113,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 4,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 37
+    },
+    {
+      "seq": 88,
+      "day": 89,
+      "dayPart": null,
+      "hurtStart": 113,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 4,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 40,
+      "hurtEnd": 114,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 40
+    },
+    {
+      "seq": 89,
+      "day": 90,
+      "dayPart": null,
+      "hurtStart": 114,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 40,
+      "hurtEnd": 115,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 40
+    },
+    {
+      "seq": 90,
+      "day": 91,
+      "dayPart": null,
+      "hurtStart": 117,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 43,
+      "hurtEnd": 117,
+      "sickAfter": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 43
+    },
+    {
+      "seq": 91,
+      "day": 92,
+      "dayPart": null,
+      "hurtStart": 117,
+      "sickBefore": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 43,
+      "hurtEnd": 118,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 43
+    },
+    {
+      "seq": 92,
+      "day": 93,
+      "dayPart": null,
+      "hurtStart": 118,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 41,
+      "hurtEnd": 118,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 41
+    },
+    {
+      "seq": 93,
+      "day": 94,
+      "dayPart": null,
+      "hurtStart": 125,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 48,
+      "hurtEnd": 125,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 48
+    },
+    {
+      "seq": 94,
+      "day": 95,
+      "dayPart": null,
+      "hurtStart": 125,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 51,
+      "hurtEnd": 125,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 51
+    },
+    {
+      "seq": 95,
+      "day": 96,
+      "dayPart": null,
+      "hurtStart": 125,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 52,
+      "hurtEnd": 125,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 52
+    },
+    {
+      "seq": 96,
+      "day": 97,
+      "dayPart": null,
+      "hurtStart": 126,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 59,
+      "hurtEnd": 126,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 59
+    },
+    {
+      "seq": 97,
+      "day": 98,
+      "dayPart": null,
+      "hurtStart": 126,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 59,
+      "hurtEnd": 126,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 59
+    },
+    {
+      "seq": 98,
+      "day": 99,
+      "dayPart": null,
+      "hurtStart": 126,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 126,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 99,
+      "day": 100,
+      "dayPart": null,
+      "hurtStart": 128,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 60,
+      "hurtEnd": 128,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 60
+    },
+    {
+      "seq": 100,
+      "day": 101,
+      "dayPart": null,
+      "hurtStart": 128,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 59,
+      "hurtEnd": 128,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 59
+    },
+    {
+      "seq": 101,
+      "day": 102,
+      "dayPart": null,
+      "hurtStart": 128,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 56,
+      "hurtEnd": 128,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 56
+    },
+    {
+      "seq": 102,
+      "day": 103,
+      "dayPart": null,
+      "hurtStart": 129,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 60,
+      "hurtEnd": 129,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 60
+    },
+    {
+      "seq": 103,
+      "day": 104,
+      "dayPart": null,
+      "hurtStart": 134,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 61,
+      "hurtEnd": 135,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 61
+    },
+    {
+      "seq": 104,
+      "day": 105,
+      "dayPart": null,
+      "hurtStart": 135,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 59,
+      "hurtEnd": 135,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 59
+    },
+    {
+      "seq": 105,
+      "day": 106,
+      "dayPart": null,
+      "hurtStart": 135,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 135,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 106,
+      "day": 107,
+      "dayPart": null,
+      "hurtStart": 135,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 61,
+      "hurtEnd": 135,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 61
+    },
+    {
+      "seq": 107,
+      "day": 108,
+      "dayPart": null,
+      "hurtStart": 135,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 135,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 108,
+      "day": 109,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 71,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 71
+    },
+    {
+      "seq": 109,
+      "day": 110,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 73,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 73
+    },
+    {
+      "seq": 110,
+      "day": 111,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 72,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 72
+    },
+    {
+      "seq": 111,
+      "day": 112,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 76,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 76
+    },
+    {
+      "seq": 112,
+      "day": 113,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 78,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 78
+    },
+    {
+      "seq": 113,
+      "day": 114,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 80,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 80
+    },
+    {
+      "seq": 114,
+      "day": 115,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 80,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 80
+    },
+    {
+      "seq": 115,
+      "day": 116,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 79,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 79
+    },
+    {
+      "seq": 116,
+      "day": 117,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 79,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 79
+    },
+    {
+      "seq": 117,
+      "day": 118,
+      "dayPart": null,
+      "hurtStart": 141,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 78,
+      "hurtEnd": 141,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 78
+    },
+    {
+      "seq": 118,
+      "day": 119,
+      "dayPart": null,
+      "hurtStart": 146,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 78,
+      "hurtEnd": 146,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 78
+    },
+    {
+      "seq": 119,
+      "day": 120,
+      "dayPart": null,
+      "hurtStart": 146,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 77,
+      "hurtEnd": 146,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 77
+    },
+    {
+      "seq": 120,
+      "day": 121,
+      "dayPart": null,
+      "hurtStart": 146,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 71,
+      "hurtEnd": 146,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 71
+    },
+    {
+      "seq": 121,
+      "day": 122,
+      "dayPart": null,
+      "hurtStart": 149,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 73,
+      "hurtEnd": 149,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 73
+    },
+    {
+      "seq": 122,
+      "day": 123,
+      "dayPart": null,
+      "hurtStart": 149,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 72,
+      "hurtEnd": 149,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 72
+    },
+    {
+      "seq": 123,
+      "day": 124,
+      "dayPart": null,
+      "hurtStart": 152,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 74,
+      "hurtEnd": 152,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 74
+    },
+    {
+      "seq": 124,
+      "day": 125,
+      "dayPart": null,
+      "hurtStart": 152,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 73,
+      "hurtEnd": 152,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 73
+    },
+    {
+      "seq": 125,
+      "day": 126,
+      "dayPart": null,
+      "hurtStart": 152,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 74,
+      "hurtEnd": 152,
+      "sickAfter": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 74
+    },
+    {
+      "seq": 126,
+      "day": 127,
+      "dayPart": null,
+      "hurtStart": 152,
+      "sickBefore": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 73,
+      "hurtEnd": 153,
+      "sickAfter": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 73
+    },
+    {
+      "seq": 127,
+      "day": 128,
+      "dayPart": null,
+      "hurtStart": 158,
+      "sickBefore": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 72,
+      "hurtEnd": 159,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 72
+    },
+    {
+      "seq": 128,
+      "day": 129,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 72,
+      "hurtEnd": 159,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 72
+    },
+    {
+      "seq": 129,
+      "day": 130,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 71,
+      "hurtEnd": 159,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 71
+    },
+    {
+      "seq": 130,
+      "day": 131,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 69,
+      "hurtEnd": 159,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 69
+    },
+    {
+      "seq": 131,
+      "day": 132,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 159,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 132,
+      "day": 133,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 69,
+      "hurtEnd": 159,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 69
+    },
+    {
+      "seq": 133,
+      "day": 134,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 68,
+      "hurtEnd": 159,
+      "sickAfter": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 68
+    },
+    {
+      "seq": 134,
+      "day": 135,
+      "dayPart": null,
+      "hurtStart": 159,
+      "sickBefore": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 160,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 135,
+      "day": 136,
+      "dayPart": null,
+      "hurtStart": 160,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 160,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 136,
+      "day": 137,
+      "dayPart": null,
+      "hurtStart": 160,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 68,
+      "hurtEnd": 160,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 68
+    },
+    {
+      "seq": 137,
+      "day": 138,
+      "dayPart": null,
+      "hurtStart": 165,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 165,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 138,
+      "day": 139,
+      "dayPart": null,
+      "hurtStart": 165,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 166,
+      "sickAfter": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 139,
+      "day": 140,
+      "dayPart": null,
+      "hurtStart": 166,
+      "sickBefore": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 167,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 140,
+      "day": 141,
+      "dayPart": null,
+      "hurtStart": 167,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 59,
+      "hurtEnd": 167,
+      "sickAfter": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 59
+    },
+    {
+      "seq": 141,
+      "day": 142,
+      "dayPart": null,
+      "hurtStart": 167,
+      "sickBefore": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 57,
+      "hurtEnd": 168,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 57
+    },
+    {
+      "seq": 142,
+      "day": 143,
+      "dayPart": null,
+      "hurtStart": 168,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 58,
+      "hurtEnd": 168,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 58
+    },
+    {
+      "seq": 143,
+      "day": 144,
+      "dayPart": null,
+      "hurtStart": 168,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 61,
+      "hurtEnd": 168,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 61
+    },
+    {
+      "seq": 144,
+      "day": 145,
+      "dayPart": null,
+      "hurtStart": 173,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 57,
+      "hurtEnd": 173,
+      "sickAfter": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 57
+    },
+    {
+      "seq": 145,
+      "day": 146,
+      "dayPart": null,
+      "hurtStart": 173,
+      "sickBefore": {
+        "yara_haddad": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 58,
+      "hurtEnd": 174,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 58
+    },
+    {
+      "seq": 146,
+      "day": 147,
+      "dayPart": null,
+      "hurtStart": 174,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 57,
+      "hurtEnd": 174,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 57
+    },
+    {
+      "seq": 147,
+      "day": 148,
+      "dayPart": null,
+      "hurtStart": 174,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 58,
+      "hurtEnd": 174,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 58
+    },
+    {
+      "seq": 148,
+      "day": 149,
+      "dayPart": null,
+      "hurtStart": 174,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 59,
+      "hurtEnd": 174,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 59
+    },
+    {
+      "seq": 149,
+      "day": 150,
+      "dayPart": null,
+      "hurtStart": 174,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 174,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 3,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 150,
+      "day": 151,
+      "dayPart": null,
+      "hurtStart": 174,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 3,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 175,
+      "sickAfter": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 151,
+      "day": 152,
+      "dayPart": null,
+      "hurtStart": 175,
+      "sickBefore": {
+        "gen_eg198xp": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 176,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 152,
+      "day": 153,
+      "dayPart": null,
+      "hurtStart": 176,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 176,
+      "sickAfter": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 153,
+      "day": 154,
+      "dayPart": null,
+      "hurtStart": 176,
+      "sickBefore": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 2,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 177,
+      "sickAfter": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 154,
+      "day": 155,
+      "dayPart": null,
+      "hurtStart": 177,
+      "sickBefore": {
+        "ingrid_vik": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 178,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 155,
+      "day": 156,
+      "dayPart": null,
+      "hurtStart": 183,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 183,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 156,
+      "day": 157,
+      "dayPart": null,
+      "hurtStart": 183,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 183,
+      "sickAfter": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 157,
+      "day": 158,
+      "dayPart": null,
+      "hurtStart": 183,
+      "sickBefore": {
+        "rosa_mendez": {
+          "name": "tick fever",
+          "severity": 1,
+          "daysLeft": 1,
+          "diagnosed": null
+        }
+      },
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 158,
+      "day": 159,
+      "dayPart": null,
+      "hurtStart": 184,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 159,
+      "day": 160,
+      "dayPart": null,
+      "hurtStart": 184,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 160,
+      "day": 161,
+      "dayPart": null,
+      "hurtStart": 184,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 161,
+      "day": 162,
+      "dayPart": null,
+      "hurtStart": 184,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 162,
+      "day": 163,
+      "dayPart": null,
+      "hurtStart": 184,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 163,
+      "day": 164,
+      "dayPart": null,
+      "hurtStart": 184,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 184,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 164,
+      "day": 165,
+      "dayPart": null,
+      "hurtStart": 189,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 189,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 165,
+      "day": 166,
+      "dayPart": null,
+      "hurtStart": 189,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 189,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 166,
+      "day": 167,
+      "dayPart": null,
+      "hurtStart": 189,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 189,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 167,
+      "day": 168,
+      "dayPart": null,
+      "hurtStart": 192,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 67,
+      "hurtEnd": 192,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 67
+    },
+    {
+      "seq": 168,
+      "day": 169,
+      "dayPart": null,
+      "hurtStart": 192,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 192,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 169,
+      "day": 170,
+      "dayPart": null,
+      "hurtStart": 192,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 192,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 170,
+      "day": 171,
+      "dayPart": null,
+      "hurtStart": 192,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 192,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 171,
+      "day": 172,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 172,
+      "day": 173,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 61,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 61
+    },
+    {
+      "seq": 173,
+      "day": 174,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 62,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 62
+    },
+    {
+      "seq": 174,
+      "day": 175,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 175,
+      "day": 176,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    },
+    {
+      "seq": 176,
+      "day": 177,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 61,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 61
+    },
+    {
+      "seq": 177,
+      "day": 178,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 65,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 65
+    },
+    {
+      "seq": 178,
+      "day": 179,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 64,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 64
+    },
+    {
+      "seq": 179,
+      "day": 180,
+      "dayPart": null,
+      "hurtStart": 197,
+      "sickBefore": {},
+      "healersBefore": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysBefore": 0,
+      "pantryLenBefore": 66,
+      "hurtEnd": 197,
+      "sickAfter": {},
+      "healersAfter": {
+        "haven": "gen_34gx47m",
+        "here": "gen_34gx47m"
+      },
+      "hungryDaysAfter": 0,
+      "pantryLenAfter": 66
+    }
+  ],
+  "hurtRows": [
+    {
+      "idx": 0,
+      "day": 2,
+      "vid": "rosa_mendez",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": null,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 1,
+      "day": 3,
+      "vid": "hannah_kim",
+      "damage": 78,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 22,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 2,
+      "day": 4,
+      "vid": "hannah_kim",
+      "damage": 4,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 68,
+      "healthAfter": 64,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 3,
+      "day": 5,
+      "vid": "gen_nc2npas",
+      "damage": 47,
+      "cause": "monster",
+      "caller": "other:expeditionMonster",
+      "healthBefore": null,
+      "healthAfter": 53,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 4,
+      "day": 5,
+      "vid": "gen_nc2npas",
+      "damage": 17,
+      "cause": "monster",
+      "caller": "other:expeditionMonster",
+      "healthBefore": 53,
+      "healthAfter": 36,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 5,
+      "day": 6,
+      "vid": "rosa_mendez",
+      "damage": 11,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 89,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 6,
+      "day": 7,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 7,
+      "day": 7,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 8,
+      "day": 7,
+      "vid": "gen_nc2npas",
+      "damage": 49,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 55,
+      "healthAfter": 6,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 9,
+      "day": 7,
+      "vid": "raj_patel",
+      "damage": 15,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 92,
+      "healthAfter": 77,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 10,
+      "day": 7,
+      "vid": "hannah_kim",
+      "damage": 50,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 95,
+      "healthAfter": 45,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 11,
+      "day": 8,
+      "vid": "gen_34gx47m",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 12,
+      "day": 9,
+      "vid": "gen_k2gqoog",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 13,
+      "day": 10,
+      "vid": "gen_34gx47m",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 14,
+      "day": 10,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 15,
+      "day": 10,
+      "vid": "gen_34gx47m",
+      "damage": 8,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 92,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 16,
+      "day": 11,
+      "vid": "gen_nc2npas",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 75,
+      "healthAfter": 75,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 17,
+      "day": 11,
+      "vid": "gen_hahp26c",
+      "damage": 51,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 98,
+      "healthAfter": 67,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 18,
+      "day": 11,
+      "vid": "gen_nc2npas",
+      "damage": 28,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 75,
+      "healthAfter": 47,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 19,
+      "day": 14,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 20,
+      "day": 14,
+      "vid": "gen_nc2npas",
+      "damage": 40,
+      "cause": "monster",
+      "caller": "other:expeditionMonster",
+      "healthBefore": 96,
+      "healthAfter": 56,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 21,
+      "day": 14,
+      "vid": "gen_hahp26c",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 76,
+      "healthAfter": 76,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 22,
+      "day": 14,
+      "vid": "gen_k2gqoog",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 23,
+      "day": 14,
+      "vid": "gen_eg198xp",
+      "damage": 13,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 87,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 24,
+      "day": 14,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 71,
+      "healthAfter": 71,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 25,
+      "day": 14,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 88,
+      "healthAfter": 88,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 26,
+      "day": 14,
+      "vid": "gen_nc2npas",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 59,
+      "healthAfter": 56,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 27,
+      "day": 15,
+      "vid": "farid_ahmed",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 84,
+      "healthAfter": 84,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 28,
+      "day": 15,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 90,
+      "healthAfter": 90,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 29,
+      "day": 15,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 90,
+      "healthAfter": 90,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 30,
+      "day": 15,
+      "vid": "gen_nc2npas",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 59,
+      "healthAfter": 56,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 31,
+      "day": 16,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 32,
+      "day": 17,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 33,
+      "day": 17,
+      "vid": "hannah_kim",
+      "damage": 75,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 97,
+      "healthAfter": 42,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 34,
+      "day": 17,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 35,
+      "day": 18,
+      "vid": "gen_34gx47m",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 36,
+      "day": 19,
+      "vid": "gen_eg198xp",
+      "damage": 67,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 53,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 37,
+      "day": 19,
+      "vid": "gen_hahp26c",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 83,
+      "healthAfter": 83,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 38,
+      "day": 20,
+      "vid": "ingrid_vik",
+      "damage": 45,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 75,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 39,
+      "day": 20,
+      "vid": "gen_nc2npas",
+      "damage": 41,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 83,
+      "healthAfter": 42,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 40,
+      "day": 20,
+      "vid": "rosa_mendez",
+      "damage": 17,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 84,
+      "healthAfter": 67,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 41,
+      "day": 21,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 79,
+      "healthAfter": 79,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 42,
+      "day": 21,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 78,
+      "healthAfter": 78,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 43,
+      "day": 21,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 44,
+      "day": 22,
+      "vid": "gen_nc2npas",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 73,
+      "healthAfter": 73,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 45,
+      "day": 22,
+      "vid": "gen_eg198xp",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 80,
+      "healthAfter": 77,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 46,
+      "day": 23,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 77,
+      "healthAfter": 77,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 47,
+      "day": 23,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 84,
+      "healthAfter": 84,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 48,
+      "day": 23,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 80,
+      "healthAfter": 78,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 49,
+      "day": 24,
+      "vid": "gen_k2gqoog",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 71,
+      "healthAfter": 71,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 50,
+      "day": 25,
+      "vid": "gen_nc2npas",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 82,
+      "healthAfter": 82,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 51,
+      "day": 25,
+      "vid": "gen_34gx47m",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 52,
+      "day": 25,
+      "vid": "gen_k2gqoog",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 74,
+      "healthAfter": 74,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 53,
+      "day": 25,
+      "vid": "yara_haddad",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 54,
+      "day": 27,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 90,
+      "healthAfter": 88,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 55,
+      "day": 28,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 88,
+      "healthAfter": 88,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 56,
+      "day": 32,
+      "vid": "raj_patel",
+      "damage": 73,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 47,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 57,
+      "day": 32,
+      "vid": "gen_k2gqoog",
+      "damage": 36,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 95,
+      "healthAfter": 59,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 58,
+      "day": 33,
+      "vid": "gen_k2gqoog",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 62,
+      "healthAfter": 62,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 59,
+      "day": 33,
+      "vid": "raj_patel",
+      "damage": 48,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 75,
+      "healthAfter": 47,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 60,
+      "day": 33,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 61,
+      "day": 33,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 62,
+      "day": 34,
+      "vid": "gen_nc2npas",
+      "damage": 34,
+      "cause": "monster",
+      "caller": "other:expeditionMonster",
+      "healthBefore": 68,
+      "healthAfter": 34,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 63,
+      "day": 35,
+      "vid": "gen_nc2npas",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 40,
+      "healthAfter": 35,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 64,
+      "day": 36,
+      "vid": "gen_nc2npas",
+      "damage": 4,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 78,
+      "healthAfter": 74,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 65,
+      "day": 41,
+      "vid": "raj_patel",
+      "damage": 56,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 44,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 66,
+      "day": 41,
+      "vid": "raj_patel",
+      "damage": 24,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 44,
+      "healthAfter": 40,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 67,
+      "day": 45,
+      "vid": "yara_haddad",
+      "damage": 60,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 40,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 68,
+      "day": 45,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 69,
+      "day": 45,
+      "vid": "gen_nc2npas",
+      "damage": 53,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 98,
+      "healthAfter": 45,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 70,
+      "day": 45,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 82,
+      "healthAfter": 82,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 71,
+      "day": 45,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 72,
+      "day": 45,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 73,
+      "day": 47,
+      "vid": "gen_nc2npas",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 76,
+      "healthAfter": 76,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 74,
+      "day": 48,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 91,
+      "healthAfter": 91,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 75,
+      "day": 49,
+      "vid": "ingrid_vik",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 76,
+      "day": 51,
+      "vid": "ingrid_vik",
+      "damage": 19,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 81,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 77,
+      "day": 56,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 78,
+      "day": 56,
+      "vid": "gen_34gx47m",
+      "damage": 27,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 73,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 79,
+      "day": 56,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 80,
+      "day": 56,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 96,
+      "healthAfter": 96,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 81,
+      "day": 56,
+      "vid": "farid_ahmed",
+      "damage": 19,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 81,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 82,
+      "day": 58,
+      "vid": "yara_haddad",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 84,
+      "healthAfter": 82,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 83,
+      "day": 60,
+      "vid": "gen_34gx47m",
+      "damage": 42,
+      "cause": "monster",
+      "caller": "other:expeditionMonster",
+      "healthBefore": 85,
+      "healthAfter": 63,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 84,
+      "day": 60,
+      "vid": "gen_34gx47m",
+      "damage": 25,
+      "cause": "monster",
+      "caller": "other:expeditionMonster",
+      "healthBefore": 63,
+      "healthAfter": 58,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 85,
+      "day": 62,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 86,
+      "day": 62,
+      "vid": "hannah_kim",
+      "damage": 20,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 80,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 87,
+      "day": 66,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 88,
+      "day": 66,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 89,
+      "day": 66,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 90,
+      "day": 66,
+      "vid": "farid_ahmed",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 91,
+      "day": 67,
+      "vid": "gen_34gx47m",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 94,
+      "healthAfter": 94,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 92,
+      "day": 72,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 78,
+      "healthAfter": 76,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 93,
+      "day": 73,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 79,
+      "healthAfter": 77,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 94,
+      "day": 74,
+      "vid": "farid_ahmed",
+      "damage": 8,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 92,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 95,
+      "day": 79,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 99,
+      "healthAfter": 99,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 96,
+      "day": 79,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 92,
+      "healthAfter": 92,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 97,
+      "day": 79,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 98,
+      "day": 79,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 85,
+      "healthAfter": 85,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 99,
+      "day": 79,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 100,
+      "day": 79,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 101,
+      "day": 85,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 102,
+      "day": 86,
+      "vid": "gen_eg198xp",
+      "damage": 10,
+      "cause": "contest",
+      "caller": "other:eval",
+      "healthBefore": 98,
+      "healthAfter": 88,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 103,
+      "day": 86,
+      "vid": "gen_eg198xp",
+      "damage": 15,
+      "cause": "contest",
+      "caller": "other:_cxEndurance",
+      "healthBefore": 88,
+      "healthAfter": 73,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 104,
+      "day": 86,
+      "vid": "raj_patel",
+      "damage": 10,
+      "cause": "contest",
+      "caller": "other:eval",
+      "healthBefore": 100,
+      "healthAfter": 90,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 105,
+      "day": 86,
+      "vid": "raj_patel",
+      "damage": 15,
+      "cause": "contest",
+      "caller": "other:_cxEndurance",
+      "healthBefore": 90,
+      "healthAfter": 75,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 106,
+      "day": 86,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 73,
+      "healthAfter": 73,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 107,
+      "day": 86,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 75,
+      "healthAfter": 75,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 108,
+      "day": 86,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 109,
+      "day": 86,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 92,
+      "healthAfter": 92,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 110,
+      "day": 86,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 111,
+      "day": 86,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 76,
+      "healthAfter": 74,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 112,
+      "day": 88,
+      "vid": "ingrid_vik",
+      "damage": 15,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 85,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 113,
+      "day": 89,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 58,
+      "healthAfter": 56,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 114,
+      "day": 90,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 74,
+      "healthAfter": 72,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 115,
+      "day": 91,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 116,
+      "day": 91,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 74,
+      "healthAfter": 74,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 117,
+      "day": 92,
+      "vid": "yara_haddad",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 118,
+      "day": 94,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 85,
+      "healthAfter": 85,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 119,
+      "day": 94,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 120,
+      "day": 94,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 81,
+      "healthAfter": 81,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 121,
+      "day": 94,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 92,
+      "healthAfter": 92,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 122,
+      "day": 94,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 123,
+      "day": 94,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 124,
+      "day": 94,
+      "vid": "farid_ahmed",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 125,
+      "day": 97,
+      "vid": "farid_ahmed",
+      "damage": 60,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 40,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 126,
+      "day": 100,
+      "vid": "gen_eg198xp",
+      "damage": 48,
+      "cause": "contest",
+      "caller": "other:_cxDuelSingle",
+      "healthBefore": 96,
+      "healthAfter": 48,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 127,
+      "day": 100,
+      "vid": "rosa_mendez",
+      "damage": 52,
+      "cause": "contest",
+      "caller": "other:_cxDuelSingle",
+      "healthBefore": 100,
+      "healthAfter": 48,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 128,
+      "day": 103,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 97,
+      "healthAfter": 97,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 129,
+      "day": 104,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 130,
+      "day": 104,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 94,
+      "healthAfter": 94,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 131,
+      "day": 104,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 132,
+      "day": 104,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 86,
+      "healthAfter": 86,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 133,
+      "day": 104,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 134,
+      "day": 104,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 135,
+      "day": 109,
+      "vid": "rosa_mendez",
+      "damage": 14,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 86,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 136,
+      "day": 109,
+      "vid": "rosa_mendez",
+      "damage": 6,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 86,
+      "healthAfter": 80,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 137,
+      "day": 109,
+      "vid": "rosa_mendez",
+      "damage": 5,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 80,
+      "healthAfter": 75,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 138,
+      "day": 109,
+      "vid": "ingrid_vik",
+      "damage": 13,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 87,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 139,
+      "day": 109,
+      "vid": "ingrid_vik",
+      "damage": 15,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 87,
+      "healthAfter": 72,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 140,
+      "day": 109,
+      "vid": "ingrid_vik",
+      "damage": 8,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 72,
+      "healthAfter": 64,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 141,
+      "day": 119,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 142,
+      "day": 119,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 143,
+      "day": 119,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 144,
+      "day": 119,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 145,
+      "day": 119,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 146,
+      "day": 122,
+      "vid": "ingrid_vik",
+      "damage": 9,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 91,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 147,
+      "day": 122,
+      "vid": "ingrid_vik",
+      "damage": 7,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 91,
+      "healthAfter": 84,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 148,
+      "day": 122,
+      "vid": "ingrid_vik",
+      "damage": 10,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 84,
+      "healthAfter": 74,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 149,
+      "day": 124,
+      "vid": "gen_eg198xp",
+      "damage": 7,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 93,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 150,
+      "day": 124,
+      "vid": "gen_eg198xp",
+      "damage": 5,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 93,
+      "healthAfter": 88,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 151,
+      "day": 124,
+      "vid": "gen_eg198xp",
+      "damage": 6,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 88,
+      "healthAfter": 82,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 152,
+      "day": 127,
+      "vid": "ingrid_vik",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 92,
+      "healthAfter": 90,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 153,
+      "day": 128,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 94,
+      "healthAfter": 94,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 154,
+      "day": 128,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 87,
+      "healthAfter": 87,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 155,
+      "day": 128,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 156,
+      "day": 128,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 157,
+      "day": 128,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 90,
+      "healthAfter": 90,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 158,
+      "day": 128,
+      "vid": "ingrid_vik",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 93,
+      "healthAfter": 91,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 159,
+      "day": 135,
+      "vid": "rosa_mendez",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 160,
+      "day": 138,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 161,
+      "day": 138,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 162,
+      "day": 138,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 163,
+      "day": 138,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 164,
+      "day": 138,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 165,
+      "day": 139,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 166,
+      "day": 140,
+      "vid": "rosa_mendez",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 167,
+      "day": 142,
+      "vid": "ingrid_vik",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 168,
+      "day": 145,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 169,
+      "day": 145,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 170,
+      "day": 145,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 171,
+      "day": 145,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 172,
+      "day": 145,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 173,
+      "day": 146,
+      "vid": "yara_haddad",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 174,
+      "day": 151,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 175,
+      "day": 152,
+      "vid": "gen_eg198xp",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 176,
+      "day": 154,
+      "vid": "ingrid_vik",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 98,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 177,
+      "day": 155,
+      "vid": "ingrid_vik",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 79,
+      "healthAfter": 77,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 178,
+      "day": 156,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 179,
+      "day": 156,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 180,
+      "day": 156,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 181,
+      "day": 156,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 85,
+      "healthAfter": 85,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 182,
+      "day": 156,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 77,
+      "healthAfter": 77,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 183,
+      "day": 158,
+      "vid": "rosa_mendez",
+      "damage": 2,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 77,
+      "healthAfter": 75,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 184,
+      "day": 165,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 185,
+      "day": 165,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 186,
+      "day": 165,
+      "vid": "rosa_mendez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 93,
+      "healthAfter": 93,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 187,
+      "day": 165,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 188,
+      "day": 165,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 189,
+      "day": 168,
+      "vid": "gen_eg198xp",
+      "damage": 6,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 100,
+      "healthAfter": 94,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 190,
+      "day": 168,
+      "vid": "gen_eg198xp",
+      "damage": 7,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 94,
+      "healthAfter": 87,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 191,
+      "day": 168,
+      "vid": "gen_eg198xp",
+      "damage": 8,
+      "cause": "contest",
+      "caller": "other:_cxBlood",
+      "healthBefore": 87,
+      "healthAfter": 79,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 192,
+      "day": 172,
+      "vid": "gen_eg198xp",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 91,
+      "healthAfter": 91,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 193,
+      "day": 172,
+      "vid": "raj_patel",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 194,
+      "day": 172,
+      "vid": "hannah_kim",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 195,
+      "day": 172,
+      "vid": "ingrid_vik",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    },
+    {
+      "idx": 196,
+      "day": 172,
+      "vid": "yara_haddad",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "other:resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "died": false,
+      "scholarVid": false
+    }
+  ],
+  "sayLines": [
+    {
+      "day": 15,
+      "line": "🤒 Sophia is on the mend — the fever broke."
+    },
+    {
+      "day": 90,
+      "line": "🤒 Hayden is on the mend — the fever broke."
+    },
+    {
+      "day": 104,
+      "line": "🤒 Hayden is on the mend — the fever broke."
+    },
+    {
+      "day": 140,
+      "line": "🤒 Rosa is on the mend — the fever broke."
+    }
+  ]
+}
