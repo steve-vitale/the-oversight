@@ -872,7 +872,9 @@
       // hopeless-shout branch below fired this fight — NOT for
       // allyFromStart joins (helpCalled is set by both paths). The two
       // narration-only end lines below gate on this flag, so unjoined
-      // and allyFromStart endings are byte-unchanged.
+      // and allyFromStart endings were byte-unchanged by that arm;
+      // SOLOENDLINES (sim-soloendlines-a) adds the matching solo lines
+      // in the same two branches, gated on !shoutJoined && !allyFromStart.
       var shoutJoined = false;
       var wardCarries = [];
       var allyMax = 70, allyVid = null, allyName = 'Someone';
@@ -1673,6 +1675,12 @@
             // line). Names the answer as a past act, so the line stays
             // honest even if the ally has since gone down.
             if (shoutJoined) rec.log.push(allyName + ' answered ' + vName + '\'s shout, but ' + vName + ' is past holding — they run while running still works.');
+            // SOLOENDLINES (sim-soloendlines-a, 2026-10-29): narration
+            // only — the same floor flee in a SOLO fight previously ended
+            // with no line at all. Same line minus the ally clause; never
+            // fires on shout-joined fights (they have their line above)
+            // nor on allyFromStart fights (out of scope, unchanged).
+            else if (!opts.allyFromStart) rec.log.push(vName + ' is past holding — they run while running still works.');
             break;
           }
         }
@@ -1696,6 +1704,12 @@
           // Names the answer as a past act, so the line stays honest
           // even if the ally has since gone down.
           if (shoutJoined) rec.log.push(mPhraseCap + ' breaks — wounded past its line, it turns and runs. ' + allyName + ' answered ' + vName + '\'s shout.');
+          // SOLOENDLINES (sim-soloendlines-a, 2026-10-29): narration
+          // only — a solo drive-off previously ended with no line at
+          // all (a log reader could not tell the beast fled). Same line
+          // minus the ally clause; never fires on shout-joined fights
+          // (they have their line above) nor on allyFromStart fights.
+          else if (!opts.allyFromStart) rec.log.push(mPhraseCap + ' breaks — wounded past its line, it turns and runs.');
           break;
         }
         // ABILITY bookkeeping: the debt of this round settles the next.
