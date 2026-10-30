@@ -382,7 +382,7 @@ function analyze(evidDir, chaincloseDir, recurrenceDir) {
   // --- recurrence fate cross-check (diagnostic only, never a GO leg) ---
   let recurrenceCrossCheck = null;
   try {
-    const rec = JSON.parse(fs.readFileSync(path.join(recurrenceDir, 'analysis.json'), 'utf8'));
+    const rec = JSON.parse(fs.readFileSync(path.join(REPO, 'evidence', '2026-10-30', 'sim-recurrence-a-analysis.json'), 'utf8'));
     const recByKey = {};
     for (const c of (rec.chains || [])) recByKey[`${c.seed}|${c.mid}|${c.firstDay}|${c.lastDay}`] = c.fate;
     const mismatches = [];
