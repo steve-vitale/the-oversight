@@ -1,0 +1,3219 @@
+{
+  "guard": {
+    "leg": "guard",
+    "seeds": [
+      {
+        "seed": 15003,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 453,
+        "tapErrs": 0,
+        "foragePresses": 49,
+        "yieldingPresses": 19,
+        "refusedPresses": 30,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2236,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15009,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 445,
+        "tapErrs": 0,
+        "foragePresses": 78,
+        "yieldingPresses": 13,
+        "refusedPresses": 65,
+        "wouldBeDebt": 6,
+        "negativePresses": 1,
+        "minKcalAfter": -60,
+        "negativeLoopDays": [
+          16
+        ]
+      },
+      {
+        "seed": 15091,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 418,
+        "tapErrs": 0,
+        "foragePresses": 48,
+        "yieldingPresses": 11,
+        "refusedPresses": 37,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 1999,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15211,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 477,
+        "tapErrs": 0,
+        "foragePresses": 67,
+        "yieldingPresses": 13,
+        "refusedPresses": 54,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 690,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15215,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 450,
+        "tapErrs": 0,
+        "foragePresses": 47,
+        "yieldingPresses": 21,
+        "refusedPresses": 26,
+        "wouldBeDebt": 6,
+        "negativePresses": 3,
+        "minKcalAfter": -60,
+        "negativeLoopDays": [
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "seed": 15220,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 453,
+        "tapErrs": 0,
+        "foragePresses": 42,
+        "yieldingPresses": 17,
+        "refusedPresses": 25,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2046,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15221,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 507,
+        "tapErrs": 0,
+        "foragePresses": 81,
+        "yieldingPresses": 0,
+        "refusedPresses": 81,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2280,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15337,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 463,
+        "tapErrs": 0,
+        "foragePresses": 47,
+        "yieldingPresses": 16,
+        "refusedPresses": 31,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2129,
+        "negativeLoopDays": []
+      }
+    ],
+    "totals": {
+      "foragePresses": 459,
+      "yieldingPresses": 110,
+      "refusedPresses": 349,
+      "wouldBeDebt": 12,
+      "negativePresses": 4
+    },
+    "negatives": [
+      {
+        "leg": "guard",
+        "seed": 15009,
+        "loopDay": 16,
+        "gameDay": 16,
+        "pos": {
+          "tile": "forest_floor",
+          "mx": 0,
+          "my": 1,
+          "mapPx": 8,
+          "mapPy": 2,
+          "gameDay": 16
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "Unfamiliar unknown shoots — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Journal: Deep shade. The floor keeps its secrets.",
+          "A shot in the dark — you take what's green: 7× unknown shoots. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 7
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "guard",
+        "seed": 15215,
+        "loopDay": 8,
+        "gameDay": 8,
+        "pos": {
+          "tile": "wetland",
+          "mx": 7,
+          "my": 0,
+          "mapPx": 1,
+          "mapPy": 5,
+          "gameDay": 8
+        },
+        "kcalBefore": 44,
+        "kcalAfter": -16,
+        "delta": -60,
+        "sayAdded": [
+          "Unfamiliar unknown shoots — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Unfamiliar unknown berries — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Unfamiliar unknown berries — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Journal: Where the creek spreads out, the starch grows.",
+          "Journal updated: small understory tree, big drooping leaves, mango-sized green-yellow fruit grows here too — better than a low plant with tiny white flowers.",
+          "A shot in the dark — you take what's green: 5× unknown shoots, 3× unknown berries, 5× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 5
+          },
+          {
+            "key": "unknown berries|inedible",
+            "delta": 8
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "guard",
+        "seed": 15215,
+        "loopDay": 9,
+        "gameDay": 9,
+        "pos": {
+          "tile": "creek",
+          "mx": 0,
+          "my": 0,
+          "mapPx": 3,
+          "mapPy": 5,
+          "gameDay": 9
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "Some of these unknown berries are starting to look familiar — sort them at camp in good light and the name might come to you.",
+          "A shot in the dark — you take what's green: 6× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown berries|inedible",
+            "delta": 6
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "guard",
+        "seed": 15215,
+        "loopDay": 10,
+        "gameDay": 10,
+        "pos": {
+          "tile": "wetland",
+          "mx": 8,
+          "my": 8,
+          "mapPx": 2,
+          "mapPy": 4,
+          "gameDay": 10
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "You work the patch with practiced hands: 6× Purslane (180 kcal). This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "purslane|edible",
+            "delta": 6
+          }
+        ],
+        "restoration": {
+          "foodGain": 3330,
+          "morningSnap": 2345,
+          "foodRestored": true,
+          "kind": "ate-food"
+        },
+        "namesKcal": true,
+        "namesCost": false
+      }
+    ],
+    "stranded": [
+      {
+        "leg": "guard",
+        "seed": 15215,
+        "loopDay": 7,
+        "gameDay": 7,
+        "tile": "haven",
+        "mx": 4,
+        "my": 7,
+        "mapPx": 4,
+        "mapPy": 4,
+        "kcal": 2364,
+        "morningWood": 4,
+        "havenMorning": true,
+        "fieldMorning": false,
+        "sweep": {
+          "wake": [
+            4,
+            7
+          ],
+          "wakeCell": "hall",
+          "grid": [
+            [
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "bunk",
+              "hall",
+              "hall",
+              "hall",
+              "bunk",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "fire",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "door",
+              "door",
+              "wall",
+              "wall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 3,
+              "y": 6,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 4,
+              "y": 6,
+              "cell": "door",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 5,
+              "y": 6,
+              "cell": "door",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 3,
+              "y": 7,
+              "cell": "hall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 4,
+              "y": 7,
+              "cell": "hall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 5,
+              "y": 7,
+              "cell": "hall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 3,
+              "y": 8,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 4,
+              "y": 8,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 5,
+              "y": 8,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": false,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "guard",
+        "seed": 15215,
+        "loopDay": 8,
+        "gameDay": 8,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 44,
+        "morningWood": 4,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 256,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "guard",
+        "seed": 15215,
+        "loopDay": 9,
+        "gameDay": 9,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 4,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      }
+    ]
+  },
+  "on": {
+    "leg": "on",
+    "seeds": [
+      {
+        "seed": 15003,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 453,
+        "tapErrs": 0,
+        "foragePresses": 49,
+        "yieldingPresses": 19,
+        "refusedPresses": 30,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2236,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15009,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 445,
+        "tapErrs": 0,
+        "foragePresses": 78,
+        "yieldingPresses": 13,
+        "refusedPresses": 65,
+        "wouldBeDebt": 6,
+        "negativePresses": 1,
+        "minKcalAfter": -60,
+        "negativeLoopDays": [
+          16
+        ]
+      },
+      {
+        "seed": 15091,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 418,
+        "tapErrs": 0,
+        "foragePresses": 48,
+        "yieldingPresses": 11,
+        "refusedPresses": 37,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 1999,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15211,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 477,
+        "tapErrs": 0,
+        "foragePresses": 67,
+        "yieldingPresses": 13,
+        "refusedPresses": 54,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 690,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15215,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 362,
+        "tapErrs": 0,
+        "foragePresses": 46,
+        "yieldingPresses": 22,
+        "refusedPresses": 24,
+        "wouldBeDebt": 16,
+        "negativePresses": 9,
+        "minKcalAfter": -60,
+        "negativeLoopDays": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ]
+      },
+      {
+        "seed": 15220,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 453,
+        "tapErrs": 0,
+        "foragePresses": 42,
+        "yieldingPresses": 17,
+        "refusedPresses": 25,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2046,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15221,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 507,
+        "tapErrs": 0,
+        "foragePresses": 81,
+        "yieldingPresses": 0,
+        "refusedPresses": 81,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2280,
+        "negativeLoopDays": []
+      },
+      {
+        "seed": 15337,
+        "endReason": "survived",
+        "daysAlive": 30,
+        "tapEvents": 463,
+        "tapErrs": 0,
+        "foragePresses": 47,
+        "yieldingPresses": 16,
+        "refusedPresses": 31,
+        "wouldBeDebt": 0,
+        "negativePresses": 0,
+        "minKcalAfter": 2129,
+        "negativeLoopDays": []
+      }
+    ],
+    "totals": {
+      "foragePresses": 458,
+      "yieldingPresses": 111,
+      "refusedPresses": 347,
+      "wouldBeDebt": 22,
+      "negativePresses": 10
+    },
+    "negatives": [
+      {
+        "leg": "on",
+        "seed": 15009,
+        "loopDay": 16,
+        "gameDay": 16,
+        "pos": {
+          "tile": "forest_floor",
+          "mx": 0,
+          "my": 1,
+          "mapPx": 8,
+          "mapPy": 2,
+          "gameDay": 16
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "Unfamiliar unknown shoots — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Journal: Deep shade. The floor keeps its secrets.",
+          "A shot in the dark — you take what's green: 7× unknown shoots. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 7
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 8,
+        "gameDay": 8,
+        "pos": {
+          "tile": "wetland",
+          "mx": 7,
+          "my": 0,
+          "mapPx": 1,
+          "mapPy": 5,
+          "gameDay": 8
+        },
+        "kcalBefore": 44,
+        "kcalAfter": -16,
+        "delta": -60,
+        "sayAdded": [
+          "Unfamiliar unknown shoots — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Unfamiliar unknown berries — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Unfamiliar unknown berries — into the bag. (Unknowns lump together; sort them at camp.)",
+          "Journal: Where the creek spreads out, the starch grows.",
+          "Journal updated: small understory tree, big drooping leaves, mango-sized green-yellow fruit grows here too — better than a low plant with tiny white flowers.",
+          "A shot in the dark — you take what's green: 5× unknown shoots, 3× unknown berries, 5× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 5
+          },
+          {
+            "key": "unknown berries|inedible",
+            "delta": 8
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 9,
+        "gameDay": 9,
+        "pos": {
+          "tile": "creek",
+          "mx": 0,
+          "my": 0,
+          "mapPx": 3,
+          "mapPy": 5,
+          "gameDay": 9
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "Some of these unknown berries are starting to look familiar — sort them at camp in good light and the name might come to you.",
+          "A shot in the dark — you take what's green: 5× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown berries|inedible",
+            "delta": 5
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 10,
+        "gameDay": 10,
+        "pos": {
+          "tile": "wetland",
+          "mx": 8,
+          "my": 8,
+          "mapPx": 2,
+          "mapPy": 4,
+          "gameDay": 10
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "You work the patch with practiced hands: 8× Purslane (240 kcal). This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "purslane|edible",
+            "delta": 8
+          }
+        ],
+        "restoration": {
+          "foodGain": 240,
+          "morningSnap": 31,
+          "foodRestored": true,
+          "kind": "ate-food"
+        },
+        "namesKcal": true,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 11,
+        "gameDay": 11,
+        "pos": {
+          "tile": "wetland",
+          "mx": 7,
+          "my": 0,
+          "mapPx": 1,
+          "mapPy": 5,
+          "gameDay": 11
+        },
+        "kcalBefore": 31,
+        "kcalAfter": -29,
+        "delta": -60,
+        "sayAdded": [
+          "Some of these unknown shoots are starting to look familiar — sort them at camp in good light and the name might come to you.",
+          "Some of these unknown berries are starting to look familiar — sort them at camp in good light and the name might come to you.",
+          "A shot in the dark — you take what's green: 5× unknown shoots, 5× unknown berries, 6× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 5
+          },
+          {
+            "key": "unknown berries|inedible",
+            "delta": 11
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 12,
+        "gameDay": 12,
+        "pos": {
+          "tile": "wetland",
+          "mx": 0,
+          "my": 8,
+          "mapPx": 2,
+          "mapPy": 4,
+          "gameDay": 12
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "Some of these unknown shoots are starting to look familiar — sort them at camp in good light and the name might come to you.",
+          "A shot in the dark — you take what's green: 5× unknown shoots. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 5
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 13,
+        "gameDay": 13,
+        "pos": {
+          "tile": "creek",
+          "mx": 0,
+          "my": 0,
+          "mapPx": 3,
+          "mapPy": 5,
+          "gameDay": 13
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "A shot in the dark — you take what's green: 5× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown berries|inedible",
+            "delta": 5
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 14,
+        "gameDay": 14,
+        "pos": {
+          "tile": "wetland",
+          "mx": 8,
+          "my": 8,
+          "mapPx": 2,
+          "mapPy": 4,
+          "gameDay": 14
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "⬆️ Green Thumb, Literally deepened to L2! +100% yield (was +50%).",
+          "\"Your understanding is... deepening! We can see it! Like watching a seed decide to be a tree! Beautiful! Profitable!\"",
+          "You work the patch with practiced hands: 8× Purslane (240 kcal). This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "purslane|edible",
+            "delta": 8
+          }
+        ],
+        "restoration": {
+          "foodGain": 240,
+          "morningSnap": 52,
+          "foodRestored": true,
+          "kind": "ate-food"
+        },
+        "namesKcal": true,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 15,
+        "gameDay": 15,
+        "pos": {
+          "tile": "wetland",
+          "mx": 7,
+          "my": 0,
+          "mapPx": 1,
+          "mapPy": 5,
+          "gameDay": 15
+        },
+        "kcalBefore": 52,
+        "kcalAfter": -8,
+        "delta": -60,
+        "sayAdded": [
+          "💪 Your Perception grows — 7. The work is changing you.",
+          "✨ Trail Eyes — You notice tracks without trying. (tier 1)",
+          "A shot in the dark — you take what's green: 11× unknown shoots, 7× unknown berries, 11× unknown berries. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 11
+          },
+          {
+            "key": "unknown berries|inedible",
+            "delta": 18
+          }
+        ],
+        "restoration": {
+          "foodGain": 0,
+          "morningSnap": 0,
+          "foodRestored": false,
+          "kind": "floored-without-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 16,
+        "gameDay": 16,
+        "pos": {
+          "tile": "wetland",
+          "mx": 0,
+          "my": 8,
+          "mapPx": 2,
+          "mapPy": 4,
+          "gameDay": 16
+        },
+        "kcalBefore": 0,
+        "kcalAfter": -60,
+        "delta": -60,
+        "sayAdded": [
+          "A shot in the dark — you take what's green: 7× unknown shoots. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days."
+        ],
+        "packDiff": [
+          {
+            "key": "unknown shoots|inedible",
+            "delta": 7
+          }
+        ],
+        "restoration": {
+          "foodGain": 900,
+          "morningSnap": 2340,
+          "foodRestored": true,
+          "kind": "ate-food"
+        },
+        "namesKcal": false,
+        "namesCost": false
+      }
+    ],
+    "stranded": [
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 7,
+        "gameDay": 7,
+        "tile": "haven",
+        "mx": 4,
+        "my": 7,
+        "mapPx": 4,
+        "mapPy": 4,
+        "kcal": 2364,
+        "morningWood": 4,
+        "havenMorning": true,
+        "fieldMorning": false,
+        "sweep": {
+          "wake": [
+            4,
+            7
+          ],
+          "wakeCell": "hall",
+          "grid": [
+            [
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "bunk",
+              "hall",
+              "hall",
+              "hall",
+              "bunk",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "fire",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "door",
+              "door",
+              "wall",
+              "wall",
+              "wall"
+            ],
+            [
+              "wall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "hall",
+              "wall"
+            ],
+            [
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall",
+              "wall"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 3,
+              "y": 6,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 4,
+              "y": 6,
+              "cell": "door",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 5,
+              "y": 6,
+              "cell": "door",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 3,
+              "y": 7,
+              "cell": "hall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 4,
+              "y": 7,
+              "cell": "hall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 5,
+              "y": 7,
+              "cell": "hall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 3,
+              "y": 8,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 4,
+              "y": 8,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 5,
+              "y": 8,
+              "cell": "wall",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": false,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 8,
+        "gameDay": 8,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 44,
+        "morningWood": 4,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 256,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 9,
+        "gameDay": 9,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 4,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 10,
+        "gameDay": 10,
+        "tile": "creek",
+        "mx": 8,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 3,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            8,
+            0
+          ],
+          "wakeCell": "plant",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 7,
+              "y": 0,
+              "cell": "plant",
+              "species": "muscadine",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": true,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 8,
+              "y": 0,
+              "cell": "plant",
+              "species": "chickweed",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 7,
+              "y": 1,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 8,
+              "y": 1,
+              "cell": "plant",
+              "species": "mayapple",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            }
+          ],
+          "forageableCells": 3,
+          "tileCanForage": true,
+          "ticksLeft": 256,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 11,
+        "gameDay": 11,
+        "tile": "creek",
+        "mx": 8,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 31,
+        "morningWood": 3,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            8,
+            0
+          ],
+          "wakeCell": "plant",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 7,
+              "y": 0,
+              "cell": "plant",
+              "species": "muscadine",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": true,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 8,
+              "y": 0,
+              "cell": "plant",
+              "species": "chickweed",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 7,
+              "y": 1,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 8,
+              "y": 1,
+              "cell": "plant",
+              "species": "mayapple",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            }
+          ],
+          "forageableCells": 3,
+          "tileCanForage": true,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 12,
+        "gameDay": 12,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 2,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 256,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 13,
+        "gameDay": 13,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 1,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 14,
+        "gameDay": 14,
+        "tile": "creek",
+        "mx": 8,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 0,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            8,
+            0
+          ],
+          "wakeCell": "plant",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 7,
+              "y": 0,
+              "cell": "plant",
+              "species": "muscadine",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": true,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 8,
+              "y": 0,
+              "cell": "plant",
+              "species": "chickweed",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 7,
+              "y": 1,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 8,
+              "y": 1,
+              "cell": "plant",
+              "species": "mayapple",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            }
+          ],
+          "forageableCells": 3,
+          "tileCanForage": true,
+          "ticksLeft": 256,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 15,
+        "gameDay": 15,
+        "tile": "creek",
+        "mx": 8,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 52,
+        "morningWood": 0,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            8,
+            0
+          ],
+          "wakeCell": "plant",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 7,
+              "y": 0,
+              "cell": "plant",
+              "species": "muscadine",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": true,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 8,
+              "y": 0,
+              "cell": "plant",
+              "species": "chickweed",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            },
+            {
+              "x": 7,
+              "y": 1,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 8,
+              "y": 1,
+              "cell": "plant",
+              "species": "mayapple",
+              "assigned": true,
+              "treeModSpecies": null,
+              "known": false,
+              "regrow": false,
+              "scorched": false,
+              "forageable": true
+            }
+          ],
+          "forageableCells": 3,
+          "tileCanForage": true,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      },
+      {
+        "leg": "on",
+        "seed": 15215,
+        "loopDay": 16,
+        "gameDay": 16,
+        "tile": "creek",
+        "mx": 0,
+        "my": 0,
+        "mapPx": 2,
+        "mapPy": 5,
+        "kcal": 0,
+        "morningWood": 0,
+        "havenMorning": false,
+        "fieldMorning": true,
+        "sweep": {
+          "wake": [
+            0,
+            0
+          ],
+          "wakeCell": "dirt",
+          "grid": [
+            [
+              "dirt",
+              "grass",
+              "plant",
+              "plant",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "plant",
+              "plant"
+            ],
+            [
+              "water",
+              "grass",
+              "grass",
+              "dirt",
+              "bigtree",
+              "bigtree",
+              "plant",
+              "dirt",
+              "plant"
+            ],
+            [
+              "water",
+              "bridge",
+              "dirt",
+              "grass",
+              "dirt",
+              "dirt",
+              "water",
+              "dirt",
+              "plant"
+            ],
+            [
+              "grass",
+              "bridge",
+              "water",
+              "water",
+              "dirt",
+              "water",
+              "water",
+              "grass",
+              "dirt"
+            ],
+            [
+              "grass",
+              "grass",
+              "water",
+              "water",
+              "grass",
+              "water",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "dirt",
+              "plant",
+              "plant",
+              "plant",
+              "water",
+              "dirt",
+              "dirt",
+              "water",
+              "water"
+            ],
+            [
+              "grass",
+              "grass",
+              "dirt",
+              "dirt",
+              "grass",
+              "grass",
+              "dirt",
+              "plant",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "grass",
+              "dirt",
+              "grass",
+              "grass",
+              "plant",
+              "grass",
+              "grass"
+            ],
+            [
+              "bigtree",
+              "bigtree",
+              "dirt",
+              "grass",
+              "dirt",
+              "plant",
+              "grass",
+              "dirt",
+              "dirt"
+            ]
+          ],
+          "cells": [
+            {
+              "x": 0,
+              "y": 0,
+              "cell": "dirt",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "cell": "water",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "cell": "grass",
+              "species": null,
+              "assigned": false,
+              "treeModSpecies": null,
+              "known": null,
+              "regrow": false,
+              "scorched": false,
+              "forageable": false
+            }
+          ],
+          "forageableCells": 0,
+          "tileCanForage": true,
+          "ticksLeft": 128,
+          "walkStepKcal": 2
+        }
+      }
+    ]
+  },
+  "totals": {
+    "foragePresses": 917,
+    "yieldingPresses": 221,
+    "refusedPresses": 696,
+    "wouldBeDebt": 34,
+    "negativePresses": 14
+  }
+}
