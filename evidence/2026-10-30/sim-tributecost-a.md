@@ -317,6 +317,115 @@ disposition. No merge until adjudicated. The branch is HELD.
    channel anywhere.
 5. No game change is proposed by this arm.
 
+## ADDENDUM — adoption worker, run fleshout-20261030T1639Z (same branch)
+
+This addendum is appended, not a rewrite: the closeout verdict above
+stands, and this worker's independent checks either confirm it or are
+recorded as disagreements for adjudication. Do not read this addendum
+as overturning the DIAG-NO-GO above.
+
+### What the adoption worker verified independently
+
+- Proof tests re-run green on adoption, before any sims:
+  test-tributecost-zero 16/16, test-tributecost-a 18/18.
+- Reconstruction check, stronger than the file-comparison check in
+  the closeout note: a fresh deterministic re-run of leanlink seed
+  9914 (same 180d harness/recorder settings, separate process) is
+  DEEP-EQUAL to the reconstructed seed-9914.json. The dump
+  reconstruction is therefore not just plausible — it reproduces
+  byte-for-byte-equivalent content on re-simulation.
+- Full-corpus analysis re-run (scripts/analyze-tributecost-a.js):
+  reproduction vs the committed vests-b corpora is 16/16 exact on
+  days, endReason, wave, rank, national, table, and deaths; tele ==
+  harness death count and aggregate == log count on 16/16; snapshot
+  counts match the harness's own sample counts on 14/16 runs and
+  exceed them by exactly 1 on competent 9913 and leanlink 9912
+  (recorder captured one MORE snapshot than the harness sample,
+  never fewer). Wall numbers and tribute totals in the closeout
+  note above are confirmed: competent national 0 / table 0 / wins 0;
+  leanlink national 5 / table 4 / wins 0; wave 5 0/8 both columns;
+  leanlink paid 0 kcal, arrivals 175,218 kcal / 74 events, accord
+  gifts 46,417 kcal / 23 calls, sweeteners 0 (only 2 counter
+  answers in the pilot, both accepts, pantry delta 0).
+- 9912 decomposition confirmed from the series (pantry cliff
+  ~day 90: 23,371 → 3,400 kcal, never above ~10,600 after; day-123
+  five-death "wild" event; subordinates holding ~43–45k kcal each
+  while Haven ends at 0; tribute arrivals beginning only day 119).
+  The closeout's reading of the paradox is adopted unchanged.
+
+### Verdict adjudication — this worker CONCURS with DIAG-NO-GO
+
+This worker's first draft judged bar 2 met on an "operative
+definition" (one snapshot per runDays iteration) and therefore
+pilot GO — and on reflection that reading is WITHDRAWN. It was
+re-scoring: the prereg bar as written says "count ==
+result.days", three runs fail that count, and MEASUREMENT §14 plus
+this run's own task brief both bind pre-registered metrics (a miss
+is NO-GO, never re-scored mid-run; doubts go under metric review
+for the NEXT run). The iteration-based reading belongs in the
+metric-review proposal below, not in this run's verdict. Final
+pilot verdict, concurred: DIAG-NO-GO on bar 2 alone; bars 1, 3, 4,
+5, 6 pass as judged in the closeout note. All findings (tribute
+quantification, 9912 explanation, zero-feasibility stop) stand on
+verified data and do not need re-measurement — only the bar-2 leg
+needs the recorder/metric fix named in "Ranked next" #1.
+
+### Confirm band — STOPPED per the pilot gate (partial data kept)
+
+Because the pilot verdict is NO-GO, the prereg's pilot gate
+forbids a confirm band ("If the pilot fails its bars, STOP").
+This worker had started the confirm band (seeds 9921–9930) under
+its withdrawn GO reading and STOPPED it on adjudication: the
+leanlink confirm process was killed after seed 9927's file was
+safely written; the competent confirm had already been killed
+earlier for CPU contention after its 9921 file was written. The
+partial confirm data is committed here, explicitly labeled
+PARTIAL and NOT a complete confirm band — it is retained because
+it independently reproduces the pilot's two key patterns, not
+because it completes any bar:
+
+- Leanlink confirm, 7/10 seeds (9921–9927): national 3/7, table
+  4/7, wins 0/7, wave 5 0/7, village-lost 5/7. Haven-paid tribute
+  0 kcal on all 7; arrivals 154,257 kcal / 66 events; accord
+  gifts 45,125 kcal. The bar-2 −1 pattern reproduces on 9921
+  (160/161), 9924 (157/158), 9925 (124/125) and NOT on 9923
+  (159/159) or 9926 (151/151) — loss-day timing varies run to
+  run, which supports the closeout's loss-day mechanism (whether
+  the loss day's post-daily runs decides the count) rather than
+  a systematic recorder shortfall.
+- Competent confirm, 1/10 seeds (9921 only): survived 180d,
+  village rank, national 0, table 0, 44 deaths, all tribute
+  figures 0. Incomplete; no conclusion is drawn from one seed.
+- No confirm conclusion is claimed from partial data. A future
+  run, after the bar-2 fix, may run the full 9921–9930 band.
+
+### Merge disposition — HELD, rebase deliberately NOT done
+
+This worker's brief ordered a rebase onto current master
+(3dbfe5f76, fullseatgate-a) before its final commit so the
+coordinator could merge --ff-only. That step is DELIBERATELY NOT
+TAKEN: the branch carries a committed HELD flag ("No merge until
+adjudicated") and a DIAG-NO-GO verdict, and rebasing now would
+rewrite the history under adjudication (prereg 65478cb8c,
+instrument f0c743059, closeout b55af16a7) for a merge the
+verdict forbids. The coordinator adjudicates first (bar-2
+reading, confirm disposition, panel open item); if the arm is
+cleared, the rebase is a one-command step at that point
+(branch base 58744e365, master tip 3dbfe5f76, disjoint files
+per the brief — no conflict is expected, but none was tested by
+rebasing). End state of this adoption: work complete, branch
+HELD, NOT ready for merge.
+
+### Additional outputs from this adoption (committed here)
+
+- evidence/2026-10-30/sim-tributecost-a-corpus-confirm-leanlink/
+  (seeds 9921–9927, PARTIAL) + sim-tributecost-a-confirm-leanlink.log
+- evidence/2026-10-30/sim-tributecost-a-corpus-confirm-competent/
+  (seed 9921 only, PARTIAL) + sim-tributecost-a-confirm-competent.log
+- This addendum in evidence/2026-10-30/sim-tributecost-a.md.
+- Panels remain an open item (ranked next #2): not produced, not
+  fabricated, for the reason in the closeout note.
+
 ## Outputs
 
 - scripts/sweep-tributecost-a.js (recorder driver, incl. the
