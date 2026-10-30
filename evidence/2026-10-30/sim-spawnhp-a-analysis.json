@@ -1,0 +1,1918 @@
+{
+ "corpusOk": true,
+ "joinTotal": 2257,
+ "joinErrors": 0,
+ "allChannelJoinTotal": 2257,
+ "allChannelJoinErrors": 0,
+ "mDealtMismatches": 0,
+ "srChecked": 751,
+ "srPrefixViolations": 0,
+ "censusInfo": {
+  "75101": {
+   "present": true,
+   "snapshots": 115,
+   "sorted": true,
+   "lastDay": 115,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75102": {
+   "present": true,
+   "snapshots": 85,
+   "sorted": true,
+   "lastDay": 85,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75103": {
+   "present": true,
+   "snapshots": 90,
+   "sorted": true,
+   "lastDay": 90,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75104": {
+   "present": true,
+   "snapshots": 102,
+   "sorted": true,
+   "lastDay": 101,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75105": {
+   "present": true,
+   "snapshots": 165,
+   "sorted": true,
+   "lastDay": 165,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75106": {
+   "present": true,
+   "snapshots": 115,
+   "sorted": true,
+   "lastDay": 115,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75107": {
+   "present": true,
+   "snapshots": 114,
+   "sorted": true,
+   "lastDay": 114,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75108": {
+   "present": true,
+   "snapshots": 31,
+   "sorted": true,
+   "lastDay": 31,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75109": {
+   "present": true,
+   "snapshots": 180,
+   "sorted": true,
+   "lastDay": 180,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75110": {
+   "present": true,
+   "snapshots": 118,
+   "sorted": true,
+   "lastDay": 118,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75111": {
+   "present": true,
+   "snapshots": 99,
+   "sorted": true,
+   "lastDay": 99,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75112": {
+   "present": true,
+   "snapshots": 128,
+   "sorted": true,
+   "lastDay": 128,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75113": {
+   "present": true,
+   "snapshots": 149,
+   "sorted": true,
+   "lastDay": 149,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75114": {
+   "present": true,
+   "snapshots": 159,
+   "sorted": true,
+   "lastDay": 159,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75115": {
+   "present": true,
+   "snapshots": 180,
+   "sorted": true,
+   "lastDay": 180,
+   "within1": true,
+   "maxHpSeen": true
+  },
+  "75116": {
+   "present": true,
+   "snapshots": 180,
+   "sorted": true,
+   "lastDay": 180,
+   "within1": true,
+   "maxHpSeen": true
+  }
+ },
+ "censusOk": true,
+ "completeness": true,
+ "substrate": {
+  "75101": true,
+  "75102": true,
+  "75103": true,
+  "75104": true,
+  "75105": true,
+  "75106": true,
+  "75107": true,
+  "75108": true,
+  "75109": true,
+  "75110": true,
+  "75111": true,
+  "75112": true,
+  "75113": true,
+  "75114": true,
+  "75115": true,
+  "75116": true
+ },
+ "substrateOk": true,
+ "censusCounts": {
+  "wild": 16,
+  "raid": 4,
+  "other": 1,
+  "otherChannels": {
+   "other": 1
+  }
+ },
+ "wildN": 16,
+ "individuals": [
+  {
+   "seed": 75102,
+   "mid": "algorithm",
+   "chainN": 4,
+   "channel": "field",
+   "firstDay": 65,
+   "firstCaller": "aid",
+   "openingHp": 1000,
+   "floor": 1000,
+   "range": [
+    1000,
+    1200
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [
+    {
+     "day": 64,
+     "channel": "raid",
+     "mHpLeft": 986
+    }
+   ],
+   "earliestPreCensus": {
+    "day": 59,
+    "hp": 1000,
+    "maxHp": 1000,
+    "tile": "5,5"
+   },
+   "preCensusSightings": 8,
+   "provenance": "SPAWN-HP",
+   "provenanceEvidence": "census d59 hp==maxHp==1000 == floor, tile (5,5)",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75102,
+   "mid": "audit",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 74,
+   "firstCaller": "resolve",
+   "openingHp": 1066,
+   "floor": 1100,
+   "range": [
+    1100,
+    1300
+   ],
+   "ratio": 0.969,
+   "censored": false,
+   "priorMeetings": [
+    {
+     "day": 73,
+     "channel": "raid",
+     "mHpLeft": 1066
+    }
+   ],
+   "earliestPreCensus": {
+    "day": 74,
+    "hp": 1066,
+    "maxHp": 1100,
+    "tile": "4,4"
+   },
+   "preCensusSightings": 1,
+   "provenance": "WOUNDED-IN-CORPUS",
+   "provenanceEvidence": "prior s75102 audit d73 channel=raid closed 1066 == opening 1066",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75102,
+   "mid": "eulogy",
+   "chainN": 4,
+   "channel": "field",
+   "firstDay": 55,
+   "firstCaller": "resolve",
+   "openingHp": 900,
+   "floor": 900,
+   "range": [
+    900,
+    1100
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [],
+   "earliestPreCensus": null,
+   "preCensusSightings": 0,
+   "provenance": "AT-FLOOR-OR-ABOVE",
+   "provenanceEvidence": "opening 900 >= floor 900, no prior in-corpus meeting, no census proof of unwounded spawn",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75102,
+   "mid": "herald",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 74,
+   "firstCaller": "aid",
+   "openingHp": 700,
+   "floor": 700,
+   "range": [
+    700,
+    900
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 65,
+    "hp": 700,
+    "maxHp": 700,
+    "tile": "7,4"
+   },
+   "preCensusSightings": 10,
+   "provenance": "SPAWN-HP",
+   "provenanceEvidence": "census d65 hp==maxHp==700 == floor, tile (7,4)",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75102,
+   "mid": "reunion",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 79,
+   "firstCaller": "resolve",
+   "openingHp": 1200,
+   "floor": 1200,
+   "range": [
+    1200,
+    1400
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 53,
+    "hp": 1200,
+    "maxHp": 1200,
+    "tile": "5,5"
+   },
+   "preCensusSightings": 30,
+   "provenance": "SPAWN-HP",
+   "provenanceEvidence": "census d53 hp==maxHp==1200 == floor, tile (5,5)",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75110,
+   "mid": "reunion",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 57,
+   "firstCaller": "resolve",
+   "openingHp": 1200,
+   "floor": 1200,
+   "range": [
+    1200,
+    1400
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [],
+   "earliestPreCensus": null,
+   "preCensusSightings": 0,
+   "provenance": "AT-FLOOR-OR-ABOVE",
+   "provenanceEvidence": "opening 1200 >= floor 1200, no prior in-corpus meeting, no census proof of unwounded spawn",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75113,
+   "mid": "audit",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 145,
+   "firstCaller": "resolve",
+   "openingHp": 1100,
+   "floor": 1100,
+   "range": [
+    1100,
+    1300
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 144,
+    "hp": 1100,
+    "maxHp": 1100,
+    "tile": "4,3"
+   },
+   "preCensusSightings": 2,
+   "provenance": "SPAWN-HP",
+   "provenanceEvidence": "census d144 hp==maxHp==1100 == floor, tile (4,3)",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75114,
+   "mid": "audit",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 115,
+   "firstCaller": "resolve",
+   "openingHp": 1100,
+   "floor": 1100,
+   "range": [
+    1100,
+    1300
+   ],
+   "ratio": 1,
+   "censored": false,
+   "priorMeetings": [],
+   "earliestPreCensus": null,
+   "preCensusSightings": 0,
+   "provenance": "AT-FLOOR-OR-ABOVE",
+   "provenanceEvidence": "opening 1100 >= floor 1100, no prior in-corpus meeting, no census proof of unwounded spawn",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75116,
+   "mid": "audit",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 139,
+   "firstCaller": "resolve",
+   "openingHp": 825,
+   "floor": 1100,
+   "range": [
+    1100,
+    1300
+   ],
+   "ratio": 0.75,
+   "censored": true,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 133,
+    "hp": 825,
+    "maxHp": 1100,
+    "tile": "4,4"
+   },
+   "preCensusSightings": 7,
+   "provenance": "OFF-CORPUS-WOUNDED",
+   "provenanceEvidence": "earliest census d133 hp==825 < maxHp==floor 1100 (wounded before first sighting, channel unrecorded)",
+   "missingInstrument": null,
+   "breakReason": null
+  },
+  {
+   "seed": 75116,
+   "mid": "suburb",
+   "chainN": 1,
+   "channel": "field",
+   "firstDay": 140,
+   "firstCaller": "resolve",
+   "openingHp": 1300,
+   "floor": 1300,
+   "range": [
+    1300,
+    1500
+   ],
+   "ratio": 1,
+   "censored": true,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 121,
+    "hp": 1300,
+    "maxHp": 1300,
+    "tile": "4,2"
+   },
+   "preCensusSightings": 7,
+   "provenance": "SPAWN-HP",
+   "provenanceEvidence": "census d121 hp==maxHp==1300 == floor, tile (4,2)",
+   "missingInstrument": null,
+   "breakReason": null
+  }
+ ],
+ "perType": [
+  {
+   "mid": "algorithm",
+   "floor": 1000,
+   "range": [
+    1000,
+    1200
+   ],
+   "n": 1,
+   "min": 1000,
+   "max": 1000,
+   "mean": 1000,
+   "varianceClaim": "INSUFFICIENT-DATA"
+  },
+  {
+   "mid": "audit",
+   "floor": 1100,
+   "range": [
+    1100,
+    1300
+   ],
+   "n": 4,
+   "min": 825,
+   "max": 1100,
+   "mean": 1022.75,
+   "varianceClaim": "VARIANCE"
+  },
+  {
+   "mid": "eulogy",
+   "floor": 900,
+   "range": [
+    900,
+    1100
+   ],
+   "n": 1,
+   "min": 900,
+   "max": 900,
+   "mean": 900,
+   "varianceClaim": "INSUFFICIENT-DATA"
+  },
+  {
+   "mid": "herald",
+   "floor": 700,
+   "range": [
+    700,
+    900
+   ],
+   "n": 1,
+   "min": 700,
+   "max": 700,
+   "mean": 700,
+   "varianceClaim": "INSUFFICIENT-DATA"
+  },
+  {
+   "mid": "reunion",
+   "floor": 1200,
+   "range": [
+    1200,
+    1400
+   ],
+   "n": 2,
+   "min": 1200,
+   "max": 1200,
+   "mean": 1200,
+   "varianceClaim": "INSUFFICIENT-DATA"
+  },
+  {
+   "mid": "suburb",
+   "floor": 1300,
+   "range": [
+    1300,
+    1500
+   ],
+   "n": 1,
+   "min": 1300,
+   "max": 1300,
+   "mean": 1300,
+   "varianceClaim": "INSUFFICIENT-DATA"
+  }
+ ],
+ "belowFloorN": 2,
+ "belowFloor": [
+  {
+   "seed": 75102,
+   "mid": "audit",
+   "openingHp": 1066,
+   "floor": 1100,
+   "ratio": 0.969,
+   "provenance": "WOUNDED-IN-CORPUS"
+  },
+  {
+   "seed": 75116,
+   "mid": "audit",
+   "openingHp": 825,
+   "floor": 1100,
+   "ratio": 0.75,
+   "provenance": "OFF-CORPUS-WOUNDED"
+  }
+ ],
+ "unmetStreaks": [
+  {
+   "seed": 75102,
+   "mid": "strike",
+   "firstDay": 66,
+   "lastDay": 85,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "1,8",
+    "2,8",
+    "3,6",
+    "3,7",
+    "5,8",
+    "6,8",
+    "5,8",
+    "6,8",
+    "6,7",
+    "5,7",
+    "6,8",
+    "6,6",
+    "6,4"
+   ],
+   "days": 20,
+   "met": false
+  },
+  {
+   "seed": 75102,
+   "mid": "influencer",
+   "firstDay": 82,
+   "lastDay": 85,
+   "hp": 850,
+   "maxHp": 850,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 4,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "strike",
+   "firstDay": 149,
+   "lastDay": 149,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "5,3"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "strike",
+   "firstDay": 150,
+   "lastDay": 156,
+   "hp": 750,
+   "maxHp": 1000,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 7,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "strike",
+   "firstDay": 157,
+   "lastDay": 165,
+   "hp": 500,
+   "maxHp": 1000,
+   "tiles": [
+    "4,4",
+    "3,4"
+   ],
+   "days": 9,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "reunion",
+   "firstDay": 163,
+   "lastDay": 165,
+   "hp": 1200,
+   "maxHp": 1200,
+   "tiles": [
+    "5,4",
+    "5,3"
+   ],
+   "days": 3,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "suburb",
+   "firstDay": 117,
+   "lastDay": 122,
+   "hp": 1300,
+   "maxHp": 1300,
+   "tiles": [
+    "4,3"
+   ],
+   "days": 6,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "suburb",
+   "firstDay": 123,
+   "lastDay": 127,
+   "hp": 975,
+   "maxHp": 1300,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 5,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "suburb",
+   "firstDay": 128,
+   "lastDay": 128,
+   "hp": 872,
+   "maxHp": 1300,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "suburb",
+   "firstDay": 149,
+   "lastDay": 149,
+   "hp": 1300,
+   "maxHp": 1300,
+   "tiles": [
+    "3,4"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "suburb",
+   "firstDay": 150,
+   "lastDay": 165,
+   "hp": 975,
+   "maxHp": 1300,
+   "tiles": [
+    "4,4",
+    "5,4",
+    "6,4",
+    "6,5",
+    "8,5",
+    "8,4"
+   ],
+   "days": 16,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "eater",
+   "firstDay": 133,
+   "lastDay": 149,
+   "hp": 950,
+   "maxHp": 950,
+   "tiles": [
+    "3,5",
+    "2,5",
+    "1,6",
+    "2,6",
+    "1,6",
+    "2,6",
+    "3,6"
+   ],
+   "days": 17,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "eater",
+   "firstDay": 150,
+   "lastDay": 156,
+   "hp": 712,
+   "maxHp": 950,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 7,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "eater",
+   "firstDay": 157,
+   "lastDay": 165,
+   "hp": 474,
+   "maxHp": 950,
+   "tiles": [
+    "4,4",
+    "4,6",
+    "4,7"
+   ],
+   "days": 9,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "herald",
+   "firstDay": 129,
+   "lastDay": 135,
+   "hp": 700,
+   "maxHp": 700,
+   "tiles": [
+    "8,4",
+    "8,5",
+    "7,6",
+    "7,5"
+   ],
+   "days": 7,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "herald",
+   "firstDay": 136,
+   "lastDay": 149,
+   "hp": 525,
+   "maxHp": 700,
+   "tiles": [
+    "4,4",
+    "4,3",
+    "3,4",
+    "2,4"
+   ],
+   "days": 14,
+   "met": false
+  },
+  {
+   "seed": 75105,
+   "mid": "herald",
+   "firstDay": 150,
+   "lastDay": 165,
+   "hp": 350,
+   "maxHp": 700,
+   "tiles": [
+    "4,4",
+    "4,2",
+    "3,2",
+    "3,1",
+    "4,1",
+    "5,1",
+    "4,1"
+   ],
+   "days": 16,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "strike",
+   "firstDay": 79,
+   "lastDay": 79,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "4,2"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "strike",
+   "firstDay": 80,
+   "lastDay": 81,
+   "hp": 750,
+   "maxHp": 1000,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 2,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "influencer",
+   "firstDay": 97,
+   "lastDay": 118,
+   "hp": 850,
+   "maxHp": 850,
+   "tiles": [
+    "4,5",
+    "5,5",
+    "6,5",
+    "6,7",
+    "7,7",
+    "6,7",
+    "7,7",
+    "8,7",
+    "8,8",
+    "7,8",
+    "6,8"
+   ],
+   "days": 22,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "audit",
+   "firstDay": 100,
+   "lastDay": 104,
+   "hp": 1100,
+   "maxHp": 1100,
+   "tiles": [
+    "5,4",
+    "6,4",
+    "5,3"
+   ],
+   "days": 5,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "audit",
+   "firstDay": 105,
+   "lastDay": 110,
+   "hp": 825,
+   "maxHp": 1100,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 6,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "eulogy",
+   "firstDay": 63,
+   "lastDay": 67,
+   "hp": 900,
+   "maxHp": 900,
+   "tiles": [
+    "5,4"
+   ],
+   "days": 5,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "eulogy",
+   "firstDay": 68,
+   "lastDay": 76,
+   "hp": 675,
+   "maxHp": 900,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 9,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "algorithm",
+   "firstDay": 73,
+   "lastDay": 79,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "5,4",
+    "6,4",
+    "7,4",
+    "6,4",
+    "6,5"
+   ],
+   "days": 7,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "algorithm",
+   "firstDay": 80,
+   "lastDay": 80,
+   "hp": 750,
+   "maxHp": 1000,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "algorithm",
+   "firstDay": 105,
+   "lastDay": 118,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "2,4",
+    "2,3",
+    "1,3",
+    "1,2",
+    "2,2",
+    "0,2",
+    "0,1",
+    "1,1",
+    "1,2",
+    "2,2"
+   ],
+   "days": 14,
+   "met": false
+  },
+  {
+   "seed": 75110,
+   "mid": "herald",
+   "firstDay": 87,
+   "lastDay": 118,
+   "hp": 700,
+   "maxHp": 700,
+   "tiles": [
+    "7,4",
+    "6,4",
+    "6,5",
+    "5,4",
+    "6,5",
+    "6,1",
+    "5,1",
+    "5,0",
+    "5,1",
+    "5,0",
+    "5,1",
+    "5,2",
+    "6,1",
+    "6,2",
+    "6,3",
+    "6,2",
+    "5,1",
+    "4,1",
+    "3,1",
+    "2,0"
+   ],
+   "days": 32,
+   "met": false
+  },
+  {
+   "seed": 75113,
+   "mid": "strike",
+   "firstDay": 132,
+   "lastDay": 149,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "3,4",
+    "3,3",
+    "4,3",
+    "4,2",
+    "3,2",
+    "3,3",
+    "4,3",
+    "5,3",
+    "5,4",
+    "6,4",
+    "6,5"
+   ],
+   "days": 18,
+   "met": false
+  },
+  {
+   "seed": 75113,
+   "mid": "algorithm",
+   "firstDay": 143,
+   "lastDay": 149,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "4,5",
+    "3,6",
+    "3,5",
+    "3,6",
+    "3,5"
+   ],
+   "days": 7,
+   "met": false
+  },
+  {
+   "seed": 75113,
+   "mid": "herald",
+   "firstDay": 122,
+   "lastDay": 149,
+   "hp": 700,
+   "maxHp": 700,
+   "tiles": [
+    "8,4",
+    "7,4",
+    "7,5",
+    "7,6",
+    "7,7",
+    "8,7",
+    "8,6",
+    "7,8",
+    "6,8",
+    "6,6",
+    "6,5",
+    "6,4",
+    "7,6",
+    "7,7",
+    "7,8",
+    "6,7"
+   ],
+   "days": 28,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "reunion",
+   "firstDay": 118,
+   "lastDay": 120,
+   "hp": 1200,
+   "maxHp": 1200,
+   "tiles": [
+    "5,4",
+    "6,4"
+   ],
+   "days": 3,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "reunion",
+   "firstDay": 121,
+   "lastDay": 125,
+   "hp": 900,
+   "maxHp": 1200,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 5,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "reunion",
+   "firstDay": 126,
+   "lastDay": 126,
+   "hp": 745,
+   "maxHp": 1200,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "eulogy",
+   "firstDay": 129,
+   "lastDay": 159,
+   "hp": 900,
+   "maxHp": 900,
+   "tiles": [
+    "4,6",
+    "3,6",
+    "4,6",
+    "4,5",
+    "2,5",
+    "1,5",
+    "1,4",
+    "1,2",
+    "0,2",
+    "1,2",
+    "2,3"
+   ],
+   "days": 31,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "algorithm",
+   "firstDay": 156,
+   "lastDay": 157,
+   "hp": 1000,
+   "maxHp": 1000,
+   "tiles": [
+    "5,5",
+    "4,5"
+   ],
+   "days": 2,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "algorithm",
+   "firstDay": 158,
+   "lastDay": 158,
+   "hp": 750,
+   "maxHp": 1000,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "algorithm",
+   "firstDay": 159,
+   "lastDay": 159,
+   "hp": 624,
+   "maxHp": 1000,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75114,
+   "mid": "herald",
+   "firstDay": 144,
+   "lastDay": 159,
+   "hp": 700,
+   "maxHp": 700,
+   "tiles": [
+    "8,4",
+    "8,5",
+    "8,6",
+    "7,6",
+    "7,5",
+    "7,4",
+    "7,6",
+    "6,6",
+    "5,6"
+   ],
+   "days": 16,
+   "met": false
+  },
+  {
+   "seed": 75116,
+   "mid": "reunion",
+   "firstDay": 170,
+   "lastDay": 180,
+   "hp": 1200,
+   "maxHp": 1200,
+   "tiles": [
+    "5,4",
+    "6,4",
+    "5,4",
+    "4,5",
+    "5,6",
+    "5,5",
+    "4,5",
+    "5,6",
+    "4,6"
+   ],
+   "days": 11,
+   "met": false
+  },
+  {
+   "seed": 75116,
+   "mid": "eulogy",
+   "firstDay": 158,
+   "lastDay": 158,
+   "hp": 900,
+   "maxHp": 900,
+   "tiles": [
+    "3,5"
+   ],
+   "days": 1,
+   "met": false
+  },
+  {
+   "seed": 75116,
+   "mid": "eulogy",
+   "firstDay": 159,
+   "lastDay": 161,
+   "hp": 675,
+   "maxHp": 900,
+   "tiles": [
+    "4,4"
+   ],
+   "days": 3,
+   "met": false
+  },
+  {
+   "seed": 75116,
+   "mid": "eulogy",
+   "firstDay": 178,
+   "lastDay": 180,
+   "hp": 900,
+   "maxHp": 900,
+   "tiles": [
+    "4,3"
+   ],
+   "days": 3,
+   "met": false
+  },
+  {
+   "seed": 75116,
+   "mid": "herald",
+   "firstDay": 144,
+   "lastDay": 180,
+   "hp": 700,
+   "maxHp": 700,
+   "tiles": [
+    "7,4",
+    "7,3",
+    "8,3",
+    "8,2",
+    "8,3",
+    "7,3",
+    "7,2",
+    "7,3",
+    "7,2",
+    "7,3",
+    "7,4",
+    "8,4",
+    "8,6",
+    "7,7",
+    "7,8",
+    "8,8",
+    "8,7",
+    "8,6",
+    "8,5"
+   ],
+   "days": 37,
+   "met": false
+  }
+ ],
+ "allStreaksN": 70,
+ "collisions": [
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 77,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 78,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 79,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 80,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 81,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 82,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 83,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 84,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "reunion",
+   "day": 85,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 65,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 66,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 67,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 68,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 69,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 70,
+   "count": 2
+  },
+  {
+   "seed": 75102,
+   "id": "algorithm",
+   "day": 71,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 108,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 109,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 110,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 111,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 112,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 113,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 114,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 115,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 116,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 117,
+   "count": 2
+  },
+  {
+   "seed": 75110,
+   "id": "influencer",
+   "day": 118,
+   "count": 2
+  }
+ ],
+ "namedCases": [
+  {
+   "seed": 75113,
+   "mid": "eulogy",
+   "w4meetOpening": 675,
+   "w4meetChannel": "raid",
+   "w4meetDay": 136,
+   "reproduced": true,
+   "channel": "raid",
+   "day": 136,
+   "caller": "resolve",
+   "openingHp": 675,
+   "floor": 900,
+   "ratio": 0.75,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 112,
+    "hp": 900,
+    "maxHp": 900,
+    "tile": "3,4"
+   },
+   "preCensusSightings": 23,
+   "verdict": "OFF-CORPUS-WOUNDED",
+   "evidence": "census d112 hp=900 maxHp=900 > opening 675 (wounded between sighting and meeting, channel unrecorded)",
+   "missingInstrument": null
+  },
+  {
+   "seed": 75116,
+   "mid": "audit",
+   "w4meetOpening": 825,
+   "w4meetChannel": "field",
+   "w4meetDay": 139,
+   "reproduced": true,
+   "channel": "field",
+   "day": 139,
+   "caller": "resolve",
+   "openingHp": 825,
+   "floor": 1100,
+   "ratio": 0.75,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 133,
+    "hp": 825,
+    "maxHp": 1100,
+    "tile": "4,4"
+   },
+   "preCensusSightings": 7,
+   "verdict": "OFF-CORPUS-WOUNDED",
+   "evidence": "earliest census d133 hp==825 < maxHp==floor 1100 (wounded before first sighting, channel unrecorded)",
+   "missingInstrument": null
+  },
+  {
+   "seed": 75113,
+   "mid": "influencer",
+   "w4meetOpening": 637,
+   "w4meetChannel": "raid",
+   "w4meetDay": 127,
+   "reproduced": true,
+   "channel": "raid",
+   "day": 127,
+   "caller": "resolve",
+   "openingHp": 637,
+   "floor": 850,
+   "ratio": 0.749,
+   "priorMeetings": [],
+   "earliestPreCensus": {
+    "day": 126,
+    "hp": 850,
+    "maxHp": 850,
+    "tile": "5,4"
+   },
+   "preCensusSightings": 2,
+   "verdict": "OFF-CORPUS-WOUNDED",
+   "evidence": "census d126 hp=850 maxHp=850 > opening 637 (wounded between sighting and meeting, channel unrecorded)",
+   "missingInstrument": null
+  }
+ ],
+ "wall": {
+  "won": 9,
+  "wonFull": 0,
+  "nationalEver": 13,
+  "nationalFinal": 11,
+  "table": 12,
+  "entered": 9,
+  "wave1reach": 16,
+  "wave2reach": 16,
+  "wave3reach": 14,
+  "wave4reach": 9,
+  "wave5reach": 0,
+  "medianDays": 118,
+  "daysSorted": [
+   31,
+   86,
+   90,
+   99,
+   102,
+   114,
+   115,
+   115,
+   118,
+   128,
+   150,
+   160,
+   165,
+   180,
+   180,
+   180
+  ],
+  "deaths": 527,
+  "deathsByCause": {
+   "villager:villager combat": 140,
+   "player:the wild": 63,
+   "villager:expedition": 42,
+   "villager:combat": 219,
+   "player:the arena": 5,
+   "villager:alien": 1,
+   "player:the night": 1,
+   "villager:sickness": 7,
+   "villager:ambush": 7,
+   "villager:monster": 18,
+   "villager:a red moon rising between the trees, breathing": 1,
+   "villager:Big Ugly": 1,
+   "villager:a wound that wouldn't close": 4,
+   "player:a stranger": 3,
+   "player:contest": 5,
+   "villager:Highbeam Deer": 1,
+   "villager:starvation": 2,
+   "player:starvation": 1,
+   "player:dehydration": 2,
+   "villager:Loud-Eyes": 1,
+   "villager:Hushpuppy": 1,
+   "player:sickness": 1,
+   "villager:Choir Toad": 1
+  }
+ },
+ "wildDetail": [
+  {
+   "seed": 75102,
+   "day": 55,
+   "part": 219,
+   "mid": "eulogy",
+   "caller": "resolve",
+   "leaderVid": "aria_thompson",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 2,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 900,
+   "mHpLeft": 877,
+   "mDealt": 23,
+   "allyDealt": 0,
+   "leaderDealt": 23,
+   "vTaken": 75,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 56,
+   "part": 222,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 877,
+   "mHpLeft": 853,
+   "mDealt": 24,
+   "allyDealt": 6,
+   "leaderDealt": 18,
+   "vTaken": 88,
+   "tileCount": 3,
+   "calledHelp": true,
+   "joinedAllyVid": "gen_ucx78a7"
+  },
+  {
+   "seed": 75102,
+   "day": 57,
+   "part": 227,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "aria_thompson",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 853,
+   "mHpLeft": 853,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 82,
+   "tileCount": 4,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 59,
+   "part": 234,
+   "mid": "eulogy",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 853,
+   "mHpLeft": 853,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 30,
+   "tileCount": 1,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 65,
+   "part": 258,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 1000,
+   "mHpLeft": 971,
+   "mDealt": 29,
+   "allyDealt": 5,
+   "leaderDealt": 24,
+   "vTaken": 96,
+   "tileCount": 1,
+   "calledHelp": true,
+   "joinedAllyVid": "stan_kowalski"
+  },
+  {
+   "seed": 75102,
+   "day": 67,
+   "part": 267,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "daniyar_askarov",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 971,
+   "mHpLeft": 971,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 66,
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 70,
+   "part": 279,
+   "mid": "algorithm",
+   "caller": "aid",
+   "leaderVid": "dmitri_sokolov",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 1,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 971,
+   "mHpLeft": 959,
+   "mDealt": 12,
+   "allyDealt": 0,
+   "leaderDealt": 12,
+   "vTaken": 100,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 71,
+   "part": 283,
+   "mid": "algorithm",
+   "caller": "resolve",
+   "leaderVid": "ursula_weber",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 2,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 959,
+   "mHpLeft": 959,
+   "mDealt": 0,
+   "allyDealt": 0,
+   "leaderDealt": 0,
+   "vTaken": 161,
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 74,
+   "part": 295,
+   "mid": "herald",
+   "caller": "aid",
+   "leaderVid": "app_mgpspifd159",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 700,
+   "mHpLeft": 679,
+   "mDealt": 21,
+   "allyDealt": 0,
+   "leaderDealt": 21,
+   "vTaken": 15,
+   "tileCount": 4,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75102,
+   "day": 74,
+   "part": 295,
+   "mid": "audit",
+   "caller": "resolve",
+   "leaderVid": "mateo_alvarez",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 3,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 1066,
+   "mHpLeft": 1008,
+   "mDealt": 58,
+   "allyDealt": 4,
+   "leaderDealt": 54,
+   "vTaken": 100,
+   "tileCount": 4,
+   "calledHelp": true,
+   "joinedAllyVid": "gen_ucx78a7"
+  },
+  {
+   "seed": 75102,
+   "day": 79,
+   "part": 315,
+   "mid": "reunion",
+   "caller": "resolve",
+   "leaderVid": "app_mgpspiho509",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 1200,
+   "mHpLeft": 1185,
+   "mDealt": 15,
+   "allyDealt": 0,
+   "leaderDealt": 15,
+   "vTaken": 70,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75110,
+   "day": 57,
+   "part": 227,
+   "mid": "reunion",
+   "caller": "resolve",
+   "leaderVid": "gen_j6lp9a1",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 2,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 1200,
+   "mHpLeft": 1188,
+   "mDealt": 12,
+   "allyDealt": 0,
+   "leaderDealt": 12,
+   "vTaken": 92,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75113,
+   "day": 145,
+   "part": 579,
+   "mid": "audit",
+   "caller": "resolve",
+   "leaderVid": "visjoin_139",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "branch": "FLOOR-BRANCH",
+   "mHpStart": 1100,
+   "mHpLeft": 1086,
+   "mDealt": 14,
+   "allyDealt": 0,
+   "leaderDealt": 14,
+   "vTaken": 62,
+   "tileCount": 0,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  },
+  {
+   "seed": 75114,
+   "day": 115,
+   "part": 459,
+   "mid": "audit",
+   "caller": "resolve",
+   "leaderVid": "nora_wilson",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 1100,
+   "mHpLeft": 1042,
+   "mDealt": 58,
+   "allyDealt": 6,
+   "leaderDealt": 52,
+   "vTaken": 56,
+   "tileCount": 1,
+   "calledHelp": true,
+   "joinedAllyVid": "gen_pyfzhzv"
+  },
+  {
+   "seed": 75116,
+   "day": 139,
+   "part": 555,
+   "mid": "audit",
+   "caller": "resolve",
+   "leaderVid": "miguel_santos",
+   "scholarLed": false,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "branch": "HOPELESS-BRANCH",
+   "mHpStart": 825,
+   "mHpLeft": 785,
+   "mDealt": 40,
+   "allyDealt": 3,
+   "leaderDealt": 37,
+   "vTaken": 99,
+   "tileCount": 4,
+   "calledHelp": true,
+   "joinedAllyVid": "gen_1whf94g"
+  },
+  {
+   "seed": 75116,
+   "day": 140,
+   "part": 559,
+   "mid": "suburb",
+   "caller": "resolve",
+   "leaderVid": "miguel_santos",
+   "scholarLed": false,
+   "outcome": "vDie",
+   "rounds": 1,
+   "branch": "PARTY-DEATH",
+   "mHpStart": 1300,
+   "mHpLeft": 1285,
+   "mDealt": 15,
+   "allyDealt": 0,
+   "leaderDealt": 15,
+   "vTaken": 43,
+   "tileCount": 2,
+   "calledHelp": false,
+   "joinedAllyVid": null
+  }
+ ]
+}
