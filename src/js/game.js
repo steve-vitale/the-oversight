@@ -33188,7 +33188,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // WATER-SPAWN (Steve 2026-10-06): the wanderer paces the treeline
       // tile-to-tile. A sessile lure predator (waterAffinity 'in') can't do
       // that — it never leaves its pool. Excluded from the roaming cast.
-      const pool = this.data.monsters.filter(m => (m.wave || 1) <= wave && m.waterAffinity !== 'in');
+      // TITAN EXCLUSION (sim-titanexcl-a 2026-10-30, backlog #1550):
+      // titans arrive by omen only (titans.js wraps monsterWavePool to
+      // filter them), but this cast filtered data.monsters directly, so
+      // the Herald (wave 4) and Finale/Nielsen (wave 5) leaked into
+      // wanderer casts and feast draws — and a refused cast-sourced
+      // Herald face survives as a pending encounter, re-facing the same
+      // day. The titan set is every titans.json key (minus '_' entries)
+      // plus every def's .monster value (the_network's monster is
+      // network_heart), read from this.data.titans inline so the fix
+      // does not depend on titans.js load order or Game.isTitan.
+      // Parity fix only — NOT a gating change: monsterWavePool, the
+      // titan gate, and the muster verbs are untouched.
+      const titanIds = {};
+      try {
+        const tdefs = (this.data && this.data.titans) || {};
+        Object.keys(tdefs).forEach(k => {
+          if (k.charAt(0) === '_') return;
+          titanIds[k] = true;
+          if (tdefs[k] && tdefs[k].monster) titanIds[tdefs[k].monster] = true;
+        });
+      } catch (e) {}
+      const pool = this.data.monsters.filter(m => (m.wave || 1) <= wave && m.waterAffinity !== 'in' && !titanIds[m.id]);
       if (!pool.length) return 'hummice'; // fallback
       const targetWave = this.spawnWaveTarget(pool);
       const candidates = pool.filter(m => (m.wave || 1) === targetWave);
