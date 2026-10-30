@@ -414,10 +414,14 @@ the algorithm — not re-describe them.
   (46 checks, 0 fails); determinism DETERMINISM-PASS; sense read
   16/16 logs (SENSE-PASS by reading).
 - Sibling loop B moved local master under this branch during the run
-  (master eef5d6fa6 vs branch base 561bbbd86; the delta is one new
-  policy file + evidence, zero src/js). Branch rebased onto current
-  master at the end per assignment; proof re-run after rebase (see
-  report). No live verification, no push, no bump: this arm reports
+  (branch base 561bbbd86; master moved twice, finally to 6025451ac;
+  the total delta is new policy/evidence files, zero src/js lines).
+  Branch rebased onto current master at the end per assignment (first
+  attempt stalled on a duplicated todo entry — aborted cleanly, original
+  tip verified intact, second attempt with GIT_SEQUENCE_EDITOR=true
+  rebased 4/4 cleanly); proof re-run after rebase: fixtures 46/46,
+  analyzer output identical, determinism re-run of 75102 byte-identical.
+  No live verification, no push, no bump: this arm reports
   "branch ready for coordinator merge, pending ship" per assignment.
   The batch ship job owns pushes.
 
