@@ -46,6 +46,20 @@ function censusInfo(census, rowDays) {
 function medianOf(arr) { if (!arr.length) return 0; const s = arr.slice().sort((a, b) => a - b); return s[Math.floor(s.length / 2)]; }
 function bump(m, k) { m[k] = (m[k] || 0) + 1; }
 function stripScholarmelt(row) { const c = JSON.parse(JSON.stringify(row)); delete c.scholarmelt; return c; }
+// normalizeWorktreePaths(s): the removal recorder's stack frames embed
+// the ABSOLUTE worktree path of the sweep process, so a corpus written
+// from worktree sim-draftflag-a and a corpus written from worktree
+// sim-dissolvecause-a differ in exactly that slug (same file, same
+// line — verified on the pilot band). That is a recording-environment
+// artifact, not game data: normalizing the slug is what makes the
+// substrate comparison test the game rather than the directory name.
+// Both raw and normalized results are reported; the leg judges the
+// normalized one, with the raw one disclosed.
+function normalizeWorktreePaths(s) {
+  return String(s)
+    .replace(/\/home\/hatch\/workspace\/worktrees\/[^\/\s)"']+/g, '<worktree>')
+    .replace(/\/home\/hatch\/workspace\/the-scattering/g, '<worktree>');
+}
 
 function analyze(dir, seeds, draftflagDir) {
   draftflagDir = draftflagDir || DRAFTFLAG;
@@ -69,7 +83,8 @@ function analyze(dir, seeds, draftflagDir) {
   const withinDeltas = []; // start-post rows only: exact within-fight HP cost
   const betweenDeltasExact = []; // pairs whose EARLIER row is start-post (exact anchor)
   let betweenPairsBound = 0;
-  const substrate = { perSeedRow: {}, perSeedCensus: {}, allRows: true, allCensus: true };
+  const substrate = { perSeedRow: {}, perSeedRowRaw: {}, perSeedCensus: {},
+    allRows: true, allRowsRaw: true, allCensus: true };
   const wall = { won: 0, nationalEver: 0, nationalFinal: 0, tableReached: 0, tableEntered: 0,
     waveReach: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, days: [], deaths: 0 };
   for (const seed of seeds) {
@@ -86,9 +101,11 @@ function analyze(dir, seeds, draftflagDir) {
       const freshStripped = JSON.stringify(stripScholarmelt(row), null, 1) + '\n';
       const dfRow = JSON.parse(fs.readFileSync(path.join(draftflagDir, `s${seed}-fresh.json`), 'utf8'));
       const dfStripped = JSON.stringify(stripScholarmelt(dfRow), null, 1) + '\n';
-      substrate.perSeedRow[seed] = (freshStripped === dfStripped);
-    } catch (e) { substrate.perSeedRow[seed] = false; }
+      substrate.perSeedRowRaw[seed] = (freshStripped === dfStripped);
+      substrate.perSeedRow[seed] = (normalizeWorktreePaths(freshStripped) === normalizeWorktreePaths(dfStripped));
+    } catch (e) { substrate.perSeedRow[seed] = false; substrate.perSeedRowRaw[seed] = false; }
     if (!substrate.perSeedRow[seed]) substrate.allRows = false;
+    if (!substrate.perSeedRowRaw[seed]) substrate.allRowsRaw = false;
     try {
       const a = fs.readFileSync(path.join(dir, `census-s${seed}.json`));
       const b = fs.readFileSync(path.join(draftflagDir, `census-s${seed}.json`));
@@ -213,8 +230,9 @@ function analyze(dir, seeds, draftflagDir) {
     withinDeltas, withinSummary,
     betweenDeltasExact, betweenSummary, betweenPairsBound,
     dissolvedRows,
-    substrate: { perSeedRow: substrate.perSeedRow, perSeedCensus: substrate.perSeedCensus,
-      allRows: substrate.allRows, allCensus: substrate.allCensus,
+    substrate: { perSeedRow: substrate.perSeedRow, perSeedRowRaw: substrate.perSeedRowRaw,
+      perSeedCensus: substrate.perSeedCensus,
+      allRows: substrate.allRows, allRowsRaw: substrate.allRowsRaw, allCensus: substrate.allCensus,
       all: substrate.allRows && substrate.allCensus },
     wall };
   return result;
@@ -234,7 +252,7 @@ function main(argv) {
   console.log(`SPAWNENDED: total=${res.spawnEnded.total} causes=${JSON.stringify(res.spawnEnded.causeCounts)} barrier=${res.spawnEnded.barrierStamped}`);
   console.log(`WITHIN (exact, start-post only): ${JSON.stringify(res.withinSummary)}`);
   console.log(`BETWEEN (exact-anchor pairs): ${JSON.stringify(res.betweenSummary)} boundPairs=${res.betweenPairsBound}`);
-  console.log(`SUBSTRATE: all=${res.substrate.all} rows=${res.substrate.allRows} census=${res.substrate.allCensus}`);
+  console.log(`SUBSTRATE: all=${res.substrate.all} rows=${res.substrate.allRows} rowsRaw=${res.substrate.allRowsRaw} census=${res.substrate.allCensus}`);
   console.log(`WALL: won=${res.wall.won} natEver=${res.wall.nationalEver} natFinal=${res.wall.nationalFinal} table=${res.wall.tableReached} entered=${res.wall.tableEntered} wave=${JSON.stringify(res.wall.waveReach)} median=${res.wall.medianDays} deaths=${res.wall.deaths}`);
   if (args.sense) {
     const bySeedDay = {};
