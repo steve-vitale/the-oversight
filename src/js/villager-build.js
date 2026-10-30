@@ -1064,12 +1064,38 @@
       } catch (e) { warn('villagerBuildDay', e); }
     },
 
+    // noteNpcHideHandled(vid): the NPC half of the hide-handling beat
+    // (gapscomp-hide 2026-10-30). The player's beat (corpses.js
+    // noteHideHandled) teaches hide_armor L1 for HANDLING hide — the shape
+    // suggests itself from the material. A villager who brings hide home
+    // to the stash handled it the same way, so the stash inflow (storage.js
+    // npcBatchTurn wrap) records them here, in the craft beat's own level
+    // map (avCraft): L1, never lowering an earned L2. This is hide-only:
+    // bark's discovery route is seeing a finished cuirass (wearing / the
+    // old-cuirass beat), not handling bark — the asymmetry is the canon
+    // one, extended to NPCs, not a second bark seed. Returns true when the
+    // record is newly set, false when already known. Never throws.
+    noteNpcHideHandled(vid) {
+      try {
+        if (!vid || vid === this.villagerId) return false;
+        const v = this.state.village || {};
+        v.avCraft = v.avCraft || {};
+        const lv = v.avCraft[vid] = v.avCraft[vid] || {};
+        if ((lv.hide_armor || 0) >= 1) return false;
+        lv.hide_armor = 1;
+        return true;
+      } catch (e) { return false; }
+    },
+
     // villagerArmorCraftDay(): NPC armor-craft beats (armorvillage 2026-10-23,
     // design calls #4-6). A villager at home who demonstrably knows an armor
     // recipe spends downtime sewing. KNOWLEDGE = demonstrated by wearing:
     // wearing bark_armor means bark_armor L1; wearing hide_armor means
     // hide_armor L1 (no new knowledge system — "if you don't know, it doesn't
-    // show", and wearing it IS the showing). Materials come from the communal
+    // show", and wearing it IS the showing). HIDE-HANDLED (gapscomp-hide
+    // 2026-10-30): handling hide also counts, hide-only — a villager the
+    // stash inflow recorded via noteNpcHideHandled knows hide_armor L1
+    // (the NPC analogue of the player's hide-handling beat). Materials come from the communal
     // materials pile (bark/vine/hide already in MAT_DEFS; the
     // whittle-from-the-woodpile precedent covers communal-materials to
     // personal-gear). Odds mirror the player's craft() exactly: L1 35% blind
@@ -1108,11 +1134,15 @@
             if ((v.avCraftCd[vid] || -99) > day - 3) continue; // ≤1 attempt / 3d
             const p = this.getPerson ? this.getPerson(vid) : null;
             if (!p) continue;
-            // knowledge: demonstrated by wearing
+            // knowledge: demonstrated by wearing, plus hide handled
+            // (gapscomp-hide: noteNpcHideHandled records a villager who
+            // brought hide home — handling the material teaches its shape,
+            // the NPC analogue of the player's hide-handling beat).
             const wornIds = new Set(Object.values(p.equipped || {}).map(e => e && e.itemId).filter(Boolean));
             const known = [];
             if (wornIds.has('bark_armor')) known.push('bark_armor');
             if (wornIds.has('hide_armor')) known.push('hide_armor');
+            if (!known.includes('hide_armor') && ((v.avCraft[vid] || {}).hide_armor)) known.push('hide_armor');
             if (!known.length) continue;
             const lv = v.avCraft[vid] = v.avCraft[vid] || {};
             // pick the best-known recipe with materials on hand

@@ -1346,6 +1346,13 @@
         const n = 1 + Math.floor(Math.random() * 3);
         st.materials[mat] = (st.materials[mat] || 0) + n;
         this.stashLog('give', MAT_DEFS[mat].name, n, giver);
+        // HIDE-HANDLED (gapscomp-hide 2026-10-30): the giver carried this
+        // hide home — handling the material teaches hide_armor L1, the NPC
+        // analogue of the player's hide-handling beat. Without this record
+        // the NPC craft beat could never know hide: its only knowledge
+        // source was wearing a piece nobody had ever made. Guarded so a
+        // recording failure can never break the inflow wrap.
+        try { if (mat === 'hide' && this.noteNpcHideHandled) this.noteNpcHideHandled(giver); } catch (e) {}
         if (Math.random() < 0.5) {
           // firstRef: "A left 2 branches..." reads as a bug; the descriptor
           // ("the woman in her 30s") lets the player recognize the giver.
