@@ -1,0 +1,942 @@
+{
+ "seeds": [
+  75201,
+  75202,
+  75203,
+  75204,
+  75205,
+  75206,
+  75207,
+  75208
+ ],
+ "confirm": false,
+ "primaryOff": [
+  {
+   "seed": 75208,
+   "vid": "visjoin_99",
+   "mid": "eulogy",
+   "wave": 4,
+   "pickDay": 131,
+   "pickPart": 520,
+   "pickDayPart": 0,
+   "huntDay": 128,
+   "huntTx": 3,
+   "huntTy": 4,
+   "cls": "overwritten-danger",
+   "reason": "eval part=521 day=131 danger=ask/2 sub=tighten-overwrite",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "guardDrafted": false,
+   "freshPickOverwrite": false,
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 521,
+     "day": 131,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "overwritten",
+     "sub": "tighten-overwrite",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "ask",
+       "score": 2
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [
+      {
+       "preKind": "HUNT",
+       "postKind": "HAVEN_CHORE",
+       "postState": "indoor"
+      }
+     ],
+     "depart": [],
+     "heldByLever": false
+    }
+   ]
+  }
+ ],
+ "primaryOn": [
+  {
+   "seed": 75201,
+   "vid": "visjoin_157",
+   "mid": "herald",
+   "wave": 4,
+   "pickDay": 174,
+   "pickPart": 694,
+   "pickDayPart": 2,
+   "huntDay": 172,
+   "huntTx": 4,
+   "huntTy": 5,
+   "cls": "overwritten-danger",
+   "reason": "eval part=704 day=177 danger=ask/2 sub=tighten-overwrite",
+   "heldLeverEvals": 6,
+   "heldParts": [
+    696,
+    697,
+    698,
+    700,
+    701,
+    702
+   ],
+   "heldVerdicts": [
+    "ask/2",
+    "ask/2",
+    "ask/2",
+    "tighten/4",
+    "tighten/4",
+    "tighten/4"
+   ],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": true,
+   "guardDrafted": false,
+   "freshPickOverwrite": false,
+   "evalCount": 7,
+   "evalChain": [
+    {
+     "part": 696,
+     "day": 175,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "ask",
+       "score": 2
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    },
+    {
+     "part": 697,
+     "day": 175,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "ask",
+       "score": 2
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    },
+    {
+     "part": 698,
+     "day": 175,
+     "dayPart": 2,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "ask",
+       "score": 2
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    },
+    {
+     "part": 700,
+     "day": 176,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "tighten",
+       "score": 4
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    },
+    {
+     "part": 701,
+     "day": 176,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "tighten",
+       "score": 4
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    },
+    {
+     "part": 702,
+     "day": 176,
+     "dayPart": 2,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "tighten",
+       "score": 4
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    },
+    {
+     "part": 704,
+     "day": 177,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "overwritten",
+     "sub": "tighten-overwrite",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "ask",
+       "score": 2
+      }
+     ],
+     "dangerRawCount": 2,
+     "heal": [],
+     "tighten": [
+      {
+       "preKind": "HUNT",
+       "postKind": "HAVEN_CHORE",
+       "postState": "indoor"
+      }
+     ],
+     "depart": [],
+     "heldByLever": false
+    }
+   ]
+  },
+  {
+   "seed": 75201,
+   "vid": "visjoin_168",
+   "mid": "influencer",
+   "wave": 4,
+   "pickDay": 175,
+   "pickPart": 696,
+   "pickDayPart": 0,
+   "huntDay": 174,
+   "huntTx": 5,
+   "huntTy": 4,
+   "cls": "guard-drafted",
+   "reason": "guard dep part=697 day=175 target=caleb_jones",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "guardDrafted": true,
+   "freshPickOverwrite": false,
+   "evalCount": 0,
+   "evalChain": []
+  },
+  {
+   "seed": 75202,
+   "vid": "visjoin_143",
+   "mid": "reunion",
+   "wave": 4,
+   "pickDay": 151,
+   "pickPart": 600,
+   "pickDayPart": 0,
+   "huntDay": 150,
+   "huntTx": 5,
+   "huntTy": 3,
+   "cls": "departed-pick-linked",
+   "reason": "dep part=601 day=151",
+   "heldLeverEvals": 0,
+   "heldParts": [],
+   "heldVerdicts": [],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "guardDrafted": false,
+   "freshPickOverwrite": false,
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 601,
+     "day": 151,
+     "dayPart": 1,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "heal-sat-out",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "go",
+       "score": 0
+      }
+     ],
+     "dangerRawCount": 2,
+     "heal": [
+      {
+       "satOut": true,
+       "cached": false
+      }
+     ],
+     "tighten": [],
+     "depart": [
+      {
+       "ret": false,
+       "postState": "ready"
+      }
+     ],
+     "heldByLever": false
+    }
+   ]
+  }
+ ],
+ "secondaryOn": [
+  {
+   "seed": 75206,
+   "vid": "visjoin_101",
+   "mid": "bulldozer",
+   "wave": 1,
+   "pickDay": 137,
+   "pickPart": 546,
+   "pickDayPart": 2,
+   "huntDay": 135,
+   "huntTx": 5,
+   "huntTy": 4,
+   "cls": "guard-drafted",
+   "reason": "guard dep part=549 day=138 target=raj_patel",
+   "heldLeverEvals": 1,
+   "heldParts": [
+    548
+   ],
+   "heldVerdicts": [
+    "ask/2"
+   ],
+   "heldThenDeparted": false,
+   "heldBeforeOverwrite": false,
+   "guardDrafted": true,
+   "freshPickOverwrite": false,
+   "evalCount": 1,
+   "evalChain": [
+    {
+     "part": 548,
+     "day": 138,
+     "dayPart": 0,
+     "atHaven": true,
+     "freshPickInCall": false,
+     "action": "held-ready",
+     "sub": "other-held",
+     "reason": null,
+     "danger": [
+      {
+       "verdict": "ask",
+       "score": 2
+      }
+     ],
+     "dangerRawCount": 1,
+     "heal": [],
+     "tighten": [],
+     "depart": [],
+     "heldByLever": true
+    }
+   ]
+  }
+ ],
+ "classesOff": {
+  "overwritten-danger": 1
+ },
+ "classesOn": {
+  "overwritten-danger": 1,
+  "guard-drafted": 1,
+  "departed-pick-linked": 1
+ },
+ "secondaryClassesOn": {
+  "guard-drafted": 1
+ },
+ "unknown": 0,
+ "unknownWave": [],
+ "instrument": {
+  "onOther": 0,
+  "onOtherHeldUnexplained": 0,
+  "offOtherHeldUnexplained": 0,
+  "onOverwriteWithoutVerdict": 0
+ },
+ "heldStarvation": [],
+ "guards": {
+  "off": {
+   "starvation": 6,
+   "deaths": 295,
+   "medianDays": 155,
+   "wave4": 7,
+   "wins": 2
+  },
+  "on": {
+   "starvation": 9,
+   "deaths": 334,
+   "medianDays": 180,
+   "wave4": 5,
+   "wins": 0
+  }
+ },
+ "hygiene": {
+  "off": {
+   "75201": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75202": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75203": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75204": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75205": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75206": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75207": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   },
+   "75208": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": null
+   }
+  },
+  "on": {
+   "75201": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75202": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75203": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75204": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75205": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75206": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75207": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   },
+   "75208": {
+    "fieldparty": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "returns": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "funnel": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "departhold": {
+     "errs": 0,
+     "errors": [],
+     "overflow": {},
+     "installed": true
+    },
+    "hunthold": {
+     "errs": 0,
+     "installed": true
+    }
+   }
+  }
+ },
+ "drift": {
+  "error": "ENOENT: no such file or directory, open '/home/hatch/workspace/worktrees/gaps2-returns/evidence/2026-10-29/perseed-depar"
+ },
+ "hygieneOk": true,
+ "staleProvenance": {
+  "off": {
+   "count": 0,
+   "sample": []
+  },
+  "on": {
+   "count": 0,
+   "sample": []
+  }
+ },
+ "evalSecondary": {
+  "off": {
+   "recorderHeldEvals": 0,
+   "leverHolds": 0,
+   "leverExhausted": 0,
+   "leverNarrated": 0
+  },
+  "on": {
+   "recorderHeldEvals": 486,
+   "leverHolds": 486,
+   "leverExhausted": 24,
+   "leverNarrated": 163
+  }
+ },
+ "counts": {
+  "offDeparted": 0,
+  "onDeparted": 1,
+  "mechanismHeldThenDeparted": false
+ },
+ "legs": {
+  "p0_clearing": true,
+  "p1_mechanism": false,
+  "p2_count": true,
+  "p3_completenessInstrument": true,
+  "p4_hygiene": true,
+  "g1_starvation": false,
+  "g2_wall": false,
+  "g3_noHeldStarvation": true,
+  "verdict": "NO-GO"
+ },
+ "secondaryHeld": {
+  "picksWithHolds": 1,
+  "heldThenDeparted": 0,
+  "heldBeforeOverwrite": 0,
+  "freshPickOverwrites": 0
+ },
+ "primaryHeld": {
+  "picksWithHolds": 1,
+  "heldThenDeparted": 0,
+  "heldBeforeOverwrite": 1,
+  "freshPickOverwrites": 0
+ }
+}
