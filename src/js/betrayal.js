@@ -1067,6 +1067,17 @@
     // every removal does now.
     try { if (v.positions) delete v.positions[vid]; } catch (e) {}
     try { if (v.nodePos) delete v.nodePos[vid]; } catch (e) {}
+    // STALE-SICK (sim-sickstale-b 2026-10-30, findings #1542): the sick
+    // record dies with the roster membership — otherwise the next
+    // villageSicknessTick deals a damage row to a corpse's health entry
+    // (or a departed villager's) before its own cleanup deletes it.
+    // Same hygiene family as positions/mentored above. Placed after the
+    // phoenix early-return above: a phoenix-saved villager never left,
+    // so they keep their record. Exiled/fled leavers lose theirs too:
+    // the tick deletes a leaver's record within a day anyway, and no
+    // return path reuses the id (membership blocks exiles; arrivals
+    // mint new ids), so nothing living depends on it.
+    try { if (v.sick) delete v.sick[vid]; } catch (e) {}
     // LEADERSHIP HYGIENE (break-it social r10 2026-10-10): a removed
     // contender's heat, challenge, and alliances die with them. The old code
     // left v.challenge pointing at a ghost — agencyLeadershipTick

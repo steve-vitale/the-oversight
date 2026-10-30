@@ -31563,6 +31563,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v._reassuredTick = false; // OUTBREAK HONESTY: one reassurance per tick
       for (const vid of Object.keys(v.sick)) {
         const s = v.sick[vid];
+        // STALE-SICK (sim-sickstale-b 2026-10-30, findings #1542): a
+        // record for someone no longer on the roster, or already marked
+        // dead (removed earlier, or an old save written before
+        // removeVillager cleared sick records), must never take a tick
+        // hit — the old code hurt first and cleaned up after, dealing
+        // damage to a corpse's health entry (52 -> 49, seed 9983 day 32
+        // on the pre-fix base). Delete silently, as the _wasDead branch
+        // below already does for the already-mourned. The post-hurt
+        // grief branch is untouched: _wasDead is computed BEFORE the
+        // hurt call, so a villager alive at tick start who dies FROM
+        // the tick hit still gets the grief line exactly as today.
+        if (!(v.roster || []).includes(vid) || ((this.vpOf(vid) || {}).dead)) {
+          delete v.sick[vid];
+          continue;
+        }
         s.daysLeft -= 1;
         // SURVIVAL-ATTRITION (2026-10-10): 2+sev*2 -> 1+sev*2 (sev1: 4->3,
         // sev2: 6->5, healer still -1). Sickness should degrade and threaten,
