@@ -704,7 +704,23 @@
           if (live.length) this.say(`Another shape at the treeline — but the way is already watched. It'll wait out there with the rest.`);
         } else if (live.length) {
           const m = live[0];
-          this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on your bedroll.`);
+          // BEDROLL HONESTY (sim-bedroll-b 2026-10-30): the raid's
+          // player line used to say "eyes on your bedroll" even on
+          // nights the player never slept — sleep refused, awake in
+          // the hall while dawn arrived through a wait. _sleeping is
+          // the game's own asleep flag (set only by sleep()'s loop,
+          // cleared after it), and havenRaidTick runs inside endDay,
+          // so it reads true exactly when the player is asleep in
+          // this raid's night. Slept nights keep the line
+          // byte-identical; awake nights get the same sentence with
+          // "eyes on you" — true whether the player stands in the
+          // hall or anywhere else at the haven. Narration only: no
+          // spawn, draft, damage, crisis, or economy value moves.
+          if (this._sleeping) {
+            this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on your bedroll.`);
+          } else {
+            this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on you.`);
+          }
           this.pendingEncounter = true;
           this.pendingMonsterId = m.id;
           // RAID-NAMING (sim-raidname-b 2026-10-29; provenance
