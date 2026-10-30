@@ -1,0 +1,14 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 85001 day 120 — conversation with Adaeze (adaeze_nwosu) ===
+occupation=ESL teacher temperament=anxious trust=42 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
