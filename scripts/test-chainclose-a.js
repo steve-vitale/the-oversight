@@ -103,6 +103,30 @@ eq('binding damage-scale', bindingClass(30, 41), 'DAMAGE-SCALE-QUESTION');
   eq('T_rem 0 -> mChain 0', eul3.mChain, 0);
   eq('T_rem 0 -> cChain Infinity', eul3.cChain, Infinity);
   eq('Infinity counts as not closable in frac', res3.chainPaceFrac.le60, 0);
+// Cross-seed same-mid separation (prereg: same mid on the SAME seed).
+{
+  const chains = buildChains([
+    { seed: 1, day: 74, part: 0, mid: 'audit', mHpStart: 1100, mHpLeft: 1042, mDealt: 58 },
+    { seed: 2, day: 60, part: 0, mid: 'audit', mHpStart: 1100, mHpLeft: 1086, mDealt: 14 },
+    { seed: 1, day: 80, part: 0, mid: 'audit', mHpStart: 1042, mHpLeft: 1000, mDealt: 42 },
+  ]);
+  eq('cross-seed chains count', chains.length, 2);
+  const s1 = chains.find(c => c.seed === 1 || (c.meetings[0] && c.meetings[0].seed === 1));
+  check('seed1 audit chain has 2 meetings', s1 && s1.meetings.length === 2);
+  check('seed1 audit chain unbroken', s1 && !s1.breakReason);
+}
+// Censored = survived only; over-other (won run) is run-end-exact.
+{
+  const rows = [{ seed: 1, days: 118, endReason: 'over-other' }];
+  const wild = [{ seed: 1, day: 57, part: 0, mid: 'reunion', mDealt: 12 }];
+  const chains = [{ mid: 'reunion', seed: 1, openingHp: 1200, lastLeft: 1188, breakReason: null,
+    n: 1, dealt: [12], medianRate: 12, bestRate: 12, remainingHp: 1188,
+    meetingsToFinishMedian: null, meetingsToFinishBest: null, intervals: [],
+    meetings: [{ day: 57, part: 0 }] }];
+  const res = computeCloseTargets(chains, rows, wild);
+  eq('over-other not censored', res.lifetime[1].censored, false);
+  eq('n=1 binding pace-unknown', res.targets[0].binding, 'PACE-UNKNOWN-N1');
+}
   // medianOf sanity.
   eq('medianOf even', medianOf([23, 24, 0, 0]), 11.5);
 }

@@ -92,11 +92,17 @@ function price(remaining, rate) {
 }
 // buildChains: meetings (day order) -> chains split on HP discontinuity.
 function buildChains(meetings) {
-  const byMid = {};
-  for (const m of meetings) (byMid[m.mid] = byMid[m.mid] || []).push(m);
+  // Group by (seed, mid): the prereg chain is same-mid on the SAME seed.
+  // Grouping by mid alone mixes seeds when several seeds meet one type.
+  const byKey = {};
+  for (const m of meetings) {
+    const k = `${m.seed}|${m.mid}`;
+    (byKey[k] = byKey[k] || []).push(m);
+  }
   const chains = [];
-  for (const mid of Object.keys(byMid).sort()) {
-    const list = byMid[mid].slice().sort((a, b) => (a.day - b.day) || (a.part - b.part));
+  for (const key of Object.keys(byKey).sort()) {
+    const mid = key.split('|').slice(1).join('|');
+    const list = byKey[key].slice().sort((a, b) => (a.day - b.day) || (a.part - b.part));
     let cur = null;
     for (const m of list) {
       if (!cur || m.mHpStart !== cur.lastLeft) {
@@ -156,7 +162,7 @@ function computeCloseTargets(chainTables, perSeedRows, wildDetail) {
     const list = bySeed[seed].slice().sort((x, y) => (x.day - y.day) || (x.part - y.part));
     const first = list[0].day, last = list[list.length - 1].day;
     const row = rowBySeed[seed] || {};
-    const censored = row.endReason !== 'village-lost';
+    const censored = row.endReason === 'survived';
     seedPace[seed] = list.length / (last - first + 1);
     lifetime[seed] = { seed: +seed, days: row.days, endReason: row.endReason,
       censored: !!censored, firstWildDay: first, lastWildDay: last,
@@ -167,7 +173,7 @@ function computeCloseTargets(chainTables, perSeedRows, wildDetail) {
     const firstDay = ms[0].day, lastDay = ms[ms.length - 1].day;
     const span = lastDay - firstDay + 1;
     const row = rowBySeed[c.seed] || {};
-    const censored = row.endReason !== 'village-lost';
+    const censored = row.endReason === 'survived';
     const tRem = row.days - lastDay;
     const pChain = c.n >= 2 ? (c.n / span) : null;
     const gaps = [];
@@ -183,7 +189,7 @@ function computeCloseTargets(chainTables, perSeedRows, wildDetail) {
       intervals: gaps, meanGap, openingHp: c.openingHp, remainingHp: c.remainingHp,
       censored, days: row.days, tRem, pChain, pSeed: seedPace[c.seed],
       mChain, mSeed, mFirst, cChain, cSeed, cDaily,
-      binding: bindingClass(cDaily, cChain == null ? Infinity : cChain),
+      binding: cChain == null ? 'PACE-UNKNOWN-N1' : bindingClass(cDaily, cChain),
       breakReason: c.breakReason || null };
   });
   const frac = (get, denom) => {
