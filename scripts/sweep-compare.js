@@ -82,7 +82,7 @@ function stdSnapshot(Game) {
   // Everything behind try/catch: a hostile read must never kill a run.
   const out = {
     won: false, arc: 1, tableWaiting: false, tableEntered: false, rank: 'village',
-    breadth: 0, stage: 0, vests: 0,
+    breadth: 0, stage: 0, vests: 0, vestsVillager: 0,
   };
   try { out.won = !!Game.won; } catch (e) {}
   try { const pg = Game.progState ? Game.progState() : {}; out.arc = pg.arc || 1; out.tableWaiting = !!pg.tableWaiting; out.tableEntered = !!pg.tableDone; } catch (e) {}
@@ -92,12 +92,55 @@ function stdSnapshot(Game) {
   // VESTS (longsim scale-wall r5 2026-10-13): the mission's measure list
   // includes vests; the driver never tracked them. military/swat vest in the
   // scholar's pack or equipped slots at snapshot time.
+  //
+  // VEST-COUNTER FIX (sim-vestcounter-b, 2026-10-30, instrument only):
+  // inventory entries are stored under `.itemId` (game.js alienLootGrant,
+  // marketDeliveryEntry, capstone grant) and equipped slots store
+  // `{itemId, name, ...}` (equipment.js — never `.id`). The old read of
+  // entry `.id` only therefore reported 0 on every panel case, including
+  // seeds where the scholar was wearing a vest (sim-vests-b). The read
+  // below is `itemId || id` (string entries pass through); old `.id`-form
+  // entries still count. No game behavior changes: this is a pure read.
+  //
+  // vestsVillager (same commit, optional metric): distinct (holder, vestId)
+  // pairs held by LIVE roster villagers in pack or equipped at snapshot
+  // time. Dedupe matters: a worn villager vest appears in BOTH pack and
+  // equipped in this engine (census day-0, seed 9915: Grace Obi's one swat
+  // vest shows pack + equipped), so the pair counts once. The scholar's
+  // person record (Game.villagerId) is skipped here — its live pack IS
+  // state.scholar, counted in `vests` above. Dead holders are skipped.
+  // Stashed, generation-pool and armory-pile holdings are NOT counted
+  // (they are not held). Pure reads only; a hostile read never kills a run.
   try {
     const VEST_IDS = ['military_vest', 'swat_vest'];
+    const vestEntryId = (e) => {
+      if (!e) return null;
+      if (typeof e === 'string') return e;
+      return e.itemId || e.id || null;
+    };
     let n = 0;
-    for (const it of ((Game.state.scholar || {}).inventory || [])) if (it && VEST_IDS.includes(it.id)) n += (it.units || 1);
-    for (const v of Object.values((Game.state.scholar || {}).equipped || {})) if (v && VEST_IDS.includes(v.id)) n++;
+    for (const it of ((Game.state.scholar || {}).inventory || [])) if (VEST_IDS.includes(vestEntryId(it))) n += (it.units || 1);
+    for (const v of Object.values((Game.state.scholar || {}).equipped || {})) if (VEST_IDS.includes(vestEntryId(v))) n++;
     out.vests = n;
+    const seenPairs = new Set();
+    const scholarVid = Game.villagerId;
+    const roster = ((Game.state.village || {}).roster || []);
+    const people = (Game.data || {}).villagers || [];
+    const survivors = (Game.data || {}).background_survivors || [];
+    for (const vid of roster) {
+      if (vid === scholarVid) continue;
+      const p = people.find(x => x && x.id === vid) || survivors.find(x => x && x.id === vid);
+      if (!p || p.dead) continue;
+      for (const it of (p.items || [])) {
+        const id = vestEntryId(it);
+        if (VEST_IDS.includes(id)) seenPairs.add(vid + '|' + id);
+      }
+      for (const v of Object.values(p.equipped || {})) {
+        const id = vestEntryId(v);
+        if (VEST_IDS.includes(id)) seenPairs.add(vid + '|' + id);
+      }
+    }
+    out.vestsVillager = seenPairs.size;
   } catch (e) {}
   return out;
 }
@@ -135,7 +178,7 @@ async function runComparison(opts) {
         policyContext = ctx;
         if (base.setup) return base.setup(G, ctx);
       };
-      const hist = { maxRank: 0, maxArc: 1, everTable: false, everEntered: false, maxVests: 0 };
+      const hist = { maxRank: 0, maxArc: 1, everTable: false, everEntered: false, maxVests: 0, maxVestsVillager: 0 };
       const origDaily = base.daily;
       policy.daily = (G, ctx) => {
         try {
@@ -143,6 +186,7 @@ async function runComparison(opts) {
           hist.maxRank = Math.max(hist.maxRank, RANK_ORDER[s.rank] || 0);
           hist.maxArc = Math.max(hist.maxArc, s.arc || 1);
           hist.maxVests = Math.max(hist.maxVests, s.vests || 0);
+          hist.maxVestsVillager = Math.max(hist.maxVestsVillager, s.vestsVillager || 0);
           if (s.tableWaiting) hist.everTable = true;
           if (s.tableEntered) hist.everEntered = true;
         } catch (e) {}
@@ -173,6 +217,7 @@ async function runComparison(opts) {
         table: hist.everTable || end.tableWaiting ? 1 : 0,
         entered: hist.everEntered || end.tableEntered ? 1 : 0,
         vests: Math.max(hist.maxVests, end.vests || 0),
+        vestsVillager: Math.max(hist.maxVestsVillager, end.vestsVillager || 0),
         deaths,
         pacing: result.pacing ? {
           verbs: result.pacing.meanDeliberatePerDay,
@@ -222,6 +267,7 @@ async function runComparison(opts) {
       tablePct: +(100 * rs.reduce((t, r) => t + r.table, 0) / Math.max(1, rs.length)).toFixed(0),
       enteredPct: +(100 * rs.reduce((t, r) => t + (r.entered || 0), 0) / Math.max(1, rs.length)).toFixed(0),
       vests: rs.reduce((t, r) => t + (r.vests || 0), 0),
+      vestsVillager: rs.reduce((t, r) => t + (r.vestsVillager || 0), 0),
       deaths: deathTotals,
       meanVerbsPerDay: rs.length && rs[0].pacing
         ? +(rs.reduce((t, r) => t + (r.pacing.verbs || 0), 0) / rs.length).toFixed(1) : null,

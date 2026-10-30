@@ -1,0 +1,87 @@
+check.js: 290 scripts, 2 parallel (quick)
+...................................................................................................................F.F..F..F..........F......................................................................................................................................................F....
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 0.5s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/sim-vestcounter-b/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/sim-vestcounter-b/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 0.5s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-mobile-combat-cadence.js (exit 1, 1.6s)
+        ok   hand-back follows resolution
+        ok   superseded announcement cannot perform a stale enemy action
+        ok   save retains the announced but unresolved actor
+        ok   Continue resolves the pending enemy exactly once
+        FAIL Continue does not wrap the announced round a second time
+        ok   Continue hands control back with fresh player inputs
+        ok   enemy-phase endings publish the terminal state to the browser
+        ok   faster opening enemy is announced before acting
+        ok   each faster opening enemy acts once before usable player controls
+      
+      mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+      failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 0.4s)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/sim-vestcounter-b/scripts/godpath/test-occupation-panels.js:17:14)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 1.2s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/arrivalText.json,src/data/characterGen.json,src/js/abilityActions.js,src/js/app.js,src/js/betrayal.js,src/js/build.js,s
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-establishment-r20-fixes-20261020.js (exit 1, 0.7s)
+        PASS NEW line cook (keyword match unchanged) -> 1.4
+        PASS OLD line cook (keyword match unchanged) -> 1.4
+        PASS fisherman earns the ⭐ natural tag
+      FIX 2 — racks-full voice gated per cook-day (real resolveOneAssignment, OLD vs NEW)
+        PASS NEW: 3 same-day resolutions -> 1 racks-full line
+        FAIL NEW: next day voices once more (gate resets daily): expected 2, got 1
+        PASS NEW: preserved stock still counted
+        PASS OLD: 3 same-day resolutions -> 3 identical lines (the bug)
+        PASS OLD: next day adds a 4th
+        PASS OLD: preserved stock still counted
+      
+      1 FAILURES
+
+  slowest: scripts/test-capable-bot-20261014.js 41s
+
+check.js: 284 passed, 6 failed in 477s

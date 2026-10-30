@@ -5,8 +5,9 @@
 //   F2 (engine): Game.rollAlienLoot with chance=1, tiers 1-4, reward
 //     sources null/contest/trade, 200 draws each, NEVER returns a vest.
 //   F3 (census): planted itemId-form vests are found by scan() in the
-//     right locations, while sweep-compare's stdSnapshot (entry `.id`
-//     only, scholar only) reads 0 — the blind-spot mechanism, proven.
+//     right locations, and sweep-compare's stdSnapshot now counts the
+//     scholar's itemId-form vest too (sim-vestcounter-b fix; the old
+//     `.id`-only read returned 0 here, which was the blind spot).
 //   F4 (read-only): scan() + gateState() twice give identical results.
 //   F5 (gate): leanlink is default-OFF (LEANLINK unset/'0' -> mode 0);
 //     LEANLINK=1 -> mode 1; requiring leanlink leaves competent intact.
@@ -124,9 +125,11 @@ function check(name, cond, detail) {
     check('F3 held count excludes stash/pool', sc.held.filter(h => h.vestId === 'military_vest').length === 1
       && sc.held.filter(h => h.vestId === 'swat_vest').length === 1, JSON.stringify(sc.held));
   }
-  // Sweep snapshot on the same state: scholar-only, `.id` only.
+  // Sweep snapshot on the same state (sim-vestcounter-b fix): the
+  // itemId-form scholar vest now counts (was 0 under the old `.id`-only
+  // read — that assertion lived here until the fix landed).
   const snap = stdSnapshot(Game);
-  check('F3 sweep snapshot misses itemId-form scholar vest', snap.vests === 0, 'snap.vests=' + snap.vests);
+  check('F3 sweep snapshot counts itemId-form scholar vest', snap.vests === 1, 'snap.vests=' + snap.vests);
   // F4: read-only — scan + gate twice, identical.
   const sc2 = scan(Game);
   check('F4 scan idempotent', JSON.stringify(sc) === JSON.stringify(sc2));
