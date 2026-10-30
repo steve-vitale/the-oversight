@@ -44,8 +44,14 @@ function classifyRemoval(ev) {
   return 'OTHER-REMOVE';
 }
 
+// Wild, per prereg correction #1: wave 4, not a titan, and not
+// lingering AT THE FATE OBSERVATION (removal event, else final
+// census snapshot). lingering is mutable (havenGrowth sets/clears it
+// around sieges), so an ever-true rule would exclude the judged
+// chains themselves, which read lingering=true mid-life and false at
+// removal. titanEver stays an identity trait (titans do not un-titan).
 function isWildW4(t) {
-  return t.wave === 4 && !t.titanEver && !t.lingeringEver;
+  return t.wave === 4 && !t.titanEver && t.lingeringAtEnd === false;
 }
 
 // buildTraces(seed, snapshots, turns, removals): snapshots = tick census
@@ -72,7 +78,7 @@ function buildTraces(seed, snapshots, turns, removals) {
       if (m.titan) t.titanEver = true;
       if (m.lingering) t.lingeringEver = true;
       if (m.veteran) t.veteranEver = true;
-      t.snapshots.push({ day: snap.day, tx: m.tx, ty: m.ty, mx: m.mx, my: m.my, hp: m.hp, maxHp: m.maxHp, lostSight: m.lostSight });
+      t.snapshots.push({ day: snap.day, tx: m.tx, ty: m.ty, mx: m.mx, my: m.my, hp: m.hp, maxHp: m.maxHp, lostSight: m.lostSight, titan: !!m.titan, lingering: !!m.lingering, veteran: !!m.veteran });
     }
   }
   for (const ev of (turns || [])) {
@@ -112,6 +118,17 @@ function buildTraces(seed, snapshots, turns, removals) {
     else if (t.removals.length) t.fate = classifyRemoval(t.removals[t.removals.length - 1]);
     else if (t.lastSeenDay != null) t.fate = 'NO-REMOVAL-EVENT';
     else t.fate = 'NEVER-CENSUSED';
+    // Fate-observation flags (correction #1): removal event wins when
+    // one exists (it postdates the last census); else the last census
+    // snapshot. Instances with no census and no removal keep nulls
+    // (never wild — they have no fate observation at all).
+    if (t.removals.length) {
+      const lastRem = t.removals[t.removals.length - 1];
+      t.titanAtEnd = !!lastRem.titan; t.lingeringAtEnd = !!lastRem.lingering;
+    } else if (t.snapshots.length) {
+      const lastSnap = t.snapshots[t.snapshots.length - 1];
+      t.titanAtEnd = !!lastSnap.titan; t.lingeringAtEnd = !!lastSnap.lingering;
+    } else { t.titanAtEnd = null; t.lingeringAtEnd = null; }
     t.maxCensusLostSight = t.snapshots.reduce((m, s) => (s.lostSight != null ? Math.max(m, s.lostSight) : m), 0);
     t.maxTurnLostSight = t.turns.reduce((m, e) => Math.max(m, (e.lostSightAfter != null ? e.lostSightAfter : 0), (e.lostSightBefore != null ? e.lostSightBefore : 0)), 0);
     t.maxLostSight = Math.max(t.maxCensusLostSight, t.maxTurnLostSight);
@@ -193,9 +210,12 @@ function analyze(evidDir, chaincloseDir, outPath) {
   const otherRemovals = [];
   for (const t of allTraces) for (const ev of t.removals) {
     const cls = classifyRemoval(ev);
-    (cls === 'LOSTSIGHT-REMOVE' ? lostsightRemovals : otherRemovals).push({ seed: t.seed, inst: t.inst, id: t.id, wave: t.wave, titan: t.titanEver, lingering: t.lingeringEver, day: ev.day, lostSight: ev.lostSight, inMonsterTurn: ev.inMonsterTurn, tbfightLive: ev.tbfightLive, hp: ev.hp, tile: [ev.tx, ev.ty] });
+    (cls === 'LOSTSIGHT-REMOVE' ? lostsightRemovals : otherRemovals).push({ seed: t.seed, inst: t.inst, id: t.id, wave: t.wave, titan: t.titanAtEnd, lingering: t.lingeringAtEnd, day: ev.day, lostSight: ev.lostSight, inMonsterTurn: ev.inMonsterTurn, tbfightLive: ev.tbfightLive, hp: ev.hp, tile: [ev.tx, ev.ty] });
   }
-  const wildLostsight = lostsightRemovals.filter(r => !r.titan && !r.lingering && r.wave === 4);
+  // Wild here uses the same fate-observation flags as isWildW4
+  // (correction #1): a lostSight removal counts as wild iff the
+  // instance is not a titan and not lingering at its fate observation.
+  const wildLostsight = lostsightRemovals.filter(r => !r.titan && r.lingering === false && r.wave === 4);
   const bucket = (t) => t.maxLostSight === 0 ? '0' : (t.maxLostSight <= 3 ? '1-3' : (t.maxLostSight <= 6 ? '4-6' : '7+'));
   const maxDist = { '0': 0, '1-3': 0, '4-6': 0, '7+': 0 };
   for (const t of wild) maxDist[bucket(t)]++;
@@ -222,7 +242,11 @@ function analyze(evidDir, chaincloseDir, outPath) {
     const m = matchJudged(traces, j);
     const entry = { chain: j, match: m.status, matchedInst: (m.trace && m.trace.inst) || null, matchedTraces: m.traces || null, carried: j.carried };
     if (m.trace) {
-      const tp = tickPath(m.trace, j.lastSeenDay);
+      // Tick-path window runs to firstAbsentDay (not lastSeenDay) so
+      // the removal day's monsterTurn events — the climb itself for
+      // a lostSight removal — are inside the path. The census series
+      // is unaffected (the instance is absent on firstAbsentDay).
+      const tp = tickPath(m.trace, m.trace.firstAbsentDay || m.trace.lastSeenDay);
       entry.trace = {
         inst: m.trace.inst, id: m.trace.id, wave: m.trace.wave,
         firstSeenDay: m.trace.firstSeenDay, lastSeenDay: m.trace.lastSeenDay, firstAbsentDay: m.trace.firstAbsentDay,

@@ -116,12 +116,32 @@ verdicts from scratch.
 UNIVERSE: every world-monster instance whose wave == 4 on any census
 snapshot (wave from the monster object, falling back to the data def),
 all seeds. WILD subset (the judged traces): titan false AND lingering
-false on every snapshot of the instance. Titan/lingering instances are
-counted in a one-line census and excluded from every judged trace
-table. Raid/other shapes are not a universe here (this instrument
-records world monsters, not raid spawns, and raid rows are out of
-scope — stated, not silently dropped: the row's fieldparty meetings
-still carry the raid census for cross-reference).
+false AT THE INSTANCE'S FATE OBSERVATION — the removal event for a
+removed instance, the final census snapshot for a survived instance
+(see correction #1). Titan/lingering-at-fate instances are counted in
+a one-line census and excluded from every judged trace table.
+Raid/other shapes are not a universe here (this instrument records
+world monsters, not raid spawns, and raid rows are out of scope —
+stated, not silently dropped: the row's fieldparty meetings still
+carry the raid census for cross-reference).
+
+CORRECTION #1 (committed after the 1-seed pilot, BEFORE the judged
+full-band sweep — an instrument-definition fix, not a re-score: no
+judged analysis exists yet, and the judged chains' tick paths
+themselves are unchanged by it, only their universe membership).
+The pilot exposed that `lingering` is a MUTABLE flag on the same
+object, not an identity trait: the s75102 eulogy instance reads
+lingering=true on census d56–61 but lingering=false on its d62
+monsterTurn events and removal event (havenGrowth.js sets/clears it
+around sieges); the s75102 algorithm instance flips false (d59–64)
+→ true (d65–70) → false (d71 removal). The original "false on every
+snapshot" rule therefore EXCLUDED the very judged chains this arm
+exists to trace. The corrected rule matches the sibling arms'
+fight-time semantics (scholarmelt classifies wild by flags at the
+fight): an instance is wild iff it is not a titan and is not
+lingering at its fate observation. Instances that END lingering
+(e.g. still besieging at run end) are excluded from judged tables
+and counted separately; that edge is named wherever it bites.
 
 INSTANCE TRACE (per seed, per instance key): firstSeenDay (first
 census day present), lastSeenDay (last census day present), census

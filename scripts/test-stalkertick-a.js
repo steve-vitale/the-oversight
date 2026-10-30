@@ -108,7 +108,7 @@ function synth() {
   eq('null lostSight -> partial', tp.complete, false);
   check('partial reason names day', tp.reasons.some(r => r.indexOf('60') >= 0));
 }
-// Titan/lingering excluded from wild universe.
+// Titan/lingering excluded from wild universe (fate-observation flags).
 {
   const traces = buildTraces(75102, [
     { day: 60, scholarTile: null, monsters: [
@@ -116,6 +116,25 @@ function synth() {
     ] },
   ], [], []);
   eq('titan not wild', isWildW4(traces[0]), false);
+}
+// Prereg correction #1: lingering flips mid-life; wild reads the fate
+// observation (removal event), not the ever-flag. A beast lingering
+// on census but not at removal IS wild.
+{
+  const traces = buildTraces(75102, [
+    { day: 60, scholarTile: null, monsters: [{ inst: 'i5', id: 'eulogy', wave: 4, tx: 4, ty: 4, mx: 4, my: 4, hp: 853, maxHp: 900, lostSight: 0, titan: false, lingering: true, veteran: false }] },
+    { day: 61, scholarTile: null, monsters: [{ inst: 'i5', id: 'eulogy', wave: 4, tx: 4, ty: 4, mx: 4, my: 4, hp: 853, maxHp: 900, lostSight: 0, titan: false, lingering: true, veteran: false }] },
+    { day: 62, scholarTile: null, monsters: [] },
+  ], [], [
+    { day: 62, dayPart: 1, inst: 'i5', id: 'eulogy', wave: 4, tx: 4, ty: 4, hp: 853, lostSight: 7, titan: false, lingering: false, veteran: false, wasInWorld: true, gone: true, inMonsterTurn: true, tbfightLive: false },
+  ]);
+  eq('lingering-at-removal false -> wild', isWildW4(traces[0]), true);
+  eq('flip fate', traces[0].fate, 'LOSTSIGHT-REMOVE');
+  // Still lingering at run end (survived, last census lingering) -> NOT wild.
+  const traces2 = buildTraces(75102, [
+    { day: 60, scholarTile: null, monsters: [{ inst: 'i6', id: 'influencer', wave: 4, tx: 4, ty: 4, mx: 4, my: 4, hp: 900, maxHp: 900, lostSight: 0, titan: false, lingering: true, veteran: false }] },
+  ], [], []);
+  eq('lingering-at-end -> not wild', isWildW4(traces2[0]), false);
 }
 // stripRow: removing stalkertick must not touch other keys/order.
 {
