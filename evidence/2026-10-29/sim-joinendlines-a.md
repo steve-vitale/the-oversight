@@ -1,10 +1,18 @@
 # sim-joinendlines-a — joined-fight end lines (GO)
 
-Run: flesh-out loop, run fleshout-20261029T1915Z. Axis: scale-onramp
+Run: flesh-out loop, run fleshout-20261030T0015Z. Axis: scale-onramp
 (blocking axis, converging, NOT converged). Worker: sim-joinendlines-a.
 Prereg: evidence/2026-10-29/sim-joinendlines-a-prereg.md (committed
 BEFORE any judged analysis, d4a810d52). Queued narration work from
 sim-breakline-a, sim-tilejoin-a, sim-allydpr-a, sim-shoutrec-a.
+
+HEADER CORRECTION (coordinator note 2026-10-29, recorded here, NOT
+in the prereg): the prereg header says run fleshout-20261029T1915Z,
+but this run is fleshout-20261030T0015Z (19:15 CDT 2026-10-29 =
+00:15 UTC 2026-10-30). 1915Z was the earlier adoption run that
+landed tilejoin/fullseat, not this run. The prereg is deliberately
+left unrewritten; this note keeps the run attribution clean. All
+"this run" references in this file mean fleshout-20261030T0015Z.
 
 ## The blank, closed
 
