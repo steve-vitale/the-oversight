@@ -408,6 +408,30 @@ function analyze(evidDir) {
   const medianDays = daysSorted[Math.floor(daysSorted.length / 2)];
   const deathsByCause = {};
   for (const r of rows) for (const [k, v] of Object.entries(r.deaths || {})) deathsByCause[k] = (deathsByCause[k] || 0) + v;
+  // Supplementary breakdowns (same corpus, same legs): channel shape of
+  // the evade phenomenon vs the scatter phenomenon, wave-4 meeting
+  // shape/outcome, and evader gear/scholar summary.
+  const byChannel = {};
+  for (const j of U) {
+    const t = byChannel[j.shape] = byChannel[j.shape] || { meetings: 0, evades: 0, scatters: 0 };
+    t.meetings++;
+    if (j.oc.cls === 'PRE-CONTACT-EVADE') t.evades++;
+    if (j.oc.cls === 'PRE-CONTACT-SCATTER') t.scatters++;
+  }
+  const byWaveMeetings = countBy(U, j => String(j.wave));
+  const scatterByWave = {};
+  for (const j of U.filter(x => x.oc.cls === 'PRE-CONTACT-SCATTER')) scatterByWave[j.wave] = (scatterByWave[j.wave] || 0) + 1;
+  const w4ByShape = countBy(U4, j => j.shape);
+  const w4ByOutcome = countBy(U4, j => j.oc.cls);
+  const evArmorPs = evades.map(j => j.gear.armorP).filter(v => v != null);
+  const evArmorSorted = evArmorPs.slice().sort((a, b) => a - b);
+  const evGear = { armed: evades.filter(j => j.gear.armed).length,
+    scholarLed: evades.filter(j => j.scholarLed).length,
+    veteranW3: evades.filter(j => j.gear.veteranW3).length,
+    armorPMin: evArmorSorted.length ? evArmorSorted[0] : null,
+    armorPMedian: evArmorSorted.length ? evArmorSorted[Math.floor(evArmorSorted.length / 2)] : null,
+    armorPMax: evArmorSorted.length ? evArmorSorted[evArmorSorted.length - 1] : null };
+  const deathMatchPlayerTrue = evadeDetail.filter(d => d.deathMatch && d.deathMatch.player).length;
   const completeness = corpusOk && joinErrors === 0 && otherCount === 0 && evadelogMismatch === 0;
   return { corpusOk, joinTotal, joinErrors, branchMismatches, waveDisagree,
     universeN: U.length, evadeN: evades.length, wave4N: U4.length, wave4EvadeN: ev4.length,
@@ -427,6 +451,8 @@ function analyze(evidDir) {
     laterMeetingsAny: evadeDetail.filter(d => d.laterSameVidMeetings > 0).length,
     repeat3plus: repeat3plus.map(([k, n]) => ({ key: k, n })),
     otherCount, shapeOtherCount, demand, perSeed,
+    byChannel, byWaveMeetings, scatterByWave, w4ByShape, w4ByOutcome,
+    evGear, deathMatchPlayerTrue,
     wall: { won, wonFull, nationalEver, nationalFinal, table: tableN, entered,
       wave1reach: waveReachCount(1), wave2reach: waveReachCount(2), wave3reach: waveReachCount(3),
       wave4reach: waveReachCount(4), wave5reach: waveReachCount(5),
@@ -511,6 +537,9 @@ function main() {
   console.log(`EVADES WARNED=${res.evWarned}/${res.evadeN} W1=${res.evW1} W2=${res.evW2} W3=${res.evW3} anomalies=${res.evadeAnomalies}`);
   console.log(`EVADES-BY-WAVE-WARNED: ${JSON.stringify(res.evByWaveWarned)} BY-WAVE-PARTY: ${JSON.stringify(res.evByWaveParty)}`);
   console.log(`EVADELOG: lines=${res.evadelogLines} mismatch=${res.evadelogMismatch} badLineCounts=${res.evadelogBadLines} distinctLines=${res.distinctLines.length}`);
+  console.log(`BY-CHANNEL: ${JSON.stringify(res.byChannel)} BY-WAVE-MEETINGS: ${JSON.stringify(res.byWaveMeetings)} SCATTER-BY-WAVE: ${JSON.stringify(res.scatterByWave)}`);
+  console.log(`WAVE4-BY-SHAPE: ${JSON.stringify(res.w4ByShape)} WAVE4-BY-OUTCOME: ${JSON.stringify(res.w4ByOutcome)}`);
+  console.log(`EVADER-GEAR: ${JSON.stringify(res.evGear)} deathMatchPlayerTrue=${res.deathMatchPlayerTrue}`);
   console.log(`AFTER-EVADE: nextType medianGap=${res.nextTypeMedianGap} none=${res.nextTypeNone}/${res.evadeN} outcomes=${JSON.stringify(res.nextTypeOutcomes)}; nextSame medianGap=${res.nextSameMedianGap} none=${res.nextSameNone}/${res.evadeN} outcomes=${JSON.stringify(res.nextSameOutcomes)}; sameIndividualCandidates=${res.sameIndividualCandidates}`);
   console.log(`VILLAGER-AFTERMATH: laterMeetingsAny=${res.laterMeetingsAny}/${res.evadeN} deathMatches=${res.deathMatches} deathsMatchableSeeds=${res.deathsMatchableSeeds}/32 repeatEvaders3plus=${JSON.stringify(res.repeat3plus)}`);
   console.log(`TAXONOMY-OTHER=${res.otherCount} SHAPE-OTHER=${res.shapeOtherCount}`);
