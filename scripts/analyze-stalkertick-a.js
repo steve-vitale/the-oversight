@@ -258,9 +258,11 @@ function analyze(evidDir, chaincloseDir, outPath) {
     judged.push(entry);
   }
   // Non-vanishing comparison set: wild w4 traces with fate
-  // SURVIVED-TO-END or OTHER-REMOVE, sorted by (seed, inst), first 3
-  // with any turn events preferred, then first 3 overall.
-  const nonVan = wild.filter(t => t.fate === 'SURVIVED-TO-END' || t.fate === 'OTHER-REMOVE')
+  // SURVIVED-TO-END, excluding the judged chains' matched instances
+  // (a judged OTHER-REMOVE chain is vanishing, not a comparison case),
+  // sorted by (seed, inst), first 3.
+  const judgedKeys = new Set(judged.filter(j => j.matchedInst).map(j => j.chain.seed + '|' + j.matchedInst));
+  const nonVan = wild.filter(t => t.fate === 'SURVIVED-TO-END' && !judgedKeys.has(t.seed + '|' + t.inst))
     .sort((a, b) => (a.seed - b.seed) || String(a.inst).localeCompare(String(b.inst)));
   const comparison = nonVan.slice(0, 3).map(t => {
     const tp = tickPath(t, t.lastSeenDay);
