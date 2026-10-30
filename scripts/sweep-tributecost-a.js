@@ -94,6 +94,22 @@ function scholarDay(Game) {
 function rosterIds(Game) {
   try { return ((Game.state.village || {}).roster || []).slice(); } catch (e) { return []; }
 }
+// endRunSnapshot(Game) — sim-recorderfix-a (round-1639 metric review):
+// the loss-day snapshot gap. Daily pantry/population snapshots land in
+// the post-daily hook, so a village-lost run whose loss day yields no
+// post-daily has series of length days-1. This pure-read snapshot,
+// taken immediately after runDays returns alongside the existing
+// end-of-run link snapshot, captures that loss day's final state
+// (scholarDay == result.days on loss runs; on survived runs it is the
+// post-loop state for the final day). It is a separate top-level row
+// field, never a series entry, so existing series counts are untouched.
+function endRunSnapshot(Game) {
+  return {
+    scholarDay: scholarDay(Game),
+    pantryKcal: Math.round(pantryKcal(Game)),
+    pop: rosterIds(Game).length,
+  };
+}
 function otherPantryKcal(Game, vid) {
   try {
     const ov = Game._otherVillage ? Game._otherVillage(vid) : null;
@@ -254,6 +270,9 @@ async function runSeed(seed, policyId, days) {
   }
   const result = await runDays(Game, policy, { days, manifest, sampleEvery: 1 });
   // End-of-run snapshot (a village lost mid-day still gets its final state).
+  // sim-recorderfix-a: pantry/population end snapshot alongside the link
+  // snapshot, closing the loss-day gap (series days-1 on loss runs).
+  const endSnapshot = endRunSnapshot(Game);
   let endLinks = [];
   try { endLinks = linkSnapshot(Game, seenHistory); } catch (e) {}
   const endGate = { rank: 'village', nationalLive: false, links: [], deed: null, seat: null };
@@ -315,7 +334,7 @@ async function runSeed(seed, policyId, days) {
     popDaily: rec.popDaily,
     popSamples: result.samples.pop || [],
     joiners: rec.joiners, leavers: rec.leavers,
-    linkDays: rec.linkDays, endLinks,
+    linkDays: rec.linkDays, endLinks, endSnapshot,
     payTributeEvents: rec.payTributeEvents,
     tributeArrivals: rec.tributeArrivals,
     courtCalls: rec.courtCalls,
@@ -409,4 +428,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch(e => { console.error('FATAL', e); process.exit(1); });
-module.exports = { runSeed, pantryKcal, linkSnapshot };
+module.exports = { runSeed, pantryKcal, linkSnapshot, endRunSnapshot, rosterIds };
