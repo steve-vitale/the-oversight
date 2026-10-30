@@ -209,7 +209,141 @@ would change game code (the stashfetch change) under the running
 band's later seeds and corrupt its comparability. Follow-up
 closeout owed: confirm evidence + rebase + merge (or hold, per the
 confirm verdict). The pilot corpus and verdict in this file are
-final; only the confirm section is outstanding.
+final; only the confirm section is outstanding. UPDATE (adopted
+worker, fleshout-20261030T1639Z): the confirm section above is
+now written and the verdict is Confirm GO; rebase + merge
+preparation follows in this run.
+
+## CONFIRM BAND — run by the adopted worker (fleshout-20261030T1639Z), verdict: Confirm GO
+
+The outstanding confirm section is now closed. The adopted worker
+ran the prereg's confirm band fresh: seeds 75117–75128, same 180d
+death-aware horizon, tableseat-nowait policy, same env set, EVID
+evidence/2026-10-30/perseed-refusalsay-a-confirm/ (12 census + 12
+fresh rows, sweep summary corpus ok=true, census ok=true). The
+analyzer was run over the confirm corpus
+(evidence/2026-10-30/sim-refusalsay-a-confirm-analysis.json). No
+game code changed between the pilot and confirm bands on this
+branch; the rebase onto master (fullseatgate-a) happens only after
+the sweep, per the closeout's deferral.
+
+| Confirm leg (prereg confirm rule) | Bar | Result |
+|---|---|---|
+| Pilot DIAG-GO | prerequisite | PASS (above, unchanged) |
+| Confirm dissolved rows | >= 20 | PASS — 77 |
+| Seeds | 12/12 valid | PASS — rsValidSeeds 12; per-seed diag errs 0, overflow empty, installed true, windows > 0 on all 12 (75117: 20, 75118: 29, 75119: 44, 75120: 101, 75121: 12, 75122: 30, 75123: 28, 75124: 18, 75125: 31, 75126: 9, 75127: 5, 75128: 12), attached == windows on every seed, 339 windows total |
+| Probe coverage | >= 95% of dissolved rows | PASS — 77/77 (100%) |
+| Bracket rate | >= 95% of probe-carrying dissolved rows | PASS — 77/77 (100%), 0 unbracketed |
+| Gate identification | >= 95% of refusal rows from say text | PASS — 77/77 (100%), all gateSource 'say-text' |
+| Have/need capture | >= 95% of muster rows with parsed have AND need | PASS — 77/77 (100%), every row have=0, need=10 |
+| Classification | 0 UNCLASSIFIED | PASS — 0 UNCLASSIFIED; fates SCHOLAR-RESTORED 52, SPAWN-ENDED 25; cause start-post-gone 77/77 |
+| Substrate | NOT judged on confirm band (no draftflag comparator corpus) | n/a, as the prereg provides — reported as not-applicable, never as a pass. The pilot substrate leg stands as this arm's substrate verdict. |
+| Confirm sense | >= 1 chain | PASS — chains below, with gate text quoted |
+
+**Confirm verdict: Confirm GO.** Pilot DIAG-GO + 77 dissolved rows
++ 12/12 valid + every rate at 100% against its >= 95% bar +
+classification complete + confirm sense. This is not
+confirm-inconclusive (77 >= 20) and it neither upgrades nor
+downgrades the pilot verdict — it confirms it on a fresh band.
+
+### Confirm refusal numbers in full
+
+Dissolved population: 77 rows, all 'dissolved-no-tbend', all
+start-post-gone, all intendedMid herald, all title THE HERALD.
+
+- Per seed: 75117: 0, 75118: 0, 75119: 3, 75120: 74, 75121: 0,
+  75122: 0, 75123: 0, 75124: 0, 75125: 0, 75126: 0, 75127: 0,
+  75128: 0. Herald clusters are seed-dependent, as the prereg
+  warned: ten confirm seeds yield zero dissolved rows, and one
+  seed (75120) carries 74 of the 77.
+- Window distribution: refusal:muster 77. No call, no gap, no
+  unbracketed rows.
+- Gate distribution: muster, from say text, 77/77. No campaign,
+  no unknown-say, no elimination rows.
+- Have/need per row: have=0, need=10 on all 77 rows — the same
+  zero-muster picture as the pilot, now on 197/197 rows across
+  both bands combined. The full per-row list is in
+  evidence/2026-10-30/sim-refusalsay-a-confirm-analysis.json
+  (probeRows); distinct captured say texts across both bands = 1,
+  the pilot text quoted above, verbatim.
+
+### Confirm sense: one chain read end to end (plus a second cluster)
+
+Chain 3 — seed 75120, days 75–80 cluster (49 rows) and days
+129–138 cluster (25 rows) on the same seed. The seed survives the
+full 180 days (end=survived, won=0, nationalEver=0), so these are
+not death-throe faces: a living village's scholar keeps meeting
+the Herald alone across two separate months and is refused
+identically each time, have=0, need=10. The first cluster's
+census snapshots show no titan-flagged roster entry (the herald
+arrives intra-day); by the second cluster the census DOES show
+the herald, at 222 HP on days 138–139 — down from its 700 HP
+full strength, so something outside these refused faces has hurt
+it — yet the refusals continue with have=0. That is the gate's
+logic made visible: it counts mustered blades, not titan HP. A
+wounded Herald still refuses a solo scholar with zero blades
+behind her. Nothing reads as a melt: every row is the same
+4-event window (startCombat enter, say enter/exit, startCombat
+exit), no live fight, scholar HP unchanged at dissolve.
+
+Chain 4 (corroboration) — seed 75119, day 148, 3 rows: the same
+text, the same 0/10, on a village-lost seed (174 days). The
+refusal does not depend on the village's fate.
+
+### Confirm wall numbers (own band, no smoothing against pilot)
+
+won 3 (full 0), nationalEver 8, nationalFinal 6, tableReached 6,
+tableEntered 3, wave reach 1:12, 2:12, 3:11, 4:9, 5:0, median
+survival 143d, deaths 458. Reported on their own band, per the
+prereg; the pilot band's figures above are unchanged. Wave 5
+reached 0 on both bands — the scale wall stands, and this arm's
+contribution to it is the confirmed gate text, not a moved gate.
+
+### Dissolveprobe question: answered, on both bands
+
+The question this arm was adopted to close — is the dissolved
+population really titan-entry-gate refusals, and which gate, with
+what numbers? — is now answered from the game's own spoken text,
+not elimination: YES, on 197/197 dissolved rows across pilot +
+confirm, every one a muster-gate refusal of THE HERALD, need 10
+allied blades, have 0 on every row. No row required elimination,
+no row was unknown-say, no campaign gate appeared. The question
+is closed; what remains open is the follow-up the pilot evidence
+already ranked: why a muster never forms (backlog item, already
+logged — not duplicated here).
+
+### Metric review, confirm addendum (for the NEXT run)
+
+- Confirm-band concentration: 74/77 rows on one seed. The
+  prereg's >= 20 threshold is met, but a future instrument arm
+  whose population clusters this hard should pre-register a
+  per-seed spread note (e.g. "dissolved rows on >= 2 seeds" as
+  a robustness check) so a single-seed cluster cannot carry a
+  confirm alone. This arm's confirm still passes as written —
+  the threshold counts rows, and 77 rows on two seeds (75119 +
+  75120) is what the band yielded — but the concentration is
+  stated, not hidden.
+- No new telemetry deviation check was run for the confirm band:
+  the arm's prereg names no confirm telemetry leg, the pilot
+  check's REGIME-artifact verdict already covers this policy
+  regime, and the confirm band has no draftflag comparator. The
+  pilot telemetry verdict stands; nothing in the confirm numbers
+  reopens it.
+- No new sim-findings backlog entries from this band: the
+  muster-never-forms gap is already logged (pilot), and the
+  herald-HP observation (222 HP on 75120 day 138) is a sense
+  note about gate logic, not a new gap.
+
+### Updated ranked next
+
+1. (DONE by this run) Confirm band 75117–75128 — Confirm GO.
+2. Muster-formation follow-up: why have stays 0 on 197/197
+   refused faces — is mustering ever attempted on these seeds,
+   and what would make the scholar muster before facing?
+   (Connects to the open steve-call on refused-face routing.)
+3. No game change is proposed by this arm. The gate text is now
+   quoted fact on two bands, not elimination, and any
+   muster/routing work starts from it.
 
 ## Outputs
 
