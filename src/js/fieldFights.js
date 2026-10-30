@@ -868,6 +868,12 @@
       // help is near, they shout instead of scattering. One ally answers per
       // fight — a second pair of hands, off-balance, exposed (no armor).
       var helpCalled = false, allyIn = false, allyHp = 0;
+      // JOINENDLINES (sim-joinendlines-a, 2026-10-29): true only when the
+      // hopeless-shout branch below fired this fight — NOT for
+      // allyFromStart joins (helpCalled is set by both paths). The two
+      // narration-only end lines below gate on this flag, so unjoined
+      // and allyFromStart endings are byte-unchanged.
+      var shoutJoined = false;
       var wardCarries = [];
       var allyMax = 70, allyVid = null, allyName = 'Someone';
       // FIELD-WOUND CARRYOVER (tackle-wound2, 2026-10-27): a field-fight ally
@@ -1587,6 +1593,7 @@
           } catch (e) {}
           rec.calledHelp = true;
           rec.allyVid = allyVid;
+          shoutJoined = true;
           rec.log.push(vName + ' is losing — shouts for help! ' + allyName + ' charges in!');
           // SHOUTREC (sim-shoutrec-a, 2026-10-29): shout-moment
           // snapshot — the engine's own morale inputs at the shout.
@@ -1660,6 +1667,12 @@
           } else {
             rec.outcome = 'vFlee'; rec.fleeHopeless = hopeless; rec.fleeHpFrac = vHp / vHpMax;
             if (rec.intent === 'learn') rec.fleeLearn = true;
+            // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
+            // only — the floor flee after a shout previously ended with
+            // no line at all (the ally's "charges in!" was the last
+            // line). Names the answer as a past act, so the line stays
+            // honest even if the ally has since gone down.
+            if (shoutJoined) rec.log.push(allyName + ' answered ' + vName + '\'s shout, but ' + vName + ' is past holding — they run while running still works.');
             break;
           }
         }
@@ -1675,7 +1688,16 @@
           rec.log.push('The lead falls — the pack\'s coordination shatters. The rest scatter or die.');
           break;
         }
-        if ((members[0].hp / members[0].maxHp) < mBreak) { rec.outcome = 'mFlee'; break; }
+        if ((members[0].hp / members[0].maxHp) < mBreak) {
+          rec.outcome = 'mFlee';
+          // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
+          // only — a drive-off after a shout previously ended with no
+          // line at all (a log reader could not tell the beast fled).
+          // Names the answer as a past act, so the line stays honest
+          // even if the ally has since gone down.
+          if (shoutJoined) rec.log.push(mPhraseCap + ' breaks — wounded past its line, it turns and runs. ' + allyName + ' answered ' + vName + '\'s shout.');
+          break;
+        }
         // ABILITY bookkeeping: the debt of this round settles the next.
         abLastRoundTaken = abRoundTaken;
       }
