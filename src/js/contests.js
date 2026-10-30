@@ -6062,6 +6062,48 @@
         dl[contestId] = (dl[contestId] || 0) + 1;
       }
     } catch (e4) {}
+    // DEATH RECORD (sim-contestdeath-b 2026-10-30, backlog #1541): every
+    // other death path routes through registerDeath — the contest path
+    // never did, so contest deaths got no death tele, no fallen entry,
+    // and no grief event, though the village narrated them. Record them
+    // like other deaths: registerDeath fires the tele, the grief event,
+    // the death-in-family deeds and deathSeen; the fallen push mirrors
+    // the lethal-hurt branch (registerDeath itself never writes fallen).
+    // No witnesses are passed, so registerDeath seeds no death gossip —
+    // the village news already exists as _cxGossip('died'), seeded at
+    // both call sites BEFORE this runs. killerId stays null: a contest
+    // death is not a player murder, so no murder event fires.
+    // CORPSE (same run, open question (a)): the body died on camera in
+    // the System's arena, off-map — there is no honest field tile, and
+    // the engine's corpse is node+tile scoped (corpseAt), so a default
+    // registerDeath call would plant a phantom lootable body at the
+    // scholar's feet. No canon says the body comes home, so the corpse
+    // registerDeath just built is removed again right here: tele, grief,
+    // deeds and deathSeen already fired inside registerDeath; only the
+    // phantom body goes. A contest death therefore records tele + fallen
+    // + grief with NO field corpse, by design.
+    // Fallen is pushed only on the first registration (registerDeath
+    // returns null when deathSeen already holds the vid) — a re-entrant
+    // kill can never write a second fallen entry.
+    try {
+      if (pid && pid !== 'player' && this.registerDeath) {
+        let _nm = pid;
+        try { _nm = this.displayName(pid); } catch (eN) {}
+        const _corpse = this.registerDeath({ kind: 'villager', villagerId: pid, name: _nm, cause: 'contest', killerId: null });
+        if (_corpse) {
+          try {
+            const _list = this.corpses ? this.corpses() : [];
+            const _ix = _list.indexOf(_corpse);
+            if (_ix >= 0) _list.splice(_ix, 1);
+          } catch (eC) {}
+          try {
+            const _vv = this.state.village || {};
+            _vv.fallen = _vv.fallen || [];
+            _vv.fallen.push({ villagerId: pid, day: (this.state.scholar || {}).day || 0, cause: 'contest', name: this.fallenName ? this.fallenName(pid) : _nm });
+          } catch (eF) {}
+        }
+      }
+    } catch (eR) {}
     // CRISIS (Gap 4, 2026-10-10): blood on air — a villager died on camera.
     // _cxKillContestant is the choke point for EVERY contest death
     // (_contestDie watch path, _contestResolveOthers multi-take, the duel
