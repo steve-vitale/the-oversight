@@ -66,7 +66,7 @@ check('T6d only havenGrowth.js changed vs pinned base', jsChanged === 'src/js/ha
 check('T6e no spawn/damage/economy value in the fix hunk', (() => {
   let hunk = '';
   try { hunk = sh(`git diff ${BASE} HEAD -- src/js/havenGrowth.js`); } catch (e) {}
-  const added = hunk.split('\n').filter((l) => l.startsWith('+') && !l.startsWith('+++') && !l.startsWith('+//'));
+  const added = hunk.split('\n').filter((l) => l.startsWith('+') && !l.startsWith('+++') && !/^\+\s*\/\//.test(l));
   return added.every((l) => !/\.hp|damage|kcal|pantry|raidN|linger|pendingEncounter =/.test(l));
 })());
 if (failures.length) { console.log(`PROOF-RED: ${failures.length} failure(s): ${failures.join(', ')}`); process.exit(1); }
