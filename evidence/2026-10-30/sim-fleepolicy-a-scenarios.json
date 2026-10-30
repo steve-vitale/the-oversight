@@ -1,0 +1,83 @@
+{
+ "seed": 75102,
+ "scenarios": [
+  {
+   "scenario": "P-door",
+   "monster": "gallowdeer",
+   "origin": {
+    "id": "gallowdeer",
+    "lingering": true,
+    "titan": false,
+    "tx": 4,
+    "ty": 4,
+    "hp": 400
+   },
+   "strikes": 0,
+   "turns": 3,
+   "result": "fled",
+   "over": true,
+   "ctx": {
+    "fpLingererFights": 1,
+    "fpStrikeTurns": 2,
+    "fpFleePhaseFights": 1,
+    "fpFleeTurns": 1,
+    "fpFleeAbandoned": 0,
+    "fpDoorFlees": 1,
+    "fpEdgeFlees": 0
+   },
+   "originInWorld": true,
+   "originHpAfter": 130,
+   "occupantAfter": {
+    "id": "gallowdeer",
+    "hp": 130,
+    "wave": 1,
+    "lingering": true,
+    "tx": 4,
+    "ty": 4,
+    "sameAsOrigin": true
+   },
+   "classification": "RESTORED",
+   "production": "FLED-LINGERER",
+   "preHp": 400
+  },
+  {
+   "scenario": "P-chase",
+   "monster": "bulldozer",
+   "origin": {
+    "id": "bulldozer",
+    "lingering": true,
+    "titan": false,
+    "tx": 4,
+    "ty": 4,
+    "hp": 400
+   },
+   "strikes": 0,
+   "turns": 9,
+   "result": "fled",
+   "over": true,
+   "ctx": {
+    "fpLingererFights": 1,
+    "fpStrikeTurns": 3,
+    "fpFleePhaseFights": 1,
+    "fpFleeTurns": 6,
+    "fpFleeAbandoned": 0,
+    "fpDoorFlees": 0,
+    "fpEdgeFlees": 6
+   },
+   "originInWorld": true,
+   "originHpAfter": 68,
+   "occupantAfter": {
+    "id": "bulldozer",
+    "hp": 68,
+    "wave": 1,
+    "lingering": true,
+    "tx": 4,
+    "ty": 4,
+    "sameAsOrigin": true
+   },
+   "classification": "RESTORED",
+   "production": "FLED-LINGERER",
+   "preHp": 400
+  }
+ ]
+}
