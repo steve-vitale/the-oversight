@@ -110,7 +110,7 @@ function deathSummary(deaths) {
   }
   return m;
 }
-function evidDirOf() { return process.env.EVID || path.join(REPO, 'evidence', '2026-10-30', 'perseed-removal-a'); }
+function evidDirOf() { return process.env.EVID || path.join(REPO, 'evidence', '2026-10-30', 'perseed-draftflag-a'); }
 
 async function runOne(seed, days, evidDir) {
   process.env.LEANLINKRESCUE = '1';
