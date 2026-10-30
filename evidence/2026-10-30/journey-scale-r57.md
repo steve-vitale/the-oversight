@@ -253,8 +253,16 @@ a real deviation. NOT rolled.
   response to a suspected regression.
 
 ## Landing (filled at closeout)
-Master at worktree creation: 70ae4c83c. (Filled at closeout: rebase
-if master moved, merge, release.)
+Master at worktree creation: 70ae4c83c. Master moved mid-run to
+e5e5daf60 (sibling sim-stalkertick-a evidence, landed by a sibling
+loop). Per body step 8 the branch was rebased onto the new master
+before merging; proof re-run after rebase (node --check on driver +
+analyzer, clean); measured files verified byte-identical through
+the rebase (0 diff lines on this run's paths vs the pre-rebase
+evidence commit). Measured results above stay pinned to the run
+base 70ae4c83c — the rebase changes no measured file's content.
+Merged locally, pending ship (no bump, no push, no live verify —
+ship loop owns those).
 
 ## CHECK-QUICK (filled at closeout)
 `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest`:
