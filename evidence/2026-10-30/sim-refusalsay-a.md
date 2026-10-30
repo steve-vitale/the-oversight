@@ -195,6 +195,22 @@ itself warns against comparing pre-seat substrates to it.)
    quoted fact, not elimination, and any muster/routing work
    starts from it.
 
+## CORRECTION — confirm band resumed by the original worker (closeout, 17:05Z)
+
+After this evidence was written, the recovery coordinator found the
+original refusalsay worker ALIVE and running the confirm band (seeds
+75117–75128, started 16:46Z, 6/12 seeds complete at 17:02Z, process
+verified live by ps, not by heartbeat). The "confirm NOT run"
+statement in the closeout note above was true when written and is
+now outdated: confirm is in progress, not absent. The pilot DIAG-GO
+verdict above stands unchanged. The merge of this branch is DEFERRED
+until the confirm sweep finishes: rebasing onto current master now
+would change game code (the stashfetch change) under the running
+band's later seeds and corrupt its comparability. Follow-up
+closeout owed: confirm evidence + rebase + merge (or hold, per the
+confirm verdict). The pilot corpus and verdict in this file are
+final; only the confirm section is outstanding.
+
 ## Outputs
 
 - scripts/policies/refusalsay-diag.js, scripts/sweep-refusalsay-a.js
