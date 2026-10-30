@@ -69,9 +69,16 @@ try {
     'thirdDeath=' + JSON.stringify(green.thirdDeath && { passed: green.thirdDeath.passed }));
 } finally {
   // Proof scratch cleanup (r56 pattern): tele + transcripts for seed 24998 only.
-  for (const f of fs.readdirSync(EVID)) {
-    if ((f.includes('-24998.') || f.includes('-24998-')) && (f.includes('journey-succession-r72-') || f.includes('journey-succession-r75-'))) {
-      try { fs.unlinkSync(path.join(EVID, f)); console.log('SCRATCH-DELETED ' + f); } catch (e) {}
+  // RED (r72 driver) writes into evidence/2026-10-29 (its hardcoded EVID_DIR);
+  // GREEN (r75 driver) writes into evidence/2026-10-30 — scan BOTH, or the
+  // RED scratch survives (r75 proof-test fix; r72's test never saw this
+  // because both its drivers shared one EVID_DIR).
+  for (const dir of [path.join(ROOT, 'evidence', '2026-10-29'), EVID]) {
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir)) {
+      if ((f.includes('-24998.') || f.includes('-24998-')) && (f.includes('journey-succession-r72-') || f.includes('journey-succession-r75-'))) {
+        try { fs.unlinkSync(path.join(dir, f)); console.log('SCRATCH-DELETED ' + f); } catch (e) {}
+      }
     }
   }
 }
