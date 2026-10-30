@@ -175,19 +175,33 @@ here for the coordinator's findings backlog, not built here.
   not 'steady' — bold/cautious are the only values that shift
   fleeAt, so the filter excludes those two.
 - node --check clean on fieldFights.js and all three new scripts.
-- node scripts/check.js --quick: ran to completion (~14 min) but its
-  exit code was lost — the run was piped through `tail -5`, so the
-  pipeline exit reflects tail, not check.js. NOT claimed green on
-  that basis. Instead, the four green-list tests most likely to
-  assert field-fight log contents were run individually with
-  captured exit codes, all 0: test-fieldfight-summary-20261013.js
-  (4 passed), test-fightlog-names-20261012.js (ALL GREEN),
+- node scripts/check.js --quick: first run completed in 837s with
+  its exit code lost to a `tail -5` pipe, so it was NOT claimed
+  green on that basis. A second, fully captured re-run finished
+  284 passed, 6 failed in 686s (exit 1). The 6 failures are
+  PRE-EXISTING, proven by re-running all six individually against
+  the BASE fieldFights.js (HEAD~2, pre-change) with the same
+  exit-1 results: godpath/test-measurement-proof-update.js
+  ("Proof source inputs are not current"),
+  godpath/test-measurement-workflow.js (retained neutrality proof
+  vs current inputs), godpath/test-mobile-combat-cadence.js
+  (Continue/announced-round), godpath/test-occupation-panels.js
+  (CLI workflow), godpath/test-phone-frame-proof.js (stale phone
+  receipts), test-establishment-r20-fixes-20261020.js (racks-full
+  voice gate). None touches field-fight narration; the two
+  measurement-proof failures are stale-proof failures that predate
+  this arm (the base already carries the shoutrec fieldFights
+  change). My version was restored byte-identical after the
+  base-state check (worktree == HEAD verified). Separately, the
+  four green-list tests most likely to assert field-fight log
+  contents were run individually with captured exit codes, all 0:
+  test-fieldfight-summary-20261013.js (4 passed),
+  test-fightlog-names-20261012.js (ALL GREEN),
   test-aid-fight-wired-20261014.js (9 passed),
   test-break-monsters3-fieldfights-20261008.js (26 passed).
-  A full unpiped --quick re-run is owed before any ship claim that
-  needs it; the narration-only diff (two log pushes behind a
-  shout-only flag) plus the band-wide neutrality gate bound the
-  blast radius in the meantime.
+  Net: this arm breaks no green-list test; the 6 failures belong
+  to the tree, not to this change, and are flagged here for the
+  coordinator rather than fixed here (out of scope).
 
 ## Remaining blanks (documented, not built — out of scope)
 
