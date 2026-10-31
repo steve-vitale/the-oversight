@@ -1,0 +1,162 @@
+{
+  "dir": "evidence/2026-10-31/perseed-fieldfinish2-pilot/leadfeast",
+  "measured": {
+    "total": 71,
+    "contact": 0,
+    "fought": 64,
+    "unclassified": 7,
+    "contactRows": [],
+    "unclassifiedRows": [
+      {
+        "seed": "87109",
+        "day": 45,
+        "mid": "buffering",
+        "outcome": "vFlee",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87124",
+        "day": 34,
+        "mid": "redactor",
+        "outcome": "vFlee",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87124",
+        "day": 40,
+        "mid": "redactor",
+        "outcome": "vDie",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87124",
+        "day": 66,
+        "mid": "terms_of_service",
+        "outcome": "evade",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87127",
+        "day": 52,
+        "mid": "spool",
+        "outcome": "evade",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87127",
+        "day": 86,
+        "mid": "callback",
+        "outcome": "evade",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87127",
+        "day": 93,
+        "mid": "terms_of_service",
+        "outcome": "evade",
+        "reason": "missing:mHpStart,mMaxHp"
+      }
+    ],
+    "reconciles": true,
+    "shares": {
+      "contact": 0,
+      "fought": 0.9014084507042254,
+      "unclassified": 0.09859154929577464
+    }
+  },
+  "capture": {
+    "total": 71,
+    "evadeRows": 4,
+    "evadeCaptured": 0,
+    "evadeCaptureRate": 0,
+    "missingHpRows": 7,
+    "missingByCaller": {
+      "expedition": 7
+    },
+    "missingByOutcome": {
+      "vFlee": 2,
+      "vDie": 1,
+      "evade": 4
+    },
+    "contactShapedUnclassified": 4,
+    "contactShapedDetail": [
+      {
+        "seed": "87124",
+        "day": 66,
+        "mid": "terms_of_service",
+        "outcome": "evade",
+        "rounds": 0,
+        "mDealt": 0,
+        "mHpLeft": 346,
+        "caller": "expedition"
+      },
+      {
+        "seed": "87127",
+        "day": 52,
+        "mid": "spool",
+        "outcome": "evade",
+        "rounds": 0,
+        "mDealt": 0,
+        "mHpLeft": 311,
+        "caller": "expedition"
+      },
+      {
+        "seed": "87127",
+        "day": 86,
+        "mid": "callback",
+        "outcome": "evade",
+        "rounds": 0,
+        "mDealt": 0,
+        "mHpLeft": 318,
+        "caller": "expedition"
+      },
+      {
+        "seed": "87127",
+        "day": 93,
+        "mid": "terms_of_service",
+        "outcome": "evade",
+        "rounds": 0,
+        "mDealt": 0,
+        "mHpLeft": 373,
+        "caller": "expedition"
+      }
+    ]
+  },
+  "backfill": {
+    "filledRows": 4,
+    "total": 71,
+    "contact": 0,
+    "fought": 68,
+    "unclassified": 3,
+    "contactRows": [],
+    "unclassifiedRows": [
+      {
+        "seed": "87109",
+        "day": 45,
+        "mid": "buffering",
+        "outcome": "vFlee",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87124",
+        "day": 34,
+        "mid": "redactor",
+        "outcome": "vFlee",
+        "reason": "missing:mHpStart,mMaxHp"
+      },
+      {
+        "seed": "87124",
+        "day": 40,
+        "mid": "redactor",
+        "outcome": "vDie",
+        "reason": "missing:mHpStart,mMaxHp"
+      }
+    ],
+    "reconciles": true,
+    "shares": {
+      "contact": 0,
+      "fought": 0.9577464788732394,
+      "unclassified": 0.04225352112676056
+    }
+  }
+}
