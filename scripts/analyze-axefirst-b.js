@@ -149,18 +149,28 @@ function censusLeg(inst) {
 }
 
 function main() {
-  const dir = process.argv[2];
-  const out = process.argv[3];
-  if (!dir) { console.error('usage: analyze-axefirst-b.js <corpusDir> [outJson]'); process.exit(2); }
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort();
-  const legs = files.map((f) => censusLeg(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))));
+  // Usage: analyze-axefirst-b.js [--out <file>] <corpusDir...>
+  // Guard and ON legs live in separate dirs (same file names), so
+  // multiple dirs are merged into one census. With one dir and no
+  // --out, prints the summary only.
+  const args = process.argv.slice(2);
+  let out = null;
+  const outIdx = args.indexOf('--out');
+  if (outIdx >= 0) { out = args[outIdx + 1]; args.splice(outIdx, 2); }
+  const dirs = args;
+  if (!dirs.length) { console.error('usage: analyze-axefirst-b.js [--out <file>] <corpusDir...>'); process.exit(2); }
+  const legs = [];
+  for (const dir of dirs) {
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort();
+    for (const f of files) legs.push(censusLeg(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))));
+  }
   const axeLegs = legs.filter((l) => l.firstAxeEvening !== null || l.firstAxeMorning !== null);
   const sourceCounts = {};
   for (const l of axeLegs) sourceCounts[l.source] = (sourceCounts[l.source] || 0) + 1;
   const pairingTriples = [];
   for (const l of legs) for (const d of l.pairing) pairingTriples.push({ seed: l.seed, woodwarm: l.woodwarm, loopDay: d });
   const summary = {
-    corpusDir: dir, legs: legs.length,
+    corpusDirs: dirs, legs: legs.length,
     legsWithAxe: axeLegs.length, sourceCounts,
     totalStrandMornings: legs.reduce((s, l) => s + l.strandMornings, 0),
     pairingTriples,

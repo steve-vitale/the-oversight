@@ -5,7 +5,8 @@
 // checks: completeness, errs 0, determinism byte-identity, and the
 // tracked-diff guard (src/ + scripts/policies/ empty vs pinned
 // base 003a9c2f391edd56f31a0f6f9f1305dfe6380a48).
-// Usage: node scripts/test-axefirst-b.js [pilotDir confirmDir [determinismDir]]
+// Usage: node scripts/test-axefirst-b.js [pilotGuard pilotOn confirmGuard confirmOn [determinismDir]]
+// Guard and ON legs live in separate dirs (same file names).
 // With no dirs, unit cases only.
 'use strict';
 const fs = require('fs');
@@ -133,8 +134,9 @@ function leg(seed, ww, morningsList, eveningsList, spawn) {
 }
 
 // --- corpus checks (only when dirs passed) ---
-const pilotDir = process.argv[2], confirmDir = process.argv[3], detDir = process.argv[4];
-if (pilotDir || confirmDir) {
+const pilotGuard = process.argv[2], pilotOn = process.argv[3], confirmGuard = process.argv[4], confirmOn = process.argv[5], detDir = process.argv[6];
+const pilotDir = pilotGuard, confirmDir = confirmGuard;
+if (pilotGuard || confirmGuard) {
   const PINNED = '003a9c2f391edd56f31a0f6f9f1305dfe6380a48';
   const root = path.join(__dirname, '..');
   try {
@@ -159,22 +161,24 @@ if (pilotDir || confirmDir) {
       check(label + ' ' + f + ' evenings>=mornings-1', inst.evenings.length >= inst.mornings.length, [inst.evenings.length, inst.mornings.length]);
     }
   }
-  if (pilotDir) checkCorpus(pilotDir, 16, 'pilot');
-  if (confirmDir) checkCorpus(confirmDir, 24, 'confirm');
-  if (detDir && pilotDir) {
-    const pilotFiles = fs.readdirSync(pilotDir).filter((f) => /s15215/.test(f) && f.includes('axefirst')).sort();
+  if (pilotGuard) checkCorpus(pilotGuard, 8, 'pilot-guard');
+  if (pilotOn) checkCorpus(pilotOn, 8, 'pilot-on');
+  if (confirmGuard) checkCorpus(confirmGuard, 12, 'confirm-guard');
+  if (confirmOn) checkCorpus(confirmOn, 12, 'confirm-on');
+  if (detDir && pilotOn) {
+    const pilotFiles = fs.readdirSync(pilotOn).filter((f) => /s15215/.test(f) && f.includes('axefirst')).sort();
     // Determinism file must byte-match the judged 15215 ON pilot file.
     const detFiles = fs.readdirSync(detDir).filter((f) => f.endsWith('.json')).sort();
     check('determinism dir has 1 file', detFiles.length === 1, detFiles.length);
     if (detFiles.length === 1) {
       const detData = fs.readFileSync(path.join(detDir, detFiles[0]), 'utf8');
       const onPilot = pilotFiles.filter((f) => {
-        const inst = JSON.parse(fs.readFileSync(path.join(pilotDir, f), 'utf8'));
+        const inst = JSON.parse(fs.readFileSync(path.join(pilotOn, f), 'utf8'));
         return inst.woodwarm === '1';
       });
       check('pilot has one 15215 ON file', onPilot.length === 1, onPilot);
       if (onPilot.length === 1) {
-        const judged = fs.readFileSync(path.join(pilotDir, onPilot[0]), 'utf8');
+        const judged = fs.readFileSync(path.join(pilotOn, onPilot[0]), 'utf8');
         check('determinism byte-identical', detData === judged, 'lengths ' + detData.length + ' vs ' + judged.length);
       }
     }
