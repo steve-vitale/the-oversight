@@ -185,22 +185,30 @@ if (!pureOnly) {
     eq(detGateCompare(censusDir(dirOf('base-guard')), censusDir(dirOf('off-guard'))).match, true, 'guard det-gate');
     eq(detGateCompare(censusDir(dirOf('base-on')), censusDir(dirOf('off-on'))).match, true, 'on det-gate');
   });
-  check('corpus: variant attempt/skip tables cover strand mornings', () => {
+  check('corpus: variant attempt/skip tables cover strand mornings (first morning = prev-not-stranded skip)', () => {
+    // A previous-evening gate cannot act on a strand's FIRST morning
+    // (no still evening precedes it): that morning appears only as a
+    // prev-not-stranded skip in the store, never in the attempt
+    // table. Later strand mornings must have an attempt or a
+    // gate-fired skip row.
     for (const leg of ['variant-guard', 'variant-on']) {
       const c = censusDir(dirOf(leg));
       const rows = attemptTable(dirOf(leg));
-      const strandMornings = new Set();
-      for (const st of c.strands) for (const n of st.nights) strandMornings.add(c.strands.length ? st.seed + ':' + n : '');
-      // Each strand morning must have an attempt or a gate-fired skip.
+      const insts = fs.readdirSync(dirOf(leg)).filter((f) => f.endsWith('.json'))
+        .map((f) => JSON.parse(fs.readFileSync(path.join(dirOf(leg), f), 'utf8')));
       for (const st of c.strands) {
-        for (const n of st.nights) {
-          const found = rows.some((r) => r.seed === st.seed && r.loopDay === n);
-          assert.ok(found, leg + ' strand morning missing from attempt table: ' + st.seed + ' day ' + n);
+        const inst = insts.find((x) => x.seed === st.seed);
+        for (let i = 0; i < st.nights.length; i++) {
+          const n = st.nights[i];
+          if (i === 0) {
+            const sk = (inst.strandfixStore.skips || []).find((x) => x.loopDay === n);
+            assert.ok(sk && sk.skip === 'prev-not-stranded', leg + ' first strand morning must be a prev-not-stranded skip: ' + st.seed + ' day ' + n);
+          } else {
+            const found = rows.some((r) => r.seed === st.seed && r.loopDay === n);
+            assert.ok(found, leg + ' strand morning missing from attempt table: ' + st.seed + ' day ' + n);
+          }
         }
       }
-      // Boundary mornings (attempt on the morning after the last still
-      // evening) are flagged, not counted as strand mornings.
-      void strandMornings;
     }
   });
   check('corpus: determinism byte-identical', () => {
