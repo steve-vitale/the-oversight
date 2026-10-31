@@ -1,0 +1,769 @@
+{
+  "corpusDir": "evidence/2026-10-31/sim-p4sleep-b-corpus-p4-f2-30d",
+  "policy": "nomadseek",
+  "horizonDays": 30,
+  "legs": 8,
+  "seeds": [
+    17511,
+    17512,
+    17513,
+    17514,
+    17515,
+    17516,
+    17517,
+    17518
+  ],
+  "totalGenuine": 1,
+  "totalDayTrips": 177,
+  "totalSleepReturns": 0,
+  "totalAwayOriginDays": 28,
+  "totalUnexplained": 6,
+  "totalExplainedMechanism": 6,
+  "totalExplainedSegmentOnly": 0,
+  "totalStillUnexplained": 0,
+  "classifiedFraction": 1,
+  "mechanismNamedFraction": 1,
+  "dominantMechanism": "deedHunt-sortie",
+  "dominantCount": 6,
+  "dominantShare": 1,
+  "mechanismCounts": {
+    "deedHunt-sortie": 6
+  },
+  "totalErrs": 0,
+  "perSeed": [
+    {
+      "seed": 17511,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 18,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 10,
+      "awayContinuations": 9,
+      "awayReturns": 1,
+      "unexplainedMornings": [
+        {
+          "loopDay": 12,
+          "class": "EXPLAINED-MECHANISM",
+          "reason": "counter",
+          "mechanism": "deedHunt-sortie",
+          "segment": "upkeep-1",
+          "hook": "upkeep-1-post",
+          "traceOnly": false,
+          "narration": "narrated",
+          "fromTile": "haven",
+          "toTile": "forest_floor",
+          "fromMap": [
+            4,
+            4
+          ],
+          "toMap": [
+            1,
+            4
+          ],
+          "fromGrid": [
+            8,
+            0
+          ],
+          "toGrid": [
+            8,
+            0
+          ],
+          "ctxDelta": {
+            "forageTrips": 0,
+            "tripHomeDetours": 0,
+            "recoverDays": 0,
+            "patrols": 0,
+            "nomadMoves": 0,
+            "nomadRoadDays": 0,
+            "nomadJoins": 0,
+            "capHuntSorties": 1,
+            "capHuntAmbushed": 0,
+            "capHuntNoticed": 0,
+            "capHuntFeastFights": 0,
+            "capHuntWaveFights": 0,
+            "capHuntNoTarget": 0,
+            "capHuntUnreached": 1,
+            "capHuntGone": 0,
+            "capHuntNoPos": 0,
+            "facedDraw": 0,
+            "thirstHome": 0,
+            "capFightsFinishedAtDusk": 0,
+            "capFinishStalled": 0,
+            "_capHuntAway": {
+              "before": null,
+              "after": 1
+            },
+            "_capHuntAwayHome": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightDay": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightSweeps": {
+              "before": null,
+              "after": null
+            }
+          },
+          "sayLines": [
+            "You are full enough.",
+            "The pantry is in the hall. Your hands are not.",
+            "No risky water to boil.",
+            "Drank clean water.",
+            "📋 June — 💧 Fetch water. June nods eagerly. They'll report back by next part.",
+            "Travel 3 tiles to forest floor.\n— Under the canopy —\nMushrooms thumb up through the duff in a ring — a fairy ring, old as the path. You step around it, not through it. Some rules are older than knowledge.",
+            "Movement — a deer, white tail raised in alarm.",
+            "👁 Wary. Ears always tracking. Get close before it knows you're there."
+          ],
+          "firstTravelLine": null,
+          "outMovesInWindow": 1,
+          "awayToHavenMoves": 0,
+          "roundTrip": false,
+          "windowEvents": 1
+        },
+        {
+          "loopDay": 16,
+          "class": "EXPLAINED-MECHANISM",
+          "reason": "counter",
+          "mechanism": "deedHunt-sortie",
+          "segment": "upkeep-1",
+          "hook": "upkeep-1-post",
+          "traceOnly": false,
+          "narration": "narrated",
+          "fromTile": "haven",
+          "toTile": "creek",
+          "fromMap": [
+            4,
+            4
+          ],
+          "toMap": [
+            5,
+            3
+          ],
+          "fromGrid": [
+            8,
+            0
+          ],
+          "toGrid": [
+            0,
+            7
+          ],
+          "ctxDelta": {
+            "forageTrips": 0,
+            "tripHomeDetours": 0,
+            "recoverDays": 0,
+            "patrols": 0,
+            "nomadMoves": 0,
+            "nomadRoadDays": 0,
+            "nomadJoins": 0,
+            "capHuntSorties": 1,
+            "capHuntAmbushed": 0,
+            "capHuntNoticed": 0,
+            "capHuntFeastFights": 0,
+            "capHuntWaveFights": 1,
+            "capHuntNoTarget": 0,
+            "capHuntUnreached": 0,
+            "capHuntGone": 0,
+            "capHuntNoPos": 0,
+            "facedDraw": 0,
+            "thirstHome": 0,
+            "capFightsFinishedAtDusk": 0,
+            "capFinishStalled": 0,
+            "_capHuntAway": {
+              "before": 1,
+              "after": 1
+            },
+            "_capHuntAwayHome": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightDay": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightSweeps": {
+              "before": null,
+              "after": null
+            }
+          },
+          "sayLines": [
+            "You are full enough.",
+            "The pantry is in the hall. Your hands are not.",
+            "Filled 1L (clean — Haven well). 2L carried (2kg). (-10 kcal hauling, 1 tick.) Cistern: 33L left.",
+            "No risky water to boil.",
+            "Drank clean water.",
+            "📋 June — 💧 Fetch water. June nods eagerly. They'll report back by next part.",
+            "Travel 2 tiles to creek.\n— Moving water —\nA kingfisher works the far bank, patient as a tax collector. It catches something silver and is gone before you can envy it properly.",
+            "One down — but 1 still holds the treeline. The gorge goes on.",
+            "💬 Tariq: \"Stay close, yeah?\"",
+            "The static resolves into something almost like a voice. Almost like yours.",
+            "Crying, in the dark. A voice you know. It sounds exactly like them — but they're safe at the haven. Aren't they?",
+            "You don't know what that was. Crying in the dark — a voice you almost recognize. Someone at the haven should hear about this.",
+            "⚔ STATIC! You're on your own.",
+            "Turn-based now. Tap a tile to move — speed is squares. Then act."
+          ],
+          "firstTravelLine": null,
+          "outMovesInWindow": 1,
+          "awayToHavenMoves": 0,
+          "roundTrip": false,
+          "windowEvents": 1
+        }
+      ],
+      "unexplainedCount": 2,
+      "explainedMechanism": 2,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": [
+        {
+          "closingLoopDay": 22,
+          "awayToHaven": 1,
+          "outMoves": 0
+        }
+      ]
+    },
+    {
+      "seed": 17512,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 24,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 4,
+      "awayContinuations": 3,
+      "awayReturns": 1,
+      "unexplainedMornings": [
+        {
+          "loopDay": 25,
+          "class": "EXPLAINED-MECHANISM",
+          "reason": "counter",
+          "mechanism": "deedHunt-sortie",
+          "segment": "upkeep-1",
+          "hook": "upkeep-1-post",
+          "traceOnly": false,
+          "narration": "narrated",
+          "fromTile": "haven",
+          "toTile": "trail_edge",
+          "fromMap": [
+            4,
+            4
+          ],
+          "toMap": [
+            4,
+            3
+          ],
+          "fromGrid": [
+            8,
+            0
+          ],
+          "toGrid": [
+            4,
+            8
+          ],
+          "ctxDelta": {
+            "forageTrips": 0,
+            "tripHomeDetours": 0,
+            "recoverDays": 0,
+            "patrols": 0,
+            "nomadMoves": 0,
+            "nomadRoadDays": 0,
+            "nomadJoins": 0,
+            "capHuntSorties": 1,
+            "capHuntAmbushed": 0,
+            "capHuntNoticed": 1,
+            "capHuntFeastFights": 0,
+            "capHuntWaveFights": 1,
+            "capHuntNoTarget": 0,
+            "capHuntUnreached": 0,
+            "capHuntGone": 0,
+            "capHuntNoPos": 0,
+            "facedDraw": 0,
+            "thirstHome": 0,
+            "capFightsFinishedAtDusk": 0,
+            "capFinishStalled": 0,
+            "_capHuntAway": {
+              "before": null,
+              "after": 1
+            },
+            "_capHuntAwayHome": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightDay": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightSweeps": {
+              "before": null,
+              "after": null
+            }
+          },
+          "sayLines": [
+            "You are full enough.",
+            "Took Expedition haul (dried).",
+            "You eat Expedition haul (dried) (400 kcal).",
+            "Took Expedition haul (dried).",
+            "You eat Expedition haul (dried) (400 kcal).",
+            "No risky water to boil.",
+            "Drank clean water.",
+            "📋 Kelly — 💧 Fetch water. Kelly nods eagerly. They'll report back by next part.",
+            "\"Got it,\" Theo says flatly. \"Orders are orders. Whoever gives them.\"",
+            "Travel 1 tile to trail edge.",
+            "You catch fragments by the fire — Aroha telling Mara about you. Half of it's true anymore. You're not sure which half.",
+            "You catch fragments by the fire — Nathan telling Ayano about you. The details have shifted. Nobody seems to mind.",
+            "Walking 5 squares (10 kcal)…",
+            "🗣️ It moves.",
+            "You don't know what that was. Something in the dark, laughing at you specifically. Someone at the haven should hear about this.",
+            "⚔ THE HECKLER! You're on your own.",
+            "You fling a handful of grit into its eyes. (pocket_sand: blinded)",
+            "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+            "It is watching you the way a cat watches a dropped glass."
+          ],
+          "firstTravelLine": null,
+          "outMovesInWindow": 1,
+          "awayToHavenMoves": 0,
+          "roundTrip": false,
+          "windowEvents": 4
+        }
+      ],
+      "unexplainedCount": 1,
+      "explainedMechanism": 1,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": []
+    },
+    {
+      "seed": 17513,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 21,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 0,
+      "awayContinuations": 0,
+      "awayReturns": 0,
+      "unexplainedMornings": [],
+      "unexplainedCount": 0,
+      "explainedMechanism": 0,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": []
+    },
+    {
+      "seed": 17514,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 1,
+      "genuineDays": [
+        28
+      ],
+      "dayTrips": 25,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 2,
+      "awayContinuations": 2,
+      "awayReturns": 0,
+      "unexplainedMornings": [],
+      "unexplainedCount": 0,
+      "explainedMechanism": 0,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": []
+    },
+    {
+      "seed": 17515,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 28,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 0,
+      "awayContinuations": 0,
+      "awayReturns": 0,
+      "unexplainedMornings": [],
+      "unexplainedCount": 0,
+      "explainedMechanism": 0,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": []
+    },
+    {
+      "seed": 17516,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 23,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 5,
+      "awayContinuations": 4,
+      "awayReturns": 1,
+      "unexplainedMornings": [
+        {
+          "loopDay": 24,
+          "class": "EXPLAINED-MECHANISM",
+          "reason": "counter",
+          "mechanism": "deedHunt-sortie",
+          "segment": "upkeep-1",
+          "hook": "upkeep-1-post",
+          "traceOnly": false,
+          "narration": "narrated",
+          "fromTile": "haven",
+          "toTile": "creek",
+          "fromMap": [
+            4,
+            4
+          ],
+          "toMap": [
+            4,
+            3
+          ],
+          "fromGrid": [
+            4,
+            5
+          ],
+          "toGrid": [
+            3,
+            6
+          ],
+          "ctxDelta": {
+            "forageTrips": 0,
+            "tripHomeDetours": 0,
+            "recoverDays": 0,
+            "patrols": 0,
+            "nomadMoves": 0,
+            "nomadRoadDays": 0,
+            "nomadJoins": 0,
+            "capHuntSorties": 1,
+            "capHuntAmbushed": 0,
+            "capHuntNoticed": 0,
+            "capHuntFeastFights": 0,
+            "capHuntWaveFights": 1,
+            "capHuntNoTarget": 0,
+            "capHuntUnreached": 0,
+            "capHuntGone": 0,
+            "capHuntNoPos": 0,
+            "facedDraw": 0,
+            "thirstHome": 0,
+            "capFightsFinishedAtDusk": 0,
+            "capFinishStalled": 0,
+            "_capHuntAway": {
+              "before": null,
+              "after": 1
+            },
+            "_capHuntAwayHome": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightDay": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightSweeps": {
+              "before": null,
+              "after": null
+            }
+          },
+          "sayLines": [
+            "Travel 1 tile to creek.",
+            "💬 Megan: \"Stay close, yeah?\"",
+            "💬 Priya: \"Ha!\"",
+            "Walking 2 squares (4 kcal)…",
+            "The ringing stops. That's worse than the ringing.",
+            "A thick dark coil by the water, mouth opening to show startling white raises its tail — a dry rattle fills the leaf litter. It is not bluffing. Back off, or commit.",
+            "You don't know what that was. A phone ringing in the trees, and no phone anywhere. Someone at the haven should hear about this.",
+            "⚔ EXTENDED WARRANTY! Jorge joins you!",
+            "You fling a handful of grit into its eyes. (pocket_sand: blinded)",
+            "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+            "Jorge squares up to watch. \"Give it hell.\"",
+            "Ring-ring. It's not calling you this time. It's calling Jorge — and they're reaching for a phone that isn't there.",
+            "💬 Jorge: \"Stay behind me!\""
+          ],
+          "firstTravelLine": null,
+          "outMovesInWindow": 1,
+          "awayToHavenMoves": 0,
+          "roundTrip": false,
+          "windowEvents": 1
+        }
+      ],
+      "unexplainedCount": 1,
+      "explainedMechanism": 1,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": []
+    },
+    {
+      "seed": 17517,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 20,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 7,
+      "awayContinuations": 6,
+      "awayReturns": 1,
+      "unexplainedMornings": [
+        {
+          "loopDay": 22,
+          "class": "EXPLAINED-MECHANISM",
+          "reason": "counter",
+          "mechanism": "deedHunt-sortie",
+          "segment": "upkeep-1",
+          "hook": "upkeep-1-post",
+          "traceOnly": false,
+          "narration": "narrated",
+          "fromTile": "haven",
+          "toTile": "meadow",
+          "fromMap": [
+            4,
+            4
+          ],
+          "toMap": [
+            4,
+            3
+          ],
+          "fromGrid": [
+            0,
+            0
+          ],
+          "toGrid": [
+            2,
+            7
+          ],
+          "ctxDelta": {
+            "forageTrips": 0,
+            "tripHomeDetours": 0,
+            "recoverDays": 0,
+            "patrols": 0,
+            "nomadMoves": 0,
+            "nomadRoadDays": 0,
+            "nomadJoins": 0,
+            "capHuntSorties": 1,
+            "capHuntAmbushed": 0,
+            "capHuntNoticed": 0,
+            "capHuntFeastFights": 0,
+            "capHuntWaveFights": 0,
+            "capHuntNoTarget": 0,
+            "capHuntUnreached": 1,
+            "capHuntGone": 0,
+            "capHuntNoPos": 0,
+            "facedDraw": 0,
+            "thirstHome": 0,
+            "capFightsFinishedAtDusk": 0,
+            "capFinishStalled": 0,
+            "_capHuntAway": {
+              "before": null,
+              "after": 1
+            },
+            "_capHuntAwayHome": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightDay": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightSweeps": {
+              "before": null,
+              "after": null
+            }
+          },
+          "sayLines": [
+            "You chew the Blackberry deliberately — the way you were taught. Bitter, working. (+8 health)",
+            "You eat Blackberry and Muscadine Grapes (1115 kcal).",
+            "No risky water to boil.",
+            "Drank clean water.",
+            "📋 Carolina — 💧 Fetch water. Carolina nods eagerly. They'll report back by next part.",
+            "Travel 1 tile to meadow.",
+            "You catch fragments by the fire — Ella telling Nikos about Smita. It's picking up decorations as it travels.",
+            "You catch fragments by the fire — Ella telling Nikos about Catalina. The details have shifted. Nobody seems to mind.",
+            "Walking 2 squares (4 kcal)…",
+            "It melts back between the trees. The silence goes with it.",
+            "It sits. Just... sits. Watching. The others are out there too, you can feel them.",
+            "🐕 It moves."
+          ],
+          "firstTravelLine": null,
+          "outMovesInWindow": 1,
+          "awayToHavenMoves": 0,
+          "roundTrip": false,
+          "windowEvents": 5
+        },
+        {
+          "loopDay": 27,
+          "class": "EXPLAINED-MECHANISM",
+          "reason": "counter",
+          "mechanism": "deedHunt-sortie",
+          "segment": "upkeep-3",
+          "hook": "upkeep-3-post",
+          "traceOnly": false,
+          "narration": "narrated",
+          "fromTile": "haven",
+          "toTile": "meadow",
+          "fromMap": [
+            4,
+            4
+          ],
+          "toMap": [
+            4,
+            3
+          ],
+          "fromGrid": [
+            8,
+            0
+          ],
+          "toGrid": [
+            3,
+            1
+          ],
+          "ctxDelta": {
+            "forageTrips": 0,
+            "tripHomeDetours": 0,
+            "recoverDays": 0,
+            "patrols": 0,
+            "nomadMoves": 0,
+            "nomadRoadDays": 0,
+            "nomadJoins": 0,
+            "capHuntSorties": 1,
+            "capHuntAmbushed": 0,
+            "capHuntNoticed": 1,
+            "capHuntFeastFights": 1,
+            "capHuntWaveFights": 0,
+            "capHuntNoTarget": 0,
+            "capHuntUnreached": 0,
+            "capHuntGone": 0,
+            "capHuntNoPos": 0,
+            "facedDraw": 0,
+            "thirstHome": 0,
+            "capFightsFinishedAtDusk": 0,
+            "capFinishStalled": 0,
+            "_capHuntAway": {
+              "before": 1,
+              "after": 1
+            },
+            "_capHuntAwayHome": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightDay": {
+              "before": null,
+              "after": null
+            },
+            "_feastFightSweeps": {
+              "before": null,
+              "after": null
+            }
+          },
+          "sayLines": [
+            "Filled 1L (clean — Haven well). 2L carried (2kg). (-10 kcal hauling, 1 tick.) Cistern: 17L left.",
+            "📋 Carolina — 💧 Fetch water. Carolina nods eagerly. They'll report back by next part.",
+            "🍖 FEAST 📺 — Valentina opens the pantry wide: 6× Foraged food, 2× Foraged food, 1× Foraged food. Skylar, Ella, Aroha eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−1,787 kcal from the pantry) The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until tomorrow's dawn, spent o",
+            "🍖 FEASTED ×2.03 until tomorrow's dawn (6 parts left): a proper feast. A channeled keepsake feeds the flames (devotion ×1.5). Strikes and abilities hit with the feast behind them.",
+            "🌙 The cookfire's smell carried further than the laughter did — smoke and grease on the night wind. Inspiration is circling the edge of the light. It followed the feast here. (A scavenger, drawn by the feast. Face it while the feast is in you — or let the watch drive it off.)",
+            "Travel 1 tile to meadow.",
+            "Walking 7 squares (14 kcal)…",
+            "It spirals closer, wings catching light that isn't there. It's interested in you. Specifically you.",
+            "A coyote watching you from the tree line sways where it stopped, head drooping — too blown to run. Yours to take, whenever.",
+            "A coyote watching you from the tree line drags in one more ragged breath, flanks shuddering. The chase is over. Your move.",
+            "🦋 It moves.",
+            "A coyote watching you from the tree line stands spent — sides heaving, head low. It's not running any more. Your move.",
+            "A coyote watching you from the tree line sways where it stopped, head drooping — too blown to run. Yours to take, whenever.",
+            "A coyote watching you from the tree line drags in one more ragged breath, flanks shuddering. The chase is over. Your move.",
+            "It spirals closer, wings catching light that isn't there. It's interested in you. Specifically you.",
+            "It lands. It folds its wings. The light in them is building.",
+            "You don't know what that was. A moth the size of a dinner plate, catching light wrong. Someone at the haven should hear about this.",
+            "⚔ FLASHBULB MOTH! You're on your own.",
+            "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+            "It lands on a branch at eye level — wings half-open, catching light that isn't there. Watching you watch it."
+          ],
+          "firstTravelLine": null,
+          "outMovesInWindow": 1,
+          "awayToHavenMoves": 0,
+          "roundTrip": false,
+          "windowEvents": 1
+        }
+      ],
+      "unexplainedCount": 2,
+      "explainedMechanism": 2,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 29,
+      "awayToHavenWindows": [
+        {
+          "closingLoopDay": 29,
+          "awayToHaven": 1,
+          "outMoves": 0
+        }
+      ]
+    },
+    {
+      "seed": 17518,
+      "policy": "nomadseek",
+      "horizonDays": 30,
+      "daysAlive": 21,
+      "endReason": "village-lost",
+      "errCount": 0,
+      "loopDays": 20,
+      "genuine": 0,
+      "genuineDays": [],
+      "dayTrips": 18,
+      "multiHop": 0,
+      "sleepReturns": 0,
+      "awayOriginDays": 0,
+      "awayContinuations": 0,
+      "awayReturns": 0,
+      "unexplainedMornings": [],
+      "unexplainedCount": 0,
+      "explainedMechanism": 0,
+      "explainedSegmentOnly": 0,
+      "stillUnexplained": 0,
+      "windowsRecorded": 19,
+      "awayToHavenWindows": []
+    }
+  ]
+}
