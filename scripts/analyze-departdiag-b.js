@@ -26,12 +26,15 @@ function needTripDecomposition(dec) {
   const pantryKcal = dec.pantry ? dec.pantry.kcal : null;
   const vesselKcal = dec.morning ? dec.morning.kcal : null;
   const kcalCap = dec.kcalCap;
-  const lastGive = dec.lastGiveDayBefore;
+  // Mirror the code exactly: needTrip reads `ctx._lastGiveDay || 0`, so an
+  // unset lastGive counts as day 0 (gave "recently" on days 1-2), never
+  // as unknown. An earlier draft returned null here; that understated
+  // the code's own giveOK on spawn days.
+  const lastGive = (dec.lastGiveDayBefore === null || dec.lastGiveDayBefore === undefined) ? 0 : dec.lastGiveDayBefore;
   const day = dec.day;
   const pantryOK = (pantryKcal === null ? null : pantryKcal >= 25000);
   const kcalOK = (vesselKcal === null || kcalCap === null ? null : vesselKcal >= kcalCap * 0.5);
-  const giveOK = (lastGive === null || lastGive === undefined || day === null || day === undefined)
-    ? null : (day - lastGive < 3);
+  const giveOK = (day === null || day === undefined) ? null : (day - lastGive < 3);
   return { pantryKcal, vesselKcal, kcalCap, lastGiveDay: lastGive, day, pantryOK, kcalOK, giveOK };
 }
 
@@ -39,7 +42,13 @@ function activityClass(dayLines, ctxDelta) {
   if (!dayLines || !dayLines.length) return 'silent';
   const text = dayLines.join(' ').toLowerCase();
   if (ctxDelta && ctxDelta.forageTrips > 0) return 'forage-trip';
-  if (/forag/.test(text)) return 'forage-trip';
+  // Text fallback must be a first-person forage verb ("You forage ..."),
+  // NOT any mention: a runner's complaint ("Your foragers are stripping
+  // our side ...") and a horizon line ("foragers, by the look of it")
+  // both contain "forag" without any foraging happening. Real trip days
+  // are already caught by the ctx-delta rule above; this fallback only
+  // labels days whose narration itself says the vessel foraged.
+  if (/you forag/.test(text)) return 'forage-trip';
   // Assignment lines ("Fish. They'll report back by next part.") name a
   // task, not a fishing trip: check the assignment marker before the
   // fish keyword, or every assignment reads as a fishing day.

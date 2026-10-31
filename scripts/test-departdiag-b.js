@@ -55,13 +55,21 @@ check('haven: inside false + map null', isAtHaven({ inside: false, tile: 'forest
 }
 {
   const d = needTripDecomposition({ pantry: null, morning: null, kcalCap: null, lastGiveDayBefore: null, day: 6 });
-  check('decomp: nulls propagate', d.pantryOK === null && d.kcalOK === null && d.giveOK === null);
+  check('decomp: nulls propagate (except lastGive, which the code reads as 0)', d.pantryOK === null && d.kcalOK === null && d.giveOK === false, d);
+}
+{
+  const d = needTripDecomposition({ pantry: { kcal: 30000 }, morning: { kcal: 2000 }, kcalCap: 2000, lastGiveDayBefore: null, day: 2 });
+  check('decomp: unset lastGive reads as day 0 (spawn days 1-2 giveOK)', d.giveOK === true && d.lastGiveDay === 0, d);
 }
 
 // --- activity classes ---
 check('activity: silent', activityClass([], {}) === 'silent');
 check('activity: forage wins', activityClass(['You forage the thicket.'], {}) === 'forage-trip');
 check('activity: forage via ctx delta', activityClass(['Something else.'], { forageTrips: 1 }) === 'forage-trip');
+check('activity: forager mention is NOT a forage trip (runner complaint)',
+  activityClass(['Your foragers are stripping our side of the southwest ground. Back off.'], {}) === 'other');
+check('activity: horizon foragers line is NOT a forage trip',
+  activityClass(['You see smoke on the horizon. Emberhold — 12 people, 3 days in. foragers, by the look of it.'], {}) === 'other');
 check('activity: garden-fish-trap', activityClass(['You sow the garden.'], {}) === 'garden-fish-trap');
 check('activity: assign', activityClass(["Fish. They'll report back by next part."], {}) === 'assign');
 check('activity: talk', activityClass(['You gossip with Fatima.'], {}) === 'talk');
