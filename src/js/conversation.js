@@ -1386,7 +1386,7 @@
       // Neutral demonstratives ("that favor") — the label is spoken by the
       // NPC (resume opener) AND offered as the player's menu option, so it
       // can't be first- or third-person.
-      if (tid === 'want') {
+      if (tid === 'want' || tid === 'request') {
         try {
           const w = this.convoGet(vid).want;
           if (w && w.def && w.def.topicLabel) return String(w.def.topicLabel);
@@ -1409,20 +1409,58 @@
               if (named && named !== 'that question') return named;
             }
           }
+          // ASK_FAVOR NAMES ITS NEED (journey-establishment r68 2026-10-31):
+          // the 'request' thread is a talk-request opener whose deferred
+          // content IS the sitting's want — but it resolved through the
+          // base map, so recaps said the category ('their request') while
+          // the want named the thing (Reagan 348: the food plan). A favor
+          // want names its real current need via the pure scan — the same
+          // need the favor beat itself is built from, so the label can
+          // never promise a need that isn't there. Null need falls
+          // through to the wid map, never to an invented label.
+          if (wid === 'ask_favor' && typeof this.convoFindFavorNeed === 'function') {
+            const need = this.convoFindFavorNeed(vid);
+            const needLabels = {
+              food_share: 'that food share', forage_help: 'that foraging help',
+              sick_help: 'that sickness help', heal_help: 'that wound care',
+              water_haul: 'that water haul', watch_shift: 'that watch shift',
+              stay_close: 'that night together', snare_mend: 'that snare mending',
+            };
+            if (need && need.kind && needLabels[need.kind]) return needLabels[need.kind];
+          }
           const labels = {
             ask_favor: 'that favor', share_news: 'that news',
             seek_comfort: 'that hard time', warn_you: 'that warning',
             curious: 'that question', just_company: 'that visit', repay: 'that debt',
+            seek_taken: 'that taken person',
           };
           if (wid && labels[wid]) return labels[wid];
         } catch (e) {}
-        return 'what was on their mind';
+        // REQUEST FALLBACK (r68): a talk-request opener with no resolvable
+        // want keeps its old category label — never an invented specific.
+        return tid === 'request' ? 'their request' : 'what was on their mind';
+      }
+      // GOAL NAMES ITS WANT (journey-establishment r68 2026-10-31): the
+      // 'goal' thread resolved through the base map, so recaps said the
+      // category ('what they want') while the goal beat named the thing
+      // (Elena 345: meals as small victories). Goal defs carry their own
+      // want phrase ("to keep everyone fed"), so the label is the goal
+      // itself, not a paraphrase. The goal beat is trust-gated at speak
+      // time, and this label only surfaces after a goal beat was spoken
+      // in-fiction (note/resume/recap paths) — it reveals nothing the
+      // NPC hasn't already said. Unknown goal/def falls back below.
+      if (tid === 'goal') {
+        try {
+          const goal = (typeof this.npcGoal === 'function') ? this.npcGoal(vid) : null;
+          const goalDef = goal ? ((this.data.characterGen || {}).goals || []).find(g => g.id === goal) : null;
+          if (goalDef && goalDef.want) return 'wanting ' + String(goalDef.want);
+        } catch (e) {}
       }
       const base = {
         personal: 'themselves', goal: 'what they want', past: 'their past',
         village: 'the village', plans: 'their plans', gossip: 'the gossip',
         spread_rumor: 'that rumor', small: 'small talk', spooked: 'what spooked them',
-        secret: 'their secret', request: 'their request',
+        secret: 'what they confided', request: 'their request',
         theorize: 'the big questions', trade: 'trading knowledge',
         situation: 'the situation', lately: "what's been happening",
         // SCENARIO THREADS (fix 2026-10-07): teach-offer and recall threads
