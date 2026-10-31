@@ -93,7 +93,7 @@ function analyzeSeed(seedRow) {
   const joined = joinRefusals(seedRow);
   const complete = joined.filter(j => j.joined && snapshotComplete(j.snap)).length;
   const gameOutcomeMatch = heraldRef.filter(a =>
-    (a.gameOutcomes || []).some(r => r && r.outcome === 'refused' && r.gate === 'muster')).length;
+    (a.gameOutcomes || []).some(r => r && r.outcome === 'refused' && ((r.detail && r.detail.gate === 'muster') || r.gate === 'muster'))).length;
   const readyAgree = joined.filter(j => j.snap && j.snap.readyManual === j.snap.readyGame).length;
   const readyTotal = joined.filter(j => j.snap).length;
   // Per-day re-face counts (all refused herald attempts, joined or not).
@@ -115,11 +115,12 @@ function analyzeSeed(seedRow) {
         alliesRaw: j.snap.alliesRaw, alliesUnique: j.snap.alliesUnique,
         havenValid: j.snap.havenValid, volunteers: j.snap.volunteers,
         links: j.snap.links, ceiling: ceilingIfCalledPlusCommit(j.snap),
-        reFaceCount: 0, volunteersSeen: [] };
+        reFaceCount: 0, volunteersSeen: [], ceilings: [] };
     }
     clusters[key].reFaceCount++;
     if (j.snap.volunteers != null && clusters[key].volunteersSeen.indexOf(j.snap.volunteers) < 0)
       clusters[key].volunteersSeen.push(j.snap.volunteers);
+    clusters[key].ceilings.push(ceilingIfCalledPlusCommit(j.snap).ceiling);
   });
   const feastDrawHerald = heraldAtt.filter(a => a.caller === 'feast-draw').length;
   return {
@@ -153,7 +154,9 @@ function analyzeAll(rows) {
   const perSeed = rows.map(analyzeSeed);
   const sum = (f) => perSeed.reduce((t, s) => t + (f(s) || 0), 0);
   const days = perSeed.map(s => s.gameDays || 0).sort((a, b) => a - b);
-  const median = days.length ? days[Math.floor(days.length / 2)] : null;
+  const median = days.length ? (days.length % 2
+    ? days[Math.floor(days.length / 2)]
+    : (days[days.length / 2 - 1] + days[days.length / 2]) / 2) : null;
   const allClusters = [];
   perSeed.forEach(s => s.clusters.forEach(c => allClusters.push(c)));
   return {
@@ -186,7 +189,8 @@ if (require.main === module) {
   console.log(`snapshots=${out.snapshots} joined=${out.joined} complete=${out.complete} completeness=${out.heraldRef ? (out.complete / out.heraldRef).toFixed(3) : 'n/a'} gameOutcomeMatch=${out.gameOutcomeMatch}/${out.heraldRef} readyAgree=${out.readyAgree}/${out.readyTotal}`);
   console.log(`feastDrawHerald(REGRESSION-#1550 if >0)=${out.feastDrawHerald} clusters=${out.clusters.length} errs=${out.instrumentErrors}+${out.musterErrs}`);
   out.clusters.forEach(c => {
-    console.log(`cluster s${c.seed} d${c.day} omen=${c.omenStage} callYield=${c.callYield} ceiling=${c.ceiling.ceiling} (called=${c.ceiling.totalIfCalled} +commit=${c.ceiling.commitAdd}) block=${c.commitBlock} offered=${c.callOffered} reFaces=${c.reFaceCount} vols=${c.volunteersSeen.join('/')}`);
+    const cMin = Math.min.apply(null, c.ceilings), cMax = Math.max.apply(null, c.ceilings);
+    console.log(`cluster s${c.seed} d${c.day} omen=${c.omenStage} callYield=${c.callYield} ceiling=${cMin === cMax ? cMin : cMin + '..' + cMax} (called=${c.ceiling.totalIfCalled} +commit=${c.ceiling.commitAdd} first-snap) block=${c.commitBlock} offered=${c.callOffered} reFaces=${c.reFaceCount} vols=${c.volunteersSeen.join('/')}`);
     (c.links || []).forEach(l => console.log(`   link ${l.name || l.villageId}: trust=${l.trust} op=${l.opinion} arrears=${l.arrears} quota=${l.quota} free=${l.facesFree} already=${l.already} yield=${l.wouldYield} refuse=${l.wouldRefuse}`));
   });
   out.perSeed.forEach(s => {

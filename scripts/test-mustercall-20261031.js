@@ -51,7 +51,7 @@ check('ceiling trusted single link = 6 + 3 = 9 (< 10)',
 // 3. Join + cluster collapse: 4 same-day refusals, one state.
 const row = {
   seed: 99999,
-  attempts: [100, 100, 100, 100].map((d, i) => ({ day: d, mid: 'herald', cls: 'REFUSED', reason: 'MUSTER-GATE', gameOutcomes: [{ outcome: 'refused', gate: 'muster', detail: { have: 0, need: 10 } }] })),
+  attempts: [100, 100, 100, 100].map((d, i) => ({ day: d, mid: 'herald', cls: 'REFUSED', reason: 'MUSTER-GATE', gameOutcomes: [{ outcome: 'refused', detail: { gate: 'muster', have: 0, need: 10 } }] })),
   musterRefusals: [snap({}), snap({}), snap({}), snap({})],
   fieldFights: [], kills: [], musterCalls: {}, instrumentErrors: [], musterErrs: 0,
 };
@@ -63,7 +63,8 @@ check('cluster reFaceCount = 4', an.clusters[0] && an.clusters[0].reFaceCount ==
 check('cluster perDay max = 4', an.maxPerDay === 4);
 check('completeness 4/4', an.complete === 4 && an.heraldRef === 4);
 check('ready agreement 4/4', an.readyAgree === 4 && an.readyTotal === 4);
-check('gameOutcomeMatch 4/4', an.gameOutcomeMatch === 4);
+check('gameOutcomeMatch 4/4 (real shape: gate inside detail)', an.gameOutcomeMatch === 4);
+check('cluster ceiling range recorded', an.clusters[0] && an.clusters[0].ceilings.length === 4 && Math.min.apply(null, an.clusters[0].ceilings) === 2, JSON.stringify(an.clusters[0] && an.clusters[0].ceilings));
 
 // 4. Distinct states stay distinct: different omen stage -> 2 clusters.
 const row2 = Object.assign({}, row, {
@@ -88,6 +89,16 @@ const row4 = Object.assign({}, row, {
 const an4 = A.analyzeSeed(Object.assign({}, row4, { national: 0, table: 0, won: 0, maxWave: 4, wave4: 1, wave5: 0, gameDays: 120, endReason: 'village-lost', endOmenStage: 2, endMusterExists: false }));
 check('asymmetry: 1 TB fought, 2 field, 0 kills either channel',
   an4.heraldFought === 1 && an4.heraldFF === 2 && an4.heraldTbKills === 0 && an4.heraldFieldKills === 0);
+
+// 6. Proper even-n median (herald-b band: middle two 102/111 -> 106.5).
+const medRows = [34, 46, 90, 90, 90, 91, 102, 102, 111, 113, 118, 122, 126, 132, 135, 139].map((d, i) => ({
+  seed: 90000 + i, attempts: [], fieldFights: [], kills: [], musterRefusals: [],
+  national: 0, table: 0, won: 0, maxWave: 4, wave4: 1, wave5: 0, gameDays: d,
+  endReason: 'village-lost', endOmenStage: null, endMusterExists: false,
+  instrumentErrors: [], musterErrs: 0, musterCalls: {},
+}));
+const medOut = A.analyzeAll(medRows);
+check('median even-n = mean of middle two (106.5)', medOut.wall.medianSurvival === 106.5, JSON.stringify(medOut.wall.medianSurvival));
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
