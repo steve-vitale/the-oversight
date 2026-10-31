@@ -1,0 +1,244 @@
+# SURFACE+SEEDED — seed 6603 (142d, 6 alive)
+
+npcPairs=56 deep2=33 cracks=0 vCracks=0 friendGriev=0 stateGriev=8 stateFriend=1 stateVCrack=0 t2picks=153 closeReadsServed=22 grievanceServes=30 othersSteered=153
+COND-TP: firstDeep2Day=30 lateClose=96 lateTP=81 lateNull=0 condRate=84.4% pooledTP=82/99 pooledRate=82.8% grievReadsByWhy={"grievance":3,"vgrievance":33}
+FUNNEL (natural): convos=414 subject=388 offered=339 picked=130 classes={"no-subject-no-ans":21,"subject-no-offer":53,"offered-not-picked":48,"picked-others":130,"offered-capped":161,"no-subject-ans":1}
+FUNNEL-UNSTEERED (r55 strict): convos=284 subjectNoOffer=53 rate=18.7% offered=209 mainOffered=32 subjectOffered=200 picked=0 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=6
+  KNACK-CIRCULATION: Camila / Chantal — "Gilberto found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Gilberto / Yuki / Joel — "cuts close faster when Chantal wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Katarina / Hannah — "Huh. Let me think about that." "cuts close faster when Chantal wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Camila / Joel — "Good question." "that stray dog — the one that bit two people — lets Yuki touch it."
+  KNACK-CIRCULATION: Chantal / Gilberto — "that stray dog — the one that bit two people — lets Yuki touch it."
+  KNACK-CIRCULATION: Katarina / Chantal — "Jada talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=335 picks=143 latePicks=50 missedChangedNotOffered=13
+WRAPSERVE: convos=36 matcherHits=30 matcherServes=30 classes={"grievance-line":30,"deflection":1,"other":5}
+FUNNEL-PROBE (subject-no-offer turns): turns=154 menuProblem=134 pickProblem=20
+INVITE (wrap, carried from r63): lure={"n":10,"accepts":3,"acceptRate":0.3,"vetoes":{"sick":1},"chanceMin":0,"chanceMax":60,"chanceMean":45.6} party={"n":12,"accepts":8,"acceptRate":0.6666666666666666,"vetoes":{},"chanceMin":33.4,"chanceMax":89.80000000000001,"chanceMean":63.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=3
+FAVOR (r65): funnel={"offers":32,"forageOffers":5,"otherFavorOffers":27,"accepts":5,"acceptAttempts":5,"waits":4,"starts":4,"startBlocked":6,"forages":4,"forageNodeBarren":7,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":9,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":4,"delivers":4,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":4,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r76): snaps=6 betrayalOfferConvos=113 mootOffers=5 mootProbePicks=[{"day":15,"vid":"katarina_novak","vidName":"Katarina","caseId":"case_2"},{"day":16,"vid":"gen_yr0w3pf","vidName":"Gilberto","caseId":"case_4"},{"day":23,"vid":"hannah_kim","vidName":"Hannah","caseId":"case_6"}] mootsConvened=0
+  CASE-SNAP d13: case_2 status=open charge=murder accused=Yuki/Gilberto/Wael target=Boris role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d16: case_2 status=acquitted charge=murder accused=Yuki/Gilberto/Wael target=Boris role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=resolved charge=ambush accused=Wael/Gilberto/Yuki target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d21: case_2 status=acquitted charge=murder accused=Yuki/Gilberto/Wael target=Boris role=juror known=true mootIn=null trial=true
+  CASE-SNAP d21: case_4 status=resolved charge=ambush accused=Wael/Gilberto/Yuki target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d21: case_6 status=open charge=murder accused=Katarina/Gilberto/Yuki target=Wael role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d23: case_2 status=acquitted charge=murder accused=Yuki/Gilberto/Wael target=Boris role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_4 status=resolved charge=ambush accused=Wael/Gilberto/Yuki target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_6 status=acquitted charge=murder accused=Katarina/Gilberto/Yuki target=Wael role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_2 status=acquitted charge=murder accused=Yuki/Gilberto/Wael target=Boris role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_4 status=resolved charge=ambush accused=Wael/Gilberto/Yuki target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_6 status=acquitted charge=murder accused=Katarina/Gilberto/Yuki target=Wael role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"gen_a1zty7f","vidName":"Wael","favorId":"favor-gen_a1zty7f-18-7","state":"promised","promisedDay":19,"meetDay":20,"deadline":20,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"hannah_kim","vidName":"Hannah","favorId":"favor-hannah_kim-137-31","state":"broken","promisedDay":137,"meetDay":138,"deadline":139,"promiseKept":"broken","startedDay":139,"forageCount":1,"playerKcal":630,"partnerKcal":720,"deliveredKcal":1350,"returnedDay":140,"talkCount":1}]
+  FAVOR-OFFER d5: Camila kind=forage_help favorId=favor-gen_8xenend-2-1 task=forage with Camila tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Camila kind=forage_help favorId=favor-gen_8xenend-9-3 task=forage with Camila tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Chantal kind=forage_help favorId=favor-chantal_mukendi-12-4 task=forage with Chantal tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Camila kind=sick_help favorId=favor-gen_8xenend-14-5 task=help Camila with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d18: Yuki kind=food_share favorId=favor-yuki_mori-15-6 task=share food with Yuki — they're running on empty
+  FAVOR-OFFER d19: Wael kind=forage_help favorId=favor-gen_a1zty7f-18-7 task=forage with Wael tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Chantal kind=sick_help favorId=favor-chantal_mukendi-37-8 task=help Chantal with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d47: Joel kind=food_share favorId=favor-gen_436rtq1-47-9 task=share food with Joel — they're going hungry
+  FAVOR-OFFER d52: Katarina kind=food_share favorId=favor-katarina_novak-52-10 task=share food with Katarina — they're going hungry
+  FAVOR-OFFER d58: Yuki kind=sick_help favorId=favor-yuki_mori-58-11 task=help Yuki with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d59: Gilberto kind=heal_help favorId=favor-gen_yr0w3pf-59-12 task=help Gilberto with their injury
+  FAVOR-OFFER d61: Jada kind=sick_help favorId=favor-gen_e9ein76-61-13 task=help Jada with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d82: Joel kind=food_share favorId=favor-gen_436rtq1-82-14 task=share food with Joel — they're going hungry
+  FAVOR-OFFER d102: Joel kind=food_share favorId=favor-gen_436rtq1-100-15 task=share food with Joel — they're going hungry
+  FAVOR-OFFER d110: Camila kind=food_share favorId=favor-gen_8xenend-110-16 task=share food with Camila — they're running on empty
+  FAVOR-OFFER d118: Jada kind=sick_help favorId=favor-gen_e9ein76-118-17 task=help Jada with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d120: Hannah kind=water_haul favorId=favor-hannah_kim-120-18 task=bring four liters home from the creek with Hannah; set out at dawn
+  FAVOR-OFFER d120: Camila kind=water_haul favorId=favor-gen_8xenend-120-19 task=bring four liters home from the creek with Camila; set out at dawn
+  FAVOR-OFFER d124: Jada kind=food_share favorId=favor-gen_e9ein76-124-20 task=share food with Jada — they're going hungry
+  FAVOR-OFFER d124: Chantal kind=food_share favorId=favor-chantal_mukendi-124-21 task=share food with Chantal — they're past hungry
+  FAVOR-OFFER d129: Jada kind=water_haul favorId=favor-gen_e9ein76-129-22 task=bring four liters home from the creek with Jada; set out at dawn
+  FAVOR-OFFER d129: Katarina kind=sick_help favorId=favor-katarina_novak-129-23 task=help Katarina with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d131: Katarina kind=food_share favorId=favor-katarina_novak-131-24 task=share food with Katarina — they're running on empty
+  FAVOR-OFFER d133: Jada kind=water_haul favorId=favor-gen_e9ein76-133-25 task=bring four liters home from the creek with Jada; set out at dawn
+  FAVOR-OFFER d134: Gilberto kind=water_haul favorId=favor-gen_yr0w3pf-134-26 task=bring four liters home from the creek with Gilberto; set out at dawn
+  FAVOR-OFFER d134: Chantal kind=sick_help favorId=favor-chantal_mukendi-134-27 task=help Chantal with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d135: Camila kind=food_share favorId=favor-gen_8xenend-135-28 task=share food with Camila — they're running on empty
+  FAVOR-OFFER d136: Jada kind=water_haul favorId=favor-gen_e9ein76-136-29 task=bring four liters home from the creek with Jada; set out at dawn
+  FAVOR-OFFER d136: Katarina kind=water_haul favorId=favor-katarina_novak-136-30 task=bring four liters home from the creek with Katarina; set out at dawn
+  FAVOR-OFFER d137: Hannah kind=forage_help favorId=favor-hannah_kim-137-31 task=forage with Hannah tomorrow to rebuild the pantry
+  FAVOR-OFFER d139: Jada kind=food_share favorId=favor-gen_e9ein76-139-32 task=share food with Jada — they're running on empty
+  FAVOR-OFFER d139: Camila kind=food_share favorId=favor-gen_8xenend-139-33 task=share food with Camila — they're running on empty
+  FAVOR-ACCEPT d5: Camila favorId=favor-gen_8xenend-2-1 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d9: Camila favorId=favor-gen_8xenend-9-3 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d14: Chantal favorId=favor-chantal_mukendi-12-4 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d19: Wael favorId=favor-gen_a1zty7f-18-7 accepted=true state=promised meetDay=20
+  FAVOR-ACCEPT d137: Hannah favorId=favor-hannah_kim-137-31 accepted=true state=promised meetDay=138
+  INVITE-DEC d8 party: Chen -> Gilberto chance=47.8 accept=false veto=- inputs={"temp":"gentle","goal":"lead","mood":"steady","fear":0,"trust":32,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 32"]
+  INVITE-DEC d8 party: Chen -> Katarina chance=77 accept=true veto=- inputs={"temp":"bold","goal":"protect","mood":"hungry","fear":0,"trust":30,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 30","bold temperament (+15)","protect goal (+15)"]
+  INVITE-DEC d9 party: Chen -> Boris chance=47.4 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":0,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31"]
+  INVITE-DEC d9 party: Chen -> Chantal chance=45.4 accept=false veto=- inputs={"temp":"steady","goal":"record","mood":"steady","fear":0,"trust":26,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 26"]
+  INVITE-DEC d9 party: Chen -> Camila chance=33.4 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":0,"trust":21,"bond":{"v":7,"depth":0},"partySize":1} reasons=["trust 21","cautious temperament (-10)"]
+  INVITE-DEC d9 lure: Gilberto -> Boris chance=45 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":4,"affinity":1} reasons=[]
+  INVITE-DEC d10 party: Chen -> Hannah chance=49.4 accept=true veto=- inputs={"temp":"intense","goal":"survive","mood":"steady","fear":4,"trust":36,"bond":null,"partySize":1} reasons=["trust 36"]
+  INVITE-DEC d10 lure: Gilberto -> Boris chance=46 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":0,"affinity":2} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d11 lure: Gilberto -> Boris chance=46 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"hungry","fear":0,"affinity":2} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d12 party: Chen -> Joel chance=66 accept=true veto=- inputs={"temp":"fidgety","goal":"feed","mood":"steady","fear":0,"trust":40,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 40","feed goal (+15)"]
+  INVITE-DEC d12 lure: Gilberto -> Boris chance=46 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d13 lure: Gilberto -> Katarina chance=60 accept=false veto=- inputs={"temp":"bold","goal":"protect","mood":"grieving","fear":4,"affinity":0} reasons=["bold temperament (+15)","protect goal (+10)","grieving mood (-10)"]
+  INVITE-DEC d14 lure: Gilberto -> Katarina chance=60 accept=true veto=- inputs={"temp":"bold","goal":"protect","mood":"grieving","fear":0,"affinity":0} reasons=["bold temperament (+15)","protect goal (+10)","grieving mood (-10)"]
+  INVITE-DEC d17 party: Chen -> Diana chance=78.6 accept=true veto=- inputs={"temp":"bold","goal":"understand","mood":"steady","fear":4,"trust":59,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 59","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d17 lure: Gilberto -> Wael chance=0 accept=false veto=sick inputs={"temp":"restless","goal":"escape","mood":"hungry","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d18 lure: Gilberto -> Wael chance=51 accept=false veto=- inputs={"temp":"restless","goal":"escape","mood":"hungry","fear":7,"affinity":25} reasons=["relationship with inviter (+6)","restless temperament (+10)","wants out (-10)"]
+  INVITE-DEC d19 lure: Gilberto -> Wael chance=51 accept=false veto=- inputs={"temp":"restless","goal":"escape","mood":"hungry","fear":0,"affinity":25} reasons=["relationship with inviter (+6)","restless temperament (+10)","wants out (-10)"]
+  INVITE-DEC d20 lure: Gilberto -> Wael chance=51 accept=true veto=- inputs={"temp":"restless","goal":"escape","mood":"grateful","fear":4,"affinity":25} reasons=["relationship with inviter (+6)","restless temperament (+10)","wants out (-10)"]
+  INVITE-DEC d31 party: Chen -> Camila chance=76 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":0,"trust":90,"bond":{"v":31,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d109 party: Joel -> Chantal chance=76.4 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":5,"trust":91,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d110 party: Joel -> Jada chance=89.80000000000001 accept=true veto=- inputs={"temp":"mischievous","goal":"belong","mood":"grieving","fear":29,"trust":87,"bond":{"v":96,"depth":3},"partySize":4} reasons=["trust 87","a real bond (+10)","a big party is safer (+5)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d141 party: Katarina -> Gilberto chance=76 accept=true veto=- inputs={"temp":"gentle","goal":"lead","mood":"grieving","fear":0,"trust":90,"bond":{"v":54,"depth":2},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":30,"v":44,"depth":3},{"day":31,"v":48,"depth":3},{"day":32,"v":48,"depth":3},{"day":33,"v":48,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":52,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":58,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":62,"depth":3},{"day":42,"v":62,"depth":3},{"day":43,"v":66,"depth":3}] class=rise
+GOSSIP: totalPicks=221 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=30 61-90=28 91-120=28 121+=22 naturalPicks=130 seededPicks=23 gossipPicks=221
+SEEDED: {"pair":{"a":"gen_8xenend","b":"yuki_mori","aName":"Camila","bName":"Yuki"},"day":29,"pre":{"v":51,"depth":2},"post":{"v":39,"depth":3},"daily":[{"day":30,"v":44,"depth":3},{"day":31,"v":48,"depth":3},{"day":32,"v":48,"depth":3},{"day":33,"v":48,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":52,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":54,"depth":3},{"day":38,"v":58,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":62,"depth":3},{"day":42,"v":62,"depth":3},{"day":43,"v":66,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":-1,"depthDrop":-1,"crack7":false,"firstServe":{"day":31,"why":"vgrievance"},"serveWithin30":true,"serves":33,"servesAll":[{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":100,"why":"vgrievance"},{"day":103,"why":"vgrievance"},{"day":141,"why":"vgrievance"}],"effect":true}
+  FRIEND d65: Jada <> Gilberto — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Jada <> Katarina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Gilberto <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Jada <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Diana <> Jada — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d125: Chantal <> Gilberto — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d70: Jada <> Hannah — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Joel <> Gilberto — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Camila <> Jada — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Camila <> Gilberto — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Camila <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Chantal <> Camila — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Chantal <> Yuki — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d125: Camila <> Katarina — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d40: Joel <> Camila — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Joel <> Katarina — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d85: Joel <> Yuki — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d115: Chantal <> Katarina — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d65: Hannah <> Katarina — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d60: Joel <> Jada — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d142: Joel <> Hannah — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d70: Chantal <> Jada — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d142: Chantal <> Joel — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d110: Diana <> Gilberto — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d120: Gilberto <> Katarina — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d110: Chen <> Yuki — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d110: Jada <> Chen — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d110: Camila <> Chen — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Chantal <> Chen — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d110: Diana <> Chen — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d110: Chen <> Katarina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Chen <> Hannah — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d142: Joel <> Chen — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d22: Camila about Yuki — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Joel about Camila — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Yuki about Camila — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Katarina about Hannah — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Joel about Camila — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Gilberto about Camila — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Katarina about Hannah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Joel about Camila — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Katarina about Hannah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Diana about Jada — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Katarina about Hannah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Jada about Camila — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Hannah about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Joel about Camila — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Hannah about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Diana about Jada — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Katarina about Hannah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d53: Jada about Camila — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Jada about Camila — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Diana about Jada — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d56: Diana about Jada — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Joel about Camila — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Hannah about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d60: Diana about Jada — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Katarina about Hannah — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d62: Hannah about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Chantal about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Katarina about Hannah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Hannah about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Diana about Jada — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Katarina about Hannah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Diana about Jada — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Katarina about Hannah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Hannah about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Diana about Jada — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Katarina about Hannah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Diana about Jada — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Chantal about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Hannah about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Diana about Jada — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Katarina about Hannah — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Gilberto about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Yuki about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Hannah about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Diana about Jada — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Katarina about Hannah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Katarina about Hannah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Jada about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Joel about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Diana about Jada — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Yuki about Jada — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Gilberto about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Katarina about Hannah — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Gilberto about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Jada about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Jada about Gilberto — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d142: Chantal about Camila — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d30 (betrayal): Camila vs Yuki (ambushed) depth 3 v 44 -> 52
+  GRIEV-READ d9: Boris about Yuki (why=grievance)
+  GRIEV-READ d15: Katarina about Wael (why=grievance)
+  GRIEV-READ d18: Katarina about Wael (why=grievance)
+  GRIEV-READ d31: Camila about Yuki (why=vgrievance)
+  GRIEV-READ d32: Camila about Yuki (why=vgrievance)
+  GRIEV-READ d33: Camila about Yuki (why=vgrievance)
+  KNACK d13 Camila: "Gilberto found a lost knife by smell last week. By SMELL."
+  KNACK d20 Gilberto: "cuts close faster when Chantal wraps them. Don't ask me how."
+  KNACK d28 Chantal: "Good question." "Camila ate something last month that should've killed them. They're fine."
+  KNACK d29 Yuki: "Good question." "Gilberto found a lost knife by smell last week. By SMELL."
+  KNACK d30 Joel: "Jada talks to the garden. The garden listens. I've seen it. Thank you. Really."
+  KNACK d38 Yuki: "Huh. Let me think about that." "I think — Jada talks to the garden. The garden listens. I've seen it."
+  KNACK d41 Katarina: "Huh. Let me think about that." "cuts close faster when Chantal wraps them. Don't ask me how."
+  KNACK d45 Camila: "Good question." "that stray dog — the one that bit two people — lets Yuki touch it."
+
+deathCauses: {"ambush":2,"a stranger":1,"The Landlord":1,"the wild":1}

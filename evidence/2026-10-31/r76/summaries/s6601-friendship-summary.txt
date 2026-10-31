@@ -1,0 +1,320 @@
+# SURFACE+SEEDED — seed 6601 (119d, 2 alive)
+
+npcPairs=74 deep2=20 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=264 closeReadsServed=22 grievanceServes=39 othersSteered=27
+COND-TP: firstDeep2Day=15 lateClose=186 lateTP=158 lateNull=0 condRate=84.9% pooledTP=158/188 pooledRate=84.0% grievReadsByWhy={"grievance":10,"vgrievance":43}
+FUNNEL (natural): convos=344 subject=330 offered=287 picked=237 classes={"subject-no-offer":43,"offered-not-picked":50,"no-subject-no-ans":14,"picked-others":237}
+FUNNEL-UNSTEERED (r55 strict): convos=344 subjectNoOffer=43 rate=12.5% offered=287 mainOffered=0 subjectOffered=287 picked=237 latePicks=63 latePicksMain=0 latePicksSubject=63
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Devon / Avery — "Miguel talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Mateo / Fernando — "Yara talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Avery / Elijah — "Fernando ate something last month that should've killed them. They're fine."
+REOFFER: offers=276 picks=249 latePicks=61 missedChangedNotOffered=0
+WRAPSERVE: convos=53 matcherHits=39 matcherServes=39 classes={"grievance-line":39,"deflection":2,"other":12}
+FUNNEL-PROBE (subject-no-offer turns): turns=192 menuProblem=163 pickProblem=29
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":22,"accepts":9,"acceptRate":0.4090909090909091,"vetoes":{},"chanceMin":21.799999999999997,"chanceMax":87.80000000000001,"chanceMean":50.8} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=5
+FAVOR (r65): funnel={"offers":41,"forageOffers":12,"otherFavorOffers":29,"accepts":12,"acceptAttempts":12,"waits":12,"starts":10,"startBlocked":10,"forages":5,"forageNodeBarren":27,"forageBarren":9,"forageBarrenTravel":0,"forageBarrenNode":9,"forageTravelBlocked":0,"forageTravelWalked":4,"stepRetries":5,"retryAssigned":5,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":5,"talks":5,"delivers":5,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":5,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r76): snaps=2 betrayalOfferConvos=102 mootOffers=0 mootProbePicks=[] mootsConvened=0
+OUTING END STATES: [{"vid":"elijah_scott","vidName":"Elijah","favorId":"favor-elijah_scott-57-18","state":"broken","promisedDay":57,"meetDay":58,"deadline":59,"promiseKept":"broken","startedDay":58,"forageCount":1,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_eakvmyo","vidName":"Charlotte","favorId":"favor-gen_eakvmyo-79-28","state":"broken","promisedDay":80,"meetDay":81,"deadline":81,"promiseKept":"broken","startedDay":81,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"lucas_brown","vidName":"Lucas","favorId":"favor-lucas_brown-70-23","state":"broken","promisedDay":70,"meetDay":71,"deadline":72,"promiseKept":"broken","startedDay":71,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"onni_korhonen","vidName":"Onni","favorId":"favor-onni_korhonen-107-38","state":"asked","promisedDay":107,"meetDay":108,"deadline":109,"promiseKept":"released","startedDay":108,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d5: Fernando kind=forage_help favorId=favor-gen_4gua8h7-5-1 task=forage with Fernando tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: Elijah kind=forage_help favorId=favor-elijah_scott-11-2 task=forage with Elijah tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Amelia kind=heal_help favorId=favor-gen_nn4texh-14-3 task=help Amelia with their injury
+  FAVOR-OFFER d18: Charlotte kind=forage_help favorId=favor-gen_eakvmyo-18-4 task=forage with Charlotte tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Fernando kind=food_share favorId=favor-gen_4gua8h7-19-5 task=share food with Fernando — they're past hungry
+  FAVOR-OFFER d21: Avery kind=food_share favorId=favor-gen_kh55v6a-21-6 task=share food with Avery — they're past hungry
+  FAVOR-OFFER d22: Fernando kind=food_share favorId=favor-gen_4gua8h7-22-7 task=share food with Fernando — they're running on empty
+  FAVOR-OFFER d23: Devon kind=food_share favorId=favor-devon_okafor-23-8 task=share food with Devon — they're going hungry
+  FAVOR-OFFER d27: Fernando kind=food_share favorId=favor-gen_4gua8h7-27-9 task=share food with Fernando — they're going hungry
+  FAVOR-OFFER d27: Avery kind=forage_help favorId=favor-gen_kh55v6a-27-10 task=forage with Avery tomorrow to rebuild the pantry
+  FAVOR-OFFER d36: Lucas kind=forage_help favorId=favor-lucas_brown-36-11 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Mateo kind=forage_help favorId=favor-mateo_alvarez-38-12 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Devon kind=sick_help favorId=favor-devon_okafor-42-13 task=help Devon with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d50: Mateo kind=food_share favorId=favor-mateo_alvarez-50-14 task=share food with Mateo — they're going hungry
+  FAVOR-OFFER d52: Devon kind=sick_help favorId=favor-devon_okafor-52-15 task=help Devon with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d53: Mateo kind=food_share favorId=favor-mateo_alvarez-53-16 task=share food with Mateo — they're going hungry
+  FAVOR-OFFER d57: Elijah kind=forage_help favorId=favor-elijah_scott-57-18 task=forage with Elijah tomorrow to rebuild the pantry
+  FAVOR-OFFER d59: Mateo kind=heal_help favorId=favor-mateo_alvarez-59-19 task=help Mateo with their injury
+  FAVOR-OFFER d60: Lucas kind=heal_help favorId=favor-lucas_brown-55-17 task=help Lucas with their injury
+  FAVOR-OFFER d63: Charlotte kind=heal_help favorId=favor-gen_eakvmyo-63-20 task=help Charlotte with their injury
+  FAVOR-OFFER d64: Mateo kind=heal_help favorId=favor-mateo_alvarez-64-21 task=help Mateo with their injury
+  FAVOR-OFFER d69: Mateo kind=heal_help favorId=favor-mateo_alvarez-69-22 task=help Mateo with their injury
+  FAVOR-OFFER d70: Lucas kind=forage_help favorId=favor-lucas_brown-70-23 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d73: Charlotte kind=food_share favorId=favor-gen_eakvmyo-73-24 task=share food with Charlotte — they're past hungry
+  FAVOR-OFFER d75: Mateo kind=food_share favorId=favor-mateo_alvarez-75-25 task=share food with Mateo — they're past hungry
+  FAVOR-OFFER d77: Miguel kind=heal_help favorId=favor-miguel_santos-77-27 task=help Miguel with their injury
+  FAVOR-OFFER d77: Utpal kind=sick_help favorId=favor-app_mgpsphjp377-77-26 task=help Utpal with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d79: Charlotte kind=forage_help favorId=favor-gen_eakvmyo-79-28 task=forage with Charlotte tomorrow to rebuild the pantry
+  FAVOR-OFFER d81: Onni kind=forage_help favorId=favor-onni_korhonen-81-29 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d83: Avery kind=sick_help favorId=favor-gen_kh55v6a-83-30 task=help Avery with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d86: Mateo kind=forage_help favorId=favor-mateo_alvarez-86-31 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d88: Avery kind=heal_help favorId=favor-gen_kh55v6a-88-32 task=help Avery with their injury
+  FAVOR-OFFER d96: Mateo kind=food_share favorId=favor-mateo_alvarez-96-33 task=share food with Mateo — they're going hungry
+  FAVOR-OFFER d97: Fernando kind=food_share favorId=favor-gen_4gua8h7-97-34 task=share food with Fernando — they're going hungry
+  FAVOR-OFFER d102: Onni kind=food_share favorId=favor-onni_korhonen-102-35 task=share food with Onni — they're running on empty
+  FAVOR-OFFER d102: Avery kind=heal_help favorId=favor-gen_kh55v6a-102-36 task=help Avery with their injury
+  FAVOR-OFFER d106: Avery kind=water_haul favorId=favor-gen_kh55v6a-106-37 task=bring four liters home from the creek with Avery; set out at dawn
+  FAVOR-OFFER d107: Onni kind=forage_help favorId=favor-onni_korhonen-107-38 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d113: Lyazzat kind=heal_help favorId=favor-visjoin_111-113-39 task=help Lyazzat with their injury
+  FAVOR-OFFER d114: Xoan kind=sick_help favorId=favor-visjoin_106-114-40 task=help Xoan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d115: Antonio kind=heal_help favorId=favor-visjoin_110-115-41 task=help Antonio with their injury
+  FAVOR-ACCEPT d5: Fernando favorId=favor-gen_4gua8h7-5-1 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d11: Elijah favorId=favor-elijah_scott-11-2 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d18: Charlotte favorId=favor-gen_eakvmyo-18-4 accepted=true state=promised meetDay=19
+  FAVOR-ACCEPT d27: Avery favorId=favor-gen_kh55v6a-27-10 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d36: Lucas favorId=favor-lucas_brown-36-11 accepted=true state=promised meetDay=37
+  FAVOR-ACCEPT d38: Mateo favorId=favor-mateo_alvarez-38-12 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d57: Elijah favorId=favor-elijah_scott-57-18 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d70: Lucas favorId=favor-lucas_brown-70-23 accepted=true state=promised meetDay=71
+  FAVOR-ACCEPT d80: Charlotte favorId=favor-gen_eakvmyo-79-28 accepted=true state=promised meetDay=81
+  FAVOR-ACCEPT d81: Onni favorId=favor-onni_korhonen-81-29 accepted=true state=promised meetDay=82
+  FAVOR-ACCEPT d86: Mateo favorId=favor-mateo_alvarez-86-31 accepted=true state=promised meetDay=87
+  FAVOR-ACCEPT d107: Onni favorId=favor-onni_korhonen-107-38 accepted=true state=promised meetDay=108
+  INVITE-DEC d8 party: Earl -> Charlotte chance=50.400000000000006 accept=false veto=- inputs={"temp":"sardonic","goal":"protect","mood":"steady","fear":4,"trust":51,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 51","sick (-20)","protect goal (+15)"]
+  INVITE-DEC d8 party: Earl -> Avery chance=49.8 accept=true veto=- inputs={"temp":"anxious","goal":"home","mood":"steady","fear":4,"trust":37,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 37"]
+  INVITE-DEC d9 party: Earl -> Elijah chance=80.6 accept=true veto=- inputs={"temp":"warm","goal":"belong","mood":"steady","fear":4,"trust":39,"bond":null,"partySize":1} reasons=["trust 39","warm temperament (+15)","belong goal (+15)"]
+  INVITE-DEC d9 party: Earl -> Yara chance=51.6 accept=false veto=- inputs={"temp":"cautious","goal":"protect","mood":"steady","fear":4,"trust":29,"bond":null,"partySize":2} reasons=["trust 29","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d9 party: Earl -> Charlotte chance=53.6 accept=false veto=- inputs={"temp":"sardonic","goal":"protect","mood":"steady","fear":4,"trust":59,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 59","sick (-20)","protect goal (+15)"]
+  INVITE-DEC d10 party: Earl -> Devon chance=63.2 accept=true veto=- inputs={"temp":"anxious","goal":"feed","mood":"hungry","fear":4,"trust":33,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 33","feed goal (+15)"]
+  INVITE-DEC d15 party: Earl -> Fernando chance=34 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":4,"trust":60,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 60","a big party is safer (+5)","sick (-20)","cautious temperament (-10)"]
+  INVITE-DEC d15 party: Earl -> Fernando chance=34 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":4,"trust":60,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 60","a big party is safer (+5)","sick (-20)","cautious temperament (-10)"]
+  INVITE-DEC d15 party: Earl -> Yara chance=57.8 accept=false veto=- inputs={"temp":"cautious","goal":"protect","mood":"steady","fear":4,"trust":32,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 32","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d16 party: Earl -> Fernando chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":0,"trust":65,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 65","a big party is safer (+5)","sick (-20)","cautious temperament (-10)"]
+  INVITE-DEC d17 party: Earl -> Fernando chance=37.599999999999994 accept=true veto=- inputs={"temp":"cautious","goal":"answers","mood":"steady","fear":4,"trust":69,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)","sick (-20)","cautious temperament (-10)"]
+  INVITE-DEC d31 party: Earl -> Lucas chance=30 accept=false veto=- inputs={"temp":"steady","goal":"peace","mood":"grieving","fear":13,"trust":50,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 50","a big party is safer (+5)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Earl -> Amelia chance=49 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":13,"trust":85,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 85","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d32 party: Earl -> Mateo chance=78.6 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"grieving","fear":0,"trust":84,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 84","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d53 party: Earl -> Yara chance=58.2 accept=false veto=- inputs={"temp":"cautious","goal":"protect","mood":"grieving","fear":9,"trust":58,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 58","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d53 party: Earl -> Lucas chance=45.2 accept=false veto=- inputs={"temp":"steady","goal":"peace","mood":"grieving","fear":9,"trust":63,"bond":{"v":40,"depth":1},"partySize":4} reasons=["trust 63","a real bond (+10)","a big party is safer (+5)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d54 party: Earl -> Yara chance=58.2 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"grieving","fear":0,"trust":58,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 58","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d67 party: Earl -> Charlotte chance=87.80000000000001 accept=true veto=- inputs={"temp":"sardonic","goal":"protect","mood":"grieving","fear":41,"trust":82,"bond":{"v":46,"depth":1},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d82 party: Earl -> Miguel chance=57.8 accept=true veto=- inputs={"temp":"intense","goal":"belong","mood":"grieving","fear":17,"trust":57,"bond":{"v":44,"depth":1},"partySize":4} reasons=["trust 57","a real bond (+10)","a big party is safer (+5)","sick (-20)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d112 party: Avery -> Antonio chance=33 accept=false veto=- inputs={"temp":"gentle","goal":"remember","mood":"grieving","fear":4,"trust":20,"bond":null,"partySize":1} reasons=["trust 20","grieving mood (-10)"]
+  INVITE-DEC d113 party: Avery -> Antonio chance=49.8 accept=true veto=- inputs={"temp":"gentle","goal":"remember","mood":"steady","fear":0,"trust":37,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 37"]
+  INVITE-DEC d114 party: Avery -> Xoan chance=21.799999999999997 accept=false veto=- inputs={"temp":"earnest","goal":"peace","mood":"grieving","fear":29,"trust":42,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 42","sick (-20)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":15,"v":42,"depth":2},{"day":16,"v":42,"depth":2},{"day":17,"v":46,"depth":2},{"day":18,"v":50,"depth":3},{"day":19,"v":50,"depth":3},{"day":21,"v":58,"depth":3},{"day":21,"v":58,"depth":3},{"day":22,"v":62,"depth":3},{"day":23,"v":66,"depth":3},{"day":24,"v":70,"depth":3},{"day":25,"v":74,"depth":3},{"day":26,"v":78,"depth":3},{"day":27,"v":82,"depth":3},{"day":28,"v":86,"depth":3}] class=rise
+GOSSIP: totalPicks=185 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=37 31-60=64 61-90=73 91-120=63 121+=0 naturalPicks=237 seededPicks=27 gossipPicks=185
+SEEDED: {"pair":{"a":"gen_4gua8h7","b":"gen_eakvmyo","aName":"Fernando","bName":"Charlotte"},"day":14,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":15,"v":42,"depth":2},{"day":16,"v":42,"depth":2},{"day":17,"v":46,"depth":2},{"day":18,"v":50,"depth":3},{"day":19,"v":50,"depth":3},{"day":21,"v":58,"depth":3},{"day":21,"v":58,"depth":3},{"day":22,"v":62,"depth":3},{"day":23,"v":66,"depth":3},{"day":24,"v":70,"depth":3},{"day":25,"v":74,"depth":3},{"day":26,"v":78,"depth":3},{"day":27,"v":82,"depth":3},{"day":28,"v":86,"depth":3}],"crackTraceClass":"rise","vAt7":42,"depthAt7":2,"vDrop":8,"depthDrop":0,"crack7":false,"firstServe":{"day":23,"why":"vgrievance"},"serveWithin30":true,"serves":43,"servesAll":[{"day":23,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":80,"why":"vgrievance"}],"effect":true}
+  FRIEND d15: Fernando <> Charlotte — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Charlotte <> Avery — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d25: Fernando <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Nouhaila <> Fernando — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d30: Nouhaila <> Avery — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d60: Fernando <> Mateo — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d25: Devon <> Fernando — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Elijah <> Fernando — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Fernando <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Fernando <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Fernando <> Miguel — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d35: Devon <> Avery — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d100: Avery <> Yara — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d100: Fernando <> Onni — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d105: Earl <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Fernando <> Earl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Charlotte <> Earl — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d105: Earl <> Mateo — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d105: Elijah <> Earl — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d110: Earl <> Yara — maxDepth 3, final 3 (v=89), dropped 0
+  CLOSE-READ d8: Charlotte about Fernando — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d13: Avery about Fernando — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Devon about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Avery about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Elijah about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Devon about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Yara about Fernando — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Avery about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d19: Charlotte about Fernando — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d21: Elijah about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Lucas about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Avery about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d21: Devon about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d23: Devon about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d24: Nouhaila about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Miguel about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Devon about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Devon about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Elijah about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d29: Lucas about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d30: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Elijah about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Elijah about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Lucas about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Lucas about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Yara about Fernando — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Lucas about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Miguel about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Lucas about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Miguel about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Lucas about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Devon about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Lucas about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Mateo about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Miguel about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Elijah about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Miguel about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Mateo about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Miguel about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Charlotte about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Mateo about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Onni about Fernando — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Mateo about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Onni about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Mateo about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Onni about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Mateo about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Utpal about Fernando — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d94: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Mateo about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Onni about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Onni about Fernando — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Yara about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Onni about Fernando — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Fernando about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Avery about Fernando — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Onni about Fernando — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Fernando about Onni — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d11: Fernando about Mateo (why=grievance)
+  GRIEV-READ d11: Elijah about Devon (why=grievance)
+  GRIEV-READ d14: Fernando about Mateo (why=grievance)
+  GRIEV-READ d15: Fernando about Mateo (why=grievance)
+  GRIEV-READ d18: Fernando about Mateo (why=grievance)
+  GRIEV-READ d19: Fernando about Mateo (why=grievance)
+  KNACK d10 Devon: "Miguel talks to the garden. The garden listens. I've seen it."
+  KNACK d16 Avery: "Miguel talks to the garden. The garden listens. I've seen it."
+  KNACK d21 Mateo: "Yara talks to the garden. The garden listens. I've seen it."
+  KNACK d22 Miguel: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Avery touch it."
+  KNACK d26 Amelia: "Good question." "that stray dog — the one that bit two people — lets Devon touch it."
+  KNACK d35 Avery: "that stray dog — the one that bit two people — lets Mateo touch it. ...sorry, I'm spiraling."
+  KNACK d39 Yara: "Huh. Let me think about that." "Charlotte ate something last month that should've killed them. They're fine."
+  KNACK d45 Lucas: "Elijah talks to the garden. The garden listens. I've seen it. One step at a time."
+
+deathCauses: {"Speedbump":1,"monster":4,"sickness":2,"alien":2,"a wound that wouldn't close":2,"the wild":3}

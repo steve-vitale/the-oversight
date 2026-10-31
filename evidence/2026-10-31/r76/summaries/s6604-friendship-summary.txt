@@ -1,0 +1,238 @@
+# SURFACE+SEEDED — seed 6604 (135d, 2 alive)
+
+npcPairs=84 deep2=29 cracks=0 vCracks=3 friendGriev=0 stateGriev=13 stateFriend=0 stateVCrack=2 t2picks=149 closeReadsServed=16 grievanceServes=89 othersSteered=147
+COND-TP: firstDeep2Day=25 lateClose=26 lateTP=21 lateNull=0 condRate=80.8% pooledTP=21/32 pooledRate=65.6% grievReadsByWhy={"grievance":2,"vgrievance":94}
+FUNNEL (natural): convos=392 subject=338 offered=279 picked=123 classes={"subject-no-offer":60,"offered-not-picked":38,"no-subject-no-ans":53,"picked-others":123,"offered-capped":118}
+FUNNEL-UNSTEERED (r55 strict): convos=271 subjectNoOffer=60 rate=22.1% offered=158 mainOffered=1 subjectOffered=157 picked=2 latePicks=1 latePicksMain=0 latePicksSubject=1
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=269 picks=136 latePicks=41 missedChangedNotOffered=9
+WRAPSERVE: convos=96 matcherHits=89 matcherServes=89 classes={"grievance-line":89,"deflection":1,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=151 menuProblem=110 pickProblem=41
+INVITE (wrap, carried from r63): lure={"n":12,"accepts":5,"acceptRate":0.4166666666666667,"vetoes":{"sick":2},"chanceMin":0,"chanceMax":46,"chanceMean":30.3} party={"n":26,"accepts":12,"acceptRate":0.46153846153846156,"vetoes":{},"chanceMin":8,"chanceMax":76,"chanceMean":48} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":56,"forageOffers":12,"otherFavorOffers":44,"accepts":11,"acceptAttempts":11,"waits":11,"starts":8,"startBlocked":13,"forages":8,"forageNodeBarren":10,"forageBarren":2,"forageBarrenTravel":0,"forageBarrenNode":2,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":4,"retryAssigned":4,"retryStarts":4,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":8,"delivers":8,"deliverBlocked":0,"completeOutings":3,"completeOutingsEvents":8,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r76): snaps=11 betrayalOfferConvos=114 mootOffers=8 mootProbePicks=[{"day":12,"vid":"carlos_diaz","vidName":"Carlos","caseId":"case_2"},{"day":15,"vid":"aroha_ngata","vidName":"Aroha","caseId":"case_4"},{"day":15,"vid":"aroha_ngata","vidName":"Aroha","caseId":"case_6"},{"day":19,"vid":"gen_7b7cr3i","vidName":"Muhindo","caseId":"case_8"},{"day":22,"vid":"gen_6i10ddc","vidName":"Matteo","caseId":"case_10"}] mootsConvened=0
+  CASE-SNAP d11: case_2 status=open charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_4 status=open charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d14: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_4 status=open charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d14: case_6 status=open charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d15: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=acquitted charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_6 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_4 status=acquitted charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_6 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_8 status=open charge=ambush accused=Muhindo/Lucas/Aroha target=Dale role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d19: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_4 status=acquitted charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_6 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_8 status=acquitted charge=ambush accused=Muhindo/Lucas/Aroha target=Dale role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_4 status=acquitted charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_6 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_8 status=acquitted charge=ambush accused=Muhindo/Lucas/Aroha target=Dale role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_10 status=open charge=ambush accused=Muhindo/Aroha/Lucas target=Dale role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d22: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_4 status=acquitted charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_6 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_8 status=acquitted charge=ambush accused=Muhindo/Lucas/Aroha target=Dale role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_10 status=acquitted charge=ambush accused=Muhindo/Aroha/Lucas target=Dale role=juror known=true mootIn=null trial=true
+  CASE-SNAP d135: case_2 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d135: case_4 status=acquitted charge=ambush accused=Dale/Dakota/Matteo target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d135: case_6 status=acquitted charge=ambush accused=Dale/Matteo/Dakota target=Muhindo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d135: case_8 status=acquitted charge=ambush accused=Muhindo/Lucas/Aroha target=Dale role=juror known=true mootIn=null trial=true
+  CASE-SNAP d135: case_10 status=acquitted charge=ambush accused=Muhindo/Aroha/Lucas target=Dale role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"lucas_brown","vidName":"Lucas","favorId":"favor-lucas_brown-48-22","state":"thanked","promisedDay":48,"meetDay":49,"deadline":50,"promiseKept":true,"startedDay":49,"forageCount":1,"playerKcal":360,"partnerKcal":360,"deliveredKcal":720,"returnedDay":49,"talkCount":1},{"vid":"gen_6i10ddc","vidName":"Matteo","favorId":"favor-gen_6i10ddc-19-7","state":"acknowledged","promisedDay":19,"meetDay":20,"deadline":21,"promiseKept":"broken","startedDay":21,"forageCount":1,"playerKcal":360,"partnerKcal":415,"deliveredKcal":775,"returnedDay":22,"talkCount":1},{"vid":"chen_wei","vidName":"Wei","favorId":"favor-chen_wei-120-53","state":"acknowledged","promisedDay":120,"meetDay":121,"deadline":122,"promiseKept":"broken","startedDay":122,"forageCount":1,"playerKcal":630,"partnerKcal":630,"deliveredKcal":1260,"returnedDay":123,"talkCount":1}]
+  FAVOR-OFFER d4: Dakota kind=sick_help favorId=favor-gen_lvffb0a-4-1 task=help Dakota with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d6: Carlos kind=heal_help favorId=favor-carlos_diaz-6-2 task=help Carlos with their injury
+  FAVOR-OFFER d11: Megan kind=sick_help favorId=favor-gen_5cmbypg-11-3 task=help Megan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d11: Farid kind=food_share favorId=favor-farid_ahmed-11-4 task=share food with Farid — they're going hungry
+  FAVOR-OFFER d14: Lucas kind=sick_help favorId=favor-lucas_brown-14-5 task=help Lucas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d17: Avery kind=food_share favorId=favor-gen_gqasfrp-17-6 task=share food with Avery — they're past hungry
+  FAVOR-OFFER d19: Matteo kind=forage_help favorId=favor-gen_6i10ddc-19-7 task=forage with Matteo tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Dale kind=forage_help favorId=favor-dale_hoffman-21-9 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Dale kind=forage_help favorId=favor-dale_hoffman-21-10 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Lucas kind=heal_help favorId=favor-lucas_brown-24-11 task=help Lucas with their injury
+  FAVOR-OFFER d24: Muhindo kind=forage_help favorId=favor-gen_7b7cr3i-24-12 task=forage with Muhindo tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Lucas kind=food_share favorId=favor-lucas_brown-28-14 task=share food with Lucas — they're going hungry
+  FAVOR-OFFER d29: Aroha kind=heal_help favorId=favor-aroha_ngata-28-13 task=help Aroha with their injury
+  FAVOR-OFFER d34: Lucas kind=sick_help favorId=favor-lucas_brown-34-16 task=help Lucas with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d35: Muhindo kind=sick_help favorId=favor-gen_7b7cr3i-35-17 task=help Muhindo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d37: Dale kind=food_share favorId=favor-dale_hoffman-34-15 task=share food with Dale — they're running on empty
+  FAVOR-OFFER d40: Muhindo kind=sick_help favorId=favor-gen_7b7cr3i-40-18 task=help Muhindo with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d43: Lucas kind=sick_help favorId=favor-lucas_brown-43-20 task=help Lucas with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d45: Avery kind=forage_help favorId=favor-gen_gqasfrp-20-8 task=forage with Avery tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Dakota kind=forage_help favorId=favor-gen_lvffb0a-42-19 task=forage with Dakota tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Muhindo kind=forage_help favorId=favor-gen_7b7cr3i-46-21 task=forage with Muhindo tomorrow to rebuild the pantry
+  FAVOR-OFFER d48: Lucas kind=forage_help favorId=favor-lucas_brown-48-22 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d54: Dale kind=food_share favorId=favor-dale_hoffman-54-23 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d57: Dale kind=food_share favorId=favor-dale_hoffman-57-24 task=share food with Dale — they're running on empty
+  FAVOR-OFFER d60: Avery kind=food_share favorId=favor-gen_gqasfrp-60-25 task=share food with Avery — they're running on empty
+  FAVOR-OFFER d67: Dale kind=forage_help favorId=favor-dale_hoffman-67-26 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Aroha kind=food_share favorId=favor-aroha_ngata-69-27 task=share food with Aroha — they're running on empty
+  FAVOR-OFFER d70: Avery kind=food_share favorId=favor-gen_gqasfrp-70-28 task=share food with Avery — they're going hungry
+  FAVOR-OFFER d78: Dakota kind=food_share favorId=favor-gen_lvffb0a-78-29 task=share food with Dakota — they're running on empty
+  FAVOR-OFFER d79: Avery kind=forage_help favorId=favor-gen_gqasfrp-79-30 task=forage with Avery tomorrow to rebuild the pantry
+  FAVOR-OFFER d81: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-81-31 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d83: Dakota kind=food_share favorId=favor-gen_lvffb0a-83-32 task=share food with Dakota — they're going hungry
+  FAVOR-OFFER d86: Dakota kind=water_haul favorId=favor-gen_lvffb0a-86-33 task=bring four liters home from the creek with Dakota; set out at dawn
+  FAVOR-OFFER d87: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-87-34 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d90: Megan kind=forage_help favorId=favor-gen_5cmbypg-90-36 task=forage with Megan tomorrow to rebuild the pantry
+  FAVOR-OFFER d90: Avery kind=water_haul favorId=favor-gen_gqasfrp-88-35 task=bring four liters home from the creek with Avery; set out at dawn
+  FAVOR-OFFER d91: Avery kind=water_haul favorId=favor-gen_gqasfrp-91-38 task=bring four liters home from the creek with Avery; set out at dawn
+  FAVOR-OFFER d92: Dakota kind=food_share favorId=favor-gen_lvffb0a-91-37 task=share food with Dakota — they're going hungry
+  FAVOR-OFFER d93: Megan kind=sick_help favorId=favor-gen_5cmbypg-93-39 task=help Megan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d93: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-93-40 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d96: Dale kind=sick_help favorId=favor-dale_hoffman-96-41 task=help Dale with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d96: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-96-42 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d98: Dakota kind=food_share favorId=favor-gen_lvffb0a-98-43 task=share food with Dakota — they're past hungry
+  FAVOR-OFFER d99: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-99-44 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d100: Megan kind=water_haul favorId=favor-gen_5cmbypg-100-45 task=bring four liters home from the creek with Megan; set out at dawn
+  FAVOR-OFFER d104: Dakota kind=water_haul favorId=favor-gen_lvffb0a-104-46 task=bring four liters home from the creek with Dakota; set out at dawn
+  FAVOR-OFFER d105: Avery kind=water_haul favorId=favor-gen_gqasfrp-105-47 task=bring four liters home from the creek with Avery; set out at dawn
+  FAVOR-OFFER d106: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-106-48 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d109: Dakota kind=food_share favorId=favor-gen_lvffb0a-109-49 task=share food with Dakota — they're going hungry
+  FAVOR-OFFER d109: Muhindo kind=sick_help favorId=favor-gen_7b7cr3i-109-50 task=help Muhindo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d112: Avery kind=water_haul favorId=favor-gen_gqasfrp-112-51 task=bring four liters home from the creek with Avery; set out at dawn
+  FAVOR-OFFER d119: Dale kind=water_haul favorId=favor-dale_hoffman-118-52 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d120: Wei kind=forage_help favorId=favor-chen_wei-120-53 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d123: Muhindo kind=water_haul favorId=favor-gen_7b7cr3i-123-55 task=bring four liters home from the creek with Muhindo; set out at dawn
+  FAVOR-OFFER d125: Dakota kind=heal_help favorId=favor-gen_lvffb0a-123-54 task=help Dakota with their injury
+  FAVOR-OFFER d134: Naran kind=heal_help favorId=favor-naran_tumen-134-56 task=help Naran with their injury
+  FAVOR-ACCEPT d19: Matteo favorId=favor-gen_6i10ddc-19-7 accepted=true state=promised meetDay=20
+  FAVOR-ACCEPT d21: Dale favorId=favor-dale_hoffman-21-10 accepted=true state=promised meetDay=22
+  FAVOR-ACCEPT d24: Muhindo favorId=favor-gen_7b7cr3i-24-12 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d45: Avery favorId=favor-gen_gqasfrp-20-8 accepted=true state=promised meetDay=46
+  FAVOR-ACCEPT d46: Dakota favorId=favor-gen_lvffb0a-42-19 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d46: Muhindo favorId=favor-gen_7b7cr3i-46-21 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d48: Lucas favorId=favor-lucas_brown-48-22 accepted=true state=promised meetDay=49
+  FAVOR-ACCEPT d67: Dale favorId=favor-dale_hoffman-67-26 accepted=true state=promised meetDay=68
+  FAVOR-ACCEPT d79: Avery favorId=favor-gen_gqasfrp-79-30 accepted=true state=promised meetDay=80
+  FAVOR-ACCEPT d90: Megan favorId=favor-gen_5cmbypg-90-36 accepted=true state=promised meetDay=91
+  FAVOR-ACCEPT d120: Wei favorId=favor-chen_wei-120-53 accepted=true state=promised meetDay=121
+  INVITE-DEC d8 party: Chris -> Wanjiru chance=66 accept=true veto=- inputs={"temp":"warm","goal":"survive","mood":"steady","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40","warm temperament (+15)"]
+  INVITE-DEC d9 party: Chris -> Farid chance=34.2 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":4,"trust":23,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 23","cautious temperament (-10)"]
+  INVITE-DEC d9 party: Chris -> Lucas chance=63.6 accept=false veto=- inputs={"temp":"steady","goal":"protect","mood":"steady","fear":4,"trust":34,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 34","protect goal (+15)"]
+  INVITE-DEC d9 party: Chris -> Avery chance=66 accept=true veto=- inputs={"temp":"sardonic","goal":"protect","mood":"steady","fear":4,"trust":40,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 40","protect goal (+15)"]
+  INVITE-DEC d9 lure: Dakota -> Muhindo chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":0,"affinity":4} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d10 lure: Dakota -> Muhindo chance=36 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"hungry","fear":0,"affinity":4} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d12 lure: Dakota -> Muhindo chance=36 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":4,"affinity":4} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d13 lure: Dakota -> Muhindo chance=36 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":4,"affinity":4} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d14 party: Wanjiru -> Lucas chance=28 accept=true veto=- inputs={"temp":"steady","goal":"protect","mood":"grieving","fear":92,"trust":45,"bond":null,"partySize":2} reasons=["trust 45","sick (-20)","protect goal (+15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d16 party: Wanjiru -> Megan chance=66 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":36,"trust":90,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 90","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d16 lure: Aroha -> Dale chance=36 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"grieving","fear":28,"affinity":3} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d18 party: Wanjiru -> Carlos chance=44.8 accept=true veto=- inputs={"temp":"prickly","goal":"lead","mood":"steady","fear":4,"trust":62,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 62","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d18 lure: Aroha -> Dale chance=46 accept=false veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d19 lure: Aroha -> Dale chance=46 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)"]
+  INVITE-DEC d22 lure: Dakota -> Muhindo chance=0 accept=false veto=sick inputs={"temp":"cautious","goal":"remember","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d23 lure: Dakota -> Muhindo chance=0 accept=false veto=sick inputs={"temp":"cautious","goal":"remember","mood":"hungry","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d24 lure: Dakota -> Muhindo chance=37 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grateful","fear":0,"affinity":7} reasons=["relationship with inviter (+2)","cautious temperament (-10)"]
+  INVITE-DEC d25 party: Farid -> Megan chance=76 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":1,"trust":90,"bond":{"v":44,"depth":1},"partySize":3} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d25 lure: Dakota -> Muhindo chance=27 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":4,"affinity":7} reasons=["relationship with inviter (+2)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d26 lure: Dakota -> Muhindo chance=27 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":0,"affinity":7} reasons=["relationship with inviter (+2)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d32 party: Farid -> Dale chance=66 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":4,"trust":65,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 65","a big party is safer (+5)"]
+  INVITE-DEC d34 party: Farid -> Aroha chance=68.2 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"grieving","fear":17,"trust":58,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 58","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d51 party: Farid -> Muhindo chance=56.8 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":39,"trust":67,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 67","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d55 party: Farid -> Dakota chance=66 accept=true veto=- inputs={"temp":"withdrawn","goal":"heal","mood":"steady","fear":4,"trust":90,"bond":{"v":32,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d109 party: Megan -> Muhindo chance=46 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":40,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d109 party: Megan -> Muhindo chance=46 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":20,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d110 party: Megan -> Muhindo chance=45.599999999999994 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"grieving","fear":0,"trust":89,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 89","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d111 party: Megan -> Muhindo chance=55.599999999999994 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"hungry","fear":4,"trust":89,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 89","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)"]
+  INVITE-DEC d112 party: Megan -> Wei chance=8 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":12,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d113 party: Megan -> Zoe chance=48.8 accept=false veto=- inputs={"temp":"intense","goal":"joy","mood":"steady","fear":12,"trust":22,"bond":null,"partySize":4} reasons=["trust 22","a big party is safer (+5)"]
+  INVITE-DEC d114 party: Megan -> Wei chance=12 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":12,"trust":30,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 30","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d115 party: Megan -> Muhindo chance=76 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":12,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d116 party: Avery -> Zoe chance=46 accept=true veto=- inputs={"temp":"intense","goal":"joy","mood":"grieving","fear":20,"trust":40,"bond":null,"partySize":4} reasons=["trust 40","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d125 party: Aroha -> Naran chance=21.799999999999997 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":100,"trust":42,"bond":null,"partySize":3} reasons=["trust 42","a big party is safer (+5)","wants out (-15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d127 party: Aroha -> Naran chance=33 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":69,"trust":45,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 45","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d129 party: Dale -> Naran chance=28 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":67,"trust":45,"bond":null,"partySize":1} reasons=["trust 45","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d130 party: Matteo -> Naran chance=30 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":64,"trust":50,"bond":null,"partySize":1} reasons=["trust 50","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d131 party: Matteo -> Nicolás chance=48.4 accept=false veto=- inputs={"temp":"earnest","goal":"belong","mood":"grieving","fear":0,"trust":21,"bond":null,"partySize":2} reasons=["trust 21","belong goal (+15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":24,"v":40,"depth":3},{"day":25,"v":40,"depth":3},{"day":26,"v":44,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":44,"depth":3},{"day":29,"v":48,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":64,"depth":3},{"day":35,"v":68,"depth":3},{"day":36,"v":72,"depth":3},{"day":37,"v":77,"depth":3},{"day":38,"v":81,"depth":3}] class=rise
+GOSSIP: totalPicks=151 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=20 31-60=29 61-90=30 91-120=30 121+=14 naturalPicks=123 seededPicks=26 gossipPicks=151
+SEEDED: {"pair":{"a":"gen_5cmbypg","b":"gen_gqasfrp","aName":"Megan","bName":"Avery"},"day":24,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":24,"v":40,"depth":3},{"day":25,"v":40,"depth":3},{"day":26,"v":44,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":44,"depth":3},{"day":29,"v":48,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":64,"depth":3},{"day":35,"v":68,"depth":3},{"day":36,"v":72,"depth":3},{"day":37,"v":77,"depth":3},{"day":38,"v":81,"depth":3}],"crackTraceClass":"rise","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":25,"why":"vgrievance"},"serveWithin30":true,"serves":82,"servesAll":[{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":73,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":79,"why":"vgrievance"},{"day":80,"why":"vgrievance"},{"day":81,"why":"vgrievance"},{"day":82,"why":"vgrievance"},{"day":83,"why":"vgrievance"},{"day":84,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":86,"why":"vgrievance"},{"day":87,"why":"vgrievance"},{"day":88,"why":"vgrievance"},{"day":89,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":91,"why":"vgrievance"},{"day":92,"why":"vgrievance"},{"day":93,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":95,"why":"vgrievance"},{"day":96,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":100,"why":"vgrievance"},{"day":101,"why":"vgrievance"},{"day":102,"why":"vgrievance"},{"day":104,"why":"vgrievance"},{"day":105,"why":"vgrievance"},{"day":106,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Megan <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Avery <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Megan <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Megan <> Muhindo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Muhindo <> Dakota — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d45: Aroha <> Megan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Farid <> Megan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Dale <> Avery — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d95: Dale <> Dakota — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d70: Matteo <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Aroha <> Muhindo — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d30: Dale <> Megan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Farid <> Matteo — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d110: Farid <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Megan <> Matteo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Aroha <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Aroha <> Dakota — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d110: Farid <> Lucas — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d40: Megan <> Lucas — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d80: Dale <> Matteo — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d100: Aroha <> Matteo — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d105: Aroha <> Dale — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d110: Matteo <> Muhindo — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d110: Aroha <> Farid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Matteo <> Avery — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d110: Farid <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Muhindo <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Farid <> Muhindo — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d110: Dale <> Farid — maxDepth 3, final 3 (v=100), dropped 0
+  VCRACK d13: Muhindo vs Dale (ambushed) v 8 -> -8 (depth 0 -> 0)
+  VCRACK d19: Muhindo vs Wanjiru (voted_guilty) v 2 -> -8 (depth 0 -> 0)
+  VCRACK d22: Muhindo vs Wanjiru (voted_guilty) v 2 -> -8 (depth 0 -> 0)
+  CLOSE-READ d17: Farid about Megan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Megan about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Farid about Megan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Farid about Megan — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Lucas about Megan — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Lucas about Megan — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Lucas about Megan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Aroha about Avery — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Avery about Megan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Lucas about Megan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Aroha about Megan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Lucas about Megan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Lucas about Megan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Lucas about Megan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Lucas about Megan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Lucas about Megan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Aroha about Megan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Lucas about Megan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Lucas about Megan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Lucas about Megan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Avery about Megan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Avery about Megan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Dakota about Megan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Avery about Megan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Aroha about Megan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Dakota about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Avery about Muhindo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Aroha about Dale — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  STATE-VCRACK d14 (betrayal): Muhindo vs Dale (ambushed) v 8 -> -8 (depth 0 -> 0)
+  STATE-VCRACK d19 (betrayal): Muhindo vs Wanjiru (voted_guilty) v 2 -> -8 (depth 0 -> 0)
+  GRIEV-READ d11: Muhindo about Dale (why=grievance)
+  GRIEV-READ d12: Dale about Muhindo (why=grievance)
+  GRIEV-READ d25: Megan about Avery (why=vgrievance)
+  GRIEV-READ d25: Muhindo about Dale (why=vgrievance)
+  GRIEV-READ d26: Megan about Avery (why=vgrievance)
+  GRIEV-READ d27: Megan about Avery (why=vgrievance)
+  KNACK d7 Wanjiru: "Huh. Let me think about that." "cuts close faster when Megan wraps them. Don't ask me how."
+  KNACK d12 Carlos: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Matteo touch it."
+  KNACK d19 Matteo: "Good question." "Carlos talks to the garden. The garden listens. I've seen it."
+  KNACK d32 Megan: "Lucas talks to the garden. The garden listens. I've seen it."
+  KNACK d32 Muhindo: "Good question." "that stray dog — the one that bit two people — lets Dale touch it."
+  KNACK d39 Avery: "cuts close faster when Megan wraps them. Don't ask me how."
+  KNACK d93 Dakota: "Muhindo talks to the garden. The garden listens. I've seen it."
+  KNACK d99 Megan: "Good question." "that stray dog — the one that bit two people — lets Matteo touch it."
+
+deathCauses: {"the wild":4,"contest":1,"monster":3,"combat":3,"starvation":2,"a stranger":1}
