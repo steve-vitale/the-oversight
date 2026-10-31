@@ -1,0 +1,10718 @@
+{
+ "seed": 85106,
+ "policyId": "lead-pockettrigger",
+ "instrument": "ammodiag-v1+supplydiag-v1+stickfiberdiag-v1+pocketcalldiag-v1+pocketdesigndiag-v1",
+ "arm": "baseline",
+ "substrate": "withPocketTrigger(withDeadfall(withDelegate(withFullseatDiag(withSeatDrive(withWinDefer(TF leadfeast))))))) + POCKETCALL_TRIGGER=unset, FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FULLSEAT=1 + AMMODIAG=1 + SUPPLYDIAG=1 + STICKFIBERDIAG=1 + PCDIAG=1 + PDIAG=1",
+ "anchorCommit": "4c92bbb042d4",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "endUnlockedWave": 4,
+ "endScaleRank": "regional",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "days": 79,
+ "gameDays": 79,
+ "endReason": "village-lost",
+ "fights": [
+  {
+   "day": 52,
+   "vid": "app_mgpsphn2492",
+   "mid": "algorithm",
+   "wave": 4,
+   "outcome": "vDie",
+   "fleeClass": "DEATH",
+   "rounds": 1,
+   "vTaken": 75,
+   "mDealt": 20,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "rangedWeaponId": "crude_bow",
+   "rangedAmmoId": "arrow",
+   "equippedRangedId": "crude_bow",
+   "postEquippedRangedId": "crude_bow",
+   "carried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "carriedNeeded": 0,
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStash": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStashNeeded": 0,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   },
+   "ammoCraft": null,
+   "depart": {
+    "onExpedition": false,
+    "expedDist": null,
+    "away": false,
+    "outdoorCrew": false
+   },
+   "callerClass": "aidFight",
+   "callerFrames": [
+    "callerOf",
+    "Game.fieldFight",
+    "Game.fieldFight",
+    "Object.fieldFight",
+    "Object.fieldFight",
+    "Object.aidFight",
+    "Object.resolveWildMonsterEncounter",
+    "Object.villagerMonsterTick"
+   ],
+   "pocket": {
+    "pocketCalls": 0,
+    "totalPocketed": 0,
+    "lastPost": null,
+    "lastOut": null,
+    "everCarried": 0
+   },
+   "log": [
+    "Eirik has Crude bow but no arrows — the string stays drawn, useless.",
+    "R1: Eirik strikes for 20 (x1.3) (730 left)",
+    "Eirik's gear absorbs 27.",
+    "R1: Engagement hits Eirik for 75 (0 left)"
+   ]
+  }
+ ],
+ "fightCount": 1,
+ "pocketCalls": [
+  {
+   "day": 1,
+   "vid": "jovan_milic",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  },
+  {
+   "day": 8,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 15,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 3,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 16,
+   "vid": "owen_smith",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  },
+  {
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 4,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 9,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 32,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 7,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 7,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 38,
+   "vid": "jovan_milic",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  },
+  {
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 4,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 9,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 7,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 7,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "arrow"
+   }
+  }
+ ],
+ "departures": [
+  {
+   "day": 1,
+   "vid": "jovan_milic",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 8,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 15,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 16,
+   "vid": "owen_smith",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 32,
+   "vid": "gen_844p8kq",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 38,
+   "vid": "jovan_milic",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol"
+  },
+  {
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol"
+  }
+ ],
+ "weaponFirstSeen": {
+  "gen_oa3tzlt": {
+   "crossbow": {
+    "day": 2,
+    "equippedRangedId": "crossbow"
+   }
+  },
+  "gen_erylf7t": {
+   "crude_bow": {
+    "day": 2,
+    "equippedRangedId": "crude_bow"
+   }
+  },
+  "gen_844p8kq": {
+   "bow": {
+    "day": 2,
+    "equippedRangedId": "bow"
+   }
+  },
+  "gen_41bvnn7": {
+   "crude_bow": {
+    "day": 2,
+    "equippedRangedId": "crude_bow"
+   },
+   "starfall_bow": {
+    "day": 41,
+    "equippedRangedId": "starfall_bow"
+   }
+  },
+  "owen_smith": {
+   "hunting_spear": {
+    "day": 2,
+    "equippedRangedId": "hunting_spear"
+   }
+  },
+  "hannah_kim": {
+   "sling": {
+    "day": 2,
+    "equippedRangedId": "sling"
+   },
+   "crude_bow": {
+    "day": 41,
+    "equippedRangedId": "crude_bow"
+   }
+  },
+  "xavier_dubois": {
+   "fire_hardened_spear": {
+    "day": 2,
+    "equippedRangedId": "fire_hardened_spear"
+   },
+   "phase_sling": {
+    "day": 35,
+    "equippedRangedId": "phase_sling"
+   }
+  },
+  "nora_wilson": {
+   "crossbow": {
+    "day": 2,
+    "equippedRangedId": "crossbow"
+   }
+  },
+  "jovan_milic": {
+   "fire_hardened_spear": {
+    "day": 35,
+    "equippedRangedId": "fire_hardened_spear"
+   }
+  },
+  "nino_kapanadze": {
+   "sling": {
+    "day": 53,
+    "equippedRangedId": "sling"
+   }
+  },
+  "app_mgpspj93272": {
+   "sling": {
+    "day": 56,
+    "equippedRangedId": "sling"
+   }
+  }
+ },
+ "pocketOverflow": 0,
+ "fieldFightCalls": 93,
+ "lowWaveFights": 92,
+ "supplyPocketCalls": [
+  {
+   "day": 1,
+   "vid": "jovan_milic",
+   "prePile": {
+    "stone": 0,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 0,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  },
+  {
+   "day": 8,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 43,
+    "stick": 6,
+    "fiber": 2,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 42,
+    "stick": 4,
+    "fiber": 2,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": {
+    "bolt": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 15,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 119,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 4
+   },
+   "postPile": {
+    "stone": 118,
+    "stick": 5,
+    "fiber": 2,
+    "branch": 4
+   },
+   "preCraft": {
+    "bolt": 2
+   },
+   "postCraft": {
+    "bolt": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 3,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 16,
+   "vid": "owen_smith",
+   "prePile": {
+    "stone": 137,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 4
+   },
+   "postPile": {
+    "stone": 137,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 4
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  },
+  {
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 318,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 16
+   },
+   "postPile": {
+    "stone": 317,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 16
+   },
+   "preCraft": {
+    "bolt": 2
+   },
+   "postCraft": {
+    "bolt": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 403,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 21
+   },
+   "postPile": {
+    "stone": 402,
+    "stick": 4,
+    "fiber": 4,
+    "branch": 21
+   },
+   "preCraft": {
+    "bolt": 2
+   },
+   "postCraft": {
+    "bolt": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 4,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 9,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 32,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 415,
+    "stick": 9,
+    "fiber": 6,
+    "branch": 23
+   },
+   "postPile": {
+    "stone": 414,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 23
+   },
+   "preCraft": null,
+   "postCraft": {},
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 416,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 24
+   },
+   "postPile": {
+    "stone": 416,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 24
+   },
+   "preCraft": {
+    "bolt": 2
+   },
+   "postCraft": {
+    "bolt": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 420,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 24
+   },
+   "postPile": {
+    "stone": 420,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 24
+   },
+   "preCraft": {
+    "bolt": 2
+   },
+   "postCraft": {
+    "bolt": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 7,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 7,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 521,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 30
+   },
+   "postPile": {
+    "stone": 520,
+    "stick": 5,
+    "fiber": 4,
+    "branch": 30
+   },
+   "preCraft": {},
+   "postCraft": {
+    "arrow": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 38,
+   "vid": "jovan_milic",
+   "prePile": {
+    "stone": 523,
+    "stick": 5,
+    "fiber": 4,
+    "branch": 30
+   },
+   "postPile": {
+    "stone": 523,
+    "stick": 5,
+    "fiber": 4,
+    "branch": 30
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  },
+  {
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 546,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 35
+   },
+   "postPile": {
+    "stone": 545,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   },
+   "preCraft": {
+    "arrow": 2
+   },
+   "postCraft": {
+    "arrow": 2
+   },
+   "preCarried": {
+    "arrow": 4,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 9,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 572,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   },
+   "postPile": {
+    "stone": 572,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   },
+   "preCraft": {
+    "arrow": 2
+   },
+   "postCraft": {
+    "arrow": 2
+   },
+   "preCarried": {
+    "arrow": 7,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 7,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 574,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   },
+   "postPile": {
+    "stone": 574,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   },
+   "preCraft": {
+    "arrow": 2
+   },
+   "postCraft": {
+    "arrow": 2
+   },
+   "preCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 589,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 38
+   },
+   "postPile": {
+    "stone": 588,
+    "stick": 4,
+    "fiber": 2,
+    "branch": 38
+   },
+   "preCraft": {
+    "arrow": 2
+   },
+   "postCraft": {
+    "arrow": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 1,
+    "craftedOk": true,
+    "ammoId": "arrow"
+   }
+  }
+ ],
+ "supplyDaily": [
+  {
+   "day": 2,
+   "pile": {
+    "stone": 0,
+    "stick": 1,
+    "fiber": 1,
+    "branch": 0
+   }
+  },
+  {
+   "day": 2,
+   "pile": {
+    "stone": 3,
+    "stick": 1,
+    "fiber": 1,
+    "branch": 0
+   }
+  },
+  {
+   "day": 4,
+   "pile": {
+    "stone": 8,
+    "stick": 5,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 4,
+   "pile": {
+    "stone": 13,
+    "stick": 5,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 5,
+   "pile": {
+    "stone": 21,
+    "stick": 6,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 6,
+   "pile": {
+    "stone": 30,
+    "stick": 6,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 7,
+   "pile": {
+    "stone": 37,
+    "stick": 6,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 8,
+   "pile": {
+    "stone": 45,
+    "stick": 4,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 9,
+   "pile": {
+    "stone": 55,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 10,
+   "pile": {
+    "stone": 67,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 11,
+   "pile": {
+    "stone": 77,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 12,
+   "pile": {
+    "stone": 88,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 0
+   }
+  },
+  {
+   "day": 13,
+   "pile": {
+    "stone": 101,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 4
+   }
+  },
+  {
+   "day": 14,
+   "pile": {
+    "stone": 112,
+    "stick": 7,
+    "fiber": 2,
+    "branch": 4
+   }
+  },
+  {
+   "day": 15,
+   "pile": {
+    "stone": 126,
+    "stick": 5,
+    "fiber": 2,
+    "branch": 4
+   }
+  },
+  {
+   "day": 16,
+   "pile": {
+    "stone": 140,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 4
+   }
+  },
+  {
+   "day": 17,
+   "pile": {
+    "stone": 155,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 5
+   }
+  },
+  {
+   "day": 18,
+   "pile": {
+    "stone": 170,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 6
+   }
+  },
+  {
+   "day": 19,
+   "pile": {
+    "stone": 191,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 6
+   }
+  },
+  {
+   "day": 20,
+   "pile": {
+    "stone": 212,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 6
+   }
+  },
+  {
+   "day": 21,
+   "pile": {
+    "stone": 231,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 8
+   }
+  },
+  {
+   "day": 22,
+   "pile": {
+    "stone": 249,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 11
+   }
+  },
+  {
+   "day": 23,
+   "pile": {
+    "stone": 267,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 11
+   }
+  },
+  {
+   "day": 24,
+   "pile": {
+    "stone": 281,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 14
+   }
+  },
+  {
+   "day": 25,
+   "pile": {
+    "stone": 303,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 14
+   }
+  },
+  {
+   "day": 26,
+   "pile": {
+    "stone": 317,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 16
+   }
+  },
+  {
+   "day": 27,
+   "pile": {
+    "stone": 336,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 18
+   }
+  },
+  {
+   "day": 28,
+   "pile": {
+    "stone": 353,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 18
+   }
+  },
+  {
+   "day": 29,
+   "pile": {
+    "stone": 371,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 18
+   }
+  },
+  {
+   "day": 30,
+   "pile": {
+    "stone": 391,
+    "stick": 6,
+    "fiber": 4,
+    "branch": 21
+   }
+  },
+  {
+   "day": 31,
+   "pile": {
+    "stone": 409,
+    "stick": 4,
+    "fiber": 4,
+    "branch": 23
+   }
+  },
+  {
+   "day": 32,
+   "pile": {
+    "stone": 423,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 24
+   }
+  },
+  {
+   "day": 33,
+   "pile": {
+    "stone": 439,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 26
+   }
+  },
+  {
+   "day": 34,
+   "pile": {
+    "stone": 460,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 29
+   }
+  },
+  {
+   "day": 35,
+   "pile": {
+    "stone": 479,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 29
+   }
+  },
+  {
+   "day": 36,
+   "pile": {
+    "stone": 497,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 29
+   }
+  },
+  {
+   "day": 37,
+   "pile": {
+    "stone": 517,
+    "stick": 7,
+    "fiber": 5,
+    "branch": 29
+   }
+  },
+  {
+   "day": 38,
+   "pile": {
+    "stone": 529,
+    "stick": 5,
+    "fiber": 4,
+    "branch": 30
+   }
+  },
+  {
+   "day": 39,
+   "pile": {
+    "stone": 540,
+    "stick": 8,
+    "fiber": 4,
+    "branch": 32
+   }
+  },
+  {
+   "day": 40,
+   "pile": {
+    "stone": 553,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   }
+  },
+  {
+   "day": 41,
+   "pile": {
+    "stone": 562,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   }
+  },
+  {
+   "day": 42,
+   "pile": {
+    "stone": 572,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   }
+  },
+  {
+   "day": 43,
+   "pile": {
+    "stone": 580,
+    "stick": 6,
+    "fiber": 3,
+    "branch": 35
+   }
+  },
+  {
+   "day": 44,
+   "pile": {
+    "stone": 590,
+    "stick": 4,
+    "fiber": 2,
+    "branch": 38
+   }
+  },
+  {
+   "day": 45,
+   "pile": {
+    "stone": 596,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 42
+   }
+  },
+  {
+   "day": 46,
+   "pile": {
+    "stone": 605,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 43
+   }
+  },
+  {
+   "day": 47,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   }
+  },
+  {
+   "day": 48,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   }
+  },
+  {
+   "day": 49,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   }
+  },
+  {
+   "day": 50,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   }
+  },
+  {
+   "day": 51,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   }
+  },
+  {
+   "day": 52,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 46
+   }
+  },
+  {
+   "day": 53,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 50
+   }
+  },
+  {
+   "day": 54,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 50
+   }
+  },
+  {
+   "day": 55,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 53
+   }
+  },
+  {
+   "day": 56,
+   "pile": {
+    "stone": 606,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 53
+   }
+  },
+  {
+   "day": 57,
+   "pile": {
+    "stone": 609,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 53
+   }
+  },
+  {
+   "day": 58,
+   "pile": {
+    "stone": 609,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 53
+   }
+  },
+  {
+   "day": 59,
+   "pile": {
+    "stone": 612,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 54
+   }
+  },
+  {
+   "day": 60,
+   "pile": {
+    "stone": 616,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 54
+   }
+  },
+  {
+   "day": 61,
+   "pile": {
+    "stone": 618,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 55
+   }
+  },
+  {
+   "day": 62,
+   "pile": {
+    "stone": 621,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 55
+   }
+  },
+  {
+   "day": 63,
+   "pile": {
+    "stone": 621,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 58
+   }
+  },
+  {
+   "day": 64,
+   "pile": {
+    "stone": 624,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 58
+   }
+  },
+  {
+   "day": 65,
+   "pile": {
+    "stone": 630,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 58
+   }
+  },
+  {
+   "day": 66,
+   "pile": {
+    "stone": 637,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 61
+   }
+  },
+  {
+   "day": 67,
+   "pile": {
+    "stone": 644,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 61
+   }
+  },
+  {
+   "day": 68,
+   "pile": {
+    "stone": 654,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 64
+   }
+  },
+  {
+   "day": 69,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 64
+   }
+  },
+  {
+   "day": 70,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 64
+   }
+  },
+  {
+   "day": 71,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 66
+   }
+  },
+  {
+   "day": 72,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 66
+   }
+  },
+  {
+   "day": 73,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 68
+   }
+  },
+  {
+   "day": 74,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 68
+   }
+  },
+  {
+   "day": 75,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 70
+   }
+  },
+  {
+   "day": 76,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 70
+   }
+  },
+  {
+   "day": 77,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 70
+   }
+  },
+  {
+   "day": 78,
+   "pile": {
+    "stone": 659,
+    "stick": 9,
+    "fiber": 2,
+    "branch": 70
+   }
+  }
+ ],
+ "supplyEnd": {
+  "finalPile": {
+   "stone": 659,
+   "stick": 9,
+   "fiber": 2,
+   "branch": 70
+  },
+  "ammoCraftAll": {
+   "gen_oa3tzlt": {
+    "bolt": 2
+   },
+   "gen_844p8kq": {
+    "arrow": 2
+   }
+  },
+  "carriedTotals": {
+   "arrow": 0,
+   "bolt": 0,
+   "stone": 0,
+   "fusion_cell": 0,
+   "heartseeker_arrows": 0
+  },
+  "stashTotals": {
+   "arrow": 0,
+   "bolt": 0,
+   "stone": 0,
+   "fusion_cell": 0,
+   "heartseeker_arrows": 0
+  },
+  "rangedCarriers": []
+ },
+ "supplyOverflow": 0,
+ "stickfiberRows": [
+  {
+   "day": 2,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 2,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 4,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 4,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 5,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 6,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 7,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 8,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 9,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 10,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 11,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 12,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 13,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 14,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 15,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 16,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 17,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 18,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 19,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 20,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 21,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 22,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 23,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 24,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 25,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 26,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 27,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 28,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 29,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 30,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 31,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 32,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 33,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 34,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 35,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 36,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 37,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 38,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 39,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 40,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 41,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 42,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 43,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 44,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 45,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 46,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 47,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 48,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 49,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 50,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 51,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 52,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 53,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 54,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 55,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 56,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 57,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 58,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 59,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 60,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 61,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 62,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 63,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 64,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 65,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 66,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 67,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 68,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 69,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 70,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 71,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 72,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 73,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 74,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 75,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 76,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 77,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 78,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  }
+ ],
+ "deadfallHauls": 16,
+ "deadfallSticks": 26,
+ "deadfallFiber": 6,
+ "t1Calls": [],
+ "pcFights": [
+  {
+   "day": 52,
+   "vid": "app_mgpsphn2492",
+   "mid": "algorithm",
+   "wave": 4,
+   "pocketBefore": 0,
+   "departBefore": 0,
+   "wentBefore": 0,
+   "fighterNode": {
+    "nx": 4,
+    "ny": 4
+   },
+   "havenNode": {
+    "nx": 4,
+    "ny": 4
+   },
+   "scholarNode": {
+    "nx": 4,
+    "ny": 3
+   },
+   "fighterGrid": null,
+   "scholarGridRaw": {
+    "mx": 8,
+    "my": 8
+   },
+   "crewIncludesVid": false,
+   "crewAliveOthers": [
+    "gen_844p8kq"
+   ],
+   "partyIncludesVid": false,
+   "away": null,
+   "onExpedition": false,
+   "monsterNode": {
+    "tx": 4,
+    "ty": 4
+   },
+   "optAllies": 1,
+   "optAllyVids": [
+    "gen_844p8kq"
+   ]
+  }
+ ],
+ "pcDepartures": [
+  {
+   "day": 1,
+   "vid": "jovan_milic",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": true
+  },
+  {
+   "day": 8,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": true
+  },
+  {
+   "day": 15,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": true
+  },
+  {
+   "day": 16,
+   "vid": "owen_smith",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": true
+  },
+  {
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": false,
+   "expedAfter": false
+  },
+  {
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": false
+  },
+  {
+   "day": 32,
+   "vid": "gen_844p8kq",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": true
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": false
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": false
+  },
+  {
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": false
+  },
+  {
+   "day": 38,
+   "vid": "jovan_milic",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": true
+  },
+  {
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": false,
+   "expedAfter": false
+  },
+  {
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": false
+  },
+  {
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": true,
+   "expedAfter": false
+  },
+  {
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "awayAfter": false,
+   "expedAfter": false
+  }
+ ],
+ "pcLowWave": 92,
+ "pcErrors": [],
+ "pdVolleyRows": [
+  {
+   "seq": 3,
+   "day": 2,
+   "vid": "jovan_milic",
+   "mid": "sanjun",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 4,
+   "day": 2,
+   "vid": "jovan_milic",
+   "mid": "speedbump_turtle",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 8,
+   "day": 8,
+   "vid": "xavier_dubois",
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 9,
+   "day": 9,
+   "vid": "gen_oa3tzlt",
+   "mid": "mirrormoth",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 19,
+    "ammoLeft": 3
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 3,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 10,
+   "day": 10,
+   "vid": "gen_oa3tzlt",
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 3,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 3,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "evade"
+  },
+  {
+   "seq": 12,
+   "day": 10,
+   "vid": "hannah_kim",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 13,
+   "day": 11,
+   "vid": "gen_erylf7t",
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 14,
+   "day": 11,
+   "vid": "hannah_kim",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 15,
+   "day": 12,
+   "vid": "xavier_dubois",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 16,
+   "day": 14,
+   "vid": "ava_garcia",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 17,
+   "day": 14,
+   "vid": "nora_wilson",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 20,
+   "day": 15,
+   "vid": "xavier_dubois",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 21,
+   "day": 15,
+   "vid": "ava_garcia",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 24,
+   "day": 16,
+   "vid": "hannah_kim",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 25,
+   "day": 16,
+   "vid": "jovan_milic",
+   "mid": "hummice",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 26,
+   "day": 17,
+   "vid": "owen_smith",
+   "mid": "dustboar",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "evade"
+  },
+  {
+   "seq": 27,
+   "day": 17,
+   "vid": "gen_41bvnn7",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 28,
+   "day": 17,
+   "vid": "hannah_kim",
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 29,
+   "day": 17,
+   "vid": "gen_oa3tzlt",
+   "mid": "memory_projector",
+   "wave": 2,
+   "volley": {
+    "shots": 3,
+    "hits": 2,
+    "dmg": 38,
+    "ammoLeft": 5
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 30,
+   "day": 18,
+   "vid": "owen_smith",
+   "mid": "sanjun",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 31,
+   "day": 18,
+   "vid": "gen_oa3tzlt",
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "volley": {
+    "shots": 3,
+    "hits": 3,
+    "dmg": 62,
+    "ammoLeft": 2
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 2,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 32,
+   "day": 18,
+   "vid": "gen_oa3tzlt",
+   "mid": "nevermore",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 22,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 2,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 33,
+   "day": 19,
+   "vid": "gen_fila5gw",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 34,
+   "day": 19,
+   "vid": "jovan_milic",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 36,
+   "day": 20,
+   "vid": "gen_erylf7t",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 38,
+   "day": 21,
+   "vid": "gen_fila5gw",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 39,
+   "day": 21,
+   "vid": "ava_garcia",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 40,
+   "day": 22,
+   "vid": "jovan_milic",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 41,
+   "day": 22,
+   "vid": "owen_smith",
+   "mid": "mirrormoth",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 42,
+   "day": 22,
+   "vid": "gen_oa3tzlt",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 43,
+   "day": 22,
+   "vid": "gen_41bvnn7",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 44,
+   "day": 22,
+   "vid": "owen_smith",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 45,
+   "day": 22,
+   "vid": "xavier_dubois",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 46,
+   "day": 22,
+   "vid": "ava_garcia",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 47,
+   "day": 23,
+   "vid": "gen_41bvnn7",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 48,
+   "day": 24,
+   "vid": "gen_41bvnn7",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 49,
+   "day": 25,
+   "vid": "jovan_milic",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 52,
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "mid": "hummice",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 19,
+    "ammoLeft": 4
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 4,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 53,
+   "day": 26,
+   "vid": "owen_smith",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 54,
+   "day": 26,
+   "vid": "xavier_dubois",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 55,
+   "day": 28,
+   "vid": "gen_erylf7t",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 56,
+   "day": 28,
+   "vid": "ava_garcia",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 57,
+   "day": 28,
+   "vid": "gen_erylf7t",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 58,
+   "day": 29,
+   "vid": "xavier_dubois",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 59,
+   "day": 29,
+   "vid": "gen_fila5gw",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 60,
+   "day": 29,
+   "vid": "ava_garcia",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 63,
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": {
+    "shots": 4,
+    "hits": 1,
+    "dmg": 20,
+    "ammoLeft": 8
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 9,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 64,
+   "day": 32,
+   "vid": "nora_wilson",
+   "mid": "psycho_hannah_kim",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 69,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "mid": "living_wire",
+   "wave": 1,
+   "volley": {
+    "shots": 4,
+    "hits": 1,
+    "dmg": 18,
+    "ammoLeft": 7
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 8,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 7,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 72,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "volley": {
+    "shots": 3,
+    "hits": 1,
+    "dmg": 19,
+    "ammoLeft": 5
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 7,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 73,
+   "day": 33,
+   "vid": "owen_smith",
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 74,
+   "day": 34,
+   "vid": "gen_844p8kq",
+   "mid": "memory_projector",
+   "wave": 2,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "evade"
+  },
+  {
+   "seq": 75,
+   "day": 34,
+   "vid": "gen_oa3tzlt",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 19,
+    "ammoLeft": 3
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 5,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 3,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 76,
+   "day": 34,
+   "vid": "gen_erylf7t",
+   "mid": "voice_mimic_radio",
+   "wave": 2,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 77,
+   "day": 34,
+   "vid": "owen_smith",
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 78,
+   "day": 34,
+   "vid": "jovan_milic",
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 79,
+   "day": 34,
+   "vid": "xavier_dubois",
+   "mid": "murkcap",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 80,
+   "day": 35,
+   "vid": "gen_844p8kq",
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 81,
+   "day": 36,
+   "vid": "gen_fila5gw",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 85,
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 18,
+    "ammoLeft": 4
+   },
+   "preCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 4,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 88,
+   "day": 38,
+   "vid": "gen_fila5gw",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 89,
+   "day": 38,
+   "vid": "xavier_dubois",
+   "mid": "moderator",
+   "wave": 2,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 90,
+   "day": 39,
+   "vid": "jovan_milic",
+   "mid": "gavel",
+   "wave": 3,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vFlee"
+  },
+  {
+   "seq": 91,
+   "day": 40,
+   "vid": "gen_41bvnn7",
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 92,
+   "day": 40,
+   "vid": "gen_41bvnn7",
+   "mid": "mirrormoth",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 93,
+   "day": 40,
+   "vid": "gen_41bvnn7",
+   "mid": "nightlight_catfish",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 96,
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 18,
+    "ammoLeft": 7
+   },
+   "preCarried": {
+    "arrow": 9,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 7,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vFlee"
+  },
+  {
+   "seq": 97,
+   "day": 40,
+   "vid": "jovan_milic",
+   "mid": "hummice",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "evade"
+  },
+  {
+   "seq": 100,
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "mid": "white_noise_heron",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 2,
+    "dmg": 35,
+    "ammoLeft": 5
+   },
+   "preCarried": {
+    "arrow": 7,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 104,
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "mid": "white_noise_heron",
+   "wave": 1,
+   "volley": {
+    "shots": 2,
+    "hits": 1,
+    "dmg": 17,
+    "ammoLeft": 4
+   },
+   "preCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 4,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 105,
+   "day": 43,
+   "vid": "gen_erylf7t",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 106,
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "mid": "speedbump_turtle",
+   "wave": 1,
+   "volley": {
+    "shots": 4,
+    "hits": 2,
+    "dmg": 34,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 4,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 107,
+   "day": 43,
+   "vid": "gen_41bvnn7",
+   "mid": "gavel",
+   "wave": 3,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vFlee"
+  },
+  {
+   "seq": 108,
+   "day": 43,
+   "vid": "jovan_milic",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 109,
+   "day": 43,
+   "vid": "hannah_kim",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 112,
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "mid": "gavel",
+   "wave": 3,
+   "volley": {
+    "shots": 3,
+    "hits": 2,
+    "dmg": 30,
+    "ammoLeft": 2
+   },
+   "preCarried": {
+    "arrow": 5,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 2,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 113,
+   "day": 45,
+   "vid": "jovan_milic",
+   "mid": "gavel",
+   "wave": 3,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 114,
+   "day": 45,
+   "vid": "jovan_milic",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 115,
+   "day": 48,
+   "vid": "gen_erylf7t",
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 116,
+   "day": 48,
+   "vid": "gen_erylf7t",
+   "mid": "mirrormoth",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 117,
+   "day": 48,
+   "vid": "gen_erylf7t",
+   "mid": "nightlight_catfish",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 118,
+   "day": 51,
+   "vid": "app_mgpsphn2492",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 119,
+   "day": 52,
+   "vid": "app_mgpsphn2492",
+   "mid": "redactor",
+   "wave": 3,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vFlee"
+  },
+  {
+   "seq": 120,
+   "day": 52,
+   "vid": "app_mgpsphn2492",
+   "mid": "algorithm",
+   "wave": 4,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vDie"
+  },
+  {
+   "seq": 121,
+   "day": 57,
+   "vid": "app_mgpspj8b386",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 122,
+   "day": 60,
+   "vid": "priya_nair",
+   "mid": "gavel",
+   "wave": 3,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 123,
+   "day": 60,
+   "vid": "app_mgpspj93272",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 124,
+   "day": 60,
+   "vid": "lena_ruiz",
+   "mid": "hushwolf",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 125,
+   "day": 60,
+   "vid": "sofia_chen",
+   "mid": "paparazzo",
+   "wave": 2,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 126,
+   "day": 61,
+   "vid": "priya_nair",
+   "mid": "gallowdeer",
+   "wave": 1,
+   "volley": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 127,
+   "day": 75,
+   "vid": "app_mgpspj93272",
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "mFlee"
+  },
+  {
+   "seq": 128,
+   "day": 75,
+   "vid": "app_mgpspj93272",
+   "mid": "nightlight_catfish",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  },
+  {
+   "seq": 129,
+   "day": 75,
+   "vid": "app_mgpspj93272",
+   "mid": "glasswing",
+   "wave": 1,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "outcome": "vKill"
+  }
+ ],
+ "pdPocketSeq": [
+  {
+   "seq": 2,
+   "day": 1,
+   "vid": "jovan_milic"
+  },
+  {
+   "seq": 7,
+   "day": 8,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 19,
+   "day": 15,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 23,
+   "day": 16,
+   "vid": "owen_smith"
+  },
+  {
+   "seq": 51,
+   "day": 26,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 62,
+   "day": 31,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 66,
+   "day": 32,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "seq": 68,
+   "day": 32,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 71,
+   "day": 32,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 84,
+   "day": 38,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "seq": 87,
+   "day": 38,
+   "vid": "jovan_milic"
+  },
+  {
+   "seq": 95,
+   "day": 40,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "seq": 99,
+   "day": 42,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "seq": 103,
+   "day": 43,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "seq": 111,
+   "day": 44,
+   "vid": "gen_844p8kq"
+  }
+ ],
+ "pdDepartures": [
+  {
+   "seq": 1,
+   "day": 1,
+   "vid": "jovan_milic",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": null,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": true,
+   "integrity": [],
+   "volleyDuring": 0,
+   "volleyDuringWaves": [],
+   "volleyDuringRanged": false,
+   "volleyDuringShots": 0
+  },
+  {
+   "seq": 6,
+   "day": 8,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": null,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": true,
+   "integrity": [],
+   "volleyDuring": 0,
+   "volleyDuringWaves": [],
+   "volleyDuringRanged": false,
+   "volleyDuringShots": 0
+  },
+  {
+   "seq": 18,
+   "day": 15,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 100,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": true,
+   "integrity": [],
+   "volleyDuring": 0,
+   "volleyDuringWaves": [],
+   "volleyDuringRanged": false,
+   "volleyDuringShots": 0
+  },
+  {
+   "seq": 22,
+   "day": 16,
+   "vid": "owen_smith",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 89,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": true,
+   "integrity": [],
+   "volleyDuring": 0,
+   "volleyDuringWaves": [],
+   "volleyDuringRanged": false,
+   "volleyDuringShots": 0
+  },
+  {
+   "seq": 50,
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 92,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": false,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 2
+  },
+  {
+   "seq": 61,
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 100,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 4
+  },
+  {
+   "seq": 65,
+   "day": 32,
+   "vid": "gen_844p8kq",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 100,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": true,
+   "integrity": [],
+   "volleyDuring": 0,
+   "volleyDuringWaves": [],
+   "volleyDuringRanged": false,
+   "volleyDuringShots": 0
+  },
+  {
+   "seq": 67,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 100,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 4
+  },
+  {
+   "seq": 70,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 100,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 3
+  },
+  {
+   "seq": 83,
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 83,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 2
+  },
+  {
+   "seq": 86,
+   "day": 38,
+   "vid": "jovan_milic",
+   "kind": "startExpedition",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 100,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": true,
+   "integrity": [],
+   "volleyDuring": 0,
+   "volleyDuringWaves": [],
+   "volleyDuringRanged": false,
+   "volleyDuringShots": 0
+  },
+  {
+   "seq": 94,
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 89,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": false,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 2
+  },
+  {
+   "seq": 98,
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 81,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 2
+  },
+  {
+   "seq": 102,
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 71,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": true,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    1
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 2
+  },
+  {
+   "seq": 110,
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "kind": "resolvePatrol",
+   "went": true,
+   "pocketDelta": 1,
+   "gate": null,
+   "healObserved": true,
+   "healTrue": false,
+   "healCalls": 1,
+   "sickBefore": false,
+   "hpBefore": 74,
+   "cachedProfile": "wanderer",
+   "cachedMaxD": 3,
+   "awayAfter": false,
+   "expedAfter": false,
+   "integrity": [],
+   "volleyDuring": 1,
+   "volleyDuringWaves": [
+    3
+   ],
+   "volleyDuringRanged": true,
+   "volleyDuringShots": 3
+  }
+ ],
+ "pdHealCalls": [
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "gen_fila5gw",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 1,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": 1,
+   "day": 1,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 2,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 2,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 2,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 2,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 2,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": null,
+   "day": 3,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 3,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 3,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 3,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 3,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 4,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 4,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 4,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 4,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 4,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 4,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 79
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "jovan_milic",
+   "ret": true,
+   "hpBefore": 45
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 5,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 90
+  },
+  {
+   "depId": null,
+   "day": 6,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 6,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 82
+  },
+  {
+   "depId": null,
+   "day": 6,
+   "vid": "jovan_milic",
+   "ret": true,
+   "hpBefore": 48
+  },
+  {
+   "depId": null,
+   "day": 6,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 6,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 6,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 85
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "jovan_milic",
+   "ret": true,
+   "hpBefore": 51
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 96
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 7,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 8,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 8,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 88
+  },
+  {
+   "depId": null,
+   "day": 8,
+   "vid": "jovan_milic",
+   "ret": true,
+   "hpBefore": 54
+  },
+  {
+   "depId": null,
+   "day": 8,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 99
+  },
+  {
+   "depId": 2,
+   "day": 8,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 8,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 91
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "jovan_milic",
+   "ret": true,
+   "hpBefore": 57
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 9,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 60
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 10,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 88
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 11,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 88
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 90
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 79
+  },
+  {
+   "depId": null,
+   "day": 12,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 91
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 58
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 94
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 93
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 80
+  },
+  {
+   "depId": null,
+   "day": 13,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 94
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 96
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 14,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": 3,
+   "day": 15,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 15,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 99
+  },
+  {
+   "depId": null,
+   "day": 16,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 82
+  },
+  {
+   "depId": null,
+   "day": 16,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 85
+  },
+  {
+   "depId": null,
+   "day": 16,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 16,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 16,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": 4,
+   "day": 16,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 88
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 82
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 17,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 18,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 19,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 88
+  },
+  {
+   "depId": null,
+   "day": 19,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 45
+  },
+  {
+   "depId": null,
+   "day": 19,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 19,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 56
+  },
+  {
+   "depId": null,
+   "day": 19,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 88
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 34
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 91
+  },
+  {
+   "depId": null,
+   "day": 20,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 73
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 91
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 94
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 27
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 21,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 76
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 80
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 94
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 68
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 55
+  },
+  {
+   "depId": null,
+   "day": 22,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 79
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 93
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 80
+  },
+  {
+   "depId": null,
+   "day": 23,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 24,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 24,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 24,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 85
+  },
+  {
+   "depId": null,
+   "day": 24,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 24,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 24,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 96
+  },
+  {
+   "depId": null,
+   "day": 25,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 25,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 25,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 25,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 25,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 25,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 62
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": 5,
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 26,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 27,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 27,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 27,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 27,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 27,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 27,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 93
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 72
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 28,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 29,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 30,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 30,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 78
+  },
+  {
+   "depId": null,
+   "day": 30,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 90
+  },
+  {
+   "depId": null,
+   "day": 30,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 30,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 30,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": 6,
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 31,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 93
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": 7,
+   "day": 32,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": 8,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": 9,
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 32,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 96
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 24
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 80
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 33,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 34,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 34,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 34,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 34,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 34,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 90
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 71
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 75
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 94
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 66
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 35,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 78
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 74
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 94
+  },
+  {
+   "depId": null,
+   "day": 36,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 50
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 99
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "gen_oa3tzlt",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 37,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 80
+  },
+  {
+   "depId": 10,
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 38,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 38,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": 11,
+   "day": 38,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 38,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 38,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 38,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 38,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 39,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 39,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 39,
+   "vid": "owen_smith",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 39,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": null,
+   "day": 39,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 68
+  },
+  {
+   "depId": null,
+   "day": 39,
+   "vid": "ava_garcia",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": 12,
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 40,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 41,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 53
+  },
+  {
+   "depId": null,
+   "day": 42,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 90
+  },
+  {
+   "depId": null,
+   "day": 42,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": 13,
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": 14,
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 71
+  },
+  {
+   "depId": null,
+   "day": 43,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 93
+  },
+  {
+   "depId": null,
+   "day": 44,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 96
+  },
+  {
+   "depId": 15,
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 74
+  },
+  {
+   "depId": null,
+   "day": 45,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 99
+  },
+  {
+   "depId": null,
+   "day": 45,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 73
+  },
+  {
+   "depId": null,
+   "day": 46,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 46,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 47,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 47,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 47
+  },
+  {
+   "depId": null,
+   "day": 47,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 47,
+   "vid": "jovan_milic",
+   "ret": false,
+   "hpBefore": 79
+  },
+  {
+   "depId": null,
+   "day": 47,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 47,
+   "vid": "nora_wilson",
+   "ret": false,
+   "hpBefore": 82
+  },
+  {
+   "depId": null,
+   "day": 48,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 61
+  },
+  {
+   "depId": null,
+   "day": 48,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 75
+  },
+  {
+   "depId": null,
+   "day": 48,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 48,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 49,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 49,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 78
+  },
+  {
+   "depId": null,
+   "day": 49,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 50,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 50,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": null,
+   "day": 50,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": null,
+   "day": 50,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 50,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 51,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 51,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 51,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 51,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 51,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 52,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 52,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 52,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 53,
+   "vid": "gen_41bvnn7",
+   "ret": false,
+   "hpBefore": 90
+  },
+  {
+   "depId": null,
+   "day": 53,
+   "vid": "hannah_kim",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 53,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 68
+  },
+  {
+   "depId": null,
+   "day": 53,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 53,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 54,
+   "vid": "gen_erylf7t",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 54,
+   "vid": "gen_844p8kq",
+   "ret": false,
+   "hpBefore": 96
+  },
+  {
+   "depId": null,
+   "day": 54,
+   "vid": "xavier_dubois",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 54,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 56,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 56,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": 50
+  },
+  {
+   "depId": null,
+   "day": 57,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 57,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": 75
+  },
+  {
+   "depId": null,
+   "day": 59,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 59,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": 81
+  },
+  {
+   "depId": null,
+   "day": 59,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 59,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 60,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 60,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 61,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 61,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 61,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": 84
+  },
+  {
+   "depId": null,
+   "day": 61,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 52
+  },
+  {
+   "depId": null,
+   "day": 61,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 62,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 62,
+   "vid": "app_mgpspj8b386",
+   "ret": false,
+   "hpBefore": 87
+  },
+  {
+   "depId": null,
+   "day": 62,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 63,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 83
+  },
+  {
+   "depId": null,
+   "day": 63,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 64,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 64,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 86
+  },
+  {
+   "depId": null,
+   "day": 65,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 65,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 65,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 66,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 66,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 66,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 92
+  },
+  {
+   "depId": null,
+   "day": 66,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 67,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 67,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 67,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 68,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 68,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 68,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 69,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 69,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 70,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 70,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 70,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": null
+  },
+  {
+   "depId": null,
+   "day": 70,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 70,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 71,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 71,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 71,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 71,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 72,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 72,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 72,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 72,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 72,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 73,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 73,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 73,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 73,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 73,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 74,
+   "vid": "nino_kapanadze",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 74,
+   "vid": "priya_nair",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 74,
+   "vid": "lena_ruiz",
+   "ret": false,
+   "hpBefore": 100
+  },
+  {
+   "depId": null,
+   "day": 74,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": 98
+  },
+  {
+   "depId": null,
+   "day": 75,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 23
+  },
+  {
+   "depId": null,
+   "day": 75,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": 97
+  },
+  {
+   "depId": null,
+   "day": 76,
+   "vid": "app_mgpspj93272",
+   "ret": false,
+   "hpBefore": 46
+  },
+  {
+   "depId": null,
+   "day": 76,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": 95
+  },
+  {
+   "depId": null,
+   "day": 77,
+   "vid": "sofia_chen",
+   "ret": false,
+   "hpBefore": 89
+  },
+  {
+   "depId": null,
+   "day": 77,
+   "vid": "visjoin_66",
+   "ret": false,
+   "hpBefore": 95
+  }
+ ],
+ "pdAssigns": [
+  {
+   "day": 26,
+   "vid": "gen_oa3tzlt",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 31,
+   "vid": "gen_oa3tzlt",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 36,
+   "vid": "gen_844p8kq",
+   "assignedAfter": false,
+   "retOk": false,
+   "retRefused": true
+  },
+  {
+   "day": 36,
+   "vid": "gen_844p8kq",
+   "assignedAfter": false,
+   "retOk": false,
+   "retRefused": true
+  },
+  {
+   "day": 38,
+   "vid": "gen_844p8kq",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 39,
+   "vid": "gen_844p8kq",
+   "assignedAfter": false,
+   "retOk": false,
+   "retRefused": true
+  },
+  {
+   "day": 40,
+   "vid": "gen_844p8kq",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 42,
+   "vid": "gen_844p8kq",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 43,
+   "vid": "gen_844p8kq",
+   "assignedAfter": false,
+   "retOk": false,
+   "retRefused": true
+  },
+  {
+   "day": 44,
+   "vid": "gen_844p8kq",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  },
+  {
+   "day": 47,
+   "vid": "gen_844p8kq",
+   "assignedAfter": true,
+   "retOk": true,
+   "retRefused": null
+  }
+ ],
+ "pdObjDeparts": [
+  {
+   "day": 1,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 1,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 1,
+   "vid": "gen_fila5gw"
+  },
+  {
+   "day": 1,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 1,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 1,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 1,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 1,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 2,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 2,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 2,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 2,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 2,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 3,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 3,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 3,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 3,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 3,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 4,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 4,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 4,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 4,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 4,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 4,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 5,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 5,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 5,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 5,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 5,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 5,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 5,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 6,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 6,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 6,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 6,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 6,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 7,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 7,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 7,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 7,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 7,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 7,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 7,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 8,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 8,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 8,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 8,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 8,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 9,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 9,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 9,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 9,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 9,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 9,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 9,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 10,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 10,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 10,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 10,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 10,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 10,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 10,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 11,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 11,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 11,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 11,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 11,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 11,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 11,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 11,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 11,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 11,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 12,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 12,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 12,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 12,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 12,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 12,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 12,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 13,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 13,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 13,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 13,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 13,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 13,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 13,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 13,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 13,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 14,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 14,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 14,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 14,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 14,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 14,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 14,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 14,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 15,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 15,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 15,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 15,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 15,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 15,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 15,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 16,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 16,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 16,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 16,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 16,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 17,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 17,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 17,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 17,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 17,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 17,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 17,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 18,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 19,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 19,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 19,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 19,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 19,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 20,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 20,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 20,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 20,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 20,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 20,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 20,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 21,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 21,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 21,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 21,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 21,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 21,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 21,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 22,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 22,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 22,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 22,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 22,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 22,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 22,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 22,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 23,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 23,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 23,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 23,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 23,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 23,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 23,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 24,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 24,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 24,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 24,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 24,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 24,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 25,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 25,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 25,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 25,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 25,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 25,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 26,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 26,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 26,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 26,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 26,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 26,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 26,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 27,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 27,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 27,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 27,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 27,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 27,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 28,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 28,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 28,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 28,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 28,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 28,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 28,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 28,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 29,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 29,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 29,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 29,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 29,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 29,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 29,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 29,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 30,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 30,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 30,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 30,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 30,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 30,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 31,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 31,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 31,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 31,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 31,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 31,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 31,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 31,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 32,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 32,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 32,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 32,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 32,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 32,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 32,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 33,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 33,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 33,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 33,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 33,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 33,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 33,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 33,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 34,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 34,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 34,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 34,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 34,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 35,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 35,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 35,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 35,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 35,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 35,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 35,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 36,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 36,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 36,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 36,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 36,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 36,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 36,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 37,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 37,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 37,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 37,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 37,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 37,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 37,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "day": 37,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 37,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 38,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 38,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 38,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 38,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 38,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 38,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 39,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 39,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 39,
+   "vid": "owen_smith"
+  },
+  {
+   "day": 39,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 39,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 39,
+   "vid": "ava_garcia"
+  },
+  {
+   "day": 40,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 41,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 42,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 42,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 42,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 43,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 44,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 45,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 45,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 46,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 46,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 47,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 47,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 47,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 47,
+   "vid": "jovan_milic"
+  },
+  {
+   "day": 47,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 47,
+   "vid": "nora_wilson"
+  },
+  {
+   "day": 48,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 48,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 48,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 48,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 49,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 49,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 49,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 50,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 50,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 50,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 50,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 50,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 51,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 51,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 51,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 51,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 51,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 52,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 52,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 52,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 53,
+   "vid": "gen_41bvnn7"
+  },
+  {
+   "day": 53,
+   "vid": "hannah_kim"
+  },
+  {
+   "day": 53,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 53,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 53,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 54,
+   "vid": "gen_erylf7t"
+  },
+  {
+   "day": 54,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "day": 54,
+   "vid": "xavier_dubois"
+  },
+  {
+   "day": 54,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 56,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 56,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 57,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 57,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 59,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 59,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 59,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 59,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 60,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 60,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 61,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 61,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 61,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 61,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 61,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 62,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 62,
+   "vid": "app_mgpspj8b386"
+  },
+  {
+   "day": 62,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 63,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 63,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 64,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 64,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 65,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 65,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 66,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 66,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 66,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 67,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 67,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 68,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 68,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 69,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 70,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 70,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 70,
+   "vid": "visjoin_66"
+  },
+  {
+   "day": 70,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 71,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 71,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 71,
+   "vid": "visjoin_66"
+  },
+  {
+   "day": 71,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 72,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 72,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 72,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 72,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 72,
+   "vid": "visjoin_66"
+  },
+  {
+   "day": 73,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 73,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 73,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 73,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 73,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 74,
+   "vid": "nino_kapanadze"
+  },
+  {
+   "day": 74,
+   "vid": "priya_nair"
+  },
+  {
+   "day": 74,
+   "vid": "lena_ruiz"
+  },
+  {
+   "day": 74,
+   "vid": "visjoin_66"
+  },
+  {
+   "day": 75,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 75,
+   "vid": "visjoin_66"
+  },
+  {
+   "day": 76,
+   "vid": "app_mgpspj93272"
+  },
+  {
+   "day": 76,
+   "vid": "visjoin_66"
+  },
+  {
+   "day": 77,
+   "vid": "sofia_chen"
+  },
+  {
+   "day": 77,
+   "vid": "visjoin_66"
+  }
+ ],
+ "pdReturns": [
+  {
+   "seq": 5,
+   "day": 4,
+   "vid": "jovan_milic"
+  },
+  {
+   "seq": 11,
+   "day": 10,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 35,
+   "day": 20,
+   "vid": "gen_oa3tzlt"
+  },
+  {
+   "seq": 37,
+   "day": 21,
+   "vid": "owen_smith"
+  },
+  {
+   "seq": 82,
+   "day": 36,
+   "vid": "gen_844p8kq"
+  },
+  {
+   "seq": 101,
+   "day": 42,
+   "vid": "jovan_milic"
+  }
+ ],
+ "pdErrors": [],
+ "pdOptionalMissing": [],
+ "pdSeq": 129,
+ "pdDepSeq": 15,
+ "deaths": [
+  {
+   "day": 8,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 9,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 16,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 20,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "patrol combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "bulldozer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "bulldozer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 31,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "patrol combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "patrol combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "patrol combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 34,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 34,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 34,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 34,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 34,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 35,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "villager",
+   "who": "gen_5tjoz37",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 38,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "patrol combat",
+   "player": false
+  },
+  {
+   "day": 38,
+   "kind": "monster",
+   "who": "moderator",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "terms_of_service",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "person",
+   "who": "gen_fila5gw",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "person",
+   "who": "ava_garcia",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "villager",
+   "who": "gen_oa3tzlt",
+   "cause": "the arena",
+   "player": true
+  },
+  {
+   "day": 43,
+   "kind": "monster",
+   "who": "white_noise_heron",
+   "cause": "patrol combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "villager",
+   "who": "owen_smith",
+   "cause": "the arena",
+   "player": true
+  },
+  {
+   "day": 48,
+   "kind": "villager",
+   "who": "jovan_milic",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 52,
+   "kind": "villager",
+   "who": "app_mgpsphn2492",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 53,
+   "kind": "villager",
+   "who": "nora_wilson",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 55,
+   "kind": "villager",
+   "who": "hannah_kim",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 55,
+   "kind": "villager",
+   "who": "gen_erylf7t",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 55,
+   "kind": "villager",
+   "who": "xavier_dubois",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 55,
+   "kind": "villager",
+   "who": "gen_844p8kq",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 55,
+   "kind": "monster",
+   "who": "algorithm",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "villager",
+   "who": "gen_41bvnn7",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 69,
+   "kind": "monster",
+   "who": "strike",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 74,
+   "kind": "villager",
+   "who": "app_mgpspj8b386",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 74,
+   "kind": "villager",
+   "who": "nino_kapanadze",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 74,
+   "kind": "villager",
+   "who": "priya_nair",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 76,
+   "kind": "villager",
+   "who": "lena_ruiz",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 77,
+   "kind": "villager",
+   "who": "app_mgpspj93272",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 78,
+   "kind": "villager",
+   "who": "sofia_chen",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 79,
+   "kind": "villager",
+   "who": "visjoin_66",
+   "cause": "the wild",
+   "player": true
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2400|12|4|4|1|401",
+  "3:3|90|2400|12|4|4|1|353",
+  "4:4|87|1000|12|4|4|1|315",
+  "5:5|100|1046|12|4|4|1|317",
+  "6:6|100|1191|12|4|4|1|309",
+  "7:7|100|1190|12|4|4|1|308",
+  "8:8|100|1142|12|4|4|1|304",
+  "9:9|91|1000|12|4|4|1|307",
+  "10:10|100|990|12|4|4|1|299",
+  "11:11|100|1256|12|4|4|1|299",
+  "12:12|95|1115|12|4|4|1|295",
+  "13:13|100|1190|12|4|4|1|279",
+  "14:14|100|1200|12|4|4|1|267",
+  "15:15|100|1398|12|4|4|1|254",
+  "16:16|100|1190|12|4|4|1|249",
+  "17:17|100|1200|12|4|4|2|236",
+  "18:18|100|1192|12|4|4|2|230",
+  "19:19|33|1382|12|4|4|2|238",
+  "20:20|54|1021|12|4|4|2|271",
+  "21:21|82|2294|12|4|4|2|298",
+  "22:22|79|2400|12|4|4|2|275",
+  "23:23|100|2379|12|4|4|2|261",
+  "24:24|100|2400|12|4|4|2|259",
+  "25:25|100|2300|12|4|4|2|268",
+  "26:26|90|2280|12|4|4|2|267",
+  "27:27|87|2400|12|4|4|2|231",
+  "28:28|100|2400|12|4|4|2|213",
+  "29:29|100|2400|12|4|4|2|223",
+  "30:30|100|2400|12|4|4|2|299",
+  "31:31|100|2314|12|4|4|2|315",
+  "32:32|100|2306|12|4|4|2|314",
+  "33:33|100|2400|12|4|4|2|329",
+  "34:34|100|2400|12|4|4|2|414",
+  "35:35|100|2400|12|4|4|3|425",
+  "36:36|100|2286|12|4|4|3|396",
+  "37:37|100|1500|11|4|4|3|401",
+  "38:38|100|2400|11|4|4|3|396",
+  "39:39|100|2173|11|4|4|3|392",
+  "40:40|100|2336|8|4|4|4|390",
+  "41:41|100|2251|8|4|4|4|369",
+  "42:42|100|2400|8|4|4|4|353",
+  "43:43|97|2337|8|4|4|4|381",
+  "44:44|95|2060|8|4|4|4|369",
+  "45:45|100|2400|8|4|4|4|356",
+  "46:46|100|2400|8|4|4|4|330",
+  "47:47|100|2290|8|4|4|4|319",
+  "48:48|100|1500|6|4|4|4|326",
+  "49:49|100|2270|6|4|4|4|299",
+  "50:50|100|2270|6|4|4|4|301",
+  "51:51|100|2400|6|4|4|4|307",
+  "52:52|98|2338|7|4|4|4|307",
+  "53:53|57|2390|6|4|4|4|287",
+  "54:54|84|2400|7|4|4|4|293",
+  "55:55|76|1500|4|4|4|4|268",
+  "56:56|100|2390|5|4|4|4|245",
+  "57:57|100|2400|6|4|4|4|245",
+  "58:58|100|2400|7|4|4|4|231",
+  "59:59|100|2400|7|4|4|4|214",
+  "60:60|100|2390|7|4|4|4|224",
+  "61:61|100|2400|7|4|4|4|225",
+  "62:62|100|1500|6|4|4|4|220",
+  "63:63|100|2390|6|4|4|4|245",
+  "64:64|100|2200|6|4|4|4|253",
+  "65:65|91|2400|6|4|4|4|245",
+  "66:66|100|2272|6|4|4|4|238",
+  "67:67|100|2390|6|4|4|4|246",
+  "68:68|100|2400|7|4|4|4|224",
+  "69:69|98|2400|7|4|4|4|183",
+  "70:70|100|2216|7|4|4|4|205",
+  "71:71|100|2400|7|4|4|4|180",
+  "72:72|100|2400|7|4|4|4|171",
+  "73:73|98|2392|7|4|4|4|185",
+  "74:74|100|1500|4|4|4|4|164",
+  "75:75|100|2400|4|4|4|4|144",
+  "76:76|100|2391|3|4|4|4|94",
+  "77:77|100|1500|2|4|4|4|90",
+  "78:78|100|1500|1|4|4|4|74"
+ ],
+ "instrumentErrors": [],
+ "supplyErrors": [],
+ "stickfiberErrors": []
+}
