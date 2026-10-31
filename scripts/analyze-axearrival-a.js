@@ -89,6 +89,7 @@ function classifyBracket(evidenceDayRow, prevSnap, firstSnap, deaths, morningPoo
   const poolShrank = !!(morningPoolBefore && morningPoolAfter &&
     Array.isArray(morningPoolBefore.stashed) && morningPoolBefore.stashed.includes('hatchet') &&
     Array.isArray(morningPoolAfter.stashed) && !morningPoolAfter.stashed.includes('hatchet'));
+  // NOTE: poolShrank is shared by stash-equip and stash-fetch above.
   if (equipEvent && poolShrank) { candidates.push('stash-equip'); evidence.push('equip wrap loopDay ' + equipEvent.loopDay + ' + stashed hatchet pool shrink'); }
   else if (equipEvent) { evidence.push('equip wrap flips hasHatchet but no morning-pool shrink observed (stash-equip unconfirmed)'); }
   // grant
@@ -99,6 +100,14 @@ function classifyBracket(evidenceDayRow, prevSnap, firstSnap, deaths, morningPoo
   // trade-gift
   const giftLine = lines.find((l) => /gave you .*hatchet|gift.*hatchet|hatchet.*gift|traded .*hatchet|hatchet.*trade/i.test(l));
   if (giftLine) { candidates.push('trade-gift'); evidence.push('gift/trade line: ' + giftLine); }
+  // stash-fetch: a haven fetch line naming the hatchet + morning-pool
+  // shrink (the fetch is not an equip() call, so no wrap entry fires).
+  // poolShrank is computed by the caller from the morning pools
+  // bracketing the arrival (spawn pool counts as the pre-arrival
+  // pool for a loopDay-1 arrival).
+  const fetchLine = lines.find((l) => /remember.*hatchet.*fetch|fetch.*hatchet|hatchet.*fetch/i.test(l));
+  if (fetchLine && poolShrank) { candidates.push('stash-fetch'); evidence.push('fetch line: ' + fetchLine + ' + stashed hatchet pool shrink'); }
+  else if (fetchLine) { evidence.push('fetch line present but no morning-pool shrink observed (stash-fetch unconfirmed)'); }
   // craft
   const craftLine = lines.find((l) => /craft.*hatchet|made .*hatchet|forged .*hatchet/i.test(l));
   if (craftLine) { candidates.push('craft'); evidence.push('craft line: ' + craftLine); }
@@ -130,10 +139,21 @@ function analyzeSeed(inst) {
   if (firstIdx >= 0) {
     const first = snaps[firstIdx];
     const prev = firstIdx > 0 ? snaps[firstIdx - 1] : null;
-    const intraday = !!(prev && prev.kind === 'morning' && first.kind === 'evening' && prev.loopDay === first.loopDay);
+    // Intraday brackets: morning->evening of one loop-day, AND
+    // spawn->evening of loopDay 1 (there is no loopDay-1 morning snap
+    // by driver design — callIdx>1 — so the spawn snap IS the
+    // loopDay-1 morning state; treating it as an overnight hid the
+    // loopDay-1 evening row's lines from classification).
+    const intraday = !!((prev && prev.kind === 'morning' && first.kind === 'evening' && prev.loopDay === first.loopDay) ||
+      (prev && prev.kind === 'spawn' && first.kind === 'evening' && first.loopDay === 1));
     const bracketDay = intraday ? first.loopDay : (first.kind === 'morning' ? first.loopDay : null);
     const evidenceRow = intraday ? eveningByLoop.get(first.loopDay) : null;
-    // Morning pools bracketing the arrival (for stash-equip shrink).
+    // Morning pools bracketing the arrival (for stash-equip /
+    // stash-fetch shrink). For an evening first-snap, poolBefore is
+    // that loop-day's morning pool, falling back to the spawn pool
+    // on loopDay 1; poolAfter is the NEXT morning's pool (the
+    // fetch/equip lands in the pack by evening, and the pool
+    // shrink is visible the next morning).
     let poolBefore = null, poolAfter = null;
     if (first.kind === 'morning') {
       poolAfter = (first.snap && first.snap.pool) || null;
@@ -141,10 +161,12 @@ function analyzeSeed(inst) {
       for (let i = firstIdx - 1; i >= 0; i--) {
         if (snaps[i].kind === 'morning' && snaps[i].snap && snaps[i].snap.pool) { poolBefore = snaps[i].snap.pool; break; }
       }
+      if (!poolBefore && inst.spawnSnap && inst.spawnSnap.pool) poolBefore = inst.spawnSnap.pool;
     } else if (first.kind === 'evening') {
-      poolAfter = null;
       const m = morningByLoop.get(first.loopDay);
-      poolBefore = (m && m.axe && m.axe.pool) || null;
+      poolBefore = (m && m.axe && m.axe.pool) || ((inst.spawnSnap && inst.spawnSnap.pool) || null);
+      const mNext = morningByLoop.get(first.loopDay + 1);
+      poolAfter = (mNext && mNext.axe && mNext.axe.pool) || null;
     }
     const cls = classifyBracket(evidenceRow, prev, first, inst.deaths || [], poolBefore, poolAfter);
     firstAxe = {

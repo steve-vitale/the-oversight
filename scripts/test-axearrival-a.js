@@ -118,6 +118,31 @@ try {
   check('B8 fixture window complete', a.windowComplete === true);
   eq('B8 fixture strand nights', a.strandNights, [10, 11]);
 }
+{
+  // Stash-fetch: fetch line + pool shrink, no equip wrap entry.
+  const row = { fullDaySay: ['You remember the Hatchet at your space in the haven and fetch it — it rides in your pack now.'], dayEvents: [] };
+  const c = classifyBracket(row, { villagerId: 'v1' }, { villagerId: 'v1' }, [], { stashed: ['snare_wire', 'hatchet', 'bark_armor'] }, { stashed: ['snare_wire'] });
+  eq('B9 stash-fetch classified', c.mechanism, 'stash-fetch');
+}
+{
+  // LoopDay-1 arrival: spawn snap IS the loopDay-1 morning state, so
+  // spawn->evening loopDay 1 is intraday and its lines classify.
+  const inst = {
+    seed: 99998, endReason: 'survived', daysAlive: 30,
+    recorder: { errs: 0, errors: [], wrapInstalled: {} }, axeEvents: [],
+    spawnSnap: { gameDay: 1, villagerId: 'v1', hasHatchet: false, tier: 'none', canFell: false, pool: { stashed: ['snare_wire', 'hatchet', 'bark_armor'] } },
+    deaths: [], mornings: [
+      { loopDay: 2, gameDay: 2, axe: { gameDay: 2, villagerId: 'v1', hasHatchet: true, tier: 'fell', canFell: true, inv: ['hatchet'], eq: [], pool: { stashed: ['snare_wire'] } } },
+    ],
+    evenings: [
+      { loopDay: 1, gameDay: 2, eveningAxe: { gameDay: 2, villagerId: 'v1', hasHatchet: true, tier: 'fell', canFell: true, inv: ['hatchet'], eq: [] }, woodcarry: null, fullDaySay: ['You remember the Hatchet at your space in the haven and fetch it — it rides in your pack now.'], dayEvents: [] },
+    ],
+  };
+  const a = analyzeSeed(inst);
+  check('B10 loopDay-1 firstAxe found', !!a.firstAxe);
+  eq('B10 loopDay-1 bracket intraday', a.firstAxe.bracket, 'intraday loopDay 1');
+  eq('B10 loopDay-1 mechanism stash-fetch', a.firstAxe.mechanism, 'stash-fetch');
+}
 
 // ---- Part C: corpus checks ----
 const CORPORA = {
