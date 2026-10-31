@@ -1,0 +1,20 @@
+(pre-talk seed: seek_taken planted d87; takenWantDay=87; convoCount=13)
+=== seed 85106 day 90 — conversation with Ernesto (gen_hsqhqs7) ===
+occupation=musician temperament=warm trust=96 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all…"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "And?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Ernesto doesn't say much. Sometimes that's the whole point.
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Take care of yourself, yeah? I mean it."

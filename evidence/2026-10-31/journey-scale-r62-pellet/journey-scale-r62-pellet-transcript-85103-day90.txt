@@ -1,0 +1,22 @@
+(pre-talk seed: seek_comfort planted d83; takenWantDay=0; convoCount=18)
+=== seed 85103 day 90 — conversation with Ursula (ursula_weber) ===
+occupation=Mortician temperament=gentle trust=90 dead=false
+want: seek_comfort (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About whatever's been weighing on me — I don't want to be alone with my head right now. That's all. That's the whole thing. Think, then act."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — are you alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Nice. Sit. The fire's warm."
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Mm." They don't look up from the fire, but they nod you down. "Sit."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Careful — that log's hotter than it looks." They shift it with a boot, making space.
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "I keep count of who's at the fire. I don't mean to — I just notice the gaps."
+YOU: (leave)
+pre-close: want seek_comfort stage 3 thread want
+closing line: "See you at the fire."

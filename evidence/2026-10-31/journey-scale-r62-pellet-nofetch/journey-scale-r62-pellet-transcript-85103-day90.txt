@@ -1,0 +1,18 @@
+(pre-talk seed: seek_taken planted d77; takenWantDay=77; convoCount=10)
+=== seed 85103 day 90 — conversation with Walt (gen_o9nyoxb) ===
+occupation=farmer temperament=warm trust=91 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. I mean it."
+(turn0 choices: dlg:more, dlg:commit, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come see what I found. You won't believe it."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Walt shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Don't be a stranger."

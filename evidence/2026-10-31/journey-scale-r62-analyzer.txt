@@ -1,0 +1,21 @@
+=== R60 TALK CLASSIFICATION ===
+seed day npc want stageOpen openThread fromSeed preTalkSeed stageClose aliveWantItems
+85002 d120 Luis want=curious stageOpen=1 thread=want fromSeed=true preSeed=curious planted d120 stageClose=2 aliveWant=[-]
+    open: THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+85002 d90 Luis want=ask_favor stageOpen=2 thread=want fromSeed=true preSeed=ask_favor planted d90 stageClose=3 aliveWant=[-]
+    open: THEM: "About the sickness I'm fighting — the need hasn't gone anywhere. I'm still asking."
+85003 d120 Lucas want=curious stageOpen=1 thread=want fromSeed=false preSeed=none stageClose=2 aliveWant=[-]
+    open: THEM: "Do you dream about before? Or is it all — this — now?"
+85003 d90 Dale want=seek_comfort stageOpen=0 thread=grief fromSeed=false preSeed=none stageClose=2 aliveWant=[-]
+    open: THEM: "Every laugh out there feels wrong today. Then I feel wrong for thinking it. Funny how that wo
+85004 d120 Regina want=curious stageOpen=1 thread=want fromSeed=false preSeed=none stageClose=2 aliveWant=[-]
+    open: THEM: "What's something from your old life that's actually useful here? That's the priority."
+85004 d90 Rowan want=curious stageOpen=1 thread=want fromSeed=true preSeed=curious planted d86 stageClose=2 aliveWant=[-]
+    open: THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone? Not that i
+
+=== R60 QUAD CENSUS ===
+seed day over pop pantry rank nationalDay globalDay firstCourt seat arc deaths covTrusts maxWave pilgrimages fusion abilities
+85001 d28 over=true pop=3/3 pantry=0 rank=village nat=null glob=null court=null seat=none arc=3 deaths=19 cov= maxWave=2 pilg=0 fusion=false abilities=[green_whisper,green_thumb,lucky_rock]
+85002 d181 over=false pop=8/8 pantry=92669 rank=regional nat=null glob=null court=null seat=none arc=3 deaths=13 cov=98/93 maxWave=2 pilg=34 fusion=true abilities=[green_whisper,scream_cheese]
+85003 d181 over=false pop=6/6 pantry=2438 rank=regional nat=null glob=null court=null seat=none arc=3 deaths=48 cov=50/50 maxWave=4 pilg=69 fusion=true abilities=[bloodhound,lucky_rock,green_whisper,trophy_room]
+85004 d169 over=true pop=0/0 pantry=0 rank=regional nat=149 glob=150 court=85 seat=lesser arc=4 deaths=73 cov=34/18/16 maxWave=4 pilg=5 fusion=false abilities=[beast_calm]

@@ -1,0 +1,25 @@
+(pre-talk seed: curious planted d107; takenWantDay=0; convoCount=14)
+=== seed 85107 day 120 — conversation with Chris (gen_mm7c75n) ===
+occupation=mechanic temperament=steady trust=92 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Jorge headed out to forage."
+YOU: [dlg:more] "Tell me more."
+THEM: "Honestly, People are talking about me. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "The seedlings Mara touched are twice the size of mine. Same soil. Same water."
+YOU: [dlg:react] (listen)
+THEM: "Stephen headed out to forage."
+YOU: [dlg:more] "Tell me more."
+THEM: "Okay. We'll pick this up later."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip

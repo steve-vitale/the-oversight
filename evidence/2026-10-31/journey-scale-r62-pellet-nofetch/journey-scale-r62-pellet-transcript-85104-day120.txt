@@ -1,0 +1,16 @@
+(pre-talk seed: curious planted d119; takenWantDay=0; convoCount=1)
+=== seed 85104 day 120 — conversation with Arne (visjoin_116) ===
+occupation=community gardener temperament=earnest trust=25 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:a_deflect, ans:q_someone:honest_pass, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+YOU: [goon] "Please, go on."
+THEM: They pull back half a step — not leaving, just... further.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Alright. One thing at a time. That's how we get through."

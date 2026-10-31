@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d88; takenWantDay=0; convoCount=15)
+=== seed 85101 day 90 — conversation with Darius (gen_062489s) ===
+occupation=aquarium keeper temperament=gentle trust=89 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Every group I've been in, someone had to be the adult. Guess it's me again.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Darius shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:more] "I’m listening."
+THEM: "Someone asked me what we should do yesterday. I had an answer. That felt... right."
+YOU: [dlg:react] (listen)
+THEM: "I watch how people look at you. Some of them are waiting for an alternative. I'm just saying."
+YOU: [dlg:more] "Tell me more."
+THEM: "I've been the one in the corner with the plan. Might as well be the one in the middle with it."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "Someone asked me yesterday what the plan was. I had one. That's new. That's — something."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Later."

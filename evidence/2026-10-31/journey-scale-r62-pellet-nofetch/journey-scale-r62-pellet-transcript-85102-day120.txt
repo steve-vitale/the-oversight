@@ -1,0 +1,18 @@
+(pre-talk seed: ask_favor planted d113; takenWantDay=0; convoCount=13)
+=== seed 85102 day 120 — conversation with Sofia (gen_4hk1cvm) ===
+occupation=street artist temperament=mischievous trust=90 dead=false
+want: ask_favor (stage 0)
+open thread: grief fromSeed=true
+picker: control
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: (leave)
+pre-close: want ask_favor stage 1 thread want
+closing line: "I should — yeah. Later."
