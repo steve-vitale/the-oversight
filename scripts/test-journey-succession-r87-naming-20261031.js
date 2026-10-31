@@ -10,7 +10,8 @@
 //     proving the scorer keys on the right name, not generic hits.
 // (c) DRIVER RENAME smoke: the r87 driver on proof seed 24998 (short
 //     config, all five kills forced) must emit fifthDeath (scripted,
-//     passed) and write d+3/d+7 transcript files. Proof scratch
+//     passed) and write d+3/d+7 transcript files (filed under the
+//     ACTUAL days-since-death at firing time, which may exceed the label).
 //     (seed 24998 tele + transcript files) is deleted afterwards,
 //     r56 pattern. The driver writes no stdout file itself; the test
 //     captures its stdout JSON directly.
@@ -65,12 +66,25 @@ try {
   const w1 = (rec.convoReads || []).filter(c => c.dplus === 3 || c.dplus === 7);
   check('DRIVER wrote d+3/d+7 convoReads (week-1 instrument present)',
     w1.length >= 2, `w1 reads=${w1.length}`);
+  // Filenames key on the ACTUAL days-since-death at firing time, not the
+  // checkpoint label (analyzer fix, same rule): the driver fires a
+  // checkpoint on the first day with daysSince >= cp, so a checkpoint
+  // can fire late (label d+7, file d+8 — proof seed 24998). The
+  // label-only lookup missed such transcripts on the rebased tip.
+  const deathDay = (rec.death && rec.death.day != null) ? rec.death.day : null;
+  const actualOf = c => (c.day != null && deathDay != null) ? c.day - deathDay : c.dplus;
   let filesOk = 0;
+  const late = [];
   for (const c of w1) {
-    if (fs.existsSync(path.join(EVID, `journey-succession-r87-transcript-24998-dplus${c.dplus}-${c.vid}.txt`))) filesOk++;
+    const actual = actualOf(c);
+    if (actual !== c.dplus) late.push(`${c.vid} label d+${c.dplus} -> file d+${actual}`);
+    if (fs.existsSync(path.join(EVID, `journey-succession-r87-transcript-24998-dplus${actual}-${c.vid}.txt`))) filesOk++;
   }
-  check('DRIVER d+3/d+7 transcript files exist on disk',
-    filesOk === w1.length, `files=${filesOk}/${w1.length}`);
+  check('DRIVER d+3/d+7 transcript files exist on disk (actual-day names)',
+    filesOk === w1.length, `files=${filesOk}/${w1.length} late=[${late.join('; ')}]`);
+  check('DRIVER late checkpoint filed under actual day, not label',
+    late.length > 0 && late.every(s => filesOk === w1.length),
+    late.length ? `late=[${late.join('; ')}]` : 'no late read on proof seed');
 } catch (e) {
   check('DRIVER smoke ran without throwing', false, String(e && e.message).slice(0, 300));
 } finally {

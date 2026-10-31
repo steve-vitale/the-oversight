@@ -25,6 +25,13 @@ function scoreSeed(evidDir, seed, tag, deadOverride) {
   const dead = deadOverride || (rec.death && rec.death.oldFirst);
   if (!dead) return { seed, error: 'no death.oldFirst' };
   const reads = (rec.convoReads || []).filter(c => c.dplus === 3 || c.dplus === 7);
+  // Filenames key on the ACTUAL days-since-death at firing time, not the
+  // checkpoint label: the driver fires a checkpoint on the first day with
+  // daysSince >= cp, so a checkpoint can fire late (label d+7, file d+8).
+  // The label-only lookup silently missed such transcripts (found on the
+  // rebased tip, proof seed 24998: d+7 fired at d+8). Fall back to the
+  // label only when day/death-day are unavailable.
+  const deathDay = (rec.death && rec.death.day != null) ? rec.death.day : null;
   const livingNames = new Set();
   for (const c of (rec.convoReads || [])) if (c.vid) livingNames.add(c.vid);
   for (const ch of (rec.chainDeaths || [])) if (ch.newFirst) livingNames.add(ch.newFirst);
@@ -33,8 +40,9 @@ function scoreSeed(evidDir, seed, tag, deadOverride) {
   const transcripts = [];
   let draws = 0, namingLines = 0;
   for (const c of reads) {
+    const actual = (c.day != null && deathDay != null) ? c.day - deathDay : c.dplus;
     const fn = path.join(evidDir,
-      `journey-succession-${tag}-transcript-${seed}-dplus${c.dplus}-${c.vid}.txt`);
+      `journey-succession-${tag}-transcript-${seed}-dplus${actual}-${c.vid}.txt`);
     if (!fs.existsSync(fn)) { transcripts.push({ dplus: c.dplus, vid: c.vid, missing: true }); continue; }
     const text = fs.readFileSync(fn, 'utf8');
     const tm = text.match(/\(trust (\d+)\)/);
@@ -47,7 +55,7 @@ function scoreSeed(evidDir, seed, tag, deadOverride) {
       if (re.test(ln)) hitLines.push(ln.trim().slice(0, 200));
     }
     namingLines += hitLines.length;
-    transcripts.push({ dplus: c.dplus, vid: c.vid, trust: tm ? +tm[1] : null,
+    transcripts.push({ dplus: c.dplus, actual, late: actual !== c.dplus, vid: c.vid, trust: tm ? +tm[1] : null,
       bond: !!c.bond, bondDepth: c.bondDepth || null, bondV: c.bondV || null,
       lately, mourning, reactMore, hits: hitLines.length, hitLines,
       names: hitLines.length > 0 });

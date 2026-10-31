@@ -237,3 +237,44 @@ Quiet: census.alive, census.integrationStage, week2.deadBearerMentions
   all 5 files hash-verified, status clean before seeding.
 - Rotation: 7 -> 4 to be written at closeout and verified by read-back.
 - Next Lane B leg: 4 (endgame).
+
+## CLOSEOUT ADDENDUM — Lane B 11:00 CDT run, 2026-10-31 (r87 closeout)
+
+This run did not re-play the leg: r87's panel was finished and its
+verdicts stand. This addendum closes the incomplete closeout only.
+
+- Liveness check before adoption (dead-coordinator ≠ dead-workers
+  rule applied): r87 heartbeat 15:18:12Z (39 min stale at adoption),
+  last worktree write 14:58:06Z, heartbeat-loop PID 29484 gone, no
+  process touching journey2-succession-r87. Declared dead 15:57Z.
+- Stale-lock recovery: lock run_id 2026-10-31T14:11:43Z had no
+  registry entry and was 100+ min old — deleted per the overlap
+  guard (both the no-registry rule and the 90-min fallback). New
+  lock 2026-10-31T15:57:33Z created for this closeout run, deleted
+  at closeout end. r86 tree/branch untouched.
+- Proof-test fix (the one open item): the driver files transcripts
+  under the ACTUAL days-since-death (d+8) while the convoRead keeps
+  the checkpoint label (d+7) — the scorer was already patched to
+  the actual-day rule, the test was not. Test part (c) now keys
+  files by actual day (c.day − rec.death.day) and asserts a late
+  checkpoint is filed under its actual day. Reproduced first
+  (files 2/4), then fixed: ALL PASS (fixtures still 8/28 exactly,
+  wrong-name control 0, driver fifthDeath scripted+passed, files
+  4/4 with late=[Alikhan d+7 → d+8; Grace d+7 → d+8], scratch
+  deleted). node --check clean on both scripts. Zero src/js change.
+- Telemetry re-confirmed on the closeout run (same command, same
+  baseline, no --update-baseline): identical 2 LOUD lines
+  (deaths.bearer +380%, census.fallen +190%), both EXPLAINED as
+  the forced-chain regime per the run note above. Baseline NOT
+  rolled — same reason as r87.
+- Check-quick on the branch tip (e254d69a2, committed log):
+  276 passed / 14 failed in 755s — the standing known-6 + flap
+  write-sensitive fails, zero regressions from these additions
+  (scripts-only change; proof test re-run after rebase, see below).
+- Landing (closeout steps, outcome in the 2026-10-31 memory log
+  and the run report): rebase onto master 18da20b58
+  (journey-scale r62), proof test re-run, --ff-only merge,
+  worktree release and branch removal, rotation 7 → 4 written
+  and verified by read-back. Next Lane B leg: 4 (endgame).
+  Merged locally, pending ship — no version tag, no push, no
+  live verification (ship loop owns those).
