@@ -739,7 +739,16 @@
           if ((detail.stage | 0) < 2) miss.push('deeper integration');
           if (!detail.foodDeeds) miss.push('the food-thesis deeds (no feast can carry the surge while the pellet hums)');
           const missTxt = miss.length ? ' The ledger still wants: ' + miss.join('; ') + '.' : '';
-          this.say('◈ THE TABLE — the ring of pale light flickers at the edge of the sky... and does not come. The System does not apologize this time. "WE PRICED THE RUN. NO HUNGER ON THE RECORD — THE PELLET HUMS WHERE THE FIRE SHOULD BE. NO FEAST, NO SURGE, NOTHING HERE WE CAN PRICE. A COLD SPOT AT EVERY TABLE: THE WORDS WERE ON THE WRAPPER."' + missTxt + ' The mantle may pass to hungrier hands; the table will still be here.');
+          // PELLET QUOTE VARIANT (journey-endgame r74 2026-10-30): the
+          // never-feasted quote contradicts the record for a bearer <redacted> feasted
+          // BEFORE the pellet — the pellet blocks NEW feasts, it does not
+          // erase banked food deeds (r73 88964 sat on wave-3 breadth alone
+          // with the pellet still online). When food deeds are banked, say
+          // that instead; the miss list still names the true bar.
+          const pelletQuote = detail.foodDeeds
+            ? '"WE PRICED THE RUN. THE FIRE BURNED BEFORE THE PELLET, AND WHAT IT BANKED STANDS — BUT THE PELLET HUMS WHERE THE FIRE SHOULD BE, AND NO NEW FEAST CAN CARRY THE SURGE."'
+            : '"WE PRICED THE RUN. NO HUNGER ON THE RECORD — THE PELLET HUMS WHERE THE FIRE SHOULD BE. NO FEAST, NO SURGE, NOTHING HERE WE CAN PRICE. A COLD SPOT AT EVERY TABLE: THE WORDS WERE ON THE WRAPPER."';
+          this.say('◈ THE TABLE — the ring of pale light flickers at the edge of the sky... and does not come. The System does not apologize this time. ' + pelletQuote + missTxt + ' The mantle may pass to hungrier hands; the table will still be here.');
           try { this.save(); } catch (e) {}
         }
       }

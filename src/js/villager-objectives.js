@@ -1654,7 +1654,21 @@
         var withId = null;
         try {
           var o = this.objOf(vid);
-          if (o.companion) { withLine = ' with ' + this.displayName(o.companion); withId = o.companion; }
+          // GHOST GUARD (journey-endgame r74 2026-10-30): the companion is
+          // snapshotted at departure — if they died out on the trip, naming
+          // them on the return narrates a dead villager walking home (r74
+          // 88972: Alaa died d123, "Felix is back with Alaa" fired d124).
+          // Drop the clause — and the dead bond below — when the companion
+          // is dead; an unknown id still reads as before.
+          if (o.companion) {
+            var compDead = false;
+            try {
+              var cp = this.getPerson ? this.getPerson(o.companion) : null;
+              if (cp) compDead = !!cp.dead;
+              else { var cvp = this.vpOf ? this.vpOf(o.companion) : null; compDead = !!(cvp && cvp.dead); }
+            } catch (e) {}
+            if (!compDead) { withLine = ' with ' + this.displayName(o.companion); withId = o.companion; }
+          }
           // REP-NAME HONESTY (travel longsim r4 2026-10-12): a stranger
           // descriptor's first word ("A person, maybe 40s…") is not a name —
           // "found A" read broken. Descriptors are used whole via _repName.
