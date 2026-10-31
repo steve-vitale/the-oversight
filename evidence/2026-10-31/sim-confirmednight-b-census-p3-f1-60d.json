@@ -1,0 +1,1819 @@
+{
+  "corpusDir": "evidence/2026-10-31/sim-confirmednight-b-corpus-p3-f1-60d",
+  "policy": "deed-seeking",
+  "horizonDays": 60,
+  "legs": 8,
+  "seeds": [
+    17501,
+    17502,
+    17503,
+    17504,
+    17505,
+    17506,
+    17507,
+    17508
+  ],
+  "totalCreekTileEvenings": 120,
+  "totalConfirmedNights": 99,
+  "totalFailedReturn": 0,
+  "totalNoAttempt": 99,
+  "totalUnclassified": 0,
+  "classificationCompleteness": 1,
+  "seedsWithConfirmedNight": [
+    17501,
+    17503,
+    17504,
+    17505,
+    17506,
+    17508
+  ],
+  "totalBlockedCrossingNights": 35,
+  "totalUnconfirmedSleepReturn": 1,
+  "totalUnconfirmedHavenFollowing": 17,
+  "totalUnconfirmedEndOfRun": 3,
+  "totalCamps": 23,
+  "campEndStories": {
+    "succession": 12,
+    "horizon": 3,
+    "moved-elsewhere": 8
+  },
+  "totalGenuine": 80,
+  "totalErrs": 0,
+  "perSeed": [
+    {
+      "seed": 17501,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 13,
+      "creekTileEvenings": 14,
+      "creekTileDays": [
+        31,
+        36,
+        37,
+        38,
+        39,
+        47,
+        48,
+        49,
+        50,
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "genuineCreekTileEvenings": 0,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [
+        {
+          "startDay": 36,
+          "endDay": 39,
+          "length": 4,
+          "days": [
+            36,
+            37,
+            38,
+            39
+          ],
+          "genuine": false,
+          "confirmedNights": 3,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 47,
+          "endDay": 50,
+          "length": 4,
+          "days": [
+            47,
+            48,
+            49,
+            50
+          ],
+          "genuine": false,
+          "confirmedNights": 3,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 54,
+          "endDay": 58,
+          "length": 5,
+          "days": [
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "genuine": false,
+          "confirmedNights": 4,
+          "endStory": "succession"
+        }
+      ],
+      "confirmedNights": 10,
+      "confirmedDays": [
+        36,
+        37,
+        38,
+        47,
+        48,
+        49,
+        54,
+        55,
+        56,
+        57
+      ],
+      "confirmed": [
+        {
+          "loopDay": 36,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 37,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 38,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 47,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 48,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 49,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 54,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 55,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 56,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 57,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        }
+      ],
+      "failedReturn": 0,
+      "noAttempt": 10,
+      "unclassified": 0,
+      "blockedCrossingNights": 5,
+      "unconfirmed": [
+        {
+          "loopDay": 31,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_xzkwb86",
+          "nextVessel": "gen_rbqwvdt"
+        },
+        {
+          "loopDay": 39,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_rbqwvdt",
+          "nextVessel": "ingrid_vik"
+        },
+        {
+          "loopDay": 50,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "ingrid_vik",
+          "nextVessel": "desmond_clarke"
+        },
+        {
+          "loopDay": 58,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "desmond_clarke",
+          "nextVessel": "tashi_sherpa"
+        }
+      ],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 4,
+      "unconfirmedEndOfRun": 0
+    },
+    {
+      "seed": 17502,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 10,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "genuineCreekTileEvenings": 0,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "confirmed": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmed": [],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0
+    },
+    {
+      "seed": 17503,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 11,
+      "creekTileEvenings": 1,
+      "creekTileDays": [
+        37
+      ],
+      "genuineCreekTileEvenings": 0,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [],
+      "confirmedNights": 1,
+      "confirmedDays": [
+        37
+      ],
+      "confirmed": [
+        {
+          "loopDay": 37,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        }
+      ],
+      "failedReturn": 0,
+      "noAttempt": 1,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmed": [],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0
+    },
+    {
+      "seed": 17504,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 7,
+      "creekTileEvenings": 36,
+      "creekTileDays": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        52,
+        53,
+        54,
+        59,
+        60
+      ],
+      "genuineCreekTileEvenings": 0,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [
+        {
+          "startDay": 11,
+          "endDay": 16,
+          "length": 6,
+          "days": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "genuine": false,
+          "confirmedNights": 5,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 19,
+          "endDay": 28,
+          "length": 10,
+          "days": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "genuine": false,
+          "confirmedNights": 9,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 31,
+          "endDay": 44,
+          "length": 14,
+          "days": [
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+          ],
+          "genuine": false,
+          "confirmedNights": 13,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 51,
+          "endDay": 54,
+          "length": 4,
+          "days": [
+            51,
+            52,
+            53,
+            54
+          ],
+          "genuine": false,
+          "confirmedNights": 3,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 59,
+          "endDay": 60,
+          "length": 2,
+          "days": [
+            59,
+            60
+          ],
+          "genuine": false,
+          "confirmedNights": 1,
+          "endStory": "horizon"
+        }
+      ],
+      "confirmedNights": 31,
+      "confirmedDays": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        51,
+        52,
+        53,
+        59
+      ],
+      "confirmed": [
+        {
+          "loopDay": 11,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 12,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 13,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 14,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 15,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 19,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 20,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 21,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 22,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 23,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 24,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 25,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 26,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 27,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 31,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 32,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 33,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 34,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 35,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 36,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 37,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 38,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 39,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 40,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 41,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 42,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 43,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 51,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 52,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 53,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 59,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        }
+      ],
+      "failedReturn": 0,
+      "noAttempt": 31,
+      "unclassified": 0,
+      "blockedCrossingNights": 3,
+      "unconfirmed": [
+        {
+          "loopDay": 16,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_bv4mhq0",
+          "nextVessel": "gen_syb2xh6"
+        },
+        {
+          "loopDay": 28,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_syb2xh6",
+          "nextVessel": "gen_57awgkr"
+        },
+        {
+          "loopDay": 44,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_57awgkr",
+          "nextVessel": "mia_andersson"
+        },
+        {
+          "loopDay": 54,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_egw1bdh",
+          "nextVessel": "gen_qog0x0w"
+        },
+        {
+          "loopDay": 60,
+          "class": "away-continuation",
+          "kind": "end-of-run",
+          "nextMorningAtHaven": null,
+          "vesselChanged": false,
+          "thisVessel": "gen_qog0x0w",
+          "nextVessel": null
+        }
+      ],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 4,
+      "unconfirmedEndOfRun": 1
+    },
+    {
+      "seed": 17505,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 9,
+      "creekTileEvenings": 25,
+      "creekTileDays": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "genuineCreekTileEvenings": 4,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [
+        {
+          "startDay": 5,
+          "endDay": 22,
+          "length": 18,
+          "days": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "genuine": true,
+          "confirmedNights": 15,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 24,
+          "endDay": 30,
+          "length": 7,
+          "days": [
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "genuine": true,
+          "confirmedNights": 6,
+          "endStory": "succession"
+        }
+      ],
+      "confirmedNights": 21,
+      "confirmedDays": [
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "confirmed": [
+        {
+          "loopDay": 5,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 6,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 7,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 8,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 10,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 11,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 12,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 13,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 14,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 15,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 17,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 18,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 19,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 20,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 21,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 24,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 25,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 26,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 27,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 28,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 29,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        }
+      ],
+      "failedReturn": 0,
+      "noAttempt": 21,
+      "unclassified": 0,
+      "blockedCrossingNights": 7,
+      "unconfirmed": [
+        {
+          "loopDay": 9,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_3hm33ex",
+          "nextVessel": "gen_no0t8p3"
+        },
+        {
+          "loopDay": 16,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_no0t8p3",
+          "nextVessel": "gen_pp3w19n"
+        },
+        {
+          "loopDay": 22,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_pp3w19n",
+          "nextVessel": "diana_osei"
+        },
+        {
+          "loopDay": 30,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "diana_osei",
+          "nextVessel": "gen_vus09y7"
+        }
+      ],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 4,
+      "unconfirmedEndOfRun": 0
+    },
+    {
+      "seed": 17506,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 57,
+      "endReason": "village-lost",
+      "errCount": 0,
+      "genuine": 9,
+      "creekTileEvenings": 33,
+      "creekTileDays": [
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        15,
+        16,
+        17,
+        18,
+        22,
+        24,
+        25,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        43,
+        44,
+        50,
+        51,
+        54,
+        55,
+        56,
+        57
+      ],
+      "genuineCreekTileEvenings": 9,
+      "sleepReturnCreekEvenings": 1,
+      "camps": [
+        {
+          "startDay": 5,
+          "endDay": 6,
+          "length": 2,
+          "days": [
+            5,
+            6
+          ],
+          "genuine": true,
+          "confirmedNights": 1,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 8,
+          "endDay": 12,
+          "length": 5,
+          "days": [
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "genuine": true,
+          "confirmedNights": 4,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 15,
+          "endDay": 18,
+          "length": 4,
+          "days": [
+            15,
+            16,
+            17,
+            18
+          ],
+          "genuine": true,
+          "confirmedNights": 4,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 24,
+          "endDay": 25,
+          "length": 2,
+          "days": [
+            24,
+            25
+          ],
+          "genuine": true,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 29,
+          "endDay": 39,
+          "length": 11,
+          "days": [
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "genuine": true,
+          "confirmedNights": 10,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 43,
+          "endDay": 44,
+          "length": 2,
+          "days": [
+            43,
+            44
+          ],
+          "genuine": true,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 50,
+          "endDay": 51,
+          "length": 2,
+          "days": [
+            50,
+            51
+          ],
+          "genuine": true,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 54,
+          "endDay": 57,
+          "length": 4,
+          "days": [
+            54,
+            55,
+            56,
+            57
+          ],
+          "genuine": false,
+          "confirmedNights": 2,
+          "endStory": "horizon"
+        }
+      ],
+      "confirmedNights": 27,
+      "confirmedDays": [
+        5,
+        8,
+        9,
+        10,
+        11,
+        15,
+        16,
+        17,
+        18,
+        24,
+        25,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        38,
+        39,
+        43,
+        44,
+        50,
+        51,
+        54,
+        55
+      ],
+      "confirmed": [
+        {
+          "loopDay": 5,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 8,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 9,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 10,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 11,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 15,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 16,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 17,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 18,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 24,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 25,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 29,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 30,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 31,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 32,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 33,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 34,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 35,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 36,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 38,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 39,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 43,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 44,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 50,
+          "class": "genuine",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 51,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 54,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 55,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        }
+      ],
+      "failedReturn": 0,
+      "noAttempt": 27,
+      "unclassified": 0,
+      "blockedCrossingNights": 16,
+      "unconfirmed": [
+        {
+          "loopDay": 6,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_yb0yl94",
+          "nextVessel": "gen_syfpcai"
+        },
+        {
+          "loopDay": 12,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_syfpcai",
+          "nextVessel": "gen_le1vf94"
+        },
+        {
+          "loopDay": 22,
+          "class": "sleep-return",
+          "kind": "sleep-return",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "nikolai_volkov",
+          "nextVessel": "gen_i0h5oua"
+        },
+        {
+          "loopDay": 37,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_i0h5oua",
+          "nextVessel": "gen_3iryrzg"
+        },
+        {
+          "loopDay": 56,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "gen_qp3u4f8",
+          "nextVessel": "rafael_torres"
+        },
+        {
+          "loopDay": 57,
+          "class": "genuine-end-of-run",
+          "kind": "end-of-run",
+          "nextMorningAtHaven": null,
+          "vesselChanged": false,
+          "thisVessel": "rafael_torres",
+          "nextVessel": null
+        }
+      ],
+      "unconfirmedSleepReturn": 1,
+      "unconfirmedHavenFollowing": 4,
+      "unconfirmedEndOfRun": 1
+    },
+    {
+      "seed": 17507,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 12,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "genuineCreekTileEvenings": 0,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "confirmed": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmed": [],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0
+    },
+    {
+      "seed": 17508,
+      "policy": "deed-seeking",
+      "horizonDays": 60,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "errCount": 0,
+      "genuine": 9,
+      "creekTileEvenings": 11,
+      "creekTileDays": [
+        24,
+        25,
+        29,
+        30,
+        33,
+        34,
+        35,
+        45,
+        46,
+        59,
+        60
+      ],
+      "genuineCreekTileEvenings": 0,
+      "sleepReturnCreekEvenings": 0,
+      "camps": [
+        {
+          "startDay": 24,
+          "endDay": 25,
+          "length": 2,
+          "days": [
+            24,
+            25
+          ],
+          "genuine": false,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 29,
+          "endDay": 30,
+          "length": 2,
+          "days": [
+            29,
+            30
+          ],
+          "genuine": false,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 33,
+          "endDay": 35,
+          "length": 3,
+          "days": [
+            33,
+            34,
+            35
+          ],
+          "genuine": false,
+          "confirmedNights": 3,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 45,
+          "endDay": 46,
+          "length": 2,
+          "days": [
+            45,
+            46
+          ],
+          "genuine": false,
+          "confirmedNights": 1,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 59,
+          "endDay": 60,
+          "length": 2,
+          "days": [
+            59,
+            60
+          ],
+          "genuine": false,
+          "confirmedNights": 1,
+          "endStory": "horizon"
+        }
+      ],
+      "confirmedNights": 9,
+      "confirmedDays": [
+        24,
+        25,
+        29,
+        30,
+        33,
+        34,
+        35,
+        45,
+        59
+      ],
+      "confirmed": [
+        {
+          "loopDay": 24,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 25,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 29,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 30,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 33,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 34,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 35,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": false,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 45,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        },
+        {
+          "loopDay": 59,
+          "class": "away-continuation",
+          "story": "NO-ATTEMPT",
+          "signals": [],
+          "blockedCrossing": true,
+          "eveningOutcome": "policy-no-record"
+        }
+      ],
+      "failedReturn": 0,
+      "noAttempt": 9,
+      "unclassified": 0,
+      "blockedCrossingNights": 4,
+      "unconfirmed": [
+        {
+          "loopDay": 46,
+          "class": "away-continuation",
+          "kind": "haven-following",
+          "nextMorningAtHaven": true,
+          "vesselChanged": true,
+          "thisVessel": "thabo_maseko",
+          "nextVessel": "yuki_mori"
+        },
+        {
+          "loopDay": 60,
+          "class": "away-continuation",
+          "kind": "end-of-run",
+          "nextMorningAtHaven": null,
+          "vesselChanged": false,
+          "thisVessel": "mateo_alvarez",
+          "nextVessel": null
+        }
+      ],
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 1,
+      "unconfirmedEndOfRun": 1
+    }
+  ]
+}
