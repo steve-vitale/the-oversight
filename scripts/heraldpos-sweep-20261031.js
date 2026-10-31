@@ -31,6 +31,7 @@ const FD = require(path.join(REPO, 'scripts', 'policies', 'fullseat-diag'));
 const HI = require(path.join(REPO, 'scripts', 'herald-instrument-20261030'));
 const MD = require(path.join(REPO, 'scripts', 'policies', 'muster-diag'));
 const HP = require(path.join(REPO, 'scripts', 'heraldpos-instrument-20261031'));
+const HPA = require(path.join(REPO, 'scripts', 'heraldpos-analyze-20261031'));
 
 for (const k of ['FEASTSCALE_R13', 'TRIBFLOOR', 'WINPURSUIT', 'WINDEFER', 'SEATDRIVE', 'FULLSEAT', 'HERALD', 'MUSTER', 'HERALDPOS']) {
   if (process.env[k] !== '1') { console.error(`SWEEP STOP: ${k}=1 is required (substrate/instrument).`); process.exit(2); }
@@ -129,7 +130,7 @@ async function oneRun(seed) {
   try { deaths = ((result.samples || {}).deaths || []).slice(); } catch (e) {}
 
   const out = {
-    seed, policyId: 'leadfeast', instrument: 'herald-v1+muster-diag',
+    seed, policyId: 'leadfeast', instrument: 'herald-v1+muster-diag+heraldpos-v1',
     substrate: 'withFullseatDiag(withSeatDrive(withWinDefer(TF leadfeast))), FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FULLSEAT=1 + HERALD=1 + MUSTER=1 + HERALDPOS=1',
     anchorCommit: ANCHOR,
     maxWave, wave4: maxWave >= 4 ? 1 : 0, wave5: maxWave >= 5 ? 1 : 0,
@@ -155,7 +156,46 @@ async function oneRun(seed) {
   const dir = path.join(EVID, 'leadfeast');
   fs.mkdirSync(dir, { recursive: true });
   const fp = path.join(dir, `s${seed}.json`);
-  fs.writeFileSync(fp, JSON.stringify(out, null, 1) + '\n');
+  // EPERM-FLAP WRITE RETRY (2026-10-31, this arm): the first pilot
+  // attempt lost 4/4 per-seed JSONs to the container write flap
+  // (write(2) EPERM after file creation -> 0-byte files; probe
+  // confirmed the flap widened beyond evidence/ to /tmp and the
+  // worktree, flapping second-to-second). The retry runs AFTER the
+  // seed's runDays completes, so it cannot perturb any trajectory;
+  // it only decides whether this seed's JSON lands. A failed write
+  // leaves NO partial file (0-byte files are deleted) so a later
+  // check can never mistake a flap artifact for data.
+  const payload = JSON.stringify(out, null, 1) + '\n';
+  // WRITE_RETRIES env (default 90): during a sustained EPERM flap a
+  // fast-fail run (WRITE_RETRIES=3) plus the stdout summary below
+  // preserves the verdict data without burning 3 min/seed on retries
+  // that cannot succeed. The summary is computed by the pure analyzer
+  // over the in-memory per-seed object — never a second sim.
+  const writeRetries = parseInt(process.env.WRITE_RETRIES || '90', 10) || 90;
+  let wrote = false, lastErr = null;
+  for (let attempt = 0; attempt < writeRetries && !wrote; attempt++) {
+    try {
+      fs.writeFileSync(fp, payload);
+      if (fs.statSync(fp).size === payload.length) wrote = true;
+      else throw new Error('short write: ' + fs.statSync(fp).size + ' of ' + payload.length);
+    } catch (e) {
+      lastErr = e;
+      try { fs.unlinkSync(fp); } catch (e2) {}
+      if (attempt < writeRetries - 1) { try { execSync('sleep 2'); } catch (e3) {} }
+    }
+  }
+  if (!wrote) {
+    // FLAP SUMMARY FALLBACK: the per-seed JSON is lost to the flap,
+    // but the verdict data is not — print the pure-analyzer summary
+    // (placement, movement, proximity, wall fields, trajectory hashes)
+    // to stdout, which the harness pipe carries even while file
+    // writes fail. The corpus itself must be re-run after the flap
+    // clears for the persisted record; the summary is labelled as
+    // stdout-only in the evidence, never presented as a file.
+    try { console.log('SUMMARY ' + JSON.stringify(HPA.analyzeSeed(out))); } catch (eSum) {}
+    try { console.log('HASHES ' + JSON.stringify({ seed: seed, hashes: out.hashes })); } catch (eH) {}
+    throw new Error('per-seed JSON write failed after ' + writeRetries + ' attempts: ' + String((lastErr && lastErr.message) || lastErr));
+  }
   return out;
 }
 
