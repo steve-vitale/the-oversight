@@ -1,0 +1,4725 @@
+{
+  "corpusDir": "evidence/2026-10-31/sim-stashfetch-a-corpus-confirm",
+  "cell": "nighttravel-wc1-ww1-sf1",
+  "n": 12,
+  "seeds": {
+    "15508": {
+      "seed": 15508,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_8hw3hg6",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "snare_wire",
+        "hunting_spear",
+        "bark_armor"
+      ],
+      "spawnInv": [
+        "trail_compass"
+      ],
+      "spawnEq": [
+        "knife_roll",
+        "oath_ring",
+        "bus_schedule",
+        "wedding_ring"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "hunting_spear",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "hunting_spear"
+        ],
+        "channels": {
+          "wrapItem": "hunting_spear",
+          "teleItem": "hunting_spear",
+          "lineItems": [
+            "hunting_spear"
+          ],
+          "gained": [
+            "hunting_spear"
+          ],
+          "shrunk": [
+            "hunting_spear"
+          ]
+        },
+        "spawnStash": [
+          "snare_wire",
+          "hunting_spear",
+          "bark_armor"
+        ],
+        "day2Stash": [
+          "snare_wire"
+        ],
+        "spawnInv": [
+          "trail_compass"
+        ],
+        "eveInv": [
+          "trail_compass",
+          "hunting_spear",
+          "bark_armor"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "hunting_spear",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_8hw3hg6",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "snare_wire",
+                "hunting_spear",
+                "bark_armor"
+              ],
+              "inv": [
+                "trail_compass"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "knife_roll",
+                "oath_ring",
+                "bus_schedule",
+                "wedding_ring"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "hunting_spear",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Hunting spear at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Bark armor at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "bark_armor",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "bark_armor"
+        ],
+        "channels": {
+          "wrapItem": "bark_armor",
+          "teleItem": "bark_armor",
+          "lineItems": [
+            "bark_armor"
+          ],
+          "gained": [
+            "bark_armor"
+          ],
+          "shrunk": [
+            "bark_armor"
+          ]
+        },
+        "spawnStash": [
+          "snare_wire",
+          "hunting_spear",
+          "bark_armor"
+        ],
+        "day2Stash": [
+          "snare_wire"
+        ],
+        "spawnInv": [
+          "trail_compass"
+        ],
+        "eveInv": [
+          "trail_compass",
+          "hunting_spear",
+          "bark_armor"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "bark_armor",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_8hw3hg6",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "snare_wire",
+                "bark_armor"
+              ],
+              "inv": [
+                "trail_compass",
+                "hunting_spear"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "knife_roll",
+                "oath_ring",
+                "bus_schedule",
+                "wedding_ring"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "bark_armor",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Hunting spear at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Bark armor at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "hunting_spear",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire",
+              "hunting_spear",
+              "bark_armor"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "bark_armor",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire",
+              "bark_armor"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 30
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 30
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 30
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 30
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "hunting_spear",
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15509": {
+      "seed": 15509,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_lz39v5r",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "multitool",
+        "crude_bow",
+        "denim_jacket"
+      ],
+      "spawnInv": [
+        "lucky_coin"
+      ],
+      "spawnEq": [
+        "carpenters_square",
+        "buskers_harmonica",
+        "dog_tags",
+        "whetstone"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crude_bow",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crude_bow"
+        ],
+        "channels": {
+          "wrapItem": "crude_bow",
+          "teleItem": "crude_bow",
+          "lineItems": [
+            "crude_bow"
+          ],
+          "gained": [
+            "crude_bow"
+          ],
+          "shrunk": [
+            "crude_bow"
+          ]
+        },
+        "spawnStash": [
+          "multitool",
+          "crude_bow",
+          "denim_jacket"
+        ],
+        "day2Stash": [
+          "multitool"
+        ],
+        "spawnInv": [
+          "lucky_coin"
+        ],
+        "eveInv": [
+          "lucky_coin",
+          "crude_bow",
+          "denim_jacket"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crude_bow",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_lz39v5r",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "multitool",
+                "crude_bow",
+                "denim_jacket"
+              ],
+              "inv": [
+                "lucky_coin"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "carpenters_square",
+                "buskers_harmonica",
+                "dog_tags",
+                "whetstone"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crude_bow",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Denim Jacket at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "denim_jacket",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "denim_jacket"
+        ],
+        "channels": {
+          "wrapItem": "denim_jacket",
+          "teleItem": "denim_jacket",
+          "lineItems": [
+            "denim_jacket"
+          ],
+          "gained": [
+            "denim_jacket"
+          ],
+          "shrunk": [
+            "denim_jacket"
+          ]
+        },
+        "spawnStash": [
+          "multitool",
+          "crude_bow",
+          "denim_jacket"
+        ],
+        "day2Stash": [
+          "multitool"
+        ],
+        "spawnInv": [
+          "lucky_coin"
+        ],
+        "eveInv": [
+          "lucky_coin",
+          "crude_bow",
+          "denim_jacket"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "denim_jacket",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_lz39v5r",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "multitool",
+                "denim_jacket"
+              ],
+              "inv": [
+                "lucky_coin",
+                "crude_bow"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "carpenters_square",
+                "buskers_harmonica",
+                "dog_tags",
+                "whetstone"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "denim_jacket",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Denim Jacket at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crude_bow",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool",
+              "crude_bow",
+              "denim_jacket"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "denim_jacket",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool",
+              "denim_jacket"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "multitool"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15510": {
+      "seed": 15510,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_pvena05",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "fishing_line",
+        "crowbar",
+        "rain_poncho"
+      ],
+      "spawnInv": [
+        "home_key"
+      ],
+      "spawnEq": [
+        "carpenters_square",
+        "lucky_coin",
+        "knife_roll",
+        "photo_album"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crowbar",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crowbar"
+        ],
+        "channels": {
+          "wrapItem": "crowbar",
+          "teleItem": "crowbar",
+          "lineItems": [
+            "crowbar"
+          ],
+          "gained": [
+            "crowbar"
+          ],
+          "shrunk": [
+            "crowbar"
+          ]
+        },
+        "spawnStash": [
+          "fishing_line",
+          "crowbar",
+          "rain_poncho"
+        ],
+        "day2Stash": [
+          "fishing_line"
+        ],
+        "spawnInv": [
+          "home_key"
+        ],
+        "eveInv": [
+          "home_key",
+          "crowbar",
+          "rain_poncho"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crowbar",
+              "slot": "melee"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_pvena05",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "fishing_line",
+                "crowbar",
+                "rain_poncho"
+              ],
+              "inv": [
+                "home_key"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "carpenters_square",
+                "lucky_coin",
+                "knife_roll",
+                "photo_album"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crowbar",
+              "via": "own_stash",
+              "slot": "melee"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crowbar at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Rain poncho at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "rain_poncho",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "rain_poncho"
+        ],
+        "channels": {
+          "wrapItem": "rain_poncho",
+          "teleItem": "rain_poncho",
+          "lineItems": [
+            "rain_poncho"
+          ],
+          "gained": [
+            "rain_poncho"
+          ],
+          "shrunk": [
+            "rain_poncho"
+          ]
+        },
+        "spawnStash": [
+          "fishing_line",
+          "crowbar",
+          "rain_poncho"
+        ],
+        "day2Stash": [
+          "fishing_line"
+        ],
+        "spawnInv": [
+          "home_key"
+        ],
+        "eveInv": [
+          "home_key",
+          "crowbar",
+          "rain_poncho"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "rain_poncho",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_pvena05",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "fishing_line",
+                "rain_poncho"
+              ],
+              "inv": [
+                "home_key",
+                "crowbar"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "carpenters_square",
+                "lucky_coin",
+                "knife_roll",
+                "photo_album"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "rain_poncho",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crowbar at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Rain poncho at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crowbar",
+            "slot": "melee"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line",
+              "crowbar",
+              "rain_poncho"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "rain_poncho",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line",
+              "rain_poncho"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "fishing_line"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15511": {
+      "seed": 15511,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_zluh2h8",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "decoy_rattle",
+        "crossbow",
+        "investigators_coat"
+      ],
+      "spawnInv": [
+        "trail_compass"
+      ],
+      "spawnEq": [
+        "dead_phone",
+        "seed_packet",
+        "mixtape",
+        "dispatchers_headset"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crossbow",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crossbow"
+        ],
+        "channels": {
+          "wrapItem": "crossbow",
+          "teleItem": "crossbow",
+          "lineItems": [
+            "crossbow"
+          ],
+          "gained": [
+            "crossbow"
+          ],
+          "shrunk": [
+            "crossbow"
+          ]
+        },
+        "spawnStash": [
+          "decoy_rattle",
+          "crossbow",
+          "investigators_coat"
+        ],
+        "day2Stash": [
+          "decoy_rattle"
+        ],
+        "spawnInv": [
+          "trail_compass"
+        ],
+        "eveInv": [
+          "trail_compass",
+          "crossbow",
+          "investigators_coat"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crossbow",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_zluh2h8",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "decoy_rattle",
+                "crossbow",
+                "investigators_coat"
+              ],
+              "inv": [
+                "trail_compass"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "dead_phone",
+                "seed_packet",
+                "mixtape",
+                "dispatchers_headset"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crossbow",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crossbow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Investigator's Coat at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "investigators_coat",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "investigators_coat"
+        ],
+        "channels": {
+          "wrapItem": "investigators_coat",
+          "teleItem": "investigators_coat",
+          "lineItems": [
+            "investigators_coat"
+          ],
+          "gained": [
+            "investigators_coat"
+          ],
+          "shrunk": [
+            "investigators_coat"
+          ]
+        },
+        "spawnStash": [
+          "decoy_rattle",
+          "crossbow",
+          "investigators_coat"
+        ],
+        "day2Stash": [
+          "decoy_rattle"
+        ],
+        "spawnInv": [
+          "trail_compass"
+        ],
+        "eveInv": [
+          "trail_compass",
+          "crossbow",
+          "investigators_coat"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "investigators_coat",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_zluh2h8",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "decoy_rattle",
+                "investigators_coat"
+              ],
+              "inv": [
+                "trail_compass",
+                "crossbow"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "dead_phone",
+                "seed_packet",
+                "mixtape",
+                "dispatchers_headset"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "investigators_coat",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crossbow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Investigator's Coat at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crossbow",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle",
+              "crossbow",
+              "investigators_coat"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "investigators_coat",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle",
+              "investigators_coat"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "decoy_rattle"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15512": {
+      "seed": 15512,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_mhrnwh6",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "snare_wire",
+        "crude_bow",
+        "bark_armor"
+      ],
+      "spawnInv": [
+        "locket"
+      ],
+      "spawnEq": [
+        "reading_glasses",
+        "trail_compass",
+        "search_locket",
+        "winter_coat_button"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crude_bow",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crude_bow"
+        ],
+        "channels": {
+          "wrapItem": "crude_bow",
+          "teleItem": "crude_bow",
+          "lineItems": [
+            "crude_bow"
+          ],
+          "gained": [
+            "crude_bow"
+          ],
+          "shrunk": [
+            "crude_bow"
+          ]
+        },
+        "spawnStash": [
+          "snare_wire",
+          "crude_bow",
+          "bark_armor"
+        ],
+        "day2Stash": [
+          "snare_wire"
+        ],
+        "spawnInv": [
+          "locket"
+        ],
+        "eveInv": [
+          "locket",
+          "wood",
+          "crude_bow",
+          "bark_armor"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crude_bow",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_mhrnwh6",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "snare_wire",
+                "crude_bow",
+                "bark_armor"
+              ],
+              "inv": [
+                "locket",
+                "wood"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "reading_glasses",
+                "trail_compass",
+                "search_locket",
+                "winter_coat_button"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crude_bow",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Bark armor at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "bark_armor",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "bark_armor"
+        ],
+        "channels": {
+          "wrapItem": "bark_armor",
+          "teleItem": "bark_armor",
+          "lineItems": [
+            "bark_armor"
+          ],
+          "gained": [
+            "bark_armor"
+          ],
+          "shrunk": [
+            "bark_armor"
+          ]
+        },
+        "spawnStash": [
+          "snare_wire",
+          "crude_bow",
+          "bark_armor"
+        ],
+        "day2Stash": [
+          "snare_wire"
+        ],
+        "spawnInv": [
+          "locket"
+        ],
+        "eveInv": [
+          "locket",
+          "wood",
+          "crude_bow",
+          "bark_armor"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "bark_armor",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_mhrnwh6",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "snare_wire",
+                "bark_armor"
+              ],
+              "inv": [
+                "locket",
+                "wood",
+                "crude_bow"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "reading_glasses",
+                "trail_compass",
+                "search_locket",
+                "winter_coat_button"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "bark_armor",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Bark armor at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crude_bow",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire",
+              "crude_bow",
+              "bark_armor"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "bark_armor",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire",
+              "bark_armor"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "snare_wire"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15513": {
+      "seed": 15513,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_04ax3n6",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "hiking_backpack",
+        "crude_bow",
+        "work_gloves"
+      ],
+      "spawnInv": [
+        "dispatchers_headset"
+      ],
+      "spawnEq": [
+        "bus_schedule",
+        "hoodie",
+        "knife_roll",
+        "photo_album"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crude_bow",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crude_bow"
+        ],
+        "channels": {
+          "wrapItem": "crude_bow",
+          "teleItem": "crude_bow",
+          "lineItems": [
+            "crude_bow"
+          ],
+          "gained": [
+            "crude_bow"
+          ],
+          "shrunk": [
+            "crude_bow"
+          ]
+        },
+        "spawnStash": [
+          "hiking_backpack",
+          "crude_bow",
+          "work_gloves"
+        ],
+        "day2Stash": [
+          "hiking_backpack"
+        ],
+        "spawnInv": [
+          "dispatchers_headset"
+        ],
+        "eveInv": [
+          "dispatchers_headset",
+          "crude_bow",
+          "work_gloves"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crude_bow",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_04ax3n6",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "hiking_backpack",
+                "crude_bow",
+                "work_gloves"
+              ],
+              "inv": [
+                "dispatchers_headset"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "bus_schedule",
+                "hoodie",
+                "knife_roll",
+                "photo_album"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crude_bow",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Work Gloves at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "work_gloves",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "work_gloves"
+        ],
+        "channels": {
+          "wrapItem": "work_gloves",
+          "teleItem": "work_gloves",
+          "lineItems": [
+            "work_gloves"
+          ],
+          "gained": [
+            "work_gloves"
+          ],
+          "shrunk": [
+            "work_gloves"
+          ]
+        },
+        "spawnStash": [
+          "hiking_backpack",
+          "crude_bow",
+          "work_gloves"
+        ],
+        "day2Stash": [
+          "hiking_backpack"
+        ],
+        "spawnInv": [
+          "dispatchers_headset"
+        ],
+        "eveInv": [
+          "dispatchers_headset",
+          "crude_bow",
+          "work_gloves"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "work_gloves",
+              "slot": "hands"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_04ax3n6",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "hiking_backpack",
+                "work_gloves"
+              ],
+              "inv": [
+                "dispatchers_headset",
+                "crude_bow"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "bus_schedule",
+                "hoodie",
+                "knife_roll",
+                "photo_album"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "work_gloves",
+              "via": "own_stash",
+              "slot": "hands"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Work Gloves at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crude_bow",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack",
+              "crude_bow",
+              "work_gloves"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "work_gloves",
+            "slot": "hands"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack",
+              "work_gloves"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "hiking_backpack"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15514": {
+      "seed": 15514,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_rd0mg8s",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "grandfathers_knife",
+        "fire_hardened_spear",
+        "flannel_shirt"
+      ],
+      "spawnInv": [
+        "rope_50ft"
+      ],
+      "spawnEq": [
+        "photo_album",
+        "field_suture_kit",
+        "knife_roll",
+        "daughters_drawing"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "fire_hardened_spear",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "fire_hardened_spear"
+        ],
+        "channels": {
+          "wrapItem": "fire_hardened_spear",
+          "teleItem": "fire_hardened_spear",
+          "lineItems": [
+            "fire_hardened_spear"
+          ],
+          "gained": [
+            "fire_hardened_spear"
+          ],
+          "shrunk": [
+            "fire_hardened_spear"
+          ]
+        },
+        "spawnStash": [
+          "grandfathers_knife",
+          "fire_hardened_spear",
+          "flannel_shirt"
+        ],
+        "day2Stash": [
+          "grandfathers_knife"
+        ],
+        "spawnInv": [
+          "rope_50ft"
+        ],
+        "eveInv": [
+          "rope_50ft",
+          "fire_hardened_spear",
+          "flannel_shirt"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "fire_hardened_spear",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_rd0mg8s",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "grandfathers_knife",
+                "fire_hardened_spear",
+                "flannel_shirt"
+              ],
+              "inv": [
+                "rope_50ft"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "photo_album",
+                "field_suture_kit",
+                "knife_roll",
+                "daughters_drawing"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "fire_hardened_spear",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Fire-hardened spear at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Flannel Shirt at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "flannel_shirt",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "flannel_shirt"
+        ],
+        "channels": {
+          "wrapItem": "flannel_shirt",
+          "teleItem": "flannel_shirt",
+          "lineItems": [
+            "flannel_shirt"
+          ],
+          "gained": [
+            "flannel_shirt"
+          ],
+          "shrunk": [
+            "flannel_shirt"
+          ]
+        },
+        "spawnStash": [
+          "grandfathers_knife",
+          "fire_hardened_spear",
+          "flannel_shirt"
+        ],
+        "day2Stash": [
+          "grandfathers_knife"
+        ],
+        "spawnInv": [
+          "rope_50ft"
+        ],
+        "eveInv": [
+          "rope_50ft",
+          "fire_hardened_spear",
+          "flannel_shirt"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "flannel_shirt",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_rd0mg8s",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "grandfathers_knife",
+                "flannel_shirt"
+              ],
+              "inv": [
+                "rope_50ft",
+                "fire_hardened_spear"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "photo_album",
+                "field_suture_kit",
+                "knife_roll",
+                "daughters_drawing"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "flannel_shirt",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Fire-hardened spear at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Flannel Shirt at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "fire_hardened_spear",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife",
+              "fire_hardened_spear",
+              "flannel_shirt"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "flannel_shirt",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife",
+              "flannel_shirt"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 15
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 15
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 15
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 15
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "grandfathers_knife"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": "fire_hardened_spear",
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15515": {
+      "seed": 15515,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_zedb6ym",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "anchors_locket",
+        "stone_knife",
+        "padded_cloth"
+      ],
+      "spawnInv": [
+        "home_key"
+      ],
+      "spawnEq": [
+        "winter_coat_button",
+        "dispatchers_headset",
+        "trail_compass",
+        "mothers_ring"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "stone_knife",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "stone_knife"
+        ],
+        "channels": {
+          "wrapItem": "stone_knife",
+          "teleItem": "stone_knife",
+          "lineItems": [
+            "stone_knife"
+          ],
+          "gained": [
+            "stone_knife"
+          ],
+          "shrunk": [
+            "stone_knife"
+          ]
+        },
+        "spawnStash": [
+          "anchors_locket",
+          "stone_knife",
+          "padded_cloth"
+        ],
+        "day2Stash": [
+          "anchors_locket"
+        ],
+        "spawnInv": [
+          "home_key"
+        ],
+        "eveInv": [
+          "home_key",
+          "stone_knife",
+          "padded_cloth"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "stone_knife",
+              "slot": "melee"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_zedb6ym",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "anchors_locket",
+                "stone_knife",
+                "padded_cloth"
+              ],
+              "inv": [
+                "home_key"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "winter_coat_button",
+                "dispatchers_headset",
+                "trail_compass",
+                "mothers_ring"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "stone_knife",
+              "via": "own_stash",
+              "slot": "melee"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Stone knife at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Padded cloth wraps at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "padded_cloth",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "padded_cloth"
+        ],
+        "channels": {
+          "wrapItem": "padded_cloth",
+          "teleItem": "padded_cloth",
+          "lineItems": [
+            "padded_cloth"
+          ],
+          "gained": [
+            "padded_cloth"
+          ],
+          "shrunk": [
+            "padded_cloth"
+          ]
+        },
+        "spawnStash": [
+          "anchors_locket",
+          "stone_knife",
+          "padded_cloth"
+        ],
+        "day2Stash": [
+          "anchors_locket"
+        ],
+        "spawnInv": [
+          "home_key"
+        ],
+        "eveInv": [
+          "home_key",
+          "stone_knife",
+          "padded_cloth"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "padded_cloth",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_zedb6ym",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "anchors_locket",
+                "padded_cloth"
+              ],
+              "inv": [
+                "home_key",
+                "stone_knife"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "winter_coat_button",
+                "dispatchers_headset",
+                "trail_compass",
+                "mothers_ring"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "padded_cloth",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Stone knife at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Padded cloth wraps at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "stone_knife",
+            "slot": "melee"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket",
+              "stone_knife",
+              "padded_cloth"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "padded_cloth",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket",
+              "padded_cloth"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "stone_knife",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15516": {
+      "seed": 15516,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_b9xf8le",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "lighter",
+        "sling",
+        "flannel_shirt"
+      ],
+      "spawnInv": [
+        "search_locket"
+      ],
+      "spawnEq": [
+        "photo_album",
+        "wedding_ring",
+        "carpenters_square",
+        "dispatchers_headset"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "sling",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "sling"
+        ],
+        "channels": {
+          "wrapItem": "sling",
+          "teleItem": "sling",
+          "lineItems": [
+            "sling"
+          ],
+          "gained": [
+            "sling"
+          ],
+          "shrunk": [
+            "sling"
+          ]
+        },
+        "spawnStash": [
+          "lighter",
+          "sling",
+          "flannel_shirt"
+        ],
+        "day2Stash": [
+          "lighter"
+        ],
+        "spawnInv": [
+          "search_locket"
+        ],
+        "eveInv": [
+          "search_locket",
+          "sling",
+          "flannel_shirt"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "sling",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_b9xf8le",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "lighter",
+                "sling",
+                "flannel_shirt"
+              ],
+              "inv": [
+                "search_locket"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "photo_album",
+                "wedding_ring",
+                "carpenters_square",
+                "dispatchers_headset"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "sling",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Sling at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Flannel Shirt at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "flannel_shirt",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "flannel_shirt"
+        ],
+        "channels": {
+          "wrapItem": "flannel_shirt",
+          "teleItem": "flannel_shirt",
+          "lineItems": [
+            "flannel_shirt"
+          ],
+          "gained": [
+            "flannel_shirt"
+          ],
+          "shrunk": [
+            "flannel_shirt"
+          ]
+        },
+        "spawnStash": [
+          "lighter",
+          "sling",
+          "flannel_shirt"
+        ],
+        "day2Stash": [
+          "lighter"
+        ],
+        "spawnInv": [
+          "search_locket"
+        ],
+        "eveInv": [
+          "search_locket",
+          "sling",
+          "flannel_shirt"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "flannel_shirt",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_b9xf8le",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "lighter",
+                "flannel_shirt"
+              ],
+              "inv": [
+                "search_locket",
+                "sling"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "photo_album",
+                "wedding_ring",
+                "carpenters_square",
+                "dispatchers_headset"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "flannel_shirt",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Sling at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Flannel Shirt at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "sling",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter",
+              "sling",
+              "flannel_shirt"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "flannel_shirt",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter",
+              "flannel_shirt"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "lighter"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15517": {
+      "seed": 15517,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_gum9f6q",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "nowhere_idol",
+        "crowbar",
+        "work_gloves"
+      ],
+      "spawnInv": [
+        "search_locket"
+      ],
+      "spawnEq": [
+        "dispatchers_headset",
+        "photo_album",
+        "daughters_drawing",
+        "rope_50ft"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crowbar",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crowbar"
+        ],
+        "channels": {
+          "wrapItem": "crowbar",
+          "teleItem": "crowbar",
+          "lineItems": [
+            "crowbar"
+          ],
+          "gained": [
+            "crowbar"
+          ],
+          "shrunk": [
+            "crowbar"
+          ]
+        },
+        "spawnStash": [
+          "nowhere_idol",
+          "crowbar",
+          "work_gloves"
+        ],
+        "day2Stash": [
+          "nowhere_idol"
+        ],
+        "spawnInv": [
+          "search_locket"
+        ],
+        "eveInv": [
+          "search_locket",
+          "crowbar",
+          "work_gloves"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crowbar",
+              "slot": "melee"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_gum9f6q",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "nowhere_idol",
+                "crowbar",
+                "work_gloves"
+              ],
+              "inv": [
+                "search_locket"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "dispatchers_headset",
+                "photo_album",
+                "daughters_drawing",
+                "rope_50ft"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crowbar",
+              "via": "own_stash",
+              "slot": "melee"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crowbar at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Work Gloves at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "work_gloves",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "work_gloves"
+        ],
+        "channels": {
+          "wrapItem": "work_gloves",
+          "teleItem": "work_gloves",
+          "lineItems": [
+            "work_gloves"
+          ],
+          "gained": [
+            "work_gloves"
+          ],
+          "shrunk": [
+            "work_gloves"
+          ]
+        },
+        "spawnStash": [
+          "nowhere_idol",
+          "crowbar",
+          "work_gloves"
+        ],
+        "day2Stash": [
+          "nowhere_idol"
+        ],
+        "spawnInv": [
+          "search_locket"
+        ],
+        "eveInv": [
+          "search_locket",
+          "crowbar",
+          "work_gloves"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "work_gloves",
+              "slot": "hands"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_gum9f6q",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "nowhere_idol",
+                "work_gloves"
+              ],
+              "inv": [
+                "search_locket",
+                "crowbar"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "dispatchers_headset",
+                "photo_album",
+                "daughters_drawing",
+                "rope_50ft"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "work_gloves",
+              "via": "own_stash",
+              "slot": "hands"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crowbar at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Work Gloves at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crowbar",
+            "slot": "melee"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol",
+              "crowbar",
+              "work_gloves"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "work_gloves",
+            "slot": "hands"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol",
+              "work_gloves"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "nowhere_idol"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15518": {
+      "seed": 15518,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_momx3lu",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "anchors_locket",
+        "crowbar",
+        "denim_jacket"
+      ],
+      "spawnInv": [
+        "mixtape"
+      ],
+      "spawnEq": [
+        "dog_tags",
+        "knife_roll",
+        "home_key",
+        "buskers_harmonica"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crowbar",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crowbar"
+        ],
+        "channels": {
+          "wrapItem": "crowbar",
+          "teleItem": "crowbar",
+          "lineItems": [
+            "crowbar"
+          ],
+          "gained": [
+            "crowbar"
+          ],
+          "shrunk": [
+            "crowbar"
+          ]
+        },
+        "spawnStash": [
+          "anchors_locket",
+          "crowbar",
+          "denim_jacket"
+        ],
+        "day2Stash": [
+          "anchors_locket"
+        ],
+        "spawnInv": [
+          "mixtape"
+        ],
+        "eveInv": [
+          "mixtape",
+          "crowbar",
+          "denim_jacket"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crowbar",
+              "slot": "melee"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_momx3lu",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "anchors_locket",
+                "crowbar",
+                "denim_jacket"
+              ],
+              "inv": [
+                "mixtape"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "dog_tags",
+                "knife_roll",
+                "home_key",
+                "buskers_harmonica"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crowbar",
+              "via": "own_stash",
+              "slot": "melee"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crowbar at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Denim Jacket at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "denim_jacket",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "denim_jacket"
+        ],
+        "channels": {
+          "wrapItem": "denim_jacket",
+          "teleItem": "denim_jacket",
+          "lineItems": [
+            "denim_jacket"
+          ],
+          "gained": [
+            "denim_jacket"
+          ],
+          "shrunk": [
+            "denim_jacket"
+          ]
+        },
+        "spawnStash": [
+          "anchors_locket",
+          "crowbar",
+          "denim_jacket"
+        ],
+        "day2Stash": [
+          "anchors_locket"
+        ],
+        "spawnInv": [
+          "mixtape"
+        ],
+        "eveInv": [
+          "mixtape",
+          "crowbar",
+          "denim_jacket"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "denim_jacket",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_momx3lu",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "anchors_locket",
+                "denim_jacket"
+              ],
+              "inv": [
+                "mixtape",
+                "crowbar"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "dog_tags",
+                "knife_roll",
+                "home_key",
+                "buskers_harmonica"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "denim_jacket",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crowbar at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Denim Jacket at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crowbar",
+            "slot": "melee"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket",
+              "crowbar",
+              "denim_jacket"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "denim_jacket",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket",
+              "denim_jacket"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 12,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "anchors_locket"
+            ],
+            "eqMelee": "crowbar",
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    },
+    "15519": {
+      "seed": 15519,
+      "cell": "nighttravel-wc1-ww1-sf1",
+      "policy": "nighttravel",
+      "woodcarry": "1",
+      "woodwarm": "1",
+      "strandfix": "1",
+      "vesselId": "gen_1ad0ax0",
+      "recorderErrs": 0,
+      "complete": true,
+      "daysAlive": 5,
+      "endReason": "survived",
+      "spawnStash": [
+        "binoculars",
+        "crude_bow",
+        "rain_shell"
+      ],
+      "spawnInv": [
+        "dispatchers_headset"
+      ],
+      "spawnEq": [
+        "reading_glasses",
+        "tin_cup",
+        "buskers_harmonica",
+        "locket"
+      ],
+      "weaponFetch": {
+        "indicator": "FETCH",
+        "item": "crude_bow",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "crude_bow"
+        ],
+        "channels": {
+          "wrapItem": "crude_bow",
+          "teleItem": "crude_bow",
+          "lineItems": [
+            "crude_bow"
+          ],
+          "gained": [
+            "crude_bow"
+          ],
+          "shrunk": [
+            "crude_bow"
+          ]
+        },
+        "spawnStash": [
+          "binoculars",
+          "crude_bow",
+          "rain_shell"
+        ],
+        "day2Stash": [
+          "binoculars"
+        ],
+        "spawnInv": [
+          "dispatchers_headset"
+        ],
+        "eveInv": [
+          "dispatchers_headset",
+          "crude_bow",
+          "rain_shell"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "crude_bow",
+              "slot": "ranged"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_1ad0ax0",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "binoculars",
+                "crude_bow",
+                "rain_shell"
+              ],
+              "inv": [
+                "dispatchers_headset"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "reading_glasses",
+                "tin_cup",
+                "buskers_harmonica",
+                "locket"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_stash_fetch",
+            "data": {
+              "item": "crude_bow",
+              "via": "own_stash",
+              "slot": "ranged"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Rain Shell at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "armorFetch": {
+        "indicator": "FETCH",
+        "item": "rain_shell",
+        "detail": "all-five-channels",
+        "spawnCandidates": [
+          "rain_shell"
+        ],
+        "channels": {
+          "wrapItem": "rain_shell",
+          "teleItem": "rain_shell",
+          "lineItems": [
+            "rain_shell"
+          ],
+          "gained": [
+            "rain_shell"
+          ],
+          "shrunk": [
+            "rain_shell"
+          ]
+        },
+        "spawnStash": [
+          "binoculars",
+          "crude_bow",
+          "rain_shell"
+        ],
+        "day2Stash": [
+          "binoculars"
+        ],
+        "spawnInv": [
+          "dispatchers_headset"
+        ],
+        "eveInv": [
+          "dispatchers_headset",
+          "crude_bow",
+          "rain_shell"
+        ],
+        "wrapCallsDay1": [
+          {
+            "result": {
+              "item": "rain_shell",
+              "slot": "torso"
+            },
+            "before": {
+              "over": false,
+              "scholarDay": 1,
+              "dayFlag": null,
+              "villagerId": "gen_1ad0ax0",
+              "atHaven": true,
+              "personAlive": true,
+              "stash": [
+                "binoculars",
+                "rain_shell"
+              ],
+              "inv": [
+                "dispatchers_headset",
+                "crude_bow"
+              ],
+              "eqMelee": null,
+              "eqMeleeBonus": 0,
+              "eqRanged": null,
+              "eqRangedBonus": 0,
+              "eqIds": [
+                "reading_glasses",
+                "tin_cup",
+                "buskers_harmonica",
+                "locket"
+              ]
+            }
+          }
+        ],
+        "teleDay1": [
+          {
+            "loopDay": 1,
+            "gameDay": 1,
+            "event": "vessel_armor_fetch",
+            "data": {
+              "item": "rain_shell",
+              "via": "own_stash",
+              "slot": "torso"
+            }
+          }
+        ],
+        "linesDay1": [
+          "You remember the Crude bow at your space in the haven and fetch it — it rides in your pack now.",
+          "You remember the Rain Shell at your space in the haven and fetch it — it rides in your pack now."
+        ]
+      },
+      "fetchCalls": [
+        {
+          "loopDay": 1,
+          "method": "vesselStashFetch",
+          "result": {
+            "item": "crude_bow",
+            "slot": "ranged"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars",
+              "crude_bow",
+              "rain_shell"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 1,
+          "method": "vesselArmorFetch",
+          "result": {
+            "item": "rain_shell",
+            "slot": "torso"
+          },
+          "before": {
+            "over": false,
+            "dayFlag": null,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars",
+              "rain_shell"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 2,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 3,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 4,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselStashFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        },
+        {
+          "loopDay": 5,
+          "method": "vesselArmorFetch",
+          "result": null,
+          "before": {
+            "over": false,
+            "dayFlag": 1,
+            "atHaven": true,
+            "personAlive": true,
+            "stash": [
+              "binoculars"
+            ],
+            "eqMelee": null,
+            "eqMeleeBonus": 0,
+            "eqRanged": null,
+            "eqRangedBonus": 0
+          }
+        }
+      ]
+    }
+  },
+  "summary": {
+    "complete": 12,
+    "recorderErrsTotal": 0,
+    "weaponFetch": 12,
+    "weaponNoFetch": 0,
+    "weaponInvalid": 0,
+    "armorFetch": 12,
+    "armorNoFetch": 0,
+    "armorInvalid": 0
+  }
+}
