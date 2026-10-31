@@ -491,6 +491,14 @@
         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
         allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
+        // TWOBLOW (sim-twoblow-a, 2026-10-31): the committed-finish
+        // window's audit fields. committedFinish/ committedRounds are
+        // set at the in-round break check; twoblowLastTwo/twoblowSum
+        // track the lead's last two proven strikes live; the commit-*
+        // fields snapshot the gate inputs at the moment it fires, so
+        // a reader can verify the gate without re-deriving it.
+        committedFinish: false, committedRounds: 0, twoblowLastTwo: null, twoblowSum: null,
+        twoblowCommitMhp: null, twoblowCommitVhpFrac: null, twoblowCommitSum: null,
         // PARTY SIZE (sim-partyfinish-a, 2026-10-28): the mustered party
         // (leader + opts.allies) for honest kill narration — a party kill
         // must never read as a solo kill (fieldFightSummary used to say
@@ -1062,9 +1070,16 @@
         ffFired('tripwire');
         rec.log.push(vName + ' had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)');
       }
+      // TWOBLOW (sim-twoblow-a, 2026-10-31): the lead's last two
+      // proven strikes this fight (vd > 0, lead-strike else-branch
+      // only — volley, ambush opening, shoulder-check collision and
+      // ally strikes never enter), plus this round's struck flag.
+      var twoblowLast = [];
+      var vStruckThisRound = false;
       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
         abRoundTaken = 0;
+        vStruckThisRound = false;
         // ABILITY — HAYMAKER (throw_haymaker): every 3rd round the villager
         // winds up — the strike below lands double, but the windup leaves
         // them open (the monster's hits land +2 this round). The telegraph
@@ -1776,6 +1791,18 @@
               try { (rec.actionKinds || (rec.actionKinds = [])).push('strike'); } catch (e) {}
               rec.strikesThrown = (rec.strikesThrown | 0) + 1;
               if (gpF) { var _gpLogN4 = rec.log.length; try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } gpTag(_gpLogN4); }
+              // TWOBLOW (sim-twoblow-a, 2026-10-31): a proven blow is
+              // vd > 0 after every multiplier, as actually landed.
+              // A 0-damage swing (mirage miss, editor cut) proves
+              // nothing and neither enters the window nor counts as
+              // this round's strike for gate 5.
+              if (vd > 0) {
+                twoblowLast.push(vd);
+                if (twoblowLast.length > 2) twoblowLast.shift();
+                vStruckThisRound = true;
+                rec.twoblowLastTwo = twoblowLast.slice();
+                rec.twoblowSum = twoblowLast.length === 2 ? twoblowLast[0] + twoblowLast[1] : null;
+              }
               lead.hp -= vd; rec.mDealt += vd;
               if (lead.hp <= 0) lead.alive = false;
               rec.log.push('R' + round + ': ' + vName + ' strikes for ' + vd + abNote + ' (' + Math.max(0, lead.hp) + ' left)');
@@ -1825,6 +1852,17 @@
         }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
+        // TWOBLOW COMPANION (sim-twoblow-a, 2026-10-31; retained from
+        // fieldfinish2): a committed fighter holds to 40%, not to
+        // the 5% winning floor. Additional, never a replacement for
+        // normal morale; the lead-fell kill below still takes
+        // precedence (members[0].hp > 0 guard), and sealed arenas
+        // are untouched.
+        if (rec.committedFinish && !opts.noFlee && members[0].hp > 0 && (vHp / vHpMax) < 0.40) {
+          rec.outcome = 'vFlee'; rec.fleeHpFrac = vHp / vHpMax;
+          rec.log.push(vName + ' is past holding even a finished fight — they run while running still works. (Committed-finish floor)');
+          break;
+        }
         // COUNTER EXECUTION (2026-10-13): the dance is a per-round flag — a
         // mistimed dance (monster went first) must not leak into a later
         // downbeat. Clear after the round's phases all ran.
@@ -2007,6 +2045,26 @@
         // skipped while the rope holds. It can still fight, and when the
         // rope's rounds run out the break check decides as before.
         if (abBoundN <= 0 && (members[0].hp / members[0].maxHp) < mBreak) {
+          // TWOBLOW (sim-twoblow-a, 2026-10-31): the committed finish
+          // within two blows. The break line, the 60% fighter-HP gate,
+          // the engage intent, the struck-this-round gate and the
+          // sealed-arena exclusion are all UNCHANGED from fieldfinish2;
+          // only gate 2 changes, from one proven blow to the last two
+          // proven blows — and only for wave-3+ beasts, so wave-1/2
+          // fights are byte-identical to baseline. When it fires the
+          // round loop continues and the kill, if it comes, comes
+          // from real strikes in the following rounds, never from a
+          // table roll.
+          var _tbGate = wave >= 3 && members[0].hp > 0 && twoblowLast.length === 2 &&
+            (twoblowLast[0] + twoblowLast[1]) >= members[0].hp &&
+            (vHp / vHpMax) >= 0.60 && rec.intent === 'engage' && vStruckThisRound && !opts.noFlee;
+          if (_tbGate) {
+            rec.committedFinish = true; rec.committedRounds = (rec.committedRounds | 0) + 1;
+            rec.twoblowLastTwo = twoblowLast.slice(); rec.twoblowSum = twoblowLast[0] + twoblowLast[1];
+            rec.twoblowCommitMhp = members[0].hp; rec.twoblowCommitVhpFrac = vHp / vHpMax;
+            rec.twoblowCommitSum = twoblowLast[0] + twoblowLast[1];
+            rec.log.push(vName + ' holds — ' + mPhrase + ' is two blows from falling, and they are still strong enough to finish it. (Committed finish, two-blow)');
+          } else {
           rec.outcome = 'mFlee';
           // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
           // only — a drive-off after a shout previously ended with no
@@ -2021,6 +2079,7 @@
           // (they have their line above) nor on allyFromStart fights.
           else if (!opts.allyFromStart) rec.log.push(mPhraseCap + ' breaks — wounded past its line, it turns and runs.');
           break;
+          } // else (TWOBLOW gate did not fire): the flight stands.
         }
         // ABILITY bookkeeping: the debt of this round settles the next.
         abLastRoundTaken = abRoundTaken;
