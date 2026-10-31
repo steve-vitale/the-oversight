@@ -1,0 +1,50 @@
+
+ORGANIC DEATH d18: Jorge -> Everett, topTrust=[{"id":"Sizwe","t":52},{"id":"Klaus","t":48},{"id":"Everett","t":38},{"id":"Nina","t":38}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=14 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=79 succTrustPost=38
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d18 (organic (phase A)): Jorge -> Everett | passed=true lin=true mo=true trust=38 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Klaus (refused=false)
+  CONVO d+3 with Sizwe (refused=false)
+  BOND-CONVO d+3 with Dylan (depth=1 v=34 refused=false)
+  CONVO d+7 with Sizwe (refused=false)
+  CONVO d+7 with Klaus (refused=false)
+  CONVO d+14 with Dylan (refused=false)
+  CONVO d+14 with Klaus (refused=false)
+
+SECOND-KILL d+20: Everett -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Everett -> Sizwe passed=true lin=true mo=true
+  CONVO d+30 with Dylan (refused=false)
+  CONVO d+30 with Klaus (refused=false)
+
+THIRD-KILL d+20 since second death: Sizwe -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Sizwe -> Varfolomiy passed=true lin=true mo=true
+  CONVO d+45 with Mia (refused=false)
+  CONVO d+45 with Dylan (refused=false)
+
+FOURTH-KILL d+10 since third death: Varfolomiy -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Varfolomiy -> Mia passed=true lin=true mo=true
+  CONVO d+53 with Dylan (refused=false)
+  CONVO d+53 with Klaus (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Mia -> ? (scripted r83 chain probe)
+FIFTH DEATH d+10 since fourth death: Mia -> Klaus passed=true lin=true mo=true
+  CONVO d+64 with Grace (refused=false)
+  CONVO d+64 with Dylan (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=0 (eligible=0) echo=1 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":64,"offerLines":64,"codexPlantsDelta":27,"codexSkillsDelta":21,"codexAbilitiesDelta":22,"xpDelta":100,"any":true} pantry 22300->55864
+TRUST-DIALS: office 38->97 (+59, climb) | villageMean 30.4->79.6 (+49.2, climb) | ge60 0->6 | movers>=5: [{"id":"Dylan","from":21,"to":90,"delta":69},{"id":"Grace","from":21,"to":90,"delta":69},{"id":"Yuki","from":21,"to":82,"delta":61},{"id":"Meera","from":31,"to":90,"delta":59},{"id":"Elijah","from":33,"to":90,"delta":57},{"id":"Nina","from":38,"to":90,"delta":52}]
+DEED-LEDGER: calls=45 summary={"teachPlant":{"calls":16,"ok":16,"deltaSum":0,"deltaN":16,"positive":0,"meanDelta":0},"donateToPantry":{"calls":29,"ok":29,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=88 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+70) t2=true(deedCalls=45) trustVerdict={"readable":true,"officeMantle":38,"officeLast":97,"officeDelta":59,"officeClass":"climb","villageMantle":30.4,"villageLast":79.6,"villageDelta":49.2,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":6,"movers":[{"id":"Dylan","from":21,"to":90,"delta":69},{"id":"Grace","from":21,"to":90,"delta":69},{"id":"Yuki","from":21,"to":82,"delta":61},{"id":"Meera","from":31,"to":90,"delta":59},{"id":"Elijah","from":33,"to":90,"delta":57},{"id":"Nina","from":38,"to":90,"delta":52}]}
+E6/CALLCHECK: e6={"callMoves":21,"withCensus":21,"chainHandoffs":4,"trustMoves":17} callCheck={"dailyMoveDays":23,"callMoveDays":20,"convoWindowDays":2,"convoCoveredDays":[],"missingDays":[22,26],"ok":false} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":17,"soloOffice":4,"soloOfficeDeltas":[1,1,1,2],"soloBearerDeltaExact":[1,1,1,2],"singleMoverBearer":1,"singleMoverOther":6,"eventClass":{"event-only":0,"deed-only":5,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":23}

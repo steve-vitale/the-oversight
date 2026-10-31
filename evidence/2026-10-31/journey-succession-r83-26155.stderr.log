@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Denise","t":90},{"id":"Kelsey","t":90},{"id":"Ethel","t":89},{"id":"Caleb","t":89}], roster=11
+INH readable=true scripted=true deadItems=10 distinct=9 transferred=0 vanished=1 keptPlants=23 inheritedPlants=4 keptSkills=5 inheritedSkills=11 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","green_whisper","green_thumb"] post=["iron_stomach","green_whisper","green_thumb"]
+DEATH d41 (a hushwolf, scripted): Marta -> Kelsey | passed=true lin=true mo=true trust=62 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=1 of 9 distinct dead-bearer items
+  CONVO d+3 with Denise (refused=false)
+  CONVO d+3 with Joaquín (refused=false)
+  BOND-CONVO d+3 with Adaeze (depth=2 v=64 refused=false)
+  CONVO d+7 with Denise (refused=false)
+  CONVO d+7 with Ethel (refused=false)
+  CONVO d+14 with Denise (refused=false)
+  CONVO d+14 with Joaquín (refused=false)
+  BOND-CONVO d+14 with Adaeze (depth=2 v=64 refused=false)
+  CONVO d+30 with Denise (refused=false)
+  CONVO d+30 with Joaquín (refused=false)
+  CONVO d+45 with Denise (refused=false)
+  CONVO d+45 with Joaquín (refused=false)
+  CONVO d+53 with Denise (refused=false)
+  CONVO d+53 with Ethel (refused=false)
+  CONVO d+64 with Denise (refused=false)
+  CONVO d+64 with Ethel (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=6) echo=0 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":56,"offerLines":90,"codexPlantsDelta":37,"codexSkillsDelta":8,"codexAbilitiesDelta":8,"xpDelta":61,"any":true} pantry 7828->32138
+TRUST-DIALS: office 62->94 (+32, climb) | villageMean 73.4->80.8 (+7.4, climb) | ge60 6->8 | movers>=5: [{"id":"Aroha","from":58,"to":90,"delta":32},{"id":"Adaeze","from":59,"to":90,"delta":31},{"id":"Ava","from":2,"to":9,"delta":7},{"id":"Aria","from":85,"to":90,"delta":5},{"id":"Ruby","from":85,"to":90,"delta":5},{"id":"Ethel","from":94,"to":87,"delta":-7},{"id":"Denise","from":99,"to":91,"delta":-8}]
+DEED-LEDGER: calls=37 summary={"donateToPantry":{"calls":37,"ok":37,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=110 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=37) trustVerdict={"readable":true,"officeMantle":62,"officeLast":94,"officeDelta":32,"officeClass":"climb","villageMantle":73.4,"villageLast":80.8,"villageDelta":7.4,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":8,"movers":[{"id":"Aroha","from":58,"to":90,"delta":32},{"id":"Adaeze","from":59,"to":90,"delta":31},{"id":"Ava","from":2,"to":9,"delta":7},{"id":"Aria","from":85,"to":90,"delta":5},{"id":"Ruby","from":85,"to":90,"delta":5},{"id":"Ethel","from":94,"to":87,"delta":-7},{"id":"Denise","from":99,"to":91,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":0,"trustMoves":18} callCheck={"dailyMoveDays":18,"callMoveDays":16,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":18,"soloOffice":11,"soloOfficeDeltas":[1,2,2,1,2,2,1,1,1,1,1],"soloBearerDeltaExact":[1,2,2,1,2,2,1,1,1,1,1],"singleMoverBearer":2,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":5,"both":13,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":18}
