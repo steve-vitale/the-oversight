@@ -1,0 +1,1543 @@
+// probe-endgame-r75-20261031.js — journey-endgame r75 (lane B, 2026-10-31).
+//
+// LEG QUESTION (r68's carried items, on r68's substrate exactly):
+//  1. FULL SEAT LAST MILE — r68's 88931 met every bar except one distinct
+//     wave-5 type faced (w5:1/2). Does ANY fresh waves seed face a second
+//     distinct wave-5 type, or earn the FULL seat?
+//  2. PEAK LIVING VETERANS, replication — r68 met the bar once (88931: 3).
+//     Does a second block peak >=2 anywhere?
+//  3. RELEASE-DAY SNAPSHOT — r68 proved it non-vacuously (88931 d70).
+//     Does any fresh seed reach uw=5 with its snapshot?
+//  4. NOWALKIN REPLICATION, fifth block (tally 2-2 across r60/r61/r65/r68).
+//     Tally only — no lever fate on small counts.
+//  5. RELAY-BRANCH TALLY (dark 3, grey 1, light 1 across r59-r65 + r68).
+//  6. FEAST-CHAIN CENSUS + DUSK TEST + SURGE MODES (r71 NEW instruments,
+//     read-only — see below).
+//  7. DECLINE vs SILENT NO-SHOW — r68 showed decline-then-announce
+//     (88935). Does any fresh seed decline and return, or decline and
+//     never return?
+//  8. GHOST LINES — does the post-death companion return recur?
+//
+// R71 NEW INSTRUMENTS (read-only, no policy change):
+//  - DUSK CENSUS: scholar haven-presence sampled at every dusk upkeep
+//    call (dayPart===2, once per day, before the original upkeep runs).
+//    Tests r68's hypothesis that the deed-hunt road keeps the scholar
+//    out at dusk, starving waves-road feasts (1-3 vs control 18).
+//  - SURGE-SPEND LOG: every feastBuff.use spend recorded (sampled at
+//    dusk upkeep AND post-daily, deduped by day+kind) — kind 'combat'
+//    vs 'healing', and banker prog.feastSurgeBy ('p' vs 'v:<id>').
+//    Resolves r68's unnamed-mode disjunction per seed.
+//  - GHOST-LINE SCAN: every "is back with X" SAY line captured with its
+//    day, classified at summary against the death roster.
+//
+// R72 NEW INSTRUMENTS (read-only, no policy change):
+//  - GRANT LOG: Game.grantFeastBuff wrapped (pass-through, same this/args/
+//    return). Each call records day, reactorOnline, progFeastSurge,
+//    feast.surge, quality, granted/refreshed, and the refusal class
+//    ('reactor' / 'devotion-gate' / other). Tests r71's open question:
+//    why 88941's 8 scale feasts went 0 armed while devotion read armed
+//    on 136 post-daily samples (fusion-reactor ceiling vs devotion
+//    timing at grant time). The wrapper records pre-call arming, so a
+//    grant refused by the ceiling is distinguishable from an unarmed one.
+//  - STANDING TRACE: daily pure-read sample (villageStanding breakdown
+//    + waveUnlockReady(4/5) + standingCfg once). The gated total is
+//    DERIVED in the analyzer from the standing.js formula (plenty cap,
+//    defer4/defer5 holds, peak floor) — villageStandingTotal() is NOT
+//    called daily because it fires release/hold beats (side effects).
+//    Tests the 199-peak attractor: a gated 199 with raw>=200 and a
+//    named defer5/cap hold is the mechanism, not a coincidence.
+// R74 NEW INSTRUMENT (read-only, no policy change):
+//  - IDENTITY-AWARE GHOST CLASSIFICATION: a back-with line is a CONFIRMED
+//    ghost only when a same-first-name death predates the line AND no
+//    same-first-name death falls on/after the line day AND no final-alive
+//    roster person shares the first name. The old first-name rule is kept
+//    as firstNameHit and reported alongside. Conservative direction:
+//    a post-line joiner sharing the first name makes a true ghost read
+//    unconfirmed (false negatives, not false positives).
+// R75 NEW INSTRUMENT (read-only, no policy change):
+//  - LAST-MILE TRACE: the daily standing-trace hook also pushes a
+//    waveTrace entry (wavesOf w1..w5 + deedGateReady crisesN/contestsN,
+//    pure reads). At run end the record carries wavesFacedKeys (full
+//    wavesFaced mid->wave map) and crisisKeys (pg.crises keys).
+// R73 NEW INSTRUMENT (read-only, no policy change):
+//  - FEAST-HOLD DIAGNOSTIC: every dusk (pre-upkeep, same hook as the
+//    dusk census) samples the full scaleFeast gate state — atHaven,
+//    feastDay, armed devotion, reactor, ctx._fsLastFeastDay + cadence,
+//    7-day contribution replicated READ-ONLY from ctx histories (no
+//    mutation of ctx: gives-delta computed on a copy of _givesHist,
+//    tribute summed from a copy of _tribHist), and a feastPlan()
+//    snapshot (ok/why/have/cost/buffer/guests). hostFeast is wrapped
+//    pass-through and every call logged (day/ok/why). The analyzer
+//    classifies each dusk HELD/AWAY/ALREADY_FED_TODAY/PLAN_REFUSED/
+//    BUFFER_SHORT/CADENCE/CONTRIBUTION/UNEXPLAINED. feastPlan() draws
+//    on a pantry COPY (menu preview) and is read-only.
+//  - AUDIT CROSS-CHECK fields ride on the existing auditLine +
+//    satWaves + census (analyzer M21): audit w1-3/w4/w5 numbers vs
+//    satWaves, census fight count vs audit distinct-type count.
+//
+// THE INSTRUMENT (arm A): same fight-outcome census as r68. Arm B differs
+// by CAPABLE_NOWALKIN_W4=1 only (env-gated, default off).
+//
+// SUBSTRATE (7 seeds, 180d, death-aware): r68 exactly — capable +
+// deedhunt + vetcommit + greedy deferral (defaults MAXTIER 4 / LASTDAY
+// 145, NOT tuned) + armorydrive + fullseat-diag + vetguard on waves
+// seeds; forcedrift control clean. FULLSEAT=1, VETCOMMIT=1,
+// CAPABLE_GREEDY=1, ARMORYDRIVE=1, CAPABLE_VETGUARD=1 (waves only),
+// TELEMETRY_FULL=1, RELAYGREY=1. Seeds fresh 88981-88987 (verified unused
+// in prior endgame notes/probes). Arm A: 88981-88983 waves. Control:
+// 88984 forcedrift. Arm B: 88985-88987 wavesnw (waves + NOWALKIN_W4).
+//
+// BINDINGS (a miss is NO-GO, never re-scored mid-run):
+//  M1 GUARD, M2 CENSUS, M2c ENGINE COVERAGE, M2d COMMIT-GATE NAMED,
+//  M3 CONVERSION (tally), M3b-peak PEAK LIVING VETERAN >=1 seed peaks >=2,
+//  M4 WAVE-5/FULL, M4b CONJUNCTION (unlock AND announced; expected NO-GO,
+//  tally), M5 VOICING CANONICAL, M5b RELAY-BRANCH TABULATION, M6 GUARD
+//  NAMED, M7 PEOPLE, M8 EXIT CANON, M9 SUPPLY, M10 FULL-SEAT GAP,
+//  M11 STANDING PEAK, M12 READINESS-BAR TABLE, M13 RELEASE SNAPSHOT,
+//  M14 INVITE CLASSIFICATION. REG: r35 auditNamed, r37 satPenalty.
+//  PRIMARY gates on all except M3/M4b (tally/question metrics).
+//
+// Usage:
+//   FULLSEAT=1 VETCOMMIT=1 CAPABLE_GREEDY=1 ARMORYDRIVE=1 CAPABLE_VETGUARD=1 TELEMETRY_FULL=1 RELAYGREY=1 node scripts/probe-endgame-r75-20261031.js
+//   SMOKE=1 ...  # 1 seed x 120d (pipeline only)
+//   DET=1 ...    # instrument-on twice byte-identical (2 x 120d on SEEDS[0])
+//   FID=1 ...    # env unset: wrapped == pure capable+deedhunt (mini)
+//
+const fs = require('fs');
+const path = require('path');
+const DS = require('./policies/deed-seeking');
+const CAP = require('./policies/capable');
+const FSD = require('./policies/fullseat-diag');
+const RG = require('./policies/relaygrey');
+const VC = require('./policies/vetcommit');
+const AD = require('./policies/armorydrive');
+const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
+
+const MODE = process.env.DET === '1' ? 'det'
+  : process.env.FID === '1' ? 'fid'
+  : process.env.SMOKE === '1' ? 'smoke' : 'sweep';
+
+if (process.env.FULLSEAT !== '1' && process.env.FID !== '1') { console.error('SWEEP STOP: FULLSEAT=1 required (the diag layer). FID mode may unset it.'); process.exit(2); }
+if (process.env.VETCOMMIT !== '1' && process.env.FID !== '1') { console.error('SWEEP STOP: VETCOMMIT=1 required (the commit lever). FID mode may unset it.'); process.exit(2); }
+if (process.env.CAPABLE_GREEDY !== '1' && process.env.FID !== '1') { console.error('SWEEP STOP: CAPABLE_GREEDY=1 required (the deferral lever, waves seeds). FID mode may unset it.'); process.exit(2); }
+if (process.env.ARMORYDRIVE !== '1' && process.env.FID !== '1') { console.error('SWEEP STOP: ARMORYDRIVE=1 required (the armory lever, waves seeds). FID mode may unset it.'); process.exit(2); }
+if (process.env.CAPABLE_VETGUARD !== '1' && process.env.FID !== '1') { console.error('SWEEP STOP: CAPABLE_VETGUARD=1 required (the vetguard lever, waves seeds). FID mode may unset it.'); process.exit(2); }
+
+// RELAY OWNERSHIP (r43 fix — replaces the r41 process-wide default): the
+// ownership toggle is per-seed, set inside runSeed. Grey-owned plans
+// (grey/forcedrift/forcedrift-deep) keep CAPABLE_RELAYROAD=0 (one player,
+// one set of hands — the r40b lesson); base plans DELETE it so the capable
+// base runs its own natural relay road (r41's base seed accidentally ran
+// with the road OFF — process-wide default leaked onto the base plan).
+
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10))
+  : [88981, 88982, 88983, 88984, 88985, 88986, 88987]).filter(Number.isFinite);
+// seed plan: 88981-88983 waves (capable+deedhunt+vetcommit+greedy+armory + fullseat diag),
+// 88984 forcedrift (capable + relaygrey FORCEDRIFT=1 + fullseat diag, greedy OFF, armory OFF)
+const PLAN = { 88981: 'waves', 88982: 'waves', 88983: 'waves', 88984: 'forcedrift', 88985: 'wavesnw', 88986: 'wavesnw', 88987: 'wavesnw' };
+// r51 FIX (seed-order bug, found live): runSeed DELETES CAPABLE_GREEDY /
+// ARMORYDRIVE / CAPABLE_VETGUARD on forcedrift seeds, so a waves seed
+// AFTER a forcedrift seed failed its own env check (r49 never hit this:
+// its control was last). Snapshot the invoked env here and restore it at
+// each waves seed's start — the loud check still fires if the INVOCATION
+// lacked the vars; only cross-seed mutation is repaired.
+const ORIG_ENV = {
+  GREEDY: process.env.CAPABLE_GREEDY,
+  ARMORY: process.env.ARMORYDRIVE,
+  VETGUARD: process.env.CAPABLE_VETGUARD,
+};
+const planOf = (seed) => PLAN[seed] || 'grey';
+const DAYS = process.env.DAYS ? parseInt(process.env.DAYS, 10)
+  : (MODE === 'smoke' ? 120 : MODE === 'det' ? 120 : MODE === 'fid' ? 120 : 180);
+const EVID = path.join(__dirname, '..', 'evidence', '2026-10-31', 'perseed-endgame-r75');
+
+function writeFileRetry(fp, data) {
+  let last = null;
+  for (let i = 0; i < 15; i++) {
+    try { fs.writeFileSync(fp, data); return; }
+    catch (e) { last = e; if (e && e.code === 'EPERM') { const t = Date.now(); while (Date.now() - t < 4000) {} continue; } throw e; }
+  }
+  throw last;
+}
+
+function dayOf(G) { try { return ((G.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
+function wavesOf(G) {
+  try {
+    const d = (G.deedState ? G.deedState() : {}).wavesFaced || {};
+    const out = { w1: 0, w2: 0, w3: 0, w4: 0, w5: 0 };
+    for (const mid of Object.keys(d)) { const w = d[mid] | 0; if (w >= 1 && w <= 5) out['w' + w]++; }
+    return out;
+  } catch (e) { return {}; }
+}
+function aliveOf(G) {
+  try {
+    const ids = ((G.state || {}).village || {}).roster || [];
+    let n = 0;
+    for (const id of ids) { try { const p = G.getPerson ? G.getPerson(id) : null; if (p && !p.dead) n++; } catch (e) {} }
+    return n;
+  } catch (e) { return 0; }
+}
+function pantryOf(G) { try { return Math.round((((G.state || {}).village || {}).pantryKcal) || 0); } catch (e) { return 0; } }
+
+// censusOf — FIXED (journey-endgame r40; r39's caveat resolved, r40b
+// correction): formerOccupation is the canonical person field (not
+// occupation/role/job — p.occupation is always null; occupationId is the
+// identity-layer disguise, not the true occupation), village.npcAbilities[vid]
+// (not p.abilities), scholar.villagerId -> name (not scholar.name), dead
+// filter corrected.
+function censusOf(Game) {
+  try {
+    const v = (Game.state || {}).village || {};
+    const abilMap = v.npcAbilities || {};
+    const people = (v.roster || []).map(id => {
+      let p = null;
+      try { p = Game.getPerson ? Game.getPerson(id) : null; } catch (e) {}
+      const abil = (abilMap[id] && abilMap[id].length) || 0;
+      return {
+        id, name: (p && (p.name || p.displayName)) || String(id),
+        dead: !!(p && p.dead),
+        occupation: (p && p.formerOccupation) || null,
+        npcAbilities: abil,
+      };
+    });
+    let bearerName = null;
+    try {
+      const vid = ((Game.state || {}).scholar || {}).villagerId;
+      const bp = (vid && Game.getPerson) ? Game.getPerson(vid) : null;
+      bearerName = (bp && (bp.name || bp.displayName)) || vid || null;
+    } catch (e) {}
+    // r47: the fallen ledger alongside the living (r46 census-tool gap).
+    let fallen = [];
+    try {
+      const raw = v.fallen || v.dead || [];
+      const arr = Array.isArray(raw) ? raw : Object.values(raw);
+      fallen = arr.map(e => {
+        if (e && typeof e === 'object') {
+          const vid = e.vid || e.id || null;
+          let nm = e.name || null;
+          if (!nm && vid) { try { const pp = Game.getPerson ? Game.getPerson(vid) : null; nm = (pp && (pp.name || pp.displayName)) || null; } catch (e2) {} }
+          return { id: vid, name: nm, day: e.day != null ? e.day : (e.d != null ? e.d : null), cause: e.cause || e.how || null };
+        }
+        return { id: String(e) };
+      });
+    } catch (e2) { fallen = [{ error: String(e2 && e2.message) }]; }
+    return {
+      alive: people.filter(p => !p.dead).length,
+      dead: people.filter(p => p.dead).length,
+      people, fallen, pantryKcal: Math.round(v.pantryKcal || 0),
+      scale: (Game.scaleRank ? Game.scaleRank() : '?'),
+      mantle: bearerName,
+    };
+  } catch (e) { return { error: String(e && e.message) }; }
+}
+
+// capable+deedhunt (r45): the courtship-survival base with the wave-deed
+// hunt layered on — capable.daily (courtship, real fleeing, abilities,
+// feasts, its own relay road) runs first, then deed-seeking's patrol and
+// surge layers. Built fresh per seed (Object.assign copy, like the other
+// composed policies).
+function capableDeedHunt() {
+  const p = Object.assign({}, CAP.capable);
+  const oDaily = p.daily.bind(p);
+  p.id = 'capable-deedhunt';
+  p.desc = 'capable base (courtship, fleeing, abilities) + deed-seeking patrols/surge';
+  p.daily = (G, c) => { oDaily(G, c); DS.deedPatrol(G, c); DS.surgeUpkeep(G, c); };
+  return p;
+}
+
+async function runSeed(seed, days) {
+  const plan = planOf(seed);
+  // r45: only the forcedrift plan wraps the relaygrey layer (the canonical
+  // voicing control, on the capable substrate per r44 metric-review #4).
+  // waves plans are capable+deedhunt (courtship survival + wave-deed
+  // patrols) + the diag. The diag layer is pure-read (FULLSEAT=1);
+  // relaygrey's own daily is self-gating on RELAYGREY=1, so unset env on
+  // plans that don't wrap it is belt-and-suspenders.
+  // RELAY OWNERSHIP (r43 canonical): grey-owned plans keep
+  // CAPABLE_RELAYROAD=0 (one player, one set of hands — the r40b lesson);
+  // waves plans DELETE it so capable runs its own natural relay road.
+  const useGrey = plan === 'forcedrift';
+  const isNW = plan === 'wavesnw';
+  delete process.env.RELAYGREY_FORCEDRIFT;
+  // r49 GREEDY + ARMORY OWNERSHIP: waves seeds defer (greedy ON, defaults
+  // MAXTIER 4 / LASTDAY 145 as-shipped) AND arm the fighters (armory ON);
+  // the forcedrift control keeps greedy OFF and armory OFF so the voicing
+  // control stays r47-comparable. FID unsets both on both sides (greedy
+  // is part of capable, armory is a gated layer).
+  if (!useGrey && MODE !== 'fid') {
+    // Restore the invoked waves env (see ORIG_ENV above): a forcedrift
+    // seed earlier in this process deleted these; the check below must
+    // judge the invocation, not the previous seed's cleanup.
+    if (ORIG_ENV.GREEDY !== undefined) process.env.CAPABLE_GREEDY = ORIG_ENV.GREEDY;
+    if (ORIG_ENV.ARMORY !== undefined) process.env.ARMORYDRIVE = ORIG_ENV.ARMORY;
+    if (ORIG_ENV.VETGUARD !== undefined) process.env.CAPABLE_VETGUARD = ORIG_ENV.VETGUARD;
+    if (process.env.CAPABLE_GREEDY !== '1') { console.error('SWEEP STOP: CAPABLE_GREEDY=1 required for the waves plan.'); process.exit(2); }
+    if (process.env.ARMORYDRIVE !== '1') { console.error('SWEEP STOP: ARMORYDRIVE=1 required for the waves plan.'); process.exit(2); }
+    if (process.env.CAPABLE_VETGUARD !== '1') { console.error('SWEEP STOP: CAPABLE_VETGUARD=1 required for the waves plan.'); process.exit(2); }
+    if (isNW) process.env.CAPABLE_NOWALKIN_W4 = '1'; else delete process.env.CAPABLE_NOWALKIN_W4;
+  } else if (useGrey) { delete process.env.CAPABLE_GREEDY; delete process.env.ARMORYDRIVE; delete process.env.CAPABLE_VETGUARD; delete process.env.CAPABLE_NOWALKIN_W4; }
+  if (MODE === 'fid') { delete process.env.CAPABLE_GREEDY; delete process.env.ARMORYDRIVE; delete process.env.CAPABLE_VETGUARD; delete process.env.CAPABLE_NOWALKIN_W4; }
+  if (useGrey && MODE !== 'fid') {
+    if (process.env.RELAYGREY !== '1') { console.error('SWEEP STOP: RELAYGREY=1 required for the forcedrift plan.'); process.exit(2); }
+    process.env.RELAYGREY_FORCEDRIFT = '1';
+    process.env.CAPABLE_RELAYROAD = '0';
+  } else {
+    delete process.env.CAPABLE_RELAYROAD;
+  }
+  if (MODE === 'fid') { delete process.env.FULLSEAT; delete process.env.RELAYGREY; delete process.env.RELAYGREY_FORCEDRIFT; delete process.env.CAPABLE_RELAYROAD; delete process.env.CAPABLE_GREEDY; delete process.env.ARMORYDRIVE; delete process.env.CAPABLE_VETGUARD;; delete process.env.CAPABLE_NOWALKIN_W4; }
+  const capture = [];
+  let lastCap = null;
+  const cap = (line) => {
+    if (line == null) return;
+    const s = String(line).slice(0, 700);
+    if (s === lastCap) return;
+    lastCap = s;
+    capture.push(s);
+  };
+  let announceDay = null, satDay = null, satSeatKind = null, satWaves = null;
+  let satPenalty = null;
+  let maxTierSeen = 0;
+  let peakLivingVets = 0, peakLivingVetDay = null, peakLivingVetKillers = [];
+  let feastedDays = 0, armedDays = 0, surgeDay = null; // r68 feast-chain census
+  // r71 DUSK CENSUS + SURGE-SPEND LOG + GHOST SCAN (read-only).
+  const duskCensus = { days: [], atHaven: 0, away: 0, unknown: 0 };
+  const surgeSpends = [];
+  const surgeSpendDays = new Set();
+  const ghostLines = [];
+  const grantLog = []; // r72: grantFeastBuff calls (read-only wrapper)
+  const feastHoldLog = []; // r73: dusk scaleFeast-gate sample (read-only)
+  const hostLog = []; // r73: hostFeast calls (read-only wrapper)
+  const standingTrace = []; // r72: daily pure-read standing sample
+  const waveTrace = []; // r75: daily wavesOf + crisesN/contestsN (pure reads)
+  let standingCfg = null; // r72: standingCfg once per seed
+  const recordSurgeSpend = (G) => {
+    try {
+      const sch = ((G.state || {}).scholar || {});
+      const u = (sch.feastBuff || {}).use;
+      if (!u || u.day == null) return;
+      const key = u.day + ':' + (u.kind || '?');
+      if (surgeSpendDays.has(key)) return;
+      surgeSpendDays.add(key);
+      surgeSpends.push({ day: u.day, kind: u.kind || null, bonusHp: u.bonusHp | 0, by: ((sch.prog || {}).feastSurgeBy || null) });
+    } catch (e) { instrumentErrors++; }
+  };
+  // r73 FEAST-HOLD SAMPLE (read-only): replicates scaleFeast's gates from
+  // feastscale.js WITHOUT calling policy code or mutating ctx. Gives-delta
+  // is computed on a COPY of _givesHist with the same trim rule
+  // recentGives applies; tribute is summed from a copy of _tribHist.
+  // feastPlan() is a pure read (menu preview draws on a pantry copy).
+  const feastHoldSample = (G, c) => {
+    try {
+      const day = dayOf(G);
+      const sch = ((G.state || {}).scholar || {});
+      const vv = ((G.state || {}).village || {});
+      let at = null;
+      try { at = !!(G.playerAtHaven && G.playerAtHaven()); } catch (e2) { at = null; }
+      let reactor = null;
+      try { reactor = (typeof G.fusionReactorOnline === 'function') ? !!G.fusionReactorOnline() : null; } catch (e2) {}
+      const armed = !!((sch.prog || {}).feastSurge);
+      const armedForFeast = armed && !reactor;
+      const cadence = armedForFeast ? 7 : 14;
+      const lastFs = (c && c._fsLastFeastDay != null) ? c._fsLastFeastDay : null;
+      const cadenceBlocked = !!(lastFs && (day - lastFs) < cadence);
+      let contrib = { gives: 0, trib: 0, total: 0 };
+      try {
+        const me = G.villagerId;
+        const g = ((vv.gives || {})[me]) || 0;
+        const hist = (((c || {})._givesHist) || []).slice();
+        const last = hist[hist.length - 1];
+        if (!last || last.day !== day) hist.push({ day, g });
+        while (hist.length > 1 && hist[1].day <= day - 7) hist.shift();
+        while (hist.length > 8) hist.shift();
+        const gives = hist.length ? g - (hist[0].g || 0) : 0;
+        let trib = 0;
+        for (const e of (((c || {})._tribHist) || [])) if (e && e.day > day - 7) trib += (e.kcal || 0);
+        contrib = { gives, trib, total: gives + trib };
+      } catch (e2) {}
+      let plan = null;
+      try {
+        const pl = (typeof G.feastPlan === 'function') ? G.feastPlan() : null;
+        if (pl) plan = { ok: !!pl.ok, why: pl.why || null, have: pl.have | 0, cost: pl.cost | 0,
+          bufferOk: (pl.have | 0) >= (pl.cost | 0) * 1.5,
+          invitable: Array.isArray(pl.guests) ? pl.guests.filter(x => x.status !== 'hostile').length : null,
+          away: Array.isArray(pl.away) ? pl.away.length : null };
+      } catch (e2) { plan = null; }
+      feastHoldLog.push({ day, atHaven: at, feastDay: (sch.feastDay != null ? sch.feastDay : null),
+        armed, reactor, lastFs, cadence, cadenceBlocked, contrib,
+        plan, fsFeastsCum: (c && c.fsFeasts) | 0, feastsCum: (c && c.feasts) | 0 });
+    } catch (e) { instrumentErrors++; }
+  };
+  const feastedDaySet = new Set();
+  let releaseSnap = null; // r65: first day unlockedWave() hits 5 — rd5 + living vets, from the daily hook
+  let walkedPath = null, walkedBranch = null, won = false;
+  let instrumentErrors = 0;
+  const ctx = {};
+  const chooserCtx = {};   // the chooseTableOption interceptor's ctx (door/cockpit/final picks)
+  // relay state snapshots
+  let atSit = null;          // {lean, band, grounding, bond, held, verbs, communes}
+  let atDoorOffer = null;    // relay offered? (earned paths at door)
+  const weekly = [];
+  const relayTrace = [];   // r43: policy-neutral weekly relay snapshot (all plans)
+  let snapCursor = null;
+  let lastDailyCtx = null; // r43: runDays' daily ctx (cap bump fields live here)
+  let guardTrace = [];       // r49: pre-sit window decisions, one per window day
+  let windowEndGuard = null; // r49: decision on the sat day (or last window decision)
+  let announceCapIdx = null; // r49: capture index at the start of the announce day
+  let dayStartCapIdx = 0;    // r49: capture length at the start of today's wrapper call
+
+  const { Game } = await loadGame({ seed, mode: 'endgame-r40', fullTelemetry: true });
+  await setupGame(Game);
+  const oSay = Game.say.bind(Game);
+  Game.say = function (l) { try { cap(l); } catch (e) {} try { const m = /is back with ([A-Z][a-z]+)/.exec(String(l == null ? '' : l)); if (m) ghostLines.push({ day: dayOf(Game), companion: m[1], line: String(l).slice(0, 300) }); } catch (e2) {} return oSay.apply(this, arguments); };
+  // r72 GRANT LOG (read-only wrapper): pass-through on grantFeastBuff.
+  try {
+    const oGrant = Game.grantFeastBuff ? Game.grantFeastBuff.bind(Game) : null;
+    if (oGrant) Game.grantFeastBuff = function (feast) {
+      let pre = null;
+      try {
+        const sch = ((Game.state || {}).scholar || {});
+        pre = { reactor: (typeof Game.fusionReactorOnline === 'function') ? !!Game.fusionReactorOnline() : null,
+          progSurge: ((sch.prog || {}).feastSurge != null ? (sch.prog || {}).feastSurge : null),
+          feastSurge: (feast && feast.surge != null ? feast.surge : null),
+          quality: (feast && feast.quality != null ? feast.quality : null) };
+      } catch (e) {}
+      let r = null, threw = null;
+      try { r = oGrant.apply(this, arguments); } catch (e) { threw = e; }
+      try {
+        let whyClass = null;
+        if (r && !r.granted && typeof r.why === 'string') {
+          if (/reactor/.test(r.why)) whyClass = 'reactor';
+          else if (/devotion gate/.test(r.why)) whyClass = 'devotion-gate';
+          else whyClass = 'other-refusal';
+        }
+        grantLog.push({ day: dayOf(Game), pre, granted: !!(r && r.granted), refreshed: !!(r && r.refreshed),
+          mult: (r && r.mult != null ? r.mult : null), quality: (r && r.quality != null ? r.quality : null),
+          draw: (r && r.draw != null ? r.draw : null), whyClass });
+      } catch (e) { instrumentErrors++; }
+      if (threw) throw threw;
+      return r;
+    };
+  } catch (e) { instrumentErrors++; }
+  // r73 HOST LOG (read-only wrapper): pass-through on hostFeast.
+  try {
+    const oHost = Game.hostFeast ? Game.hostFeast.bind(Game) : null;
+    if (oHost) Game.hostFeast = function () {
+      let r = null, threw = null;
+      try { r = oHost.apply(this, arguments); } catch (e) { threw = e; }
+      try { hostLog.push({ day: dayOf(Game), ok: !!(r && r.ok), why: (r && r.why) || null }); } catch (e) { instrumentErrors++; }
+      if (threw) throw threw;
+      return r;
+    };
+  } catch (e) { instrumentErrors++; }
+  Game.sysSay = function (text) {
+    try {
+      if (!((Game.state || {}).systemArrived)) return;
+      const shown = String(text == null ? '' : text).replace(/^📺\s*/, '');
+      return Game.say(`📺 SYSTEM: "${shown}"`);
+    } catch (e) {}
+  };
+  // ---- r51 FIGHT-CAUSAL DEATH ATTRIBUTION (probe-local, read-only) ----
+  // Wraps registerDeath (corpses.js choke point: success returns the
+  // corpse object, the double-death guard returns null) AND tbVillagerFalls
+  // (the combat death path, cause 'combat') OUTSIDE the game's own load-time
+  // wrappers. Each wrapper records the death with the live tbfight object
+  // at call time, then passes through untouched (same this, same args,
+  // same return). A death whose fightRef matches a census fight's ref died
+  // IN that fight; anything else is day-window only. The serializable
+  // record and the object ref ride in parallel arrays (same order).
+  const deathRecords = [];
+  const deathFightRefs = [];
+  let deathWrapErrors = 0;
+  function recordDeath(channel, vid, name, cause) {
+    try {
+      let f = null; try { f = Game.tbfight || null; } catch (e) {}
+      let mons = [];
+      try {
+        if (f) mons = (f.fighters || []).filter(x => x && x.kind === 'monster').map(x => ({ id: x.monsterId || (x.mdef || {}).id || '?', wave: ((x.mdef || {}).wave) || 0 }));
+      } catch (e) {}
+      deathRecords.push({ channel, vid: vid != null ? String(vid) : null, name: name || null, cause: cause || null, day: dayOf(Game), fightLive: !!f, fightOver: f ? !!f.over : null, monsters: mons });
+      deathFightRefs.push(f);
+    } catch (e) { deathWrapErrors++; }
+  }
+  try {
+    const oReg = Game.registerDeath ? Game.registerDeath.bind(Game) : null;
+    if (oReg) Game.registerDeath = function (opts) {
+      let r = null, threw = null;
+      try { r = oReg.apply(this, arguments); } catch (e) { threw = e; }
+      try {
+        opts = opts || {};
+        if (r !== null && (opts.kind === 'person' || opts.kind === 'villager' || opts.villagerId)) {
+          recordDeath('registerDeath', opts.villagerId, opts.name, opts.cause);
+        }
+      } catch (e) { deathWrapErrors++; }
+      if (threw) throw threw;
+      return r;
+    };
+  } catch (e) { deathWrapErrors++; }
+  try {
+    const oFalls = Game.tbVillagerFalls ? Game.tbVillagerFalls.bind(Game) : null;
+    if (oFalls) Game.tbVillagerFalls = function (t) {
+      let before = false;
+      try { before = !!(((Game.state || {}).village || {}).roster || []).includes(t && t.villagerId); } catch (e) {}
+      let r = null, threw = null;
+      try { r = oFalls.apply(this, arguments); } catch (e) { threw = e; }
+      try {
+        let after = true;
+        try { after = !!(((Game.state || {}).village || {}).roster || []).includes(t && t.villagerId); } catch (e2) {}
+        // Only a real removal is a death: the guard's early return (vid
+        // already off the roster) records nothing.
+        if (before && !after && t && t.villagerId) recordDeath('tbVillagerFalls', t.villagerId, t.name || null, 'combat');
+      } catch (e) { deathWrapErrors++; }
+      if (threw) throw threw;
+      return r;
+    };
+  } catch (e) { deathWrapErrors++; }
+
+  if (useGrey) RG.installRelayGreyChooser(Game, chooserCtx);
+
+  // ---- r41 FINAL-LIVE-CHOICE instrument ----
+  // Record every tablePrompt frame (door/cockpit/final frames all route
+  // through tablePrompt) and every dispatched chooseTableOption id, so the
+  // final beat can be judged as played: options offered, choice dispatched,
+  // consequence voiced. The recorder wraps OUTSIDE the grey chooser (when
+  // installed), so it sees the final dispatched id.
+  const promptFrames = [];
+  const dispatched = [];
+  try {
+    const oPrompt = Game.tablePrompt.bind(Game);
+    Game.tablePrompt = function (promptHtml, options, frame) {
+      try {
+        promptFrames.push({
+          day: dayOf(Game),
+          frame: String(frame || ''),
+          options: (options || []).map(o => ({ id: String(o.id || ''), label: String(o.label || '').slice(0, 120) })),
+        });
+      } catch (e) {}
+      return oPrompt.apply(this, arguments);
+    };
+  } catch (e) { instrumentErrors++; }
+  let finalDispatchLine = null;
+  try {
+    const oChoose = Game.chooseTableOption.bind(Game);
+    Game.chooseTableOption = function (id) {
+      try {
+        const tc = ((Game.state || {}).scholar || {}).tableChoices || {};
+        const opts = (tc.options || []).map(o => String(o.id || ''));
+        const entry = { day: dayOf(Game), id: String(id), options: opts, line: capture.length };
+        dispatched.push(entry);
+        if (String(id).indexOf('final:') === 0) finalDispatchLine = entry;
+      } catch (e) {}
+      return oChoose.apply(this, arguments);
+    };
+  } catch (e) { instrumentErrors++; }
+
+  // fullseat-diag wraps OUTSIDE everything (its own compose rule: it sits
+  // outside tribfloor/windefer/seatdrive — here outside relaygrey too).
+  const withDiag = (inner, id, desc) => FSD.withFullseatDiag(inner, id, desc);
+  // r43 canonical control deployment: capable base + the grey road.
+  const base = useGrey ? RG.withRelayGrey(Object.assign({}, CAP.capable), 'capable+relaygrey', 'capable + the grey road')
+                       : AD.withArmoryDrive(VC.withVetCommit(capableDeedHunt(), 'capabledeedhunt+vetcommit', 'capable + deed-hunt + VETCOMMIT committed wave-4 fights'), 'capabledeedhunt+vetcommit+armorydrive', 'capable + deed-hunt + vetcommit + ARMORYDRIVE weapons in hands');
+  const policy = withDiag(
+    base,
+    useGrey ? 'capable+relaygrey+fullseatdiag' : (isNW ? 'capabledeedhunt+vetcommit+armorydrive+nowalkin+fullseatdiag' : 'capabledeedhunt+vetcommit+armorydrive+fullseatdiag'),
+    useGrey ? 'capable + forcedrift road + full-seat component recorder'
+            : 'capable + deed-hunt + vetcommit + armorydrive + full-seat component recorder');
+
+  // ---- r54 COMMIT-GATE SNAPSHOT (probe-local, read-only) ----
+  // vetcommit's commitLive gate, snapshotted per fight: opted in,
+  // unlockedWave == 4, veterans bar still short, scholar HP >= 50%.
+  // scholarHpPct is inlined (vetcommit does not export it) with the
+  // same formula. A snapshot names WHY a fight never committed; it
+  // never changes the turn.
+  function gateSnap(G) {
+    try {
+      const s = ((G.state || {}).scholar || {});
+      const maxHp = G.maxHealth ? G.maxHealth() : 100;
+      const hpPct = Math.round(((s.hp || s.health || 100) / Math.max(1, maxHp)) * 1000) / 1000;
+      return { vetcommitOn: VC.vetcommitOn(), uw: VC.unlockedWave(G), veteransShort: VC.veteransShort(G), hpPct, commitLive: VC.commitLive(G) };
+    } catch (e) { return { error: String(e && e.message) }; }
+  }
+
+  // ---- r51 FIGHT-OUTCOME CENSUS (probe-local, read-only) ----
+  // Wraps policy.fight: observes every fight turn, tracks the live
+  // tbfight by object identity, and closes each COMMITTED wave-4 fight
+  // (vetcommit's ctx._w5Commit set on that turn) with one primary
+  // outcome + flags. Never changes the turn: the inner fight's return
+  // value and exceptions pass through untouched. Non-committed wave-4
+  // fights are tallied as nonCommittedW4 (pending record, dropped at
+  // close), never counted as census fights.
+  let fightCensus = [];
+  let nonCommittedW4 = 0;
+  let censusErrors = 0;
+  let openFight = null;
+  let pendingNonCommit = null;
+  // r51 FAST-FIGHT TALLY (census blind-spot fix, proven by 88062): a fight
+  // that resolves inside a SINGLE policy.fight call is never opened by the
+  // census (the old code returned early on f.over) — 88062's in-window
+  // Suburb/Reunion fights left zero census trace despite '⚔' lines and
+  // 5 wave-4 facings. A just-ended over fight never seen before, with
+  // wave-4 monsters by DATA lookup (not mdef.wave, not hp>0 — the dead
+  // and fled have no live hp), is tallied here, separately from the
+  // multi-turn census, never merged into its outcome distribution.
+  // Causal deaths match by tbfight identity (the death wrappers record
+  // the live fight object), so fast fights DO carry named deaths; kills
+  // are day-granular (waveKillLog day + monster id) and flagged as such.
+  let fastW4 = [];
+  let fastNonCommittedW4 = 0;
+  let lastFastRef = null;
+  let capLenAtLastObserve = 0;
+  function dataWaveOf(G, mid) {
+    try {
+      const def = ((G.data || {}).monsters || []).find(d => d && d.id === mid);
+      return (def && def.wave) || 0;
+    } catch (e) { return 0; }
+  }
+  function fastMonsOf(G) {
+    try {
+      const f = G.tbfight;
+      if (!f) return [];
+      return (f.fighters || []).filter(x => x && x.kind === 'monster' && dataWaveOf(G, x.monsterId || (x.mdef || {}).id || x.id) >= 4);
+    } catch (e) { return []; }
+  }
+  function killCountW4(G) { try { return ((G.state || {}).waveKillLog || []).filter(e => (e.w | 0) >= 4).length; } catch (e) { return 0; } }
+  function aliveSetOf(G) {
+    const s = new Set();
+    try {
+      for (const id of (((G.state || {}).village || {}).roster || [])) {
+        let p = null;
+        try { p = G.getPerson ? G.getPerson(id) : null; } catch (e2) {}
+        if (p && !p.dead) s.add(id);
+      }
+    } catch (e) {}
+    return s;
+  }
+  function snapFighters(G, f0) {
+    try {
+      const f = f0 || G.tbfight;
+      if (!f) return null;
+      const fs = f.fighters || [];
+      return {
+        result: f.result || null, over: !!f.over,
+        playerFled: !!fs.find(x => x.key === 'p' && x.fled),
+        villFled: !!fs.filter(x => (x.kind === 'villager' || x.kind === 'ally') && x.fled).length,
+        monFled: !!fs.filter(x => x.kind === 'monster' && x.fled).length,
+      };
+    } catch (e) { return null; }
+  }
+  function wave4Mons(G) {
+    try {
+      const f = G.tbfight;
+      if (!f) return [];
+      return (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && ((dataWaveOf(G, x.monsterId || (x.mdef || {}).id || x.id) || ((x.mdef || {}).wave) || 0) >= 4));
+    } catch (e) { return []; }
+  }
+  function closeFightRec(G, rec0, why) {
+    if (!rec0 || rec0.closed) return;
+    rec0.closed = true;
+    try { if (engineOpen.has(rec0.ref)) engineOpen.delete(rec0.ref); } catch (e) {}
+    try { closedEngineRefs.add(rec0.ref); } catch (e) {}
+    try {
+      const endKills = killCountW4(G);
+      const endAlive = aliveSetOf(G);
+      const died = [...rec0.startAlive].filter(id => !endAlive.has(id));
+      const slice = capture.slice(rec0.startCap);
+      const talkDown = slice.some(s => /They stand down|Walk In: the fight ends/.test(s));
+      const gotAway = slice.some(s => /It got away/.test(s));
+      const killFlag = endKills > rec0.startKills;
+      const dieFlag = died.length > 0;
+      const last = rec0.lastSnap || {};
+      let outcome = 'otherEnd';
+      if (killFlag) outcome = 'vKill';
+      else if (dieFlag) outcome = 'vDie';
+      else if (talkDown) outcome = 'talkDown';
+      else if (last.playerFled || last.villFled) outcome = 'vFlee';
+      else if (last.monFled || gotAway) outcome = 'mFlee';
+      // r51: fight-causal deaths = death records whose tbfight object IS
+      // this fight (identity, not day-window). Dedupe by vid: a death can
+      // ride both channels (registerDeath + tbVillagerFalls) for one body.
+      const causalByVid = {};
+      for (let i = 0; i < deathRecords.length; i++) {
+        if (deathFightRefs[i] === rec0.ref) {
+          const dr = deathRecords[i];
+          if (!causalByVid[dr.vid]) causalByVid[dr.vid] = dr;
+        }
+      }
+      const causalDeaths = Object.values(causalByVid);
+      const escapeKind = slice.some(x => /ESCAPED|BARRIER CROSSED|last streetlight|crash through to a new area/.test(x)) ? 'designed' : 'break';
+      const arenaMention = slice.some(x => /arena/i.test(x));
+      const deathCauses = [...new Set(causalDeaths.map(d => d.cause || '?'))];
+      fightCensus.push({
+        monsters: rec0.monsters, startDay: rec0.startDay, endDay: dayOf(G),
+        turns: rec0.turns, turnsObserved: !!rec0.turnsObserved, outcome, killFlag, dieFlag, talkDown, gotAway,
+        escapeKind, openDriver: rec0.openDriver || 'policy', source: rec0.source || 'policy',
+        committed: rec0.committed !== false, arenaMention, deathCauses,
+        gateAtOpen: rec0.gateAtOpen || null, gateAtFirstObserve: rec0.gateAtFirstObserve || null, ctxCommitAtFirstObserve: rec0.ctxCommitAtFirstObserve != null ? rec0.ctxCommitAtFirstObserve : null,
+        playerFled: !!last.playerFled, villFled: !!last.villFled,
+        monFled: !!last.monFled, result: last.result || null, closeWhy: why,
+        diedInFight: died, causalDeaths, causalFlag: causalDeaths.length > 0,
+      });
+    } catch (e) { censusErrors++; }
+  }
+  function closeFight(G, why) {
+    if (!openFight) return;
+    const rec0 = openFight;
+    openFight = null;
+    closeFightRec(G, rec0, why);
+  }
+  function closePending(G, why) {
+    if (!pendingNonCommit) return;
+    const p = pendingNonCommit;
+    pendingNonCommit = null;
+    closeFightRec(G, {
+      ref: p.ref, monsters: p.monsters || [], startDay: p.startDay, startCap: p.startCap,
+      startKills: p.startKills, startAlive: p.startAlive, turns: p.turns || 1,
+      turnsObserved: true, lastSnap: null, source: 'policy', openDriver: 'policy',
+      committed: false,
+      gateAtOpen: p.gateAtOpen || null, gateAtFirstObserve: p.gateAtFirstObserve || null, ctxCommitAtFirstObserve: p.ctxCommitAtFirstObserve != null ? p.ctxCommitAtFirstObserve : null,
+    }, why);
+  }
+  function censusObserve(G, c) {
+    const f = G.tbfight;
+    if (openFight && f === openFight.ref) {
+      const sn = snapFighters(G);
+      if (sn) openFight.lastSnap = sn;
+      openFight.turns++;
+      openFight.turnsObserved = true;
+      if (f.over) closeFight(G, 'over');
+      return;
+    }
+    if (openFight) closeFight(G, 'ref-change');
+    if (pendingNonCommit && f !== pendingNonCommit.ref) { closePending(G, 'ref-change'); }
+    // r51 FAST BRANCH: a just-ended over fight never opened above. Only
+    // when no open fight and no pending entry claims this ref (a pending
+    // fight that ended keeps its tally-at-next-fight path, never double).
+    if (f && f.over && f !== lastFastRef && !(pendingNonCommit && pendingNonCommit.ref === f) && !engineOpen.has(f) && !closedEngineRefs.has(f)) {
+      lastFastRef = f;
+      try {
+        const fm = fastMonsOf(G);
+        if (fm.length) {
+          const slice = capture.slice(capLenAtLastObserve);
+          const committed = !!(c && c._w5Commit === true);
+          const mids = fm.map(m => (m.monsterId || (m.mdef || {}).id || '?'));
+          const causalByVid = {};
+          for (let i = 0; i < deathRecords.length; i++) {
+            if (deathFightRefs[i] === f) {
+              const dr = deathRecords[i];
+              if (!causalByVid[dr.vid]) causalByVid[dr.vid] = dr;
+            }
+          }
+          let dayKills = [];
+          try {
+            dayKills = ((G.state || {}).waveKillLog || []).filter(e => e && e.d === dayOf(G) && mids.indexOf(e.mid) >= 0);
+          } catch (e2) {}
+          policyOnlyOpensW4++;
+          const fGotAway = slice.some(x => /It got away/.test(x));
+          const fEscaped = slice.some(x => /You escape\. The thicket/.test(x));
+          let fOutcome = 'otherEnd';
+          if (dayKills.length) fOutcome = 'vKill';
+          else if (Object.values(causalByVid).length) fOutcome = 'vDie';
+          else if (fGotAway) fOutcome = 'mFlee';
+          else if (fEscaped) fOutcome = 'vFlee';
+          fightCensus.push({
+            monsters: mids, startDay: dayOf(G), endDay: dayOf(G),
+            turns: 1, turnsObserved: true, outcome: fOutcome,
+            killFlag: dayKills.length > 0, dieFlag: Object.values(causalByVid).length > 0,
+            talkDown: slice.some(x => /They stand down|Walk In: the fight ends/.test(x)),
+            gotAway: fGotAway, escapeKind: (fEscaped || slice.some(x => /ESCAPED|BARRIER CROSSED|last streetlight|crash through/.test(x))) ? 'designed' : 'break',
+            openDriver: 'policy', source: 'policy-fast', committed,
+            arenaMention: slice.some(x => /arena/i.test(x)),
+            deathCauses: [...new Set(Object.values(causalByVid).map(d => d.cause || '?'))],
+            playerFled: false, villFled: false, monFled: fGotAway,
+            result: f.result || null, closeWhy: 'fast-single-call',
+            gateAtOpen: null, gateAtFirstObserve: gateSnap(G), ctxCommitAtFirstObserve: committed,
+            diedInFight: [], causalDeaths: Object.values(causalByVid),
+            causalFlag: Object.values(causalByVid).length > 0,
+            dayKills: dayKills.map(e => ({ mid: e.mid, by: e.by || null, via: e.via || null })),
+          });
+        }
+      } catch (e) { censusErrors++; }
+    }
+    capLenAtLastObserve = capture.length;
+    if (!f || f.over) return;
+    const mons = wave4Mons(G);
+    if (!mons.length) return;
+    const committed = !!(c && c._w5Commit === true);
+    const types = mons.map(m => (m.monsterId || (m.mdef || {}).id || '?'));
+    // r52 ENGINE ADOPTION: a fight the startCombat wrapper already opened
+    // is the SAME fight by object identity — adopt it (engine start
+    // snapshots are earlier and complete) instead of opening a second
+    // record. Non-committed engine fights stay in the engine map until
+    // they commit; the policy pending record is unnecessary then.
+    if (engineOpen.has(f)) {
+      const er = engineOpen.get(f);
+      er.turnsObserved = true;
+      er.lastSnap = snapFighters(G);
+      er.turns++;
+      if (!er.gateAtFirstObserve) { er.gateAtFirstObserve = gateSnap(G); er.ctxCommitAtFirstObserve = committed; }
+      if (!committed) {
+        if (pendingNonCommit && pendingNonCommit.ref === f) pendingNonCommit = null;
+        return;
+      }
+      er.source = 'engine+policy';
+      er.committed = true;
+      engineOpen.delete(f);
+      if (pendingNonCommit && pendingNonCommit.ref === f) pendingNonCommit = null;
+      openFight = er;
+      return;
+    }
+    // Conversion: a pending fight that LATER commits (commitLive turned
+    // true mid-fight) joins the census with its ORIGINAL start snapshots,
+    // so kills/deaths from the fight's start are not lost.
+    if (pendingNonCommit && pendingNonCommit.ref === f) {
+      if (!committed) return; // still waiting for commit; stay pending
+      openFight = {
+        ref: f, monsters: types, startDay: pendingNonCommit.startDay,
+        startCap: pendingNonCommit.startCap,
+        startKills: pendingNonCommit.startKills,
+        startAlive: pendingNonCommit.startAlive,
+        turns: (pendingNonCommit.turns | 0) + 1,
+        gateAtOpen: pendingNonCommit.gateAtOpen || null, gateAtFirstObserve: pendingNonCommit.gateAtFirstObserve || null, ctxCommitAtFirstObserve: pendingNonCommit.ctxCommitAtFirstObserve != null ? pendingNonCommit.ctxCommitAtFirstObserve : null,
+        turnsObserved: true,
+        lastSnap: snapFighters(G),
+        source: 'policy', openDriver: 'policy', committed: true,
+      };
+      pendingNonCommit = null;
+      return;
+    }
+    if (committed) {
+      policyOnlyOpensW4++;
+      openFight = {
+        ref: f, monsters: types, startDay: dayOf(G), startCap: capture.length,
+        startKills: killCountW4(G), startAlive: aliveSetOf(G), turns: 1,
+        turnsObserved: true,
+        lastSnap: snapFighters(G),
+        source: 'policy', openDriver: 'policy', committed: true,
+      };
+    } else {
+      policyOnlyOpensW4++;
+      pendingNonCommit = {
+        ref: f, monsters: types, startDay: dayOf(G), startCap: capture.length,
+        startKills: killCountW4(G), startAlive: aliveSetOf(G), turns: 1, gateAtFirstObserve: gateSnap(G), ctxCommitAtFirstObserve: committed,
+      };
+    }
+  }
+  const oFight = policy.fight ? policy.fight.bind(policy) : null;
+  if (oFight) {
+    policy.fight = (G, c) => {
+      let r = null, threw = null;
+      try { r = oFight(G, c); } catch (e) { threw = e; }
+      try { censusObserve(G, c); } catch (e2) { censusErrors++; }
+      if (threw) throw threw;
+      return r;
+    };
+  }
+  // ---- r52 ENGINE-LEVEL CENSUS (startCombat wrapper, read-only) ----
+  // Every fight opener funnels through Game.startCombat(mid): record the
+  // open here (wave by DATA lookup, fallback mdef.wave) so fights that
+  // open and close inside one daily — invisible to the policy.fight
+  // wrapper — are still census fights. The wrapper passes through
+  // untouched (same this, same args, same return, same throw).
+  const engineOpen = new Map();
+  const closedEngineRefs = new Set();
+  let engineOpensW4 = 0, policyOnlyOpensW4 = 0;
+  try {
+    const oStart = Game.startCombat ? Game.startCombat.bind(Game) : null;
+    if (oStart) Game.startCombat = function (mid) {
+      let r = null, threw = null;
+      try { r = oStart.apply(this, arguments); } catch (e) { threw = e; }
+      try {
+        const f = Game.tbfight || null;
+        if (f && !engineOpen.has(f) && !closedEngineRefs.has(f)) {
+          const mons = (f.fighters || []).filter(x => x && x.kind === 'monster');
+          const w4 = mons.filter(x => { const w = dataWaveOf(Game, x.monsterId || (x.mdef || {}).id || x.id) || ((x.mdef || {}).wave) || 0; return w >= 4; });
+          if (w4.length) {
+            engineOpensW4++;
+            engineOpen.set(f, {
+              ref: f, monsters: w4.map(x => (x.monsterId || (x.mdef || {}).id || '?')),
+              startDay: dayOf(Game), startCap: capture.length,
+              startKills: killCountW4(Game), startAlive: aliveSetOf(Game),
+              turns: 1, turnsObserved: false, lastSnap: snapFighters(Game, f),
+              source: 'engine', openDriver: 'engine', committed: false,
+              gateAtOpen: gateSnap(Game),
+            });
+          }
+        }
+      } catch (e) { censusErrors++; }
+      if (threw) throw threw;
+      return r;
+    };
+  } catch (e) { censusErrors++; }
+  function closeEngineOpen(G, why) {
+    for (const [ref, rec] of Array.from(engineOpen.entries())) {
+      try {
+        if (ref.over || !G.tbfight || G.tbfight !== ref) closeFightRec(G, rec, why);
+        else { rec.lastSnap = snapFighters(G, ref); }
+      } catch (e) { censusErrors++; }
+    }
+  }
+  // r71 DUSK CENSUS (read-only): sample haven-presence at each dusk
+  // upkeep call (dayPart===2), once per day, BEFORE the original upkeep
+  // runs — so the feast gate sees the same position this sample reads.
+  // Also samples the surge-spend receipt here (a spend in an early part
+  // is caught before any dusk re-grant can overwrite the receipt).
+  const duskSeenDays = new Set();
+  try {
+    const oUpkeep = policy.upkeep ? policy.upkeep.bind(policy) : null;
+    if (oUpkeep) policy.upkeep = (G, c) => {
+      try {
+        if (G.dayPart === 2) {
+          const d = dayOf(G);
+          if (!duskSeenDays.has(d)) {
+            duskSeenDays.add(d);
+            let at = null;
+            try { at = !!(G.playerAtHaven && G.playerAtHaven()); } catch (e2) { at = null; }
+            duskCensus.days.push({ day: d, atHaven: at });
+            if (at === true) duskCensus.atHaven++; else if (at === false) duskCensus.away++; else duskCensus.unknown++;
+            try { feastHoldSample(G, c); } catch (e2) { instrumentErrors++; }
+          }
+        }
+      } catch (e) { instrumentErrors++; }
+      try { recordSurgeSpend(G); } catch (e) { instrumentErrors++; }
+      // r72 STANDING TRACE (pure reads only — see header note): daily
+      // breakdown + readiness, so the analyzer can derive the gated
+      // total and test the 199 attractor without firing beats.
+      try {
+        if (!standingCfg && typeof G.standingCfg === 'function') { try { standingCfg = G.standingCfg(); } catch (e2) {} }
+        const vs = (typeof G.villageStanding === 'function') ? G.villageStanding() : null;
+        const rd4 = (typeof G.waveUnlockReady === 'function') ? G.waveUnlockReady(4) : null;
+        const rd5 = (typeof G.waveUnlockReady === 'function') ? G.waveUnlockReady(5) : null;
+        if (vs) standingTrace.push({ day: dayOf(G), war: vs.war | 0, diplomacy: vs.diplomacy | 0, plenty: vs.plenty | 0,
+          raw: vs.total | 0, warPts: vs.warPts | 0, links: vs.links | 0, feasts: vs.feasts | 0,
+          rd4ready: rd4 ? !!rd4.ready : null, rd5ready: rd5 ? !!rd5.ready : null,
+          rd5short: rd5 ? (rd5.short || []) : null,
+          rd5: rd5 ? { armored: rd5.armored | 0, armed: rd5.armed | 0, tricks: rd5.tricks | 0, veterans: rd5.veterans | 0 } : null });
+        try {
+          const wv = wavesOf(G);
+          let dg = null; try { dg = (typeof G.deedGateReady === 'function') ? G.deedGateReady() : null; } catch (e2) {}
+          waveTrace.push({ day: dayOf(G), w1: wv.w1 | 0, w2: wv.w2 | 0, w3: wv.w3 | 0, w4: wv.w4 | 0, w5: wv.w5 | 0,
+            crises: dg ? (dg.crisesN | 0) : null, contests: dg ? (dg.contestsN | 0) : null });
+        } catch (e2) { instrumentErrors++; }
+      } catch (e) { instrumentErrors++; }
+      return oUpkeep(G, c);
+    };
+  } catch (e) { instrumentErrors++; }
+  const oDaily = policy.daily.bind(policy);
+  let todayPreSnap = null; // r49: pre-daily guard snapshot for THIS day (see below)
+  let withdrawal = null;
+  let dayBounds = []; // r54 FIX: (day, capture idx) at each daily start — the rescan below maps a hit to its day
+  let dayStartDay = 0;
+  policy.daily = (G, c) => {
+    dayStartCapIdx = capture.length;
+    dayStartDay = dayOf(G);
+    dayBounds.push({ day: dayStartDay, idx: dayStartCapIdx });
+    try {
+      if (openFight && (!G.tbfight || G.tbfight !== openFight.ref)) closeFight(G, 'day-boundary');
+      if (pendingNonCommit && (!G.tbfight || G.tbfight !== pendingNonCommit.ref)) { closePending(G, 'day-boundary'); }
+      closeEngineOpen(G, 'day-boundary');
+    } catch (e) { censusErrors++; }
+    todayPreSnap = null;
+    // r49 GUARD SNAPSHOT (pre-sit): while the window is open, read the
+    // live preview BEFORE the day's policy runs, and compute the greedy
+    // decision from the same fields greedyWaits reads (capable.js:
+    // key, tier vs MAXTIER, day vs LASTDAY, losses vs 3, roster vs 5,
+    // bearer hp frac vs 0.4, vetguard living veteran - in that order).
+    // r49 ANNOUNCE-DAY FIX (r48 metric-review item 5a): detect the
+    // announce BEFORE snapshotting, so the announce day itself gets a
+    // guard entry (r48's trace only covered days AFTER the announce day,
+    // leaving same-day sits 'unknown'). snapCursor is set here too, so
+    // the post-daily detector (which only fires while announceDay is
+    // still null) stays consistent.
+    try {
+      const pg0 = (G.progState ? G.progState() : {});
+      if (announceDay == null && pg0.tableAnnounced) {
+        announceDay = dayOf(G);
+        if (announceCapIdx == null) announceCapIdx = dayStartCapIdx;
+        if (snapCursor == null) snapCursor = dayOf(G) + 7;
+      }
+    } catch (e) {}
+    // The pre-daily snapshot is computed EVERY day (preview permitting),
+    // not only once announced: the retroactive announce-day entry below
+    // needs the day-start state even on days the announce flips mid-day.
+    // It is PUSHED to guardTrace only once the window exists (announced),
+    // or retroactively when the announce is first detected post-daily.
+    try {
+      if (satDay == null) {
+        const pv = (typeof G.tablePreview === 'function') ? G.tablePreview() : null;
+        if (pv) {
+          const roster = (((G.state || {}).village || {}).roster || []).length;
+          let hp = 1;
+          try { const s = (G.state || {}).scholar || {}; hp = (s.health || 0) / Math.max(1, (G.maxHealth ? G.maxHealth() : s.maxHealth) || 100); } catch (e2) {}
+          let vets = 0;
+          try { const rd = (typeof G.waveCombatReadiness === 'function') ? G.waveCombatReadiness(5) : null; vets = rd ? (rd.veterans | 0) : 0; } catch (e2) {}
+          let decision = null;
+          if (!pv.ready) decision = 'not-ready:' + String(pv.why || '');
+          else if (pv.key) decision = 'key';
+          else if ((pv.overtime | 0) >= (parseInt(process.env.CAPABLE_GREEDY_MAXTIER || '4', 10))) decision = 'tier-cap';
+          else if (dayOf(G) >= (parseInt(process.env.CAPABLE_GREEDY_LASTDAY || '145', 10))) decision = 'horizon';
+          else if ((pv.losses | 0) >= 3) decision = 'losses';
+          else if (roster < 5) decision = 'roster';
+          else if (hp < 0.4) decision = 'hp';
+          else if (process.env.CAPABLE_VETGUARD === '1' && vets >= 1) decision = 'veteran-banked';
+          else if (process.env.CAPABLE_GREEDY === '1') decision = 'wait';
+          else decision = 'sit-promptly';
+          todayPreSnap = { day: dayOf(G), decision, overtime: pv.overtime | 0, losses: pv.losses | 0, roster, vets, seat: pv.seat };
+          if (announceDay != null && !guardTrace.some(e => e.day === todayPreSnap.day)) {
+            guardTrace.push(todayPreSnap);
+            if (guardTrace.length > 120) guardTrace.splice(0, guardTrace.length - 120);
+          }
+        }
+      }
+    } catch (e) { instrumentErrors++; }
+    let r;
+    try { r = oDaily(G, c); } catch (e) { instrumentErrors++; }
+    try { lastDailyCtx = c; } catch (e) {}
+    // r52: close engine fights that opened AND closed inside this daily
+    // (the finishLiveFight class — never touches policy.fight), and
+    // detect the table WITHDRAWAL beat on the day it fires.
+    try { closeEngineOpen(G, 'day-end'); } catch (e) { censusErrors++; }
+    try {
+      if (!withdrawal) {
+        const slice = capture.slice(dayStartCapIdx);
+        const hit = slice.find(x => /PELLET HUMS|the mantle may pass to hungrier hands/.test(x));
+        if (hit) withdrawal = { day: dayStartDay, line: hit };
+      }
+    } catch (e) { instrumentErrors++; }
+    // CTX SYNC (r40 fix): runDays owns the daily ctx — the grey layer's
+    // road state lives on it, not on this probe's outer ctx. Mirror the
+    // reference so the summary below reads the real road state.
+    try { if (c && c._relaygrey && ctx._relaygrey !== c._relaygrey) ctx._relaygrey = c._relaygrey; } catch (e) {}
+    try {
+      const pg = (G.progState ? G.progState() : {});
+      const d = dayOf(G);
+      if (pg.tableAnnounced && announceDay == null) {
+        announceDay = d; snapCursor = d + 7; if (announceCapIdx == null) announceCapIdx = dayStartCapIdx;
+        // r49 RETROACTIVE ANNOUNCE-DAY ENTRY: the announce usually flips
+        // INSIDE today's oDaily (progression beats), so the pre-daily
+        // snapshot above could not see it — the r48 'unknown' class.
+        // The day-start preview is the honest cause ONLY when it already
+        // implied a sit (sit guards are stable-or-worsening intraday:
+        // losses/hp/tier move toward sit, never away); a 'wait' or
+        // 'not-ready' day-start state means the sit's cause formed during
+        // the announce day itself, recorded as 'intraday' — named, not
+        // 'unknown', and never dressed up as a guard that was not there.
+        if (todayPreSnap && !guardTrace.some(e => e.day === todayPreSnap.day)) {
+          const sitGuards = ['key', 'tier-cap', 'horizon', 'losses', 'roster', 'hp', 'veteran-banked', 'sit-promptly'];
+          const retro = sitGuards.indexOf(todayPreSnap.decision) >= 0
+            ? Object.assign({}, todayPreSnap, { retro: true })
+            : Object.assign({}, todayPreSnap, { decision: 'intraday', retro: true });
+          guardTrace.push(retro);
+          if (guardTrace.length > 120) guardTrace.splice(0, guardTrace.length - 120);
+        }
+      }
+      const inWindow = announceDay != null && satDay == null && !pg.tableDone;
+      if (inWindow && snapCursor != null && d >= snapCursor) {
+        let tier = 0; try { tier = G.overtimeTier ? G.overtimeTier() | 0 : 0; } catch (e) {}
+        weekly.push({ day: d, tier, alive: aliveOf(G), pantry: pantryOf(G) });
+        snapCursor += 7;
+      }
+      if (pg.tableDone && satDay == null) {
+        satDay = d; satWaves = wavesOf(G);
+        // r49: the window-end guard is the pre-sit decision recorded this
+        // morning (same-day entry if present, else the last window entry).
+        try {
+          let g = null;
+          for (const e of guardTrace) { if (e.day <= d) g = e; }
+          windowEndGuard = g ? g.decision : 'unknown';
+        } catch (e2) { windowEndGuard = 'unknown'; }
+        try { const st = G.tableSeat ? G.tableSeat() : null; satSeatKind = st ? st.seat : null; } catch (e) {}
+        try { satPenalty = G.overtimeStanding ? G.overtimeStanding() : null; } catch (e) { instrumentErrors++; }
+      }
+      try { if (G.overtimeTier) maxTierSeen = Math.max(maxTierSeen, G.overtimeTier() | 0); } catch (e) {}
+      // r65 DAILY VETERAN / RELEASE SNAPSHOT (read-only): living veterans =
+      // waveKillLog w>=4 killers currently on the living roster. Peak tracked
+      // daily (r61's end-state bar missed transient peaks); the first day
+      // unlockedWave() hits 5 snapshots rd5 + living veterans in place.
+      try {
+        const log65 = ((G.state || {}).waveKillLog || []).filter(e => (e.w | 0) >= 4);
+        const roster65 = ((G.state || {}).village || {}).roster || [];
+        const living65 = new Set();
+        for (const id of roster65) { try { const pp = G.getPerson ? G.getPerson(id) : null; if (pp && !pp.dead) living65.add(id); } catch (e2) {} }
+        const killers65 = [];
+        for (const e of log65) { const k = e.killer || e.by || e.vid || '?'; if (living65.has(k) && killers65.indexOf(k) < 0) killers65.push(k); }
+        if (killers65.length > peakLivingVets) { peakLivingVets = killers65.length; peakLivingVetDay = dayOf(G); peakLivingVetKillers = killers65.slice(); }
+        let uw65 = null;
+        try { uw65 = (typeof G.unlockedWave === 'function') ? G.unlockedWave() : null; } catch (e2) {}
+        if ((uw65 | 0) >= 5 && !releaseSnap) {
+          let rd65 = null;
+          try { rd65 = (typeof G.waveUnlockReady === 'function') ? G.waveUnlockReady(5) : null; } catch (e2) {}
+          releaseSnap = { day: dayOf(G), unlockedWave: uw65, livingVeterans: killers65.slice(), livingVeteranCount: killers65.length,
+            rd5: rd65 ? { ready: !!rd65.ready, short: rd65.short || null, veterans: rd65.veterans | 0, armored: rd65.armored | 0, armed: rd65.armed | 0, tricks: rd65.tricks | 0 } : null };
+        }
+      } catch (e) { instrumentErrors++; }
+      // r68 FEAST-CHAIN CENSUS (read-only): post-daily sample of the feast
+      // chain stages. feastedActive at post-daily is a LOWER BOUND on window
+      // days (the 2-dawn window may open/close intraday); surgeDay is the
+      // first day prog.feastSurgeUsed reads true.
+      try {
+        const s68 = (G.state || {}).scholar || {};
+        const pg68 = s68.prog || {};
+        if (G.feastedActive && G.feastedActive()) { feastedDays++; feastedDaySet.add(dayOf(G)); }
+        if (pg68.feastSurge) armedDays++;
+        if (pg68.feastSurgeUsed && surgeDay == null) surgeDay = dayOf(G);
+      } catch (e) { instrumentErrors++; }
+      try { recordSurgeSpend(G); } catch (e) { instrumentErrors++; }
+      if (c && c.capTablePath) walkedPath = walkedPath || c.capTablePath;
+      try { const T = G.tableState ? G.tableState() : {}; if (T.path) walkedPath = T.path; if (T.branch) walkedBranch = T.branch; } catch (e) {}
+      // r43 POLICY-NEUTRAL relay trace (feeds the grey-door census on base
+      // seeds): weekly {lean, band, bond, held, grounding} for every plan.
+      try {
+        if (d % 7 === 0) {
+          relayTrace.push({
+            day: d,
+            lean: RG.leanOf(G), band: RG.bandOf(G),
+            grounding: RG.groundingOf(G), bond: RG.bondOf(G),
+            held: (typeof G.relayHeldByBearer === 'function') ? !!G.relayHeldByBearer() : null,
+          });
+          if (relayTrace.length > 60) relayTrace.splice(0, relayTrace.length - 60);
+        }
+      } catch (e) { instrumentErrors++; }
+    } catch (e) { instrumentErrors++; }
+    return r;
+  };
+
+  let result;
+  await quietLog(async () => { result = await runDays(Game, policy, { days, manifest: undefined, sampleEvery: 1 }); });
+  try {
+    if (openFight) closeFight(Game, 'run-end');
+    if (pendingNonCommit) { closePending(Game, 'run-end'); }
+    closeEngineOpen(Game, 'run-end');
+  } catch (e) { censusErrors++; }
+  won = !!Game.won;
+
+  // ---- r54 FIX: end-of-run withdrawal rescan ----
+  // r54 found the daily-slice detector MISSING a real PELLET HUMS decline
+  // (88095: the line is in the full transcript, withdrawal field null).
+  // The decline fires on a day-transition the daily slice does not cover
+  // (it sits between night camp and the next day's actions — outside the
+  // wrapper's per-day slice). The per-day detector stays as-is; this
+  // post-hoc, read-only rescan catches what it missed, tagged
+  // source:'end-rescan' so a daily hit and a rescan hit stay distinct.
+  // It reads capture only — it changes no gameplay, no policy, no seed.
+  if (!withdrawal) {
+    try {
+      const hitIdx = capture.findIndex(x => /PELLET HUMS|the mantle may pass to hungrier hands/.test(x));
+      if (hitIdx >= 0) {
+        let d = null;
+        for (const b of dayBounds) if (b.idx <= hitIdx) d = b.day;
+        withdrawal = { day: d, line: capture[hitIdx], source: 'end-rescan' };
+      }
+    } catch (e) { instrumentErrors++; }
+  }
+
+  // ---- relay road summary from the layer ctx ----
+  let rgSum = null;
+  try {
+    const L = ctx._relaygrey;       // daily road state (inner ctx, synced)
+    const LC = chooserCtx._relaygrey || {};  // door/cockpit/final picks
+    if (L) {
+      // verbs: ALL relay verb invocations (deepen/reroute/commune answers
+      // are all real uses of the office — r40 pilot instrument
+      // clarification, see metric review).
+      const verbs = (L.deepens | 0) + (L.rerouteEff | 0) + (L.rerouteHon | 0) + (L.communes | 0);
+      rgSum = {
+        active: !!L.active, claimDone: !!L.claimDone, claimDay: L.claimDay,
+        claimTried: L.claimTried | 0, claimWaiting: L.claimWaiting | 0,
+        firstAvailableDay: L.firstAvailableDay,
+        deepens: L.deepens | 0, rerouteEff: L.rerouteEff | 0, rerouteHon: L.rerouteHon | 0,
+        verbs, communes: L.communes | 0, floorStops: L.floorStops | 0,
+        doorRelay: LC.doorRelay | 0, doorDelegated: LC.doorDelegated | 0,
+        cockpitPicks: LC.cockpitPicks || {}, finalPick: LC.finalPick || null,
+        leanTrace: L.leanTrace || [], communeLean: L.communeLean || [],
+        rgError: (L.rgError | 0) + (LC.rgError | 0),
+      };
+      const tr = L.leanTrace || [];
+      rgSum.leanTraceHead = tr.slice(0, 3);
+      rgSum.leanTraceTail = tr.slice(-8);
+      // at-sit lean/band: last trace point at or before satDay
+      if (satDay != null && tr.length) {
+        let pt = tr[0];
+        for (const q of tr) { if (q.day <= satDay) pt = q; }
+        atSit = pt;
+      }
+      rgSum.atSit = atSit;
+    }
+  } catch (e) { instrumentErrors++; }
+
+  // relay offered at the door? (from the transcript's path-offer lines)
+  try {
+    const offerIdx = capture.findIndex(s => s.indexOf('Choose your door') >= 0 || s.indexOf('Walk the path of') >= 0);
+    atDoorOffer = offerIdx >= 0 ? capture.slice(Math.max(0, offerIdx - 2), offerIdx + 3).join(' ').slice(0, 400) : null;
+  } catch (e) {}
+
+  // ---- audit line as spoken (r35 regression datum) ----
+  const auditIdx = capture.findIndex(s => s.indexOf('◈ THE AUDIT') === 0);
+  const auditLine = auditIdx >= 0 ? capture[auditIdx] : null;
+  const w45 = satWaves ? (satWaves.w4 | 0) + (satWaves.w5 | 0) : 0;
+  let auditNamed = null;
+  if (auditLine && satWaves && w45 > 0) {
+    if (satSeatKind === 'full') auditNamed = /every wave faced/.test(auditLine);
+    else {
+      const namesW4 = (satWaves.w4 | 0) > 0 ? /wave-4/.test(auditLine) : true;
+      const namesW5 = (satWaves.w5 | 0) > 0 ? /wave-5/.test(auditLine) : true;
+      auditNamed = namesW4 && namesW5;
+    }
+  } else if (auditLine && satWaves && w45 === 0) auditNamed = true;
+
+  // ---- r37 regression: satPenalty present + voiced match ----
+  let otMismatch = null;
+  if (satDay != null) {
+    const sp = satPenalty;
+    const fieldsOk = sp && typeof sp === 'object'
+      && Number.isFinite(sp.tier) && Number.isFinite(sp.losses) && Number.isFinite(sp.penalty);
+    let voiced = null;
+    const m = capture.join('\n').match(/Every door's standing −(\d+)/);
+    voiced = m ? parseInt(m[1], 10) : null;
+    if (!fieldsOk) otMismatch = 'OT-RECORD-MISSING';
+    else if (sp.penalty > 0 && voiced == null) otMismatch = 'OT-VOICED-LINE-MISSING';
+    else if (voiced != null && voiced !== sp.penalty) otMismatch = `OT-MISMATCH record=${sp.penalty} voiced=${voiced}`;
+  }
+
+  // ---- M4: lean legibility ----
+  const allText = capture.join('\n');
+  const noticeLines = capture.filter(s => /NOTICED\. (YOUR REGISTER|YOU ARE BACK)/.test(s));
+  const noticedCount = noticeLines.length;
+  let ledgerLine = null;
+  try {
+    const li = capture.findIndex(s => s.indexOf('The table has read your ledger') === 0);
+    ledgerLine = li >= 0 ? capture[li] : null;
+  } catch (e) {}
+
+  let tele = [];
+  try {
+    tele = ((Game.state || {}).telemetry || [])
+      .filter(e => e.type === 'table_entered' || e.type === 'table_won' || e.type === 'table_lost')
+      .map(e => ({ type: e.type, day: e.day, path: e.tablePath, moral: e.moral, ending: e.ending, endingKind: e.endingKind }));
+  } catch (e) {}
+  for (const t of tele) if (t.type === 'table_won' && t.path) { walkedPath = walkedPath || t.path; walkedBranch = walkedBranch || t.moral; }
+
+  // ---- r41: final live choice verdict fields ----
+  const allText2 = capture.join('\n');
+  const finalBeat = allText2.indexOf("the last choice is yours, and it's live") >= 0;
+  const finalFrames = promptFrames.filter(f => f.options.some(o => o.id.indexOf('final:') === 0));
+  const finalFrame0 = finalFrames.length ? finalFrames[finalFrames.length - 1] : null;
+  const finalOptsCount = finalFrame0 ? finalFrame0.options.length : 0;
+  const finalPickId = finalDispatchLine ? finalDispatchLine.id : null;
+  // resolution voiced: the 'X — "<label>"' line naming the chosen final's label
+  let finalLabel = null, finalResolved = false, finalOutcomeLines = [];
+  if (finalFrame0 && finalPickId) {
+    const opt = finalFrame0.options.find(o => o.id === finalPickId);
+    finalLabel = opt ? opt.label : null;
+  }
+  if (finalLabel && finalDispatchLine) {
+    const after = capture.slice(finalDispatchLine.line);
+    // the resolution line is ◈ <PATH> — "<label>"
+    const lab = finalLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const resRe = new RegExp('◈ .* — "' + lab + '"');
+    finalResolved = after.some(s => resRe.test(s));
+    // outcome SAY lines: the next up-to-12 SAY lines after the pick
+    finalOutcomeLines = after.slice(0, 12).filter(s => s && s.indexOf('◈') === 0);
+  }
+  // band crossings from the lean trace (drift control datum)
+  let bandCrossings = 0;
+  try {
+    const tr = (rgSum && rgSum.leanTrace) || [];
+    let last = null;
+    for (const q of tr) { if (last != null && q.band !== last) bandCrossings++; last = q.band; }
+  } catch (e) {}
+
+  // ---- r43: the relay-door census datum (policy-neutral) ----
+  // On base seeds the capable base runs its own relay road (cap bumps on the
+  // daily ctx); on grey-owned seeds the grey layer owns it (rgSum above).
+  let relayDoor = null;
+  try {
+    let atSitTrace = null;
+    if (relayTrace.length) {
+      atSitTrace = relayTrace[0];
+      for (const q of relayTrace) { if (satDay != null && q.day <= satDay) atSitTrace = q; else if (satDay == null) atSitTrace = q; }
+    }
+    const doorFrame = promptFrames.find(f => f.options.some(o => String(o.id).indexOf('path:') === 0));
+    const dc = lastDailyCtx || {};
+    relayDoor = {
+      heldAtSit: atSitTrace ? atSitTrace.held : null,
+      leanAtSit: atSitTrace ? atSitTrace.lean : null,
+      bandAtSit: atSitTrace ? atSitTrace.band : null,
+      bondAtSit: atSitTrace ? atSitTrace.bond : null,
+      groundingAtSit: atSitTrace ? atSitTrace.grounding : null,
+      capClaimed: (dc.capRelayClaimed | 0),
+      capAppointed: (dc.capRelayAppointed | 0),
+      capAnswers: (dc.capRelayAnswers | 0),
+      capCommunes: (dc.capRelayCommunes | 0),
+      capReroutes: (dc.capRelayReroutes | 0),
+      doorsOffered: doorFrame ? doorFrame.options.map(o => o.id) : null,
+      doorWalked: walkedPath || null,
+    };
+  } catch (e) { instrumentErrors++; }
+
+  // ---- r44: the full-seat component record (pure-read diag layer) ----
+  // The diag layer stores on the daily ctx (captured as lastDailyCtx by the
+  // instrumented wrapper above — the same object the layers saw).
+  let fullseat = null;
+  try {
+    const D = (lastDailyCtx || {})._fullseatdiag;
+    if (D) {
+      const snap = (s) => !s ? null : ({
+        day: s.day, seat: s.seat, wavesOk: s.wavesOk, contestsOk: s.contestsOk,
+        crisesOk: s.crisesOk, stageOk: s.stageOk, foodDeedsOk: !!(s.foodDeeds && s.foodDeeds.ok),
+        binding: s.binding, worst: s.worst,
+        unlock: s.unlock ? {
+          standing: s.unlock.standing, t4: s.unlock.t4, t5: s.unlock.t5,
+          unlockedWave: s.unlock.unlockedWave, w4faced: s.unlock.w4faced,
+          holdKind: s.unlock.holdKind, rd5short: s.unlock.rd5short,
+        } : null,
+      });
+      fullseat = {
+        days: D.days | 0, errs: D.errs | 0, bestSeat: D.bestSeat || 'none',
+        max: Object.assign({}, D.max),
+        sentDay: D.sentDay == null ? null : D.sentDay,
+        surgeDay: D.surgeDay == null ? null : D.surgeDay,
+        firstLesserDay: D.firstLesserDay == null ? null : D.firstLesserDay,
+        firstFullSeatDay: D.firstFullSeatDay == null ? null : D.firstFullSeatDay,
+        firstFullSeat: snap(D.firstFullSeatSnap),
+        indispEver: !!D.indispEver,
+        firstIndispDay: D.firstIndispDay == null ? null : D.firstIndispDay,
+        winDay: D.winDay == null ? null : D.winDay,
+        winSeat: snap(D.winSnap),
+      };
+    }
+  } catch (e) { instrumentErrors++; }
+
+
+  // ---- r46/r47: veterans census (the leg's question, read from the engine) ----
+  let veterans = null;
+  try {
+    const rd5 = (typeof Game.waveUnlockReady === 'function') ? Game.waveUnlockReady(5) : null;
+    const log = ((Game.state || {}).waveKillLog || []).filter(e => (e.w | 0) >= 4);
+    const roster = ((Game.state || {}).village || {}).roster || [];
+    const living = new Set();
+    for (const id of roster) { try { const pp = Game.getPerson ? Game.getPerson(id) : null; if (pp && !pp.dead) living.add(id); } catch (e) {} }
+    const byKiller = {};
+    for (const e of log) {
+      const k = e.killer || e.by || e.vid || '?';
+      if (!byKiller[k]) byKiller[k] = { kills: 0, types: [], mids: [], days: [] };
+      byKiller[k].kills++;
+      if (e.type && byKiller[k].types.indexOf(e.type) < 0) byKiller[k].types.push(e.type);
+      // r60 types fill: waveKillLog entries carry mid, not type — record the
+      // monster id in mids and in types (types was empty on every r59 kill).
+      if (e.mid && byKiller[k].mids.indexOf(e.mid) < 0) byKiller[k].mids.push(e.mid);
+      if (e.mid && byKiller[k].types.indexOf(e.mid) < 0) byKiller[k].types.push(e.mid);
+      if (e.d != null) byKiller[k].days.push(e.d);
+    }
+    const livingVets = Object.keys(byKiller).filter(k => living.has(k));
+    const dc = lastDailyCtx || {};
+    veterans = {
+      rd5ready: rd5 ? !!rd5.ready : null,
+      rd5short: rd5 ? (rd5.short || null) : null,
+      rd5veterans: rd5 ? (rd5.veterans | 0) : null,
+      rd5armored: rd5 ? (rd5.armored | 0) : null,
+      rd5armed: rd5 ? (rd5.armed | 0) : null,
+      rd5tricks: rd5 ? (rd5.tricks | 0) : null,
+      rd5demand: rd5 ? (rd5.demand || null) : null,
+      unlockedWave: (typeof Game.unlockedWave === 'function') ? Game.unlockedWave() : null,
+      w4plusKills: log.length,
+      killers: byKiller,
+      livingVeterans: livingVets,
+      livingVeteranCount: livingVets.length,
+      vetFights: (dc.vetFights | 0),
+      vetFirstDay: dc.vetFirstDay || null,
+      vetDpsFledSeen: (dc.vetDpsFledSeen | 0),
+    };
+  } catch (e) { veterans = { error: String(e && e.message) }; }
+
+  // ---- r47: deferral record (greedy bumps live on lastDailyCtx) ----
+  let greedy = null;
+  try {
+    const dc = lastDailyCtx || {};
+    greedy = {
+      waits: (dc.capGreedyWaits | 0),
+      maxTier: (dc.capGreedyMaxTier | 0),
+      seatDay: dc.capSeatDay != null ? dc.capSeatDay : null,
+      seatKind: dc.capSeatKind != null ? dc.capSeatKind : null,
+    };
+  } catch (e) { greedy = { error: String(e && e.message) }; }
+  // ---- r49: armory record (armorydrive bumps live on lastDailyCtx) ----
+  let armory = null;
+  try {
+    const dc = lastDailyCtx || {};
+    let units = null;
+    try { units = AD.armoryUnits(Game); } catch (e) {}
+    armory = {
+      donations: (dc.adDonations | 0),
+      craftDonations: (dc.adCraftDonations | 0),
+      donatedBonus: (dc.adDonatedBonus | 0),
+      donateFailed: (dc.adDonateFailed | 0),
+      vinebankDeferred: (dc.adVinebankDeferred | 0),
+      knapWasted: (dc.adKnapWasted | 0),
+      errors: (dc.adArmoryError | 0),
+      unitsAtEnd: units,
+    };
+  } catch (e) { armory = { error: String(e && e.message) }; }
+  const deferDays = (announceDay != null && satDay != null) ? (satDay - announceDay) : null;
+  let overtimeLines = 0;
+  try { overtimeLines = capture.filter(l => l.indexOf('OVERTIME') >= 0).length; } catch (e) {}
+  // ---- r51 ENCOUNTER SUPPLY: wave-4 arrivals that never became fights ----
+  // Scans the full-run capture for the arrival/boundary lines and pairs
+  // each boundary-blocked arrival with the monster named just before it.
+  // (The transcript file only covers announce->end; the capture is full-run.)
+  const WAVE4_NAMES = { 'The Suburb': 'suburb', 'The Strike': 'strike', 'The Influencer': 'influencer', 'The Congregation': 'congregation', 'The Reunion': 'reunion', 'The Eater': 'eater', 'The Algorithm': 'algorithm', 'The Audit': 'audit', 'The Eulogy': 'eulogy', 'The Herald': 'herald' };
+  function blockedArrivalsOf() {
+    const out = [];
+    try {
+      for (let i = 0; i < capture.length; i++) {
+        const line = capture[i];
+        if (/stops at the boundary|Something else is already here/.test(line)) {
+          // r51 PILOT FIX: the monster's name is IN the boundary line
+          // itself ("The Reunion stops at the boundary") — the original
+          // lookback scanned only lines BEFORE it and always missed.
+          // Scan the line itself plus the 6 lines before it; also record
+          // the raw name so non-wave-4 arrivals are visible too (the slot
+          // is near-always occupied — the supply mechanism itself).
+          let mon = null, rawName = null;
+          for (let j = Math.max(0, i - 6); j <= i; j++) {
+            const mName = capture[j].match(/The ([A-Z][A-Za-z' -]+?) stops at the boundary/);
+            if (mName) rawName = 'The ' + mName[1];
+            for (const nm of Object.keys(WAVE4_NAMES)) {
+              if (capture[j].indexOf(nm) >= 0) mon = WAVE4_NAMES[nm];
+            }
+          }
+          out.push({ line: line.slice(0, 200), monster: mon, rawName, capIdx: i });
+        }
+      }
+    } catch (e) {}
+    return out;
+  }
+
+  // r68 FEAST-CHAIN CENSUS (read-only): counters live on runDays' single
+  // ctx, captured as lastDailyCtx by the daily wrapper. Feasted-day fights
+  // are census fights starting on a post-daily-sampled feasted day.
+  const fc68 = lastDailyCtx || {};
+  const feastChain = {
+    feasts: fc68.feasts | 0, armedFeasts: fc68.armedFeasts | 0,
+    fsFeasts: fc68.fsFeasts | 0, fsArmedFeasts: fc68.fsArmedFeasts | 0,
+    facedDraw: fc68.facedDraw | 0, devotionChannels: fc68.devotionChannels | 0,
+    huntSorties: fc68.capHuntSorties | 0, huntFeastFights: fc68.capHuntFeastFights | 0,
+    huntWaveFights: fc68.capHuntWaveFights | 0, huntNoTarget: fc68.capHuntNoTarget | 0,
+    huntGone: fc68.capHuntGone | 0, huntUnreached: fc68.capHuntUnreached | 0,
+    feastedDays, armedDays, surgeDay, surgeSpends, surgeMode: surgeSpends.length ? surgeSpends[0].kind : null,
+    feastedDayFights: (fightCensus || []).filter(f => feastedDaySet.has(f.startDay)).map(f => ({ day: f.startDay, monsters: f.monsters, outcome: f.outcome })),
+    surgeDayFights: surgeDay == null ? null : (fightCensus || []).filter(f => f.startDay === surgeDay).map(f => ({ monsters: f.monsters, outcome: f.outcome })),
+  };
+  // r74 IDENTITY-AWARE GHOST CLASSIFICATION: first-name death-before-day
+  // alone is only a firstNameHit (r73's 88966 d49 Grace false positive:
+  // Grace Sullivan died d16, but grace_obi was alive at d49, died d81).
+  // CONFIRMED requires no same-first-name villager alive on the line day:
+  // no same-first-name death on/after the line day, and no final-alive
+  // roster person sharing the first name.
+  const finalAliveFirst = new Set();
+  try {
+    const v = (Game.state || {}).village || {};
+    for (const id of (v.roster || [])) {
+      let pp = null;
+      try { pp = Game.getPerson ? Game.getPerson(id) : null; } catch (e) {}
+      if (pp && !pp.dead) { const nm = pp.name || pp.displayName || ''; finalAliveFirst.add(String(nm).split(' ')[0]); }
+    }
+  } catch (e) {}
+  const ghostHits = ghostLines.map(gl => {
+    const first = gl.companion;
+    const earlier = deathRecords.filter(dr => dr && dr.name && String(dr.name).split(' ')[0] === first && (dr.day | 0) < (gl.day | 0));
+    const aliveLater = deathRecords.some(dr => dr && dr.name && String(dr.name).split(' ')[0] === first && (dr.day | 0) >= (gl.day | 0));
+    const aliveAtEnd = finalAliveFirst.has(first);
+    return { day: gl.day, companion: first, line: gl.line,
+      hit: earlier.length > 0 && !aliveLater && !aliveAtEnd,
+      firstNameHit: earlier.length > 0,
+      deathDay: earlier.length ? earlier[0].day : null,
+      deathCause: earlier.length ? earlier[0].cause : null,
+      aliveCandidate: aliveLater || aliveAtEnd };
+  });
+  const rec = {
+    seed, days, gameDays: dayOf(Game), deferDays, greedy, armory,
+    guardTrace, windowEndGuard, announceCapIdx, overtimeLines,
+    plan: planOf(seed), fullseat,
+    endReason: Game.over ? (Game.villageLost ? 'village-lost' : 'over-other') : 'survived',
+    won, announceDay, satDay, satSeatKind, satWaves, auditLine, auditNamed,
+    satPenalty, maxTier: maxTierSeen, otMismatch,
+    walkedPath, walkedBranch, instrumentErrors, telemetry: tele,
+    rg: rgSum, noticedCount, noticeLines, ledgerLine, bandCrossings,
+    relayDoor, relayTrace,
+    finalBeat, finalOptsCount, finalPickId, finalLabel, finalResolved,
+    finalOutcomeLines, promptFrameCount: promptFrames.length, dispatchCount: dispatched.length,
+    weekly, fightCensus: { fights: fightCensus, nonCommittedW4, censusErrors, fastW4, fastNonCommittedW4, engineOpensW4, policyOnlyOpensW4 }, census: censusOf(Game), veterans, withdrawal,
+    peakLivingVeterans: peakLivingVets, peakLivingVetDay, peakLivingVetKillers, releaseSnap, feastChain, duskCensus, surgeSpends, ghostLines, ghostHits,
+    grantLog, standingTrace, standingCfg, feastHoldLog, hostLog,
+    waveTrace, wavesFacedKeys: (function () { try { return (Game.deedState ? Game.deedState() : {}).wavesFaced || {}; } catch (e) { return {}; } })(),
+    crisisKeys: (function () { try { const pg = (typeof Game.progState === 'function') ? Game.progState() : null; return Object.keys((pg && pg.crises) || {}); } catch (e) { return []; } })(),
+    inviteClass: announceDay != null ? 'announced' : (withdrawal ? 'withdrawal' : (Game.over && Game.villageLost ? 'village-lost' : 'silent')),
+    deathRecords, deathWrapErrors,
+    blockedArrivals: blockedArrivalsOf(),
+  };
+  if (process.env.DET !== '1' && process.env.FID !== '1') {
+    try { fs.mkdirSync(EVID, { recursive: true }); } catch (e) {}
+    writeFileRetry(path.join(EVID, `endgame-r75-${seed}.json`), JSON.stringify(rec, null, 1));
+    // r49: slice from the ANNOUNCE day (r47 metric-review item 5) — the
+    // deferral itself must be readable, not just counted. Fall back to
+    // the TABLE IS SET / AUDIT lines if the announce capture is missing.
+    const annIdx = capture.findIndex(s => s.indexOf('◈ THE TABLE IS SET') === 0);
+    const auditIdx2 = capture.findIndex(s => s.indexOf('◈ THE AUDIT') === 0);
+    const start = announceCapIdx != null ? announceCapIdx
+      : Math.max(0, annIdx >= 0 ? annIdx : (auditIdx2 >= 0 ? auditIdx2 : 0));
+    writeFileRetry(path.join(EVID, `endgame-r75-${seed}-transcript.txt`),
+      `# journey-endgame r74 — seed ${seed}, announced d${announceDay}, sat day ${satDay} (${satSeatKind} seat), ` +
+      `walked ${walkedPath || '—'}/${walkedBranch || '?'}, won=${won}, relay=${rgSum ? JSON.stringify({ lean: atSit && atSit.lean, band: atSit && atSit.band, verbs: rgSum.verbs, communes: rgSum.communes }) : 'off'}\n` +
+      (withdrawal ? `# withdrawal d${withdrawal.day}: ${withdrawal.line}\n` : '') +
+      `# window: the announce through the run's end (${capture.length - start} SAY lines)\n\n` +
+      capture.slice(start).join('\n') + '\n');
+  }
+  return rec;
+}
+
+(async () => {
+  if (MODE === 'det') {
+    const a = await runSeed(SEEDS[0], DAYS, true, false);
+    const b = await runSeed(SEEDS[0], DAYS);
+    const sa = JSON.stringify(a), sb = JSON.stringify(b);
+    console.log('DET ' + (sa === sb ? 'GREEN byte-identical' : 'RED differs'));
+    if (sa !== sb) { console.log('a bytes', sa.length, 'b bytes', sb.length); process.exit(1); }
+    return;
+  }
+  if (MODE === 'fid') {
+    // FULLSEAT/RELAYGREY unset in this process: wrapped base must equal
+    // the pure capable+deedhunt base (layers delegate byte-identically).
+    const a = await runSeed(SEEDS[0], DAYS);
+    const sa = JSON.stringify(a);
+    console.log('FID wrapped=' + sa.length);
+    const b = await (async () => {
+      const { Game } = await loadGame({ seed: SEEDS[0], mode: 'endgame-r40', fullTelemetry: true });
+      await setupGame(Game);
+      const ctx = {};
+      await quietLog(async () => { await runDays(Game, capableDeedHunt(), { days: DAYS, manifest: undefined, sampleEvery: 1 }); });
+      return { gameDays: dayOf(Game), won: !!Game.won, alive: aliveOf(Game), pantry: pantryOf(Game) };
+    })();
+    const saMini = { gameDays: a.gameDays, won: a.won, alive: a.census.alive, pantry: a.census.pantryKcal };
+    const ok = JSON.stringify(saMini) === JSON.stringify(b);
+    console.log('FID ' + (ok ? 'GREEN byte-identical (mini)' : 'RED differs'));
+    console.log('wrapped', JSON.stringify(saMini));
+    console.log('pure   ', JSON.stringify(b));
+    if (!ok) process.exit(1);
+    return;
+  }
+  if (MODE === 'smoke') {
+    const r = await runSeed(SEEDS[0], DAYS);
+    console.log(`SMOKE seed=${r.seed} plan=${r.plan} announceDay=${r.announceDay} satDay=${r.satDay} seat=${r.satSeatKind} path=${r.walkedPath}/${r.walkedBranch} won=${r.won} end=${r.endReason} alive=${r.census.alive}`);
+    console.log('FINAL', JSON.stringify({ finalBeat: r.finalBeat, finalOptsCount: r.finalOptsCount, finalPickId: r.finalPickId, finalLabel: r.finalLabel, finalResolved: r.finalResolved, outcomeLines: r.finalOutcomeLines.length, promptFrames: r.promptFrameCount, dispatches: r.dispatchCount }));
+    console.log('CENSUS', JSON.stringify({ fights: (r.fightCensus && r.fightCensus.fights) || [], nonCommittedW4: r.fightCensus ? r.fightCensus.nonCommittedW4 : null, censusErrors: r.fightCensus ? r.fightCensus.censusErrors : null, engineOpens: r.fightCensus ? r.fightCensus.engineOpensW4 : null, policyOnlyOpens: r.fightCensus ? r.fightCensus.policyOnlyOpensW4 : null, withdrawal: r.withdrawal || null }));
+    console.log('RG', JSON.stringify(r.rg ? { firstAvailableDay: r.rg.firstAvailableDay, claimDay: r.rg.claimDay, claimTried: r.rg.claimTried, claimWaiting: r.rg.claimWaiting, verbs: r.rg.verbs, communes: r.rg.communes, doorRelay: r.rg.doorRelay, cockpitPicks: r.rg.cockpitPicks, finalPick: r.rg.finalPick, atSit: r.rg.atSit, traceTail: r.rg.leanTraceTail } : null));
+    return;
+  }
+  const out = [];
+  for (const s of SEEDS) {
+    const r = await runSeed(s, DAYS);
+    const rd = r.relayDoor || {};
+    const fs44 = r.fullseat || {};
+    out.push({ seed: r.seed, plan: r.plan, announceDay: r.announceDay, satDay: r.satDay, deferDays: r.deferDays, greedyWaits: r.greedy && r.greedy.waits, greedyMaxTier: r.greedy && r.greedy.maxTier, maxTier: r.maxTier, satPenalty: r.satPenalty, overtimeLines: r.overtimeLines, armoryDonations: r.armory && r.armory.donations, armoryUnits: r.armory && r.armory.unitsAtEnd, windowEndGuard: r.windowEndGuard, livingVeterans: r.veterans && r.veterans.livingVeteranCount, peakLivingVeterans: r.peakLivingVeterans, peakLivingVetDay: r.peakLivingVetDay, releaseSnap: r.releaseSnap, feastChain: r.feastChain, inviteClass: r.inviteClass, unlockedWave: r.veterans && r.veterans.unlockedWave, seat: r.satSeatKind, path: r.walkedPath, branch: r.walkedBranch, won: r.won, end: r.endReason, alive: r.census.alive, atSit: r.rg && r.rg.atSit, verbs: r.rg && r.rg.verbs, communes: r.rg && r.rg.communes, doorRelay: r.rg && r.rg.doorRelay, finalPickId: r.finalPickId, finalResolved: r.finalResolved, withdrawal: r.withdrawal || null, census: { n: ((r.fightCensus && r.fightCensus.fights) || []).length, outcomes: ((r.fightCensus && r.fightCensus.fights) || []).map(f => f.outcome), sources: ((r.fightCensus && r.fightCensus.fights) || []).map(f => f.source), escapeKinds: ((r.fightCensus && r.fightCensus.fights) || []).map(f => f.escapeKind), nonCommittedW4: r.fightCensus ? r.fightCensus.nonCommittedW4 : null, engineOpens: r.fightCensus ? r.fightCensus.engineOpensW4 : null, policyOnlyOpens: r.fightCensus ? r.fightCensus.policyOnlyOpensW4 : null, fastW4: ((r.fightCensus && r.fightCensus.fastW4) || []).map(f => f.monsters.join('+') + (f.committed ? '' : '(noncom)')), fastNonCom: r.fightCensus ? r.fightCensus.fastNonCommittedW4 : null }, noticed: r.noticedCount, bandCrossings: r.bandCrossings, fullseatMax: fs44.max, firstFullSeatDay: fs44.firstFullSeatDay, bestSeat: fs44.bestSeat, indispEver: fs44.indispEver, door: { held: rd.heldAtSit, lean: rd.leanAtSit, band: rd.bandAtSit, bond: rd.bondAtSit, capClaimed: rd.capClaimed, capCommunes: rd.capCommunes, capReroutes: rd.capReroutes, walked: rd.doorWalked } });
+    console.log(JSON.stringify(out[out.length - 1]));
+  }
+})().catch(e => { console.error('FATAL', e && e.stack || e); process.exit(1); });
