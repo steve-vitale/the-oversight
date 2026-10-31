@@ -4,8 +4,7 @@
 // reconciliation when this arm's pilot corpora exist on disk.
 // Usage: node scripts/test-soleprotect-20261031.js
 //   (corpus dirs, when present:
-//    evidence/2026-10-31/perseed-soleprotect-a-base-pilot/
-//    evidence/2026-10-31/perseed-soleprotect-a-instrument-pilot/)
+//    evidence/2026-10-31/perseed-soleprotect-a-{base,instrument}-{pilot,confirm}/)
 'use strict';
 const assert = require('assert');
 const fs = require('fs');
@@ -141,11 +140,12 @@ check('holder with both skills sole: both truncation rows present', () => {
   assert.strictEqual(s.soleCoverage.mend.soleHolderVid, null);
 });
 
-// Corpus reconciliation (runs only when pilot corpora exist).
+// Corpus reconciliation (runs only when corpora exist).
 const REPO = path.join(__dirname, '..');
 for (const leg of ['base', 'instrument']) {
-  const dir = path.join(REPO, 'evidence', '2026-10-31', `perseed-soleprotect-a-${leg}-pilot`);
-  if (!fs.existsSync(dir)) { console.log(`skip corpus ${leg}: ${dir} not present yet`); continue; }
+ for (const band of ['pilot', 'confirm']) {
+  const dir = path.join(REPO, 'evidence', '2026-10-31', `perseed-soleprotect-a-${leg}-${band}`);
+  if (!fs.existsSync(dir)) { console.log(`skip corpus ${leg}-${band}: ${dir} not present yet`); continue; }
   const files = fs.readdirSync(dir).filter(f => /^s\d+\.json$/.test(f)).sort();
   assert.ok(files.length >= 8, `corpus ${leg}: expected >=8 seeds, got ${files.length}`);
   for (const f of files) {
@@ -164,7 +164,8 @@ for (const leg of ['base', 'instrument']) {
       if (h.death) assert.ok(h.patrolDeath || h.death.cause, `corpus ${leg} ${f} ${h.vid}: death unresolved`);
     }
   }
-  console.log(`ok ${++n} - corpus ${leg}: ${files.length} seeds reconciled, errors 0`);
+  console.log(`ok ${++n} - corpus ${leg}-${band}: ${files.length} seeds reconciled, errors 0`);
+ }
 }
 
 console.log(`test-soleprotect-20261031.js: ${n} checks GREEN`);
