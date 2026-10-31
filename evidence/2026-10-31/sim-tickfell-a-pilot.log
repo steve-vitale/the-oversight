@@ -1,0 +1,12 @@
+sim-tickfell-a pilot legs (seed 15215, DAYS=30, substrate
+POLICY=nighttravel COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0
+DEPOSITGATE=1 WOODCARRY=1; driver scripts/tickfell-trace-a.js):
+tickfell policy=nighttravel woodcarry=1 woodwarm=0 tickfell=0 seed=15215 end=survived days=30 evenings=30 inside=27 wcRecords=4 errs=0 wwActed=0 wwErrs=0 tfAttempts=0 tfSkips=0 tfErrs=0 ppErrs=0 written
+tickfell policy=nighttravel woodcarry=1 woodwarm=1 tickfell=0 seed=15215 end=survived days=30 evenings=30 inside=20 wcRecords=10 errs=0 wwActed=6 wwErrs=0 tfAttempts=0 tfSkips=0 tfErrs=0 ppErrs=0 written
+tickfell policy=nighttravel woodcarry=1 woodwarm=0 tickfell=1 seed=15215 end=survived days=30 evenings=30 inside=27 wcRecords=4 errs=0 wwActed=0 wwErrs=0 tfAttempts=0 tfSkips=30 tfErrs=0 ppErrs=0 written
+tickfell policy=nighttravel woodcarry=1 woodwarm=1 tickfell=1 seed=15215 end=survived days=30 evenings=30 inside=20 wcRecords=10 errs=0 wwActed=6 wwErrs=0 tfAttempts=0 tfSkips=30 tfErrs=0 ppErrs=0 written
+determinism re-run (WOODWARM=1 TICKFELL=1, seed 15215):
+tickfell policy=nighttravel woodcarry=1 woodwarm=1 tickfell=1 seed=15215 end=survived days=30 evenings=30 inside=20 wcRecords=10 errs=0 wwActed=6 wwErrs=0 tfAttempts=0 tfSkips=30 tfErrs=0 ppErrs=0 written
+cmp tickfell-on vs determinism corpus files: byte-identical.
+proof (after legs, before prototype deletion):
+test-tickfell-a: 71 passed, 0 failed

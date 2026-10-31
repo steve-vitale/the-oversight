@@ -1,0 +1,3340 @@
+{
+  "legs": {
+    "cg": {
+      "leg": "control-guard",
+      "dir": "evidence/2026-10-31/sim-tickfell-a-corpus-control-guard",
+      "files": 1,
+      "seeds": {
+        "15215": {
+          "seed": 15215,
+          "file": "tickfell-a-nighttravel-s15215.json",
+          "daysAlive": 30,
+          "endReason": "survived",
+          "maxWaveUnlocked": 1,
+          "errs": {
+            "wc": 0,
+            "ww": 0,
+            "tf": 0
+          },
+          "creek": 4,
+          "still": 3,
+          "rescued": 1,
+          "stillDays": [
+            7,
+            8,
+            9
+          ],
+          "rescuedDays": [
+            10
+          ],
+          "creekDays": [
+            7,
+            8,
+            9,
+            10
+          ],
+          "runs": [
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "maxRun": 3,
+          "strandRuns": [
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "perEvening": {
+            "7": {
+              "loopDay": 7,
+              "rescued": false,
+              "skip": "ticks-short",
+              "narration": "No bridge tonight — 47 ticks left in the day, and a bridge takes 96 ticks.",
+              "wood": 4,
+              "kcal": 2254,
+              "ticks": 47
+            },
+            "8": {
+              "loopDay": 8,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 239
+            },
+            "9": {
+              "loopDay": 9,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 109
+            },
+            "10": {
+              "loopDay": 10,
+              "rescued": true,
+              "skip": null,
+              "narration": null,
+              "wood": 4,
+              "kcal": 180,
+              "ticks": 110
+            }
+          },
+          "strandMornings": [
+            {
+              "morningLoopDay": 8,
+              "followsStillLoopDay": 7,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 8,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 1,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 44,
+                "gameDay": 8,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 9,
+              "followsStillLoopDay": 8,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 9,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 9,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 10,
+              "followsStillLoopDay": 9,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 10,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 10,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            }
+          ],
+          "axeMornings": [
+            {
+              "loopDay": 2,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 3,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 4,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2294
+            },
+            {
+              "loopDay": 5,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2388
+            },
+            {
+              "loopDay": 6,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2374
+            },
+            {
+              "loopDay": 7,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2364
+            },
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 11,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2345
+            },
+            {
+              "loopDay": 12,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 13,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 14,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2360
+            },
+            {
+              "loopDay": 15,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2044
+            },
+            {
+              "loopDay": 16,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 17,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            },
+            {
+              "loopDay": 18,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2242
+            },
+            {
+              "loopDay": 19,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2369
+            },
+            {
+              "loopDay": 20,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2369
+            },
+            {
+              "loopDay": 21,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 22,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 23,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 24,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2372
+            },
+            {
+              "loopDay": 25,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 26,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            },
+            {
+              "loopDay": 27,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            },
+            {
+              "loopDay": 28,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 29,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 30,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            }
+          ],
+          "axeStrandMornings": [
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            }
+          ],
+          "playerDeathDay": null,
+          "gameOverDay": null,
+          "deathDay": null,
+          "tickfellAttempts": 0,
+          "tickfellSkips": 0,
+          "cutTreeCalls": 0
+        }
+      },
+      "strandSeeds": [
+        15215
+      ]
+    },
+    "co": {
+      "leg": "control-on",
+      "dir": "evidence/2026-10-31/sim-tickfell-a-corpus-control-on",
+      "files": 1,
+      "seeds": {
+        "15215": {
+          "seed": 15215,
+          "file": "tickfell-a-nighttravel-s15215.json",
+          "daysAlive": 30,
+          "endReason": "survived",
+          "maxWaveUnlocked": 1,
+          "errs": {
+            "wc": 0,
+            "ww": 0,
+            "tf": 0
+          },
+          "creek": 10,
+          "still": 10,
+          "rescued": 0,
+          "stillDays": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "rescuedDays": [],
+          "creekDays": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "runs": [
+            [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ]
+          ],
+          "maxRun": 10,
+          "strandRuns": [
+            [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ]
+          ],
+          "perEvening": {
+            "7": {
+              "loopDay": 7,
+              "rescued": false,
+              "skip": "ticks-short",
+              "narration": "No bridge tonight — 47 ticks left in the day, and a bridge takes 96 ticks.",
+              "wood": 4,
+              "kcal": 2254,
+              "ticks": 47
+            },
+            "8": {
+              "loopDay": 8,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 239
+            },
+            "9": {
+              "loopDay": 9,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 109
+            },
+            "10": {
+              "loopDay": 10,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 3 logs, and a bridge needs 4.",
+              "wood": 3,
+              "kcal": 240,
+              "ticks": 238
+            },
+            "11": {
+              "loopDay": 11,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 3 logs, and a bridge needs 4.",
+              "wood": 3,
+              "kcal": 0,
+              "ticks": 111
+            },
+            "12": {
+              "loopDay": 12,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 2 logs, and a bridge needs 4.",
+              "wood": 2,
+              "kcal": 0,
+              "ticks": 239
+            },
+            "13": {
+              "loopDay": 13,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 1 log, and a bridge needs 4.",
+              "wood": 1,
+              "kcal": 0,
+              "ticks": 111
+            },
+            "14": {
+              "loopDay": 14,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 0 logs, and a bridge needs 4.",
+              "wood": 0,
+              "kcal": 240,
+              "ticks": 238
+            },
+            "15": {
+              "loopDay": 15,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 0 logs, and a bridge needs 4.",
+              "wood": 0,
+              "kcal": 0,
+              "ticks": 111
+            },
+            "16": {
+              "loopDay": 16,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 0 logs, and a bridge needs 4.",
+              "wood": 0,
+              "kcal": 0,
+              "ticks": 111
+            }
+          },
+          "strandMornings": [
+            {
+              "morningLoopDay": 8,
+              "followsStillLoopDay": 7,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 8,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 1,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 44,
+                "gameDay": 8,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 9,
+              "followsStillLoopDay": 8,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 9,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 9,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 10,
+              "followsStillLoopDay": 9,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 10,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 10,
+                "morningWood": 3,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 11,
+              "followsStillLoopDay": 10,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 11,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 31,
+                "gameDay": 11,
+                "morningWood": 3,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 12,
+              "followsStillLoopDay": 11,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 12,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 12,
+                "morningWood": 2,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 13,
+              "followsStillLoopDay": 12,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 13,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 13,
+                "morningWood": 1,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 14,
+              "followsStillLoopDay": 13,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 14,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 14,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 15,
+              "followsStillLoopDay": 14,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 15,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 52,
+                "gameDay": 15,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 16,
+              "followsStillLoopDay": 15,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 16,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 16,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 17,
+              "followsStillLoopDay": 16,
+              "tickfellRecord": null,
+              "morningSnap": {
+                "loopDay": 17,
+                "inside": true,
+                "insideTent": null,
+                "exiled": false,
+                "mx": 4,
+                "my": 4,
+                "tile": "haven",
+                "access": "inside",
+                "stage": 2,
+                "mapPx": 4,
+                "mapPy": 4,
+                "kcal": 2340,
+                "gameDay": 17,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 0,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "none",
+                  "toolName": "bare hands",
+                  "itemId": null,
+                  "canFell": false
+                }
+              }
+            }
+          ],
+          "axeMornings": [
+            {
+              "loopDay": 2,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 3,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 4,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2294
+            },
+            {
+              "loopDay": 5,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2388
+            },
+            {
+              "loopDay": 6,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2374
+            },
+            {
+              "loopDay": 7,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2364
+            },
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 3,
+              "kcal": 0
+            },
+            {
+              "loopDay": 11,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 3,
+              "kcal": 31
+            },
+            {
+              "loopDay": 12,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 2,
+              "kcal": 0
+            },
+            {
+              "loopDay": 13,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 1,
+              "kcal": 0
+            },
+            {
+              "loopDay": 14,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 15,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 52
+            },
+            {
+              "loopDay": 16,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 17,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2340
+            },
+            {
+              "loopDay": 18,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2060
+            },
+            {
+              "loopDay": 19,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 20,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2235
+            },
+            {
+              "loopDay": 21,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2043
+            },
+            {
+              "loopDay": 22,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 23,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2178
+            },
+            {
+              "loopDay": 24,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2066
+            },
+            {
+              "loopDay": 25,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2266
+            },
+            {
+              "loopDay": 26,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2142
+            },
+            {
+              "loopDay": 27,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 28,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2230
+            },
+            {
+              "loopDay": 29,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2116
+            },
+            {
+              "loopDay": 30,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2165
+            }
+          ],
+          "axeStrandMornings": [
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 3,
+              "kcal": 0
+            },
+            {
+              "loopDay": 11,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 3,
+              "kcal": 31
+            },
+            {
+              "loopDay": 12,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 2,
+              "kcal": 0
+            },
+            {
+              "loopDay": 13,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 1,
+              "kcal": 0
+            },
+            {
+              "loopDay": 14,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 15,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 52
+            },
+            {
+              "loopDay": 16,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 17,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2340
+            }
+          ],
+          "playerDeathDay": 17,
+          "gameOverDay": null,
+          "deathDay": 17,
+          "tickfellAttempts": 0,
+          "tickfellSkips": 0,
+          "cutTreeCalls": 0
+        }
+      },
+      "strandSeeds": [
+        15215
+      ]
+    },
+    "tg": {
+      "leg": "tickfell-guard",
+      "dir": "evidence/2026-10-31/sim-tickfell-a-corpus-tickfell-guard",
+      "files": 1,
+      "seeds": {
+        "15215": {
+          "seed": 15215,
+          "file": "tickfell-a-nighttravel-s15215.json",
+          "daysAlive": 30,
+          "endReason": "survived",
+          "maxWaveUnlocked": 1,
+          "errs": {
+            "wc": 0,
+            "ww": 0,
+            "tf": 0
+          },
+          "creek": 4,
+          "still": 3,
+          "rescued": 1,
+          "stillDays": [
+            7,
+            8,
+            9
+          ],
+          "rescuedDays": [
+            10
+          ],
+          "creekDays": [
+            7,
+            8,
+            9,
+            10
+          ],
+          "runs": [
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "maxRun": 3,
+          "strandRuns": [
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "perEvening": {
+            "7": {
+              "loopDay": 7,
+              "rescued": false,
+              "skip": "ticks-short",
+              "narration": "No bridge tonight — 47 ticks left in the day, and a bridge takes 96 ticks.",
+              "wood": 4,
+              "kcal": 2254,
+              "ticks": 47
+            },
+            "8": {
+              "loopDay": 8,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 239
+            },
+            "9": {
+              "loopDay": 9,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 109
+            },
+            "10": {
+              "loopDay": 10,
+              "rescued": true,
+              "skip": null,
+              "narration": null,
+              "wood": 4,
+              "kcal": 180,
+              "ticks": 110
+            }
+          },
+          "strandMornings": [
+            {
+              "morningLoopDay": 8,
+              "followsStillLoopDay": 7,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 8,
+                "prevLoopDay": 7,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 44,
+                "morningWood": 4,
+                "morningDayTicks": 256,
+                "morningTicksLeft": 256,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "pack-ready"
+              },
+              "morningSnap": {
+                "loopDay": 8,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 1,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 44,
+                "gameDay": 8,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 9,
+              "followsStillLoopDay": 8,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 9,
+                "prevLoopDay": 8,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 4,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "pack-ready"
+              },
+              "morningSnap": {
+                "loopDay": 9,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 9,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 10,
+              "followsStillLoopDay": 9,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 10,
+                "prevLoopDay": 9,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  8,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 4,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "pack-ready"
+              },
+              "morningSnap": {
+                "loopDay": 10,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 10,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            }
+          ],
+          "axeMornings": [
+            {
+              "loopDay": 2,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 3,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 4,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2294
+            },
+            {
+              "loopDay": 5,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2388
+            },
+            {
+              "loopDay": 6,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2374
+            },
+            {
+              "loopDay": 7,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2364
+            },
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 11,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2345
+            },
+            {
+              "loopDay": 12,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 13,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 14,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2360
+            },
+            {
+              "loopDay": 15,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2044
+            },
+            {
+              "loopDay": 16,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 17,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            },
+            {
+              "loopDay": 18,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2242
+            },
+            {
+              "loopDay": 19,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2369
+            },
+            {
+              "loopDay": 20,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2369
+            },
+            {
+              "loopDay": 21,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 22,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 23,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 24,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2372
+            },
+            {
+              "loopDay": 25,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 26,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            },
+            {
+              "loopDay": 27,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            },
+            {
+              "loopDay": 28,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 29,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 30,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2390
+            }
+          ],
+          "axeStrandMornings": [
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            }
+          ],
+          "playerDeathDay": null,
+          "gameOverDay": null,
+          "deathDay": null,
+          "tickfellAttempts": 0,
+          "tickfellSkips": 30,
+          "cutTreeCalls": 0
+        }
+      },
+      "strandSeeds": [
+        15215
+      ]
+    },
+    "to": {
+      "leg": "tickfell-on",
+      "dir": "evidence/2026-10-31/sim-tickfell-a-corpus-tickfell-on",
+      "files": 1,
+      "seeds": {
+        "15215": {
+          "seed": 15215,
+          "file": "tickfell-a-nighttravel-s15215.json",
+          "daysAlive": 30,
+          "endReason": "survived",
+          "maxWaveUnlocked": 1,
+          "errs": {
+            "wc": 0,
+            "ww": 0,
+            "tf": 0
+          },
+          "creek": 10,
+          "still": 10,
+          "rescued": 0,
+          "stillDays": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "rescuedDays": [],
+          "creekDays": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "runs": [
+            [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ]
+          ],
+          "maxRun": 10,
+          "strandRuns": [
+            [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ]
+          ],
+          "perEvening": {
+            "7": {
+              "loopDay": 7,
+              "rescued": false,
+              "skip": "ticks-short",
+              "narration": "No bridge tonight — 47 ticks left in the day, and a bridge takes 96 ticks.",
+              "wood": 4,
+              "kcal": 2254,
+              "ticks": 47
+            },
+            "8": {
+              "loopDay": 8,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 239
+            },
+            "9": {
+              "loopDay": 9,
+              "rescued": false,
+              "skip": "kcal-short",
+              "narration": "No bridge tonight — 0 kcal in hand, and the lashing takes 60.",
+              "wood": 4,
+              "kcal": 0,
+              "ticks": 109
+            },
+            "10": {
+              "loopDay": 10,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 3 logs, and a bridge needs 4.",
+              "wood": 3,
+              "kcal": 240,
+              "ticks": 238
+            },
+            "11": {
+              "loopDay": 11,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 3 logs, and a bridge needs 4.",
+              "wood": 3,
+              "kcal": 0,
+              "ticks": 111
+            },
+            "12": {
+              "loopDay": 12,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 2 logs, and a bridge needs 4.",
+              "wood": 2,
+              "kcal": 0,
+              "ticks": 239
+            },
+            "13": {
+              "loopDay": 13,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 1 log, and a bridge needs 4.",
+              "wood": 1,
+              "kcal": 0,
+              "ticks": 111
+            },
+            "14": {
+              "loopDay": 14,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 0 logs, and a bridge needs 4.",
+              "wood": 0,
+              "kcal": 240,
+              "ticks": 238
+            },
+            "15": {
+              "loopDay": 15,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 0 logs, and a bridge needs 4.",
+              "wood": 0,
+              "kcal": 0,
+              "ticks": 111
+            },
+            "16": {
+              "loopDay": 16,
+              "rescued": false,
+              "skip": "wood-short",
+              "narration": "No bridge tonight — the pack holds 0 logs, and a bridge needs 4.",
+              "wood": 0,
+              "kcal": 0,
+              "ticks": 111
+            }
+          },
+          "strandMornings": [
+            {
+              "morningLoopDay": 8,
+              "followsStillLoopDay": 7,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 8,
+                "prevLoopDay": 7,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 44,
+                "morningWood": 4,
+                "morningDayTicks": 256,
+                "morningTicksLeft": 256,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "pack-ready"
+              },
+              "morningSnap": {
+                "loopDay": 8,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 1,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 44,
+                "gameDay": 8,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 9,
+              "followsStillLoopDay": 8,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 9,
+                "prevLoopDay": 8,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 4,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "pack-ready"
+              },
+              "morningSnap": {
+                "loopDay": 9,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 9,
+                "morningWood": 4,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 10,
+              "followsStillLoopDay": 9,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 10,
+                "prevLoopDay": 9,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  8,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 3,
+                "morningDayTicks": 256,
+                "morningTicksLeft": 256,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 5,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  6,
+                  0
+                ],
+                "path": [
+                  "7,0",
+                  "6,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": 118
+              },
+              "morningSnap": {
+                "loopDay": 10,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 10,
+                "morningWood": 3,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 11,
+              "followsStillLoopDay": 10,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 11,
+                "prevLoopDay": 10,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  8,
+                  0
+                ],
+                "morningKcal": 31,
+                "morningWood": 3,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 5,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  6,
+                  0
+                ],
+                "path": [
+                  "7,0",
+                  "6,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": -10
+              },
+              "morningSnap": {
+                "loopDay": 11,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 31,
+                "gameDay": 11,
+                "morningWood": 3,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 12,
+              "followsStillLoopDay": 11,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 12,
+                "prevLoopDay": 11,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 2,
+                "morningDayTicks": 256,
+                "morningTicksLeft": 256,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 4,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  3,
+                  0
+                ],
+                "path": [
+                  "1,0",
+                  "2,0",
+                  "3,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": 117
+              },
+              "morningSnap": {
+                "loopDay": 12,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 12,
+                "morningWood": 2,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 13,
+              "followsStillLoopDay": 12,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 13,
+                "prevLoopDay": 12,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 1,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 4,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  3,
+                  0
+                ],
+                "path": [
+                  "1,0",
+                  "2,0",
+                  "3,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": -11
+              },
+              "morningSnap": {
+                "loopDay": 13,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 13,
+                "morningWood": 1,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 14,
+              "followsStillLoopDay": 13,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 14,
+                "prevLoopDay": 13,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  8,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 0,
+                "morningDayTicks": 256,
+                "morningTicksLeft": 256,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 5,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  6,
+                  0
+                ],
+                "path": [
+                  "7,0",
+                  "6,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": 118
+              },
+              "morningSnap": {
+                "loopDay": 14,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 14,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 256,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 15,
+              "followsStillLoopDay": 14,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 15,
+                "prevLoopDay": 14,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  8,
+                  0
+                ],
+                "morningKcal": 52,
+                "morningWood": 0,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 5,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  6,
+                  0
+                ],
+                "path": [
+                  "7,0",
+                  "6,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": -10
+              },
+              "morningSnap": {
+                "loopDay": 15,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 8,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 52,
+                "gameDay": 15,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 16,
+              "followsStillLoopDay": 15,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 16,
+                "prevLoopDay": 15,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTile": "2,5",
+                "wakeTileType": "creek",
+                "wake": [
+                  0,
+                  0
+                ],
+                "morningKcal": 0,
+                "morningWood": 0,
+                "morningDayTicks": 384,
+                "morningTicksLeft": 128,
+                "axeSnap": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                },
+                "skip": "tool-gate",
+                "target": {
+                  "x": 4,
+                  "y": 0,
+                  "cell": "bigtree"
+                },
+                "stance": [
+                  3,
+                  0
+                ],
+                "path": [
+                  "1,0",
+                  "2,0",
+                  "3,0"
+                ],
+                "cutInfo": {
+                  "canFell": false,
+                  "toolName": "Stone knife",
+                  "tier": "whittle"
+                },
+                "cutInfoError": null,
+                "projected": -11
+              },
+              "morningSnap": {
+                "loopDay": 16,
+                "inside": false,
+                "insideTent": null,
+                "exiled": null,
+                "mx": 0,
+                "my": 0,
+                "tile": "creek",
+                "access": "none",
+                "stage": 2,
+                "mapPx": 2,
+                "mapPy": 5,
+                "kcal": 0,
+                "gameDay": 16,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 8,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "whittle",
+                  "toolName": "Stone knife",
+                  "itemId": "stone_knife",
+                  "canFell": false
+                }
+              }
+            },
+            {
+              "morningLoopDay": 17,
+              "followsStillLoopDay": 16,
+              "tickfellRecord": {
+                "kind": "skip",
+                "loopDay": 17,
+                "skip": "haven-morning",
+                "prevLoopDay": 16,
+                "prevBucket": "creek",
+                "prevRescued": false,
+                "wakeTileType": "haven",
+                "insideHaven": true,
+                "axeSnap": {
+                  "tier": "none",
+                  "toolName": "bare hands",
+                  "itemId": null,
+                  "canFell": false
+                }
+              },
+              "morningSnap": {
+                "loopDay": 17,
+                "inside": true,
+                "insideTent": null,
+                "exiled": false,
+                "mx": 4,
+                "my": 4,
+                "tile": "haven",
+                "access": "inside",
+                "stage": 2,
+                "mapPx": 4,
+                "mapPy": 4,
+                "kcal": 2340,
+                "gameDay": 17,
+                "morningWood": 0,
+                "adjSources": {
+                  "tree": 0,
+                  "bigtree": 0,
+                  "bush": 0,
+                  "fullTree": 0,
+                  "fullBigtree": 0,
+                  "fullBush": 0
+                },
+                "morningDayTicks": 384,
+                "morningAxe": {
+                  "tier": "none",
+                  "toolName": "bare hands",
+                  "itemId": null,
+                  "canFell": false
+                }
+              }
+            }
+          ],
+          "axeMornings": [
+            {
+              "loopDay": 2,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 3,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 4,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2294
+            },
+            {
+              "loopDay": 5,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2388
+            },
+            {
+              "loopDay": 6,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2374
+            },
+            {
+              "loopDay": 7,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2364
+            },
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 3,
+              "kcal": 0
+            },
+            {
+              "loopDay": 11,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 3,
+              "kcal": 31
+            },
+            {
+              "loopDay": 12,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 2,
+              "kcal": 0
+            },
+            {
+              "loopDay": 13,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 1,
+              "kcal": 0
+            },
+            {
+              "loopDay": 14,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 15,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 52
+            },
+            {
+              "loopDay": 16,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 17,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2340
+            },
+            {
+              "loopDay": 18,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2060
+            },
+            {
+              "loopDay": 19,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 20,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2235
+            },
+            {
+              "loopDay": 21,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2043
+            },
+            {
+              "loopDay": 22,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 23,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2178
+            },
+            {
+              "loopDay": 24,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2066
+            },
+            {
+              "loopDay": 25,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2266
+            },
+            {
+              "loopDay": 26,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2142
+            },
+            {
+              "loopDay": 27,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2400
+            },
+            {
+              "loopDay": 28,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2230
+            },
+            {
+              "loopDay": 29,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 2116
+            },
+            {
+              "loopDay": 30,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 2165
+            }
+          ],
+          "axeStrandMornings": [
+            {
+              "loopDay": 8,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 4,
+              "kcal": 44
+            },
+            {
+              "loopDay": 9,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 4,
+              "kcal": 0
+            },
+            {
+              "loopDay": 10,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 3,
+              "kcal": 0
+            },
+            {
+              "loopDay": 11,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 3,
+              "kcal": 31
+            },
+            {
+              "loopDay": 12,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 2,
+              "kcal": 0
+            },
+            {
+              "loopDay": 13,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 1,
+              "kcal": 0
+            },
+            {
+              "loopDay": 14,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 256,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 15,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 52
+            },
+            {
+              "loopDay": 16,
+              "tier": "whittle",
+              "toolName": "Stone knife",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 0
+            },
+            {
+              "loopDay": 17,
+              "tier": "none",
+              "toolName": "bare hands",
+              "canFell": false,
+              "morningDayTicks": 384,
+              "morningWood": 0,
+              "kcal": 2340
+            }
+          ],
+          "playerDeathDay": 17,
+          "gameOverDay": null,
+          "deathDay": 17,
+          "tickfellAttempts": 0,
+          "tickfellSkips": 30,
+          "cutTreeCalls": 0
+        }
+      },
+      "strandSeeds": [
+        15215
+      ]
+    }
+  },
+  "judgement": {
+    "perSeed": {
+      "15215": {
+        "bothEvenings": [
+          7,
+          8,
+          9
+        ],
+        "rescuedOn": {
+          "7": {
+            "guard": false,
+            "on": false
+          },
+          "8": {
+            "guard": false,
+            "on": false
+          },
+          "9": {
+            "guard": false,
+            "on": false
+          }
+        },
+        "len": {
+          "guard": {
+            "control": {
+              "still": 3,
+              "maxRun": 3
+            },
+            "tickfell": {
+              "still": 3,
+              "maxRun": 3
+            },
+            "increased": false
+          },
+          "on": {
+            "control": {
+              "still": 10,
+              "maxRun": 10
+            },
+            "tickfell": {
+              "still": 10,
+              "maxRun": 10
+            },
+            "increased": false
+          }
+        },
+        "death": {
+          "guard": {
+            "control": null,
+            "tickfell": null,
+            "earlier": false
+          },
+          "on": {
+            "control": 17,
+            "tickfell": 17,
+            "earlier": false
+          }
+        },
+        "controlStrand": {
+          "guard": [
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "on": [
+            [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ]
+          ]
+        },
+        "tickfellStrand": {
+          "guard": [
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "on": [
+            [
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ]
+          ]
+        }
+      }
+    },
+    "goRescues": 0,
+    "lengthIncrease": [],
+    "earlierDeath": [],
+    "clauseA": false,
+    "clauseB": true,
+    "clauseC": true,
+    "verdict": "NO-GO"
+  }
+}
