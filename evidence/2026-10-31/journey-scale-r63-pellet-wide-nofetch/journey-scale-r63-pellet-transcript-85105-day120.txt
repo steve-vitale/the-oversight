@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d114; takenWantDay=0; convoCount=27)
+=== seed 85105 day 120 — conversation with Lucas (gen_qqv7y5o) ===
+occupation=line cook temperament=warm trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the pantry run — still need hands. Are you in?"
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good — The knotweed shoot patch past the treeline, before the dew dries. Pack light — we move fast."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "I should — yeah. Later."

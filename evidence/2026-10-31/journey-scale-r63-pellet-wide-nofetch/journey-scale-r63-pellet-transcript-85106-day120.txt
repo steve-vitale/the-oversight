@@ -1,0 +1,14 @@
+(pre-talk seed: curious planted d108; takenWantDay=0; convoCount=1)
+=== seed 85106 day 120 — conversation with Nadia (nadia_khoury) ===
+occupation=radio DJ temperament=warm trust=39 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "We're eating through stores faster than we replace them. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good — The far treeline, past the rocks, first light. Pack light — we move fast."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Anyway. I'm glad we talked. Really."

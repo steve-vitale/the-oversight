@@ -1,0 +1,24 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 85003 day 90 — conversation with Dale (dale_hoffman) ===
+occupation=rail conductor temperament=dry trust=38 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "Every laugh out there feels wrong today. Then I feel wrong for thinking it. Funny how that works."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Dale stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [dlg:comfort] "You alright?"
+THEM: "You're kind. Don't let this place change that."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Nikos headed out to forage."
+YOU: [dlg:more] "I’m listening."
+THEM: "Funny thing: Greta? A Sailor, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Chloe headed out to forage."
+YOU: [dlg:more] "I’m listening."
+THEM: "People are talking about Olivia. Take it for what it's worth. Think, then act."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+closing line: "Talking helps. A little. Thank you."

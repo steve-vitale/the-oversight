@@ -1,0 +1,16 @@
+(pre-talk seed: curious planted d90; takenWantDay=0; convoCount=15)
+=== seed 85101 day 90 — conversation with Darius (gen_062489s) ===
+occupation=aquarium keeper temperament=gentle trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing, as it were."
+(turn0 choices: ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+YOU: [goon] "I'm here. Go on."
+THEM: The conversation cools to something businesslike.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "I should — yeah. Later."

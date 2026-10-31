@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d119; takenWantDay=0; convoCount=22)
+=== seed 85106 day 120 — conversation with Duc (gen_bi0y6kd) ===
+occupation=physical therapy aide temperament=withdrawn trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: grief fromSeed=true
+picker: control
+
+THEM: "I keep expecting to see them by the fire. Then I remember."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Duc shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Nino is back. Walked in like they'd never left."
+YOU: [dlg:more] "Tell me more."
+THEM: "Ursula drank the creek water straight. No boiling. Nothing happened. Nothing."
+YOU: [dlg:react] (listen)
+THEM: "Sari headed out for water."
+YOU: [dlg:more] "Tell me more."
+THEM: "Yeah, that was me. I walked away from Haven once. Didn't look back."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "Talking helps. A little. Thank you."

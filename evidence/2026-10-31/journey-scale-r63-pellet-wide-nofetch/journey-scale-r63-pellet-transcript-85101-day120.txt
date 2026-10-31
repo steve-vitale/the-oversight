@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d118; takenWantDay=0; convoCount=24)
+=== seed 85101 day 120 — conversation with Darius (gen_062489s) ===
+occupation=aquarium keeper temperament=gentle trust=89 dead=false
+want: ask_favor (stage 2)
+open thread: small fromSeed=true
+picker: control
+
+THEM: "You've got a tell when you're worried. Just so you know. It's the jaw thing."
+(turn0 choices: confront:d_z4tyhmx, dlg:commit, dlg:cant, dlg:invite, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good — The north treeline by the fallen oak, before the heat sets in. Bring the big pack if you have it."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread small
+closing line: "Good talk."

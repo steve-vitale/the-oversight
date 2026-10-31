@@ -1,0 +1,16 @@
+(pre-talk seed: ask_favor planted d120; takenWantDay=0; convoCount=22)
+=== seed 85103 day 120 — conversation with Naran (naran_tumen) ===
+occupation=bus driver temperament=dry trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: cheer fromSeed=true
+picker: control
+
+THEM: "People are smiling. I forgot what that looked like."
+(turn0 choices: dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread cheer
+closing line: "Right then. Back to the business of surviving."

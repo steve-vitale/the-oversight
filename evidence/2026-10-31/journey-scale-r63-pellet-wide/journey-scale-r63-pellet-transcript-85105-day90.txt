@@ -1,0 +1,16 @@
+(pre-talk seed: seek_taken planted d78; takenWantDay=78; convoCount=14)
+=== seed 85105 day 90 — conversation with Sidney (gen_lmsht91) ===
+occupation=welder temperament=sardonic trust=90 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Guadalupe? What could go wrong."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Steady as she goes. See you at dinner."
