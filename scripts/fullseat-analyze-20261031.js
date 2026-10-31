@@ -106,6 +106,18 @@ function analyzeSeed(j) {
   a.singleBarNearMissAtMax = a.bindingAtMax.length === 1;
   // Component-wise pass but never simultaneous?
   a.componentWisePass = a.bindingAtMax.length === 0;
+  // Closest single day: the daily row minimizing shortfall (ties ->
+  // latest day). The max vector is per-component; this is the best
+  // day the village actually lived, and the gap between the two is
+  // the simultaneity gap.
+  let closest = null;
+  for (const r of rt) {
+    const f = r.full || {};
+    const v = { w1: f.w1, w2: f.w2, w3: f.w3, w4: f.w4, w5: f.w5, contests: f.contestsN, crises: f.crisesN, stage: f.stage, foodDeeds: f.foodDeeds, scale: f.scale };
+    const sf = shortfall(v);
+    if (closest == null || sf <= closest.shortfall) closest = { day: r.day, vector: v, binding: bindingAt(v), shortfall: sf, seat: r.seat, rank: r.rank };
+  }
+  a.closestDay = closest;
 
   // (4) Veterans census.
   let maxV5 = 0, maxV5First = null, maxV5Last = null, maxV5Rows = 0;

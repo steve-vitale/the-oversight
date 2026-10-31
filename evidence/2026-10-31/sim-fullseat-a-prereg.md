@@ -225,6 +225,35 @@ stdout→file + stderr→file, never a backgrounded pipe); the splitter
 writer. Judged corpora are NEVER staged in /tmp. Scratch dirs live
 in the worktree and are deleted before commit.
 
+## Addendum (appended BEFORE confirm spend and BEFORE any verdict, pilot data inspected only for instrument adjudication)
+
+Pilot cc3 adjudication, 87109 day 81: one capture/census mismatch
+whose machine shape differs from the vet2-a 87135 class in exactly
+one respect — the kill-time scholar (gen_xv4uwtn, BOTH capture
+scholar reads agreeing: Game.villagerId == state.scholar.villagerId)
+never appears on any daily row. The daily series shows rapid mantle
+churn around the day (Leo day 79 → Lucas day 80 → Maya day 81 →
+Daniyar day 82), so the mechanism is the same — the mantle passed
+between the kill moment and the daily snapshot — except the interim
+holder held it between two snapshots and is invisible to daily rows.
+The analyzer's machine check (prior daily row scholar == capture
+scholar) cannot see interim holders; that is an instrument blind
+spot, recorded here, not a new mechanism. The kill is wave 1
+(cliffhanger, via companion, by Daniyar), so its keying moves NO
+census number in this arm (vet5, w4/w5 kills, full components, and
+table/seat are all unaffected either way it is keyed).
+
+RULE, stated now and applied to the confirm corpus unchanged: a cc3
+mismatch counts as explained (does not fail the gate) iff ALL of:
+(i) both capture scholar reads agree at the kill moment; (ii) the
+daily series shows mantle churn bracketing the kill day, or a prior
+daily row scholar == capture scholar; (iii) the kill's wave/keying
+cannot move any census number in this arm (verified per mismatch
+in the evidence). Any mismatch failing (i)–(iii) fails the gate.
+The pilot's other cc3 mismatches (87135 day 135 x3, 87138 day 82)
+are the prior-row class and were already covered by the original
+clause.
+
 ## Metric review (for the NEXT run — mandatory section in evidence)
 
 To be filled at evidence time, including: whether the max-vector
