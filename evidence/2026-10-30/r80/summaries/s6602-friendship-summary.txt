@@ -1,0 +1,103 @@
+# SURFACE+SEEDED — seed 6602 (43d, 5 alive)
+
+npcPairs=71 deep2=8 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=71 closeReadsServed=16 grievanceServes=17 othersSteered=14
+COND-TP: firstDeep2Day=25 lateClose=16 lateTP=9 lateNull=0 condRate=56.3% pooledTP=9/30 pooledRate=30.0% grievReadsByWhy={"grievance":14,"vgrievance":17}
+FUNNEL (natural): convos=123 subject=101 offered=78 picked=57 classes={"subject-no-offer":23,"offered-not-picked":21,"picked-others":57,"no-subject-no-ans":22}
+FUNNEL-UNSTEERED (r55 strict): convos=123 subjectNoOffer=23 rate=18.7% offered=78 mainOffered=4 subjectOffered=75 picked=57 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=67 picks=59 latePicks=0 missedChangedNotOffered=3
+WRAPSERVE: convos=31 matcherHits=17 matcherServes=17 classes={"grievance-line":17,"deflection":3,"other":11}
+FUNNEL-PROBE (subject-no-offer turns): turns=73 menuProblem=61 pickProblem=12
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":0,"acceptRate":0,"vetoes":{},"chanceMin":36,"chanceMax":52,"chanceMean":40.4} party={"n":15,"accepts":8,"acceptRate":0.5333333333333333,"vetoes":{},"chanceMin":24.200000000000003,"chanceMax":89.6,"chanceMean":49.8} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":11,"forageOffers":1,"otherFavorOffers":10,"accepts":1,"acceptAttempts":1,"waits":2,"starts":1,"startBlocked":2,"forages":1,"forageNodeBarren":1,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":1,"keptMatched":0,"keptMatchedStrict":0}
+MOOT (r80): villageMootsField=0 conveneSum=0 sayNpc=0 sayEcho=0 sayPlayer=0 sayTotal=0 casesTrial=0 cases=0 plots=1
+OUTING END STATES: []
+  FAVOR-OFFER d10: Valeria kind=food_share favorId=favor-valeria_quispe-10-1 task=share food with Valeria — they're running on empty
+  FAVOR-OFFER d16: Stan kind=forage_help favorId=favor-stan_kowalski-16-2 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Hassan kind=sick_help favorId=favor-hassan_ali-20-3 task=help Hassan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d21: Hassan kind=sick_help favorId=favor-hassan_ali-21-5 task=help Hassan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d24: Valeria kind=food_share favorId=favor-valeria_quispe-24-6 task=share food with Valeria — they're past hungry
+  FAVOR-OFFER d28: Sanne kind=heal_help favorId=favor-sanne_bakker-28-7 task=help Sanne with their injury
+  FAVOR-OFFER d29: Hassan kind=heal_help favorId=favor-hassan_ali-29-8 task=help Hassan with their injury
+  FAVOR-OFFER d30: Valeria kind=sick_help favorId=favor-valeria_quispe-30-9 task=help Valeria with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d34: Daniela kind=sick_help favorId=favor-gen_3u69fh1-34-10 task=help Daniela with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d39: Stan kind=food_share favorId=favor-stan_kowalski-39-11 task=share food with Stan — they're past hungry
+  FAVOR-OFFER d43: Dakila kind=sick_help favorId=favor-gen_rz3y9z9-43-12 task=help Dakila with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-ACCEPT d16: Stan favorId=favor-stan_kowalski-16-2 accepted=true state=promised meetDay=17
+  INVITE-DEC d8 party: Luke -> Daniela chance=58 accept=false veto=- inputs={"temp":"stoic","goal":"belong","mood":"steady","fear":4,"trust":20,"bond":null,"partySize":1} reasons=["trust 20","belong goal (+15)"]
+  INVITE-DEC d8 party: Luke -> Seymour chance=68.8 accept=true veto=- inputs={"temp":"warm","goal":"answers","mood":"steady","fear":4,"trust":47,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 47","warm temperament (+15)"]
+  INVITE-DEC d8 party: Luke -> Valeria chance=45.4 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":4,"trust":26,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 26"]
+  INVITE-DEC d10 party: Peyton -> Daniela chance=54.8 accept=true veto=- inputs={"temp":"stoic","goal":"belong","mood":"grieving","fear":27,"trust":37,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 37","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d11 lure: Dalila -> Valeria chance=42 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":4,"affinity":27} reasons=["relationship with inviter (+7)","grieving mood (-10)"]
+  INVITE-DEC d12 lure: Dalila -> Valeria chance=52 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"hungry","fear":0,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d13 lure: Dalila -> Valeria chance=36 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":29,"affinity":2} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d14 lure: Dalila -> Valeria chance=36 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":9,"affinity":2} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Peyton -> Yuki chance=36.400000000000006 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"grieving","fear":0,"trust":41,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 41","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Peyton -> Sanne chance=46.8 accept=false veto=- inputs={"temp":"dry","goal":"prove","mood":"grieving","fear":0,"trust":42,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d15 lure: Dalila -> Valeria chance=36 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":4,"affinity":2} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d16 party: Peyton -> Yuki chance=46 accept=true veto=- inputs={"temp":"cautious","goal":"joy","mood":"steady","fear":4,"trust":40,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d31 party: Peyton -> Sanne chance=40 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":12,"trust":50,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 50","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d33 party: Peyton -> Nina chance=60.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"belong","mood":"grieving","fear":5,"trust":39,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 39","a big party is safer (+5)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d37 party: Seymour -> Dakila chance=89.6 accept=true veto=- inputs={"temp":"stoic","goal":"belong","mood":"steady","fear":4,"trust":74,"bond":{"v":44,"depth":1},"partySize":2} reasons=["trust 74","a real bond (+10)","belong goal (+15)"]
+  INVITE-DEC d37 party: Seymour -> Stan chance=79.6 accept=true veto=- inputs={"temp":"dry","goal":"legacy","mood":"steady","fear":4,"trust":74,"bond":{"v":40,"depth":1},"partySize":3} reasons=["trust 74","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d40 party: Yuki -> Thabo chance=26.6 accept=false veto=- inputs={"temp":"dry","goal":"joy","mood":"grieving","fear":73,"trust":29,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 29","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d41 party: Yuki -> Ursula chance=33.8 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":45,"trust":22,"bond":null,"partySize":2} reasons=["trust 22","grieving mood (-10)"]
+  INVITE-DEC d42 party: Yuki -> Farid chance=24.200000000000003 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"grieving","fear":0,"trust":23,"bond":null,"partySize":2} reasons=["trust 23","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d42 party: Yuki -> Ursula chance=37 accept=true veto=- inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":13,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":23,"v":44,"depth":3},{"day":24,"v":48,"depth":3},{"day":25,"v":52,"depth":3},{"day":26,"v":56,"depth":3},{"day":27,"v":56,"depth":3},{"day":28,"v":56,"depth":3},{"day":29,"v":60,"depth":3},{"day":30,"v":64,"depth":3},{"day":31,"v":68,"depth":3},{"day":32,"v":72,"depth":3},{"day":33,"v":76,"depth":3},{"day":34,"v":82,"depth":3},{"day":35,"v":84,"depth":3},{"day":36,"v":86,"depth":3},{"day":37,"v":86,"depth":3}] class=rise
+GOSSIP: totalPicks=73 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=38 31-60=19 61-90=0 91-120=0 121+=0 naturalPicks=57 seededPicks=14 gossipPicks=73
+SEEDED: {"pair":{"a":"gen_3k3e6jd","b":"gen_3u69fh1","aName":"Seymour","bName":"Daniela"},"day":23,"pre":{"v":56,"depth":2},"post":{"v":44,"depth":3},"daily":[{"day":23,"v":44,"depth":3},{"day":24,"v":48,"depth":3},{"day":25,"v":52,"depth":3},{"day":26,"v":56,"depth":3},{"day":27,"v":56,"depth":3},{"day":28,"v":56,"depth":3},{"day":29,"v":60,"depth":3},{"day":30,"v":64,"depth":3},{"day":31,"v":68,"depth":3},{"day":32,"v":72,"depth":3},{"day":33,"v":76,"depth":3},{"day":34,"v":82,"depth":3},{"day":35,"v":84,"depth":3},{"day":36,"v":86,"depth":3},{"day":37,"v":86,"depth":3}],"crackTraceClass":"rise","vAt7":64,"depthAt7":3,"vDrop":-8,"depthDrop":-1,"crack7":false,"firstServe":{"day":24,"why":"vgrievance"},"serveWithin30":true,"serves":17,"servesAll":[{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Seymour <> Daniela — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d30: Daniela <> Dakila — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d30: Daniela <> Valeria — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d35: Daniela <> Stan — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d40: Daniela <> Hassan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d40: Daniela <> Nina — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d40: Seymour <> Peyton — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d35: Peyton <> Valeria — maxDepth 2, final 2 (v=52), dropped 0
+  CLOSE-READ d13: Seymour about Daniela — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d16: Yuki about Seymour — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Dakila about Daniela — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Daniela about Seymour — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Seymour about Daniela — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Valeria about Daniela — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Daniela about Seymour — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Yuki about Seymour — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Valeria about Daniela — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Yuki about Seymour — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Valeria about Daniela — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Yuki about Seymour — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Hassan about Daniela — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Valeria about Daniela — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Valeria about Daniela — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Hassan about Daniela — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Daniela about Seymour — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d27: Valeria about Daniela — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Hassan about Daniela — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Valeria about Daniela — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Valeria about Daniela — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Daniela about Dakila — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d35: Daniela about Dakila — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Daniela about Dakila — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Daniela about Dakila — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Dakila about Daniela — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Dakila about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Dakila about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Dakila about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Dakila about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d8: Daniela about Valeria (why=grievance)
+  GRIEV-READ d10: Daniela about Valeria (why=grievance)
+  GRIEV-READ d10: Valeria about Daniela (why=grievance)
+  GRIEV-READ d12: Valeria about Daniela (why=grievance)
+  GRIEV-READ d13: Daniela about Valeria (why=grievance)
+  GRIEV-READ d14: Valeria about Daniela (why=grievance)
+  KNACK d5 Peyton: "Good question." "Dalila talks to the garden. The garden listens. I've seen it."
+  KNACK d7 Valeria: "Seymour found a lost knife by smell last week. By SMELL."
+  KNACK d19 Sanne: "Huh. Let me think about that." "Nina talks to the garden. The garden listens. I've seen it."
+  KNACK d24 Yuki: "You want to know about that? Okay." "Daniela talks to the garden. The garden listens. I've seen it."
+  KNACK d31 Sanne: "Stan sees in the dark. Not well — but better than you. Better than me."
+  KNACK d37 Stan: "Good question." "Hassan talks to the garden. The garden listens. I've seen it."
+  KNACK d38 Daniela: "that stray dog — the one that bit two people — lets Ursula touch it."
+
+deathCauses: {"the wild":2,"monster":1,"sickness":2,"the night":1,"combat":1}

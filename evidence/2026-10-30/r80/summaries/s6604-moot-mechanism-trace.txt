@@ -1,0 +1,14 @@
+SAYTRACE-INSTALLED say=function sysSay=function
+CTRACE d14 ticks=491 callMoot ENTER case=case_2 by=(default) cases=[case_2:open:trial=null:res=-]
+SAYTRACE d14 ticks=491 [sys] cases=[case_2:open:trial=null:res=-] :: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+SAYTRACE d14 ticks=491 [say] cases=[case_2:open:trial=null:res=-] :: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+SAYTRACE d14 ticks=539 [say] cases=[case_2:open:trial=null:res=-] :: Lucas has been talking at the fires. Enough voices — tonight they call a moot. Dale answers for what happened to Muhindo
+CTRACE d14 ticks=539 callMoot ENTER case=case_2 by=lucas_brown cases=[case_2:open:trial=null:res=-]
+SAYTRACE d14 ticks=539 [sys] cases=[case_2:open:trial=null:res=-] :: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+SAYTRACE d14 ticks=539 [say] cases=[case_2:open:trial=null:res=-] :: Lucas calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+CTRACE d14 ticks=539 conductTrial ENTER case=case_2 quorum={"living":10,"present":3,"quorum":false}
+CTRACE d14 ticks=539 conductTrial EXIT case=case_2 err=no cases=[case_2:open:trial=d14:res=-]
+CTRACE d14 ticks=539 callMoot EXIT case=case_2 err=no cases=[case_2:open:trial=d14:res=-]
+CTRACE d15 ticks=0 conductTrial ENTER case=case_2 quorum={"living":10,"present":10,"quorum":true}
+CTRACE d15 ticks=0 conductTrial EXIT case=case_2 err=no cases=[case_2:open:trial=d15:res=-]
+CTRACE d15 ticks=0 callMoot EXIT case=case_2 err=no cases=[case_2:open:trial=d15:res=-]

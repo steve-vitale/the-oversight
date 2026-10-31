@@ -1,0 +1,288 @@
+# SURFACE+SEEDED — seed 6604 (140d, 2 alive)
+
+npcPairs=84 deep2=33 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=273 closeReadsServed=32 grievanceServes=58 othersSteered=20
+COND-TP: firstDeep2Day=35 lateClose=143 lateTP=121 lateNull=0 condRate=84.6% pooledTP=121/155 pooledRate=78.1% grievReadsByWhy={"grievance":1,"vgrievance":72}
+FUNNEL (natural): convos=414 subject=372 offered=318 picked=253 classes={"subject-no-offer":54,"offered-not-picked":65,"no-subject-no-ans":42,"picked-others":253}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=54 rate=13.0% offered=318 mainOffered=0 subjectOffered=318 picked=253 latePicks=87 latePicksMain=0 latePicksSubject=87
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Aroha / Avery — "Dakota talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Dakota / Pavel — "You want to know about that? Okay." "Lucas talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=296 picks=260 latePicks=83 missedChangedNotOffered=37
+WRAPSERVE: convos=73 matcherHits=58 matcherServes=58 classes={"grievance-line":58,"deflection":1,"other":14}
+FUNNEL-PROBE (subject-no-offer turns): turns=161 menuProblem=124 pickProblem=37
+INVITE (wrap, carried from r63): lure={"n":1,"accepts":1,"acceptRate":1,"vetoes":{},"chanceMin":36,"chanceMax":36,"chanceMean":36} party={"n":15,"accepts":11,"acceptRate":0.7333333333333333,"vetoes":{},"chanceMin":34.2,"chanceMax":72,"chanceMean":58.2} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+FAVOR (r65): funnel={"offers":36,"forageOffers":12,"otherFavorOffers":24,"accepts":12,"acceptAttempts":12,"waits":11,"starts":9,"startBlocked":9,"forages":7,"forageNodeBarren":13,"forageBarren":3,"forageBarrenTravel":0,"forageBarrenNode":3,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":7,"delivers":7,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":7,"keptMatched":0,"keptMatchedStrict":0}
+MOOT (r80): villageMootsField=0 conveneSum=1 sayNpc=1 sayEcho=1 sayPlayer=1 sayTotal=2 casesTrial=1 cases=1 plots=1
+OUTING END STATES: [{"vid":"gen_gqasfrp","vidName":"Avery","favorId":"favor-gen_gqasfrp-87-23","state":"acknowledged","promisedDay":87,"meetDay":88,"deadline":89,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"aroha_ngata","vidName":"Aroha","favorId":"favor-aroha_ngata-73-20","state":"broken","promisedDay":73,"meetDay":74,"deadline":75,"promiseKept":"broken","startedDay":75,"forageCount":2,"playerKcal":80,"partnerKcal":120,"deliveredKcal":200,"returnedDay":76,"talkCount":1},{"vid":"visjoin_113","vidName":"Purificacion","favorId":"favor-visjoin_113-136-39","state":"asked","promisedDay":137,"meetDay":138,"deadline":138,"promiseKept":"released","startedDay":138,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Dakota kind=sick_help favorId=favor-gen_lvffb0a-4-1 task=help Dakota with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d6: Carlos kind=heal_help favorId=favor-carlos_diaz-6-2 task=help Carlos with their injury
+  FAVOR-OFFER d10: Dale kind=sick_help favorId=favor-dale_hoffman-10-3 task=help Dale with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d24: Farid kind=forage_help favorId=favor-farid_ahmed-22-4 task=forage with Farid tomorrow to rebuild the pantry
+  FAVOR-OFFER d41: Farid kind=sick_help favorId=favor-farid_ahmed-41-5 task=help Farid with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d44: Lucas kind=forage_help favorId=favor-lucas_brown-44-6 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Avery kind=food_share favorId=favor-gen_gqasfrp-53-8 task=share food with Avery — they're running on empty
+  FAVOR-OFFER d53: Lucas kind=food_share favorId=favor-lucas_brown-53-9 task=share food with Lucas — they're past hungry
+  FAVOR-OFFER d57: Avery kind=forage_help favorId=favor-gen_gqasfrp-57-10 task=forage with Avery tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Dale kind=forage_help favorId=favor-dale_hoffman-57-11 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d58: Farid kind=food_share favorId=favor-farid_ahmed-58-12 task=share food with Farid — they're past hungry
+  FAVOR-OFFER d60: Dale kind=forage_help favorId=favor-dale_hoffman-60-13 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Avery kind=sick_help favorId=favor-gen_gqasfrp-63-14 task=help Avery with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d63: Aroha kind=forage_help favorId=favor-aroha_ngata-63-15 task=forage with Aroha tomorrow to rebuild the pantry
+  FAVOR-OFFER d67: Dakota kind=heal_help favorId=favor-gen_lvffb0a-67-16 task=help Dakota with their injury
+  FAVOR-OFFER d70: Avery kind=food_share favorId=favor-gen_gqasfrp-70-18 task=share food with Avery — they're running on empty
+  FAVOR-OFFER d71: Lucas kind=forage_help favorId=favor-lucas_brown-71-19 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d72: Dale kind=food_share favorId=favor-dale_hoffman-69-17 task=share food with Dale — they're past hungry
+  FAVOR-OFFER d73: Aroha kind=forage_help favorId=favor-aroha_ngata-73-20 task=forage with Aroha tomorrow to rebuild the pantry
+  FAVOR-OFFER d77: Lucas kind=food_share favorId=favor-lucas_brown-77-22 task=share food with Lucas — they're running on empty
+  FAVOR-OFFER d87: Avery kind=forage_help favorId=favor-gen_gqasfrp-87-23 task=forage with Avery tomorrow to rebuild the pantry
+  FAVOR-OFFER d87: Dale kind=food_share favorId=favor-dale_hoffman-87-24 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d95: Lucas kind=sick_help favorId=favor-lucas_brown-95-25 task=help Lucas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d100: Lucas kind=forage_help favorId=favor-lucas_brown-100-26 task=forage with Lucas tomorrow to rebuild the pantry
+  FAVOR-OFFER d113: Lucas kind=heal_help favorId=favor-lucas_brown-108-27 task=help Lucas with their injury
+  FAVOR-OFFER d114: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-114-28 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d116: Khadija kind=food_share favorId=favor-visjoin_111-116-29 task=share food with Khadija — they're going hungry
+  FAVOR-OFFER d117: Purificacion kind=heal_help favorId=favor-visjoin_113-117-30 task=help Purificacion with their injury
+  FAVOR-OFFER d123: Vasyl kind=food_share favorId=favor-vasyl_shevchenko-123-31 task=share food with Vasyl — they're past hungry
+  FAVOR-OFFER d125: Purificacion kind=heal_help favorId=favor-visjoin_113-125-32 task=help Purificacion with their injury
+  FAVOR-OFFER d127: Purificacion kind=heal_help favorId=favor-visjoin_113-127-34 task=help Purificacion with their injury
+  FAVOR-OFFER d128: Lucas kind=heal_help favorId=favor-lucas_brown-128-35 task=help Lucas with their injury
+  FAVOR-OFFER d130: Purificacion kind=heal_help favorId=favor-visjoin_113-130-36 task=help Purificacion with their injury
+  FAVOR-OFFER d131: Khadija kind=heal_help favorId=favor-visjoin_111-131-37 task=help Khadija with their injury
+  FAVOR-OFFER d133: Dakota kind=food_share favorId=favor-gen_lvffb0a-133-38 task=share food with Dakota — they're past hungry
+  FAVOR-OFFER d137: Purificacion kind=forage_help favorId=favor-visjoin_113-136-39 task=forage with Purificacion tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d24: Farid favorId=favor-farid_ahmed-22-4 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d44: Lucas favorId=favor-lucas_brown-44-6 accepted=true state=promised meetDay=45
+  FAVOR-ACCEPT d57: Avery favorId=favor-gen_gqasfrp-57-10 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d57: Dale favorId=favor-dale_hoffman-57-11 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d60: Dale favorId=favor-dale_hoffman-60-13 accepted=true state=promised meetDay=61
+  FAVOR-ACCEPT d63: Aroha favorId=favor-aroha_ngata-63-15 accepted=true state=promised meetDay=64
+  FAVOR-ACCEPT d71: Lucas favorId=favor-lucas_brown-71-19 accepted=true state=promised meetDay=72
+  FAVOR-ACCEPT d73: Aroha favorId=favor-aroha_ngata-73-20 accepted=true state=promised meetDay=74
+  FAVOR-ACCEPT d87: Avery favorId=favor-gen_gqasfrp-87-23 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d100: Lucas favorId=favor-lucas_brown-100-26 accepted=true state=promised meetDay=101
+  FAVOR-ACCEPT d114: Vasyl favorId=favor-vasyl_shevchenko-114-28 accepted=true state=promised meetDay=115
+  FAVOR-ACCEPT d137: Purificacion favorId=favor-visjoin_113-136-39 accepted=true state=promised meetDay=138
+  INVITE-DEC d8 party: Chris -> Wanjiru chance=66 accept=true veto=- inputs={"temp":"warm","goal":"survive","mood":"steady","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40","warm temperament (+15)"]
+  INVITE-DEC d9 party: Chris -> Farid chance=34.2 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":4,"trust":23,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 23","cautious temperament (-10)"]
+  INVITE-DEC d9 party: Chris -> Lucas chance=64 accept=false veto=- inputs={"temp":"steady","goal":"protect","mood":"steady","fear":4,"trust":35,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 35","protect goal (+15)"]
+  INVITE-DEC d9 party: Chris -> Avery chance=66 accept=true veto=- inputs={"temp":"sardonic","goal":"protect","mood":"steady","fear":4,"trust":40,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 40","protect goal (+15)"]
+  INVITE-DEC d11 lure: Dakota -> Muhindo chance=36 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":4,"affinity":4} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d15 party: Megan -> Lucas chance=61.8 accept=false veto=- inputs={"temp":"steady","goal":"protect","mood":"grieving","fear":12,"trust":42,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d16 party: Megan -> Aroha chance=67.4 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"grieving","fear":12,"trust":56,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 56","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Megan -> Lucas chance=70.6 accept=true veto=- inputs={"temp":"steady","goal":"protect","mood":"steady","fear":4,"trust":64,"bond":{"v":36,"depth":1},"partySize":4} reasons=["trust 64","a real bond (+10)","a big party is safer (+5)","sick (-20)","protect goal (+15)"]
+  INVITE-DEC d47 party: Wanjiru -> Dale chance=61.2 accept=false veto=- inputs={"temp":"dry","goal":"prove","mood":"grieving","fear":0,"trust":78,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 78","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d48 party: Wanjiru -> Dale chance=72 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":12,"trust":80,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 80","a big party is safer (+5)"]
+  INVITE-DEC d93 party: Farid -> Dakota chance=56.80000000000001 accept=true veto=- inputs={"temp":"withdrawn","goal":"heal","mood":"grieving","fear":24,"trust":92,"bond":{"v":89,"depth":3},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d107 party: Farid -> Pavel chance=51.6 accept=false veto=- inputs={"temp":"dry","goal":"prove","mood":"grieving","fear":0,"trust":54,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 54","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d109 party: Farid -> Pavel chance=61.6 accept=true veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":12,"trust":54,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 54","a big party is safer (+5)"]
+  INVITE-DEC d113 party: Aroha -> Khadija chance=53 accept=true veto=- inputs={"temp":"intense","goal":"protect","mood":"grieving","fear":0,"trust":20,"bond":null,"partySize":3} reasons=["trust 20","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d116 party: Aroha -> Vasyl chance=34.8 accept=true veto=- inputs={"temp":"withdrawn","goal":"home","mood":"grieving","fear":25,"trust":62,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 62","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d125 party: Aroha -> Purificacion chance=52.4 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"steady","fear":0,"trust":31,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 31","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":34,"v":42,"depth":2},{"day":35,"v":42,"depth":2},{"day":36,"v":46,"depth":2},{"day":37,"v":46,"depth":2},{"day":38,"v":46,"depth":2},{"day":39,"v":46,"depth":2},{"day":40,"v":50,"depth":3},{"day":41,"v":50,"depth":3},{"day":42,"v":50,"depth":3},{"day":43,"v":50,"depth":3},{"day":44,"v":50,"depth":3},{"day":45,"v":50,"depth":3},{"day":46,"v":54,"depth":3},{"day":47,"v":54,"depth":3}] class=no-drop
+GOSSIP: totalPicks=166 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=35 31-60=64 61-90=67 91-120=48 121+=39 naturalPicks=253 seededPicks=20 gossipPicks=166
+SEEDED: {"pair":{"a":"gen_gqasfrp","b":"gen_lvffb0a","aName":"Avery","bName":"Dakota"},"day":33,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":34,"v":42,"depth":2},{"day":35,"v":42,"depth":2},{"day":36,"v":46,"depth":2},{"day":37,"v":46,"depth":2},{"day":38,"v":46,"depth":2},{"day":39,"v":46,"depth":2},{"day":40,"v":50,"depth":3},{"day":41,"v":50,"depth":3},{"day":42,"v":50,"depth":3},{"day":43,"v":50,"depth":3},{"day":44,"v":50,"depth":3},{"day":45,"v":50,"depth":3},{"day":46,"v":54,"depth":3},{"day":47,"v":54,"depth":3}],"crackTraceClass":"no-drop","vAt7":50,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":34,"why":"vgrievance"},"serveWithin30":true,"serves":72,"servesAll":[{"day":34,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":73,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":79,"why":"vgrievance"},{"day":80,"why":"vgrievance"},{"day":81,"why":"vgrievance"},{"day":82,"why":"vgrievance"},{"day":83,"why":"vgrievance"},{"day":84,"why":"vgrievance"},{"day":85,"why":"vgrievance"},{"day":86,"why":"vgrievance"},{"day":87,"why":"vgrievance"},{"day":88,"why":"vgrievance"},{"day":89,"why":"vgrievance"},{"day":90,"why":"vgrievance"},{"day":91,"why":"vgrievance"},{"day":92,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":95,"why":"vgrievance"},{"day":96,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":98,"why":"vgrievance"},{"day":104,"why":"vgrievance"}],"effect":true}
+  FRIEND d50: Megan <> Avery — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d35: Avery <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Megan <> Dakota — maxDepth 3, final 3 (v=35), dropped 0
+  FRIEND d50: Farid <> Megan — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d60: Dale <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Dale <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Matteo <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Avery <> Wanjiru — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Farid <> Matteo — maxDepth 2, final 2 (v=73), dropped 0
+  FRIEND d100: Matteo <> Lucas — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d65: Farid <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Dakota <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Megan <> Matteo — maxDepth 3, final 3 (v=31), dropped 0
+  FRIEND d40: Aroha <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Avery <> Lucas — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Dakota <> Wanjiru — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d80: Aroha <> Dakota — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Farid <> Lucas — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d50: Megan <> Lucas — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d85: Dale <> Matteo — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d80: Aroha <> Matteo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Aroha <> Dale — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d40: Matteo <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Matteo <> Wanjiru — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d115: Farid <> Wanjiru — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d140: Aroha <> Farid — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d50: Farid <> Avery — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Aroha <> Wanjiru — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d95: Lucas <> Wanjiru — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d95: Dale <> Wanjiru — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d140: Aroha <> Lucas — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d125: Dakota <> Vasyl — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d130: Dakota <> Purificacion — maxDepth 3, final 3 (v=84), dropped 0
+  CLOSE-READ d9: Avery about Megan — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d13: Avery about Megan — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Dakota about Avery — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Dale about Dakota — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Lucas about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Aroha about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Lucas about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Aroha about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Lucas about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Farid about Avery — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Lucas about Avery — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Farid about Avery — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Farid about Avery — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Lucas about Avery — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Aroha about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Lucas about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Farid about Avery — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Lucas about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Dale about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Lucas about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Lucas about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Matteo about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Lucas about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Wanjiru about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Farid about Avery — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Wanjiru about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Lucas about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Farid about Avery — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Aroha about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Farid about Avery — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Lucas about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Aroha about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Lucas about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Wanjiru about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Farid about Avery — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Aroha about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Aroha about Avery — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Farid about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Farid about Avery — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Dale about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Dakota about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Dale about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Dale about Avery — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Dale about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Dale about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Farid about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Dakota about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Aroha about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Dakota about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Lucas about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Dakota about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Dakota about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Dale about Avery — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Dakota about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Aroha about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Dakota about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Aroha about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Aroha about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Pavel about Dakota — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Vasyl about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d117: Vasyl about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d118: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Vasyl about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d120: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Vasyl about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d121: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Purificacion about Dakota — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Vasyl about Dakota — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Vasyl about Dakota — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Vasyl about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Purificacion about Dakota — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Lucas about Dakota — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Purificacion about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Purificacion about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Purificacion about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Purificacion about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Khadija about Dakota — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d136: Khadija about Dakota — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d137: Purificacion about Dakota — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Khadija about Dakota — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Khadija about Dakota — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Purificacion about Dakota — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Dakota about Matteo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Purificacion about Matteo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d11: Muhindo about Dale (why=grievance)
+  GRIEV-READ d34: Avery about Dakota (why=vgrievance)
+  GRIEV-READ d36: Avery about Dakota (why=vgrievance)
+  GRIEV-READ d37: Avery about Dakota (why=vgrievance)
+  GRIEV-READ d38: Avery about Dakota (why=vgrievance)
+  GRIEV-READ d38: Avery about Dakota (why=vgrievance)
+  KNACK d7 Wanjiru: "Huh. Let me think about that." "cuts close faster when Megan wraps them. Don't ask me how."
+  KNACK d13 Farid: "You want to know about that? Okay." "cuts close faster when Megan wraps them. Don't ask me how."
+  KNACK d14 Dale: "Good question." "that stray dog — the one that bit two people — lets Avery touch it."
+  KNACK d16 Aroha: "Dakota talks to the garden. The garden listens. I've seen it."
+  KNACK d21 Dakota: "You want to know about that? Okay." "Lucas talks to the garden. The garden listens. I've seen it."
+  KNACK d24 Lucas: "Farid talks to the garden. The garden listens. I've seen it."
+  KNACK d31 Dakota: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Matteo touch it."
+  KNACK d37 Dale: "You want to know about that? Okay." "Farid talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":1,"the wild":3,"monster":1,"a stranger":1,"dehydration":1,"combat":1,"alien":3,"the night":1}
