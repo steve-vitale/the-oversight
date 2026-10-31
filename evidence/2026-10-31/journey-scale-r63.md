@@ -278,3 +278,19 @@ numbers (prereg decision stands).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
+Master at worktree creation: 7daa1e3d8. At closeout master had moved
+twice on sibling evidence-only merges (d7400dd03, then 2d25029bb;
+zero src/js + src/data changes in the second range) — the branch
+was rebased cleanly onto each new master in turn, and proof tests
+were re-run after each rebase (node --check on all three scripts;
+full pellet-quad re-run after the first rebase: identical scalars,
+0-line capture diffs on all four seeds; seed-85001 pellet re-run
+after the second rebase: identical scalar + capture). Merged locally
+via `git merge --ff-only journey-scale-r63` → master 605190ce1,
+pending ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 1f88d7f5b (prereg + driver, rebased from ce758b99d),
+605190ce1 (quad + pellet-v2 wide band + evidence, rebased from
+cf71c1d3b). This landing-section commit follows on the same branch
+and is merged by a second fast-forward (hash in the branch log).
+Worktree released + branch deleted at closeout; final main-tree
+status clean. Rotation file written 3→0 at closeout.
