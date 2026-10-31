@@ -598,6 +598,15 @@
           abBraced = false, abDebtSettled = false, abStun = 0, abRoundTaken = 0,
           abLastRoundTaken = 0, abHaymakerRound = false, abMedicated = false,
           abDrewFire = false, abBodyguarded = false, abRallied = false;
+      // ABILITY TRANSLATION, WAVE 2 (lootabilities Arm 4, 2026-10-31): the
+      // combat cards the field engine never read — freeze_tag, tripwire,
+      // shoulder_check, hogtie, come_get_some, leech, brawler_instinct,
+      // intimidating_presence, peacemaker — translated below with the same
+      // card semantics abilityActions.js uses for the player (see the
+      // villager-phase chain). Board effects, not damage multipliers.
+      var abFroze = false, abTied = false, abShoved = false, abGoaded = false,
+          abStared = false, abPeaced = false, abReadFight = false, abLeechTold = false,
+          abFrozenN = 0, abBoundN = 0, abGoadN = 0, abExposedN = 0;
       var abNight = false;
       try { abNight = this.isNight ? this.isNight() : false; } catch (e) {}
 
@@ -640,6 +649,121 @@
         } catch (e) { return 'Someone'; }
       };
       try { vName = refName(vid); } catch (e) {}
+
+      // CLASS VISIBILITY (lootabilities Arm 5, 2026-10-31): when a godpath
+      // field verb fires for a classed villager, the log line names them —
+      // villager + class/subclass + effect (parity: the player sees their
+      // own class on their verb lines). SURFACING ONLY: gpTag rewrites
+      // log strings after the fact; it draws no RNG and no engine code
+      // reads rec.log to decide anything, so outcomes cannot move.
+      var ffClassLine = null;
+      try { if (GPf && GPf.classLine) ffClassLine = GPf.classLine(vid); } catch (e) { console.warn('[godpath] classLine', e); }
+      if (!ffClassLine) {
+        try {
+          if (GPf && GPf.classify && GPf.data) {
+            var _fc = GPf.classify(vAbs);
+            if (_fc && _fc.path && _fc.subclass) {
+              var _fd = GPf.data() || {}, _fp = ((_fd.paths || {})[_fc.path] || {});
+              var _fs = ((_fp.subclasses || {})[_fc.subclass] || {}).name;
+              var _fg = String(((_fp.god || {}).name || _fc.path)).replace(/^The /, 'the ');
+              if (_fs) ffClassLine = _fs + ' of ' + _fg;
+            }
+          }
+        } catch (e) { console.warn('[godpath] classify tag', e); }
+      }
+      var ffClassTag = ffClassLine ? ' [' + vName + ' — ' + ffClassLine + ']' : '';
+      if (ffClassLine) rec.classLine = ffClassLine;
+      var gpTag = function (from) {
+        if (!ffClassTag) return;
+        for (var ti = Math.max(0, from | 0); ti < rec.log.length; ti++) {
+          if (rec.log[ti].indexOf(ffClassTag) < 0) rec.log[ti] += ffClassTag;
+        }
+      };
+      // WAVE-2 ABILITY HELPERS (Arm 4): kcal costs are the card's own,
+      // read from abilities.json and paid the godpath way — the villager's
+      // own hunger (kcal/25), refused at the same hunger>=80 gate the
+      // godpath villager verbs use (godpath.js vCanPay/vPay parity).
+      var ffKcal = function (id, actId) {
+        try {
+          var defs = _G.data.abilities || [];
+          for (var di = 0; di < defs.length; di++) {
+            if (defs[di].id !== id) continue;
+            var acts = defs[di].actions || [];
+            for (var ai2 = 0; ai2 < acts.length; ai2++)
+              if (acts[ai2].id === actId) return (acts[ai2].cost || {}).kcal || 0;
+            return acts.length ? ((acts[0].cost || {}).kcal || 0) : 0;
+          }
+        } catch (e) { console.warn('[fieldAbilities] kcal lookup', e); }
+        return 0;
+      };
+      var ffCanPay = function (kcal) {
+        if (!kcal) return true;
+        try {
+          if (typeof _G.npcNeeds === 'function') {
+            var n = _G.npcNeeds(vid);
+            if (n && ((n.hunger || 0) + kcal / 25) >= 80) return false;
+          }
+        } catch (e) { console.warn('[fieldAbilities] canPay', e); }
+        return true;
+      };
+      var ffPay = function (kcal) {
+        if (!kcal) return;
+        try {
+          if (typeof _G.npcNeeds === 'function') {
+            var n2 = _G.npcNeeds(vid);
+            if (n2) n2.hunger = Math.min(100, (n2.hunger || 0) + Math.round(kcal / 25));
+          }
+        } catch (e) { console.warn('[fieldAbilities] pay', e); }
+      };
+      var ffModAdd = function (id, target) {
+        try {
+          var defs2 = _G.data.abilities || [];
+          for (var mi2 = 0; mi2 < defs2.length; mi2++) {
+            if (defs2[mi2].id !== id) continue;
+            var mods = defs2[mi2].modifiers || [], sum = 0;
+            for (var mj2 = 0; mj2 < mods.length; mj2++)
+              if (mods[mj2] && mods[mj2].target === target && mods[mj2].op === 'add') sum += mods[mj2].value || 0;
+            return sum;
+          }
+        } catch (e) { console.warn('[fieldAbilities] mod lookup', e); }
+        return 0;
+      };
+      var ffHasRope = function () {
+        try {
+          var items = (vp && vp.items) || [];
+          for (var ri = 0; ri < items.length; ri++) {
+            var ent = items[ri], eid = (typeof ent === 'string') ? ent : (ent && (ent.itemId || ent.id));
+            if (eid === 'rope_50ft') return true;
+          }
+        } catch (e) { console.warn('[fieldAbilities] rope check', e); }
+        return false;
+      };
+      var ffSpendRope = function () {
+        try {
+          var items = (vp && vp.items) || [];
+          for (var ri2 = 0; ri2 < items.length; ri2++) {
+            var ent2 = items[ri2], eid2 = (typeof ent2 === 'string') ? ent2 : (ent2 && (ent2.itemId || ent2.id));
+            if (eid2 !== 'rope_50ft') continue;
+            if (typeof ent2 === 'string') items.splice(ri2, 1);
+            else { ent2.units = Math.max(0, (ent2.units || 1) - 1); if (ent2.units <= 0) items.splice(ri2, 1); }
+            return true;
+          }
+        } catch (e) { console.warn('[fieldAbilities] rope spend', e); }
+        return false;
+      };
+      var ffFired = function (id) { try { (rec.ffFired || (rec.ffFired = [])).push(id); } catch (e) { console.warn('[fieldAbilities] fired record', e); } };
+      // "Controlled" in the tactical engine's own terms (tbPlayerShove /
+      // tbPlayerBind gates): stunned, rooted, bound, blinded or hesitating.
+      // Off-screen those states are: a stun landing this round or queued
+      // for the next, the freeze root, the hogtie bind, the godpath blind
+      // (Pocket Sand) and the Bird Strike harry window.
+      var ffControlled = function () {
+        return !!((typeof mStunnedThisRound !== 'undefined' && mStunnedThisRound) || abStun > 0 || abFrozenN > 0 || abBoundN > 0 ||
+          (gpF && (((gpF.blindUntil || 0) >= (typeof round !== 'undefined' ? round : 0)) || ((gpF.birdsUntil || 0) >= (typeof round !== 'undefined' ? round : 0)))));
+      };
+      var ffBlinded = function () {
+        return !!((gpF && (((gpF.blindUntil || 0) >= (typeof round !== 'undefined' ? round : 0)) || ((gpF.birdsUntil || 0) >= (typeof round !== 'undefined' ? round : 0)))));
+      };
 
       // ALREADY DEAD (break-it combat 2026-10-09): a world-monster entity
       // with hp<=0 is a corpse, not a fight. Reachable: a vFlee round can
@@ -917,6 +1041,18 @@
         rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
         try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
       }
+      // ABILITY — TRIPWIRE (lootabilities Arm 4): the card is strung BEFORE
+      // the monster moves ("the next monster that moves is stunned"). A
+      // field fight has no approach march to model, so the wire is strung
+      // as the fight opens and the monster's first attack phase is the
+      // one it eats: abStun 1, exactly the tactical stun, paid at the
+      // card's 40 kcal.
+      if (vHasAb('tripwire') && ffCanPay(ffKcal('tripwire', 'string'))) {
+        ffPay(ffKcal('tripwire', 'string'));
+        abStun += 1;
+        ffFired('tripwire');
+        rec.log.push(vName + ' had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)');
+      }
       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
         abRoundTaken = 0;
@@ -1073,6 +1209,29 @@
                   rec.log.push(vName + ' dances on the downbeat — the kick catches air. (' + _preD + ' avoided)');
                 }
               } catch (e) {}
+              // ABILITY — FREEZE TAG root / HOGTIE bind (lootabilities
+              // Arm 4): a rooted beast's lunge comes short and a bound
+              // beast thrashes against the rope — the same blow, halved,
+              // while the root/bind lasts. Board effects (the monster's
+              // reach and freedom), not a villager damage number.
+              if (abFrozenN > 0 && total > 0) {
+                var _preF = total;
+                total = Math.max(1, Math.ceil(total / 2));
+                if (total < _preF) rec.log.push('  rooted in frozen ground, its lunge comes short. ' + _preF + ' → ' + total + '. (Freeze Tag)');
+              }
+              if (abBoundN > 0 && total > 0) {
+                var _preB = total;
+                total = Math.max(1, Math.ceil(total / 2));
+                if (total < _preB) rec.log.push('  bound fast, it thrashes against the rope — the blow lands thin. ' + _preB + ' → ' + total + '. (Hogtie)');
+              }
+              // ABILITY — PEACEMAKER exposure (Arm 4): a failed Walk In
+              // leaves them exposed, off-balance — the next blow lands
+              // a quarter harder, the tactical card's stated price.
+              if (abExposedN > 0 && total > 0) {
+                abExposedN--;
+                total = Math.round(total * 1.25);
+                rec.log.push('  still off-balance from the failed parley, ' + vName + ' takes it worse. (Peacemaker — exposed)');
+              }
               // PARTY-UP: the pack splits its attention — the ally who rushed
               // in is exposed (no armor) and draws some of the hits.
               // TANK — DRAW FIRE (2026-10-12): the taunter makes themselves
@@ -1086,6 +1245,12 @@
                 _allyShare = 0.1;
                 rec.log.push(vName + ' draws its eye — "Me. I\'m the problem." The beast turns.');
               }
+              // ABILITY — COME GET SOME (lootabilities Arm 4): the goaded,
+              // blinded beast lurches toward the sound — toward the
+              // villager who made it. Its next phase ignores the ally
+              // entirely (share 0), the draw_fire mirror: attention moved,
+              // no damage changed.
+              if (abGoadN > 0 && allyIn && allyHp > 0) _allyShare = 0;
               var _allyRoll = allyIn && allyHp > 0 ? RR() : 1;
               var hittingAlly = allyIn && allyHp > 0 && _allyRoll < _allyShare;
               if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) _wardVia = 'aegis_link';
@@ -1099,7 +1264,9 @@
               }
               if (!hittingAlly && gpF && total > 0) {
                 var beamDamage = beamShare > 0 ? Math.min(d, total) : 0;
+                var _gpLogN1 = rec.log.length;
                 try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round, attack: rAttack, beamDamage: beamDamage })); } catch (e) { console.warn('[godpath] incoming', e); }
+                gpTag(_gpLogN1);
               }
               if (!hittingAlly && varmor > 0 && total > 0) {
                 // ARMOR (Steve 2026-10-09): diminishing-returns curve,
@@ -1116,10 +1283,28 @@
               }
               total = this.wornDamage(hittingAlly ? allyVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
               if (hittingAlly) {
-                allyHp -= total;
-                rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
+                // ABILITY — LEECH (lootabilities Arm 4): the stance the
+                // card promises — when an ally near the holder takes
+                // damage, the holder takes half of it. "They owe you.
+                // (They know it.)" Passive here the way bodyguard and
+                // draw_fire already are in this engine: the stance is
+                // renewed as the fight moves, no separate turn to spend
+                // off-screen.
+                var _leechShare = 0;
+                if (vHasAb('leech') && total > 0) _leechShare = Math.floor(total / 2);
+                allyHp -= (total - _leechShare);
+                if (_leechShare > 0) {
+                  vHp -= _leechShare; rec.vTaken += _leechShare; abRoundTaken += _leechShare;
+                  if (vHp <= 0) vAlive = false;
+                  if (!abLeechTold) { abLeechTold = true; ffFired('leech'); }
+                  rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + (total - _leechShare) + ' (' + Math.max(0, allyHp) + ' left) — ' + vName + ' takes the other half, ' + _leechShare + ', on their own body. (Leech)');
+                } else {
+                  rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
+                }
                 if (allyHp <= 0 && gpF) {
+                  var _gpLogN2 = rec.log.length;
                   try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
+                  gpTag(_gpLogN2);
                 }
                 if (allyHp <= 0) {
                   huntOpening.lost = true;
@@ -1165,6 +1350,9 @@
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
             }
+            // COME GET SOME (Arm 4): the goad spends itself on the phase
+            // it drew — one lurch toward the sound, then it's spent.
+            if (abGoadN > 0) abGoadN--;
             // PACK-WIDE CHORUS BREAK (2026-10-25, sim-belltoad-fix-a):
             // the shout disrupts the whole chorus — every pack member's
             // next attack is halved, matching the counter text ("the
@@ -1192,6 +1380,7 @@
             // Guard, Stoke) ride along; a turn verb spends the action.
             var gpOut = null;
             if (!trickAct && gpF) {
+              var _gpLogN3 = rec.log.length;
               try {
                 gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken, beamTaken: vBeamTaken }));
                 if (gpOut.vHp != null) vHp = gpOut.vHp;
@@ -1210,6 +1399,7 @@
                   }
                 }
               } catch (e) { console.warn('[godpath] fieldAct', e); gpOut = null; }
+              gpTag(_gpLogN3);
             }
             if (gpOut && gpOut.consumed) {
               // the verb was the action this round (narrated in fieldAct)
@@ -1413,6 +1603,112 @@
               abAimed = true; abAim = true;
               rec.log.push('R' + round + ': ' + vName + ' goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)');
               try { (rec.actionKinds || (rec.actionKinds = [])).push('aim'); } catch (e) {}
+            // ABILITY — FREEZE TAG (lootabilities Arm 4): the card roots a
+            // monster for 2 rounds; it can still attack adjacent targets.
+            // Off-screen there is no movement phase to root, so the root
+            // reads as board position: its next attack phase is lost
+            // outright (it cannot close), and while the root lasts its
+            // lunges come short (halved, in the monster phase above).
+            // Once per fight, the card's turn and 40 kcal.
+            } else if (!abFroze && vHasAb('freeze_tag') && ffCanPay(ffKcal('freeze_tag', 'tag'))) {
+              abFroze = true; ffPay(ffKcal('freeze_tag', 'tag'));
+              abFrozenN = 2; abStun += 1;
+              ffFired('freeze_tag');
+              rec.log.push('R' + round + ': ' + vName + ' slaps a palm to it and yells "YOU\'RE IT!" — it locks in place, rooted where it stands. (Freeze Tag: rooted 2 rounds)');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
+            // ABILITY — HOGTIE (Arm 4): the tactical gate, verbatim — a
+            // controlled (stunned/rooted/bound/blinded/hesitating),
+            // size-1 monster, and one real coil of rope out of the
+            // villager's own pack, consumed. Bound 3 rounds: it cannot
+            // run (the break check below honors the rope) and its blows
+            // land halved against the rope; it can still attack, exactly
+            // as the card says.
+            } else if (!abTied && vHasAb('hogtie') && ffControlled() && (mdef.size || 1) <= 1 && ffHasRope() && ffCanPay(ffKcal('hogtie', 'bind'))) {
+              abTied = true; ffPay(ffKcal('hogtie', 'bind')); ffSpendRope();
+              abBoundN = 3;
+              ffFired('hogtie');
+              rec.log.push('R' + round + ': ' + vName + ' gets the rope around it while it can\'t fight back — hogtied, three rounds, going nowhere. (Hogtie)');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
+            // ABILITY — SHOULDER CHECK (Arm 4): the tactical gate,
+            // verbatim — a controlled, size-1 monster. The shove is
+            // displacement: the beast is put where the villager wants
+            // it and loses its next attack phase regaining its feet;
+            // slammed into a packmate, both take the collision
+            // (lroll [2,5], the tactical slam in field numbers).
+            } else if (!abShoved && vHasAb('shoulder_check') && ffControlled() && (mdef.size || 1) <= 1 && ffCanPay(ffKcal('shoulder_check', 'shove'))) {
+              abShoved = true; ffPay(ffKcal('shoulder_check', 'shove'));
+              abStun += 1;
+              ffFired('shoulder_check');
+              var _shoveLine = 'R' + round + ': ' + vName + ' puts a shoulder into it and it goes where THEY want — stumbling, off its line. (Shoulder Check)';
+              var _shoveOther = null;
+              for (var _so = 0; _so < members.length; _so++) { if (members[_so] !== lead && members[_so].hp > 0) { _shoveOther = members[_so]; break; } }
+              if (_shoveOther) {
+                var _sc1 = lroll([2, 5]), _sc2 = lroll([2, 5]);
+                lead.hp -= _sc1; rec.mDealt += _sc1; if (lead.hp <= 0) lead.alive = false;
+                _shoveOther.hp -= _sc2; if (_shoveOther.hp <= 0) _shoveOther.alive = false;
+                _shoveLine += ' It slams into its packmate — collision, ' + _sc1 + ' and ' + _sc2 + '.';
+              }
+              rec.log.push(_shoveLine);
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
+            // ABILITY — COME GET SOME (Arm 4): the tactical gate — a
+            // BLINDED monster (Pocket Sand grit, the birds in its eyes).
+            // The noise is made; the blind thing lurches toward it on
+            // its next phase, onto the villager and away from the ally
+            // (the goad flag in the monster phase above).
+            } else if (!abGoaded && vHasAb('come_get_some') && ffBlinded() && ffCanPay(ffKcal('come_get_some', 'goad'))) {
+              abGoaded = true; ffPay(ffKcal('come_get_some', 'goad'));
+              abGoadN = 1;
+              ffFired('come_get_some');
+              rec.log.push('R' + round + ': ' + vName + ' makes exactly the right noise — the blind thing lurches toward the sound, toward THEM. (Come Get Some)');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
+            // ABILITY — INTIMIDATING PRESENCE / Stare Down (Arm 4): the
+            // tactical check, verbatim — 50% plus the card's own
+            // social.intimidate modifier (0.25), capped 0.95; fearless
+            // foes are immune and the turn is still spent, honestly.
+            // Success is a disengage, not a kill: the beast backs off
+            // (mFlee) and stays out there, unwounded by the stare.
+            } else if (!abStared && vHasAb('intimidating_presence') && round <= 2) {
+              abStared = true;
+              ffFired('intimidating_presence');
+              if (mdef.fearless) {
+                rec.log.push('R' + round + ': ' + vName + ' locks eyes with it. It doesn\'t blink. This one doesn\'t know fear — or doesn\'t care. (Stare Down — truly fearless)');
+              } else if (RR() < Math.min(0.95, 0.5 + ffModAdd('intimidating_presence', 'social.intimidate'))) {
+                rec.outcome = 'mFlee'; rec.staredDown = true;
+                rec.log.push('R' + round + ': ' + vName + ' locks eyes and doesn\'t look away. It falters — then backs off, disengaging. Smart. (Stare Down — it backed down)');
+                break;
+              } else {
+                rec.log.push('R' + round + ': ' + vName + ' locks eyes. It meets the stare and holds. Respect — but it\'s not backing down. (Stare Down — it held)');
+              }
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
+            // ABILITY — PEACEMAKER / Walk In (Arm 4): the tactical talk
+            // check at the card's own 35% (the player's drama bonus is a
+            // scholar-side number; the villager walks in at the base
+            // rate). Success: the fight ends peacefully, mFlee with no
+            // kill and no loot of war. Failure: exposed — the next blow
+            // lands a quarter harder (monster phase above). Round 1
+            // only: you walk into a fight as it starts, not as it ends.
+            } else if (!abPeaced && vHasAb('peacemaker') && round === 1) {
+              abPeaced = true;
+              ffFired('peacemaker');
+              if (RR() < 0.35) {
+                rec.outcome = 'mFlee'; rec.peaceful = true;
+                rec.log.push('R' + round + ': ' + vName + ' walks in open-handed, talking — low, steady, unafraid. And impossibly, it listens. It stands down. (Peacemaker: Walk In)');
+                break;
+              }
+              abExposedN = 1;
+              rec.log.push('R' + round + ': ' + vName + ' walks in open-handed — and it goes wrong. It doesn\'t want peace. They\'re exposed, off-balance. (Walk In — failed)');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
+            // ABILITY — BRAWLER'S INSTINCT / Read the Fight (Arm 4):
+            // the card, verbatim — spend the turn reading the fight,
+            // +2 speed for the rest of it. Field initiative is rolled
+            // from vSpeed every round, so the +2 lands in the engine's
+            // own terms from the next round on.
+            } else if (!abReadFight && vHasAb('brawler_instinct')) {
+              abReadFight = true;
+              vSpeed += 2;
+              ffFired('brawler_instinct');
+              rec.log.push('R' + round + ': ' + vName + ' reads the fight as it moves — the body tells them what the mouth won\'t. Quicker from here. (Brawler\'s Instinct: +2 speed)');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
             } else {
               var vd = lroll([4 + wb, 8 + wb]); // tactical formula, verbatim
               var abNote = '';
@@ -1470,7 +1766,7 @@
               // editor/cancellation pattern checks.
               try { (rec.actionKinds || (rec.actionKinds = [])).push('strike'); } catch (e) {}
               rec.strikesThrown = (rec.strikesThrown | 0) + 1;
-              if (gpF) { try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } }
+              if (gpF) { var _gpLogN4 = rec.log.length; try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } gpTag(_gpLogN4); }
               lead.hp -= vd; rec.mDealt += vd;
               if (lead.hp <= 0) lead.alive = false;
               rec.log.push('R' + round + ': ' + vName + ' strikes for ' + vd + abNote + ' (' + Math.max(0, lead.hp) + ' left)');
@@ -1508,6 +1804,7 @@
           } catch (e) {}
         }
         if (vHp <= 0 && gpF) {
+          var _gpLogN5 = rec.log.length;
           try {
             var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round }));
             if (_gpHp) {
@@ -1515,6 +1812,7 @@
               if (gpF.shedGear) { wb = 0; varmor = gpF.armorAdd || 0; gpF.shedGear = false; }
             }
           } catch (e) { console.warn('[godpath] cheat death', e); }
+          gpTag(_gpLogN5);
         }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
@@ -1696,7 +1994,10 @@
           rec.log.push('The lead falls — the pack\'s coordination shatters. The rest scatter or die.');
           break;
         }
-        if ((members[0].hp / members[0].maxHp) < mBreak) {
+        // HOGTIE (Arm 4): a bound beast cannot run — the break check is
+        // skipped while the rope holds. It can still fight, and when the
+        // rope's rounds run out the break check decides as before.
+        if (abBoundN <= 0 && (members[0].hp / members[0].maxHp) < mBreak) {
           rec.outcome = 'mFlee';
           // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
           // only — a drive-off after a shout previously ended with no
@@ -1714,6 +2015,10 @@
         }
         // ABILITY bookkeeping: the debt of this round settles the next.
         abLastRoundTaken = abRoundTaken;
+        // WAVE-2 ABILITY bookkeeping (Arm 4): the freeze root and the
+        // hogtie bind burn down a round at a time.
+        if (abFrozenN > 0) abFrozenN--;
+        if (abBoundN > 0) abBoundN--;
       }
       if (!rec.outcome) {
         // round cap: the worse-off side disengages
@@ -1813,6 +2118,7 @@
           if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
         }
       } catch (e) {}
+      var _gpLogN6 = rec.log.length;
       try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field escape', e); }
       try { if (GPf && GPf.finishFieldWardRescue) GPf.finishFieldWardRescue(this, vid, wardCarries, rec,
         { id: allyVid, alive: helpCalled && allyIn && allyHp > 0 }); }
@@ -1820,6 +2126,7 @@
       try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
         { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
       catch (e) { console.warn('[godpath] field hunt outcome', e); }
+      gpTag(_gpLogN6);
       // FIELD-WOUND CARRYOVER (tackle-wound2): the surviving Haven ally's
       // wounds settle here, through the same once-only sealed record as the
       // lead's — one entry per person, so a caller settling the lead can
