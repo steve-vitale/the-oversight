@@ -49,8 +49,13 @@ function fetchIndicator(inst, kind) {
   const present = { spawn: !!ev1, day2morning: !!ev2, day2pool: day2Stash !== null };
   const incomplete = !ev1 || !ev2 || day2Stash === null;
   // Candidate items: union of wrap/tele/line-matched/gained/shrunk.
-  const gained = eveInv.filter((id) => !spawnInv.includes(id) && spawnStash.includes(id));
-  const shrunk = spawnStash.filter((id) => day2Stash !== null && !day2Stash.includes(id));
+  // NOTE (pilot fix, pre-judged): gained/shrunk MUST be kind-filtered.
+  // Both fetches fire on day 1, so the raw evening gain and pool shrink
+  // name the weapon AND the armor; without the filter every seed with
+  // both kinds stashed classified multi-item INVALID.
+  const kindCheck = (id) => (kind === 'weapon' ? isWeapon(id) : isArmor(id));
+  const gained = eveInv.filter((id) => !spawnInv.includes(id) && spawnStash.includes(id) && kindCheck(id));
+  const shrunk = spawnStash.filter((id) => day2Stash !== null && !day2Stash.includes(id) && kindCheck(id));
   const lineItems = spawnCandidates.filter((id) => lines1.some((l) => l.toLowerCase().includes(itemName(id).toLowerCase())));
   const union = [...new Set([wrapItem, teleItem, ...lineItems, ...gained, ...shrunk].filter(Boolean))];
   // Valid-true: exactly one item, all five channels name it.
