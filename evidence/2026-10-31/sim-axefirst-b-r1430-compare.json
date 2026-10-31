@@ -1,0 +1,140 @@
+{
+  "controlDir": "evidence/2026-10-31/sim-axefirst-b-r1430-corpus-pilot-control",
+  "leverDir": "evidence/2026-10-31/sim-axefirst-b-r1430-corpus-pilot-lever",
+  "nControl": 1,
+  "nLever": 1,
+  "primary": {
+    "lever": [],
+    "control": [],
+    "leverCount": 0,
+    "controlCount": 0
+  },
+  "joint": [
+    {
+      "seed": 15215,
+      "status": "not-stranding-control",
+      "controlStill": 0,
+      "controlNeedsWood": []
+    }
+  ],
+  "jointPasses": 0,
+  "jointDecided": 0,
+  "guardrails": {
+    "deaths": [],
+    "lengthen": [],
+    "medianLever": 30,
+    "medianControl": 30,
+    "pass": true
+  },
+  "leverSources": {},
+  "ruinAgg": {
+    "runs": 4,
+    "finds": 0,
+    "searches": 8,
+    "unreached": 0,
+    "stops": {
+      "ticks": 4
+    }
+  },
+  "verdict": "DIAG-NO-STRAND",
+  "verdictReason": "no control seed strands with a needs-wood strand morning; joint proof cannot be exercised",
+  "controlLegs": [
+    {
+      "seed": 15215,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "still": [],
+      "strandMornings": 0,
+      "axeByDay7": {
+        "byDay7": false,
+        "firstDay": null,
+        "firstSnap": null,
+        "loopDay": null
+      }
+    }
+  ],
+  "leverLegs": [
+    {
+      "seed": 15215,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "still": [],
+      "strandMornings": 0,
+      "axeByDay7": {
+        "byDay7": false,
+        "firstDay": null,
+        "firstSnap": null,
+        "loopDay": null
+      },
+      "ruinRuns": [
+        {
+          "loopDay": 2,
+          "gameDay": 2,
+          "ruin": {
+            "x": 5,
+            "y": 4,
+            "via": "offered"
+          },
+          "searches": 1,
+          "found": false,
+          "stop": "ticks",
+          "unreached": null,
+          "return": "home",
+          "kcalBefore": 2400,
+          "kcalAfter": 2300
+        },
+        {
+          "loopDay": 3,
+          "gameDay": 3,
+          "ruin": {
+            "x": 5,
+            "y": 4,
+            "via": "offered"
+          },
+          "searches": 3,
+          "found": false,
+          "stop": "ticks",
+          "unreached": null,
+          "return": "home",
+          "kcalBefore": 2354,
+          "kcalAfter": 2054
+        },
+        {
+          "loopDay": 4,
+          "gameDay": 5,
+          "ruin": {
+            "x": 5,
+            "y": 4,
+            "via": "offered"
+          },
+          "searches": 1,
+          "found": false,
+          "stop": "ticks",
+          "unreached": null,
+          "return": "home",
+          "kcalBefore": 2310,
+          "kcalAfter": 2210
+        },
+        {
+          "loopDay": 5,
+          "gameDay": 6,
+          "ruin": {
+            "x": 5,
+            "y": 4,
+            "via": "offered"
+          },
+          "searches": 3,
+          "found": false,
+          "stop": "ticks",
+          "unreached": null,
+          "return": "home",
+          "kcalBefore": 2287,
+          "kcalAfter": 1987
+        }
+      ],
+      "firstAxeEvening": null,
+      "firstAxeMorning": null,
+      "source": null
+    }
+  ]
+}
