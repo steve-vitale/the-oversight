@@ -1,0 +1,4240 @@
+{
+ "seed": 85106,
+ "policyId": "leadfeast",
+ "instrument": "ammodiag-v1+supplydiag-v1+stickfiberdiag-v1",
+ "arm": "baseline",
+ "substrate": "withFullseatDiag(withSeatDrive(withWinDefer(TF leadfeast))), FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FULLSEAT=1 + AMMODIAG=1 + SUPPLYDIAG=1 + STICKFIBERDIAG=1",
+ "anchorCommit": "b2518ece2863",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "endUnlockedWave": 4,
+ "endScaleRank": "global",
+ "national": 1,
+ "table": 0,
+ "won": 0,
+ "days": 139,
+ "gameDays": 139,
+ "endReason": "village-lost",
+ "fights": [
+  {
+   "day": 93,
+   "vid": "oliver_moore",
+   "mid": "reunion",
+   "wave": 4,
+   "outcome": "vDie",
+   "fleeClass": "DEATH",
+   "rounds": 2,
+   "vTaken": 86,
+   "mDealt": 19,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "rangedWeaponId": "crossbow",
+   "rangedAmmoId": "bolt",
+   "equippedRangedId": "crossbow",
+   "postEquippedRangedId": "crossbow",
+   "carried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "carriedNeeded": 0,
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStash": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStashNeeded": 0,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   },
+   "ammoCraft": null,
+   "depart": {
+    "onExpedition": false,
+    "expedDist": null,
+    "away": true,
+    "outdoorCrew": false
+   },
+   "callerClass": "resolveWildMonsterEncounter",
+   "callerFrames": [
+    "callerOf",
+    "Game.fieldFight",
+    "Object.fieldFight",
+    "Object.resolveWildMonsterEncounter",
+    "Object.villagerMonsterTick",
+    "Object.worldTick",
+    "Object.checkEncounter",
+    "G.checkEncounter"
+   ],
+   "pocket": {
+    "pocketCalls": 0,
+    "totalPocketed": 0,
+    "lastPost": null,
+    "lastOut": null,
+    "everCarried": 0
+   },
+   "log": [
+    "Oliver has Crossbow but no arrows — the string stays drawn, useless.",
+    "R1: Oliver strikes for 19 (680 left)",
+    "Oliver's gear absorbs 30.",
+    "R1: Your Move hits Oliver for 43 (42 left)",
+    "Oliver's gear absorbs 30.",
+    "R2: Your Move hits Oliver for 43 (0 left)"
+   ]
+  },
+  {
+   "day": 111,
+   "vid": "visjoin_105",
+   "mid": "herald",
+   "wave": 4,
+   "outcome": "vFlee",
+   "fleeClass": "LEARN-WITHDRAWAL",
+   "rounds": 2,
+   "vTaken": 31,
+   "mDealt": 37,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "rangedWeaponId": "crossbow",
+   "rangedAmmoId": "bolt",
+   "equippedRangedId": "crossbow",
+   "postEquippedRangedId": "crossbow",
+   "carried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "carriedNeeded": 0,
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStash": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStashNeeded": 0,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 40
+   },
+   "ammoCraft": null,
+   "depart": {
+    "onExpedition": false,
+    "expedDist": null,
+    "away": false,
+    "outdoorCrew": false
+   },
+   "callerClass": "aidFight",
+   "callerFrames": [
+    "callerOf",
+    "Game.fieldFight",
+    "Object.fieldFight",
+    "Object.aidFight",
+    "Object.resolveWildMonsterEncounter",
+    "Object.villagerMonsterTick",
+    "Object.worldTick",
+    "Object.checkEncounter"
+   ],
+   "pocket": {
+    "pocketCalls": 0,
+    "totalPocketed": 0,
+    "lastPost": null,
+    "lastOut": null,
+    "everCarried": 0
+   },
+   "log": [
+    "Yerkezhan has Crossbow but no arrows — the string stays drawn, useless.",
+    "Yerkezhan's gear absorbs 21.",
+    "R1: Second Omen hits Yerkezhan for 17 (71 left)",
+    "R1: Yerkezhan strikes for 19 (331 left)",
+    "R2: Yerkezhan strikes for 18 (313 left)",
+    "Yerkezhan's gear absorbs 18.",
+    "R2: Second Omen hits Yerkezhan for 14 (57 left)",
+    "Yerkezhan sees how this ends — and runs while running still works."
+   ]
+  },
+  {
+   "day": 113,
+   "vid": "visjoin_105",
+   "mid": "herald",
+   "wave": 4,
+   "outcome": "vFlee",
+   "fleeClass": "LEARN-WITHDRAWAL",
+   "rounds": 1,
+   "vTaken": 48,
+   "mDealt": 20,
+   "volley": {
+    "shots": 0,
+    "hits": 0,
+    "dmg": 0,
+    "ammoLeft": 0
+   },
+   "rangedWeaponId": "crossbow",
+   "rangedAmmoId": "bolt",
+   "equippedRangedId": "crossbow",
+   "postEquippedRangedId": "crossbow",
+   "carried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "carriedNeeded": 0,
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStash": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStashNeeded": 0,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 42
+   },
+   "ammoCraft": null,
+   "depart": {
+    "onExpedition": false,
+    "expedDist": null,
+    "away": false,
+    "outdoorCrew": false
+   },
+   "callerClass": "resolveWildMonsterEncounter",
+   "callerFrames": [
+    "callerOf",
+    "Game.fieldFight",
+    "Object.fieldFight",
+    "Object.resolveWildMonsterEncounter",
+    "Object.villagerMonsterTick",
+    "Object.worldTick",
+    "Object.checkEncounter",
+    "G.checkEncounter"
+   ],
+   "pocket": {
+    "pocketCalls": 0,
+    "totalPocketed": 0,
+    "lastPost": null,
+    "lastOut": null,
+    "everCarried": 0
+   },
+   "log": [
+    "Yerkezhan has Crossbow but no arrows — the string stays drawn, useless.",
+    "Yerkezhan's gear absorbs 63.",
+    "R1: The Naming hits Yerkezhan for 48 (9 left)",
+    "R1: Yerkezhan strikes for 20 (293 left)",
+    "Yerkezhan is past holding — they run while running still works."
+   ]
+  },
+  {
+   "day": 128,
+   "vid": "visjoin_126",
+   "mid": "herald",
+   "wave": 4,
+   "outcome": "vFlee",
+   "fleeClass": "FLOOR",
+   "rounds": 1,
+   "vTaken": 69,
+   "mDealt": 13,
+   "volley": null,
+   "rangedWeaponId": null,
+   "rangedAmmoId": null,
+   "equippedRangedId": null,
+   "postEquippedRangedId": null,
+   "carried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "carriedNeeded": null,
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStash": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "ownStashNeeded": null,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   },
+   "ammoCraft": null,
+   "depart": {
+    "onExpedition": false,
+    "expedDist": null,
+    "away": true,
+    "outdoorCrew": false
+   },
+   "callerClass": "aidFight",
+   "callerFrames": [
+    "callerOf",
+    "Game.fieldFight",
+    "Object.fieldFight",
+    "Object.aidFight",
+    "Object.resolveWildMonsterEncounter",
+    "Object.villagerMonsterTick",
+    "Object.worldTick",
+    "Object.checkEncounter"
+   ],
+   "pocket": {
+    "pocketCalls": 0,
+    "totalPocketed": 0,
+    "lastPost": null,
+    "lastOut": null,
+    "everCarried": 0
+   },
+   "log": [
+    "R1: Marcelo strikes for 13 (105 left)",
+    "Marcelo's gear absorbs 14.",
+    "R1: The Naming hits Marcelo for 69 (26 left)",
+    "Marcelo is past holding — they run while running still works."
+   ]
+  }
+ ],
+ "fightCount": 4,
+ "pocketCalls": [
+  {
+   "day": 2,
+   "vid": "gen_oa3tzlt",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 5,
+   "vid": "gen_erylf7t",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 19,
+   "vid": "gen_erylf7t",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 19,
+   "vid": "jovan_milic",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 6,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 6,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "stone"
+   }
+  },
+  {
+   "day": 21,
+   "vid": "gen_844p8kq",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 44,
+   "vid": "hannah_kim",
+   "pre": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "post": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  }
+ ],
+ "departures": [
+  {
+   "day": 2,
+   "vid": "gen_oa3tzlt",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 5,
+   "vid": "gen_erylf7t",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 19,
+   "vid": "gen_erylf7t",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 19,
+   "vid": "jovan_milic",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 21,
+   "vid": "gen_844p8kq",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 25,
+   "vid": "jovan_milic",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 26,
+   "vid": "jovan_milic",
+   "kind": "startExpedition"
+  },
+  {
+   "day": 44,
+   "vid": "hannah_kim",
+   "kind": "startExpedition"
+  }
+ ],
+ "weaponFirstSeen": {
+  "gen_erylf7t": {
+   "crude_bow": {
+    "day": 2,
+    "equippedRangedId": "crude_bow"
+   }
+  },
+  "gen_844p8kq": {
+   "bow": {
+    "day": 2,
+    "equippedRangedId": "bow"
+   }
+  },
+  "gen_41bvnn7": {
+   "crude_bow": {
+    "day": 2,
+    "equippedRangedId": "crude_bow"
+   }
+  },
+  "owen_smith": {
+   "hunting_spear": {
+    "day": 2,
+    "equippedRangedId": "hunting_spear"
+   }
+  },
+  "jovan_milic": {
+   "sling": {
+    "day": 2,
+    "equippedRangedId": "sling"
+   }
+  },
+  "xavier_dubois": {
+   "fire_hardened_spear": {
+    "day": 2,
+    "equippedRangedId": "fire_hardened_spear"
+   }
+  },
+  "nora_wilson": {
+   "crossbow": {
+    "day": 2,
+    "equippedRangedId": "crossbow"
+   }
+  },
+  "gen_oa3tzlt": {
+   "crossbow": {
+    "day": 2,
+    "equippedRangedId": "crossbow"
+   }
+  },
+  "app_mgpsphgq801": {
+   "bow": {
+    "day": 74,
+    "equippedRangedId": "bow"
+   }
+  },
+  "app_mgpspi87437": {
+   "sling": {
+    "day": 75,
+    "equippedRangedId": "sling"
+   }
+  },
+  "oliver_moore": {
+   "crossbow": {
+    "day": 88,
+    "equippedRangedId": "crossbow"
+   }
+  },
+  "visjoin_105": {
+   "crossbow": {
+    "day": 107,
+    "equippedRangedId": "crossbow"
+   }
+  }
+ },
+ "pocketOverflow": 0,
+ "fieldFightCalls": 112,
+ "lowWaveFights": 108,
+ "supplyPocketCalls": [
+  {
+   "day": 2,
+   "vid": "gen_oa3tzlt",
+   "prePile": {
+    "stone": 1,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 1,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "bolt"
+   }
+  },
+  {
+   "day": 5,
+   "vid": "gen_erylf7t",
+   "prePile": {
+    "stone": 3,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 3,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 19,
+   "vid": "gen_erylf7t",
+   "prePile": {
+    "stone": 55,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 55,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 19,
+   "vid": "jovan_milic",
+   "prePile": {
+    "stone": 55,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 49,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 6,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 6,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "stone"
+   }
+  },
+  {
+   "day": 21,
+   "vid": "gen_844p8kq",
+   "prePile": {
+    "stone": 59,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "postPile": {
+    "stone": 59,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": "arrow"
+   }
+  },
+  {
+   "day": 44,
+   "vid": "hannah_kim",
+   "prePile": {
+    "stone": 122,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   },
+   "postPile": {
+    "stone": 122,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   },
+   "preCraft": null,
+   "postCraft": null,
+   "preCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "postCarried": {
+    "arrow": 0,
+    "bolt": 0,
+    "stone": 0,
+    "fusion_cell": 0,
+    "heartseeker_arrows": 0
+   },
+   "out": {
+    "pocketed": 0,
+    "crafted": 0,
+    "craftedOk": false,
+    "ammoId": null
+   }
+  }
+ ],
+ "supplyDaily": [
+  {
+   "day": 2,
+   "pile": {
+    "stone": 0,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 2,
+   "pile": {
+    "stone": 2,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 4,
+   "pile": {
+    "stone": 1,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 4,
+   "pile": {
+    "stone": 2,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 5,
+   "pile": {
+    "stone": 6,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 6,
+   "pile": {
+    "stone": 9,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 7,
+   "pile": {
+    "stone": 16,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 8,
+   "pile": {
+    "stone": 21,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 9,
+   "pile": {
+    "stone": 21,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 10,
+   "pile": {
+    "stone": 23,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 11,
+   "pile": {
+    "stone": 28,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 12,
+   "pile": {
+    "stone": 31,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 13,
+   "pile": {
+    "stone": 34,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 14,
+   "pile": {
+    "stone": 37,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 15,
+   "pile": {
+    "stone": 41,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 16,
+   "pile": {
+    "stone": 44,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 17,
+   "pile": {
+    "stone": 47,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 18,
+   "pile": {
+    "stone": 52,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 19,
+   "pile": {
+    "stone": 52,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 20,
+   "pile": {
+    "stone": 56,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 21,
+   "pile": {
+    "stone": 62,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 22,
+   "pile": {
+    "stone": 66,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 23,
+   "pile": {
+    "stone": 68,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 24,
+   "pile": {
+    "stone": 70,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 25,
+   "pile": {
+    "stone": 71,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 26,
+   "pile": {
+    "stone": 73,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 27,
+   "pile": {
+    "stone": 74,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 28,
+   "pile": {
+    "stone": 79,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 29,
+   "pile": {
+    "stone": 81,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 30,
+   "pile": {
+    "stone": 83,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 31,
+   "pile": {
+    "stone": 87,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 32,
+   "pile": {
+    "stone": 91,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 33,
+   "pile": {
+    "stone": 92,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 34,
+   "pile": {
+    "stone": 96,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 35,
+   "pile": {
+    "stone": 99,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 36,
+   "pile": {
+    "stone": 101,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 37,
+   "pile": {
+    "stone": 107,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 0
+   }
+  },
+  {
+   "day": 38,
+   "pile": {
+    "stone": 109,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 2
+   }
+  },
+  {
+   "day": 39,
+   "pile": {
+    "stone": 111,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 8
+   }
+  },
+  {
+   "day": 40,
+   "pile": {
+    "stone": 114,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 8
+   }
+  },
+  {
+   "day": 41,
+   "pile": {
+    "stone": 115,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 8
+   }
+  },
+  {
+   "day": 42,
+   "pile": {
+    "stone": 116,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 8
+   }
+  },
+  {
+   "day": 43,
+   "pile": {
+    "stone": 121,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   }
+  },
+  {
+   "day": 44,
+   "pile": {
+    "stone": 122,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   }
+  },
+  {
+   "day": 45,
+   "pile": {
+    "stone": 123,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   }
+  },
+  {
+   "day": 46,
+   "pile": {
+    "stone": 126,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   }
+  },
+  {
+   "day": 47,
+   "pile": {
+    "stone": 127,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   }
+  },
+  {
+   "day": 48,
+   "pile": {
+    "stone": 129,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 10
+   }
+  },
+  {
+   "day": 49,
+   "pile": {
+    "stone": 131,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 13
+   }
+  },
+  {
+   "day": 50,
+   "pile": {
+    "stone": 132,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 13
+   }
+  },
+  {
+   "day": 51,
+   "pile": {
+    "stone": 133,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 52,
+   "pile": {
+    "stone": 134,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 53,
+   "pile": {
+    "stone": 136,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 54,
+   "pile": {
+    "stone": 139,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 55,
+   "pile": {
+    "stone": 140,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 56,
+   "pile": {
+    "stone": 141,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 57,
+   "pile": {
+    "stone": 143,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 58,
+   "pile": {
+    "stone": 145,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 59,
+   "pile": {
+    "stone": 149,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 60,
+   "pile": {
+    "stone": 151,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 61,
+   "pile": {
+    "stone": 151,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 62,
+   "pile": {
+    "stone": 154,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 63,
+   "pile": {
+    "stone": 156,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 65,
+   "pile": {
+    "stone": 157,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 17
+   }
+  },
+  {
+   "day": 65,
+   "pile": {
+    "stone": 159,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 66,
+   "pile": {
+    "stone": 160,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 67,
+   "pile": {
+    "stone": 163,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 68,
+   "pile": {
+    "stone": 165,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 69,
+   "pile": {
+    "stone": 166,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 70,
+   "pile": {
+    "stone": 166,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 71,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 20
+   }
+  },
+  {
+   "day": 72,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 21
+   }
+  },
+  {
+   "day": 73,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 21
+   }
+  },
+  {
+   "day": 74,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 22
+   }
+  },
+  {
+   "day": 75,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 22
+   }
+  },
+  {
+   "day": 76,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 22
+   }
+  },
+  {
+   "day": 77,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 22
+   }
+  },
+  {
+   "day": 78,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 22
+   }
+  },
+  {
+   "day": 79,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 24
+   }
+  },
+  {
+   "day": 80,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 24
+   }
+  },
+  {
+   "day": 81,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 24
+   }
+  },
+  {
+   "day": 82,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 27
+   }
+  },
+  {
+   "day": 83,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 84,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 85,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 86,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 87,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 88,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 89,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 90,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 91,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 92,
+   "pile": {
+    "stone": 167,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 93,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 94,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 29
+   }
+  },
+  {
+   "day": 95,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 96,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 97,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 98,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 99,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 100,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 101,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 102,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 103,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 104,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 34
+   }
+  },
+  {
+   "day": 105,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 37
+   }
+  },
+  {
+   "day": 106,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 37
+   }
+  },
+  {
+   "day": 107,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 37
+   }
+  },
+  {
+   "day": 108,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 40
+   }
+  },
+  {
+   "day": 109,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 40
+   }
+  },
+  {
+   "day": 110,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 40
+   }
+  },
+  {
+   "day": 111,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 40
+   }
+  },
+  {
+   "day": 112,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 40
+   }
+  },
+  {
+   "day": 113,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 42
+   }
+  },
+  {
+   "day": 114,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 45
+   }
+  },
+  {
+   "day": 115,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 45
+   }
+  },
+  {
+   "day": 116,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 117,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 118,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 119,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 120,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 121,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 122,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 123,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 124,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 125,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 47
+   }
+  },
+  {
+   "day": 126,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 49
+   }
+  },
+  {
+   "day": 127,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 49
+   }
+  },
+  {
+   "day": 128,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 129,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 130,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 131,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 132,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 133,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 134,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 135,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 136,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 137,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  },
+  {
+   "day": 138,
+   "pile": {
+    "stone": 168,
+    "stick": 0,
+    "fiber": 0,
+    "branch": 52
+   }
+  }
+ ],
+ "supplyEnd": {
+  "finalPile": {
+   "stone": 168,
+   "stick": 0,
+   "fiber": 0,
+   "branch": 52
+  },
+  "ammoCraftAll": {},
+  "carriedTotals": {
+   "arrow": 0,
+   "bolt": 0,
+   "stone": 0,
+   "fusion_cell": 0,
+   "heartseeker_arrows": 0
+  },
+  "stashTotals": {
+   "arrow": 0,
+   "bolt": 0,
+   "stone": 0,
+   "fusion_cell": 0,
+   "heartseeker_arrows": 0
+  },
+  "rangedCarriers": []
+ },
+ "supplyOverflow": 0,
+ "stickfiberRows": [
+  {
+   "day": 2,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 2,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 4,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 4,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 5,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 6,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 7,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 8,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 9,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 10,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 11,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 12,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 13,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 14,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 15,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 16,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 17,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 18,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 19,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 20,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 21,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 22,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 23,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 24,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 25,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 26,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 27,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 28,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 29,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 30,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 31,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 32,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 33,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 34,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 35,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 36,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 37,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 38,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 39,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 40,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 41,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 42,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 43,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 44,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 45,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 46,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 47,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 48,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 49,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 50,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 51,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 52,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 53,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 54,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 55,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 56,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 57,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 58,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 59,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 60,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 61,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 62,
+   "scholarStick": 2,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 63,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 65,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 65,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 66,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 67,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 68,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 69,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 70,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 71,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 72,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 73,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 74,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 75,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 76,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 77,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 78,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 79,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 80,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 81,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 82,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 83,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 84,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 85,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 86,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 87,
+   "scholarStick": 0,
+   "scholarFiber": 1,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 88,
+   "scholarStick": 0,
+   "scholarFiber": 2,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 89,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 90,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 91,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 92,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 93,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 94,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 95,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 96,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 97,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 98,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 99,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 100,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 101,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 102,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 103,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 104,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 105,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 106,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 107,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 108,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 109,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 110,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 111,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 112,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 113,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 114,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 115,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 116,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 117,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 118,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 119,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 120,
+   "scholarStick": 1,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 121,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 122,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 123,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 124,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 125,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 126,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 127,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 128,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 129,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 130,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 131,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 132,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 133,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 134,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 135,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 136,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 137,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  },
+  {
+   "day": 138,
+   "scholarStick": 0,
+   "scholarFiber": 0,
+   "addStick": 0,
+   "addFiber": 0,
+   "donateStick": 0,
+   "donateFiber": 0,
+   "inviteBundle": 0,
+   "craftArrow": 0,
+   "craftBolt": 0
+  }
+ ],
+ "deadfallHauls": 0,
+ "deadfallSticks": 0,
+ "deadfallFiber": 0,
+ "deaths": [
+  {
+   "day": 2,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 5,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "villager",
+   "who": "gen_5tjoz37",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 19,
+   "kind": "monster",
+   "who": "speedbump_turtle",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 20,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "villager",
+   "who": "gen_844p8kq",
+   "cause": "The Heckler",
+   "player": false
+  },
+  {
+   "day": 23,
+   "kind": "villager",
+   "who": "gen_erylf7t",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 23,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 38,
+   "kind": "villager",
+   "who": "gen_fila5gw",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 42,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 44,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 70,
+   "kind": "monster",
+   "who": "gallowdeer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 70,
+   "kind": "villager",
+   "who": "gen_oa3tzlt",
+   "cause": "the arena",
+   "player": true
+  },
+  {
+   "day": 70,
+   "kind": "monster",
+   "who": "callback",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 79,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 81,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 81,
+   "kind": "villager",
+   "who": "hannah_kim",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 83,
+   "kind": "villager",
+   "who": "jovan_milic",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 84,
+   "kind": "villager",
+   "who": "gen_41bvnn7",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 85,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 88,
+   "kind": "villager",
+   "who": "xavier_dubois",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 92,
+   "kind": "monster",
+   "who": "chorus_line",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 93,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 93,
+   "kind": "villager",
+   "who": "oliver_moore",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 100,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 111,
+   "kind": "monster",
+   "who": "callback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 113,
+   "kind": "villager",
+   "who": "visjoin_105",
+   "cause": "a wound that wouldn't close",
+   "player": false
+  },
+  {
+   "day": 119,
+   "kind": "person",
+   "who": "app_mgpsphgq801",
+   "cause": "alien",
+   "player": false
+  },
+  {
+   "day": 123,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 123,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 123,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 123,
+   "kind": "villager",
+   "who": "owen_smith",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 124,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 130,
+   "kind": "villager",
+   "who": "visjoin_126",
+   "cause": "a wound that wouldn't close",
+   "player": false
+  },
+  {
+   "day": 132,
+   "kind": "villager",
+   "who": "nora_wilson",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 135,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 136,
+   "kind": "villager",
+   "who": "ava_garcia",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 139,
+   "kind": "villager",
+   "who": "app_mgpspi87437",
+   "cause": "the wild",
+   "player": true
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2400|12|4|4|1|395",
+  "3:3|100|2309|12|4|4|1|331",
+  "4:4|97|990|12|4|4|1|283",
+  "5:5|100|1190|12|4|4|1|261",
+  "6:6|100|1200|12|4|4|1|264",
+  "7:7|100|1363|12|4|4|1|255",
+  "8:8|100|1218|12|4|4|1|252",
+  "9:9|100|1141|12|4|4|1|251",
+  "10:10|100|1078|12|4|4|1|269",
+  "11:11|100|1490|12|4|4|1|252",
+  "12:12|80|2400|11|4|4|2|225",
+  "13:13|100|2390|11|4|4|2|219",
+  "14:14|100|2184|11|4|4|2|215",
+  "15:15|100|2300|11|4|4|2|212",
+  "16:16|100|2375|11|4|4|2|209",
+  "17:17|100|2400|11|4|4|2|208",
+  "18:18|95|2400|11|4|4|2|214",
+  "19:19|100|2390|11|4|4|2|207",
+  "20:20|100|2400|11|4|4|2|193",
+  "21:21|100|2400|11|4|4|2|179",
+  "22:22|100|2390|11|4|4|2|159",
+  "23:23|100|2400|10|4|4|2|139",
+  "24:24|100|2400|9|4|4|2|153",
+  "25:25|100|2390|9|4|4|2|140",
+  "26:26|100|2400|9|4|4|2|141",
+  "27:27|100|2400|9|4|4|2|122",
+  "28:28|100|2400|9|4|4|2|101",
+  "29:29|100|2400|9|4|4|2|86",
+  "30:30|100|2400|9|4|4|2|80",
+  "31:31|100|2400|9|4|4|2|85",
+  "32:32|100|2400|9|4|4|2|87",
+  "33:33|100|2400|9|4|4|2|99",
+  "34:34|100|2400|9|4|4|2|105",
+  "35:35|100|2400|9|4|4|2|125",
+  "36:36|100|2400|9|4|4|2|131",
+  "37:37|100|2400|9|4|4|2|114",
+  "38:38|100|2390|9|4|4|3|115",
+  "39:39|95|2400|8|4|4|3|111",
+  "40:40|100|2400|8|4|4|3|127",
+  "41:41|100|2390|8|4|4|3|130",
+  "42:42|100|2233|8|4|4|3|137",
+  "43:43|100|2400|8|4|4|3|131",
+  "44:44|100|2390|8|4|4|3|121",
+  "45:45|100|2400|8|4|4|3|123",
+  "46:46|100|2400|8|4|4|3|127",
+  "47:47|100|2400|8|4|4|3|133",
+  "48:48|100|2390|8|4|4|3|147",
+  "49:49|100|2400|8|4|4|3|168",
+  "50:50|100|2400|8|4|4|3|181",
+  "51:51|100|2390|8|4|4|3|189",
+  "52:52|100|2400|8|4|4|3|199",
+  "53:53|100|2400|8|4|4|3|190",
+  "54:54|90|2390|8|4|4|3|258",
+  "55:55|100|2400|8|4|4|3|193",
+  "56:56|100|2400|8|4|4|3|195",
+  "57:57|30|2390|8|4|4|3|214",
+  "58:58|60|2400|8|4|4|3|207",
+  "59:59|60|2400|8|4|4|3|193",
+  "60:60|90|2390|8|4|4|3|210",
+  "61:61|100|2400|8|4|4|3|195",
+  "62:62|100|2400|8|4|4|3|208",
+  "63:63|100|2390|8|4|4|3|199",
+  "64:64|56|2400|8|4|4|3|225",
+  "65:65|56|2390|8|4|4|3|199",
+  "66:66|56|2400|8|4|4|3|207",
+  "67:67|86|2390|8|4|4|3|185",
+  "68:68|100|2400|8|4|4|3|181",
+  "69:69|100|2390|8|4|4|3|169",
+  "70:70|100|2400|7|4|4|3|169",
+  "71:71|97|2400|7|4|4|4|141",
+  "72:72|100|2306|7|4|4|4|132",
+  "73:73|100|2400|7|4|4|4|124",
+  "74:74|100|2400|8|4|4|4|110",
+  "75:75|97|2400|9|4|4|4|136",
+  "76:76|100|2190|9|4|4|4|170",
+  "77:77|100|2400|9|4|4|4|186",
+  "78:78|100|2190|9|4|4|4|145",
+  "79:79|89|2400|9|4|4|4|139",
+  "80:80|100|2247|9|4|4|4|121",
+  "81:81|100|1500|8|4|4|4|127",
+  "82:82|78|2390|8|4|4|4|158",
+  "83:83|100|1500|7|4|4|4|144",
+  "84:84|100|1500|6|4|4|4|128",
+  "85:85|83|2286|6|3|4|4|100",
+  "86:86|68|2309|6|1|5|4|85",
+  "87:87|29|2334|6|1|5|4|87",
+  "88:88|41|2366|7|1|5|4|95",
+  "89:89|98|2205|6|4|4|4|83",
+  "90:90|100|2190|6|4|4|4|73",
+  "91:91|100|2245|6|4|4|4|68",
+  "92:92|54|2400|6|4|4|4|116",
+  "93:93|35|2263|6|4|4|4|85",
+  "94:94|32|2299|5|4|4|4|68",
+  "95:95|58|2313|5|4|4|4|36",
+  "96:96|85|2390|5|4|4|4|13",
+  "97:97|100|1787|5|4|4|4|4",
+  "98:98|100|2340|5|4|4|4|8",
+  "99:99|100|2266|5|4|4|4|97",
+  "100:100|92|2380|5|4|4|4|74",
+  "101:101|89|2400|5|4|4|4|54",
+  "102:102|100|2390|5|4|4|4|25",
+  "103:103|100|2400|5|4|4|4|12",
+  "104:104|100|2238|5|4|4|4|9",
+  "105:105|100|1846|5|4|4|4|0",
+  "106:106|100|2400|5|4|4|4|58",
+  "107:107|97|2300|6|4|4|4|28",
+  "108:108|100|2390|6|4|4|4|10",
+  "109:109|100|2304|6|4|4|4|55",
+  "110:110|100|2400|6|4|4|4|26",
+  "111:111|100|2055|6|4|4|4|0",
+  "112:112|29|2276|6|3|4|4|0",
+  "113:113|36|2376|6|3|4|4|60",
+  "114:114|49|2364|5|3|4|4|38",
+  "115:115|29|2360|5|3|4|4|51",
+  "116:116|88|2340|5|3|4|4|80",
+  "117:117|58|2376|5|3|4|4|39",
+  "118:118|51|2368|5|3|4|4|23",
+  "119:119|100|2376|4|3|4|4|29",
+  "120:120|100|2376|4|3|4|4|117",
+  "121:121|81|2360|4|3|4|4|80",
+  "122:122|94|2376|4|3|4|4|87",
+  "123:123|73|2360|4|3|4|4|70",
+  "124:124|86|2200|3|4|4|4|44",
+  "125:125|8|2293|3|4|4|4|29",
+  "126:126|35|1355|3|4|4|4|0",
+  "127:127|97|2390|3|4|4|4|15",
+  "128:128|100|2400|4|4|4|4|10",
+  "129:129|98|1011|4|4|4|4|0",
+  "130:130|100|628|4|4|4|4|0",
+  "131:131|100|1363|3|4|4|4|0",
+  "132:132|100|1500|2|4|4|4|20",
+  "133:133|100|1888|2|4|4|4|5",
+  "134:134|100|2233|2|4|4|4|25",
+  "135:135|100|2390|2|4|4|4|11",
+  "136:136|100|1500|1|4|4|4|0",
+  "137:137|100|2245|1|4|4|4|0",
+  "138:138|100|584|1|4|4|4|0"
+ ],
+ "instrumentErrors": [],
+ "supplyErrors": [],
+ "stickfiberErrors": []
+}

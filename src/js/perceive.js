@@ -45,7 +45,7 @@
     return i.primary === 'observant' || i.secondary === 'observant';
   }
 
-  const MAT_PLURAL = { wood: 'logs', branch: 'branches', stone: 'stones', fiber: 'fiber' };
+  const MAT_PLURAL = { wood: 'logs', branch: 'branches', stone: 'stones', fiber: 'fiber', stick: 'sticks' };
 
   // perceptionHints(): [{text, priority}] sorted, capped. Strings only
   // leave this function — app.js renders them verbatim (escaped).
@@ -113,7 +113,7 @@
         const st = this.stashState();
         const mats = st.materials || {};
         const parts = [];
-        for (const m of ['branch', 'wood', 'stone', 'fiber']) {
+        for (const m of ['branch', 'wood', 'stone', 'fiber', 'stick']) {
           const n = mats[m] || 0;
           if (n > 0) parts.push(`${n} ${MAT_PLURAL[m] || m}`);
         }

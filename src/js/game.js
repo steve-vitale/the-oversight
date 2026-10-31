@@ -6213,6 +6213,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         hunt:   { icon: '🏹', name: 'Hunt', desc: 'Hunt animals for meat. Risky — animals fight back.', danger: 1 },
         wood:   { icon: '🪵', name: 'Gather wood', desc: 'Firewood and building wood. Safe.', danger: 0 },
         stone:  { icon: '🪨', name: 'Gather stone', desc: 'Pry loose stone from creek beds and hillsides. Building stone.', danger: 0 },
+        deadfall: { icon: '🪾', name: 'Gather deadfall', desc: 'Gather fallen sticks and brush fiber from deadfall. No axe needed — fallen wood only. Arrow material.', danger: 0 },
         water:  { icon: '💧', name: 'Fetch water', desc: 'Bring back clean water. Safe.', danger: 0 },
         scout:  { icon: '🔭', name: 'Scout', desc: 'Explore and map nearby land. May find things.', danger: 0 },
         patrol: { icon: '⚔️', name: 'Patrol / Fight', desc: 'Deal with monster threats. DANGEROUS.', danger: 2 },
@@ -6295,6 +6296,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // STONE (haven growth 2026-10-10): masons and builders know rock.
         if (has('mason', 'stonecutter', 'quarry', 'builder')) mult = 1.4;
         else if (has('carpenter', 'handyman', 'lumberjack')) mult = 1.2;
+      } else if (task === 'deadfall') {
+        // DEADFALL (sim-deadfall-b 2026-10-31, backlog #1594): the stone
+        // duty's shape applied to fallen wood — foragers and woodworkers
+        // know deadfall; no axe gate (gatherFallen precedent: deadfall
+        // needs no tool). Mirrors stone's 1.4/1.2 tiers exactly.
+        if (has('forager', 'lumberjack', 'carpenter', 'handyman', 'builder')) mult = 1.4;
+        else if (has('farmer', 'gardener')) mult = 1.2;
       } else if (task === 'water') {
         if (has('plumber', 'firefighter', 'fisherman', 'sailor')) mult = 1.3;
       } else if (task === 'scout') {
@@ -6940,6 +6948,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
         this.say(`🪨 ${first} pries ${stone} stone loose from the creek bed. The building pile grows. (${pile} stone now.)`);
         this.bumpTrust(vid, 1, 'pried stone from the creek bed');
+      } else if (a.task === 'deadfall') {
+        // DEADFALL (sim-deadfall-b 2026-10-31, backlog #1594): the
+        // villager stick/fiber source, modeled on the stone branch
+        // directly above — same shape (R(1,2) * eff into the communal
+        // stash, one return line, bumpTrust 1), same scheduling family
+        // (delegateTasks + resolveOneAssignment). Deadfall needs NO
+        // tool (gatherFallen precedent), so no axe gate applies; the
+        // brush half yields fiber on a 50% roll (clearBrush
+        // analogue). Throttle-alt and cistern rotations are NOT
+        // touched: stone routing stays exactly as it was. Telemetry
+        // lives OFF-STATE on the Game object (never in saves or
+        // state fingerprints), like the FOODVOICE2 day flags.
+        const sticks = Math.max(1, Math.round(R(1, 2) * eff));
+        const fiber = Math.random() < 0.5 ? 1 : 0;
+        let pileStick = 0, pileFiber = 0;
+        try {
+          const st = this.stashState();
+          st.materials.stick = (st.materials.stick || 0) + sticks;
+          st.materials.fiber = (st.materials.fiber || 0) + fiber;
+          pileStick = st.materials.stick;
+          pileFiber = st.materials.fiber;
+        } catch (e) {}
+        this._deadfallHauls = (this._deadfallHauls || 0) + 1;
+        this._deadfallSticks = (this._deadfallSticks || 0) + sticks;
+        this._deadfallFiber = (this._deadfallFiber || 0) + fiber;
+        this.say(`🍂 ${first} gathers deadfall — ${sticks} stick${sticks > 1 ? 's' : ''}${fiber ? ` + ${fiber} fiber` : ''}. The pile grows. (${pileStick} sticks now.)`);
+        this.bumpTrust(vid, 1, 'gathered deadfall sticks');
       } else if (a.task === 'water') {
         // CISTERNCHECK (sim-cisterncheck-b 2026-10-21, backlog #732): a person
         // checks the cistern before walking to the creek. Remaining capacity is
