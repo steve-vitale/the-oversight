@@ -1,0 +1,2806 @@
+{
+ "band": {
+  "seeds": [
+   87104,
+   87109,
+   87119,
+   87124,
+   87140,
+   87115,
+   87123,
+   87127
+  ],
+  "nSeeds": 8,
+  "national": 7,
+  "table": 7,
+  "won": 7,
+  "wave4": 4,
+  "wave5": 0,
+  "medianSurvival": 118.5,
+  "maxSurvival": 197,
+  "meetings": 120,
+  "fieldMeetings": 104,
+  "tbMeetings": 16,
+  "fieldOutcomes": {
+   "vFlee": 55,
+   "mFlee": 40,
+   "evade": 9
+  },
+  "tbOutcomes": {
+   "lost": 8,
+   "won": 5,
+   "routed": 3
+  },
+  "triggerCounts": {
+   "learn": 24,
+   "floor": 7,
+   "mBreak-driveoff": 33,
+   "hopeless": 23,
+   "round-cap": 2,
+   "trick-exit": 1,
+   "unclassified": 5
+  },
+  "fleeN": 95,
+  "killableN": 4,
+  "nearKillableN": 9,
+  "belowBreakN": 34,
+  "zeroDmgN": 39,
+  "rtkLe2": 4,
+  "rtkLe5": 9,
+  "rtkLe15": 31,
+  "unclassifiedFlightsN": 5,
+  "orphanLedgerN": 0,
+  "orphanPyrrhicN": 0,
+  "unmatchedLogN": 0,
+  "eventsNoLogN": 0,
+  "recorderErrs": 0,
+  "killEventsN": 5,
+  "pyrrhicEventsN": 0,
+  "logW3N": 5,
+  "joinLedgerTotals": {
+   "fieldVKill": 0,
+   "tbWon": 5,
+   "tbRouted": 0
+  },
+  "joinPyrrhicTotals": {
+   "tbLost": 0
+  },
+  "fieldVKillNoEventN": 0,
+  "tbWRNoEventN": 3,
+  "dailySortedAll": true,
+  "convertedN": 0,
+  "w3FieldVKillsN": 0,
+  "w45FieldVKillsN": 0,
+  "fieldW3pN": 109,
+  "committedFightsN": 0,
+  "committedOutcomes": {},
+  "committedFloorN": 0,
+  "committedDeaths": 0,
+  "fieldW3DeathsN": 4,
+  "rtkPooled": {
+   "n": 56,
+   "median": 14.172413793103448,
+   "min": 0.32653061224489793,
+   "max": 38.666666666666664
+  },
+  "rtkPooledShares": {
+   "le2": 0.07142857142857142,
+   "le5": 0.16071428571428573,
+   "le15": 0.5535714285714286
+  },
+  "rtkSeedMedians": [
+   {
+    "seed": 87104,
+    "median": 15.15,
+    "n": 6
+   },
+   {
+    "seed": 87109,
+    "median": 13.944099378881987,
+    "n": 4
+   },
+   {
+    "seed": 87119,
+    "median": 13.294117647058824,
+    "n": 3
+   },
+   {
+    "seed": 87124,
+    "median": 3.2888888888888888,
+    "n": 6
+   },
+   {
+    "seed": 87140,
+    "median": 18.23076923076923,
+    "n": 17
+   },
+   {
+    "seed": 87115,
+    "median": 7.384615384615385,
+    "n": 5
+   },
+   {
+    "seed": 87123,
+    "median": 14,
+    "n": 13
+   },
+   {
+    "seed": 87127,
+    "median": 29.7,
+    "n": 2
+   }
+  ]
+ },
+ "perSeed": [
+  {
+   "seed": 87104,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 159,
+   "gameDays": 159,
+   "endReason": "over-other",
+   "endScaleRank": "global",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 13,
+   "fieldMeetings": 11,
+   "tbMeetings": 2,
+   "fieldOutcomes": {
+    "vFlee": 9,
+    "mFlee": 2
+   },
+   "tbOutcomes": {
+    "lost": 1,
+    "won": 1
+   },
+   "triggerCounts": {
+    "learn": 4,
+    "floor": 5,
+    "mBreak-driveoff": 2
+   },
+   "triggerXIntent": {
+    "learn": {
+     "learn": 4
+    },
+    "floor": {
+     "engage": 5
+    },
+    "mBreak-driveoff": {
+     "engage": 2
+    }
+   },
+   "triggerXCaller": {
+    "learn": {
+     "wild": 4
+    },
+    "floor": {
+     "wild": 5
+    },
+    "mBreak-driveoff": {
+     "wild": 2
+    }
+   },
+   "unclassifiedFlights": [],
+   "fleeN": 11,
+   "killableN": 0,
+   "nearKillableN": 1,
+   "belowBreakN": 2,
+   "zeroDmgN": 5,
+   "rtkDist": {
+    "n": 6,
+    "median": 15.15,
+    "min": 4.324324324324324,
+    "max": 38.666666666666664
+   },
+   "rtkValues": [
+    30.5,
+    38.666666666666664,
+    11.5,
+    4.324324324324324,
+    18.8,
+    9.818181818181818
+   ],
+   "rtkLe2": 0,
+   "rtkLe5": 1,
+   "rtkLe15": 3,
+   "byOutcomeDist": {
+    "vFlee": {
+     "n": 9,
+     "mDealt": {
+      "n": 9,
+      "median": 12,
+      "min": 0,
+      "max": 74
+     },
+     "vTaken": {
+      "n": 9,
+      "median": 32,
+      "min": 14,
+      "max": 62
+     },
+     "allyDealt": {
+      "n": 9,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 9,
+      "median": 2,
+      "min": 1,
+      "max": 5
+     },
+     "vDpr": {
+      "n": 9,
+      "median": 6,
+      "min": 0,
+      "max": 16.5
+     },
+     "mDpr": {
+      "n": 9,
+      "median": 16,
+      "min": 12.4,
+      "max": 18.666666666666668
+     },
+     "mHpLeft": {
+      "n": 9,
+      "median": 162,
+      "min": 64,
+      "max": 235
+     },
+     "mFracLeft": {
+      "n": 9,
+      "median": 0.6230769230769231,
+      "min": 0.24615384615384617,
+      "max": 0.9038461538461539
+     },
+     "rtk": {
+      "n": 6,
+      "median": 15.15,
+      "min": 4.324324324324324,
+      "max": 38.666666666666664
+     }
+    },
+    "mFlee": {
+     "n": 2,
+     "mDealt": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vTaken": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "allyDealt": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vDpr": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mDpr": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mHpLeft": {
+      "n": 2,
+      "median": 1,
+      "min": 1,
+      "max": 1
+     },
+     "mFracLeft": {
+      "n": 2,
+      "median": 0.0038461538461538464,
+      "min": 0.0038461538461538464,
+      "max": 0.0038461538461538464
+     },
+     "rtk": {
+      "n": 0,
+      "median": null,
+      "min": null,
+      "max": null
+     }
+    }
+   },
+   "partyAll": {
+    "n": 11,
+    "partyClassCounts": {
+     "solo-start-to-finish": 11
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 9,
+      "mFlee": 2
+     }
+    },
+    "partySizeDist": {
+     "1": 11
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "partyWild": {
+    "n": 11,
+    "partyClassCounts": {
+     "solo-start-to-finish": 11
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 9,
+      "mFlee": 2
+     }
+    },
+    "partySizeDist": {
+     "1": 11
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 1,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 1,
+   "pyrrhicEventsN": 0,
+   "logW3N": 1,
+   "w3days": 25,
+   "firstW3Day": 135,
+   "endP3": 1,
+   "endWar": 1,
+   "dailySorted": true,
+   "dailyRows": 159,
+   "closestToKill": {
+    "day": 144,
+    "vid": "chloe_dubois",
+    "mid": "callback",
+    "outcome": "vFlee",
+    "trigger": "floor",
+    "rounds": 5,
+    "mDealt": 74,
+    "vTaken": 62,
+    "allyDealt": 0,
+    "mHpLeft": 64,
+    "mMax": 260,
+    "mFracLeft": 0.24615384615384617,
+    "vDpr": 14.8,
+    "rtk": 4.324324324324324,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "engage",
+    "caller": "wild",
+    "log": [
+     "R1: It wears Tariq's face. The eyes don't track. (Chloe knew that walk — and knows they're dead.)",
+     "R1: Chloe speaks to the face — as THEM, the way they laughed — and says the goodbye properly. The face loses coherence.",
+     "Chloe's gear absorbs 21.",
+     "R1: Encore hits Chloe for 15 (79 left)",
+     "R2: Chloe strikes for 20 (x1.3) (118 left)",
+     "Chloe's gear absorbs 19.",
+     "R2: Encore hits Chloe for 14 (65 left)",
+     "Chloe holds the line — working the trick, not the damage race.",
+     "R3: the face tries to shift — and can’t. Chloe’s goodbye holds. (No borrowed swing.)",
+     "Chloe's gear absorbs 14.",
+     "R3: Standing Ovation hits Chloe for 10 (55 left)",
+     "R3: Chloe strikes for 19 (x1.3) (99 left)",
+     "Chloe holds the line — working the trick, not the damage race.",
+     "R4: Chloe strikes for 16 (x1.2) (83 left)",
+     "Chloe's gear absorbs 20.",
+     "R4: Encore hits Chloe for 14 (41 left)",
+     "Chloe holds the line — working the trick, not the damage race.",
+     "R5: Chloe strikes for 19 (x1.3) (64 left)",
+     "Chloe's gear absorbs 13.",
+     "R5: Standing Ovation hits Chloe for 9 (32 left)",
+     "Chloe holds the line — working the trick, not the damage race.",
+     "Chloe SCREAMS — the milk is cheese now! The Callback reels, dizzy. (Scream Cheese)",
+     "Chloe is past holding — they run while running still works."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 11,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87109,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 146,
+   "gameDays": 146,
+   "endReason": "village-lost",
+   "endScaleRank": "regional",
+   "national": 0,
+   "table": 0,
+   "won": 0,
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 9,
+   "fieldMeetings": 6,
+   "tbMeetings": 3,
+   "fieldOutcomes": {
+    "evade": 2,
+    "vFlee": 4
+   },
+   "tbOutcomes": {
+    "lost": 1,
+    "won": 2
+   },
+   "triggerCounts": {
+    "hopeless": 3,
+    "learn": 1
+   },
+   "triggerXIntent": {
+    "hopeless": {
+     "engage": 3
+    },
+    "learn": {
+     "learn": 1
+    }
+   },
+   "triggerXCaller": {
+    "hopeless": {
+     "wild": 3
+    },
+    "learn": {
+     "wild": 1
+    }
+   },
+   "unclassifiedFlights": [],
+   "fleeN": 4,
+   "killableN": 0,
+   "nearKillableN": 0,
+   "belowBreakN": 0,
+   "zeroDmgN": 0,
+   "rtkDist": {
+    "n": 4,
+    "median": 13.944099378881987,
+    "min": 5.294117647058824,
+    "max": 31.5
+   },
+   "rtkValues": [
+    5.7142857142857135,
+    5.294117647058824,
+    22.17391304347826,
+    31.5
+   ],
+   "rtkLe2": 0,
+   "rtkLe5": 0,
+   "rtkLe15": 2,
+   "byOutcomeDist": {
+    "evade": {
+     "n": 2,
+     "mDealt": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vTaken": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "allyDealt": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vDpr": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mDpr": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mHpLeft": {
+      "n": 2,
+      "median": 291,
+      "min": 268,
+      "max": 314
+     },
+     "mFracLeft": {
+      "n": 2,
+      "median": 0.880514705882353,
+      "min": 0.8375,
+      "max": 0.9235294117647059
+     },
+     "rtk": {
+      "n": 0,
+      "median": null,
+      "min": null,
+      "max": null
+     }
+    },
+    "vFlee": {
+     "n": 4,
+     "mDealt": {
+      "n": 4,
+      "median": 60.5,
+      "min": 16,
+      "max": 102
+     },
+     "vTaken": {
+      "n": 4,
+      "median": 87,
+      "min": 53,
+      "max": 94
+     },
+     "allyDealt": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 4,
+      "median": 5,
+      "min": 2,
+      "max": 6
+     },
+     "vDpr": {
+      "n": 4,
+      "median": 13.8,
+      "min": 3.8333333333333335,
+      "max": 20.4
+     },
+     "mDpr": {
+      "n": 4,
+      "median": 15.966666666666669,
+      "min": 10.6,
+      "max": 47
+     },
+     "mHpLeft": {
+      "n": 4,
+      "median": 110,
+      "min": 85,
+      "max": 252
+     },
+     "mFracLeft": {
+      "n": 4,
+      "median": 0.3928571428571429,
+      "min": 0.30357142857142855,
+      "max": 0.9692307692307692
+     },
+     "rtk": {
+      "n": 4,
+      "median": 13.944099378881987,
+      "min": 5.294117647058824,
+      "max": 31.5
+     }
+    }
+   },
+   "partyAll": {
+    "n": 6,
+    "partyClassCounts": {
+     "solo-start-to-finish": 6
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "evade": 2,
+      "vFlee": 4
+     }
+    },
+    "partySizeDist": {
+     "1": 6
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "partyWild": {
+    "n": 4,
+    "partyClassCounts": {
+     "solo-start-to-finish": 4
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 4
+     }
+    },
+    "partySizeDist": {
+     "1": 4
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 2,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 2,
+   "pyrrhicEventsN": 0,
+   "logW3N": 2,
+   "w3days": 96,
+   "firstW3Day": 50,
+   "endP3": 2,
+   "endWar": 3,
+   "dailySorted": true,
+   "dailyRows": 145,
+   "closestToKill": {
+    "day": 78,
+    "vid": "app_mgpsphcn990",
+    "mid": "spool",
+    "outcome": "vFlee",
+    "trigger": "hopeless",
+    "rounds": 5,
+    "mDealt": 102,
+    "vTaken": 53,
+    "allyDealt": 0,
+    "mHpLeft": 108,
+    "mMax": 280,
+    "mFracLeft": 0.38571428571428573,
+    "vDpr": 20.4,
+    "rtk": 5.294117647058824,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "engage",
+    "caller": "wild",
+    "log": [
+     "Placide has Bow but no arrows — the string stays drawn, useless.",
+     "R1: Placide strikes for 23 (x1.3) (187 left)",
+     "R1: the spool watches Placide — recording (1/3). It does not attack.",
+     "R1: Replay hits Placide for 0 (100 left)",
+     "R2: the spool watches Placide — recording (2/3). It does not attack.",
+     "R2: Replay hits Placide for 0 (100 left)",
+     "R2: Placide strikes for 21 (x1.2) (166 left)",
+     "Placide reads the fight — the odds are good. Committing to the kill.",
+     "R3: Placide strikes for 19 (x1.3) (147 left)",
+     "R3: the spool watches Placide — recording (3/3). It does not attack.",
+     "R3: Replay hits Placide for 0 (100 left)",
+     "R4: REPLAY — the spool plays Placide’s own strike back (+25).",
+     "Placide's gear absorbs 39.",
+     "R4: Replay hits Placide for 32 (68 left)",
+     "R4: Placide strikes for 20 (x1.3) (127 left)",
+     "R5: REPLAY — the spool plays Placide’s own strike back (+0).",
+     "Placide's gear absorbs 25.",
+     "R5: Replay hits Placide for 21 (47 left)",
+     "R5: Placide strikes for 19 (x1.3) (108 left)",
+     "Placide sees how this ends — and runs while running still works."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 11,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 4,
+   "fieldDeathsAllW3p": [
+    {
+     "day": 78,
+     "vid": "app_mgpsphcn990",
+     "mid": "eater",
+     "wave": 4,
+     "rounds": 1,
+     "committedFinish": false
+    },
+    {
+     "day": 79,
+     "vid": "sanne_bakker",
+     "mid": "eater",
+     "wave": 4,
+     "rounds": 1,
+     "committedFinish": false
+    },
+    {
+     "day": 110,
+     "vid": "visjoin_106",
+     "mid": "congregation",
+     "wave": 4,
+     "rounds": 1,
+     "committedFinish": false
+    },
+    {
+     "day": 115,
+     "vid": "visjoin_113",
+     "mid": "reunion",
+     "wave": 4,
+     "rounds": 2,
+     "committedFinish": false
+    }
+   ],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87119,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 90,
+   "gameDays": 90,
+   "endReason": "over-other",
+   "endScaleRank": "global",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 7,
+   "fieldMeetings": 3,
+   "tbMeetings": 4,
+   "fieldOutcomes": {
+    "vFlee": 3
+   },
+   "tbOutcomes": {
+    "lost": 2,
+    "won": 1,
+    "routed": 1
+   },
+   "triggerCounts": {
+    "learn": 2,
+    "hopeless": 1
+   },
+   "triggerXIntent": {
+    "learn": {
+     "learn": 2
+    },
+    "hopeless": {
+     "engage": 1
+    }
+   },
+   "triggerXCaller": {
+    "learn": {
+     "wild": 2
+    },
+    "hopeless": {
+     "expedition": 1
+    }
+   },
+   "unclassifiedFlights": [],
+   "fleeN": 3,
+   "killableN": 0,
+   "nearKillableN": 0,
+   "belowBreakN": 0,
+   "zeroDmgN": 0,
+   "rtkDist": {
+    "n": 3,
+    "median": 13.294117647058824,
+    "min": 12.580645161290322,
+    "max": 23.916666666666668
+   },
+   "rtkValues": [
+    13.294117647058824,
+    12.580645161290322,
+    23.916666666666668
+   ],
+   "rtkLe2": 0,
+   "rtkLe5": 0,
+   "rtkLe15": 2,
+   "byOutcomeDist": {
+    "vFlee": {
+     "n": 3,
+     "mDealt": {
+      "n": 3,
+      "median": 34,
+      "min": 31,
+      "max": 60
+     },
+     "vTaken": {
+      "n": 3,
+      "median": 21,
+      "min": 19,
+      "max": 35
+     },
+     "allyDealt": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 3
+     },
+     "rounds": {
+      "n": 3,
+      "median": 2,
+      "min": 2,
+      "max": 5
+     },
+     "vDpr": {
+      "n": 3,
+      "median": 15.5,
+      "min": 12,
+      "max": 17
+     },
+     "mDpr": {
+      "n": 3,
+      "median": 9.5,
+      "min": 7,
+      "max": 10.5
+     },
+     "mHpLeft": {
+      "n": 3,
+      "median": 226,
+      "min": 195,
+      "max": 287
+     },
+     "mFracLeft": {
+      "n": 3,
+      "median": 0.7972222222222223,
+      "min": 0.75,
+      "max": 0.8692307692307693
+     },
+     "rtk": {
+      "n": 3,
+      "median": 13.294117647058824,
+      "min": 12.580645161290322,
+      "max": 23.916666666666668
+     }
+    }
+   },
+   "partyAll": {
+    "n": 3,
+    "partyClassCounts": {
+     "solo-start-to-finish": 2,
+     "party-shout-joined": 1
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 2
+     },
+     "party-shout-joined": {
+      "vFlee": 1
+     }
+    },
+    "partySizeDist": {
+     "1": 2,
+     "3": 1
+    },
+    "soloStartShare": 0.6666666666666666,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0.3333333333333333,
+    "soloStartToFinishShare": 0.6666666666666666
+   },
+   "partyWild": {
+    "n": 2,
+    "partyClassCounts": {
+     "solo-start-to-finish": 2
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 2
+     }
+    },
+    "partySizeDist": {
+     "1": 2
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 1,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [
+    {
+     "day": 81,
+     "result": "routed",
+     "monsterIds": [
+      "redactor"
+     ]
+    }
+   ],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 1,
+   "pyrrhicEventsN": 0,
+   "logW3N": 1,
+   "w3days": 37,
+   "firstW3Day": 54,
+   "endP3": 1,
+   "endWar": 1,
+   "dailySorted": true,
+   "dailyRows": 90,
+   "closestToKill": {
+    "day": 63,
+    "vid": "gen_6fyen9w",
+    "mid": "redactor",
+    "outcome": "vFlee",
+    "trigger": "learn",
+    "rounds": 2,
+    "mDealt": 31,
+    "vTaken": 21,
+    "allyDealt": 0,
+    "mHpLeft": 195,
+    "mMax": 260,
+    "mFracLeft": 0.75,
+    "vDpr": 15.5,
+    "rtk": 12.580645161290322,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "learn",
+    "caller": "wild",
+    "log": [
+     "Adaugo has Bow but no arrows — the string stays drawn, useless.",
+     "R1: the Redactor's handles point at Adaugo's weapon — the redaction lands next round.",
+     "Adaugo's gear absorbs 20.",
+     "R1: Return hits Adaugo for 9 (67 left)",
+     "R1: Adaugo strikes for 16 (210 left)",
+     "R2: the Redactor redacts Adaugo's weapon — their strikes weaken for two rounds.",
+     "Adaugo's gear absorbs 26.",
+     "R2: Return hits Adaugo for 12 (55 left)",
+     "R2: Adaugo strikes for 15 (195 left)",
+     "Adaugo sees how this ends — and runs while running still works."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 3,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87124,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 92,
+   "gameDays": 92,
+   "endReason": "over-other",
+   "endScaleRank": "global",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 3,
+   "wave4": 0,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 16,
+   "fieldMeetings": 15,
+   "tbMeetings": 1,
+   "fieldOutcomes": {
+    "mFlee": 7,
+    "evade": 3,
+    "vFlee": 5
+   },
+   "tbOutcomes": {
+    "routed": 1
+   },
+   "triggerCounts": {
+    "mBreak-driveoff": 7,
+    "learn": 4,
+    "round-cap": 1
+   },
+   "triggerXIntent": {
+    "mBreak-driveoff": {
+     "engage": 5,
+     "learn": 2
+    },
+    "learn": {
+     "learn": 4
+    },
+    "round-cap": {
+     "engage": 1
+    }
+   },
+   "triggerXCaller": {
+    "mBreak-driveoff": {
+     "expedition": 1,
+     "wild": 6
+    },
+    "learn": {
+     "wild": 3,
+     "expedition": 1
+    },
+    "round-cap": {
+     "wild": 1
+    }
+   },
+   "unclassifiedFlights": [],
+   "fleeN": 12,
+   "killableN": 3,
+   "nearKillableN": 3,
+   "belowBreakN": 7,
+   "zeroDmgN": 6,
+   "rtkDist": {
+    "n": 6,
+    "median": 3.2888888888888888,
+    "min": 0.45454545454545453,
+    "max": 35.333333333333336
+   },
+   "rtkValues": [
+    0.6757679180887372,
+    0.7777777777777778,
+    35.333333333333336,
+    5.8,
+    14.863636363636363,
+    0.45454545454545453
+   ],
+   "rtkLe2": 3,
+   "rtkLe5": 3,
+   "rtkLe15": 5,
+   "byOutcomeDist": {
+    "mFlee": {
+     "n": 7,
+     "mDealt": {
+      "n": 7,
+      "median": 0,
+      "min": 0,
+      "max": 293
+     },
+     "vTaken": {
+      "n": 7,
+      "median": 0,
+      "min": 0,
+      "max": 103
+     },
+     "allyDealt": {
+      "n": 7,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 7,
+      "median": 0,
+      "min": 0,
+      "max": 9
+     },
+     "vDpr": {
+      "n": 7,
+      "median": 0,
+      "min": 0,
+      "max": 55
+     },
+     "mDpr": {
+      "n": 7,
+      "median": 0,
+      "min": 0,
+      "max": 14.714285714285714
+     },
+     "mHpLeft": {
+      "n": 7,
+      "median": 28,
+      "min": 1,
+      "max": 28
+     },
+     "mFracLeft": {
+      "n": 7,
+      "median": 0.1,
+      "min": 0.0038461538461538464,
+      "max": 0.1
+     },
+     "rtk": {
+      "n": 3,
+      "median": 0.6757679180887372,
+      "min": 0.45454545454545453,
+      "max": 0.7777777777777778
+     }
+    },
+    "evade": {
+     "n": 3,
+     "mDealt": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vTaken": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "allyDealt": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vDpr": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mDpr": {
+      "n": 3,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mHpLeft": {
+      "n": 3,
+      "median": 348,
+      "min": 341,
+      "max": 350
+     },
+     "mFracLeft": {
+      "n": 3,
+      "median": 0.9157894736842105,
+      "min": 0.8333333333333334,
+      "max": 0.9472222222222222
+     },
+     "rtk": {
+      "n": 0,
+      "median": null,
+      "min": null,
+      "max": null
+     }
+    },
+    "vFlee": {
+     "n": 5,
+     "mDealt": {
+      "n": 5,
+      "median": 15,
+      "min": 0,
+      "max": 50
+     },
+     "vTaken": {
+      "n": 5,
+      "median": 38,
+      "min": 27,
+      "max": 56
+     },
+     "allyDealt": {
+      "n": 5,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 5,
+      "median": 2,
+      "min": 1,
+      "max": 15
+     },
+     "vDpr": {
+      "n": 5,
+      "median": 7.5,
+      "min": 0,
+      "max": 25
+     },
+     "mDpr": {
+      "n": 5,
+      "median": 19,
+      "min": 2.7333333333333334,
+      "max": 28
+     },
+     "mHpLeft": {
+      "n": 5,
+      "median": 265,
+      "min": 145,
+      "max": 327
+     },
+     "mFracLeft": {
+      "n": 5,
+      "median": 0.7785714285714286,
+      "min": 0.5576923076923077,
+      "max": 0.9464285714285714
+     },
+     "rtk": {
+      "n": 3,
+      "median": 14.863636363636363,
+      "min": 5.8,
+      "max": 35.333333333333336
+     }
+    }
+   },
+   "partyAll": {
+    "n": 15,
+    "partyClassCounts": {
+     "party-from-start": 2,
+     "solo-start-to-finish": 13
+    },
+    "outcomesByPartyClass": {
+     "party-from-start": {
+      "mFlee": 1,
+      "evade": 1
+     },
+     "solo-start-to-finish": {
+      "mFlee": 6,
+      "vFlee": 5,
+      "evade": 2
+     }
+    },
+    "partySizeDist": {
+     "1": 13,
+     "2": 2
+    },
+    "soloStartShare": 0.8666666666666667,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 0.8666666666666667
+   },
+   "partyWild": {
+    "n": 10,
+    "partyClassCounts": {
+     "solo-start-to-finish": 10
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "mFlee": 6,
+      "vFlee": 4
+     }
+    },
+    "partySizeDist": {
+     "1": 10
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 0,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [
+    {
+     "day": 56,
+     "result": "routed",
+     "monsterIds": [
+      "buffering"
+     ]
+    }
+   ],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 0,
+   "pyrrhicEventsN": 0,
+   "logW3N": 0,
+   "w3days": 61,
+   "firstW3Day": 32,
+   "endP3": 0,
+   "endWar": 0,
+   "dailySorted": true,
+   "dailyRows": 92,
+   "closestToKill": {
+    "day": 71,
+    "vid": "gen_eyfay36",
+    "mid": "callback",
+    "outcome": "mFlee",
+    "trigger": "mBreak-driveoff",
+    "rounds": 1,
+    "mDealt": 55,
+    "vTaken": 12,
+    "allyDealt": 0,
+    "mHpLeft": 25,
+    "mMax": 260,
+    "mFracLeft": 0.09615384615384616,
+    "vDpr": 55,
+    "rtk": 0.45454545454545453,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "learn",
+    "caller": "wild",
+    "log": [
+     "Joaquín has Crossbow but no arrows — the string stays drawn, useless.",
+     "R1: It wears Jorge's face. The eyes don't track. (Joaquín knew that walk — and knows they're dead.)",
+     "R1: Joaquín strikes for 55 (x1.3) (25 left)",
+     "Joaquín's gear absorbs 18.",
+     "R1: Encore hits Joaquín for 12 (88 left)",
+     "The Callback breaks — wounded past its line, it turns and runs."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 15,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87140,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 197,
+   "gameDays": 197,
+   "endReason": "over-other",
+   "endScaleRank": "national",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 3,
+   "wave4": 0,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 29,
+   "fieldMeetings": 28,
+   "tbMeetings": 1,
+   "fieldOutcomes": {
+    "vFlee": 16,
+    "mFlee": 8,
+    "evade": 4
+   },
+   "tbOutcomes": {
+    "routed": 1
+   },
+   "triggerCounts": {
+    "hopeless": 12,
+    "mBreak-driveoff": 8,
+    "learn": 4
+   },
+   "triggerXIntent": {
+    "hopeless": {
+     "engage": 12
+    },
+    "mBreak-driveoff": {
+     "engage": 8
+    },
+    "learn": {
+     "learn": 4
+    }
+   },
+   "triggerXCaller": {
+    "hopeless": {
+     "wild": 11,
+     "expedition": 1
+    },
+    "mBreak-driveoff": {
+     "wild": 8
+    },
+    "learn": {
+     "wild": 3,
+     "expedition": 1
+    }
+   },
+   "unclassifiedFlights": [],
+   "fleeN": 24,
+   "killableN": 1,
+   "nearKillableN": 2,
+   "belowBreakN": 9,
+   "zeroDmgN": 7,
+   "rtkDist": {
+    "n": 17,
+    "median": 18.23076923076923,
+    "min": 0.32653061224489793,
+    "max": 37.57142857142857
+   },
+   "rtkValues": [
+    23.317073170731707,
+    5.042016806722689,
+    22.27272727272727,
+    20.727272727272727,
+    3.7021276595744683,
+    12.883720930232558,
+    37.57142857142857,
+    18.23076923076923,
+    14.344827586206897,
+    17.80952380952381,
+    20.605633802816904,
+    7.033333333333333,
+    8.833333333333334,
+    30.2,
+    0.32653061224489793,
+    35.64705882352941,
+    26.857142857142858
+   ],
+   "rtkLe2": 1,
+   "rtkLe5": 2,
+   "rtkLe15": 7,
+   "byOutcomeDist": {
+    "vFlee": {
+     "n": 16,
+     "mDealt": {
+      "n": 16,
+      "median": 27.5,
+      "min": 14,
+      "max": 119
+     },
+     "vTaken": {
+      "n": 16,
+      "median": 39.5,
+      "min": 17,
+      "max": 104
+     },
+     "allyDealt": {
+      "n": 16,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 16,
+      "median": 2,
+      "min": 2,
+      "max": 7
+     },
+     "vDpr": {
+      "n": 16,
+      "median": 10.375,
+      "min": 3.6666666666666665,
+      "max": 30
+     },
+     "mDpr": {
+      "n": 16,
+      "median": 14.428571428571429,
+      "min": 7.75,
+      "max": 20.5
+     },
+     "mHpLeft": {
+      "n": 16,
+      "median": 211.5,
+      "min": 29,
+      "max": 303
+     },
+     "mFracLeft": {
+      "n": 16,
+      "median": 0.7435267857142858,
+      "min": 0.10357142857142858,
+      "max": 0.946875
+     },
+     "rtk": {
+      "n": 16,
+      "median": 19.41820151679307,
+      "min": 3.7021276595744683,
+      "max": 37.57142857142857
+     }
+    },
+    "mFlee": {
+     "n": 8,
+     "mDealt": {
+      "n": 8,
+      "median": 0,
+      "min": 0,
+      "max": 196
+     },
+     "vTaken": {
+      "n": 8,
+      "median": 0,
+      "min": 0,
+      "max": 71
+     },
+     "allyDealt": {
+      "n": 8,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 8,
+      "median": 0,
+      "min": 0,
+      "max": 4
+     },
+     "vDpr": {
+      "n": 8,
+      "median": 0,
+      "min": 0,
+      "max": 49
+     },
+     "mDpr": {
+      "n": 8,
+      "median": 0,
+      "min": 0,
+      "max": 17.75
+     },
+     "mHpLeft": {
+      "n": 8,
+      "median": 22.5,
+      "min": 16,
+      "max": 29
+     },
+     "mFracLeft": {
+      "n": 8,
+      "median": 0.08255494505494507,
+      "min": 0.06153846153846154,
+      "max": 0.10357142857142858
+     },
+     "rtk": {
+      "n": 1,
+      "median": 0.32653061224489793,
+      "min": 0.32653061224489793,
+      "max": 0.32653061224489793
+     }
+    },
+    "evade": {
+     "n": 4,
+     "mDealt": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vTaken": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "allyDealt": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "vDpr": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mDpr": {
+      "n": 4,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "mHpLeft": {
+      "n": 4,
+      "median": 315.5,
+      "min": 301,
+      "max": 372
+     },
+     "mFracLeft": {
+      "n": 4,
+      "median": 0.9364889705882353,
+      "min": 0.9235294117647059,
+      "max": 0.9789473684210527
+     },
+     "rtk": {
+      "n": 0,
+      "median": null,
+      "min": null,
+      "max": null
+     }
+    }
+   },
+   "partyAll": {
+    "n": 28,
+    "partyClassCounts": {
+     "solo-start-to-finish": 26,
+     "party-from-start": 2
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 16,
+      "mFlee": 8,
+      "evade": 2
+     },
+     "party-from-start": {
+      "evade": 2
+     }
+    },
+    "partySizeDist": {
+     "1": 26,
+     "2": 1,
+     "3": 1
+    },
+    "soloStartShare": 0.9285714285714286,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 0.9285714285714286
+   },
+   "partyWild": {
+    "n": 22,
+    "partyClassCounts": {
+     "solo-start-to-finish": 22
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 14,
+      "mFlee": 8
+     }
+    },
+    "partySizeDist": {
+     "1": 22
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 0,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [
+    {
+     "day": 184,
+     "result": "routed",
+     "monsterIds": [
+      "buffering"
+     ]
+    }
+   ],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 0,
+   "pyrrhicEventsN": 0,
+   "logW3N": 0,
+   "w3days": 46,
+   "firstW3Day": 152,
+   "endP3": 0,
+   "endWar": 0,
+   "dailySorted": true,
+   "dailyRows": 197,
+   "closestToKill": {
+    "day": 183,
+    "vid": "gen_pd73eew",
+    "mid": "redactor",
+    "outcome": "mFlee",
+    "trigger": "mBreak-driveoff",
+    "rounds": 4,
+    "mDealt": 196,
+    "vTaken": 71,
+    "allyDealt": 0,
+    "mHpLeft": 16,
+    "mMax": 260,
+    "mFracLeft": 0.06153846153846154,
+    "vDpr": 49,
+    "rtk": 0.32653061224489793,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "engage",
+    "caller": "wild",
+    "log": [
+     "Babatunde has Crude bow but no arrows — the string stays drawn, useless.",
+     "Babatunde had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+     "R1: The Redactor hesitates — Babatunde bought a breath.",
+     "R1: Babatunde's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Babatunde — Stalker of the Apex Predator]",
+     "R1: Babatunde goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+     "R2: the Redactor's handles point at Babatunde's weapon — the redaction lands next round.",
+     "Babatunde's gear absorbs 15.",
+     "R2: Return hits Babatunde for 21 (79 left)",
+     "R2: Babatunde strikes for 110 (aimed 2.5x) (x2.0) (102 left)",
+     "Babatunde reads the fight — the odds are good. Committing to the kill.",
+     "R3: the Redactor redacts Babatunde's weapon — their strikes weaken for two rounds.",
+     "Babatunde's gear absorbs 20.",
+     "R3: Redact hits Babatunde for 30 (49 left)",
+     "R3: Babatunde strikes for 40 (blood trail +2) (x2.0) (62 left)",
+     "R4: the Redactor's handles point at Babatunde's last turn — the redaction lands next round.",
+     "Babatunde's gear absorbs 14.",
+     "R4: Return hits Babatunde for 20 (29 left)",
+     "R4: Babatunde strikes for 46 (blood trail +2) (x2.0) (16 left)",
+     "The Redactor breaks — wounded past its line, it turns and runs."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 28,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87115,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 90,
+   "gameDays": 90,
+   "endReason": "over-other",
+   "endScaleRank": "global",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 3,
+   "wave4": 0,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 14,
+   "fieldMeetings": 11,
+   "tbMeetings": 3,
+   "fieldOutcomes": {
+    "mFlee": 6,
+    "vFlee": 5
+   },
+   "tbOutcomes": {
+    "lost": 3
+   },
+   "triggerCounts": {
+    "trick-exit": 1,
+    "learn": 3,
+    "unclassified": 2,
+    "floor": 2,
+    "mBreak-driveoff": 3
+   },
+   "triggerXIntent": {
+    "trick-exit": {
+     "learn": 1
+    },
+    "learn": {
+     "learn": 3
+    },
+    "unclassified": {
+     "engage": 2
+    },
+    "floor": {
+     "engage": 2
+    },
+    "mBreak-driveoff": {
+     "engage": 3
+    }
+   },
+   "triggerXCaller": {
+    "trick-exit": {
+     "wild": 1
+    },
+    "learn": {
+     "wild": 3
+    },
+    "unclassified": {
+     "wild": 2
+    },
+    "floor": {
+     "wild": 2
+    },
+    "mBreak-driveoff": {
+     "wild": 3
+    }
+   },
+   "unclassifiedFlights": [
+    {
+     "day": 62,
+     "vid": "gen_8tqo7ef",
+     "mid": "focus_group",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "mDealt": 0,
+     "vTaken": 57,
+     "mHpLeft": 142,
+     "fleeHopeless": null,
+     "fleeLearn": false,
+     "fleeHpFrac": null,
+     "volley": null,
+     "peaceful": false,
+     "staredDown": false,
+     "redactorQuiet": 0,
+     "trickLog": [
+      "bore",
+      "bore",
+      "bore"
+     ],
+     "caller": "wild",
+     "intent": "engage"
+    },
+    {
+     "day": 69,
+     "vid": "dmitri_sokolov",
+     "mid": "focus_group",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "mDealt": 0,
+     "vTaken": 52,
+     "mHpLeft": 142,
+     "fleeHopeless": null,
+     "fleeLearn": false,
+     "fleeHpFrac": null,
+     "volley": {
+      "shots": 0,
+      "hits": 0,
+      "dmg": 0
+     },
+     "peaceful": false,
+     "staredDown": false,
+     "redactorQuiet": 0,
+     "trickLog": [
+      "bore",
+      "bore",
+      "bore"
+     ],
+     "caller": "wild",
+     "intent": "engage"
+    }
+   ],
+   "fleeN": 11,
+   "killableN": 0,
+   "nearKillableN": 2,
+   "belowBreakN": 3,
+   "zeroDmgN": 6,
+   "rtkDist": {
+    "n": 5,
+    "median": 7.384615384615385,
+    "min": 3.571428571428571,
+    "max": 30.5
+   },
+   "rtkValues": [
+    10.1,
+    30.5,
+    7.384615384615385,
+    3.571428571428571,
+    4.5
+   ],
+   "rtkLe2": 0,
+   "rtkLe5": 2,
+   "rtkLe15": 4,
+   "byOutcomeDist": {
+    "mFlee": {
+     "n": 6,
+     "mDealt": {
+      "n": 6,
+      "median": 0,
+      "min": 0,
+      "max": 24
+     },
+     "vTaken": {
+      "n": 6,
+      "median": 35.5,
+      "min": 0,
+      "max": 57
+     },
+     "allyDealt": {
+      "n": 6,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 6,
+      "median": 2,
+      "min": 0,
+      "max": 3
+     },
+     "vDpr": {
+      "n": 6,
+      "median": 0,
+      "min": 0,
+      "max": 8
+     },
+     "mDpr": {
+      "n": 6,
+      "median": 16.5,
+      "min": 0,
+      "max": 24
+     },
+     "mHpLeft": {
+      "n": 6,
+      "median": 89,
+      "min": 36,
+      "max": 240
+     },
+     "mFracLeft": {
+      "n": 6,
+      "median": 0.3650641025641026,
+      "min": 0.13846153846153847,
+      "max": 1
+     },
+     "rtk": {
+      "n": 1,
+      "median": 4.5,
+      "min": 4.5,
+      "max": 4.5
+     }
+    },
+    "vFlee": {
+     "n": 5,
+     "mDealt": {
+      "n": 5,
+      "median": 39,
+      "min": 0,
+      "max": 84
+     },
+     "vTaken": {
+      "n": 5,
+      "median": 51,
+      "min": 36,
+      "max": 71
+     },
+     "allyDealt": {
+      "n": 5,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 5,
+      "median": 2,
+      "min": 2,
+      "max": 5
+     },
+     "vDpr": {
+      "n": 5,
+      "median": 16.8,
+      "min": 0,
+      "max": 20
+     },
+     "mDpr": {
+      "n": 5,
+      "median": 23.5,
+      "min": 14.2,
+      "max": 29.5
+     },
+     "mHpLeft": {
+      "n": 5,
+      "median": 144,
+      "min": 60,
+      "max": 202
+     },
+     "mFracLeft": {
+      "n": 5,
+      "median": 0.5538461538461539,
+      "min": 0.23076923076923078,
+      "max": 0.8416666666666667
+     },
+     "rtk": {
+      "n": 4,
+      "median": 8.742307692307692,
+      "min": 3.571428571428571,
+      "max": 30.5
+     }
+    }
+   },
+   "partyAll": {
+    "n": 11,
+    "partyClassCounts": {
+     "solo-start-to-finish": 11
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "mFlee": 6,
+      "vFlee": 5
+     }
+    },
+    "partySizeDist": {
+     "1": 11
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "partyWild": {
+    "n": 11,
+    "partyClassCounts": {
+     "solo-start-to-finish": 11
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "mFlee": 6,
+      "vFlee": 5
+     }
+    },
+    "partySizeDist": {
+     "1": 11
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 0,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 0,
+   "pyrrhicEventsN": 0,
+   "logW3N": 0,
+   "w3days": 39,
+   "firstW3Day": 52,
+   "endP3": 0,
+   "endWar": 0,
+   "dailySorted": true,
+   "dailyRows": 90,
+   "closestToKill": {
+    "day": 83,
+    "vid": "sofia_chen",
+    "mid": "callback",
+    "outcome": "vFlee",
+    "trigger": "floor",
+    "rounds": 5,
+    "mDealt": 84,
+    "vTaken": 71,
+    "allyDealt": 0,
+    "mHpLeft": 60,
+    "mMax": 260,
+    "mFracLeft": 0.23076923076923078,
+    "vDpr": 16.8,
+    "rtk": 3.571428571428571,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "engage",
+    "caller": "wild",
+    "log": [
+     "Sofia has Phase sling but no arrows — the string stays drawn, useless.",
+     "R1: It wears Pawan's face. The eyes don't track. (Sofia knew that walk — and knows they're dead.)",
+     "R1: Sofia speaks to the face — as THEM, the way they laughed — and says the goodbye properly. The face loses coherence.",
+     "Sofia's gear absorbs 20.",
+     "R1: Encore hits Sofia for 17 (69 left)",
+     "Sofia's gear absorbs 17.",
+     "R2: Encore hits Sofia for 16 (53 left)",
+     "R2: Sofia stops mid-fight and binds the wound — field medicine, +20 HP.",
+     "Sofia holds the line — working the trick, not the damage race.",
+     "R3: the face tries to shift — and can’t. Sofia’s goodbye holds. (No borrowed swing.)",
+     "R3: Sofia strikes for 27 (117 left)",
+     "Sofia's gear absorbs 15.",
+     "R3: Encore hits Sofia for 14 (59 left)",
+     "Sofia holds the line — working the trick, not the damage race.",
+     "Sofia's gear absorbs 13.",
+     "R4: Standing Ovation hits Sofia for 12 (47 left)",
+     "R4: Sofia strikes for 30 (87 left)",
+     "Sofia holds the line — working the trick, not the damage race.",
+     "Sofia's gear absorbs 13.",
+     "R5: Standing Ovation hits Sofia for 12 (35 left)",
+     "R5: Sofia strikes for 27 (60 left)",
+     "Sofia holds the line — working the trick, not the damage race.",
+     "Sofia is past holding — they run while running still works."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 11,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87123,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 110,
+   "gameDays": 110,
+   "endReason": "over-other",
+   "endScaleRank": "global",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 29,
+   "fieldMeetings": 28,
+   "tbMeetings": 1,
+   "fieldOutcomes": {
+    "vFlee": 11,
+    "mFlee": 17
+   },
+   "tbOutcomes": {
+    "won": 1
+   },
+   "triggerCounts": {
+    "learn": 4,
+    "hopeless": 7,
+    "round-cap": 1,
+    "mBreak-driveoff": 13,
+    "unclassified": 3
+   },
+   "triggerXIntent": {
+    "learn": {
+     "learn": 4
+    },
+    "hopeless": {
+     "engage": 7
+    },
+    "round-cap": {
+     "engage": 1
+    },
+    "mBreak-driveoff": {
+     "engage": 13
+    },
+    "unclassified": {
+     "engage": 3
+    }
+   },
+   "triggerXCaller": {
+    "learn": {
+     "wild": 2,
+     "aid": 2
+    },
+    "hopeless": {
+     "wild": 6,
+     "aid": 1
+    },
+    "round-cap": {
+     "wild": 1
+    },
+    "mBreak-driveoff": {
+     "wild": 8,
+     "aid": 5
+    },
+    "unclassified": {
+     "aid": 2,
+     "wild": 1
+    }
+   },
+   "unclassifiedFlights": [
+    {
+     "day": 104,
+     "vid": "gen_w4bpnoj",
+     "mid": "terms_of_service",
+     "outcome": "mFlee",
+     "rounds": 2,
+     "mDealt": 0,
+     "vTaken": 36,
+     "mHpLeft": 206,
+     "fleeHopeless": null,
+     "fleeLearn": false,
+     "fleeHpFrac": null,
+     "volley": null,
+     "peaceful": false,
+     "staredDown": false,
+     "redactorQuiet": 0,
+     "trickLog": [
+      "examine",
+      "examine"
+     ],
+     "caller": "aid",
+     "intent": "engage"
+    },
+    {
+     "day": 107,
+     "vid": "gen_w4bpnoj",
+     "mid": "terms_of_service",
+     "outcome": "mFlee",
+     "rounds": 2,
+     "mDealt": 0,
+     "vTaken": 30,
+     "mHpLeft": 206,
+     "fleeHopeless": null,
+     "fleeLearn": false,
+     "fleeHpFrac": null,
+     "volley": null,
+     "peaceful": false,
+     "staredDown": false,
+     "redactorQuiet": 0,
+     "trickLog": [
+      "examine",
+      "examine"
+     ],
+     "caller": "aid",
+     "intent": "engage"
+    },
+    {
+     "day": 109,
+     "vid": "gen_tkl3u3h",
+     "mid": "terms_of_service",
+     "outcome": "mFlee",
+     "rounds": 2,
+     "mDealt": 0,
+     "vTaken": 29,
+     "mHpLeft": 206,
+     "fleeHopeless": null,
+     "fleeLearn": false,
+     "fleeHpFrac": null,
+     "volley": {
+      "shots": 0,
+      "hits": 0,
+      "dmg": 0
+     },
+     "peaceful": false,
+     "staredDown": false,
+     "redactorQuiet": 0,
+     "trickLog": [
+      "examine",
+      "examine"
+     ],
+     "caller": "wild",
+     "intent": "engage"
+    }
+   ],
+   "fleeN": 28,
+   "killableN": 0,
+   "nearKillableN": 1,
+   "belowBreakN": 13,
+   "zeroDmgN": 15,
+   "rtkDist": {
+    "n": 13,
+    "median": 14,
+    "min": 2.175824175824176,
+    "max": 27.636363636363637
+   },
+   "rtkValues": [
+    18.526315789473685,
+    26.76923076923077,
+    27.636363636363637,
+    17.884615384615383,
+    14,
+    11.794871794871796,
+    2.175824175824176,
+    6,
+    11.294117647058824,
+    5.909090909090909,
+    5.666666666666667,
+    15,
+    21.68421052631579
+   ],
+   "rtkLe2": 0,
+   "rtkLe5": 1,
+   "rtkLe15": 8,
+   "byOutcomeDist": {
+    "vFlee": {
+     "n": 11,
+     "mDealt": {
+      "n": 11,
+      "median": 33,
+      "min": 19,
+      "max": 66
+     },
+     "vTaken": {
+      "n": 11,
+      "median": 46,
+      "min": 26,
+      "max": 89
+     },
+     "allyDealt": {
+      "n": 11,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 11,
+      "median": 4,
+      "min": 2,
+      "max": 5
+     },
+     "vDpr": {
+      "n": 11,
+      "median": 9.75,
+      "min": 8.25,
+      "max": 15
+     },
+     "mDpr": {
+      "n": 11,
+      "median": 20,
+      "min": 7.25,
+      "max": 26
+     },
+     "mHpLeft": {
+      "n": 11,
+      "median": 154,
+      "min": 51,
+      "max": 261
+     },
+     "mFracLeft": {
+      "n": 11,
+      "median": 0.5923076923076923,
+      "min": 0.19615384615384615,
+      "max": 0.87
+     },
+     "rtk": {
+      "n": 11,
+      "median": 14,
+      "min": 5.666666666666667,
+      "max": 27.636363636363637
+     }
+    },
+    "mFlee": {
+     "n": 17,
+     "mDealt": {
+      "n": 17,
+      "median": 0,
+      "min": 0,
+      "max": 104
+     },
+     "vTaken": {
+      "n": 17,
+      "median": 0,
+      "min": 0,
+      "max": 36
+     },
+     "allyDealt": {
+      "n": 17,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 17,
+      "median": 0,
+      "min": 0,
+      "max": 15
+     },
+     "vDpr": {
+      "n": 17,
+      "median": 0,
+      "min": 0,
+      "max": 15.166666666666666
+     },
+     "mDpr": {
+      "n": 17,
+      "median": 0,
+      "min": 0,
+      "max": 18
+     },
+     "mHpLeft": {
+      "n": 17,
+      "median": 1,
+      "min": 1,
+      "max": 206
+     },
+     "mFracLeft": {
+      "n": 17,
+      "median": 0.0038461538461538464,
+      "min": 0.0033333333333333335,
+      "max": 0.6058823529411764
+     },
+     "rtk": {
+      "n": 2,
+      "median": 10.03021978021978,
+      "min": 2.175824175824176,
+      "max": 17.884615384615383
+     }
+    }
+   },
+   "partyAll": {
+    "n": 28,
+    "partyClassCounts": {
+     "solo-start-to-finish": 28
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 11,
+      "mFlee": 17
+     }
+    },
+    "partySizeDist": {
+     "1": 28
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "partyWild": {
+    "n": 18,
+    "partyClassCounts": {
+     "solo-start-to-finish": 18
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 8,
+      "mFlee": 10
+     }
+    },
+    "partySizeDist": {
+     "1": 18
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 1,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 1,
+   "pyrrhicEventsN": 0,
+   "logW3N": 1,
+   "w3days": 60,
+   "firstW3Day": 51,
+   "endP3": 1,
+   "endWar": 1,
+   "dailySorted": true,
+   "dailyRows": 110,
+   "closestToKill": {
+    "day": 75,
+    "vid": "gen_tkl3u3h",
+    "mid": "chorus_line",
+    "outcome": "mFlee",
+    "trigger": "mBreak-driveoff",
+    "rounds": 6,
+    "mDealt": 91,
+    "vTaken": 15,
+    "allyDealt": 0,
+    "mHpLeft": 33,
+    "mMax": 300,
+    "mFracLeft": 0.11,
+    "vDpr": 15.166666666666666,
+    "rtk": 2.175824175824176,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "engage",
+    "caller": "wild",
+    "log": [
+     "Kate has Sling but no arrows — the string stays drawn, useless.",
+     "R1: Kate strikes for 18 (blood trail +2) (x1.3) (106 left)",
+     "R1: the chorus line keeps the count — beat 1/4. (Counting, not kicking.)",
+     "R1: Crescendo hits Kate for 0 (100 left)",
+     "R2: Kate strikes for 21 (blood trail +2) (x1.2) (85 left)",
+     "R2: the chorus line keeps the count — beat 2/4. (Counting, not kicking.)",
+     "R2: Syncopation hits Kate for 0 (100 left)",
+     "R3: the chorus line keeps the count — beat 3/4. (Counting, not kicking.)",
+     "R3: Downbeat hits Kate for 0 (100 left)",
+     "R3: Kate strikes for 18 (blood trail +2) (x1.3) (67 left)",
+     "R4: DOWNBEAT — the chorus line’s kick lands on Kate (29). No dancer out here to slip it.",
+     "Kate's gear absorbs 14.",
+     "R4: Downbeat hits Kate for 15 (85 left)",
+     "R4: Kate dances on the downbeat.",
+     "R5: the chorus line keeps the count — beat 1/4. (Counting, not kicking.)",
+     "R5: Syncopation hits Kate for 0 (85 left)",
+     "R5: Kate strikes for 16 (blood trail +2) (x1.2) (51 left)",
+     "R6: the chorus line keeps the count — beat 2/4. (Counting, not kicking.)",
+     "R6: Crescendo hits Kate for 0 (85 left)",
+     "R6: Kate strikes for 18 (blood trail +2) (x1.3) (33 left)",
+     "Chorus Line breaks — wounded past its line, it turns and runs."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 28,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  },
+  {
+   "seed": 87127,
+   "anchorCommit": "986aae4e5751",
+   "instrument": "twoblow-v1",
+   "days": 127,
+   "gameDays": 127,
+   "endReason": "over-other",
+   "endScaleRank": "global",
+   "national": 1,
+   "table": 1,
+   "won": 1,
+   "maxWave": 3,
+   "wave4": 0,
+   "wave5": 0,
+   "recorderErrs": 0,
+   "recorderErrors": [],
+   "recorderOverflow": {},
+   "meetings": 3,
+   "fieldMeetings": 2,
+   "tbMeetings": 1,
+   "fieldOutcomes": {
+    "vFlee": 2
+   },
+   "tbOutcomes": {
+    "lost": 1
+   },
+   "triggerCounts": {
+    "learn": 2
+   },
+   "triggerXIntent": {
+    "learn": {
+     "learn": 2
+    }
+   },
+   "triggerXCaller": {
+    "learn": {
+     "expedition": 1,
+     "wild": 1
+    }
+   },
+   "unclassifiedFlights": [],
+   "fleeN": 2,
+   "killableN": 0,
+   "nearKillableN": 0,
+   "belowBreakN": 0,
+   "zeroDmgN": 0,
+   "rtkDist": {
+    "n": 2,
+    "median": 29.7,
+    "min": 21.4,
+    "max": 38
+   },
+   "rtkValues": [
+    21.4,
+    38
+   ],
+   "rtkLe2": 0,
+   "rtkLe5": 0,
+   "rtkLe15": 0,
+   "byOutcomeDist": {
+    "vFlee": {
+     "n": 2,
+     "mDealt": {
+      "n": 2,
+      "median": 22,
+      "min": 14,
+      "max": 30
+     },
+     "vTaken": {
+      "n": 2,
+      "median": 28.5,
+      "min": 27,
+      "max": 30
+     },
+     "allyDealt": {
+      "n": 2,
+      "median": 0,
+      "min": 0,
+      "max": 0
+     },
+     "rounds": {
+      "n": 2,
+      "median": 2,
+      "min": 2,
+      "max": 2
+     },
+     "vDpr": {
+      "n": 2,
+      "median": 11,
+      "min": 7,
+      "max": 15
+     },
+     "mDpr": {
+      "n": 2,
+      "median": 14.25,
+      "min": 13.5,
+      "max": 15
+     },
+     "mHpLeft": {
+      "n": 2,
+      "median": 293.5,
+      "min": 266,
+      "max": 321
+     },
+     "mFracLeft": {
+      "n": 2,
+      "median": 0.8973684210526316,
+      "min": 0.8447368421052631,
+      "max": 0.95
+     },
+     "rtk": {
+      "n": 2,
+      "median": 29.7,
+      "min": 21.4,
+      "max": 38
+     }
+    }
+   },
+   "partyAll": {
+    "n": 2,
+    "partyClassCounts": {
+     "solo-start-to-finish": 2
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 2
+     }
+    },
+    "partySizeDist": {
+     "1": 2
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "partyWild": {
+    "n": 1,
+    "partyClassCounts": {
+     "solo-start-to-finish": 1
+    },
+    "outcomesByPartyClass": {
+     "solo-start-to-finish": {
+      "vFlee": 1
+     }
+    },
+    "partySizeDist": {
+     "1": 1
+    },
+    "soloStartShare": 1,
+    "allyFromStartShare": 0,
+    "shoutJoinedShare": 0,
+    "soloStartToFinishShare": 1
+   },
+   "joinLedger": {
+    "fieldVKill": 0,
+    "tbWon": 0,
+    "tbRouted": 0,
+    "orphan": []
+   },
+   "joinPyrrhic": {
+    "tbLost": 0,
+    "orphan": []
+   },
+   "fieldVKillNoEvent": [],
+   "tbWRNoEvent": [],
+   "unmatchedLog": [],
+   "eventsNoLog": [],
+   "killEventsN": 0,
+   "pyrrhicEventsN": 0,
+   "logW3N": 0,
+   "w3days": 7,
+   "firstW3Day": 121,
+   "endP3": 0,
+   "endWar": 0,
+   "dailySorted": true,
+   "dailyRows": 127,
+   "closestToKill": {
+    "day": 122,
+    "vid": "theo_lindqvist",
+    "mid": "ad_break",
+    "outcome": "vFlee",
+    "trigger": "learn",
+    "rounds": 2,
+    "mDealt": 30,
+    "vTaken": 30,
+    "allyDealt": 0,
+    "mHpLeft": 321,
+    "mMax": 380,
+    "mFracLeft": 0.8447368421052631,
+    "vDpr": 15,
+    "rtk": 21.4,
+    "partySize": 1,
+    "calledHelp": false,
+    "intent": "learn",
+    "caller": "expedition",
+    "log": [
+     "Theo walks straight into Ad Break. No avoiding it.",
+     "R1: Theo strikes for 16 (stalker's opening +4) (335 left)",
+     "Theo's gear absorbs 12.",
+     "R1: Sponsored Pause hits Theo for 16 (81 left)",
+     "R2: Theo strikes for 14 (321 left)",
+     "Theo's gear absorbs 10.",
+     "R2: Targeted Ad hits Theo for 14 (67 left)",
+     "Theo sees how this ends — and runs while running still works."
+    ]
+   },
+   "convertedN": 0,
+   "convertedRows": [],
+   "w3FieldVKillsN": 0,
+   "w45FieldVKillsN": 0,
+   "fieldW3pN": 2,
+   "committedFightsN": 0,
+   "committedOutcomes": {},
+   "committedW3Details": [],
+   "committedFloorN": 0,
+   "committedDeaths": 0,
+   "fieldW3DeathsN": 0,
+   "fieldDeathsAllW3p": [],
+   "fieldDeaths": []
+  }
+ ]
+}
