@@ -319,8 +319,8 @@ function main() {
       }
     }
   }
-  const census = { pilot, control, instrument, holdCensus: holdC, attribution, conversions,
-    goBar: { controlTicksTotal, instrumentTicksTotal, fall, converted: converted.length, go },
+  const census = { pilot, control, instrument: instr, holdCensus: holdC, attribution, conversions,
+    goBar: { controlTicksTotal, instrumentTicksTotal: instrTicksTotal, fall, converted: converted.length, go },
     newlyTicksShort, newlyStill, deathDelay, day7, reconciliation: recon, waveReach, survival,
     controlControl: pilot ? null : { guard: legs['control-control-guard'], on: legs['control-control-on'] },
     detgate };
