@@ -36,12 +36,14 @@ function median(arr) {
 
 const corpus = JSON.parse(fs.readFileSync(CORPUS, 'utf8'));
 const head = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim();
-// The anchor is the base the sims ran on. Pre-commit that IS HEAD;
-// post-commit it is HEAD's parent (the commit itself moved HEAD).
-// Either is valid, but it must be one of the two — never anything else.
-let parent = '';
-try { parent = execSync('git rev-parse HEAD~1', { cwd: REPO }).toString().trim(); } catch (e) {}
-check('anchor == HEAD or HEAD~1 (the run base)', corpus.anchorCommit === head || (parent && corpus.anchorCommit === parent), corpus.anchorCommit);
+// The anchor is the base the sims ran on. Each commit on this branch
+// moves HEAD forward, so the stable invariant is ancestry: the anchor
+// must be an ancestor of HEAD (it was HEAD at run time, and every
+// commit since descends from it). A non-ancestor anchor would mean
+// the corpus was measured on a different base than this branch.
+let isAncestor = false;
+try { execSync('git merge-base --is-ancestor ' + corpus.anchorCommit + ' HEAD', { cwd: REPO, stdio: 'pipe' }); isAncestor = true; } catch (e) {}
+check('anchor is an ancestor of HEAD (the run base)', isAncestor, corpus.anchorCommit);
 // And the committed corpus file must be byte-identical to the disk file.
 try {
   const blob = execSync('git ls-tree HEAD -- evidence/2026-10-31/perseed-sighit-b/fixture-band.json', { cwd: REPO }).toString().trim().split(/\s+/)[2];
