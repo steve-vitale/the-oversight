@@ -371,14 +371,14 @@ processes concurrently).
   file's summary); food-economy axis line unchanged — still
   CONVERGING (NOT converged). No default flipped, no balance
   change landed, no lever judged in this round.
-- Sim-findings: (1) the 1230Z recovery's stated line-1600
-  flip (tool-tier item) was NOT in the file as read at this
-  closeout — that line still read [open] as the fellrepeat
-  item — so this closeout applies the flip explicitly, citing
-  toolloss-b (succession + recording artifact, not a loss)
-  and corpsemove-b (corpse mechanics confirmed); (2) the
-  corpse-move item (line 1634) marked answered-by-trace with
-  the re-proof caveat (fresh-corpus re-proof failed on the
+- Sim-findings: (1) the line-1600 tool-tier flip was VERIFIED
+  present at this closeout (inline [ANSWERED 2026-10-31 by
+  toolloss-b] annotation on that line; the [open] prefix is
+  retained by the file's convention) — the 1230Z recovery's
+  stated flip stands, and corpsemove-b's corpse mechanics
+  confirm the same succession picture; (2) the corpse-move
+  item (line 1634) marked answered-by-trace with the
+  re-proof caveat (fresh-corpus re-proof failed on the
   later base; needs a toolloss-base-pinned tree or a fresh
   bearer death on current master); (3) anonymous-carrier
   texture note appended [open]; (4) base-pinned-trajectories
