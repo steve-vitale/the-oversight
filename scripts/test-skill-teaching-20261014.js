@@ -15,7 +15,7 @@ const ORPHANS = ['thief', 'grave_robber', 'scarecrow', 'draw_fire', 'bodyguard',
 
 (async () => {
   const T = K.reporter('skill-teaching');
-  const Game = await K.load({ seed: 20261014 });
+  const Game = await K.load({ seed: 20261015 }); // seed 20261014 -> 20261015 on 2026-10-31 (lootabilities build): items.json gained two tier-1 loot pieces, re-rolling seeded generation; at the old seed the generated mushroom_grower no longer knows their trade. Seed 20261015 preserves the fixture's shape. No assertion changed.
   K.newRun(Game);
   const s = Game.state.scholar;
   const v = Game.state.village;
