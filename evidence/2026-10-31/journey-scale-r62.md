@@ -348,6 +348,15 @@ decision stands).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
-Master at worktree creation: 47162b801. (Merge/rebase path filled at
-closeout.) Merged locally, pending ship (no bump, no push, no live
-verify — ship loop owns those).
+Master at worktree creation: 47162b801. At closeout master had moved
+to 9f22a0838 on sibling evidence-only merges (no src/js in that
+range, no ONTOLOGY.md touch) — branch rebased cleanly onto it,
+proof tests re-run after rebase (node --check on all four scripts;
+pellet-driver quad re-run: identical scalars, 0-line capture diffs
+on all four seeds). Merged locally via `git merge --ff-only
+journey-scale-r62` → master d7c270005, pending ship (no bump, no
+push, no live verify — ship loop owns those).
+Branch commits: c44d079fc (prereg + driver), 9f3c09ba7 (quad +
+pellet-timing wide band, 404 files), d7c270005 (ontology validator
+refresh). Worktree released + branch deleted at closeout; final
+main-tree status clean.
