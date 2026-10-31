@@ -1,0 +1,801 @@
+{
+ "seed": 86108,
+ "policyId": "leadfeast",
+ "instrument": "herald-v1+muster-diag",
+ "substrate": "withFullseatDiag(withSeatDrive(withWinDefer(TF leadfeast))), FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FULLSEAT=1 + HERALD=1 + MUSTER=1",
+ "anchorCommit": "70407e9f4b4d",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "w4Day": 66,
+ "w5Day": null,
+ "national": 0,
+ "table": 1,
+ "won": 1,
+ "days": 90,
+ "gameDays": 90,
+ "endReason": "over-other",
+ "endScaleRank": "regional",
+ "endOmenStage": 2,
+ "endOmenDay": 82,
+ "endMusterExists": false,
+ "attempts4Count": 2,
+ "attemptsOtherCount": 11,
+ "attemptsUnresolvedMidCount": 0,
+ "fieldFights4Count": 0,
+ "kills4Count": 1,
+ "attempts": [
+  {
+   "day": 74,
+   "mid": "strike",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "feast-draw",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Object.faceFeastDraw@feastBuff.js:520:20",
+    "Object.w@sim-harness.js:515:25",
+    "feastFightRoad@competent.js:511:38",
+    "Object.upkeep@competent.js:2834:5",
+    "Object.upkeep@feastscale.js:141:12",
+    "/home/hatch/workspace/worktrees/sim-mustercall2-a/scripts/sim-harness.js:557:102@sim-harness.js:557:102"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": true,
+   "pendingMidBefore": "strike",
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 0,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": null,
+   "entityHp": null,
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "won"
+  },
+  {
+   "day": 83,
+   "mid": "suburb",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "contest",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "driveContestsImpl@sim-harness.js:816:12",
+    "run@sim-harness.js:774:21",
+    "Object.withOrigin@sim-harness.js:414:18",
+    "driveContests@sim-harness.js:775:41",
+    "/home/hatch/workspace/worktrees/sim-mustercall2-a/scripts/sim-harness.js:559:7@sim-harness.js:559:7",
+    "quietLog@sim-harness.js:57:22"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": true,
+   "pendingMidBefore": "suburb",
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 0,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": null,
+   "entityHp": null,
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  }
+ ],
+ "fieldFights": [],
+ "kills": [
+  {
+   "day": 74,
+   "mid": "strike",
+   "wave": 4,
+   "by": "adaeze_nwosu",
+   "via": "player"
+  }
+ ],
+ "musterEvents": [],
+ "census": [
+  {
+   "day": 2,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 2,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 4,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 4,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 5,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 6,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 7,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 8,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 9,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 10,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 11,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 12,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 13,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 14,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 15,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 16,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 17,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 18,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 19,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 20,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 21,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 22,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 23,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 24,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 25,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 26,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 27,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 28,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 29,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 30,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 31,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 32,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 33,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 34,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 35,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 36,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 37,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 38,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 39,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 40,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 41,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 42,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 43,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 44,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 45,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 46,
+   "uw": 3,
+   "rank": "village"
+  },
+  {
+   "day": 47,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 48,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 49,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 50,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 51,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 52,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 53,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 54,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 55,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 56,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 57,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 58,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 59,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 60,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 61,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 62,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 63,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 64,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 65,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 66,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 67,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 68,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 69,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 70,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 71,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 72,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 73,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 74,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 75,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 76,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 77,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 78,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 79,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 80,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 81,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 82,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 83,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 84,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 85,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 86,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 87,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 88,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 89,
+   "uw": 4,
+   "rank": "regional"
+  }
+ ],
+ "transcripts": [],
+ "musterRefusals": [],
+ "musterCalls": {
+  "soundTitanCall": 0,
+  "titanCommitOwn": 0,
+  "titanSelfDo": 0,
+  "titanWarCouncil": 0
+ },
+ "musterCommitReturns": [],
+ "musterInstalled": true,
+ "musterErrs": 0,
+ "musterErrors": [],
+ "deaths": [
+  {
+   "day": 4,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 8,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 23,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "mirror_stag",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 31,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 31,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "villager",
+   "who": "gen_nkxgejp",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 46,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 59,
+   "kind": "villager",
+   "who": "gen_zp42ebk",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 61,
+   "kind": "villager",
+   "who": "olivia_bennett",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 66,
+   "kind": "monster",
+   "who": "ad_sponsor",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 66,
+   "kind": "monster",
+   "who": "ad_break",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 74,
+   "kind": "monster",
+   "who": "strike",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 78,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 83,
+   "kind": "villager",
+   "who": "adaeze_nwosu",
+   "cause": "the wild",
+   "player": true
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2400|12|4|4|1|380",
+  "3:3|90|2336|12|4|4|1|321",
+  "4:4|87|1200|12|4|4|1|279",
+  "5:5|100|1200|12|4|4|1|261",
+  "6:6|100|1200|12|4|4|1|261",
+  "7:7|100|1052|12|4|4|1|256",
+  "8:8|63|1029|12|4|4|1|240",
+  "9:9|84|1200|12|4|4|1|241",
+  "10:10|100|1231|12|4|4|1|234",
+  "11:11|100|1112|12|4|4|1|234",
+  "12:12|100|1249|12|4|4|1|225",
+  "13:13|100|2400|12|4|4|1|229",
+  "14:14|100|2390|12|4|4|1|228",
+  "15:15|80|1792|12|4|4|2|228",
+  "16:16|100|2400|12|4|4|2|225",
+  "17:17|100|1361|12|4|4|2|245",
+  "18:18|100|1730|12|4|4|2|216",
+  "19:19|100|2400|12|4|4|2|203",
+  "20:20|90|2321|12|4|4|2|205",
+  "21:21|100|2400|12|4|4|2|210",
+  "22:22|100|2400|12|4|4|2|200",
+  "23:23|100|2400|12|4|4|2|204",
+  "24:24|100|2400|12|4|4|2|157",
+  "25:25|100|2400|12|4|4|2|167",
+  "26:26|100|2273|12|4|4|2|202",
+  "27:27|100|2281|12|4|4|2|163",
+  "28:28|100|2400|12|4|4|2|156",
+  "29:29|100|2283|12|4|4|2|161",
+  "30:30|100|2400|12|4|4|2|118",
+  "31:31|100|2400|12|4|4|2|117",
+  "32:32|100|2400|12|4|4|3|126",
+  "33:33|100|2390|12|4|4|3|129",
+  "34:34|100|2400|12|4|4|3|157",
+  "35:35|100|2303|12|4|4|3|168",
+  "36:36|100|2390|12|4|4|3|183",
+  "37:37|100|1500|11|4|4|3|153",
+  "38:38|100|2288|11|4|4|3|123",
+  "39:39|100|2111|11|4|4|3|135",
+  "40:40|100|2288|11|4|4|3|161",
+  "41:41|100|2120|11|4|4|3|155",
+  "42:42|98|2300|11|4|4|3|163",
+  "43:43|100|2059|11|4|4|3|200",
+  "44:44|98|2076|11|4|4|3|174",
+  "45:45|100|2131|11|4|4|3|180",
+  "46:46|72|2400|11|4|4|3|168",
+  "47:47|69|2306|11|4|4|3|179",
+  "48:48|100|2132|11|4|4|3|159",
+  "49:49|100|2400|11|4|4|3|169",
+  "50:50|100|2126|11|4|4|3|146",
+  "51:51|37|2400|11|4|4|3|130",
+  "52:52|99|2400|11|4|4|3|145",
+  "53:53|100|2057|11|4|4|3|135",
+  "54:54|100|2117|11|4|4|3|113",
+  "55:55|100|2400|11|4|4|3|112",
+  "56:56|100|2141|11|4|4|3|119",
+  "57:57|100|2117|11|4|4|3|148",
+  "58:58|100|2400|11|4|4|3|132",
+  "59:59|100|1500|10|4|4|3|135",
+  "60:60|100|2400|10|4|4|3|145",
+  "61:61|97|2400|10|4|4|3|107",
+  "62:62|95|2320|9|4|4|3|128",
+  "63:63|100|2390|9|4|4|3|118",
+  "64:64|100|2400|9|4|4|3|134",
+  "65:65|100|2390|9|4|4|3|155",
+  "66:66|91|2400|9|4|4|4|145",
+  "67:67|89|2400|9|4|4|4|144",
+  "68:68|100|2390|9|4|4|4|172",
+  "69:69|98|2245|9|4|4|4|197",
+  "70:70|52|2400|9|4|4|4|193",
+  "71:71|49|2200|9|4|4|4|171",
+  "72:72|100|2400|9|4|4|4|162",
+  "73:73|90|2400|9|4|4|4|174",
+  "74:74|100|2400|9|4|4|4|180",
+  "75:75|97|2300|9|4|4|4|174",
+  "76:76|41|2400|9|4|4|4|182",
+  "77:77|68|2200|9|4|4|4|229",
+  "78:78|100|2400|9|4|4|4|237",
+  "79:79|100|2390|9|4|4|4|238",
+  "80:80|97|2208|9|4|4|4|220",
+  "81:81|100|2400|9|4|4|4|230",
+  "82:82|97|2200|9|4|4|4|271",
+  "83:83|100|1500|8|4|4|4|242",
+  "84:84|94|2341|8|4|4|4|176",
+  "85:85|100|2250|8|4|4|4|217",
+  "86:86|100|2400|8|4|4|4|204",
+  "87:87|100|2390|8|4|4|4|227",
+  "88:88|100|2400|8|4|4|4|226",
+  "89:89|100|2390|8|4|4|4|261",
+  "90:90|100|2400|8|4|4|4|231"
+ ],
+ "instrumentErrors": []
+}
