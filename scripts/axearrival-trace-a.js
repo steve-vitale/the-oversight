@@ -175,7 +175,11 @@ async function oneInstance(seed) {
   const curLoopDay = { v: 0 };
   const axeEvents = [];
   const wrapErrs = [];
-  const WRAP_METHODS = ['lootCorpse', 'equip', 'unequip', 'alienLootGrant'];
+  // Addendum (post-pilot, pre-judged): the pilot's day-15 loot lines
+  // match corpses.js corpseLootAll's batch path, not lootCorpse's
+  // search verb — so the batch/per-item corpse-take methods are
+  // wrapped too. Same log-only, behavior-preserving wrapper.
+  const WRAP_METHODS = ['lootCorpse', 'corpseLootAll', 'corpseTakeItem', 'equip', 'unequip', 'alienLootGrant'];
   const wrapInstalled = {};
   for (const m of WRAP_METHODS) {
     try {
