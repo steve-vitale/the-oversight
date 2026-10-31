@@ -1,0 +1,73 @@
+# SURFACE+SEEDED — seed 6701 (28d, 5 alive)
+
+npcPairs=56 deep2=1 cracks=0 vCracks=0 friendGriev=1 stateGriev=3 stateFriend=1 stateVCrack=0 t2picks=44 closeReadsServed=8 grievanceServes=6 othersSteered=3
+COND-TP: firstDeep2Day=25 lateClose=7 lateTP=0 lateNull=0 condRate=0.0% pooledTP=0/10 pooledRate=0.0% grievReadsByWhy={"grievance":12,"vgrievance":3}
+FUNNEL (natural): convos=78 subject=74 offered=58 picked=41 classes={"subject-no-offer":16,"offered-not-picked":17,"picked-others":41,"no-subject-no-ans":4}
+FUNNEL-UNSTEERED (r55 strict): convos=78 subjectNoOffer=16 rate=20.5% offered=58 mainOffered=2 subjectOffered=56 picked=41 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=40 picks=35 latePicks=0 missedChangedNotOffered=0
+WRAPSERVE: convos=15 matcherHits=6 matcherServes=6 classes={"grievance-line":6,"deflection":3,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=47 menuProblem=17 pickProblem=30
+INVITE (wrap, carried from r63): lure={"n":6,"accepts":1,"acceptRate":0.16666666666666666,"vetoes":{"sick":5},"chanceMin":0,"chanceMax":45,"chanceMean":7.5} party={"n":12,"accepts":5,"acceptRate":0.4166666666666667,"vetoes":{},"chanceMin":35,"chanceMax":82.2,"chanceMean":61.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=3
+FAVOR (r65): funnel={"offers":7,"forageOffers":1,"otherFavorOffers":6,"accepts":2,"acceptAttempts":2,"waits":1,"starts":1,"startBlocked":2,"forages":0,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r77): snaps=5 betrayalOfferConvos=63 mootOffers=62 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d7: case_2 status=open charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d8: case_2 status=dormant charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=juror known=true mootIn=null trial=false
+  CASE-SNAP d28: case_2 status=resolved charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=juror known=true mootIn=null trial=false
+  CASE-SNAP d28: case_2 status=resolved charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=juror known=true mootIn=null trial=false
+OUTING END STATES: []
+  FAVOR-OFFER d4: Onni kind=forage_help favorId=favor-onni_korhonen-4-1 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Sanne kind=sick_help favorId=favor-sanne_bakker-9-2 task=help Sanne with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d14: Giulia kind=heal_help favorId=favor-giulia_bianchi-13-3 task=help Giulia with their injury
+  FAVOR-OFFER d25: Sanne kind=heal_help favorId=favor-sanne_bakker-25-4 task=help Sanne with their injury
+  FAVOR-OFFER d26: Rafael kind=heal_help favorId=favor-rafael_torres-26-6 task=help Rafael with their injury
+  FAVOR-OFFER d26: Priya kind=heal_help favorId=favor-gen_0er8u53-26-7 task=help Priya with their injury
+  FAVOR-OFFER d28: Sanne kind=heal_help favorId=favor-sanne_bakker-28-8 task=help Sanne with their injury
+  FAVOR-ACCEPT d4: Onni favorId=favor-onni_korhonen-4-1 accepted=true state=promised meetDay=5
+  FAVOR-ACCEPT d16: Onni favorId=favor-onni_korhonen-4-1 accepted=true state=promised meetDay=17
+  INVITE-DEC d6 lure: A woman, maybe 60s -> Dawit chance=45 accept=true veto=- inputs={"temp":"intense","goal":"feed","mood":"grieving","fear":21,"affinity":0} reasons=["feed goal (+10)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Emily -> Grace chance=67 accept=false veto=- inputs={"temp":"warm","goal":"feed","mood":"grieving","fear":4,"trust":30,"bond":{"v":8,"depth":0},"partySize":0} reasons=["trust 30","warm temperament (+15)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Emily -> Sanne chance=35 accept=false veto=- inputs={"temp":"dry","goal":"remember","mood":"grieving","fear":4,"trust":25,"bond":{"v":18,"depth":0},"partySize":0} reasons=["trust 25","grieving mood (-10)"]
+  INVITE-DEC d8 party: Emily -> Yaqi chance=55.2 accept=true veto=- inputs={"temp":"bold","goal":"peace","mood":"grieving","fear":4,"trust":38,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 38","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d9 party: Emily -> Grace chance=78.2 accept=false veto=- inputs={"temp":"warm","goal":"feed","mood":"steady","fear":0,"trust":33,"bond":{"v":10,"depth":0},"partySize":1} reasons=["trust 33","warm temperament (+15)","feed goal (+15)"]
+  INVITE-DEC d9 party: Emily -> Grace chance=80.2 accept=true veto=- inputs={"temp":"warm","goal":"feed","mood":"steady","fear":0,"trust":38,"bond":{"v":10,"depth":0},"partySize":1} reasons=["trust 38","warm temperament (+15)","feed goal (+15)"]
+  INVITE-DEC d9 party: Emily -> Priya chance=46.6 accept=true veto=- inputs={"temp":"stoic","goal":"home","mood":"steady","fear":0,"trust":29,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 29"]
+  INVITE-DEC d14 lure: Sanne -> Dawit chance=0 accept=false veto=sick inputs={"temp":"intense","goal":"feed","mood":"grieving","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d15 party: Emily -> Rafael chance=73 accept=false veto=- inputs={"temp":"restless","goal":"protect","mood":"grieving","fear":4,"trust":45,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 45","a big party is safer (+5)","restless temperament (+10)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Emily -> Sanne chance=48.400000000000006 accept=false veto=- inputs={"temp":"dry","goal":"remember","mood":"grieving","fear":4,"trust":46,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 46","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Emily -> Giulia chance=64.6 accept=false veto=- inputs={"temp":"warm","goal":"home","mood":"grieving","fear":4,"trust":49,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 49","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d15 lure: Sanne -> Dawit chance=0 accept=false veto=sick inputs={"temp":"intense","goal":"feed","mood":"grieving","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d16 party: Emily -> Onni chance=47.2 accept=false veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":4,"trust":43,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d16 party: Emily -> Rafael chance=82.2 accept=true veto=- inputs={"temp":"restless","goal":"protect","mood":"steady","fear":4,"trust":43,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","restless temperament (+10)","protect goal (+15)"]
+  INVITE-DEC d16 lure: Sanne -> Dawit chance=0 accept=false veto=sick inputs={"temp":"intense","goal":"feed","mood":"hungry","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d17 lure: Sanne -> Dawit chance=0 accept=false veto=sick inputs={"temp":"intense","goal":"feed","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d18 lure: Sanne -> Dawit chance=0 accept=false veto=sick inputs={"temp":"intense","goal":"feed","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d28 party: Emily -> Sanne chance=59.2 accept=true veto=- inputs={"temp":"dry","goal":"remember","mood":"grieving","fear":26,"trust":48,"bond":{"v":46,"depth":1},"partySize":3} reasons=["trust 48","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":26,"v":42,"depth":3},{"day":27,"v":46,"depth":3},{"day":28,"v":50,"depth":3}] class=no-drop
+GOSSIP: totalPicks=37 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=41 31-60=0 61-90=0 91-120=0 121+=0 naturalPicks=41 seededPicks=3 gossipPicks=37
+SEEDED: {"pair":{"a":"gen_0er8u53","b":"giulia_bianchi","aName":"Priya","bName":"Giulia"},"day":25,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":26,"v":42,"depth":3},{"day":27,"v":46,"depth":3},{"day":28,"v":50,"depth":3}],"crackTraceClass":"no-drop","vAt7":50,"depthAt7":3,"vDrop":2,"depthDrop":-1,"crack7":false,"firstServe":{"day":26,"why":"vgrievance"},"serveWithin30":true,"serves":3,"servesAll":[{"day":26,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Priya <> Giulia — maxDepth 3, final 3 (v=50), dropped 0
+  FRIEND-GRIEV d25: Priya vs Giulia (ambushed) depth 2 v 52 -> 50
+  CLOSE-READ d20: Priya about Giulia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Giulia about Priya — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Priya about Giulia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Somchai about Rafael — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Rafael about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Rafael about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Sanne about Priya — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Priya about Onni — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Sanne about Priya — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Grace about Priya — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  STATE-FRIEND-GRIEV d26 (betrayal): Priya vs Giulia (ambushed) depth 2 v 52 -> 50
+  GRIEV-READ d6: Rafael about Grace (why=grievance)
+  GRIEV-READ d9: Grace about Rafael (why=grievance)
+  GRIEV-READ d9: Priya about Dawit (why=grievance)
+  GRIEV-READ d10: Priya about Dawit (why=grievance)
+  GRIEV-READ d11: Priya about Dawit (why=grievance)
+  GRIEV-READ d12: Rafael about Grace (why=grievance)
+  KNACK d4 Priya: "that stray dog — the one that bit two people — lets Yaqi touch it."
+  KNACK d20 Sanne: "You want to know about that? Okay." "The way I read it — Somchai found a lost knife by smell last week. By SMELL."
+  KNACK d22 Onni: "Somchai found a lost knife by smell last week. By SMELL."
+
+deathCauses: {"the wild":1,"sickness":2,"starvation":2}

@@ -1,0 +1,304 @@
+SEEDS: 6701 30d, 6702 32d, 6703 137d, 6704 141d
+  funnel seed 6701: {"offers":9,"forageOffers":2,"otherFavorOffers":7,"accepts":4,"acceptAttempts":4,"waits":2,"starts":1,"startBlocked":3,"forages":0,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0}
+  funnel seed 6702: {"offers":10,"forageOffers":5,"otherFavorOffers":5,"accepts":5,"acceptAttempts":5,"waits":5,"starts":3,"startBlocked":7,"forages":2,"forageNodeBarren":5,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":4,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":2,"delivers":2,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":2,"keptMatched":1,"keptMatchedStrict":1}
+  funnel seed 6703: {"offers":94,"forageOffers":18,"otherFavorOffers":76,"accepts":18,"acceptAttempts":18,"waits":20,"starts":12,"startBlocked":19,"forages":10,"forageNodeBarren":29,"forageBarren":8,"forageBarrenTravel":0,"forageBarrenNode":8,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":8,"retryAssigned":8,"retryStarts":6,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":10,"delivers":10,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":10,"keptMatched":2,"keptMatchedStrict":2}
+  funnel seed 6704: {"offers":42,"forageOffers":19,"otherFavorOffers":23,"accepts":20,"acceptAttempts":20,"waits":20,"starts":15,"startBlocked":16,"forages":13,"forageNodeBarren":11,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":5,"retryAssigned":5,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":13,"delivers":13,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":13,"keptMatched":0,"keptMatchedStrict":0}
+
+DAWN ATTEMPTS pooled: 76 (starts 31, blocked 45, waits 47)
+BLOCKED by adjFail: {"away":12,"no-micro-pos":17,"micro-far":3,"node-elsewhere":8,"non-adjacency":5}
+BLOCKED by status reason: {"Move next to your partner, on the same side of the Haven door.":40,"Finish your current outing before starting another.":3,"Finish the current event before foraging together.":2}
+BLOCKED with NO diag: 0 / 45
+DAWN CENSUS over 76 diag-carrying attempts:
+  playerAtHome: 70
+  partnerNodeAtHome: 62
+  insideMatch (partnerInside===playerInside): 69
+  partnerAway: 12
+  partnerPos null: 33
+  partnerNode defaulted (no nodePos): 0
+
+FORAGE-NODE-BARREN pooled: 45
+  by targetCanForage: {"false":8,"true":37}
+FORAGE-CELL-BLOCKED pooled: 66
+  by status reason: {"Finish the fight before foraging together.":6,"You carry 0 kcal; your partner carries 0 kcal. Nothing left to take here today — walk to another green patch.":60}
+
+PER-FAVOR TIMELINES (accepted forage favors):
+  {"seed":6701,"vidName":"Onni","favorId":"favor-onni_korhonen-4-1","acceptDay":4,"meetDay":5,"attempts":3,"startDay":6,"forages":0,"nodeBarren":0,"delivers":0,"endState":"broken","promiseKept":"broken","startedDay":6,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6701,"vidName":"Sanne","favorId":"favor-sanne_bakker-9-2","acceptDay":14,"meetDay":15,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1}}
+  {"seed":6701,"vidName":"Onni","favorId":"favor-onni_korhonen-4-1","acceptDay":16,"meetDay":17,"attempts":3,"startDay":6,"forages":0,"nodeBarren":0,"delivers":0,"endState":"broken","promiseKept":"broken","startedDay":6,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6701,"vidName":"Onni","favorId":"favor-onni_korhonen-4-1","acceptDay":21,"meetDay":22,"attempts":3,"startDay":6,"forages":0,"nodeBarren":0,"delivers":0,"endState":"broken","promiseKept":"broken","startedDay":6,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6702,"vidName":"Jaxon","favorId":"favor-gen_3i6i53c-4-2","acceptDay":4,"meetDay":5,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6702,"vidName":"Tashi","favorId":"favor-tashi_sherpa-2-1","acceptDay":7,"meetDay":8,"attempts":2,"startDay":8,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6702,"vidName":"Jaxon","favorId":"favor-gen_3i6i53c-8-4","acceptDay":8,"meetDay":9,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":6702,"vidName":"Olivia","favorId":"favor-olivia_bennett-17-7","acceptDay":17,"meetDay":18,"attempts":2,"startDay":18,"forages":0,"nodeBarren":1,"delivers":0,"endState":"asked","promiseKept":"released","startedDay":18,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6702,"vidName":"Tashi","favorId":"favor-tashi_sherpa-22-8","acceptDay":22,"meetDay":23,"attempts":2,"startDay":23,"forages":1,"nodeBarren":1,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":23,"deliveredKcal":470,"firstKeptDay":23,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Aisling","favorId":"favor-gen_y5smbnt-2-1","acceptDay":5,"meetDay":6,"attempts":2,"startDay":6,"forages":1,"nodeBarren":10,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Sal","favorId":"favor-gen_o4j7vqo-8-5","acceptDay":8,"meetDay":9,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":6703,"vidName":"Jovan","favorId":"favor-jovan_milic-20-9","acceptDay":20,"meetDay":21,"attempts":2,"startDay":21,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":21,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Catalina","favorId":"favor-catalina_reyes-25-14","acceptDay":25,"meetDay":26,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6703,"vidName":"Naran","favorId":"favor-naran_tumen-26-16","acceptDay":26,"meetDay":27,"attempts":3,"startDay":28,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Catalina","favorId":"favor-catalina_reyes-30-18","acceptDay":30,"meetDay":31,"attempts":1,"startDay":31,"forages":1,"nodeBarren":3,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":31,"deliveredKcal":275,"firstKeptDay":32,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6703,"vidName":"Aisling","favorId":"favor-gen_y5smbnt-38-27","acceptDay":38,"meetDay":39,"attempts":1,"startDay":39,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":39,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6703,"vidName":"Ursula","favorId":"favor-gen_6kpn8dz-42-29","acceptDay":42,"meetDay":43,"attempts":2,"startDay":44,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+  {"seed":6703,"vidName":"Harry","favorId":"favor-gen_an1xl8m-53-41","acceptDay":53,"meetDay":54,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":2}}
+  {"seed":6703,"vidName":"Desmond","favorId":"favor-desmond_clarke-55-44","acceptDay":55,"meetDay":56,"attempts":2,"startDay":56,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":56,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Adaeze","favorId":"favor-adaeze_nwosu-57-48","acceptDay":57,"meetDay":58,"attempts":1,"startDay":58,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":59,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6703,"vidName":"Sal","favorId":"favor-gen_o4j7vqo-58-49","acceptDay":58,"meetDay":59,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":1}}
+  {"seed":6703,"vidName":"Sal","favorId":"favor-gen_o4j7vqo-65-50","acceptDay":65,"meetDay":66,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6703,"vidName":"Dale","favorId":"favor-dale_hoffman-80-64","acceptDay":80,"meetDay":81,"attempts":1,"startDay":81,"forages":1,"nodeBarren":1,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":81,"deliveredKcal":400,"firstKeptDay":82,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6703,"vidName":"Naran","favorId":"favor-naran_tumen-81-65","acceptDay":81,"meetDay":82,"attempts":3,"startDay":83,"forages":1,"nodeBarren":2,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":1,"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Marouane","favorId":"favor-app_mgpsphpa552-87-70","acceptDay":87,"meetDay":88,"attempts":2,"startDay":88,"forages":0,"nodeBarren":3,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6703,"vidName":"Naran","favorId":"favor-naran_tumen-116-83","acceptDay":116,"meetDay":117,"attempts":1,"startDay":117,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6703,"vidName":"Adaeze","favorId":"favor-adaeze_nwosu-116-84","acceptDay":116,"meetDay":117,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"moot","promiseKept":"released","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"non-adjacency":1}}
+  {"seed":6704,"vidName":"Yuki","favorId":"favor-yuki_mori-18-4","acceptDay":18,"meetDay":19,"attempts":2,"startDay":19,"forages":0,"nodeBarren":3,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6704,"vidName":"Raushan","favorId":"favor-gen_1q7v728-26-8","acceptDay":26,"meetDay":27,"attempts":1,"startDay":27,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":27,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Somchai","favorId":"favor-somchai_prasert-29-11","acceptDay":29,"meetDay":30,"attempts":2,"startDay":30,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":30,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6704,"vidName":"Alfredo","favorId":"favor-gen_xbyfaop-33-12","acceptDay":33,"meetDay":34,"attempts":2,"startDay":35,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":35,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6704,"vidName":"Yuki","favorId":"favor-yuki_mori-18-4","acceptDay":35,"meetDay":36,"attempts":2,"startDay":19,"forages":0,"nodeBarren":3,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6704,"vidName":"Oliver","favorId":"favor-oliver_moore-36-13","acceptDay":36,"meetDay":37,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"non-adjacency":1}}
+  {"seed":6704,"vidName":"Alfredo","favorId":"favor-gen_xbyfaop-37-14","acceptDay":37,"meetDay":38,"attempts":1,"startDay":38,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":38,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Yuki","favorId":"favor-yuki_mori-41-17","acceptDay":41,"meetDay":42,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":6704,"vidName":"Oliver","favorId":"favor-oliver_moore-43-18","acceptDay":43,"meetDay":44,"attempts":1,"startDay":44,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":44,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Somchai","favorId":"favor-somchai_prasert-46-20","acceptDay":46,"meetDay":47,"attempts":1,"startDay":47,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":47,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Esther","favorId":"favor-visjoin_23-45-19","acceptDay":47,"meetDay":48,"attempts":2,"startDay":48,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":48,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6704,"vidName":"Joshua","favorId":"favor-gen_u47vyo8-5-1","acceptDay":49,"meetDay":50,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6704,"vidName":"Somchai","favorId":"favor-somchai_prasert-52-21","acceptDay":52,"meetDay":53,"attempts":1,"startDay":53,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":53,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Somchai","favorId":"favor-somchai_prasert-59-23","acceptDay":59,"meetDay":60,"attempts":1,"startDay":60,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":60,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Raushan","favorId":"favor-gen_1q7v728-90-25","acceptDay":90,"meetDay":91,"attempts":1,"startDay":91,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":91,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Oliver","favorId":"favor-oliver_moore-90-26","acceptDay":90,"meetDay":91,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"non-adjacency":2}}
+  {"seed":6704,"vidName":"Abigail","favorId":"favor-visjoin_83-91-27","acceptDay":91,"meetDay":92,"attempts":3,"startDay":93,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"non-adjacency":1,"no-micro-pos":1}}
+  {"seed":6704,"vidName":"Esther","favorId":"favor-visjoin_23-94-28","acceptDay":94,"meetDay":95,"attempts":1,"startDay":95,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":96,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6704,"vidName":"Somchai","favorId":"favor-somchai_prasert-132-37","acceptDay":133,"meetDay":134,"attempts":2,"startDay":134,"forages":1,"nodeBarren":1,"delivers":1,"endState":"acknowledged","promiseKept":"broken","startedDay":134,"deliveredKcal":450,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1}}
+  {"seed":6704,"vidName":"Oliver","favorId":"favor-oliver_moore-138-42","acceptDay":138,"meetDay":139,"attempts":2,"startDay":140,"forages":0,"nodeBarren":0,"delivers":0,"endState":"moot","promiseKept":"released","startedDay":140,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1}}
+
+KEPT-WITHOUT-START: 0
+
+BARREN SPLIT (forage-barren days): 10
+  by barrenKind: {"node-barren":10}
+TRAVEL-BLOCKED entries: 0 (walkAttempted: 0, pathFound: 0)
+TRAVEL-WALKED entries: 6
+ESCALATIONS: ended-stuck 0, end-blocked 0
+
+RAW-KEPT AUDIT:
+  deliver events ok: 25; missed-line-but-kept-true (must be 0): 0
+  funnel completes: events vs snapshot per seed:
+    seed 6701: events=0 snapshot=0 keptStrict=0 keptMatched=0
+    seed 6702: events=2 snapshot=1 keptStrict=1 keptMatched=1
+    seed 6703: events=10 snapshot=2 keptStrict=2 keptMatched=2
+    seed 6704: events=13 snapshot=1 keptStrict=0 keptMatched=0
+
+POSITION HISTORY (no-micro-pos blocks: ever vs never before):
+  no-micro-pos blocks: ever-before=9 never-before=0 same-day-ambiguous=8
+    seed 6701: posHistory villagers=9
+    seed 6702: posHistory villagers=10
+    seed 6703: posHistory villagers=15
+    seed 6704: posHistory villagers=9
+
+DAWN STEP-FIRST RETRIES: 17
+  stepOk: 17, stepAssigned: 17, retryStarted: 15
+  retryStarted without stepAssigned (must be 0): 0
+  retries by dayPartAfter: {"0":17}
+  retries missing stepAssigned field (binding miss if >0): 0
+
+NO-HOME ENTRIES (must all carry walk detail): 0
+  missing walkPathFound (binding miss if >0): 0
+  by step: {}
+  by walkRefusedReason: {}
+TRAVEL-WALKED entries: 6
+TRAVEL-BLOCKED refusals naming a step (walkRefusedAt present): 0 / 0
+TRAVEL-BLOCKED missing blockage read (binding miss if >0): 0
+
+POST-ENDING STARTS (a start dated after an ending in the same seed):
+  seed 6701: no endings
+  seed 6702: no endings
+  seed 6703: no endings
+  seed 6704: no endings
+
+MIDDAY POSITIONS (no-micro-pos dawn blocks vs midday history):
+  seed 6701: midday-ever=1 midday-never=0 midday villagers=10
+  seed 6702: midday-ever=2 midday-never=1 midday villagers=10
+  seed 6703: midday-ever=8 midday-never=0 midday villagers=18
+  seed 6704: midday-ever=5 midday-never=0 midday villagers=12
+
+CASE TIMELINES (from change-only daily caseSnaps):
+  seed 6701: caseSnaps=6 distinct cases=2 mootsConvened=0
+    case case_2: d7:open -> d8:resolved+trial | charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=bystander known=false mootIn=null
+    case case_4: d12:open -> d14:acquitted+trial | charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=bystander known=false mootIn=null
+  seed 6702: caseSnaps=2 distinct cases=0 mootsConvened=0
+    (no cases ever snapshotted)
+  seed 6703: caseSnaps=2 distinct cases=0 mootsConvened=0
+    (no cases ever snapshotted)
+  seed 6704: caseSnaps=6 distinct cases=2 mootsConvened=0
+    case case_2: d10:open -> d12:acquitted+trial | charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=bystander known=false mootIn=null
+    case case_4: d11:open -> d13:resolved+trial | charge=murder accused=Xavier/Yuki/Ethan target=Mi-kyung role=bystander known=false mootIn=null
+
+BETRAYAL-OFFER CENSUS + MOOT PROBE:
+  seed 6701 arm=linger: betrayalOfferConvos=14 distinct moot-offer cases=2 probePicks=0 mootsConvened=0
+    offer d8 Grace (bond-daily-1): betrayal:accept, betrayal:decline, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d9 Grace (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d11 Somchai (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d13 Yaqi (bond-daily-1): betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:moot:case_4, betrayal:letlie:case_4, betrayal:vote_guilty:case_4, betrayal:vote_acquit:case_4
+    offer d16 Rafael (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d19 Somchai (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d20 Grace (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d21 Onni (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d25 Yaqi (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d26 Grace (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d28 Grace (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d29 Yaqi (bond-daily-1): betrayal:accept, betrayal:decline
+  seed 6702 arm=linger: betrayalOfferConvos=21 distinct moot-offer cases=0 probePicks=0 mootsConvened=0
+    offer d4 Rosa (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d8 George (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d8 Jaxon (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d9 Liam (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d10 Rosa (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d12 Tashi (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d14 Tashi (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d16 Tashi (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d17 Olivia (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d18 Chloe (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d18 George (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d21 Rosa (bond-daily-1): betrayal:accept, betrayal:decline
+  seed 6703 arm=mootprobe: betrayalOfferConvos=99 distinct moot-offer cases=0 probePicks=0 mootsConvened=0
+    offer d4 Sal (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d6 Dale (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d15 Catalina (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d15 Naran (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d16 Adaeze (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d25 Catalina (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d27 Desmond (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d30 Aisling (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d31 Sal (seeded-speaker): betrayal:accept, betrayal:decline
+    offer d33 Catalina (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d34 Sal (seeded-speaker): betrayal:accept, betrayal:decline
+    offer d35 Sal (seeded-speaker): betrayal:accept, betrayal:decline
+  seed 6704 arm=mootprobe: betrayalOfferConvos=134 distinct moot-offer cases=2 probePicks=2 mootsConvened=0
+    offer d7 Somchai (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d9 Yuki (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d10 Oliver (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d12 Xavier (bond-daily-1): betrayal:press:case_2:xavier_dubois, betrayal:press:case_4:xavier_dubois, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2 PROBE->case_2
+    offer d12 Ethan (bond-daily-2): betrayal:press:case_2:ethan_hunt, betrayal:press:case_4:ethan_hunt, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d12 Yuki (bond-daily-3): betrayal:press:case_2:yuki_mori, betrayal:approach:case_2, betrayal:press:case_4:yuki_mori, betrayal:approach:case_4, betrayal:investigate:case_2, betrayal:vote_guilty:case_2
+    offer d13 Sam (bond-daily-1): betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:moot:case_4 PROBE->case_4
+    offer d13 Yuki (bond-daily-2): betrayal:press:case_4:yuki_mori, betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:vote_guilty:case_4, betrayal:vote_acquit:case_4
+    offer d13 Somchai (bond-daily-3): betrayal:investigate:case_4, betrayal:vote_guilty:case_4, betrayal:vote_acquit:case_4
+    offer d14 Alfredo (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d15 Raushan (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d16 Oliver (bond-daily-2): betrayal:accept, betrayal:decline
+    PROBE d12 Xavier case=case_2 laterTrial=true
+    PROBE d13 Sam case=case_4 laterTrial=true
+
+AWAY CENSUS (start-blocks with adjFail=away):
+  away blocks: 12; missing away record (binding miss if >0): 0
+  by purpose: {"water":4,"traps":2,"visit":4,"explore":1,"guard":1}
+  returnDay-minus-blockDay: {}
+  node distance from home (Chebyshev): {"1":10,"2":1,"3":1}
+
+POST-ENDING REPEAT-START WINDOW (B4: ended favor -> later same-villager start):
+    seed 6701 Onni: started-undelivered d4 -> later start d16 (gap 12d)
+    seed 6701 Onni: started-undelivered d16 -> later start d21 (gap 5d)
+    seed 6702 Tashi: delivered d7 -> later start d22 (gap 15d)
+    seed 6703 Aisling: delivered d5 -> later start d38 (gap 33d)
+    seed 6703 Catalina: unstarted d25 -> later start d30 (gap 5d)
+    seed 6703 Naran: delivered d26 -> later start d81 (gap 55d)
+    seed 6703 Naran: delivered d81 -> later start d116 (gap 35d)
+    seed 6704 Yuki: started-undelivered d18 -> later start d35 (gap 17d)
+    seed 6704 Raushan: delivered d26 -> later start d90 (gap 64d)
+    seed 6704 Somchai: delivered d29 -> later start d46 (gap 17d)
+    seed 6704 Somchai: delivered d46 -> later start d52 (gap 6d)
+    seed 6704 Somchai: delivered d52 -> later start d59 (gap 7d)
+    seed 6704 Somchai: delivered d59 -> later start d133 (gap 74d)
+    seed 6704 Alfredo: delivered d33 -> later start d37 (gap 4d)
+    seed 6704 Oliver: unstarted d36 -> later start d43 (gap 7d)
+    seed 6704 Oliver: delivered d43 -> later start d138 (gap 95d)
+    seed 6704 Oliver: unstarted d90 -> later start d138 (gap 48d)
+    seed 6704 Esther: delivered d47 -> later start d94 (gap 47d)
+
+R77 TRIAL CENSUS (B1: first-trial-appearance per case + SAY announcements; v.moots NEVER a count):
+  seed 6701 arm=linger case=case_2 charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=bystander opened d6 mootIn=null (mootInDay~d6) firstTrial snap d8 origin=autonomous? status=resolved resolution=weregild playerConvened=true
+    VOTE: npcGuilty=5 finalGuilty=6 present=6 total~7 need~4 convicted=true wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=5 mean=-27.4 | acquit n=1 mean=7.0
+  seed 6701 arm=linger case=case_4 charge=ambush accused=Priya/Giulia/Sanne target=Dawit role=bystander opened d11 mootIn=null (mootInDay~d11) firstTrial snap d14 origin=autonomous? status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=1 finalGuilty=2 present=4 total~5 need~3 convicted=false wildDay=true playerVoter=true votes=4
+    SCORE SPREAD: guilty n=1 mean=-14.0 | acquit n=3 mean=60.3
+  seed 6701: trials=2 mootSayLines=11 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d7: Word reaches you, days late: Priya stands accused over what happened to Dawit. There's going to be a moot. People are choosing sides.
+    SAY d8: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d8: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d8: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d12: Word reaches you, days late: Priya stands accused over what happened to Dawit. There's going to be a moot. People are choosing sides.
+    SAY d13: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d13: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d13: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d26: They're named, every one: Tariq Sato, Grace Zhang, Kenji Osei. Your move — ask them questions (up to three), call a MOOT on it, or turn them away at the edge of the firelight.
+    SAY d29: They waited three days at the edge of your fire. Nobody called the moot. Tariq nods — not angry, just done — and they walk.
+    SAY d29: They're named, every one: Nadia Frost, Ben Nair. Your move — ask them questions (up to three), call a MOOT on it, or turn them away at the edge of the firelight.
+  seed 6702: trials=0 mootSayLines=3 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d6: 🔍 Tashi crouches over broad smooth green leaves in spring colonies, strong onion smell when crushed, studying it a moment before moving on. (1/3 looks)
+    SAY d8: Travel 2 tiles to meadow.
+— Open ground —
+The grass is bent in a long smooth run, like something heavy slid through it. You walk the other way around.
+    SAY d8: Travel 1 tile to meadow.
+— Open ground —
+The grass is bent in a long smooth run, like something heavy slid through it. You walk the other way around.
+  seed 6703: trials=0 mootSayLines=13 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d27: They're named, every one: Hana Rhee, Omar Marsh. Your move — ask them questions (up to three), call a MOOT on it, or turn them away at the edge of the firelight.
+    SAY d30: They waited three days at the edge of your fire. Nobody called the moot. Hana nods — not angry, just done — and they walk.
+    SAY d38: 🔍 Sal crouches over tall white flower umbels on smooth purple-blotched stems, smelling faintly foul, studying it a moment before moving on. (2/3 looks)
+    SAY d39: Aisling spends the afternoon with the tall smooth stalks turning reddish-purple, with dark purple berry clusters in late summer — look, smell, the smallest taste, then waiting. Edible, but it argues o
+    SAY d39: ★ IDENTIFIED: Pokeweed. Smooth stalks, purple-red stems, dark berry clusters. Uses unknown — harvest, taste, and learn.
+    SAY d39: 💡 The tall smooth stalks turning reddish-purple, with dark purple berry clusters in late summer — THAT's what Aisling was describing. Pokeweed. It clicks like a key turning.
+    SAY d42: 🔍 Sal has been turning over tall white flower umbels on smooth purple-blotched stems, smelling faintly foul for days — today it clicked. "I know this one now. Look — see the leaves?"
+    SAY d43: ★ IDENTIFIED: Poison Hemlock. Tall white umbels on smooth stems blotched purple. Uses unknown — harvest, taste, and learn.
+    SAY d49: 🔍 Desmond crouches over broad smooth green leaves in spring colonies, strong onion smell when crushed, studying it a moment before moving on. (2/3 looks)
+    SAY d66: Desmond showed Naran the broad smooth green leaves in spring colonies, strong onion smell when crushed — "remember it." Word gets around.
+    SAY d66: ★ IDENTIFIED: Wild Ramps. Broad smooth leaves, onion smell. Spring only. Uses unknown — harvest, taste, and learn.
+    SAY d77: 📈 your moot crowd +8 — You won The Quiet Room on camera (favor: 8)
+  seed 6704 arm=mootprobe case=case_2 charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=bystander opened d9 mootIn=null (mootInDay~d9) firstTrial snap d12 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=0 finalGuilty=1 present=5 total~6 need~4 convicted=false wildDay=true playerVoter=true votes=5
+    SCORE SPREAD: guilty n=0 mean=n/a | acquit n=5 mean=57.2
+    NOTE: probe-arm trial with playerVoter=true — driver cast NO vote (probe ended convo); any player contribution is the game backstop, compare finalGuilty vs guilty.
+  seed 6704 arm=mootprobe case=case_4 charge=murder accused=Xavier/Yuki/Ethan target=Mi-kyung role=bystander opened d10 mootIn=null (mootInDay~d10) firstTrial snap d13 origin=probe status=resolved resolution=exile playerConvened=true
+    VOTE: npcGuilty=7 finalGuilty=8 present=7 total~8 need~5 convicted=true wildDay=false playerVoter=true votes=7
+    SCORE SPREAD: guilty n=7 mean=-32.1 | acquit n=0 mean=n/a
+    NOTE: probe-arm trial with playerVoter=true — driver cast NO vote (probe ended convo); any player contribution is the game backstop, compare finalGuilty vs guilty.
+  seed 6704: trials=2 mootSayLines=18 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d1: 🔍 A crouches over a tree heavy with smooth-skinned fruit blushing red and gold, studying it a moment before moving on. (1/3 looks)
+    SAY d3: Travel 1 tile to trail edge.
+— An old trail —
+The trail is worn smooth as an old coin. Deer, probably. Probably.
+    SAY d9: 🔍 Yuki has been turning over a tree heavy with smooth-skinned fruit blushing red and gold for days — today it clicked. "I know this one now. Look — see the leaves?"
+    SAY d11: Word reaches you, days late: Xavier stands accused over what happened to Mi-kyung. There's going to be a moot. People are choosing sides.
+    SAY d11: Word reaches you, days late: Xavier stands accused over what happened to Mi-kyung. There's going to be a moot. People are choosing sides.
+    SAY d12: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d12: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d12: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d13: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d13: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d13: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d32: 📈 your moot crowd +6 — You won The Quiet Room on camera (favor: 6)
+POOLED trials=4 mootSayLines=45
+
+R77 AUTONOMOUS-CONVENING VERDICT (B2, control arm only):
+  seed 6701 case=case_2 opened d6 mootInDay~d6 runDays=30 trialed=true
+  seed 6701 case=case_4 opened d11 mootInDay~d11 runDays=30 trialed=true
+  seed 6701: eligible control cases=2 convened=2 -> AUTONOMOUS CONVENING OBSERVED
+  seed 6702: eligible control cases=0 convened=0 -> UNISOLATED (no control case reached mootIn)
+
+R77 AWAY-RETURN CENSUS (B4: computed return = sinceDay + duration):
+  away blocks=12 missing computed return (binding miss if >0)=0
+  computedReturn-minus-blockDay: {"1":1,"2":6,"3":5}
+
+R77 BROKEN-ORIGIN WINDOWS (B5: final broken favor -> later same-villager start):
+  seed 6701 Onni: broken favor favor-onni_korhonen-4-1 (deadline d18) -> later start d21 favor favor-onni_korhonen-4-1 (gap 3d past deadline)
+  seed 6701: broken favors=2 broken-origin windows=1
+  seed 6702: broken favors=0 broken-origin windows=0 (no broken favor in final ledger — window untestable this seed)
+  seed 6703: broken favors=0 broken-origin windows=0 (no broken favor in final ledger — window untestable this seed)
+  seed 6704: broken favors=1 broken-origin windows=0
+
+R77 END-BLOCKED REPETITION CENSUS (decision input, not a game change):
+  seed 6701: no end-blocked entries
+  seed 6702: no end-blocked entries
+  seed 6703: no end-blocked entries
+  seed 6704: no end-blocked entries
+
+DRIVER VERDICTS FILE: [{"seed":6701,"steering":true,"arm":"linger","alive":5,"deep2":1,"cracks":0,"vCracks":1,"friendGrievances":0,"stateGrievances":7,"stateFriend":0,"stateVCracks":1,"t2picks":42,"closeReads":18,"grievReads":11,"grievReadsByWhy":{"grievance":11,"vgrievance":0},"firstDeep2Day":30,"lateClose":2,"lateTP":0,"lateNull":0,"condRate":0,"pooledTP":1,"pooledRate":0.05555555555555555,"othersSteered":0,"lingerPicks":42,"knack":6,"dryCensus":{"totalConvos":85,"deepConvos":85,"totalDryLines":29,"dry9Lines":29,"self3Lines":0,"convosWithDry":26,"shareWithDry":0.3058823529411765,"dryPerConvo":0.3411764705882353,"convosEndingOnDry":0,"shareEndingOnDry":0,"hist":{"0":59,"1":24,"2":1,"3":1,"4":0,"5+":0},"prePick":{"topic":25,"other":4},"prePick9":{"topic":25,"other":4},"followCounts":{"recap":1,"question":12,"other":15,"close":1},"noFollow":0,"follows":[{"day":5,"name":"Priya","who":"them","text":"\"I should get back to it.\""},{"day":5,"name":"A woman, maybe 40s, with tattooed arms","who":"you","text":"\"Can I ask you something else?\""},{"day":6,"name":"A woman, maybe 40s, with restless hands","who":"you","text":"\"Can I ask you something else?\""},{"day":6,"name":"A woman, maybe 40s, with sun-creased eyes","who":"you","text":"\"Keep going.\""},{"day":7,"name":"A woman, maybe 60s","who":"them","text":"\"I could talk all day, but — go on. We'll talk more.\""},{"day":8,"name":"Yaqi","who":"you","text":"\"Can I ask you something else?\""},{"day":10,"name":"Giulia","who":"you","text":"\"Go on.\""},{"day":14,"name":"Sanne","who":"you","text":"\"...\""},{"day":14,"name":"Giulia","who":"you","text":"\"Can I ask you something else?\""},{"day":15,"name":"Rafael","who":"you","text":"\"Do go on.\""},{"day":16,"name":"Onni","who":"you","text":"\"Do go on.\""},{"day":20,"name":"Sanne","who":"you","text":"\"Can I ask you something else?\""},{"day":21,"name":"Onni","who":"you","text":"\"Whoa — go on.\""},{"day":21,"name":"Sanne","who":"you","text":"\"Who told you that?\""},{"day":22,"name":"Sanne","wh

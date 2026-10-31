@@ -1,0 +1,304 @@
+# SURFACE+SEEDED — seed 6703 (137d, 0 alive)
+
+npcPairs=109 deep2=33 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=1 stateVCrack=0 t2picks=154 closeReadsServed=42 grievanceServes=31 othersSteered=150
+COND-TP: firstDeep2Day=25 lateClose=88 lateTP=83 lateNull=0 condRate=94.3% pooledTP=84/95 pooledRate=88.4% grievReadsByWhy={"grievance":9,"vgrievance":33}
+FUNNEL (natural): convos=372 subject=320 offered=276 picked=126 classes={"subject-no-offer":46,"picked-others":126,"no-subject-no-ans":46,"offered-capped":106,"offered-not-picked":44,"no-subject-ans":4}
+FUNNEL-UNSTEERED (r55 strict): convos=251 subjectNoOffer=46 rate=18.3% offered=155 mainOffered=13 subjectOffered=154 picked=5 latePicks=3 latePicksMain=1 latePicksSubject=2
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Ursula / Desmond — "Naran talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Claudine / Harry / Adaeze — "Dale talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=250 picks=139 latePicks=41 missedChangedNotOffered=18
+WRAPSERVE: convos=42 matcherHits=31 matcherServes=31 classes={"grievance-line":31,"deflection":0,"other":11}
+FUNNEL-PROBE (subject-no-offer turns): turns=131 menuProblem=105 pickProblem=26
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":27,"accepts":14,"acceptRate":0.5185185185185185,"vetoes":{},"chanceMin":5,"chanceMax":91,"chanceMean":55.7} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=5
+FAVOR (r65): funnel={"offers":94,"forageOffers":18,"otherFavorOffers":76,"accepts":18,"acceptAttempts":18,"waits":20,"starts":12,"startBlocked":19,"forages":10,"forageNodeBarren":29,"forageBarren":8,"forageBarrenTravel":0,"forageBarrenNode":8,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":8,"retryAssigned":8,"retryStarts":6,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":10,"delivers":10,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":10,"keptMatched":2,"keptMatchedStrict":2}
+CASE (r77): snaps=2 betrayalOfferConvos=99 mootOffers=0 mootProbePicks=[] mootsConvened=0
+OUTING END STATES: [{"vid":"dale_hoffman","vidName":"Dale","favorId":"favor-dale_hoffman-80-64","state":"thanked","promisedDay":80,"meetDay":81,"deadline":82,"promiseKept":true,"startedDay":81,"forageCount":1,"playerKcal":160,"partnerKcal":240,"deliveredKcal":400,"returnedDay":82,"talkCount":1},{"vid":"adaeze_nwosu","vidName":"Adaeze","favorId":"favor-adaeze_nwosu-116-84","state":"moot","promisedDay":116,"meetDay":117,"deadline":118,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"catalina_reyes","vidName":"Catalina","favorId":"favor-catalina_reyes-30-18","state":"thanked","promisedDay":30,"meetDay":31,"deadline":32,"promiseKept":true,"startedDay":31,"forageCount":1,"playerKcal":125,"partnerKcal":150,"deliveredKcal":275,"returnedDay":32,"talkCount":1}]
+  FAVOR-OFFER d4: Sal kind=food_share favorId=favor-gen_o4j7vqo-4-2 task=share food with Sal — they're running on empty
+  FAVOR-OFFER d5: Aisling kind=forage_help favorId=favor-gen_y5smbnt-2-1 task=forage with Aisling tomorrow to rebuild the pantry
+  FAVOR-OFFER d6: Naran kind=food_share favorId=favor-naran_tumen-6-4 task=share food with Naran — they're past hungry
+  FAVOR-OFFER d6: Dale kind=food_share favorId=favor-dale_hoffman-6-3 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d8: Sal kind=forage_help favorId=favor-gen_o4j7vqo-8-5 task=forage with Sal tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Naran kind=sick_help favorId=favor-naran_tumen-9-6 task=help Naran with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d19: Desmond kind=food_share favorId=favor-desmond_clarke-19-7 task=share food with Desmond — they're running on empty
+  FAVOR-OFFER d20: Adaeze kind=sick_help favorId=favor-adaeze_nwosu-20-8 task=help Adaeze with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d20: Jovan kind=forage_help favorId=favor-jovan_milic-20-9 task=forage with Jovan tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Claudine kind=food_share favorId=favor-gen_h5f6bee-21-10 task=share food with Claudine — they're running on empty
+  FAVOR-OFFER d21: Sal kind=sick_help favorId=favor-gen_o4j7vqo-21-11 task=help Sal with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d22: Adaeze kind=sick_help favorId=favor-adaeze_nwosu-22-12 task=help Adaeze with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d24: Sal kind=food_share favorId=favor-gen_o4j7vqo-24-13 task=share food with Sal — they're going hungry
+  FAVOR-OFFER d25: Catalina kind=forage_help favorId=favor-catalina_reyes-25-14 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d25: Ursula kind=food_share favorId=favor-gen_6kpn8dz-25-15 task=share food with Ursula — they're going hungry
+  FAVOR-OFFER d26: Naran kind=forage_help favorId=favor-naran_tumen-26-16 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Harry kind=food_share favorId=favor-gen_an1xl8m-28-17 task=share food with Harry — they're going hungry
+  FAVOR-OFFER d30: Catalina kind=forage_help favorId=favor-catalina_reyes-30-18 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Dale kind=heal_help favorId=favor-dale_hoffman-31-19 task=help Dale with their injury
+  FAVOR-OFFER d31: Harry kind=food_share favorId=favor-gen_an1xl8m-31-20 task=share food with Harry — they're running on empty
+  FAVOR-OFFER d33: Sal kind=heal_help favorId=favor-gen_o4j7vqo-33-21 task=help Sal with their injury
+  FAVOR-OFFER d34: Aisling kind=heal_help favorId=favor-gen_y5smbnt-34-22 task=help Aisling with their injury
+  FAVOR-OFFER d35: Desmond kind=food_share favorId=favor-desmond_clarke-35-23 task=share food with Desmond — they're running on empty
+  FAVOR-OFFER d36: Dale kind=food_share favorId=favor-dale_hoffman-36-24 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d37: Harry kind=food_share favorId=favor-gen_an1xl8m-37-25 task=share food with Harry — they're running on empty
+  FAVOR-OFFER d37: Harry kind=food_share favorId=favor-gen_an1xl8m-37-26 task=share food with Harry — they're running on empty
+  FAVOR-OFFER d38: Aisling kind=forage_help favorId=favor-gen_y5smbnt-38-27 task=forage with Aisling tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Jovan kind=sick_help favorId=favor-jovan_milic-42-28 task=help Jovan with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d42: Ursula kind=forage_help favorId=favor-gen_6kpn8dz-42-29 task=forage with Ursula tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Sal kind=food_share favorId=favor-gen_o4j7vqo-44-30 task=share food with Sal — they're past hungry
+  FAVOR-OFFER d45: Aisling kind=food_share favorId=favor-gen_y5smbnt-45-31 task=share food with Aisling — they're past hungry
+  FAVOR-OFFER d47: Naran kind=sick_help favorId=favor-naran_tumen-47-32 task=help Naran with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d47: Dale kind=food_share favorId=favor-dale_hoffman-47-33 task=share food with Dale — they're past hungry
+  FAVOR-OFFER d48: Adaeze kind=water_haul favorId=favor-adaeze_nwosu-48-34 task=bring four liters home from the creek with Adaeze; set out at dawn
+  FAVOR-OFFER d50: Naran kind=sick_help favorId=favor-naran_tumen-50-35 task=help Naran with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d51: Sal kind=water_haul favorId=favor-gen_o4j7vqo-51-36 task=bring four liters home from the creek with Sal; set out at dawn
+  FAVOR-OFFER d51: Adaeze kind=water_haul favorId=favor-adaeze_nwosu-51-37 task=bring four liters home from the creek with Adaeze; set out at dawn
+  FAVOR-OFFER d51: Aisling kind=water_haul favorId=favor-gen_y5smbnt-51-38 task=bring four liters home from the creek with Aisling; set out at dawn
+  FAVOR-OFFER d52: Naran kind=sick_help favorId=favor-naran_tumen-52-39 task=help Naran with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d52: Sal kind=water_haul favorId=favor-gen_o4j7vqo-52-40 task=bring four liters home from the creek with Sal; set out at dawn
+  FAVOR-OFFER d53: Harry kind=forage_help favorId=favor-gen_an1xl8m-53-41 task=forage with Harry tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Dale kind=food_share favorId=favor-dale_hoffman-53-42 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d54: Adaeze kind=food_share favorId=favor-adaeze_nwosu-54-43 task=share food with Adaeze — they're going hungry
+  FAVOR-OFFER d55: Desmond kind=forage_help favorId=favor-desmond_clarke-55-44 task=forage with Desmond tomorrow to rebuild the pantry
+  FAVOR-OFFER d56: Ursula kind=food_share favorId=favor-gen_6kpn8dz-56-45 task=share food with Ursula — they're past hungry
+  FAVOR-OFFER d56: Naran kind=water_haul favorId=favor-naran_tumen-56-46 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d56: Aisling kind=water_haul favorId=favor-gen_y5smbnt-56-47 task=bring four liters home from the creek with Aisling; set out at dawn
+  FAVOR-OFFER d57: Adaeze kind=forage_help favorId=favor-adaeze_nwosu-57-48 task=forage with Adaeze tomorrow to rebuild the pantry
+  FAVOR-OFFER d58: Sal kind=forage_help favorId=favor-gen_o4j7vqo-58-49 task=forage with Sal tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Sal kind=forage_help favorId=favor-gen_o4j7vqo-65-50 task=forage with Sal tomorrow to rebuild the pantry
+  FAVOR-OFFER d66: Dale kind=food_share favorId=favor-dale_hoffman-66-51 task=share food with Dale — they're running on empty
+  FAVOR-OFFER d67: Ursula kind=heal_help favorId=favor-gen_6kpn8dz-67-52 task=help Ursula with their injury
+  FAVOR-OFFER d68: Harry kind=food_share favorId=favor-gen_an1xl8m-68-53 task=share food with Harry — they're past hungry
+  FAVOR-OFFER d70: Ursula kind=water_haul favorId=favor-gen_6kpn8dz-70-54 task=bring four liters home from the creek with Ursula; set out at dawn
+  FAVOR-OFFER d70: Adaeze kind=water_haul favorId=favor-adaeze_nwosu-70-55 task=bring four liters home from the creek with Adaeze; set out at dawn
+  FAVOR-OFFER d70: Sal kind=food_share favorId=favor-gen_o4j7vqo-70-56 task=share food with Sal — they're going hungry
+  FAVOR-OFFER d71: Naran kind=water_haul favorId=favor-naran_tumen-71-57 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d73: Dale kind=food_share favorId=favor-dale_hoffman-73-58 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d73: Adaeze kind=food_share favorId=favor-adaeze_nwosu-73-59 task=share food with Adaeze — they're past hungry
+  FAVOR-OFFER d74: Naran kind=water_haul favorId=favor-naran_tumen-74-60 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d75: Adaeze kind=food_share favorId=favor-adaeze_nwosu-75-61 task=share food with Adaeze — they're past hungry
+  FAVOR-OFFER d76: Sal kind=water_haul favorId=favor-gen_o4j7vqo-76-62 task=bring four liters home from the creek with Sal; set out at dawn
+  FAVOR-OFFER d78: Chantal kind=heal_help favorId=favor-chantal_mukendi-78-63 task=help Chantal with their injury
+  FAVOR-OFFER d80: Dale kind=forage_help favorId=favor-dale_hoffman-80-64 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d81: Naran kind=forage_help favorId=favor-naran_tumen-81-65 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d84: Adaeze kind=water_haul favorId=favor-adaeze_nwosu-84-66 task=bring four liters home from the creek with Adaeze; set out at dawn
+  FAVOR-OFFER d84: Harry kind=water_haul favorId=favor-gen_an1xl8m-84-67 task=bring four liters home from the creek with Harry; set out at dawn
+  FAVOR-OFFER d85: Sal kind=food_share favorId=favor-gen_o4j7vqo-85-68 task=share food with Sal — they're running on empty
+  FAVOR-OFFER d87: Chantal kind=sick_help favorId=favor-chantal_mukendi-87-69 task=help Chantal with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d87: Marouane kind=forage_help favorId=favor-app_mgpsphpa552-87-70 task=forage with Marouane tomorrow to rebuild the pantry
+  FAVOR-OFFER d89: Chantal kind=heal_help favorId=favor-chantal_mukendi-89-71 task=help Chantal with their injury
+  FAVOR-OFFER d92: Naran kind=water_haul favorId=favor-naran_tumen-91-72 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d93: Desmond kind=food_share favorId=favor-desmond_clarke-93-73 task=share food with Desmond — they're going hungry
+  FAVOR-OFFER d94: Chantal kind=heal_help favorId=favor-chantal_mukendi-94-74 task=help Chantal with their injury
+  FAVOR-OFFER d94: Marouane kind=heal_help favorId=favor-app_mgpsphpa552-94-75 task=help Marouane with their injury
+  FAVOR-OFFER d100: Desmond kind=water_haul favorId=favor-desmond_clarke-100-76 task=bring four liters home from the creek with Desmond; set out at dawn
+  FAVOR-OFFER d102: Onni kind=heal_help favorId=favor-onni_korhonen-102-77 task=help Onni with their injury
+  FAVOR-OFFER d103: Naran kind=food_share favorId=favor-naran_tumen-103-78 task=share food with Naran — they're going hungry
+  FAVOR-OFFER d103: David kind=sick_help favorId=favor-david_kim-103-79 task=help David with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d104: Desmond kind=food_share favorId=favor-desmond_clarke-104-80 task=share food with Desmond — they're going hungry
+  FAVOR-OFFER d108: Desmond kind=water_haul favorId=favor-desmond_clarke-108-81 task=bring four liters home from the creek with Desmond; set out at dawn
+  FAVOR-OFFER d110: Onni kind=food_share favorId=favor-onni_korhonen-110-82 task=share food with Onni — they're going hungry
+  FAVOR-OFFER d116: Naran kind=forage_help favorId=favor-naran_tumen-116-83 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d116: Adaeze kind=forage_help favorId=favor-adaeze_nwosu-116-84 task=forage with Adaeze tomorrow to rebuild the pantry
+  FAVOR-OFFER d118: Desmond kind=food_share favorId=favor-desmond_clarke-118-85 task=share food with Desmond — they're running on empty
+  FAVOR-OFFER d121: Desmond kind=food_share favorId=favor-desmond_clarke-121-86 task=share food with Desmond — they're going hungry
+  FAVOR-OFFER d121: Naran kind=water_haul favorId=favor-naran_tumen-121-87 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d124: Naran kind=food_share favorId=favor-naran_tumen-124-89 task=share food with Naran — they're going hungry
+  FAVOR-OFFER d124: Desmond kind=food_share favorId=favor-desmond_clarke-124-88 task=share food with Desmond — they're going hungry
+  FAVOR-OFFER d127: Naran kind=food_share favorId=favor-naran_tumen-127-90 task=share food with Naran — they're going hungry
+  FAVOR-OFFER d128: Desmond kind=water_haul favorId=favor-desmond_clarke-128-91 task=bring four liters home from the creek with Desmond; set out at dawn
+  FAVOR-OFFER d131: Naran kind=food_share favorId=favor-naran_tumen-131-92 task=share food with Naran — they're running on empty
+  FAVOR-OFFER d132: Desmond kind=food_share favorId=favor-desmond_clarke-132-93 task=share food with Desmond — they're past hungry
+  FAVOR-OFFER d136: Christo kind=food_share favorId=favor-visjoin_132-136-94 task=share food with Christo — they're running on empty
+  FAVOR-ACCEPT d5: Aisling favorId=favor-gen_y5smbnt-2-1 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d8: Sal favorId=favor-gen_o4j7vqo-8-5 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d20: Jovan favorId=favor-jovan_milic-20-9 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d25: Catalina favorId=favor-catalina_reyes-25-14 accepted=true state=promised meetDay=26
+  FAVOR-ACCEPT d26: Naran favorId=favor-naran_tumen-26-16 accepted=true state=promised meetDay=27
+  FAVOR-ACCEPT d30: Catalina favorId=favor-catalina_reyes-30-18 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d38: Aisling favorId=favor-gen_y5smbnt-38-27 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d42: Ursula favorId=favor-gen_6kpn8dz-42-29 accepted=true state=promised meetDay=43
+  FAVOR-ACCEPT d53: Harry favorId=favor-gen_an1xl8m-53-41 accepted=true state=promised meetDay=54
+  FAVOR-ACCEPT d55: Desmond favorId=favor-desmond_clarke-55-44 accepted=true state=promised meetDay=56
+  FAVOR-ACCEPT d57: Adaeze favorId=favor-adaeze_nwosu-57-48 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d58: Sal favorId=favor-gen_o4j7vqo-58-49 accepted=true state=promised meetDay=59
+  FAVOR-ACCEPT d65: Sal favorId=favor-gen_o4j7vqo-65-50 accepted=true state=promised meetDay=66
+  FAVOR-ACCEPT d80: Dale favorId=favor-dale_hoffman-80-64 accepted=true state=promised meetDay=81
+  FAVOR-ACCEPT d81: Naran favorId=favor-naran_tumen-81-65 accepted=true state=promised meetDay=82
+  FAVOR-ACCEPT d87: Marouane favorId=favor-app_mgpsphpa552-87-70 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d116: Naran favorId=favor-naran_tumen-116-83 accepted=true state=promised meetDay=117
+  FAVOR-ACCEPT d116: Adaeze favorId=favor-adaeze_nwosu-116-84 accepted=true state=promised meetDay=117
+  INVITE-DEC d8 party: Michelle -> Sal chance=53 accept=true veto=- inputs={"temp":"stoic","goal":"record","mood":"steady","fear":12,"trust":45,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 45"]
+  INVITE-DEC d9 party: Michelle -> Adaeze chance=60.8 accept=false veto=- inputs={"temp":"anxious","goal":"protect","mood":"steady","fear":0,"trust":27,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 27","protect goal (+15)"]
+  INVITE-DEC d9 party: Michelle -> Naran chance=5 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"steady","fear":0,"trust":22,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 22","sick (-20)","wants to be alone (-40)"]
+  INVITE-DEC d10 party: Michelle -> Catalina chance=74 accept=true veto=- inputs={"temp":"bold","goal":"peace","mood":"steady","fear":0,"trust":60,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 60","bold temperament (+15)"]
+  INVITE-DEC d31 party: Michelle -> Adaeze chance=74.6 accept=false veto=- inputs={"temp":"anxious","goal":"protect","mood":"steady","fear":0,"trust":49,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 49","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d33 party: Michelle -> Jovan chance=91 accept=true veto=- inputs={"temp":"bold","goal":"answers","mood":"steady","fear":0,"trust":90,"bond":{"v":19,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d43 party: Michelle -> Adaeze chance=63.8 accept=true veto=- inputs={"temp":"anxious","goal":"protect","mood":"grieving","fear":49,"trust":47,"bond":{"v":24,"depth":0},"partySize":3} reasons=["trust 47","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d43 party: Michelle -> Naran chance=25.599999999999994 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":49,"trust":64,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 64","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Michelle -> Dale chance=74.4 accept=true veto=- inputs={"temp":"dry","goal":"family","mood":"grieving","fear":21,"trust":86,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 86","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d62 party: Aisling -> Harry chance=86.4 accept=true veto=- inputs={"temp":"restless","goal":"heal","mood":"grieving","fear":28,"trust":91,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d74 party: Ursula -> Naran chance=33.2 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":48,"trust":83,"bond":{"v":55,"depth":2},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d75 party: Ursula -> Desmond chance=86.4 accept=true veto=- inputs={"temp":"restless","goal":"family","mood":"grieving","fear":21,"trust":91,"bond":{"v":68,"depth":2},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d89 party: Sal -> Marouane chance=60.400000000000006 accept=false veto=- inputs={"temp":"fidgety","goal":"peace","mood":"grieving","fear":30,"trust":76,"bond":{"v":20,"depth":0},"partySize":3} reasons=["trust 76","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d89 party: Sal -> Chantal chance=73.8 accept=true veto=- inputs={"temp":"steady","goal":"protect","mood":"grieving","fear":30,"trust":72,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 72","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d93 party: Sal -> Naran chance=46 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"steady","fear":12,"trust":90,"bond":{"v":41,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d95 party: Sal -> Marouane chance=76.4 accept=false veto=- inputs={"temp":"fidgety","goal":"peace","mood":"steady","fear":4,"trust":91,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 91","a big party is safer (+5)"]
+  INVITE-DEC d96 party: Dale -> Marouane chance=76.4 accept=true veto=- inputs={"temp":"fidgety","goal":"peace","mood":"grieving","fear":48,"trust":91,"bond":{"v":30,"depth":1},"partySize":3} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d97 party: Dale -> Naran chance=36 accept=false veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":20,"trust":90,"bond":{"v":47,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d100 party: Dale -> Naran chance=25.400000000000006 accept=true veto=- inputs={"temp":"dry","goal":"alone","mood":"grieving","fear":42,"trust":76,"bond":{"v":51,"depth":2},"partySize":2} reasons=["trust 76","a real bond (+10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d102 party: Dale -> Katarina chance=69.6 accept=true veto=- inputs={"temp":"bold","goal":"protect","mood":"grieving","fear":4,"trust":24,"bond":null,"partySize":3} reasons=["trust 24","a big party is safer (+5)","bold temperament (+15)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d104 party: Dale -> Onni chance=29.6 accept=false veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":49,"trust":24,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 24","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d106 party: Dale -> Onni chance=37.6 accept=true veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":4,"trust":44,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 44","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d107 party: Dale -> Priya chance=71.8 accept=false veto=- inputs={"temp":"intense","goal":"protect","mood":"steady","fear":4,"trust":42,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 42","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d108 party: Dale -> David chance=29.6 accept=false veto=- inputs={"temp":"cautious","goal":"legacy","mood":"grieving","fear":17,"trust":24,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 24","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d111 party: Dale -> David chance=57.599999999999994 accept=true veto=- inputs={"temp":"cautious","goal":"legacy","mood":"steady","fear":0,"trust":69,"bond":{"v":10,"depth":0},"partySize":4} reasons=["trust 69","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d134 party: Desmond -> Christo chance=34.6 accept=false veto=- inputs={"temp":"intense","goal":"prove","mood":"grieving","fear":12,"trust":24,"bond":null,"partySize":0} reasons=["trust 24","grieving mood (-10)"]
+  INVITE-DEC d136 party: Desmond -> Christo chance=52.2 accept=true veto=- inputs={"temp":"intense","goal":"prove","mood":"hungry","fear":4,"trust":43,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 43"]
+SEEDED-DAILY: [{"day":25,"v":38,"depth":2},{"day":26,"v":40,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":45,"depth":2},{"day":30,"v":45,"depth":2},{"day":30,"v":45,"depth":2},{"day":31,"v":45,"depth":2},{"day":33,"v":47,"depth":2},{"day":33,"v":47,"depth":2},{"day":34,"v":49,"depth":2},{"day":35,"v":53,"depth":3},{"day":36,"v":55,"depth":3},{"day":37,"v":59,"depth":3},{"day":38,"v":63,"depth":3}] class=no-drop
+GOSSIP: totalPicks=120 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=21 31-60=29 61-90=30 91-120=33 121+=12 naturalPicks=125 seededPicks=29 gossipPicks=120
+SEEDED: {"pair":{"a":"gen_o4j7vqo","b":"gen_y5smbnt","aName":"Sal","bName":"Aisling"},"day":24,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":25,"v":38,"depth":2},{"day":26,"v":40,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":45,"depth":2},{"day":30,"v":45,"depth":2},{"day":30,"v":45,"depth":2},{"day":31,"v":45,"depth":2},{"day":33,"v":47,"depth":2},{"day":33,"v":47,"depth":2},{"day":34,"v":49,"depth":2},{"day":35,"v":53,"depth":3},{"day":36,"v":55,"depth":3},{"day":37,"v":59,"depth":3},{"day":38,"v":63,"depth":3}],"crackTraceClass":"no-drop","vAt7":45,"depthAt7":2,"vDrop":5,"depthDrop":0,"crack7":false,"firstServe":{"day":25,"why":"vgrievance"},"serveWithin30":true,"serves":33,"servesAll":[{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":54,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Ursula <> Aisling — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Sal <> Aisling — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Ursula <> Sal — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d35: Harry <> Sal — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Dale <> Aisling — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Adaeze <> Aisling — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Adaeze <> Harry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Adaeze <> Ursula — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Aisling <> Naran — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d60: Ursula <> Naran — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d70: Adaeze <> Desmond — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Desmond <> Harry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Desmond <> Ursula — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d75: Adaeze <> Sal — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d30: Harry <> Aisling — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Ursula <> Harry — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d90: Dale <> Ursula — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d90: Adaeze <> Dale — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d80: Dale <> Sal — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d50: Desmond <> Aisling — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d105: Desmond <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Adaeze <> Naran — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Dale <> Desmond — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d120: Dale <> Naran — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d65: Dale <> Harry — maxDepth 3, final 3 (v=75), dropped 0
+  FRIEND d65: Catalina <> Michelle — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d65: Harry <> Michelle — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d65: Michelle <> Sal — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Ursula <> Michelle — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d65: Michelle <> Naran — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d65: Dale <> Michelle — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d65: Adaeze <> Michelle — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d75: Michelle <> Aisling — maxDepth 3, final 3 (v=83), dropped 0
+  CLOSE-READ d16: Sal about Aisling — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Aisling about Sal — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Aisling about Sal — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Dale about Aisling — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Sal about Aisling — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Aisling about Sal — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Sal about Aisling — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Ursula about Aisling — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Aisling about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Ursula about Aisling — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Desmond about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Aisling about Harry — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Ursula about Aisling — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Desmond about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Dale about Aisling — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Naran about Aisling — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Aisling about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Ursula about Aisling — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Adaeze about Aisling — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Naran about Aisling — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Adaeze about Aisling — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Dale about Aisling — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Naran about Aisling — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Aisling about Sal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Ursula about Aisling — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Adaeze about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Adaeze about Aisling — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Dale about Aisling — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Naran about Ursula — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Ursula about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Dale about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Dale about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Sal about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Dale about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Harry about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Dale about Harry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Sal about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Naran about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d82: Adaeze about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Desmond about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Adaeze about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Harry about Sal — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Adaeze about Harry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Dale about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Dale about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Dale about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Dale about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Dale about Desmond — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Dale about Desmond — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Dale about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Naran about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Onni about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: David about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d115: Adaeze about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Desmond about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Desmond about Naran — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Desmond about Naran — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Naran about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Naran about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Naran about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Naran about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Naran about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Desmond about Naran — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Naran about Desmond — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d25 (betrayal): Sal vs Aisling (ambushed) depth 2 v 38 -> 45
+  GRIEV-READ d4: Catalina about A woman, maybe 20s (why=grievance)
+  GRIEV-READ d10: Catalina about Adaeze (why=grievance)
+  GRIEV-READ d15: Catalina about Adaeze (why=grievance)
+  GRIEV-READ d25: Sal about Aisling (why=vgrievance)
+  GRIEV-READ d25: Catalina about Adaeze (why=grievance)
+  GRIEV-READ d26: Sal about Aisling (why=vgrievance)
+  KNACK d14 Ursula: "Naran talks to the garden. The garden listens. I've seen it."
+  KNACK d21 Claudine: "Dale talks to the garden. The garden listens. I've seen it."
+  KNACK d24 Naran: "Good question." "Sal ate something last month that should've killed them. They're fine."
+  KNACK d27 Desmond: "Naran talks to the garden. The garden listens. I've seen it."
+  KNACK d38 Dale: "that stray dog — the one that bit two people — lets Catalina touch it. Just... be straight with me."
+  KNACK d39 Desmond: "Aisling ate something last month that should've killed them. They're fine."
+  KNACK d42 Sal: "Huh. Let me think about that." "Ursula talks to the garden. The garden listens. I've seen it."
+  KNACK d44 Naran: "Between us — Adaeze talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"a wound that wouldn't close":1,"sickness":1,"combat":2,"the wild":5,"dehydration":2,"the arena":1,"monster":6}

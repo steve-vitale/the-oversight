@@ -1,0 +1,231 @@
+# SURFACE+SEEDED — seed 6704 (141d, 5 alive)
+
+npcPairs=89 deep2=27 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=163 closeReadsServed=29 grievanceServes=52 othersSteered=158
+COND-TP: firstDeep2Day=25 lateClose=71 lateTP=63 lateNull=0 condRate=88.7% pooledTP=63/79 pooledRate=79.7% grievReadsByWhy={"grievance":0,"vgrievance":69}
+FUNNEL (natural): convos=414 subject=378 offered=338 picked=139 classes={"offered-not-picked":34,"subject-no-offer":41,"picked-others":139,"offered-capped":165,"no-subject-ans":2,"no-subject-no-ans":33}
+FUNNEL-UNSTEERED (r55 strict): convos=280 subjectNoOffer=41 rate=14.6% offered=204 mainOffered=14 subjectOffered=197 picked=5 latePicks=2 latePicksMain=0 latePicksSubject=2
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Alfredo / Yuki — "cuts close faster when Oliver wraps them. Don't ask me how."
+REOFFER: offers=338 picks=151 latePicks=49 missedChangedNotOffered=11
+WRAPSERVE: convos=69 matcherHits=52 matcherServes=52 classes={"grievance-line":52,"deflection":0,"other":17}
+FUNNEL-PROBE (subject-no-offer turns): turns=128 menuProblem=103 pickProblem=25
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":2,"acceptRate":0.4,"vetoes":{},"chanceMin":52,"chanceMax":52,"chanceMean":52} party={"n":14,"accepts":9,"acceptRate":0.6428571428571429,"vetoes":{},"chanceMin":25.799999999999997,"chanceMax":91.6,"chanceMean":58.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+FAVOR (r65): funnel={"offers":42,"forageOffers":19,"otherFavorOffers":23,"accepts":20,"acceptAttempts":20,"waits":20,"starts":15,"startBlocked":16,"forages":13,"forageNodeBarren":11,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":5,"retryAssigned":5,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":13,"delivers":13,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":13,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r77): snaps=6 betrayalOfferConvos=134 mootOffers=2 mootProbePicks=[{"day":12,"vid":"xavier_dubois","vidName":"Xavier","caseId":"case_2"},{"day":13,"vid":"gen_r9t4izs","vidName":"Sam","caseId":"case_4"}] mootsConvened=0
+  CASE-SNAP d10: case_2 status=open charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d11: case_2 status=open charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d11: case_4 status=open charge=murder accused=Xavier/Yuki/Ethan target=Mi-kyung role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=acquitted charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_4 status=open charge=murder accused=Xavier/Yuki/Ethan target=Mi-kyung role=juror known=true mootIn=null trial=false
+  CASE-SNAP d13: case_2 status=acquitted charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_4 status=resolved charge=murder accused=Xavier/Yuki/Ethan target=Mi-kyung role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_2 status=acquitted charge=ambush accused=Xavier/Ethan/Yuki target=Mi-kyung role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_4 status=resolved charge=murder accused=Xavier/Yuki/Ethan target=Mi-kyung role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"somchai_prasert","vidName":"Somchai","favorId":"favor-somchai_prasert-132-37","state":"acknowledged","promisedDay":133,"meetDay":134,"deadline":134,"promiseKept":"broken","startedDay":134,"forageCount":2,"playerKcal":195,"partnerKcal":255,"deliveredKcal":450,"returnedDay":135,"talkCount":1},{"vid":"oliver_moore","vidName":"Oliver","favorId":"favor-oliver_moore-138-42","state":"moot","promisedDay":138,"meetDay":139,"deadline":140,"promiseKept":"released","startedDay":140,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d5: Joshua kind=forage_help favorId=favor-gen_u47vyo8-5-1 task=forage with Joshua tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Yuki kind=sick_help favorId=favor-yuki_mori-9-2 task=help Yuki with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d11: Sam kind=heal_help favorId=favor-gen_r9t4izs-11-3 task=help Sam with their injury
+  FAVOR-OFFER d18: Yuki kind=forage_help favorId=favor-yuki_mori-18-4 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d23: Alfredo kind=food_share favorId=favor-gen_xbyfaop-23-5 task=share food with Alfredo — they're going hungry
+  FAVOR-OFFER d23: Somchai kind=food_share favorId=favor-somchai_prasert-23-6 task=share food with Somchai — they're running on empty
+  FAVOR-OFFER d24: Alfredo kind=sick_help favorId=favor-gen_xbyfaop-24-7 task=help Alfredo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d26: Raushan kind=forage_help favorId=favor-gen_1q7v728-26-8 task=forage with Raushan tomorrow to rebuild the pantry
+  FAVOR-OFFER d27: Alfredo kind=food_share favorId=favor-gen_xbyfaop-27-9 task=share food with Alfredo — they're going hungry
+  FAVOR-OFFER d27: Oliver kind=food_share favorId=favor-oliver_moore-27-10 task=share food with Oliver — they're going hungry
+  FAVOR-OFFER d29: Somchai kind=forage_help favorId=favor-somchai_prasert-29-11 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d33: Alfredo kind=forage_help favorId=favor-gen_xbyfaop-33-12 task=forage with Alfredo tomorrow to rebuild the pantry
+  FAVOR-OFFER d36: Oliver kind=forage_help favorId=favor-oliver_moore-36-13 task=forage with Oliver tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Alfredo kind=forage_help favorId=favor-gen_xbyfaop-37-14 task=forage with Alfredo tomorrow to rebuild the pantry
+  FAVOR-OFFER d39: Alfredo kind=heal_help favorId=favor-gen_xbyfaop-39-15 task=help Alfredo with their injury
+  FAVOR-OFFER d39: Oliver kind=sick_help favorId=favor-oliver_moore-39-16 task=help Oliver with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d41: Yuki kind=forage_help favorId=favor-yuki_mori-41-17 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Oliver kind=forage_help favorId=favor-oliver_moore-43-18 task=forage with Oliver tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Somchai kind=forage_help favorId=favor-somchai_prasert-46-20 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d47: Esther kind=forage_help favorId=favor-visjoin_23-45-19 task=forage with Esther tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Somchai kind=forage_help favorId=favor-somchai_prasert-52-21 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Raushan kind=food_share favorId=favor-gen_1q7v728-53-22 task=share food with Raushan — they're past hungry
+  FAVOR-OFFER d59: Somchai kind=forage_help favorId=favor-somchai_prasert-59-23 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Joshua kind=food_share favorId=favor-gen_u47vyo8-65-24 task=share food with Joshua — they're going hungry
+  FAVOR-OFFER d90: Raushan kind=forage_help favorId=favor-gen_1q7v728-90-25 task=forage with Raushan tomorrow to rebuild the pantry
+  FAVOR-OFFER d90: Oliver kind=forage_help favorId=favor-oliver_moore-90-26 task=forage with Oliver tomorrow to rebuild the pantry
+  FAVOR-OFFER d91: Abigail kind=forage_help favorId=favor-visjoin_83-91-27 task=forage with Abigail tomorrow to rebuild the pantry
+  FAVOR-OFFER d94: Esther kind=forage_help favorId=favor-visjoin_23-94-28 task=forage with Esther tomorrow to rebuild the pantry
+  FAVOR-OFFER d99: Raushan kind=food_share favorId=favor-gen_1q7v728-99-29 task=share food with Raushan — they're past hungry
+  FAVOR-OFFER d105: Oliver kind=sick_help favorId=favor-oliver_moore-105-30 task=help Oliver with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d111: Yuki kind=food_share favorId=favor-yuki_mori-111-31 task=share food with Yuki — they're going hungry
+  FAVOR-OFFER d112: Raushan kind=food_share favorId=favor-gen_1q7v728-112-32 task=share food with Raushan — they're going hungry
+  FAVOR-OFFER d117: Yuki kind=sick_help favorId=favor-yuki_mori-117-33 task=help Yuki with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d118: Esther kind=water_haul favorId=favor-visjoin_23-118-34 task=bring four liters home from the creek with Esther; set out at dawn
+  FAVOR-OFFER d130: Oliver kind=water_haul favorId=favor-oliver_moore-130-35 task=bring four liters home from the creek with Oliver; set out at dawn
+  FAVOR-OFFER d131: Esther kind=water_haul favorId=favor-visjoin_23-131-36 task=bring four liters home from the creek with Esther; set out at dawn
+  FAVOR-OFFER d133: Somchai kind=forage_help favorId=favor-somchai_prasert-132-37 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d133: Yuki kind=water_haul favorId=favor-yuki_mori-133-38 task=bring four liters home from the creek with Yuki; set out at dawn
+  FAVOR-OFFER d136: Abigail kind=water_haul favorId=favor-visjoin_83-136-40 task=bring four liters home from the creek with Abigail; set out at dawn
+  FAVOR-OFFER d136: Esther kind=food_share favorId=favor-visjoin_23-136-41 task=share food with Esther — they're going hungry
+  FAVOR-OFFER d137: Shona kind=heal_help favorId=favor-visjoin_132-135-39 task=help Shona with their injury
+  FAVOR-OFFER d138: Oliver kind=forage_help favorId=favor-oliver_moore-138-42 task=forage with Oliver tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d18: Yuki favorId=favor-yuki_mori-18-4 accepted=true state=promised meetDay=19
+  FAVOR-ACCEPT d26: Raushan favorId=favor-gen_1q7v728-26-8 accepted=true state=promised meetDay=27
+  FAVOR-ACCEPT d29: Somchai favorId=favor-somchai_prasert-29-11 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d33: Alfredo favorId=favor-gen_xbyfaop-33-12 accepted=true state=promised meetDay=34
+  FAVOR-ACCEPT d35: Yuki favorId=favor-yuki_mori-18-4 accepted=true state=promised meetDay=36
+  FAVOR-ACCEPT d36: Oliver favorId=favor-oliver_moore-36-13 accepted=true state=promised meetDay=37
+  FAVOR-ACCEPT d37: Alfredo favorId=favor-gen_xbyfaop-37-14 accepted=true state=promised meetDay=38
+  FAVOR-ACCEPT d41: Yuki favorId=favor-yuki_mori-41-17 accepted=true state=promised meetDay=42
+  FAVOR-ACCEPT d43: Oliver favorId=favor-oliver_moore-43-18 accepted=true state=promised meetDay=44
+  FAVOR-ACCEPT d46: Somchai favorId=favor-somchai_prasert-46-20 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d47: Esther favorId=favor-visjoin_23-45-19 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d49: Joshua favorId=favor-gen_u47vyo8-5-1 accepted=true state=promised meetDay=50
+  FAVOR-ACCEPT d52: Somchai favorId=favor-somchai_prasert-52-21 accepted=true state=promised meetDay=53
+  FAVOR-ACCEPT d59: Somchai favorId=favor-somchai_prasert-59-23 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d90: Raushan favorId=favor-gen_1q7v728-90-25 accepted=true state=promised meetDay=91
+  FAVOR-ACCEPT d90: Oliver favorId=favor-oliver_moore-90-26 accepted=true state=promised meetDay=91
+  FAVOR-ACCEPT d91: Abigail favorId=favor-visjoin_83-91-27 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d94: Esther favorId=favor-visjoin_23-94-28 accepted=true state=promised meetDay=95
+  FAVOR-ACCEPT d133: Somchai favorId=favor-somchai_prasert-132-37 accepted=true state=promised meetDay=134
+  FAVOR-ACCEPT d138: Oliver favorId=favor-oliver_moore-138-42 accepted=true state=promised meetDay=139
+  INVITE-DEC d6 lure: Yuki -> Mi-kyung chance=52 accept=false veto=- inputs={"temp":"gentle","goal":"answers","mood":"steady","fear":4,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d7 lure: Yuki -> Mi-kyung chance=52 accept=false veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":0,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d8 party: Niamh -> Sam chance=31 accept=true veto=- inputs={"temp":"steady","goal":"heal","mood":"hungry","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40","sick (-20)"]
+  INVITE-DEC d8 lure: Yuki -> Mi-kyung chance=52 accept=false veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":4,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d9 lure: Yuki -> Mi-kyung chance=52 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":0,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d10 party: Niamh -> Raushan chance=44.6 accept=true veto=- inputs={"temp":"earnest","goal":"joy","mood":"steady","fear":0,"trust":24,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 24"]
+  INVITE-DEC d10 party: Niamh -> Oliver chance=53 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":0,"trust":45,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 45"]
+  INVITE-DEC d10 lure: Yuki -> Mi-kyung chance=52 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":4,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d11 party: Niamh -> Yuki chance=25.799999999999997 accept=false veto=- inputs={"temp":"cautious","goal":"home","mood":"grieving","fear":17,"trust":27,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 27","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d13 party: Niamh -> Somchai chance=57.4 accept=false veto=- inputs={"temp":"restless","goal":"legacy","mood":"steady","fear":0,"trust":31,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 31","restless temperament (+10)"]
+  INVITE-DEC d14 party: Niamh -> Joshua chance=62.6 accept=true veto=- inputs={"temp":"steady","goal":"answers","mood":"steady","fear":4,"trust":69,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 69"]
+  INVITE-DEC d15 party: Niamh -> Alfredo chance=60 accept=true veto=- inputs={"temp":"anxious","goal":"record","mood":"grieving","fear":37,"trust":75,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 75","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d21 party: Sam -> Oliver chance=48.400000000000006 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":5,"trust":46,"bond":{"v":20,"depth":0},"partySize":3} reasons=["trust 46","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Sam -> Somchai chance=90 accept=false veto=- inputs={"temp":"restless","goal":"legacy","mood":"steady","fear":4,"trust":75,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 75","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d32 party: Sam -> Esther chance=56 accept=false veto=- inputs={"temp":"steady","goal":"record","mood":"steady","fear":4,"trust":40,"bond":{"v":7,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)"]
+  INVITE-DEC d34 party: Sam -> Somchai chance=91.6 accept=true veto=- inputs={"temp":"restless","goal":"legacy","mood":"steady","fear":4,"trust":79,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 79","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d83 party: Alfredo -> Esther chance=76 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":0,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d87 party: Alfredo -> Yuki chance=57.599999999999994 accept=true veto=- inputs={"temp":"cautious","goal":"home","mood":"grieving","fear":17,"trust":69,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 69","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d119 party: Raushan -> Andrea chance=66 accept=true veto=- inputs={"temp":"stoic","goal":"record","mood":"grieving","fear":64,"trust":90,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":22,"v":40,"depth":3},{"day":23,"v":44,"depth":3},{"day":24,"v":50,"depth":3},{"day":25,"v":56,"depth":3},{"day":26,"v":62,"depth":3},{"day":27,"v":62,"depth":3},{"day":28,"v":68,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":74,"depth":3},{"day":31,"v":80,"depth":3},{"day":32,"v":80,"depth":3},{"day":33,"v":80,"depth":3},{"day":34,"v":80,"depth":3},{"day":35,"v":80,"depth":3}] class=rise
+GOSSIP: totalPicks=166 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=28 31-60=29 61-90=30 91-120=30 121+=22 naturalPicks=139 seededPicks=24 gossipPicks=166
+SEEDED: {"pair":{"a":"gen_xbyfaop","b":"somchai_prasert","aName":"Alfredo","bName":"Somchai"},"day":21,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":22,"v":40,"depth":3},{"day":23,"v":44,"depth":3},{"day":24,"v":50,"depth":3},{"day":25,"v":56,"depth":3},{"day":26,"v":62,"depth":3},{"day":27,"v":62,"depth":3},{"day":28,"v":68,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":74,"depth":3},{"day":31,"v":80,"depth":3},{"day":32,"v":80,"depth":3},{"day":33,"v":80,"depth":3},{"day":34,"v":80,"depth":3},{"day":35,"v":80,"depth":3}],"crackTraceClass":"rise","vAt7":56,"depthAt7":3,"vDrop":-4,"depthDrop":-1,"crack7":false,"firstServe":{"day":22,"why":"vgrievance"},"serveWithin30":true,"serves":69,"servesAll":[{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":73,"why":"vgrievance"},{"day":75,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":78,"why":"vgrievance"},{"day":79,"why":"vgrievance"},{"day":80,"why":"vgrievance"},{"day":81,"why":"vgrievance"}],"effect":true}
+  FRIEND d120: Sam <> Alfredo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Raushan <> Alfredo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Alfredo <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Alfredo <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Alfredo <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Oliver <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Sam <> Joshua — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Raushan <> Sam — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d85: Sam <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Sam <> Somchai — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d95: Raushan <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Joshua <> Alfredo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Raushan <> Oliver — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d90: Somchai <> Yuki — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d60: Oliver <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Sam <> Yuki — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d70: Joshua <> Oliver — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d140: Raushan <> Yuki — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d110: Esther <> Yuki — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d50: Alfredo <> Esther — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Somchai <> Esther — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d95: Oliver <> Esther — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d140: Raushan <> Esther — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d85: Sam <> Esther — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d140: Raushan <> Andrea — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d125: Oliver <> Andrea — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d120: Alfredo <> Abigail — maxDepth 2, final 2 (v=66), dropped 0
+  CLOSE-READ d16: Alfredo about Sam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Alfredo about Sam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Alfredo about Sam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Alfredo about Sam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Alfredo about Sam — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Raushan about Alfredo — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Yuki about Alfredo — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Joshua about Alfredo — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Joshua about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Somchai about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Raushan about Alfredo — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Joshua about Alfredo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Oliver about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Joshua about Alfredo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Somchai about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Yuki about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Joshua about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Raushan about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Esther about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Raushan about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Somchai about Alfredo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Yuki about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d84: Yuki about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Joshua about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Joshua about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Yuki about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Esther about Oliver — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Yuki about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Somchai about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Yuki about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Somchai about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Yuki about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Esther about Oliver — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Esther about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Yuki about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Oliver about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Somchai about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Yuki about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Oliver about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Raushan about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Raushan about Somchai — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Raushan about Somchai — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Raushan about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Raushan about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Raushan about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Raushan about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Andrea about Oliver — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d120: Somchai about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Somchai about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Yuki about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Yuki about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Oliver about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Somchai about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Abigail about Oliver — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d140: Somchai about Yuki — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d22: Alfredo about Somchai (why=vgrievance)
+  GRIEV-READ d23: Alfredo about Somchai (why=vgrievance)
+  GRIEV-READ d24: Alfredo about Somchai (why=vgrievance)
+  GRIEV-READ d24: Alfredo about Somchai (why=vgrievance)
+  GRIEV-READ d25: Alfredo about Somchai (why=vgrievance)
+  GRIEV-READ d25: Alfredo about Somchai (why=vgrievance)
+  KNACK d8 Sam: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Xavier touch it."
+  KNACK d17 Alfredo: "Good question." "Mm. Sam sees in the dark. Not well — but better than you. Better than me."
+  KNACK d19 Alfredo: "that stray dog — the one that bit two people — lets Raushan touch it."
+  KNACK d33 Alfredo: "Esther talks to the garden. The garden listens. I've seen it."
+  KNACK d48 Esther: "that stray dog — the one that bit two people — lets Somchai touch it."
+  KNACK d53 Yuki: "You want to know about that? Okay." "Alfredo talks to the garden. The garden listens. I've seen it."
+  KNACK d59 Alfredo: "cuts close faster when Oliver wraps them. Don't ask me how."
+  KNACK d74 Yuki: "cuts close faster when Oliver wraps them. Don't ask me how."
+
+deathCauses: {"ambush":1,"monster":4,"a stranger":2,"the wild":2}
