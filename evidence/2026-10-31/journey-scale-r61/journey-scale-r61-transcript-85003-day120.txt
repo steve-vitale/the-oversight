@@ -1,0 +1,14 @@
+(pre-talk seed: ask_favor planted d115; takenWantDay=0; convoCount=18)
+=== seed 85003 day 120 — conversation with Thabo (thabo_maseko) ===
+occupation=taxi driver temperament=dry trust=91 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+(turn0 choices: goon, dlg:subject, leave, silence)
+YOU: [goon] "Go on. I'm listening."
+THEM: You can feel the history in how they greet you.
+YOU: (leave)
+pre-close: want ask_favor stage 1 thread want
+closing line: "Well. That was almost a conversation. We're improving."

@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 85003 day 90 — conversation with Henry (henry_zhang) ===
+occupation=emergency dispatcher temperament=cautious trust=47 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Do you believe in anything? Now, I mean. After everything. Just... be straight with me."
+(turn0 choices: ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I believe in breakfast. In people showing up. Small, provable things. The big beliefs all broke — the small ones held."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "I'll think about what you said. Carefully. That's how I do things."
