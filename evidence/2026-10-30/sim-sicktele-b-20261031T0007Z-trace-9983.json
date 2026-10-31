@@ -1,0 +1,4039 @@
+{
+  "seed": 9983,
+  "daysCap": 180,
+  "days": 38,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "over": true,
+  "harnessDeaths": [
+    {
+      "day": 3,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "villager",
+      "who": "sam_wilson",
+      "cause": "sickness",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "villager",
+      "who": "gen_mr1pr0r",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "villager",
+      "who": "henry_zhang",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "gen_7cclmvb",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "villager",
+      "who": "gen_925shtf",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "villager",
+      "who": "gen_a29exbk",
+      "cause": "starvation",
+      "player": false
+    }
+  ],
+  "scholarVid": "gen_dcif40j",
+  "finalSnap": {
+    "day": 38,
+    "roster": [
+      "gen_dcif40j",
+      "gen_8hvtc45",
+      "mateo_alvarez",
+      "marcus_webb",
+      "elif_demir",
+      "desmond_clarke"
+    ],
+    "rosterLen": 6,
+    "vpLiving": 6,
+    "gpLiving": 6,
+    "fallen": [
+      "sam_wilson",
+      "gen_mr1pr0r",
+      "henry_zhang",
+      "gen_7cclmvb",
+      "gen_925shtf",
+      "gen_a29exbk"
+    ],
+    "exiles": [],
+    "corpses": [
+      "sam_wilson",
+      "gen_mr1pr0r",
+      "henry_zhang",
+      "gen_7cclmvb",
+      "gen_925shtf",
+      "gen_a29exbk"
+    ],
+    "sick": [
+      "desmond_clarke"
+    ]
+  },
+  "teles": [
+    {
+      "day": 3,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "villager",
+      "who": "sam_wilson",
+      "cause": "sickness",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "villager",
+      "who": "gen_mr1pr0r",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "villager",
+      "who": "henry_zhang",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "gen_7cclmvb",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "villager",
+      "who": "gen_925shtf",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "villager",
+      "who": "gen_a29exbk",
+      "cause": "starvation",
+      "player": false
+    }
+  ],
+  "registers": [
+    {
+      "day": 3,
+      "kind": "monster",
+      "vid": "nightlight_catfish",
+      "cause": "villager combat",
+      "caller": "resolveWildMonsterEncounter"
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "vid": "lockpick_raccoon",
+      "cause": "villager combat",
+      "caller": "resolveWildMonsterEncounter"
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "vid": "glasswing",
+      "cause": "expedition",
+      "caller": "mapmemNoteKill"
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "vid": "rut_king",
+      "cause": "combat",
+      "caller": "tbDamage"
+    },
+    {
+      "day": 24,
+      "kind": "villager",
+      "vid": "sam_wilson",
+      "cause": "sickness",
+      "caller": "hurtVillager"
+    },
+    {
+      "day": 27,
+      "kind": "villager",
+      "vid": "gen_mr1pr0r",
+      "cause": "a wound that wouldn't close",
+      "caller": "villageLives"
+    },
+    {
+      "day": 28,
+      "kind": "villager",
+      "vid": "henry_zhang",
+      "cause": "a wound that wouldn't close",
+      "caller": "villageLives"
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "vid": "gen_7cclmvb",
+      "cause": "starvation",
+      "caller": "hurtVillager"
+    },
+    {
+      "day": 36,
+      "kind": "villager",
+      "vid": "gen_925shtf",
+      "cause": "starvation",
+      "caller": "hurtVillager"
+    },
+    {
+      "day": 37,
+      "kind": "villager",
+      "vid": "gen_a29exbk",
+      "cause": "starvation",
+      "caller": "hurtVillager"
+    }
+  ],
+  "removals": [
+    {
+      "day": 24,
+      "vid": "sam_wilson",
+      "how": "killed",
+      "caller": "hurtVillager",
+      "rosterAfter": false,
+      "gpDeadAfter": true,
+      "vpDeadAfter": true
+    },
+    {
+      "day": 27,
+      "vid": "gen_mr1pr0r",
+      "how": "killed",
+      "caller": "villageLives",
+      "rosterAfter": false,
+      "gpDeadAfter": true,
+      "vpDeadAfter": true
+    },
+    {
+      "day": 28,
+      "vid": "henry_zhang",
+      "how": "killed",
+      "caller": "villageLives",
+      "rosterAfter": false,
+      "gpDeadAfter": true,
+      "vpDeadAfter": true
+    },
+    {
+      "day": 32,
+      "vid": "gen_7cclmvb",
+      "how": "killed",
+      "caller": "hurtVillager",
+      "rosterAfter": false,
+      "gpDeadAfter": true,
+      "vpDeadAfter": true
+    },
+    {
+      "day": 36,
+      "vid": "gen_925shtf",
+      "how": "killed",
+      "caller": "hurtVillager",
+      "rosterAfter": false,
+      "gpDeadAfter": true,
+      "vpDeadAfter": true
+    },
+    {
+      "day": 37,
+      "vid": "gen_a29exbk",
+      "how": "killed",
+      "caller": "hurtVillager",
+      "rosterAfter": false,
+      "gpDeadAfter": true,
+      "vpDeadAfter": true
+    }
+  ],
+  "hurts": [
+    {
+      "day": 3,
+      "vid": "gen_7cclmvb",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 4,
+      "vid": "gen_925shtf",
+      "damage": 36,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 64,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 4,
+      "vid": "gen_8hvtc45",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 88,
+      "healthAfter": 85,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 5,
+      "vid": "gen_mr1pr0r",
+      "damage": 11,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 89,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 5,
+      "vid": "gen_8hvtc45",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 88,
+      "healthAfter": 85,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 5,
+      "vid": "gen_mr1pr0r",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 92,
+      "healthAfter": 89,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 6,
+      "vid": "gen_8hvtc45",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 85,
+      "healthAfter": 85,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 6,
+      "vid": "gen_mr1pr0r",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 92,
+      "healthAfter": 89,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 7,
+      "vid": "mateo_alvarez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 100,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 9,
+      "vid": "marcus_webb",
+      "damage": 55,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 45,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 9,
+      "vid": "henry_zhang",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 86,
+      "healthAfter": 83,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 10,
+      "vid": "sam_wilson",
+      "damage": 42,
+      "cause": "monster",
+      "caller": "expeditionMonster",
+      "healthBefore": null,
+      "healthAfter": 58,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 10,
+      "vid": "desmond_clarke",
+      "damage": 36,
+      "cause": "monster",
+      "caller": "expeditionMonster",
+      "healthBefore": null,
+      "healthAfter": 64,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 10,
+      "vid": "sam_wilson",
+      "damage": 10,
+      "cause": "monster",
+      "caller": "expeditionMonster",
+      "healthBefore": 58,
+      "healthAfter": 48,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 10,
+      "vid": "sam_wilson",
+      "damage": 22,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 48,
+      "healthAfter": 26,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 10,
+      "vid": "henry_zhang",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 86,
+      "healthAfter": 83,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 11,
+      "vid": "henry_zhang",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 86,
+      "healthAfter": 83,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 11,
+      "vid": "gen_8hvtc45",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 97,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 12,
+      "vid": "gen_mr1pr0r",
+      "damage": 38,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 62,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 12,
+      "vid": "gen_mr1pr0r",
+      "damage": 43,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 62,
+      "healthAfter": 19,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 12,
+      "vid": "gen_8hvtc45",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 100,
+      "healthAfter": 97,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 13,
+      "vid": "desmond_clarke",
+      "damage": 19,
+      "cause": "monster",
+      "caller": "expeditionMonster",
+      "healthBefore": 73,
+      "healthAfter": 54,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 13,
+      "vid": "gen_8hvtc45",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 97,
+      "healthAfter": 94,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 13,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 35,
+      "healthAfter": 30,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "henry_zhang",
+      "damage": 53,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 86,
+      "healthAfter": 33,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "gen_a29exbk",
+      "damage": 54,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": null,
+      "healthAfter": 46,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "gen_8hvtc45",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 94,
+      "healthAfter": 94,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "gen_7cclmvb",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 83,
+      "healthAfter": 83,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "gen_925shtf",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 70,
+      "healthAfter": 70,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "mateo_alvarez",
+      "damage": 32,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 68,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "gen_8hvtc45",
+      "damage": 3,
+      "cause": "bad belly",
+      "caller": "villageSicknessTick",
+      "healthBefore": 94,
+      "healthAfter": 91,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 14,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 30,
+      "healthAfter": 25,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 15,
+      "vid": "gen_7cclmvb",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 83,
+      "healthAfter": 83,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 15,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 25,
+      "healthAfter": 20,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 15,
+      "vid": "elif_demir",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": null,
+      "healthAfter": 97,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 16,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 20,
+      "healthAfter": 15,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 16,
+      "vid": "elif_demir",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 97,
+      "healthAfter": 94,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 16,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 33,
+      "healthAfter": 28,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 17,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 15,
+      "healthAfter": 10,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 17,
+      "vid": "elif_demir",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 94,
+      "healthAfter": 91,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 17,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 28,
+      "healthAfter": 23,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 17,
+      "vid": "gen_a29exbk",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 46,
+      "healthAfter": 43,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 18,
+      "vid": "elif_demir",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 94,
+      "healthAfter": 91,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 18,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 26,
+      "healthAfter": 21,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 18,
+      "vid": "gen_a29exbk",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 46,
+      "healthAfter": 43,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 19,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 21,
+      "healthAfter": 16,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 19,
+      "vid": "gen_a29exbk",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 43,
+      "healthAfter": 40,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 20,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 19,
+      "healthAfter": 14,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 20,
+      "vid": "gen_a29exbk",
+      "damage": 3,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 43,
+      "healthAfter": 40,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 21,
+      "vid": "gen_mr1pr0r",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 28,
+      "healthAfter": 23,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 21,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 16,
+      "healthAfter": 11,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 22,
+      "vid": "gen_mr1pr0r",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 26,
+      "healthAfter": 21,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 22,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 14,
+      "healthAfter": 9,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 23,
+      "vid": "elif_demir",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 97,
+      "healthAfter": 97,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 23,
+      "vid": "gen_mr1pr0r",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 21,
+      "healthAfter": 16,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 23,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 9,
+      "healthAfter": 4,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 24,
+      "vid": "gen_a29exbk",
+      "damage": 15,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 43,
+      "healthAfter": 28,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 24,
+      "vid": "gen_7cclmvb",
+      "damage": 48,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 68,
+      "healthAfter": 20,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 24,
+      "vid": "gen_925shtf",
+      "damage": 21,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 55,
+      "healthAfter": 34,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 24,
+      "vid": "gen_mr1pr0r",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 16,
+      "healthAfter": 11,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 24,
+      "vid": "sam_wilson",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 4,
+      "healthAfter": 0,
+      "gpDead": true,
+      "vpDead": true,
+      "onRoster": false
+    },
+    {
+      "day": 25,
+      "vid": "gen_mr1pr0r",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 11,
+      "healthAfter": 6,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 26,
+      "vid": "gen_8hvtc45",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 26,
+      "vid": "gen_mr1pr0r",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 6,
+      "healthAfter": 1,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 26,
+      "vid": "gen_a29exbk",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 28,
+      "healthAfter": 23,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 26,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 17,
+      "healthAfter": 12,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 27,
+      "vid": "gen_a29exbk",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 23,
+      "healthAfter": 18,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 27,
+      "vid": "henry_zhang",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 12,
+      "healthAfter": 7,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 27,
+      "vid": "gen_7cclmvb",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 20,
+      "healthAfter": 15,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 28,
+      "vid": "elif_demir",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 97,
+      "healthAfter": 97,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 28,
+      "vid": "mateo_alvarez",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 77,
+      "healthAfter": 77,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 28,
+      "vid": "gen_a29exbk",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 21,
+      "healthAfter": 16,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 28,
+      "vid": "gen_7cclmvb",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 18,
+      "healthAfter": 13,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 29,
+      "vid": "gen_a29exbk",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 16,
+      "healthAfter": 11,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 29,
+      "vid": "gen_7cclmvb",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 13,
+      "healthAfter": 8,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 29,
+      "vid": "gen_925shtf",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 37,
+      "healthAfter": 32,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 30,
+      "vid": "gen_8hvtc45",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 84,
+      "healthAfter": 84,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 30,
+      "vid": "gen_a29exbk",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 11,
+      "healthAfter": 6,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 30,
+      "vid": "gen_7cclmvb",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 8,
+      "healthAfter": 3,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 30,
+      "vid": "gen_925shtf",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 32,
+      "healthAfter": 27,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 31,
+      "vid": "gen_8hvtc45",
+      "damage": 24,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 84,
+      "healthAfter": 60,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 31,
+      "vid": "mateo_alvarez",
+      "damage": 39,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 80,
+      "healthAfter": 41,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 31,
+      "vid": "marcus_webb",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 69,
+      "healthAfter": 69,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 31,
+      "vid": "gen_925shtf",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 27,
+      "healthAfter": 22,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 32,
+      "vid": "gen_7cclmvb",
+      "damage": 8,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 3,
+      "healthAfter": 0,
+      "gpDead": true,
+      "vpDead": true,
+      "onRoster": false
+    },
+    {
+      "day": 33,
+      "vid": "elif_demir",
+      "damage": 0,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 100,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 33,
+      "vid": "gen_925shtf",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 22,
+      "healthAfter": 17,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 34,
+      "vid": "gen_925shtf",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 17,
+      "healthAfter": 12,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 35,
+      "vid": "gen_925shtf",
+      "damage": 5,
+      "cause": "sickness",
+      "caller": "villageSicknessTick",
+      "healthBefore": 12,
+      "healthAfter": 7,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "elif_demir",
+      "damage": 43,
+      "cause": "monster",
+      "caller": "resolveWildMonsterEncounter",
+      "healthBefore": 100,
+      "healthAfter": 57,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "gen_925shtf",
+      "damage": 8,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 7,
+      "healthAfter": 0,
+      "gpDead": true,
+      "vpDead": true,
+      "onRoster": false
+    },
+    {
+      "day": 36,
+      "vid": "gen_8hvtc45",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 60,
+      "healthAfter": 56,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "gen_a29exbk",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 6,
+      "healthAfter": 2,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "mateo_alvarez",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 41,
+      "healthAfter": 37,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "marcus_webb",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 69,
+      "healthAfter": 65,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "elif_demir",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 57,
+      "healthAfter": 53,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 36,
+      "vid": "desmond_clarke",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 50,
+      "healthAfter": 46,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 37,
+      "vid": "gen_a29exbk",
+      "damage": 8,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 2,
+      "healthAfter": 0,
+      "gpDead": true,
+      "vpDead": true,
+      "onRoster": false
+    },
+    {
+      "day": 37,
+      "vid": "gen_8hvtc45",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 56,
+      "healthAfter": 52,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 37,
+      "vid": "mateo_alvarez",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 37,
+      "healthAfter": 33,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 37,
+      "vid": "marcus_webb",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 65,
+      "healthAfter": 61,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 37,
+      "vid": "elif_demir",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 53,
+      "healthAfter": 49,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 37,
+      "vid": "desmond_clarke",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 46,
+      "healthAfter": 42,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 38,
+      "vid": "gen_8hvtc45",
+      "damage": 8,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 52,
+      "healthAfter": 44,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 38,
+      "vid": "gen_8hvtc45",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 44,
+      "healthAfter": 40,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 38,
+      "vid": "mateo_alvarez",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 33,
+      "healthAfter": 29,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 38,
+      "vid": "marcus_webb",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 61,
+      "healthAfter": 57,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 38,
+      "vid": "elif_demir",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 33,
+      "healthAfter": 29,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    },
+    {
+      "day": 38,
+      "vid": "desmond_clarke",
+      "damage": 4,
+      "cause": "starvation",
+      "caller": "hurtFromStarvation",
+      "healthBefore": 42,
+      "healthAfter": 38,
+      "gpDead": false,
+      "vpDead": false,
+      "onRoster": true
+    }
+  ],
+  "daily": [
+    {
+      "when": "entry",
+      "snap": {
+        "day": 1,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 1,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 2,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 2,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 3,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 3,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 4,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 4,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 5,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 5,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45",
+          "gen_mr1pr0r"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 6,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 6,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 7,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 7,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 8,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 8,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 9,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 9,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 10,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 10,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 11,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 11,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang",
+          "gen_8hvtc45"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 12,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 12,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 13,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 13,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 14,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 14,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_8hvtc45",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 15,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "sam_wilson",
+          "elif_demir"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 15,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "sam_wilson",
+          "elif_demir"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 16,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "sam_wilson",
+          "elif_demir",
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 16,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "sam_wilson",
+          "elif_demir",
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 17,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "sam_wilson",
+          "elif_demir",
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 17,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "sam_wilson",
+          "elif_demir",
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 18,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "elif_demir",
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 18,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "elif_demir",
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 19,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 19,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 20,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 20,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "henry_zhang",
+          "gen_a29exbk"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 21,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 21,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 22,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 22,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 23,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 23,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 24,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 24,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "sam_wilson",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 12,
+        "vpLiving": 12,
+        "gpLiving": 12,
+        "fallen": [],
+        "exiles": [],
+        "corpses": [],
+        "sick": [
+          "gen_mr1pr0r",
+          "sam_wilson"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 25,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 11,
+        "vpLiving": 11,
+        "gpLiving": 11,
+        "fallen": [
+          "sam_wilson"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson"
+        ],
+        "sick": [
+          "gen_mr1pr0r"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 25,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 11,
+        "vpLiving": 11,
+        "gpLiving": 11,
+        "fallen": [
+          "sam_wilson"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson"
+        ],
+        "sick": [
+          "gen_mr1pr0r"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 26,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 11,
+        "vpLiving": 11,
+        "gpLiving": 11,
+        "fallen": [
+          "sam_wilson"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson"
+        ],
+        "sick": [
+          "gen_mr1pr0r",
+          "gen_a29exbk",
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 26,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_mr1pr0r",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 11,
+        "vpLiving": 11,
+        "gpLiving": 11,
+        "fallen": [
+          "sam_wilson"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson"
+        ],
+        "sick": [
+          "gen_mr1pr0r",
+          "gen_a29exbk",
+          "henry_zhang"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 27,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 10,
+        "vpLiving": 10,
+        "gpLiving": 10,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 27,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "henry_zhang",
+          "desmond_clarke"
+        ],
+        "rosterLen": 10,
+        "vpLiving": 10,
+        "gpLiving": 10,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 28,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "gen_7cclmvb"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 28,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "gen_7cclmvb"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 29,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 29,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 30,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 30,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 31,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 31,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 32,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 9,
+        "vpLiving": 9,
+        "gpLiving": 9,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang"
+        ],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 32,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 33,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 33,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 34,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 34,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 35,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 35,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 36,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "gen_925shtf",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 8,
+        "vpLiving": 8,
+        "gpLiving": 8,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb"
+        ],
+        "sick": [
+          "gen_925shtf"
+        ]
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 36,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 7,
+        "vpLiving": 7,
+        "gpLiving": 7,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 37,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "gen_a29exbk",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 7,
+        "vpLiving": 7,
+        "gpLiving": 7,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf"
+        ],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 37,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 6,
+        "vpLiving": 6,
+        "gpLiving": 6,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_a29exbk"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_a29exbk"
+        ],
+        "sick": []
+      }
+    },
+    {
+      "when": "entry",
+      "snap": {
+        "day": 38,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 6,
+        "vpLiving": 6,
+        "gpLiving": 6,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_a29exbk"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_a29exbk"
+        ],
+        "sick": []
+      }
+    },
+    {
+      "when": "exit",
+      "snap": {
+        "day": 38,
+        "roster": [
+          "gen_dcif40j",
+          "gen_8hvtc45",
+          "mateo_alvarez",
+          "marcus_webb",
+          "elif_demir",
+          "desmond_clarke"
+        ],
+        "rosterLen": 6,
+        "vpLiving": 6,
+        "gpLiving": 6,
+        "fallen": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_a29exbk"
+        ],
+        "exiles": [],
+        "corpses": [
+          "sam_wilson",
+          "gen_mr1pr0r",
+          "henry_zhang",
+          "gen_7cclmvb",
+          "gen_925shtf",
+          "gen_a29exbk"
+        ],
+        "sick": []
+      }
+    }
+  ],
+  "sayLines": [
+    {
+      "day": 5,
+      "line": "🤒 Kofi is on the mend — the fever broke."
+    },
+    {
+      "day": 14,
+      "line": "🤒 Kofi is on the mend — the fever broke."
+    },
+    {
+      "day": 16,
+      "line": "Investigate and the morning is gone — tracking them costs a full day-part. Bar the door and you learn nothing. Your call."
+    },
+    {
+      "day": 17,
+      "line": "🤒 Sam is on the mend — the fever broke."
+    },
+    {
+      "day": 27,
+      "line": "💀 Diya is gone. The wound was too much. Nobody eats much tonight. The pot stays full and nobody touches it."
+    },
+    {
+      "day": 27,
+      "line": "📓 Codex: The old argument between Diya and Desmond ended — one of them is gone."
+    },
+    {
+      "day": 28,
+      "line": "💀 Henry is gone. The wound was too much. Somebody's sleeping-roll stays rolled out. Nobody puts it away."
+    },
+    {
+      "day": 30,
+      "line": "🤒 Alex is on the mend — the fever broke."
+    },
+    {
+      "day": 30,
+      "line": "🤒 Aaron is on the mend — the fever broke."
+    },
+    {
+      "day": 31,
+      "line": "🤒 Antônia is on the mend — the fever broke."
+    }
+  ]
+}
