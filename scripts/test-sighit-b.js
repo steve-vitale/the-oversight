@@ -36,7 +36,18 @@ function median(arr) {
 
 const corpus = JSON.parse(fs.readFileSync(CORPUS, 'utf8'));
 const head = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim();
-check('anchor == worktree HEAD', corpus.anchorCommit === head, corpus.anchorCommit);
+// The anchor is the base the sims ran on. Pre-commit that IS HEAD;
+// post-commit it is HEAD's parent (the commit itself moved HEAD).
+// Either is valid, but it must be one of the two — never anything else.
+let parent = '';
+try { parent = execSync('git rev-parse HEAD~1', { cwd: REPO }).toString().trim(); } catch (e) {}
+check('anchor == HEAD or HEAD~1 (the run base)', corpus.anchorCommit === head || (parent && corpus.anchorCommit === parent), corpus.anchorCommit);
+// And the committed corpus file must be byte-identical to the disk file.
+try {
+  const blob = execSync('git ls-tree HEAD -- evidence/2026-10-31/perseed-sighit-b/fixture-band.json', { cwd: REPO }).toString().trim().split(/\s+/)[2];
+  const disk = execSync('git hash-object evidence/2026-10-31/perseed-sighit-b/fixture-band.json', { cwd: REPO }).toString().trim();
+  check('corpus disk file == blob in HEAD', blob === disk, blob + ' vs ' + disk);
+} catch (e) { check('corpus disk file == blob in HEAD', false, e.message); }
 check('48 fights (3 beasts x 8 streams x 2 legs)', corpus.fights.length === 48, corpus.fights.length);
 check('leader is boris_kowalski, iron_stomach only',
   corpus.leader === 'boris_kowalski' && JSON.stringify(corpus.fighterInfo.heldAbilities) === JSON.stringify(['iron_stomach']),
@@ -45,9 +56,16 @@ check('leader is boris_kowalski, iron_stomach only',
 // Determinism gate.
 const tmpOut = '/tmp/sighit-det-' + process.pid + '.json';
 execSync('node ' + path.join(REPO, 'scripts', 'sighit-fixture-20261031.js') + ' ' + tmpOut, { cwd: REPO, stdio: 'pipe' });
-const rerun = fs.readFileSync(tmpOut, 'utf8');
-const committed = fs.readFileSync(CORPUS, 'utf8');
-check('det-gate: rerun byte-identical to corpus', rerun === committed);
+// The fixture stamps current HEAD as anchorCommit, so a rerun AFTER
+// this arm's own commit necessarily differs in that one field. The
+// pre-commit run was byte-identical (that was the binding gate); here
+// we compare with anchorCommit normalized out of both documents, which
+// is the same determinism claim minus the self-moving stamp.
+const rerunJson = JSON.parse(fs.readFileSync(tmpOut, 'utf8'));
+const committedJson = JSON.parse(fs.readFileSync(CORPUS, 'utf8'));
+delete rerunJson.anchorCommit; delete committedJson.anchorCommit;
+check('det-gate: rerun identical to corpus modulo anchorCommit',
+  JSON.stringify(rerunJson) === JSON.stringify(committedJson));
 try { fs.unlinkSync(tmpOut); } catch (e) {}
 
 // Per-hit integrity + independent re-derivation.
