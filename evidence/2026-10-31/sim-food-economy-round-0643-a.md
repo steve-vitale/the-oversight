@@ -235,3 +235,13 @@ recommended, 0537Z) and the warmth-fuel decision, both still awaiting a
 design owner; (3) the two Steve-call items (competent courtship drive;
 generation-dealt vs earnable vests) and the warmth default still await
 rulings. scale-onramp untouched (sibling Loop B lane).
+
+## Correction (coordinator, post-commit)
+The landing note above claiming "no clobber on the coordinator evidence
+commit" was written before that commit and is WRONG: the coordinator
+evidence commit itself hit the safe-commit index clobber (main index showed
+the evidence file staged-deleted while the file sat untracked on disk).
+Repaired via `update-index --add --cacheinfo` from the HEAD blob
+(hash verified equal); status empty + diff HEAD empty after repair. The
+clobber class therefore struck four times this run (three worker commits +
+this coordinator commit), not three.
