@@ -1,0 +1,16 @@
+(pre-talk seed: curious planted d115; takenWantDay=0; convoCount=13)
+=== seed 85102 day 120 — conversation with Dieter (gen_d3b4lj7) ===
+occupation=fishing guide temperament=cautious trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About teaching them something — Teach me something. Anything you know that I don't."
+(turn0 choices: ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:honest_pass, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+YOU: [goon] "Go on."
+THEM: The ease drains out of it, a little.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Good talk."

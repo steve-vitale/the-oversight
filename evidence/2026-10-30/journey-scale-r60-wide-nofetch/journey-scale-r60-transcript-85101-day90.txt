@@ -1,0 +1,18 @@
+(pre-talk seed: curious planted d89; takenWantDay=0; convoCount=16)
+=== seed 85101 day 90 — conversation with Colton (gen_qgsh0lt) ===
+occupation=HVAC tech temperament=bold trust=89 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About what day it is — Do you still count the days? I lost track days ago!"
+(turn0 choices: ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses. You know?"
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Remember what we said. Hold me to it."

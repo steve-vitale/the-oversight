@@ -1,0 +1,18 @@
+(pre-talk seed: curious planted d115; takenWantDay=0; convoCount=1)
+=== seed 85104 day 120 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=39 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "I asked Lena about where you're from — Lena's gone. Where are you from — originally? Before all this."
+(turn0 choices: ans:q_origin:a_tell, ans:q_origin:a_vague, ans:q_origin:a_deflect, leave, silence)
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [goon] "I'm listening, I promise."
+THEM: Whatever warmth was building cools to politeness.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Good talk. Don't be a stranger."

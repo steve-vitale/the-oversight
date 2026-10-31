@@ -1,0 +1,24 @@
+(pre-talk seed: curious planted d87; takenWantDay=0; convoCount=9)
+=== seed 85102 day 90 — conversation with Dieter (gen_d3b4lj7) ===
+occupation=fishing guide temperament=cautious trust=90 dead=false
+want: curious (stage 0)
+open thread: trade fromSeed=true
+picker: control
+
+THEM: Every camp we make, I rearrange it until it feels right. It never quite does. Yet.
+(turn0 choices: agency:ask_expedition, ask:goal, invite_party, ask:others, ask:gossip, menu:more, leave, silence)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Henry headed out to forage."
+YOU: [dlg:more] "Go on."
+THEM: "Quinn headed out to check the snares."
+YOU: [dlg:react] (listen)
+THEM: "Between us — Nathan headed out to check the snares."
+YOU: [dlg:more] "Tell me more."
+THEM: "Ruby? A lifeguard, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Henry? A street artist, back before. Solid person."
+YOU: [dlg:more] "I’m listening."
+THEM: "Kōwhai headed out to check the snares. ...at least, that's how it looks to me."
+YOU: (leave)
+pre-close: want curious stage 0 thread gossip
+closing line: "Take care of yourself."

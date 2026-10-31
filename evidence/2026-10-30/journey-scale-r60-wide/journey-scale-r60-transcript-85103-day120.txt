@@ -1,0 +1,16 @@
+(pre-talk seed: ask_favor planted d112; takenWantDay=0; convoCount=16)
+=== seed 85103 day 120 — conversation with Aria (aria_thompson) ===
+occupation=musician temperament=gentle trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Any regrets? The real kind, not the small stuff."
+(turn0 choices: ans:q_regret:a_tell, ans:q_regret:a_vague, leave, silence)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+YOU: [goon] "Yeah?"
+THEM: "I regret the ordinary days I rushed through. All those Nashville, Tennessee mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Later."

@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=88; convoCount=15)
+=== seed 85105 day 90 — conversation with Nicole (gen_5gsti0r) ===
+occupation=radio DJ temperament=sardonic trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Is there someone here you don't trust? Be honest."
+(turn0 choices: ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Good. That's settled, then. Onward."

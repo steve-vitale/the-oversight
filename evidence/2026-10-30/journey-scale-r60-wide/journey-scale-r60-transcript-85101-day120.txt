@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=114; convoCount=20)
+=== seed 85101 day 120 — conversation with Jamie (gen_uqd0xu6) ===
+occupation=Dentist temperament=warm trust=90 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "About Bill — did the System answer? I keep thinking about the humming."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Don't be a stranger."

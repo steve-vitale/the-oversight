@@ -1,0 +1,25 @@
+(pre-talk seed: curious planted d82; takenWantDay=0; convoCount=1)
+=== seed 85105 day 90 — conversation with Albertine (app_mgpsphp847) ===
+occupation=hunter temperament=cautious trust=40 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing. Not that it matters."
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "Huh. Let me think about that." "…Nicole? A radio DJ, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "Dale headed out for water."
+YOU: [dlg:react] (listen)
+THEM: "Mia sees in the dark. Not well — but better than you. Better than me. ...at least, that's how it looks to me."
+YOU: [dlg:more] "I’m listening."
+THEM: "That was me — headed out for water. Give it time."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "I’m listening."
+THEM: "Let me sit with all that. We'll pick it up later."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip

@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=9)
+=== seed 85102 day 90 — conversation with Sarah (gen_7hpgbvz) ===
+occupation=hotel housekeeper temperament=sardonic trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Groups make noise. Noise gets you noticed. I work better quiet.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Sarah shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:more] "Tell me more."
+THEM: "Alone doesn't mean lonely. It means unobserved. There's freedom in that."
+YOU: [dlg:react] (listen)
+THEM: "I need the quiet the way other people need food. Don't worry about me."
+YOU: [dlg:more] "Tell me more."
+THEM: "People are a lot. Even good people. Especially good people, some days."
+YOU: [dlg:react] (listen)
+THEM: "Don't take it personally if I disappear for a while. It's how I recharge."
+YOU: [dlg:more] "Tell me more."
+THEM: "I think better when it's quiet. And out here, thinking is surviving."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Good. We've got a plan forming. I can feel it."

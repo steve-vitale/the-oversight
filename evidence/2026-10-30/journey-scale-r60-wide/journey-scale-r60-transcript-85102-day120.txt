@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=14)
+=== seed 85102 day 120 — conversation with Sarah (gen_7hpgbvz) ===
+occupation=hotel housekeeper temperament=sardonic trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+(turn0 choices: deflect_q, ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, leave, silence)
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "Please, go on."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Good talking. We'll figure it out."

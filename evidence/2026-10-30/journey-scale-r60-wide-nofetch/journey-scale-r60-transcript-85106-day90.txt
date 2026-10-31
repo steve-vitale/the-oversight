@@ -1,0 +1,20 @@
+(pre-talk seed: seek_taken planted d79; takenWantDay=79; convoCount=11)
+=== seed 85106 day 90 — conversation with Madison (gen_erylf7t) ===
+occupation=exterminator temperament=stoic trust=90 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Patricia — I keep coming back to it. The pods, humming. Do you think they're still in there?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Madison stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Don't be a stranger."

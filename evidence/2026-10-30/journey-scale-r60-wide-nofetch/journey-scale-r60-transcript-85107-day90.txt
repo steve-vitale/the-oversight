@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 85107 day 90 — conversation with Henry (henry_zhang) ===
+occupation=emergency dispatcher temperament=cautious trust=24 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:a_deflect, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "I'll think about what you said. Carefully. That's how I do things."

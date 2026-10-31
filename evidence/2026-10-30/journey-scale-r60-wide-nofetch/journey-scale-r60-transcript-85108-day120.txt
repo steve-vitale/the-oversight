@@ -1,0 +1,24 @@
+(pre-talk seed: none; takenWantDay=109; convoCount=16)
+=== seed 85108 day 120 — conversation with Duc (gen_s44j47c) ===
+occupation=Veterinarian temperament=restless trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It doesn't move. Speedbump, every time. It hunts by day — watch the open ground."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Don't be a stranger."

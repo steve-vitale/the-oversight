@@ -1,0 +1,16 @@
+(pre-talk seed: seek_taken planted d69; takenWantDay=69; convoCount=7)
+=== seed 85104 day 90 — conversation with Brianna (gen_7j8tslu) ===
+occupation=Sailor temperament=mischievous trust=91 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Bill?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Good talk."

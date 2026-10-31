@@ -1,0 +1,14 @@
+(pre-talk seed: none; takenWantDay=112; convoCount=13)
+=== seed 85107 day 120 — conversation with Vikram (gen_dk914as) ===
+occupation=lifeguard temperament=cautious trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I hate to ask this, but I can't shake it. I'm achy and wrung out, barely keeping food down. Can you do anything?"
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "See you at the fire."

@@ -1,0 +1,14 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 85103 day 120 — conversation with Carlos (carlos_diaz) ===
+occupation=Fisherman temperament=prickly trust=33 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I can't reach this properly. Could you take a look?"
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "That's enough talking for me."
