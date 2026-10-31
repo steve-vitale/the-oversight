@@ -70,7 +70,7 @@ function analyzeSeed(obj) {
   const committedFights = fieldW3p.filter(f => f.committedFinish === true);
   const committedOutcomes = {};
   for (const f of committedFights) committedOutcomes[f.outcome || 'null'] = (committedOutcomes[f.outcome || 'null'] || 0) + 1;
-  const committedW3Details = committedFights.filter(f => f.wave === 3).map(f => ({ day: f.day, vid: f.vid, mid: f.mid, outcome: f.outcome, rounds: f.rounds, committedRounds: f.committedRounds | 0, twoblowLastTwo: f.twoblowLastTwo || null, twoblowSum: f.twoblowSum != null ? f.twoblowSum : null, mDealt: f.mDealt, vTaken: f.vTaken, mHpLeft: f.mHpLeft, mHpStart: f.mHpStart, mMaxHp: f.mMaxHp, intent: f.intent, caller: f.caller, log: f.log || null }));
+  const committedW3Details = committedFights.filter(f => f.wave === 3).map(f => ({ day: f.day, vid: f.vid, mid: f.mid, outcome: f.outcome, rounds: f.rounds, committedRounds: f.committedRounds | 0, twoblowLastTwo: f.twoblowLastTwo || null, twoblowSum: f.twoblowSum != null ? f.twoblowSum : null, mDealt: f.mDealt, vTaken: f.vTaken, mHpLeft: f.mHpLeft, mHpStart: f.mHpStart, mMaxHp: f.mMaxHp, intent: f.intent, caller: f.caller, twoblowCommitMhp: f.twoblowCommitMhp != null ? f.twoblowCommitMhp : null, twoblowCommitVhpFrac: f.twoblowCommitVhpFrac != null ? f.twoblowCommitVhpFrac : null, twoblowCommitSum: f.twoblowCommitSum != null ? f.twoblowCommitSum : null, log: f.log || null }));
   const floorFights = fieldW3p.filter(f => f.outcome === 'vFlee' && Array.isArray(f.log) && f.log.some(l => String(l).indexOf('Committed-finish floor') >= 0));
   const committedFloorN = floorFights.length;
   const committedDeaths = committedFights.filter(f => f.outcome === 'vDie').length;
