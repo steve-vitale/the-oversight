@@ -1,0 +1,51 @@
+
+ORGANIC DEATH d27: Sierra -> Hayden, topTrust=[{"id":"Jesse","t":89},{"id":"Kate","t":64},{"id":"Nikos","t":55},{"id":"Hayden","t":53}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=81 succTrustPost=53
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","bloodhound"] post=["night_eyes","bloodhound"]
+DEATH d27 (organic (phase A)): Sierra -> Hayden | passed=true lin=true mo=true trust=53 vouchers=2
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Jesse (refused=false)
+  CONVO d+3 with Kate (refused=false)
+  BOND-CONVO d+3 with Landon (depth=2 v=54 refused=false)
+  CONVO d+7 with Jesse (refused=false)
+  CONVO d+7 with Kate (refused=false)
+  CONVO d+14 with Kate (refused=false)
+  CONVO d+14 with Jesse (refused=false)
+  BOND-CONVO d+14 with Landon (depth=2 v=54 refused=false)
+
+SECOND-KILL d+20: Hayden -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Hayden -> Landon passed=true lin=true mo=true
+  CONVO d+30 with Jesse (refused=false)
+  CONVO d+30 with Kate (refused=false)
+
+THIRD-KILL d+21 since second death: Landon -> ? (scripted r79 chain probe)
+THIRD DEATH d+21 since second death: Landon -> Evelyn passed=true lin=true mo=true
+  CONVO d+45 with Jesse (refused=false)
+  CONVO d+45 with Kate (refused=false)
+
+FOURTH-KILL d+10 since third death: Jesse -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Jesse -> Kate passed=true lin=true mo=true
+  CONVO d+53 with Emma (refused=false)
+  CONVO d+53 with Pavel (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Kate -> ? (scripted r87 chain probe)
+FIFTH DEATH d+10 since fourth death: Kate -> Pavel passed=true lin=true mo=true
+  CONVO d+64 with Emma (refused=false)
+  CONVO d+64 with Caleb (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=2) echo=2 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=4 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":40,"offerLines":68,"codexPlantsDelta":31,"codexSkillsDelta":29,"codexAbilitiesDelta":17,"xpDelta":37,"any":true} pantry 46664->18900
+TRUST-DIALS: office 53->78 (+25, climb) | villageMean 52.2->76.3 (+24.1, climb) | ge60 2->2 | movers>=5: [{"id":"Yara","from":44,"to":90,"delta":46},{"id":"Nikos","from":55,"to":91,"delta":36}]
+DEED-LEDGER: calls=73 summary={"teachPlant":{"calls":16,"ok":16,"deltaSum":0,"deltaN":16,"positive":0,"meanDelta":0},"donateToPantry":{"calls":57,"ok":57,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=97 alive=4 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+31,d+70) t2=true(deedCalls=73) trustVerdict={"readable":true,"officeMantle":53,"officeLast":78,"officeDelta":25,"officeClass":"climb","villageMantle":52.2,"villageLast":76.3,"villageDelta":24.1,"villageClass":"climb","villageGe60Mantle":2,"villageGe60Last":2,"movers":[{"id":"Yara","from":44,"to":90,"delta":46},{"id":"Nikos","from":55,"to":91,"delta":36}]}
+E6/CALLCHECK: e6={"callMoves":25,"withCensus":25,"chainHandoffs":7,"trustMoves":18} callCheck={"dailyMoveDays":24,"callMoveDays":22,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":18,"soloOffice":4,"soloOfficeDeltas":[2,1,1,1],"soloBearerDeltaExact":[2,1,1,1],"singleMoverBearer":2,"singleMoverOther":5,"eventClass":{"event-only":0,"deed-only":8,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":7,"known":7,"unknown":0} e3={"dailyDays":71,"moves":24}
