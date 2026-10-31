@@ -32,7 +32,7 @@ const TF = require(path.join(REPO, 'scripts', 'policies', 'tribfloor'));
 const WD = require(path.join(REPO, 'scripts', 'policies', 'windefer'));
 const SD = require(path.join(REPO, 'scripts', 'policies', 'seatdrive'));
 const FD = require(path.join(REPO, 'scripts', 'policies', 'fullseat-diag'));
-const WE = require(path.join(REPO, 'scripts', 'policies', 'contactrec-diag'));
+const CR = require(path.join(REPO, 'scripts', 'policies', 'contactrec-diag'));
 
 for (const k of ['FEASTSCALE_R13', 'TRIBFLOOR', 'WINPURSUIT', 'WINDEFER', 'SEATDRIVE', 'FULLSEAT']) {
   if (process.env[k] !== '1') { console.error(`SWEEP STOP: ${k}=1 is required (substrate/instrument).`); process.exit(2); }
