@@ -26593,11 +26593,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.noteToolUse(); // RELIC BOND: prying, cutting, carrying.
           const item = this.scavengeItem(lootId);
           if (!this.canCarry(item.kg)) { t.loot.unshift(lootId); this.sayGated('tooHeavy', 'Too heavy — your pack can\'t take it. Eat something or leave it.', 3); return null; }
-          // GEAR IN THE RUINS (lootabilities Arm 3, 2026-10-31): a
-          // scavenge entry whose id is a real gear def (weapon/armor in
-          // items.json) is GEAR, not a can — it enters the pack as an
-          // equippable item entry, never as fake food with a plantId.
-          const gearDef = (this.data.items || []).find(i => i.id === lootId && (i.weapon || i.armor));
+          // GEAR IN THE RUINS (lootabilities Arm 3, 2026-10-31; widened
+          // by the Arm 1 correction, same day): a scavenge entry whose id
+          // is a real item def in items.json is THAT ITEM, not a can —
+          // gear enters as an equippable entry, and the human-story
+          // artifacts (ledgers, seals, accords) enter as themselves,
+          // never as fake food with a plantId. Medicine-cabinet entries
+          // (medType) keep the medicine path below.
+          const gearDef = !item.medType && (this.data.items || []).find(i => i.id === lootId);
           if (gearDef) {
             scholar.inventory.push({ itemId: lootId, units: 1, kcalEach: 0, spoilDay: 9999, name: gearDef.name, unit: 'piece', kg: gearDef.kg || item.kg || 0.5 });
             scholar.kcal -= 100;
@@ -26614,8 +26617,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const lootId2 = t.loot.shift();
             const item2 = this.scavengeItem(lootId2);
             if (item2 && this.canCarry(item2.kg)) {
-              // Arm 3 (2026-10-31): bonus finds are gear-aware too (see above).
-              const gd2 = (this.data.items || []).find(i => i.id === lootId2 && (i.weapon || i.armor));
+              // Arm 3 (2026-10-31): bonus finds are item-aware too (see above).
+              const gd2 = !item2.medType && (this.data.items || []).find(i => i.id === lootId2);
               if (gd2) scholar.inventory.push({ itemId: lootId2, units: 1, kcalEach: 0, spoilDay: 9999, name: gd2.name, unit: 'piece', kg: gd2.kg || item2.kg });
               else scholar.inventory.push({ plantId: lootId2, units: 1, kcalEach: item2.kcal, spoilDay: 9999, name: item2.name, unit: 'can', prep: 'No prep. The miracle of the can.', kg: item2.kg });
               this.say(`Scrounger: you spot another — ${item2.name}.`);
@@ -26629,8 +26632,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const bonusId = t.loot.shift();
             const bonus = this.scavengeItem(bonusId);
             if (bonus && this.canCarry(bonus.kg)) {
-              // Arm 3 (2026-10-31): bonus finds are gear-aware too (see above).
-              const gdB = (this.data.items || []).find(i => i.id === bonusId && (i.weapon || i.armor));
+              // Arm 3 (2026-10-31): bonus finds are item-aware too (see above).
+              const gdB = !bonus.medType && (this.data.items || []).find(i => i.id === bonusId);
               if (gdB) scholar.inventory.push({ itemId: bonusId, units: 1, kcalEach: 0, spoilDay: 9999, name: gdB.name, unit: 'piece', kg: gdB.kg || bonus.kg });
               else scholar.inventory.push({ plantId: bonusId, units: 1, kcalEach: bonus.kcal, spoilDay: 9999, name: bonus.name, unit: 'can', prep: 'No prep.', kg: bonus.kg });
               this.say(`Taste vision: behind the loose panel — ${bonus.name}. The walls were right.`);

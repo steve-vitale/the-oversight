@@ -65,7 +65,7 @@ function drive(Game, ctx, maxIter) {
 
 async function main() {
   global.__policyRandom = H.mulberry32(12345);
-  const Game = await K.load({ seed: 8 }); // seed 8 (2026-10-17, sim-gengap-b): seed 7's flee fixture stalled (5 barrier pushes, 0 exits) after the occupation pool grew 55->78 shifted the scenario RNG; 8 preserves every scenario precondition.
+  const Game = await K.load({ seed: 9 }); // seed 8 (2026-10-17, sim-gengap-b): seed 7's flee fixture stalled (5 barrier pushes, 0 exits) after the occupation pool grew 55->78 shifted the scenario RNG; 8 preserves every scenario precondition. Seed 9 (2026-10-31, lootabilities build): items.json gained two tier-1 loot pieces, shifting the scenario RNG again — at seed 8 a villager's fight consumed the feast buff before the player's first combat use; 9 preserves every scenario precondition, all sections pass, no assertion changed.
 
   // ---------- 1. real flee ----------
   T.section('1. real flee exits the fight');

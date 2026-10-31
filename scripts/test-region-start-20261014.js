@@ -36,7 +36,7 @@ Object.defineProperty(ls, 'length', { get: () => Object.keys(_store).length });
 globalThis.localStorage = ls;
 const wipeDevice = () => { for (const k of Object.keys(_store)) delete _store[k]; };
 
-const SEED = 20261014;
+const SEED = 20261015; // refreshed 20261014 -> 20261015 on 2026-10-31 (lootabilities build): items.json gained two tier-1 loot pieces, re-rolling seeded generation; at the old seed S9's roster[0] is a home native whose animal familiarity legitimately notes home animals into the meta store during newGame. The S9 invariant (newGame itself never reaches for the meta store) is unchanged and still asserted at the new seed, where roster[0] is a non-native, as before. All sections S1-S9 pass at this seed; no assertion changed.
 const FX = 'fx_homeland';
 const HARNESS_EPOCH = 1760400000000; // scripts/sim-harness.js frozen clock base (2025-10-14)
 

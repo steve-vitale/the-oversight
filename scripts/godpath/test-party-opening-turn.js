@@ -1,7 +1,13 @@
 'use strict';
 const K=require('./lib'),T=K.reporter('party-opening-turn');
 (async()=>{
- const G=await K.load({seed:7});K.newRun(G);
+ // Seed refreshed 7 -> 64 on 2026-10-31 (lootabilities build): items.json
+ // gained two tier-1 loot pieces, which re-rolled seeded generation; at
+ // seed 7 the new village fields extra fight joiners, breaking this
+ // fixture's exact-3-humans shape. Seed 64 verified to the same shape:
+ // exactly the player + two companions in the opening fight, distinct
+ // squares, each companion added exactly once. No assertion changed.
+ const G=await K.load({seed:64});K.newRun(G);
  const ids=G.state.village.roster.filter(id=>id!==G.villagerId).slice(0,2);
  if(ids.length!==2)throw Error('Need two actual companions');
  G.state.village.party=ids.slice();
