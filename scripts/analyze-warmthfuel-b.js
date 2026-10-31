@@ -17,7 +17,12 @@ const WOOD_NEEDED = 4, KCAL_NEEDED = 60, TICKS_NEEDED = 96;
 // Warmth fire say lines (makeFire success copy) — these are the
 // warmth fire itself, excluded from the other-fire scan.
 const WARMTH_LINE_RE = /tinder catches|beard-moss tinder takes|Third fire|knack now/;
-const OTHER_FIRE_RE = /fire|feed it|lay another log|charcoal|cook/i;
+// Other-fuel scan is deliberately narrow: only player fuel-spending
+// action lines (feedFire wood/branch, tent-fire feeding). Gossip
+// ("fragments by the fire"), codex counters ("They fear fire"),
+// and conversation lines mentioning fire are NOT fuel spends and
+// must not pollute the scan.
+const OTHER_FIRE_RE = /lay another log on|feed it another branch|You feed the little fire|You feed it another/i;
 
 function attributeNight(r) {
   const w = r.warmth;

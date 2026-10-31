@@ -114,7 +114,7 @@ if (guardDir && onDir) {
   check('on CF converts d10 length 3', o15215[0].counterfactual.converted && o15215[0].counterfactual.converted.loopDay === 10 && o15215[0].counterfactual.length === 3, o15215[0].counterfactual);
   check('on CF neverReached 11..16', JSON.stringify(o15215[0].counterfactual.neverReached) === JSON.stringify([11, 12, 13, 14, 15, 16]), o15215[0].counterfactual);
   check('guard warmth spends zero logs', g.warmLogSpent === 0, g.warmLogSpent);
-  check('on warmth log-spends = 3 (nights 9,11,13)', o.warmLogSpent === 3, o.warmLogSpent);
+  check('on warmth log-spends = 4 (nights 9,11,12,13)', o.warmLogSpent === 4, o.warmLogSpent);
 }
 
 console.log('warmthfuel proof: ' + (checks - failures) + '/' + checks + ' checks pass');
