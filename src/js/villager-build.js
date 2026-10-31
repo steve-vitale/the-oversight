@@ -20,6 +20,7 @@
 //   - villagerGearDay() -> greedy daily gear allocation (own stash, gifts of spares, armory)
 //   - vesselStashFetch() -> {item, slot} | null; the vessel's own-stash weapon fetch, once a day at haven
 //   - vesselArmorFetch() -> {item, slot} | null; the vessel's own-stash armor fetch, once a day at haven (mirror of the weapon fetch)
+//   - villagerWeaponCraftDay() -> number crafted; a weaponless villager who personally knows a weapon recipe and can reach the materials (own pack / camp pile at home) crafts up the spear/bow recipe ladder and equips the result (own knowledge, own hands only)
 //   - villagerBuildDay() -> the daily tick: gear, pending sheets
 //   - pickVillagerKnack(vid, choices) -> knack id chosen by buildScore
 //   - mantleBecome(oldId, newId) -> the new bearer keeps THEIR OWN tracks, XP, abilities, skills, knowledge, godhood and gear; the predecessor's do not pass (Steve 2026-10-14: "No I don't think you should take your XP or the abilities. You become that villager.")
@@ -1053,6 +1054,11 @@
         // ARMOR CRAFT (armorvillage 2026-10-23): NPC armor-craft beats —
         // villagers who demonstrably know an armor recipe sew for themselves.
         try { if (this.villagerArmorCraftDay) this.villagerArmorCraftDay(); } catch (e) { warn('armorcraft', e); }
+        // WEAPON SELF-CRAFT (lootabilities-w3 2026-10-31, Arm 6): a
+        // weaponless villager who personally knows a weapon recipe and
+        // can reach the materials crafts up the spear/bow ladder and
+        // equips it — self-seeking, modeled on the armor-craft beat.
+        try { if (this.villagerWeaponCraftDay) this.villagerWeaponCraftDay(); } catch (e) { warn('weaponcraft', e); }
         const v = this.state.village || {};
         for (const rid of (v.roster || [])) {
           if (rid === this.villagerId) continue;
@@ -1190,6 +1196,169 @@
           } catch (e) { warn('armorcraft one', e); }
         }
       } catch (e) { warn('villagerArmorCraftDay', e); }
+      return made;
+    },
+
+    // villagerWeaponCraftDay(): VILLAGER SELF-CRAFT (lootabilities-w3
+    // 2026-10-31, Arm 6). Today a weaponless villager only whittles a
+    // stick (villagerGearUp's last resort in game.js); nobody crafts a
+    // real weapon for themselves. This duty is the armor-craft beat
+    // (villagerArmorCraftDay, above) and the pocket-ammo craft
+    // (villagerPocketAmmo, game.js) applied to weapons: a WEAPONLESS
+    // villager at home who PERSONALLY knows a weapon recipe and can
+    // reach the materials crafts up the EXISTING recipe ladder —
+    // spear first (hunting_spear, then fire_hardened_spear), then bow
+    // (bow, then crude_bow) — and equips the result through autoEquip.
+    // The ladder is a preference order for a villager with NO weapon
+    // at all: the first rung they personally know and can pay for is
+    // the one they make. (Slot note: items.json gives the spears
+    // range 2, so equipment.js puts them in the ranged/reach slot —
+    // the ladder follows the game's own classification, not slot
+    // names.) Recipe costs come from recipes.json only; nothing
+    // cheaper is invented.
+    // KNOWLEDGE = the per-villager record v.weaponCraft[vid][recipeId]
+    // (the ammoCraft/avCraft shape), seeded ONLY by the villager's own
+    // hands: wearing, carrying or stashing the finished weapon teaches
+    // L1 (the noteGearHandled rule — you have SEEN one up close), and a
+    // successful blind (L1) craft teaches L2 (the PRACTICE rule, exactly
+    // as craft() / villagerPocketAmmo). Odds mirror craft() exactly:
+    // L1 35% blind (materials at risk), L2+ 85%. Materials come from
+    // what the villager can reach at home: their own carried materials
+    // first, then the communal camp pile (stashState().materials — the
+    // whittle-from-the-woodpile / armor-craft communal-materials
+    // precedent). At most 1 attempt per villager per 3 days (the
+    // armor-craft cooldown). The sharpened-stick whittle fallback in
+    // villagerGearUp is untouched: a villager with no knowledge or no
+    // materials simply never attempts here, so the truly bare still
+    // whittle. Scholar-driven crafting (the player's craft()) is
+    // untouched. Returns the number of weapons crafted.
+    // PERCEPTION LAW (Steve 2026-10-28): every input below is the
+    // villager's OWN state or the camp pile they are standing at —
+    // own equipped/carried/stashed gear (the weaponless check and the
+    // knowledge seeding), own knowledge record, own carried materials,
+    // the communal pile at home, and recipes.json (public recipe
+    // data). The roster is iterated only to SCHEDULE each villager's
+    // own decision (the villagerArmorCraftDay pattern); no villager's
+    // decision reads another villager's gear, knowledge or materials,
+    // and no global "who is weaponless" list is built or consulted.
+    villagerWeaponCraftDay() {
+      let made = 0;
+      try {
+        const v = this.state.village || {};
+        const day = (this.state.scholar || {}).day || 0;
+        const defs = this.data.items || [];
+        const recipes = this.data.recipes || [];
+        const eq = EQ();
+        if (!eq) return 0;
+        v.weaponCraft = v.weaponCraft || {};       // vid -> { recipeId: level }
+        v.weaponCraftCd = v.weaponCraftCd || {};   // vid -> last attempt day
+        const LADDER = ['hunting_spear', 'fire_hardened_spear', 'bow', 'crude_bow'];
+        const idOf = (it) => (it && (it.itemId || it.id)) || it;
+        const defOf = (id) => defs.find(d => d.id === id) || null;
+        const home = (v.roster || []).filter(id =>
+          id !== this.villagerId && !((v.away || {})[id]) &&
+          !(this.getPerson ? (this.getPerson(id) || {}).dead : false));
+        for (const vid of home) {
+          try {
+            const p = this.getPerson ? this.getPerson(vid) : null;
+            if (!p) continue;
+            const lv = v.weaponCraft[vid] = v.weaponCraft[vid] || {};
+            // KNOWLEDGE SEEDING (own hands only): a finished ladder
+            // weapon they wear, carry or keep in their own stash has
+            // been SEEN up close — L1, recorded in their own record.
+            const ownGear = []
+              .concat(Object.values(p.equipped || {}).map(e => e && e.itemId).filter(Boolean))
+              .concat((p.items || []).map(idOf).filter(Boolean))
+              .concat((p.stashed || []).map(idOf).filter(Boolean));
+            for (const rid of LADDER) {
+              if ((lv[rid] || 0) < 1 && ownGear.indexOf(rid) >= 0) lv[rid] = 1;
+            }
+            if ((v.weaponCraftCd[vid] || -99) > day - 3) continue; // ≤1 attempt / 3d
+            try { eq.autoEquip(p, defs); } catch (e) {}
+            // WEAPONLESS: no weapon in either hand and none in their
+            // pack. Already armed -> no craft (they are not the bare
+            // villager this duty exists for).
+            const armed = ((eq.weaponBonusOf ? (eq.weaponBonusOf(p, defs, 'melee') || 0) + (eq.weaponBonusOf(p, defs, 'ranged') || 0) : 0) > 0) ||
+              (p.items || []).some(e => { const d = defOf(idOf(e)); return d && d.weapon; });
+            if (armed) continue;
+            // their own carried materials: pack entries carrying a
+            // material key (the craft() matching rule), never gear
+            const isMatEntry = (e, mat) => {
+              if (typeof e === 'string') return e === mat;
+              if (!e) return false;
+              if (e.material === mat) return true;
+              if (e.itemId === mat) { const d = defOf(mat); return !(d && (d.weapon || d.armor)); }
+              return false;
+            };
+            const ownMat = (mat) => {
+              let n = 0;
+              for (const e of (p.items || [])) if (isMatEntry(e, mat)) n += (typeof e === 'string') ? 1 : (e.units || 1);
+              return n;
+            };
+            // the camp pile, reachable because the villager is at home
+            let mats = null;
+            try { const st = this.stashState ? this.stashState() : null; mats = (st && st.materials) || null; } catch (e) { warn('weaponcraft stash', e); }
+            if (!mats) mats = (v.stash && v.stash.materials) || {};
+            // first ladder rung whose recipe they personally know and
+            // whose materials they can reach
+            let pick = null;
+            for (const rid of LADDER) {
+              const recipe = recipes.find(r => r.id === rid);
+              if (!recipe || !recipe.materials) continue;
+              const level = lv[rid] || 0;
+              if (level < 1) continue; // no knowledge -> no craft
+              let ok = true;
+              for (const [m, need] of Object.entries(recipe.materials)) {
+                if (ownMat(m) + (mats[m] || 0) < need) { ok = false; break; }
+              }
+              if (!ok) continue; // no materials -> no craft
+              pick = { rid, recipe, level };
+              break;
+            }
+            if (!pick) continue;
+            v.weaponCraftCd[vid] = day;
+            // honest take: own carried materials first, then the pile
+            for (const [m, need] of Object.entries(pick.recipe.materials)) {
+              let left = need;
+              const items = p.items || [];
+              for (let i = items.length - 1; i >= 0 && left > 0; i--) {
+                if (!isMatEntry(items[i], m)) continue;
+                const have = (typeof items[i] === 'string') ? 1 : (items[i].units || 1);
+                const take = Math.min(have, left);
+                left -= take;
+                if (typeof items[i] === 'string') items.splice(i, 1);
+                else { items[i].units = have - take; if (items[i].units <= 0) items.splice(i, 1); }
+              }
+              if (left > 0) {
+                mats[m] = (mats[m] || 0) - left;
+                try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+              }
+            }
+            const rate = pick.level >= 2 ? 0.85 : 0.35;
+            const success = Math.random() < rate;
+            let nm = 'Someone';
+            try { nm = (this.firstRef ? this.firstRef(vid) : null) || p.name || 'Someone'; } catch (e) {}
+            let atHaven = false;
+            try { atHaven = this.playerAtHaven ? this.playerAtHaven() : false; } catch (e) {}
+            const cdef = defOf(pick.rid) || {};
+            const pieceName = cdef.name || pick.recipe.name || pick.rid;
+            if (!success) {
+              try { if (this.tele) this.tele('weapon_craft', { vid: vid, item: pick.rid, ok: false }); } catch (e) {}
+              // no silent actions: a failed craft is witnessed when you're home
+              if (atHaven) { try { this.say(`${nm} spent the afternoon at the workbench, and the ${pieceName} came apart in their hands. The materials are wasted.`); } catch (e) {} }
+              continue; // materials already consumed above — the woods keep them
+            }
+            if (pick.level < 2) lv[pick.rid] = 2; // PRACTICE: blind success teaches
+            p.items = p.items || [];
+            p.items.push({ itemId: pick.rid, name: cdef.name || pick.recipe.name || pick.rid,
+              units: 1, kcalEach: 0, kg: cdef.kg || pick.recipe.kg || 0.5 });
+            try { eq.autoEquip(p, defs); } catch (e) {}
+            made++;
+            try { if (this.tele) this.tele('weapon_craft', { vid: vid, item: pick.rid, ok: true }); } catch (e) {}
+            if (atHaven) { try { this.say(`🗡️ ${nm} spent the afternoon at the workbench and made a ${pieceName} — and carries it now, their own work in their own hands.`); } catch (e) {} }
+          } catch (e) { warn('weaponcraft one', e); }
+        }
+      } catch (e) { warn('villagerWeaponCraftDay', e); }
       return made;
     },
   };
