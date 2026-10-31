@@ -1672,11 +1672,17 @@
       c.digMisses = n + 1;
       // no wrap: past the pool the narrator admits the dead end instead of
       // parroting (the honest dead-end beats a filler loop).
-      if (n >= pool.length) return cold;
-      return pool[n];
+      // R85: stash the spoken line + cold flag on the case — the convo
+      // handler reuses the spoken line instead of calling here a second
+      // time (which advanced the pool twice per pick), and spends the
+      // choice out once cold (see the `investigate` act).
+      const line = n >= pool.length ? cold : pool[n];
+      c.lastDigMissLine = line;
+      c.digCold = n >= pool.length;
+      return line;
     } catch (e) { return pool[0]; }
   },
-  investigateBribery(caseId) {
+  investigateBribery(caseId, opts) {
     const c = this.getCase(caseId); if (!c) return null;
     const found = [];
     for (const b of (c.bribes || [])) {
@@ -1686,7 +1692,10 @@
       const p = b.trace === false ? 0.35 : 0.8;
       if (R() < p) found.push(b);
     }
-    if (!found.length) { this.say(this.bribeDigMissLine(c)); return []; }
+    // R85: the convo handler speaks the miss as the beat (finish line), so
+    // a quiet miss avoids saying the same line twice (narration + beat).
+    // The dossier path passes no opts and keeps the narration.
+    if (!found.length) { const line = this.bribeDigMissLine(c); if (!(opts && opts.quiet)) this.say(line); return []; }
     for (const b of found) {
       this.say(`There it is: ${this.whoTag(b.by)} bought ${this.whoTag(b.voter)}. Follow the food — it always works.`);
     }
@@ -4376,6 +4385,24 @@
         break;
       }
     }
+    // SPENT (journey-crisis r85 2026-10-31): the per-sitting ledger that
+    // buildMenu honors never applied to betrayal extras — the wrap prepends
+    // them unfiltered, so convoSpendChoice was a no-op for betrayal: ids
+    // (transcript-caught: the cold investigate line re-offered verbatim).
+    // Filter here so spent betrayal verbs leave the menu for the sitting,
+    // like every other spent choice. No handler spends a betrayal: id today
+    // except the cold-investigate spend below, so this is behavior-neutral
+    // for all existing flows.
+    try {
+      const spent = (c && c.spent) || {};
+      if (Object.keys(spent).length) {
+        // in-place: `out` is const, a reassignment would throw (and the
+        // catch would swallow it, leaving the choice offered).
+        for (let i = out.length - 1; i >= 0; i--) {
+          if (out[i] && out[i].id && spent[out[i].id]) out.splice(i, 1);
+        }
+      }
+    } catch (e) {}
     return out;
   },
   betrayalTurn(vid, choiceId) {
@@ -4523,13 +4550,22 @@
     }
     if (act === 'pressaccuser') { this.defendPressAccuser(parts[2]); return finish('Your question hangs in the air. Let the pause do the work.', '"Walk me through YOUR story."'); }
     if (act === 'investigate') {
-      const f = this.investigateBribery(parts[2]) || [];
+      // R85 (journey-crisis r85, transcript seed 9503 d9/d10): the old code
+      // called investigateBribery (speaks a miss line, pool advance #1)
+      // and then bribeDigMissLine AGAIN for the beat (advance #2) — beats
+      // showed pool[1], pool[3], pool[5], pool[7], cold, cold... and the
+      // cold line re-offered verbatim. One pick = one advance: reuse the
+      // spoken line, and once cold, spend the choice for this sitting
+      // (recap / favor-requirements discipline — it re-arms next sitting,
+      // so a later dig can still find a bribe).
+      const f = this.investigateBribery(parts[2], { quiet: true }) || [];
       const cs2 = this.getCase(parts[2]);
       if (cs2) {
         cs2.foundBribes = cs2.foundBribes || [];
         for (const b of f) if (!cs2.foundBribes.some(y => y.voter === b.voter)) cs2.foundBribes.push(b);
       }
-      return finish(f.length ? 'Found something. Follow it to the moot.' : this.bribeDigMissLine(cs2), '(follow the food)');
+      if (!f.length && cs2 && cs2.digCold) { try { this.convoSpendChoice(vid, 'betrayal:investigate:' + parts[2]); } catch (e) {} }
+      return finish(f.length ? 'Found something. Follow it to the moot.' : (cs2 && cs2.lastDigMissLine ? cs2.lastDigMissLine : this.bribeDigMissLine(cs2)), '(follow the food)');
     }
     if (act === 'letlie') { this.letItLie(parts[2]); return finish('You say nothing. The silence sits at the fire with everyone else.', '(say nothing)'); }
     if (act === 'vote_guilty') { this.castPlayerVote(parts[2], true); return finish('Counted.', 'GUILTY.'); }
