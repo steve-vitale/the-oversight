@@ -198,6 +198,11 @@
     { id: 'can_corn', name: 'Canned corn', kcal: 550, kg: 0.4, text: 'The label is gone. The corn doesn\'t care.' },
     { id: 'can_soup', name: 'Canned soup', kcal: 450, kg: 0.35, text: 'Chicken soup. Tastes like before.' },
     { id: 'jar_peaches', name: 'Jarred peaches', kcal: 700, kg: 0.5, text: 'Home-canned. Whoever sealed this knew what they were doing.' },
+    // GEAR IN THE FALLBACK POOL (lootabilities Arm 3, 2026-10-31): one
+    // pry-bar in the legacy pool, so even a region with no scavenge
+    // layer of its own can yield a weapon from a ruin. The ruin search
+    // converts gear ids to equippable item entries (see doAction).
+    { id: 'crowbar', name: 'Crowbar', kcal: 0, kg: 1.1, text: 'Pry bar, pry weapon, argument-ender. Somebody left it in the pantry like a promise.' },
     // MEDICINE (disease rework, Steve 2026-10-09): rare and SPECIFIC. A
     // medicine cabinet survives here and there. Antibiotics kill bacterial;
     // antiparasitics kill parasitic. Nothing here touches a virus. The label
@@ -26588,6 +26593,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.noteToolUse(); // RELIC BOND: prying, cutting, carrying.
           const item = this.scavengeItem(lootId);
           if (!this.canCarry(item.kg)) { t.loot.unshift(lootId); this.sayGated('tooHeavy', 'Too heavy — your pack can\'t take it. Eat something or leave it.', 3); return null; }
+          // GEAR IN THE RUINS (lootabilities Arm 3, 2026-10-31): a
+          // scavenge entry whose id is a real gear def (weapon/armor in
+          // items.json) is GEAR, not a can — it enters the pack as an
+          // equippable item entry, never as fake food with a plantId.
+          const gearDef = (this.data.items || []).find(i => i.id === lootId && (i.weapon || i.armor));
+          if (gearDef) {
+            scholar.inventory.push({ itemId: lootId, units: 1, kcalEach: 0, spoilDay: 9999, name: gearDef.name, unit: 'piece', kg: gearDef.kg || item.kg || 0.5 });
+            scholar.kcal -= 100;
+            this.say(`You ${isCache ? 'dig out the stash' : 'pry open a ' + (isBld ? 'cabinet' : 'cupboard')}: ${gearDef.name}. ${item.text}` + (t.loot.length ? '' : (isCache ? ' That\'s everything. This cache is done.' : isBld ? ' That\'s everything. This building is done.' : ' That\'s everything. This house is done.')));
+            this.tele('scavenge', { item: gearDef.name, kcal: 0, lootLeft: t.loot.length, packKg: Math.round(this.packWeight() * 10) / 10 });
+            return this.tickAction(64) || this.status();
+          }
           // MEDICINE (disease rework 2026-10-09): bottled, dosed, specific.
           const medPush = { plantId: lootId, units: 1, kcalEach: item.kcal, spoilDay: 9999, name: item.name, unit: item.medType ? 'bottle' : 'can', prep: item.medType ? 'Use from your pack when sick. Specific — read the label.' : 'No prep. The miracle of the can.', kg: item.kg };
           if (item.medType) { medPush.itemId = lootId; medPush.medType = item.medType; medPush.doses = item.doses || 2; }
@@ -26597,7 +26614,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const lootId2 = t.loot.shift();
             const item2 = this.scavengeItem(lootId2);
             if (item2 && this.canCarry(item2.kg)) {
-              scholar.inventory.push({ plantId: lootId2, units: 1, kcalEach: item2.kcal, spoilDay: 9999, name: item2.name, unit: 'can', prep: 'No prep. The miracle of the can.', kg: item2.kg });
+              // Arm 3 (2026-10-31): bonus finds are gear-aware too (see above).
+              const gd2 = (this.data.items || []).find(i => i.id === lootId2 && (i.weapon || i.armor));
+              if (gd2) scholar.inventory.push({ itemId: lootId2, units: 1, kcalEach: 0, spoilDay: 9999, name: gd2.name, unit: 'piece', kg: gd2.kg || item2.kg });
+              else scholar.inventory.push({ plantId: lootId2, units: 1, kcalEach: item2.kcal, spoilDay: 9999, name: item2.name, unit: 'can', prep: 'No prep. The miracle of the can.', kg: item2.kg });
               this.say(`Scrounger: you spot another — ${item2.name}.`);
             } else if (item2) {
               t.loot.unshift(lootId2); // too heavy, leave it
@@ -26609,7 +26629,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const bonusId = t.loot.shift();
             const bonus = this.scavengeItem(bonusId);
             if (bonus && this.canCarry(bonus.kg)) {
-              scholar.inventory.push({ plantId: bonusId, units: 1, kcalEach: bonus.kcal, spoilDay: 9999, name: bonus.name, unit: 'can', prep: 'No prep.', kg: bonus.kg });
+              // Arm 3 (2026-10-31): bonus finds are gear-aware too (see above).
+              const gdB = (this.data.items || []).find(i => i.id === bonusId && (i.weapon || i.armor));
+              if (gdB) scholar.inventory.push({ itemId: bonusId, units: 1, kcalEach: 0, spoilDay: 9999, name: gdB.name, unit: 'piece', kg: gdB.kg || bonus.kg });
+              else scholar.inventory.push({ plantId: bonusId, units: 1, kcalEach: bonus.kcal, spoilDay: 9999, name: bonus.name, unit: 'can', prep: 'No prep.', kg: bonus.kg });
               this.say(`Taste vision: behind the loose panel — ${bonus.name}. The walls were right.`);
             } else if (bonus) t.loot.unshift(bonusId);
           }
@@ -44141,6 +44164,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // - Wave-2 apex (moderator, mdef.apex): tier 4.
     rollAlienLoot(mdef, fighter) {
       const loot = (mdef || {}).loot;
+      // WAVE-6 NETWORK (lootabilities Arm 2, 2026-10-31): network_*
+      // monsters carry chance 0 ON PURPOSE — Network structures pay
+      // through the campaign prize path, not carcass loot ("The Network
+      // drops nothing. The key is the prize."). Do not "fix" the zero.
       if (!loot || !(loot.chance > 0)) return null;
       if (Math.random() >= loot.chance) return null;
       const wave = mdef.wave || 1;
@@ -44153,12 +44180,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           maxTier = Math.min((loot.tier || 1) + 1, 3);
         }
       }
+      // TIER-4 ON HARD KILLS (lootabilities Arm 2, 2026-10-31): a loot
+      // entry may carry tier4Chance — the fraction of its successful
+      // drops that pay tier 4 instead of the entry's own tier. The
+      // effective tier-4 rate is chance x tier4Chance, always below the
+      // same monster's tier-3 rate. Tier 4 stays earned through the
+      // hardest kills at low rates on its own terms — never a
+      // per-wave quota (Steve 2026-10-06).
+      if (!loot.rewardSource && loot.tier4Chance > 0 && Math.random() < loot.tier4Chance) {
+        maxTier = 4;
+      }
       // Find the highest available tier <= maxTier (fallback if tier missing)
       let tier = Math.max(1, maxTier);
       let pool = [];
       while (tier >= 1 && !pool.length) {
-        const extra = loot.rewardSource ? (((this.data.rewardEconomy || {}).extraItems || {})[tier] || []) : [];
-        pool = (this.data.items || []).filter(i => (i.origin === 'alien' || extra.includes(i.id)) && (i.lootTier || 1) === tier
+        // LOOT POOLS (lootabilities Arm 1, 2026-10-31): the kill pool is
+        // NOT alien-only any more. reward-economy.json names two route
+        // memberships: extraItems = the prize pool (contest / broadcast
+        // gift / trade — consulted only on rewardSource paths, as
+        // before) and killItems = the named kill-pool members (what a
+        // carcass can plausibly carry: worn armor, trophies, ammo,
+        // beast-touched gear). Every lootTier item belongs to at least
+        // one named route; scripts/proof-lootabilities-w1.js scan
+        // proves 0 unreachable.
+        const reward = this.data.rewardEconomy || {};
+        const extra = loot.rewardSource ? (((reward.extraItems || {})[tier]) || []) : [];
+        const kill = loot.rewardSource ? [] : (((reward.killItems || {})[tier]) || []);
+        pool = (this.data.items || []).filter(i => (i.origin === 'alien' || extra.includes(i.id) || kill.includes(i.id)) && (i.lootTier || 1) === tier
           // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. Once
           // taken, pellets stop dropping as installable loot — existing ones
           // still burn, but no new reactor can rise.
