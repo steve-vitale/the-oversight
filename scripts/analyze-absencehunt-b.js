@@ -100,10 +100,20 @@ function classifySeed(inst) {
   }
   const count = (c) => days.filter((d) => d.class === c).length;
   const genuineDays = days.filter((d) => d.class === 'genuine' || d.class === 'genuine-end-of-run');
+  // Unexplained away mornings (diagnostic, not a judged class): a morning
+  // away whose PREVIOUS evening was at haven — the vessel moved out in
+  // the sleep/upkeep window between the evening snap and the next
+  // daily-start snap, so no genuine transition was observed for that
+  // episode. The genuine count is therefore a conservative lower bound
+  // on nights away; this diagnostic sizes the gap.
+  const unexplainedAwayMornings = [];
+  for (let i = 1; i < days.length; i++) {
+    if (!days[i].startsHaven && days[i - 1].endsHaven) unexplainedAwayMornings.push(days[i].loopDay);
+  }
   return {
     seed: inst.seed,
     policy: inst.policy,
-    days: inst.days || null,
+    horizonDays: inst.days || null,
     daysAlive: inst.daysAlive ?? null,
     endReason: inst.endReason || null,
     errCount: inst.errCount ?? null,
@@ -116,6 +126,7 @@ function classifySeed(inst) {
     dayTrips: count('day-trip'),
     multiHop: count('multi-hop'),
     awayOriginDays: days.filter((d) => !d.startsHaven).length,
+    unexplainedAwayMornings,
     awayContinuations: count('away-continuation'),
     awayReturns: count('away-return'),
     stays: count('stay'),
@@ -138,7 +149,7 @@ function analyzeDir(corpusDir) {
   return {
     corpusDir,
     policy: perSeed.length ? perSeed[0].policy : null,
-    days: perSeed.length ? perSeed[0].days : null,
+    horizonDays: perSeed.length ? perSeed[0].horizonDays : null,
     legs: perSeed.length,
     seeds: perSeed.map((s) => s.seed),
     totalGenuine: sum('genuine'),
@@ -149,6 +160,7 @@ function analyzeDir(corpusDir) {
     totalDayTrips: sum('dayTrips'),
     totalMultiHop: sum('multiHop'),
     totalAwayOriginDays: sum('awayOriginDays'),
+    totalUnexplainedAwayMornings: perSeed.reduce((t, s) => t + (s.unexplainedAwayMornings || []).length, 0),
     totalAwayContinuations: sum('awayContinuations'),
     totalAwayReturns: sum('awayReturns'),
     totalStays: sum('stays'),
@@ -166,10 +178,11 @@ if (require.main === module) {
   const census = analyzeDir(dir);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, JSON.stringify(census, null, 2));
-  console.log('census: ' + census.legs + ' legs policy=' + census.policy + ' days=' + census.days +
+  console.log('census: ' + census.legs + ' legs policy=' + census.policy + ' horizonDays=' + census.horizonDays +
     ' genuine=' + census.totalGenuine + ' seedsWithGenuine=' + JSON.stringify(census.seedsWithGenuine) +
     ' dayTrips=' + census.totalDayTrips + ' multiHop=' + census.totalMultiHop +
     ' road=' + census.totalRoadAbsences + ' sleepReturns=' + census.totalSleepReturns +
+    ' unexplainedAwayMornings=' + census.totalUnexplainedAwayMornings +
     ' rawCreek=' + census.totalRawCreekEvenings + ' checkedCreek=' + census.totalHavenCheckedCreekEvenings);
 }
 
