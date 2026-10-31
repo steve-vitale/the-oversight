@@ -618,6 +618,15 @@
         var pmax = (m && pi === 0 && m.maxHp) ? m.maxHp : Math.max(php, hpDef[1] || hpDef[0]);
         members.push({ hp: php, maxHp: pmax, alive: php > 0 });
       }
+      // CONTACTREC (sim-contactrec-a, 2026-10-31): pure logging emission
+      // ONLY. The recorder cannot see opening HP on ephemeral (m=null)
+      // meetings from its pre-call capture, so the record carries it:
+      // members[0] is the fight's own opening body, before ambush,
+      // volley, or any round. These two keys are read by no engine
+      // code, draw no RNG, and write no state — every return path
+      // below carries them unchanged.
+      rec.mHpStart = members[0].hp;
+      rec.mMaxHp = members[0].maxHp;
       // Original body draw, before ambush/volley/any damage. Unknown saved
       // maxima cannot invent an unwounded encounter.
       var huntOpening = { actorMaxHp: vHpMax, allies: Math.max(0, opts.allies || 0),
