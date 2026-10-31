@@ -8,6 +8,9 @@
 // Default out: evidence/2026-10-31/perseed-spearxbow-a/fixture-band.json
 // The file contains NO timestamps or timings, so two runs on the same
 // base are byte-comparable (the determinism gate in the prereg).
+// anchorCommit is the last commit touching src/, not HEAD (see the
+// anchor comment in main()): a HEAD anchor moves when the corpus
+// itself is committed, so it can never be byte-stable.
 //
 // Design (see evidence/2026-10-31/sim-spearxbow-a-prereg.md): two roster
 // NPC fighters (leader + 1 from-start ally — the largest party
@@ -102,8 +105,19 @@ function summarize(fights) {
 
 async function main() {
   const outPath = process.argv[2] || path.join(REPO, 'evidence', '2026-10-31', 'perseed-spearxbow-a', 'fixture-band.json');
+  // Anchor = last commit touching src/ (the game code actually measured),
+  // NOT HEAD. HEAD is self-referential here and can never satisfy the
+  // byte-exact determinism gate: the corpus is generated on HEAD H, then
+  // committed, which moves HEAD to H' != H, so every re-run records H'
+  // and differs from the committed corpus by exactly that one line
+  // (2026-10-31 fix-up: the original corpus differed from fresh reruns
+  // ONLY in anchorCommit, 003a9c2f... vs 200c4ef6..., all 176 fights
+  // byte-identical). The last-src-commit anchor is stable across
+  // script/evidence-only commits (including the commit carrying this
+  // corpus) and changes exactly when src/ changes — i.e. exactly when
+  // the corpus must be regenerated.
   let anchor = 'unknown';
-  try { anchor = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
+  try { anchor = execSync('git log -1 --format=%H -- src/', { cwd: REPO }).toString().trim(); } catch (e) {}
   const { Game, loadFails } = await loadGame({ seed: 4242, mode: 'spearxbow-fixture' });
   if (loadFails && loadFails.length) { console.error('LOAD FAILS: ' + loadFails.join('; ')); process.exit(1); }
   await quietLog(async () => { await setupGame(Game); });

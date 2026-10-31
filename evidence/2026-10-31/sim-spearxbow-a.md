@@ -2,9 +2,18 @@
 
 Run: Loop A, oversight-flesh-out-loop, run fleshout-20261031T0915Z,
 axis scale-onramp, arm sim-spearxbow-a. Worktree branch: sim-spearxbow-a.
-Base anchor: 003a9c2f391edd56f31a0f6f9f1305dfe6380a48 (recorded in the
-corpus; this arm re-anchored itself, it does not assume the
-partyvolley-b tree).
+Base anchor at first commit: 003a9c2f391edd56f31a0f6f9f1305dfe6380a48
+(worktree HEAD at generation time; this arm re-anchored itself, it does
+not assume the partyvolley-b tree). FIX-UP 2026-10-31: that HEAD anchor
+made the proof's byte-exact determinism gate unpassable by construction
+— committing the corpus moved HEAD, so fresh reruns differed from the
+committed corpus in exactly one line, anchorCommit only, all 176 fights
+byte-identical. The instrument now anchors on the last commit touching
+src/ (7d5281064a760769f8c55fd431d36820fbd7beb5, the game code actually measured), which is stable
+across the script/evidence-only commit carrying the corpus; the corpus
+was regenerated from the fixed instrument with no other change, the
+verdicts below are unchanged, and the proof re-runs 27/27 on the
+post-commit HEAD.
 Pre-registration: evidence/2026-10-31/sim-spearxbow-a-prereg.md
 (written BEFORE any judged sims; judged against it below).
 Instrument: scripts/spearxbow-fixture-20261031.js (forced-meeting
