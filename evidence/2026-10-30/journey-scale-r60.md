@@ -301,8 +301,17 @@ lineage. Baseline NOT rolled on this run's numbers (prereg said so).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
-Master at worktree creation: 7a2974684. (Filled at closeout after
-the merge step.)
+Master at worktree creation: 7a2974684. Master DID move during the
+run (Lane B journey-social r80 landed; HEAD was 168db1ea3 at merge
+time), so the body's rebase path was taken: branch rebased onto
+168db1ea3 (clean, no conflicts, tree clean), proofs re-run after the
+rebase (`node --check` on driver + analyzer clean; analyzer
+reproduces all three census tables exactly as recorded above; `git
+diff master -- src/js/` 0 lines), then merge --ff-only. Unlike r59,
+the closeout did NOT release/remove the worktree before the merge —
+the merge succeeded first, then release/removal followed.
+Merged locally, pending ship (no bump, no push, no live verify —
+ship loop owns those).
 
 ## CHECK-QUICK (filled at closeout)
 `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest`:
