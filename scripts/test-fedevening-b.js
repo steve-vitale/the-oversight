@@ -180,4 +180,64 @@ check('starvationCount case-insensitive', () => {
   assert.strictEqual(starvationCount([{ cause: 'starvation' }, { cause: 'the wild' }, { note: 'STARVED' }]), 2);
 });
 
-console.log('test-fedevening-b pure: ' + n + ' checks, exit=' + (process.exitCode || 0));
+// --- corpus checks (DIAG run: strand set empty on this base) ---
+// These run over the committed corpora only; they assert the DIAG's
+// factual basis (clean legs, zero creek evenings everywhere), never a
+// strand verdict (there is no strand to judge).
+const fs = require('fs');
+const path = require('path');
+const EV = path.join(__dirname, '..', 'evidence', '2026-10-31');
+function loadDir(dir, prefix) {
+  const out = {};
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
+    const d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    out[d.seed] = d;
+  }
+  return out;
+}
+function creekStill(d) {
+  return (d.evenings || []).filter((e) => (e.woodcarry || {}).bucket === 'creek');
+}
+check('pilot corpus 8/8, errs 0, zero creek evenings', () => {
+  const pilot = loadDir(path.join(EV, 'sim-fedevening-b-corpus-pilot-on'));
+  assert.strictEqual(Object.keys(pilot).length, 8);
+  for (const seed of Object.keys(pilot)) {
+    const d = pilot[seed];
+    assert.strictEqual(d.errCount, 0, 'seed ' + seed + ' errs');
+    assert.strictEqual(d.daysAlive, 30, 'seed ' + seed + ' daysAlive');
+    assert.strictEqual(creekStill(d).length, 0, 'seed ' + seed + ' creek evenings');
+  }
+  const p15215 = pilot[15215];
+  assert.strictEqual(p15215.fedeveningStore.acted, 0);
+  assert.strictEqual(p15215.fedeveningStore.errs, 0);
+  assert.strictEqual(p15215.warmthStore.acted, 0);
+});
+check('control corpora 8/8 per leg, errs 0, zero creek evenings', () => {
+  for (const leg of ['sim-fedevening-b-control-on', 'sim-fedevening-b-control-guard']) {
+    const legs = loadDir(path.join(EV, leg));
+    assert.strictEqual(Object.keys(legs).length, 8, leg);
+    for (const seed of Object.keys(legs)) {
+      const d = legs[seed];
+      assert.strictEqual(d.errCount, 0, leg + ' seed ' + seed + ' errs');
+      assert.strictEqual(creekStill(d).length, 0, leg + ' seed ' + seed + ' creek');
+    }
+  }
+});
+check('driftcheck corpora reproduce stay-home on 15215 both legs', () => {
+  for (const leg of ['sim-fedevening-b-driftcheck-on', 'sim-fedevening-b-driftcheck-guard']) {
+    const legs = loadDir(path.join(EV, leg));
+    assert.strictEqual(Object.keys(legs).length, 1, leg);
+    const d = legs[15215];
+    assert.strictEqual(d.errCount, 0);
+    assert.strictEqual(creekStill(d).length, 0);
+    assert.strictEqual(d.daysAlive, 30);
+  }
+});
+check('pilot 15215 vessel never leaves haven', () => {
+  const pilot = loadDir(path.join(EV, 'sim-fedevening-b-corpus-pilot-on'));
+  const d = pilot[15215];
+  assert.ok((d.evenings || []).every((e) => e.tile === 'haven'));
+  assert.strictEqual(d.spawn.pos.vesselId, 'gen_gyft62f');
+});
+
+console.log('test-fedevening-b: ' + n + ' checks, exit=' + (process.exitCode || 0));
