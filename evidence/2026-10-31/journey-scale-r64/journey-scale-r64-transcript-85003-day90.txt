@@ -1,0 +1,24 @@
+(pre-talk seed: ask_favor planted d86; takenWantDay=0; convoCount=16)
+=== seed 85003 day 90 — conversation with Olivia (olivia_bennett) ===
+occupation=Social worker temperament=warm trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: I'll do what it takes. I'll live with what I've done. That's the deal.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the cache spot. Olivia doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:more] "Tell me more."
+THEM: "The will to live isn't poetic. It's stubborn. I'm stubborn."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "One more day. That's the goal. It's always been the goal. Everything else is decoration."
+YOU: [dlg:react] (listen)
+THEM: "I'm not proud of how I survive. I'm just committed to it."
+YOU: [dlg:more] "Tell me more."
+THEM: "I've stopped asking why. Why is a luxury. How is the necessity."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Come find me later, yeah? I like talking to you."

@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=11)
+=== seed 85107 day 90 — conversation with Chris (gen_mm7c75n) ===
+occupation=mechanic temperament=steady trust=92 dead=false
+want: ask_favor (stage 2)
+open thread: grief fromSeed=true
+picker: control
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Stephen headed out to find someone."
+YOU: [dlg:more] "I’m listening."
+THEM: "Aitana talks to the garden. The garden listens. I've seen it."
+YOU: [dlg:react] (listen)
+THEM: "Aroha headed out to forage."
+YOU: [dlg:more] "Tell me more."
+THEM: "Stephen is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "Alright — I should get back to it."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip

@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d108; takenWantDay=0; convoCount=14)
+=== seed 85107 day 120 — conversation with Chris (gen_mm7c75n) ===
+occupation=mechanic temperament=steady trust=92 dead=false
+want: ask_favor (stage 0)
+open thread: goal fromSeed=false
+picker: control
+
+THEM: Hold it together. That's my whole philosophy. Hold it together.
+(turn0 choices: dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "Everyone's allowed a bad day. Nobody's allowed two in a row. My rule."
+YOU: [dlg:react] (listen)
+THEM: "Somebody has to be the calm one. I've taken the job. No one else applied."
+YOU: [dlg:more] "Tell me more."
+THEM: "You two sort it out, or I will, and nobody likes my version."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "Arguments cost calories. I do the math out loud until people stop."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "Okay. We'll pick this up later."
+YOU: (leave)
+pre-close: want ask_favor stage 0 thread goal

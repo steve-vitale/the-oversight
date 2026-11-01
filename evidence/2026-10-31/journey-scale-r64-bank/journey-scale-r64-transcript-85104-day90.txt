@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=9)
+=== seed 85104 day 90 — conversation with Chester (gen_t397yuo) ===
+occupation=Pharmacist temperament=mischievous trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "When's the last time you really laughed? You'd know about that."
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it, as it were."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Alright. Back to it."
