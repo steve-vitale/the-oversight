@@ -179,21 +179,27 @@ function installHeraldArrCapture(Game, store) {
       const heraldAfter = heraldTile();
       const scholarMoved = !!(fromTile && scholarAfter && !HAL.sameTile(fromTile, scholarAfter));
       const hadOldMonster = !!oldMonster;
-      const hadHerald = !!(oldMonster && oldMonster.id === 'herald') || (heraldBefore && fromTile && HAL.sameTile(heraldBefore, fromTile));
-      // Note: hadHerald via oldMonster is exact; the heraldBefore fallback
-      // covers a herald on the from-tile when monsterAt returned another
-      // stacked monster (one-monster-per-tile should prevent this).
+      // Tracked = the herald itself sat on the from-tile, i.e. the herald
+      // IS the old monster the follow branch governs. Only tracked calls
+      // can contradict a branch prediction. A herald that moves during a
+      // travelTo where it was NOT the old monster moved via a nested
+      // call (worldTick -> wander, recorded by the wander wrapper) — that
+      // is a nestedMove observation, never a branch mismatch, and it must
+      // NOT push a second move event (v1 double-counted exactly this).
+      const tracked = !!(heraldBefore && fromTile && HAL.sameTile(heraldBefore, fromTile));
       const branch = HAL.predictTravelBranch({
         scholarMoved: scholarMoved, hadOldMonster: hadOldMonster,
         follows: followsVal, destOccupied: !!destOccupied, destSafe: !!destSafe,
       });
-      let mismatch = null;
-      if (heraldBefore && HAL.sameTile(heraldBefore, fromTile)) {
+      let mismatch = null, nestedMove = false;
+      if (tracked) {
         mismatch = HAL.travelMismatch(branch, heraldBefore, heraldAfter, dest);
       } else if (heraldBefore && heraldAfter && !HAL.sameTile(heraldBefore, heraldAfter)) {
-        mismatch = 'heraldMovedWithoutOldMonster';
+        nestedMove = true;
       } else if (!heraldBefore && heraldAfter) {
-        mismatch = 'appearedDuringTravel';
+        nestedMove = true;
+      } else if (heraldBefore && !heraldAfter) {
+        nestedMove = true;
       }
       const sayDuring = store.sayLines.filter(s => s.seq > seqBefore && s.seq <= store.saySeq).map(s => ({ kind: s.kind, text: s.text }));
       const rec = {
@@ -202,20 +208,16 @@ function installHeraldArrCapture(Game, store) {
         oldMonsterId: oldMonster ? oldMonster.id : null,
         followsRaw: (followsVal === undefined ? null : followsVal),
         destOccupied: destOccupied, destSafe: destSafe,
-        branch: branch, mismatch: mismatch, sayDuring: sayDuring,
+        branch: branch, mismatch: mismatch, nestedMove: nestedMove, sayDuring: sayDuring,
         returnedKind: (r === null ? 'null' : (r && typeof r === 'object' ? (r.blockType ? 'block:' + r.blockType : 'object') : typeof r)),
       };
       store.travelEvents.push(rec);
-      // Move-event attribution: only herald moves count as moves.
-      if (heraldBefore && heraldAfter && !HAL.sameTile(heraldBefore, heraldAfter)) {
-        const cls = (branch === 'followEnter' && oldMonster && oldMonster.id === 'herald') ? 'followEnter'
-          : (branch === 'followEnter' ? 'followEnterOther' : 'travelOther');
-        pushMove(cls, heraldBefore, heraldAfter, { branch: branch, oldMonsterId: oldMonster ? oldMonster.id : null });
-      } else if (heraldBefore && !heraldAfter) {
-        pushMove('travelRemove', heraldBefore, null, { branch: branch });
-      } else if (!heraldBefore && heraldAfter) {
-        pushMove('travelAppear', null, heraldAfter, { branch: branch });
-      }
+      // NOTE (v2): this wrapper pushes NO move events. Herald moves
+      // during travelTo are either the follow leg itself (synthesized
+      // by the analyzer from this travelEvent when oldMonsterId is
+      // 'herald' and the branch is followEnter) or nested wander
+      // moves (recorded by the wander wrapper). Pushing a diff here
+      // double-counted the nested case in v1 and broke chain continuity.
     } catch (e) { noteErr('travelAfter', e); }
     return r;
   });

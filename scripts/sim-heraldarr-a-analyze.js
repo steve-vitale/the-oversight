@@ -40,13 +40,18 @@ function analyzeSeed(s) {
     if (firstDawn) window = s.gameDays - firstDawn.day;
   }
   // Branch counts over travel events where a monster sat on the from-tile.
+  // Mismatches count ONLY tracked herald cases (oldMonsterId 'herald' with
+  // a branch contradiction); nested wander moves during other monsters'
+  // travelTo calls are observations, not branch violations (v2 taxonomy).
   const branchCounts = {};
   const mismatches = [];
+  let nestedMoves = 0;
   for (const t of travel) {
     if (t.oldMonsterId) {
       branchCounts[t.branch] = (branchCounts[t.branch] || 0) + 1;
-      if (t.mismatch) mismatches.push({ day: t.day, from: t.from, dest: t.dest, oldMonsterId: t.oldMonsterId, branch: t.branch, mismatch: t.mismatch, heraldBefore: t.heraldBefore, heraldAfter: t.heraldAfter });
+      if (t.oldMonsterId === 'herald' && t.mismatch) mismatches.push({ day: t.day, from: t.from, dest: t.dest, oldMonsterId: t.oldMonsterId, branch: t.branch, mismatch: t.mismatch, heraldBefore: t.heraldBefore, heraldAfter: t.heraldAfter });
     }
+    if (t.nestedMove) nestedMoves++;
   }
   const heraldTravel = travel.filter(t => t.oldMonsterId === 'herald');
   const heraldBranchCounts = {};
@@ -54,6 +59,39 @@ function analyzeSeed(s) {
   // Move-kind counts.
   const moveKinds = {};
   for (const m of moves) moveKinds[m.kind] = (moveKinds[m.kind] || 0) + 1;
+  // Chain events per inter-dawn window: primitive moves with day in
+  // [prev.day, cur.day), PLUS dawn-tick spawns stamped day == cur.day
+  // when the herald was absent at prev dawn (the spawn fires inside
+  // titanDawnTick before the dawn snapshot, so its day stamp equals the
+  // dawn day it appears in), PLUS synthesized follow legs from
+  // travelEvents (the sweep's travelTo wrapper pushes no move events
+  // since v2 — see the sweep note). A synthesized leg is dropped when
+  // a primitive move with identical (day, from, to) already covers it.
+  // Same-day order between a synthesized leg and same-day primitive
+  // moves is unknown (nested worldTick order inside travelTo), so the
+  // chain test tries primitives-then-synthesized AND the reverse.
+  function windowChainEvents(prev, cur) {
+    const prim = moves.filter(m => (m.day >= prev.day && m.day < cur.day) ||
+      (m.kind === 'spawn' && m.day === cur.day && !prev.heraldTile));
+    const primEvents = prim.map(m => ({ from: m.from, to: m.to, cls: m.kind }));
+    const synth = [];
+    for (const t of travel) {
+      if (t.oldMonsterId !== 'herald') continue;
+      if (!t.heraldBefore || !t.heraldAfter || HAL.sameTile(t.heraldBefore, t.heraldAfter)) continue;
+      if (!(t.day >= prev.day && t.day < cur.day)) continue;
+      const cls = t.branch === 'followEnter' ? 'followEnter' : (t.mismatch ? 'travelAnomaly' : 'travelOther');
+      const dup = prim.some(m => m.day === t.day && HAL.sameTile(m.from, t.heraldBefore) && HAL.sameTile(m.to, t.heraldAfter));
+      if (!dup) synth.push({ from: t.heraldBefore, to: t.heraldAfter, cls: cls });
+    }
+    return { primEvents: primEvents, synthEvents: synth, allMoves: prim };
+  }
+  function attributeWithOrderAllowance(prevTile, curTile, primEvents, synthEvents) {
+    const a = HAL.attributeWindow(prevTile, curTile, primEvents.concat(synthEvents));
+    if (a.attributed) return a;
+    const b = HAL.attributeWindow(prevTile, curTile, synthEvents.concat(primEvents));
+    if (b.attributed) return b;
+    return a;
+  }
   // Haven-tile arrival windows + attribution chains.
   const havenWindows = [];
   // Inter-dawn windows: move events are day-stamped with scholar.day at
@@ -74,14 +112,13 @@ function analyzeSeed(s) {
     const curIsHaven = HAL.sameTile(cur.heraldTile, cur.havenTile);
     const prevIsHaven = prev.heraldTile ? HAL.sameTile(prev.heraldTile, cur.havenTile) : false;
     if (!curIsHaven || prevIsHaven) continue;
-    const windowMoves = moves.filter(m => m.day >= prev.day && m.day < cur.day && m.kind !== 'remove');
-    const chainEvents = windowMoves.map(m => ({ from: m.from, to: m.to, cls: m.kind }));
-    const attr = HAL.attributeWindow(prev.heraldTile, cur.heraldTile, chainEvents);
+    const we = windowChainEvents(prev, cur);
+    const attr = attributeWithOrderAllowance(prev.heraldTile, cur.heraldTile, we.primEvents, we.synthEvents);
     havenWindows.push({
       fromDawn: prev.day, toDawn: cur.day,
       fromTile: prev.heraldTile, toTile: cur.heraldTile,
       havenTile: cur.havenTile,
-      movesInWindow: windowMoves.map(m => ({ kind: m.kind, from: m.from, to: m.to, branch: m.branch || null })),
+      movesInWindow: we.allMoves.map(m => ({ kind: m.kind, from: m.from, to: m.to, branch: m.branch || null })),
       attributed: attr.attributed, landingCls: attr.landingCls, reason: attr.reason,
     });
   }
@@ -94,11 +131,10 @@ function analyzeSeed(s) {
     if (HAL.sameTile(prev.heraldTile, cur.heraldTile)) continue;
     if (!prev.heraldTile && !cur.heraldTile) continue;
     changeWindows++;
-    const windowMoves = moves.filter(m => m.day >= prev.day && m.day < cur.day && m.kind !== 'remove');
-    const chainEvents = windowMoves.map(m => ({ from: m.from, to: m.to, cls: m.kind }));
-    const attr = HAL.attributeWindow(prev.heraldTile, cur.heraldTile, chainEvents);
+    const we = windowChainEvents(prev, cur);
+    const attr = attributeWithOrderAllowance(prev.heraldTile, cur.heraldTile, we.primEvents, we.synthEvents);
     if (attr.attributed) attributedWindows++;
-    else unattributed.push({ fromDawn: prev.day, toDawn: cur.day, fromTile: prev.heraldTile, toTile: cur.heraldTile, reason: attr.reason, movesInWindow: windowMoves.map(m => ({ kind: m.kind, from: m.from, to: m.to })) });
+    else unattributed.push({ fromDawn: prev.day, toDawn: cur.day, fromTile: prev.heraldTile, toTile: cur.heraldTile, reason: attr.reason, movesInWindow: we.allMoves.map(m => ({ kind: m.kind, from: m.from, to: m.to })) });
   }
   return {
     seed: s.seed, days: s.days, gameDays: s.gameDays, endReason: s.endReason,
@@ -109,7 +145,7 @@ function analyzeSeed(s) {
     contacts: contacts.length, scholarContacts: scholarContacts, villagerContacts: villagerContacts,
     dawns: dawns.length, moves: moves.length,
     moveKinds: moveKinds, branchCounts: branchCounts, heraldBranchCounts: heraldBranchCounts,
-    mismatches: mismatches, travelEvents: travel.length,
+    mismatches: mismatches, nestedMoves: nestedMoves, travelEvents: travel.length,
     captureErrs: s.captureErrs, havenWindows: havenWindows,
     changeWindows: changeWindows, attributedWindows: attributedWindows, unattributed: unattributed,
     worldTickCount: s.worldTickCount, wanderCalls: s.wanderCalls,

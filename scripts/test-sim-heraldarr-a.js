@@ -87,9 +87,12 @@ if (corpusDir && analysisPath) {
     check('corpus-' + s.seed + '-has-end-fields', s.endReason != null && s.gameDays != null && s.endScaleRank != null, { seed: s.seed });
     check('corpus-' + s.seed + '-has-dawns-or-unlocated', Array.isArray(s.dawns), { seed: s.seed });
     // Recompute travel mismatches from the records and compare counts.
+    // Only tracked herald cases count as branch mismatches (v2 taxonomy:
+    // nested wander moves during other monsters' travelTo calls are
+    // observations, not violations).
     let recomputed = 0;
     for (const t of (s.travelEvents || [])) {
-      if (!t.oldMonsterId) continue;
+      if (t.oldMonsterId !== 'herald') continue;
       if (t.mismatch) recomputed++;
       // Cross-check the stored mismatch against the lib's own verdict
       // when the herald sat on the from-tile (the case the lib judges).
@@ -98,6 +101,9 @@ if (corpusDir && analysisPath) {
         check('corpus-' + s.seed + '-mismatch-agrees-' + t.day + '-' + t.branch, (want === null) === (t.mismatch === null), { day: t.day, branch: t.branch, stored: t.mismatch, recomputed: want });
       }
     }
+    // v2 sweep emits no travelTo-diff move events (double-count source).
+    const forbiddenKinds = (s.moves || []).filter(m => ['travelOther', 'travelRemove', 'travelAppear'].indexOf(m.kind) >= 0);
+    check('corpus-' + s.seed + '-no-v1-duplicate-kinds', forbiddenKinds.length === 0, { seed: s.seed, forbidden: forbiddenKinds });
     const perSeed = (analysis.perSeed || []).find(p => p.seed === s.seed);
     check('corpus-' + s.seed + '-in-analysis', !!perSeed, { seed: s.seed });
     if (perSeed) {
