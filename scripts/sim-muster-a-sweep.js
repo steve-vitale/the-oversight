@@ -314,7 +314,7 @@ async function oneRun(seed) {
     musterDiag: mstore ? { calls: mstore.calls, callTotals: mstore.callTotals, commitReturns: mstore.commitReturns, refusals: mstore.refusals, errs: mstore.errs, errors: mstore.errors } : null,
     endSnaps: endSnaps,
   };
-  process.stdout.write(JSON.stringify(out) + '\\n');
+  process.stdout.write(JSON.stringify(out) + '\n');
   const nRef = store.refusals.length;
   const verbs = mstore ? JSON.stringify(mstore.callTotals) : 'off';
   console.error(`done s${seed}: refusals=${nRef} verbs=${verbs} traj=${store.trajectory.length} sayLines=${store.sayLines.length} maxWave=${maxWave} nat=${national} table=${table} won=${won} end=${result.endReason} days=${gameDays} rank=${out.endScaleRank} capErrs=${store.captureErrs} mdErrs=${mstore ? mstore.errs : 'off'}`);
