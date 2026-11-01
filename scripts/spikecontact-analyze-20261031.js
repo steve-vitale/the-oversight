@@ -16,10 +16,11 @@
 // dropped (not proven).
 //
 // Universes (never pooled):
-// - U-COMMITTED: committedFinish === true, wave >= 3. Moment = FIRST
-//   commit line in the log. Engine truth: twoblowCommitMhp,
-//   twoblowCommitSum. Classified only if parsed strikes before the
-//   first commit line reproduce twoblowCommitSum exactly.
+// - U-COMMITTED: committedFinish === true, wave >= 3. Moment = LAST
+//   commit line in the log (the engine overwrites twoblowCommitMhp/
+//   twoblowCommitSum at every re-fire, so recorded engine truth
+//   describes the last firing). Classified only if parsed strikes
+//   before the last commit line reproduce twoblowCommitSum exactly.
 // - U-FLIGHT: wave-3, outcome mFlee, rounds >= 1, log contains the
 //   break-check marker "breaks — wounded past its line". Moment =
 //   flight, remainingHp = mHpLeft. Classified only if parsed
@@ -78,12 +79,16 @@ function parseLeadStrikes(log) {
   return { strikes: order, truncated: logTruncated(lines), damageSum, lines: lines.length };
 }
 
-// Strikes strictly before the first commit line (or null if no commit
-// line). Truncation is judged on the FULL log, never on the slice:
-// the slice ends at the commit line, which is not an outcome line.
+// Strikes strictly before the LAST commit line (or null if no commit
+// line). The engine overwrites twoblowCommitMhp/twoblowCommitSum at
+// every re-fire, so the recorded engine truth describes the LAST
+// firing, not the first — the parse must match that moment.
+// Truncation is judged on the FULL log, never on the slice: the
+// slice ends at the commit line, which is not an outcome line.
 function parseStrikesBeforeCommit(log) {
   const lines = Array.isArray(log) ? log.map(String) : [];
-  const idx = lines.findIndex(l => l.indexOf(COMMIT_MARKER) >= 0);
+  let idx = -1;
+  for (let i = 0; i < lines.length; i++) if (lines[i].indexOf(COMMIT_MARKER) >= 0) idx = i;
   if (idx < 0) return null;
   const sliced = parseLeadStrikes(lines.slice(0, idx));
   sliced.truncated = logTruncated(lines);
@@ -147,12 +152,21 @@ function analyzeFlight(f) {
   if (parsed.truncated) return Object.assign(base, { cls: 'UNCLASSIFIED', reason: 'log-truncated' });
   const strikes = parsed.strikes;
   if (!strikes.length) return Object.assign(base, { cls: 'UNCLASSIFIED', reason: 'no-parsed-strikes' });
-  if (strikes.length < 2) return Object.assign(base, { cls: 'UNCLASSIFIED', reason: 'fewer-than-2-parsed-strikes', strikes: strikes.map(s => s.dmg) });
-  const parsedSum = sumLastTwo(strikes);
-  if (f.twoblowLastTwo && f.twoblowLastTwo.length === 2) {
-    const engineSum = f.twoblowLastTwo[0] + f.twoblowLastTwo[1];
-    if (parsedSum !== engineSum) {
-      return Object.assign(base, { cls: 'UNCLASSIFIED', reason: 'parse-vs-engine-mismatch', parsedSum, engineSum, strikes: strikes.map(s => s.dmg) });
+  // A fight with exactly 1 proven blow cannot pass L (the gate needs
+  // two blows) but S is still evaluable: lastTwoPass = false by
+  // insufficiency, spikePass = the single blow vs remaining HP.
+  const parsedSum = sumLastTwo(strikes); // null when < 2 strikes
+  if (f.twoblowLastTwo && f.twoblowLastTwo.length >= 1) {
+    // Engine truth keeps only the last two proven blows (or the single
+    // blow when the fight has exactly one). Validate the tail, not
+    // the whole sequence: for 1-strike fights the engine tail is
+    // [that blow]; for longer fights it is the last two.
+    const engineTail = f.twoblowLastTwo.slice(-2);
+    const parsedTail = strikes.slice(-2).map(s => s.dmg);
+    const engineSum = engineTail.reduce((a, b) => a + b, 0);
+    const parsedTailSum = parsedTail.reduce((a, b) => a + b, 0);
+    if (engineTail.length !== parsedTail.length || engineSum !== parsedTailSum) {
+      return Object.assign(base, { cls: 'UNCLASSIFIED', reason: 'parse-vs-engine-mismatch', parsedSum: parsedTailSum, engineSum, strikes: strikes.map(s => s.dmg) });
     }
   } else if (f.mDealt != null) {
     // Baseline legs (pre-rule code): no engine twoblow fields exist.
@@ -167,7 +181,7 @@ function analyzeFlight(f) {
   if (f.mHpLeft == null) return Object.assign(base, { cls: 'UNCLASSIFIED', reason: 'mHpLeft-missing', strikes: strikes.map(s => s.dmg) });
   const mx = maxStrike(strikes);
   const spikePass = mx >= f.mHpLeft;
-  const lastTwoPass = parsedSum >= f.mHpLeft;
+  const lastTwoPass = parsedSum != null && parsedSum >= f.mHpLeft; // null = fewer than 2 blows: L false by insufficiency
   const out = Object.assign(base, { cls: classify(spikePass, lastTwoPass), spikePass, lastTwoPass,
     maxStrike: mx, lastTwoSum: parsedSum, strikes: strikes.map(s => s.dmg) });
   // Blocking-gate hint for lever-leg flights that WOULD convert under L but fled.

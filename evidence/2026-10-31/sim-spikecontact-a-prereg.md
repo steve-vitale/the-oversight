@@ -78,12 +78,13 @@ true), neither (both false).
 DECISION MOMENTS (two universes, never pooled):
 
 - U-COMMITTED: every fight with committedFinish === true. Moment
-  = the FIRST commit in the fight (first log line containing
-  "(Committed finish, two-blow)"; later re-fires are the same
-  decision re-struck, not new decisions). Engine truth at the
+  = the LAST commit in the fight (last log line containing
+  "(Committed finish, two-blow)"; see Amendment 2 — the engine
+  overwrites the commit fields at every re-fire, so recorded
+  truth describes the last firing). Engine truth at the
   moment: twoblowCommitMhp (remaining HP) and twoblowCommitSum
   (last-two sum). Parsed strikes are taken from log lines strictly
-  BEFORE the first commit line. Classification uses engine
+  BEFORE the last commit line. Classification uses engine
   remainingHp = twoblowCommitMhp, engine lastTwoSum =
   twoblowCommitSum (so L is true by construction for every
   committed fight — the gate required it), and parsed
@@ -105,6 +106,29 @@ DECISION MOMENTS (two universes, never pooled):
   maxStrike = max parsed proven blow, lastTwoSum = sum of the
   last two parsed proven blows. Fights with fewer than 1 parsed
   proven blow are unparseable for this purpose, not "neither".
+
+AMENDMENT 2 (committed BEFORE any judged verdict, 2026-11-01):
+two parse-moment corrections found while validating the analyzer
+against the old corpora, before any evidence verdict:
+(1) U-COMMITTED moment = the LAST commit line, not the first.
+The engine overwrites twoblowCommitMhp/twoblowCommitSum at every
+re-fire (fieldFights.js break-check block), so the recorded
+engine truth describes the last firing. Proof on the old corpus:
+Kate s87123 d75 parses 34 before the first commit line but the
+engine records 36 — the last-two sum before the SECOND commit
+line (18+18), matching the recorded 36 exactly. Classifying at
+the first commit would compare parsed strikes against another
+moment's engine truth and fail validation spuriously.
+(2) U-FLIGHT fights with exactly ONE parsed proven blow are
+CLASSIFIED, not unclassified: L is false by insufficiency (the
+gate needs two blows) while S is still evaluable (the single
+blow vs remaining HP). Proof case: the Callback 1-round flight
+(Joaquín, s87124 d71: one 55-damage strike, beast at 25 HP left)
+is spike-only — a spike rule would have committed it, the
+last-two rule cannot. Validation for 1-strike fights: the
+engine tail is [that blow] on lever legs, damage reconciliation
+on baseline legs. Fights with ZERO parsed proven blows stay
+unclassified. No GO threshold changes.
 
 AMENDMENT 1 (committed BEFORE any judged verdict, 2026-11-01):
 baseline legs ran on pre-rule code, so their rows physically
