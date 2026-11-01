@@ -1,0 +1,8042 @@
+{
+ "seed": 85162,
+ "policyId": "leadfeast",
+ "instrument": "herald-v1+muster-diag+heraldhp-ledger",
+ "substrate": "withFullseatDiag(withSeatDrive(withWinDefer(TF leadfeast))), FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FULLSEAT=1 + HERALD=1 + MUSTER=1 + HERALDHP=1",
+ "anchorCommit": "a76c90dccdd8",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "w4Day": 60,
+ "w5Day": null,
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "days": 115,
+ "gameDays": 115,
+ "endReason": "village-lost",
+ "endScaleRank": "regional",
+ "endOmenStage": 2,
+ "endOmenDay": 74,
+ "endMusterExists": false,
+ "attempts4Count": 8,
+ "attemptsOtherCount": 16,
+ "attemptsUnresolvedMidCount": 0,
+ "fieldFights4Count": 9,
+ "kills4Count": 1,
+ "attempts": [
+  {
+   "day": 65,
+   "mid": "congregation",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "feast-draw",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.faceFeastDraw@feastBuff.js:520:20",
+    "Object.w@sim-harness.js:515:25",
+    "feastFightRoad@competent.js:511:38",
+    "Object.upkeep@competent.js:2834:5",
+    "Object.upkeep@feastscale.js:141:12"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": true,
+   "pendingMidBefore": "congregation",
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": null,
+   "entityHp": null,
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "won"
+  },
+  {
+   "day": 67,
+   "mid": "audit",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "contest",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "driveContestsImpl@sim-harness.js:816:12",
+    "run@sim-harness.js:774:21",
+    "Object.withOrigin@sim-harness.js:414:18",
+    "driveContests@sim-harness.js:775:41",
+    "/home/hatch/workspace/worktrees/sim-heraldhp2-a/scripts/sim-harness.js:559:7@sim-harness.js:559:7"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": true,
+   "pendingMidBefore": "audit",
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 0,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": null,
+   "entityHp": null,
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  },
+  {
+   "day": 77,
+   "mid": "eater",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "OTHER",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 1,
+    "my": 0,
+    "px": 1,
+    "py": 7
+   },
+   "entityPos": {
+    "tx": 1,
+    "ty": 7,
+    "mx": 1,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 950,
+    "maxHp": 950
+   },
+   "sayDuring": [
+    "The Eater is on you — no warning, just teeth.",
+    "Armor absorbs 8.",
+    "The Eater hits you for 63.",
+    "You go down.",
+    "📖 The Codex turns a page on its own. Anuwat Loahakul is dead. You didn't ask. It knew.",
+    "🕯️ Anuwat is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Anuwat Loahakul is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Anuwat's gone.\" Marcus looks at you for a long moment. \"You're not Anuwat.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Isaac blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "📖 LEARNED: Wiring & Circuits (Level 1). Volts, amps, and why you respect both. Safe splices, real grounds, no shortcuts.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Anuwat Loahakul, 77 days. The mantle passes to Isaac Jeon.",
+    "🪞 You wake up somebody else. Isaac Jeon, 19 — an appliance repair tech. Their hands know different work now: Iron Stomach, Green Thumb, Literally, War Cry.",
+    "The village's quarrel was with Anuwat — and Anuwat is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+    "You knew Anuwat — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+    "At the grave, Maisie, Marcus, Jesse speak for Isaac — \"Anuwat trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+    "The fire knew Isaac before the Codex did — their name already carried weight here."
+   ],
+   "gameOutcomes": [],
+   "end": null
+  },
+  {
+   "day": 93,
+   "mid": "eulogy",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 7,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 7,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 675,
+    "maxHp": 900
+   },
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  },
+  {
+   "day": 94,
+   "mid": "eulogy",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 4,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 4,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 428,
+    "maxHp": 900
+   },
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  },
+  {
+   "day": 94,
+   "mid": "eulogy",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 4,
+    "my": 4,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 4,
+    "my": 4
+   },
+   "entityHp": {
+    "hp": 350,
+    "maxHp": 900
+   },
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  },
+  {
+   "day": 94,
+   "mid": "eulogy",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 4,
+    "my": 4,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 4,
+    "my": 4
+   },
+   "entityHp": {
+    "hp": 269,
+    "maxHp": 900
+   },
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  },
+  {
+   "day": 99,
+   "mid": "algorithm",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23333:42",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 0,
+    "my": 0,
+    "px": 3,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 0,
+    "ty": 8,
+    "mx": 3,
+    "my": 8
+   },
+   "entityHp": {
+    "hp": 1000,
+    "maxHp": 1000
+   },
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "lost"
+  }
+ ],
+ "fieldFights": [
+  {
+   "day": 67,
+   "vid": "katarina_novak",
+   "mid": "algorithm",
+   "wave": 4,
+   "outcome": "vDie",
+   "rounds": 2,
+   "vTaken": 164,
+   "mDealt": 33,
+   "vHpLeft": 0,
+   "mHpLeft": 987
+  },
+  {
+   "day": 97,
+   "vid": "ivy_wang",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vDie",
+   "rounds": 1,
+   "vTaken": 36,
+   "mDealt": 0,
+   "vHpLeft": 0,
+   "mHpLeft": 246
+  },
+  {
+   "day": 97,
+   "vid": "app_mgpsphip994",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vFlee",
+   "rounds": 2,
+   "vTaken": 52,
+   "mDealt": 11,
+   "vHpLeft": 11,
+   "mHpLeft": 235
+  },
+  {
+   "day": 98,
+   "vid": "luis_fernandez",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "vTaken": 52,
+   "mDealt": 13,
+   "vHpLeft": 31,
+   "mHpLeft": 222
+  },
+  {
+   "day": 99,
+   "vid": "luis_fernandez",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "vTaken": 53,
+   "mDealt": 0,
+   "vHpLeft": 21,
+   "mHpLeft": 222
+  },
+  {
+   "day": 104,
+   "vid": "luis_fernandez",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vDie",
+   "rounds": 2,
+   "vTaken": 112,
+   "mDealt": 0,
+   "vHpLeft": 0,
+   "mHpLeft": 222
+  },
+  {
+   "day": 108,
+   "vid": "lena_ruiz",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "vTaken": 92,
+   "mDealt": 0,
+   "vHpLeft": 1,
+   "mHpLeft": 675
+  },
+  {
+   "day": 109,
+   "vid": "valeria_quispe",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vFlee",
+   "rounds": 3,
+   "vTaken": 52,
+   "mDealt": 0,
+   "vHpLeft": 30,
+   "mHpLeft": 675
+  },
+  {
+   "day": 111,
+   "vid": "app_mgpspive779",
+   "mid": "eulogy",
+   "wave": 4,
+   "outcome": "vFlee",
+   "rounds": 2,
+   "vTaken": 91,
+   "mDealt": 0,
+   "vHpLeft": 9,
+   "mHpLeft": 675
+  }
+ ],
+ "kills": [
+  {
+   "day": 65,
+   "mid": "congregation",
+   "wave": 4,
+   "by": "gen_4ihp4d8",
+   "via": "player"
+  }
+ ],
+ "musterEvents": [],
+ "census": [
+  {
+   "day": 2,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 2,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 4,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 4,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 5,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 6,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 7,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 8,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 9,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 10,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 11,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 12,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 13,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 14,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 15,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 16,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 17,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 18,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 19,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 20,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 21,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 22,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 23,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 24,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 25,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 26,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 27,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 28,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 29,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 30,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 31,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 32,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 33,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 34,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 35,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 36,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 37,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 38,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 39,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 40,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 41,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 42,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 43,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 44,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 45,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 46,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 47,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 48,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 49,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 50,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 51,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 52,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 53,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 54,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 55,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 56,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 57,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 58,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 59,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 60,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 61,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 62,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 63,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 64,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 65,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 66,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 67,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 68,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 69,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 70,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 71,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 72,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 73,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 74,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 75,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 76,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 77,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 78,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 79,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 80,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 81,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 82,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 83,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 84,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 85,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 86,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 87,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 88,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 89,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 90,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 91,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 92,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 93,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 94,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 95,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 96,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 97,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 98,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 99,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 100,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 101,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 102,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 103,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 104,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 105,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 106,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 107,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 108,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 109,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 110,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 111,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 112,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 113,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 114,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 115,
+   "uw": 4,
+   "rank": "regional"
+  }
+ ],
+ "transcripts": [],
+ "musterRefusals": [],
+ "musterCalls": {
+  "soundTitanCall": 0,
+  "titanCommitOwn": 0,
+  "titanSelfDo": 0,
+  "titanWarCouncil": 0
+ },
+ "musterCommitReturns": [],
+ "musterInstalled": true,
+ "musterErrs": 0,
+ "musterErrors": [],
+ "heraldhp": {
+  "ledger": [
+   {
+    "seq": 1,
+    "fn": "spawnWorldMonster",
+    "day": 74,
+    "dayBefore": 74,
+    "depth": 2,
+    "span": 2823,
+    "parent": 2822,
+    "before": [],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 5,
+      "ty": 7,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "herald",
+     "tx": 5,
+     "ty": 7,
+     "hpOpt": null,
+     "titanOpt": true
+    }
+   },
+   {
+    "seq": 2,
+    "fn": "titanDawnTick",
+    "day": 74,
+    "dayBefore": 74,
+    "depth": 1,
+    "span": 2822,
+    "parent": 2815,
+    "before": [],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 5,
+      "ty": 7,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 3,
+    "fn": "sleep",
+    "day": 74,
+    "dayBefore": 73,
+    "depth": 0,
+    "span": 2815,
+    "parent": null,
+    "before": [],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 5,
+      "ty": 7,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 4,
+    "fn": "wanderWorldMonsters",
+    "day": 74,
+    "dayBefore": 74,
+    "depth": 1,
+    "span": 2838,
+    "parent": 2836,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 5,
+      "ty": 7,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 6,
+      "ty": 7,
+      "mx": 4,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 5,
+    "fn": "worldTick",
+    "day": 74,
+    "dayBefore": 74,
+    "depth": 0,
+    "span": 2836,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 5,
+      "ty": 7,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 6,
+      "ty": 7,
+      "mx": 4,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 6,
+    "fn": "wanderWorldMonsters",
+    "day": 74,
+    "dayBefore": 74,
+    "depth": 1,
+    "span": 2845,
+    "parent": 2843,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 6,
+      "ty": 7,
+      "mx": 4,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 7,
+      "mx": 3,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 7,
+    "fn": "worldTick",
+    "day": 74,
+    "dayBefore": 74,
+    "depth": 0,
+    "span": 2843,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 6,
+      "ty": 7,
+      "mx": 4,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 7,
+      "mx": 3,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 8,
+    "fn": "wanderWorldMonsters",
+    "day": 75,
+    "dayBefore": 75,
+    "depth": 1,
+    "span": 2878,
+    "parent": 2876,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 7,
+      "mx": 3,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 9,
+    "fn": "worldTick",
+    "day": 75,
+    "dayBefore": 75,
+    "depth": 0,
+    "span": 2876,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 7,
+      "mx": 3,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 10,
+    "fn": "removeWorldMonster",
+    "day": 77,
+    "dayBefore": 77,
+    "depth": 2,
+    "span": 2932,
+    "parent": 2931,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "rut_king",
+     "tx": 4,
+     "ty": 4,
+     "hp": 15
+    }
+   },
+   {
+    "seq": 11,
+    "fn": "startCombat",
+    "day": 77,
+    "dayBefore": 77,
+    "depth": 1,
+    "span": 2931,
+    "parent": 2930,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "mid": "rut_king"
+    }
+   },
+   {
+    "seq": 12,
+    "fn": "monsterTurn",
+    "day": 77,
+    "dayBefore": 77,
+    "depth": 0,
+    "span": 2930,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 13,
+    "fn": "wanderWorldMonsters",
+    "day": 78,
+    "dayBefore": 78,
+    "depth": 1,
+    "span": 2977,
+    "parent": 2975,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 0,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 14,
+    "fn": "worldTick",
+    "day": 78,
+    "dayBefore": 78,
+    "depth": 0,
+    "span": 2975,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 0,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 15,
+    "fn": "wanderWorldMonsters",
+    "day": 79,
+    "dayBefore": 79,
+    "depth": 1,
+    "span": 3017,
+    "parent": 3015,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 0,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 8,
+      "ty": 5,
+      "mx": 0,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 16,
+    "fn": "worldTick",
+    "day": 79,
+    "dayBefore": 79,
+    "depth": 0,
+    "span": 3015,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 0,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 8,
+      "ty": 5,
+      "mx": 0,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 17,
+    "fn": "wanderWorldMonsters",
+    "day": 80,
+    "dayBefore": 80,
+    "depth": 1,
+    "span": 3049,
+    "parent": 3047,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 8,
+      "ty": 5,
+      "mx": 0,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 8,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 18,
+    "fn": "worldTick",
+    "day": 80,
+    "dayBefore": 80,
+    "depth": 0,
+    "span": 3047,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 8,
+      "ty": 5,
+      "mx": 0,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 8,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 19,
+    "fn": "wanderWorldMonsters",
+    "day": 81,
+    "dayBefore": 81,
+    "depth": 1,
+    "span": 3092,
+    "parent": 3090,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 8,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 4,
+      "mx": 7,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 20,
+    "fn": "worldTick",
+    "day": 81,
+    "dayBefore": 81,
+    "depth": 0,
+    "span": 3090,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 8,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 4,
+      "mx": 7,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 21,
+    "fn": "wanderWorldMonsters",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 1,
+    "span": 3118,
+    "parent": 3116,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 4,
+      "mx": 7,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 22,
+    "fn": "worldTick",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 0,
+    "span": 3116,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 4,
+      "mx": 7,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 23,
+    "fn": "removeWorldMonster",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 3,
+    "span": 3130,
+    "parent": 3128,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "statickite",
+     "tx": 0,
+     "ty": 5,
+     "hp": 80
+    }
+   },
+   {
+    "seq": 24,
+    "fn": "resolveWildMonsterEncounter",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 2,
+    "span": 3128,
+    "parent": 3127,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "vid": "tom_baker",
+     "mid": "statickite"
+    }
+   },
+   {
+    "seq": 25,
+    "fn": "villagerMonsterTick",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 1,
+    "span": 3127,
+    "parent": 3124,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 26,
+    "fn": "worldTick",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 0,
+    "span": 3124,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 27,
+    "fn": "wanderWorldMonsters",
+    "day": 83,
+    "dayBefore": 83,
+    "depth": 1,
+    "span": 3163,
+    "parent": 3161,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 8,
+      "ty": 5,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 28,
+    "fn": "worldTick",
+    "day": 83,
+    "dayBefore": 83,
+    "depth": 0,
+    "span": 3161,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 8,
+      "ty": 5,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 29,
+    "fn": "wanderWorldMonsters",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 1,
+    "span": 3207,
+    "parent": 3205,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 8,
+      "ty": 5,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 30,
+    "fn": "worldTick",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 0,
+    "span": 3205,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 8,
+      "ty": 5,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 31,
+    "fn": "removeWorldMonster",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 2,
+    "span": 3267,
+    "parent": 3266,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "hushwolf",
+     "tx": 4,
+     "ty": 4,
+     "hp": 1
+    }
+   },
+   {
+    "seq": 32,
+    "fn": "startCombat",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 1,
+    "span": 3266,
+    "parent": 3265,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "mid": "hushwolf"
+    }
+   },
+   {
+    "seq": 33,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 3265,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 34,
+    "fn": "wanderWorldMonsters",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 1,
+    "span": 3386,
+    "parent": 3384,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 35,
+    "fn": "worldTick",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3384,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 36,
+    "fn": "wanderWorldMonsters",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 1,
+    "span": 3395,
+    "parent": 3393,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 37,
+    "fn": "worldTick",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3393,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 38,
+    "fn": "removeWorldMonster",
+    "day": 92,
+    "dayBefore": 92,
+    "depth": 2,
+    "span": 3494,
+    "parent": 3493,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "belltoad",
+     "tx": 4,
+     "ty": 4,
+     "hp": 1
+    }
+   },
+   {
+    "seq": 39,
+    "fn": "startCombat",
+    "day": 92,
+    "dayBefore": 92,
+    "depth": 1,
+    "span": 3493,
+    "parent": 3492,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "mid": "belltoad"
+    }
+   },
+   {
+    "seq": 40,
+    "fn": "monsterTurn",
+    "day": 92,
+    "dayBefore": 92,
+    "depth": 0,
+    "span": 3492,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 41,
+    "fn": "removeWorldMonster",
+    "day": 94,
+    "dayBefore": 94,
+    "depth": 2,
+    "span": 3572,
+    "parent": 3571,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "hushwolf",
+     "tx": 3,
+     "ty": 4,
+     "hp": 7
+    }
+   },
+   {
+    "seq": 42,
+    "fn": "startCombat",
+    "day": 94,
+    "dayBefore": 94,
+    "depth": 1,
+    "span": 3571,
+    "parent": 3570,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "mid": "hushwolf"
+    }
+   },
+   {
+    "seq": 43,
+    "fn": "monsterTurn",
+    "day": 94,
+    "dayBefore": 94,
+    "depth": 0,
+    "span": 3570,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 44,
+    "fn": "wanderWorldMonsters",
+    "day": 95,
+    "dayBefore": 95,
+    "depth": 1,
+    "span": 3608,
+    "parent": 3606,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 7,
+      "ty": 6,
+      "mx": 1,
+      "my": 3,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 45,
+    "fn": "worldTick",
+    "day": 95,
+    "dayBefore": 95,
+    "depth": 0,
+    "span": 3606,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 7,
+      "ty": 6,
+      "mx": 1,
+      "my": 3,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 46,
+    "fn": "wanderWorldMonsters",
+    "day": 96,
+    "dayBefore": 96,
+    "depth": 1,
+    "span": 3636,
+    "parent": 3634,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 7,
+      "ty": 6,
+      "mx": 1,
+      "my": 3,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 47,
+    "fn": "worldTick",
+    "day": 96,
+    "dayBefore": 96,
+    "depth": 0,
+    "span": 3634,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 7,
+      "ty": 6,
+      "mx": 1,
+      "my": 3,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 48,
+    "fn": "wanderWorldMonsters",
+    "day": 97,
+    "dayBefore": 97,
+    "depth": 1,
+    "span": 3682,
+    "parent": 3680,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 3,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 49,
+    "fn": "worldTick",
+    "day": 97,
+    "dayBefore": 97,
+    "depth": 0,
+    "span": 3680,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 3,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 50,
+    "fn": "wanderWorldMonsters",
+    "day": 98,
+    "dayBefore": 98,
+    "depth": 1,
+    "span": 3712,
+    "parent": 3710,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 3,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 8,
+      "mx": 6,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 51,
+    "fn": "worldTick",
+    "day": 98,
+    "dayBefore": 98,
+    "depth": 0,
+    "span": 3710,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 3,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 8,
+      "mx": 6,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 52,
+    "fn": "wanderWorldMonsters",
+    "day": 99,
+    "dayBefore": 99,
+    "depth": 1,
+    "span": 3746,
+    "parent": 3744,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 8,
+      "mx": 6,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 2,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 53,
+    "fn": "worldTick",
+    "day": 99,
+    "dayBefore": 99,
+    "depth": 0,
+    "span": 3744,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 8,
+      "mx": 6,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 2,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 54,
+    "fn": "wanderWorldMonsters",
+    "day": 100,
+    "dayBefore": 100,
+    "depth": 1,
+    "span": 3780,
+    "parent": 3778,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 2,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 55,
+    "fn": "worldTick",
+    "day": 100,
+    "dayBefore": 100,
+    "depth": 0,
+    "span": 3778,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 2,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 56,
+    "fn": "wanderWorldMonsters",
+    "day": 105,
+    "dayBefore": 105,
+    "depth": 1,
+    "span": 3957,
+    "parent": 3955,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 5,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 57,
+    "fn": "worldTick",
+    "day": 105,
+    "dayBefore": 105,
+    "depth": 0,
+    "span": 3955,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 5,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 58,
+    "fn": "wanderWorldMonsters",
+    "day": 106,
+    "dayBefore": 106,
+    "depth": 1,
+    "span": 3985,
+    "parent": 3983,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 5,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 59,
+    "fn": "worldTick",
+    "day": 106,
+    "dayBefore": 106,
+    "depth": 0,
+    "span": 3983,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 5,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 60,
+    "fn": "removeWorldMonster",
+    "day": 110,
+    "dayBefore": 110,
+    "depth": 2,
+    "span": 4129,
+    "parent": 4128,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "hushwolf",
+     "tx": 4,
+     "ty": 4,
+     "hp": 1
+    }
+   },
+   {
+    "seq": 61,
+    "fn": "startCombat",
+    "day": 110,
+    "dayBefore": 110,
+    "depth": 1,
+    "span": 4128,
+    "parent": 4127,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "mid": "hushwolf"
+    }
+   },
+   {
+    "seq": 62,
+    "fn": "monsterTurn",
+    "day": 110,
+    "dayBefore": 110,
+    "depth": 0,
+    "span": 4127,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 63,
+    "fn": "wanderWorldMonsters",
+    "day": 110,
+    "dayBefore": 110,
+    "depth": 1,
+    "span": 4139,
+    "parent": 4137,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 8,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 64,
+    "fn": "worldTick",
+    "day": 110,
+    "dayBefore": 110,
+    "depth": 0,
+    "span": 4137,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 8,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 65,
+    "fn": "wanderWorldMonsters",
+    "day": 111,
+    "dayBefore": 111,
+    "depth": 1,
+    "span": 4171,
+    "parent": 4169,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 8,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 2,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 66,
+    "fn": "worldTick",
+    "day": 111,
+    "dayBefore": 111,
+    "depth": 0,
+    "span": 4169,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 8,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 2,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 67,
+    "fn": "wanderWorldMonsters",
+    "day": 111,
+    "dayBefore": 111,
+    "depth": 1,
+    "span": 4177,
+    "parent": 4175,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 2,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 68,
+    "fn": "worldTick",
+    "day": 111,
+    "dayBefore": 111,
+    "depth": 0,
+    "span": 4175,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 6,
+      "ty": 6,
+      "mx": 2,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 69,
+    "fn": "wanderWorldMonsters",
+    "day": 111,
+    "dayBefore": 111,
+    "depth": 1,
+    "span": 4185,
+    "parent": 4183,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 70,
+    "fn": "worldTick",
+    "day": 111,
+    "dayBefore": 111,
+    "depth": 0,
+    "span": 4183,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 71,
+    "fn": "wanderWorldMonsters",
+    "day": 114,
+    "dayBefore": 114,
+    "depth": 1,
+    "span": 4285,
+    "parent": 4283,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 4,
+      "ty": 7,
+      "mx": 4,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 72,
+    "fn": "worldTick",
+    "day": 114,
+    "dayBefore": 114,
+    "depth": 0,
+    "span": 4283,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 4,
+      "ty": 7,
+      "mx": 4,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   }
+  ],
+  "fieldRows": [
+   {
+    "seq": 0,
+    "span": 64,
+    "day": 3,
+    "vid": "mia_andersson",
+    "mid": "hummice",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 22,
+    "mHpLeft": 0,
+    "vTaken": 18,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 167,
+    "day": 6,
+    "vid": "gen_ov21wzx",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 3,
+    "mDealt": 30,
+    "mHpLeft": 30,
+    "vTaken": 56,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 169,
+    "day": 6,
+    "vid": "miguel_santos",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 64,
+    "mHpLeft": 6,
+    "vTaken": 28,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 175,
+    "day": 6,
+    "vid": "miguel_santos",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 21,
+    "mHpLeft": 9,
+    "vTaken": 18,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 234,
+    "day": 8,
+    "vid": "gen_4ihp4d8",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 9,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 242,
+    "day": 8,
+    "vid": "gen_c6ddwrp",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 9,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 248,
+    "day": 8,
+    "vid": "gen_akcx9vs",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 9,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 250,
+    "day": 8,
+    "vid": "jesse_cortez",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 43,
+    "mHpLeft": 7,
+    "vTaken": 25,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 260,
+    "day": 8,
+    "vid": "gen_akcx9vs",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 21,
+    "mHpLeft": 24,
+    "vTaken": 81,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 302,
+    "day": 9,
+    "vid": "jesse_cortez",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 17,
+    "mHpLeft": 7,
+    "vTaken": 11,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 364,
+    "day": 11,
+    "vid": "katarina_novak",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 370,
+    "day": 11,
+    "vid": "marcus_webb",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 387,
+    "day": 11,
+    "vid": "gen_4ihp4d8",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 389,
+    "day": 11,
+    "vid": "gen_akcx9vs",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 391,
+    "day": 11,
+    "vid": "gen_ov21wzx",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 393,
+    "day": 11,
+    "vid": "gen_c6ddwrp",
+    "mid": "gallowdeer",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 27,
+    "mHpLeft": 123,
+    "vTaken": 32,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 422,
+    "day": 12,
+    "vid": "gen_4ihp4d8",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 447,
+    "day": 13,
+    "vid": "gen_4ihp4d8",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 534,
+    "day": 15,
+    "vid": "gen_c6ddwrp",
+    "mid": "lockpick_raccoon",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 39,
+    "mHpLeft": 3,
+    "vTaken": 35,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 542,
+    "day": 16,
+    "vid": "gen_c6ddwrp",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 55,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 560,
+    "day": 16,
+    "vid": "katarina_novak",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 606,
+    "day": 17,
+    "vid": "mia_andersson",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 41,
+    "mHpLeft": 4,
+    "vTaken": 28,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 632,
+    "day": 18,
+    "vid": "gen_ov21wzx",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 22,
+    "mHpLeft": 28,
+    "vTaken": 62,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 634,
+    "day": 18,
+    "vid": "gen_ov21wzx",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 1,
+    "mDealt": 11,
+    "mHpLeft": 39,
+    "vTaken": 28,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 681,
+    "day": 19,
+    "vid": "gen_akcx9vs",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 6,
+    "mDealt": 64,
+    "mHpLeft": 6,
+    "vTaken": 75,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 707,
+    "day": 20,
+    "vid": "katarina_novak",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 32,
+    "mHpLeft": 7,
+    "vTaken": 46,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 713,
+    "day": 20,
+    "vid": "mia_andersson",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 18,
+    "mHpLeft": 10,
+    "vTaken": 32,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 720,
+    "day": 20,
+    "vid": "gen_4ihp4d8",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 750,
+    "day": 21,
+    "vid": "mia_andersson",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 22,
+    "mHpLeft": 28,
+    "vTaken": 51,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 752,
+    "day": 21,
+    "vid": "marcus_webb",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 15,
+    "mHpLeft": 30,
+    "vTaken": 59,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 763,
+    "day": 21,
+    "vid": "mia_andersson",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 21,
+    "mHpLeft": 7,
+    "vTaken": 51,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 797,
+    "day": 22,
+    "vid": "mia_andersson",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 30,
+    "vTaken": 17,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 803,
+    "day": 22,
+    "vid": "mia_andersson",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vDie",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 30,
+    "vTaken": 33,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 829,
+    "day": 23,
+    "vid": "marcus_webb",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 839,
+    "day": 23,
+    "vid": "katarina_novak",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 62,
+    "mHpLeft": 8,
+    "vTaken": 33,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 873,
+    "day": 24,
+    "vid": "marcus_webb",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 947,
+    "day": 26,
+    "vid": "jesse_cortez",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 32,
+    "mHpLeft": 0,
+    "vTaken": 12,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 978,
+    "day": 27,
+    "vid": "gen_4ihp4d8",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 980,
+    "day": 27,
+    "vid": "gen_ov21wzx",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1022,
+    "day": 28,
+    "vid": "gen_ov21wzx",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1035,
+    "day": 28,
+    "vid": "gen_c6ddwrp",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1037,
+    "day": 28,
+    "vid": "katarina_novak",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1039,
+    "day": 28,
+    "vid": "jesse_cortez",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 46,
+    "mHpLeft": 4,
+    "vTaken": 21,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1068,
+    "day": 29,
+    "vid": "gen_w8aznhg",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 9,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1111,
+    "day": 30,
+    "vid": "gen_c6ddwrp",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 40,
+    "mHpLeft": 5,
+    "vTaken": 26,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1137,
+    "day": 31,
+    "vid": "gen_w8aznhg",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1147,
+    "day": 31,
+    "vid": "katarina_novak",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1177,
+    "day": 32,
+    "vid": "marcus_webb",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 5,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1196,
+    "day": 33,
+    "vid": "gen_akcx9vs",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 44,
+    "mHpLeft": 0,
+    "vTaken": 25,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1231,
+    "day": 33,
+    "vid": "gen_akcx9vs",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 6,
+    "mDealt": 60,
+    "mHpLeft": 10,
+    "vTaken": 77,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1309,
+    "day": 35,
+    "vid": "katarina_novak",
+    "mid": "speedbump_turtle",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 61,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1321,
+    "day": 36,
+    "vid": "katarina_novak",
+    "mid": "sanjun",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 5,
+    "mDealt": 88,
+    "mHpLeft": 0,
+    "vTaken": 62,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1326,
+    "day": 36,
+    "vid": "katarina_novak",
+    "mid": "dustboar",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 62,
+    "mHpLeft": 19,
+    "vTaken": 36,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1340,
+    "day": 36,
+    "vid": "marcus_webb",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1357,
+    "day": 37,
+    "vid": "katarina_novak",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 62,
+    "mHpLeft": 0,
+    "vTaken": 20,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1386,
+    "day": 37,
+    "vid": "gen_akcx9vs",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1388,
+    "day": 37,
+    "vid": "gen_ov21wzx",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1390,
+    "day": 37,
+    "vid": "marcus_webb",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 5,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1398,
+    "day": 38,
+    "vid": "katarina_novak",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 36,
+    "mHpLeft": 11,
+    "vTaken": 17,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1403,
+    "day": 38,
+    "vid": "katarina_novak",
+    "mid": "statickite",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 94,
+    "mHpLeft": 0,
+    "vTaken": 32,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1408,
+    "day": 38,
+    "vid": "katarina_novak",
+    "mid": "alien_tick",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 61,
+    "mHpLeft": 0,
+    "vTaken": 14,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1414,
+    "day": 38,
+    "vid": "gen_c6ddwrp",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1439,
+    "day": 39,
+    "vid": "katarina_novak",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 39,
+    "mHpLeft": 0,
+    "vTaken": 16,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1444,
+    "day": 39,
+    "vid": "katarina_novak",
+    "mid": "alien_tick",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 61,
+    "mHpLeft": 0,
+    "vTaken": 13,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1450,
+    "day": 39,
+    "vid": "gen_w8aznhg",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1457,
+    "day": 39,
+    "vid": "gen_akcx9vs",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 8,
+    "mDealt": 88,
+    "mHpLeft": 62,
+    "vTaken": 72,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1478,
+    "day": 40,
+    "vid": "katarina_novak",
+    "mid": "mirror_stag",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vFlee",
+    "rounds": 3,
+    "mDealt": 93,
+    "mHpLeft": 44,
+    "vTaken": 42,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1492,
+    "day": 40,
+    "vid": "gen_w8aznhg",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1498,
+    "day": 40,
+    "vid": "jesse_cortez",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 48,
+    "mHpLeft": 14,
+    "vTaken": 21,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1504,
+    "day": 40,
+    "vid": "gen_ov21wzx",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1534,
+    "day": 41,
+    "vid": "gen_c6ddwrp",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1536,
+    "day": 41,
+    "vid": "gen_ov21wzx",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 14,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1586,
+    "day": 42,
+    "vid": "marcus_webb",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1677,
+    "day": 45,
+    "vid": "gen_akcx9vs",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1679,
+    "day": 45,
+    "vid": "marcus_webb",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 14,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1685,
+    "day": 45,
+    "vid": "jesse_cortez",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1695,
+    "day": 45,
+    "vid": "gen_c6ddwrp",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1712,
+    "day": 46,
+    "vid": "gen_akcx9vs",
+    "mid": "ducks_in_a_row",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 13,
+    "mHpLeft": 0,
+    "vTaken": 3,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1721,
+    "day": 46,
+    "vid": "gen_akcx9vs",
+    "mid": "landlord",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 109,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1727,
+    "day": 46,
+    "vid": "gen_c6ddwrp",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 14,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1762,
+    "day": 47,
+    "vid": "gen_c6ddwrp",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1764,
+    "day": 47,
+    "vid": "gen_ov21wzx",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 17,
+    "mHpLeft": 43,
+    "vTaken": 32,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1770,
+    "day": 47,
+    "vid": "katarina_novak",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 43,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1784,
+    "day": 47,
+    "vid": "gen_c6ddwrp",
+    "mid": "sunback",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 58,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1800,
+    "day": 48,
+    "vid": "katarina_novak",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 101,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1810,
+    "day": 48,
+    "vid": "gen_c6ddwrp",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 13,
+    "mHpLeft": 52,
+    "vTaken": 28,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1821,
+    "day": 48,
+    "vid": "gen_akcx9vs",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1859,
+    "day": 49,
+    "vid": "katarina_novak",
+    "mid": "landlord",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 94,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1864,
+    "day": 49,
+    "vid": "katarina_novak",
+    "mid": "mirror_stag",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 110,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1872,
+    "day": 50,
+    "vid": "marcus_webb",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 49,
+    "mHpLeft": 1,
+    "vTaken": 21,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1894,
+    "day": 50,
+    "vid": "gen_c6ddwrp",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1930,
+    "day": 51,
+    "vid": "gen_c6ddwrp",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1932,
+    "day": 51,
+    "vid": "marcus_webb",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 32,
+    "mHpLeft": 3,
+    "vTaken": 15,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1966,
+    "day": 52,
+    "vid": "katarina_novak",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 14,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1972,
+    "day": 52,
+    "vid": "jesse_cortez",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 14,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1978,
+    "day": 52,
+    "vid": "gen_ov21wzx",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1980,
+    "day": 52,
+    "vid": "gen_c6ddwrp",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 5,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2006,
+    "day": 53,
+    "vid": "gen_akcx9vs",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2013,
+    "day": 53,
+    "vid": "jesse_cortez",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2015,
+    "day": 53,
+    "vid": "katarina_novak",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2021,
+    "day": 53,
+    "vid": "gen_c6ddwrp",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2055,
+    "day": 54,
+    "vid": "katarina_novak",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2097,
+    "day": 55,
+    "vid": "katarina_novak",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2142,
+    "day": 57,
+    "vid": "gen_c6ddwrp",
+    "mid": "landlord",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 104,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2161,
+    "day": 57,
+    "vid": "marcus_webb",
+    "mid": "white_noise_heron",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 58,
+    "mHpLeft": 2,
+    "vTaken": 63,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2167,
+    "day": 57,
+    "vid": "gen_ov21wzx",
+    "mid": "white_noise_heron",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 2,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2184,
+    "day": 58,
+    "vid": "gen_c6ddwrp",
+    "mid": "paparazzo",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 83,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2189,
+    "day": 58,
+    "vid": "gen_c6ddwrp",
+    "mid": "nightcourt",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 49,
+    "mHpLeft": 15,
+    "vTaken": 62,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2250,
+    "day": 59,
+    "vid": "gen_c6ddwrp",
+    "mid": "nightlight_catfish",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 30,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2281,
+    "day": 60,
+    "vid": "jesse_cortez",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 6,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2312,
+    "day": 61,
+    "vid": "gen_c6ddwrp",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2314,
+    "day": 61,
+    "vid": "gen_akcx9vs",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 10,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2524,
+    "day": 67,
+    "vid": "katarina_novak",
+    "mid": "algorithm",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vDie",
+    "rounds": 2,
+    "mDealt": 33,
+    "mHpLeft": 987,
+    "vTaken": 164,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2629,
+    "day": 68,
+    "vid": "gen_akcx9vs",
+    "mid": "ducks_in_a_row",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 14,
+    "mHpLeft": 4,
+    "vTaken": 6,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2637,
+    "day": 69,
+    "vid": "gen_akcx9vs",
+    "mid": "moderator",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 152,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2676,
+    "day": 69,
+    "vid": "marcus_webb",
+    "mid": "warranty_caller",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 101,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2688,
+    "day": 70,
+    "vid": "marcus_webb",
+    "mid": "warranty_caller",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 80,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2748,
+    "day": 71,
+    "vid": "app_mgpsphla498",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2750,
+    "day": 71,
+    "vid": "tom_baker",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2775,
+    "day": 72,
+    "vid": "app_mgpsphla498",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 21,
+    "mHpLeft": 15,
+    "vTaken": 13,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2778,
+    "day": 72,
+    "vid": "app_mgpsphla498",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2806,
+    "day": 73,
+    "vid": "app_mgpsphip994",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 15,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 4,
+    "span": 2842,
+    "day": 74,
+    "vid": "app_mgpsphip994",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 15,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 6,
+    "span": 2848,
+    "day": 74,
+    "vid": "app_mgpsphla498",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 6,
+    "span": 2851,
+    "day": 74,
+    "vid": "app_mgpsphip994",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 9,
+    "span": 2915,
+    "day": 76,
+    "vid": "app_mgpsphip994",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 12,
+    "span": 2948,
+    "day": 77,
+    "vid": "app_mgpsphla498",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 12,
+    "span": 2974,
+    "day": 78,
+    "vid": "app_mgpsphip994",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 18,
+    "span": 3088,
+    "day": 81,
+    "vid": "tom_baker",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 19,
+    "span": 3095,
+    "day": 81,
+    "vid": "tom_baker",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 22,
+    "span": 3129,
+    "day": 82,
+    "vid": "tom_baker",
+    "mid": "statickite",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 89,
+    "mHpLeft": 0,
+    "vTaken": 66,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 26,
+    "span": 3160,
+    "day": 83,
+    "vid": "tom_baker",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 27,
+    "span": 3166,
+    "day": 83,
+    "vid": "tom_baker",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 28,
+    "span": 3172,
+    "day": 83,
+    "vid": "app_mgpsphip994",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 4,
+    "mDealt": 26,
+    "mHpLeft": 274,
+    "vTaken": 18,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 30,
+    "span": 3217,
+    "day": 84,
+    "vid": "app_mgpsphla498",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 30,
+    "span": 3219,
+    "day": 84,
+    "vid": "app_mgpsphip994",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 4,
+    "mDealt": 27,
+    "mHpLeft": 172,
+    "vTaken": 17,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 30,
+    "span": 3238,
+    "day": 85,
+    "vid": "app_mgpsphip994",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 15,
+    "mDealt": 111,
+    "mHpLeft": 61,
+    "vTaken": 24,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 30,
+    "span": 3249,
+    "day": 85,
+    "vid": "app_mgpsphla498",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 33,
+    "span": 3303,
+    "day": 87,
+    "vid": "jesse_cortez",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 29,
+    "mHpLeft": 8,
+    "vTaken": 6,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 37,
+    "span": 3402,
+    "day": 89,
+    "vid": "app_mgpsphla498",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 37,
+    "span": 3460,
+    "day": 91,
+    "vid": "app_mgpsphip994",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 37,
+    "span": 3482,
+    "day": 91,
+    "vid": "app_mgpsphla498",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 46,
+    "span": 3639,
+    "day": 96,
+    "vid": "ivy_wang",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 12,
+    "mDealt": 190,
+    "mHpLeft": 110,
+    "vTaken": 72,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 47,
+    "span": 3669,
+    "day": 97,
+    "vid": "valeria_quispe",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 47,
+    "span": 3672,
+    "day": 97,
+    "vid": "ivy_wang",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vDie",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 246,
+    "vTaken": 36,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 47,
+    "span": 3679,
+    "day": 97,
+    "vid": "app_mgpsphip994",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 11,
+    "mHpLeft": 235,
+    "vTaken": 52,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 48,
+    "span": 3685,
+    "day": 97,
+    "vid": "luis_fernandez",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 51,
+    "span": 3723,
+    "day": 98,
+    "vid": "luis_fernandez",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 1,
+    "mDealt": 13,
+    "mHpLeft": 222,
+    "vTaken": 52,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 52,
+    "span": 3749,
+    "day": 99,
+    "vid": "luis_fernandez",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 222,
+    "vTaken": 53,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 54,
+    "span": 3783,
+    "day": 100,
+    "vid": "app_mgpspigg7",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 5,
+    "mDealt": 73,
+    "mHpLeft": 37,
+    "vTaken": 18,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 55,
+    "span": 3813,
+    "day": 101,
+    "vid": "luis_fernandez",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 13,
+    "mHpLeft": 24,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 55,
+    "span": 3920,
+    "day": 104,
+    "vid": "app_mgpspigg7",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 33,
+    "mHpLeft": 10,
+    "vTaken": 15,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 55,
+    "span": 3926,
+    "day": 104,
+    "vid": "luis_fernandez",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vDie",
+    "rounds": 2,
+    "mDealt": 0,
+    "mHpLeft": 222,
+    "vTaken": 112,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 59,
+    "span": 4080,
+    "day": 108,
+    "vid": "valeria_quispe",
+    "mid": "chorus_line",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 59,
+    "span": 4082,
+    "day": 108,
+    "vid": "lena_ruiz",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 3,
+    "mDealt": 0,
+    "mHpLeft": 675,
+    "vTaken": 92,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 59,
+    "span": 4101,
+    "day": 109,
+    "vid": "valeria_quispe",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 3,
+    "mDealt": 0,
+    "mHpLeft": 675,
+    "vTaken": 52,
+    "entryHp": 700,
+    "exitHp": 700
+   },
+   {
+    "seq": 65,
+    "span": 4174,
+    "day": 111,
+    "vid": "app_mgpspive779",
+    "mid": "eulogy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 0,
+    "mHpLeft": 675,
+    "vTaken": 91,
+    "entryHp": 700,
+    "exitHp": 700
+   }
+  ],
+  "daily": [
+   {
+    "day": 2,
+    "ents": []
+   },
+   {
+    "day": 3,
+    "ents": []
+   },
+   {
+    "day": 4,
+    "ents": []
+   },
+   {
+    "day": 5,
+    "ents": []
+   },
+   {
+    "day": 6,
+    "ents": []
+   },
+   {
+    "day": 7,
+    "ents": []
+   },
+   {
+    "day": 7,
+    "ents": []
+   },
+   {
+    "day": 9,
+    "ents": []
+   },
+   {
+    "day": 10,
+    "ents": []
+   },
+   {
+    "day": 11,
+    "ents": []
+   },
+   {
+    "day": 12,
+    "ents": []
+   },
+   {
+    "day": 13,
+    "ents": []
+   },
+   {
+    "day": 14,
+    "ents": []
+   },
+   {
+    "day": 15,
+    "ents": []
+   },
+   {
+    "day": 16,
+    "ents": []
+   },
+   {
+    "day": 17,
+    "ents": []
+   },
+   {
+    "day": 18,
+    "ents": []
+   },
+   {
+    "day": 19,
+    "ents": []
+   },
+   {
+    "day": 20,
+    "ents": []
+   },
+   {
+    "day": 21,
+    "ents": []
+   },
+   {
+    "day": 22,
+    "ents": []
+   },
+   {
+    "day": 23,
+    "ents": []
+   },
+   {
+    "day": 24,
+    "ents": []
+   },
+   {
+    "day": 25,
+    "ents": []
+   },
+   {
+    "day": 26,
+    "ents": []
+   },
+   {
+    "day": 27,
+    "ents": []
+   },
+   {
+    "day": 28,
+    "ents": []
+   },
+   {
+    "day": 29,
+    "ents": []
+   },
+   {
+    "day": 30,
+    "ents": []
+   },
+   {
+    "day": 31,
+    "ents": []
+   },
+   {
+    "day": 32,
+    "ents": []
+   },
+   {
+    "day": 33,
+    "ents": []
+   },
+   {
+    "day": 33,
+    "ents": []
+   },
+   {
+    "day": 35,
+    "ents": []
+   },
+   {
+    "day": 36,
+    "ents": []
+   },
+   {
+    "day": 37,
+    "ents": []
+   },
+   {
+    "day": 38,
+    "ents": []
+   },
+   {
+    "day": 38,
+    "ents": []
+   },
+   {
+    "day": 40,
+    "ents": []
+   },
+   {
+    "day": 41,
+    "ents": []
+   },
+   {
+    "day": 42,
+    "ents": []
+   },
+   {
+    "day": 43,
+    "ents": []
+   },
+   {
+    "day": 44,
+    "ents": []
+   },
+   {
+    "day": 44,
+    "ents": []
+   },
+   {
+    "day": 46,
+    "ents": []
+   },
+   {
+    "day": 46,
+    "ents": []
+   },
+   {
+    "day": 48,
+    "ents": []
+   },
+   {
+    "day": 48,
+    "ents": []
+   },
+   {
+    "day": 50,
+    "ents": []
+   },
+   {
+    "day": 51,
+    "ents": []
+   },
+   {
+    "day": 52,
+    "ents": []
+   },
+   {
+    "day": 53,
+    "ents": []
+   },
+   {
+    "day": 53,
+    "ents": []
+   },
+   {
+    "day": 55,
+    "ents": []
+   },
+   {
+    "day": 56,
+    "ents": []
+   },
+   {
+    "day": 56,
+    "ents": []
+   },
+   {
+    "day": 58,
+    "ents": []
+   },
+   {
+    "day": 58,
+    "ents": []
+   },
+   {
+    "day": 60,
+    "ents": []
+   },
+   {
+    "day": 61,
+    "ents": []
+   },
+   {
+    "day": 62,
+    "ents": []
+   },
+   {
+    "day": 62,
+    "ents": []
+   },
+   {
+    "day": 64,
+    "ents": []
+   },
+   {
+    "day": 65,
+    "ents": []
+   },
+   {
+    "day": 66,
+    "ents": []
+   },
+   {
+    "day": 67,
+    "ents": []
+   },
+   {
+    "day": 68,
+    "ents": []
+   },
+   {
+    "day": 68,
+    "ents": []
+   },
+   {
+    "day": 70,
+    "ents": []
+   },
+   {
+    "day": 70,
+    "ents": []
+   },
+   {
+    "day": 72,
+    "ents": []
+   },
+   {
+    "day": 73,
+    "ents": []
+   },
+   {
+    "day": 74,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 5,
+      "ty": 7,
+      "mx": 6,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 75,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 7,
+      "mx": 3,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 76,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 77,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 24,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 77,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 6,
+      "mx": 0,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 79,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 0,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 79,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 8,
+      "ty": 5,
+      "mx": 0,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 81,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 5,
+      "mx": 8,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 82,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 23,
+      "tx": 7,
+      "ty": 4,
+      "mx": 7,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 83,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 3,
+      "my": 4,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 84,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 8,
+      "ty": 5,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 85,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 86,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 22,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 87,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 87,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 89,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 7,
+      "ty": 5,
+      "mx": 7,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 89,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 91,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 92,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 21,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 92,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 94,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 20,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 94,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 7,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 96,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 7,
+      "ty": 6,
+      "mx": 1,
+      "my": 3,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 97,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 98,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 3,
+      "my": 8,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 99,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 8,
+      "mx": 6,
+      "my": 1,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 99,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 2,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 101,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 102,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 102,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 104,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 105,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 3,
+      "my": 2,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 105,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 7,
+      "mx": 5,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 107,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 108,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 108,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 110,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 19,
+      "tx": 6,
+      "ty": 6,
+      "mx": 8,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 111,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 6,
+      "mx": 8,
+      "my": 5,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 112,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 113,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 113,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 5,
+      "ty": 7,
+      "mx": 1,
+      "my": 0,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 115,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 4,
+      "ty": 7,
+      "mx": 4,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   },
+   {
+    "day": 115,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 18,
+      "tx": 4,
+      "ty": 7,
+      "mx": 4,
+      "my": 7,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ]
+   }
+  ],
+  "errors": [],
+  "wrapped": {
+   "fieldFight": true,
+   "aidFight": true,
+   "startCombat": true,
+   "tbEnd": true,
+   "spawnWorldMonster": true,
+   "removeWorldMonster": true,
+   "titanDawnTick": true,
+   "monsterTurn": true,
+   "animalTurn": true,
+   "villagerMonsterTick": true,
+   "resolveWildMonsterEncounter": true,
+   "resolvePatrol": true,
+   "worldTick": true,
+   "wanderWorldMonsters": true,
+   "maintainWorldMonsters": true,
+   "havenRaidTick": true,
+   "havenGrowthDaily": true,
+   "sleep": true
+  }
+ },
+ "deaths": [
+  {
+   "day": 3,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "person",
+   "who": "miguel_santos",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "villager",
+   "who": "gen_k11gpw0",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 22,
+   "kind": "villager",
+   "who": "mia_andersson",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "villager",
+   "who": "catalina_reyes",
+   "cause": "the arena",
+   "player": true
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 38,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 38,
+   "kind": "monster",
+   "who": "statickite",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 38,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 39,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 39,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 46,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 58,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "ad_sponsor",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "ad_break",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "congregation",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 67,
+   "kind": "villager",
+   "who": "gen_4ihp4d8",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 67,
+   "kind": "villager",
+   "who": "katarina_novak",
+   "cause": "The Algorithm",
+   "player": false
+  },
+  {
+   "day": 68,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "villager",
+   "who": "gen_c6ddwrp",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 82,
+   "kind": "monster",
+   "who": "statickite",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 86,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 87,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 89,
+   "kind": "villager",
+   "who": "tom_baker",
+   "cause": "starvation",
+   "player": false
+  },
+  {
+   "day": 92,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 92,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 92,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 92,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 93,
+   "kind": "villager",
+   "who": "gen_akcx9vs",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 94,
+   "kind": "villager",
+   "who": "marcus_webb",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 94,
+   "kind": "villager",
+   "who": "gen_ov21wzx",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 94,
+   "kind": "villager",
+   "who": "jesse_cortez",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 94,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 97,
+   "kind": "villager",
+   "who": "ivy_wang",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 99,
+   "kind": "villager",
+   "who": "app_mgpsphla498",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 104,
+   "kind": "villager",
+   "who": "luis_fernandez",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 108,
+   "kind": "villager",
+   "who": "app_mgpsphip994",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 110,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 111,
+   "kind": "villager",
+   "who": "app_mgpspive779",
+   "cause": "starvation",
+   "player": false
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2400|12|4|4|1|410",
+  "3:3|95|2400|12|4|4|1|347",
+  "4:4|92|1042|12|4|4|1|286",
+  "5:5|100|1200|12|4|4|1|259",
+  "6:6|100|1052|12|4|4|1|247",
+  "7:7|100|1190|12|4|4|1|226",
+  "8:8|95|1200|12|4|4|1|211",
+  "9:9|100|1047|12|4|4|1|201",
+  "10:10|100|990|12|4|4|1|198",
+  "11:11|100|1209|12|4|4|1|198",
+  "12:12|95|2300|10|4|4|1|189",
+  "13:13|100|2161|10|4|4|1|171",
+  "14:14|100|2064|10|4|4|1|161",
+  "15:15|100|2400|10|4|4|1|157",
+  "16:16|95|2390|10|4|4|1|145",
+  "17:17|100|2400|10|4|4|1|152",
+  "18:18|100|2400|10|4|4|1|172",
+  "19:19|95|2390|10|4|4|1|195",
+  "20:20|100|2400|10|4|4|1|188",
+  "21:21|100|2400|10|4|4|1|176",
+  "22:22|100|2400|10|4|4|1|156",
+  "23:23|100|2390|9|4|4|1|157",
+  "24:24|90|2400|9|4|4|1|143",
+  "25:25|100|2400|9|4|4|1|151",
+  "26:26|100|2236|9|4|4|1|158",
+  "27:27|100|2390|9|4|4|1|142",
+  "28:28|100|2400|9|4|4|1|107",
+  "29:29|79|2400|9|4|4|1|84",
+  "30:30|100|2365|9|4|4|1|84",
+  "31:31|100|2365|9|4|4|1|84",
+  "32:32|100|2400|9|4|4|1|75",
+  "33:33|100|2365|8|4|4|1|65",
+  "34:34|97|2400|8|4|4|1|28",
+  "35:35|100|2400|8|4|4|1|43",
+  "36:36|100|2311|8|4|4|2|63",
+  "37:37|100|2400|8|4|4|2|63",
+  "38:38|98|2262|8|4|4|2|48",
+  "39:39|100|2400|8|4|4|2|45",
+  "40:40|100|2400|8|4|4|2|51",
+  "41:41|100|2400|8|4|4|2|29",
+  "42:42|100|2400|8|4|4|2|46",
+  "43:43|100|2395|8|4|4|2|114",
+  "44:44|100|2361|8|4|4|2|115",
+  "45:45|97|2400|8|4|4|2|112",
+  "46:46|100|2344|8|4|4|2|117",
+  "47:47|100|2400|8|4|4|2|121",
+  "48:48|100|2400|8|4|4|2|133",
+  "49:49|98|2280|8|4|4|2|143",
+  "50:50|100|2390|8|4|4|2|257",
+  "51:51|71|2400|8|4|4|2|182",
+  "52:52|68|2240|8|4|4|2|207",
+  "53:53|100|2390|8|4|4|2|209",
+  "54:54|98|2285|8|4|4|2|234",
+  "55:55|100|2400|8|4|4|2|260",
+  "56:56|100|2190|8|4|4|2|260",
+  "57:57|100|2400|8|4|4|2|228",
+  "58:58|98|2400|8|4|4|3|207",
+  "59:59|95|2400|8|4|4|3|200",
+  "60:60|87|2400|8|4|4|4|213",
+  "61:61|100|2228|8|4|4|4|200",
+  "62:62|100|2390|8|4|4|4|217",
+  "63:63|97|2320|8|4|4|4|200",
+  "64:64|100|2250|8|4|4|4|185",
+  "65:65|71|2400|8|4|4|4|165",
+  "66:66|99|2200|8|4|4|4|167",
+  "67:67|100|1500|6|4|4|4|129",
+  "68:68|97|2400|6|4|4|4|150",
+  "69:69|83|2353|6|8|5|4|142",
+  "70:70|97|2329|7|1|7|4|159",
+  "71:71|33|2347|7|1|7|4|111",
+  "72:72|47|2352|8|1|7|4|120",
+  "73:73|49|2340|9|1|7|4|53",
+  "74:74|20|2309|9|1|7|4|15",
+  "75:75|22|2376|9|1|7|4|52",
+  "76:76|38|2376|9|1|7|4|10",
+  "77:77|100|2290|8|4|4|4|16",
+  "78:78|100|2400|8|4|4|4|46",
+  "79:79|100|2365|8|4|4|4|35",
+  "80:80|97|2325|8|4|4|4|22",
+  "81:81|100|2400|8|4|4|4|27",
+  "82:82|100|2170|8|4|4|4|11",
+  "83:83|100|2400|8|4|4|4|8",
+  "84:84|100|1158|8|4|4|4|0",
+  "85:85|48|2400|8|4|4|4|58",
+  "86:86|100|2064|8|4|4|4|16",
+  "87:87|95|2400|8|4|4|4|51",
+  "88:88|92|2365|8|4|4|4|42",
+  "89:89|100|2365|8|4|4|4|19",
+  "90:90|100|2400|7|4|4|4|6",
+  "91:91|100|2390|7|4|4|4|14",
+  "92:92|100|2329|7|4|4|4|55",
+  "93:93|100|1500|6|4|4|4|28",
+  "94:94|100|1500|3|4|4|4|0",
+  "95:95|100|1992|5|3|4|4|0",
+  "96:96|100|597|7|3|4|4|2",
+  "97:97|100|788|7|3|4|4|0",
+  "98:98|94|2376|7|3|4|4|8",
+  "99:99|90|2266|7|3|4|4|10",
+  "100:100|88|230|6|4|4|4|0",
+  "101:101|100|254|6|4|4|4|0",
+  "102:102|19|985|6|4|4|4|0",
+  "103:103|56|1296|6|4|4|4|0",
+  "104:104|79|2293|6|4|4|4|2",
+  "105:105|100|1837|5|4|4|4|0",
+  "106:106|100|2400|5|4|4|4|2",
+  "107:107|100|2366|5|4|4|4|99",
+  "108:108|100|2390|4|4|4|4|50",
+  "109:109|100|2400|4|4|4|4|34",
+  "110:110|100|2172|4|4|4|4|25",
+  "111:111|25|2400|5|4|4|4|4",
+  "112:112|100|2400|4|4|4|4|0",
+  "113:113|100|2400|5|4|4|4|0",
+  "114:114|100|2365|5|4|4|4|0",
+  "115:115|100|2365|5|4|4|4|0"
+ ],
+ "instrumentErrors": []
+}

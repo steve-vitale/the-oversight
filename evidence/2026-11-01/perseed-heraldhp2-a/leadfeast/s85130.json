@@ -1,0 +1,9006 @@
+{
+ "seed": 85130,
+ "policyId": "leadfeast",
+ "instrument": "herald-v1+muster-diag+heraldhp-ledger",
+ "substrate": "withFullseatDiag(withSeatDrive(withWinDefer(TF leadfeast))), FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FULLSEAT=1 + HERALD=1 + MUSTER=1 + HERALDHP=1",
+ "anchorCommit": "a76c90dccdd8",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "w4Day": 71,
+ "w5Day": null,
+ "national": 1,
+ "table": 1,
+ "won": 1,
+ "days": 89,
+ "gameDays": 90,
+ "endReason": "over-other",
+ "endScaleRank": "global",
+ "endOmenStage": 2,
+ "endOmenDay": 82,
+ "endMusterExists": false,
+ "attempts4Count": 23,
+ "attemptsOtherCount": 21,
+ "attemptsUnresolvedMidCount": 0,
+ "fieldFights4Count": 3,
+ "kills4Count": 1,
+ "attempts": [
+  {
+   "day": 79,
+   "mid": "strike",
+   "wave": 4,
+   "aggression": "territorial",
+   "titan": false,
+   "caller": "feast-draw",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.faceFeastDraw@feastBuff.js:520:20",
+    "Object.w@sim-harness.js:515:25",
+    "feastFightRoad@competent.js:511:38",
+    "Object.upkeep@competent.js:2834:5",
+    "Object.upkeep@feastscale.js:141:12"
+   ],
+   "cls": "FOUGHT",
+   "reason": null,
+   "liveBefore": false,
+   "pendingBefore": true,
+   "pendingMidBefore": "strike",
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": null,
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": null,
+   "entityHp": null,
+   "sayDuring": [],
+   "gameOutcomes": [],
+   "end": "won"
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 85,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 85,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 86,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 86,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 86,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 86,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 86,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 86,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 87,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 87,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 88,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 88,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 88,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 88,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 89,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 89,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 89,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 89,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  },
+  {
+   "day": 89,
+   "mid": "herald",
+   "wave": 4,
+   "aggression": "heraldic",
+   "titan": true,
+   "caller": "wild-contact",
+   "stackTop": [
+    "stackTop@herald-instrument-20261030.js:132:17",
+    "Game.startCombat@herald-instrument-20261030.js:239:21",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.monsterTurn@game.js:23366:48",
+    "Game.<computed>@heraldhp-instrument-20261101.js:116:15",
+    "Object.tickAction@game.js:19836:35",
+    "game.tickAction@favor-company.js:187:34",
+    "game.<computed>@timeSettlement.js:39:33"
+   ],
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "liveBefore": false,
+   "pendingBefore": false,
+   "pendingMidBefore": null,
+   "pendingAfter": false,
+   "pendingMidAfter": null,
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "scholarPos": {
+    "mx": 8,
+    "my": 0,
+    "px": 4,
+    "py": 4
+   },
+   "entityPos": {
+    "tx": 4,
+    "ty": 4,
+    "mx": 8,
+    "my": 0
+   },
+   "entityHp": {
+    "hp": 525,
+    "maxHp": 700
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "gameOutcomes": [
+    {
+     "titan": "herald",
+     "day": 89,
+     "outcome": "refused",
+     "detail": {
+      "gate": "muster",
+      "have": 0,
+      "need": 10
+     }
+    }
+   ],
+   "end": null
+  }
+ ],
+ "fieldFights": [
+  {
+   "day": 75,
+   "vid": "gen_kngu7ak",
+   "mid": "suburb",
+   "wave": 4,
+   "outcome": "evade",
+   "rounds": 0,
+   "vTaken": 0,
+   "mDealt": 0,
+   "vHpLeft": 100,
+   "mHpLeft": 1315
+  },
+  {
+   "day": 75,
+   "vid": "gen_kngu7ak",
+   "mid": "congregation",
+   "wave": 4,
+   "outcome": "evade",
+   "rounds": 0,
+   "vTaken": 0,
+   "mDealt": 0,
+   "vHpLeft": 100,
+   "mHpLeft": 1096
+  },
+  {
+   "day": 84,
+   "vid": "gen_3g3s5up",
+   "mid": "suburb",
+   "wave": 4,
+   "outcome": "evade",
+   "rounds": 0,
+   "vTaken": 0,
+   "mDealt": 0,
+   "vHpLeft": 100,
+   "mHpLeft": 1460
+  }
+ ],
+ "kills": [
+  {
+   "day": 79,
+   "mid": "strike",
+   "wave": 4,
+   "by": "gen_1st1y6i",
+   "via": "player"
+  }
+ ],
+ "musterEvents": [],
+ "census": [
+  {
+   "day": 2,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 2,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 4,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 4,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 5,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 6,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 7,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 8,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 9,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 10,
+   "uw": 1,
+   "rank": "village"
+  },
+  {
+   "day": 11,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 12,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 13,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 14,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 15,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 16,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 17,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 18,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 19,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 20,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 21,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 22,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 23,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 24,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 25,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 26,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 27,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 28,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 29,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 30,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 31,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 32,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 33,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 34,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 35,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 36,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 37,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 38,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 39,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 41,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 41,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 42,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 43,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 44,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 45,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 46,
+   "uw": 2,
+   "rank": "village"
+  },
+  {
+   "day": 47,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 48,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 49,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 50,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 51,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 52,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 53,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 54,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 55,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 56,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 57,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 58,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 59,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 61,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 62,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 63,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 64,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 65,
+   "uw": 2,
+   "rank": "regional"
+  },
+  {
+   "day": 66,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 67,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 68,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 69,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 70,
+   "uw": 3,
+   "rank": "regional"
+  },
+  {
+   "day": 71,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 72,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 73,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 74,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 75,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 76,
+   "uw": 4,
+   "rank": "regional"
+  },
+  {
+   "day": 77,
+   "uw": 4,
+   "rank": "national"
+  },
+  {
+   "day": 78,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 79,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 80,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 81,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 82,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 83,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 84,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 85,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 86,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 87,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 88,
+   "uw": 4,
+   "rank": "global"
+  },
+  {
+   "day": 89,
+   "uw": 4,
+   "rank": "global"
+  }
+ ],
+ "transcripts": [
+  {
+   "cls": "herald-refused-first",
+   "day": 85,
+   "mid": "herald",
+   "muster": {
+    "present": false,
+    "alliesRaw": 0,
+    "alliesUnique": 0,
+    "havenRaw": 0,
+    "havenUnique": 0,
+    "need": null,
+    "readyProxy": null
+   },
+   "sayDuring": [
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ],
+   "lines": [
+    "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies.",
+    "You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+    "You clutch your Contract Quill. You're still here. The resonance deepens. (bond 0)",
+    "Your hands won't stop shaking. The Contract Quill is right there — hold it, think of them. (Pack → 💛 Hold it (steady yourself))",
+    "💛 You hold Contract Quill. Breathe. The shaking eases. (−6 trauma)",
+    "Travel 1 tile to grove.",
+    "Something moves out there — The Moderator.",
+    "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods.",
+    "Travel 2 tiles to grove.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 2 tiles to forest floor.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 1 tile to Haven.",
+    "1 unprocessed haul onto the counter — the clock is ticking.",
+    "You walk back into Haven. 28 Codex entries. The village is glad to see you.",
+    "No carcasses to clean.",
+    "Butchering yields: 1 hide.",
+    "Something at the tree line is watching you. Not hunting — studying. The way it tilts its head is wrong, like it's taking notes.",
+    "Cleaned 1 carcass — quick, practiced cuts. Honest portions, ~500 kcal each. (Field Dressing — less waste, kept ~52%.) (8 ticks)",
+    "You coax 3 growing beds forward by 4 days. The next harvest carries the growth magic.",
+    "⬆️ Green Whisper deepened to L2! Plants lean toward you.",
+    "\"Your understanding is... deepening! We can see it! Like watching a seed decide to be a tree! Beautiful! Profitable!\"",
+    "(−200 kcal — food becomes green whisper.)",
+    "🎭 It moves.",
+    "Taken: Gland sac x1.",
+    "Too heavy for the rest — left where it lies: The Big Beast (carcass) x1.",
+    "You settle into the hall floor. Sleep takes you.",
+    "💧 Elijah returns with water: +2 clean.",
+    "🚶 Rafael is back with Elijah.",
+    "The village debates Leo Martin. Warm, mostly. \"One more pair of hands.\" (68% for.)",
+    "📨 The village didn't wait for you. Leo Martin was vouched for around the fire — they're walking.",
+    "Accepted. Leo Martin is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them.",
+    "🌙 Night. The lingering The Understudy gorges at the treeline — 800 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+    "🌙 Night. The lingering The Herald gorges at the treeline — 1,558 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+    "⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+    "Village meal: +2200 kcal, +1L water from the communal pantry.",
+    "Elijah came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+    "Oliver is hurt — a fall, a thorn, a bad step. (health 70/100)",
+    "Rafael and Elijah lingered over the fire together.",
+    "Rafael and Elijah lingered over the fire together.",
+    "Rafael and Elijah lingered over the fire together.",
+    "— DAY 84 DAWN — The world wakes. Animals are active.",
+    "👀 When the others traded stories about Denver, Ida went quiet in a way that wasn't listening — more like realizing they had nothing true to trade.",
+    "◈ WORD TRAVELS — riders from Thornfield bring talk of Haven. Out there they call you the Indispensable. Other villages send envoys now. They need what you know.",
+    "Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "No risky water to boil.",
+    "Drank clean water.",
+    "Something at the tree line is watching you. Not hunting — studying. The way it tilts its head is wrong, like it's taking notes.",
+    "It's closer now. And it's moving like you move — your walk, your rhythm. That's not mimicry. That's rehearsal.",
+    "👥 Elijah heads out for water. \"Thirst doesn't negotiate. Going.\"",
+    "👥 Rafael walks out with Elijah. \"Nobody walks alone today.\"",
+    "💧 Nina returns with water: +4 clean.",
+    "💧 Oliver returns with water: +2 clean.",
+    "🚶 Elif is back with Oliver.",
+    "Iron cold. Even the ticks are shelved.",
+    "— MIDDAY — Honest work hours. Heat builds.",
+    "You wait. The light changes. Nothing asks anything of you.",
+    "Rafael left 3 branches by the stash. No announcement. That's how it works here.",
+    "🎭 It moves.",
+    "Ida stopped asking. They just started organizing the Forage crews. Nobody stopped them.",
+    "You catch fragments by the fire — Nina telling Elijah about Oliver. It's picking up decorations as it travels.",
+    "Nina heads out for water. \"Water first. Everything else waits.\"",
+    "🩹 Oliver is hurting (68 HP) — You patch them up before they head out. (68 → 93 HP)",
+    "👥 Oliver heads out for water. \"Fetching water. Somebody has to.\"",
+    "👥 Elif walks out with Oliver. \"Nobody walks alone today.\"",
+    "— DUSK — Animals stir again. Shadows lengthen.",
+    "You wait. The light changes. Nothing asks anything of you.",
+    "The village is rattled. Everyone's jumpy — eyes on the treeline.",
+    "You don't know what that was. A blank shape at the tree line, watching. learning. Someone at the haven should hear about this.",
+    "⚔ THE UNDERSTUDY! You're on your own.",
+    "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+    "It is watching you fight. Taking notes. In your handwriting. (Attack it — every round it watches, it learns.)",
+    "🐗 This one came with the raid on Haven — it was with the teeth at the door, not a lone wanderer.",
+    "(The game is telling you something: this is bigger than one person. Talk to your companions — \"We should name this. Us.\")",
+    "💬 Nina says: \"Do you ever feel it? Like the air leans in when something happens.\"",
+    "📣 Ida found a cache out there — enough to matter.",
+    "— NIGHT — Camp. Rest — or risk the dark.",
+    "Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+    "PATIENT AIM: first strike, doubled.",
+    "AMBUSH: first blood. ×1.5.",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "The Understudy falls.",
+    "You STRIKE the understudy for 176 (Phase sling).",
+    "📺 +5 style — solid hit",
+    "📺 +20 style — dropped the Understudy!",
+    "It tastes like nothing. Like a rehearsal.",
+    "You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+    "You clutch your Contract Quill. You're still here. The resonance deepens. (bond 0)",
+    "Your hands won't stop shaking. The Contract Quill is right there — hold it, think of them. (Pack → 💛 Hold it (steady yourself))",
+    "💛 You hold Contract Quill. Breathe. The shaking eases. (−6 trauma)",
+    "💛 You hold Dispatcher's headset. You learned the voice — low, steady, unhurried. 'Panic is just information arriving too fast.' You hear it in your own voice now when it counts. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "Travel 1 tile to grove.",
+    "It followed you. The Herald is here.",
+    "Birds scatter in a sudden hush — something is moving out there. You give it a wide berth.",
+    "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods.",
+    "Travel 2 tiles to grove.",
+    "Birds scatter in a sudden hush — something is moving out there. You give it a wide berth.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 2 tiles to forest floor.",
+    "Still full. (Eat, test a lump, or leave some.)",
+    "Travel 1 tile to Haven.",
+    "You walk back into Haven. 28 Codex entries. The village is glad to see you.",
+    "You coax 3 growing beds forward by 8 days. The next harvest carries the growth magic.",
+    "(−200 kcal — food becomes green whisper.)",
+    "Too heavy for the rest — left where it lies: The Big Beast (carcass) x1.",
+    "Too heavy for the rest — left where it lies: Stripped hide x1.",
+    "Elif leans in, voice low. \"Here's what we figured out about The Understudy. Hit it with something it's never seen. It copies what it sees — strike with a weapon it has NEVER seen and the copy falls apart. The familiar is what kills you. Switch weapons mid-fight and it's back to guessing.\"",
+    "💡 COUNTER LEARNED — The Understudy: Hit it with something it's never seen. It copies what it sees — strike with a weapon it has NEVER seen and the copy falls apart. The familiar is what kills you. Switch weapons mid-fight and it's back to guessing. (Someone at the haven knew the trick.)",
+    "📓 Codex: Counter: Hit it with something it's never seen — It copies what it sees — strike with a weapon it has NEVER seen and the copy falls apart. The familiar is what kills you. Switch weapons mid-fight and it's back to guessing.",
+    "You are full enough.",
+    "Took Foraged food.",
+    "You eat Foraged food (322 kcal).",
+    "You settle into the hall floor. Sleep takes you.",
+    "💧 Nina returns with water: +3 clean.",
+    "Rafael shakes their head, admiring. \"Did you hear what Ida did?\" You hadn't. Now you have.",
+    "🌾 Tribute from Emberhold arrives — 2,813 kcal of grain into the pantry. Their fields, our fire.",
+    "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)",
+    "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)",
+    "🧳 Word from Emberhold: traders say Emberhold had a feud over grain — or so the traders say",
+    "📡 The world feed: Stonebridge — a new speaker rising. The chat has opinions.",
+    "📨 Word came: Yuki Mori of Emberhold wants to join Haven. \"I saw you on the broadcast. You looked like people who eat.\" — they haven't set foot here. The village will judge.",
+    "The village debates Yuki Mori. The room is cold — Elijah, Rafael, Nina against. \"More mouths, same fire.\" (34% for.)",
+    "🌙 Night. The lingering The Herald gorges at the treeline — 1,000 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+    "⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+    "Village meal: +2200 kcal, +1L water from the communal pantry.",
+    "Elijah is showing Ida how to tie a snare. Hands patient. It takes three tries.",
+    "Oliver traded something with someone for something else. The barter economy stirs.",
+    "Oliver came back with 400 kcal of something edible. The pantry breathes.",
+    "🍽️ Elif peeks into the pantry, then turns the foraging party back. \"Plenty for days. Teaching the kids snares instead — they'll need to know.\"",
+    "🍽️ Elif looks at the full shelves and waves off the day's share. \"No more into the store — we eat at the fire, and the shelves keep.\"",
+    "🌙 Raid — Stonebridge came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+    "The land is getting tired. The easy food is thinning.",
+    "— DAY 85 DAWN — The world wakes. Animals are active.",
+    "Overnight, The Ugly Beast (cleaned); Hickory Nuts (in shell) went bad — beyond saving. You leave them for the flies.",
+    "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "💬 Minh says: \"They said you're doing well. It sounded... proud? Can they feel proud?\"",
+    "Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 23 kcal conserved. By the fire. Good enough.)",
+    "No risky water to boil.",
+    "Drank clean water.",
+    "Its posture changes. Curiosity is over.",
+    "📯 It moves.",
+    "You catch fragments by the fire — Ida telling Nina about herself. Someone's added a flourish that wasn't there this morning.",
+    "💧 Elijah returns with water: +2 clean.",
+    "🚶 Rafael is back with Elijah.",
+    "👥 Nina heads out to forage. \"Gone looking. Don't wait up.\"",
+    "👥 Elijah walks out with Nina. \"Nobody walks alone today.\"",
+    "Iron cold. Even the ticks are shelved.",
+    "— MIDDAY — Honest work hours. Heat builds.",
+    "You wait. The light changes. Nothing asks anything of you.",
+    "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic."
+   ]
+  }
+ ],
+ "musterRefusals": [
+  {
+   "idx": 0,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 1,
+   "outcomesPrior": 0,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 1,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 1,
+   "outcomesPrior": 1,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 2,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 1,
+   "outcomesPrior": 2,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 3,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 2,
+   "outcomesPrior": 3,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 4,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 2,
+   "outcomesPrior": 4,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 5,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 2,
+   "outcomesPrior": 5,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 6,
+   "day": 85,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 2,
+   "outcomesPrior": 6,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 7,
+   "day": 86,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 1,
+   "outcomesPrior": 7,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 8,
+   "day": 86,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 1,
+   "outcomesPrior": 8,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 9,
+   "day": 86,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 91,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 1,
+   "outcomesPrior": 9,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 10,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 10,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 11,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 11,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 12,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 12,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 13,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 13,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 14,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 14,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 15,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 15,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 16,
+   "day": 87,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 16,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 17,
+   "day": 88,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 17,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 18,
+   "day": 88,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 37,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 40,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 3,
+   "outcomesPrior": 18,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 19,
+   "day": 89,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 39,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 44,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 4,
+   "outcomesPrior": 19,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 20,
+   "day": 89,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 39,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 44,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 4,
+   "outcomesPrior": 20,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  },
+  {
+   "idx": 21,
+   "day": 89,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 82,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 92,
+     "opinion": 39,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 86,
+     "opinion": 42,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 6,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 92,
+     "opinion": 44,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 5
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 11,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 4,
+   "outcomesPrior": 21,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  }
+ ],
+ "musterCalls": {
+  "soundTitanCall": 0,
+  "titanCommitOwn": 0,
+  "titanSelfDo": 0,
+  "titanWarCouncil": 0
+ },
+ "musterCommitReturns": [],
+ "musterInstalled": true,
+ "musterErrs": 0,
+ "musterErrors": [],
+ "heraldhp": {
+  "ledger": [
+   {
+    "seq": 1,
+    "fn": "spawnWorldMonster",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 1,
+    "span": 2756,
+    "parent": 2755,
+    "before": [],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 7,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": {
+     "id": "herald",
+     "tx": 7,
+     "ty": 4,
+     "hpOpt": null,
+     "titanOpt": true
+    }
+   },
+   {
+    "seq": 2,
+    "fn": "titanDawnTick",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 0,
+    "span": 2755,
+    "parent": null,
+    "before": [],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 7,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 3,
+    "fn": "wanderWorldMonsters",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 1,
+    "span": 2779,
+    "parent": 2777,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 7,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 6,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 4,
+    "fn": "worldTick",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 0,
+    "span": 2777,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 7,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 6,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 5,
+    "fn": "havenRaidTick",
+    "day": 82,
+    "dayBefore": 82,
+    "depth": 1,
+    "span": 2791,
+    "parent": 2782,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 6,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": {
+     "result": true
+    }
+   },
+   {
+    "seq": 6,
+    "fn": "sleep",
+    "day": 83,
+    "dayBefore": 82,
+    "depth": 0,
+    "span": 2782,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 6,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 700,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": false
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 7,
+    "fn": "removeWorldMonster",
+    "day": 83,
+    "dayBefore": 83,
+    "depth": 2,
+    "span": 2804,
+    "parent": 2803,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": {
+     "id": "drumbelly_tanuki",
+     "tx": 4,
+     "ty": 4,
+     "hp": 1
+    }
+   },
+   {
+    "seq": 8,
+    "fn": "startCombat",
+    "day": 83,
+    "dayBefore": 83,
+    "depth": 1,
+    "span": 2803,
+    "parent": 2802,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": {
+     "mid": "drumbelly_tanuki"
+    }
+   },
+   {
+    "seq": 9,
+    "fn": "monsterTurn",
+    "day": 83,
+    "dayBefore": 83,
+    "depth": 0,
+    "span": 2802,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 10,
+    "fn": "removeWorldMonster",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 2,
+    "span": 2845,
+    "parent": 2844,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": {
+     "id": "understudy",
+     "tx": 4,
+     "ty": 4,
+     "hp": 79
+    }
+   },
+   {
+    "seq": 11,
+    "fn": "startCombat",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 1,
+    "span": 2844,
+    "parent": 2843,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": {
+     "mid": "understudy"
+    }
+   },
+   {
+    "seq": 12,
+    "fn": "monsterTurn",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 0,
+    "span": 2843,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 13,
+    "fn": "wanderWorldMonsters",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 1,
+    "span": 2849,
+    "parent": 2847,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 3,
+      "mx": 7,
+      "my": 8,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 2,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 14,
+    "fn": "worldTick",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 0,
+    "span": 2847,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 3,
+      "mx": 7,
+      "my": 8,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 2,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 15,
+    "fn": "wanderWorldMonsters",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 1,
+    "span": 2853,
+    "parent": 2851,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 2,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 2,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 16,
+    "fn": "worldTick",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 0,
+    "span": 2851,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 2,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 2,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 17,
+    "fn": "havenGrowthDaily",
+    "day": 84,
+    "dayBefore": 84,
+    "depth": 1,
+    "span": 2870,
+    "parent": 2865,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 2,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 18,
+    "fn": "sleep",
+    "day": 85,
+    "dayBefore": 84,
+    "depth": 0,
+    "span": 2865,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 2,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 19,
+    "fn": "monsterTurn",
+    "day": 85,
+    "dayBefore": 85,
+    "depth": 0,
+    "span": 2876,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 20,
+    "fn": "monsterTurn",
+    "day": 85,
+    "dayBefore": 85,
+    "depth": 0,
+    "span": 2877,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 21,
+    "fn": "monsterTurn",
+    "day": 85,
+    "dayBefore": 85,
+    "depth": 0,
+    "span": 2878,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 22,
+    "fn": "havenGrowthDaily",
+    "day": 85,
+    "dayBefore": 85,
+    "depth": 1,
+    "span": 2914,
+    "parent": 2909,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 23,
+    "fn": "sleep",
+    "day": 86,
+    "dayBefore": 85,
+    "depth": 0,
+    "span": 2909,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 24,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2917,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 25,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2918,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 2,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 26,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2919,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 2,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 3,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 27,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2920,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 3,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 4,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 28,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2921,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 4,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 29,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2922,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 30,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2923,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 31,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2924,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 32,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2925,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 33,
+    "fn": "monsterTurn",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2926,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 34,
+    "fn": "wanderWorldMonsters",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 1,
+    "span": 2946,
+    "parent": 2944,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 6,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 35,
+    "fn": "worldTick",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2944,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 6,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 36,
+    "fn": "havenGrowthDaily",
+    "day": 86,
+    "dayBefore": 86,
+    "depth": 1,
+    "span": 2953,
+    "parent": 2949,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 6,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 37,
+    "fn": "sleep",
+    "day": 87,
+    "dayBefore": 86,
+    "depth": 0,
+    "span": 2949,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 6,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 38,
+    "fn": "monsterTurn",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2956,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 39,
+    "fn": "monsterTurn",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2957,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 40,
+    "fn": "monsterTurn",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2958,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 41,
+    "fn": "monsterTurn",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2959,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 42,
+    "fn": "monsterTurn",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2960,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 43,
+    "fn": "monsterTurn",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2961,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 44,
+    "fn": "wanderWorldMonsters",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 1,
+    "span": 2989,
+    "parent": 2987,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 3,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 45,
+    "fn": "worldTick",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2987,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 3,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 46,
+    "fn": "havenGrowthDaily",
+    "day": 87,
+    "dayBefore": 87,
+    "depth": 1,
+    "span": 2996,
+    "parent": 2991,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 3,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 47,
+    "fn": "sleep",
+    "day": 88,
+    "dayBefore": 87,
+    "depth": 0,
+    "span": 2991,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 3,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 48,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 2999,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 49,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3000,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 2,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 50,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3001,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 2,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 3,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 51,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3002,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 3,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 4,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 52,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3003,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 4,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 53,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3004,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 54,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3005,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 55,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3006,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 56,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3007,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 57,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3008,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 58,
+    "fn": "monsterTurn",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3009,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 59,
+    "fn": "wanderWorldMonsters",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 1,
+    "span": 3019,
+    "parent": 3017,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 3,
+      "ty": 4,
+      "mx": 8,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 2,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 60,
+    "fn": "worldTick",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3017,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 3,
+      "ty": 4,
+      "mx": 8,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 2,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 61,
+    "fn": "havenGrowthDaily",
+    "day": 88,
+    "dayBefore": 88,
+    "depth": 1,
+    "span": 3034,
+    "parent": 3029,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 2,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 62,
+    "fn": "sleep",
+    "day": 89,
+    "dayBefore": 88,
+    "depth": 0,
+    "span": 3029,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 2,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 63,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3037,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 64,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3038,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 65,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3039,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 66,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3040,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 67,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3041,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 68,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3042,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 3,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 69,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3043,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 70,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3044,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 71,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3045,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   },
+   {
+    "seq": 72,
+    "fn": "monsterTurn",
+    "day": 89,
+    "dayBefore": 89,
+    "depth": 0,
+    "span": 3046,
+    "parent": null,
+    "before": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 1,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "after": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 8,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ],
+    "detail": null
+   }
+  ],
+  "fieldRows": [
+   {
+    "seq": 0,
+    "span": 17,
+    "day": 1,
+    "vid": "catalina_reyes",
+    "mid": "sanjun",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 70,
+    "mHpLeft": 10,
+    "vTaken": 32,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 30,
+    "day": 2,
+    "vid": "rafael_torres",
+    "mid": "speedbump_turtle",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 58,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 31,
+    "day": 2,
+    "vid": "catalina_reyes",
+    "mid": "nightlight_catfish",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 2,
+    "mDealt": 46,
+    "mHpLeft": 0,
+    "vTaken": 9,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 41,
+    "day": 2,
+    "vid": "catalina_reyes",
+    "mid": "ducks_in_a_row",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 16,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 53,
+    "day": 3,
+    "vid": "rafael_torres",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 48,
+    "mHpLeft": 6,
+    "vTaken": 20,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 54,
+    "day": 3,
+    "vid": "catalina_reyes",
+    "mid": "glasswing",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 25,
+    "mHpLeft": 0,
+    "vTaken": 7,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 75,
+    "day": 3,
+    "vid": "rafael_torres",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 38,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 76,
+    "day": 3,
+    "vid": "catalina_reyes",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 48,
+    "mHpLeft": 14,
+    "vTaken": 49,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 89,
+    "day": 4,
+    "vid": "catalina_reyes",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vDie",
+    "rounds": 1,
+    "mDealt": 25,
+    "mHpLeft": 69,
+    "vTaken": 12,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 220,
+    "day": 7,
+    "vid": "gen_k6o9kkr",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 59,
+    "mHpLeft": 11,
+    "vTaken": 33,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 222,
+    "day": 7,
+    "vid": "gen_36fv17b",
+    "mid": "hummice",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 12,
+    "mHpLeft": 0,
+    "vTaken": 12,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 225,
+    "day": 7,
+    "vid": "gen_3g3s5up",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 53,
+    "mHpLeft": 7,
+    "vTaken": 46,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 227,
+    "day": 7,
+    "vid": "rafael_torres",
+    "mid": "nightlight_catfish",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 22,
+    "mHpLeft": 0,
+    "vTaken": 10,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 240,
+    "day": 8,
+    "vid": "gen_1st1y6i",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 110,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 251,
+    "day": 8,
+    "vid": "elif_demir",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 258,
+    "day": 8,
+    "vid": "gen_1st1y6i",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 35,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 271,
+    "day": 9,
+    "vid": "gen_1st1y6i",
+    "mid": "sunback",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 0,
+    "mHpLeft": 59,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 355,
+    "day": 11,
+    "vid": "oliver_moore",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 44,
+    "mHpLeft": 1,
+    "vTaken": 27,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 361,
+    "day": 11,
+    "vid": "gen_k6o9kkr",
+    "mid": "mirrormoth",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 38,
+    "mHpLeft": 0,
+    "vTaken": 22,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 400,
+    "day": 12,
+    "vid": "elif_demir",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 11,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 406,
+    "day": 12,
+    "vid": "gen_kngu7ak",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 464,
+    "day": 14,
+    "vid": "oliver_moore",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 546,
+    "day": 16,
+    "vid": "gen_3g3s5up",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 7,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 548,
+    "day": 16,
+    "vid": "oliver_moore",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 563,
+    "day": 17,
+    "vid": "rafael_torres",
+    "mid": "paparazzo",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 93,
+    "mHpLeft": 0,
+    "vTaken": 51,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 577,
+    "day": 17,
+    "vid": "oliver_moore",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 605,
+    "day": 18,
+    "vid": "rafael_torres",
+    "mid": "paparazzo",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 87,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 624,
+    "day": 18,
+    "vid": "oliver_moore",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 13,
+    "mHpLeft": 37,
+    "vTaken": 43,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 630,
+    "day": 18,
+    "vid": "oliver_moore",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 13,
+    "mHpLeft": 24,
+    "vTaken": 47,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 651,
+    "day": 19,
+    "vid": "rafael_torres",
+    "mid": "giant_mosquito",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 48,
+    "mHpLeft": 0,
+    "vTaken": 33,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 662,
+    "day": 19,
+    "vid": "gen_kngu7ak",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 16,
+    "mHpLeft": 8,
+    "vTaken": 18,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 700,
+    "day": 20,
+    "vid": "gen_1st1y6i",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 48,
+    "mHpLeft": 12,
+    "vTaken": 42,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 734,
+    "day": 21,
+    "vid": "rafael_torres",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 24,
+    "mHpLeft": 66,
+    "vTaken": 28,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 789,
+    "day": 23,
+    "vid": "gen_3g3s5up",
+    "mid": "understudy",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vFlee",
+    "rounds": 5,
+    "mDealt": 48,
+    "mHpLeft": 57,
+    "vTaken": 60,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 795,
+    "day": 23,
+    "vid": "gen_kngu7ak",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 11,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 801,
+    "day": 23,
+    "vid": "gen_3g3s5up",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 11,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 807,
+    "day": 23,
+    "vid": "gen_3g3s5up",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 11,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 875,
+    "day": 25,
+    "vid": "gen_1st1y6i",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 896,
+    "day": 26,
+    "vid": "rafael_torres",
+    "mid": "nightcourt",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 67,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 901,
+    "day": 26,
+    "vid": "rafael_torres",
+    "mid": "statickite",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 92,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 920,
+    "day": 26,
+    "vid": "gen_kngu7ak",
+    "mid": "nevermore",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 39,
+    "mHpLeft": 6,
+    "vTaken": 30,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 958,
+    "day": 27,
+    "vid": "rafael_torres",
+    "mid": "nevermore",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 0,
+    "mDealt": 25,
+    "mHpLeft": 0,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1086,
+    "day": 31,
+    "vid": "rafael_torres",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 63,
+    "mHpLeft": 3,
+    "vTaken": 29,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1135,
+    "day": 32,
+    "vid": "gen_3g3s5up",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1137,
+    "day": 32,
+    "vid": "nina_petrova",
+    "mid": "hummice",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 1,
+    "mDealt": 14,
+    "mHpLeft": 0,
+    "vTaken": 11,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1140,
+    "day": 32,
+    "vid": "oliver_moore",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 46,
+    "mHpLeft": 4,
+    "vTaken": 61,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1142,
+    "day": 32,
+    "vid": "elif_demir",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1236,
+    "day": 35,
+    "vid": "gen_3g3s5up",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 85,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1244,
+    "day": 36,
+    "vid": "gen_3g3s5up",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 77,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1249,
+    "day": 36,
+    "vid": "gen_3g3s5up",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 48,
+    "mHpLeft": 3,
+    "vTaken": 86,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1259,
+    "day": 36,
+    "vid": "gen_3g3s5up",
+    "mid": "giant_mosquito",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 10,
+    "mHpLeft": 24,
+    "vTaken": 23,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1267,
+    "day": 37,
+    "vid": "gen_3g3s5up",
+    "mid": "voice_mimic_radio",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 16,
+    "mHpLeft": 55,
+    "vTaken": 36,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1313,
+    "day": 38,
+    "vid": "gen_1st1y6i",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1319,
+    "day": 38,
+    "vid": "gen_kngu7ak",
+    "mid": "bright_idea",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 61,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1343,
+    "day": 39,
+    "vid": "gen_3g3s5up",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1345,
+    "day": 39,
+    "vid": "rafael_torres",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 48,
+    "mHpLeft": 12,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1347,
+    "day": 39,
+    "vid": "nina_petrova",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1349,
+    "day": 39,
+    "vid": "elif_demir",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1380,
+    "day": 41,
+    "vid": "gen_kngu7ak",
+    "mid": "speedbump_turtle",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 67,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1385,
+    "day": 41,
+    "vid": "gen_kngu7ak",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 83,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1474,
+    "day": 45,
+    "vid": "gen_1st1y6i",
+    "mid": "living_wire",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 59,
+    "mHpLeft": 2,
+    "vTaken": 37,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1504,
+    "day": 46,
+    "vid": "gen_3g3s5up",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1518,
+    "day": 46,
+    "vid": "nina_petrova",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1520,
+    "day": 46,
+    "vid": "oliver_moore",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 12,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1554,
+    "day": 47,
+    "vid": "gen_1st1y6i",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 55,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1679,
+    "day": 53,
+    "vid": "gen_k6o9kkr",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1701,
+    "day": 54,
+    "vid": "nina_petrova",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1711,
+    "day": 54,
+    "vid": "gen_k6o9kkr",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1717,
+    "day": 54,
+    "vid": "gen_kngu7ak",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1730,
+    "day": 54,
+    "vid": "gen_3g3s5up",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 3,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1732,
+    "day": 54,
+    "vid": "rafael_torres",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 0,
+    "mDealt": 26,
+    "mHpLeft": 0,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1735,
+    "day": 54,
+    "vid": "nina_petrova",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 4,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1737,
+    "day": 54,
+    "vid": "oliver_moore",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1739,
+    "day": 54,
+    "vid": "elif_demir",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 12,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1829,
+    "day": 57,
+    "vid": "oliver_moore",
+    "mid": "rut_king",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 4,
+    "mDealt": 66,
+    "mHpLeft": 0,
+    "vTaken": 38,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1836,
+    "day": 57,
+    "vid": "gen_kngu7ak",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 12,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1904,
+    "day": 59,
+    "vid": "rafael_torres",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 0,
+    "mDealt": 26,
+    "mHpLeft": 0,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1912,
+    "day": 59,
+    "vid": "gen_kngu7ak",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 1966,
+    "day": 60,
+    "vid": "rafael_torres",
+    "mid": "cliffhanger",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 0,
+    "mDealt": 26,
+    "mHpLeft": 0,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2031,
+    "day": 62,
+    "vid": "rafael_torres",
+    "mid": "murkcap",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "vKill",
+    "rounds": 0,
+    "mDealt": 25,
+    "mHpLeft": 0,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2075,
+    "day": 63,
+    "vid": "gen_k6o9kkr",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 8,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2081,
+    "day": 63,
+    "vid": "gen_3g3s5up",
+    "mid": "statickite",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 7,
+    "mDealt": 74,
+    "mHpLeft": 6,
+    "vTaken": 94,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2158,
+    "day": 65,
+    "vid": "gen_k6o9kkr",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2160,
+    "day": 65,
+    "vid": "gen_kngu7ak",
+    "mid": "mirror_stag",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 2,
+    "mDealt": 67,
+    "mHpLeft": 15,
+    "vTaken": 40,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2162,
+    "day": 65,
+    "vid": "gen_3g3s5up",
+    "mid": "statickite",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2164,
+    "day": 65,
+    "vid": "rafael_torres",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2185,
+    "day": 66,
+    "vid": "rafael_torres",
+    "mid": "hushwolf",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2195,
+    "day": 66,
+    "vid": "oliver_moore",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2201,
+    "day": 66,
+    "vid": "gen_kngu7ak",
+    "mid": "drumbelly_tanuki",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2268,
+    "day": 68,
+    "vid": "gen_3g3s5up",
+    "mid": "statickite",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2306,
+    "day": 69,
+    "vid": "oliver_moore",
+    "mid": "belltoad",
+    "mdefIsWorldObject": false,
+    "worldArgNull": false,
+    "outcome": "mFlee",
+    "rounds": 1,
+    "mDealt": 39,
+    "mHpLeft": 6,
+    "vTaken": 22,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2317,
+    "day": 70,
+    "vid": "gen_k6o9kkr",
+    "mid": "giant_mosquito",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "vKill",
+    "rounds": 3,
+    "mDealt": 45,
+    "mHpLeft": 0,
+    "vTaken": 23,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2426,
+    "day": 73,
+    "vid": "gen_3g3s5up",
+    "mid": "spool",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 287,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2435,
+    "day": 73,
+    "vid": "gen_3g3s5up",
+    "mid": "bulldozer",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 90,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2460,
+    "day": 74,
+    "vid": "gen_3g3s5up",
+    "mid": "speedbump_turtle",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 55,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2467,
+    "day": 74,
+    "vid": "gen_3g3s5up",
+    "mid": "white_noise_heron",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 4,
+    "mDealt": 47,
+    "mHpLeft": 16,
+    "vTaken": 37,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2481,
+    "day": 74,
+    "vid": "gen_3g3s5up",
+    "mid": "nightlight_catfish",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "mFlee",
+    "rounds": 3,
+    "mDealt": 20,
+    "mHpLeft": 5,
+    "vTaken": 18,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2493,
+    "day": 75,
+    "vid": "gen_kngu7ak",
+    "mid": "suburb",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1315,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 0,
+    "span": 2498,
+    "day": 75,
+    "vid": "gen_kngu7ak",
+    "mid": "congregation",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1096,
+    "vTaken": 0,
+    "entryHp": null,
+    "exitHp": null
+   },
+   {
+    "seq": 9,
+    "span": 2837,
+    "day": 84,
+    "vid": "gen_3g3s5up",
+    "mid": "suburb",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 1460,
+    "vTaken": 0,
+    "entryHp": 525,
+    "exitHp": 525
+   },
+   {
+    "seq": 21,
+    "span": 2913,
+    "day": 85,
+    "vid": "gen_3g3s5up",
+    "mid": "anaconda_empress",
+    "mdefIsWorldObject": false,
+    "worldArgNull": true,
+    "outcome": "evade",
+    "rounds": 0,
+    "mDealt": 0,
+    "mHpLeft": 119,
+    "vTaken": 0,
+    "entryHp": 525,
+    "exitHp": 525
+   }
+  ],
+  "daily": [
+   {
+    "day": 2,
+    "ents": []
+   },
+   {
+    "day": 3,
+    "ents": []
+   },
+   {
+    "day": 4,
+    "ents": []
+   },
+   {
+    "day": 5,
+    "ents": []
+   },
+   {
+    "day": 6,
+    "ents": []
+   },
+   {
+    "day": 7,
+    "ents": []
+   },
+   {
+    "day": 8,
+    "ents": []
+   },
+   {
+    "day": 8,
+    "ents": []
+   },
+   {
+    "day": 10,
+    "ents": []
+   },
+   {
+    "day": 10,
+    "ents": []
+   },
+   {
+    "day": 12,
+    "ents": []
+   },
+   {
+    "day": 13,
+    "ents": []
+   },
+   {
+    "day": 14,
+    "ents": []
+   },
+   {
+    "day": 15,
+    "ents": []
+   },
+   {
+    "day": 16,
+    "ents": []
+   },
+   {
+    "day": 16,
+    "ents": []
+   },
+   {
+    "day": 18,
+    "ents": []
+   },
+   {
+    "day": 19,
+    "ents": []
+   },
+   {
+    "day": 20,
+    "ents": []
+   },
+   {
+    "day": 21,
+    "ents": []
+   },
+   {
+    "day": 22,
+    "ents": []
+   },
+   {
+    "day": 22,
+    "ents": []
+   },
+   {
+    "day": 24,
+    "ents": []
+   },
+   {
+    "day": 25,
+    "ents": []
+   },
+   {
+    "day": 26,
+    "ents": []
+   },
+   {
+    "day": 27,
+    "ents": []
+   },
+   {
+    "day": 28,
+    "ents": []
+   },
+   {
+    "day": 28,
+    "ents": []
+   },
+   {
+    "day": 30,
+    "ents": []
+   },
+   {
+    "day": 31,
+    "ents": []
+   },
+   {
+    "day": 32,
+    "ents": []
+   },
+   {
+    "day": 33,
+    "ents": []
+   },
+   {
+    "day": 33,
+    "ents": []
+   },
+   {
+    "day": 35,
+    "ents": []
+   },
+   {
+    "day": 36,
+    "ents": []
+   },
+   {
+    "day": 37,
+    "ents": []
+   },
+   {
+    "day": 38,
+    "ents": []
+   },
+   {
+    "day": 39,
+    "ents": []
+   },
+   {
+    "day": 40,
+    "ents": []
+   },
+   {
+    "day": 41,
+    "ents": []
+   },
+   {
+    "day": 41,
+    "ents": []
+   },
+   {
+    "day": 43,
+    "ents": []
+   },
+   {
+    "day": 43,
+    "ents": []
+   },
+   {
+    "day": 45,
+    "ents": []
+   },
+   {
+    "day": 46,
+    "ents": []
+   },
+   {
+    "day": 47,
+    "ents": []
+   },
+   {
+    "day": 47,
+    "ents": []
+   },
+   {
+    "day": 49,
+    "ents": []
+   },
+   {
+    "day": 50,
+    "ents": []
+   },
+   {
+    "day": 51,
+    "ents": []
+   },
+   {
+    "day": 52,
+    "ents": []
+   },
+   {
+    "day": 53,
+    "ents": []
+   },
+   {
+    "day": 53,
+    "ents": []
+   },
+   {
+    "day": 55,
+    "ents": []
+   },
+   {
+    "day": 55,
+    "ents": []
+   },
+   {
+    "day": 57,
+    "ents": []
+   },
+   {
+    "day": 57,
+    "ents": []
+   },
+   {
+    "day": 59,
+    "ents": []
+   },
+   {
+    "day": 60,
+    "ents": []
+   },
+   {
+    "day": 62,
+    "ents": []
+   },
+   {
+    "day": 62,
+    "ents": []
+   },
+   {
+    "day": 64,
+    "ents": []
+   },
+   {
+    "day": 64,
+    "ents": []
+   },
+   {
+    "day": 66,
+    "ents": []
+   },
+   {
+    "day": 67,
+    "ents": []
+   },
+   {
+    "day": 68,
+    "ents": []
+   },
+   {
+    "day": 69,
+    "ents": []
+   },
+   {
+    "day": 70,
+    "ents": []
+   },
+   {
+    "day": 71,
+    "ents": []
+   },
+   {
+    "day": 72,
+    "ents": []
+   },
+   {
+    "day": 73,
+    "ents": []
+   },
+   {
+    "day": 74,
+    "ents": []
+   },
+   {
+    "day": 75,
+    "ents": []
+   },
+   {
+    "day": 76,
+    "ents": []
+   },
+   {
+    "day": 77,
+    "ents": []
+   },
+   {
+    "day": 77,
+    "ents": []
+   },
+   {
+    "day": 79,
+    "ents": []
+   },
+   {
+    "day": 79,
+    "ents": []
+   },
+   {
+    "day": 81,
+    "ents": []
+   },
+   {
+    "day": 81,
+    "ents": []
+   },
+   {
+    "day": 83,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 11,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 84,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 10,
+      "tx": 4,
+      "ty": 4,
+      "mx": 6,
+      "my": 6,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 85,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 0,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 86,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 87,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 88,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 1,
+      "my": 4,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": true,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 89,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 4,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ]
+   },
+   {
+    "day": 90,
+    "ents": [
+     {
+      "tag": 1,
+      "idx": 9,
+      "tx": 5,
+      "ty": 4,
+      "mx": 0,
+      "my": 2,
+      "hp": 525,
+      "maxHp": 700,
+      "titan": true,
+      "lingering": false,
+      "raidBorn": true
+     }
+    ]
+   }
+  ],
+  "errors": [],
+  "wrapped": {
+   "fieldFight": true,
+   "aidFight": true,
+   "startCombat": true,
+   "tbEnd": true,
+   "spawnWorldMonster": true,
+   "removeWorldMonster": true,
+   "titanDawnTick": true,
+   "monsterTurn": true,
+   "animalTurn": true,
+   "villagerMonsterTick": true,
+   "resolveWildMonsterEncounter": true,
+   "resolvePatrol": true,
+   "worldTick": true,
+   "wanderWorldMonsters": true,
+   "maintainWorldMonsters": true,
+   "havenRaidTick": true,
+   "havenGrowthDaily": true,
+   "sleep": true
+  }
+ },
+ "deaths": [
+  {
+   "day": 2,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 3,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 4,
+   "kind": "villager",
+   "who": "catalina_reyes",
+   "cause": "something displaced a LOT of water, and it wasn't a log",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 8,
+   "kind": "villager",
+   "who": "gen_08t3j4e",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 11,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "person",
+   "who": "sigrun_eiriksdottir",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 19,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 24,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "villager",
+   "who": "gen_36fv17b",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 54,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 57,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 59,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 66,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 70,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 71,
+   "kind": "monster",
+   "who": "callback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 74,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 74,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 74,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 74,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 79,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 79,
+   "kind": "monster",
+   "who": "strike",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 81,
+   "kind": "villager",
+   "who": "gen_1st1y6i",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 83,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 84,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "combat",
+   "player": false
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2400|12|4|4|1|387",
+  "3:3|95|2368|12|4|4|1|315",
+  "4:4|92|1170|11|4|4|1|276",
+  "5:5|100|1200|11|4|4|1|251",
+  "6:6|100|1281|11|4|4|1|239",
+  "7:7|100|1141|11|4|4|1|208",
+  "8:8|100|2300|10|4|4|1|191",
+  "9:9|100|2210|10|4|4|1|177",
+  "10:10|100|2140|10|4|4|1|169",
+  "11:11|96|2000|10|4|4|1|185",
+  "12:12|100|2363|9|4|4|2|166",
+  "13:13|100|2224|9|4|4|2|155",
+  "14:14|100|2215|9|4|4|2|130",
+  "15:15|100|2400|9|4|4|2|127",
+  "16:16|100|2319|9|4|4|2|108",
+  "17:17|100|2400|9|4|4|2|98",
+  "18:18|100|2215|9|4|4|2|92",
+  "19:19|100|2150|9|4|4|2|69",
+  "20:20|100|2400|9|4|4|2|119",
+  "21:21|100|2390|9|4|4|2|92",
+  "22:22|100|2054|9|4|4|2|82",
+  "23:23|80|2246|9|4|4|2|131",
+  "24:24|100|2400|9|4|4|2|157",
+  "25:25|100|2400|9|4|4|2|125",
+  "26:26|96|2270|9|4|4|2|119",
+  "27:27|100|2356|9|4|4|2|110",
+  "28:28|100|2300|9|4|4|2|126",
+  "29:29|100|2187|9|4|4|2|175",
+  "30:30|100|2400|9|4|4|2|249",
+  "31:31|100|2400|9|4|4|2|190",
+  "32:32|100|2400|9|4|4|2|175",
+  "33:33|95|2400|9|4|4|2|132",
+  "34:34|95|2400|9|4|4|2|153",
+  "35:35|83|2400|9|4|4|2|231",
+  "36:36|100|2365|9|4|4|2|554",
+  "37:37|100|2400|9|4|4|2|576",
+  "38:38|100|2400|9|4|4|2|279",
+  "39:39|54|2400|9|4|4|2|493",
+  "40:40|46|2400|9|4|4|2|484",
+  "41:41|46|2365|9|4|4|2|321",
+  "42:42|31|2400|9|4|4|2|442",
+  "43:43|61|2400|9|4|4|2|392",
+  "44:44|61|2400|9|4|4|2|192",
+  "45:45|91|2400|9|4|4|2|271",
+  "46:46|100|2400|9|4|4|2|232",
+  "47:47|100|2400|9|4|4|2|193",
+  "48:48|23|2400|9|4|4|2|410",
+  "49:49|53|2365|9|4|4|2|529",
+  "50:50|83|2400|9|4|4|2|567",
+  "51:51|100|2330|8|4|4|2|666",
+  "52:52|100|2320|8|4|4|2|662",
+  "53:53|100|2400|8|4|4|2|645",
+  "54:54|100|2290|8|4|4|2|652",
+  "55:55|26|2240|8|4|4|2|667",
+  "56:56|23|2393|8|4|4|2|663",
+  "57:57|53|2326|8|4|4|2|635",
+  "58:58|51|2250|8|4|4|2|531",
+  "59:59|48|2400|8|4|4|2|223",
+  "61:61|100|2400|8|4|4|2|186",
+  "62:62|84|2400|8|4|4|2|194",
+  "63:63|84|2252|8|4|4|2|197",
+  "64:64|100|2351|8|4|4|2|223",
+  "65:65|89|2304|8|4|4|2|215",
+  "66:66|100|2400|8|4|4|3|189",
+  "67:67|100|2365|8|4|4|3|233",
+  "68:68|100|2243|8|4|4|3|248",
+  "69:69|100|2400|8|4|4|3|242",
+  "70:70|95|2365|8|4|4|3|249",
+  "71:71|100|2400|8|4|4|4|209",
+  "72:72|100|2278|8|4|4|4|227",
+  "73:73|79|2275|8|4|4|4|215",
+  "74:74|77|2400|8|4|4|4|209",
+  "75:75|100|2400|8|4|4|4|227",
+  "76:76|100|2390|8|4|4|4|216",
+  "77:77|100|2281|8|4|4|4|216",
+  "78:78|98|2390|8|4|4|4|129",
+  "79:79|100|2400|8|4|4|4|88",
+  "80:80|100|2173|8|4|4|4|92",
+  "81:81|100|1500|7|4|4|4|86",
+  "82:82|100|2215|7|4|4|4|99",
+  "83:83|100|2303|7|4|4|4|115",
+  "84:84|100|2200|7|4|4|4|92",
+  "85:85|100|2250|7|4|4|4|102",
+  "86:86|100|2390|8|4|4|4|94",
+  "87:87|100|2400|8|4|4|4|125",
+  "88:88|100|2200|9|4|4|4|87",
+  "89:89|95|2400|9|4|4|4|32",
+  "90:90|100|2400|10|4|4|4|23"
+ ],
+ "instrumentErrors": []
+}
