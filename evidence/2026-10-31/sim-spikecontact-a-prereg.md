@@ -106,6 +106,23 @@ DECISION MOMENTS (two universes, never pooled):
   last two parsed proven blows. Fights with fewer than 1 parsed
   proven blow are unparseable for this purpose, not "neither".
 
+AMENDMENT 1 (committed BEFORE any judged verdict, 2026-11-01):
+baseline legs ran on pre-rule code, so their rows physically
+carry no twoblowLastTwo/twoblowCommit fields — engine-truth
+validation is impossible there, not merely failed. For
+pre-rule (baseline) U-FLIGHT fights ONLY, the validation below
+is replaced by damage reconciliation: the sum of ALL parsed
+damage components (lead strikes + ally strikes + volley hits +
+ambush opener) must equal the recorded mDealt exactly; a
+mismatch is UNCLASSIFIED with reason
+'reconciliation-mismatch'. Lever legs keep engine-truth
+validation. This amendment changes no GO threshold and no
+classification rule — it supplies the validation the baseline
+legs can actually satisfy. Truncation for U-COMMITTED is
+judged on the FULL captured log, never on the pre-commit
+slice (the slice ends at the commit line, which is not an
+outcome line).
+
 PARSE VALIDATION (no silent trust in log parsing): a parsed
 fight is CLASSIFIED only if its parsed sequence reproduces
 engine truth where engine truth exists —
