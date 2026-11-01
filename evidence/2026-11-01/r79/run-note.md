@@ -340,4 +340,29 @@ to r79.
 
 ## Closeout
 
-- (filled at closeout)
+- Commit 6032c23be (210 files: 4 scripts + 206 evidence files)
+  on base 5f2d17bf7; safe-commit index clobber hit (staged
+  deletions, the known class) and was repaired via HEAD-blob
+  cacheinfo before any rebase (verified: status empty, diff
+  empty). Lane A landed mid-run (7c8745741 journey-deepening
+  r79); branch rebased onto it cleanly (new commit 0a66ca387,
+  my files verified byte-identical across the rebase, post-rebase
+  wedge proof 56/56 on SEED=42 and SEED=7), then merged locally
+  via --ff-only, pending ship — no version bump, no push (the
+  ship loop owns those).
+- Rotation-b advanced 5 -> 6, verified by re-read. Next Lane B
+  leg is 6 (crisis).
+- Lane B lock deleted at closeout. Worktree journey2-social
+  released and removed; branch deleted.
+- INFRA HAZARD (heartbeat loop): the 10-minute background
+  nohup heartbeat loop died after its first beat — the exec
+  session that spawned it reported output_drain_timeout and its
+  teardown killed the loop (log holds 1 entry; the registry
+  read 10:12:41 stale for ~37 min mid-run). Manual re-heartbeats
+  at major steps (registration, driver launch, closeout) are
+  what actually kept the tree fresh. A background loop spawned
+  from a timed-out exec session must be verified alive, not
+  assumed — same class as r53's silenced-loop lesson, new
+  trigger. No harm this run (the lock file held, no successor
+  started), but the next run should heartbeat manually at each
+  major step and read the registry back every time.
