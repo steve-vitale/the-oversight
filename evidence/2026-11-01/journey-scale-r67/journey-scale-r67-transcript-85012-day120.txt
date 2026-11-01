@@ -1,0 +1,26 @@
+(pre-talk seed: seek_taken planted d119; takenWantDay=119; convoCount=13)
+=== seed 85012 day 120 — conversation with Deon (visjoin_75) ===
+occupation=pottery instructor temperament=mischievous trust=90 dead=false
+want: seek_taken (stage 0)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Watch — I'll get a real laugh out of this camp before the week is out.
+(turn0 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "Surviving isn't enough. I want to remember what fun felt like."
+YOU: [dlg:react] (listen)
+THEM: "I'm collecting jokes like firewood. We'll need them when it's dark."
+YOU: [dlg:more] "Tell me more."
+THEM: "Watch — I'll get a real laugh out of this camp before the week is out."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "I want one day where I laugh until it hurts and it's not from nerves."
+YOU: [dlg:react] (listen)
+THEM: "I miss laughing without checking over my shoulder first. I'm working on it."
+YOU: [dlg:more] "Tell me more."
+THEM: "Joy is a resource. I'm foraging for it. Some days the yield is terrible."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread goal
+closing line: "Later."

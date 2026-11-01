@@ -2690,9 +2690,22 @@
     convoPick(vid, key, pool, hard) {
       const c = this.convoGet(vid);
       c.said[key] = c.said[key] || [];
+      // QUOTE-NORMALIZED DEDUPE (journey-scale r67 2026-11-01): the goal
+      // opener pool (goalDef.lines, unquoted) and the goaldeep pool
+      // (goalFollow[goal], quoted variants) hold the SAME lines in
+      // different wrapping — Deon d120 re-served his opener verbatim on
+      // "Tell me more" because exact-string dedupe never matched the twin.
+      // Compare quote-stripped text, so a line said under one key never
+      // re-serves under another whatever its quotes. Returned lines keep
+      // their original wrapping; only the comparison normalizes.
+      const normPick = (l) => {
+        let t = String(l == null ? '' : l).trim();
+        if (t.length >= 2 && t.startsWith('"') && t.endsWith('"')) t = t.slice(1, -1);
+        return t.trim();
+      };
       const allSaid = [];
-      for (const k of Object.keys(c.said)) for (const l of c.said[k]) allSaid.push(l);
-      const fresh = (pool || []).filter(l => allSaid.indexOf(l) === -1);
+      for (const k of Object.keys(c.said)) for (const l of c.said[k]) allSaid.push(normPick(l));
+      const fresh = (pool || []).filter(l => allSaid.indexOf(normPick(l)) === -1);
       if (!fresh.length) return null;
       let pickPool = fresh;
       try {

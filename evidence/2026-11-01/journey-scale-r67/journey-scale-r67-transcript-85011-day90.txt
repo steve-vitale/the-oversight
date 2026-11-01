@@ -1,0 +1,18 @@
+(pre-talk seed: ask_favor planted d82; takenWantDay=26; convoCount=11)
+=== seed 85011 day 90 — conversation with Eli (gen_pq0iaxp) ===
+occupation=librarian temperament=withdrawn trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "My wound needs a second pair of hands. Could you clean it out for me? Please."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [goon] "And?"
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread trade
+closing line: "...I'm going to go. This was... fine. It was fine."

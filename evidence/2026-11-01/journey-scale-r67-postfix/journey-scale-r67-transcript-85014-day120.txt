@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=107; convoCount=13)
+=== seed 85014 day 120 — conversation with Austin (gen_jskz91n) ===
+occupation=tattoo artist temperament=withdrawn trust=94 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "About the taken — about Willem. I can't stop turning it over. Have you heard anything new?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Later."
