@@ -1,0 +1,390 @@
+# SURFACE+SEEDED — seed 6901 (143d, 7 alive)
+
+npcPairs=69 deep2=36 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=261 closeReadsServed=45 grievanceServes=25 othersSteered=19
+COND-TP: firstDeep2Day=30 lateClose=196 lateTP=155 lateNull=0 condRate=79.1% pooledTP=157/205 pooledRate=76.6% grievReadsByWhy={"grievance":0,"vgrievance":28}
+FUNNEL (natural): convos=414 subject=392 offered=348 picked=242 classes={"subject-no-offer":44,"offered-not-picked":106,"picked-others":242,"no-subject-no-ans":22}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=44 rate=10.6% offered=348 mainOffered=9 subjectOffered=341 picked=242 latePicks=107 latePicksMain=4 latePicksSubject=103
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Ezra / Murugan — "You want to know about that? Okay." "Tariq talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Pedro / Ezra / Tariq — "Stan sees in the dark. Not well — but better than you. Better than me."
+  KNACK-CIRCULATION: Murugan / Stan / Tariq — "cuts close faster when Elena wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Somchai / Bongani — "Good question." "Stan sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=345 picks=249 latePicks=105 missedChangedNotOffered=16
+WRAPSERVE: convos=28 matcherHits=25 matcherServes=25 classes={"grievance-line":25,"deflection":0,"other":3}
+FUNNEL-PROBE (subject-no-offer turns): turns=185 menuProblem=138 pickProblem=47
+INVITE (wrap, carried from r63): lure={"n":2,"accepts":2,"acceptRate":1,"vetoes":{},"chanceMin":52,"chanceMax":60,"chanceMean":56} party={"n":27,"accepts":9,"acceptRate":0.3333333333333333,"vetoes":{},"chanceMin":16,"chanceMax":80,"chanceMean":49.5} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=5
+FAVOR (r65): funnel={"offers":49,"forageOffers":19,"otherFavorOffers":30,"accepts":19,"acceptAttempts":19,"waits":18,"starts":18,"startBlocked":15,"forages":17,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":8,"retryAssigned":8,"retryStarts":8,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":17,"delivers":16,"deliverBlocked":0,"completeOutings":3,"completeOutingsEvents":16,"keptMatched":3,"keptMatchedStrict":3}
+CASE (r79): snaps=10 betrayalOfferConvos=122 mootOffers=7 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d7: case_2 status=open charge=murder accused=Esteban/Stan/Pedro target=Katarina role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d9: case_2 status=open charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=false
+  CASE-SNAP d10: case_2 status=open charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_2 status=acquitted charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d29: case_2 status=acquitted charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d29: case_4 status=open charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d31: case_2 status=acquitted charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d31: case_4 status=open charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=juror known=true mootIn=null trial=false
+  CASE-SNAP d32: case_2 status=acquitted charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d32: case_4 status=open charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=juror known=true mootIn=null trial=true
+  CASE-SNAP d34: case_2 status=acquitted charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d34: case_4 status=acquitted charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=juror known=true mootIn=null trial=true
+  CASE-SNAP d143: case_2 status=acquitted charge=murder accused=Esteban/Stan/Pedro target=Katarina role=juror known=true mootIn=null trial=true
+  CASE-SNAP d143: case_4 status=acquitted charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"gen_p5ivi26","vidName":"Murugan","favorId":"favor-gen_p5ivi26-57-18","state":"thanked","promisedDay":57,"meetDay":58,"deadline":59,"promiseKept":true,"startedDay":58,"forageCount":1,"playerKcal":195,"partnerKcal":195,"deliveredKcal":390,"returnedDay":58,"talkCount":1},{"vid":"gen_1x3qz1a","vidName":"Ezra","favorId":"favor-gen_1x3qz1a-30-10","state":"thanked","promisedDay":30,"meetDay":31,"deadline":32,"promiseKept":true,"startedDay":32,"forageCount":2,"playerKcal":260,"partnerKcal":260,"deliveredKcal":520,"returnedDay":32,"talkCount":1},{"vid":"somchai_prasert","vidName":"Somchai","favorId":"favor-somchai_prasert-78-29","state":"declined","promisedDay":78,"meetDay":79,"deadline":80,"promiseKept":true,"startedDay":79,"forageCount":2,"playerKcal":360,"partnerKcal":360,"deliveredKcal":720,"returnedDay":79,"talkCount":1}]
+  FAVOR-OFFER d4: Elena kind=sick_help favorId=favor-elena_petrova-4-1 task=help Elena with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d6: Yuki kind=food_share favorId=favor-yuki_mori-4-2 task=share food with Yuki — they're going hungry
+  FAVOR-OFFER d10: Murugan kind=forage_help favorId=favor-gen_p5ivi26-10-4 task=forage with Murugan tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Tariq kind=sick_help favorId=favor-tariq_mahmood-9-3 task=help Tariq with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d14: Stan kind=sick_help favorId=favor-stan_kowalski-14-6 task=help Stan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d17: Yuki kind=forage_help favorId=favor-yuki_mori-14-5 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d26: Stan kind=sick_help favorId=favor-stan_kowalski-26-8 task=help Stan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d28: Tariq kind=forage_help favorId=favor-tariq_mahmood-22-7 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Ezra kind=sick_help favorId=favor-gen_1x3qz1a-29-9 task=help Ezra with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d30: Ezra kind=forage_help favorId=favor-gen_1x3qz1a-30-10 task=forage with Ezra tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Murugan kind=forage_help favorId=favor-gen_p5ivi26-35-11 task=forage with Murugan tomorrow to rebuild the pantry
+  FAVOR-OFFER d39: Tariq kind=forage_help favorId=favor-tariq_mahmood-39-12 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Stan kind=food_share favorId=favor-stan_kowalski-42-13 task=share food with Stan — they're going hungry
+  FAVOR-OFFER d45: Pedro kind=food_share favorId=favor-gen_abruqfy-45-14 task=share food with Pedro — they're past hungry
+  FAVOR-OFFER d47: Murugan kind=heal_help favorId=favor-gen_p5ivi26-47-15 task=help Murugan with their injury
+  FAVOR-OFFER d50: Stan kind=forage_help favorId=favor-stan_kowalski-50-16 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d54: Somchai kind=forage_help favorId=favor-somchai_prasert-54-17 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Murugan kind=forage_help favorId=favor-gen_p5ivi26-57-18 task=forage with Murugan tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Pedro kind=forage_help favorId=favor-gen_abruqfy-63-19 task=forage with Pedro tomorrow to rebuild the pantry
+  FAVOR-OFFER d64: Tariq kind=forage_help favorId=favor-tariq_mahmood-64-20 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Stan kind=forage_help favorId=favor-stan_kowalski-65-21 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d68: Stan kind=forage_help favorId=favor-stan_kowalski-68-22 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d69: Yuki kind=food_share favorId=favor-yuki_mori-69-23 task=share food with Yuki — they're going hungry
+  FAVOR-OFFER d70: Somchai kind=forage_help favorId=favor-somchai_prasert-70-24 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d71: Yash kind=heal_help favorId=favor-gen_aq9vahu-71-25 task=help Yash with their injury
+  FAVOR-OFFER d75: Elena kind=heal_help favorId=favor-elena_petrova-75-26 task=help Elena with their injury
+  FAVOR-OFFER d76: Elena kind=heal_help favorId=favor-elena_petrova-76-27 task=help Elena with their injury
+  FAVOR-OFFER d77: Pedro kind=food_share favorId=favor-gen_abruqfy-77-28 task=share food with Pedro — they're going hungry
+  FAVOR-OFFER d78: Somchai kind=forage_help favorId=favor-somchai_prasert-78-29 task=forage with Somchai tomorrow to rebuild the pantry
+  FAVOR-OFFER d80: Stan kind=heal_help favorId=favor-stan_kowalski-80-30 task=help Stan with their injury
+  FAVOR-OFFER d93: Yash kind=forage_help favorId=favor-gen_aq9vahu-93-32 task=forage with Yash tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Yash kind=food_share favorId=favor-gen_aq9vahu-98-33 task=share food with Yash — they're running on empty
+  FAVOR-OFFER d104: Yash kind=forage_help favorId=favor-gen_aq9vahu-104-35 task=forage with Yash tomorrow to rebuild the pantry
+  FAVOR-OFFER d104: Stan kind=forage_help favorId=favor-stan_kowalski-104-36 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Yuki kind=food_share favorId=favor-yuki_mori-103-34 task=share food with Yuki — they're running on empty
+  FAVOR-OFFER d109: Stan kind=heal_help favorId=favor-stan_kowalski-109-37 task=help Stan with their injury
+  FAVOR-OFFER d111: Yash kind=food_share favorId=favor-gen_aq9vahu-111-38 task=share food with Yash — they're past hungry
+  FAVOR-OFFER d114: Stan kind=food_share favorId=favor-stan_kowalski-113-39 task=share food with Stan — they're past hungry
+  FAVOR-OFFER d115: Yuki kind=forage_help favorId=favor-yuki_mori-115-40 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d120: Stan kind=food_share favorId=favor-stan_kowalski-120-41 task=share food with Stan — they're running on empty
+  FAVOR-OFFER d120: Elena kind=food_share favorId=favor-elena_petrova-120-42 task=share food with Elena — they're going hungry
+  FAVOR-OFFER d124: Nikos kind=water_haul favorId=favor-nikos_papadopoulos-122-43 task=bring four liters home from the creek with Nikos; set out at dawn
+  FAVOR-OFFER d127: Stan kind=food_share favorId=favor-stan_kowalski-127-45 task=share food with Stan — they're going hungry
+  FAVOR-OFFER d128: Yuki kind=water_haul favorId=favor-yuki_mori-127-44 task=bring four liters home from the creek with Yuki; set out at dawn
+  FAVOR-OFFER d129: Tariq kind=sick_help favorId=favor-tariq_mahmood-129-47 task=help Tariq with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d130: Elena kind=water_haul favorId=favor-elena_petrova-128-46 task=bring four liters home from the creek with Elena; set out at dawn
+  FAVOR-OFFER d139: Elena kind=water_haul favorId=favor-elena_petrova-139-48 task=bring four liters home from the creek with Elena; set out at dawn
+  FAVOR-OFFER d141: Stan kind=water_haul favorId=favor-stan_kowalski-141-49 task=bring four liters home from the creek with Stan; set out at dawn
+  FAVOR-OFFER d141: Tariq kind=sick_help favorId=favor-tariq_mahmood-141-50 task=help Tariq with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-ACCEPT d10: Murugan favorId=favor-gen_p5ivi26-10-4 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d17: Yuki favorId=favor-yuki_mori-14-5 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d28: Tariq favorId=favor-tariq_mahmood-22-7 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d30: Ezra favorId=favor-gen_1x3qz1a-30-10 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d35: Murugan favorId=favor-gen_p5ivi26-35-11 accepted=true state=promised meetDay=36
+  FAVOR-ACCEPT d39: Tariq favorId=favor-tariq_mahmood-39-12 accepted=true state=promised meetDay=40
+  FAVOR-ACCEPT d50: Stan favorId=favor-stan_kowalski-50-16 accepted=true state=promised meetDay=51
+  FAVOR-ACCEPT d54: Somchai favorId=favor-somchai_prasert-54-17 accepted=true state=promised meetDay=55
+  FAVOR-ACCEPT d57: Murugan favorId=favor-gen_p5ivi26-57-18 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d63: Pedro favorId=favor-gen_abruqfy-63-19 accepted=true state=promised meetDay=64
+  FAVOR-ACCEPT d64: Tariq favorId=favor-tariq_mahmood-64-20 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d65: Stan favorId=favor-stan_kowalski-65-21 accepted=true state=promised meetDay=66
+  FAVOR-ACCEPT d68: Stan favorId=favor-stan_kowalski-68-22 accepted=true state=promised meetDay=69
+  FAVOR-ACCEPT d70: Somchai favorId=favor-somchai_prasert-70-24 accepted=true state=promised meetDay=71
+  FAVOR-ACCEPT d78: Somchai favorId=favor-somchai_prasert-78-29 accepted=true state=promised meetDay=79
+  FAVOR-ACCEPT d93: Yash favorId=favor-gen_aq9vahu-93-32 accepted=true state=promised meetDay=94
+  FAVOR-ACCEPT d104: Yash favorId=favor-gen_aq9vahu-104-35 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d104: Stan favorId=favor-stan_kowalski-104-36 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d115: Yuki favorId=favor-yuki_mori-115-40 accepted=true state=promised meetDay=116
+  INVITE-DEC d6 lure: Stan -> Katarina chance=60 accept=true veto=- inputs={"temp":"bold","goal":"legacy","mood":"hungry","fear":0,"affinity":0} reasons=["bold temperament (+15)"]
+  INVITE-DEC d8 party: Ingrid -> Elena chance=16 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":4,"trust":40,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 40","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Ingrid -> Ezra chance=42.2 accept=false veto=- inputs={"temp":"anxious","goal":"joy","mood":"grieving","fear":4,"trust":43,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 43","grieving mood (-10)"]
+  INVITE-DEC d9 party: Ingrid -> Yash chance=54.6 accept=false veto=- inputs={"temp":"intense","goal":"lead","mood":"steady","fear":4,"trust":49,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 49"]
+  INVITE-DEC d9 party: Ingrid -> Yash chance=54.6 accept=false veto=- inputs={"temp":"intense","goal":"lead","mood":"steady","fear":4,"trust":49,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 49"]
+  INVITE-DEC d9 party: Ingrid -> Elena chance=27.200000000000003 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"trust":43,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 43","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d9 party: Ingrid -> Elena chance=28.400000000000006 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":4,"trust":46,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 46","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d9 party: Ingrid -> Pedro chance=48.2 accept=false veto=- inputs={"temp":"dry","goal":"remember","mood":"steady","fear":4,"trust":33,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 33"]
+  INVITE-DEC d9 party: Ingrid -> Pedro chance=48.6 accept=false veto=- inputs={"temp":"dry","goal":"remember","mood":"steady","fear":4,"trust":34,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 34"]
+  INVITE-DEC d9 party: Ingrid -> Pedro chance=48.6 accept=true veto=- inputs={"temp":"dry","goal":"remember","mood":"steady","fear":4,"trust":34,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 34"]
+  INVITE-DEC d10 party: Ingrid -> Esteban chance=61.8 accept=true veto=- inputs={"temp":"mischievous","goal":"legacy","mood":"steady","fear":12,"trust":67,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 67"]
+  INVITE-DEC d10 party: Ingrid -> Murugan chance=45.8 accept=false veto=- inputs={"temp":"sardonic","goal":"prove","mood":"steady","fear":12,"trust":27,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 27"]
+  INVITE-DEC d12 party: Ingrid -> Murugan chance=55.400000000000006 accept=false veto=- inputs={"temp":"sardonic","goal":"prove","mood":"steady","fear":0,"trust":51,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 51"]
+  INVITE-DEC d12 party: Ingrid -> Yuki chance=48.4 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"steady","fear":0,"trust":21,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 21","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d15 party: Ingrid -> Stan chance=29.6 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"steady","fear":4,"trust":24,"bond":null,"partySize":3} reasons=["trust 24","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d15 party: Ingrid -> Ezra chance=67.6 accept=true veto=- inputs={"temp":"anxious","goal":"joy","mood":"steady","fear":4,"trust":69,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)"]
+  INVITE-DEC d19 party: Esteban -> Tariq chance=23.200000000000003 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"grieving","fear":0,"trust":33,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 33","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d19 party: Esteban -> Yash chance=64.4 accept=true veto=- inputs={"temp":"intense","goal":"lead","mood":"grieving","fear":0,"trust":86,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 86","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d28 lure: Ezra -> Pedro chance=52 accept=true veto=- inputs={"temp":"dry","goal":"remember","mood":"steady","fear":0,"affinity":27} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d31 party: Esteban -> Tariq chance=45.599999999999994 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"steady","fear":4,"trust":64,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 64","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d31 party: Esteban -> Tariq chance=45.599999999999994 accept=false veto=- inputs={"temp":"prickly","goal":"record","mood":"steady","fear":4,"trust":64,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 64","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d31 party: Esteban -> Stan chance=66.8 accept=false veto=- inputs={"temp":"dry","goal":"peace","mood":"steady","fear":4,"trust":42,"bond":{"v":38,"depth":1},"partySize":4} reasons=["trust 42","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d31 party: Esteban -> Stan chance=66.8 accept=true veto=- inputs={"temp":"dry","goal":"peace","mood":"steady","fear":4,"trust":42,"bond":{"v":38,"depth":1},"partySize":4} reasons=["trust 42","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d90 party: Pedro -> Tariq chance=56 accept=true veto=- inputs={"temp":"prickly","goal":"record","mood":"grieving","fear":4,"trust":90,"bond":{"v":54,"depth":2},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d95 party: Ezra -> Murugan chance=80 accept=false veto=- inputs={"temp":"sardonic","goal":"prove","mood":"grieving","fear":52,"trust":100,"bond":{"v":70,"depth":2},"partySize":4} reasons=["trust 100","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d96 party: Ezra -> Elena chance=51.80000000000001 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":16,"trust":92,"bond":{"v":60,"depth":2},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d112 party: Yash -> Nikos chance=38 accept=false veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":0,"trust":20,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 20","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d117 party: Yash -> Bongani chance=63.4 accept=false veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":0,"trust":21,"bond":null,"partySize":4} reasons=["trust 21","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d119 party: Yash -> Nikos chance=56.8 accept=true veto=- inputs={"temp":"gentle","goal":"family","mood":"hungry","fear":4,"trust":42,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 42","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":29,"v":42,"depth":3},{"day":30,"v":42,"depth":3},{"day":31,"v":42,"depth":3},{"day":32,"v":46,"depth":3},{"day":33,"v":50,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":56,"depth":3},{"day":36,"v":56,"depth":3},{"day":37,"v":62,"depth":3},{"day":38,"v":68,"depth":3},{"day":39,"v":68,"depth":3},{"day":40,"v":68,"depth":3},{"day":41,"v":68,"depth":3},{"day":42,"v":68,"depth":3}] class=rise
+GOSSIP: totalPicks=243 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=30 31-60=57 61-90=48 91-120=55 121+=52 naturalPicks=242 seededPicks=19 gossipPicks=243
+SEEDED: {"pair":{"a":"gen_1x3qz1a","b":"gen_abruqfy","aName":"Ezra","bName":"Pedro"},"day":28,"pre":{"v":54,"depth":2},"post":{"v":42,"depth":3},"daily":[{"day":29,"v":42,"depth":3},{"day":30,"v":42,"depth":3},{"day":31,"v":42,"depth":3},{"day":32,"v":46,"depth":3},{"day":33,"v":50,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":56,"depth":3},{"day":36,"v":56,"depth":3},{"day":37,"v":62,"depth":3},{"day":38,"v":68,"depth":3},{"day":39,"v":68,"depth":3},{"day":40,"v":68,"depth":3},{"day":41,"v":68,"depth":3},{"day":42,"v":68,"depth":3}],"crackTraceClass":"rise","vAt7":56,"depthAt7":3,"vDrop":-2,"depthDrop":-1,"crack7":false,"firstServe":{"day":29,"why":"vgrievance"},"serveWithin30":true,"serves":28,"servesAll":[{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":76,"why":"vgrievance"}],"effect":true}
+  FRIEND d95: Pedro <> Esteban — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Ezra <> Pedro — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Ezra <> Esteban — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Yash <> Esteban — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d55: Pedro <> Murugan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Murugan <> Esteban — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Murugan <> Stan — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d90: Esteban <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Elena <> Pedro — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Elena <> Esteban — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Pedro <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Esteban <> Yuki — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d135: Stan <> Tariq — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d115: Somchai <> Stan — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d35: Ezra <> Somchai — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Esteban <> Somchai — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d130: Somchai <> Yuki — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d50: Pedro <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Elena <> Ezra — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d80: Murugan <> Yuki — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d80: Ezra <> Yuki — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d80: Ezra <> Tariq — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d70: Pedro <> Somchai — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d90: Esteban <> Tariq — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d80: Ezra <> Murugan — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d80: Ezra <> Stan — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d95: Elena <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Elena <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Yash <> Somchai — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d115: Murugan <> Somchai — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d80: Pedro <> Yash — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d75: Pedro <> Tariq — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d110: Stan <> Yuki — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Ezra <> Yash — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Elena <> Somchai — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d100: Elena <> Murugan — maxDepth 2, final 2 (v=72), dropped 0
+  CLOSE-READ d18: Esteban about Ezra — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Ezra about Pedro — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Pedro about Ezra — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Ezra about Pedro — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Murugan about Pedro — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Pedro about Ezra — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Ezra about Pedro — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Pedro about Ezra — live depth=3 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Somchai about Ezra — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Yuki about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Murugan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Elena about Pedro — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Yash about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Yash about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Elena about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d40: Yuki about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d41: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Yuki about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Murugan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Stan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Yash about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Elena about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Yash about Somchai — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d45: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Murugan about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Elena about Pedro — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Tariq about Ezra — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Stan about Pedro — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Stan about Pedro — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Somchai about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Stan about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Yuki about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Yash about Ezra — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Stan about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Stan about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Elena about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Stan about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Tariq about Ezra — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Yuki about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Elena about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Yuki about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Murugan about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Elena about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Stan about Pedro — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Stan about Pedro — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Yash about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Stan about Pedro — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Yash about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Tariq about Ezra — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Murugan about Pedro — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Elena about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Elena about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Somchai about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Yash about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Tariq about Pedro — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Tariq about Pedro — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Murugan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Yash about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Yash about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Yash about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Yash about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Elena about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Pedro about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Somchai about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Stan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Yuki about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Murugan about Pedro — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Yuki about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Yuki about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Tariq about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Ezra about Somchai — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Tariq about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Yash about Ezra — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Murugan about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Tariq about Ezra — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Murugan about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Elena about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Elena about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Yuki about Murugan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Elena about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Elena about Yuki — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Stan about Murugan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Elena about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Yuki about Murugan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Elena about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Tariq about Yash — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d108: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Elena about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Tariq about Yash — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d109: Tariq about Yash — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d109: Elena about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Elena about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Yash about Somchai — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Yuki about Elena — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Tariq about Yash — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d112: Yuki about Elena — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Elena about Stan — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Elena about Stan — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Yuki about Elena — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Yuki about Elena — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Yuki about Elena — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Yuki about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Tariq about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d123: Yuki about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Tariq about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d127: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Yuki about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Tariq about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d129: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Tariq about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d130: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Nikos about Stan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d131: Tariq about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d132: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Nikos about Stan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d133: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Tariq about Stan — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Yuki about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Nikos about Stan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d135: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Tariq about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Tariq about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Nikos about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Bongani about Stan — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Yuki about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Nikos about Stan — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d140: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Yuki about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Elena about Stan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d141: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d141: Tariq about Stan — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d142: Stan about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d29: Ezra about Pedro (why=vgrievance)
+  GRIEV-READ d30: Ezra about Pedro (why=vgrievance)
+  GRIEV-READ d31: Ezra about Pedro (why=vgrievance)
+  GRIEV-READ d31: Ezra about Pedro (why=vgrievance)
+  GRIEV-READ d34: Ezra about Pedro (why=vgrievance)
+  GRIEV-READ d35: Ezra about Pedro (why=vgrievance)
+  KNACK d5 Ezra: "You want to know about that? Okay." "Tariq talks to the garden. The garden listens. I've seen it."
+  KNACK d8 Tariq: "that stray dog — the one that bit two people — lets Yuki touch it."
+  KNACK d9 Pedro: "Stan sees in the dark. Not well — but better than you. Better than me."
+  KNACK d13 Elena: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Yuki touch it. You'd know abou
+  KNACK d20 Stan: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Ezra touch it."
+  KNACK d23 Murugan: "You want to know about that? Okay." "Tariq talks to the garden. The garden listens. I've seen it."
+  KNACK d30 Murugan: "cuts close faster when Elena wraps them. Don't ask me how."
+  KNACK d44 Ezra: "Stan sees in the dark. Not well — but better than you. Better than me."
+
+deathCauses: {"ambush":1,"a stranger":2,"the arena":1,"the wild":2}

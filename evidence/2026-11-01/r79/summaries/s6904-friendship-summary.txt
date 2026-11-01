@@ -1,0 +1,237 @@
+# SURFACE+SEEDED — seed 6904 (142d, 6 alive)
+
+npcPairs=71 deep2=30 cracks=0 vCracks=0 friendGriev=1 stateGriev=2 stateFriend=1 stateVCrack=0 t2picks=153 closeReadsServed=33 grievanceServes=30 othersSteered=153
+COND-TP: firstDeep2Day=25 lateClose=67 lateTP=54 lateNull=0 condRate=80.6% pooledTP=54/72 pooledRate=75.0% grievReadsByWhy={"grievance":2,"vgrievance":36}
+FUNNEL (natural): convos=414 subject=397 offered=330 picked=126 classes={"subject-no-offer":68,"picked-others":126,"offered-not-picked":79,"offered-capped":125,"no-subject-no-ans":14,"no-subject-ans":2}
+FUNNEL-UNSTEERED (r55 strict): convos=288 subjectNoOffer=68 rate=23.6% offered=204 mainOffered=11 subjectOffered=204 picked=0 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Luis / Aurora — "Ana talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=306 picks=141 latePicks=49 missedChangedNotOffered=13
+WRAPSERVE: convos=38 matcherHits=30 matcherServes=30 classes={"grievance-line":30,"deflection":1,"other":7}
+FUNNEL-PROBE (subject-no-offer turns): turns=163 menuProblem=113 pickProblem=50
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":14,"accepts":10,"acceptRate":0.7142857142857143,"vetoes":{},"chanceMin":11.200000000000003,"chanceMax":91,"chanceMean":55.9} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=3
+FAVOR (r65): funnel={"offers":56,"forageOffers":31,"otherFavorOffers":25,"accepts":28,"acceptAttempts":28,"waits":29,"starts":19,"startBlocked":30,"forages":19,"forageNodeBarren":11,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":8,"retryAssigned":8,"retryStarts":8,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":19,"delivers":19,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":19,"keptMatched":2,"keptMatchedStrict":2}
+CASE (r79): snaps=2 betrayalOfferConvos=114 mootOffers=0 mootProbePicks=[] mootsConvened=0
+OUTING END STATES: [{"vid":"gen_g3ev1i8","vidName":"Damiano","favorId":"favor-gen_g3ev1i8-39-22","state":"fulfilled","promisedDay":39,"meetDay":40,"deadline":41,"promiseKept":true,"startedDay":40,"forageCount":1,"playerKcal":215,"partnerKcal":360,"deliveredKcal":575,"returnedDay":40,"talkCount":1},{"vid":"luis_fernandez","vidName":"Luis","favorId":"favor-luis_fernandez-78-39","state":"acknowledged","promisedDay":78,"meetDay":79,"deadline":80,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_c27oegb","vidName":"Wilhelm","favorId":"favor-gen_c27oegb-45-26","state":"thanked","promisedDay":45,"meetDay":46,"deadline":47,"promiseKept":true,"startedDay":46,"forageCount":1,"playerKcal":280,"partnerKcal":450,"deliveredKcal":730,"returnedDay":46,"talkCount":1}]
+  FAVOR-OFFER d9: Rosa kind=forage_help favorId=favor-rosa_mendez-9-2 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Aurora kind=forage_help favorId=favor-gen_coc1s5w-9-3 task=forage with Aurora tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Zoe kind=heal_help favorId=favor-zoe_adams-10-4 task=help Zoe with their injury
+  FAVOR-OFFER d10: Mateo kind=forage_help favorId=favor-mateo_alvarez-10-5 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: James kind=forage_help favorId=favor-james_okonkwo-11-6 task=forage with James tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Damiano kind=food_share favorId=favor-gen_g3ev1i8-12-7 task=share food with Damiano — they're running on empty
+  FAVOR-OFFER d13: Ana kind=food_share favorId=favor-gen_30muhrn-13-8 task=share food with Ana — they're going hungry
+  FAVOR-OFFER d13: Luis kind=food_share favorId=favor-luis_fernandez-13-9 task=share food with Luis — they're going hungry
+  FAVOR-OFFER d16: Zoe kind=forage_help favorId=favor-zoe_adams-16-11 task=forage with Zoe tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Damiano kind=sick_help favorId=favor-gen_g3ev1i8-17-12 task=help Damiano with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d17: Ana kind=forage_help favorId=favor-gen_30muhrn-17-13 task=forage with Ana tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Mateo kind=forage_help favorId=favor-mateo_alvarez-15-10 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Onni kind=forage_help favorId=favor-onni_korhonen-20-14 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d23: Luis kind=forage_help favorId=favor-luis_fernandez-23-15 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Ana kind=heal_help favorId=favor-gen_30muhrn-30-16 task=help Ana with their injury
+  FAVOR-OFFER d31: James kind=forage_help favorId=favor-james_okonkwo-31-17 task=forage with James tomorrow to rebuild the pantry
+  FAVOR-OFFER d32: Mateo kind=forage_help favorId=favor-mateo_alvarez-32-18 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Ana kind=forage_help favorId=favor-gen_30muhrn-34-19 task=forage with Ana tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Zoe kind=forage_help favorId=favor-zoe_adams-34-20 task=forage with Zoe tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Wilhelm kind=food_share favorId=favor-gen_c27oegb-35-21 task=share food with Wilhelm — they're past hungry
+  FAVOR-OFFER d39: Damiano kind=forage_help favorId=favor-gen_g3ev1i8-39-22 task=forage with Damiano tomorrow to rebuild the pantry
+  FAVOR-OFFER d40: Onni kind=forage_help favorId=favor-onni_korhonen-40-23 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d41: Wilhelm kind=food_share favorId=favor-gen_c27oegb-41-24 task=share food with Wilhelm — they're running on empty
+  FAVOR-OFFER d43: Zoe kind=heal_help favorId=favor-zoe_adams-43-25 task=help Zoe with their injury
+  FAVOR-OFFER d45: Wilhelm kind=forage_help favorId=favor-gen_c27oegb-45-26 task=forage with Wilhelm tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Mateo kind=forage_help favorId=favor-mateo_alvarez-46-27 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d48: Ana kind=food_share favorId=favor-gen_30muhrn-48-28 task=share food with Ana — they're past hungry
+  FAVOR-OFFER d52: Aurora kind=forage_help favorId=favor-gen_coc1s5w-52-29 task=forage with Aurora tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: James kind=food_share favorId=favor-james_okonkwo-53-30 task=share food with James — they're running on empty
+  FAVOR-OFFER d56: James kind=forage_help favorId=favor-james_okonkwo-56-31 task=forage with James tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Onni kind=food_share favorId=favor-onni_korhonen-57-32 task=share food with Onni — they're running on empty
+  FAVOR-OFFER d61: Rosa kind=forage_help favorId=favor-rosa_mendez-61-33 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d61: Zoe kind=forage_help favorId=favor-zoe_adams-61-34 task=forage with Zoe tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Ana kind=forage_help favorId=favor-gen_30muhrn-62-35 task=forage with Ana tomorrow to rebuild the pantry
+  FAVOR-OFFER d64: Mateo kind=forage_help favorId=favor-mateo_alvarez-64-36 task=forage with Mateo tomorrow to rebuild the pantry
+  FAVOR-OFFER d72: Luis kind=forage_help favorId=favor-luis_fernandez-72-37 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d73: Ana kind=food_share favorId=favor-gen_30muhrn-73-38 task=share food with Ana — they're going hungry
+  FAVOR-OFFER d78: Luis kind=forage_help favorId=favor-luis_fernandez-78-39 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d80: Rosa kind=forage_help favorId=favor-rosa_mendez-80-40 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d90: Aurora kind=food_share favorId=favor-gen_coc1s5w-90-41 task=share food with Aurora — they're going hungry
+  FAVOR-OFFER d100: Ana kind=heal_help favorId=favor-gen_30muhrn-100-42 task=help Ana with their injury
+  FAVOR-OFFER d104: Onni kind=forage_help favorId=favor-onni_korhonen-104-43 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d110: Onni kind=forage_help favorId=favor-onni_korhonen-110-44 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d111: Aurora kind=forage_help favorId=favor-gen_coc1s5w-111-45 task=forage with Aurora tomorrow to rebuild the pantry
+  FAVOR-OFFER d113: Onni kind=forage_help favorId=favor-onni_korhonen-112-46 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d115: Onni kind=forage_help favorId=favor-onni_korhonen-115-47 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d116: James kind=food_share favorId=favor-james_okonkwo-116-48 task=share food with James — they're going hungry
+  FAVOR-OFFER d122: Aurora kind=food_share favorId=favor-gen_coc1s5w-122-49 task=share food with Aurora — they're past hungry
+  FAVOR-OFFER d124: Mateo kind=water_haul favorId=favor-mateo_alvarez-124-50 task=bring four liters home from the creek with Mateo; set out at dawn
+  FAVOR-OFFER d126: Maureen kind=heal_help favorId=favor-app_mgpsphj8354-126-52 task=help Maureen with their injury
+  FAVOR-OFFER d126: Zoe kind=water_haul favorId=favor-zoe_adams-126-51 task=bring four liters home from the creek with Zoe; set out at dawn
+  FAVOR-OFFER d129: Jesse kind=water_haul favorId=favor-jesse_cortez-129-53 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d130: Maureen kind=heal_help favorId=favor-app_mgpsphj8354-130-54 task=help Maureen with their injury
+  FAVOR-OFFER d130: Onni kind=heal_help favorId=favor-onni_korhonen-130-55 task=help Onni with their injury
+  FAVOR-OFFER d135: Ana kind=water_haul favorId=favor-gen_30muhrn-135-56 task=bring four liters home from the creek with Ana; set out at dawn
+  FAVOR-OFFER d138: Rosa kind=food_share favorId=favor-rosa_mendez-138-57 task=share food with Rosa — they're running on empty
+  FAVOR-ACCEPT d9: Rosa favorId=favor-rosa_mendez-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d9: Aurora favorId=favor-gen_coc1s5w-9-3 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d10: Mateo favorId=favor-mateo_alvarez-10-5 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d11: James favorId=favor-james_okonkwo-11-6 accepted=true state=promised meetDay=12
+  FAVOR-ACCEPT d16: Zoe favorId=favor-zoe_adams-16-11 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d17: Ana favorId=favor-gen_30muhrn-17-13 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d19: Mateo favorId=favor-mateo_alvarez-15-10 accepted=true state=promised meetDay=20
+  FAVOR-ACCEPT d20: Onni favorId=favor-onni_korhonen-20-14 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d23: Luis favorId=favor-luis_fernandez-23-15 accepted=true state=promised meetDay=24
+  FAVOR-ACCEPT d31: James favorId=favor-james_okonkwo-31-17 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d32: Mateo favorId=favor-mateo_alvarez-32-18 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d34: Ana favorId=favor-gen_30muhrn-34-19 accepted=true state=promised meetDay=35
+  FAVOR-ACCEPT d39: Damiano favorId=favor-gen_g3ev1i8-39-22 accepted=true state=promised meetDay=40
+  FAVOR-ACCEPT d40: Onni favorId=favor-onni_korhonen-40-23 accepted=true state=promised meetDay=41
+  FAVOR-ACCEPT d45: Wilhelm favorId=favor-gen_c27oegb-45-26 accepted=true state=promised meetDay=46
+  FAVOR-ACCEPT d46: Mateo favorId=favor-mateo_alvarez-46-27 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d52: Aurora favorId=favor-gen_coc1s5w-52-29 accepted=true state=promised meetDay=53
+  FAVOR-ACCEPT d56: James favorId=favor-james_okonkwo-56-31 accepted=true state=promised meetDay=57
+  FAVOR-ACCEPT d61: Rosa favorId=favor-rosa_mendez-61-33 accepted=true state=promised meetDay=62
+  FAVOR-ACCEPT d61: Zoe favorId=favor-zoe_adams-61-34 accepted=true state=promised meetDay=62
+  FAVOR-ACCEPT d62: Ana favorId=favor-gen_30muhrn-62-35 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d64: Mateo favorId=favor-mateo_alvarez-64-36 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d72: Luis favorId=favor-luis_fernandez-72-37 accepted=true state=promised meetDay=73
+  FAVOR-ACCEPT d78: Luis favorId=favor-luis_fernandez-78-39 accepted=true state=promised meetDay=79
+  FAVOR-ACCEPT d80: Rosa favorId=favor-rosa_mendez-80-40 accepted=true state=promised meetDay=81
+  FAVOR-ACCEPT d111: Aurora favorId=favor-gen_coc1s5w-111-45 accepted=true state=promised meetDay=112
+  FAVOR-ACCEPT d113: Onni favorId=favor-onni_korhonen-112-46 accepted=true state=promised meetDay=114
+  FAVOR-ACCEPT d115: Onni favorId=favor-onni_korhonen-115-47 accepted=true state=promised meetDay=116
+  INVITE-DEC d8 party: Frank -> Aurora chance=11.200000000000003 accept=false veto=- inputs={"temp":"stoic","goal":"escape","mood":"steady","fear":12,"trust":28,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 28","sick (-20)","wants out (-15)"]
+  INVITE-DEC d9 party: Frank -> James chance=43.4 accept=true veto=- inputs={"temp":"steady","goal":"heal","mood":"steady","fear":12,"trust":21,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 21"]
+  INVITE-DEC d9 party: Frank -> Aurora chance=35.6 accept=false veto=- inputs={"temp":"stoic","goal":"escape","mood":"steady","fear":12,"trust":39,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 39","wants out (-15)"]
+  INVITE-DEC d10 party: Frank -> Zoe chance=50.2 accept=false veto=- inputs={"temp":"intense","goal":"family","mood":"steady","fear":0,"trust":38,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 38"]
+  INVITE-DEC d11 party: Frank -> Ana chance=49.2 accept=true veto=- inputs={"temp":"cautious","goal":"belong","mood":"steady","fear":0,"trust":23,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 23","cautious temperament (-10)","belong goal (+15)"]
+  INVITE-DEC d15 party: Frank -> Zoe chance=60 accept=true veto=- inputs={"temp":"intense","goal":"family","mood":"steady","fear":12,"trust":50,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 50","a big party is safer (+5)"]
+  INVITE-DEC d33 party: Frank -> Mateo chance=76.6 accept=true veto=- inputs={"temp":"bold","goal":"answers","mood":"steady","fear":0,"trust":54,"bond":{"v":17,"depth":0},"partySize":4} reasons=["trust 54","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d67 party: Wilhelm -> Luis chance=91 accept=true veto=- inputs={"temp":"steady","goal":"feed","mood":"grieving","fear":9,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d95 party: Wilhelm -> Giuseppe chance=76 accept=true veto=- inputs={"temp":"intense","goal":"lead","mood":"grieving","fear":25,"trust":90,"bond":{"v":96,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d98 party: Giuseppe -> Aurora chance=51 accept=true veto=- inputs={"temp":"stoic","goal":"escape","mood":"grieving","fear":0,"trust":90,"bond":null,"partySize":4} reasons=["trust 90","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d120 party: James -> Rosa chance=91 accept=true veto=- inputs={"temp":"bold","goal":"prove","mood":"grieving","fear":36,"trust":90,"bond":{"v":27,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d132 party: Zoe -> Jesse chance=28.6 accept=true veto=- inputs={"temp":"withdrawn","goal":"feed","mood":"grieving","fear":73,"trust":34,"bond":null,"partySize":3} reasons=["trust 34","a big party is safer (+5)","withdrawn temperament (-20)","feed goal (+15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d133 party: Zoe -> Onni chance=66.80000000000001 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"grieving","fear":56,"trust":92,"bond":{"v":59,"depth":2},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Zoe -> Maureen chance=52.400000000000006 accept=true veto=- inputs={"temp":"sardonic","goal":"family","mood":"grieving","fear":32,"trust":56,"bond":{"v":9,"depth":0},"partySize":4} reasons=["trust 56","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":26,"v":42,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":46,"depth":2},{"day":30,"v":50,"depth":3},{"day":31,"v":54,"depth":3},{"day":33,"v":58,"depth":3},{"day":33,"v":58,"depth":3},{"day":34,"v":62,"depth":3},{"day":35,"v":66,"depth":3},{"day":36,"v":70,"depth":3},{"day":37,"v":70,"depth":3},{"day":38,"v":74,"depth":3},{"day":39,"v":78,"depth":3}] class=no-drop
+GOSSIP: totalPicks=235 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=21 31-60=29 61-90=26 91-120=30 121+=20 naturalPicks=126 seededPicks=27 gossipPicks=235
+SEEDED: {"pair":{"a":"gen_30muhrn","b":"gen_c27oegb","aName":"Ana","bName":"Wilhelm"},"day":25,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":26,"v":42,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":46,"depth":2},{"day":30,"v":50,"depth":3},{"day":31,"v":54,"depth":3},{"day":33,"v":58,"depth":3},{"day":33,"v":58,"depth":3},{"day":34,"v":62,"depth":3},{"day":35,"v":66,"depth":3},{"day":36,"v":70,"depth":3},{"day":37,"v":70,"depth":3},{"day":38,"v":74,"depth":3},{"day":39,"v":78,"depth":3}],"crackTraceClass":"no-drop","vAt7":50,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":26,"why":"vgrievance"},"serveWithin30":true,"serves":36,"servesAll":[{"day":26,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":62,"why":"vgrievance"}],"effect":true}
+  FRIEND d50: Wilhelm <> Giuseppe — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d25: Ana <> Wilhelm — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Wilhelm <> Damiano — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d25: Wilhelm <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Wilhelm <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Wilhelm <> James — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Ana <> Rosa — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d120: Onni <> Zoe — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d65: Wilhelm <> Mateo — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d60: Damiano <> Giuseppe — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d60: Wilhelm <> Rosa — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d95: Giuseppe <> Mateo — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d85: Ana <> Zoe — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d90: James <> Onni — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d80: Ana <> Giuseppe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Ana <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Ana <> James — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Giuseppe <> James — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d130: Ana <> Mateo — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d95: Giuseppe <> Onni — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d75: Ana <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Giuseppe <> Luis — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d120: Giuseppe <> Rosa — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d95: James <> Luis — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d135: Onni <> Rosa — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d100: Wilhelm <> Zoe — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d120: Giuseppe <> Zoe — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d70: Ana <> Frank — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d70: Frank <> Mateo — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d120: Aurora <> Giuseppe — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND-GRIEV d25: Ana vs Wilhelm (ambushed) depth 2 v 50 -> 50
+  CLOSE-READ d11: Wilhelm about Onni — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Ana about Wilhelm — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: James about Wilhelm — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Wilhelm about Ana — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Luis about Wilhelm — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Wilhelm about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d29: Onni about Wilhelm — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: James about Wilhelm — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Giuseppe about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: James about Wilhelm — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Giuseppe about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: James about Wilhelm — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Damiano about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Mateo about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Rosa about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Zoe about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: James about Wilhelm — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: James about Wilhelm — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Zoe about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Zoe about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d61: Zoe about Wilhelm — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Giuseppe about Wilhelm — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: James about Wilhelm — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Wilhelm about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Luis about Ana — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Giuseppe about Damiano — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: James about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Luis about Ana — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Zoe about Ana — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d76: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Luis about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Luis about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Damiano about Giuseppe — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Zoe about Ana — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d82: Damiano about Giuseppe — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Giuseppe about Damiano — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Giuseppe about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Zoe about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Zoe about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Luis about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Luis about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Giuseppe about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Rosa about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Rosa about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Zoe about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Onni about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Zoe about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Mateo about Ana — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d127: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Mateo about Ana — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Mateo about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Mateo about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Rosa about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Rosa about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Mateo about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ana about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Rosa about Ana — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Mateo about Ana — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d26 (betrayal): Ana vs Wilhelm (ambushed) depth 2 v 50 -> 50
+  GRIEV-READ d9: James about Giuseppe (why=grievance)
+  GRIEV-READ d16: James about Giuseppe (why=grievance)
+  GRIEV-READ d26: Ana about Wilhelm (why=vgrievance)
+  GRIEV-READ d28: Ana about Wilhelm (why=vgrievance)
+  GRIEV-READ d29: Ana about Wilhelm (why=vgrievance)
+  GRIEV-READ d30: Ana about Wilhelm (why=vgrievance)
+  KNACK d4 Ana: "You want to know about that? Okay." "Zoe talks to the garden. The garden listens. I've seen it."
+  KNACK d10 Mateo: "Onni ate something last month that should've killed them. They're fine."
+  KNACK d13 Luis: "Ana talks to the garden. The garden listens. I've seen it."
+  KNACK d18 Giuseppe: "You want to know about that? Okay." "Damiano talks to the garden. The garden listens. I've seen it. Hm."
+  KNACK d21 Damiano: "You want to know about that? Okay." "cuts close faster when Mateo wraps them. Don't ask me how."
+  KNACK d21 Zoe: "Good question." "Luis ate something last month that should've killed them. They're fine."
+  KNACK d34 Luis: "Aurora ate something last month that should've killed them. They're fine."
+  KNACK d36 Mateo: "You want to know about that? Okay." "Damiano talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"contest":1,"alien":2,"dehydration":1,"the wild":2,"combat":1}

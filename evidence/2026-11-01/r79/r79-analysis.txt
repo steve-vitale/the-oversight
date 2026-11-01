@@ -1,0 +1,416 @@
+SEEDS: 6901 143d, 6902 127d, 6903 70d, 6904 142d
+  funnel seed 6901: {"offers":49,"forageOffers":19,"otherFavorOffers":30,"accepts":19,"acceptAttempts":19,"waits":18,"starts":18,"startBlocked":15,"forages":17,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":8,"retryAssigned":8,"retryStarts":8,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":17,"delivers":16,"deliverBlocked":0,"completeOutings":3,"completeOutingsEvents":16,"keptMatched":3,"keptMatchedStrict":3}
+  funnel seed 6902: {"offers":48,"forageOffers":16,"otherFavorOffers":32,"accepts":16,"acceptAttempts":16,"waits":18,"starts":11,"startBlocked":16,"forages":10,"forageNodeBarren":3,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":6,"retryAssigned":6,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":10,"delivers":10,"deliverBlocked":0,"completeOutings":3,"completeOutingsEvents":10,"keptMatched":3,"keptMatchedStrict":3}
+  funnel seed 6903: {"offers":46,"forageOffers":8,"otherFavorOffers":38,"accepts":8,"acceptAttempts":8,"waits":5,"starts":5,"startBlocked":10,"forages":5,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":5,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":5,"delivers":5,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":5,"keptMatched":1,"keptMatchedStrict":1}
+  funnel seed 6904: {"offers":56,"forageOffers":31,"otherFavorOffers":25,"accepts":28,"acceptAttempts":28,"waits":29,"starts":19,"startBlocked":30,"forages":19,"forageNodeBarren":11,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":8,"retryAssigned":8,"retryStarts":8,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":19,"delivers":19,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":19,"keptMatched":2,"keptMatchedStrict":2}
+
+DAWN ATTEMPTS pooled: 124 (starts 53, blocked 71, waits 70)
+BLOCKED by adjFail: {"no-micro-pos":25,"away":30,"micro-far":5,"node-elsewhere":10,"non-adjacency":1}
+BLOCKED by status reason: {"Move next to your partner, on the same side of the Haven door.":70,"Finish your current outing before starting another.":1}
+BLOCKED with NO diag: 0 / 71
+DAWN CENSUS over 124 diag-carrying attempts:
+  playerAtHome: 111
+  partnerNodeAtHome: 95
+  insideMatch (partnerInside===playerInside): 116
+  partnerAway: 30
+  partnerPos null: 58
+  partnerNode defaulted (no nodePos): 0
+
+FORAGE-NODE-BARREN pooled: 14
+  by targetCanForage: {"true":6,"false":8}
+FORAGE-CELL-BLOCKED pooled: 63
+  by status reason: {"Finish the fight before foraging together.":6,"You carry 0 kcal; your partner carries 0 kcal. Nothing left to take here today — walk to another green patch.":57}
+
+PER-FAVOR TIMELINES (accepted forage favors):
+  {"seed":6901,"vidName":"Murugan","favorId":"favor-gen_p5ivi26-10-4","acceptDay":10,"meetDay":11,"attempts":2,"startDay":11,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":11,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Yuki","favorId":"favor-yuki_mori-14-5","acceptDay":17,"meetDay":18,"attempts":1,"startDay":18,"forages":1,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6901,"vidName":"Tariq","favorId":"favor-tariq_mahmood-22-7","acceptDay":28,"meetDay":29,"attempts":2,"startDay":29,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":29,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Ezra","favorId":"favor-gen_1x3qz1a-30-10","acceptDay":30,"meetDay":31,"attempts":2,"startDay":32,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":32,"deliveredKcal":520,"firstKeptDay":32,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6901,"vidName":"Murugan","favorId":"favor-gen_p5ivi26-35-11","acceptDay":35,"meetDay":36,"attempts":3,"startDay":37,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":37,"firstKeptStep":"deliver","adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Tariq","favorId":"favor-tariq_mahmood-39-12","acceptDay":39,"meetDay":40,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6901,"vidName":"Stan","favorId":"favor-stan_kowalski-50-16","acceptDay":50,"meetDay":51,"attempts":1,"startDay":51,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":52,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6901,"vidName":"Somchai","favorId":"favor-somchai_prasert-54-17","acceptDay":54,"meetDay":55,"attempts":2,"startDay":55,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":55,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Murugan","favorId":"favor-gen_p5ivi26-57-18","acceptDay":57,"meetDay":58,"attempts":2,"startDay":58,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":58,"deliveredKcal":390,"firstKeptDay":58,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Pedro","favorId":"favor-gen_abruqfy-63-19","acceptDay":63,"meetDay":64,"attempts":1,"startDay":64,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":64,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6901,"vidName":"Tariq","favorId":"favor-tariq_mahmood-64-20","acceptDay":64,"meetDay":65,"attempts":2,"startDay":65,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":65,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Stan","favorId":"favor-stan_kowalski-65-21","acceptDay":65,"meetDay":66,"attempts":1,"startDay":66,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":66,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6901,"vidName":"Stan","favorId":"favor-stan_kowalski-68-22","acceptDay":68,"meetDay":69,"attempts":2,"startDay":70,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":70,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6901,"vidName":"Somchai","favorId":"favor-somchai_prasert-70-24","acceptDay":70,"meetDay":71,"attempts":3,"startDay":72,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":72,"firstKeptStep":"deliver","adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Somchai","favorId":"favor-somchai_prasert-78-29","acceptDay":78,"meetDay":79,"attempts":2,"startDay":79,"forages":1,"nodeBarren":0,"delivers":1,"endState":"declined","promiseKept":true,"startedDay":79,"deliveredKcal":720,"firstKeptDay":79,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6901,"vidName":"Yash","favorId":"favor-gen_aq9vahu-93-32","acceptDay":93,"meetDay":94,"attempts":1,"startDay":94,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":94,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6901,"vidName":"Yash","favorId":"favor-gen_aq9vahu-104-35","acceptDay":104,"meetDay":105,"attempts":2,"startDay":106,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+  {"seed":6901,"vidName":"Stan","favorId":"favor-stan_kowalski-104-36","acceptDay":104,"meetDay":105,"attempts":1,"startDay":105,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":105,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6901,"vidName":"Yuki","favorId":"favor-yuki_mori-115-40","acceptDay":115,"meetDay":116,"attempts":1,"startDay":116,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":116,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6902,"vidName":"Meera","favorId":"favor-meera_reddy-9-2","acceptDay":9,"meetDay":10,"attempts":2,"startDay":10,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":10,"deliveredKcal":300,"firstKeptDay":10,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6902,"vidName":"Miguel","favorId":"favor-miguel_santos-27-7","acceptDay":27,"meetDay":28,"attempts":3,"startDay":29,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":29,"firstKeptStep":"deliver","adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":6902,"vidName":"Akwasi","favorId":"favor-gen_nexzdp5-34-10","acceptDay":34,"meetDay":35,"attempts":1,"startDay":35,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":35,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6902,"vidName":"Rustem","favorId":"favor-gen_g3w3rky-43-11","acceptDay":43,"meetDay":44,"attempts":2,"startDay":44,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":44,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6902,"vidName":"Miguel","favorId":"favor-miguel_santos-47-12","acceptDay":47,"meetDay":48,"attempts":1,"startDay":48,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":48,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6902,"vidName":"Tanisha","favorId":"favor-gen_sb1nnoq-52-13","acceptDay":52,"meetDay":53,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"micro-far":1}}
+  {"seed":6902,"vidName":"Rustem","favorId":"favor-gen_g3w3rky-53-14","acceptDay":53,"meetDay":54,"attempts":2,"startDay":54,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":54,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6902,"vidName":"Miguel","favorId":"favor-miguel_santos-58-15","acceptDay":58,"meetDay":59,"attempts":1,"startDay":59,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":60,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6902,"vidName":"Rustem","favorId":"favor-gen_g3w3rky-62-17","acceptDay":62,"meetDay":63,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"node-elsewhere":1}}
+  {"seed":6902,"vidName":"Thabo","favorId":"favor-thabo_maseko-75-24","acceptDay":75,"meetDay":76,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"away":1}}
+  {"seed":6902,"vidName":"Tanisha","favorId":"favor-gen_sb1nnoq-75-25","acceptDay":75,"meetDay":76,"attempts":2,"startDay":76,"forages":1,"nodeBarren":0,"delivers":1,"endState":"fulfilled","promiseKept":true,"startedDay":76,"deliveredKcal":315,"firstKeptDay":76,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6902,"vidName":"Miguel","favorId":"favor-miguel_santos-76-26","acceptDay":76,"meetDay":77,"attempts":1,"startDay":77,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":78,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6902,"vidName":"Rustem","favorId":"favor-gen_g3w3rky-76-27","acceptDay":76,"meetDay":77,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":1,"node-elsewhere":1}}
+  {"seed":6902,"vidName":"Priya","favorId":"favor-priya_nair-77-28","acceptDay":77,"meetDay":78,"attempts":2,"startDay":79,"forages":1,"nodeBarren":0,"delivers":1,"endState":"fulfilled","promiseKept":true,"startedDay":79,"deliveredKcal":225,"firstKeptDay":79,"firstKeptStep":"deliver","adjFails":{"node-elsewhere":1}}
+  {"seed":6902,"vidName":"Miguel","favorId":"favor-miguel_santos-81-29","acceptDay":81,"meetDay":82,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"moot","promiseKept":"released","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":1}}
+  {"seed":6902,"vidName":"Petra","favorId":"favor-petra_novak-124-47","acceptDay":124,"meetDay":125,"attempts":1,"startDay":125,"forages":0,"nodeBarren":1,"delivers":0,"endState":"moot","promiseKept":"released","startedDay":125,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":6903,"vidName":"Boris","favorId":"favor-boris_kowalski-17-4","acceptDay":17,"meetDay":18,"attempts":2,"startDay":18,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":18,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6903,"vidName":"Brian","favorId":"favor-brian_otieno-19-5","acceptDay":19,"meetDay":20,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6903,"vidName":"Wei","favorId":"favor-chen_wei-32-14","acceptDay":32,"meetDay":33,"attempts":2,"startDay":33,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":33,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6903,"vidName":"Wei","favorId":"favor-chen_wei-36-18","acceptDay":36,"meetDay":37,"attempts":2,"startDay":37,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":37,"deliveredKcal":430,"firstKeptDay":37,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6903,"vidName":"Boris","favorId":"favor-boris_kowalski-40-21","acceptDay":40,"meetDay":41,"attempts":1,"startDay":41,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":41,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6903,"vidName":"Brian","favorId":"favor-brian_otieno-53-32","acceptDay":53,"meetDay":54,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6903,"vidName":"Brian","favorId":"favor-brian_otieno-59-36","acceptDay":59,"meetDay":60,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6903,"vidName":"Leo","favorId":"favor-leo_martin-62-38","acceptDay":62,"meetDay":63,"attempts":2,"startDay":64,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":64,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6904,"vidName":"Rosa","favorId":"favor-rosa_mendez-9-2","acceptDay":9,"meetDay":10,"attempts":2,"startDay":10,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":11,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6904,"vidName":"Aurora","favorId":"favor-gen_coc1s5w-9-3","acceptDay":9,"meetDay":10,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6904,"vidName":"Mateo","favorId":"favor-mateo_alvarez-10-5","acceptDay":10,"meetDay":11,"attempts":3,"startDay":12,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":1,"no-micro-pos":1}}
+  {"seed":6904,"vidName":"James","favorId":"favor-james_okonkwo-11-6","acceptDay":11,"meetDay":12,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"node-elsewhere":1}}
+  {"seed":6904,"vidName":"Zoe","favorId":"favor-zoe_adams-16-11","acceptDay":16,"meetDay":17,"attempts":2,"startDay":18,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":18,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6904,"vidName":"Ana","favorId":"favor-gen_30muhrn-17-13","acceptDay":17,"meetDay":18,"attempts":2,"startDay":19,"forages":1,"nodeBarren":2,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"non-adjacency":1}}
+  {"seed":6904,"vidName":"Mateo","favorId":"favor-mateo_alvarez-15-10","acceptDay":19,"meetDay":20,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+  {"seed":6904,"vidName":"Onni","favorId":"favor-onni_korhonen-20-14","acceptDay":20,"meetDay":21,"attempts":2,"startDay":21,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":21,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6904,"vidName":"Luis","favorId":"favor-luis_fernandez-23-15","acceptDay":23,"meetDay":24,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"micro-far":1}}
+  {"seed":6904,"vidName":"James","favorId":"favor-james_okonkwo-31-17","acceptDay":31,"meetDay":32,"attempts":1,"startDay":32,"forages":1,"nodeBarren":2,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":32,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Mateo","favorId":"favor-mateo_alvarez-32-18","acceptDay":32,"meetDay":33,"attempts":1,"startDay":33,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":33,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Ana","favorId":"favor-gen_30muhrn-34-19","acceptDay":34,"meetDay":35,"attempts":1,"startDay":35,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":35,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Damiano","favorId":"favor-gen_g3ev1i8-39-22","acceptDay":39,"meetDay":40,"attempts":2,"startDay":40,"forages":1,"nodeBarren":0,"delivers":1,"endState":"fulfilled","promiseKept":true,"startedDay":40,"deliveredKcal":575,"firstKeptDay":40,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6904,"vidName":"Onni","favorId":"favor-onni_korhonen-40-23","acceptDay":40,"meetDay":41,"attempts":2,"startDay":41,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":41,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6904,"vidName":"Wilhelm","favorId":"favor-gen_c27oegb-45-26","acceptDay":45,"meetDay":46,"attempts":1,"startDay":46,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":46,"deliveredKcal":730,"firstKeptDay":46,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Mateo","favorId":"favor-mateo_alvarez-46-27","acceptDay":46,"meetDay":47,"attempts":1,"startDay":47,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":47,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Aurora","favorId":"favor-gen_coc1s5w-52-29","acceptDay":52,"meetDay":53,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6904,"vidName":"James","favorId":"favor-james_okonkwo-56-31","acceptDay":56,"meetDay":57,"attempts":1,"startDay":57,"forages":1,"nodeBarren":2,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":57,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Rosa","favorId":"favor-rosa_mendez-61-33","acceptDay":61,"meetDay":62,"attempts":2,"startDay":62,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":62,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6904,"vidName":"Zoe","favorId":"favor-zoe_adams-61-34","acceptDay":61,"meetDay":62,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"away":1}}
+  {"seed":6904,"vidName":"Ana","favorId":"favor-gen_30muhrn-62-35","acceptDay":62,"meetDay":63,"attempts":2,"startDay":64,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":64,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6904,"vidName":"Mateo","favorId":"favor-mateo_alvarez-64-36","acceptDay":64,"meetDay":65,"attempts":2,"startDay":66,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":66,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":6904,"vidName":"Luis","favorId":"favor-luis_fernandez-72-37","acceptDay":72,"meetDay":73,"attempts":1,"startDay":73,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":73,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":6904,"vidName":"Luis","favorId":"favor-luis_fernandez-78-39","acceptDay":78,"meetDay":79,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"acknowledged","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":6904,"vidName":"Rosa","favorId":"favor-rosa_mendez-80-40","acceptDay":80,"meetDay":81,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":6904,"vidName":"Aurora","favorId":"favor-gen_coc1s5w-111-45","acceptDay":111,"meetDay":112,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":6904,"vidName":"Onni","favorId":"favor-onni_korhonen-112-46","acceptDay":113,"meetDay":114,"attempts":2,"startDay":114,"forages":1,"nodeBarren":2,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":114,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":6904,"vidName":"Onni","favorId":"favor-onni_korhonen-115-47","acceptDay":115,"meetDay":116,"attempts":2,"startDay":116,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":116,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+
+KEPT-WITHOUT-START: 0
+
+BARREN SPLIT (forage-barren days): 0
+  by barrenKind: {}
+TRAVEL-BLOCKED entries: 0 (walkAttempted: 0, pathFound: 0)
+TRAVEL-WALKED entries: 5
+ESCALATIONS: ended-stuck 0, end-blocked 0
+
+RAW-KEPT AUDIT:
+  deliver events ok: 50; missed-line-but-kept-true (must be 0): 0
+  funnel completes: events vs snapshot per seed:
+    seed 6901: events=16 snapshot=3 keptStrict=3 keptMatched=3
+    seed 6902: events=10 snapshot=3 keptStrict=3 keptMatched=3
+    seed 6903: events=5 snapshot=1 keptStrict=1 keptMatched=1
+    seed 6904: events=19 snapshot=2 keptStrict=2 keptMatched=2
+
+POSITION HISTORY (no-micro-pos blocks: ever vs never before):
+  no-micro-pos blocks: ever-before=18 never-before=0 same-day-ambiguous=7
+    seed 6901: posHistory villagers=11
+    seed 6902: posHistory villagers=14
+    seed 6903: posHistory villagers=9
+    seed 6904: posHistory villagers=12
+
+DAWN STEP-FIRST RETRIES: 25
+  stepOk: 25, stepAssigned: 25, retryStarted: 24
+  retryStarted without stepAssigned (must be 0): 0
+  retries by dayPartAfter: {"0":25}
+  retries missing stepAssigned field (binding miss if >0): 0
+
+NO-HOME ENTRIES (must all carry walk detail): 1
+  missing walkPathFound (binding miss if >0): 0
+  by step: {"deliver-no-home":1}
+  by walkRefusedReason: {"combat":1}
+TRAVEL-WALKED entries: 5
+TRAVEL-BLOCKED refusals naming a step (walkRefusedAt present): 0 / 0
+TRAVEL-BLOCKED missing blockage read (binding miss if >0): 0
+
+POST-ENDING STARTS (a start dated after an ending in the same seed):
+  seed 6901: no endings
+  seed 6902: no endings
+  seed 6903: no endings
+  seed 6904: no endings
+
+MIDDAY POSITIONS (no-micro-pos dawn blocks vs midday history):
+  seed 6901: midday-ever=7 midday-never=1 midday villagers=11
+  seed 6902: midday-ever=6 midday-never=0 midday villagers=15
+  seed 6903: midday-ever=3 midday-never=0 midday villagers=10
+  seed 6904: midday-ever=8 midday-never=0 midday villagers=13
+
+CASE TIMELINES (from change-only daily caseSnaps):
+  seed 6901: caseSnaps=10 distinct cases=2 mootsConvened=0
+    case case_2: d7:open -> d10:open+trial -> d12:acquitted+trial | charge=murder accused=Esteban/Stan/Pedro target=Katarina role=bystander known=false mootIn=null
+    case case_4: d29:open -> d32:open+trial -> d34:acquitted+trial | charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=bystander known=false mootIn=null
+  seed 6902: caseSnaps=9 distinct cases=3 mootsConvened=0
+    case case_2: d10:open -> d13:resolved | charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=bystander known=false mootIn=null
+    case case_4: d13:open -> d16:open+trial -> d18:acquitted+trial | charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=bystander known=false mootIn=null
+    case case_6: d15:open -> d18:open+trial -> d20:acquitted+trial | charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=bystander known=false mootIn=null
+  seed 6903: caseSnaps=10 distinct cases=4 mootsConvened=0
+    case case_2: d7:open -> d8:acquitted+trial | charge=murder accused=Gina/Aroha/Brian target=Yara role=bystander known=false mootIn=null
+    case case_5: d17:open -> d19:acquitted+trial | charge=ambush accused=Metin/Boris/Gina target=Wei role=bystander known=false mootIn=null
+    case case_7: d23:open -> d25:acquitted+trial | charge=ambush accused=Wei/Gina/Boris target=Metin role=bystander known=false mootIn=null
+    case case_10: d32:open -> d33:acquitted+trial | charge=ambush accused=Metin/Gina/Boris target=Wei role=bystander known=false mootIn=null
+  seed 6904: caseSnaps=2 distinct cases=0 mootsConvened=0
+    (no cases ever snapshotted)
+
+BETRAYAL-OFFER CENSUS + MOOT PROBE:
+  seed 6901 arm=handsoff: betrayalOfferConvos=122 distinct moot-offer cases=2 probePicks=0 mootsConvened=0
+    offer d4 Ezra (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d9 Yash (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d9 Elena (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d9 Pedro (bond-daily-3): betrayal:accept, betrayal:decline, betrayal:press:case_2:gen_abruqfy, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d10 Esteban (bond-daily-1): betrayal:press:case_2:gen_wgekbce, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d10 Murugan (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d10 Pedro (bond-daily-3): betrayal:press:case_2:gen_abruqfy, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d12 Murugan (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d13 Yuki (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d13 Elena (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d14 Murugan (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d15 Murugan (bond-daily-3): betrayal:accept, betrayal:decline
+  seed 6902 arm=handsoff: betrayalOfferConvos=138 distinct moot-offer cases=2 probePicks=0 mootsConvened=0
+    offer d4 Rustem (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d5 Tanisha (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d8 Ivy (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d10 Miguel (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d11 Priya (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d12 Thabo (bond-daily-1): betrayal:press:case_2:thabo_maseko, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d12 Aria (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d12 Akwasi (bond-daily-3): betrayal:accept, betrayal:decline, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d13 Tanisha (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d14 Ivy (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d15 Miguel (bond-daily-1): betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:moot:case_4, betrayal:letlie:case_4
+    offer d15 Rustem (bond-daily-2): betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:moot:case_4, betrayal:letlie:case_4
+  seed 6903 arm=mootprobe: betrayalOfferConvos=59 distinct moot-offer cases=4 probePicks=4 mootsConvened=0
+    offer d6 A woman, maybe 60s (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d8 Wei (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2 PROBE->case_2
+    offer d8 Brian (bond-daily-2): betrayal:press:case_2:brian_otieno, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2, betrayal:moot:case_2
+    offer d8 Austin (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d10 Gina (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d14 Giulia (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d14 Brian (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d14 Metin (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d16 Aroha (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d16 Metin (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d17 Boris (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d18 Gina (bond-daily-1): betrayal:accept, betrayal:decline
+    PROBE d8 Wei case=case_2 laterTrial=true
+    PROBE d19 Brian case=case_5 laterTrial=true
+    PROBE d25 Boris case=case_7 laterTrial=true
+    PROBE d33 Aroha case=case_10 laterTrial=true
+  seed 6904 arm=mootprobe: betrayalOfferConvos=114 distinct moot-offer cases=0 probePicks=0 mootsConvened=0
+    offer d7 Onni (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d8 Onni (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d11 Ana (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d13 Ana (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d14 Mateo (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d17 Damiano (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d21 Giuseppe (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d21 Zoe (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d26 James (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d27 Ana (seeded-speaker): betrayal:accept, betrayal:decline
+    offer d27 Giuseppe (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d27 Aurora (bond-daily-3): betrayal:accept, betrayal:decline
+
+AWAY CENSUS (start-blocks with adjFail=away):
+  away blocks: 30; missing away record (binding miss if >0): 0
+  by purpose: {"visit":4,"guard":6,"hunt":1,"explore":3,"forage":3,"leave":12,"water":1}
+  returnDay-minus-blockDay: {}
+  node distance from home (Chebyshev): {"1":14,"2":2,"3":2,"4":12}
+
+POST-ENDING REPEAT-START WINDOW (B4: ended favor -> later same-villager start):
+    seed 6901 Murugan: delivered d10 -> later start d35 (gap 25d)
+    seed 6901 Murugan: delivered d35 -> later start d57 (gap 22d)
+    seed 6901 Yuki: started-undelivered d17 -> later start d115 (gap 98d)
+    seed 6901 Tariq: delivered d28 -> later start d64 (gap 36d)
+    seed 6901 Tariq: unstarted d39 -> later start d64 (gap 25d)
+    seed 6901 Stan: delivered d50 -> later start d65 (gap 15d)
+    seed 6901 Stan: delivered d65 -> later start d68 (gap 3d)
+    seed 6901 Stan: delivered d68 -> later start d104 (gap 36d)
+    seed 6901 Somchai: delivered d54 -> later start d70 (gap 16d)
+    seed 6901 Somchai: delivered d70 -> later start d78 (gap 8d)
+    seed 6901 Yash: delivered d93 -> later start d104 (gap 11d)
+    seed 6902 Miguel: delivered d27 -> later start d47 (gap 20d)
+    seed 6902 Miguel: delivered d47 -> later start d58 (gap 11d)
+    seed 6902 Miguel: delivered d58 -> later start d76 (gap 18d)
+    seed 6902 Rustem: delivered d43 -> later start d53 (gap 10d)
+    seed 6902 Tanisha: unstarted d52 -> later start d75 (gap 23d)
+    seed 6903 Boris: delivered d17 -> later start d40 (gap 23d)
+    seed 6903 Wei: delivered d32 -> later start d36 (gap 4d)
+    seed 6904 Rosa: delivered d9 -> later start d61 (gap 52d)
+    seed 6904 Mateo: delivered d10 -> later start d32 (gap 22d)
+    seed 6904 Mateo: unstarted d19 -> later start d32 (gap 13d)
+    seed 6904 Mateo: delivered d32 -> later start d46 (gap 14d)
+    seed 6904 Mateo: delivered d46 -> later start d64 (gap 18d)
+    seed 6904 James: unstarted d11 -> later start d31 (gap 20d)
+    seed 6904 James: delivered d31 -> later start d56 (gap 25d)
+    seed 6904 Ana: delivered d17 -> later start d34 (gap 17d)
+    seed 6904 Ana: delivered d34 -> later start d62 (gap 28d)
+    seed 6904 Onni: delivered d20 -> later start d40 (gap 20d)
+    seed 6904 Onni: delivered d40 -> later start d113 (gap 73d)
+    seed 6904 Onni: delivered d113 -> later start d115 (gap 2d)
+    seed 6904 Luis: unstarted d23 -> later start d72 (gap 49d)
+
+R79 TRIAL CENSUS (B1: first-trial-appearance per case + SAY announcements; v.moots NEVER a count):
+  seed 6901 arm=handsoff case=case_2 charge=murder accused=Esteban/Stan/Pedro target=Katarina role=bystander opened d6 mootIn=null (mootInDay~d9) firstTrial snap d10 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=0 finalGuilty=null present=6 total~7 need~4 convicted=null wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=0 mean=n/a | acquit n=6 mean=33.5
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=0->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 6901 arm=handsoff case=case_4 charge=ambush accused=Ezra/Tariq/Yash target=Pedro role=bystander opened d28 mootIn=null (mootInDay~d31) firstTrial snap d32 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=2 finalGuilty=null present=6 total~7 need~4 convicted=null wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=2 mean=-4.5 | acquit n=4 mean=32.8
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=2->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 6901: trials=2 mootSayLines=15 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d8: Word reaches you, days late: Esteban stands accused over what happened to Katarina. There's going to be a moot. People are choosing sides.
+    SAY d9: Yuki has been talking at the fires. Enough voices — tonight they call a moot. Esteban answers for what happened to Katarina.
+    SAY d9: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d9: Yuki calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d9: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d11: The moot doesn't wait forever. Two days of silence from the fire's edge — the count is taken without you.
+    SAY d30: Word reaches you, days late: Ezra stands accused over what happened to Pedro. There's going to be a moot. People are choosing sides.
+    SAY d31: They're named, every one: Theo Murphy, Omar Weiss, Sam Calhoun. Your move — ask them questions (up to three), call a MOOT on it, or turn them away at the edge of the firelight.
+    SAY d31: Pedro has been talking at the fires. Enough voices — tonight they call a moot. Ezra answers for what happened to Pedro.
+    SAY d31: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d31: Pedro calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d31: The moot turns to you. Your vote matters here — and everyone will remember it.
+  seed 6902 arm=handsoff case=case_4 charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=bystander opened d12 mootIn=null (mootInDay~d15) firstTrial snap d16 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=0 finalGuilty=null present=7 total~8 need~5 convicted=null wildDay=false playerVoter=true votes=7
+    SCORE SPREAD: guilty n=0 mean=n/a | acquit n=7 mean=37.4
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=0->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 6902 arm=handsoff case=case_6 charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=bystander opened d14 mootIn=null (mootInDay~d17) firstTrial snap d18 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=1 finalGuilty=null present=5 total~6 need~4 convicted=null wildDay=false playerVoter=true votes=5
+    SCORE SPREAD: guilty n=1 mean=-42.0 | acquit n=4 mean=28.3
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=1->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 6902: trials=2 mootSayLines=19 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d11: Word reaches you, days late: Ezra stands accused over what happened to Tanisha. There's going to be a moot. People are choosing sides.
+    SAY d12: Ezra is gone — the moot doesn't try the dead. The case dies with the accused; the fire remembers the rest.
+    SAY d14: Word reaches you, days late: Tanisha stands accused over what happened to Ezra. There's going to be a moot. People are choosing sides.
+    SAY d15: Word reaches you, days late: Rustem stands accused over what happened to Ivy. There's going to be a moot. People are choosing sides.
+    SAY d15: Rustem has been talking at the fires. Enough voices — tonight they call a moot. Tanisha answers for what happened to Ezra.
+    SAY d15: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d15: Rustem calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d15: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d17: Ivy has been talking at the fires. Enough voices — tonight they call a moot. Rustem answers for what happened to Ivy.
+    SAY d17: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d17: Ivy calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d17: The moot turns to you. Your vote matters here — and everyone will remember it.
+  seed 6903 arm=mootprobe case=case_2 charge=murder accused=Gina/Aroha/Brian target=Yara role=bystander opened d6 mootIn=null (mootInDay~d9) firstTrial snap d8 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=0 finalGuilty=1 present=7 total~8 need~5 convicted=false wildDay=false playerVoter=true votes=7
+    SCORE SPREAD: guilty n=0 mean=n/a | acquit n=7 mean=24.7
+    PLAYER VOTE: driverVotePicks=[{"day":8,"name":"Brian","vote":"guilty"}] playerVoter=true npcGuilty->final=0->1 (contrib 1; driver voted in a later convo)
+  seed 6903 arm=mootprobe case=case_5 charge=ambush accused=Metin/Boris/Gina target=Wei role=bystander opened d16 mootIn=null (mootInDay~d19) firstTrial snap d19 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=1 finalGuilty=2 present=5 total~6 need~4 convicted=false wildDay=false playerVoter=true votes=5
+    SCORE SPREAD: guilty n=1 mean=-2.0 | acquit n=4 mean=57.5
+    PLAYER VOTE: driverVotePicks=[{"day":19,"name":"Austin","vote":"guilty"}] playerVoter=true npcGuilty->final=1->2 (contrib 1; driver voted in a later convo)
+  seed 6903 arm=mootprobe case=case_7 charge=ambush accused=Wei/Gina/Boris target=Metin role=bystander opened d22 mootIn=null (mootInDay~d25) firstTrial snap d25 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=1 finalGuilty=2 present=4 total~5 need~3 convicted=false wildDay=false playerVoter=true votes=4
+    SCORE SPREAD: guilty n=1 mean=-9.0 | acquit n=3 mean=45.3
+    PLAYER VOTE: driverVotePicks=[{"day":25,"name":"Wei","vote":"guilty"}] playerVoter=true npcGuilty->final=1->2 (contrib 1; driver voted in a later convo)
+  seed 6903 arm=mootprobe case=case_10 charge=ambush accused=Metin/Gina/Boris target=Wei role=bystander opened d31 mootIn=null (mootInDay~d34) firstTrial snap d33 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=2 finalGuilty=3 present=6 total~7 need~4 convicted=false wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=2 mean=-15.5 | acquit n=4 mean=20.5
+    PLAYER VOTE: driverVotePicks=[{"day":33,"name":"Boris","vote":"guilty"}] playerVoter=true npcGuilty->final=2->3 (contrib 1; driver voted in a later convo)
+  seed 6903: trials=4 mootSayLines=20 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d7: Word reaches you, days late: Gina stands accused over what happened to Yara. There's going to be a moot. People are choosing sides.
+    SAY d8: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d8: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d8: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d18: Word reaches you, days late: Metin stands accused over what happened to Wei. There's going to be a moot. People are choosing sides.
+    SAY d19: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d19: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d19: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d24: Word reaches you, days late: Wei stands accused over what happened to Metin. There's going to be a moot. People are choosing sides.
+    SAY d25: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d25: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d25: The moot turns to you. Your vote matters here — and everyone will remember it.
+  seed 6904: trials=0 mootSayLines=3 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d33: They're named, every one: Rafael Khan. Your move — ask them questions (up to three), call a MOOT on it, or turn them away at the edge of the firelight.
+    SAY d36: They waited three days at the edge of your fire. Nobody called the moot. Rafael nods — not angry, just done — and they walk.
+    SAY d136: ◈ The Records: You won The Moot under the cameras. The village's glory, public and loud.
+POOLED trials=8 mootSayLines=57
+
+R79 GATE CENSUS (B7: nonverbal gate in master — case offers while thread=nonverbal with no interpreter must be ZERO):
+  seed 6901 arm=handsoff: totalConvos=444 nvConvos=24 nvNoInterp=24 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0
+  seed 6902 arm=handsoff: totalConvos=401 nvConvos=0 nvNoInterp=0 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0 (UNMEASURED on this seed: no nonverbal convos)
+  seed 6903 arm=mootprobe: totalConvos=222 nvConvos=6 nvNoInterp=0 nvInterp=6 caseOffersNvNoInterp=0 caseOffersNvInterp=0
+  seed 6904 arm=mootprobe: totalConvos=444 nvConvos=0 nvNoInterp=0 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0 (UNMEASURED on this seed: no nonverbal convos)
+POOLED gate: nvConvos=30 nvNoInterp=24 nvInterp=6 badOffers=0 (GATE HOLDS)
+
+R79 AUTONOMOUS-CONVENING VERDICT (hands-off arm) (B2, control arm only; post-Amendment-A rules):
+  seed 6901 case=case_2 opened d6 mootInDay~d9 (mootIn field null, tick default 3) runDays=143 trialed=true
+  seed 6901 case=case_4 opened d28 mootInDay~d31 (mootIn field null, tick default 3) runDays=143 trialed=true
+  seed 6901: eligible control cases=2 convened=2 -> AUTONOMOUS CONVENING OBSERVED
+  seed 6902 case=case_2 opened d9 mootInDay~d12 (mootIn field null, tick default 3) runDays=127 trialed=false
+  seed 6902 case=case_4 opened d12 mootInDay~d15 (mootIn field null, tick default 3) runDays=127 trialed=true
+  seed 6902 case=case_6 opened d14 mootInDay~d17 (mootIn field null, tick default 3) runDays=127 trialed=true
+  seed 6902: eligible control cases=3 convened=2 -> PARTIAL/UNCONVENED
+
+R78 AWAY-RETURN CENSUS (replication) (B4: computed return = sinceDay + duration):
+  away blocks=30 missing computed return (binding miss if >0)=0
+  computedReturn-minus-blockDay: {"1":2,"2":5,"3":5,"4":4,"5":2,"887":1,"888":1,"939":1,"940":1,"945":1,"946":2,"947":1,"979":1,"980":1,"989":1,"990":1}
+
+R78 BROKEN-ORIGIN WINDOWS (final-ledger method, kept for continuity) (B5: final broken favor -> later same-villager start):
+  seed 6901: broken favors=0 broken-origin windows=0 (no broken favor in final ledger — window untestable this seed)
+  seed 6902: broken favors=0 broken-origin windows=0 (no broken favor in final ledger — window untestable this seed)
+  seed 6903: broken favors=1 broken-origin windows=0
+  seed 6904: broken favors=1 broken-origin windows=0
+
+R78 END-BLOCKED REPETITION CENSUS (decision input, not a game change):
+  seed 6901: no end-blocked entries
+  seed 6902: no end-blocked entries
+  seed 6903: no end-blocked entries
+  seed 6904: no end-blocked entries
+
+R78 HANDS-OFF PICK AUDIT (binding: zero case-menu picks on handsoff seeds):
+  seed 6901: case-menu picks=0 (arm was hands-off)
+  seed 6902: case-menu picks=0 (arm was hands-off)
+
+R78 BROKEN-ORIGIN BY LOG TRACE (B5: promise-broken-seen -> later same-villager start):
+  seed 6901 Tariq: broken d42 favor favor-tariq_mahmood-39-12 -> later start d65 favor favor-tariq_mahmood-64-20 (gap 23d)
+  seed 6901: broken-seen=1 broken-origin windows=1
+  seed 6902 Tanisha: broken d55 favor favor-gen_sb1nnoq-52-13 -> later start d76 favor favor-gen_sb1nnoq-75-25 (gap 21d)
+  seed 6902: broken-seen=4 broken-origin windows=1
+  seed 6903: broken-seen=3 broken-origin windows=0
+  seed 6904 Mateo: broken d13 favor favor-mateo_alvarez-10-5 -> later start d33 favor favor-mateo_alvarez-32-18 (gap 20d)
+  seed 6904 James: broken d14 favor favor-james_okonkwo-11-6 -> later start d32 favor favor-james_okonkwo-31-17 (gap 18d)
+  seed 6904 Ana: broken d20 favor favor-gen_30muhrn-17-13 -> later start d35 favor favor-gen_30muhrn-34-19 (gap 15d)
+  seed 6904 Mateo: broken d21 favor favor-mateo_alvarez-15-10 -> later start d33 favor favor-mateo_alvarez-32-18 (gap 12d)
+  seed 6904 Luis: broken d26 favor favor-luis_fernandez-23-15 -> later start d73 favor favor-luis_fernandez-72-37 (gap 47d)
+  seed 6904: broken-seen=11 broken-origin windows=5
+
+R78 SAY TV EXCLUSION CENSUS:
+  seed 6901: mootSayLines=15 mootSayTvExcluded=4
+    TV-EXCLUDED d46: 📺 CONTEST: The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d47: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d47: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+
+People have been hurt in this one. Not always.
+
+The lights come up. You can hear the crowd —
+    TV-EXCLUDED d48: 📺 The Moot — YOU WIN. The crowd is a weather system.
+  seed 6902: mootSayLines=19 mootSayTvExcluded=4
+    TV-EXCLUDED d28: 📺 CONTEST: The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d29: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d29: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+
+People have been hurt in this one. Not always.
+
+The lights come up. You can hear the crowd —
+    TV-EXCLUDED d30: 📺 The Moot — YOU WIN. The crowd is a weather system.
+  seed 6903: mootSayLines=20 mootSayTvExcluded=0
+  seed 6904: mootSayLines=3 mootSayTvExcluded=4
+    TV-EXCLUDED d134: 📺 CONTEST: The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d135: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d135: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+
+Almost nobody walks away from this one.
+
+The lights come up. You can hear the crowd — millio
+    TV-EXCLUDED d136: 📺 The Moot — YOU WIN. The crowd is a weather system.
+
+DRIVER VERDICTS FILE: [{"seed":6901,"steering":true,"arm":"handsoff","alive":7,"deep2":36,"cracks":0,"vCracks":0,"friendGrievances":0,"stateGrievances":2,"stateFriend":0,"stateVCracks":0,"t2picks":261,"closeReads":205,"grievReads":28,"grievReadsByWhy":{"grievance":0,"vgrievance":28},"firstDeep2Day":30,"lateClose":196,"lateTP":155,"lateNull":0,"condRate":0.7908163265306123,"pooledTP":157,"pooledRate":0.7658536585365854,"othersSteered":19,"lingerPicks":242,"knack":21,"dryCensus":{"totalConvos":444,"deepConvos":444,"totalDryLines":108,"dry9Lines":108,"self3Lines":0,"convosWithDry":94,"shareWithDry":0.21171171171171171,"dryPerConvo":0.24324324324324326,"convosEndingOnDry":2,"shareEndingOnDry":0.0045045045045045045,"hist":{"0":350,"1":80,"2":14,"3":0,"4":0,"5+":0},"prePick":{"other":16,"topic":92},"prePick9":{"other":16,"topic":92},"followCounts":{"question":47,"other":59},"noFollow":2,"follows":[{"day":7,"name":"A person, maybe 20s, with a wiry build","who":"you","text":"\"And then?\""},{"day":8,"name":"Ezra","who":"you","text":"\"Go on.\""},{"day":15,"name":"Murugan","who":"you","text":"\"Can I ask you something else?\""},{"day":21,"name":"Elena","who":"you","text":"\"...\""},{"day":21,"name":"Elena","who":"you","text":"\"What else did you hear?\""},{"day":22,"name":"Stan","who":"you","text":"\"...\""},{"day":24,"name":"Elena","who":"you","text":"\"...\""},{"day":24,"name":"Elena","who":"you","text":"\"Can I ask you something else?\""},{"day":24,"name":"Murugan","who":"you","text":"\"...\""},{"day":24,"name":"Murugan","who":"you","text":"\"Can I ask you something else?\""},{"day":26,"name":"Stan","who":"you","text":"\"I've been watching. Things don't add up. Talk to me.\""},{"day":29,"name":"Elena","who":"you","text":"\"Can I ask you something else?\""},{"day":30,"name":"Somchai","who":"you","text":"\"Can I ask you something else?\""},{"day":31,"name":"Ezra","who":"you","text":"\"Let's talk roles.\""},{"day":32,"name":"Murugan","who":"you","text":"\"Whoa — go on.\""},{"day":33,"name":"Ezra"

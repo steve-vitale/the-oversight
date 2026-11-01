@@ -1,0 +1,363 @@
+# SURFACE+SEEDED — seed 6902 (127d, 0 alive)
+
+npcPairs=90 deep2=29 cracks=0 vCracks=0 friendGriev=0 stateGriev=4 stateFriend=0 stateVCrack=0 t2picks=276 closeReadsServed=43 grievanceServes=35 othersSteered=24
+COND-TP: firstDeep2Day=30 lateClose=179 lateTP=131 lateNull=0 condRate=73.2% pooledTP=132/184 pooledRate=71.7% grievReadsByWhy={"grievance":14,"vgrievance":40}
+FUNNEL (natural): convos=371 subject=371 offered=324 picked=252 classes={"subject-no-offer":47,"offered-not-picked":72,"picked-others":252}
+FUNNEL-UNSTEERED (r55 strict): convos=371 subjectNoOffer=47 rate=12.7% offered=324 mainOffered=10 subjectOffered=314 picked=252 latePicks=85 latePicksMain=0 latePicksSubject=85
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Tyler / Tanisha — "Good question." "Rustem talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Ivy / Aria / Priya / Yara — "Thabo ate something last month that should've killed them. They're fine."
+REOFFER: offers=319 picks=262 latePicks=82 missedChangedNotOffered=2
+WRAPSERVE: convos=54 matcherHits=35 matcherServes=35 classes={"grievance-line":35,"deflection":1,"other":18}
+FUNNEL-PROBE (subject-no-offer turns): turns=204 menuProblem=172 pickProblem=32
+INVITE (wrap, carried from r63): lure={"n":6,"accepts":3,"acceptRate":0.5,"vetoes":{},"chanceMin":26,"chanceMax":57,"chanceMean":36.7} party={"n":25,"accepts":11,"acceptRate":0.44,"vetoes":{},"chanceMin":24.6,"chanceMax":76,"chanceMean":52.9} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=9
+FAVOR (r65): funnel={"offers":48,"forageOffers":16,"otherFavorOffers":32,"accepts":16,"acceptAttempts":16,"waits":18,"starts":11,"startBlocked":16,"forages":10,"forageNodeBarren":3,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":6,"retryAssigned":6,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":10,"delivers":10,"deliverBlocked":0,"completeOutings":3,"completeOutingsEvents":10,"keptMatched":3,"keptMatchedStrict":3}
+CASE (r79): snaps=9 betrayalOfferConvos=138 mootOffers=6 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d10: case_2 status=open charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=open charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d13: case_2 status=resolved charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d13: case_4 status=open charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d15: case_2 status=resolved charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d15: case_4 status=open charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=juror known=true mootIn=null trial=false
+  CASE-SNAP d15: case_6 status=open charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d16: case_2 status=resolved charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d16: case_4 status=open charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_6 status=open charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=juror known=true mootIn=null trial=false
+  CASE-SNAP d18: case_2 status=resolved charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d18: case_4 status=acquitted charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_6 status=open charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_2 status=resolved charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d20: case_4 status=acquitted charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_6 status=acquitted charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=juror known=true mootIn=null trial=true
+  CASE-SNAP d127: case_2 status=resolved charge=ambush accused=Ezra/Tyler/Thabo target=Tanisha role=juror known=true mootIn=null trial=false
+  CASE-SNAP d127: case_4 status=acquitted charge=murder accused=Tanisha/Akwasi/Ivy target=Ezra role=juror known=true mootIn=null trial=true
+  CASE-SNAP d127: case_6 status=acquitted charge=ambush accused=Rustem/Aria/Tyler target=Ivy role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"meera_reddy","vidName":"Meera","favorId":"favor-meera_reddy-9-2","state":"thanked","promisedDay":9,"meetDay":10,"deadline":11,"promiseKept":true,"startedDay":10,"forageCount":1,"playerKcal":150,"partnerKcal":150,"deliveredKcal":300,"returnedDay":10,"talkCount":1},{"vid":"miguel_santos","vidName":"Miguel","favorId":"favor-miguel_santos-81-29","state":"moot","promisedDay":81,"meetDay":82,"deadline":83,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"priya_nair","vidName":"Priya","favorId":"favor-priya_nair-77-28","state":"fulfilled","promisedDay":77,"meetDay":78,"deadline":79,"promiseKept":true,"startedDay":79,"forageCount":2,"playerKcal":90,"partnerKcal":135,"deliveredKcal":225,"returnedDay":79,"talkCount":1},{"vid":"gen_sb1nnoq","vidName":"Tanisha","favorId":"favor-gen_sb1nnoq-75-25","state":"fulfilled","promisedDay":75,"meetDay":76,"deadline":77,"promiseKept":true,"startedDay":76,"forageCount":1,"playerKcal":135,"partnerKcal":180,"deliveredKcal":315,"returnedDay":76,"talkCount":1},{"vid":"petra_novak","vidName":"Petra","favorId":"favor-petra_novak-124-47","state":"moot","promisedDay":124,"meetDay":125,"deadline":126,"promiseKept":"released","startedDay":125,"forageCount":2,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Meera kind=sick_help favorId=favor-meera_reddy-6-1 task=help Meera with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d9: Meera kind=forage_help favorId=favor-meera_reddy-9-2 task=forage with Meera tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Aria kind=heal_help favorId=favor-aria_thompson-22-3 task=help Aria with their injury
+  FAVOR-OFFER d26: Ivy kind=food_share favorId=favor-ivy_wang-26-5 task=share food with Ivy — they're past hungry
+  FAVOR-OFFER d26: Miguel kind=food_share favorId=favor-miguel_santos-26-6 task=share food with Miguel — they're running on empty
+  FAVOR-OFFER d27: Miguel kind=forage_help favorId=favor-miguel_santos-27-7 task=forage with Miguel tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Miguel kind=food_share favorId=favor-miguel_santos-29-8 task=share food with Miguel — they're past hungry
+  FAVOR-OFFER d31: Priya kind=heal_help favorId=favor-priya_nair-31-9 task=help Priya with their injury
+  FAVOR-OFFER d34: Akwasi kind=forage_help favorId=favor-gen_nexzdp5-34-10 task=forage with Akwasi tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Rustem kind=forage_help favorId=favor-gen_g3w3rky-43-11 task=forage with Rustem tomorrow to rebuild the pantry
+  FAVOR-OFFER d47: Miguel kind=forage_help favorId=favor-miguel_santos-47-12 task=forage with Miguel tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Tanisha kind=forage_help favorId=favor-gen_sb1nnoq-52-13 task=forage with Tanisha tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Rustem kind=forage_help favorId=favor-gen_g3w3rky-53-14 task=forage with Rustem tomorrow to rebuild the pantry
+  FAVOR-OFFER d58: Miguel kind=forage_help favorId=favor-miguel_santos-58-15 task=forage with Miguel tomorrow to rebuild the pantry
+  FAVOR-OFFER d59: Ivy kind=food_share favorId=favor-ivy_wang-59-16 task=share food with Ivy — they're past hungry
+  FAVOR-OFFER d62: Rustem kind=forage_help favorId=favor-gen_g3w3rky-62-17 task=forage with Rustem tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Ivy kind=food_share favorId=favor-ivy_wang-63-18 task=share food with Ivy — they're running on empty
+  FAVOR-OFFER d65: Ivy kind=water_haul favorId=favor-ivy_wang-65-19 task=bring four liters home from the creek with Ivy; set out at dawn
+  FAVOR-OFFER d67: Priya kind=food_share favorId=favor-priya_nair-67-21 task=share food with Priya — they're going hungry
+  FAVOR-OFFER d69: Tanisha kind=heal_help favorId=favor-gen_sb1nnoq-66-20 task=help Tanisha with their injury
+  FAVOR-OFFER d72: Thabo kind=food_share favorId=favor-thabo_maseko-72-22 task=share food with Thabo — they're going hungry
+  FAVOR-OFFER d73: Priya kind=sick_help favorId=favor-priya_nair-73-23 task=help Priya with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d75: Thabo kind=forage_help favorId=favor-thabo_maseko-75-24 task=forage with Thabo tomorrow to rebuild the pantry
+  FAVOR-OFFER d75: Tanisha kind=forage_help favorId=favor-gen_sb1nnoq-75-25 task=forage with Tanisha tomorrow to rebuild the pantry
+  FAVOR-OFFER d76: Miguel kind=forage_help favorId=favor-miguel_santos-76-26 task=forage with Miguel tomorrow to rebuild the pantry
+  FAVOR-OFFER d76: Rustem kind=forage_help favorId=favor-gen_g3w3rky-76-27 task=forage with Rustem tomorrow to rebuild the pantry
+  FAVOR-OFFER d77: Priya kind=forage_help favorId=favor-priya_nair-77-28 task=forage with Priya tomorrow to rebuild the pantry
+  FAVOR-OFFER d81: Miguel kind=forage_help favorId=favor-miguel_santos-81-29 task=forage with Miguel tomorrow to rebuild the pantry
+  FAVOR-OFFER d85: Yara kind=heal_help favorId=favor-yara_haddad-85-30 task=help Yara with their injury
+  FAVOR-OFFER d90: Tyler kind=food_share favorId=favor-gen_c1fw1id-90-31 task=share food with Tyler — they're going hungry
+  FAVOR-OFFER d92: Petra kind=water_haul favorId=favor-petra_novak-92-32 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d95: Tyler kind=sick_help favorId=favor-gen_c1fw1id-95-33 task=help Tyler with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d96: Thabo kind=water_haul favorId=favor-thabo_maseko-96-34 task=bring four liters home from the creek with Thabo; set out at dawn
+  FAVOR-OFFER d97: Rustem kind=heal_help favorId=favor-gen_g3w3rky-97-35 task=help Rustem with their injury
+  FAVOR-OFFER d98: Rustem kind=heal_help favorId=favor-gen_g3w3rky-98-36 task=help Rustem with their injury
+  FAVOR-OFFER d99: Petra kind=food_share favorId=favor-petra_novak-99-37 task=share food with Petra — they're going hungry
+  FAVOR-OFFER d101: Rustem kind=sick_help favorId=favor-gen_g3w3rky-101-38 task=help Rustem with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d102: Rustem kind=sick_help favorId=favor-gen_g3w3rky-102-39 task=help Rustem with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d104: Petra kind=water_haul favorId=favor-petra_novak-104-41 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d104: Farid kind=water_haul favorId=favor-farid_ahmed-104-40 task=bring four liters home from the creek with Farid; set out at dawn
+  FAVOR-OFFER d105: Rustem kind=water_haul favorId=favor-gen_g3w3rky-105-42 task=bring four liters home from the creek with Rustem; set out at dawn
+  FAVOR-OFFER d106: Yara kind=food_share favorId=favor-yara_haddad-106-43 task=share food with Yara — they're running on empty
+  FAVOR-OFFER d108: Rustem kind=water_haul favorId=favor-gen_g3w3rky-108-44 task=bring four liters home from the creek with Rustem; set out at dawn
+  FAVOR-OFFER d118: Akwasi kind=water_haul favorId=favor-gen_nexzdp5-118-45 task=bring four liters home from the creek with Akwasi; set out at dawn
+  FAVOR-OFFER d120: Petra kind=food_share favorId=favor-petra_novak-120-46 task=share food with Petra — they're running on empty
+  FAVOR-OFFER d124: Petra kind=forage_help favorId=favor-petra_novak-124-47 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d125: Rustem kind=food_share favorId=favor-gen_g3w3rky-125-48 task=share food with Rustem — they're running on empty
+  FAVOR-OFFER d125: Yara kind=food_share favorId=favor-yara_haddad-125-49 task=share food with Yara — they're going hungry
+  FAVOR-ACCEPT d9: Meera favorId=favor-meera_reddy-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d27: Miguel favorId=favor-miguel_santos-27-7 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d34: Akwasi favorId=favor-gen_nexzdp5-34-10 accepted=true state=promised meetDay=35
+  FAVOR-ACCEPT d43: Rustem favorId=favor-gen_g3w3rky-43-11 accepted=true state=promised meetDay=44
+  FAVOR-ACCEPT d47: Miguel favorId=favor-miguel_santos-47-12 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d52: Tanisha favorId=favor-gen_sb1nnoq-52-13 accepted=true state=promised meetDay=53
+  FAVOR-ACCEPT d53: Rustem favorId=favor-gen_g3w3rky-53-14 accepted=true state=promised meetDay=54
+  FAVOR-ACCEPT d58: Miguel favorId=favor-miguel_santos-58-15 accepted=true state=promised meetDay=59
+  FAVOR-ACCEPT d62: Rustem favorId=favor-gen_g3w3rky-62-17 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d75: Thabo favorId=favor-thabo_maseko-75-24 accepted=true state=promised meetDay=76
+  FAVOR-ACCEPT d75: Tanisha favorId=favor-gen_sb1nnoq-75-25 accepted=true state=promised meetDay=76
+  FAVOR-ACCEPT d76: Miguel favorId=favor-miguel_santos-76-26 accepted=true state=promised meetDay=77
+  FAVOR-ACCEPT d76: Rustem favorId=favor-gen_g3w3rky-76-27 accepted=true state=promised meetDay=77
+  FAVOR-ACCEPT d77: Priya favorId=favor-priya_nair-77-28 accepted=true state=promised meetDay=78
+  FAVOR-ACCEPT d81: Miguel favorId=favor-miguel_santos-81-29 accepted=true state=promised meetDay=82
+  FAVOR-ACCEPT d124: Petra favorId=favor-petra_novak-124-47 accepted=true state=promised meetDay=125
+  INVITE-DEC d7 lure: Thabo -> Tanisha chance=37 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":4,"affinity":6} reasons=["relationship with inviter (+2)","cautious temperament (-10)"]
+  INVITE-DEC d8 party: Kofi -> Tyler chance=46.2 accept=false veto=- inputs={"temp":"gentle","goal":"lead","mood":"steady","fear":4,"trust":28,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 28"]
+  INVITE-DEC d8 party: Kofi -> Tanisha chance=35.4 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":4,"trust":26,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 26","cautious temperament (-10)"]
+  INVITE-DEC d8 party: Kofi -> Ivy chance=37.8 accept=true veto=- inputs={"temp":"cautious","goal":"home","mood":"steady","fear":4,"trust":32,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 32","cautious temperament (-10)"]
+  INVITE-DEC d8 lure: Thabo -> Tanisha chance=37 accept=false veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":0,"affinity":6} reasons=["relationship with inviter (+2)","cautious temperament (-10)"]
+  INVITE-DEC d9 party: Kofi -> Tyler chance=49.4 accept=false veto=- inputs={"temp":"gentle","goal":"lead","mood":"steady","fear":12,"trust":36,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 36"]
+  INVITE-DEC d9 lure: Thabo -> Tanisha chance=37 accept=true veto=- inputs={"temp":"cautious","goal":"record","mood":"steady","fear":4,"affinity":6} reasons=["relationship with inviter (+2)","cautious temperament (-10)"]
+  INVITE-DEC d10 party: Kofi -> Akwasi chance=38 accept=false veto=- inputs={"temp":"withdrawn","goal":"belong","mood":"steady","fear":12,"trust":20,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 20","withdrawn temperament (-20)","belong goal (+15)"]
+  INVITE-DEC d10 party: Kofi -> Aria chance=44.6 accept=false veto=- inputs={"temp":"gentle","goal":"answers","mood":"steady","fear":12,"trust":24,"bond":null,"partySize":2} reasons=["trust 24"]
+  INVITE-DEC d12 party: Kofi -> Thabo chance=62.4 accept=true veto=- inputs={"temp":"dry","goal":"belong","mood":"steady","fear":4,"trust":31,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 31","belong goal (+15)"]
+  INVITE-DEC d12 lure: Ivy -> Ezra chance=57 accept=true veto=- inputs={"temp":"restless","goal":"peace","mood":"hungry","fear":0,"affinity":6} reasons=["relationship with inviter (+2)","restless temperament (+10)"]
+  INVITE-DEC d13 lure: Aria -> Ivy chance=26 accept=false veto=- inputs={"temp":"cautious","goal":"home","mood":"grieving","fear":5,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d14 party: Kofi -> Meera chance=44.6 accept=true veto=- inputs={"temp":"dry","goal":"understand","mood":"grieving","fear":12,"trust":49,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 49","grieving mood (-10)"]
+  INVITE-DEC d14 lure: Aria -> Ivy chance=26 accept=true veto=- inputs={"temp":"cautious","goal":"home","mood":"grieving","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Kofi -> Miguel chance=71 accept=true veto=- inputs={"temp":"intense","goal":"belong","mood":"steady","fear":0,"trust":40,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d31 party: Meera -> Akwasi chance=68.2 accept=true veto=- inputs={"temp":"withdrawn","goal":"belong","mood":"cheerful","fear":4,"trust":58,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 58","a big party is safer (+5)","withdrawn temperament (-20)","belong goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d67 party: Ivy -> Aria chance=72.80000000000001 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"grieving","fear":13,"trust":82,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d82 party: Ivy -> Tyler chance=76 accept=true veto=- inputs={"temp":"gentle","goal":"lead","mood":"grieving","fear":0,"trust":90,"bond":{"v":79,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d85 party: Miguel -> Yara chance=53.4 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"steady","fear":35,"trust":21,"bond":null,"partySize":4} reasons=["trust 21","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d96 party: Miguel -> Petra chance=70.2 accept=false veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":12,"trust":38,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 38","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d97 party: Miguel -> Petra chance=59.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"belong","mood":"grieving","fear":29,"trust":36,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 36","a big party is safer (+5)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d99 party: Miguel -> Farid chance=37.2 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"grieving","fear":0,"trust":43,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d100 party: Miguel -> Farid chance=47.2 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"steady","fear":4,"trust":43,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d101 party: Tyler -> Rustem chance=24.6 accept=false veto=- inputs={"temp":"stoic","goal":"understand","mood":"grieving","fear":5,"trust":24,"bond":{"v":100,"depth":3},"partySize":2} reasons=["trust 24","a real bond (+10)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d102 party: Tyler -> Rustem chance=27 accept=false veto=- inputs={"temp":"stoic","goal":"understand","mood":"grieving","fear":38,"trust":30,"bond":{"v":100,"depth":3},"partySize":2} reasons=["trust 30","a real bond (+10)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d102 party: Tyler -> Oliver chance=33.8 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"grieving","fear":58,"trust":22,"bond":null,"partySize":2} reasons=["trust 22","grieving mood (-10)"]
+  INVITE-DEC d104 party: Tyler -> Petra chance=69.6 accept=true veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":4,"trust":49,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 49","belong goal (+15)"]
+  INVITE-DEC d104 party: Tyler -> Farid chance=60 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"steady","fear":4,"trust":50,"bond":{"v":40,"depth":1},"partySize":3} reasons=["trust 50","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d105 party: Tyler -> Farid chance=60 accept=true veto=- inputs={"temp":"cautious","goal":"heal","mood":"steady","fear":0,"trust":50,"bond":{"v":42,"depth":1},"partySize":3} reasons=["trust 50","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d105 party: Tyler -> Rustem chance=66 accept=false veto=- inputs={"temp":"stoic","goal":"understand","mood":"steady","fear":0,"trust":40,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 40","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d110 party: Tyler -> Rustem chance=68 accept=true veto=- inputs={"temp":"stoic","goal":"understand","mood":"hungry","fear":0,"trust":45,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 45","a real bond (+10)","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":28,"v":42,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":44,"depth":2},{"day":32,"v":48,"depth":2},{"day":33,"v":52,"depth":3},{"day":34,"v":52,"depth":3},{"day":35,"v":52,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":56,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":60,"depth":3},{"day":41,"v":60,"depth":3}] class=rise
+GOSSIP: totalPicks=216 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=32 31-60=67 61-90=68 91-120=71 121+=14 naturalPicks=252 seededPicks=24 gossipPicks=216
+SEEDED: {"pair":{"a":"gen_nexzdp5","b":"gen_sb1nnoq","aName":"Akwasi","bName":"Tanisha"},"day":27,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":28,"v":42,"depth":2},{"day":29,"v":42,"depth":2},{"day":30,"v":42,"depth":2},{"day":31,"v":44,"depth":2},{"day":32,"v":48,"depth":2},{"day":33,"v":52,"depth":3},{"day":34,"v":52,"depth":3},{"day":35,"v":52,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":56,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":60,"depth":3},{"day":41,"v":60,"depth":3}],"crackTraceClass":"rise","vAt7":42,"depthAt7":2,"vDrop":8,"depthDrop":0,"crack7":false,"firstServe":{"day":28,"why":"vgrievance"},"serveWithin30":true,"serves":40,"servesAll":[{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":77,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Akwasi <> Tanisha — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Tanisha <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Tyler <> Tanisha — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Rustem <> Akwasi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Rustem <> Ivy — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d30: Tyler <> Thabo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aria <> Tyler — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d35: Rustem <> Tanisha — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Tanisha <> Meera — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d40: Tyler <> Rustem — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Tyler <> Akwasi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Tyler <> Miguel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Tanisha <> Thabo — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d105: Miguel <> Thabo — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d80: Aria <> Rustem — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d65: Akwasi <> Ivy — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d80: Rustem <> Thabo — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d55: Aria <> Tanisha — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d105: Akwasi <> Miguel — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d70: Akwasi <> Meera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Ivy <> Meera — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d105: Ivy <> Miguel — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d85: Ivy <> Thabo — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d85: Aria <> Ivy — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d105: Rustem <> Miguel — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d55: Tyler <> Ivy — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d70: Meera <> Miguel — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d127: Tyler <> Yara — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d120: Akwasi <> Yara — maxDepth 2, final 2 (v=56), dropped 0
+  CLOSE-READ d10: Akwasi about Tanisha — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Tanisha about Akwasi — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Thabo about Tyler — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Tyler about Tanisha — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Akwasi about Tanisha — live depth=2 ledger depth=1 class=TP late=false inGroup=true speakerHasDeep2=true
+  CLOSE-READ d31: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d32: Aria about Tanisha — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Miguel about Tyler — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Miguel about Tyler — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Rustem about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Thabo about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Aria about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Aria about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Priya about Tanisha — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Thabo about Tyler — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Miguel about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Aria about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Ivy about Tanisha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Ivy about Tanisha — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Tanisha about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Miguel about Tyler — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Rustem about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Miguel about Tyler — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Tyler about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Aria about Tanisha — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Ivy about Tanisha — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Tanisha about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Rustem about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Tyler about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Rustem about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Aria about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d64: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Ivy about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d69: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Rustem about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Tyler about Tanisha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Priya about Tanisha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Priya about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Priya about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Priya about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Aria about Tyler — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Priya about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d80: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Miguel about Tyler — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Aria about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Tyler about Thabo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Thabo about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Rustem about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Akwasi about Tyler — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Tyler about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Yara about Tyler — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d99: Farid about Tyler — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Farid about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Tyler about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Yara about Tyler — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d102: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Yara about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d110: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Farid about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Petra about Rustem — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d113: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Yara about Akwasi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d114: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Petra about Rustem — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d114: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Yara about Akwasi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d116: Farid about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d116: Petra about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d117: Farid about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d117: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Petra about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d118: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Petra about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d120: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Petra about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d121: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Yara about Akwasi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Yara about Akwasi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Oliver about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Farid about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d123: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Petra about Rustem — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d124: Yara about Akwasi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Rustem about Akwasi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Akwasi about Rustem — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Yara about Akwasi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Rustem about Farid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Farid about Rustem — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d8: Tanisha about Ezra (why=grievance)
+  GRIEV-READ d8: Ivy about Rustem (why=grievance)
+  GRIEV-READ d11: Ezra about Tanisha (why=grievance)
+  GRIEV-READ d14: Ivy about Rustem (why=grievance)
+  GRIEV-READ d15: Rustem about Ivy (why=grievance)
+  GRIEV-READ d15: Ivy about Rustem (why=grievance)
+  KNACK d8 Tyler: "Good question." "Priya ate something last month that should've killed them. They're fine, friend."
+  KNACK d18 Tyler: "Good question." "Rustem talks to the garden. The garden listens. I've seen it."
+  KNACK d20 Ivy: "Thabo ate something last month that should've killed them. They're fine."
+  KNACK d28 Tanisha: "Good question." "Rustem talks to the garden. The garden listens. I've seen it."
+  KNACK d36 Tyler: "that stray dog — the one that bit two people — lets Ivy touch it. Just... be straight with me."
+  KNACK d37 Ivy: "Miguel talks to the garden. The garden listens. I've seen it."
+  KNACK d38 Aria: "Thabo ate something last month that should've killed them. They're fine."
+  KNACK d42 Thabo: "Priya ate something last month that should've killed them. They're fine. Just... be straight with me."
+
+deathCauses: {"ambush":1,"starvation":1,"contest":1,"alien":2,"combat":2,"the wild":4,"dehydration":1,"monster":2}

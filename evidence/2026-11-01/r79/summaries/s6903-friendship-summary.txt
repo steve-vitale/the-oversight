@@ -1,0 +1,199 @@
+# SURFACE+SEEDED — seed 6903 (70d, 5 alive)
+
+npcPairs=46 deep2=7 cracks=0 vCracks=1 friendGriev=0 stateGriev=11 stateFriend=0 stateVCrack=1 t2picks=69 closeReadsServed=18 grievanceServes=1 othersSteered=67
+COND-TP: firstDeep2Day=25 lateClose=36 lateTP=32 lateNull=0 condRate=88.9% pooledTP=33/45 pooledRate=73.3% grievReadsByWhy={"grievance":9,"vgrievance":0}
+FUNNEL (natural): convos=204 subject=181 offered=124 picked=65 classes={"subject-no-offer":57,"offered-not-picked":21,"picked-others":65,"offered-capped":38,"no-subject-no-ans":22,"no-subject-ans":1}
+FUNNEL-UNSTEERED (r55 strict): convos=141 subjectNoOffer=57 rate=40.4% offered=61 mainOffered=1 subjectOffered=61 picked=2 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=110 picks=58 latePicks=0 missedChangedNotOffered=5
+WRAPSERVE: convos=9 matcherHits=1 matcherServes=1 classes={"grievance-line":1,"deflection":2,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=149 menuProblem=108 pickProblem=41
+INVITE (wrap, carried from r63): lure={"n":18,"accepts":4,"acceptRate":0.2222222222222222,"vetoes":{"sick":10},"chanceMin":0,"chanceMax":54,"chanceMean":21.4} party={"n":17,"accepts":6,"acceptRate":0.35294117647058826,"vetoes":{},"chanceMin":5,"chanceMax":73,"chanceMean":41.7} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":46,"forageOffers":8,"otherFavorOffers":38,"accepts":8,"acceptAttempts":8,"waits":5,"starts":5,"startBlocked":10,"forages":5,"forageNodeBarren":0,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":5,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":5,"delivers":5,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":5,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r79): snaps=10 betrayalOfferConvos=59 mootOffers=10 mootProbePicks=[{"day":8,"vid":"chen_wei","vidName":"Wei","caseId":"case_2"},{"day":19,"vid":"brian_otieno","vidName":"Brian","caseId":"case_5"},{"day":25,"vid":"boris_kowalski","vidName":"Boris","caseId":"case_7"},{"day":33,"vid":"aroha_ngata","vidName":"Aroha","caseId":"case_10"}] mootsConvened=0
+  CASE-SNAP d7: case_2 status=open charge=murder accused=Gina/Aroha/Brian target=Yara role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d8: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_5 status=open charge=ambush accused=Metin/Boris/Gina target=Wei role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d19: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_5 status=acquitted charge=ambush accused=Metin/Boris/Gina target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_5 status=acquitted charge=ambush accused=Metin/Boris/Gina target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_7 status=open charge=ambush accused=Wei/Gina/Boris target=Metin role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d25: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_5 status=acquitted charge=ambush accused=Metin/Boris/Gina target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_7 status=acquitted charge=ambush accused=Wei/Gina/Boris target=Metin role=juror known=true mootIn=null trial=true
+  CASE-SNAP d32: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d32: case_5 status=acquitted charge=ambush accused=Metin/Boris/Gina target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d32: case_7 status=acquitted charge=ambush accused=Wei/Gina/Boris target=Metin role=juror known=true mootIn=null trial=true
+  CASE-SNAP d32: case_10 status=open charge=ambush accused=Metin/Gina/Boris target=Wei role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d33: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d33: case_5 status=acquitted charge=ambush accused=Metin/Boris/Gina target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d33: case_7 status=acquitted charge=ambush accused=Wei/Gina/Boris target=Metin role=juror known=true mootIn=null trial=true
+  CASE-SNAP d33: case_10 status=acquitted charge=ambush accused=Metin/Gina/Boris target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d70: case_2 status=acquitted charge=murder accused=Gina/Aroha/Brian target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d70: case_5 status=acquitted charge=ambush accused=Metin/Boris/Gina target=Wei role=juror known=true mootIn=null trial=true
+  CASE-SNAP d70: case_7 status=acquitted charge=ambush accused=Wei/Gina/Boris target=Metin role=juror known=true mootIn=null trial=true
+  CASE-SNAP d70: case_10 status=acquitted charge=ambush accused=Metin/Gina/Boris target=Wei role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"chen_wei","vidName":"Wei","favorId":"favor-chen_wei-36-18","state":"thanked","promisedDay":36,"meetDay":37,"deadline":38,"promiseKept":true,"startedDay":37,"forageCount":1,"playerKcal":180,"partnerKcal":250,"deliveredKcal":430,"returnedDay":37,"talkCount":1},{"vid":"brian_otieno","vidName":"Brian","favorId":"favor-brian_otieno-59-36","state":"acknowledged","promisedDay":59,"meetDay":60,"deadline":61,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d7: Sebastián kind=sick_help favorId=favor-gen_45ktnpn-4-1 task=help Sebastián with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d13: Gina kind=sick_help favorId=favor-gen_xfuhxlc-13-2 task=help Gina with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d17: Wei kind=heal_help favorId=favor-chen_wei-14-3 task=help Wei with their injury
+  FAVOR-OFFER d17: Boris kind=forage_help favorId=favor-boris_kowalski-17-4 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Brian kind=forage_help favorId=favor-brian_otieno-19-5 task=forage with Brian tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Gina kind=food_share favorId=favor-gen_xfuhxlc-21-6 task=share food with Gina — they're going hungry
+  FAVOR-OFFER d21: Wei kind=sick_help favorId=favor-chen_wei-21-7 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d23: Aroha kind=food_share favorId=favor-aroha_ngata-23-8 task=share food with Aroha — they're past hungry
+  FAVOR-OFFER d23: Metin kind=heal_help favorId=favor-gen_d2e5sig-23-9 task=help Metin with their injury
+  FAVOR-OFFER d26: Austin kind=heal_help favorId=favor-gen_cw7wyzo-26-10 task=help Austin with their injury
+  FAVOR-OFFER d26: Wei kind=sick_help favorId=favor-chen_wei-26-11 task=help Wei with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d27: Gina kind=food_share favorId=favor-gen_xfuhxlc-27-12 task=share food with Gina — they're running on empty
+  FAVOR-OFFER d27: Metin kind=food_share favorId=favor-gen_d2e5sig-27-13 task=share food with Metin — they're going hungry
+  FAVOR-OFFER d32: Wei kind=forage_help favorId=favor-chen_wei-32-14 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d32: Metin kind=sick_help favorId=favor-gen_d2e5sig-32-15 task=help Metin with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d35: Metin kind=sick_help favorId=favor-gen_d2e5sig-35-16 task=help Metin with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d36: Austin kind=heal_help favorId=favor-gen_cw7wyzo-36-17 task=help Austin with their injury
+  FAVOR-OFFER d36: Wei kind=forage_help favorId=favor-chen_wei-36-18 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Boris kind=food_share favorId=favor-boris_kowalski-37-19 task=share food with Boris — they're going hungry
+  FAVOR-OFFER d39: Brian kind=food_share favorId=favor-brian_otieno-39-20 task=share food with Brian — they're going hungry
+  FAVOR-OFFER d40: Boris kind=forage_help favorId=favor-boris_kowalski-40-21 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Gina kind=food_share favorId=favor-gen_xfuhxlc-42-22 task=share food with Gina — they're past hungry
+  FAVOR-OFFER d42: Giulia kind=heal_help favorId=favor-giulia_bianchi-42-23 task=help Giulia with their injury
+  FAVOR-OFFER d42: Brian kind=food_share favorId=favor-brian_otieno-42-24 task=share food with Brian — they're going hungry
+  FAVOR-OFFER d43: Boris kind=sick_help favorId=favor-boris_kowalski-43-25 task=help Boris with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d45: Gina kind=heal_help favorId=favor-gen_xfuhxlc-45-26 task=help Gina with their injury
+  FAVOR-OFFER d47: Giulia kind=heal_help favorId=favor-giulia_bianchi-47-27 task=help Giulia with their injury
+  FAVOR-OFFER d47: Brian kind=sick_help favorId=favor-brian_otieno-47-28 task=help Brian with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d48: Gina kind=heal_help favorId=favor-gen_xfuhxlc-48-29 task=help Gina with their injury
+  FAVOR-OFFER d50: Boris kind=heal_help favorId=favor-boris_kowalski-50-30 task=help Boris with their injury
+  FAVOR-OFFER d52: Brian kind=sick_help favorId=favor-brian_otieno-52-31 task=help Brian with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d53: Brian kind=forage_help favorId=favor-brian_otieno-53-32 task=forage with Brian tomorrow to rebuild the pantry
+  FAVOR-OFFER d55: Boris kind=sick_help favorId=favor-boris_kowalski-55-33 task=help Boris with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d57: Aroha kind=heal_help favorId=favor-aroha_ngata-57-34 task=help Aroha with their injury
+  FAVOR-OFFER d58: Brian kind=water_haul favorId=favor-brian_otieno-58-35 task=bring four liters home from the creek with Brian; set out at dawn
+  FAVOR-OFFER d59: Brian kind=forage_help favorId=favor-brian_otieno-59-36 task=forage with Brian tomorrow to rebuild the pantry
+  FAVOR-OFFER d60: Gina kind=food_share favorId=favor-gen_xfuhxlc-60-37 task=share food with Gina — they're going hungry
+  FAVOR-OFFER d62: Leo kind=forage_help favorId=favor-leo_martin-62-38 task=forage with Leo tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Gina kind=heal_help favorId=favor-gen_xfuhxlc-63-39 task=help Gina with their injury
+  FAVOR-OFFER d63: Boris kind=sick_help favorId=favor-boris_kowalski-63-40 task=help Boris with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d65: Arjun kind=food_share favorId=favor-gen_5w3luua-65-41 task=share food with Arjun — they're going hungry
+  FAVOR-OFFER d68: Aroha kind=food_share favorId=favor-aroha_ngata-68-42 task=share food with Aroha — they're past hungry
+  FAVOR-OFFER d68: Boris kind=food_share favorId=favor-boris_kowalski-68-43 task=share food with Boris — they're past hungry
+  FAVOR-OFFER d68: Yuqing kind=heal_help favorId=favor-app_mgpsphhg516-68-44 task=help Yuqing with their injury
+  FAVOR-OFFER d70: Arjun kind=food_share favorId=favor-gen_5w3luua-70-45 task=share food with Arjun — they're running on empty
+  FAVOR-OFFER d70: Leo kind=food_share favorId=favor-leo_martin-70-46 task=share food with Leo — they're past hungry
+  FAVOR-ACCEPT d17: Boris favorId=favor-boris_kowalski-17-4 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d19: Brian favorId=favor-brian_otieno-19-5 accepted=true state=promised meetDay=20
+  FAVOR-ACCEPT d32: Wei favorId=favor-chen_wei-32-14 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d36: Wei favorId=favor-chen_wei-36-18 accepted=true state=promised meetDay=37
+  FAVOR-ACCEPT d40: Boris favorId=favor-boris_kowalski-40-21 accepted=true state=promised meetDay=41
+  FAVOR-ACCEPT d53: Brian favorId=favor-brian_otieno-53-32 accepted=true state=promised meetDay=54
+  FAVOR-ACCEPT d59: Brian favorId=favor-brian_otieno-59-36 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d62: Leo favorId=favor-leo_martin-62-38 accepted=true state=promised meetDay=63
+  INVITE-DEC d6 lure: Aroha -> Yara chance=35 accept=true veto=- inputs={"temp":"cautious","goal":"survive","mood":"steady","fear":4,"affinity":1} reasons=["cautious temperament (-10)"]
+  INVITE-DEC d7 lure: Austin -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":9} reasons=["sick — stays by the fire"]
+  INVITE-DEC d8 party: Li -> Austin chance=43.400000000000006 accept=false veto=- inputs={"temp":"stoic","goal":"understand","mood":"grieving","fear":12,"trust":46,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 46","grieving mood (-10)"]
+  INVITE-DEC d8 lure: Austin -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d9 party: Li -> Wei chance=30.200000000000003 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":0,"trust":38,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 38","sick (-20)"]
+  INVITE-DEC d9 party: Li -> Arjun chance=55 accept=true veto=- inputs={"temp":"mischievous","goal":"legacy","mood":"steady","fear":0,"trust":50,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 50"]
+  INVITE-DEC d9 lure: Austin -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d10 lure: Austin -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d11 party: Li -> Giulia chance=28 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":12,"trust":45,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 45","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d11 lure: Austin -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d12 party: Li -> Sebastián chance=10.799999999999997 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":12,"trust":27,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 27","sick (-20)","wants out (-15)"]
+  INVITE-DEC d12 party: Li -> Giulia chance=29.200000000000003 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"steady","fear":12,"trust":48,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 48","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d14 lure: Boris -> Wei chance=42 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":0,"affinity":27} reasons=["relationship with inviter (+7)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Li -> Aroha chance=60.599999999999994 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"grieving","fear":12,"trust":39,"bond":{"v":-5,"depth":0},"partySize":3} reasons=["trust 39","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d15 lure: Boris -> Wei chance=42 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"grieving","fear":4,"affinity":28} reasons=["relationship with inviter (+7)","grieving mood (-10)"]
+  INVITE-DEC d16 lure: Boris -> Wei chance=52 accept=true veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4,"affinity":28} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d21 lure: Boris -> Metin chance=54 accept=false veto=- inputs={"temp":"dry","goal":"record","mood":"steady","fear":4,"affinity":35} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d22 lure: Boris -> Metin chance=54 accept=true veto=- inputs={"temp":"dry","goal":"record","mood":"hungry","fear":0,"affinity":37} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d23 lure: Boris -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d24 lure: Boris -> Wei chance=53 accept=false veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4,"affinity":30} reasons=["relationship with inviter (+8)"]
+  INVITE-DEC d25 lure: Boris -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d26 lure: Boris -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"cheerful","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d27 lure: Boris -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":0} reasons=["sick — stays by the fire"]
+  INVITE-DEC d30 lure: Gina -> Wei chance=0 accept=false veto=sick inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d31 party: Li -> Brian chance=46.6 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"steady","fear":12,"trust":54,"bond":{"v":7,"depth":0},"partySize":4} reasons=["trust 54","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d31 party: Li -> Boris chance=73 accept=true veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":12,"trust":45,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 45","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d31 lure: Gina -> Wei chance=53 accept=true veto=- inputs={"temp":"gentle","goal":"understand","mood":"steady","fear":4,"affinity":32} reasons=["relationship with inviter (+8)"]
+  INVITE-DEC d54 party: Li -> Brian chance=44.599999999999994 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":47,"trust":49,"bond":{"v":31,"depth":1},"partySize":4} reasons=["trust 49","a real bond (+10)","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d56 party: Li -> Brian chance=55 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grateful","fear":4,"trust":50,"bond":{"v":37,"depth":1},"partySize":4} reasons=["trust 50","a real bond (+10)","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d57 party: Li -> Leo chance=58 accept=false veto=- inputs={"temp":"restless","goal":"heal","mood":"steady","fear":12,"trust":20,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 20","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d58 party: Li -> Brian chance=56.2 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"steady","fear":12,"trust":53,"bond":{"v":39,"depth":1},"partySize":4} reasons=["trust 53","a real bond (+10)","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d60 party: Li -> Leo chance=63.6 accept=true veto=- inputs={"temp":"restless","goal":"heal","mood":"steady","fear":12,"trust":34,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 34","a big party is safer (+5)","restless temperament (+10)"]
+  INVITE-DEC d69 party: Li -> Yuqing chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"joy","mood":"grieving","fear":17,"trust":32,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 32","a big party is safer (+5)","sick (-20)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d69 party: Li -> Brian chance=44.599999999999994 accept=true veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":17,"trust":49,"bond":{"v":55,"depth":2},"partySize":3} reasons=["trust 49","a real bond (+10)","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d70 party: Li -> Yuqing chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"joy","mood":"grieving","fear":0,"trust":34,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 34","a big party is safer (+5)","sick (-20)","withdrawn temperament (-20)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":23,"v":40,"depth":2},{"day":24,"v":42,"depth":2},{"day":25,"v":46,"depth":2},{"day":26,"v":48,"depth":2},{"day":27,"v":52,"depth":3},{"day":28,"v":54,"depth":3},{"day":29,"v":58,"depth":3},{"day":30,"v":62,"depth":3},{"day":31,"v":64,"depth":3},{"day":32,"v":66,"depth":3},{"day":33,"v":70,"depth":3},{"day":34,"v":72,"depth":3},{"day":35,"v":76,"depth":3},{"day":36,"v":80,"depth":3}] class=rise
+GOSSIP: totalPicks=99 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=25 31-60=29 61-90=11 91-120=0 121+=0 naturalPicks=65 seededPicks=4 gossipPicks=99
+SEEDED: {"pair":{"a":"gen_d2e5sig","b":"gen_xfuhxlc","aName":"Metin","bName":"Gina"},"day":22,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":23,"v":40,"depth":2},{"day":24,"v":42,"depth":2},{"day":25,"v":46,"depth":2},{"day":26,"v":48,"depth":2},{"day":27,"v":52,"depth":3},{"day":28,"v":54,"depth":3},{"day":29,"v":58,"depth":3},{"day":30,"v":62,"depth":3},{"day":31,"v":64,"depth":3},{"day":32,"v":66,"depth":3},{"day":33,"v":70,"depth":3},{"day":34,"v":72,"depth":3},{"day":35,"v":76,"depth":3},{"day":36,"v":80,"depth":3}],"crackTraceClass":"rise","vAt7":46,"depthAt7":2,"vDrop":4,"depthDrop":0,"crack7":false,"firstServe":null,"serveWithin30":false,"serves":0,"servesAll":[],"effect":false}
+  FRIEND d35: Arjun <> Gina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Austin <> Gina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Metin <> Gina — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d30: Wei <> Gina — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d25: Aroha <> Gina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Gina <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Boris <> Gina — maxDepth 3, final 3 (v=100), dropped 0
+  VCRACK d16: Wei vs Metin (ambushed) v 16 -> 4 (depth 0 -> 0)
+  CLOSE-READ d16: Aroha about Gina — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d17: Austin about Gina — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d18: Gina about Metin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Boris about Gina — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Arjun about Gina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Gina about Metin — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Arjun about Gina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Giulia about Gina — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Aroha about Gina — live depth=2 ledger depth=1 class=TP late=false inGroup=true speakerHasDeep2=true
+  CLOSE-READ d26: Austin about Gina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Gina about Metin — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Arjun about Gina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Gina about Metin — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Arjun about Gina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Giulia about Gina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Boris about Gina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Boris about Gina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Austin about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Austin about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Gina about Austin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Arjun about Gina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Gina about Austin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Gina about Austin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Gina about Austin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Gina about Austin — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Aroha about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Giulia about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Boris about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Arjun about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Boris about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Aroha about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Aroha about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Arjun about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Gina about Aroha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Aroha about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Boris about Gina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Gina about Arjun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Boris about Aroha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d68: Aroha about Boris — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  STATE-VCRACK d17 (betrayal): Wei vs Metin (ambushed) v 16 -> 4 (depth 0 -> 0)
+  GRIEV-READ d9: Wei about Metin (why=grievance)
+  GRIEV-READ d15: Metin about Wei (why=grievance)
+  GRIEV-READ d26: Metin about Wei (why=grievance)
+  GRIEV-READ d27: Metin about Wei (why=grievance)
+  GRIEV-READ d30: Metin about Wei (why=grievance)
+  GRIEV-READ d36: Metin about Wei (why=grievance)
+  KNACK d12 Aroha: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Wei touch it."
+  KNACK d18 Wei: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Giulia touch it. Seen worse."
+  KNACK d29 Wei: "cuts close faster when Aroha wraps them. Don't ask me how."
+  KNACK d32 Metin: "Good question." "Austin talks to the garden. The garden listens. I've seen it."
+  KNACK d54 Gina: "Huh. Let me think about that." "cuts close faster when Aroha wraps them. Don't ask me how."
+  KNACK d54 Brian: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Yuqing touch it."
+
+deathCauses: {"ambush":1,"a wound that wouldn't close":2,"sickness":4,"monster":1}
