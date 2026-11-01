@@ -131,8 +131,18 @@ if (process.argv.includes('--live')) {
     for (const k of ['WOODCARRY', 'WOODWARM', 'MORNINGCARRY', 'WINDOWCARRY', 'STRANDFIX', 'PRESSB', 'FEDEVENING']) delete env[k];
     const r = spawnSync('node', ['scripts/depositgate-b-driver.js'], { env, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
     if (r.status !== 0) { console.error(r.stderr); throw new Error('driver arm ' + dg + ' exited ' + r.status); }
-    fs.writeFileSync(out, r.stdout);
-    return JSON.parse(r.stdout.trim().split('\n')[0]);
+    // The in-memory parse below is authoritative; the /tmp record copy is
+    // best-effort with EPERM-flap retries (2026-11-01: flap hit this very
+    // write). Never let a record-copy failure fail the contrast itself.
+    const parsed = JSON.parse(r.stdout.trim().split('\n')[0]);
+    for (let attempt = 1; attempt <= 4; attempt++) {
+      try { fs.writeFileSync(out, r.stdout); break; }
+      catch (e) {
+        if (attempt === 4) { console.error('live contrast: /tmp record copy failed after retries (in-memory result still authoritative): ' + e.message); break; }
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, Math.min(10000, 2000 * attempt));
+      }
+    }
+    return parsed;
   };
   const c0 = runArm(0);
   const c1 = runArm(1);

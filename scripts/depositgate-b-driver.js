@@ -161,13 +161,43 @@ async function oneInstance(seed) {
   };
 }
 
+// EPERM-flap rule (2026-11-01, this arm): the host intermittently denies
+// writes (observed: stdout JSON write EPERM after a completed sim, twice
+// in a row, losing the seed's result). A bare process.stdout.write with
+// no callback turns that into an unhandled 'error' event crash. So stdout
+// lines go through writeLineStrict: callback-based, error-event guarded,
+// retried with backoff (up to ~3 min per line). A line is never claimed
+// written on a bare exit code — main() throws (loud, nonzero) if retries
+// exhaust, so the caller retries that seed.
+process.stdout.on('error', () => { /* guarded: callback below reports it */ });
+function sleepMs(ms) { return new Promise((r) => setTimeout(r, ms)); }
+async function writeLineStrict(line) {
+  for (let attempt = 1; attempt <= 12; attempt++) {
+    const ok = await new Promise((resolve) => {
+      let settled = false;
+      const done = (v) => { if (!settled) { settled = true; resolve(v); } };
+      const timer = setTimeout(() => done(false), 30000);
+      try {
+        process.stdout.write(line, (err) => { clearTimeout(timer); done(!err); });
+      } catch (e) { clearTimeout(timer); done(false); }
+    });
+    if (ok) return;
+    const wait = Math.min(30000, 2000 * attempt);
+    try { console.error('depositgate stdout write failed, retry ' + attempt + ' in ' + wait + 'ms'); } catch (e) {}
+    await sleepMs(wait);
+  }
+  throw new Error('depositgate stdout write failed after 12 retries');
+}
+
 async function main() {
   for (const seed of SEEDS) {
     const inst = await oneInstance(seed);
-    process.stdout.write(JSON.stringify(inst) + '\n');
-    console.error('depositgate arm=' + ARM + ' seed=' + seed + ' end=' + inst.endReason +
-      ' daysAlive=' + inst.daysAlive + ' rows=' + inst.rows.length +
-      ' holdbacks=' + inst.holdbacks.length + ' intakes=' + inst.intakes.length + ' stdout');
+    await writeLineStrict(JSON.stringify(inst) + '\n');
+    try {
+      console.error('depositgate arm=' + ARM + ' seed=' + seed + ' end=' + inst.endReason +
+        ' daysAlive=' + inst.daysAlive + ' rows=' + inst.rows.length +
+        ' holdbacks=' + inst.holdbacks.length + ' intakes=' + inst.intakes.length + ' stdout');
+    } catch (e) {}
   }
   console.error('wrote ' + SEEDS.length + ' depositgate JSON lines to stdout');
 }
