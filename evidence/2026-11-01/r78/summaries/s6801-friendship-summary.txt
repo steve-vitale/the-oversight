@@ -1,0 +1,414 @@
+# SURFACE+SEEDED — seed 6801 (142d, 7 alive)
+
+npcPairs=66 deep2=29 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=286 closeReadsServed=41 grievanceServes=56 othersSteered=26
+COND-TP: firstDeep2Day=25 lateClose=190 lateTP=172 lateNull=0 condRate=90.5% pooledTP=173/204 pooledRate=84.8% grievReadsByWhy={"grievance":7,"vgrievance":61}
+FUNNEL (natural): convos=414 subject=413 offered=362 picked=260 classes={"picked-others":260,"subject-no-offer":51,"offered-not-picked":102,"no-subject-no-ans":1}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=51 rate=12.3% offered=362 mainOffered=4 subjectOffered=358 picked=260 latePicks=114 latePicksMain=0 latePicksSubject=114
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Elena / Kuanysh — "that stray dog — the one that bit two people — lets Yara touch it."
+  KNACK-CIRCULATION: Bridget / Emma — "Elena talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Elena / Tom — "cuts close faster when David wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Yara / Tom — "that stray dog — the one that bit two people — lets Ingo touch it."
+REOFFER: offers=367 picks=275 latePicks=114 missedChangedNotOffered=3
+WRAPSERVE: convos=68 matcherHits=56 matcherServes=56 classes={"grievance-line":56,"deflection":3,"other":9}
+FUNNEL-PROBE (subject-no-offer turns): turns=250 menuProblem=215 pickProblem=35
+INVITE (wrap, carried from r63): lure={"n":12,"accepts":4,"acceptRate":0.3333333333333333,"vetoes":{},"chanceMin":5,"chanceMax":60,"chanceMean":37.1} party={"n":12,"accepts":7,"acceptRate":0.5833333333333334,"vetoes":{},"chanceMin":5,"chanceMax":91.80000000000001,"chanceMean":59.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":55,"forageOffers":26,"otherFavorOffers":29,"accepts":25,"acceptAttempts":25,"waits":24,"starts":22,"startBlocked":12,"forages":21,"forageNodeBarren":14,"forageBarren":4,"forageBarrenTravel":0,"forageBarrenNode":4,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":7,"retryAssigned":7,"retryStarts":7,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":21,"delivers":20,"deliverBlocked":0,"completeOutings":6,"completeOutingsEvents":20,"keptMatched":6,"keptMatchedStrict":6}
+CASE (r78): snaps=15 betrayalOfferConvos=148 mootOffers=16 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d9: case_2 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d10: case_2 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=false
+  CASE-SNAP d11: case_2 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=false
+  CASE-SNAP d11: case_4 status=open charge=ambush accused=Tom/Kuanysh/David target=Elena role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_4 status=open charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=false
+  CASE-SNAP d14: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_4 status=open charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=open charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_6 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d16: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_6 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d17: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_6 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=false
+  CASE-SNAP d18: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_6 status=open charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_6 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_6 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d22: case_8 status=open charge=ambush accused=Elena/Yara/Stanley target=Tom role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d23: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_6 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_8 status=open charge=ambush accused=Elena/Yara/Stanley target=Tom role=juror known=true mootIn=null trial=false
+  CASE-SNAP d25: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_6 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_8 status=acquitted charge=ambush accused=Elena/Yara/Stanley target=Tom role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_2 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_4 status=acquitted charge=ambush accused=Tom/Kuanysh/David target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_6 status=acquitted charge=ambush accused=Tom/David/Kuanysh target=Elena role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_8 status=acquitted charge=ambush accused=Elena/Yara/Stanley target=Tom role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"david_kim","vidName":"David","favorId":"favor-david_kim-87-31","state":"thanked","promisedDay":87,"meetDay":88,"deadline":89,"promiseKept":true,"startedDay":88,"forageCount":1,"playerKcal":200,"partnerKcal":210,"deliveredKcal":410,"returnedDay":88,"talkCount":1},{"vid":"gen_7motqau","vidName":"Bridget","favorId":"favor-gen_7motqau-59-17","state":"thanked","promisedDay":59,"meetDay":60,"deadline":61,"promiseKept":true,"startedDay":60,"forageCount":1,"playerKcal":175,"partnerKcal":175,"deliveredKcal":350,"returnedDay":60,"talkCount":1},{"vid":"yara_haddad","vidName":"Yara","favorId":"favor-yara_haddad-122-48","state":"moot","promisedDay":122,"meetDay":123,"deadline":124,"promiseKept":"released","startedDay":123,"forageCount":1,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"emma_larsen","vidName":"Emma","favorId":"favor-emma_larsen-102-42","state":"thanked","promisedDay":103,"meetDay":104,"deadline":104,"promiseKept":true,"startedDay":104,"forageCount":1,"playerKcal":125,"partnerKcal":150,"deliveredKcal":275,"returnedDay":104,"talkCount":1},{"vid":"gen_n6vodhm","vidName":"Stanley","favorId":"favor-gen_n6vodhm-40-10","state":"thanked","promisedDay":40,"meetDay":41,"deadline":42,"promiseKept":true,"startedDay":42,"forageCount":1,"playerKcal":50,"partnerKcal":50,"deliveredKcal":100,"returnedDay":42,"talkCount":1},{"vid":"tom_baker","vidName":"Tom","favorId":"favor-tom_baker-141-55","state":"promised","promisedDay":141,"meetDay":142,"deadline":143,"promiseKept":false,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"elena_petrova","vidName":"Elena","favorId":"favor-elena_petrova-84-29","state":"thanked","promisedDay":84,"meetDay":85,"deadline":86,"promiseKept":true,"startedDay":85,"forageCount":3,"playerKcal":270,"partnerKcal":290,"deliveredKcal":290,"returnedDay":85,"talkCount":1},{"vid":"gen_5grsbk7","vidName":"Ingo","favorId":"favor-gen_5grsbk7-134-52","state":"thanked","promisedDay":134,"meetDay":135,"deadline":136,"promiseKept":true,"startedDay":135,"forageCount":1,"playerKcal":100,"partnerKcal":100,"deliveredKcal":200,"returnedDay":135,"talkCount":1}]
+  FAVOR-OFFER d5: Bridget kind=food_share favorId=favor-gen_7motqau-2-2 task=share food with Bridget — they're going hungry
+  FAVOR-OFFER d7: David kind=sick_help favorId=favor-david_kim-2-1 task=help David with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d8: David kind=forage_help favorId=favor-david_kim-8-3 task=forage with David tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Yara kind=forage_help favorId=favor-yara_haddad-9-4 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Emma kind=heal_help favorId=favor-emma_larsen-19-5 task=help Emma with their injury
+  FAVOR-OFFER d27: Stanley kind=forage_help favorId=favor-gen_n6vodhm-27-6 task=forage with Stanley tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Bridget kind=food_share favorId=favor-gen_7motqau-35-8 task=share food with Bridget — they're going hungry
+  FAVOR-OFFER d38: Stanley kind=heal_help favorId=favor-gen_n6vodhm-38-9 task=help Stanley with their injury
+  FAVOR-OFFER d38: Yara kind=forage_help favorId=favor-yara_haddad-32-7 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d40: Stanley kind=forage_help favorId=favor-gen_n6vodhm-40-10 task=forage with Stanley tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Yara kind=forage_help favorId=favor-yara_haddad-46-11 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d51: Emma kind=forage_help favorId=favor-emma_larsen-51-12 task=forage with Emma tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Tom kind=heal_help favorId=favor-tom_baker-52-13 task=help Tom with their injury
+  FAVOR-OFFER d53: Yara kind=forage_help favorId=favor-yara_haddad-53-14 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d56: Elena kind=forage_help favorId=favor-elena_petrova-56-16 task=forage with Elena tomorrow to rebuild the pantry
+  FAVOR-OFFER d56: Yara kind=heal_help favorId=favor-yara_haddad-56-15 task=help Yara with their injury
+  FAVOR-OFFER d59: Bridget kind=forage_help favorId=favor-gen_7motqau-59-17 task=forage with Bridget tomorrow to rebuild the pantry
+  FAVOR-OFFER d60: Tom kind=forage_help favorId=favor-tom_baker-60-18 task=forage with Tom tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: David kind=food_share favorId=favor-david_kim-62-19 task=share food with David — they're past hungry
+  FAVOR-OFFER d64: Mara kind=heal_help favorId=favor-mara_vasquez-64-20 task=help Mara with their injury
+  FAVOR-OFFER d65: Ingo kind=sick_help favorId=favor-gen_5grsbk7-65-21 task=help Ingo with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d65: Yara kind=sick_help favorId=favor-yara_haddad-65-22 task=help Yara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d69: Elena kind=heal_help favorId=favor-elena_petrova-69-23 task=help Elena with their injury
+  FAVOR-OFFER d70: David kind=heal_help favorId=favor-david_kim-70-25 task=help David with their injury
+  FAVOR-OFFER d72: Mara kind=forage_help favorId=favor-mara_vasquez-70-24 task=forage with Mara tomorrow to rebuild the pantry
+  FAVOR-OFFER d75: Ingo kind=food_share favorId=favor-gen_5grsbk7-75-26 task=share food with Ingo — they're going hungry
+  FAVOR-OFFER d78: Yara kind=food_share favorId=favor-yara_haddad-78-27 task=share food with Yara — they're going hungry
+  FAVOR-OFFER d79: Emma kind=forage_help favorId=favor-emma_larsen-79-28 task=forage with Emma tomorrow to rebuild the pantry
+  FAVOR-OFFER d84: Elena kind=forage_help favorId=favor-elena_petrova-84-29 task=forage with Elena tomorrow to rebuild the pantry
+  FAVOR-OFFER d86: Mara kind=heal_help favorId=favor-mara_vasquez-86-30 task=help Mara with their injury
+  FAVOR-OFFER d87: David kind=forage_help favorId=favor-david_kim-87-31 task=forage with David tomorrow to rebuild the pantry
+  FAVOR-OFFER d88: Heidi kind=food_share favorId=favor-gen_3kp2a3o-88-32 task=share food with Heidi — they're past hungry
+  FAVOR-OFFER d88: Yara kind=food_share favorId=favor-yara_haddad-88-33 task=share food with Yara — they're running on empty
+  FAVOR-OFFER d91: Yara kind=forage_help favorId=favor-yara_haddad-91-34 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Yara kind=forage_help favorId=favor-yara_haddad-92-35 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d93: Kuanysh kind=food_share favorId=favor-gen_ayuq9b3-93-36 task=share food with Kuanysh — they're going hungry
+  FAVOR-OFFER d96: Yara kind=forage_help favorId=favor-yara_haddad-96-37 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Heidi kind=forage_help favorId=favor-gen_3kp2a3o-98-39 task=forage with Heidi tomorrow to rebuild the pantry
+  FAVOR-OFFER d99: Yara kind=food_share favorId=favor-yara_haddad-99-40 task=share food with Yara — they're running on empty
+  FAVOR-OFFER d99: Kuanysh kind=food_share favorId=favor-gen_ayuq9b3-99-41 task=share food with Kuanysh — they're going hungry
+  FAVOR-OFFER d100: Tom kind=heal_help favorId=favor-tom_baker-98-38 task=help Tom with their injury
+  FAVOR-OFFER d103: Kuanysh kind=sick_help favorId=favor-gen_ayuq9b3-103-43 task=help Kuanysh with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d103: Emma kind=forage_help favorId=favor-emma_larsen-102-42 task=forage with Emma tomorrow to rebuild the pantry
+  FAVOR-OFFER d104: Heidi kind=forage_help favorId=favor-gen_3kp2a3o-104-44 task=forage with Heidi tomorrow to rebuild the pantry
+  FAVOR-OFFER d104: Heidi kind=forage_help favorId=favor-gen_3kp2a3o-104-45 task=forage with Heidi tomorrow to rebuild the pantry
+  FAVOR-OFFER d119: Yara kind=forage_help favorId=favor-yara_haddad-119-46 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d122: Yara kind=forage_help favorId=favor-yara_haddad-122-48 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d122: Heidi kind=heal_help favorId=favor-gen_3kp2a3o-122-47 task=help Heidi with their injury
+  FAVOR-OFFER d126: Heidi kind=food_share favorId=favor-gen_3kp2a3o-126-49 task=share food with Heidi — they're going hungry
+  FAVOR-OFFER d128: Ingo kind=food_share favorId=favor-gen_5grsbk7-128-50 task=share food with Ingo — they're going hungry
+  FAVOR-OFFER d129: Heidi kind=heal_help favorId=favor-gen_3kp2a3o-129-51 task=help Heidi with their injury
+  FAVOR-OFFER d134: Ingo kind=forage_help favorId=favor-gen_5grsbk7-134-52 task=forage with Ingo tomorrow to rebuild the pantry
+  FAVOR-OFFER d135: Heidi kind=food_share favorId=favor-gen_3kp2a3o-135-53 task=share food with Heidi — they're past hungry
+  FAVOR-OFFER d135: Kuanysh kind=food_share favorId=favor-gen_ayuq9b3-135-54 task=share food with Kuanysh — they're past hungry
+  FAVOR-OFFER d141: Tom kind=forage_help favorId=favor-tom_baker-141-55 task=forage with Tom tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d8: David favorId=favor-david_kim-8-3 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d9: Yara favorId=favor-yara_haddad-9-4 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d27: Stanley favorId=favor-gen_n6vodhm-27-6 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d38: Yara favorId=favor-yara_haddad-32-7 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d40: Stanley favorId=favor-gen_n6vodhm-40-10 accepted=true state=promised meetDay=41
+  FAVOR-ACCEPT d46: Yara favorId=favor-yara_haddad-46-11 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d51: Emma favorId=favor-emma_larsen-51-12 accepted=true state=promised meetDay=52
+  FAVOR-ACCEPT d53: Yara favorId=favor-yara_haddad-53-14 accepted=true state=promised meetDay=54
+  FAVOR-ACCEPT d56: Elena favorId=favor-elena_petrova-56-16 accepted=true state=promised meetDay=57
+  FAVOR-ACCEPT d59: Bridget favorId=favor-gen_7motqau-59-17 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d60: Tom favorId=favor-tom_baker-60-18 accepted=true state=promised meetDay=61
+  FAVOR-ACCEPT d72: Mara favorId=favor-mara_vasquez-70-24 accepted=true state=promised meetDay=73
+  FAVOR-ACCEPT d79: Emma favorId=favor-emma_larsen-79-28 accepted=true state=promised meetDay=80
+  FAVOR-ACCEPT d84: Elena favorId=favor-elena_petrova-84-29 accepted=true state=promised meetDay=85
+  FAVOR-ACCEPT d87: David favorId=favor-david_kim-87-31 accepted=true state=promised meetDay=88
+  FAVOR-ACCEPT d91: Yara favorId=favor-yara_haddad-91-34 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d92: Yara favorId=favor-yara_haddad-92-35 accepted=true state=promised meetDay=93
+  FAVOR-ACCEPT d96: Yara favorId=favor-yara_haddad-96-37 accepted=true state=promised meetDay=97
+  FAVOR-ACCEPT d98: Heidi favorId=favor-gen_3kp2a3o-98-39 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d103: Emma favorId=favor-emma_larsen-102-42 accepted=true state=promised meetDay=104
+  FAVOR-ACCEPT d104: Heidi favorId=favor-gen_3kp2a3o-104-45 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d119: Yara favorId=favor-yara_haddad-119-46 accepted=true state=promised meetDay=120
+  FAVOR-ACCEPT d122: Yara favorId=favor-yara_haddad-122-48 accepted=true state=promised meetDay=123
+  FAVOR-ACCEPT d134: Ingo favorId=favor-gen_5grsbk7-134-52 accepted=true state=promised meetDay=135
+  FAVOR-ACCEPT d141: Tom favorId=favor-tom_baker-141-55 accepted=true state=promised meetDay=142
+  INVITE-DEC d7 lure: Kuanysh -> Elena chance=60 accept=false veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":0,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d8 party: Duc -> Heidi chance=51 accept=false veto=- inputs={"temp":"stoic","goal":"remember","mood":"steady","fear":12,"trust":40,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 40"]
+  INVITE-DEC d8 lure: Kuanysh -> Elena chance=60 accept=true veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":4,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d9 party: Duc -> Yara chance=40.6 accept=true veto=- inputs={"temp":"cautious","goal":"remember","mood":"steady","fear":12,"trust":39,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 39","cautious temperament (-10)"]
+  INVITE-DEC d9 party: Duc -> Emma chance=64.8 accept=true veto=- inputs={"temp":"warm","goal":"understand","mood":"steady","fear":12,"trust":37,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 37","warm temperament (+15)"]
+  INVITE-DEC d9 lure: Kuanysh -> Elena chance=60 accept=false veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":4,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d10 lure: Kuanysh -> Elena chance=60 accept=true veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":4,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d12 lure: Kuanysh -> Elena chance=60 accept=false veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":0,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d13 lure: Kuanysh -> Elena chance=60 accept=false veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":4,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d14 lure: Kuanysh -> Elena chance=60 accept=true veto=- inputs={"temp":"warm","goal":"home","mood":"steady","fear":0,"affinity":1} reasons=["warm temperament (+15)"]
+  INVITE-DEC d15 party: Duc -> Tom chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":12,"trust":49,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 49","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)"]
+  INVITE-DEC d15 party: Duc -> Tom chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":12,"trust":49,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 49","a big party is safer (+5)","withdrawn temperament (-20)","wants to be alone (-40)"]
+  INVITE-DEC d17 party: Duc -> Ingo chance=62.400000000000006 accept=true veto=- inputs={"temp":"sardonic","goal":"joy","mood":"steady","fear":4,"trust":56,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 56","a big party is safer (+5)"]
+  INVITE-DEC d17 lure: Yara -> Tom chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)","wants to be alone (-25)"]
+  INVITE-DEC d18 lure: Yara -> Tom chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)","wants to be alone (-25)"]
+  INVITE-DEC d19 lure: Yara -> Tom chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)","wants to be alone (-25)"]
+  INVITE-DEC d20 lure: Yara -> Tom chance=5 accept=false veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"hungry","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)","wants to be alone (-25)"]
+  INVITE-DEC d21 lure: Yara -> Tom chance=5 accept=true veto=- inputs={"temp":"withdrawn","goal":"alone","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)","wants to be alone (-25)"]
+  INVITE-DEC d31 party: Duc -> Heidi chance=76 accept=true veto=- inputs={"temp":"stoic","goal":"remember","mood":"steady","fear":12,"trust":90,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)"]
+  INVITE-DEC d74 party: Bridget -> Stanley chance=89.80000000000001 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"grieving","fear":5,"trust":87,"bond":{"v":62,"depth":2},"partySize":4} reasons=["trust 87","a real bond (+10)","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d75 party: Bridget -> David chance=63.2 accept=false veto=- inputs={"temp":"cautious","goal":"prove","mood":"grieving","fear":29,"trust":83,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d75 party: Bridget -> Elena chance=87.80000000000001 accept=false veto=- inputs={"temp":"warm","goal":"home","mood":"grieving","fear":29,"trust":82,"bond":{"v":88,"depth":3},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d76 party: Bridget -> Kuanysh chance=76 accept=true veto=- inputs={"temp":"anxious","goal":"understand","mood":"grieving","fear":12,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d125 party: Yara -> Elena chance=91.80000000000001 accept=true veto=- inputs={"temp":"warm","goal":"home","mood":"grieving","fear":0,"trust":92,"bond":{"v":52,"depth":2},"partySize":4} reasons=["trust 92","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":24,"v":44,"depth":3},{"day":25,"v":48,"depth":3},{"day":26,"v":52,"depth":3},{"day":27,"v":52,"depth":3},{"day":28,"v":52,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":52,"depth":3},{"day":33,"v":56,"depth":3},{"day":34,"v":60,"depth":3},{"day":35,"v":60,"depth":3},{"day":36,"v":60,"depth":3},{"day":37,"v":64,"depth":3}] class=no-drop
+GOSSIP: totalPicks=262 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=45 31-60=51 61-90=50 91-120=59 121+=55 naturalPicks=260 seededPicks=26 gossipPicks=262
+SEEDED: {"pair":{"a":"gen_3kp2a3o","b":"gen_7motqau","aName":"Heidi","bName":"Bridget"},"day":23,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":24,"v":44,"depth":3},{"day":25,"v":48,"depth":3},{"day":26,"v":52,"depth":3},{"day":27,"v":52,"depth":3},{"day":28,"v":52,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":52,"depth":3},{"day":31,"v":52,"depth":3},{"day":32,"v":52,"depth":3},{"day":33,"v":56,"depth":3},{"day":34,"v":60,"depth":3},{"day":35,"v":60,"depth":3},{"day":36,"v":60,"depth":3},{"day":37,"v":64,"depth":3}],"crackTraceClass":"no-drop","vAt7":52,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":24,"why":"vgrievance"},"serveWithin30":true,"serves":40,"servesAll":[{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":72,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Heidi <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Bridget <> Stanley — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d25: Bridget <> Kuanysh — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Ingo <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: David <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: David <> Ingo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Ingo <> Tom — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d40: Bridget <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Elena <> Kuanysh — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d40: Bridget <> Yara — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d50: Emma <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Heidi <> Kuanysh — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Kuanysh <> Tom — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d125: Bridget <> Mara — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d85: David <> Kuanysh — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Heidi <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: David <> Emma — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d80: Ingo <> Kuanysh — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: David <> Heidi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Elena <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Elena <> Heidi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Heidi <> Stanley — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d60: Heidi <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: David <> Tom — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d55: Heidi <> Ingo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Emma <> Ingo — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d85: Emma <> Heidi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: David <> Elena — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d75: Heidi <> Duc — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d11: Bridget about Heidi — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d13: Kuanysh about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d14: Kuanysh about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d14: Bridget about Heidi — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Bridget about Heidi — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Emma about Bridget — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Heidi about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Heidi about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Emma about Bridget — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Ingo about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Stanley about Heidi — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Bridget about Heidi — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Bridget about Heidi — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d24: Emma about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Yara about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Kuanysh about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: David about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Emma about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: David about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Emma about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: David about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Yara about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Stanley about Heidi — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Kuanysh about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Emma about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Kuanysh about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: David about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Ingo about Bridget — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Yara about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Emma about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Yara about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: David about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Bridget about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Yara about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Tom about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Ingo about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: David about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Yara about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Mara about Bridget — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Ingo about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Tom about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Emma about Bridget — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Kuanysh about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Emma about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Emma about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Tom about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Yara about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Tom about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Yara about Bridget — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: David about Bridget — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Tom about Bridget — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Kuanysh about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Emma about Bridget — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Stanley about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Emma about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: David about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Kuanysh about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Stanley about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Yara about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Kuanysh about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Ingo about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Yara about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Yara about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Ingo about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Bridget about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Yara about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Emma about Bridget — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Mara about Bridget — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d74: Emma about David — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Stanley about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Mara about Heidi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d77: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Yara about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Emma about Heidi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: David about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Yara about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Emma about Heidi — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: David about Heidi — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Mara about Heidi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: David about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Yara about Heidi — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Emma about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Yara about Heidi — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: David about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Emma about Heidi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Ingo about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: David about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Tom about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Tom about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Ingo about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d121: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d122: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Tom about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Yara about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Ingo about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: David about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ingo about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: David about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: David about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ingo about David — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: David about Ingo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: David about Ingo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Emma about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Ingo about David — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Ingo about David — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Kuanysh about Heidi — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Heidi about Kuanysh — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: David about Ingo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d4: Tom about A woman, maybe 40s, with a shaved head (why=grievance)
+  GRIEV-READ d7: Elena about Tom (why=grievance)
+  GRIEV-READ d15: Tom about Elena (why=grievance)
+  GRIEV-READ d16: Tom about Elena (why=grievance)
+  GRIEV-READ d21: Tom about Elena (why=grievance)
+  GRIEV-READ d23: Tom about Elena (why=grievance)
+  KNACK d16 Stanley: "Good question." "Emma talks to the garden. The garden listens. I've seen it."
+  KNACK d24 Kuanysh: "You want to know about that? Okay." "Emma talks to the garden. The garden listens. I've seen it."
+  KNACK d32 Mara: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Tom touch it."
+  KNACK d33 Elena: "Hah. Mara talks to the garden. The garden listens. I've seen it."
+  KNACK d36 Elena: "that stray dog — the one that bit two people — lets Yara touch it."
+  KNACK d38 Yara: "Kuanysh talks to the garden. The garden listens. I've seen it."
+  KNACK d47 Mara: "You want to know about that? Okay." "Kuanysh talks to the garden. The garden listens. I've seen it."
+  KNACK d50 David: "Heidi talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"a stranger":1,"monster":2,"the wild":1}

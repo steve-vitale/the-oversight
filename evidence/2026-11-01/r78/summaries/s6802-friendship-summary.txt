@@ -1,0 +1,423 @@
+# SURFACE+SEEDED — seed 6802 (141d, 7 alive)
+
+npcPairs=52 deep2=19 cracks=0 vCracks=0 friendGriev=1 stateGriev=2 stateFriend=1 stateVCrack=0 t2picks=281 closeReadsServed=21 grievanceServes=10 othersSteered=8
+COND-TP: firstDeep2Day=25 lateClose=242 lateTP=214 lateNull=0 condRate=88.4% pooledTP=214/251 pooledRate=85.3% grievReadsByWhy={"grievance":5,"vgrievance":9}
+FUNNEL (natural): convos=414 subject=414 offered=380 picked=273 classes={"subject-no-offer":34,"offered-not-picked":107,"picked-others":273}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=34 rate=8.2% offered=380 mainOffered=6 subjectOffered=376 picked=273 latePicks=106 latePicksMain=0 latePicksSubject=106
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=4
+  KNACK-CIRCULATION: Reuben / Bessie / Raj — "Maya ate something last month that should've killed them. They're fine."
+  KNACK-CIRCULATION: Maya / Vera — "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK-CIRCULATION: Bessie / Raj — "Reuben sees in the dark. Not well — but better than you. Better than me."
+  KNACK-CIRCULATION: Bessie / Vera — "that stray dog — the one that bit two people — lets Pavel touch it."
+REOFFER: offers=383 picks=270 latePicks=106 missedChangedNotOffered=0
+WRAPSERVE: convos=14 matcherHits=10 matcherServes=10 classes={"grievance-line":10,"deflection":2,"other":2}
+FUNNEL-PROBE (subject-no-offer turns): turns=159 menuProblem=136 pickProblem=23
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":0,"acceptRate":0,"vetoes":{},"chanceMin":32,"chanceMax":32,"chanceMean":32} party={"n":11,"accepts":7,"acceptRate":0.6363636363636364,"vetoes":{},"chanceMin":28.799999999999997,"chanceMax":88.6,"chanceMean":52.9} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=3
+FAVOR (r65): funnel={"offers":61,"forageOffers":36,"otherFavorOffers":25,"accepts":36,"acceptAttempts":36,"waits":38,"starts":36,"startBlocked":10,"forages":36,"forageNodeBarren":13,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":7,"retryAssigned":7,"retryStarts":6,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":36,"delivers":36,"deliverBlocked":0,"completeOutings":5,"completeOutingsEvents":36,"keptMatched":4,"keptMatchedStrict":4}
+CASE (r78): snaps=2 betrayalOfferConvos=105 mootOffers=0 mootProbePicks=[] mootsConvened=0
+OUTING END STATES: [{"vid":"nathan_lee","vidName":"Nathan","favorId":"favor-nathan_lee-124-56","state":"thanked","promisedDay":124,"meetDay":125,"deadline":126,"promiseKept":true,"startedDay":125,"forageCount":1,"playerKcal":260,"partnerKcal":325,"deliveredKcal":585,"returnedDay":125,"talkCount":1},{"vid":"grace_obi","vidName":"Grace","favorId":"favor-grace_obi-120-54","state":"thanked","promisedDay":120,"meetDay":121,"deadline":122,"promiseKept":true,"startedDay":121,"forageCount":1,"playerKcal":325,"partnerKcal":390,"deliveredKcal":715,"returnedDay":121,"talkCount":1},{"vid":"raj_patel","vidName":"Raj","favorId":"favor-raj_patel-136-59","state":"broken","promisedDay":136,"meetDay":137,"deadline":138,"promiseKept":"broken","startedDay":137,"forageCount":3,"playerKcal":240,"partnerKcal":320,"deliveredKcal":560,"returnedDay":139,"talkCount":1},{"vid":"gen_f3m27hm","vidName":"Bessie","favorId":"favor-gen_f3m27hm-130-57","state":"thanked","promisedDay":130,"meetDay":131,"deadline":132,"promiseKept":true,"startedDay":131,"forageCount":1,"playerKcal":90,"partnerKcal":120,"deliveredKcal":210,"returnedDay":131,"talkCount":1},{"vid":"pavel_dubinin","vidName":"Pavel","favorId":"favor-pavel_dubinin-100-42","state":"fulfilled","promisedDay":100,"meetDay":101,"deadline":102,"promiseKept":true,"startedDay":101,"forageCount":1,"playerKcal":195,"partnerKcal":260,"deliveredKcal":455,"returnedDay":102,"talkCount":1}]
+  FAVOR-OFFER d6: Nathan kind=forage_help favorId=favor-nathan_lee-6-1 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Grace kind=forage_help favorId=favor-grace_obi-10-2 task=forage with Grace tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Maya kind=forage_help favorId=favor-maya_singh-16-3 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d26: Raj kind=sick_help favorId=favor-raj_patel-26-4 task=help Raj with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d29: Raj kind=forage_help favorId=favor-raj_patel-29-5 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d32: Bessie kind=forage_help favorId=favor-gen_f3m27hm-32-6 task=forage with Bessie tomorrow to rebuild the pantry
+  FAVOR-OFFER d33: Raj kind=food_share favorId=favor-raj_patel-33-7 task=share food with Raj — they're running on empty
+  FAVOR-OFFER d36: Pavel kind=forage_help favorId=favor-pavel_dubinin-36-8 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Nathan kind=food_share favorId=favor-nathan_lee-37-9 task=share food with Nathan — they're going hungry
+  FAVOR-OFFER d39: Raj kind=forage_help favorId=favor-raj_patel-38-10 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d40: Maya kind=food_share favorId=favor-maya_singh-40-11 task=share food with Maya — they're running on empty
+  FAVOR-OFFER d42: Maya kind=forage_help favorId=favor-maya_singh-42-12 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d42: Reuben kind=forage_help favorId=favor-gen_d6kicu0-42-13 task=forage with Reuben tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Vera kind=food_share favorId=favor-gen_lmn7b6h-44-14 task=share food with Vera — they're running on empty
+  FAVOR-OFFER d44: Scarlett kind=food_share favorId=favor-gen_urzkpjg-44-15 task=share food with Scarlett — they're going hungry
+  FAVOR-OFFER d44: Pavel kind=food_share favorId=favor-pavel_dubinin-44-16 task=share food with Pavel — they're past hungry
+  FAVOR-OFFER d46: Nathan kind=forage_help favorId=favor-nathan_lee-46-17 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d47: Pavel kind=forage_help favorId=favor-pavel_dubinin-47-18 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d49: Raj kind=forage_help favorId=favor-raj_patel-49-19 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Maya kind=forage_help favorId=favor-maya_singh-57-21 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d58: Nathan kind=food_share favorId=favor-nathan_lee-58-22 task=share food with Nathan — they're going hungry
+  FAVOR-OFFER d58: Reuben kind=heal_help favorId=favor-gen_d6kicu0-55-20 task=help Reuben with their injury
+  FAVOR-OFFER d61: Raj kind=forage_help favorId=favor-raj_patel-61-23 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Maya kind=forage_help favorId=favor-maya_singh-65-24 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d67: Grace kind=forage_help favorId=favor-grace_obi-67-26 task=forage with Grace tomorrow to rebuild the pantry
+  FAVOR-OFFER d68: Pavel kind=forage_help favorId=favor-pavel_dubinin-67-25 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d68: Nathan kind=food_share favorId=favor-nathan_lee-68-27 task=share food with Nathan — they're running on empty
+  FAVOR-OFFER d71: Nathan kind=forage_help favorId=favor-nathan_lee-71-29 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d72: Maya kind=forage_help favorId=favor-maya_singh-72-30 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d76: Reuben kind=heal_help favorId=favor-gen_d6kicu0-71-28 task=help Reuben with their injury
+  FAVOR-OFFER d77: Raj kind=heal_help favorId=favor-raj_patel-77-31 task=help Raj with their injury
+  FAVOR-OFFER d78: Nathan kind=forage_help favorId=favor-nathan_lee-78-32 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d79: Grace kind=food_share favorId=favor-grace_obi-79-33 task=share food with Grace — they're running on empty
+  FAVOR-OFFER d82: Nathan kind=forage_help favorId=favor-nathan_lee-82-34 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d83: Raj kind=forage_help favorId=favor-raj_patel-83-35 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d85: Raj kind=forage_help favorId=favor-raj_patel-85-36 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d91: Maya kind=forage_help favorId=favor-maya_singh-91-37 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Pavel kind=heal_help favorId=favor-pavel_dubinin-92-38 task=help Pavel with their injury
+  FAVOR-OFFER d92: Nathan kind=forage_help favorId=favor-nathan_lee-92-39 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d98: Nathan kind=forage_help favorId=favor-nathan_lee-98-40 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d100: Pavel kind=forage_help favorId=favor-pavel_dubinin-100-42 task=forage with Pavel tomorrow to rebuild the pantry
+  FAVOR-OFFER d101: Raj kind=food_share favorId=favor-raj_patel-101-43 task=share food with Raj — they're going hungry
+  FAVOR-OFFER d103: Grace kind=heal_help favorId=favor-grace_obi-99-41 task=help Grace with their injury
+  FAVOR-OFFER d104: Nathan kind=forage_help favorId=favor-nathan_lee-104-44 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Maya kind=heal_help favorId=favor-maya_singh-106-45 task=help Maya with their injury
+  FAVOR-OFFER d111: Maya kind=forage_help favorId=favor-maya_singh-111-46 task=forage with Maya tomorrow to rebuild the pantry
+  FAVOR-OFFER d112: Grace kind=sick_help favorId=favor-grace_obi-112-47 task=help Grace with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d113: Nathan kind=forage_help favorId=favor-nathan_lee-113-48 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d114: Bessie kind=food_share favorId=favor-gen_f3m27hm-114-49 task=share food with Bessie — they're running on empty
+  FAVOR-OFFER d114: Maya kind=food_share favorId=favor-maya_singh-114-50 task=share food with Maya — they're running on empty
+  FAVOR-OFFER d119: Nathan kind=forage_help favorId=favor-nathan_lee-119-52 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d119: Maya kind=heal_help favorId=favor-maya_singh-119-53 task=help Maya with their injury
+  FAVOR-OFFER d120: Grace kind=forage_help favorId=favor-grace_obi-120-54 task=forage with Grace tomorrow to rebuild the pantry
+  FAVOR-OFFER d120: Vera kind=food_share favorId=favor-gen_lmn7b6h-116-51 task=share food with Vera — they're running on empty
+  FAVOR-OFFER d123: Raj kind=forage_help favorId=favor-raj_patel-123-55 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d124: Nathan kind=forage_help favorId=favor-nathan_lee-124-56 task=forage with Nathan tomorrow to rebuild the pantry
+  FAVOR-OFFER d130: Bessie kind=forage_help favorId=favor-gen_f3m27hm-130-57 task=forage with Bessie tomorrow to rebuild the pantry
+  FAVOR-OFFER d131: Raj kind=food_share favorId=favor-raj_patel-131-58 task=share food with Raj — they're going hungry
+  FAVOR-OFFER d136: Raj kind=forage_help favorId=favor-raj_patel-136-59 task=forage with Raj tomorrow to rebuild the pantry
+  FAVOR-OFFER d138: Reuben kind=heal_help favorId=favor-gen_d6kicu0-138-60 task=help Reuben with their injury
+  FAVOR-OFFER d141: Maya kind=heal_help favorId=favor-maya_singh-141-61 task=help Maya with their injury
+  FAVOR-ACCEPT d6: Nathan favorId=favor-nathan_lee-6-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d10: Grace favorId=favor-grace_obi-10-2 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d16: Maya favorId=favor-maya_singh-16-3 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d29: Raj favorId=favor-raj_patel-29-5 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d32: Bessie favorId=favor-gen_f3m27hm-32-6 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d36: Pavel favorId=favor-pavel_dubinin-36-8 accepted=true state=promised meetDay=37
+  FAVOR-ACCEPT d39: Raj favorId=favor-raj_patel-38-10 accepted=true state=promised meetDay=40
+  FAVOR-ACCEPT d42: Maya favorId=favor-maya_singh-42-12 accepted=true state=promised meetDay=43
+  FAVOR-ACCEPT d42: Reuben favorId=favor-gen_d6kicu0-42-13 accepted=true state=promised meetDay=43
+  FAVOR-ACCEPT d46: Nathan favorId=favor-nathan_lee-46-17 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d47: Pavel favorId=favor-pavel_dubinin-47-18 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d49: Raj favorId=favor-raj_patel-49-19 accepted=true state=promised meetDay=50
+  FAVOR-ACCEPT d57: Maya favorId=favor-maya_singh-57-21 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d61: Raj favorId=favor-raj_patel-61-23 accepted=true state=promised meetDay=62
+  FAVOR-ACCEPT d65: Maya favorId=favor-maya_singh-65-24 accepted=true state=promised meetDay=66
+  FAVOR-ACCEPT d67: Grace favorId=favor-grace_obi-67-26 accepted=true state=promised meetDay=68
+  FAVOR-ACCEPT d68: Pavel favorId=favor-pavel_dubinin-67-25 accepted=true state=promised meetDay=69
+  FAVOR-ACCEPT d71: Nathan favorId=favor-nathan_lee-71-29 accepted=true state=promised meetDay=72
+  FAVOR-ACCEPT d72: Maya favorId=favor-maya_singh-72-30 accepted=true state=promised meetDay=73
+  FAVOR-ACCEPT d78: Nathan favorId=favor-nathan_lee-78-32 accepted=true state=promised meetDay=79
+  FAVOR-ACCEPT d82: Nathan favorId=favor-nathan_lee-82-34 accepted=true state=promised meetDay=83
+  FAVOR-ACCEPT d83: Raj favorId=favor-raj_patel-83-35 accepted=true state=promised meetDay=84
+  FAVOR-ACCEPT d85: Raj favorId=favor-raj_patel-85-36 accepted=true state=promised meetDay=86
+  FAVOR-ACCEPT d91: Maya favorId=favor-maya_singh-91-37 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d92: Nathan favorId=favor-nathan_lee-92-39 accepted=true state=promised meetDay=93
+  FAVOR-ACCEPT d98: Nathan favorId=favor-nathan_lee-98-40 accepted=true state=promised meetDay=99
+  FAVOR-ACCEPT d100: Pavel favorId=favor-pavel_dubinin-100-42 accepted=true state=promised meetDay=101
+  FAVOR-ACCEPT d104: Nathan favorId=favor-nathan_lee-104-44 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d111: Maya favorId=favor-maya_singh-111-46 accepted=true state=promised meetDay=112
+  FAVOR-ACCEPT d113: Nathan favorId=favor-nathan_lee-113-48 accepted=true state=promised meetDay=114
+  FAVOR-ACCEPT d119: Nathan favorId=favor-nathan_lee-119-52 accepted=true state=promised meetDay=120
+  FAVOR-ACCEPT d120: Grace favorId=favor-grace_obi-120-54 accepted=true state=promised meetDay=121
+  FAVOR-ACCEPT d123: Raj favorId=favor-raj_patel-123-55 accepted=true state=promised meetDay=124
+  FAVOR-ACCEPT d124: Nathan favorId=favor-nathan_lee-124-56 accepted=true state=promised meetDay=125
+  FAVOR-ACCEPT d130: Bessie favorId=favor-gen_f3m27hm-130-57 accepted=true state=promised meetDay=131
+  FAVOR-ACCEPT d136: Raj favorId=favor-raj_patel-136-59 accepted=true state=promised meetDay=137
+  INVITE-DEC d8 party: Norman -> Scarlett chance=65.4 accept=true veto=- inputs={"temp":"anxious","goal":"family","mood":"cheerful","fear":4,"trust":51,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 51","cheerful mood (+10)"]
+  INVITE-DEC d8 party: Norman -> Vera chance=38.2 accept=false veto=- inputs={"temp":"withdrawn","goal":"heal","mood":"cheerful","fear":4,"trust":33,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 33","withdrawn temperament (-20)","cheerful mood (+10)"]
+  INVITE-DEC d8 party: Norman -> Raj chance=62.8 accept=true veto=- inputs={"temp":"cautious","goal":"feed","mood":"cheerful","fear":4,"trust":32,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 32","cautious temperament (-10)","feed goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d12 lure: Vera -> Tom chance=32 accept=false veto=- inputs={"temp":"withdrawn","goal":"record","mood":"hungry","fear":0,"affinity":26} reasons=["relationship with inviter (+7)","withdrawn temperament (-20)"]
+  INVITE-DEC d13 lure: Vera -> Tom chance=32 accept=false veto=- inputs={"temp":"withdrawn","goal":"record","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","withdrawn temperament (-20)"]
+  INVITE-DEC d14 lure: Vera -> Tom chance=32 accept=false veto=- inputs={"temp":"withdrawn","goal":"record","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","withdrawn temperament (-20)"]
+  INVITE-DEC d15 party: Norman -> Tom chance=28.799999999999997 accept=true veto=- inputs={"temp":"withdrawn","goal":"record","mood":"steady","fear":12,"trust":22,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 22","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d15 lure: Vera -> Tom chance=32 accept=false veto=- inputs={"temp":"withdrawn","goal":"record","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","withdrawn temperament (-20)"]
+  INVITE-DEC d16 lure: Vera -> Tom chance=32 accept=false veto=- inputs={"temp":"withdrawn","goal":"record","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","withdrawn temperament (-20)"]
+  INVITE-DEC d23 party: Norman -> Grace chance=72.2 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"grieving","fear":17,"trust":68,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 68","a big party is safer (+5)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Norman -> Bessie chance=46 accept=false veto=- inputs={"temp":"sardonic","goal":"alone","mood":"steady","fear":0,"trust":90,"bond":{"v":26,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d32 party: Norman -> Bessie chance=46 accept=false veto=- inputs={"temp":"sardonic","goal":"alone","mood":"steady","fear":12,"trust":90,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d32 party: Norman -> Pavel chance=66.8 accept=true veto=- inputs={"temp":"dry","goal":"family","mood":"steady","fear":12,"trust":67,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 67","a big party is safer (+5)"]
+  INVITE-DEC d50 party: Norman -> Bessie chance=33.599999999999994 accept=false veto=- inputs={"temp":"sardonic","goal":"alone","mood":"grieving","fear":33,"trust":84,"bond":{"v":76,"depth":3},"partySize":4} reasons=["trust 84","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d50 party: Norman -> Maya chance=88.6 accept=true veto=- inputs={"temp":"bold","goal":"prove","mood":"grieving","fear":33,"trust":84,"bond":{"v":36,"depth":1},"partySize":4} reasons=["trust 84","a real bond (+10)","a big party is safer (+5)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d106 party: Norman -> Bessie chance=33.2 accept=true veto=- inputs={"temp":"sardonic","goal":"alone","mood":"grieving","fear":29,"trust":83,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":26,"v":44,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":58,"depth":3},{"day":31,"v":62,"depth":3},{"day":32,"v":68,"depth":3},{"day":33,"v":72,"depth":3},{"day":34,"v":78,"depth":3},{"day":35,"v":78,"depth":3},{"day":36,"v":82,"depth":3},{"day":37,"v":82,"depth":3},{"day":38,"v":86,"depth":3},{"day":39,"v":86,"depth":3}] class=rise
+GOSSIP: totalPicks=286 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=41 31-60=68 61-90=58 91-120=68 121+=38 naturalPicks=273 seededPicks=8 gossipPicks=286
+SEEDED: {"pair":{"a":"gen_f3m27hm","b":"gen_urzkpjg","aName":"Bessie","bName":"Scarlett"},"day":25,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":26,"v":44,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":54,"depth":3},{"day":30,"v":58,"depth":3},{"day":31,"v":62,"depth":3},{"day":32,"v":68,"depth":3},{"day":33,"v":72,"depth":3},{"day":34,"v":78,"depth":3},{"day":35,"v":78,"depth":3},{"day":36,"v":82,"depth":3},{"day":37,"v":82,"depth":3},{"day":38,"v":86,"depth":3},{"day":39,"v":86,"depth":3}],"crackTraceClass":"rise","vAt7":58,"depthAt7":3,"vDrop":-6,"depthDrop":-1,"crack7":false,"firstServe":{"day":26,"why":"vgrievance"},"serveWithin30":true,"serves":9,"servesAll":[{"day":26,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":45,"why":"vgrievance"}],"effect":true}
+  FRIEND d25: Bessie <> Scarlett — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Vera <> Scarlett — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d55: Reuben <> Bessie — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Bessie <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Bessie <> Nathan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Bessie <> Grace — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Bessie <> Vera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Bessie <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Bessie <> Maya — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Grace <> Raj — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d135: Grace <> Nathan — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d70: Pavel <> Raj — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d75: Vera <> Raj — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Nathan <> Raj — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d130: Vera <> Nathan — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d75: Maya <> Pavel — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d100: Grace <> Pavel — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d125: Reuben <> Vera — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d110: Vera <> Grace — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND-GRIEV d25: Bessie vs Scarlett (ambushed) depth 2 v 52 -> 58
+  CLOSE-READ d16: Vera about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d17: Nathan about Bessie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Raj about Bessie — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d19: Grace about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Nathan about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Tom about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Raj about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Tom about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Grace about Bessie — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Raj about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Vera about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Raj about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Pavel about Bessie — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Nathan about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Scarlett about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Raj about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Pavel about Raj — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Raj about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Reuben about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Grace about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Raj about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Scarlett about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Nathan about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Raj about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Grace about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Reuben about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Raj about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Reuben about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Raj about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d34: Pavel about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Pavel about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Vera about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Pavel about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Nathan about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Raj about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Pavel about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Grace about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Nathan about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Raj about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Scarlett about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Raj about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Raj about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Raj about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Raj about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Pavel about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Scarlett about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Pavel about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Scarlett about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Pavel about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Reuben about Bessie — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Pavel about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Maya about Pavel — live depth=1 ledger depth=0 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Scarlett about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Pavel about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Bessie about Nathan — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Pavel about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Pavel about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d59: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d59: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Reuben about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d65: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Bessie about Pavel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d73: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Maya about Pavel — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d75: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Reuben about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Maya about Pavel — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Maya about Pavel — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Maya about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Maya about Bessie — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Bessie about Pavel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Maya about Pavel — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Maya about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Maya about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Reuben about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Maya about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Maya about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Maya about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Maya about Bessie — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Pavel about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Maya about Bessie — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Reuben about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Vera about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Reuben about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Raj about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Bessie about Reuben — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Grace about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Reuben about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Nathan about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Reuben about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d141: Maya about Bessie — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d26 (betrayal): Bessie vs Scarlett (ambushed) depth 2 v 52 -> 58
+  GRIEV-READ d9: Scarlett about Tom (why=grievance)
+  GRIEV-READ d10: Tom about Scarlett (why=grievance)
+  GRIEV-READ d15: Tom about Scarlett (why=grievance)
+  GRIEV-READ d16: Tom about Scarlett (why=grievance)
+  GRIEV-READ d18: Tom about Scarlett (why=grievance)
+  GRIEV-READ d26: Bessie about Scarlett (why=vgrievance)
+  KNACK d5 Bessie: "Good question." "Moana found a lost knife by smell last week. By SMELL."
+  KNACK d5 Scarlett: "Huh. Let me think about that." "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d11 Reuben: "You want to know about that? Okay." "Moana found a lost knife by smell last week. By SMELL."
+  KNACK d11 Reuben: "Maya ate something last month that should've killed them. They're fine."
+  KNACK d18 Pavel: "Good question." "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d23 Maya: "Raj talks to the garden. The garden listens. I've seen it."
+  KNACK d23 Maya: "that stray dog — the one that bit two people — lets Grace touch it."
+  KNACK d26 Pavel: "Maya ate something last month that should've killed them. They're fine. It'll pass."
+
+deathCauses: {"a wound that wouldn't close":1,"alien":1,"monster":1}

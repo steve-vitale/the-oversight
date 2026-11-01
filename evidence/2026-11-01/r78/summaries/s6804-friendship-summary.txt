@@ -1,0 +1,266 @@
+# SURFACE+SEEDED — seed 6804 (140d, 6 alive)
+
+npcPairs=77 deep2=39 cracks=0 vCracks=1 friendGriev=0 stateGriev=10 stateFriend=0 stateVCrack=1 t2picks=128 closeReadsServed=23 grievanceServes=2 othersSteered=126
+COND-TP: firstDeep2Day=35 lateClose=100 lateTP=82 lateNull=0 condRate=82.0% pooledTP=82/106 pooledRate=77.4% grievReadsByWhy={"grievance":7,"vgrievance":0}
+FUNNEL (natural): convos=414 subject=338 offered=285 picked=128 classes={"subject-no-offer":53,"no-subject-no-ans":74,"picked-others":128,"offered-not-picked":55,"offered-capped":102,"no-subject-ans":2}
+FUNNEL-UNSTEERED (r55 strict): convos=288 subjectNoOffer=53 rate=18.4% offered=159 mainOffered=1 subjectOffered=158 picked=2 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Omar / Jesse — "Sam found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Jesse / Omar — "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Yavdokha touch 
+REOFFER: offers=257 picks=117 latePicks=49 missedChangedNotOffered=92
+WRAPSERVE: convos=7 matcherHits=2 matcherServes=2 classes={"grievance-line":2,"deflection":4,"other":1}
+FUNNEL-PROBE (subject-no-offer turns): turns=166 menuProblem=144 pickProblem=22
+INVITE (wrap, carried from r63): lure={"n":8,"accepts":4,"acceptRate":0.5,"vetoes":{},"chanceMin":21,"chanceMax":53,"chanceMean":31.4} party={"n":12,"accepts":8,"acceptRate":0.6666666666666666,"vetoes":{},"chanceMin":30.400000000000006,"chanceMax":92,"chanceMean":52.7} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=3
+FAVOR (r65): funnel={"offers":35,"forageOffers":5,"otherFavorOffers":30,"accepts":5,"acceptAttempts":5,"waits":4,"starts":4,"startBlocked":4,"forages":3,"forageNodeBarren":5,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":3,"stepRetries":2,"retryAssigned":2,"retryStarts":2,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":3,"delivers":3,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":3,"keptMatched":2,"keptMatchedStrict":2}
+CASE (r78): snaps=10 betrayalOfferConvos=109 mootOffers=5 mootProbePicks=[{"day":9,"vid":"sam_wilson","vidName":"Sam","caseId":"case_2"},{"day":14,"vid":"jesse_cortez","vidName":"Jesse","caseId":"case_6"},{"day":17,"vid":"olivia_bennett","vidName":"Olivia","caseId":"case_8"}] mootsConvened=0
+  CASE-SNAP d7: case_2 status=open charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d10: case_2 status=open charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d10: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_4 status=open charge=ambush accused=Adaeze/Autumn/Olivia target=Jesse role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d13: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_4 status=resolved charge=ambush accused=Adaeze/Autumn/Olivia target=Jesse role=juror known=true mootIn=null trial=false
+  CASE-SNAP d13: case_6 status=open charge=murder accused=Jesse/Jamal/Autumn target=Adaeze role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d14: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_4 status=resolved charge=ambush accused=Adaeze/Autumn/Olivia target=Jesse role=juror known=true mootIn=null trial=false
+  CASE-SNAP d14: case_6 status=acquitted charge=murder accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=resolved charge=ambush accused=Adaeze/Autumn/Olivia target=Jesse role=juror known=true mootIn=null trial=false
+  CASE-SNAP d15: case_6 status=acquitted charge=murder accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_8 status=open charge=ambush accused=Tim/Henry/Autumn target=Sam role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d17: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_4 status=resolved charge=ambush accused=Adaeze/Autumn/Olivia target=Jesse role=juror known=true mootIn=null trial=false
+  CASE-SNAP d17: case_6 status=acquitted charge=murder accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_8 status=acquitted charge=ambush accused=Tim/Henry/Autumn target=Sam role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_2 status=acquitted charge=ambush accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_4 status=resolved charge=ambush accused=Adaeze/Autumn/Olivia target=Jesse role=juror known=true mootIn=null trial=false
+  CASE-SNAP d140: case_6 status=acquitted charge=murder accused=Jesse/Jamal/Autumn target=Adaeze role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_8 status=acquitted charge=ambush accused=Tim/Henry/Autumn target=Sam role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"henry_zhang","vidName":"Henry","favorId":"favor-henry_zhang-93-26","state":"fulfilled","promisedDay":93,"meetDay":94,"deadline":95,"promiseKept":true,"startedDay":94,"forageCount":1,"playerKcal":1890,"partnerKcal":1890,"deliveredKcal":3780,"returnedDay":95,"talkCount":1},{"vid":"gen_oimj3fd","vidName":"Tim","favorId":"favor-gen_oimj3fd-16-6","state":"thanked","promisedDay":16,"meetDay":17,"deadline":18,"promiseKept":true,"startedDay":17,"forageCount":1,"playerKcal":120,"partnerKcal":120,"deliveredKcal":240,"returnedDay":18,"talkCount":1}]
+  FAVOR-OFFER d6: Adaeze kind=heal_help favorId=favor-adaeze_nwosu-6-1 task=help Adaeze with their injury
+  FAVOR-OFFER d6: Sam kind=food_share favorId=favor-sam_wilson-6-2 task=share food with Sam — they're going hungry
+  FAVOR-OFFER d7: Henry kind=sick_help favorId=favor-henry_zhang-7-3 task=help Henry with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d11: Autumn kind=food_share favorId=favor-gen_sh63ok7-11-4 task=share food with Autumn — they're going hungry
+  FAVOR-OFFER d14: Henry kind=food_share favorId=favor-henry_zhang-14-5 task=share food with Henry — they're going hungry
+  FAVOR-OFFER d16: Tim kind=forage_help favorId=favor-gen_oimj3fd-16-6 task=forage with Tim tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Bridget kind=food_share favorId=favor-gen_tjae0pw-20-7 task=share food with Bridget — they're going hungry
+  FAVOR-OFFER d20: Jesse kind=forage_help favorId=favor-jesse_cortez-20-8 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Autumn kind=food_share favorId=favor-gen_sh63ok7-30-9 task=share food with Autumn — they're going hungry
+  FAVOR-OFFER d32: Henry kind=forage_help favorId=favor-henry_zhang-32-11 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Olivia kind=forage_help favorId=favor-olivia_bennett-35-12 task=forage with Olivia tomorrow to rebuild the pantry
+  FAVOR-OFFER d36: Omar kind=food_share favorId=favor-omar_farouk-36-13 task=share food with Omar — they're going hungry
+  FAVOR-OFFER d36: Jesse kind=food_share favorId=favor-jesse_cortez-36-14 task=share food with Jesse — they're going hungry
+  FAVOR-OFFER d40: Sam kind=food_share favorId=favor-sam_wilson-40-15 task=share food with Sam — they're running on empty
+  FAVOR-OFFER d77: Jesse kind=water_haul favorId=favor-jesse_cortez-77-16 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d77: Omar kind=water_haul favorId=favor-omar_farouk-77-17 task=bring four liters home from the creek with Omar; set out at dawn
+  FAVOR-OFFER d79: Olivia kind=sick_help favorId=favor-olivia_bennett-79-18 task=help Olivia with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d81: Sam kind=water_haul favorId=favor-sam_wilson-81-19 task=bring four liters home from the creek with Sam; set out at dawn
+  FAVOR-OFFER d87: Jesse kind=water_haul favorId=favor-jesse_cortez-87-21 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d88: Autumn kind=water_haul favorId=favor-gen_sh63ok7-87-20 task=bring four liters home from the creek with Autumn; set out at dawn
+  FAVOR-OFFER d88: Jesse kind=water_haul favorId=favor-jesse_cortez-88-22 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d88: Henry kind=water_haul favorId=favor-henry_zhang-88-23 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d91: Jesse kind=water_haul favorId=favor-jesse_cortez-91-24 task=bring four liters home from the creek with Jesse; set out at dawn
+  FAVOR-OFFER d91: Olivia kind=water_haul favorId=favor-olivia_bennett-91-25 task=bring four liters home from the creek with Olivia; set out at dawn
+  FAVOR-OFFER d93: Henry kind=forage_help favorId=favor-henry_zhang-93-26 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d100: Jesse kind=sick_help favorId=favor-jesse_cortez-100-27 task=help Jesse with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d102: Sam kind=water_haul favorId=favor-sam_wilson-102-28 task=bring four liters home from the creek with Sam; set out at dawn
+  FAVOR-OFFER d103: Olivia kind=food_share favorId=favor-olivia_bennett-103-30 task=share food with Olivia — they're going hungry
+  FAVOR-OFFER d104: Jesse kind=sick_help favorId=favor-jesse_cortez-104-31 task=help Jesse with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d105: Sam kind=water_haul favorId=favor-sam_wilson-105-32 task=bring four liters home from the creek with Sam; set out at dawn
+  FAVOR-OFFER d108: Omar kind=sick_help favorId=favor-omar_farouk-103-29 task=help Omar with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d108: Sam kind=food_share favorId=favor-sam_wilson-108-33 task=share food with Sam — they're running on empty
+  FAVOR-OFFER d116: Omar kind=heal_help favorId=favor-omar_farouk-116-34 task=help Omar with their injury
+  FAVOR-OFFER d126: Autumn kind=food_share favorId=favor-gen_sh63ok7-126-35 task=share food with Autumn — they're past hungry
+  FAVOR-OFFER d136: Olivia kind=food_share favorId=favor-olivia_bennett-136-36 task=share food with Olivia — they're running on empty
+  FAVOR-ACCEPT d16: Tim favorId=favor-gen_oimj3fd-16-6 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d20: Jesse favorId=favor-jesse_cortez-20-8 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d32: Henry favorId=favor-henry_zhang-32-11 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d35: Olivia favorId=favor-olivia_bennett-35-12 accepted=true state=promised meetDay=36
+  FAVOR-ACCEPT d93: Henry favorId=favor-henry_zhang-93-26 accepted=true state=promised meetDay=94
+  INVITE-DEC d6 lure: Autumn -> Adaeze chance=52 accept=true veto=- inputs={"temp":"anxious","goal":"understand","mood":"hungry","fear":0,"affinity":29} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d8 party: Paisley -> Jamal chance=43 accept=false veto=- inputs={"temp":"sardonic","goal":"answers","mood":"steady","fear":4,"trust":20,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 20"]
+  INVITE-DEC d8 party: Paisley -> Bridget chance=51.8 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"steady","fear":4,"trust":42,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 42"]
+  INVITE-DEC d8 party: Paisley -> Henry chance=36.2 accept=true veto=- inputs={"temp":"cautious","goal":"understand","mood":"steady","fear":4,"trust":28,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 28","cautious temperament (-10)"]
+  INVITE-DEC d8 lure: Olivia -> Jesse chance=26 accept=false veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)"]
+  INVITE-DEC d9 lure: Olivia -> Jesse chance=26 accept=false veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)"]
+  INVITE-DEC d10 party: Paisley -> Omar chance=51 accept=true veto=- inputs={"temp":"dry","goal":"home","mood":"steady","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 40"]
+  INVITE-DEC d10 lure: Olivia -> Jesse chance=26 accept=false veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"steady","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)"]
+  INVITE-DEC d11 lure: Olivia -> Jesse chance=26 accept=true veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","withdrawn temperament (-20)"]
+  INVITE-DEC d12 lure: Autumn -> Adaeze chance=53 accept=true veto=- inputs={"temp":"anxious","goal":"understand","mood":"hungry","fear":4,"affinity":30} reasons=["relationship with inviter (+8)"]
+  INVITE-DEC d13 lure: Autumn -> Sam chance=21 accept=false veto=- inputs={"temp":"restless","goal":"alone","mood":"grieving","fear":1,"affinity":3} reasons=["relationship with inviter (+1)","restless temperament (+10)","wants to be alone (-25)","grieving mood (-10)"]
+  INVITE-DEC d14 lure: Autumn -> Sam chance=21 accept=true veto=- inputs={"temp":"restless","goal":"alone","mood":"grieving","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","restless temperament (+10)","wants to be alone (-25)","grieving mood (-10)"]
+  INVITE-DEC d16 party: Paisley -> Autumn chance=65.4 accept=false veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":0,"trust":26,"bond":{"v":-18,"depth":0},"partySize":3} reasons=["trust 26","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d16 party: Paisley -> Tim chance=56.400000000000006 accept=false veto=- inputs={"temp":"sardonic","goal":"joy","mood":"steady","fear":0,"trust":41,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 41","a big party is safer (+5)"]
+  INVITE-DEC d18 party: Paisley -> Autumn chance=45.8 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":0,"trust":27,"bond":{"v":-27,"depth":-1},"partySize":3} reasons=["trust 27","a hostile bond (-20)","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d31 party: Paisley -> Sam chance=30.400000000000006 accept=true veto=- inputs={"temp":"restless","goal":"alone","mood":"steady","fear":0,"trust":51,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 51","a big party is safer (+5)","restless temperament (+10)","wants to be alone (-40)"]
+  INVITE-DEC d38 party: Bridget -> Olivia chance=92 accept=true veto=- inputs={"temp":"warm","goal":"belong","mood":"grieving","fear":0,"trust":80,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 80","a big party is safer (+5)","warm temperament (+15)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d129 party: Henry -> Jesse chance=66.4 accept=false veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"steady","fear":12,"trust":91,"bond":{"v":86,"depth":3},"partySize":4} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d131 party: Tim -> Jesse chance=56 accept=true veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"grieving","fear":0,"trust":90,"bond":{"v":69,"depth":2},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Omar -> James chance=38 accept=true veto=- inputs={"temp":"steady","goal":"home","mood":"grieving","fear":4,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":36,"v":38,"depth":2},{"day":37,"v":40,"depth":2},{"day":38,"v":46,"depth":2},{"day":39,"v":48,"depth":2},{"day":40,"v":50,"depth":3},{"day":41,"v":52,"depth":3},{"day":42,"v":54,"depth":3},{"day":43,"v":62,"depth":3},{"day":44,"v":66,"depth":3},{"day":45,"v":68,"depth":3},{"day":46,"v":72,"depth":3},{"day":47,"v":74,"depth":3},{"day":48,"v":76,"depth":3},{"day":49,"v":78,"depth":3}] class=rise
+GOSSIP: totalPicks=152 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=25 31-60=26 61-90=28 91-120=28 121+=21 naturalPicks=128 seededPicks=0 gossipPicks=152
+SEEDED: {"pair":{"a":"gen_cgnj5v6","b":"gen_tjae0pw","aName":"Yavdokha","bName":"Bridget"},"day":35,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":36,"v":38,"depth":2},{"day":37,"v":40,"depth":2},{"day":38,"v":46,"depth":2},{"day":39,"v":48,"depth":2},{"day":40,"v":50,"depth":3},{"day":41,"v":52,"depth":3},{"day":42,"v":54,"depth":3},{"day":43,"v":62,"depth":3},{"day":44,"v":66,"depth":3},{"day":45,"v":68,"depth":3},{"day":46,"v":72,"depth":3},{"day":47,"v":74,"depth":3},{"day":48,"v":76,"depth":3},{"day":49,"v":78,"depth":3}],"crackTraceClass":"rise","vAt7":null,"depthAt7":null,"vDrop":null,"depthDrop":null,"crack7":false,"firstServe":null,"serveWithin30":false,"serves":0,"servesAll":[],"effect":false}
+  FRIEND d45: Jamal <> Jesse — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d130: Bridget <> Jamal — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d45: Yavdokha <> Jamal — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d35: Yavdokha <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Yavdokha <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Tim <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Bridget <> Sam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Yavdokha <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Henry <> Olivia — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d65: Yavdokha <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Bridget <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Yavdokha <> Sam — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d140: Jesse <> Sam — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d130: Bridget <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Autumn <> Bridget — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Tim <> Bridget — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d40: Yavdokha <> Tim — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Bridget <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Autumn <> Jesse — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d125: Jesse <> Olivia — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d75: Autumn <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Tim <> Omar — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d50: Jamal <> Omar — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d60: Yavdokha <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Bridget <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Yavdokha <> Autumn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Autumn <> Sam — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d95: Tim <> Jesse — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d75: Tim <> Autumn — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Autumn <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Tim <> Sam — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d110: Henry <> Sam — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d100: Olivia <> Omar — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d125: Jesse <> Omar — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d75: Autumn <> Henry — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d100: Henry <> Jesse — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d120: Omar <> Sam — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d85: Henry <> Omar — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Tim <> Olivia — maxDepth 3, final 3 (v=82), dropped 0
+  VCRACK d11: Jesse vs Adaeze (ambushed) v -10 -> -22 (depth 0 -> 0)
+  CLOSE-READ d24: Bridget about Yavdokha — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Bridget about Yavdokha — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Jesse about Jamal — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Henry about Jamal — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Yavdokha about Bridget — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d33: Bridget about Yavdokha — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Henry about Jamal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Bridget about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Olivia about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d39: Henry about Jamal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Jamal about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d41: Olivia about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Henry about Jamal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Henry about Jamal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Omar about Jamal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Autumn about Jamal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Olivia about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Omar about Jamal — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Omar about Jamal — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Olivia about Autumn — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Sam about Yavdokha — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Omar about Yavdokha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Sam about Yavdokha — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Jesse about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Autumn about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Olivia about Yavdokha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Jesse about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Sam about Yavdokha — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Olivia about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Autumn about Yavdokha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Jesse about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Autumn about Yavdokha — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Olivia about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Omar about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Omar about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Autumn about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Olivia about Yavdokha — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Jesse about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Omar about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Autumn about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Sam about Yavdokha — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Omar about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Jesse about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Omar about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Omar about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Autumn about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Olivia about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Omar about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Henry about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Omar about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Sam about Yavdokha — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d134: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d138: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d139: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Autumn about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  STATE-VCRACK d12 (betrayal): Jesse vs Adaeze (ambushed) v -10 -> -22 (depth 0 -> 0)
+  GRIEV-READ d7: Adaeze about Jesse (why=grievance)
+  GRIEV-READ d9: Jesse about Adaeze (why=grievance)
+  GRIEV-READ d12: Adaeze about Jesse (why=grievance)
+  GRIEV-READ d19: Tim about Sam (why=grievance)
+  GRIEV-READ d22: Tim about Sam (why=grievance)
+  GRIEV-READ d31: Sam about Tim (why=grievance)
+  KNACK d7 Henry: "Adaeze talks to the garden. The garden listens. I've seen it."
+  KNACK d13 Sam: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Yavdokha touch it. Doesn't matter n
+  KNACK d26 Bridget: "Huh. Let me think about that." "Between us — that stray dog — the one that bit two people — lets Yavdokha touch it."
+  KNACK d28 Yavdokha: "You want to know about that? Okay." "Jesse ate something last month that should've killed them. They're fine."
+  KNACK d33 Yavdokha: "Omar talks to the garden. The garden listens. I've seen it. Extremely normal, all of it."
+  KNACK d38 Omar: "Sam found a lost knife by smell last week. By SMELL."
+  KNACK d48 Sam: "Good question." "Olivia talks to the garden. The garden listens. I've seen it. I don't know, though."
+  KNACK d53 Jesse: "Henry talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":1,"a stranger":3,"Glasswing Darter":1,"contest":1}

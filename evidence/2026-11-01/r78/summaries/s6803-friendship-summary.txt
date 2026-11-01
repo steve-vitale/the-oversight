@@ -1,0 +1,251 @@
+# SURFACE+SEEDED — seed 6803 (143d, 1 alive)
+
+npcPairs=94 deep2=29 cracks=0 vCracks=0 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=136 closeReadsServed=38 grievanceServes=27 othersSteered=160
+COND-TP: firstDeep2Day=15 lateClose=68 lateTP=47 lateNull=0 condRate=69.1% pooledTP=47/69 pooledRate=68.1% grievReadsByWhy={"grievance":2,"vgrievance":31}
+FUNNEL (natural): convos=354 subject=299 offered=263 picked=135 classes={"subject-no-offer":39,"picked-others":135,"offered-not-picked":45,"no-subject-ans":9,"no-subject-no-ans":43,"offered-capped":83}
+FUNNEL-UNSTEERED (r55 strict): convos=220 subjectNoOffer=39 rate=17.7% offered=129 mainOffered=8 subjectOffered=127 picked=1 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Ofelia / Yara — "Lena talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=256 picks=144 latePicks=48 missedChangedNotOffered=32
+WRAPSERVE: convos=33 matcherHits=27 matcherServes=27 classes={"grievance-line":27,"deflection":0,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=114 menuProblem=83 pickProblem=31
+INVITE (wrap, carried from r63): lure={"n":8,"accepts":1,"acceptRate":0.125,"vetoes":{"sick":2},"chanceMin":0,"chanceMax":17,"chanceMean":11.5} party={"n":25,"accepts":16,"acceptRate":0.64,"vetoes":{},"chanceMin":5,"chanceMax":81.8,"chanceMean":48.1} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+FAVOR (r65): funnel={"offers":63,"forageOffers":18,"otherFavorOffers":45,"accepts":19,"acceptAttempts":19,"waits":16,"starts":15,"startBlocked":18,"forages":11,"forageNodeBarren":22,"forageBarren":5,"forageBarrenTravel":0,"forageBarrenNode":5,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":6,"retryAssigned":6,"retryStarts":6,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":11,"delivers":11,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":11,"keptMatched":2,"keptMatchedStrict":2}
+CASE (r78): snaps=4 betrayalOfferConvos=93 mootOffers=2 mootProbePicks=[{"day":11,"vid":"lena_ruiz","vidName":"Lena","caseId":"case_2"}] mootsConvened=0
+  CASE-SNAP d9: case_2 status=open charge=ambush accused=Ofelia/Theo/Rosa target=Yara role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d11: case_2 status=acquitted charge=ambush accused=Ofelia/Theo/Rosa target=Yara role=juror known=true mootIn=null trial=true
+  CASE-SNAP d143: case_2 status=acquitted charge=ambush accused=Ofelia/Theo/Rosa target=Yara role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"gen_dl70i02","vidName":"Karina","favorId":"favor-gen_dl70i02-64-26","state":"asked","promisedDay":64,"meetDay":65,"deadline":66,"promiseKept":"released","startedDay":65,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_q77sw7h","vidName":"Ofelia","favorId":"favor-gen_q77sw7h-94-42","state":"thanked","promisedDay":94,"meetDay":95,"deadline":96,"promiseKept":true,"startedDay":95,"forageCount":2,"playerKcal":60,"partnerKcal":90,"deliveredKcal":150,"returnedDay":95,"talkCount":1},{"vid":"grace_obi","vidName":"Grace","favorId":"favor-grace_obi-47-19","state":"fulfilled","promisedDay":47,"meetDay":48,"deadline":49,"promiseKept":true,"startedDay":48,"forageCount":1,"playerKcal":180,"partnerKcal":270,"deliveredKcal":450,"returnedDay":48,"talkCount":1}]
+  FAVOR-OFFER d5: Saul kind=forage_help favorId=favor-gen_ch9koso-5-1 task=forage with Saul tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Yara kind=forage_help favorId=favor-yara_haddad-9-2 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Karina kind=food_share favorId=favor-gen_dl70i02-12-3 task=share food with Karina — they're going hungry
+  FAVOR-OFFER d14: Karina kind=forage_help favorId=favor-gen_dl70i02-13-4 task=forage with Karina tomorrow to rebuild the pantry
+  FAVOR-OFFER d15: Theo kind=forage_help favorId=favor-theo_lindqvist-15-5 task=forage with Theo tomorrow to rebuild the pantry
+  FAVOR-OFFER d18: Milo kind=forage_help favorId=favor-gen_8szwy98-18-6 task=forage with Milo tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Milo kind=heal_help favorId=favor-gen_8szwy98-21-8 task=help Milo with their injury
+  FAVOR-OFFER d21: Lena kind=food_share favorId=favor-lena_ruiz-20-7 task=share food with Lena — they're going hungry
+  FAVOR-OFFER d22: Theo kind=food_share favorId=favor-theo_lindqvist-22-9 task=share food with Theo — they're going hungry
+  FAVOR-OFFER d24: Milo kind=forage_help favorId=favor-gen_8szwy98-24-10 task=forage with Milo tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Ofelia kind=forage_help favorId=favor-gen_q77sw7h-24-11 task=forage with Ofelia tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Karina kind=food_share favorId=favor-gen_dl70i02-26-12 task=share food with Karina — they're going hungry
+  FAVOR-OFFER d30: Rosa kind=forage_help favorId=favor-rosa_mendez-30-13 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d32: Ofelia kind=forage_help favorId=favor-gen_q77sw7h-32-14 task=forage with Ofelia tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Grace kind=food_share favorId=favor-grace_obi-35-15 task=share food with Grace — they're running on empty
+  FAVOR-OFFER d36: Milo kind=food_share favorId=favor-gen_8szwy98-36-16 task=share food with Milo — they're going hungry
+  FAVOR-OFFER d42: Yara kind=forage_help favorId=favor-yara_haddad-42-17 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Luigi kind=sick_help favorId=favor-gen_oeumma2-44-18 task=help Luigi with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d47: Grace kind=forage_help favorId=favor-grace_obi-47-19 task=forage with Grace tomorrow to rebuild the pantry
+  FAVOR-OFFER d48: Luigi kind=food_share favorId=favor-gen_oeumma2-48-20 task=share food with Luigi — they're going hungry
+  FAVOR-OFFER d48: Lena kind=forage_help favorId=favor-lena_ruiz-48-21 task=forage with Lena tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Yara kind=heal_help favorId=favor-yara_haddad-52-22 task=help Yara with their injury
+  FAVOR-OFFER d55: Rosa kind=forage_help favorId=favor-rosa_mendez-55-23 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d56: Luigi kind=food_share favorId=favor-gen_oeumma2-56-24 task=share food with Luigi — they're past hungry
+  FAVOR-OFFER d57: Lena kind=sick_help favorId=favor-lena_ruiz-57-25 task=help Lena with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d64: Karina kind=forage_help favorId=favor-gen_dl70i02-64-26 task=forage with Karina tomorrow to rebuild the pantry
+  FAVOR-OFFER d65: Lena kind=food_share favorId=favor-lena_ruiz-65-27 task=share food with Lena — they're going hungry
+  FAVOR-OFFER d68: Saul kind=heal_help favorId=favor-gen_ch9koso-68-28 task=help Saul with their injury
+  FAVOR-OFFER d69: Yara kind=forage_help favorId=favor-yara_haddad-69-29 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d70: Saul kind=forage_help favorId=favor-gen_ch9koso-70-30 task=forage with Saul tomorrow to rebuild the pantry
+  FAVOR-OFFER d79: Saul kind=water_haul favorId=favor-gen_ch9koso-79-31 task=bring four liters home from the creek with Saul; set out at dawn
+  FAVOR-OFFER d79: Ofelia kind=water_haul favorId=favor-gen_q77sw7h-79-32 task=bring four liters home from the creek with Ofelia; set out at dawn
+  FAVOR-OFFER d83: Saul kind=water_haul favorId=favor-gen_ch9koso-83-33 task=bring four liters home from the creek with Saul; set out at dawn
+  FAVOR-OFFER d83: Yara kind=water_haul favorId=favor-yara_haddad-83-34 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d85: Lena kind=food_share favorId=favor-lena_ruiz-85-35 task=share food with Lena — they're running on empty
+  FAVOR-OFFER d86: Saul kind=food_share favorId=favor-gen_ch9koso-86-36 task=share food with Saul — they're running on empty
+  FAVOR-OFFER d87: Rosa kind=water_haul favorId=favor-rosa_mendez-87-37 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d87: Yara kind=water_haul favorId=favor-yara_haddad-87-38 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d90: Rosa kind=water_haul favorId=favor-rosa_mendez-90-39 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d93: Lena kind=food_share favorId=favor-lena_ruiz-93-41 task=share food with Lena — they're going hungry
+  FAVOR-OFFER d93: Saul kind=food_share favorId=favor-gen_ch9koso-92-40 task=share food with Saul — they're going hungry
+  FAVOR-OFFER d94: Ofelia kind=forage_help favorId=favor-gen_q77sw7h-94-42 task=forage with Ofelia tomorrow to rebuild the pantry
+  FAVOR-OFFER d96: Rosa kind=water_haul favorId=favor-rosa_mendez-96-43 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d96: Lena kind=sick_help favorId=favor-lena_ruiz-96-44 task=help Lena with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d98: Yara kind=food_share favorId=favor-yara_haddad-98-45 task=share food with Yara — they're going hungry
+  FAVOR-OFFER d102: Yara kind=heal_help favorId=favor-yara_haddad-102-46 task=help Yara with their injury
+  FAVOR-OFFER d104: Brian kind=heal_help favorId=favor-brian_otieno-104-47 task=help Brian with their injury
+  FAVOR-OFFER d104: Yara kind=food_share favorId=favor-yara_haddad-104-48 task=share food with Yara — they're going hungry
+  FAVOR-OFFER d105: Luis kind=food_share favorId=favor-luis_fernandez-105-49 task=share food with Luis — they're going hungry
+  FAVOR-OFFER d108: Brian kind=sick_help favorId=favor-brian_otieno-108-50 task=help Brian with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d109: Luis kind=forage_help favorId=favor-luis_fernandez-109-51 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d109: Yara kind=food_share favorId=favor-yara_haddad-109-52 task=share food with Yara — they're going hungry
+  FAVOR-OFFER d113: Luis kind=food_share favorId=favor-luis_fernandez-113-53 task=share food with Luis — they're running on empty
+  FAVOR-OFFER d116: Luis kind=food_share favorId=favor-luis_fernandez-116-54 task=share food with Luis — they're past hungry
+  FAVOR-OFFER d119: Luis kind=food_share favorId=favor-luis_fernandez-119-55 task=share food with Luis — they're running on empty
+  FAVOR-OFFER d122: Luis kind=food_share favorId=favor-luis_fernandez-122-56 task=share food with Luis — they're running on empty
+  FAVOR-OFFER d125: Luis kind=food_share favorId=favor-luis_fernandez-125-57 task=share food with Luis — they're past hungry
+  FAVOR-OFFER d129: Luis kind=food_share favorId=favor-luis_fernandez-129-58 task=share food with Luis — they're past hungry
+  FAVOR-OFFER d131: Giuseppe kind=water_haul favorId=favor-visjoin_125-131-59 task=bring four liters home from the creek with Giuseppe; set out at dawn
+  FAVOR-OFFER d132: Luis kind=water_haul favorId=favor-luis_fernandez-132-60 task=bring four liters home from the creek with Luis; set out at dawn
+  FAVOR-OFFER d134: Giuseppe kind=food_share favorId=favor-visjoin_125-134-61 task=share food with Giuseppe — they're going hungry
+  FAVOR-OFFER d137: Giuseppe kind=heal_help favorId=favor-visjoin_125-137-62 task=help Giuseppe with their injury
+  FAVOR-OFFER d140: Giuseppe kind=food_share favorId=favor-visjoin_125-140-63 task=share food with Giuseppe — they're past hungry
+  FAVOR-ACCEPT d5: Saul favorId=favor-gen_ch9koso-5-1 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d9: Yara favorId=favor-yara_haddad-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d14: Karina favorId=favor-gen_dl70i02-13-4 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d15: Theo favorId=favor-theo_lindqvist-15-5 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d18: Milo favorId=favor-gen_8szwy98-18-6 accepted=true state=promised meetDay=19
+  FAVOR-ACCEPT d20: Yara favorId=favor-yara_haddad-9-2 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d24: Milo favorId=favor-gen_8szwy98-24-10 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d24: Ofelia favorId=favor-gen_q77sw7h-24-11 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d30: Rosa favorId=favor-rosa_mendez-30-13 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d32: Ofelia favorId=favor-gen_q77sw7h-32-14 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d42: Yara favorId=favor-yara_haddad-42-17 accepted=true state=promised meetDay=43
+  FAVOR-ACCEPT d47: Grace favorId=favor-grace_obi-47-19 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d48: Lena favorId=favor-lena_ruiz-48-21 accepted=true state=promised meetDay=49
+  FAVOR-ACCEPT d55: Rosa favorId=favor-rosa_mendez-55-23 accepted=true state=promised meetDay=56
+  FAVOR-ACCEPT d64: Karina favorId=favor-gen_dl70i02-64-26 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d69: Yara favorId=favor-yara_haddad-69-29 accepted=true state=promised meetDay=70
+  FAVOR-ACCEPT d70: Saul favorId=favor-gen_ch9koso-70-30 accepted=true state=promised meetDay=71
+  FAVOR-ACCEPT d94: Ofelia favorId=favor-gen_q77sw7h-94-42 accepted=true state=promised meetDay=95
+  FAVOR-ACCEPT d109: Luis favorId=favor-luis_fernandez-109-51 accepted=true state=promised meetDay=110
+  INVITE-DEC d6 lure: Theo -> Yara chance=17 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","cautious temperament (-10)","wants to be alone (-25)"]
+  INVITE-DEC d7 lure: Theo -> Yara chance=17 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"hungry","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","cautious temperament (-10)","wants to be alone (-25)"]
+  INVITE-DEC d8 party: Karen -> Luigi chance=76.4 accept=true veto=- inputs={"temp":"restless","goal":"feed","mood":"steady","fear":0,"trust":41,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 41","restless temperament (+10)","feed goal (+15)"]
+  INVITE-DEC d8 party: Karen -> Saul chance=51.8 accept=false veto=- inputs={"temp":"steady","goal":"joy","mood":"hungry","fear":0,"trust":42,"bond":{"v":10,"depth":0},"partySize":1} reasons=["trust 42"]
+  INVITE-DEC d8 party: Karen -> Theo chance=55 accept=true veto=- inputs={"temp":"restless","goal":"legacy","mood":"steady","fear":0,"trust":25,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 25","restless temperament (+10)"]
+  INVITE-DEC d8 lure: Theo -> Yara chance=17 accept=true veto=- inputs={"temp":"cautious","goal":"alone","mood":"hungry","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","cautious temperament (-10)","wants to be alone (-25)"]
+  INVITE-DEC d9 party: Karen -> Yara chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":0,"trust":34,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 34","cautious temperament (-10)","wants to be alone (-40)"]
+  INVITE-DEC d9 party: Karen -> Hannah chance=47.8 accept=true veto=- inputs={"temp":"intense","goal":"lead","mood":"steady","fear":0,"trust":32,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 32"]
+  INVITE-DEC d10 lure: Theo -> Yara chance=0 accept=false veto=sick inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":25} reasons=["sick — stays by the fire"]
+  INVITE-DEC d11 party: Hannah -> Rosa chance=63.400000000000006 accept=false veto=- inputs={"temp":"bold","goal":"belong","mood":"grieving","fear":25,"trust":21,"bond":{"v":-11,"depth":0},"partySize":2} reasons=["trust 21","bold temperament (+15)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d11 lure: Theo -> Yara chance=0 accept=false veto=sick inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":5} reasons=["sick — stays by the fire"]
+  INVITE-DEC d12 party: Hannah -> Rosa chance=67 accept=true veto=- inputs={"temp":"bold","goal":"belong","mood":"grieving","fear":4,"trust":30,"bond":{"v":-9,"depth":0},"partySize":2} reasons=["trust 30","bold temperament (+15)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d12 lure: Theo -> Yara chance=7 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":0,"affinity":26} reasons=["relationship with inviter (+7)","cautious temperament (-10)","wants to be alone (-25)","grieving mood (-10)"]
+  INVITE-DEC d13 lure: Theo -> Yara chance=17 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","cautious temperament (-10)","wants to be alone (-25)"]
+  INVITE-DEC d14 lure: Theo -> Yara chance=17 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":4,"affinity":26} reasons=["relationship with inviter (+7)","cautious temperament (-10)","wants to be alone (-25)"]
+  INVITE-DEC d15 party: Hannah -> Milo chance=67.2 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":4,"trust":68,"bond":{"v":11,"depth":0},"partySize":3} reasons=["trust 68","a big party is safer (+5)"]
+  INVITE-DEC d28 party: Theo -> Yara chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":5,"trust":62,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 62","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d28 party: Theo -> Karina chance=55.599999999999994 accept=true veto=- inputs={"temp":"mischievous","goal":"legacy","mood":"grieving","fear":5,"trust":64,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 64","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Theo -> Yara chance=15.599999999999994 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":0,"trust":64,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 64","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)"]
+  INVITE-DEC d32 party: Theo -> Grace chance=81.8 accept=true veto=- inputs={"temp":"warm","goal":"remember","mood":"steady","fear":4,"trust":67,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 67","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d40 party: Milo -> Yara chance=18.799999999999997 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":9,"trust":72,"bond":{"v":70,"depth":2},"partySize":4} reasons=["trust 72","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d41 party: Milo -> Lena chance=73.6 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"grieving","fear":0,"trust":84,"bond":{"v":60,"depth":2},"partySize":4} reasons=["trust 84","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d67 party: Luigi -> Saul chance=76 accept=true veto=- inputs={"temp":"steady","goal":"joy","mood":"grieving","fear":5,"trust":90,"bond":{"v":92,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d84 party: Karina -> Yara chance=16 accept=true veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":32,"trust":90,"bond":{"v":7,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d98 party: Grace -> Ofelia chance=66.4 accept=true veto=- inputs={"temp":"stoic","goal":"family","mood":"grieving","fear":92,"trust":91,"bond":{"v":91,"depth":3},"partySize":3} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d99 party: Grace -> Yerlan chance=51.2 accept=true veto=- inputs={"temp":"sardonic","goal":"remember","mood":"grieving","fear":56,"trust":53,"bond":{"v":10,"depth":0},"partySize":4} reasons=["trust 53","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d100 party: Lena -> Luis chance=43.2 accept=false veto=- inputs={"temp":"steady","goal":"joy","mood":"grieving","fear":88,"trust":58,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 58","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d101 party: Lena -> Ines chance=13.799999999999997 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":76,"trust":47,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 47","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d103 party: Lena -> Luis chance=51 accept=true veto=- inputs={"temp":"steady","goal":"joy","mood":"grieving","fear":56,"trust":65,"bond":{"v":20,"depth":0},"partySize":1} reasons=["trust 65","grieving mood (-10)"]
+  INVITE-DEC d104 party: Lena -> Brian chance=48.4 accept=true veto=- inputs={"temp":"gentle","goal":"belong","mood":"grieving","fear":4,"trust":21,"bond":null,"partySize":2} reasons=["trust 21","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d105 party: Lena -> Hunter chance=28.4 accept=false veto=- inputs={"temp":"prickly","goal":"remember","mood":"steady","fear":0,"trust":21,"bond":null,"partySize":3} reasons=["trust 21","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d127 party: Yara -> Giuseppe chance=58.4 accept=false veto=- inputs={"temp":"bold","goal":"family","mood":"steady","fear":4,"trust":21,"bond":null,"partySize":1} reasons=["trust 21","bold temperament (+15)"]
+  INVITE-DEC d129 party: Yara -> Giuseppe chance=64.8 accept=true veto=- inputs={"temp":"bold","goal":"family","mood":"steady","fear":17,"trust":37,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 37","bold temperament (+15)"]
+SEEDED-DAILY: [{"day":14,"v":44,"depth":2},{"day":15,"v":48,"depth":2},{"day":16,"v":54,"depth":3},{"day":17,"v":60,"depth":3},{"day":18,"v":60,"depth":3},{"day":19,"v":60,"depth":3},{"day":20,"v":66,"depth":3},{"day":21,"v":70,"depth":3},{"day":22,"v":74,"depth":3},{"day":23,"v":78,"depth":3},{"day":24,"v":78,"depth":3},{"day":25,"v":82,"depth":3},{"day":26,"v":86,"depth":3},{"day":27,"v":92,"depth":3}] class=rise
+GOSSIP: totalPicks=118 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=23 31-60=29 61-90=30 91-120=22 121+=6 naturalPicks=110 seededPicks=26 gossipPicks=118
+SEEDED: {"pair":{"a":"gen_8szwy98","b":"gen_oeumma2","aName":"Milo","bName":"Luigi"},"day":13,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":14,"v":44,"depth":2},{"day":15,"v":48,"depth":2},{"day":16,"v":54,"depth":3},{"day":17,"v":60,"depth":3},{"day":18,"v":60,"depth":3},{"day":19,"v":60,"depth":3},{"day":20,"v":66,"depth":3},{"day":21,"v":70,"depth":3},{"day":22,"v":74,"depth":3},{"day":23,"v":78,"depth":3},{"day":24,"v":78,"depth":3},{"day":25,"v":82,"depth":3},{"day":26,"v":86,"depth":3},{"day":27,"v":92,"depth":3}],"crackTraceClass":"rise","vAt7":66,"depthAt7":3,"vDrop":-16,"depthDrop":-1,"crack7":false,"firstServe":{"day":15,"why":"vgrievance"},"serveWithin30":true,"serves":31,"servesAll":[{"day":15,"why":"vgrievance"},{"day":16,"why":"vgrievance"},{"day":16,"why":"vgrievance"},{"day":17,"why":"vgrievance"},{"day":18,"why":"vgrievance"},{"day":19,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":21,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":41,"why":"vgrievance"}],"effect":true}
+  FRIEND d15: Milo <> Luigi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d20: Milo <> Saul — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Saul <> Luigi — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Luigi <> Ofelia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Milo <> Ofelia — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d70: Milo <> Karina — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d70: Milo <> Theo — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d75: Ofelia <> Grace — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d70: Saul <> Lena — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d70: Milo <> Lena — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Milo <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Milo <> Rosa — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d70: Ofelia <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Karina <> Luigi — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d30: Milo <> Grace — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Luigi <> Lena — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Saul <> Ofelia — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d55: Saul <> Grace — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Ofelia <> Lena — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d30: Milo <> Hannah — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d115: Karina <> Lena — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d95: Ofelia <> Rosa — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d85: Luigi <> Rosa — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d55: Luigi <> Grace — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d100: Karina <> Grace — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d85: Luigi <> Yara — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d85: Saul <> Yara — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d135: Lena <> Yara — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d115: Lena <> Luis — maxDepth 2, final 2 (v=50), dropped 0
+  CLOSE-READ d13: Grace about Milo — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Luigi about Milo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d24: Saul about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d25: Theo about Luigi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Luigi about Milo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Ofelia about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Luigi about Milo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Lena about Milo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Grace about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Grace about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Yara about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Grace about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Yara about Milo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Luigi about Saul — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Lena about Luigi — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d44: Grace about Saul — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Luigi about Saul — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Lena about Luigi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Yara about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d51: Lena about Luigi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Grace about Saul — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Karina about Grace — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Lena about Luigi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Yara about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d56: Luigi about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Rosa about Luigi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Lena about Luigi — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Lena about Luigi — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Grace about Luigi — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Karina about Luigi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d62: Yara about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Yara about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d64: Karina about Luigi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Rosa about Luigi — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Yara about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d67: Ofelia about Saul — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Saul about Grace — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Saul about Lena — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Saul about Lena — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Saul about Grace — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Grace about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Lena about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Saul about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Rosa about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d91: Grace about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Rosa about Ofelia — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d93: Lena about Saul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Yara about Ofelia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Yara about Ofelia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Ofelia about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d101: Rosa about Ofelia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Yara about Luis — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Luis about Yara — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d111: Luis about Yara — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d112: Yara about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d4: Ofelia about A woman, maybe 30s, with restless hands (why=grievance)
+  GRIEV-READ d9: Yara about Ofelia (why=grievance)
+  GRIEV-READ d15: Milo about Luigi (why=vgrievance)
+  GRIEV-READ d16: Milo about Luigi (why=vgrievance)
+  GRIEV-READ d16: Milo about Luigi (why=vgrievance)
+  GRIEV-READ d17: Milo about Luigi (why=vgrievance)
+  KNACK d5 Luigi: "the woman in her 30s, with restless hands talks to the garden. The garden listens. I've seen it."
+  KNACK d12 Rosa: "Huh. Let me think about that." "I'll tell you plain — Yara talks to the garden. The garden listens. I've seen it."
+  KNACK d16 Saul: "Well, Lena talks to the garden. The garden listens. I've seen it."
+  KNACK d19 Karina: "that stray dog — the one that bit two people — lets Grace touch it."
+  KNACK d21 Lena: "Milo talks to the garden. The garden listens. I've seen it."
+  KNACK d35 Ofelia: "Lena talks to the garden. The garden listens. I've seen it."
+  KNACK d39 Yara: "Huh. Let me think about that." "Ofelia ate something last month that should've killed them. They're fine."
+  KNACK d42 Yara: "Lena talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"starvation":1,"a stranger":4,"sickness":1,"the wild":3,"combat":4,"monster":1,"a wound that wouldn't close":1,"betrayal":1}
