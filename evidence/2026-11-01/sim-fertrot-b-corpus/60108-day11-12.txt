@@ -1,0 +1,19 @@
+loopDay 11 start {'x': 2, 'y': 4} end {'x': 2, 'y': 4}
+  forage at {'x': 1, 'y': 4} OK preAvail=29 preRegrow=3
+    SAY: A sturdy stick (crafting material).
+    SAY: A shot in the dark — you take what's green: 8× unknown nuts. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days.
+  travel {'x': 2, 'y': 4} -> {'x': 4, 'y': 4} BLOCKED:washed_out
+  travel {'x': 2, 'y': 4} -> {'x': 2, 'y': 6} moved
+  travel {'x': 2, 'y': 6} -> {'x': 2, 'y': 4} moved
+  travel {'x': 2, 'y': 4} -> {'x': 1, 'y': 4} moved
+  travel {'x': 1, 'y': 4} -> {'x': 2, 'y': 4} moved
+loopDay 12 start {'x': 2, 'y': 4} end {'x': 2, 'y': 4}
+  forage at {'x': 1, 'y': 4} FAIL preAvail=26 preRegrow=6
+    SAY: This patch is worked out — step to another green patch and forage again.
+  forage at {'x': 2, 'y': 2} OK preAvail=29 preRegrow=0
+    SAY: Some of these unknown shoots are starting to look familiar — sort them at camp in good light and the name might come to you.
+    SAY: A shot in the dark — you take what's green: 3× unknown shoots, 4× unknown nuts. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days.
+  travel {'x': 2, 'y': 4} -> {'x': 4, 'y': 4} BLOCKED:washed_out
+  travel {'x': 2, 'y': 4} -> {'x': 1, 'y': 4} moved
+  travel {'x': 1, 'y': 4} -> {'x': 2, 'y': 2} moved
+  travel {'x': 2, 'y': 2} -> {'x': 2, 'y': 4} moved
