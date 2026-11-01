@@ -90,10 +90,18 @@ function checkDriveOffLine(f, line) {
     const u = classifyUniverse(f);
     return u.cls === 'NO-REAL-INSTRUMENT' ? { lie: false } : { lie: true, reason: 'no-weapon line while holding an instrument (' + u.instrument + ')' };
   }
-  // Credited weapon must be held: equipped name match, or a carried
-  // close id whose token appears in the credited name, or the
-  // credited token appears in a held name.
+  // Credited weapon must be a USABLE held instrument (the
+  // spikecontact lie definition): a bow/sling/crossbow credited with
+  // no arrows is a lie even though the weapon is held — only a
+  // ranged weapon with ammoAtContact > 0, or a spear in the ranged
+  // slot, or a melee weapon, counts as held-usable here.
   const names = heldNames(f);
+  const u = classifyUniverse(f);
+  if (f.rangedEqName && low(f.rangedEqName).indexOf(credited) >= 0) {
+    if (u.rangedUsable || u.spearHeld) return { lie: false };
+    return { lie: true, reason: 'credited "' + credited + '" held but unusable (no arrows)' };
+  }
+  if (f.meleeEqName && low(f.meleeEqName).indexOf(credited) >= 0) return { lie: false };
   if (names.some(n => n.indexOf(credited) >= 0 || credited.indexOf(n) >= 0)) return { lie: false };
   const carried = (f.closeCarriedIds || []).concat(f.meleeCarriedIds || []);
   if (carried.some(id => { const t = low(id).replace(/_/g, ' '); return credited.indexOf(t) >= 0 || t.indexOf(credited) >= 0; })) return { lie: false };
