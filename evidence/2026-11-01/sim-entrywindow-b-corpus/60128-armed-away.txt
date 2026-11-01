@@ -1,0 +1,46 @@
+ARMED 60128 — away-day window (loopDays 17-23) and the return home
+Baseline contrast: baseline 60128 ends away on loopDays 16-30 (15 day-ends, 13 live returns).
+Armed 60128 ends away on loopDays 18-22 only (5 day-ends, 23 live returns) — the rule IMPROVED the stranding shape on this seed.
+
+loopDay 17 start={'x': 4, 'y': 4, 'mx': 0, 'my': 0} end={'x': 4, 'y': 4, 'mx': 0, 'my': 0} haven={'x': 4, 'y': 4}
+  forage at {'x': 4, 'y': 3, 'mx': 0, 'my': 8} entry={'x': 0, 'y': 8} windowHarvest=1 ok=True reason=None
+    say: You work the patch with practiced hands: 11× Purslane (330 kcal). This patch is picked clean — it'll recover in a few days.
+loopDay 18 start={'x': 4, 'y': 4, 'mx': 0, 'my': 0} end={'x': 5, 'y': 4, 'mx': 1, 'my': 0} haven={'x': 4, 'y': 4}
+  forage at {'x': 5, 'y': 4, 'mx': 1, 'my': 0} entry={'x': 1, 'y': 0} windowHarvest=3 ok=True reason=None
+    say: You also take some vine (crafting material).
+    say: You work the patch with practiced hands: 13× Hickory Nuts, 11× Muscadine Grapes, 13× Blackberry (1835 kcal). This patch is picked clean — it'll recover in a few days.
+loopDay 19 start={'x': 5, 'y': 4, 'mx': 1, 'my': 0} end={'x': 5, 'y': 4, 'mx': 1, 'my': 0} haven={'x': 4, 'y': 4}
+  forage at {'x': 5, 'y': 3, 'mx': 1, 'my': 8} entry={'x': 1, 'y': 8} windowHarvest=2 ok=True reason=None
+    say: ★ Deeper knowledge: Muscadine Grapes. Parts: fruit (eat), leaves (wrap food), vines (cordage). (Yield +50%). Use unlocked: food: thick-skinned wild grapes, sweet-tart.
+    say: Unfamiliar unknown berries — into the bag. (Unknowns lump together; sort them at camp.)
+    say: Journal: Disturbed ground grows good weeds.
+    say: Journal updated: Muscadine Grapes grows here too — better than a vine with elaborate purple-and-white flowers and egg-sized green fruit that wrinkles yellow when ripe.
+loopDay 20 start={'x': 5, 'y': 4, 'mx': 1, 'my': 0} end={'x': 5, 'y': 4, 'mx': 1, 'my': 0} haven={'x': 4, 'y': 4}
+  forage at {'x': 6, 'y': 4, 'mx': 0, 'my': 0} entry={'x': 0, 'y': 0} windowHarvest=0 ok=False reason=worked_out
+    say: This patch is worked out — step to another green patch and forage again.
+  forage at {'x': 3, 'y': 4, 'mx': 8, 'my': 0} entry={'x': 8, 'y': 0} windowHarvest=1 ok=True reason=None
+    say: You work the patch with practiced hands: 7× Blackberry (455 kcal). This patch is picked clean — it'll recover in a few days.
+loopDay 21 start={'x': 5, 'y': 4, 'mx': 1, 'my': 0} end={'x': 5, 'y': 4, 'mx': 8, 'my': 0} haven={'x': 4, 'y': 4}
+  forage at {'x': 7, 'y': 4, 'mx': 2, 'my': 0} entry={'x': 2, 'y': 0} windowHarvest=2 ok=True reason=None
+    say: Unfamiliar unknown nuts — into the bag. (Unknowns lump together; sort them at camp.)
+    say: A sturdy stick (crafting material).
+    say: Journal: Deep shade. The floor keeps its secrets.
+    say: A shot in the dark — you take what's green: 9× unknown nuts. Into the bag, unnamed. (Not food until identified — sort them at camp.) You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days.
+loopDay 22 start={'x': 5, 'y': 4, 'mx': 8, 'my': 0} end={'x': 5, 'y': 3, 'mx': 8, 'my': 8} haven={'x': 4, 'y': 4}
+  forage at {'x': 5, 'y': 3, 'mx': 8, 'my': 8} entry={'x': 8, 'y': 8} windowHarvest=2 ok=True reason=None
+    say: Some of these unknown nuts are starting to look familiar — sort them at camp in good light and the name might come to you.
+    say: A sturdy stick (crafting material).
+    say: Journal updated: a tree with lobed leaves and oval nuts in scaly caps grows here too — better than muscadine grapes.
+    say: Journal updated: Hickory Nuts grows here too — better than a tree with lobed leaves and oval nuts in scaly caps.
+loopDay 23 start={'x': 4, 'y': 4, 'mx': 4, 'my': 4} end={'x': 4, 'y': 4, 'mx': 8, 'my': 0} haven={'x': 4, 'y': 4}
+  forage at {'x': 4, 'y': 3, 'mx': 4, 'my': 8} entry={'x': 4, 'y': 8} windowHarvest=0 ok=False reason=worked_out
+    say: This patch is worked out — step to another green patch and forage again.
+  forage at {'x': 5, 'y': 4, 'mx': 1, 'my': 0} entry={'x': 1, 'y': 0} windowHarvest=3 ok=True reason=None
+    say: You work the patch with practiced hands: 5× Hickory Nuts, 5× Muscadine Grapes, 6× Blackberry (840 kcal). This patch is picked clean — it'll recover in a few days.
+
+ARMED 60128 loopDay 3 — an ordinary first-try success (window harvest 1, the census minimum that pays):
+  forage at {'x': 4, 'y': 3, 'mx': 4, 'my': 8} entry={'x': 4, 'y': 8} windowHarvest=1 ok=True
+    say: Unfamiliar unknown shoots — into the bag. (Unknowns lump together; sort them at camp.)
+    say: Journal: Slow water. The cattails stand thick.
+    say: 📓 Journal: you UNDERSTAND **Green Thumb, Literally**. It resonates with: something unnamed, something unnamed.
+    say: A shot in the dark — you take what's green: 2× unknown shoots. Into the bag, unnamed. (Not food until identified — sort them at camp.) This patch is picked clean — it'll recover in a few days.
