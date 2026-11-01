@@ -230,3 +230,225 @@ shadow is that two villages that would have won by day ~160–197 instead
 ran out the 200-day clock still strong but unseated — why is not yet
 known, and the fresh-seed confirm band is where that gets tested before
 anyone calls this safe to keep.
+
+## Confirm section (run fleshout-loop-a-20261101T0515Z, arm sim-contactfinish-a-confirm)
+
+Confirm verdict: **GO — all six preregistered bars hold on the 12-seed
+confirm band alone** (never pooled into the pilot). The rule is NOT
+merged by this worker; it is reported 'ready to merge, pending
+coordinator'. No game-code change was made in this leg: the rule is
+commit `54642e946`, branch tip `c41b8cb60`, unchanged.
+
+### Confirm band table (both legs, identical seeds, same policy stack)
+
+Policy stack both legs: `withFullseatDiag(withSeatDrive(withWinDefer(TF
+leadfeast)))`, `FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1
+SEATDRIVE=1 FULLSEAT=1`, recorder `CONTACTFINISH=1`, death-aware cap
+200 loop-days. Seeds: 87103, 87107, 87120, 87121, 87126, 87128, 87132,
+87134, 87135, 87137, 87138, 87141. Baseline leg FIRST with the rule
+OFF (fieldFights.js swapped to the `1a6dce59d` version, verified
+byte-identical to that commit and differing from HEAD by the rule
+block only), then restored from the backup copy (never `git
+checkout` as the restore step) with `git diff HEAD` verified empty
+before the lever leg ran. The legs differ ONLY by this rule.
+
+| | Baseline (rule OFF) | Lever (rule ON) |
+| --- | --- | --- |
+| National / table / wins | 7/12 / 10/12 / 9/12 | 6/12 / 10/12 / 9/12 |
+| Wave-4 / wave-5 | 10/12 / 0/12 | 10/12 / 0/12 |
+| Full seat | 0/12 | 0/12 |
+| Median / max survival | 90d / 144d | 90d / 163d |
+| Wave-3 rows / CONTACT meetings | 128 / 14 | 87 / 1 (remaining only) |
+| Judged finishable mFlee CONTACT | 13 (+1 no-instrument) | 3 attempted (2 killed, 1 struck-and-fled), 0 remaining finishable |
+| Drive-off lines / lies | 14 / 14 (100%, old code) | 1 / 0 (0%) |
+| Wave-3 field deaths | 2 | 2 |
+| Recorder errors | 0 all seeds | 0 all seeds |
+
+Per seed (baseline nat/table/won/days → lever nat/table/won/days):
+87103 0/0/0/60 → 0/0/0/60; 87107 1/1/1/90 → 1/1/1/90; 87120 1/1/1/103
+→ 1/1/1/103; 87121 1/1/1/90 → 1/1/1/96; 87126 1/1/1/102 → 1/1/1/102;
+87128 0/1/1/91 → 0/1/1/91; 87132 1/1/1/90 → 1/1/1/90; 87134 0/1/1/90
+→ 0/1/1/90; 87135 1/0/0/144 → 0/0/0/163; 87137 0/1/0/89 → 0/1/0/89;
+87138 1/1/1/90 → 1/1/1/90; 87141 0/1/1/90 → 0/1/1/90. Best seat is
+lesser everywhere a seat was taken, none on 87103/87135.
+
+### The six bars (confirm band alone)
+
+| GO bar | Result |
+| --- | --- |
+| Converted kills >= 50% of judged finishable mFlee CONTACT meetings | **PASS: 2/3 = 66.7%** (attempted 3, all analyzer-verified finishable; remaining finishable 0) |
+| Unarmed meetings converted = 0 | **PASS: 0** |
+| Deaths attributable to contact-finish attempts = 0 | **PASS: 0** (no vDie row carries `contactFinishAttempted`) |
+| Median survival >= baseline −10% | **PASS: 90d vs 90d** (bar 81d) |
+| Wave >= 3 field deaths <= baseline + 2 | **PASS: 2 vs 2** (bar 4; same two seeds, 87128 and 87137, on both legs) |
+| Lie rate on remaining drive-off lines = 0 | **PASS: 0/1** (the one remaining line uses honest no-weapon wording) |
+
+Instrument accounting (prereg: a mismatch fails the accounting even
+if the conversion bar passes): **zero mismatches** — no engine
+attempt outside the analyzer's spear-counts-as-melee universe, no
+analyzer-universe row left unattempted, no instrument-unclassified
+rows on either leg. Baseline leg attempted 0, as it must with the
+rule off.
+
+### The three strikes (all analyzer-verified finishable)
+
+- 87121 d79, Greta, Hardlight knife vs 28-HP Callback (28/260, below
+  the 15% break line): **killed** (40 dmg).
+- 87135 d85, Sigrun, crowbar vs 17-HP Spool: struck for 10 (7 left),
+  beast broke away.
+- 87135 d87, Francisco, fire-hardened spear vs 7-HP Spool: **killed**
+  (16 dmg) — the spear-edge case again, spear named.
+
+### Sense-reads (4 transcripts: 3 strikes + 1 leftover, judged for MEANING)
+
+All three kills read as earned put-downs, not granted fights: a real
+single strike, the held weapon named, the beast already below its
+break line (28, 17, and 7 HP against 260–280 maxima). Greta's kill
+line is the strongest honesty check on the band: her log first says
+she "has Crude bow but no arrows — the string stays drawn, useless",
+and the kill line then credits the hardlight knife, never the bow —
+the two lines agree instead of contradicting. Sigrun's failed strike
+reads as a real attempt that fell short (10 vs 17 HP, 7 left stated
+before the flight). The one leftover drive-off is the honest pair:
+Pasquale "has Phase sling but no arrows", then "drove Ugly-Eyes off
+— it broke before it ever closed" — no weapon credited. **No line
+anywhere in these 4 transcripts credits a weapon nobody holds.**
+(The "Ugly-Eyes" name is the pre-existing monster-naming fixture,
+not this arm's.) All 3 attempts are engage intent, as on the pilot;
+the intent-gating question still has not arisen on any judged band.
+
+### The win dip: does NOT replicate on confirm
+
+Pilot dip (table/wins 7/8 → 5/8) is absent here: confirm table/wins
+are **10/9 on BOTH legs with identical won sets** (87107, 87120,
+87121, 87126, 87128, 87132, 87134, 87138, 87141 won on both legs; no
+seed flips won → survived-to-cap in either direction). Wins are not
+a preregistered bar and this is not re-scored either way; it is
+reported because the pilot carried it as the confirm decision item.
+The one confirm move is national, not wins: s87135 reached national
+on baseline (144d, village-lost) but not on lever (163d,
+village-lost) — it won on neither leg, and it lived 19 days longer
+on the lever leg. The §15 confirm panel returns `review_required`
+on that single signal alone (national scale access 0.5833 → 0.5,
+regression_watch); table win rate, table sitting, day-30/60
+survival, and community loss are all exactly flat (0 delta). The
+panel is the instrument; the six bars above are the judge.
+
+### Trajectory note: s87135 reroutes hard after two conversions
+
+Baseline s87135 produced 47 wave-3 rows and 11 finishable CONTACT
+meetings; lever s87135 produced 6 wave-3 rows, 2 attempts, and no
+remaining CONTACT meetings. Two conversions rerouted the village's
+whole later meeting stream (fewer wave-3 meetings, longer survival,
+no national). The mechanism is not identified from these corpora —
+same open class as the pilot's win-dip mechanism question, but here
+it cost no win. This is a coordinator note, not a bar: nothing in
+the preregistration scores trajectory stability, and all six bars
+pass. A future arm that wants to claim the rule is trajectory-safe
+needs a mechanism account for s87135, not just bar passes.
+
+### Baseline-confirm reuse decision (strict byte rule, honored)
+
+The dead worker's partial baseline-confirm corpus (s87103, s87107)
+was NOT reused. A fresh rule-OFF re-run of those 2 seeds reproduced
+them in every simulation field but differed at one metadata line:
+`anchorCommit` `54642e946806` (dead worker's HEAD) vs `c41b8cb60b44`
+(current tip, pilot evidence commit). The task's reuse rule requires
+byte-identity, so both files were discarded and the full 12-seed
+baseline band was re-run fresh; the fresh s87103/s87107 files then
+matched the det-run scratch copies byte-identically (143,533 and
+332,274 bytes). No judged number rests on the discarded files.
+
+### EPERM flap windows in this leg
+
+- Coordinator-start flap (2026-11-01 05:19Z, reported in the task)
+  did not stall this leg's baseline sweep (05:23–05:28Z, relay
+  wrote=12 failed=0, no retries logged).
+- Lever-leg relay stall ~05:34–~05:40Z: the relay stopped after
+  s87120 and sat on the s87121 write through the flap (sweep
+  stderr shows seeds completing while relay output froze; relay
+  stderr is buffered behind the retry loop, so no waiting line
+  flushed until the flap lifted). When it lifted, the relay
+  flushed all remaining seeds in one go: final relay done
+  wrote=12 skipped=0 failed=0, all 12 files full-size. A
+  flap-blocked write was treated as a retry, not a failure, and
+  no file was accepted without full-size verification.
+- The two untracked 0-byte pilot lever captures
+  (`contactfinish-lever-pilot.jsonl` / `.err`, 2026-11-01 02:11Z)
+  were flap casualties with no content; the judged lever-pilot
+  corpus is the committed per-seed JSONs, so the empty files were
+  deleted, not committed.
+
+### Metric review (for the NEXT run, not this verdict)
+
+- The confirm universe is small (3 attempts; baseline finishable
+  13 concentrated 11-on-1-seed on s87135). Conversion 2/3 = 66.7%
+  matches the pilot's 4/6 = 66.7% exactly, but on tiny n; pooled
+  descriptively that is 6/9 = 66.7%. The rate is stable, the
+  sample is thin — a future band with more attempts would firm
+  it, but no preregistered bar demands it.
+- The lever-leg universe definition (attempted + remaining
+  finishable) worked verbatim again: remaining finishable 0, so
+  no denominator ambiguity on confirm.
+- The baseline-leg lie rate (14/14) is the old-code control, not
+  a leak: the baseline leg runs pre-rule code by design. The
+  lever leg is where the bar lives (0/1).
+- The full-20-seed panel (descriptive only, pooled, never a
+  verdict) shows win 0.8 → 0.7 and sitting 0.85 → 0.75 — both
+  inherit the pilot dip; confirm alone is flat. Do not cite the
+  pooled panel as a confirm result.
+
+### Unmeasured (never zero)
+
+Arc reach, four-realm formation, trap acquisition, counter
+discovery, and young-link succession are not in the contactfinish
+corpora. The s87135 reroute mechanism is unmeasured (see above).
+Intent-gating of the finish (learn-intent meetings) is unmeasured
+— no such meeting appeared on either judged band.
+
+### Panel (§15)
+
+`evidence/2026-10-31/sim-contactfinish-a-panel-compare-confirm.{md,json}`
+plus `-before-confirm`/`-after-confirm` panel `.json.gz`, and the
+full-20-seed descriptive set with `-full` suffix, built by
+`scripts/contactfinish-panels-20261031.js` (extended in this leg
+with a `[pilot|confirm|full]` band argument; pilot files
+untouched). Deviation stated on the face of each compare: the
+official panel driver runs sweep-compare registry policies only
+and cannot express the leadfeast + fullseat-diag stack +
+contactfinish instrument, so panels are built from the sweep
+corpora. Contract metrics mapped where observable (won, table,
+national, survival30/60, communityLost); the rest null, never
+fabricated. Panel is the instrument; prereg thresholds are the
+judge.
+
+### Proof and suite
+
+- `scripts/test-contactfinish-20261031.js` (pilot proof, re-run on
+  the final branch state): **39/39 passed**.
+- `scripts/test-contactfinish-confirm-20261031.js` (new, confirm
+  leg): **9/9 passed** — all six bars, both mismatch checks, and
+  the baseline zero-attempt control, asserted from the confirm
+  corpora, not eyeballed.
+- No game-code change was made in this leg, so no new `check.js`
+  surface exists beyond the pilot's full run (284 passed, 6
+  pre-existing failures, re-verified individually then). The
+  panels-script extension is tooling-only and was validated by
+  running it (confirm + full compares produced, exit 2 = material
+  signal, not an error).
+
+### Village assessment (plain words, confirm band)
+
+On twelve fresh villages, the rule did what the pilot said it
+would: villagers who meet a dying beast with a real weapon in
+hand try one honest finishing blow — two out of three such tries
+put the beast down — and villagers with nothing usable watch it
+walk away while the log says so plainly. Villages survive exactly
+as long, lose nobody extra, and win exactly as often; the pilot's
+worrying win dip did not show up again. The one shadow is a
+single village whose whole later story changed course after two
+finishing blows — longer life, fewer monster meetings, no
+national standing where it had reached it before — and nobody
+yet knows why a kill instead of a flight reroutes a village that
+far. That question travels with the rule to the coordinator; it
+does not overturn six passing bars.
