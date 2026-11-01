@@ -328,4 +328,24 @@ numbers (prereg decision stands).
   discard.
 
 ## Landing (filled at closeout)
-PENDING — filled after check.js --quick completes, rebase, and merge.
+Master at worktree creation: 230bc154e. At closeout master had moved
+to e39adc6de (Loop A 1415Z coordinator evidence + sim-heraldplace-a —
+ZERO src/js + src/data in the range, verified by diff). The branch
+was rebased cleanly onto e39adc6de (2/2 picks, no conflicts, no
+stop-at-pick quirk), and proofs were re-run after the rebase as the
+body requires: node --check clean on conversation.js, goal proof 7/7,
+gossip proof 11/11, gossip analyzer on the scored quad unchanged
+(1 pair / 0 fallback). NO quad re-run after the rebase: the rebase
+range holds zero game code, so the measured quad stands unchanged on
+the new base (the post-fix control quad already covers the fix's
+behavioral footprint).
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 780a5c0db (prereg + driver/analyzer + gossip
+analyzer + proof), 49a78b0d3 (fix + goal proof + quad + postfix
+control + run note), plus this landing section as the final branch
+commit, merged by a second fast-forward. Worktree released + branch
+deleted at closeout; final main-tree status clean. Rotation file
+written 3→0 at closeout and verified by reading it back. Playtest
+lock deleted at closeout. Heartbeat loop stopped at closeout.
