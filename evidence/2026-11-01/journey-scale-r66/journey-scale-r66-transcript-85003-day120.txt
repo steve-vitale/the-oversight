@@ -1,0 +1,23 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 85003 day 120 — conversation with Henrique (visjoin_118) ===
+occupation=crossing guard temperament=restless trust=22 dead=false
+want: seek_taken (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+YOU: [ask:gossip] "What's the word around the fire?"
+THEM: "You want to know about that? Okay." "Dulat? A Dentist, back before. Solid person. Funny how that works."
+YOU: [dlg:more] "Go on."
+THEM: "Okay, okay — Chloe headed out to haul something back."
+YOU: [dlg:react] (listen)
+THEM: "The way I read it — Word is you're doing right by people. Keep it up."
+YOU: [dlg:more] "Go on."
+THEM: "Word is you're doing right by people. Keep it up. That's my read."
+YOU: [dlg:react] (listen)
+THEM: "Moving! But — good talk! More later!"
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread gossip
