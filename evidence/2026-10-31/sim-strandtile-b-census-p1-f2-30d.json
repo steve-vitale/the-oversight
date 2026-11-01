@@ -1,0 +1,452 @@
+{
+  "corpusDir": "evidence/2026-10-31/sim-strandtile-b-corpus-p1-f2-30d",
+  "policy": "nighttravel-stack",
+  "horizonDays": 30,
+  "legs": 8,
+  "seeds": [
+    17511,
+    17512,
+    17513,
+    17514,
+    17515,
+    17516,
+    17517,
+    17518
+  ],
+  "gateOkLegs": 8,
+  "gateFailures": [],
+  "totalCreekTileEvenings": 7,
+  "totalConfirmedNights": 6,
+  "totalFailedReturn": 6,
+  "totalNoAttempt": 0,
+  "totalUnclassified": 0,
+  "classificationCompleteness": 1,
+  "totalBlockedCrossingNights": 6,
+  "totalUnconfirmedSleepReturn": 0,
+  "totalUnconfirmedHavenFollowing": 1,
+  "totalUnconfirmedEndOfRun": 0,
+  "totalCamps": 1,
+  "totalGenuine": 2,
+  "totalErrs": 0,
+  "totalEpisodes": 2,
+  "episodesPerLeg": 0.25,
+  "seedsWithEpisode": [
+    17511,
+    17513
+  ],
+  "lengthDist": {
+    "1": 1,
+    "2-4": 0,
+    "5+": 1
+  },
+  "episodesByEnd": {
+    "MOVED-ELSEWHERE": 1,
+    "SUCCESSION": 1
+  },
+  "episodes": [
+    {
+      "seed": 17511,
+      "vesselId": "gen_cogph00",
+      "startDay": 10,
+      "endDay": 10,
+      "days": [
+        10
+      ],
+      "length": 1,
+      "nights": [
+        {
+          "loopDay": 10,
+          "vesselId": "gen_cogph00",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        }
+      ],
+      "endStory": "MOVED-ELSEWHERE",
+      "exitDay": 11
+    },
+    {
+      "seed": 17513,
+      "vesselId": "gen_riqgwrh",
+      "startDay": 5,
+      "endDay": 9,
+      "days": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "length": 5,
+      "nights": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_riqgwrh",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_riqgwrh",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 7,
+          "vesselId": "gen_riqgwrh",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_riqgwrh",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 9,
+          "vesselId": "gen_riqgwrh",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        }
+      ],
+      "endStory": "SUCCESSION",
+      "exitDay": 10
+    }
+  ],
+  "perSeed": [
+    {
+      "seed": 17511,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 1,
+      "creekTileEvenings": 1,
+      "creekTileDays": [
+        10
+      ],
+      "confirmedNights": 1,
+      "confirmedDays": [
+        10
+      ],
+      "failedReturn": 1,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 1,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [
+        {
+          "vesselId": "gen_cogph00",
+          "startDay": 10,
+          "endDay": 10,
+          "days": [
+            10
+          ],
+          "length": 1,
+          "nights": [
+            {
+              "loopDay": 10,
+              "vesselId": "gen_cogph00",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            }
+          ],
+          "endStory": "MOVED-ELSEWHERE",
+          "exitDay": 11
+        }
+      ],
+      "episodeCount": 1
+    },
+    {
+      "seed": 17512,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 0,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [],
+      "episodeCount": 0
+    },
+    {
+      "seed": 17513,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 1,
+      "creekTileEvenings": 6,
+      "creekTileDays": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "confirmedNights": 5,
+      "confirmedDays": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "failedReturn": 5,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 5,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 1,
+      "unconfirmedEndOfRun": 0,
+      "camps": [
+        {
+          "startDay": 5,
+          "endDay": 10,
+          "length": 6,
+          "days": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "genuine": true,
+          "confirmedNights": 5,
+          "endStory": "succession"
+        }
+      ],
+      "episodes": [
+        {
+          "vesselId": "gen_riqgwrh",
+          "startDay": 5,
+          "endDay": 9,
+          "days": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "length": 5,
+          "nights": [
+            {
+              "loopDay": 5,
+              "vesselId": "gen_riqgwrh",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 6,
+              "vesselId": "gen_riqgwrh",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 7,
+              "vesselId": "gen_riqgwrh",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 8,
+              "vesselId": "gen_riqgwrh",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 9,
+              "vesselId": "gen_riqgwrh",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            }
+          ],
+          "endStory": "SUCCESSION",
+          "exitDay": 10
+        }
+      ],
+      "episodeCount": 1
+    },
+    {
+      "seed": 17514,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 0,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [],
+      "episodeCount": 0
+    },
+    {
+      "seed": 17515,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 0,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [],
+      "episodeCount": 0
+    },
+    {
+      "seed": 17516,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 0,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [],
+      "episodeCount": 0
+    },
+    {
+      "seed": 17517,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 0,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [],
+      "episodeCount": 0
+    },
+    {
+      "seed": 17518,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 0,
+      "creekTileEvenings": 0,
+      "creekTileDays": [],
+      "confirmedNights": 0,
+      "confirmedDays": [],
+      "failedReturn": 0,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 0,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 0,
+      "unconfirmedEndOfRun": 0,
+      "camps": [],
+      "episodes": [],
+      "episodeCount": 0
+    }
+  ]
+}
