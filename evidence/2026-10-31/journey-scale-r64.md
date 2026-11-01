@@ -309,4 +309,27 @@ this run's numbers (prereg decision stands).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
-[PENDING — filled at closeout]
+Master at worktree creation: daf9e7c76. At closeout master had moved
+to ee159dbc3 (sibling evidence-only merges plus one src change:
+sim-chorus-a CHORUS-HOLD, fieldFights.js +36 — committed fighters
+hold through a downbeat dance round instead of losing the finish;
+narrow to chorus_line, requires a prior commitment). The branch was
+rebased cleanly onto ee159dbc3 (no conflicts), and proofs were
+re-run after the rebase as the body requires: node --check clean
+on all three scripts, and a FULL quad re-run on the rebased base
+into a scratch evid dir gave identical census scalars and 0-line
+capture diffs on all four seeds, with 0 "chorus hold" lines — the
+hold never fires on these paths, so r64's verdicts stand unchanged
+on the new base as well as the measurement base. (The scratch
+re-run dir was not committed; its comparison numbers are the
+record above.)
+Merged locally via `git merge --ff-only journey-scale-r64` →
+master [HASH], pending ship (no bump, no push, no live verify —
+ship loop owns those).
+Branch commits: a7f9eb2f1 (prereg + driver, rebased from a66db4ae),
+a711010db (quad + bank-trace wide band + evidence, rebased from
+1a0784f09). This landing-section commit follows on the same branch
+and is merged by a second fast-forward (hash in the branch log).
+Worktree released + branch deleted at closeout; final main-tree
+status clean. Rotation file written 3→0 at closeout and verified
+by reading it back.
