@@ -11,11 +11,18 @@ const fs = require('fs');
 
 function loadReplay(file) {
   const raw = fs.readFileSync(file, 'utf8').trim();
-  // Accept: a single {"seed","adopt"} object, a bare adopt object, or
-  // JSON-lines (first line wins for a per-seed file).
-  const first = raw.split('\n').find(l => l.trim());
-  const obj = JSON.parse(first);
-  return obj.adopt || obj;
+  // Accept: a single {"seed","adopt"} object (pretty or compact), a bare
+  // adopt object, or JSON-lines (first parseable line wins).
+  try {
+    const obj = JSON.parse(raw);
+    return obj.adopt || obj;
+  } catch (e) {
+    for (const line of raw.split('\n')) {
+      if (!line.trim()) continue;
+      try { const obj = JSON.parse(line); return obj.adopt || obj; } catch (e2) {}
+    }
+    throw e;
+  }
 }
 
 function checkSeed(a, isPrimary) {
@@ -23,7 +30,7 @@ function checkSeed(a, isPrimary) {
   const bars = [];
   const add = (name, pass, detail) => bars.push({ name, pass, detail });
   if (!p.sounded) {
-    add('sounded', false, 'no refused Herald attempt triggered the call (seed not judged)');
+    add('sounded', null, 'no refused Herald attempt triggered the call (seed not judged)');
     return { seed: a.seed, judged: false, bars, pass: null };
   }
   const snap = p.snapshotCallYield;
@@ -74,6 +81,8 @@ function main() {
     const r = checkSeed(a, isPrimary);
     console.log(`seed ${a.seed} (${isPrimary ? 'PRIMARY' : 'control'}): judged=${r.judged} pass=${r.pass}`);
     r.bars.forEach(b => console.log(`  ${b.pass === null ? 'N/A ' : (b.pass ? 'PASS' : 'FAIL')} ${b.name}: ${b.detail}`));
+    // An unjudged seed (no trigger) is N/A, not a failure — only judged
+    // seeds gate the overall verdict.
     if (r.pass === false) overall = false;
   }
   console.log(overall ? 'OVERALL PASS' : 'OVERALL FAIL');
