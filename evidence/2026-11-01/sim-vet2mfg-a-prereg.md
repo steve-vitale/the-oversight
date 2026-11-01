@@ -178,6 +178,41 @@ only if the pilot passes its bar; the confirm band, if run, is
 verdict time and recorded in the evidence file — never by silently
 extending the pilot.
 
+## Amendment 1 (appended BEFORE any verdict, after the first pilot — the pilot gate was NOT declared)
+
+The first pilot (8 seeds, 95301–95308) FAILED the GO bar on one
+instrument gap: 29 UNCLASSIFIED "unresolved-start" events, all type
+'herald' on seed 95304 (days 161–165). Root cause, proven by three
+scratch probes (reproduction + accessor trap + direct call, all on
+scratch, none judged data): startCombat on a TITAN without a mustered
+coalition is HARD-REFUSED by the titan gate (src/js/titans.js,
+"no_solo_titans" — a titan "does not notice you the way prey notices
+a hunter"; herald needs 10 allied blades). The refusal returns null
+WITHOUT creating a fight and WITHOUT throwing. The first sweep only
+treated the live-fight check as refusal, so the 29 gate refusals
+looked like fights that never ended. The herald caller is the
+monster's own hungry-branch turn (game.js monsterTurn: a territorial
+monster that steps onto the player calls startCombat); the gate
+refuses it aloud, every tick, while the herald paces — 29 refusals in
+5 days on 95304, zero fights, zero tbEnds.
+
+Instrument fix (this amendment): tbStarts record refusal from the
+RETURN VALUE (null/undefined = no fight created) plus the live-fight
+entry check plus a throw capture (rethrowing the original error).
+Refused starts are classified 'refused' events in the analyzer
+(reported per seed by type), never fights and never UNCLASSIFIED.
+Only a NON-refused start with no tbEnd is unresolved. The analyzer
+also reports pending-instantiated player fights (tbStart worldWave
+null — the 95308 shape: a player-channel kill with no world spawn,
+via pending/wanderer instantiation, not a spawn-census miss).
+
+Handling (vet2-a precedent: discard, don't patch): the first pilot
+corpus is DISCARDED (files deleted, not retained as judged data) and
+the arm re-pilots fresh on the same band (95301–95308) with the fixed
+instrument. No verdict was declared on the discarded pilot; its
+numbers are not cited as judged data. The GO bar itself is unchanged
+— the amendment only corrects what counts as a fight.
+
 ## Sense-test plan
 
 Read, where the funnel touches narration: muster/shelter say lines
