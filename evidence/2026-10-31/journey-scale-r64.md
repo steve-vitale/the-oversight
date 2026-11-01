@@ -323,6 +323,15 @@ hold never fires on these paths, so r64's verdicts stand unchanged
 on the new base as well as the measurement base. (The scratch
 re-run dir was not committed; its comparison numbers are the
 record above.)
+At closeout master had moved a second time, to cc67af1b7 (lane B
+journey-endgame r77; zero src/js + src/data changes in the range),
+so the branch was rebased a second time onto cc67af1b7. The
+rebase stopped at the landing pick with the known stop-at-pick
+quirk (pick in both done and todo lists, tree clean); `git rebase
+--continue` sailed through the remaining picks, final log shows
+each commit exactly once. Proofs re-run after the second rebase:
+node --check clean, and seed-85001 pilot re-run on the final base
+gave identical scalars and a 0-line capture diff.
 Merged locally via `git merge --ff-only journey-scale-r64` →
 master (hash in the branch log), pending ship (no bump, no push,
 no live verify — ship loop owns those).
