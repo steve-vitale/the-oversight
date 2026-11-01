@@ -389,12 +389,15 @@ past wave 4 to a full seat still does not complete.
   any Herald field — but it still selects: screened
   bands must never be pooled with unscreened bands or
   trended as if representative. (e) This worktree's
-  base differs from heraldarr-a's anchor (rebased to
-  the Loop B 1830Z head before this evidence commit —
-  zero `src/js` changes in the rebase range, game
-  behavior identical, proofs re-run green on the
-  rebased tip), so counts are judged on their own base,
-  never pooled with heraldarr-a. (f) NEW: the raidPin
+  base differs from heraldarr-a's anchor (branch
+  rebased onto the Loop B 1830Z head 62aaa8f21 after
+  the evidence commit: prereg d8efee008 → 823266839,
+  screen driver a8fff494a → 567c7c4e3, evidence
+  c4d8b0dfd → 37ca9d6c5 — zero `src/js` changes in
+  the rebase range, game behavior identical, proofs
+  re-run green on the rebased tip), so counts are
+  judged on their own base, never pooled with
+  heraldarr-a. (f) NEW: the raidPin
   move event records net before/after tiles across a
   raid call, collapsing draft + same-call fight-flee
   into one event; chains through such days need a
