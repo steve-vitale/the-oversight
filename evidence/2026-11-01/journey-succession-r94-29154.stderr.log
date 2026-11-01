@@ -1,0 +1,38 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Carmela","t":90},{"id":"Caleb","t":90},{"id":"Nikolai","t":63},{"id":"Adaeze","t":62}], roster=9
+INH readable=true scripted=true deadItems=13 distinct=13 transferred=2 vanished=4 keptPlants=18 inheritedPlants=5 keptSkills=6 inheritedSkills=5 succTrustPre=90 succTrustPost=64
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d41 (a hushwolf, scripted): Paola -> Carmela | passed=true lin=true mo=true trust=64 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=7 vanished=4 of 13 distinct dead-bearer items
+  CONVO d+3 with Caleb (refused=false)
+  CONVO d+3 with Adaeze (refused=false)
+  CONVO d+7 with Caleb (refused=false)
+  CONVO d+7 with Adaeze (refused=false)
+  CONVO d+14 with Caleb (refused=false)
+  CONVO d+14 with Adaeze (refused=false)
+  CONVO d+30 with Caleb (refused=false)
+  CONVO d+30 with Adaeze (refused=false)
+  CONVO d+45 with Caleb (refused=false)
+  CONVO d+45 with Oliver (refused=false)
+  CONVO d+53 with Caleb (refused=false)
+  CONVO d+53 with Oliver (refused=false)
+  CONVO d+64 with Caleb (refused=false)
+  CONVO d+64 with Oliver (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=3) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":43,"offerLines":97,"codexPlantsDelta":17,"codexSkillsDelta":18,"codexAbilitiesDelta":10,"xpDelta":120,"any":true} pantry 25241->55124
+TRUST-DIALS: office 64->100 (+36, climb) | villageMean 55.1->78.4 (+23.3, climb) | ge60 3->7 | movers>=5: [{"id":"Priya","from":32,"to":90,"delta":58},{"id":"Elijah","from":51,"to":90,"delta":39},{"id":"Oliver","from":52,"to":90,"delta":38},{"id":"Nikolai","from":64,"to":90,"delta":26},{"id":"Adaeze","from":69,"to":90,"delta":21}]
+DEED-LEDGER: calls=46 summary={"teachPlant":{"calls":5,"ok":5,"deltaSum":0,"deltaN":5,"positive":0,"meanDelta":0},"donateToPantry":{"calls":41,"ok":41,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=111 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=46) trustVerdict={"readable":true,"officeMantle":64,"officeLast":100,"officeDelta":36,"officeClass":"climb","villageMantle":55.1,"villageLast":78.4,"villageDelta":23.3,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":7,"movers":[{"id":"Priya","from":32,"to":90,"delta":58},{"id":"Elijah","from":51,"to":90,"delta":39},{"id":"Oliver","from":52,"to":90,"delta":38},{"id":"Nikolai","from":64,"to":90,"delta":26},{"id":"Adaeze","from":69,"to":90,"delta":21}]}
+E6/CALLCHECK: e6={"callMoves":28,"withCensus":28,"chainHandoffs":0,"trustMoves":28} callCheck={"dailyMoveDays":28,"callMoveDays":25,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":28,"soloOffice":16,"soloOfficeDeltas":[1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1],"soloBearerDeltaExact":[1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1],"singleMoverBearer":1,"singleMoverOther":5,"eventClass":{"event-only":0,"deed-only":10,"both":18,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":28}

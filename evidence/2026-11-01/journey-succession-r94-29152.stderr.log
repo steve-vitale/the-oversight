@@ -1,0 +1,51 @@
+
+ORGANIC DEATH d16: Leonard -> Sandra, topTrust=[{"id":"Tanisha","t":77},{"id":"Sandra","t":48},{"id":"Quinn","t":39},{"id":"Pearl","t":31}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=13 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=90 succTrustPost=48
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d16 (organic (phase A)): Leonard -> Sandra | passed=true lin=true mo=true trust=48 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Tanisha (refused=false)
+  CONVO d+3 with Quinn (refused=false)
+  BOND-CONVO d+3 with Chloe (depth=0 v=20 refused=false)
+  CONVO d+7 with Tanisha (refused=false)
+  CONVO d+7 with Quinn (refused=false)
+  CONVO d+14 with Tanisha (refused=false)
+  CONVO d+14 with Quinn (refused=false)
+  BOND-CONVO d+14 with Chloe (depth=0 v=20 refused=false)
+
+SECOND-KILL d+21: Tanisha -> ? (scripted r64 chain probe)
+SECOND DEATH d+21: Tanisha -> Quinn passed=true lin=true mo=true
+  CONVO d+30 with Pearl (refused=false)
+  CONVO d+30 with Chloe (refused=false)
+
+THIRD-KILL d+21 since second death: Quinn -> ? (scripted r79 chain probe)
+THIRD DEATH d+21 since second death: Quinn -> Pavel passed=true lin=true mo=true
+  CONVO d+45 with Priya (refused=false)
+  CONVO d+45 with Chloe (refused=false)
+
+FOURTH-KILL d+10 since third death: Pavel -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Pavel -> Priya passed=true lin=true mo=true
+  CONVO d+53 with Farid (refused=false)
+  CONVO d+53 with Chloe (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Priya -> ? (scripted r94 chain probe)
+FIFTH DEATH d+10 since fourth death: Priya -> Chloe passed=true lin=true mo=true
+  CONVO d+64 with Farid (refused=false)
+  CONVO d+64 with Pearl (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=1) echo=7 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=16 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":46,"offerLines":70,"codexPlantsDelta":28,"codexSkillsDelta":29,"codexAbilitiesDelta":14,"xpDelta":82,"any":true} pantry 12411->21362
+TRUST-DIALS: office 48->80 (+32, climb) | villageMean 31.6->53.1 (+21.5, climb) | ge60 1->3 | movers>=5: [{"id":"Farid","from":17,"to":90,"delta":73},{"id":"Pearl","from":31,"to":90,"delta":59},{"id":"Meera","from":26,"to":72,"delta":46}]
+DEED-LEDGER: calls=4 summary={"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0},"donateToPantry":{"calls":1,"ok":1,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=86 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=4) trustVerdict={"readable":true,"officeMantle":48,"officeLast":80,"officeDelta":32,"officeClass":"climb","villageMantle":31.6,"villageLast":53.1,"villageDelta":21.5,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":3,"movers":[{"id":"Farid","from":17,"to":90,"delta":73},{"id":"Pearl","from":31,"to":90,"delta":59},{"id":"Meera","from":26,"to":72,"delta":46}]}
+E6/CALLCHECK: e6={"callMoves":8,"withCensus":8,"chainHandoffs":5,"trustMoves":3} callCheck={"dailyMoveDays":8,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":8,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":8}
