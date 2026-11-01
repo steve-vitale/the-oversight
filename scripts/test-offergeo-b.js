@@ -97,6 +97,32 @@ check('departure: hop without cross record falls back to day line, tile unpinned
   assert.deepStrictEqual([d.mapPx, d.distance], [null, 2]);
   assert.match(d.provenance, /day-line/);
 });
+check('departure: refused evening uses woodcarry step record, not rescued snap', () => {
+  const eve = {
+    eveningOutcome: 'travel-refused', travelledHome: false,
+    mapPx: 4, mapPy: 4, tile: 'haven',
+    woodcarry: { classification: { departure: { tile: 'meadow', mapPx: 3, mapPy: 3 } } },
+  };
+  const d = departureOf(eve, null, 'nighttravel-stack', null);
+  assert.deepStrictEqual([d.mapPx, d.mapPy, d.tile, d.distance], [3, 3, 'meadow', 2]);
+  assert.strictEqual(d.retryRescued, true);
+});
+check('departure: refused evening without woodcarry record falls back to snap', () => {
+  const eve = { eveningOutcome: 'travel-refused', travelledHome: false, mapPx: 5, mapPy: 3, tile: 'forest_floor', woodcarry: null };
+  const d = departureOf(eve, null, 'nighttravel-stack', null);
+  assert.deepStrictEqual([d.mapPx, d.mapPy, d.distance], [5, 3, 2]);
+});
+check('departure: cross pin gated OFF by diverged mornings falls back to line', () => {
+  const eve = { eveningOutcome: 'completed', travelledHome: true, mapPx: 4, mapPy: 4, tile: 'haven', dayLines: ['Travel 1 tile to Haven.'] };
+  const d = departureOf(eve, { csFrom: { mapPx: 4, mapPy: 4, tile: 'haven' } }, 'nighttravel-stack', false);
+  assert.deepStrictEqual([d.mapPx, d.distance], [null, 1]);
+  assert.match(d.provenance, /day-line/);
+});
+check('departure: cross pin gated ON uses creekseek-from', () => {
+  const eve = { eveningOutcome: 'completed', travelledHome: true, mapPx: 4, mapPy: 4, tile: 'haven', dayLines: ['Travel 1 tile to Haven.'] };
+  const d = departureOf(eve, { csFrom: { mapPx: 4, mapPy: 3, tile: 'forest_floor' } }, 'nighttravel-stack', true);
+  assert.deepStrictEqual([d.mapPx, d.mapPy, d.distance], [4, 3, 1]);
+});
 check('departure: hop with no line and no cross = unpinned', () => {
   const eve = { eveningOutcome: 'walk-no-path', travelledHome: true, mapPx: 4, mapPy: 4, tile: 'haven', dayLines: [] };
   const d = departureOf(eve, null, 'nighttravel-stack');
@@ -158,6 +184,8 @@ check('analyzer wiring on synthetic corpus dir', () => {
     assert.strictEqual(res.pooled.bands['C>=6'].n, 1); // offer-no at d=6
     assert.strictEqual(res.pooled.entryFail.n, 1); // hop entry-fail haven evening
     assert.strictEqual(res.pooled.entrySuccess.n, 1);
+    assert.strictEqual(res.entryFailRows.length, 1);
+    assert.strictEqual(res.entrySuccessRows.length, 1); // success rows emitted for starvation controls
     assert.strictEqual(res.surprises.length, 0);
     assert.strictEqual(res.havenCoordViolations.length, 0);
     const hopRow = res.offerRows.find((r) => r.kind === 'hop-yes-entry-no');

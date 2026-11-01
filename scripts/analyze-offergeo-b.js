@@ -37,9 +37,13 @@
 //         blocked-tent -> guard: fires before the offer check.
 //         policy-no-record -> no step. game-over -> no step.
 //         haven-unknown / step-error / detour-* / unknown -> surprise.
-//   * Departure recovery (prereg): for every evening on which the step
-//     moves nothing, the evening snap's (mapPx, mapPy) IS the departure
-//     tile (the entry walk moves detail mx/my only). For hop evenings
+//   * Departure recovery (prereg, CORRECTED — see metric review in
+//     evidence): for offer-no / guard evenings the evening snap's
+//     (mapPx, mapPy) IS the departure tile (the step moves nothing,
+//     the entry walk moves detail mx/my only). For travel-refused
+//     evenings the step's own woodcarry classification.departure is
+//     authoritative, because a successful wrapper retry can move the
+//     villager to haven after the step (17606 day 4). For hop evenings
 //     the evening snap is the haven node, so departure is recovered
 //     (a) from a same-seed-day creekseek record (creekseek.from = the
 //     post-daily position on the P1 stack, since the visit runs after
@@ -122,9 +126,37 @@ const HOP_LINE_RE = /Travel (\d+) tiles? to Haven\./;
 // post-daily position (the visit runs after competent.daily, so the
 // two stacks share the daily trajectory up to the step). Returns
 // { mapPx, mapPy, tile, distance, provenance } or { provenance: 'unpinned' }.
-function departureOf(eve, cross, policy) {
+function departureOf(eve, cross, policy, morningGate) {
   const cls = classifyOffer(eve);
   if (!cls.evaluated) return { provenance: 'not-evaluated' };
+  // CORRECTION (found on new-base seed 17606 day 4, both stacks; see
+  // evidence metric review): on a travel-refused evening the
+  // woodcarry wrapper may RETRY the hop after building a bridge, and
+  // a successful retry moves the villager to haven AFTER the step —
+  // so the evening snap is the RESCUED position, not the departure.
+  // The step's own record (woodcarry classification.departure) is
+  // authoritative here, exactly as eveningstep's step-record ruling
+  // prefers the step record over the snap flag. When the wrapper
+  // record is absent, fall back to the evening snap.
+  if (cls.kind === 'hop-refused') {
+    const dep = eve.woodcarry && eve.woodcarry.classification && eve.woodcarry.classification.departure;
+    if (dep && dep.mapPx !== null && dep.mapPx !== undefined) {
+      const moved = (dep.mapPx !== eve.mapPx || dep.mapPy !== eve.mapPy);
+      return {
+        mapPx: dep.mapPx, mapPy: dep.mapPy, tile: dep.tile || null,
+        distance: manhattan(dep.mapPx, dep.mapPy),
+        provenance: moved
+          ? 'woodcarry-departure (step record; retry rescued to evening snap)'
+          : 'woodcarry-departure (= evening snap)',
+        retryRescued: moved,
+      };
+    }
+    return {
+      mapPx: eve.mapPx, mapPy: eve.mapPy, tile: eve.tile,
+      distance: manhattan(eve.mapPx, eve.mapPy),
+      provenance: 'evening-snap (step moved nothing; no woodcarry record)',
+    };
+  }
   if (!eve.travelledHome && cls.kind !== 'hop-arrived-combat' && cls.kind !== 'hop-died') {
     return {
       mapPx: eve.mapPx, mapPy: eve.mapPy, tile: eve.tile,
@@ -133,10 +165,16 @@ function departureOf(eve, cross, policy) {
     };
   }
   // Hop evening: evening snap is haven, not the departure.
+  // CROSS-STACK GATE (found on new-base seed 17576 day 24): the
+  // creekseek-from pin is valid for a nighttravel row ONLY when the
+  // two stacks' morning snaps for that seed-day still agree (same
+  // tile, map position, vessel) — i.e. the trajectories have not
+  // diverged. When the gate fails, fall back to the day-line hop
+  // distance (band exact, tile unpinned). A creekseek row's own
+  // arrival pin needs no gate (it is that row's own record).
   if (cross) {
-    if (policy === 'creekseek-stack' && cross.csArrival) return { mapPx: cross.csArrival.mapPx, mapPy: cross.csArrival.mapPy, tile: cross.csArrival.tile || null, distance: manhattan(cross.csArrival.mapPx, cross.csArrival.mapPy), provenance: 'creekseek-arrival (post-visit step departure)' };
-    if (cross.csFrom) return { mapPx: cross.csFrom.mapPx, mapPy: cross.csFrom.mapPy, tile: cross.csFrom.tile || null, distance: manhattan(cross.csFrom.mapPx, cross.csFrom.mapPy), provenance: 'creekseek-from (post-daily position, visit runs after daily)' };
-    if (policy === 'creekseek-stack' && cross.csArrival) return { mapPx: cross.csArrival.mapPx, mapPy: cross.csArrival.mapPy, tile: cross.csArrival.tile || null, distance: manhattan(cross.csArrival.mapPx, cross.csArrival.mapPy), provenance: 'creekseek-arrival (post-visit step departure)' };
+    if (policy === 'creekseek-stack' && cross.csArrival) return { mapPx: cross.csArrival.mapPx, mapPy: cross.csArrival.mapPy, tile: cross.csArrival.tile || null, distance: manhattan(cross.csArrival.mapPx, cross.csArrival.mapPy), provenance: 'creekseek-arrival (post-visit step departure; arrival record carries no tile)' };
+    if (cross.csFrom && morningGate !== false) return { mapPx: cross.csFrom.mapPx, mapPy: cross.csFrom.mapPy, tile: cross.csFrom.tile || null, distance: manhattan(cross.csFrom.mapPx, cross.csFrom.mapPy), provenance: 'creekseek-from (post-daily position, visit runs after daily; morning-gate passed)' };
   }
   const lines = Array.isArray(eve.dayLines) ? eve.dayLines : [];
   for (const l of lines) {
@@ -176,9 +214,16 @@ function readDir(dir) {
 function analyzeDirs(dirs) {
   const byPolicy = {}; // policy -> { files, seeds }
   const cross = {}; // seed -> day -> { csFrom, csArrival }
-  // First pass: collect creekseek cross-stack records.
+  const mornings = {}; // seed -> day -> { policy -> morning snap }
+  // First pass: collect creekseek cross-stack records + morning snaps.
   for (const dir of dirs) {
     for (const { inst } of readDir(dir)) {
+      for (const dec of inst.decisions || []) {
+        if (!dec.morning) continue;
+        mornings[inst.seed] = mornings[inst.seed] || {};
+        mornings[inst.seed][dec.loopDay] = mornings[inst.seed][dec.loopDay] || {};
+        mornings[inst.seed][dec.loopDay][inst.policy] = dec.morning;
+      }
       if (inst.policy !== 'creekseek-stack') continue;
       for (const eve of inst.evenings || []) {
         const cs = eve.creekseek || null;
@@ -221,7 +266,13 @@ function analyzeDirs(dirs) {
         if (cls.evaluated) {
           P.evaluated++; if (cls.offered) P.offered++;
           const x = cross[inst.seed] && cross[inst.seed][eve.loopDay];
-          const dep = departureOf(eve, x || null, pol);
+          const mIdx = mornings[inst.seed] && mornings[inst.seed][eve.loopDay];
+          let morningGate = null;
+          if (mIdx && mIdx['nighttravel-stack'] && mIdx['creekseek-stack']) {
+            const a = mIdx['nighttravel-stack'], b = mIdx['creekseek-stack'];
+            morningGate = a.tile === b.tile && a.mapPx === b.mapPx && a.mapPy === b.mapPy && a.vesselId === b.vesselId;
+          }
+          const dep = departureOf(eve, x || null, pol, morningGate);
           const band = bandOf(dep.distance);
           if (band) {
             P.bands[band].n++; if (cls.offered) P.bands[band].offered++;
@@ -234,7 +285,7 @@ function analyzeDirs(dirs) {
           PT.n++; if (cls.offered) PT.offered++; PT.kinds[cls.kind] = (PT.kinds[cls.kind] || 0) + 1;
           result.offerRows.push({
             seed: inst.seed, policy: pol, day: eve.loopDay, kind: cls.kind,
-            offered: cls.offered, departure: dep, band,
+            offered: cls.offered, departure: dep, band, morningGate,
             eveningTile: eve.tile, eveningMap: [eve.mapPx, eve.mapPy],
             travelledHome: !!eve.travelledHome, outcome: eve.eveningOutcome,
           });
@@ -289,6 +340,7 @@ function analyzeDirs(dirs) {
   result.pooled = { bands: pooledBands, tiles: pooledTiles, entryFail: summarize(pooledEntry.fail), entrySuccess: summarize(pooledEntry.success) };
   result.policies = byPolicy;
   result.entryFailRows = pooledEntry.fail;
+  result.entrySuccessRows = pooledEntry.success;
   result.entrySuccessRowsCount = pooledEntry.success.length;
   return result;
 }
