@@ -166,6 +166,11 @@ async function runOne(seed, days, evidDir) {
     Game.fieldFight = function (vid, mdef, m, opts) {
       const pantryBefore = pantryKcal(Game);
       const dayBefore = dayOf(Game);
+      // mHpStart MUST be snapshotted pre-fight: the live monster object is
+      // mutated by the fight, so a post-fight read returns end HP, not
+      // start HP (caught 2026-11-01: wrapper mHpStart equalled diag
+      // mHpLeft on fled fights).
+      const mHpStartPre = (m && m.hp != null) ? Math.round(m.hp) : null;
       let rec = null;
       try { rec = _ff(vid, mdef, m, opts); } catch (e) { throw e; }
       try {
@@ -188,7 +193,7 @@ async function runOne(seed, days, evidDir) {
             leaderName: rawName(Game, vid),
             mid: (live && live.id) || (defObj && defObj.id) || null,
             caller, stackNames: names.slice(0, 20).join(','),
-            mHpStart: (live && live.hp != null) ? Math.round(live.hp) : null,
+            mHpStart: mHpStartPre,
             outcome: rec ? (rec.outcome || null) : null, rounds: rec ? (rec.rounds | 0) : null,
             mDealt: rec ? (rec.mDealt | 0) : null, vTaken: rec ? (rec.vTaken | 0) : null,
             vHpLeft: rec ? (rec.vHpLeft != null ? Math.round(rec.vHpLeft) : null) : null,
