@@ -577,12 +577,15 @@ for the coordinator with that note.
    node writeFileSync to /tmp failed repeatedly
    (offerygeo's proof test fails at its mkdtemp
    write step, 3/3 attempts, plus safe-commit's
-   /tmp index lock, 26 consecutive failures over
-   ~4 minutes), while shell and python writes to
-   /tmp succeeded in the same minutes — the flap
-   is per-moment and per-writer, not a full /tmp
-   outage. It cleared in a later window and the
-   prereg commit landed on the next attempt. This
+   /tmp index lock: 28 failed attempts before the
+   prereg commit landed, and 37 failed attempts —
+   a 12-try loop plus 25 tries of a 30-try loop —
+   before the evidence commit landed on the next
+   try), while shell and python writes to /tmp
+   succeeded in the same minutes — the flap is
+   per-moment and per-writer, not a full /tmp
+   outage. It cleared in two separate later
+   windows, one per commit. This
    arm's proof test writes NOTHING to /tmp (pure
    in-memory analyzeInstances wiring) specifically
    so it stays green through the flap; offergeo's
