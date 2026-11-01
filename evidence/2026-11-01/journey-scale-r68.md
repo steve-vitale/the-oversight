@@ -336,7 +336,7 @@ Branch commits: 942817444 (prereg + gossip-first driver/analyzer),
 2fcf2ce85 (gossipPicks block-scope fix), 6561b2d46 (quad +
 analyses + run note), d09258152 (run note tests section +
 checkquick log), plus this landing section as the final branch
-commit, merged by a second fast-forward.
+commit, merged by a single fast-forward below.
 Worktree released + branch deleted at closeout; final main-tree
 status clean. Rotation file written 3→0 at closeout and verified
 by reading it back. Playtest lock deleted at closeout. Heartbeat
