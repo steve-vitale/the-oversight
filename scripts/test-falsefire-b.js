@@ -181,5 +181,20 @@ function withWinPost(win, post, opts) {
   check('summarize: wall collapsed [4]', JSON.stringify(sum.wall.collapsed) === '[4]');
 }
 
+// 14. Judged rate excludes censored trues (conservative): 1 false +
+// 1 censored-true + 1 sustained-true -> judged 1/2, observed 1/3.
+{
+  const f = mkSeed(base().concat(pureWindow()).concat([17000, 16000, 23000, 22000, 21000, 20000, 19000, 18000, 17000, 16000]), { seed: 11 });
+  const c = mkSeed(base().concat(pureWindow()).concat([17000, 16000, 15000]), { seed: 12 });
+  const t = mkSeed(base().concat(pureWindow()).concat(sustainedPost()), { seed: 13 });
+  const sum = summarizeFalsefire([f, c, t]);
+  check('censored band: judged rate 0.5', sum.bars.newFalseFireRate.rate === 0.5);
+  check('censored band: judged fails cap', sum.bars.newFalseFireRate.pass === false);
+  check('censored band: observed rate 1/3',
+    Math.abs(sum.bars.newFalseFireRate.observedRate - 1 / 3) < 1e-9);
+  check('censored band: censoredTrueSeeds [12]',
+    JSON.stringify(sum.bars.censoredTrueSeeds) === '[12]');
+}
+
 console.log('test-falsefire-b: ' + passed + ' passed, ' + failed + ' failed');
 if (failed > 0) process.exit(1);

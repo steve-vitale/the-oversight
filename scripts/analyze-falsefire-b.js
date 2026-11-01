@@ -187,10 +187,17 @@ function summarizeFalsefire(allSeeds) {
       trueCount: trueSeeds.length,
       trueSeeds: trueSeeds.map((s) => s.seed),
       censoredTrueSeeds: censoredTrue.map((s) => s.seed),
-      newFalseFireRate: confirmed.length === 0
-        ? { judged: false, rate: null, pass: null }
-        : { judged: true, rate: falseSeeds.length / confirmed.length,
-            pass: (falseSeeds.length / confirmed.length) <= 0.25 },
+      // JUDGED rate (prereg, conservative): censored true fires are
+      // excluded from BOTH numerator and denominator — dropping true
+      // cases can only raise the false rate, so a pass is not bought
+      // with thin observations. observedRate counts them as true.
+      newFalseFireRate: (confirmed.length - censoredTrue.length) === 0
+        ? { judged: false, rate: null, pass: null,
+            observedRate: confirmed.length === 0 ? null : falseSeeds.length / confirmed.length }
+        : { judged: true,
+            rate: falseSeeds.length / (confirmed.length - censoredTrue.length),
+            observedRate: falseSeeds.length / confirmed.length,
+            pass: (falseSeeds.length / (confirmed.length - censoredTrue.length)) <= 0.25 },
       extensionRestingCount: extensionResting.length,
       extensionRestingSeeds: extensionResting.map((s) => s.seed),
       sensitivityExcludingExtension: confirmed.length - extensionResting.length,
