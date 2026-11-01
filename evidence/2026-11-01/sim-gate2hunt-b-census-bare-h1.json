@@ -1,0 +1,628 @@
+{
+  "corpusDir": "evidence/2026-11-01/sim-gate2hunt-b-corpus-bare-h1",
+  "policy": "bare",
+  "horizonDays": 30,
+  "legs": 8,
+  "seeds": [
+    17701,
+    17702,
+    17703,
+    17704,
+    17705,
+    17706,
+    17707,
+    17708
+  ],
+  "eveningsJudged": 240,
+  "outcomeTotals": {
+    "already-inside": 18,
+    "completed": 214,
+    "travel-refused": 7,
+    "walk-interrupted-combat": 1
+  },
+  "totalRefusals": 7,
+  "seedsWithRefusals": [
+    17703
+  ],
+  "bandBar": false,
+  "hopSplit": {
+    "block:fallen_tree": 7
+  },
+  "bucketSplit": {
+    "other-refused": 7
+  },
+  "blockCreekDenominator": 0,
+  "blockCreekBucketCreek": 0,
+  "gate2Agreement": null,
+  "gate2AgreementValue": null,
+  "creekRefusals": [],
+  "narratedRefusals": 7,
+  "gateFailures": [],
+  "gatePass": true,
+  "allRefusals": [
+    {
+      "seed": 17703,
+      "loopDay": 4,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    },
+    {
+      "seed": 17703,
+      "loopDay": 5,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    },
+    {
+      "seed": 17703,
+      "loopDay": 6,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    },
+    {
+      "seed": 17703,
+      "loopDay": 7,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    },
+    {
+      "seed": 17703,
+      "loopDay": 8,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    },
+    {
+      "seed": 17703,
+      "loopDay": 9,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    },
+    {
+      "seed": 17703,
+      "loopDay": 10,
+      "eveningMap": [
+        2,
+        3
+      ],
+      "tile": "forest_floor",
+      "havenDistance": 3,
+      "hopReturnKind": "block:fallen_tree",
+      "hopType": "fallen_tree",
+      "source": "creekremedy",
+      "bucket": "other-refused",
+      "blockType": "fallen_tree",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": false,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    }
+  ],
+  "perSeed": [
+    {
+      "seed": 17701,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17702,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 4,
+        "completed": 26
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17703,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 21,
+        "travel-refused": 7
+      },
+      "eveningsJudged": 30,
+      "refusals": 7,
+      "refusalSeeds": 1,
+      "refusalDays": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "refusalList": [
+        {
+          "loopDay": 4,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        },
+        {
+          "loopDay": 5,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        },
+        {
+          "loopDay": 6,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        },
+        {
+          "loopDay": 7,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        },
+        {
+          "loopDay": 8,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        },
+        {
+          "loopDay": 9,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        },
+        {
+          "loopDay": 10,
+          "eveningMap": [
+            2,
+            3
+          ],
+          "tile": "forest_floor",
+          "havenDistance": 3,
+          "hopReturnKind": "block:fallen_tree",
+          "hopType": "fallen_tree",
+          "source": "creekremedy",
+          "bucket": "other-refused",
+          "blockType": "fallen_tree",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": false,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        }
+      ],
+      "storeRecords": 7,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 7,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17704,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17705,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17706,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17707,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17708,
+      "policy": "bare",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "completeReason": "days-complete",
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 27,
+        "walk-interrupted-combat": 1
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    }
+  ]
+}
