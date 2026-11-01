@@ -117,5 +117,6 @@ script was run, via plain node).
 
 ## Commit
 
-Branch `build-water-guard`, message carries `[needs-eyes]`. Coordinator
-merges; this arm does not merge, push, bump, or verify live.
+Branch `build-water-guard`, message carries `[needs-eyes]`, commit
+`ee2264119d1652ee20482bc761e5b71f1e0ee42b` (fix + proof + this note).
+Coordinator merges; this arm does not merge, push, bump, or verify live.
