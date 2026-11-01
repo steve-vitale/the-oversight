@@ -1,0 +1,54 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Catalina","t":91},{"id":"Eli","t":90},{"id":"Scarlett","t":82},{"id":"Kunal","t":64}], roster=11
+INH readable=true scripted=true deadItems=18 distinct=16 transferred=1 vanished=1 keptPlants=20 inheritedPlants=3 keptSkills=6 inheritedSkills=10 succTrustPre=91 succTrustPost=66
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d41 (a hushwolf, scripted): Manuel -> Catalina | passed=true lin=true mo=true trust=66 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=11 vanished=1 of 16 distinct dead-bearer items
+  CONVO d+3 with Eli (refused=false)
+  CONVO d+3 with Scarlett (refused=false)
+  BOND-CONVO d+3 with Kunal (depth=1 v=26 refused=false)
+  CONVO d+7 with Eli (refused=false)
+  CONVO d+7 with Scarlett (refused=false)
+  CONVO d+14 with Eli (refused=false)
+  CONVO d+14 with Tiana (refused=false)
+  BOND-CONVO d+14 with Kunal (depth=1 v=26 refused=false)
+
+SECOND-KILL d+20: Catalina -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Catalina -> Tiana passed=true lin=true mo=true
+  CONVO d+30 with Eli (refused=false)
+  CONVO d+30 with Kunal (refused=false)
+
+THIRD-KILL d+20 since second death: Tiana -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Tiana -> Eli passed=true lin=true mo=true
+  CONVO d+45 with Quinn (refused=false)
+  CONVO d+45 with Kunal (refused=false)
+
+FOURTH-KILL d+10 since third death: Eli -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Eli -> Kunal passed=true lin=true mo=true
+  CONVO d+53 with Quinn (refused=false)
+  CONVO d+53 with Meera (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Kunal -> ? (scripted r97 chain probe)
+FIFTH DEATH d+10 since fourth death: Kunal -> Quinn passed=true lin=true mo=true
+  CONVO d+64 with Yara (refused=false)
+  CONVO d+64 with Adaeze (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=5) echo=3 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=69 violations=2 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+66: Quinn trust=87 kcal=1156 halfVoice=true
+  VIOLATION d+66: Quinn trust=87 kcal=1156 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":38,"offerLines":68,"codexPlantsDelta":27,"codexSkillsDelta":15,"codexAbilitiesDelta":13,"xpDelta":60,"any":true} pantry 61828->0
+TRUST-DIALS: office 66->86 (+20, climb) | villageMean 58.9->75.8 (+16.9, climb) | ge60 5->7 | movers>=5: [{"id":"Meera","from":56,"to":90,"delta":34},{"id":"Kunal","from":64,"to":91,"delta":27},{"id":"Quinn","from":60,"to":86,"delta":26},{"id":"Adaeze","from":57,"to":78,"delta":21},{"id":"Yara","from":43,"to":60,"delta":17},{"id":"Enzo","from":6,"to":21,"delta":15},{"id":"Scarlett","from":82,"to":89,"delta":7}]
+DEED-LEDGER: calls=9 summary={"teachPlant":{"calls":4,"ok":4,"deltaSum":0,"deltaN":4,"positive":0,"meanDelta":0},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=110 alive=7 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=9) trustVerdict={"readable":true,"officeMantle":66,"officeLast":86,"officeDelta":20,"officeClass":"climb","villageMantle":58.9,"villageLast":75.8,"villageDelta":16.9,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":7,"movers":[{"id":"Meera","from":56,"to":90,"delta":34},{"id":"Kunal","from":64,"to":91,"delta":27},{"id":"Quinn","from":60,"to":86,"delta":26},{"id":"Adaeze","from":57,"to":78,"delta":21},{"id":"Yara","from":43,"to":60,"delta":17},{"id":"Enzo","from":6,"to":21,"delta":15},{"id":"Scarlett","from":82,"to":89,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":4,"trustMoves":6} callCheck={"dailyMoveDays":10,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":6,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":70,"moves":10}
