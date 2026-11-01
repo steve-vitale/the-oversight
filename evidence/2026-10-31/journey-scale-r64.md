@@ -324,8 +324,8 @@ on the new base as well as the measurement base. (The scratch
 re-run dir was not committed; its comparison numbers are the
 record above.)
 Merged locally via `git merge --ff-only journey-scale-r64` →
-master [HASH], pending ship (no bump, no push, no live verify —
-ship loop owns those).
+master (hash in the branch log), pending ship (no bump, no push,
+no live verify — ship loop owns those).
 Branch commits: a7f9eb2f1 (prereg + driver, rebased from a66db4ae),
 a711010db (quad + bank-trace wide band + evidence, rebased from
 1a0784f09). This landing-section commit follows on the same branch
