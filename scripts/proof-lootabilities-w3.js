@@ -12,9 +12,9 @@
 //
 // Harness: scripts/sim-harness.js (seeded Math.random BEFORE eval,
 // src/js in index.html order minus DOM-only files). Game.save is never
-// stubbed. One loadGame in this process; the pristine contrast runs in
-// a CHILD process against ~/workspace/the-scattering (never two
-// harnesses in one process).
+// stubbed. One loadGame in this process; the actual removed-duty contrast
+// runs in a CHILD process with the same shared harness and Game inputs.
+// This is a causal hook-removal control, not a historical pristine Game.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -29,9 +29,19 @@ function check(name, cond, extra) {
 
 // --- pristine scenario, stringified into a child node process ---
 function pristineScenario(harnessPath) {
+  const fs = require('fs'), originalRead = fs.readFileSync;
   const { loadGame, setupGame } = require(harnessPath);
   (async () => {
-    const { Game } = await loadGame({ seed: 31031, mode: 'mvc', fullTelemetry: false });
+    fs.readFileSync = function(file, ...args) {
+      const value = originalRead.call(this, file, ...args);
+      if (!String(file).replace(/\\/g, '/').endsWith('/src/js/villager-build.js')) return value;
+      const before = String(value), after = before.replace('    villagerWeaponCraftDay() {', '    __removedWeaponCraftDay() {');
+      if (after === before) throw Error('Actual weapon-craft duty removal did not apply');
+      return typeof value === 'string' ? after : Buffer.from(after);
+    };
+    let Game;
+    try { ({ Game } = await loadGame({ seed: 31031, mode: 'mvc', fullTelemetry: false })); }
+    finally { fs.readFileSync = originalRead; }
     await setupGame(Game);
     const v = Game.state.village || {};
     const vid = (v.roster || []).find(id => id !== Game.villagerId);
@@ -207,29 +217,24 @@ function pristineScenario(harnessPath) {
     craftTeleFor(armedVid).length === 0 && JSON.stringify(ap.items) === itemsBefore,
     { tele: craftTeleFor(armedVid), items: ap.items });
 
-  // ---------- PART C: pristine master contrast (child process) ----------
-  console.log('\n=== PRISTINE MASTER (~/workspace/the-scattering) same scenario ===');
+  // ---------- PART C: actual removed-duty contrast (child process) ----------
+  console.log('\n=== ACTUAL REMOVED DUTY, same shared Game and scenario ===');
   let pristine = null;
   try {
-    const out = execFileSync(process.execPath, ['-e', `(${pristineScenario})(${JSON.stringify('/home/hatch/workspace/the-scattering/scripts/sim-harness.js')})`],
+    const out = execFileSync(process.execPath, ['-e', `(${pristineScenario})(${JSON.stringify(require.resolve('./sim-harness'))})`],
       { encoding: 'utf8', timeout: 240000, maxBuffer: 16 * 1024 * 1024 });
     const lastLine = out.trim().split('\n').filter(Boolean).pop();
     pristine = JSON.parse(lastLine);
   } catch (e) {
-    console.log('pristine child run failed: ' + (e && e.message));
+    console.log('removed-duty child run failed: ' + (e && e.message));
   }
   if (pristine && !pristine.error) {
-    console.log('pristine result: ' + JSON.stringify(pristine));
-    check('P1 pristine has no villagerWeaponCraftDay', pristine.hasDuty === false, pristine);
-    check('P2 pristine villager gets NO crafted spear/bow (whittle stick at best)',
+    console.log('removed-duty result: ' + JSON.stringify(pristine));
+    check('P1 removed control has no villagerWeaponCraftDay', pristine.hasDuty === false, pristine);
+    check('P2 removing actual duty loses the crafted spear/bow',
       pristine.melee !== 'hunting_spear' && pristine.ranged !== 'bow' && pristine.ranged !== 'crude_bow', pristine);
   } else {
-    // static fallback: pristine villager-build.js has no self-craft duty;
-    // the only weaponless acquisition in pristine game.js villagerGearUp
-    // is own stash -> deposited armory -> whittle a sharpened stick.
-    const pvb = fs.readFileSync('/home/hatch/workspace/the-scattering/src/js/villager-build.js', 'utf8');
-    check('P1s pristine villager-build.js has no villagerWeaponCraftDay (static)', !/villagerWeaponCraftDay/.test(pvb));
-    console.log('pristine contrast by code reading: pristine villagerGearUp acquire order is own carried -> own stashed -> communal armory -> whittle sharpened_stick from the woodpile; no craft duty exists, so the scenario villager stays weaponless (or whittles a +5 stick).');
+    check('P0 actual removed-duty child must complete; no static fallback', false, pristine);
   }
 
   console.log('\npass=' + pass + ' fail=' + fail);

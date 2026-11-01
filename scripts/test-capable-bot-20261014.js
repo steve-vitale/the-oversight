@@ -172,19 +172,17 @@ async function main() {
   // ---------- 5. beastStrikeTarget clamp (competent fix) ----------
   T.section('5. competent.beastStrikeTarget steps within moveLeft');
   {
-    const moves = [];
-    const fake = {
-      equippedWeapon: () => ({ range: 1 }),
-      findPath: (sx, sy, tx, ty) => { const out = []; let x = sx; while (x !== tx) { x += Math.sign(tx - x); out.push([x, sy]); } return out; },
-      tbTerrainCost: () => 1,
-      tbPlayerMove: (x, y) => { moves.push([x, y]); return true; },
-      tbPlayerStrike: () => true,
-    };
-    const f = { fighters: [{ key: 'm1', alive: true, mx: 7, my: 4 }] };
-    const p = { mx: 1, my: 4, moveLeft: 3 };
-    C.beastStrikeTarget(fake, f, {}, p, 1, 4, f.fighters[0], () => {});
-    T.ok('moved', moves.length === 1, JSON.stringify(moves));
-    T.ok('destination within this turn\'s 3 squares (was 5 away: "Too far" no-op)', moves[0] && Math.abs(moves[0][0] - 1) <= 3, JSON.stringify(moves));
+    K.newRun(Game);
+    const m=K.fight(Game,'hushwolf',{px:1,py:4,mx:7,my:4,hp:1000}),f=Game.tbfight,p=Game.tbFighter('p');
+    f.fighters=[p,m];f.order=[p.key,m.key];f.turnIdx=0;f.round=1;f.noFlee=true;
+    Object.assign(p,{hp:1000,maxHp:1000,moveLeft:3,acted:false});Game.state.scholar.health=1000;
+    for(const row of Game.genDetail(Game.map.px,Game.map.py))for(let x=0;x<row.length;x++)row[x]='dirt';
+    const moves=[],original=Game.tbPlayerMove;
+    Game.tbPlayerMove=function(x,y){const path=this.findPath(p.mx,p.my,x,y),cost=path?.reduce((n,[cx,cy])=>n+this.tbTerrainCost(cx,cy),0),result=original.call(this,x,y);moves.push({x,y,cost,result});return result;};
+    try { C.beastStrikeTarget(Game,f,{},p,1,4,m,()=>{}); }
+    finally { Game.tbPlayerMove=original; }
+    T.ok('moved',moves.length===1&&moves[0].result===true,JSON.stringify(moves));
+    T.ok('destination within this turn\'s 3 squares (was 5 away: "Too far" no-op)',moves[0]&&Math.abs(moves[0].x-1)<=3&&moves[0].cost<=3,JSON.stringify(moves));
   }
 
   // ---------- 6. a fight that starts in the daily round is finished before bed ----------
@@ -223,6 +221,11 @@ async function main() {
     Game.donateToPantry(donated);
     T.ok('real donation clears the policy contribution bar', C.recentGives(Game, ctx, 7) >= 1500);
     Game.dayPart = 2;
+    // Prepared player-use contrast: guests remain on this node but beyond
+    // the four-square join radius. Fresh positions must not turn this into
+    // an NPC-first-use test; natural campaigns below retain real parties.
+    Game.ensureVillagerPositions(); s.mx = 1; s.my = 1;
+    for (const id of v.roster || []) if (id !== Game.villagerId && v.positions[id]) v.positions[id] = { mx:8, my:8 };
     const originalHost = Game.hostFeast, receipts = [];
     Game.hostFeast = function (...args) {
       const before = this.pantryKcalLive(this.state.village);

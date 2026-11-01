@@ -106,6 +106,7 @@ const busCalls = [];
 let dlCalls = 0;
 let padSide = 'right', refreshes = 0;
 const fakeGame = {
+  worldSeedString: () => 'settings-fixture-seed',
   dpadSide: () => padSide,
   setDpadSide: side => { padSide = side; },
   audio: {
@@ -137,6 +138,7 @@ vm.runInContext(fns + '\nopenSettings();', ctx);
 
 (async () => {
   const byId = (id) => fakeDoc.getElementById(id);
+  ok(fakeDoc.body.children.some(el=>el.innerHTML.includes('settings-fixture-seed')), 'world seed from Game renders alongside the audio controls');
   ok(byId('set-dpad-side').value === 'right', 'pad side initializes from the current setting');
   byId('set-dpad-side').onchange({target: {value: 'left'}});
   ok(padSide === 'left' && refreshes === 1, 'changing Settings pad side updates the game and repaints once');

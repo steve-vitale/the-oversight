@@ -2,7 +2,7 @@
 // system: table-witness
 // description: The Witness path — the trial of the judges. Three beats: opening charges (from the real exposed count), the defense (your own villagers testify about YOUR leadership in their own words — sampled by personality, honest to the vector), the branch twist. Plays on the moot register: the exposed count came from real accusations. Meters: swing — your record can convict you mid-trial. Light = just trial (submit your own ledger); dark = show trial (the audience chants for blood).
 // provides: (registers via tableRegisterPath; no new Game methods)
-// consumes: tableState(), tableRunBeat(), tableFinals(), tableFail(), tableLiveWrap(), say; ledger(), deedState()
+// consumes: tableState(), tableRunBeat(), tableFinals(), tableFail(), tableLiveWrap(), say; ledger(), deedState(), promiseSpeechAbout()
 // Load AFTER table.js.
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
@@ -93,9 +93,9 @@
           for (const k of Object.keys(pr)) {
             const p = pr[k];
             if (p && p.kept === 'broken') {
-              let nm = k; try { nm = (Game.displayName(k) || k).split(' ')[0]; } catch (e2) {}
+              let nm = 'someone'; try { nm = typeof Game.firstRef === 'function' ? Game.firstRef(k) : (Game.displayName(k) || 'someone'); } catch (e2) { console.warn('[table witness] promise name', e2); }
               let task = ''; try { task = String(p.favorTask || '').slice(0, 90); } catch (e2) {}
-              brokenDetails.push({ name: nm, task });
+              brokenDetails.push({ name: nm, task, about: Game.promiseSpeechAbout(k, p, 'witness') });
             }
           }
         } catch (e) {}
@@ -128,7 +128,9 @@
           const b0n = b0.name || 'someone';
           pool.push(`"${b0n} asked. They said yes. ${b0n}'s still waiting — you can ask them yourself."`);
           if (brokenCt > 1) pool.push(`"${brokenCt} promises. I counted the ones they kept. Shorter list."`);
-          if (b0.task) pool.push(`"They promised ${b0n}: ${b0.task}. Still owed."`);
+          if (b0.task) pool.push(b0.about
+            ? `"They gave ${b0n} their word about ${b0.about}. They didn't keep it."`
+            : `"They gave ${b0n} their word. They didn't keep it."`);
           pool.push(`"The fire remembers what the court might miss: their word."`);
           if (t < 30) pool.push(`"I stopped asking. Everybody stops asking, eventually."`);
           else pool.push(`"I want to believe them. The list says not to."`);

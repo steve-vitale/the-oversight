@@ -383,11 +383,16 @@
   const _endConvo = Game.endConvo;
   if (_endConvo) {
     Game.endConvo = function (vid, how) {
+      const state = this.state, conversation = state?.village?.conv?.[vid];
+      const wasActive = !!conversation?.active;
       const r = _endConvo.call(this, vid, how);
-      try {
-        const d = this.personDepth(vid);
-        if (!d.closed) { d.convos += 1; this.checkPersonLevel(vid); }
-      } catch (e) {}
+      // Count a real transition once; finally/close/reload may call end again.
+      if (wasActive && this.state === state && state.village.conv[vid] === conversation && !conversation.active) {
+        try {
+          const d = this.personDepth(vid);
+          if (!d.closed) { d.convos += 1; this.checkPersonLevel(vid); }
+        } catch (e) { console.warn('[codex-people] conversation depth', e); }
+      }
       return r;
     };
   }

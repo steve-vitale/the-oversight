@@ -181,6 +181,10 @@
       hesitate: 0, blind: 0, stunned: 0, threatQueue: [],
     };
     f.fighters.push(fighter);
+      // A free anchor is not a free body: giant reruns and campaign escorts
+      // occupy complete footprints. Preserve every actor and expand only
+      // when the current board cannot hold them without overlap.
+      Game.tbArrangeFootprints();
     try { f.order.push(key); } catch (e) {}
     return fighter;
   }

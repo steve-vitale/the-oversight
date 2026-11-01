@@ -1,3 +1,4 @@
+const { validateAskContract } = require('./lib/ask-contract');
 // ADVERSARIAL 3 (break-it 2026-10-08, socialite): softlock + honesty sweeps.
 // SOFTLOCK: (a) no active conversation may offer an empty menu; (b) talk-
 // request cues must be consumed when opened; (c) rumor verbs must not dangle
@@ -69,8 +70,8 @@ function ok(cond, msg, extra) { A++; if (!cond) { F++; console.log('  FAIL:', ms
   // (d) Ask/Answer contract on live question states
   let contractFails = [];
   for (const v2 of others.slice(0, 3)) {
-    if (typeof Game.validateAskContract === 'function') {
-      const r = Game.validateAskContract(v2);
+    if (typeof validateAskContract === 'function') {
+      const r = validateAskContract(Game, v2);
       if (!r.ok) contractFails.push(v2 + ': ' + (r.failures || []).join(';'));
     }
   }

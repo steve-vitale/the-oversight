@@ -1,4 +1,117 @@
+NPC weapon acquisition boundary (2026-10-31, under qualification): collector/contract revision npc-weapon-grants-2026-10-31 observes actual villagerWeaponCraftDay physical gains as craft, with canonical own recipients and existing nested-source subtraction. All31 metric IDs/directions/tolerances remain. Starting equipment, paid failures and cooldown refusals are not grants. npcCrafts remains the paid personal-objective attempt table; it does not fabricate day-duty attempt counts. Historical panels retain their identities; reobserve BOTH roots under this collector and refresh real neutrality before comparison.
+
 # Balanced measurement on Muse's current game
+
+Input-fidelity scope matters: corrected competent/capable and their livelihood/
+grid/garden descendants do not clear every registry policy. The same real-engine
+prepared probe now confirms winseek and shark still privately finish turns and
+can spend2 rounds after a0-movement Strike; passive also bypasses public Wait.
+Their executable/counter tests do not certify native inputs. Hold adversarial
+or passive-viability calibration pending a separate family correction and fresh
+common-input proof; do not tune Game from those wins. R5 primary cohorts inherit
+the corrected capable brain, not these secondary combat handlers. Preserve that
+bounded distinction and inspect the actual policy call graph before reuse.
+See evidence/2026-10-23/secondary-policy-input-audit-r1.md.
+
+R5 input revision: live target selection excludes fled/dead positive-HP
+monsters. Shared fallback approach uses current battle bounds, whole fighter
+footprints and actual terrain-priced path prefixes, with same-turn public
+Strike/Wait. R4 is retained diagnostic history, not final native-input proof.
+Rerun BOTH roots under identical revised controls and real neutrality before
+using new panels as a gate. No Game parameter or metric definition changed.
+Shark is a heuristic adversarial probe: win ordering alone proves neither
+degeneracy nor the absence of exploits. Require actual behavior/exposure and
+matched mechanism controls; keep all29 domains and earlier warnings visible.
+
+Next common-controller revision also honors actual contest reqKcal gates:
+the old capable/fallback choices can repeat an unaffordable TV option despite
+free alternatives. Focused real public paths now pass16/0 at zero/funded food,
+including genuine costs and phase resolution. R3 is retained diagnostic history;
+do not compare R3/R4 as Game-only effects or use old400-choice loops as utility.
+The helper is under policies/, so shared manifests/cache keys include it.
+
+2026-10-23 native-turn revision: current release comparisons must use the same
+corrected common monster controller on both roots. R2 direct-budget finishing
+could bypass Wait effects and spend a new round. Preserve its reports as
+heuristic history, not mobile-input certification. Input fidelity is now
+reported in row.harnessDiagnostics, panel.validity.harness and CLI comparison
+harnessInputCoverage. Review routing attempts (including thrown calls), loop
+conditions and unknown historical coverage alongside ALL29 existing domains.
+These are input-quality diagnostics, not extra win objectives or automatic
+Game regressions. New cache/neutral/source fingerprints are required; never
+rewrite R2 identities to make it current. See SIMULATING.md and the automatic
+public-monster-turn-policy/harness-input-coverage checks.
+
+407 reconciliation in progress (2026-10-22): the current collector has29
+columns: the original23 domain metrics plus six explicit diagnostic-only luck
+scores. Preserve core survival/community/resources/progression/gear gates and
+win investigation. Luck coverage, sparse samples and unknowns remain visible
+but cannot decide the policy verdict. Luck cannot cancel another warning.
+Inclusive-CDF scoring labeled both single-pit outcomes lucky; the correction
+uses the midpoint of observed mass and preserves actual tail values separately.
+Scores and their combined inverse-normal index are descriptive, exposure-
+dependent and not calibrated probabilities or causal explanations of endings.
+Do not compare historical23-column panels to current29-column panels or rewrite
+their identities. Reobserve BOTH roots with the same collector/contract/policy,
+retain real neutral maintenance and update balance-proof.json through its tool.
+Existing23-domain warnings remain open. See reconcile-407-audit-r1.
+
+Current common-controller screen (2026-10-22): BOTH exact publicd64/candidate5c
+Game roots reobserved under one repaired dialogue policy,16 matched seeds per
+capable/maker/merchant/caregiver. All23 remains review_required. Raw panels,
+unknowns, sixteen exact selected traces and four exact-prefix natural terminal
+extensions are retained in controller-held-audit-r1. Every original600 cap
+is now played to a later ending (days657-724), including a real Table win660.
+Keep the600 balanced gate separate from these longer-horizon diagnostics.
+Death analyses must use canonical live telemetry: one suppressed sickness
+callback in merchant8 demonstrates why registerDeath calls are not unique
+deaths. Do not compare these new-policy panels to old-policy reports as a
+Game-only effect, or reinterpret old unknown survival as death/success.
+
+
+Interrupted-answer screen (2026-10-22): caregiver death rate worsens despite more
+wins; retain review_required and the all23 class/hydration/survival watches.
+Selected92 traces cover46 pairs, with91 original exact-success records recovered
+and one full exact cap recheck. Merchant31337 stays alive at the600-iteration
+cap/day602; it is not an ending or win. Do not force terminal outcomes to satisfy
+a diagnostic. The caller/source/row/all23/hash evidence is in held-answer-audit-r1.
+Conversation corpus schema2 adds passive before/after queues/speech under one
+sampler on both roots. Counts7794/7844 are independent API coverage, not matched
+NPCs. Its raw text heuristic includes old untagged reminders; manually reviewed
+substantive losses and low candidate exposure are documented. A reminder after
+an answer can belong to a NEW authored question. Never infer stale state solely
+from a generic marker. Balanced observer/contract/controller remain unchanged.
+
+Conversation controller caveat (2026-10-22): `competent.pickTalkChoice` excludes
+goon but treats recap/silence as fallback content and ultimately picks live[0].
+Reply ordering therefore changes real simulated actions and downstream endings.
+The reply64-case screen remains review_required;82 exact passive dialogue/death
+replays reproduce all23 and final hashes.7794 semantic-ID paired menus preserve
+words/actions/resources, but that does not clear human balance or downstream
+gear/community warnings. Before changing the controller, share its tools and
+rerun BOTH Game roots under one revision; never compare repaired policies to old
+panels as if only Game changed. See reply-audit-r1 and reply-replay-summary-r1.
+
+Game-namespace boundary repair (2026-10-22): the current shared harness no longer
+creates global.Game, and module evaluation failures throw before initialization.
+The browser only exposes Scattering.Game. The old alias made party-bond hooks
+available in sims while absent on the phone; actual crew practice now persists
+through native Wait/Continue after canonical binding. Rerun BOTH Game roots under
+the same corrected harness before calibration; old reports stay historical. Use
+game-namespace-baseline-r1 to retain exact Game source with matched current tools.
+All23 warnings and unknown opportunities remain, even when wins increase or a
+shorter winning run has less class/trade exposure. See game-namespace-audit-r1.
+
+Legacy acceptance producer caveat (2026-10-22): the telemetry hook counts an
+activation as accepted only when the API returns a non-null/non-false result.
+Legacy activateAbility formerly returned null even after a successful inner
+effect. Repairing that return changes abilityAccepted and retained telemetry
+state hashes without necessarily changing casts. Retain exact before/after
+replays, actual inner results/resource/clock traces and all23 before making a
+usage claim. This is a producer correction; the observer/contract are unchanged.
+See evidence/2026-10-22/legacy-availability-audit-r1.md. At that checkpoint the
+harness also installed global.Game, absent in the browser. The boundary repair
+above removes it; Node eligibility alone still cannot prove a clickable action.
 
 Current population-loss contract (2026-10-21): revision
 community-history-2026-10-21 separates a real engine ending from sustained

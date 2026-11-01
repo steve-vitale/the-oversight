@@ -1,0 +1,50 @@
+check.js: 473 scripts, 4 parallel (quick)
+.................................................................
+  Failed: scripts/godpath/test-contest-win-credit.js (exit 1, 1.1s)
+...........................................
+  Failed: scripts/godpath/test-feast-healing-use.js (exit 1, 1.5s)
+...............................................................................
+  Failed: scripts/godpath/test-late-bearer-haven.js (exit 1, 0.6s)
+...........................................................................................................................................................................................................................................................................................
+
+  FAIL scripts/godpath/test-contest-win-credit.js (exit 1, 1.1s)
+      ok   real noncombat contest entry contains the player
+        ok   actual noncombat moot reaches a real victory
+        ok   a real victory adds exactly one win rather than phase plus terminal
+        ok   real noncombat contest entry contains the player
+        ok   the low-trust catalog Moot really loses its deterministic judgment
+        ok   a failed truthful climax does not mint win credit
+        ok   real noncombat contest entry contains the player
+        ok   other winning rhetoric keeps one terminal victory
+        ok   real noncombat contest entry contains the player
+      Error: Missing public choice Tell the truth
+          at pick (C:\Users\Steve\.codex\oversight-handoffs\public10ccb-review-verify-r1\scripts\godpath\test-contest-win-credit.js:6:135)
+          at C:\Users\Steve\.codex\oversight-handoffs\public10ccb-review-verify-r1\scripts\godpath\test-contest-win-credit.js:10:17
+
+  FAIL scripts/godpath/test-feast-healing-use.js (exit 1, 1.5s)
+        ok   caregiver reserves dinner instead of spending its low food balance
+        ok   clamped bonus records only the five HP that actually landed
+        ok   visible full treatment price equals its actual 140 kcal charge
+        ok   the final actual treatment notice reports the whole unchanged bill
+        ok   combat credit adds no diagnostic clock reads beyond its existing save
+        ok   landed healing belongs to the actual bearer
+        ok   real Continue preserves the landed healing receipt and personal credit
+        FAIL actual companion damage preserves Muse first-blow feast ownership
+        FAIL a later actual bearer hit cannot steal or repeat companion credit
+      
+      feast-healing-use: 19 passed, 2 failed, 0 todo (phase 0)
+      failing: actual companion damage preserves Muse first-blow feast ownership | a later actual bearer hit cannot steal or repeat companion credit
+
+  FAIL scripts/godpath/test-late-bearer-haven.js (exit 1, 0.6s)
+      ok   actual natural day464 checkpoint loads
+        FAIL late bearer is a background survivor absent from original main cast
+        ok   Haven summary resolves the actual saved background bearer identity
+        ok   reading the Haven name does not hydrate and reroll a character
+        ok   background bearer departure does not dereference the static cast
+      
+      Late bearer Haven identity: 4 passed, 1 failed, 0 todo (phase 0)
+      failing: late bearer is a background survivor absent from original main cast
+
+  slowest: scripts/godpath/test-combat-input-phone-proof.js 39s, scripts/godpath/test-closing-silence-contract.js 34s, scripts/godpath/test-campaign-geography.js 32s
+
+check.js: 470 passed, 3 failed in 305s

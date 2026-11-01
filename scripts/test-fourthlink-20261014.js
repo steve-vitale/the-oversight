@@ -123,7 +123,18 @@ async function runChild(kind) {
   G.proposeLink = function (...args) {
     const window = leadcourtWindow(this);
     const result = propose.apply(this, args);
-    proposalEntries.push({ target: args[0], window, linkId: result?.id || null });
+    proposalEntries.push({ target: args[0], window, linkId: result?.id || null, counter: result === 'counter' });
+    return result;
+  };
+  // The real fourth lead may form by accepting/sweetening a counter on the
+  // following day. Retain its actual origin proposal and accepted return;
+  // requiring an immediate proposal return discarded this valid paid route.
+  const counterEntries = [], answerCounter = G.answerCounter;
+  G.answerCounter = function (...args) {
+    const target = this.state.pendingCounter?.targetId;
+    const day = this.state.scholar.day;
+    const result = answerCounter.apply(this, args);
+    counterEntries.push({ target, day, how: args[0], linkId: result?.id || null });
     return result;
   };
   const hashes = [], warnings = [], warn = console.warn;
@@ -140,7 +151,7 @@ async function runChild(kind) {
   hashes.push(stateHash(G));
   return { seed, armed, hashes, days: result.days, gameDays: result.gameDays,
     end: result.endReason, standing: standing.total, links: standing.links,
-    randomTail: Array.from({ length: 16 }, () => Math.random()), warnings, proposalEntries,
+    randomTail: Array.from({ length: 16 }, () => Math.random()), warnings, proposalEntries, counterEntries,
     pipe: p ? finalizeLinkPipe(G, m) : null };
 }
 async function main() {
@@ -161,28 +172,40 @@ async function main() {
   check('baseline makes no fourth proposal at its cap', capped.proposals.length === 0);
   check('uncapped policy makes one real fourth proposal', uncapped.proposals.length === 1);
   let baseline;
+  const neutralCampaigns = [];
   for (const seed of [...new Set([campaignSeed, 7, 42, 99])]) {
     const bare = child('campaign', { SEED: String(seed), FOURTHLINK: '0', LINK_OBSERVER: '0' });
     const inst = child('campaign', { SEED: String(seed), FOURTHLINK: '0', LINK_OBSERVER: '1' });
     console.log('  neutrality receipt ' + JSON.stringify({ seed, bare, inst }));
+    neutralCampaigns.push(inst);
     check('seed ' + seed + ': daily/final state snapshots identical', hash(bare.hashes) === hash(inst.hashes));
     check('seed ' + seed + ': days/ending/standing/links identical', bare.days === inst.days && bare.gameDays === inst.gameDays && bare.end === inst.end && bare.standing === inst.standing && bare.links === inst.links);
     check('seed ' + seed + ': RNG continuation identical', hash(bare.randomTail) === hash(inst.randomTail));
     check('seed ' + seed + ': actual proposal entries identical', hash(bare.proposalEntries) === hash(inst.proposalEntries));
+    check('seed ' + seed + ': actual counter acceptances identical', hash(bare.counterEntries) === hash(inst.counterEntries));
     check('seed ' + seed + ': real windows sampled without warnings/errors', inst.pipe.winDays > 0 && inst.pipe.errors.length === 0 && bare.warnings.length === 0 && inst.warnings.length === 0);
     if (seed === campaignSeed) baseline = inst;
   }
-  check('canonical campaign records actual proposals/links/tends', baseline.pipe.proposals.total > 0 && baseline.pipe.linksObserved > 0 && baseline.pipe.tends > 0);
+  check('canonical campaign records actual proposals and links', baseline.pipe.proposals.total > 0 && baseline.pipe.linksObserved > 0);
+  // Tending needs surplus food after courtship. Deposit easing changed the
+  // canonical trajectory: it still forms three links, but makes no tend calls.
+  // Keep real tending coverage in the SAME predeclared neutral seed cohort,
+  // including exact state/RNG/proposal/counter parity above for every seed.
+  check('fixed neutral campaigns exercise real tending', neutralCampaigns.reduce((n, r) => n + r.pipe.tends, 0) > 0);
   const armed = child('campaign', { SEED: String(campaignSeed), FOURTHLINK: '1', LINK_OBSERVER: '1' });
   check('canonical matched campaign keeps proposing', armed.pipe.proposals.total >= baseline.pipe.proposals.total);
   const fourth = armed.pipe.fourthLeadLink;
+  const fourthCounter = fourth && armed.counterEntries.find(row =>
+    row.target === fourth.target && row.day === fourth.formedDay && row.linkId);
   const fourthReceipt = fourth && armed.proposalEntries.find(row =>
-    row.target === fourth.target && row.window.day === fourth.formedDay && row.linkId);
+    row.target === fourth.target && ((row.window.day === fourth.formedDay && row.linkId) ||
+      (row.counter && fourthCounter && row.window.day <= fourthCounter.day)));
+  const fourthId = fourthReceipt?.linkId || fourthCounter?.linkId;
   check('baseline campaign stays below a fourth lead formation', baseline.pipe.fourthLeadLink === null);
   check('armed campaign forms a real fourth lead from an open capped proposal window',
     fourthReceipt && fourthReceipt.window.open && fourthReceipt.window.capFires &&
     fourthReceipt.window.subs >= 3 && armed.pipe.links.some(link =>
-      link.id === fourthReceipt.linkId && link.target === fourth.target && link.dir === 'lead') &&
+      link.id === fourthId && link.target === fourth.target && link.dir === 'lead') &&
     armed.pipe.errors.length === 0);
   console.log('  campaign comparison ' + JSON.stringify({ baseline: baseline.pipe, armed: armed.pipe }));
   delete process.env.FOURTHLINK;

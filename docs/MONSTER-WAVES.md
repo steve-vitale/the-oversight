@@ -224,7 +224,21 @@ as any death — "unkillable means unkillable." `maybeCheatDeath()` is the
 single death choke point; no bypass exists. A random villager burns in the
 ash-death; the villager pool is the cap.
 
-## Wave 6+: The Long Night (SCAFFOLD — Steve 2026-10-17)
+## Wave 6+: The Long Night (existing siege; calendar repair under test)
+
+Current runtime already implements THE NETWORK in network-campaign.js and the
+overtime/key road in overtime.js. The scaffold below is historical design,
+not an inventory of missing code. On2026-10-23 Steve clarified: "Remember we
+discussed the Easter egg boss around day 150? That’s already supposed to be
+getting intolerably hard."
+
+Candidate repair removes a Table-deed bypass: ordinary world pressure gets an
+uncapped calendar floor, initially starting120 and growing weekly, severe by150
+and still rising after180. The existing three-titan requirement and nine-node
+siege remain; the calendar grants no victory or key. Initial schedule is under
+matched all29 testing, not release clearance. Exact coefficients and calibration
+decision belong in SURVIVAL-LEVERS.md. Ordinary spawn-wave5 cap is distinct from
+this real wave6 campaign and increasingly strong ordinary reruns.
 
 Steve: wave 6 was the plan for the Easter-egg long-survival challenge and
 its boss monster — waves past 5 escalating toward "another sort of final

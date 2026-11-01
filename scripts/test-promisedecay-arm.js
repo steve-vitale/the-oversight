@@ -121,7 +121,9 @@ console.log((PRISTINE ? '[PRISTINE — HEAD game.js]' : '[worktree]') + ' seed '
       ok(c && c.mem, `break instrumented at trust ${t}`);
       ok(c && c.mem && c.mem.trustAtBreak === t, `trustAtBreak stamped (${t})`);
       S().day = c.breakDay + D - 1;
-      ok(Game.promiseHelp(vt) === null, `refusal holds at D-1 (D=${D})`);
+      const refused = Game.promiseHelp(vt);
+      ok(refused?.ok === false && refused.reason === 'broken-word' &&
+        /Not again/.test(refused.line) && !V().promises[vt], `typed refusal holds at D-1 (D=${D})`);
       S().day = c.breakDay + D;
       const r = Game.promiseHelp(vt);
       ok(r && r.ok, `refusal lifts at exactly D (${D})`);
@@ -175,7 +177,10 @@ console.log((PRISTINE ? '[PRISTINE — HEAD game.js]' : '[worktree]') + ' seed '
     ok(latest && latest.trustAtBreak === 80, 'latest break stamps fresh trustAtBreak (80)', 'got ' + (latest && latest.trustAtBreak));
     ok(Game.promiseDecayDays(80) === 32, 'latest break governs D (32, not 20)');
     S().day = latest.day + 31;
-    ok(Game.promiseHelp(vid) === null, 'refusal holds at D2-1 (32-1), not lifted by the old D=20 window');
+    const refused = Game.promiseHelp(vid);
+    ok(refused?.ok === false && refused.reason === 'broken-word' &&
+      /Not again/.test(refused.line) && !v.promises[vid],
+      'typed refusal holds at D2-1 (32-1), not lifted by the old D=20 window');
     S().day = latest.day + 32;
     const r = Game.promiseHelp(vid);
     ok(r && r.ok, 'refusal lifts at the NEW D (32)');

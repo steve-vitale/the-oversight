@@ -145,7 +145,8 @@ console.log((PRISTINE ? '[PRISTINE run — HEAD versions of game.js/ledger.js/be
     // refusal holds at D-1
     S().day = breakDay + D - 1;
     const r1 = Game.promiseHelp(vid);
-    ok(r1 === null, 'refusal still holds at D-1 days (' + (D - 1) + ' of ' + D + ')');
+    ok(r1?.ok === false && r1.reason === 'broken-word' && /Not again/.test(r1.line) &&
+      !v.promises[vid], 'typed refusal still holds at D-1 days (' + (D - 1) + ' of ' + D + ')');
     // lifts at exactly D
     S().day = breakDay + D;
     const r2 = Game.promiseHelp(vid);

@@ -80,6 +80,16 @@ metric = S.compareMetric([1,0,0,0,0,0,0,0], [0,1,1,0,0,0,0,0], win, 'challenge-w
 T.ok('uncertain material win movement remains an investigation watch', metric.status === 'change_watch');
 metric = S.compareMetric(Array(8).fill(1), Array(8).fill(1), win, 'unchanged');
 T.ok('unchanged wins make no difficulty claim', metric.status === 'descriptive');
+before = panel(); after = copy(before);
+const diagnostics = S.contract.metrics.filter(m => m.diagnosticOnly);
+for (const r of before.rows) for (const m of diagnostics) r.metrics[m.id] = null;
+result = S.comparePanels(before, after);
+T.ok('diagnostic exposure changes remain visible without deciding domain balance', diagnostics.length === 6 && result.decision === 'no_material_signal' && result.policies[0].metrics.filter(m => m.diagnosticOnly).every(m => m.status === 'not_observed' && m.coverageChanged));
+for (const r of after.rows) r.metrics.lowFood = 0.5;
+result = S.comparePanels(before, after);
+T.ok('unknown luck cannot cancel a food regression', result.decision === 'review_required' && result.policies[0].metrics.find(m => m.id === 'lowFood').status === 'regression_signal');
+metric = S.compareMetric(Array(8).fill(null), Array(8).fill(1), { ...spec, diagnosticOnly: true }, 'domain');
+T.ok('a diagnostic flag cannot disable a directional survival warning', !metric.diagnosticOnly && S.requiresReview(metric));
 let exposure = require('../balance-features').summarize(featurePanel)[0].npcExposure;
 T.ok('legacy NPC exposure remains unknown rather than fabricated zero', exposure.measuredRuns === 0 && exposure.eligiblePersonDays === null && exposure.holderDays === null);
 const exposurePanel = panel();

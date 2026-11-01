@@ -1,0 +1,28 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),util=require('util'),F=require('../phone-frame-proof-update');
+const recipe='evidence/2026-10-26/formal-help-phone-r1.cjs',fixture='evidence/2026-10-26/formal-help-fixtures-r1.json',hash=b=>crypto.createHash('sha256').update(b).digest('hex'),same=util.isDeepStrictEqual;
+const state=s=>{const x=structuredClone(s);delete x.saveSeq;return x;},committable=s=>{const x=state(s);delete x.run.log;return x;};
+function read(root){const pointer=JSON.parse(fs.readFileSync(path.join(root,'scripts/formal-help-phone-proof.json')));return{pointer,receipts:pointer.receipts.map(r=>{const b=fs.readFileSync(path.join(root,r.path));return{...r,actualHash:hash(b),data:JSON.parse(z.gunzipSync(b))};})};}
+function verify(root,{pointer,receipts}=read(root)){
+ const errors=[],check=(c,m)=>{if(!c)errors.push(m);},input=JSON.parse(fs.readFileSync(path.join(root,fixture))),expected=F.expectedInputs(root),keys=new Set();check(pointer.schemaVersion===1&&receipts.length===8,'Eight actual cases required');
+ for(const r of receipts){const d=r.data,k=d.height+':'+d.kind,s=input.scenes.find(s=>s.kind===d.kind),get=n=>d.trace.find(t=>t.name===n);check(!keys.has(k)&&[736,844].includes(d.height)&&!!s,'Unique declared case '+k);keys.add(k);if(!s)continue;
+  check(r.actualHash===r.sha256&&same(d.scene,s)&&d.scope===input.scope,k+' receipt/fixture bytes');check(same(d.errors,[]),k+' no browser error');
+  for(const[f,h]of Object.entries(expected))check(d.sourceWitness?.networkInputs?.[f]===h,k+' loaded '+f);
+  for(const f of[recipe,fixture,'evidence/2026-10-22/combat-turn-network-r1.cjs','scripts/refresh-phone-proofs.js','scripts/phone-frame-proof-update.js','scripts/balance-panel.js'])check(d.sourceWitness?.recipeInputs?.[f]===F.normalized(path.join(root,f)),k+' executed '+f);
+  const images=['outcome','continued'].map(kind=>path.posix.dirname(r.path)+'/'+d.height+'-'+d.kind+'-'+kind+'.png').sort();check(same(d.screenshots.map(i=>i.path).sort(),images),k+' actual case images');
+  for(const i of d.screenshots){const f=path.resolve(root,i.path),rel=path.relative(path.join(root,'evidence'),f);check(!rel.startsWith('..')&&!path.isAbsolute(rel)&&fs.existsSync(f)&&hash(fs.readFileSync(f))===i.sha256,k+' rendered bytes');}
+  check(d.sourceWitness?.trustedTouches?.length>=6&&d.sourceWitness.trustedTouches.every(t=>t.trusted),k+' actual trusted touches');check(d.controls.length>=6&&d.controls.every(b=>b.x>=0&&b.y>=0&&b.x+b.width<=391&&b.y+b.height<=d.height&&b.width>=43.5&&b.height>=43.5),k+' visible44px controls');check(d.controls.some(b=>b.q.includes('data-cid="offer_help"')),k+' offered formal help');
+  check(d.trace.every(t=>t.scroll[0]===0&&t.scroll[1]===0&&t.scroll[2]<=d.height+1&&t.rects.length>=4&&t.rects.every(b=>b.y>=0&&b.bottom<=d.height+1)),k+' one phone frame');
+  for(let i=0;i<d.trace.length;i++)if(d.trace[i].name==='before reply page')check(d.trace[i+1]?.name==='after reply page'&&same(state(d.trace[i].state),state(d.trace[i+1].state)),k+' free reply page');
+  const talk=get('before paid Talk'),before=get('prepared known goal subject menu'),after=get('actual offered formal help'),final=get('before pagehide'),loaded=get('native Continue');check(talk&&before&&after&&final&&loaded,k+' actual boundaries');if(!talk||!before||!after||!final||!loaded)continue;
+  check(before.bearer===s.bearer&&talk.state.scholar.kcal-before.state.scholar.kcal===10,k+' actual10kcal Talk');
+  const promise=after.state.village.promises[s.vid];
+  if(s.kind==='broken')check(!promise&&d.pages.some(p=>/not again/i.test(p))&&d.pages.every(p=>!/thank you|means something|won.t forget/i.test(p)),k+' actual refusal without acceptance');
+  else if(s.kind==='deflected')check(d.pages.some(p=>/fair/i.test(p))&&same(promise,before.state.village.promises[s.vid]),k+' actual deflection preserves history');
+  else check(d.pages.some(p=>/thank you/i.test(p))&&promise?.kept===false&&promise.maker===s.bearer&&promise.day===after.state.scholar.day&&same(after.word,before.word),k+' actual one new current vow without erasing settlement history');
+  check(same(committable(final.state),committable(d.committed))&&same(final.log,(d.committed.run.log||[]).map(l=>String(l.text||l))),k+' final whole action and separate log committed');check(same(state(loaded.state),state(d.committed)),k+' whole committed Continue');
+ }
+ for(const h of[736,844])for(const s of input.scenes)check(keys.has(h+':'+s.kind),'Missing '+h+s.kind);return{ok:!errors.length,errors};
+}
+function update(root,directory){const absolute=fs.realpathSync(path.resolve(root,directory)),rel=path.relative(fs.realpathSync(root),absolute);if(rel.startsWith('..')||path.isAbsolute(rel))throw Error('Receipts must remain inside the repository');const input=JSON.parse(fs.readFileSync(path.join(root,fixture))),receipts=[736,844].flatMap(h=>input.scenes.map(s=>{const file=path.join(rel,h+'-'+s.kind+'.json.gz').replace(/\\/g,'/'),b=fs.readFileSync(path.join(root,file)),sha256=hash(b);return{path:file,sha256,actualHash:sha256,data:JSON.parse(z.gunzipSync(b))};})),pointer={schemaVersion:1,scope:input.scope,receipts:receipts.map(({path,sha256})=>({path,sha256}))},v=verify(root,{pointer,receipts});if(!v.ok)throw Error(v.errors.join('\n'));fs.writeFileSync(path.join(root,'scripts/formal-help-phone-proof.json'),JSON.stringify(pointer,null,2)+'\n');return{receipts:receipts.length};}
+module.exports={read,verify,update};if(require.main===module)try{if(!process.argv[2])throw Error('Actual fresh receipt directory required');console.log(JSON.stringify(update(path.resolve(__dirname,'../..'),process.argv[2])));}catch(e){console.error(e.stack);process.exitCode=1;}

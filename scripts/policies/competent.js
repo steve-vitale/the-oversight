@@ -7,6 +7,8 @@ const idle = require('./idle');
 const {chooseConversationChoice}=require('./conversation-pages');
 const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1, default OFF)
 const snareteach = require('./snareteach'); // teach-drive arm (SNARETEACH=1, default OFF)
+const humanCombat = require('./human-combat');
+const publicTravel = require('./public-travel');
 
 // COMPETENT_WARM (journey social r39 2026-10-21): warm acts (donations,
 // promise-keeping, comfort, answering begs) are part of the competent base.
@@ -534,7 +536,7 @@ function feastFightRoad(Game, ctx) {
       for (const c of cands.slice(0, 4)) {
         if (Game.over || Game.tbfight) break;
         if (!Game.feastedActive || !Game.feastedActive()) break;
-        try { Game.travelTo(c.x, c.y); } catch (e) { break; }
+        try { publicTravel.travel(Game, c.x, c.y); } catch (e) { break; }
         if (Game.over || Game.tbfight) break;
         if (Game.map.px !== c.x || Game.map.py !== c.y) continue;
         try { Game.doAction('forage', {}); } catch (e) {}
@@ -557,6 +559,9 @@ function recentGives(Game, ctx, days) {
   try {
     const vv = Game.state.village || {};
     const me = Game.villagerId;
+    const actor=(Game.state.runKey||'')+':'+me;
+    if(ctx._givesActor!==undefined&&ctx._givesActor!==actor)ctx._givesHist=[];
+    ctx._givesActor=actor;
     const g = (vv.gives || {})[me] || 0;
     const day = (Game.state.scholar || {}).day || 0;
     ctx._givesHist = ctx._givesHist || [];
@@ -693,29 +698,38 @@ function talkRound(Game, ctx) {
 // for any recurrence.
 function talkOn() { return process.env.COMPETENT_TALK === '1'; }
 
-// Structural menu ids: never picked mid-conversation. 'goon' ("go on") is
-// structural here too — the 5-turn cap owns continuation, not the menu.
-const TALK_STRUCTURAL = { leave: 1, goon: 1, subject: 1, 'dlg:subject': 1, 'menu:more':1, deflect_q: 1, honest_pass: 1 };
+// History/silence are not fallback content. A queued continuer is handled
+// explicitly below; it still consumes one of the SAME five sitting actions.
+const TALK_STRUCTURAL = { leave: 1, goon: 1, recap: 1, silence: 1, subject: 1, 'dlg:subject': 1, 'menu:more':1, deflect_q: 1, honest_pass: 1 };
 
-function pickTalkChoice(choices, seen) {
+function pickTalkChoice(choices, seen, conversation) {
   try {
+    const offered = (choices || []).filter(c => c && c.id);
+    // An offered answer belongs to the CURRENT question. Its ID may recur
+    // after an intervening question, so topic-repeat suppression cannot own it.
+    for (const prefix of ['ans:', 'gq:', 'react:']) {
+      const answer = offered.find(c => String(c.id).startsWith(prefix));
+      if (answer) return answer;
+    }
+    // Read only the existence of queued speech, never its future contents.
+    // Each newly advanced beat legitimately reuses the same offered goon ID.
+    if (conversation?.heldBeats?.length) {
+      const next = offered.find(c => c.id === 'goon');
+      if (next) return next;
+    }
     // NO REPEATS (blitz simpolicy 2026-10-13): teaching three plants in a
     // row reads as a lecture, not a conversation (pilot transcripts: the
     // triple-teach + the engine's "lost my train of thought" stutter). A
     // choice id fires once per sitting; the next turn picks the next-best.
-    const live = (choices || []).filter(c =>
+    const live = offered.filter(c =>
       c && c.id && !TALK_STRUCTURAL[String(c.id)] && !(seen && seen[String(c.id)]));
     if (!live.length) return null;
-    const ans = live.find(c => String(c.id).indexOf('ans:') === 0);
-    if (ans) return ans; // answer their question first — it's rude to ignore it
     const teach = live.find(c => String(c.id) === 'teach');
     if (teach) return teach; // knowledge is the food economy
-    const gq = live.find(c => String(c.id).indexOf('gq') === 0);
-    if (gq) return gq; // the canon questions
     const ask = live.find(c => String(c.id) === 'ask');
     if (ask) return ask;
     return live[0];
-  } catch (e) { return null; }
+  } catch (e) { console.warn('[policy/conversation-choice]', e.message); return null; }
 }
 
 function talkScore(Game, ctx, vid) {
@@ -765,7 +779,7 @@ function holdConversation(Game, ctx, vid) {
         let c = null;
         try { c = Game.convoGet ? Game.convoGet(vid) : null; } catch (e) {}
         if (!c || !c.active) break;
-        const pick = chooseConversationChoice(Game,vid,choices=>pickTalkChoice(choices,seen),ctx);
+        const pick = chooseConversationChoice(Game,vid,choices=>pickTalkChoice(choices,seen,Game.convoGet(vid)),ctx);
         if (!pick) break;
         seen[String(pick.id)] = 1;
         let result;
@@ -1055,7 +1069,7 @@ function workGarden(Game,ctx) {
     if(inside&&Game.exitBuilding()!==true)return;
     if(!active())return;
     harvest();if(!active())return;
-    const target=Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
+    const target=typeof ctx.gardenTarget==='function'?ctx.gardenTarget(Game,ctx):Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
     while(active()&&Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
     if(!active())return;
     const v=Game.state.village;
@@ -1162,7 +1176,7 @@ function walkTo(Game, hx, hy) {
       }
       if (!best) break;
       const px0 = Game.map.px, py0 = Game.map.py;
-      try { Game.travelTo(best.x, best.y); } catch (e) { break; }
+      try { publicTravel.travel(Game, best.x, best.y); } catch (e) { break; }
       if (Game.map.px === px0 && Game.map.py === py0) {
         // refused: stay put, safely — or (opt-in) go around, as the
         // blockage card's own "Go around" button offers a human.
@@ -1207,7 +1221,7 @@ function routeAround(Game, hx, hy) {
     if (!(key(hx, hy) in prev)) return false;
     let cur = [hx, hy];
     while (prev[key(cur[0], cur[1])] && !(prev[key(cur[0], cur[1])][0] === sx && prev[key(cur[0], cur[1])][1] === sy)) cur = prev[key(cur[0], cur[1])];
-    try { Game.travelTo(cur[0], cur[1]); } catch (e) { return false; }
+    try { publicTravel.travel(Game, cur[0], cur[1]); } catch (e) { return false; }
     return Game.map.px !== sx || Game.map.py !== sy;
   } catch (e) { return false; }
 }
@@ -1307,7 +1321,7 @@ function clearRubbleForStone(Game, ctx, bx, by) {
     const sx = bx + (bf.dx || 0), sy = by + (bf.dy || 0);
     if (sx < 0 || sy < 0 || sx > 8 || sy > 8) return false;
     if (Game.map.px !== sx || Game.map.py !== sy) {
-      try { Game.travelTo(sx, sy); } catch (e) { return false; } // honest walk, no force
+      try { publicTravel.travel(Game, sx, sy); } catch (e) { return false; } // honest walk, no force
       if (Game.over || Game.tbfight) return false;
       if (Game.map.px !== sx || Game.map.py !== sy) return false;
     }
@@ -1463,8 +1477,8 @@ function forageTripSeedFirst(Game, ctx) {
       // 40 kcal, no stone, no card). A real player goes around or does the
       // roadwork. Never force.
       const res = keepKnifeOn
-        ? Game.travelTo(pick.x, pick.y)
-        : Game.travelTo(pick.x, pick.y, pick.blocked); // legacy: gate-off behavior
+        ? publicTravel.travel(Game, pick.x, pick.y)
+        : publicTravel.travel(Game, pick.x, pick.y, pick.blocked); // legacy: gate-off behavior
       if (Game.over || Game.tbfight) { ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy); return 0; }
       if (Game.map.px !== pick.x || Game.map.py !== pick.y) {
         // STONE RUN (food r6): rubble on the path and the knife needs its
@@ -1473,7 +1487,7 @@ function forageTripSeedFirst(Game, ctx) {
         // a competent trapper clears paths.
         if (keepKnifeOn && res && res.blockType === 'rubble' && knifeWantsStone(Game, ctx)) {
           if (clearRubbleForStone(Game, ctx, res.x, res.y)) {
-            const res2 = Game.travelTo(pick.x, pick.y);
+            const res2 = publicTravel.travel(Game, pick.x, pick.y);
             if (Game.over || Game.tbfight) { ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy); return 0; }
             if (Game.map.px !== pick.x || Game.map.py !== pick.y) continue;
           } else continue;
@@ -1485,7 +1499,7 @@ function forageTripSeedFirst(Game, ctx) {
     }
     ctx.tripHomeDetours = (ctx.tripHomeDetours || 0) + walkHome(Game, hx, hy);
     return foraged;
-  } catch (e) { try { Game.travelTo(Game.map.px, Game.map.py); } catch (e2) {} return 0; }
+  } catch (e) { try { publicTravel.travel(Game, Game.map.px, Game.map.py); } catch (e2) {} return 0; }
 }
 
 // Donate the haul: identified edible inventory food goes to the pantry.
@@ -1506,9 +1520,11 @@ function donateSurplus(Game,ctx,options={}) {
     const cap=Game.kcalCap?Game.kcalCap():2400;
     const keep=options.keepKcal??(process.env.COMPETENT_TRADE_RESERVE==='1'?cap*3:cap);
     const max=options.maxTransfers??Infinity;
+    let remaining=options.targetKcal??Infinity;
+    if((!Number.isFinite(remaining)&&remaining!==Infinity)||remaining<0)return 0;
     if(!Number.isFinite(keep)||keep<0)return 0;
-    for(let i=inv.length-1;i>=0&&transferred<max&&active();i--){
-      const it=inv[i];if(!donationFoodReady(Game,it))continue;
+    for(let i=inv.length-1;i>=0&&transferred<max&&remaining>0&&active();i--){
+      const it=inv[i];if(!donationFoodReady(Game,it)||(options.accept&&!options.accept(it)))continue;
       const have=it.units??1;
       const available=inv.reduce((n,item)=>n+(donationFoodReady(Game,item)?item.kcalEach*(item.units??1):0),0);
       const room=Game.pantryCapKcal()-Game.pantryKcal();
@@ -1519,6 +1535,7 @@ function donateSurplus(Game,ctx,options={}) {
         amount=Math.min(have,choice.maxUnits,Math.floor(Math.max(0,available-keep)/it.kcalEach));
         if(!Number.isSafeInteger(amount)||amount<=0)continue;
       }else if(available-have*it.kcalEach<keep||room<have*it.kcalEach)continue;
+      amount=Math.min(amount,Math.ceil(remaining/it.kcalEach));
       const kcal=it.kcalEach*amount;
       const vid=Game.villagerId,before=(Game.state.village.gives||{})[vid]||0;
       ctx.donationAttempts=(ctx.donationAttempts||0)+1;
@@ -1528,6 +1545,7 @@ function donateSurplus(Game,ctx,options={}) {
       if(moved===amount&&Math.abs(credited-kcal)<1e-6){
         transferred++;ctx.donated=(ctx.donated||0)+1;
         ctx.donatedKcal=(ctx.donatedKcal||0)+credited;
+        remaining-=credited;
         ctx._lastGiveDay=s.day||0;
       }else if(moved===0&&credited===0)ctx.donationRefusals=(ctx.donationRefusals||0)+1;
       else throw Error('Donation removal and gift credit disagree');
@@ -1661,7 +1679,8 @@ function counterPlay(Game, ctx) {
     const day = (Game.state.scholar || {}).day || 0;
     if ((ctx._cpDay || 0) === day) return;
     ctx._cpDay = day;
-    workGarden(Game,ctx);
+    if(typeof ctx.gardenWork==='function')ctx.gardenWork(Game,ctx,'late');
+    else workGarden(Game,ctx);
     // fishing: the creek crew. Two fishers from day one — the early deficit
     // kills before the garden matures. Three when the pantry is critical.
     // (Three from day one was tried: more exposure killed more than the
@@ -2077,19 +2096,15 @@ function beastHintKnown(Game, mid) {
     return !!(e && e.stage === 'slain');
   } catch (e) { return false; }
 }
-// Interior free tiles (1..7): grid edges are the flee-by-barrier (by design)
-// — stepping on them can end the fight mid-trick.
+// Interior free tiles: use the current battle's bounds and full footprints.
+// Edges are reserved for deliberate flee-by-barrier movement.
 function beastFreeTiles(Game, f, px, py) {
-  const out = [];
-  try {
-    const occupied = new Set(
-      ((f.fighters || []).filter(x => x && x.alive && x.key !== 'p')).map(x => x.mx + ',' + x.my));
-    for (let tx = 1; tx <= 7; tx++) for (let ty = 1; ty <= 7; ty++) {
-      if (tx === px && ty === py) continue;
-      if (occupied.has(tx + ',' + ty)) continue;
-      out.push([tx, ty]);
-    }
-  } catch (e) {}
+  const out=[],p=Game.tbFighter('p'),max=Game.tbGridMax();
+  if(Game.tbfight!==f||!p)return out;
+  for(let tx=1;tx<max;tx++)for(let ty=1;ty<max;ty++){
+    if(tx===px&&ty===py)continue;
+    if(Game.tbCanOccupy(p,tx,ty))out.push([tx,ty]);
+  }
   return out;
 }
 // Closest free tile avoiding a set of "x,y" cells (a telegraph lane).
@@ -2104,55 +2119,15 @@ function beastDodgeTile(Game, f, px, py, avoid) {
 // Strike a chosen target: close the distance first (interior tiles only),
 // then strike. Returns 'moved', 'struck', or 'stuck'.
 function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
-  try {
-    const w = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
-    const tmx = tgt.mx != null ? tgt.mx : 4, tmy = tgt.my != null ? tgt.my : 4;
-    const d0 = Math.max(Math.abs(tmx - px), Math.abs(tmy - py));
-    if (d0 > (w.range || 1)) {
-      const occupied = new Set(
-        ((f.fighters || []).filter(x => x && x.alive && x.key !== 'p')).map(x => x.mx + ',' + x.my));
-      let bx = null, by = null, bd = 1e9;
-      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
-        if (!dx && !dy) continue;
-        const cx = tmx + dx, cy = tmy + dy;
-        if (cx < 1 || cx > 7 || cy < 1 || cy > 7) continue;
-        if (occupied.has(cx + ',' + cy)) continue;
-        const dd = Math.max(Math.abs(cx - px), Math.abs(cy - py));
-        if (dd < bd) { bd = dd; bx = cx; by = cy; }
-      }
-      if (bx != null) {
-        // STEP, DON'T TELEPORT (capable bot 2026-10-14): the main strike
-        // path got this fix in r6, this one didn't — tbPlayerMove refuses a
-        // destination past this turn's movement ("Too far"), so a far trick
-        // target was a no-op every turn. Walk as far as moveLeft pays for
-        // (terrain priced like tbPlayerMove prices it).
-        try {
-          let dx = bx, dy = by;
-          if (typeof Game.findPath === 'function') {
-            const path = Game.findPath(px, py, bx, by);
-            if (path && path.length) {
-              let cost = 0, idx = -1;
-              for (let i = 0; i < path.length; i++) {
-                let c = 1;
-                try { c = Game.tbTerrainCost ? Game.tbTerrainCost(path[i][0], path[i][1]) : 1; } catch (e) { c = 1; }
-                if (cost + c > (p.moveLeft || 0)) break;
-                cost += c; idx = i;
-              }
-              if (idx >= 0) { dx = path[idx][0]; dy = path[idx][1]; }
-            }
-          }
-          Game.tbPlayerMove(dx, dy);
-        } catch (e) {}
-        ctx.closed = (ctx.closed || 0) + 1;
-      }
-      endTurn();
-      return 'moved';
-    }
-  } catch (e) {}
-  try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
-  if (ctx._dpsRace) ctx._dpsRace.strikes++; // DPS-race assessment (scale-wall r1): count real strikes
-  endTurn();
-  return 'struck';
+  if(Game.tbfight!==f||!humanCombat.liveMonster(tgt))return 'stuck';
+  const strikes=ctx.monsterCombatStrikeActions||0,moves=ctx.monsterCombatMoveAttempts||0;
+  const handled=humanCombat.monsterTurn(Game,ctx,{target:tgt,interior:true});
+  const landed=(ctx.monsterCombatStrikeActions||0)-strikes;
+  ctx.struck=(ctx.struck||0)+landed;
+  const moved=(ctx.monsterCombatMoveAttempts||0)-moves;
+  ctx.closed=(ctx.closed||0)+moved;
+  if(ctx._dpsRace)ctx._dpsRace.strikes+=landed;
+  return landed?'struck':handled&&moved?'moved':'stuck';
 }
 // Attempt one beast trick this turn. Returns true when the turn is consumed.
 function beastTrickPlay(Game, f, ctx, p, endTurn) {
@@ -2160,7 +2135,7 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
     if (ctx._btFight !== f) { ctx._btFight = f; ctx._btTried = {}; ctx._btSeq = {}; }
     const tried = ctx._btTried, seq = ctx._btSeq;
     const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
-    const live = (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+    const live = (f.fighters || []).filter(humanCombat.liveMonster);
     const markTypeTried = (mid) => { for (const x of live) { if (beastMidOf(x) === mid) tried[x.key] = 1; } };
     for (const m of live) {
       const mid = beastMidOf(m);
@@ -2410,7 +2385,7 @@ function dpsRaceRemaining(Game, f) {
   let hp = 0;
   try {
     for (const x of (f.fighters || [])) {
-      if (!x || x.kind !== 'monster' || x.fled || (x.hp || 0) <= 0) continue;
+      if (!humanCombat.liveMonster(x)) continue;
       hp += x.hp;
     }
   } catch (e) {}
@@ -2540,12 +2515,12 @@ function fleeDirScore(Game, mpx, mpy, dx, dy) {
 // exists — haven is within reach — monster-active exits are off the table
 // entirely. Never trade one fight for another on the way home. When no
 // safe way home exists, take the least-bad scored exit.
-function chooseFleeDir(Game, mpx, mpy) {
+function chooseFleeDir(Game, mpx, mpy, canUse) {
   if (mpx === DIR_FLEE_HAVEN.x && mpy === DIR_FLEE_HAVEN.y) return null; // at haven: hold
   const cands = [];
   for (const dd of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
     const s = fleeDirScore(Game, mpx, mpy, dd[0], dd[1]);
-    if (s) cands.push(s);
+    if (s && (!canUse || canUse(s))) cands.push(s);
   }
   if (!cands.length) return null;
   const safeHome = cands.filter(c => (c.haven || c.havenward) && !c.danger);
@@ -2736,7 +2711,7 @@ function fightAssessLore(Game, ctx, f, p, mons) {
 // through the policy's normal flee() — walk to the edge while survivable.
 // Returns true when it disengaged.
 function fightAssessHook(Game, f, ctx, p, flee) {
-  const mons = (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+  const mons = (f.fighters || []).filter(humanCombat.liveMonster);
   const race = fightAssessRace(Game, ctx, mons, p);
   ctx.faChecks = (ctx.faChecks || 0) + 1;
   if (!race.decline) return false;
@@ -2873,6 +2848,7 @@ const competent = {
     if (COMPETENT_WARM) keepPromises(Game, ctx);
     const rec = recovering(Game, ctx);
     if (rec) recoverStep(Game, ctx);
+    if (!rec && typeof ctx.gardenWork==='function') ctx.gardenWork(Game,ctx,'early');
     // the honest food run: forage, sort the haul at camp, sow seed first,
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
     if (!rec) stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
@@ -2945,8 +2921,11 @@ const competent = {
     try {
       const ch = (Game.state.scholar || {}).abilityChoices;
       if (ch && ch.length && Game.chooseAbility) {
-        Game.chooseAbility(ch[0].id);
-        ctx.choseAbility = (ctx.choseAbility || 0) + 1;
+        if(typeof ctx.resolvePendingOffers==='function')ctx.resolvePendingOffers(Game,ctx);
+        else {
+          Game.chooseAbility(ch[0].id);
+          ctx.choseAbility = (ctx.choseAbility || 0) + 1;
+        }
       }
     } catch (e) {}
     const known = Object.keys((Game.state.codex || {}).plants || {}).length;
@@ -2981,13 +2960,11 @@ const competent = {
       if (!f || f.over || !Game.tbIsPlayerTurn()) return false;
       const p = Game.tbFighter('p');
       const hpPct = (p.hp || 0) / Math.max(1, p.maxHp || p.hp || 1);
-      const endTurn = () => {
-        try {
-          const q = Game.tbFighter('p');
-          q.moveLeft = 0; q.acted = true;
-          Game.tbAfterPlayerAction();
-        } catch (e) {}
-      };
+      const humanOnly=f.fighters.some(humanCombat.liveHuman)&&!f.fighters.some(humanCombat.liveMonster);
+      const turnToken=humanCombat.token(Game,f);
+      // Every opponent uses the same public end-turn verb as the phone.
+      // Automatic advancement after a strike must not spend a fresh turn.
+      const endTurn = () => humanCombat.finishTurn(Game,f,p,turnToken);
       // FLEE = PUSH THROUGH THE BARRIER (longsim scale-wall r1 2026-10-13):
       // the engine's exit is tbBarrierExit(dx,dy) — a deliberate push THROUGH
       // the grid edge onto the next node. Walking to / along the edge does
@@ -3004,14 +2981,20 @@ const competent = {
         // pick the havenward exit and judge the destination — never the
         // nearest edge. At the haven node: HOLD (no push leads toward
         // safety) — return false so fight() falls through to normal combat.
-        if (dirFleeOn()) {
+        if (dirFleeOn() || humanOnly) {
           try {
             const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
             const mpx = Game.map.px, mpy = Game.map.py;
-            const dir = chooseFleeDir(Game, mpx, mpy);
+            const goals=new Map(),max=Game.tbGridMax();
+            if(humanOnly&&ctx._humanFlee?.fight!==f)ctx._humanFlee={fight:f,blocked:new Set()};
+            const key=d=>[mpx,mpy,d.dx,d.dy].join(':');
+            const dir = chooseFleeDir(Game, mpx, mpy,humanOnly?d=>{
+              if(ctx._humanFlee.blocked.has(key(d)))return false;
+              const goal=humanCombat.edgeGoal(Game,p,d,max);if(goal)goals.set(key(d),goal);return !!goal;
+            }:undefined);
             if (!dir) { ctx.fledHeld = (ctx.fledHeld || 0) + 1; return false; } // hold ground
-            const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? 8 : px;
-            const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? 8 : py;
+            const tx = humanOnly?goals.get(key(dir)).x:dir.dx < 0 ? 0 : dir.dx > 0 ? max : px;
+            const ty = humanOnly?goals.get(key(dir)).y:dir.dy < 0 ? 0 : dir.dy > 0 ? max : py;
             if (px === tx && py === ty) {
               // On the chosen edge: push THROUGH toward the judged destination.
               const bx = Game.map.px, by = Game.map.py;
@@ -3025,13 +3008,13 @@ const competent = {
               // moving — no recovery window for a push that went nowhere.)
               if (Game.map.px !== bx || Game.map.py !== by || !Game.tbfight || Game.tbfight.over) {
                 markRecover(Game, ctx);
-              }
+              } else if(humanOnly)ctx._humanFlee.blocked.add(key(dir));
             } else {
               // Not on the chosen edge yet: step toward it one tile (the
               // full edge walk can exceed this turn's movement budget —
               // tbPlayerMove refuses paths longer than moveLeft); the push
               // lands on a later turn once the edge is reached.
-              try { Game.tbPlayerMove(px + dir.dx, py + dir.dy); } catch (e) {}
+              try { const step=humanOnly?goals.get(key(dir)).path[0]:[px+dir.dx,py+dir.dy];if(step)Game.tbPlayerMove(step[0],step[1]); } catch (e) { if(humanOnly)console.warn('[policy] human flee move',e.message); }
               ctx.dirWalks = (ctx.dirWalks || 0) + 1;
             }
             ctx.fled = (ctx.fled || 0) + 1;
@@ -3040,7 +3023,7 @@ const competent = {
           return true;
         }
         try {
-          const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+          const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4,max=Game.tbGridMax();
           if (exitVerifiedFleeOn() && ctx._fleeBlockedFor === f.id) {
             // This fight is already marked unfleeable (consumed push, or
             // stuck flee-walk): a real player reads the message once and
@@ -3064,8 +3047,8 @@ const competent = {
           try {
             const mpx = Game.map.px, mpy = Game.map.py;
             const cands = [];
-            if (px === 0) cands.push([-1, 0]); else if (px === 8) cands.push([1, 0]);
-            if (py === 0) cands.push([0, -1]); else if (py === 8) cands.push([0, 1]);
+            if (px === 0) cands.push([-1, 0]); else if (px === max) cands.push([1, 0]);
+            if (py === 0) cands.push([0, -1]); else if (py === max) cands.push([0, 1]);
             // World bounds: pushing off the 9x9 world is a spent turn ("The
             // known world ends here") — prefer an exit that leads somewhere.
             const viable = cands.filter((dd) =>
@@ -3099,7 +3082,7 @@ const competent = {
           if (!pushed) {
             // Not on an edge yet (or lever gated off — legacy path): walk to
             // the nearest x-edge; the push happens on a later turn.
-            const tx = px <= 4 ? 0 : 8;
+            const tx = px <= max/2 ? 0 : max;
             try { Game.tbPlayerMove(tx, py); } catch (e) {}
           }
           if (exitVerifiedFleeOn()) {
@@ -3139,7 +3122,7 @@ const competent = {
       // damage from the scholar's own fights — bookkeeping only, gate on.
       if (fightAssessOn()) {
         try {
-          const _mons = f.fighters.filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+          const _mons = f.fighters.filter(humanCombat.liveMonster);
           fightAssessLore(Game, ctx, f, p, _mons);
         } catch (e) {}
       }
@@ -3156,7 +3139,7 @@ const competent = {
             if (fightAssessHook(Game, f, ctx, p, flee)) return true;
           } catch (e) {}
         } else try {
-          const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
+          const monsters = f.fighters.filter(humanCombat.liveMonster);
           let totalMhp = 0, maxWave = 1;
           for (const m of monsters) {
             totalMhp += m.maxHp || m.hp || 0;
@@ -3219,62 +3202,15 @@ const competent = {
       // counters tactically before the generic strike-the-weakest. Never
       // overrides the walk-away assessment above.
       try { if (beastTrickPlay(Game, f, ctx, p, endTurn)) return true; } catch (e) {}
-      const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
-      if (!alive.length) return false;
-      alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
-      const tgt = alive[0];
-      const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
-      const tmx = tgt.mx != null ? tgt.mx : 4, tmy = tgt.my != null ? tgt.my : 4;
-      // CLOSE THE DISTANCE (coverage 2026-10-09): striking out of range is a
-      // no-op that never advances the turn. Move adjacent first, then strike.
-      // (Grid is 0..8; skip off-grid and monster-occupied tiles.)
-      try {
-        const w = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
-        const d0 = Math.max(Math.abs(tmx - px), Math.abs(tmy - py));
-        if (d0 > (w.range || 1)) {
-          const occupied = new Set(
-            f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
-          let bx = null, by = null, bd = 1e9;
-          for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
-            if (!dx && !dy) continue;
-            const cx = tmx + dx, cy = tmy + dy;
-            if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
-            if (occupied.has(cx + ',' + cy)) continue;
-            const dd = Math.max(Math.abs(cx - px), Math.abs(cy - py));
-            if (dd < bd) { bd = dd; bx = cx; by = cy; }
-          }
-          if (bx != null) {
-            // STEP, DON'T TELEPORT (journey-endgame r6 2026-10-12):
-            // tbPlayerMove refuses destinations beyond moveLeft ("Too far").
-            // Walking the full path to a far target no-ops forever — the
-            // ducks_in_a_row standoff ran 4975 rounds with nobody moving and
-            // nobody bleeding. Step as far toward the target as this turn
-            // allows instead.
-            try {
-              let dx = bx, dy = by;
-              const ml = (p.moveLeft || 0);
-              if (ml > 0 && typeof Game.findPath === 'function') {
-                const path = Game.findPath(px, py, bx, by);
-                if (path && path.length > ml) {
-                  const step = path[ml - 1];
-                  dx = step[0]; dy = step[1];
-                }
-              }
-              Game.tbPlayerMove(dx, dy);
-            } catch (e) {}
-            ctx.closed = (ctx.closed || 0) + 1;
-          }
-          endTurn();
-          return true;
-        }
-      } catch (e) {}
-      // STRIKE THEN END TURN (coverage 2026-10-09): tbPlayerStrike leaves
-      // moveLeft > 0, so the turn never auto-advances — the policy spun on
-      // "Already acted" forever, freezing the game clock. End explicitly.
-      try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
-      if (ctx._dpsRace) ctx._dpsRace.strikes++; // DPS-race assessment (scale-wall r1): count real strikes
-      endTurn();
-      return true;
+      if (!humanCombat.sameTurn(Game,f,p,turnToken)) return true;
+      if (!f.fighters.some(humanCombat.liveMonster)) return humanCombat.humanTurn(Game,ctx);
+      const strikes=ctx.monsterCombatStrikeActions||0,moves=ctx.monsterCombatMoveAttempts||0;
+      const handled=humanCombat.monsterTurn(Game,ctx);
+      const landed=(ctx.monsterCombatStrikeActions||0)-strikes;
+      ctx.struck=(ctx.struck||0)+landed;
+      ctx.closed=(ctx.closed||0)+(ctx.monsterCombatMoveAttempts||0)-moves;
+      if(ctx._dpsRace)ctx._dpsRace.strikes+=landed;
+      return handled;
     } catch (e) { return false; }
   },
 };

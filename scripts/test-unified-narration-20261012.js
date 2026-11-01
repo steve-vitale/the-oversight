@@ -56,6 +56,10 @@ console.log('== PART 2 — behavioral: real narrationBoxHTML, realistic beats ==
 const m = APP.match(/function narrationBoxHTML\([\s\S]*?\n  \}/);
 check('narrationBoxHTML extracts cleanly from shipped source',
   !!m && m[0].includes('lastBeat') && m[0].trimEnd().endsWith('}'));
+const fieldStart = APP.indexOf('  let fieldActionResult = null,'),
+  fieldEnd = APP.indexOf('  function runCellAction(', fieldStart);
+check('real field-result reader dependency extracts cleanly', fieldStart >= 0 && fieldEnd > fieldStart);
+const fieldHelpers = APP.slice(fieldStart, fieldEnd);
 
 function entry(text, surface) {
   const e = new String(text);
@@ -71,16 +75,49 @@ function makeNB(logEntries, opts) {
     contestBoxHTML: () => '<div class="contest-stub">CONTEST</div>',
     personCardHTML: () => '<div class="person-stub">PERSON</div>',
     dialogueBoxHTML: () => '<div class="dialogue-stub">DIALOGUE</div>',
+    // This unit composes narration views; native combat capture is exercised
+    // by the touch-browser turn proofs. Non-combat has no combat view.
+    combatResultHTML: () => opts.combatResult || '',
+    combatSaveWarning: opts.saveWarning || null,
     inlineView: opts.inlineView || null,
     _isSynTeaseLine: opts.isTease || (() => false),
     _synTeaseSet: () => new Set(),
+    matchMedia: () => ({ matches: true }),
     console,
   };
   vm.createContext(sandbox);
-  const nb = vm.runInContext(m[0] + '\nnarrationBoxHTML;', sandbox);
+  const nb = vm.runInContext(fieldHelpers + '\n' + m[0] + '\nnarrationBoxHTML;', sandbox);
   return nb;
 }
 const countBoxes = html => (html.match(/dialogue-box/g) || []).length;
+
+// The live renderer gives a current-run save failure priority over combat or
+// dialogue. This unit proves presentation, not storage durability.
+{
+  const nb=makeNB([entry('Older beat','feedback')],{
+    saveWarning:{key:'current',text:'Save failed <retry>'},
+    combatResult:'<div class="dialogue-box combat-result">HP result</div>',
+  });
+  const html=nb({runKey:'current'},{line:'A conversation'});
+  check('current save warning owns exactly one message surface',
+    countBoxes(html)===1&&html.includes('role="alert"')&&html.includes('Save failed &lt;retry&gt;'));
+  check('save risk is not hidden by HP or dialogue summaries',
+    !html.includes('HP result')&&!html.includes('DIALOGUE')&&!html.includes('Older beat'));
+}
+{
+  const result='<div class="dialogue-box combat-result">Current HP result</div>';
+  const nb=makeNB([],{saveWarning:{key:'another-run',text:'Stale save warning'},combatResult:result});
+  check('another run save warning cannot hide the current combat result',nb({runKey:'current'},null)===result);
+}
+
+
+{
+  const view='<div class="dialogue-box narr-box combat-result">You −7 HP</div>';
+  const nb=makeNB([entry('The beam scorches the ground.', 'feedback')],{combatResult:view});
+  const html=nb({},null);
+  check('provided combat result occupies the single narration surface',html===view&&countBoxes(html)===1);
+  check('older stream sentence does not duplicate the combat result',!html.includes('scorches the ground'));
+}
 
 // Steve's screenshot, verbatim beats: narration grant, then a travel action's
 // feedback. The unified box must show the travel beat — in the ONE box.

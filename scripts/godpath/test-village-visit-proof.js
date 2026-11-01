@@ -1,0 +1,15 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),K=require('./lib'),V=require('../lib/village-visit-proof');
+const T=K.reporter('Native village visits'),root=path.resolve(__dirname,'../..'),proof=require('../village-visit-proof.json');
+const records=proof.receipts.map(p=>{const bytes=fs.readFileSync(path.join(root,p.file));T.ok('retained receipt bytes '+p.file,V.hash(bytes)===p.sha256);return JSON.parse(z.gunzipSync(bytes));});
+T.ok('both phone sizes cover split, tribute and insufficient food',records.length===6&&new Set(records.map(r=>r.height+':'+r.scene)).size===6);
+T.ok('all six actual visit/payment/Continue witnesses match current source',records.every(r=>V.validate(root,r).length===0),records.flatMap(r=>V.validate(root,r)).join('; '));
+const sample=records.find(r=>r.scene==='tribute'&&r.height===736),clone=()=>structuredClone(sample),reject=(label,mutate)=>{const r=clone();mutate(r);T.ok(label,V.validate(root,r).length>0);};
+reject('stale served runtime cannot pass',r=>{r.sourceWitness.networkInputs['src/js/app.js']='stale';});
+reject('occluded or cropped deal controls cannot pass',r=>{r.choices[3].bottom=r.choices[3].boardBottom+1;});
+reject('synthetic touches cannot pass',r=>{r.sourceWitness.trustedTouches[0].trusted=false;});
+reject('a charged browse cannot pass',r=>{r.trace.find(t=>t.name==='village card').state.scholar.kcal--;});
+reject('a false food bill cannot pass',r=>{r.trace.find(t=>t.name==='deal').pantryKcal+=2000;});
+reject('a lost pending offer cannot pass',r=>{r.checkpoints[0].stored.otherVillages.find(v=>v.id===r.trace[0].village.id).commonsTalkOpen=false;});
+reject('a duplicate payment after Continue cannot pass',r=>{r.trace.find(t=>t.name.startsWith('continued paid-')).pantryKcal-=2000;});
+T.done();

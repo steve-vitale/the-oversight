@@ -33,11 +33,11 @@ const successfulCraftRoll = fn => { const old = Math.random; Math.random = () =>
   const material = units => ({ material: 'hide', name: 'Prepared hide', units, kg: 1, kcalEach: 0, spoilDay: 9999, sourceTag: 'preserve-me' });
   const snapshot = () => JSON.stringify({ pack: s.inventory, counter: stash, ticks: s.dayTicks, trust: v.trust });
   stash.length = 0; stash.push(material(5)); s.water = [{ liters: 2 }];
-  s.inventory = [{ name: 'Prepared ballast', units: 1, kg: G.carryCapacity() - 4.5 }];
+  s.inventory = [{ name: 'Prepared ballast', units: 1, kg: G.carryLimit() - 4.5 }];
   let beforeTicks = s.dayTicks; take(0, 5);
-  T.ok('pickup takes only what fits including carried water', s.inventory.some(i => i.material === 'hide' && i.units === 2) && stash[0].units === 3 && G.packWeight() <= G.packCapacity() && s.dayTicks === beforeTicks + 2);
+  T.ok('pickup takes only what fits including carried water', s.inventory.some(i => i.material === 'hide' && i.units === 2) && stash[0].units === 3 && G.packWeight() <= G.carryLimit() && s.dayTicks === beforeTicks + 2);
   T.ok('split material retains its actual metadata', (s.inventory.find(i => i.material === 'hide') || {}).sourceTag === 'preserve-me');
-  s.inventory = [{ name: 'Prepared full pack', units: 1, kg: G.carryCapacity() }]; s.water = [];
+  s.inventory = [{ name: 'Prepared full pack', units: 1, kg: G.carryLimit() }]; s.water = [];
   let before = snapshot(); take(0, 1);
   T.ok('full pack refusal preserves stock, time and trust', snapshot() === before);
   s.inventory = []; stash.length = 0; stash.push(material(0)); before = snapshot(); take(0);

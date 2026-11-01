@@ -1,0 +1,4 @@
+'use strict';const assert=require('assert/strict'),K=require('./lib'),P=require('../lib/earned-choice-phone-proof');const data=P.read(K.ROOT);assert.deepEqual(P.verify(K.ROOT,data),{ok:true,errors:[]});
+const bad=fn=>{const r=structuredClone(data);fn(r);assert.equal(P.verify(K.ROOT,r).ok,false);};
+bad(r=>r.rows.pop());bad(r=>r.rows.find(x=>x.variant==='current').responses['src/js/timeSettlement.js']='old');bad(r=>r.rows[0].touches[0].trusted=false);bad(r=>r.rows[0].controls[0].box.y=-1);bad(r=>r.recipeSha256='different');bad(r=>r.rows.find(x=>x.variant==='current'&&x.choose).afterRaw=r.rows[0].beforeRaw);bad(r=>r.rows.find(x=>x.variant==='current'&&!x.choose).beforeRaw=r.rows[0].beforeRaw);
+console.log('Earned choice phone proof: actual eight-scene contrast and seven rejecting controls passed');

@@ -7,21 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 
-const ORDER = [
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js',
-  'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js',
-  'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
-  'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
-  'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js',
-];
+const ORDER = require('./lib/browser-script-files')(ROOT);
 
 // Resettable shared RNG (mulberry32). Install BEFORE eval.
 let _s = 1;

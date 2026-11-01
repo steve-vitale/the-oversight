@@ -533,6 +533,7 @@
     // terror with hands), 'rage' (provoked swing, e.g. a bold villager pushed
     // too far: fury, not calculation).
     npcBetrays(vid, opts) {
+      if (this.contestOwnsScene && this.contestOwnsScene()) return;
       opts = opts || {};
       if (this.tbfight) return; // not mid-fight
       const v = this.partyState();
@@ -571,6 +572,7 @@
 
     // YOU strike first. The classic MMO move.
     playerAttacks(vid) {
+      if (this.contestBlocksWorldAction && this.contestBlocksWorldAction()) return false;
       if (this.over) return false; // the dead don't start fights
       if (this.tbfight) { this.say('Not in the middle of a fight.'); return false; }
       const v = this.partyState();
@@ -601,6 +603,7 @@
 
     // Betrayal combat: no monster. You, the betrayer, and whoever's still loyal.
     startBetrayalCombat(vid, opts) {
+      if (this.contestOwnsScene && this.contestOwnsScene()) return null;
       opts = opts || {};
       const s = this.state.scholar;
       const px = s.mx ?? 4, py = s.my ?? 4;
@@ -834,6 +837,7 @@
     // Called on travel arrival and batch turns. The world does its math.
 
     betrayalSweep() {
+      if (this.contestOwnsScene && this.contestOwnsScene()) return;
       if (this.tbfight) return; // never interrupt an active fight
       this.reevaluateBetrayal();
       this.betrayalCueCheck();

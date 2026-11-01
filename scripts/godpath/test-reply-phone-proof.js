@@ -1,0 +1,10 @@
+'use strict';
+const K=require('./lib'),P=require('../lib/reply-phone-proof'),T=K.reporter('reply phone proof'),root=K.ROOT,original=P.read(root),run=patch=>{const c=structuredClone(original);patch(c);return P.verify(root,c).ok;};
+T.ok('current runtime has two actual phone reply witnesses',P.verify(root,original).ok);
+T.ok('an unrelated first reply cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='real native opener').choices[0].id='deflect_q'));
+T.ok('a short reply using two rows cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='subject first').choices[0].height=92));
+T.ok('paid reply paging cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='question page2').state.scholar.kcal--));
+T.ok('different selected words cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native exact offered answer').state.village.conv[p.receipts[0].data.trace.find(t=>t.label==='native exact offered answer').conversation.vid].transcript.filter(t=>t.who==='you').at(-1).text='Invented reply'));
+T.ok('a second turn debit cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native exact offered answer').state.scholar.dayTicks++));
+T.ok('stale source cannot pass',!run(p=>p.receipts[0].data.responses['src/js/app.js']='stale'));
+T.ok('lost Continue progress cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native full-payload Continue').state.scholar.kcal--));T.done();

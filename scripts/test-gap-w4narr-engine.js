@@ -6,7 +6,7 @@
 //        units:1/kcalEach:0 collapse, duplicate ids stay distinct).
 // Uses scripts/sim-harness.js. Writes nothing into the repo.
 'use strict';
-const fs = require('fs');
+const K = require('./godpath/lib');
 const { loadGame, quietLog } = require('./sim-harness');
 let pass = 0, fail = 0;
 function ok(cond, name, detail) {
@@ -26,12 +26,31 @@ async function main() {
   ok(m3 && m3.wave === 3, 'world spawn carries def wave (redactor=3)', JSON.stringify(m3 && m3.wave));
   const mO = Game.spawnWorldMonster({ id: 'hushwolf' }, 0, 0, { wave: 5 });
   ok(mO && mO.wave === 5, 'opts wave overrides def wave', JSON.stringify(mO && mO.wave));
-  // #107 (source-level: the arena-loss branch; driving a full arena loss
-  // to playerDeath is a contest-fixture job, the branch identity is the fix)
-  const gsrc = fs.readFileSync(__dirname + '/../src/js/game.js', 'utf8');
-  ok(/arena loss path/.test(gsrc) && /playerDeath\('the arena'\)/.test(gsrc), 'arena loss branch reports the arena');
-  const arenaIdx = gsrc.indexOf('playerDeath(\'the arena\')');
-  ok(gsrc.indexOf('playerDeath(\'combat\')') === -1, 'no playerDeath(combat) remains in game.js');
+  // #107: tbEnd also handles field and overnight deaths. A literal-source
+  // assertion blessed the arena label on all three. Exercise real settlement
+  // and succession with the existing shared runtime instead.
+  for (const [arena, nightCause, expected] of [
+    [false, null, 'combat'], [true, null, 'the arena'],
+    [false, 'starvation', 'starvation'], [true, 'dehydration', 'dehydration'],
+  ]) {
+    K.newRun(Game);
+    const bearer = Game.villagerId, deaths = [], death = Game.playerDeath;
+    K.fight(Game, 'hushwolf', { party: true });
+    if (arena) {
+      Game.state.activeContest = { contestId:'gauntlet', participant:'player', others:[], phase:'live', phaseIdx:2, phases:[], arenaSuspended:true };
+      Game.state.arenaContest = { contestId:'gauntlet', waves:['hushwolf'], waveIdx:0 };
+    }
+    if (nightCause) Game.tbfight.nightDeathCause = nightCause;
+    const body = Game.tbFighter('p'); body.hp = 0; body.alive = false;
+    Game.state.scholar.health = 0;
+    Game.playerDeath = function (cause) {
+      deaths.push({ cause, bearer:this.villagerId });
+      return death.apply(this, arguments);
+    };
+    try { Game.tbEnd('lost'); } finally { Game.playerDeath = death; }
+    ok(deaths.length === 1 && deaths[0].bearer === bearer && deaths[0].cause === expected,
+      `actual ${arena ? 'arena' : 'field'} loss preserves ${expected} and one original-body death`, JSON.stringify(deaths));
+  }
   // #807
   const succ = Game.state.village.roster.find(id => id !== Game.villagerId);
   ok(!!succ, 'successor exists');

@@ -121,9 +121,10 @@ async function duel(Game, playerFn, roundCap) {
         const cur = Game.tbCurrent();
         if (!cur) break;
         if (cur.kind === 'player') {
+          const turnFight = Game.tbfight, turnRound = turnFight.round;
           playerFn(Game);
-          if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
-            try { const p = Game.tbFighter('p'); p.moveLeft = 0; p.acted = true; Game.tbAfterPlayerAction(); }
+          if (Game.tbfight === turnFight && !turnFight.over && turnFight.round === turnRound && Game.tbIsPlayerTurn()) {
+            try { Game.tbPlayerWait(); }
             catch (e) { break; }
           }
         } else { try { Game.tbAdvance(); } catch (e) { break; } }
@@ -170,6 +171,9 @@ async function newDuelGame(seed) {
   s.health = 100;
   giveWeapon(Game, 'fire_hardened_spear');
   giveArmor(Game, 'hide_armor');
+  // Prepared solo mechanic case. startCombat refreshes physical resident
+  // positions, so stale positions cannot exclude otherwise present allies.
+  Game.state.village.roster = [];
   // 1v1: villagers far away
   try {
     for (const rid of Object.keys((Game.state.village || {}).positions || {})) {
@@ -189,14 +193,26 @@ async function newDuelGame(seed) {
   return Game;
 }
 
+const CASE = Number(process.env.FOCUS_CASE || 0);
+const {spawnSync} = require('child_process');
 (async () => {
+  if (!CASE) {
+    for (let testCase=1;testCase<=4;testCase++) {
+      const child=spawnSync(process.execPath,[__filename],{encoding:'utf8',env:{...process.env,FOCUS_CASE:String(testCase)},maxBuffer:8*1024*1024});
+      process.stdout.write(child.stdout || '');process.stderr.write(child.stderr || '');
+      ok('isolated scenario ' + testCase,child.status===0,child.error && child.error.message);
+    }
+    process.exit(fail ? 1 : 0);
+  }
+
+
   console.log(`inffight proof: FOCUSGROUP_CLOSE=${FIX_ON ? '1 (fix ON)' : '0 (RED)'}`);
 
   // R1: the stall reproduces on pristine (gate OFF).
   // WHIFF-CLASS GUARD (2026-10-14): the general whiff-forever guard in
   // tbRoundWrap now resolves this geometry honestly (see
   // test-inffight-class-20261014.js). The pristine RED needs BOTH gates off.
-  {
+  if (CASE === 1) {
     const savedWhiff = process.env.WHIFFGUARD;
     if (!FIX_ON) process.env.WHIFFGUARD = '0';
     const Game = await newDuelGame(44);
@@ -215,7 +231,7 @@ async function newDuelGame(seed) {
   }
 
   // G1: the dumb-driver duel resolves with the fix.
-  {
+  if (CASE === 2) {
     const Game = await newDuelGame(44);
     const t = await duel(Game, strikeWeakest, ROUND_CAP);
     console.log(`G1: endResult=${t.endResult} maxRound=${t.maxRound} over=${t.over} leadMoved=${t.leadMoved} deliberationLanded=${t.deliberationLanded}`);
@@ -235,7 +251,7 @@ async function newDuelGame(seed) {
   }
 
   // G2: the honest duel — scholar strikes the LEAD (the coached counter).
-  {
+  if (CASE === 3) {
     const Game = await newDuelGame(44);
     const strikeLead = (G) => {
       const f = G.tbfight;
@@ -257,7 +273,7 @@ async function newDuelGame(seed) {
   }
 
   // G3: no collateral — other bursts keep their want-range; honest engine fights untouched.
-  {
+  if (CASE === 4) {
     const { Game } = await loadGame({ seed: 44, mode: 'inffight-g3' });
     await setupGame(Game);
     const hum = { kind: 'monster', mdef: { id: 'hummice' } };

@@ -159,7 +159,7 @@ async function main() {
     const acts = Game.activatableAbilities().filter(a => a.abilityId === 'game_sense');
     ok(acts.length > 0, 'game_sense listed');
     ok(acts.every(a => /kcal/.test(a.desc || '')), 'kcal cost visible on button', (acts[0] && acts[0].desc || '').slice(0, 80));
-    ok(acts.every(a => /OVERCHARGED/.test(a.desc || '')), 'overcharge visible on button');
+    ok(acts.every(a => !/OVERCHARGED/.test(a.desc || '')), 'damage bonus never mislabels scouting actions');
     s.kcal = Math.floor(cap * 0.5);
     const acts2 = Game.activatableAbilities().filter(a => a.abilityId === 'game_sense');
     ok(acts2.every(a => !/OVERCHARGED/.test(a.desc || '')), 'no overcharge label when not topped up');

@@ -5,9 +5,11 @@
 // Kingsford/MCTS: "no optimizer exists, so reward-shaping has no adversary").
 // It exists so reward-shaping HAS an adversary: a policy that maximizes the
 // `won` metric of the 23-metric balance contract with zero regard for fun.
-// Its wins are read INVERTED: shark >= competent on identical seeds means
-// the metric/lever it exploited is DEGENERATE, never that the game should be
-// tuned harder. Per Steve 2026-10-15, win-rate movement is investigation, not
+// Its wins prompt investigation: shark >= competent on identical seeds does
+// not establish that a metric or lever is degenerate. Inspect actual choices,
+// exposure and community costs, then isolate any suspected exploit with a
+// matched control. This is a fixed heuristic probe, not an MCTS optimizer or
+// proof that it found the best strategy. Per Steve 2026-10-15, win-rate movement is investigation, not
 // regression — the shark's wins must NEVER tune the game harder or declare
 // regressions. Never add it to the panel baseline; never edit the metric
 // contract (contract changes are Steve's call).
@@ -64,12 +66,12 @@
 //  - Never mutates shared policy objects (Object.assign per use).
 //  - diagnostics() returns bounded JSON counters, never Game state.
 //
-// Reading the probe (inverted):
-//   shark.won >= competent.won  -> the win metric is reachable by degenerate
-//      play: the levers in ctx (top-up rate, refusals, drain) are degenerate.
-//   shark.won < competent.won   -> degenerate play does NOT dominate: the
-//      win metric currently rewards the fuller game. Still investigation,
-//      never a verdict.
+// Reading the probe:
+//   shark.won >= competent.won -> investigate whether its intended skimming
+//      actually occurred and mattered; a tie or higher win rate proves neither.
+//   shark.won < competent.won -> this heuristic did not outperform that control
+//      on those cases. It does not rule out other exploit strategies.
+// Both directions require all-domain review and faithful common inputs.
 'use strict';
 const { winseek } = require('./winseek');
 const { competent, competentEat, packEatOnce } = require('./competent');

@@ -323,10 +323,14 @@ function deq(a, b) {
     };
     Game.state.activeContest = { contestId: 'blood_pit', phase: 'fight', phaseIdx: 1, phases: [{}], arenaSuspended: true, participant: 'player' };
     Game.state.arenaContest = { contestId: 'blood_pit', waves: [mid.id], waveIdx: 0 };
+    // Legacy saves now gain explicit bounded return context. Keep exact
+    // equality, including every original field and the migrated body/scene.
+    const legacyReturn = { bearer: Game.villagerId, mx: Game.state.scholar.mx ?? 4, my: Game.state.scholar.my ?? 4,
+      insideHaven: Game.state.scholar.insideHaven, location: Game.location, legacy: true };
     Game.save(); Game.load(saveKey());
     h9 = !!Game.tbfight && Game.tbfight.fighters.length === 2 &&
       !!(Game.state.activeContest && Game.state.activeContest.arenaSuspended) &&
-      deq(Game.state.arenaContest, { contestId: 'blood_pit', waves: [mid.id], waveIdx: 0 });
+      deq(Game.state.arenaContest, { contestId: 'blood_pit', waves: [mid.id], waveIdx: 0, origin: legacyReturn });
     Game.tbfight = null;
     Game.state.activeContest = null; Game.state.arenaContest = null;
   } catch (e) { h9 = 'error: ' + e.message; }

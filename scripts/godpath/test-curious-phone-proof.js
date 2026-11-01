@@ -1,0 +1,21 @@
+'use strict';const K=require('./lib'),P=require('../lib/curious-phone-proof'),T=K.reporter('Curiosity phone proof'),original=P.read(K.ROOT);
+T.ok('Both actual current phone journeys preserve question identity, visible farewell and whole Continue',P.verify(K.ROOT,original).ok);
+function reject(label,change){const copy=structuredClone(original);change(copy);T.ok(label,!P.verify(K.ROOT,copy).ok);}
+const snap=(p,label)=>p.receipts[0].data.trace.find(t=>t.label===label);
+reject('A seeded recall cannot stand in for a fresh first question',p=>{snap(p,'paid Talk ready').convo.want.fromSeed=true;});
+reject('A different resumed question is rejected',p=>{snap(p,'paid Talk ready').convo.pendingQ.id='different';});
+reject('A lost unanswered seed is rejected',p=>{snap(p,'unanswered Continue').seed.qid='different';});
+reject('A phantom completed seed is rejected',p=>{snap(p,'left answered').seed={qid:'again'};});
+reject('An unshown farewell is rejected',p=>{p.receipts[0].data.closingPages=['A Journal notice'];});
+reject('A doubled farewell is rejected',p=>{p.receipts[0].data.closing.push(p.receipts[0].data.closing[0]);});
+reject('A paid Done is rejected',p=>{snap(p,'free Done').state.scholar.kcal--;});
+reject('An unpriced Talk is rejected',p=>{snap(p,'before Talk').state.scholar.kcal--;});
+reject('A missing public Done input is rejected',p=>{p.receipts[0].data.controls=p.receipts[0].data.controls.filter(c=>c.selector!=='#dlg-done');});
+reject('A clipped phone frame is rejected',p=>{p.receipts[0].data.trace[0].rects[0].bottom=2000;});
+reject('A synthetic touch is rejected',p=>{p.receipts[0].data.touches[0].trusted=false;});
+reject('Stale actual loaded code is rejected',p=>{p.receipts[0].data.sourceWitness.networkInputs['src/js/app.js']='old';});
+reject('Lost native Continue resources are rejected',p=>{snap(p,'answered Continue').state.scholar.kcal--;});
+reject('Substituted committed bytes are rejected',p=>{p.receipts[0].data.commits[0].raw+=' ';});
+reject('A successor cannot substitute for the original person',p=>{snap(p,'answered Continue').bearer='another';});
+reject('One phone size cannot stand in for both',p=>{p.receipts=p.receipts.slice(0,1);});
+T.done();

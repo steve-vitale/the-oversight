@@ -80,8 +80,12 @@ const Game = globalThis.Scattering.Game;
     ok(over40.length === 0, 'words alone never push trust past 40 (make spam)', over40.length ? 'over: ' + over40.map(v => v.slice(0, 8) + '=' + trustOf(v)).join(',') : '');
     // second promise while one is open: refused, no trust paid
     const t0 = trustOf(A);
+    const originalPromise = Game.state.village.promises[A];
     const r = Game.promiseHelp(A);
-    ok(r === null && trustOf(A) === t0, 'second promise while one is open is refused, no trust paid', 'r=' + JSON.stringify(r) + ' t=' + t0 + '->' + trustOf(A));
+    ok(r?.ok === false && r.reason === 'open-promise' && /Keep .*promise/.test(r.line) &&
+      Game.state.village.promises[A] === originalPromise && trustOf(A) === t0,
+      'second promise returns its refusal, preserves the open vow and pays no trust',
+      'r=' + JSON.stringify(r) + ' t=' + t0 + '->' + trustOf(A));
     // unkeepable goal: honest deflection, no promise tracked, no trust
     Game.state.village.promises = {};
     setGoal(F, 'home');
@@ -306,8 +310,14 @@ const Game = globalThis.Scattering.Game;
         vhx = cand; break;
       }
       ok(!!vhx, 'plant scenario found a verbal-thread villager');
-      const chx = (Game.convoUI(vhx).choices || []).map(c => c.id);
       const cx = Game.convoGet(vhx);
+      // This fixture tests abandoning an UNREVEALED question. A generated
+      // opener may itself ask a different, already-spoken question; answering
+      // that interruption now correctly preserves unfinished speech. Remove
+      // that unrelated opener question so nonGoon actually means moving on.
+      cx.pendingQ = null; cx.reactiveQ = null; cx.genericQ = null;
+      const chx = (Game.convoUI(vhx).choices || []).map(c => c.id);
+      ok(chx.every(id => !id.startsWith('nv:')), 'held-question fixture uses verbal choices');
       cx.heldBeats.push({ text: '"So — what scares you?"', ask: { id: 'qtest', q: 'what scares you?', answers: [{ id: 'a1', label: '"Plenty."' }] } });
       cx.heldAsk = true;
       cx.winddownQueued = true;

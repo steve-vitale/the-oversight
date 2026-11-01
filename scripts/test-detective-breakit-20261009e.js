@@ -67,8 +67,13 @@ const openFor = (vid) => G.getDoubts(vid).filter(d => !d.resolved);
 
   // ---------- E1: contradiction double-note ----------
   console.log('E1: trust-oscillation contradiction farming');
-  const vid = G.npcIds().find(id => { const l = G.npcLies(id) || {}; return l.occupation && !l.occupation.confessed; });
-  ok(!!vid, 'E1: found occupation liar');
+  // This case tests contradiction handling, not whether a random cast lies.
+  // Prepare a real occupation cover with the authored lie generator.
+  const vid = G.npcIds()[0];
+  ok(!!vid, 'E1: living remaining detective subject');
+  const subject = G.vpOf(vid);
+  subject.lies = { occupation: G.makeLie(subject, 'occupation', 'hiding') };
+  ok(subject.lies.occupation.told !== subject.lies.occupation.truth, 'E1: prepared cover differs from actual occupation');
   const lie = G.npcLies(vid).occupation;
   G.state.village.trust = G.state.village.trust || {};
   G.startConvo(vid); H.say();

@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "policy": "merchant",
+      "seed": 4,
+      "actualDiagnosticPanelHashesMatch": true,
+      "firstWholeDifference": 116,
+      "firstDifferenceOutsideResidentRecords": 128,
+      "removedCaptureFullBaselineHashRestored": true,
+      "legacyTraitReadWholeRowMatches": true,
+      "legacyTraitReadEveryDailyStateWithoutResidentRecordsMatches": true,
+      "legacyTraitReadFinalWithoutResidentRecordsMatches": true
+    },
+    {
+      "policy": "merchant",
+      "seed": 5,
+      "actualDiagnosticPanelHashesMatch": true,
+      "firstWholeDifference": 114,
+      "firstDifferenceOutsideResidentRecords": 117,
+      "removedCaptureFullBaselineHashRestored": true,
+      "legacyTraitReadWholeRowMatches": true,
+      "legacyTraitReadEveryDailyStateWithoutResidentRecordsMatches": true,
+      "legacyTraitReadFinalWithoutResidentRecordsMatches": true
+    }
+  ],
+  "scope": "Selected two raw-row-changing cases only. Actual unmodified roots reproduce panel terminal hashes. Removal and trait-view interventions are declared component controls, not neutral roots, balance panels or proof of every death cause. Removing the entire resident-record map is a diagnostic normalization, not complete state equivalence or clearance of31 other changed hashes. No holdout or future RNG-equivalence claim."
+}

@@ -196,7 +196,9 @@ sec('seek_taken want: mourning NPCs want news of the taken');
     const def = w.def;
     const eb = def.engageBeat.call(Game, 'm1');
     ok('engageBeat names the kin', /Anna/.test(eb), eb.slice(0, 70));
-    ok('engageBeat sounds human, not melodramatic', /dream|broadcast/i.test(eb));
+    ok('engageBeat keeps the pods and ambiguous dream or night hearing',
+      /pods/i.test(eb) && /dream|sleep|hear/i.test(eb) && /can't tell|couldn't tell|can't say|not sure/i.test(eb));
+    ok('engageBeat encloses spoken words in matching quotes', /^"[\s\S]*"$/.test(eb));
     const cb = def.commitBeat.call(Game, 'm1');
     ok('commitBeat records takenPromises', (Game.state.village.takenPromises || {}).m1 === 20);
     ok('commitBeat thank-you reads true', /Even asking is more than the silence/.test(cb));

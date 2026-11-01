@@ -11,8 +11,8 @@
 // GREEN (gate on): same injection + an honestly-invited companion ->
 //   policy.daily sets pendingEncounter with pendingMonsterId 'cancellation';
 //   the scholar was marched to the haven tile; startCombat removes the
-//   lingering entity from the world at fight start; after tbEnd the gorge
-//   beat is silent (havenGrowthDaily says no gorge line).
+//   lingering entity from the world at fight start. Fleeing restores it and
+//   the siege keeps gorging; only defeating/routing the threat clears it.
 // JUDGMENT: tableActive -> no trigger; scholar HP < 50% (wave-5) ->
 //   no trigger + gorgeHeldHp counted; no party + healthy villagers at home
 //   -> HOLD (no trigger) + gorgeHeldAlone counted.
@@ -24,7 +24,7 @@ process.env.FEASTSCALE_R13 = '1';
 const assert = require('assert');
 const cp = require('child_process');
 const mode = process.argv[2];
-const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
+const { loadGame, setupGame, runDays, quietLog, driveFights } = require('./sim-harness');
 const gd = require('./policies/gorgedrive');
 const { leadfeast } = require('./policies/feastscale');
 
@@ -160,7 +160,7 @@ async function main() {
 
   }
   if (mode === 'green') {
-  console.log('PART 3 — GREEN (gate on): honest engagement, gorge stops');
+  console.log('PART 3 — GREEN (gate on): honest engagement, fleeing preserves siege');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
     await setupGame(Game);
@@ -213,29 +213,45 @@ async function main() {
       ok(!Game.worldMonsters().includes(ent), 'GREEN: lingering entity removed from world at fight start');
       Game.tbEnd('fled');
       ok(!Game.tbfight || Game.tbfight.over, 'GREEN: fight ended');
-      // the gorge beat is now silent
+      // Muse r38 deliberately fixed flee deleting the siege. Engagement is
+      // not victory: retain the actual world origin and its nightly threat.
+      ok(Game.worldMonsters().includes(ent) && ent.lingering && ent.hp > 0,
+        'GREEN: fleeing restores the same living besieger');
+      const home = havenTile(Game);
+      ok(ent.tx === home.x && ent.ty === home.y,
+        'GREEN: restored siege holds the Haven treeline');
+      ok(said.some(t => /marches out to drive off/.test(t)),
+        'GREEN: march-out beat read in the transcript (no silent actions)');
+      said.length = 0;
       Game.havenGrowthDaily();
       Game.say = origSay;
-      ok(!said.some(t => /gorges at the treeline/.test(t)), 'GREEN: no gorge line after the answer');
-      const marched = said.some(t => /marches out to drive off/.test(t));
-      ok(marched, 'GREEN: march-out beat read in the transcript (no silent actions)');
+      ok(said.some(t => /gorges at the treeline/.test(t)),
+        'GREEN: fled siege still gorges at the next dawn');
     }
   });
 
   }
   if (mode === 'wrapper') {
-  console.log('PART 3b — wrapper invokes the layer when ON (drift-robust)');
+  console.log('PART 3b — wrapper factory invokes the layer when ON (prepared dispatch fixture)');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
     await setupGame(Game);
     await quietLog(() => runDays(Game, gd.leadfeast, { days: 25 }));
-    try {
-      const v = Game.state.village || {};
-      const cands = (v.roster || []).filter(id => id !== Game.villagerId && !((v.away || {})[id]));
-      for (const vid of cands) {
-        try { const r = Game.inviteToParty(vid); if (r && r.ok) break; } catch (e) {}
-      }
-    } catch (e) {}
+    // The observation cap can stop with a real encounter still active. The
+    // wrapper correctly refuses to clobber it; finish it with the shared real
+    // fight driver before staging this separate wrapper-dispatch fixture.
+    await quietLog(() => driveFights(Game, gd.leadfeast, {}));
+    ok(!Game.over && !Game.pendingEncounter && !(Game.tbfight && !Game.tbfight.over),
+      '3b: warmup encounter resolves before staging the wrapper threat');
+    // This is the dispatch fixture, not the acceptance experiment in PART3.
+    // The generated lone-wolf can correctly refuse every invitation. Stage
+    // helpers as away if no companion joined; never erase their motivation or
+    // force a party membership to make the wrapper engage.
+    if(!gd.companions(Game)){
+      const v=Game.state.village;v.away=v.away||{};
+      for(const id of v.roster||[])if(id!==Game.villagerId)v.away[id]=true;
+    }
+    ok(gd.companions(Game)>0||gd.healthyVillagersAtHome(Game).length===0,'3b: prepared dispatch has a companion or nobody available to ask');
     injectLingering(Game);
     // bounded: each wrapped daily re-targets the entity. Engagement must land
     // within 3. PIN (flake fix 2026-10-14): world-monster wandering is held
@@ -245,17 +261,24 @@ async function main() {
     // layer when ON). The drift-retry itself is the layer's own concern.
     const ctx = {};
     let it = 0;
+    // Isolate wrapper dispatch from leadfeast's independent encounter work:
+    // it can now engage the injected threat before the answer layer runs.
+    // Keep the REAL layer and Game actions, and require base delegation too.
+    const wrapped = gd.withGorgeDrive({ daily(G, c) {
+      c.wrapperBaseCalls = (c.wrapperBaseCalls || 0) + 1;
+    } }, 'wrapper-proof', 'prepared wrapper dispatch');
     const realWander = Game.wanderWorldMonsters;
     Game.wanderWorldMonsters = function () {};
     try {
       for (; it < 3 && !(ctx.gorgeEngagements > 0); it++) {
         // HP judgment is tested in PART 4; pin a healthy scholar here (seed-robust)
         try { const _s = Game.state.scholar; _s.health = Math.max(_s.health || 0, (Game.maxHealth ? Game.maxHealth() : 100) || 100); } catch (e) {}
-        await quietLog(() => gd.policyForRun().daily(Game, ctx));
+        await quietLog(() => wrapped.daily(Game, ctx));
         if (Game.over) break;
       }
     } finally { Game.wanderWorldMonsters = realWander; }
     ok((ctx.gorgeEngagements || 0) > 0, `3b: wrapper drove an engagement within 3 dailies (took ${it})`);
+    ok(ctx.wrapperBaseCalls === it, '3b: every wrapped daily delegates to its base');
     ok(!!Game.pendingEncounter, '3b: pendingEncounter set via the wrapped policy');
   });
 
@@ -282,7 +305,9 @@ async function main() {
       const ent = injectLingering(Game);
       Game.state.scholar.health = Math.round((Game.maxHealth ? Game.maxHealth() : 100) * 0.2);
       const ctx = {};
-      await quietLog(() => gd.policyForRun().daily(Game, ctx));
+      // Judge the stated 20% HP boundary before competent.daily can heal it.
+      // The separate wrapper case proves invocation through the full policy.
+      await quietLog(() => gd.gorgeDrive(Game, ctx));
       ok(!Game.pendingEncounter, 'JUDGMENT: no engagement at 20% HP vs wave-5');
       ok((ctx.gorgeHeldHp || 0) > 0, 'JUDGMENT: gorgeHeldHp counted');
       ok(Game.worldMonsters().includes(ent), 'JUDGMENT: entity untouched when held');

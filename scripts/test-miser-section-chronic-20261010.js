@@ -138,16 +138,16 @@ ok('S4 take-back sting applied as promised', trustOf() <= sTrust - 5, `trust ${s
 // ---------- HONESTY: "Take 5" at near-full pack ----------
 freshGame();
 Game.stashState().materials.branch = 10;
-// fill pack to 19.9/20 kg with a heavy stone
-Game.state.scholar.inventory = [{ material: 'stone', name: 'Stone', units: 66, kg: 0.3 }]; // 19.8kg
+// Refusal fixture follows the voluntary hauling limit, including water.
+Game.state.scholar.inventory = [{ material: 'stone', name: 'Stone', units: 1, kg: Game.carryLimit() - 0.2 }]; // limit minus0.2kg; water still counts
 const before = Game.stashState().materials.branch;
 Game.takeMaterial('branch', 5);
 const after = Game.stashState().materials.branch;
 const taken = before - after;
 const said = (Game.log || []).slice(-3).join(' | ');
 ok('H1 partial take weighs honestly', taken === 0 && /Too heavy/.test(said), `took=${taken} said=${said.slice(-80)}`);
-// lighten a little: waterWeight()=2, so 56 stones (16.8kg) leaves room for exactly 2 branches
-Game.state.scholar.inventory = [{ material: 'stone', name: 'Stone', units: 56, kg: 0.3 }]; // 16.8+2=18.8kg
+// Lighten to1.2kg remaining room including2L water: exactly two branches fit.
+Game.state.scholar.inventory = [{ material: 'stone', name: 'Stone', units: 1, kg: Game.carryLimit() - 3.2 }]; // limit minus1.2kg including water
 Game.takeMaterial('branch', 5);
 const taken2 = after - Game.stashState().materials.branch;
 const said2 = (Game.log || []).slice(-3).join(' | ');

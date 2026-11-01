@@ -42,6 +42,22 @@ async function main(){
   reg.installing=future;updateFound();
   T.ok('later update discovery cannot activate a different build',messages.length===1);
  }
+ if(!process.env.UPDATE_ENTRY_SOURCE){
+  const P=require('../lib/installed-lifecycle-proof'),data=P.read(K.ROOT),result=P.verify(K.ROOT,data);
+  T.ok('retained published-to-candidate-to-rollback phone evidence matches current runtime',result.ok,result.errors.join('\n'));
+  const mutate=(label,change)=>{const copy=JSON.parse(JSON.stringify(data));change(copy);T.ok(label,!P.verify(K.ROOT,copy).ok);};
+  mutate('stale cached runtime invalidates installed evidence',d=>{d.panels[0].cachesRead[1].receipt.inputs['/index.html'].normalizedSha256='stale';});
+  mutate('stale icon invalidates installed evidence',d=>{d.panels[0].cachesRead[4].icons['assets/icons/icon-192.png']='stale';});
+  mutate('lost inventory during cold Continue fails full-payload comparison',d=>{d.panels[0].trace.find(t=>t.label==='candidate cold full payload').fullPayloadDiff.push({path:'scholar.inventory.0',after:null});});
+  mutate('update cannot substitute different saved bytes',d=>{d.panels[0].trace.find(t=>t.afterRaw).afterRaw='{}';});
+  mutate('changed replay recipe invalidates old receipts',d=>{d.recipe+='\n// changed';});
+  mutate('one phone height cannot stand in for both',d=>{d.panels.pop();});
+  mutate('historical source bytes are checked independently',d=>{d.panels[0].cachesRead[0].receipt.inputs['/index.html'].normalizedSha256='stale';});
+  mutate('a different historical commit cannot replace the current published pin',d=>{d.pin.commit='10ccb1af565c41a625045d512b0af6ab65c5c23a';});
+  mutate('dropping the declared legacy migration is rejected',d=>{d.panels[0].trace.find(t=>t.label==='candidate loaded full legacy payload').fullPayloadDiff=[];});
+  mutate('an extra migration cannot hide inventory loss',d=>{d.panels[0].trace.find(t=>t.label==='candidate loaded full legacy payload').fullPayloadDiff.push({path:'scholar.inventory.0',after:null});});
+  mutate('native pagehide evidence cannot be omitted',d=>{d.panels[0].trace.find(t=>t.afterRaw).events=d.panels[0].trace.find(t=>t.afterRaw).events.filter(e=>e.event!=='pagehide');});
+ }
  T.done();
 }
 main().catch(e=>{console.error(e.stack);process.exitCode=1;});

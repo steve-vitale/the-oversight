@@ -1,0 +1,17 @@
+{
+  "classification": "unprepared-campaign",
+  "observeRequests": true,
+  "height": 736,
+  "profile": "evidence/2026-10-31/cold-resident-audit-r1/initial-transport-profile.json.gz",
+  "out": "SET_A_FRESH_OUTPUT_DIRECTORY",
+  "channel": "msedge",
+  "watch": true,
+  "settleUnansweredConversation": false,
+  "steps": [
+    {
+      "op": "observe",
+      "label": "Inspect current loaded field and choose actual available controls"
+    }
+  ],
+  "profileCompressionNote": "Decompress the actual initial-transport-profile.json.gz to a temporary JSON path before running mobile-native-journey; original executed plan is retained separately."
+}

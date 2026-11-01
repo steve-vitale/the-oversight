@@ -4,6 +4,12 @@
 // provides:
 //   - buryCorpse(cid)
 //   - corpseAt(x, y)
+//   - corpseScene(node, inside)
+//   - corpseInScene(c, node, scene)
+//   - corpseInFrame(c)
+//   - corpseLocation(opts)
+//   - migrateCorpseScenes()
+//   - projectBattleCorpses(f)
 //   - corpseDesc(c)
 //   - examineCorpse(cid)
 //   - lootCorpse(cid)
@@ -101,10 +107,79 @@
 
     corpseStageInfo(c) { return STAGES[this.corpseStage(c)]; },
 
+    corpseScene(node, inside) {
+      return inside && this.map.tiles?.[node.y]?.[node.x]?.type === 'haven' ? 'hall' : 'outside';
+    },
+
+    corpseInScene(c, node, scene) {
+      node = node || { x: this.map.px, y: this.map.py };
+      scene = scene || this.corpseScene(node, !!this.state.scholar.insideHaven);
+      return !!(c && c.node && c.node.x === node.x && c.node.y === node.y &&
+        (c.scene || 'outside') === scene);
+    },
+
+    corpseInFrame(c) {
+      const f = this.tbfight;
+      const arena = f && !f.over && !f.coalitionArena?.returned && (f.gridSize || 9) > 9;
+      return arena ? c.fightId === f.id && c.battleGrid === f.gridSize : !(c.battleGrid > 9);
+    },
+
+    corpseLocation(opts) {
+      const s = this.state.scholar, v = this.state.village || {};
+      const f = this.tbfight;
+      const player = opts.player || opts.villagerId === this.villagerId;
+      // Explicit world-field placement is not this fight just because species
+      // and grid numbers match. A supplied fighter key must also be local.
+      const fightPlace = !opts.node || (opts.fighterKey && opts.node.x === this.map.px && opts.node.y === this.map.py);
+      const fighter = fightPlace && f?.fighters?.find(p => opts.fighterKey ? p.key === opts.fighterKey :
+        player ? p.key === 'p' : opts.villagerId ? p.villagerId === opts.villagerId :
+          opts.monsterId && p.kind === 'monster' && (p.monsterId || p.mdef?.id) === opts.monsterId &&
+          p.mx === opts.mx && p.my === opts.my);
+      const resident = opts.villagerId && !player && !fighter;
+      const n = resident ? ((v.nodePos || {})[opts.villagerId] || { nx: v.px ?? 4, ny: v.py ?? 4 }) : null;
+      const node = opts.node || (n ? { x: n.nx, y: n.ny } : { x: this.map.px, y: this.map.py });
+      const room = (v.npcInside || {})[opts.villagerId];
+      const inside = resident ? (room === undefined || !!room) : !!s.insideHaven;
+      const scene = opts.scene === 'hall' ? this.corpseScene(node, true) : opts.scene === 'outside' ? 'outside' :
+        this.corpseScene(node, opts.node && !resident ? false : inside);
+      // Only visible resident positions belong to the currently displayed grid.
+      const pos = resident ? (this.corpseInScene({ node, scene }) ? (v.positions || {})[opts.villagerId] : null) : fighter || s;
+      return { node: { x: node.x, y: node.y }, scene,
+        mx: opts.mx ?? pos?.mx ?? pos?.x ?? 4, my: opts.my ?? pos?.my ?? pos?.y ?? 4,
+        ...(fighter && f ? { fightId: f.id, fighterKey: fighter.key, battleGrid: f.coalitionArena?.returned ? 9 : (f.gridSize || 9) } : {}) };
+    },
+
+    migrateCorpseScenes() {
+      for (const c of this.state.corpses || []) {
+        if (!c || c.scene === 'hall' || c.scene === 'outside') continue;
+        // Old saves cannot tell us which grid a body occupied. Keep all original
+        // IDs, coordinates and belongings; use one outside marker, not both grids.
+        c.scene = 'outside';
+        c.sceneInferred = 'legacy-outside';
+      }
+    },
+
+    projectBattleCorpses(f) {
+      for (const c of this.state.corpses || []) {
+        if (c.fightId !== f.id || !(c.battleGrid > 9) || !this.corpseInScene(c)) continue;
+        const detail = this.genDetail(c.node.x, c.node.y), max = c.battleGrid - 1;
+        const x = Math.max(0, Math.min(8, Math.round(c.mx * 8 / max)));
+        const y = Math.max(0, Math.min(8, Math.round(c.my * 8 / max)));
+        let point = null;
+        for (let r = 0; r < 9 && !point; r++) for (let dy = -r; dy <= r && !point; dy++) for (let dx = -r; dx <= r; dx++) {
+          const nx = x + dx, ny = y + dy, cell = detail[ny]?.[nx];
+          if (nx >= 0 && ny >= 0 && nx <= 8 && ny <= 8 && cell && cell !== 'door' && !this.cellProps(cell).blocks) {
+            point = { x: nx, y: ny }; break;
+          }
+        }
+        if (!point) { console.warn('[corpses] no world landing for battlefield body', c.id); continue; }
+        c.mx = point.x; c.my = point.y; c.battleGrid = 9;
+      }
+    },
+
     corpseAt(cx, cy) {
-      const px = this.map.px, py = this.map.py;
       return this.corpses().filter(c =>
-        !c.buried && c.node.x === px && c.node.y === py && c.mx === cx && c.my === cy);
+        !c.buried && this.corpseInScene(c) && this.corpseInFrame(c) && c.mx === cx && c.my === cy);
     },
 
     // corpseIsPerson: 'person' and 'villager' kinds are both sapient dead.
@@ -229,11 +304,7 @@
         // NODE OVERRIDE (break-it 2026-10-09): deaths off the player's tile
         // (villager-vs-monster field fights) register where they happened,
         // not where the player stands — corpses are node-scoped (corpseAt).
-        node: opts.node || { x: this.map.px, y: this.map.py },
-        // R52 FIX (journey-deepening r52, same falsy-0 class as r51):
-        // a scholar at edge 0 spawned the corpse at the center (4,4).
-        mx: opts.mx != null ? opts.mx : (s.mx ?? 4),
-        my: opts.my != null ? opts.my : (s.my ?? 4),
+        ...this.corpseLocation(opts),
         dayDied: s.day || 0,
         cause: opts.cause || 'combat',
         killerId: opts.killerId || null,
@@ -301,6 +372,9 @@
           this.fireCrisis('first-grave', { name: nm });
         }
       } catch (e) {}
+      // Succession can register the bearer after tbEnd began settling the fight.
+      // That late body needs the same projection as bodies registered mid-fight.
+      if (this.tbfight?.over && corpse.battleGrid > 9) this.projectBattleCorpses(this.tbfight);
       return corpse;
     },
 
@@ -443,13 +517,11 @@
 
     _corpseCheckRange(c, quiet) {
       const s = this.state.scholar;
-      // R51 FIX (journey-deepening r51, arm-proven): s.mx/s.my are cell
-      // coordinates where 0 is a real edge cell, not "missing" — the old
-      // `|| 4` fallback read a scholar at (4,0) as standing at the center
-      // (4,4), so a corpse 4 cells away passed the range gate (d37: the
-      // take then failed on weight instead of range). `??` keeps 0.
-      if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
+      const f = this.tbfight, p = f && !f.over && f.fighters?.find(x => x.key === 'p');
+      const max = f && !f.over ? (f.gridSize || 9) - 1 : 8;
+      if (!this.corpseInScene(c) || !this.corpseInFrame(c) || !Number.isInteger(c.mx) || !Number.isInteger(c.my) ||
+          c.mx < 0 || c.my < 0 || c.mx > max || c.my > max ||
+          Math.max(Math.abs(c.mx - (p?.mx ?? s.mx ?? 4)), Math.abs(c.my - (p?.my ?? s.my ?? 4))) > 1) {
         if (!quiet) this.say('Too far — get closer to the body.');
         return false;
       }
@@ -524,7 +596,7 @@
       const it = (c.items || [])[idx];
       if (!it || (it.units == null ? 1 : it.units) <= 0) { this.say('Nothing left of that.'); return null; }
       const units = it.units || 1;
-      const kg = (it.kg || 0.3) * units;
+      const kg = (it.kg || 0.1) * units;
       if (this.canCarry && !this.canCarry(kg)) { this.say("Too heavy — your pack can't take it."); return null; }
       // THE WEIGHT, NAMED (journey-succession r22 2026-10-17): the per-item
       // button fired the trauma number silently, like the batch path did —
@@ -587,7 +659,7 @@
         if (it._left) { skipped++; continue; }
         if (skipFn && skipFn(it)) { skipped++; if (it.plantId === 'meat_human') humanSkipped++; continue; }
         const units = it.units || 1;
-        const kg = (it.kg || 0.3) * units;
+        const kg = (it.kg || 0.1) * units;
         if (this.canCarry && !this.canCarry(kg)) { left.push({ name: nm(it), units }); continue; }
         this._corpseTakeStack(c, it);
         taken.push({ name: nm(it), units, kcalEach: it.kcalEach || 0 });
@@ -685,19 +757,14 @@
       if (!c || c.buried) { this.say('Nothing there.'); return null; }
       // must be close: same node, adjacent cell
       const s = this.state.scholar;
-      // R51 FIX: same falsy-0 bug as _corpseCheckRange (see there) — a
-      // scholar on row/col 0 was read as standing at the center (4,4).
-      if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
-        this.say('Too far — get closer to the body.'); return null;
-      }
+      if (!this._corpseCheckRange(c)) return null;
       const st = this.corpseStageInfo(c);
       const remaining = c.items.filter(i => (i.units == null ? 1 : i.units) > 0);
       if (!remaining.length) { this.say('Nothing left worth taking.'); return null; }
 
       const took = [];
       const takeOne = (it) => {
-        const kg = (it.kg || 0.3) * 1;
+        const kg = (it.kg || 0.1) * 1;
         if (this.canCarry && !this.canCarry(kg)) { this.say('Too heavy — your pack can\'t take it.'); return false; }
         const inv = s.inventory;
         // FUNGIBILITY GATE (break-it food r3 2026-10-08): the old merge keyed
@@ -828,6 +895,7 @@
     examineCorpse(id) {
       const c = this.corpses().find(x => x.id === id);
       if (!c || c.buried) { this.say('Nothing there.'); return null; }
+      if (!this._corpseCheckRange(c)) return null;
       this.say(this.corpseDesc(c));
       const st = this.corpseStageInfo(c);
       const remaining = c.items.filter(i => (i.units == null ? 1 : i.units) > 0).length;
@@ -857,6 +925,7 @@
     payRespects(id) {
       const c = this.corpses().find(x => x.id === id);
       if (!c || c.buried || !this.corpseIsPerson(c)) { this.say('Nothing to honor here.'); return null; }
+      if (!this._corpseCheckRange(c)) return null;
       if (c.respectsPaid) { this.say('You already said your words.'); return null; }
       c.respectsPaid = true;
       const s = this.state.scholar;
@@ -876,6 +945,7 @@
     buryCorpse(id) {
       const c = this.corpses().find(x => x.id === id);
       if (!c || c.buried || !this.corpseIsPerson(c)) return null;
+      if (!this._corpseCheckRange(c)) return null;
       const st = this.corpseStageInfo(c);
       c.buried = true;
       const known = this.nameKnown ? this.nameKnown(c.villagerId) : true;
@@ -935,7 +1005,15 @@
           if (!c || c.buried) continue;
           const hx = (v.px != null ? v.px : 4), hy = (v.py != null ? v.py : 4);
           c.node = { x: hx, y: hy };
-          c.mx = 4; c.my = 4;
+          c.scene = 'outside';
+          // The recovery beat names the grounds fire, not the hall's centre.
+          const grounds = this.map.tiles?.[hy]?.[hx]?.groundsDetail;
+          let fire = null;
+          for (let y = 0; y < (grounds || []).length; y++) {
+            const x = grounds[y].indexOf('fire');
+            if (x >= 0) { fire = { x, y }; break; }
+          }
+          c.mx = fire ? fire.x : 2; c.my = fire ? fire.y : 4;
           c.recovered = true;
           c.deathKnown = true; // the village told the new Bearer they'd brought the body home
           const first = String(p.name || 'them').split(' ')[0];

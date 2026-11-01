@@ -435,13 +435,6 @@
         label: (typeof this.convoGoonLabel === 'function') ? this.convoGoonLabel(vid) : '"Go on."',
       });
     }
-    try {
-      if ((c.threadLog || []).length >= 2 && !seen.has('recap') &&
-          typeof this.convoRecapChoice === 'function') {
-        seen.add('recap');
-        out.push(this.convoRecapChoice(vid));
-      }
-    } catch (e) {}
 
     // Party invite — contextual on warm beats with trust.
     try {
@@ -478,6 +471,14 @@
     // Subject change — explicit, with a bridge on the way out.
     out.push({ id: 'dlg:subject', label: '"Can I ask you something else?"' });
     out.push({ id: 'leave', label: c.exchanges === 0 ? '"Actually — never mind."' : '"I should go."' }); // BREAK-IT (socialite 2026-10-08): the zero-exchange label must not claim a conversation happened.
+
+    // Recap remains available, after the current topic/navigation choices.
+    // It is a recovery aid, not the default reply to a line just spoken.
+    if ((c.threadLog || []).length >= 2 && !seen.has('recap') &&
+        typeof this.convoRecapChoice === 'function') {
+      seen.add('recap');
+      out.push(this.convoRecapChoice(vid));
+    }
 
     return out;
   };

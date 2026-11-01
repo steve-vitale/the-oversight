@@ -14,6 +14,7 @@
 //   - Game.convoSpeakLine(vid, text, opts)
 //   - Game.voiceStop()
 //   - Game.voiceCleanText(text)
+//   - Game.voiceLinesForBeats(chunks)
 // rules:
 //   - Never auto-play before a user gesture (code: Game._voiceUnlocked flips on first pointerdown/keydown; convoSpeakLine returns 'locked' before).
 //   - Mute silences voice like every other audio (code: convoSpeakLine checks Game.audio.isMuted(); playVoice routes through the master gain).
@@ -107,15 +108,36 @@
 
   // voiceCleanText: what the TTS engine may hear. Emoji and markdown never
   // reach the voice; beats are already short, but cap defensively.
+  function quotedSpans(text) {
+    var spans = [], match, quoted = /"([^"]+)"|“([^”]+)”/g;
+    while ((match = quoted.exec(text))) {
+      var spoken = match[1] || match[2];
+      spans.push({ start: match.index + 1, end: match.index + 1 + spoken.length, text: spoken });
+    }
+    return spans;
+  }
+  // Parse the whole accepted utterance before slicing it into pages. A quote
+  // closing on the next page must not turn intervening narration into speech.
+  Game.voiceLinesForBeats = function (chunks) {
+    var spans = quotedSpans(chunks.join(' ')), offset = 0;
+    return chunks.map(function (chunk) {
+      var start = offset, end = start + chunk.length;
+      offset = end + 1;
+      var speech = spans.map(function (span) {
+        var a = Math.max(start, span.start), b = Math.min(end, span.end);
+        return b > a ? span.text.slice(a - span.start, b - span.start) : '';
+      }).filter(Boolean).join(' ').trim();
+      // The payload contains only proven speech, inside one complete quote.
+      // Internal quote glyphs are punctuation, never a second parsing boundary.
+      return speech ? '"' + speech.replace(/["“”]/g, '') + '"' : '';
+    });
+  };
   function voiceCleanText(text, speechOnly) {
     var t = String(text == null ? '' : text);
     // Narration stays on screen. Both voice backends get only complete
     // quoted speech, through the same boundary.
     if (speechOnly) {
-      var spans = [], quote;
-      var quoted = /"([^"]+)"|“([^”]+)”/g;
-      while ((quote = quoted.exec(t))) spans.push(quote[1] || quote[2]);
-      t = spans.join(' ');
+      t = quotedSpans(t).map(function (span) { return span.text; }).join(' ');
     }
     try { t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/gu, ''); }
     catch (e) { t = t.replace(/[^\u0000-\uFFFF]/g, ''); }
@@ -300,8 +322,8 @@
   }
   Game.voiceStop = voiceStop;
 
-  // convoSpeakLine(vid, text, opts): THE hook — called from sayLine() for
-  // every NPC beat pushed to the dialogue transcript. Synchronous gate
+  // convoSpeakLine(vid, text, opts): speech hook for the visible accepted
+  // dialogue page, plus explicit persona/quest callers. Synchronous gate
   // checks return a status string (unit-testable); actual speech is
   // fire-and-forget. Statuses: off | muted | locked | empty | foreign-skip |
   // speaking-piper | speaking-fallback | error.

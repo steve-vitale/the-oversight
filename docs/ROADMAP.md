@@ -1,4 +1,2027 @@
+Current handoff — 2026-10-31: Steve requested Codex wrap-up. Read [CODEX-TO-MUSE-2026-10-31.md](CODEX-TO-MUSE-2026-10-31.md) first. Verified9433 is delivered; resident-record R3 is uncommitted/unqualified WIP, with a new readable legacy-card crash fix and completed64-case exact R2 measurement equality. Broad phone refresh was stopped, saved checks remain pending, one pre-Continue storage-transport failure is unresolved. Public24bf now diverges from this branch atdc66; reconcile on a review branch before landing. All earlier current-status paragraphs describe their own epochs.
+
+Current Codex closure — 2026-10-31: saved9433e621d appointment/roster source passes472 quick/1245 full; all18 source/evidence assets retrieved and verified for Muse review (issue2 comment6550583980). No acknowledgment or publication assumed. Current codex/resident-record-lifecycle-20261031 ports actual canonical resident admission/save/Continue only; the separate job-generation prototype and its warnings remain archived. Actual day20 Aroha failure and ordinary maker42 day65 cold admission loss have shared/native/independent controls. Fresh record-only64/all31 has no material scorecard signal, but merchant4/5 later differences are reproduced and isolated to existing authored trait reads and earlier public/appointment warnings remain. Native paid company replies/cold recoveries pass at both heights; broader phone/special/installed and frozen checks are pending. Natural Oscar remains preserved alive day20. Physical favor planning follows this record repair. See RELEASE-GAPS.md and resident-record-lifecycle-r2; no ending or general viability clearance.
+
+Current release closure (2026-10-31): Steve asked to address every gap in the telemetry assessment. [RELEASE-GAPS.md](RELEASE-GAPS.md) records each gap, evidence, ownership and closure requirement. Keep existing NPC-utilization order and complete mobile campaign, with causal fixes before numerical tuning. Latest review source remains unqualified; do not borrow historical checks.
+
+Current priority (2026-10-29): make existing systems drive NPC and simulation decisions. Follow the ordered work and done-when in [NPC-UTILIZATION.md](NPC-UTILIZATION.md): useful autonomous Haven work, then prerequisite-directed crafting, then shared primary-policy decision support. The first candidate connects real surplus preservation to cooking objectives; it is under verification, not released. Parent6a769 is the previously qualified review handoff. Keep the ordinary mobile campaign's actual ending and all31 balance domains in scope; no forced feature quotas or automatic win-rate compensation. Older status snapshots below are historical.
+
+Current review (2026-10-29): codex/reconcile-c3c8a-conversations-20261029 preserves publicc3c8a plus qualified b482 through normal mergef09. Conversation context/save inputs and evolved gardening are saved in87ed/e527, unqualified for release. Natural day13 then exposed Muse Walk home missing its completed-arrival checkpoint: raw bytes retained outside location/carcass until autosave. The final initialized walkHome chain now commits after all arrival/party/favor/message hooks, with9 shared scenarios/3 cold recoveries and8 actual original/current native/cold scenes. Two new automatic phone gates also enforce actual evolved cultivation and return recovery; see evolved-garden-r1 and walk-home-checkpoint-r1 audits. Prior e527 20-family/combat/installed proofs are historical after this runtime fix. All31-metric comparisons remain REVIEW_REQUIRED; no automatic difficulty adjustment. Refresh final source receipts, measurements, quick/full and review handoff. Same ordinary phone campaign remains alive day13 after real learning, solo fight, loot and return; continue to actual death/victory. No500-day target, no origin push or live claim. Older status snapshots below are historical.
+
+Current bounded follow-up (2026-10-29): parent3725a48e8 is qualified and delivered for review (449 quick/1222 full; issue2 comment6493308811), not live. Codex now owns the actual day12 earned-evolution gap on codex/earned-evolution-choice-20261029: no UI caller, missing immediate checkpoint, lost upkeep after ID replacement and misleading capacity copy. Shared12 scenarios/two cold recoveries/two rejecting source controls plus ten native choice/defer/reopen/paid-use/cold phone journeys and11 receipt controls pass. Current64/all31 screen outcomes equal prior candidate; all44 changed hashes independently reduce to saved offer text/deferral metadata on detached diagnostic copies. Existing public-baseline warnings remain REVIEW_REQUIRED. Current20-family phone receipts, complete combat/interruptions, installed/offline/rollback, prior relic and indoor proofs are refreshed. Final frozen quick/saved full and owner review remain pending. Natural Oscar is alive day13 after real evolution, paid Ask the Plants, normal Haven night, cold Continue and breakfast. Continue this campaign to an actual ending; conversation structure follows this bounded fix. See evidence/2026-10-29/earned-evolution-r1/README.md. Older status snapshots below are historical.
+
+Current milestone (2026-10-29): saved reconciliation0f86a86be passed448 quick/1221 full checks and has verified Git-history intake for Muse. Further actual day12 play found an urgent presentation defect: a feast fight legitimately starts in Haven, but the UI hid indoor fighters; a monster sharing the player's square was also discarded by the entity chain. Codex's new review branch displays actual live actors without moving bodies or changing Game rules. Shared41, three rejecting source controls and twelve native old/fixed/cold/full-encounter scenes pass. Current broad phone refresh is running; combat/offline and fresh64-case/all31 screening pass their bounded checks. Whole headless observations/state hashes equal prior candidate; inherited survival/community/resource/progression warnings remain REVIEW_REQUIRED. Saved quick/full and owner/ship-loop review remain pending for this new source.
+
+Natural Oscar remains alive day12 after real trapping/food preparation/eating, keepsake-channel feast, party victory and loot. Keep playing to a real campaign ending. Next queued structural repair: conversation result receipts, pending decisions before unrelated offers, opposing alternatives together, one pager and speech/narration memory provenance. See evidence/2026-10-29/indoor-fight-visibility-r1. Earlier status snapshots below are historical and do not establish current qualification.
+Current review cut (2026-10-29): authorized normal reconciliation now includes publicec327 and all prior Codex history; no origin push/master landing. Natural Oscar reached day12, first real cultivated harvest, earned weir placement, hearing/vote, tending and jacket bond evolution. Immediate evolution save loss was reproduced and fixed at final initialized selection boundaries, including ability/knack/keep siblings. Shared17 scenarios and eight native source/cold contrasts pass. Final source-bound20-family/combat/installed/measurement refresh and saved quick/full/review packet are in progress. Do not claim older source epochs as current. Next bounded structural goal: authoritative conversation action outcomes, pending-decision group priority, one reply pager and spoken-memory provenance. Preserve challenge and all31 metric warnings. Details: evidence/2026-10-29/reconcile-public-ec327-r1 and relic-choice-save-r1.
+
 # ROADMAP: what's built, what's next, how to do it
+
+Current authorized publiccb30 reconciliation (2026-10-28): codex/reconcile-public-cb30-20261028 preserves both histories; all21 textual conflicts are resolved, but final merge/check/review remain pending. Shared foraging conserves both actual inventories and migrates older public cargo once. Real integration checks caught duplicate entry-script execution and Animal Ken calming human opponents; both are fixed with rejecting controls. A later native edge-camp journey exposed a null world-map renderer read; the final guard passes an actual before/after174-response browser contrast and11 shared checks. This final app change is undergoing fresh20-family/combat/installed/31-metric maintenance. Earlier epochs are historical, not current clearance. Completed first screen is review_required across all four policies; no automatic difficulty compensation. The exact caregiver3 continuation won at day164 without forced turns/recovery. The actual phone Oscar campaign is alive day11 after its first earned cultivated harvest, food use and pantry delivery; continue to a real ending. Full details and failed pilots: evidence/2026-10-28/reconcile-public-cb30-r1/STATUS.md. Ship loop publishes after review; no origin push or master landing.
+
+Current day10 aid checkpoint follow-up (2026-10-28): natural three-stone System hand-in taught Scrounger but immediate bytes retained the complete old quest and goods. The initialized public hand-in now checkpoints consumption, completion and actual reward together; short refusals remain free. Six engine scenarios/two abrupt recoveries/removed-hook rejection and both-height native baseline/candidate/cold witnesses pass. All29-metric64-case fresh candidate screen matches previous candidate whole rows; no long-run equivalence claim. Standard remaining-family refresh and final checks are pending. New public057b796d9 shares3cc base but overlaps nineteen runtime paths; do not overwrite or claim reconciliation/landing. See evidence/2026-10-28/aid-handin-audit-r1.md. Continue the actual campaign through its ending, preserving challenge. Newly observed breach copy wrongly counts adjacent nodes as Haven; the one-Study White Noise ending followed actual retreat beyond its reach, with a corrected operator that stops travel when combat appears.
+
+Latest failure-path follow-up (2026-10-28): saved4dc62cf46 completed quick438/0 and full1210/0 on stable inputs, but an additional real composite-effect fault probe proved that foodPower silently retried an exception and the new paid-fizzle checkpoint could save the partial result. Do not treat that green suite as clearance of this uncovered path. Current working delta logs/rethrows once, poisons the incomplete transaction and suppresses partial success presentation in the actual app caller. Binding12/0 and settlement10 scenarios/3 cold recoveries/2 removed-hook controls pass. Fresh native/combat/installed/measurement maintenance is running again; latest source is unqualified. The natural run is alive day9, after an explicitly source-verified fresh-process migration and real paid Echo/cold recovery. Next observed UI sibling: tapping onto plants/bushes/rubble hides their own resource actions; stepping beside restores them. Keep the existing goal through an actual campaign ending, and leave publication to owner review/ship loop.
+
+Current follow-up (2026-10-28): codex/field-ability-results-20261028 starts at qualified fe642f591 (full1208/0, quick436/0; issue2 comment6457536585). The same natural Oscar campaign is alive day8, with actually earned Green Thumb/Echo Location. Ask the Plants and Echo hid findings behind their payment notices. A strict phone replay also caught the short Echo action absent from committed bytes. The new app binding retains actual accepted messages; initialized activateAbility/useAbility transactions enclose effect, fee, practice and cooldown. Shared tests cover legacy/composite/direct calls, refusals, nested saves, failed effects and three abrupt-process recoveries. Native replay r3 completes baseline/current renderer contrasts and two fresh-process Continues at both phone heights. Broader source-bound browser/combat/installed and BOTH-root measurement maintenance are running; this new source is NOT qualified or live. The prior fe642 candidate remains separately qualified. Continue the natural run to its real ending. Physical charge cover/body travel, fabricated ReadBeast information, Journal undefined technique entries and legacy remote quest/reward gaps remain open.
+
+Charge follow-up now has18/0 public-input/rejecting tests, sixteen native comparison/cold witnesses, current70-step/all20 families, combat/installed maintenance and BOTH-root64/all29 screening with8 neutral pairs/root. Five changed runs and open physical cover/body travel remain explicit; final quick/full/review are pending. Same natural campaign is alive day7, not ended. Next structural findings include ReadBeast reporting random illness without inspecting an animal (read-beast-truthfinding-r1), alongside legacy physical quest/reward and gossip perception gaps. Continue the existing natural campaign to its actual ending; do not replace it with an observation cap or a prepared ending.
+
+Current Codex follow-up: physical charge counter contract on codex/charge-counter-contract-20261027, parent1491. Parent delivery/full1207/0 is verified in issue2 comment6455716180. Ordinary mobile campaign continues alive day6; no death/victory or later-game proof. Generic charge lane commitment now passes18/0 including actual removed-hook rejection; physical cover/body travel and current browser/measurement/full qualification remain open. Muse retains numerical/controller work. See evidence/2026-10-27/charge-counter-contract-r1.md; older pending qualification notes below are historical.
+
+Day4 natural play additionally exposed the work-refusal null Back-button crash before phone-frame mounting. The optional guard now passes shared9/0, rejecting control and actual-save baseline/current replays at736/844, plus a real subsequent refusal/payment/work report. No engine obedience tuning. Current source-bound refresh-r4 completes all71steps with stable source; final quick/full remain pending; earlier r3(71steps) is pre-guard history. See mobile-action-results-audit-r1 and issue2 comment6453728156.
+
+## Active mobile milestone (2026-10-27; review branch, not live)
+
+Steve corrected the campaign target: "No, the game isn’t 500 days." Day150 is already punishing and day180 exceptionally long. Continue the actual Oscar/Portland mobile campaign to death or victory; it remains alive on day3. Observation caps and prepared scenes are not endings.
+
+Branch codex/mobile-action-results-20261027 starts at checked350a2261b. Ordinary play exposed paid results overwritten by incidental messages, then a critical short-input save loss. The current correction keeps the authoritative result in the existing bounded reader and checkpoints the complete initialized paid field input. Eight source-stable bed/forage phone replays at390x736/844 pass, each with committed-byte inspection before unload and fresh-process Continue. These use actual historical campaign saves; the comparison changes saved350a renderer/CSS only on a common current engine. They are not full historical-Game comparisons or physical-device clearance. Final broad browser, measurement, quick/full and owner review remain pending. See mobile-action-results-audit-r1.md in evidence/2026-10-27.
+
+A separate observed legacy activeQuest gap remains: remote Blackberry turn-in removes goods, promises an item and grants only knowledge. No accept/return or item-grant branch exists there. Next architecture priority is coherent physical favor turn-ins with authored/conserved rewards; do not paper over the missing reward with copy or mint arbitrary equipment. This supersedes older next-task prose below. Muse retains numerical/controller calibration; coordination issue2 comment6453072656 records the source boundary and open gap.
+
+
+Latest reconciliation (2026-10-27): Muse shipped public3cc while saved9a3a507e5
+finished full1203/0 in673s. That full result remains historical. Review merge
+53b1190f3 preserves both histories, the national-scale full-seat gate and all
+favor runtime. Gate22/0, Table handoff5/0, forage-filtered24/0, combat/input/
+Strike/Deer, all20 native families70 steps, six favor journeys at both phone
+sizes and actual public3cc installed lifecycle pass. Quick432/0 in446s is
+source-stable before final R2 maintenance. Final quick/saved-candidate full
+and owner/ship remain open. No live claim. See
+issue2 comment6449333628. The next bounded gameplay gap is an executable
+snare-mending favor, after this milestone's review intake.
+Reconciliation screen r1 is invalid due nine mismatched diagnostic controllers;
+shared input preflight now rejects them before a campaign (6/0 proof). Actual
+common-controller setup preserves both Games; fresh BOTH-root r2 completes64
+paired cases with identical whole played rows/state hashes/all29/gear and8
+neutral pairs per root. Gate-only no_material_signal does not clear earlier
+forage review_required warnings or missing physical controller coverage.
+See evidence/2026-10-27/joint-forage-public3cc-audit-r6.md. Post-commit full
+receipts belong to the exact saved candidate in the latest issue2 handoff;
+preparation notes here must not be substituted for that later terminal result.
+
+Historical pre-public3cc qualification: fixed-source quick430/0 in377s; native20
+families70 steps, combat/input/Strike/Deer and installed public241 lifecycle
+complete. Automatic arrival additionally passes4 engine scenarios/3 fresh-process
+recoveries using actual gathered phone cargo and explicitly scarce pantry. These
+engine cases do not establish scarce-pantry phone interaction. Fresh all29
+screen remains review_required; controller coverage, final full saved-candidate
+check, owner review and ship remain open. See joint-forage-qualification-r4.md.
+
+Earlier WIP checkpoints (historical, superseded by the qualification above):
+actual future/expired phone outcomes exposed and fixed
+two dialogue phase bugs; final18-stage outcome journeys each phone size pass,
+including8 real Waits beyond the deadline. Current all29 screen/native20 refresh
+is running again on phase-fixed source. Earlier screen is review_required with
+merchant/caregiver win declines and other warnings, not grounds to tune difficulty.
+Latest quick observed404/26 while proof pointers changed concurrently, so is
+not stable-source qualification. See evidence/2026-10-27/joint-forage-outcomes-audit-r3.md.
+
+Active milestone (2026-10-27, WIP): joint-foraging now has actual meeting,
+travel/gather, proportional food provenance, pantry delivery, deadlines and
+structural dialogue. Both phone sizes complete21-stage journeys; acceptance
+and delivery are committed before unload. Native storage-full warning/retry
+passes7 stages each; original full water journey16 each still passes. Current
+quick400/26 retains source-bound native/observer/installed freshness failures;
+actual20-family refresh and all29 matched16x4/neutral runs are in progress.
+Not saved/reviewed/live; cold delivery/arrival and blocked/expired/cancel phone
+coverage remain open. See evidence/2026-10-27/joint-forage-native-audit-r2.md.
+
+Prior checked checkpoint: saved9d83 cache hygiene passed quick423/0 and full1195/0 in756s; parent064e reconciles siege/public-action fixes with Muse public241. Those results certify their actual saved source only. Existing maker mortality review_required remains; no difficulty tuning. Source/full intake and owner/ship-loop status are retained in evidence/2026-10-27/release-intake-hygiene-r1.md.
+
+Earlier checkpoints (historical; their results do not certify current source):
+
+## Current reconciliation: publicb462, 2026-10-26
+
+Formal help follow-up (review): kept/broken promises now reach the existing
+renewal/amends rules in both subject and idle menus; open vows still block
+duplicates. Refusals relay their actual words instead of grateful acceptance.
+Existing payments, deadlines, nominal words trust and cap retained. Shared-kit
+33/0 and three rejecting hook controls; eight actual phone journeys plus current
+frame/role refreshes pass.16 matched seeds per four policies yield identical64
+terminal hashes/all29 rows; no_material_signal is screen-only, not feature-use
+or holdout clearance. Broad395/20 retains stale native/update gates. See
+evidence/2026-10-26/formal-help-audit-r1.md. Next: remaining current native,
+combat/installed and full-suite roots. Muse retains numerical/controller work.
+
+
+Promise-language boundary follow-up: original full water-favor replay at both phone
+heights exposed Journal task labels used as speech. Authored narrator and
+recipient/bearer/witness references now require exact favor identity; broken
+memories retain that identity. Existing payments/deadlines/rewards unchanged.
+Shared-kit44/0 plus three failing controls; final water16 checkpoints per size,
+four real role/Continue cases and phone gate12/0. Runner supports18 families.
+Fresh8-pair150-day observer maintenance establishes neutrality only. Current
+Game/data changes invalidate older native receipts; fresh broad/full, remaining
+combat/installed, owner review and ship-loop gates remain open. The separate
+formal offer_help gratitude-after-refusal sibling is queued for actual proof.
+See evidence/2026-10-26/promise-outcome-audit-r1.md. Muse retains calibration.
+
+
+Reader workflow follow-up: camp/visits/food/held join the runner (17
+supported families). Final five-family16-step execution passes22 current
+phone witnesses with original recipes/fixtures/assertions intact. Explicit
+food/held CLI entry points invoke real existing updates; missing-revision
+probes fail without changing pointers. Actual held-input failure preserves
+the prior pointer, then exact restore precedes positive execution. Safety15/0,
+filtered quick1/0, measurement9/0, replay inputs8/0 and offline180URLs pass.
+No runtime/controller/collector/numeric changes. Parent1f60 broad405/6 precedes
+these four updates; final broad/full, combat/installed and current full-water-
+favor native replay remain open. See today's reader-phone-maintenance-audit-r1.md.
+Muse keeps calibration; Codex continues release boundaries and legacy roots.
+
+Field workflow follow-up: arrival/carry/Haven/loot join the owned-preview
+runner (13 supported families). Final five-family17-step browser run passes
+14 current positive witnesses at both phone heights, including all six loot
+room/body cases and native Continues. Original fixtures/assertions retained;
+separate actual carrying/input-change failure keeps the prior pointer and
+closes its listener, followed by exact source restore and positive execution.
+Safety14/0, filtered quick1/0, current measurement9/0, replay inputs8/0 and
+offline180URLs pass. No Game/controller/collector/fixture/numeric edits.
+Parent5af broad401/10 precedes these four refreshes; final broad/full and
+remaining reader/combat/installed gates stay open. Shared issue index now
+names current source and preserves the historical body. See today's
+field-phone-maintenance-audit-r1.md. Continue remaining native gates, then
+installed/full root causes; Muse retains numerical/controller calibration.
+
+Owned-preview follow-up: activation, namespace, legacy and pack are now on the
+repository runner, bringing support to nine families. Three ability adapters
+accept only the owned ephemeral loopback origin (old manual fallback retained);
+Pack records actual normalized executed bytes. Final six-family20-step browser
+run passes32 current witnesses, all real updaters/gates and whole Continues.
+Changed-input failure preserves the old pointer and closes the listener;
+fresh positive execution closes it too, with refused-connection proof.
+Safety13/0, filtered quick1/0, current measurement9/0; no Game/controller/
+observer/fixture or numeric changes. Earlier broad397/14 preceded these four
+refreshes; fresh broad/full and other native/installed gates remain open.
+See ability-phone-maintenance-audit-r1.md. Extend remaining field/reader/combat
+proofs next, preserving failed pilots and all actual phone sizes.
+
+Repository-owned maintenance now plans/runs the existing real frame, Table,
+gear, caretaker and reply proofs with fresh artifacts, declared-input guards,
+actual validators, retained failures and verified optional scratch cleanup.
+All five paths have actual browser execution; final output ownership has a
+two-process race proof, and a changed-runner-input contrast aborts after a real
+browser completion without changing the old pointer. Final-source reply passes
+both heights after exact restore. Safety8/0; filtered quick1/0; current real
+measurement9/0. Latest earlier broad395/15 preceded this tool/new reply update;
+fresh broad/full and unsupported native/installed gates remain open. No Game/
+controller/observer/recipe tuning. See phone-maintenance-audit-r1.md.
+Next: extend actual maintenance to the still-unsupported release families,
+then close the remaining full-suite issues. Keeper-status clarity is a queued
+UX fix: the observed unavailable keeper actually left on a water trip.
+
+Current-source phone follow-up:16 actual witnesses pass with180 trusted
+touches across both Table profiles, physical gear and caretaker eligibility.
+Both historical Table checkpoints reach real endings/Records, whole mid-act
+Continue and save tombstones; non-god identity is known empty at every required
+boundary. Equipment conservation and garden growing/hungry/used cases pass.
+Table26/0, gear12/0 and caretaker11/0 validators refresh all required profiles.
+Latest broad quick392/18 preceded these three refreshes; other source-bound
+families, final broad quick/full and owner/ship-loop gates remain open. Game/
+controller/observer bytes are unchanged. See native-late-gear-audit-r1.md.
+Next narrow UX investigation: explain the appointed keeper's actual readiness
+reason, without granting eligibility or labeling successful paid work broken.
+
+Muse submitted39 newer public commits after2a0d. Normal integration on the
+existing Codex review branch preserves both histories, real dead-teacher and
+storage-reminder changes, and stronger shared corpse room/frame/range checks.
+Four targeted proofs pass; incoming coordinate probes now use the real range
+dependency and explicit outside fixture, and incomplete probes fail. Current
+16-stage trusted-touch phone frames pass both heights with no page errors;
+the736 combat render was inspected. Fresh150-day maintenance has eight neutral
+on/off pairs across four policies; this is not new16-seed balance clearance.
+Immediate day150 combat checkpoints and actual day200 nonviolent four-rat
+contest endings pass both phone heights, with whole native Continue. Animal
+teacher contrast6/0 fails3/3 when death is hidden. Broad quick389/21 precedes
+those two phone pointer updates and an intentional reminder assertion update;
+current reminder23/0 preserves historical RED checks and verifies the actual
+seven-silent-day rule and changed-stock behavior. Wider source-bound proofs,
+existing full failures, combined final
+checks, owner review and ship-loop publication remain open. Previous2a0d
+panels/receipts retain their historical source identities. See today's
+reconcile-b462-audit-r1.md. No live release claimed.
+
+One verified public-base download now carries all private history through66c;
+Muse no longer needs a chain of private prerequisite packets. Source intake
+and review instructions are in issue2/comment6424283630. Temporary bundle and
+public-only verification cache were removed after byte/hash/import checks,
+freeing1,168,562,223 logical bytes while preserving local refs and the remote
+asset. This does not imply owner acknowledgment or acceptance.
+
+## Prior integration snapshot: public2a0d, 2026-10-26
+
+Travel proof follow-up: the old partial evaluator is replaced by the unchanged
+shared seeded harness. Original runtime checks pass25/0 at7,42,999; bounded
+source census no longer scans all tests or counts their names as production
+references. Actual moved-lie and stacked-monster controls fail. Historical
+BEFORE requires an explicit root. Game/controller/observer bytes stay unchanged.
+Another26 actual phone receipts clear activation, crew/namespace and legacy
+activation. Quick400/10 preceded these three pointer refreshes; seven native/
+installed families and other non-browser full failures remain. See today's
+travel-r8-shared-audit-r1.md. No broad green result or live release is claimed.
+
+Verification follow-up:48 fresh phone receipts across scene/carry/loot, reader/
+visit/food/conversation, combat and water-favor flows; separate two-height
+same-body tactical Deer wins36/76HP. Actual twelve combat witnesses preserve
+death/succession as losses. Ten native proof families and both measurement
+gates refreshed. Current quick399/10 retains ten native/installed gates; initial
+full1140/41 includes earlier stale witnesses and22 non-browser failures. Three
+declared-duel fixture causes are now reproduced and fixed without Game changes;
+a new actual-party redaction proof passes5/0 and fails when its hook is removed.
+Other non-browser failures, timeouts and final combined full remain open.
+Current common-controller16-seed all29 comparison is review_required:
+maker population, merchant hydration and caregiver deaths need investigation.
+Selected maker4 actually wins173 before and loses community183 after, with
+neutral/prefix proofs and no forced turns. See today's muse-release-maintenance-r1
+audit; no numeric compensation, live release or physical-device clearance.
+
+Muse's public master advanced118 commits beyond772c to
+2a0d3d686dc54e41d5541c10f6760f7a1596c55a. Those commits are now being
+normally merged on codex/reconcile-public-20261025, based on saved518adfd9c.
+Conflicts in corpses/game/storage preserve canonical room/frame/range and
+overload carrying contracts while adopting incoming refusal voice throttling.
+The incoming zero-cell range test now prepares its intended outdoor scene and
+also checks that a hall wall still blocks access. Its initial fixture failures
+are retained. New public controller/evidence inputs supersede earlier balance
+comparisons for claims about this combined candidate; no such clearance yet.
+
+The previous full-r4 stopped incomplete at230/1181 with24 failures, not green.
+Its separate phone Siege finished at both sizes with whole native Continue;
+that proof belongs to518adfd9c's bytes, not this newer merge. Current quick and
+combined verification remain in progress. No master merge/push/deployment.
+The new unnumbered wound-mill packet question is addressed separately in
+BUILD-PACKET-RULINGS-20261025.md; the original51-ID snapshot stays historical.
+
+## Current review: reconcile772c and make away supplies/rest real
+
+Normal review-branch merges preserve private35e6, publica888 and the newer45
+public commits through772c. No manual history replacement or master push.
+Resolve shared loss attribution by actual night/arena/field cause; preserve
+legacy string gear IDs alongside object stack metadata. Existing solo tests
+now prepare solo fights explicitly, with a separate interrupted-party proof.
+
+Latest source also fixes remote away-ration reseeding/top-ups and transient
+post-flee rest. Real access to the hall pays food; carried leftovers persist;
+both departure routes pack before moving. Saved rest survives a fresh process,
+expires next day and cannot leak to a new run.12 focused contrasts and current
+native rest/lesson/Continue plus16-stage phone controls pass at both sizes.
+See AWAY-SUPPLY.md and today's reconcile772 supply evidence.
+
+All29-domain16-seed screens remain review_required. Merchant population and
+progression costs, maker survival/hunger, caregiver/community and gear/class
+watches are retained. Selected merchant31337 actually wins148 before the
+repair and loses the community195 after; no forced terminal or presumed hunger
+cause. No64 holdout or general viability clearance. Quick389/20 has no new
+failure IDs relative to field35e6; the generic frame gate is refreshed.
+Interrupted full r3 is not a result; direct r4 is pending. Broader20 phone/
+lifecycle gates and runtime-owner review remain; no live release claimed.
+
+Next: close the actual remaining release gates, and inspect NPC departure/
+provisioning/return opportunities before compensating any survival metric.
+Keep settled-favor Help truth in the serial queue. The rolling release goal
+remains active, with one review candidate frozen for verification.
+
+## Current review: field lessons are completed knowledge, not unfinished favors
+
+Lesson delivery records its actual topic/accepted speech, preserves real favors
+and deadlines, and cannot bypass questions, ambushes or language barriers.
+Availability queries no longer create empty conversations.12 focused contrasts
+pass; final prepared native lessons/language study and closed/interrupted
+Continue have current loaded-byte proof at both phone heights. Neutral
+maintenance is fresh.16 matched four-policy screens remain review_required;
+fresh actual caregiver and selected merchant lifetime endings are investigated,
+not turned into a win-rate target. Full suite1154/26 has the exact same26
+failure IDs as preceding372743dd1; broader source-bound gates remain open.
+See CONVERSATIONS.md and evidence/2026-10-25/field-lesson-audit-r1.md.
+
+Next: reconcile overlapping public a888d24b0 conversation/food/storage and
+controller work on a review branch, preserving both histories; then truthful
+settled-favor Help. No origin push or live release is claimed. The packet
+decision milestone is separately saved in93a28f2bf and shared with Muse.
+
+
+## Current review: question-contract checks cannot perturb the game
+
+The old audit inherited an earlier goodbye and falsely reported missing answers;
+it also changed cached replies and advanced the caller's gameplay RNG. The gate
+now runs in test tooling using a private shared-kit process and explicit posed
+questions through the final public menus. Both original failing assertions pass;
+all36 authored questions, actual reactive definitions and six generic kinds are
+covered. Missing-answer/boundary/silence/label and exception controls fail honestly.
+This repairs the gate, not every nonsensical conversation in the game.
+
+No production question handling, menu ownership, costs or numerical/controller
+levers changed. Fresh current-source phone replay retains real Talk/questions,
+name/role decisions, cancellation, pending/closed Continue and quota retry at
+both heights. Fresh real maintenance retains eight neutral pairs and complete
+observed-row equality versus the prior source at150 driver-day caps. These are
+not terminal campaigns, physical-device or broad lifecycle release clearance.
+Fresh quick386/21 and full1153/26 (zero timeouts) retain the broader gates;
+only the two confirmed question-checker failures are removed, with no new
+failure IDs. See CONVERSATIONS.md and evidence/2026-10-25/ask-contract-audit-r1.md. The older
+1150/28 full-suite result below remains historical; this branch records its own
+current check results. Next content fix remains agency field lessons being
+remembered as unfinished favors, followed by truthful closed-favor Help.
+
+## Design decisions delegated2026-10-25
+
+Six verified open repository calls are decided in DELEGATED-DESIGN-CALLS.md,
+with sources and observable done-when conditions. Design decided does not mean
+implemented, balanced or live. Muse's packet is now found at4b6d4c8eb; all51 IDs
+are disposed in BUILD-PACKET-RULINGS-20261025.md. Preserve verbatim Steve
+instructions above delegated interpretations. No runtime or controller changes
+in this documentation branch; gameplay release work below remains active.
+
+
+## Current review: party naming and roles survive the actual UI boundary
+
+The corpus finding is reproduced on a phone: naming paid a tick and generated
+names while the screen kept the previous NPC reply. Roles shared the same
+return-only picker. Both now use saved conversation decisions and actual
+transcript emission. The outer agency menu/dispatch respects ownership; strict
+selection validation blocks stale/malformed replay. Existing coefficients and
+real-assignment rewards stay with their original implementation. Actual lifetime
+play exposed credit for reconfirming an unchanged role; that operation is now
+idempotent/free and says so. Earlier time-to-win is flagged for calibration,
+not treated as automatic improvement or regression.
+
+Phone flow covers both heights, actual priced Talk/questions, names/roles,
+interrupted pending Continue, free paging/cancellation, paid confirmations,
+closed Continue, and a quota failure/free successful retry. Ordinary Continue
+keeps walk-away settlement; only a validated saved decision resumes. See
+CONVERSATIONS.md and evidence/2026-10-25/party-decision-audit-r1.md. This is a
+review candidate, not a live release or broad balance/lifecycle clearance.
+
+The fresh full suite reports1150/28; all seven full-only failures also occur
+against the pre-change Git source. They remain open, not waived. Before release,
+reconcile the old extracted/manual harness contracts with real initialized
+runtime and investigate generic Ask answer/opt-out failures;21broader native
+source-bound gates also remain. Measurement maintenance has fresh real proof.
+
+Next bounded work: agency replies must own their topic rather than planting a
+monster lesson as unfinished favor content; then distinguish declined/broken
+requests from completed requests in Help. Muse owns controller follow-up:
+prioritize physically executable favors and exercise the now-visible party
+choices through public menus, with new source/controller identities.
+
+
+## Prior review: passive whole-campaign conversation corpus
+
+Tooling only; Game remains the frozen d6f5a6e07 review. Terminal campaign audit
+now accepts `--view conversation`, retaining actual existing calls, returned
+menus, selected words, favor state and outcomes without extra Game queries.
+Two caregiver seeds ran to real wins on days206/188; four on/off pairs and both
+short/long prefixes match, including the original whole row/gameplay-state/all29/gear/
+terminal/notes/RNG. No watchdog routes or forced driver turns. Longest cases
+contain1187active conversation starts and2803turn calls (including navigation).
+Do not count the short prefixes again or infer difficulty from two wins.
+
+A50-exchange stratified review found concrete next work:305party naming replies
+return text/choices without an emitted NPC transcript beat; a day31favor resume
+quotes an unrelated monster lesson; three closed-request Help replies use the
+same "already handled" line for non-completion states. These are retained
+headless/source findings, not fresh native confirmation. Another distinction:
+22distinct forage requests have no executable outing, while physical food/care
+choices are sometimes genuinely offered but the controller picks explanation/
+decline. Existing canonical care also fulfills some ledger requests outside
+this dispatcher. No calls is not proof of no functionality.
+
+See conversation-campaign-audit-r1.md and review-r5.md. Probe tests7/0; Game,
+controller and measurement collector unchanged. New workflow is in SIMULATING.md.
+Next bounded runtime milestone: party naming decision delivery, then topic
+ownership and truthful settled-favor responses. Broader source-bound proof
+refresh, reconciliation direction and owner review remain pending before ship.
+
+
+## Earlier review milestone: closing beats keep their meaning
+
+This is the current dependent review milestone. Earlier milestone receipts below
+are historical for their named sources; they do not clear this combined source.
+Public Git was freshly fetched at3aff8d64b6a2d91747734e7d1d3796f9595ec281;
+its new food/build work remains to be reconciled through the review process.
+
+A spoken goodbye no longer draws a silence response that resumes the topic or
+asks a fresh question. The presentation guard covers ordinary, escalated and
+exhausted silence in every mood band while retaining its existing count/shift/
+exhaustion work. Actual unanswered interruptions keep their own response.
+Resolution and mood farewells use the closing grammar class, so shared wording
+cannot be replaced by content-repeat amnesia. Closing beats also stop replacing
+remembered topic snippets with a goodbye or counting as a topic discussion.
+
+Shared-kit7/0:11matched closing-action contrasts after identical live prefixes,
+actual hook-ablation controls, unchanged non-dialogue state/settlement, and
+exactly the intended topic-count correction. This is not full-campaign balance
+neutrality: changing spoken-line registries can change later offered dialogue.
+Two ordinary unchanged-save phone journeys at390x736/844,99trusted touches,
+prove closing narration/farewell, free Done, actual paid Talk again, cancellation
+and committed Continue;173current loaded sources and all56snapshot frames match.
+Screenshots inspected; narration's accepted voice payload is empty. No physical
+or audible-quality claim. See closing-phase-audit-r1.md. Review branch only;
+combined owner review, reconciliation direction and broader proof refresh are
+still required before ship-loop publication.
+
+
+## Earlier review milestone: read NPC endings before dismissing
+
+Ordinary phone play reproduced final NPC replies disappearing behind a journal
+notice as soon as convoTurn returned ended. The browser now keeps those actual
+new replies in a read-only chat view, one page at a time, with a free44px Done
+button in the normal thumb action row. End settlement stays in the existing
+Game route; reading, Done, header close and stale choices cannot pay it again.
+No Game/dialogue content, numeric balance, policy or collector changes.
+
+Shared-kit tests execute actual app handlers with the real Game ending:7/0.
+An offered-choice headless census found11natural endings/107actions; the first
+pilot stopped at menus lacking a preferred choice and is preserved, not called
+an infinite-game defect. An ordinary native baseline reproduced the lost reply.
+Final unchanged-save native journeys at390x736/844 use106trusted touches;
+all actual final replies appear, free read/Done leaves state unchanged, and
+native committed Continue retains the closed conversation/payment. All173loaded
+sources match, and rendered screenshots were inspected. No matched-RNG,
+physical-device, audible quality or full-campaign claim. Review branch only;
+owner review, reconciliation direction, broader fresh proofs and ship loop
+remain pending. See conversation-ending-audit-r1.md.
+
+
+## Earlier review milestone: village questions answer their actual subject
+
+Ordinary native play on c4ba98d416 reproduced a semantic mismatch: the offered
+"Is anyone going hungry?" received "same as yesterday; I'll take boring."
+Eighteen authored village questions shared that broad handler. Their unchanged
+labels now carry explicit intents in characterGen.json: hunger, supplies,
+health, care, morale, young people, living residents or a general overview.
+The exact offered/saved words select the intent; changed menu traits cannot
+silently change the question. Unknown old labels get an admission. Follow-ups
+retain the subject and use canonical current NPC needs/health and shared pantry
+rows. Reports do not consume food, accept favors or invent rewards.
+
+Focused tests15/0 include every offered variant through the full turn handler
+and a control reproducing the defect when semantic binding is removed. Two
+prepared replays restore the actual observed sitting without altering hunger,
+stock or speech;36trusted touches at390x736/844 prove exact question, food answer,
+food follow-up, free reply paging, close and committed Continue. These are not
+natural Talk/payment, full-campaign, physical-device or release proofs. The
+original ordinary failure and its unmodified-save lineage remain retained.
+See evidence/2026-10-25/village-question-audit-r1.md. Review branch only; public
+reconciliation direction, owner review and ship-loop publication remain pending.
+
+
+## Earlier review milestone: visible dialogue voice and quote boundaries
+
+Prepared actual sayLine/Piper dispatch reproduced the stage-direction leak:
+the first raw page's quote was unclosed, the next page quoted the intervening
+"She turns toward the trees", and that was the only submitted speech. An
+actual offered-action short-session sample528emissions found no multi-page
+utterance; it does not establish the bug's natural prevalence. The bounded
+repair projects whole accepted speech onto persisted per-page payloads, then
+voices only the displayed entry. History/refresh do not replay, and advancing/
+closing cancels. The160-character beat choice follows a real phone overflow;
+legacy raw pages subdivide in UI only, preserving their transcript and costs.
+
+Current-source native evidence: six Piper/device/legacy journeys plus two
+standalone-topic regressions, both phone heights,100trusted touches,173identical
+loaded responses, readable full beats, exact payments, free paging/history and
+native Continue. Backend inference/device speak is stubbed: no audible feel,
+physical-device or full-campaign claim. Unit voice-pages10/0, boundary5/0, Piper
+29/0, wired0unwired, ontology128, offline asset check pass. Fresh quick378passed/
+23stale-proof failures in148s, four workers/unchanged120s timeout. No full,
+neutral-maintenance or installed-update/offline/rollback clearance. Public
+master freshly fetched remains327e16b69; reconciliation direction/review/
+ship-loop publication remain pending. No coefficients/rewards/policies changed.
+See conversation-voice-audit-r1.md and CONVERSATIONS.md. Next bounded audit:
+terminal NPC reply delivery and ordinary native conversation choices/endings;
+do not infer those from the prepared long-utterance proof.
+
+## Current bounded repair: playable standalone topic answers
+
+Actual phone continuation of the sibling audit found Ask about charged10kcal
+and learned the counter while showing only a generic success label; a journal
+side effect replaced the speech, and the payment was not immediately saved.
+The review follow-up exposes explicit authored replies across seven standalone
+topics, reads them through free existing beats and checkpoints the complete
+topic after its wrappers. It preserves earned names rather than embedding whole
+scene descriptors mid-sentence. No cost, progression, policy or balance tuning.
+
+Four final-runtime native journeys pass at both phone heights: lesson+goal
+with complete rendered beats/free navigation/exact paid Continue, and native
+quota faults with visible risk/prior payload intact/pagehide retry.56 trusted
+touches, identical173 loaded response identities. Shared-kit topic3/0, counter
+5/0 (all40species plus earned name), voice boundary5/0. Final-runtime quick
+377passed/23stale-proof failures in162s, four workers/unchanged120s limit.
+No full/release pass. Source-bound broad browser/measurement receipts,
+reconciliation direction, review and ship-loop publication remain pending.
+See counter-lesson-audit-r1.md and CONVERSATIONS.md. Next bounded audit:
+formal conversation voice across long beat/quote boundaries, using actual
+sayLine/convoSpeakLine behavior rather than whole-string regex tests. This is
+an audit target, not a verified additional defect or clearance of other dialogue.
+
+## Current review follow-up: systemic combat writing siblings
+
+Steve's "probably systemic with several siblings" prompted consumer tracing,
+not an Ad-only replacement. The follow-up changes30 authored text fields in10
+species, removes repeated headings from spoken counter lessons, shortens a
+lesson cut off by the400-character voice cap, and removes a runtime method name
+from Rerun's reset message. The Finale entry now describes the actual item and
+250-kcal memory controls rather than an unavailable ability-charge payment.
+All40 counter species pass actual teaching/speech/knowledge assertions; six
+fight cue paths and a fifth-round reset pass. No numeric/data-structure changes.
+Maintenance instructions: docs/COMBAT-WRITING.md; path inventory and limits:
+evidence/2026-10-24/combat-writing-census-r2.json.
+
+Turn cards now put the actor inline with two narration lines and a complete
+fact row. Final-revision prepared Ad journeys pass at390x736 and390x844 with42
+trusted touches, whole paid Continue and retreat endings; rendered screenshots
+inspected. This does not establish every sibling's mobile flow, Details, physical
+audio, every conversation or release readiness. Earlier CSS-only clipping pilot
+is retained. Existing source-bound browser/measurement receipts remain stale;
+no full pass, integration, owner approval or publication is claimed. Keep the
+rolling release goal active and refresh actual combined-source proofs after
+the pending reconciliation decision, without replacing old hashes by hand.
+
+## Active bounded milestone: durable native combat input
+
+Saved review68f8864ba addresses the fast native Strike checkpoint gap and hidden
+synchronous rounds after final movement/full-turn stun. Its checkpoint15/0 and
+actual two-height phone gate15/0 include immediate committed HP/deeds, announced
+actor Continue, spent budgets and actual retreat. Failed pilots remain retained.
+See evidence/2026-10-24/combat-input-durability-audit-r1.md. These receipts bind
+that saved source; subsequent Ad/UI changes require actual fresh runs.
+
+Steve's Ad writing complaint exposed design notes shown as prose and turn cards
+discarding narration whenever HP facts existed. The local review work replaces
+the copy, keeps short narration with outcome facts and gives storage failures
+priority in the existing message area. Actual quota/retry/paid Continue ran at
+both sizes, with the hidden-warning failure retained. Longer commercial play
+also found duplicate rider IDs and Continue dropping three riders/resetting the
+paid turn. Canonical combat-only definitions and recorded-slot legacy migration
+now have shared-kit8/0, including actual old native bytes and missing-hook
+controls. Independent rider pursuit after the glyph disengages is corrected and
+recorded in SURVIVAL-LEVERS. No numerical attack/heal/pressure tuning.
+
+Eight final-runtime native journeys now pass at both heights: commercial/skip,
+legacy-rider interruption, quota retry and immediate input/Continue,114 trusted
+touches and173 identical loaded source identities. The entire spoken sponsor
+line fits actual clipping bounds; outcome facts can still clip beneath it when
+a danger cue shares the area. Input receipt gate15/0 is freshly updated from
+actual runs. See combat-ad-review-r1.md and combat-ad-final-native-census-r1.json.
+Other source-bound phone/installed and real observer-maintenance receipts,
+fresh final-source quick/full, reconciliation with public327e16b69, owner review
+and ship-loop publication remain required. Early quick375/23 predates the last
+copy shortening and pointer refresh; it is not final-source clearance. Saved
+sourceeb2e01397 now has fresh quick376/22 in305s; all22 remaining failures are
+stale browser/measurement receipts. No full pass or release clearance. The latest supplied
+AGENTS divergence rule requires direction before integration; both tips are
+preserved and a normal three-way review merge was requested. No origin push or
+deployment. Runtime9d remains frozen. Continue day150-intolerable/day180-
+exceptional assessment and the earned boss approach after this bounded repair.
+
+All three public caps now reach actual community-loss endings1039/1074/1359.
+Twelve jobs, six real trace-off controls and three full state/context/RNG/clock
+prefixes pass; original1000 rows/state/all29/gear exactly reproduce. Nine
+damaged linkage copies are rejected. No recovery/forced turn or10000 extension
+is needed. Preserve original capped screen rows and all candidate warnings.
+All three lack the used-feast-power deed, which also leaves public Table-linked
+overtime dormant; this supports calendar-floor intent, not coefficient adoption.
+See publicb3-cap-audit-r1.md. Actual saved source1e76f4271 now passes full1165/0
+in1141s, two quiet workers, unchanged120s limit (clock85s). Next replay the first
+natural day150 encounter for maker63003 from the candidate panel, followed by
+phone-size tactical play, committed Continue and actual feast-power opportunity
+assessment. The plan is day150-phone-plan-r1.json, selected before capture.
+No coefficient/default adoption; runtime9d remains frozen for review.
+
+Initial source-exact screen completes400 jobs with all29 and lossless original
+controls. Candidate64 endings/latest292; public three1000-iteration caps and
+three separate input recovery cases. All policies remain review_required;
+maker/caregiver community losses rise2→9/16 alongside win changes. No tuning.
+Gardener one eligible offered pair/64 attempts remains insufficient. Next
+continue public merchant63003/63015 and caregiver63002 to3000 then10000 if
+needed, preserving original1000 row/state/all29 linkage. First repair the
+terminal-audit tool's hardcoded origin/omitted explicit region; never silently
+change the main panel's inputs. Then inspect natural candidate day150 losses
+and expand offered-job coverage. See publicb3-current-study-audit-r1.md.
+
+Exact Git Game roots are now prepared under one current toolset:32 manifested
+Game differences,322 copied inputs per arm. Constructor source/dependencies
+are fingerprinted; real refusal/byte-preservation tests pass8/0. Preregistration
+pins16 seeds per original four policies at1000 iterations plus actual neutral
+controls, and a separate64-attempt offered-gardener cohort with explicit
+exclusions/controls. No balance verdict follows from preparation. See
+publicb3-current-input-audit-r1.md for construction/check status and resumable
+commands. The aggregate release comparison does not isolate calendar causality.
+
+The selected livelihood guard derivation is complete. Pure retained-data
+reader validates complete reductions and all nine long-case buys, rejecting
+eight corrupted actual traces. Before60 iterations, on's26 observed purchase
+checks are all below the1200 policy buffer; off has21 of27 below and two buys.
+This narrows the selected early discrepancy to usable finished-food barter
+value before payment, without establishing why or a cohort-wide cause. Do not
+tune Game prices/defaults from it. See ledger-trade-guards-audit-r1.md.
+The original four-policy panels are now retained with all29. The follow-up
+above completes their caps and investigates warnings without substituting an
+easier controller or restoring wins.
+The fully verified runtime9d8c5c427 stays frozen for review.
+
+Fresh fetch finds public master/main b3c5ea6e3 beyond8c43. Normal three-way
+review merge62d9ab374 preserves both histories without conflicts. Fresh
+31-profile/62-job observation maintenance passes. Native570773950 now executes
+and validates all18 previously stale phone/installed groups. Actual same-body
+Deer completions, both Table profiles and latest publicb3 upgrade/offline/
+rollback are retained. Frame verification now binds the actually executed
+recipes and original saves. Saved ec4172cbe now passes quick391/0 and full1163/0
+in158s/1127s; the quiet full retains the unchanged120s limit and clock passes117s.
+All earlier failures remain retained. Matched current-source calibration,
+runtime-owner review and ship-loop publication remain open.
+See publicb3-native-refresh-r1.md. Preserve Muse's
+preserver occupation coverage, living-raider filter, friendship/gossip work
+and deliberate removal of the default-off blood-restraint experiment. Do not
+use old-source green checks or panels as current combined-source clearance.
+
+Steve's day150-intolerable/day180-exceptional requirement stands. One selected
+natural merchant50012 day150 replay exactly reproduces its original row/state/
+all29/gear and records23 public actions: bearer100→14HP, three companions flee.
+It is a partial encounter trace, not a boss fight, native phone proof or a
+cohort calibration result. Next danger assessment must distinguish actual
+fight injury/deaths/retreat, succession and earlier wins from safe late survival;
+continue selected long cases to actual endings. Keep all29 and earned boss
+requirements. See day150-merchant50012-combat-audit-r1.md.
+
+Runtime review tip9d8c5c427 is saved, fully checked and delivered as a single
+public-history bundle in issue2 comment6384550916. Its issue-body index is now
+current, and primary has the exact review tip/tree. No approval/deployment.
+
+The separate livelihood-probe-v2 branch corrects canonical equipped slots,
+adds available policy caller context and versions output/configuration/cache
+identity. Prepared11/0 and eight actual selected replays preserve original
+whole rows/state/all29/gear, real neutrality and prefixes; six/seven worn slots
+now appear. Actual tool source4c2a94ec0 passes quick391/0 and full1163/0
+in189s/1347s, with the unchanged120s limit. No earlier pass is substituted.
+R1 snapshots remain invalid for worn-gear eligibility. Transaction counts and
+balanced gear/all29 were unaffected. The corrected source and actual replay
+controls are shared in issue2 comment6384772479. Next reconstruct the actual
+raw-price/budget checks and validate their correspondence with recorded
+purchase attempts, retaining missing-credit/stock/branch coverage as unknown.
+Do not promote defaults or tune Game rewards from this selected old case;
+see livelihood-probe-v2-audit-r1.md. Keep the
+verified runtime candidate frozen while pursuing this tool-only lane. Then build
+fresh matched publicb3/current Game panels with identical current controls;
+old8c43 panels remain historical. No reward/default/pressure promotion from wins.
+
+## Livelihood opportunity probe retained; controller correction remains open
+
+Native/installed verification is complete at800a59ce2 (quick390/0, full1162/0)
+and source is delivered in issue2 comment6382859573 for owner review. Publication
+and the calendar tradeoff decision remain pending. The preregistered next
+study completes136 jobs, all128 observed real endings, stable sources, eight
+neutral matches and no recorded harness interventions. All29 flags remain in
+the scoped report: wins improve in three profiles, while hunger rises and
+maker/merchant craft-trade gear access drops8→2/7→3 of16. No default promotion.
+Selected maker50003 early-state/prefix audits now reproduce original whole
+rows/state/all29/gear exactly. Trade access already differs by day60/61;
+Passive work/market probes now reproduce original rows/state/all29/gear and
+all eight neutral/prefix jobs exactly. Selected off/on buys7/2 and sales19/2
+all succeed; most of the difference precedes a payment attempt. Recorded Haven
+queries are mostly true in both arms, so a blanket away-from-Haven explanation
+is insufficient. Distinguish finished-food budgets, meal-buffer guards and
+stock progression before correcting the controller. See ledger-screen-audit-r1.md
+and ledger-maker50003-work-audit-r1.md.
+Do not mutate the frozen roots/shared observer or tune Game from these wins.
+
+## Verified candidate: owner review and calibration remain
+
+Ledger instrument2473639ea is delivered in issue2 comment6381868207. Game and
+browser runtime remain frozen. Source-current Strike, held-answer, combat-turn,
+Haven food, camp sightings, village visits, caretaker, crew, Haven stations,
+ability activation/availability and equipment native gates pass both phone
+sizes with committed Continue. Arrival, heavy carry and six-case body search
+also pass. Both late/non-god Table endings now complete at both sizes, with
+whole mid-act Continue, empty godhood maintained for the non-god case and
+persistent Records. Installed public8c43 upgrade/offline/rollback also passes
+both heights:178 cached text inputs and two icons at each of five stages,
+full native save bytes and exact migration/Continue. Quick390/0 and full1162/0
+close all17 stale groups. This is verification, not calibration or publication.
+Aggressive Deer replay ends in death/succession,
+not victory. Separate tactical touch replay now earns same-body Deer kills at
+both sizes; exact starting resources, actual kill credit and full Continue
+validate independently, including12 rejected faults. Earlier14
+dirty proof/adapter files have recoverable exact-byte external snapshots;
+all14 proof/adapter files are now finished through actual evidence. See
+evidence/2026-10-24/native-proof-refresh-r1.md and installed-public8c43-audit-r1.md.
+Runtime-owner review and ship-loop publication remain required. Next bounded
+measurement: preregistered16-seed/profile ledger strategy screen, all29 domains,
+with an exact controller-only off arm. It now has a valid review-required
+report and exact selected prefix audit; work/market eligibility remains under
+investigation. See ledger-screen-audit-r1.md.
+Keep day150-intolerable/day180-exceptional and existing community warnings;
+no numerical calibration or default promotion follows from passing checks.
+
+## Current: explicit ledger-seeking controller trial
+
+Maker/merchant/caregiver intentionally disable hunts; retain that baseline.
+The new named ledger-aware-* family adds deliberate exploration/hunts while
+keeping existing paid ending/counter and livelihood hooks. Prepared18/0 and
+selected merchant99 off/on produce exact parent loss299 versus wave4/win90,
+with worse first-bearer survival/hunger/class-access observations. This is a
+controller experiment, not Game balance clearance or automatic improvement.
+The normal Game comparator correctly rejects changed policies. A separately
+scoped all29 report retains that rejection and requires exact one-file source
+ablation; never loosen the standard comparator. See LEDGER-AWARE-SIMS.md.
+Coherent diagnostics,31-profile neutral maintenance, sampled exact original27
+compatibility, portable-control6/0, scoped-report6/0 and full1145/17 now pass
+their intended core scope. All17 failures are existing stale native/installed
+gates. Share the source before wider matched controller probes or Game
+calibration. Next bounded release work is refreshing those actual native gates
+against the frozen runtime; a selected win is not calibration. Game pressure,
+bars/caps, rewards and original non-hunters remain unchanged.
+
+## Current: merged-source screen and full native Siege contest
+
+Fresh Muse8c43 off/on64 panels validate all29, exact recorded pre120 prefixes
+and source stability. All on cases end; latest299,20 reach180, so eliminating
+caps does not establish Steve's intended day150 danger. Mortality/community/
+NPC progression warnings remain open. The two off caps have real endings:
+merchant555 wins650 and caregiver6 wins604, with exact neutral/prefix controls.
+Original capped rows stay unchanged. No coefficient adoption from wins.
+Both phone heights complete the three authored Siege TV waves and whole native
+Continue from the actual pending saves, with no starting resource/actor edits.
+This is a contest, not a Haven world raid or a full mobile campaign. See
+evidence/2026-10-24/muse8c43-calendar-audit-r1.md. Next actual cap endings,
+named cohorts/long-tail opportunity analysis, remaining native/installed/full
+gates and runtime owner review. Known presentation follow-up: "You WINS" card.
+
+## Current: newly shipped Muse8c43 reconciled on the review branch
+
+After the frozen screen, public advanced to8c43b6b04. Normal three-way merge
+preserves both it and saved956a8bea6 without source conflicts or changes to14
+prior dirty proof files. Syntax/ontology pass; runtime verification is fresh
+work. The128 main rows and all source-bound phone evidence below retain their
+original source identities and are historical for this combined code. Reobserve
+both roots under one current collector/controller before calibration, and rerun
+actual native receipts before release. Ship loop retains every origin push.
+See evidence/2026-10-24/muse-8c43-reconciliation-r1.md. A single public-history
+review bundle replaces chained private prerequisites for the next handoff.
+
+## Current: composed calendar screen reaches real endings; inspect decisions
+
+Same-controller off/on64 pairs now complete, all29 errors=[]/review_required.
+On root all64 end by264; the sole off-root cap has a controlled real win648,
+with exact original600 row/state/all29/gear and prefix/off proof. Original capped
+panel stays unchanged. Wins within600:15→14,15→10,15→10,14→8. At onset120,
+3 capable runs remain versus10 maker,9 merchant,13 caregiver; recorded pre120
+resource/action prefixes match. Do not equate exposure with combat competence
+or try to equalize win rates. NPC progression/mortality tradeoffs remain open.
+
+Real day158 trace shows round damage, not safe grinding. Native736/844 validates
+the nine-body siege's Wait, legitimate sealed exit refusal, Strike and whole
+pending Continue; this is not siege completion. Both fresh16-stage general phone
+journeys pass. Next continue that native fight, audit public counter/opportunity
+coverage and the delayed feast-use road, then named cohorts and remaining release
+proof. No further numerical retune or release clearance from win totals alone.
+See evidence/2026-10-24/calendar-composed-audit-r1.md for all evidence/limits.
+
+## Current combined review: paid counterplay before calendar calibration
+
+Next screen uses explicit endgame-counter-aware-* composition so the same
+simulated player knows both real paid counterplay and the existing feast-use
+ending road. Real integration6/0 and reward143/143 pass; original experiment
+families/defaults unchanged. Fresh simulation-only off root differs at exactly
+one JSON flag; actual day1 paired preflight reproduces rows/state/all29/gear.
+This isolates calendar pressure on corrected combined code. It is not the
+published baseline comparison. See COUNTER-AWARE-SIMS.md for repeatable setup.
+
+Public-parent00a plus the scoped501..09149 port preserves both agents' work.
+Fresh combined native736/844 completes four paid Strike promises and two full
+Continues; actual23-policy neutrality passes, measurement9/0. Core checks pass.
+Next share the review branch, run identical current controllers/observer on both
+roots and inspect actual day150 danger across all29 before choosing coefficients.
+Day150 is already intended intolerable; day180 is exceptional survival. See
+evidence/2026-10-23/calendar-counter-public-port-r1.md. Earlier private panels
+and stale native receipts remain historical; owner/full/release gates are open.
+
+## Current: day150 pressure must not depend on Table deeds
+
+Follow-up: actual paid counterplay and separate full-footprint arenas now pass
+prepared native736/844, including unpaid-turn Continue and actual settlement.
+Explicit counter-aware policies leave defaults unchanged. Native gate15/0,
+payment19/0,arena16/0,controller8/0;23-policy neutrality proves observation only.
+Next reconcile latest Muse/public source and measure identical current
+controllers on both roots. See COUNTER-AWARE-SIMS.md and the retained
+strike-counter-arena-audit-r1. The first screen remains historical.
+
+Existing THE NETWORK/overtime road is implemented but its Table gate shelters
+stalled long runs. Steve's day150 intolerable/day180 very long guidance now
+drives a calendar-floor candidate using the same monster/raid coefficients,
+including NPC world fights. Three earned titan victories and actual nine-node
+boss/key challenge remain. Initial onset120/weekly schedule is provisional;
+pressure keeps rising after180 while pack/grid additions stay bounded.
+Real engine29/0 and existing overtime/network40/0 pass. Natural day464 touch
+replay/Continue passes736/844 after the background-successor name fix, with
+zero page errors. Current16 matched seeds x4 policy before/after all29 and
+19-policy neutrality now passes; candidate64 endings finish by236 with no caps.
+The initial settings are NO-GO: exact merchant99 trace proves a362-round safe
+grind after existing rerun logic clones/scales passive The Strike in a Pit.
+Next separate actual danger from HP/duplicate-mechanic inflation; preserve this
+case as a pacing regression, do not approve numbers from reduced wins. Broad
+quick351/21 retains19 stale browser proofs and2 since-refreshed measurement
+proofs (focused8/0). Final combined native/full checks remain pending.
+See SURVIVAL-LEVERS.md. Current Muse reconciliation and combined source-fresh
+release proof remain required; no publication clearance is implied.
+
+## Current: smarter ending pursuit exposes late-phone Continue crash
+
+Explicit ending-aware-* prototypes reuse paid surplus feasts and useful learned
+healing without changing defaults/difficulty/deed requirements. Real engine14/0;
+reward contracts111/111. Exact current-Game parent controls preserve original
+whole rows/states/all29/gear. Selected merchant6 changes loss931 ->win465;
+actual day464 public treatment pays140 kcal for30 HP and real healing-use credit.
+All29 retained, with NPC access/intake/hydration tradeoffs; no adoption claim.
+Native replay of its unedited checkpoint catches Haven summary's static-cast
+name lookup crash for a background successor. Fix and rerun actual phone/save
+verification before publishing. Read docs/ENDING-AWARE-SIMS.md; next full
+controller adoption screen is16 matched seeds x4 profiles, then holdouts as
+appropriate. Existing R5 remains historical; reconcile current Muse/public
+source before any final paired Game calibration or ship-loop release.
+
+## Current: long-run ending bottleneck isolated (2026-10-23)
+
+All8 main R5 alive600 caps now have actual endings:1 win710,7 community losses
+665–1147. Exact600 original row/state/all29/whole-gear and full extension
+observed/off/prefix controls pass. Five reachwave5,threewave4; losing runs span
+4–11 player deaths. Actual terminal seat APIs find only feast power use missing
+in all7 losses, not missing wave/contest/rank bars. No final reactor is online.
+Exact passive replays: capable8 never hosts a feast; merchant6 grants8 real
+feast buffs but never spends one. Livelihood fight-seeking is intentionally
+disabled; competent ending pursuit has not been demonstrated. Next: instrument
+actual missing-deed opportunities/refusals and repair controller pursuit,
+including public noncombat power uses. Preserve all29 and hard difficulty;
+do not loosen Table gates or call long survival a successful late-game test.
+See evidence/2026-10-23/r5-long-run-diagnosis.md. Combined native reconciliation
+verification continues separately; no publication clearance is implied.
+
+## Current: R5 main complete; newer-public review merge prepared (2026-10-23)
+
+All112 matched cases/root now complete. Main wins capable12->16, maker12->13,
+merchant8->12, caregiver13->15; all29/errors=[] remain review_required with
+survival/mortality/NPC-access/hydration warnings. Eight alive600 caps (six before,
+two after) are being replayed toward real endings with exact prefix/off controls;
+never relabel them losses. Before capable8 reaches loss665 in both controls so
+far; aggregate audits still running. Food-prefix replay first shows day4
+caretaker choice changing to Aria's correctly recognized earned gardening kit,
+well before crops. Do not blame plot yield alone or restore old wins.
+
+Actual normal three-way merge23ed preserves d426 and latest public10ccb. Sole
+conflict retains both real board bounds and Muse's consumed/stuck-flee checks.
+Two obsolete mocks repaired without changing32 assertions, passing against both
+exact controller blobs; test-only followup793f3dc4a is the current review tip.
+Active R5 roots stay unchanged. Combined actual Game/mobile/save/cache and final
+gates remain pending; older d426 green cannot certify793f. See
+evidence/2026-10-23/r5-main-and-reconciliation-checkpoint.md and raw checkpoint.
+
+## Current R5 payoff checkpoint and newer Muse intake (2026-10-23)
+
+Actual d426 review source passes quick369/0 and full1141/0. Frozen R5 named
+screens now complete: Ohio grower12->14 wins, Sahel14->14, native-grid maker
+10->7, each16 matched seeds/root. All96 named cases end in Game, no caps. All29
+remain review_required: food/community/gear/access and first-bearer warnings
+need investigation; win ordering alone decides nothing. Main before is done;
+main after remains active. Exact seed555 off/on replays prove actual day30
+starvation/scattering, with a day23 plot and paid growth but no harvested food.
+Next trace early food decisions/opportunities rather than buffing yields.
+
+Fresh public10ccb1af5 adds Muse's contest-news lane, crisis labels and truthful
+meal-share wording; preserve them. A normal merge preview finds only one
+competent.js conflict: retain dynamic board bounds AND incoming default-off
+consumed/stuck-flee verification. Do not modify frozen R5 inputs mid-campaign.
+Finish current comparisons/real endings, then review-branch reconcile and
+refresh combined proof. See conference-payoff-checkpoint-r5.md and its raw
+r5-cohort-checkpoint-r1 receipts. Earlier520-based passes do not certify10ccb.
+
+## Current conference follow-through: input fidelity before calibration
+
+Muse's conference foundations and P1 implementations are retained in the
+normal520 reconciliation. Character-level variety after succession remains
+the design direction; Founding Oath/hunt pity remain rejected. Higher-value
+Codex work is proving useful choices and payoff through complete campaigns,
+not adding duplicate motivations or tuning toward a target win rate.
+
+R4 revealed another concrete controller defect: expired/fled enemies with
+positive HP are selected for repeated refused Strikes. Fix live target selection
+and its siblings (large grids, target footprints, weighted movement) in shared
+public-action control. Prepared before0/6; after14/0 includes all six controls
+and actual12/24-cell geometry. Preserve R4 as diagnostic history. Next R5 uses
+the same corrected controller on both roots, fresh neutrality and actual
+endings; then finish the public520-parent port's full gate and owner review.
+See evidence/2026-10-23/conference-input-fidelity-r1.md. No Game tuning or
+publication clearance is implied.
+
+## Active: reconcile Muse's new public520 batch (2026-10-23)
+
+Second input blocker found by R3: current grid-maker8's bot repeats an
+unaffordable200-kcal Ratings Summons choice while free alternatives exist.
+Actual passive trace exactly matches the full original panel row/all29/state/
+gear; prepared zero-food case is RED, funded case GREEN. Finish/save frozen
+R3 inputs before the next common-controller correction; no Game-price tweak.
+See contest-affordability-audit-r1.md. R3 is diagnostic, not final input clearance.
+
+Affordability correction is now implemented without Game changes: both capable
+and fallback use the public declared kcal gate. Zero/funded real summons paths,
+actual payment/resolution, dangerous options and arena suspension pass16/0.
+Monster turn14/0 and harness input13/0 remain green. Save/share before R4
+neutrality/paired calibration. R3 quick365/0 covers its earlier controller;
+do not reuse it as the new revision's full clearance.
+
+Current bounded milestone: monster-policy end-turn fidelity. A prepared real
+shared-harness probe finds competent/capable directly write fighter budgets
+and call tbAfterPlayerAction. With0 movement/1 action, a strike auto-advances
+then that helper spends the NEXT turn:2 rounds instead of1, no public Wait.
+Fixed and shared at a98eb8e1c: use the existing same-turn public finish helper
+for monsters as for humans (14/0; human10/0; grid14/0). Standard rows now expose
+harness recovery/guard conditions with explicit historical unknowns (13/0).
+Iterative quick363/2 fails only the stale canonical measurement proof checks.
+Fresh identical-controller R3 screens and15-cohort neutrality are running;
+do not relabel R2 or interpret different controllers as Game-only changes.
+Keep Game/reward/NPC numbers frozen; prove actual calls/rounds and rerun BOTH
+roots with the same corrected controller. R2 panels below remain historical
+heuristic evidence, not certification of mobile-equivalent combat.
+
+The new coverage already finds public520 capable2026's real day32 stall:
+ability then pursuit crossing consumes the remaining movement without ending
+the spent turn.18,664 Wait calls and one harness recovery; the existing
+combined barrier-settlement repair gives195 Wait calls and no recorded guards
+or recovery in the selected candidate control. All original whole rows/all29/
+states reproduce under passive tracing; focused barrier12/0. This confirms an
+already retained repair, not a new difficulty lever or population claim.
+
+Final fetch after gear1367/full1134 revealed public520dbbd7a, including real
+conference P1 runtime changes. Prior529 remains common ancestor; preserve both
+tips with a normal review merge. Pre520 gear proof is saved/shared for review,
+not clearance of the new combined source. Three inspected overlaps: retain both
+survival records; combine armor donation with Pack action grouping/curio hint;
+return displaced gear ONCE, preserving Muse#806 intent and whole-instance,
+stack and mass conservation. All other Muse changes auto-merge by history.
+Do not replay two displacement returns or replace either whole tree.
+
+Eight selected Muse owner regressions and equipment14/0 pass. Fresh six native
+gear journeys/Continue and their12-check source gate pass;736 armor Pack image
+shows returned Robes plus Muse's Armory action in one frame. Initial combined
+quick341/21 fails only source-bound browser/measurement receipts; gear has since
+been actually refreshed. Remaining current mobile/cache and common-observer matched screens,
+selected actual endings and full gate. Preserve new successor identity/meal,
+NPC motives/retargeting, graves, seeds, knowledge quests and nightfall behavior.
+Earlier balance warnings remain open. Full combined gate is pending. No combined release clearance yet.
+
+Verification checkpoint before that controller correction: all browser/cache
+families actually replayed, published520 installed/cold/offline/rollback pin
+matched178 canonical text inputs at both heights, fresh quick363/0. R2 has112
+matched cases/root across seven cells and15-cohort neutrality. All comparisons
+remain review_required.24 selected cases/root reach real engine endings, up
+to1065 before/849 after; two before endings used a time-freeze harness route
+(grid-maker555/garden9), all24 after have0 such routes. Seven600-iteration live
+caps are represented; unfinished prefix audits were deliberately stopped on
+finding the policy fidelity defect, never relabeled complete. Preserve them.
+
+## Saved pre520 for review: conserve gear when equipping and taking it off (2026-10-23)
+
+The next utility trace found actual item destruction before reward tuning:
+two controlled natural maker5/merchant7 campaigns match their original whole
+rows/all29/state and show five worn-item disappearances during Equip. Prepared
+public swaps and stacks are0/3; the broader core proof is2/12 on the exact
+caretaker R2 before root. Current repair14/0 returns the displaced item, wears
+one stack unit, preserves whole instance metadata and real weight on take-off,
+and normalizes legacy Equip weapon/armor requests. No gear statistics/prices changed.
+The before root is a425-file thin snapshot at972f2a17a, not another worktree.
+Source remains frozen.112 matched cases per root cover seven policy/cohort
+cells, including actual grid travel;12 selected cases per root reach controlled
+endings. Maker8's current live cap ends loss636 with exact600 prefix. Six
+prepared native phone swap/stack/Continue flows pass. Fresh quick362/0 passes;
+full1133/1 hit a travel timeout, isolated rerun passes in3s and reduced-concurrency
+full rerun passes1134/0. No assertions/time limits relaxed. Maker mortality and
+community/access/gear warnings remain open; unchanged wins do not clear them.
+
+Scope: physical ownership, stacks and usable equipment, not numeric reward
+calibration or wiring every advertised special effect. Missing exact-name code
+references for Ghost Camo/Living Soil Robes are leads, not proof by search alone.
+Next: complete full gate and owner-review handoff, then trace acquired gear's
+actual actions/special effects and meaningful noncombat choices. Preserve current
+caretaker source3a0 and all failed proof attempts. Do not tune away honest
+carried mass or discard conserved items to restore an earlier win rate.
+
+## Saved for review: paid cultivation despite surplus, corrected R2 (2026-10-23)
+
+Runtime candidate repairs the identified dispatch gap: own eligible NPC magic
+can progress immature crops during surplus; successful cast consumes duty,
+preserving hunger/daily limits/task priority and normal fallback. R1 omitted
+normal garden trust and completed-task history; it is failed historical evidence,
+never a runtime commit or release. R2 restores both. Core16/0, isolated
+cultivation41/0 and six native phone appointment/Continue cases pass; automatic
+caretaker phone hook11/0. No numeric crop/raid tuning. Fresh R2 screens cover
+64 core plus16 Ohio grower and16 Sahel cases; two core cases are alive at600,
+with actual later endings retained below. Canonical15-cohort neutrality passes.
+All six16-pair comparisons remain review_required. Capable low-food exposure
+increases despite more wins; grower/Sahel wins decline. Six new actual losses,
+two caps and selected food-payoff cases now have controlled full replays, with
+explicit region identity. Maker7 ends win616; merchant6 loss658, both exact600
+prefixes.13 selected cases per root reproduce controls/endings; two extra
+character traces reproduce the reserve-warning cases. Combined mobile/cache
+witnesses are refreshed. Quick360/0 in171s; full1132/0 in832s after isolating the
+expensive clock proof without changing its seeds/assertions/120s cap. Tradeoff warnings
+remain. See caretaker-r2-audit-r1.md for current proof and next boundaries;
+see caretaker-surplus-audit-r1.md
+for failed R1 history; current R2 evidence uses caretaker-r2 prefixes. Not shipped.
+
+Next bounded Codex lane after handoff: trace naturally crafted/traded gear
+through acquisition, actual useful effect and a successor's phone Wear/Continue.
+Distinguish high-tier weapon/armor counts from tools and actions they enable;
+zero tier3 gear does not establish a dead livelihood. Use current unchanged
+policies, actual endings and off/on controls before deciding on a mechanics
+repair. Muse retains numeric reward/pricing and NPC motive ownership. No new
+gear tuning or pacifist claim is authorized by the existing mixed-policy wins.
+
+## Earlier diagnosis: caretaker cultivation and food payoff (2026-10-23)
+
+Three selected full campaigns now exactly reproduce original rows/all29/state,
+each with observer-free control, actual endings233/501/38 and zero watchdogs.
+All have zero recorded garden harvest/intake. All160 recorded crop losses
+precede derived maturity; daily samples never see ripe beds. This does not prove
+general nonviability or a broken harvest action. Redirected duties STILL tend
+beds; do not mistake them for neglect. A shared-harness dispatch probe confirms
+surplus redirects skip usable paid NPC cultivation: duty0growth, explicit engine
+cast4growth/8own-hunger,0player food. See caretaker-payoff-audit-r1.md.
+
+Next narrow correction: distinguish cultivation of growing crops from surplus
+harvest production, preserving food costs/daily limits/task priority and all
+growth/yield/raid numbers. No runtime change yet; keep sourcea3/verified7e frozen
+for integration. Balanced cohort warnings remain. Muse keeps numerical and NPC
+motivation ownership; Codex owns this garden dispatch/payoff boundary.
+
+## Active: earned camp location and fog-safe Visit (2026-10-23)
+
+Candidate records sighted camp locations separately from explored ground.
+World-generated camps can be newly sighted; Map/Visit accept earned locations,
+without terrain/visited/deed credit. Core15/0 and four actual phone crossings/
+Map/range/paid-talk/whole-Continue journeys pass; source-bound proof13/0. Prior
+six village deal/payment flows are refreshed. Known camp markers and the player
+face bypass the old terrain fast path; the map remains for viewing.
+
+Core64 paired cases preserve all29 metrics exactly. Named16-pair gardener and
+16-pair Sahel/Dakar screens remain review_required; water/NPC-class and community/
+gear/access warnings stay open. Old auxiliary "visits" meant attempts, including
+unreached trips. New schema2 census separates attempts/range/paid calls/actual
+observed agreements; balanced29 is unchanged. Core caregiver6/8 caps in both
+roots reached actual losses day1138/764, with exact prefixes and observer
+controls. Final quick342/15 and full1114/15 retain the15 stale mobile/cache
+release gates. Saved a3f842637 delivered for Muse review in issue2 comment
+6364798017; no adoption/publication inferred. See camp-sighting-audit.md.
+No publication or completed release-gate claim.
+
+Combined-source verification follow-up now passes quick357/0 and full1129/0.
+All15 stale mobile/cache families have real fresh journeys, including current
+public529 installed update/offline/rollback and both late/non-god Table endings.
+See camp-release-verification-r1.md. First carry replay failure is retained with
+unresolved cause, not a claimed product fix. Owner/ship-loop review, physical
+device coverage and named-cohort balance warnings remain. Freeze runtime through
+integration; next substantive goal is caretaker scheduling and paid garden
+action -> harvest -> safe meals -> actual nourishment, preserving Muse's lane.
+
+## Water-safe optional visits; next earned camp discovery (2026-10-23)
+
+Explicit water-safe gardener controller requires real hydration/clean carried
+water at optional departure/arrival/actions, preserving the unsafe r1.23 focused
+checks pass. Fresh15-cohort neutral maintenance and16-pair screen retained;
+57 offered actions have no unsafe starts, but comparison stays review_required
+(class access watch; low-water exposure barely changes). Four selected actual
+endings have exact observer controls; all16 unsafe results reproduce r1 exactly.
+The shared long-audit --case-plan replaces bespoke selected-case runners.
+
+Next player-facing boundary is reproduced on both phone heights: actual smoke
+narration names a nearby village, but the map still calls it unexplored and
+the adjacent Visit action is absent. Fix checkVillageProximity's earned
+per-bearer discovery/provenance, keeping fog/visited deeds honest. Prove sighting
+-> Map -> real Visit -> native Continue before measuring both exact Game roots.
+No crop/food/raid tuning or default bot adoption. See garden-water-audit.md.
+
+## Active: diplomacy-aware garden controller screen (2026-10-23)
+
+Opt-in garden-diplomacy-control/visit retain the same garden-invest-expand
+brain and unchanged Game. The visit arm requires live crops, known generated
+neighbors, personal reserves and one attempt per7 days. Only diplomacy travel
+uses actual grid approaches/cardinal exits; this does not certify every other
+base-policy movement. Actual Sit and talk builds trust; live offered actions
+permit split at the visible trusted tier or tribute after three community
+days of pantry reserve. No raw exact trust, hidden strain or remote deal
+calls drive decisions. Interrupted/changed-bearer/day journeys stop.
+
+Focused shared-kit proof15/0; completed paired16-seed screen remains
+review_required:85 visits,248 grid crossings, three deal-bearing campaigns,
+but water/needs/class/community warnings. Fresh14-cohort neutrality passes.
+Four selected full endings have exact off/on controls and zero watchdog routes;
+eight selected boundary replays match full rows/all29/hashes. Seed6 starts
+actual talks at hydration0,0,86,8: optional diplomacy needs water safety before
+calibration. Preserve r1 and its warnings. Next bounded goal is a water-safe
+controller revision, compared against r1 with all29 and actual endings; then
+warning/discovery/counterplay and useful-meal attribution. See the dated garden-
+diplomacy audit. No crop/food/raid tuning or pacifist viability claim.
+
+## Active: make noncombat counterplay reachable (2026-10-23)
+
+Garden-loss attribution now distinguishes real neglect from commons raids;
+selected maker/caregiver replays show substantial raid losses. Existing
+policies never attempt village diplomacy, so those campaigns do not establish
+diplomacy-aware gardening viability. Do not remove raids or shorten crops to
+restore an old win rate. See garden-loss-attribution-audit.md.
+
+The phone's neighboring-village renderer was disconnected from the live Map.
+The review candidate adds a known nearby Visit action under Place and one
+bounded reader for actual village services, shared-ground choices and naming.
+Six prepared phone flows prove split, paid tribute and insufficient-food
+refusal at both heights; two sibling flows prove real naming. Pending and
+completed discussions survive native Continue. No numerical engine changes.
+See village-visit-audit.md and MOBILE-PLAYTEST.md for scope and repeatable proof.
+
+Next: diplomacy-aware garden campaigns using physical travel and real offered
+card actions, retaining every balanced metric and complete selected endings.
+Keep the earlier canonical-garden mortality/community/hydration warnings open.
+Source-bound release receipts and owner review remain required before ship.
+
+## Active: character decisions after the conference (2026-10-23)
+
+Concrete follow-up found and corrected locally: canonical NPC garden IDs
+were invisible to gardenMagicPlan. Public-grant proof1/3→14/0; paid personal
+practice and actual succession preserve the grower's mastery. Six matched
+cohort cells (16 seeds each), six exact passive replays and all four capped
+campaigns' played endings are retained. All comparisons stay review_required:
+maker population/death and Sahel hydration warnings need investigation.
+Next: caretaker selection/scheduling and paid garden action→actual food
+payoff; do not tune for old win rates. Latest full1105/17, all remaining
+source-bound receipt gates still block release. See the dated canonical-
+holder audit and SURVIVAL-LEVERS; no publication is claimed.
+
+Codex owns natural-succession/action exposure on
+`codex/roguelike-character-decisions-20261023`. Normal review merge
+`bfc64bb99` preserves Muse529 and Codexa38. Conference P0 foundations are
+present; they do not establish distinct playable builds. Steve's later
+character-level directive supersedes Founding Oath, which is rejected.
+
+Next bounded milestone: make the character audit repeatable and control-
+checked, then use actual opportunities and payoffs to choose a specific
+mechanics/playability correction. Track complete campaigns, including late
+successors and losses. A maker/merchant/caregiver win using shared combat
+does not establish pacifist or livelihood viability. Preserve shared Codex
+skills per Steve's explicit rule. No gameplay tuning or release clearance
+is implied by this diagnostic milestone. See docs/SIMULATING.md and
+evidence/2026-10-23/character-decisions-audit.md.
+
+## Active: overnight body HP settlement (2026-10-23)
+
+Branch codex/overnight-body-health-20261023 starts at verified7e88dc146. Fix the
+actual endDay boundary where resolved starvation/dehydration debits scholar HP
+after a fight has copied its old value. The prepared shared-kit red probe is
+2/1: day144→145, scholar42→25.6944, fighter42. Passive historical replay also
+reproduces its full row/all29/final hash and traces the calories.resolveDay write.
+See evidence/2026-10-22/overnight-health-audit-r1.md; preserve this red evidence.
+
+Current repair passes33 focused checks (exact7e88 fails17), Phase Shawl92/0
+and quick348/0 in86s. Both actual-touch phone heights cross midnight into
+natural combat, play two real pursuit crossings and retain paid HP through
+two whole Continues; the old-source phone control reproduces the mismatch.
+Current native/cache/Table families are refreshed. Matched16 seeds/profile
+plus16 Sahel-maker seeds remain review_required; all10 changed cases reproduce
+exact rows/all29/hashes. Passive night observations show13 positive live-body
+splits before and0 after. Every cap has an actual ending and exact600 prefix.
+Full1120/0 in363s passes. Keep coefficients unchanged and balance warnings open.
+See evidence/2026-10-23/overnight-body-health-audit-r1.md.
+
+Next serial milestone: after saving this source, normally reconcile newly
+published52904815f with the7e88 descendant on a review branch and rerun combined
+verification. Both histories remain recoverable; owner review and ship-loop-only
+origin pushes still apply. Coordination comment6359059658 records the active lane.
+No new publication or owner acknowledgment is claimed.
+
+## Saved for review: contest scene and HP settlement (2026-10-22)
+
+Current checkpoint:32 focused checks pass. The first corrected source passed
+four actual phone flows and a64-case-per-arm screen, whose eight changed cases
+all reproduce exactly under passive triage. That triage found reverse dawn-
+contest/fight overlap and a legacy escape refusal; both are corrected in current
+source, with queued deadline/save and Table ownership checks. Fresh current-
+source now passes six native flows and refreshed browser/cache/Table witnesses.
+Real12-cohort neutral proof, quick347/0 in263s and full1119/0 in769s pass.
+Matched64 per arm remains review_required; all52 changed cases reproduce in104
+passive replays, with recorded mixed scene events17→0. Preserve class, hydration,
+community and earned-gear warnings. Every alive cap has a real ending with its
+original600-step state hash verified. Do not replace these with older panels.
+Reconciliation7a source is now
+verified/delivered in issue2 comments6355565437/6355602311; no owner review or new
+publication is claimed. Keep the separate observed overnight HP split as the
+next audit; do not claim every HP route is fixed. See contest-scene-health audit.
+
+Combined Muse407 reconciliation is saved as7a6c6561c with both parents455/407,
+quick346/full1118 green. Exact review transport is verified/delivered; no owner review or
+release clearance is claimed. Current branch codex/contest-combat-hp-20261022
+owns the retained native day144 defect. Original committed checkpoints prove
+Blood Tithe existed BEFORE Menu Wait started a field fight. Actual choices
+debit only scholar HP; escape restores the old fighter HP. A shared-kit replay
+of those untouched checkpoints fails four checks before correction and passes
+seven after the first repair. Preserve authored costs, nonlethal shows,
+lifelines and deliberate arena handoffs. Expand sibling/Continue tests, verify
+real phone actions and fresh balanced/source-bound evidence before landing.
+See evidence/2026-10-22/contest-hp-checkpoints-r1/index.json. No fix is live yet.
+
+## Saved for review: reconcile Muse407 and correct luck diagnostics (2026-10-22)
+
+Current checkpoint: combined quick346/0 in67s and full1118/0 in720s pass. All source-bound phone families, both Table pairs, tool/prune/Continue
+and installed update/offline/rollback have fresh407 receipts. Historical readers
+explicitly select the exact old23-column contract; current panels retain29.
+Matched64 per arm remains review_required; all four alive caps now have real
+endings with exact600-step prefixes. Twelve selected passive traces reproduce
+whole rows/all29/final hashes. No numerical survival tuning, owner review or
+publication clearance is claimed. Coordination checkpoint is issue2
+comment6354959874. Normal merge preserves455 and407; final combined gates pass. Native contest/combat HP erasure stays next.
+
+Curio milestone455f8bea5 is saved:25 focused,341 quick,1113 full checks;
+both phone heights, actual useful tool/Continue, matched64 and real cap endings.
+Review branch codex/reconcile-407-curios-20261022 normally merges origin407;
+both tips are preserved. Incoming luck scores label BOTH single-pit outcomes
+lucky. Correct the discrete score and diagnostic-only verdict handling,
+register common checks, preserve historical23-column contracts honestly, then
+recollect current29-column/both-root and combined-source phone/cache evidence.
+The initial merged quick317/24 is retained as historical failure evidence;
+historical-contract and stale evidence failures are repaired, not waived.
+Owner review and ship-loop publication are pending.
+See evidence/2026-10-22/reconcile-407-audit-r1.md. Native scene overlap and HP
+erasure remain the next player-facing blocker after reconciliation.
+
+## Saved: noncombat broadcast reward on phone (2026-10-22)
+
+Follows sharedaa6ebf9d1 (issue2 comment6352814116):26 focused checks,
+quick340/full1112, both old/new Table phone pairs preserved. Current target:
+one naturally earned noncombat contest/show reward through real controls,
+usable Pack action/effect and full committed Continue. Passive maker8 replay
+records30 episodes and reproduces original row/all23/final hash. Tiny Door
+day141 is the first earned input; no arena call and an authored prize choice.
+The actual Tiny Door prize was an Audience Token. Its authored400 barter value
+had no runtime consumer; Spare Battery250 had the same defect. Candidate wires
+material curios into real visitor tabs and adds an honest Pack hint. Keepsakes,
+drop odds and prices remain unchanged. Native continuation reached a real
+trader, sold the original token, truthfully refused an unaffordable tool, then
+used another carried token/battery to buy and actually prune with a Hand Saw.
+Full committed Continue passes. Shared-kit25/0, maintained quick341/0 and
+full1113/0 in776s pass; both final phone heights and failed pilots are retained.
+Matched64 cases have identical rows, all23 and state hashes; the merchant policy
+selects only food to sell, so this is not curio-use or human-balance clearance.
+All six matched-arm alive caps reach genuine endings with exact prefixes. See
+evidence/2026-10-22/broadcast-reward-phone-audit-r1.md.
+Owner review and publication remain open.
+
+New origin407d02dec must be reconciled on a review branch before publication.
+It adds six luck metrics; the current23-column panels stay historical. A direct
+counterexample shows both outcomes of a single pit attempt labeled lucky.
+Reconcile and correct descriptive luck semantics before combined measurement;
+use one current collector on both roots and preserve both Git tips.
+
+Next release blocker, queued after this milestone: native Wait started a
+field fight and Blood Tithe together. Contest choices reduced scholar HP106→79
+while the combat fighter stayed106; fleeing restored106. Direct contest HP
+writes bypass the combat pool. Reproduce and fix scene overlap plus HP
+settlement, preserving actual costs, survival safeguards and saved Continue.
+Also retain the message-priority finding: a successful prune's result was
+replaced by an NPC stash notice. Do not treat either as fixed by curio trading.
+
+## Earned non-god Table on phone (2026-10-22, source shared; review pending)
+
+Follows sharedf5c509d5f (issue2 comment6352216361; quick340/full1112).
+Maker8 replay exactly matches original row/all23/final hash. Actual phone
+pilots at736 and844 reach six earned doors, play the original Beloved choices,
+restore full mid-act Continue and retain the win in Records. Player godhood
+is known empty at entry and ending. No Game/food/time tuning.
+Four source-bound receipts preserve the day660 pair and add known-empty
+non-god entry/Continue/ending. Automatic26/0 and atomic batch refresh pass;
+final quick340/0 in74s and full1112/0 in695s pass; exact source handoff
+follows this saved milestone.
+Next queued milestone: one noncombat contest/show reward through actual
+phone choices, receipt of a usable item, Pack action/effect and committed
+Continue. Use an earned campaign checkpoint, preserve legitimate losses
+and shy vault outcomes, and label any preparation. Reward tiers already
+read personal wins/audience favor independently of monster kills; inspect
+availability and opportunity before a usage/tuning verdict.
+See evidence/2026-10-22/nongod-table-native-audit-r1.md. Public release and
+owner review remain pending; imported cases do not advance natural Benjamin.
+
+## Native late-game Table proof (2026-10-22, source shared; review pending)
+
+Reader proof0f46d0e4e is saved and delivered in issue2 comment6351768162;
+combined runtime78ad is delivered in comment6351573108. Owner review and
+publication remain pending. Current lane: repeatable native Table entry,
+mid-act committed Continue, actual ending and persistent Records from an
+untouched naturally simulated day660 checkpoint. Both phone pilots pass;
+the replay exactly reproduces original row/all23/final state. No Game tuning.
+Final r3 source-bound replays pass both heights and all seven free door
+reaches. Automatic16/0 includes negative controls; final quick340/0 and full1112/0
+in384s pass. Source handoff follows this saved milestone.
+Next queued milestone: actual phone entry/ending/Continue for a naturally
+earned non-god Table seat (retained maker8 day148 is a candidate, not yet
+phone-verified and not pacifist evidence).
+See evidence/2026-10-22/late-table-native-audit-r1.md for scope and failed
+capture pilots. Natural Benjamin remains a separate day2 campaign.
+
+Haven reader proof follow-up (2026-10-22): final r5 native receipts prove the
+whole meal record is inside its management reader after a trusted swipe, not
+only present in the DOM. Automatic10/0 includes a clipped-record negative
+control. Runtime remains78ad72f38; quick339/0 and full1111/0 in497s. See
+evidence/2026-10-22/haven-food-reader-audit-r1.md.
+
+## Haven food-record honesty (2026-10-22, source shared; review pending)
+
+Next queued milestone: verify the late-game Table screen, actual entry/end and
+committed Continue with native phone controls from a clearly labeled naturally
+simulated late-game checkpoint. Node terminal evidence alone does not prove its UI.
+No new gameplay tuning is planned; record any actual blocker before fixing it.
+
+Branch codex/haven-food-summary-20261022 follows shared0faf. Fix the actual
+phone summary mixing private eating with pantry deposits and falsely claiming
+zero-draw/empty stores feed the village. One Shared supplies block and44px
+meal-record disclosure; no food/time/difficulty coefficients change. Shared
+harness14/0, eight before/eight after actual phone cases and automatic9/0,
+full committed Continue and fresh broader browser/cache receipts retained.
+New12-cohort maintenance rows/all23/state hashes exactly match old; prior
+balance watches remain. Quick339/0; full1111/0 in436s. See haven-food-audit-r1.
+
+
+## Conversation controller fidelity (2026-10-22, source shared; review pending)
+
+Combined5c source handoff completed (issue2 comment6348959530). Next bounded
+milestone fixes the simulation overlooking actual held speech inside its
+existing five-action sitting. Experimental tool patch is shared before
+calibration (comment6349100108); shared-kit6/10 before,16/0 after, real pager
+proof passes. Fresh12-cohort neutral maintenance and quick337/full1109 pass.
+Publicd64/candidate BOTH-root64-case all23 panels complete, review_required;16 exact selected
+traces and all four alive-cap terminal extensions retained. Source0faf delivered with verified remote import/blob proof (comment6350634743). No difficulty tuning.
+Keep owner review/publication open and continue the natural Benjamin chain;
+latest d64-r2 checkpoint day2/tick30 with actual cultivation and Continue.
+See controller-held-audit-r1.
+
+
+## Reconcile Muse d64 (2026-10-22, source shared; review pending)
+
+Saved0aa987d57 closes the interrupted-answer milestone with332 quick/1104 full
+checks. Before source upload, fresh fetch advanced published master/main from
+09ff tod64fcee1b. The transport guard stopped before mutation. Branch
+codex/reconcile-d64-20261022 has a verified normal three-way merge for source handoff,
+preserving both histories; do not present0aa's green results as merged results.
+Incoming deeper variants, pod-dream tails, deposit easing, plot/moot gates and
+sick stay-home behavior remain. Review caught an unclosed quoted kin speech
+return; corrected the delimiter and strengthened the existing six-seed proof
+with one harness per child (before31/6, after37/0). Four live incoming proofs
+are now on the quick/full list. Research splitkill/vetwindow proofs require
+their distinct pinned substrates; initial STOPs are not passes.
+
+Fresh combined phone/cache/Continue,12 neutral cohorts and three64-case
+balanced panels complete. Both integration/public comparisons remain
+review_required; retain merchant hunger/class and survival/community watches.
+Six selected integration pairs reproduce row/all23/final hashes, including
+a live observation cap. Five initial full-suite failures are diagnosed in
+reconcile-d64-audit-r1; fixture fixes and isolated observer proof pass, with
+final combined quick336/full1108 pass. New baseline is exact pre-merge0aa Game with one
+current toolset; actual installed baseline is independently archived/live-checked
+published d64 (version c917881ec-20261022-172408), not relabeled09ff. See issue2
+comment6347595054. Owner review and ship-loop publication stay open. Source5c3487ea1 and retained gates are shared via one verified bundle;
+controller milestone is now active.
+
+## Interrupted answers and truthful continuers (2026-10-22, review)
+
+Actual day2 phone play found voice decoration adding a generic question, then
+answering it deleting Deirdre's still-unspoken substantive answer. Preserve
+unfinished beats across answers to the current question, clear its reminder,
+and retain deliberate subject abandonment. Decoration cannot add questions;
+queued narration/goodbyes get truthful continuation roles. Shared-kit26/0 and
+prepared native before0/after1 delivery at both heights with committed Continue
+cover the repair; automatic native gate8/0 protects it. Independent generated
+corpus7794/7844 is coverage, not paired NPCs/all semantic quality. The all23
+64-case screen remains review_required, especially caregiver death rate and
+class/hydration watches.92 selected traces include one real alive day602 cap;
+do not call it an ending. See held-answer-audit-r1 for the recovered diagnostic,
+test corrections and Pack outcome pricing proof correction (no price change).
+Next: controller fidelity for held conversation, share/replay both roots under
+one policy, then continue actual natural-phone-ac5-r2-checkpoint day2/tick12
+toward an ending. Owner review/ship-loop/public-device gates remain open.
+
+## Reply priority and phone density (2026-10-22, review)
+
+The same actual farmer campaign reached day2 and exposed recap before held
+continuation, dodges before answers and seven topic pages. The bounded repair
+keeps structural positions, puts actual question answers and held continuation
+first, appends recap, preserves cached offered words and sizes each phone reply
+individually.7794 paired generated menus preserve words/semantic selections/
+resources; both-height native Talk/reply/paging/committed Continue pass. Shared
+API45/0 and automatic native receipt8/0 cover the repair. See reply-audit-r1.
+The all23 matched64-case screen remains review_required:82 exact passive replays
+locate order-sensitive bot fallback (recap/silence eligible; goon excluded).
+Next bounded milestone: repair conversation controller fidelity, share it and
+rerun BOTH Game roots under one policy. No numerical difficulty compensation.
+Continue the actual natural-phone-851-r3-checkpoint from day2/tick10 toward an
+ending; garden harvest, late-game, physical-device and voice quality stay open.
+Owner review and ship-loop publication remain required.
+
+## Pack context from natural phone play (2026-10-22, review)
+
+The same natural farmer expedition reached day1/tick157 after testing its first
+unknown forage. That exposed full-width action buttons and a Pack reader reset
+after every action. This fix adds compact44px action rows and retains carried-item
+context through re-render, including a removed-item fallback. UI references stay
+on DOM/view objects, never saved inventory. Native controls at390x736/844 reproduce
+the reset on50cf and preserve position on the candidate; real authored test
+payment and pagehide/Continue are checked. The source-bound pack proof runs
+automatically. See pack-reader-audit-r1. No engine tuning or campaign completion
+claim. Next: continue the actual natural-phone-continuation-r1-checkpoint through
+gardening and an ending; do not substitute a disposable UI test replay. Welcome
+identity, onboarding scroll and notice priority remain separate work. Owner
+review and ship-loop publication remain open.
+
+## Canonical Game and honest simulations (2026-10-22, review)
+
+The fake Node-only Game global concealed missing browser party-bond hooks and
+unbound alien speech/legacy Relay references. Use the actual canonical namespace/
+receiver; remove the fake alias and refuse partial module loads. No changed
+values or new tactical-party awards. Native crew Wait/Continue earns0->1 practice
+before/after at both heights; API/load-error/phone gates keep it protected. All123
+source scripts were scope-inspected. See game-namespace-audit-r1 for old failures,
+current checks, all23 watches and limits. The same corrected harness is used on
+both Game roots; older alias-harness reports stay historical. Restoration of all64
+old modeled ending states is a separate diagnostic, not human balance neutrality.
+Next: a directly playable current review build and natural phone journey; public
+launch/physical-device/immediate-save and broader playstyle coverage stay open.
+
+## Reconciliation with Muse09ff (2026-10-22, review in progress)
+
+Normal merge preserves saved818 ability/mobile/save work and current09ff
+memorial/endgame/narration work. Verbal fixture conflict is resolved using an
+actual verbal person; four incoming proofs now run automatically. Fresh phone/
+cache/Continue and12 neutral cohorts pass; installed baseline is actual09ff.
+The same-controller64-case all23 screen remains review_required: investigate
+community/progression/resources/gear, including merchant win/loss turnover hidden
+by equal aggregate wins. Ten exact changed-case death-call replays locate real
+endings. No difficulty compensation. See reconcile-09ff-audit-r1 for raw evidence,
+tool failures, current checks and limitations. Combined owner review and ship-loop
+publication remain pending. Next bounded work after sharing: harness/browser
+global parity; broader human late-game/device and immediate-save gates stay open.
+
+## Legacy ability refusal and ownership (2026-10-22, review)
+
+The successor to896421674 makes legacy button eligibility match the existing
+500-food gate and actual cooldown/health/item constraints before payment/time.
+Successful dispatch returns its real result; refused dispatch refunds only its
+outer activation fee to the same living actor. Clock-boundary body changes must
+not dispatch the departed actor's effect, grant successor XP or spend a successor
+combat action. Disabled reasons remain readable. Red Hunger's nearby-body check
+now uses its actual receiver: the browser has no bare Game global.
+
+Fourteen prepared native phone cases cover refusal/payment/Continue and nearby
+body eligibility, alongside refreshed ordinary/combat/installed gates. The80
+matched mixed/nurse cases retain every non-acceptance metric. Sixty exact replays
+prove acceptance changes are repaired producer returns, not increased real use.
+See legacy-availability-audit-r1 for retained proof and limitations. No numerical
+calibration or publication claim. The follow-on namespace repair above removes
+the extra global.Game shim and verifies actual availability. Preserve all
+previous survival/community/gear warnings and the separate immediate-save audit.
+
+## Truthful activation bills and native free actions (2026-10-22, review)
+
+codex/ability-previews-20261022 follows reconciledcfab. Activation cards no
+longer append a global damage multiplier to scouting/healing/preparation.
+Explicit bills use the existing payment route; Stance and Aim explain their
+actual limits, and blocked buttons show their reason. Native testing found
+the browser spent an extra action after composite dispatch; declared free
+actions now remain free. No engine cost/damage/food-gate tuning. Ten source-bound
+phone activations/Continue and refreshed ordinary/party/Deer/cache gates are in
+activation-preview-audit-r1. Separate legal footprints replace old overlapping
+prepared fights.64 headless rows/states/all23 are exact, which does not prove
+human balance. Prior watches remain. Next: legacy low-food availability and
+actual refusal/checkpoint behavior. Owner review/ship-loop publication pending.
+
+## Current release reconciliation (2026-10-22)
+
+The review branch combines savedc067441f2 with current publishedf83b5d92c
+through a normal merge from57ca. Retain both agents' production/gossip/injury
+and mobile/save/beam work. Fresh two-height phone, actual published-f83
+installed update/offline/rollback and twelve source-bound combat witnesses
+pass; the combat gate now runs automatically in quick/full. See
+evidence/2026-10-22/reconcile-f83-audit-r1.md. Same-current-controller64-case
+all23 screen remains review_required; native maker community-loss mechanisms
+are retained, with no compensating difficulty tuning. Source intake/review and
+ship-loop publication remain distinct from verification. Next one milestone:
+truthful non-damaging ability effect/cost previews; later-game/device remains open.
+
+## Readable combat turns in review (2026-10-22)
+
+codex/combat-turn-results-20261022 follows f41ed4528. Actual phone replay
+showed antler damage disappearing behind a later beam sentence. The candidate
+now names the actor and shows actual net HP/movement/arrival/withdrawal results
+in the existing message area. Details opens the accepted messages for that
+turn inside the board's existing history workspace; a selected turn survives
+later combat renders until closed. No new saved state or gameplay action is
+introduced by inspecting it. Invalid movement controls are visibly disabled
+during other participants' turns.
+
+Browser announcement/result holds become450/700ms; native order, action costs,
+damage and save generation guards stay intact. Recorded Deer and prepared
+ordinary/party phone flows, actual mid-turn reloads and a real asynchronous
+reader regression are retained in combat-turn-audit-r1. Fresh source-bound
+proof and all23 comparison maintenance must match the final source. This is
+not every monster, large-party, physical-device or late-game UI clearance.
+
+Next bounded goal: truthful ability effect/cost previews, including damage
+boost wording on non-damaging actions. Then continue later-game garden/Table
+and broader combat/device journeys. Existing numerical calibration and
+survival watches remain; UI evidence cannot clear them. Owner review and
+ship-loop publication are pending; source packets are not live releases.
+
+## Mobile Deer corrections in review (2026-10-21–22)
+
+codex/mobile-combat-20261021 follows704d9dda8. Real phone combat reproduced two
+antler hits on ignition, with only the last hit narrated. Remove the duplicate
+ignition invocation while retaining normal windup/firing antlers. Steve also
+rejected ordinary Strike interrupting a beam; remove the old25/50% random
+cancellation and its reward. It originated in5150fb415 (October4), without a
+located Steve directive. No compensating damage/health/cost tuning.
+
+Current native-touch replays at390×736 and390×844 complete the recorded Deer
+fight and preserve the result through Continue; deliberate Wait-only losses
+produce successors that also Continue. Fixture equipment is prepared historical
+content, not proof of natural acquisition. Full phase-boundary/Strike regression
+tests, fresh source-bound mobile/cache gates and same-observer matched panels
+are retained in combat-audit-r2. Balance warnings remain for review. This does
+not establish every enemy/party encounter or physical-device quality.
+
+Next bounded work: coherent per-actor result narration (the current last-log
+display can hide earlier damage), and removing damage-boost labels from
+non-damaging ability descriptions. Keep ordinary/party full-completion and
+late-game harvest/Table/device coverage open. Owner review and ship-loop
+publication are still required; source transport is not a live deployment.
+
+## Fresh phone opening corrections (2026-10-21)
+
+Codex review branch codex/mobile-opening-20261021 follows056e07a08. A manually
+played fresh expedition chose actual origin/person/five belongings and Green
+Whisper, gathered and identified wild fruit, ate, returned to the hall and
+donated, planted and cultivated on the outdoor grid, and continued normally.
+It exposed a blank intro, raw{place} item flavor and impossible Haven forage.
+The UI now shows each intro line with a named next step, resolves every offered
+item's flavor against its owner, and removes zero-stock Haven Forage promises.
+Grounds inspection shares narration/thumb controls and keeps the map visible.
+
+No Game, policy, food/cost/yield or difficulty changes. Current two-height proof
+separates new native onboarding from an unedited checkpoint of that fresh run;
+it proves real paid planting/cultivation, refusals and full loaded payload on
+Continue. Existing arrival/carry/loot/Haven/combat-frame/lifecycle gates are
+replayed on final source. Twelve neutral rows/states/all23 remain exact; this is
+maintenance, not balance or garden harvest viability. See mobile-opening-audit-r1.
+Next bounded milestone: actual mobile combat completion and loss, using current
+ordinary/Deer/party flows and preserving difficult outcomes. Keep late-game
+harvest/Table/device/release gates open. Runtime owner review and ship-loop
+publication remain required; no direct push or deploy from this branch.
+
+## Published-source lifecycle and remote handoff (2026-10-21)
+
+The reconciled456cf8cbd source is retrievable through the unpublished draft
+release linked in GitHub issue2; a fresh GitHub clone imported its normal
+history and verified both Muse ancestors. No Git ref was pushed or published.
+Peer receipt, owner review and ship-loop publication remain pending.
+
+The next release evidence milestone now exercises actual published57ca code,
+candidate456 and published-code rollback at390x736/844: native paid pickups,
+update buttons, final native-save bytes, full-payload migration/Continue,
+stopped-origin cold boots, all173 cached text inputs and both icons. Its
+source-bound maintenance check lives in the existing update-cache-safety test.
+See published-lifecycle-audit-r1 and PWA-RELEASE-CHECKLIST.md for scope/replay.
+This clears the exercised local lifecycle case, not all rollback gameplay,
+physical phones or release approval. Next: a fresh mobile expedition through
+the release journeys, retaining deaths and late-game coverage rather than
+tuning wins or opening another competing calibration lane.
+
+## Paid local-search experiment (2026-10-21)
+
+Codex adds four experimental grid-*-search profiles; existing defaults and Game
+are unchanged. Current visible bodies only, geometric selection, paid approach,
+native carry/refusal/first-touch and actor/day/scene/encounter guards. A sprite
+can hide a distant body, so those cannot select a destination. The controller's
+actual phone fixture matches paid touch/search/refusal/pickup/Continue at both
+heights; trusted Stop saves only the landed step.19 native and6 report checks.
+
+Final144 observed600-iteration campaigns end natively over36–226d,8 real controls
+match, no caps/recovery.16-seed screen wins: capable10→10,maker11→12,
+merchant13→13,caregiver15→15. All23 stays review_required: deaths rise in several
+profiles, with food/progression/class/earned-gear watches. More searching is not
+an automatic improvement; no defaults or Game costs/rewards were tuned.
+Both extended seeds remain separate. See local-search-audit-r1,
+LOCAL-SEARCH-COHORT.md and local-search-summary-r2.
+
+Next bounded release milestone: deliver the reconciled source/proofs through an
+actually retrievable review packet to Muse/ship-loop, preserving normal history
+and publication discipline. GitHub issue2 records the direct coordination request;
+an OID/local bundle path alone does not make source available to a cloud clone.
+Owner review, shipping, physical-device and public-release gates remain open.
+
+## Local recovery diagnosis (2026-10-21)
+
+The passive recovery recorder reproduces four selected current campaign
+rows/state hashes/all23 exactly. It distinguishes raw local proximity, actual
+native range acceptance and stack transfers; known death does not invent a
+known body location. Capable2 reaches Liam's death node on day29 but never
+samples adjacency or accepts range. Caregiver7 never samples the selected
+day6 resident locally and never observes their death knowledge. Other bodies
+have quiet proximity samples without any accepted range call. These are
+specific routing/timing leads, not proof every such body was takeable.
+
+Next bounded Codex milestone: experimental local search at actual visible-body
+opportunities, with native paid approach, actor/encounter guards, mobile parity
+and same-Game methodology controls. Keep original policies untouched; do not
+route using remote corpse internals or tune win rates. Evidence and repeatable
+CLI: evidence/2026-10-21/recovery-opportunities-audit-r1.md.
+
+## Canonical corpse scene candidate (2026-10-21)
+
+Fresh final quick311/full1083 pass; final128 panels and72 native campaigns
+retain current source identity.
+
+Codex branch codex/corpse-scenes-20261021 startsdaa023a06 and retains
+Muse57ca. Corpses now save hall/outside identity. All physical access routes
+share scene/range checks; remote resident deaths use their own node/room,
+recovery goes to the outdoor fire, and large-fight bodies return to legal
+world cells. Cached reward packs resolve canonical IDs/fight/fighter identity
+rather than an unrelated same-species body. Legacy missing rooms are explicitly
+inferred outside without deleting/reassigning belongings; exact saved fighter
+links supply room/frame evidence. Unknown people stay unnamed in the Loot header.
+
+Core29/0, coalition27/0, controller10/0 and both phone heights pass native
+entry/exit/paid approach/loot/legacy/Leave/immediate bytes/Continue. Fresh128
+matched all23 remains review_required;113 cases change metrics. Selected exact
+replays prove the old code put remote dead residents and their gear at the
+bearer's feet: capable2/day10 and caregiver7/day6 actually died at5,3 while
+the bearer stood4,4/8,0. The new body stays at5,3; next-day remote pickup is
+correctly refused. This explains an actual removed free-recovery path, not all
+subsequent deaths or cohort warnings. Do not restore teleportation or buff wins
+to hide the difference.72 current long cases end natively38–226d,55wins/17losses,
+4 exact off controls. All phone/shared/local installed173-input checks refreshed.
+See evidence/2026-10-21/corpse-scenes-audit-r1.md. Earlier scene holds below
+are historical diagnoses now addressed on this candidate; owner review, balance
+tradeoff review and ship-loop publication remain pending. Next: evidence-led
+resource/earned-gear recovery with real travel and honest location knowledge.
+
+## Current Muse merge verification (2026-10-21)
+
+Fresh merged quick310/full1082 pass.
+Normal merge4b5d4e0da preserves Search92a and incoming Muse57ca. Fresh128
+matched all23 pairs under identical current tools remain review_required;
+caregiver wins rise while deaths/first-bearer survival worsen, and class/gear/
+water watches remain. Two selected native CISTERNCHECK_OFF replays remove extra
+deaths but also one win; diagnostic, not clearance or default tuning.72 current
+physical long campaigns reach native endings39–167d,52 wins/20 losses, no caps,
+4 exact off controls. Both phone heights and local installed173-input update/
+offline proofs are refreshed. Native anonymous-person telemetry is preserved
+without inventing resident IDs; isolated-process proof78/0. See
+evidence/2026-10-21/search-muse-reconciliation-r1.md. Canonical corpse room
+identity remains the next bounded release hold; owner review/ship pending.
+
+## Nearby Search candidate; canonical scene fix next (2026-10-21)
+
+Branch codex/nearby-bodies-20261021 builds onad78/Muse965. One existing
+context slot exposes nearest Search, with other nearby bodies in a folded list
+inside the same Loot reader. Stable IDs/context prevent retargeting stale
+buttons. Native range/remaining-content guards and combat/end guards apply.
+Opening/switching is free; actual ownership, prices and save paths stay native.
+Quick310/full1082 pass. Underfoot0 and paid approach/two-body touch cases pass both phone heights,
+without grid taps, plus16 discovery and9 loot controller checks and7 preserved
+mobile-routing assertions. The existing loot gate upgrades to four-case schema2;
+source/recipe changes require current actual receipts. See search-audit-r1.
+
+Fresh8-policy/8-off neutral maintenance keeps exact row/state/all23 toad78.
+It does not clear carry warnings or prove all human playstyles. Existing
+phone/Haven/arrival/carry and LOCAL installed173-input checks are refreshed.
+Owner review and ship-loop publication remain pending.
+
+Release hold and next concrete goal: search-scene-probe-r1 shows an outdoor
+body at world4,7 becomes in range after native entry at interior4,7. Corpses
+have node/coordinates but no room identity. Fix the canonical creation/lookup/
+load contract with legacy ownership safety and verify entry/exit plus battle
+projection. Do not hide it only in the new button or publish this discovery
+candidate on the strength of UI greens. Run matched all23 and native long/
+phone/save evidence for that Game change, then resume resource-recovery/
+hydration/progression diagnosis without compensation tuning.
+
+
+## Loot reader/checkpoint candidate (2026-10-21)
+
+Branch codex/loot-checkpoint-20261021 builds on9563d3ce5/Muse965. Actual
+zero-coordinate phone loot reproduced covered buttons. One shared bounded
+inlinecard/body layout replaces identical Garden/Pantry-only rules and makes
+Loot/Pack lists usable. Loot uses emitted feedback and guarded immediate
+source/destination checkpoints, including source-only Leave flags. It rejects
+stale panels/bearers/removed bodies. No Game cost, loot rule, admission,
+policy, observer or contract changes. See loot-audit-r1 and repeat instructions
+in MOBILE-PLAYTEST.md; source-bound loot proof now joins quick/full.
+
+Quick309/full1081 and eight native/controller checks pass; both phone heights complete actual
+refusal/pickup/Leave/immediate bytes/Continue. Fresh existing phone/Haven/
+arrival/carry and installed173-input checks pass, plus direct free Garden
+reader/close. Eight seed1 policies plus8 off controls retain exact rows/state/
+all23 against956; this is neutral maintenance, not balance clearance. Carry
+warnings remain open. Owner review and ship-loop publication are pending.
+
+Next bounded goal: surface actual nearby/underfoot bodies in the phone action
+area so Search need not be discovered by tapping a grid square. Preserve the
+same native distance/node/access/knowledge and item/ownership rules. Then
+investigate excess-load recovery and retained hydration/progression windows.
+No easier-win tuning or policy change to erase the warnings.
+
+
+## Carrying contract candidate and balance review (2026-10-21)
+
+Review branch codex/carry-contract-20261021 builds on20f305286/Muse965.
+Central pickup admission permits2x nominal effective mass while nominal
+capacity still sets burden and combat tiers. Water/body modifiers participate
+on both sides of a transfer. Existing movement/work tier coefficients now
+price physical squares, forage and ruin searches; no boundary fee or other
+job-cost change. Pantry/Pack quotes match those native prices. Old excess
+possessions remain owned and movable. Zero-coordinate corpse range/creation
+and body-use siblings are repaired. Transfers and landed manual/completed/
+cancelled walks checkpoint before background/unload, guarded against replaced
+state/bearers. See carry-audit-r1 for exact coverage and limitations.
+
+Quick307/full1079 pass;38 native/controller assertions and both phone heights prove
+actual packing, cost, trusted Stop, immediate saved bytes and Continue. All72
+extended physical campaigns reach native endings,32–169 calendar days, with
+4 matching observer-off controls. This does not establish balance clearance.
+The128-case matched all23 screen is review_required: class, hydration,
+progression and community warnings remain. Selected diagnostic lever-removal
+arms and six exact passive replays investigate the changes; neither arm
+restores all selected outcomes. No compensation tuning or default promotion.
+
+The Haven-only9b/20f commits remain separately reviewable; do not hold their
+visual review hostage to accepting this candidate's survival tradeoff. Runtime
+owner review and ship-loop publication remain pending. No origin push or
+public deployment is claimed. Next bounded milestone is resource-recovery
+and hydration/progression diagnosis in the retained divergent runs, including
+honest unload/loot feedback and pickup durability in the corpse UI. Do not
+change observer/policies to mask the signal; paired evidence comes first.
+
+
+
+## Outdoor lodge and Haven management candidate (2026-10-21)
+
+Review branch codex/haven-lodge-20261021 builds on9b9672f11/Muse965. One
+building is composed over the real rectangular six-cell lodge. Altered saved
+structures retain individual cells; rendering never rebuilds missing ground.
+People remain above the art. Tap the lodge to approach the native south door
+through paid pathing, then explicitly choose Go inside. Existing Dpad/collision
+rules are preserved; this does not introduce automatic entry or a Game patch.
+
+The existing Place control becomes 🏠 Haven at home. Its original Garden and
+gated Pantry buttons move to the top; surrounding-place details fold below
+management. No duplicate button, resource station or new access entitlement.
+Inside, ordinary outside, System-remote and exiled states retain their gates.
+
+Quick305/full1077 pass. Both phone sizes, native update/cold offline173-input
+verification, saved damaged structures and System remote/exile access pass.
+Actual phone/save/Continue, structure and entitlement evidence is in
+`evidence/2026-10-21/lodge-audit-r1.md`. Publication/Muse owner review remain
+pending through the normal ship loop. Current Game/controller/harness inputs
+are unchanged; the small neutral panel is maintenance, not a balance claim.
+
+Next bounded investigation: Pantry packing admission and burden feedback.
+Source/native probes show Game.burden is absent (the UI catches it as "light"),
+while calories.burdenTier(30,20) is "straining" with movement/work/combat costs.
+Pantry bulk/single/UI reject above carryCapacity. Reproduce actual packing and
+compare looting/trading plus native cost application before changing limits.
+Steve's earlier extra-carry/cost request and all23 survival-lever workflow apply.
+
+
+## Haven scene and visual actions candidate (2026-10-21)
+
+Steve reports beds drawn over the hall and asks for intuitive Haven actions.
+The review branch `codex/exile-scene-20261021` retains the Muse965/Codex355
+history and fixes the source mismatch: exile wrote null, renderer read indoors,
+controls/garden read outdoors. Native load now canonicalizes legacy flags;
+exile writes false. Existing hall/grounds and plot records remain separate.
+
+The hall now renders wood floors, stone walls, beds, hearth and labeled exits
+from its actual saved cells. Station touches use paid native movement and show
+real choices beside the Dpad, keeping the room visible. Actors stay above the
+furnishings. A corpse handler formerly intercepted every ordinary cell simply
+because the corpse API existed; it now requires a body at that cell. Standing
+on a bunk/door keeps its action, and selecting a station clears an earlier
+person card. Arrival Continue also keeps all seven beats and a visible button.
+
+Quick305/full1077, both phone heights and native update/cold offline pass.
+The128-case all23 screen retains64 exact original controls;72 long observed
+cases reach native endings without watchdog/cap. One merchant win change
+remains review_required. Verification and metric investigation are retained in
+`evidence/2026-10-21/haven-visual-audit-r1.md`. This is a review candidate,
+not a published build or Muse-reviewed landing. Ship-loop publication only.
+Next bounded visual milestone: unify the six-cell outdoor lodge footprint and
+make existing Haven management access visually discoverable, without invented
+resource stations or another scrolling play surface.
+
+
+
+## Codex public-grid travel experiment verified; exile scene repair next (2026-10-21)
+
+Branch codex/public-grid-travel-20261021 builds on reconciled4befb820a.
+Four explicit grid profiles use native approaches/cardinal exits and a declared
+unreachable-human retreat. Original profiles retain64 exact rows/Game hashes/
+all23 metrics. Fresh128-case named-cohort panel is review_required; no numeric
+or default promotion. Quick302/full1074,14 core cases, captured sealed/unsealed
+standoff, both phone heights/immediate Continue and observer controls pass.
+Long coverage has71 native endings/72 observed, zero harness recovery.
+
+The remaining capped merchant seed5 reproduces through1200 iterations with an
+identical600 prefix and remains stuck: exile writes insideHaven=null, genDetail
+renders the hall, UI refuses its exit. Actual day602 native save/Continue probe
+and full source-bound capture establish the mismatch. This is the next bounded
+runtime fix; Codex will touch game.js genDetail and betrayal.js exilePlayer,
+verify existing-null saves/normal exile/mobile exit/Continue and matched Game
+panels. This records cross-lane intent before runtime edits. Muse retains owner
+review and numerical calibration; ship loop owns publication. See
+PUBLIC-TRAVEL-COHORT.md and public-grid-audit-r1. No all-campaigns-playable claim.
+
+
+## Active reconciliation with Muse (2026-10-21)
+
+Steve directed root-cause investigation, coordination and repair rather than
+stopping on divergence. Review branch `codex/muse-reconcile-20261021` combines
+Codex `c96c7273f` and published Muse `965f9d40e` through their shared ancestor
+`cb5ad02ca`, preserving both histories. The only textual conflict was two fixes
+to the shared-barks test observation window; Muse's opening-turn instrumentation
+is retained. Fresh combined-source verification passes quick299/full1071, phone frames and12
+walking cases, native update/offline and36 garden endings. Same-tool64-pair
+balance remains review_required (mortality/community watches). Runtime owner
+review and ship-loop intake remain pending.
+Old-base evidence remains historical, including integration-stop-r1; it does not
+certify this combined candidate. No release or owner-review completion claimed.
+See `evidence/2026-10-21/muse-reconciliation-r1.md` for integration and handoff.
+
+
+## Native walking cadence and Stop corrected in candidate (2026-10-21)
+
+codex/walk-cadence-20261021 stacks oncb74d18af. Dpad and committed paths now
+share real NPC turns and brush exposure; Stop/overrides retire the chained
+walk, and body/scene/combat changes stop old intent. Final phone/offline/Continue
+proof and22 shared-kit cases are in walk-cadence-audit-r1. All23 remains
+review_required: capable mortality/Table/gear watches survive; the one short
+window win loss is alive at cutoff and wins a longer rerun at175d.36 current
+garden campaigns end cleanly through281d, with nine beds actually used. No
+numerical garden adjustment or default promotion. Owner review/ship pending.
+Next: declared bot public-grid approach/edge-exit policy; macro jumps remain.
+
+## Phone travel bugs fixed in candidate; movement parity next (2026-10-21)
+
+codex/public-travel-20261021 saves completed ordinary crossings after payment,
+and keeps blocked-path choices alive across refresh. Phone choices sit beside
+the Dpad with one message and a visible map. Actual touch/cost/Continue, native
+offline and failure cases are retained in public-travel-audit-r1. Muse runtime
+review and ship-loop intake pending; no local master merge/push or release bump.
+No garden numerical/default/controller change. Next verify microMove/pathStep
+NPC/ambient cadence parity, then replace macro bot travel with actual approaches.
+
+## Actual dawn gardening measured; travel parity is next (2026-10-21)
+
+`codex/garden-daystart-20261021` adds optional after-needs/before-hunt dawn work,
+with real promises, costs, recovery and individual NPC Wait turns. All72 observed
+campaigns end cleanly; quick297/full1069 pass. Shared timing summaries preserve
+the prior result exactly and keep native policy IDs/one real control per arm.
+
+One expansion campaign uses all nine beds; five build beyond four. Fixed-bed
+crop intake falls552,095→178,809 kcal, with survival, water, class and gear
+watches; expansion119,171 kcal versus103,236 has mortality/NPC-class watches.
+More activity/wins do not clear the tradeoffs. No numeric tuning or promotion.
+See garden-daystart-audit-r1, all23 summary, actual death-call traces and replays.
+
+Next bounded goal: phone/node travel parity. walkTo currently calls travelTo
+directly, including revealed targets up to three nodes away; the phone exit
+requires the bearer on an edge. Verify actual touch, then teach the declared
+controller public terrain-priced approach/exit steps with interruption handling.
+Boundary crossing remains authored free. Do not add a Game tax or keep tuning
+garden yields around a movement-fidelity gap. Parent runtime review/ship pending.
+
+## Garden scheduling screen: measured, not promoted (2026-10-21)
+
+`codex/garden-scheduling-20261021` adds optional before-outing garden sessions
+to invested profiles; the normal shared policies and Game stay unchanged.
+Prospective contract: GARDEN-SCHEDULING-COHORT.md. All72 observed campaigns end
+without recovery. Earlier fixed-bed work lowers actual crop intake552,095 to
+404,090 kcal, with class/contest-show gear watches. Earlier expansion raises
+intake103,236 to141,713 kcal and one campaign reaches eight beds, but gross
+production far exceeds consumption and survival60 coverage changes. No default
+promotion, ordinary-garden buff or numerical calibration gate. See the dated
+garden-scheduling audit/summary/diagnosis and independent replays.
+
+Most optional early sessions are already past tick320 after earlier daily work.
+Two exact actual-call traces locate three driver Waits before daily entry at
+tick384. This is not a morning-gardening test. Next bounded task is a prospectively
+declared day-start policy with actual public/NPC turns preserved. Pending runtime
+parent9d4c30519 still needs Muse owner review and ship-loop intake.
+
+## Barrier turn/save correction ready for owner review (2026-10-21)
+
+`codex/barrier-settlement-20261021` follows the controller task without changing
+crop numbers or powers. Priced crossings now settle exhausted turns and save
+the complete pursuit board. Quick293/full1065 pass; twelve barrier cases include
+an eight-failure old-runtime negative control. Fresh phone touch, Continue and
+local native-worker offline update proof pass. See barrier-settlement-audit-r1.
+
+All72 observed garden campaigns now end without watchdog recovery (previously
+three). Ordinary64-case all23 screen has no material signal; garden screens
+retain three first-bearer60d watches, exactly the previously recovered cases.
+Those raw outcomes remain visible; this is not garden balance clearance.
+Runtime owner review and ship-loop intake are pending, with no origin push or
+master merge. Next bounded garden task: preregister earlier scheduling and test
+actual duty opportunities before tuning ordinary crop yields or magic costs.
+
+## Reachable retreat/controller task; barrier settlement is next
+
+The current controller handles human strike fallbacks and chooses reachable
+retreat edges. The exact day76 standoff escapes in three public-action turns;
+old-policy negative control fails. Quick292/full1064 pass, with a fresh64-case
+maintenance panel and all23 methodology review_required. This is not yet a
+player-code change or clean campaign clearance. See human-combat-controller-audit-r1.
+
+The full replay reveals three already-spent/movement0 barrier phases requiring
+harness recovery. Actual phone crossing also leaves the committed map at3,0
+while the visible map is3,1. Next bounded task: settle the barrier's turn and
+save the complete board atomically, using this same controller on both Game
+arms. Runtime owner review and ship-loop intake remain required before landing.
+
+## Gardener factorial prototype measured; human-fight bot gap next (2026-10-21)
+
+Pending review branch codex/gardener-intent-20261021 adds four explicit
+priority/expansion profiles with real offer and public garden actions. Shared
+17 checks pass. All64 stock context cases retain exact rows/Game hashes/all23.
+The current long screen has72 observed campaigns plus four neutral controls:
+71 clean endings, one ending after harness recovery, no capped cases.
+Quick290/0 and full1,062/0 pass, including four explicit summary guards;
+no Game/numeric lever changed.
+
+Investment at fixed beds increases actual crop intake but deaths and other
+all23 watches remain. Expansion is review_required: only the normal-priority
+arm reaches six beds, while combined investment/expansion stops at four.
+Selected exact traces show late tick budget dominates two worst-denial cases;
+this is not a whole-cohort causal classification. Do not promote this policy
+as a better default or buff ordinary gardening from it. See the dated
+gardener-intent-audit-r1, summary-r3 and GARDENER-INTENT-COHORT.md.
+
+Next concrete task: fix the shared bot's handling of human hostiles. Seed9's
+day76 betrayal reaches21,201 rounds because both the competent target list
+and driver fallback target monsters only. Its exact state/fight is retained;
+recovery is not counted as clean playable completion. Prove public combat
+actions resolve that case without watchdog recovery, then revisit earlier
+garden scheduling as a separate policy revision. Muse retains numeric tuning.
+Both controller and opportunity parent branches are pending review/ship.
+
+## Current Muse adoption and bounded garden follow-up (2026-10-21)
+
+Fresh cb5ad02ca census: 74 observed campaigns, eight exact on/off controls,
+61 player cultivation campaigns /3,327 paid physical casts /1,198 harvests.
+Core garden powers are actually offered in 65 campaigns and acquired from
+earned track sheets in 17. NPC holders occur in all 74 but casts are zero;
+6,958/7,138 garden assignments redirect and all 132 queried NPC magic gates
+lack the worker's own core ability. Holder exposure is not work availability.
+
+The unchanged controller targets four beds even in the 54 upper-tier campaigns.
+Next task: a declared Gardener intent policy using real earned offers, actual
+gates, investment/mastery and demand/cost/storage decisions for expansion.
+The bounded experiment and done-when are in GARDENER-INTENT-COHORT.md.
+Compare policy revisions on one Game; preserve actual endings and all23 metrics.
+No numeric calibration or forced maximum planting. Muse owns numeric tuning.
+Natural-r4/summary-r2/audit-r2 supersede the earlier Game's census as current
+evidence. This branch is pending review and ship-loop intake, not yet on origin.
+
+## Garden opportunity census shared; next deliberate investment cohort (2026-10-21)
+
+Historical baseline: the census figures below bind Game 00412b13f, before Muse’s cb5ad02ca batch. The adopted-tip audit is retained separately; these are not
+a current-Game comparison or balance clearance.
+
+Current tooling separates actual offers/choices, own held powers, named class,
+resident eligibility, queried gates and physical casts. Shared-kit16 checks
+include unknown kits, invalid selection, real NPC sheets, nested dispatch and
+a player/NPC dawn interleave. Fresh82 jobs reproduce reference canonical hashes,
+rows/all23/RNG/native counters; eight actual controls pass. Game/controller and
+balanced contract remain unchanged. See garden-opportunity-audit-r1/summary-r1.
+
+Of74 observed campaigns:65 offer core garden power,20 acquire it via earned
+track sheets,59 sample a player core holder and55 record player cultivation.
+Named player Gardeners occur in22, eligible NPC core holders in74 and named
+NPC Gardeners in50. No NPC completes cultivation:7,467/7,611 garden-duty
+attempts redirect; the97 executed NPC magic-gate queries all lack the worker's
+own core power. Do not equate holder exposure with working opportunity.
+
+Upper tiers occur in59 cases but the bot never queries or builds beyond four
+beds. This is a known policy coverage limit, not proof the Game blocks tier
+capacity. Next bounded milestone: create a declared Gardener intent/investment
+cohort that chooses only real offers, checks actual gates, and considers food
+demand, learning/mastery, reserve/time costs and storage before extra beds.
+Compare it as a methodology revision on one unchanged Game; preserve all23 and
+actual endings, including the existing caregiver death watch. No grants, no
+forced maximum planting and no numerical crop/power tuning in that milestone.
+Muse retains calibration. The rolling public-release goal remains active.
 
 ## Partial gifts playable; next earned garden-build coverage (2026-10-21)
 
@@ -2116,3 +4139,4 @@ The final319-conversation sample also retains non-favor semantic voice closers
 and story-offer callbacks that acknowledge Yes without delivering the story
 (seed23 Petra and seed2026 Nina at stage30). Those response contracts need a
 separate repair; mechanical context checks do not clear their prose.
+

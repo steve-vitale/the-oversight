@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),T=require('./lib').reporter('Controller experiment scope'),P=require('../controller-trial-report');
+const root=path.resolve(__dirname,'../..'),load=f=>JSON.parse(f.endsWith('.gz')?z.gunzipSync(fs.readFileSync(path.join(root,f))):fs.readFileSync(path.join(root,f),'utf8'));
+const before=load('evidence/2026-10-24/ledger-merchant99-off-r1/panel.json.gz'),after=load('evidence/2026-10-24/ledger-merchant99-on-r1/panel.json.gz'),ablation=load('evidence/2026-10-24/ledger-trial-ablation-r1.json'),report=P.compare(before,after,ablation,{historical:true});
+let strict=false;try{P.compare(before,after,ablation);}catch(e){strict=/Historical measurements/.test(e.message);}T.ok('old trials require explicit historical interpretation',strict);
+T.ok('actual selected trial retains all29 and explicitly rejects Game clearance',report.type==='explicit_controller_experiment'&&report.decision==='controller_review_required'&&report.policies[0].metrics.length===29&&report.standardGameComparison.decision==='invalid');
+function rejected(change){const b=structuredClone(before),a=structuredClone(after),r=structuredClone(ablation);change(b,a,r);try{P.compare(b,a,r,{historical:true});return false;}catch(e){return true;}}
+const S=require('../lib/balance-scorecard'),raw=JSON.stringify({before,after});
+T.ok('ordinary current scoring rejects the old contract',S.comparePanels(before,after).errors.includes('Metric contract does not match this comparator'));
+T.ok('historical report declares its exact29-column contract',report.measurementIdentity.mode==='historical'&&report.measurementIdentity.metricCount===29&&report.contractDigest===before.contractDigest);
+const forged=structuredClone(before);forged.observerDigest='0'.repeat(64);
+T.ok('unknown historical observer cannot borrow the29-column contract',S.comparePanels(forged,after,{historical:true}).decision==='invalid');
+const missing=structuredClone(before);delete missing.rows[0].metrics.playerDeaths;
+T.ok('a historical vector cannot omit a metric',S.comparePanels(missing,after,{historical:true}).errors.some(e=>/Historical metric vector/.test(e)));
+T.ok('historical interpretation preserves original observations',JSON.stringify({before,after})===raw);
+T.ok('a changed Game input cannot hide behind the controller experiment',rejected((b,a)=>{a.sources['src/js/game.js']='wrong';}));
+T.ok('an unrelated harness change cannot hide behind the declared layer',rejected((b,a)=>{a.sources['scripts/sim-harness.js']='wrong';}));
+T.ok('different flags or observation windows remain invalid',rejected((b,a)=>{a.options.days++;}));
+T.ok('missing metrics stay unknown only when explicitly present, never omitted',rejected((b,a)=>{delete a.rows[0].metrics.npcClassAccess;}));
+T.ok('missing actual observed/off control is rejected',rejected((b,a)=>{a.validity.neutrality=[];}));
+T.done();

@@ -41,19 +41,7 @@ Math.random = mulberry32(SEED);
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 global.window = global; // equipment.js needs window at load; removed before play
-const FILES = ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
-  'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
-  'src/js/convo-scene.js', 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-  'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/broadcast.js', 'src/js/contestEngine.js', 'src/js/alienPlayers.js', 'src/js/storage.js',
-  'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js', 'src/js/lifeseed.js',
-  'src/js/progression.js', 'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
-  'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js',
-  'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js'];
+const FILES = require('./lib/browser-script-files')(ROOT);
 for (const f of FILES) { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) { console.log('EVAL FAIL', f, e.message); process.exit(2); } }
 delete global.window; // keep combat on the sync path
 const Game = globalThis.Scattering.Game;
@@ -125,17 +113,25 @@ const roster = () => (Game.state.village.roster || []).filter(id => id !== Game.
   const vf = Game.tbfight && Game.tbfight.fighters.find(x => x.kind === 'villager' && x.villagerId === ally);
   const mf = Game.tbfight && Game.tbfight.fighters.find(x => x.kind === 'monster');
   console.log('  ally fighter present:', !!vf);
-  let monsterKill = false;
+  let monsterKill = false, allyThreatened = false;
   if (Game.tbfight && vf && mf) {
-    vf.hp = 1; mf.mx = vf.mx + 1; mf.my = vf.my;
+    // Prepared interception: the charge aims at the bearer. Put the ally
+    // on that real straight beam path, rather than merely beside the beast.
+    const target = Game.tbFighter('p');
+    target.mx = 3; target.my = 4; vf.mx = 5; vf.my = 4;
+    mf.mx = 6; mf.my = 4; vf.hp = 1;
     for (let i = 0; i < 6 && vf.alive; i++) {
       Game.tbfight.turnIdx = Game.tbfight.order.indexOf(mf.key);
-      try { Game.tbMonsterTurn(mf); } catch (e) { console.log('  tbMonsterTurn threw:', e.message); break; }
+      try {
+        Game.tbMonsterTurn(mf);
+        if (mf.telegraph?.cells?.some(c => c.cx === vf.mx && c.cy === vf.my)) allyThreatened = true;
+      } catch (e) { console.log('  tbMonsterTurn threw:', e.message); break; }
     }
     monsterKill = !vf.alive;
   }
   console.log('  monster landed the kill:', monsterKill);
-  ok(monsterKill, 'B2 monster AI targets and kills villager allies (proxy murder is possible)');
+  ok(allyThreatened, 'B2a the real charge threatens the intervening ally before firing');
+  ok(monsterKill, 'B2 monster charge kills an intervening ally (proxy murder is possible)');
   if (monsterKill) {
     const deaths = (Game.state.corpses || []).filter(c => c && c.villagerId === ally);
     const d = deaths[deaths.length - 1];

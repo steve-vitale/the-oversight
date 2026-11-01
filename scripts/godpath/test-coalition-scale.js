@@ -37,7 +37,8 @@ const fs=require('fs'),path=require('path'),K=require('./lib'),T=K.reporter('coa
  T.ok('actual action renderer enables Strike beside the huge body far from its anchor',!actions({}).match(/id="c-strike"[^>]*disabled/));
  T.ok('the real Strike caller accepts that body-edge target',G.tbPlayerStrike(m.key)===true&&p.acted);
  const stepBody=source.match(/  function moveStepHook\([^\n]*\) \{[\s\S]*?\n  \}\n/);
- const step=new Function('Game','MoveAnim','moveSig',stepBody[0]+';return moveStepHook;')(G,{clearHold(){}},()=> 'prepared-input');
+ const inputBody=source.match(/  function combatInput\([^\n]*\)\{[\s\S]*?\n  \}\n/);
+ const step=new Function('Game','MoveAnim','moveSig',inputBody[0]+stepBody[0]+';return moveStepHook;')(G,{clearHold(){}},()=> 'prepared-input');
  p.mx=8;p.my=22;p.moveLeft=3;p.acted=false;G.state.scholar.mx=8;G.state.scholar.my=22;
  T.ok('actual dpad handler crosses the old column-eight boundary inside the arena',step({dx:1,dy:0}).moved&&p.mx===9&&p.my===22&&p.moveLeft===2);
  T.ok('each human still occupies one battlefield cell',f.fighters.filter(x=>x.kind==='ally'||x.kind==='player').every(x=>G.fighterSize(x)===1));
@@ -49,8 +50,15 @@ const fs=require('fs'),path=require('path'),K=require('./lib'),T=K.reporter('coa
  const restored=G.tbfight,rm=restored&&restored.fighters.find(x=>x.kind==='monster');
  T.ok('Continue retains the body, wounds, and player location',rm&&G.fighterSize(rm)===10&&rm.hp===hp-7&&G.tbFighter('p').mx===22&&G.tbFighter('p').my===22);
  T.ok('Continue retains the battlefield origin for safe return',restored.coalitionArena?.origin?.bearer===origin.bearer);
- const corpse=G.registerDeath({kind:'monster',monsterId:'herald',name:'Prepared battlefield corpse',mx:22,my:22,cause:'prepared mapping fixture',items:[{itemId:'proof-loot',units:1}]});
+ let corpse=G.registerDeath({kind:'monster',monsterId:'herald',fighterKey:rm.key,name:'Prepared battlefield corpse',mx:22,my:22,cause:'prepared mapping fixture',items:[{itemId:'proof-loot',units:1}]});
+ const ordinary=G.registerDeath({kind:'animal',name:'Declared ordinary-grid body during the fight',mx:7,my:7,items:[{name:'declared ordinary stock',units:1}]});
+ rm._deathCorpse=corpse;
+ for(const k of ['scene','sceneInferred','fightId','fighterKey','battleGrid'])delete corpse[k];
+ G.save();T.ok('legacy large-fight Continue restores its canonical corpse link',G.load(key)&&G.tbFighter(rm.key)._deathCorpse===G.state.corpses.find(c=>c.id===corpse.id));
+ corpse=G.state.corpses.find(c=>c.id===corpse.id);
+ T.ok('saved fight identity supplies legacy body frame evidence',corpse.scene==='outside'&&corpse.sceneInferred==='legacy-saved-fight'&&corpse.battleGrid===24&&corpse.fightId===G.tbfight.id);
  G.tbEnd('fled');
+ T.ok('ordinary-grid bodies created during combat are never rescaled',G.state.corpses.find(c=>c.id===ordinary.id).mx===7&&G.state.corpses.find(c=>c.id===ordinary.id).my===7);
  T.ok('leaving the expanded field returns the same bearer to legal world coordinates',G.villagerId===origin.bearer&&G.state.scholar.mx===origin.mx&&G.state.scholar.my===origin.my&&!G.tbfight);
  T.ok('battlefield corpse and its actual loot return to a reachable world square',corpse.mx>=0&&corpse.mx<=8&&corpse.my>=0&&corpse.my<=8&&!G.cellProps(G.genDetail(G.map.px,G.map.py)[corpse.my][corpse.mx]).blocks&&corpse.items[0].itemId==='proof-loot'&&corpse.items[0].units===1);
  T.done();

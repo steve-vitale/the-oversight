@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { validateAskContract } = require('./lib/ask-contract');
 // HOSTILE PLAYTEST (socialite r11, 2026-10-10): fresh surface past r1-r10.
 // Prior runs hardened: endConvo stipend scaling + 40 words cap (r8), promise
 // keep gate (r10), gossip rep-only (r6), crumb-gift substance (r9), rumor
@@ -281,7 +282,7 @@ function driveSubstantive(vid, maxTurns) {
   let contractFails = 0, contractChecked = 0;
   for (const w of roster) {
     try {
-      const r = Game.validateAskContract(w);
+      const r = validateAskContract(Game, w);
       contractChecked++;
       if (!r.ok) { contractFails++; note(`A5 contract FAIL for ${w}: ${(r.failures || []).slice(0, 3).join('; ')}`); }
     } catch (e) { contractFails++; }

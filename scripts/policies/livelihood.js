@@ -6,6 +6,7 @@
 'use strict';
 const { capable } = require('./capable');
 const C = require('./competent');
+const publicTravel = require('./public-travel');
 function quiet(fn, reserve) {
   const env = { CAPABLE_HUNT: '0', COMPETENT_FEAST: '1', COMPETENT_SEEK_FIGHTS: '0', COMPETENT_TRADE_RESERVE: reserve ? '1' : '0' }, old = {};
   for (const k of Object.keys(env)) { old[k] = process.env[k]; process.env[k] = env[k]; }
@@ -230,7 +231,7 @@ function study(G, ctx) {
       || reachable.filter(t => !G.mapSeen(t.x, t.y)).sort((a, b) => a.d - b.d)[0];
     if (!target) return;
     ctx._makerKnowledgeDay = today;
-    if (target.d) G.travelTo(target.x, target.y);
+    if (target.d) publicTravel.travel(G, target.x, target.y);
     if (G.over || G.tbfight || G.pendingEncounter) return;
     if (G.map.px !== target.x || G.map.py !== target.y) { blocked[target.x + ',' + target.y] = today; return; }
     ctx.livelihoodKnowledgeTrips = (ctx.livelihoodKnowledgeTrips || 0) + 1;
@@ -240,7 +241,7 @@ function study(G, ctx) {
       if (G.over || G.tbfight || G.pendingEncounter) return;
       read();
     }
-    if (target.d) G.travelTo(here.x, here.y);
+    if (target.d) publicTravel.travel(G, here.x, here.y);
   } catch (e) { err(ctx, 'study', e); }
 }
 function care(G, ctx) {
@@ -296,12 +297,12 @@ function policy(id, work) {
     id, desc: 'capable survival, no deliberate hunts or feast fights; ' + id,
     setup(G, ctx) { return quiet(() => capable.setup(G, ctx), id !== 'caregiver'); },
     upkeep(G, ctx) { work(G, ctx); return quiet(() => capable.upkeep(G, ctx), id !== 'caregiver'); },
-    daily(G, ctx) { work(G, ctx); return quiet(() => capable.daily(G, ctx), id !== 'caregiver'); },
+    daily(G, ctx) { ctx.communityProfile = id; work(G, ctx); return quiet(() => capable.daily(G, ctx), id !== 'caregiver'); },
     fight(G, ctx) { return quiet(() => capable.fight(G, ctx)); },
     contest(G, ctx) { return quiet(() => capable.contest(G, ctx)); },
     diagnostics(ctx) {
       const base=capable.diagnostics(ctx);
-      return { version: 1, profile: id, mode: 'non-hunter-mixed', errors: [...(ctx && ctx.livelihoodErrors || []),...base.errors], blocked: { ...(ctx && ctx.livelihoodBlocked || {}) },
+      return { version: 1, profile: id, mode: 'non-hunter-mixed', errors: [...(ctx && ctx.livelihoodErrors || []),...base.errors], blocked: { ...base.blocked, ...(ctx && ctx.livelihoodBlocked || {}) }, communityVisits:base.communityVisits,
         counters: {...base.counters,...Object.fromEntries(Object.entries(ctx || {}).filter(([k,v]) => k.startsWith('livelihood') && Number.isFinite(v)))} };
     },
     pending(G, ctx) {

@@ -374,7 +374,7 @@
                     else if (target.kind === 'villager') {
                       self.say(`☠ ${target.name} falls.`);
                       if (self.tbVillagerFalls) self.tbVillagerFalls(target);
-                      if (self.registerDeath) self.registerDeath({ kind: 'person', villagerId: target.villagerId, name: target.name, mx: target.mx, my: target.my, cause: 'combat', witnesses: self.fightWitnesses ? self.fightWitnesses(target.villagerId) : [] });
+                      if (self.registerDeath) self.registerDeath({ kind: 'person', villagerId: target.villagerId, name: target.name, fighterKey: target.key, mx: target.mx, my: target.my, cause: 'combat', witnesses: self.fightWitnesses ? self.fightWitnesses(target.villagerId) : [] });
                     }
                   } catch (e2) {}
                   try { if (self.inCombat && self.inCombat()) self.tbEndCheck(); } catch (e3) {}

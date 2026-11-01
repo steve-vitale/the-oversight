@@ -43,10 +43,22 @@ async function fixture(trust) {
     v.health[id] = 1;
   }
   for (const id of [awayVid, emptyVid]) {
-    v.away[id] = true;
+    // A ration must be packed at the physical hall before departure.
+    // Marking the resident away first correctly forbids remote resupply.
+    v.away[id] = false;
+    Game.npcSetInside(id, true);
+    assert(Game.packAtPantry(id), 'fixture resident can reach the pantry');
+    const pantryBefore = Game.pantryKcalLive(v);
     const packed = Game.packKcal(id);
     assert(packed > 100, 'actual ration was packed');
+    assert(Math.abs(pantryBefore - Game.pantryKcalLive(v) - packed) < 1,
+      'the packed ration is paid from actual pantry food');
     Game.packSpend(id, packed - (id === awayVid ? 100 : 0));
+    v.away[id] = true;
+    Game.npcSetInside(id, false);
+    const beforeRemoteRead = Game.pantryKcalLive(v);
+    assert.equal(Game.packKcal(id), id === awayVid ? 100 : 0, 'away reads retain the real short/empty pack');
+    assert.equal(Game.pantryKcalLive(v), beforeRemoteRead, 'away reads cannot refill from the pantry');
   }
   // A prepared knowledgeable farmer guarantees genuine surplus in both trust
   // arms. This changes fixture inputs, never the production or meal function.

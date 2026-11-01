@@ -11,6 +11,7 @@ twice in one day (2026-10-09).
 | Doc | Covers | Read it when touching |
 |-----|--------|----------------------|
 | docs/CORRUPTION.md | corruption, cannibalism slope, fear, psycho spawns | any corruption, cannibalism, fear, dark player content |
+| docs/DELEGATED-DESIGN-CALLS.md | Six architecture-based calls delegated2026-10-25; below Steve's verbatim instructions | pantry fairness, grief/muster, pyrrhic deeds, Table preference/NPC representation |
 | docs/VISION.md | the game's thesis and tone | anything foundational |
 | docs/DESIGN.md | systems design | new systems |
 | docs/DIRECTIVES.md | Steve's standing orders (append-only) | always — it wins over inference |

@@ -211,12 +211,10 @@ async function newDuelGame(seed, hp, withNarration) {
   await setupGame(Game);
   const s = Game.state.scholar;
   s.health = hp || 100;
-  // no party: villagers far away so the duel is 1v1
-  try {
-    for (const rid of Object.keys((Game.state.village || {}).positions || {})) {
-      Game.state.village.positions[rid] = { mx: 0, my: 0 };
-    }
-  } catch (e) {}
+  // Explicit solo fixture, as in godpath/lib.fight. Canonical resident
+  // placement refreshes stale positions, so moving the old view map cannot
+  // establish a duel. Real party behavior is covered separately.
+  Game.state.village.roster = [];
   Game._beamFatigueHunts = 0;
   Game.dayPart = 3;
   // OPEN TERRAIN: stub the node detail to all grass so beam lanes are never
@@ -231,6 +229,7 @@ async function newDuelGame(seed, hp, withNarration) {
   s.monster = { id: 'gallowdeer', mx: 7, my: 4 };
   Game.startCombat('gallowdeer');
   if (!Game.tbfight) throw new Error('no fight started');
+  if (Game.tbfight.fighters.some(f => f.kind === 'villager')) throw new Error('Declared beam duel recruited residents');
   const p0 = Game.tbFighter('p');
   const d0 = Game.tbfight.fighters.find(x => x.kind === 'monster' && x.mdef && x.mdef.id === 'gallowdeer');
   if (p0) { p0.mx = 4; p0.my = 4; }

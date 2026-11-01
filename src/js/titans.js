@@ -1034,7 +1034,7 @@
     var grid = cfg.arenaGrid || 24, size = cfg.titanFootprint || 10;
     var s = Game.state.scholar;
     f.gridSize = grid;
-    f.coalitionArena = {gridSize:grid,origin:{mx:s.mx,my:s.my,bearer:Game.villagerId,tx:Game.map.px,ty:Game.map.py},corpseIds:(Game.state.corpses || []).map(function(c){return c.id;})};
+    f.coalitionArena = {gridSize:grid,origin:{mx:s.mx,my:s.my,bearer:Game.villagerId,tx:Game.map.px,ty:Game.map.py,scene:Game.corpseScene({x:Game.map.px,y:Game.map.py},!!s.insideHaven)},corpseIds:(Game.state.corpses || []).map(function(c){return c.id;})};
     var lead = f.fighters.find(function(m){return m.kind === 'monster';});
     f.fighters.forEach(function(m){
       // Campaign venues and Network nodes are also the army's main opponent;
@@ -1067,7 +1067,9 @@
     f.fighters.forEach(function(p){var q=worldPoint(p.mx,p.my);p.mx=q.mx;p.my=q.my;});
     (Game.state.corpses||[]).forEach(function(c){
       if(a.corpseIds.indexOf(c.id)>=0||!c.node||c.node.x!==o.tx||c.node.y!==o.ty)return;
+      if(c.fightId!==f.id||!(c.battleGrid>9)||!Game.corpseInScene(c,{x:o.tx,y:o.ty},o.scene||Game.corpseScene({x:o.tx,y:o.ty},!!Game.state.scholar.insideHaven)))return;
       var q=worldPoint(c.mx,c.my);c.mx=q.mx;c.my=q.my;
+      c.battleGrid=9;
     });
     if(Game.villagerId===o.bearer&&Game.map.px===o.tx&&Game.map.py===o.ty){Game.state.scholar.mx=o.mx;Game.state.scholar.my=o.my;}
     a.returned=true;

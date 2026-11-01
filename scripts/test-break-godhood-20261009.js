@@ -110,7 +110,7 @@ async function main() {
   // ------------------------------------------------------------------
   for (const seed of SEEDS) {
     H.fresh(45); RNG.reset(seed);
-    const s = Game.state.scholar;
+    let s = Game.state.scholar;
     grant('rage'); grant('second_wind');
     s.synergies = ['undying_fury'];
     s.activeSynergies = ['undying_fury'];
@@ -118,8 +118,16 @@ async function main() {
     Game.maybeCheatDeath();
     assert(s.health === 1,
       `G2a: second_wind WITHOUT active rage heals to 1 HP (got ${s.health}, seed ${seed})`);
-    // Now genuinely raging: full heal.
+    // The current shared survival ledger belongs to the person. Rewinding
+    // the scholar mirror cannot manufacture another daily refusal.
     s.secondWindDay = s.day - 1; s.secondWindUses = 0;
+    s.health = 0; s.hp = 0;
+    assert(Game.maybeCheatDeath() === false && s.health === 0,
+      'G2 control: rewinding scholar counters does not bypass the actual person ledger');
+    // Independent prepared raging opportunity, with an actually unused day.
+    H.fresh(45); RNG.reset(seed); s = Game.state.scholar;
+    grant('rage'); grant('second_wind');
+    s.synergies = ['undying_fury']; s.activeSynergies = ['undying_fury'];
     s.rageActive = { rounds: 2, dmgMult: 2.0 };
     s.health = 0; s.hp = 0;
     Game.maybeCheatDeath();
@@ -139,15 +147,18 @@ async function main() {
       stage: 'struggle', kind: 'villager-protests', bearerIsPlayer: true,
       bearer: null, victim: vids[0], beats: 1, deadline: s.day + 1,
     };
-    s.moltWeek = -1; s.moltUses = 0;
-    s.secondWindDay = s.day - 1; s.secondWindUses = 0;
+    // No period stamp means unused; a legacy stamp with zero uses is
+    // conservatively interpreted as spent by the actual migration contract.
+    for (const key of ['moltWeek','moltUses','secondWindDay','secondWindUses']) delete s[key];
+    const priorUses = JSON.stringify(Game.state.village.godpathSurvival || {});
     s.health = 0; s.hp = 0;
     const held = Game.maybeCheatDeath();
     assert(held === true, `G3a: death held by the link (seed ${seed})`);
-    assert((s.moltUses || 0) === 0 && s.moltWeek === -1,
+    assert((s.moltUses || 0) === 0 && s.moltWeek == null,
       `G3b: molt NOT consumed while link holds (seed ${seed})`);
     assert((s.secondWindUses || 0) === 0,
       `G3c: second_wind NOT consumed while link holds (seed ${seed})`);
+    assert(JSON.stringify(Game.state.village.godpathSurvival || {}) === priorUses, 'G3: actual per-person survival ledger is unchanged while held');
     assert(s.health === 0, `G3d: health untouched by cheats (seed ${seed})`);
     Game.state.phoenixLink = null;
   }

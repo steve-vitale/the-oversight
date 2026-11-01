@@ -411,7 +411,7 @@
       if (msgs.length) {
         game.say('The clapperboard cannot see the margins. Your handwriting survives: ' + msgs.map(function (g) { return '"' + g.text + '"'; }).join(' '));
       } else {
-        game.say('(No messages in the margins. Write between resets — tbRrLeaveMessage. Or win fast.)');
+        game.say('The margins are blank. Choose Rigging, Left or Big hit to write a reminder before the next reset.');
       }
       try { game.tbRefreshTelegraphUI(); } catch (err) {}
       if (game.tbEndCheck()) return true;
@@ -1329,13 +1329,14 @@
     },
 
     // Wire data-sigw5 buttons (one insertion point in app.js).
-    sigW5WireCombat(on, rerender) {
+    sigW5WireCombat(on, rerender, runInput) {
+      const execute = runInput || (action => G.runCombatInput(action).value);
       document.querySelectorAll('[data-sigw5]').forEach(function (b) {
         b.onclick = function () {
           try {
             var fn = b.dataset.sigw5, arg = b.dataset.arg;
-            if (arg) G[fn](arg); else G[fn]();
-          } catch (e) {}
+            execute(() => arg ? G[fn](arg) : G[fn]());
+          } catch (e) { console.warn('[sigW5] combat action', e); }
           rerender();
         };
       });

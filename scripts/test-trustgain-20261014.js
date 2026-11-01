@@ -84,10 +84,18 @@ async function main() {
 
   console.log('== R5 (GREEN): takeFromPantry sting — penalty drain ==');
   v.takes = v.takes || {}; v.gives = v.gives || {};
-  v.takes[vid] = 6000; v.gives[vid] = 0; // hostile cumulative: the old gate stings
+  v.takes[vid] = 6000; v.gives[vid] = 0;
+  // Muse's fair-share change judges dated net rate, not lifetime totals.
+  // First prove an old cumulative deficit alone no longer produces a sting.
   v.pantry = v.pantry || [];
   v.pantry.push({ name: 'test biscuit', kcalEach: 500, units: 5, kg: 0.1 });
   Game.witnesses = () => [];
+  const stingBefore=census.writes.filter(w=>w.caller==='takeFromPantry').length;
+  Game.takeFromPantry(v.pantry.length - 1);
+  ok('R5: cumulative deficit without abuse rate does not sting',census.writes.filter(w=>w.caller==='takeFromPantry').length===stingBefore);
+  // Prepare sustained over-share history using the actual dated ledger API.
+  Game.recordTakeHist(vid, 28000);
+  ok('R5: current net rate reaches the actual abuse bar',Game.takeRate7(vid)-Game.giveRate7(vid)>=3000);
   try { Game.takeFromPantry(v.pantry.length - 1); } catch (e) { console.log('  (take threw: ' + e.message + ')'); }
   const r5 = census.writes.filter(w => w.caller === 'takeFromPantry').pop();
   ok('R5: sting row, caller takeFromPantry, delta -2', !!r5 && r5.delta === -2, JSON.stringify(r5));

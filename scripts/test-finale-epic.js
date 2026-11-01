@@ -32,7 +32,7 @@ function mkMuster(n) {
   return { allies, haven: [], day: 40, outfitted: {} };
 }
 
-function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfight = null; }
+function endFight(game) { if (game.tbfight) game.tbfight.over = true; game.tbfight = null; }
 
 (async () => {
   const H = require('./sim-harness.js');
@@ -91,7 +91,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
 
   // (d) opening gate
   console.log('(d) the opening credits');
-  endFight();
+  endFight(G);
   G.state.titans._fight = null;
   said.length = 0;
   r = G.startCombat('finale_opening');
@@ -121,7 +121,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
 
   // (e) heart gate
   console.log('(e) the heart gate');
-  endFight();
+  endFight(G);
   G.state.titans._fight = null;
   const gate = (id) => G.titanEntryGate(id);
   check('non-finale titan: no override', gate('herald') === null);
@@ -247,7 +247,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
 
   // (j) defeat pauses (muster holds)
   console.log('(j) defeat pauses the march');
-  endFight();
+  endFight(G);
   G.state.titans._fight = null;
   G.state.titans.campaigns.finale = { started: true, crew: false, opening: false };
   G.state.titans.musters.finale = mkMuster(20);
@@ -273,7 +273,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
   check('player heals 50% of missing', G.state.scholar.health === 100 + Math.round((maxH - 100) * 0.5), 'hp=' + G.state.scholar.health);
   check('allies heal 25% of missing', G.state.titans.musters.finale.allies[0].hp === 40 + Math.round(60 * 0.25));
 
-  endFight();
+  endFight(G);
   console.log(`\n${pass} passed, ${fail} failed (seed ${SEED})`);
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('HARNESS ERROR', e); process.exit(2); });

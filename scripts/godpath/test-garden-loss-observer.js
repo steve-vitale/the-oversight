@@ -1,0 +1,34 @@
+'use strict';
+const K=require('./lib'),O=require('../lib/garden-usage'),{gameplayHash}=require('../gear-usage-audit');
+const T=K.reporter('Garden loss observation');
+(async()=>{
+  const G=await K.load({seed:7002});K.newRun(G);G.exitBuilding();
+  const s=G.state.scholar,v=G.state.village;s.day=20;
+  const plants=['dandelion','blackberry'].map(pid=>{const p={};G.gardenPlant(p,pid,10);return p;});
+  G.map.tiles[4][4].plots=plants;
+  plants[0].magicGrowth=8;plants[0].magicYield=1.5;
+  const originalRaid=G.commonsRaid,originalTick=G.gardenTick,before=gameplayHash(G.state),obs=O.install(G);
+  T.ok('installing loss observation does not mutate gameplay state',gameplayHash(G.state)===before);
+  const neighbor={id:'prepared-raider',name:'Prepared neighbor',x:6,y:4,trust:0,commons:{tension:80}};
+  // Fixed seed, real public raids, no RNG override or invented crop deaths.
+  for(let i=0;i<8&&!plants.some(p=>p.dead);i++)G.commonsRaid(neighbor);
+  T.ok('the real raid route destroys both existing crops',plants.every(p=>p.dead&&!p.pid));
+  T.ok('raid losses are counted independently of legacy neglect',obs.report.cropLosses.raid===2&&obs.report.cropLosses.untended===0&&obs.report.cropDeaths===0);
+  const losses=obs.report.events.filter(e=>e.type==='crop-loss');
+  T.ok('loss events preserve actual crop and invested growth',losses.length===2&&losses[0].pid==='dandelion'&&losses[0].magicGrowthLost===8&&losses[0].village===neighbor.id);
+  G.commonsRaid(neighbor);
+  T.ok('another pantry raid cannot count an already dead crop again',obs.report.cropLosses.raid===2);
+  const dying={};G.gardenPlant(dying,'dandelion',10);dying.lastTend=10;dying.weeds=5;
+  G.map.tiles[4][4].plots=[dying];G.gardenTick();
+  T.ok('real untended death retains the old counter and adds its cause',dying.dead&&obs.report.cropDeaths===1&&obs.report.cropLosses.untended===1&&obs.report.cropLosses.raid===2);
+  const loss=obs.report.events.filter(e=>e.type==='crop-loss').at(-1);
+  T.ok('neglect events retain pre-death care state',loss.cause==='untended'&&loss.lastTend===10&&loss.weeds===5);
+  G.gardenTick();T.ok('repeat reckoning does not double-count dead crops',obs.report.cropLosses.untended===1);
+  T.ok('observer errors remain visible and empty on the real routes',obs.report.errors.length===0);
+  obs.restore();T.ok('restoring observation restores both actual methods',G.commonsRaid===originalRaid&&G.gardenTick===originalTick);
+  G.commonsRaid=undefined;
+  const absent=O.install(G);
+  T.ok('an unavailable destruction route remains unknown rather than zero',absent.report.cropLosses.raid===null&&absent.report.cropLosses.untended===0);
+  absent.restore();G.commonsRaid=originalRaid;
+  T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

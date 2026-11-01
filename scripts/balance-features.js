@@ -21,6 +21,12 @@ function summarize(panel) {
       const attempts = rows.reduce((n, r) => n + (r.gear.crafts[id]?.attempts || 0), 0), successes = rows.reduce((n, r) => n + (r.gear.crafts[id]?.successes || 0), 0);
       recipes.push({ id, knownRuns, readyRuns, attempts, successes, status: successes ? 'produced' : attempts ? 'attempted_no_success' : readyRuns ? 'ready_unused' : knownRuns ? 'known_no_material_sample' : 'unobserved_access' });
     }
+    const npcRows = rows.filter(r => r.gear.npcCrafts && typeof r.gear.npcCrafts === 'object');
+    const npcCrafting = { measuredRuns: npcRows.length, missingRuns: rows.length - npcRows.length,
+      recipes: [...new Set(npcRows.flatMap(r => Object.keys(r.gear.npcCrafts)))].sort().map(id => ({ id,
+        attempts: npcRows.reduce((n, r) => n + (r.gear.npcCrafts[id]?.attempts || 0), 0),
+        successes: npcRows.reduce((n, r) => n + (r.gear.npcCrafts[id]?.successes || 0), 0),
+        residentRunIdentities: npcRows.reduce((n, r) => n + Object.keys(r.gear.npcCrafts[id]?.residents || {}).length, 0) })) };
     for (const r of rows) for (const g of r.gear.grants) {
       const key = (g.who === 'player' ? 'player/' : 'npc/') + g.source;
       const s = sources[key] || (sources[key] = { units: 0, tier3WeaponArmor: 0 });
@@ -75,7 +81,7 @@ function summarize(panel) {
       capturedErrorReasons, blockKnownRuns: blockRows.length,
       blockedRuns: blockRows.length ? blockRows.filter(d => Object.keys(d.blocked).length).length : null,
       blocks: Object.values(blocks), counters };
-    return { policy, runs: rows.length, ...(panel.options.occupation ? { cohort: cohorts.coverage(panel, policy) } : {}), completeMethodCoverage, features, recipes, sources, distributions, npcExposure, controllerDiagnostics };
+    return { policy, runs: rows.length, ...(panel.options.occupation ? { cohort: cohorts.coverage(panel, policy) } : {}), completeMethodCoverage, features, recipes, npcCrafting, sources, distributions, npcExposure, controllerDiagnostics };
   });
 }
 function markdown(report) {
@@ -89,6 +95,9 @@ function markdown(report) {
     for (const f of p.features) lines.push(`| ${f.name} | ${f.availableRuns}/${p.runs} | ${f.reachedRuns} | ${f.calls} | ${f.returnedTruthy} | ${f.status} |`);
     lines.push('', '### Observed recipe funnel', '', '| Recipe | Known runs | Ready runs | Attempts | Actual successes | Status |', '| --- | ---: | ---: | ---: | ---: | --- |');
     for (const r of p.recipes) lines.push(`| ${r.id} | ${r.knownRuns} | ${r.readyRuns} | ${r.attempts} | ${r.successes} | ${r.status} |`);
+    lines.push('', '### NPC paid objective crafting', '',
+      'Own paid attempts and products from npcWorkGear. Stone procurement and truthy refusals are excluded. Armor-day grants have their actual craft source in earned rewards, but this attempt table does not measure armor failures. Missing historical observations remain unknown. Resident identities are distinct per recipe/run, not globally unique people.', '',
+      '```json', JSON.stringify(p.npcCrafting, null, 2), '```', '');
     lines.push('', '### Earned rewards by recipient/source', '', '| Source | Units | Tier-3+ weapon/armor units |', '| --- | ---: | ---: |');
     for (const [key, s] of Object.entries(p.sources).sort()) lines.push(`| ${key} | ${s.units} | ${s.tier3WeaponArmor} |`);
     lines.push('', '### NPC eligibility and sampled build exposure', '',

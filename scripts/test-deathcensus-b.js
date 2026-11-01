@@ -133,7 +133,7 @@ ok('not lost', a5.lost === false && a5.site === 'none');
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
 const { leadfeast } = require(path.join(REPO, 'scripts', 'policies', 'feastscale'));
 
-async function oneRun(seed, days, instrumented) {
+async function runTrial(seed, days, instrumented) {
   const { Game } = await loadGame({ seed: seed, mode: 'deathcensus-proof', fullTelemetry: false });
   let inst = null, K = null;
   if (instrumented) { inst = DC.install(Game); K = inst.K; }
@@ -142,7 +142,19 @@ async function oneRun(seed, days, instrumented) {
   await quietLog(async () => { result = await runDays(Game, leadfeast, { days: days, manifest: undefined, sampleEvery: 30 }); });
   let fin = null;
   if (instrumented) { fin = DC.finalize(Game, K); try { inst.uninstall(); } catch (e) {} }
-  return { Game: Game, result: result, fin: fin };
+  return { result: result, fin: fin, outcome: outcomeFields(Game, result) };
+}
+
+// Harness globals are shared within a process. Isolate every trial, including
+// pristine pairs, rather than relying on repeated loads to reset all modules.
+async function oneRun(seed, days, instrumented) {
+  const cp = require('child_process');
+  const output = cp.execFileSync(process.execPath, [__filename, '--trial',
+    String(seed), String(days), instrumented ? '1' : '0'],
+    { cwd: REPO, encoding: 'utf8', timeout: 120000, maxBuffer: 16 * 1024 * 1024 });
+  const line = output.split('\n').find(x => x.startsWith('DEATHCENSUS_TRIAL '));
+  if (!line) throw Error('Missing isolated death-census trial receipt');
+  return JSON.parse(line.slice('DEATHCENSUS_TRIAL '.length));
 }
 
 function outcomeFields(Game, result) {
@@ -176,6 +188,11 @@ function personDeaths(samples) {
 }
 
 (async () => {
+  if (process.argv[2] === '--trial') {
+    const trial = await runTrial(Number(process.argv[3]), Number(process.argv[4]), process.argv[5] === '1');
+    console.log('DEATHCENSUS_TRIAL ' + JSON.stringify(trial));
+    return;
+  }
   console.log('PART B: instrument honesty (5 seeds x 60d)');
   const bSeeds = [66101, 66102, 66103, 66104, 66105];
   let totRows = 0, totHarness = 0, totUnexpl = 0, totErrs = 0;
@@ -184,15 +201,20 @@ function personDeaths(samples) {
     const h = personDeaths(result.samples);
     const mine = fin.deaths.filter(function (r) { return r.kind === 'person' || r.kind === 'villager'; });
     // Row completeness: every harness person death must have a matching row.
-    // The harness's `who` is the villagerId (tele record), ours is the name —
-    // match on vid<->who (both are the engine's villager id).
+    // Match the native telemetry key, not a displayed name or optional resident ID.
+    // Anonymous people retain vid:null and the engine's name-keyed event identity.
     let matched = 0;
+    const unmatched = mine.slice();
     for (const hd of h) {
-      const m = mine.find(function (r) {
-        return r.day === hd.day && String(r.vid) === String(hd.who) && String(r.cause) === String(hd.cause);
+      const index = unmatched.findIndex(function (r) {
+        return r.day === hd.day && r.telemetryWho === String(hd.who) &&
+          r.kind === hd.kind && String(r.cause) === String(hd.cause);
       });
-      if (m) matched++;
+      if (index >= 0) { matched++; unmatched.splice(index, 1); }
     }
+    const anonymous = mine.filter(r => r.kind === 'person' && r.vid === null);
+    if (s === 66105) ok('anonymous person preserves event key without invented resident ID',
+      anonymous.some(r => r.telemetryWho === 'Stranger' && r.who === 'Stranger'));
     const completeness = h.length ? matched / h.length : 1;
     totRows += mine.length; totHarness += h.length;
     totUnexpl += fin.unexplained; totErrs += fin.instrumentErrors.length;
@@ -204,7 +226,7 @@ function personDeaths(samples) {
     ok('s' + s + ' instrumentErrors=0', fin.instrumentErrors.length === 0, fin.instrumentErrors.slice(0, 2).join(';'));
     // Every person row carries the brief's fields.
     const bad = mine.filter(function (r) {
-      return r.day == null || !r.who || !r.vid && r.vid !== null || !r.kind || r.cause == null || typeof r.player !== 'boolean' || !r.pclass;
+      return r.day == null || !r.who || !r.vid && r.vid !== null || typeof r.telemetryWho !== 'string' || !r.kind || r.cause == null || typeof r.player !== 'boolean' || !r.pclass;
     });
     ok('s' + s + ' row schema', bad.length === 0, JSON.stringify(bad.slice(0, 1)));
   }
@@ -217,8 +239,8 @@ function personDeaths(samples) {
   for (const s of [66106, 66107]) {
     const a = await oneRun(s, 60, true);
     const b = await oneRun(s, 60, false);
-    const fa = JSON.stringify(outcomeFields(a.Game, a.result));
-    const fb = JSON.stringify(outcomeFields(b.Game, b.result));
+    const fa = JSON.stringify(a.outcome);
+    const fb = JSON.stringify(b.outcome);
     ok('s' + s + ' instrumented == pristine', fa === fb,
       fa === fb ? '' : ('A=' + fa.slice(0, 300) + ' B=' + fb.slice(0, 300)));
   }

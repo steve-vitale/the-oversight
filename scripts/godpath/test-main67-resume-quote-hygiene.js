@@ -69,7 +69,7 @@ async function main() {
   ok(dq(line) === 2, `opener has exactly 2 double quotes (open/close), got ${dq(line)}`);
   ok(!/\"[^\"]*\"[^\"]*\"/.test(line), 'no nested double-quote span in opener');
   ok(/how you slept/i.test(line), 'thread label present');
-  ok(/They go still/i.test(line), 'snippet memory present (quotes stripped, words kept)');
+  ok(!/They go still/i.test(line), 'unspoken stage direction is not quoted as memory');
   ok(/So it's not just me/i.test(line), 'snippet inner content preserved');
 
   // control: a snippet with no inner quotes renders identically to before
@@ -77,7 +77,7 @@ async function main() {
   L2.open = (L2.open || []).filter(o => o.tid !== 'testquote2');
   L2.open.push({
     tid: 'testquote2', label: 'the cold nights', day: (Game.state.scholar || {}).day || 1,
-    why: 'unfinished business', snippet: 'We should bank the fire better.',
+    why: 'unfinished business', snippet: '"We should bank the fire better."',
   });
   let res2 = null;
   for (let i = 0; i < 40 && !res2; i++) {

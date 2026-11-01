@@ -35,6 +35,41 @@ const { scoreOffer, scoreTableOption } = require('./capable'); // stub-Game driv
 // what bounds it (Z).
 // ----------------------------------------------------------------------------
 const REWARDS = [
+  ...['capable','maker','merchant','caregiver'].map(base=>({
+    id:'ledger-aware-'+base,file:'ledger-aware.js',
+    scorers:['existing paid ending/counter '+base+' plus ledger-unlock exploration'],
+    X:'Explicit mixed progression experiment: seek still-required wave1/2 unlock credit from uncapped types on the current rendered field, exploring through adjacent public crossings.',
+    Y:'Degenerate optimum: farming capped types, confusing facing with kills, omniscient world targeting, or turning non-hunter baselines into hunters without naming the change.',
+    Z:'Parents/defaults unchanged; named livelihood variants explicitly add hunts. Health70%, food40%, early-survival and once-per-part limits, actual public movement/payment, normal retreat and bearer/target identity safeguards. No granted kills/deeds or Game bar changes; measure same controllers on both roots and inspect all29.'
+  })),
+  ...['capable','maker','merchant','caregiver'].map(base=>({
+    id:'endgame-counter-aware-'+base,file:'endgame-counter-aware.js',
+    scorers:['parent '+base+' plus existing ending-aware and counter-aware public-action experiments'],
+    X:'Combine useful learned paid feast-bonus treatment and surplus hosting with visible, fully paid labor-demand counterplay.',
+    Y:'Degenerate optimum: free demand credit, starving the community for a deed, or assuming a shorter fight proves a better campaign.',
+    Z:'Existing engine costs and both original controller safeguards apply unchanged; no grants, invented opportunities, private finishing or default promotion. Same controller/observer on both roots, all29 and real terminal outcomes required.'
+  })),
+  ...['capable','maker','merchant','caregiver'].map(base=>({
+    id:'counter-aware-'+base,file:'counter-aware.js',
+    scorers:['parent '+base+' with visible paid labor-demand counterplay'],
+    X:'Experimental faithful public counterplay: hear a posted labor demand and pay three real still turns instead of grinding passive monsters.',
+    Y:'Degenerate optimum: an unpaid promise or free counter ending that avoids all pressure. A shorter fight or higher win rate alone cannot establish improvement.',
+    Z:'Only visible posted choices or legacy button wording; public Wait/Meet actions; engine enforces payment, movement resets and actor lifetime. Original defaults unchanged; all29 and actual opportunity/use diagnostics required.'
+  })),
+  ...['capable','maker','merchant','caregiver'].map(base=>({
+    id:'ending-aware-'+base,file:'ending-aware.js',
+    scorers:['parent '+base+' plus paid surplus feast and learned bonus-healing opportunity'],
+    X:'Experimental ending-deed pursuit: spend a real feast buff on useful known wound care; host a surplus feast when its existing food/guest/cadence checks pass.',
+    Y:'Degenerate optimum: spending community food to chase one deed or waiting indefinitely for wounds. Day count alone cannot establish intelligent completion.',
+    Z:'No invented abilities, injuries, encounters or credit. Real paid public actions,1200 personal kcal remaining, existing communal surplus/starvation restrictions. Parent hunt/defense preferences persist; not pacifist proof.',
+  })),
+  {
+    id:'garden-diplomacy', file:'garden-diplomacy.js',
+    scorers:['targets (known villages, least recently visited then closest)', 'choose (visible trust tier split, otherwise reserved pantry tribute)'],
+    X:'Opt-in gardener controller comparison: invest in real garden offers and physically visit known neighbors for actual diplomacy.',
+    Y:'Degenerate optimum: repeated visits for trust/knowledge or paying away community food to maximize crop survival.',
+    Z:'Separate control/visit profiles and explicit water-safe revision: live garden gate, weekly attempts, personal and community reserves, real grid travel and offered card actions, actor/day/interruption guards. Water-safe requires hydration70+ and1 clean carried liter at optional departure/arrival/actions; it does not refill for free or guarantee every transit step. Retain all balanced outcomes; no arm establishes pacifist viability.',
+  },
   {
     id: 'competent', file: 'competent.js',
     scorers: ['talkScore', 'fleeDirScore', 'pickTalkChoice (priority rule)'],

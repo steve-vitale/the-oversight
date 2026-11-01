@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { validateAskContract } = require('./lib/ask-contract');
 // HOSTILE PLAYTEST (socialite r4, 2026-10-09): trust/talk/gift/promise/gossip.
 // Fresh surface since: break-it social r6 (3becfc9), detective adversarial
 // (97a6b30), socialite break-it (3d021a9), playtest-socialite (d2a0010),
@@ -288,8 +289,8 @@ const origSay = Game.say ? Game.say.bind(Game) : null;
       const hasBoundary = answers.some(a => a && /rather not|boundar|not say/i.test(a.label || ''));
       if (!answers.length) contractFails.push(q.id + ':no-answers');
     }
-    if (typeof Game.validateAskContract === 'function') {
-      const vr = Game.validateAskContract(vid);
+    if (typeof validateAskContract === 'function') {
+      const vr = validateAskContract(Game, vid);
       if (vr && vr.ok === false) contractFails.push('validator:' + JSON.stringify(vr).slice(0, 80));
     }
   } catch (e) { contractFails.push('threw:' + e.message); }

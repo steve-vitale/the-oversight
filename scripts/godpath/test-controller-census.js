@@ -10,5 +10,6 @@ const bad=F.summarize(failed).find(r=>r.policy==='maker').controllerDiagnostics;
 T.ok('failed real port errors remain visible rather than being erased',bad.errorRuns===1&&bad.capturedErrorReasons['make: G.takePrepMaterial is not a function']===30&&bad.blockKnownRuns===0&&bad.blockedRuns===null);
 const capable=rows.find(r=>r.policy==='capable').controllerDiagnostics;
 T.ok('uninstrumented mixed profile stays unknown rather than apparently clean',capable.measuredRuns===0&&capable.missingRuns===2&&capable.errorRuns===null&&capable.blockedRuns===null);
+T.ok('legacy panels do not invent zero NPC crafting coverage',rows.every(r=>r.npcCrafting.measuredRuns===0&&r.npcCrafting.missingRuns===r.runs&&!r.npcCrafting.recipes.length));
 T.ok('offline census leaves both retained raw panels unchanged',before===JSON.stringify([current,failed]));
 T.done();

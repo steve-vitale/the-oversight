@@ -1,78 +1,58 @@
-// test-explorer-worldedge-20261006.js — explorer loop: the world has an edge.
-// Regression: tapping "➡️ Head west/east/..." on the rim of a border node
-// called Game.travelTo with out-of-bounds coords (e.g. (-1,3)) — travelTo
-// dereferenced the undefined tile BEFORE the travelTargets guard and threw
-// a TypeError, killing the tap handler. The button is also a dead end:
-// no path exists beyond the 7x7 map, so the tap must never promise travel.
-// Expected behavior now:
-//   1. travelTo(-1,3) / travelTo(7,3) returns null — no throw.
-//   2. tryNodeExit at the map border tells the player the known world ends
-//      here (once ever — not spam on hold-to-walk), instead of dying quiet.
-//   3. Sanity: a real adjacent travel target still works.
-// Usage: node scripts/test-explorer-worldedge-20261006.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-// Loader: scripts/godpath/lib.js — index.html script order, seeded
-// Math.random, frozen Date.now (flake fix 2026-10-14; the old
-// hand-rolled eval list was unseeded and missed modules).
+// Explorer border regression, updated for Muse's 2026-10-28 beyond-map travel.
+// Preserve the undefined-destination crash protection. Adjacent beyond ground
+// is offered now; an unoffered coordinate must still refuse without payment.
+const assert = require('assert/strict');
 const K = require('./godpath/lib');
-let Game;
-
-let pass = 0, fail = 0;
-function ok(name, cond, note) {
-  if (cond) { pass++; }
-  else { fail++; console.log(`FAIL ${name}${note ? ' — ' + note : ''}`); }
-}
-
 (async () => {
-  Game = await K.load({ seed: Number(process.env.SEED || 20261006), narration: true });
-  const said = [];
-  const _say = Game.say.bind(Game);
-  Game.say = (m) => { said.push(String(m)); return _say(m); };
+  const Game = await K.load({ seed: Number(process.env.SEED || 20261006), narration: true });
+  const said = [], say = Game.say.bind(Game);
+  Game.say = m => { said.push(String(m)); return say(m); };
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
-  Game.exitBuilding();
-
-  // put the player on the west rim of the westmost node
-  Game.map.px = 0; Game.map.py = 3;
-  Game.reveal(0, 3);
+  Game.depart(); Game.exitBuilding();
+  // Prepared west rim; open cells keep habitat outside this boundary probe.
+  Game.map.px = 0; Game.map.py = 3; Game.reveal(0, 3);
   const det = Game.genDetail(0, 3);
   det[4][0] = 'grass'; det[4][1] = 'grass';
-  Game.state.scholar.mx = 1; Game.state.scholar.my = 4;
-  Game.microMove(0, 4);
-  const ex = Game.edgeExit(Game.state.scholar.mx, Game.state.scholar.my);
-  ok('standing on the world-border rim', ex && ex.dx === -1 && ex.dir === 'west', JSON.stringify(ex));
-
-  // 1. travelTo must not throw on out-of-bounds coords
-  let threw = null, res = 'unset';
-  try { res = Game.travelTo(-1, 3); } catch (e) { threw = e; }
-  ok('travelTo(-1,3) does not throw', !threw, threw && threw.message);
-  ok('travelTo(-1,3) returns null (no target)', res === null, JSON.stringify(res));
-  threw = null; res = 'unset';
-  try { res = Game.travelTo(7, 3); } catch (e) { threw = e; }
-  ok('travelTo(7,3) does not throw', !threw, threw && threw.message);
-  ok('travelTo(7,3) returns null (no target)', res === null, JSON.stringify(res));
-  ok('player still on the border node', Game.map.px === 0 && Game.map.py === 3);
-
-  // 2. tryNodeExit at the world edge: honest, once, not silent
+  Game.state.scholar.mx = 0; Game.state.scholar.my = 4;
+  assert.deepEqual(Game.edgeExit(0, 4), { dx: -1, dy: 0, dir: 'west' });
+  const beforeOffer = JSON.stringify(Game.map.beyond || {});
+  const offered = Game.travelTargets();
+  assert(offered.some(t => t.x === -1 && t.y === 3 && t.d === 1 && t.unknown));
+  assert.equal(JSON.stringify(Game.map.beyond || {}), beforeOffer, 'reading targets generated ground');
+  const beforeRefusal = JSON.stringify({ scholar: Game.state.scholar, map: Game.map });
+  for (const [x, y] of [[100, 3], [7, 3], [NaN, 3]]) {
+    assert.equal(Game.travelTo(x, y), null, 'unoffered travel must refuse without throwing');
+  }
+  assert.equal(JSON.stringify({ scholar: Game.state.scholar, map: Game.map }), beforeRefusal,
+    'invalid destination changed resources, position or world');
   said.length = 0;
-  const r1 = Game.tryNodeExit(-1, 0);
-  ok('tryNodeExit off the world returns null', r1 === null, JSON.stringify(r1));
-  ok('world-edge bump says the world ends here', said.some(t => /known world ends|no path/i.test(t)), said.slice(0, 3).join(' | ').slice(0, 120));
+  const first = Game.tryNodeExit(-1, 0);
+  assert(first && first.moved);
+  assert.equal(Game.map.px, -1); assert.equal(Game.map.py, 3);
+  const firstTile = Game.tileAt(-1, 3);
+  assert(firstTile && firstTile.revealed, 'successful arrival needs real revealed ground');
+  assert.equal(said.filter(t => /world keeps going past the old edge/.test(t)).length, 1);
+  assert(said.some(t => /Travel 1 tile/.test(t)), 'crossing must narrate arrival');
   said.length = 0;
-  Game.tryNodeExit(-1, 0);
-  ok('world-edge message does not repeat (no hold-to-walk spam)', said.length === 0, said.slice(0, 2).join(' | ').slice(0, 120));
-
-  // 3. sanity: a real in-bounds travel target still works
-  const t = Game.travelTargets().find(tt => tt.x === 1 && tt.y === 3);
-  ok('in-bounds target exists', !!t);
-  said.length = 0;
-  Game.travelTo(1, 3);
-  ok('in-bounds travel still moves', Game.map.px === 1 && Game.map.py === 3, `at ${Game.map.px},${Game.map.py}`);
-  ok('arrival said something', said.some(x => /Travel 1 tile/.test(x)));
-
-  console.log(`\nRESULT: ${pass} pass, ${fail} fail`);
-  process.exit(fail ? 1 : 0);
-})();
+  const second = Game.tryNodeExit(-1, 0);
+  assert(second && second.moved);
+  assert.equal(Game.map.px, -2); assert.equal(Game.map.py, 3);
+  assert(Game.tileAt(-2, 3));
+  assert(!said.some(t => /world keeps going past the old edge/.test(t)), 'introduction repeated');
+  assert(said.some(t => /Travel 1 tile/.test(t)), 'later crossing must still narrate arrival');
+  // Return through the same generated object, then onto the home board.
+  Game.travelTo(-1, 3);
+  assert.equal(Game.map.px, -1);
+  assert.equal(Game.tileAt(-1, 3), firstTile, 'return regenerated visited ground');
+  for (const x of [0, 1]) {
+    const tile = Game.tileAt(x, 3); delete tile.blockFrom; delete tile.needsBridge;
+    assert(Game.travelTargets().some(t => t.x === x && t.y === 3));
+    said.length = 0; Game.travelTo(x, 3);
+    assert.equal(Game.map.px, x); assert.equal(Game.map.py, 3);
+    assert(said.some(t => /Travel 1 tile/.test(t)));
+  }
+  assert.equal(Game.map.tiles.length, 9);
+  assert(Game.map.tiles.every(row => row.length === 9), 'beyond travel expanded the home array');
+  console.log('Explorer boundary: offered-only travel, free invalid refusal, real beyond crossings, one introduction and exact return passed.');
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "panel-contract-rulings-2026-10-24",
+  "revision": "npc-weapon-grants-2026-10-31",
   "minimumPairs": 8,
   "confirmationSeeds": 64,
   "bootstrapSamples": 1000,
@@ -30,11 +30,11 @@
     { "id": "usefulIntake", "label": "Primary nourishment / physical food consumed on instrumented routes", "unit": "ratio; reserve absorption or NPC route need equivalent; may exceed 1; versioned cumulative receipts only", "direction": "neutral", "tolerance": 0 },
     { "id": "bearerChanges", "label": "Bearer changes", "unit": "people/run", "direction": "neutral", "tolerance": 0 },
     { "id": "abilityAccepted", "label": "Accepted player ability events", "unit": "events/run, not landed effects", "direction": "neutral", "tolerance": 0 },
-    { "id": "luckHunt", "label": "Hunt luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
-    { "id": "luckTrap", "label": "Trap luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
-    { "id": "luckSnare", "label": "Snare luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
-    { "id": "luckPit", "label": "Pit luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
-    { "id": "luckFish", "label": "Fishing luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
-    { "id": "luckOverall", "label": "Combined run luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false }
+    { "id": "luckHunt", "label": "Hunt luck score", "unit": "descriptive mid-distribution score, observable fixed-exposure model; not a calibrated probability", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false, "diagnosticOnly": true },
+    { "id": "luckTrap", "label": "Trap luck score", "unit": "descriptive mid-distribution score, observable fixed-exposure model; not a calibrated probability", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false, "diagnosticOnly": true },
+    { "id": "luckSnare", "label": "Snare luck score", "unit": "descriptive mid-distribution score, observable fixed-exposure model; not a calibrated probability", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false, "diagnosticOnly": true },
+    { "id": "luckPit", "label": "Pit luck score", "unit": "descriptive mid-distribution score, observable fixed-exposure model; not a calibrated probability", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false, "diagnosticOnly": true },
+    { "id": "luckFish", "label": "Fishing luck score", "unit": "descriptive mid-distribution score, observable fixed-exposure model; not a calibrated probability", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false, "diagnosticOnly": true },
+    { "id": "luckOverall", "label": "Combined descriptive luck index", "unit": "descriptive inverse-normal index on [0,1]; dependent/adaptive exposure, not a calibrated probability", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false, "diagnosticOnly": true }
   ]
 }

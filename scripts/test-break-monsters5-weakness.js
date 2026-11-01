@@ -44,7 +44,7 @@ const allWeaknesses = () => monsters.flatMap(m => (m.weaknesses || []).map(w => 
 // Mechanic anchors: each rewritten counter must point at something real.
 const ANCHORS = {
   boarWinded: /boarWinded[\s\S]{0,120}1\.5|winded x1\.5/i,
-  disrupt: /DISRUPT: a solid hit while it's channeling/,
+  beamMovement: /Ordinary Strike deals damage; it does not interrupt a firing beam/,
   mothRecover: /The moth shivers its wings — dull, lightless/,
   shoutChorus: /chorusBrokenUntil/,
   radioReveal: /The signal scrambles — exposed, it takes the hit badly/,
@@ -57,7 +57,7 @@ const FIXES = [
   { id: 'bulldozer', old: 'soft flanks (HARRY then STRIKE)',
     nw: 'dodge the charge - it ends winded, flanks soft; STRIKE then', anchor: 'boarWinded' },
   { id: 'gallowdeer', old: 'interrupt the freeze (HARRY)',
-    nw: 'a solid strike while the beam burns can break its aim', anchor: 'disrupt' },
+    nw: 'move sideways out of the beam or break its lane behind a wall; striking does not interrupt it', anchor: 'beamMovement' },
   { id: 'mirrormoth', old: 'overcast days dull the wings',
     nw: 'after the flash the wings hang dull and lightless - strike while it recovers', anchor: 'mothRecover' },
   { id: 'belltoad', old: 'deafened by its own chorus (loud noises scatter the pack)',
@@ -92,7 +92,8 @@ check('voice_mimic coaching: honest reveal line present',
 const LIE_TOKENS = [/\bHARRY\b/, /overcast/i, /ordinary cats/i,
   /fire scrambles it/, /fire scatters it/, /fire breaks its concentration/,
   /cannot moderate what it cannot see/, /loud noises scatter the pack/,
-  /fire scrambles the signal/i, /fire scrambles the broadcast/i];
+  /fire scrambles the signal/i, /fire scrambles the broadcast/i,
+  /a solid strike while the beam burns can break its aim/i, /close in and break its aim/i];
 for (const t of LIE_TOKENS) {
   const hit = allWeaknesses().find(x => t.test(x.w));
   check(`no weakness matches ${t}`, !hit);

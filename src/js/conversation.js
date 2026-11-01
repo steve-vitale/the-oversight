@@ -6,6 +6,9 @@
 //   - convoMenuPage(vid, choices)
 //   - convoNextMenu(vid)
 //   - convoChoices(vid)
+//   - convoOrderReplies(vid, choices)
+//   - convoVillageQuestionIntent(label)
+//   - convoVillageFocusedLine(vid, intent)
 //   - convoBeatOf(choiceId, thread)
 //   - convoFollowups(vid, topic)
 //   - convoSpeakBackChoice(vid, suppressPivot)
@@ -13,7 +16,8 @@
 //   - convoTopicLedger(vid)
 //   - convoNoteTopic(vid, tid, label)
 //   - convoNoteBeat(vid, thread, line)
-//   - convoNoteSpokenBeat(vid, line)
+//   - convoNoteSpokenBeat(vid, line, opts)
+//   - convoSnippetSpeech(vid, snippet)
 //   - convoThreadOpen(vid, tid, label, why, snippet)
 //   - convoThreadResolve(vid, tid)
 //   - convoOpenThreads(vid)
@@ -666,6 +670,7 @@
       // Random semantic mannerisms ("It'll be fun", "how are YOU?") can
       // contradict an injury or introduce a second unanswered question.
       const request = this.state.village?.conv?.[vid];
+      if (request?.thread === 'village' && request.villageQuestionIntent && request.villageQuestionIntent !== 'overview') return line;
       if (request?.active && ['ask_favor', 'repay'].includes(request.want?.id)) return line;
       const temp = String(this.npcTemper(vid) || 'steady').toLowerCase();
       const V = (this.data.characterGen || {}).voice || {};
@@ -703,6 +708,11 @@
           if (dna.close) closes = closes.concat(dna.close);
         }
       } catch (e) {}
+      // Voice changes delivery, not the reply contract. A mannerism such as
+      // "What's this about?" creates a second question in an answer that
+      // never asked one. Actual questions belong to the authored base line.
+      opens = opens.filter(bit => !/[?？]/.test(String(bit)));
+      closes = closes.filter(bit => !/[?？]/.test(String(bit)));
       if ((!opens.length && !closes.length) || Math.random() >= p) return line;
       const inner = t.slice(1, -1);
       const isQ = /\?\s*$/.test(inner);
@@ -823,7 +833,7 @@
     // boundaries, never mid-word; a pathological single sentence falls back
     // to word boundaries. Returns [line] when it already fits.
     convoSplitBeats(text) {
-      const MAX = 260;
+      const MAX = 160; // native 390px phone: leave room for speaker and controls
       const t = String(text || '');
       if (t.length <= MAX) return [t];
       // Split into sentences on . ! ? ; — : followed by space, plus em-dashes.
@@ -842,7 +852,7 @@
             // Single over-long sentence: split at word boundaries.
             const words = s.split(/\s+/);
             let wcur = '';
-            for (const w of words) {
+            for (let w of words) {
               if ((wcur + (wcur ? ' ' : '') + w).length <= MAX) {
                 wcur = wcur ? wcur + ' ' + w : w;
               } else {
@@ -1014,8 +1024,13 @@
         c.genericQ = null;
         c.heldBeats = (c.heldBeats || []).filter(h => !h.genericFollowup);
       }
-      for (const chunk of useChunks) {
-        const entry = { who: 'them', text: chunk };
+      // Voice context belongs to the complete accepted utterance, including a
+      // genuine fallback. Keep its per-page payload with the transcript so
+      // Continue can voice the same words without guessing legacy quote state.
+      const voiceLines = typeof this.voiceLinesForBeats === 'function'
+        ? this.voiceLinesForBeats(useChunks) : useChunks.map(() => '');
+      for (const [index, chunk] of useChunks.entries()) {
+        const entry = { who: 'them', text: chunk, voiceLine: voiceLines[index] };
         if (this.convoRecordSpokenBeat) this.convoRecordSpokenBeat(vid, chunk, fellBack ? { tag: 'endtopic' } : opts);
         if (opts && opts.foreign) entry.foreign = opts.foreign;
         // (beat/topic tags are stamped by convo-beats' transcript-push wrapper
@@ -1041,13 +1056,15 @@
       // and self-repeat fallbacks are meta-speech, not thread content.
       // Noting them made deflections the thread's "last beat", which the
       // resume opener then quoted as the unfinished topic.
-      try { if (!fellBack) for (const chunk of useChunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
-      // VOICED DIALOGUE (Steve 2026-10-11): speak each NPC beat in the
-      // villager's own deterministic voice (voice-piper.js). Fire-and-forget;
-      // mute/unlock/setting/foreign gates live inside convoSpeakLine.
-      // Speaks what was ACTUALLY spoken (useChunks: the fallback when the
-      // primary was no-repeat-blocked), never the blocked line.
-      try { for (const chunk of useChunks) this.convoSpeakLine(vid, chunk, opts); } catch (e) {}
+      try {
+        if(!fellBack){
+          const memoryLines=this.voiceLinesForBeats(useChunks.map(chunk=>this.convoStripAcks(chunk)));
+          for(const spoken of memoryLines)this.convoNoteSpokenBeat(vid,spoken,opts);
+        }
+      } catch(error) { console.warn('[conversation memory] spoken beat failed',error); }
+      // The UI dispatches only the currently displayed beat. Sending every
+      // page now makes Piper cancel earlier pages before they can be heard.
+      // Mute/unlock/settings/foreign gates remain in convoSpeakLine.
       // DRY STREAK + WIND-DOWN (journey-social r18 2026-10-16): count
       // consecutive deflection speeches — however they were produced. The
       // sayLine fallbacks (dry / self-repeat) are one source, but the dlg:
@@ -1360,6 +1377,22 @@
       if (!L.discussed) L.discussed = {};
       if (!L.open) L.open = [];
       if (!L.lapsed) L.lapsed = [];
+      // Old saves can carry a favor thread after the actual deed settled.
+      // Match its identity (or legacy day/label), never a newer unrelated ask.
+      // Preserve only proven speech before a new sitting clears its transcript.
+      const want=v.conv?.[vid]?.want, favor=v.favorLedger?.[vid];
+      const closed=o=>{
+        if(o.tid!=='want')return false;
+        const id=o.favorId||(want?.id==='ask_favor'?want.favor?.id:null);
+        const record=favor&&((id&&favor.id===id)||(!id&&o.label==='that favor'&&favor.askedDay<=o.day))?favor:
+          want?.id==='ask_favor'&&want.favor?.id===id?want.favor:null;
+        return !!record&&['fulfilled','thanked','broken','acknowledged','moot','declined'].includes(record.state);
+      };
+      L.open=L.open.filter(o=>!closed(o));L.lapsed=L.lapsed.filter(o=>!closed(o));
+      for(const o of L.open.concat(L.lapsed))if(o.snippetSpeech===undefined){
+        const speech=this.convoSnippetSpeech(vid,o.snippet);o.snippetSpeech=!!speech;
+        if(speech)o.snippet=speech;
+      }
       // People move on: open threads older than 14 days lapse — REMEMBERED
       // as lapsed, not deleted (COHERENCE Steve 2026-10-07). Circling back
       // to a lapsed topic gets an honest "we never did finish that one",
@@ -1432,6 +1465,7 @@
         // label — the villager never offered a lesson. The honest label names
         // what happened, in neutral voice (spoken by NPC and player alike).
         taughtref: 'that plant lesson', recall: 'that personal stuff',
+        field: 'that field lesson',
         // TABLE SITTING (journey-endgame r11 2026-10-14): the table opener's
         // thread id must never leak raw into resume/recap lines
         // ("talking about table") — the honest label is the table.
@@ -1503,6 +1537,10 @@
     // happened. Now the plant itself requires the teaching event.
     convoThreadBacked(vid, tid) {
       if (!tid) return false;
+      if(tid==='want'){
+        const want=this.state.village.conv?.[vid]?.want;
+        if(want?.id==='ask_favor'&&['fulfilled','thanked','broken','acknowledged','moot','declined'].includes(want.favor?.state))return false;
+      }
       if (tid === 'taughtref') {
         try {
           const tbp = this.playerTaughtPlants ? this.playerTaughtPlants(vid) : [];
@@ -1543,11 +1581,14 @@
         if (L.lastClosed && L.lastClosed.tid === tid) L.lastClosed = null;
         if (L.open.some(o => o.tid === tid)) return;
         if (L.open.length >= 4) L.open.shift();
+        const speech=this.convoSnippetSpeech(vid,snippet);
         L.open.push({
           tid, label: String(label || tid).slice(0, 80),
           day: (this.state.scholar || {}).day || 1,
           why: why || 'unfinished',
-          snippet: snippet ? clipSnippet(snippet, 110) : null,
+          snippet: speech || (snippet ? clipSnippet(snippet, 110) : null),
+          snippetSpeech: !!speech,
+          ...(tid==='want'&&this.state.village.conv?.[vid]?.want?.favor?.id?{favorId:this.state.village.conv[vid].want.favor.id}:{}),
         });
       } catch (e) {}
     },
@@ -1577,6 +1618,22 @@
     // records beats the NPC landed (convoNoteBeat / convoNoteSpokenBeat), so
     // quoting it in the NPC's voice at resume time is honest — it's
     // literally the last thing THEY said on that thread.
+    // Speech provenance is shared with TTS. Legacy bare snippets need a real
+    // transcript match; narration and unknown old text are never re-voiced.
+    convoSnippetSpeech(vid, snippet) {
+      if(!snippet)return null;
+      const clean=line=>clipSnippet(this.convoStripAcks(line),110);
+      const quoted=this.voiceLinesForBeats?.([this.convoStripAcks(String(snippet))])?.[0];
+      if(quoted)return clean(quoted);
+      const candidate=clean(String(snippet)),c=this.state.village.conv?.[vid];
+      if(c?.threadLog?.some(e=>e.speech===true&&e.snippet===candidate))return candidate;
+      for(const entry of c?.transcript||[]){
+        if(entry.who!=='them')continue;
+        const speech=Object.prototype.hasOwnProperty.call(entry,'voiceLine')?entry.voiceLine:this.voiceLinesForBeats?.([String(entry.text||'')])?.[0];
+        if(speech&&clean(speech)===candidate)return candidate;
+      }
+      return null;
+    },
     convoLastThreadSnippet(vid, tid) {
       try {
         const c = this.convoGet(vid);
@@ -1588,8 +1645,9 @@
             // had substance earlier quotes the substance, not the filler.
             // A thread with no substantive beat at all yields null, and the
             // plant-time gate treats it as the ghost it is.
-            if (this.convoSnippetIsRealBeat(log[i].snippet)) {
-              return clipSnippet(log[i].snippet, 110);
+            const speech=this.convoSnippetSpeech(vid,log[i].snippet);
+            if (this.convoSnippetIsRealBeat(speech)) {
+              return speech;
             }
           }
         }
@@ -1647,17 +1705,19 @@
     // line noted twice via sayLine + turn tail) collapse.
     convoNoteBeat(vid, thread, line) {
       if (!thread || thread === 'nonverbal') return;
+      const spoken=this.voiceLinesForBeats?.([this.convoStripAcks(String(line||''))])?.[0];
+      if(!spoken)return;
       try {
         const c = this.convoGet(vid);
         this.convoNoteTopic(vid, thread, this.convoTopicLabel(vid, thread));
         // R13 (journey-deepening 2026-10-16): strip thinking-aloud acks
         // before clipping — the snippet is the memory of the topic's
         // CONTENT, not the delivery wrappers.
-        const clean = clipSnippet(this.convoStripAcks(line), 110);
+        const clean = clipSnippet(this.convoStripAcks(spoken), 110);
         c.threadLog = c.threadLog || [];
         const last = c.threadLog[c.threadLog.length - 1];
         if (clean && (!last || last.thread !== thread || last.snippet !== clean)) {
-          c.threadLog.push({ thread, snippet: clean, ex: c.exchanges || 0 });
+          c.threadLog.push({ thread, snippet: clean, ex: c.exchanges || 0, speech:true });
           if (c.threadLog.length > 12) c.threadLog.shift();
         }
         // SUBJECT CHANGE: the old thread was live and we moved on. The plant
@@ -1691,11 +1751,12 @@
 
     // convoNoteSpokenBeat: the sayLine hook. The dialogue layer speaks its
     // beats through sayLine, so this sees dlg: turns that never reach
-    // methods.convoTurn. Guarded: only live conversations record.
-    convoNoteSpokenBeat(vid, line) {
+    // methods.convoTurn. Only live, substantive beats belong in topic memory;
+    // a goodbye must not become the unfinished subject on the next sitting.
+    convoNoteSpokenBeat(vid, line, opts) {
       try {
         const c = this.convoGet(vid);
-        if (!c.active || !c.thread) return;
+        if (!c.active || !c.thread || opts?.tag === 'closing') return;
         this.convoNoteBeat(vid, c.thread, line);
       } catch (e) {}
     },
@@ -1882,7 +1943,7 @@
       // doubles too nested unescaped quotes (transcript-verified:
       // ...neighbors.""). Single quotes nest cleanly; the snippet text
       // itself is untouched.
-      if (o.snippet) {
+      if (o.snippet && o.snippetSpeech===true) {
         // R17 (journey-social 2026-10-15): never quote a deflection as the
         // "memory" — the sayLine hook no longer notes fallback chunks, so no
         // new deflection snippets are planted; this guards threads planted
@@ -2776,15 +2837,16 @@
       // here. (socialite playtest 2026-10-06: the want/secret/taught hooks
       // used to pre-empt it intermittently, stranding the request.)
       const treq = (v.talkRequests || {})[vid];
-      if (treq && !treq.delivered) {
+      if (treq && (!treq.delivered || this.talkRequestNeedsReply?.(vid, treq))) {
         const tline = this.renderTalkLine(String(treq.line).replace(/ \(Talk to .*?\.\)$/, ''), vid);
         // OPENER SKIP (journey-social r19 2026-10-16): a run-blocked request
         // opener must not go dry — and must NOT mark delivered, or the
         // reason they came to talk is stranded. The request stays pending
         // and fires next conversation (the 48-entry ledger slides).
-        if (!this.convoWouldBlock(vid, tline)) {
+        const requestNeedsReply = this.talkRequestNeedsReply?.(vid, treq);
+        if (requestNeedsReply || !this.convoWouldBlock(vid, tline)) {
           treq.delivered = true;
-          return { line: tline, thread: 'request' };
+          return { line: tline, thread: 'request', ...(requestNeedsReply ? { structural: true } : {}) };
         }
       }
 
@@ -2884,7 +2946,12 @@
           // opener may have already established the ask (stage 2, menu goes
           // straight to commit/deflect). Don't downgrade it.
           const seedVLine = this.voiceLine(vid, seedLine);
-          if (this.convoWouldBlock(vid, seedVLine)) {
+          // Repeating an unanswered saved question is a real invitation to
+          // answer it, not recycled flavor. Both opener selection and speech
+          // emission must preserve this exact question across later sittings.
+          const resumesQuestion = want.id === 'curious' && !!want.seedQid &&
+            opener.question?.id === want.seedQid && _liveSeed?.qid === want.seedQid;
+          if (!resumesQuestion && this.convoWouldBlock(vid, seedVLine)) {
             // Blocked: fall through — seed stays planted, side effects
             // deferred, next conversation resumes it.
           } else {
@@ -2899,7 +2966,7 @@
             // seed-driven conversations open one mood band cooler. Whatever
             // was left hanging, it wasn't nothing — the air is heavier.
             if (typeof this.convoMoodShift === 'function') this.convoMoodShift(vid, -1);
-            return { line: seedVLine, thread: 'want', wantId: want.id };
+            return { line: seedVLine, thread: 'want', wantId: want.id, structural: resumesQuestion };
           }
         }
       }
@@ -3485,8 +3552,65 @@
     // of fizzling to the dry admission — same root cause as the request
     // thread (convoThreadBeat served goal/past/plans/want/gossip but not
     // village). Repeat calls walk the idle-variant pool, never verbatim.
+    convoVillageQuestionIntent(label) {
+      const def = ((this.data.characterGen || {}).convo || {}).villageQuestions || {};
+      for (const group of Object.values(def)) for (const rows of Object.values(group || {})) {
+        if (!Array.isArray(rows)) continue;
+        for (const entry of rows) if (entry.label === label || (entry.legacyLabels || []).includes(label)) return entry.intent;
+      }
+      return null;
+    },
+    convoVillageFocusedLine(vid, intent) {
+      const c = this.convoGet(vid), v = this.state.village;
+      const fallen = new Set((v.fallen || []).map(x => typeof x === 'string' ? x : x.villagerId));
+      const people = [...new Set(v.roster || [])].filter(id => id !== this.villagerId && id !== 'player' &&
+        !fallen.has(id) && (v.health?.[id] ?? 100) > 0 && this.vpOf(id));
+      const hungry = people.filter(id => (this.npcNeeds(id).hunger || 0) > 70);
+      const hurt = people.filter(id => (v.health?.[id] ?? 100) < 100 || v.sick?.[id]);
+      const scared = people.filter(id => (this.npcNeeds(id).fear || 0) > 70);
+      const report = (ids, self, other) => ids.slice(0, 3).map(id => id === vid ? self : this.firstRef(id) + ' ' + other).join(' ') +
+        (ids.length > 3 ? ' There are ' + (ids.length - 3) + ' others too.' : '');
+      const food = hungry.length ? report(hungry, "I'm going hungry.", 'needs food.') : "I haven't seen anyone here going hungry.";
+      const stored = (v.pantry || []).reduce((n, row) => {
+        const units = row?.units == null ? 1 : row.units;
+        return n + (Number.isFinite(units) && units > 0 && Number.isFinite(row?.kcalEach) && row.kcalEach > 0 ? units * row.kcalEach : 0);
+      }, 0);
+      const supplies = stored > 0 ? 'The shared pantry holds about ' + Math.round(stored) + ' calories. That does not include what people carry themselves.' : "The shared pantry is empty. People may still have their own supplies.";
+      const health = hurt.length ? report(hurt, v.sick?.[vid] ? "I'm feeling ill." : "I'm hurt.", 'looks hurt or ill.') : "I haven't noticed anyone hurt or ill. Tell me if I've missed someone.";
+      const care = [...new Set([...hungry, ...hurt, ...scared])];
+      const mood = [];
+      if (v.grief > 0) mood.push("people are grieving");
+      if (v.cheer > 0) mood.push('people are in good spirits');
+      if (scared.length) mood.push(scared.length + (scared.length === 1 ? ' person seems frightened' : ' people seem frightened'));
+      if (Object.values(v.heat || {}).some(x => x > 0)) mood.push("there's tension over who's in charge");
+      const morale = mood.length ? mood.join('; ') + '.' : 'People seem settled, from what I have seen.';
+      const young = people.filter(id => { const age = this.vpOf(id).age; return Number.isFinite(age) && age <= 24; });
+      const youngNeed = young.filter(id => care.includes(id));
+      const concern = [hurt.length && health, hungry.length && food, scared.length && report(scared, "I'm frightened.", 'seems frightened.')].filter(Boolean);
+      const youngConcern = [
+        young.filter(id => hurt.includes(id)).length && report(young.filter(id => hurt.includes(id)), v.sick?.[vid] ? "I'm feeling ill." : "I'm hurt.", 'looks hurt or ill.'),
+        young.filter(id => hungry.includes(id)).length && report(young.filter(id => hungry.includes(id)), "I'm going hungry.", 'needs food.'),
+        young.filter(id => scared.includes(id)).length && report(young.filter(id => scared.includes(id)), "I'm frightened.", 'seems frightened.'),
+      ].filter(Boolean);
+      const reports = {
+        hunger: [food, supplies], supplies: [supplies, food],
+        health: [health],
+        care: concern.length ? [...concern, morale] : ['Nobody I can account for seems to need urgent help.', morale],
+        morale: [morale, ...concern],
+        young: !young.length ? ['I cannot point to anyone that young in our group.'] : youngNeed.length ? youngConcern : ['The younger ones seem to be managing.'],
+        alive: [people.length === 1 ? 'I am still here with you.' : people.length + ' other people are still with our group, besides you.', fallen.size ? 'We have lost ' + fallen.size + (fallen.size === 1 ? ' person along the way.' : ' people along the way.') : 'I do not know of anyone we have lost.'],
+        unknown: ['I am not sure about that particular question. I can tell you what I have noticed.', food, health, morale],
+      };
+      c.thread = 'village'; c.depth = Math.max(1, c.depth || 0);
+      c.said = c.said || {}; c.said.villageFocused = c.said.villageFocused || [];
+      const lines = Object.prototype.hasOwnProperty.call(reports, intent) ? reports[intent] : reports.unknown;
+      const next = lines.find(line => !c.said.villageFocused.includes(intent + ':' + line));
+      if (next) { c.said.villageFocused.push(intent + ':' + next); return '"' + next + '"'; }
+      return this.convoPickCycle(vid, 'villageFocusedExhausted', ['"That is all I can tell you about that right now."', '"I have no more to add on that."']);
+    },
     convoVillageLine(vid) {
       const c = this.convoGet(vid);
+      if (c.villageQuestionIntent && c.villageQuestionIntent !== 'overview') return this.convoVillageFocusedLine(vid, c.villageQuestionIntent);
       const vp = this.vpOf(vid) || {};
       const vg = this.state.village;
       const bits = [];
@@ -3632,6 +3756,11 @@
         return l ? this.voiceLine(vid, this.fillTalkLine(l, vp)) : exh();
       }
       if (topic === 'village') {
+        // Bind the exact offered words, including cached menus from Continue.
+        // Direct topic callers ask the broad overview; unknown saved labels
+        // get an explicit admission rather than an invented specific answer.
+        const offered = c.offeredReplies?.['ask:village'];
+        c.villageQuestionIntent = offered ? (this.convoVillageQuestionIntent(offered) || 'unknown') : 'overview';
         return this.convoVillageLine(vid);
       }
       if (topic === 'plans') {
@@ -3714,7 +3843,8 @@
       }
       pool = pool || [seedKey];
       const h = this._hashStr ? this._hashStr(vid + ':' + seedKey + ':' + tier + ':' + pv.voiceClass + ':' + pv.ageBand) : 0;
-      return pool[Math.abs(h) % pool.length];
+      const chosen = pool[Math.abs(h) % pool.length];
+      return typeof chosen === 'string' ? chosen : chosen.label;
     },
 
     // convoVoiceTier: the REGISTER the player speaks in to this villager.
@@ -3783,31 +3913,7 @@
                     '"Tell me about your life. I\'ve got time."'],
           },
         },
-        village: {
-          tier: {
-            new: ['"How\'s everyone holding up?"',
-                  '"How are people doing?"'],
-            warm: ['"What\'s the feeling around the fire lately?"',
-                   '"Who\'s struggling that I haven\'t noticed?"'],
-            close: ['"Be honest — how bad is it, really?"',
-                    '"Who do I need to check on?"'],
-          },
-          occ: {
-            medicinal: ['"Anyone hurt? Who needs looking at?"', '"How are the injured doing?"'],
-            food: ['"Is anyone going hungry?"', '"How\'s the food holding out — honestly?"'],
-          },
-          voice: {
-            blunt: ['"Everyone still breathing?"', '"Who\'s falling apart?"'],
-            soft: ['"Is everyone alright? Really alright?"'],
-            dry: ['"How\'s morale? Or shouldn\'t I ask."'],
-          },
-          age: {
-            young: ['"Is everyone okay? Like, actually okay?"',
-                    '"How\'s everyone doing? For real?"'],
-            elder: ['"How are the young ones holding up?"',
-                    '"Is everyone managing? Tell me true."'],
-          },
-        },
+        village: ((this.data.characterGen || {}).convo || {}).villageQuestions || { tier: { new: [{ label: '"How are people doing?"', intent: 'overview' }] } },
         plans: {
           tier: {
             new: ['"What\'s your plan for tomorrow?"',
@@ -3862,16 +3968,16 @@
     // sound like a response to WHAT THEY JUST SAID — not a button.
     // Gentle when they're grieving or scared; eager when they trail off
     // mid-story; per-thread otherwise. Stable per person within context.
-    convoMoreLabel(vid) {
+    convoMoreLabel(vid, queued = false) {
       const c = this.convoGet(vid);
       // TOPIC PACK (Steve 2026-10-06): generated topics have their own more-labels.
-      if (this.topic2Has && this.topic2Has(c.thread || '')) return this.topic2MoreLabel(vid);
-      const thread = c.thread || 'small';
+      if (!queued && this.topic2Has && this.topic2Has(c.thread || '')) return this.topic2MoreLabel(vid);
+      const thread = queued ? 'small' : c.thread || 'small';
       const mood = (this.npcMood && this.npcMood(vid)) || '';
       const themLines = (c.transcript || []).filter(e => e.who === 'them');
       const last = themLines.length ? String(themLines[themLines.length - 1].text || '') : '';
-      const trailsOff = /(\.\.\.|—|…)\s*"?$/.test(last);
-      const askedYou = /\?\s*"?$/.test(last);
+      const trailsOff = !queued && /(\.\.\.|—|…)\s*"?$/.test(last);
+      const askedYou = !queued && /\?\s*"?$/.test(last);
       let pool;
       if (mood === 'grieving' || mood === 'scared') {
         pool = ['"Take your time."', '"I\'m here. Go on."', '"You don\'t have to say it all at once."'];
@@ -4141,6 +4247,7 @@
       else if (c.pendingQ) owns = id => id.startsWith('ans:') || ['deflect_q','leave','silence'].includes(id);
       else if (c.reactiveQ) owns = id => id.startsWith('react:') || ['leave','silence'].includes(id);
       else if (c.genericQ) owns = id => id.startsWith('gq:') || ['leave','silence'].includes(id);
+      else if (c.thread === 'nonverbal') owns = id => id.startsWith('nv:') || ['speak_back','goon','leave','silence'].includes(id);
       else if (c.pendingTrade) owns = id => ['trade_yes','trade_no','leave','silence'].includes(id);
       else if (c.pendingHawk) owns = id => ['hawker_yes','hawker_no','leave','silence'].includes(id);
       else if (!c.choosingSubject && c.thread === 'want' && c.want?.stage > 0 && c.want.stage < 3 &&
@@ -4229,6 +4336,30 @@
       } catch (e) { return 0; }
     },
 
+    // Ordering also applies to saved reply caches: never regenerate the
+    // offered words merely to repair their order after an installed update.
+    convoOrderReplies(vid, choices) {
+      const c = this.convoGet(vid), disp = this.playerDisposition();
+      const question = c.pendingQ || c.reactiveQ || c.genericQ;
+      const pinned = new Set(['leave', 'goon', 'subject', 'dlg:subject', 'silence', 'nv:listen']);
+      const recap = (choices || []).filter(ch => ch && ch.id === 'recap');
+      let out = (choices || []).filter(ch => !ch || ch.id !== 'recap');
+      const score = ch => {
+        const t = (ch && ch.temper) || 'neutral';
+        const role = question && !/^(ans:|react:|gq:)/.test(ch && ch.id || '') ? 10 : 0;
+        if (disp === 0) return role;
+        if (disp > 0) return role + (t === 'kind' ? 0 : (t === 'neutral' || t === 'honest-hard') ? 1 : 2);
+        return role + (t === 'cruel' ? 0 : (t === 'neutral' || t === 'honest-hard') ? 1 : 2);
+      };
+      const content = out.filter(ch => !pinned.has(ch && ch.id)).sort((a, b) => score(a) - score(b));
+      let next = 0;
+      out = out.map(ch => pinned.has(ch && ch.id) ? ch : content[next++]);
+      if (!question && c.heldBeats?.length && out.some(ch => ch && ch.id === 'goon')) {
+        out = out.filter(ch => ch && ch.id === 'goon').concat(out.filter(ch => !ch || ch.id !== 'goon'));
+      }
+      return out.concat(recap);
+    },
+
     // finalizeMenu: cross-cutting rules applied to every menu the single
     // builder produces (Principles 4, 5, 10, 12, 13).
     finalizeMenu(vid, choices) {
@@ -4242,25 +4373,6 @@
         const trust = ((this.state.village || {}).trust || {})[vid] || 10;
         if (trust >= 35 && !c.escalated) {
           out = out.filter(ch => !ch || ch.id === 'deflect_q' || (ch.temper || 'neutral') !== 'cruel');
-        }
-      } catch (e) {}
-      // 2. Disposition reorder (Principle 4): matching temper first among
-      // content choices; structural options (leave/goon/subject) stay pinned.
-      // Out-of-character options don't vanish — they sit last, and cost more
-      // on use (see dispositionCostMult).
-      try {
-        const disp = this.playerDisposition();
-        if (disp !== 0) {
-          const pinned = new Set(['leave', 'goon', 'subject', 'dlg:subject']);
-          const score = (ch) => {
-            const t = (ch && ch.temper) || 'neutral';
-            if (disp > 0) return t === 'kind' ? 0 : (t === 'neutral' || t === 'honest-hard') ? 1 : 2;
-            return t === 'cruel' ? 0 : (t === 'neutral' || t === 'honest-hard') ? 1 : 2;
-          };
-          const content = [], rest = [];
-          for (const ch of out) (pinned.has(ch && ch.id) ? rest : content).push(ch);
-          content.sort((a, b) => score(a) - score(b));
-          out = content.concat(rest);
         }
       } catch (e) {}
       // 3. Strangers aren't interrogated (NOT Principle 12): fresh
@@ -4301,7 +4413,7 @@
           out = out.filter(ch => !ch || !ch.id || !spent[ch.id]);
         }
       } catch (e) {}
-      return out;
+      return this.convoOrderReplies(vid, out);
     },
 
     // dispositionCostMult: out-of-character picks cost more socially.
@@ -4341,7 +4453,7 @@
         this.state.village.trust?.[vid], c.escalated,
         this.convoFavorAction?.(vid, c.want?.favor || this.convoGetFavor?.(vid))]);
       if (c.replyMenu?.key === menuKey) {
-        const menu = c.replyMenu.choices.map(ch => ({ ...ch }));
+        const menu = this.convoOrderReplies(vid, c.replyMenu.choices.map(ch => ({ ...ch })));
         c.offeredReplies = Object.fromEntries(menu.map(ch => [ch.id, ch.label]));
         return uncapped ? menu : this.convoMenuPage(vid, menu);
       }
@@ -4704,7 +4816,8 @@
         }
         // Deliberate topic changes also expose earned practical verbs.
         // Focusing ordinary replies must not strand those features.
-        if (this.goalKnown(vid) && !c.offeredHelp && !(this.state.village.promises || {})[vid] &&
+        const subjectPromise = (this.state.village.promises || {})[vid];
+        if (this.goalKnown(vid) && !c.offeredHelp && (!subjectPromise || subjectPromise.kept) &&
             (this.hasDiscovered('promise') || c.goalOpenedUp)) sub.push({ id: 'offer_help', label: this.convoActionLabel(vid, 'offer_help') });
         if (this.isKnowledgeTrader?.(vid) && this.traderKnowledge(vid)?.length &&
             (this.hasDiscovered('trade') || c.traderMentioned)) sub.push({ id: 'trade', label: '"You know things. I know things. Shall we trade?"' });
@@ -4861,7 +4974,8 @@
       // (deep in their goal thread). After that, any known goal will do.
       // The handler makes a FORMAL tracked promise — keep it or break it.
       // (Thread coherence: off-thread verbs wait for the thread to resolve.)
-      const alreadyPromised = !!((this.state.village.promises || {})[vid]);
+      const priorPromise = (this.state.village.promises || {})[vid];
+      const alreadyPromised = !!(priorPromise && !priorPromise.kept);
       // (c.goalOpenedUp is set at the top of buildMenu — see STICKY note.)
       // EARNED VERB (trust r7): rides after the capped topics like teach/
       // trade — the old `choices.length < MAXC` check starved it behind the
@@ -4999,7 +5113,10 @@
         }
       }
       const vp = this.vpOf(vid);
-      if (!vp || !vp.id) return null;
+      if (!vp || !vp.id) {
+        if((v.roster||[]).includes(vid))this.say('This resident’s personal details are missing from this older save. Their saved relationships and abilities remain, but conversation is unavailable.');
+        return null;
+      }
       // PHANTOM TALK (break-it social r6 2026-10-09): removeVillager drops the
       // roster but leaves rosterChars, so vpOf still resolved exiled/dead
       // villagers and startConvo opened full conversations with ghosts — you
@@ -5029,6 +5146,8 @@
         }
       } catch (e) { _exileBroke = false; /* a broken gate must not break talking */ }
       const c = this.convoGet(vid);
+      // Migrate/prove old memory while its original transcript still exists.
+      this.convoTopicLedger(vid);
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.spokenBeat = null; c.replyMenu = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
@@ -5204,10 +5323,9 @@
         if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null, seedFavorId: want.seedFavorId || null, seedQid: want.seedQid || null };
       } catch (e) { want = null; }
       const op = (() => {
-        // An outing is physical work already under way. Its current-phase
-        // opening keeps the actual collect/unload action reachable through
-        // Continue and repeat visits, instead of replacing it with small talk.
-        const jointWork = this.waterFavorOpening?.(vid) || this.forageFavorOpening?.(vid);
+        // Accepted meetings and work under way retain their actual phase and
+        // controls through Continue, ahead of generic unfinished-thread quotes.
+        const jointWork = this.convoJointFavorOpening?.(vid);
         if (jointWork && c.want?.id === 'repay') {
           c.want.favor = this.convoGetFavor(vid);
           return jointWork;
@@ -5297,6 +5415,10 @@
       // R17: a resume opener is structural grammar — sayLine exempts it
       // from the run-ledger block (op.structural set by convoResumeOpener).
       this.sayLine(vid, opLine, op && op.structural ? { structural: true } : undefined);
+      // The physical phase was actually spoken. A provisional stage-0 want
+      // cannot supply its requirements/end controls after the deadline breaks
+      // the promise, even though the companion and cargo are still here.
+      if(op?.jointFavor&&c.want?.id==='repay')c.want.stage=Math.max(1,c.want.stage||0);
       // INVITATION HONESTY (journey landing r7 2026-10-12): the lure is a
       // diegetic act — sayLine's inviteBeat exemption keeps it spoken even
       // when another villager used the same lure recently (or this one did
@@ -5371,7 +5493,13 @@
     convoGoonLabel(vid) {
       const c = this.convoGet(vid);
       if (c.thread === 'nonverbal') return '(watch quietly)';
-      return this.convoMoreLabel(vid);
+      const next = c.heldBeats?.[0];
+      if (next?.winddown) return '(let them finish)';
+      if (next?.text && !/["“]/.test(next.text)) return '(give them a moment)';
+      // A held beat continues this utterance; it does not request a new
+      // topic detail such as "What else are you good at?". Keep player voice
+      // and mood, without promising a fact the queued beat cannot deliver.
+      return this.convoMoreLabel(vid, true);
     },
 
     // convoWinddownChoices: one last turn — say goodbye yourself, take one
@@ -5463,6 +5591,21 @@
       // not. Otherwise a resumed event speaks but its menu stays on topics.
       if (c && c.choosingSubject && !['subject','dlg:subject','menu:more','silence','leave'].includes(choiceId)) c.choosingSubject = false;
       if (!c || choiceId === 'goon' || !c.heldBeats || !c.heldBeats.length) return;
+      const reactive = c.reactiveQ && REACTIVE_DEFS[c.reactiveQ.id];
+      const answersCurrent = (c.pendingQ && choiceId.startsWith('ans:' + c.pendingQ.id + ':')) ||
+        (c.genericQ && choiceId.startsWith('gq:' + c.genericQ.kind + ':')) ||
+        (c.reactiveQ && choiceId.startsWith('react:' + c.reactiveQ.id + ':')) ||
+        (['agree', 'joke', 'silence'].includes(choiceId) &&
+          (c.genericQ || reactive?.reacts?.[choiceId]));
+      if (answersCurrent) {
+        // Answering their interruption is not abandoning their unfinished
+        // thought. Remove only reminders for the resolved question; keep the
+        // original speech, deferred question and eventual goodbye in order.
+        c.heldBeats = c.heldBeats.filter(h => !h.genericFollowup && !h.pendingqFup &&
+          !h.reactiveFollowup && !(reactive && h.text === reactive.followUp));
+        c.heldAsk = c.heldBeats.some(h => h.ask);
+        return;
+      }
       const traderIntro = c.heldBeats.find(h => h && h.traderIntro);
       if (traderIntro && !c.traderMentioned) c.traderIntroPending = traderIntro.text;
       const invitation = c.heldBeats.find(h => h && h.invitation);
@@ -5590,6 +5733,7 @@
         // turn — the beats belonged to the turn that queued them.
         // The label is voiced per person, mood, and thread (convoMoreLabel)
         // — never a hardcoded "Go on." (unique-person law, Steve 2026-10-06).
+        const gl = c.offeredReplies?.goon || this.convoGoonLabel(vid);
         const hb = (c.heldBeats || []).shift();
         if (hb) {
           // The ask-beat is the one piece of state that waits for the
@@ -5626,7 +5770,6 @@
               }
             } catch (e) {}
           }
-          const gl = this.convoGoonLabel(vid);
           c.transcript.push({ who: 'you', text: gl });
           if (hb.traderIntro) {
             c.traderMentioned = true;
@@ -6091,7 +6234,8 @@
           this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'ask:' + topic });
         }
         // TOPIC PACK (Steve 2026-10-06): generated topics carry their own labels.
-        done(this.convoAskTopic(vid, topic), this.topic2AskLabel ? this.topic2AskLabel(vid, topic) : this.convoLabel(vid, topic));
+        const askedWords = c.offeredReplies?.[choiceId] || (this.topic2AskLabel ? this.topic2AskLabel(vid, topic) : this.convoLabel(vid, topic));
+        done(this.convoAskTopic(vid, topic), askedWords);
         c.choosingSubject = false;
       } else if (choiceId.indexOf('follow:') === 0) {
         // THREAD FOLLOW-UP (Steve 2026-10-06): the natural next thing to say
@@ -6139,11 +6283,7 @@
           // the NPC hears the honesty, not a broken vow in waiting.
           const l = (pr && pr.deflected)
             ? `"Fair." A slow nod. "Most people just say the words."`
-            : (this.convoPick(vid, 'offerhelp', [
-            '"You\'d do that? ...Thank you. Really."',
-            '"I won\'t forget you said that."',
-            '"Okay. Okay — that means something, you know that?"',
-          ]) || '"Thank you."');
+            : (pr && pr.line) || '"I haven\'t agreed to a promise."';
           // SCENE (Phase 2): through the resolver.
           this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'offer_help' });
           done(l, '"I could help with that."');
@@ -6604,7 +6744,7 @@
       // invite_party only: teach / tell-me drops share the ledger but
       // ride different handlers and are not touched here.
       const inviteOutcome = choiceId === 'invite_party';
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome }) || line;
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome, tag: structuralTurn && c.windingDown ? 'closing' : undefined }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
@@ -6693,7 +6833,7 @@
             // State marks at queue time (as before); only the showing waits
             // for the continuer.
             c.reactiveQ.followedUp = true;
-            c.heldBeats.push({ text: rqf.followUp });
+            c.heldBeats.push({ text: rqf.followUp, reactiveFollowup: c.reactiveQ.id });
           } else {
             if (rqf.lapse) c.heldBeats.push({ text: rqf.lapse });
             c.reactiveQ = null;
@@ -6825,7 +6965,7 @@
       // exit line here would be a SECOND goodbye — the stacked-farewell
       // shape ("should get back to it" + "Right. Go on, then." + dry-line
       // trail-offs). A person says goodbye once.
-      const goodbyeSaid = !!c.windingDown;
+      const goodbyeSaid = !!c.windingDown || (how === 'request-complete' && c.spokenBeat?.tag === 'request-close');
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null;
       // UNIFIED TRACKS (2026-10-14): a held conversation (a real exchange,
@@ -6899,19 +7039,18 @@
       // turning farewells into dry-line deflections (transcript-caught:
       // "...Actually, forget it." AS the goodbye). Structural exemption,
       // same as the r17 resume/recap beats and the r25 mood-silence turn.
+      // One farewell carries the mood as a gesture, not a second goodbye.
+      try {
+        const moodBeat = this.convoMoodGoodbye(vid);
+        if (moodBeat) line = [line, moodBeat].filter(Boolean).join(' ');
+      } catch (e) { console.warn('[convo] mood closing', e); }
       this.sayLine(vid, line, { structural: true });
       // THE WANT'S CLOSING BEAT (convo rebuild 2026-10-11): the goodbye
       // names the resolution — promised, deflected, comforted, heeded.
       // Resolved/planted/owed, never evaporated.
-      // CLOSING BEATS ARE GRAMMAR (dryfall-gap 2026-10-27, B7): the
-      // want's closing beat, the thread close/lapse beat and the mood
-      // goodbye are all spoken at the goodbye, from small shared pools
-      // (the curious want's engaged close is a single fixed line) — the
-      // same class as the exit line above, already exempt. The run
-      // ledger was replacing these goodbyes with dry lines, which is
-      // why stalls end conversations. Content lines keep full ledger
-      // protection; only the goodbye beats are exempt here.
-      if (wantClose) this.sayLine(vid, wantClose, { structural: true });
+      // A resolution/farewell may recur across residents. Replacing it with
+      // a content-repeat deflection invites another topic after the goodbye.
+      if (wantClose) this.sayLine(vid, wantClose, { structural: true, tag: 'closing' });
       // WORDS ONLY GO SO FAR: talk caps at 40. Beyond that, do something real.
       // MOOD LINGERS (convo-mood.js): how the conversation felt sticks to
       // the relationship — ending warm earns a little trust, ending tense
@@ -6979,13 +7118,7 @@
       } catch (e) {}
       // (exit line already emitted via sayLine above — single emission point,
       // no second feed write.)
-      // MOOD GOODBYE: the parting beat carries the temperature out the door.
-      try {
-        const mgb = this.convoMoodGoodbye(vid);
-        if (mgb) {
-          this.sayLine(vid, mgb, { structural: true });
-        }
-      } catch (e) {}
+
       return { line, choices: [], ended: true, transcript: c.transcript.slice() };
     },
 
@@ -7054,7 +7187,7 @@
 
   Object.assign(Game, methods);
   // SCENE (dialog rethink Phase 2): expose the reactive defs so
-  // validateAskContract can gate every question path, not just pendingQ.
+  // the isolated scripts/lib/ask-contract audit can gate every question path.
   Game.REACTIVE_DEFS = REACTIVE_DEFS;
 })();
 

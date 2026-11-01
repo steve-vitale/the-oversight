@@ -47,12 +47,15 @@ function coalition(n) {
   const tiers = K.teleEvents(Game, 'overtime_tier').map(e => e.tier);
   T.ok('tele overtime_tier fired once per tier (1,2,3)', tiers.join(',') === '1,2,3', tiers.join(','));
   for (let i = 0; i < 80; i++) dawn();
-  T.ok('tier caps at 6', Game.overtimeTier() === 6);
+  T.ok('Table clock caps at 6 but calendar survival pressure keeps rising', pg.overtime === 6 && Game.overtimeTier() > 6);
   pg.overtime = 3; pg.overtimeDays = 21;
   pg.tableDone = true;
   for (let i = 0; i < 30; i++) dawn();
   T.ok('seated (tableDone): the tier stops rising', Game.overtimeTier() === 3);
   pg.tableDone = false;
+  // The following fixtures isolate the original Table-overtime mechanics,
+  // before the separately tested day120 calendar floor.
+  s.day = 110;
   const pv = Game.tablePreview();
   T.ok('seat price shows the cost honestly (tier 3 = standing -12)', pv && pv.overtime === 3 && pv.standingCost === 12, JSON.stringify(pv));
   pg.overtimeLosses = 2;

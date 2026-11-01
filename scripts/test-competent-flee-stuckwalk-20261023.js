@@ -38,7 +38,7 @@ function ok(name, cond, extra) {
 // so the strike path is exercised when flee gives up.
 function mockGame(opts) {
   const f = { id: 'fw', over: false, fighters: [] };
-  const p = { key: 'p', kind: 'player', mx: 4, my: 4, hp: 30, maxHp: 100, moveLeft: 3, acted: false };
+  const p = { key: 'p', kind: 'player', alive: true, mx: 4, my: 4, hp: 30, maxHp: 100, moveLeft: 3, acted: false };
   const mon = { key: 'm_0', kind: 'monster', monsterId: 'moderator', hp: 50, maxHp: 50, mx: 5, my: 5, alive: true };
   f.fighters = [p, mon];
   let walks = 0, strikes = 0;
@@ -46,6 +46,11 @@ function mockGame(opts) {
     tbfight: f,
     map: { px: 4, py: 4 },
     data: { monsters: [] },
+    // Match the public combat contract used by the shared controller.
+    tbGridMax: () => 8,
+    tbPlayerWait: () => { p.moveLeft = 0; p.acted = true; return true; },
+    equippedWeapon: () => ({ range: 1 }),
+    fighterDistTo: (target, x, y) => Math.max(Math.abs(target.mx - x), Math.abs(target.my - y)),
     tbIsPlayerTurn: () => true,
     tbFighter: () => p,
     tbAfterPlayerAction: () => { p.moveLeft = 0; p.acted = true; },

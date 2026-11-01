@@ -22,7 +22,7 @@
 //   V11 foreign-skip: foreign-flagged beats are never voiced
 //   V12 empty: blank text -> 'empty'
 //   V13 muted: Game.audio.isMuted() true -> 'muted'
-//   V14 hook wired: sayLine() calls convoSpeakLine (source check)
+//   V14 accepted speech is retained for visible-page dispatch, not spoken ahead
 //   V15 fallback path: pack missing -> 'speaking-fallback' (device voice);
 //       pack cached + mock tts -> 'speaking-piper'
 //
@@ -155,9 +155,18 @@ const mk = (o) => Object.assign({ id: 'gen_x', name: 'Test Person', age: 30, gen
   ok('V13 muted -> muted', Game.convoSpeakLine('gen_aaa', '"hello"') === 'muted');
   delete Game.audio;
 
-  // ---- V14 hook wired ----
-  const convSrc = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'conversation.js'), 'utf8');
-  ok('V14 sayLine() calls convoSpeakLine', convSrc.includes('this.convoSpeakLine(vid, chunk, opts)'));
+  // ---- V14 actual accepted payload / no premature synthesis ----
+  const resident = Game.state.village.roster.find(id => id !== Game.villagerId);
+  Game.startConvo(resident);
+  const calls = [], originalSpeak = Game.convoSpeakLine;
+  Game.convoSpeakLine = (...args) => { calls.push(args); return 'off'; };
+  const conv = Game.convoGet(resident), before = conv.transcript.length;
+  try { Game.sayLine(resident, 'They take a breath. "Stay by the fire."', { diegeticAct: true }); }
+  finally { Game.convoSpeakLine = originalSpeak; }
+  const accepted = conv.transcript.slice(before);
+  ok('V14 accepted speech payload excludes narration and waits for visible dispatch',
+    calls.length === 0 && accepted.length === 1 &&
+    Game.voiceCleanText(accepted[0].voiceLine, true) === 'Stay by the fire.');
 
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

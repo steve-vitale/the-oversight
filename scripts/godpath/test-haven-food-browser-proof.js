@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('assert/strict'),path=require('path'),P=require('../lib/haven-food-proof');
+const root=path.resolve(__dirname,'../..'),data=P.read(root),v=P.verify(root,data);assert(v.ok,v.errors.join('\n'));
+const fails=(name,mutate)=>{const d=structuredClone(data);mutate(d);assert(!P.verify(root,d).ok,name);};
+fails('private food cannot become a pantry shortfall',d=>d.receipts[0].data.trace.find(t=>t.label==='pantry record visible').text+=' shortfall23315/day');
+fails('zero draw cannot claim the village feeds itself',d=>d.receipts[2].data.trace.find(t=>t.label==='pantry record visible').stock='Pantry holding steady — the village feeds itself');
+fails('missing history cannot invent a forecast',d=>d.receipts[3].data.trace.find(t=>t.label==='pantry record visible').stock='Pantry: about50days');
+fails('record opening cannot burn food',d=>d.receipts[0].data.trace.find(t=>t.label==='record opened with touch').state.scholar.kcal--);
+fails('Continue must preserve real stock',d=>d.receipts[0].data.trace.find(t=>t.label==='native Continue').state.village.pantry=[]);
+fails('stale App cannot pass',d=>delete d.receipts[0].data.responses['src/js/app.js']);
+fails('untrusted clicks cannot replace touch',d=>d.receipts[0].data.touches[0].trusted=false);
+fails('one phone height cannot stand in for both',d=>d.receipts=d.receipts.slice(0,4));
+fails('a clipped record cannot count as readable',d=>d.receipts[0].data.trace.find(t=>t.label==='record readable after native swipe').recordView.bottom=9999);
+console.log('Haven food browser proof: 10 passed, 0 failed');

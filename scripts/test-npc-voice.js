@@ -167,8 +167,22 @@ const GENERIC = '"We should stick together. Twelve strangers is better than one 
   Game.npcVoiceSet = savedSet; Game.convoSpeechMarkers = savedMarkers;
   console.log('voice stats:', JSON.stringify(stats, null, 1));
   ok('cautious hedges more than bold', stats.cautious.hedges > stats.bold.hedges);
-  ok('warm asks back more than prickly', stats.warm.questions > stats.prickly.questions);
-  ok('terse temps (prickly/withdrawn) shorter than steady', stats.prickly.avgLen < stats.steady.avgLen && stats.withdrawn.avgLen < stats.steady.avgLen);
+  // A mannerism must not create a question/reply contract. Actual authored
+  // questions keep their focused machinery (held-answer continuity proof).
+  ok('no temperament adds a question to the authored statement', Object.values(stats).every(s => s.questions === 0));
+  // Terseness is enforced by voicePool's authored-beat selection, not the
+  // incidental average length of decorative closers versus steady's pool.
+  // Check both actual terse profiles and the exact retained short beat.
+  const shortBeats=['"Fine."','"I see."'],longBeat='"'+('I have a long story to tell. '.repeat(8))+'"';
+  const authoredPool=[...shortBeats,longBeat,longBeat+' More.'];
+  const terseFilters=['prickly','withdrawn'].every(temp=>{
+    Game.vpOf(v2).personality.temperament=temp;
+    const picked=Game.voicePool(v2,authoredPool);
+    return JSON.stringify(picked)===JSON.stringify(shortBeats);
+  });
+  ok('both terse profiles retain the actual short beat and exclude long authored speech',terseFilters);
+  Game.vpOf(v2).personality.temperament='steady';
+  ok('steady retains those same long and short authored alternatives',JSON.stringify(Game.voicePool(v2,authoredPool))===JSON.stringify(authoredPool));
 
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

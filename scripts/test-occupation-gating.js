@@ -109,13 +109,29 @@ function testVillager() {
 
   // 6. Roster surface: no raw formerOccupation interpolation in the haven roster.
   const appSrc = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
-  const rosterBlock = appSrc.slice(appSrc.indexOf('mains.map(p => {'));
-  const rosterLine = rosterBlock.slice(0, rosterBlock.indexOf("}).join('')"));
+  const rosterStart = appSrc.indexOf('roster.map(p => {');
+  ok('current unified roster renderer exists', rosterStart >= 0);
+  const rosterBlock = appSrc.slice(rosterStart);
+  const rosterEnd = rosterBlock.indexOf("}).join('')");
+  ok('current roster renderer has a complete callback', rosterEnd >= 0);
+  const rosterLine = rosterBlock.slice(0, rosterEnd);
   ok('roster line calls occupationLabel', rosterLine.includes('occupationLabel(p.id)'));
   ok('roster line has no raw ${p.formerOccupation} interpolation',
     !rosterLine.includes('${p.formerOccupation}'));
   ok('roster unknown branch renders empty (not "???")',
     rosterLine.includes("occ ? ` — ${esc(occ)}` : ''") || rosterLine.includes('occBit'));
+
+  // Execute the actual row callback: source-text presence alone cannot prove
+  // that an unknown occupation is omitted from the rendered roster.
+  const renderRosterRow = new Function('Game', 'esc', 'p',
+    rosterLine.slice(rosterLine.indexOf('{') + 1));
+  const person = { id: 'occupation-gate-probe', name: 'Resident', presence: 'At home',
+    formerOccupation: 'SECRET_JOB' };
+  const render = label => renderRosterRow({ state: { village: { health: {} } },
+    occupationLabel: () => label }, value => String(value), person);
+  ok('rendered unknown occupation is absent', !render(null).includes('SECRET_JOB') && !render(null).includes('???'));
+  ok('rendered learned occupation is visible', render('Known job').includes(' — Known job'));
+  ok('rendered uncertain occupation remains qualified', render('Known job?').includes(' — Known job?'));
 
   // 7. Other surfaces unchanged and correct:
   //    - person card sys branch still shows (System reveals all, like names)

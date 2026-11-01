@@ -5329,6 +5329,318 @@
     ]
   },
   "convo": {
+    "requestContracts": {
+      "rumor": {
+        "legacyLine": "\"Can we talk?\" __NAME__ glances around first. \"People are saying things. About you. Is any of it true?\"",
+        "line": "\"Can we talk?\" __NAME__ glances around first. \"I have heard that {claim}. I would rather ask you about it.\"",
+        "opinions": {
+          "generous": "you keep too much for yourself",
+          "honest": "you have not been straight with people",
+          "trustworthy": "you do not keep your word",
+          "competent": "you have not been pulling your weight",
+          "brave": "you leave other people to face the danger"
+        },
+        "start": [
+          {
+            "id": "clarify",
+            "label": "\"What exactly are you worried about?\"",
+            "op": "concern"
+          },
+          {
+            "id": "decline",
+            "label": "\"I do not want to discuss rumors.\"",
+            "op": "answer",
+            "response": "\"All right. I will leave it there.\""
+          }
+        ],
+        "detail": [
+          {
+            "id": "dispute",
+            "label": "\"That is not a fair picture of me.\"",
+            "op": "answer",
+            "response": "\"Then I should not treat it as settled. I wanted your side.\"",
+            "trust": 1
+          },
+          {
+            "id": "acknowledge",
+            "label": "\"I understand why that worries you.\"",
+            "op": "answer",
+            "response": "\"That is what I needed to know.\"",
+            "trust": 1
+          },
+          {
+            "id": "decline",
+            "label": "\"I would rather not discuss it.\"",
+            "op": "answer",
+            "response": "\"All right. I will leave it there.\""
+          }
+        ],
+        "unknown": "\"It was days ago, and I do not have the details straight. I should not have put you on the spot.\"",
+        "detailLine": "\"I am worried that {claim}. That is an impression, not something I can prove.\""
+      },
+      "work": {
+        "legacyLine": "\"Can we talk?\" __NAME__ shifts their weight. \"I need something to do. Anything. Please.\"",
+        "line": "\"Can we talk?\" __NAME__ shifts their weight. \"I need something to do. Anything. Please.\"",
+        "start": [
+          {
+            "id": "assign",
+            "label": "\"Let us find you a task.\"",
+            "op": "assign",
+            "response": "\"Show me what needs doing.\""
+          },
+          {
+            "id": "decline",
+            "label": "\"I do not have a task for you right now.\"",
+            "op": "answer",
+            "response": "\"All right. Ask me when there is something I can do.\""
+          }
+        ]
+      },
+      "space": {
+        "legacyLine": "\"Can we talk?\" __NAME__ sighs. \"I need some space. A corner nobody needs me in. Is that okay?\"",
+        "line": "\"Can we talk?\" __NAME__ sighs. \"I need some space. A corner nobody needs me in. Is that okay?\"",
+        "start": [
+          {
+            "id": "leave",
+            "label": "\"Of course. I will leave you be.\"",
+            "op": "close",
+            "response": "\"Thank you. I need a little quiet.\"",
+            "trust": 1
+          },
+          {
+            "id": "ask",
+            "label": "\"Is something wrong?\"",
+            "op": "space-detail",
+            "response": "\"Nothing I want to talk about just now. I need some time on my own.\""
+          }
+        ],
+        "detail": [
+          {
+            "id": "leave",
+            "label": "\"I will give you some space.\"",
+            "op": "close",
+            "response": "\"Thank you.\"",
+            "trust": 1
+          }
+        ]
+      },
+      "roads": {
+        "legacyLine": "\"Can we talk? Have you seen anyone on the roads? Anyone at all? I'm asking everyone.\"",
+        "line": "\"Can we talk? Have you seen anyone on the roads? Anyone at all? I'm asking everyone.\"",
+        "start": [
+          {
+            "id": "who",
+            "label": "\"Who are you hoping to find?\"",
+            "op": "detail",
+            "response": "\"Anyone who might know the people I left at home. I am not ready to give up on them.\""
+          },
+          {
+            "id": "decline",
+            "label": "\"I cannot help with that right now.\"",
+            "op": "answer",
+            "response": "\"I understand.\""
+          }
+        ],
+        "detail": [
+          {
+            "id": "acknowledge",
+            "label": "\"I hope you hear something.\"",
+            "op": "answer",
+            "response": "\"So do I.\"",
+            "trust": 1
+          },
+          {
+            "id": "decline",
+            "label": "\"I cannot help with that right now.\"",
+            "op": "answer",
+            "response": "\"I understand.\""
+          }
+        ]
+      },
+      "leadership": {
+        "legacyLine": "\"Can we talk?\" __NAME__ doesn't wait for an answer. \"We need to discuss how things are run here.\"",
+        "line": "\"Can we talk?\" __NAME__ doesn't wait for an answer. \"We need to discuss how things are run here.\"",
+        "start": [
+          {
+            "id": "proposal",
+            "label": "\"What would you change?\"",
+            "op": "detail",
+            "response": "\"I want a say in the decisions that affect me.\""
+          },
+          {
+            "id": "decline",
+            "label": "\"I cannot discuss that right now.\"",
+            "op": "answer",
+            "response": "\"Another time, then.\""
+          }
+        ],
+        "detail": [
+          {
+            "id": "morale",
+            "label": "\"Let us look at how people are doing.\"",
+            "op": "morale"
+          },
+          {
+            "id": "acknowledge",
+            "label": "\"I have heard what you are asking for.\"",
+            "op": "answer",
+            "response": "\"Thank you for hearing me out.\"",
+            "trust": 1
+          }
+        ]
+      },
+      "stores": {
+        "legacyLine": "\"Can we talk?\" __NAME__ keeps their voice low. \"The stores. Have you looked at the stores? We're running thin.\"",
+        "line": "\"Can we talk?\" __NAME__ keeps their voice low. \"The stores. Have you looked at the stores? We're running thin.\"",
+        "start": [
+          {
+            "id": "supplies",
+            "label": "\"Let us check what we have.\"",
+            "op": "supplies"
+          },
+          {
+            "id": "decline",
+            "label": "\"I cannot discuss the stores right now.\"",
+            "op": "answer",
+            "response": "\"All right. I am still concerned about them.\""
+          }
+        ],
+        "detail": [
+          {
+            "id": "assign",
+            "label": "\"Let us decide what needs doing.\"",
+            "op": "assign",
+            "response": "\"What would you like me to do?\""
+          },
+          {
+            "id": "done",
+            "label": "\"That is enough for now.\"",
+            "op": "answer",
+            "response": "\"All right.\""
+          }
+        ]
+      },
+      "company": {
+        "legacyLine": "\"Can we talk?\" __NAME__ sits down near you. \"Just... talk. Like people used to.\"",
+        "line": "\"Can we talk?\" __NAME__ sits down near you. \"Just... talk. Like people used to.\"",
+        "start": [
+          {
+            "id": "past",
+            "label": "\"What did you do before all this?\"",
+            "op": "past"
+          },
+          {
+            "id": "decline",
+            "label": "\"I cannot stay and talk right now.\"",
+            "op": "close",
+            "response": "\"All right. Take care of yourself.\""
+          }
+        ]
+      }
+    },
+    "silenceAtGoodbye": "You let them go without another word.",
+    "villageQuestions": {
+      "tier": {
+        "new": [
+          {
+            "label": "\"How's everyone holding up?\"",
+            "intent": "overview"
+          },
+          {
+            "label": "\"How are people doing?\"",
+            "intent": "overview"
+          }
+        ],
+        "warm": [
+          {
+            "label": "\"What's the feeling around the fire lately?\"",
+            "intent": "morale"
+          },
+          {
+            "label": "\"Who's struggling that I haven't noticed?\"",
+            "intent": "care"
+          }
+        ],
+        "close": [
+          {
+            "label": "\"Be honest — how bad is it, really?\"",
+            "intent": "overview"
+          },
+          {
+            "label": "\"Who do I need to check on?\"",
+            "intent": "care"
+          }
+        ]
+      },
+      "occ": {
+        "medicinal": [
+          {
+            "label": "\"Anyone hurt? Who needs looking at?\"",
+            "intent": "health"
+          },
+          {
+            "label": "\"How are the injured doing?\"",
+            "intent": "health"
+          }
+        ],
+        "food": [
+          {
+            "label": "\"Is anyone going hungry?\"",
+            "intent": "hunger"
+          },
+          {
+            "label": "\"How's the food holding out — honestly?\"",
+            "intent": "supplies"
+          }
+        ]
+      },
+      "voice": {
+        "blunt": [
+          {
+            "label": "\"Everyone still breathing?\"",
+            "intent": "alive"
+          },
+          {
+            "label": "\"Who's falling apart?\"",
+            "intent": "care"
+          }
+        ],
+        "soft": [
+          {
+            "label": "\"Is everyone alright? Really alright?\"",
+            "intent": "care"
+          }
+        ],
+        "dry": [
+          {
+            "label": "\"How's morale? Or shouldn't I ask.\"",
+            "intent": "morale"
+          }
+        ]
+      },
+      "age": {
+        "young": [
+          {
+            "label": "\"Is everyone okay? Like, actually okay?\"",
+            "intent": "care"
+          },
+          {
+            "label": "\"How's everyone doing? For real?\"",
+            "intent": "overview"
+          }
+        ],
+        "elder": [
+          {
+            "label": "\"How are the young ones holding up?\"",
+            "intent": "young"
+          },
+          {
+            "label": "\"Is everyone managing? Tell me true.\"",
+            "intent": "overview"
+          }
+        ]
+      }
+    },
     "questions": [
       {
         "id": "q_origin",

@@ -19,7 +19,8 @@ const T = K.reporter('evo-root');
   K.newRun(Game);
   K.openSlots(Game, 6);
   const s = Game.state.scholar;
-  for (const id of ['echo_location', 'patient_aim', 'game_sense', 'trophy_room']) K.giveAbility(Game, id, { level: 1 });
+  // Evolution is an earned L3 boundary; L1 is a refused stale/prepared offer.
+  for (const id of ['echo_location', 'patient_aim', 'game_sense', 'trophy_room']) K.giveAbility(Game, id, { level: 3 });
   const S = globalThis.Scattering;
   const gh = S.Godhood.godhoods().find(g => g.id === 'apex_predator');
   const BA = S.buildarounds;
@@ -53,7 +54,7 @@ const T = K.reporter('evo-root');
   T.ok('baPathCount (trophy assembly bonus) unchanged by evolution', trophyAfter === trophyBefore, `${trophyBefore} -> ${trophyAfter}`);
 
   // Party bond: hold all four shieldbearer abilities, evolve one -> anchor stays 1.
-  for (const id of ['draw_fire', 'bodyguard', 'shield_wall', 'retribution']) K.giveAbility(Game, id, { level: 1, force: true });
+  for (const id of ['draw_fire', 'bodyguard', 'shield_wall', 'retribution']) K.giveAbility(Game, id, { level: 3, force: true });
   const anchorBefore = Game.pathAnchor();
   const sb = s.abilities.find(a => a.id === 'retribution');
   Game.stageEvolution(sb);

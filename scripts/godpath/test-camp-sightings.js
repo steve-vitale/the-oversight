@@ -1,0 +1,36 @@
+'use strict';
+const path=require('path'),K=require('./lib'),{gameplayHash}=require('../gear-usage-audit'),T=K.reporter('Earned camp locations');
+(async()=>{
+ const H=require(path.resolve(process.argv[2]||path.join(__dirname,'../..'),'scripts/sim-harness'));
+ const {Game:G}=await H.quietLog(()=>H.loadGame({seed:42,narration:true}));K.newRun(G);
+ const v=G.state.otherVillages.find(v=>!v.generated),s=G.state.scholar;
+ if(!v)throw Error('Prepared seed has no fresh camp');
+ G.catchUpSim(v);G.map.px=v.x>1?v.x-2:v.x+2;G.map.py=v.y;s.insideHaven=false;
+ delete s.seenTiles[v.x+','+v.y];
+ T.ok('world generation alone does not grant camp knowledge',!G.villageSighting?.(v.id)&&G.villageCard(v.id)===null);
+ const ground=JSON.stringify(s.seenTiles),before=G.log.length;G.checkVillageProximity();
+ const sight=G.villageSighting?.(v.id);
+ T.ok('a camp simulated before approach is still sighted by the bearer',!!sight&&sight.x===v.x&&sight.y===v.y&&sight.source==='smoke');
+ T.ok('the actual village card opens from earned location knowledge',!!G.villageCard(v.id));
+ if(!G.villageSighting){T.done();return;}
+ T.ok('seeing smoke does not explore ground or change map-sharing credit',G.mapSeen(v.x,v.y)===null&&JSON.stringify(s.seenTiles)===ground);
+ T.ok('distance2 permits viewing but not face-to-face actions',G.villageCard(v.id).actions.length===0);
+ const count=()=>G.log.filter(e=>String(e.text||e).includes('smoke')&&String(e.text||e).includes(v.name)).length;
+ T.ok('first personal sight has actual narration',count()===1&&G.log.length>before);
+ G.checkVillageProximity();T.ok('rechecking a known camp does not repeat the sighting',count()===1);
+ const state=gameplayHash(G.state);G.villageSighting(v.id);T.ok('reading a sighting is pure',gameplayHash(G.state)===state);
+ const serialized=JSON.parse(JSON.stringify(s.campSightings));s.campSightings=serialized;
+ T.ok('location provenance survives ordinary JSON persistence',G.villageSighting(v.id)?.day===s.day);
+ G.map.px=v.x>0?v.x-1:v.x+1;
+ T.ok('adjacent known camp offers the actual talk action',G.villageCard(v.id).actions.some(a=>a.id==='talk'));
+ const oldX=v.x;v.x=(v.x+3)%9;T.ok('a marker cannot track a moved camp into fog',G.villageSighting(v.id)===null);v.x=oldX;
+ const unknown=G.state.otherVillages.find(x=>x.id!==v.id&&!G.villageSighting(x.id));
+ T.ok('other world camps remain unknown',!unknown||G.villageSighting(unknown.id)===null);
+ const movedDay=s.day+1;s.day=movedDay;G.checkVillageProximity();
+ T.ok('time passing does not rewrite the original sighting',G.villageSighting(v.id).day===movedDay-1);
+ const oldBearer=G.villagerId,officeSightings=JSON.stringify(s.campSightings);
+ G.playerDeath('prepared camp-knowledge succession');
+ T.ok('real succession retains the office map knowledge',!G.over&&G.villagerId!==oldBearer&&JSON.stringify(G.state.scholar.campSightings)===officeSightings);
+ K.newRun(G);T.ok('a fresh run does not inherit camp locations',!G.state.scholar.campSightings);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

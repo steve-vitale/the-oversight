@@ -123,7 +123,7 @@ ok('exploit: kcal conserved through bury/take/dig', kcalAfter === kcalBefore,
 
 // ---------- ATTACK 2: SOFTLOCK — the heavy-cache escape hatch ----------
 freshGame();
-// Carry capacity ~20kg. Bury 8 wood (16kg) at a far node, then arrive with a
+// Bury8 wood (16kg) at a far node, then approach the hauling boundary with a
 // near-full pack: the whole-cache dig must refuse honestly WITHOUT stranding
 // the goods — the ration drawer (portion weight check) is the escape hatch.
 Game.state.scholar.inventory = [];
@@ -131,14 +131,14 @@ Game.addMaterial('wood', 8);
 Game.buryCache('material', 'wood', 8);
 const heavyId = Game.playerCaches()[0].id;
 ok('softlock: 8 wood buried', Game.playerCaches()[0].items[0].units === 8);
-// Fill the pack to ~19kg so the 16kg dig can't fit.
-Game.state.scholar.inventory.push({ name: 'Pack ballast', units: 1, kg: 13, kcalEach: 0 });
+// Leave5kg room including2L water; the whole16kg cache cannot fit.
+Game.state.scholar.inventory.push({ name: 'Pack ballast', units: 1, kg: Game.carryLimit() - 7, kcalEach: 0 });
 said = [];
 Game.digUpCache(heavyId);
 ok('softlock: heavy dig refused, cache NOT destroyed', Game.playerCaches().length === 1 &&
   Game.playerCaches()[0].items[0].units === 8, 'cache len=' + Game.playerCaches().length);
 ok('softlock: refusal is honest, not silent', said.some(s => /too heavy/i.test(s)));
-// Escape hatch: draw 2 wood (1kg) by the portion — must work with a full pack.
+// Escape hatch: draw2 wood (4kg) by the portion from a near-full pack.
 Game.takeFromCache(heavyId, 0, 2);
 ok('softlock: portion draw works with full pack', Game.materialCount('wood') === 2,
   'wood=' + Game.materialCount('wood'));

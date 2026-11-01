@@ -32,7 +32,7 @@ function rigCorpse(Game, opts) {
   const c = {
     id: 'probe-corpse-' + Math.floor(Math.random() * 1e9),
     kind: opts.kind || 'monster', monsterId: opts.mid || 'hushwolf',
-    node, mx: opts.mx != null ? opts.mx : (s.mx != null ? s.mx : 4),
+    node, scene: Game.corpseScene(node,!!s.insideHaven), mx: opts.mx != null ? opts.mx : (s.mx != null ? s.mx : 4),
     my: opts.my != null ? opts.my : (s.my != null ? s.my : 4),
     buried: false, looted: false, items: opts.items || [carcassItem(opts.mid || 'hushwolf', 1400)],
   };

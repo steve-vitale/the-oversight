@@ -239,7 +239,7 @@
     // The Relay office is the Socialite's alternative deed (Voice of the Relay).
     if (!synergy && req.deedAlt === 'relay_office') {
       try {
-        const sw = (typeof Game !== 'undefined' && Game.state && Game.state.switchboard) || {};
+        const sw = (S.Game && S.Game.state && S.Game.state.switchboard) || {};
         synergy = !!(sw.holderId && sch.villagerId && sw.holderId === sch.villagerId);
       } catch (e) { /* no switchboard: the synergy deed stands alone */ }
     }

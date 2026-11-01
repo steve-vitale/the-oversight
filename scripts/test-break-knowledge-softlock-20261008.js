@@ -15,7 +15,13 @@ async function main() {
   const check = (n, c, d) => { console.log((c ? 'PASS' : 'FAIL') + ' | ' + n + (d ? ' | ' + d : '')); if (!c) fails++; };
 
   const plants = G.data.plants;
-  const pid = plants[10].id, otherPid = plants[11].id;
+  const otherPid = plants[11].id;
+  // Current origin knowledge may already name the old fixed-index plant.
+  // Select a real unknown opportunity instead of deleting learned knowledge.
+  const plant = plants.find(p => p.id !== otherPid && !G.plantKnown(p.id));
+  if (!plant) throw Error('No unknown plant available for the identify boundary');
+  const pid = plant.id;
+  check('S0 prepared plant is actually unknown', !G.plantKnown(pid));
   const v = G.state.village;
   const vid = v.roster.find(id => id !== G.villagerId);
 
@@ -27,7 +33,7 @@ async function main() {
 
   // read surfaces agree
   const line = G.codexPlantLine(pid), pj = G.plantJournalEntry(pid), gaps = G.knowledgeGaps(pid);
-  check('S1 codexPlantLine agrees (L1, true name)', !!line && line.includes('L1') && line.includes(plants[10].name),
+  check('S1 codexPlantLine agrees (L1, true name)', !!line && line.includes('L1') && line.includes(plant.name),
     (line || '').slice(0, 80));
   check('S1b plantJournalEntry agrees (non-null at L1)', !!pj && pj.pid === pid);
   check('S1c knowledgeGaps honest (non-empty at L1)', Array.isArray(gaps) && gaps.length > 0);

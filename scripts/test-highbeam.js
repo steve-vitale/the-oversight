@@ -19,7 +19,7 @@
 //  - COOLDOWN between Discharges (2 deer turns) — no every-round pressure.
 //  - walls/structures block; trees shred; beam reaches the node edge.
 //  - scorch: environmental damage, forage destroyed, recovers in ~3 days.
-//  - counterplay: circle it, break the line, close in (antler thrash), disrupt.
+//  - counterplay: circle it, break the line; close range risks antler thrash.
 //  - NOT A BOSS: no boss theater; the Discharge guarantee is diegetic
 //    (windup can't be interrupted; death throes fire the beam).
 //  - UI: combatActionsHTML in the combined actions area (panelCombat is dead).
@@ -496,7 +496,7 @@ function deerRound() {
     if (Game.tbfight) Game.tbEnd('fled');
   }
 
-  // --- 12. disrupt: a solid strike mid-fire can break the beam ---
+  // --- 12. ordinary Strike cannot interrupt a firing beam (Steve2026-10-21) ---
   {
     const realGen = Game.genDetail.bind(Game);
     Game.genDetail = () => flatGrid();
@@ -508,7 +508,7 @@ function deerRound() {
     Game.tbfight.fighters = Game.tbfight.fighters.filter(f => f.kind !== 'villager');
     Game.tbFighter('p').hp = 300; Game.state.scholar.health = 300;
     S_.combat.roll = ([a, b]) => b;
-    Math.random = () => 0.1; // disrupt triggers (0.5 at d>=20)
+    Math.random = () => 0.1; // formerly cancelled the beam at this roll
     Game.tbPlayerStrike('m_0'); // P1: strike during the aim windup
     let deer = Game.tbFighter('m_0');
     ok('struck during windup (telegraph live)', !!deer.telegraph && deer.telegraph.firing === 0);
@@ -518,10 +518,11 @@ function deerRound() {
     ok('beam live and burning', !!deer.telegraph && deer.telegraph.firing > 0);
     ok('player hurt but alive', Game.tbFighter('p').alive);
     // (beam may sweep off a stationary target; the firing itself is the threat)
-    Game.tbPlayerStrike('m_0'); // P3: strike mid-fire -> disrupt
+    const liveBeam = deer.telegraph;
+    Game.tbPlayerStrike('m_0'); // P3: strike mid-fire, beam must remain
     deer = Game.tbFighter('m_0');
-    ok('beam disrupted (message in the log)', Game.log.some(l => /stutters and dies/.test(l)));
-    ok('disrupt broke the firing beam (telegraph cleared)', !deer.telegraph);
+    ok('ordinary Strike never announces beam cancellation', !Game.log.some(l => /stutters and dies/.test(l)));
+    ok('ordinary Strike preserves the firing beam', deer.telegraph === liveBeam && deer.telegraph.firing > 0);
     if (Game.tbIsPlayerTurn()) Game.tbPlayerEndTurn(); // D3: re-declares fresh
     deer = Game.tbFighter('m_0');
     ok('disrupt buys a turn: it re-declares fresh (aim, not continued fire)',

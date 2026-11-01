@@ -462,6 +462,7 @@
 
     // Start an alien-player encounter. Called from the encounter roll.
     apStartEncounter: function (pid) {
+      if (this.contestOwnsScene && this.contestOwnsScene()) return false;
       var p = this.apPersona(pid);
       if (!p) return false;
       // DEAD (break-it r12): refuse to start a fight with a corpse — debug
@@ -663,10 +664,10 @@
     apSpeak: function (pid, text) {
       try {
         if (!text) return 'empty';
-        if (typeof Game.convoSpeakLine !== 'function') return 'no-hook';
+        if (typeof this.convoSpeakLine !== 'function') return 'no-hook';
         var rec = this.apVoiceRecord(pid);
         if (!rec) return 'no-persona';
-        return Game.convoSpeakLine('ap:' + pid, text, { persona: rec });
+        return this.convoSpeakLine('ap:' + pid, text, { persona: rec });
       } catch (e) { return 'error'; }
     },
 
@@ -2956,7 +2957,7 @@
               else if (t.kind === 'villager' || (t.kind === 'ally' && t.villageId === 'haven' && t.villagerId)) {
                 this.say('☠ ' + t.name + ' falls.');
                 this.tbVillagerFalls(t);
-                this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'alien_beam', witnesses: this.fightWitnesses ? this.fightWitnesses(t.villagerId) : [] });
+                this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, fighterKey: t.key, mx: t.mx, my: t.my, cause: 'alien_beam', witnesses: this.fightWitnesses ? this.fightWitnesses(t.villagerId) : [] });
               }
             } catch (e) { console.warn('apBeamHit death', e && e.message); }
           }

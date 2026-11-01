@@ -1,0 +1,24 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),F=require('../phone-frame-proof-update');
+const DIR='evidence/2026-10-29/relic-choice-save-r1',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),normalize=s=>s.replace(/\r\n/g,'\n');
+function enhanced(s){let yes=false;function walk(o){if(!o||typeof o!=='object')return;if((o.itemId||o.id)==='denim_jacket'&&o.enhancements?.includes('stay_put'))yes=true;for(const v of Object.values(o))walk(v);}walk(s);return yes;}
+function verify(root,r){
+ const errors=[],check=(v,m)=>{if(!v)errors.push(m);},same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),current=F.expectedInputs(root),fixture=fs.readFileSync(path.join(root,DIR,'day12-after-jacket-evolution-profile-r1.json.gz')),baseline=fs.readFileSync(path.join(root,DIR,'baseline-timeSettlement-8f545d471.js.txt'),'utf8');
+ check(r.schemaVersion===1&&r.sourceStable===true,'stable actual producer required');check(r.recipeSha256===sha(normalize(fs.readFileSync(path.join(root,DIR,'replay.cjs'),'utf8'))),'recipe changed');check(r.fixtureSha256===sha(fixture),'original natural scene changed');check(r.baselineSha256===sha(normalize(baseline)),'historical boundary changed');
+ check(same(r.current,current),'current source inputs changed');check(r.rows?.length===8,'eight native scenes required');
+ const seen=new Set();for(const row of r.rows||[]){const id=row.variant+':'+row.height+':'+row.choose;check(!seen.has(id),'duplicate scene');seen.add(id);check(['baseline','current'].includes(row.variant)&&[736,844].includes(row.height)&&typeof row.choose==='boolean','unknown scene');
+  const expected={...current};if(row.variant==='baseline')expected['src/js/timeSettlement.js']=sha(normalize(baseline));check(same(row.expected,expected),'scene expected source changed');for(const[k,h]of Object.entries(expected))check(row.responses?.[k]===h,'actual response missing/changed '+k);
+  check(row.touches?.length>0&&row.touches.every(t=>t.trusted&&t.type==='touch'),'trusted touch required');check(row.controls?.length===(row.choose?2:1)&&row.controls.every(c=>c.box&&c.box.x>=0&&c.box.y>=0&&c.box.x+c.box.width<=390&&c.box.y+c.box.height<=row.height),'phone controls must be visible');check(row.errors?.length===0,'browser error');
+  let before,after;try{before=JSON.parse(row.beforeRaw);after=JSON.parse(row.afterRaw);}catch(e){errors.push('invalid actual saved bytes');continue;}
+  check(same(row.saved,after),'saved view differs from raw bytes');check(same(row.restored?.scholar,before.scholar)&&same(row.restored?.codex,before.codex),'whole original Continue required');
+  const durable=same(after.scholar,row.live?.scholar)&&same(after.codex,row.live?.codex);check(row.durable===durable,'durability result misreported');
+  if(row.choose){check(enhanced(row.live?.scholar)&&row.live?.scholar.relicChoices===null,'native pick must actually land');if(row.variant==='current')check(durable,'current choice is not immediately durable');else check(!durable&&row.afterRaw===row.beforeRaw&&!enhanced(after.scholar)&&!!after.scholar.relicChoices,'original failure must be preserved');}
+  else{check(durable,'cold whole state differs');check(enhanced(row.live?.scholar)===(row.variant==='current'),'cold enhancement wrong');check((row.live?.scholar.relicChoices===null)===(row.variant==='current'),'cold pending offer wrong');const warm=r.rows.find(x=>x.variant===row.variant&&x.height===row.height&&x.choose===true);check(warm&&row.beforeRaw===warm.afterRaw,'cold transport is not the actual immediate profile');}
+ }
+ for(const variant of ['baseline','current'])for(const height of [736,844])for(const choose of [true,false])check(seen.has(variant+':'+height+':'+choose),'missing required contrast');
+ return{ok:errors.length===0,errors};
+}
+function read(root){const p=JSON.parse(fs.readFileSync(path.join(root,'scripts/earned-choice-phone-proof.json'))),raw=fs.readFileSync(path.join(root,p.report));assert.equal(sha(raw),p.reportDigest,'actual report bytes changed');return JSON.parse(z.gunzipSync(raw));}
+function update(root,file){const absolute=fs.realpathSync(path.resolve(file)),base=fs.realpathSync(root),relative=path.relative(base,absolute);assert(!relative.startsWith('..')&&!path.isAbsolute(relative),'retain report inside repo first');const raw=fs.readFileSync(absolute),r=JSON.parse(z.gunzipSync(raw)),v=verify(root,r);assert(v.ok,v.errors.join('\n'));const p={schemaVersion:1,report:relative.replace(/\\/g,'/'),reportDigest:sha(raw)};fs.writeFileSync(path.join(root,'scripts/earned-choice-phone-proof.json'),JSON.stringify(p,null,2)+'\n');return p;}
+module.exports={verify,read,update};
+if(require.main===module){try{assert(process.argv[2],'actual retained report required');console.log(JSON.stringify(update(path.resolve(__dirname,'../..'),process.argv[2])));}catch(e){console.error(e.message);process.exitCode=1;}}

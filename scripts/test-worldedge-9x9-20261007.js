@@ -47,15 +47,18 @@ function hopTo(x, y) { // adjacent force-hops (bypass blockages) to reposition f
     `got ${JSON.stringify(r1)} at (${Game.map.px},${Game.map.py})`);
   check('no fake world-edge message at (7,4)', !says.join(' ').includes('known world ends here'));
 
-  // 2. TRUE edge: (8,4) east says the line once, then stays silent on repeat bumps
+  // 2. Muse's 2026-10-28 beyond-map contract supersedes the finite edge:
+  // cross (8,4)->(9,4), then (10,4), with one introduction and real arrivals.
   says.length = 0;
   Game.state.scholar.mx = 8; Game.state.scholar.my = 4;
   const r2 = Game.tryNodeExit(1, 0);
-  const saidOnce = says.join(' ').includes('known world ends here');
-  check('true edge (8,4) blocks with words', r2 === null && Game.map.px === 8 && saidOnce);
+  check('home edge crosses into generated ground', r2 && r2.moved && Game.map.px === 9 && Game.map.py === 4);
+  check('beyond tile exists and arrival is narrated', !!Game.tileAt(9, 4) && says.some(t => /Travel 1 tile/.test(t)));
+  check('first crossing explains the continuing world once', says.filter(t => /world keeps going past the old edge/.test(t)).length === 1);
   says.length = 0;
-  Game.tryNodeExit(1, 0);
-  check('repeat bump stays silent (once per game)', says.length === 0, `said ${says.length} lines`);
+  const r3 = Game.tryNodeExit(1, 0);
+  check('next crossing also moves without repeating introduction', r3 && r3.moved && Game.map.px === 10 && !says.some(t => /world keeps going past the old edge/.test(t)));
+  check('home board retains all nine rows and columns', Game.map.tiles.length === 9 && Game.map.tiles.every(row => row.length === 9));
 
   // 3. direct out-of-bounds travelTo still guards without crashing
   let threw = false;

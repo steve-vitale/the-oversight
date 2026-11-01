@@ -28,8 +28,7 @@ const SEED = parseInt(process.env.SEED || '20261010', 10);
 Math.random = mulberry32(SEED);
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\"]*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
-  .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
+const order = require('./sim-harness').nodeScriptFiles(ROOT);
 global.window = global;
 order.forEach(f => { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });
 delete global.window;

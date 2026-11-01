@@ -14,6 +14,7 @@
 // BEFORE/AFTER: MECHANIC=off skips hook registration -> the gate goes RED.
 // Green across 3 seeds: SEED=1,2,3 node scripts/test-sig-terms-of-service-20261010.js
 const H = require('./sim-harness.js');
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '1', 10);
 const MECHANIC_OFF = process.env.MECHANIC === 'off';
 
@@ -28,8 +29,9 @@ function endTurn(Game) {
   if (!Game.tbIsPlayerTurn()) return;
   const p = Game.tbFighter('p');
   if (!p) return;
-  p.moveLeft = 0; p.acted = true;
-  Game.tbAfterPlayerAction();
+  // A public action may already have completed its turn synchronously.
+  // Only forfeit the movement remaining after a spent action.
+  if (p.acted) Game.tbPlayerWait();
 }
 function monsterOf(Game) {
   return Game.tbfight.fighters.find(x => x.kind === 'monster' && x.alive && !x.fled);
@@ -47,7 +49,6 @@ function waitForClause(Game, said, n) {
     playerTurn(Game);
     if (!Game.tbfight || Game.tbfight.over) return null;
     Game.tbPlayerWait();
-    endTurn(Game);
   }
   const m = monsterOf(Game);
   return (m && m.tosActive) ? m : null;
@@ -79,7 +80,8 @@ function waitForClause(Game, said, n) {
     { itemId: 'torch', name: 'Pitch torch', units: 1 },
     { itemId: 'gravel', name: 'Handful of gravel', units: 3 },
   ];
-  Game.startCombat('terms_of_service');
+  K.fight(Game, 'terms_of_service', {px:4,py:4,mx:6,my:4,hp:9000});
+  ok('prepared solo mechanic scene excludes bystanders', !Game.tbfight.fighters.some(f => f.kind === 'villager'));
   let m = monsterOf(Game);
   let rounds = 0;
 
@@ -136,7 +138,6 @@ function waitForClause(Game, said, n) {
     playerTurn(Game);
     if (!Game.tbfight || Game.tbfight.over) break;
     Game.tbPlayerWait();
-    endTurn(Game);
   }
   ok('accepted penalty fired (kcal collected)', s.kcal < kcalBefore, kcalBefore + ' -> ' + s.kcal);
   ok('penalty narrated honestly', said.some(t => /bailiffs collect/.test(t)));
@@ -154,7 +155,6 @@ function waitForClause(Game, said, n) {
     const mm = monsterOf(Game);
     if (mm && !mm.tosActive) break;
     Game.tbPlayerWait();
-    endTurn(Game);
     if (said.some(t => /UNROLLS TOWARD YOU/.test(t))) break;
   }
   m = monsterOf(Game);

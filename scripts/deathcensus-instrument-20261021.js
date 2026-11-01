@@ -303,6 +303,8 @@ function install(Game) {
           day: d,
           who: String(opts.name || (vid ? Game.displayName ? Game.displayName(vid) : vid : '?')),
           vid: vid,
+          // Native death telemetry key; an anonymous person need not have a resident ID.
+          telemetryWho: String(opts.villagerId || opts.monsterId || opts.name || "?"),
           kind: String(opts.kind || '?'),
           cause: String(opts.cause || '?'),
           player: !!opts.player,
@@ -554,7 +556,7 @@ function finalize(Game, K) {
   var mIdx = monsterIndex(Game);
   var rows = (K.deaths || []).map(function (r) {
     var a = classifyDeath(r, mIdx);
-    return { day: r.day, who: r.who, vid: r.vid, kind: r.kind, cause: r.cause,
+    return { day: r.day, who: r.who, vid: r.vid, telemetryWho: r.telemetryWho, kind: r.kind, cause: r.cause,
       player: r.player, monsterId: r.monsterId, monsterName: r.monsterName,
       wave: r.wave, venue: r.venue, occupationId: r.occupationId, occupation: r.occupation,
       pclass: a.class, detail: a.detail };

@@ -33,7 +33,7 @@
  const block=reason=>({ready:false,reason});
  let pending=null,receipt=null,installed=false;
  function record(g,vid){const f=g.state.village.favorLedger?.[vid],p=g.state.village.promises?.[vid];return f?.kind==='stay_close'&&f.companyVersion===1&&p?.favorId===f.id&&!p.kept&&p.maker===g.villagerId?{f,p}:null;}
- function busy(g,vid){const v=g.state.village;return !!(v.assignments?.[vid]||g.waterFavorCompanions?.().includes(vid)||g.isSheltered?.(vid));}
+ function busy(g,vid){const v=g.state.village;return !!(v.assignments?.[vid]||g.waterFavorCompanions?.().includes(vid)||g.forageFavorCompanions?.().includes(vid)||g.isSheltered?.(vid));}
  function personHere(g,vid){
   const v=g.state.village,s=g.state.scholar,p=g.getPerson(vid),node=v.nodePos?.[vid]||{nx:v.px??4,ny:v.py??4},pos=v.positions?.[vid];
   if(g.over||s.dead||vid===g.villagerId||!(v.roster||[]).includes(vid)||!p||p.dead)return 'That person is no longer available.';

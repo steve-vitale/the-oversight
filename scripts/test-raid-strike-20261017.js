@@ -30,6 +30,9 @@ async function main() {
   const st = Game.state;
   const target = (st.otherVillages || []).find(v => v && v.id !== 'haven' && Game.knowsVillage(v) && !Game.linkWith(v.id));
   assert.ok(target, 'a known unlinked village exists to raid');
+  // Prepared relationship contrast: conquest must debit an initially friendly
+  // neighbor too; a negative starting score could hide a missing debit.
+  target.opinion = 20;
   const pop0 = (st.village.roster || []).length;
 
   // muster
@@ -40,7 +43,19 @@ async function main() {
   assert.ok(fighters.length >= 2, 'war party of 2+, got ' + fighters.length);
 
   // STRIKE
-  const link = Game.answerRaid('strike');
+  // Opinion is a clamped debit, not a fixed final score. A friendly village
+  // can still start above zero after the actual warm-up campaign.
+  const opinionMoves = [], nudgeOpinion = Game._nudgeOpinion;
+  Game._nudgeOpinion = function (id, delta, why) {
+    const ov = (this.state.otherVillages || []).find(v => v.id === id);
+    const before = ov && (ov.opinion || 0);
+    const result = nudgeOpinion.apply(this, arguments);
+    opinionMoves.push({ id, delta, why, before, after: ov && ov.opinion });
+    return result;
+  };
+  let link;
+  try { link = Game.answerRaid('strike'); }
+  finally { Game._nudgeOpinion = nudgeOpinion; }
   assert.ok(link && link.id, 'strike returns the subjugation link');
   assert.strictEqual(link.conquered, true, 'link flagged conquered');
   assert.strictEqual(link.trust, 15, 'trust 15, got ' + link.trust);
@@ -75,7 +90,11 @@ async function main() {
 
   // opinion -40
   const ov = (st.otherVillages || []).find(v => v.id === target.id);
-  assert.ok((ov.opinion || 0) <= -30, 'hatred marked, opinion=' + ov.opinion);
+  const raidMoves = opinionMoves.filter(m => m.id === target.id && m.why === 'raid');
+  assert.strictEqual(raidMoves.length, 1, 'one actual raid opinion debit');
+  assert.strictEqual(raidMoves[0].delta, -40, 'raid requests exactly -40 opinion');
+  assert.strictEqual(raidMoves[0].after, Math.max(-100, raidMoves[0].before - 40), 'actual clamped opinion cost');
+  assert.strictEqual(ov.opinion, raidMoves[0].after, 'debit remains in actual village state');
 
   console.log(`GREEN: strike exacts blood — pop ${pop0}→${(st.village.roster||[]).length}, ` +
     `${deadNames.length} dead, ${wounded.length} wounded 7d, loot ${loot.kcalEach} kcal, trust 15, tribute 7000/wk.`);

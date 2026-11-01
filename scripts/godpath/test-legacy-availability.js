@@ -1,0 +1,21 @@
+'use strict';
+const path=require('path'),ri=process.argv.indexOf('--root'),K=ri<0?require('./lib'):require(path.join(path.resolve(process.argv[ri+1]),'scripts/godpath/lib')),T=K.reporter('legacy availability and refusals');
+(async()=>{
+ const G=await K.load({seed:221028,narration:true});
+ function ready({food=2200,hp=70,combat=true,used=false}={}){const s=K.newRun(G);for(const id of ['field_medicine','blood_magic','echo_location'])K.giveAbility(G,id,{force:true});s.kcal=food;if(combat){K.fight(G,'bulldozer',{px:4,py:4,mx:5,my:4});const p=G.tbFighter('p');G.tbfight.turnIdx=G.tbfight.order.indexOf('p');p.moveLeft=3;p.acted=false;}if(hp<G.maxHealth())G.addHealth(hp-G.maxHealth());if(used)s.fieldMedDayPart=s.day+'-'+G.dayPart;return s;}
+ function costs(){const s=G.state.scholar,p=G.tbFighter('p');return{kcal:s.kcal,hp:s.health,tick:s.dayTicks,day:s.day,part:G.dayPart,acted:p?.acted,moves:p?.moveLeft,dose:s.fieldMedDayPart};}
+ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+ for(const food of [0,499,500]){const s=ready({food}),card=G.activatableAbilities().find(a=>a.id==='field_medicine');T.ok('legacy medicine button matches existing500-food gate at '+food,card.available===(food>=500)&&(food>=500||/500|empty|eat/i.test(card.why)));const before=costs(),result=G.activateAbility('field_medicine');if(food<500)T.ok('low-food refusal preserves resource/clock/action/dose at '+food,result===false&&same(costs(),before));else T.ok('accepted native treatment reports success and its140-food debit',result===true&&s.kcal===before.kcal-140&&s.health===before.hp+20);}
+ for(const o of [{hp:100},{used:true}]){ready(o);const before=costs(),result=G.activateAbility('field_medicine');T.ok((o.used?'used-up':'full-health')+' refusal returns false before food/time/action/dose payment',result===false&&same(costs(),before));}
+ ready({combat:false});const explore=G.activatableAbilities().find(a=>a.id==='field_medicine');T.ok('noncombat treatment does not advertise a combat action',!explore.desc.includes('1 action'));
+ ready({food:499});const blood=G.activatableAbilities().find(a=>a.id==='blood_magic'),beforeBlood=costs();T.ok('Blood Price preview obeys its existing food gate despite HP-based cost',!blood.available&&/500|empty|eat/i.test(blood.why));T.ok('refused Blood Price neither buys food nor cuts HP',G.activateAbility('blood_magic')===false&&same(costs(),beforeBlood));
+ ready();const original=G._activateAbilityInner,sentinel=new Error('prepared legacy dispatcher failure');let calls=0,caught;
+ try{G._activateAbilityInner=function(){calls++;throw sentinel;};try{G.activateAbility('field_medicine');}catch(e){caught=e;}}finally{G._activateAbilityInner=original;}
+ T.ok('a throwing legacy dispatcher is never silently invoked twice',calls===1&&caught===sentinel,'calls='+calls);
+ ready();const refusedBefore=costs();try{G._activateAbilityInner=function(){return false;};T.ok('a real false dispatcher result refunds the outer fee without crediting a use',G.activateAbility('field_medicine')===false&&same(costs(),refusedBefore));}finally{G._activateAbilityInner=original;}
+ ready();const tick=G.tickAction;calls=0;
+ try{G.tickAction=function(){this.state.scholar={...this.state.scholar,kcal:900,health:60};this.villagerId='prepared-successor';};G._activateAbilityInner=function(){calls++;return true;};const result=G.activateAbility('field_medicine');T.ok('a body transfer during the clock never dispatches/heals/charges the successor',result===false&&calls===0&&G.state.scholar.kcal===900&&G.state.scholar.health===60);}finally{G.tickAction=tick;G._activateAbilityInner=original;}
+ ready();const gain=G.gainAbilityXP;let xp=0;
+ try{G.tickAction=function(){};G._activateAbilityInner=function(){this.state.scholar={...this.state.scholar,kcal:900,health:60};this.villagerId='prepared-successor-after-effect';return true;};G.gainAbilityXP=function(){xp++;};const result=G.activateAbility('field_medicine');T.ok('an effect that transfers the body never credits XP or refunds food to its successor',result===true&&xp===0&&G.state.scholar.kcal===900&&G.state.scholar.health===60);}finally{G.tickAction=tick;G._activateAbilityInner=original;G.gainAbilityXP=gain;}
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

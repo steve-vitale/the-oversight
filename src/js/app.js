@@ -522,7 +522,7 @@
       // "a visual joke about priorities"): full row, thickest bar, always.
       chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : ''), null, 'statc-food') +
       chip('💧', st.hydration + '%' + (st.waterCleanL ? ' · ' + st.waterCleanL + 'L clean' : ''), st.hydration, st.hydration < 30, 'Hydration') +
-      chip('🎒', st.packKg + '/' + st.packCap + 'kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried', 'pack') +
+      chip('🎒', st.packKg + '/' + (st.packLimit || st.packCap) + 'kg', st.packKg / (st.packLimit || st.packCap) * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried · ' + (st.burdenName || 'unknown burden') + ' · nominal ' + st.packCap + 'kg', 'pack') +
       (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration', null, 'sys-ui') : '') +
       `</div>` + contestRow + beatsRowHTML() + afflictionRow(st);
   }
@@ -553,6 +553,8 @@
     // OVER-FLAG HONESTY (break-it travel r11 2026-10-10): Game.state.over was
     // a phantom — read here but never written anywhere. st.over is the live flag.
     if (st.inCombat || st.over) return '';
+    const broadcastLock = Game.contestOwnsScene && Game.contestOwnsScene()
+      ? ' disabled title="Finish the broadcast first"' : '';
     const sleepDot = st.energy < 30 ? '<span class="dot"></span>'
       : (st.isNight ? '<span class="dot soft"></span>' : '');
     // THE LONG WAY HOME (2026-10-15): on the road the slow actions are
@@ -569,8 +571,8 @@
     return `<div class="lowermenu">` +
       `<button class="lm-btn" data-lm="pack">🎒 Pack</button>` +
       `<button class="lm-btn" data-lm="character">🧬 You</button>` +
-      `<button class="lm-btn" data-lm="sleep">😴 Sleep${sleepDot}</button>` +
-      `<button class="lm-btn" data-lm="wait">⏳ Wait</button>` +
+      `<button class="lm-btn" data-lm="sleep"${broadcastLock}>😴 Sleep${sleepDot}</button>` +
+      `<button class="lm-btn" data-lm="wait"${broadcastLock}>⏳ Wait</button>` +
       (roadBtns || `<button class="lm-btn" data-lm="map">🗺️ Map</button>`) +
       `<button class="lm-btn" data-lm="settings" aria-label="settings">⚙️</button>` +
       `</div>`;
@@ -650,6 +652,16 @@
       if (Game.load(b.dataset.load)) {
         try { S.MoveAnim.stopAll(); } catch (e) {}
         try { Game.musicAmbient(); } catch (e) {}
+        chatView=null; inlineView=null; Game.voiceStop?.();
+        // A saved party decision resumes its actual prompt, without another Talk
+        // fee, name roll or synthetic conversation opening.
+        if (!Game.tbfight || Game.tbfight.over) {
+          for (const [vid,c] of Object.entries(Game.state.village.conv || {})) {
+            if (!Game.partyDecisionCanResume?.(vid)) continue;
+            const msgIndex=c.transcript.findLastIndex(e=>e.partyDecision && e.text===c.partyDecision.prompt);
+            if (msgIndex>=0) {chatView={vid,thinking:null,thinkingToken:0,msgIndex};break;}
+          }
+        }
         expeditionScreen();
         // Saved enemy turns have no player controls to restart the controller.
         // Continue must resume the real chain, including an announced actor
@@ -876,17 +888,20 @@
   function obColdOpen() {
     screen.innerHTML = `${bar('scattering://wake', '...')}
       <div style="margin:60px 0 30px;min-height:120px" id="ob-lines"></div>
-      <button class="btn ghost" id="b-c1">...</button>`;
+      <button class="btn ghost" id="b-c1">Continue</button>`;
     const lines = [
       'You wake up with dirt in your mouth and blood on your hands that isn\'t yours.',
       'The sky is the wrong color — not sunset-wrong, wound-wrong.',
       'That was yesterday. This is now.'
     ];
     const el = document.getElementById('ob-lines');
-    let i = 0;
+    let i = 1;
+    el.innerHTML = `<p class="term-line">${lines[0]}</p>`;
     document.getElementById('b-c1').onclick = () => {
-      if (i < lines.length) { el.innerHTML += `<p class="term-line">${lines[i++]}</p>`; }
-      if (i >= lines.length) obHome();
+      if (i < lines.length) {
+        el.innerHTML += `<p class="term-line">${lines[i++]}</p>`;
+        if (i === lines.length) document.getElementById('b-c1').textContent = 'Choose your origin';
+      } else obHome();
     };
   }
   function obHome() {
@@ -990,7 +1005,8 @@
       // The pick screen shows the named, dated version.
       const personal = (v.itemPersonal || {})[i.id];
       const showName = personal ? personal.name : i.name;
-      const showFlavor = personal ? personal.flavor : (i.flavor || '');
+      const rawFlavor = personal ? personal.flavor : (i.flavor || '');
+      const showFlavor = Game.resolveKeepsakeText(v, i, rawFlavor);
       // ITEM KNOWLEDGE GATING (Steve 2026-10-06): NO mechanical knowledge at
       // selection. "If you don't know, it doesn't show." The only signal is
       // the item's own description/flavor — you learn what things do by
@@ -1098,8 +1114,17 @@
   // BLOCKED PATH: show what's in the way and every way through.
   // Always multiple solutions: work through it, bridge it, swim it, or go around.
   function showBlockage(block) {
-    const info = document.getElementById('inlineslot');
-    if (!info) return;
+    inlineView = {kind:'blockage',block,context:Game.captureTravelCheckpoint(),day:Game.state.scholar.day,part:Game.dayPart,mx:Game.state.scholar.mx,my:Game.state.scholar.my,mapKey:inlineMapKey()};
+    refresh();
+  }
+  function blockageContextCurrent(view) {
+    const c=view.context,s=Game.state.scholar;
+    return !Game.over&&!Game.inCombat()&&Game.state===c.state&&Game.villagerId===c.bearer&&Game.state.runKey===c.key&&Game.map.px===c.x&&Game.map.py===c.y&&s.day===view.day&&Game.dayPart===view.part&&s.mx===view.mx&&s.my===view.my;
+  }
+  function renderBlockageInline(info, view) {
+    if (!blockageContextCurrent(view)) { inlineView=null; info.innerHTML=''; return; }
+    const block=Game.travelBlockage(view.block.x,view.block.y);
+    if (!block) { inlineView=null; info.innerHTML=''; return; }
     const { x, y, blockType } = block;
     const wood = Game.woodCount();
     const canSwim = Game.hasAbility('swimmer'); // ABILITY LANES: swimmer is a skill now
@@ -1118,10 +1143,17 @@
       if (canSwim) html += `<button class="btn sm" data-act="swim">🏊 Swim across (20 kcal)</button>`;
       html += `${goAround}</div><p class="small">No bridge, no swim? Pick another tile — there's always another way.</p></div>`;
     }
-    info.innerHTML = html;
-    info.querySelectorAll('button').forEach(b => {
+    info.innerHTML = `<div class="inlinecard blockage-card">${inlineHead('Blocked path')}<div class="inline-body">${html}</div></div>`;
+    wireInlineX(info);
+    info.querySelectorAll('button[data-act]').forEach(b => {
       b.onclick = () => {
         const act = b.dataset.act;
+        if (!blockageContextCurrent(view)) { inlineView=null; refresh(); return; }
+        const live=Game.travelBlockage(x,y);
+        if (!live) { inlineView=null; refresh(); return; }
+        if (live.blockType!==blockType) { showBlockage(live); return; }
+        const checkpoint = Game.captureTravelCheckpoint();
+        inlineView=null;
         // MID-FIGHT (break-it travel r4 2026-10-09): the card can sit open
         // when a fight starts. Clearing/bridging mid-fight would spend kcal
         // and remove the blockage with NO time cost (tickAction no-ops in
@@ -1131,6 +1163,7 @@
         if (act === 'cut' || act === 'clear') { Game.clearBlockage(x, y); }
         else if (act === 'bridge') { if (!Game.buildBridge(x, y)) { refresh(); return; } }
         else if (act === 'swim') {
+          if (!Game.hasAbility('swimmer')) { Game.say('You need the Swimmer skill to cross here.'); refresh(); return; }
           // HONESTY (break-it travel 2026-10-09): travel first, charge after.
           // The old order spent the 20 kcal and announced the crossing, then
           // travelTo could refuse (dead with the card open) — charged for a
@@ -1141,17 +1174,19 @@
           // nothing: charging them the toll and grinning about it bills the
           // wrong person for a crossing they never made. (Game.over covers
           // the village-wiped case; the bearer check covers the mantle.)
-          const bearerBefore = Game.villagerId;
           const swam = Game.travelTo(x, y, true);
-          if (swam === null || Game.over || Game.villagerId !== bearerBefore) { refresh(); return; }
+          if (swam === null || Game.over || Game.state !== checkpoint.state || Game.villagerId !== checkpoint.bearer || Game.state.runKey !== checkpoint.key) { refresh(); return; }
           Game.state.scholar.kcal = Math.max(0, Game.state.scholar.kcal - 20);
           Game.say('You swim across, cold and grinning.');
+          persistTravel(checkpoint);
           refresh(); return;
         }
         else { refresh(); return; } // go around: just close
+        if (Game.over || Game.state !== checkpoint.state || Game.villagerId !== checkpoint.bearer || Game.state.runKey !== checkpoint.key || Game.map.px !== checkpoint.x || Game.map.py !== checkpoint.y) { refresh(); return; }
         // after clearing/building, travel through
         const res = Game.travelTo(x, y);
         if (res && res.kind === 'blockage') { showBlockage(res); return; }
+        persistTravel(checkpoint);
         refresh();
       };
     });
@@ -1186,6 +1221,12 @@
   // the actions surface quietly below the grid. No tapping around, no popups.
   // Maps Game.cellActions labels to real calls.
   function doContextAction(cx, cy, label, extra) {
+    if (extra?.corpseId) {
+      const body = nearbyLootBodies().find(c => c.id === extra.corpseId);
+      if (!body) { Game.say('That body is no longer available here.'); return; }
+      inlineView = {kind:'loot',cid:body.id,mapKey:inlineMapKey()};
+      return;
+    }
     const mon = (typeof Game.playerMonster === 'function') ? Game.playerMonster() : Game.state.scholar.monster;
     if (label === 'Fight' && mon && mon.mx === cx && mon.my === cy) { Game.startCombat(mon.id); return; }
     if (label === 'Hunt') { Game.huntAnimal(); return; }
@@ -1281,13 +1322,13 @@
     gardenSowOpen = false;
     if (action === 'make') {
       const before = Game.gardenPlots().length;
-      Game.makePlot();
+      fieldActionFeedback(() => Game.makePlot());
       // Game.say owns the paid result; counts and crop details show state.
-    } else if (action === 'outside') Game.exitBuilding();
-    else if (action === 'reclaim') Game.reclaimGarden();
-    else if (action === 'cultivate') Game.cultivateGarden();
-    else if (action === 'tend') Game.tendGarden();
-    else if (action === 'harvest') Game.harvestGarden();
+    } else if (action === 'outside') fieldActionFeedback(() => Game.exitBuilding());
+    else if (action === 'reclaim') fieldActionFeedback(() => Game.reclaimGarden());
+    else if (action === 'cultivate') fieldActionFeedback(() => Game.cultivateGarden());
+    else if (action === 'tend') fieldActionFeedback(() => Game.tendGarden());
+    else if (action === 'harvest') fieldActionFeedback(() => Game.harvestGarden());
     gardenRefresh();
   }
   function wireGardenControls(root = document) {
@@ -1297,11 +1338,36 @@
     root.querySelectorAll('[data-garden]').forEach(b => b.onclick = () => gardenTap(b.dataset.garden));
     root.querySelectorAll('[data-garden-seed]').forEach(b => b.onclick = () => {
       const pid = b.dataset.gardenSeed, before = Game.gardenStatus().live;
-      Game.sowPlot(pid);
+      fieldActionFeedback(() => Game.sowPlot(pid));
       gardenSowOpen = false;
       gardenFeedback = null;
       gardenRefresh();
     });
+  }
+
+  function nearbyLootBodies() {
+    if (Game.over || Game.tbfight || Game.inCombat()) return [];
+    const s = Game.state.scholar, px = s.mx ?? 4, py = s.my ?? 4;
+    const distance = c => Math.max(Math.abs(c.mx-px), Math.abs(c.my-py));
+    return (Game.state.corpses || []).filter(c => c && c.id && c.node && !c.buried &&
+      Number.isInteger(c.mx) && Number.isInteger(c.my) && c.mx>=0 && c.mx<=8 && c.my>=0 && c.my<=8 &&
+      (c.items || []).some(it => (it.units ?? 1)>0) && Game._corpseCheckRange(c,true))
+      .sort((a,b) => distance(a)-distance(b) || a.my-b.my || a.mx-b.mx || String(a.id).localeCompare(String(b.id)));
+  }
+
+  function nearbyDirection(cx, cy) {
+    const px = Game.state.scholar.mx ?? 4, py = Game.state.scholar.my ?? 4;
+    const dx = Math.sign(cx-px), dy = Math.sign(cy-py);
+    return { '-1,-1':'↖', '0,-1':'↑', '1,-1':'↗', '-1,0':'←', '0,0':'⊙', '1,0':'→', '-1,1':'↙', '0,1':'↓', '1,1':'↘' }[dx+','+dy] || '';
+  }
+  function nearbyBodyLabel(c) {
+    let who;
+    if (c.ash || Game.corpseIsPerson(c)) {
+      const known = c.villagerId && Game.nameKnown && Game.nameKnown(c.villagerId);
+      who = known ? Game.displayName(c.villagerId) : 'Unknown person';
+    } else who = c.kind === 'monster' ? (c.descriptor || c.monsterName || 'The beast') : (c.name || 'A carcass');
+    const condition = c.ash ? 'ashes' : Game.corpseStageInfo(c).id;
+    return `${who} — ${condition} ${nearbyDirection(c.mx,c.my)}`;
   }
 
   // nearbyActionItems: the 9 cells around you, deduped action labels. Single source.
@@ -1312,13 +1378,20 @@
     if (Game.over) return items;
     if (Game.tbfight) return items;
     const px = Game.state.scholar.mx ?? 4, py = Game.state.scholar.my ?? 4;
-    const seen = new Set();
+    const tile = Game.playerTile();
+    const noWildHarvest = tile.type === 'haven' && (tile.stock || 0) <= 0;
+    const bodies = nearbyLootBodies(), body = bodies[0];
+    if (body) items.push({cx:body.mx,cy:body.my,corpseId:body.id,label:bodies.length>1 ? `Search bodies (${bodies.length})` : body.ash ? 'Sift ashes' : 'Search body'});
+    const seen = new Set(items.map(it => it.label));
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
       const cx = px + dx, cy = py + dy;
       if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
       let labels = [];
       try { labels = Game.cellActions(cx, cy) || []; } catch (e) { continue; }
       for (const label of labels) {
+        // Grounds greenery is not wild forage stock. Keep examining/clearing
+        // and the separate planted-bed Garden interaction available.
+        if (label === 'Forage' && noWildHarvest) continue;
         // dedupe: same action label once (nearest cell wins)
         if (seen.has(label)) continue;
         seen.add(label);
@@ -1371,6 +1444,19 @@
   // a visible home, not the fold's basement. Tap for the full node/haven
   // details (planning = your call, your scroll). Hidden in combat.
   let surroundOpen = false;
+  function nearbyVillageVisits() {
+    if (Game.over || Game.inCombat() || Game.pendingEncounter ||
+        (Game.state.activeContest && Game.state.activeContest.phase !== 'done')) return [];
+    return (Game.state.otherVillages || []).filter(v => v.generated &&
+      Math.abs(v.x - Game.map.px) + Math.abs(v.y - Game.map.py) <= 1)
+      .map(v => ({ id:v.id, card:Game.villageCard(v.id) })).filter(v => v.card);
+  }
+  function openVillage(villageId) {
+    if (!nearbyVillageVisits().some(v => v.id === villageId)) return;
+    inlineView = { kind:'village', villageId, bearer:Game.villagerId,
+      runKey:Game.state.runKey, mapKey:inlineMapKey(), result:null };
+    refresh();
+  }
   function surroundHTML(st, n) {
     if (st.inCombat) return '';
     const d = Game.nodeDetail();
@@ -1387,11 +1473,14 @@
       (here ? `<span class="ss-here">${esc(here)}</span>` : '') +
       (hints.length ? `<span class="perceiveline">${hints.map(h => esc(h)).join('<br>')}</span>` : '') +
       `<span class="ss-expand">${surroundOpen ? '▴ hide' : '▾ details'}</span>` +
-      `</button>${detail}</div>`;
+      `</button>${nearbyVillageVisits().map(v => `<button class="btn sm" data-open-village="${esc(v.id)}" style="min-height:44px">Visit ${esc(v.card.name)}</button>`).join('')}${detail}</div>`;
   }
   function wireSurround() {
     const t = document.getElementById('surround-toggle');
     if (t) t.onclick = () => { surroundOpen = !surroundOpen; refresh(); };
+    document.querySelectorAll('[data-open-village]').forEach(b => {
+      b.onclick = () => openVillage(b.dataset.openVillage);
+    });
   }
 
   // perceiveHTML: kept as the quiet fallback (surroundHTML is the live path).
@@ -1416,20 +1505,15 @@
     // ACTION CLARITY (Steve 2026-10-05): show WHAT you're acting on (direction
     // arrow to the target cell) and WHAT it does (ability description). No
     // more mystery "Dowse" buttons.
-    const px = Game.state.scholar.mx ?? 4, py = Game.state.scholar.my ?? 4;
-    const dirArrow = (cx, cy) => {
-      const dx = Math.sign(cx - px), dy = Math.sign(cy - py);
-      return { '-1,-1': '↖', '0,-1': '↑', '1,-1': '↗', '-1,0': '←', '0,0': '⊙', '1,0': '→', '-1,1': '↙', '0,1': '↓', '1,1': '↘' }[dx + ',' + dy] || '';
-    };
     let abilityDescs = {};
     try {
       for (const a of (Game.activatableAbilities() || [])) abilityDescs[a.name] = a.desc;
     } catch (e) {}
     return `<div class="contextbar"><span class="ctx-label">nearby:</span>` +
       items.map((it, i) => {
-        const arrow = dirArrow(it.cx, it.cy);
+        const arrow = nearbyDirection(it.cx, it.cy);
         const desc = abilityDescs[it.label];
-        return `<button class="ctx-btn" data-ctx="${i}"${desc ? ` title="${esc(desc)}"` : ''}>${esc(it.label)} ${arrow}${it.label === 'Talk' && wantTalk ? '<span class="dot"></span>' : ''}${desc ? `<span class="ctx-desc"> — ${esc(desc)}</span>` : ''}</button>`;
+        return `<button class="ctx-btn" data-ctx="${i}"${it.corpseId ? ` data-ctx-corpse="${esc(it.corpseId)}"` : ''}${desc ? ` title="${esc(desc)}"` : ''}>${esc(it.label)} ${arrow}${it.label === 'Talk' && wantTalk ? '<span class="dot"></span>' : ''}${desc ? `<span class="ctx-desc"> — ${esc(desc)}</span>` : ''}</button>`;
       }).join('') +
       `</div>`;
   }
@@ -1437,8 +1521,14 @@
   function wireContextBar() {
     const bar = document.querySelector('.contextbar');
     if (!bar) return;
+    const state=Game.state,scholar=Game.state.scholar,bearer=Game.villagerId;
     bar.querySelectorAll('[data-ctx]').forEach(b => {
       b.onclick = () => {
+        if (b.dataset.ctxCorpse) {
+          if (Game.state!==state || Game.state.scholar!==scholar || Game.villagerId!==bearer) { refresh(); return; }
+          actAndRefresh(() => doContextAction(null,null,null,{corpseId:b.dataset.ctxCorpse}));
+          return;
+        }
         // Identical labels can now refer to a different nearby square.
         const it = nearbyActionItems()[+b.dataset.ctx];
         if (!it) return;
@@ -1618,13 +1708,22 @@
           const near = villagersNear(8);
           if (!near.length) { Game.say('No one in reach.'); return; }
           enterTargeting({ prompt: `⚡ ${a.name} — on whom?`, targets: near,
-            onPick: (t) => { try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {} Game.activateAbility(id, t.id); refresh(); } });
+            onPick: (t) => { try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {} fieldActionFeedback(() => combatInput(() => Game.activateAbility(id, t.id))); refresh(); } });
           return;
         }
         try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {}
-        Game.activateAbility(id);
-        // in combat, an ability IS your action for the turn
-        if (Game.tbfight) Game.tbPlayerActed();
+        // Outside combat, retain the finding alongside its later cost notice.
+        // The same input transaction still owns activation and payment.
+        fieldActionFeedback(() => combatInput(() => {
+        const state = Game.state, scholar = state.scholar, bearer = Game.villagerId, key = state.runKey;
+        const result = Game.activateAbility(id);
+        // Composite actions pay their declared action cost in useAbility.
+        // A second UI debit incorrectly spent a turn for free-action powers
+        // such as Stoke. Only legacy activations need this UI turn boundary;
+        // an explicitly refused legacy activation spends nothing.
+        if (Game.tbfight && id.indexOf('.') === -1 && result !== false && Game.state === state && Game.state.scholar === scholar && Game.villagerId === bearer && Game.state.runKey === key) Game.tbPlayerActed();
+        return result;
+        }));
         refresh();
       };
     });
@@ -1651,6 +1750,7 @@
     const detail = Game.genDetail(Game.map.px, Game.map.py);
     const cell = detail[cy] && detail[cy][cx];
     const t = Game.playerTile();
+    const noWildHarvest = t.type === 'haven' && (t.stock || 0) <= 0;
     const sec = (t.secrets || {})[cx + ',' + cy];
     const mod = (t.modifiers || {})[cx + ',' + cy];
     const px = Game.state.scholar.mx ?? 4, py = Game.state.scholar.my ?? 4;
@@ -1693,6 +1793,9 @@
 
     if (isMe) {
       desc = 'You are here.';
+      if (cell === 'door' && Game.state.scholar.insideHaven === true) actions.push(['🚪 Step outside', () => { Game.exitBuilding(); refresh(); }]);
+      if (cell === 'bunk') actions.push(['😴 Rest (a while)', () => { Game.doAction('rest'); refresh(); }]);
+      if (cell === 'lodge') actions.push(['🏠 Go inside', () => { Game.enterBuilding(); refresh(); }]);
       // EDGE OF THE MAP: you're on the rim. The next node is that way.
       // This is how you travel — walk to the edge, then head out.
       const exit = Game.edgeExit(cx, cy);
@@ -1709,9 +1812,11 @@
         if (nt) {
           const label = block ? `➡️ Head ${exit.dir} (blocked!)` : `➡️ Head ${exit.dir}`;
           actions.push([label, () => {
-            if (block) { showBlockage({ kind: 'blockage', blockType: block.blockType, x: nx, y: ny }); refresh(); return; }
+            if (block) { showBlockage({ kind: 'blockage', blockType: block.blockType, x: nx, y: ny }); return; }
+            const checkpoint = Game.captureTravelCheckpoint();
             const res = Game.travelTo(nx, ny);
-            if (res && res.kind === 'blockage') { showBlockage(res); }
+            if (res && res.kind === 'blockage') { showBlockage(res); return; }
+            persistTravel(checkpoint);
             refresh();
           }]);
           desc += ` You're on the ${exit.dir}ern edge — ${nm} lies that way.`;
@@ -1816,7 +1921,7 @@
         actions.push(['Stalk', () => { try { Game.audioEvent('animalStalk'); } catch (e) {} Game.stalkAnimal(); }]);
         actions.push(walkCloser(cx, cy));
       }
-    } else if (Game.corpseAt) {
+    } else if (Game.corpseAt && Game.corpseAt(cx, cy).length) {
       // CORPSE SYSTEM: the dead stay where they fell.
       const dead = Game.corpseAt(cx, cy);
       if (dead.length) {
@@ -1978,7 +2083,7 @@
         // passable
         if (dist <= 1 && !isMe) {
           actions.push(['Step here', () => {
-            MoveAnim.purgeKind('path');
+            cancelPathWalk();
             MoveAnim.enqueue({ dx: cx - px, dy: cy - py, kind: 'step', ms: MoveAnim.stepMs });
           }]);
         } else if (!isMe) {
@@ -1996,7 +2101,7 @@
             desc += ' (No path there.)';
           }
         }
-        if (cell === 'plant' || cell === 'bush') actions.push(['Forage', () => Game.cellInteract(cx, cy)]);
+        if ((cell === 'plant' || cell === 'bush') && !noWildHarvest) actions.push(['Forage', () => Game.cellInteract(cx, cy)]);
         // EXAMINE (Steve 2026-10-06): cheap look without harvesting. Vague
         // description + observation memory — the foundation of recognition.
         if (cell === 'plant' || cell === 'bush') actions.push(['🔍 Examine', () => { Game.examineCell(cx, cy); refresh(); }]);
@@ -2049,6 +2154,33 @@
         desc += ` A shadow on the ground — ${_dark}. Something is falling.`;
       }
     } catch (e) {}
+    if (noWildHarvest && (cell === 'plant' || cell === 'bush')) {
+      desc += ' No wild harvest here. Forage beyond Haven; use Garden for planted beds.';
+    }
+    if (t.type === 'haven' &&
+        (Game.state.scholar.insideHaven === true ? ['bunk','door','fire'].includes(cell) : cell === 'lodge' || (noWildHarvest && ['plant','bush'].includes(cell))) &&
+        matchMedia('(max-width: 899px)').matches) {
+      inlineView = null; // The selected station replaces any earlier person card.
+      // Station choices share the existing message/thumb regions; the room
+      // stays visible. Page original action closures without querying Game.
+      const slot = document.getElementById('inlineslot'); if (slot) slot.innerHTML = '';
+      const message = document.querySelector('.ord-narration');
+      const line = document.createElement('div'); line.className = 'dlg-line';
+      line.textContent = name + ' · ' + desc; message.replaceChildren(line);
+      const row = document.querySelector('.phone-primary-actions');
+      if (row) {
+        let at = 0;
+        const choices = actions.map(([label, action]) => {
+          const b = document.createElement('button'); b.className = 'self-btn'; b.textContent = label;
+          b.onclick = () => actAndRefresh(action); return b;
+        });
+        const back = document.createElement('button'); back.className = 'self-btn'; back.textContent = 'Back'; back.onclick = refresh;
+        const more = document.createElement('button'); more.className = 'self-btn';
+        const paint = () => { row.replaceChildren(...choices.slice(at, at + 2), ...(choices.length > 2 ? [more] : []), back); more.textContent = 'More actions · ' + (Math.floor(at / 2) + 1) + '/' + Math.ceil(choices.length / 2); };
+        more.onclick = () => { at = (at + 2) % (Math.ceil(choices.length / 2) * 2); paint(); }; paint();
+      }
+      return;
+    }
     const info = document.getElementById('inlineslot');
     if (!info) { expeditionScreen(); return; } // fallback if panel target missing
     info.innerHTML = `
@@ -2072,11 +2204,69 @@
   // refresh: full expedition screen re-render after an action.
   function refresh() { expeditionScreen(); }
 
+  // Keep the real messages from a field action together. Clock hooks, journal
+  // discoveries and errands can all speak after the paid result; showing only
+  // the final line hid the harvest/bed the player just paid for. This reader is
+  // presentation-only: no extra Game queries, payments, RNG or save requests.
+  // Threats keep the existing latest-warning presentation. Read the maintained
+  // monster alias, not playerMonster(), whose debug-adoption path can write.
+  let fieldActionResult = null, fieldActionCapture = null;
+  function rememberFieldActionMessage(entry, presentation) {
+    if (!fieldActionCapture) return;
+    if (!['narration','feedback'].includes(entry?.surface || 'narration')) return;
+    const text = typeof entry === 'object' && !(entry instanceof String)
+      ? String(entry.text || '') : String(entry);
+    if (!text) return;
+    for (let capture = fieldActionCapture; capture; capture = capture.parent) {
+      if (capture.lines.length < 500) capture.lines.push(text);
+      else { capture.lines[499] = text; capture.truncated = true; }
+      if (presentation?.role === 'action-result' && presentation.body === capture.body) capture.primary = text;
+    }
+  }
+  function fieldActionFeedback(action) {
+    fieldActionResult = null;
+    if (!matchMedia('(max-width: 899px)').matches || !Game.state?.scholar ||
+        Game.pendingEncounter || Game.state.scholar.monster ||
+        (Game.tbfight && !Game.tbfight.over)) return action();
+    const state = Game.state, body = state.scholar;
+    const capture = { body, lines: [], truncated: false, primary: null, parent: fieldActionCapture };
+    fieldActionCapture = capture;
+    let value;
+    try { value = action(); }
+    finally { fieldActionCapture = capture.parent; }
+    // Asynchronous scenes and a replacement bearer own their own feedback.
+    if (capture.failed || value?.then || Game.state !== state || state.scholar !== body ||
+        Game.pendingEncounter || body.monster ||
+        Game.over || (Game.tbfight && !Game.tbfight.over)) return value;
+    const log = Game.log || [];
+    if (capture.lines.length > 1) fieldActionResult = {
+      state, body, last: log[log.length - 1], lines: capture.lines,
+      truncated: capture.truncated, primary: capture.primary
+    };
+    return value;
+  }
+  function fieldActionResultText() {
+    const result = fieldActionResult, log = Game.log || [];
+    if (!result || !matchMedia('(max-width: 899px)').matches ||
+        result.state !== Game.state || result.body !== Game.state?.scholar ||
+        Game.pendingEncounter || Game.state?.scholar?.monster ||
+        result.last !== log[log.length - 1] || (Game.tbfight && !Game.tbfight.over)) return '';
+    const lines = result.truncated
+      ? [...result.lines.slice(0,-1), '(Additional action messages omitted.)', result.lines.at(-1)]
+      : result.lines.slice();
+    if (result.primary) {
+      const at = lines.indexOf(result.primary);
+      if (at >= 0) lines.splice(at, 1);
+      lines.unshift(result.primary);
+    }
+    return lines.join('\n\n');
+  }
+
   function runCellAction(action) {
     const px0 = Game.state.scholar.mx, py0 = Game.state.scholar.my, fight0 = Game.tbfight;
     try { if (Game.feedbackMark) Game.feedbackMark(); }
     catch (error) { console.warn('[cell action] feedback marker failed', error); }
-    action();
+    fieldActionFeedback(action);
     // Combat wrappers add the real party after core entry has rendered.
     // Paint the completed encounter immediately, without requiring a turn.
     if (Game.tbfight !== fight0 || Game.state.scholar.mx !== px0 || Game.state.scholar.my !== py0) refresh();
@@ -2116,7 +2306,7 @@
   }
   function actAndRefresh(fn) {
     try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {}
-    try { fn(); } catch (e) { console.error(e); }
+    try { fieldActionFeedback(fn); } catch (e) { console.error(e); }
     refresh();
   }
 
@@ -13063,9 +13253,111 @@
   // dead until 2026-10-12). {vid, thinking, thinkingToken}.
   let chatView = null;
   let fieldPanel = null, fieldFrameLog = null;
+  let fieldCombatResult = null, fieldPanelRunKey = null;
   let fieldChoicePage = 0, fieldChoiceSignature = '';
   const fieldMessages = [];
   let fieldSeenLog = null;
+
+  // Combat presentation stays outside saved Game state. Observe real messages
+  // and fighter changes instead of guessing the outcome from the last sentence.
+  let combatPresentationFight = null, combatPresentationActor = null;
+  let combatPlayerCapture = null, combatActorCapture = null, combatLastResult = null;
+  let combatResultSerial = 0;
+  const combatResults = [];
+  function combatPresentationReset() {
+    if (combatPresentationFight === Game.tbfight) return;
+    combatPresentationFight = Game.tbfight;
+    combatPresentationActor = combatPlayerCapture = combatActorCapture = combatLastResult = null;
+    combatResults.length = 0;
+  }
+  function combatCapture(key, name) {
+    return { fight: Game.tbfight, key, name, lines: [], truncated: false,
+      fighters: (Game.tbfight?.fighters || []).map(f => ({ key: f.key, name: f.key === 'p' ? 'You' : f.name,
+        hp: f.hp, alive: f.alive, fled: f.fled, x: f.mx, y: f.my })) };
+  }
+  function combatCurrentNarration() {
+    const log = Game.log || [];
+    for (let i = log.length - 1; i >= 0; i--) {
+      const surface = log[i]?.surface || 'narration';
+      if (surface === 'narration' || surface === 'feedback') return log[i];
+    }
+    return null;
+  }
+  function combatCaptureResult(capture) {
+    if (!capture || capture.fight !== combatPresentationFight) return null;
+    const current = capture.fight.fighters || [], changes = [];
+    for (const before of capture.fighters) {
+      const after = current.find(f => f.key === before.key);
+      if (!after) { changes.push(`${before.name} left the field`); continue; }
+      const delta = Number.isFinite(before.hp) && Number.isFinite(after.hp) ? after.hp - before.hp : 0;
+      if (delta) changes.push(`${before.name} ${delta > 0 ? '+' : '−'}${Math.abs(Math.round(delta * 10) / 10)} HP${before.alive && !after.alive ? ' · down' : ''}`);
+      else if (before.alive && !after.alive) changes.push(`${before.name} · down`);
+      if (!before.fled && after.fled) changes.push(`${before.name} withdrew`);
+      if (before.key === capture.key && (before.x !== after.mx || before.y !== after.my)) changes.push(`${before.name} moved`);
+    }
+    for (const f of current) if (f.alive && !f.fled && !capture.fighters.some(old => old.key === f.key)) changes.push(`${f.key === 'p' ? 'You' : f.name} joined`);
+    if (!capture.lines.length && !changes.length && capture.key === 'p') return null;
+    const result = { id: ++combatResultSerial, name: capture.name, changes, lines: capture.lines, truncated: capture.truncated, lastNarration: combatCurrentNarration() };
+    combatResults.push(result);
+    if (combatResults.length > 24) combatResults.shift();
+    combatLastResult = result;
+    return result;
+  }
+  // Preserve emit's exact arguments, return value, deduplication and write count.
+  // Only copy entries it actually accepted; no second Game action/helper call.
+  const combatOriginalEmit = Game.emit;
+  Game.emit = function(...args) {
+    const previous = this.log?.at(-1), value = combatOriginalEmit.apply(this, args), entry = this.log?.at(-1);
+    try {
+      if (entry && entry !== previous) rememberFieldActionMessage(entry, args[2]);
+      const capture = combatActorCapture || combatPlayerCapture;
+      if (capture && entry && entry !== previous) {
+        if (capture.lines.length < 500) capture.lines.push({ text: String(entry.text || entry), surface: entry.surface || 'narration' });
+        else capture.truncated = true;
+      }
+    } catch (err) { console.warn('[combat] message observation failed', err); }
+    return value;
+  };
+  document.addEventListener('click', e => {
+    const button = e.target?.closest?.('button');
+    if (!button || !Game.tbfight || !Game.tbIsPlayerTurn() || Game.tbfight.asyncRunning) return;
+    if (button.closest('.ord-controls') && !button.hasAttribute('data-field-panel')) {
+      fieldPanel = null; fieldCombatResult = null;
+    }
+    combatPresentationReset();
+    if (combatPlayerCapture) combatCaptureResult(combatPlayerCapture);
+    const capture = combatCapture('p', 'You');
+    combatPlayerCapture = capture;
+    // Run after the real button handler. An immediate enemy announcement can
+    // finish this same capture first, before beginning the enemy's observation.
+    // Native input can run a microtask checkpoint between capture listeners
+    // and the button handler. A task, rather than a microtask, observes the
+    // completed action. Immediate enemy announcements consume it sooner.
+    setTimeout(() => {
+      if (combatPlayerCapture !== capture) return;
+      combatPlayerCapture = null;
+      if (combatCaptureResult(capture) && Game.tbfight === capture.fight) refreshFeedback();
+    }, 0);
+  }, true);
+
+  function combatResultHTML() {
+    combatPresentationReset();
+    if (!Game.tbfight || Game.tbfight.over || !matchMedia('(max-width: 899px)').matches) return '';
+    const result = combatLastResult;
+    // A later refusal, status tick or field message owns the surface again.
+    // Do not let a completed turn hide unrelated current feedback.
+    if (result && !combatPlayerCapture && !combatActorCapture && result.lastNarration !== combatCurrentNarration()) return '';
+    if (!result && !combatPresentationActor) return '';
+    const clean = text => String(text || '').replace(/<\/p>/gi, ' ').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    const name = result?.name || combatPresentationActor.name;
+    const latest = result?.lines.findLast(line => ['narration','feedback'].includes(line.surface));
+    const facts = result?.changes || [];
+    const text = clean(latest?.text) || (result ? 'Turn ended.' : 'Acting…');
+    const summary = facts.slice(0, 2).map(clean).join(' · ');
+    const more = facts.length > 2 ? ` · +${facts.length - 2} changes` : '';
+    const hasDetails = result && (result.lines.length || result.changes.length);
+    return `<div class="dialogue-box narr-box combat-result"><div class="combat-result-head">${hasDetails ? `<button class="btn sm ghost" data-combat-details="${result.id}" aria-label="Turn details">Details</button>` : ''}</div><div class="combat-result-summary"><span class="combat-result-narrative"><b>${esc(name)}</b> · ${esc(text)}</span>${summary ? `<span class="combat-result-facts">${esc(summary + more)}</span>` : ''}</div></div>`;
+  }
 
   function rememberFieldMessage(text) {
     const clean = String(text || '').replace(/<[^>]*>/g, '').trim();
@@ -13091,7 +13383,7 @@
     if (!document.querySelector('.field-layout') || !matchMedia('(max-width: 899px)').matches) return null;
     const message = document.querySelector('.ord-narration');
     message.querySelectorAll(':scope > .field-notice,:scope > .field-danger').forEach(el => el.remove());
-    if (dangerCue && Game.inCombat()) {
+    if (dangerCue && Game.inCombat() && combatSaveWarning?.key !== Game.state?.runKey) {
       const danger = document.createElement('div'); danger.className = 'field-danger';
       danger.textContent = '⚠ ' + dangerCue; message.prepend(danger);
     }
@@ -13109,13 +13401,17 @@
     if (!frame || !matchMedia('(max-width: 899px)').matches) return;
     rememberFieldLog();
     const last = (Game.log || []).slice(-1)[0];
-    if (fieldFrameLog !== last) fieldPanel = null;
+    if (fieldPanelRunKey !== Game.state.runKey) { fieldPanel = null; fieldCombatResult = null; }
+    fieldPanelRunKey = Game.state.runKey;
+    // An explicitly selected turn is history. Subsequent actors must not
+    // replace it with another reader or close it underneath a finger.
+    if (fieldFrameLog !== last && !(fieldPanel === 'messages' && fieldCombatResult)) fieldPanel = null;
     fieldFrameLog = last;
     // Pack outcomes use the same phone message area as field actions. Keep
     // the inline fallback when dialogue owns that area; never replace choices.
     const packFeedback = frame.querySelector('#inlineslot .pack-feedback');
     const narration = frame.querySelector('.ord-narration .narr-box .dlg-line');
-    if (packFeedback && narration && ['inv','pantry','caches'].includes(inlineView?.kind) && inlineView.resultLog === last) {
+    if (packFeedback && narration && ['inv','pantry','caches','loot'].includes(inlineView?.kind) && inlineView.resultLog === last) {
       narration.textContent = packFeedback.textContent;
       narration.style.whiteSpace = 'pre-line';
       packFeedback.remove();
@@ -13136,8 +13432,20 @@
     if(tableEntry){tableEntry.classList.add('field-table-entry');contents.place.appendChild(tableEntry);}
     const gardenEntry=frame.querySelector('[data-open-garden]');
     if(gardenEntry)contents.place.appendChild(gardenEntry);
+    const atHaven = Game.playerTile()?.type === 'haven';
+    const surroundings = atHaven ? document.createElement('details') : null;
+    if (surroundings) { surroundings.className = 'haven-surroundings'; surroundings.innerHTML = '<summary>Grounds and surroundings</summary>'; }
     for (const selector of ['.ord-surround','.ord-compass','.ord-quest-top','.ord-panel','.ord-taphint']) {
-      const el = frame.querySelector(selector); if (el) contents.place.appendChild(el);
+      const el = frame.querySelector(selector);
+      if (el) (surroundings && ['.ord-surround','.ord-compass'].includes(selector) ? surroundings : contents.place).appendChild(el);
+    }
+    if (surroundings) {
+      contents.place.appendChild(surroundings);
+      const shortcuts = document.createElement('div'); shortcuts.className = 'haven-tool-shortcuts';
+      // Move the original gated buttons with their handlers: one Garden,
+      // one pantry, no duplicate controls or remote access through a shortcut.
+      for (const entry of [gardenEntry, frame.querySelector('#x-pantry')]) if (entry) shortcuts.appendChild(entry);
+      contents.place.prepend(shortcuts);
     }
     const statusNotes = [...frame.querySelectorAll('.ord-status > .statrow')];
     statusNotes.forEach(el => contents.place.appendChild(el));
@@ -13148,25 +13456,39 @@
     });
     const journal = frame.querySelector('.ord-codex');
     if (journal) contents.menu.prepend(journal);
-    const choose = name => {
+    const choose = (name, result = null) => {
       fieldPanel = name;
+      fieldCombatResult = name === 'messages' ? result : null;
       if (name && inlineView && inlineView.kind !== 'person') {
         inlineView = null;
         const slot = frame.querySelector('#inlineslot'); if (slot) slot.innerHTML = '';
       }
       workspace.hidden = !name;
-      workspace.querySelector('.field-tool-title').textContent = ({place:'This place',actions:'Actions',menu:'Expedition',messages:'Messages'})[name] || '';
+      workspace.querySelector('.field-tool-title').textContent = ({place:Game.playerTile()?.type === 'haven' ? 'Haven' : 'This place',actions:'Actions',menu:'Expedition',messages:'Messages'})[name] || '';
       if (name === 'messages') {
         rememberFieldLog(); contents.messages.replaceChildren();
-        for (const text of fieldMessages) { const p = document.createElement('p'); p.textContent = text; contents.messages.appendChild(p); }
+        if (result) {
+          workspace.querySelector('.field-tool-title').textContent = result.name + ' · turn details';
+          for (const text of [...result.changes, ...result.lines.map(line => line.text), ...(result.truncated ? ['Additional messages exceeded the turn history limit.'] : [])]) {
+            const p = document.createElement('p'); p.textContent = String(text).replace(/<\/p>/gi, ' ').replace(/<[^>]*>/g, ''); contents.messages.appendChild(p);
+          }
+        } else for (const text of fieldMessages) { const p = document.createElement('p'); p.textContent = text; contents.messages.appendChild(p); }
       }
       for (const [key, el] of Object.entries(contents)) el.hidden = key !== name;
       frame.querySelectorAll('[data-field-panel]').forEach(b => b.setAttribute('aria-expanded', String(b.dataset.fieldPanel === name)));
     };
     workspace.querySelector('[data-field-close]').onclick = () => choose(null);
+    frame.addEventListener('click', e => {
+      const button = e.target?.closest?.('[data-combat-details]');
+      if (!button) return;
+      const result = combatResults.find(r => r.id === Number(button.dataset.combatDetails));
+      if (result) { e.stopPropagation(); choose('messages', result); }
+    });
     for (const [name,label] of [['place','Place'],['messages','Messages'],['menu','Menu']]) {
       const button = document.createElement('button'); button.className = 'lm-btn';
-      button.textContent = label; button.dataset.fieldPanel = name;
+      button.textContent = name === 'place' && Game.playerTile()?.type === 'haven' ? '🏠 Haven' : label;
+      if (name === 'place' && Game.playerTile()?.type === 'haven') button.setAttribute('aria-label', 'Haven management');
+      button.dataset.fieldPanel = name;
       button.onclick = () => choose(fieldPanel === name ? null : name); nav.appendChild(button);
     }
     const actions = frame.querySelector('.ord-actions');
@@ -13183,18 +13505,32 @@
     }
     const personButtons = [...frame.querySelectorAll('.ord-narration [data-act]')];
     const decisionButtons = [...frame.querySelectorAll('.ord-narration [data-cid],.ord-narration [data-contest-choice]')];
-    const nextBeat = frame.querySelector('#dlg-next');
+    const nextBeat = frame.querySelector('#dlg-next,#dlg-done,#dlg-save');
     const contest = Game.state.activeContest;
     const deciding = !!chatView || !!(contest && contest.phase !== 'done' && !contest.arenaSuspended);
+    const crossingCard = !deciding && !targeting && !st.inCombat && !st.pendingEncounter && inlineView?.kind === 'blockage'
+      ? frame.querySelector('#inlineslot .blockage-card') : null;
+    const crossingButtons = crossingCard ? [...crossingCard.querySelectorAll('button[data-act]')] : [];
+    const crossingDescription = crossingCard?.querySelector('.card > p')?.textContent;
     const signature = decisionButtons.map(b => b.textContent).join('|');
     if (signature !== fieldChoiceSignature) { fieldChoicePage = 0; fieldChoiceSignature = signature; }
-    const perPage = decisionButtons.some(b => b.textContent.length > 40) ? 1 : 2;
-    const pages = Math.max(1, Math.ceil(decisionButtons.length / perPage));
+    const choicePages = [];
+    for (const button of decisionButtons) {
+      const rows = button.textContent.length > 40 ? 2 : 1;
+      button.classList.toggle('long-reply', rows === 2);
+      const last = choicePages[choicePages.length - 1];
+      if (!last || last.rows + rows > 2) choicePages.push({ buttons:[button], rows });
+      else { last.buttons.push(button); last.rows += rows; }
+    }
+    const pages = Math.max(1, choicePages.length);
     fieldChoicePage %= pages;
-    const buttons = [...actions.querySelectorAll('button'), ...personButtons, ...decisionButtons, ...(nextBeat ? [nextBeat] : [])];
+    const ordinaryButtons = [...actions.querySelectorAll('button'), ...personButtons, ...decisionButtons, ...(nextBeat ? [nextBeat] : [])];
+    const buttons = crossingButtons.length ? crossingButtons : ordinaryButtons;
+    if (crossingButtons.length) ordinaryButtons.forEach(b => contents.actions.appendChild(b));
     const targetButtons = [...actions.querySelectorAll('.ord-target button')];
     const primary = deciding
-      ? decisionButtons.length ? decisionButtons.slice(fieldChoicePage * perPage, (fieldChoicePage + 1) * perPage) : nextBeat ? [nextBeat] : []
+      ? decisionButtons.length ? choicePages[fieldChoicePage].buttons : nextBeat ? [nextBeat] : []
+      : crossingButtons.length ? crossingButtons
       : inlineView && inlineView.kind === 'person' && personButtons.length
       ? personButtons.filter(b => ['talk','give','ask'].includes(b.dataset.act)).slice(0,3)
       : targeting
@@ -13203,10 +13539,9 @@
         ? buttons.filter(b => ['c-strike','c-study','c-wait'].includes(b.id))
         : [...actions.querySelectorAll('.ord-danger button'), ...actions.querySelectorAll('.ord-ctx button,.ord-self button')].slice(0,3);
     const row = document.createElement('div'); row.className = 'phone-primary-actions';
-    if (deciding) row.classList.add('reply-actions');
+    if (deciding || crossingButtons.length) row.classList.add('reply-actions');
     primary.forEach(b => row.appendChild(b));
-    if (nextBeat) nextBeat.textContent = 'Continue';
-    if (deciding && perPage === 1 && decisionButtons.length) decisionButtons.forEach(b => b.classList.add('long-reply'));
+    if (nextBeat) nextBeat.textContent = nextBeat.id === 'dlg-save' ? 'Retry save' : nextBeat.id === 'dlg-done' ? 'Done' : 'Continue';
     const extra = buttons.filter(b => !primary.includes(b));
     extra.forEach(b => contents.actions.appendChild(b));
     const talkRow = actions.querySelector('#c-talkrow');
@@ -13216,7 +13551,7 @@
       page.dataset.replyPage = '';
       const showPage = () => {
         decisionButtons.forEach(b => contents.actions.appendChild(b));
-        row.replaceChildren(...decisionButtons.slice(fieldChoicePage * perPage, (fieldChoicePage + 1) * perPage), page);
+        row.replaceChildren(...choicePages[fieldChoicePage].buttons, page);
         page.textContent = 'More choices · ' + (fieldChoicePage + 1) + '/' + pages + ' →';
       };
       // Paging is a DOM operation: no engine reads, RNG or gameplay refresh.
@@ -13228,13 +13563,23 @@
       more.onclick = () => choose(fieldPanel === 'actions' ? null : 'actions'); row.appendChild(more);
     }
     actions.appendChild(row);
+    if (crossingButtons.length) {
+      // Keep the board visible and put the actual bound controls in the one
+      // phone action row. Refresh recreates this decision from inlineView.
+      const narration = frame.querySelector('.ord-narration');
+      const box = document.createElement('div'); box.className = 'narr-box';
+      const line = document.createElement('div'); line.className = 'dlg-line';
+      line.textContent = crossingDescription; box.appendChild(line);
+      narration.replaceChildren(box);
+      crossingCard.remove();
+    }
     const notice = decorateFieldMessage();
     // World reminders already live in Place. Copying them here covered the
     // actual turn, reply and action feedback as the late-game list grew.
     if (targeting) { notice.textContent = targeting.prompt; notice.hidden = false; }
     if (inlineView && inlineView.kind !== 'person') fieldPanel = null;
     if (st.pendingEncounter) fieldPanel = 'place';
-    choose(fieldPanel);
+    choose(fieldPanel, fieldCombatResult);
   }
 
   matchMedia('(max-width: 899px)').addEventListener('change', () => {
@@ -13286,6 +13631,7 @@
       target.innerHTML = `<div class="inlinecard garden-card">${inlineHead('Garden')}<div class="inline-body">${Game.gardenStripHtml({sowOpen:gardenSowOpen,keeperOpen:gardenKeeperOpen,feedback:gardenFeedback})}</div></div>`;
       wireInlineX(target); wireGardenControls(target);
     }
+    else if (inlineView.kind === 'blockage') renderBlockageInline(target, inlineView);
     else if (inlineView.kind === 'assign') renderAssignInline(target, inlineView);
     else if (inlineView.kind === 'remote') renderRemoteInline(target, inlineView);
     else if (inlineView.kind === 'askabout') renderAskAboutInline(target, inlineView);
@@ -13298,6 +13644,7 @@
     else if (inlineView.kind === 'loot') renderLootInline(target, inlineView);
     else if (inlineView.kind === 'feast') renderFeastInline(target, inlineView);
     else if (inlineView.kind === 'market') renderMarketInline(target, inlineView);
+    else if (inlineView.kind === 'village') renderVillageInline(target, inlineView);
     else target.innerHTML = '';
   }
 
@@ -13308,6 +13655,54 @@
   function wireInlineX(slot) {
     const x = slot.querySelector('[data-x]');
     if (x) x.onclick = () => { inlineView = null; refresh(); };
+  }
+
+  function renderVillageInline(slot, view) {
+    const current = () => inlineView === view && view.runKey === Game.state.runKey &&
+      view.bearer === Game.villagerId && view.mapKey === inlineMapKey();
+    const visit = current() && nearbyVillageVisits().find(v => v.id === view.villageId);
+    if (!visit) { inlineView = null; slot.innerHTML = ''; return; }
+    const card = visit.card, deals = card.actions.filter(a => a.id.startsWith('deal_'));
+    const actions = deals.length ? deals : card.actions.slice().sort((a,b) =>
+      Number(b.id === 'territory') - Number(a.id === 'territory'));
+    const perform = (chosen, extra = {}) => {
+      if (!current()) return;
+      const live = nearbyVillageVisits().find(v => v.id === view.villageId);
+      const action = live?.card.actions.find(a => a.id === chosen.id &&
+        (a.giftKcal || 0) === (chosen.giftKcal || 0) && a.babyId === chosen.babyId);
+      if (!action) { view.result = 'That option is no longer available.'; refresh(); return; }
+      const state = Game.state, x = Game.map.px, y = Game.map.py, last = Game.log.at(-1);
+      const result = Game.villageCardAction(view.villageId, action.id,
+        { giftKcal:action.giftKcal || 0, ...extra });
+      if (Game.state !== state || Game.villagerId !== view.bearer || Game.map.px !== x || Game.map.py !== y ||
+          Game.over || Game.inCombat() || Game.pendingEncounter) inlineView = null;
+      else {
+        view.mapKey = inlineMapKey(); view.naming = null;
+        // Engine narration owns the one message area. Only APIs returning
+        // otherwise-unvoiced text need feedback inside this explicit reader.
+        view.result = Game.log.at(-1) === last ? (typeof result === 'string' ? result : result?.msg || null) : null;
+      }
+      refresh();
+    };
+    slot.innerHTML = `<div class="inlinecard village-card">${inlineHead(esc((deals.length ? 'Shared ground · ' : '') + card.name))}<div class="inline-body">` +
+      `${deals.length ? '' : `<p class="small">${esc(card.sub)}</p>`}${view.result ? `<p class="small" role="status">${esc(view.result)}</p>` : ''}` +
+      (view.naming ? `<label for="babyname-input">Name the baby</label><input id="babyname-input" type="text" maxlength="24" placeholder="The name you give" autocomplete="off" autocapitalize="words" style="width:100%;box-sizing:border-box;padding:10px;font-size:16px"><div class="inline-btns"><button class="btn sm" id="babyname-go">Give the name</button><button class="btn sm ghost" data-village-name-back>Back</button></div>` :
+        `<div class="inline-btns">${actions.map((a,i) => `<button class="btn sm" data-vact="${i}" data-village-action="${esc(a.id)}" style="min-height:44px;${deals.length ? 'font-size:13px;line-height:1.25;padding:8px 6px;' : ''}${a.id === 'territory' ? 'flex-basis:100%;' : ''}">${esc(a.label)}${a.hint ? `<small style="display:block;font-size:12px;line-height:1.3">${esc(a.hint)}</small>` : ''}</button>`).join('')}</div>`) +
+      `</div></div>`;
+    wireInlineX(slot);
+    slot.querySelectorAll('[data-vact]').forEach(b => b.onclick = () => {
+      const action = actions[Number(b.dataset.vact)];
+      if (action.id === 'namebaby') { view.naming = action; refresh(); }
+      else perform(action);
+    });
+    if (view.naming) {
+      const input = slot.querySelector('#babyname-input'), action = view.naming;
+      const give = () => perform(action, { babyId:action.babyId, name:input.value });
+      slot.querySelector('#babyname-go').onclick = give;
+      input.onkeydown = e => { if (e.key === 'Enter') give(); };
+      slot.querySelector('[data-village-name-back]').onclick = () => { view.naming = null; refresh(); };
+      input.focus();
+    }
   }
 
   function renderMarketInline(slot, view) {
@@ -13347,7 +13742,7 @@
       if (JSON.stringify(current) !== JSON.stringify(quoted)) {
         view.quote = current; view.result = 'The terms changed. Review them before confirming.'; refresh(); return;
       }
-      const ok = Game.activateAbility('god.name_price', current.itemId);
+      const ok = combatInput(() => Game.activateAbility('god.name_price', current.itemId));
       view.quote = null;
       view.result = ok ? `Delivered: ${current.name}.` : 'The market did not deliver. Check the terms again.';
       if (ok) Game.save();
@@ -13359,7 +13754,13 @@
     const villagerId = view.vid;
     const vp = (Game.data.villagers || []).find(v => v.id === villagerId) ||
                (Game.data.background_survivors || []).find(v => v.id === villagerId);
-    if (!vp) { slot.innerHTML = ''; inlineView = null; return; }
+    if (!vp) {
+      const resident = (Game.state.village.roster || []).includes(villagerId);
+      const reason = resident
+        ? 'This old save lacks details needed to talk.<br>Saved relationships and abilities remain.'
+        : 'This person’s details are unavailable, so conversation cannot open.';
+      return `<div class="inlinecard" data-missing-person>${inlineHead('Personal record unavailable')}<div class="inline-body"><p class="small">${reason}</p></div></div>`;
+    }
     const sys = !!Game.state.systemArrived;
     const known = sys || Game.nameKnown(villagerId);
     const titleName = known ? vp.name : Game.personDescriptor(villagerId);
@@ -13572,12 +13973,14 @@
   function openChat(vid) {
     inlineView = null;
     const st = Game.startConvo(vid);
+    if(!st){refresh();return;}
     // EXILE COLD SHOULDER (Steve 2026-10-17): a refused talk isn't a
     // conversation — the refusal was already narrated via say(); opening the
     // chat view on it would render an empty box (dialogueBoxHTML bails on
     // inactive convos). Stay on the main view so the refusal reads.
     if (st && st.refused) { refresh(); return; }
     chatView = { vid: vid, thinking: null, thinkingToken: 0, msgIndex: 0 };
+    if (st?.conversationSave !== undefined && st.conversationSave !== null) checkpointPartyChat(st.conversationSave);
     // startConvo resets the transcript — the opening lands after a beat.
     armChatThinking(vid, 0, null, true);
     refresh();
@@ -13598,14 +14001,21 @@
   function closeChat(sayGoodbye) {
     if (!chatView) return;
     const vid = chatView.vid;
+    const completed = !!chatView.ended;
     chatView = null;
-    if (sayGoodbye !== false) { try { Game.endConvo(vid, 'left'); } catch (e) {} }
+    Game.voiceStop?.();
+    if (sayGoodbye !== false && !completed) {
+      const closed = Game.convoTurn(vid, 'leave');
+      const saved = closed?.requestSave ?? closed?.conversationSave;
+      if (saved !== undefined && saved !== null && saved !== true) Game.say('This conversation could not be saved. Keep this tab open and retry saving.');
+    }
     refresh();
   }
 
   // Chat hesitation: same personality-shaped beat as inline, held on chatView.
   function armChatThinking(vid, hiddenFrom, choiceId, isOpening) {
     if (!chatView || chatView.vid !== vid) return;
+    Game.voiceStop?.();
     const tok = (chatView.thinkingToken = (chatView.thinkingToken || 0) + 1);
     const ms = Game.convoHesitationMs ? Game.convoHesitationMs(vid, choiceId, isOpening) : 450;
     chatView.thinking = { hiddenFrom: hiddenFrom, token: tok };
@@ -13618,9 +14028,22 @@
     }, ms);
   }
 
+  function checkpointPartyChat(result) {
+    let saved=result;
+    if(arguments.length===0){
+      try { saved=Game.save(); }
+      catch(error) { console.warn('[party conversation checkpoint]',error); saved=false; }
+    }
+    const warnings={stale:'Another tab has newer progress. Close it and reload here.',
+      tombstoned:'This expedition ended elsewhere. Reload before continuing.',
+      settlement_failed:'Time could not finish safely. Reload and Continue from the last saved checkpoint.',
+      deferred:'Saving is still pending. Keep this tab open.'};
+    if (chatView) chatView.saveWarning=saved===true ? null : warnings[saved] || 'This decision could not be saved. Keep this tab open and retry saving.';
+    return saved;
+  }
+
   function chatChoice(vid, cid) {
-    if (!chatView || chatView.vid !== vid) return;
-    if (cid === 'leave') { closeChat(true); return; }
+    if (!chatView || chatView.vid !== vid || chatView.ended) return;
     const ui = Game.convoUI ? Game.convoUI(vid) : null;
     // DESYNC FIX (Steve 2026-10-05): convoTurn appends AND the transcript can
     // shift old entries off, so "length before" is not a stable index. Anchor
@@ -13629,8 +14052,16 @@
     const t0 = (ui && ui.transcript) || [];
     const lastBefore = t0.length ? t0[t0.length - 1] : null;
     const st = Game.convoTurn(vid, cid);
-    if (!st || st.ended) { chatView = null; refresh(); return; }
+    if (!st) { Game.voiceStop?.(); chatView = null; refresh(); return; }
     if (st.navigation) { chatView.history=false;chatView.thinking=null;refresh();return; }
+    if (st.requestDecision) checkpointPartyChat(st.requestSave);
+    else if (st.conversationSave !== undefined && st.conversationSave !== null) checkpointPartyChat(st.conversationSave);
+    if (st.requestNavigation?.kind === 'assign' && st.requestSave === true) {
+      Game.voiceStop?.(); chatView = null;
+      assignTaskSheet(vid, 'in-person'); inlineView.requestLine = st.line; refresh(); return;
+    }
+    if (st.partyDecision) checkpointPartyChat();
+    if (st.favorSave !== undefined && st.favorSave !== null) checkpointPartyChat(st.favorSave);
     // Pokémon-style: jump to the first new message — the reply paces beat by
     // beat under ▼, never dumps/skips.
     const t1 = (Game.convoUI ? Game.convoUI(vid) : null) || {};
@@ -13642,9 +14073,16 @@
       // ONE-BEAT TURNS (Steve 2026-10-05): your own line lives in the
       // history, not paginated back at you — land on their reply.
       while (idx < t.length && t[idx].who === 'you') idx++;
-      idx = Math.min(idx, Math.max(0, t.length - 1));
     }
-    chatView.msgIndex = idx;
+    // Ending settles the Game once; it does not mean the player has read
+    // the new answer. Keep actual final beats in a read-only view. A noop
+    // or ending with no new reply has nothing to retain.
+    if (st.ended && (st.noop || idx >= t.length)) {
+      Game.voiceStop?.(); chatView = null; refresh(); return;
+    }
+    chatView.ended = !!st.ended;
+    chatView.msgIndex = Math.min(idx, Math.max(0, t.length - 1));
+    chatView.subPage = 0;
     chatView.history = false;
     armChatThinking(vid, idx, cid, false);
     refresh();
@@ -13655,9 +14093,10 @@
   // until you know them), ONE message at a time, ▼ to continue, choices land
   // in the box when it's your turn to pick. No screen takeover, no scrolling.
   function dialogueBoxHTML(cv) {
+    cv.visibleEntry = null;
     const vid = cv.vid;
     const convo = Game.convoUI ? Game.convoUI(vid) : null;
-    if (!convo || !convo.active) return '';
+    if (!convo || (!convo.active && !cv.ended)) return '';
     const sys = !!Game.state.systemArrived;
     const known = sys || Game.nameKnown(vid);
     const vp = (Game.data.villagers || []).find(v => v.id === vid) ||
@@ -13668,8 +14107,14 @@
     // msgIndex: Pokémon-style, one message at a time. Clamp to the transcript.
     let mi = cv.msgIndex || 0;
     if (mi >= transcript.length) mi = Math.max(0, transcript.length - 1);
-    const atEnd = mi >= transcript.length - 1 || transcript.length === 0;
-    const choices = (atEnd && !thinking) ? (convo.choices || []) : [];
+    // Old saves can retain longer pages. Subdivide their presentation without
+    // rewriting the transcript, charging a turn or guessing their quote state.
+    const parts = transcript[mi] ? Game.convoSplitBeats(transcript[mi].text) : [''];
+    const subPage = Math.min(cv.subPage || 0, parts.length - 1);
+    cv.subPage = subPage;
+    cv.visibleParts = parts;
+    const atEnd = (mi >= transcript.length - 1 && subPage >= parts.length - 1) || transcript.length === 0;
+    const choices = (atEnd && !thinking && !cv.ended) ? (convo.choices || []) : [];
     let body;
     if (thinking) {
       body = `<div class="dlg-line"><span class="thinking-dots" aria-label="thinking"><span>.</span><span>.</span><span>.</span></span></div>`;
@@ -13677,7 +14122,8 @@
       body = `<div class="dlg-line">…</div>`;
     } else {
       const e = transcript[mi];
-      const clean = Game.cleanDialogue ? Game.cleanDialogue(e.text) : String(e.text || '');
+      if (!cv.history) cv.visibleEntry = e;
+      const clean = Game.cleanDialogue ? Game.cleanDialogue(parts[subPage]) : String(parts[subPage] || '');
       const isSpeech = /^\s*"/.test(clean);
       const who = e.who === 'you' ? 'You' : titleName;
       const ftag = e.foreign
@@ -13715,12 +14161,17 @@
       };
       histBody = `<div class="dlg-history">${transcript.map(renderEntry).join('')}</div>`;
     }
+    if (cv.saveWarning) {
+      cv.visibleEntry=null;
+      return `<div class="dialogue-box"><div class="dlg-line" role="alert">${esc(cv.saveWarning)}</div><button class="btn" id="dlg-save">Retry save</button><button class="btn ghost" id="dlg-end">End conversation</button></div>`;
+    }
     const showBody = cv.history && histBody ? histBody : body;
     return `<div class="dialogue-box">
       <div class="dlg-speaker"><button class="dlg-hist" id="dlg-hist" aria-label="conversation history" title="See full conversation">💬 ${esc(titleName)} ${cv.history ? '▾' : '▸'}</button><button class="dlg-x" id="dlg-end" aria-label="end conversation">✕</button></div>
       ${showBody}
       ${!cv.history && choiceBtns ? `<div class="dlg-choices">${choiceBtns}</div>` : ''}
       ${!cv.history && more ? `<button class="dlg-next" id="dlg-next" aria-label="continue">▼</button>` : ''}
+      ${!cv.history && !thinking && atEnd && cv.ended ? `<button class="btn" id="dlg-done">Done</button>` : ''}
     </div>`;
   }
 
@@ -13756,6 +14207,11 @@
   }
 
   function narrationBoxHTML(st, chatView) {
+    // A storage/settlement failure owns the existing message surface until
+    // a real successful checkpoint. HP summaries must not hide save risk.
+    if (combatSaveWarning?.key === st?.runKey && combatSaveWarning) {
+      return `<div class="dialogue-box narr-box combat-save-warning" role="alert">${esc(combatSaveWarning.text)}</div>`;
+    }
     // CONTEST (Steve 2026-10-05): active contests are modal — they take over
     // the narration surface until resolved. Unavoidable means unavoidable.
     try {
@@ -13769,6 +14225,12 @@
     } catch (e) {}
     // PERSON CARD (Steve 2026-10-05): tapping a person shows their card HERE,
     // in the narration/chat area — not below the grid. One interaction surface.
+    // The explicitly opened topic reader owns the answer. A journal side
+    // effect must not repeat it in the second, smaller message surface.
+    if (inlineView?.kind === 'askabout' && inlineView.readingReply) {
+      return inlineView.saveWarning
+        ? `<div class="dialogue-box narr-box combat-save-warning" role="alert">${esc(inlineView.saveWarning)}</div>` : '';
+    }
     if (inlineView && inlineView.kind === 'person') {
       return personCardHTML(inlineView);
     }
@@ -13827,6 +14289,8 @@
         };
       }
     }
+    const combatResult = combatResultHTML();
+    if (combatResult) return combatResult;
     // ONE SURFACE (Steve 2026-10-12): the narration box is the single text
     // surface — action feedback beats render here, not in a separate card.
     // Latest beat wins (narration or feedback, in log order): one message at
@@ -13841,11 +14305,13 @@
       const s = (e && typeof e === 'object') ? (e.surface || 'narration') : 'narration';
       if (s === 'narration' || s === 'feedback') { lastBeat = (e && typeof e === 'object') ? (e.text || '') : String(e); break; }
     }
-    const text = lastBeat;
+    const actionResult = fieldActionResultText();
+    const text = actionResult || lastBeat;
     if (!text) return '';
     // Strip HTML, show as plain narration (</p> boundaries become spaces
     // so adjacent feedback lines don't glue: "slams through!A woman..." fix
-    let clean = String(text).replace(/<\/p>/gi, ' ').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    let clean = String(text).replace(/<\/p>/gi, ' ').replace(/<[^>]*>/g, '');
+    clean = actionResult ? clean.trim() : clean.replace(/\s+/g, ' ').trim();
     if (!clean) return '';
     // SYNERGY TEASE (unified surface): the in-the-moment shiver keeps its
     // purple accent and mark inside the one box.
@@ -13853,16 +14319,26 @@
     try {
       if (_isSynTeaseLine(clean, _synTeaseSet())) { beatCls = ' narr-syntease'; clean = '🌀 ' + clean; }
     } catch (e) {}
-    return `<div class="dialogue-box narr-box${beatCls}"><div class="dlg-line narr"><span class="narr">${esc(clean)}</span></div></div>`;
+    return `<div class="dialogue-box narr-box${beatCls}${actionResult ? ' field-action-results' : ''}"><div class="dlg-line narr"><span class="narr">${esc(clean)}</span></div></div>`;
   }
 
   function wireDialogueBox() {
+    const entry = chatView?.visibleEntry;
+    if (entry && entry.who === 'them' && typeof entry.voiceLine === 'string' && chatView.visibleParts.length === 1) {
+      chatView.voicedEntries ||= new WeakSet();
+      if (!chatView.voicedEntries.has(entry)) {
+        chatView.voicedEntries.add(entry);
+        try { Game.convoSpeakLine(chatView.vid, entry.voiceLine, { foreign: entry.foreign }); }
+        catch (error) { console.warn('[visible dialogue voice]', error); }
+      }
+    }
     const nx = document.getElementById('dlg-next');
     if (nx) nx.onclick = () => chatAdvance();
     const hist = document.getElementById('dlg-hist');
     if (hist) hist.onclick = (e) => {
       e.stopPropagation();
       if (!chatView) return;
+      Game.voiceStop?.();
       chatView.history = !chatView.history;
       refresh();
     };
@@ -13875,6 +14351,10 @@
         chatAdvance();
       };
     }
+    const retry = document.getElementById('dlg-save');
+    if (retry) retry.onclick = e => {e.stopPropagation();checkpointPartyChat();refresh();};
+    const done = document.getElementById('dlg-done');
+    if (done) done.onclick = (e) => { e.stopPropagation(); closeChat(false); };
     const end = document.getElementById('dlg-end');
     if (end) end.onclick = (e) => { e.stopPropagation(); closeChat(true); };
     document.querySelectorAll('.dialogue-box [data-cid]').forEach(b => {
@@ -13887,9 +14367,14 @@
   function chatAdvance() {
     if (!chatView || chatView.thinking) return;
     const convo = Game.convoUI ? Game.convoUI(chatView.vid) : null;
-    if (!convo || !convo.active) { chatView = null; refresh(); return; }
+    if (!convo || (!convo.active && !chatView.ended)) { Game.voiceStop?.(); chatView = null; refresh(); return; }
     const n = (convo.transcript || []).length;
-    chatView.msgIndex = Math.min((chatView.msgIndex || 0) + 1, Math.max(0, n - 1));
+    Game.voiceStop?.();
+    if ((chatView.subPage || 0) + 1 < (chatView.visibleParts?.length || 1)) chatView.subPage++;
+    else {
+      chatView.msgIndex = Math.min((chatView.msgIndex || 0) + 1, Math.max(0, n - 1));
+      chatView.subPage = 0;
+    }
     refresh();
   }
 
@@ -14029,25 +14514,60 @@
     // topic only when there's actually a trick to learn (counterTeachable).
     const trickTeachable = Game.counterTeachable ? Game.counterTeachable() : null;
     if (trickTeachable) topics.push(['beasttricks', '\u{1F43E} "Any tricks for the beasts?"', '']);
-    const btns = topics.map(([tid, label, extra]) =>
+    const beats = view.replyBeats || [];
+    const reading = !!view.readingReply && beats.length > 0;
+    const page = Math.min(view.replyPage || 0, Math.max(0, beats.length - 1));
+    const readerButtons = reading ?
+      `${page > 0 ? '<button class="btn sm ghost" data-topic-prev>← Previous</button>' : ''}<button class="btn sm" data-topic-next>${page + 1 < beats.length ? 'Continue' : 'Done'}</button>` : '';
+    const btns = readerButtons || topics.map(([tid, label, extra]) =>
       `<button class="btn sm ghost" data-topic="${tid}">${label}${extra}</button>`).join('') +
       ` <button class="btn sm ghost" data-act="back">\u2190 Back</button>`;
     slot.innerHTML = `<div class="inlinecard">
       ${inlineHead('\u2753 Ask ' + esc(dname) + ' about\u2026')}
+      ${view.saveWarning && !reading ? `<p class="inline-result">⚠ ${esc(view.saveWarning)}</p>` : ''}
       ${view.result ? `<p class="inline-result">\u2713 ${esc(view.result)}</p>` : ''}
-      <div class="inline-body"><p class="small" style="opacity:.7">What do you want to know?</p></div>
+      <div class="inline-body">${reading
+        ? `<p class="small">${page + 1} / ${beats.length}</p><p class="topic-reply">${esc(beats[page])}</p>`
+        : '<p class="small" style="opacity:.7">What do you want to know? (10 kcal per question.)</p>'}</div>
       <div class="inline-btns">${btns}</div>
     </div>`;
     wireInlineX(slot);
-    slot.querySelector('[data-act="back"]').onclick = () => {
+    const back = slot.querySelector('[data-act="back"]');
+    if (back) back.onclick = () => {
       inlineView = { kind: 'person', vid: villagerId, line: view.line, result: null, nvMode: null, mapKey: inlineMapKey() };
+      refresh();
+    };
+    const previous = slot.querySelector('[data-topic-prev]');
+    if (previous) previous.onclick = () => { view.replyPage = page - 1; refresh(); };
+    const next = slot.querySelector('[data-topic-next]');
+    if (next) next.onclick = () => {
+      if (page + 1 < beats.length) view.replyPage = page + 1;
+      else view.readingReply = false;
       refresh();
     };
     slot.querySelectorAll('[data-topic]').forEach(b => {
       b.onclick = () => {
-        const r = Game.askAbout(villagerId, b.dataset.topic);
+        const replyLines = [];
+        const r = Game.askAbout(villagerId, b.dataset.topic, { onReply: line => replyLines.push(line) });
         const labels = { goal: 'what they want', gossip: 'what they\u2019ve heard', village: 'how everyone\u2019s doing', namebeast: 'what to call the beast', tellbeast: 'what you saw out there', beasttricks: 'beast tricks', usename: 'for a name from you' };
-        view.result = r ? `You asked about ${labels[b.dataset.topic] || 'it'}.` : null;
+        view.replyLines = replyLines;
+        view.replyBeats = replyLines.flatMap(line => Game.convoSplitBeats(line));
+        view.replyPage = 0;
+        view.readingReply = view.replyBeats.length > 0;
+        view.saveWarning = null;
+        view.result = replyLines.length ? null : r ? `You asked about ${labels[b.dataset.topic] || 'it'}.` : null;
+        // Finish the entire topic (including journal/knowledge wrappers) before
+        // checkpointing its payment. Browsing the answer never pays again.
+        if (r) {
+          let saved;
+          try { saved = Game.save(); }
+          catch (error) { console.warn('[topic checkpoint] save failed', error); saved = false; }
+          if (saved === false) view.saveWarning = 'Your answer could not be saved. Keep this tab open; recent progress is at risk.';
+          else if (saved === 'stale') view.saveWarning = 'Another tab has newer progress. Close it and reload here before continuing.';
+          else if (saved === 'tombstoned') view.saveWarning = 'This expedition ended elsewhere. Its save was not restored.';
+          else if (saved === 'settlement_failed') view.saveWarning = 'Time could not finish safely. Reload and Continue from the last saved checkpoint.';
+          else if (saved === 'deferred') view.saveWarning = 'Saving is still pending. Keep this tab open.';
+        }
         view.naming = r && r.naming ? r.naming : null;
         view.useNaming = r && r.useNaming ? r.useNaming : null;
         refresh();
@@ -14198,11 +14718,11 @@
       water: `Could you fetch water?`, scout: `Could you scout around?`, patrol: `Could you patrol for threats?`,
       rest: `You should rest.`,
     };
-    let body = '';
+    let body = view.requestLine ? `<p class="inline-result">${esc(view.requestLine)}</p>` : '';
     if (current && tasks[current.task]) {
       body += `<p class="small" style="opacity:.8">"I'm on it — ${tasks[current.task].icon} ${esc(tasks[current.task].name).toLowerCase()}." — out until next part.</p>`;
     } else {
-      body += `<p style="font-size:15px;line-height:1.5">"What do you need?"</p>`;
+      if (!view.requestLine) body += `<p style="font-size:15px;line-height:1.5">"What do you need?"</p>`;
       // NUMBERS DON'T LEAK (break-it social r5 2026-10-09): the person panel
       // and the people journal read trust as qualitative bands — the assign
       // panel showed the raw Trust: N/100. One convention everywhere.
@@ -14256,7 +14776,8 @@
       <div class="inline-btns">${btns}</div>
     </div>`;
     wireInlineX(slot);
-    slot.querySelector('[data-act="back"]').onclick = () => {
+    const back = slot.querySelector('[data-act="back"]');
+    if (back) back.onclick = () => {
       inlineView = { kind: 'person', vid: villagerId, line: view.line, result: null, nvMode: null, mapKey: inlineMapKey() };
       refresh();
     };
@@ -14406,11 +14927,12 @@
       overlay.innerHTML =
         '<div class="system-crack"></div>' +
         '<div class="system-beat-kicker">' + esc(b.kicker || '') + '</div>' +
+        '<div class="system-beat-lines" role="region" aria-label="Current System message" tabindex="0">' +
         b.lines.map(l =>
           '<div class="system-window"><div class="system-text' + (l.who === 'narr' ? ' system-narr' : '') + '">' +
           (l.who === 'sys' ? '&ldquo;' + esc(Game.quoteWrap(l.text).slice(1, -1)) + '&rdquo;' : esc(l.text)) +
           '</div></div>'
-        ).join('') +
+        ).join('') + '</div>' +
         '<button class="btn arrival-next" style="margin-top: 14px; z-index: 1001;">' + esc(b.button || '…') + '</button>';
       // SCOPED LOOKUP (day7 soft-lock 2026-10-12): the old code used
       // document.getElementById('b-arrival-next') — a document-wide id. With
@@ -14544,6 +15066,28 @@
 
   // abilitySheet: the System offers you a choice. Pick one.
   // Modal sheet - you must choose. No dismissing the System.
+  function evolutionSheet() {
+    const state = Game.state, body = state.scholar, root = body.pendingEvolution;
+    const choices = Game.liveEvolutionChoices();
+    if (!choices.length) return;
+    const held = (body.abilities || []).concat(body.backgroundAbilities || []).find(a => a.id === root);
+    const pick = id => {
+      closeSheet('offer-evolution');
+      if (Game.state === state && state.scholar === body && body.pendingEvolution === root) Game.chooseEvolution(id);
+      refresh();
+      return 'keep';
+    };
+    openSheet({
+      id: 'offer-evolution', title: 'Evolve ' + esc(held.name || root),
+      html: '<p>Mastery earned a choice. Keep your current actions and add one of these effects. No extra ability slot is needed.</p>',
+      buttons: choices.map(c => ({
+        label: '<b>' + esc(c.name) + '</b><br><span class="small">' + esc(c.verb) + '</span>',
+        primary: true, onClick: () => pick(c.id),
+      })).concat([{label: 'Not yet — choose later in You', onClick: () => pick('defer')}]),
+      priority: 82, modal: true, dismissible: false,
+    });
+  }
+
   function abilitySheet() {
     const choices = Game.state.scholar.abilityChoices;
     if (!choices || !choices.length) return;
@@ -14992,7 +15536,7 @@
             <p class="small" style="margin:0"><b>Empty slot ${idx + 1}</b> — learn abilities from the System: offers, trials, and service.</p>
           </div>`;
         }
-        const def = defs.find(d => d.id === (ab.id || ab)) || {};
+        const def = defs.find(d => d.id === (ab.evolvedFrom || ab.id || ab)) || {};
         const name = ab.name || def.name || ab.id || 'Unknown';
         const level = ab.level || 1;
         const xp = ab.xp || 0;
@@ -15011,6 +15555,8 @@
         }).join(' ');
         // Detail: description, actions, modifiers
         let detail = `<p class="small" style="opacity:.8">${esc(ab.desc || def.description || '')}</p>`;
+        const evolution = (Game.data.evolutions?.evolutions || []).find(e => e.id === ab.id);
+        if (evolution) detail += `<p class="small">${esc(evolution.verb)}</p>`;
         if (def.actions && def.actions.length) {
           detail += `<p class="small"><b>Actions:</b></p>` + def.actions.map(a => {
             const cost = a.cost ? Object.entries(a.cost).map(([k, v]) => `${k}: ${v}`).join(', ') : '—';
@@ -15241,10 +15787,12 @@
   // inventory: your pack. Inline — one screen, no overlay hopping.
   // Returns actual action feedback, including refusals. A status object or
   // null return is not a success receipt (drinking uses null in both cases).
-  function packActionFeedback(fn, fallback) {
+  function packActionFeedback(fn, fallback, extraState) {
     const before = (Game.log || []).slice(), last = before[before.length - 1];
     const state=Game.state, eatenBefore=state.village.harvestIntakeTotals?.records || 0;
     const giver=Game.villagerId,giftsBefore=(state.village.gives||{})[giver]||0;
+    const cargo = st => JSON.stringify({pack:st.scholar?.inventory,water:st.scholar?.water,pantry:st.village?.pantry,prep:st.scholar?.prepStash,stash:st.village?.stash,caches:st.caches,extra:extraState?.()});
+    const cargoBefore=cargo(state);
     Game.feedbackMark();
     const result = fn(), log = Game.log || [];
     // Pack and prep-counter bites finish here, after food, benefits and the
@@ -15252,9 +15800,10 @@
     // must not be the only protection against a phone tab being killed.
     let saveNote='';
     const gifted=Game.state===state&&((state.village.gives||{})[giver]||0)>giftsBefore;
-    if(Game.state===state&&!Game.over&&((state.village.harvestIntakeTotals?.records || 0)>eatenBefore||gifted)){
+    const transferred=Game.state===state&&cargo(state)!==cargoBefore;
+    if(Game.state===state&&Game.villagerId===giver&&!Game.over&&((state.village.harvestIntakeTotals?.records || 0)>eatenBefore||gifted||transferred)){
       const saved=Game.save();
-      const action=gifted?'transfer':'meal';
+      const action=gifted||transferred?'transfer':'meal';
       if(saved===false)saveNote=`The ${action} finished, but could not be saved. Storage may be full.`;
       else if(saved==='stale')saveNote=`Another tab has a newer save. This ${action} was not saved over it.`;
       else if(saved==='tombstoned')saveNote=`This expedition’s save ended elsewhere. This ${action} was not saved.`;
@@ -15277,6 +15826,30 @@
     const chance = Math.round(Math.max(0, Math.min(1, Game.modTarget('craft.success', base))) * 100);
     const label = level >= 3 ? 'Make' : level === 2 ? 'Try' : 'Try blind';
     return `<button class="btn ghost sm" data-craft="${recipe.id}" title="${chance}% chance of success. Materials are used even if crafting fails.">${label} (${chance}%)</button>`;
+  }
+
+  // Keep presentation context on the view/DOM, never on saved inventory rows.
+  function rememberPackReader() {
+    if (!inlineView || inlineView.kind !== 'inv') return;
+    const body = document.querySelector('#inlineslot .pack-view > .inline-body');
+    if (!body) return;
+    const card = body.parentElement;
+    const top = body.getBoundingClientRect().top;
+    const row = body.scrollTop > 0 && Array.from(body.querySelectorAll('[data-pack-row]')).find(el => el.getBoundingClientRect().bottom > top);
+    inlineView.reader = { scroll:body.scrollTop, item:row?._packItem,
+      index:row ? Number(row.dataset.packRow) : null,
+      offset:row ? row.getBoundingClientRect().top - top : 0,
+      donation:card._packDonation, state:card._packState, bearer:card._packBearer };
+  }
+
+  function restorePackReader(slot, view) {
+    const body = slot.querySelector('.inline-body'), saved = view.reader;
+    if (!body || !saved || saved.state !== Game.state || saved.bearer !== Game.villagerId || saved.donation !== !!view.donation) return;
+    const rows = Array.from(body.querySelectorAll('[data-pack-row]'));
+    const row = rows.find(el => el._packItem === saved.item) || rows.find(el => Number(el.dataset.packRow) === saved.index);
+    body.scrollTop = row
+      ? body.scrollTop + row.getBoundingClientRect().top - body.getBoundingClientRect().top - saved.offset
+      : saved.scroll;
   }
 
   function renderInvInline(slot, view) {
@@ -15355,7 +15928,7 @@
             // note: data-cook below covers cookable via the extended condition
             i._cookable = cookable;
           } catch (e) {}
-          return `<p class="small">${itemSpriteHtml(i)}${(Game.isKeepsake && Game.isKeepsake(i)) ? '💛 ' : ''}${i.bonded ? '\u2756 ' : ''}<b>${Game.itemDisplayName(i)}</b> x${i.units} (${(() => { try {
+          return `<p class="small" data-pack-row="${idx}">${itemSpriteHtml(i)}${(Game.isKeepsake && Game.isKeepsake(i)) ? '💛 ' : ''}${i.bonded ? '\u2756 ' : ''}<b>${Game.itemDisplayName(i)}</b> x${i.units} (${(() => { try {
             // KNOWLEDGE GATE (Steve 2026-10-07): kcal hidden for unknown plants.
             // "If you don't know it's food, you don't know its calories."
             if (i.foodKind === "meat" && i.edible === false) return "?";
@@ -15364,7 +15937,7 @@
               if (isPlant && !Game.canShow('plant', i.plantId, 'kcal')) return "?";
             }
             return (i.kcalEach || 0) * i.units;
-          } catch (e) { return (i.kcalEach || 0) * i.units; } })()} kcal · ${(((i.kg || 0.1)) * i.units).toFixed(1)} kg)${foodMark}${i.bonded ? ` <span class="small" title="Bonded relic \u2014 grown, not found">bond ${i.bond || 0}${(i.enhancements || []).length ? ' \u00B7 ' + i.enhancements.join(', ') : ''}</span>` : ''}${(Game.isKeepsake && Game.isKeepsake(i)) ? ` <span class="small" style="opacity:.6">keepsake</span>${ksPips(i)}` : ''}${(() => { try { const et = Game.keepsakeEffectText ? Game.keepsakeEffectText(i) : null; return et ? ` <span class="small" style="opacity:.75">⚙ ${et}</span>` : ''; } catch (e) { return ''; } })()}${(Game.isSpoiled && Game.isSpoiled(i)) ? ' \u26A0 spoiled' : ''}${i.bookId ? ` <button class="btn ghost sm" data-read="${i.bookId}">Read</button>` : ''}${Game.isUsable(i) && !i.bonded ? ` <button class="btn ghost sm" data-use="${idx}">Use</button>` : ''}${i.unopened ? ` <button class="btn ghost sm" data-openpkg="1">Open it (a day-part, on camera)</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-eatone="${idx}">Eat</button>` : ''}${foodBtns}${i._cookable ? ` <button class="btn ghost sm" data-cook="${idx}">Cook</button>` : ''}${Game.isWeapon(i) ? ` <button class="btn ghost sm" data-equip-w="${idx}">Equip</button>` : ''}${Game.isArmor(i) ? ` <button class="btn ghost sm" data-equip-a="${idx}">Wear</button>` : ''}${ksWearable(i) ? ` <button class="btn ghost sm" data-wear-acc="${idx}" title="Accessory slot — keepsakes and accessories share the same four">Wear</button>` : ''}${(Game.isKeepsake && Game.isKeepsake(i) && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel="${idx}">${(() => { try { return Game.channelLabel ? Game.channelLabel() : '💛 Channel'; } catch (e) { return '💛 Channel'; } })()}</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-donate="${idx}">Donate</button>` : ''}${!i.bonded && !(Game.isKeepsake && Game.isKeepsake(i)) ? ` <button class="btn ghost sm" data-drop="${idx}">Leave it</button>` : ''}${i.material ? ` <button class="btn ghost sm" data-stashmat="${idx}">Stash</button>` : ''}${Game.isStashableTool(i) ? ` <button class="btn ghost sm" data-stashtool="${idx}">Stash</button>` : ''}${Game.isStashableWeapon(i) ? ` <button class="btn ghost sm" data-stashweapon="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isStashableArmor && Game.isStashableArmor(i) ? ` <button class="btn ghost sm" data-stasharmor="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isMedicine(i) ? ` <button class="btn ghost sm" data-stashmed="${idx}" title="Deposit to the pharmacy — becomes communal">Pharmacy</button>` : ''}</p>`;
+          } catch (e) { return (i.kcalEach || 0) * i.units; } })()} kcal · ${(((i.kg || 0.1)) * i.units).toFixed(1)} kg)${foodMark}${i.bonded ? ` <span class="small" title="Bonded relic \u2014 grown, not found">bond ${i.bond || 0}${(i.enhancements || []).length ? ' \u00B7 ' + i.enhancements.join(', ') : ''}</span>` : ''}${(Game.isKeepsake && Game.isKeepsake(i)) ? ` <span class="small" style="opacity:.6">keepsake</span>${ksPips(i)}` : ''}${(() => { try { const et = Game.keepsakeEffectText ? Game.keepsakeEffectText(i) : null; return et ? ` <span class="small" style="opacity:.75">⚙ ${et}</span>` : ''; } catch (e) { return ''; } })()}${Game.traderCurioValue(i) > 0 ? ' <span class="small" data-curio-trade-hint>Trade good — offer to a visiting trader at Haven.</span>' : ''}${(Game.isSpoiled && Game.isSpoiled(i)) ? ' \u26A0 spoiled' : ''}<span class="pack-item-actions">${i.bookId ? ` <button class="btn ghost sm" data-read="${i.bookId}">Read</button>` : ''}${Game.isUsable(i) && !i.bonded ? ` <button class="btn ghost sm" data-use="${idx}">Use</button>` : ''}${i.unopened ? ` <button class="btn ghost sm" data-openpkg="1">Open it (a day-part, on camera)</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-eatone="${idx}">Eat</button>` : ''}${foodBtns}${i._cookable ? ` <button class="btn ghost sm" data-cook="${idx}">Cook</button>` : ''}${Game.isWeapon(i) ? ` <button class="btn ghost sm" data-equip-w="${idx}">Equip</button>` : ''}${Game.isArmor(i) ? ` <button class="btn ghost sm" data-equip-a="${idx}">Wear</button>` : ''}${ksWearable(i) ? ` <button class="btn ghost sm" data-wear-acc="${idx}" title="Accessory slot — keepsakes and accessories share the same four">Wear</button>` : ''}${(Game.isKeepsake && Game.isKeepsake(i) && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel="${idx}">${(() => { try { return Game.channelLabel ? Game.channelLabel() : '💛 Channel'; } catch (e) { return '💛 Channel'; } })()}</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-donate="${idx}">Donate</button>` : ''}${!i.bonded && !(Game.isKeepsake && Game.isKeepsake(i)) ? ` <button class="btn ghost sm" data-drop="${idx}">Leave it</button>` : ''}${i.material ? ` <button class="btn ghost sm" data-stashmat="${idx}">Stash</button>` : ''}${Game.isStashableTool(i) ? ` <button class="btn ghost sm" data-stashtool="${idx}">Stash</button>` : ''}${Game.isStashableWeapon(i) ? ` <button class="btn ghost sm" data-stashweapon="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isStashableArmor && Game.isStashableArmor(i) ? ` <button class="btn ghost sm" data-stasharmor="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isMedicine(i) ? ` <button class="btn ghost sm" data-stashmed="${idx}" title="Deposit to the pharmacy — becomes communal">Pharmacy</button>` : ''}</span></p>`;
         }).join('') : '<p class="small">Empty. The world provides.</p>'}
         ${stashSectionHtml()}
         ${tools.length ? `<h3 style="margin-top:12px">🔧 Tools</h3>${tools.map(t => `<p class="small"><b>${t.name}</b> (${t.uses} uses left) <button class="btn ghost sm" data-settrap="${t.recipeId}">Set</button></p>`).join('')}` : ''}
@@ -15376,8 +15949,9 @@
         }).join('')}` : ''}`;
 
 
-    slot.innerHTML = `<div class="inlinecard">
+    slot.innerHTML = `<div class="inlinecard pack-view">
       ${inlineHead('\uD83C\uDF92 Pack (' + st.invCount + ' items)')}
+      <p class="small" data-carry-info>Load ${Game.packWeight().toFixed(1)}/${Game.carryLimit()} kg pickup limit · ${Game.burden().name} (nominal ${Game.carryCapacity()} kg).<br>Walk ${Game.walkStepKcal()} kcal/square · forage effort ${Game.workCost(S.calories.ACTION_COSTS.forage)} kcal.</p>
       ${view.result ? `<p class="inline-result pack-feedback">${esc(view.result)}</p>` : ''}
       <div class="inline-body">${view.donation?`<section class="donation-picker">
         <b>Donate ${esc(Game.itemDisplayName(view.donation.item))}</b>
@@ -15387,10 +15961,16 @@
         <div class="donation-actions"><button class="btn ghost" data-donation-fit>Fit pantry</button><button class="btn" data-donation-confirm>Donate</button><button class="btn ghost" data-donation-cancel>Cancel</button></div>
         <p class="small" style="opacity:.7">No time cost.</p></section>`:bodyHtml}</div>
     </div>`;
+    const packCard = slot.querySelector('.pack-view');
+    packCard._packState = Game.state; packCard._packBearer = Game.villagerId; packCard._packDonation = !!view.donation;
+    slot.querySelectorAll('[data-pack-row]').forEach(row => {
+      row._packItem = Game.state.scholar.inventory[Number(row.dataset.packRow)];
+    });
+    restorePackReader(slot, view);
     wireInlineX(slot);
     // obvious feedback: every action confirms, then the panel re-renders fresh.
     const rewire = (fn, ok) => (e) => {
-      const view = inlineView, result = packActionFeedback(() => fn(e), ok);
+      const view = inlineView, result = packActionFeedback(() => combatInput(() => fn(e)), ok);
       if (view && inlineView === view) {
         view.result = result; view.resultLog = (Game.log || []).slice(-1)[0];
         view.mapKey = inlineMapKey();
@@ -15532,7 +16112,7 @@
     slot.querySelectorAll('[data-stasharmor]').forEach(b => b.onclick = rewire(() => Game.donateArmor(+b.dataset.stasharmor), null));
     slot.querySelectorAll('[data-stashmed]').forEach(b => b.onclick = rewire(() => Game.donateMedicine(+b.dataset.stashmed), null));
     slot.querySelectorAll('[data-activate]').forEach(b => b.onclick = (e) => {
-      Game.activateAbility(b.dataset.activate); inlineView.result = 'Activated.'; refresh();
+      combatInput(() => Game.activateAbility(b.dataset.activate)); inlineView.result = 'Activated.'; refresh();
     });
   }
 
@@ -15943,6 +16523,7 @@
             return `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">🛡️ Equipped <span style="opacity:.6;font-weight:normal">(${eqCount} worn)</span></summary><div style="margin-top:6px">${rows}${ksThreadHtml()}</div></details>`;
           } catch (e) { return ''; }
         })()}
+        ${Game.liveEvolutionChoices().length ? '<button class="btn" data-open-evolution>Choose evolution</button>' : ''}
         ${renderAbilitiesSection()}
         ${renderTracksSection()}
         ${renderSkillsSection()}
@@ -15959,7 +16540,8 @@
       <div class="inline-body">${bodyHtml}</div>
     </div>`;
     wireInlineX(slot);
-    const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
+    const rewire = (fn, ok) => (e) => { combatInput(() => fn(e)); inlineView.result = ok; refresh(); };
+    slot.querySelector('[data-open-evolution]')?.addEventListener('click', evolutionSheet);
     slot.querySelectorAll('[data-unequip-slot]').forEach(b => b.onclick = rewire(() => Game.unequip(b.dataset.unequipSlot), 'Taken off.'));
     slot.querySelectorAll('[data-channel-slot]').forEach(b => b.onclick = rewire(() => Game.channelSentiment(b.dataset.channelSlot), 'Channeled.'));
     // DISEASE (Steve 2026-10-09): affliction buttons — examine, treat, folk
@@ -15980,16 +16562,30 @@
   // LOOT-AS-ACTION (Steve 2026-10-06): the enemy's pack. Per item: take it,
   // leave it, or use it on the spot. Knowledge-gated: unknown items show
   // weight (always known) but not identity/effects.
+  function lootActionFeedback(view, context, fn) {
+    if (Game.over || Game.inCombat() || inlineView !== view || Game.state !== context.state || Game.state.scholar !== context.scholar ||
+        Game.villagerId !== context.bearer || !(Game.state.corpses || []).includes(context.corpse)) return null;
+    if (!Game._corpseCheckRange(context.corpse)) return null;
+    const line = packActionFeedback(fn, undefined, () => context.corpse);
+    if (inlineView === view && Game.state === context.state && Game.state.scholar === context.scholar && Game.villagerId === context.bearer) {
+      view.result = line;
+      view.resultLog = (Game.log || []).slice(-1)[0];
+    }
+    return line;
+  }
   function renderLootInline(slot, view) {
     const cid = view.cid;
     const c = (Game.state.corpses || []).find(x => x.id === cid);
-    if (!c || c.buried) { slot.innerHTML = ''; inlineView = null; return; }
+    if (!c || c.buried || !Game._corpseCheckRange(c, true)) { slot.innerHTML = ''; inlineView = null; return; }
     const st = Game.status();
+    const context = {state:Game.state,scholar:Game.state.scholar,bearer:Game.villagerId,corpse:c};
+    const otherBodies = nearbyLootBodies().filter(body => body.id !== cid);
+    if (view.result && view.resultLog !== (Game.log || []).slice(-1)[0]) view.result = null;
     const items = (c.items || []).map((it, idx) => ({ it, idx }))
       .filter(({ it }) => (it.units == null ? 1 : it.units) > 0);
-    const who = c.kind === 'monster'
-      ? (c.descriptor || c.monsterName || 'the beast')
-      : (c.name || 'the body');
+    const who = Game.corpseIsPerson(c)
+      ? (c.villagerId && Game.nameKnown(c.villagerId) ? Game.displayName(c.villagerId) : 'Unknown person')
+      : c.kind === 'monster' ? (c.descriptor || c.monsterName || 'the beast') : (c.name || 'the body');
     const stage = Game.corpseStageInfo ? Game.corpseStageInfo(c).id : 'fresh';
     const bodyHtml = items.length ? items.map(({ it, idx }) => {
       const nm = Game.itemDisplayName ? Game.itemDisplayName(it) : (it.name || 'something');
@@ -16029,23 +16625,31 @@
       ${c.ash
         ? `<p class="small" style="opacity:.7">What they carried belongs to the village now, not to whoever's standing here. Pocket it, or bring it home. The village will remember.</p>`
         : `<p class="small" style="opacity:.7">Take what you want. What's left stays — and meat rots where it lies.</p>`}
+      ${view.result ? `<p class="inline-result pack-feedback">${esc(view.result)}</p>` : ''}
+      <div class="inline-body">
+      ${otherBodies.length ? `<details class="loot-other-bodies"><summary>Other bodies nearby (${otherBodies.length})</summary>${otherBodies.map(body => `<button class="btn ghost sm" data-loot-body="${esc(body.id)}">${esc(nearbyBodyLabel(body))}</button>`).join('')}</details>` : ''}
       ${items.length ? `<p><button class="btn ghost sm" data-lootall="1">Take all</button></p>` : ''}
       ${bodyHtml}
+      </div>
     </div>`;
     wireInlineX(slot);
-    const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
+    const rewire = fn => () => { lootActionFeedback(view, context, () => combatInput(fn)); refresh(); };
+    slot.querySelectorAll('[data-loot-body]').forEach(b => b.onclick = rewire(() => doContextAction(null,null,null,{corpseId:b.dataset.lootBody})));
     // TAKE-ALL (batch loot 2026-10-13): one decision clears the corpse.
     // Skips human meat (trembles — no cure) with an honest narration; the
     // per-item Take button still allows a deliberate human-meat take.
-    slot.querySelectorAll('[data-lootall]').forEach(b => b.onclick = rewire(() => Game.corpseLootAll(cid, (it) => it.plantId === 'meat_human'), 'Taken.'));
-    slot.querySelectorAll('[data-loottake]').forEach(b => b.onclick = rewire(() => Game.corpseTakeItem(cid, +b.dataset.loottake), 'Taken.'));
-    slot.querySelectorAll('[data-lootuse]').forEach(b => b.onclick = rewire(() => Game.corpseUseItem(cid, +b.dataset.lootuse), 'Used.'));
-    slot.querySelectorAll('[data-looteat]').forEach(b => b.onclick = rewire(() => Game.corpseEatItem(cid, +b.dataset.looteat), 'Eaten.'));
+    slot.querySelectorAll('[data-lootall]').forEach(b => b.onclick = rewire(() => Game.corpseLootAll(cid, (it) => it.plantId === 'meat_human')));
+    slot.querySelectorAll('[data-loottake]').forEach(b => b.onclick = rewire(() => Game.corpseTakeItem(cid, +b.dataset.loottake)));
+    slot.querySelectorAll('[data-lootuse]').forEach(b => b.onclick = rewire(() => Game.corpseUseItem(cid, +b.dataset.lootuse)));
+    slot.querySelectorAll('[data-looteat]').forEach(b => b.onclick = rewire(() => Game.corpseEatItem(cid, +b.dataset.looteat)));
     slot.querySelectorAll('[data-lootleave]').forEach(b => b.onclick = rewire(() => {
       const cc = (Game.state.corpses || []).find(x => x.id === cid);
       const it = cc && (cc.items || [])[+b.dataset.lootleave];
-      if (it) it._left = true;
-    }, 'Left.'));
+      if (it && (it.units ?? 1) > 0) {
+        it._left = true;
+        Game.say(`You leave ${Game.itemDisplayName ? Game.itemDisplayName(it) : (it.name || 'it')} on the body.`);
+      }
+    }));
   }
 
 
@@ -16071,6 +16675,7 @@
   // FULL path step-by-step instead of jumping.
   const MoveAnim = S.MoveAnim;
   function expHeadHTML(st, location) {
+    if (st.inCombat && Game.state.arenaContest) location = ({pit:'The Pit',gauntlet:'The Gauntlet',siege:'The Siege'})[Game.state.arenaContest.contestId] || 'Arena';
     // SEASON LINE (Steve 2026-10-14): where/when you are, only once someone
     // told you (whereAreWe.js). Nothing known -> nothing shown.
     const wl = Game.whereLine ? Game.whereLine() : '';
@@ -16107,12 +16712,12 @@
       // A crossing is deliberate — kill hold-to-move so a held finger doesn't
       // chain-cross into the next node unintentionally.
       if (tx < 0 || tx > Game.tbGridMax() || ty < 0 || ty > Game.tbGridMax()) {
-        const exited = Game.tbBarrierExit(step.dx, step.dy);
+        const exited = combatInput(() => Game.tbBarrierExit(step.dx, step.dy));
         if (exited) MoveAnim.clearHold();
         return { moved: !!exited };
       }
       const mlBefore = p.moveLeft;
-      const moved = !!Game.tbPlayerMove(tx, ty);
+      const moved = !!combatInput(() => Game.tbPlayerMove(tx, ty));
       // TURN BOUNDARY (Steve): if this step ended the turn (moveLeft reset for
       // a fresh turn), kill hold-to-move. A held D-pad finger must not spend
       // the NEW turn's movement — each turn starts with a conscious input.
@@ -16128,14 +16733,20 @@
     // node automatically — no tap-yourself, no confirmation. Blocked exits stop
     // you with a reason.
     if (tx < 0 || tx > 8 || ty < 0 || ty > 8) {
+      const checkpoint = Game.captureTravelCheckpoint();
       const r = Game.tryNodeExit(step.dx, step.dy);
-      if (r && r.blocked) { const _bt = r.blocked.blockType; const _bname = { fallen_tree: 'A fallen tree', rubble: 'Rubble', washed_out: 'A washed-out gap' }[_bt]; toast(_bt === 'creek' ? '🌊 Creek blocks the way — bridge it or swim it.' : _bname ? `🚧 ${_bname} blocks the ${r.dir} path — clear it to pass.` : `🚧 Blocked ${r.dir} — clear the way first.`); }
+      if (r && r.moved) persistTravel(checkpoint);
+      if (r && r.blocked) { MoveAnim.clearHold(); showBlockage(r.blocked); }
       // NODE EXIT (Steve 2026-10-06): a successful crossing kills hold-to-move.
       // A held finger must not chain-travel into the next node unintentionally.
       if (r && r.moved) MoveAnim.clearHold();
       return { moved: !!(r && r.moved) };
     }
+    const context = { ...Game.captureTravelCheckpoint(), scholar:s, inside:s.insideHaven, mx:s.mx, my:s.my, kcal:s.kcal, tick:s.dayTicks };
+    step._walkProgress = context;
+    const inside = s.insideHaven;
     const moved = step.kind === 'path' ? Game.pathStep(tx, ty) : Game.microMove(tx, ty);
+    if (!walkSceneCurrent(context, inside)) MoveAnim.stopAll();
     // A blocked path step kills the rest of the walk — the world changed.
     if (!moved && step.walkId) return { moved: false, purge: step.walkId };
     return { moved: !!moved };
@@ -16144,6 +16755,9 @@
   function wireDetailGrid(grid) {
     if (!grid) return;
     grid.querySelectorAll('.cell').forEach(el => {
+      if (el.classList.contains('haven-station')) el.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      };
       el.onclick = () => {
         const cx = +el.dataset.cx, cy = +el.dataset.cy;
         // TARGETING MODE: tap a highlighted target to pick it. Anything else is ignored.
@@ -16155,7 +16769,7 @@
           if (!Game.tbIsPlayerTurn()) { Game.say('Not your turn — hold.'); refresh(); return; }
           if (cx === px && cy === py) return; // tapping yourself: nothing
           try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {}
-          Game.tbPlayerMove(cx, cy);
+          combatInput(() => Game.tbPlayerMove(cx, cy));
           expeditionScreen();
           return;
         }
@@ -16198,7 +16812,11 @@
             }
             let walked = false;
             // The sheet opens when the walk LANDS, not when the tap happens.
-            const _openAfter = (ok) => { if (ok) personSheet(villagerThere); else cellPopup(cx, cy); };
+            const approach = Game.captureTravelCheckpoint(), inside = Game.state.scholar.insideHaven;
+            const _openAfter = (ok, reason) => {
+              if (reason?.cancelled || !walkSceneCurrent(approach, inside)) return;
+              if (ok) personSheet(villagerThere); else cellPopup(cx, cy);
+            };
             if (best) walked = walkPathAnimated(best[0], best[1], _openAfter);
             else walked = walkPathAnimated(cx, cy, _openAfter); // surrounded — walk through as before
             if (!walked) cellPopup(cx, cy); // couldn't start — popup explains why
@@ -16209,7 +16827,7 @@
           if (lastPersonTap && lastPersonTap.vid === villagerThere &&
               lastPersonTap.px === px && lastPersonTap.py === py) {
             lastPersonTap = null;
-            MoveAnim.purgeKind('path');
+            cancelPathWalk();
             MoveAnim.enqueue({ dx: cx - px, dy: cy - py, kind: 'step', ms: MoveAnim.stepMs })
               .then((ok) => { if (ok) { personSheet(villagerThere); return; } cellPopup(cx, cy); });
             return;
@@ -16219,19 +16837,37 @@
           personSheet(villagerThere);
           return;
         }
+        if (cell === 'lodge' && Game.playerTile().type === 'haven' && Game.state.scholar.insideHaven === false) {
+          // A building tap approaches its existing south doorstep, then asks
+          // for the native entry action. It never walks you onto the roof or
+          // enters automatically, and cannot bypass paid/path-blocked movement.
+          const checkpoint = Game.captureTravelCheckpoint();
+          const front = detail[4]?.[4] === 'lodge' ? [4,4] : [cx,cy];
+          const showDoor = (ok, reason) => { if (ok && !reason?.cancelled && walkSceneCurrent(checkpoint, false)) cellPopup(...front); };
+          if (px === 4 && py === 5) showDoor(true);
+          else walkPathAnimated(4, 5, showDoor);
+          return;
+        }
+        const havenStation = Game.playerTile().type === 'haven' &&
+          Game.state.scholar.insideHaven === true && ['bunk', 'door'].includes(cell);
+        const approach = havenStation ? Game.captureTravelCheckpoint() : null;
+        const inside = Game.state.scholar.insideHaven;
+        const openStation = (ok, reason) => {
+          if (havenStation && ok && !reason?.cancelled && walkSceneCurrent(approach, inside)) cellPopup(cx, cy);
+        };
         // walkable? GO. adjacent = one animated step, distant = the FULL path
         // animated step-by-step. Tap-to-move is the accessibility alternative
         // now — the d-pad is primary — but it never teleports.
         if (!Game.cellProps(cell).blocks) {
           const dist = Math.max(Math.abs(cx - px), Math.abs(cy - py));
           if (dist <= 1) {
-            MoveAnim.purgeKind('path');
+            cancelPathWalk();
             MoveAnim.enqueue({ dx: cx - px, dy: cy - py, kind: 'step', ms: MoveAnim.stepMs })
-              .then((ok) => { if (ok && villagerThere) personSheet(villagerThere); });
+              .then((ok) => { if (ok && villagerThere) personSheet(villagerThere); else openStation(ok); });
           } else {
             // couldn't start (no path / not enough kcal): the say() from
             // beginPathWalk renders via walkPathAnimated's fallback.
-            walkPathAnimated(cx, cy, (ok) => { if (ok && villagerThere) personSheet(villagerThere); });
+            walkPathAnimated(cx, cy, (ok, reason) => { if (ok && villagerThere) personSheet(villagerThere); else openStation(ok, reason); });
           }
           return;
         }
@@ -16267,7 +16903,28 @@
     el.innerHTML = html;
     return true;
   }
+  function persistTravel(before) {
+    const result = Game.commitTravelCheckpoint(before);
+    if (result === false) Game.say('The crossing finished, but could not be saved. Storage may be full.');
+    else if (result === 'stale') Game.say('Another tab has a newer save. This crossing was not saved over it.');
+    else if (result === 'tombstoned') Game.say('This expedition’s save ended elsewhere. This crossing was not saved.');
+    else if (result === 'settlement_failed') Game.say('Time could not finish safely. Reload and Continue from the last saved checkpoint.');
+  }
+  function saveWalkProgress(before) {
+    const s=Game.state?.scholar;
+    if(!before||!s||!Game.map||Game.over||Game.state!==before.state||s!==before.scholar||Game.villagerId!==before.bearer||Game.state.runKey!==before.key||Game.map.px!==before.x||Game.map.py!==before.y||s.insideHaven!==before.inside)return;
+    if(s.mx===before.mx&&s.my===before.my&&s.kcal===before.kcal&&s.dayTicks===before.tick)return;
+    const saved=Game.save();
+    if(saved===false)Game.say('The walk finished, but could not be saved. Storage may be full.');
+    else if(saved==='stale')Game.say('Another tab has a newer save. This walk was not saved over it.');
+    else if(saved==='tombstoned')Game.say('This expedition’s save ended elsewhere. This walk was not saved.');
+    else if(saved==='settlement_failed')Game.say('Time could not finish safely. Reload and Continue from the last saved checkpoint.');
+  }
   function syncAfterMove(step, res) {
+    if (res?.moved && step.kind !== 'path') {
+      saveWalkProgress(step._walkProgress);
+      if (step._walkProgress && Game.villagerId !== step._walkProgress.bearer) MoveAnim.stopAll();
+    }
     if (document.querySelector('.field-layout') && matchMedia('(max-width: 899px)').matches) { expeditionScreen(); return; }
     // The player moved: any open tile panel is now about somewhere else.
     const info = document.getElementById('inlineslot');
@@ -16327,7 +16984,7 @@
       if (inlineView && inlineView.kind !== 'person') { inlineView = null; document.getElementById('inlineslot').innerHTML = ''; }
     }
     if (Game.inCombat() && !Game.tbIsPlayerTurn()) { Game.say('Not your turn — hold.'); refresh(); return; }
-    MoveAnim.purgeKind('path');
+    cancelPathWalk();
     MoveAnim.setHold({ dx, dy });
     MoveAnim.enqueue({ dx, dy, kind: 'step', ms: MoveAnim.stepMs });
   }
@@ -16340,13 +16997,28 @@
   // retires the old token so a stale in-flight step can't keep the old walk
   // alive. The superseded walk's onDone(false) fires honestly at supersede.
   let walkToken = { current: null };
+  function walkSceneCurrent(context, inside) {
+    return !Game.over && !Game.inCombat() && Game.state === context.state &&
+      Game.villagerId === context.bearer && Game.state.runKey === context.key &&
+      Game.map.px === context.x && Game.map.py === context.y && Game.state.scholar.insideHaven === inside;
+  }
+  function cancelPathWalk() {
+    const previous = walkToken.current;
+    walkToken.current = null;
+    MoveAnim.purgeKind('path');
+    if (previous) saveWalkProgress(previous.progress);
+    if (previous && typeof previous.onDone === 'function') {
+      try { previous.onDone(false, { cancelled: true }); }
+      catch (error) { console.warn('[walk] cancellation callback', error); }
+    }
+  }
   function walkPathAnimated(tx, ty, onDone) {
     if (Game.inCombat()) return false;
     const path = Game.beginPathWalk(tx, ty);
     if (!path) { expeditionScreen(); return false; } // the say() needs a render
     if (!path.length) { if (onDone) onDone(true); return true; }
     const walkId = 'w' + (++walkSeq);
-    MoveAnim.purgeKind('path');
+    cancelPathWalk();
     // LONG-WALK HONESTY (break-it travel r10 2026-10-10): the old code
     // bulk-enqueued the whole path, but MoveAnim caps its queue at maxQueue
     // (10) — paths longer than 11 steps silently truncated: the label quoted
@@ -16354,16 +17026,22 @@
     // steps were still animating. Chain one step at a time instead: the queue
     // never fills, the FULL path lands, and any refusal/purge stops the chain
     // cleanly (no skipped squares, no phantom drain).
-    const token = { id: walkId, onDone: onDone || null };
-    const prev = walkToken.current;
+    const scholar=Game.state.scholar;
+    const context = { ...Game.captureTravelCheckpoint(), scholar, inside:scholar.insideHaven, mx:scholar.mx, my:scholar.my, kcal:scholar.kcal, tick:scholar.dayTicks }, inside = scholar.insideHaven;
+    const currentScene = () => walkSceneCurrent(context, inside);
+    const token = { id: walkId, progress:context, onDone: onDone || null };
     walkToken.current = token;
-    if (prev && prev !== token && typeof prev.onDone === 'function') {
-      try { prev.onDone(false); } catch (e) {}
-    }
+    const finish = ok => {
+      if (walkToken.current !== token) return;
+      walkToken.current = null;
+      saveWalkProgress(context);
+      if (token.onDone) token.onDone(ok);
+    };
     let idx = 0, okAll = true;
     const stepNext = () => {
       if (walkToken.current !== token) return; // superseded — stay dead
-      if (idx >= path.length) { if (onDone) { try { onDone(okAll); } catch (e) {} } return; }
+      if (!currentScene()) { finish(false); return; }
+      if (idx >= path.length) { finish(okAll); return; }
       const [x, y] = path[idx];
       // dx/dy resolve against the CURRENT position at enqueue time (same as
       // the old bulk form resolved per step) — a step always aims at the
@@ -16373,7 +17051,7 @@
         .then((ok) => {
           if (walkToken.current !== token) return; // purged mid-flight
           okAll = okAll && ok;
-          if (!ok) { if (onDone) { try { onDone(false); } catch (e) {} } return; } // refused: combat, death, blocked — stop here
+          if (!ok || !currentScene()) { finish(false); return; }
           idx++;
           stepNext();
         });
@@ -16388,7 +17066,9 @@
       // no more dragging, no more saved positions, no more edging off-screen.
       // (Drag-to-move retired; the pad is fixed by design.)
       pad.querySelectorAll('.dpbtn[data-dx]').forEach((b) => {
+        b.disabled = !!Game.tbfight && !Game.tbIsPlayerTurn();
         b.addEventListener('pointerdown', (e) => {
+          if (b.disabled) return;
           e.preventDefault();
           try { b.setPointerCapture(e.pointerId); } catch (_) {}
           b.classList.add('held');
@@ -16401,7 +17081,10 @@
         b.addEventListener('contextmenu', (e) => e.preventDefault());
       });
       const stop = document.getElementById('dp-stop');
-      if (stop) stop.addEventListener('click', () => { MoveAnim.stopAll(); toast('Stopped.'); });
+      if (stop) stop.addEventListener('click', () => {
+        cancelPathWalk(); MoveAnim.stopAll();
+        Game.say('Stopped walking.'); expeditionScreen();
+      });
       const min = document.getElementById('dp-min');
       if (min) min.addEventListener('click', () => {
         pad.classList.add('hidden');
@@ -16443,6 +17126,15 @@
   window.addEventListener('tb-turn', (e) => {
     try {
       const d = e.detail || {};
+      combatPresentationReset();
+      if (d.phase === 'monster' || d.phase === 'villager') {
+        if (combatPlayerCapture) { combatCaptureResult(combatPlayerCapture); combatPlayerCapture = null; }
+        combatPresentationActor = { key: d.key, name: d.name };
+        combatActorCapture = combatCapture(d.key, d.name);
+      } else if (d.phase === 'resolved' || d.phase === 'ended') {
+        combatCaptureResult(combatActorCapture); combatActorCapture = null;
+        combatPresentationActor = null;
+      } else if (d.phase === 'player') combatPresentationActor = null;
       const oldGrid = document.querySelector('.ord-gridwrap .detail');
       const before = d.phase === 'resolved' && oldGrid ? MoveAnim.capture(oldGrid) : null;
       // Refresh FIRST: highlighting the old node before refresh discarded the
@@ -16563,6 +17255,7 @@
   }
 
   function expeditionScreen() {
+    rememberPackReader();
     const st = Game.status();
     if (st.over) return ending();
     // TENT ROOM: inside your tent, the room screen replaces the grid.
@@ -16571,11 +17264,11 @@
     // acceptable full-screen interruption" rule): talking no longer takes over
     // the screen. A Pokémon-style box sits under the grid — speaker tab, one
     // line at a time, ▼ to continue — while the map stays visible and tappable.
-    // Combat still cancels it; an ended conversation drops the view.
-    if (st.inCombat) chatView = null;
+    // Combat still cancels it; an ended sitting can retain unread final replies.
+    if (st.inCombat && chatView) { Game.voiceStop?.(); chatView = null; }
     if (chatView) {
       const _cc = Game.convoUI ? Game.convoUI(chatView.vid) : null;
-      if (!_cc || !_cc.active) chatView = null;
+      if (!_cc || (!_cc.active && !chatView.ended)) { Game.voiceStop?.(); chatView = null; }
     }
     // NPCs must be visible on first load, not just after the first step.
     try { Game.ensureVillagerPositions(); } catch (e) {}
@@ -16664,7 +17357,21 @@
       const whBtn = compass.querySelector('[data-walkhome]');
       if (whBtn) whBtn.onclick = (ev) => {
         ev.stopPropagation();
-        try { if (Game.walkHome) Game.walkHome(); } catch (e) { console.warn('[walkhome]', e); }
+        try {
+          const walked = Game.walkHome?.();
+          if (walked?.travelSave != null && walked.travelSave !== true) {
+            const warnings = {
+              settlement_failed: 'The walk could not finish safely. Reload and Continue from the last saved checkpoint.',
+              stale: 'Another tab has newer progress. Close it and reload here.',
+              tombstoned: 'This expedition ended elsewhere. Reload before continuing.',
+              deferred: 'Saving is still pending. Keep this tab open.'
+            };
+            Game.say(warnings[walked.travelSave] || 'The walk could not be saved. Keep this tab open and retry saving.');
+          }
+        } catch (e) {
+          console.warn('[walkhome]', e);
+          Game.say('The walk could not finish safely. Reload and Continue from the last saved checkpoint.');
+        }
         try { rerender(); } catch (e2) { console.warn('[walkhome rerender]', e2); }
       };
       compass.onclick = () => {
@@ -16678,7 +17385,7 @@
         // HIVE SIGHT (break-it travel 2026-10-10): name the sense in the header.
         let _hiveHead = false;
         try { _hiveHead = !!(Game.hiveSight && Game.hiveSight()); } catch (e) {}
-        overlay.innerHTML = `<div class="mapoverlay-back"></div><div class="mapoverlay-box"><div class="mapoverlay-head"><span>🗺️ World (${_seenCount} seen${_hiveHead ? ' · hive sight' : ''})</span><button class="btn sm ghost" id="mapoverlay-x">✕</button></div><div class="map minimap">${renderMap(st, tset)}</div></div>`;
+        overlay.innerHTML = `<div class="mapoverlay-back"></div><div class="mapoverlay-box"><div class="mapoverlay-head"><span>🗺️ World (${_seenCount} tiles seen${_hiveHead ? ' · hive sight' : ''})</span><button class="btn sm ghost" id="mapoverlay-x" aria-label="Close map" style="width:44px;min-width:44px;min-height:44px;flex:0 0 44px">✕</button></div><div class="map minimap">${renderMap(st, tset)}</div></div>`;
         overlay.classList.remove('hidden');
         overlay.querySelector('#mapoverlay-x').onclick = () => overlay.classList.add('hidden');
         overlay.querySelector('.mapoverlay-back').onclick = () => overlay.classList.add('hidden');
@@ -16700,19 +17407,20 @@
             // hive-sensed tiles, so taps must read them too — otherwise the
             // map shows terrain the tap calls "Unexplored".
             const hiveTap = !seen && (Game.hiveSight && Game.hiveSight());
-            if (!seen && !hiveTap) { mapInfoEl.innerHTML = '<span class="dim">Unexplored — you haven\'t been here.</span>'; return; }
+            const otherV = knownMapVillage(x, y, hiveTap);
+            if (!seen && !hiveTap && !otherV) { mapInfoEl.innerHTML = '<span class="dim">Unexplored — you haven\'t been here.</span>'; return; }
             if (x === (Game.map || {}).px && y === (Game.map || {}).py) {
               mapInfoEl.innerHTML = '<b>You are here.</b>';
               return;
             }
-            const otherV = (Game.state.otherVillages || []).find(v => v.x === x && v.y === y && v.generated);
             if (otherV) {
               // HONESTY (break-it travel 2026-10-10): the old line said "tap
               // again to visit" but nothing ever read el.dataset.village — a
               // dead promise, and it contradicts Steve's law (no travel from
               // the map; travel happens by walking). The villageCard hint
               // already says it right: walk to the edge and head out.
-              mapInfoEl.innerHTML = `<b>🏘️ ${esc(otherV.name || 'Another village')}</b> — walk to the edge of the map and head out to get there.`;
+              const nearby = Math.abs(otherV.x - Game.map.px) + Math.abs(otherV.y - Game.map.py) <= 1;
+              mapInfoEl.innerHTML = `<b>🏘️ ${esc(otherV.name || 'Another village')}</b>${!seen && !hiveTap ? ' — camp sighted; ground unexplored.' : ''} ${nearby ? 'Nearby: open Place to visit.' : 'Walk toward their camp to visit.'}`;
               el.dataset.village = otherV.id;
               return;
             }
@@ -16753,37 +17461,10 @@
         if (otherV && Game.villageCard) {
           const card = Game.villageCard(otherV.id);
           if (card) {
-            const btns = (card.actions || []).map((a, i) =>
-              `<button class="btn sm" data-vact="${i}">${esc(a.label)}</button>`).join('');
-            const hints = (card.actions || []).map(a => `<p class="small" style="opacity:.7">${esc(a.hint || '')}</p>`).join('');
-            info.innerHTML = `<div class="card"><p>🏘️ <b>${esc(card.name)}</b><br><span class="small">${esc(card.sub)}</span></p>${hints}<div class="actions">${btns}</div>${card.hint ? `<p class="small" style="opacity:.7">${esc(card.hint)}</p>` : ''}</div>`;
-            info.querySelectorAll('[data-vact]').forEach(b => {
-              b.onclick = () => {
-                const a = card.actions[+b.dataset.vact];
-                try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {}
-                // NAMING RITE (rogue P0-8 2026-10-22): the baby's name is
-                // typed, not picked — swap the card for a name input.
-                if (a.id === 'namebaby') {
-                  info.innerHTML = `<div class="card"><p>👶 <b>Name the baby</b><br><span class="small">${esc(a.hint || '')}</span></p>` +
-                    `<input id="babyname-input" type="text" maxlength="24" placeholder="The name you give" autocomplete="off" autocapitalize="words" style="width:100%;padding:10px;margin:8px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">` +
-                    `<div class="actions"><button class="btn sm" id="babyname-go">Give the name</button></div></div>`;
-                  const binp = document.getElementById('babyname-input');
-                  const bgo = () => {
-                    const r = Game.nameBaby(otherV.id, a.babyId, binp.value);
-                    info.innerHTML = `<div class="card"><p>${esc(r && r.ok ? `You named the baby "${r.name}."` : 'No name given. The offer stands — for now.')}</p></div>`;
-                    refresh();
-                  };
-                  document.getElementById('babyname-go').onclick = bgo;
-                  binp.addEventListener('keydown', e => { if (e.key === 'Enter') bgo(); });
-                  binp.focus();
-                  return;
-                }
-                Game.villageCardAction(otherV.id, a.id, { giftKcal: a.giftKcal || 0 });
-                refresh();
-              };
-            });
-            return;
+            if (nearbyVillageVisits().some(v => v.id === otherV.id)) openVillage(otherV.id);
+            else info.innerHTML = '<div class="card"><p>🏘️ <b>' + esc(card.name) + '</b><br><span class="small">' + esc(card.hint || 'Walk to their fire to visit.') + '</span></p></div>';
           }
+          return;
         }
         const seenHow = (Game.mapSeen ? Game.mapSeen(x, y) : null) || (_hiveTap ? 'hive' : null);
         if (!seenHow) {
@@ -17035,6 +17716,7 @@
     if (s.knackChoices && s.knackChoices.length && !sheetQueued('knack-choice')) {
       knackSheet();
     }
+    if (!s.evolutionDeferred && Game.liveEvolutionChoices().length && !sheetQueued('offer-evolution')) evolutionSheet();
     if (s.abilityChoices && s.abilityChoices.length && !sheetQueued('offer-ability')) {
       // SLOT HONESTY (spawn-knack 2026-10-11): the knack fills slot 1, so the
       // day-7 gift needs slot 2 (integration 20). If no slot is free, the
@@ -17110,7 +17792,7 @@
     const pantry = Game.state.village.pantry || [];
     const vWater = Game.state.village.water || { clean: 0, dirty: 0 };
     const carry = st.carryKg;
-    const maxCarry = Game.carryCapacity();
+    const maxCarry = Game.carryLimit();
     const waterRow = vWater.clean > 0 ? `<div class="card" style="margin:6px 0;padding:8px 10px;border-left:3px solid var(--sys-cyan)">
         <p class="small"><b>\uD83D\uDCA7 Water (clean)</b> \u00D7${vWater.clean} L<br>
         <span style="opacity:.7">0 kcal/L \u00B7 1 kg/L \u00B7 from the Haven well</span></p>
@@ -17128,7 +17810,7 @@
       if (fsn) fairShareHtml = `<p class="small" style="opacity:.65">Fair share is ~${fsn.perPerson} kcal/day each. The pantry holds ~${Game.pluralize(fsn.daysLeft, 'day')} at that pace. Take what you need — people notice what you take.</p>`;
     } catch (e) {}
     const bodyHtml = `
-      <p class="small">Choose what to pack. Carrying ${carry.toFixed(1)}/${maxCarry} kg — ${(() => { try { return Game.burden().name; } catch (e) { return 'light'; } })()}.</p>
+      <p class="small">Load ${carry.toFixed(1)}/${maxCarry} kg pickup limit · ${Game.burden().name} (nominal ${Game.carryCapacity()} kg).<br>Walk ${Game.walkStepKcal()} kcal/square · forage effort ${Game.workCost(S.calories.ACTION_COSTS.forage)} kcal.</p>
       ${fairShareHtml}
       ${(() => { try {
         // FOOD REALITY: storage has real caps. Expand them with materials + labor.
@@ -17217,7 +17899,7 @@
         if (qEl) qEl.textContent = q;
         if (q > 0) {
           const p = pantry[idx];
-          kg += q * (p.kg || 0);
+          kg += q * (p.kg || 0.1);
           kcal += q * p.kcalEach;
           parts.push(`${q} ${(Game.itemDisplayName ? Game.itemDisplayName(p) : (p.name || 'something'))}`);
         }
@@ -17226,10 +17908,13 @@
       slot.querySelector('#ps-kg').textContent = kg.toFixed(1);
       slot.querySelector('#ps-kcal').textContent = Game.fmtKcal(kcal);
       slot.querySelector('#ps-water').textContent = wl + ' L';
-      const over = carry + kg > maxCarry;
+      const over = !Game.canCarry(kg);
       slot.querySelector('#ps-kg').style.color = over ? '#e05c5c' : '';
       const packBtn = slot.querySelector('#pack-btn');
-      if (packBtn) packBtn.disabled = !parts.length || over;
+      if (packBtn) {
+        packBtn.disabled = !parts.length || over;
+        packBtn.textContent = over ? `Over ${maxCarry} kg — ${carry > maxCarry ? 'unload first' : 'choose less'}` : 'Pack it';
+      }
     };
     slot.querySelectorAll('[data-pack]').forEach(sl => { sl.oninput = update; });
     update();
@@ -17437,13 +18122,21 @@
     const v = Game.villageInfo();
     const vs = Game.data.villagers;
     const roster = Game.villageRoster();
-    const mains = roster.filter(r => r.isMain);
-    const bg = roster.filter(r => !r.isMain);
-    const net = st.villageEat - st.villageGive;
+
+    const food = Game.havenFoodSummary();
+    const foodAmount = value => value == null ? 'not recorded' : Game.fmtKcal(Math.round(value));
+    const foodTrend = food.stockKcal == null ? 'reserve estimate unavailable'
+      : food.stockKcal === 0 ? 'empty'
+      : !food.historyKnown ? 'meal history not recorded'
+      : food.averageMealDraw === 0 ? 'no net meal use recorded'
+      : food.daysAtRecentUse === 0 ? 'less than a day at recent use'
+      : `about ${Game.pluralize(food.daysAtRecentUse, 'day')} at recent use`;
     return `
-      <div class="card"><h3>🏠 HAVEN — ${st.rosterCount} souls</h3>
-      <p class="small"><i>${v.atmos}</i></p>
-      <p class="small">Pantry: ${Game.fmtKcal(st.pantryKcal)} (${st.pantryDays >= 999 ? 'holding steady — the village feeds itself' : `about ${Game.pluralize(st.pantryDays, 'day')} at this burn`})${st.hungryDays ? ' · ⚠ HUNGRY day ' + st.hungryDays : ''}</p>
+      <div class="card"><h3>Shared supplies</h3>
+      <p class="small" data-haven-food-stock>Pantry: ${foodAmount(food.stockKcal)} · ${foodTrend}${st.hungryDays ? ' · ⚠ HUNGRY day ' + st.hungryDays : ''}</p>
+      <details class="small" data-haven-food-record><summary style="min-height:44px;padding:10px 0;box-sizing:border-box;display:list-item;list-style-position:inside;cursor:pointer">Meal record${food.historyKnown ? ' · ' + Game.pluralize(food.historyDays, 'recorded day') : ''}</summary>
+        <p>Last recorded eating: ${foodAmount(food.lastEaten)} (includes private food).<br>Pantry deposits: ${foodAmount(food.lastDeposited)}.<br>Recent net use for meals: ${foodAmount(food.averageMealDraw)}${food.averageMealDraw == null ? '' : '/day'}.</p>
+      </details>
       <p class="small">💧 Water: ${st.waterClean}L clean / ${st.waterDirty}L dirty</p>
       ${(() => {
         // One entry: controls live in the Garden panel, never duplicated
@@ -17682,7 +18375,6 @@
           })()}`;
         } catch (e) { return ''; }
       })()}
-      <p class="small" style="opacity:.75">${st.rosterCount} mouths need ${st.villageEat.toLocaleString()}/day · the village brings in ${st.villageGive.toLocaleString()} · shortfall ${net.toLocaleString()}/day</p>
       ${(() => {
         // WHO'S PULLING WEIGHT (Steve 2026-10-09): per-person actual vs expected.
         // Knowledge-gated like everything: you see effort bands, not numbers
@@ -17700,8 +18392,8 @@
           rows.map(r => `${band(r)} ${esc(r.name)}`).join(' · ') + '</p>';
       })()}
       <p class="small">Haven survives when: ${Game.journalName()} 10 (${st.codexCount}) · Pantry ${Game.fmtKcal(8000)}+ (${Game.fmtKcal(st.pantryKcal)})</p>
-      <p class="small" style="opacity:.7">Tap a person in the grid to talk. They\'re living their lives.</p>
-      ${mains.map(p => {
+      <p class="small" style="opacity:.7">Find people on the grid. Hall residents are through the door; away members must return.</p>
+      ${roster.map(p => {
         const h = (Game.state.village.health && Game.state.village.health[p.id] !== undefined) ? Game.state.village.health[p.id] : 100;
         const hb = h >= 70 ? '🟢' : h >= 40 ? '🟡' : '🔴';
         const lang = p.langNote ? ` <span style="opacity:.7">${p.langNote}</span>` : '';
@@ -17710,8 +18402,7 @@
         // Unknown → omitted, not "???".
         const occ = (typeof Game.occupationLabel === 'function') ? Game.occupationLabel(p.id) : p.formerOccupation;
         const occBit = occ ? ` — ${esc(occ)}` : '';
-        return `<p class="small">${hb} <b>${p.name}</b>${occBit} (${h})${lang}${conf}</p>`; }).join('')}
-      <p class="small" style="margin-top:8px;opacity:.75"><b>Also here:</b> ${bg.map(p => `${p.name}`).join(' · ')}</p>
+        return `<p class="small" data-roster-person="${esc(p.id)}">${hb} <b>${p.name}</b>${occBit} (${h})${lang}${conf}<br><span data-roster-presence style="opacity:.75">${esc(p.presence)}</span>${p.appointment ? `<br><span data-roster-appointment style="opacity:.75">${esc(p.appointment)}</span>` : ''}</p>`; }).join('')}
       ${(() => {
         const asg = (Game.state.village.assignments || {});
         const ids = Object.keys(asg);
@@ -17767,10 +18458,11 @@
     const flippable = p ? mons.some(m => Game.turtleIs && Game.turtleIs(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1) : false;
     const yourTurn = Game.tbIsPlayerTurn();
     if (!p) return '';
+    const stillDemand = Game.tbStrikeDemandOptions ? Game.tbStrikeDemandOptions().find(d=>d.pending) : null;
+    const turnStatus = stillDemand ? `Stay still · ${stillDemand.remaining} rounds left` : `Your turn · ${p.moveLeft || 0} move · ${p.acted ? 0 : 1} action`;
     if (!yourTurn) {
-      const actor = Game.tbCurrent();
-      const who = actor && (actor.kind === 'villager' || actor.kind === 'ally') ? 'Ally' : 'Enemy';
-      return `<div class="combat-turn-status" role="status">${who} turn · watch the highlighted figure</div>`;
+      return combatPresentationActor && combatLastResult
+        ? `<div class="combat-turn-status" role="status">Next: ${esc(combatPresentationActor.name)}</div>` : '';
     }
     // COALITION VERBS (2026-10-13): rally + war cry surface only when living
     // allies stand with you (titan musters, party fights). One use each per
@@ -17799,7 +18491,7 @@
     // life-and-death info — the phoenix beats need you to SEE who's hurt.
     // Rendered only when allies are actually in the fight.
     const _allyStrip = (Game.allyStripHTML ? Game.allyStripHTML() : '') || '';
-    return `<div class="combat-enemies" style="font-size:12px;opacity:.85;margin:0 6px 4px">${enemyLine}</div><div class="combat-turn-status" role="status">Your turn · ${p.moveLeft || 0} move · ${p.acted ? 0 : 1} action</div>` +
+    return `<div class="combat-enemies" style="font-size:12px;opacity:.85;margin:0 6px 4px">${enemyLine}</div><div class="combat-turn-status" role="status"${stillDemand ? ' title="Moving restarts the three-round demand"' : ''}>${turnStatus}</div>` +
     (_allyStrip ? `<div class="combat-allies" style="font-size:12px;opacity:.9;margin:0 6px 4px">${_allyStrip}</div>` : '') +
     `<div class="selfbar">
       <button class="self-btn" id="c-strike" title="${esc(wname)} — range ${wrange}" ${(!adj.length || p.acted) ? 'disabled' : ''}>⚔ Strike${adj.length > 1 ? '…' : ''}</button>
@@ -17917,11 +18609,30 @@
       </div>`;
   }
 
+  let combatSaveWarning = null;
+  function presentInputCheckpoint(e) {
+    const result=e.detail && e.detail.result;
+    if(result===true){const previous=combatSaveWarning;combatSaveWarning=null;if(previous)refreshFeedback();return;}
+    if(![false,'stale','tombstoned','settlement_failed'].includes(result))return;
+    const text=result==='settlement_failed'?'The action could not finish safely. Reload and Continue from the last saved checkpoint.':
+      result==='stale'?'Another tab has newer progress. Close it and reload here before continuing.':
+      result==='tombstoned'?'This expedition ended elsewhere. Its save was not restored.':
+      'Could not save the completed action. Storage may be full. Keep this tab open; recent progress is at risk.';
+    if(combatSaveWarning?.key===Game.state?.runKey&&combatSaveWarning.text===text)return;
+    combatSaveWarning={key:Game.state?.runKey,text};
+    Game.say(text);refreshFeedback();
+  }
+  window.addEventListener('combat-checkpoint', presentInputCheckpoint);
+  window.addEventListener('decision-checkpoint', presentInputCheckpoint);
+  function combatInput(action){
+    try{return Game.runCombatInput(action).value;}
+    catch(error){for(let capture=fieldActionCapture;capture;capture=capture.parent)capture.failed=true;console.warn('[combat input] action failed',error);const text='The action could not finish safely. Reload and Continue from the last saved checkpoint.';combatSaveWarning={key:Game.state?.runKey,text};Game.say(text);refreshFeedback();return false;}
+  }
   function wireCombatPanel() {
     const on = (id, fn) => { const e = document.getElementById(id); if (e) e.onclick = fn; };
-    on('c-wait', () => { Game.tbPlayerWait(); rerender(); });
-    on('c-study', () => { Game.tbPlayerStudy(); rerender(); });
-    on('c-scream', () => { Game.useAbility('scream_cheese', 'scream'); rerender(); });
+    on('c-wait', () => { combatInput(() => Game.tbPlayerWait()); rerender(); });
+    on('c-study', () => { combatInput(() => Game.tbPlayerStudy()); rerender(); });
+    on('c-scream', () => { combatInput(() => Game.useAbility('scream_cheese', 'scream')); rerender(); });
     // CONTROL ABILITIES (2026-10-14, Steve: verbs are ABILITIES not basic
     // actions): Shoulder Check / Hogtie / Come Get Some route through the
     // ability framework (hasAbility + kcal + turn owned there).
@@ -17932,8 +18643,8 @@
       const isC = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
       const list = ctrlTargets(tf.fighters).filter(m => isC(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (Game.fighterSize(m) || 1) <= 1);
       if (!list.length) return;
-      if (list.length === 1) { Game.useAbility('shoulder_check', 'shove', list[0].key); rerender(); return; }
-      enterTargeting({ prompt: '🤚 Shove which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility('shoulder_check', 'shove', t.key); rerender(); } });
+      if (list.length === 1) { combatInput(() => Game.useAbility('shoulder_check', 'shove', list[0].key)); rerender(); return; }
+      enterTargeting({ prompt: '🤚 Shove which?', targets: monsterTargets(list), onPick: (t) => { combatInput(() => Game.useAbility('shoulder_check', 'shove', t.key)); rerender(); } });
     });
     on('c-bind', () => {
       const tf = Game.tbfight; if (!tf) return;
@@ -17941,21 +18652,21 @@
       const isC = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
       const list = ctrlTargets(tf.fighters).filter(m => isC(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (Game.fighterSize(m) || 1) <= 1);
       if (!list.length) return;
-      if (list.length === 1) { Game.useAbility('hogtie', 'bind', list[0].key); rerender(); return; }
-      enterTargeting({ prompt: '🪢 Bind which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility('hogtie', 'bind', t.key); rerender(); } });
+      if (list.length === 1) { combatInput(() => Game.useAbility('hogtie', 'bind', list[0].key)); rerender(); return; }
+      enterTargeting({ prompt: '🪢 Bind which?', targets: monsterTargets(list), onPick: (t) => { combatInput(() => Game.useAbility('hogtie', 'bind', t.key)); rerender(); } });
     });
     on('c-goad', () => {
       const tf = Game.tbfight; if (!tf) return;
       const p = Game.tbFighter('p');
       const list = ctrlTargets(tf.fighters).filter(m => (m.blind || 0) > 0 && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 3);
       if (!list.length) return;
-      if (list.length === 1) { Game.useAbility('come_get_some', 'goad', list[0].key); rerender(); return; }
-      enterTargeting({ prompt: '📣 Goad which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility('come_get_some', 'goad', t.key); rerender(); } });
+      if (list.length === 1) { combatInput(() => Game.useAbility('come_get_some', 'goad', list[0].key)); rerender(); return; }
+      enterTargeting({ prompt: '📣 Goad which?', targets: monsterTargets(list), onPick: (t) => { combatInput(() => Game.useAbility('come_get_some', 'goad', t.key)); rerender(); } });
     });
-    on('c-shout', () => { Game.tbPlayerShout(); rerender(); });
-    on('c-rally', () => { Game.tbPlayerRally(); rerender(); });
-    on('c-warcry', () => { Game.tbPlayerWarCry(); rerender(); });
-    on('c-well', () => { Game.tbPlayerGravityWell(); rerender(); });
+    on('c-shout', () => { combatInput(() => Game.tbPlayerShout()); rerender(); });
+    on('c-rally', () => { combatInput(() => Game.tbPlayerRally()); rerender(); });
+    on('c-warcry', () => { combatInput(() => Game.tbPlayerWarCry()); rerender(); });
+    on('c-well', () => { combatInput(() => Game.tbPlayerGravityWell()); rerender(); });
     on('c-flip', () => {
       const tf = Game.tbfight;
       if (!tf || !Game.turtleIs) return;
@@ -17963,37 +18674,37 @@
       const cands = tf.fighters.filter(x => Game.turtleIs(x) && x.alive && !x.fled
         && Game.fighterDistTo(x, p.mx, p.my) <= 1);
       if (!cands.length) return;
-      if (cands.length === 1) { Game.tbPlayerFlip(cands[0].key); rerender(); return; }
+      if (cands.length === 1) { combatInput(() => Game.tbPlayerFlip(cands[0].key)); rerender(); return; }
       enterTargeting({
         prompt: '🐢 Flip which?',
         targets: monsterTargets(cands),
-        onPick: (t) => { Game.tbPlayerFlip(t.key); rerender(); },
+        onPick: (t) => { combatInput(() => Game.tbPlayerFlip(t.key)); rerender(); },
       });
     });
-    on('c-offer', () => { Game.tbPlayerOfferFood(); rerender(); });
+    on('c-offer', () => { combatInput(() => Game.tbPlayerOfferFood()); rerender(); });
     // SIGNATURE MECHANICS (sigW3b, Steve 2026-10-10): wave-3 batch-B player
     // actions (examine reel / dance / throw gravel / read-object-accept-
     // invoke §0). Buttons are rendered by Game.sigW3bCombatButtons() above;
     // this wires them exactly like the combat buttons above it.
     document.querySelectorAll('[data-sigw3b]').forEach(b => {
-      b.onclick = () => { try { Game[b.dataset.sigw3b](); } catch (e) {} rerender(); };
+      b.onclick = () => { combatInput(() => Game[b.dataset.sigw3b]()); rerender(); };
     });
     // SIG W3C (wave 3 batch C, 2026-10-10): signature combat actions —
     // funeral / name-it (callback), close eyes (buffering), skip ad /
     // look away (ad break). Buttons + wiring live in src/js/sigW3c.js.
-    if (Game.sigW3cWireCombat) Game.sigW3cWireCombat(on, rerender);
+    if (Game.sigW3cWireCombat) Game.sigW3cWireCombat(on, rerender, combatInput);
     // SIG W4 (wave 4 "The Mirror Draft", 2026-10-11): signature combat actions —
     // congregation accept/refuse/heresy, strike meet/scab, influencer
     // out-entertain, audit read, suburb rest/leave/alive, eulogy
     // contradict/rewrite, algorithm tank, eater poison. Buttons + wiring
     // live in src/js/sigW4.js.
-    if (Game.sigW4WireCombat) Game.sigW4WireCombat(on, rerender);
+    if (Game.sigW4WireCombat) Game.sigW4WireCombat(on, rerender, combatInput);
     // SIG W5 (wave 5 "The Producers", 2026-10-11): signature combat actions —
     // cancellation off-script/favor, editor retrieve/contradict, rerun
     // margin messages, spoiler cheap-fulfill/binding-question, timeslot
     // own-venue, nielsen play-to-camera, finale sacrifice, network-note
     // bad-note/read-memo. Buttons + wiring live in src/js/sigW5.js.
-    if (Game.sigW5WireCombat) Game.sigW5WireCombat(on, rerender);
+    if (Game.sigW5WireCombat) Game.sigW5WireCombat(on, rerender, combatInput);
     // TALK: words are actions too. Pick who, then how.
     const showTalkRow = (targetKey) => {
       const row = document.getElementById('c-talkrow');
@@ -18005,7 +18716,7 @@
       row.querySelectorAll('[data-tactic]').forEach(b => {
         b.onclick = () => {
           row.style.display = 'none';
-          if (b.dataset.tactic) { Game.tbPlayerTalk(targetKey, b.dataset.tactic); }
+          if (b.dataset.tactic) { combatInput(() => Game.tbPlayerTalk(targetKey, b.dataset.tactic)); }
           rerender();
         };
       });
@@ -18031,11 +18742,11 @@
       const adj = tf.fighters.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled
         && Game.fighterDistTo(x, p.mx, p.my) <= wr);
       if (!adj.length) return;
-      if (adj.length === 1) { Game.tbPlayerStrike(adj[0].key); rerender(); return; }
+      if (adj.length === 1) { combatInput(() => Game.tbPlayerStrike(adj[0].key)); rerender(); return; }
       enterTargeting({
         prompt: '⚔ Strike which?',
         targets: monsterTargets(adj),
-        onPick: (t) => { Game.tbPlayerStrike(t.key); rerender(); },
+        onPick: (t) => { combatInput(() => Game.tbPlayerStrike(t.key)); rerender(); },
       });
     });
     // SIGNATURE MECHANICS (sigW3a.js, wave-3 batch A 2026-10-10): bespoke
@@ -18043,7 +18754,7 @@
     // menu buttons. Shared hook point for ALL signature batches — later
     // batches reuse it, no further app.js edits needed.
     document.querySelectorAll('[data-sig-act]').forEach(b => {
-      b.onclick = () => { try { Game.sigCombatAct(b.dataset.sigAct); } catch (e) {} rerender(); };
+      b.onclick = () => { combatInput(() => Game.sigCombatAct(b.dataset.sigAct)); rerender(); };
     });
   }
 
@@ -18275,7 +18986,9 @@
   }
   function combatPresentation() {
     const f = Game.tbfight;
-    const active = !!(f && !f.over && !Game.state.scholar.insideHaven);
+    // A feast challenge or breach can start in the hall. The live fight
+    // owns the same cells used by collision; shelter is not a render filter.
+    const active = !!(f && !f.over);
     const view = { active, gridSize: active ? Game.tbGridSize() : 9, allies: {} };
     if (!active) return view;
     for (const a of f.fighters) {
@@ -18285,16 +18998,74 @@
     }
     return view;
   }
+  // Furnish the real hall cells. These are action landmarks, not new stations
+  // or state: the existing grid remains the source of collision and use rules.
+  const HAVEN_STATIONS = {
+    bunk: { label: 'Rest', name: 'Bunk · rest', art: '<rect x="3" y="9" width="26" height="18" rx="2" fill="#72513a"/><rect x="5" y="7" width="22" height="17" rx="2" fill="#628592"/><rect x="7" y="8" width="7" height="6" rx="2" fill="#e8dbc1"/><path d="M15 9v14M5 25v4m22-4v4" stroke="#b7c5bd" stroke-width="2"/>' },
+    fire: { label: 'Fire', name: 'Hearth · warmth and cooking', art: '<path d="M4 26V13L10 5h12l6 8v13Z" fill="#888174"/><path d="M9 25V15a7 7 0 0 1 14 0v10" fill="#211c1a"/><path d="M16 25c-12-2-5-10-4-13 0 5 6 3 5-7 9 11 10 18-1 20Z" fill="#e78b40"/><path d="M16 24c-4-1-3-6 1-10 0 4 5 7-1 10Z" fill="#ffe1a0"/><path d="M5 28h22" stroke="#b4a58c" stroke-width="3"/>' },
+    door: { label: 'Exit', name: 'Door · step outside to the grounds', art: '<path d="M5 29V3h22v26" fill="#a58b59"/><path d="M9 29V7h14v22" fill="#65824d"/><path d="M16 23V12m-4 4 4-4 4 4" fill="none" stroke="#e0edb9" stroke-width="2.5"/><path d="M6 29h20" stroke="#e0c395" stroke-width="2"/>' }
+  };
+
   function renderDetail(st) {
+    // Only compose an intact rectangular footprint. Altered/irregular saves
+    // retain their actual individual cells; art never paints over a missing tile.
+    function havenLodgeFootprint(cells) {
+      const points = [];
+      cells.forEach((row,y) => row.forEach((cell,x) => { if (cell === 'lodge') points.push({x,y}); }));
+      if (!points.length) return null;
+      const x = Math.min(...points.map(p => p.x)), y = Math.min(...points.map(p => p.y));
+      const width = Math.max(...points.map(p => p.x)) - x + 1, height = Math.max(...points.map(p => p.y)) - y + 1;
+      return width * height === points.length ? {x,y,width,height} : null;
+    }
+    // One token builder for ordinary and co-occupied combat cells.
+    // World contact can start a monster on the bearer's square; neither
+    // body may disappear just because another actor already drew there.
+    function combatCreatureToken(mf, _mfi) {
+      const _msz = Game.fighterSize(mf);
+      const _hkey = mf.key || mf.monsterId || (mf.mdef && mf.mdef.id) || ('tb' + _mfi);
+      const _mid = mf.monsterId || (mf.mdef && mf.mdef.id);
+      // MONSTER SVGS (Steve 2026-10-06): use the custom SVG for all monsters,
+      // not just humanoids. The emoji is a last resort.
+      let _mspr = '';
+      try {
+        if (_mid && S.Sprites && S.Sprites.monsterSprite) {
+          const _aggro = true; // combat = aggro form
+          // TITAN BODIES (presentation B 2026-10-14): a titan fights
+          // in its own sprite, not its scaled-up monster form.
+          const _tsvg = (Game.isTitan && Game.isTitan(_mid) && S.Sprites.titanSprite) ? S.Sprites.titanSprite(_mid) : null;
+          const _svg = _tsvg || S.Sprites.monsterSprite(_mid, _aggro);
+          if (_svg) _mspr = `<span class="csprite">${_svg}</span>`;
+        }
+      } catch (e) { console.warn('[titan sprite]', e && e.message); }
+      // Humanoids get the special ambiguous treatment; others get their SVG
+      const _hspr = humanoidSpriteHtml(_mid);
+      // BUFFERING FAINTEST FRAME (r15 CATCH 3): the real present is the
+      // faintest frame — dim the token so the bright echoes read as past.
+      const _bufDim = (_mid === 'buffering') ? ' style="opacity:.45"' : '';
+      // MULTI-TILE SPAN (Steve 2026-10-12): the winning sprite spans
+      // the footprint — the CSS scales it to the body size.
+      let _sprInner = _hspr || _mspr || esc(mf.emoji || '👹');
+      if (_msz > 1 && _sprInner.indexOf('csprite') !== -1)
+        _sprInner = _sprInner.replace('class="csprite"', 'class="csprite multitile mts' + _msz + '" style="--body-size:' + _msz + '"');
+      // ent-multi: the entity wrapper fills the anchor cell, so the
+      // 200%/300% span sizes against the CELL. (The wrapper is a
+      // will-change:transform containing block; at 0 width the
+      // multi-tile sprite collapsed to 0x0 and the body vanished.)
+      return `<span data-ent="creature:${esc(_hkey)}"${_bufDim}${_msz > 1 ? ' class="ent-multi"' : ''}>${_sprInner}</span>`;
+    }
+    const HAVEN_LODGE_ART = '<svg viewBox="0 0 96 64" aria-hidden="true"><path d="M9 27h78v32H9Z" fill="#876444" stroke="#3c3026" stroke-width="2"/><path d="M5 29 20 5h56l15 24Z" fill="#593d34" stroke="#2e2925" stroke-width="2"/><path d="M17 26 27 9h42l10 17M9 31h78" fill="none" stroke="#a47b57" stroke-width="2"/><path d="M17 42h62M17 52h62M14 31v25m68-25v25" stroke="#58402e" stroke-width="2"/><path d="M40 57V35h16v22" fill="#332c25" stroke="#c5a778" stroke-width="2"/><path d="M44 54V39h8v15Z" fill="#dec58a"/><path d="M20 35h12v12H20Zm44 0h12v12H64Z" fill="#a2b4a0" stroke="#3b493e" stroke-width="2"/><path d="M26 35v12m-6-6h12m38-6v12m-6-6h12" stroke="#5c6958"/><path d="M5 59h86" stroke="#9b9380" stroke-width="5"/><path d="M64 7V2h9v10" fill="#827970" stroke="#3c3833" stroke-width="2"/></svg>';
     // Collect telegraph visuals once per render (not per cell)
     const _tg = tbAllTelegraphCells();
     const cells = Game.genDetail(st.px, st.py);
     const tile = Game.playerTile();
+    const arena = !!(Game.tbfight && !Game.tbfight.over && Game.state.arenaContest);
+    const havenRoom = !arena && tile.type === 'haven' && cells.some(row => row.includes('hall'));
+    const lodge = !arena && tile.type === 'haven' && !havenRoom ? havenLodgeFootprint(cells) : null;
     const pmx = Game.state.scholar.mx ?? 4, pmy = Game.state.scholar.my ?? 4;
     const mon = (typeof Game.playerMonster === 'function') ? Game.playerMonster() : Game.state.scholar.monster;
     const ani = Game.state.scholar.animal;
     const vpos = (Game.state.village.positions || {});
-    const secrets = tile.secrets || {};
+    const secrets = arena ? {} : tile.secrets || {};
     // GLASSWING TRAP SHADOW (Steve 2026-10-06): the pre-combat dive shadow.
     // game.js sibling owns Game.glasswingTrapCells() — null or
     // {tile:{x,y}, turns:1|2|3, splash:[{x,y}]}. GUARDED: if absent, nothing renders.
@@ -18376,7 +19147,7 @@
         // detailRegrow tracks it until it recovers. Show it dimmed/wilted so
         // the player SEES what they've taken. (Plants become dirt instead.)
         const deplKey = cx + ',' + cy;
-        const isDepleted = tile.detailRegrow && tile.detailRegrow[deplKey] &&
+        const isDepleted = !arena && tile.detailRegrow && tile.detailRegrow[deplKey] &&
           (typeof tile.detailRegrow[deplKey].day === 'number' ? tile.detailRegrow[deplKey].day > (Game.state.scholar.day || 0) : true);
         if (cell === 'plant') {
           // KNOWLEDGE-GATED GLYPHS (Steve): the game knows the species (t.plantSpecies),
@@ -18446,7 +19217,7 @@
             g = ''; cls += ' dirt';
           }
         }
-        else { g = CELL_GLYPH[cell] || ''; if (cell) cls += ' c-' + cell; }
+        else { g = cell === 'lodge' && lodge ? '' : (CELL_GLYPH[cell] || ''); if (cell) cls += ' c-' + cell; }
 
         // known secrets override the look: knowledge is visible.
         const sec = secrets[cx + ',' + cy];
@@ -18483,11 +19254,10 @@
           // COMBAT-OVER GUARD (Steve 2026-10-06): if the fight is over but
           // tbfight hasn't cleared yet (or got stuck), do NOT render fighters.
           // Dead fighters on the grid after combat = the softlock bug.
-          // INSIDE SCOPING (Steve 2026-10-06): fights happen OUTSIDE. If the
-          // player is inside Haven, never render field fighters — "they show
-          // on the grid inside too" was the bug. Combat inside is impossible;
-          // the door-flee path ends it.
-          const _inside = Game.state.scholar && Game.state.scholar.insideHaven;
+          // Keep ambient outdoor creatures out of the hall, but draw actual
+          // live fighters there. Feast/breach encounters can genuinely begin
+          // indoors; the old blanket guard hid their monsters and helpers.
+          const _inside = Game.state.scholar && Game.state.scholar.insideHaven && !arena;
           const tbf = Game.tbfight;
           let drawn = false;
           const ally = _combatView.allies[cx + ',' + cy];
@@ -18509,7 +19279,7 @@
             if (tbf && tbf.actingKey === ally.key) cls += ' acting';
             drawn = true;
           }
-          if (tbf && !tbf.over && !_inside) {
+          if (tbf && !tbf.over) {
             for (let _mfi = 0; _mfi < tbf.fighters.length; _mfi++) {
               if (drawn) break;
               const mf = tbf.fighters[_mfi];
@@ -18536,36 +19306,7 @@
               // monster or animal — the emoji shows what it looks like, not what it is.
               // HUMANOID SPRITES (Steve 2026-10-06): human-like horrors show
               // their calm SVG — the paranoia needs a real silhouette.
-              const _hkey = mf.key || mf.monsterId || (mf.mdef && mf.mdef.id) || ('tb' + _mfi);
-              const _mid = mf.monsterId || (mf.mdef && mf.mdef.id);
-              // MONSTER SVGS (Steve 2026-10-06): use the custom SVG for all monsters,
-              // not just humanoids. The emoji is a last resort.
-              let _mspr = '';
-              try {
-                if (_mid && S.Sprites && S.Sprites.monsterSprite) {
-                  const _aggro = true; // combat = aggro form
-                  // TITAN BODIES (presentation B 2026-10-14): a titan fights
-                  // in its own sprite, not its scaled-up monster form.
-                  const _tsvg = (Game.isTitan && Game.isTitan(_mid) && S.Sprites.titanSprite) ? S.Sprites.titanSprite(_mid) : null;
-                  const _svg = _tsvg || S.Sprites.monsterSprite(_mid, _aggro);
-                  if (_svg) _mspr = `<span class="csprite">${_svg}</span>`;
-                }
-              } catch (e) { console.warn('[titan sprite]', e && e.message); }
-              // Humanoids get the special ambiguous treatment; others get their SVG
-              const _hspr = humanoidSpriteHtml(_mid);
-              // BUFFERING FAINTEST FRAME (r15 CATCH 3): the real present is the
-              // faintest frame — dim the token so the bright echoes read as past.
-              const _bufDim = (_mid === 'buffering') ? ' style="opacity:.45"' : '';
-              // MULTI-TILE SPAN (Steve 2026-10-12): the winning sprite spans
-              // the footprint — the CSS scales it to the body size.
-              let _sprInner = _hspr || _mspr || esc(mf.emoji || '👹');
-              if (_msz > 1 && _sprInner.indexOf('csprite') !== -1)
-                _sprInner = _sprInner.replace('class="csprite"', 'class="csprite multitile mts' + _msz + '" style="--body-size:' + _msz + '"');
-              // ent-multi: the entity wrapper fills the anchor cell, so the
-              // 200%/300% span sizes against the CELL. (The wrapper is a
-              // will-change:transform containing block; at 0 width the
-              // multi-tile sprite collapsed to 0x0 and the body vanished.)
-              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}${_msz > 1 ? ' class="ent-multi"' : ''}>${_sprInner}</span>`;
+              g = combatCreatureToken(mf, _mfi);
               cls += ' creature';
               if (tbf.actingKey === mf.key) cls += ' acting';
               // TITAN FIGHT (Steve 2026-10-11): mark titan cells for ant-vs-titan scaling
@@ -18636,7 +19377,7 @@
             }
           }
           // CORPSE SYSTEM: the dead stay where they fell. Always visible.
-          if (!drawn && Game.corpseAt) {
+          if (!drawn && !arena && Game.corpseAt) {
             const dead = Game.corpseAt(cx, cy);
             if (dead.length) {
               const dc = dead[0];
@@ -18649,7 +19390,7 @@
           // GRAVE MARKERS (rogue P1 T7 2026-10-22): the dead stay present.
           // A cairn on the Haven grounds, at the fire — drawn like the other
           // quiet entities. Grounds only, never inside the hall.
-          if (!drawn && !_inside && Game.graveAt) {
+          if (!drawn && !arena && !_inside && Game.graveAt) {
             const gr = Game.graveAt(cx, cy);
             if (gr.length) {
               g = `<span data-ent="grave:${esc(gr[0].id)}">🪦</span>`;
@@ -18662,8 +19403,41 @@
         // set trap marks its cell. Game.trapMarkerAt owns the HTML; the cell
         // just hosts it. Corner badge, underfoot, never covers the entity.
         // GUARDED: if absent, nothing renders.
-        try { g += Game.trapMarkerAt(cx, cy) || ''; } catch (e) {}
-        g += Game.gardenMarkerAt(cx, cy);
+        if (!arena) {
+          try { g += Game.trapMarkerAt(cx, cy) || ''; } catch (e) { console.warn('[map] trap marker', e); }
+          g += Game.gardenMarkerAt(cx, cy);
+        }
+        if (lodge && cell === 'lodge') {
+          cls += ' haven-lodge-cell';
+          if (cx === lodge.x && cy === lodge.y) {
+            g = `<span class="haven-lodge-building" role="img" aria-label="Haven hall" style="width:${lodge.width * 100}%;height:${lodge.height * 100}%">${HAVEN_LODGE_ART}<span class="haven-building-label" aria-hidden="true">Hall</span></span>` + g;
+          }
+        }
+        const station = havenRoom && HAVEN_STATIONS[cell];
+        if (havenRoom) {
+          cls += ' haven-room haven-' + cell;
+          if (station) {
+            const occupied = g.includes('data-ent=');
+            cls += ' haven-station' + (occupied ? ' haven-occupied' : '');
+            // Leave people/corpses above the furniture; never tint the actor.
+            const furnishing = `<span class="haven-furnishing" aria-hidden="true"><svg viewBox="0 0 32 32">${station.art}</svg></span>`;
+            g = furnishing + (occupied ? g : '') + `<span class="haven-station-label" aria-hidden="true">${station.label}</span>`;
+          }
+        }
+        // Player/helper drawing has priority in the ordinary cell chain.
+        // Retain a creature sharing that exact anchor as a second real token,
+        // rather than relocating either fighter or hiding the threat.
+        const sharedFight = Game.tbfight;
+        if (sharedFight && !sharedFight.over) {
+          sharedFight.fighters.forEach((mf,index) => {
+            if (!mf.alive || mf.fled || !['monster','hostile'].includes(mf.kind) || mf.mx !== cx || mf.my !== cy) return;
+            const key = mf.key || mf.monsterId || (mf.mdef && mf.mdef.id) || ('tb' + index);
+            if (g.includes('data-ent="creature:' + esc(key) + '"')) return;
+            g += combatCreatureToken(mf,index);
+            cls += ' creature combat-overlap';
+            if (sharedFight.actingKey === mf.key) cls += ' acting';
+          });
+        }
         const _lane = Game.tbBeamLaneCells ? Game.tbBeamLaneCells() : null;
         const _ghost = Game.tbBeamPrevLaneCells ? Game.tbBeamPrevLaneCells() : null;
         const _live = Game.tbBeamIsFiring ? Game.tbBeamIsFiring() : false;
@@ -18860,7 +19634,7 @@
         const _isEdge = (cx === 0 || cx === 8 || cy === 0 || cy === 8);
         const _sealed = _inCombat && !!((Game.state || {}).arenaContest || ((Game.tbfight || {}).noFlee));
         const _barrierCls = (_sealed && _isEdge) ? ' barrierSealed' : '';
-        html += `<div class="${cls}${targetingCells().has(_k) ? ' targetable' : ''}${Game.cellScorched && Game.cellScorched(cx, cy) ? ' scorched' : ''}${_beamCls}${_srcCls}${_haloCls}${_tgCls}${_w2aCls}${_gwCls}${_cfCls}${_barrierCls}"${(_gwStyle || _cfStyle || _w2cStyle || _wbStyle) ? ` style="${[_gwStyle, _cfStyle, _w2cStyle, _wbStyle].filter(Boolean).join(';')}"` : ''} data-cx="${cx}" data-cy="${cy}">${g}</div>`;
+        html += `<div class="${cls}${targetingCells().has(_k) ? ' targetable' : ''}${Game.cellScorched && Game.cellScorched(cx, cy) ? ' scorched' : ''}${_beamCls}${_srcCls}${_haloCls}${_tgCls}${_w2aCls}${_gwCls}${_cfCls}${_barrierCls}"${(_gwStyle || _cfStyle || _w2cStyle || _wbStyle) ? ` style="${[_gwStyle, _cfStyle, _w2cStyle, _wbStyle].filter(Boolean).join(';')}"` : ''} data-cx="${cx}" data-cy="${cy}"${station ? ` role="button" tabindex="0" aria-label="${station.name}"` : ''}>${g}</div>`;
       }
       html += '</div>';
     }
@@ -19165,6 +19939,10 @@
     return `<div class="compass" id="compass" title="Tap for full map">${parts.join(' · ')}</div>`;
   }
 
+  function knownMapVillage(x, y, hive) {
+    return (Game.state.otherVillages || []).find(v => v.x === x && v.y === y && v.generated &&
+      (Game.mapSeen(x, y) || hive || Game.villageSighting(v.id)));
+  }
   function renderMap(st, tset) {
     let html = '';
     // HIVE SIGHT (break-it travel 2026-10-10): hive_mind promises "(map
@@ -19201,6 +19979,20 @@
       for (let _rx = 0; _rx < 9; _rx++) {
         const x = _win ? _win[_ry][_rx].x : _rx;
         const y = _win ? _win[_ry][_rx].y : _ry;
+        // A sighted camp is a known location, not explored ground. Render
+        // only its marker, also on visited tiles where the terrain fast path
+        // previously swallowed village markers. Never inspect its resources.
+        const camp = knownMapVillage(x, y, _hive);
+        const playerHere = x === Game.map.px && y === Game.map.py;
+        if (camp && !playerHere) {
+          let title = camp.name;
+          if ((Game.mapSeen(x, y) || _hive) && Game.systemIntegrationLevel() >= 1 && Game.villagePower) {
+            title += ` (Pwr ${Game.villagePower(camp)}, ${camp.knowledgeProfile?.focus || 'survivors'})`;
+          }
+          const unknownGround = !Game.mapSeen(x, y) && !_hive;
+          html += `<div class="tile known-camp" data-x="${x}" data-y="${y}" aria-label="${esc(camp.name)} — camp location" title="${esc(title)}" style="position:relative">${unknownGround ? `<div class="fogtile fog-v${(x * 7 + y * 13) % 4}" aria-label="ground unexplored"></div>` : ''}<span style="position:absolute;inset:0;display:grid;place-items:center">🏘️</span></div>`;
+          continue;
+        }
         // FOG OF WAR (Steve 2026-10-06): only tiles you've WALKED IN reveal.
         // Check seenTiles for visited status. No hardcoded visibility.
         // FOG DEPTH (break-it travel r4 2026-10-09): 'shared' tiles render
@@ -19215,7 +20007,7 @@
           const _e = _st[x + ',' + y];
           if (_e && _e.k === 'v') _seenSimple = true;
         } catch (e) {}
-        if (_seenSimple) {
+        if (_seenSimple && !playerHere) {
           // Get tile type (tileAt resolves beyond tiles; the direct board
           // lookup below would miss them and render meadow instead)
           let _tl = null, _ttype = 'meadow';
@@ -19301,38 +20093,15 @@
         const isT = tset.has(x + ',' + y);
         // depletionClass gates fog internally (break-it travel r4 2026-10-09):
         // only seen tiles show picked-clean/barren.
-        const depCls = Game.depletionClass ? Game.depletionClass(tl, x, y) : ((((tl.maxStock - (tl.stock || 0) > 0)) && seen) ? ' spent' : '');
-        const pathCls = (tl.wornPath && seen) ? 'worn-path' : '';
+        const depCls = Game.depletionClass ? Game.depletionClass(tl, x, y) : (((tl && (tl.maxStock - (tl.stock || 0) > 0)) && seen) ? ' spent' : '');
+        const pathCls = (tl?.wornPath && seen) ? 'worn-path' : '';
         const shrCls = seen === 'shared' ? ' shared' : '';
         const cls = 'tile' + (isT ? ' dest' : '') + (isW ? ' beast' : '') + (depCls ? ' ' + depCls : '') + (pathCls ? ' ' + pathCls : '') + shrCls;
-        // other villages: show 🏘️ ONLY if the tile is seen (Steve 2026-10-06:
-        // "another village I never visited" = fog leak. generated != discovered)
-        // HIVE SIGHT (break-it travel 2026-10-10): hive_mind's earned alien
-        // sense shows villages too — the fiction is the payoff, and the
-        // card below still gates face-to-face actions on proximity.
-        const otherV = (Game.state.otherVillages || []).find(v => {
-          if (v.x !== x || v.y !== y || !v.generated) return false;
-          const st2 = (Game.state && Game.state.scholar && Game.state.scholar.seenTiles) || {};
-          return !!st2[x + ',' + y] || _hive;
-        });
         let g;
         if (isP) {
           g = meSpr ? `<span class="mface msprite">${meSpr}</span>` : '🧍';
         } else if (isW && seen) {
           g = '🐗';
-        } else if (otherV) {
-          // SYSTEM INTEGRATION (Steve 2026-10-07): L1+ shows village power.
-          // The System sees more as you link codices. Your HUD sharpens.
-          let vInfo = '';
-          try {
-            const integ = Game.systemIntegrationLevel ? Game.systemIntegrationLevel() : 0;
-            if (integ >= 1 && Game.villagePower) {
-              const pw = Game.villagePower(otherV);
-              const focus = (otherV.knowledgeProfile || {}).focus || 'survivors';
-              vInfo = ` title="${otherV.name} (Pwr ${pw}, ${focus})"`;
-            }
-          } catch (e) {}
-          g = `<span${vInfo}>🏘️</span>`;
         } else {
           // HAVEN/VILLAGE ICON (Steve 2026-10-06): havens and villages ALWAYS
           // show the 🏘️ icon, not terrain. You need to see where people are.

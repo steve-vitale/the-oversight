@@ -1,205 +1,79 @@
 #!/usr/bin/env node
-// test-hide-r15.js — proof for scale-wall r15 (armor uptake lever).
-//
-// RED phase: with HIDE_R15 unset, belonghide/leadhide are pure delegation —
-// the parent-identical baseline the before/after measurement needs.
-// GREEN: with HIDE_R15=1 the layer closes the uptake gap through the
-// engine's own gates only:
-//   1. L0 (never seen) + materials -> NO craft (no free learning).
-//   2. L1 + 2 hide + 1 vine -> blind craft attempt (35%, materials at real
-//      risk); success teaches L2 (the engine's PRACTICE rule).
-//   3. crafted hide armor gets equipped by the parent's gearUp -> P=20.
-//   4. lost armor is re-crafted (re-craft when destroyed/lost).
-//   5. FIGHT: a real tb fight vs review_drone (wave 2, Scored Assessment
-//      28-40) — damage taken bare vs P=20, proving the r14 math live.
-// Re-verifies competent's armor suite (test-armor-up-20261012) still green.
-//
-// Seeded RNG (modules capture Math.random at load); no Game.save stub.
 'use strict';
-
-const { loadGame, setupGame } = require('./sim-harness');
-
-let pass = 0, fail = 0;
-function check(name, cond, extra) {
-  if (cond) { pass++; console.log('  ok   ' + name); }
-  else { fail++; console.log('  FAIL ' + name + (extra ? ' — ' + extra : '')); }
+// Prepared armor-uptake contrasts. Every case has one fresh shared runtime;
+// combat uses actual bearer capacity and equal incoming attacks, not 5,000 HP.
+const K=require('./godpath/lib'),a=require('assert/strict'),cp=require('child_process'),crypto=require('crypto');
+const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
+function giveMaterials(G,n){for(let i=0;i<n;i++)G.state.scholar.inventory.push({plantId:'animal_hide',material:'hide',name:'Hide',units:1,kg:1,kcalEach:0});G.state.scholar.inventory.push({material:'vine',name:'Vine',units:1,kg:0.1,kcalEach:0});}
+function recipe(G,level){G.state.codex.recipes=G.state.codex.recipes||{};G.state.codex.recipes.hide_armor={level,learnedDay:1,learnedFrom:'prepared-test',via:'discovery'};}
+function owns(G){const s=G.state.scholar;return [...Object.values(s.equipped||{}),...s.inventory].some(x=>x&&(x.itemId||x.id)==='hide_armor');}
+async function caseRun(mode){
+ const seed={off:51001,parent:51001,l0:51002,craft:51003,recraft:51004,sweep:51005,bare:61001,armor:61001}[mode];a(seed);
+ const G=await K.load({seed,narration:true}),s=K.newRun(G),bearer=G.villagerId,hide=require('./policies/hide'),checks=[],ctx={};
+ const check=(name,condition,details)=>checks.push({name,condition:!!condition,details});
+ delete process.env.HIDE_R15;
+ if(mode==='off'||mode==='parent'){
+  recipe(G,1);giveMaterials(G,2);const policy=mode==='off'?hide.belonghide:require('./policies/belongseek').belongseek;
+  for(let i=0;i<3;i++)policy.upkeep(G,ctx);
+  check('gate off: no hide craft attempt',ctx.hideCraftAttempts===undefined);
+  check('gate off: no phantom armor',!owns(G));
+  check('gate off: recipe remains L1',s&&G.state.codex.recipes.hide_armor.level===1);
+  check('gate off: inventory contains no free hide armor',!s.inventory.some(x=>(x.itemId||x.id)==='hide_armor'));
+  return{mode,seed,checks,stateHash:hash(G.state),contextHash:hash(ctx),nextRandom:Math.random()};
+ }
+ if(['l0','craft','recraft','sweep'].includes(mode))process.env.HIDE_R15='1';
+ if(mode==='l0'){
+  G.state.codex.recipes=G.state.codex.recipes||{};delete G.state.codex.recipes.hide_armor;giveMaterials(G,2);
+  for(let i=0;i<3;i++)hide.belonghide.upkeep(G,ctx);
+  check('L0: unseen recipe never crafts or grants armor',ctx.hideCraftAttempts===undefined&&!owns(G));
+ }else if(mode==='craft'){
+  recipe(G,1);giveMaterials(G,4);
+  const payments=[],craft=G.craft,count=mat=>s.inventory.filter(x=>x.material===mat).reduce((n,x)=>n+x.units,0);
+  G.craft=function(...args){const before={hide:count('hide'),vine:count('vine')},result=craft.apply(this,args);payments.push({success:!!result,hide:before.hide-count('hide'),vine:before.vine-count('vine')});return result;};
+  for(let day=1;day<=10&&!owns(G);day++){s.day=day;hide.belonghide.upkeep(G,ctx);if(!owns(G))giveMaterials(G,2);}
+  check('blind craft actually attempted',ctx.hideCraftAttempts>=1,ctx);
+  check('blind craft succeeds within ten prepared attempt days',owns(G));
+  check('successful practice teaches L2',G.state.codex.recipes.hide_armor.level>=2);
+  check('inherited gearUp wears crafted armor in torso',s.equipped?.torso?.itemId==='hide_armor');
+  check('crafted worn armor provides P20',G.armorBonus()===20,G.armorBonus());
+  check('successful armor pays two actual hides and one vine',payments.some(x=>x.success)&&payments.filter(x=>x.success).every(x=>x.hide===2&&x.vine===1),payments);
+ }else if(mode==='recraft'){
+  recipe(G,2);giveMaterials(G,2);s.day=30;hide.belonghide.upkeep(G,ctx);
+  check('replacement setup actually acquired first armor',owns(G),ctx);
+  for(const key of Object.keys(s.equipped||{}))if((s.equipped[key]?.itemId||s.equipped[key]?.id)==='hide_armor')delete s.equipped[key];
+  s.inventory=s.inventory.filter(x=>(x.itemId||x.id)!=='hide_armor');check('lost armor actually removed',!owns(G));
+  giveMaterials(G,2);s.day=31;hide.belonghide.upkeep(G,ctx);check('lost armor is crafted again',owns(G)&&ctx.hideArmorCrafted>=2,ctx);
+ }else if(mode==='sweep'){
+  s.mx=4;s.my=4;const body=G.registerDeath({kind:'animal',monsterId:'deer',name:'Deer',mx:4,my:4,cause:'prepared-loot-scene'});a(body?.id);
+  const before=body.items.filter(x=>x.material==='hide').reduce((n,x)=>n+x.units,0);a(before>0,'Real registered animal body must own generated hide');
+  const prior=s.inventory.filter(x=>x.material==='hide').reduce((n,x)=>n+x.units,0);hide.hideUpkeep(G,ctx);
+  const after=s.inventory.filter(x=>x.material==='hide').reduce((n,x)=>n+x.units,0),remaining=body.items.filter(x=>x.material==='hide').reduce((n,x)=>n+x.units,0);
+  check('actual animal corpse transfers hide into pack',after-prior===before&&remaining===0,{before,prior,after,remaining});
+  check('successful hide transfer is counted honestly',ctx.hidesSwept>=1,ctx);
+ }else if(mode==='bare'||mode==='armor'){
+  s.equipped={};if(mode==='armor')s.equipped.torso={itemId:'hide_armor',name:'Hide armor'};
+  const grid=G.genDetail(G.map.px,G.map.py);for(const row of grid)row.fill('dirt');
+  const m=K.fight(G,'review_drone',{px:3,py:4,mx:4,my:4}),f=G.tbfight,p=G.tbFighter('p');a(m&&f&&p);const startingHp=p.hp,hits=[],damage=G.tbDamage;
+  G.tbDamage=function(key,amount,...rest){const before=p.hp,result=damage.call(this,key,amount,...rest);if(key==='p'&&before>p.hp)hits.push({requested:amount,debit:before-p.hp,source:rest[1],name:rest[0]});return result;};
+  let waits=0;while(G.tbfight===f&&!f.over&&p.alive&&G.villagerId===bearer&&hits.length<2&&waits<30){a(G.tbIsPlayerTurn());G.tbPlayerWait();waits++;}
+  check(mode+': two actual incoming attacks reach the real body',hits.length===2,{hits,waits});
+  check(mode+': same living bearer at normal capacity',G.villagerId===bearer&&G.state.scholar===s&&p.alive&&p.hp>0&&startingHp===100&&p.maxHp===100&&s.health===p.hp,{startingHp,hp:p.hp,max:p.maxHp,health:s.health});
+  check(mode+': canonical worn protection',G.armorBonus()===(mode==='armor'?20:0));
+  return{mode,seed,checks,hits,waits,hp:p.hp,startingHp,protection:G.armorBonus()};
+ }
+ return{mode,seed,checks,ctx,protection:G.armorBonus()};
 }
-
-async function freshGame(seed) {
-  let s = seed >>> 0;
-  Math.random = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-  const { Game } = await loadGame({ seed, mode: 'hide-r15', fullTelemetry: false });
-  await setupGame(Game);
-  return Game;
+if(process.argv[2]==='--child')caseRun(process.argv[3]).then(r=>console.log('HIDE_RESULT '+JSON.stringify(r))).catch(e=>{console.error(e.stack);process.exitCode=1;});
+else{
+ const T=K.reporter('Hide armor uptake and real incoming hits'),rows={};
+ for(const mode of ['off','parent','l0','craft','recraft','sweep','bare','armor']){
+  const child=cp.spawnSync(process.execPath,[__filename,'--child',mode],{cwd:K.ROOT,encoding:'utf8',timeout:120000,maxBuffer:4*1024*1024});a.equal(child.status,0,child.stderr+'\n'+child.stdout);
+  const lines=child.stdout.split('\n').filter(x=>x.startsWith('HIDE_RESULT '));a.equal(lines.length,1);const r=rows[mode]=JSON.parse(lines[0].slice(12));console.log(JSON.stringify(r));for(const c of r.checks)T.ok(c.name,c.condition,JSON.stringify(c.details));
+ }
+ T.ok('disabled layer exactly delegates: whole state, context and next RNG draw',rows.off.stateHash===rows.parent.stateHash&&rows.off.contextHash===rows.parent.contextHash&&rows.off.nextRandom===rows.parent.nextRandom);
+ const bare=rows.bare,armor=rows.armor;
+ T.ok('both arms resolve the same incoming attack requests and cadence',JSON.stringify(bare.hits.map(x=>[x.requested,x.source,x.name]))===JSON.stringify(armor.hits.map(x=>[x.requested,x.source,x.name]))&&bare.waits===armor.waits);
+ T.ok('P20 reduces every actual corresponding hit',bare.hits.length===2&&armor.hits.length===2&&armor.hits.every((h,i)=>h.debit>0&&h.debit<bare.hits[i].debit));
+ T.ok('total real HP debit is lower with worn armor',bare.startingHp-bare.hp>armor.startingHp-armor.hp&&armor.startingHp-armor.hp>0);
+ T.done();
 }
-
-function giveMaterials(Game, nHide) {
-  const inv = Game.state.scholar.inventory;
-  for (let i = 0; i < nHide; i++) inv.push({ plantId: 'animal_hide', material: 'hide', name: 'Hide', units: 1, kg: 1.0, kcalEach: 0 });
-  inv.push({ material: 'vine', name: 'Vine', units: 1, kg: 0.1, kcalEach: 0 });
-}
-
-function setRecipe(Game, level) {
-  Game.state.codex.recipes = Game.state.codex.recipes || {};
-  Game.state.codex.recipes.hide_armor = { level, learnedDay: 1, learnedFrom: 'test', via: 'discovery' };
-}
-
-function ownHideArmor(Game) {
-  const s = Game.state.scholar;
-  const isHide = (it) => it && ((it.itemId || it.id) === 'hide_armor');
-  if (Object.values(s.equipped || {}).some(isHide)) return true;
-  return (s.inventory || []).some(isHide);
-}
-
-(async () => {
-  const hide = require('./policies/hide');
-  const { belonghide } = hide;
-
-  // ---- RED: gate off -> pure delegation, parent-identical ----
-  {
-    delete process.env.HIDE_R15;
-    const Game = await freshGame(51001);
-    setRecipe(Game, 1); // L1: seen one
-    giveMaterials(Game, 2);
-    const ctx = {};
-    const before = JSON.stringify(Game.state.scholar.inventory.map(i => i.itemId || i.material));
-    for (let i = 0; i < 3; i++) { try { belonghide.upkeep(Game, ctx); } catch (e) {} }
-    check('RED1 no craft attempt with gate off', ctx.hideCraftAttempts === undefined,
-      'attempts=' + ctx.hideCraftAttempts);
-    check('RED2 no hide_armor in inventory with gate off', !ownHideArmor(Game));
-    check('RED3 recipe level untouched by the layer (L1 stays L1)', (Game.state.codex.recipes.hide_armor.level || 0) === 1,
-      'level=' + Game.state.codex.recipes.hide_armor.level);
-    const after = JSON.stringify(Game.state.scholar.inventory.map(i => i.itemId || i.material));
-    check('RED4 inventory has no phantom hide_armor (craft consumed nothing)', !after.includes('hide_armor'));
-  }
-
-  // ---- HONESTY: L0 + materials -> no craft ----
-  {
-    process.env.HIDE_R15 = '1';
-    const Game = await freshGame(51002);
-    Game.state.codex.recipes = Game.state.codex.recipes || {};
-    delete Game.state.codex.recipes.hide_armor;
-    giveMaterials(Game, 2);
-    const ctx = {};
-    for (let i = 0; i < 3; i++) { try { belonghide.upkeep(Game, ctx); } catch (e) {} }
-    check('L0 no craft (never seen = no button)', ctx.hideCraftAttempts === undefined && !ownHideArmor(Game),
-      'attempts=' + ctx.hideCraftAttempts);
-    delete process.env.HIDE_R15;
-  }
-
-  // ---- GREEN: L1 + materials -> blind attempt, learns L2 on success ----
-  {
-    process.env.HIDE_R15 = '1';
-    const Game = await freshGame(51003);
-    setRecipe(Game, 1);
-    giveMaterials(Game, 4); // 2 attempts' worth (blind burns hides on fails)
-    const ctx = {};
-    let crafted = false;
-    for (let d = 0; d < 10 && !crafted; d++) {
-      Game.state.scholar.day = d + 1;
-      try { belonghide.upkeep(Game, ctx); } catch (e) {}
-      if (ownHideArmor(Game)) crafted = true;
-      // replenish honest materials for the next attempt day
-      if (!crafted) giveMaterials(Game, 2);
-    }
-    check('GREEN1 blind craft attempted with gate on', (ctx.hideCraftAttempts || 0) >= 1,
-      'attempts=' + (ctx.hideCraftAttempts || 0));
-    check('GREEN2 hide armor crafted within 10 attempt-days (35%/try)', crafted);
-    const lvl = ((Game.state.codex.recipes || {}).hide_armor || {}).level || 0;
-    check('GREEN3 successful blind craft teaches L2 (engine PRACTICE rule)', lvl >= 2, 'level=' + lvl);
-    // parent gearUp (inside belongseek upkeep) equips the best armor owned
-    const wornIds = Object.values(Game.state.scholar.equipped || {}).map(e => e && (e.itemId || e.id));
-    check('GREEN4 hide_armor equipped on torso by inherited gearUp', wornIds.includes('hide_armor'),
-      'worn=' + JSON.stringify(wornIds));
-    let prot = -1;
-    try { prot = Game.armorBonus() || 0; } catch (e) {}
-    check('GREEN5 armorBonus() = 20 (P=20 halves wave-2 hits)', prot === 20, 'P=' + prot);
-    delete process.env.HIDE_R15;
-  }
-
-  // ---- RE-CRAFT: armor lost -> layer makes another ----
-  {
-    process.env.HIDE_R15 = '1';
-    const Game = await freshGame(51004);
-    setRecipe(Game, 2);
-    giveMaterials(Game, 2);
-    const ctx = {};
-    Game.state.scholar.day = 30;
-    try { belonghide.upkeep(Game, ctx); } catch (e) {}
-    const first = ownHideArmor(Game);
-    // simulate the piece being destroyed/lost
-    const s = Game.state.scholar;
-    for (const k of Object.keys(s.equipped || {})) {
-      const it = s.equipped[k];
-      if (it && (it.itemId || it.id) === 'hide_armor') delete s.equipped[k];
-    }
-    s.inventory = (s.inventory || []).filter(it => (it.itemId || it.id) !== 'hide_armor');
-    check('RE-CRAFT setup: piece removed', !ownHideArmor(Game));
-    giveMaterials(Game, 2);
-    Game.state.scholar.day = 31;
-    try { belonghide.upkeep(Game, ctx); } catch (e) {}
-    check('RE-CRAFT lost armor replaced', ownHideArmor(Game), 'crafted=' + (ctx.hideArmorCrafted || 0));
-    delete process.env.HIDE_R15;
-  }
-
-  // ---- SWEEP: hides off a fresh kill, honestly ----
-  {
-    process.env.HIDE_R15 = '1';
-    const Game = await freshGame(51005);
-    const osay = Game.say; Game.say = function () {};
-    // plant a fresh animal corpse at the scholar's feet with a Hide on it
-    const s = Game.state.scholar;
-    s.mx = 4; s.my = 4;
-    let corpse = null;
-    try {
-      corpse = Game.registerDeath ? Game.registerDeath({ kind: 'animal', monsterId: 'deer' }) : null;
-    } catch (e) {}
-    // registerDeath may not leave a lootable corpse; build one directly
-    if (!corpse || !corpse.id) {
-      Game.state.corpses = Game.state.corpses || [];
-      corpse = { id: 'test-deer-corpse', kind: 'animal', name: 'Deer', node: { x: Game.map.px, y: Game.map.py }, mx: 4, my: 4,
-        items: [{ plantId: 'animal_hide', material: 'hide', name: 'Hide', units: 1, kg: 1.0, kcalEach: 0 }] };
-      Game.state.corpses.push(corpse);
-    }
-    const ctx = {};
-    try { hide.hideUpkeep(Game, ctx); } catch (e) { console.log('sweep err', e.message); }
-    const hides = (s.inventory || []).filter(i => i && i.material === 'hide').reduce((t, i) => t + (i.units || 0), 0);
-    check('SWEEP hide taken off the kill tile (in range, not mid-fight)', hides >= 1, 'hides=' + hides);
-    check('SWEEP recorded honestly', (ctx.hidesSwept || 0) >= 1, 'swept=' + (ctx.hidesSwept || 0));
-    Game.say = osay;
-    delete process.env.HIDE_R15;
-  }
-  {
-    async function fightHpLost(seed, withArmor) {
-      const Game = await freshGame(seed);
-      const osay = Game.say; Game.say = function () {};
-      if (withArmor) {
-        Game.state.scholar.equipped = Game.state.scholar.equipped || {};
-        Game.state.scholar.equipped.torso = { itemId: 'hide_armor', name: 'Hide armor' };
-      }
-      Game.startCombat('review_drone');
-      if (!Game.tbfight) { Game.say = osay; return -1; }
-      const p = Game.tbFighter('p');
-      p.hp = 5000; p.maxHp = 5000;
-      const start = p.hp;
-      // wait through 12 rounds of monster turns — the drone attacks for real
-      for (let r = 0; r < 12 && !Game.tbfight.over; r++) {
-        try { Game.tbPlayerWait(); } catch (e) { break; }
-        try { Game.tbEndCheck(); } catch (e) {}
-      }
-      const lost = start - p.hp;
-      try { Game.tbEnd('fled'); } catch (e) {}
-      Game.say = osay;
-      return lost;
-    }
-    const bare = await fightHpLost(61001, false);
-    const armored = await fightHpLost(61001, true);
-    check('FIGHT real tb fight vs review_drone ran both ways', bare >= 0 && armored >= 0,
-      `bare=${bare} armored=${armored}`);
-    check('FIGHT P=20 reduces damage taken (r14 math live)', bare > 0 && armored < bare,
-      `bare=${bare} armored=${armored}`);
-  }
-
-  console.log(`\ntest-hide-r15: ${pass} passed, ${fail} failed`);
-  process.exit(fail ? 1 : 0);
-})().catch(e => { console.error('FATAL', e); process.exit(1); });

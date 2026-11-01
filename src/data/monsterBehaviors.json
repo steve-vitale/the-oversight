@@ -1,6 +1,14 @@
 {
   "_docs": "Data-driven monster behavior tables (Steve 2026-10-07, scaffold audit). Each monster gets a behavior entry: fleeAt (LIVE since 2026-10-13: tbMonsterTurn honors it \u2014 values migrated into monsters.json mdefs; this table is the fallback for ad-hoc mdefs like the sigW3c sponsor-creature), and preTurnHooks (ordered list of registered hook names run at the top of tbMonsterTurn; a hook returning true consumes the turn). To migrate a species: (1) add its hook names here, (2) register the hook functions in src/js/monsterBehaviors.js (verbatim extraction from tbMonsterTurn), (3) remove the inline branch. Behavior must be IDENTICAL \u2014 this is relocation, not redesign.",
   "_schema": "monsterBehaviors/v1",
+  "summons": {
+    "ad_sponsor": {
+      "id": "ad_sponsor",
+      "name": "Sponsor-creature",
+      "unknown": "a little rider with a fixed smile",
+      "follows": false
+    }
+  },
   "behaviors": {
     "belltoad": {
       "fleeAt": 0.3,

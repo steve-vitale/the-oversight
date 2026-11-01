@@ -11,6 +11,22 @@
 // ambiguity. The repeat-ack ledger is untouched.
 // Usage: node scripts/test-taken-pod-dream-variants-20261022.js
 'use strict';
+// A harness owns process globals. Preserve the six-seed proof, with ONE
+// shared harness per child rather than loading six runtimes into one process.
+if(!process.env.OVERSIGHT_TAKEN_PROOF_SEED){
+  const cp=require('child_process'),tails=new Set();let passed=0,failed=0;
+  for(const seed of[61,82,103,124,7,42]){
+    const r=cp.spawnSync(process.execPath,[__filename],{env:{...process.env,OVERSIGHT_TAKEN_PROOF_SEED:String(seed)},encoding:'utf8'});
+    process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');
+    if(r.status!==0)failed++;
+    passed+=((r.stdout||'').match(/^  PASS /gm)||[]).length;
+    const line=(r.stdout||'').split(/\r?\n/).find(l=>l.startsWith('@@TAKEN_TAILS@@'));
+    if(!line){failed++;continue;}for(const t of JSON.parse(line.slice('@@TAKEN_TAILS@@'.length)))tails.add(t);
+  }
+  if(tails.size>=2){passed++;console.log('  PASS CROSS-VILLAGER VARIETY: at least2 distinct tails across isolated seeds');}
+  else{failed++;console.log('  FAIL CROSS-VILLAGER VARIETY');}
+  console.log(`${passed} passed, ${failed} failed`);process.exit(failed?1:0);
+}
 const { loadGame, setupGame } = require('./sim-harness');
 
 let failures = 0;
@@ -41,7 +57,7 @@ function takenWant(Game) {
 }
 
 (async () => {
-  const SEEDS = [61, 82, 103, 124, 7, 42];
+  const SEEDS = [Number(process.env.OVERSIGHT_TAKEN_PROOF_SEED)];
   const tails = new Set();
   const perVid = {};
   for (const seed of SEEDS) {
@@ -73,6 +89,7 @@ function takenWant(Game) {
     const first = (kin.name || 'they').split(' ')[0];
     ok(String(beat).indexOf(first) >= 0, `seed ${seed}: first telling names the taken kin (${first})`);
     ok(String(beat).indexOf(t1) >= 0, `seed ${seed}: first telling uses that villager's tail variant`);
+    ok(/^"[\s\S]*"$/.test(beat), `seed ${seed}: actual kin speech retains its closing quotation mark`);
     // repeat-ack path unaffected
     let beat2 = null;
     try { beat2 = def.engageBeat.call(Game, vid); } catch (e) { beat2 = 'ERROR ' + e.message; }
@@ -81,7 +98,7 @@ function takenWant(Game) {
   }
   console.log(`\ndistinct tails across ${SEEDS.length} seeds: ${tails.size}`);
   for (const t of tails) console.log('  - ' + t.slice(0, 90) + '...');
-  ok(tails.size >= 2, 'CROSS-VILLAGER VARIETY: at least 2 distinct tails in the corpus (the r25 bug was 1)');
+  console.log('@@TAKEN_TAILS@@'+JSON.stringify([...tails]));
   console.log(failures === 0 ? '\nALL GREEN' : `\n${failures} FAILURES`);
   process.exit(failures === 0 ? 0 : 1);
 })().catch(e => { console.error('HARNESS ERROR', e); process.exit(2); });

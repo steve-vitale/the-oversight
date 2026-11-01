@@ -5,6 +5,8 @@
 //   - aidCrisis()
 //   - raiseAidCrisis(name, wave)
 //   - resolveAidCrisis(how)
+//   - aidRaidThreatPresent()
+//   - settleAidRaidFight()
 //   - callForHelp(tier, opts)
 //   - aidSendRunner(opts)
 //   - aidPickRunner()
@@ -171,10 +173,28 @@
       return this.state.aidCrisis;
     },
 
+    // A fleeing raider still besieges Haven, even away from its map tile.
+    // An unfinished scholar encounter also owns a live world-origin threat.
+    aidRaidThreatPresent() {
+      if (this.lingeringRaiders().some(m => m && (m.hp || 0) > 0)) return true;
+      const fight = this.tbfight;
+      return !!(fight && !fight.over && fight.worldOrigin && fight.worldOrigin.lingering);
+    },
+
+    // Called only after a real patrol/wild result has settled bodies and map.
+    settleAidRaidFight() {
+      const crisis = this.aidCrisis();
+      if (!crisis || !crisis.raiders) return null;
+      const result = this.resolveAidCrisis('fought');
+      if (result === 'ongoing') this.say('The siege continues. A raider still threatens Haven.');
+      return result;
+    },
+
     // resolveAidCrisis: the door goes quiet. Help heads home; debts stand.
     resolveAidCrisis(how) {
       var crisis = this.aidCrisis();
       if (!crisis) return null;
+      if (how === 'fought' && crisis.raiders && this.aidRaidThreatPresent()) return 'ongoing';
       if (how === 'fled' && (crisis.attracted || 0) >= 1) {
         this.say('You try to slip away — but the smoke told it exactly where your door is. It\'s waiting. (Fleeing is blocked while the beacon\'s attention holds.)');
         return 'blocked';
@@ -656,7 +676,7 @@
       if (rec && rec.outcome === 'vKill') {
         try { this.recordWaveKill(mdef && mdef.id, vid, 'aid-crisis', this.trickSummary ? this.trickSummary(rec) : null); } catch (e2) {}
       }
-      if (crisis && rec && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
+      if (crisis && !crisis.raiders && rec && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
         // LINGERERS FIRST (journey crisis r59): the tick and the sortie
         // only call the door quiet when no living lingerer holds the
         // treeline — killing or driving off ONE beast while others
@@ -773,29 +793,7 @@
       var crisis = this.aidCrisis();
       if (crisis && !crisis.resolved && crisis.raiders) crisis.ageParts = (crisis.ageParts || 0) + 1;
       if (crisis && !crisis.resolved && crisis.raiders && (crisis.ageParts || 0) >= 3) {
-        var threat = false;
-        try {
-          // LINGERING = BESIEGING (journey crisis r38 2026-10-21): the flag
-          // is only ever set on unmet raid raiders holding the treeline
-          // (havenGrowth.js). The old check also required the haven tile,
-          // but a lingerer mid-map (chasing, or restored after a fled
-          // fight before the next dawn re-pin) is still a threat — the tile
-          // equality let the 'fought' resolution fire with a raider still
-          // out there. Any living lingerer in the world is a threat.
-          var lings = this.lingeringRaiders ? this.lingeringRaiders() : [];
-          for (var i = 0; i < lings.length; i++) {
-            if (lings[i] && (lings[i].hp || 0) > 0) { threat = true; break; }
-          }
-          // LINGERER MID-FIGHT: a lingerer lifted off the map for a scholar
-          // fight is still a threat — it comes back to the treeline if the
-          // scholar flees or loses (worldOrigin restore). Don't resolve
-          // 'fought' mid-fight.
-          if (!threat) {
-            var tf = this.tbfight;
-            if (tf && !tf.over && tf.worldOrigin && tf.worldOrigin.lingering) threat = true;
-          }
-        } catch (e) {}
-        if (!threat) this.resolveAidCrisis('fought');
+        if (!this.aidRaidThreatPresent()) this.resolveAidCrisis('fought');
       }
       // SAFETY VALVE: a crisis that outlives attention moves on.
       if (crisis && !crisis.resolved && day - crisis.sinceDay > 6) {

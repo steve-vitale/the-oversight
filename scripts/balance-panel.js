@@ -45,6 +45,17 @@ function communityLossCoverage(row,engineLost,unknownPopulation=false){
   const lost=terminalLoss||c.sustainedEmpty?1:c.unknownObservations||unknownPopulation?null:0;
   return{status:lost===null?'unknown':'known',source:'driver-history-v1',lost,history:c};
 }
+function harnessCoverage(rows){
+  const out={version:1,cases:rows.length,known:0,unknown:[],recovered:[],budgeted:[],status:'not_observed',
+    scope:'Recorded harness interventions/guard conditions, not a causal diagnosis or complete human-input certification. Missing historical coverage remains unknown.'};
+  for(const item of rows){const row=item.row||item,key={policy:row.policy,seed:row.seed},d=row.harnessDiagnostics;
+    if(d==null){out.unknown.push(key);continue;}
+    if(d.version!==1||!['timeFreezeRouteAttempts','fightBudgetExhaustions','fightNoProgressBreaks','contestBudgetExhaustions'].every(k=>Number.isSafeInteger(d[k])&&d[k]>=0)||(d.timeFreezeRouteReturns!==undefined&&(!Number.isSafeInteger(d.timeFreezeRouteReturns)||d.timeFreezeRouteReturns<0||d.timeFreezeRouteReturns>d.timeFreezeRouteAttempts)))throw Error('Invalid harness input diagnostics: '+row.policy+':'+row.seed);
+    out.known++;if(d.timeFreezeRouteAttempts)out.recovered.push({...key,attempts:d.timeFreezeRouteAttempts,...(d.timeFreezeRouteReturns!==undefined?{returned:d.timeFreezeRouteReturns}:{})});
+    if(d.fightBudgetExhaustions||d.fightNoProgressBreaks||d.contestBudgetExhaustions)out.budgeted.push({...key,...d});
+  }
+  out.status=out.recovered.length?'intervened':out.unknown.length?'partial_unknown':out.budgeted.length?'budget_conditions':rows.length?'no_recorded_intervention':'not_observed';return out;
+}
 // PANEL CONTRACT RULINGS (Steve 2026-10-24) — pure metric mappings, unit-tested
 // in scripts/godpath/test-panel-contract-rulings.js:
 // - 665: the `table` metric counts SITTINGS (the seat taken), not invitations.
@@ -165,10 +176,9 @@ function install(G) {
     if(community.status==='invalid')errors.push({at:'community exposure',message:community.error});
     // LUCK INSTRUMENTATION (rogue P0-6): per-run binomial luck summary from
     // the recorded roll streams. Descriptive only — the luck metric columns
-    // are direction-neutral and reviewChanges:false, so they can never move
-    // a comparison verdict. A reviewer reads luckSummary.streams.*.tercile
-    // (unlucky/neutral/lucky) next to the run's wins to see whether an arm's
-    // wins came from luck or the lever.
+    // are explicitly diagnosticOnly, so they cannot move a comparison verdict.
+    // Coverage stays visible. These exposure-dependent descriptive indices
+    // do not establish that luck caused an ending or excuse domain warnings.
     let luckSummary = null;
     try { luckSummary = luck.summarizeRun(luckRolls); }
     catch (e) { errors.push({ at: 'luck summary', message: e.message }); }
@@ -287,6 +297,7 @@ async function run() {
   const rows = observed.filter(r => !r.excluded), exclusions = observed.filter(r => r.excluded), neutrality = proofs.filter(p => p.kind !== 'selection');
   const sourcesStable = JSON.stringify(sources) === JSON.stringify(manifest(root)) && observerDigest === observerHash() && contractDigest === observerIdentity(observerRoot).contractDigest;
   const panel = { schemaVersion: 1, flagCoverage:{discovered:require('./lib/simulation-flags').discover(root,sources,flagNames),rule:'Legacy flags retain explicit null defaults; additional source-declared flags enter cache inputs when set. Discovery names remain source-bound metadata, not a changed simulation setting.'}, sourceHeadStart, sourceHeadEnd: head(), sourceDigest, observerDigest, contractDigest, sources, options, validity: { sourcesStable, neutrality }, reused, rows };
+  panel.validity.harness=harnessCoverage(rows);
   if (options.occupation != null) { panel.exclusions = exclusions; panel.validity.selection = proofs.filter(p => p.kind === 'selection'); }
   fs.writeFileSync(path.join(out, 'panel.json.gz'), zlib.gzipSync(JSON.stringify(panel) + '\n'));
   console.log(`\nSaved ${out}; ${rows.length} cases, ${reused} cached jobs.`);
@@ -301,8 +312,11 @@ async function main() {
     // are exempted from the flags match and recorded on the report; the
     // exemption is never inferred from the panels themselves.
     const interventionFlags = arg('intervention-flags', null) ? arg('intervention-flags', null).split(',').map(s => s.trim()).filter(Boolean) : [];
-    const report = score.comparePanels(read(arg('before')), read(arg('after')), { interventionFlags }), out = arg('out');
-    fs.writeFileSync(out + '.json', JSON.stringify(report, null, 2) + '\n'); fs.writeFileSync(out + '.md', score.markdown(report));
+    const before=read(arg('before')),after=read(arg('after')),report = score.comparePanels(before,after,{interventionFlags}), out = arg('out');
+    report.harnessInputCoverage={before:harnessCoverage(Array.isArray(before)?before:before.rows||[]),after:harnessCoverage(Array.isArray(after)?after:after.rows||[])};
+    if(report.decision==='no_material_signal'&&!report.errors.length&&Object.values(report.harnessInputCoverage).some(c=>c.status!=='no_recorded_intervention'))report.decision='review_required';
+    const summary=Object.entries(report.harnessInputCoverage).map(([side,c])=>`${side}: ${c.status}; ${c.known}/${c.cases} known, ${c.recovered.length} cases with routing attempts, ${c.budgeted.length} with guard conditions.`).join('\n\n');
+    fs.writeFileSync(out + '.json', JSON.stringify(report, null, 2) + '\n'); fs.writeFileSync(out + '.md', score.markdown(report)+'\n## Harness input coverage\n\n'+summary+'\n\nGuard conditions require investigation; they are not automatic balance regressions. Missing historical coverage is unknown.\n');
     console.log(report.decision); if (report.decision !== 'no_material_signal') process.exitCode = 2; return;
   }
   return run();
@@ -312,5 +326,5 @@ function sourceHead(root) {
   if (!fs.existsSync(path.join(root, '.git'))) return null;
   return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
-module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles, communityLossCoverage, deathMetrics, tableSitting };
+module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles, communityLossCoverage, harnessCoverage, deathMetrics, tableSitting };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

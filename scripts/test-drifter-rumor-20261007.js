@@ -10,48 +10,17 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = a + 0x6D2B79F5 | 0;
-    let t = Math.imul(a ^ a >>> 15, 1 | a);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261007', 10);
-const realRandom = Math.random;
-Math.random = mulberry32(SEED);
-
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-
-const SCRIPTS = [
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
-  'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js',
-  'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
-  'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js',
-];
-for (const f of SCRIPTS) {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.error(`FAILED loading ${f}: ${e.message}`); process.exit(2); }
-}
-delete global.window;
-
-const Game = globalThis.Scattering.Game;
+let Game;
 let failures = 0, checks = 0;
 const fail = (msg) => { failures++; console.log('  FAIL: ' + msg); };
 const ok = (cond, msg) => { checks++; if (cond) console.log('  ok: ' + msg); else fail(msg); };
 // force the next Math.random() calls to a fixed value (restores seeded PRNG after)
-const rig = (v, fn) => { Math.random = () => v; try { return fn(); } finally { Math.random = mulberry32(SEED); } };
+const rig = (v, fn) => { const saved = Math.random; Math.random = () => v; try { return fn(); } finally { Math.random = saved; } };
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED, narration: true });
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -65,12 +34,19 @@ const rig = (v, fn) => { Math.random = () => v; try { return fn(); } finally { M
   const fired = rig(0, () => Game.maybeVillageRumor(v));
   ok(fired === true, 'maybeVillageRumor returns true on success');
   ok(v.rumored === true, 'village marked rumored');
-  ok(v.rumorDay === Game.state.scholar.day, `rumorDay = scholar day (${v.rumorDay})`);
+  ok(v.rumorDay == null, 'queued word has no delivery day');
+  ok(!Game.villageLoreEntry(Game.playerKnowerId(), v.id), 'queueing grants no player village lore');
   const rs = Game.state.scholar.rumors || [];
   ok(rs.length === n0 + 1, 'exactly one rumor queued');
   const r = rs[rs.length - 1];
   ok(r.type === 'village' && r.villageId === v.id && /traveler passed through/i.test(r.text) && r.text.includes(v.name),
     `rumor text names the village: "${String(r.text).slice(0, 70)}..."`);
+
+  // The actual delivery grants knowledge and stamps the current day.
+  ok(Game.deliverVillageRumors() === true, 'traveler actually delivers the queued rumor');
+  ok(r.delivered === true && v.rumorDay === Game.state.scholar.day, 'delivery stamps the actual day');
+  const lore = Game.villageLoreEntry(Game.playerKnowerId(), v.id);
+  ok(lore && lore.how === 'rumor', 'delivery grants the player rumor provenance');
 
   // 2. no double-fire: second call (even rigged) does nothing
   const fired2 = rig(0, () => Game.maybeVillageRumor(v));

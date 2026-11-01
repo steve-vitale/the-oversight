@@ -42,7 +42,9 @@ function ok(name, cond) {
   // 2. a new vow is refused — and cites the rotted one
   said.length = 0;
   const mk2 = Game.promiseHelp(vid);
-  ok('second vow refused', mk2 === null);
+  ok('second vow returns the actual broken-word refusal', mk2?.ok === false &&
+    mk2.reason === 'broken-word' && /You said that before/.test(mk2.line) &&
+    !v.promises[vid]);
   ok('refusal cites the broken word', said.some(s => s.includes('You said that before')));
 
   // 3. amends reopen the door

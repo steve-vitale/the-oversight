@@ -89,7 +89,7 @@
         "cost": {
           "turn": true
         },
-        "effect": "Once per fight: study the monster's stance. Reveals its likely next move (knowledge-gated)."
+        "effect": "If you recognize the enemy's attack pattern, reveal what it is preparing. Once per fight, including an unsuccessful read."
       }
     ],
     "deepening": {
@@ -127,7 +127,7 @@
         "cost": {
           "turn": true
         },
-        "effect": "Spend turn aiming. Next shot is 2.5x damage and cannot miss. You are exposed (enemies get +hit)."
+        "effect": "Your next Strike deals 2.5x damage and cannot miss. You cannot dodge enemy attacks until your next turn."
       },
       {
         "id": "clean_shot",
@@ -2672,7 +2672,7 @@
           "turn": true,
           "kcal": 50
         },
-        "effect": "Clear stun, slow, and bleed. Once per fight. Costs 50 kcal \u2014 your body burns fuel to keep going."
+        "effect": "Clear stun, slow, and bleed. Once per fight."
       }
     ],
     "deepening": {
@@ -4429,7 +4429,7 @@
         "mult": 1.6,
         "strikes": 2,
         "perFight": 2,
-        "effect": "Burn 150 kcal: next 2 strikes +60%. No turn spent."
+        "effect": "Your next 2 strikes deal 60% more damage. No action spent."
       }
     ],
     "synergyHints": [
@@ -4697,7 +4697,7 @@
         "do": "feed_camp",
         "hunger": 40,
         "perDay": 1,
-        "effect": "Spend 300 kcal of your food: every villager in camp loses 40 hunger."
+        "effect": "Every villager in camp loses 40 hunger."
       }
     ],
     "deepening": {

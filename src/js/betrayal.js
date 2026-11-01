@@ -25,6 +25,7 @@
 //   - visitorBuyWare(visId, idx)
 //   - traderSell(visId, packIdx)
 //   - traderSellStock(vis)
+//   - traderCurioValue(it) -> authored tab value for material curios, never calories
 //   - traderAppraise(vis, it) -> { verdict, pricePerUnit, line }
 //   - traderKnowsItem(vis, it)
 //   - traderItemKey(it)
@@ -2272,7 +2273,9 @@
     // access to the hall they'd been walked out of ("The pantry is in the
     // hall. Your hands are not" — but their hands were). The walk-out is
     // physical too.
-    try { if (s.insideHaven) s.insideHaven = null; } catch (e) {}
+    // Use the canonical scene flag. Null used to render the hall while its
+    // controls refused the door, trapping exiles and old saves on the grid.
+    s.insideHaven = false;
     try { this.recordTrauma('exile'); } catch (e) {}
     return true;
   },
@@ -2547,7 +2550,7 @@
     try {
       const seenHow = (typeof this.mapSeen === 'function') ? this.mapSeen(ov.x, ov.y) : null;
       const hive = (typeof this.hiveSight === 'function') ? this.hiveSight() : false;
-      if (!seenHow && !hive) return null;
+      if (!seenHow && !hive && !this.villageSighting(ov.id)) return null;
     } catch (e) { return null; }
     const s = this.state.scholar;
     // proximity, computed once: every action on this card is face to face.
@@ -3429,6 +3432,13 @@
     } catch (e) {}
     return { staples, specialties };
   },
+  // Read marked barter value from the canonical material definition.
+  // Keepsakes retain their existing wear/bond path; this is not automatic pawning.
+  traderCurioValue(it) {
+    const def = it && (this.data.items || []).find(d => d.id === it.itemId);
+    return def && def.class === 'material' && def.origin === 'alien' &&
+      Number.isFinite(def.tradeValue) && def.tradeValue > 0 ? Math.floor(def.tradeValue) : 0;
+  },
   // traderItemKey: identity for knowledge checks. plantId/itemId when the
   // item carries one, else the plain name.
   traderItemKey(it) {
@@ -3454,6 +3464,9 @@
   traderAppraise(vis, it) {
     const day = (this.state.scholar || {}).day || 0;
     const name = it.name || 'it';
+    const curio = this.traderCurioValue(it);
+    if (curio > 0) return { verdict: 'curio', pricePerUnit: curio,
+      line: '"' + this.capFirst(name) + ' — I can move that. ' + curio + ' a piece on your tab."' };
     const base = Math.max(0, Math.round(it.kcalEach || 0));
     // BONUS-AWARE (break-it food 2026-10-09): one spoil boundary everywhere.
     // The raw check called bonus-alive food rotten — the trader refused goods
@@ -3805,10 +3818,10 @@
     this.creditGoodsTrade(vid, price);
     return true;
   },
-  // traderSellStock(vis): pack food stacks with appraisals, for the sell view.
+  // traderSellStock(vis): pack food and marked material curios, for the sell view.
   traderSellStock(vis) {    const inv = this.state.scholar.inventory || [];
     return inv.map((it, idx) => ({ idx, it, ap: this.traderAppraise(vis, it) }))
-      .filter(e => (e.it.kcalEach || 0) > 0 && (e.it.units || 0) > 0);
+      .filter(e => ((e.it.kcalEach || 0) > 0 || this.traderCurioValue(e.it) > 0) && (e.it.units || 0) > 0);
   },
   // traderSell(visId, packIdx): sell the whole stack. The price lands on the
   // trader's tab as credit toward his wares.
@@ -3820,12 +3833,20 @@
     const inv = this.state.scholar.inventory || [];
     const it = inv[packIdx];
     if (!it || (it.units || 0) <= 0) return null;
+    const curio = this.traderCurioValue(it);
+    if (curio && (this.over || this.state.scholar.health <= 0 || (!this.map || this.playerTile()?.type !== 'haven') ||
+        (this.tbfight && !this.tbfight.over) || (this.state.activeContest && this.state.activeContest.phase !== 'done'))) {
+      this.say('Keep it for a visiting trader at Haven, when you are free to trade.');
+      return null;
+    }
+    if (!(it.kcalEach > 0) && !curio) return null;
     const ap = this.traderAppraise(vis, it);
     if (ap.verdict === 'refuse' || ap.verdict === 'decline') {
       this.say(ap.line);
       return null;
     }
     const units = it.units, total = ap.pricePerUnit * units;
+    if (!Number.isFinite(total) || total <= 0) return null;
     vis.credit = (vis.credit || 0) + total;
     const name = it.name || 'it';
     inv.splice(packIdx, 1);

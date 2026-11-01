@@ -1,211 +1,77 @@
 #!/usr/bin/env node
-// PROOF TEST: spool signature mechanic (sigW3b, 2026-10-10).
-// Proves, driving a real headless fight:
-//   1. RECORD: the first 3 player turns are recorded (harmless, narrated),
-//      then the spool flips to REPLAY with an honest loaded-reel preview.
-//   2. REPLAY: recorded strikes come back as ~the same damage; the reel
-//      preview names the loaded actions (telegraph honesty).
-//   3. COUNTERPLAY (feed it a heal): a recorded heal replays as a HEAL on
-//      the player.
-//   4. COUNTERPLAY (boring tape): 3 recorded waits -> the replay does
-//      nothing, every cycle, and the fight still terminates.
-//   5. Examine-reel action reads exact numbers.
-// BEFORE/AFTER: MECHANIC=off skips hook registration -> the gate goes RED.
-// Green across 3 seeds: SEED=1,2,3 node scripts/test-sig-spool-20261010.js
-const H = require('./sim-harness.js');
-const SEED = parseInt(process.env.SEED || '1', 10);
-const MECHANIC_OFF = process.env.MECHANIC === 'off';
-
-let pass = 0, fail = 0;
-const ok = (name, cond, detail) => {
-  if (cond) { pass++; }
-  else { fail++; console.log('  FAIL: ' + name + (detail ? ' — ' + detail : '')); }
-};
-
-function endTurn(Game) {
-  if (!Game.tbfight || Game.tbfight.over) return;
-  if (!Game.tbIsPlayerTurn()) return;
-  const p = Game.tbFighter('p');
-  if (!p) return;
-  p.moveLeft = 0; p.acted = true;
-  Game.tbAfterPlayerAction();
+'use strict';
+// Real public actions, one seeded runtime per child scene. Prepared open ground
+// and a pre-fight wound are explicit fixtures, not naturally acquired campaigns.
+const K=require('./godpath/lib'),a=require('assert/strict'),cp=require('child_process');
+async function encounter(mode,seed){
+ const G=await K.load({seed,narration:true}),s=K.newRun(G),bearer=G.villagerId,checks=[],audio=[];
+ const check=(name,condition,details)=>checks.push({name,condition:!!condition,details});
+ const registered=typeof globalThis.MonsterBehaviorHooks?.spoolWatch==='function'&&typeof G.tbSpoolExamineReel==='function';
+ check('signature hook and public reel action registered',registered);if(!registered)return{mode,seed,checks};
+ s.equipped={};s.inventory=[];
+ if(mode==='heal'){
+  // Wounded BEFORE combat; never damage/heal a fighter to manufacture a verb.
+  s.health=40;const def=K.readJSON('src/data/items.json').find(x=>x.id==='field_sutures');a(def);
+  s.inventory.push({itemId:def.id,name:def.name,kg:def.kg,units:1});
+ }
+ const grid=G.genDetail(G.map.px,G.map.py);for(const row of grid)row.fill('dirt');
+ const audioEvent=G.audioEvent;G.audioEvent=function(name,...args){audio.push(name);return audioEvent.call(this,name,...args);};
+ const logStart=G.log.length,m=K.fight(G,'spool',{px:3,py:4,mx:4,my:4}),f=G.tbfight,p=G.tbFighter('p');a(m&&f&&p);
+ const startingHp=p.hp,monsterHp=m.hp,damage=G.tbDamage,incoming=[],strikes=[];
+ let ownStrike=false;const playerStrike=G.tbPlayerStrike;G.tbPlayerStrike=function(...args){const prior=ownStrike;ownStrike=this.tbFighter('p')===p&&this.villagerId===bearer;try{return playerStrike.apply(this,args);}finally{ownStrike=prior;}};
+ G.tbDamage=function(key,amount,label,source,...args){const target=key==='p'?p:key===m.key?m:null,before=target?.hp,result=damage.call(this,key,amount,label,source,...args);if(target&&before>target.hp)(key==='p'?incoming:strikes).push({requested:amount,debit:before-target.hp,source,label,publicPlayerStrike:ownStrike});return result;};
+ function active(){return G.tbfight===f&&!f.over&&!G.over&&p.alive&&G.villagerId===bearer;}
+ function wait(){a(active()&&G.tbIsPlayerTurn(),'Original living bearer must still own the public turn');a.equal(G.tbPlayerWait(),true);}
+ function finishPublicTurn(){if(active()&&G.tbIsPlayerTurn())wait();}
+ const recordHp=[];let healing;
+ for(let turn=0;turn<3;turn++){
+  a(active()&&G.tbIsPlayerTurn());
+  if(mode==='strike')G.tbPlayerStrike(m.key);
+  if(mode==='heal'&&turn===1){const before=p.hp,idx=s.inventory.findIndex(x=>x.itemId==='field_sutures');a(idx>=0);G.useItem(idx);healing={before,after:p.hp,paidAction:p.acted,consumed:!s.inventory.some(x=>x.itemId==='field_sutures')};}
+  finishPublicTurn();recordHp.push(p.hp);
+ }
+ const reel=JSON.parse(JSON.stringify(m.spRec||[])),recordLines=G.log.slice(logStart).map(String);
+ check('exactly three actual player turns recorded and replay loaded',reel.length===3&&m.spPhase==='replay',reel);
+ check('record phase is harmless to the actual bearer',incoming.length===0&&recordHp.every(h=>h>=startingHp),recordHp);
+ check('three record cues and one replay-start audio event',audio.filter(x=>x==='spoolRecord').length===3&&audio.filter(x=>x==='spoolReplayStart').length===1,audio);
+ check('REC3/3 and honest loaded-reel preview narrated',recordLines.some(x=>/REC ● \(3\/3\)/.test(x))&&recordLines.some(x=>x.includes('LOADED:')));
+ let ending=null;
+ if(mode==='strike'){
+  check('each real Strike supplies its own recorded damage',reel.length===3&&strikes.length===3&&reel.every((e,i)=>e.kind==='strike'&&e.dmg>0&&e.dmg===strikes[i].debit&&strikes[i].publicPlayerStrike),{reel,strikes});
+  const n=G.log.length,cycle=m.spCycle;
+  check('public Examine consumes the action',G.tbSpoolExamineReel()===true&&p.acted);
+  const detail=G.log.slice(n).map(String).join(' ');
+  check('reel examination lists every exact recorded damage and next frame',reel.every((e,i)=>detail.includes((i+1)+'. STRIKE → hits you for ~'+e.dmg))&&detail.includes('Next up: 1/3'),detail);
+  const nIncoming=incoming.length;finishPublicTurn();let replayWaits=0;while(active()&&m.spCycle<cycle+3&&replayWaits++<6)wait();
+  const hits=incoming.slice(nIncoming);
+  check('one actual replay cycle damages the original body with matching swings',hits.length===3&&hits.every((h,i)=>h.source===m.key&&h.debit>0&&h.debit>=Math.round(reel[i].dmg*0.9)&&h.debit<=Math.round(reel[i].dmg*1.1)),hits);
+  check('strike replay is narrated and emits replay audio',G.log.slice(n).map(String).filter(x=>/REPLAY \d\/3: STRIKE/.test(x)).length===3&&audio.filter(x=>x==='spoolReplay').length===3);
+ }else if(mode==='heal'){
+  check('real medicine heals and pays/consumes its action and item',healing?.after>healing?.before&&healing.paidAction&&healing.consumed,healing);
+  check('record is exactly Wait, real item Heal, Wait',JSON.stringify(reel.map(e=>e.kind))===JSON.stringify(['wait','heal','wait'])&&reel[1].amt===healing.after-healing.before,{reel,healing});
+  const changes=[],n=G.log.length;for(let frame=0;frame<3&&active();frame++){const before=p.hp;wait();changes.push(p.hp-before);}
+  check('only recorded heal frame restores actual HP, respecting real capacity',changes.length===3&&changes[0]===0&&changes[1]===Math.min(reel[1].amt,p.maxHp-healing.after)&&changes[1]>0&&changes[2]===0,changes);
+  check('replay honestly identifies the healing frame',G.log.slice(n).map(String).some(x=>/REPLAY 2\/3: HEAL/.test(x)));
+ }else{
+  check('boring tape is exactly three real Wait actions',reel.length===3&&reel.every(e=>e.kind==='wait'),reel);
+  const before=p.hp,n=G.log.length,cycle=m.spCycle;for(let i=0;i<6&&active();i++)wait();
+  check('two complete replay cycles do no damage',m.spCycle===cycle+6&&p.hp===before&&incoming.length===0,{cycle:m.spCycle,hp:p.hp});
+  check('every harmless replay frame narrates patience',G.log.slice(n).map(String).filter(x=>x.includes('Your own patience, played back at you')).length===6);
+  let swings=0;while(active()&&swings<200){a(G.tbIsPlayerTurn());G.tbPlayerStrike(m.key);swings++;finishPublicTurn();}
+  ending={swings,result:f.result,over:f.over,monsterHp:m.hp,monsterStart:monsterHp,playerHp:p.hp,corpse:m._deathCorpse&&{monsterId:m._deathCorpse.monsterId,killerId:m._deathCorpse.killerId},strikeDamage:strikes.reduce((n,h)=>n+h.debit,0)};
+  check('ordinary public Strikes finish the actual full-health monster',f.over&&f.result==='won'&&!m.alive&&!m.fled&&m.hp<=0&&swings>1&&swings<200&&ending.strikeDamage>=monsterHp&&monsterHp===m.maxHp&&strikes.every(h=>h.publicPlayerStrike),ending);
+  check('actual corpse credits this bearer, not a successor or companion',m._deathCorpse?.monsterId==='spool'&&m._deathCorpse?.killerId===bearer,ending.corpse);
+ }
+ check('original normal-capacity bearer and fighter HP remain synchronized',G.villagerId===bearer&&G.state.scholar===s&&p.alive&&p.hp>0&&p.maxHp===100&&s.health===p.hp,{hp:p.hp,health:s.health,max:p.maxHp});
+ check('scene has only this human fighter',f.fighters.filter(x=>x.kind!=='monster').length===1);
+ return{mode,seed,checks,reel,incoming,healing,ending,audio};
 }
-function monsterOf(Game) {
-  return Game.tbfight.fighters.find(x => x.kind === 'monster' && x.alive && !x.fled);
+if(process.argv[2]==='--child')encounter(process.argv[3],+process.argv[4]).then(r=>console.log('SPOOL_RESULT '+JSON.stringify(r))).catch(e=>{console.error(e.stack);process.exitCode=1;});
+else{
+ const T=K.reporter('Spool public recording and replay'),seeds=process.env.SEED?[Number(process.env.SEED)]:[1,2,3];
+ for(const seed of seeds)for(const mode of ['strike','heal','wait']){
+  const child=cp.spawnSync(process.execPath,[__filename,'--child',mode,String(seed)],{cwd:K.ROOT,encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024});a.equal(child.status,0,child.stderr+'\n'+child.stdout);
+  const lines=child.stdout.split('\n').filter(x=>x.startsWith('SPOOL_RESULT '));a.equal(lines.length,1);const r=JSON.parse(lines[0].slice(13));console.log(JSON.stringify(r));for(const c of r.checks)T.ok(seed+' '+mode+': '+c.name,c.condition,JSON.stringify(c.details));
+ }
+ T.done();
 }
-function endFight(Game) {
-  if (Game.tbfight) { Game.tbfight.over = true; Game.tbfight = null; }
-  Game.state.scholar.monster = null;
-}
-// run monster turns until control returns to the player (or fight ends);
-// if it's currently the player's turn, end it first.
-// returns per-monster-turn hp deltas + say lines seen during them.
-function runMonsterPhase(Game, said) {
-  endTurn(Game);
-  const deltas = [];
-  let guard = 0;
-  while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && guard++ < 8) {
-    const p = Game.tbFighter('p');
-    const before = p.hp;
-    const n0 = said.length;
-    Game.tbAdvance();
-    deltas.push({ dhp: Game.tbFighter('p').hp - before, lines: said.slice(n0) });
-  }
-  return deltas;
-}
-// test-fixture reposition that keeps the scholar's recorded position in
-// sync (tbPlayerMove does the same) so the spool's first-turn recovery
-// doesn't misread setup as a player move.
-function placePlayer(Game, x, y) {
-  const p = Game.tbFighter('p');
-  p.mx = x; p.my = y;
-  Game.state.scholar.mx = x; Game.state.scholar.my = y;
-}
-
-(async () => {
-  const { Game } = await H.loadGame({ seed: SEED });
-  await H.setupGame(Game);
-  Game.depart();
-  console.log('== SPOOL PROOF, SEED ' + SEED + ', MECHANIC ' + (MECHANIC_OFF ? 'OFF' : 'ON') + ' ==');
-  const said = [];
-  Game.say = (t) => { said.push(String(t)); };
-  const audio = [];
-  Game.audioEvent = (n, d) => { audio.push(n); };
-
-  const HB = globalThis.MonsterBehaviorHooks || {};
-  const mechanicOn = typeof HB.spoolWatch === 'function' && typeof Game.tbSpoolExamineReel === 'function';
-  ok('mechanic registered (hook + player action)', mechanicOn,
-    'spoolWatch=' + typeof HB.spoolWatch + ' tbSpoolExamineReel=' + typeof Game.tbSpoolExamineReel);
-  if (!mechanicOn) {
-    console.log('MECHANIC off — signature absent as expected; skipping behavior checks.');
-    console.log(`\n${pass} passed, ${fail} failed`);
-    process.exit(1);
-  }
-
-  const s = Game.state.scholar;
-
-  // ---------- Fight 1: record strikes -> replay mirrors them ----------
-  s.health = 9000; s.mx = 4; s.my = 4;
-  Game.startCombat('spool');
-  let m = monsterOf(Game);
-  let p = Game.tbFighter('p');
-  placePlayer(Game, m.mx + 1, m.my);
-  let rounds = 0;
-  for (let i = 0; i < 3; i++) {
-    while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-    Game.tbPlayerStrike(monsterOf(Game).key);
-    endTurn(Game);
-  }
-  m = Game.tbfight.fighters.find(x => x.kind === 'monster');
-  ok('3 turns recorded', m.spRec && m.spRec.length === 3, JSON.stringify(m.spRec));
-  ok('all three recorded as strikes', (m.spRec || []).every(e => e.kind === 'strike'));
-  ok('flipped to replay', m.spPhase === 'replay', m.spPhase);
-  ok('REC narration honest', said.some(t => /REC ● \(3\/3\)/.test(t)));
-  ok('loaded-reel preview shown', said.some(t => /LOADED:.*STRIKE/.test(t)));
-  ok('replay-start audio fired', audio.includes('spoolReplayStart'));
-  // examine reel: exact numbers
-  while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-  said.length = 0;
-  ok('examine reel works', Game.tbSpoolExamineReel() === true);
-  endTurn(Game);
-  ok('examine shows exact numbers', said.some(t => /hits you for ~\d+/.test(t)), said[0]);
-  // replay turns damage the player ~recorded amounts
-  p = Game.tbFighter('p');
-  const hp0 = p.hp;
-  const deltas = runMonsterPhase(Game, said);
-  const replayLines = said.join(' ');
-  ok('replay turns narrated', /REPLAY \d\/3: STRIKE/.test(replayLines));
-  const took = hp0 - Game.tbFighter('p').hp;
-  ok('replayed strikes damage the player', took > 0, 'took ' + took);
-  ok('replay audio fired', audio.includes('spoolReplay'));
-  endFight(Game);
-
-  // ---------- Fight 2: feed it a heal -> the replay heals ----------
-  s.health = 100; s.mx = 4; s.my = 4;
-  s.inventory = [{ itemId: 'field_sutures', name: 'Field Sutures', units: 1 }];
-  Game.startCombat('spool');
-  m = monsterOf(Game);
-  p = Game.tbFighter('p');
-  placePlayer(Game, m.mx + 1, m.my);
-  rounds = 0;
-  // turn 1: get hurt (setup), so the heal has something to heal
-  while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-  Game.tbDamage('p', Math.floor(p.maxHp / 2), 'setup', null);
-  const hurtHp = Game.tbFighter('p').hp;
-  endTurn(Game);
-  // turn 2: heal via a real item
-  while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-  p = Game.tbFighter('p');
-  const idx = (s.inventory || []).findIndex(i => (i.itemId || i.id) === 'field_sutures');
-  ok('heal item present', idx >= 0);
-  Game.useItem(idx);
-  endTurn(Game);
-  // turn 3: wait
-  while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-  Game.tbPlayerWait();
-  endTurn(Game);
-  m = Game.tbfight.fighters.find(x => x.kind === 'monster');
-  const kinds = (m.spRec || []).map(e => e.kind);
-  ok('recorded [wait, heal, wait] (hurt setup is not a player verb)', JSON.stringify(kinds) === JSON.stringify(['wait', 'heal', 'wait']),
-    JSON.stringify(kinds) + ' hurtHp=' + hurtHp);
-  ok('heal amount recorded', (m.spRec[1] || {}).amt > 0, JSON.stringify(m.spRec[1]));
-  ok('replay phase reached', m.spPhase === 'replay', m.spPhase);
-  // hurt again, then watch replay cycles for the heal coming back
-  p = Game.tbFighter('p');
-  Game.tbDamage('p', Math.floor(p.maxHp / 2), 'setup', null);
-  let healed = false, healNarrated = false;
-  for (let c = 0; c < 4; c++) {
-    if (!Game.tbfight || Game.tbfight.over) break;
-    const b = Game.tbFighter('p').hp;
-    const n0 = said.length;
-    if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); endTurn(Game); }
-    let g = 0;
-    while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && g++ < 50) Game.tbAdvance();
-    const a = Game.tbFighter('p').hp;
-    if (a > b) healed = true;
-    const seg = said.slice(n0).join(' ');
-    if (/REPLAY/.test(seg) && /HEAL/.test(seg)) healNarrated = true;
-  }
-  ok('replay HEALS the player (feed-it-a-heal counterplay)', healed);
-  ok('heal replay narrated honestly', healNarrated);
-  endFight(Game);
-
-  // ---------- Fight 3: boring tape -> useless replay, fight terminates ----------
-  s.health = 9000; s.mx = 4; s.my = 4;
-  s.inventory = [];
-  Game.startCombat('spool');
-  m = monsterOf(Game);
-  p = Game.tbFighter('p');
-  rounds = 0;
-  for (let i = 0; i < 3; i++) {
-    while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-    Game.tbPlayerWait();
-    endTurn(Game);
-  }
-  m = Game.tbfight.fighters.find(x => x.kind === 'monster');
-  ok('boring tape recorded', (m.spRec || []).every(e => e.kind === 'wait'), JSON.stringify((m.spRec || []).map(e => e.kind)));
-  p = Game.tbFighter('p');
-  const bhp = p.hp;
-  said.length = 0;
-  for (let c = 0; c < 3; c++) {
-    while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && rounds++ < 200) Game.tbAdvance();
-    Game.tbPlayerWait();
-    endTurn(Game);
-    runMonsterPhase(Game, said);
-  }
-  ok('useless replay deals no damage over a full cycle', Game.tbFighter('p').hp === bhp, 'hp ' + bhp + ' -> ' + Game.tbFighter('p').hp);
-  ok('wait replay narrated', said.join(' ').includes('Your own patience, played back at you'));
-  // terminate for real: kill it
-  m.hp = 3;
-  while (Game.tbfight && !Game.tbfight.over && rounds++ < 200) {
-    if (Game.tbIsPlayerTurn()) {
-      const mm = monsterOf(Game);
-      if (mm) { placePlayer(Game, mm.mx + 1, mm.my); Game.tbPlayerStrike(mm.key); }
-      endTurn(Game);
-    } else Game.tbAdvance();
-  }
-  ok('fight terminates (won) within 200 rounds', !Game.tbfight || Game.tbfight.over, 'rounds=' + rounds);
-
-  console.log(`\n${pass} passed, ${fail} failed`);
-  process.exit(fail ? 1 : 0);
-})().catch(e => { console.error('TEST CRASH:', e.message); process.exit(1); });

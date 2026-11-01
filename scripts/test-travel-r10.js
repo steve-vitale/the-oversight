@@ -224,11 +224,16 @@ async function main() {
       const fakePath = [];
       for (let i = 1; i <= 14; i++) fakePath.push([i, 0]);
       const pos = { mx: 0, my: 0, kcal: 9000 };
-      const landed = [];
+      const landed = [], checkpoints = [];
       const stubGame = {
         inCombat: () => false,
+        save() { checkpoints.push({mx:pos.mx,my:pos.my}); return true; },
         beginPathWalk: () => fakePath,
-        state: { scholar: pos },
+        state: { scholar: pos, runKey: 'long-walk-test' },
+        villagerId: 'p', map: { px: 4, py: 4 },
+        captureTravelCheckpoint() {
+          return { state: this.state, bearer: this.villagerId, key: this.state.runKey, x: this.map.px, y: this.map.py };
+        },
       };
       wireStepHook(landed);
       MoveAnim.hooks.step = (st) => {
@@ -240,11 +245,18 @@ async function main() {
       const walkToken = { current: null };
       const expeditionScreen = () => {};
       let doneVal = 'unset';
-      // Rebind the function's module-scope names (walkSeq, walkToken,
-      // expeditionScreen) in a closure so the SHIPPED source runs as-is.
-      const runnerSrc = `let walkSeq = 0;\nconst walkToken = { current: null };\nconst expeditionScreen = () => {};\n${fnSrc}\nreturn walkPathAnimated;`;
-      const walkPathAnimated = new Function('Game', 'MoveAnim', runnerSrc)(stubGame, MoveAnim);
-      walkPathAnimated(14, 0, (v) => { doneVal = v; });
+      // Rebind the full shipped closure, including its context/cancellation
+      // helpers. This queue test's fake path deliberately exceeds the grid;
+      // native terrain/payment/NPC behavior is covered by test-walk-cadence.
+      const helpers = ['saveWalkProgress', 'walkSceneCurrent', 'cancelPathWalk'].map(name => {
+        const match = appSrc.match(new RegExp(`function ${name}\\([^)]*\\) \\{[\\s\\S]*?\\n  \\}`));
+        if (fnSrc.includes(name) && !match) throw new Error('Missing shipped walk dependency: ' + name);
+        return match ? match[0] : '';
+      }).join('\n');
+      const runnerSrc = `let walkSeq = 0;\nconst walkToken = { current: null };\nconst expeditionScreen = () => {};\n${helpers}\n${fnSrc}\nreturn { walkPathAnimated, cancelPathWalk: typeof cancelPathWalk === 'function' ? cancelPathWalk : null };`;
+      const runner = new Function('Game', 'MoveAnim', runnerSrc)(stubGame, MoveAnim);
+      let callbacks = 0;
+      runner.walkPathAnimated(14, 0, (v) => { callbacks++; doneVal = v; });
       await drainMoveAnim();
       console.log(`  [info] T3 14-step path: landed=${landed.length}, onDone=${doneVal}, maxQueue=${MoveAnim.maxQueue}`);
       if (BEFORE) {
@@ -253,6 +265,17 @@ async function main() {
       } else {
         ok('T3: full 14-step path lands', landed.length === 14, `landed=${landed.length}`);
         ok('T3: onDone(true) after the last step', doneVal === true, `onDone=${doneVal}`);
+        ok('T3: finished chain checkpoints exactly its landed destination', checkpoints.length===1&&checkpoints[0].mx===14);
+        if (runner.cancelPathWalk) {
+          runner.cancelPathWalk();
+          ok('T3: a finished walk is not cancelled or notified twice', callbacks === 1 && doneVal === true);
+          landed.length = 0; pos.mx = 0; pos.my = 0; callbacks = 0; doneVal = 'unset';
+          runner.walkPathAnimated(14, 0, v => { callbacks++; doneVal = v; });
+          runner.cancelPathWalk(); MoveAnim.stopAll();
+          await drainMoveAnim();
+          ok('T3: cancellation retires chained future steps and notifies once', landed.length === 1 && callbacks === 1 && doneVal === false, `landed=${landed.length}, callbacks=${callbacks}`);
+          ok('T3: cancellation checkpoints only the actual landed square', checkpoints.length===2&&checkpoints[1].mx===1);
+        }
       }
       MoveAnim.stopAll();
     }

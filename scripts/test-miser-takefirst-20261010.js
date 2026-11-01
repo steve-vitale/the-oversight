@@ -220,7 +220,17 @@ freshGame();
 {
   const st = Game.stashState();
   st.materials.branch = 10;
-  Game.addMaterial('stone', 52); // 15.6kg + 2kg water = 17.6 of 20kg: fits 4 of 5 branches
+  Game.addMaterial('stone', 1);
+  // Character strength/packing now vary. Arrange a genuine four-unit boundary
+  // from physical item mass and the declared limit, not a fixed52-stone load.
+  const existing=new Set(Game.state.scholar.inventory);
+  Game.addMaterial('branch',1);
+  const unit=Game.state.scholar.inventory.find(i=>!existing.has(i));
+  if(!unit||Game.materialCount('branch')!==1)throw Error('Boundary fixture requires one real branch unit');
+  const unitKg=unit.kg;Game.state.scholar.inventory.splice(Game.state.scholar.inventory.indexOf(unit),1);
+  const mult=Game.modTarget('carry.weight_mult',1),ballast=(Game.carryLimit()-Game.packWeight()-4.5*unitKg*mult)/mult;
+  if(!Number.isFinite(ballast)||ballast<=0)throw Error('Boundary fixture requires positive weighted ballast');
+  Game.state.scholar.inventory.push({name:'Declared boundary ballast',units:1,kg:ballast,kcalEach:0});
   const t0 = trustOf();
   Game.takeMaterial('branch', 5);
   const got = Game.materialCount('branch');

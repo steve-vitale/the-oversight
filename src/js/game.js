@@ -22,6 +22,7 @@
 //   - fieldFitBlock(tx, ty, mx, my, size) (world-spawn footprint validation)
 //   - tbCanOccupy(f, nx, ny) (validated movement: whole-footprint occupancy)
 //   - tbHumanFighter(vid, kind, pos, extra), tbPlaceHumans(fighters, gmax), tbSyncHumanHealth(f) (living human combat state, legal entry and persistent wounds)
+//   - tbArrangeFootprints() -> place complete live bodies legally, expanding the battle grid when needed without dropping fighters
 //   - tbAdvance()
 //   - tbOtherAllies(actor), tbCommandPlayer(actor, label), tbBeginCommandedPlayerTurn(), tbResumeCommandedTurn() (canonical support recipients; queued human-chosen extra turns through save/load)
 //   - tbRoundWrap(f) (shared round wrap: order re-sort, ROUND call, belltoad chorus arrivals, whiff-forever guard — sync + stepped-async)
@@ -54,6 +55,7 @@
 //   - stablePersonKey(vid) -> string (deterministic per-person key for variation hashes: data.villagers index, append-only in creation order; villager IDs embed Date.now() so the ID string is NOT stable across runs)
 //   - ensureRosterPerson(nid, hint) -> person (recruit-ghost fix: hydrate arrivals once so every roster id resolves)
 //   - markSeen(x, y, kind, by), mapSeen(x, y) -> 'visited'|'shared'|null (player map knowledge: fog of war display)
+//   - villageSighting(id) -> earned camp location | null (does not reveal surrounding ground or grant discovery deeds)
 //   - sharedTileNote(x, y) -> honest provenance parenthetical for 'shared' tiles (dowsing / echo_location / someone)
 //   - hiveSight() -> bool (hive_mind map reveal: overlay renders all tiles at 'shared' level, display-only, never writes seenTiles)
 //   - worldMonsters() -> [{id,tx,ty,mx,my,hp,...}] (living world: monsters on tiles, independent of the player)
@@ -83,6 +85,10 @@
 //   - compareMaps(vid) -> {newCount} (conversation action: merge their visited into your shared knowledge; records the sharing for the codex MAPS gate)
 //   - villageMapKnown() -> {"x,y":1} (codex MAPS: your seen tiles + visited tiles of villagers who actually shared via compareMaps; unshared seed tiles are never shown)
 //   - walkCost(n) -> kcal (the one honest price of a committed n-square walk: quoted by the "Walk here" button AND equal to the sum of the per-step charges pathStep levies as squares land; applies travel.cost_mult)
+//   - carryLimit() -> maximum effective acquisition load (2x nominal)
+//   - burden() -> current tier, effective kg, nominal capacity and hard limit
+//   - fittingCarryUnits(unitKg, wanted) -> raw units fitting with body modifiers
+//   - workCost(base) -> base effort plus the current burden work addition
 //   - walkStepKcal() -> kcal (the honest price of ONE square of walking; microMove and pathStep both levy exactly this — one square, one price, whichever verb walks it)
 // rules:
 //   - terraform_difficult_cost: 2 (code: tbTerrainCost)
@@ -106,6 +112,7 @@
 //   - dead_dont_move: movement + map interaction (beginPathWalk, pathStep, microMove, _cellInteract, enterBuilding, exitBuilding, clearBlockage, buildBridge) refuse when over — the corpse walks nothing, builds nothing, the world advances nothing (code: beginPathWalk, break-it travel r6 2026-10-09)
 //   - no_mid_fight_interact: _cellInteract refuses inCombat — interacting runs monster/animal/villager turns while tickAction(1) no-ops mid-fight, so a stale tile card could grant free interacts AND free monster turns; same class as the examineCell guard (code: _cellInteract, explorer break-it 2026-10-09)
 //   - walk_bills_landed_squares: beginPathWalk validates affordability and announces the quote but charges nothing; pathStep levies walkStepKcal() per landed square, so an interrupted walk (combat starts mid-path) never bills squares never walked (code: pathStep, break-it travel r6 2026-10-09)
+//   - walk_cadence: manual and committed steps share world turns and ambient risks; replacement actors/scenes or combat stop the remaining response (code: pathStep, microMove)
 //   - one_square_one_price: microMove and pathStep levy the same walkStepKcal() — one square, one price, whichever verb walks it; the committed walk no longer costs 5x a hand-walked trail (code: walkStepKcal, microMove, explorer break-it 2026-10-10)
 //   - entry_has_exit: findWalkableEntry prefers the nearest walkable cell with at least one walkable neighbor — travel never strands the player in a pocket with zero grid moves; falls back to the nearest walkable only when the whole tile is pockets (code: findWalkableEntry, explorer break-it 2026-10-10)
 //   - travel_world_step_priced: travelTimeStep's needs+gossip world-step is proportional to player time actually spent — each travel banks its elapsed dayTicks; every 128 banked (one day-part) releases one step. The zero-tick ping-pong (2026-10-08) and the 1-tick re-arm (r7) buy nothing the clock didn't pay for. Exception (by design): the first crossing ever and each new day's first crossing grant one step — the crossing itself is a beat (code: travelTimeStep, break-it travel r7 2026-10-09)
@@ -114,6 +121,7 @@
 //   - world_monsters_live: monsters exist on tiles independent of the player (state.worldMonsters); they persist when you leave, wander between tiles, and villagers fight them (code: worldTick, Steve 2026-10-06)
 //   - maps_are_social: pre-System, ground knowledge spreads by comparing maps in conversation (code: compareMaps, Steve 2026-10-06)
 //   - load_resets_session_death: load() clears villageLost (session state of a dead run, not save data) — a Continued living run always has a home (code: load, break-it persistence r5 2026-10-09)
+//   - haven_scene_boolean: exile writes outdoors=false; load normalizes legacy null/missing scene flags before any consumer; explicit null renders/places the player outdoors without rebuilding either Haven cache (code: load, genDetail, ensureVillagerPositions)
 //   - fight_gates_round_trip: per-fight gates on the fight object (alien beam _beamCooldown) and the uprising's identity (uprising/uprisingAttackers, rebuilt into _lastBetrayal) persist in tbSave and restore verbatim — a mid-fight reload can neither re-arm the beam nor downgrade an uprising to an ordinary betrayal (code: syncRun, load, break-it persistence r6 2026-10-09)
 //   - fight_gate_sibling_sweep: the same save-scum class in related systems — hummice sound pressure (humStacks/humMice/humRiseRound/humDecayRound), the player shout cap (shouts) + its chorus-break duration (chorusBrokenUntil), the scorch narration flag (terraformScorched), the pending order re-sort (orderDirty) — all persist in tbSave and restore verbatim (code: syncRun, load, break-it persistence r6 2026-10-09)
 //   - fight_gate_counter_sweep: the same save-scum class in the counter engine (postdates the r6 sweep; r16 added _counterLastMoveDir without touching the boundary) — _counterStrikes (union_rep strike_first first-blood gate), _counterLastMoveRound/_counterLastMoveDir (review_drone move_x2 vary chain) persist in tbSave and restore verbatim. A mid-fight reload can neither re-arm firstStrike (save-scum counter discovery) nor silently break the drone's chain (code: syncRun, load, break-it persistence r11 2026-10-11)
@@ -1606,11 +1614,21 @@
     // hydration would mint divergent people): background-survivor seeds via
     // hydrateSeed (seed identity authoritative); everyone else gets a full
     // genCharacter (unique-person law — a real name, never "a tired cook").
+    _resetPersonRegistry() {
+      if(!this._personTemplates)this._personTemplates=JSON.parse(JSON.stringify((this.data.villagers||[]).filter(p=>!(p.id||'').startsWith('gen_'))));
+      this.data.villagers=JSON.parse(JSON.stringify(this._personTemplates));
+    },
+
     ensureRosterPerson(nid, hint) {
       if (!nid) return null;
+      const remember = person => {
+        const village=this.state?.village;
+        if(village&&person?.id===nid){village.rosterChars=village.rosterChars||{};village.rosterChars[nid]=person;}
+        return person;
+      };
       try {
         const have = (this.data.villagers || []).find(x => x && x.id === nid);
-        if (have && have.id) return have;
+        if (have && have.id) return remember(have);
         let person = null;
         const seed = ((this.data.background_survivors || []).find(s => s && s.id === nid)) || null;
         if (seed && typeof this.hydrateSeed === 'function') {
@@ -1629,9 +1647,9 @@
           person.id = nid;
           this.data.villagers = this.data.villagers || [];
           if (!this.data.villagers.some(x => x && x.id === nid)) this.data.villagers.push(person);
-          return person;
+          return remember(person);
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[person admission]',nid,e); }
       return null;
     },
 
@@ -1644,7 +1662,7 @@
       const cg = this.data.characterGen || {};
       const pick = a => a[Math.floor(Math.random() * a.length)];
       // sims call newGame repeatedly in one process — clear last expedition's cast
-      this.data.villagers = (this.data.villagers || []).filter(v => !(v.id || '').startsWith('gen_'));
+      this._resetPersonRegistry();
       // PER-EXPEDITION DEATH MARKS (break-it contests r11 2026-10-10): 'killed'
       // removals set rec.dead=true on the SHARED data objects (betrayal.js —
       // "must not lie about a corpse"). Those marks are per-expedition: without
@@ -2795,14 +2813,14 @@
       // be found, and the knapping can still fail. Without this, the whole
       // hunter gut/cook chain was a dead end for characters who don't start
       // with a knife (4 of 6 roster archetypes had no path to one).
-      this.state.codex.recipes['stone_knife'] = { level: 3 };
+      this.state.codex.recipes['stone_knife'] = { level: this.basicRecipeLevels().stone_knife };
       // WATER FILTER CHAIN (2026-10-06): the water_filter recipe was a lie —
       // cloth/charcoal had no obtainable source. Now: weave cloth from plant
       // fiber, rake charcoal from campfire ashes. Containers are assumed
       // (Steve: not a crafting game). Everyone knows these basics; the
       // materials are the work.
-      this.state.codex.recipes['cloth'] = { level: 3 };
-      this.state.codex.recipes['water_filter'] = { level: 3 };
+      this.state.codex.recipes['cloth'] = { level: this.basicRecipeLevels().cloth };
+      this.state.codex.recipes['water_filter'] = { level: this.basicRecipeLevels().water_filter };
       // AFTERNOON SPAWN (Steve 2026-10-08): new runs used to start at dawn,
       // dayTicks 0 — lightLevel 0.25, the whole first impression in gloom.
       // You arrive mid-afternoon now: full light, half a day to get your
@@ -3412,6 +3430,64 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return true;
     },
 
+    // Actor-neutral recipe rules. Callers own knowledge, modifiers, time and
+    // destination; neither planner nor executor reads the bearer's inventory.
+    basicRecipeLevels() { return { stone_knife: 3, cloth: 3, water_filter: 3 }; },
+    planRecipeCraft(recipeId, inventory, level) {
+      const recipe = this.data.recipes.find(r => r.id === recipeId);
+      if (!recipe) return { ready: false, reason: 'unknown_recipe' };
+      const matches = (item, mat) => !!item && typeof item === 'object' &&
+        (mat === 'bait' ? (item.kcalEach || 0) > 0 : item.material === mat);
+      const count = item => Number.isSafeInteger(item.units) && item.units > 0 ? item.units : 0;
+      const materials = Object.entries(recipe.materials).map(([mat, need]) => ({
+        mat, need, have: inventory.filter(i => matches(i, mat)).reduce((n, i) => n + count(i), 0)
+      }));
+      const missing = materials.filter(m => m.have < m.need);
+      return { recipe, inventory, level, materials, missing, ready: level >= 1 && !missing.length,
+        reason: level < 1 ? 'unknown_recipe' : missing.length ? 'materials' : null,
+        baseRate: level < 2 ? 0.35 : 0.85, matches, count };
+    },
+    attemptRecipeCraft(plan, chance, rng = Math.random) {
+      if (!plan.recipe) return { paid: false, ok: false, reason: 'unknown_recipe' };
+      const current = this.planRecipeCraft(plan.recipe.id, plan.inventory, plan.level);
+      if (!current.ready) return { paid: false, ok: false, reason: current.reason };
+      if (!Number.isFinite(chance)) throw Error('Craft success chance must be finite');
+      for (const { mat, need } of current.materials) {
+        let left = need;
+        for (const item of current.inventory) {
+          if (!current.matches(item, mat) || left <= 0) continue;
+          const take = Math.min(current.count(item), left);
+          item.units -= take; left -= take;
+        }
+      }
+      const inventory = current.inventory.filter(i => typeof i === 'string' ||
+        (i && (i.units > 0 || (i.units == null && !i.material))));
+      if (rng() > Math.min(1, chance)) return { paid: true, ok: false, inventory };
+      const recipe = current.recipe;
+      const durable = recipe.durable || recipe.uses == null;
+      const product = durable
+        ? { name: recipe.name, units: recipe.makesUnits || 1, kg: recipe.kg || 0.2, desc: recipe.description }
+        : { recipeId: recipe.id, uses: recipe.uses, name: recipe.name };
+      if (durable) {
+        if (recipe.producesMaterial) product.material = recipe.producesMaterial;
+        const def = this.data.items.find(i => i.id === recipe.id);
+        if (def) { product.itemId = def.id; product.name = def.name; }
+      }
+      return { paid: true, ok: true, inventory, product, durable };
+    },
+    // Same incidental materials for a real bush/tree harvest, whoever did it.
+    collectForageByproducts(harvested, inventory, rng = Math.random) {
+      const out = [];
+      for (const h of harvested) {
+        if (h.cell === 'bush' && rng() < 0.3)
+          out.push({ material: 'vine', units: 1, name: 'Vine', kcalEach: 0, spoilDay: 9999, kg: 0.1 });
+        if ((h.cell === 'tree' || h.cell === 'bigtree') && rng() < 0.4)
+          out.push({ material: 'stick', units: 1, name: 'Stick', kcalEach: 0, spoilDay: 9999, kg: 0.2 });
+      }
+      inventory.push(...out);
+      return out;
+    },
+
     // CRAFT: make a recipe you know (L3). Consumes materials. Creates an item with uses.
     // Items degrade: snare breaks after 2 catches. You make another.
     craft(recipeId) {
@@ -3431,49 +3507,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const blind = rlevel < 2;
       if (blind) this.say(`You've only SEEN ${this.indefArt(recipe.name)} ${recipe.name}. You'll try to copy it from memory — long odds, and the materials are at risk if it comes apart.`);
-      // check materials
-      const inv = this.state.scholar.inventory;
-      // BAIT is not a material — it's food. Any edible item (berries, nuts,
-      // scraps) baits a deadfall. The recipe text says "bait (berries or
-      // nuts)"; the code honors it instead of demanding a phantom item.
-      const matMatches = (item, mat) => mat === 'bait'
-        ? ((item.kcalEach || 0) > 0 && (item.units || 0) > 0)
-        : item.material === mat;
-      for (const [mat, need] of Object.entries(recipe.materials)) {
-        const have = inv.filter(i => matMatches(i, mat)).reduce((t, i) => t + i.units, 0);
-        if (have < need) {
-          // BLIND HONESTY (break-it knowledge 2026-10-09): at L1 the materials
-          // list is L2 knowledge — naming the missing material here printed the
-          // recipe's secrets one free probe at a time (this check runs before
-          // any cost: no ticks, no consumption). A blind attempt stays blind.
-          // At L2+ the materials are known, so the detailed line is honest.
-          if (blind) {
-            this.say(`You don't know what ${this.indefArt(recipe.name)} ${recipe.name} is made of — not really. Bring your best guess and try.`);
-            return null;
-          }
-          this.say(mat === 'bait'
-            ? `Need ${need} bait — berries, nuts, any food (have ${have}).`
-            : `Need ${need} ${mat} (have ${have}).`);
-          return null;
-        }
+      const plan = this.planRecipeCraft(recipeId, this.state.scholar.inventory, rlevel);
+      if (!plan.ready) {
+        const missing = plan.missing[0];
+        if (blind) this.say(`You don't know what ${this.indefArt(recipe.name)} ${recipe.name} is made of — not really. Bring your best guess and try.`);
+        else this.say(missing.mat === 'bait'
+          ? `Need ${missing.need} bait — berries, nuts, any food (have ${missing.have}).`
+          : `Need ${missing.need} ${missing.mat} (have ${missing.have}).`);
+        return null;
       }
-      // consume materials
-      for (const [mat, need] of Object.entries(recipe.materials)) {
-        let left = need;
-        for (const item of inv) {
-          if (!matMatches(item, mat) || left <= 0) continue;
-          const take = Math.min(item.units, left);
-          item.units -= take; left -= take;
-        }
-      }
-      this.state.scholar.inventory = inv.filter(i => i.units > 0);
-      // steady_hands: fine work under pressure. Base 85% success —
-      // fail and the materials are already consumed above. The woods keep them.
-      // Blind (L1) attempts: 35%. You've seen one; your hands haven't.
-      const baseRate = blind ? 0.35 : 0.85;
-      const success = Math.min(1, this.modTarget('craft.success', baseRate));
-      if (Math.random() > success) {
+      const attempt = this.attemptRecipeCraft(plan, this.modTarget('craft.success', plan.baseRate));
+      if (!attempt.paid) return null;
+      this.state.scholar.inventory = attempt.inventory;
+      if (!attempt.ok) {
         this.say(`The ${recipe.name} comes apart in your hands. The materials are wasted. (craft failed)`);
+        // Failed hand work still spends the authored crafting time.
+        this.tickAction(32);
         return null;
       }
       // create the item
@@ -3485,15 +3534,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // producesMaterial (water-filter chain 2026-10-06): woven cloth and
         // wooden cups are materials for other recipes — the item carries its
         // material key so craft()'s material matching can consume it.
-        const made = { name: recipe.name, units: recipe.makesUnits || 1, kg: recipe.kg || 0.2, desc: recipe.description };
-        if (recipe.producesMaterial) made.material = recipe.producesMaterial;
-        // GEAR (Steve 2026-10-09): a recipe whose id matches a real item def
-        // makes the REAL item (itemId) — a crafted spear is a spear, not a
-        // named rock. Without this the 13 gear recipes craft decorative
-        // nothings (itemIdOf finds no id; the equipment system never sees
-        // them). One system: the same craft(), the same gates, real items.
-        const realDef = (this.data.items || []).find(i => i.id === recipe.id);
-        if (realDef) { made.itemId = realDef.id; made.name = realDef.name; }
+        const made = attempt.product;
         this.state.scholar.inventory.push(made);
         this.say(`You make ${this.indefArt(recipe.name)} ${recipe.name}. ${recipe.description}`);
         // PRACTICE (Steve 2026-10-09): a successful blind (L1) craft teaches
@@ -3502,7 +3543,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (blind && this.grantKnowledge) this.grantKnowledge('recipe', recipeId, 2, { type: 'discovery' }); } catch (e) {}
       } else {
         this.state.scholar.tools = this.state.scholar.tools || [];
-        this.state.scholar.tools.push({ recipeId, uses: recipe.uses, name: recipe.name });
+        this.state.scholar.tools.push(attempt.product);
         this.say(`You make ${this.indefArt(recipe.name)} ${recipe.name}. ${recipe.description} (${recipe.uses} uses)`);
         // PRACTICE (structural 2026-10-10): the blind→L2 lesson lived only in
         // the durable branch above — a trap built blind (35%) never taught the
@@ -3772,7 +3813,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let _trapCaught = false;
           if (!_stagedCatch) {
             _trapCaught = Math.random() < trapChance;
-            try { this.luckRoll('trap', trapChance, _trapCaught); } catch (e) {}
+            try { this.luckRoll('trap', trapChance, _trapCaught); } catch (e) { console.warn('[measurement] luck hook failed', e); }
           }
           if (_stagedCatch || _trapCaught) {
             const catchId = eligible[Math.floor(Math.random() * eligible.length)];
@@ -4172,13 +4213,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Victims carry their daily ration (packKcal): hidden until stolen.
     // Nobody sees a number; they feel the hunger when it's gone.
 
-    // packKcal: what this person is carrying today (kcal of rations).
-    // Reseeds at dawn. Drawn from their share — the village feeds people.
+    // Packing/refilling needs actual access to the physical hall pantry.
+    // Expedition flags also matter: their coarse node can still say Haven
+    // while the person is several days away. No remote daily resupply.
+    packAtPantry(vid) {
+      const v = this.state.village;
+      if (!v || v.away?.[vid] || !(v.roster || []).includes(vid)) return false;
+      const node = this.npcNode(vid);
+      return node.nx === (v.px ?? 4) && node.ny === (v.py ?? 4) && this.npcInside(vid);
+    },
+    // packKcal: actual carried kcal. Away packs persist across dawns;
+    // an absent remote pack is empty, never an automatic pantry draw.
     packKcal(vid) {
       const v = this.state.village;
       v.pack = v.pack || {};
       const today = this.state.scholar.day;
       let p = v.pack[vid];
+      if (!this.packAtPantry(vid)) {
+        if (!p) p = v.pack[vid] = { day:today, kcal:0, risks:this.freshExposure() };
+        return Math.max(0, Number(p.kcal) || 0);
+      }
+      if (p && p.day !== today && p.kcal > 0) {
+        // Returning does not discard yesterday's actual remaining food.
+        // A local meal may make a real, priced top-up below in packMeal.
+        p.day = today; p.dawnKcal = p.kcal; p.topUpDone = false;
+        return p.kcal;
+      }
       if (!p || p.day !== today) {
         const need = this.npcNeeds(vid);
         const temp = this.npcTemper(vid);
@@ -4589,6 +4649,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // 'gossip' -> "heard anything?" (surfaces gossip they've heard)
     // 'village' -> "how's everyone?" (morale/atmosphere readout)
     askAbout(vid, topic, opts) {
+      // The person card needs the authored answer, independently of later
+      // journal/discovery notices. Existing callers without a reply observer
+      // retain exactly the same log and result; do not intercept global say.
+      const reply = text => {
+        this.say(text);
+        if (opts && typeof opts.onReply === 'function') opts.onReply(String(text));
+      };
       const v = this.data.villagers.find(x => x.id === vid)
         /* unified: getPerson */;
       if (!v) return null;
@@ -4633,8 +4700,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           peace: `"Somebody has to be the calm one. I've taken the job."`,
         };
         const line = goalLines[goal] || `"I don't know. Getting through today, I guess."`;
-        this.say(`${first}: ${line}`);
-        if (!already && want) this.say(`(You learned what ${known ? first : 'they'} want: ${want}.)`);
+        reply(`${first}: ${line}`);
+        if (!already && want) reply(`(You learned what ${known ? first : 'they'} want: ${want}.)`);
         this.remember(vid, 'shared_goal', goal || 'unknown');
         return { ok: true, goal };
       }
@@ -4705,7 +4772,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               const target = pool[Math.floor(Math.random() * pool.length)];
               const gg = this.npcGossipAbout(vid, target);
               if (gg && gg.line) {
-                this.say(`${first} lowers their voice. ${gg.line}`);
+                reply(`${first} lowers their voice. ${gg.line}`);
                 return { ok: true, gossipAbout: target, gossipSig: 'about:' + target };
               }
             }
@@ -4751,7 +4818,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               ? warn[Math.floor(Math.random() * warn.length)]
               : defend[Math.floor(Math.random() * defend.length)];
           }
-          this.say(`${first} lowers their voice. ${line}`);
+          reply(`${first} lowers their voice. ${line}`);
           try {
             if (this.journalNote) this.journalNote('people', did,
               dk.kind === 'benign'
@@ -4764,7 +4831,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const heard = (this.state.village.gossip || []).filter(g => (g.heard || []).includes(vid));
         if (!heard.length) {
           const idle = [`"Quiet lately. Too quiet, maybe."`, `"Nothing new. Which is new, if you think about it."`, `"People are keeping to themselves."`];
-          this.say(`${first}: ${idle[Math.floor(Math.random() * idle.length)]}`);
+          reply(`${first}: ${idle[Math.floor(Math.random() * idle.length)]}`);
           return { ok: true, none: true };
         }
         // Salience order: a scandal about YOU jumps the queue (it's what
@@ -4777,7 +4844,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (negHeard.length) {
           const g = freshGossip(negHeard); // walk-down: don't re-serve the same scandal
           if (g) {
-          this.say(`${first} lowers their voice. "People are saying things. About you. ...I'd watch how you act around the fire."`);
+          reply(`${first} lowers their voice. "People are saying things. About you. ...I'd watch how you act around the fire."`);
           return { ok: true, gossip: g, gossipSig: gossipSig(g) };
           }
         }
@@ -4822,10 +4889,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // away...") spoken BY James. A person talks about themselves in
           // first person. Never misattribute the rumor to the teller.
           const self = g.dims.who === vid;
-          if (g.action === 'stingy') this.say(self
+          if (g.action === 'stingy') reply(self
             ? `${first} lowers their voice. "Word is I've been holding back. Keeping the good stuff close, yeah. I'll own that."`
             : `${first} lowers their voice. "Word is ${wname} has been holding back. Keeping the good stuff close."`);
-          else if (g.action === 'generous') this.say(self
+          else if (g.action === 'generous') reply(self
             ? `${first}: "People are saying I've been generous. Sharing around, no questions asked."`
             : `${first}: "People are saying ${wname} has been generous. Sharing around, no questions asked."`);
           else if (g.action === 'departure') {
@@ -4843,17 +4910,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               visit: 'to find someone', explore: "to see what's out there",
               haul: 'to haul something back', guard: 'to stand watch',
             }[dpurp];
-            if (dRoutine) this.say(self
+            if (dRoutine) reply(self
               ? `${first}: "That was me — headed out ${dRoutine}."`
               : `${first}: "${wname} headed out ${dRoutine}."`);
-            else if (dpurp === 'expedition') this.say(self
+            else if (dpurp === 'expedition') reply(self
               ? `${first}: "That was me — gone a while. Don't wait up."`
               : `${first}: "${wname} set out on a long trek. Won't be back for days."`);
-            else this.say(self
+            else reply(self
               ? `${first}: "Yeah, that was me. I walked away from Haven once. Didn't look back."`
               : `${first}: "Did you hear? ${wname} just walked away from Haven. Didn't look back."`);
           }
-          else if (g.action === 'return') this.say(self
+          else if (g.action === 'return') reply(self
             ? `${first}: "I left. Walked back in like I'd never left, apparently."`
             : `${first}: "${wname} is back. Walked in like they'd never left."`);
           // PARTY WIRING (Steve 2026-10-12): the village hears who ran
@@ -4861,7 +4928,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           else if (g.action === 'rescue') {
             let _fname = 'someone';
             try { _fname = this.displayName(g.dims.for).split(' ')[0]; } catch (e) {}
-            this.say(self
+            reply(self
               ? `${first}: "Yeah, that was me. Ran into the treeline when I heard the screaming. Didn't think, just ran."`
               : `${first}: "Did you hear? ${wname} ran into the treeline when they heard ${_fname} scream. Didn't hesitate."`);
           }
@@ -4882,9 +4949,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             else cline = self
               ? `${first}: "I didn't walk out of ${cname}."`
               : `${first}: "They're saying ${wname} died in ${cname}. The fire was quiet last night."`;
-            this.say(cline);
+            reply(cline);
           }
-          else this.say(self
+          else reply(self
             ? `${first}: "People are talking about me. Take it for what it's worth."`
             : `${first}: "People are talking about ${wname}. Take it for what it's worth."`);
           try {
@@ -4926,7 +4993,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const g = freshGossip(heard);
         if (!g) { // walk-down: every gossip this villager has heard was already said — honestly dry
           const idle = [`"Quiet lately. Too quiet, maybe."`, `"Nothing new. Which is new, if you think about it."`, `"People are keeping to themselves."`];
-          this.say(`${first}: ${idle[Math.floor(Math.random() * idle.length)]}`);
+          reply(`${first}: ${idle[Math.floor(Math.random() * idle.length)]}`);
           return { ok: true, none: true };
         }
         const gdims = (g && g.dims) || {};
@@ -4953,7 +5020,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         };
         const gLine = gTop ? (gDist >= 2 ? gBig[gTop] : gPlain[gTop])
           : `"Word is you're doing right by people. Keep it up."`;
-        this.say(`${first}: ${gLine}`);
+        reply(`${first}: ${gLine}`);
         return { ok: true, gossip: g, gossipSig: gossipSig(g) };
       }
       if (topic === 'village') {
@@ -4968,7 +5035,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const heat = Object.values(vg.heat || {}).filter(h => h > 0).length;
         if (heat) bits.push("there's tension about who's in charge");
         const line = bits.length ? bits.join('; ') + '.' : "holding together, somehow.";
-        this.say(`${first} looks around. "Honestly? ${line}"`);
+        reply(`${first} looks around. "Honestly? ${line}"`);
         this.socialTick(vid);
         return { ok: true };
       }
@@ -4979,7 +5046,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const cands = Object.entries(this.state.codex.monsters || {})
           .filter(([id, e]) => e.reported && !e.namingKicked);
         if (!cands.length) {
-          this.say(`${first} shrugs. "Seen what? It's been quiet out there."`);
+          reply(`${first} shrugs. "Seen what? It's been quiet out there."`);
           return { ok: true };
         }
         const [mid, e] = cands[0];
@@ -4992,7 +5059,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // branch used to render the raw lowercase opener mid-quote.
         const tUnk = mdef.unknown || 'That thing';
         const tUnkC = tUnk.charAt(0).toUpperCase() + tUnk.slice(1);
-        this.say(`${first} goes still. "${tUnkC}. You're sure." They'll tell the others — word travels fast around a fire.`);
+        reply(`${first} goes still. "${tUnkC}. You're sure." They'll tell the others — word travels fast around a fire.`);
         this.socialTick(vid);
         this.monsterNewsCheck(mid);
         return { ok: true };
@@ -5010,14 +5077,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // knew every trick for every slain type — there was just nothing
           // NEW to teach. Say what's true.
           const anyKnown = Object.keys(this.state.monsterCounters || {}).length > 0;
-          this.say(anyKnown
+          reply(anyKnown
             ? `${first} shakes their head. "We've told you every trick we've figured out. The rest — we kill them or they kill us, and nobody's cracked those yet."`
             : `${first} shrugs. "The beasts? We kill them or they kill us. Nobody's figured out anything clever yet."`);
           return { ok: true, none: true };
         }
         const tmdef = (this.data.monsters || []).find(m => m.id === teachable) || {};
         const tctr = tmdef.counter || {};
-        this.say(`${first} leans in, voice low. "Here's what we figured out about ${this.monsterDisplayName(teachable)}. ${tctr.trick || 'There is a trick'}. ${tctr.reveal || ''}"`);
+        // Some unknown descriptors are whole scenes, not names. Keep them
+        // out of the middle of a spoken sentence; preserve earned names.
+        const noun = this.monsterNoun(teachable);
+        const subject = noun === 'something' ? 'that creature' : this.articlePhrase(noun);
+        reply(`${first} leans in, voice low. "Here's what we figured out about ${subject}. ${tctr.reveal || tctr.trick || 'We have not worked out how to stop it yet.'}"`);
         this.discoverMonsterCounter(teachable, 'taught');
         this.socialTick(vid);
         return { ok: true, taught: teachable };
@@ -5032,7 +5103,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           .filter(([id, e]) => e.namingKicked && !e.villageName)
           .sort((a, b) => (b[1].namingKickSeq || 0) - (a[1].namingKickSeq || 0));
         if (!cands.length) {
-          this.say(`${first} shrugs. "Name what? We haven't seen anything worth naming lately."`);
+          reply(`${first} shrugs. "Name what? We haven't seen anything worth naming lately."`);
           return { ok: true };
         }
         const [mid, e] = cands[0];
@@ -5049,7 +5120,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // the template adds its own — "behavior..". Strip the
         // descriptor's trailing periods; the template supplies the stop.
         const unkDesc = String(mdef.unknown || 'you know the one').replace(/\.+$/, '');
-        this.say(`${first} leans in. "That thing — ${unkDesc}. We're naming it. So far: ${opts.map(o => `"${o.name}" (${o.backers.join(', ')})`).join('; ')}. What's your vote?"`);
+        reply(`${first} leans in. "That thing — ${unkDesc}. We're naming it. So far: ${opts.map(o => `"${o.name}" (${o.backers.join(', ')})`).join('; ')}. What's your vote?"`);
         this.socialTick(vid);
         return { ok: true, naming: { mid, descriptor: mdef.unknown || 'the beast', options: opts.map(o => o.name) } };
       }
@@ -5059,14 +5130,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // (useNameAvailable), and the name is typed, never picked. The
         // reaction is generated from temperament (unique-person law).
         if (!this.useNameAvailable || !this.useNameAvailable(vid)) {
-          this.say(`${first} tilts their head. "Call me something? You've got a name for me already — it's the one I was born with."`);
+          reply(`${first} tilts their head. "Call me something? You've got a name for me already — it's the one I was born with."`);
           return { ok: true };
         }
         const temp = (typeof this.npcTemper === 'function') ? this.npcTemper(vid) : 'steady';
         // firstRef, not raw v.name: the gate guarantees the name is known,
         // but the funnel keeps it honest (knowledge-gating).
         const tFirst = this.firstRef(vid);
-        this.say(`You say it before you can second-guess it. "Can I call you something? Not your name — a name from me."`);
+        reply(`You say it before you can second-guess it. "Can I call you something? Not your name — a name from me."`);
         let react;
         if (/prickly|suspicious|cynical/.test(temp)) {
           react = `"A nickname." ${tFirst} studies you for a long moment. "What's wrong with the name I have?" — "Nothing. It's not a replacement. It's yours, from me." A pause. "...Say it, then."`;
@@ -5077,7 +5148,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } else {
           react = `"Oh." ${tFirst} goes a little pink. "I'd — yeah. I'd like that."`;
         }
-        this.say(react);
+        reply(react);
         this.socialTick(vid);
         return { ok: true, useNaming: { vid } };
       }
@@ -5203,7 +5274,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const t = this.state.village.trust || (this.state.village.trust = {});
           t[vid] = Math.min(100, (t[vid] || 10) + this.trustGainProgressive(vid, 4));
         }
-        this.say(`You find ${first}. "About ${what || 'my word'}. You had it — and I let it rot. That's on me. I'm sorry." A long silence. Then, slowly: "...All right. Words again. Don't make me regret hearing this."`);
+        const about = this.promiseSpeechAbout(vid, lw.mem, 'bearer') || 'the promise I broke';
+        this.say(`You find ${first}. "About ${about}. I gave you my word and let you down. That's on me. I'm sorry." A long silence. Then, slowly: "...All right. Words again. Don't make me regret hearing this."`);
         this.remember(vid, 'amends', 'owned the broken word: ' + (what || 'promise'), { maker: this.villagerId });
         this.observe('amends', { target: vid, noTrust: true });
         this.notePlaystyle('social');
@@ -5725,7 +5797,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // (via related actions), big trust. If you ignore it, they remember.
     promiseHelp(vid) {
       const goal = this.npcGoal(vid);
-      if (!goal) { this.say("You don't know what they want yet."); return null; }
+      if (!goal) {
+        const line = "You don't know what they want yet.";
+        this.say(line);
+        return { ok: false, reason: 'unknown-goal', line };
+      }
       // BREAK-IT (social r7 2026-10-09): an unkeepable vow is a trap, not a
       // mechanic. Only goals with a real keep path get a formal tracked
       // promise; the rest get honesty instead of a commitment the engine
@@ -5742,7 +5818,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // villager (the entry was never cleared). Only an OPEN promise blocks
       // a new one; a settled one is replaced by the new vow.
       const oldP = v.promises[vid];
-      if (oldP && !oldP.kept) { this.say("You already made them a promise. Keep it first."); return null; }
+      if (oldP && !oldP.kept) {
+        const about = this.promiseSpeechAbout(vid, oldP, 'recipient');
+        const line = about ? `"Keep your promise about ${about} first."` : '"Keep the promise you already made me first."';
+        this.say(`${this.displayName(vid)} says, ${line}`);
+        return { ok: false, reason: 'open-promise', line };
+      }
       if (oldP) delete v.promises[vid];
       const want = this.goalWant(vid);
       const first = this.displayName(vid);
@@ -5760,14 +5841,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // no maker stamp; the office owns them (old behavior preserved).
           const mine = !lastMem || lastMem.maker == null || lastMem.maker === this.villagerId;
           if (mine) {
-          // humanize a bare goal id ("feed" → "to keep everyone fed"); a
-          // favor task note is already human.
-          let what = (lastMem && lastMem.note) || '';
-          try {
-            const g = (this.data.characterGen.goals || []).find(x => x.id === what);
-            if (g && g.want) what = String(g.want);
-          } catch (e) {}
-          const about = what ? ` You promised ${what} — it never happened.` : ` It never happened.`;
+          const reference = this.promiseSpeechAbout(vid, lastMem, 'recipient');
+          const about = reference ? ` About ${reference} — you gave me your word, and it never happened.` : ` You gave me your word, and it never happened.`;
           // PROMISE DECAY (blitz-succession 2026-10-13 — Steve's exact
           // spec): the refusal lifts D days after the break, where D comes
           // from the trust level at the break (trustAtBreak, stamped on the
@@ -5777,8 +5852,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const D = this.promiseDecayDays(lastMem && lastMem.trustAtBreak);
           const daysSince = this.state.scholar.day - ((lastMem && lastMem.day) || 0);
           if (daysSince < D) {
-            this.say(`${first} doesn't look up. "You said that before." A beat.${about} "Not again. Not until that's answered."`);
-            return null;
+            const line = `"You said that before.${about} Not again. Not until that's answered."`;
+            this.say(`${first} doesn't look up. ${line}`);
+            return { ok: false, reason: 'broken-word', line };
           }
           // Time did what amends would have: the door reopens. The memory
           // stays (bitterness, dialogue) — only the refusal decayed.
@@ -5843,6 +5919,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return Number.isFinite(due) ? Math.max(start + 1, due) : null;
     },
 
+    // Task labels are narrator/Journal text. A speaker may refer to the exact
+    // current favor only; old memories without an identity stay nonspecific.
+    promiseSpeechAbout(vid, record, speaker) {
+      if (!record?.favorId || !['recipient', 'bearer', 'witness'].includes(speaker)) return null;
+      const favor = this.convoGetFavor?.(vid);
+      if (!favor || favor.vid !== vid || favor.id !== record.favorId) return null;
+      return speaker === 'recipient' ? (favor.short || null) :
+        ((speaker === 'witness' ? this.data?.favorRules?.witnessAbout : this.data?.favorRules?.spokenAbout)?.[favor.kind] || null);
+    },
+
+    // Settlement is narration, not an NPC quoting the Journal's task label.
+    // Read only known display names and authored outcome copy; never task/short.
+    promiseOutcomeLine(vid, promise, favor, outcome, trustLost) {
+      const kind = promise?.favorId && favor?.id === promise.favorId ? favor.kind : 'default';
+      const lines = this.data?.favorRules?.settlement?.[outcome];
+      const template = lines?.[kind] || lines?.default ||
+        (outcome === 'fulfilled' ? 'You kept your word to {name}.' : 'The time to keep your promise to {name} has passed.');
+      let line = template.replaceAll('{name}', this.displayName(vid));
+      if (outcome === 'expired' && Number.isFinite(trustLost) && trustLost > 0) line += ` (-${trustLost} trust)`;
+      return line;
+    },
+
     checkPromises(kind, vid, opts) {
       const v = this.state.village;
       const entries = Object.entries(v.promises || {});
@@ -5875,10 +5973,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 (requested.kind === 'water_haul' && opts?.waterFavorId === requested.id &&
                   requested.waterRun?.returned && requested.waterRun.deliveredLiters >= 4 &&
                   requested.waterRun.bearer === this.villagerId) ||
-                (requested.kind === 'forage_help' && opts?.forageFavorId === requested.id &&
-                  requested.forageRun?.returned && (requested.forageRun.deliveredKcal || 0) > 0 &&
-                  requested.forageRun.bearer === this.villagerId) ||
-                (requested.kind === 'stay_close' && this.companyFavorReceipt?.(pid,requested,opts))))) continue;
+                (requested.kind === 'stay_close' && this.companyFavorReceipt?.(pid,requested,opts)) ||
+                (requested.kind === 'forage_help' && this.forageFavorReceipt?.(pid,requested,opts))))) continue;
           p.kept = true;
           // FAVOR OBLIGATIONS (convo favor system 2026-10-11): mark the
           // favor instance fulfilled and name the task — the fiction must
@@ -5905,15 +6001,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const t = v.trust || (v.trust = {});
             t[pid] = Math.min(100, (t[pid] || 10) + 15);
           }
-          if (requested?.kind === 'stay_close') {
-            this.say(`${this.displayName(pid)} looks steadier as dawn reaches the fire. You stayed with them through the night.`);
-          } else if (p.favorTask) {
-            // Name the kept task — the fiction knows what was done, not
-            // just that a promise was. (Replaces the generic line.)
-            this.say(`${this.displayName(pid)} catches your eye across the fire. "${p.favorTask}" — done. You kept your word. That meant everything.`);
-          } else {
-            this.say(`${this.displayName(pid)} catches your eye across the fire. You kept your word. That meant everything.`);
-          }
+          this.say(this.promiseOutcomeLine(pid, p, favor, 'fulfilled'));
           this.remember(pid, 'promise_kept', p.favorTask || p.goal);
           // KEPT WORD BINDS (2026-10-13): a kept promise already pays +15
           // trust — but the bond machinery never noticed, so the scholar
@@ -5939,20 +6027,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // word broke. Missing entry falls back to 10 (the engine default).
           const trustAtBreak = (t[pid] == null ? 10 : t[pid]);
           t[pid] = Math.max(0, (t[pid] || 10) - 15);
-          if (p.favorTask) {
-            // Name the broken task in the NPC's own short form ("this wound",
-            // "the creek water run") — the ledger's third-person "help X with
-            // their injury" reads like a file label, not a memory. And a
-            // person you promised to help does NOT go silent — they remember.
-            // (journey establishment 2026-10-13: the old line said "doesn't
-            // say anything" AND "— silence" in one breath.)
-            const fshort = (favor && favor.id === p.favorId && favor.short) || null;
-            const what = fshort ? `You said you'd help with ${fshort}` : `About "${p.favorTask}"`;
-            this.say(`${this.displayName(pid)} won't meet your eye. ${what} — and it never happened. Promises rot. (-15 trust)`);
-          } else {
-            this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
-          }
-          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak, maker: p.maker || this.villagerId });
+          this.say(this.promiseOutcomeLine(pid, p, favor, 'expired', Math.max(0, trustAtBreak - t[pid])));
+          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak, maker: p.maker || this.villagerId, ...(p.favorId ? { favorId: p.favorId } : {}) });
           }
         }
       }
@@ -6744,11 +6820,122 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
     },
 
+    // Pure availability used by both the chooser and the real cook duty.
+    // No pantry splitting, deeds, clock changes or random draws here.
+    havenPreservationPlan(vid) {
+      const person = (this.getPerson ? this.getPerson(vid) : null) || {};
+      const skill = this.specialistSkill ? this.specialistSkill(person, 'preserver') : 0;
+      const day = (this.state.scholar || {}).day || 1;
+      const v = this.state.village;
+      // DINNER-FIRST (longsim food 2026-10-11): the village eats
+      // fresh-first at the nightly meal (pantryDraw: soonest-spoiling
+      // first, slabs last) — and the cook resolves 3x/day while the
+      // village eats once at night. Smoking tonight's dinner at 0.80x
+      // destroys value in efficient villages (measured: they flip from
+      // survived to lost). So: reserve ~2 nights of the village's ACTUAL
+      // pantry draw — measured ~1.5k/night for 12 (villagers eat own
+      // production first; total need is NOT the draw). The soonest-
+      // spoiling stays fresh for tonight and tomorrow; only the excess
+      // beyond the reserve hits the racks. The reserve errs big on
+      // purpose: a too-big reserve merely delays preservation a day; a
+      // too-small one steals dinner.
+      let reserve = 0;
+      try {
+        reserve = 250 * ((v.roster || []).length || 10);
+      } catch (e) { reserve = 2500; }
+      const eligible = [];
+      for (const it of (v.pantry || [])) {
+        if (!it || (it.kcalEach || 0) <= 0 || (it.units || 0) <= 0) continue;
+        if (it.bonded) continue;
+        if (it.foodState === 'preserved' || it.foodState === 'rendered') continue;
+        if ((it.foodKind || '') === 'pemmican') continue;
+        if (this.isKeepsake && this.isKeepsake(it)) continue;
+        const sd = it.spoilDay;
+        if (sd === undefined || sd === null || sd >= 9999) continue;
+        // CANON (PRESERVATION.md): rot can't be smoked back into food.
+        // Spoiled stacks (spoilDay <= today) are discarded honestly —
+        // never laundered onto the racks with a fresh spoilDay. Raw day
+        // boundary (bonus=0): the player's preservation bonus must not
+        // shrink the 0..2-day about-to-rot window below.
+        if (this.isSpoiled && this.isSpoiled(it, 0)) continue;
+        if (sd - day > 2) continue; // only the about-to-rot surplus
+        eligible.push(it);
+      }
+      // soonest-spoiling first: tonight's dinner is at the front, the
+      // would-rot excess at the back.
+      eligible.sort((a, b) => (a.spoilDay - b.spoilDay) ||
+        (((b.kcalEach || 0) * (b.units || 1)) - ((a.kcalEach || 0) * (a.units || 1))));
+      // RACKS-FULL (longsim food 2026-10-11): the village eats ~125 kcal
+      // per person per day from the pantry (measured ~1.5k/night for 12)
+      // and eats fresh-first — a preserved stockpile bigger than this
+      // cook's own shelf x the daily draw will rot on the racks. Smoking
+      // it anyway converts fresh rot into preserved rot (measured: ~28%
+      // of all waste was dried/smoked food the village never got to).
+      // When the racks hold more than the haven can eat before it turns,
+      // the racks stay shut and the cook says so honestly.
+      let preservedKcal = 0;
+      for (const it of (v.pantry || [])) {
+        if (it && (it.foodState === 'preserved' || it.foodState === 'rendered'))
+          preservedKcal += (it.kcalEach || 0) * (it.units || 1);
+      }
+      const ownShelf = skill > 0 ? 30 + 5 * skill : 15;
+      const rackCap = 125 * ((v.roster || []).length || 10) * Math.max(1, ownShelf - 2);
+      // RACKS-FULL GUARD (longsim scale-wall r5 2026-10-13, opt-in gate
+      // FOODLEVER_R5=1): the guard blocked 35-50% of smoke resolutions
+      // while ~2.4k kcal/day rotted fresh (8-run baseline: 1,291k rot,
+      // 95%+ fresh; preserved rot only 44k = 3.4%). The guard solves a
+      // preserved-rot problem that doesn't exist in the current data
+      // while causing the fresh-rot problem. With the gate on, the
+      // guard stands down: the cook smokes eligible surplus up to
+      // budget whenever it's there. Default OFF: pristine parity.
+      // (The famine-aware variant was killed: pantryDays<7 never
+      // co-occurs with racks-full — the conditions are mutually
+      // exclusive. This simpler variant is the honest test.)
+      let _racksStandDown = false;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.FOODLEVER_R5 === '1') {
+          _racksStandDown = true;
+        }
+      } catch (e) { console.warn('[preservation] experiment flag', e); }
+      const racksFull = preservedKcal >= rackCap && !_racksStandDown;
+      let keepFresh = reserve, budget = 4000, workKcal = 0;
+      if (!racksFull) for (const it of eligible) {
+        const per = it.kcalEach, units = it.units;
+        const keep = Math.min(units, Math.ceil(keepFresh / per));
+        keepFresh = Math.max(0, keepFresh - keep * per);
+        const take = Math.min(units - keep, Math.floor(budget / per));
+        workKcal += take * per; budget -= take * per;
+      }
+      return { v, day, skill, reserve, eligible, preservedKcal, racksFull, workKcal };
+    },
+    npcHavenWorkReady(vid) {
+      const v = this.state.village, person = this.getPerson(vid);
+      if (this.over || this.inCombat() || vid === this.villagerId || vid === this.state.scholar.villagerId ||
+          !(v.roster || []).includes(vid) || !person || person.dead) return false;
+      if (v.away?.[vid] || v.assignments?.[vid] || Object.values(v.taskLeads || {}).includes(vid) ||
+          v.gardenKeeper === vid || this.isEngaged(vid) || this.isSheltered?.(vid) ||
+          this.partyMembers?.().includes(vid) || (v.followers || []).includes(vid) ||
+          this.waterFavorCompanions?.().includes(vid) || this.companyFavorHolding?.(vid)) return false;
+      const node = this.npcNode(vid), needs = this.npcNeeds(vid);
+      if (!node || node.nx !== (v.px ?? 4) || node.ny !== (v.py ?? 4) ||
+          (v.health?.[vid] ?? 100) < 40 || (needs.energy ?? 100) < 35 || (needs.hunger ?? 0) > 55) return false;
+      const part = this.state.scholar.day + ':' + this.dayPart;
+      return v.workedPart?.[vid] !== part;
+    },
+    autonomousCookReady(vid) {
+      return this.npcHavenWorkReady(vid) && this.havenPreservationPlan(vid).workKcal > 0;
+    },
+
     resolveOneAssignment(vid, a) {
+      if (a.autonomous && (a.task !== 'cook' || !this.autonomousCookReady(vid))) return false;
       if(a.task==='garden'&&(!(this.state.village.roster||[]).includes(vid)||!this.getPerson(vid)||this.getPerson(vid).dead))return;
       if (this.waterFavorCompanions?.().includes(vid)) return;
       if (this.companyFavorHolding?.(vid)) return;
       const v = this.state.village;
+      // Explicit duties and autonomous objectives share one work-part record.
+      // A consumed order must not become a second autonomous shift this part.
+      v.workedPart = v.workedPart || {};
+      v.workedPart[vid] = this.state.scholar.day + ':' + this.dayPart;
       const vp = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */ || {};
       const first = this.displayName(vid);
@@ -6802,9 +6989,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Never throttles into famine: an empty pantry never engages.
       if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleEngaged()) {
         const from = a.task;
-        if(from === 'garden' && this.gardenMaintain(vid)>0){
-          this.say(`🌱 ${first} waters and weeds the beds before taking up other work. The harvest can wait.`);
-          this.creditDeed && this.creditDeed(vid,'gardening');
+        if(from === 'garden'){
+          const maintained = this.gardenMaintain(vid)>0;
+          // Full shelves pause harvesting, not paid progress on immature beds.
+          // Use this resident's own magic/hunger and the existing daily gate.
+          // A successful cast uses the duty; it does not also earn a full haul.
+          if(vid !== this.villagerId && this.gardenMagicGate(vid).ok && this.cultivateGarden(vid) === true){
+            this.creditDeed && this.creditDeed(vid,'gardening');
+            this.bumpTrust(vid, 1, 'worked the garden');
+            this.remember(vid, 'task', 'garden (assigned)');
+            return;
+          }
+          if(maintained){
+            this.say(`🌱 ${first} waters and weeds the beds before taking up other work. The harvest can wait.`);
+            this.creditDeed && this.creditDeed(vid,'gardening');
+          }
         }
         const alt = this.prodThrottleAltTask();
         // FOODVOICE2 per-day voice gate (see header above): voice once per
@@ -7138,83 +7337,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // the rung (preserved) is one.
         let preservedNote = '';
         try {
-          const person = (this.getPerson ? this.getPerson(vid) : null) || vp || {};
-          const skill = this.specialistSkill ? this.specialistSkill(person, 'preserver') : 0;
-          const day = (this.state.scholar || {}).day || 1;
-          const v = this.state.village;
-          // DINNER-FIRST (longsim food 2026-10-11): the village eats
-          // fresh-first at the nightly meal (pantryDraw: soonest-spoiling
-          // first, slabs last) — and the cook resolves 3x/day while the
-          // village eats once at night. Smoking tonight's dinner at 0.80x
-          // destroys value in efficient villages (measured: they flip from
-          // survived to lost). So: reserve ~2 nights of the village's ACTUAL
-          // pantry draw — measured ~1.5k/night for 12 (villagers eat own
-          // production first; total need is NOT the draw). The soonest-
-          // spoiling stays fresh for tonight and tomorrow; only the excess
-          // beyond the reserve hits the racks. The reserve errs big on
-          // purpose: a too-big reserve merely delays preservation a day; a
-          // too-small one steals dinner.
-          let reserve = 0;
-          try {
-            reserve = 250 * ((v.roster || []).length || 10);
-          } catch (e) { reserve = 2500; }
-          const eligible = [];
-          for (const it of (v.pantry || [])) {
-            if (!it || (it.kcalEach || 0) <= 0 || (it.units || 0) <= 0) continue;
-            if (it.bonded) continue;
-            if (it.foodState === 'preserved' || it.foodState === 'rendered') continue;
-            if ((it.foodKind || '') === 'pemmican') continue;
-            if (this.isKeepsake && this.isKeepsake(it)) continue;
-            const sd = it.spoilDay;
-            if (sd === undefined || sd === null || sd >= 9999) continue;
-            // CANON (PRESERVATION.md): rot can't be smoked back into food.
-            // Spoiled stacks (spoilDay <= today) are discarded honestly —
-            // never laundered onto the racks with a fresh spoilDay. Raw day
-            // boundary (bonus=0): the player's preservation bonus must not
-            // shrink the 0..2-day about-to-rot window below.
-            if (this.isSpoiled && this.isSpoiled(it, 0)) continue;
-            if (sd - day > 2) continue; // only the about-to-rot surplus
-            eligible.push(it);
-          }
-          // soonest-spoiling first: tonight's dinner is at the front, the
-          // would-rot excess at the back.
-          eligible.sort((a, b) => (a.spoilDay - b.spoilDay) ||
-            (((b.kcalEach || 0) * (b.units || 1)) - ((a.kcalEach || 0) * (a.units || 1))));
+          const { day, skill, v, reserve, eligible, preservedKcal, racksFull } = this.havenPreservationPlan(vid);
           let keepFresh = reserve;
           const toPreserve = [];
-          // RACKS-FULL (longsim food 2026-10-11): the village eats ~125 kcal
-          // per person per day from the pantry (measured ~1.5k/night for 12)
-          // and eats fresh-first — a preserved stockpile bigger than this
-          // cook's own shelf x the daily draw will rot on the racks. Smoking
-          // it anyway converts fresh rot into preserved rot (measured: ~28%
-          // of all waste was dried/smoked food the village never got to).
-          // When the racks hold more than the haven can eat before it turns,
-          // the racks stay shut and the cook says so honestly.
-          let preservedKcal = 0;
-          for (const it of (v.pantry || [])) {
-            if (it && (it.foodState === 'preserved' || it.foodState === 'rendered'))
-              preservedKcal += (it.kcalEach || 0) * (it.units || 1);
-          }
-          const ownShelf = skill > 0 ? 30 + 5 * skill : 15;
-          const rackCap = 125 * ((v.roster || []).length || 10) * Math.max(1, ownShelf - 2);
-          // RACKS-FULL GUARD (longsim scale-wall r5 2026-10-13, opt-in gate
-          // FOODLEVER_R5=1): the guard blocked 35-50% of smoke resolutions
-          // while ~2.4k kcal/day rotted fresh (8-run baseline: 1,291k rot,
-          // 95%+ fresh; preserved rot only 44k = 3.4%). The guard solves a
-          // preserved-rot problem that doesn't exist in the current data
-          // while causing the fresh-rot problem. With the gate on, the
-          // guard stands down: the cook smokes eligible surplus up to
-          // budget whenever it's there. Default OFF: pristine parity.
-          // (The famine-aware variant was killed: pantryDays<7 never
-          // co-occurs with racks-full — the conditions are mutually
-          // exclusive. This simpler variant is the honest test.)
-          let _racksStandDown = false;
-          try {
-            if (typeof process !== 'undefined' && process.env && process.env.FOODLEVER_R5 === '1') {
-              _racksStandDown = true;
-            }
-          } catch (e) {}
-          const racksFull = preservedKcal >= rackCap && !_racksStandDown;
           if (!racksFull) {
           for (const it of eligible) {
             const per = it.kcalEach || 1;
@@ -7685,6 +7810,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
           }
           if (!placed) person.items.push({ itemId: ammoId, material: ammoId, units: made, name: adef.name || ammoId, kcalEach: 0, kg: adef.kg || 0.1 });
+          try { this.creditDeed(vid, 'crafting'); // actual ammo production
+          } catch (e) { console.warn('[tracks] ammo production deed', e); }
           try { if (this.stashLog) this.stashLog('take', adef.name || recipe.name || ammoId, made, vid); } catch (e2) {}
           try { if (this.tele) this.tele('ammo_craft', { vid: vid, item: ammoId, ok: true }); } catch (e3) {}
         } else {
@@ -8010,6 +8137,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.deathGriefBeat(vid);
         this.bumpTrust(vid, -2);
       }
+      if (pViaAid && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) this.settleAidRaidFight();
     },
 
     // hurt a villager (non-player). Tracks health, handles death.
@@ -8450,29 +8578,43 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // --- village node ---
     // the roster: who lives here this run. mains talk; background have one line each.
     villageRoster() {
-      const roster = this.state.village.roster || [];
+      const v = this.state.village;
+      const roster = v.roster || [];
       const conflicts = this.state.village.conflicts || [];
       // NAME GATE (break-it knowledge 2026-10-10): this feeds the haven
       // panel — pre-System, villagers are stranger descriptors, not names.
       // (You know your own name.) displayName is the funnel.
       const shownName = (id, trueName) => id === this.villagerId ? trueName : this.displayName(id);
+      const project = row => {
+        const id=row.id,node=v.nodePos?.[id],hx=v.px??4,hy=v.py??4;
+        const presence=id===this.villagerId?'You':v.away?.[id]||node&&(node.nx!==hx||node.ny!==hy)
+          ? 'Away from Haven':!node?'Location not known':v.npcInside?.[id]===false?'On the Haven grounds':'Inside the Haven hall';
+        const meeting=this.convoFavorDepartureReservation?.(id,0);
+        return {...row,presence,appointment:meeting?.reason||null};
+      };
       return roster.map(id => {
         const main = this.data.villagers.find(v => v.id === id);
         if (main) {
           const c = conflicts.find(x => !x.resolved && x.known && (x.a === id || x.b === id));
-          return {
+          return project({
             id, name: shownName(id, main.name), formerOccupation: main.formerOccupation, isMain: true,
             langNote: this.langNote(id), conflictNote: this.conflictNote(c, id),
-          };
+          });
         }
         const bg = (this.data.background_survivors || []).find(v => v.id === id);
-        if (bg) return { id, name: shownName(id, bg.name), formerOccupation: bg.formerOccupation, line: bg.line, isMain: false };
-        return { id, name: this.displayName(id), formerOccupation: '', isMain: false };
+        if (bg) return project({ id, name: shownName(id, bg.name), formerOccupation: bg.formerOccupation, line: bg.line, isMain: false });
+        return project({ id, name: this.displayName(id), formerOccupation: '', isMain: false });
       });
     },
 
     villageInfo() {
       const v = this.state.village;
+      // This surface needs only identity. getPerson's background fallback
+      // hydrates a full character and draws RNG; opening Haven must not reroll
+      // their life just to read their name after succession/Continue.
+      const bearer = (this.data.villagers || []).find(p => p.id === this.villagerId)
+        || (v.rosterChars || {})[this.villagerId]
+        || (this.data.background_survivors || []).find(p => p.id === this.villagerId);
       const codexN = Object.keys(this.state.codex.plants).length;
       const atmos = [
         'The fire is lit. Someone is mending something. It smells like smoke and rain.',
@@ -8483,7 +8625,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         name: v.name, pop: 12, pantryKcal: Math.round(this.pantryKcalLive(v)),
         atmos: atmos[this.state.scholar.day % atmos.length],
         codexN,
-        scholarName: this.data.villagers.find(x => x.id === this.villagerId).name,
+        scholarName: bearer?.name || 'Survivor',
       };
     },
 
@@ -8497,7 +8639,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.state.scholar.lastHavenDay == null) this.state.scholar.lastHavenDay = this.state.scholar.day || 1;
       this.dayPart = 0; this.ap = 1;
       this.state.scholar.dayTicks = 0; this.state.scholar.actionClock = 0; // action clock: fresh budget
-      const first = this.data.villagers.find(x => x.id === this.villagerId).name.split(' ')[0];
       this.say(`You tell the others you're heading out. Someone nods. "Come back before dark."`);
       this.say(`— DAY 1 DAWN — ${DAY_PART_HINT.dawn}`);
       this.save();
@@ -8820,7 +8961,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             needsCooking: item.needsCooking, rawKcal: item.rawKcal, cookedKcal: item.cookedKcal,
             // TRICHINOSIS (break-it food 2026-10-10): the homecoming pool
             // never washes worms — same contract as takenStack.
-            parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares }, 500);
+            parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares,
+            ...(item.forageShares ? {forageShares:item.forageShares} : {}) }, 500);
         }
         // first return: someone explains the pooling. after that, it's understood.
         if (!vv.pooledFoodExplained && give.length) {
@@ -8977,7 +9119,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           cookedKcal: item.cookedKcal, burnt: item.burnt, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): exile amends don't wash
           // worms either — same field contract as takenStack.
-          parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares }, 500);
+          parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares,
+          ...(item.forageShares ? {forageShares:item.forageShares} : {}) }, 500);
       }
       s.inventory = (s.inventory || []).filter(i => !giveSet.has(i));
       const givenKcal = Math.round(give.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 0), 0));
@@ -9002,6 +9145,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return state;
     },
     syncRun() {
+      // Capture actual live resident objects, not summaries or a fresh kit.
+      const village=this.state?.village;
+      if(village){
+        village.rosterChars=village.rosterChars||{};
+        for(const id of village.roster||[]){const person=(this.data.villagers||[]).find(p=>p.id===id);if(person)village.rosterChars[id]=person;}
+      }
       // COMBAT PERSISTENCE (Steve 2026-10-06): save active fight so it survives
       // PWA updates. Fighters are serialized minimally; reconstructed on load.
       // FIGHT FIDELITY (break-it persistence 2026-10-08): the old whitelist
@@ -9022,6 +9171,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             gridSize: f.gridSize,
             tableTrial: !!f.tableTrial,
             signatureState: this.tbSignatureState(f),
+              arenaDetail: f.arenaDetail || null,
             ...(f.coalitionArena ? {gridSize:f.gridSize,coalitionArena:f.coalitionArena,worldOrigin:f.worldOrigin || null} : {}),
             fighters: (f.fighters || []).map(ft => {
               try {
@@ -9216,6 +9366,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // expedition either.
       if (!s || !s.run || !s.scholar || !s.run.map) return false;
       this.state = s;
+      // Exile formerly wrote null: the grid's !==false meant "hall" while
+      // controls/shelter read it as outdoors. Give all consumers one boolean.
+      // A missing legacy flag retains the original hall default only when
+      // actually home and not exiled; missing flags away never grant shelter.
+      if (s.scholar.insideHaven == null) {
+        const m=s.run.map,home=m.tiles?.[m.py]?.[m.px]?.type==='haven';
+        s.scholar.insideHaven=s.scholar.insideHaven===undefined&&home&&!s.scholar.exiled;
+      }
+      if (this.migrateCorpseScenes) this.migrateCorpseScenes();
       // Remove only the legacy phantom recipient, never real resident standing.
       if (s.village && s.village.trust) delete s.village.trust.null;
       // BROADCAST FRAME (break-it shows r3 2026-10-10): a mid-show save keeps
@@ -9321,9 +9480,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // re-inject the generated cast: they live in the save, not in the JSON
       const rc = (s.village && s.village.rosterChars) || {};
-      this.data.villagers = (this.data.villagers || []).filter(v => !(v.id || '').startsWith('gen_'));
+      this._resetPersonRegistry();
       for (const id of Object.keys(rc)) {
-        if (!this.data.villagers.find(v => v.id === id)) this.data.villagers.push(rc[id]);
+        const person=rc[id];
+        if(!person||person.id!==id){console.warn('[person restore] invalid saved person',id);continue;}
+        this.data.villagers=this.data.villagers.filter(p=>p.id!==id);
+        this.data.villagers.push(person);
+      }
+      // Deterministic legacy recovery uses only authored seed facts. Lost
+      // possessions are unknown: never create a fresh starter kit or reroll it.
+      for(const id of s.village.roster||[]){
+        if(this.data.villagers.some(p=>p.id===id))continue;
+        const seed=(this.data.background_survivors||[]).find(p=>p.id===id);
+        if(!seed)continue;
+        const person={...JSON.parse(JSON.stringify(seed)),items:[],stashed:[],equipped:{},legacyPersonRecovery:{source:'authored-seed',possessions:'unknown'}};
+        s.village.rosterChars=s.village.rosterChars||{};s.village.rosterChars[id]=person;this.data.villagers.push(person);
       }
       this.over = false; this.won = false;
       // VILLAGELOST RESET (break-it persistence r5 2026-10-09): villageLost
@@ -9351,6 +9522,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (const cvid of Object.keys(vcv)) {
             const cc = vcv[cvid];
             if (!cc || !cc.active) continue;
+            // The phone restores this saved, validated prompt and its exact
+            // choices. All ordinary conversations keep walk-away settlement.
+            if (!s.run.tbfight && this.partyDecisionCanResume?.(cvid)) continue;
             const substantive = (cc.exchanges || 0) >= 1 || (cc.transcript || []).length > 0;
             if (substantive) {
               try { this.endConvo(cvid, 'left'); }
@@ -9397,7 +9571,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // cleared before restoring (or a belltoad pack would answer the call in
       // some other fight's round 2).
       try {
-        const tbS = r.tbfight;
+        const tbS = this.restoreAdSponsors ? this.restoreAdSponsors(r.tbfight) : r.tbfight;
         this._pendingPack = null;
         // STALE FIGHT (break-it persistence 2026-10-09): the restore below
         // only assigns tbfight when the save HAS a fight. Loading a peaceful
@@ -9427,7 +9601,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // Reattach monster definition
               if (fs.monsterId) {
                 ft.monsterId = fs.monsterId;
-                const mdef = (this.data.monsters || []).find(m => m.id === fs.monsterId);
+                const summons = (this.data.monsterBehaviors || {}).summons || {};
+                const mdef = (this.data.monsters || []).find(m => m.id === fs.monsterId) ||
+                  (Object.prototype.hasOwnProperty.call(summons, fs.monsterId) ? summons[fs.monsterId] : null);
                 if (mdef) ft.mdef = mdef;
               }
             } catch (e2) { droppedCorrupt++; continue; }
@@ -9446,8 +9622,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // node+species search in corpseForKill can find the real body.
             if (ft._deathCorpse && ft._deathCorpse.id) {
               const real = (this.state.corpses || []).find(c => c && c.id === ft._deathCorpse.id);
-              if (real) ft._deathCorpse = real;
+              if (real) {
+                ft._deathCorpse = real;
+                if (real.sceneInferred === 'legacy-outside') {
+                  // A saved live fighter's exact corpse link supplies room/frame
+                  // evidence which an unattached legacy body does not have.
+                  real.scene = this.corpseScene(real.node, !!s.scholar.insideHaven);
+                  real.sceneInferred = 'legacy-saved-fight';
+                  real.fightId = tbS.id;
+                  real.fighterKey = ft.key;
+                  real.battleGrid = tbS.coalitionArena?.returned ? 9 : (tbS.gridSize || 9);
+                }
+              }
               else delete ft._deathCorpse;
+            }
+            // Legacy fallen residents have no monster-style cached pointer.
+            // Their unique ID and matching saved fighter position still identify
+            // the body in this frame; never reframe a recovered/moved body.
+            if (ft.villagerId && ft.alive === false) {
+              const body = (this.state.corpses || []).find(c => c && !c.recovered &&
+                c.sceneInferred === 'legacy-outside' && c.villagerId === ft.villagerId &&
+                c.node?.x === this.map.px && c.node?.y === this.map.py && c.mx === ft.mx && c.my === ft.my);
+              if (body) {
+                body.scene = this.corpseScene(body.node, !!s.scholar.insideHaven);
+                body.sceneInferred = 'legacy-saved-fight';
+                body.fightId = tbS.id; body.fighterKey = ft.key;
+                body.battleGrid = tbS.coalitionArena?.returned ? 9 : (tbS.gridSize || 9);
+              }
             }
             // Drop monster fighters that can't reattach a def — but never the
             // player: a save without its bearer is rejected by the scholar
@@ -9524,6 +9725,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let turnIdx = (droppedGhosts > 0 || droppedCorrupt > 0 || !Array.isArray(tbS.order)) ? 0 : (tbS.turnIdx || 0);
           if (turnIdx >= order.length) turnIdx = 0;
           if (tbS.playerCommandReturn && order.includes('p')) turnIdx = order.indexOf('p');
+          const arenaSize = Number.isSafeInteger(tbS.gridSize) && tbS.gridSize >= 9 && tbS.gridSize <= 32 ? tbS.gridSize : 9;
+          const arenaDetail = Array.isArray(tbS.arenaDetail) && tbS.arenaDetail.length === arenaSize && tbS.arenaDetail.every(row=>Array.isArray(row)&&row.length===arenaSize&&row.every(cell=>typeof cell==='string'))
+            ? tbS.arenaDetail.map(row=>row.slice()) : Array.from({length:arenaSize},()=>Array(arenaSize).fill('dirt'));
           this.tbfight = {
             ...this.tbSignatureState(tbS.signatureState),
             gridSize: Number.isSafeInteger(tbS.gridSize) && tbS.gridSize >= 9 && tbS.gridSize <= 32 ? tbS.gridSize : undefined,
@@ -9537,6 +9741,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             pendingTurnKey: order.includes(tbS.pendingTurnKey) ? tbS.pendingTurnKey : null,
             over: false, result: null,
             terraform: tbS.terraform || {},
+            arenaDetail: this.state.arenaContest ? arenaDetail : null,
             // BETRAYAL RESTORE (break-it combat r7 2026-10-09): person-fight
             // flags persisted in syncRun. Without them the party.js tbEndCheck
             // wrapper can't recognize the fight and it resolves as a monster
@@ -9584,6 +9789,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             _counterLastMoveRound: (tbS.counterLastMoveRound == null) ? undefined : tbS.counterLastMoveRound,
             _counterLastMoveDir: tbS.counterLastMoveDir || null,
           };
+          if (this.state.arenaContest) {
+            // Older arena saves never recorded the pre-show square. Keep
+            // their stored scene and a bounded return square, without claiming
+            // to recover travel history the save did not retain.
+            if (!this.state.arenaContest.origin) this.state.arenaContest.origin = {
+              bearer: this.villagerId, mx: Math.max(0,Math.min(8,this.state.scholar.mx ?? 4)), my: Math.max(0,Math.min(8,this.state.scholar.my ?? 4)),
+              insideHaven: this.state.scholar.insideHaven, location: this.location, legacy: true,
+            };
+            this.tbArrangeFootprints();
+          }
           // BETRAYAL AFTERMATH CONTEXT (break-it combat r7 2026-10-09):
           // _lastBetrayal is session state, not save data — rebuild it from
           // the restored fight so betrayalAftermath still resolves (gossip,
@@ -10484,11 +10699,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const v of (this.state.otherVillages || [])) {
         const dist = Math.abs(v.x - px) + Math.abs(v.y - py);
         if (dist <= 2) {
-          const firstSight = !v.generated;
-          // KNOWER LEDGER (2026-10-29): at their fire (dist <= 1) is a
-          // visit; smoke on the horizon (dist 2) is only seen-nearby.
+          // A generated world village is not this bearer's camp sighting.
+          const firstSight = !this.villageSighting(v.id);
+          // Preserve Muse's per-knower visit vs distant-sighting provenance.
           this.catchUpSim(v, { how: dist <= 1 ? 'visit' : 'seen-nearby' });
           if (!firstSight) continue;
+          const s = this.state.scholar;
+          if (!s.campSightings) s.campSightings = {};
+          s.campSightings[v.id] = { x:v.x, y:v.y, day:s.day, source:'smoke' };
           const prof = v.knowledgeProfile || {};
           const nPlants = Object.keys(prof.plants || {}).length;
           const focusWord = { fisher: 'fishing folk', forager: 'foragers', farmer: 'farmers', scavenger: 'scavengers' }[prof.focus] || 'survivors';
@@ -11018,6 +11236,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     genDetail(x, y) {
+      // A sealed television arena has its own ground. Its collision, plants
+      // and terraform must never alias the Haven where the contestant stood.
+      const battle = this.tbfight;
+      if (battle && !battle.over && this.state.arenaContest && x === this.map.px && y === this.map.py) {
+        return battle.arenaDetail || Array.from({length:this.tbGridSize()},()=>Array(this.tbGridSize()).fill('dirt'));
+      }
       const t = this.tileAt(x, y);
       // HAVEN VIEWS (break-it camps r13 2026-10-10): the haven tile keeps two
       // persistent view caches (groundsDetail/hallDetail) with t.detail as
@@ -11030,7 +11254,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // INSIDE vs OUTSIDE: scholar.insideHaven tracks which you're in.
       // The door leads outside to the Haven grounds (tents, fire, the world).
       if (t.type === 'haven') {
-        const inside = this.state.scholar ? this.state.scholar.insideHaven !== false : true;
+        const flag = this.state.scholar?.insideHaven;
+        const inside = flag !== false && flag !== null;
         if (!inside) {
           // OUTSIDE: the Haven grounds. Tents, a fire pit, worn paths.
           // The lodge sits in the center — its south approach faces the world.
@@ -11628,6 +11853,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // player has seen — tiles they've stood on, plus tiles learned by
     // comparing maps with villagers. Separate from tile.revealed, which
     // drives travel mechanics. seenTiles: "x,y" -> {k:'v'|'s', by}.
+    villageSighting(villageId) {
+      const v = (this.state.otherVillages || []).find(v => v.id === villageId);
+      const sighting = this.state.scholar.campSightings?.[villageId];
+      // A remembered position must not follow a camp to an unseen location.
+      return v && sighting && sighting.x === v.x && sighting.y === v.y ? sighting : null;
+    },
     markSeen(x, y, kind, by) {
       try {
         const s = this.state.scholar;
@@ -12396,6 +12627,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return { x: 4, y: 4 }; // unreachable in practice — every detail has walkable cells
     },
     travelTo(x, y, force, combatExit) {
+      // An existing mixed save must still permit the real priced barrier
+      // crossing. Ordinary travel cannot use this exception outside a fight.
+      if (!(combatExit && this.inCombat()) && this.contestBlocksWorldAction && this.contestBlocksWorldAction()) return null;
       // WORLD EDGE (explorer loop 2026-10-06): the 9x9 map is the whole
       // known world. A rim tap on a border node passes out-of-bounds coords
       // (e.g. (-1,3)) — tileAt is undefined there, and the old order crashed
@@ -12807,53 +13041,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // micro-move: step to an adjacent cell in the 9x9. 1 tick of time, no effort.
     // this is how you reach the plant, the water, the monster. the world is physical.
     microMove(cx, cy) {
-      // DEAD (break-it travel r6 2026-10-09): the corpse takes no steps —
-      // same class as the examineCell post-death fix (round 5), which the
-      // sibling sweep missed on every movement function.
-      if (this.over) return false;
-      // COMBAT (break-it travel 2026-10-08, sibling sweep): same class as the
-      // travelTo combat-escape — a raw microMove mid-fight slides scholar.mx/my
-      // without moving the tb fighter, desyncing the fight. Combat movement is
-      // tbPlayerMove's job (dpad/taps route there). Refuse here.
-      if (this.inCombat()) return false;
-      const s = this.state.scholar;
-      const px = s.mx ?? 4, py = s.my ?? 4;
-      const dx = Math.abs(cx - px), dy = Math.abs(cy - py);
-      if (dx > 1 || dy > 1 || (dx === 0 && dy === 0)) return false;
-      if (cx < 0 || cx > 8 || cy < 0 || cy > 8) return false;
-      // INTERACTION MODEL: the world is physical and consistent.
-      // blocks: you can't walk through. interact: what you can do from adjacent.
-      // tree blocks AND feeds (nuts). water blocks AND quenches. wall just blocks.
-      const detail = this.genDetail(this.map.px, this.map.py);
-      const cell = detail[cy] && detail[cy][cx];
-      const props = this.cellProps(cell);
-      if (props.blocks) return false; // can't walk through, but might interact (see cellInteract)
-      // FACING: you face where you step. The marker shows it.
-      s.facing = { x: Math.sign(cx - px), y: Math.sign(cy - py) };
-      // MOVEMENT COSTS (Steve 2026-10-05): walkStepKcal() per step. Not free,
-      // not punishing — walking the map feels light but never costless
-      // (9x9 crossing ≈ 32 kcal). Time cost (1 tick) unchanged.
-      // ONE PRICE (explorer break-it 2026-10-10): manual steps and committed
-      // walks levy the same walkStepKcal() — the same squares never cost 5x
-      // via the "Walk here" button again. SECOND SKIN / WANDERER:
-      // travel.cost_mult reduces the kcal cost (inside walkStepKcal).
-      // Movement is baseline. Power doesn't tax walking.
-      s.kcal = Math.max(0, s.kcal - this.walkStepKcal());
-      s.mx = cx; s.my = cy;
-      try { this._footstep(); } catch (e) {}
-      // MONSTERS MOVE WHEN YOU DO. A step can spook, warn, or trigger —
-      // the stance machine runs on steps, not just on interacts. (It didn't.
-      // Walking up to a deer did nothing until you touched something.)
-      this.monsterTurn(); this.animalTurn();
-      // EVERYONE ACTS (Steve 2026-10-07): your step is your turn — each NPC
-      // on this node then takes one action, in roster order.
-      try { this.villagerTurn(); } catch (e) {}
-      // ACTION CLOCK: a step is 1 tick + walkStepKcal() kcal. Monsters,
-      // animals, and villagers move on their own schedule (or when you ACT).
-      // But steps ACCUMULATE: every TICKS_PER_BATCH ticks, NPCs take a batch turn.
-      this.ensureVillagerPositions();
-      this.tickAction(1, { moving: true });
-      return true;
+      // Manual and committed steps run the same world; only blocked-path
+      // narration differs. Combat movement still belongs to tbPlayerMove.
+      return this.pathStep(cx, cy, { quietBlocked: true });
     },
 
     // cellInteract: tap a cell to USE it. but it's a MAYBE — you learn the truth up close.
@@ -13259,6 +13449,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     equip(itemIdx, slot) {
       const item = this.state.scholar.inventory[itemIdx];
       if (!item) return null;
+      if ((item.units ?? 1) <= 0) { this.say('There is none of that left to equip.'); return null; }
       const def = this.data.items.find(i => i.id === (item.itemId || item.id));
       if (!def) return null;
       // validate slot (EQUIPMENT 2026-10-06: body-part slots + misc)
@@ -13267,6 +13458,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         if (S.equipment) {
           const wantSlot = S.equipment.slotForItem(def);
+          // Legacy commands use the same canonical slots as the Pack buttons.
+          if (slot === 'weapon') slot = wantSlot;
+          if (slot === 'armor') slot = 'torso';
           const miscOk = /^misc[1-3]$/.test(slot || '');
           if (!miscOk && wantSlot && wantSlot !== slot && !(slot === 'armor' && wantSlot === 'torso')) {
             this.say(`That goes on your ${wantSlot}, not your ${slot}.`);
@@ -13284,14 +13478,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       this.state.scholar.equipped = this.state.scholar.equipped || {};
+      if (S.equipment) S.equipment.migrateEquipment(this.state.scholar);
       // unequip current (back to inventory, stays there)
       // equip new (remove from inventory, set slot)
-      // #806 HONEST ACCOUNTING (armorvillage 2026-10-23): the old worn piece
-      // used to VANISH on overwrite — the "unequip current (back to
-      // inventory)" comment had no code, and the ledger hook skipped
-      // oldId===nowId. Units are conserved: the displaced piece goes back to
-      // the pack, flags intact (bonded / alienLoot travel like unequip()).
-      const _displaced = this.state.scholar.equipped[slot] || null;
+      // #806: return displaced stock once; the whole-instance Take off path
+      // also preserves real mass/ownership. Do not append a second copy.
+      if (this.state.scholar.equipped[slot]) this.unequip(slot);
       // EQUIPMENT (Steve 2026-10-06): render hints for the sprite layer.
       let _hints = {};
       try {
@@ -13302,23 +13494,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (S.equipment.isFullSet(def.id)) _hints.fullSet = true;
         }
       } catch (e) {}
-      this.state.scholar.equipped[slot] = { itemId: def.id, name: def.name, ..._hints,
-        ...(item.bonded ? { bonded: true, bond: item.bond || 0, bondOffered: item.bondOffered || [], enhancements: item.enhancements || [] } : {}),
-        // ALIEN LOOT (Steve 2026-10-06): the knowledge-gate flag travels with
-        // the weapon — first swing is the learning moment (tbPlayerStrike).
-        ...(item.alienLoot ? { alienLoot: true, alienEffectHidden: item.alienEffectHidden } : {}) };
-      // remove from inventory (it's worn, not carried)
-      this.state.scholar.inventory.splice(itemIdx, 1);
-      // #806: the displaced piece returns to the pack (units conserved —
-      // inventory loses the newly-worn piece, regains the old one).
-      if (_displaced && _displaced.itemId) {
-        const _dd = this.data.items.find(i => i.id === _displaced.itemId) || {};
-        this.state.scholar.inventory.push({ itemId: _displaced.itemId,
-          name: _displaced.name || _dd.name || _displaced.itemId, units: 1, kcalEach: 0, kg: 0.5,
-          ...(_displaced.bonded ? { bonded: true, bond: _displaced.bond || 0,
-            bondOffered: _displaced.bondOffered || [], enhancements: _displaced.enhancements || [] } : {}),
-          ...(_displaced.alienLoot ? { alienLoot: true, alienEffectHidden: _displaced.alienEffectHidden } : {}) });
-      }
+      // Move one whole instance, including ownership, weight and reveal state.
+      this.state.scholar.equipped[slot] = { ...item, itemId: def.id, name: item.name || def.name, units: 1, ..._hints };
+      if ((item.units ?? 1) > 1) item.units -= 1;
+      else this.state.scholar.inventory.splice(itemIdx, 1);
       this.say(`Equipped ${def.name} (${slot}).`);
       // GEAR DISCOVERY (Steve 2026-10-09): wielding it teaches the recipe L1.
       try { this.noteGearHandled(def.id); } catch (e) {}
@@ -13349,11 +13528,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const eq = (this.state.scholar.equipped || {})[slot];
       if (!eq) return null;
       // back to inventory
-      this.state.scholar.inventory.push({ itemId: eq.itemId, name: eq.name, units: 1, kcalEach: 0, kg: 0.5,
-        ...(eq.bonded ? { bonded: true, bond: eq.bond || 0, bondOffered: eq.bondOffered || [], enhancements: eq.enhancements || [] } : {}),
-        // ALIEN LOOT (Steve 2026-10-06): the knowledge-gate flag comes home
-        // with the weapon, revealed or not.
-        ...(eq.alienLoot ? { alienLoot: true, alienEffectHidden: eq.alienEffectHidden } : {}) });
+      const def = this.data.items.find(i => i.id === (eq.itemId || eq.id));
+      this.state.scholar.inventory.push({ ...eq, units: 1, kcalEach: eq.kcalEach ?? 0, kg: eq.kg ?? def?.kg ?? 0.5 });
       delete this.state.scholar.equipped[slot];
       this.say(`Unequipped ${eq.name}.`);
       return null;
@@ -14312,12 +14488,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // cost 5x via the button, a noob trap on the accessibility tap-to-move
     // path. One square, one price.)
     walkStepKcal() {
-      let cost = 2;
-      try {
-        const mult = this.modTarget('travel.cost_mult', 1);
-        if (mult !== 1) cost = Math.max(1, Math.round(cost * mult));
-      } catch (e) {}
-      return cost;
+      const travel = typeof this.modTarget === 'function' ? this.modTarget('travel.cost_mult', 1) : 1;
+      return Math.max(1, Math.round(2 * travel * this.burden().moveMult));
     },
 
     // walkCost(n): the honest price of a committed n-square walk — quoted by
@@ -14338,6 +14510,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Returns the path ([[x,y],...]) or null.
     // The UI animates the FULL path — tap-to-move never teleports.
     beginPathWalk(tx, ty) {
+      if (this.contestBlocksWorldAction && this.contestBlocksWorldAction()) return null;
       // DEAD (break-it travel r6 2026-10-09): the corpse starts no walks.
       if (this.over) return null;
       // COMBAT (break-it travel 2026-10-08, sibling sweep): no committed walks
@@ -14369,7 +14542,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // square, villagers reposition), and revalidates the tile — the world
     // may have changed mid-walk. Returns true if the step landed, false if
     // the walk must stop here (caller purges the rest).
-    pathStep(tx, ty) {
+    pathStep(tx, ty, opts) {
+      if (this.contestBlocksWorldAction && this.contestBlocksWorldAction()) return false;
       // DEAD (break-it travel r6 2026-10-09): the corpse takes no steps.
       if (this.over) return false;
       // COMBAT (break-it travel 2026-10-08, sibling sweep): same desync class
@@ -14386,7 +14560,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // new blockers today, but the refusal must never be silent if it ever
       // fires. No silent actions: the player tapped "walk", they get the
       // reason the walk stops here.
-      if (this.cellProps(cell).blocks) { this.say('Blocked — the way changed under your feet. The walk stops here.'); return false; }
+      if (this.cellProps(cell).blocks) { if (!opts?.quietBlocked) this.say('Blocked — the way changed under your feet. The walk stops here.'); return false; }
+      const context = { state: this.state, bearer: this.villagerId, key: this.state.runKey,
+        x: this.map.px, y: this.map.py, inside: s.insideHaven };
+      const stillWalking = () => !this.over && !this.inCombat() &&
+        this.state === context.state && this.state.scholar === s &&
+        this.villagerId === context.bearer && this.state.runKey === context.key &&
+        this.map.px === context.x && this.map.py === context.y && s.insideHaven === context.inside;
       s.facing = { x: Math.sign(tx - px), y: Math.sign(ty - py) };
       // PER-STEP CHARGE (break-it travel r6 2026-10-09): the kcal for this
       // square leaves NOW, because the square is walked. beginPathWalk only
@@ -14397,12 +14577,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SECOND SKIN / WANDERER: travel.cost_mult reduces the kcal cost.
       s.kcal = Math.max(0, (s.kcal || 0) - this.walkStepKcal());
       s.mx = tx; s.my = ty;
-      try { this._footstep(); } catch (e) {}
-      // MONSTERS MOVE WHEN YOU DO — per square, same as microMove.
-      this.monsterTurn(); this.animalTurn();
+      try { this._footstep(); } catch (error) { console.warn('[walk] footstep', error); }
+      // The square is already landed and paid. A fight, death or scene change
+      // ends this world's response; never spend the successor's action clock.
+      if (!stillWalking()) return true;
+      this.monsterTurn();
+      if (!stillWalking()) return true;
+      this.animalTurn();
+      if (!stillWalking()) return true;
+      // EVERYONE ACTS (Steve 2026-10-07): one real NPC turn per landed square,
+      // regardless of whether the input was Dpad, adjacent tap or a full path.
+      try { this.villagerTurn(); } catch (error) { console.warn('[walk] villager turn', error); }
+      if (!stillWalking()) return true;
       this.ensureVillagerPositions();
+      if (!stillWalking()) return true;
       // ACTION CLOCK: one step = 1 tick. The beat you feel per step IS the cost.
       this.tickAction(1, { moving: true });
+      if (!stillWalking()) return true;
       // AMBIENT TICKS (Steve 2026-10-09): tiny per-step attach chance in
       // woods/thicket. Narrated + a visible status — never silent. The tiny
       // ones are atmosphere; the map-visible alien tick is the monster fight.
@@ -14414,7 +14605,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.applyStatus('scholar', 'tick_attached', { source: 'brushing through the brush' });
           this.say('Something itches at your ankle \u2014 you look down: a tick, latched on. (Tick attached \u2014 get it off cleanly; each day it stays, the fever risk climbs.)');
         }
-      } catch (e) {}
+      } catch (error) { console.warn('[walk] brush tick', error); }
       return true;
     },
 
@@ -14588,12 +14779,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Event and ability water (storm, rain_dancer, ant_trail) bypassed it:
       // a storm at a full pack pushed weight over capacity with no refusal.
       // Clamp to what fits; callers name the actual take from the return.
-      let room = liters;
-      try {
-        const cap = this.carryCapacity ? this.carryCapacity() : 99;
-        const wt = this.packWeight ? this.packWeight() : 0;
-        room = Math.max(0, Math.min(liters, Math.floor(cap - wt)));
-      } catch (e) { room = liters; }
+      const room = Math.floor(this.fittingCarryUnits(1, liters));
       for (let i = 0; i < room; i++) s.water.push({ liters: 1, quality, source });
       return room;
     },
@@ -15691,7 +15877,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // LUCK INSTRUMENTATION (rogue P0-6): record the honest fishing roll.
       const _fishRoll = Math.random();
-      try { this.luckRoll('fish', chance, _fishRoll < chance); } catch (e) {}
+      try { this.luckRoll('fish', chance, _fishRoll < chance); } catch (e) { console.warn('[measurement] luck hook failed', e); }
       if (_fishRoll < chance) {
         const fid = fishHere[Math.floor(Math.random() * fishHere.length)];
         _wl[fid]--; if (_wl[fid] <= 0) delete _wl[fid];
@@ -15887,6 +16073,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (amount === choice.units) this.state.scholar.inventory.splice(idx, 1);
       else item.units = choice.units - amount;
       this._creditPantryGift(donated, kcal);
+      this.forageFavorDeposit?.(donated, kcal);
       return null;
     },
     // Only an actual deliberate player transfer earns gift credit. Internal
@@ -16233,14 +16420,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const v = this.state.village;
       let totalKcal = 0, totalKg = 0, totalUnits = 0;
       const taken = [];
-      // WEIGHT BASE: snapshot carry weight BEFORE this pack. The loop mutates
-      // inventory/water as it goes, so rescanning mid-loop double-counts what
-      // was already taken (this call) — silently blocking water after food, or
-      // short-changing later food items. totalKg tracks only what THIS pack adds.
-      const baseKg = (this.state.scholar.inventory || []).reduce((t, i) => t + (i.kg || 0) * (i.units || 1), 0);
-      const baseWaterKg = this.waterWeight();
-      const max = this.carryCapacity();
-      const carryNow = () => baseKg + baseWaterKg + totalKg;
+      // Each fit reads the actual current effective load after prior transfers.
       // INDEX STABILITY: fully taking an item splices it out of the pantry,
       // which would shift the indexes of items handled later in the same pack.
       // Handle food indexes in DESCENDING order (water last) so splices never
@@ -16255,8 +16435,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (key === 'water') {
           const q = Math.min(qty, (v.water && v.water.clean) || 0);
           if (q <= 0) continue;
-          const carry = carryNow();
-          const canTake = Math.min(q, Math.floor(max - carry)); // 1L = 1kg
+          const canTake = Math.floor(this.fittingCarryUnits(1, q)); // whole liters, 1L = 1kg
           if (canTake <= 0) { this.sayGated('tooHeavy', 'Too heavy for more water.', 3); continue; }
           v.water.clean -= canTake;
           this.addWater(canTake, 'clean', 'Haven well');
@@ -16269,8 +16448,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (q <= 0) continue;
         const item = pantry[idx];
         // weight check per item (running total)
-        const carry = carryNow();
-        const canTake = Math.min(q, Math.floor((max - carry) / (item.kg || 0.1)));
+        const canTake = this.fittingCarryUnits(item.kg || 0.1, q);
         if (canTake <= 0) { this.sayGated('tooHeavy', `Too heavy for more ${item.name}.`, 3); continue; }
         item.units -= canTake;
         if (item.units <= 0) pantry.splice(pantry.indexOf(item), 1);
@@ -16284,7 +16462,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // FOOD REALITY: keep processing state — the haul stays workable.
           plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
-          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares, gardenShares: item.gardenShares };
+          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares, gardenShares: item.gardenShares,
+          ...(item.forageShares ? {forageShares:item.forageShares} : {}) };
         const existing = inv.find(i => this.stacksMatch(i, takenStack));
         if (existing) { this.mergeHarvestShares(existing, takenStack, canTake); existing.units += canTake; }
         else inv.push(takenStack);
@@ -16388,11 +16567,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       if (item.units <= 0) return null;
-      // weight check (includes water: 1L = 1kg)
-      const carry = (this.state.scholar.inventory || []).reduce((t, i) => t + (i.kg || 0) * (i.units || 1), 0) + this.waterWeight();
-      const max = this.carryCapacity();
-      if (carry + (item.kg || 0) > max) {
-        this.sayGated('tooHeavy', `Too heavy. Carrying ${carry.toFixed(1)}/${max} kg.`, 3);
+      if (!this.canCarry(item.kg || 0.1)) {
+        this.sayGated('tooHeavy', `Too heavy. Maximum hauling load is ${this.carryLimit()} kg.`, 3);
         return null;
       }
       // take one unit
@@ -16494,7 +16670,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const takenStack = { name: item.name, kcalEach: item.kcalEach, units: 1, spoilDay: this.pantryTakeSpoilDay(item), safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
         plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
-          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares, gardenShares: item.gardenShares };
+          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares, gardenShares: item.gardenShares,
+          ...(item.forageShares ? {forageShares:item.forageShares} : {}) };
       const existing = inv.find(i => this.stacksMatch(i, takenStack));
       if (existing) {
         this.mergeHarvestShares(existing, takenStack, 1);
@@ -16748,7 +16925,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // On the Haven node, the door is real: only NPCs on YOUR side of it
       // render. Inside villagers don't teleport out when you step outside.
       const havenNode = (px === (v.px ?? 4) && py === (v.py ?? 4));
-      const playerInside = havenNode ? (this.state.scholar.insideHaven !== false) : true;
+      const flag = this.state.scholar.insideHaven;
+      const playerInside = havenNode ? (flag !== false && flag !== null) : true;
       // Clear positions for NPCs who aren't on this node anymore — or who are
       // on the other side of the Haven door.
       for (const rid of Object.keys(v.positions)) {
@@ -17660,7 +17838,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const partKey = this.state.scholar.day + ':' + this.dayPart;
       if (v.gossip.some(g => g.action === action && g.partKey === partKey)) return;
       v.gossip.push({
-        action, dims: { ...dims }, heard: [...(heardBy || [])],
+        action, dims: { ...dims }, heard: [...(heardBy || [])], subjectId: dims.who || this.villagerId,
         distortion: 0, day: this.state.scholar.day, partKey, noTrust: !!noTrust,
       });
       // NPC TRIGGER (rogue P1, Talk 2 G2/P2-3 mid-trip re-targeting): gossip
@@ -17982,26 +18160,43 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // talkReason lines are TEMPLATES with a __NAME__ placeholder — see
     // renderTalkLine. The requester may earn their name between the request
     // firing and the player answering it, so the name renders at delivery.
+    makeTalkRequest(rid, kind, context) {
+      const def = this.data.characterGen?.convo?.requestContracts?.[kind];
+      if (!def) return null;
+      const s = this.state.scholar;
+      const request = { version: 1, kind, requesterId: rid, bearerId: this.villagerId,
+        createdDay: s.day, createdTick: s.dayTicks,
+        id: [this.state.runKey, this.villagerId, rid, s.day, s.dayTicks, kind].join(':'),
+        phase: 'start', answered: false };
+      if (context) request.context = JSON.parse(JSON.stringify(context));
+      return { line: def.line.replaceAll('{claim}', context?.claim || ''), request };
+    },
     talkReason(rid) {
       const v = this.state.village;
       for (const g of (v.gossip || [])) {
         if (!g.heard.includes(rid)) continue;
-        const neg = Object.entries(g.dims).some(([k, val]) => val < -3);
+        // A reputation story needs its real subject, not whichever body is
+        // currently controlled. Legacy subjectless stories remain unknown.
+        const subjectId = g.subjectId || g.dims.who;
+        if (subjectId !== this.villagerId) continue;
+        const opinions = this.data.characterGen?.convo?.requestContracts?.rumor?.opinions || {};
+        const neg = Object.entries(g.dims).find(([key, val]) => Object.hasOwn(opinions, key) && Number.isFinite(val) && val < -3);
         if (neg && Math.random() < 0.6) {
-          return { line: `"Can we talk?" __NAME__ glances around first. "People are saying things. About you. Is any of it true?"` };
+          return this.makeTalkRequest(rid, 'rumor', { subjectId, action: g.action, sourceDay: g.day,
+            sourceKey: g.partKey || null, dimension: neg[0], claim: opinions[neg[0]], epistemic: 'opinion' });
         }
       }
       const goal = this.npcGoal(rid);
       const pantryLow = this.pantryKcalLive(v) < 4000;
       const roll = Math.random();
-      if (goal === 'prove' && roll < 0.5) return { line: `"Can we talk?" __NAME__ shifts their weight. "I need something to do. Anything. Please."` };
-      if (goal === 'alone' && roll < 0.4) return { line: `"Can we talk?" __NAME__ sighs. "I need some space. A corner nobody needs me in. Is that okay?"` };
-      if (goal === 'family' && roll < 0.4) return { line: `"Can we talk? Have you seen anyone on the roads? Anyone at all? I'm asking everyone."` };
-      if (goal === 'lead' && (v.heat || {})[rid] > 0 && roll < 0.5) return { line: `"Can we talk?" __NAME__ doesn't wait for an answer. "We need to discuss how things are run here."` };
-      if (pantryLow && roll < 0.35) return { line: `"Can we talk?" __NAME__ keeps their voice low. "The stores. Have you looked at the stores? We're running thin."` };
+      if (goal === 'prove' && roll < 0.5) return this.makeTalkRequest(rid, 'work', { goal });
+      if (goal === 'alone' && roll < 0.4) return this.makeTalkRequest(rid, 'space', { goal });
+      if (goal === 'family' && roll < 0.4) return this.makeTalkRequest(rid, 'roads', { goal });
+      if (goal === 'lead' && (v.heat || {})[rid] > 0 && roll < 0.5) return this.makeTalkRequest(rid, 'leadership', { goal });
+      if (pantryLow && roll < 0.35) return this.makeTalkRequest(rid, 'stores', { pantryKcal: this.pantryKcalLive(v) });
       // JUST TALK (Steve 2026-10-05): people should come talk to you more.
       // Was 0.25 — approaches were so rare players never noticed the mechanic.
-      if (roll < 0.5) return { line: `"Can we talk?" __NAME__ sits down near you. "Just... talk. Like people used to."` };
+      if (roll < 0.5) return this.makeTalkRequest(rid, 'company');
       return null;
     },
     // renderTalkLine: a stored talk-request line is a template; the name is
@@ -18666,7 +18861,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (reason) {
             stepToward(); done();
             v.talkRequests = v.talkRequests || {};
-            v.talkRequests[rid] = { line: reason.line, day: this.state.scholar.day };
+            v.talkRequests[rid] = { ...reason, day: this.state.scholar.day };
             this.say(this.renderTalkLine(reason.line, rid) + ` (Talk to ${this.displayName(rid)}.)`);
             // ATTENTION CUE (Steve 2026-10-05): they came to YOU — chime so
             // the player actually notices. The quiet dot wasn't enough.
@@ -20216,13 +20411,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     markPostFleeRest(vid) {
       if (!vid || vid === this.villagerId) return false;
       try { if (this.getPerson) { const p = this.getPerson(vid); if (p && p.dead) return false; } } catch (e) {}
-      this._postFleeRest = this._postFleeRest || {};
-      this._postFleeRest[vid] = this.postFleeRestDay();
+      const v = this.state && this.state.village;
+      if (!v) return false;
+      v.postFleeRest = v.postFleeRest || {};
+      v.postFleeRest[vid] = this.postFleeRestDay();
       return true;
     },
     isPostFleeResting(vid) {
-      if (!vid || !this._postFleeRest) return false;
-      return this._postFleeRest[vid] === this.postFleeRestDay();
+      const rest = this.state && this.state.village && this.state.village.postFleeRest;
+      if (!vid || !rest) return false;
+      return rest[vid] === this.postFleeRestDay();
     },
     // villagerMonsterTick: the world lives without you. Villagers on a
     // monster's tile may kill it, drive it off, get mauled, or die.
@@ -20421,6 +20619,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (how) { try { this.remember(vid, 'defended', how, { sticky: true }); } catch (e) {} }
       }
       this.syncMonsterAlias();
+      if (wViaAid && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) this.settleAidRaidFight();
       // RAID DEFENSE BEAT (journey crisis r30 2026-10-19): havenRaidTick
       // narrates the defense aloud — it needs the fight record. Returning
       // the record is backward-compatible (no caller used the return).
@@ -20805,6 +21004,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
     },
     sleep() {
+      if (this.contestBlocksWorldAction && this.contestBlocksWorldAction()) return this.status();
       const s = this.state.scholar;
       const T = this.TIME;
       if (this.tbfight) { this.sayOncePerFight('Not in the middle of a fight.'); return this.status(); }
@@ -21175,6 +21375,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (adj.cell === 'plant') detail[adj.cy][adj.cx] = 'dirt'; // picked clean, like yours
           n.hunger = Math.max(0, n.hunger - 25 * cornucopia);
           n.energy = Math.max(0, (n.energy || 0) - 3);
+          // Incidental materials belong to the person who actually worked
+          // this shared patch, just as they do on the player's forage path.
+          const forager = this.getPerson(rid);
+          forager.items = forager.items || [];
+          this.collectForageByproducts([{ cell: adj.cell, x: adj.cx, y: adj.cy, nx: this.map.px, ny: this.map.py }], forager.items);
           // they eat some, bring some home for the village
           // WORK VISIBLE (Steve 2026-10-07): kids watch grown-ups work.
           // ctx.worked records who did real work this turn — npcChildAction
@@ -21983,7 +22188,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // remain stable; preparing a bed changes its actual ground to soil.
     gardenCellAt(cx, cy) {
       const t = this.playerTile();
-      if (!t || t.type !== 'haven' || this.state.scholar.insideHaven) return null;
+      const flag = this.state.scholar.insideHaven;
+      if (!t || t.type !== 'haven' || (flag !== false && flag !== null)) return null;
       const index = havenGardenIndex(cx, cy);
       if (index < 0) return null;
       return { index, plot: this.gardenPlots()[index] || null, locked: index >= Math.max(this.gardenCapacity(), this.gardenPlots().length) };
@@ -22472,7 +22678,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // monsterDisplayName: what the UI calls it. Village-agreed name wins;
     // otherwise the strange descriptor. The TRUE name never shows pre-System.
     monsterDisplayName(mid) {
-      const mdef = (this.data.monsters || []).find(m => m.id === mid);
+      const summons = (this.data.monsterBehaviors || {}).summons || {};
+      const mdef = (this.data.monsters || []).find(m => m.id === mid) ||
+        (Object.prototype.hasOwnProperty.call(summons, mid) ? summons[mid] : null);
       if (!mdef) return 'something';
       const e = (this.state.codex.monsters || {})[mid];
       if (e && e.villageName) return e.villageName;
@@ -24958,10 +25166,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // to bury, red hunger asleep, unknown ids) granted free XP + synergy
       // attempts with zero cost. The inner dispatch now reports whether the
       // activation actually fired; XP is granted only then.
+      const state = this.state, scholar = state.scholar, bearer = this.villagerId, key = state.runKey;
       this.tickAction(2);
+      if (this.over || this.state !== state || this.state.scholar !== scholar || this.villagerId !== bearer || this.state.runKey !== key) return false;
       const fired = this._activateAbilityInner(id, target);
-      if (fired) this.gainAbilityXP(id, 1);
-      return null;
+      if (fired && !this.over && this.state === state && this.state.scholar === scholar && this.villagerId === bearer && this.state.runKey === key) this.gainAbilityXP(id, 1);
+      return fired;
     },
 
     // _activateAbilityInner: the legacy hardcoded activatable branches.
@@ -25254,6 +25464,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return;
       }
       s.pendingEvolution = ab.id;
+      s.evolutionDeferred = false;
       s.evolutionChoices = choices.map(c => ({
         id: c.id, name: c.name, choiceText: c.choiceText, flavor: c.flavor,
         verb: c.verb, lane: c.lane, family: c.family,
@@ -25273,15 +25484,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     // chooseEvolution: player picks the evolution. The ability is REPLACED by
     // its evolved form (new id, evolvedFrom lineage, level 3 capstone).
-    // Never auto-granted; "not yet" defers (choice re-staged on next XP gain).
+    // Never auto-granted. Deferred choices remain available from You.
+    liveEvolutionChoices() {
+      const s = this.state.scholar;
+      if (this.over || !s.pendingEvolution) return [];
+      const ab = (s.abilities || []).concat(s.backgroundAbilities || []).find(a => a && a.id === s.pendingEvolution);
+      if (!ab || ab.level < 3 || ab.evolution) return [];
+      const offered = new Set((s.evolutionChoices || []).map(c => c.id));
+      return this.evolutionChoicesFor(ab.id).filter(c => offered.has(c.id));
+    },
     chooseEvolution(evoId) {
       const s = this.state.scholar;
+      const choices = this.liveEvolutionChoices();
+      if (!choices.length) return null;
       if (evoId === 'defer') {
-        this.say(`Not yet. ${s.pendingEvolution || 'It'} waits — mastery is patient. (The choice will return.)`);
+        if (s.evolutionDeferred) return null;
+        this.say('Evolution saved for later. Open You to choose when you are ready.');
         s.evolutionDeferred = true;
         return null;
       }
-      const choice = (s.evolutionChoices || []).find(c => c.id === evoId);
+      const choice = choices.find(c => c.id === evoId);
       if (!choice) return null;
       const all = (s.abilities || []).concat(s.backgroundAbilities || []);
       const ab = all.find(a => (a.id || a) === s.pendingEvolution);
@@ -25296,9 +25518,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.evolutionChoices = null;
       s.pendingEvolution = null;
       s.evolutionDeferred = false;
-      try { this.tele('ability_evolved', { from: rootId, to: evoId, who: 'player' }); } catch (e) {}
+      this.tele('ability_evolved', { from: rootId, to: evoId, who: 'player' });
       this.say(`🌀 ${choice.name}. ${choice.verb}`);
-      if (choice.flavor) this.say(`"${choice.flavor}"`);
+      if (choice.flavor) this.say(this.quoteWrap(choice.flavor));
       // Evolution flags that need engine hooks are applied here (one-liners).
       this.applyEvolutionFlags(ab);
       this.recomputeActiveSynergies();
@@ -26441,16 +26663,41 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // CODEX NETWORKING: codexes talk within friendly organizations.
     // KNOWLEDGE HAS TWO PARTS:
-    // --- pack weight: 15 kg. distance has a price; so does carrying. ---
+    // Nominal capacity sets burden; carryLimit sets voluntary pickup admission.
     packCapacity() { return this.carryCapacity(); },
     packWeight() {
       // hollow_bones: birdlike bones — you weigh 30% less for carry calculations.
-      const raw = this.state.scholar.inventory.reduce((t, i) => t + (i.units * (i.kg || 0.1)), 0);
+      const raw = this.state.scholar.inventory.reduce((t, i) => t + ((i.units ?? 1) * (i.kg || 0.1)), 0);
       // water has mass: 1L = 1kg. it counts.
       const waterKg = (this.state.scholar.water || []).reduce((t, b) => t + (b.liters || 1), 0);
       return (raw + waterKg) * this.modTarget('carry.weight_mult', 1);
     },
-    canCarry(kg) { return this.packWeight() + kg <= this.packCapacity(); },
+    // Nominal capacity still sets burden/combat tiers. Extra hauling is
+    // possible up to twice that load; old excess possessions are never erased.
+    carryLimit() { return this.carryCapacity() * 2; },
+    burden() {
+      const kg = this.packWeight(), capacity = this.carryCapacity();
+      const tier = S.calories && typeof S.calories.burdenTier === 'function'
+        ? S.calories.burdenTier(kg, capacity)
+        : { name: 'unknown', moveMult: 1, workAdd: 0, speedPen: 0, dodgePen: 0 };
+      return { ...tier, kg, capacity, limit: this.carryLimit() };
+    },
+    fittingCarryUnits(unitKg, wanted) {
+      if (!Number.isFinite(unitKg) || unitKg < 0 || !Number.isFinite(wanted) || wanted <= 0) return 0;
+      const weight = this.packWeight(), limit = this.carryLimit(), mult = this.modTarget('carry.weight_mult', 1);
+      if (![weight, limit, mult].every(Number.isFinite) || weight < 0 || limit < 0 || mult < 0 || weight > limit + 1e-9) return 0;
+      const perUnit = (unitKg || 0.1) * mult;
+      return perUnit === 0 ? wanted : Math.min(wanted, Math.max(0, Math.floor((limit - weight) / perUnit + 1e-9)));
+    },
+    canCarry(kg) {
+      if (!Number.isFinite(kg) || kg < 0) return false;
+      const weight = this.packWeight(), limit = this.carryLimit(), mult = this.modTarget('carry.weight_mult', 1);
+      return [weight, limit, mult].every(Number.isFinite) && mult >= 0 && weight + kg * mult <= limit + 1e-9;
+    },
+    workCost(base) {
+      if (!Number.isFinite(base) || base < 0) throw new RangeError('Effort must have a finite nonnegative cost');
+      return base + this.burden().workAdd;
+    },
 
     // --- actions: each one consumes the day-part and advances time ---
     // bumpPlantFamiliarity: handling a plant builds RECOGNITION, never naming.
@@ -26480,6 +26727,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     doAction(kind, opts) {
       if (this.over) return null;
+      // Pack food/water remains available for the contest's stated fuel
+      // requirements. Waiting, resting and field work cannot start a second
+      // scene underneath the broadcast.
+      if (kind !== 'drink' && this.contestBlocksWorldAction && this.contestBlocksWorldAction()) return null;
       // MID-FIGHT (explorer break-it 2026-10-10): forage and wait are
       // time-costing verbs — tickAction no-ops in tbfight, so a mid-fight
       // forage granted free hauls + free villager turns + free ability XP
@@ -26510,6 +26761,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       if (kind !== 'forage') this._packFullStreak = 0; // guidance streak is per-stuck-episode
       if (kind === 'forage') {
+        const forageEffort = this.workCost(S.calories.ACTION_COSTS.forage), searchEffort = this.workCost(100);
         const t = this.playerTile();
         // PHYSICAL: you work the patch around you (area sweep below). Walk to
         // the green, then take it. The world is not a slot machine.
@@ -26578,7 +26830,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               });
               this.say(`You find a book: "${book.name}". ${book.description}. (Read it from your pack.)`);
               // ACTION CLOCK: searching a ruin = 2 chunks (64 ticks) + 100 kcal effort.
-              scholar.kcal = Math.max(0, (scholar.kcal || 0) - 100);
+              scholar.kcal = Math.max(0, (scholar.kcal || 0) - searchEffort);
               return this.tickAction(64) || this.status();
             }
           }
@@ -26639,7 +26891,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               this.say(`Taste vision: behind the loose panel — ${bonus.name}. The walls were right.`);
             } else if (bonus) t.loot.unshift(bonusId);
           }
-          scholar.kcal -= 100;
+          scholar.kcal -= searchEffort;
           msg = `You ${isCache ? 'dig out the stash' : 'pry open a ' + (isBld ? 'cabinet' : 'cupboard')}: ${item.name}${item.kcal ? ` (+${item.kcal} kcal)` : ''}. ${item.text}` + (t.loot.length ? '' : (isCache ? ' That\'s everything. This cache is done.' : isBld ? ' That\'s everything. This building is done.' : ' That\'s everything. This house is done.'));
           this.say(msg);
           this.tele('scavenge', { item: item.name, kcal: item.kcal, lootLeft: t.loot.length, packKg: Math.round(this.packWeight() * 10) / 10 });
@@ -26841,6 +27093,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const kcal = e.units * e.plant.caloriesPerUnit;
           if (e.known) {
             const item = this.foodForageItem(e.plant, true, e.units, kcal, scholar.day, this.harvestOrigin(this.villagerId));
+            const outing = this.forageFavorHarvestShares?.(e.units);
+            if (outing) item.forageShares = outing;
             scholar.inventory.push(item);
             // BELIEVED NAME (break-it knowledge 2026-10-10c): the pack line
             // speaks the name the player believes — a false label is still
@@ -26852,22 +27106,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // name; their kcal arrives after the Shell action, honestly.
             if (item.edible) totalKcalKnown += kcal;
           } else {
-            this.addUnknownToLump(e.plant, e.units, scholar.day, undefined, this.harvestOrigin(this.villagerId));
+            this.addUnknownToLump(e.plant, e.units, scholar.day, undefined, this.harvestOrigin(this.villagerId), undefined, this.forageFavorHarvestShares?.(e.units));
             packedBits.push(`${e.units}\u00d7 ${this.lumpFormName(e.plant)}`);
           }
         }
         // RELIC BOND: tools cut, clothing kept you moving.
         this.noteToolUse(); this.noteTrailUse();
         // MATERIALS: vine from bush, stick from tree — you don't just get food.
-        for (const h of harvested) {
-          if (h.cell === 'bush' && Math.random() < 0.3) {
-            scholar.inventory.push({ material: 'vine', units: 1, name: 'Vine', kcalEach: 0, spoilDay: 9999, kg: 0.1 });
-            this.say('You also take some vine (crafting material).');
-          }
-          if ((h.cell === 'tree' || h.cell === 'bigtree') && Math.random() < 0.4) {
-            scholar.inventory.push({ material: 'stick', units: 1, name: 'Stick', kcalEach: 0, spoilDay: 9999, kg: 0.2 });
-            this.say('A sturdy stick (crafting material).');
-          }
+        for (const item of this.collectForageByproducts(harvested, scholar.inventory)) {
+          this.say(item.material === 'vine' ? 'You also take some vine (crafting material).' : 'A sturdy stick (crafting material).');
         }
         // squirrel_friend: sometimes they leave you nuts. Random gifts, real food.
         // KNOWLEDGE-GATED like every other find: unknown nuts lump together
@@ -26906,7 +27153,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             scholar.inventory.push({ plantId: 'rare_herb', harvestShares: this.harvestOrigin(this.villagerId), units: 1, kcalEach: 300, spoilDay: scholar.day + 4, name: this.plantKnown('rare_herb') ? rp.name : (rp.description || 'unfamiliar plant'), unit: 'bundle', prep: 'Potent. The Codex is interested.', kg: 0.3 });
           }
         }
-        scholar.kcal -= S.calories.ACTION_COSTS.forage;
+        scholar.kcal -= forageEffort;
         // THE MESSAGE: honest. Named hauls for what you knew; lumps for what
         // you didn't. Blind sweeps say so; deliberate ones feel it.
         const knownBits = [], unknownBits = [];
@@ -26955,7 +27202,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             else if (!isNew) this.say(`Journal updated: ${this.plantDisplayName(pid)} grows here too — better than ${this.plantDisplayName(prevBest.id).toLowerCase()}.`);
           }
         }
-        this.tele('forage', { tile: t.type, epithet: this.nodeEpithet(this.map.px, this.map.py), plants: Object.keys(bySpecies), cells: harvested.length, kcal: totalKcalKnown, cost: S.calories.ACTION_COSTS.forage });
+        this.tele('forage', { tile: t.type, epithet: this.nodeEpithet(this.map.px, this.map.py), plants: Object.keys(bySpecies), cells: harvested.length, kcal: totalKcalKnown, cost: forageEffort });
         if (scholar.week1) scholar.week1.forage++;
         // UNIFIED TRACKS (2026-10-14): same deed as a villager's foraging — field.
         if (harvested.length) { try { if (this.noteDeed) this.noteDeed('foraging'); } catch (eT) { console.warn('[tracks] forage deed', eT); } }
@@ -27032,6 +27279,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // only when nothing actually asked anything of you; the fight's own
         // intro narrates the other case. (this.TIME, not T — T is declared
         // later in this function.)
+        const waitRaidBefore = this.aidCrisis ? this.aidCrisis() : null;
         const WT = this.TIME;
         const rem = (this.state.scholar.dayTicks || 0) % WT.TICKS_PER_PART;
         const wticks = rem === 0 ? WT.TICKS_PER_PART : WT.TICKS_PER_PART - rem;
@@ -27039,8 +27287,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.maybeOfferQuest();
         try { this.villagerTurn(); } catch (e) {}
         const wr = this.tickAction(wticks);
-        if (!this.tbfight && !this.pendingEncounter && !this.over)
-          this.say('You wait. The light changes. Nothing asks anything of you.');
+        if (!this.tbfight && !this.pendingEncounter && !this.over) {
+          const waitRaidAfter = this.aidCrisis ? this.aidCrisis() : null;
+          // Part settlement can wound defenders or end a siege. The ordinary
+          // calm fallback must not overwrite that actual change.
+          this.say(waitRaidAfter && waitRaidAfter.raiders
+            ? 'The siege continues. Something still moves beyond the firelight.'
+            : waitRaidBefore && waitRaidBefore.raiders
+            ? 'You wait. The treeline is quiet now.'
+            : 'You wait. The light changes. Nothing asks anything of you.');
+        }
         return wr || this.status();
       } else if (kind === 'drink') {
         // Bottle drink (pack UI "Drink"). drinkWater charges the canon 1 tick
@@ -27051,7 +27307,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.maybeOfferQuest();
         return true;
       }
-      this.say(msg);
+      // Optional presentation metadata is observed by the app, never saved in
+      // the text stream. Keep the authoritative action result ahead of its
+      // discovery prelude and subsequent clock/errand notices on phones.
+      this.say(msg, { role: 'action-result', body: this.state.scholar });
       this.checkQuest(kind);
       this.maybeOfferQuest();
       // ACTION CLOCK: variable cost by fictional weight. 1 chunk = 32 ticks.
@@ -28138,7 +28397,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!abilities || !abilities.length) return 1;
       let mult = 1;
       for (const entry of abilities) {
-        const aid = (entry && entry.id) || entry;
+        const aid = (entry && (entry.evolvedFrom || entry.id)) || entry;
         const ab = this.data.abilities.find(a => a.id === aid);
         if (ab && ab.metabolic && ab.metabolic.eatMult) mult = Math.max(mult, ab.metabolic.eatMult);
         else if (ab && (ab.name.toLowerCase().includes('fire') || ab.name.toLowerCase().includes('god'))) mult = Math.max(mult, 4);
@@ -29051,7 +29310,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let total = 0;
       const all = (this.state.scholar.abilities || []).concat(this.state.scholar.backgroundAbilities || []);
       for (const entry of all) {
-        const aid = (entry && entry.id) || entry;
+        const aid = (entry && (entry.evolvedFrom || entry.id)) || entry;
         const ab = this.data.abilities.find(a => a.id === aid);
         if (ab && ab.metabolic && ab.metabolic.daily) total += ab.metabolic.daily;
       }
@@ -29634,7 +29893,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (the top-up request is want minus dawn, not want minus pool).
       // One attempt per pack-day; an empty pantry pays nothing and the
       // meal falls back to the old min(pool, want) shape.
-      if (p && !p.topUpDone) {
+      if (p && !p.topUpDone && this.packAtPantry(vid)) {
         p.topUpDone = true;
         const dawn = (p.dawnKcal != null ? p.dawnKcal : pool);
         if (dawn < want) {
@@ -32068,9 +32327,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say('Your gut-tenant worked overnight: 1L of water is clean now. It hums, satisfied. (symbiote)');
         }
       }
+      // Dawn can already have opened a fight. Metabolism resolves against
+      // the scholar, including worn avoidance and the relic adjudication
+      // below. Copy that surviving result into this same bearer's live body;
+      // do not apply the debit again or let combat decide overnight death.
+      const nightBearer = this.villagerId;
+      const settleNightHealth = () => {
+        if (this.villagerId !== nightBearer || this.state.scholar !== scholar || !(scholar.health > 0)) return;
+        const body = this.inCombat() ? this.tbFighter('p') : null;
+        if (body && body.alive && !body.fled) body.hp = scholar.health;
+      };
       const res = S.calories.resolveDay(scholar, this.state.village, {
         weather: this.state.weather, dayTicks: scholar.dayTicks,
-        damage: (amount, cause) => this.wornDamage(this.villagerId, amount, { scene: cause })
+        damage: (amount, cause) => this.wornDamage(this.villagerId, amount, {
+          scene: cause, body: this.inCombat() ? this.tbFighter('p') : undefined
+        })
       });
       res.warnings.forEach(w => this.say('⚠ ' + w));
       // HONEST MIDNIGHT (survivalist loop 2026-10-07): the basal burn is the
@@ -32083,6 +32354,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // You look at the thing you carry. Not today.
       if (this.hasRelicEnhancement('resolve') && !scholar.relicResolveUsed && scholar.health < scholar._preDayHealth) {
         scholar.health = scholar._preDayHealth;
+        res.ok = scholar.health > 0;
         scholar.relicResolveUsed = true;
         const ri = this.relicItems().find(r => (r.enhancements || []).includes('resolve'));
         this.say(`You hold your ${ri ? ri.name : 'relic'}. Not today. (Resolve: today's health damage ignored.)`);
@@ -32096,6 +32368,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const ai = this.relicItems().find(r => (r.enhancements || []).includes('anchor'));
         this.say(`Your ${ai ? ai.name : 'relic'} holds you here. Not yet. (Anchor: death refused, once per season.)`);
       }
+      settleNightHealth();
       // the village eats whether you're there or not — every day you're out, the
       // mouths at home. YOUR meal is physical: villageMeal only serves at haven
       // (see the gate there); the away player's roster draw is skipped too.
@@ -32192,11 +32465,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const honestCause = (res.killedBy || 'starvation');
         if (this.maybeCheatDeath('starvation')) {
           this.say('Death knocked. Something else answered.');
+          settleNightHealth();
         } else {
           // the village is the protagonist: the mantle passes, the story continues.
-          try { this.playerDeath(honestCause); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
-          this.returnToVillage();
-          return this.status();
+          try {
+            if (this.inCombat()) {
+              const fight = this.tbfight, body = this.tbFighter('p');
+              fight.nightDeathCause = honestCause;
+              if (body) { body.hp = 0; body.alive = false; }
+              this.tbEnd('lost');
+            } else this.playerDeath(honestCause);
+          } catch (e) {
+            console.warn('[night] death settlement', e);
+            this.over = true; this.wipe();
+          }
+          // An authored arena lifeline can still save this bearer. Finish
+          // their dawn normally; a successor never pays this body's night.
+          if (this.over || this.villagerId !== nightBearer || !(scholar.health > 0)) {
+            this.returnToVillage();
+            return this.status();
+          }
         }
       }
       // PACING TELEMETRY (measurement 2026-10-11): real minutes-per-day for
@@ -32297,6 +32585,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // idempotent choke point; same no-double-fire / no-early guarantees
       // as the bread path above. Harness gate: Game._standingBeatOff.
       try { if (!this._standingBeatOff) this.checkWaveUnlockBeat(); } catch (e) {}
+      settleNightHealth();
       this.save();
       return this.status();
     },
@@ -33399,6 +33688,39 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.health = v.health || {}; v.health[f.villagerId] = Math.max(0,f.hp);
       if (v.betrayalWounds && v.betrayalWounds[f.villagerId] !== undefined) delete v.betrayalWounds[f.villagerId];
     },
+    tbArrangeFootprints() {
+      const f = this.tbfight;
+      if (!f || f.over) return false;
+      const detail = this.genDetail(this.map.px, this.map.py);
+      const actors = f.fighters.filter(a=>a.alive && !a.fled).slice().sort((a,b)=>
+        (a.kind === 'player' ? 0 : a.kind === 'monster' ? 2 : 1) - (b.kind === 'player' ? 0 : b.kind === 'monster' ? 2 : 1));
+      const initial = this.tbGridSize();let plan=null, size=initial;
+      for (;size<=32;size=Math.min(33,size+3)) {
+        const taken=new Set(), placements=[];let failed=false;
+        for (const actor of actors) {
+          const width=this.fighterSize(actor), ox=Number.isInteger(actor.mx)?actor.mx:0, oy=Number.isInteger(actor.my)?actor.my:0;
+          const legal=(x,y)=>{
+            if(x<0||y<0||x+width>size||y+width>size)return false;
+            for(let dy=0;dy<width;dy++)for(let dx=0;dx<width;dx++)if(taken.has((x+dx)+','+(y+dy))||this.cellProps(detail[y+dy]?.[x+dx]).blocks)return false;
+            return true;
+          };
+          let spot=legal(ox,oy)?{x:ox,y:oy}:null;
+          for(let r=0;!spot&&r<size;r++)for(let dy=-r;dy<=r&&!spot;dy++)for(let dx=-r;dx<=r;dx++){
+            if(Math.max(Math.abs(dx),Math.abs(dy))!==r)continue;
+            if(legal(ox+dx,oy+dy)){spot={x:ox+dx,y:oy+dy};break;}
+          }
+          if(!spot){failed=true;break;}
+          placements.push({actor,...spot});
+          for(let dy=0;dy<width;dy++)for(let dx=0;dx<width;dx++)taken.add((spot.x+dx)+','+(spot.y+dy));
+        }
+        if(!failed){plan=placements;break;}
+      }
+      if(!plan)throw new Error('Combat grid cannot hold complete live fighter footprints');
+      f.gridSize=size;
+      if(f.arenaDetail)f.arenaDetail=Array.from({length:size},(_,y)=>Array.from({length:size},(_,x)=>f.arenaDetail[y]?.[x] || 'dirt'));
+      for(const {actor,x,y}of plan){actor.mx=x;actor.my=y;if(actor.kind==='player'){this.state.scholar.mx=x;this.state.scholar.my=y;}}
+      return true;
+    },
     // TB WORLD-HP (sim-w4tbkill-a phase B, 2026-10-28): the primary
     // fighter for a lifted world monster enters at the WORLD
     // monster's current hp/maxHp, not at a fresh roll from mdef.hp.
@@ -33421,6 +33743,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return { hp: hp, maxHp: maxHp };
     },
     startCombat(monsterId, options) {
+      // Arena contests explicitly yield their scene before entering here.
+      // Ordinary world contact must not overlap an unresolved broadcast.
+      if (this.contestOwnsScene && this.contestOwnsScene()) return null;
       // NO SILENT CLOBBER (break-it combat 2026-10-09): re-entering a live
       // fight rebuilt the fighters from stale scholar.health — a free heal
       // (or wound) and erased monster wounds. Fail loudly, keep the fight.
@@ -33443,11 +33768,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // CRISIS (Steve 2026-10-09): the breach — a hostile got INSIDE the
       // haven. The safe place isn't.
       const tableTrial = !!(monsterId === 'finale' && options && options.tableTrial);
-      try { if (!tableTrial && this.playerAtHaven && this.playerAtHaven() && this.fireCrisis) this.fireCrisis('breach'); } catch (e) {}
+      const sealedArena = !!this.state.arenaContest;
+      if (sealedArena && !this.state.arenaContest.origin) this.state.arenaContest.origin = {
+        bearer: this.villagerId, mx: this.state.scholar.mx, my: this.state.scholar.my,
+        insideHaven: this.state.scholar.insideHaven, location: this.location,
+      };
+      try { if (!tableTrial && !sealedArena && this.playerAtHaven && this.playerAtHaven() && this.fireCrisis) this.fireCrisis('breach'); } catch (e) {}
       this.resetPerFightFlags();
       const s = this.state.scholar;
       this.syncMonsterAlias();
-      const worldMonster = tableTrial ? null : s.monster;
+      const worldMonster = tableTrial || sealedArena ? null : s.monster;
       const px = s.mx ?? 4, py = s.my ?? 4;
       // WANDERER CONTACT (forager loop 2026-10-05): the "Face it" button calls
       // startCombat() with no id — the monster that walked into you is
@@ -33474,7 +33804,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // s.monster mirrors only player-tile monsters, so this second read).
       // Scoped to the drawn monster's own id: a wanderer clobbering the
       // pending slot must not inherit the feast draw's veteran flag.
-      const isVeteran = !tableTrial && ((worldMonster && worldMonster.veteran) ||
+      const isVeteran = !tableTrial && !sealedArena && ((worldMonster && worldMonster.veteran) ||
         (s.feastDraw && s.feastDraw.veteran && s.feastDraw.monsterId === mid)) || false;
       // VARIANT (Steve 2026-10-06): veterans aren't just stat bumps — each
       // has a variant with 1-2 new tricks. Scarred braces your opening.
@@ -33486,7 +33816,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const vNames = { scarred: 'Scarred', elder: 'Elder', 'pack-leader': 'Pack-leader' };
         this.say(`⚠ This one is different — ${veteranVariant === 'scarred' ? 'scarred, braced, waiting for your opening' : veteranVariant === 'elder' ? 'old, patient, unhurried — it has seen your kind before' : 'bigger, and it didn\'t come alone'}. A ${vNames[veteranVariant]} veteran.`);
       }
-      const detail = this.genDetail(this.map.px, this.map.py);
+      const detail = sealedArena ? Array.from({length:9},()=>Array(9).fill('dirt')) : this.genDetail(this.map.px, this.map.py);
       const terrainBlocked = (x, y) => {
         const cell = detail[y] && detail[y][x];
         return this.cellProps(cell).blocks;
@@ -33568,7 +33898,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // TENT BREACH (Steve 2026-10-08): the intruder came out right behind you —
       // the fight starts at arm's length, at the tent mouth, not across the grid.
       let srcMx = srcMx0, srcMy = srcMy0;
-      if (this._tentBreachSpawn) {
+      if (this._tentBreachSpawn && !sealedArena) {
         srcMx = this._tentBreachSpawn.mx; srcMy = this._tentBreachSpawn.my;
         this._tentBreachSpawn = null;
       }
@@ -33712,7 +34042,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
 
-      this.tbPlaceHumans(fighters, (this.isTitan && this.isTitan(mid)) ? 11 : 8);
+      if (!sealedArena) this.tbPlaceHumans(fighters, (this.isTitan && this.isTitan(mid)) ? 11 : 8);
       this.tbfight = {
         // FIGHT ID (hunter loop 2026-10-07): read_stance keys "once per fight"
         // off tbfight.id — it must exist, or undefined===undefined makes the
@@ -33723,11 +34053,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         turnIdx: 0, round: 1,
         over: false, result: null,
         terraform: {}, // TERRAFORM (Steve 2026-10-06): monster-reshaped ground, "x,y" -> type
+        arenaDetail: sealedArena ? detail : null,
         // GRID SIZE (Steve 2026-10-11): titan fights use 12x12 (144 cells) for
         // 10+ fighters; normal fights use 9x9. Per-fight, not global.
         gridSize: (typeof this.isTitan === 'function' && this.isTitan(mid)) ? 12 : 9,
         ...(tableTrial ? { tableTrial: true } : {}),
       };
+      if (sealedArena) this.tbArrangeFootprints();
       try { S.Godpath?.beginApexHunt(this, this.tbfight); } catch (e) { console.warn('[godpath] encounter opening', e); }
       // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
       // fight entry. Zero gameplay effect. (Placed after tbfight creation —
@@ -33899,7 +34231,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!(_raidPendingLiveAtEntry && this.raidPendingMonsterId && mid === this.raidPendingMonsterId)) this.raidPendingMonsterId = null;
       // face to face: the ambiguity does NOT end. Descriptor and dread, not a name.
       try { this.identifyMonster(mdef.id); } catch (e) {}
-      const _origin = tableTrial ? null : this.playerMonster();
+      const _origin = tableTrial || sealedArena ? null : this.playerMonster();
       // BYSTANDER HOLD (journey-scale r42): startCombat used to lift the
       // player-tile monster on EVERY tb fight, but a contest/trial fight's
       // monsters are its own waves — not the tile monster. Lifting a
@@ -34171,7 +34503,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (c.stunFull) { c.acted = true; c.stunFull = 0; }
           this.say(c.acted ? 'You can\'t act — the world tilts, and the turn slips past.' : 'You\'re frozen — you can\'t move. (stunned)');
           this.tbRefreshTelegraphUI();
-          if (c.acted) { this.tbAdvance(); return; }
+          if (c.acted) {
+            if (typeof window !== 'undefined' && typeof setTimeout !== 'undefined') {
+              // An arriving async driver owns the lost turn and schedules its
+              // next beat. Never run a hidden synchronous round inside it.
+              if (!f.asyncRunning) this.tbAdvanceAsync();
+            } else this.tbAdvance();
+            return;
+          }
         } else {
           // SLOW (statusEffects engine, Steve 2026-10-07): heavy limbs.
           c.moveLeft = Math.max(0, Math.floor((c.speed || 0) * this.seMoveMod(c))); c.acted = false; c.beamTicks = 0;
@@ -34402,10 +34741,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         focus_group: { trick: 'Be boring — bore them out of the room', reveal: 'The murmur loves violence one round and is bored by it the next. Be deliberately boring for three rounds — recite bus schedules, count ceiling tiles — and they lose interest and LEAVE. (Striking is entertainment; every swing is a review.)' },
         terms_of_service: { trick: 'Read the fine print — find the loophole', reveal: 'Clauses write themselves and unanswered ones auto-accept, the penalties landing unread. Spend turns examining the scroll and you will find the loophole clause that dismisses it outright. (Striking the scroll just gives it more to bill you for.)' },
         callback: { trick: 'Say the goodbye — properly, out loud', reveal: 'It wears someone you buried. Every few rounds the face shifts and borrows their swing. Speak to it AS them — say the goodbye properly, out loud — and it loses coherence; the face cannot borrow a swing from someone who has been mourned.' },
-        ad_break: { trick: 'Look away when the break runs', reveal: 'Every fourth round it runs the break — repositions, knits itself back together, and WATCHES you watch. Look away. The ad\u2019s power is that you watch; unwatched, the break is just dead air and the healing never lands.' },
+        ad_break: { trick: 'Look away when the break runs', reveal: 'When the commercial starts, turn away to weaken its recovery. Your next Strike may miss. Defeating the rider advances the loading bar; use SKIP when it lights up.' },
         // ---- wave 4: counterplay concepts from weaknesses + sigW4 ----
         congregation: { trick: 'Argue theology — make it engage', reveal: 'It is bound by liturgy: argue theology with it and it MUST engage the argument instead of the beam. (The offer is genuine — that is what makes it a monster. Refuse the absolution; argue the doctrine.)' },
-        strike: { trick: 'Meet one demand — buy a quiet round', reveal: 'The demands are honest and the schedule is announced. Meet ONE demand — do the work yourself, manually, at real cost — and the picket stands down a round. (Scabbing buys the breather; the strike does not end.)' },
+        strike: { trick: 'Meet a demand — end this rat\'s strike', reveal: 'Choose one posted payment: three consecutive rounds without moving, real carried food, or a carried tool. Moving restarts the stillness count. A paid demand sends that rat away; other rats have their own demands. Scabbing buys working turns during shutdown instead.' },
         influencer: { trick: 'Kill the followers first', reveal: 'The followers sharpen the Ratio — every one of them is damage. Kill the followers and it is just a person with good lighting. (Ratio-ing it is a popularity contest; starving its audience is a plan.)' },
         audit: { trick: 'Be inefficient on purpose', reveal: 'It taxes your best trick on audit day — read the clipboard, know the schedule, and front-load everything between the announced rounds. When the auditors come, be deliberately, visibly inefficient: it cannot tax what does not optimize.' },
         reunion: { trick: 'Do something you have never done', reveal: 'It only knows your past — every move you ever made, worn like your face. Do something you have never done and it has nothing to wear. Novelty is literally the weapon; repetition is the uniform it dresses you in.' },
@@ -34413,18 +34752,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         eulogy: { trick: 'Contradict the narration', reveal: 'It is a STORY and stories need listeners — it narrates you faltering, and the verses count down. Contradict it with your actions: it says you run, you advance. Three true contradictions and the story dismisses you kindly. (It says you falter — do not.)' },
         algorithm: { trick: 'Lose on purpose — tank the prediction', reveal: 'It is about the NEXT action, not your history — the predictable get countered. Lose on purpose: stand there and take the soft prediction for two rounds and its model goes mushy. (The most engaging thing is an upset; be the upset.)' },
         eater: { trick: 'Poison the meal', reveal: 'It cannot tell good food from bad — it gorges, it does not chew, and it eats the grid first, you second. Feed it spoiled or diseased meat and watch it vomit out the fight. (Or starve the field: burn your own crops and deny it fuel. Guard the pantry — always.)' },
-        herald: { trick: 'Read the omens — reposition freely', reveal: 'It announces everything — read the omens. It is slow: reposition freely, never trade blows standing still. (It is a tutorial — the real test comes later. Learn it here, cheap.)' },
+        herald: { trick: 'Read the omens — reposition freely', reveal: 'Watch where the light falls when it raises the trumpet. Get off that ground before the sound lands. It is slow enough to give you room.' },
         // ---- wave 5: counterplay concepts from weaknesses + sigW5 ----
         cancellation: { trick: 'Go off-script', reveal: 'It can only cancel what is IN the script — the stamp descends for three rounds before it falls. Go off-script: improvise, use your abilities in ways never intended, and there is nothing to cancel. (Or spend audience favor — the audience can overrule a cancellation. The stamp is slow; you have time.)' },
         editor: { trick: 'Contradict yourself — break the cut', reveal: 'Every third round the scissors cut your swing — it never happened. Do two contradictory things and it cannot cut cleanly; the film strips show the swing coming and there is nothing coherent to snip. (What is cut is not GONE — it is on the cutting-room floor. Go back for it.)' },
-        rerun: { trick: 'Win fast — or write between takes', reveal: 'Every fifth round the take rewinds and it comes back fresh, remembering. Win FAST — kill it within five rounds, the one honest stat check — or leave messages for yourself in the journal between resets: writing persists when nothing else does. (Between takes the set is visible — hit the rigging.)' },
+        rerun: { trick: 'Win fast — or write between takes', reveal: 'Every fifth round, the clap puts both sides back where they started, with their wounds closed. It hits harder after each take. Write in the margins during the fight; those messages survive. After the clap, hit the exposed rigging, or finish it before the next reset.' },
         spoiler: { trick: 'Fall prone — deliberately', reveal: 'It must tell the truth — and when it announces you will bleed in three rounds, fulfill the spoiler on YOUR terms: fall PRONE, deliberately, when the round comes. The prophecy is satisfied cheaply and the voiceover finds nothing to fatten on.' },
         timeslot: { trick: 'Be boring enough to get bumped', reveal: 'The venues rotate and the guide shows it coming — the burning building hits harder than the green room. Be so boring the show bumps you to a better slot. (Or own the venue: every venue has a native. Befriend it — or be from somewhere worse.)' },
         nielsen: { trick: 'Fight boring', reveal: 'The gaze scales with the crowd — every flashy hit is ratings. FIGHT BORING: the smallest, dullest actions starve it of viewers, and at zero ratings the eye closes. (If you must be watched, be watched on your terms: strike when the eye is shut.)' },
-        finale: { trick: 'End it first', reveal: 'Three rounds after the title card rises, it falls — unavoidable. Villagers cannot feed it the sacrifice out here; they can only END IT FIRST. The DPS race, honest: kill it before the card lands or do not fight it at all.' },
+        finale: { trick: 'End it first', reveal: 'Three rounds after the title card rises, it falls — unavoidable. Villagers cannot feed it the sacrifice out here; they can only END IT FIRST. Kill it before the card lands, or stay out of the fight.' },
         finale_crew: { trick: 'Kill the crew first', reveal: 'It is the venue, not the show — end it fast, before the ratings climb. Kill the crew and the finale fights part two without its production staff: no lighting, no rigging, no second takes.' },
         finale_opening: { trick: 'Meet it while it is still arriving', reveal: 'It is still ARRIVING — the Herald taught you: what arrives can be met. Hit it in the arrival, before the credits finish rolling, or feed the credits the sacrifice. (Do not let it finish arriving.)' },
-        network_note: { trick: 'Give it bad notes', reveal: 'It is support — it takes suggestions. Plant a terrible idea (\u2018the wolf should be SMALLER\u2019) and the memo \u2018fixes\u2019 the enemy into uselessness: the lasers never arrive. (Or kill it first — the rare correct focus-the-buffoon call.)' },
+        network_note: { trick: 'Give it bad notes', reveal: 'It is support — it takes suggestions. Plant a terrible idea (\u2018the wolf should be SMALLER\u2019) and the memo \u2018fixes\u2019 the enemy into uselessness: the lasers never arrive. (Or kill it before it can strengthen the others.)' },
         // ---- the previously-wired three (kept) ----
         spool: { trick: 'Feed it nothing', reveal: 'It records your strikes and plays them back. Give it waits and heals while it records and the replay is silence.' },
         chorus_line: { trick: 'Dance on the downbeat', reveal: 'The kick only lands on beat 4 of the 4/4 count. Dance and it catches air — but dancing is your whole turn.' },
@@ -34868,10 +35207,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if ((tg.dwell || 0) > 0.6) this.say('The beam holds its line, burning where you were. It did not have to move at all.');
         else this.say('The beam swings wide, scorching the earth where you were.');
       }
-      // ANTLER SWEEP (close range): closing in to disrupt is risky.
-      // During the beam, the thrash is a bonus punish — the beam still fires.
-      // Skipped in visual-only mode (no damage on tracking ticks).
-      if (!visualOnly) this.tbAntlerThrash(m);
+      // Live-fire turns own this close-range attack; ignition already received
+      // the pre-turn hook while the deer was still aiming. Do not hit twice on
+      // that phase boundary. Tracking-only player ticks remain harmless.
+      if (!visualOnly && !tg.ignition) this.tbAntlerThrash(m);
       if ((this.tbfight || {}).over) return;
       // AUDIO: the hum hunts with the beam — pan follows it across the stereo
       // field, heat rises as the aim closes in on the player.
@@ -35728,7 +36067,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // on the way in (your own pit trap). playerDeath passes the mantle —
       // over stays false, but the fighter in this tbfight is a corpse.
       const _bearerBefore = this.villagerId;
-      try { crossed = this.travelTo(nx, ny, false, true); } catch (e) {} // combatExit: the barrier is the legitimate mid-fight crossing
+      const _stateBefore = this.state;
+      // Finish the original actor only after the complete pursuit board is
+      // ready. The outer barrier transaction defers intermediate travel saves.
+      const finishCrossing = () => {
+        if (this.state !== _stateBefore || this.villagerId !== _bearerBefore || this.over) return;
+        if (this.tbfight === f && !f.over && p.alive && !p.fled && p.acted && p.moveLeft <= 0 && this.tbIsPlayerTurn()) this.tbAfterPlayerAction();
+        if (this.state === _stateBefore && this.villagerId === _bearerBefore && !this.over) this.save();
+      };
+      try { crossed = this.travelTo(nx, ny, false, true); }
+      catch (e) { console.warn('[combat barrier] crossing failed', e); throw e; }
       // DEATH MID-CROSSING: the old code kept going — ending the fight as a
       // 'flee' for a corpse (flee-reputation for a dead body, and "You
       // escape" in the log next to the death) or, on the failed roll,
@@ -35754,6 +36102,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // travelTo already named the blockage. The push is spent; the fight
         // is not — you hit a wall, not an exit.
         this.say('🚪 You hurl yourself at the barrier — no escape that way. The fight continues here.');
+        finishCrossing();
         return true; // consumed the push attempt
       }
       // 50% to break contact at the barrier — but only against things that
@@ -35772,6 +36121,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         p.fled = true;
         if (f.betrayal) f.playerFled = true;
         this.tbEnd('fled');
+        finishCrossing();
         return true;
       }
       // CHASE (Steve 2026-10-09): no coin flip, no parting damage roll. The
@@ -35809,6 +36159,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         p.fled = true;
         if (f.betrayal) f.playerFled = true;
         this.tbEnd('fled');
+        finishCrossing();
         return true;
       }
       if (!stillChasing.length) {
@@ -35817,6 +36168,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         p.fled = true;
         if (f.betrayal) f.playerFled = true;
         this.tbEnd('fled');
+        finishCrossing();
         return true;
       }
       this.say('🚪 BARRIER CROSSED — you crash through to a new area, but they\'re right behind you — through the barrier! (The edge of the grid is an exit. The chase continues.)');
@@ -35845,6 +36197,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       p.my = Math.max(0, Math.min(gmax, Math.floor(gmax / 2) + dy * 3));
       this.state.scholar.mx = p.mx; this.state.scholar.my = p.my;
       this.tbRefreshTelegraphUI();
+      finishCrossing();
       return true;
     },
 
@@ -36328,15 +36681,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { if (tAfter && this.encUsesFifo(tAfter)) this.encNoticesPain(tAfter, 'p'); } catch (e) {}
       // HITS LANDED: hurting it teaches you its toughness.
       try { if (tAfter && tAfter.mdef) this.ensureMonsterEntry(tAfter.mdef.id).hitsLanded++; } catch (e) {}
-      // DISRUPT: a solid hit while it's channeling the beam can break its aim.
-      // Closing in is the risky counterplay — the antlers make sure of that.
-      if (tAfter && tAfter.alive && tAfter.telegraph && tAfter.telegraph.firing > 0 &&
-          Math.random() < (d >= 20 ? 0.5 : 0.25)) {
-        tAfter.telegraph = null;
-        this.say(`Your strike bites DEEP — the ${tAfter.name} staggers, and the beam stutters and dies!`);
-        this.tbStyle(15, 'broke its concentration!');
-        this.tbRefreshTelegraphUI();
-      }
+      // Ordinary Strike deals damage; it does not interrupt a firing beam.
       if (tAfter && !tAfter.alive && !isHuman) this.tbStyle(20, `dropped the ${this.encTheName(tAfter)}!`);
       // GRISTLEFIT LASH-OUT: the rage doesn't aim. 15% per strike — a wild
       // backhand at a random other adjacent fighter, friend or foe.
@@ -36606,7 +36951,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         p.blindTurns = 0;
         this.say('Your vision clears — the spots fade.');
       }
-      this.tbAdvance();
+      // Last movement has the same visible NPC cadence as Wait/last action.
+      if (typeof window !== 'undefined' && typeof setTimeout !== 'undefined') this.tbAdvanceAsync();
+      else this.tbAdvance();
     },
 
     // WAIT (Steve): the explicit pause. Forfeit remaining actions, end the
@@ -37084,6 +37431,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // zero-monster fight at turn arrival — don't dispatch a player-turn
           // event or refresh combat UI for a fight that just ended.
           if (!this.tbfight || this.tbfight.over) { presentEnd(); return; }
+          const player = this.tbFighter('p');
+          if (f.order[f.turnIdx] === 'p' && player && player.acted && player.moveLeft <= 0) {
+            // A full-turn stun is a lost turn, not fresh controls or a burst
+            // of invisible NPC actions. Continue resumes after this cursor.
+            f.actingKey = null;
+            setTimeout(() => { if (this.tbfight === f) this.tbAdvanceOneAsync(gen); }, 550);
+            return;
+          }
           f.actingKey = null;
           f.asyncRunning = false;
           try { this.tbRefreshTelegraphUI(); } catch (e) {}
@@ -37123,6 +37478,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // after the hit. Movement/damage appeared before the turn had a beat.
         setTimeout(() => {
           if (this.tbfight !== f || f.over || (gen !== undefined && f.asyncGen !== gen)) return;
+          this.runCombatInput(() => {
           delete f.pendingTurnKey;
           try {
             if (c.alive && !c.fled) {
@@ -37143,8 +37499,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               detail: { phase: 'resolved', key, name: c.name || 'Monster' }
             }));
           } catch (err) { console.warn('[combat] resolved turn presentation failed', err); }
-          setTimeout(() => { if (this.tbfight === f) this.tbAdvanceOneAsync(gen); }, 350);
-        }, 200);
+          // Hold the actual result long enough to read before announcing the
+          // next participant. This changes browser pacing, never turn order.
+          setTimeout(() => { if (this.tbfight === f) this.tbAdvanceOneAsync(gen); }, 700);
+          });
+        }, 450);
         return;
       }
       // A full round with nobody able to act (chorus hold): tick again.
@@ -38070,7 +38429,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         if (t.kind === 'player') this.say('You go down.');
         else if (t.kind === 'villager') { this.say(`☠ ${t.name} falls.`); this.tbVillagerFalls(t);
-          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {} }
+          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, fighterKey: t.key, mx: t.mx, my: t.my, cause: 'combat', witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {} }
         else if (t.kind === 'ally') {
           // ALLIED FACE FALLS (2026-10-13): person-honoring, never the
           // monster branch's loot glint. Haven's own go through
@@ -38080,7 +38439,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // keeps them in the Callback's face pool — they were people.
           this.say(`☠ ${t.name} falls.`);
           if (t.villageId === 'haven' && t.villagerId) this.tbVillagerFalls(t);
-          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
+          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, fighterKey: t.key, mx: t.mx, my: t.my, cause: 'combat', witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
         }
         else if (t.kind === 'hostile') {
           // KILLING A PERSON: the text depends on who they were and why.
@@ -38126,7 +38485,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
             this.villageEvent('murder', { victim: t.villagerId, witnessed: wit > 0 });
           } catch (e) {}
-          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
+          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, fighterKey: t.key, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
         }
         else {
           this.say(`${this.encSubject(t)} falls.`);
@@ -38143,7 +38502,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const got = this.tbLockpickReturn(t);
             this.say(`Your ${got} is still clutched in its clever hands. You take it back.`);
           }
-          try { t._deathCorpse = this.registerDeath({ kind: 'monster', monsterId: (t.mdef || {}).id, monsterName: t.name, name: t.name, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses() }); } catch (e) {}
+          try { t._deathCorpse = this.registerDeath({ kind: 'monster', monsterId: (t.mdef || {}).id, monsterName: t.name, name: t.name, fighterKey: t.key, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses() }); } catch (e) {}
           const tdCfg = ((t.mdef || {}).encounter) || {};
           if (tdCfg.deathAudio) this.audioEvent(tdCfg.deathAudio);
           else if ((t.mdef || {}).id === 'gallowdeer') this.audioEvent('deerDown');
@@ -38220,6 +38579,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     tbVillagerSyncPos(v) {
+      if (this.state.arenaContest) return; // arena coordinates are not home coordinates
       const vpos = this.state.village && this.state.village.positions;
       if (vpos && vpos[v.villagerId]) { vpos[v.villagerId].mx = v.mx; vpos[v.villagerId].my = v.my; }
     },
@@ -39284,7 +39644,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const t = this.tbFighter(q[0]);
         const who = t ? (t.kind === 'player' ? 'you' : t.name) : 'someone';
         if (!cfg.quiet) this.say(this.encThreatLines(m).snap.replace('{who}', who));
-        this.audioEvent(cfg.aggroAudio || 'deerAggro');
+        // Silent-contact creatures keep their actual attack/pain voices.
+        if (cfg.proximityAudio !== false) this.audioEvent(cfg.aggroAudio || 'deerAggro');
       }
     },
     // Queue narration helpers — thin delegates over encThreatLines (the
@@ -41133,7 +41494,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // The re-locked square flashes: the gaze moved with you.
               this.warnCells(tg.cells, 1);
             }
-          } else if (ptype !== 'beam' && ptype !== 'line' && !rcfg.commitCharge && !tg.commitCells) {
+          // Physical charges follow their declared lane. Re-aiming here made
+          // Rut King and Dustboar hit a sidestep outside the displayed cells.
+          // Explicit lock-on above and sweeping-beam tracking keep their rules.
+          } else if (ptype !== 'beam' && ptype !== 'line' && ptype !== 'charge' && !rcfg.commitCharge && !tg.commitCells) {
             const foe = S.combat.nearestEnemy(f.fighters, m);
             if (foe) tg.cells = this.tbPatternCells(m, tg.pattern, foe.f.mx, foe.f.my);
           }
@@ -44118,7 +44482,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       //      available throughout.
       // The chorus check above runs first, so incoming reinforcements still
       // hold the fight open.
-      if (p && p.alive && !p.fled) {
+      if (p && p.alive && !p.fled && !this.state.arenaContest && !f.noFlee) {
         const ourSide = f.fighters.filter(x => x.alive && !x.fled && (x.kind === 'player' || x.kind === 'ally' || x.kind === 'villager'));
         const allGone = monstersFighting.every(m => {
           if ((m.mdef || {}).follows !== false) return false;
@@ -44341,24 +44705,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // BREAK-IT 2026-10-08: prefer the corpse registered for THIS kill.
         // The node+species search below misfiles when two of the same species
         // die in one fight (both carcasses landed on the last corpse).
-        if (mf && mf._deathCorpse) return mf._deathCorpse;
         const list = this.corpses ? this.corpses() : (this.state.corpses || []);
-        for (let i = list.length - 1; i >= 0; i--) {
-          const c = list[i];
-          if (c.kind === 'monster' && !c.buried && c.monsterId === mdef.id &&
-              c.node && c.node.x === this.map.px && c.node.y === this.map.py) return c;
-        }
+        const valid = c => c && c.kind === 'monster' && !c.buried && c.monsterId === mdef.id && this.corpseInScene(c);
+        // A saved fighter may hold a detached snapshot. Resolve its identity
+        // against the canonical list; never append rewards to that snapshot.
+        const cached = mf?._deathCorpse?.id;
+        const real = cached && list.find(c => c.id === cached && valid(c));
+        if (real) { mf._deathCorpse = real; return real; }
+        const exact = mf?.key && this.tbfight?.id && list.find(c => valid(c) &&
+          c.fightId === this.tbfight.id && c.fighterKey === mf.key);
+        if (exact) { mf._deathCorpse = exact; return exact; }
         if (this.registerDeath) {
-          return this.registerDeath({
+          const created = this.registerDeath({
             kind: 'monster', monsterId: mdef.id, monsterName: mdef.name,
             name: this.monsterDisplayName ? this.monsterDisplayName(mdef.id) : (mdef.name || 'the beast'),
             descriptor: this.monsterDisplayName ? this.monsterDisplayName(mdef.id) : null,
             mx: (mf && mf.mx != null) ? mf.mx : null,
             my: (mf && mf.my != null) ? mf.my : null,
+            fighterKey: mf?.key,
             cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses ? this.fightWitnesses() : [],
           });
+          if (mf && created) mf._deathCorpse = created;
+          if (this.tbfight?.over) this.projectBattleCorpses(this.tbfight);
+          return created;
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[corpses] kill reward location', e); }
       return null;
     },
     // SNAKE LINEAGE KEY (break-it combat 2026-10-10): reward de-dupe key for
@@ -44499,6 +44870,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
       } catch (e) {}
       f.over = true; f.result = result;
+      const arenaOrigin = this.state.arenaContest && this.state.arenaContest.origin;
+      if (arenaOrigin && arenaOrigin.bearer === this.villagerId) {
+        this.state.scholar.mx = arenaOrigin.mx; this.state.scholar.my = arenaOrigin.my;
+        this.state.scholar.insideHaven = arenaOrigin.insideHaven; this.location = arenaOrigin.location;
+      }
       try { S.Godpath?.finishApexHunt(this, f, result); } catch (e) { console.warn('[godpath] hunt outcome', e); }
       try { S.Godpath?.finishWardRescues(this, f, result); } catch (e) { console.warn('[godpath] protection outcome', e); }
       try { S.Godpath?.finishTacticalEscape(this, f); } catch (e) { console.warn('[godpath] escape outcome', e); }
@@ -44562,6 +44938,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (dpad/tap/tryNodeExit all check it) and renders fighters on every
       // node's grid (no node scoping). try/finally, not hope.
       try {
+      // Projection is part of settlement: a broken/missing optional module
+      // must not strand the game before the cleanup guarantee takes effect.
+      if (this.projectBattleCorpses) this.projectBattleCorpses(f);
       // WAVE TRACKING (Steve 2026-10-05, revised): kills by wave unlock the
       // next wave (day-gated). The System watches — prove you can handle it.
       this.state.combatWins = this.state.combatWins || 0;
@@ -44821,14 +45200,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               try { this._contestResolveOthers(contest); }
               catch (e) { console.warn('[arena] co-taken fates', e); }
             }
-            // GAP-W4-NARR #107, origin-labeled (sim-arenalabel-b):
-            // the arena loss path (Blood pit/gauntlet/siege) still
-            // reports 'the arena'; a proven wild fight reports
-            // 'the wild' instead, so succession sweeps can split
-            // arena deaths out without mislabeling wild losses.
-            // tbFightDeathCause is label-only — nothing else here
-            // changes (lifeline, co-taken fates, contest resume).
-            try { this.playerDeath(this.tbFightDeathCause(f)); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
+            // This resolver also ends ordinary field and overnight fights.
+            // Preserve a settled night cause; only an actual contest arena
+            // gets Muse's arena attribution, after co-taken fates settle.
+            const deathCause = f.nightDeathCause || this.tbFightDeathCause(f);
+            try { this.playerDeath(deathCause); } catch (e5) {
+              console.warn('[combat] death settlement', e5);
+              this.over = true;
+              try { this.wipe(); } catch (e6) { console.warn('[combat] death wipe', e6); }
+            }
           }
         }
       }
@@ -44936,7 +45316,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const arc = this.state && this.state.arenaContest;
         if (arc) {
           this.state.arenaContest = null;
-          if (typeof this._contestArenaAfter === 'function') this._contestArenaAfter(arc, result);
+          if (typeof this._contestArenaAfter === 'function') this._contestArenaAfter(arc, result, { stalemate: !!f._whiffFired });
         }
       } catch (e) {}
     },
@@ -44982,8 +45362,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return makeLogEntry(String(t == null ? '' : t), s, tm);
       }).filter(e => String(e).length > 0);
     },
-    say(msg) {
-      this.emit(msg, 'narration');
+    say(msg, presentation) {
+      this.emit(msg, 'narration', presentation);
     },
     // sayGated(key, msg, maxPerDay): voice-only throttle for refusal
     // spam classes (GAP-W4-NARR #576/#636/#647 too-heavy). The counter
@@ -46108,7 +46488,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // DESCRIPTIVE instrumentation (Pagnutti: quantify luck per run), NOT a
     // pity mechanic — nothing here can alter gameplay.
     luckRoll(stream, p, hit) {
-      try { const f = this.__luckSink; if (typeof f === 'function') f(stream, p, hit); } catch (e) {}
+      try { const f = this.__luckSink; if (typeof f === 'function') f(stream, p, hit); } catch (e) { console.warn('[measurement] luck hook failed', e); }
     },
     tele(type, data) {
       this.state.telemetry = this.state.telemetry || [];
@@ -46189,7 +46569,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         waterClean: Math.round((this.state.village.water || {}).clean || 0),
         waterDirty: Math.round((this.state.village.water || {}).dirty || 0),
         // Weight: everything has mass. Carrying capacity 20kg.
-        carryKg: (s.inventory || []).reduce((t, i) => t + (i.kg || 0) * (i.units || 1), 0),
+        carryKg: this.packWeight(),
         villageEat: Math.round(this.state.village.lastEat || 800),
         villageGive: Math.round(this.state.village.lastGive || 0),
         villageProviders: this.state.village.lastProviders || [],
@@ -46205,6 +46585,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         hungryDays: this.state.village.hungryDays || 0,
         packKg: Math.round(this.packWeight() * 10) / 10,
         packCap: this.packCapacity(),
+        packLimit: this.carryLimit(),
+        burdenName: this.burden().name,
         // DISEASE (Steve 2026-10-09): symptom-labeled until diagnosed.
         afflictions: this.afflictionChips ? this.afflictionChips() : [],
         px: this.map.px, py: this.map.py,

@@ -6,6 +6,9 @@ function install(G) {
   const report = { schemaVersion:2, calls:{}, made:0, sown:{player:0,npc:0}, playerHarvests:0,
     playerHarvestKcal:0, pantryDeliveries:0, pantryDeliveredKcal:0, cropDeaths:0,
     gardenDutyAttempts:0, gardenDutyRedirects:0, tendedDutyPlots:0,
+    cropDeathsScope:'Legacy count: untended losses during gardenTick only, not all crop destruction.',
+    cropLosses:{untended:typeof G.gardenTick==='function'?0:null,raid:typeof G.commonsRaid==='function'?0:null},
+    cropLossesScope:'Observed gardenTick and commonsRaid destruction routes only. Missing route API is unknown, not zero. Applied growth lost is not a calorie-cost estimate.',
     events:[], days:[], errors:[], accounting:{initialStocks:accounting.stockSnapshot(G),intake:null,stocks:null,
       removedBySpoilageSweep:Object.fromEntries(accounting.KINDS.map(k=>[k,0])),
       costs:{scope:'Observed net reserve debits before clock work, NPC hunger equivalents at 25 kcal/point, nominal seeds, requested clock ticks and actual elapsed ticks. A dawn may discard clock overshoot; the two tick counts are distinct. Excludes normal metabolism and unpriced duty opportunity costs.',playerReserveKcal:0,npcHungerEquivalentKcal:0,seedUnits:0,seedNominalKcal:0,unvaluedSeedUnits:0,playerActionTicks:0,playerRequestedTicks:0,unknownWindows:0,byAction:{}}} };
@@ -73,7 +76,20 @@ function install(G) {
     if(before===null)return;const kcal=Math.max(0,calories(G.state.village.pantry)-before);
     if(kcal>0){report.pantryDeliveries++;report.pantryDeliveredKcal+=kcal;event('pantry-delivery',{requestedKcal:args[0],deliveredKcal:kcal});}
   });
-  wrap('gardenTick',copy,before=>{plots().forEach((p,i)=>{if(before[i]?.pid&&!before[i].dead&&p.dead){report.cropDeaths++;event('crop-death',{pid:before[i].pid,index:i});}});});
+  function recordLosses(before,cause,extra={}){
+    plots().forEach((p,i)=>{
+      const old=before[i];if(!old?.pid||old.dead||!p.dead)return;
+      report.cropLosses[cause]++;
+      // Retain the historical field/event meaning. Raids are an additional
+      // observed route, not a rewrite of older reports' neglect counts.
+      if(cause==='untended'){report.cropDeaths++;event('crop-death',{pid:old.pid,index:i});}
+      event('crop-loss',{cause,pid:old.pid,index:i,plantedDay:old.plantedDay??null,
+        lastTend:old.lastTend??null,weeds:old.weeds??null,
+        magicGrowthLost:old.magicGrowth||0,magicYieldLost:old.magicYield||1,...extra});
+    });
+  }
+  wrap('gardenTick',copy,before=>recordLosses(before,'untended'));
+  wrap('commonsRaid',args=>({plots:copy(),village:args[0]?.id??null}),before=>recordLosses(before.plots,'raid',{village:before.village}));
   wrap('sweepSpoiled',()=>accounting.stockSnapshot(G),before=>{
     const after=accounting.stockSnapshot(G);for(const key of accounting.KINDS)report.accounting.removedBySpoilageSweep[key]+=Math.max(0,before.totals[key]-after.totals[key]);
   });

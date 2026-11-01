@@ -45,7 +45,7 @@ async function main() {
   let st = Game.startConvo(vid);
   t('startConvo opens', !!st && !!st.line);
   let choices = Game.convoChoices(vid) || [];
-  const ans0 = choices.find(c => c && /^ans:/.test(c.id)) || choices.find(c => c && c.id === 'deflect_q');
+  const ans0 = choices.find(c => c && /^ans:/.test(c.id)) || choices.find(c => c && c.id === 'deflect_q') || choices.find(c => /^gq:.*:honest_pass$/.test(c.id));
   if (ans0) Game.convoTurn(vid, ans0.id); // clear their opening question first
   const g1 = Game.convoTurn(vid, 'ask:gossip');
   t('gossip ask delivers a line', !!(g1 && g1.line), String(g1 && g1.line).slice(0, 120));
@@ -58,24 +58,37 @@ async function main() {
 
   // --- 2. resume: the alive:thread:gossip choice must exist and deliver ---
   st = Game.startConvo(vid);
+  const autoResumed = Game.convoGet(vid).thread === 'gossip' &&
+    !Game.convoOpenThreads(vid).some(o => o && o.tid === 'gossip');
   choices = Game.convoChoices(vid) || [];
-  const ans1 = choices.find(c => c && /^ans:/.test(c.id)) || choices.find(c => c && c.id === 'deflect_q');
+  const ans1 = choices.find(c => c && /^ans:/.test(c.id)) || choices.find(c => c && c.id === 'deflect_q') || choices.find(c => /^gq:.*:honest_pass$/.test(c.id));
   if (ans1) Game.convoTurn(vid, ans1.id);
   choices = Game.convoChoices(vid) || [];
-  const pivot = choices.find(ch => ['dlg:subject','subject'].includes(ch.id));
+  const pivot = !autoResumed && choices.find(ch => ['dlg:subject','subject'].includes(ch.id));
   if (pivot) Game.convoTurn(vid,pivot.id);
-  choices = Game.buildMenu(vid,true);
-  const resume = choices.find(c => c && c.id === 'alive:thread:gossip');  t('alive:thread:gossip offered on resume', !!resume,
+  choices = autoResumed ? Game.convoChoices(vid) : Game.buildMenu(vid,true);
+  const resumeId = autoResumed ? 'dlg:more' : 'alive:thread:gossip';
+  const resume = choices.find(c => c && c.id === resumeId);  t('actual offered gossip continuation follows automatic or manual resumption', !!resume,
     JSON.stringify(choices.map(c => c.id).slice(0, 16)));
   let realGossip = null; const gossipBeat = Game.convoGossipBeat;
   Game.convoGossipBeat = function(id) { realGossip = gossipBeat.call(this,id); return realGossip; };
-  const r = Game.convoTurn(vid, 'alive:thread:gossip');
+  const r = Game.convoTurn(vid, resumeId);
   Game.convoGossipBeat = gossipBeat;
   const rline = String((r && r.line) || '');
   t('resume speaks a line', rline.length > 10, rline.slice(0, 120));
   t('resume is NOT the generic echo', !GENERIC_RE.test(rline), rline.slice(0, 160));
   t('resume carries gossip content', !!realGossip?.line && rline.includes(realGossip.line.replace(/^["“]|["”]$/g,'')), rline.slice(0, 160));
   console.log('  RESUME LINE: ' + rline.slice(0, 220));
+
+  // Exercise the manual handler independently even when the natural fixture
+  // already resumed the thread at the opener. This direct handler contrast
+  // does not claim it was an offered player option in that automatic state.
+  let manualBeat = null;
+  Game.convoGossipBeat = function(id) { manualBeat = gossipBeat.call(this,id); return manualBeat; };
+  const manual = Game.convoTurn(vid, 'alive:thread:gossip');
+  Game.convoGossipBeat = gossipBeat;
+  t('manual resume handler independently delivers its actual gossip beat',
+    !!manualBeat?.line && String(manual?.line).includes(manualBeat.line.replace(/^["“]|["”]$/g,'')));
 
   // --- 3. follow-up on the resumed thread keeps it alive ---
   const beat = Game.convoThreadBeat(vid);

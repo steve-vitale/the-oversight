@@ -262,6 +262,7 @@
 
     assignRole(vid, role) {
       const v = this.partyFormalState();
+      if (PARTY_ROLES[role] && this.inParty(vid) && v.partyRoles[vid] === role) return { ok: true, role, unchanged: true };
       if (!PARTY_ROLES[role]) return { ok: false, msg: 'No such role.' };
       if (!this.inParty || !this.inParty(vid)) return { ok: false, msg: 'They are not in your party.' };
       const holder = Object.keys(v.partyRoles).find(id => v.partyRoles[id] === role && id !== vid);
@@ -674,111 +675,94 @@
         if (!this.inParty || !this.inParty(vid)) return;
         if (!Array.isArray(choices)) return;
         const v = this.partyFormalState();
-        const c = this.convoGet ? this.convoGet(vid) : null;
-        // JOURNEY SOCIAL r67 (2026-10-29): the name/role sub-menus must
-        // be offered by the menu itself, not only in one convoTurn
-        // return value. Before this fix the wrapper returned
-        // party_namepick:* / party_rolepick:* options that no menu
-        // builder ever reproduced, so chatChoice (which renders
-        // convoChoices, not the returned choices) never showed them:
-        // party_name was offered 192 times on one wild seed, added
-        // nothing to the transcript, and could never complete.
-        // While a sub-menu is pending, offer its picks INSTEAD of the
-        // opener, so the beat completes through the normal menu path.
-        let items;
-        if (!v.partyName && c && Array.isArray(c.pendingPartyNames) && c.pendingPartyNames.length) {
-          items = c.pendingPartyNames.map((n, i) => ({ id: 'party_namepick:' + i, label: `"${n}."` }));
-        } else if (!v.partyName) {
-          items = [{ id: 'party_name', label: '"We should name this. Us."' }];
-        } else if (c && c.pendingPartyRole) {
-          items = Object.keys(PARTY_ROLES).map(k => ({ id: 'party_rolepick:' + k, label: `${PARTY_ROLES[k].icon} ${PARTY_ROLES[k].name}` }));
-        } else {
-          items = [{ id: 'party_role', label: '"Let\'s talk roles."' }];
+        const item = !v.partyName
+          ? { id: 'party_name', label: '"We should name this. Us."' }
+          : { id: 'party_role', label: '"Let\'s talk roles."' };
+        if (choices.some(c => c.id === item.id)) return;
+        if (choices.length < MAXC) {
+          choices.push(item);
+          return;
         }
-        for (const item of items) {
-          if (choices.some(ch => ch.id === item.id)) continue;
-          if (choices.length < MAXC) {
-            choices.push(item);
-            continue;
-          }
-          // No room — but naming the party / assigning roles outranks small
-          // talk. Splice in near the top ('more'/invite territory), displace
-          // the last non-'leave' choice, keep 'leave' last and the list bounded.
-          // ASK-OTHERS PROTECTION (journey social r59, 2026-10-26): the trim
-          // used to eat 'ask:others' whenever a party member's subject menu
-          // ran long (r58: 1008 displaced probes, all in-party) — the
-          // village-talk verb is how the village remembers each other, and
-          // a one-tap party item must not outrank it. Victims skip
-          // 'ask:others': if every displaceable row is protected, the loop
-          // breaks and the menu keeps one extra row rather than losing the
-          // verb (reactive menus already vary MAXC, so one extra row is
-          // display-safe).
-          choices.splice(1, 0, item);
-          while (choices.length > MAXC) {
-            let rm = choices.length - 1;
-            while (rm > 1 && (choices[rm].id === 'leave' || choices[rm].id === 'ask:others')) rm--;
-            if (rm <= 1) break;
-            choices.splice(rm, 1);
-          }
+        // No room — but naming the party / assigning roles outranks small
+        // talk. Splice in near the top ('more'/invite territory), displace
+        // the last non-'leave' choice, keep 'leave' last and the list bounded.
+        // ASK-OTHERS PROTECTION (journey social r59, 2026-10-26): the trim
+        // used to eat 'ask:others' whenever a party member's subject menu
+        // ran long (r58: 1008 displaced probes, all in-party) — the
+        // village-talk verb is how the village remembers each other, and
+        // a one-tap party item must not outrank it. Victims skip
+        // 'ask:others': if every displaceable row is protected, the loop
+        // breaks and the menu keeps one extra row rather than losing the
+        // verb (reactive menus already vary MAXC, so one extra row is
+        // display-safe).
+        choices.splice(1, 0, item);
+        while (choices.length > MAXC) {
+          let rm = choices.length - 1;
+          while (rm > 1 && (choices[rm].id === 'leave' || choices[rm].id === 'ask:others')) rm--;
+          if (rm <= 1) break;
+          choices.splice(rm, 1);
         }
       } catch (e) {}
     },
 
+    // Pending choices are saved conversation state, shared by the phone and bots.
+    partyDecisionChoices(vid) {
+      const c = this.convoGet(vid), d = c.partyDecision;
+      if (!c.active || !d) return null;
+      // An urgent replacement scene owns the controls, never the old picker.
+      if (c.thread==='ambush') {delete c.partyDecision;return null;}
+      const choices = d.choices.map(ch => ({...ch}));
+      choices.push({id:'party_cancel', label:'"Let me think about it."'});
+      c.menuPage=0; c.menuPages=1;
+      c.offeredReplies=Object.fromEntries(choices.map(ch => [ch.id,ch.label]));
+      return choices;
+    },
+
+    partyDecisionCanResume(vid) {
+      const c=this.convoGet(vid),d=c.partyDecision;
+      return !!(c.active && c.thread!=='ambush' && d && d.context===this.partyDecisionContext(vid) &&
+        c.transcript.some(e=>e.partyDecision && e.who==='them' && e.text===d.prompt));
+    },
+
+    partyDecisionContext(vid) {
+      const v=this.partyFormalState();
+      return JSON.stringify([this.villagerId, this.partyUnlocked(), this.inParty(vid),
+        this.partyMembers().slice().sort(), v.partyName, v.partyRoles]);
+    },
+
     partyConvoTurn(vid, choiceId, c) {
-      // returns {line, youSaid} or null if not ours
-      const v = this.partyFormalState();
-      if (choiceId === 'party_name') {
-        const opts = this.partyNameOptions();
-        c.pendingPartyNames = opts.map(o => o.name);
-        const optLines = opts.map((o, i) => {
-          const by = o.by === 'system' ? '📺 the System suggests' : o.by === 'plain' ? 'or plain' : `${o.byName} suggests`;
-          return `${i + 1}. "${o.name}" (${by})`;
-        }).join('\n');
-        try { this.convoDeepTick(vid); } catch (e) {}
-        return {
-          line: `"A name. Okay." You say it out loud, trying the shape of it:\n${optLines}\n(Which one? It'll stick.)`,
-          youSaid: '"We should name this. Us."',
-          _partyNamePick: true,
-        };
+      const v=this.partyFormalState(), d=c.partyDecision;
+      if (choiceId==='party_cancel') {
+        if (!d) return {rejected:true};
+        delete c.partyDecision; delete c.pendingPartyNames; delete c.pendingPartyRole;
+        return {line:'"All right. We can decide later."', youSaid:'"Let me think about it."', free:true};
       }
-      if (choiceId.indexOf('party_namepick:') === 0) {
-        const idx = parseInt(choiceId.split(':')[1], 10) || 0;
-        const names = c.pendingPartyNames || [];
-        const name = names[idx] || names[0];
-        if (!name) return { line: '"...Never mind."', youSaid: null };
-        const r = this.nameParty(name);
-        try { this.convoDeepTick(vid); } catch (e) {}
-        // r67: a completed pick clears the pending sub-menu, so the menu
-        // stops offering name picks and moves on to roles.
-        if (r.ok) c.pendingPartyNames = null;
-        return { line: r.ok ? null : r.msg, youSaid: `"${name}."` };
+      if (choiceId==='party_name' || choiceId==='party_role') {
+        if (d || !this.partyUnlocked() || !this.inParty(vid) ||
+            !c.offeredReplies?.[choiceId]) return {rejected:true};
+        const naming=choiceId==='party_name';
+        if (naming && v.partyName) return {rejected:true};
+        const opts=naming ? this.partyNameOptions() : null;
+        const choices=naming ? opts.map((o,i)=>({id:'party_namepick:'+i,label:`"${o.name}."`,value:o.name})) :
+          Object.keys(PARTY_ROLES).map(k=>{
+            const holder=Object.keys(v.partyRoles).find(id=>v.partyRoles[id]===k);
+            const held=holder ? (holder===vid ? ' (your current role)' : ` (replaces ${this.displayName(holder)})`) : '';
+            return {id:'party_rolepick:'+k,label:`${PARTY_ROLES[k].icon} ${PARTY_ROLES[k].name}${held} — ${PARTY_ROLES[k].desc}`,value:k};
+          });
+        c.partyDecision={kind:naming?'name':'role',context:this.partyDecisionContext(vid),choices};
+        delete c.pendingPartyNames;
+        return {line:naming?'"What should we call ourselves?"':'"What do you need me to do?"',youSaid:c.offeredReplies[choiceId]};
       }
-      if (choiceId === 'party_role') {
-        // r67: remember the open sub-menu so the menu builder can offer
-        // the role picks on the next render (see partyConvoChoices).
-        c.pendingPartyRole = true;
-        const roles = Object.keys(PARTY_ROLES).map(k => {
-          const holder = Object.keys(v.partyRoles).find(id => v.partyRoles[id] === k);
-          const held = holder && holder !== vid ? ` (held by ${this.displayName(holder).split(' ')[0]})` : '';
-          const mine = v.partyRoles[vid] === k ? ' ← you have this' : '';
-          return `${PARTY_ROLES[k].icon} ${k}${held}${mine} — ${PARTY_ROLES[k].desc}`;
-        }).join('\n');
-        try { this.convoDeepTick(vid); } catch (e) {}
-        return {
-          line: `"Roles. Not ranks — promises."\n${roles}\n(Which one is ${this.displayName(vid).split(' ')[0]}?)`,
-          youSaid: '"Let\'s talk roles."',
-          _partyRolePick: true,
-        };
+      const selected=d?.choices.find(ch=>ch.id===choiceId);
+      if (!selected) return {rejected:true};
+      if (d.context!==this.partyDecisionContext(vid)) {
+        delete c.partyDecision; delete c.pendingPartyNames; delete c.pendingPartyRole;
+        return {line:'The party has changed. Ask again before choosing a name or role.',youSaid:selected.label,free:true};
       }
-      if (choiceId.indexOf('party_rolepick:') === 0) {
-        const role = choiceId.split(':')[1];
-        const r = this.assignRole(vid, role);
-        try { this.convoDeepTick(vid); } catch (e) {}
-        // r67: a completed pick clears the pending sub-menu.
-        if (r.ok) c.pendingPartyRole = false;
-        return { line: r.ok ? null : r.msg, youSaid: `"${role}."` };
-      }
-      return null;
+      delete c.partyDecision; delete c.pendingPartyNames; delete c.pendingPartyRole;
+      const r=d.kind==='name'?this.nameParty(selected.value):this.assignRole(vid,selected.value);
+      return {line:r.unchanged ? '"I already have that role."' : r.ok ? (d.kind==='name' ? `"${r.name}. That's us, then."` : `"I'll be the ${PARTY_ROLES[selected.value].name}."`) : r.msg,
+        youSaid:selected.label,free:!!r.unchanged};
     },
 
     // ---------- DISPLAY ----------
@@ -998,44 +982,38 @@
     // wrapper type-checks; this one didn't. Null is UI-safe (closes chat).
     if (typeof choiceId !== 'string' || !choiceId) return null;
     if (choiceId === 'party_name' || choiceId.indexOf('party_namepick:') === 0 ||
-        choiceId === 'party_role' || choiceId.indexOf('party_rolepick:') === 0) {
+        choiceId === 'party_role' || choiceId === 'party_cancel' || choiceId.indexOf('party_rolepick:') === 0) {
       const c = this.convoGet(vid);
       if (!c || !c.active) return null;
-      // SUBSTANCE (socialite r8 2026-10-09): this early return never
-      // reaches convo-dialogue.js's choke-point wrapper. Naming the party
-      // and assigning roles is real engagement — mark it here.
-      try { this.convoMarkSubstantive(vid, choiceId); } catch (e) {}
-      // UNSPOOKEN BEATS (socialite 2026-10-10): this early return also
-      // skips the base turn handler's held-beat filter — run the shared
-      // choke point or queued beats never die here either.
-      try { if (typeof this.convoDropUnspoken === 'function') this.convoDropUnspoken(vid, choiceId); } catch (e) {}
       const res = this.partyConvoTurn(vid, choiceId, c);
-      if (!res) return origConvoTurn.call(this, vid, choiceId);
-      // r67: the beat must ENTER the transcript. Before this fix the
-      // wrapper returned the line without appending it, so chatChoice —
-      // which anchors on transcript entries — re-landed on the previous
-      // message and the tap looked dead (192 such turns on one wild
-      // seed). Append your line, then theirs, exactly as the dialogue
-      // handlers do for their own beats.
-      try {
-        if (res.youSaid) c.transcript.push({ who: 'you', text: res.youSaid });
-        if (res.line) c.transcript.push({ who: 'them', text: res.line });
-      } catch (e) {}
-      // name-pick / role-pick present sub-choices instead of ending the beat
-      if (res._partyNamePick) {
-        const opts = (c.pendingPartyNames || []).map((n, i) => ({ id: 'party_namepick:' + i, label: `"${n}."` }));
-        opts.push({ id: 'leave', label: '"...Let me think."' });
-        return { line: res.line, choices: opts, ended: false, transcript: c.transcript.slice() };
+      if (res.rejected) return {noop:true, navigation:true, ended:false, choices:this.convoChoices(vid), transcript:c.transcript.slice()};
+      if (!res.free) {
+        this.convoMarkSubstantive(vid, choiceId);
+        this.convoDropUnspoken?.(vid, choiceId);
       }
-      if (res._partyRolePick) {
-        const opts = Object.keys(PARTY_ROLES).map(k => ({ id: 'party_rolepick:' + k, label: `${PARTY_ROLES[k].icon} ${PARTY_ROLES[k].name}` }));
-        opts.push({ id: 'leave', label: '"...Later."' });
-        return { line: res.line, choices: opts, ended: false, transcript: c.transcript.slice() };
+      // This exchange owns its topic. Do not plant a party prompt as an old favor.
+      c.thread='small'; c.depth=0; c.choosingSubject=false; c.lastBeat=null;
+      c.transcript.push({who:'you',text:res.youSaid});
+      const prior=new Set(c.transcript);
+      this.sayLine(vid,res.line,{structural:true,tag:'prompt',topic:'party'});
+      if(c.partyDecision) {
+        const prompt=c.transcript.find(e=>e.who==='them'&&!prior.has(e));
+        if(prompt) {prompt.partyDecision=true;c.partyDecision.prompt=prompt.text;}
       }
-      return { line: res.line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      if (!res.free) this.convoDeepTick(vid);
+      return {partyDecision:true, line:res.line, choices:this.convoChoices(vid), ended:false, transcript:c.transcript.slice()};
     }
     return origConvoTurn.call(this, vid, choiceId);
   };
+
+  for (const method of ['startConvo','endConvo']) {
+    const original=Game[method];
+    Game[method]=function(vid,...args) {
+      const c=this.convoGet(vid);
+      delete c.partyDecision; delete c.pendingPartyNames; delete c.pendingPartyRole;
+      return original.call(this,vid,...args);
+    };
+  }
 
   // partyButtonHtml: show the name and role on the person card. display only.
   const origPartyButtonHtml = Game.partyButtonHtml;

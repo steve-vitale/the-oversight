@@ -1,5 +1,165 @@
 # Conversations
 
+## Formal help after a settled vow (2026-10-26 review)
+
+Both subject and idle menus distinguish an open promise from settled history.
+Kept/broken entries may reach promiseHelp again; its existing amends/decay and
+successor rules still decide whether a new vow is accepted. Known goal and
+discovery gates remain. A failed promise returns its reason and actual words;
+the conversation must relay them rather than pick a success reaction. Honest
+unkeepable-goal deflection keeps its own reply. Existing nominal2 kind words
+consequence and40 talk cap remain, including a refused offer; no silent tuning.
+A new vow never rewrites the earlier settlement/amends memory.
+
+Run scripts/godpath/test-formal-help-outcomes.js. Its optional
+FORMAL_HELP_TEST_ROOT selects the real shared kit from an explicitly frozen
+root for the same-source before contrast; it does not replace the game loader.
+Native reproduction: refresh-phone-proofs.js --families frame,promise,formal
+with a fresh revision/output. Histories and initial subject state are prepared;
+offer selection,10kcal Talk, reply paging, rendering and final committed
+Continue are actual phone controls. See the dated formal-help audit for exact
+source, failed pilots, controls and all29 screening limits.
+
+
+## Field lessons own their topic and respect language (2026-10-25 review)
+
+`agencySayLesson` emits through the real `sayLine` acceptance/fallback boundary,
+records a completed `field` beat, then returns an active conversation to idle.
+It does not advance or resolve the person's existing want/favor. Returned words
+are the actual accepted transcript chunk; rejected speech leaves no orphan
+player reply or false ended result. Recap can name the field lesson without
+opening it as unfinished favor business.
+
+Agency dispatch revalidates the selected words against the complete current
+public menu. Hidden/stale lessons cannot bypass a question, ambush or changed
+lesson pool. Nonverbal conversations retain gesture/listen/study ownership;
+the agency domain also refuses a free English lesson while that barrier is
+active. Availability uses read-only conversation lookup: querying an untouched
+resident must not create a conversation record.
+
+Run `node scripts/godpath/test-field-lesson-topic.js` (12 contrasts, including
+actual hook removal, accepted fallback, accepted favor/deadline preservation,
+language and query purity). Current prepared phone receipts at390x736/844
+cover actual offered lessons or foreign Listen/earned Study, paid Talk, free
+navigation, explicit close or active interruption, and saved Continue. Final
+receipts match173 loaded inputs;64 trusted touches/34 snapshots. Candidate
+recap was not offered in those native runs; its generator is proved in the
+shared runtime, not claimed as a native after-fix interaction.
+
+Screening and full lifetimes change downstream opportunities; no numerical
+lever was retuned. See `evidence/2026-10-25/field-lesson-audit-r1.md` for raw
+proof, retained failed pilots, all29 metrics and limits. Source-bound broader
+phone/lifecycle gates and current-public reconciliation remain open. Next:
+truthful settled-favor Help, after reconciliation with Muse's overlapping code.
+
+
+## Isolated Ask/Answer gate (2026-10-25)
+
+Use `require('./lib/ask-contract').validateAskContract(Game, vid)` from a script
+under scripts/, or `require('../lib/ask-contract')` from godpath tests. The audit
+is deliberately absent from Game's browser API. The parent copies serializable
+canonical state/data/map/body/region into a disposable shared-kit process with
+its own declared seed. It never calls a live menu or replaces the parent's RNG.
+The child reloads this checkout's code; parent monkey-patched functions are not
+serialized. The explicit negative controls act after the worker's real final
+menu. This tests the checkout's posed-question contract, not an arbitrary live
+object's behavior or natural question availability.
+Each explicitly prepared, posed question owns its fixture's controls. A prior
+closing, ambush, favor, invitation or party decision is not mislabeled as that
+question. This does not overwrite or reopen the observed conversation.
+
+The gate observes Game.convoChoices after every live wrapper and reply page,
+not a data-only scan or inner buildMenu. Every authored question and reactive
+definition plus all six current generic kinds must offer a substantive answer,
+an honest boundary and silence. A flagged boundary cannot stand in for the
+substantive answer. Duplicate IDs/empty labels fail; honest-hard choices remain
+required. A failed/timed-out/thrown worker is a failed audit, never a skipped
+question or a green result. The returned cases are labeled prepared, not native
+screen observations, natural encounter counts or a prose-quality rating.
+
+Run `node scripts/godpath/test-ask-contract-isolation.js`. Matched independent
+processes check complete state/data/map/log and the next32 RNG draws; controls
+remove answers/boundaries/silence/words from the actual final menu and inject a
+menu exception. Legacy gate assertions now use this helper without being
+relaxed. Actual native replay and maintenance comparison are retained in
+ask-contract-audit-r1.md. Historical ask-contract-diagnosis-r1/legacy-trace-r1
+recipes require their frozen30d42e5a8 source, where the removed Game method and
+old call site still exist; do not rewrite their receipts as current.
+
+## Voice belongs to the displayed beat (2026-10-25 review)
+
+`sayLine` first decides which utterance actually survives its repeat/fallback
+rules. `voiceLinesForBeats` parses complete quoted spans from that accepted
+utterance before clipping those spans to text pages. Each transcript entry
+retains its complete, speech-only quoted `voiceLine`. Never run the quote
+extractor independently on raw fragments: a closing quote on one page can be
+mistaken for an opening quote around the next stage direction.
+
+The browser's `wireDialogueBox` submits only `chatView.visibleEntry.voiceLine`
+to `convoSpeakLine`, once per entry during that view. `sayLine` does not dispatch
+the entire queued transcript: Piper supersedes older requests, so that loses
+earlier pages and speaks ahead of the screen. History/rerenders do not replay
+speech. Advancing, thinking, history, closing and combat/inactive transitions
+cancel the previous voice. Existing voice-enabled/mute/gesture/foreign/profile
+gates remain authoritative; this does not enable production voices or download
+new models. Persona and quest speech retain their separate existing callers.
+
+Current text beats use160characters, selected after an actual260-character
+phone overflow. This is an implementation choice, not Steve's specified number
+or a guarantee for every font/zoom/device. Older saved text is subdivided only
+for display using `chatView.subPage`; the transcript and payment are unchanged.
+Historical entries without `voiceLine` stay readable and silent as before;
+do not newly infer speech from an ambiguous saved fragment. New replies get the
+current payload. Complete quote context is never guessed for malformed speech.
+
+Run `node scripts/godpath/test-conversation-voice-pages.js` (accepted fallback/
+whole quote projection, both backend submissions, long tokens, foreign and
+purity) and `node scripts/godpath/test-conversation-voice-boundary.js`. The old
+Piper V14 source-string assertion was replaced by actual accepted-payload/no-
+premature-dispatch behavior in `scripts/test-voice-piper-20261011.js`.
+
+Native recipe:
+`node evidence/2026-10-25/conversation-voice-phone-r3.cjs <736-or-844> <fresh-prefix> <piper|fallback|legacy>`.
+It performs actual priced Talk, readable pages, per-visible-page backend text
+submission, free history/page movement, cancellation and closed conversation
+Continue. The inference/device submission is stubbed; this proves payload and
+UI wiring, not audible quality or physical-device behavior. Preserve failed
+pilots. Normal save projection must compare the live last40 Game.log entries
+with native `run.log`; the latter can be stale in Game.state before syncRun.
+See evidence/2026-10-25/conversation-voice-audit-r1.md for scope and remaining
+release gates. Terminal NPC reply delivery remains a separate audit target.
+
+## Standalone topic answers (2026-10-24 review follow-up)
+
+The person card's Ask about path observes only `askAbout`'s own authored replies
+through `opts.onReply`. Nested journal/discovery notices remain in their normal
+records; they must not replace the answer or become its text. Existing callers
+without the observer retain the same result/log/state, including in-conversation
+cost handling. Do not scrape the last log line as the response.
+
+The explicit question card states its existing10-kcal cost. After the complete
+topic and its wrappers finish, the UI requests a native save and reports actual
+failure/stale/tombstone/deferred statuses. No deferred result is durable success.
+It uses existing `convoSplitBeats` for free Continue/Previous/Done reading;
+navigation is UI-only and never invokes the paid topic again. While reading,
+the answer has one surface; a later journal notice cannot duplicate it below.
+Full scene descriptors are not noun phrases: the lesson uses `monsterNoun` and
+`articlePhrase`, preserving earned village names and keeping unknowns unknown.
+
+Run `node scripts/godpath/test-topic-replies.js` for seven actual standalone
+paths and independent-process seeded state/log/result neutrality, plus
+`node scripts/godpath/test-counter-speech.js` for all40 counter lessons and
+earned-name handling. Both are automatically discovered by quick/full.
+The prepared native recipe is
+`node evidence/2026-10-24/counter-lesson-phone-r3.cjs <736-or-844> <fresh-prefix> [quota]`.
+It covers lesson and goal responses, full rendered beat bounds, free paging,
+exact fees committed before unload and complete Continue. Quota mode faults
+only the native run-key write, retains the prior payload, shows risk, restores
+the writer and proves normal pagehide retry/Continue. It does not establish
+natural acquisition, every topic in a browser, actual audio delivery or release
+readiness. Keep original failed scouts/readability screenshots. See
+evidence/2026-10-24/counter-lesson-audit-r1.md.
+
 Real back-and-forth dialogue. Built because Steve said: "They just talk at me,
 there's no conversation happening."
 
@@ -9,6 +169,34 @@ The old `talkTo` returned one NPC line per tap. The player clicked "Talk" and
 got talked at — a vending machine, not a conversation.
 
 ## How it works
+
+### Answering an interruption preserves unfinished speech (2026-10-22)
+
+`convoDropUnspoken` distinguishes a current question answer from moving on.
+Keep substantive queued speech/deferred questions/goodbye across formal,
+reactive and generic answers, while removing the resolved question's reminders.
+Legacy reactive reminder text is recognized too. A deliberate subject change
+still abandons the old beats; heldAsk must reflect actual remaining asks.
+Voice decoration may not add questions to the authored base utterance. It
+cannot silently create another answer contract. Other semantic mannerisms
+still need review. Continuers describe the NEXT queued role: narration gets
+a moment, goodbye lets them finish, speech uses a general voiced continuer.
+New topic actions may use topic-specific questions. Preserve exact offered
+words before advancing the queue. See held-answer-audit-r1, the shared-kit
+regression and automatic source-bound native interrupted-answer gate.
+
+### Reply order and phone pages (2026-10-22)
+
+`convoOrderReplies` serves fresh and cached offered menus. Preserve exact saved
+words; do not redraw voice variants just to reorder after an installed update.
+Actual offered answers precede dodges, held continuation leads when no question
+is pending, personality sorts content slots and structural navigation stays
+stable. Recap remains last as a recovery aid. Phone paging packs two short
+44px replies or one long92px reply per page; one long label must not inflate
+every other option. Paging is free and DOM-only. Automatic priority/native
+receipt tests and reply-audit-r1 retain controls and limits. The broad campaign
+bot's recap/silence fallback is still order-sensitive and excludes goon; do not
+treat its current all23 warnings as a calibrated human conversation model.
 
 ### Accepted favors and the People journal (2026-10-20)
 
@@ -249,10 +437,11 @@ local adjacency are checked at dispatch. Completion cannot replay the deed.
 A future promise remains distinct from performing the action; ready actions stay
 available immediately after committing and on later promise reminders.
 
-Three authored jobs still lack an executable joint activity: shared snare
-repair, watch handover and overnight company. (Joint foraging left this
-list with tackle-outing.) Creek hauling
-now uses the physical trip contract above.
+Two authored jobs still lack an executable joint activity: shared snare
+repair and watch handover. Creek hauling and overnight company have the
+physical contracts above. The joint-forage review source now binds actual
+meeting, known patch, public gathering and origin-weighted pantry delivery;
+see ROADMAP and BROWSER-PLAYTESTING for current qualification and ship status.
 Their menus explicitly explain this and offer no new unkeepable promise. Old
 open jobs have a no-penalty close route, no completion reward, and no deadline
 penalty while the unsupported job remains open. This is a disclosed release
@@ -273,3 +462,158 @@ UI choices and save/Continue, with no browser outcome grants. Preserve the broad
 r7 transcript review as historical evidence, then refresh balanced and frame
 proofs whenever runtime changes. See the dated favor-action audit for final
 source hashes, limitations and tradeoffs.
+
+## Village question semantics
+
+`characterGen.convo.villageQuestions` owns every village question's unchanged
+label and explicit intent. Keep variant wording compatible with its intent;
+new wording belongs in this registry, with `legacyLabels` when supporting an
+older cached label. Never infer a saved question from the resident's current
+occupation or regenerate the player's words at selection. `convoAskTopic`
+binds the exact `offeredReplies["ask:village"]` label to a persisted
+`villageQuestionIntent`; unknown labels admit uncertainty, while direct broad
+topic callers without an offered label retain the overview.
+
+`convoVillageFocusedLine` answers focused questions from living canonical
+resident needs/health/illness, current community mood and positive pantry rows.
+It excludes the current bearer and fallen residents, uses earned name references,
+and distinguishes speaker/other grammar. Pantry calories describe stored stock,
+not an assurance of safe or cooked meals. Private packs and the old scalar stock
+summary do not count as shared food. The report does not consume supplies or
+create a favor. Follow-ups retain intent and track actually delivered facts;
+semantic voice mannerisms cannot append unrelated requests to focused reports.
+
+Run `node scripts/godpath/test-village-question-contracts.js`. Native replay:
+`node evidence/2026-10-25/village-question-phone-r1.cjs 736 <fresh-output-prefix>`
+(and844). This restores the unchanged pre-question snapshot from an ordinary
+native session, once, before native controls execute. It is explicitly prepared,
+not a natural acquisition/payment proof. Preserve the original failed ordinary
+session and source identities. Audit future topic-label pools for this same
+question/handler mismatch; a readable panel alone does not prove an answer.
+
+## Reading an ended sitting
+
+Game completion and finishing reading are different boundaries. chatChoice
+anchors the prior transcript, skips the player's selected words and retains
+new NPC replies even when the Game has already closed the sitting. The local
+`chatView.ended` flag permits rendering/advancing those replies but never offers
+another gameplay choice. After the last page, `#dlg-done` appears in the phone's
+normal action row with a44px target; history and header close remain available.
+Done calls closeChat(false); a completed header close also avoids endConvo.
+The runtime has already handled release of NPC engagement, promises/residue and
+normal end rewards. Reading must not invoke those again. Noop/null endings
+without a new reply close immediately; combat still cancels the reader.
+
+The flag is ephemeral UI state. Native Continue preserves the committed closed
+sitting/transcript and resource effects; this change does not promise restoration
+of the exact unread page after reload. Explicit player cancellation keeps its
+existing close behavior. Do not route journal notices over unread NPC beats.
+
+Run `node scripts/godpath/test-conversation-ending-reader.js` (actual extracted
+app functions + shared real Game) and
+`node evidence/2026-10-25/conversation-ending-phone-r2.cjs <736-or-844> <fresh-prefix> after`.
+This uses the unchanged original native-save payload and actual offered choices
+through NPC-driven endings. No Game method, budget, dialogue, needs or RNG
+replacement. Native session RNG is not matched across heights/baseline. Retain
+r1 and before evidence: the first UI pilot had a weak blinking Done target;
+r2 enforces a44px button on the coherent primary action surface.
+
+## Closing phase owns the words
+
+`convoSilencePresentation(vid, beat)` preserves the ordinary silence reaction's
+count/RNG/shift/exhaustion work, then substitutes the data-authored
+`characterGen.convo.silenceAtGoodbye` narration only after a goodbye has landed.
+It returns an unchanged beat for an open conversation or a real unanswered
+pending/generic/reactive/held interruption. It does not mutate the beat or
+Game state. Do not use ordinary prompts such as "where was I?" as a farewell.
+
+The resolution beat and mood goodbye in endConvo use `{structural:true,
+tag:"closing"}`. Their meaning must survive shared phrasing across residents;
+content-repeat fallbacks (amnesia, "ask me something else") do not belong after
+a goodbye. The existing active-conversation end guard still owns idempotence.
+
+sayLine forwards its options to convoNoteSpokenBeat. Closing-tagged beats cannot
+count as topic content or replace the remembered snippet used for unfinished
+business. This covers held winddown, the closing silence and final farewells;
+it does not exempt all ordinary dialogue from content repetition controls.
+A real previously unfinished subject can remain open with its actual last
+content. Old polluted snippets are not rewritten by guessing history.
+
+Run `node scripts/godpath/test-closing-silence-contract.js`. Its11paired
+closure contrasts use identical executable prefixes with live want functions,
+then enable/ablate only the closing hooks at the actual final public action.
+They compare complete non-dialogue state, settlement scalars and exact topic
+counter differences; conversation registries, spoken-text registry and topic
+prose are explicit changed inputs. This is not a neutral full campaign or the
+separate real observer maintenance proof. A naive full-multi-NPC equality
+assertion was rejected after corrected text registries changed later choices.
+
+Native recipe:
+`node evidence/2026-10-25/closing-phase-phone-r2.cjs <736-or-844> <fresh-prefix> after`.
+Uses unchanged native save/actual offered replies, final narration and farewell,
+read-only Done, committed Continue, actual second10-kcal Talk, cancellation and
+another native Continue. No Game/budget/needs/RNG replacements. Keep original
+ending baseline, failed controller drafts and first r1 native cases. Never copy
+these hashes onto old broader16-stage/installed/measurement proofs.
+
+## Auditing actual campaign conversations
+
+Use the passive conversation view documented in SIMULATING.md before drawing
+conclusions from absent feature calls. It captures actual policy/game calls
+through engine endings, separately from the old bounded direct-interview sampler.
+The stored favor ledger is historical context; it is not necessarily the active
+spoken request. Review raw returned menus, selected cached words, physical block
+explanations and actual added transcript. Helper readiness alone is not an
+executable public opportunity. Headless results cannot establish phone delivery.
+
+Current frozen-d6 corpus retains1187active starts and2803turn calls across two
+caregiver lifetimes. Party naming returns305nonempty lines without new NPC
+transcript beats; a favor resume quotes a monster lesson, and closed Help uses
+an undifferentiated success sentence. These are concrete next runtime targets.
+See evidence/2026-10-25/conversation-campaign-audit-r1.md and the50-exchange r5
+review; do not mistake old closed favors for the current want or infer numerical
+balance from these two trajectories.
+
+Corpus neutrality uses the exact declared wall-clock pacing exclusions in
+gear.gameplayHash; raw state bytes and CPU/phone timing are not claimed equal.
+See conversation-campaign-state-projection-r1.json for the independently checked
+leaf paths.
+
+
+## Party decisions use canonical conversation state
+
+Naming and roles share `c.partyDecision`: the exact frozen offered IDs, labels
+and values, current bearer/party context, and the actual emitted prompt. Never
+return a temporary picker that exists only in convoTurn's result: app.js renders
+fresh convoUI/transcript, and policy helpers read fresh convoChoices. The last
+agency wrapper honors this decision before running ordinary menu generators or
+unrelated handlers. An urgent ambush replaces/clears that pending decision so
+RUN/TALK/FIGHT cannot be hidden. Reads do not reroll names. Malformed, stale and unrelated
+commands cannot silently select the first name or pay again.
+
+Both the selected player words and NPC prompt/confirmation go through the real
+transcript path. Party discussion owns its topic instead of inheriting `want`.
+Opening and real selection retain their existing one-tick costs. Reconfirming
+the current role is an explicit free unchanged result; assignRole returns before
+any deed/standing/log mutation, and the NPC says they already have that role. Reply paging and
+`party_cancel` are free; closing clears the decision. Changed membership, bearer,
+name or role ownership invalidates a stale selection with an explanation.
+
+Continue keeps the old walk-away settlement for ordinary conversations. Only
+`partyDecisionCanResume` may preserve an active party decision: the context must
+match and its actual prompt must still exist in the saved transcript. App opens
+that entry without startConvo, another Talk fee, or a new name roll. Unknown old
+pendingPartyNames are not reconstructed as if someone spoke a prompt.
+
+The phone checkpoints after the complete convoTurn wrapper chain. A failed save
+owns the same message area and offers a free Retry save; it never reruns the
+conversation action. Deferred is not durable success. Successful retry increments
+saveSeq, with every other state field unchanged in the native quota contrast.
+
+Run `node scripts/godpath/test-party-conversation-decisions.js` (automatically
+on quick/full). Native recipe:
+`node evidence/2026-10-25/party-decision-phone-r5.cjs <736-or-844> <fresh-prefix> [quota]`.
+The fixture prepares membership/unlock eligibility only; actual Talk, questions,
+choices, paging, closing and Continue use trusted touch. No recruitment/balance,
+physical-device or broader installed lifecycle claim. Keep failed pilots.
+See evidence/2026-10-25/party-decision-audit-r1.md for source-bound receipts and remaining gates.

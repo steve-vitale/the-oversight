@@ -12,19 +12,8 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 let _seed = parseInt(process.env.SEED || '20261007', 10) >>> 0;
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(_seed);
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js',
- 'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
- 'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
- 'src/js/journal.js', 'src/js/party.js', 'src/js/truth.js', 'src/js/storage.js',
- 'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js',
- 'src/js/debug-scenarios.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -54,13 +43,17 @@ function playConvo(vid, maxTurns) {
     // absorbed two dry reacts honestly drops dlg:more/dlg:react — the menu
     // winds down instead of looping dead acknowledgments forever.
     const dry = !!(c.thread && c.threadDryFor && c.thread === c.threadDryFor);
+    // An answered curiosity question ends after its real queued reply is
+    // delivered. It need not manufacture two dry reactions to finish.
+    const answeredQuestion = c.thread === 'want' && c.want?.id === 'curious' &&
+      (c.want.stage || 0) >= 2 && !(c.heldBeats || []).length;
     log.push({
       line: lastThem ? lastThem.text : res.line,
       beat: lastThem && lastThem.beat ? lastThem.beat : beat.tag,
       topic: lastThem && lastThem.topic ? lastThem.topic : beat.topic,
       replies: (res.choices || []).map(ch => ch.label || ch.id),
       replyIds: (res.choices || []).map(ch => ch.id),
-      woundDown: dry && (c.reactDryCount || 0) >= 2,
+      woundDown: answeredQuestion || (dry && (c.reactDryCount || 0) >= 2),
       hasPendingBeat: !!c.heldBeats?.length,
     });
     // Pick the first engaging response (not leave, not subject-change on turn 1).
@@ -88,7 +81,7 @@ function playConvo(vid, maxTurns) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({seed:_seed,narration:true});
   const roster = freshGame();
   ok('roster has NPCs', roster.length >= 2);
   const vid = roster[0];

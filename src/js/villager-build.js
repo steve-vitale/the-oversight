@@ -562,9 +562,13 @@
         // abilities: theirs
         const mine = ((v.npcAbilities || {})[newId] || []).slice();
         const knack = ((v.npcKnacks || {})[newId]) || null;
-        s.abilities = mine.map(id => {
+        s.abilities = mine.map(held => {
+          const id=typeof held==='string'?held:held.id;
           const d = (this.abilityDef && this.abilityDef(id)) || {};
-          const e = { id, name: d.name || id, desc: d.description || '', level: 1, xp: 0 };
+          const practice=((v.npcAbilityPractice||{})[newId]||{})[id] || (typeof held==='object'?held:null);
+          const level=Math.max(1,Math.min(3,Number.isFinite(practice?.level)?Math.floor(practice.level):1));
+          const xp=level>=3?0:Math.max(0,Math.min(level===1?5:11,Number.isFinite(practice?.xp)?Math.floor(practice.xp):0));
+          const e = { id, name: d.name || id, desc: d.description || '', level, xp };
           if (id === knack) e.latent = true;
           return e;
         });
@@ -684,7 +688,7 @@
         } catch (e) { warn('mantle languages', e); }
         if (person) { person.items = []; person.equipped = {}; person.stashed = []; } // the bearer's kit lives on scholar.* now — never counted twice
         // they are the bearer now: no villager records
-        for (const k of ['npcAbilities', 'npcXp', 'npcSkills', 'npcKnow', 'npcBuild', 'npcDeedDay', 'npcGodpath']) { if (v[k]) delete v[k][newId]; }
+        for (const k of ['npcAbilities', 'npcAbilityPractice', 'npcXp', 'npcSkills', 'npcKnow', 'npcBuild', 'npcDeedDay', 'npcGodpath']) { if (v[k]) delete v[k][newId]; }
         try { if (this.recomputeActiveSynergies) this.recomputeActiveSynergies(); } catch (e) { warn('mantle synergies', e); }
         try { this.tele('mantle_become', { from: oldId, to: newId, abilities: s.abilities.length, gear: Object.keys(s.equipped).length }); } catch (e) { warn('tele', e); }
         return true;
@@ -1189,6 +1193,7 @@
             p.items = p.items || [];
             p.items.push({ itemId: pick.rid, name: cdef.name || pick.recipe.name || pick.rid,
               units: 1, kcalEach: 0, kg: cdef.kg || pick.recipe.kg || 0.5 });
+            this.creditDeed(vid, 'crafting'); // actual armor production
             try { if (eq) eq.autoEquip(p, defs); } catch (e) {}
             made++;
             try { if (this.tele) this.tele('armor_craft', { vid: vid, item: pick.rid, ok: true }); } catch (e) {}
@@ -1354,6 +1359,7 @@
               units: 1, kcalEach: 0, kg: cdef.kg || pick.recipe.kg || 0.5 });
             try { eq.autoEquip(p, defs); } catch (e) {}
             made++;
+            this.creditDeed(vid, 'crafting'); // actual weapon production
             try { if (this.tele) this.tele('weapon_craft', { vid: vid, item: pick.rid, ok: true }); } catch (e) {}
             if (atHaven) { try { this.say(`🗡️ ${nm} spent the afternoon at the workbench and made a ${pieceName} — and carries it now, their own work in their own hands.`); } catch (e) {} }
           } catch (e) { warn('weaponcraft one', e); }

@@ -230,7 +230,7 @@
       return rows.map(row => {
         if (!row.favorId) return row;
         const left = Number.isFinite(row.dueDay) ? row.dueDay - today : null;
-        const activeWater = favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && favor.id === row.favorId;
+        const activeWater = favor?.id === row.favorId && ((favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) || (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned));
         const action = (row.status === 'open' || activeWater) && promise?.favorId === row.favorId && favor?.id === row.favorId
           ? this.convoFavorAction(vid, favor) : null;
         const unavailable = !!action?.unsupported;

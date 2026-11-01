@@ -1,4 +1,5 @@
 'use strict';
+const proofCase=require('./isolated-proof-cases')(['cultivation','controller','unavailable-controller']);
 const K=require('./lib'),T=K.reporter('Garden cultivation');
 (async()=>{
  const saves=new Map();global.localStorage={getItem:k=>saves.get(k)??null,setItem:(k,v)=>saves.set(k,String(v)),removeItem:k=>saves.delete(k),key:i=>[...saves.keys()][i]??null,get length(){return saves.size;}};
@@ -6,6 +7,21 @@ const K=require('./lib'),T=K.reporter('Garden cultivation');
  function fresh(){K.newRun(G);s=G.state.scholar;v=G.state.village;s.kcal=6000;v.wood=0;v.pantry=[];G.exitBuilding();}
  const crop='lambs_quarters';
  function planted(pid=crop){const plot={pid:null,dead:false};G.gardenPlant(plot,pid,s.day);G.map.tiles[4][4].plots=[plot];return plot;}
+ if(proofCase!=='cultivation'){
+  // Controller availability must not depend on RNG/module state consumed by
+  // the preceding cultivation scenarios. Each controller case gets its own run.
+  fresh();G.enterBuilding();
+  if(proofCase==='unavailable-controller')for(const id of v.roster)if(id!==G.villagerId)G.npcSetNode(id,0,0);
+  const {workGarden}=require('../policies/competent');workGarden(G,{notes:[]});
+  if(proofCase==='controller'){
+   T.ok('the real controller prepares allowed ground and returns to the hall',G.gardenPlots().length===2&&s.insideHaven===true&&!!v.gardenKeeper);
+   const standing=v.gardenKeeper;T.ok('the controller reserves its caretaker rather than promising an absent person',G.gardenKeeperReady(standing)&&G.getPerson(standing)&&!G.getPerson(standing).dead);
+  }else{
+   T.ok('unavailable residents do not prevent preparing ground and returning',G.gardenPlots().length===2&&s.insideHaven===true);
+   T.ok('the controller does not promise an absent caretaker',!v.gardenKeeper);
+  }
+  T.done();return;
+ }
  fresh();
  T.ok('capacity follows all four real Haven tiers', [0,1,2,3].map(t=>(v.havenTier=t,G.gardenCapacity())).join(',')==='2,4,6,9');v.havenTier=0;
  G.makePlot();G.makePlot();const count=G.gardenPlots().length,food=s.kcal,ticks=s.dayTicks;
@@ -77,8 +93,5 @@ const K=require('./lib'),T=K.reporter('Garden cultivation');
  T.ok('three paid NPC uses deepen their own ability at the same six-XP threshold',v.npcAbilities[npcLearner][0].level===2&&v.npcAbilities[npcLearner][0].xp===0&&G.npcNeeds(npcLearner).hunger===34);
  fresh();planted();K.giveAbility(G,'green_whisper');for(let i=0;i<3;i++){G.cultivateGarden();s.day++;}
  T.ok('the matching player casts deepen the player at that same threshold',s.abilities.find(a=>a.id==='green_whisper').level===2);
- fresh();G.enterBuilding();const {workGarden}=require('../policies/competent');const gardenContext={notes:[]};workGarden(G,gardenContext);
- T.ok('the real controller prepares allowed ground and returns to the hall',G.gardenPlots().length===2&&s.insideHaven===true&&!!v.gardenKeeper);
- const standing=v.gardenKeeper;T.ok('the controller reserves its caretaker rather than promising an absent person',G.gardenKeeperReady(standing)&&G.getPerson(standing)&&!G.getPerson(standing).dead);
  T.done();
 })().catch(e=>{console.error(e.stack);process.exitCode=1;});

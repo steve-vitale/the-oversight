@@ -3,7 +3,7 @@
 // presses, then jump 3 days and run regrowTiles — the forager must not be
 // stranded on a permanently barren tile.
 // HONESTY probe: each press must advance exactly 16 ticks and charge exactly
-// 60 kcal (the promised "quick 16-tick beat"); the "+K kcal" in the sweep
+// its quoted starting-load effort (the quick16-tick beat); the "+K kcal" in the sweep
 // message must equal the edible kcal actually added to the pack.
 'use strict';
 const h = require('./break-monsters-harness.js');
@@ -66,7 +66,7 @@ async function main() {
     // of the pack mid-measure; whether one is open is roster luck
     // (origins-world 2026-10-14). H3 measures the forage message vs the haul.
     s.activeQuest = null;
-    const kcalBefore = s.kcal, ticksBefore = s.dayTicks, packBefore = packKcal();
+    const kcalBefore = s.kcal, ticksBefore = s.dayTicks, packBefore = packKcal(), effort = G.workCost(60);
     G.doAction('forage');
     const msg = says.join(' || ');
     const dKcal = s.kcal - kcalBefore, dTicks = s.dayTicks - ticksBefore, dPack = packKcal() - packBefore;
@@ -80,7 +80,7 @@ async function main() {
     }
     presses++;
     if (dTicks !== 16) { costOk = false; note = `press ${presses}: ticks +${dTicks} (want 16)`; }
-    if (dKcal !== -60) { costOk = false; note = `press ${presses}: kcal ${dKcal} (want -60)`; }
+    if (dKcal !== -effort) { costOk = false; note = `press ${presses}: kcal ${dKcal} (want ${-effort})`; }
     const m = msg.match(/\(([\d,]+) kcal\)/);
     if (m) {
       const promised = parseInt(m[1].replace(/,/g, ''), 10);
@@ -89,7 +89,7 @@ async function main() {
     if (/worked out|nothing within reach/i.test(msg)) { cleanMsg = msg; break; }
   }
   check('H1 every press advanced exactly 16 ticks', costOk && presses > 0, note || `${presses} presses, ${blocked} blocked-free`);
-  check('H2 every press charged exactly 60 kcal', costOk, note || `${presses} presses, ${blocked} blocked-free`);
+  check('H2 every press charged its exact quoted starting-load effort', costOk, note || `${presses} presses, ${blocked} blocked-free`);
   check('H3 message kcal == pack kcal gained', msgKcalOk, note || `${presses} presses`);
 
   // S1: the picked-clean press charges nothing and says something honest.

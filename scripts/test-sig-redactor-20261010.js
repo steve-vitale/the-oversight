@@ -52,6 +52,10 @@ function giveSpear(Game) {
   const { Game, loadFails } = await H.loadGame({ seed: SEED });
   if (loadFails.length) console.log('LOAD FAILS:', loadFails.join('; '));
   await H.setupGame(Game);
+  // These signature contrasts are duels. Canonical resident placement now
+  // recruits real nearby companions; their hits are not the player's last hit.
+  // Use the explicit solo fixture also used by godpath/lib.fight.
+  Game.state.village.roster = [];
   console.log('== REDACTOR PROOF, SEED ' + SEED + ' (mechanic ' + (MECHANIC_ON ? 'ON' : 'OFF') + ') ==');
   const said = [];
   Game.say = (t) => { said.push(String(t)); };

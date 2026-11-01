@@ -15,6 +15,23 @@
 'use strict';
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { oracleV2 } = require('./policies/oracleV2');
+const { spawnSync } = require('child_process');
+const defenseCase = Number(process.env.DEFENSE_MEMORY_CASE || 0);
+if (!defenseCase) {
+  let failed = false, passedChecks = 0, failedChecks = 0;
+  for (let n = 1; n <= 7; n++) {
+    const child = spawnSync(process.execPath, [__filename], {
+      env: { ...process.env, DEFENSE_MEMORY_CASE: String(n) }, encoding: 'utf8', maxBuffer: 8e6
+    });
+    process.stdout.write(child.stdout || ''); process.stderr.write(child.stderr || '');
+    passedChecks += ((child.stdout || '').match(/^  PASS /gm) || []).length;
+    failedChecks += ((child.stdout || '').match(/^  FAIL /gm) || []).length;
+    if (child.error) console.error(child.error);
+    if (child.status !== 0 || child.error) failed = true;
+  }
+  console.log(`\nIsolated cases: ${passedChecks} passed, ${failedChecks} failed`);
+  process.exit(failed ? 1 : 0);
+}
 
 let pass = 0, fail = 0;
 function ok(cond, label) {
@@ -25,7 +42,7 @@ function ok(cond, label) {
 async function freshGame(seed, days) {
   const { Game } = await loadGame({ seed, mode: 'defense-proof', fullTelemetry: true });
   await setupGame(Game);
-  await runDays(Game, oracleV2, { days: days == null ? 10 : days });
+  if (days !== 0) await runDays(Game, oracleV2, { days: days == null ? 10 : days });
   return Game;
 }
 function memsOf(Game, vid) {
@@ -44,8 +61,9 @@ function spawnMonster(Game, id) {
 }
 
 async function main() {
+  if (defenseCase === 1) {
   console.log('TEST 1: raid-flagged fight plants a defended memory (real fight)');
-  {
+
     const Game = await freshGame(424242);
     let defender = null, planted = null;
     // a few villagers, weak monster, real fights — take the first survivor
@@ -75,8 +93,9 @@ async function main() {
     }
   }
 
+  if (defenseCase === 2) {
   console.log('TEST 2: wild fight (no raid flag) plants no defended memory');
-  {
+
     const Game = await freshGame(99);
     // causal assertion, not a global one: a natural raid during establish
     // may already have planted defended memories — snapshot per-villager
@@ -98,8 +117,9 @@ async function main() {
     ok(added === 0, 'wild fights planted no defended memories (' + added + ' added)');
   }
 
+  if (defenseCase === 3) {
   console.log('TEST 3: fresh defended memory drives the defense lately-kind');
-  {
+
     const Game = await freshGame(777);
     const vid = healthyVillager(Game);
     ok(!!vid, 'have a villager to interview');
@@ -158,23 +178,35 @@ async function main() {
     }
   }
 
+  if (defenseCase === 4) {
   console.log('TEST 4: old defended memory (8d) does not fire the kind');
-  {
-    const Game = await freshGame(424242);
+
+    // Prepared expiry contrast, not a natural-play claim: a ten-day warmup
+    // can now leave fresh grief which correctly outranks defense. The other
+    // cases exercise actual played raids and their competing memories.
+    const Game = await freshGame(424242, 0);
+    Game.state.scholar.day = 10;
     const vid = healthyVillager(Game);
     if (vid) {
       const v = Game.state.village || {};
-      v.memory = v.memory || {}; v.memory[vid] = v.memory[vid] || [];
+      v.memory = v.memory || {};
+      // Establishment may have planted a newer real raid memory. Test expiry
+      // of the deliberately old entry alone; TEST 3 covers fresh memories.
+      v.memory[vid] = (v.memory[vid] || []).filter(x => x.t !== 'defended');
       const day = (Game.state.scholar || {}).day || 1;
       v.memory[vid].push({ t: 'defended', day: day - 8, note: 'I put down a beast at the treeline' });
       let ev = null;
       try { ev = Game.t2LatelyEvent(vid); } catch (e) {}
       ok(!ev || ev.kind !== 'defense', '8-day-old defense is old news (got ' + (ev && ev.kind) + ')');
+      v.memory[vid][v.memory[vid].length - 1].day = day;
+      const renewed = Game.t2LatelyEvent(vid);
+      ok(renewed && renewed.kind === 'defense', 'same memory becomes tellable when fresh (expiry contrast)');
     } else ok(false, 'no villager — skipped');
   }
 
+  if (defenseCase === 5) {
   console.log('TEST 5: dead defender gets no defended memory (mourning covers them)');
-  {
+
     const Game = await freshGame(20261012);
     // drive real raid-flagged fights against a brutal monster until one
     // defender dies; the dead must carry no 'defended' line
@@ -196,8 +228,9 @@ async function main() {
     ok(true, 'dead defenders are covered by mourning, not defense lines');
   }
 
+  if (defenseCase === 6) {
   console.log('TEST 6: defended memory survives meal-spam (sticky), cap still holds');
-  {
+
     const Game = await freshGame(99);
     const vid = healthyVillager(Game);
     if (vid) {
@@ -216,8 +249,9 @@ async function main() {
     } else ok(false, 'no villager — skipped');
   }
 
+  if (defenseCase === 7) {
   console.log('TEST 7: no doubled treeline when the descriptor already locates the beast');
-  {
+
     // PRE-SYSTEM (day <7): the hushwolf is still "a dog-shaped silence at
     // the treeline" — the stranger descriptor, treeline included. The note
     // template must not append a second one.

@@ -35,9 +35,14 @@ function ok(name, cond, extra) {
   // ask "heard anything?" up to N times; the npcGossipAbout (50%) and
   // darkGossip (45%) branches may preempt the rumor-mill branch.
   function askUntil(vid, want, tries) {
+    // Reputation rumors deliberately outrank routine news now. Follow the
+    // actual conversation walk-down; repeatedly asking for its first headline
+    // cannot establish whether lower-priority departure news is reachable.
+    const skipSigs = [];
     for (let i = 0; i < (tries || 40); i++) {
       said.length = 0;
-      const r = Game.askAbout(vid, 'gossip');
+      const r = Game.askAbout(vid, 'gossip', { skipSigs });
+      if (r && r.gossipSig) skipSigs.push(r.gossipSig);
       if (r && want(r, said.join(' '))) return { r, text: said.join(' ') };
     }
     return null;

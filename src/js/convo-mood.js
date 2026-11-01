@@ -8,6 +8,7 @@
 //   - convoMoodFlush(vid)
 //   - convoMoodBeat(from, to)
 //   - convoMoodSilence(vid)
+//   - convoSilencePresentation(vid, beat)
 //   - convoMoodGoodbye(vid)
 //   - convoMoodMod(vid)
 //   - convoMoodReceptivity(vid)
@@ -220,6 +221,16 @@
   // precedent). Silence stays available (canon); it just stops narrating
   // itself in circles. Past the escalation, the honest line is the bare
   // "..." — the absence of speech, not a content beat.
+  // The ordinary reaction still owns its count, RNG, shift and exhaustion.
+  // Once a goodbye has landed, its words cannot resume the subject or ask
+  // another question. An actual unanswered interruption retains its own beat.
+  Game.convoSilencePresentation = function (vid, beat) {
+    const c = this.state.village?.conv?.[vid];
+    if (!c?.windingDown || c.pendingQ || c.genericQ || c.reactiveQ || c.heldAsk) return beat;
+    const line = ((this.data.characterGen || {}).convo || {}).silenceAtGoodbye || 'You let them go without another word.';
+    return { ...beat, line };
+  };
+
   Game.convoMoodSilence = function (vid) {
     const c = this.convoGet(vid);
     const band = this.convoMoodBand(vid);
@@ -264,14 +275,14 @@
     const key = (band === 'warm' || band === 'cool' || band === 'tense') ? band : 'fill';
     const def = POOLS[key];
     if (n <= def.pool.length) {
-      return { shift: def.shift, line: this.convoPickCycle(vid, 'msil:' + key, def.pool) || def.pool[0] };
+      return this.convoSilencePresentation(vid, { shift: def.shift, line: this.convoPickCycle(vid, 'msil:' + key, def.pool) || def.pool[0] });
     }
     if (n === def.pool.length + 1) {
       // The prompt gets its turn to land — the budget spends only if the
       // player stays silent PAST it.
-      return { shift: def.shift, line: def.escalate, spent: false };
+      return this.convoSilencePresentation(vid, { shift: def.shift, line: def.escalate, spent: false });
     }
-    return { shift: 0, line: '"..."', spent: true };
+    return this.convoSilencePresentation(vid, { shift: 0, line: '"..."', spent: true });
   };
 
   // convoMoodGoodbye: the parting beat carries the temperature out the door.
@@ -279,14 +290,14 @@
     const band = this.convoMoodBand(vid);
     if (band === 'warm') {
       return this.convoPickCycle(vid, 'mbye:warm', [
-        'They\'re smiling as you go. "Come back anytime."',
-        '"This was good." They mean it.',
+        'They\'re smiling as you go.',
+        'Their shoulders ease as you leave.',
       ]) || null;
     }
     if (band === 'tense' || band === 'cool') {
       return this.convoPickCycle(vid, 'mbye:cold', [
         'They nod, already turning away.',
-        '"Right. Well." That\'s the whole goodbye.',
+        'They give a brief nod and look away.',
       ]) || null;
     }
     return null;

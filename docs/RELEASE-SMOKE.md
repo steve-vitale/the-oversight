@@ -1,5 +1,22 @@
 # Candidate smoke and feedback
 
+Opening smoke now includes a visible first intro line, readable next step with
+all three lines retained, and owner-resolved flavor across all eight offered
+belongings. Zero-stock Haven plants must not advertise Forage. Their inspection
+belongs in narration/thumb controls with the map visible; beyond-Haven foraging
+and outdoor Garden remain separate. Use mobile-opening-phone-r1.cjs and the
+source-bound proof refresh recorded in mobile-opening-audit-r1. Its retained
+native checkpoint supports reproducible planting/refusals/Continue, not a claim
+that both heights naturally played an entire new campaign or reached harvest.
+
+Installed lifecycle: repeat actual published57 -> candidate -> published-code
+rollback at both phone heights. Use real update buttons and native final-save
+hooks; compare the entire loaded payload, with only declared migration fields
+allowed. Verify every cached text/icon byte, stop the origin, cold reopen and
+Continue at both candidate and rollback stages. See PWA-RELEASE-CHECKLIST.md
+and published-lifecycle-audit-r1. Old gameplay bugs return with old code; a
+passing cache/Continue case does not approve all rollback mechanics.
+
 Relay: old dead/permanently departed posts reopen and require an explicit new
 claim. A living temporarily away holder stays in post. Check several same-day
 Waits, next calendar day, native Continue and another same-day Wait: one actual

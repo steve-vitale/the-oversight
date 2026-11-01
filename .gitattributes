@@ -1,0 +1,4 @@
+# Native replay recipes include raw-byte self fingerprints. Keep their checked
+# out bytes canonical on Windows as well as POSIX; JSON/binary evidence is not
+# rewritten. Runtime JS/CSS fingerprints separately normalize source text.
+*.cjs text eol=lf

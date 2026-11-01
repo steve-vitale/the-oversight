@@ -1,0 +1,23 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('Response body boundary');
+let {createResponseCapture}=require('../lib/response-body-capture');
+if(process.env.RESPONSE_CAPTURE_FAULT==='no-drain'){
+ const fs=require('fs'),path=require('path'),source=fs.readFileSync(path.join(K.ROOT,'scripts/lib/response-body-capture.js'),'utf8'),needle='while (pending.size) await Promise.all([...pending]);',m={exports:{}};
+ if(!source.includes(needle))throw Error('Exact drain hook missing');
+ new Function('module',source.replace(needle,''))(m);createResponseCapture=m.exports.createResponseCapture;
+}
+const deferred=()=>{let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no;});return{promise,resolve,reject};},tick=()=>new Promise(r=>setImmediate(r));
+(async()=>{
+ let emit;const page={on(name,fn){if(name!=='response')throw Error('Wrong event');emit=fn;}},first=deferred(),second=deferred(),errors=[],bytes=[],bodies=new Map([['first',first],['second',second]]),c=createResponseCapture(page,async response=>{bytes.push(await bodies.get(response).promise);},(error,response)=>errors.push({message:error.message,response}));
+ emit('first');emit('second');let drained=false;const wait=c.drain().then(()=>drained=true);await tick();T.ok('reload boundary waits for outstanding bodies',!drained);
+ second.resolve('second bytes');await tick();T.ok('one finished response cannot release another body',!drained&&bytes.length===1);
+ first.resolve('first bytes');await wait;T.ok('drain retains both actual byte payloads',bytes.join('|')==='second bytes|first bytes');T.ok('successful captures do not report errors',errors.length===0);
+ const third=deferred();bodies.set('third',third);emit('third');drained=false;const later=c.drain().then(()=>drained=true);await tick();T.ok('capture remains usable after a prior navigation boundary',!drained);third.resolve('third bytes');await later;T.ok('later body is retained',bytes.at(-1)==='third bytes');
+ const bad=deferred();bodies.set('bad',bad);emit('bad');const failed=c.drain();bad.reject(Error('actual body unavailable'));await failed;await tick();T.ok('body failure stays an explicit error with response identity',errors.length===1&&errors[0].message==='actual body unavailable'&&errors[0].response==='bad');
+ let fire;const additional=deferred(),start=deferred(),order=[],nested=createResponseCapture({on(_,fn){fire=fn;}},async response=>{if(response==='start'){await start.promise;fire('additional');order.push('start');}else{await additional.promise;order.push('additional');}},e=>{throw e;});fire('start');let nestedDone=false;const nestedWait=nested.drain().then(()=>nestedDone=true);start.resolve();await tick();T.ok('responses arriving during a drain also hold its boundary',!nestedDone&&order[0]==='start');additional.resolve();await nestedWait;T.ok('drain includes the newly arrived response',order.join('|')==='start|additional');
+ let sync;const syncErrors=[],syncCapture=createResponseCapture({on(_,fn){sync=fn;}},()=>{throw Error('synchronous capture fault');},e=>syncErrors.push(e.message));sync('response');await syncCapture.drain();await tick();T.ok('synchronous capture failure is reported once',syncErrors.join('|')==='synchronous capture fault');
+ let report;const reportCapture=createResponseCapture({on(_,fn){report=fn;}},()=>{throw Error('body fault');},()=>{throw Error('reporter failed');});report('response');await tick();let reportError;try{await reportCapture.drain();}catch(e){reportError=e;}T.ok('reporting failure remains fatal even after its task settles',reportError?.message==='reporter failed');
+ let asyncReport;const asyncCapture=createResponseCapture({on(_,fn){asyncReport=fn;}},()=>{throw Error('body fault');},async()=>{throw Error('async reporter failed');});asyncReport('response');let asyncError;try{await asyncCapture.drain();}catch(e){asyncError=e;}T.ok('asynchronous reporting failure cannot disappear',asyncError?.message==='async reporter failed');
+ let timeoutEvent;const never=deferred(),timeouts=[],bounded=createResponseCapture({on(_,fn){timeoutEvent=fn;}},()=>never.promise,(e,r)=>timeouts.push({message:e.message,response:r}),{timeoutMs:5});timeoutEvent('unavailable body');await bounded.drain();T.ok('an unavailable native body cannot hang the observer forever',timeouts.length===1&&timeouts[0].message==='Response body capture timed out after 5ms'&&timeouts[0].response==='unavailable body');never.reject(Error('late body rejection'));await tick();T.ok('late rejection cannot erase or duplicate the timeout finding',timeouts.length===1);
+ T.done();
+})().catch(e=>{console.error(e);process.exitCode=1;});

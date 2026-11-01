@@ -669,9 +669,10 @@ body.system-live .ord-narration .inlinecard .inline-btns {
   background: var(--black); z-index: 1000;
   display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
   animation: skySplit 3s ease-out forwards;
-  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   padding-top: calc(env(safe-area-inset-top, 0px) + 18px);
-  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 90px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  padding-inline: 12px;
   box-sizing: border-box;
 }
 @keyframes skySplit {
@@ -726,6 +727,23 @@ body.system-live .ord-narration .inlinecard .inline-btns {
   letter-spacing: 4px; text-transform: uppercase; opacity: .85; margin-bottom: 6px;
 }
 .system-narr { color: #ffe9c9; font-style: italic; }
+/* The current beat owns the remaining height; its action never scrolls away. */
+.system-arrival-overlay .system-beat-kicker { flex-shrink: 0; position: relative; }
+.system-beat-lines {
+  flex: 1; min-height: 0; width: min(100%, 34rem);
+  overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+.system-beat-lines .system-window {
+  box-sizing: border-box; max-width: none; width: 100%; margin: 0 0 10px;
+}
+.system-beat-lines .system-text {
+  max-width: none; margin: 0; font-size: clamp(16px, 3.8vw, 20px);
+  line-height: 1.5; overflow-wrap: anywhere;
+}
+.system-arrival-overlay .arrival-next {
+  flex-shrink: 0; position: relative; width: min(100%, 34rem); min-height: 48px;
+}
 
 .emptybush { opacity: 0.4; filter: grayscale(50%); }
 
@@ -947,7 +965,9 @@ body.system-live .ord-narration .inlinecard .inline-btns {
   border: 1px solid #6a5a2a; background: #1d1a10; color: #e8d98a;
   cursor: pointer;
 }
-.ab-btn:disabled { opacity: .4; border-color: var(--chip-edge); color: var(--muted-2); background: var(--surface-2); }
+/* The reason for a refusal must remain readable. The disabled attribute,
+   muted palette and dashed border convey that this cannot be used. */
+.ab-btn:disabled { opacity: 1; border-color: var(--chip-edge); border-style: dashed; color: var(--muted-2); background: var(--surface-2); cursor: not-allowed; }
 .ab-btn:active:not(:disabled) { background: #2a2415; }
 /* PATH COLORS (Steve 2026-10-14 ability coherency): Dead Cells pattern —
    one color per path, on buttons, synergy banners, codex. Feel the build
@@ -1739,6 +1759,9 @@ body.titan-fight .detail .cell .plantsprite { width:100%; height:100%; }
    is a will-change:transform containing block (FLIP glide); left inline at
    0 width it collapsed every multi-tile body to 0x0. */
 .detail .cell [data-ent].ent-multi { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+/* The animated wrapper creates a stacking context. Raise its anchor cell so
+   neighboring ground cannot paint over the rest of a giant's real body. */
+.detail .cell:has(> [data-ent].ent-multi) { z-index: 3; }
 .cell .multitile svg.sprite { max-width: none; max-height: none; }
 
 /* TITAN BAR: the marquee over the arena. Face, title, one long bar in three
@@ -1968,6 +1991,15 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
 .garden-work [data-garden-seed] small { display:block; opacity:.8; }
 
 .pack-feedback { white-space: pre-line; }
+/* Pack management stays inside the board reader. Use real touch targets in
+   wrapping rows instead of inheriting full-width expedition buttons. */
+.pack-view .inline-body .btn.sm {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:auto; max-width:100%; min-width:44px; min-height:44px;
+  padding:8px 10px; margin:4px 4px 4px 0; font-size:14px; line-height:1.3;
+  vertical-align:middle;
+}
+.pack-item-actions { display:block; }
 
 /* Phone play has a viewport budget. Only explicitly opened tools/history scroll. */
 @media (max-width: 899px) {
@@ -2001,6 +2033,7 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
   .field-layout .ord-dpad { align-self:end; }
   .field-layout .dpad { display:grid !important; grid-template-columns:repeat(3,44px); grid-auto-rows:44px; gap:2px; padding:4px; }
   .field-layout .dpbtn { min-height:44px; }
+  .field-layout .dpbtn:disabled { opacity:.35; }
   .field-layout .dpmin,.field-layout .dpshow { display:none !important; }
   .field-layout .ord-actions { overflow:visible; display:flex; flex-direction:column; gap:2px; height:144px; margin:0; min-height:0; }
   .field-layout .ord-actions .contextbar { display:none; }
@@ -2026,6 +2059,15 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
   .field-layout .dialogue-box > .dlg-line .dlg-who[data-npc="true"] { display:none; }
   .field-layout .ord-narration { grid-area:message; margin:0; height:auto !important; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
   .field-layout .ord-narration .dialogue-box { min-height:0; flex:1; max-height:100%; padding:6px 8px; font-size:13px; line-height:1.35; }
+  .field-layout .ord-narration .field-action-results .dlg-line { height:100%; min-height:0; overflow-y:auto; overscroll-behavior:contain; white-space:pre-line; }
+  .field-layout .ord-narration .dialogue-box.combat-result { display:grid; grid-template-columns:minmax(0,1fr) 62px; grid-template-rows:minmax(0,1fr); gap:0 6px; padding:2px 6px; align-content:center; }
+  .combat-result-head { display:contents; }
+  .combat-result-head button { grid-column:2; grid-row:1; align-self:center; width:auto; min-height:44px; min-width:44px; padding:4px; margin:0; font-size:12px; }
+  .combat-result-summary { grid-column:1; grid-row:1; min-width:0; min-height:0; font-size:12px; line-height:16px; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
+  .combat-result-narrative { flex:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .combat-result-facts { flex:none; display:block; height:16px; line-height:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:12px; }
+  .field-layout .ord-narration .combat-result:not(:has([data-combat-details])) { grid-template-columns:minmax(0,1fr); }
+  .field-layout .combat-turn-status { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .field-layout .ord-narration .inline-btns,.field-layout .ord-narration .dlg-choices { display:none; }
   .field-layout #dlg-end,.field-layout #dlg-hist { min-height:44px; }
   .field-layout #dlg-end { min-width:44px; }
@@ -2067,11 +2109,11 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
 }
 
 @media (max-width:899px) {
-  .field-layout #inlineslot:has(.pantry-card) { overflow:hidden; }
-  .field-layout #inlineslot .pantry-card { height:100%; display:flex; flex-direction:column; box-sizing:border-box; margin:0; }
-  .field-layout #inlineslot .pantry-card > .inline-head { position:static; flex:none; }
-  .field-layout #inlineslot .pantry-card > .inline-body { min-height:0; flex:1; overflow:auto; overscroll-behavior:contain; }
-  .field-layout #inlineslot .pantry-card > .inline-btns { flex:none; margin:0; padding:4px 0; }
+  .field-layout #inlineslot:has(> .inlinecard > .inline-body) { overflow:hidden; }
+  .field-layout #inlineslot > .inlinecard:has(> .inline-body) { height:100%; display:flex; flex-direction:column; box-sizing:border-box; margin:0; }
+  .field-layout #inlineslot > .inlinecard:has(> .inline-body) > .inline-head { position:static; flex:none; }
+  .field-layout #inlineslot > .inlinecard:has(> .inline-body) > .inline-body { min-height:0; flex:1; overflow:auto; overscroll-behavior:contain; }
+  .field-layout #inlineslot > .inlinecard:has(> .inline-body) > .inline-btns { flex:none; margin:0; padding:4px 0; }
 }
 
 /* Garden management keeps its current decisions ahead of detailed lists. */
@@ -2081,9 +2123,47 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
 .garden-work [data-garden-keeper] { display:block; width:100%; margin:5px 0; text-align:left; min-height:44px; }
 
 @media (max-width:899px) {
-  .field-layout #inlineslot:has(.garden-card) { overflow:hidden; }
-  .field-layout #inlineslot .garden-card { height:100%; display:flex; flex-direction:column; box-sizing:border-box; margin:0; }
-  .field-layout #inlineslot .garden-card > .inline-head { position:static; flex:none; }
-  .field-layout #inlineslot .garden-card > .inline-body { min-height:0; flex:1; overflow:auto; overscroll-behavior:contain; }
   .garden-work [data-garden-keeper] { font-size:13px; line-height:1.3; }
+}
+
+/* Haven uses the saved room's geometry: wood floor, stone hearth, real beds.
+   Furnishings stay behind actors, with action labels only on usable cells. */
+.cell.haven-room { border-radius:0; }
+.cell.haven-hall, .cell.haven-bunk { background-color:#594631; background-image:repeating-linear-gradient(0deg,transparent 0 10px,#372c2270 10px 11px); box-shadow:inset 1px 0 #b2946630; }
+.detail .cell.haven-wall, .field-layout .detail .cell.haven-wall { font-size:0; background:linear-gradient(0deg,#2b2622 0 30%,#655b4d 32% 90%,#998970 92%); box-shadow:inset 0 0 0 1px #302b25; }
+.cell.haven-fire { background:radial-gradient(ellipse at center,#bc7f3e80,#594631 75%); }
+.cell.haven-door { background:#526340; outline:1px solid #c7d9a4; outline-offset:-1px; }
+.haven-furnishing { position:absolute; inset:1px 2px 10px; pointer-events:none; display:flex; align-items:center; justify-content:center; }
+.haven-furnishing svg { width:100%; height:100%; max-width:42px; }
+.haven-station-label { position:absolute; inset:auto 0 0; font-size:12px; line-height:13px; text-align:center; color:#fff1d2; text-shadow:0 1px 2px #000; pointer-events:none; }
+.haven-occupied .haven-station-label { display:none; }
+.haven-occupied .haven-furnishing { opacity:.45; }
+.haven-station > [data-ent], .haven-station > .vent { position:relative; z-index:1; }
+.cell.haven-station:focus-visible { outline:2px solid #fff0b5; outline-offset:-2px; }
+
+/* One building over its real lodge footprint; entities stay above the roof. */
+.cell.haven-lodge-cell { border:0; outline:none; background:#514b36; }
+.haven-lodge-building { position:absolute; left:0; top:0; display:block; pointer-events:none; z-index:1; }
+.haven-lodge-building > svg { width:100%; height:100%; display:block; }
+.haven-building-label { position:absolute; bottom:0; left:0; width:100%; text-align:center; font-size:12px; line-height:14px; color:#fff1d2; text-shadow:0 1px 2px #000; }
+.haven-lodge-cell > [data-ent], .haven-lodge-cell > .vent { position:relative; z-index:2; }
+.haven-lodge-cell > .garden-marker, .haven-lodge-cell > .trap-marker { z-index:2; }
+
+.haven-tool-shortcuts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; margin-bottom:8px; }
+.haven-tool-shortcuts > button { min-height:44px; width:100%; margin:0; white-space:normal; }
+.haven-tool-shortcuts > button:only-child { grid-column:1/-1; }
+.haven-surroundings { margin-top:8px; }
+.haven-surroundings > summary { min-height:44px; display:flex; align-items:center; cursor:pointer; }
+
+.loot-other-bodies summary { min-height:44px; display:flex; align-items:center; cursor:pointer; }
+
+/* Contact can put two fighters on one square. Keep the creature's real
+   footprint and a smaller foreground human, rather than moving either body. */
+.detail .cell.combat-overlap > [data-ent^="creature:"] {
+  position:absolute; left:0; top:0; width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center; z-index:3;
+}
+.detail .cell.combat-overlap > .vent {
+  position:relative; z-index:5; transform:translate(-24%,22%) scale(.72);
+  transform-origin:bottom left;
 }

@@ -102,7 +102,7 @@ scripts/test-brawler-pierce-20261010.js
 scripts/test-brawler-proof-20261010.js
 scripts/test-brawler-snap-fiction-20261007.js
 scripts/test-break-alien-20261009.js
-scripts/test-break-alien-20261010-r11.js
+scripts/test-break-alien-20261010-r11.js exclusive
 scripts/test-break-alien-20261010-r13.js
 scripts/test-break-alien7-burnfix-20261011.js
 scripts/test-break-alien7-fight-20261011.js
@@ -294,7 +294,8 @@ scripts/test-detective-trustflip-20261009d.js
 scripts/test-detective-wrongly-accused-20261008.js
 scripts/test-detective.js
 scripts/test-determinism-gate-20261014.js
-scripts/test-deterministic-clock-20261014.js
+# Eight full campaign traversals need an idle queue within the unchanged120s cap.
+scripts/test-deterministic-clock-20261014.js exclusive
 scripts/test-detfix-idhash-20261014.js
 scripts/test-dialog-coherence-20261011.js
 scripts/test-dialog-gating-20261011.js
@@ -763,7 +764,7 @@ scripts/test-travel-r10.js
 scripts/test-travel-r13-20261011.js
 scripts/test-travel-r6.js
 scripts/test-travel-r7.js
-scripts/test-travel-r8.js
+scripts/test-travel-r8.js exclusive
 scripts/test-travel-r9-examine-combat.js
 scripts/test-travel-village5.js
 scripts/test-tree-examine-gating-20261007.js
@@ -904,3 +905,36 @@ scripts/test-establishment-r20-fixes-20261020.js quick
 scripts/test-contestgrant-20261020.js quick
 scripts/test-killbeat.js quick
 scripts/test-join-request-line-20261020.js quick
+
+# Muse09ff reconciliation: keep memorial and spoken Table/winddown repairs wired.
+scripts/test-wound-death-fallen-20261022.js quick
+scripts/test-tabledeed-dupename-20261022.js quick
+scripts/test-tablewithdraw-20261021.js quick
+scripts/test-nvwinddown-20261021.js quick
+
+# Muse d64 reconciliation: protect live deeper speech, moot, and sickness paths.
+scripts/test-deeper-variants-20261022.js quick
+scripts/test-moot-convene-repeat-20261022.js quick
+scripts/test-sick-stayhome-gates-20261022.js quick
+scripts/test-taken-pod-dream-variants-20261022.js quick
+
+# Muse407 integration: new measurement and hunger-request proofs stay shared.
+scripts/test-luck-instrument-20261022.js quick
+scripts/test-heatmap-terminal-20261022.js quick
+scripts/test-favor-stutter-20261022.js quick
+scripts/test-landing-r37-griefreset-20261022.js quick
+scripts/test-character-decisions-observer.js quick
+
+scripts/test-competent-flee-consumedpush-20261023.js quick
+scripts/test-competent-flee-stuckwalk-20261023.js quick
+
+# Muse8c43 reconciliation: run shipped dialogue, invitation and succession proofs.
+scripts/test-r30-recap-label-20261023.js quick
+scripts/test-r42-request-thread-20261023.js quick
+scripts/test-sick-invite-gates-20261024.js quick
+scripts/test-succession-meal-gate-20261024.js quick
+scripts/test-teachline-article-20261023.js quick
+scripts/test-scalediscovery-nextact-dedup-20261023.js quick
+scripts/test-siege-settlement.js quick
+
+scripts/test-creekpath-armb-b.js # current absent/disabled replay neutrality and actual return detours

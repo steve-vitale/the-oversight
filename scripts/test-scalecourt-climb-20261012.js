@@ -64,6 +64,7 @@ function check(name, cond, detail) {
   // (4,1), in sight of Haven). Keep only the target and the linked village.
   st.otherVillages = (st.otherVillages || []).filter(v => !v || v.id === 'haven' || v.id === target.id || v.id === otherId);
   target.rumored = true;
+  Game.recordVillageLore(Game.playerKnowerId(), target.id, {how:'visit',toldBy:'prepared prior courtship contact'});
   target.opinion = 5;
   target._codexOpinionGiven = false;
   target.x = 6; target.y = 6;

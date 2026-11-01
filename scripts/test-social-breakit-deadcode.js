@@ -20,7 +20,7 @@ const ENTRY = new Set([
   'petitionVillage', 'villageCard', 'villageCardAction', 'joinVillageReal',
   'probationTick', 'drift', 'driftTick', 'exilePlayer', 'villageTalk', 'villageShareFood',
   'promiseHelp', 'checkPromises', 'confrontGossip', 'bumpTrust',
-  'validateAskContract', 'resolveConsequence', 'getScene',
+  'resolveConsequence', 'getScene',
 ]);
 
 const allJs = [];

@@ -28,7 +28,8 @@ function compareMetric(before, after, spec, key) {
   else if (spec.direction !== 'neutral' && orientation * delta < -spec.tolerance) {
     status = (spec.direction === 'lower' ? ci[0] > 0 : ci[1] < 0) ? 'regression_signal' : 'regression_watch';
   }
-  return { id: spec.id, label: spec.label, unit: spec.unit, direction: spec.direction, tolerance: spec.tolerance, reviewChanges: !!spec.reviewChanges, status, coverageChanged,
+  return { id: spec.id, label: spec.label, unit: spec.unit, direction: spec.direction, tolerance: spec.tolerance, reviewChanges: !!spec.reviewChanges,
+    ...(spec.diagnosticOnly === true && spec.direction === 'neutral' && spec.reviewChanges === false ? { diagnosticOnly: true } : {}), status, coverageChanged,
     totalPairs: before.length, eligibleBefore: before.filter(Number.isFinite).length, eligibleAfter: after.filter(Number.isFinite).length, pairs: pairs.length,
     before: mean(pairs.map(p => p[0])), after: mean(pairs.map(p => p[1])), delta, interval95: ci,
     pairedP10: quantile(diffs, 0.1), pairedMedian: quantile(diffs, 0.5), pairedP90: quantile(diffs, 0.9),
@@ -37,6 +38,9 @@ function compareMetric(before, after, spec, key) {
     worse: spec.direction === 'neutral' ? null : diffs.filter(d => d * orientation < 0).length, tied: diffs.filter(d => d === 0).length };
 }
 const caseKey = r => r.row.policy + ':' + r.row.seed;
+// Diagnostics retain unknown/sparse/changed-coverage statuses without deciding
+// the policy verdict. Domain and win warnings keep their existing force.
+const requiresReview = metric => !metric.diagnosticOnly && !['descriptive', 'no_material_signal'].includes(metric.status);
 // ---- Per-seed sweep-corpus ingestion (gap-instruments B12, 2026-10-27) ----
 // Workers kept feeding per-seed sweep corpora (flat rows:
 // {policy, seed, won, entered, ...}, no .options) into the panel compare,
@@ -134,6 +138,15 @@ function comparePanels(before, after, options) {
   if (!isPanelShape(before) || !isPanelShape(after)) return { decision: 'invalid', errors: ['Not a balanced panel (missing options/rows/sources/validity); per-seed sweep corpora are compared via the sweep-corpus path'], policies: [] };
   const errors = [];
   options = options || {};
+  let panelContract=contract, expectedContract=contractDigest, measurementIdentity=null;
+  if(options.historical===true){
+    try{
+      const M=require('./measurement-contract'),a=M.select(before,{historical:true}),b=M.select(after,{historical:true});
+      if(a.measurementIdentity.contractDigest!==b.measurementIdentity.contractDigest)throw Error('Different historical contracts');
+      panelContract=a.contract;expectedContract=a.measurementIdentity.contractDigest;measurementIdentity=a.measurementIdentity;
+    }catch(e){return {decision:'invalid',errors:[e.message],policies:[]};}
+  }
+
   // 797 (Steve 2026-10-24): a run may DECLARE flags as its intervention (e.g.
   // an env-gated lever's own flag differing before/after). Declared flags are
   // exempted from the flags match — never inferred: only flags listed here
@@ -144,8 +157,8 @@ function comparePanels(before, after, options) {
   const declared = [...new Set((rawFlags || []).filter(f => typeof f === 'string' && f))];
   const flagVal = (panel, f) => (panel.options.flags && Object.hasOwn(panel.options.flags, f)) ? panel.options.flags[f] : null;
   const intervention = declared.length ? { declared, before: Object.fromEntries(declared.map(f => [f, flagVal(before, f)])), after: Object.fromEntries(declared.map(f => [f, flagVal(after, f)])) } : null;
-  const withIntervention = report => intervention ? { ...report, interventionFlags: intervention } : report;
-  if (before.contractDigest !== contractDigest || after.contractDigest !== contractDigest) errors.push('Metric contract does not match this comparator');
+  const withIntervention = report => ({...report,...(intervention?{interventionFlags:intervention}:{}),...(measurementIdentity?{measurementIdentity}:{})});
+  if (before.contractDigest !== expectedContract || after.contractDigest !== expectedContract) errors.push('Metric contract does not match this comparator');
   for (const field of ['schemaVersion', 'observerDigest', 'contractDigest']) if (before[field] !== after[field]) errors.push('Different ' + field);
   for (const field of ['days', 'policies', 'seeds', 'region', 'origin', 'occupation', 'flags', 'nodeVersion']) {
     if (field === 'flags' && declared.length) {
@@ -159,6 +172,10 @@ function comparePanels(before, after, options) {
   const validate = panel => {
     errors.push(...cohorts.validate(panel));
     if (!panel.validity.sourcesStable) errors.push('Sources changed mid-panel');
+    if(measurementIdentity){
+      const ids=panelContract.metrics.map(m=>m.id).sort().join(',');
+      for(const r of panel.rows)if(Object.keys(r.metrics||{}).sort().join(',')!==ids||Object.values(r.metrics).some(v=>v!==null&&!Number.isFinite(v)))errors.push('Historical metric vector does not match its retained contract: '+caseKey(r));
+    }
     for (const r of panel.rows) if (r.warnings?.length || r.observerErrors?.length || r.gear?.errors?.length) errors.push('Observer/runtime warning or error: ' + caseKey(r));
   };
   validate(before); validate(after);
@@ -167,9 +184,9 @@ function comparePanels(before, after, options) {
   if (errors.length) return withIntervention({ decision: 'invalid', errors: [...new Set(errors)], policies: [] });
   const policies = after.options.policies.map(policy => {
     const all = after.rows.filter(r => r.row.policy === policy), rs = all.filter(r => bm.has(caseKey(r)));
-    const metrics = contract.metrics.map(m => compareMetric(rs.map(r => bm.get(caseKey(r)).metrics[m.id]), rs.map(r => r.metrics[m.id]), m, policy + '/' + m.id));
-    const review = metrics.filter(m => !['descriptive', 'no_material_signal'].includes(m.status));
-    const result = { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
+    const metrics = panelContract.metrics.map(m => compareMetric(rs.map(r => bm.get(caseKey(r)).metrics[m.id]), rs.map(r => r.metrics[m.id]), m, policy + '/' + m.id));
+    const review = metrics.filter(requiresReview);
+    const result = { policy, cases: rs.length, confirmationSized: rs.length >= panelContract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
     if (after.options.occupation) {
       const beforeRows = before.rows.filter(r => r.row.policy === policy), am = new Set(all.map(caseKey));
       const unavailableBefore = all.filter(r => !bm.has(caseKey(r))).map(r => r.row.seed);
@@ -196,4 +213,4 @@ function markdown(report) {
   lines.push('', report.note || 'Invalid comparisons must be repaired before interpretation.', '');
   return lines.join('\n');
 }
-module.exports = { mean, quantile, interval, compareMetric, comparePanels, compareSweepCorpora, isSweepCorpus, sweepMetric, markdown, contract, contractDigest };
+module.exports = { mean, quantile, interval, compareMetric, comparePanels, compareSweepCorpora, isSweepCorpus, sweepMetric, requiresReview, markdown, contract, contractDigest };

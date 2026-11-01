@@ -1,5 +1,21 @@
 # scripts/policies/ — the policy library (measurement 2026-10-11)
 
+Ending-deed experiment (2026-10-23): ending-aware-capable, ending-aware-maker,
+ending-aware-merchant and ending-aware-caregiver wrap their explicit parents.
+They reuse the existing paid communal-surplus feast and use available learned
+wound treatment with a real feast bonus. No default ID changes, forced hunt,
+invented injury or synthetic deed. Read docs/ENDING-AWARE-SIMS.md for full
+bounds, all29 pilot tradeoffs and the next matched-cohort adoption gate.
+
+Gardener factorial prototype (2026-10-21): garden-control, garden-invest,
+garden-control-expand and garden-invest-expand are explicit mixed-survival
+methodology arms. All four resolve late daily offers with the capable brain;
+only investment arms prioritize actual unheld garden offers, and only expansion
+arms replace the four-bed target with gated demand/storage/mastery decisions.
+No stock policy sets these hooks. See docs/GARDENER-INTENT-COHORT.md for exact
+preregistered thresholds and interpretation limits. Pending review/ship; this
+prototype must be shared before becoming a numerical calibration gate.
+
 A policy is a named way of playing; a module may export several. Every lever is measured with
 **multiple policies on identical seeds** so results show strategy-dependence,
 not just one competent player's luck.

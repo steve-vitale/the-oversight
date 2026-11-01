@@ -6,8 +6,8 @@
 //       an out-of-range strike is refused WITHOUT spending the act.
 //   H3. doAction('rest') mid-fight is refused (fiction + phantom-heal guard).
 //   H4. No combat data-action is FREE: every combat-context ability action
-//       either spends the turn, fails fast unwired (nothing spent), or
-//       refuses for a stated reason — never fires without costing the act.
+//       spends its declared turn, or its declared kcal for an explicitly
+//       no-turn action. Refusals/fail-fast actions must not spend the act.
 const assert = require('assert');
 const H = require('./combat-r3-harness.js');
 const fs = require('fs');
@@ -120,11 +120,12 @@ function lastSay(Game, n) {
     const data = JSON.parse(fs.readFileSync(path.join(H.ROOT, 'src/data/abilities.json'), 'utf8'));
     const combatActs = [];
     for (const a of data) for (const ac of (a.actions || [])) {
-      if ((ac.context || 'explore') === 'combat') combatActs.push([a.id, ac.id]);
+      if ((ac.context || 'explore') === 'combat') combatActs.push([a.id, ac.id, ac]);
     }
     console.log('  (combat data actions:', combatActs.length + ')');
     let free = [];
-    for (const [abId, actId] of combatActs) {
+    const paidNoTurn = [];
+    for (const [abId, actId, def] of combatActs) {
       const Game = await H.newCombatReadyGame();
       const mk = H.synthFight(Game, 'bulldozer', { moves: 3, mhp: 500 });
       Game.tbFighter(mk).mx = 5; Game.tbFighter(mk).my = 4;
@@ -134,6 +135,8 @@ function lastSay(Game, n) {
       const p = Game.tbFighter('p');
       const fight0 = Game.tbfight;
       const round0 = fight0 ? fight0.round : 0;
+      const kcal0 = Game.state.scholar.kcal;
+      const moves0 = p.moveLeft;
       let ret;
       try { ret = Game.useAbility(abId, actId); } catch (e) { ret = 'threw:' + e.message.split('\n')[0]; }
       const said = lastSay(Game, 4);
@@ -142,12 +145,27 @@ function lastSay(Game, n) {
       // e.g. dead_aim plants the feet: moveLeft 0 + acted auto-advances per
       // the no-end-turn-ceremony design. Break-it combat r6 2026-10-09.)
       const spent = p.acted || (Game.tbfight && Game.tbfight.round > round0) || !!(fight0 && fight0.over);
-      if (ret === true && !spent) free.push(abId + '.' + actId);
+      if (ret === true && !spent) {
+        const label = abId + '.' + actId;
+        // Current authored no-turn actions are food-paid setups. The copied
+        // partial runtime had left them unwired, so this census missed them.
+        const expected = (def.cost || {}).kcal;
+        const explicit = /No (?:turn|action) spent\./i.test(def.effect || '');
+        if (def.cost?.turn || !explicit || !(expected > 0) ||
+            kcal0 - Game.state.scholar.kcal !== expected || p.moveLeft !== moves0) free.push(label);
+        else paidNoTurn.push([label, expected]);
+      }
       // Fail-fast unwired must not spend either (round-1 invariant).
       if (ret === false && /isn't wired up yet/.test(said) && p.acted) free.push(abId + '.' + actId + ' (failfast spent!)');
     }
-    check('H4 no combat ability action fires free (all spend, fail fast, or refuse stated)', () => {
+    check('H4 no combat action bypasses its declared turn or food payment', () => {
       assert.deepStrictEqual(free, [], 'FREE actions: ' + free.join(', '));
+    });
+    check('H4 all four authored no-turn setups actually fire and pay exact food prices', () => {
+      assert.deepStrictEqual(paidNoTurn.sort(), [
+        ['blink.blink', 40], ['coin_guard.coins', 80],
+        ['foresight.foresee', 40], ['stoke.stoke', 150],
+      ]);
     });
   }
 
@@ -218,11 +236,13 @@ function lastSay(Game, n) {
     // calm_beast with no target: refuses pre-payment (was: paid turn, then "Nothing here to calm").
     const { Game } = await freshFightWith('animal_ken');
     const p = Game.tbFighter('p');
+    const kcal0 = Game.state.scholar.kcal;
     const r = Game.useAbility('animal_ken', 'calm_beast');
     check('H5 calm_beast targetless refuses pre-payment', () => {
       assert.strictEqual(r, false);
       assert.strictEqual(p.acted, false, 'refused tap ate the turn');
-      assert.ok(/Nothing here to calm/.test(lastSay(Game, 2)), 'got: ' + lastSay(Game, 2));
+      assert.strictEqual(Game.state.scholar.kcal, kcal0, 'refused tap ate kcal');
+      assert.ok(/No non-predatory animal here to calm/.test(lastSay(Game, 2)), 'got: ' + lastSay(Game, 2));
     });
   }
 

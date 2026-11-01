@@ -11,6 +11,9 @@
 //   - objAskCompanion(vid, obj, hx, hy)
 //   - objTick()
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
+//   - npcGearPlan(vid)
+//   - npcWorkGear(vid, rng)
+//   - npcForageCraftMaterial(vid, nx, ny, rng)
 // rules:
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
@@ -270,6 +273,7 @@
       if (vp.dead) { o.kind = 'idle'; o.state = 'idle'; return o; }
       o.tightened = false; // fresh pick: not a danger-tightened trip
       o.huntMid = null; o.huntTx = null; o.huntTy = null; o.huntDay = null; // fresh pick: a stale hunt provenance must not linger on a new errand
+      o.craftMaterial = null;
       o.chore = null; // fresh pick: a stale chore label must not linger on
       // non-chore objectives (longsim agency 2026-10-11: census showed
       // VISIT/out(fire), GUARD/out(teach) — old chore tags on new errands)
@@ -302,7 +306,7 @@
         return o;
       }
       // body first: rest when spent
-      if ((n.energy || 70) < 35) {
+      if ((n.energy ?? 70) < 35) {
         o.kind = 'REST'; o.purpose = 'rest'; o.state = 'indoor';
         o.indoor = true; o.targetVid = null; o.companion = null;
         o.partsLeft = 2 + Math.floor(R() * 3);
@@ -404,8 +408,14 @@
       if (goal === 'peace') { gwExploreMul = 0.3; gwHaulMul = 0.5; gwChore += 0.8; }
       if (goal === 'home') gwChore += 1.2;
       if (goal === 'legacy') { gwChore += 1.0; gwChoreTag = 'teach'; }
+      const gearGoal = this.npcGearPlan(vid);
+      if (gearGoal?.action === 'forage' && maxD > 0)
+        cands.push({ kind: 'FORAGE', w: 1.2, craftMaterial: 'vine' });
+      else if (gearGoal && gearGoal.action !== 'forage')
+        cands.push({ kind: 'HAVEN_CHORE', w: 1.2, chore: 'gear' });
       if (needTrack === 'field' && maxD > 0) cands.push({ kind: 'FORAGE', w: 1.5 });
       if (needTrack === 'social') cands.push({ kind: 'HAVEN_CHORE', w: 1.2, chore: 'teach' });
+      if (needTrack === 'craft' && this.autonomousCookReady(vid)) cands.push({ kind: 'HAVEN_CHORE', w: 1.2, chore: 'cook' });
       if ((needTrack === 'combat' || needTrack === 'strange') && (prof === 'wanderer' || prof === 'explorer')) cands.push({ kind: 'EXPLORE', w: 1.5 });
       // FORAGE — the village eats, or they do. Homebodies only go when hungry.
       // GOAL r7 (2026-10-12): the 'feed' goal lives here now — "Nobody goes
@@ -503,6 +513,7 @@
       var r = R() * tot, chosen = cands[cands.length - 1];
       for (i = 0; i < cands.length; i++) { r -= cands[i].w; if (r <= 0) { chosen = cands[i]; break; } }
 
+      o.craftMaterial = chosen.craftMaterial || null;
       o.kind = chosen.kind; o.targetVid = chosen.targetVid || null;
       o.companion = null; o.indoor = false; o.state = 'ready';
       var dist = 1;
@@ -563,6 +574,7 @@
         // nothing behind it (theater: trust bumps and a deed for nothing
         // transferred).
         var chores = ['fire', 'repair', 'cook', 'sweep'];
+        if (chosen.chore === 'gear') chores.push('gear');
         try {
           var _pk = this.plantsKnownBy ? this.plantsKnownBy(vid) : [];
           // SNARE APPRENTICESHIP (trapline 2026-10-13): a wire-knowing
@@ -864,6 +876,7 @@
       for (var i = 0; i < roster.length; i++) {
         var id = roster[i];
         if (id === vid || id === this.villagerId) continue;
+        if(this.convoFavorDepartureReservation?.(id,obj.partsLeft)?.blocked)continue;
         var vp = null;
         try { vp = this.vpOf(id); } catch (e) {}
         if (vp && vp.dead) continue;
@@ -936,6 +949,7 @@
       return !sat;
     },
     objDepart(vid, obj, hx, hy, playerAtHaven) {
+      if(obj?.kind!=='LEAVE'&&this.convoFavorDepartureReservation?.(vid,obj?.partsLeft)?.blocked)return false;
       // HEAL GATE (2026-10-13): hurt villagers are patched or sat out
       // (objHealGate) BEFORE the move. Returns true when they departed.
       try {
@@ -945,6 +959,9 @@
       var s = this.state.scholar;
       var node = null;
       try { node = this.npcNode(vid); } catch (e) { return; }
+      // Pack while still physically at home; later away meals cannot draw
+      // from the Haven shelves. Existing carried food stays with the person.
+      if (this.packKcal) this.packKcal(vid);
       this.npcSetNode(vid, obj.tx, obj.ty);
       try { this.npcSetInside(vid, false); } catch (e) {}
       v.away = v.away || {};
@@ -1067,6 +1084,8 @@
       try { playerAtHaven = (this.map.px === hx && this.map.py === hy); } catch (e) {}
       // escape: the desperate don't do danger checks
       if (o.kind === 'LEAVE') { this.objDepart(rid, o, hx, hy, playerAtHaven); return; }
+      // Keep the existing job pending; other home duties still run.
+      if(this.convoFavorDepartureReservation?.(rid,o.partsLeft)?.blocked)return;
       var dg = this.objDanger(rid, o.tx, o.ty, hx, hy);
       if (dg.verdict === 'go') {
         this.objDepart(rid, o, hx, hy, playerAtHaven);
@@ -1203,7 +1222,7 @@
       try {
         var nn = this.npcNeeds(rid);
         nn.hunger = Math.min(100, (nn.hunger || 0) + 3);
-        nn.energy = Math.max(0, (nn.energy || 70) - 4);
+        nn.energy = Math.max(0, (nn.energy ?? 70) - 4);
       } catch (e) {}
       if (o && o.partsLeft != null) o.partsLeft--;
       // arrived at a VISIT target: the visit happens
@@ -1228,6 +1247,9 @@
       // objective to returning (meat carried as objective state).
       if (o && o.state === 'out' && o.kind === 'HAUL' && nx === o.tx && ny === o.ty) {
         try { this.mapmemHaulAt(rid); } catch (e) { o.state = 'returning'; }
+      }
+      if (o && o.state === 'out' && o.kind === 'FORAGE' && o.craftMaterial && nx === o.tx && ny === o.ty) {
+        this.npcForageCraftMaterial(rid, nx, ny);
       }
       // RETURN-TO-FIGHT arrival (gap-routing 2026-10-27): at the hunt tile
       // with the quarry gone, the memory is spent — they checked, it is
@@ -1341,6 +1363,15 @@
           nn.hunger = Math.min(100, (nn.hunger || 0) + 1);
           if (o.kind === 'REST') nn.energy = Math.min(100, (nn.energy || 0) + 9);
         } catch (e) {}
+        // Productive work is independent of the ambient voice lottery and of
+        // the player's presence. The executor rechecks real surplus and orders.
+        if (o.kind === 'HAVEN_CHORE' && o.chore === 'cook' && this.autonomousCookReady(rid)) {
+          this.resolveOneAssignment(rid, { task: 'cook', autonomous: true });
+        }
+        if (o.kind === 'HAVEN_CHORE' && o.chore === 'gear') {
+          const work = this.npcWorkGear(rid);
+          if (!work.paid) { o.state = 'done'; o.kind = 'idle'; }
+        }
         if (o.partsLeft != null) { o.partsLeft--; if (o.partsLeft <= 0) { o.state = 'done'; o.kind = 'idle'; } }
         if (R() >= 0.22) continue; // most indoor life is quiet
         var nm = 'Someone';
@@ -1402,7 +1433,7 @@
               // line says that — never claims a lesson was given.
               this.say(this.ambientLine('finds', rid, nm) || `📖 ${nm} is going over their finds, re-tying the bundle.`);
             }
-          } else if (o.chore !== 'teach' && playerAtHaven) {
+          } else if (o.chore !== 'teach' && o.chore !== 'cook' && o.chore !== 'gear' && playerAtHaven) {
             var _choreLine = this.ambientLine('chore_' + o.chore, rid, nm);
             if (_choreLine) this.say(_choreLine);
           }
@@ -1531,6 +1562,114 @@
     // ---------- 6. RETURN EFFECTS for the new purposes ----------
     // The base return block handles forage/explore/leave; these extend it.
     // Called from the base return path (surgical hook in npcNodeTravel).
+    // A bounded first crafting chain: the universally known stone knife.
+    // A real melee upgrade is the goal; XP alone never justifies making spares.
+    npcGearPlan(vid) {
+      if (!this.npcHavenWorkReady(vid) || this.npcAge(vid) < 15) return null;
+      const person = this.getPerson(vid), eq = globalThis.Scattering.equipment;
+      const recipeId = 'stone_knife', def = this.data.items.find(d => d.id === recipeId);
+      if (!def || !eq) return null;
+      const idOf = item => typeof item === 'string' ? item : item?.itemId || item?.id;
+      const value = item => {
+        const d = this.data.items.find(d => d.id === idOf(item));
+        return d && eq.slotForItem(d) === 'melee' ? this._gearValue(d) : 0;
+      };
+      const target = this._gearValue(def);
+      const owned = [...(person.items || []), ...(person.stashed || []), ...Object.values(person.equipped || {})];
+      if (owned.some(i => value(i) >= target)) return null;
+      // Deposited upgrades already have a sharing path. Do not waste supplies
+      // making another knife while the armory can meet this need.
+      if ((this.state.village.stash?.weapons || []).some(i => (i.units ?? 1) > 0 && value(i) >= target)) return null;
+      const recipe = this.data.recipes.find(r => r.id === recipeId);
+      if (!recipe) return null;
+      const pile = this.state.village.stash?.materials || {};
+      const communal = Object.keys(recipe.materials).map(material => ({ material, units: pile[material] || 0 }));
+      const ownStashed = (person.stashed || []).filter(i => i && typeof i === 'object' && Object.hasOwn(recipe.materials, i.material));
+      const plan = this.planRecipeCraft(recipeId, [...(person.items || []), ...ownStashed, ...communal], this.basicRecipeLevels()[recipeId] || 0);
+      return { recipeId, person, communal, ownStashed, plan, action: plan.ready ? 'craft'
+        : plan.missing.some(m => m.mat === 'vine') ? 'forage' : 'stone' };
+    },
+    npcWorkGear(vid, rng = Math.random) {
+      const goal = this.npcGearPlan(vid);
+      if (!goal) return { paid: false, reason: 'no_useful_work' };
+      if (goal.action === 'forage') return { paid: false, reason: 'needs_vine' };
+      const village = this.state.village;
+      if (goal.action === 'stone') {
+        const before = village.stash?.materials?.stone || 0;
+        this.resolveOneAssignment(vid, { task: 'stone' });
+        return { paid: (village.stash?.materials?.stone || 0) > before, kind: 'stone' };
+      }
+      const ids = village.npcAbilities?.[vid] || [];
+      const actor = { ...goal.person, abilities: ids.map(id => ({ ...(village.npcAbilityPractice?.[vid]?.[id] || {}), id })),
+        activeSynergies: village.npcSynergies?.[vid] || [] };
+      const modifiers = globalThis.Scattering.modifiers;
+      const chance = modifiers.resolve(goal.plan.baseRate, 'craft.success', modifiers.collectModifiers(actor, this.data.abilities, this.data.synergies), {});
+      const attempt = this.attemptRecipeCraft(goal.plan, chance, rng);
+      if (!attempt.paid) return attempt;
+      village.workedPart = village.workedPart || {};
+      village.workedPart[vid] = this.state.scholar.day + ':' + this.dayPart;
+      // Own materials go first; only the actual remainder is drawn from the
+      // communal pile. Virtual communal rows never enter anybody's inventory.
+      const pile = this.stashState().materials;
+      for (const row of goal.communal) {
+        const used = (pile[row.material] || 0) - row.units;
+        pile[row.material] = row.units;
+        if (used > 0) this.stashLog('take', row.material, used, vid);
+      }
+      goal.person.items = attempt.inventory.filter(i => !goal.communal.includes(i) && !goal.ownStashed.includes(i));
+      goal.person.stashed = (goal.person.stashed || []).filter(i => !goal.ownStashed.includes(i) || i.units > 0);
+      if (attempt.ok) {
+        goal.person.items.push(attempt.product);
+        globalThis.Scattering.equipment.autoEquip(goal.person, this.data.items);
+        this.creditDeed(vid, 'crafting');
+      }
+      if (this.map.px === (village.px ?? 4) && this.map.py === (village.py ?? 4)) {
+        const name = this.firstRef ? this.firstRef(vid) : this.displayName(vid);
+        this.say(attempt.ok ? `${name} knaps and binds a stone knife, then puts it on their belt.`
+          : `${name}'s stone edge breaks while they bind it. The stone and vine are spent.`);
+      }
+      return { paid: true, made: attempt.ok, kind: 'craft', itemId: goal.recipeId, vid };
+    },
+    // Actual visited ground, not the bearer's location or a free daily pile.
+    // One patch per work part; successful and failed harvesting both work the
+    // shared patch and pay the same existing NPC forage exertion.
+    npcForageCraftMaterial(vid, nx, ny, rng = Math.random) {
+      const v = this.state.village, person = this.getPerson(vid), o = this.objOf(vid);
+      if (this.over || this.inCombat() || !person || person.dead || vid === this.villagerId ||
+          vid === this.state.scholar.villagerId || this.npcAge(vid) < 15 ||
+          !(v.roster || []).includes(vid) || o.kind !== 'FORAGE' || o.state !== 'out' ||
+          o.craftMaterial !== 'vine' || v.away?.[vid]?.purpose !== 'forage' ||
+          this.isEngaged(vid) || this.isSheltered?.(vid) || this.partyMembers().includes(vid) ||
+          this.waterFavorCompanions?.().includes(vid) || this.companyFavorHolding?.(vid)) return false;
+      const needs = this.npcNeeds(vid);
+      if ((v.health?.[vid] ?? 100) < 40 || (needs.energy ?? 70) < 3 || (needs.hunger ?? 0) > 80) return false;
+      const node = this.npcNode(vid), stamp = this.state.scholar.day + ':' + this.dayPart;
+      if (node.nx !== nx || node.ny !== ny || o.materialWorkPart === stamp ||
+          (person.items || []).some(i => i?.material === 'vine' && i.units > 0)) return false;
+      const tile = this.tileAt(nx, ny);
+      if (!tile || !globalThis.Scattering.forage.canForage(tile)) return false;
+      const detail = this.genDetail(nx, ny), day = this.state.scholar.day;
+      const scorch = this.state.scorch?.[nx + ',' + ny] || {};
+      let site = null;
+      for (let y = 0; y < 9 && !site; y++) for (let x = 0; x < 9; x++) {
+        const key = x + ',' + y;
+        if (detail[y]?.[x] === 'bush' && !tile.detailRegrow?.[key] && !(scorch[key] > day)) {
+          site = { x, y, cell: 'bush' }; break;
+        }
+      }
+      if (!site) return false;
+      o.materialWorkPart = stamp;
+      needs.energy = Math.max(0, (needs.energy ?? 70) - 3);
+      needs.hunger = Math.min(100, (needs.hunger ?? 0) + 3);
+      tile.detailRegrow = tile.detailRegrow || {};
+      tile.detailRegrow[site.x + ',' + site.y] = { day: day + 2, was: site.cell };
+      this.stripGround(tile, 1);
+      person.items = person.items || [];
+      const found = this.collectForageByproducts([{ ...site, nx, ny }], person.items, rng);
+      o.materialSource = { nx, ny, x: site.x, y: site.y, day, found: found.length };
+      return true;
+    },
+
     objReturnEffect(vid, purpose) {
       var v = this.state.village;
       var nm = 'Someone';
@@ -1558,7 +1697,7 @@
         let _snareRoll = false;
         if (_knowsSnare) {
           _snareRoll = R() < 0.4;
-          try { this.luckRoll('snare', 0.4, _snareRoll); } catch (e) {}
+          try { this.luckRoll('snare', 0.4, _snareRoll); } catch (e) { console.warn('[measurement] luck hook failed', e); }
         }
         if (_snareRoll) {
           _caught = true;
@@ -1585,7 +1724,7 @@
         let _pitRoll = false;
         if (_knowsPit) {
           _pitRoll = R() < 0.18;
-          try { this.luckRoll('pit', 0.18, _pitRoll); } catch (e) {}
+          try { this.luckRoll('pit', 0.18, _pitRoll); } catch (e) { console.warn('[measurement] luck hook failed', e); }
         }
         if (_pitRoll) {
           var _pitTable = ['white_tailed_deer', 'white_tailed_deer', 'wild_boar', 'raccoon', 'opossum'];

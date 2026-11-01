@@ -16,25 +16,8 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || '20261010', 10);
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ a >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(SEED);
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
- 'src/js/convo-scene.js', 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/contestEngine.js',
- 'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js',
- 'src/js/progression.js', 'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
- 'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js', 'src/js/villager-objectives.js',
- 'src/js/codex-people.js', 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/villageAgency.js',
- 'src/js/partyTactics.js', 'src/js/debug-scenarios.js', 'src/js/build.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-delete global.window;
-const Game = globalThis.Scattering.Game;
+const {loadGame}=require('./sim-harness');
+let Game;
 const say = () => { const l = Game.log || []; const s = l.map(x => x.text || x).join(' '); l.length = 0; return s; };
 const verdicts = [];
 const attack = (name, broke, detail) => { verdicts.push([name, broke]); console.log(`[${broke ? 'BREAK' : 'HELD '} ] ${name}${detail ? ' — ' + detail : ''}`); };
@@ -51,7 +34,7 @@ function fresh() {
 const tile = (x, y) => Game.tileAt(x, y);
 
 (async () => {
-await Game.init();
+({Game}=await loadGame({seed:SEED,narration:true}));
 
 // ---------- T1: intermediate-tile blockage bypass ----------
 (function T1() {
@@ -137,7 +120,10 @@ await Game.init();
   fresh();
   const src = fs.readFileSync(ROOT + '/src/js/game.js', 'utf8');
   const start = src.indexOf('travelTo(x, y, force, combatExit)');
-  const chunk = src.slice(start, start + 9000);
+  const tail = src.slice(start);
+  const nextMethod = /\n    [A-Za-z_$][\w$]*\([^\n]*\)\s*\{/.exec(tail);
+  if(start<0||!nextMethod) throw Error('Actual travel method boundaries required');
+  const chunk = tail.slice(0,nextMethod.index);
   const iPos = chunk.indexOf('this.map.px = x');
   const iReveal = chunk.indexOf('this.reveal(x, y)');
   const iSeen = chunk.indexOf("this.markSeen(x, y, 'visited')");

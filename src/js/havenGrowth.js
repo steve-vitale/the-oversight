@@ -884,7 +884,7 @@
       }
       // AFTERMATH: treeline clear of lingerers = the door answered.
       const still = this.lingeringRaiders();
-      if (!still.length) {
+      if (!still.length && !this.aidRaidThreatPresent()) {
         const crisis = this.aidCrisis ? this.aidCrisis() : null;
         if (crisis && !crisis.resolved && crisis.raiders) {
           this.say('The treeline is quiet. No shapes in the dark.');

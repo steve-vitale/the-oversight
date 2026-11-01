@@ -15,6 +15,7 @@
 //   - Game.tbCongRefuse()
 //   - Game.tbCongHeresy()
 //   - Game.tbStrikeMeet()
+//   - Game.tbStrikeDemandOptions() -> visible posted demands, actual affordability and unpaid still rounds
 //   - Game.tbStrikeScab()
 //   - Game.tbInflOutentertain()
 //   - Game.tbAuditRead()
@@ -223,19 +224,59 @@
   }
   function strikeDemands(game) {
     var opts = [];
-    try {
-      var kcal = (game.state && game.state.scholar && game.state.scholar.packKcal) || 0;
-      if (kcal > 1500) opts.push({ id: 'kcal', label: '2,000 kcal from your pack', cost: 'kcal:2000' });
-    } catch (e) {}
-    opts.push({ id: 'still', label: '3 rounds of stillness (no movement)', cost: 'still:3' });
-    opts.push({ id: 'tool', label: 'your best tool (dropped)', cost: 'tool:1' });
+    if (game.playerPackKcal() >= 2000) opts.push({ id: 'kcal', label: 'at least 2,000 kcal of carried food (whole portions)', cost: 'kcal:2000' });
+    opts.push({ id: 'still', label: '3 consecutive rounds of stillness (no movement)', cost: 'still:3' });
+    var tool = strikeTool(game);
+    if (tool) opts.push({ id: 'tool', label: 'one carried ' + (tool.item.name || tool.def.name || 'tool'), cost: 'tool:1', toolId: tool.def.id });
     return opts.slice(0, 3);
+  }
+  function strikeTool(game, id) {
+    var inv = game.state.scholar.inventory || [];
+    for (var i = 0; i < inv.length; i++) {
+      var item = inv[i];
+      if (!item) continue;
+      var def = (game.data.items || []).find(function (d) { return d.id === (item.itemId || item.id); });
+      if (!def || (id && def.id !== id) || !(def.class === 'tool' || def.tool) || item.bonded || (game.isKeepsake && game.isKeepsake(item)) || (item.units != null && !(item.units > 0))) continue;
+      return { item: item, def: def, index: i };
+    }
+    return null;
+  }
+  function strikeSettled(game, m, message) {
+    var S = strikeState(m);
+    S.met = true; S.shutdown = 0; S.demands = null; S.still = null; S.phase = 'settled';
+    m.fled = true;
+    say(game, message);
+    game.tbEndCheck();
+  }
+  function tbStrikeDemandOptions() {
+    var m = liveMonsters(this, 'strike')[0], S = m && m.sigStrike;
+    if (!S || !S.demands) return [];
+    if (S.still) return [{ id: 'still', label: 'Hold still: ' + S.still.remaining + ' rounds left', hint: 'End your turn without moving. Moving restarts all three rounds.', available: false, pending: true, remaining: S.still.remaining }];
+    var game = this;
+    return S.demands.map(function (d) {
+      var available = d.id === 'still' || (d.id === 'kcal' && game.playerPackKcal() >= 2000) || (d.id === 'tool' && !!strikeTool(game, d.toolId));
+      return { id: d.id, label: d.id === 'still' ? 'Hold still ×3' : d.id === 'kcal' ? 'Give food ≥2,000 kcal' : 'Give ' + d.label.replace(/^one carried /, ''), hint: d.label + '. ' + (available ? 'This ends this rat\'s strike when paid.' : 'You no longer carry the required payment.'), available: !!available };
+    });
   }
   function sigStrikeHook(game, m) {
     var f = null;
     try { f = game.tbfight; } catch (e) {}
     if (!f || f.over) return false;
     var S = strikeState(m);
+    if (S.still) {
+      var hold = S.still, p = playerFighter(game), round = f.round || 1;
+      if (!p || game.villagerId !== hold.bearer) { S.still = null; say(game, 'The stillness agreement belonged to someone else. The demand remains unpaid.'); return true; }
+      if (round <= hold.lastRound) return true;
+      hold.lastRound = round;
+      var moved = hold.movedRound === round || p.mx !== hold.x || p.my !== hold.y;
+      hold.x = p.mx; hold.y = p.my;
+      if (moved) { hold.remaining = 3; say(game, '🐀 You moved. The stillness demand restarts: three consecutive rounds without moving.'); return true; }
+      hold.remaining--;
+      if (hold.remaining <= 0) {
+        strikeSettled(game, m, '🐀 Three still rounds paid. The rat lowers its sign and leaves. (Non-violent resolution.)');
+      } else say(game, '🐀 Hold still: ' + hold.remaining + (hold.remaining === 1 ? ' round' : ' rounds') + ' left. End your turn without moving; moving restarts the three rounds.');
+      return true;
+    }
     // Shutdown rounds: nothing works (announced, never sprung).
     if (S.shutdown > 0) {
       S.shutdown--;
@@ -269,38 +310,30 @@
     try { game.audioEvent('strikeShutdown'); } catch (e4) {}
     return true;
   }
-  function tbStrikeMeet() {
+  function tbStrikeMeet(demandId) {
     var m = liveMonsters(G, 'strike')[0];
     if (!m) return false;
     var S = strikeState(m);
     if (!S.demands || !S.demands.length) { say(G, 'No demands posted. (It hasn\'t asked yet.)'); return false; }
+    if (S.still) { say(G, 'The stillness demand is already underway. End your turn without moving.'); return false; }
+    var d = S.demands.find(function (x) { return x.id === (demandId || S.demands[0].id); });
+    var option = G.tbStrikeDemandOptions().find(function (x) { return d && x.id === d.id; });
+    if (!d || !option || !option.available) { say(G, 'You cannot pay that posted demand with what you carry. Choose another demand.'); return false; }
+    var p = playerFighter(G), f = G.tbfight;
     if (!spendPlayerTurn(G)) return false;
-    var d = S.demands[0];
-    var paid = false;
-    try {
-      if (d.id === 'kcal' && G.spendKcal) { paid = G.spendKcal(2000); }
-      else if (d.id === 'still') { var f = G.tbfight; f.sigW4stillOwe = 3; paid = true; }
-      else if (d.id === 'tool') {
-        var inv = G.state && G.state.scholar && G.state.scholar.pack;
-        if (inv && inv.length) { var t = inv.pop(); say(G, 'You set down: ' + (t.name || 'your best tool') + '. The rat\'s whiskers twitch — accepted.'); paid = true; }
-      }
-    } catch (e) {}
-    if (!paid) {
-      if (d.id === 'kcal') {
-        try {
-          var s = G.state.scholar; var had = s.packKcal || 0;
-          s.packKcal = Math.max(0, had - 2000);
-          say(G, 'You count out 2,000 kcal from your pack. The rat\'s eyes deflate like punctured balloons. "SOLIDARITY," it squeaks, almost fond, and waddles off.');
-          paid = true;
-        } catch (e2) {}
-      }
+    if (d.id === 'still') {
+      S.shutdown = 0;
+      S.still = { remaining: 3, lastRound: (f.round || 1) - 1, x: p.mx, y: p.my, movedRound: null, bearer: G.villagerId };
+      say(G, '🐀 You agree to three consecutive rounds without moving. This turn counts; moving restarts the demand.');
+    } else if (d.id === 'kcal') {
+      var paid = G.playerPackSpend(2000);
+      if (paid >= 2000) strikeSettled(G, m, '🐀 You give ' + paid + ' kcal in whole portions from your pack. The rat lowers its sign and leaves. (Non-violent resolution.)');
+      else { console.warn('[strike] food payment fell short after preflight', paid); say(G, 'The food payment fell short (' + paid + ' kcal). The demand remains unpaid.'); }
+    } else if (d.id === 'tool') {
+      var tool = strikeTool(G, d.toolId);
+      if (tool.item.units > 1) tool.item.units--; else G.state.scholar.inventory.splice(tool.index, 1);
+      strikeSettled(G, m, '🐀 You give one ' + (tool.item.name || tool.def.name) + '. The rat takes the tool, lowers its sign and leaves. (Non-violent resolution.)');
     }
-    if (paid) {
-      S.met = true; S.shutdown = 0; S.demands = null;
-      m.fled = true;
-      say(G, '🐀 Demand met. The strike is over — the rat deflates to a normal (house-sized, still alarming) rat and leaves. (Non-violent resolution.)');
-      try { G.tbEndCheck(); } catch (e3) {}
-    } else say(G, 'You couldn\'t meet the demand. (The strike holds.)');
     endPlayerTurn(G);
     return true;
   }
@@ -704,7 +737,12 @@
     var orig = G[name];
     if (typeof orig !== 'function') return;
     G[name] = function () {
+      var before = name === 'tbPlayerMove' && this.tbfight, mover = before && playerFighter(this);
+      var oldMove = mover && { x: mover.mx, y: mover.my, round: before.round };
       var r = orig.apply(this, arguments);
+      if (oldMove && this.tbfight === before && (mover.mx !== oldMove.x || mover.my !== oldMove.y)) {
+        liveMonsters(this, 'strike').forEach(function (m) { if (m.sigStrike && m.sigStrike.still) m.sigStrike.still.movedRound = oldMove.round; });
+      }
       try {
         var f = this.tbfight;
         if (f && !f.over) {
@@ -783,6 +821,7 @@
     tbCongRefuse: tbCongRefuse,
     tbCongHeresy: tbCongHeresy,
     tbStrikeMeet: tbStrikeMeet,
+    tbStrikeDemandOptions: tbStrikeDemandOptions,
     tbStrikeScab: tbStrikeScab,
     tbInflOutentertain: tbInflOutentertain,
     tbAuditRead: tbAuditRead,
@@ -801,9 +840,9 @@
       var p = playerFighter(this);
       var dis = (p && p.acted) ? 'disabled' : '';
       var out = [];
-      var btn = function (act, label, title, cond) {
+      var btn = function (act, label, title, cond, arg, unavailable) {
         if (cond === false) return;
-        out.push('<button class="self-btn" data-sigw4="' + act + '" ' + dis + ' title="' + escHtml(title) + '">' + label + '</button>');
+        out.push('<button class="self-btn" data-sigw4="' + act + '"' + (arg ? ' data-sigw4arg="' + escHtml(arg) + '"' : '') + ' ' + (dis || unavailable ? 'disabled' : '') + ' title="' + escHtml(title) + '">' + escHtml(label) + '</button>');
       };
       if (liveMonsters(this, 'congregation').length) {
         var C = congState(liveMonsters(this, 'congregation')[0]);
@@ -814,8 +853,7 @@
         if (C.geas > 0 && !p.acted) btn('tbCongHeresy', '⛪ Heresy', 'Argue theology — break the geas (25 damage to it).');
       }
       if (liveMonsters(this, 'strike').length) {
-        var S = strikeState(liveMonsters(this, 'strike')[0]);
-        if (S.demands && S.demands.length && !p.acted) btn('tbStrikeMeet', '🤝 Meet demand', 'Meet the first demand: ' + S.demands[0].label + ' — the strike ends.');
+        this.tbStrikeDemandOptions().forEach(function (d) { btn('tbStrikeMeet', d.label, d.hint, true, d.id, !d.available); });
         if (!p.acted) btn('tbStrikeScab', '🧤 Scab', 'Learn the grid\'s job — your shutdown rounds work at half strength.');
       }
       if (liveMonsters(this, 'influencer').length && !p.acted) {
@@ -844,9 +882,10 @@
       return out.join('');
     },
 
-    sigW4WireCombat: function (on, rerender) {
+    sigW4WireCombat: function (on, rerender, runInput) {
+      var execute = runInput || function (action) { return G.runCombatInput(action).value; };
       document.querySelectorAll('[data-sigw4]').forEach(function (b) {
-        b.onclick = function () { try { G[b.dataset.sigw4](); } catch (e) {} rerender(); };
+        b.onclick = function () { try { execute(function () { return G[b.dataset.sigw4](b.dataset.sigw4arg); }); } catch (e) { console.warn('[sigW4] combat action', e); } rerender(); };
       });
     },
 
@@ -981,9 +1020,10 @@
   // - Congregation: the invitation consumes its whole turn (liturgy, not
   //   violence); geas commands alternate kneel/give; heresy is once per geas
   //   (the geas breaks, so naturally once).
-  // - Strike: demands are generated from real state (pack kcal if >1500);
-  //   shutdown is 2 rounds; scabbing costs the organizing turn now and pays
-  //   during shutdown at half strength.
+  // - Strike: demands read real carried finished food and unbonded tools;
+  //   stillness costs three consecutive rounds, restarting after movement.
+  //   Shutdown is 2 rounds; scabbing costs the organizing turn now and pays
+  //   during shutdown at half strength. The posted choices are public data.
   // - Influencer followers are spawned via tbSpawnFollower if present, else
   //   tracked as a buff count (the hook degrades gracefully).
   // - Audit taxes the most-used VERB (strike/ability/move...) — "your sheet"

@@ -50,6 +50,16 @@ try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || r
 try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
 const livelihoods = require('./policies/livelihood');
 for (const id of ['maker', 'merchant', 'caregiver']) POLICY_REGISTRY[id] = livelihoods[id];
+for (const profile of require('./policies/ending-aware').profiles()) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/counter-aware').profiles()) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/endgame-counter-aware').profiles()) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/ledger-aware').profiles()) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/public-travel-profiles').profiles) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/local-search-profiles').profiles) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/gardener-intent').profiles) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/garden-scheduling').profiles) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/garden-daystart').profiles) POLICY_REGISTRY[profile.id]=profile;
+for (const profile of require('./policies/garden-diplomacy').profiles) POLICY_REGISTRY[profile.id]=profile;
 const marketBuilds = require('./policies/market-build');
 for (const id of ['dealer', 'hoarder']) POLICY_REGISTRY['market-'+id] = marketBuilds[id];
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
@@ -207,6 +217,7 @@ async function runComparison(opts) {
         endReason: result.endReason,
         stop: result.stop,
         communityExposure: result.communityExposure,
+        harnessDiagnostics: result.harnessDiagnostics,
         won: end.won ? 1 : 0,
         waveReach: result.maxWaveUnlocked || 1,
         maxArc: hist.maxArc,

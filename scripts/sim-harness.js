@@ -20,8 +20,25 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const humanCombat = require('./policies/human-combat');
+const contestChoices = require('./policies/contest-choices');
 
 const ROOT = path.join(__dirname, '..');
+
+// One browser-script surface for the shared harness and legacy custom probes.
+// Keep inline code/comments and DOM-only adapters out; never truncate by count.
+function nodeScriptFiles(root=ROOT) {
+  const html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/<!--[\s\S]*?-->/g,'');
+  const dom=new Set(['src/js/app.js','src/js/sprites.js','src/js/tile-scenes.js','src/js/move-anim.js','src/js/drama.js']);
+  const files=[];
+  for(const tag of html.matchAll(/<script\b([^>]*)>[\s\S]*?<\/script\s*>/gi)){
+    const src=/(?:^|\s)src\s*=\s*(["'])(.*?)\1/i.exec(tag[1]);
+    if(!src)continue;
+    const file=src[2].split(/[?#]/)[0];
+    if(/^src\/js\/.+\.js$/i.test(file)&&!dom.has(file.toLowerCase()))files.push(file);
+  }
+  return files;
+}
 
 function mulberry32(a) {
   return function () {
@@ -170,17 +187,17 @@ async function loadGame(opts) {
   // (the entire crisis-relief system), villageAgency.js, and memdepth.js.
   // Sims were measuring a game without its recovery mechanics. No cap: load
   // the full list in index.html order.
-  const order = execSync(`grep -o 'src/js/[^"'"'"']*\\.js' index.html`, { cwd: ROOT })
-    .toString().split('\n')
-    .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
+  const order = nodeScriptFiles();
 
+  // The browser exposes Scattering.Game, not a bare Game global. A stale alias
+  // must not make broken browser references pass in the shared harness.
+  delete global.Game;
   global.window = global;
   const loadFails = [];
-  // TWO-PASS EVAL (crisis 2026-10-11): game.js first, then expose global.Game
-  // the way the browser's global lexical scope does — later modules' load-time
-  // code resolves bare `Game` against it. Before, the function-scope
-  // `const Game` below TDZ-shadowed every eval, and titans.js failed to load
-  // SILENTLY in every sim (loadFails was collected but never asserted).
+  // Keep index order around game.js. Its Game binding is IIFE-local; later
+  // modules must read Scattering.Game themselves, just as in the browser.
+  // The old alias hid missing party-bond attachment and unbound speech/deed
+  // references. The local harness variable below is G, avoiding the former TDZ.
   const gameIdx = order.indexOf('src/js/game.js');
   const evalFile = (f) => {
     // EXPORT SHIELD (journey establishment 2026-10-13): several game files
@@ -209,9 +226,9 @@ async function loadGame(opts) {
   // at load, so it must not run before them.
   order.forEach((f, i) => { if (gameIdx < 0 || i < gameIdx) evalFile(f); });
   if (gameIdx >= 0) evalFile(order[gameIdx]);
-  global.Game = globalThis.Scattering.Game;
   order.forEach((f, i) => { if (i > gameIdx) evalFile(f); });
   delete global.window;
+  if (loadFails.length) throw new Error('Simulation runtime failed to load:\n' + loadFails.join('\n'));
 
   // MACROTASK YIELD (journey-succession 2026-10-13): some modules install
   // load-order-critical wraps on a deferred macrotask — journal.js's mantle
@@ -585,6 +602,7 @@ async function runDays(Game, policy, opts) {
       const sday = (Game.state.scholar || {}).day || 0;
       if (lastSday !== null && sday === lastSday) {
         if (++frozenIters >= 8 && Game.tbfight && !Game.tbfight.over) {
+            ctx.timeFreezeRouteAttempts=(ctx.timeFreezeRouteAttempts||0)+1;
           try { Game.tbEnd('routed'); ctx.timeFreezeCleared = (ctx.timeFreezeCleared || 0) + 1; } catch (e) {}
           frozenIters = 0;
         }
@@ -691,6 +709,13 @@ async function runDays(Game, policy, opts) {
       engineOver:!!Game.over,won:!!Game.won,villageLost:!!Game.villageLost,
       iterations:iterationsStarted,gameDay:gameDays},
     communityExposure,
+    // Observation only: preserve recovery/guard use in every standard row.
+    // A budget condition is not itself proof of a Game softlock or death.
+    harnessDiagnostics:{version:1,timeFreezeRouteAttempts:ctx.timeFreezeRouteAttempts||0,
+      timeFreezeRouteReturns:ctx.timeFreezeCleared||0,
+      fightBudgetExhaustions:ctx.fightBudgetExhaustions||0,
+      fightNoProgressBreaks:ctx.fightNoProgressBreaks||0,
+      contestBudgetExhaustions:ctx.contestBudgetExhaustions||0},
     telemetry: Game.state.telemetry || [],
     samples,
     learnedPlants, learnedSkills,
@@ -751,20 +776,21 @@ function driveFightsImpl(Game, policy, ctx) {
     // (e.g. useAbility) can END the fight — tbfight null or over — and return
     // handled=false. The old code dereferenced tbfight right after.
     if (!Game.tbfight || Game.tbfight.over) break;
-    const tgt = Game.tbfight.fighters.find(x => x.kind === 'monster' && (x.hp || 0) > 0);
-    if (tgt && Game.tbIsPlayerTurn()) {
-      try { Game.tbPlayerStrike(tgt.key); } catch (e) {}
-    }
+    const f=Game.tbfight,p=Game.tbFighter('p'),turn=humanCombat.token(Game,f);
+    const handled=f.fighters.some(humanCombat.liveMonster)
+      ?humanCombat.monsterTurn(Game,ctx):humanCombat.humanTurn(Game,ctx);
     if (!Game.tbfight || Game.tbfight.over) { exitWhy = 'fight-null-or-over'; break; }
-    if (Game.tbIsPlayerTurn()) {
-      try {
-        Game.tbPlayerWait(); // same public end-turn action as the phone
-      } catch (e) { exitWhy = 'default-turn-threw'; break; }
-    } else { exitWhy = 'not-player-turn'; break; }
+    if(!handled){
+      if(!Game.tbIsPlayerTurn()){exitWhy='not-player-turn';break;}
+      try { humanCombat.finishTurn(Game,f,p,turn); }
+      catch(e){console.warn('[driveFights] public Wait: '+e.message);exitWhy='default-turn-threw';break;}
+    }
     const s = sig();
     if (s === lastSig) { if (++still > 10) { try { (ctx.notes || (ctx.notes = [])).push('driveFights: no progress for 10 rounds, breaking'); } catch (e2) {} exitWhy = 'no-progress'; break; } }
     else { still = 0; lastSig = s; }
   }
+  if(exitWhy==='no-progress')ctx.fightNoProgressBreaks=(ctx.fightNoProgressBreaks||0)+1;
+  if(guard>200&&Game.tbfight&&!Game.tbfight.over&&!Game.over)ctx.fightBudgetExhaustions=(ctx.fightBudgetExhaustions||0)+1;
   if (TR) TR(`exit: ${exitWhy} guard=${guard} fight=${Game.tbfight ? Game.tbfight.id + ' round=' + Game.tbfight.round + ' over=' + Game.tbfight.over : 'none'}`);
 }
 
@@ -786,11 +812,15 @@ function driveContestsImpl(Game, policy, ctx) {
     }
     try {
       if (Game.state.activeContest && !(Game.tbfight && !Game.tbfight.over)) {
-        Game.contestChoose(0);
+        const available=contestChoices.availableIndices(Game);
+        // Keep the engine refusal/guard visible if every option is blocked.
+        // Otherwise choose a real affordable option, as a phone player can.
+        Game.contestChoose(available[0]??0);
       }
     } catch (e) { break; }
     if (Game.over) break;
   }
+  if(guard>400&&Game.state.activeContest&&!Game.over)ctx.contestBudgetExhaustions=(ctx.contestBudgetExhaustions||0)+1;
   driveFights(Game, policy, ctx);
   // Give an explicit bot choice the same opportunity as the phone before
   // the historical fight fallback. Profiles without a callback are unchanged.
@@ -819,4 +849,4 @@ function driveContestsImpl(Game, policy, ctx) {
   }
 }
 
-module.exports = { swallowReport, instrumentCatches, mulberry32, loadGame, setupGame, runDays, manifest, driveFights, driveContests, quietLog, snapshotVillagers,ROOT };
+module.exports = { swallowReport, instrumentCatches, mulberry32, nodeScriptFiles, loadGame, setupGame, runDays, manifest, driveFights, driveContests, quietLog, snapshotVillagers,ROOT };

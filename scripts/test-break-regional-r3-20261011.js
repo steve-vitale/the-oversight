@@ -45,23 +45,7 @@ Math.random = mulberry32(SEED);
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 global.window = global; // equipment.js needs window at LOAD; deleted before play
-[
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js',
-  'src/js/convo-beats.js', 'src/js/convo-scene.js', 'src/js/examine.js',
-  'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/broadcast.js', 'src/js/storage.js', 'src/js/perceive.js',
-  'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js',
-  'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/ledger.js',
-  'src/js/villager-agency.js', 'src/js/villager-objectives.js',
-  'src/js/codex-people.js', 'src/js/membership.js', 'src/js/hierarchy.js',
-  'src/js/comms.js', 'src/js/safetynets.js', 'src/js/debug-scenarios.js',
-  'src/js/build.js',
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
+require('./lib/browser-script-files')(ROOT).forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 delete global.window; // sync combat path, per harness lessons
 const Game = globalThis.Scattering.Game;
 

@@ -3,11 +3,13 @@
 // description: Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 // provides:
 //   - convoSelectWant(vid) -> want object
+//   - convoJointFavorOpening(vid) -> truthful accepted meeting or active outing phase before generic recall
 //   - convoWantOpener(vid, want) -> provisional {line, thread, question}
 //   - convoAcceptWantQuestion(vid, opener) -> accept only the spoken question
 //   - convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked
 //   - convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit')
 //   - convoWantMenu(vid) -> menu options for the live want
+//   - convoFavorDepartureReservation(vid, parts) -> pure shared meeting/return budget
 //   - convoFavorAction(vid, favor) -> read-only physical action readiness
 //   - convoFavorActionMenu(vid, favor, canPromise) -> action and requirements
 //   - convoPerformFavor(vid, favor) -> execute a checked canonical care or food deed
@@ -357,51 +359,24 @@
     forage_help: {
       keepKind: 'food', goal: 'feed', deadlineDays: 2,
       build(vid, need, ctx) {
-        const n = ctx.rosterN || 1;
-        const hh = this.convoFavorHash(vid, ctx) + n;
-        // JOURNEY DEEPENING R6 (2026-10-12): the meeting direction was the
-        // fixed "Good. East treeline, first light. Bring a pack." — every
-        // villager's pantry run met at the same spot at the same hour. Now
-        // the spot is grounded in THIS villager's foraging knowledge and
-        // when/gear vary per instance (3x3x3x3x4 combos, instance-hashed).
-        const spot = this.convoForageSpot(vid, hh);
-        const capSpot = spot.charAt(0).toUpperCase() + spot.slice(1);
-        // Lead x spot x when x gear: 4x10x6x6 = 1440 combinations per
-        // instance hash — same-spot collisions across villagers are rare,
-        // not systematic (journey deepening r6: 128 combos still produced a
-        // byte-identical pair in the wild).
-        const leads = ['Good.', 'Good \u2014', 'Then it\u2019s set.', 'Done.'];
-        const whens = ['first light', 'dawn', 'before the heat sets in', 'morning, early', 'at sunup', 'before the dew dries'];
-        const gears = ['Bring a pack.', 'Bring your pack and your knife.', 'Two packs between us.', 'Pack light \u2014 we move fast.', 'Bring the big pack if you have it.', 'Pack and knife. We travel light.'];
-        const states = [
-          `The pantry's nearly bare.`,
-          `We're eating through stores faster than we replace them.`,
-          `Pantry's thin and getting thinner.`,
+        const amount=this.data.favorRules?.forage?.minimumDeliveryKcal;
+        const h=this.convoFavorHash(vid,ctx),asks=[
+          'The pantry is running thin. Will you forage with me tomorrow?',
+          'Come foraging with me tomorrow? We can bring food home together.',
+          'I want to bring more food in. Will you come with me tomorrow?',
+        ],plans=[
+          'Meet me at Haven at dawn. We will gather together; you carry the food.',
+          'Then it is settled. Haven, first light tomorrow. Leave room in your pack for what we find.',
+          'Find me at Haven tomorrow at first light. We can pick a patch we actually know.',
         ];
-        const asks = [
-          `Will you forage with me tomorrow? Two pairs of eyes, twice the ground.`,
-          `Forage with me tomorrow? I know ${spot}.`,
-          `Come forage with me tomorrow \u2014 two of us can fill packs.`,
-        ];
-        const line = '"' + states[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
-        const whyBits = [
-          `Another day like today and we're choosing who eats.`,
-          `The stores won't stretch past tomorrow, and I'm not choosing who eats.`,
-          `I did the count twice. The count doesn't change.`,
-        ];
-        const whyTails = [
-          `I know ${spot} \u2014 come with me and we'll fill packs before dark.`,
-          `Meet me at ${spot} and we'll fill packs before dark.`,
-          `Nobody's worked ${spot} in days. We'll fill packs before dark.`,
-        ];
-        const whyLine = '"' + whyBits[hh % 3] + ' ' + whyTails[(hh >>> 3) % 3] + '"';
-        const commitLine = `"${leads[hh % 4]} ${capSpot}, ${whens[(hh >>> 4) % 6]}. ${gears[(hh >>> 7) % 6]}"`;
         return {
-          task: `forage with ${ctx.name} tomorrow to rebuild the pantry`,
+          task: 'gather and bring '+amount+' kcal of outing food home with '+ctx.name+'; meet at Haven at dawn tomorrow',
           short: 'the pantry run',
-          line, whyLine, commitLine,
-          goodbye: `"First light. The pantry's counting on us."`,
-          stakes: `The village is ${n} hungry mouths from an empty pantry.`,
+          line: '"'+asks[h%asks.length]+'"',
+          whyLine: '\"Let us bring back '+amount+' kcal of food we gather together. Meet me at Haven at first light. We will choose a patch we actually know.\"',
+          commitLine: '"'+plans[(h>>>3)%plans.length]+' The food needs to reach the pantry before the deadline."',
+          goodbye: '\"First light, at Haven. Bring room in your pack.\"',
+          stakes: 'The pantry needs food. Only newly gathered food returned from this outing keeps the promise.',
         };
       },
     },
@@ -930,6 +905,8 @@
         if (want.fromSeed && want.seedFavorId) favor = this.convoGetFavor(vid);
         if (!favor || favor.id !== want.seedFavorId) favor = this.convoGetFavor(vid);
         const open = this.openFavorObligation(vid);
+        const physical=this.convoJointFavorOpening?.(vid);
+        if(physical){if(c.want)c.want.favor=favor;return physical.line;}
         if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
           if (c.want) c.want.favor = favor;
           return this.waterFavorOpening(vid)?.line || '"We still have a creek trip to finish."';
@@ -976,6 +953,8 @@
       },
       menuOptions(vid, stage) {
         const open = this.openFavorObligation(vid);
+        const ongoing=this.waterFavorOpening?.(vid)||this.forageFavorOpening?.(vid);
+        if(ongoing)return this.convoFavorActionMenu(vid,this.convoGetFavor(vid),false);
         if (open && open.favorTask) {
           // The promise is OPEN — "we're square" would be a lie. Honest
           // options: reaffirm it, or back out (which breaks it now, with
@@ -997,6 +976,7 @@
         // Still open — they still remember. Otherwise the business is
         // closed: fulfilled, broken, or renounced all consume the seed.
         const open = this.openFavorObligation(vid);
+        if(this.waterFavorOpening?.(vid)||this.forageFavorOpening?.(vid)){const f=this.convoGetFavor(vid);return{wantId:'repay',note:'the outing still under way',favorId:f.id};}
         if (open && open.favorTask) {
           const favor = this.convoGetFavor(vid);
           return { wantId: 'repay', note: ((favor && favor.short) || 'the promise') + ' you made', favorId: favor && favor.id };
@@ -1191,7 +1171,7 @@
         try { return !!this.convoPickUnaskedQuestion(vid); } catch (e) { return true; }
       },
       closeLine(vid, resolution) {
-        if (resolution === 'engaged') return '"Good talk. I feel like I know you a little better now."';
+        // The answer already landed; the normal farewell closes this exchange.
         return null;
       },
       // A walked-away-from question hangs: the curiosity plants a seed so
@@ -1208,6 +1188,9 @@
         if (how === 'left' && resolution !== 'deflected' && resolution !== 'unestablished') {
           let qid = null;
           try { const c = this.convoGet(vid); qid = (c && c.pendingQ && c.pendingQ.id) || null; } catch (e) {}
+          // An answered question is complete even when the player chooses Leave.
+          // Never replace it with a different question under an unfinished seed.
+          if (!qid) return null;
           return { wantId: 'curious', note: this.convoQuestionTopic(qid), qid: qid };
         }
         return null;
@@ -1459,45 +1442,7 @@
       return h >>> 0;
     },
 
-    // convoForageSpot: the meeting place for a pantry-run favor, grounded in
-    // the ASKING villager's own foraging knowledge (journey deepening r6,
-    // 2026-10-12: the commit line was verbatim "East treeline, first light.
-    // Bring a pack." across every NPC — the same spot, the same hour, the
-    // same pack). If the villager knows an edible plant, they point at its
-    // patch by name; otherwise they fall back to treeline-relative spots.
-    // Selection is deterministic per instance hash — two NPCs the same day
-    // point different directions, and one NPC can move the meeting day to day.
-    convoForageSpot(vid, hh) {
-      const generics = [
-        'the east treeline',
-        'the north treeline by the fallen oak',
-        'the creek bend, past the treeline',
-        'the south slope below the meadow',
-        'the old burn east of camp',
-        'the meadow edge, west of the creek',
-        'the ridge above the creek',
-        'the far treeline, past the rocks',
-      ];
-      const spots = generics.slice();
-      try {
-        const known = (Game.plantsKnownBy ? Game.plantsKnownBy(vid) : []) || [];
-        const foodPlants = [];
-        const seen = {};
-        for (const pid of known) {
-          if (seen[pid]) continue; seen[pid] = 1;
-          const p = (Game.data.plants || []).find(x => x.id === pid);
-          if (p && (p.caloriesPerUnit || 0) > 0 && p.name) foodPlants.push(p);
-        }
-        foodPlants.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-        const fp = foodPlants.length ? foodPlants[hh % foodPlants.length] : null;
-        if (fp) {
-          const nm = String(fp.name).toLowerCase();
-          spots.push('where the ' + nm + ' grows thick');
-          spots.push('the ' + nm + ' patch past the treeline');
-        }
-      } catch (e) {}
-      return spots[hh % spots.length];
-    },
+
 
     // convoBuildFavor: turn a need into a favor INSTANCE — WHO, concrete
     // task (verb+object+time+place), WHY (grounded), stakes, deadline.
@@ -1529,6 +1474,7 @@
         commitLine: parts.commitLine || '"Thank you. Seriously — thank you."',
         goodbye: parts.goodbye || '"Thank you."',
         deadline: day + (def.deadlineDays ?? 2),
+        ...(need.kind === 'forage_help' ? {forageRequiredKcal:this.data.favorRules?.forage?.minimumDeliveryKcal} : {}),
         ...(need.kind === 'stay_close' ? {companyVersion:1,companyNight:day} : {}),
         state: 'asked', askedDay: day,
       };
@@ -1558,6 +1504,37 @@
       } catch (e) { return null; }
     },
 
+    // Publicly agreed joint work competes with ordinary away jobs. NPC jobs
+    // launch at the END of advancePart's outgoing slot: a duration-N trip
+    // returns at outgoingSlot + 1 + N, not outgoingSlot + N.
+    // Pure planning information; never moves a person or extends a promise.
+    convoFavorDepartureReservation(vid, parts) {
+      const v=this.state.village,s=this.state.scholar,f=v.favorLedger?.[vid],p=v.promises?.[vid];
+      // Projection callers must not hydrate a new person or draw RNG.
+      const person=(this.data.villagers||[]).find(p=>p.id===vid)||(v.rosterChars||{})[vid],day=s.day,part=this.dayPart;
+      if(this.over||s.dead||vid===this.villagerId||!person||person.id!==vid||person.dead||
+        !(v.roster||[]).includes(vid)||v.assignments?.[vid]||!f||f.vid!==vid||f.state!=='promised'||
+        p?.favorId!==f.id||p.kept||p.maker!==this.villagerId||
+        !Number.isInteger(day)||!Number.isInteger(part)||part<0||part>3)return null;
+      const due=this.promiseDueDay(p);if(!Number.isFinite(due)||day>due)return null;
+      let meetDay,meetPart;
+      if(f.kind==='water_haul'||f.kind==='forage_help'){
+        if(f.kind==='water_haul'&&f.waterRun||f.kind==='forage_help'&&f.forageRun)return null;
+        const first=f.meetDay??((f.promisedDay??p.day)+1);
+        if(!Number.isInteger(first))return null;
+        meetDay=Math.max(first,day+(part===0?0:1));meetPart=0;
+      }else if(f.kind==='stay_close'){
+        if(f.company?.active)return null;
+        meetDay=f.companyNight??p.companyNight;meetPart=2;
+      }else return null;
+      if(!Number.isInteger(meetDay)||meetDay>due)return null;
+      const now=day*4+part,meeting=meetDay*4+meetPart;if(meeting<now)return null;
+      const valid=Number.isInteger(parts)&&parts>0,arrival=valid?now+1+parts:null;
+      return{favorId:f.id,kind:f.kind,meetDay,meetPart,meeting,arrival,
+        blocked:!valid||arrival>meeting,
+        reason:'Agreed joint work at Haven on day '+meetDay+(meetPart===0?' at dawn.':' at dusk.')};
+    },
+
     // convoFavorCommit: "I'll do it" creates a TRACKED OBLIGATION — the same
     // v.promises structure as formal vows, so checkPromises fulfillment,
     // deadlines, and the journal all work. One open commitment per villager.
@@ -1565,6 +1542,9 @@
       if (!favor) return { ok: false };
       if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
         const gate=this.companyFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
+      }
+      if (favor.kind === 'forage_help' && this.forageFavorCommitGate) {
+        const gate=this.forageFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
       }
       if (this.convoFavorAction(vid, favor).unsupported) return { ok: false, unsupported: true };
       if (favor.vid !== vid || !['asked', 'promised'].includes(favor.state)) return { ok: false, closed: true };
@@ -1585,8 +1565,8 @@
         favor.meetDay = day + 1;
       }
       if (favor.kind === 'forage_help') {
-        v.promises[vid].forageVersion = 1;
-        favor.meetDay = day + 1;
+        v.promises[vid].forageVersion=1;favor.meetDay=day+1;
+        favor.forageRequiredKcal=favor.forageRequiredKcal??this.data.favorRules.forage.minimumDeliveryKcal;
       }
       if (favor.kind === 'stay_close') {
         v.promises[vid].companyVersion=1;v.promises[vid].companyNight=favor.companyNight;
@@ -1646,9 +1626,10 @@
       const promise = this.state.village.promises?.[vid];
       if (status.unsupported && promise?.favorId === favor?.id && !promise.kept) out.push({ id: 'dlg:favor_cancel', labels: ['Close this unavailable job (no penalty)'], temper: 'neutral' });
       if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && this.waterFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:favor_cancel', labels: ['End trip and unload what we have (break unfinished promise)'], temper: 'neutral' });
-      if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && this.forageFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:favor_cancel', labels: ['End outing and unload what we have (break unfinished promise)'], temper: 'neutral' });
+      if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && this.forageFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:forage_unload_end', labels: ['Unload both shares and end outing (break unfinished promise)'], temper: 'neutral' });
       if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && this.forageFavorTalkReady?.(vid,favor)) out.push({ id: 'dlg:forage_talk', labels: ['Talk on the trail for a while'], temper: 'kind' });
       if (favor?.kind === 'stay_close' && promise?.favorId === favor.id && !promise.kept && !status.unsupported) out.push({ id:'dlg:favor_cancel',labels:['Break tonight’s company promise'],temper:'neutral' });
+      if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && this.forageFavorAction(vid,favor,{keepCargo:true}).ready) out.push({id:'dlg:favor_cancel',labels:['End outing; each keeps their food (break unfinished promise)'],temper:'neutral'});
       return out;
     },
 
@@ -1709,7 +1690,7 @@
         const tw = v.trust || (v.trust = {});
         tw[vid] = Math.max(0, trustAtBreakRen - 15);
       }
-      try { this.remember(vid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak: trustAtBreakRen, maker: p.maker || this.villagerId }); } catch (e) {}
+      try { this.remember(vid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak: trustAtBreakRen, maker: p.maker || this.villagerId, favorId: p.favorId }); } catch (e) {}
       this.journalFavorPromise?.(vid, p);
       try { this.say(`${this.displayName(vid)} goes quiet. "...Okay." The air between you cools a degree.`); } catch (e) {}
       return true;
@@ -1729,6 +1710,7 @@
           case 'stay_close': return (this.npcNeeds(favor.vid).fear || 0) > 50;
           case 'water_haul': return (favor.waterRun && !favor.waterRun.returned) || ((v.water || {}).clean || 0) < 15;
           case 'forage_help': {
+            if(favor.forageRun&&!favor.forageRun.returned)return true;
             const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : 0;
             return kcal < (((v.roster || []).length || 1) * 6000);
           }
@@ -1822,8 +1804,18 @@
     // lead with curiosity about the stranger, not errands. ACUTE needs
     // (urgency 4: hunger>70, health<60, sick) still lead — that's human.
     // Chronic needs (urgency <= 3) are dampened on first meetings only.
+    // The planned meeting is already accepted business, even before departure.
+    // Keep it ahead of clipped generic unfinished-thread recollections.
+    convoJointFavorOpening(vid) {
+      const active=this.waterFavorOpening?.(vid)||this.forageFavorOpening?.(vid);if(active)return{...active,jointFavor:true};
+      const f=this.convoGetFavor(vid),p=this.openFavorObligation(vid),s=this.state.scholar;
+      if(!f||!['water_haul','forage_help'].includes(f.kind)||f.waterRun||f.forageRun||f.state!=='promised'||p?.favorId!==f.id||p.maker!==this.villagerId||s.day>this.promiseDueDay(p)||this.state.activeContest||this.tableActive?.())return null;
+      const meet=f.meetDay??f.promisedDay+1,when=s.day<meet?(meet===s.day+1?'tomorrow':'on day '+meet):'at the next dawn';
+      const line=s.day<meet?'We meet at Haven at dawn '+when+'.':this.dayPart===0?'We agreed to set out from Haven at dawn.':'Find me at Haven '+when+'.';
+      return{line:'"'+line+(f.kind==='water_haul'?' Bring something to carry the water in.':' Leave room in your pack for the food.')+'"',thread:'want',wantId:'repay',structural:true,jointFavor:true};
+    },
     convoSelectWant(vid) {
-      const water = this.waterFavorOpening?.(vid);
+      const water = this.convoJointFavorOpening(vid);
       if (water) return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: this.convoGetFavor(vid).id };
       const forage = this.forageFavorOpening?.(vid);
       if (forage) return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: this.convoGetFavor(vid).id };

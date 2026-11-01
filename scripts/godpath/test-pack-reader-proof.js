@@ -1,0 +1,13 @@
+'use strict';
+const K=require('./lib'),P=require('../lib/pack-reader-proof'),T=K.reporter('pack reader proof'),root=K.ROOT,original=P.read(root),run=patch=>{const copy=structuredClone(original);patch(copy);return P.verify(root,copy).ok;};
+T.ok('current runtime has two native pack witnesses',P.verify(root,original).ok);
+T.ok('returning to top cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native cautious test').body.scroll=0));
+T.ok('free or falsely billed testing cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native cautious test').state.scholar.kcal++));
+T.ok('outcome-specific opposite billing cannot pass',!run(p=>{const d=p.receipts[0].data,b=d.trace.find(t=>t.label==='deep unknown item before native test'),a=d.trace.find(t=>t.label==='native cautious test'),sick=a.log.some(t=>/^Your stomach knots an hour later\.|^By evening you are thoroughly, educationally sick\./.test(t));a.state.scholar.kcal=b.state.scholar.kcal-(sick?0:200);}));
+T.ok('missing actual outcome narration cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native cautious test').log=[]));
+T.ok('outcome narration cannot contradict actual billing',!run(p=>{const a=p.receipts[0].data.trace.find(t=>t.label==='native cautious test'),sick=a.log.some(t=>/^Your stomach knots an hour later\.|^By evening you are thoroughly, educationally sick\./.test(t));a.log=sick?['The meal sits fine. Food.']:['Your stomach knots an hour later. Not dangerous — educational.'];}));
+T.ok('browsing cannot spend food',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='Pack open').state.scholar.kcal--));
+T.ok('small tap targets cannot pass',!run(p=>p.receipts[0].data.buttons[0].height=20));
+T.ok('lost Continue inventory cannot pass',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native pagehide and Continue').state.scholar.inventory.pop()));
+T.ok('stale served code cannot pass',!run(p=>p.receipts[0].data.responses['src/js/app.js']='stale'));
+T.done();

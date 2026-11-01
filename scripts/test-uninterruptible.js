@@ -58,7 +58,11 @@ async function main() {
   ok(!/Interruptible/.test(reveal('bulldozer')), 'bulldozer reveal drops Interruptible');
   ok(!/Interruptible/.test(reveal('gallowdeer')), 'gallowdeer reveal drops Interruptible');
   ok(/Interruptible/.test(reveal('sunbasker')), 'sunbasker reveal gains Interruptible');
-  ok(/Interruptible/.test(reveal('memory_projector')), 'memory_projector reveal gains Interruptible');
+  const memoryReveal = reveal('memory_projector');
+  ok(def('memory_projector').counter.kind === 'move_windup' && !def('memory_projector').uninterruptible &&
+    /Keep moving during the spell/i.test(memoryReveal) && /Stun it or shout/i.test(memoryReveal) &&
+    /while it brightens to break its concentration/i.test(memoryReveal),
+    'memory_projector teaches movement and the interrupt timing in its actual cue');
 
   // ---------- (3) player scream vs bulldozer: telegraph survives, stun lands ----------
   console.log('(3) scream cannot fizzle the charge');

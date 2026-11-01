@@ -23,7 +23,7 @@ const K = require('./lib'), T = K.reporter('hide-discovery');
   T.ok('ordinary real material acquisition teaches the same L1 outline', level() === 1);
   forget(); s.inventory = []; const shared = G.stashState(); shared.materials.hide = 1; G.takeMaterial('hide', 1);
   T.ok('public communal take has the same handling lesson', level() === 1);
-  const body = id => ({ id, kind: 'animal', name: 'Prepared animal body', dayDied: s.day, node: { x: G.map.px, y: G.map.py }, mx: s.mx || 4, my: s.my || 4, items: [{ plantId: 'animal_hide', material: 'hide', name: 'Prepared legacy hide', units: 1, kg: 1, kcalEach: 0, spoilDay: 9999 }] });
+  const body = id => ({ id, kind: 'animal', name: 'Prepared animal body', dayDied: s.day, node: { x: G.map.px, y: G.map.py }, scene: G.corpseScene({x:G.map.px,y:G.map.py},!!s.insideHaven), mx: s.mx || 4, my: s.my || 4, items: [{ plantId: 'animal_hide', material: 'hide', name: 'Prepared legacy hide', units: 1, kg: 1, kcalEach: 0, spoilDay: 9999 }] });
   forget(); G.state.corpses = [body('prepared_single')]; G.corpseTakeItem('prepared_single', 0);
   T.ok('actual single corpse take still teaches after its source is emptied', level() === 1);
   forget(); G.state.corpses = [body('prepared_batch')]; G.corpseLootAll('prepared_batch');
@@ -47,15 +47,13 @@ const K = require('./lib'), T = K.reporter('hide-discovery');
   forget(); s.inventory = [carcass()]; G.askSpecialist(teacher, 0, undefined, 'butcher');
   T.ok('real specialist pack butchering follows the same handling lesson', level() === 1 && s.inventory.some(i => i.material === 'hide'));
   forget(); s.inventory = [{ itemId: 'stone_knife', units: 1, kg: 0.4 }]; stash.length = 0; stash.push(carcass()); G.cleanCarcass(undefined, stash);
-  // R44 (journey-deepening r44): counter butchering IS handling the hide —
-  // the beat fires when the hide lands on the scholar's own prep counter,
-  // so the lesson is taught at the counter; only the MATERIAL waits for
-  // pickup. The old expectation (lesson deferred until pickup) encoded the
-  // pre-r44 wiring limit, not a design law.
-  T.ok('counter butchering teaches at the counter (r44 hide beat)', level() === 1);
-  T.ok('butchered hide stays on the counter until pickup', stash.some(i => i.material === 'hide') && !s.inventory.some(i => i.material === 'hide'));
+  // Actual butchering handles the hide even when its output stays on the
+  // scholar's counter (Muse r44). Mere counter stock above still teaches
+  // nothing; this action teaches an outline, not a complete recipe.
+  T.ok('real counter butchering teaches L1 while material stays on the counter', level() === 1 && stash.some(i => i.material === 'hide') && !s.inventory.some(i => i.material === 'hide'));
+  const counterLesson = JSON.stringify(G.state.codex.recipes.hide_armor);
   G.takePrepMaterial(stash.findIndex(i => i.material === 'hide'), 1);
-  T.ok('taking the real butchered hide completes the discovery path', level() === 1);
+  T.ok('taking the real butchered hide preserves that same outline without a second lesson', level() === 1 && JSON.stringify(G.state.codex.recipes.hide_armor) === counterLesson && s.inventory.some(i => i.material === 'hide'));
   forget(); G.noteHideHandled({ plantId: 'animal_hide', units: 1 });
   s.inventory = [hide(2), { material: 'vine', units: 1, kg: 0.1 }];
   const made = G.craft('hide_armor');

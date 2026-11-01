@@ -1,5 +1,5 @@
 'use strict';
-// Same validated23-metric methodology calculation, with a narrower source
+// Same validated29-column methodology calculation, with a narrower source
 // scope for explicit player-strategy experiments. No source rewriting.
 const {compareHarnessRevision}=require('./harness-comparison');
 function comparePolicyRevision(before,after,declaration){

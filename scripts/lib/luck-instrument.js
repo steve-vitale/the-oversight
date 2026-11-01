@@ -19,11 +19,13 @@
 //
 // Per stream per run we report:
 //   n, k, expected (sum of p), observedRate, lower/upper/twoSided tail probs,
-//   luckPct = P(X <= k) — the run's luck percentile, ~Uniform(0,1) under the
-//     null. 0 = catastrophically unlucky, 0.5 = neutral, 1 = charmed.
+//   luckPct = P(X < k) + 0.5 P(X = k), a descriptive mid-distribution score.
+//     The legacy field name is retained. Discrete scores are NOT uniform.
+//     Guaranteed outcomes score0.5; unknown/unobserved streams stay null.
 //   tercile: 'unlucky' | 'neutral' | 'lucky' (conditional-format buckets)
-// Per run overall: Stouffer's inverse-normal combination of the stream
-// percentiles, weighted by sqrt(n) — a single "was this run lucky?" number.
+// Per run overall: an inverse-normal index weighted by sqrt(n). Streams can
+// be dependent and gameplay exposure adaptive: this is not a calibrated
+// probability, significance test, or causal explanation of an ending.
 'use strict';
 
 const STREAMS = Object.freeze([
@@ -37,23 +39,25 @@ const STREAMS = Object.freeze([
 // Contract metric specs for the luck columns. Appended to
 // scripts/balance-metrics.json as new OPTIONAL fields — never rename/remove
 // existing entries. direction neutral + reviewChanges false: the scorecard
-// renders them as always-'descriptive' columns with zero verdict power.
+// retains their coverage/status while diagnosticOnly prevents verdict power.
 const CONTRACT_METRICS = Object.freeze([
   ...STREAMS.map(s => ({
     id: s.metricId,
-    label: s.label + ' percentile',
-    unit: 'luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases',
+    label: s.label + ' score',
+    unit: 'descriptive mid-distribution score, observable fixed-exposure model; not a calibrated probability',
     direction: 'neutral',
     tolerance: 0.1,
     reviewChanges: false,
+    diagnosticOnly: true,
   })),
   {
     id: 'luckOverall',
-    label: 'Combined run luck percentile',
-    unit: 'luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases',
+    label: 'Combined descriptive luck index',
+    unit: 'descriptive inverse-normal index on [0,1]; dependent/adaptive exposure, not a calibrated probability',
     direction: 'neutral',
     tolerance: 0.1,
     reviewChanges: false,
+    diagnosticOnly: true,
   },
 ]);
 
@@ -139,11 +143,15 @@ function summarizeStream(rolls) {
   }
   if (!ps.length) return null;
   const tails = pbTails(ps, k);
-  const luckPct = tails.lower; // P(X <= k): the run's luck percentile
+  // Inclusive tails overlap at the observed mass. Counting its whole mass
+  // upward made BOTH single-pit outcomes "lucky", even a normal miss.
+  const observedMass = Math.max(0, Math.min(1, tails.lower + tails.upper - 1));
+  const luckPct = Math.max(0, Math.min(1, tails.lower - observedMass / 2));
   return {
     n: ps.length, k, expected: tails.expected,
     observedRate: k / ps.length, expectedRate: tails.expected / ps.length,
     lower: tails.lower, upper: tails.upper, twoSided: tails.twoSided,
+    observedMass,
     luckPct, tercile: tercile(luckPct),
   };
 }

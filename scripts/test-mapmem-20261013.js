@@ -65,7 +65,9 @@ async function main() {
 
   // rig a monster corpse on another node with meat on it
   // hushwolf: edible.calories 1400, unknown descriptor pre-identification
-  const node = { x: hx + 2, y: hy + 1 };
+  // Prepared off-node opportunity inside this person's actual travel range.
+  const node = { x: hx + 1, y: hy + 1 };
+  assert(Game.npcMaxDist(vid) >= 1, 'prepared hauler can travel one node');
   const corpse = {
     id: 'probe-corpse-mapmem-1', kind: 'monster', monsterId: 'hushwolf',
     name: 'something', descriptor: 'a hound of static',

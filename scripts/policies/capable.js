@@ -54,6 +54,10 @@ const C = require('./competent');
 const {conversationDiagnostics}=require('./conversation-pages');
 const { leadfeast } = require('./feastscale');
 const { harmScore } = require('./risk-aware');
+const humanCombat = require('./human-combat');
+const contestChoices = require('./contest-choices');
+const community = require('./community-road');
+const communityVisit = require('./community-visit');
 
 const BASE = leadfeast;
 const ENV = { COMPETENT_DIRECTIONAL_FLEE: '1', FEASTSCALE_R13: '1', COMPETENT_ROUTE_AROUND: '1' };
@@ -94,15 +98,6 @@ function pantryKcal(Game) {
 }
 function cheb(a, b) { return Math.max(Math.abs((a.mx || 0) - (b.mx || 0)), Math.abs((a.my || 0) - (b.my || 0))); }
 
-function endTurn(Game) {
-  try {
-    if (!Game.tbfight || Game.tbfight.over || !Game.tbIsPlayerTurn()) return;
-    const q = Game.tbFighter('p');
-    if (!q) return;
-    q.moveLeft = 0; q.acted = true;
-    Game.tbAfterPlayerAction();
-  } catch (e) { /* fight ended under us */ }
-}
 function turnSpent(Game, p) {
   try {
     if (!Game.tbfight || Game.tbfight.over) return true;
@@ -146,7 +141,7 @@ function fightState(Game, ctx, f) {
   return ctx._cap;
 }
 function liveMons(f) {
-  return (f.fighters || []).filter(x => x && (x.kind === 'monster' || x.kind === 'hostile') && x.alive !== false && (x.hp || 0) > 0 && !x.fled);
+  return (f.fighters || []).filter(x=>humanCombat.liveMonster(x)||humanCombat.liveHuman(x));
 }
 function monWave(Game, m) {
   try {
@@ -188,35 +183,20 @@ function shouldFlee(Game, ctx, st, f, p, mons) {
 }
 // One flee turn. Returns true when the turn is consumed.
 function realFlee(Game, ctx, st, f, p) {
+  const turn=humanCombat.token(Game,f),goals=new Map();
+  let gmax=8;try{gmax=Game.tbGridMax?Game.tbGridMax():8;}catch(e){note(ctx,'flee grid: '+e.message);}
+  const edgeKey=dir=>[Game.map.px,Game.map.py,dir.dx,dir.dy].join(':');
   let dir = null;
-  try { dir = C.chooseFleeDir(Game, Game.map.px, Game.map.py); } catch (e) { note(ctx, 'chooseFleeDir: ' + e.message); }
+  try { dir = C.chooseFleeDir(Game, Game.map.px, Game.map.py,d=>{
+    if(st.blockedEdges?.has(edgeKey(d)))return false;
+    const goal=humanCombat.edgeGoal(Game,p,d,gmax);if(goal)goals.set(edgeKey(d),goal);return !!goal;
+  }); } catch (e) { note(ctx, 'chooseFleeDir: ' + e.message); }
   if (!dir) { bump(ctx, 'capFleeHeld'); st.fleeing = false; return false; } // at haven: hold ground
   if (!st.fleeing) { st.fleeing = true; bump(ctx, 'capFleeDecisions'); bumpMap(ctx, 'capFleeWhy', st.why || '?'); }
-  let gmax = 8;
-  try { gmax = Game.tbGridMax ? Game.tbGridMax() : 8; } catch (e) { gmax = 8; } // titan fights are 12x12
-  let tx = dir.dx < 0 ? 0 : dir.dx > 0 ? gmax : p.mx;
-  let ty = dir.dy < 0 ? 0 : dir.dy > 0 ? gmax : p.my;
-  // BLOCKED EDGE TILE (2026-10-14, seed 1234 day 9): the straight-line edge
-  // tile can be a tree. findPath then fails every turn, the bot never reaches
-  // the edge, and a betrayer who won't close (a "stalling" human hostile)
-  // leaves the fight live forever — a lost game day per loop-day. Head for
-  // the nearest REACHABLE tile on the chosen edge instead.
-  try {
-    const direct = Game.findPath(p.mx, p.my, tx, ty);
-    if (!(p.mx === tx && p.my === ty) && (!direct || !direct.length)) {
-      const cands = [];
-      for (let i = 0; i <= gmax; i++) {
-        if (dir.dx) cands.push([dir.dx < 0 ? 0 : gmax, i]);
-        if (dir.dy) cands.push([i, dir.dy < 0 ? 0 : gmax]);
-      }
-      let best = null;
-      for (const [cx, cy] of cands) {
-        const pth = Game.findPath(p.mx, p.my, cx, cy);
-        if (pth && pth.length && (!best || pth.length < best.n)) best = { x: cx, y: cy, n: pth.length };
-      }
-      if (best) { tx = best.x; ty = best.y; }
-    }
-  } catch (e) { note(ctx, 'flee edge pick: ' + e.message); }
+  let tx = goals.get(edgeKey(dir)).x;
+  let ty = goals.get(edgeKey(dir)).y;
+  // The world-direction preference is filtered by actual board reachability,
+  // not merely by finding another square on the same unreachable edge.
   const onEdge = () => { const q = Game.tbFighter('p'); return q && ((dir.dx < 0 && q.mx === 0) || (dir.dx > 0 && q.mx === gmax) || (dir.dy < 0 && q.my === 0) || (dir.dy > 0 && q.my === gmax)); };
   if (!onEdge()) { if (stepToward(Game, p, tx, ty)) bump(ctx, 'capFleeSteps'); }
   if (!Game.tbfight || Game.tbfight.over) { bump(ctx, 'capFleeExits'); st.fleeing = false; return true; } // a door, mid-walk
@@ -231,9 +211,10 @@ function realFlee(Game, ctx, st, f, p) {
       if (moved) bump(ctx, 'capFleeNodeExits');
       st.fleeing = false;
     } else if (moved) bump(ctx, 'capFleeChased'); // crossed, chase continues — keep running
+    else { (st.blockedEdges||(st.blockedEdges=new Set())).add(edgeKey(dir)); bump(ctx,'capFleeBlockedEdges'); }
     if (moved || ended) { try { C.markRecover(Game, ctx); } catch (e) { note(ctx, 'markRecover: ' + e.message); } }
   }
-  endTurn(Game);
+  humanCombat.finishTurn(Game,f,p,turn);
   return true;
 }
 
@@ -501,6 +482,7 @@ function heldAbilityIds(Game) {
 }
 function chooseOffers(Game, ctx) {
   try {
+    if (typeof ctx.capResolveOffers === 'function' && ctx.capResolveOffers(Game, ctx)) return;
     const s = Game.state.scholar || {};
     const ch = s.abilityChoices;
     if (!ch || !ch.length || !Game.chooseAbility) return;
@@ -652,21 +634,23 @@ function capableContest(Game, ctx) {
     const phase = (ac.phases || [])[ac.phaseIdx || 0];
     if (!phase || !phase.choices || !phase.choices.length) return false;
     const choices = phase.choices;
+    const available=contestChoices.availableIndices(Game,ac);
+    if(!available.length)return false;
     const hp = hpFrac(Game);
     let wave = 1;
     try { wave = Game.unlockedWave ? Game.unlockedWave() : 1; } catch (e) { wave = 1; }
     const refuseIdx = choices.findIndex(ch => ch && ch.next === 'REFUSE');
-    let pick = 0;
-    if (refuseIdx >= 0 && (!ac.participant || ac.participant === 'player')) {
+    let pick = available[0];
+    if (refuseIdx >= 0 && available.includes(refuseIdx) && (!ac.participant || ac.participant === 'player')) {
       let risk = 'medium';
       try { const c = (Game.contestPool ? Game.contestPool() : []).find(x => x && x.id === ac.contestId); risk = (c && c.risk) || 'medium'; } catch (e) { risk = 'medium'; }
       const refuse = (risk === 'extreme' && hp < 0.8) || (risk === 'high' && hp < 0.6) || hp < 0.4;
-      pick = refuse ? refuseIdx : (refuseIdx === 0 ? 1 : 0);
+      pick = refuse ? refuseIdx : (available.find(i=>i!==refuseIdx)??refuseIdx);
       if (refuse) bump(ctx, 'capContestRefusals');
     } else {
       const w = 1 + Math.max(0, 1 - hp) * 3 + (wave >= 3 ? 0.5 : 0);
       let best = -Infinity;
-      for (let i = 0; i < choices.length; i++) {
+      for (const i of available) {
         const sc = contestReward(choices[i]) - harmScore(choices[i]) * w + rnd() * 2;
         if (sc > best) { best = sc; pick = i; }
       }
@@ -957,8 +941,18 @@ function deedHunt(Game, ctx) {
     }
     if (!goal) { bump(ctx, 'capHuntNoTarget'); return; }
     const tg = cands[0];
+    approachHuntTarget(Game, ctx, tg, goal);
+  } catch (e) { note(ctx, 'deedHunt: ' + e.message); }
+}
+
+// Reused by explicit progression trials. Existing hunts pass no guard and
+// retain their exact target selection, actions and diagnostic behavior.
+function approachHuntTarget(Game, ctx, tg, goal, stillValid) {
+  try {
+    if (stillValid && !stillValid()) return;
     bump(ctx, 'capHuntSorties');
     if (Game.map.px !== tg.m.tx || Game.map.py !== tg.m.ty) C.walkTo(Game, tg.m.tx, tg.m.ty);
+    if (stillValid && !stillValid()) return;
     if (Game.tbfight && !Game.tbfight.over) { ctx._capHuntAway = 1; bump(ctx, 'capHuntAmbushed'); return; } // something found us first
     if (Game.map.px !== tg.m.tx || Game.map.py !== tg.m.ty) { bump(ctx, 'capHuntUnreached'); return; }
     const here = Game.playerMonster ? Game.playerMonster() : Game.monsterAt(Game.map.px, Game.map.py);
@@ -986,10 +980,12 @@ function deedHunt(Game, ctx) {
       } catch (e) { note(ctx, 'hunt approach: ' + e.message); }
       const path = best ? Game.beginPathWalk(best[0], best[1]) : null;
       for (const st of (path || [])) {
+        if (stillValid && !stillValid()) return;
         if (Game.over || (Game.tbfight && !Game.tbfight.over)) break;
         if (!Game.pathStep(st[0], st[1])) break;
       }
     }
+    if (stillValid && !stillValid()) return;
     if (Game.tbfight && !Game.tbfight.over) { bump(ctx, 'capHuntNoticed'); bump(ctx, goal === 'feast' ? 'capHuntFeastFights' : 'capHuntWaveFights'); return; } // it came to us
     if (!near()) { bump(ctx, 'capHuntUnreached'); ctx._capFeastCommit = false; return; }
     Game.startCombat(here.id);
@@ -1015,9 +1011,10 @@ function finishLiveFight(Game, ctx) {
       let handled = false;
       try { handled = capableFight(Game, ctx); } catch (e) { note(ctx, 'finish fight: ' + e.message); }
       if (!handled && Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
-        const t = Game.tbfight.fighters.find(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled && (x.hp || 0) > 0);
-        if (t) { try { Game.tbPlayerStrike(t.key); } catch (e) { note(ctx, 'finish strike: ' + e.message); } }
-        endTurn(Game);
+        const fight=Game.tbfight,player=Game.tbFighter('p'),turn=humanCombat.token(Game,fight);
+        const handled=fight.fighters.some(humanCombat.liveMonster)
+          ?humanCombat.monsterTurn(Game,ctx):humanCombat.humanTurn(Game,ctx);
+        if(!handled)humanCombat.finishTurn(Game,fight,player,turn);
       }
       const f = Game.tbfight;
       const sig = f ? f.round + ':' + f.fighters.map(x => Math.round(x.hp || 0) + '@' + x.mx + ',' + x.my).join(';') : 'none';
@@ -1030,7 +1027,7 @@ function finishLiveFight(Game, ctx) {
 // ---------- the policy ----------
 const capable = Object.assign({}, BASE, {
   id: 'capable',
-  diagnostics(ctx) { const d=conversationDiagnostics(ctx); return {version:1,profile:'capable',mode:'capable-mixed',blocked:{},errors:[...(ctx?.capErrors||[]),...d.errors],counters:d.counters}; },
+  diagnostics(ctx) { const d=conversationDiagnostics(ctx),h=humanCombat.diagnostics(ctx); return {version:1,profile:'capable',mode:'capable-mixed',blocked:{communityVisit:ctx?.communityVisitBlocked||null},errors:[...(ctx?.capErrors||[]),...d.errors,...h.errors],counters:{...d.counters,...h.counters},communityVisits:ctx?.communityVisits||[]}; },
   desc: 'leadfeast base + real fleeing, combat abilities + signature verbs, scored choices (offers/contests/table/relic), held conversations by need, relay',
   setup(Game, ctx) {
     if (BASE.setup) withEnv(() => BASE.setup(Game, ctx));
@@ -1038,12 +1035,17 @@ const capable = Object.assign({}, BASE, {
   upkeep(Game, ctx) {
     chooseOffers(Game, ctx); // before competent's ch[0] pick in daily
     withEnv(() => BASE.upkeep(Game, ctx));
+    if (communityVisit.visitPrerequisite(Game, ctx)) return;
+    withEnv(() => { if (typeof ctx.capBeforeHunt === 'function') ctx.capBeforeHunt(Game, ctx); });
     deedHunt(Game, ctx); // in upkeep: the harness drives the fight right after
   },
   daily(Game, ctx) {
+    ctx.communityProfile ||= 'capable';
     chooseOffers(Game, ctx);
     answerRelic(Game, ctx);
     wearKeepsakes(Game, ctx);
+    community.contributeForFeast(Game, ctx);
+    if (ctx.communityVisit && communityVisit.visitPrerequisite(Game, ctx)) return;
     withEnv(() => BASE.daily(Game, ctx));
     capableTalk(Game, ctx);
     relayRoad(Game, ctx);
@@ -1067,4 +1069,4 @@ function capableSummary(ctx) {
   return out;
 }
 
-module.exports = { capable, capableSummary, chooseOffers, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
+module.exports = { capable, capableSummary, chooseOffers, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF, approachHuntTarget };

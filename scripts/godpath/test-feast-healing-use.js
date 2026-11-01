@@ -5,15 +5,18 @@ const K = require('./lib'), T = K.reporter('feast-healing-use');
   const memory = new Map();
   globalThis.localStorage = {getItem:k=>memory.get(k)??null,setItem:(k,v)=>memory.set(k,String(v)),removeItem:k=>memory.delete(k),key:i=>[...memory.keys()][i]??null,get length(){return memory.size;}};
   const G = await K.load({ seed: Number(process.env.SEED || 12) });
-  function ready(hp = 40) {
+  function ready(hp = 40, withFoodPower = true) {
     K.newRun(G);
     const s = G.state.scholar;
     s.health = hp; s.kcal = 2400;
     G.learnSkill('wound_care', 2, 'prepared treatment proof');
-    s.prog = s.prog || {}; s.prog.feastSurge = 1.5;
-    G.grantFeastBuff({ quality: 1, served: [{ itemId: 'foraged_food', kcal: 1800 }], guests: ['a', 'b', 'c'] });
+    if (withFoodPower) grantFoodPower(s);
     G.driveOffFeastDraw();
     return s;
+  }
+  function grantFoodPower(s) {
+    s.prog = s.prog || {}; s.prog.feastSurge = 1.5;
+    G.grantFeastBuff({ quality: 1, served: [{ itemId: 'foraged_food', kcal: 1800 }], guests: ['a', 'b', 'c'] });
   }
   let s = ready(), before = s.kcal;
   T.ok('prepared wound care is known without a magic slot', G.hasAbility('field_medicine') && !(s.abilities || []).some(a => a.id === 'field_medicine'));
@@ -58,7 +61,7 @@ const K = require('./lib'), T = K.reporter('feast-healing-use');
   G.say = function(line){messages.push(String(line));return say.apply(this,arguments);};
   const foodBefore = s.kcal;
   G.activateAbility('field_medicine');
-  T.ok('visible full treatment price equals its actual 140 kcal charge', /\(140 kcal\)/.test(description) && foodBefore - s.kcal === 140, description);
+  T.ok('visible full treatment price equals its actual 140 kcal charge', /Cost: 140 kcal/.test(description) && foodBefore - s.kcal === 140, description);
   G.say = say;
   T.ok('the final actual treatment notice reports the whole unchanged bill', /−140 kcal/.test(messages.at(-1)), messages.at(-1));
   s = ready();
@@ -78,10 +81,14 @@ const K = require('./lib'), T = K.reporter('feast-healing-use');
   const use = JSON.stringify(s.feastBuff.use), key = G.state.runKey;
   T.ok('landed healing belongs to the actual bearer', s.prog.feastSurgeBy === 'p' && s.feastBuff.use.kind === 'healing');
   T.ok('real Continue preserves the landed healing receipt and personal credit', G.load(key) && G.villagerId === owner && JSON.stringify(G.state.scholar.feastBuff.use) === use && G.state.scholar.prog.feastSurgeBy === 'p');
-  s = ready();
+  // Starting a real party fight can already land another resident's opening hit.
+  // Prepare this feast only after that opening, before the hit whose ownership is tested.
+  s = ready(40, false);
   const companion = G.state.village.roster.find(id => id !== G.villagerId && G.npcAge(id) >= 18);
   G.state.village.party = [companion];
   K.fight(G, 'hushwolf', {party:true});
+  grantFoodPower(s);
+  T.ok('companion-credit fixture begins with genuinely unused food power', !s.prog.feastSurgeUsed && !s.feastBuff.used);
   const enemy = G.tbfight.fighters.find(f => f.kind === 'monster'), ally = G.tbfight.fighters.find(f => f.villagerId === companion);
   if (!ally || !enemy) throw Error('Prepared actual party actor absent');
   enemy.hp = enemy.maxHp = 10000;

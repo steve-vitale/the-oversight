@@ -57,26 +57,28 @@ function freshGame() {
     ok('B: all peanuts packed (no double-count)', nuts && nuts.units === 16);
   }
 
-  // C: boundary — 12kg food + 8L water = exactly 20kg, all fits.
+  // C: exactly fill the voluntary hauling boundary with food plus8L water.
   {
     freshGame();
-    Game.state.village.pantry = [{ name: 'Dried meat', kcalEach: 800, units: 24, kg: 0.5, unit: 'strip', safe: true }];
+    const foodUnits=(Game.carryLimit()-8)*2;
+    Game.state.village.pantry = [{ name: 'Dried meat', kcalEach: 800, units: foodUnits, kg: 0.5, unit: 'strip', safe: true }];
     Game.state.village.water = { clean: 8 };
-    Game.takeFromPantryBulk({ 0: 24, water: 8 });
+    Game.takeFromPantryBulk({ 0: foodUnits, water: 8 });
     const meat = Game.state.scholar.inventory.find(i => i.name === 'Dried meat');
-    ok('C: food at exact capacity boundary', meat && meat.units === 24);
+    ok('C: food at exact capacity boundary', meat && meat.units === foodUnits);
     ok('C: water at exact capacity boundary', (Game.state.scholar.water || []).length === 8);
   }
 
-  // D: over-capacity still blocks correctly. 10kg food then 15L water (>20kg).
+  // D: food first, then five more liters than fit under the hauling limit.
   {
     freshGame();
     Game.state.village.pantry = [{ name: 'Peanuts', kcalEach: 425, units: 40, kg: 0.25, unit: 'handful', safe: true }];
-    Game.state.village.water = { clean: 15 };
-    Game.takeFromPantryBulk({ 0: 40, water: 15 });
+    const offeredWater=Game.carryLimit()-5;
+    Game.state.village.water = { clean: offeredWater };
+    Game.takeFromPantryBulk({ 0: 40, water: offeredWater });
     const nuts = Game.state.scholar.inventory.find(i => i.name === 'Peanuts');
     ok('D: food packed first', nuts && nuts.units === 40);
-    ok('D: water capped at remaining 10kg', (Game.state.scholar.water || []).length === 10);
+    ok('D: water capped at remaining hauling room', (Game.state.scholar.water || []).length === Game.carryLimit()-10);
     ok('D: excess water left in well', Game.state.village.water.clean === 5);
   }
 

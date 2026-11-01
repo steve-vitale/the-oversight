@@ -32,23 +32,7 @@ Math.random = mulberry32(SEED);
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 global.window = global;
-[
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/broadcast.js', 'src/js/contestEngine.js', 'src/js/alienPlayers.js',
-  'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
-  'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js', 'src/js/corpses.js',
-  'src/js/corruption.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
-  'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js',
-  'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js',
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
+require('./lib/browser-script-files')(ROOT).forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 delete global.window;
 const Game = globalThis.Scattering.Game;
 
@@ -73,7 +57,12 @@ function freshGame(nVillages) {
     Game.state.otherVillages.push(t);
   }
   const ovs = Game.state.otherVillages.filter(v => v && v.id !== 'haven');
-  ovs.forEach(v => { v.rumored = true; if (typeof v.opinion !== 'number') v.opinion = 0; });
+  // Prepared mutual contact; a bare queued-rumor flag grants no knowledge.
+  ovs.forEach(v => {
+    v.rumored = true; if (typeof v.opinion !== 'number') v.opinion = 0;
+    Game.recordVillageLore(Game.playerKnowerId(), v.id, {how:'visit',toldBy:'prepared structural contact'});
+    Game.recordVillageLore('village:' + v.id, 'haven', {how:'visit',toldBy:'prepared structural contact'});
+  });
   Game.state.networkLive = true;
   Game.state.scholar.day = 0;
   return ovs;

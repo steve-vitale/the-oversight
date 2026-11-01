@@ -24,6 +24,9 @@ const { loadGame, setupGame } = require('./sim-harness');
   // Pin the map node; corpses below all sit on it.
   Game.map.px = 4; Game.map.py = 4;
   const s = Game.state.scholar;
+  // Explicit outdoor range fixture. setupGame may start inside the hall;
+  // an outside corpse in that other room must remain inaccessible.
+  s.insideHaven = false;
   const mkCorpse = (mx, my) => ({ id: 'corpse_probe', node: { x: 4, y: 4 }, mx, my, items: [], buried: false });
   let failures = 0;
   const check = (label, actual, expected) => {
@@ -50,6 +53,10 @@ const { loadGame, setupGame } = require('./sim-harness');
   // Undefined position still defaults to the center (old behavior preserved).
   s.mx = undefined; s.my = undefined;
   check('scholar(undefined) vs corpse(4,4) defaults to center', Game._corpseCheckRange(mkCorpse(4, 4), true), true);
+  // Preserve the stronger shared room boundary alongside the zero-cell fix.
+  s.insideHaven = true;
+  check('outdoor corpse cannot be reached through the hall wall', Game._corpseCheckRange(mkCorpse(4, 4), true), false);
+  s.insideHaven = false;
   // lootCorpse's own inline check: scholar (4,0) vs corpse (4,4) with no
   // items must fail on RANGE ('Too far'), not fall through to the
   // 'Nothing left' branch (which is what the bug produced: range passed,

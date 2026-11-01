@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),K=require('./lib'),P=require('../lib/camp-sighting-proof'),T=K.reporter('Native camp sighting proof'),root=path.resolve(__dirname,'../..'),proof=require('../camp-sighting-proof.json');
+const records=proof.receipts.map(p=>{const b=fs.readFileSync(path.join(root,p.file));T.ok('retained actual receipt '+p.file,P.hash(b)===p.sha256);return JSON.parse(z.gunzipSync(b));});
+T.ok('both heights cover new and world-simulated camps',new Set(records.map(r=>r.height+':'+r.scene)).size===4);
+T.ok('all actual crossing/fog/card/Continue witnesses match current source',records.every(r=>P.validate(root,r).length===0),records.flatMap(r=>P.validate(root,r)).join('; '));
+const sample=records.find(r=>r.scene==='warm'),reject=(label,mutate)=>{const r=structuredClone(sample);mutate(r);T.ok(label,P.validate(root,r).length>0);};
+reject('stale served source cannot pass',r=>r.sourceWitness.networkInputs['src/js/game.js']='old');
+reject('synthetic input cannot pass',r=>r.sourceWitness.trustedTouches[0].trusted=false);
+reject('teleporting instead of crossing cannot pass',r=>r.trace.find(t=>t.name==='sighted camp').world[0]+=2);
+reject('ground exploration from smoke cannot pass',r=>{const scene=require('../../evidence/2026-10-23/camp-sighting-fixtures-r1.json').scenes.find(s=>s.name===r.scene),t=r.trace.find(t=>t.name==='sighted camp');t.state.scholar.seenTiles[scene.x+','+scene.y]={k:'v'};});
+reject('clipped map detail cannot pass',r=>r.mapRects[0].bottom=r.height+1);
+reject('a free conversation cannot pass',r=>r.trace.find(t=>t.name==='paid conversation').state.scholar.dayTicks=r.trace.find(t=>t.name==='visit card').state.scholar.dayTicks);
+reject('lost sighting on Continue cannot pass',r=>r.checkpoints[0].scholar.campSightings={});
+T.done();

@@ -1,0 +1,34 @@
+{
+  "reason": "Steve requested wrap-up and handoff; stop only owned unfinished R3 verification processes",
+  "started": "2026-11-01T00:54:30.7415153Z",
+  "roots": [
+    {
+      "ProcessId": 56432,
+      "ParentProcessId": 54412,
+      "Name": "node.exe",
+      "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/refresh-phone-proofs.js --revision resident-record-r3 --out evidence/2026-10-31/resident-record-all-phone-r3 --run --clean-scratch",
+      "CreationDate": "2026-10-31T19:42:01.911693-05:00"
+    }
+  ],
+  "owned": [
+    {
+      "ProcessId": 56432,
+      "ParentProcessId": 54412,
+      "Name": "node.exe",
+      "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/refresh-phone-proofs.js --revision resident-record-r3 --out evidence/2026-10-31/resident-record-all-phone-r3 --run --clean-scratch",
+      "CreationDate": "2026-10-31T19:42:01.911693-05:00"
+    },
+    {
+      "ProcessId": 62796,
+      "ParentProcessId": 56432,
+      "Name": "node.exe",
+      "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/godpath/test-late-table-phone-proof.js",
+      "CreationDate": "2026-10-31T19:54:25.613638-05:00"
+    }
+  ],
+  "stopped": [
+    62796,
+    56432
+  ],
+  "finished": "2026-11-01T00:54:31.0264920Z"
+}

@@ -17,28 +17,15 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-// Seed before modules capture RNG. Reuse the shared stream; do not select a
-// lucky random world to satisfy the pantry assertion below.
-Math.random = require('./sim-harness').mulberry32(20261018);
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/journal.js', 'src/js/party.js', 'src/js/party-formal.js',
- 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js', 'src/js/perceive.js',
- 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js',
- 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/ledger.js',
- 'src/js/villager-agency.js', 'src/js/codex-people.js', 'src/js/membership.js',
- 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const {loadGame}=require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
   if (cond) { pass++; } else { fail++; console.log(`FAIL ${name}${extra ? ' — ' + extra : ''}`); }
 }
 const said = [];
-Game.say = (t) => { said.push(String(t)); };
-Game.sysSay = (t) => { said.push('[SYS] ' + String(t)); };
+
 function rig(seq) { const o = Math.random; let i = 0; Math.random = () => seq[i++ % seq.length]; return () => { Math.random = o; }; }
 function stepToward(tx, ty) {
   const axes = [];
@@ -80,7 +67,9 @@ function campNight() {
 }
 
 (async () => {
-  await Game.init();
+  ({Game}=await loadGame({seed:20261018,narration:true}));
+  Game.say = (t) => { said.push(String(t)); };
+Game.sysSay = (t) => { said.push('[SYS] ' + String(t)); };
 
   // --- 1. homecoming for the day-1 drifter ---
   {
@@ -168,6 +157,19 @@ function campNight() {
     for (let i = 0; i < 5; i++) campNight();
     const dayGone = v.day; // should NOT have advanced while away (no one watching)
     const workedWhileAway = workedDays;
+    // The real nights can open a show. Return travel must wait for its actual
+    // choices; forcing world movement under that scene used to hide the bug.
+    if (Game.state.activeContest) {
+      const before = { x: Game.map.px, y: Game.map.py, ticks: s.dayTicks, kcal: s.kcal };
+      const nx = Game.map.px + Math.sign(v.x - Game.map.px);
+      const ny = Game.map.py + (nx === Game.map.px ? Math.sign(v.y - Game.map.py) : 0);
+      Game.travelTo(nx, ny, true);
+      ok('broadcast-refuses-return-travel-before-payment', Game.map.px === before.x &&
+        Game.map.py === before.y && s.dayTicks === before.ticks && s.kcal === before.kcal);
+      let sceneSteps = 0;
+      while (Game.state.activeContest && sceneSteps++ < 20) Game.contestChoose(0);
+    }
+    ok('distant-village-return-waits-for-broadcast-choices', !Game.state.activeContest);
     walkTo(v.x, v.y);
     Game.checkVillageProximity(); // re-approach -> catch-up
     ok('distant-village-frozen-while-away', dayGone === dayFirst, `day ${dayFirst} -> ${dayGone} while away`);

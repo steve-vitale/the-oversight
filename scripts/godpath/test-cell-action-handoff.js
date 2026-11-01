@@ -5,9 +5,12 @@ const fs=require('fs'),path=require('path'),K=require('./lib'),T=K.reporter('cel
  const source=fs.readFileSync(path.join(K.ROOT,'src/js/app.js'),'utf8').replace(/\r\n/g,'\n');
  const body=source.match(/  function runCellAction\([^\n]*\) \{[\s\S]*?\n  \}\n/);
  if(!body)throw Error('Missing actual cell-action handoff');
+ const helperStart=source.indexOf('  let fieldActionResult = null,'),helperEnd=source.indexOf('  function runCellAction(',helperStart);
+ if(helperStart<0||helperEnd<helperStart)throw Error('Missing actual field-action presentation boundary');
+ const helpers=source.slice(helperStart,helperEnd);
  const paints=[],partials=[];
- const run=new Function('Game','refresh','refreshTilePanel',body[0]+';return runCellAction;')(
-  G,()=>paints.push({fight:G.tbfight,allies:(G.tbfight?.fighters||[]).filter(f=>f.kind==='ally').length}),()=>partials.push(true));
+ const run=new Function('Game','refresh','refreshTilePanel','matchMedia',helpers+body[0]+';return runCellAction;')(
+  G,()=>paints.push({fight:G.tbfight,allies:(G.tbfight?.fighters||[]).filter(f=>f.kind==='ally').length}),()=>partials.push(true),()=>({matches:true}));
  run(()=>G.examineCell(G.state.scholar.mx,G.state.scholar.my));
  T.ok('real in-place examine keeps the contextual panel', partials.length===1&&paints.length===0);
  const links=G.hierarchyState();links.length=0;

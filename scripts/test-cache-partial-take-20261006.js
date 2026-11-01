@@ -55,24 +55,24 @@ function buryPemmican(units) {
   ok('takeFromCache API exists', typeof Game.takeFromCache === 'function');
   const c1 = buryPemmican(20);
   eq('cache holds 20', c1.items[0].units, 20);
-  // heavy pack: 18kg of rocks (inventory weight counts); empty waterskins
+  // Heavy pack leaves2kg of voluntary hauling room; empty waterskins
   // so the numbers are deterministic — waterWeight() is real and counts.
   s().water = [];
-  s().inventory = [{ name: 'Rock', units: 6, kg: 3, kcalEach: 0 }];
+  s().inventory = [{ name: 'Rock', units: 1, kg: Game.carryLimit() - 2, kcalEach: 0 }];
   Game.log.length = 0;
-  const r = Game.digUpCache(c1.id); // 6kg cache + 18kg pack > 20kg capacity
+  const r = Game.digUpCache(c1.id); // 6kg cache exceeds the remaining2kg
   eq('full dig refused when overweight', r, null);
   ok('refusal names weight', /Too heavy/.test(Game.log.join(' ')));
   ok('cache still buried', Game.playerCaches().some(c => c.id === c1.id));
   // the ONLY recourse before the fix: drop your pack. After: draw rations.
   if (typeof Game.takeFromCache === 'function') {
     Game.log.length = 0;
-    const r2 = Game.takeFromCache(c1.id, 0, 4); // 1.2kg fits: 18 + 1.2 <= 20
+    const r2 = Game.takeFromCache(c1.id, 0, 4); // Four portions weigh1.2kg and fit the remaining2kg
     ok('partial take works with heavy pack', r2 !== null && r2 !== undefined);
     eq('took 4 into pack', invUnits('Pemmican'), 4);
     eq('16 left buried', Game.playerCaches().find(c => c.id === c1.id).items[0].units, 16);
     ok('says the rest stays buried', /stays buried|rest/.test(Game.log.join(' ')));
-    // too much for the pack: 10 units = 3kg -> 18+3 > 20
+    // Ten more portions weigh3kg and exceed the remaining0.8kg
     Game.log.length = 0;
     const r3 = Game.takeFromCache(c1.id, 0, 10);
     eq('over-portion refused', r3, null);

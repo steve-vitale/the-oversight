@@ -29,6 +29,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { spawn, spawnSync } = require('child_process');
+const { runJobs } = require('./lib/check-scheduler');
 
 const ROOT = path.join(__dirname, '..');
 const argv = process.argv.slice(2);
@@ -67,7 +68,10 @@ function run(job) {
   return new Promise(resolve => {
     const t0 = Date.now();
     let out = '';
-    const child = spawn(process.execPath, [job.file], { cwd: ROOT, env: process.env });
+    // Historical tests hand-load fixed browser script lists predating text.js.
+    // Supply the SAME pure grammar module the browser loads, not a test double.
+    // Modern shared-harness tests still evaluate index.html in its real order.
+    const child = spawn(process.execPath, ['--require', path.join(ROOT, 'src/js/text.js'), job.file], { cwd: ROOT, env: process.env });
     child.stdout.on('data', d => { out += d; if (out.length > 200000) out = out.slice(-100000); });
     child.stderr.on('data', d => { out += d; if (out.length > 200000) out = out.slice(-100000); });
     const timer = setTimeout(() => { out += `\n[check.js] TIMEOUT after ${TIMEOUT_MS / 1000}s`; child.kill('SIGKILL'); }, TIMEOUT_MS);
@@ -82,16 +86,11 @@ function run(job) {
   const t0 = Date.now();
   console.log(`check.js: ${jobs.length} scripts, ${JOBS} parallel${QUICK ? ' (quick)' : ''}${ONLY ? ` (only "${ONLY}")` : ''}`);
   for (const m of missing) console.log(`  WARN listed but missing: ${m.file}`);
-  const results = [];
-  let next = 0;
-  await Promise.all(Array.from({ length: Math.max(1, JOBS) }, async () => {
-    while (next < jobs.length) {
-      const j = jobs[next++];
-      const r = await run(j);
-      results.push(r);
-      process.stdout.write(r.code === 0 ? '.' : 'F');
-    }
-  }));
+  const results = await runJobs(jobs, { concurrency:JOBS, run,
+    onResult:r=>{
+      if(r.code===0)process.stdout.write('.');
+      else process.stdout.write(`\n  Failed: ${r.job.file} (exit ${r.code}, ${(r.ms/1000).toFixed(1)}s)\n`);
+    } });
   process.stdout.write('\n');
 
   const failed = results.filter(r => r.code !== 0);

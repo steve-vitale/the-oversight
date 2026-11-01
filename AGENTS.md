@@ -270,6 +270,12 @@ hook installation or ChangePilot repo workflow is required.
 
 ## Actual phone play
 
+For repeatable supported-family maintenance, use the
+refresh-phone-proofs.js --list command, then its read-only plan and
+explicit run with fresh revision/output IDs. See BROWSER-PLAYTESTING.md.
+It calls actual recipes/updaters/gates; it does not replace unsupported native,
+installed-lifecycle, physical-device or complete release requirements.
+
 Read docs/PHONE-FRAME.md and docs/MOBILE-PLAYTEST.md before changing field UI.
 Core play must fit one phone viewport: board, current message, movement and
 actions remain together. Only explicitly opened management/history lists scroll.
@@ -307,15 +313,26 @@ The rules:
    branch, document what changed and why, attach proof tests. The owning
    agent reviews before it merges. Never push another agent's lane directly
    to master.
-4. **Stale bases are the killer.** Before merging anything, verify your base
+4. **Stale bases are the killer.** Before landing reviewed work, verify your base
    is current: `git fetch origin master` and check your branch contains the
-   latest origin/master. A merge from a stale base silently reverts other
-   people's work — this is exactly what happened on 2026-10-20.
-5. **If you discover divergent histories, STOP.** Do not rebase, do not
-   force-push, do not "fix" it yourself. Report it loudly and wait for
-   direction. The 2026-10-20 repair was a plain 3-way merge (`git merge
-   origin/master`, never rebase/reset/force-push) specifically because both
-   sides had work worth keeping.
+   latest origin/master. Replacing current files with a stale tree can silently
+   revert other people's fixes. A normal three-way review-branch merge is how
+   to reconcile a stale branch; inspect conflicts and verify retained behavior.
+5. **Root cause and reconcile divergence.** Steve's direction (2026-10-21):
+   "The instruction should be to root cause and fix when things diverge, and
+   to coordinate with divergent agent or session." Fetch current refs, inspect
+   the common ancestor, both sides' commits, lane ownership and evidence. Keep
+   both tips recoverable and reconcile on a review branch with a normal
+   three-way merge (`git merge origin/master` when histories share an ancestor).
+   Resolve conflicts by intent, preserving both agents' fixes; do not copy a
+   whole tree over the other side, reset away work, rebase shared history or
+   force-push. Coordinate with the actual divergent agent/session using an
+   available channel; if unavailable, record a precise handoff and continue
+   independent reconciliation and verification. Do not claim delivery or review
+   without evidence. Refresh checks, simulations and source-bound phone/save
+   proofs against the combined code; old-base passes do not certify it. Escalate
+   only a specific unresolved design decision or access limitation, not ordinary
+   divergence. Owner review and ship-loop publication rules still apply.
 
 These rules bind every agent working in this repo. Steve's "merge with their
 work" means port, review, and land through the process — not a direct push

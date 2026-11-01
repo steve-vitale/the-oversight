@@ -11,7 +11,7 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
 const METHODS = {
   _contestEnd: 'contest', _contestResolveOthers: 'contest', _showEnd: 'show', _showVillagerEnd: 'show',
   apCarePackage: 'fan-package', apClubBoon: 'fan-vote', apPersonaPackage: 'patron', apDeadDrop: 'patron',
-  visitorWares: 'trade-stock', visitorBuyWare: 'trade', traderSell: 'trade-sale', craft: 'craft', doAction: 'action',
+  visitorWares: 'trade-stock', visitorBuyWare: 'trade', traderSell: 'trade-sale', craft: 'craft', npcWorkGear: 'craft', villagerArmorCraftDay: 'craft', villagerWeaponCraftDay: 'craft', doAction: 'action',
   tbEnd: 'combat', corpseTakeItem: 'corpse', corpseLootAll: 'corpse', readBook: 'book', preserveFood: 'preserve',
   renderFat: 'render', cleanCarcass: 'clean', takePrepMaterial: 'counter-material', makePemmican: 'pemmican', expandStorage: 'storage', donateWeapon: 'armory',
   takeWeapon: 'armory', donateMedicine: 'pharmacy', takeMedicine: 'pharmacy', takePrepMaterial: 'materials', giveFood: 'care', comfort: 'care', proposeTrade: 'league',
@@ -53,7 +53,7 @@ function preservationSnapshot(G) {
   return out;
 }
 function install(G) {
-  const rec = { calls: {}, effects: {}, grants: [], missing: [], errors: [], contest: {}, show: {}, crafts: {}, recipeAccess: {}, maxTier: 0, maxFavor: 0, startingTier: 0 };
+  const rec = { calls: {}, effects: {}, grants: [], missing: [], errors: [], contest: {}, show: {}, crafts: {}, npcCrafts: {}, recipeAccess: {}, maxTier: 0, maxFavor: 0, startingTier: 0 };
   const stack = [];
   const defs = new Map(G.data.items.map(d => [d.id, d]));
   const inventory = () => {
@@ -68,11 +68,12 @@ function install(G) {
     (s.inventory || []).forEach(it => add(it, 'player'));
     Object.values(s.equipped || {}).forEach(it => add(it, 'player'));
     for (const vid of ((G.state.village || {}).roster || [])) {
-      if (vid === G.villagerId) continue;
+      if (vid === G.villagerId || vid === s.villagerId) continue;
       // getPerson may hydrate an old seed. Observation must not generate a
       // person (or consume RNG) before the game's own first encounter.
-      const p = (G.data.villagers || []).find(p => p.id === vid);
-      if (!p) continue;
+      const p = (G.data.villagers || []).find(p => p.id === vid) ||
+        G.state.village.rosterChars?.[vid] || (G.data.background_survivors || []).find(p => p.id === vid);
+      if (!p || p.dead) continue;
       (p.items || []).forEach(it => add(it, vid));
       // NPC items remain in person.items when worn; don't count equipped twice.
     }
@@ -131,6 +132,13 @@ function install(G) {
       }
       if (result && result !== false) rec.effects[name] = (rec.effects[name] || 0) + 1;
       if (craft && result === true) craft.successes++;
+      // A truthy refusal or a stone-gathering shift is not a craft. Observe
+      // the executor's actual paid attempt and real item separately.
+      if (name === 'npcWorkGear' && result?.paid === true && result.kind === 'craft') {
+        const row = rec.npcCrafts[result.itemId] || (rec.npcCrafts[result.itemId] = { attempts: 0, successes: 0, residents: {} });
+        row.attempts++; if (result.made === true) row.successes++;
+        row.residents[args[0]] = (row.residents[args[0]] || 0) + 1;
+      }
       // Calls/results are reachability evidence, NOT universal success counts.
       if (name === '_contestEnd') { const k = String(args[1]); rec.contest[k] = (rec.contest[k] || 0) + 1; }
       if (name === '_showEnd') { const k = String(args[1]); rec.show[k] = (rec.show[k] || 0) + 1; }

@@ -1,10 +1,9 @@
 // @ontology
 // system: convo-scene
-// description: Dialogue rethink Phase 2 (Steve 2026-10-08) — the Scene pipeline. One scene state unifying want + mood + relationship + beat; one consequence resolver every choice flows through; the Ask/Answer Contract as a validate gate; memory-driven "what's alive" menu data.
+// description: Dialogue rethink Phase 2 (Steve 2026-10-08) — the Scene pipeline. One scene state unifying want + mood + relationship + beat; one consequence resolver every choice flows through; the Ask/Answer Contract (validated in isolated script tooling); memory-driven "what's alive" menu data.
 // provides:
 //   - getScene(vid)
 //   - resolveConsequence(vid, spec)
-//   - validateAskContract(vid)
 //   - convoWhatsAlive(vid)
 // rules:
 //   - scene_unified: want + mood + bond + beat compose into one snapshot; handlers read the Scene for decisions, mutate convo state only (code: convo-scene.js, getScene; Steve 2026-10-08)
@@ -12,7 +11,7 @@
 //   - words_cap: talk-originated trust gains cap at 40 ("words only go so far"); penalties land whole, never softened (code: convo-scene.js, resolveConsequence)
 //   - mediated_halves: live-translate mediation halves positive rapport gains (code: convo-scene.js, resolveConsequence; kept from trustGain, Steve 2026-10-06)
 //   - warmth_follows_trust: mood delta defaults to sign(trust delta) when not given — no separate data (code: convo-scene.js, resolveConsequence)
-//   - contract_gate: every NPC question offers honest answer + boundary + silence; validateAskContract fails the build otherwise (code: convo-scene.js, validateAskContract; Steve 2026-10-08)
+//   - contract_gate: every NPC question offers honest answer + boundary + silence; isolated shared-runtime audit gates the actual public menu (code: scripts/lib/ask-contract.js; Steve 2026-10-08)
 //   - whats_alive: the topic menu leads with open threads, fresh memories, want questions, world events — not the static pool (code: convo-scene.js, convoWhatsAlive; Steve 2026-10-08)
 // consumes:
 //   - convoGet(vid), convoVoiceTier(vid), relDays(vid), playerDisposition()
@@ -167,85 +166,6 @@
         if (spec.escalate && typeof this.markEscalated === 'function') this.markEscalated(vid);
       } catch (e) {}
       return applied;
-    },
-
-    // validateAskContract: the Ask/Answer Contract as a gate (Principle 2).
-    // Every NPC question must offer: honest answers + "I'd rather not say"
-    // + "...". Returns { ok, failures[] }. A missing honest option is a
-    // test failure, not a design discussion (Steve 2026-10-08).
-    // Behavioral: it builds the actual menus and checks what the player sees.
-    validateAskContract(vid) {
-      const failures = [];
-      const c = (typeof this.convoGet === 'function') ? this.convoGet(vid) : null;
-      if (!c) return { ok: false, failures: ['no convo'] };
-      // Save + restore convo question state — validation never mutates.
-      const save = { pendingQ: c.pendingQ, reactiveQ: c.reactiveQ, genericQ: c.genericQ, thread: c.thread, heldBeats: c.heldBeats };
-      const wasActive = c.active;
-      c.active = true;
-      try {
-        const hasHonest = (menu, answers) => menu.some(ch => {
-          if (!ch || !ch.id) return false;
-          if (/honest_pass/.test(ch.id)) return true;
-          // Data-authored honest boundary (honest_opt_out flag).
-          const aid = ch.id.split(':').pop();
-          return !!(answers || []).some(a => a.id === aid && a.honest_opt_out);
-        });
-        const hasSilence = (menu) => menu.some(ch => ch && ch.id &&
-          (ch.id === 'silence' || ch.id === 'nv:listen'));
-        const hasRealAnswer = (menu, prefix) => menu.some(ch => ch && ch.id &&
-          ch.id.indexOf(prefix) === 0 && ch.id.indexOf('honest_pass') === -1 &&
-          ch.id !== 'deflect_q');
-        // 1. BESPOKE questions (pendingQ): data gate + menu gate.
-        const cg = (this.data.characterGen || {}).convo || {};
-        for (const q of (cg.questions || [])) {
-          const ans = q.answers || [];
-          if (ans.length < 2) failures.push(q.id + ': fewer than 2 answers');
-          for (const a of ans) {
-            if (!a.label || !String(a.label).trim()) failures.push(q.id + ':' + (a.id || '?') + ': empty label');
-          }
-          c.pendingQ = { id: q.id, answers: ans };
-          c.reactiveQ = null; c.genericQ = null; c.thread = null; c.heldBeats = [];
-          const menu = this.buildMenu(vid);
-          if (!hasRealAnswer(menu, 'ans:')) failures.push(q.id + ': no real answer offered');
-          if (!hasHonest(menu, ans)) failures.push(q.id + ': missing honest opt-out');
-          if (!hasSilence(menu)) failures.push(q.id + ': missing silence');
-          // honest-hard answers, where they exist, must be offered.
-          for (const a of ans) {
-            if ((a.temper === 'honest-hard') && !menu.some(ch => ch && ch.id === 'ans:' + q.id + ':' + a.id)) {
-              failures.push(q.id + ': honest-hard answer not offered');
-            }
-          }
-        }
-        // 2. REACTIVE questions: every reactive def gets the contract too.
-        const rdefs = this.REACTIVE_DEFS || {};
-        for (const rid of Object.keys(rdefs)) {
-          const rd = rdefs[rid];
-          const rans = rd.answers || [];
-          if (rans.length < 2) failures.push('react:' + rid + ': fewer than 2 answers');
-          c.pendingQ = null;
-          c.reactiveQ = { id: rid };
-          c.genericQ = null; c.thread = null; c.heldBeats = [];
-          const menu = this.buildMenu(vid);
-          if (!hasRealAnswer(menu, 'react:')) failures.push('react:' + rid + ': no real answer offered');
-          if (!hasHonest(menu)) failures.push('react:' + rid + ': missing honest opt-out');
-          if (!hasSilence(menu)) failures.push('react:' + rid + ': missing silence');
-        }
-        // 3. GENERIC questions: every generic kind gets the contract.
-        for (const kind of ['yn', 'howru', 'greet', 'open']) {
-          c.pendingQ = null; c.reactiveQ = null;
-          c.genericQ = { kind };
-          c.thread = null; c.heldBeats = [];
-          const menu = this.buildMenu(vid);
-          if (!hasRealAnswer(menu, 'gq:')) failures.push('gq:' + kind + ': no real answer offered');
-          if (!hasHonest(menu)) failures.push('gq:' + kind + ': missing honest opt-out');
-          if (!hasSilence(menu)) failures.push('gq:' + kind + ': missing silence');
-        }
-      } finally {
-        c.pendingQ = save.pendingQ; c.reactiveQ = save.reactiveQ;
-        c.genericQ = save.genericQ; c.thread = save.thread;
-        c.heldBeats = save.heldBeats; c.active = wasActive;
-      }
-      return { ok: failures.length === 0, failures };
     },
 
     // convoMemoryAbout: human label for a memory type — the ledger is

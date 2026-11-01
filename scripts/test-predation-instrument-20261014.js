@@ -4,7 +4,7 @@
 // Every fixture/arm gets one shared-harness world in a separate process.
 const assert = require('assert');
 const { createHash } = require('crypto');
-const { execFileSync } = require('child_process');
+const execFile = require('util').promisify(require('child_process').execFile);
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { installPredation, finalizePredation, pantryKcal } = require('./predation-lib-20261014');
 let passed = 0;
@@ -13,8 +13,8 @@ const digest = value => createHash('sha256').update(JSON.stringify(value)).diges
 function snapshot(Game) { return digest({ state: Game.state, over: Game.over, won: Game.won,
   dayPart: Game.dayPart, villagerId: Game.villagerId, tbfight: Game.tbfight,
   pendingEncounter: Game.pendingEncounter }); }
-function child(kind, extra = {}) {
-  const stdout = execFileSync(process.execPath, [__filename], { env: { ...process.env,
+async function child(kind, extra = {}) {
+  const {stdout} = await execFile(process.execPath, [__filename], { env: { ...process.env,
     PREDATION_CHILD: kind, ...extra }, encoding: 'utf8', maxBuffer: 8e6 });
   const line = stdout.split('\n').find(line => line.startsWith('PREDATION_RESULT '));
   assert(line, 'child result ' + kind);
@@ -186,11 +186,15 @@ async function main() {
     } else result = await observedRun(task);
     console.log('PREDATION_RESULT ' + JSON.stringify(result)); return;
   }
-  child('a'); child('b');
+  await child('a'); await child('b');
   for (const kind of ['response', 'sortie', 'risk', 'idle', 'campaign']) {
     for (const seed of (kind === 'campaign' || kind === 'idle' ? [7, 42, 44, 99] : kind === 'risk' ? [105] : [44])) {
-      const off = child(kind, { SEED: String(seed), PREDATION_ARMED: '0' });
-      const on = child(kind, { SEED: String(seed), PREDATION_ARMED: '1' });
+      // Each arm owns a separate seeded process. Run the independent pair
+      // together, preserving every seed, snapshot, RNG-tail and outcome check.
+      const [off, on] = await Promise.all([
+        child(kind, { SEED: String(seed), PREDATION_ARMED: '0' }),
+        child(kind, { SEED: String(seed), PREDATION_ARMED: '1' })
+      ]);
       console.log('  neutrality receipt ' + JSON.stringify({ kind, off, on }));
       check(kind + ' seed ' + seed + ': all state snapshots match', digest(off.hashes) === digest(on.hashes));
       check(kind + ' seed ' + seed + ': RNG continuation matches', digest(off.randomTail) === digest(on.randomTail));

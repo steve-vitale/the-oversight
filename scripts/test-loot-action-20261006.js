@@ -27,7 +27,7 @@ function ok(name, cond) {
   ok('corpse has trophy items (not empty)', (corpse.items || []).length > 0);
 
   // simulate tbEnd win path drops via corpseForKill
-  const found = Game.corpseForKill(mdef, { mx: 5, my: 5 });
+  const found = Game.corpseForKill(mdef, { mx: 5, my: 5, _deathCorpse: corpse });
   ok('corpseForKill finds the death corpse', found && found.id === corpse.id);
 
   // meat goes to corpse, NOT player inventory

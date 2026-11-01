@@ -1,0 +1,27 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),F=require('../phone-frame-proof-update');
+const DIR='evidence/2026-10-29/indoor-fight-visibility-r1',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),norm=s=>s.replace(/\r\n/g,'\n'),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+function verify(root,r){
+ const errors=[],check=(v,m)=>{if(!v)errors.push(m);},current=F.expectedInputs(root),fixture=fs.readFileSync(path.join(root,DIR,'pending-feast-profile-r1.json.gz')),old=z.gunzipSync(fs.readFileSync(path.join(root,DIR,'baseline-app-0f86a86be.js.txt.gz'))).toString();
+ check(r.schemaVersion===1&&r.sourceStable===true,'stable actual producer required');check(r.recipeSha256===sha(norm(fs.readFileSync(path.join(root,DIR,'replay.cjs'),'utf8'))),'recipe changed');check(r.fixtureSha256===sha(fixture),'original natural fixture changed');check(r.baselineSha256===sha(norm(old)),'original renderer changed');check(same(r.current,current),'current source changed');check(r.rows?.length===12,'twelve scenes required');
+ const seen=new Set();for(const row of r.rows||[]){const id=row.variant+':'+row.height+':'+row.stage;check(!seen.has(id),'duplicate scene');seen.add(id);check(['baseline','current'].includes(row.variant)&&[736,844].includes(row.height)&&['entry','interrupted','ending'].includes(row.stage),'unknown scene');const expected={...current};if(row.variant==='baseline')expected['src/js/app.js']=sha(norm(old));check(same(row.expected,expected),'scene expected source changed');for(const[k,h]of Object.entries(expected))check(row.responses?.[k]===h,'missing/changed response '+k);
+  check(row.touches?.length>0&&row.touches.every(t=>t.trusted&&t.type==='touch'),'trusted touch required');check(row.controls?.length>0&&row.controls.every(c=>c.box&&c.box.x>=0&&c.box.y>=0&&c.box.x+c.box.width<=390&&c.box.y+c.box.height<=row.height),'visible controls required');check(row.errors?.length===0,'browser errors');
+  let before,after;try{before=JSON.parse(row.beforeRaw);after=JSON.parse(row.afterRaw);}catch(e){errors.push('invalid actual saved bytes');continue;}
+  check(same(row.restored?.scholar,before.scholar)&&same(row.restored?.codex,before.codex),'whole original Continue required');check(same(row.saved,after),'saved view differs from actual bytes');
+  if(row.stage!=='ending'){
+   const b=row.observed;check(b?.active&&b.inside===true&&b.pure,'real unchanged indoor battle required');check(b?.rows===b?.gridSize&&same(b?.phone,[390,row.height])&&same(b?.scroll?.slice(0,2),[0,0])&&b?.scroll?.[2]<=row.height+1,'phone battle frame required');
+   const monsters=b?.fighters?.filter(a=>['monster','hostile'].includes(a.kind))||[],helpers=b?.fighters?.filter(a=>['ally','villager'].includes(a.kind))||[];check(monsters.length>0&&helpers.length>0,'actual living monster and helpers required');for(const a of [...monsters,...helpers]){check(a.rendered===(row.variant==='current'),'indoor actor visibility wrong');if(a.rendered)check(same(a.cell,{x:a.mx,y:a.my})&&a.rect?.width>0&&a.rect?.height>0,'actor moved or collapsed in view');}
+  }
+  if(row.stage==='entry')check(after.run?.tbfight?.fighters?.length>0&&!!after.run.tbfight.pendingTurnKey,'actual announced-turn checkpoint required');
+  else{
+   check(same(after.scholar,row.result?.scholar)&&same(after.codex,row.result?.codex)&&after.combatWins===row.result?.combatWins,'ending is not immediately durable');check(row.result?.inCombat===false&&row.result?.over===false,'complete surviving encounter required');
+   const prior=r.rows.find(x=>x.variant===row.variant&&x.height===row.height&&x.stage===(row.stage==='interrupted'?'entry':'interrupted'));check(prior&&row.beforeRaw===prior.afterRaw,'actual cold transport mismatch');
+   if(row.stage==='interrupted'){check(row.cancellation?.resourceNeutral===true,'free cancellation required');check(row.events?.some(e=>e.phase==='player')&&row.events?.some(e=>e.phase==='resolved'),'real participant turns required');check(after.combatWins>before.combatWins,'whole actual encounter victory required');}
+   else check(after.combatWins===before.combatWins,'ending Continue granted another victory');
+  }
+ }
+ for(const v of ['baseline','current'])for(const h of [736,844])for(const s of ['entry','interrupted','ending'])check(seen.has(v+':'+h+':'+s),'missing required contrast');return{ok:errors.length===0,errors};
+}
+function read(root){const p=JSON.parse(fs.readFileSync(path.join(root,'scripts/indoor-fight-phone-proof.json'))),raw=fs.readFileSync(path.join(root,p.report));assert.equal(sha(raw),p.reportDigest,'actual report bytes changed');return JSON.parse(z.gunzipSync(raw));}
+function update(root,file){const absolute=fs.realpathSync(path.resolve(file)),base=fs.realpathSync(root),relative=path.relative(base,absolute);assert(!relative.startsWith('..')&&!path.isAbsolute(relative),'retain actual report inside repo');const raw=fs.readFileSync(absolute),r=JSON.parse(z.gunzipSync(raw)),v=verify(root,r);assert(v.ok,v.errors.join('\n'));const p={schemaVersion:1,report:relative.replace(/\\/g,'/'),reportDigest:sha(raw)};fs.writeFileSync(path.join(root,'scripts/indoor-fight-phone-proof.json'),JSON.stringify(p,null,2)+'\n');return p;}
+module.exports={verify,read,update};if(require.main===module){try{assert(process.argv[2],'actual retained report required');console.log(JSON.stringify(update(path.resolve(__dirname,'../..'),process.argv[2])));}catch(e){console.error(e.message);process.exitCode=1;}}

@@ -250,7 +250,10 @@ async function main() {
     ok(!/interruptible/i.test(bul.counter.reveal), 'bulldozer counter drops interruptible');
     ok(gal.uninterruptible === true && bul.uninterruptible === true, 'both flagged uninterruptible');
     ok(/interruptible/i.test(sun.counter.reveal), 'sunbasker counter notes interruptible');
-    ok(/interruptible/i.test(mem.counter.reveal), 'memory_projector counter notes interruptible');
+    ok(!mem.uninterruptible && mem.counter.kind === 'move_windup' &&
+      /Keep moving during the spell/i.test(mem.counter.reveal) &&
+      /Stun it or shout while it brightens to break its concentration/i.test(mem.counter.reveal),
+      'memory_projector counter teaches actual movement, timing and concentration');
   }
 
   // ---------- _bound blocks movement ----------

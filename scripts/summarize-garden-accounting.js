@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs'),z=require('zlib'),crypto=require('crypto'),R=require('./garden-longplay-audit'),A=require('./lib/garden-accounting'),contract=require('./balance-metrics.json');
+const fs=require('fs'),z=require('zlib'),crypto=require('crypto'),R=require('./garden-longplay-audit'),A=require('./lib/garden-accounting'),M=require('./lib/measurement-contract');
 const read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(f))),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const arg=n=>{const i=process.argv.indexOf('--'+n);if(i<0)throw Error('--'+n+' required');return process.argv[i+1];};
-function validate(r){
+function validate(r,options){
  if(!r.stable||!r.plan?.jobs?.length||r.results?.length!==r.plan.jobs.length)throw Error('Incomplete or unstable report');
- const ids=contract.metrics.map(m=>m.id).sort();
+ const ids=M.select(r.plan.identity,options).contract.metrics.map(m=>m.id).sort();
  for(const job of r.plan.jobs){const found=r.results.filter(x=>same(x.job,job));if(found.length!==1)throw Error('Missing/duplicate case');const x=found[0];R.validateResult(x,job,r.plan.sources);
   if(x.warnings.length||x.observerErrors.length||x.gearErrors.length||x.garden?.errors.length||!same(Object.keys(x.metrics).sort(),ids))throw Error('Invalid observed case');
   if(job.observe&&(!x.garden?.accounting||x.garden.schemaVersion!==2))throw Error('Current accounting observer required');
@@ -25,16 +25,17 @@ function summarize(r){
   for(const k of Object.keys(g.costs))g.costs[k]+=a.costs[k];
  }for(const g of groups){const sum=key=>Object.values(g[key]).reduce((n,x)=>n+x,0);g.unallocatedNominalKcal=g.unknownIntakeCases?null:g.outputKcal+sum('initialNominal')-sum('consumed')-sum('spoilageRemoved')-sum('remainingNominal');}return groups.sort((a,b)=>a.cap-b.cap||a.policy.localeCompare(b.policy));
 }
-function compare(before,after){
- validate(before);validate(after);
+function compare(before,after,options){
+ validate(before,options);validate(after,options);
  for(const key of ['identity','toolHashes','configuration','jobs','comparisonExclusions'])if(!same(before.plan[key],after.plan[key]))throw Error('Mixed methodology: '+key);
  for(const file of Object.keys(before.plan.sources).filter(f=>f.startsWith('scripts/policies/')||['scripts/sim-harness.js','scripts/sweep-compare.js'].includes(f)))if(before.plan.sources[file]!==after.plan.sources[file])throw Error('Controller/harness changed: '+file);
  const pairs=after.results.map(a=>{const b=before.results.find(b=>same(a.job,b.job));if(!b)throw Error('Unmatched case');return{job:a.job,stateExcludingDeclaredInstrumentation:a.comparableStateHash===b.comparableStateHash,outcome:same(a.row,b.row),all23:same(a.metrics,b.metrics),rng:same(a.rngTail,b.rngTail)};});
- return{scope:'Natural mixed-policy campaigns. Ordinary/assisted describes the harvested cycle, not an ordinary-only or intentional ability build. All known intake is a lower bound; unclassified includes non-garden food and unknown origins. Nominal stocks and spoilage-sweep removals are not edible security. Unallocated nominal kcal is a diagnostic residual: it may include processing, seed use, barter/export, loss at run end, uncovered storage or dropped provenance; it is not classified waste. Direct debits, hunger equivalents, seed stock and time are separate; no net-profit or causal magic-payoff estimate.',comparisonExclusions:after.plan.comparisonExclusions,pairs,before:summarize(before),after:summarize(after)};
+ return{measurementIdentity:M.select(after.plan.identity,options).measurementIdentity,scope:'Natural mixed-policy campaigns. Ordinary/assisted describes the harvested cycle, not an ordinary-only or intentional ability build. All known intake is a lower bound; unclassified includes non-garden food and unknown origins. Nominal stocks and spoilage-sweep removals are not edible security. Unallocated nominal kcal is a diagnostic residual: it may include processing, seed use, barter/export, loss at run end, uncovered storage or dropped provenance; it is not classified waste. Direct debits, hunger equivalents, seed stock and time are separate; no net-profit or causal magic-payoff estimate.',comparisonExclusions:after.plan.comparisonExclusions,pairs,before:summarize(before),after:summarize(after)};
 }
 module.exports={validate,summarize,compare};
 if(require.main===module)try{
- const beforeFile=arg('before'),afterFile=arg('after'),out=arg('out'),r=compare(read(beforeFile),read(afterFile));
+ const historicalOptions={historical:process.argv.includes('--historical')};
+ const beforeFile=arg('before'),afterFile=arg('after'),out=arg('out'),r=compare(read(beforeFile),read(afterFile),historicalOptions);
  r.inputs={before:{file:beforeFile,sha256:sha(fs.readFileSync(beforeFile))},after:{file:afterFile,sha256:sha(fs.readFileSync(afterFile))},summarizerSha256:sha(fs.readFileSync(__filename,'utf8').replace(/\r\n/g,'\n'))};
  const total=(g,k)=>Object.values(g[k]).reduce((n,x)=>n+x,0),num=n=>Math.round(n).toLocaleString('en-US');
  const rows=r.after.map(g=>`| ${g.policy} | ${g.cap} | ${g.cases} | ${g.terminal} / ${g.capped} | ${g.harvesting} | ${g.eatingGardenCases} | ${num(g.outputKcal)} | ${num(total(g,'consumed'))} | ${num(total(g,'nourishment'))} | ${num(total(g,'spoilageRemoved'))} | ${num(total(g,'remainingNominal'))} |`);

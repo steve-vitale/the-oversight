@@ -14,6 +14,7 @@
 // BEFORE/AFTER: MECHANIC=off skips hook registration -> the gate goes RED.
 // Green across 3 seeds: SEED=1,2,3 node scripts/test-sig-chorus-line-20261010.js
 const H = require('./sim-harness.js');
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '1', 10);
 const MECHANIC_OFF = process.env.MECHANIC === 'off';
 
@@ -28,8 +29,9 @@ function endTurn(Game) {
   if (!Game.tbIsPlayerTurn()) return;
   const p = Game.tbFighter('p');
   if (!p) return;
-  p.moveLeft = 0; p.acted = true;
-  Game.tbAfterPlayerAction();
+  // A public action may already have completed its turn synchronously.
+  // Only forfeit the movement remaining after a spent action.
+  if (p.acted) Game.tbPlayerWait();
 }
 function monsterOf(Game) {
   return Game.tbfight.fighters.find(x => x.kind === 'monster' && x.alive && !x.fled);
@@ -46,7 +48,7 @@ function placePlayer(Game, x, y) {
 // advance until it's the player's turn; run one full monster phase and
 // report the player's hp delta + say lines seen during it.
 function monsterPhase(Game, said) {
-  if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); endTurn(Game); }
+  if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); }
   const b = Game.tbFighter('p').hp;
   const n0 = said.length;
   let g = 0;
@@ -82,7 +84,8 @@ function monsterPhase(Game, said) {
   // capture from BEFORE startCombat: the opening monster turn (BEAT 1/4)
   // fires inside startCombat, and resetting after would lose it.
   said.length = 0; audio.length = 0;
-  Game.startCombat('chorus_line');
+  K.fight(Game, 'chorus_line', {px:4,py:4,mx:6,my:4,hp:9000});
+  ok('prepared solo mechanic scene excludes bystanders', !Game.tbfight.fighters.some(f => f.kind === 'villager'));
   let m = monsterOf(Game);
   // stand still, wait through a full 4/4: beats must count, then the kick
   let kickDhp = 0, downbeatSeen = false;
@@ -92,8 +95,7 @@ function monsterPhase(Game, said) {
     if (!Game.tbfight || Game.tbfight.over) break;
     const bb = Game.tbFighter('p').hp;
     const n1 = said.length;
-    Game.tbPlayerWait();
-    endTurn(Game); // the monster turn runs here
+    Game.tbPlayerWait(); // the monster turn runs here
     const seg = said.slice(n1).join(' ');
     if (/DOWNBEAT/.test(seg)) { downbeatSeen = true; kickDhp = bb - Game.tbFighter('p').hp; }
   }
@@ -117,7 +119,7 @@ function monsterPhase(Game, said) {
   while (Game.tbfight && !Game.tbfight.over && guard++ < 30) {
     m = monsterOf(Game);
     if ((m.clBeat % 4) === 3 && Game.tbIsPlayerTurn()) break;
-    if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); endTurn(Game); }
+    if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); }
     else Game.tbAdvance();
   }
   ok('reached the pre-downbeat turn', guard < 30, 'guard=' + guard);
@@ -136,7 +138,8 @@ function monsterPhase(Game, said) {
   // ---------- Fight 2: move on the beat ----------
   s.health = 9000; s.mx = 4; s.my = 4;
   s.inventory = [];
-  Game.startCombat('chorus_line');
+  K.fight(Game, 'chorus_line', {px:4,py:4,mx:6,my:4,hp:9000});
+  ok('prepared solo mechanic scene excludes bystanders', !Game.tbfight.fighters.some(f => f.kind === 'villager'));
   m = monsterOf(Game);
   said.length = 0;
   // move every round (alternate two tiles); when the downbeat comes,
@@ -148,11 +151,11 @@ function monsterPhase(Game, said) {
     while (Game.tbfight && !Game.tbfight.over && !Game.tbIsPlayerTurn() && g2++ < 50) Game.tbAdvance();
     if (!Game.tbfight || Game.tbfight.over) break;
     const p = Game.tbFighter('p');
-    const tx = p.mx < 7 ? p.mx + 1 : p.mx - 1;
-    Game.tbPlayerMove(tx, p.my);
+    const tx = p.mx === 4 ? 5 : 4;
+    ok('public movement actually changes square on each beat', Game.tbPlayerMove(tx, p.my) === true && p.mx === tx);
     const n2 = said.length;
     const b2 = Game.tbFighter('p').hp;
-    endTurn(Game); // the monster turn runs here
+    Game.tbPlayerWait(); // spend the action after movement
     const seg = said.slice(n2).join(' ');
     // the 'moving ON the beat' narration is NOT deaf-gated — it is the
     // honest signal. /DOWNBEAT/ is hidden by design while deaf, so the
@@ -168,7 +171,8 @@ function monsterPhase(Game, said) {
 
   // ---------- Fight 3: flank halves the kick ----------
   s.health = 9000; s.mx = 4; s.my = 4;
-  Game.startCombat('chorus_line');
+  K.fight(Game, 'chorus_line', {px:4,py:4,mx:6,my:4,hp:9000});
+  ok('prepared solo mechanic scene excludes bystanders', !Game.tbfight.fighters.some(f => f.kind === 'villager'));
   m = monsterOf(Game);
   const dmgAt = (faceDx, faceDy, px, py) => {
     m.clBeat = 3; // the next monster turn is the downbeat
@@ -182,7 +186,7 @@ function monsterPhase(Game, said) {
     const b = Game.tbFighter('p').hp;
     const n0 = said.length;
     // run exactly one monster turn (the downbeat), whichever side is up
-    if (Game.tbIsPlayerTurn()) endTurn(Game);
+    if (Game.tbIsPlayerTurn()) Game.tbPlayerWait();
     else Game.tbAdvance();
     return { dmg: b - Game.tbFighter('p').hp, lines: said.slice(n0).join(' ') };
   };
@@ -199,7 +203,8 @@ function monsterPhase(Game, said) {
   // ---------- Fight 4: gravel breaks the count ----------
   s.health = 9000; s.mx = 4; s.my = 4;
   s.inventory = [{ itemId: 'gravel', name: 'Handful of gravel', units: 2 }];
-  Game.startCombat('chorus_line');
+  K.fight(Game, 'chorus_line', {px:4,py:4,mx:6,my:4,hp:9000});
+  ok('prepared solo mechanic scene excludes bystanders', !Game.tbfight.fighters.some(f => f.kind === 'villager'));
   m = monsterOf(Game);
   said.length = 0;
   // wait for the player's turn, then throw gravel
@@ -220,7 +225,8 @@ function monsterPhase(Game, said) {
   // ---------- Fight 5: deafness hides the count, not the kick ----------
   s.health = 9000; s.mx = 4; s.my = 4;
   s.inventory = [];
-  Game.startCombat('chorus_line');
+  K.fight(Game, 'chorus_line', {px:4,py:4,mx:6,my:4,hp:9000});
+  ok('prepared solo mechanic scene excludes bystanders', !Game.tbfight.fighters.some(f => f.kind === 'villager'));
   m = monsterOf(Game);
   // deaf lives on the FIGHTER (engine convention — seTickFighter expires it
   // per combat round). Scholar-scoped deaf never ticked; the test must apply
@@ -231,7 +237,7 @@ function monsterPhase(Game, said) {
   const hpD0 = Game.tbFighter('p').hp;
   guard = 0;
   while (Game.tbfight && !Game.tbfight.over && guard++ < 40) {
-    if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); endTurn(Game); }
+    if (Game.tbIsPlayerTurn()) { Game.tbPlayerWait(); }
     else Game.tbAdvance();
     if ((monsterOf(Game) || {}).clBeat >= 4) break;
   }

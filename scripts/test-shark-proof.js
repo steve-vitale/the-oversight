@@ -107,19 +107,20 @@ function assert(cond, msg) {
   const takes = sharkRows.reduce((t, r) => t + ((r.diag || {}).sharkContestTakes || 0), 0);
   console.log(`  shark contests: takes=${takes} refusals=${refusals}`);
 
-  // --- the inverted read (investigation, never a verdict) ---
+  // Win ordering is descriptive. This fixed heuristic does not establish
+  // causality or rule out other strategies; preserve all-domain review.
   const wins = {};
   for (const pid of POLICY_IDS) wins[pid] = rows.filter(r => r.policy === pid && r.won).length;
-  console.log('--- INVERTED READ ---');
+  console.log('--- HEURISTIC PROBE: INVESTIGATE BOTH DIRECTIONS ---');
   for (const pid of POLICY_IDS) console.log(`  ${pid}: ${wins[pid]}/${SEEDS.length} wins`);
   if (POLICY_IDS.includes('shark') && POLICY_IDS.includes('competent')) {
     if (wins.shark >= wins.competent)
-      console.log('  READ: shark >= competent -> win metric reachable by degenerate play; levers above are DEGENERATE (investigate, do not tune).');
+      console.log('  READ: shark >= competent -> inspect actual skimming, exposure and costs; this ordering does not prove degeneracy. Isolate suspected mechanisms with matched controls.');
     else
-      console.log('  READ: shark < competent -> degenerate play does not dominate; the win metric currently rewards the fuller game (investigate, do not tune).');
+      console.log('  READ: shark < competent -> this heuristic did not outperform that control here; other exploit strategies remain untested.');
   }
   console.log('shark wins must NEVER tune the game harder or declare regressions (Steve 2026-10-15).');
 
   if (failures.length) { console.error(`PROOF FAILED: ${failures.length} assertion(s)`); process.exit(1); }
-  console.log('PROOF GREEN: shark plays, wins recorded, degenerate signature interpretable.');
+  console.log('PROOF GREEN: shark plays and intended behavior is observed; balance and exploit conclusions require separate investigation.');
 })().catch(e => { console.error('PROOF ERROR: ' + (e && e.stack || e)); process.exit(1); });

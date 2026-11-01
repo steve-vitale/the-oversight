@@ -17,6 +17,7 @@
 //   - gardenMaintain(vid)
 //   - reclaimGarden(vid)
 //   - gardenMagicPlan(vid)
+//   - gardenAbilityEntry(vid, id)
 //   - gardenMagicGate(vid)
 //   - cultivateGarden(vid)
 //   - gardenKeeperReady(vid)
@@ -161,9 +162,22 @@
       }
       return true;
     },
-    gardenMagicPlan(vid = this.villagerId) {
+    // NPC ownership is canonically an ID list (npcGrantAbility/build brain).
+    // Keep earned practice beside it, never replace IDs with player entries:
+    // doing so makes npcHasAbility, build scoring and mantle import disagree.
+    // Reading a plan must not create practice or claim an unheld ability.
+    gardenAbilityEntry(vid, id) {
       const abilities = vid === this.villagerId ? this.state.scholar.abilities || [] : this.state.village.npcAbilities?.[vid] || [];
-      const level = id => Math.max(0,...abilities.filter(a=>a.id===id).map(a=>Math.min(3,a.level||1)));
+      // Evolution replaces the ID but retains the holder's root power and
+      // earned mastery. Resolve that same owned entry; never borrow practice
+      // or a different resident's ability to make a garden plan available.
+      const held=abilities.find(a=>(typeof a==='string'?a:(a?.evolvedFrom||a?.id))===id);
+      if(!held)return null;
+      if(typeof held!=='string')return held;
+      return this.state.village.npcAbilityPractice?.[vid]?.[id] || {id,level:1,xp:0};
+    },
+    gardenMagicPlan(vid = this.villagerId) {
+      const level = id => {const held=this.gardenAbilityEntry(vid,id);return held?Math.max(1,Math.min(3,held.level||1)):0;};
       const thumb=level('green_thumb'),whisper=level('green_whisper'),corn=level('cornucopia'),magic=rules().magic;
       if (!thumb && !whisper) return null;
       const source=thumb >= whisper ? 'green_thumb' : 'green_whisper';
@@ -208,7 +222,10 @@
         plot.magicDay=day();plot.magicOwner=vid;plot.lastTend=day();plot.weeds=0;n++;
       }
       if(npc){
-        const held=this.state.village.npcAbilities[vid].find(a=>a.id===plan.source);
+        const v=this.state.village,held=this.gardenAbilityEntry(vid,plan.source);
+        // Hydrate only after a real paid cast, and only for this holder.
+        const practice=v.npcAbilityPractice||(v.npcAbilityPractice={});
+        (practice[vid]||(practice[vid]={}))[plan.source]=held;
         if(this.advanceAbilityPractice(held,2))this.say(`${this.displayName(vid)}'s ${plan.source.replace(/_/g,' ')} deepens to level ${held.level}.`);
         if(this.map.px===4&&this.map.py===4&&!this.state.scholar.insideHaven)this.noteVillagerAbilityUse(vid,plan.source);
       }

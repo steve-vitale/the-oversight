@@ -22,30 +22,10 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || '20261008', 10);
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(SEED);
-const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(read(f))) });
-global.window = global;
-const _SCRIPTS = ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
- 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/contestEngine.js',
- 'src/js/alienPlayers.js', 'src/js/storage.js',
- 'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
- 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
- 'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
- 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/fieldFights.js',
- 'src/js/debug-scenarios.js', 'src/js/build.js'];
-_SCRIPTS.forEach(f => eval(read(f)));
-delete global.window;
-const Game = globalThis.Scattering.Game;
-
+const {loadGame,mulberry32}=require('./sim-harness');
+const read = p => fs.readFileSync(path.join(ROOT,p),'utf8');
 (async () => {
-await Game.init();
+const {Game}=await loadGame({seed:SEED,narration:true});
 
 // ---------- harness ----------
 const note = t => console.log(t);
@@ -138,9 +118,8 @@ note('2. PLAYER BLOOD — pit plays as a real tactical fight');
   // Simulate winning the fight: call tbEnd('won') like the engine would.
   // (We don't play the full fight here — the arena wiring is what's proven;
   // the fight itself is the real tactical engine.)
-  const arc = Game.state.arenaContest;
-  Game.state.arenaContest = null; // tbEnd clears it; simulate
-  Game._contestArenaAfter(arc, 'won');
+  Game.tbEnd('won'); // settle the actual arena chain, not only its callback
+  ok('arena settlement ends the actual tactical fight', !Game.inCombat());
   ok('arena win resolves the contest (no longer suspended)', ac.arenaSuspended === false);
   ok('contest ended after arena win', Game.state.activeContest === null || Game.state.activeContest.phase === 'done');
   drain();

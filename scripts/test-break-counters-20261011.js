@@ -81,9 +81,22 @@ const counterOf = (Game, id) => {
     s.health = 9000; s.mx = 4; s.my = 4;
     s.equipped = s.equipped || {};
     s.equipped.weapon = { name: 'spear', type: 'spear', range: 2, damage: [6, 10] };
-    Game.startCombat(mid);
+    // This lure contrast needs the player as its actual FIFO target.
+    // Preserve the village after preparing that one solo encounter.
+    if (mid === 'voice_mimic_radio') {
+      const village = Game.state.village, roster = village.roster, positions = structuredClone(village.positions || {});
+      try {
+        require('./godpath/lib').fight(Game, mid, {
+          px: px == null ? 4 : px, py: py == null ? 4 : py,
+          mx: mx == null ? (px == null ? 4 : px) + 1 : mx,
+          my: my == null ? (py == null ? 4 : py) : my,
+        });
+      } finally { village.roster = roster; village.positions = positions; }
+    } else Game.startCombat(mid);
     const m = Game.tbfight.fighters.find(x => x.kind === 'monster' && x.mdef && x.mdef.id === mid);
     const p = Game.tbFighter('p');
+    if (mid === 'voice_mimic_radio') ok('fixture: only the actual player is a human target',
+      Game.tbfight.fighters.filter(f => f.kind !== 'monster' && f.alive && !f.fled).length === 1);
     p.hp = 9000; p.maxHp = 9000;
     p.mx = px == null ? 4 : px; p.my = py == null ? 4 : py;
     m.mx = mx == null ? p.mx + 1 : mx; m.my = my == null ? p.my : my;

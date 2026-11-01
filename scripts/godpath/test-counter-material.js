@@ -25,7 +25,7 @@ const K=require('./lib'),T=K.reporter('counter material');
 
   for(const special of [false,true]){
     s=fresh();if(special)K.giveAbility(G,'hollow_bones',{force:true});
-    const mult=G.modTarget('carry.weight_mult',1),cap=G.carryCapacity();
+    const mult=G.modTarget('carry.weight_mult',1),cap=G.carryLimit();
     if(special)T.ok('weight control uses a real authored hollow-bones modifier',G.hasAbility('hollow_bones')&&mult>0&&mult<1);
     s.inventory=[{name:'Ballast',units:1,kg:cap/mult-2-1.5*0.8}];s.prepStash=[hide(3)];
     r=take(0);

@@ -177,7 +177,7 @@ function has(fn) { return typeof Game[fn] === 'function'; }
     const cid = 'test-animal-corpse';
     Game.state.corpses.push({
       id: cid, kind: 'animal', buried: false,
-      node: { x: Game.map.px, y: Game.map.py }, mx: 4, my: 4,
+      node: { x: Game.map.px, y: Game.map.py }, scene: Game.corpseScene({x:Game.map.px,y:Game.map.py},!!Game.state.scholar.insideHaven), mx: 4, my: 4,
       items: [{ plantId: 'animal_hide', material: 'hide', name: 'Hide', units: 1, kg: 1.0, kcalEach: 0, spoilDay: 9999 }],
     });
     const before = said.length;
@@ -197,7 +197,7 @@ function has(fn) { return typeof Game[fn] === 'function'; }
     const cid = 'test-animal-corpse-2';
     Game.state.corpses.push({
       id: cid, kind: 'animal', buried: false,
-      node: { x: Game.map.px, y: Game.map.py }, mx: 4, my: 4,
+      node: { x: Game.map.px, y: Game.map.py }, scene: Game.corpseScene({x:Game.map.px,y:Game.map.py},!!Game.state.scholar.insideHaven), mx: 4, my: 4,
       items: [{ plantId: 'animal_hide', material: 'hide', name: 'Hide', units: 1, kg: 1.0, kcalEach: 0, spoilDay: 9999 }],
     });
     Game.lootCorpse(cid, true);

@@ -14,6 +14,7 @@
 //   - Game.sigW3cCombatButtons(mons, p)
 //   - Game.sigW3cWireCombat(on, rerender)
 //   - Game.sigW3cFieldRound(mdef, vid, round, rec, sigFx, ctx)
+//   - Game.restoreAdSponsors(savedFight)
 // rules:
 //   - telegraph_honesty: every signature announcement describes exactly what the hook executes next (code: bufAnnounce -> bufExecutePending, adBar).
 //   - face_never_living: the Callback's face is picked from corpse records only, excluding current roster members (code: sigPickFace).
@@ -341,7 +342,7 @@
       var s = game.tbFighter(m.adSponsorKey);
       if (s && s.alive && !s.fled) {
         s.fled = true;
-        game.say(why || 'The sponsor-creature tips its tiny hat and rides the folding glyph away. (No ad, no sponsor.)');
+        game.say(why || 'The rider folds its pennant and slips behind the closing screen.');
       }
     } catch (e) {}
     m.adSponsorKey = null;
@@ -351,13 +352,13 @@
     var f = game.tbfight;
     if (!f) return;
     m.adCount = (m.adCount || 0) + 1;
-    var skey = 'ad_sponsor_' + m.adCount;
+    var skey = 'ad_sponsor_' + m.key + '_' + m.adCount;
     m.adSponsorKey = skey;
     m.adSponsorSlain = false;
     try {
       f.fighters.push({
         key: skey, kind: 'monster', name: 'Sponsor-creature', emoji: '🧚',
-        mdef: { id: 'ad_sponsor', name: 'Sponsor-creature' },
+        mdef: game.data.monsterBehaviors.summons.ad_sponsor,
         hp: 40, maxHp: 40, speed: 1,
         mx: m.mx, my: m.my,
         alive: true, fled: false, telegraph: null,
@@ -367,6 +368,43 @@
       if (idx >= 0) f.order.splice(idx + 1, 0, skey);
       else f.order.push(skey);
     } catch (e) {}
+  }
+
+  // Old packs reused one rider key across every host. Restore the recorded
+  // turn slots one-to-one without dropping bodies, HP, budgets or the cursor.
+  // Each rider slot was inserted immediately after its host by adSpawnSponsor.
+  function restoreAdSponsors(saved) {
+    if (!saved || !Array.isArray(saved.fighters) || !Array.isArray(saved.order)) return saved;
+    var groups = new Map();
+    saved.fighters.forEach(function (f, i) {
+      if (f && f.kind === 'monster' && f.monsterId === 'ad_sponsor') {
+        if (!groups.has(f.key)) groups.set(f.key, []);
+        groups.get(f.key).push(i);
+      }
+    });
+    var out = null, used = new Set(saved.fighters.filter(Boolean).map(function (f) { return f.key; }));
+    groups.forEach(function (indices, key) {
+      if (indices.length < 2) return;
+      var slots = [];
+      saved.order.forEach(function (k, i) { if (k === key) slots.push(i); });
+      if (slots.length !== indices.length) {
+        console.warn('[combat] Cannot disambiguate legacy sponsor slots', key);
+        return;
+      }
+      if (!out) out = Object.assign({}, saved, { fighters: saved.fighters.map(function (f) { return f && typeof f === 'object' ? Object.assign({}, f) : f; }), order: saved.order.slice() });
+      indices.forEach(function (index, i) {
+        var unique = key + '_slot_' + slots[i];
+        while (used.has(unique)) unique += '_';
+        used.add(unique);
+        out.fighters[index].key = unique;
+        out.order[slots[i]] = unique;
+        var hostKey = saved.order[slots[i] - 1];
+        var host = out.fighters.find(function (f) { return f && f.key === hostKey && f.adSponsorKey === key; });
+        if (host) host.adSponsorKey = unique;
+        if (saved.pendingTurnKey === key && saved.turnIdx === slots[i]) out.pendingTurnKey = unique;
+      });
+    });
+    return out || saved;
   }
 
   function adHook(game, m) {
@@ -379,7 +417,7 @@
       if (sp && !sp.alive) {
         m.adSponsorSlain = true;
         m.adActive.progress += 2;
-        game.say('The sponsor-creature pops like a soap bubble. The ad stutters — the bar JUMPS forward. (Killing the sponsor shortens the ad.)');
+        game.say('The rider bursts. The loading bar jumps forward.');
       }
     }
     if (m.adActive) {
@@ -392,7 +430,9 @@
       // for geared players while letting even unarmed fights terminate).
       ad.progress += lookAway ? 0.5 : 1;
       var heal = Math.round((m.maxHp || 300) * 0.03 * (lookAway ? 0.5 : 1));
-      if (heal > 0) m.hp = Math.min(m.maxHp || 9999, (m.hp || 0) + heal);
+      var beforeHeal = m.hp || 0;
+      if (heal > 0) m.hp = Math.min(m.maxHp || 9999, beforeHeal + heal);
+      var restored = Math.max(0, (m.hp || 0) - beforeHeal);
       // Reposition: it drifts — up to 2 cells away from the player — but never
       // beyond its own striking distance. The ad is a pause, not an exit:
       // drifting out of reach would trip the engine's disengage rule
@@ -405,16 +445,17 @@
           m.mx = nx; m.my = ny;
         }
       }
-      game.say(adBar(ad) + (lookAway
-        ? ' You\'re not watching — it heals slower, starved of attention.' + (heal > 0 ? ' (+' + heal + ' hp)' : '')
-        : ' ...and you watch.') + (heal > 0 && !lookAway ? ' (+' + heal + ' hp)' : ''));
+      game.say(adBar(ad) + ' — ' + (lookAway
+        ? 'You keep your eyes on the ground. The jingle falters.'
+        : restored > 0 ? 'Cracks seal across the screen.' : 'The rider holds its smile.') +
+        (restored > 0 ? ' (+' + restored + ' HP)' : ''));
       if (ad.progress >= ad.total) {
         m.adActive = null;
         m.adCd = 4;
-        adDismissSponsor(game, m, '"Thanks for watching." The glyph folds away, sponsor and all.');
+        adDismissSponsor(game, m, '"Thanks for watching." The picture snaps shut.');
       } else if (ad.progress >= ad.skipAt && !ad.skipOffered) {
         ad.skipOffered = true;
-        game.say('⏭ SKIP AD is available. (Patience — or look away.)');
+        game.say('⏭ A SKIP button lights up beneath the picture.');
       }
       try { game.tbRefreshTelegraphUI(); } catch (e) {}
       if (game.tbEndCheck && game.tbEndCheck()) return true;
@@ -439,11 +480,8 @@
     m.adActive = { progress: 0, total: total, skipAt: Math.max(1, total - 1), skipOffered: false };
     adSpawnSponsor(game, m);
     try { game.audioEvent('adbreakCut', {}); } catch (e) {} // the glyph unfolds: jingle curdles (break-it audio 2026-10-11)
-    if (preempted) game.say('The glyph unfolds mid-wind-up — the attack dies unspent, pre-empted by the break. (The ad pauses everything.)');
-    game.say('⏸ AD BREAK. A giant glyph unfolds overhead — PROGRESS BAR: ' + adBar(m.adActive) +
-      '. During the pause it repositions and heals, and you watch. ' +
-      (tier > 0 ? '(The audience likes you — the sponsor is already nervous.) ' : '') +
-      '(Kill the sponsor-creature riding the glyph to shorten it — or look away: the ad\'s power is that you WATCH.)');
+    game.say((preempted ? 'Its attack fades. ' : 'A rider lifts a can. ') +
+      '"A word from our sponsor."');
     try { game.tbRefreshTelegraphUI(); } catch (e) {}
     if (game.tbEndCheck && game.tbEndCheck()) return true;
     return true;
@@ -458,9 +496,9 @@
       var x = f.fighters[i];
       if (x.mdef && x.mdef.id === 'ad_break' && x.adSponsorKey === m.key) { host = x; break; }
     }
-    if ((!host || !host.alive || !host.adActive) && !m.fled && m.alive) {
+    if ((!host || !host.alive || host.fled || !host.adActive) && !m.fled && m.alive) {
       m.fled = true;
-      game.say('The sponsor-creature tips its tiny hat and rides the folding glyph away. (No ad, no sponsor.)');
+      game.say('The rider folds its pennant and slips behind the closing screen.');
       try { game.tbRefreshTelegraphUI(); } catch (e) {}
       if (game.tbEndCheck && game.tbEndCheck()) return true;
       return true;
@@ -609,12 +647,11 @@
       if (p.acted) { this.say('Already acted this turn.'); return false; }
       var m = liveMonster(this, 'ad_break');
       if (!m || !m.adActive) { this.say('There\'s no ad playing.'); return false; }
-      if (m.adActive.progress < m.adActive.skipAt) { this.say('The skip button hasn\'t appeared yet. (Patience — wait for the skip beat. Or look away.)'); return false; }
+      if (m.adActive.progress < m.adActive.skipAt) { this.say('The SKIP button is still dark.'); return false; }
       p.acted = true;
-      adDismissSponsor(this, m, '⏭ SKIP AD. The glyph folds itself away, offended. ("Thanks for—" gone.)');
+      adDismissSponsor(this, m, '⏭ "Thanks for—" The screen goes black.');
       m.adActive = null;
       m.adCd = 4;
-      this.say('Silence. Blessed, unsponsored silence. The fight resumes.');
       try { this.tbRefreshTelegraphUI(); } catch (e) {}
       this.tbAfterPlayerAction();
       return true;
@@ -633,7 +670,7 @@
       if ((p.adLookAway || 0) > 0) { this.say('You\'re already looking away.'); return false; }
       p.acted = true;
       p.adLookAway = 1;
-      this.say('You look away. The ad\'s power is that you WATCH — and you\'re not watching. (Its gains starve while you look away. Your next strike will be blind.)');
+      this.say('You turn your face from the glare. The jingle keeps playing behind you.');
       try { this.tbRefreshTelegraphUI(); } catch (e) {}
       this.tbAfterPlayerAction();
       return true;
@@ -664,17 +701,18 @@
       var ad = live('ad_break');
       if (ad && ad.adActive) {
         if (ad.adActive.progress >= ad.adActive.skipAt) out += '<button class="self-btn" id="c-skipad" title="Skip the ad.">⏭ Skip ad</button>';
-        out += '<button class="self-btn" id="c-lookaway" title="Look away — the ad\'s power is that you WATCH. Its gains starve; your next strike is blind.">👀 Look away</button>';
+        out += '<button class="self-btn" id="c-lookaway" title="1 action. Halves recovery and slows the break while you look away. Your next Strike may miss.">👀 Look away</button>';
       }
       return out;
     },
-    sigW3cWireCombat: function (on, rerender) {
+    sigW3cWireCombat: function (on, rerender, runInput) {
       var Gm = G;
-      on('c-funeral', function () { Gm.tbPlayerFuneral(); rerender(); });
-      on('c-nameit', function () { Gm.tbPlayerNameIt(); rerender(); });
-      on('c-closeeyes', function () { Gm.tbPlayerCloseEyes(); rerender(); });
-      on('c-skipad', function () { Gm.tbPlayerSkipAd(); rerender(); });
-      on('c-lookaway', function () { Gm.tbPlayerLookAway(); rerender(); });
+      var execute = runInput || function (action) { return Gm.runCombatInput(action).value; };
+      on('c-funeral', function () { execute(function () { return Gm.tbPlayerFuneral(); }); rerender(); });
+      on('c-nameit', function () { execute(function () { return Gm.tbPlayerNameIt(); }); rerender(); });
+      on('c-closeeyes', function () { execute(function () { return Gm.tbPlayerCloseEyes(); }); rerender(); });
+      on('c-skipad', function () { execute(function () { return Gm.tbPlayerSkipAd(); }); rerender(); });
+      on('c-lookaway', function () { execute(function () { return Gm.tbPlayerLookAway(); }); rerender(); });
     },
   };
 
@@ -717,14 +755,17 @@
         // one look-away).
         if (rec.trickUnwatched) {
           rec.trickUnwatched = 0;
-          log('R' + round + ': ⏸ AD BREAK ▓▓▓▓ (4/4) — ' + ctx.vName + ' looks away. Dead air. Nothing heals.');
+          log('R' + round + ': ' + ctx.vName + ' turns away. The jingle cuts out; the cracks stay open.');
         } else {
           var members = ctx.members || [];
           var lead = members[0];
           if (lead && lead.hp > 0) {
             var heal = Math.round((lead.maxHp || 300) * 0.06);
+            var hpBefore = lead.hp;
             lead.hp = Math.min(lead.maxHp || 9999, lead.hp + heal);
-            log('R' + round + ': ⏸ AD BREAK ▓▓▓▓ (4/4) — it repositions and heals +' + heal + ', and ' + ctx.vName + ' watches.');
+            var recovered = Math.max(0, lead.hp - hpBefore);
+            log('R' + round + ': The commercial plays to ' + ctx.vName + '.' +
+              (recovered > 0 ? ' Cracks seal across the screen. (+' + recovered + ' HP)' : ' The rider holds its smile.'));
           }
         }
       }
@@ -736,6 +777,7 @@
   // ------------------------------------------------------------------
 
   if (!SIGW3C_OFF) {
+    G.restoreAdSponsors = restoreAdSponsors;
     var HB = _g.MonsterBehaviorHooks;
     if (HB) {
       HB.cbFace = cbHook;

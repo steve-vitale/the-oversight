@@ -104,6 +104,7 @@
     if(!home)return block('Return to Haven with your partner to set out together.');
     if(this.dayPart!==0)return block('Set out at dawn. Return at the next dawn before the deadline.');
     const other=this.waterFavorCompanions();if(other.some(id=>id!==vid))return block('Finish your current creek trip before starting another.');
+    if(this.forageFavorCompanions?.().length)return block('Finish your current foraging outing before starting a creek trip.');
     const target=knownCreek(this);if(!target)return block('Find a creek on your map first. No known creek can be named for this trip yet.');
     if(!this.canCarry(2))return block('Make room for two liters: 2kg of water, in addition to your current pack.');
     return{ready:true,action:'water_start',target,label:'Set out together for the creek',reason:'Walk to the known creek '+direction(this,target)+' of Haven. Collect two liters each (40 kcal and four filling actions), then carry it home. Creek water still needs boiling.'};

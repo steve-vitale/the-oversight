@@ -12,8 +12,8 @@
 //      as a bug.
 // Each site is probed LIVE, not retyped: A and B through the Game object in
 // the shared harness; C by extracting the actual shipped function source
-// from abilityActions.js on disk and evaluating it against a fake game
-// (the function is module-local, so there is no Game entry point for it).
+// from abilityActions.js on disk and evaluating it against the initialized
+// Game (the function is module-local). Its real range dependency stays live.
 // A "FAIL" line is a confirmed bug at that site, not a test bug: the
 // expected values are the range rules the code itself states (same node,
 // Chebyshev distance <= 1). Exits non-zero if any site is buggy.
@@ -31,6 +31,9 @@ const { loadGame, setupGame } = require('./sim-harness');
   Game.say = function (...a) { said.push(String(a[0])); try { return origSay.apply(this, a); } catch (e) { return a[0]; } };
   Game.map.px = 4; Game.map.py = 4;
   const s = Game.state.scholar;
+  // Explicit outside fixture: setup starts inside the Haven, whereas these
+  // legacy bodies have no room tag and therefore represent outside bodies.
+  s.insideHaven = false;
   let failures = 0;
   const check = (label, actual, expected) => {
     const ok = actual === expected;
@@ -66,13 +69,13 @@ const { loadGame, setupGame } = require('./sim-harness');
     Game.registerDeath({ kind: 'person', name: 'Probe Dead' });
     const created = Game.corpses().slice(beforeN).find(c => c && c.name === 'Probe Dead');
     if (!created) {
-      console.log('PROBE-INCONCLUSIVE B: registerDeath created no findable corpse');
+      throw new Error('registerDeath created no findable corpse');
     } else {
       check('B corpse from scholar(0,5) inherits mx=0', created.mx, 0);
       check('B corpse from scholar(0,5) inherits my=5', created.my, 5);
     }
   } catch (e) {
-    console.log('PROBE-INCONCLUSIVE B: registerDeath threw: ' + (e && e.message));
+    throw new Error('Site B incomplete: ' + (e && e.message));
   }
 
   // ---- Site C: abilityActions _graveRobberCorpse (source-extracted) ----
@@ -85,8 +88,9 @@ const { loadGame, setupGame } = require('./sim-harness');
     const fnSrc = src.slice(start, end).trim();
     const fn = eval('(' + fnSrc.replace(/^function _graveRobberCorpse/, 'function') + ')');
     const probeC = (smx, smy, cmx, cmy) => {
-      const fake = { corpses: () => [{ id: 'c1', buried: false, node: { x: 4, y: 4 }, mx: cmx, my: cmy }], state: { scholar: { mx: smx, my: smy } }, map: { px: 4, py: 4 } };
-      const r = fn(fake);
+      Game.state.corpses = [{ id: 'c1', buried: false, node: { x: 4, y: 4 }, mx: cmx, my: cmy }];
+      s.mx = smx; s.my = smy;
+      const r = fn(Game);
       return !!(r && r.id === 'c1');
     };
     check('C scholar(4,0) vs corpse(4,0) found', probeC(4, 0, 4, 0), true);
@@ -95,7 +99,7 @@ const { loadGame, setupGame } = require('./sim-harness');
     check('C scholar(4,4) vs corpse(4,4) found (control)', probeC(4, 4, 4, 4), true);
     check('C scholar(0,4) vs corpse(4,4) NOT found (control)', probeC(0, 4, 4, 4), false);
   } catch (e) {
-    console.log('PROBE-INCONCLUSIVE C: ' + (e && e.stack || e));
+    throw new Error('Site C incomplete: ' + (e && e.stack || e));
   }
 
   if (failures) { console.log(`RESULT: ${failures} FAILING PROBE(S) — falsy-0 bug confirmed at a sibling site`); process.exit(1); }

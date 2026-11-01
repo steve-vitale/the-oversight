@@ -6,6 +6,44 @@ one labeled entry with a fiction-based derivation and explicit provenance.
 GAP means a recording is missing or unregistered; it does not certify that
 someone searched every source. Preserve existing attribution caveats.
 
+Silent-contact retargeting (2026-10-26 review): encounter.proximityAudio=false
+prevents the shared scanner from announcing a new adjacent target for the
+turtle, anaconda and tiger. It does not suppress actual attack/pain voices or
+ordinary deer/mimic notices. Do not infer silence from a rush/ambush pattern:
+some callers and lures are intentionally vocal. The automatic shared-kit
+test-silent-proximity-audio.js proves all three authored flags, real queue
+priority, unchanged resources/time, vocal contrasts and pain notices. Existing
+regional141 checks remain unchanged; run them at default/7/42.
+
+The native dispatcher check uses bundled Playwright on NODE_PATH:
+
+```sh
+node evidence/2026-10-26/prepare-silent-audio-phone-r3.cjs <new-fixture.json>
+node evidence/2026-10-26/silent-proximity-audio-phone-r3.cjs <new-positive-directory>
+node evidence/2026-10-26/silent-proximity-audio-phone-control-r3.cjs <new-negative-directory>
+node evidence/2026-10-26/review-silent-audio-phone-r1.cjs <new-positive-directory> <new-negative-directory> <new-review.json>
+```
+
+The recipe deliberately reads its declared silent-audio-phone-fixture-r3.json;
+the first command is for independently reproducing/inspecting that prepared
+scene, not silently substituting an alternate fixture. It retains real Haven
+exit costs and leaves one canonical adult companion outdoors. A prepared
+startCombat/position/queue setup forces an actual two-target scanner switch;
+subsequent turns use trusted Study/Strike/Wait through actual endings. Both
+phone sizes switch targets without a scanner voice. Production voices start
+running native Web Audio sources with finite nonzero buffers attributable to
+that exact voice call, following resolved contact or an actual authored Rerun
+declaration. A valid direct telegraph may sound before damage; scanner calls
+must remain silent. Both final R3 fights end in defeat, not victories. Removing
+only the tiger flag in disposable browser data fails the precise retarget
+silence assertion; retain that failed trace and inspect it with the reviewer.
+Loaded response bytes and rendered phone screenshots are retained. Earlier
+solo R1/R2 pilots do not prove retargeting. The audio observers forward
+the real damage options and sound methods; they do not finish turns or change
+RNG, budgets, HP or prices. This is not natural discovery, physical-device
+listening, sound-quality judgment, native tiger saved Continue or universal
+combat clearance; the separate ordinary combat/save suites cover their cases.
+
 For a monster roster, audio-hook or curated-description change:
 
 1. Keep the actual encounter noticeAudio/aggroAudio keys and registered voice

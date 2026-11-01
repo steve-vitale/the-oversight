@@ -22,64 +22,14 @@
 // Usage: node scripts/test-travel-r7.js            (AFTER fix)
 //        BEFORE=1 node scripts/test-travel-r7.js    (pre-fix HEAD code)
 //        SEED=999 node scripts/test-travel-r7.js   (seed override)
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const K = require('./godpath/lib');
+const fs = require('fs'), path = require('path');
 const ROOT = path.join(__dirname, '..');
-const BEFORE = !!process.env.BEFORE;
-let gameSrc;
-if (BEFORE) {
-  execSync('git show HEAD:src/js/game.js > /tmp/bt7-game-before.js', { cwd: ROOT });
-  gameSrc = fs.readFileSync('/tmp/bt7-game-before.js', 'utf8');
-  console.log('MODE: BEFORE (pre-fix game.js from git HEAD)');
-} else {
-  gameSrc = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
-  console.log('MODE: AFTER (fixed worktree code)');
-}
-const PAIRS = [
-  ['plants.json', 'plants'], ['biomes.json', 'biomes'], ['monsters.json', 'monsters'],
-  ['villagers.json', 'villagers'], ['abilities.json', 'abilities'], ['items.json', 'items'],
-  ['background_survivors.json', 'background_survivors'], ['cell_defs.json', 'cellDefs'],
-  ['animals.json', 'animals'], ['recipes.json', 'recipes'], ['books.json', 'books'],
-  ['relicEnhancements.json', 'relicEnhancements'], ['locations.json', 'locations'],
-  ['characterGen.json', 'characterGen'], ['synergies.json', 'synergies'],
-  ['knowledge.json', 'knowledge'], ['nameCultures.json', 'nameCultures'],
-  ['originPicker.json', 'originPicker'], ['foreignSpeech.json', 'foreignSpeech'],
-  ['lifeseeds.json', 'lifeseeds'], ['arrivalText.json', 'arrivalText'],
-  ['justiceVoice.json', 'justiceVoice'], ['alienPlayers.json', 'alienPlayers'],
-  ['regions.json', 'regions'], 
-  ['monsterBehaviors.json', 'monsterBehaviors'], ['contests.json', 'contests'],
-  ['events.json', 'events'], ['statusEffects.json', 'statusEffects'],
-];
-global.SCATTER_DATA = {};
-for (const [f, key] of PAIRS) {
-  global.SCATTER_DATA[key] = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8'));
-}
-// SEED BEFORE EVAL: modules capture Math.random at load (AGENTS.md).
-let _seed = 7;
 const SEED = parseInt(process.env.SEED || '7', 10);
-function rng() { _seed = (_seed * 1103515245 + 12345) % 2147483648; return _seed / 2147483648; }
-rng.reset = (s) => { _seed = (s === undefined ? SEED : s); };
-rng.reset();
-Math.random = rng;
-global.window = global;
-const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'engine/day.js',
-  'engine/forage.js', 'engine/combat.js', '__GAME__', 'encounters.js', 'conversation.js',
-  'convo-mood.js', 'convoTopics.js', 'convo-wants.js', 'convo-dialogue.js', 'convo-beats.js',
-  'convo-scene.js', 'examine.js', 'equipment.js', 'journal.js', 'party.js', 'party-formal.js',
-  'truth.js', 'contests.js', 'contestEngine.js', 'alienPlayers.js', 'storage.js', 'perceive.js',
-  'carexplore.js', 'justice.js', 'food.js', 'betrayal.js', 'corpses.js', 'lifeseed.js',
-  'progression.js', 'ledger.js', 'abilityActions.js', 'monsterBehaviors.js', 'statusEffects.js',
-  'villager-agency.js', 'fieldFights.js', 'villager-objectives.js', 'codex-people.js',
-  'membership.js', 'hierarchy.js', 'debug-scenarios.js', 'build.js'];
-for (const f of LIST) {
-  const src = f === '__GAME__' ? gameSrc : fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8');
-  try { eval(src); }
-  catch (e) { console.error('EVAL FAIL ' + f + ': ' + e.message); process.exit(2); }
-}
-delete global.window;
-const Game = globalThis.Scattering.Game;
-Game.data = global.SCATTER_DATA;
+const BEFORE = !!process.env.BEFORE;
+if (BEFORE) throw new Error('Run this shared-harness test in the actual frozen baseline checkout; HEAD is not a historical before fixture.');
+(async () => {
+const Game = await K.load({seed:SEED,narration:true});
 const oCE = Game.checkEncounter, oCA = Game.checkAnimals;
 Game.checkEncounter = () => {};
 Game.checkAnimals = () => {};
@@ -90,7 +40,6 @@ function ok(name, cond, detail) {
   else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); }
 }
 function setup() {
-  rng.reset();
   Game.tbfight = null;
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -198,7 +147,21 @@ function npcAvg(field) {
 // ---- T3a. EXPLOIT: arrival animal-spawn farming ----
 {
   setup();
-  Game.checkEncounter = () => {}; Game.checkAnimals = oCA; // live animals only
+  Game.checkEncounter = () => {};
+  const debits = [];
+  // Observe the real spawn boundary: re-seeing a parked animal is not a
+  // second animal, and paid travel can cross a dawn with real ecology.
+  Game.checkAnimals = function () {
+    const tile = this.playerTile(), before = {...(tile.wildlife || {})};
+    const prior = this.state.scholar.animal;
+    const result = oCA.apply(this, arguments), animal = this.state.scholar.animal;
+    const changes = Object.keys({...before,...tile.wildlife}).filter(id => (before[id] || 0) !== (tile.wildlife[id] || 0));
+    const spawned = !prior && !!animal;
+    debits.push({spawned, id:animal && animal.id, changes, exact:spawned
+      ? changes.length === 1 && changes[0] === animal.id && before[animal.id] - tile.wildlife[animal.id] === 1
+      : changes.length === 0});
+    return result;
+  };
   const A = adjUnblocked();
   ok('T3a setup: tile A', !!A);
   Game.travelTo(A.x, A.y);
@@ -218,7 +181,8 @@ function npcAvg(field) {
   }
   const pop1 = pop(A) + pop(B);
   console.log(`  [info] T3a: ${spawns} animal spawns over 30 arrivals, wildlife pop ${pop0}->${pop1}`);
-  ok('T3a: animal spawns bounded by local populations (no thin-air farm)', spawns <= pop0 + 2, `spawns=${spawns} pop0=${pop0}`);
+  ok('T3a: live spawn boundaries were observed', debits.length > 0 && debits.some(r => r.spawned));
+  ok('T3a: every actual new animal debits exactly its local species once; parked returns debit nothing', debits.every(r => r.exact), JSON.stringify(debits.filter(r => !r.exact)));
   ok('T3a: wildlife populations never go negative', pop1 >= 0, `pop1=${pop1}`);
   Game.checkAnimals = () => {};
   Game.tbfight = null;
@@ -377,3 +341,5 @@ function npcAvg(field) {
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
+
+})().catch(e => { console.error(e.stack); process.exitCode=1; });

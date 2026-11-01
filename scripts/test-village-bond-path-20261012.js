@@ -26,9 +26,20 @@ function vids(Game, n) {
 // Big bruiser: hopeless trajectory by round 2, but fighter and ally live to see it.
 const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], name: 'slam' }, speed: 3, wave: 1 };
 
+const CASE = Number(process.env.BOND_CASE || 0);
+const {spawnSync} = require('child_process');
 (async () => {
+  if (!CASE) {
+    for (let testCase=1;testCase<=9;testCase++) {
+      const child=spawnSync(process.execPath,[__filename],{encoding:'utf8',env:{...process.env,BOND_CASE:String(testCase)},maxBuffer:8*1024*1024});
+      process.stdout.write(child.stdout || '');process.stderr.write(child.stderr || '');
+      ok('isolated scenario ' + testCase,child.status===0,child.error && child.error.message);
+    }
+    process.exit(fail ? 1 : 0);
+  }
+
   // ---------- 1. godhoods stay out of it ----------
-  {
+  if (CASE === 1) {
     const Game = await freshGame(SEED);
     Game.state.scholar.godhood = { active: ['undying_ward'] };
     ok('ward ascension -> pathAnchor 0', Game.pathAnchor() === 0);
@@ -39,7 +50,7 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 2. completing the path grants the pool ----------
-  {
+  if (CASE === 2) {
     const Game = await freshGame(SEED + 1);
     const [a] = vids(Game, 1);
     Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
@@ -62,7 +73,7 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 3. the pool bonus flows into real combat ----------
-  {
+  if (CASE === 3) {
     const Game = await freshGame(SEED + 2);
     const [a, b] = vids(Game, 2);
     Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
@@ -80,7 +91,7 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 4. death dips the pool proportionally ----------
-  {
+  if (CASE === 4) {
     const Game = await freshGame(SEED + 3);
     Game.state.village.villageBond = 100;
     Game.noteVillageBondGrief();
@@ -89,7 +100,7 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 5. the path is genuinely completable by villagers ----------
-  {
+  if (CASE === 5) {
     const Game = await freshGame(SEED + 4);
     const [a, b] = vids(Game, 2);
     Game.state.systemArrived = true;
@@ -111,6 +122,8 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
     Game.noteShieldbearerOffer(a);
     ok('bond 50 -> bodyguard follows', Game.npcHasAbility(a, 'bodyguard'), 'held=' + owned().join(','));
     ok('skill-lane shieldbearer abilities take no villager slot', ((Game.state.village.npcAbilities || {})[a] || []).indexOf('draw_fire') < 0);
+  }
+  if (CASE === 9) {
     // before the System's arrival
     // DESIGN CHANGE (Steve 2026-10-14: "Human skills should be learnable
     // before the system shows up"): the shieldbearer entries are skill-lane,
@@ -129,23 +142,30 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 6. rally: hold for them, once per fight ----------
-  {
+  if (CASE === 6) {
     const Game = await freshGame(SEED + 5);
     const [a, b] = vids(Game, 2);
     Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
     Game.state.village.npcAbilities[a] = ['rally'];
+    // Prepared unarmored pair: current starter armor otherwise makes this
+    // trajectory winnable, so there is no legitimate Rally opportunity.
+    for (const id of [a,b]) {
+      const person = Game.getPerson(id);
+      person.items = []; person.stashed = []; person.equipped = {};
+    }
     Game.state.village.health = Game.state.village.health || {};
     Game.state.village.health[a] = 100; Game.state.village.health[b] = 100;
     const rec = Game.fieldFight(a, BRUISER, null, {
       allies: 1, allyVids: [b], allyFromStart: true, rng: () => 0.5, // 0.5: the ally isn't hit every round, lives to the hopeless round
     });
     const rallies = rec.log.filter(l => /\(Rally\)/.test(l)).length;
+    ok('prepared trajectory actually becomes hopeless while help lives', rec.everHopeless === true);
     ok('rally fires on the hopeless round', rallies === 1, 'rallies=' + rallies + ' outcome=' + rec.outcome + ' rounds=' + rec.rounds);
     ok('held that round, decided honestly after (rounds>=3)', (rec.rounds || 0) >= 3, 'rounds=' + rec.rounds);
   }
 
   // ---------- 7. stand_together capstone: the pool grows twice as fast ----------
-  {
+  if (CASE === 7) {
     const Game = await freshGame(SEED + 6);
     const [a] = vids(Game, 1);
     Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
@@ -162,7 +182,7 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 8. RED: without the path, nothing flows ----------
-  {
+  if (CASE === 8) {
     const Game = await freshGame(SEED + 7);
     const [a] = vids(Game, 1);
     Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};

@@ -1,307 +1,54 @@
 #!/usr/bin/env node
-// test-inffight-class-20261014.js — PROOF for finding #108 (longsim
-// scale-wall r24 arm 2, game-code): the GENERAL whiff-forever guard.
-//
-// The blank (s44, evidence/2026-10-14/sim-succession.md): baseline s44
-// (leadcourt+FOURTHLINK, seed 44, 180d runDays) stalls ~day 60 in a
-// turn-based fight vs The Focus Group at round 1M+, over=false. Mechanism:
-// the competent policy strikes the weakest (1-HP eye-heads) -> sigW3a
-// interception consumes the turn with ZERO damage; the lead's Deliberation
-// (self-centered r1 burst, anchor-centered on a 2x2 body) can't reach the
-// edge-pinned scholar at range 2 -> ZERO damage; the boredom walkout needs
-// 3 boring rounds but 'strike' resets it every round. HP/position churn
-// defeats the harness's hp@pos no-progress signature, and the time-freeze
-// watchdog never gets its 8 loop-days: each loop-day grinds ~240k rounds
-// through driveContests' 400-iteration loop (~75s/loop-day -> ~10 min fuse).
-//
-// The fix (game.js tbRoundWrap): a GENERAL engine-class guard — no monster
-// ids, no telegraph names. If NOBODY loses HP for 120 consecutive rounds,
-// the fight COMES APART via the existing honest-disengage idiom (tbEndCheck:
-// "It comes apart — no one in reach, no one chasing..."), never a silent
-// kill, never a free win. WHIFFGUARD=0 disables (RED).
-//
-// Scenarios:
-//   R1 (WHIFFGUARD=0): the whiff duel must STALL (round cap hit, over=false,
-//      zero damage after the opening exchange). Proves the test sees the bug.
-//   G1 (guard on): same duel must RESOLVE honestly — over=true, 'routed',
-//      the "comes apart" line said, lead unharmed past the opening (no free
-//      win), scholar alive, zero kills paid, within a sane round budget.
-//   G2 (battery): honest duels (damage flows) resolve BYTE-IDENTICALLY with
-//      the guard on vs off — the guard fires only on true whiff-forever.
-//   G3 (sense): the "comes apart" narration collected from G1 must read as
-//      an honest fizzle, not an engine trick.
-//
-// Usage: node scripts/test-inffight-class-20261014.js        (GREEN)
-//        WHIFFGUARD=0 node scripts/test-inffight-class-20261014.js  (RED: R1 must STALL, G1 must FAIL)
 'use strict';
-const { loadGame, setupGame, quietLog } = require('./sim-harness');
-
-let pass = 0, fail = 0;
-function ok(name, cond, extra) {
-  if (cond) { pass++; }
-  else { fail++; console.log('FAIL ' + name + (extra ? ' -- ' + extra : '')); }
+// One shared seeded runtime per child. Real terrain makes the whiff class;
+// explicit on/off cases retain the 3,000-turn control without private inputs.
+const H=require('./policies/human-combat'),K=require('./godpath/lib'),a=require('assert/strict'),cp=require('child_process'),crypto=require('crypto');
+const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
+async function duel(id,mode){
+ if(mode==='off')process.env.WHIFFGUARD='0';else delete process.env.WHIFFGUARD;
+ const G=await K.load({seed:44,narration:true}),s=K.newRun(G),bearer=G.villagerId,wall=id==='wall-hushwolf',whiff=wall||id==='focus_group';
+ s.equipped={};if(!wall){const def=K.readJSON('src/data/items.json').find(x=>x.id==='fire_hardened_spear');s.inventory.push({itemId:def.id,name:def.name,units:1,kg:def.kg});G.equip(s.inventory.length-1,'weapon');a.equal(G.equippedWeapon().itemId,def.id);}
+ const grid=G.genDetail(G.map.px,G.map.py);for(const row of grid)row.fill('dirt');if(wall)for(let y=0;y<grid.length;y++)grid[y][4]='wall';
+ const pos=wall?{px:1,py:4,mx:6,my:4}:id==='focus_group'?{px:8,py:2,mx:6,my:1}:{px:4,py:4,mx:6,my:4};
+ const monster=K.fight(G,wall?'hushwolf':id,pos),f=G.tbfight,p=G.tbFighter('p');a(monster&&f&&p);const monsters=f.fighters.filter(x=>x.kind==='monster'),startHp=p.hp,startMonsters=monsters.map(x=>({key:x.key,hp:x.hp})),wins=G.state.combatWins||0,killCount=(G.state.waveKillLog||[]).length,hits=[];
+ const damage=G.tbDamage;G.tbDamage=function(key,...args){const target=f.fighters.find(x=>x.key===key),before=target?.hp,result=damage.call(this,key,...args);if(target&&before>target.hp)hits.push({key,debit:before-target.hp});return result;};
+ const limit=whiff?(mode==='off'?3000:600):500;let calls=0,opening=null;
+ while(G.tbfight===f&&!f.over&&!G.over&&p.alive&&G.villagerId===bearer&&calls<limit){
+  a(G.tbIsPlayerTurn(),'Synchronous engine must return the original player turn');
+  const token=H.token(G,f);const target=f.fighters.filter(x=>x.kind==='monster'&&x.alive&&!x.fled).sort((a,b)=>a.hp-b.hp)[0];if(target)G.tbPlayerStrike(target.key);
+  if(H.sameTurn(G,f,p,token))G.tbPlayerWait();calls++;
+  if(!opening&&f.round>=5)opening={hp:p.hp,monsters:monsters.map(x=>({key:x.key,hp:x.hp})),hitCount:hits.length};
+ }
+ const endMonsters=monsters.map(x=>({key:x.key,hp:x.hp,alive:x.alive,fled:!!x.fled})),guardLine=G.log.map(String).find(x=>x.includes('comes apart'))||'';
+ const outcome={calls,round:f.round,result:f.result,over:f.over,playerHp:p.hp,playerAlive:p.alive,sameBearer:G.villagerId===bearer,monsters:endMonsters,hits,wins:[wins,G.state.combatWins||0],kills:(G.state.waveKillLog||[]).slice(killCount),gameOver:!!G.over,lines:G.log.map(String),stateHash:hash(G.state)};
+ return{id,actualMonster:monster.mdef.id,mode,opening,guardOn:G.tbWhiffGuardOn(),fired:!!f._whiffFired,whiffs:f._whiffRounds,startHp,startMonsters,guardLine,wall:whiff&&grid.every(row=>!!G.cellProps(row[4]).blocks),sameScholar:G.state.scholar===s,synchronized:G.villagerId===bearer&&s.health===p.hp,solo:f.fighters.filter(x=>x.kind!=='monster').length===1,outcome,nextRandom:Math.random()};
 }
-
-const GUARD_ON = process.env.WHIFFGUARD !== '0';
-const STALL_CAP = 3000;    // RED must hit this with over=false
-const RESOLVE_BUDGET = 600; // GREEN must resolve well under this (120 whiff + opening)
-
-function giveWeapon(Game, itemId) {
-  const s = Game.state.scholar;
-  const def = Game.data.items.find(i => i.id === itemId);
-  s.inventory = s.inventory || [];
-  s.inventory.push({ itemId, name: def.name, units: 1 });
-  s.equipped = s.equipped || {};
-  s.equipped.weapon = { itemId, name: def.name };
+if(process.argv[2]==='--child')duel(process.argv[3],process.argv[4]).then(r=>console.log('WHIFF_RESULT '+JSON.stringify(r))).catch(e=>{console.error(e.stack);process.exitCode=1;});
+else{
+ const T=K.reporter('General no-damage combat guard'),read=(id,mode)=>{const r=cp.spawnSync(process.execPath,[__filename,'--child',id,mode],{cwd:K.ROOT,encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024});a.equal(r.status,0,r.stderr+'\n'+r.stdout);const lines=r.stdout.split('\n').filter(x=>x.startsWith('WHIFF_RESULT '));a.equal(lines.length,1);const row=JSON.parse(lines[0].slice(13));a.equal(row.actualMonster,id==='wall-hushwolf'?'hushwolf':id,'Actual encounter species must match preparation');return row;};
+ const on=read('wall-hushwolf','on'),off=read('wall-hushwolf','off');console.log(JSON.stringify({on,off}));
+ T.ok('real full-height terrain wall separates both actors',on.wall&&off.wall&&on.solo&&off.solo);
+ T.ok('default-on guard resolves at120 harmless public turns within600 budget',on.guardOn&&on.fired&&on.whiffs===120&&on.outcome.calls===120&&on.outcome.over&&on.outcome.result==='routed');
+ T.ok('disabled control remains a live stall through3000 public turns',!off.guardOn&&!off.fired&&off.outcome.calls===3000&&!off.outcome.over&&off.outcome.result===null);
+ for(const r of [on,off]){
+  T.ok(r.mode+': original bearer lives at unchanged synchronized HP',r.sameScholar&&r.synchronized&&r.outcome.sameBearer&&r.outcome.playerAlive&&r.outcome.playerHp===r.startHp&&r.outcome.hits.length===0);
+  T.ok(r.mode+': every monster retains its actual initial HP',r.outcome.monsters.length===r.startMonsters.length&&r.outcome.monsters.every((m,i)=>m.alive&&m.hp===r.startMonsters[i].hp));
+  T.ok(r.mode+': no free kill or combat win',r.outcome.wins[0]===r.outcome.wins[1]&&r.outcome.kills.length===0);
+ }
+ T.ok('only resolved guard scatters living monsters',on.outcome.monsters.every(m=>m.fled)&&off.outcome.monsters.every(m=>!m.fled));
+ T.ok('honest disengagement names reach, pursuit and where they go',/no one in reach, no one chasing/.test(on.guardLine)&&/melt back into the wilds/.test(on.guardLine));
+ T.ok('disengagement invents no victory or kill',!/WINNER|trophy|slain/i.test(on.guardLine)&&off.guardLine==='');
+ const fx=read('focus_group','on'),fy=read('focus_group','off');console.log(JSON.stringify({focusOn:fx,focusOff:fy}));
+ T.ok('Focus Group original geometry actually disengages under the guard',fx.fired&&fx.whiffs===120&&fx.outcome.over&&fx.outcome.result==='routed'&&fx.outcome.calls<600);
+ T.ok('Focus Group disabled control remains live through3000 original turns',!fy.fired&&!fy.outcome.over&&fy.outcome.calls===3000);
+ for(const r of [fx,fy]){T.ok('Focus '+r.mode+': original bearer survives opening and subsequent whiff',r.opening&&r.sameScholar&&r.synchronized&&r.outcome.sameBearer&&r.outcome.playerAlive&&r.outcome.playerHp===r.opening.hp);T.ok('Focus '+r.mode+': no damage past the actual opening',r.opening&&r.outcome.hits.length===r.opening.hitCount&&r.outcome.monsters.every(m=>m.alive&&m.hp===r.opening.monsters.find(x=>x.key===m.key)?.hp));T.ok('Focus '+r.mode+': no free kill or combat win',r.outcome.kills.length===0&&r.outcome.wins[0]===r.outcome.wins[1]);}
+ T.ok('Focus guard uses the honest no-victory resolution',fx.guardLine===on.guardLine&&fy.guardLine==='');
+ for(const id of ['bulldozer','hushwolf','mirror_stag']){
+  const x=read(id,'on'),y=read(id,'off');console.log(JSON.stringify({id,on:x,off:y}));
+  T.ok(id+': both real damaging duels actually resolve',x.outcome.over&&y.outcome.over&&x.outcome.calls<500&&y.outcome.calls<500&&x.outcome.hits.length>0&&y.outcome.hits.length>0);
+  T.ok(id+': guard never turns actual damage into disengagement',!x.fired&&!y.fired&&x.guardLine===''&&y.guardLine==='');
+  T.ok(id+': on/off outcomes, all actual hits, narration and full state match',JSON.stringify(x.outcome)===JSON.stringify(y.outcome));
+  T.ok(id+': no hidden RNG change',x.nextRandom===y.nextRandom);
+ }
+ T.done();
 }
-
-// The s44 whiff geometry, deterministically: scholar pinned at the grid edge
-// (8,2); the Focus Group lead's 2x2 body anchored at (6,1) cannot close
-// further; Deliberation (self-centered r1, anchor-centered) misses forever;
-// the scholar strikes weakest (eye-heads -> interception, 0 damage).
-async function newWhiffGame(seed) {
-  const { Game } = await loadGame({ seed, mode: 'inffight-class-whiff' });
-  await setupGame(Game);
-  const s = Game.state.scholar;
-  s.health = 100;
-  giveWeapon(Game, 'fire_hardened_spear');
-  try {
-    for (const rid of Object.keys((Game.state.village || {}).positions || {})) {
-      Game.state.village.positions[rid] = { mx: 0, my: 0 };
-    }
-  } catch (e) {}
-  Game.dayPart = 3;
-  Game.genDetail = function () { return Array.from({ length: 9 }, () => Array(9).fill('grass')); };
-  s.mx = 8; s.my = 2;
-  s.monster = { id: 'focus_group', mx: 6, my: 1 };
-  await quietLog(async () => { Game.startCombat('focus_group'); });
-  if (!Game.tbfight) throw new Error('no fight started');
-  const p0 = Game.tbFighter('p');
-  if (p0) { p0.mx = 8; p0.my = 2; p0.hp = 100; p0.maxHp = 100; }
-  const lead = Game.tbfight.fighters.find(x => x.kind === 'monster' && x.mdef && x.mdef.id === 'focus_group');
-  if (lead) { lead.mx = 6; lead.my = 1; }
-  return Game;
-}
-
-// strike-weakest: the competent policy's honest targeting (competent.js).
-function strikeWeakest(Game) {
-  const f = Game.tbfight;
-  if (!f || f.over || !Game.tbIsPlayerTurn()) return false;
-  const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
-  if (!alive.length) return false;
-  alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
-  try { return !!Game.tbPlayerStrike(alive[0].key); } catch (e) { return false; }
-}
-
-// Drive a duel; returns telemetry. Captures say() lines for the sense check.
-async function duel(Game, playerFn, roundCap) {
-  const tele = { maxRound: 0, endResult: null, iters: 0, said: [] };
-  const leadOf = () => Game.tbfight ? Game.tbfight.fighters.find(x => x.kind === 'monster' && x.mdef && x.mdef.id === 'focus_group') : null;
-  const l0 = leadOf();
-  if (l0) tele.leadHp0 = Math.round(l0.hp);
-  const p0 = Game.tbFighter('p');
-  if (p0) tele.scholarHp0 = Math.round(p0.hp);
-  tele.combatWins0 = Game.state.combatWins || 0;
-  const origSay = Game.say.bind(Game);
-  Game.say = function (msg) { try { tele.said.push(String(msg)); } catch (e) {} return origSay(msg); };
-  const origEnd = Game.tbEnd.bind(Game);
-  Game.tbEnd = function (res) {
-    tele.endResult = res;
-    try {
-      const ld = leadOf();
-      tele.leadHp = ld ? Math.round(ld.hp) : tele.leadHp;
-      tele.leadAlive = ld ? !!ld.alive : tele.leadAlive;
-      const p = Game.tbFighter('p');
-      tele.scholarHp = p ? Math.round(p.hp) : tele.scholarHp;
-      tele.scholarAlive = p ? !!p.alive : tele.scholarAlive;
-    } catch (e) {}
-    return origEnd(res);
-  };
-  try {
-    await quietLog(async () => {
-      while (Game.tbfight && !Game.tbfight.over && tele.iters++ < 400000) {
-        const cur = Game.tbCurrent();
-        if (!cur) break;
-        if (cur.kind === 'player') {
-          playerFn(Game);
-          if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
-            try { const p = Game.tbFighter('p'); p.moveLeft = 0; p.acted = true; Game.tbAfterPlayerAction(); }
-            catch (e) { break; }
-          }
-        } else { try { Game.tbAdvance(); } catch (e) { break; } }
-        const f = Game.tbfight;
-        if (!f || f.over) break;
-        tele.maxRound = Math.max(tele.maxRound, f.round);
-        // HP at the end of the opening (round 5): what the lead keeps from here on
-        // is the "unharmed past the opening" measure (seed-independent).
-        if (f.round >= 5 && tele.leadHpOpen == null) { const ld = leadOf(); if (ld) tele.leadHpOpen = Math.round(ld.hp); }
-        if (f.round >= (roundCap || STALL_CAP)) break;
-        if (Game.over) break;
-      }
-    });
-  } finally {
-    Game.say = origSay;
-    Game.tbEnd = origEnd;
-  }
-  const f = Game.tbfight;
-  tele.over = !f || !!f.over;
-  // Prefer end-of-fight captures (tbEnd wrapper) — tbfight is nulled after.
-  if (tele.leadHp == null) {
-    const lead = leadOf();
-    tele.leadHp = lead ? Math.round(lead.hp) : null;
-    tele.leadAlive = lead ? !!lead.alive : null;
-  }
-  if (tele.scholarHp == null) {
-    const p = Game.tbFighter('p');
-    tele.scholarHp = p ? Math.round(p.hp) : null;
-    tele.scholarAlive = p ? !!p.alive : null;
-  }
-  tele.combatWins = Game.state.combatWins || 0;
-  tele.comesApart = tele.said.some(s => /comes apart — no one in reach/.test(s));
-  return tele;
-}
-
-// An honest duel vs a straightforward damage-dealing monster. Returns a
-// compact outcome tuple for byte-identical comparison.
-async function honestDuel(monId, seed) {
-  const { Game } = await loadGame({ seed, mode: 'inffight-class-honest' });
-  await setupGame(Game);
-  const s = Game.state.scholar;
-  s.health = 100;
-  giveWeapon(Game, 'fire_hardened_spear');
-  try {
-    for (const rid of Object.keys((Game.state.village || {}).positions || {})) {
-      Game.state.village.positions[rid] = { mx: 0, my: 0 };
-    }
-  } catch (e) {}
-  Game.dayPart = 3;
-  Game.genDetail = function () { return Array.from({ length: 9 }, () => Array(9).fill('grass')); };
-  s.mx = 4; s.my = 4;
-  s.monster = { id: monId, mx: 6, my: 4 };
-  await quietLog(async () => { Game.startCombat(monId); });
-  if (!Game.tbfight) throw new Error('no fight for ' + monId);
-  const strikeIt = (G) => {
-    const f = G.tbfight;
-    if (!f || f.over || !G.tbIsPlayerTurn()) return false;
-    const m = f.fighters.find(x => x.kind === 'monster' && x.alive && !x.fled);
-    if (!m) return false;
-    try { return !!G.tbPlayerStrike(m.key); } catch (e) { return false; }
-  };
-  let iters = 0, maxRound = 0, endResult = null, endPhp = null, endMhp = null;
-  const origEnd = Game.tbEnd.bind(Game);
-  Game.tbEnd = function (res) {
-    endResult = res;
-    try {
-      const p = Game.tbFighter('p');
-      endPhp = p ? Math.round(p.hp) : null;
-      const m = Game.tbfight ? Game.tbfight.fighters.find(x => x.kind === 'monster') : null;
-      endMhp = m ? Math.round(m.hp) : null;
-    } catch (e) {}
-    return origEnd(res);
-  };
-  try {
-    await quietLog(async () => {
-      while (Game.tbfight && !Game.tbfight.over && iters++ < 100000) {
-        const cur = Game.tbCurrent();
-        if (!cur) break;
-        if (cur.kind === 'player') {
-          strikeIt(Game);
-          if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
-            try { const p = Game.tbFighter('p'); p.moveLeft = 0; p.acted = true; Game.tbAfterPlayerAction(); }
-            catch (e) { break; }
-          }
-        } else { try { Game.tbAdvance(); } catch (e) { break; } }
-        const f = Game.tbfight;
-        if (!f || f.over) break;
-        maxRound = Math.max(maxRound, f.round);
-        if (Game.over) break;
-      }
-    });
-  } finally { Game.tbEnd = origEnd; }
-  const p = Game.tbFighter('p');
-  const m = Game.tbfight ? Game.tbfight.fighters.find(x => x.kind === 'monster') : null;
-  return {
-    over: !Game.tbfight || !!Game.tbfight.over,
-    result: endResult,
-    rounds: maxRound,
-    php: endPhp != null ? endPhp : (p ? Math.round(p.hp) : null),
-    mhp: endMhp != null ? endMhp : (m ? Math.round(m.hp) : null),
-    mdead: m ? !m.alive : null,
-  };
-}
-
-(async () => {
-  console.log(`inffight-class proof: WHIFFGUARD=${GUARD_ON ? '1 (guard ON)' : '0 (RED)'}`);
-
-  // R1: the whiff-forever stall reproduces with the guard disabled.
-  {
-    const Game = await newWhiffGame(44);
-    const t = await duel(Game, strikeWeakest, STALL_CAP);
-    console.log(`R1: maxRound=${t.maxRound} over=${t.over} leadHp=${t.leadHp} (was ${t.leadHp0}) scholarHp=${t.scholarHp} (was ${t.scholarHp0})`);
-    if (!GUARD_ON) {
-      ok('R1 stall: round cap hit', t.maxRound >= STALL_CAP, 'maxRound=' + t.maxRound);
-      ok('R1 stall: fight never ends', t.over === false, 'over=' + t.over);
-      ok('R1 stall: no damage after the opening exchange (lead frozen)',
-        t.leadHp != null && t.leadHp0 != null && (t.leadHp0 - t.leadHp) <= 30, `lead ${t.leadHp0} -> ${t.leadHp}`);
-      ok('R1 stall: scholar takes no damage in the whiff', t.scholarHp === t.scholarHp0, `scholar ${t.scholarHp0} -> ${t.scholarHp}`);
-    } else {
-      console.log('R1 skipped (guard ON — stall should be gone; see G1)');
-    }
-  }
-
-  // G1: the same duel resolves HONESTLY with the guard on.
-  {
-    const Game = await newWhiffGame(44);
-    const t = await duel(Game, strikeWeakest, STALL_CAP);
-    console.log(`G1: over=${t.over} result=${t.endResult} maxRound=${t.maxRound} leadHp=${t.leadHp} (was ${t.leadHp0}) scholarHp=${t.scholarHp} comesApart=${t.comesApart}`);
-    if (GUARD_ON) {
-      ok('G1 resolves: fight ends', t.over === true, 'over=' + t.over + ' maxRound=' + t.maxRound);
-      ok('G1 resolves: within sane budget (120 whiff rounds + opening)', t.maxRound < RESOLVE_BUDGET, 'maxRound=' + t.maxRound);
-      ok('G1 honest: the fight comes apart (existing idiom)', t.endResult === 'routed' && t.comesApart === true,
-        `result=${t.endResult} comesApart=${t.comesApart}`);
-      ok('G1 honest: no free win — the lead survives unharmed past the opening',
-        // origins-world 2026-10-14: the old proxy (total damage <= 30) sat on
-        // seed luck (28 before, 34 after a roster reroll). Measured directly
-        // now: no damage at all after the opening rounds.
-        t.leadAlive === true && t.leadHp != null && t.leadHpOpen != null && t.leadHp === t.leadHpOpen,
-        `lead alive=${t.leadAlive} ${t.leadHp0} -> ${t.leadHpOpen} (round 5) -> ${t.leadHp}`);
-      ok('G1 honest: the scholar lives', t.scholarAlive === true, `scholarHp=${t.scholarHp}`);
-      ok('G1 honest: no kill paid (combatWins unchanged)', t.combatWins === t.combatWins0,
-        `wins ${t.combatWins0} -> ${t.combatWins}`);
-    } else {
-      console.log('G1 expected to FAIL on RED (stall) — guard OFF');
-      ok('G1 RED check: stall present', t.over === false);
-    }
-  }
-
-  // G2: battery — honest duels resolve byte-identically with the guard on/off.
-  {
-    const mons = ['bulldozer', 'hushwolf', 'mirror_stag'];
-    for (const mid of mons) {
-      const a = await honestDuel(mid, 44); // guard state per env; run twice via env
-      console.log(`G2 ${mid}: over=${a.over} result=${a.result} rounds=${a.rounds} php=${a.php} mhp=${a.mhp} mdead=${a.mdead}`);
-      // The byte-identical check runs across the two env invocations; here we
-      // assert the duel is honest (damage flowed and it resolved).
-      ok(`G2 ${mid}: honest duel resolves`, a.over === true, `over=${a.over} rounds=${a.rounds}`);
-      ok(`G2 ${mid}: damage flowed (guard must not fire)`, a.rounds < 500, `rounds=${a.rounds}`);
-    }
-  }
-
-  // G3: sense — the "comes apart" narration reads honestly.
-  {
-    const Game = await newWhiffGame(44);
-    const t = await duel(Game, strikeWeakest, STALL_CAP);
-    const line = t.said.find(s => /comes apart/.test(s)) || '';
-    console.log(`G3 line: ${line.slice(0, 160)}`);
-    if (GUARD_ON) {
-      ok('G3 sense: the line names what happened (no one in reach, no one chasing)', /no one in reach, no one chasing/.test(line), line.slice(0, 80));
-      ok('G3 sense: the line says where they go (melt back into the wilds)', /melt back into the wilds/.test(line), line.slice(0, 80));
-      ok('G3 sense: no kill language, no victory language', !/WINNER|trophy|slain/i.test(line), line.slice(0, 80));
-    } else {
-      console.log('G3 skipped on RED (no resolution, no line)');
-    }
-  }
-
-  console.log(`\n${pass} passed, ${fail} failed`);
-  process.exit(fail ? 1 : 0);
-})().catch(e => { console.error('FATAL', e); process.exit(1); });

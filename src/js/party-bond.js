@@ -20,6 +20,7 @@
 (function (global) {
   'use strict';
   const S = global.Scattering;
+  // Game is exported on Scattering; a bare Game global existed only in old sims.
 
   // Outdoor tasks — the ones that put villagers in the treeline.
   // Mirrors the _outdoorCrew filter in game.js resolveAssignments.
@@ -47,14 +48,14 @@
   // warmth lingers as memory, the combat edge dies with its pair and must
   // be re-earned.
   function pairKey(a, b) {
-    var g = global.Game;
+    var g = S.Game;
     if (g && g.bondKey) { try { return g.bondKey(a, b); } catch (e) {} }
     return a < b ? a + '|' + b : b + '|' + a;
   }
 
   function combatBondGet(a, b) {
     if (!a || !b || a === b) return 0;
-    var g = global.Game;
+    var g = S.Game;
     var v = (g && g.state && g.state.village) || {};
     var bnd = (v.bonds || {})[pairKey(a, b)];
     return Math.max(0, Math.min(100, (bnd && bnd.combat) || 0));
@@ -62,7 +63,7 @@
 
   function firstName(vid) {
     try {
-      var g = global.Game;
+      var g = S.Game;
       if (g && g.displayName) return String(g.displayName(vid)).split(' ')[0];
     } catch (e) {}
     return 'Someone';
@@ -72,7 +73,7 @@
   // Gossip (rep) and trust move separately, per the existing pattern.
   function combatBondAdd(a, b, n) {
     if (!a || !b || a === b || !n) return combatBondGet(a, b);
-    var g = global.Game;
+    var g = S.Game;
     var v = (g && g.state && g.state.village) || {};
     v.bonds = v.bonds || {};
     var k = pairKey(a, b);
@@ -94,7 +95,7 @@
   function noteSharedFight(vids) {
     vids = (vids || []).filter(Boolean);
     if (vids.length < 2) return;
-    var g = global.Game;
+    var g = S.Game;
     for (var i = 0; i < vids.length; i++) {
       for (var j = i + 1; j < vids.length; j++) {
         combatBondAdd(vids[i], vids[j], 4);
@@ -108,7 +109,7 @@
   // edge must be re-earned). Pairs among the survivors of X's party scale
   // by survivors/party. Grief, not amnesia.
   function noteBondGrief(deadVid, partyVids) {
-    var g = global.Game;
+    var g = S.Game;
     var v = (g && g.state && g.state.village) || {};
     v.bonds = v.bonds || {};
     partyVids = (partyVids || []).filter(function (x) { return x && x !== deadVid; });
@@ -163,7 +164,7 @@
 
   function livingVid(vid) {
     try {
-      var g = global.Game;
+      var g = S.Game;
       if (g && g.vpOf) { var vp = g.vpOf(vid); if (vp && vp.dead) return false; }
     } catch (e) {}
     return true;
@@ -179,7 +180,7 @@
   // 0   — no shieldbearer. The village fights as individuals.
   function pathAnchor() {
     try {
-      var g = global.Game;
+      var g = S.Game;
       if (!g || !g.state) return 0;
       var sch = g.state.scholar || {};
       // An evolved ability counts as its root (evolvedFrom keeps the lineage).
@@ -210,7 +211,7 @@
   // earn nothing.
   function noteShieldbearerOffer(vid) {
     try {
-      var g = global.Game;
+      var g = S.Game;
       if (!g || !g.state || !vid || vid === g.villagerId) return;
       // SKILLS PRE-SYSTEM (Steve 2026-10-14: "Human skills should be
       // learnable before the system shows up"): the path's skill-lane
@@ -268,7 +269,7 @@
   }
 
   function vnameOf(vid) {
-    try { var g = global.Game; if (g && g.displayName) return g.displayName(vid); } catch (e) {}
+    try { var g = S.Game; if (g && g.displayName) return g.displayName(vid); } catch (e) {}
     return 'Someone';
   }
 
@@ -276,7 +277,7 @@
     try {
       var a = pathAnchor();
       if (!a) return 0;
-      var v = (global.Game.state || {}).village || {};
+      var v = (S.Game.state || {}).village || {};
       return a * Math.max(0, Math.min(100, v.villageBond || 0)) * 0.0008;
     } catch (e) { return 0; }
   }
@@ -286,7 +287,7 @@
   // fast. The synergy's discovery copy says exactly this.
   function villageBondGrowth() {
     try {
-      var sch = (global.Game.state || {}).scholar || {};
+      var sch = (S.Game.state || {}).scholar || {};
       if ((sch.synergies || []).indexOf('stand_together') >= 0) return 4;
     } catch (e) {}
     return 2;
@@ -295,17 +296,17 @@
   function noteVillageBondFight() {
     try {
       if (!pathAnchor()) return;
-      var v = global.Game.state.village;
+      var v = S.Game.state.village;
       v.villageBond = Math.max(0, Math.min(100, (v.villageBond || 0) + villageBondGrowth()));
     } catch (e) {}
   }
 
   function noteVillageBondGrief() {
     try {
-      var v = global.Game.state.village;
+      var v = S.Game.state.village;
       if (!v || !(v.villageBond > 0)) return;
       v.villageBond = Math.max(0, Math.round(v.villageBond * 0.9));
-      var g = global.Game;
+      var g = S.Game;
       if (g && g.say) g.say('The village feels it — the bond dips, but holds. They endure together.');
     } catch (e) {}
   }
@@ -313,17 +314,17 @@
   // isNewcomer: arrived within the last 14 days (arrivalTick records arrivedDay).
   function isNewcomer(vid) {
     try {
-      var v = global.Game.state.village || {};
+      var v = S.Game.state.village || {};
       var ad = (v.arrivedDay || {})[vid];
       if (ad == null) return false;
-      var day = (global.Game.state.scholar || {}).day || 0;
+      var day = (S.Game.state.scholar || {}).day || 0;
       return (day - ad) < 14;
     } catch (e) { return false; }
   }
 
   function braveryOf(vid) {
     try {
-      var g = global.Game;
+      var g = S.Game;
       if (g && g.agencyOf) return ((((g.agencyOf(vid) || {}).xp || {})[vid] || {}).bravery || 0);
     } catch (e) {}
     return 0;
@@ -333,7 +334,7 @@
   // the same task. Newcomers walk with someone who's bled before.
   function findVeteranBuddy(vid, task) {
     try {
-      var g = global.Game;
+      var g = S.Game;
       var v = g.state.village || {};
       var asg = v.assignments || {};
       var best = null, bestBrave = 10;
@@ -352,22 +353,22 @@
   // NOTE: bondKey/bondGet/bondAdd are NOT wired here — betrayal.js owns
   // the social pair-bond store and loads after this module. The combat
   // dimension uses its own writer (combatBondAdd) on the same store.
-  if (global.Game) {
-    global.Game.combatBondGet = combatBondGet;
-    global.Game.combatBondAdd = combatBondAdd;
-    global.Game.noteSharedFight = noteSharedFight;
-    global.Game.noteBondGrief = noteBondGrief;
-    global.Game.noteCrewTogether = noteCrewTogether;
-    global.Game.bondCombatBonus = bondCombatBonus;
-    global.Game.pathAnchor = pathAnchor;
-    global.Game.villageBondBonus = villageBondBonus;
-    global.Game.villageBondGrowth = villageBondGrowth;
-    global.Game.noteVillageBondFight = noteVillageBondFight;
-    global.Game.noteVillageBondGrief = noteVillageBondGrief;
-    global.Game.noteShieldbearerOffer = noteShieldbearerOffer;
-    global.Game.isNewcomer = isNewcomer;
-    global.Game.findVeteranBuddy = findVeteranBuddy;
-    global.Game.OUTDOOR_TASKS = OUTDOOR_TASKS;
+  if (S.Game) {
+    S.Game.combatBondGet = combatBondGet;
+    S.Game.combatBondAdd = combatBondAdd;
+    S.Game.noteSharedFight = noteSharedFight;
+    S.Game.noteBondGrief = noteBondGrief;
+    S.Game.noteCrewTogether = noteCrewTogether;
+    S.Game.bondCombatBonus = bondCombatBonus;
+    S.Game.pathAnchor = pathAnchor;
+    S.Game.villageBondBonus = villageBondBonus;
+    S.Game.villageBondGrowth = villageBondGrowth;
+    S.Game.noteVillageBondFight = noteVillageBondFight;
+    S.Game.noteVillageBondGrief = noteVillageBondGrief;
+    S.Game.noteShieldbearerOffer = noteShieldbearerOffer;
+    S.Game.isNewcomer = isNewcomer;
+    S.Game.findVeteranBuddy = findVeteranBuddy;
+    S.Game.OUTDOOR_TASKS = OUTDOOR_TASKS;
   }
 
   S.PartyBond = {

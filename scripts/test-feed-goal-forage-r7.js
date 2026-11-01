@@ -21,20 +21,32 @@
 // Usage: node scripts/test-feed-goal-forage-r7.js   (exit 0 = green)
 'use strict';
 const assert = require('assert');
+const fs = require('fs'), cp = require('child_process');
 const { loadGame, setupGame } = require('./sim-harness');
 
 function countForage(Game, vid, hx, hy, trials) {
   let n = 0;
   for (let i = 0; i < trials; i++) {
-    let o = null;
-    try { o = Game.objPick(vid, hx, hy); } catch (e) { continue; }
+    const o = Game.objPick(vid, hx, hy);
     if (o && o.kind === 'FORAGE') n++;
   }
   return n;
 }
 
 (async () => {
-  const { Game } = await loadGame({ seed: 31337, mode: 'test', fullTelemetry: false });
+  const read = fs.readFileSync;
+  if (process.argv.includes('--without-feed')) fs.readFileSync = function(file, ...args) {
+    let source = read.call(this, file, ...args);
+    if (String(file).replace(/\\/g, '/').endsWith('/src/js/villager-objectives.js')) {
+      const before = String(source), after = before.replace("var feedDrive = (goal === 'feed');", 'var feedDrive = false;');
+      assert.notStrictEqual(before, after, 'remove the actual feed dial');
+      source = typeof source === 'string' ? after : Buffer.from(after);
+    }
+    return source;
+  };
+  let Game;
+  try { ({ Game } = await loadGame({ seed: 31337, mode: 'test', fullTelemetry: false })); }
+  finally { fs.readFileSync = read; }
   await setupGame(Game);
 
   const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
@@ -48,9 +60,15 @@ function countForage(Game, vid, hx, hy, trials) {
   const realPantry = Game.pantryKcalLive.bind(Game);
   const realProfile = Game.npcRangeProfile.bind(Game);
   const realMaxDist = Game.npcMaxDist.bind(Game);
+  const realGear = Game.npcGearPlan.bind(Game), realTrack = Game.villagerNeedTrack.bind(Game);
   let pantryStub = 5000;
   Game.npcNeeds = () => ({ hunger: 20, energy: 80, social: 40 });
   Game.pantryKcalLive = () => pantryStub;
+  // This proof isolates FOOD motivation. Gear procurement and field-study
+  // trips are independently valid even with a full pantry; they must not be
+  // mistaken for the food gate opening. Their coexistence is proved below.
+  Game.npcGearPlan = () => null;
+  Game.villagerNeedTrack = () => null;
 
   const setGoal = (g) => {
     vp.goal = g;
@@ -95,8 +113,39 @@ function countForage(Game, vid, hx, hy, trials) {
   console.log(`full pantry (8000, feed): FORAGE ${feedFull}/200`);
   assert(feedFull === 0, 'feed must not forage into a full pantry');
 
+  Game.npcGearPlan = realGear;
+  // Prepare the stated missing-weapon opportunity. The generated butcher
+  // already owns a crowbar and knife in their PERSONAL stash; that is a
+  // legitimate reason to fetch existing gear instead of crafting another.
+  const person = Game.getPerson(vid), eq = globalThis.Scattering.equipment;
+  assert(person && eq);
+  person.stashed = [...(person.stashed || []), 'stone_knife'];
+  assert.strictEqual(realGear(vid), null, 'own stashed knife removes the crafting need');
+  const isWeapon = item => Game.data.items.find(d => d.id === (typeof item === 'string' ? item : item?.itemId || item?.id))?.weapon;
+  person.items = (person.items || []).filter(i => !isWeapon(i));
+  person.stashed = person.stashed.filter(i => !isWeapon(i));
+  for (const slot of Object.keys(person.equipped || {})) if (isWeapon(person.equipped[slot])) delete person.equipped[slot];
+  assert(!(Game.state.village.stash?.weapons || []).length, 'prepared coexistence has no deposited replacement');
+  assert.strictEqual(realGear(vid)?.action, 'forage', 'actual bare resident needs physical vine');
+  setGoal('belong');
+  let materialTrips = 0, foodTrips = 0;
+  for (let i = 0; i < 300; i++) {
+    const o = Game.objPick(vid, hx, hy);
+    if (o.kind === 'FORAGE') { if (o.craftMaterial === 'vine') materialTrips++; else foodTrips++; }
+  }
+  assert(materialTrips > 0, 'actual missing-knife procurement must coexist with a full pantry');
+  assert.strictEqual(foodTrips, 0, 'material need must not reopen the food-forage gate');
+  console.log(`full pantry coexistence: ${materialTrips} real vine plans, ${foodTrips} food trips`);
+  Game.villagerNeedTrack = realTrack;
+
   Game.npcNeeds = realNeeds;
   Game.pantryKcalLive = realPantry;
 
   console.log('GREEN: feed-goal forage dial proven (gate + weight + guards)');
+  if (!process.argv.includes('--without-feed')) {
+    const child = cp.spawnSync(process.execPath, [__filename, '--without-feed'], { encoding: 'utf8', windowsHide: true, timeout: 60000 });
+    assert.notStrictEqual(child.status, 0);
+    assert.match(child.stderr, /feed goal must forage in the 4000-6000 early-worry bracket/);
+    console.log('Actual removed feed dial is rejected');
+  }
 })().catch(e => { console.error('RED:', e.message); process.exit(1); });

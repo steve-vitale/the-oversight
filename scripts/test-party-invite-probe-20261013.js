@@ -9,8 +9,8 @@ const { loadGame, setupGame } = require('./sim-harness');
 async function main() {
   const lg = await loadGame({ seed: 31337 });
   const Game = lg.Game;
-  Game.genDetail = function () { return {}; };
   await setupGame(Game);
+  if(!Array.isArray(Game.genDetail(Game.map.px,Game.map.py)))throw Error('Party probe requires the real playable grid');
   // advance to post-System (party unlock day 7) via the journey day loop
   const { competent } = require('./policies/competent');
   const { driveFights, driveContests } = require('./sim-harness');
@@ -65,11 +65,20 @@ async function main() {
     // main menu builder, not the question-answer menu.
     let found = (r0.choices || []).find(c => c && c.id === 'invite_party') || null;
     let r = r0;
-    for (let t = 0; t < 5 && !found; t++) {
+    const seenMenus=new Set();
+    let changedSubject=false;
+    for (let t = 0; t < 16 && !found; t++) {
       const choices = r.choices || [];
-      const ans = choices.find(c => c && c.id.indexOf('ans:') === 0 && c.id.indexOf('honest_pass') === -1);
-      const more = ans || choices.find(c => c && (c.id === 'dlg:more' || c.id === 'dlg:help' || c.id === 'dlg:subject'));
+      const signature=choices.map(c=>c.id).join('|');
+      if(seenMenus.has(signature))break;
+      seenMenus.add(signature);
+      // Use only offered replies/pages. Generic questions and the compact
+      // menu's More pages are real UI states, not absent invitation wiring.
+      const ans=choices.find(c=>c&&c.id==='gq:yn:unsure')||choices.find(c=>c&&/honest_pass/.test(c.id))||choices.find(c=>c&&c.id.indexOf('ans:')===0);
+      const subject=!changedSubject&&choices.find(c=>c&&c.id==='dlg:subject');
+      const more=ans||subject||choices.find(c=>c&&c.id==='menu:more')||choices.find(c=>c&&(c.id==='dlg:more'||c.id==='dlg:help'));
       if (!more) break;
+      if(more.id==='dlg:subject')changedSubject=true;
       try { r = Game.convoTurn(vid, more.id); } catch (e) { break; }
       found = (r.choices || []).find(c => c && c.id === 'invite_party') || null;
       if (r.ended) break;

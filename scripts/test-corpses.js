@@ -29,7 +29,7 @@ function mkPersonCorpse(trust, dayDied) {
   Game.state.village.trust = Game.state.village.trust || {};
   Game.state.village.trust[vid] = trust;
   return Game.registerDeath({
-    kind: 'person', villagerId: vid, name: 'Test Person',
+    kind: 'person', villagerId: vid, name: 'Test Person', node: {x:Game.map.px,y:Game.map.py}, scene: Game.corpseScene({x:Game.map.px,y:Game.map.py},!!Game.state.scholar.insideHaven),
     mx: 4, my: 4, cause: 'combat', witnesses: [],
   });
 }

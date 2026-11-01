@@ -1,0 +1,26 @@
+{
+  "started": "2026-11-01T00:11:08.222Z",
+  "finished": "2026-11-01T00:16:13.924Z",
+  "code": 1,
+  "signal": null,
+  "args": [
+    "scripts/check.js",
+    "--quick",
+    "--jobs",
+    "4"
+  ],
+  "head": "9433e621da57f5880a3b01390dd90d229a8aa398",
+  "tree": "89dd7421e4d331af19c336acebf8cbbca1bca13b",
+  "sourceStable": true,
+  "sourceSha256": "c1064b532df86b55f93e0ca3b271f972504ab02d6657be7d425c677f73929364",
+  "summary": [
+    "check.js: 473 scripts, 4 parallel (quick)",
+    "check.js: 470 passed, 3 failed in 305s"
+  ],
+  "failures": [
+    "scripts/godpath/test-contest-win-credit.js",
+    "scripts/godpath/test-feast-healing-use.js",
+    "scripts/godpath/test-late-bearer-haven.js"
+  ],
+  "scope": "Actual current check invocation. Inspect sourceStable and exact candidate before qualification; concurrent proof refresh invalidates a stable-candidate claim. No check skipping, owner acceptance or release claim."
+}

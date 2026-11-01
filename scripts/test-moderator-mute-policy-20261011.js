@@ -1,166 +1,50 @@
-// PROOF TEST (journey-scale r2 2026-10-11): the Moderator mute vs the
-// journey-harness fight policy.
-//
-// BUG (found in the trade-road 8-seed run): seed 271828 hit the Moderator
-// (wave-2 apex) 102 times and NEVER finished one — max 281,594 rounds.
-// The policy struck into the suppression-field mute every turn: each muted
-// strike is a violation (+3/Notice each, turn spent, zero damage), and a
-// strike-only policy never varies verbs, so the mute never flips. The old
-// policy also counted muted flee-moves as progress. The fight is not
-// unwinnable for a real player — WAIT is never muted, five quiet rounds
-// lift the mute ("it loses the thread", announced plainly), and only ONE
-// verb is ever muted at a time (game code, verified below). The stall was
-// purely the policy not reading the coaching.
-//
-// FIX (scripts/test-journey-scale-20261011.js policy.fight): scan the
-// previous turn's say-output for "IS MUTED inside the suppression field";
-// when seen, tbPlayerWait() instead of striking. Quiet rounds flip the
-// mute; the policy resumes striking once the lift lands.
-//
-// This file demonstrates both sides in one fixture:
-//   PART 1 (old behavior): strike-only policy -> stalls (RED documentation)
-//   PART 2 (new behavior): mute-aware policy -> adapts, mute lifts, damage
-//   lands (GREEN assertions A1..A4)
-// Run: node scripts/test-moderator-mute-policy-20261011.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-// mulberry32 seeded BEFORE eval — modules capture Math.random at load.
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+#!/usr/bin/env node
+'use strict';
+// Explicit prepared muting/history scene, not a natural equipment campaign.
+// Each case loads one full shared runtime; public actions use the turn token.
+const K=require('./godpath/lib'),H=require('./policies/human-combat'),a=require('assert/strict'),cp=require('child_process');
+async function scene(mode){
+ const G=await K.load({seed:20261011,narration:true}),s=K.newRun(G),bearer=G.villagerId,captured=[],say=G.say;
+ s.equipped={};for(const id of ['swat_vest','fire_hardened_spear']){const d=K.readJSON('src/data/items.json').find(x=>x.id===id);a(d);s.inventory.push({itemId:id,name:d.name,kg:d.kg,units:1});G.equip(s.inventory.length-1,d.armor?'armor':'weapon');a(Object.values(s.equipped).some(x=>x.itemId===id));}
+ if(mode==='stocked'){const d=K.readJSON('src/data/items.json').find(x=>x.id==='field_sutures');s.inventory.push({itemId:d.id,name:d.name,kg:d.kg,units:8});}
+ const starting={hp:s.health,max:G.maxHealth(),protection:G.armorBonus(),weapon:G.equippedWeapon().itemId};
+ G.say=function(...args){captured.push(String(args[0]));return say.apply(this,args);};
+ const grid=G.genDetail(G.map.px,G.map.py);for(const row of grid)row.fill('dirt');const m=K.fight(G,'moderator',{px:3,py:4,mx:5,my:4}),f=G.tbfight,p=G.tbFighter('p');a(m&&f&&p);
+ // Prepared prior strike habit and live suppression. The real AI still selects
+ // its authored attack; this proves mute/quiet behavior, not natural move names.
+ G.encSetPhase(m,'muting');m.telegraph=null;f.modRecent=['strike','strike','strike','strike','strike'];G.modProjectField(m,2,'suppressed');G.tbPlayerWait();
+ const initialMhp=m.hp,rows=[],heals=[],hits=[],damage=G.tbDamage,playerStrike=G.tbPlayerStrike;let ownStrike=false;
+ G.tbPlayerStrike=function(...args){const prior=ownStrike;ownStrike=this.tbFighter('p')===p&&this.villagerId===bearer;try{return playerStrike.apply(this,args);}finally{ownStrike=prior;}};
+ G.tbDamage=function(key,...args){const target=key==='p'?p:key===m.key?m:null,before=target?.hp,result=damage.call(this,key,...args);if(target&&before>target.hp)hits.push({key,debit:before-target.hp,ownStrike});return result;};
+ let cursor=captured.length,quiet=0,liftSeen=false;const limit=mode==='bad'?10:mode==='stocked'?160:16;
+ for(let i=0;i<limit&&G.tbfight===f&&!f.over&&!G.over&&p.alive&&G.villagerId===bearer;i++){
+  a(G.tbIsPlayerTurn());const beforeHp=p.hp,token=H.token(G,f),before=m.modViolations||0,logs=captured.slice(cursor);cursor=captured.length;
+  if(logs.some(x=>x.includes('IS MUTED inside')))quiet=6;
+  if(logs.some(x=>x.includes('The mute LIFTS'))){quiet=0;liftSeen=true;}
+  const med=s.inventory.findIndex(x=>x.itemId==='field_sutures'&&x.units>0),action=mode==='stocked'&&p.hp<50&&med>=0?'heal':mode==='bad'||quiet===0?'strike':'wait';
+  if(action==='heal'){const item=s.inventory[med],units=item.units,hp=p.hp;G.useItem(med);heals.push({gain:p.hp-hp,consumed:units-item.units,acted:p.acted});}
+  else if(action==='strike')G.tbPlayerStrike(m.key);
+  else{G.tbPlayerWait();quiet--;}
+  if(H.sameTurn(G,f,p,token))G.tbPlayerWait();
+  rows.push({action,beforeHp,beforeViolations:before,violations:m.modViolations||0,hp:p.hp,mhp:m.hp,quiet});
+ }
+ return{mode,starting,initialMhp,rows,heals,hits,liftSeen,violations:m.modViolations||0,result:f.result,over:f.over,playerAlive:p.alive,hp:p.hp,max:p.maxHp,sameBearer:G.villagerId===bearer,sameScholar:G.state.scholar===s,synchronized:s.health===p.hp,monsterHp:m.hp,monsterAlive:m.alive,monsterFled:!!m.fled,solo:f.fighters.filter(x=>x.kind!=='monster').length===1,logCount:G.log.length,capturedCount:captured.length,lines:captured,medicineLeft:s.inventory.filter(x=>x.itemId==='field_sutures').reduce((n,x)=>n+x.units,0),kills:(G.state.waveKillLog||[]).filter(x=>x.mid==='moderator'),bearer,corpse:m._deathCorpse&&{mid:m._deathCorpse.monsterId,by:m._deathCorpse.killerId}};
 }
-const rng = mulberry32(20261011);
-Math.random = rng;
-global.window = global; // stub for the eval phase only (equipment.js needs it)
-const files = [
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-  'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js',
-  'src/js/contests.js', 'src/js/broadcast.js', 'src/js/contestEngine.js',
-  'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js',
-  'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js',
-  'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/waveLedger.js',
-  'src/js/feastBuff.js', 'src/js/ledger.js', 'src/js/abilityActions.js',
-  'src/js/monsterBehaviors.js', 'src/js/partyTactics.js',
-  'src/js/sigW3a.js', 'src/js/statusEffects.js', 'src/js/sigW3b.js',
-  'src/js/metaProgression.js', 'src/js/sigW3c.js',
-  'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js',
-  'src/js/membership.js', 'src/js/havenGrowth.js', 'src/js/hierarchy.js',
-  'src/js/comms.js', 'src/js/safetynets.js', 'src/js/villageAgency.js',
-  'src/js/debug-scenarios.js', 'src/js/build.js',
-];
-for (const f of files) eval(fs.readFileSync(path.join(ROOT, f), 'utf8'));
-delete global.window; // sync headless path from here on
-const Game = globalThis.Scattering.Game;
-function flatGrid() { return Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => 'grass')); }
-const P = () => Game.tbFighter('p');
-const M = () => Game.tbfight && Game.tbfight.fighters.find(x => Game.modIs(x));
-const capture = [];
-let failures = 0;
-function check(name, cond, detail) {
-  console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${detail ? ' — ' + detail : ''}`);
-  if (!cond) failures++;
+if(process.argv[2]==='--child')scene(process.argv[3]).then(r=>console.log('MODERATOR_RESULT '+JSON.stringify(r))).catch(e=>{console.error(e.stack);process.exitCode=1;});
+else{
+ const T=K.reporter('Moderator public mute and quiet play'),rows={};
+ for(const mode of ['bad','aware','stocked']){const r=cp.spawnSync(process.execPath,[__filename,'--child',mode],{cwd:K.ROOT,encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024});a.equal(r.status,0,r.stderr+'\n'+r.stdout);const lines=r.stdout.split('\n').filter(x=>x.startsWith('MODERATOR_RESULT '));a.equal(lines.length,1);const x=rows[mode]=JSON.parse(lines[0].slice(17));console.log(JSON.stringify(x));T.ok(mode+': ordinary capacity and actual canonical loadout',x.starting.hp===100&&x.starting.max===100&&x.max===100&&x.starting.protection===35&&x.starting.weapon==='fire_hardened_spear'&&x.solo);if(mode!=='bad')T.ok(mode+': actual quiet turns never add a violation',x.rows.some(r=>r.action==='wait')&&x.rows.filter(r=>r.action==='wait').every(r=>r.violations===r.beforeViolations));else T.ok('bad: blocked strikes pay actual incoming HP costs',x.rows.every(r=>r.hp<r.beforeHp));}
+ const {bad:b,aware:q,stocked:c}=rows;
+ T.ok('strike-only: nearly every actual attempt is muted',b.rows.length===10&&b.rows.every(r=>r.action==='strike'&&r.violations===r.beforeViolations+1));
+ T.ok('strike-only: zero monster progress despite real violations',b.monsterHp===b.initialMhp&&b.hits.filter(h=>h.key!=='p').length===0&&b.violations===10);
+ T.ok('strike-only: honest original-body death is not called a stall or win',b.over&&b.result==='lost'&&!b.playerAlive&&b.hp<=0&&b.monsterAlive&&!b.monsterFled&&b.kills.length===0);
+ T.ok('cue-aware: all sixteen original public turns complete alive',q.rows.length===16&&q.playerAlive&&q.hp>0&&q.sameBearer&&q.sameScholar&&q.synchronized);
+ T.ok('cue-aware: violations stay tiny and are never consecutive',q.violations<=3&&q.rows.every((r,i)=>i===0||!(r.violations>r.beforeViolations&&q.rows[i-1].violations>q.rows[i-1].beforeViolations)));
+ T.ok('cue-aware: quiet actually lifts the mute and announces it',q.liftSeen&&q.lines.some(x=>x.includes('The mute LIFTS'))&&q.rows.some(r=>r.action==='wait'));
+ T.ok('cue-aware: actual owned Strikes make damage progress',q.monsterHp<q.initialMhp&&q.hits.some(h=>h.key!=='p'&&h.ownStrike&&h.debit>0));
+ T.ok('stocked: real whole fight ends won with original normal body alive',c.over&&c.result==='won'&&c.playerAlive&&c.hp>0&&c.sameBearer&&c.sameScholar&&c.synchronized&&!c.monsterAlive&&!c.monsterFled&&c.monsterHp<=0&&c.rows.length<160);
+ T.ok('stocked: healing really consumes items and actions, no free HP',c.heals.length>0&&c.medicineLeft===8-c.heals.length&&c.heals.every(h=>h.gain>0&&h.consumed===1&&h.acted));
+ T.ok('stocked: actual kill and corpse credit the original bearer',c.kills.length===1&&c.kills[0].by===c.bearer&&c.corpse?.mid==='moderator'&&c.corpse.by===c.bearer);
+ T.ok('stocked: cue capture survives bounded Game.log rollover',c.capturedCount>c.logCount&&c.liftSeen&&c.lines.filter(x=>x.includes('The mute LIFTS')).length>=2);
+ T.done();
 }
-function endTurn() {
-  if (!Game.tbfight || Game.tbfight.over) return;
-  if (!Game.tbIsPlayerTurn()) return;
-  const p = P(); p.moveLeft = 0; p.acted = true;
-  Game.tbAfterPlayerAction();
-}
-function strikeLowest() {
-  const m = M();
-  if (m && Game.tbIsPlayerTurn()) Game.tbPlayerStrike(m.key);
-  endTurn();
-}
-function waitTurn() {
-  if (Game.tbIsPlayerTurn()) Game.tbPlayerWait();
-  else endTurn();
-}
-async function setupFight() {
-  capture.length = 0;
-  await Game.init();
-  Game.say = (t) => { capture.push(String(t)); };
-  Game.genDetail = () => flatGrid();
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart(); Game.dayPart = 1;
-  const s = Game.state.scholar;
-  s.health = 500;
-  s.equipped = { weapon: { itemId: 'fire_hardened_spear', name: 'Fire-hardened spear' } };
-  Game.canSee = () => true;
-  Game.startCombat('moderator');
-  const m = M();
-  const p = P(); p.hp = p.maxHp = 5000; // survive the apex's pressure; we test the mute, not the DPS race
-  p.mx = 4; p.my = 4; s.mx = 4; s.my = 4; m.mx = 5; m.my = 4;
-  // muting phase, player inside the suppression field, and a verb window
-  // already full of landed strikes (as after real earlier phases) — the
-  // window only shifts on NOTED verbs, muted attempts don't note, so the
-  // mute persists until the player varies verbs or waits.
-  m.beamPhase = 'muting';
-  Game.modProjectField(m, 2, 'suppressed');
-  Game.tbfight.modRecent = ['strike', 'strike', 'strike', 'strike', 'strike'];
-  return m;
-}
-(async () => {
-  // ---------- PART 1: old strike-only policy (the stall, RED documentation)
-  let m = await setupFight();
-  const hp0 = m.hp;
-  let v0 = 0, mutedAttempts = 0;
-  for (let r = 1; r <= 10 && Game.tbfight && !Game.tbfight.over; r++) {
-    m = M(); if (!m || !m.alive) break;
-    const vBefore = m.modViolations || 0;
-    strikeLowest(); // old policy: strike, always strike
-    v0 = m.modViolations || 0;
-    if (v0 > vBefore) mutedAttempts++;
-  }
-  const dmgOld = hp0 - (M() ? M().hp : hp0);
-  console.log(`PART 1 (old policy): 10 strike-only rounds -> muted strikes=${mutedAttempts}, violations=${v0}, monster damage=${Math.round(dmgOld)}, fight over=${!!(Game.tbfight && Game.tbfight.over)}`);
-  check('P1 documents the stall: nearly every strike is muted', mutedAttempts >= 8, `muted=${mutedAttempts}/10`);
-  check('P1 documents the stall: ~zero progress for the violations paid', dmgOld < 40, `damage=${Math.round(dmgOld)} for ${v0} violations`);
-  check('P1 documents the stall: fight never ends', !(Game.tbfight && Game.tbfight.over), 'still fighting after 10 dead rounds');
-
-  // ---------- PART 2: new mute-aware policy (the fix)
-  // (Part 1's fight is still live by design — the stall never ends. Close
-  // it explicitly: startCombat rightly refuses to clobber a live fight.)
-  try { if (Game.tbfight && !Game.tbfight.over) Game.tbfight.over = true; } catch (e) {}
-  m = await setupFight();
-  const mhp0 = m.hp;
-  let muteCk = 0, muteWait = 0, liftSeen = false, rounds = 0;
-  for (let r = 1; r <= 16 && Game.tbfight && !Game.tbfight.over; r++) {
-    rounds = r;
-    m = M(); if (!m || !m.alive) break;
-    let muted = false, lifted = false;
-    for (let i = muteCk; i < capture.length; i++) {
-      const l = capture[i] || '';
-      if (/IS MUTED inside the suppression field/.test(l)) muted = true;
-      if (/The mute LIFTS/.test(l)) { lifted = true; liftSeen = true; }
-    }
-    muteCk = capture.length;
-    if (lifted) muteWait = 0;
-    else if (muted) muteWait = 6;
-    if (muteWait > 0) { muteWait--; waitTurn(); }
-    else strikeLowest();
-    if (!P() || !P().alive) { console.log('  player died (honest death, not a stall)'); break; }
-  }
-  const viol = (M() ? M().modViolations : 0) || 0;
-  const dmgNew = mhp0 - (M() ? M().hp : mhp0);
-  console.log(`PART 2 (new policy): ${rounds} rounds -> violations=${viol}, lift announced=${liftSeen}, monster damage=${Math.round(dmgNew)}`);
-  check('A1 never strikes into the mute twice in a row (violations stay tiny)', viol <= 3, `violations=${viol}`);
-  check('A2 quiet rounds lift the mute, announced plainly', liftSeen, 'The mute LIFTS in capture');
-  check('A3 damage lands once the mute lifts', dmgNew >= 1, `damage=${Math.round(dmgNew)}`);
-  check('A4 the fight progresses instead of stalling', dmgNew >= 1 || (Game.tbfight && Game.tbfight.over) || !P() || !P().alive, 'no 281k-round lock');
-  console.log(failures ? `\n${failures} FAILURES` : '\nALL GREEN');
-  process.exit(failures ? 1 : 0);
-})().catch(e => { console.error('HARNESS ERROR', e); process.exit(2); });

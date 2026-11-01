@@ -1,4 +1,1360 @@
+## Canonical resident lifecycle (2026-10-31, review)
+
+Actual admitted bodies and possessions now enter the existing saved registry. Continue replaces warm records with committed bodies; a new world resets the cast. Known-seed legacy recovery copies authored facts only, marks old possessions unknown and creates no starter gear. Opaque lost identities retain saved relations/tracks but get an honest unavailable Talk explanation. No odds, role distributions, recipes, XP amounts, damage or reward coefficients change. The separate advertised-job generation repair is NOT ported; its source/warnings remain in cold-resident-combined-lifecycle-r1.
+
+Body availability also activates existing consumers of those real records, including authored NPC dark/quirk traits, so later behavior/survival can change. Current fresh16x4/all31 screen has no material scorecard signal, zero errors, eight exact neutral pairs and zero cached cases. It is not a no-regression/holdout claim: merchant4/5 later differences are reproduced and isolated to existing traits becoming readable on admitted bodies;33 state hashes differ and62 raw rows match. The earlier overall public/appointment survival, community and progression warnings stay open. Keep missing legacy possessions unknown; do not compensate warnings with easier wins. Native cold paid company replies pass at both heights; full combined qualification/owner review/ship remain pending.
+
+NPC weapon production parity (2026-10-31, under qualification): an actual newly made spear/bow now credits its maker through the existing crafting deed, with the authored XP amount and shared daily cap. No recipe, odds, material, damage or work-rate coefficient changes. Failures/refusals/old gear give none. This may change later NPC ability timing and survival; it is a progression repair, not a neutral refactor or compensation for earlier NPC-class warnings. Preserve all31 watches; fresh common-observer comparisons and final qualification are pending.
+
+Shared village visits (2026-10-29, under verification): primary peer-road profiles may spend actual grid travel and visible village Talk/Study time to honor an unmet below-opinion relationship prerequisite, then return. The policy competes with other work; it does not buff knowledge/opinion rewards or waive costs. Candidate heuristics: distance<=3, day>=25, health>=75/kcal>=1800/hydration>=50/positive carried clean water, start tick<=128, one new trip per actor/day and7day village retry. All are reviewable bot choices. An ordinary neutral pilot exposed daily scheduling after three waited parts; decision moves to upkeep, not a relaxed time guard. Fresh matched all31-domain comparison/qualification is pending.
+
+## Successful NPC production progression (2026-10-29, under qualification)
+
+Actual NPC armor and arrow/bolt production now credits the maker's existing
+crafting deed after product placement. The authored XP amount and shared daily
+cap are unchanged. Previously these paid successes gave zero XP while the same
+player deed advanced craft. This can change later skills, abilities and survival;
+it is not neutral or proven responsible for earlier paired warnings. Failed
+attempts, ammunition transfers and refused work give none.21 prepared checks
+and two removed-hook controls pass. Fresh runtime-bound qualification follows.
+
+## NPC crafting prerequisites (2026-10-29, under qualification)
+
+Eligible unarmed residents may pursue a personal stone knife through actual
+vine harvest, existing stone duty and paid crafting/equipping. Objective
+weight1.2 competes with existing choices; urgent rest/food and commitments take
+priority. Existing bush material odds30%, recipe success35% atL1/85% atL2+,
+own modifiers and one work part remain. Harvesting works the actual patch and
+costs3 own energy/+3 hunger. No bearer materials, knowledge or modifiers are
+borrowed. Adequate own/deposited melee gear removes this crafting need.
+Universal knife knowledge is existing authored behavior. This prototype kept
+ARMORVILLAGE off on its original parent; newly public6dccc8b5 independently
+enables Muse's armor paths and must be preserved during reconciliation.
+
+Failed player crafts now spend the authored32 ticks; zero NPC energy no longer
+falls back to70 in selection/travel. These affect survival. Two natural pilots
+establish useful execution, not net benefit. Completed both-root/common-observer
+16x4/all31 screens have eight exact neutral pairs/root and153 actual NPC knife
+successes. Comparison remains REVIEW_REQUIRED: wins14->11,5->9,5->6,9->4/16;
+caregiver NPC class access and merchant recorded-death-rate signals plus other
+watches require investigation. Death series includes monsters. Current combined
+browser/full checks follow reconciliation; no automatic compensation or
+holdout/viability claim. More activity alone does not justify numerical buffs.
+
+## Autonomous productive cooking (2026-10-29, review candidate)
+
+A real cooking objective may now preserve actual about-to-spoil pantry surplus through the existing cook duty. Craft-seeking residents may consider that opportunity when it exists. Dinner reserve, rack capacity, shelf, rough/specialist losses and4000kcal part throughput are unchanged. Real additional work can affect food stocks, waste, contribution, trust and craft progression: this is a survival-affecting behavior change, not a neutral refactor. Other orders/body needs take priority and saved work-part records prevent duplicate autonomous shifts. The assigned-duty extraction has9 matched full-state/narration contrasts (only new work-part metadata excluded on detached comparison copies). Natural two-seed pilots show23 objective duty calls versus0; their total preserving-deed counts are60 versus65, so increased call coverage is not a demonstrated net benefit. Fresh16x4/all31 screening is REVIEW_REQUIRED: wins13->14,4->5,4->5,5->9/16 by capable/maker/merchant/caregiver. First-bearer survival, community-loss and NPC progression/gear warnings are retained. The legacy villageDeaths series includes monster deaths; see the actual prefix decomposition before interpreting its signal as resident loss. No difficulty compensation or holdout/viability claim. See NPC-UTILIZATION.md and the dated NPC work evidence.
+
 # Survival levers and investigation register
+
+Reconciliation recipient/cargo correction (2026-10-28, review): prevent Animal Ken from calming hostile people or alien monsters; its authored scope is non-predatory animals. One positive recipient guard encloses scan, explicit precheck and dispatch. The actual captured human fight previously ended calmed; it now escapes via public movement/barrier controls. Human refusal is free; no controller, fee, damage or difficulty coefficient changed. Actual animal combat availability remains unproved. Shared foraging now splits one real harvest between actual inventories, imports old public cargo only once and retains canonical source-weighted pantry receipts. These changes may affect earned supplies and survival, so investigate the fresh common-controller BOTH-root31-metric16-seed screens against publiccb30 without compensating automatically for win movement. Old29-column observations stay historical. Current browser, complete checks and review are pending.
+
+System hand-in checkpoint (2026-10-28): complete the real fetch reward before committing goods, quest ledger and learned skill. No authored supply amount, skill pool, price, damage, timing or difficulty coefficient changed. Short or missing hand-ins request no save. Actual day9 skill reward now survives immediate Continue. Fresh candidate64 cases/all29 metrics/four neutral pairs are stable and whole rows equal the prior ability candidate; unchanged fe642 baseline has matching collector/controllers under fresh preflight. Screen only, no independent holdout or pure-pacifist/lifetime viability claim. Natural day11 is alive; six body-recovered gear pieces were actually picked up, cap/bow equipped and cold recovered, with eight ticks and six trauma. New publiccb30 uses31 metrics including village deaths: adopt its contract and obtain new common-input evidence on the reconciled source; old panels are historical.
+
+Complete ability input error follow-up: remove the foodPower retry after a thrown composite effect. A real fault probe on saved4dc proved the exception could be swallowed, leaving a partial paid attempt durable. The new path propagates once, preserves prior save bytes and gives reload guidance without presenting the partial finding as success. No authored fee, yield, cooldown, damage or difficulty coefficient changed. Failed actions may now stop honestly rather than appear to continue, so earlier clean ordinary screens are historical, not fault-route viability proof. Fresh current-source64-case/all29 observation is running against the unchanged actually observed fe642 baseline under the same collector/controllers; do not invent a new baseline run or claim holdout/human equivalence. The natural campaign remains alive day9; one commissioned stone has reached the communal pile, but its timed reward is not yet earned.
+
+## Complete ability input (2026-10-28, unqualified review)
+
+Actual day8 phone play hid ability findings behind calorie notices, and a strict Echo replay lost the two-tick action on Continue. The app now groups existing messages; final initialized legacy/composite ability transactions preserve real effects, food/HP/time payments, practice and daily limits together. No authored fee, damage, yield, cooldown or difficulty coefficient changed. Persisting earned effects/costs and making information visible can affect survival; do not call this neutral merely because the coefficients are unchanged. Fresh common-controller BOTH-root64 screens/all29 and observer-neutral maintenance are running against saved fe642. Investigate any movement; no automatic compensation or earlier-warning clearance. Natural earned Green Thumb cost200kcal and advanced a bed4days; repetition was free and explained its limit. These observations do not establish long-term garden viability, pacifist success or a campaign ending.
+
+## Charge lane commitment (2026-10-27, WIP)
+
+Natural mobile play and public-input prepared contrasts show RutKing/Dustboar charges re-aiming outside their displayed lanes. Generic physical charge resolution now retains declared cells; staying in the lane still takes damage. No HP/damage/food/controller values change. This may improve survival through real sidestep counterplay; investigate common-controller all29 panels before judging the effect, without automatic compensation. Physical cover/body travel, phone replays, source-bound maintenance and final checks remain open. Parent1491's full1207/0 is historical. See evidence/2026-10-27/charge-counter-contract-r1.md.
+
+Update: native r4 comparisons and cold-r3 recoveries complete16 source/byte-bound witnesses; standard70-step/all20 families, current combat and installed lifecycle pass. Fresh common-controller64 cases/root/all29 and8 neutral pairs/root are stable.59 whole rows/hashes match and5 differ; comparator no_material_signal is a16-seed screen, not equivalence or64-holdout clearance. Merchant/caregiver timing, rank, rates and small resource/community differences remain visible; no numerical compensation. Final quick/full/review remain pending and physical cover/body path remains open. Natural campaign is alive day7. ReadBeast's random paid illness report is a separate open information-truthfulness lever, not a cleared state or an implemented change.
+
+## Short field-input save boundary (2026-10-27, review)
+
+Natural mobile play exposed real harvest lost on Continue. The initialized outer paid-input checkpoint now preserves completed forage/examine/cell work and final ticks; no calories, yields, prices, healing, reward quantities or difficulty coefficients change. Persisting legitimately earned resources may change recovered runs, so the earlier app-only screen is historical. The64-case after-r2 comparison against measured unchanged350a before-r1 completed under common controllers/collector,16 matched seeds per capable/maker/merchant/caregiver and8 neutral pairs/root. Every row field except stateHash is identical; raw hashes differ. Four policy seed7 final-state diagnostics find only added saveSeq and wall-clock pacing.lastTs; this does not attribute every hash across64 cases. The later app-only optional-Back guard has fresh8 rows/8 neutral pairs on final source, each whole row/hash/all29/gear exactly matching corresponding after-r2 cases. Earlier64 panels remain historical renderer identities. No material numerical signal; original forage review_required warnings remain open. This is not a pacifist/holdout/long-lifetime proof.
+
+
+## Incoming full-seat standing gate (2026-10-27 reconciliation)
+
+Muse public3cc includes national/global standing in the full-seat deed gate;
+the lesser seat retains its existing regional bar. Review merge53b preserves
+that exact published progression/Table code and its22-case gate proof. No
+food, survival, price or controller compensation is introduced by this merge.
+The first reconciliation screen is **invalid**, not a balance verdict: nine
+diagnostic policy files differed between roots. Retain that failed comparison.
+After explicit common-controller installation, both unchanged Games are freshly
+reobserved:64 paired whole rows/state hashes/all29/gear identical;8 neutral
+pairs per root. Wins capable11->11, maker9->9, merchant4->4, caregiver7->7.
+This gate-only no_material_signal screen does not establish natural full-seat
+opportunity, full lifetimes or64 independent holdouts. Earlier joint-forage
+review_required warnings below and physical controller gap remain independent.
+
+## Joint-foraging availability (WIP, 2026-10-27)
+
+Current same-method16x4 screen R2 is review_required: capable11->11,
+maker3->9, merchant8->4, caregiver7->7. Independent survival/community/
+progression/earned-gear warnings remain; zero physical favor events establish
+a controller coverage gap, not viability. Selected merchant31337 accepts7
+forage promises without any physical favor attempt. Old authoring alone fails
+to recover merchant1's baseline row; explicit old-authoring PLUS unavailable-
+feature diagnostic recovers its whole played row/all29/gear, not raw stateHash.
+No diagnostic intervention is adopted, no cohort causality or difficulty
+clearance inferred. Muse owns controller/calibration. See qualification r4.
+
+Historical first same-method16x4 screen (pre-phase fix): capable wins
+11->13, maker3->5, merchant8->2, caregiver7->4; all29 survival/community/
+progression/gear warnings remain. Only1 departure/1 ending and0 actual gather/
+return events: headless results do not establish favor viability. Fresh both-root
+screen is running after real pending/expired dialogue bugs were fixed. Selected
+neutral full-campaign traces locate early social-action/time/RNG divergence;
+the causal hook and cohort tradeoff remain unproven. Preserve all warnings,
+difficulty, method identities and no numerical compensation. See outcome audit r3.
+
+One formerly unperformable favor now binds actual dawn meeting, known patch,
+temporary companion, ordinary gathering and actual pantry delivery.500kcal
+of newly gathered usable food is the explicit data task amount, an
+implementation choice. Old food contributes only its actual outing fraction
+when mixed; preparation, spoilage, capacity and original costs still apply.
+No extra food/yield/reward, generic deadline, controller or collector tune.
+Changing availability can change survival/social progression even without
+numeric tuning. Two prepared native journeys complete; they do not establish
+natural opportunities, net survival benefit or long-run viability. Fresh neutral
+maintenance and all29 same-method matched16x4 remain required; existing maker
+mortality review_required stays visible. See today's joint-forage-native audit.
+
+## Raid crisis settlement (in review, 2026-10-27)
+
+A successful patrol or wild aid fight previously closed the whole raid crisis before the caller settled its target. Other living lingerers, and even the target that fled but kept lingering, could remain while Haven announced safety. The candidate defers raid closure to actual settled patrol/wild results and uses one live-threat predicate for direct closure and the tick, including an unfinished scholar world-origin fight. Ordinary non-raid aid behavior, actual field combat, wounds, deaths, loot and one kill credit retain their routes. Sortie quiet narration also checks the active threat.
+
+This changes crisis availability, foreign helpers remaining at the door, protection credit and the timing of the-siege progression event. It is a survival/progression lever despite unchanged numeric coefficients. No threshold is lowered to rescue wins. Current shared prepared proof112/0 with six rejecting siege/cue hooks plus the action-transaction control. Four current phone journeys show truthful ongoing/ended Wait text and committed Continue. Wait information and action persistence can affect human survival even without coefficient changes. Fresh public241-combined browser/installed/water/combat and real observer maintenance pass. Natural exposure confirms premature closure with two living lingerers. Same-method16x4/all29 screen retains maker mortality regression_watch (2.625 ->2.75 deaths/run), unchanged wins. Selected maker9/2026 causal controls restoring only old closure reproduce baseline whole row/all29/gear/state exactly. Retain truthful eligibility for review without coefficient tuning; warning and independent-cohort limits remain. Fresh combined quick423/0; saved-checkpoint full and owner/ship-loop remain required. See evidence/2026-10-27/siege-public241-qualification-r1/audit.md. Previous f096 full1193/0 does not certify this new runtime. See evidence/2026-10-27/siege-settlement-r1.
+
+
+## Silent-contact proximity audio (review, 2026-10-26)
+
+The shared scanner emitted a tiger growl before its silent rush made contact.
+An explicit encounter.proximityAudio=false now suppresses only that retarget
+voice for turtle/anaconda/tiger. Actual contact and pain voices remain; deer
+and the vocal mimic retain their ordinary notices. No attack, telegraph,
+movement, HP, food, time, RNG, controller or reward coefficient was changed.
+Removing a premature auditory cue can make human survival harder; that
+information effect is not assumed harmless or measurable by silenced Node audio.
+
+Current16-seed common-controller screen (four policies,150-day cap) has all64
+terminal hashes and all29 metric rows identical to its exact retained baseline.
+All policy metric decisions have no material signal, but the comparison is
+review_required because maker99 has the same one fightNoProgressBreaks guard on
+both roots. Investigate that behavior before treating the controller as complete
+human-play coverage. Eight actual neutral on/off pairs per root establish
+observer neutrality; hunt/fish remain unobserved and small trap/pit samples
+insufficient. This is not a64-holdout/equivalence, named-cohort, pacifist or
+complete-lifetime claim. Earlier curiosity screen/holdout warnings still stand.
+
+Actual R3 party retargeting is silent at736/844; production voices follow
+resolved contact or an authored direct Rerun declaration, with running native
+Web Audio and per-call nonzero buffers. Both whole touch-driven fights end in
+defeat. Removing only the tiger flag fails the precise retarget assertion.
+Those prepared scenes and separately replayed full combat/Deer/save boundaries
+do not establish human auditory quality or physical-device difficulty. See
+silent-proximity-plan-r2, balanced-r2, panel-review-r2 and audio-native-review-r3
+under evidence/2026-10-26. R1's unnecessary JSON formatting was corrected in a
+new frozen r2 root; its historical screen and identities remain unchanged.
+
+## Completed curiosity and readable Leave (review, 2026-10-26)
+
+Curiosity now plants unfinished business only when an actual question remains
+pending. An answered question no longer returns as a different question under
+"About that question." Its normal farewell replaces the extra generic
+learned-you summary. The app routes the spoken Leave choice through the
+existing terminal reader: actual farewell pages remain until free Done, so
+Journal side effects cannot hide them. Header cancellation retains its existing
+behavior. No food, trust, XP, survival, damage or ability price was tuned.
+
+This changes information, future want selection and entropy. A frozen common-
+controller screen (16 seeds per capable/maker/merchant/caregiver, all29 metrics,
+150-day cap) is **review_required**. Wins are13→12,6→9,8→4 and10→6; capable
+living-NPC mean and several merchant/caregiver community, progression and gear
+metrics have warnings. More maker wins do not cancel those warnings. Both roots
+have real neutral controls; old warning panels remain historical evidence.
+
+The capable seed1 passive conversation/prefix replay matches its original panel
+hash and all29 rows on both roots, with four on/off and two30/150 prefix controls.
+The first route split is day2: the old seed asks a new theory question while
+the corrected conversation recalls an actual prior exchange. At that call HP
+and kcal match. Game RNG consumption subsequently differs while policy RNG and
+clock streams still match at the first changed daily boundary. The seed-only
+component reproduces all candidate metrics for that one case; closing-only
+reproduces baseline metrics. This is a mechanism example, not all-policy causal
+attribution or an acceptance of adverse rates.
+
+Independent64-seed holdouts per policy completed on the same frozen roots
+(seeds900001–900064, disjoint from the screen). All29 metrics remain
+**review_required**: capable has no material signal; maker retains community,
+player-class and craft/trade-gear watches; merchant retains deaths, community
+and craft/trade-gear watches; caregiver retains an NPC-class watch. Wins are
+51→50,20→23,18→20 and16→26. The caregiver increase is a change signal to
+investigate, not automatic improvement. The large merchant/caregiver win losses
+in the small screen do not repeat in these holdouts; that does not erase their
+other warnings. All256 paired rows and terminal hashes change. Both roots have
+eight real observer-neutral pairs and known no-recorded-intervention coverage
+for all256 observed campaigns. Hunt/fish remain unobserved and changed luck or
+survival coverage remains explicit. Intervals are exploratory, not adjusted for
+multiple metrics. See curious-confirm-balanced-r1 and curious-confirm-review-r1.
+No universal dialogue quality, named job/region, pacifist or complete-lifetime
+clearance is claimed. Keep numeric/controller calibration
+with Muse; preserve the truthful question boundary while investigating all
+domains. Raw panels/plans and mechanism evidence use the `curious-*` prefixes
+under `evidence/2026-10-26/`.
+
+## Settled vow availability and refusal (review, 2026-10-26)
+
+Formal help follow-up (review): kept/broken promises now reach the existing
+renewal/amends rules in both subject and idle menus; open vows still block
+duplicates. Refusals relay their actual words instead of grateful acceptance.
+Existing payments, deadlines, nominal words trust and cap retained. Shared-kit
+33/0 and three rejecting hook controls; eight actual phone journeys plus current
+frame/role refreshes pass.16 matched seeds per four policies yield identical64
+terminal hashes/all29 rows; no_material_signal is screen-only, not feature-use
+or holdout clearance. Broad395/20 retains stale native/update gates. See
+evidence/2026-10-26/formal-help-audit-r1.md. Next: remaining current native,
+combat/installed and full-suite roots. Muse retains numerical/controller work.
+
+Availability and removing a random reply can change future choices/entropy;
+this is a gameplay/information change despite unchanged numeric rules. The
+existing refused-offer nominal2 words credit is retained deliberately, not
+replaced by an unmeasured numerical judgment. Prior warning panels stand.
+
+
+## Promise information and identity (review, 2026-10-26)
+
+Promise-language boundary follow-up: original full water-favor replay at both phone
+heights exposed Journal task labels used as speech. Authored narrator and
+recipient/bearer/witness references now require exact favor identity; broken
+memories retain that identity. Existing payments/deadlines/rewards unchanged.
+Shared-kit44/0 plus three failing controls; final water16 checkpoints per size,
+four real role/Continue cases and phone gate12/0. Runner supports18 families.
+Fresh8-pair150-day observer maintenance establishes neutrality only. Current
+Game/data changes invalidate older native receipts; fresh broad/full, remaining
+combat/installed, owner review and ship-loop gates remain open. The separate
+formal offer_help gratitude-after-refusal sibling is queued for actual proof.
+See evidence/2026-10-26/promise-outcome-audit-r1.md. Muse retains calibration.
+
+The added favorId and truthful trust-floor disclosure can affect human choices;
+this is not a universal balance-neutrality claim. Preserve all29 warnings.
+
+
+## Imported b462 teacher/reminder changes (2026-10-26, review only)
+
+The combined review fc86a772 preserves Muse's two real Game changes: a dead
+discoverer/animal learner cannot teach at the fire, and unchanged racks-full
+figures stay quiet until seven silent eligible days (a changed figure speaks).
+The first corrects knowledge/deed availability and can change later choices,
+RNG and survival. It is not a balance-neutral prose edit. The reminder writes
+voice markers; its presentation effect on human decisions remains unmeasured.
+No food, need, reward, growth, damage or wave coefficient was tuned here.
+
+Incoming plant proof and additional real animal6/0 with death-hidden3/3 fault
+control establish the narrow teacher boundary. Reminder23/0 verifies exact
+quiet-day/changed-stock behavior and preserves historical RED checks. Fresh
+current150-day observer maintenance has eight neutral on/off pairs for four
+policies at seeds7/42 with all29 metrics and stable inputs. This establishes
+collector neutrality, not unchanged balance or policy viability. Prior2a0d
+16-seed warning panels remain historical; current common-controller screens,
+necessary holdouts and tradeoff review remain open. See today's
+reconcile-b462-audit-r1.md. No added wins dismiss community/hydration/death
+warnings, and no survival reduction has been labeled a regression by itself.
+
+## Physical away rations and durable post-flee rest (2026-10-25, review)
+
+Incoming772c's top-up paid real pantry items during away meals; the older daily
+pack reseed also drew remotely. Conservation did not establish transport. The
+candidate requires actual hall access, keeps finite away food over dawns,
+preserves leftovers and requests the existing ration before both departures.
+This changes food availability, pantry costs, RNG and expedition opportunities;
+it is not narration-only or balance-neutral. No ration amount/need coefficient
+was raised to compensate. Some trips can still be underprovisioned.
+
+Incoming post-flee rest lived only on Game; a real committed fresh-process
+Continue lost it. Canonical village/person/day state now preserves that intent,
+expires next day and cannot leak into a new run. Existing25%-HP and raid/aid
+exceptions retained; no healing/relocation or player immunity added.
+
+Both failures are reproduced by actual shared-kit boundaries; final12/0 also
+checks real departure packing. Current response-byte phone proofs cover native
+rest/lesson Continue and ordinary16-stage controls at both sizes. See
+AWAY-SUPPLY.md and reconcile-public-audit-r1.md; not physical-device or a natural
+full-expedition claim.
+
+Sixteen matched seeds per four policies against exact pre-repair combined tree,
+identical controller/observer, all29 domains: review_required. Capable wins
+11/16→15/16; maker7/16→9/16; merchant10/16→6/16; caregiver8/16→5/16.
+Merchant invitation and sampled living-NPC decreases are signals; maker
+first-bearer/hunger and other classes/gear/community watches remain visible.
+Neither increased wins nor the physical rule dismiss these costs. Selected
+merchant31337 follows actual terminal play; do not attribute its different
+combat deaths to hunger without context. No64 holdouts or broad viability
+clearance. Full reconciliation-versus-public comparison remains separately
+identified because its runtime delta is much larger. Owner review pending.
+
+## Field-lesson availability/topic correction (2026-10-25, review only)
+
+No numeric reward, survival or lesson-cost coefficient changed. Language and
+current-scene ownership now actually restrict offered knowledge, so this is a
+real opportunity/progression change, not a Game-neutral refactor. Accepted
+lessons preserve the actual favor/deadline and record completed field memory.
+
+All29 metrics are retained for16 matched seeds per capable/maker/merchant/
+caregiver,150driver-day horizon, same frozen controller/observer on both roots.
+Comparison is review_required; capable/maker/merchant win movement, progression,
+community and gear watches remain visible. No64 holdouts or all-region/job/
+strict-pacifist clearance. Current public subsequently changed its controller;
+reconcile and rerun common inputs before making live calibration claims.
+
+Fresh caregiver seed42 runs reached actual Table endings: baseline163 versus
+candidate90. Both have observer-neutral prefix contrasts and no forced turns.
+First state divergence precedes later RNG/opportunity differences; one lifetime
+cannot attribute the earlier win to a single lesson mechanism. Merchant seed5
+reached baseline win146 but candidate community loss197. Its actual reached
+buy checks lacked finished-food surplus through150days; no repeat transactions
+meant no higher-tier stock. Fire was available; this is not proof of broken
+stock/grant wiring. Other lost gear seeds had transactions, so the mechanism
+does not explain every warning. No difficulty/reward compensation was applied.
+
+Raw panels, complete gear/terminal observations and passive readers are linked
+in field-lesson-audit-r1.md. Values and warnings are hypotheses for investigation,
+not tuning instructions; easier wins cannot offset other regressions.
+
+## Party decision delivery and unchanged-role credit (2026-10-25, review only)
+
+Saved name/role choices now reach actual phone/controller menus and confirmations.
+This exposes existing founding deeds, role assignments and role bonuses that the
+old return-only picker hid. No role coefficient or real-assignment reward amount
+was retuned. Invalid/stale/replayed selections cannot perform an assignment.
+
+A new natural seed42 caregiver lifetime used name/role choices and won on day90
+(the earlier frozen-d6 case won188). Its53Point assignments included8consecutive
+same-holder reconfirmations and45other assignments. This is an investigation
+trigger, not proof of causation, improved balance or excessive ease. The Game
+manifests differ only in app/game/party-formal/villager-agency; policy/harness/
+collector inputs are the same. Full decisions, roles and other calls change RNG
+and later opportunities, so fame alone is not credited with the earlier win.
+
+The real assignRole boundary confirms an unchanged role still added one Codex
+deed and increased standing5to6 without a role change. The safety fix returns
+unchanged before recording/narrating a deed: exact canonical state/log remain
+identical. Phone reconfirmation says the person already has that role, spends
+no selection tick and grants no deed. Opening the role discussion still costs
+its original tick. Real role changes keep their original unique-holder transfer,
+deeds and coefficients. Repeated genuine transfers/controller churn remain a
+calibration question for Muse, not silently removed from the game.
+
+Final-source seed42 reaches a real day163win with a successor bearer, zero
+forced/recovery turns and498conversation starts. All29domains/gear/whole rows
+are retained for frozen188/intermediate90/final163 in
+evidence/2026-10-25/party-conversation-metric-investigation-r1.json. Final low-water/
+low-health/useful-intake/NPC-class movements stay visible; a win cancels none.
+
+Retained full-lifetime and maintenance cases have fresh identities for each
+source revision. They do not replace16matched screens/64independent holdouts,
+per-policy/community/resource/progression/earned-gear watches or actual mobile
+and installed lifecycle gates. Do not restore a win-rate target or suppress the
+single-seed time-to-win shift. See party-decision-audit-r1.md for raw artifacts
+and the final-source follow-up; broader balance decision remains review_required.
+
+
+## Conversation closing metadata (2026-10-25, review only)
+
+No survival coefficient or resource cost changed. Closing silence keeps its
+existing mood shift/exhaustion, and actual end settlement stays idempotent.
+Eleven matched closing-action contrasts preserve all non-dialogue state and
+settlement scalars. The intended changes are conversation text registries,
+closing tags and topic-memory/count metadata; later dialogue choices may
+therefore differ. This bounded action contrast does not establish campaign
+balance neutrality or human survival effects. Real observer maintenance and
+combined source-bound release proofs remain separate before publication.
+See evidence/2026-10-25/closing-phase-audit-r1.md.
+
+
+## Ad Break rider continuity correction (2026-10-24, review only)
+
+Actual round6 phone Continue dropped three summoned riders as phantom monsters
+and reset the paid player turn. A three-Ad pack also reused one rider ID three
+times, so targeting and turn summaries addressed the first body repeatedly.
+The review fix gives new riders host-specific IDs and restores the explicit
+combat-only definition from monsterBehaviors.json. Legacy duplicate IDs migrate
+one-to-one through their recorded turn slots without removing bodies or changing
+HP, budgets or the cursor. Malformed slot counts remain a reported unknown.
+
+Riders now have follows:false, matching their attachment to the non-chasing
+glyph, and withdraw if their host fled. This changes an actual survival route:
+the native escape pilot left the Ads behind but their unattached riders chased
+into the next node. Preserve normal crossing payment and damage; do not treat
+the correction as numerical calibration or restore a target win rate. No attack,
+healing, recovery/progress fraction or audience coefficient changes. Current
+source needs fresh neutral observer maintenance and combined-source phone/check
+proof before publication. Old panels do not measure this correction.
+
+## Day150 phone investigation (2026-10-24)
+
+No survival lever change. The preregistered natural maker63003 RERUNx5
+encounter now has trusted Wait/Strike/retreat at both phone heights. These are
+tactical retreats, not a boss completion or severity calibration. Faster844
+exposes unsaved Strike effects before the30-second/exit fallback; its immediate
+commit gate remains red. Long warning readability is also unresolved. Keep
+day150 intolerable/day180 exceptional, the earned boss gates and all29 watches.
+See evidence/2026-10-24/day150-phone-findings-r1.md for proof and limits.
+
+## Original public caps resolved separately (2026-10-24)
+
+No lever change. All three original1000-horizon caps now reach actual community
+loss1039/1074/1359 in exact-source extensions. Six real trace-off controls,
+three state/context/RNG/clock prefixes and original whole-row/state/all29/gear
+linkage pass; no forced/recovery turns. Keep initial capped rows unchanged.
+All three lack the used-feast-power deed, so public Table-linked overtime never
+starts despite many contests/all-wave deeds. This is a real old pressure shelter,
+not proof of surviving endlessly escalating advanced waves or a complete AI
+diagnosis. Candidate calendar-floor intent is supported; its severity and
+nonhunter community-loss warnings still need actual phone/decision review.
+No automatic win-rate restoration, gate weakening or coefficient adoption.
+See evidence/2026-10-24/publicb3-cap-audit-r1.md for controls and limits.
+
+## Current publicb3/candidate release screen (2026-10-24)
+
+No new survival lever change. Source-exact32-Game-file aggregate comparison
+under identical current controls completes400 jobs, all29 and original controls
+retained. Candidate64 endings/latest292/no recorded intervention; public61
+endings/three1000-iteration caps and three separate recovered input cases.
+All policy verdicts remain review_required. Maker wins14→7/caregiver13→7 with
+community loss2→9 each; merchant's7→8 wins cannot cancel its other warnings.
+Craft/trade earned gear6→7 maker/7→8 merchant does not justify price cuts.
+Gardener coverage is one offered pair/64 attempts, insufficient. Preserve the
+old panel and finish its caps; inspect natural losses/succession/pacing before
+tuning calendar coefficients. Some early survival signals precede onset, so
+this broad effect is not isolated calendar causality. Day150 already
+intolerable/day180 exceptional stands. See publicb3-current-study-audit-r1.md
+in evidence/2026-10-24; no numerical adoption or win-rate restoration follows.
+
+## Ledger-seeking player strategy trial (2026-10-24)
+
+No Game lever change. New explicitly named mixed profiles add paid public
+exploration and uncapped-type pursuit for outstanding wave1/2 unlock points.
+Original non-hunters stay non-hunters; their intentional hunt suppression also
+limits progression. Do not attribute merchant99's duration solely to the shared
+faced-bar blind spot. Selected off/on loss299→win90 has earlier first-bearer
+death, greater hunger and lower NPC class-access observations. All29 remains
+review-required under a separate controller-experiment report; ordinary Game
+comparison stays invalid for changed player policies. Duration, opportunities
+and early competing endings differ. Share and expand matched evidence before
+using this player model for calendar calibration; no default promotion or
+restoration of old wins is authorized by a selected improvement.
+
+Expanded preregistered136-job screen now completes:128 real endings, eight
+neutral matches, stable sources and no recorded harness intervention. All29
+remains controller_review_required. Wins off/on14/15,11/10,11/13,10/12;
+hungry-NPC exposure rises in every profile, maker/merchant craft-trade gear
+runs fall8→2/7→3 of16 and several NPC class/death/reserve signals worsen.
+Ten off cases reach180 versus three on, latest250/236; Game settings did not
+change. No promotion or difficulty-calibration claim. Selected maker50003
+60/600 audits reproduce original whole rows/state/all29/gear with real neutral
+prefix controls. Its trade route is already different by day60/61, but the
+single cause remains under investigation. Healthy internal kcal does not
+establish surplus finished food for trading. See ledger-screen-audit-r1.md.
+
+## Muse8c43 current-source screen (2026-10-24)
+
+No new lever change. Same-controller off/on64 pairs/all29 are valid and every
+profile remains review_required. Current wins15/14,15/10,14/10,14/9; community
+loss1/16 each rises2/16,6/16,6/16,7/16. Maker/merchant/caregiver NPC class access
+falls; capable has no material class signal. Deaths and exposures differ, so
+inspect actual causes/opportunities rather than restoring prior wins. All64 on
+cases end, latest299;20 still reach180. Day150 intended intolerable/day180
+exceptional is not yet established by this schedule. The two off caps now
+have actual wins650/604 with exact prefix/neutral controls; original capped
+rows remain unchanged. All64 both arms have contest/show good gear, including combat.
+Craft/trade gives maker6/16 and merchant9/16 on, not pure-pacifist proof.
+Actual prepared day158 Siege TV contest now completes all three waves on both
+phone sizes, whole Continue,62.75/14.75 saved HP. That is not a natural campaign,
+world raid, numerical calibration or Network-boss proof. See
+evidence/2026-10-24/muse8c43-calendar-audit-r1.md and full source-bound panels.
+
+## Calendar ablation tradeoff record (2026-10-24)
+
+No new numerical lever change. Exact current composed off/on64 pairs retain
+all29 warnings: player/community deaths rise; eligible NPC class access falls;
+food/water/general earned gear show no material small-screen signal. Lower
+wins are not an automatic regression. All64 on runs end by264. The sole off
+cap reaches actual win648 after first useful feast healing647, with exact
+prefix/off/original-row controls. Its main capped row remains censored.
+
+Onset exposure differs:3/16 capable versus10 maker,9 merchant,13 caregiver,
+with equal recorded pre120 sample/action prefixes in both arms. Early wins
+compete with late exposure. Do not infer a late-combat skill ranking, equalize
+win rates or call median sampled100HP safety: the actual158 trace loses9–13HP
+on several round advances. Review NPC opportunity, noncombat ending pursuit,
+native decisions and named cohorts before deciding on coefficients. Existing
+day150 severity and earned-boss requirements stand. See the composed audit.
+
+## Combined ending/counter controller instrument (2026-10-24)
+
+No Game or numerical lever changes. Explicit endgame-counter-aware-* profiles
+compose existing paid treatment/surplus-feast and visible labor counterplay
+experiments. Their costs/safeguards persist; defaults remain unchanged. This
+changes experimental player decisions, so do not compare its results with old
+controllers as if only difficulty changed. Actual27-policy neutrality is
+maintenance proof, not survival clearance. Calendar off/on roots differ only
+by calendarEnabled; measure all29 with the same combined controller on both.
+
+## Paid labor counterplay and sealed arena isolation (2026-10-23 candidate)
+
+Stillness costs three stationary turns per rat, persists through Continue and
+resets on movement. Food spends real finished portions totaling at least2000
+kcal; tool payment consumes one eligible carried tool, protecting bonded and
+keepsake items. These correct free/phantom payment. Nonviolent routing earns
+actual contest rewards once; emergency stalemate pays none. Arena isolation
+preserves world beasts,home positions and return context; full footprints and
+sprite layering replace hidden/overlapping actors. No numeric coefficients
+changed. Counter-aware policies are explicit experiments; defaults unchanged.
+
+Historical362-round grinding proves controller/pacing trouble, not absence of
+player counterplay. Focused/native proofs pass;23-policy neutrality is not
+all29 calibration. Preserve death/community warnings and remeasure combined
+Muse source. Day150 remains intended intolerable difficulty; safe grinding is
+not successful late-game danger. See COUNTER-AWARE-SIMS.md.
+
+## Calendar pressure and the existing Easter egg road (2026-10-23, candidate)
+
+Steve: "Remember we discussed the Easter egg boss around day 150? That’s already supposed to be getting intolerably hard."
+Also: "180 days should be considered a long long game and start becoming increasingly harder to survive".
+
+Root cause: ordinary spawning stops at wave5, while the implemented overtime
+and THE NETWORK road depended on Table eligibility/announcement. A missing
+feast-use deed let otherwise advanced campaigns avoid that escalation. This
+candidate keeps the existing boss, three titan victories, nine-node siege and
+earned key. It adds a calendar floor to the existing pressure coefficients;
+missing a Table deed no longer shelters a long campaign. No automatic loss,
+free titan victory, boss key, or immunity bypass is added.
+
+Initial schedule (implementation choices to calibrate, not Steve's numbers):
+warn110, onset120, one tier every7 days; calendar-only boss qualification
+starts150. Effective pressure is the larger of the original Table clock and
+calendar tier. At150 tier5 gives ordinary beasts2.25x HP,1.60x damage,+2 pack;
+at180 tier9 gives3.25x HP,2.08x damage,+3 pack. Strength and raid appetite
+continue rising after180. Pack and world-cap additions stay bounded at3 for
+physical board capacity; the calendar tier itself has no ceiling. Lower-wave
+ordinary beasts are included. Titan/campaign pieces and sealed authored NPC
+arenas retain their authored mechanics.
+
+Levers live in src/data/titans.json._overtime: calendarEnabled,
+calendarWarningDay, calendarStartDay, calendarDaysPerTier, calendarBossDay,
+calendarMinWave, existing hpPerTier/dmgPerTier, packEveryTiers/capEveryTiers,
+maxPackExtra/maxCapExtra and existing raid/standing coefficients. NPC world
+fights share the pressure, preserve wounded monster HP without repeated
+multiplication, and pay damage through their existing mitigation. Calendar
+notices persist across succession; Continue announces current pressure without
+advancing a dawn, charging resources or summoning a boss during load.
+
+Initial candidate is NOT approved for adoption. Its64 actual endings have no
+600-day caps (latest236), but one merchant99 fight reaches362 rounds without
+hurting the player: the existing rerun rule clones/scales passive The Strike
+inside a Pit contest. A source-exact public-action trace reproduces the whole
+row/state/all29/gear and records720 calls in that fight. It eventually ends;
+this is demonstrated pacing failure, not a frozen turn. Retain it as a next
+regression target; more HP/duplicated passive mechanics are not evidence of
+the intended danger. Do not ship these initial settings simply because late
+community losses rise or caps disappear.
+
+Real-engine29/0 plus existing overtime/network40/0 and actual day464 phone
+touch/Continue at736/844 pass. The actual19-policy neutral proof is refreshed;
+focused measurement8/0 passes. Broad quick351/21 was run before that refresh:
+19 stale source-bound browser proofs plus2 stale measurement proofs. None are
+waived; final combined native refresh/full verification is pending. Controlled
+before root disables only calendarEnabled; it is an
+ablation on the same current Game/controller/observer, not original public
+source. First failed root/panel attempts are retained and excluded. Fewer
+wins require investigation, not automatic rejection. Inspect survival dates,
+community losses, resources, progression, gear and actual boss opportunities;
+long alive-at-cap rows remain caps. Reconcile current Muse source and refresh
+combined release proofs before publication.
+
+## Reconciled public520 runtime bundle (2026-10-23, verification pending)
+
+R2 screen is112 matched cases/root under one common heuristic controller;
+all seven cells remain review_required. Wins: capable15→15, maker13→12,
+merchant10→11, caregiver15→14, Ohio gardener11→12, Sahel13→15, grid-maker10→9.
+More wins do not clear mortality/community/resource/progression/gear warnings.
+Seven live600 caps must not be called losses.24 selected endings/root exist;
+two baseline cases used harness routing and are not clean normal endings.
+
+Mortality diagnostics match whole rows/all29/state/gear and controls. Old public
+burden/workCost helpers are unavailable, not zero cost. Native walk quotes exist
+in both roots; quotes are not payments or mortality causes. A terminal duplicate
+playerDeath call in before garden9 makes9 invocations but8 canonical deaths.
+Canonical counts/cause histograms, not callback totals, anchor interpretation.
+
+Prepared monster-policy probe now proves another confound: direct private turn
+finishing skips public Wait effects and can spend a fresh turn. Correcting this
+controller is a measurement revision, not a Game survival lever. Rerun both
+roots under that same revision; do not compensate by tuning Game coefficients
+or compare its new numbers to R2 as a Game-only effect.
+
+Keep Muse's new successor-body stats/practice/passive reset and full-meal
+treatment for taken-over existing residents; these alter competence and food
+access. Preserve the eleven motivation weights, severe-gossip retargeting and
+communal armor deposit/gift/craft paths; these alter duties, risk, resources and
+protection. Their owner regressions passing is not balanced release clearance.
+Seed setup changes are circumstance changes, not survival buffs. Preserve the
+knowledge-gated disease/death narration; fatal lockjaw may occur with positive
+HP and should not be mistaken for a health synchronization defect.
+
+The combined review merge retains the physical gear correction once, including
+stock and true mass. New matched comparison must state its exact roots and
+source bundle: this merge contains multiple agents' runtime changes, so a
+before/after difference cannot be assigned to equipment alone. Older pre520
+gear panels remain historical. Carry survival/community/resources/progression/
+earned-gear warnings and investigate selected actual endings before release.
+
+## Equipment conservation (2026-10-23, candidate)
+
+Direct replacement returns the displaced physical item instead of deleting it;
+equipping a stack moves one unit; instance ownership/reveals/bond and actual
+mass survive wear/take-off. Legacy Equip weapon/armor requests address canonical
+slots. No item bonus, combat odds, price, reward tier or survival coefficient
+changes. Conserved gear can be reused/traded/inherited but also adds burden;
+restoring actual take-off mass can increase movement/food costs. These are
+survival-affecting ownership corrections, not a free difficulty buff. Compare
+all29 under the same observer/policies; retain warnings and actual endings.
+Current before input vector exactly matches caretaker R2's96 retained screen
+cases. Fresh112-pair screens, neutral/mobile and selected ending proofs finish;
+maker mortality signals and community/access/gear watches remain open. Two
+selected late deaths have gear-heavy packs; other deaths have moderate/low
+loads. This supports investigating burden, not assigning it mortality causality.
+Core policies did not invoke grid movement; grid-maker has its own16-pair
+actual-travel coverage. No balance clearance or public release is inferred.
+Do not restore historically
+lost items by inventing stock; prove future conservation at the actual action.
+
+## Paid NPC cultivation during surplus (2026-10-23, candidate)
+
+Surplus garden duty can spend the resident's OWN eligible cultivation action
+on immature beds. A successful cast consumes the assignment instead of adding
+a complete alternative haul. Existing hunger cost/daily limits/ownership and
+other-order priority remain. No maturity/yield/raid/ability-price tuning.
+This affects NPC hunger, practice/class access, eventual food and competing
+wood/stone/water work, so it is a survival-affecting dispatch lever even without
+new coefficients. Preserve its costs and actual useful nourishment separately.
+
+R1 skipped normal trust/task-history completion; reject it as a release
+candidate. R2 restores both; no inference that memory itself schedules ambient
+actions (villageLives uses assignments). Fresh R2 six16-pair screens remain
+review_required. By600 wins: capable13->15, maker10->12, merchant14->14,
+caregiver13->14, Ohio grower14->13, Sahel13->12. Maker7/merchant6 are still
+alive caps, not losses. Capable sampled reserve below500 rises0.0056->0.0713;
+seeds777/8 dominate the increase and receive controlled food/cost traces.
+Population/access/gear/survival warnings and all29 unknowns remain visible.
+Six actual new losses receive full matched, region-preserving replays.
+All13 selected cases per root now reach controlled endings. Maker7 wins616,
+merchant6 loses658 with exact600 prefixes. Two controlled character traces
+exclude covered player-ability debits during the adverse reserve windows, but
+do not explain all meal/travel/metabolism or indirect pantry effects. Decision:
+retain the narrow dispatch candidate for owner review with all warnings open;
+preserve difficulty, do not tune for more wins or claim net-profit/causal ending
+improvement. Quick360/full1132 pass; these technical gates do not clear balance.
+
+## Earned camp locations (2026-10-23, review candidate)
+
+No survival coefficient changes. A real camp sighting now records its location
+and enables Map/card access without exploring ground or awarding visited deeds.
+More available locations can change optional travel,64-tick conversations,
+knowledge/trust and later agreements. The matched core64 cases preserve all29
+metrics; saved state hashes include the new knowledge and are not declared
+equivalent. Named gardener and Sahel/Dakar screens stay review_required:
+Sahel low-water0.0532->0.0953 and eligible NPC class0.1223->0.0882 require
+investigation; other community/access/gear watches remain. More agreements or
+different wins cannot cancel warnings. No crop/food/raid/NPC-weight retuning.
+
+Auxiliary historical "visits" counted attempts, not arrivals. The corrected
+schema2 census exposes actual range, accepted/time-charged talk and observed
+agreement outcomes; all29 semantics are unchanged. Inspect actual card/rival/
+travel opportunities before calling zero agreements broken. See the dated
+camp-sighting audit; full/capped-ending/release verification remains incomplete.
+
+## Optional diplomacy water guard (2026-10-23, controller only)
+
+An explicit water-safe profile checks hydration>=70 and clean carried liters>=1
+at optional departure/arrival/offered actions. No free refills or Game water,
+food, crop, raid or survival coefficients change. The old unsafe profile is
+preserved; this is a method contrast, not Game balance. All16 old unsafe results
+reproduce.57 new offered actions have no unsafe starts, but the16-pair comparison
+stays review_required: wins13->15 cannot cancel class access0.875->0.75 or prior
+warnings. Whole-run low-water exposure0.0680->0.0612 is not a material signal.
+Transit safety, hunger and meaningful garden food remain separate questions.
+See garden-water-audit.md and its source-bound panels/actual ending controls.
+
+## Gardener diplomacy controller r1 (2026-10-23, diagnostic only)
+
+No Game lever changed. Optional named control/visit profiles share current
+garden-invest-expand on one Game. Their weekly real talks/travel consume time
+and may alter knowledge, trust, community needs and future choices. This is a
+controller-method contrast, never a Game-only comparison. R1 requires live
+crops, health60, reserve1800 kcal, start tick<=128, and2000 tribute plus three
+nominal community pantry days. That nominal reserve is not guaranteed edible
+food security. The split uses the visible30+ trust tier, not a hidden exact20.
+
+R1 remains review_required: hydration/needs/NPC class and community watches
+worsen in the16-pair screen. Eight exact boundary replays confirm seed6 starts
+talks at hydration0,0,86,8; low-water starts carry no water. Preserve this unsafe
+r1 and the raw warnings. Next improve optional-expedition water safety and
+compare both declared controller revisions, with real food/raid outcomes and
+all29 metrics. Do not change crop costs, maturity, raid odds or player survival
+rules to rescue this bot. Details and source-bound receipts are in the dated
+garden-diplomacy audit; no default adoption or release clearance.
+
+## Reachable village diplomacy (2026-10-23, review candidate)
+
+UI access changes a human survival opportunity: known adjacent/current village
+cards can now be opened through Place > Visit. Real split/tribute/warning/leave
+actions use unchanged Game APIs, prices, trust/tension and raid rules. Existing
+deals can suppress commons raids; no automatic deal or protection is granted.
+Prepared phone tests prove exact2000-kcal tribute payment and honest refusal
+at1000 kcal, retained pending offers and native Continue. Free browsing charges
+nothing. Naming/services share the same reader and actual offered actions.
+
+The64-case matched UI comparison preserves whole rows/all29 metrics/final
+hashes under identical observer/controller/options; source differs only in
+app.js. Those bots do not use the repaired entry, so this establishes no human
+survival benefit or diplomacy-aware gardener viability. Prior canonical-garden
+review_required warnings remain open. Next measure physical travel plus real
+offered diplomacy, with both whole-community outcomes and garden food payoff.
+
+## Canonical NPC garden holders (2026-10-23, review candidate)
+
+Integration correction, not coefficient tuning: gardenMagicPlan used object
+entries although npcGrantAbility and the build brain store NPC ability IDs.
+Naturally granted Green Thumb/Green Whisper holders therefore had no garden
+magic plan. Prepared public-grant proof was1/3 red; canonical-holder repair
+passes14/0, including real death/succession. Existing cultivation39/0 passes.
+Do not replace the canonical ID list with player objects. Practice is saved
+per person/ability in village.npcAbilityPractice after real paid NPC casts;
+read-only plans do not hydrate it. Succession imports only the incoming held
+abilities' earned levels/XP and removes their duplicate NPC practice record.
+Auxiliary opportunity observations read this metadata only for held IDs.
+
+Survival levers affected: NPC garden growth/yield becomes reachable, at the
+existing authored food cost/hunger limit/daily bed cap. More harvests may
+improve community food; paying for magic may also make the gardener hungry.
+No cost, growth, yield, maturity, practice threshold or hunger coefficient
+was increased or reduced. Shared Codex knowledge still persists.
+
+Completed review screen:16 matched seeds per capable/maker/merchant/caregiver, plus
+16 declared garden-invest-expand and16 Sahel/Dakar maker cases, cap600 with
+actual endings distinguished from caps. Same current observer/policies on
+frozen pre-fix and candidate Game roots. All comparisons remain review_required:
+maker deaths/run2.3125→3.8125 and sampled living NPCs8.049→7.121;
+Sahel low-hydration exposure0.0353→0.0734. Maker craft/trade gear access
+0.125→0.5 cannot cancel those warnings; merchant access falls0.5→0.375.
+Six selected passive replays match full rows/all29/final hashes and show real
+NPC casts0→18 in maker5,0→2 in caregiver9. Caretaker selection changes before
+casts in gardener1, so food-cost causality is not established for every metric.
+All four original caps have prefix-verified real endings through day1138,
+kept separate from the matched gate. Decision: hold for investigation/review,
+not retune difficulty to recover wins. See garden-canonical-holder-audit.md.
+
+## Overnight body settlement (2026-10-23, review work)
+
+No calorie, hydration, armor, avoidance or damage coefficient changed. Dawn
+can open combat before metabolism settles. Its starvation/dehydration result
+must reach that same bearer's fighter after Resolve/Anchor adjudication;
+escaping or continuing cannot restore the stale pre-night HP. This removes an
+unpaid-health escape and may make exposed runs harder. Resolve's restored
+lethal night now also clears the stale lethal result. A lethal night retires
+the actual fight through its ordinary loss path, preserving arena lifelines,
+the true death cause and the successor's own health. Never reroll avoidance
+while copying resolved HP.
+
+The shared-kit proof passes33 checks; the exact preceding source fails17 of
+them. Phase Shawl's92 checks still pass. Fresh matched16 seeds per policy
+remain review_required: capable deaths/run2.0625→2.25 and deaths/100 calendar
+days2.21965→2.42798; merchant craft/trade tier-3+ access0.3125→0.1875. Merchant
+wins0.75→0.8125 do not offset those warnings. All seven main and three named
+Sahel/Dakar maker changed cases reproduce exact rows/all29/final hashes.
+Passive endDay observations record13 positive live-body splits before→0 after;
+later gear/class/community differences remain incompletely attributed. Every
+alive cap has an actual played ending with its600-step prefix verified.
+This is screening, not an effect-size or universal noncombat viability claim.
+Actual phone pursuit/Continue and current browser proofs pass at both heights;
+quick348/0 in86s and full1120/0 in363s pass.
+See evidence/2026-10-23/overnight-body-balanced-r1.md and the retained panels.
+
+## Contest scene and HP correction (2026-10-22, not released)
+
+The coefficients are unchanged. Contest damage and the five-HP winner tax now
+remain paid in an overlapping combat body through escape/Continue; healing and
+lifelines likewise reach the real body. This removes a survival exploit and
+can make an old mixed scene harder. World actions cannot start a second fight
+under an unresolved broadcast, while actual arena handoffs remain valid;
+preventing that overlap can reduce simultaneous threats. Both effects require
+fresh matched measurement rather than a win-rate target. Current baseline is
+saved7a, candidate uses the same tools/29-column contract,16 seeds/profile.
+Keep all23 domain warnings and real alive caps.32 focused checks and six native
+phone replays pass, including a prepared post-fight due grab at both heights.
+Current-source browser maintenance, real neutral proof and quick347/0 pass.
+The current matched64 per arm remains review_required: capable class access
+0.875→0.625; maker low-water samples0.01698→0.05033; merchant craft/trade gear
+0.4375→0.3125 and deaths/calendar100 days0.8461→1.2647. Caregiver win gains
+do not clear class warnings. All52 changed cases reproduce in104 passive
+replays, with recorded mixed-scene events17→0; this does not establish the
+cause of every later metric. All caps reach real endings with exact600-step
+prefixes. Full1119/0 in769s passes. Historical first-candidate warnings
+remain recorded and cannot be substituted for the current-source comparison.
+See evidence/2026-10-22/contest-scene-health-audit-r1.md.
+
+## Combined Muse407 measurement (2026-10-22, review pending)
+
+No numerical survival lever is tuned by the luck correction: scores become
+discrete midpoints and diagnostic-only, preserving the original23 domain gates.
+The same current collector/policies on public407 and the reconciled candidate
+retain capable/caregiver survival/community warnings and maker hunger; merchant
+win gains do not cancel them. All four alive caps reach genuine endings with
+exact600-step prefixes. Current passive replays identify starvation, contest,
+dehydration and combat losses; they do not establish one cause for all changes.
+The prior curio candidate's64 rows/all23 agree in a separate cross-epoch
+diagnostic, while23 state hashes differ; this is not full-state equality or a
+replacement for the current matched comparison. Keep review_required and avoid
+numeric compensation while the native contest/combat HP erasure is investigated.
+See evidence/2026-10-22/reconcile-407-audit-r1.md and retained raw panels/traces.
+
+## Haven food-record view (2026-10-22)
+
+No numerical survival lever changed. App separates actual total eating, pantry
+deposits and recorded net meal use; an empty/zero-draw pantry cannot imply
+everyone is fed. New read-only food view changes information for human
+decisions; that human effect is unmeasured. All12 maintenance cohorts reproduce
+original row/all23/final state exactly under one controller; this does not
+clear earlier public/candidate balance watches. Before/after native phone,
+committed Continue and free-record gates are in haven-food-audit-r1.
+
+
+## Common conversation controller screen (2026-10-22)
+
+No numerical lever changed. The new controller answers current questions and
+hears queued speech within five actions; both exact Game roots were rerun
+under it. Publicd64 versus candidate5c,16 matched seeds/profile, all23 remains
+review_required. Capable/caregiver entry/community/survival and maker hunger
+watches remain; merchant9->12wins does not cancel them. Caregiver deaths/run
+1.8125->2.1875 but per100calendar days .8207->.7846 illustrate why both exposure
+and counts matter. Preserve coverage_changed for the15known survival pairs
+in maker/merchant; two early public community endings leave bearer survival
+unknown. See controller-balanced-r1 and controller-held-audit-r1.
+
+All four alive600-iteration caps now have separate, exact-prefix, naturally
+played endings: public maker8 day724 loss; candidate maker1 day657 loss,
+caregiver7 day660 Table win, merchant1 day718 loss. Original panels remain
+unchanged. Disease can kill at positive HP (lockjaw620), and late contest/
+night/phoenix-link losses remain real hazards. Do not add food/damage buffs
+or force deaths to satisfy a diagnostic. Availability reads explain three
+original Table absences by the food-deed bar; no godhood gate was added.
+
+
+## Muse d64 reconciliation (2026-10-22, review in progress)
+
+The incoming published d64 changes the following real levers. Preserve their
+intent during the normal merge; this record is not an acceptance of balance:
+
+| Lever | Before | Incoming behavior |
+| --- | --- | --- |
+| Plentiful-pantry deposit gate | ordinary deposit decisions | default on in browser/Node unless DEPOSITGATE=0; uses prodThrottleEngaged (>4 fresh days; hunger stretch stands it down) |
+| Scholar homecoming food keep |2000kcal|6000kcal when that gate engages; actual carried food remains donate-able |
+| NPC share/return/ambient deposits |ordinary pantry share|half of eligible deposit is eaten at the fire and recorded as intake instead |
+| Weekly tribute at plentiful pantry |normal transfer/arrears|waive that payment, leave food in subordinate stores, mark paid and gain1trust |
+| NPC-targeted plot motive |45|35; player-targeted remains45, and beloved-player protection remains for player targets |
+| Sick departure/guard companions |wound-only/missing sibling gates|actual sick people stay home on both departure paths |
+
+Deeper/pod-tail/moot prose varies without new price values. Reconciliation also
+corrects a missing closing speech quote in the incoming pod-tail producer; it
+does not alter any authored tail. The old and new source histories remain.
+
+Same-controller64-case integration screen against saved0aa is review_required:
+national/population/death/class/community watches worsen in several cohorts.
+This is not a verdict based only on fewer wins. Actual-cause selected replays
+and a SEPARATE comparison against public d64 Game with common current tools are
+retained in reconcile-d64-audit-r1. Both are review_required. Public impact has
+merchant hunger/class and capable/caregiver survival watches. Six selected
+integration pairs reproduce all23/final hashes; one is an alive observation
+cap, not an ending. Day2 authored questions already diverge; actual later deaths
+do not attribute every signal to one lever. Public release impact and
+incoming-change impact are distinct.
+No food, plot or damage coefficient was retuned to restore old results. Retain
+raw panels/unknowns and finish combined verification before owner review/ship.
+
+## Interrupted answers and voice questions (2026-10-22, review)
+
+No numeric survival price/coefficient changes. Preserving queued answers and
+preventing invented questions changes actual available social actions and RNG
+histories. Unchanged-controller64-case all23 screen stays review_required:
+caregiver deaths1->2/run and.6205->1.2232/100days are adverse signals, despite
+one additional win in every cohort. Capable survival60/deaths, maker hydration,
+and maker/merchant/caregiver class watches also remain.92 selected traces retain
+actual combat/contest deaths, including after day90, and a real day602 alive
+observation cap. No win-preserving food/damage/reward tuning. Controller still
+excludes held goon; repair it separately and rerun BOTH roots with one policy.
+See held-answer-audit-r1 and complete retained balanced table.
+
+Pack proof correction from that refresh:200kcal was never universal cautious
+testing cost. Existing queasy branches charge200; symptom-free full64tick
+completion charges0, with ordinary time/energy effects. No food.js change.
+Schema2 proof binds exact payment to actual outcome narration and rejects
+missing/contradictory/false billing. Older200 observations remain true for their
+sick outcomes, not a universal rule. No free symptom-free receipt was fabricated.
+
+## Conversation choice order (2026-10-22, review candidate)
+
+Reply priority changes which actions are easiest to reach on the phone, while
+retaining every offered label, ID, price and authored effect. No numerical
+survival lever changes. Existing position-sensitive bots choose recap/silence
+as fallback and filter goon, so ordering alone produces real divergent campaigns.
+Same-policy64-case all23 screen is review_required, with adverse national/class,
+community, death and earned-gear watches.82 exact passive replays reproduce
+original rows/all23/end states; the first capable1 divergence is actual
+day2/tick26 recap vs silence before later community endings96 vs44. This is
+model fidelity debt, not a waiver of warnings or human neutrality. Next fix
+must use one common revised controller on both Game roots. Do not retune food,
+damage or rewards to restore these win rates. See reply-audit-r1 and the full
+retained balanced table. Actual natural campaign is only at day2/tick10.
+
+## Pack reader presentation (2026-10-22, review candidate)
+
+Natural play exposed costly navigation, not an engine resource price. Compact
+action rows and retained item context change phone discoverability; no food,
+time, damage, reward or test-risk values change. Human survival effects remain
+unmeasured. Native cautious tests still pay200kcal at the authored16/24/40/64tick
+stopping boundary for this unknown Jewelweed input.12 fresh observer-neutral
+cohorts maintain provenance, not human balance-neutrality or campaign clearance.
+Preserve prior all23 review warnings. See pack-reader-audit-r1.md.
+
+## Authored bond hooks reach the browser (2026-10-22, review candidate)
+
+Restoring canonical party-bond binding activates existing crew/NPC field-fight
+practice, grief and authored path bonuses that old sims had but the browser
+did not. This is a real survival/progression change for players, not merely a
+test refactor. Existing coefficients/thresholds/prices stay. Tactical-party
+award rules are not expanded. Alien speech and legacy office reads use their
+actual receiver/namespace; current authored god deeds remain required.
+
+Use the corrected no-alias harness on BOTH Game roots. All23 screen remains
+review_required: maker national/NPC-class, merchant craft-trade gear and caregiver
+player/NPC-class watches coexist with caregiver wins15->16. Earlier terminal
+windows partly confound class/trade access; unobserved opportunity remains
+unknown. Preserve the prior09ff community/resource/gear watches too. Decision:
+retain truthful authored wiring; no compensating food/HP/win adjustment. The
+64-case identity with the OLD harness is a restoration diagnostic, not proof of
+human balance neutrality or single-lever causality. See game-namespace-audit-r1.
+
+## Current09ff integration decision (2026-10-22, review candidate)
+
+No new numerical lever tuning. Preserve both agents' authored behavior and
+original actor ownership. Same-controller64-case all23 comparison remains
+review_required: capable wins16->15; maker16->14; merchant15->15 with opposite
+seed4/31337 win/loss turnover; caregiver living-NPC regression_signal plus
+hydration/class watches. Preserve entry, early survival, community, resource,
+progression and earned-gear warnings individually. Ten exact passive replays
+cover all five changed win/community-loss cases and show actual engine endings
+with death callers; they are not single-lever attribution or human clearance.
+Keep truthful behavior; no HP/food/win compensation. Owner review and independent
+holdouts precede small-effect claims. See reconcile-09ff-audit-r1 and the raw
+all23 tables. Earlierf83 seed identities/reporting-only contrasts stay historical.
+
+## Legacy refusal before payment (2026-10-22, review candidate)
+
+Keep the existing500-food gate, tier prices, treatment100-food native fee,
+Blood Price exemption and effects. Known cooldown/health/item refusal now happens
+before fee/time. An unexpected false inner result refunds only the outer fee to
+the same living actor; it does not undo arbitrary native partial effects. The
+clock boundary prevents a departed actor's effect/XP/action reaching a successor.
+These are real resource/ownership changes, not a cosmetic correction. Disabled
+reasons are readable and Red Hunger's nearby-body eligibility works in the
+browser. This proves eligibility only, not an entire corpse-consumption path.
+
+Decision: retain truthful refusal/ownership; no win-rate compensation. The64
+mixed-policy and16 actual offered ER-nurse campaigns have identical non-acceptance
+metrics on matched inputs. Accepted-ability reporting changes because legacy
+dispatch formerly returned null after success; inspect retained replay evidence
+before interpreting this as usage. Node's extra global.Game shim concealed a real
+phone bug; the current namespace repair above addresses it. Broader survival/community/
+gear warnings and unknown late-game/device coverage remain. See legacy-availability-
+audit-r1. Native pagehide/Continue is proved; immediate force-kill durability is not.
+
+## Browser activation action parity (2026-10-22, review candidate)
+
+No engine price, damage multiplier, hunger gate or effect tuning. Remove the
+browser's extra tbPlayerActed after data-driven dispatch: Stoke still costs150
+kcal and empowers two Strikes60%, but now preserves the declared free action.
+Paid actions retain their own action debit; explicitly refused legacy actions
+do not gain an extra UI debit. This restores human action economy and could
+affect survival; it is not just a wording change. Native two-height paid/free/
+refusal/Continue cases pass. All64 headless rows/hashes/all23 are exact because
+the harness excludes the browser handler; do not infer human balance neutrality.
+No win compensation. Preserve current survival/community/resource/gear watches
+and investigate wider native opportunity/use separately. See activation-preview-
+audit-r1. Immediate autosave/force-kill and low-food legacy availability remain
+separate bounded audits, not claims of this prepared proof.
+
+## Current f83 reconciliation (2026-10-22, review candidate)
+
+No additional numerical lever tuning. Preserve Muse's production/gossip/injury
+changes and Codex's earlier survival/resource/beam fixes. The same-controller
+64-case600-iteration comparison against current f83 remains review_required:
+maker wins16→14 with native community losses4/99; capable early-survival/NPC
+class, merchant contest-gear and caregiver hydration/NPC-class watches remain.
+Exact passive maker death-call replays reproduce rows/states/all23 on both roots;
+they locate sickness/starvation/wounds/monster/contest endings, not stalled combat.
+These multi-change contrasts do not establish a single lever's causal effect.
+Decision: retain truthful ownership/turn/beam behavior, no win-rate compensation,
+preserve all23 warnings for owner review/holdouts. See reconcile-f83-audit-r1.
+
+## Fresh opening UI (2026-10-21)
+
+No survival lever changed. Native Haven forage stock remains zero, wild forage
+and garden costs/yields/growth are unchanged, and refusals still cost nothing.
+The phone UI stops advertising an impossible zero-stock Haven harvest, preserves
+looking/brush work and points to wild ground or planted beds. Entry copy and
+owner-specific keepsake flavor change no Game RNG or policy methods. Twelve
+current neutral cohorts/off controls match prior whole rows/states/all23 exactly;
+this is maintenance coverage, not broad balance clearance. A real fresh-run grape
+bed still needs365 growth days; observed Green Whisper adds4 for200kcal once per
+day. No late harvest viability or numerical tuning is inferred from planting.
+
+## Local search controller experiment (2026-10-21)
+
+No Game lever, numeric cost/yield, difficulty, default policy or balanced
+observer/contract changed. The additive grid-*-search policies choose a local
+approach/search session before existing upkeep. This changes player-method
+timing and can displace food/social/travel work:8 paid approach steps maximum,
+3 native per-item attempts, one body per bearer/day. Actual carrying, first-touch
+time, trauma/disease, NPC/ambient consequences and refusals remain. Do not call
+methodology differences a Game balance effect or compensate with easier wins.
+
+Matched all23, actual native endings, separate extended seeds, real controls,
+and a source-bound mobile/Continue reference are required by
+LOCAL-SEARCH-COHORT.md. Depleted stacks are not earned useful gear or nutrition;
+known death is not a remote location grant. Distant sprite-covered bodies cannot
+select a route. Final results/decision are retained in local-search-audit-r1;
+default promotion and numerical calibration remain separate decisions.
+
+## Canonical corpse scene candidate (2026-10-21)
+
+Access/location levers changed; no costs, yield coefficients, food prices or
+difficulty thresholds tuned. Burial/respects/examination/butchery/grave use
+require the actual room and proximity, like item taking. Spoilage continues
+world-wide; its local notice only names the current room. Abstract NPC
+starvation/cannibalism events and Codex death knowledge are not physical
+player-hand interactions and were not rewritten as pathfinding in this pass.
+
+Fresh final quick311/full1083 pass; final128 panels and72 native campaigns
+retain current source identity.
+
+Codex branch codex/corpse-scenes-20261021 startsdaa023a06 and retains
+Muse57ca. Corpses now save hall/outside identity. All physical access routes
+share scene/range checks; remote resident deaths use their own node/room,
+recovery goes to the outdoor fire, and large-fight bodies return to legal
+world cells. Cached reward packs resolve canonical IDs/fight/fighter identity
+rather than an unrelated same-species body. Legacy missing rooms are explicitly
+inferred outside without deleting/reassigning belongings; exact saved fighter
+links supply room/frame evidence. Unknown people stay unnamed in the Loot header.
+
+Core29/0, coalition27/0, controller10/0 and both phone heights pass native
+entry/exit/paid approach/loot/legacy/Leave/immediate bytes/Continue. Fresh128
+matched all23 remains review_required;113 cases change metrics. Selected exact
+replays prove the old code put remote dead residents and their gear at the
+bearer's feet: capable2/day10 and caregiver7/day6 actually died at5,3 while
+the bearer stood4,4/8,0. The new body stays at5,3; next-day remote pickup is
+correctly refused. This explains an actual removed free-recovery path, not all
+subsequent deaths or cohort warnings. Do not restore teleportation or buff wins
+to hide the difference.72 current long cases end natively38–226d,55wins/17losses,
+4 exact off controls. All phone/shared/local installed173-input checks refreshed.
+See evidence/2026-10-21/corpse-scenes-audit-r1.md. Earlier scene holds below
+are historical diagnoses now addressed on this candidate; owner review, balance
+tradeoff review and ship-loop publication remain pending. Next: evidence-led
+resource/earned-gear recovery with real travel and honest location knowledge.
+
+## Current Muse merge verification (2026-10-21)
+
+Muse survival levers retained: a full cistern redirects assigned water work to
+alternating wood/stone; a partial cistern caps the haul to remaining room. The
+feud no-repeat rule can select a different authored trust/tension incident.
+These can alter resources, relationships and subsequent play despite avoiding
+an extra direct RNG draw. No difficulty compensation was applied.
+
+Normal merge4b5d4e0da preserves Search92a and incoming Muse57ca. Fresh128
+matched all23 pairs under identical current tools remain review_required;
+caregiver wins rise while deaths/first-bearer survival worsen, and class/gear/
+water watches remain. Two selected native CISTERNCHECK_OFF replays remove extra
+deaths but also one win; diagnostic, not clearance or default tuning.72 current
+physical long campaigns reach native endings39–167d,52 wins/20 losses, no caps,
+4 exact off controls. Both phone heights and local installed173-input update/
+offline proofs are refreshed. Native anonymous-person telemetry is preserved
+without inventing resident IDs; isolated-process proof78/0. See
+evidence/2026-10-21/search-muse-reconciliation-r1.md. Canonical corpse room
+identity remains the next bounded release hold; owner review/ship pending.
+
+## Nearby body discovery and inherited scene ambiguity (2026-10-21)
+
+UI interaction lever: one Search action and a folded alternative-body list
+make native nearby loot discoverable. Exact ID/state/bearer guards preserve
+intent through rerenders; free open/switch does not transfer stock or charge
+time. No numerical, Game, policy, observer or contract changes. Fresh8-policy
+seed1/8-off maintenance is exact toad78 for row/state/all23; this does not clear
+the carry screen or establish human recovery balance.
+
+Canonical spatial warning: native enterBuilding makes an outdoor4,7 corpse
+appear in range from interior4,7 because corpse records lack room identity.
+The new UI preserves and exposes that existing contract. Hold its publication
+until creation/lookup/load scene semantics and old-save ownership are fixed,
+with matched measurement and actual entry/exit/Continue. Keep this distinct
+from cost/admission tuning and from the prior corpse coordinate-zero fix.
+See search-audit-r1 and search-scene-probe-r1; do not infer balance from UI green.
+
+
+## Loot reader interaction candidate (2026-10-21)
+
+No Game, numerical lever, policy, observer or contract changes. App-side body
+choices now use the actual emitted result and checkpoint inventory plus the
+selected corpse after a real change. Leave flags persist even when inventory
+does not move; stale panels/bearers/removed bodies cannot invoke old handlers.
+Opened readers share bounded inner scrolling, so previously clipped buttons
+are reachable without moving the outer phone page. This can improve human
+resource recovery even though node policies do not operate the UI.
+
+The fresh8-policy seed1/8-off neutral maintenance panel retains exact rows,
+state hashes and all23 metrics against9563d3ce5; this does not clear its
+128-case burden warnings, prove general playstyle balance or certify human
+late-game recovery. Native zero-coordinate touch ownership/Leave/Continue,
+refusal and checkpoint tests provide the interaction evidence. See loot-audit-r1.
+Next: nearby body discovery and recoverable excess-load/hydration loops, using
+the retained divergent runs before any numerical tuning.
+
+
+## Carrying contract candidate (2026-10-21)
+
+Steve reported blocked pickup despite expecting extra carrying at greater
+calorie expense, and false corpse-distance refusals while standing on a body.
+This candidate keeps nominal capacity and all authored combat burden tiers.
+Voluntary pickup/retrieval now permits twice nominal effective mass, including
+water and body modifiers. Two is a provisional implementation choice within
+his double-or-triple example, not a designer-mandated coefficient. No existing
+excess inventory is deleted or immobilized. Sources and their quantities remain
+unchanged on refusal; fitting quantities move only once.
+
+Existing burden movement multipliers1/1.25/1.6/2 now multiply the physical
+square price before rounding. Existing work additions0/15/35/60 apply to
+foraging and ruin searches, measured from starting load. Other work, resting,
+ability costs and free node-boundary transitions are unchanged. This is a real
+survival lever, not merely a label correction. Original nominal-based combat
+speed/dodge penalties remain. Plain node-travel policies do not establish
+human walking costs; retain named grid cohorts and native long endings.
+
+Related interaction levers: corpse coordinate0 is preserved instead of being
+replaced by4; all corpse-use siblings retain distance/node/access guards.
+Transfer and completed/cancelled walking checkpoints preserve actual landed
+progress, guarded by state/bearer/scene identity, with storage failure notices.
+UI now quotes effective load, pickup limit, current burden and real costs.
+These fixes can affect resource access and succession, not just screenshots.
+
+This is a voluntary acquisition threshold, not a universal inventory invariant:
+automatic awards/harvest output can exceed it, and foraging still uses an
+estimated preflight mass. Keep earned surplus and allow unloading. Do not
+claim every physical job is burden-priced or every source strictly clamped.
+Water containers remain whole liters; fractional requests do not create a
+whole bottle. Repeatable contract/phone checks and the all23 before/after
+tradeoff are recorded in carry-audit-r1. No compensation tuning or claim of
+pacifist viability is implied. Runtime owner review and ship-loop publication
+remain separate from local verification.
+
+
+## Lodge UI access and approach (2026-10-21 candidate)
+
+Presentation/access-discovery lever only: native Garden/Pantry entries move to
+the first Haven management row, with the same access/cost handlers. Lodge taps
+use native paid movement to the existing south door and explicit entry; Dpad
+and Game collision remain unchanged. No food, growth, burden, combat, reward,
+controller or cost coefficient changes. The human route is now a doorstep
+approach rather than a roof-cell target; actual costs must be read from native
+phone receipts, not inferred from node policies that do not operate the UI.
+
+Eight seed1 maintenance cases plus8 off controls retain exact state/rows/all23
+against9b; this is not treatment or small-effect confirmation. Its prior merchant
+win change_watch remains in the full previous panel. Do not use the UI pass to
+clear that watch or promote/tune physical policies. Next burden investigation
+must audit existing calorie tiers and all acquisition gates before changing
+capacity or movement/work penalties. See lodge-audit-r1 and SURVIVAL register.
+
+
+## Canonical Haven scene and native departure (2026-10-21)
+
+Exile now writes insideHaven=false; native load canonicalizes explicit null to
+false and missing legacy flags to indoors only at home for a non-exile. The
+renderer, garden eligibility and resident placement agree with that scene.
+Hall/grounds caches and plots survive. No food/water, growth, costs, healing,
+combat or difficulty numbers change. Rest/door station choices call the same
+native verbs. Arrival/room art and choices do not simulate turns themselves.
+
+This removes accidental indoor shelter/interaction access and permits actual
+exile departure, so survival and outcomes can change. The matched128-case
+before/after screen uses one current observer/controller/harness and all23
+metrics. Seven cohorts show no material signal; grid-merchant has a +1/16 win
+change_watch, requiring investigation rather than declaring a balance gain.
+The old stuck merchant5 now departs and wins day120 in long coverage; its
+survival cause includes an already-held Fusion Reactor, not a new resource
+buff. Do not promote physical profiles or compensate by changing difficulty.
+See haven-visual-audit-r1 for exact endings, controls and limits.
+
+
+## Experimental physical travel profiles (2026-10-21)
+
+The grid-capable/maker/merchant/caregiver controller profiles pay native grid
+approaches, grant real per-step world/NPC responses, leave Haven through actual
+door approaches and cross one cardinal boundary at a time. Runtime and original
+profile defaults are unchanged. New experimental policy lever: after two blocked
+human-combat turns with no movement/strike attempt, try an available native
+retreat; sealed fights keep their barrier. No fighter or clock edits, forced
+victory or modified escape chance. These are controller levers, not Game buffs.
+
+The first named-cohort screen found strong mortality, water/food/health and NPC
+progression warnings despite some higher win rates. It also exposed a natural
+terrain-separated human fight requiring harness recovery. The current profile
+adds real retreat through public verbs, and fresh panels/native-ending coverage
+are being rerun. Keep the original recovered/capped observations historical.
+No garden numeric tuning, profile promotion or balance clearance follows from
+this experiment. See PUBLIC-TRAVEL-COHORT.md and public-grid-audit-r1.
+
+## Reconciliation with published Muse runtime (2026-10-21)
+
+Review branch `codex/muse-reconcile-20261021` preserves Muse's published siege
+restoration/drift behavior and Codex's pending movement/settlement correctness
+stack. No garden yield, ability cost, capacity number or policy default is tuned.
+Native world-turn cadence remains a survival lever even without numeric changes.
+Use muse-reconciliation-r1 and its current-tool matched panels for this combined
+candidate; older walk-cadence contrasts describe a different source baseline.
+The first comparison with historical controllers was rejected as invalid and is
+not balance evidence. Keep all23 warnings and unknowns; independent native garden
+endings establish coverage, not a causal benefit or clearance for NPC cultivation.
+The valid same-tool screen is review_required: capable wins stay15/16 while
+first-bearer30-day survival drops14/16 to13/16; maker wins/entry drop10/16 to9/16
+with one community loss. Both cohorts' deaths increase; merchant/caregiver show
+no material metric signal. These are investigation watches, not an instruction
+to restore win rates. No numeric compensation or default promotion is made.
+
+## Walking input cadence and cancellation (2026-10-21, review_required)
+
+Lever register: manual walking now shares the authored2% per-square brush risk;
+committed walking now grants the same real village turns. A landed square still
+costs native walkStepKcal and normal1 tick; combat owns its own clock. Original
+body/scene guards prevent remaining world hooks/queued intent from charging a
+successor. NPC work can alter shared food, danger and RNG; these are real
+survival-affecting cadence changes despite unchanged numerical multipliers.
+
+Decision log: retain the correctness candidate for owner/mobile review, preserve
+all23 watches and do not compensate with food/HP/reward buffs. Capable screen
+wins15/16 to14/16, deaths1.875 to2/run and good/contest-show gear16/16 to15/16
+require investigation; other three cohorts reproduce all16 rows/hashes/metrics.
+The single new short-panel non-win is alive at its cutoff; a separate longer
+rerun wins at175d after combat158/lockjaw169 deaths. Keep both observations.
+Seed3 adds later contest deaths; seed42 loses qualifying gear despite real
+utility rewards and wins. None proves whole-cohort cause. Current36 garden
+campaigns end natively through281d; that is coverage, not balance clearance.
+See walk-cadence-audit-r1, all23 tables and exact selected replays. Ordinary
+crop calendars, ability costs, garden capacity and all numerical levers stay.
+
+## Actual dawn controller; no numerical Game lever change
+
+The daystart profile pays native garden/obligation costs before hunting/driver
+Wait and preserves NPC turns. This is methodology, not a damage/crop/survival
+treatment. Fixed-bed30d first-bearer survival13/16→8/16 and60d6/16→2/16, deaths
+2.3125→2.5625, water/class/gear watches and NPC-class regression_signal remain.
+Expansion adds mortality/NPC-class watches despite wins15/16→16/16;60d known
+coverage changes. Do not compensate numerically or judge from win direction.
+Selected exact native deaths differ: seed1 expedition236d versus lockjaw59d;
+seed2 contest41d versus27d, hydration14 versus0. These inspect danger routes,
+not all-cause attribution. Decision stays review_required. Raw all23, finite
+death-call windows and paid food/time/stock accounting are separate. See
+garden-daystart-audit-r1. Next verify phone/bot movement parity before tuning.
+
+## Optional garden timing screen; retain cross-system watches
+
+No numerical Game lever changed. Invested before-outing profiles preserve actual
+public costs and old late fallback after an unsafe/away early refusal. Completed
+early sessions replace later ones for the original actor/day. All72 campaigns
+end without recovery, but that is not balance clearance. Fixed beds have class
+access15/16→13/16 and contest/show good gear16/16→15/16. Expansion wins15/16→16/16
+require consideration, with changed known coverage for first-bearer60d survival.
+More wins/food do not cancel warnings. Seed2/14 lose class access, seed8 loses
+contest/show gear in the fixed-bed contrast; expansion seed7 loses class access
+despite no aggregate class warning. These cases are retained/replayed; their
+causal progression reasons remain unclassified. See garden-scheduling-summary-r1
+and diagnosis-r1. Keep review_required; no default policy or numeric buff.
+
+## Barrier turn/save correctness, no numerical tuning (pending review)
+
+The barrier now completes the original actor's spent phase and commits the settled
+pursuit board. This can change combat exposure, RNG and human Continue, so it is
+a survival-affecting correction despite unchanged damage/crop/food numbers.
+One controller/observer on both Game arms:64 ordinary cases show no material
+all23 signal. All72 garden cases end without recovery, versus three recovered
+baseline cases. The garden-invest seed2 and both expansion seed10 cases change
+first-bearer60d survival1→0; these are exactly those three recovered baselines.
+Do not use watchdog outcomes as clean counterfactuals, discard the adverse rows,
+or compensate by buffing survival. The warnings remain review_required; numerical
+calibration stays with Muse. Raw all23 and accounting: barrier-settlement-review-r2
+and balanced-r1 in2026-10-21 evidence. No general difficulty/viability clearance.
+
+## Gardener methodology screen: retain watches, change no Game lever
+
+No crop calendar/yield, power cost, reserve or survival Game lever changed.
+Four explicit controller arms separate actual garden-offer priority from
+demand/storage-gated bed expansion; current ordinary64-case rows/Game hashes/
+all23 stay exact. The72 observed long cases include71 clean endings and one
+harness-recovered ending; no caps. Raw balanced metrics retain that recovery,
+which does not clear real combat completion. See gardener-intent-audit-r1.
+
+At fixed beds, actual tagged crop intake154,625 to446,758 kcal (18 cases/arm)
+coincides with screen deaths/run2.75 to3.125, plus national/class access
+watches. Gross output and spoilage rise much more than intake. Expansion has
+first-bearer survival/community/earned-gear watches; fewer wins alone is not
+the verdict. Two selected denial traces implicate late tick budget, without
+classifying all cohort refusals. Decision remains review_required: do not
+promote expansion or buff ordinary crops. Next fix the bot's human-hostile
+target gap, then separately preregister garden scheduling. Numeric tuning
+remains Muse's lane; pending branches must be shared before calibration use.
+
+## Current Muse adoption; no Codex garden lever change (2026-10-21)
+
+The branch fast-forwards 00412b13f to cb5ad02ca without divergence or overwriting
+Muse. This changes the underlying Game, so older replay evidence stays historical.
+Fresh natural-r4 has eight exact controls and 74 observed campaigns: 3,327 paid
+player casts, 1,198 harvests, zero NPC casts; 6,958/7,138 garden duties redirect.
+The policy never queries/builds a fifth bed despite 54 upper-tier campaigns.
+Ten extended cases actually end (seven wins, three community losses) through
+day246; 20 short screens are capped. Raw all23 metrics remain retained, without
+declaring a before/after balance improvement or clearing existing warnings.
+
+Decision: do not adjust ordinary growth, capacity, magic cost/yield or reserves
+from this census. Next measure deliberate earned Gardener investment and extra
+bed opportunity on one unchanged Game. See garden-opportunity-audit-r2.
+
+## Garden opportunity observation (2026-10-21)
+
+Historical baseline: the census figures below bind Game 00412b13f, before Muse’s cb5ad02ca batch. The adopted-tip audit is retained separately; these are not
+a current-Game comparison or balance clearance.
+
+No Game lever or controller changed. A new passive sidecar separates offers,
+actual acquisitions, sampled holders/classes, queried gates and physical uses.
+Fresh82 jobs retain exact canonical Game hashes, rows/all23/RNG/native counters
+and eight true observer controls. Existing caregiver death and broader balance
+watches remain; this measurement improvement does not clear them.
+
+Current mixed cohorts have3,474 completed player casts in55/74 cases, matching
+the independent paid-cultivation count. NPC core holders appear in74/74 but
+cast zero times:7,467/7,611 garden-duty attempts redirect, and97 observed NPC
+magic-gate calls lack the worker's own core power. The availability of other
+holders at each work attempt remains unproven. Upper-tier unused capacity in59
+cases coincides with zero queries/builds beyond the policy's four-bed cap.
+
+Decision: share accurate opportunity evidence, then measure a declared Gardener
+intent/investment policy using real offers/gates and demand/mastery/cost/storage
+decisions. Do not respond to zero NPC use by buffing powers, or to unused beds
+by forcing maximum investment. No win-rate restoration or crop price change.
 
 ## Partial food transfer granularity (2026-10-21)
 
@@ -1769,6 +3125,52 @@ useful intake. Ordinary-only and eligible-NPC-magic viability remain unproven.
 See garden-cultivation-balanced-r1, farmer-balanced-r2, raw panels and per-policy
 replay-r1 reports. Winning remains hard; lower wins alone are not a veto.
 
+## Combat readability and presentation cadence (2026-10-22 candidate)
+
+Browser announcement/result holds change200/350ms→450/700ms. This is time
+to paint/read an actor's turn, not an additional gameplay turn or resource
+payment. Generation guards, order and action methods remain unchanged. The
+message area now exposes actual net HP changes and a selected turn reader;
+movement inputs already illegal during enemy turns become visibly disabled.
+No damage, defense, HP, food, loot, AI or progression values were tuned.
+
+Compare the same observer/policies to f41ed4528 using retained64 matched cases
+and fresh12-cohort neutral maintenance. Headless runs exclude app.js/CSS and
+cannot establish human balance, readability or absence of browser races. Native
+touch, Details neutrality and announcement/resolution reload checks cover those
+specific boundaries. Retain earlier survival/progression watches; do not use
+unchanged headless metrics to clear them. See combat-turn-audit-r1 and its
+final source-bound receipts, panel/census/configuration and comparison.
+
+## Ordinary Strike and Deer ignition correction (2026-10-21–22, review candidate)
+
+Steve: "Strike shouldn’t interrupt a beam. Where did that come from?"
+Commit5150fb415 (2026-10-04, "the reserve: food is humanity's superpower")
+introduced a generic ordinary-Strike cancellation of firing telegraphs:25%
+below20 damage,50% at20 or more. No Steve directive supporting that rule was
+found. Remove that random cancellation and its style reward/prose; landed
+damage, pain targeting and actual target death remain native. Beam exposure
+may increase. Do not restore win rate with unrelated numeric compensation.
+
+Separately, reproduced Deer ignition invoked close-range antlers twice in one
+enemy turn (pre-turn hook plus live-fire entry). Skip only the second ignition
+call; retain one attack during windup and every actual firing turn, and zero
+damage on visual tracking ticks. This reduces that duplicated exposure and
+changes RNG consumption. The joint candidate requires fresh matched survival,
+community, resource, progression and earned-gear review against704d9dda8.
+Earlier antler-only panels do not verify the final candidate. Shared native
+regression test exercises actual Strike damage and preserves live beams across
+three formerly cancelling rolls, plus real phase-boundary attack counts.
+
+Final r3 screen retains capable survival/death and caregiver progression
+watches; maker/merchant have no material aggregate signal. The caregiver14
+screen cap resolves to a native win at day622 in its separate extended replay.
+Keep that extension separate from the matched600-iteration comparison. The
+guide copy correction leaves all64 campaign rows, metrics and saved-state
+hashes identical to the pre-copy mechanics candidate. Retain difficulty and
+warnings for review; do not compensate with unrelated buffs. See combat-audit-r2
+and final combat-balanced-r3 plus raw panels/census/configuration.
+
 ## Historical garden direction and dead spots (2026-10-20)
 
 No gameplay lever changes in this audit/tooling milestone. Current capacity
@@ -1783,6 +3185,37 @@ paid garden magic, maintenance separate from unwanted surplus and reclamation.
 Treat food output, useful consumption, labor/opportunity and all23 domains
 separately. NPC garden-ability use and crop-specific intake remain unknown.
 See GARDENS.md and garden-longplay-audit-r3.md; no runtime balance clearance.
+
+## Broadcast material curios: authored barter value becomes usable (2026-10-22 candidate)
+
+Audience Token400 and Spare Battery250 already declare canonical tradeValue,
+but no runtime consumer existed. The visiting trader previously offered only
+food stacks. Wire these material curios into its actual appraisal/tab flow;
+keep Contract Quill on its existing keepsake path. No prices or prize odds
+change. Selling consumes the real stack and credits that buyer's tab; it does
+not feed the bearer. The existing completed-trade counters and deed hooks
+remain active, so resource access and progression may change.
+
+Require an actual living visiting buyer, living bearer at Haven and freedom
+from combat/active broadcast. Refuse unknown material IDs and invalid payments.
+Preserve food appraisal/payment and carry limits. A hint cannot imply that a
+buyer is currently available. Full native trade/use/Continue and matched all23
+comparison against frozenaa6 remain pending; do not clear older survival,
+community, hydration or earned-gear warnings with a unit pass or more wins.
+See broadcast-reward-phone-audit-r1 for the genuine token, baseline failure,
+current25-check prepared isolation test, coordination and retained panels.
+
+Final pre-reconciliation screen is64/64 identical rows/all23/state hashes,
+with current neutral proof. Merchant sale selection is food-only, so this
+does not quantify actual curio use or clear older public/review warnings.
+All three alive caps per arm reach real terminal outcomes at657/660/718 with
+exact original600-iteration prefixes. Native736/844 buys and pruning plus
+full committed Continue pass. A400 token part-funds the1000 tool; older carried
+token400/battery250 pay the remainder. Do not claim a single low-tier token
+buys good gear or infer a price change from this case. New origin407 extends
+the metric contract; reobserve both roots after reconciliation. Inclusive-CDF
+luck currently labels both single-pit outcomes lucky; descriptive luck must
+not dismiss survival, community, resource or progression warnings.
 
 ## Linkform courtship levers — pilot survival read (2026-10-23)
 
@@ -1806,3 +3239,43 @@ Decision: neither arm lands as a change. The cadence mode is deleted; the
 overcourt instrument stays env-gated default-off pending a re-stage with the
 metric review's mean-dip primary (evidence/2026-10-23/sim-links-diag.md).
 Re-stage must carry the starvation/median-days guardrails with tighter bars.
+
+## Recall follow-through and prospective closing (2026-10-27)
+
+Recall64 holdouts use the unchanged common controller/observer and150-day observation cap: wins50to52,23to24,20to24,26to19. All29 remains review_required with death/community/class/gear watches; more wins cannot erase them. Passive capable1 first diverges at the intended day7 restored question, at the same100HP/1054kcal/tick; the unchanged brain actually answers. Caregiver900004 is nonterminal at151 and later loses its village on220, with no forced turns/watchdogs. That is one adverse case, not population causality; recheck under the incoming bystander fix before tuning.
+
+The separate unapplied closing proposal folds gesture-only mood into one farewell and counts only an actual active-to-closed sitting. Existing level3 relationship disclosure requires trust55, four conversations and three days after level2; duplicate end calls previously inflated that count. Correcting future counts can delay disclosure and is a progression lever, not cosmetic. Do not subtract unknown historical counts from saves.40-case source controls and original R8 mobile proof pass;16x4 all29 rows match the prior Game exactly while state hashes differ. This is a finite screen, not a64-cooled holdout/equivalence or human difficulty claim. Incoming public Game/diagnostic inputs require fresh combined proof; no numerical compensation adopted.
+
+## Conversation closure and relationship depth (review, 2026-10-27)
+
+A real active-to-closed sitting increments depth.convos once; repeated end/
+finally/Done calls do not advance it. One farewell retains mood as an unspoken
+gesture rather than a second spoken goodbye. Existing trust/food/time/reward
+coefficients remain unchanged. Correct counting can delay the existing level3
+disclosure requirement (trust55, four conversations, three days after level2),
+so this is a progression lever, not merely cosmetic. Do not subtract unverifiable
+historical counts from legacy saves. Fresh common-current16x4 all29 panels are
+running; old a6 isolated panels are historical and cannot certify the new Muse
+world-monster guard. Keep pending survival/community/gear warnings visible.
+
+Closure screening completed on the combined current Muse source (2026-10-27):16 matched seeds per capable/maker/merchant/caregiver,150-day cap,8 real neutral pairs per root. All64 all29 metric rows match; final states all differ. Wins11to11/3to3/8to8/7to7. no_material_signal is screening only; hunt/fish exposure remains unobserved, no population equivalence or cancellation of older recall watches. See closing-combined-screen-summary-r2.json and closing-combined-balanced-r1.json. Two test-only physical-ration/player-target setup corrections change no Game, controller or collector input.
+
+
+2026-10-29 — Earned-choice durability boundary (Codex, review only). Persist complete relic evolution, ability/knack acceptance and keep-existing selection at offer consumption. No damage, healing, food price, encounter rate or grant coefficients changed. Actual loss was a worn enhancement reverting to its pending sheet on immediate Continue; real cold contrasts now preserve it. All64 fresh played rows and31 metrics equal the pre-fix candidate under one collector/controller; final state hashes differ and remain unrelabelled. A named capable7 exact-input ablation matches each official hash and RNG tail; its only differences are saveSeq2038→2056 and existing wall-clock pacing.lastTs. This is not an all-case state-equivalence claim. Public comparison remains review_required with the pre-existing survival/community/resources/progression watches; no automatic compensation. See relic-choice-save-r1/gameplay-screen-contrast-r1.json and checkpoint-statehash-audit-r1.json.gz.
+
+## Live actor visibility (2026-10-29, review)
+
+Actual day12 feast/breach combat was hidden by an obsolete interior render guard, and a creature sharing the player's anchor was discarded by player-first drawing. Presentation now retains the live fight's real monster/helper tokens and shared anchors, using the same creature art builder and original footprints. No actor relocation, damage, fee, clock, roster, spawn or policy change. This can change human tactical choices; headless simulation does not measure that benefit. Current-source64 cases/all31 vectors and whole state hashes equal the prior candidate, with eight neutral pairs; unchanged public baseline/current common input identities were revalidated before comparison. Public comparison still REVIEW_REQUIRED, including capable8→16 and caregiver8→4 wins and prior community/resource/NPC warnings. No compensation, holdout, physical-device or all-playstyle clearance. See indoor-fight-visibility-r1.
+
+2026-10-29 earned evolution (review): expose a genuine earned choice and persist selection/deferral through the initialized chain. Preserve root actions and daily/eatMult costs after ID replacement; original upkeep disappearing was a real conservation bug. Green Sovereign remains1.6 forage yield; Hearth King remains1.3 calorie-capacity multiplier with no refill/rest-efficiency effect. No authored coefficients changed. Making rewards usable and restoring costs can affect human survival. Current64/all31 screen equals the prior indoor candidate outcomes;44 state hashes are independently explained by saved offer text/deferral metadata on detached copies, with actual states retained. Publicec327 comparison retains its earlier per-policy warnings and REVIEW_REQUIRED. No pure-pacifist, holdout, natural lifetime, policy evolution-use or human-effect claim. Preserve challenge and investigate future differences without automatic compensation.
+
+Conversation request review (2026-10-29): typed request clarification/decline replaces unrelated generic Yes/No menus. Explicit accepted understanding/privacy replies reuse the existing one-point trust consequence; merely clarifying or opening work controls grants no favor completion or assignment. This changes reachable social outcomes and durable paid Talk, so obtain fresh common-controller31-metric panels after reconciliation; no viability or unchanged-outcome claim yet. No survival coefficient was tuned. See conversation-context-r1/audit.md.
+
+Evolved gardening ownership (2026-10-29, review): actual natural day13 Green Sovereign lost Cultivate because gardenAbilityEntry matched only raw IDs. Resolve the same owned entry through evolvedFrom; retain NPC ownership and practice isolation. The real200-kcal/16-tick cast now advances three beds by their authored12 days and2.5 next yield. No coefficient changed, but restored availability may affect food and survival; new common-input BOTH-root31-metric screens are required. Earlier f09 jobs were stopped and retained as partial, not reused. See evidence/2026-10-29/evolved-garden-r1/audit.md.
+
+Walk home checkpoint (2026-10-29 review): preserve complete actual movement, arrival pooling/carcass staging and final return messages immediately. No node cost, route, damage, yield, encounter or clock coefficient changed. Newly durable arrival effects can affect later Continue and survival; refresh candidate64/all31 plus observer neutrality, revalidate the unchanged actual publicc3c8a baseline under the same common controls, and retain every warning. The e527 screen is REVIEW_REQUIRED in all four policies; maker seed1's first bearer dies day17 in a real outside-Haven fight, while both diagnostic source histories already differ in game entropy on day1. Neutral/prefix checks pass; no causal lever attribution or compensating buff follows from that example.
+
+2026-10-29 — shared primary community planning (controller prototype, not live): default peer intent for merchant/maker and supported caregiver changes actual political/food obligations; explicit COMMUNITY_PLANNER=legacy is the matched same-Game control. R1 screen retains all31 metrics, death/gear/progression warnings and zero maker/merchant wins. Selected actual engine returns identify missing paid food-contribution -> feast conversion, not a reason to lower Table requirements or increase rewards. Existing coefficients unchanged. See NPC-UTILIZATION.md and evidence/2026-10-29/community-road-r1; further prerequisite planning, current broad checks and owner review remain.
+2026-10-29 food-plan continuation (controller prototype): voluntary actual own-harvest donation toward the existing1500recent-gift goal with one safe dinner-day protected; actual feasible-feast buffer remains1.5x. Targeted whole-unit transfers avoid overspending trade capital. These are reviewable policy decisions, not new authored Game requirements. Common current controller now scopes gift-history baselines by run/bearer. Both modes must be freshly observed; predecessor panels/pilots are historical. No Game coefficient, Table bar, reward rate or survival target changed. See community-food-chain-r1;25 prepared/8curated tests and selected neutral precursor complete a real paid-resource chain, not all-policy balance clearance.
+
+2026-10-31 joint appointments (review): protect an existing water/forage/company meeting from conflicting ordinary departure, companion duty or expedition using actual outgoing-slot+1+duration return time. This makes existing joint work physically reachable and can reduce NPC away-work opportunities; explicit work orders and LEAVE retain priority. No deadline extension, relocation, rewards, rates, damage, costs or global clock semantics change. Honest roster whereabouts can affect human choices. Corrected R2 reserves the longest authored expedition before preparation and retains original ammo/target RNG order; rejected R1 is retained. Fresh64/all31 plus8 exact neutral pairs is REVIEW_REQUIRED: maker survival30 falls16→11/16, merchant community losses1→3/16; higher wins do not clear these. A selected removed-reservation control restores the exact baseline terminal hash, but does not explain every later death. Independent holdouts/physical policy follow-through remain open. Native prepared dawn departures do not prove completed water work, natural campaign outcomes or noncombat viability. See joint-appointment-budget-r2.

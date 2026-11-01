@@ -11,6 +11,8 @@
 //   the identical "racks are already full" line fired per resolution
 //   (r20 seed 61 day 25: 3x identical). Now voiced once per cook-day
 //   (FOODVOICE2 pattern); the fullness is still computed every resolution.
+//   Current default adds Muse's seven-silent-day reminder and speaks when
+//   the stored figure changes; an unchanged next day stays quiet.
 //
 // Method: extract the REAL function sources from the worktree (NEW) and from
 // the immutable parent of the r20 fix (OLD),
@@ -143,16 +145,36 @@ for (const [tag, gameSrc] of [['NEW', NEW_GAME], ['OLD', OLD_GAME]]) {
     say: (l) => sayLines.push(String(l)),
   };
   const racksFullCount = () => sayLines.filter(l => l.includes('racks are already full')).length;
+  // The real duty now shares its pure availability calculation with the
+  // autonomous chooser. Bind that real dependency rather than swallowing a
+  // missing-method error in this extracted historical fixture.
+  if (tag === 'NEW') ctx.havenPreservationPlan = new Function(
+    'return function havenPreservationPlan(vid) ' + extractBlock(gameSrc, '\n    havenPreservationPlan(vid) {')
+  )();
   // 3 resolutions, same day (the cook resolves ~3x/day)
   for (let i = 0; i < 3; i++) resolveOneAssignment.call(ctx, vid, { task: 'cook' });
   const afterDay1 = racksFullCount();
-  // next day: one more resolution — the gate must reset
+  // Next day: unchanged stock stays quiet under the current reminder rule.
   ctx.state.scholar.day = 21;
   resolveOneAssignment.call(ctx, vid, { task: 'cook' });
   const afterDay2 = racksFullCount();
   if (tag === 'NEW') {
     eq(afterDay1, 1, 'NEW: 3 same-day resolutions -> 1 racks-full line');
-    eq(afterDay2, 2, 'NEW: next day voices once more (gate resets daily)');
+    eq(afterDay2, 1, 'NEW: unchanged next-day stock stays quiet');
+    for (let day = 22; day <= 26; day++) {
+      ctx.state.scholar.day = day;
+      resolveOneAssignment.call(ctx, vid, { task: 'cook' });
+    }
+    eq(racksFullCount(), 1, 'NEW: first six silent days add no repeated complaint');
+    ctx.state.scholar.day = 27;
+    resolveOneAssignment.call(ctx, vid, { task: 'cook' });
+    eq(racksFullCount(), 2, 'NEW: seventh silent day voices the actual reminder');
+    resolveOneAssignment.call(ctx, vid, { task: 'cook' });
+    eq(racksFullCount(), 2, 'NEW: repeated resolution cannot double the reminder');
+    pantry[0].units = 9;
+    ctx.state.scholar.day = 28;
+    resolveOneAssignment.call(ctx, vid, { task: 'cook' });
+    eq(racksFullCount(), 3, 'NEW: a changed still-full stock figure speaks next day');
   } else {
     eq(afterDay1, 3, 'OLD: 3 same-day resolutions -> 3 identical lines (the bug)');
     eq(afterDay2, 4, 'OLD: next day adds a 4th');

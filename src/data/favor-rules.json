@@ -1,5 +1,48 @@
 {
   "version": 1,
+  "witnessAbout": {
+    "food_share": "a meal",
+    "heal_help": "help with a wound",
+    "sick_help": "looking after them",
+    "water_haul": "bringing water home",
+    "stay_close": "staying the night",
+    "watch_shift": "the watch",
+    "forage_help": "foraging together",
+    "snare_mend": "mending the snares"
+  },
+  "spokenAbout": {
+    "food_share": "the food you asked me for",
+    "heal_help": "your wound",
+    "sick_help": "looking after you",
+    "water_haul": "our creek trip",
+    "stay_close": "staying with you through the night",
+    "watch_shift": "your watch",
+    "forage_help": "helping you forage",
+    "snare_mend": "your snare line"
+  },
+  "settlement": {
+    "fulfilled": {
+      "food_share": "You shared the food you promised {name}.",
+      "heal_help": "You tended the wound, as you promised {name}.",
+      "sick_help": "You gave {name} the care you promised.",
+      "water_haul": "The water is home. You kept your word to {name}.",
+      "forage_help": "The food is home. You kept your foraging promise to {name}.",
+      "stay_close": "You stayed with {name} through the night, as promised.",
+      "default": "You kept your word to {name}."
+    },
+    "expired": {
+      "food_share": "The day you promised {name} food has passed without that meal.",
+      "heal_help": "The time you promised to tend the wound for {name} has passed.",
+      "sick_help": "The time you promised to care for {name} has passed.",
+      "water_haul": "The water did not reach Haven by the day you promised {name}.",
+      "forage_help": "The promised foraging haul did not reach Haven in time for {name}.",
+      "stay_close": "The night passed without the company you promised {name}.",
+      "default": "The time to keep your promise to {name} has passed."
+    }
+  },
+  "forage": {
+    "minimumDeliveryKcal": 500
+  },
   "company": {
     "minimumPresenceTicks": 32,
     "fireRadius": 2,

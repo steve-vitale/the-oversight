@@ -24,16 +24,14 @@
 //    items (itemId); knowledge gates hold (L0 none / L1 blind 35% / L2+ 85%)
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const SEED = parseInt(process.env.SEED || '20261009', 10);
 Math.random = mulberry32(SEED);
 const ROOT = path.join(__dirname, '..');
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\"'\"'\"']*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
-  .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
+const order = require('./lib/browser-script-files')(ROOT);
 global.window = global;
-order.forEach(f => { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) {} });
+order.forEach(f => { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });
 delete global.window;
 const Game = globalThis.Scattering.Game;
 const SC = globalThis.Scattering;

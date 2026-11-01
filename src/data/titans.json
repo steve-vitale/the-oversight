@@ -75,9 +75,18 @@
     }
   },
   "_overtime": {
-    "_comment": "OVERTIME (Steve 2026-10-14: 'waiting should have a cost'). Once the Table exists for the player (announced, day 90+, seat not none) every daysPerTier days unseated raises a tier, cap maxTier. Read by overtime.js; raid knobs read by havenGrowth.js. The key tier lives on the_network.keyTier.",
+    "_comment": "Table waiting still rises every daysPerTier to maxTier. Steve2026-10-23: the calendar floor starts at120, rises weekly without a plateau, and cannot be evaded by missing Table deeds. Calendar-only boss qualification starts at150; all three titan victories remain required. Entity additions are bounded for the physical grid; HP/damage/raid hunger keep increasing. Initial schedule requires matched all29 calibration, not a win-rate target.",
     "daysPerTier": 7,
     "maxTier": 6,
+    "calendarEnabled": true,
+    "calendarWarningDay": 110,
+    "calendarStartDay": 120,
+    "calendarDaysPerTier": 7,
+    "calendarBossDay": 150,
+    "calendarMinWave": 1,
+    "maxPackExtra": 3,
+    "maxCapExtra": 3,
+    "calendarWarningLine": "The season is running long. From day {startDay}, beasts return tougher and raids grow hungrier. The danger will rise again every {daysPerTier} days.",
     "hpPerTier": 0.25,
     "dmgPerTier": 0.12,
     "packEveryTiers": 2,
@@ -99,7 +108,7 @@
       "OVERTIME ×3! The producers are drafting something BIG. Map-sized. We're not saying what. (It's big.)",
       "OVERTIME ×4! Raids every few nights now! Bigger packs! Is this cruel? It's TELEVISION.",
       "OVERTIME ×5! We've stopped writing scripts. Everything is a rerun of a rerun and they all have teeth.",
-      "OVERTIME ×6! MAXIMUM OVERTIME! The table is still set. The chair is getting cold. Sit — or don't! We LOVE this!"
+      "OVERTIME ×6! The season keeps going. The table is still set. The chair is getting cold. Sit — or don't! We LOVE this!"
     ]
   },
   "the_network": {

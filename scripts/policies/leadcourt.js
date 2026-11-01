@@ -14,6 +14,7 @@
 // clicks, with real pantry costs.
 'use strict';
 const { competent } = require('./competent');
+const community = require('./community-road');
 
 function pantryKcal(Game) {
   try {
@@ -28,6 +29,10 @@ function popAlive(Game) {
 
 function leadCourtship(Game, ctx) {
   try {
+    if (ctx.communityProfile && process.env.COMMUNITY_PLANNER !== 'legacy' && (Game.over || Game.inCombat() || Game.pendingEncounter || Game.state.activeContest)) {
+      ctx.communityBlocked = 'engaged';
+      return;
+    }
     const day = gday(Game);
     const st = Game.state;
     // answer pending offers/beats — a competent player answers, never leaves mail unread
@@ -52,6 +57,7 @@ function leadCourtship(Game, ctx) {
     }
     let links = [];
     try { links = Game.hierarchyState() || []; } catch (e) {}
+    const road = community.intent(Game, ctx, links);
     const week = (Game._week ? Game._week() : 0);
     for (const link of links) {
       if (!link || link.status !== 'active') continue;
@@ -69,6 +75,7 @@ function leadCourtship(Game, ctx) {
         ctx.defenseCalls = (ctx.defenseCalls || 0) + 1;
       }
     }
+    if (community.peerCouncil(Game, ctx, links, road)) return;
     // LEAD courtship: day>=25, propose villages as subordinates until three
     // seasoned bonds stand under one head. One proposal per day — courtship
     // takes time.
@@ -86,7 +93,10 @@ function leadCourtship(Game, ctx) {
         break;
       }
     }
-  } catch (e) {}
+  } catch (e) {
+    (ctx.capErrors || (ctx.capErrors = [])).push('community courtship: ' + e.message);
+    console.warn('[community courtship]', e.message);
+  }
 }
 
 const leadcourt = Object.assign({}, competent, {
@@ -98,4 +108,4 @@ const leadcourt = Object.assign({}, competent, {
   },
 });
 
-module.exports = { leadcourt };
+module.exports = { leadcourt, leadCourtship };

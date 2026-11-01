@@ -175,7 +175,19 @@ function findConvoChoice(Game, vid, wanted) {
   throw Error('Conversation navigation did not wrap within32 pages');
 }
 
+// Prepared replay only: a capture includes runtime aliases not contained in
+// Game.state. Restoring just state leaves the newly generated bearer's ID live.
+function restoreCombatCapture(Game,capture){
+  if(!capture?.bearer||capture.state?.scholar?.villagerId!==capture.bearer||capture.fight?.over!==false||!Array.isArray(capture.fight?.fighters)||!Number.isInteger(capture.map?.px)||!Number.isInteger(capture.map?.py))throw Error('Incomplete active combat capture');
+  Game.state=structuredClone(capture.state);Game.map=structuredClone(capture.map);Game.tbfight=structuredClone(capture.fight);
+  Game.villagerId=capture.bearer;Game.location=capture.location;Game.dayPart=capture.dayPart;
+  Game.departed=capture.state.run?.departed!==false;Game.homeRegion=capture.state.run?.homeRegion;
+  Game.over=false;Game.won=false;Game.villageLost=false;Game.pendingEncounter=false;Game.pendingMonsterId=null;
+  for(const person of capture.people||[]){const i=Game.data.villagers.findIndex(p=>p.id===person.id);if(i<0)Game.data.villagers.push(structuredClone(person));else Game.data.villagers[i]=structuredClone(person);}
+  if(Game.villagerId!==Game.state.scholar.villagerId)throw Error('Prepared bearer alias mismatch');
+}
+
 module.exports = {
   ROOT, H, readJSON, readSrc, phase, reporter, load, newRun, abilityIds,
-  giveAbility, openSlots, fight, captureSays, teleEvents, findConvoChoice,
+  giveAbility, openSlots, fight, captureSays, teleEvents, findConvoChoice, restoreCombatCapture,
 };

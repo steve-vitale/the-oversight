@@ -29,7 +29,7 @@ function ok(name, cond) {
 // ---------- PART 1: binomial math on synthetic streams ----------
 console.log('PART 1 — binomial math on synthetic roll streams');
 {
-  // Neutral: 100 rolls at p=0.5, exactly 50 hits. luckPct = P(X<=50) ≈ 0.54.
+  // Neutral: 100 rolls at p=0.5, exactly 50 hits. Mid-distribution score0.5.
   const neutral = Array.from({ length: 100 }, () => ({ p: 0.5, hit: true }))
     .map((r, i) => ({ p: 0.5, hit: i < 50 }));
   const s = luck.summarizeStream(neutral);
@@ -64,6 +64,24 @@ console.log('PART 1 — binomial math on synthetic roll streams');
   const degen = [{ p: 1, hit: true }, { p: 0, hit: false }, { p: 0.5, hit: true }];
   const sd = luck.summarizeStream(degen);
   ok('degenerate p values handled', sd.n === 3 && sd.k === 2 && Number.isFinite(sd.luckPct));
+
+  // A common sparse pit stream used to label BOTH possible outcomes lucky.
+  // Guaranteed outcomes contain no luck; they must remain centered as well.
+  const pitMiss = luck.summarizeStream([{ p: 0.18, hit: false }]);
+  const pitHit = luck.summarizeStream([{ p: 0.18, hit: true }]);
+  ok('single pit failure is not labeled lucky', pitMiss.tercile !== 'lucky');
+  ok('single-pit score has probability-weighted center one half',
+    Math.abs(0.82 * pitMiss.luckPct + 0.18 * pitHit.luckPct - 0.5) < 1e-12);
+  for (const p of [0, 1]) {
+    const certain = luck.summarizeStream(Array.from({ length: 100 }, () => ({ p, hit: p === 1 })));
+    ok('guaranteed p=' + p + ' outcome is neutral', certain.tercile === 'neutral' && Math.abs(certain.luckPct - 0.5) < 1e-12);
+    const combined = luck.summarizeRun({ pit: Array.from({ length: 100 }, () => ({ p, hit: p === 1 })) });
+    ok('guaranteed p=' + p + ' combined index stays neutral', combined.overall.tercile === 'neutral' && Math.abs(combined.overall.luckPct - 0.5) < 1e-6);
+  }
+  const sample = [{ p: 0.18, hit: false }, { p: 0.4, hit: true }, { p: 0.8, hit: true }];
+  const reflected = sample.map(r => ({ p: 1 - r.p, hit: !r.hit }));
+  ok('complementary fixed exposures have complementary scores',
+    Math.abs(luck.summarizeStream(sample).luckPct + luck.summarizeStream(reflected).luckPct - 1) < 1e-12);
 
   // Empty stream → null summary → null metric value.
   const se = luck.summarizeStream([]);
@@ -113,10 +131,14 @@ console.log('PART 2 — real panel children (observe=1 vs observe=0)');
         : (on.luck.streams[luck.STREAMS.find(s => s.metricId === id).id] || {}).luckPct ?? null;
       return v === exp || (v == null && exp == null);
     }));
-  const preexisting = ['won', 'entered', 'table', 'survival30', 'playerDeaths', 'livingNpcs',
-    'lowFood', 'classAccess', 'goodGear', 'usefulIntake', 'bearerChanges', 'abilityAccepted'];
+  const preexisting = ['won','entered','table','national','survival30','survival60',
+    'playerDeaths','playerDeaths100Days','villageDeaths','villageDeaths100Days','communityLost','livingNpcs','lowFood',
+    'lowWater','lowHealth','npcHungry','classAccess','npcClassAccess','goodGear',
+    'contestShowGear','craftTradeGear','corpseGear','usefulIntake','bearerChanges','abilityAccepted'];
   ok('observe=1: pre-existing metric columns intact',
     preexisting.every(id => Object.prototype.hasOwnProperty.call(on.metrics, id)));
+  ok('all25 domain metrics including separate village deaths retain their gating roles',
+    contract.metrics.filter(m => !m.diagnosticOnly).map(m => m.id).join(',') === preexisting.join(','));
   // Observer neutrality: gameplay state and driver row must not move.
   ok('neutrality: stateHash identical (observe=1 vs 0)', on.stateHash === off.stateHash);
   ok('neutrality: driver row identical', JSON.stringify(on.row) === JSON.stringify(off.row));
@@ -134,7 +156,7 @@ console.log('PART 3 — luck columns cannot move a comparison verdict');
     const inContract = contract.metrics.find(m => m.id === spec.id);
     ok('contract contains ' + spec.id,
       !!inContract && inContract.direction === 'neutral' && inContract.reviewChanges === false &&
-      inContract.label === spec.label);
+      inContract.label === spec.label && inContract.unit === spec.unit && inContract.diagnosticOnly === true);
   }
   // compareMetric on a luck column: always 'descriptive', never a signal.
   const spec = contract.metrics.find(m => m.id === 'luckOverall');
@@ -146,7 +168,7 @@ console.log('PART 3 — luck columns cannot move a comparison verdict');
   // The markdown table renders the luck column like any other metric.
   const md = score.markdown({ decision: 'no_material_signal', errors: [],
     policies: [{ policy: 'capable', cases: 8, confirmationSized: false, decision: 'no_material_signal', metrics: [r] }] });
-  ok('markdown renders the luck column', md.includes('Combined run luck percentile'));
+  ok('markdown renders the descriptive luck index', md.includes('Combined descriptive luck index'));
 }
 
 console.log(`\nALL ${passed} CHECKS PASSED`);

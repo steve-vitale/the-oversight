@@ -129,6 +129,14 @@ const ok = (name, cond, detail) => {
   Game.over = false; Game.won = false; Game.tbfight = null;
   await H.setupGame(Game);
   // ---- path 2: hide (seeker fight) ----
+  // Prepared kill opportunity alongside ordinary contestants for flee controls.
+  // Starter gear cannot reliably kill the current armored seeker before it
+  // retreats; this is source-accounting proof, not a hide balance sample.
+  const armedSeeker = alive()[0];
+  ok('hide: living prepared late-gear contestant exists', !!armedSeeker);
+  Game.getPerson(armedSeeker).items.push('starfall_lance');
+  Game.villagerGearUp(armedSeeker, false);
+  ok('hide: prepared lance is actually worn', Object.values(Game.getPerson(armedSeeker).equipped || {}).some(slot => slot && slot.itemId === 'starfall_lance'));
   let hideKill = null, hideEngage = null;
   for (let day = 15; day < 200 && (!hideKill || !hideEngage); day++) {
     Game.state.scholar.day = day;

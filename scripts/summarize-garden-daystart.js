@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+'use strict';
+const fs=require('fs'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),T=require('./summarize-garden-scheduling');
+function summarize(report,options){return T.summarizeTiming(report,{
+ ids:['garden-invest','garden-invest-expand','garden-invest-daystart','garden-invest-expand-daystart'],suffix:'-daystart',diagnostic:'daystart',phase:'dawn',countKey:'dawnSessions',
+ scope:'Prospective real day-start controller screen on one unchanged Game and NPC/Wait cadence. Sixteen matched screen seeds plus two separately analyzed extended cases per arm; no confirmation holdout or numerical Game effect. Dawn sessions begin in part0 below tick128 after needs/promises; costs can legitimately cross parts. Attempts are not casts, and gross output/stocks are not consumed food. Retain all23, unknown/capped/recovered cases and every adverse watch.',
+ validateSession(q){if(q.phase==='dawn'){assert(q.before.part===0&&q.before.tick<128,'Session did not begin at actual dawn');assert(q.before.kcal>=1800&&q.before.health>=60,'Dawn session bypassed personal reserve');assert(q.initial.bearer===q.before.bearer&&q.initial.day===q.before.day,'Dawn session spent a replacement actor/day');}}
+},options);}
+module.exports={summarize};
+if(require.main===module)try{
+ const historicalOptions={historical:process.argv.includes('--historical')};
+ const[file,out]=process.argv.slice(2);if(!file||!out)throw Error('Usage: summarize-garden-daystart.js <long.json.gz> <fresh-prefix>');const bytes=fs.readFileSync(file),result=summarize(JSON.parse(z.gunzipSync(bytes)),historicalOptions);result.input={file,sha256:crypto.createHash('sha256').update(bytes).digest('hex')};
+ fs.writeFileSync(out+'.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});const total=x=>Object.values(x).reduce((n,v)=>n+v,0),lines=['# Actual dawn garden screen','',result.scope,'',`Decision: ${result.decision}.`,'','| Arm | Ended/capped | Recovered | Screen wins/16 | Dawn sessions | Crop kcal eaten | Useful nourishment |','| --- | ---: | ---: | ---: | ---: | ---: | ---: |',...result.arms.map(a=>`| ${a.id} | ${a.terminal}/${a.capped} | ${a.recovered.length} | ${a.screenWins} | ${a.dawnSessions??'unobserved'} | ${Math.round(total(a.accounting.consumed))} | ${Math.round(total(a.accounting.nourishment))} |`),'','Food/session totals include the two extended cases; wins/all23 screen use16 seeds. Extended metrics, native costs, spoilage/stock/residual and unknowns remain separate in JSON.'];
+ for(const c of result.contrasts)lines.push('',`## ${c.name}: ${c.decision}`,'','| Metric | Before | After | Delta | Known pairs | Status |','| --- | ---: | ---: | ---: | ---: | --- |',...c.screen.map(m=>`| ${m.label} | ${m.before} | ${m.after} | ${m.delta} | ${m.pairs}/${m.totalPairs} | ${m.status} |`));fs.writeFileSync(out+'.md',lines.join('\n')+'\n',{flag:'wx'});console.log(JSON.stringify({decision:result.decision,arms:result.arms.map(a=>({id:a.id,terminal:a.terminal,capped:a.capped,recovered:a.recovered,dawnSessions:a.dawnSessions}))}));
+}catch(e){console.error(e.stack);process.exitCode=1;}

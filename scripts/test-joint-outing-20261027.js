@@ -39,23 +39,8 @@ const K = require('./godpath/lib'), T = K.reporter('joint-outing');
  const said = [];
  const origSay = G.say.bind(G);
  G.say = msg => { said.push(String(msg)); return origSay(msg); };
- // ---- START: dawn, at Haven, next to the partner ----
  const home = { x: v.px ?? 4, y: v.py ?? 4 };
- s.day = favor.meetDay; G.dayPart = 0;
- G.map.px = home.x; G.map.py = home.y;
- s.mx = 4; s.my = 4;
- v.nodePos = v.nodePos || {}; v.nodePos[vid] = { nx: home.x, ny: home.y };
- v.npcInside = v.npcInside || {}; v.npcInside[vid] = false; s.insideHaven = false;
- v.positions = v.positions || {}; v.positions[vid] = { mx: 4, my: 4 };
- if (v.away) delete v.away[vid];
- let status = G.convoFavorAction(vid, favor);
- T.ok('start is ready at dawn at Haven next to the partner', !!(status.ready && status.action === 'forage_start'), JSON.stringify(status));
- let res = G.convoPerformFavor(vid, favor);
- T.ok('start performs through the public favour path', !!(res && res.ok && res.incomplete), JSON.stringify(res));
- T.ok('partner travels with you once the outing starts', G.travelingWith().includes(vid), G.travelingWith().join(','));
- T.ok('partner is engaged for the outing', !!G.isEngaged(vid));
- const menu = G.convoFavorActionMenu(vid, favor, false);
- T.ok('outing menu offers trail talk while out together', menu.some(m => m.id === 'dlg:forage_talk'), menu.map(m => m.id).join(','));
+ let status, res;
  // ---- TRAVEL: find green ground and walk there together ----
  const S = (globalThis.Scattering || {}).forage;
  let spot = null;
@@ -95,6 +80,35 @@ const K = require('./godpath/lib'), T = K.reporter('joint-outing');
  G.state.codex.plants = G.state.codex.plants || {};
  for (const sp of spot.speciesList) if (!G.plantKnown(sp)) G.state.codex.plants[sp] = { level: 1, harvests: 0 };
  T.ok('the patch food plant is known, so the haul is real food', spot.speciesList.some(sp => isEdiblePlant(sp) && G.plantKnown(sp)), spot.speciesList.join(','));
+ // Prepared rich-patch success fixture, not a naturally discovered campaign.
+ // The current physical promise requires 500 kcal, a visited known patch at
+ // departure, and access to the actual pantry when returning.
+ spot.tile.stock=100; spot.tile.vigor=100; spot.tile.type='forest_floor';
+ spot.tile.detailRegrow={}; spot.tile.plantSpecies=spot.tile.plantSpecies||{};
+ spot.tile.bushSpecies=spot.tile.bushSpecies||{};
+ for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+  const x=spot.mx+dx,y=spot.my+dy;
+  if(!dx&&!dy){spot.tile.detail[y][x]='dirt';continue;}
+  spot.tile.detail[y][x]='plant';spot.tile.plantSpecies[x+','+y]='blackberry';
+ }
+ G.state.codex.plants.blackberry={level:1,harvests:0};
+ G.markSeen(spot.nx,spot.ny,'visited');
+ // ---- START: dawn, at Haven, next to the partner ----
+ s.day = favor.meetDay; G.dayPart = 0;
+ G.map.px = home.x; G.map.py = home.y;
+ s.mx = 4; s.my = 4;
+ v.nodePos = v.nodePos || {}; v.nodePos[vid] = { nx: home.x, ny: home.y };
+ v.npcInside = v.npcInside || {}; v.npcInside[vid] = false; s.insideHaven = false;
+ v.positions = v.positions || {}; v.positions[vid] = { mx: 4, my: 4 };
+ if (v.away) delete v.away[vid];
+ status = G.convoFavorAction(vid, favor);
+ T.ok('start is ready at dawn at Haven next to the partner', !!(status.ready && status.action === 'forage_start'), JSON.stringify(status));
+ res = G.convoPerformFavor(vid, favor);
+ T.ok('start performs through the public favour path', !!(res && res.ok && res.incomplete), JSON.stringify(res));
+ T.ok('partner travels with you once the outing starts', G.travelingWith().includes(vid), G.travelingWith().join(','));
+ T.ok('partner is engaged for the outing', !!G.isEngaged(vid));
+ const menu = G.convoFavorActionMenu(vid, favor, false);
+ T.ok('outing menu offers trail talk while out together', menu.some(m => m.id === 'dlg:forage_talk'), menu.map(m => m.id).join(','));
  G.map.px = spot.nx; G.map.py = spot.ny; s.mx = spot.mx; s.my = spot.my;
  G.placePartyAtPlayer();
  T.ok('partner node follows the player node on travel', v.nodePos[vid] && v.nodePos[vid].nx === spot.nx && v.nodePos[vid].ny === spot.ny, JSON.stringify(v.nodePos[vid]));
@@ -104,7 +118,7 @@ const K = require('./godpath/lib'), T = K.reporter('joint-outing');
  const kcalBefore = s.kcal, ticksBefore = s.dayTicks || 0;
  // ---- FORAGE TOGETHER: one real solo-rule press, split ----
  status = G.convoFavorAction(vid, favor);
- T.ok('joint forage is ready on green ground', !!(status.ready && status.action === 'forage_together'), JSON.stringify(status));
+ T.ok('joint forage is ready on green ground', !!(status.ready && status.action === 'forage_gather'), JSON.stringify(status));
  res = G.convoPerformFavor(vid, favor);
  const forageLine = res && res.line;
  const run = favor.forageRun;
@@ -136,6 +150,8 @@ const K = require('./godpath/lib'), T = K.reporter('joint-outing');
  G.map.px = home.x; G.map.py = home.y; s.mx = 4; s.my = 4;
  G.placePartyAtPlayer();
  v.nodePos[vid] = { nx: home.x, ny: home.y }; v.positions[vid] = { mx: 4, my: 4 };
+ G.enterBuilding();
+ G.npcSetInside(vid,true); v.positions[vid]={mx:s.mx,my:s.my};
  status = G.convoFavorAction(vid, favor);
  T.ok('delivery is ready back at Haven together', !!(status.ready && status.action === 'forage_deliver'), JSON.stringify(status));
  res = G.convoPerformFavor(vid, favor);

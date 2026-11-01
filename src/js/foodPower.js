@@ -186,7 +186,7 @@
         }
       }
       return result;
-    } catch (e) { return _useAbility.call(this, abilityId, actionId, target); }
+    } catch (e) { console.warn('[foodPower] ability activation failed', e); throw e; }
   };
 
   // activateAbility: legacy hardcoded branches (blood_magic, time_skip,
@@ -200,6 +200,11 @@
       if (!id || id.indexOf('.') !== -1) return _activateAbility.call(this, id, target);
       const gate = this.foodPowerGate();
       if (!gate.ok) { this.say(gate.why + ' (' + id + ')'); return false; }
+      // Use the same known cooldown/health/item eligibility as the legacy
+      // button, before either its food fee or the engine's action clock.
+      const legacy = typeof this._legacyActivatables === 'function'
+        ? this._legacyActivatables().find(a => a.id === id) : null;
+      if (legacy && !legacy.available) { this.say((legacy.why || 'Unavailable.') + ' (' + id + ')'); return false; }
       if (id === 'blood_magic') return _activateAbility.call(this, id, target);
       const s = this.state.scholar || {};
       if (id === 'time_skip' && (s.timeSkipDay === s.day || (this.inCombat && this.inCombat()))) {
@@ -209,11 +214,20 @@
         return _activateAbility.call(this, id, target); // its own refusal; no burn
       }
       const kc = this.abilityKcalCost(id, null);
-      if ((s.kcal || 0) < kc) { this.say(`Not enough energy — need ${kc} kcal. (${id})`); return false; }
+      const ab = ((this.data || {}).abilities || []).find(a => a.id === id);
+      const nativeCost = (((ab || {}).legacyCost || {}).kcal || 0);
+      if ((s.kcal || 0) < kc + nativeCost) { this.say(`Not enough energy — need ${kc + nativeCost} kcal. (${id})`); return false; }
+      const state = this.state, bearer = this.villagerId, key = state.runKey;
       s.kcal -= kc;
       const healingBefore = id === 'field_medicine' ? this._feastPreHp() : null;
       const r = _activateAbility.call(this, id, target);
-      const ab = ((this.data || {}).abilities || []).find(a => a.id === id);
+      if (r === false) {
+        // Refund only our activation fee to the same living run/body. Never
+        // transfer a departed actor's payment into a successor's food bank.
+        if (!this.over && this.state === state && this.state.scholar === s && this.villagerId === bearer && this.state.runKey === key) s.kcal += kc;
+        return false;
+      }
+      if (this.over || this.state !== state || this.state.scholar !== s || this.villagerId !== bearer || this.state.runKey !== key) return r;
       const native = r === false ? 0 : (((ab || {}).legacyCost || {}).kcal || 0);
       try {
         if (id === 'field_medicine' && r !== false) {
@@ -223,7 +237,7 @@
         } else this.say(`(−${kc + native} kcal — food becomes ${String(id).replace(/_/g, ' ')}.)`);
       } catch (e) { console.warn('[foodPower] activation notice', e); }
       return r;
-    } catch (e) { return _activateAbility.call(this, id, target); }
+    } catch (e) { console.warn('[foodPower] activation failed', e); throw e; }
   };
 
   // _actionAvailable: the hunger gate reaches the buttons — a starving
@@ -239,22 +253,34 @@
     };
   }
 
-  // activatableAbilities: costs visible BEFORE use, overcharge visible when
-  // live. Appended to desc (never the name — app.js keys abilityDescs by name).
+  // The activation bill is separate from its effect (which may itself grant
+  // food). Damage bonuses are narrated when damage lands, not attached to
+  // scouting, healing or preparation as if they changed those effects.
   const _activatableAbilities = Game.activatableAbilities;
   Game.activatableAbilities = function () {
     const out = _activatableAbilities.call(this);
     try {
-      const oc = this.overchargeLine();
+      const gate = this.foodPowerGate();
       for (const a of out) {
-        // Show the complete unchanged activation and native treatment bill.
-        const ab = ((this.data || {}).abilities || []).find(x => x.id === (a.abilityId || a.id));
+        const id = a.abilityId || a.id;
+        const ab = ((this.data || {}).abilities || []).find(x => x.id === id);
+        const action = a.actionId && (ab?.actions || []).find(x => x.id === a.actionId);
+        if (!action?.automatic && !gate.ok) { a.available = false; a.why = gate.why; }
+        // Automatic triggers have no activation bill. Blood Price's existing
+        // effect states its HP payment and food gain; activateAbility explicitly
+        // exempts it from the food-power activation burn.
+        if (action?.automatic || id === 'blood_magic') continue;
+        const cost = a.cost || {};
         const native = a.actionId ? 0 : (((ab || {}).legacyCost || {}).kcal || 0);
-        const kc = ((a.cost && a.cost.kcal) || this.abilityKcalCost(a.abilityId, a.actionId)) + native;
-        if (kc && !/kcal/.test(a.desc || '')) a.desc = (a.desc ? a.desc + ' ' : '') + `(${kc} kcal)`;
-        if (oc && !/OVERCHARGED/.test(a.desc || '')) a.desc = (a.desc ? a.desc + ' ' : '') + oc;
+        const kc = (cost.kcal || this.abilityKcalCost(id, a.actionId)) + native;
+        const bill = [];
+        if (kc) bill.push(`${kc} kcal`);
+        if (cost.hp) bill.push(`${cost.hp} HP`);
+        if (cost.turn || (!a.actionId && a.combat && this.inCombat())) bill.push('1 action');
+        if (cost.time_min) bill.push(`about ${cost.time_min} min`);
+        if (bill.length) a.desc = (a.desc ? a.desc + ' ' : '') + `Cost: ${bill.join(' · ')}.`;
       }
-    } catch (e) {}
+    } catch (e) { console.warn('[foodPower] activation preview', e); }
     return out;
   };
 

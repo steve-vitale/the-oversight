@@ -7,6 +7,38 @@ verbatim.
 
 ---
 
+## 2026-10-27 (campaign target correction)
+
+"No, the game isn’t 500 days."
+
+Use the existing day150/day180 direction below. Observation caps are not authored run lengths or successful endings.
+
+## 2026-10-23 (long-run pressure and Easter egg boss)
+
+"180 days should be considered a long long game and start becoming increasingly harder to survive"
+
+"Remember we discussed the Easter egg boss around day 150? That’s already supposed to be getting intolerably hard."
+
+Calendar survival pressure must not be bypassed by leaving Table requirements
+unmet. Preserve the existing long-survival/Easter-egg road and actual earned
+boss/key challenge; long headless campaigns do not establish playable pacing.
+
+The candidate's warning110, onset120 and weekly coefficients are implementation
+choices requiring calibration. They are not Steve's specified numbers; passing
+mechanical checks does not establish intolerable difficulty by day150.
+
+## 2026-10-21–22 (ordinary Strike and beams)
+
+"Strike shouldn’t interrupt a beam. Where did that come from?"
+
+## 2026-10-21 (divergence and coordination)
+
+"Why stop? The instruction should be to root cause and fix when things diverge, and to coordinate with divergent agent or session."
+
+See `../../AGENTS.md` for the reconciliation workflow. Preserve both agents'
+work and verify the combined candidate; ordinary divergence is not a reason to
+wait for another permission request.
+
 ## 2026-10-20 (gardens, Haven size and abilities)
 
 "It seems like garden rows/number should upgrade with haven size. Are they getting used in long playthroughs? In general, the garden path really only makes sense for the ability path. IRL things take too long to grow so we need to account for that reality. Gardens are only a little effective without a character who has invested in gardening abilities etc."

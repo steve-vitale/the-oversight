@@ -1,13 +1,13 @@
 'use strict';
 const fs=require('fs'),os=require('os'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto');
-const K=require('./lib'),T=K.reporter('occupation panels'),S=require('../lib/balance-scorecard'),C=require('../lib/balance-cohorts'),F=require('../balance-features');
+const K=require('./lib'),T=K.reporter('occupation panels'),S=require('../lib/balance-scorecard'),C=require('../lib/balance-cohorts'),F=require('../balance-features'),B=require('../balance-panel');
 const OF=require('./occupation-fixtures.json');
 // Preserve one actually offered non-first nurse, one NPC-only nurse and one
 // absent nurse. The larger Muse occupation pool changed the old seed receipts.
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'oversight-cohort-')),driver=path.join(temporary,'observer'),out=path.join(temporary,'cases');
 const read=()=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(out,'panel.json.gz')))),copy=x=>JSON.parse(JSON.stringify(x));
 try{
- for(const f of ['balance-panel.js','gear-usage-audit.js','balance-metrics.json','lib/balance-scorecard.js','lib/simulation-flags.js','lib/balance-cohorts.js','lib/source-text.js']){
+ for(const f of [...B.observerFiles.map(f=>f.slice('scripts/'.length)),'balance-metrics.json']){
   const target=path.join(driver,'scripts',f);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(K.ROOT,'scripts',f),target);
  }
  const run=occupation=>{
@@ -24,7 +24,9 @@ try{
  const changedObserver=run('er_nurse');
  T.ok('changed shared cohort observer invalidates every cached case',changedObserver.reused===0&&changedObserver.observerDigest!==nurse.observerDigest);
  const alternate=run(OF.alternateOccupation);
- T.ok('occupation option changes cache identity and actual selected jobs',alternate.reused===0&&alternate.rows.length===2&&alternate.rows.every(r=>r.row.selection.occupation===OF.alternateOccupation));
+ const alternateSeeds=[...nurse.rows,...nurse.exclusions].filter(r=>r.row.selection.offered.some(p=>p.occupation===OF.alternateOccupation)).map(r=>r.row.seed).sort((a,b)=>a-b);
+ T.ok('occupation option changes cache identity and actual selected jobs',alternate.reused===0&&alternateSeeds.length>0&&alternate.options.occupation!==nurse.options.occupation&&C.validate(alternate).length===0&&
+  JSON.stringify(alternate.rows.map(r=>r.row.seed).sort((a,b)=>a-b))===JSON.stringify(alternateSeeds)&&alternate.rows.every(r=>r.row.selection.occupation===OF.alternateOccupation),JSON.stringify({expectedFromRealOffers:alternateSeeds,actual:alternate.rows.map(r=>r.row.seed)}));
  T.ok('complete played/excluded accounting validates the real panel',C.validate(nurse).length===0);
  const report=S.comparePanels(nurse,copy(nurse)),policy=report.policies[0];
  T.ok('only the one matched played campaign enters metrics',report.decision==='review_required'&&policy.cases===1&&!policy.confirmationSized&&policy.cohort.before.attempted===3&&policy.metrics.find(m=>m.id==='won').pairs===1);

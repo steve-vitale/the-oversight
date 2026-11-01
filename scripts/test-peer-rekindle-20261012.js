@@ -23,7 +23,8 @@
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 
-const SEEDS = [11, 22, 33];
+const SEEDS = process.env.PEER_SEED ? [Number(process.env.PEER_SEED)] : [11,22,33];
+const {spawnSync} = require('child_process');
 let failures = 0;
 function check(name, cond, extra) {
   if (cond) { console.log(`  ok: ${name}`); }
@@ -51,7 +52,9 @@ async function runSeed(seed) {
   const v1 = knownVillage(Game);
   if (!v1) { check('a known village exists', false); return; }
   v1.opinion = 60; // guarantee the judge accepts (>=55 band)
-  v1.rumored = true; // the early-contact curve: Haven has heard of this fire
+  v1.rumored = true;
+  // Prepared prior contact, not a queued rumor masquerading as knowledge.
+  Game.recordVillageLore(Game.playerKnowerId(), v1.id, {how:'visit',toldBy:'prepared rekindling contact'});
 
   // 1-2. form primary link, break it, wait, form covenant -> memory line
   let linkId = null;
@@ -94,6 +97,7 @@ async function runSeed(seed) {
   if (v2) {
     v2.opinion = 60;
     v2.rumored = true;
+    Game.recordVillageLore(Game.playerKnowerId(), v2.id, {how:'visit',toldBy:'prepared second contact'});
     said.length = 0;
     try { Game.proposeCovenant(v2.id); } catch (e) {}
     const cov2 = Game.hierarchyState().find(l => l.status === 'active' && l.kind === 'covenant' && l.b === v2.id);
@@ -106,7 +110,13 @@ async function runSeed(seed) {
 }
 
 (async () => {
-  for (const s of SEEDS) {
+  if (!process.env.PEER_SEED) {
+    for (const seed of SEEDS) {
+      const child = spawnSync(process.execPath,[__filename],{encoding:'utf8',env:{...process.env,PEER_SEED:String(seed)}});
+      process.stdout.write(child.stdout || ''); process.stderr.write(child.stderr || '');
+      check('isolated seed ' + seed,child.status === 0,child.error && child.error.message);
+    }
+  } else for (const s of SEEDS) {
     try { await runSeed(s); }
     catch (e) { failures++; console.log(`seed ${s} FATAL: ` + (e && e.stack || e)); }
   }

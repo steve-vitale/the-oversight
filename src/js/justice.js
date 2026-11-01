@@ -122,6 +122,9 @@
 
     justiceTick() {
       if (this.over || this.tbfight) return;
+      // Defer the escalation too, rather than setting stage4 and losing the
+      // uprising because its fight entry was refused under the cameras.
+      if (this.contestOwnsScene && this.contestOwnsScene()) return;
       const j = this.justiceState();
       // UNIFIED PIPELINE: while the moot has you, the village waits. No
       // parallel escalation, no mobbing someone mid-trial, no cooling either.
@@ -772,6 +775,7 @@
     // calling it with a roster produced a single 40-HP pseudo-fighter with a
     // comma-joined key and wiped _lastBetrayal. Fixed 2026-10-05 (brawler loop).
     startVillageUprising(reason) {
+      if (this.contestOwnsScene && this.contestOwnsScene()) return null;
       if (this.tbfight) return null;
       // Defensive: never render a dev marker in the player-facing "Reason:" line.
       reason = String(reason || '').replace(/debug scenario:?\s*/i, '');

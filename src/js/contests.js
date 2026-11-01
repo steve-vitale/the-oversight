@@ -389,6 +389,7 @@
     // One interruption at a time (Steve 2026-10-06): never fire while one is
     // pending or an interruption is still unresolved — a new fire would
     // overwrite pendingContest or clobber the active modal.
+    if (this.inCombat()) return null;
     if (this.state.pendingContest) return null;
     const ac0 = this.state.activeContest;
     if (ac0 && ac0.phase !== 'done') return null;
@@ -1122,6 +1123,7 @@
   // (one communal beat). Wired: game.js's dawn branch calls fireShow(event)
   // for non-contest events.
   G.fireShow = function(show) {
+    if (this._contestSceneBusy()) return null;
     const s = (show && show.id) ? show : this.pickShow();
     // MUSIC (Steve 2026-10-12): the show gets its bed — tense, televised.
     try { this.music('scenario', 'contest'); } catch (e) {}
@@ -1576,6 +1578,7 @@
   // break-it shows 2026-10-09 removed the extra curio double-dip), phone it
   // in, or refuse on camera (a sequence, with consequences).
   G.fireRatingsSummons = function() {
+    if (this._contestSceneBusy()) return null;
     // CASTABILITY (break-it contest r10 2026-10-09): belt-and-suspenders with
     // the tick gate above — direct/debug callers must not summon a corpse or
     // an exile either. Said out loud, never a silent void.
@@ -2220,6 +2223,7 @@
   // no matter where you are or what you're doing. Participate or don't —
   // but skipping isn't a thing. If you're not involved, you watch the show.
   G.contestInterruption = function(contest, participantIds) {
+    if (this._contestSceneBusy()) return null;
     // MULTI-TAKE (Steve 2026-10-06): participantIds is an array — the
     // System takes several people at once. Old single-id callers still work.
     const ids = Array.isArray(participantIds) ? participantIds.slice() : [participantIds];
@@ -2422,6 +2426,9 @@
   G.resolveContest = function() {
     const pc = this.state.pendingContest;
     if (!pc) return;
+    // Keep the announced cast/deadline intact. Clearing this before refusing
+    // would silently cancel the grab rather than let it wait for the fight.
+    if (this._contestSceneBusy()) return null;
     this.state.pendingContest = null;
 
     const base = this.contestPool().find(c => c.id === pc.contestId);
@@ -4341,6 +4348,60 @@
   };
 
   // === CHOICE RESOLUTION ===
+  G._contestSceneBusy = function() {
+    const ac = this.state.activeContest;
+    return this.inCombat() || !!(ac && ac.phase !== 'done');
+  };
+
+  G.contestOwnsScene = function() {
+    const ac = this.state.activeContest;
+    return !!(ac && ac.phase !== 'done' && !ac.arenaSuspended);
+  };
+
+  G.contestBlocksWorldAction = function() {
+    if (!this.contestOwnsScene()) return false;
+    this.say('Finish the broadcast first — choose what to do under the cameras.');
+    return true;
+  };
+
+  // Settle the already-resolved contest result in both representations of
+  // this body. Do not roll avoidance, trigger combat death, or reinterpret a
+  // voluntary blood payment here; the contest owns its lifeline/death rules.
+  // This also supports old saves containing a contest and a field fight.
+  G._contestSetPlayerHealth = function(health) {
+    const s = this.state.scholar;
+    const p = this.inCombat() ? this.tbFighter('p') : null;
+    const cap = p ? p.maxHp : this.maxHealth();
+    s.health = Math.max(0, Math.min(cap, health));
+    if (p) { p.hp = s.health; p.alive = p.hp > 0; }
+    return s.health;
+  };
+
+  // Install around the completed engine chain, after party/arena settlement
+  // wrappers exist. A due grab waits for the fight, then resumes immediately;
+  // future grabs keep their date. Saves inside barrier/time settlement still
+  // use that transaction's ordinary deferred commit.
+  const initContestScene = G.init;
+  G.init = async function(...args) {
+    const result = await initContestScene.apply(this, args);
+    if (!this._contestEndResumeWrapped) {
+      const endFight = this.tbEnd;
+      this.tbEnd = function(...endArgs) {
+        const ended = endFight.apply(this, endArgs);
+        const pc = this.state.pendingContest;
+        const s = this.state.scholar;
+        if (!this.over && (s.health || 0) > 0 && pc && pc.firesDay <= s.day && !this._contestSceneBusy() &&
+            !(this.tableActive && this.tableActive())) {
+          this.resolveContest();
+          this.save();
+        }
+        return ended;
+      };
+      this._contestEndResumeWrapped = true;
+    }
+    return result;
+  };
+
   G.contestChoose = function(idx) {
     const ac = this.state.activeContest;
     if (!ac || ac.phase === 'done') return null;
@@ -4502,7 +4563,7 @@
         }
       } catch (e) {}
       if (amt > 0) {
-        s.health = Math.max(0, (s.health || 0) - amt);
+        this._contestSetPlayerHealth(Math.max(0, (s.health || 0) - amt));
         // Wounds feed the Gauntlet closer (and anything else that reads them)
         ac.wounds = (ac.wounds || 0) + amt;
         this.sysSay(`📺 You take ${amt} damage.`);
@@ -4526,7 +4587,7 @@
           // the next endDay's health<=0 check then killed you anyway ("the
           // night"). A save that doesn't save is a lie. The killing blow
           // missed: you live, barely.
-          s.health = Math.max(1, Math.round((this.maxHealth ? this.maxHealth() : 100) * 0.1));
+          this._contestSetPlayerHealth(Math.max(1, Math.round((this.maxHealth ? this.maxHealth() : 100) * 0.1)));
           return this._contestEnd(ac, 'lost', false);
         }
         return this._contestDie(ac, 'The damage was too much.');
@@ -4537,7 +4598,7 @@
     // from real damage (above), real fights (arena), or deterministic
     // pursuit (Maw). No slot machine.
     if (d.heal) {
-      s.health = Math.min(this.maxHealth(), (s.health || 0) + d.heal);
+      this._contestSetPlayerHealth(Math.min(this.maxHealth(), (s.health || 0) + d.heal));
       log.push(`+${d.heal} hp`);
       // SILENT HEAL (break-it shows r16 2026-10-11): d.dmg got a "You take N
       // damage" sysSay but d.heal landed with zero narration — the nap_wars
@@ -4764,12 +4825,18 @@
   };
 
   // tbEnd lands here (game.js hook). The fight was real; so is the outcome.
-  G._contestArenaAfter = function(arc, result) {
+  G._contestArenaAfter = function(arc, result, detail) {
     const ac = this.state.activeContest;
     if (!ac) return;
     ac.arenaSuspended = false;
     const contest = this._cxScaledContest(ac);
-    if (result === 'won') {
+    // Match NPC blood contests: actually driving the beast off counts.
+    // The emergency no-damage guard is a stopped bout, never a farmable win.
+    if (detail && detail.stalemate) {
+      this.sysSay('📺 The judges stop the stalemate. No winner — the bout is over.');
+      return this._contestEnd(ac, 'lost', false);
+    }
+    if (result === 'won' || result === 'routed' || result === 'calmed') {
       arc.waveIdx++;
       if (arc.waveIdx < arc.waves.length) {
         const wn = arc.waveIdx + 1;
@@ -4784,7 +4851,7 @@
         }
         return;
       }
-      this.sysSay('📺 Silence — then the weather system. You are still standing.');
+      this.sysSay(result === 'won' ? '📺 Silence — then the weather system. You are still standing.' : '📺 The beasts stand down. The judges award you the bout.');
       return this._contestEnd(ac, 'won', true);
     }
     if (result === 'lost') {
@@ -5270,7 +5337,7 @@
         }
         // FEARED means winning costs: winners are marked. Said out loud —
         // a silent HP tax is a lie (break-it 2026-10-08).
-        s.health = Math.max(1, (s.health || 0) - 5);
+        this._contestSetPlayerHealth(Math.max(1, (s.health || 0) - 5));
         this.sysSay('📺 The lights take their cut. Winning marks you. (-5 health.)');
         // AFTERMATH TRAUMA (break-it contests r15 2026-10-11; canon
         // docs/CONTESTS.md: "Winners come home changed (prizes, trauma,
@@ -5486,8 +5553,15 @@
     // the cheats get their say first ("unkillable means unkillable",
     // PROGRESSION.md). Zero the pool so narrative DIE terminals (the Maw,
     // a verdict) are answerable deaths too, not just the arena-fight path.
-    try { const cs = this.state.scholar; if (cs) cs.health = 0; } catch (e0) {}
-    try { if (!this.maybeCheatDeath()) this.playerDeath('contest'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+    this._contestSetPlayerHealth(0);
+    try {
+      if (this.maybeCheatDeath()) this._contestSetPlayerHealth(this.state.scholar.health);
+      else this.playerDeath('contest');
+    } catch (e) {
+      console.warn('[contest] death settlement failed', e);
+      this.over = true;
+      try { this.wipe(); } catch (e2) { console.warn('[contest] death save wipe failed', e2); }
+    }
     return { done: true, outcome: 'died' };
   };
 

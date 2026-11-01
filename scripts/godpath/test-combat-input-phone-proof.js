@@ -1,0 +1,20 @@
+'use strict';
+const K=require('./lib'),P=require('../lib/combat-input-phone-proof'),T=K.reporter('Native combat input checkpoints'),data=P.read(K.ROOT),result=P.verify(K.ROOT,data);
+T.ok('Both actual phone heights preserve immediate input, announced actor, budgets and whole Continue',result.ok,result.errors.join('\n'));
+function reject(name,change){const copy=structuredClone(data);change(copy);const result=P.verify(K.ROOT,copy);T.ok(name,!result.ok,result.errors.join('\n'));}
+const snap=(r,label)=>r.raw.steps.find(s=>s.kind==='snapshot'&&s.label===label);
+reject('Stale loaded Game source is rejected',d=>{d.receipts[0].raw.networkInputs['src/js/game.js']='stale';});
+reject('Changed executed runner is rejected',d=>{d.receipts[0].data.runner.sha256='stale';});
+reject('Changed original receipt bytes are rejected',d=>{d.receipts[0].rawHash='stale';});
+reject('Synthetic touch is rejected',d=>{d.receipts[0].raw.touches[0].trusted=false;});
+reject('Missing phone height is rejected',d=>{d.receipts.pop();});
+reject('Unsaved actual hit is rejected',d=>{snap(d.receipts[0],'strike-immediate').committed.run.tbfight.fighters.find(f=>f.key==='m_0').hp+=1;});
+reject('Ally damage cannot stand in for a landed player hit',d=>{snap(d.receipts[0],'strike-immediate').fight.sigW5PDmg=0;});
+reject('Refunded live action after Continue is rejected',d=>{snap(d.receipts[0],'strike-continued').fight.fighters.find(f=>f.key==='p').acted=false;});
+reject('Refunded live movement after Continue is rejected',d=>{snap(d.receipts[0],'movement-continued').fight.fighters.find(f=>f.key==='p').moveLeft=2;});
+reject('Late autosave cannot stand in for immediate storage',d=>{const r=d.receipts[0],tap=r.raw.steps.find(s=>s.kind==='tap'&&s.selector==='#c-strike');snap(r,'strike-immediate').at=new Date(Date.parse(tap.at)+30000).toISOString();});
+reject('Skipped pending actor is rejected',d=>{d.receipts[0].data.interruption.continued.fight.pendingTurnKey=null;});
+reject('Instant full round cannot stand in for movement handoff',d=>{d.receipts[0].data.handoff.fight.pendingTurnKey=null;});
+reject('Wrong successor on Continue is rejected',d=>{snap(d.receipts[0],'retreat-continued').bearer='wrong-body';});
+reject('Double-height main surface is rejected',d=>{snap(d.receipts[0],'movement-immediate').geometry.documentHeight=1472;});
+T.done();

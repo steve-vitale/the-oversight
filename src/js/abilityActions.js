@@ -491,7 +491,7 @@
       // TAKE AIM: 2.5x, cannot miss. Consumed on use.
       if (s.aimBonus) {
         d = Math.round(d * s.aimBonus.mult);
-        this.say('TAKE AIM: the shot lands exactly where you pictured it. ×' + s.aimBonus.mult + '.');
+        this.say('TAKE AIM: your Strike lands as planned. ×' + s.aimBonus.mult + '.');
         delete s.aimBonus;
       }
       // DEAD AIM SHOT: 3x, ignores armor.
@@ -710,7 +710,7 @@
       }
       // RED HUNGER (Steve 2026-10-09): pipeline shortcut, not a free lunch.
       if (hasAb('cannibal_frenzy')) {
-        var dc2 = (typeof Game !== 'undefined' && Game.nearButcherableCorpse) ? Game.nearButcherableCorpse() : null;
+        var dc2 = typeof this.nearButcherableCorpse === 'function' ? this.nearButcherableCorpse() : null;
         out.push({
           abilityId: 'cannibal_frenzy', actionId: null, id: 'cannibal_frenzy',
           target: 'self', name: 'Feed the Red Hunger',
@@ -761,24 +761,18 @@
     if (ticks > 0 && ((s.dayTicks || 0) + ticks) >= perDay) return s.day + 1;
     return s.day;
   }
-  // CALM SCAN-DEFAULT (sim-calmbeast-b 2026-10-28): the action bar never
-  // passes a target, so the old calm_beast precheck (tbFighter(null))
-  // refused every bar tap. Mirrors war_cry.challenge's pattern: when the
-  // target is null, resolve it by scanning the live fight. The predicate
-  // is exactly the precheck's own eligibility test (alive, kind not
-  // monster / player / villager) — no new eligibility, so monsters stay
-  // uncalmable and the impl's monster refusal still stands. Returns the
-  // fighter's key, or null. (Fled is not excluded here, matching the
-  // explicit-target path, which also attempts on a fled key — a known
-  // edge, same class before and after, not a new behaviour.)
+  // Animal Ken is human animal-handling knowledge, not a way to pacify
+  // people or alien monsters. Use the same positive recipient test for
+  // the bar's default scan, explicit requests and defensive dispatch.
+  // This does not introduce animal combat actors into the live world.
+  function _calmableAnimal(m) {
+    return !!(m && m.kind === 'animal' && m.alive && !m.fled && m.hp > 0 && m.predatory !== true);
+  }
   function _calmableFighter(game) {
     var f = game.tbfight;
     if (!f || f.over || !f.fighters) return null;
     for (var i = 0; i < f.fighters.length; i++) {
-      var m = f.fighters[i];
-      if (!m || !m.alive) continue;
-      if (m.kind === 'monster' || m.kind === 'player' || m.kind === 'villager') continue;
-      return m.key;
+      if (_calmableAnimal(f.fighters[i])) return f.fighters[i].key;
     }
     return null;
   }
@@ -850,8 +844,8 @@
       // Refuse before the turn is spent, not after.
       var key = target || _calmableFighter(game);
       var m = key && game.tbFighter ? game.tbFighter(key) : null;
-      if (!m || !m.alive || m.kind === 'monster' || m.kind === 'player' || m.kind === 'villager')
-        return { ok: false, why: 'Nothing here to calm.' };
+      if (!_calmableAnimal(m))
+        return { ok: false, why: 'No non-predatory animal here to calm. People and monsters are not targets for Animal Ken.' };
       return { ok: true };
     },
     'field_dressing.dress_game': function (game, target) {
@@ -1129,12 +1123,7 @@
     for (var i = 0; i < corpses.length; i++) {
       var c = corpses[i];
       if (!c || c.buried) continue;
-      var n = c.node || {};
-      if (n.x !== px || n.y !== py) continue;
-      // R52 FIX (journey-deepening r52, same falsy-0 class as r51's
-      // corpses.js fix): 0 is a real edge cell. (c.my || 0) already keeps
-      // 0 and is left alone.
-      if (Math.max(Math.abs((c.mx ?? 4) - (s.mx ?? 4)), Math.abs((c.my || 0) - (s.my ?? 4))) > 1) continue;
+      if (!game._corpseCheckRange(c, true)) continue;
       return c;
     }
     return null;
@@ -1217,7 +1206,7 @@
       // Spend turn aiming. Next shot 2.5x, can't miss. Exposed.
       var s = game.state.scholar;
       s.aimBonus = { mult: 2.5, guaranteed: true, exposeTurns: 1 };
-      game.say('You go still. Breath slows. The world narrows to the target. Next shot: 2.5x damage, cannot miss. But you\'re exposed — enemies hit easier until your next turn. (Take Aim)');
+      game.say('Your next Strike deals 2.5x damage and cannot miss. You cannot dodge enemy attacks until your next turn. (Take Aim)');
       return true;
     },
 
@@ -1368,20 +1357,10 @@
     },
 
     'animal_ken.calm_beast': function (game, target) {
-      // Scan-default (sim-calmbeast-b): a bar tap carries no target, so
-      // resolve one from the live fight (challenge pattern); an explicit
-      // target keeps the old lookup. Without a target AND without a
-      // calmable fighter, the precheck above normally refuses first —
-      // this is the defensive echo of that refusal, not a new path.
       var key = target || _calmableFighter(game);
       var m = key ? game.tbFighter(key) : null;
-      if (!m) {
-        game.say('Nothing here to calm. (Calm)');
-        return false;
-      }
-      // Only works on non-predatory animals (not monsters).
-      if (m.kind === 'monster') {
-        game.say('You try the calming breath, the low posture. It doesn\'t care — this thing isn\'t an animal, it\'s a monster. It\'s coming. (Calm — failed, it\'s a monster.)');
+      if (!_calmableAnimal(m)) {
+        game.say('No non-predatory animal here to calm. People and monsters are not targets for Animal Ken.');
         return false;
       }
       // 50% chance to end the fight peacefully.
@@ -1813,13 +1792,9 @@
       var item = pantry[idx];
       // weight: a lift still has to fit on your back
       var inv = s.inventory || [];
-      var carryKg = inv.reduce(function (t, it) { return t + (it.kg || 0) * (it.units || 1); }, 0);
-      try { carryKg += game.waterWeight(); } catch (e) {}
-      var room = game.carryCapacity() - carryKg;
-      var take = 0;
       var unitKg = item.kg || 0.1;
       var want = Math.min(item.units || 1, 2);
-      for (var u = 0; u < want; u++) { if (room >= unitKg) { take++; room -= unitKg; } }
+      var take = game.fittingCarryUnits(unitKg, want);
       if (take <= 0) {
         game.say('Too heavy for even a light lift. (Light Fingers)');
         return false;
@@ -1945,7 +1920,7 @@
         for (var i = 0; i < f.fighters.length; i++) {
           var c = f.fighters[i];
           if (c.kind !== 'monster' || !c.alive || c.fled) continue;
-          var d = p ? Math.abs((c.mx || 0) - (p.mx || 0)) + Math.abs((c.my || 0) - (p.my || 0)) : 0;
+          var d = p ? Math.abs((c.mx || 0) - (p.mx || 0)) + Math.abs((c.my ?? 0) - (p.my || 0)) : 0;
           if (d <= 3 && d < bestD) { bestD = d; best = c; }
         }
         m = best;
@@ -2034,7 +2009,7 @@
         for (var i = 0; i < f.fighters.length; i++) {
           var c = f.fighters[i];
           if (c.kind !== 'monster' || !c.alive || c.fled) continue;
-          var d = p ? Math.abs((c.mx || 0) - (p.mx || 0)) + Math.abs((c.my || 0) - (p.my || 0)) : 0;
+          var d = p ? Math.abs((c.mx || 0) - (p.mx || 0)) + Math.abs((c.my ?? 0) - (p.my || 0)) : 0;
           if (d <= 1 && d < bestD) { bestD = d; best = c; }
         }
         m = best;

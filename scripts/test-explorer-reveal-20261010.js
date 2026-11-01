@@ -148,8 +148,15 @@ function forceDowsingSuccess(fn) {
   ok(delta2 === 9, 'echo_location reveals exactly the promised 3x3',
     'revealed ' + delta2 + ' tiles, copy says "3x3 revealed"');
   // 1/day gate still works
-  Game.activateAbility('echo_location');
-  ok(said.some(l => /Already echoed today/.test(l)), 'echo_location keeps its 1/day gate');
+  const echoBefore = { kcal: Game.state.scholar.kcal, day: Game.state.scholar.day, tick: Game.state.scholar.dayTicks, revealed: revealedCount() };
+  const echoButton = Game.activatableAbilities().find(a => a.id === 'echo_location');
+  said.length = 0;
+  const repeatedEcho = Game.activateAbility('echo_location');
+  ok(repeatedEcho === false && echoButton && !echoButton.available,
+    'echo_location keeps its 1/day gate in both button and dispatcher');
+  ok(said.some(l => l.includes(echoButton.why)), 'echo refusal explains the visible unavailable reason');
+  ok(JSON.stringify(echoBefore) === JSON.stringify({ kcal: Game.state.scholar.kcal, day: Game.state.scholar.day, tick: Game.state.scholar.dayTicks, revealed: revealedCount() }),
+    'refused repeat echo spends no food/time and reveals nothing');
 
   // ================= HELD: hostile-input sweep =================
   freshGame();

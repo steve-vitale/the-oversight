@@ -13,6 +13,7 @@ const K=require('./lib'),P=require('../lib/conversation-playtest'),T=K.reporter(
   c.want={id:'ask_favor',def:selected.def,stage:2,favor};c.thread='want';c.pendingQ=null;c.genericQ=null;c.reactiveQ=null;c.windingDown=false;c.choosingSubject=false;G.sayLine(vid,favor.line,{diegeticAct:true});c.replyMenu=null;
   return {v,s,vid,favor,c};
  }
+ // Joint forage now has a real physical lifecycle; only these jobs remain unavailable.
  for(const kind of ['snare_mend','watch_shift']){
   const {v,vid,favor}=scene(kind),choices=P.offers(G,vid);
   T.ok(kind+' explains unavailable execution and does not offer a hollow promise',choices.some(o=>o.id==='dlg:favor_requirements')&&!choices.some(o=>['dlg:favor_action','dlg:commit'].includes(o.id)),JSON.stringify(choices));
@@ -29,6 +30,13 @@ const K=require('./lib'),P=require('../lib/conversation-playtest'),T=K.reporter(
   T.ok(kind+' closing grants neither completion nor penalty',v.promises[vid].kept==='unavailable'&&favor.state==='moot'&&v.trust[vid]===trust&&G.convoGet(vid).want.resolution==='moot');
  }
  {
+{
+  const {v,vid,favor}=scene('forage_help');
+  T.ok('forage request now offers a real future commitment rather than an unavailable job',P.offers(G,vid).some(o=>o.id==='dlg:commit')&&!G.convoFavorAction(vid,favor).unsupported);
+  P.choose(G,vid,'dlg:commit');
+  T.ok('actual foraging commitment records tomorrow without fabricating a completed outing',v.promises[vid]?.favorId===favor.id&&!v.promises[vid].kept&&!favor.forageRun&&Number.isFinite(favor.meetDay));
+}
+{
   // JOINT OUTING (tackle-outing 2026-10-27): forage_help is PLAYABLE now —
   // the pantry outing behind it exists, so it leaves the unavailable set.
   // A playable job commits, rots on its deadline like other real jobs, and
@@ -43,6 +51,7 @@ const K=require('./lib'),P=require('../lib/conversation-playtest'),T=K.reporter(
   T.ok('forage_help playable job rots on its deadline like other real jobs',v.promises[vid].kept==='broken'&&favor.state==='broken');
   G.convoGet(vid).replyMenu=null;
   T.ok('forage_help broken job offers no no-penalty close',!P.offers(G,vid).some(o=>o.id==='dlg:favor_cancel'));
+}
  }
  {
   const {s,vid,favor,c}=scene('food_share');s.inventory=[];

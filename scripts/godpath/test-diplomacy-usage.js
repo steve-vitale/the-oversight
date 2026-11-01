@@ -1,0 +1,18 @@
+'use strict';
+const K=require('./lib'),D=require('../lib/diplomacy-usage'),T=K.reporter('Diplomacy usage semantics');
+const at=(bearer,x)=>({bearer,world:[x,0],day:1,tick:0}),base={before:at('p',0),target:{x:1,y:0},observedBefore:{deal:null},observedAfter:{deal:null}};
+const failed={...base,arrival:at('p',4),actions:[]},refused={...base,arrival:at('p',0),actions:[{id:'deal_split',accepted:true}]};
+const actual={...base,arrival:at('p',0),observedAfter:{deal:'split'},actions:[{id:'talk',accepted:true,before:at('p',0),after:{...at('p',0),tick:64}},{id:'deal_split',accepted:true}]};
+const r=D.summarize({receipts:[failed,refused,actual]});
+T.ok('unreached trips are attempts, not arrivals',r.attempts===3&&r.sameBearerRangeArrivals===2);
+T.ok('true deal return without a deal cannot count as an agreement',r.dealCalls===2&&r.newAgreementsObserved===1);
+T.ok('accepted talk and observed payment remain separate',r.acceptedTalkCalls===1&&r.talksWithObservedTime===1);
+T.ok('an unknown outcome stays unknown',D.summarize({receipts:[{...base,observedAfter:undefined,actions:[]}]}).unknownAgreementOutcomes===1);
+T.ok('missing instrumentation is unknown rather than zero',D.summarize(null).attempts===null);
+T.ok('a measured empty receipt list is known zero',D.summarize({receipts:[]}).attempts===0);
+T.ok('missing arrival/action coverage is explicit rather than a known zero',D.summarize({receipts:[{...base}]}).status==='partial'&&D.summarize({receipts:[{...base}]}).unknownActionAttempts===1);
+const switched=D.summarize({receipts:[{...actual,arrival:at('successor',0),actions:[{id:'talk',accepted:true,before:at('p',0),after:{...at('successor',0),tick:64}}]}]});
+T.ok('successors are not attributed the predecessor arrival or clock',switched.sameBearerRangeArrivals===0&&switched.unknownTalkTime===1&&switched.talksWithObservedTime===0);
+const free=D.summarize({receipts:[{...base,actions:[{id:'talk',accepted:true,before:at('p',0),after:at('p',0)}]}]});
+T.ok('an accepted uncharged talk is not a paid interaction',free.acceptedTalkCalls===1&&free.talksWithObservedTime===0);
+T.done();

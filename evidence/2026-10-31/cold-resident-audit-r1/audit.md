@@ -1,0 +1,13 @@
+# Actual cold resident failure — next causal task, not repaired
+
+Same ordinary Oscar campaign, day20/dawn,100HP,2124kcal,78%hydration. Native source is corrected joint-budget R2; whole scholar/codex and actual pre-Continue bytes recover. The journey has preserved operator selector/covered-target failures, so final.ok is false. Those do not explain the following accepted player inputs.
+
+Aroha Ngata requests company on the actual grove node. Physical sprite approach and two actual visible paid-Talk control taps succeed as native inputs, yet open no conversation and charge nothing. The member remains in village.roster, physically beside the player; her request remains unanswered and conv.active stays false. Rows35–38 and rendered images show this.
+
+Independent shared-harness original-source diagnostic imports the actual retained profile into a fresh process WITHOUT newRun. Canonical data.villagers and saved village.rosterChars both lack aroha_ngata; vpOf returns no id and actual startConvo returns null. The authored background seed exists. Two getPerson calls produce different full objects and do not cache either as the canonical person. No scholar/resource/clock edit reproduces the failure.
+
+Root boundary to audit: ensureRosterPerson creates arrivals but does not put them in rosterChars; load restores only that saved registry, and skips saved overrides when an authored data id already exists. In-process reloads can retain a warm non-gen actor in data.villagers and hide the omission. Actual fresh-process resident identity/inventory/worn/knowledge and usable Talk must be proven, not just whole scholar/codex or roster membership. Do not generate replacement rewards, silently invent lost equipment, or erase known person facts. Preserve original actors and record irrecoverable legacy unknowns honestly.
+
+Next bounded work: canonical actor admission/save/Continue lifecycle plus actual cold player interaction and NPC work/gear retention. Extend repeatable campaign checkpoints to cold resident probes before claiming later-game or NPC utilization coverage. No candidate repair or release clearance yet.
+
+Other retained observations: nutrition-positive actual shell/eat chain (150kcal per prepared Hickory unit), second paid forage yielding13 Groundnut +15 Muscadine Grapes (2520 nominalkcal), paid cultivation4beds/12days and teaching Meera, underfoot resource actions hidden by self/edge-card precedence and NW-first dedup (not nearest), and distant by-fire narration during field travel. These need sibling audits; do not infer a numeric garden payoff or universal dialogue repair from them.

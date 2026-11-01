@@ -1,0 +1,11 @@
+'use strict';
+const K=require('./lib'),P=require('../lib/held-answer-phone-proof'),T=K.reporter('held answer phone proof'),root=K.ROOT,original=P.read(root),run=patch=>{const c=structuredClone(original);patch(c);return P.verify(root,c).ok;};
+T.ok('source-bound native interrupted-answer proof passes both phone heights',P.verify(root,original).ok);
+T.ok('lost substantive delivery fails',!run(p=>p.receipts[0].data.delivered=0));
+T.ok('answered stale question fails',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native answer to interruption').conversation.generic={kind:'reason'}));
+T.ok('falsely priced generic answer fails',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native answer to interruption').state.scholar.kcal--));
+T.ok('changed offered words fail',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='before continuation 0').conversation.words.goon='wrong words'));
+T.ok('lost saved inventory fails',!run(p=>p.receipts[0].data.trace.find(t=>t.label==='native committed Continue').state.scholar.inventory.pop()));
+T.ok('stale actual conversation code fails',!run(p=>p.receipts[0].data.responses['src/js/conversation.js']='stale'));
+T.ok('untrusted synthetic input fails',!run(p=>p.receipts[0].data.touches[0].trusted=false));
+T.done();

@@ -1,0 +1,25 @@
+'use strict';
+const path=require('path'),i=process.argv.indexOf('--root'),K=require(i<0?'./lib':path.join(path.resolve(process.argv[i+1]),'scripts/godpath/lib')),T=K.reporter('Surplus caretaker cultivation');
+(async()=>{const G=await K.load({seed:7002});let s,v,actor,plot,altCalls;
+const realAlt=G.prodThrottleAltTask;G.prodThrottleAltTask=function(...args){altCalls++;return realAlt.apply(this,args);};
+function fresh(magic=true,hunger=10){K.newRun(G);s=G.state.scholar;v=G.state.village;s.kcal=6000;G.exitBuilding();actor=v.roster.find(id=>id!==G.villagerId&&!G.getPerson(id)?.dead);v.npcAbilities=v.npcAbilities||{};v.npcAbilities[actor]=[];if(v.npcAbilityPractice)delete v.npcAbilityPractice[actor];if(magic)G.npcGrantAbility(actor,'green_whisper');G.npcNeeds(actor).hunger=hunger;plot={pid:null,dead:false};G.gardenPlant(plot,'lambs_quarters',s.day);plot.lastTend=s.day-2;plot.weeds=2;G.map.tiles[4][4].plots=[plot];G.stockPantry(200000,'Prepared surplus');altCalls=0;}
+fresh();T.ok('real surplus and own canonical ability leave paid growth available',G.prodThrottleEngaged()&&G.gardenMagicGate(actor).ok&&v.npcAbilities[actor].includes('green_whisper'));
+v.trust[actor]=40;
+const kcal=s.kcal,hunger=G.npcNeeds(actor).hunger,a={task:'garden'};G.resolveOneAssignment(actor,a);
+T.ok('garden assignment advances an immature bed while pantry is full',plot.magicGrowth===4&&plot.magicOwner===actor);
+T.ok('the same resident pays eight hunger points; player pays nothing',G.npcNeeds(actor).hunger===hunger+8&&s.kcal===kcal);
+T.ok('successful paid cultivation consumes duty without another resource job',altCalls===0&&a.task==='garden');
+T.ok('successful duty still maintains the bed and earns personal practice',plot.lastTend===s.day&&plot.weeds===0&&v.npcAbilityPractice?.[actor]?.green_whisper?.xp===2);
+T.ok('successful cultivation receives the normal garden work trust credit',v.trust[actor]===41);
+T.ok('the completed garden assignment is recorded once in actual memory',(v.memory?.[actor]||[]).filter(m=>m.t==='task'&&m.day===s.day&&m.note==='garden (assigned)').length===1);
+const xp=v.npcAbilityPractice?.[actor]?.green_whisper?.xp;G.resolveOneAssignment(actor,{task:'garden'});
+T.ok('second same-day duty falls back without duplicating growth or practice',plot.magicGrowth===4&&v.npcAbilityPractice?.[actor]?.green_whisper?.xp===xp&&altCalls===1);
+fresh(true,79);G.resolveOneAssignment(actor,{task:'garden'});T.ok('hungry gardener maintains and takes ordinary fallback without a cast',plot.magicGrowth===0&&plot.weeds===0&&altCalls===1&&!v.npcAbilityPractice?.[actor]);
+fresh(false);K.giveAbility(G,'green_thumb');G.resolveOneAssignment(actor,{task:'garden'});T.ok('resident cannot borrow the player gardening ability',plot.magicGrowth===0&&altCalls===1);
+fresh();plot.plantedDay=s.day-30;G.resolveOneAssignment(actor,{task:'garden'});T.ok('ripe beds do not receive magic or force surplus harvesting',plot.magicGrowth===0&&plot.lastHarvest===0&&altCalls===1);
+fresh();plot.pid=null;G.resolveOneAssignment(actor,{task:'garden'});T.ok('empty beds retain ordinary resource fallback',altCalls===1&&!v.npcAbilityPractice?.[actor]);
+fresh();plot.dead=true;G.resolveOneAssignment(actor,{task:'garden'});T.ok('dead beds do not consume food on cultivation',plot.magicGrowth===0&&altCalls===1&&!v.npcAbilityPractice?.[actor]);
+fresh();const cast=G.cultivateGarden;G.cultivateGarden=()=>false;G.resolveOneAssignment(actor,{task:'garden'});G.cultivateGarden=cast;T.ok('unsuccessful dispatch keeps the resource fallback',plot.magicGrowth===0&&altCalls===1);
+fresh();G.setGardenKeeper(actor);altCalls=0;v.assignments={[actor]:{task:'water'}};G.gardenKeeperTurn();T.ok('another explicit order still outranks standing garden care',plot.magicGrowth===0&&altCalls===0);
+delete v.assignments[actor];G.gardenKeeperTurn();G.gardenKeeperTurn();T.ok('standing care performs one paid daily garden duty',plot.magicGrowth===4&&altCalls===0&&v.gardenKeeperDay===s.day);
+G.prodThrottleAltTask=realAlt;T.done();})().catch(e=>{console.error(e.stack);process.exitCode=1;});

@@ -1,0 +1,15 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),assert=require('assert/strict'),K=require('./lib'),T=K.reporter('Explicit measurement contracts'),M=require('../lib/measurement-contract'),B=require('../balance-panel');
+const identity={observerDigest:'72d7f2954862806368492d125da5e2a7449a77b41d34956dcf9f1a09850fbdb2',contractDigest:'cd5aea63d710332f49c59b33dbe8a750eb49965198566e88f72c027370288ca9'};
+assert.throws(()=>M.select(identity),/explicit historical:true/);T.ok('old identities cannot silently become current observations',true);
+assert.throws(()=>M.select(identity,{historical:'false'}),/explicit historical:true/);T.ok('historical reading requires a real explicit boolean',true);
+const old=M.select(identity,{historical:true});
+T.ok('known original contract retains23 domains and no invented luck',old.contract.metrics.length===23&&old.contract.metrics.every(m=>!m.id.startsWith('luck'))&&old.measurementIdentity.mode==='historical'&&old.measurementIdentity.contractDigest===identity.contractDigest);
+assert.throws(()=>M.select({...identity,observerDigest:'0'.repeat(64)},{historical:true}),/Unknown historical/);T.ok('unknown observer cannot borrow a known old metric contract',true);
+assert.throws(()=>M.select({...identity,contractDigest:'0'.repeat(64)},{historical:true}),/Unknown historical/);T.ok('unknown contract cannot be inferred from missing fields',true);
+const current=M.select(B.observerIdentity(K.ROOT));T.ok('current default keeps all31 columns and six diagnostic-only fields',current.measurementIdentity.mode==='current'&&current.contract.metrics.length===31&&current.contract.metrics.filter(m=>m.diagnosticOnly).length===6);
+const report=JSON.parse(z.gunzipSync(fs.readFileSync(path.join(K.ROOT,'evidence/2026-10-21/public-grid-screen-r1.json.gz')))),snapshot=JSON.stringify(report),reader=require('../summarize-public-travel');
+assert.throws(()=>reader.summarize(report),/explicit historical:true/);T.ok('actual historical reader rejects a current-source claim by default',true);
+const result=reader.summarize(report,{historical:true});T.ok('explicit historical analysis preserves raw identities and every original metric',JSON.stringify(report)===snapshot&&result.measurementIdentity.mode==='historical'&&result.contrasts.every(c=>c.metrics.length===23));
+const forged=structuredClone(report);forged.contractDigest='0'.repeat(64);assert.throws(()=>reader.summarize(forged,{historical:true}),/Unknown historical/);T.ok('actual reader rejects a forged historical identity',true);
+T.done();

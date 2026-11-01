@@ -286,6 +286,11 @@ console.log('B3: trembles at the end of its 40 day-parts');
 {
   const st = freshGame();
   Game.applyStatus('scholar', 'trembles', { source: 'human meat' });
+  // Match the normal diagnosis caller: diagnose, then share the name. Fatal
+  // narration uses the camp's knowledge; the unknown boundary is separate.
+  Game.diagnoseDisease('scholar','trembles',{by:'prepared diagnosis fixture'});
+  Game.markDiseaseKnown('trembles');
+  check('expiry fixture has a real shared diagnosis',Game.isDiagnosed('scholar','trembles')&&Game.villageKnowsDisease('trembles'));
   let died = null;
   const realPD = Game.playerDeath, realMCD = Game.maybeCheatDeath;
   Game.maybeCheatDeath = () => false;
@@ -313,6 +318,14 @@ console.log('B3: trembles at the end of its 40 day-parts');
     }
   }
   Game.playerDeath = realPD; Game.maybeCheatDeath = realMCD;
+}
+
+if(!BEFORE){
+  freshGame();Game.applyStatus('scholar','trembles',{source:'prepared unknown disease'});
+  const entry=Game.seList('scholar').find(e=>e.id==='trembles'),realPD=Game.playerDeath,realMCD=Game.maybeCheatDeath;
+  let cause=null;Game.playerDeath=c=>{cause=c;};Game.maybeCheatDeath=()=>false;
+  try{check('unknown expiry fixture has no diagnosis',!Game.villageKnowsDisease('trembles'));entry.dayPartsLeft=1;said.length=0;Game.tickStatuses('scholar','dayPart');check('unknown tremor is still terminal without leaking its name',cause==='sickness'&&!said.join(' ').includes('the trembles'),'cause='+cause);}
+  finally{Game.playerDeath=realPD;Game.maybeCheatDeath=realMCD;}
 }
 
 // ============ B4: mosquito can deliver both viruses ============

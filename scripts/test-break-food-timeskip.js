@@ -28,10 +28,13 @@ async function main() {
   // 2) second use same day refused (engine gate)
   sayLog.length = 0;
   const dp2 = G.dayPart;
+  const blocked = G.activatableAbilities().find(a => a.id === 'time_skip');
+  const deniedResources = JSON.stringify({kcal:s.kcal,ticks:s.dayTicks,xp:s.abilities.find(a=>a.id==='time_skip').xp});
   G.activateAbility('time_skip');
+  check('T2 refused activation preserves paid resources', deniedResources === JSON.stringify({kcal:s.kcal,ticks:s.dayTicks,xp:s.abilities.find(a=>a.id==='time_skip').xp}));
   check('T2 second skip same day refused', s.timeSkipDay === 5 && G.dayPart === dp2,
     `timeSkipDay=${s.timeSkipDay} dayPart unchanged=${G.dayPart === dp2}`);
-  check('T2b refusal says why', sayLog.some(m => /1\/day/.test(m)), sayLog.slice(-1)[0]);
+  check('T2b refusal says why', blocked && blocked.available === false && !!blocked.why && sayLog.some(m => m.includes(blocked.why)), sayLog.slice(-1)[0]);
 
   // 3) next day it works again
   s.day = 6;

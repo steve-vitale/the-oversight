@@ -1,9 +1,12 @@
 // @ontology
 // system: overtime
-// description: OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.
+// description: OVERTIME — earned Table waiting cost plus the calendar survival floor (Steve 2026-10-23: Easter egg around day150 is already intolerably hard;180 is a very long game). Table waiting rises weekly to6; independently, day120+ raises an uncapped weekly floor without requiring a Table. Ordinary world monsters and NPC field fights grow stronger, raids gorge harder; pack/cap additions remain physically bounded. Calendar-only Network qualification starts at150 and still requires all three titan victories. Tuning: titans.json _overtime.
 // provides:
 //   - overtimeActive() -> bool: the clock is running (table set, announced, day 90+, seat not none, not seated)
-//   - overtimeTier() -> 0..maxTier
+//   - overtimeTier() -> max(Table tier capped at6, uncapped calendar floor)
+//   - survivalPressureTier() -> calendar floor, rising weekly from day120 without a plateau
+//   - survivalPressureTick() -> warn before onset; announce calendar tiers without requiring a Table
+//   - overtimeMonsterPressure(mid) -> shared ordinary-monster HP/damage/pack coefficients
 //   - overtimeTick() -> daily: count unseated days, raise the tier aloud, check the key
 //   - overtimeStanding() -> {tier, losses, penalty} the seat-price cost
 //   - overtimeThirdTitan() -> the uncast apocalypse id once tier >= thirdTitanTier (titans.js reads it)
@@ -11,11 +14,11 @@
 //   - overtimeScaleFight(mid) -> applies the RERUN modifiers to a just-started fight
 //   - networkKeyReady() -> the key's gate (tier >= the_network.keyTier AND herald, nielsen, finale slain)
 // rules:
-//   - no_spoilers: nothing ticks, shows or speaks before the Table exists for the player (tableAnnounced + winDayFloorOk) (code: overtimeActive)
+//   - no_table_spoilers: the Table clock requires its announcement; calendar warnings name only world danger (code: overtimeActive/survivalPressureTick)
 //   - stops_when_seated: tableDone stops the clock; the tier never rises after the seat is taken (code: overtimeActive)
 //   - tier_is_monotonic: the tier never falls; a withdrawn seat pauses the clock, it does not reset it (code: overtimeTick)
-//   - zero_at_tier_zero: every knob is a no-op at tier 0, so runs that sit promptly play exactly as before (code: overtimeRaidKnobs)
-//   - reruns_not_titans: scaling skips titans, campaign nodes and anything below minWave (code: overtimeScaleFight)
+//   - zero_at_tier_zero: every knob is a no-op at tier0 (code: overtimeRaidKnobs)
+//   - reruns_not_titans: scaling skips titans/campaign nodes; calendar pressure includes lower-wave ordinary beasts (code: overtimeMonsterPressure)
 // consumes:
 //   - progState(), tableSeat(), winDayFloorOk(), titanCast(), sysSay, say, tele, recordMoment
 //   - startCombat() (wrapped: RERUN scaling after the fight is built)
@@ -50,10 +53,44 @@
       } catch (e) { console.warn('overtimeActive', e); return false; }
     },
     overtimeTier() {
-      try { return Math.max(0, Math.min(num('maxTier', 6), this.progState().overtime | 0)); } catch (e) { return 0; }
+      try { return Math.max(0, Math.min(num('maxTier', 6), this.progState().overtime | 0), this.survivalPressureTier()); } catch (e) { console.warn('overtimeTier', e); return 0; }
+    },
+    survivalPressureTier() {
+      const pg = (this.state.scholar || {}).prog || {};
+      if (cfg().calendarEnabled === false || pg.tableDone) return 0;
+      const start = num('calendarStartDay', 120), span = Math.max(1, num('calendarDaysPerTier', 7));
+      return today() < start ? 0 : 1 + Math.floor((today() - start) / span);
+    },
+    survivalPressureTick(announceOnly) {
+      if (cfg().calendarEnabled === false || this.over || ((this.state.scholar || {}).prog || {}).tableDone) return;
+      const day = today();
+      if (day < num('calendarWarningDay', 110)) return;
+      const st = this.state.longSurvival || (this.state.longSurvival = { announcedTier: 0, warned: false });
+      if (!st.warned) {
+        st.warned = true;
+        if (day < num('calendarStartDay', 120)) this.say(String(cfg().calendarWarningLine || 'The season is running long. The beasts and raids will keep growing stronger.')
+          .replace('{startDay}', String(num('calendarStartDay', 120))).replace('{daysPerTier}', String(num('calendarDaysPerTier', 7))));
+      }
+      const tier = this.survivalPressureTier();
+      if (tier > (st.announcedTier || 0)) {
+        st.announcedTier = tier;
+        const effectiveTier = this.overtimeTier();
+        this.say(`Day ${day}: the long season tightens its grip. Ordinary monsters have +${Math.round(num('hpPerTier', 0.25) * effectiveTier * 100)}% HP and +${Math.round(num('dmgPerTier', 0.12) * effectiveTier * 100)}% damage. Raids come sooner and eat more. This pressure will keep rising.`);
+        this.tele('survival_pressure_tier', { day, tier, effectiveTier });
+      }
+      if (!announceOnly && this.networkKeyReady() && typeof this.networkSummon === 'function') this.networkSummon();
+    },
+    overtimeMonsterPressure(mid) {
+      const tier = this.overtimeTier(), calendar = this.survivalPressureTier() > 0;
+      const mdef = (this.data.monsters || []).find(m => m.id === mid);
+      if (!tier || !mdef || mdef.campaignOnly || (this.isTitan && this.isTitan(mid))) return null;
+      if ((mdef.wave || 1) < num(calendar ? 'calendarMinWave' : 'minWave', calendar ? 1 : 4)) return null;
+      return { tier, hpMult: 1 + num('hpPerTier', 0.25) * tier, damageMult: 1 + num('dmgPerTier', 0.12) * tier,
+        packExtra: Math.min(num('maxPackExtra', 3), Math.floor(tier / Math.max(1, num('packEveryTiers', 2)))) };
     },
     overtimeTick() {
       try {
+        this.survivalPressureTick();
         const pg = this.progState();
         const day = today();
         if (pg.overtimeLastDay === day) return;
@@ -116,22 +153,23 @@
         const net = this.titanDef ? this.titanDef('the_network') : null;
         const keyTier = (net && net.keyTier) || 3;
         if (this.overtimeTier() < keyTier) return false;
+        // The earned Table-overtime road retains its original gate. Calendar
+        // pressure can reveal the Easter egg around day150, never by merely
+        // missing a Table requirement; the three titan victories still count.
+        if ((pg.overtime | 0) < keyTier && today() < num('calendarBossDay', 150)) return false;
         const slain = ((this.state.titans || {}).slain) || {};
         return !!(slain.herald && slain.nielsen && slain.finale);
       } catch (e) { console.warn('networkKeyReady', e); return false; }
     },
     // overtimeScaleFight(mid): RERUN ×N — applied to a fight startCombat just built.
     overtimeScaleFight(mid) {
-      const t = this.overtimeTier();
+      const pressure = this.overtimeMonsterPressure(mid), t = pressure && pressure.tier;
       const f = this.tbfight;
       if (!t || !f || !f.fighters || f.otTier) return false;
       if (this.tableActive && this.tableActive()) return false;
-      const mdef = (this.data.monsters || []).find(m => m.id === mid);
-      if (!mdef || (mdef.wave || 1) < num('minWave', 4) || mdef.campaignOnly) return false;
-      if (this.isTitan && this.isTitan(mid)) return false;
       f.otTier = t;
-      const hpM = 1 + num('hpPerTier', 0.25) * t;
-      const extra = Math.floor(t / num('packEveryTiers', 2));
+      const hpM = pressure.hpMult;
+      const extra = pressure.packExtra;
       for (let i = 0; i < extra; i++) {
         try { if (this.campaignInjectMonster) this.campaignInjectMonster(mid); } catch (e) { console.warn('overtime packmate', e); }
       }
@@ -148,6 +186,16 @@
   Object.assign(Game, methods);
 
   // ---------- wraps (originals always called) ----------
+  if (Game.load && !Game.load.__survivalPressureWrapped) {
+    const original = Game.load;
+    const wrapped = function () {
+      const result = original.apply(this, arguments);
+      if (result) this.survivalPressureTick(true); // notice only: no dawn, boss spawn or resource charge
+      return result;
+    };
+    wrapped.__survivalPressureWrapped = true;
+    Game.load = wrapped;
+  }
   if (Game.startCombat && !Game.startCombat.__overtimeWrapped) {
     const orig = Game.startCombat;
     const w = function (monsterId) {
@@ -183,7 +231,7 @@
     const w = function () {
       const c = orig.apply(this, arguments);
       let add = 0;
-      try { const t = this.overtimeTier(); if (t) add = Math.ceil(t / num('capEveryTiers', 2)); } catch (e) { console.warn('overtime cap', e); }
+      try { const t = this.overtimeTier(); if (t) add = Math.min(num('maxCapExtra', 3), Math.ceil(t / num('capEveryTiers', 2))); } catch (e) { console.warn('overtime cap', e); }
       return c + add;
     };
     w.__overtimeWrapped = true;

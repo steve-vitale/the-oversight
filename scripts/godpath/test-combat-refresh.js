@@ -42,7 +42,7 @@ function fn(name, next) {
   vm.createContext(context);
   // Signature modules were loaded by the shared kit in the host realm.
   global.document = context.document;
-  vm.runInContext(fn('setHTMLCached', 'syncAfterMove') + fn('syncAfterMove', 'dpadPress').split('  MoveAnim.hooks.step')[0] + fn('wireCombatPanel', 'wirePanel'), context);
+  vm.runInContext(fn('setHTMLCached', 'syncAfterMove') + fn('syncAfterMove', 'dpadPress').split('  MoveAnim.hooks.step')[0] + fn('combatInput','wireCombatPanel') + fn('wireCombatPanel', 'wirePanel'), context);
   const wait = G.tbPlayerWait;
   G.tbPlayerWait = function () { calls++; return wait.call(this); };
   const sync = () => context.syncAfterMove({_sig: {...sig}}, {moved: false});

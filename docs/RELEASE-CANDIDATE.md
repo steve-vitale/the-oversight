@@ -2,7 +2,40 @@
 
 Status: integration in progress; not cleared for public launch.
 
-Current shared development release (2026-10-20): e83b78097, production build
+2026-10-22 checkpoint: nine actual public critical files match09ff3090e,
+buildab5f8db3e-20261022-113126 (reconcile-09ff-public-pin-r1). Independent
+review81883f9c5 is saved/shared in issue2 comment6340125948, with actual downloaded
+history/tree/file verification, quick320/full1092 and native phone/Continue
+proof. Source shared is not source deployed or reviewed. Normal reconciliation
+with09ff is verified on codex/reconcile-09ff-20261022: fresh source-bound phone,
+cache/Continue, quick324/full1096,12 neutral cohorts and64 matched campaigns.
+All23 screen remains review_required; ten changed-case death-call replays are
+exact. See reconcile-09ff-audit-r1; independent passes did not qualify the merge.
+Combined source review and ship-loop publication are still pending. Physical-device,
+broader late-game/all-playstyle and public-launch gates remain open.
+
+Historical local review follow-up: codex/mobile-opening-20261021 on056e07a08 adds
+the small first-start/grounds UI corrections from actual fresh phone play.
+Game/policies/difficulty remain unchanged. Both target heights replay native
+onboarding and an unedited fresh-run planting/cultivation/refusal/Continue
+checkpoint; the existing source-bound frame, scene and installed lifecycle
+proofs are refreshed. Twelve neutral rows/states/all23 match exactly. See
+mobile-opening-audit-r1 for scope, failures and open late-game/device/release
+gates. Prior456/056 packets remain frozen. Owner review/publication are pending.
+
+Historical coordination checkpoint (2026-10-21): published master/main were57ca6e10d.
+Reconciled review runtime456cf8cbd retains both Muse ancestors and is available
+through the unpublished draft packet linked in GitHub issue2. Sender-side
+download/import into a fresh GitHub clone is verified; peer acknowledgment,
+owner review and ship-loop publication are pending. No whole-tree port needed.
+The current local published57/candidate/rollback lifecycle witness verifies173
+text inputs and both icons at five stages on each phone height, with native
+save bytes and full loaded payload preservation. See PWA-RELEASE-CHECKLIST.md
+and published-lifecycle-audit-r1. Tooling/evidence follow on a separate review
+branch. Physical-device, fresh five-journey binding and public-launch gates
+remain open. The older development/preview checkpoints below are historical.
+
+Historical shared development release (2026-10-20): e83b78097, production build
 d09f47ea2-20261021-042230. Atomic time/Sleep saves, crash recovery and current
 UTF-8 report readers are shared. Fresh prepush quick276/0 and full1,048/0 pass;
 overnight-save-publication-r1.json verifies166 boot inputs plus worker/version/
@@ -11,7 +44,7 @@ penalty, recovery guidance and installed offline update are retained. Read
 TIME-SETTLEMENT.md and overnight-save-audit-r1 for precise limits. Legacy partial
 night reconstruction, other joint favors and physical-device gates remain open.
 
-Current shared development release (2026-10-20): master/main19b91d67f,
+Historical shared development release (2026-10-20): master/main19b91d67f,
 production build ffe2259a9-20261021-033519 at https://the-oversight.vercel.app.
 Muse recovery999c69491 is preserved in this ancestry; no whole-tree port is
 needed. caregiver-terminal-publication-r1.json verifies165 boot inputs plus

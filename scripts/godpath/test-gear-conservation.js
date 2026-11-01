@@ -1,0 +1,20 @@
+'use strict';
+const path=require('path'),rootArg=process.argv.indexOf('--root'),K=require(rootArg<0?'./lib':path.join(path.resolve(process.argv[rootArg+1]),'scripts/godpath/lib')),T=K.reporter('Equipment conserves owned gear');
+(async()=>{const G=await K.load({seed:7002});let s;const copy=x=>JSON.parse(JSON.stringify(x)),item=(id,extra={})=>({itemId:id,name:G.data.items.find(d=>d.id===id).name,units:1,kcalEach:0,kg:G.data.items.find(d=>d.id===id).kg,...extra});
+function fresh(items){K.newRun(G);s=G.state.scholar;s.inventory=copy(items);s.equipped={};}
+const old=item('sharpened_stick',{owner:'earlier bearer',origin:'crafted',alienLoot:true,alienEffectHidden:true}),knife=item('stone_knife',{owner:'new bearer',origin:'traded'});
+fresh([old,knife]);const kcal=s.kcal,tick=s.dayTicks;G.equip(0,'melee');G.equip(0,'melee');
+T.ok('a direct swap returns the old weapon',s.inventory.some(i=>i.itemId===old.itemId)&&s.equipped.melee.itemId==='stone_knife');
+T.ok('the old item comes back with its actual instance data',Object.entries(old).every(([k,v])=>JSON.stringify(s.inventory.find(i=>i.itemId===old.itemId)?.[k])===JSON.stringify(v)));
+T.ok('the newly worn weapon keeps its own provenance',s.equipped.melee.owner===knife.owner&&s.equipped.melee.origin===knife.origin&&s.equipped.melee.kg===knife.kg);
+T.ok('swapping adds no food or clock charge',s.kcal===kcal&&s.dayTicks===tick);
+fresh([item('bark_armor'),item('living_soil_robes')]);G.equip(0,'torso');G.equip(0,'torso');T.ok('armor replacement returns the previous armor',s.inventory.some(i=>i.itemId==='bark_armor')&&s.equipped.torso.itemId==='living_soil_robes');
+fresh([item('stone_knife',{units:3,owner:'maker'})]);G.equip(0,'melee');T.ok('wearing one unit leaves the other two in their existing stack',s.inventory.length===1&&s.inventory[0].units===2&&s.inventory[0].owner==='maker'&&s.equipped.melee.units===1);G.unequip('melee');T.ok('taking off a stacked weapon retains exactly three physical units',s.inventory.reduce((n,i)=>n+(i.units??1),0)===3&&!s.equipped.melee);
+const plate=item('conquerors_plate',{owner:'maker',alienLoot:true,alienEffectHidden:false,origin:'trade',bonded:true,bond:17,enhancements:['prepared marker']});fresh([plate]);G.equip(0,'torso');G.unequip('torso');T.ok('wear and take-off retain weight, ownership and earned instance metadata',Object.entries(plate).every(([k,v])=>JSON.stringify(s.inventory[0]?.[k])===JSON.stringify(v)));
+fresh([]);s.equipped.torso={itemId:'conquerors_plate',name:'Legacy plate'};G.unequip('torso');T.ok('legacy worn gear without a saved weight uses the real definition weight',s.inventory[0].kg===G.data.items.find(i=>i.id==='conquerors_plate').kg);
+fresh([item('stone_knife',{units:0})]);let before=copy(s.inventory);G.equip(0,'melee');T.ok('an empty stack cannot create a worn weapon',!s.equipped.melee&&JSON.stringify(s.inventory)===JSON.stringify(before));
+fresh([item('stone_knife')]);before=copy({inventory:s.inventory,equipped:s.equipped});G.equip(0,'torso');T.ok('a refused slot choice moves neither the packed nor worn item',JSON.stringify({inventory:s.inventory,equipped:s.equipped})===JSON.stringify(before));
+fresh([item('living_soil_robes')]);s.equipped.armor=item('bark_armor');G.equip(0,'torso');T.ok('legacy armor is normalized and returned before a modern replacement',!s.equipped.armor&&s.equipped.torso.itemId==='living_soil_robes'&&s.inventory.some(i=>i.itemId==='bark_armor'));
+fresh([item('living_soil_robes')]);s.equipped.torso=item('bark_armor');G.equip(0,'armor');T.ok('the legacy armor command writes the same modern slot',!s.equipped.armor&&s.equipped.torso.itemId==='living_soil_robes'&&s.inventory.some(i=>i.itemId==='bark_armor'));
+fresh([item('stone_knife')]);G.equip(0,'weapon');T.ok('the legacy weapon command selects the item proper slot',s.equipped.melee?.itemId==='stone_knife'&&!s.equipped.weapon);
+T.done();})().catch(e=>{console.error(e.stack);process.exitCode=1;});

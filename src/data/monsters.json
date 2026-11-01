@@ -386,7 +386,7 @@
       }
     ],
     "weaknesses": [
-      "a solid strike while the beam burns can break its aim",
+      "move sideways out of the beam or break its lane behind a wall; striking does not interrupt it",
       "unaware while grazing \u2014 strike before it notices you"
     ],
     "edible": {
@@ -401,7 +401,7 @@
     "codexStages": {
       "unknown": "It froze like headlights on a highway. The light did not stop gathering.",
       "observed": "Whitetail. The System observed the freeze response and classified it as ocular beam charging. It was wrong about the 'beam' \u2014 and right that you should move. When it freezes, it is aiming. The beam does not just fire \u2014 it SWEEPS after you while it burns. Antlers never shed: the System classified them as permanent equipment.",
-      "slain": "Moves: Ocular Discharge (telegraphed by the freeze \u2014 MOVE), Antler Sweep (close range). It does not run. It does not bluff. When it freezes, it is aiming \u2014 and the beam tracks you while it fires. Break the lane behind a wall, outrun it sideways (never down the lane), or close in and break its aim \u2014 mind the antlers. Caught under the full beam with nowhere to run, you die. The meat is worth the sorrow. Thank it."
+      "slain": "Moves: Ocular Discharge (telegraphed by the freeze \u2014 MOVE), Antler Sweep (close range). It does not run. It does not bluff. When it freezes, it is aiming \u2014 and the beam tracks you while it fires. Break the lane behind a wall or move sideways out of the beam (never down the lane). Striking does not interrupt it. Mind the antlers at close range. Caught under the full beam with nowhere to run, you die. The meat is worth the sorrow. Thank it."
     },
     "systemDesignation": "Odocoileus virginianus (standard)",
     "aggression": "territorial",
@@ -1266,6 +1266,7 @@
     "wave": 1,
     "encounter": {
       "aggroAudio": "turtleGrind",
+      "proximityAudio": false,
       "fifo": true,
       "noticeRange": 2,
       "phases": [
@@ -2066,7 +2067,7 @@
       "kind": "move_windup",
       "trick": "Keep moving during the spell",
       "hint": "The beam needs your eyes. The picture holds you still.",
-      "reveal": "The Home Movies beam needs your EYES \u2014 keep moving during the SPELL beat and the picture can't hold you. The screen burns brightest just before it fires: that's your two-turn warning. Or break its concentration outright: a stun or shout while the screen burns brightest fizzles the picture. Interruptible \u2014 it can only hold one memory at a time."
+      "reveal": "Keep moving during the spell so the picture cannot hold you. The screen burns brightest two turns before it fires. Stun it or shout while it brightens to break its concentration."
     },
     "wave": 2,
     "name": "Nostalgia",
@@ -2214,8 +2215,8 @@
       "kind": "move_x2",
       "tiles": 2,
       "trick": "Never stand still",
-      "hint": "It can only dial a stationary target. The RING is the telegraph.",
-      "reveal": "The RING is the telegraph \u2014 the pitch itself gives no warning. Move two or more tiles from where you stood when it dialed and the call drops. It can only dial a stationary target. Never stand still."
+      "hint": "The phone rings before it rushes. Keep moving.",
+      "reveal": "Listen for the ring. Move at least two squares from where you stood when it dialed, and the call drops. Once it starts its pitch, there is no further warning."
     },
     "wave": 2,
     "name": "Extended Warranty",
@@ -2335,7 +2336,7 @@
       "proximityText": "Too close. It stops ringing \u2014 it doesn't need the phone anymore. It's right there.",
       "comment": "Encounter framework client. THE CALL: dial (1 turn, locks the target's position \u2014 the number it dialed) \u2192 ring (1 turn, the tell: audio + dread line; moving 2+ tiles from the dialed position DROPS the call) \u2192 pitch (rush, speed 4, no grid telegraph \u2014 the ring was the warning) \u2192 redial (2 turns). Pain = bad connection = hang up + redial. Relentless: no fear, it always calls back. Distinct from the mimic (patient watcher, one rush per approach, fire counter): impatient, rushes every cycle, needs you still.",
       "knownCue": "It can only dial a stationary target. Keep moving and it can't place the call.",
-      "knownTactics": "The RING is the telegraph \u2014 the pitch itself gives no warning. Move two or more tiles from where you stood when it dialed and the call drops. Never end a turn still; a stationary target is a dialed target."
+      "knownTactics": "Listen for the ring, then move at least two squares from where you stood when it dialed. The pitch gives no further warning."
     },
     "loot": {
       "chance": 0.15,
@@ -5128,7 +5129,7 @@
         24,
         38
       ],
-      "telegraph": "The text on the scroll GLOWS before a clause activates \u2014 the glow runs along the words like a fuse. The telegraph is literally legible. Reading is the defense.",
+      "telegraph": "Light runs along the scroll. One clause glows brighter than the rest.",
       "pattern": {
         "type": "single"
       },
@@ -5141,7 +5142,7 @@
           24,
           38
         ],
-        "telegraph": "The text on the scroll GLOWS before a clause activates \u2014 the glow runs along the words like a fuse. The telegraph is literally legible. Reading is the defense.",
+        "telegraph": "Light runs along the scroll. One clause glows brighter than the rest.",
         "pattern": {
           "type": "single"
         },
@@ -5198,7 +5199,7 @@
     "codexStages": {
       "unknown": "Fine print, approaching. It unrolls toward you. You feel like you've already agreed to something.",
       "observed": "A towering scroll that adds clauses mid-fight \u2014 'by standing here you agree...' Each clause is a debuff you accepted by not objecting in time. The text GLOWS before a clause activates; the glow runs like a fuse. Paper, mostly \u2014 but the paper is everywhere.",
-      "slain": "Moves: Clause (debuff you accepted by not objecting \u2014 object now at small cost, or accept and pay bigger later). Counter: READ IT. Spend turns examining \u2014 knowledge as a weapon, literally \u2014 and you'll find the loophole clause that dismisses it. (Detective: this is their boss fight. Market God: they LIVE in fine print \u2014 home turf.)"
+      "slain": "Clause adds a penalty if you let it pass unanswered. Object before it takes effect, or pay the larger cost afterward. Examine the scroll to find the loophole that dismisses it."
     },
     "systemDesignation": "LEGAL-1 (nobody is happy about this, including the System)",
     "aggression": "territorial",
@@ -5552,7 +5553,7 @@
         20,
         33
       ],
-      "telegraph": "A giant floating AD glyph with a PROGRESS BAR \u2014 the bar is the telegraph. During the pause it repositions and heals, and you watch. After the bar fills, a 'skip ad' beat appears: skip faster if the audience likes you. Or look away \u2014 the ad's power is that you WATCH.",
+      "telegraph": "The screen turns toward you. A smiling mouth opens beneath the loading bar.",
       "pattern": {
         "type": "single"
       },
@@ -5565,7 +5566,7 @@
           20,
           33
         ],
-        "telegraph": "A giant floating AD glyph with a PROGRESS BAR \u2014 the bar is the telegraph. During the pause it repositions and heals, and you watch. After the bar fills, a 'skip ad' beat appears: skip faster if the audience likes you. Or look away \u2014 the ad's power is that you WATCH.",
+        "telegraph": "The screen turns toward you. A smiling mouth opens beneath the loading bar.",
         "pattern": {
           "type": "single"
         },
@@ -5575,7 +5576,7 @@
       {
         "name": "Product Placement",
         "tactic": "recover",
-        "telegraph": "A glowing can rotates beside it \u2014 \u2018THIS REGENERATION BROUGHT TO YOU BY\u2014\u2019 It drinks. It heals.",
+        "telegraph": "The rider raises a can to its mouth. Cracks spread across the can and close across the screen.",
         "condition": {
           "hpBelow": 0.7,
           "cooldownTurns": 4
@@ -5588,7 +5589,7 @@
           24,
           36
         ],
-        "telegraph": "The glyph flickers \u2014 it found your search history. The ad is FOR you, specifically, and it knows what you\u2019re afraid of.",
+        "telegraph": "Your name appears on the screen. The mouth begins to shape it.",
         "pattern": {
           "type": "direct"
         },
@@ -5600,9 +5601,9 @@
       }
     ],
     "weaknesses": [
-      "patience \u2014 wait for the skip beat",
-      "look away \u2014 the ad's power is that you WATCH",
-      "kill the sponsor-creature riding the glyph and the ad shortens"
+      "wait for the SKIP button to light up",
+      "look away to slow its recovery; your next Strike may miss",
+      "defeat the rider to advance the loading bar"
     ],
     "edible": {
       "calories": 0,
@@ -5614,9 +5615,9 @@
     ],
     "behavior": "passive",
     "codexStages": {
-      "unknown": "An interruption with a progress bar. The fight... pauses. You're watching something.",
-      "observed": "It pauses the fight for an ad \u2014 a giant AD glyph with a progress bar. During the pause it repositions and heals, and you watch. A small smiling sponsor-creature rides the glyph. The System apologizes for this one. The apology is also sponsored.",
-      "slain": "Moves: Sponsored Pause (the fight stops; it repositions and heals). Counter, three ways, all lateral: patience (wait for the skip beat \u2014 faster if the audience likes you), inattention (look away), or murder the sponsor (kill the rider and the ad shortens). It's a pacing monster, not a build check. (Market God: they understand sponsors \u2014 home turf.)"
+      "unknown": "A bright rectangle drifts between the trees, playing the same three notes.",
+      "observed": "A tiny rider perches on a floating screen. While its commercial plays, cracks close across the picture and it drifts out of reach. The rider keeps smiling through the blows.",
+      "slain": "Look away to halve its recovery and slow the loading bar, at the risk of missing your next Strike. When SKIP lights up, spend an action to end the break. Defeating the rider advances the bar by two steps. A friendly audience gets a shorter commercial."
     },
     "systemDesignation": "INVENTORY-7 (the sponsors demanded inventory)",
     "aggression": "territorial",
@@ -5624,17 +5625,17 @@
     "fear": "inattention",
     "speed": 1,
     "emoji": "\ud83d\udcfa",
-    "unknown": "an interruption with a progress bar",
-    "vibe": "the sponsors demanded inventory, and the System complied",
+    "unknown": "a bright rectangle drifting between the trees",
+    "vibe": "a smile held long enough to hurt",
     "cues": {
       "curious": [
         "\"WE'LL BE RIGHT BACK,\" says the sky."
       ],
       "warn": [
-        "The AD glyph brightens. The progress bar starts filling. Don't watch. DON'T watch."
+        "The screen brightens. A loading bar crawls beneath the smiling mouth."
       ],
       "fearful": [
-        "\"SKIP AD\" \u2014 the bar completes, the glyph flickers out."
+        "The picture gutters. The rider scrabbles for the edge of the screen."
       ]
     },
     "wave": 3,
@@ -5662,10 +5663,10 @@
         "idle": "resume"
       },
       "shortName": "ad break",
-      "noticeText": "The world holds up a progress bar. An ad is coming.",
-      "painText": "The glyph glitches \u2014 the sponsor-creature winces.",
-      "knownCue": "The progress bar \u2014 and the skip beat when it fills.",
-      "knownTactics": "Look away, wait for skip, or kill the sponsor."
+      "noticeText": "A three-note jingle repeats between the trees. A screen turns toward you.",
+      "painText": "The picture tears. Its rider loses a tooth from that fixed smile.",
+      "knownCue": "Watch for SKIP beneath the loading bar.",
+      "knownTactics": "Look away to halve recovery, use SKIP when it lights up, or defeat the rider to advance the bar."
     },
     "loot": {
       "chance": 0.15,
@@ -5883,7 +5884,7 @@
       }
     ],
     "weaknesses": [
-      "negotiate \u2014 meet ONE demand and it stands down a round",
+      "meet a posted demand: three still rounds, real carried food, or a carried tool - that rat leaves when paid",
       "scab: do the grid's job yourself, manually and costly \u2014 doing the work breaks the strike's morale",
       "read the demands \u2014 they're honest, and the schedule is announced"
     ],
@@ -5899,7 +5900,7 @@
     "codexStages": {
       "unknown": "An inflatable rat the size of a house. It's not attacking. That's worse.",
       "observed": "The classic inflatable strike rat, building-sized. It doesn't attack you \u2014 it stops everything ELSE. Abilities, items, the grid itself goes on strike: dead turns where nothing works. The eyes inflate before a shutdown, and the demands are posted first \u2014 a real, readable list.",
-      "slain": "Moves: Walkout (shutdown turns \u2014 nothing works, announced in advance via the demands list). Counter: negotiate \u2014 meet ONE demand and it stands down a round. Or scab: do the grid's job yourself, manual and costly \u2014 doing the work breaks the strike's morale. (Market God: their whole game is leverage \u2014 this is leverage aimed AT them. Unkillable: their game is outlasting \u2014 the strike outlasts.)"
+      "slain": "Moves: Walkout (announced shutdown rounds). Counter: choose one posted payment - three consecutive rounds without moving, real carried food, or a carried tool. Moving restarts the stillness count. Each rat has its own demands. Scabbing lets you work at half strength during two shutdown rounds."
     },
     "systemDesignation": "LOCAL-404 (the picket line walked off the set)",
     "aggression": "territorial",
@@ -5917,7 +5918,7 @@
         "The eyes inflate \u2014 slowly, terribly. The shutdown is coming."
       ],
       "fearful": [
-        "The rat deflates slightly. One demand, met. It stands down a round."
+        "The rat lowers its sign. One demand, paid."
       ]
     },
     "wave": 4,
@@ -6264,7 +6265,7 @@
         60,
         80
       ],
-      "telegraph": "Faces surface on its body before it uses YOUR moves \u2014 you see whose face, you know what's coming. It has your fight history: every tactic you've ever used. The telegraph is recognition.",
+      "telegraph": "A face pushes through its skin. It raises its hands in a stance you recognize.",
       "pattern": {
         "type": "direct"
       },
@@ -6277,7 +6278,7 @@
           60,
           80
         ],
-        "telegraph": "Faces surface on its body before it uses YOUR moves \u2014 you see whose face, you know what's coming. It has your fight history: every tactic you've ever used. The telegraph is recognition.",
+        "telegraph": "A face pushes through its skin. It raises its hands in a stance you recognize.",
         "pattern": {
           "type": "direct"
         },
@@ -6312,8 +6313,8 @@
       }
     ],
     "weaknesses": [
-      "it only knows your PAST \u2014 do something you've never done; novelty is literally the weapon",
-      "the counter is playing differently \u2014 the game tracks your action history"
+      "it copies familiar actions — try something new",
+      "vary your actions rather than repeating a familiar tactic"
     ],
     "edible": {
       "calories": 0,
@@ -6338,7 +6339,7 @@
     "codexStages": {
       "unknown": "Everyone you've buried, standing up. It moves like a crowd, not a creature.",
       "observed": "The village you failed, given teeth \u2014 a gestalt of dead scholars and villagers. A mass of almost-people; the faces are the organs. It knows every tactic you've ever used \u2014 it has your fight history. Faces surface on its body before it uses your moves.",
-      "slain": "Moves: Your Move (your own tactics, echoed \u2014 the face telegraphs which). Counter: it only knows your PAST \u2014 do something you've never done. The game tracks your action history; novelty is literally the weapon. The counter is playing differently. Party-aware: it brings as many as you brought (up to three) \u2014 and they flank and run down stragglers like wolves. The dead outnumber you on purpose. (One-Person Army: they have ONE tactic \u2014 the Reunion has it memorized. Apex Predator: their patterns ARE their identity.)"
+      "slain": "Faces surface before it echoes your moves. Try an action you have not used before. Against a group it brings up to three companions; they flank and chase stragglers."
     },
     "systemDesignation": "CLIP-SHOW-9 (the clip show, with a body count)",
     "aggression": "territorial",
@@ -6702,7 +6703,7 @@
         45,
         65
       ],
-      "telegraph": "The thumbnails \u2014 it shows clickbait previews of its next move. The telegraph is literally a trailer. It rearranges the fight \u2014 your position, your available actions \u2014 toward 'engagement.' The highlighted thumbnail is the tell.",
+      "telegraph": "The wall of thumbnails shuffles. One preview lights up; the others go dark.",
       "pattern": {
         "type": "direct"
       },
@@ -6715,7 +6716,7 @@
           45,
           65
         ],
-        "telegraph": "The thumbnails \u2014 it shows clickbait previews of its next move. The telegraph is literally a trailer. It rearranges the fight \u2014 your position, your available actions \u2014 toward 'engagement.' The highlighted thumbnail is the tell.",
+        "telegraph": "The wall of thumbnails shuffles. One preview lights up; the others go dark.",
         "pattern": {
           "type": "direct"
         },
@@ -6772,7 +6773,7 @@
     "codexStages": {
       "unknown": "A wall of almost-faces, all watching you. It knows what you want before you do.",
       "observed": "The System's recommender, embodied \u2014 a shifting mass of thumbnails, progress bars, preview panes. It rearranges the fight toward engagement: your position, your available actions. It's usually right about what you want. That's the scary part. The thumbnails preview its next move.",
-      "slain": "Moves: Engagement (rearranges your position and available actions \u2014 the highlighted thumbnail telegraphs what's next). Counter: be unpredictable \u2014 same family as the Reunion's counter, but here it's about the NEXT action, not history. Or: it optimizes for engagement, and the most engaging thing is an UPSET \u2014 lose on purpose and it can't model you. Tanking as strategy. (All-Seeing Detective: their predictions vs its optimization \u2014 the mirror match. Between/Drifter: unpredictability is their domain \u2014 home turf.)"
+      "slain": "The highlighted thumbnail previews its next move. Repeated actions make you easier to predict. Taking its weak prediction for two rounds disrupts the model; changing your next action also defeats its expectations."
     },
     "systemDesignation": "RECOMMENDER-1 (it knows what you want)",
     "aggression": "territorial",
@@ -6850,7 +6851,7 @@
         45,
         75
       ],
-      "telegraph": "It SMACKS \u2014 audible chewing from a mile off, drooling toward the richest food on the grid. It eats the GRID first: crops, forage, carcasses, pack food \u2014 and grows stronger with every thousand calories (+15 damage per 2000 kcal consumed in the fight). Its belly visibly swells as it eats. The belly is the telegraph AND the health bar.",
+      "telegraph": "It smacks its lips and turns toward the food. Its swollen belly drags through the dirt.",
       "pattern": {
         "type": "rush"
       },
@@ -6863,7 +6864,7 @@
           45,
           75
         ],
-        "telegraph": "It SMACKS \u2014 audible chewing from a mile off, drooling toward the richest food on the grid. It eats the GRID first: crops, forage, carcasses, pack food \u2014 and grows stronger with every thousand calories (+15 damage per 2000 kcal consumed in the fight). Its belly visibly swells as it eats. The belly is the telegraph AND the health bar.",
+        "telegraph": "It smacks its lips and turns toward the food. Its swollen belly drags through the dirt.",
         "pattern": {
           "type": "rush"
         },
@@ -6918,7 +6919,7 @@
     "codexStages": {
       "unknown": "A sound like a feast with no people at it. Smacking. From the treeline. Getting closer.",
       "observed": "The aliens watched us eat and thought it looked like so much fun they let a monster try it. A vast vertical maw on stubby legs \u2014 the mouth IS the weapon. It ate a whole blackberry thicket first, then a deer carcass, then it looked at us. Its belly swells with every meal, and it hits harder with every thousand calories. Including people.",
-      "slain": "Moves: Gorge (+15 damage per 2000 kcal consumed in the fight \u2014 it eats the GRID: crops, forage, carcasses, pack food, then you), Smack-Rush (lunges at the richest food source). Dark mirror of the food thesis: humans eat to become gods; it eats to become a monster. Counter: poison the meal \u2014 it can't tell good food from bad. Or starve the field \u2014 burn your own crops and deny it fuel. This is the Living Garden's predator \u2014 the wave-4 answer to the food economy."
+      "slain": "Gorge consumes nearby food: crops, forage, carcasses and carried supplies. Each 2000 kcal eaten adds 15 damage to its attacks. Deny it food, or offer spoiled or diseased meat to make it vomit. Smack-Rush carries it toward the richest food source."
     },
     "systemDesignation": "GUEST-DINER-1 (it asked to try)",
     "aggression": "territorial",
@@ -7289,7 +7290,7 @@
         60,
         90
       ],
-      "telegraph": "A clapperboard \u2014 it CLAPS before a reset, and the take number increments. Every 5 rounds the fight RESTARTS: HP resets both sides, but IT remembers and you don't. You can count down. The number is always visible.",
+      "telegraph": "The clapperboard rises. The take number clicks over; the jaws begin to close.",
       "pattern": {
         "type": "direct"
       },
@@ -7302,7 +7303,7 @@
           60,
           90
         ],
-        "telegraph": "A clapperboard \u2014 it CLAPS before a reset, and the take number increments. Every 5 rounds the fight RESTARTS: HP resets both sides, but IT remembers and you don't. You can count down. The number is always visible.",
+        "telegraph": "The clapperboard rises. The take number clicks over; the jaws begin to close.",
         "pattern": {
           "type": "direct"
         },
@@ -7343,8 +7344,8 @@
       }
     ],
     "weaknesses": [
-      "leave messages for yourself \u2014 write in the journal/codex BETWEEN resets; writing persists",
-      "win FAST \u2014 kill it within 5 rounds; a pure DPS check, the one place a stat check is honest",
+      "write a margin message during the fight — it survives the rewind",
+      "defeat it before the fifth-round reset",
       "between takes the set is visible \u2014 a brief vulnerability window"
     ],
     "edible": {
@@ -7359,7 +7360,7 @@
     "codexStages": {
       "unknown": "D\u00e9j\u00e0 vu with teeth. You've done this before. You haven't done this before.",
       "observed": "Every 5 rounds, the fight RESTARTS \u2014 HP resets both sides, but IT remembers and you don't. The episode airs again. A clapperboard claps before each reset; the take number increments, always visible. Between takes, the set is visible \u2014 and briefly vulnerable.",
-      "slain": "Moves: Take Twelve (the reset \u2014 countdown via the clapperboard). Counter: leave messages for yourself \u2014 the knowledge system as weapon; write in the journal/codex BETWEEN resets, writing persists. Or win FAST: kill it within 5 rounds \u2014 a pure DPS check, the one place a stat check is honest. (Detective/All-Seeing: their knowledge persists \u2014 the intended counter. One-Person Army: the DPS race is their domain.)"
+      "slain": "Every fifth round, Take Twelve restores both sides' health and positions. Each reset makes its attacks 10% stronger. Write margin messages during the fight to preserve an advantage across takes. Just after the clap, the exposed rigging takes extra damage. Defeating it before the reset avoids another take."
     },
     "systemDesignation": "PROGRAMMING-4 (the network ordered more episodes)",
     "aggression": "territorial",
@@ -7435,7 +7436,7 @@
         75,
         105
       ],
-      "telegraph": "Trailer-voice announcements \u2014 the telegraph IS the announcement: it tells you how the fight ends, truthfully. Announced outcomes gain weight under the System (announced things happen). The poster changes to show the announced outcome. The honesty is the horror.",
+      "telegraph": "A trailer voice announces an ending. On the poster, the picture changes to match.",
       "pattern": {
         "type": "single"
       },
@@ -7448,7 +7449,7 @@
           75,
           105
         ],
-        "telegraph": "Trailer-voice announcements \u2014 the telegraph IS the announcement: it tells you how the fight ends, truthfully. Announced outcomes gain weight under the System (announced things happen). The poster changes to show the announced outcome. The honesty is the horror.",
+        "telegraph": "A trailer voice announces an ending. On the poster, the picture changes to match.",
         "pattern": {
           "type": "single"
         },
@@ -7488,7 +7489,7 @@
     "codexStages": {
       "unknown": "A voiceover that knows too much. The trailer told you everything. The trailer was right.",
       "observed": "No body \u2014 a voiceover with key art. The marketing department leaked the finale. It tells you how the fight ends \u2014 truthfully \u2014 and announced outcomes gain weight under the System: announced things happen. The poster changes to show the announced outcome.",
-      "slain": "Moves: Leaked Ending (truthful announcements that gain weight \u2014 the announcement IS the telegraph). Counter: it must tell the truth \u2014 ask it the RIGHT question ('what happens if I do X?') and the answer binds IT too. Or fulfill the spoiler on YOUR terms: it says you fall \u2014 fall PRONE, deliberately, and the prophecy is satisfied cheaply. Undertale as hell. (Detective: truth as weapon \u2014 their arena. Eulogy veterans: same family, scaled up \u2014 Eulogy is the doom you INTERRUPT, Spoiler is the truth you EXPLOIT.)"
+      "slain": "Its announcements describe what will happen next. A fulfilled prediction strengthens later ones. Ask a binding question to force a harmless prediction, or satisfy the announced event cheaply: when it predicts a fall, choose to fall prone."
     },
     "systemDesignation": "MARKETING-2 (the trailer told you everything)",
     "aggression": "territorial",
@@ -7908,7 +7909,7 @@
     ],
     "weaknesses": [
       "the sacrifice \u2014 WHAT will you feed it? (a real, painful choice \u2014 the game at its best)",
-      "END IT FIRST \u2014 the DPS race, honest",
+      "defeat it before the title card falls",
       "doom deaths trigger phoenix_clause normally \u2014 unkillable means unkillable"
     ],
     "edible": {
@@ -7923,7 +7924,7 @@
     "codexStages": {
       "unknown": "The sky, getting bigger. It starts sky-sized and gets bigger.",
       "observed": "Every season needs its climax. This one is yours. It grows every round \u2014 scale as telegraph. Once per fight it declares a finale: 3 rounds to a massive unavoidable strike, and you can see it coming the whole time. The finale strike is a falling title card.",
-      "slain": "Moves: Season Finale (normal strikes [60,85]; once per fight, a 3-round countdown to an UNAVOIDABLE [150,200] finale strike). Counter: the sacrifice \u2014 feed it a thing (an item, an ability charge, a memory) and it passes; WHAT will you feed it is a real, painful choice. Or END IT FIRST \u2014 the DPS race, honest again. Ruling, Steve: doom-countdown deaths trigger phoenix_clause the same as any death \u2014 unkillable means unkillable. (Unkillable: their whole fantasy vs the un-outlastable \u2014 the intended wall. Undying Ward: their 'no one dies' vs the finale \u2014 the cruelest matchup in the book.)"
+      "slain": "Once per fight, Season Finale starts a three-round countdown to an unavoidable strike. End the fight before the card falls, or use Feed: item to surrender one carried item. Feed: memory costs 250 kcal. Either offering cancels this countdown; it will not declare another. Ordinary attacks continue."
     },
     "systemDesignation": "SEASON-FINALE (live)",
     "aggression": "territorial",
@@ -8365,7 +8366,7 @@
       "note": "It does not ambush. It arrives. You see it coming for days.",
       "aggroAudio": "heraldTrumpet"
     },
-    "behavior": "It announces. Every move is an omen first. The tutorial is: read, move, live.",
+    "behavior": "It raises its trumpet before each attack. Pale lines spread across the ground where the sound will strike.",
     "follows": "it does not follow. It precedes.",
     "attack": {
       "name": "First Omen",
@@ -8435,7 +8436,7 @@
     "weaknesses": [
       "it announces everything — read the omens",
       "it is slow — reposition freely",
-      "it is a tutorial — the real test comes later"
+      "leave the marked ground while it raises the trumpet"
     ],
     "loot": {
       "chance": 0.1,
@@ -9341,7 +9342,8 @@
         "spent"
       ],
       "shortName": "anaconda",
-      "aggroAudio": "anacondaCoil"
+      "aggroAudio": "anacondaCoil",
+      "proximityAudio": false
     },
     "fear": "fire",
     "follows": true,
@@ -9767,7 +9769,8 @@
         "withdraw"
       ],
       "shortName": "tiger",
-      "aggroAudio": "tigerBreath"
+      "aggroAudio": "tigerBreath",
+      "proximityAudio": false
     },
     "fear": "fire",
     "fleeAt": 0.25,

@@ -3,11 +3,13 @@
 // description: Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 // provides:
 //   - blendHarvestShares(parts) / mergeHarvestShares(target, incoming, units)
+//   - blendForageShares(parts) (outing identity, separate from producer/crop origin)
 //   - blendGardenShares(parts) / recordGardenIntake(eater, portions)
 //   - harvestOrigin(id) / captureIntakeEater(id)
 //   - recordHarvestIntake(eater, portions, route) / recordHarvestDraw(eater, draw, route, nourishment, share)
 //   - queueHarvestMeal(eater, draw, route, nourishment)
 //   - foodMarker()
+//   - havenFoodSummary() (read-only meal-history view, never a production estimate)
 //   - cleanCarcass()
 //   - carcassToMeat()
 //   - cookFood()
@@ -265,6 +267,8 @@
       return out;
     },
     mergeHarvestShares(target, incoming, units) {
+      const forage = this.blendForageShares([{item:target,weight:target.units || 0},
+        {item:incoming,weight:units == null ? incoming.units || 0 : units}]);
       const garden = this.blendGardenShares([{item:target,weight:target.units || 0},
         {item:incoming,weight:units == null ? incoming.units || 0 : units}]);
       const shares = this.blendHarvestShares([{item:target,weight:target.units || 0},
@@ -273,6 +277,15 @@
       else delete target.harvestShares;
       if (Object.keys(garden).length) target.gardenShares = garden;
       else delete target.gardenShares;
+      if (Object.keys(forage).length) target.forageShares = forage;
+      else delete target.forageShares;
+    },
+    // Same bounded weighted arithmetic, separate metadata. A task ID is never
+    // stored as a producer ID or classified as cultivated food. Untagged old
+    // ingredients still occupy their full weight in the denominator.
+    blendForageShares(parts) {
+      return this.blendHarvestShares((parts || []).map(p=>({weight:p.weight,
+        item:{harvestShares:p.item?.forageShares}})));
     },
     // Cultivated origin is separate from producer identity. Unknown food keeps
     // its weight in the denominator; names and current ability holdings cannot
@@ -508,7 +521,7 @@
 
     // addUnknownToLump: the game never loses track of what is what, even
     // though the player sees one opaque stack.
-    addUnknownToLump(plant, units, day, container, harvestShares, gardenShares) {
+    addUnknownToLump(plant, units, day, container, harvestShares, gardenShares, forageShares) {
       const cont = container || this.state.scholar.inventory;
       const form = this.lumpFormOf(plant);
       const F = LUMP_FORMS[form];
@@ -526,7 +539,7 @@
       }
       const comp = lump.lump;
       const e = comp[plant.id] || { units: 0, day };
-      this.mergeHarvestShares(e, { harvestShares, gardenShares }, units);
+      this.mergeHarvestShares(e, { harvestShares, gardenShares, forageShares }, units);
       e.units += units;
       e.day = Math.min(e.day, day);
       comp[plant.id] = e;
@@ -556,6 +569,7 @@
         plantId: pid, units: e.units, kg: 0.1, unit: p.unit,
         ...(e.harvestShares ? { harvestShares: e.harvestShares } : {}),
         ...(e.gardenShares ? { gardenShares: e.gardenShares } : {}),
+        ...(e.forageShares ? { forageShares: e.forageShares } : {}),
         spoilDay: e.day + (p.spoilageDays || 2),
         foodKind: isNut ? 'nut' : 'plant',
         foodState: isNut ? 'in_shell' : 'ready',
@@ -608,7 +622,7 @@
         if (!p) continue;
         const ix = inv.indexOf(it);
         if (ix >= 0) inv.splice(ix, 1);
-        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv, it.harvestShares, it.gardenShares);
+        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv, it.harvestShares, it.gardenShares, it.forageShares);
         if (it.spoilDay) lump.spoilDay = Math.min(lump.spoilDay, it.spoilDay);
       }
     },
@@ -1114,10 +1128,12 @@
         // One stack per set: that set's bars carry that set's ~97%
         // retention (forager break-it 2026-10-09). Full sets read 3x600.
         const barRisk = wormRisk ? { id: wormRisk.id || 'trichinosis', p: wormRisk.p || 0.25, from: wormRisk.from } : null;
+        const forageShares = this.blendForageShares(set.picks.map(p=>({item:p.it,weight:p.kcal})));
         inv.push({
           itemId: 'pemmican', plantId: null, foodKind: 'meat', foodState: 'pemmican',
           harvestShares: this.blendHarvestShares(set.picks.map(p => ({ item: p.it, weight: p.kcal }))),
           gardenShares: this.blendGardenShares(set.picks.map(p => ({ item: p.it, weight: p.kcal }))),
+          ...(Object.keys(forageShares).length ? {forageShares} : {}),
           edible: true, units: set.bars, unit: 'bar', kcalEach: set.kcalEach,
           spoilDay: day + 120, kg: 0.3, safe: true, // KG PER-UNIT (break-it food r4 2026-10-10): 0.3 kg per bar; the old *bars total bricked the pack.
           name: 'Pemmican',
@@ -2121,6 +2137,26 @@
       return (this.state.village.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 0), 0);
     },
 
+    // Total eaten includes private food; deposits are only pantry inflow.
+    // Their difference is NOT the pantry's shortfall. Use the existing
+    // recorded net meal draw, and keep missing/invalid history unknown.
+    havenFoodSummary() {
+      const v = this.state.village || {};
+      const history = Array.isArray(v.burnHistory) ? v.burnHistory.slice(-7) : [];
+      const historyKnown = history.length > 0 && history.every(x => Number.isFinite(x) && x >= 0);
+      const averageMealDraw = historyKnown ? history.reduce((a, b) => a + b, 0) / history.length : null;
+      const stock = this.pantryKcal();
+      const validStock = (v.pantry || []).every(item => item &&
+        [item.kcalEach ?? 0, item.units ?? 0].every(value => Number.isFinite(value) && value >= 0));
+      const stockKcal = validStock && Number.isFinite(stock) && stock >= 0 ? stock : null;
+      const recorded = value => historyKnown && Number.isFinite(value) && value >= 0 ? value : null;
+      return {
+        stockKcal, historyDays: history.length, historyKnown, averageMealDraw,
+        lastEaten: recorded(v.lastEat), lastDeposited: recorded(v.lastGive),
+        daysAtRecentUse: stockKcal > 0 && averageMealDraw > 0 ? Math.floor(stockKcal / averageMealDraw) : null,
+      };
+    },
+
     // ---------- prey behavior ----------
 
     preyWariness(adef) {
@@ -2432,11 +2468,10 @@
       const have = item.units ?? 1, requested = units === undefined ? have : units;
       if (!Number.isSafeInteger(requested) || requested <= 0) return refuse('Choose a positive whole number of materials.');
       if (!Number.isFinite(item.kg) || item.kg < 0) return refuse('You cannot judge how much of that will fit in your pack.');
-      const carry = this.packWeight(), cap = this.carryCapacity(), mult = this.modTarget('carry.weight_mult', 1);
+      const carry = this.packWeight(), cap = this.carryLimit(), mult = this.modTarget('carry.weight_mult', 1);
       if (![carry, cap, mult].every(Number.isFinite) || carry < 0 || cap < 0 || mult < 0) return refuse('You cannot judge the space in your pack.');
-      const unitWeight = (item.kg || 0.1) * mult; // same rule as packWeight, including water/body modifiers
       const desired = Math.min(have, requested);
-      const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));
+      const fits = this.fittingCarryUnits(item.kg || 0.1, desired);
       const taken = Math.min(desired, fits);
       if (!taken) { this.sayGated('tooHeavy', 'Too heavy. Lighten your pack first.', 3); return { ok: false, why: 'Too heavy. Lighten your pack first.', taken: 0 }; }
       const moved = { ...item, units: taken };
@@ -2469,10 +2504,10 @@
       if (!Number.isSafeInteger(have) || have <= 0 || !Number.isSafeInteger(requested) || requested <= 0) return refuse('Choose a positive whole number of portions.');
       const kg = item.kg == null ? 0.1 : item.kg;
       if (!Number.isFinite(kg) || kg < 0) return refuse('You cannot judge how much of that will fit in your pack.');
-      const carry = this.packWeight(), cap = this.carryCapacity(), mult = this.modTarget('carry.weight_mult', 1);
+      const carry = this.packWeight(), cap = this.carryLimit(), mult = this.modTarget('carry.weight_mult', 1);
       if (![carry, cap, mult].every(Number.isFinite) || carry < 0 || cap < 0 || mult < 0) return refuse('You cannot judge the space in your pack.');
-      const unitWeight = (kg || 0.1) * mult, desired = Math.min(have, requested);
-      const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));
+      const desired = Math.min(have, requested);
+      const fits = this.fittingCarryUnits(kg || 0.1, desired);
       const taken = Math.min(desired, fits);
       if (!taken) { this.sayGated('tooHeavy', 'Too heavy. Lighten your pack first.', 3); return { ok: false, why: 'Too heavy. Lighten your pack first.', taken: 0 }; }
       const moved = { ...item, units: taken };
@@ -2728,7 +2763,7 @@
             // in the woods isn't "stored right". The earth doesn't grade on
             // technique. (Pack/pantry use the bonus-aware boundary.)
             if (this.isSpoiled(it, 0)) {
-              const here = c.node && c.node.x === this.map.px && c.node.y === this.map.py;
+              const here = this.corpseInScene(c);
               lostCorpse.push({ name: it.name || 'something', here: !!here, kind: c.kind });
               c.items.splice(i, 1);
             }
@@ -2930,6 +2965,7 @@
         foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
         diseaseRisk: item.diseaseRisk, needsCooking: item.needsCooking,
         wellMade: item.wellMade, harvestShares: item.harvestShares, gardenShares: item.gardenShares,
+        ...(item.forageShares ? {forageShares:item.forageShares} : {}),
         // FULL PROCESSING STATE (break-it food 2026-10-09): the old subset-push
         // silently stripped poisonRisk — toxin laundering: poisoned meat came
         // back from the pantry clean, and trackMealExposure saw nothing, so

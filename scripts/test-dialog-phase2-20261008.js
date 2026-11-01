@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { validateAskContract } = require('./lib/ask-contract');
 // PROOF TEST (Steve 2026-10-08) — dialog rethink Phase 2 (the Scene).
 // Seeded; SEED=... overrides. Run 3+ seeds:
 //   for s in 20261008 424242 777; do SEED=$s node scripts/test-dialog-phase2-20261008.js; done
@@ -177,7 +178,7 @@ const vid2 = roster[1] || roster[0];
 
 // ---- 4. Contract gate ----
 {
-  const res = Game.validateAskContract(vid);
+  const res = validateAskContract(Game, vid);
   ok('validateAskContract passes', res.ok, (res.failures || []).slice(0, 3).join('; '));
   ok('contract covers 36 bespoke questions', (Game.data.characterGen.convo.questions || []).length === 36);
 }

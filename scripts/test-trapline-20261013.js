@@ -32,6 +32,8 @@
 const fs = require('fs');
 const path = require('path');
 const { loadGame, setupGame } = require('./sim-harness');
+const { spawnSync } = require('child_process');
+const CASE = process.env.TRAPLINE_CASE || '';
 
 const SEED = parseInt(process.env.SEED || '20261013', 10);
 const SCAN_SEEDS = [11, 22, 33, 44];
@@ -44,26 +46,27 @@ function knowerCount(Game) {
   const v = Game.state.village || {};
   let n = 0;
   for (const vid of (v.roster || [])) {
-    try { if (Game.vpOf && Game.vpOf(vid) && Game.vpOf(vid).knowsSnare) n++; } catch (e) {}
+    if (Game.vpOf(vid).knowsSnare) n++;
   }
   return n;
 }
 
 (async () => {
-  // ============ E1: cast scan (documents the gap; passes either way) ============
-  console.log('--- E1: cast scan (knowsSnare holders per cast) ---');
-  let deadCasts = 0;
-  for (const s of SCAN_SEEDS) {
-    const { Game } = await loadGame({ seed: s, mode: 'test' });
+  // Each seeded cast gets its own harness process. Coverage is reported;
+  // the test must not require the missing-teacher defect to remain present.
+  if (CASE === 'scan') {
+    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     await setupGame(Game);
-    const n = knowerCount(Game);
-    const occ = (Game.vpOf && Game.vpOf(Game.villagerId) || {}).occupationId || '?';
-    console.log(`seed ${s}: cast knowers=${n}, scholar occupation=${occ}`);
-    if (n === 0) deadCasts++;
+    const count = knowerCount(Game), roster = Game.state.village.roster;
+    ok('E1 count is a valid current cast census', Number.isInteger(count) && count >= 0 && count <= roster.length);
+    console.log(JSON.stringify({seed:SEED, knowers:count, residents:roster.length}));
   }
-  ok('E1 dead casts exist on the pilot seeds (the gap is real)', deadCasts >= 1,
-    `deadCasts=${deadCasts}/4`);
-
+  if (!CASE) {
+    for (const [kind, seed] of [...SCAN_SEEDS.map(s => ['scan',s]), ['apprentice',SEED], ['overhear',SEED]]) {
+      const child = spawnSync(process.execPath, [__filename], { encoding:'utf8', env:{...process.env, TRAPLINE_CASE:kind, SEED:String(seed)} });
+      process.stdout.write(child.stdout || ''); process.stderr.write(child.stderr || '');
+      ok('isolated ' + kind + ' seed ' + seed, child.status === 0, child.error && child.error.message);
+    }
   // ============ E2: SEED arm — occupation data ============
   console.log('--- E2: seed occupations ---');
   const cg = JSON.parse(fs.readFileSync(
@@ -76,9 +79,11 @@ function knowerCount(Game) {
   const total = (cg.occupations || []).filter(o => o.knowsSnare).length;
   console.log(`knowsSnare occupations: ${total}/55`);
 
+  }
+
   // ============ E3: APPRENTICE arm — villager teaches villager ============
   console.log('--- E3: snare apprenticeship (NPC -> NPC) ---');
-  {
+  if (CASE === 'apprentice') {
     const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     await setupGame(Game);
     const roster = (Game.state.village || {}).roster || [];
@@ -91,7 +96,7 @@ function knowerCount(Game) {
       delete lvp.snareTaught;
       Game.state.village.trust = Game.state.village.trust || {};
       Game.state.village.trust[teacherVid] = 20; // regard gate: 15+
-      try { Game.npcNeeds(learnerVid).hunger = 70; } catch (e) {} // need-driven
+      Game.npcNeeds(learnerVid).hunger = 70; // need-driven
       let landed = false;
       for (let i = 0; i < 6 && !landed; i++) {
         try {
@@ -110,7 +115,7 @@ function knowerCount(Game) {
 
   // ============ E4: OVERHEAR — player learns by watching the lesson ============
   console.log('--- E4: player overhears the snare lesson ---');
-  {
+  if (CASE === 'overhear') {
     const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     await setupGame(Game);
     ok('E4 snareLessonOverhear exists', typeof Game.snareLessonOverhear === 'function');
@@ -126,6 +131,11 @@ function knowerCount(Game) {
       Game.state.codex = Game.state.codex || {};
       Game.state.codex.recipes = Game.state.codex.recipes || {};
       delete Game.state.codex.recipes.snare;
+      // No teacher means no magical knowledge grant, even with high regard.
+      Game.vpOf(teacherVid).knowsSnare = false;
+      Game.snareLessonOverhear(teacherVid);
+      ok('E4 non-knower cannot teach the wire', !Game.state.codex.recipes.snare);
+      Game.vpOf(teacherVid).knowsSnare = true;
       Game.snareLessonOverhear(teacherVid);
       const lvl = ((Game.state.codex.recipes || {}).snare || {}).level || 0;
       ok('E4 player gains snare recipe L1 from the overheard lesson', lvl >= 1, 'level=' + lvl);

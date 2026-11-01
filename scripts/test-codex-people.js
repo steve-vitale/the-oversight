@@ -116,7 +116,7 @@ function learnFacts(vid) {
   Game.journalLearn(vid, 'name', 'Mara Test', { how: 'told' });
   learnFacts(vid);
   const lvlBefore = Game.personDepth(vid).level;
-  Game.registerDeath({ kind: 'person', villagerId: vid, name: 'Mara Test', mx: 4, my: 4, cause: 'the ridge thing', witnesses: [] });
+  Game.registerDeath({ kind: 'person', villagerId: vid, name: 'Mara Test', node: {x:Game.map.px,y:Game.map.py}, scene: Game.corpseScene({x:Game.map.px,y:Game.map.py},!!Game.state.scholar.insideHaven), mx: 4, my: 4, cause: 'the ridge thing', witnesses: [] });
   d = Game.personDepth(vid);
   ok('death closes the book', d.closed === true && d.death && d.death.cause === 'the ridge thing');
   ok('death note written', Game.journalPerson(vid).notes.some(n => /Died day/.test(n.text)));
@@ -132,7 +132,7 @@ function learnFacts(vid) {
   Game.journalLearn(vid, 'name', 'Mara Test', { how: 'told' });
   learnFacts(vid); // level 2 — wound still hidden
   Game.state.village.trust[vid] = 50;
-  const corpse = Game.registerDeath({ kind: 'person', villagerId: vid, name: 'Mara Test', mx: 4, my: 4, cause: 'combat', witnesses: [Game.villagerId] });
+  const corpse = Game.registerDeath({ kind: 'person', villagerId: vid, name: 'Mara Test', node: {x:Game.map.px,y:Game.map.py}, scene: Game.corpseScene({x:Game.map.px,y:Game.map.py},!!Game.state.scholar.insideHaven), mx: 4, my: 4, cause: 'combat', witnesses: [Game.villagerId] });
   const realRandom = Math.random;
   Math.random = () => 0.1; // force the 35% roll to hit
   let revealed = false;

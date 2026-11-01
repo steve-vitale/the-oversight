@@ -213,13 +213,26 @@ function check(name, fn) {
     Game.state.scholar.fieldMedDayPart = null;
     const before = Game.state.scholar.health;
     const kcalBefore = Game.state.scholar.kcal;
+    // The full runtime also pays foodPower's activation fee. Keep the native
+    // authored100-kcal debit pinned; the old partial loader omitted the fee.
+    const activationFee = Game.abilityKcalCost('field_medicine', null);
     Game.activateAbility('field_medicine'); // wrapper returns null by design; the effect is the proof
-    check('D field medicine fires (kcal cost paid)', () => assert.strictEqual(Game.state.scholar.kcal, kcalBefore - 100));
+    check('D field medicine pays native100 plus the live activation fee', () => {
+      assert.ok(Number.isFinite(activationFee) && activationFee > 0);
+      assert.strictEqual(Game.state.scholar.kcal, kcalBefore - 100 - activationFee);
+    });
     check('D mid-fight heal lands on the FIGHTER (not phantom)', () => {
       assert.strictEqual(Game.tbFighter('p').hp, before + 20, `p.hp=${Game.tbFighter('p').hp}, scholar.health=${Game.state.scholar.health} -> heal went to the wrong pool`);
     });
     check('D scholar pool synced from fighter', () => {
       assert.strictEqual(Game.state.scholar.health, Game.tbFighter('p').hp);
+    });
+    const after = { kcal: Game.state.scholar.kcal, hp: Game.tbFighter('p').hp };
+    const refused = Game.activateAbility('field_medicine');
+    check('D same-part refusal pays neither fee and heals neither pool', () => {
+      assert.strictEqual(refused, false);
+      assert.deepStrictEqual({ kcal: Game.state.scholar.kcal, hp: Game.tbFighter('p').hp }, after);
+      assert.strictEqual(Game.state.scholar.health, after.hp);
     });
   }
 

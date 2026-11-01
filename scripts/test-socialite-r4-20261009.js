@@ -1,3 +1,4 @@
+const { validateAskContract } = require('./lib/ask-contract');
 // HOSTILE SOCIALITE PROBES r4 (2026-10-09) — adversarial playtest vs trust/gossip/dialogue.
 // Seeded harness: RNG installed before eval (modules capture Math.random at load).
 // Run: node scripts/test-socialite-r4-20261009.js [probe]   (SEED=... optional)
@@ -365,7 +366,7 @@ probes.askcontract = function () {
   const vid = roster()[0];
   Game.startConvo(vid);
   let res = null;
-  try { res = Game.validateAskContract(vid); } catch (e) { console.log('validator threw:', e.message); }
+  try { res = validateAskContract(Game, vid); } catch (e) { console.log('validator threw:', e.message); }
   Game.endConvo(vid, 'left');
   if (!res) { console.log('no validator result; skip'); return; }
   console.log(`ok=${res.ok} failures=${(res.failures || []).length}`);

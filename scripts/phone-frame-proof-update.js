@@ -3,6 +3,8 @@
 const fs=require('fs'),path=require('path'),crypto=require('crypto'),B=require('./build-offline-assets');
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const normalized=file=>sha(fs.readFileSync(file,'utf8').replace(/\r\n/g,'\n'));
+const replayFiles=['scripts/phone-frame-proof-update.js','evidence/2026-10-21/mobile-opening-frame-r1.cjs','evidence/2026-10-19/release-contact2-frame-replay-r3.js','evidence/2026-10-18/installed-update-old-save-r1.json','evidence/2026-10-18/mobile-combat-pagehide-r2.json'];
+const replayInputs=root=>Object.fromEntries(replayFiles.map(rel=>[rel,normalized(path.join(root,rel))]));
 const stages=['ordinary','Pack open','refused drink','Menu','Place','movement closes tools','replacement controls','person card','conversation choices','paged choices','real reply','resumed Deer','combat actions open','zero moves one action','Wait resolved','actual edge escape'];
 function expectedInputs(root){
  const rels=B.collect(root).assets.filter(u=>/\.(js|css)(?:\?|$)/.test(u)).map(u=>u.split('?')[0].replace(/^\.\//,''));
@@ -13,6 +15,7 @@ function expectedInputs(root){
 }
 function validateReceipt(root,r){
  if(![736,844].includes(r.height)||r.trace?.length!==stages.length||!r.networkInputs)throw Error('Expected real phone frame receipts at both target heights');
+ if(JSON.stringify(r.replayInputs)!==JSON.stringify(replayInputs(root)))throw Error('Phone replay recipe or original fixture identity is stale or missing');
  const observed={};
  for(const[url,value]of Object.entries(r.networkInputs)){
   const rel=new URL(url,'https://receipt.invalid/').pathname.slice(1)||'index.html';
@@ -39,11 +42,11 @@ function update(root,files){
  const receipts=files.map(file=>{const absolute=path.resolve(file),rel=path.relative(root,absolute);if(rel.startsWith('..')||path.isAbsolute(rel))throw Error('Retain receipts inside the repo first');const bytes=fs.readFileSync(absolute),r=JSON.parse(bytes);return{path:rel.replace(/\\/g,'/'),sha256:normalized(absolute),height:validateReceipt(root,r)};});
  if(receipts.length!==2||receipts.map(r=>r.height).sort().join(',')!=='736,844')throw Error('One receipt for each phone height required');
  const sources=expectedInputs(root);
- for(const rel of ['scripts/phone-frame-proof-update.js','evidence/2026-10-18/phone-frame-replay-r1.js'])sources[rel]=normalized(path.join(root,rel));
- const proof={schemaVersion:1,receiptHashNormalization:'lf-v1',scope:'Chromium touch phone frame; not physical iOS/Android or installed lifecycle clearance',receipts,sources};
+ Object.assign(sources,replayInputs(root));
+ const proof={schemaVersion:2,receiptHashNormalization:'lf-v1',scope:'Chromium touch phone frame with actual replay/fixture identities; not physical iOS/Android or installed lifecycle clearance',receipts,sources};
  const destination=path.join(root,'scripts/phone-frame-proof.json'),temporary=destination+'.tmp';
  fs.writeFileSync(temporary,JSON.stringify(proof,null,2)+'\n');fs.renameSync(temporary,destination);
  return{receipts:receipts.map(r=>r.height),inputs:Object.keys(sources).length};
 }
-module.exports={expectedInputs,validateReceipt,update,normalized};
+module.exports={expectedInputs,validateReceipt,update,normalized,replayInputs};
 if(require.main===module)try{console.log(JSON.stringify(update(path.resolve(__dirname,'..'),process.argv.slice(2))));}catch(e){console.error(e.message);process.exitCode=1;}

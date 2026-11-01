@@ -21,64 +21,21 @@
 //   T7 SOFTLOCK held: no strand between nodes — map.px/py writes valid,
 //       returnToVillage PIN keeps grid coords sane.
 // Usage: node scripts/test-travel-r8.js            (AFTER fix)
-//        BEFORE=1 node scripts/test-travel-r8.js    (pre-fix HEAD code)
+//        BEFORE=1 TRAVEL_ROOT=<historical-root> node scripts/test-travel-r8.js
+//          (explicit pre-fix runtime with the shared harness)
 //        SEED=999 node scripts/test-travel-r8.js
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
-const ROOT = path.join(__dirname, '..');
+const ROOT = process.env.TRAVEL_ROOT ? path.resolve(process.env.TRAVEL_ROOT) : path.join(__dirname, '..');
 const BEFORE = !!process.env.BEFORE;
-function headSrc(p) {
-  execSync(`git show HEAD:${p} > /tmp/bt8-before-${p.replace(/\//g, '_')}`, { cwd: ROOT });
-  return fs.readFileSync(`/tmp/bt8-before-${p.replace(/\//g, '_')}`, 'utf8');
-}
-const gameSrc = BEFORE ? headSrc('src/js/game.js') : fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
-const appSrc = BEFORE ? headSrc('src/js/app.js') : fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
-console.log(BEFORE ? 'MODE: BEFORE (pre-fix HEAD code)' : 'MODE: AFTER (fixed worktree code)');
-const PAIRS = [
-  ['plants.json', 'plants'], ['biomes.json', 'biomes'], ['monsters.json', 'monsters'],
-  ['villagers.json', 'villagers'], ['abilities.json', 'abilities'], ['items.json', 'items'],
-  ['background_survivors.json', 'background_survivors'], ['cell_defs.json', 'cellDefs'],
-  ['animals.json', 'animals'], ['recipes.json', 'recipes'], ['books.json', 'books'],
-  ['relicEnhancements.json', 'relicEnhancements'], ['locations.json', 'locations'],
-  ['characterGen.json', 'characterGen'], ['synergies.json', 'synergies'],
-  ['knowledge.json', 'knowledge'], ['nameCultures.json', 'nameCultures'],
-  ['originPicker.json', 'originPicker'], ['foreignSpeech.json', 'foreignSpeech'],
-  ['lifeseeds.json', 'lifeseeds'], ['arrivalText.json', 'arrivalText'],
-  ['justiceVoice.json', 'justiceVoice'], ['alienPlayers.json', 'alienPlayers'],
-  ['regions.json', 'regions'], 
-  ['monsterBehaviors.json', 'monsterBehaviors'], ['contests.json', 'contests'],
-  ['events.json', 'events'], ['statusEffects.json', 'statusEffects'],
-];
-global.SCATTER_DATA = {};
-for (const [f, key] of PAIRS) {
-  global.SCATTER_DATA[key] = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8'));
-}
-// SEED BEFORE EVAL: modules capture Math.random at load (AGENTS.md).
-let _seed = 7;
+if (BEFORE && !process.env.TRAVEL_ROOT) throw Error('BEFORE requires an explicit historical TRAVEL_ROOT; moving HEAD is not a pre-fix baseline');
+const H = require(path.join(ROOT, 'scripts/sim-harness'));
+const gameSrc = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
+const appSrc = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
+console.log(BEFORE ? 'MODE: BEFORE (explicit historical runtime)' : 'MODE: AFTER (shared runtime)');
 const SEED = parseInt(process.env.SEED || '7', 10);
-function rng() { _seed = (_seed * 1103515245 + 12345) % 2147483648; return _seed / 2147483648; }
-rng.reset = (s) => { _seed = (s === undefined ? SEED : s); };
-rng.reset();
-Math.random = rng;
-global.window = global;
-const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'engine/day.js',
-  'engine/forage.js', 'engine/combat.js', '__GAME__', 'encounters.js', 'conversation.js',
-  'convo-mood.js', 'convoTopics.js', 'convo-wants.js', 'convo-dialogue.js', 'convo-beats.js',
-  'convo-scene.js', 'examine.js', 'equipment.js', 'journal.js', 'party.js', 'party-formal.js',
-  'truth.js', 'contests.js', 'contestEngine.js', 'alienPlayers.js', 'storage.js', 'perceive.js',
-  'carexplore.js', 'justice.js', 'food.js', 'betrayal.js', 'corpses.js', 'lifeseed.js',
-  'progression.js', 'ledger.js', 'abilityActions.js', 'monsterBehaviors.js', 'statusEffects.js',
-  'villager-agency.js', 'fieldFights.js', 'villager-objectives.js', 'codex-people.js',
-  'membership.js', 'hierarchy.js', 'debug-scenarios.js', 'build.js'];
-for (const f of LIST) {
-  const src = f === '__GAME__' ? gameSrc : fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8');
-  try { eval(src); }
-  catch (e) { console.error('EVAL FAIL ' + f + ': ' + e.message); process.exit(2); }
-}
-delete global.window;
-const Game = globalThis.Scattering.Game;
-Game.data = global.SCATTER_DATA;
+(async () => {
+const { Game } = await H.loadGame({ seed: SEED, mode: 'travel-r8', narration: true });
 Game.checkEncounter = () => {};
 Game.checkAnimals = () => {};
 
@@ -88,7 +45,6 @@ function ok(name, cond, detail) {
   else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); }
 }
 function setup() {
-  rng.reset();
   Game.tbfight = null;
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -254,7 +210,13 @@ function goWild() {
       swimBranch.includes('swam === null') && !swimBranch.includes('bearerBefore'));
   } else {
     ok('AFTER: swim branch refuses the charge when the bearer died mid-crossing',
-      swimBranch.includes('bearerBefore') && swimBranch.includes('Game.villagerId !== bearerBefore') && swimBranch.includes('Game.over'));
+      (() => {
+        const chargeAt = swimBranch.indexOf('Game.state.scholar.kcal =');
+        const beforeCharge = swimBranch.slice(0, chargeAt);
+        return chargeAt > 0 && beforeCharge.includes('Game.state !== checkpoint.state') &&
+          beforeCharge.includes('Game.villagerId !== checkpoint.bearer') &&
+          beforeCharge.includes('Game.state.runKey !== checkpoint.key') && beforeCharge.includes('Game.over');
+      })());
   }
 }
 
@@ -264,11 +226,7 @@ function goWild() {
   for (const f of fs.readdirSync(path.join(ROOT, 'src/js'))) {
     if (f.endsWith('.js')) srcs['js/' + f] = fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8');
   }
-  // debugToWildNode is a test hook: its live callers are the proof scripts.
-  for (const f of fs.readdirSync(path.join(ROOT, 'scripts'))) {
-    if (f.endsWith('.js')) srcs['scripts/' + f] = fs.readFileSync(path.join(ROOT, 'scripts', f), 'utf8');
-  }
-  const all = Object.values(srcs).join('\n');
+  const runtime = Object.values(srcs);
   const fns = ['travelTo', 'travelTargets', 'travelBlockage', 'travelTimeStep', 'reveal',
     'markSeen', 'mapSeen', 'compareMaps', 'villageMapKnown', 'seedVillagerMaps',
     'edgeExit', 'tryNodeExit', 'findWalkableEntry', 'clearBlockage', 'buildBridge',
@@ -278,10 +236,26 @@ function goWild() {
   let dead = [];
   for (const fn of fns) {
     const defRe = new RegExp(`(function ${fn}|${fn}\\s*\\(|${fn}\\s*[:=]\\s*function|Game\\.${fn}\\s*=)`);
-    const uses = (all.match(new RegExp(`\\b${fn}\\b`, 'g')) || []).length;
-    if (!defRe.test(all) || uses < 2) dead.push(fn);
+    // Only debugToWildNode intentionally has test-only callers. Production
+    // references must not be supplied by this test's own function-name list.
+    // Stop after two references; do not build/rescan the growing whole-script
+    // corpus or materialize every match just to establish a lower bound.
+    let uses = 0;
+    const count = text => {
+      for (const unused of text.matchAll(new RegExp(`\\b${fn}\\b`, 'g'))) {
+        if (++uses >= 2) break;
+      }
+    };
+    for (const text of runtime) { count(text); if (uses >= 2) break; }
+    if (fn === 'debugToWildNode' && uses < 2) {
+      for (const f of fs.readdirSync(path.join(ROOT, 'scripts'))) {
+        if (f.endsWith('.js')) count(fs.readFileSync(path.join(ROOT, 'scripts', f), 'utf8'));
+        if (uses >= 2) break;
+      }
+    }
+    if (!runtime.some(text => defRe.test(text)) || uses < 2) dead.push(fn);
   }
-  ok('T5: all travel/map functions defined and called', dead.length === 0, dead.join(','));
+  ok('T5: all travel/map functions defined and referenced in their intended source scope', dead.length === 0, dead.join(','));
 }
 
 // ---- T6. EXPLOIT held: force=true only via swim UI + debug ----
@@ -322,3 +296,4 @@ function goWild() {
 
 console.log(`\n${pass} passed, ${fail} failed (${BEFORE ? 'BEFORE' : 'AFTER'} mode, seed ${SEED})`);
 process.exit(fail ? 1 : 0);
+})().catch(error => { console.error(error.stack); process.exitCode = 2; });

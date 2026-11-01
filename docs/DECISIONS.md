@@ -1068,8 +1068,41 @@ the implementation trimmed outcomes instead of changing decisions.
 - Fix: unserved contest news jumps the queue in ask:gossip — after scandals about you, before the rumor-verb walk-down. Rationale: a televised contest outcome is the biggest news at the fire; the whole village watched it. When the lane is exhausted in a sitting, the routine walk-down still proceeds (r39 grapevine salience preserved: rumor verbs still outrank routine news).
 - Proof: scripts/test-contest-gossip-surfacing-20261023.js — RED pre-fix (0/40 asks serve the entry; entry alive in pool), GREEN post-fix (serves on first pool-reaching ask; outranks rumor verbs).
 
+
+## 2026-10-25 — Delegated resolution of six recorded open design calls
+
+Steve: "Try to make executive calls for me in the remaining decision items according to our principles laid out in architecture."
+
+Codex's delegated rulings (not verbatim Steve design answers), detailed in
+[DELEGATED-DESIGN-CALLS.md](DELEGATED-DESIGN-CALLS.md):
+1. #340: cumulative history stays; current culpability uses dated net excess
+   versus real need/opportunity, equally for NPC/bearer. Ordinary eating is not theft.
+2. Muster/grief: immediate playable safety owns controls; recent grief precedes
+   retrospective muster stories after safety is settled.
+3. Grief leverage: keep two grabs per canonical link; grief/memory itself is not capped.
+4. Pyrrhic kills: genuine kills count shared historical/wave-kill deeds once;
+   no victory/surviving-veteran credit, successor XP or synthetic loot for a loss.
+5. Door ties: human chooses earned doors; bot preference follows known build and
+   intent. Beloved-first is a named legacy control, not a universal design rule.
+6. #448: NPCs may earn representation and outshine the bearer; an actual played
+   village Table event decides the ending, not an offscreen threshold. Deferral
+   keeps calendar pressure and the optional long-survival road.
+
+These supersede the provisional unanswered defaults in the2026-10-17 batch
+within their stated scopes. No runtime behavior or numerical tune was changed
+by recording them. The separate build packet has not been located; this six-item
+repository list is verified, but packet completeness remains unknown.
+
 ## 2026-10-24 — Panel-contract rulings (Steve, decision-pack blocking family 1)
 - 665 table metric: REDEFINED — count sittings (invitation-to-sitting), not invitations. An invitation the game never observes is not a measurement; the old metric printed fake regressions while sittings went 0 to 10 of 16.
 - 753 playerDeaths: SPLIT — track village deaths and player deaths separately. The old metric computed total combat deaths under a player label. New shape: `villageDeaths` = all combat deaths (preserves the old series' meaning), `playerDeaths` = deaths of the player-flagged character only. (Steve's refinement of the recommendation, which was rename-plus-add.)
 - 797 panel compare: DECLARED-INTERVENTION-FLAG EXEMPTION added, per recommendation — Steve deferred to Muse's judgment on the mechanism. Plain-language meaning: when a test flips a setting on purpose, the automatic comparison must not flag that setting's difference as a mismatch — the difference IS the test, declared upfront, not a hidden confound.
 - Communication note from this ruling round (Steve): explain technical items as if he didn't write the code — because he didn't. No programmer shorthand; say what a change does in plain words.
+
+## 2026-10-25 — Actual build packet found and disposed
+
+Muse published the snapshot in4b6d4c8eb. BUILD-PACKET-RULINGS-20261025.md
+accounts for all51 IDs: three prior Steve rulings retained,47 delegated calls
+and malformed678 returned to Muse for evidence correction. The earlier
+not-found note records the initial historical pass, not current coverage.
+No decisions alone establish implementation, balance approval or release.

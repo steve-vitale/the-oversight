@@ -5,8 +5,7 @@
 // never repeat verbatim, and the ending resolves/plants/owes. Also proves
 // the seed loop: an unfinished want resurfaces next conversation.
 //
-// Seeded PRNG BEFORE module eval. Full production script list, minus
-// DOM-only modules.
+// Shared seeded runtime, one load per process, full production module order.
 //
 // Usage: node scripts/test-convo-engine-trust.js [SEED=...]
 
@@ -15,51 +14,9 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || '20261013', 10);
 
-let _s = SEED >>> 0;
-Math.random = function () {
-  _s |= 0; _s = (_s + 0x6D2B79F5) | 0;
-  let t = Math.imul(_s ^ (_s >>> 15), 1 | _s);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
+const H=require('./sim-harness');let Game;
 
-global.fetch = (f) => Promise.resolve({
-  json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
-});
-global.window = global;
-const files = [
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-  'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js',
-  'src/js/contests.js', 'src/js/broadcast.js', 'src/js/contestEngine.js',
-  'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js',
-  'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js',
-  'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/waveLedger.js',
-  'src/js/feastBuff.js', 'src/js/ledger.js', 'src/js/abilityActions.js',
-  'src/js/monsterBehaviors.js', 'src/js/partyTactics.js',
-  'src/js/sigW3a.js', 'src/js/statusEffects.js', 'src/js/sigW3b.js',
-  'src/js/metaProgression.js', 'src/js/sigW3c.js',
-  'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js',
-  'src/js/membership.js', 'src/js/havenGrowth.js', 'src/js/hierarchy.js',
-  'src/js/comms.js', 'src/js/safetynets.js', 'src/js/villageAgency.js',
-  'src/js/debug-scenarios.js', 'src/js/build.js',
-];
-for (const f of files) { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-delete global.window;
-const Game = globalThis.Scattering.Game;
 
-if (typeof Game.emit !== 'function') {
-  Game.emit = function (msg) {
-    try { (this.log = this.log || []).push(String(msg)); } catch (e) {}
-    return msg;
-  };
-}
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -106,7 +63,7 @@ function runConversation(vid, maxTurns, label) {
 }
 
 async function main() {
-  await Game.init();
+  Game=(await H.loadGame({seed:SEED,mode:'convo-probe',narration:true})).Game;
   Game.genDetail = function () { return {}; };
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -123,10 +80,12 @@ async function main() {
 
   // Conversation 1: engage the want, then LEAVE mid-arc (unfinished business).
   console.log(`\n--- CONVERSATION 1 (leave the want hanging) ---`);
-  const c1 = runConversation(vid, 3, 'c1');
+  const c1 = runConversation(vid, 0, 'c1');
   for (const l of c1.lines) console.log(`${l.who}: ${l.text}`);
   const w1 = Game.convoGet(vid).want || {};
   console.log(`want after c1: ${w1.id} stage=${w1.stage} resolution=${w1.resolution}`);
+  const pendingQuestion=Game.convoGet(vid).pendingQ?.id;
+  ok('first sitting actually leaves a voiced question unanswered', !!pendingQuestion && w1.stage === 1);
   const beforeEnd = Game.convoGet(vid).transcript.length;
   Game.endConvo(vid, 'left');
   const closing1 = Game.convoGet(vid).transcript.slice(beforeEnd).filter(e => e.who === 'them').map(e => e.text);
@@ -148,6 +107,7 @@ async function main() {
   const w2 = Game.convoGet(vid).want || {};
   console.log(`THEM: ${r2.line}`);
   console.log(`want: ${w2.id} stage=${w2.stage} fromSeed=${w2.fromSeed}`);
+  ok('unfinished curiosity resumes the exact question rather than another topic', w2.qid === pendingQuestion, JSON.stringify({pendingQuestion,resumed:w2.qid}));
   const resumed = w2.fromSeed === true || /about .* —/i.test(String(r2.line));
   // Finish it honestly this time: commit or deflect, then end.
   const lines2 = [{ who: 'THEM', text: String(r2.line) }];
@@ -166,12 +126,14 @@ async function main() {
     if (r.ended) break;
   }
   const beforeEnd2 = Game.convoGet(vid).transcript.length;
-  Game.endConvo(vid, 'done');
+  Game.endConvo(vid, 'left');
   const closing2 = Game.convoGet(vid).transcript.slice(beforeEnd2).filter(e => e.who === 'them').map(e => e.text);
+  ok('answered curiosity ends with one normal farewell, not an extra summary', closing2.length === 1);
   console.log('--- CLOSING ---');
   for (const l of closing2) console.log(`THEM: ${l}`);
   const w2end = Game.convoGet(vid).want || {};
 
+  ok('answered question is not replanted just because the player leaves', !Game.state.village.convoSeeds[vid]);
   // Zero verbatim repeats across BOTH conversations.
   const allThem = c1.lines.concat(lines2).filter(l => l.who === 'THEM').map(l => l.text)
     .concat(closing1, closing2);
@@ -184,7 +146,7 @@ async function main() {
   ok('second conversation ended resolved (resolution recorded)',
     (w2end.stage || 0) >= 3 && !!w2end.resolution,
     `stage=${w2end.stage} resolution=${w2end.resolution}`);
-  ok('closing beats spoken (goodbye + want close line)', closing2.length >= 1,
+  ok('a normal closing is spoken after the answered question', closing2.length >= 1,
     `${closing2.length} closing beats`);
   ok('no leaked "(last time)" internal note',
     !/\(last time\)/i.test(allThem.join('\n')));

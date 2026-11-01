@@ -285,6 +285,13 @@ sec('HONESTY H2 — eligibility: who can go, AND WHY (K2)');
   Game.state.scholar.health = 100;
   // healthy baseline: nothing off the board
   const vills2 = freshGame(20);
+  // A generated cast can legitimately contain an elder. This is the
+  // explicitly healthy/adult control; age exclusions were proved above.
+  for (const id of Game.state.village.roster) {
+    const person = Game.getPerson(id);
+    if (!person) throw new Error('Missing canonical healthy-control person ' + id);
+    person.age = 30;
+  }
   const r4 = Game.contestEligible();
   ok('H2 healthy roster: ineligible list empty', (r4.ineligible || []).length === 0,
     `n=${(r4.ineligible || []).length}: ${JSON.stringify((r4.ineligible || []).map(o => o.reason))}`);

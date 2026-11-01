@@ -35,23 +35,7 @@ Math.random = mulberry32(SEED);
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 global.window = global; // equipment.js needs window at LOAD; deleted before play
-[
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/broadcast.js', 'src/js/contestEngine.js', 'src/js/alienPlayers.js',
-  'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
-  'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js', 'src/js/corpses.js',
-  'src/js/corruption.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
-  'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js', 'src/js/havenGrowth.js',
-  'src/js/hierarchy.js', 'src/js/villageAgency.js', 'src/js/debug-scenarios.js', 'src/js/build.js',
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
+require('./lib/browser-script-files')(ROOT).forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 delete global.window; // sync combat path, per harness lessons
 const Game = globalThis.Scattering.Game;
 
@@ -76,6 +60,9 @@ function ok(cond, label) {
   ovs.forEach(v => { v.rumored = true; v.opinion = 0; v.population = Math.max(10, v.population || 10); });
   ok(ovs.length >= 2, `have ${ovs.length} foreign villages to play with`);
   const [vA, vB] = ovs;
+  // This prepared event-pipeline case begins after actual contact.
+  // Queue flags alone deliberately do not establish player knowledge.
+  for (const ov of ovs) Game.recordVillageLore(Game.playerKnowerId(), ov.id, {how:'visit',toldBy:'prepared village-event contact'});
   // link vA to Haven (the splinter signature needs a linked village)
   const linkA = Game._formLink(vA.id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
   ok(!!linkA && !!Game.linkWith(vA.id), 'vA linked to Haven');
@@ -184,8 +171,11 @@ function ok(cond, label) {
   ok(saidHas(/starving|jars/), 'delivered at the day boundary through the rumor pipeline');
   // never omniscience: an unknown village gets nothing
   vB.rumored = false; vB.generated = false;
+  const oldLore = Game.villageLoreOf(Game.playerKnowerId())[vB.id];
+  delete Game.villageLoreOf(Game.playerKnowerId())[vB.id];
   ok(Game.queueVillageEventRumor(vB.id, 'succession', {}) === null, 'unknown village: no rumor (never omniscience)');
   vB.rumored = true;
+  Game.villageLoreOf(Game.playerKnowerId())[vB.id] = oldLore;
   // succession rumor carries the crisis
   Game._vaStartSuccession(vB);
   ok(!!(vB.inner && vB.inner.crisis), 'succession crisis started (leader dead, claimants circle)');

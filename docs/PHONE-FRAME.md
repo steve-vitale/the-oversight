@@ -1,4 +1,25 @@
-#Party combat: the main action area has a fixed budget. A bounded ally/hurt/
+# Combat turn presentation (2026-10-22 candidate)
+
+The one message area shows the actual actor and net HP/movement changes rather
+than only the final log sentence. Compact results show up to two changes;
+Details opens that turn's accepted messages in the existing history workspace.
+Only this explicitly opened history scrolls. A selected turn stays selected
+while other actors continue, and closing it restores the live board. Choosing
+another expedition clears that selection. Reader state never enters the save.
+The UI retains at most24 recent turn records and500 accepted lines per turn;
+an actual overflow is labeled. Native saved Messages remain the saved log,
+not a promise to preserve this in-memory reader after reload. Unknown names
+stay unknown. Additional world/status messages can reclaim the narration area.
+
+An announcement paints before the action (450ms), then the resolved result
+holds700ms before the next participant. Movement buttons are disabled while
+another actor owns the turn; the real driver still owns all eligibility and
+costs. Player turns keep their movement/action budget. Human balance effects
+of clearer information remain unmeasured; this is no numeric survival tune.
+Actual prepared solo/party and recorded Deer checks are in
+evidence/2026-10-22/combat-turn-audit-r1.md.
+
+Party combat: the main action area has a fixed budget. A bounded ally/hurt/
 down summary stays visible; Party/actions opens full names/health and extra
 commands inside the board. Individual party rows must not push Wait beneath
 the bottom menu. Both phone heights have actual entry/movement/Wait/Strike/
@@ -115,3 +136,51 @@ message/control areas, not merely have bounds somewhere within the viewport.
 These are Chromium phone-emulation checks, not physical iOS/Android installation,
 safe-area, suspension, audio or full content coverage. Follow
 PWA-RELEASE-CHECKLIST.md separately for primed-cache upgrade/offline/rollback.
+
+
+## Haven station and arrival maintenance (2026-10-21)
+
+Haven uses real saved room cells for furnishings. Gardens belong to grounds;
+inside and outside use the same canonical boolean after native load. People
+and bodies render above the furniture. Tap an empty bunk/exit to walk there
+and see real actions in the existing thumb row; a person occupying the cell
+retains normal person selection/explicit second-tap movement. A station
+selection replaces its prior person card. Fire offers a paid Walk closer
+before warmth/cooking when distant. No station menu covers the room.
+
+Two source-bound gates join quick/full automatically:
+- `test-haven-phone-proof.js`: prepared native birth choice, rest, hearth,
+  exit and Continue at390x736/844; zero indoor garden markers and preserved beds.
+- `test-arrival-phone-proof.js`: unedited late save, all seven arrival buttons
+  on screen without outer scrolling, no time/resource effects and actual exit.
+
+Replay `evidence/2026-10-21/haven-visual-mobile-r1.cjs <fresh-revision>` and
+`exile-scene-mobile-r1.cjs --rev <fresh-revision>` with the documented local
+preview server. Retain new receipts, then run respectively
+`scripts/haven-phone-proof-update.js <736.json> <844.json>` and
+`scripts/arrival-phone-proof-update.js <736.json> <844.json>`. Do not replace
+source hashes by hand. Generic16-stage phone-frame proof and installed-update/
+cold-offline byte verification remain separate requirements. These are touch
+emulations; physical iOS/Android usability and Steve's art review remain open.
+
+
+### Lodge and management extension (2026-10-21 candidate)
+
+The outdoor lodge uses one composed image over actual intact rectangular
+lodge cells. Irregular/altered saved structures use their remaining real cells;
+the render does not fill gaps. A normal lodge tap approaches the existing south
+door through native pathing and presents explicit entry. Original Dpad movement
+and collision remain unchanged. People/bodies stay visible above the structure.
+
+At home, Place is labeled 🏠 Haven. Garden and the already-gated Pantry button
+move with their original handlers to its first row; duplicated place identity
+and compass content fold under Grounds and surroundings. This is an explicit
+management surface; the normal board/message/thumb frame is preserved. Pantry
+keeps native inside/System entitlement and exile refusal, with one actual node.
+
+Current Haven maintenance replay is now `lodge-mobile-r1.cjs <fresh-revision>`
+(the earlier haven-visual recipe remains historical). Retain both height JSONs
+and update with haven-phone-proof-update.js. The gate additionally checks one
+six-cell lodge, native doorstep/entry and management/Pantry access. Actual
+saved damaged-structure and remote/exiled browser recipes are lodge-fallback-r1
+and lodge-access-r1. Generic16-stage/arrival/installed gates stay separate.

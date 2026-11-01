@@ -217,13 +217,13 @@
   // narration box (app.js narrationBoxHTML), latest beat wins — the
   // separate feedback card is retired. One emission, one surface.
   // feedback(text) is the explicit path — use it for action results.
-  G.say = function (msg) {
+  G.say = function (msg, presentation) {
     // Mark check: the mark is the stream length at mark time; any emission
     // from that point on is feedback (mirrors the old logSeq increment-then-
     // compare: the first say() after the mark is already feedback).
     var feedbackMode = false;
     try { feedbackMode = (this.state.fbMarkIdx != null && (this.log || []).length >= this.state.fbMarkIdx); } catch (e) {}
-    return this.emit(msg, feedbackMode ? 'feedback' : 'narration');
+    return this.emit(msg, feedbackMode ? 'feedback' : 'narration', presentation);
   };
   G.feedbackMark = function () {
     try { this.state.fbMarkIdx = (this.log || []).length; } catch (e) {}
@@ -2540,7 +2540,7 @@
     var roll = Math.random();
     // LUCK INSTRUMENTATION (rogue P0-6): record the honest hunt roll. The
     // near-miss band below reuses this same roll — one roll, one record.
-    try { this.luckRoll('hunt', chance, roll < chance); } catch (e) {}
+    try { this.luckRoll('hunt', chance, roll < chance); } catch (e) { console.warn('[measurement] luck hook failed', e); }
     if (roll < chance) {
       s.animal = null;
       this.encHuntPracticed('kill'); // a clean kill teaches double
@@ -2709,6 +2709,7 @@
   // text, no fight) covers a missing definition.
   G.startAlienCombat = function (fighter) {
     if (!fighter) return null;
+    if (this.contestOwnsScene && this.contestOwnsScene()) return null;
     if (this.inCombat && this.inCombat()) return null;
     // LATE CHAIN (load order): party.js Object.assigns tbHostileTurn AFTER
     // encounters.js loads, so a load-time wrap would be silently replaced.

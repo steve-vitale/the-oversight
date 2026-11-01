@@ -8,6 +8,7 @@
 //   - agencyScore(vid)
 //   - recordDeed(vid, deed)
 //   - startExpedition(vid)
+//   - agencySayLesson(vid, line, choiceId)
 // rules:
 //   - (none documented)
 // consumes:
@@ -239,6 +240,10 @@
       try { if (playerAtHaven && R() < 0.12) this.agencyDeedTalk(); } catch (e) {}
     },
     startExpedition(vid, hx, hy, announce) {
+      // Reserve the longest authored trip before any lottery or preparation.
+      // Keep the existing ammo/target RNG order for every admitted expedition.
+      var minDuration=8, durationChoices=13;
+      if(this.convoFavorDepartureReservation?.(vid,minDuration+durationChoices-1)?.blocked)return;
       var a = this.agencyOf(vid);
       var st = this.agencyState();
       // GEAR-UP + HEAL CHECK (Steve 2026-10-09): expeditions arm up from the
@@ -269,7 +274,10 @@
       var d = pick(dirs);
       var tx = Math.max(0, Math.min(8, hx + d[0] * dist)); // 9x9 world (2026-10-07)
       var ty = Math.max(0, Math.min(8, hy + d[1] * dist)); // 9x9 world (2026-10-07)
-      var duration = 8 + Math.floor(R() * 13); // 2-5 days of parts
+      var duration = minDuration + Math.floor(R() * durationChoices); // 2-5 days of parts
+      // Carry the real existing ration before setting away/moving. This
+      // does not promise a fully provisioned trip or draw food remotely.
+      if (this.packKcal) this.packKcal(vid);
       st.exped[vid] = {
         tx: tx, ty: ty, dist: dist, legs: 0,
         sinceDay: this.state.scholar.day, sincePart: this.dayPart,
@@ -834,6 +842,8 @@
     },
     agencyChoices(vid) {
       try {
+        const conversation = this.state.village.conv?.[vid];
+        if (conversation?.active && conversation.thread === 'nonverbal') return [];
         var lessons = this.npcFieldLessons(vid);
         if (!lessons.length) return [];
         var v = this.state.village;
@@ -860,6 +870,29 @@
       } catch (e) {}
       return '"Teach me something from the wild."';
     },
+    // One delivered lesson is a completed topic, not a continuation of the
+    // person's favor/question. Keep its real content in field memory, then
+    // return to an idle thread so a recap/pivot cannot reopen that lesson.
+    agencySayLesson(vid, line, choiceId) {
+      const c = this.convoGet(vid);
+      const previous = { thread:c.thread, depth:c.depth, choosingSubject:c.choosingSubject, lastBeat:c.lastBeat };
+      let spoken = null;
+      if (c.active) {
+        c.thread = 'field'; c.depth = 0; c.choosingSubject = false; c.lastBeat = null;
+      }
+      try {
+        spoken = this.sayLine(vid, line, { tag:'endtopic', topic:'field' });
+      } finally {
+        if (!spoken && c.active) Object.assign(c, previous);
+      }
+      if (spoken && c.active) {
+        c.thread = 'small'; c.depth = 0; c._beatThread = null;
+        this.convoThreadResolve(vid, 'field');
+        this.convoDropUnspoken(vid, choiceId);
+      }
+      return spoken;
+    },
+
     agencyTurn(vid, choiceId) {
       var st = this.agencyState();
       var nm = '';
@@ -868,6 +901,11 @@
       // gives the distinguishing descriptor.
       try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; }
       if (choiceId === 'agency:ask_expedition' || choiceId === 'agency:ask_field') {
+        const current = this.state.village.conv?.[vid];
+        if (current?.active && current.thread === 'nonverbal') {
+          return { noop:true, navigation:true, ended:false, line:null,
+            choices:this.convoChoices(vid), transcript:current.transcript.slice() };
+        }
         var v = this.state.village;
         var k = st.know[vid] || { plants: 0, monsters: 0, places: [] };
         // LABEL TIMING (journey-establishment r27 2026-10-23): the label is
@@ -944,7 +982,7 @@
         if (c) c.transcript.push(youEntry);
         var spokenText = null;
         if (lineText) {
-          try { if (this.sayLine(vid, lineText)) spokenText = lineText; } catch (e) { spokenText = null; }
+          try { spokenText = this.agencySayLesson(vid, lineText, choiceId); } catch (e) { console.warn('[conversation] field lesson emission', e); }
         }
         var closedOut = false;
         if (!spokenText) {
@@ -960,8 +998,8 @@
           ];
           for (var ci = 0; ci < closers.length; ci++) {
             var em2 = null;
-            try { em2 = this.sayLine(vid, closers[ci]); } catch (e) { em2 = null; }
-            if (em2) { spokenText = closers[ci]; closedOut = true; break; }
+            try { em2 = this.agencySayLesson(vid, closers[ci], choiceId); } catch (e) { console.warn('[conversation] field lesson closer', e); }
+            if (em2) { spokenText = em2; closedOut = true; break; }
           }
         }
         if (!spokenText) {
@@ -973,7 +1011,7 @@
           if (c) { var xi = c.transcript.indexOf(youEntry); if (xi !== -1) c.transcript.splice(xi, 1); }
           var noChoices = [];
           try { noChoices = this.convoChoices(vid); } catch (e) {}
-          return { ended: true, line: null, choices: [], noop: true, transcript: c ? c.transcript.slice() : [] };
+          return { ended: !c?.active, line: null, choices: c?.active ? noChoices : [], noop: true, transcript: c ? c.transcript.slice() : [] };
         }
         // SPENT (journey-succession 2026-10-12): a closer means the pool is
         // dry for this sitting — "I've told you everything" must not loop.
@@ -1444,6 +1482,8 @@
     // conversation: ask about the wild
     var _convoChoices = G.convoChoices;
     G.convoChoices = function (vid) {
+      const decision=this.partyDecisionChoices?.(vid);
+      if (decision) return decision;
       var base = _convoChoices ? _convoChoices.call(this, vid) : [];
       try {
         // An ambush replaces the old exchange. A stale question's answer
@@ -1503,6 +1543,8 @@
     };
     var _convoTurn = G.convoTurn;
     G.convoTurn = function (vid, choiceId) {
+      const owned=this.partyDecisionChoices?.(vid);
+      if (owned && choiceId!=='leave' && !owned.some(ch=>ch.id===choiceId)) return {navigation:true,noop:true,ended:false,choices:owned,transcript:this.convoGet(vid).transcript.slice()};
       if(choiceId==='menu:more') return this.convoNextMenu(vid);
       const menuConvo=this.convoGet(vid);menuConvo.menuPage=0;menuConvo.menuPages=1;
       const selectedWords = menuConvo.offeredReplies?.[choiceId];
@@ -1510,6 +1552,15 @@
       try {
         try {
           if (typeof choiceId === 'string' && choiceId.indexOf('agency:') === 0) {
+            const available = menuConvo.active ? this.convoChoices(vid) : [];
+            // Revalidate the complete current public menu, including its
+            // focus filter and all pages. Cached old labels cannot bypass
+            // an urgent scene/question or consume a changed lesson pool.
+            if (!menuConvo.active || !selectedWords ||
+                menuConvo.offeredReplies?.[choiceId] !== selectedWords) {
+              return { noop:true, navigation:true, ended:!menuConvo.active,
+                choices:available, transcript:menuConvo.transcript.slice() };
+            }
             var r = this.agencyTurn(vid, choiceId);
             if (r) return r;
           }

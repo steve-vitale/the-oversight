@@ -155,18 +155,22 @@ function voiceCheck(seed) {
     try { return Game.convoSpeechDNA(id).pace === 'quick'; } catch (e) { return false; }
   });
   if (!quick) { console.log(`(seed ${seed}: no quick-paced villager — voice check skipped)`); return; }
+  // Finish any sampled favor first: active requests intentionally suppress
+  // mannerisms so voice cannot change their action contract.
+  Game.endConvo(quick, 'left');
   const qSeen = new Set(), sSeen = new Set();
   // Exercise the real formatting branch, not a probabilistic sixty-draw
   // quota after a long mutable campaign. Enter the marker branch, choose a
   // closer and let the real no-repeat cycle walk its authored pools.
   const random=Math.random;
   try {
-    for(let i=0;i<60;i++) {
-      let call=0;Math.random=()=>call++===0?0:0.99;
-      const q=Game.voiceLine(quick,'"Will you help me clean it?"');
-      call=0;
-      const statement=Game.voiceLine(quick,'"I cannot clean it properly one-handed."');
-      if(q)qSeen.add(q);if(statement)sSeen.add(statement);
+    // Independent full cycles: alternating question/statement calls can
+    // deterministically assign a given closer only to questions.
+    for (const [text, seen] of [['"Will you help me clean it?"',qSeen], ['"I cannot clean it properly one-handed."',sSeen]]) {
+      for(let i=0;i<60;i++) {
+        let call=0;Math.random=()=>call++===0?0:0.99;
+        const line=Game.voiceLine(quick,text);if(line)seen.add(line);
+      }
     }
   } finally { Math.random=random; }
   const badQ = [...qSeen].filter(l => /— (anyway|comedy)\."$/.test(l));

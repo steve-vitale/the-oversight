@@ -86,6 +86,9 @@ function strike(Game, id) {
 (async () => {
   const { Game } = await H.loadGame({ seed: SEED });
   await H.setupGame(Game);
+  // Isolate the declared signature-mechanic fixtures from nearby residents.
+  // Explicit named Titan musters below remain real allied fighters.
+  Game.state.village.roster = [];
   Game.depart();
   console.log('== BLITZ WAVE3-5 PROOF, SEED ' + SEED + ', MECHANIC ' + (MECHANIC_OFF ? 'OFF' : 'ON') + ' ==');
   const said = [];
@@ -262,10 +265,10 @@ function strike(Game, id) {
       waitPlayerTurn(Game); if (!Game.tbfight || Game.tbfight.over) break;
       const seg = monPhase(Game, said);
       const mm = monsterOf(Game, 'ad_break');
-      if (/AD BREAK/.test(seg) && mm && mm.adActive) paused = true;
-      if (/SKIP AD is available/.test(seg)) skip = true;
+      if (/AD [▓░]+/.test(seg) && mm && mm.adActive) paused = true;
+      if (/SKIP/.test(seg) && mm && mm.adActive && mm.adActive.skipOffered) skip = true;
     }
-    ok('ad_break: the fight pauses for an ad (progress bar is real state)', paused);
+    ok('ad_break: the commercial has a displayed progress bar and real active state', paused);
     ok('ad_break: a SKIP AD beat arrives', skip);
     endFight(Game);
   }

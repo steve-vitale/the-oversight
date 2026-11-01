@@ -166,7 +166,7 @@
     if (choiceId && choiceId.indexOf('dlg:') === 0) {
       const dlg = choiceId.slice(4);
 
-      if (dlg === 'favor_action' || dlg === 'favor_requirements' || dlg === 'favor_cancel') {
+      if (dlg === 'favor_action' || dlg === 'favor_requirements' || dlg === 'favor_cancel' || dlg === 'forage_unload_end') {
         const favor = c.want?.favor || this.convoGetFavor(vid);
         const status = this.convoFavorAction(vid, favor);
         c.transcript.push({ who: 'you', text: c.offeredReplies?.[choiceId] || 'Check the request' });
@@ -175,6 +175,8 @@
         if (dlg === 'favor_cancel' && favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
           result = this.performWaterFavor(vid, favor, true);
         } else if (dlg === 'favor_cancel' && favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          result = this.performForageFavor(vid, favor, {keepCargo:true});
+        } else if (dlg === 'forage_unload_end' && favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
           result = this.performForageFavor(vid, favor, true);
         } else if (dlg === 'favor_cancel' && favor?.kind === 'stay_close' && this.performCompanyFavor && !status.unsupported) {
           result = this.performCompanyFavor(vid, favor, true);
@@ -548,10 +550,13 @@
                 : w.favor.commitLine;
             } else {
               // Already carrying an open commitment — heard, not promised.
-              const openTask = ((this.state.village.promises || {})[vid] || {}).favorTask;
-              beat = openTask
-                ? `"Wait — you already gave me your word on ${openTask}. Keep that first."`
-                : '"Wait — you already gave your word somewhere. Keep that first."';
+              const openPromise = (this.state.village.promises || {})[vid];
+              const about = this.promiseSpeechAbout(vid, openPromise, 'recipient');
+              beat = fc?.blocked
+                ? (about ? `"Wait — you already gave me your word about ${about}. Keep that first."`
+                  : '"Wait — you already gave me your word. Keep that first."')
+                : (fc?.line || (fc?.unsupported ? 'This request has no playable action yet.'
+                  : fc?.closed ? 'This request is already closed.' : 'The promise could not be made.'));
               committed = false;
             }
           } else if (w && w.def && typeof w.def.commitBeat === 'function') {

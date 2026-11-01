@@ -11,36 +11,10 @@
 // out by small talk" — the early return violates it.
 // DRAMA-TERRITORY: conversation.js is the drama sibling's file — this test
 // documents the bug for them. Do NOT "fix" by editing conversation.js here.
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-
-let _seed = parseInt(process.env.SEED || '20261007', 10) >>> 0;
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(_seed);
-
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const makeEl = () => ({ style: {}, classList: { add() {}, remove() {} }, appendChild() {}, remove() {},
-  setAttribute() {}, addEventListener() {}, removeEventListener() {}, querySelector() { return null; },
-  querySelectorAll() { return []; }, contains() { return false; }, innerHTML: '', textContent: '' });
-global.document = { createElement: makeEl, body: makeEl(), head: makeEl(),
-  getElementById() { return null; }, querySelector() { return null; },
-  querySelectorAll() { return []; }, contains() { return false; }, addEventListener() {} };
-
-const ORDER = (fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').match(/src\/js\/[^\"]+\.js/g) || []);
-const SKIP = new Set(['src/js/app.js', 'src/js/sprites.js', 'src/js/tile-scenes.js', 'src/js/move-anim.js']);
-global.window = global;
-for (const f of ORDER) {
-  if (SKIP.has(f)) continue;
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.error('EVAL FAIL', f, e.message); process.exit(1); }
-}
-delete global.window;
-delete global.document;
-const Game = globalThis.Scattering.Game;
-
+const K = require('./godpath/lib');
+const menu = require('./lib/conversation-playtest');
 (async () => {
-  await Game.init();
+  const Game = await K.load({seed: Number(process.env.SEED || 20261007)});
   Game.genRoster('Columbus, Ohio');
   const pick = (Game.generatedRoster || [])[0];
   Game.newGame('Columbus, Ohio', null, pick.id);
@@ -64,19 +38,21 @@ const Game = globalThis.Scattering.Game;
 
   // Honest player path: open conversation, then "can I ask you something else?"
   Game.startConvo(vid);
-  let ids = Game.convoUI(vid).choices.map(c => c.id);
-  // If the villager opened with a question, answer it first: the invite lives
-  // in the main menu, not the question-answer menu (seed-robust 2026-10-14).
-  const ans = ids.find(id => id.indexOf('ans:') === 0 && id.indexOf('honest_pass') === -1);
-  if (ans && !ids.includes('dlg:subject')) {
-    Game.convoTurn(vid, ans);
-    ids = Game.convoUI(vid).choices.map(c => c.id);
+  // An existing personal invitation owns its answer menu. Resolve it through
+  // an actually offered reply before testing a different subject menu.
+  if (Game.pendingInvite(vid)) {
+    const decline = menu.reach(Game, vid, ['betrayal:decline']);
+    ok('pending invitation offers a real decline', !!decline);
+    if (!decline) throw Error('Invitation could not be answered');
+    menu.choose(Game, vid, decline.id);
+    ok('declining resolves the pending invitation', !Game.pendingInvite(vid));
+    Game.endConvo(vid, 'left');
+    Game.startConvo(vid);
   }
-  if (ids.includes('dlg:subject')) {
-    Game.convoTurn(vid, 'dlg:subject');
-    ids = Game.convoUI(vid).choices.map(c => c.id);
-  }
-  ids=require('./lib/conversation-playtest').offers(Game,vid).map(x=>x.id);
+  const subject = menu.reach(Game, vid, ['dlg:subject']);
+  ok('subject navigation is actually offered', !!subject);
+  if (subject) menu.choose(Game, vid, subject.id);
+  const ids = menu.offers(Game,vid).map(x=>x.id);
   Game.endConvo(vid, 'left');
 
   // The invite must survive the subject menu — the design comment at the
@@ -87,4 +63,4 @@ const Game = globalThis.Scattering.Game;
 
   if (failures.length) { console.log(`\n${failures.length} FAILING (bug reproduced)`); process.exit(1); }
   console.log('\nALL GREEN');
-})();
+})().catch(error => { console.error(error); process.exitCode = 1; });

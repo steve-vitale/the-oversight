@@ -220,13 +220,7 @@
       if (!isPerson) { this.say('Field-dressing handles animals. This is the other kind of butchery — and it is only for the dead who were people.'); return null; }
       if (c.butchered) { this.say('There\'s nothing left to take that way.'); return null; }
       const s = this.state.scholar;
-      if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          // R52 FIX (journey-deepening r52, same falsy-0 class as r51's
-          // corpses.js fix): 0 is a real edge cell, not "missing" — `|| 4`
-          // read a scholar at (4,0) as standing at the center (4,4).
-          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
-        this.say('Too far — get closer to the body.'); return null;
-      }
+      if (!this._corpseCheckRange(c)) return null;
       if (this.hasCuttingTool && !this.hasCuttingTool()) {
         this.say('You need a blade for this. Your hands aren\'t enough — thank whatever\'s left of your conscience for that.'); return null;
       }
@@ -427,6 +421,7 @@
       try {
         const c = (this.corpses ? this.corpses() : []).find(x => x.id === cid);
         if (!c || !c.npcFed || c.npcKnown) return false;
+        if (!this._corpseCheckRange(c)) return false;
         c.npcKnown = true;
         const vid = c.npcFed;
         const nm = this.displayName ? this.displayName(vid) : 'someone';
@@ -554,8 +549,7 @@
         return (this.corpses ? this.corpses() : []).find(c =>
           // PERSON-GATE (crisis leg r7 2026-10-13): corpseIsPerson — see corpseButcher.
           (this.corpseIsPerson ? this.corpseIsPerson(c) : c.kind === 'person') && !c.buried && !c.butchered &&
-          c.node.x === this.map.px && c.node.y === this.map.py &&
-          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) <= 1) || null;
+          this._corpseCheckRange(c, true)) || null;
       } catch (e) { return null; }
     },
     // ============ PSYCHO VIOLENCE (Steve 2026-10-13) ============

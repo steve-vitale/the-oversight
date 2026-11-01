@@ -525,6 +525,14 @@
       // AID (comms 2026-10-10): the signal fire's smoke draws company — the
       // pack is really bigger, blow by blow, not a modifier.
       var packN = Math.max(1, (mdef.pack || 1) + (opts.packBonus || 0));
+      // Calendar pressure reaches the off-screen village too. Authored sealed
+      // arenas and titan/campaign pieces retain their own challenge rules.
+      var pressure = !opts.noFlee && this.survivalPressureTier && this.survivalPressureTier() > 0
+        && this.overtimeMonsterPressure ? this.overtimeMonsterPressure(mdef.id) : null;
+      if (pressure) {
+        packN += pressure.packExtra;
+        rec.pressure = { tier: pressure.tier, hpMult: pressure.hpMult, damageMult: pressure.damageMult, packExtra: pressure.packExtra };
+      }
 
       // ---- villager stats (real) ----
       var vv = this.state.village || {};
@@ -612,6 +620,19 @@
 
       // ---- monster stats (real) ----
       var hpDef = mdef.hp || [20, 20];
+      if (pressure) {
+        hpDef = hpDef.map(function (hp) { return Math.round(hp * pressure.hpMult); });
+        if (m && Number.isFinite(m.hp)) {
+          // A surviving world beast retains its wounds. Convert once from its
+          // prior pressure scale; repeated meetings cannot multiply HP again.
+          var previousScale = m.survivalHpMult || 1;
+          if (pressure.hpMult > previousScale) {
+            m.hp = Math.round(m.hp / previousScale * pressure.hpMult);
+            if (Number.isFinite(m.maxHp)) m.maxHp = Math.round(m.maxHp / previousScale * pressure.hpMult);
+            m.survivalHpMult = pressure.hpMult;
+          }
+        }
+      }
       var members = [];
       for (var pi = 0; pi < packN; pi++) {
         var php = (m && pi === 0 && m.hp !== undefined && m.hp !== null) ? m.hp : lroll(hpDef);
@@ -1092,6 +1113,11 @@
               var _sigCtx = { vHp: vHp, wb: wb };
               var _sigDone = false;
               try { if (this.sigFieldMonster) _sigDone = !!this.sigFieldMonster(mdef, members[mi], _sigCtx, { vid: vid, vName: vName, mName: mName, round: round, RR: RR, lroll: lroll }, rec); } catch (e) {}
+              if (pressure && _sigDone && _sigCtx.vHp > 0 && _sigCtx.vHp < vHp) {
+                var pressureBonus = Math.round((vHp - _sigCtx.vHp) * (pressure.damageMult - 1));
+                _sigCtx.vHp -= pressureBonus; rec.vTaken += pressureBonus;
+                if (pressureBonus) rec.log.push('Long-season pressure adds ' + pressureBonus + ' damage.');
+              }
               vHp = _sigCtx.vHp; wb = _sigCtx.wb;
               if (vHp <= 0) vAlive = false;
               if (_sigDone) continue;
@@ -1262,8 +1288,9 @@
                 _wardVia = 'bodyguard';
                 rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
               }
+              if (pressure && total > 0) total = Math.round(total * pressure.damageMult);
               if (!hittingAlly && gpF && total > 0) {
-                var beamDamage = beamShare > 0 ? Math.min(d, total) : 0;
+                var beamDamage = beamShare > 0 ? Math.min(pressure ? Math.round(d * pressure.damageMult) : d, total) : 0;
                 var _gpLogN1 = rec.log.length;
                 try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round, attack: rAttack, beamDamage: beamDamage })); } catch (e) { console.warn('[godpath] incoming', e); }
                 gpTag(_gpLogN1);

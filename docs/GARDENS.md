@@ -1,5 +1,164 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+## Current coverage with corrected native walking (pending review)
+
+walk-cadence-garden-summary-r2 observes36 invested dawn campaigns on the updated
+Game, all native endings without recovery/caps, through281d. Expansion performs
+22 real builds past four and reaches nine;22 is build actions, not campaigns.
+Food is eaten in13/18 fixed-bed and11/18 expansion runs. Assisted lifetime intake
+240,569/395,579 kcal is not daily yield or net profit. NPC casts remain zero.
+All23 current screen and extended values are retained. These are updated coverage,
+not a controlled comparison with older timing arms. Mortality/progression/gear
+watches stay open; no numerical garden change or default promotion. Next correct
+macro bot movement before calibration. See walk-cadence-audit-r1.
+
+## Actual dawn work reaches upper capacity, with adverse tradeoffs
+
+Pending review daystart profiles finally act before driver Wait, after actual
+needs/promises/recovery checks. All72 observed cases end naturally. Five expansion
+cases build beyond four beds; seed4 reaches nine. Crop food is eaten in9/18
+fixed-bed and10/18 expansion dawn cases, versus14/18 and5/18 late controls.
+Fixed-bed intake178,809 kcal versus552,095 and expansion119,171 versus103,236
+remain lifetime totals over18 cases, not per-day yield or net profit. Actual
+casts532/491 differ from982/1,121 dawn routine attempts. Eligible NPC casts are
+zero; do not infer power use from nominal NPC work charges or sampled holdings.
+
+Survival/water/class/gear watches prevent promotion or a numerical buff. The
+selected exact death replays locate lockjaw/contest danger paths, without claiming
+all deaths are caused by gardening. See garden-daystart-audit-r1 and the cohort
+contract. Existing Haven2/4/6/9 capacity and slow ordinary calendars remain.
+Next audit phone-vs-bot approach/exit travel before further calibration: the
+current macro travel helper is not proof of human-equivalent movement costs.
+
+## Earlier work is a tradeoff, not a recommended default (pending review)
+
+The preregistered scheduling screen changes controller timing on the same Game.
+All72 campaigns reach actual endings without recovery. Fixed-bed investment
+consumes552,095 crop kcal under the prior schedule versus404,090 under earlier
+work (18 cases each), with class-access and contest/show gear watches. Expansion
+consumes103,236 versus141,713, while seed7 alone reaches eight actual beds.
+Gross output rises856,285→4,031,150 kcal across the expansion arms, far more than
+useful consumption; these differently paced campaigns are not a yield-multiplier
+or net-profit estimate. Existing 2/4/6/9 capacity and slow ordinary growth remain.
+
+The optional early hook still arrives after tick320 in1,283/1,344 and1,366/1,396
+personal-reserve refusals, respectively; health/food reasons overlap. These are
+early-session snapshots, not a classification of every expansion refusal.
+Do not remove the safety/time gates to make utilization look better. Next trace
+the actual pre-daily budget. See GARDEN-SCHEDULING-COHORT.md and the dated audit;
+the prototype stays experimental and is not a numeric calibration gate.
+
+The follow-up trace locates a harness artifact: three public driver Waits run
+before daily work, often placing callback entry at tick384. The r2 actual-call
+replays are exact. This “early” profile is earlier within that callback, not a
+real morning-gardening control. Next compare an explicit day-start policy while
+preserving actual NPC turns; do not speed up crops to offset driver waiting.
+
+## Current clean-ending screen after barrier correction (pending review)
+
+The same four garden profiles now reach72/72 natural engine endings without
+harness recovery, through day245. All four arms have18 cases (16 screen and two
+extended coverage cases). Crop food is actually eaten in10/18 control,14/18
+investment,4/18 expansion and5/18 combined campaigns. Fixed-bed investment
+consumes552,095 assisted kcal versus164,633 assisted plus1,080 ordinary kcal
+in control. These mixed policies can all earn magic; this is not an ordinary-only
+comparison or an estimate of a magic yield multiplier. Expansion still is not
+cleared as a default. Three first-bearer60d watches coincide exactly with old
+watchdog-recovered cases; keep their outcomes and investigate, not tune them away.
+
+Haven capacity remains2/4/6/9 actual beds and ordinary crop calendars remain slow.
+This follow-up changes turn/save correctness, not garden yields or power costs.
+See barrier-settlement-audit-r1 and retained Game-only accounting/review outputs.
+Next is a separately declared scheduling experiment, not an ordinary-garden buff.
+
+## Declared investment/expansion screen (pending review, 2026-10-21)
+
+The new four-arm controller experiment uses actual garden offers and public
+actions. At fixed beds, priority increases measured crop intake154,625 to446,758
+kcal across18 campaigns, but deaths/run2.75 to3.125 and other all23 watches
+remain in the16-seed screen. Expansion arms frequently defer work at the
+personal reserve/time gate: only normal-priority expansion reaches six beds;
+investment+expansion stays at four. Selected exact input traces identify late
+tick budget in two worst-denial cases, not every missed opportunity.
+
+71/72 observed campaigns end cleanly, one after harness recovery; no caps.
+That case exposes a human-fight bot target gap and is explicitly not playable
+completion proof. Raw wins remain unaltered. All crop intake in this cohort is
+tagged assisted; priority-off still acquires powers naturally, so it is not
+an ordinary-only control. No numerical garden changes or viability clearance.
+See gardener-intent-audit-r1/summary-r3 and the cohort spec. Fix human combat
+coverage next, then investigate garden scheduling with a separate preregistration.
+
+## Adopted Muse batch: current garden census (2026-10-21)
+
+The cb5ad02ca Game has been freshly observed, not compared as an observer-only
+revision of 00412b13f. Natural-r4 has 74 observed campaigns and eight exact real
+on/off controls. Players cultivate in 61 campaigns (3,327 physical paid casts)
+and harvest 1,198 times. Core powers are offered in 65 campaigns, acquired from
+earned track sheets in 17 (18 acquisitions), and sampled held in 63. Named
+player Gardeners occur in 14 campaigns; this is not a deliberate build cohort.
+
+Eligible NPC core holders appear in all 74 campaigns, named NPC Gardeners in
+49, but NPC casts remain zero. Of 7,138 garden-duty attempts, 6,958 redirect;
+all 132 executed NPC magic queries lack the actual worker's own core power.
+Unknown resident/build observations are zero for this cohort only.
+
+Upper tiers with unused structural capacity appear in 54 campaigns. The policy
+still targets at most four beds: zero fifth-bed queries or builds. Ten extended
+campaigns reach real endings through day 246 (seven wins, three community losses,
+no watchdog recovery); 20 shorter screenings remain capped. See retained
+garden-opportunity-summary-r2 and audit-r2 for scope, costs and all23 limits.
+Ordinary crop calendars and food-powered cultivation remain as described below.
+
+This tooling branch needs review and the ship loop; it is not yet shared on
+origin. Muse's runtime is already live and matches the adopted source.
+The next cohort contract is in GARDENER-INTENT-COHORT.md.
+
+## Observed garden opportunities (2026-10-21)
+
+Historical baseline: the census figures below bind Game 00412b13f, before Muse’s cb5ad02ca batch. The adopted-tip audit is retained separately; these are not
+a current-Game comparison or balance clearance.
+
+The shared long audit now records actual pending offers, physical player choices,
+NPC level-up sheets/grants with resident eligibility, own held kits, named classes,
+returned garden gates and cultivation board changes. It calls no extra Game,
+permission, knowledge, needs, RNG or clock helpers. Unknown kits remain unknown.
+Player dispatch is counted once; a different NPC casting during its dawn remains
+a separate event, and player effects settle before time advances.
+
+Fresh74 observed mixed-policy campaigns plus eight actual on/off controls replay
+the previous82 jobs exactly in canonical Game hash, driver row, all23 metrics,
+RNG and donation counters. Ten extended campaigns reach real endings through309;
+23 screening cases remain capped. This is auxiliary measurement, not balance.
+
+Core powers are offered in65 campaigns, held by the player in59, and actually
+cast in55 (3,474 completed physical casts, matching3,474 independently observed
+charged cultivation calls). Twenty campaigns acquire core powers through actual
+track level-up choices (21 acquisitions); arrival offers, inherited holdings,
+unlinked grants and named Gardener recognition are separate. Actual named player
+Gardener is sampled in22 campaigns. NPC core holders appear in all74 and named
+NPC Gardeners in50, with227 linked eligible-resident core acquisitions.
+
+NPC casts are zero in this cohort. Do not call the powers broken from that zero:
+7,467 of7,611 garden-duty attempts redirect into other work. The97 NPC magic-gate
+queries that execute all report that the worker lacks their own core power.
+Sampled holders elsewhere are not proof they were free, present and assigned.
+There are no unknown resident/build observations in this cohort; the collector
+and tests still retain unknowns for other data.
+
+Upper Haven tiers appear in59 campaigns, all with unused structural capacity.
+The controller's hard four-bed target means zero fifth-bed builds AND zero
+make-gate queries past four. Extra-bed physical availability, affordability and
+usefulness were not tested by those policies. Do not buff capacity from this
+coverage gap or force maximum planting: output/consumption/spoilage remain
+separate, and existing surplus redirections matter.
+
+Use `scripts/summarize-garden-opportunity.js` with one fresh current report and
+an exact-source reference. See garden-opportunity-audit-r1 and summary-r1.
+Next: a declared Gardener intent/investment cohort using real offers and public
+gates, weighing food demand, learning/mastery, costs and storage before expanding.
+This turn does not establish that intent cohort or all-playstyle viability.
+
 ## Partial pantry gifts (2026-10-21)
 
 Pack → Donate now opens one compact amount picker. It states the fitting whole
@@ -362,3 +521,14 @@ Sowing events are method-completion observations. Their player actor/day
 fields must not be used as initiation-time personal deed credit when a paid
 action advances time or changes bearer; planted-run coverage is the usage
 measure here. NPC eligibility and useful consumption remain separate audits.
+
+
+### Scene boundary (2026-10-21 candidate)
+
+Plot IDs and contents live on Haven, but garden markers/actions belong only
+to its outdoor grounds. Legacy insideHaven=null means outside; missing flags
+at home preserve the non-exiled legacy hall default. Native load canonicalizes
+these before any consumer renders. Never fix an overlay by erasing plots or
+replacing saved hall/grounds caches. Scene tests cover old saves, explicit
+inside/outside, new exile, actual departure and Continue. Source-bound Haven
+phone receipts verify zero indoor markers and unchanged plot records outside.
