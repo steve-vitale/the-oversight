@@ -1,0 +1,365 @@
+{
+ "corpusOk": true,
+ "rows": 8,
+ "w4Total": 67,
+ "fought": 65,
+ "evades": 2,
+ "byState": {
+  "EVADE": 2,
+  "DRIVE-OFF": 5,
+  "DIED": 16,
+  "FLED": 43,
+  "KILL": 1
+ },
+ "byStateFought": {
+  "DRIVE-OFF": 5,
+  "DIED": 16,
+  "FLED": 43,
+  "KILL": 1
+ },
+ "byCaller": {
+  "other": 2,
+  "sortie": 10,
+  "resolve": 50,
+  "aid": 5
+ },
+ "byCallerFought": {
+  "sortie": 10,
+  "resolve": 50,
+  "aid": 5
+ },
+ "leaderDeathRate": 0.246,
+ "leaderDeaths": 16,
+ "allyDeathRate": 0,
+ "allyDeaths": 0,
+ "joinedFights": 5,
+ "allyUnstruck": 5,
+ "beastDeathRate": 0.015,
+ "beastDeaths": 1,
+ "killerSurvival": {
+  "fights": 1,
+  "leaderAlive": 1,
+  "leaderAliveRate": 1,
+  "joined": 0,
+  "allyAlive": 0,
+  "allyAliveRate": null,
+  "allyUnstruck": 0
+ },
+ "rounds": {
+  "flee": {
+   "n": 43,
+   "median": 1,
+   "min": 1,
+   "max": 3
+  },
+  "die": {
+   "n": 16,
+   "median": 2,
+   "min": 1,
+   "max": 3
+  },
+  "kill": {
+   "n": 1,
+   "median": 0
+  },
+  "driveOff": {
+   "n": 5,
+   "median": 1
+  }
+ },
+ "fleeMech": {
+  "hopeless": 20,
+  "hpFloor": 42,
+  "learn": 26,
+  "cap15": 0
+ },
+ "concentration": {
+  "n": 1,
+  "medLeaderShare": 1,
+  "medAllyShare": 0,
+  "medVolleyShare": 0,
+  "medTopShare": 1,
+  "verdict": "CONCENTRATED"
+ },
+ "engineCap": {
+  "joinedDist": {
+   "1": 60,
+   "2": 5
+  },
+  "musteredDist": {
+   "1": 55,
+   "2": 5,
+   "3": 5
+  },
+  "shoutJoined": 5,
+  "shoutJoinedRate": 0.077,
+  "gapMedian": 0,
+  "gapDist": {
+   "0": 58,
+   "1": 4,
+   "2": 3
+  }
+ },
+ "hpBands": {
+  "counts": {
+   "le64": 2,
+   "b65_90": 0,
+   "ge91": 63
+  },
+  "kills": {
+   "le64": 1,
+   "b65_90": 0,
+   "ge91": 0
+  },
+  "leaderDeaths": {
+   "le64": 0,
+   "b65_90": 0,
+   "ge91": 16
+  }
+ },
+ "context": {
+  "diagW4": 67,
+  "wrapperW4": 67,
+  "countMatch": true,
+  "leaderArmed": 67,
+  "leaderTotal": 67,
+  "armorPMedian": 16,
+  "trickKnown": 20,
+  "cornered": 10,
+  "everHopeless": 20,
+  "pantryMedian": 9350
+ },
+ "wall": {
+  "won": 1,
+  "nationalEver": 5,
+  "nationalFinal": 3,
+  "table": 3,
+  "entered": 1,
+  "wave4reach": 6,
+  "wave5reach": 0,
+  "medianDays": 180,
+  "starv": 2,
+  "deaths": 318
+ },
+ "deathsByCause": {
+  "villager:villager combat": 75,
+  "villager:ambush": 5,
+  "villager:combat": 126,
+  "villager:sickness": 5,
+  "villager:a wound that wouldn't close": 4,
+  "villager:starvation": 2,
+  "villager:monster": 17,
+  "player:contest": 3,
+  "villager:expedition": 9,
+  "player:the wild": 46,
+  "player:the arena": 9,
+  "villager:sortie combat": 11,
+  "player:lockjaw": 1,
+  "player:a stranger": 3,
+  "villager:The Living Wire": 1,
+  "player:dehydration": 1
+ },
+ "perSeed": [
+  {
+   "seed": 75101,
+   "days": 28,
+   "end": "village-lost",
+   "wave": 2,
+   "w4": 0,
+   "diagW4": 0
+  },
+  {
+   "seed": 75102,
+   "days": 144,
+   "end": "village-lost",
+   "wave": 4,
+   "w4": 4,
+   "diagW4": 4
+  },
+  {
+   "seed": 75103,
+   "days": 180,
+   "end": "survived",
+   "wave": 4,
+   "w4": 24,
+   "diagW4": 24
+  },
+  {
+   "seed": 75104,
+   "days": 107,
+   "end": "over-other",
+   "wave": 3,
+   "w4": 0,
+   "diagW4": 0
+  },
+  {
+   "seed": 75105,
+   "days": 180,
+   "end": "survived",
+   "wave": 4,
+   "w4": 19,
+   "diagW4": 19
+  },
+  {
+   "seed": 75106,
+   "days": 180,
+   "end": "survived",
+   "wave": 4,
+   "w4": 13,
+   "diagW4": 13
+  },
+  {
+   "seed": 75107,
+   "days": 166,
+   "end": "village-lost",
+   "wave": 4,
+   "w4": 6,
+   "diagW4": 6
+  },
+  {
+   "seed": 75108,
+   "days": 180,
+   "end": "survived",
+   "wave": 4,
+   "w4": 1,
+   "diagW4": 1
+  }
+ ],
+ "sense": {
+  "died": {
+   "seed": 75102,
+   "day": 142,
+   "vid": "brian_otieno",
+   "leaderName": "Brian Otieno",
+   "mid": "algorithm",
+   "caller": "sortie",
+   "stackNames": "Game,lingererSortie,answerLingerer,episodeDayHook,daily,withOrigin,quietLog",
+   "mHpStart": 750,
+   "outcome": "vDie",
+   "rounds": 2,
+   "mDealt": 31,
+   "vTaken": 102,
+   "vHpLeft": 0,
+   "mHpLeft": 719,
+   "minHpFrac": 0.49,
+   "fleeHpFrac": null,
+   "allyVid": null,
+   "allyName": null,
+   "joined": false,
+   "allyDealt": 0,
+   "allyTaken": 0,
+   "allyHpLeft": null,
+   "allyDied": null,
+   "engineAllies": 1,
+   "allyVids": [
+    "boris_kowalski"
+   ],
+   "allyFromStart": false,
+   "cornered": true,
+   "calledHelp": false,
+   "everHopeless": false,
+   "everWinning": false,
+   "fleeHopeless": false,
+   "fleeLearn": false,
+   "volleyDmg": 0,
+   "volleyShots": 0,
+   "abilityNotes": {},
+   "pantryBefore": 0,
+   "log": [
+    "Brian has Sling but no arrows — the string stays drawn, useless.",
+    "Brian's gear absorbs 50.",
+    "R1: Engagement hits Brian for 51 (49 left)",
+    "R1: Brian strikes for 31 (719 left)",
+    "Brian's gear absorbs 49.",
+    "R2: Recommended For You hits Brian for 51 (0 left)",
+    "Boris stood the rear through it, watching the treeline behind them."
+   ]
+  },
+  "fled": {
+   "seed": 75103,
+   "day": 76,
+   "vid": "daniyar_askarov",
+   "leaderName": "Daniyar",
+   "mid": "algorithm",
+   "caller": "resolve",
+   "stackNames": "Game,resolveWildMonsterEncounter,havenRaidTick,metaWrapped",
+   "mHpStart": 750,
+   "outcome": "vFlee",
+   "rounds": 1,
+   "mDealt": 11,
+   "vTaken": 77,
+   "vHpLeft": 22,
+   "mHpLeft": 739,
+   "minHpFrac": 0.22,
+   "fleeHpFrac": 0.22,
+   "allyVid": null,
+   "allyName": null,
+   "joined": false,
+   "allyDealt": 0,
+   "allyTaken": 0,
+   "allyHpLeft": null,
+   "allyDied": null,
+   "engineAllies": 0,
+   "allyVids": [],
+   "allyFromStart": false,
+   "cornered": false,
+   "calledHelp": false,
+   "everHopeless": false,
+   "everWinning": false,
+   "fleeHopeless": false,
+   "fleeLearn": true,
+   "volleyDmg": 0,
+   "volleyShots": 0,
+   "abilityNotes": {},
+   "pantryBefore": 34739,
+   "log": [
+    "R1: Daniyar strikes for 11 (739 left)",
+    "Daniyar's gear absorbs 23.",
+    "R1: Recommended For You hits Daniyar for 77 (22 left)",
+    "Daniyar is past holding — they run while running still works."
+   ]
+  },
+  "seriousOrKill": {
+   "seed": 75103,
+   "day": 156,
+   "vid": "visjoin_135",
+   "leaderName": "Zenon",
+   "mid": "herald",
+   "caller": "resolve",
+   "stackNames": "Game,resolveWildMonsterEncounter,havenRaidTick,metaWrapped",
+   "mHpStart": 1,
+   "outcome": "vKill",
+   "rounds": 0,
+   "mDealt": 10,
+   "vTaken": 0,
+   "vHpLeft": 85,
+   "mHpLeft": 0,
+   "minHpFrac": 1,
+   "fleeHpFrac": null,
+   "allyVid": null,
+   "allyName": null,
+   "joined": false,
+   "allyDealt": 0,
+   "allyTaken": 0,
+   "allyHpLeft": null,
+   "allyDied": null,
+   "engineAllies": 0,
+   "allyVids": [],
+   "allyFromStart": false,
+   "cornered": false,
+   "calledHelp": false,
+   "everHopeless": false,
+   "everWinning": false,
+   "fleeHopeless": false,
+   "fleeLearn": false,
+   "volleyDmg": 0,
+   "volleyShots": 0,
+   "abilityNotes": {},
+   "pantryBefore": 9475,
+   "log": [
+    "Zenon does not let it slip away — they close in and strike with the stone knife for 10 — The Herald falls. (Contact finish)"
+   ]
+  }
+ }
+}
+VERDICT: DIAG-GO (fought=65 offered=67 evades=2 seedsWave4=6)
