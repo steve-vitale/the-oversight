@@ -49,6 +49,9 @@ function classifyRow(row, pile, weaponSet, armorSet, recipesById) {
     const hasReal = armedItems.some(id => id !== 'sharpened_stick');
     armedClass = (hasStick && hasReal) ? 'both' : (hasStick ? 'stick-only' : 'real');
   }
+  const equippedArmed = (row.equipped || []).some(id => weaponSet.has(id));
+  const packArmed = (row.pack || []).map(itemIdOf).filter(Boolean).some(id => weaponSet.has(id));
+  const armedSource = !armedItems.length ? 'none' : (equippedArmed && packArmed ? 'both' : (equippedArmed ? 'equipped' : 'pack'));
   let matsOK = false, matsDetail = null;
   if (firstKnown) {
     const recipe = recipesById[firstKnown] || {};
@@ -66,14 +69,14 @@ function classifyRow(row, pile, weaponSet, armorSet, recipesById) {
   const knower = !!firstKnown;
   const weaponless = armedClass === 'none';
   const eligible = knower && weaponless && matsOK && cooldownClear;
-  return { day, vid: row.vid, knower, firstKnown, armedClass, armedItems, matsOK, matsDetail, cd, cooldownClear, weaponless, eligible };
+  return { day, vid: row.vid, knower, firstKnown, armedClass, armedSource, armedItems, matsOK, matsDetail, cd, cooldownClear, weaponless, eligible };
 }
 
 function analyzeSeed(evidir, r65dir, seed, weaponSet, armorSet, recipesById) {
   const wsplitPath = path.join(evidir, `journey-scale-r66-wsplit-${seed}.json`);
   const rows = fs.existsSync(wsplitPath) ? loadJson(wsplitPath) : [];
   const byVid = {}; // vid -> [{day, cls, pile}] in day order
-  const totals = { villagerDays: 0, knowerDays: 0, stickOnlyDays: 0, realArmedDays: 0, bothArmedDays: 0, weaponlessKnowerDays: 0, weaponlessKnowerMatsDays: 0, eligibleDays: 0, stickBlockedDays: 0, attempts: 0 };
+  const totals = { villagerDays: 0, knowerDays: 0, stickOnlyDays: 0, realArmedDays: 0, bothArmedDays: 0, weaponlessKnowerDays: 0, weaponlessKnowerMatsDays: 0, eligibleDays: 0, stickBlockedDays: 0, attempts: 0, weaponlessDays: 0, weaponlessNonknowerDays: 0, knowerArmedEquipped: 0, knowerArmedPack: 0, knowerArmedBoth: 0 };
   const blockShares = { armed: 0, mats: 0, cooldown: 0 };
   for (const dayRow of rows) {
     for (const r of (dayRow.rows || [])) {
@@ -81,6 +84,8 @@ function analyzeSeed(evidir, r65dir, seed, weaponSet, armorSet, recipesById) {
       if (!cls) continue;
       totals.villagerDays++;
       if (cls.knower) totals.knowerDays++;
+      if (cls.weaponless) { totals.weaponlessDays++; if (!cls.knower) totals.weaponlessNonknowerDays++; }
+      if (cls.knower && cls.armedClass !== 'none') { if (cls.armedSource === 'equipped') totals.knowerArmedEquipped++; else if (cls.armedSource === 'pack') totals.knowerArmedPack++; else if (cls.armedSource === 'both') totals.knowerArmedBoth++; }
       if (cls.knower && cls.armedClass === 'stick-only') totals.stickOnlyDays++;
       if (cls.knower && cls.armedClass === 'real') totals.realArmedDays++;
       if (cls.knower && cls.armedClass === 'both') totals.bothArmedDays++;
@@ -143,11 +148,16 @@ function analyzeSeed(evidir, r65dir, seed, weaponSet, armorSet, recipesById) {
   if (fs.existsSync(trustPath)) census = loadJson(trustPath).census || null;
   if (census && fs.existsSync(r65trust)) {
     const rc = loadJson(r65trust).census || {};
+    // SCALARS ONLY (prereg list): trustSetLog/convoFiles carry driver
+    // paths and stack traces, so whole-object comparison false-positives
+    // on labels; deathLog is game state (day/who/cause/player) and is
+    // compared by length + content.
+    const SCALARS = ['day', 'over', 'popAlive', 'popTotal', 'pantryKcal', 'scaleRank', 'nationalDay', 'globalDay', 'firstCourtDay', 'tableSeat', 'arcNow', 'tableWaiting', 'tableAnnounced', 'maxWave', 'pilgrimages', 'fusionInstalled', 'abilitiesHeld', 'leadActive', 'leadSeasoned', 'nationalVoiced', 'globalVoiced'];
     censusDiff = {};
-    for (const k of Object.keys(census)) {
+    for (const k of SCALARS) {
       if (JSON.stringify(census[k]) !== JSON.stringify(rc[k])) censusDiff[k] = { r65: rc[k], r66: census[k] };
     }
-    // Only report scalar keys (skip deathLog detail by keeping it, it is comparable too).
+    if (JSON.stringify((census.deathLog || []).map(d => [d.day, d.who, d.cause])) !== JSON.stringify((rc.deathLog || []).map(d => [d.day, d.who, d.cause]))) censusDiff.deathLog = { r65: (rc.deathLog || []).length, r66: (census.deathLog || []).length };
   }
   return { seed, totals, blockShares, unexplained: unexplained.slice(0, 20), unexplainedCount: unexplained.length, wcLines, deadfallLines, deadfallDutyLines, diffLines, firstDiff, census, censusDiff };
 }
@@ -165,7 +175,7 @@ function main() {
   for (const seed of [85001, 85002, 85003, 85004]) {
     out[seed] = analyzeSeed(evid, r65dir, seed, weaponSet, armorSet, recipesById);
     const s = out[seed];
-    console.log(`seed ${seed}: villagerDays=${s.totals.villagerDays} knowerDays=${s.totals.knowerDays} armed(stick-only=${s.totals.stickOnlyDays} real=${s.totals.realArmedDays} both=${s.totals.bothArmedDays}) weaponlessKnower=${s.totals.weaponlessKnowerDays} eligibleDays=${s.totals.eligibleDays} attempts(Cd)=${s.totals.attempts} unexplained=${s.unexplainedCount} stickBlocked=${s.totals.stickBlockedDays} wcLines=${s.wcLines} deadfallDuty=${s.deadfallDutyLines} captureDiff=${s.diffLines} censusDiffKeys=${s.censusDiff ? Object.keys(s.censusDiff).length : 'n/a'}`);
+    console.log(`seed ${seed}: villagerDays=${s.totals.villagerDays} knowerDays=${s.totals.knowerDays} armed(stick-only=${s.totals.stickOnlyDays} real=${s.totals.realArmedDays} both=${s.totals.bothArmedDays} srcEq=${s.totals.knowerArmedEquipped} srcPack=${s.totals.knowerArmedPack} srcBoth=${s.totals.knowerArmedBoth}) weaponless=${s.totals.weaponlessDays} weaponlessKnower=${s.totals.weaponlessKnowerDays} eligibleDays=${s.totals.eligibleDays} attempts(Cd)=${s.totals.attempts} unexplained=${s.unexplainedCount} stickBlocked=${s.totals.stickBlockedDays} wcLines=${s.wcLines} deadfallDuty=${s.deadfallDutyLines} captureDiff=${s.diffLines} censusDiffKeys=${s.censusDiff ? Object.keys(s.censusDiff).length : 'n/a'}`);
   }
   fs.writeFileSync(path.join(evid, 'journey-scale-r66-wsplit-analysis.json'), JSON.stringify(out, null, 1));
 }

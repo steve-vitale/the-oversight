@@ -40,4 +40,8 @@ n += 2;
 check('ladder-order', { day: 100, vid: 'j', dead: false, away: false, equipped: [], pack: [], stashed: [], wc: { fire_hardened_spear: 1, hunting_spear: 1 }, cd: null }, undefined, { firstKnown: 'hunting_spear' });
 // 10. Own pack materials count toward matsOK (branch in pack, rest in pile).
 check('pack-mats', { day: 100, vid: 'k', dead: false, away: false, equipped: [], pack: ['branch'], stashed: [], wc: { hunting_spear: 1 }, cd: null }, { branch: 0, stone: 1, vine: 1, wood: 0 }, { matsOK: true, eligible: true });
+
+// 11. Armed source: equipped weapon vs pack-only weapon.
+check('armed-equipped', { day: 100, vid: 'l', dead: false, away: false, equipped: ['hunting_spear'], pack: [], stashed: [], wc: { hunting_spear: 1 }, cd: null }, undefined, { armedSource: 'equipped' });
+check('armed-pack', { day: 100, vid: 'm', dead: false, away: false, equipped: [], pack: ['bow'], stashed: [], wc: { bow: 1 }, cd: null }, undefined, { armedSource: 'pack' });
 console.log(`wsplit classifier proof: ${n} checks passed`);
