@@ -1231,6 +1231,98 @@ function walkHome(Game, hx, hy) {
     return tripHomeDetourSteps;
   } catch (e) { tripHomeDetour = false; return 0; }
 }
+// THIRST WALK HOME (water-guard arrival 2026-11-01; landing r84 mechanism):
+// a thirsty scholar's walk home must not die on a blocked path. walkTo
+// stops dead at the first refused step, and the old THIRST HOME then went
+// on with the day while the scholar stayed wild and thirsty — the r84
+// panel caught the same failure in the outing guard (a fallen_tree at
+// (3,3) refused the homeward jump, hydration skipped 6x, arrival 0/4,
+// scholar Jude dying of dehydration next to a full cistern). For thirst
+// ONLY — no other walkTo leg gains this — honor the refusal, in order:
+//   1. DETOUR: one routeAround BFS step (the engine's own blockage check,
+//      node travel is free, the tree stays standing for later), then walk
+//      again. Detour first because it costs nothing.
+//   2. CLEAR: when no detour exists, name the blockage from travelTo's own
+//      return ({kind:'blockage', blockType, x, y}) and clear it when the
+//      scholar can afford it (fallen_tree 60 kcal, rubble 40, washed_out
+//      80 or a 4-wood bridge — never below the cost), then walk again.
+//      Clearing is permanent, so a repeat skip on later days cannot recur.
+//   3. DRINK IN PLACE: the caller's drinkSafe after this runs (bottle or
+//      creek water buys time); if still wild, ctx.thirstHomeBlockedType
+//      names the block — never a silent skip-and-assume-arrival.
+// Bounded (24 rounds); every round moves, clears, or breaks. A creek
+// blockage is never "cleared" by hand here: it is not affordable by the
+// rule above (clearBlockage itself refuses it), so the walk records it
+// blocked and stops honestly.
+function thirstWalkHome(Game, ctx) {
+  try {
+    const hx = DIR_FLEE_HAVEN.x, hy = DIR_FLEE_HAVEN.y;
+    const atHome = () => Game.map.px === hx && Game.map.py === hy;
+    walkTo(Game, hx, hy);
+    let guard = 0;
+    while (!atHome() && guard++ < 24 && !Game.over && !Game.tbfight) {
+      // 1. DETOUR (thirst-only: routeAround called directly, NOT via the
+      // global COMPETENT_ROUTE_AROUND gate, so no other leg changes).
+      let moved = false;
+      try { moved = routeAround(Game, hx, hy); } catch (e) { moved = false; }
+      if (moved) {
+        ctx.thirstHomeDetours = (ctx.thirstHomeDetours || 0) + 1;
+        walkTo(Game, hx, hy);
+        continue;
+      }
+      // 2. CLEAR: the homeward hop's refusal names the blocking tile.
+      let block = null;
+      try {
+        let best = null, bd = 1e9;
+        for (const tt of (Game.travelTargets() || [])) {
+          const d = Math.abs(tt.x - hx) + Math.abs(tt.y - hy);
+          if (d < bd) { bd = d; best = tt; }
+        }
+        if (best) {
+          const ret = Game.travelTo(best.x, best.y);
+          if (ret && (ret.kind === 'blockage' || ret.blockType)) block = ret;
+        }
+      } catch (e) { block = null; }
+      if (atHome()) break;
+      if (!block) {
+        ctx.thirstHomeBlockedN = (ctx.thirstHomeBlockedN || 0) + 1;
+        ctx.thirstHomeBlockedType = 'unnamed-refusal';
+        break;
+      }
+      // The return names the tile; the tile names the type. (Worldgen
+      // always sets blockFrom.type, but read it from the tile rather than
+      // trusting the return to carry it.)
+      if (!block.blockType) {
+        try { block.blockType = (Game.tileAt(block.x, block.y) || {}).blockFrom?.type || null; } catch (e) {}
+      }
+      const s = Game.state.scholar || {};
+      const kcal = s.kcal || 0;
+      let wood = 0;
+      try { wood = (Game.woodCount ? Game.woodCount() : 0) || 0; } catch (e) { wood = 0; }
+      const affordable = (block.blockType === 'fallen_tree' && kcal > 60)
+        || (block.blockType === 'rubble' && kcal > 40)
+        || (block.blockType === 'washed_out' && (wood >= 4 || kcal > 80));
+      if (!affordable) {
+        ctx.thirstHomeBlockedN = (ctx.thirstHomeBlockedN || 0) + 1;
+        ctx.thirstHomeBlockedType = block.blockType || 'unknown';
+        break;
+      }
+      let cleared = false;
+      try { cleared = !!Game.clearBlockage(block.x, block.y); } catch (e) { cleared = false; }
+      if (!cleared) {
+        ctx.thirstHomeBlockedN = (ctx.thirstHomeBlockedN || 0) + 1;
+        ctx.thirstHomeBlockedType = block.blockType || 'unknown';
+        break;
+      }
+      ctx.thirstHomeClears = (ctx.thirstHomeClears || 0) + 1;
+      walkTo(Game, hx, hy);
+    }
+    if (!atHome() && !ctx.thirstHomeBlockedType) {
+      ctx.thirstHomeBlockedN = (ctx.thirstHomeBlockedN || 0) + 1;
+      ctx.thirstHomeBlockedType = 'walk-ended-wild';
+    }
+  } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
+}
 // STANDING GO-HOME (creekpath Arm C retry, gate COMPETENT_STANDING_HOME=1,
 // default off): Arm B proved trips home detour, but the policy had NO
 // standing "go home" rule — a villager who ends the day away (no trip
@@ -2853,14 +2945,19 @@ const competent = {
     // and hp. The game says "DEHYDRATED: find and treat water today." — a
     // human listens. Gating this behind the experimental routing flag meant
     // every non-flagged run could die of thirst; the walk itself is safe
-    // without routeAround (walkTo just stops at blockages).
+    // without routeAround (walkTo just stops at blockages) — EXCEPT the
+    // walk home itself: landing r84 proved a blocked walk home kills
+    // (fallen_tree at (3,3), 0/4 arrivals, death next to a full cistern).
+    // So the thirst walk, and only the thirst walk, honors refusals via
+    // thirstWalkHome (detour, then clear-if-affordable, then drink in
+    // place) instead of stopping dead at the first refused step.
     try {
       const s = Game.state.scholar;
       if ((s.hydration || 0) < 45 && !(s.water || []).length && !Game.playerAtHaven()) {
         drinkSafe(Game, ctx); // this tile may offer water — drink before walking
         const s2 = Game.state.scholar;
         if ((s2.hydration || 0) < 45 && !(s2.water || []).length) {
-          walkTo(Game, DIR_FLEE_HAVEN.x, DIR_FLEE_HAVEN.y);
+          thirstWalkHome(Game, ctx);
           drinkSafe(Game, ctx);
         }
         ctx.thirstHome = (ctx.thirstHome || 0) + 1;
@@ -3279,7 +3376,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
