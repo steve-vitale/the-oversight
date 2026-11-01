@@ -1,0 +1,487 @@
+{
+ "baseline": {
+  "dir": "evidence/2026-11-01/sim-stay-a/baseline",
+  "valid": true,
+  "dec": {
+   "offered": 26,
+   "fought": 25,
+   "evades": 1,
+   "byOutcome": {
+    "vDie": 7,
+    "vFlee": 17,
+    "mFlee": 1
+   },
+   "shares": {
+    "fled": 0.68,
+    "died": 0.28,
+    "driveOff": 0.04,
+    "kill": 0
+   },
+   "roundsDist": {
+    "1": 14,
+    "2": 10,
+    "3": 1
+   },
+   "medianDpr": 10,
+   "healthy": 25,
+   "healthyKills": 0,
+   "healthyDamageConv": 0,
+   "round4plus": [],
+   "round4plusSurvived": 0,
+   "componentShares": {
+    "leader": 1,
+    "ally": 0,
+    "volley": 0,
+    "totalDealt": 424,
+    "totalAlly": 0,
+    "totalVolley": 0
+   },
+   "leaderDeaths": 7,
+   "leaderDeathShare": 0.28,
+   "joined": 2,
+   "allyDeaths": 1,
+   "allyStruck": 1,
+   "byCaller": {
+    "sortie": {
+     "n": 4,
+     "fled": 3,
+     "died": 1,
+     "driveOff": 0,
+     "kill": 0,
+     "joined": 2,
+     "engineAllies": {
+      "1": 1,
+      "2": 3
+     }
+    },
+    "resolve": {
+     "n": 16,
+     "fled": 11,
+     "died": 4,
+     "driveOff": 1,
+     "kill": 0,
+     "joined": 0,
+     "engineAllies": {
+      "0": 16
+     }
+    },
+    "aid": {
+     "n": 5,
+     "fled": 3,
+     "died": 2,
+     "driveOff": 0,
+     "kill": 0,
+     "joined": 0,
+     "engineAllies": {
+      "0": 5
+     }
+    }
+   },
+   "deepest": [
+    {
+     "seed": 75107,
+     "day": 161,
+     "leader": "Miriam Guerra",
+     "mid": "reunion",
+     "mHpStart": 900,
+     "mDealt": 56,
+     "mHpLeft": 844,
+     "outcome": "vFlee",
+     "rounds": 2
+    },
+    {
+     "seed": 75103,
+     "day": 89,
+     "leader": "Terry",
+     "mid": "herald",
+     "mHpStart": 700,
+     "mDealt": 44,
+     "mHpLeft": 656,
+     "outcome": "vFlee",
+     "rounds": 2
+    },
+    {
+     "seed": 75102,
+     "day": 161,
+     "leader": "Aki",
+     "mid": "herald",
+     "mHpStart": 700,
+     "mDealt": 37,
+     "mHpLeft": 663,
+     "outcome": "vFlee",
+     "rounds": 2
+    },
+    {
+     "seed": 75102,
+     "day": 155,
+     "leader": "Yash Puranik",
+     "mid": "reunion",
+     "mHpStart": 900,
+     "mDealt": 36,
+     "mHpLeft": 864,
+     "outcome": "vDie",
+     "rounds": 2
+    },
+    {
+     "seed": 75107,
+     "day": 166,
+     "leader": "Ines",
+     "mid": "eulogy",
+     "mHpStart": 900,
+     "mDealt": 32,
+     "mHpLeft": 868,
+     "outcome": "vFlee",
+     "rounds": 2
+    }
+   ],
+   "wall": {
+    "seeds": 8,
+    "won": 3,
+    "nationalEver": 7,
+    "nationalFinal": 6,
+    "table": 3,
+    "entered": 3,
+    "wave4Reach": 7,
+    "wave5Reach": 0,
+    "medianDays": 166,
+    "maxDays": 180,
+    "deathsTotal": 262,
+    "starvationDeaths": 6,
+    "deathCauses": {
+     "villager:villager combat": 75,
+     "villager:ambush": 4,
+     "villager:combat": 91,
+     "villager:sickness": 2,
+     "villager:starvation": 5,
+     "villager:a wound that wouldn't close": 6,
+     "villager:expedition": 16,
+     "player:starvation": 1,
+     "villager:sortie combat": 9,
+     "player:the wild": 32,
+     "villager:monster": 8,
+     "villager:The Callback": 1,
+     "player:the night": 2,
+     "player:contest": 2,
+     "villager:The Understudy": 1,
+     "player:a stranger": 2,
+     "villager:The Redactor": 1,
+     "player:the arena": 3,
+     "player:dehydration": 1
+    }
+   },
+   "ammo": {
+    "fights": 26,
+    "ranged": 11,
+    "carriedGt0": 0,
+    "carriedShare": 0,
+    "volleyShots": 0,
+    "volleyDmg": 0,
+    "byWeapon": {
+     "crossbow": {
+      "n": 3,
+      "carriedGt0": 0
+     },
+     "fire_hardened_spear": {
+      "n": 4,
+      "carriedGt0": 0
+     },
+     "hunting_spear": {
+      "n": 1,
+      "carriedGt0": 0
+     },
+     "phase_sling": {
+      "n": 2,
+      "carriedGt0": 0
+     },
+     "crude_bow": {
+      "n": 1,
+      "carriedGt0": 0
+     }
+    }
+   }
+  }
+ },
+ "candidate": {
+  "dir": "evidence/2026-11-01/sim-stay-a/candidate",
+  "valid": true,
+  "dec": {
+   "offered": 69,
+   "fought": 69,
+   "evades": 0,
+   "byOutcome": {
+    "vFlee": 42,
+    "vDie": 15,
+    "mFlee": 10,
+    "vKill": 2
+   },
+   "shares": {
+    "fled": 0.6087,
+    "died": 0.2174,
+    "driveOff": 0.1449,
+    "kill": 0.029
+   },
+   "roundsDist": {
+    "0": 4,
+    "1": 26,
+    "2": 23,
+    "3": 15,
+    "4": 1
+   },
+   "medianDpr": 7.5,
+   "healthy": 61,
+   "healthyKills": 0,
+   "healthyDamageConv": 1,
+   "round4plus": [
+    {
+     "seed": 75102,
+     "day": 49,
+     "leader": "Brian Otieno",
+     "mid": "influencer",
+     "rounds": 4,
+     "outcome": "vFlee",
+     "mDealt": 93,
+     "mHpStart": 850
+    }
+   ],
+   "round4plusSurvived": 1,
+   "componentShares": {
+    "leader": 0.9584,
+    "ally": 0.0416,
+    "volley": 0.1077,
+    "totalDealt": 1949,
+    "totalAlly": 81,
+    "totalVolley": 210
+   },
+   "leaderDeaths": 15,
+   "leaderDeathShare": 0.2174,
+   "joined": 26,
+   "allyDeaths": 1,
+   "allyStruck": 2,
+   "byCaller": {
+    "patrol": {
+     "n": 43,
+     "fled": 29,
+     "died": 6,
+     "driveOff": 7,
+     "kill": 1,
+     "joined": 22,
+     "engineAllies": {
+      "0": 10,
+      "1": 29,
+      "2": 2,
+      "3": 2
+     }
+    },
+    "sortie": {
+     "n": 5,
+     "fled": 2,
+     "died": 1,
+     "driveOff": 1,
+     "kill": 1,
+     "joined": 1,
+     "engineAllies": {
+      "1": 2,
+      "2": 3
+     }
+    },
+    "resolve": {
+     "n": 15,
+     "fled": 9,
+     "died": 4,
+     "driveOff": 2,
+     "kill": 0,
+     "joined": 3,
+     "engineAllies": {
+      "0": 7,
+      "1": 1,
+      "2": 4,
+      "3": 3
+     }
+    },
+    "other": {
+     "n": 2,
+     "fled": 0,
+     "died": 2,
+     "driveOff": 0,
+     "kill": 0,
+     "joined": 0,
+     "engineAllies": {
+      "2": 2
+     }
+    },
+    "aid": {
+     "n": 4,
+     "fled": 2,
+     "died": 2,
+     "driveOff": 0,
+     "kill": 0,
+     "joined": 0,
+     "engineAllies": {
+      "0": 3,
+      "2": 1
+     }
+    }
+   },
+   "deepest": [
+    {
+     "seed": 75107,
+     "day": 76,
+     "leader": "Ursula Weber",
+     "mid": "herald",
+     "mHpStart": 552,
+     "mDealt": 179,
+     "mHpLeft": 373,
+     "outcome": "vFlee",
+     "rounds": 3
+    },
+    {
+     "seed": 75107,
+     "day": 77,
+     "leader": "Ursula Weber",
+     "mid": "herald",
+     "mHpStart": 373,
+     "mDealt": 169,
+     "mHpLeft": 204,
+     "outcome": "vFlee",
+     "rounds": 3
+    },
+    {
+     "seed": 75107,
+     "day": 89,
+     "leader": "Vasyl Shevchenko",
+     "mid": "algorithm",
+     "mHpStart": 951,
+     "mDealt": 146,
+     "mHpLeft": 805,
+     "outcome": "vFlee",
+     "rounds": 3
+    },
+    {
+     "seed": 75107,
+     "day": 75,
+     "leader": "Ursula Weber",
+     "mid": "herald",
+     "mHpStart": 700,
+     "mDealt": 128,
+     "mHpLeft": 572,
+     "outcome": "vFlee",
+     "rounds": 3
+    },
+    {
+     "seed": 75107,
+     "day": 78,
+     "leader": "Ursula Weber",
+     "mid": "herald",
+     "mHpStart": 164,
+     "mDealt": 112,
+     "mHpLeft": 52,
+     "outcome": "mFlee",
+     "rounds": 3
+    }
+   ],
+   "wall": {
+    "seeds": 8,
+    "won": 1,
+    "nationalEver": 4,
+    "nationalFinal": 3,
+    "table": 4,
+    "entered": 1,
+    "wave4Reach": 8,
+    "wave5Reach": 0,
+    "medianDays": 103,
+    "maxDays": 180,
+    "deathsTotal": 400,
+    "starvationDeaths": 4,
+    "deathCauses": {
+     "player:the wild": 56,
+     "villager:combat": 89,
+     "villager:starvation": 4,
+     "villager:sickness": 1,
+     "villager:patrol combat": 142,
+     "villager:villager combat": 40,
+     "villager:a wound that wouldn't close": 3,
+     "villager:sortie combat": 12,
+     "villager:monster": 27,
+     "player:lockjaw": 1,
+     "villager:expedition": 8,
+     "villager:ambush": 3,
+     "villager:The Strike": 1,
+     "player:the arena": 5,
+     "villager:The Heckler": 1,
+     "villager:thirst": 2,
+     "player:dehydration": 1,
+     "villager:The Reunion": 1,
+     "villager:The Loud Beast": 1,
+     "player:contest": 2
+    }
+   },
+   "ammo": {
+    "fights": 71,
+    "ranged": 40,
+    "carriedGt0": 10,
+    "carriedShare": 0.25,
+    "volleyShots": 22,
+    "volleyDmg": 246,
+    "byWeapon": {
+     "sling": {
+      "n": 5,
+      "carriedGt0": 3
+     },
+     "hunting_spear": {
+      "n": 3,
+      "carriedGt0": 0
+     },
+     "starfall_bow": {
+      "n": 3,
+      "carriedGt0": 0
+     },
+     "crude_bow": {
+      "n": 2,
+      "carriedGt0": 0
+     },
+     "crossbow": {
+      "n": 11,
+      "carriedGt0": 0
+     },
+     "fire_hardened_spear": {
+      "n": 7,
+      "carriedGt0": 0
+     },
+     "bow": {
+      "n": 2,
+      "carriedGt0": 0
+     },
+     "phase_sling": {
+      "n": 7,
+      "carriedGt0": 7
+     }
+    }
+   }
+  }
+ },
+ "detgate": {
+  "ok": true,
+  "diffs": []
+ },
+ "judge": {
+  "verdict": "PILOT-GO",
+  "g1CorpusValid": true,
+  "g2StayingSignal": true,
+  "signals": {
+   "round4plusSurvived": true,
+   "healthyDamageConv": true,
+   "dprDoubled": false
+  },
+  "g3DeathGuard": true,
+  "diedShareBase": 0.28,
+  "diedShareCand": 0.2174,
+  "diedDeltaPp": -6.26,
+  "g4Sense": true,
+  "reasons": [
+   "G1 corpus valid",
+   "G2 staying signal present",
+   "G3 death guard holds",
+   "G4 sense leg read"
+  ]
+ }
+}
