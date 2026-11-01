@@ -357,3 +357,8 @@ module.exports = { runComparison, printTable, POLICY_REGISTRY, stdSnapshot, flee
 
 // Explicit opt-in comparison configuration. Omission preserves the standard driver.
 module.exports.comparisonCapabilities = {schemaVersion:1,origin:true,region:true,occupation:true};
+// routeblock instrument (sim-routeblock-b, 2026-11-01, Loop B food-economy):
+// the competent + route-blockage-gates policy, registered so the balanced panel
+// (§15) can build its column. Additive; zero behavior change to existing
+// entries (the variant stays default-OFF: nothing loads it unless named).
+try { const rb = require('./policies/competent-routeblock-b'); POLICY_REGISTRY['competent-routeblock-b'] = rb.routeblock; } catch (e) {}
