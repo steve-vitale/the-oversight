@@ -68,12 +68,33 @@ function plantKnown(Game, pid) {
   try { return !!((Game.state.codex || {}).plants || {})[pid]; } catch (e) { return null; }
 }
 function stockedCandidates(Game) {
+  // Tile-stock menu PLUS cell availability (amendment v2): tile stock
+  // does NOT deplete on a sweep (control 51509: grove (4,3) stock 41
+  // before and after a worked-out sweep), so stock>0 does NOT mean
+  // harvestable. availableCells counts detail cells in
+  // {plant,bush,tree,bigtree} not in detailRegrow, read ONLY from an
+  // already-generated detail grid (never generated here: if
+  // tile.detail is not an array, availableCells is null, not 0).
   try {
     const out = [];
     for (const tt of (Game.travelTargets() || [])) {
       const t = Game.tileAt(tt.x, tt.y);
       if (!t || t.type === 'haven' || t.type === 'ruin' || (t.stock || 0) <= 0) continue;
-      out.push({ x: tt.x, y: tt.y, d: tt.d, type: t.type, revealed: !!t.revealed, stock: t.stock });
+      let availableCells = null;
+      try {
+        if (Array.isArray(t.detail)) {
+          const FORAGEABLE = { plant: 1, bush: 1, tree: 1, bigtree: 1 };
+          let n = 0;
+          for (let cy = 0; cy < 9; cy++) for (let cx = 0; cx < 9; cx++) {
+            const c = t.detail[cy] && t.detail[cy][cx];
+            if (!FORAGEABLE[c]) continue;
+            if (t.detailRegrow && t.detailRegrow[cx + ',' + cy]) continue;
+            n++;
+          }
+          availableCells = n;
+        }
+      } catch (e) { availableCells = null; }
+      out.push({ x: tt.x, y: tt.y, d: tt.d, type: t.type, revealed: !!t.revealed, stock: t.stock, availableCells });
     }
     return out;
   } catch (e) { return null; }

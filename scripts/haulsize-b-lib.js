@@ -73,11 +73,39 @@ function classifyTripDay(day) {
   if (packFullFail) return 'PACK_FULL';
   if (d.packKgAtTripEnd != null && d.packCapAtTripEnd != null && d.packCapAtTripEnd > 0 &&
       d.packKgAtTripEnd >= 0.95 * d.packCapAtTripEnd) return 'PACK_FULL';
-  if (d.stockedRemainingAtTripEnd === 0) return 'NO_MORE_TARGETS';
+  // Amendment v2: cell availability governs NO_MORE_TARGETS when
+  // measured (tile stock does not deplete on a sweep, so a stock>0
+  // tile can still be cell-picked-clean); stocked count is the
+  // fallback only when no cell measure exists.
+  if (d.availableCellsRemainingAtTripEnd != null) {
+    if (d.availableCellsRemainingAtTripEnd === 0) return 'NO_MORE_TARGETS';
+  } else if (d.stockedRemainingAtTripEnd === 0) return 'NO_MORE_TARGETS';
   const cost = (d.medianTripCost != null && isFinite(d.medianTripCost)) ? d.medianTripCost : 64;
   if (d.ticksRemainingAtTripEnd != null && d.ticksRemainingAtTripEnd < cost) return 'OUT_OF_TIME';
   if (d.secondTripAttempted) return 'UNCLASSIFIED'; // a second trip WAS tried: not a one-trip stop
   return 'POLICY_ONE_TRIP';
+}
+
+// classifyFailedDay(day): amendment v2 secondary. For a day with
+// forage attempts but ZERO successes (a failed trip, not a capped
+// haul): FAILED_WORKED_OUT iff every forage failure says the patch
+// is worked out / nothing left; FAILED_BLOCKED_TRAVEL iff no forage
+// call happened but a travel to a candidate was blocked (trip could
+// not reach any patch); else FAILED_OTHER. A failed trip has no haul
+// to cap, so it never enters the primary (successful-trip) metric.
+function classifyFailedDay(day) {
+  const d = day || {};
+  if (d.forageSuccesses) return null;
+  if (!d.forageAttempts) {
+    const travels = d.travels || [];
+    if (travels.some((t) => t && !t.moved && t.blocked)) return 'FAILED_BLOCKED_TRAVEL';
+    return 'FAILED_OTHER';
+  }
+  const fails = d.forageFailures || [];
+  if (fails.length && fails.every((f) => /worked out|nothing left|nothing within reach|bare pavement/i.test(String((f && f.say) || '')))) {
+    return 'FAILED_WORKED_OUT';
+  }
+  return 'FAILED_OTHER';
 }
 
 // attributeSeed(days): days = array of {category} for successful-trip
@@ -116,4 +144,4 @@ function dominantMechanism(seedAttrs) {
     scattered: attributedSeeds >= 6 && best < 6, counts };
 }
 
-module.exports = { KEEP_KCAL, TICKS_PER_DAY, shelledNetEach, summarizePack, classifyTripDay, attributeSeed, dominantMechanism };
+module.exports = { KEEP_KCAL, TICKS_PER_DAY, shelledNetEach, summarizePack, classifyTripDay, classifyFailedDay, attributeSeed, dominantMechanism };

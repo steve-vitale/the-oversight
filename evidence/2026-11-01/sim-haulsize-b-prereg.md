@@ -147,6 +147,63 @@ The evidence file carries a "metric review" section. No metric,
 threshold, seed, or classification rule may change mid-run; doubts
 go there for the NEXT run.
 
+## Amendment v2 (before pilot, after control 51509 — NO judged sim has run)
+
+Control 51509 (instrument proof only, never a judged seed) exposed
+three instrument gaps, fixed here BEFORE the pilot so the judged
+bands run under a frozen, complete prereg. The PRIMARY metric and
+GO thresholds above are UNCHANGED; only measurement completeness
+changes:
+
+1. FAILED-TRIP DAYS DOMINATE SOME SEEDS: control 51509 has 19
+   failed-trip days vs 8 successful-trip days and 3 no-trip days.
+   The v1 classification dumped failed days into UNCLASSIFIED and
+   out of the attribution entirely — a pilot run that way would
+   attribute 8 days and silently ignore 19. Added SECONDARY metric
+   (never a re-score of the primary): failed-trip classification
+   (FAILED_WORKED_OUT / FAILED_BLOCKED_TRAVEL / FAILED_OTHER,
+   lib.classifyFailedDay) + per-seed day-shape counts
+   (noTrip / success / failed) + failed-day modal attribution
+   (same 50% / >= 5 rule). If failed days are the modal day-shape
+   on >= 6/8 pilot seeds, the evidence leads with the failed-trip
+   mechanism as the ceiling's dominant day-shape — a finding that
+   motivates the NEXT arm (regrow timing, path blockage, standing
+   home), not a confirm trigger for this diag.
+2. TILE STOCK DOES NOT DEPLETE ON A SWEEP: control grove (4,3)
+   shows stock 41 before AND after a worked-out sweep, so a
+   stock>0 candidate menu does NOT mean harvestable ground.
+   NO_MORE_TARGETS is now governed by CELL availability (count of
+   un-regrown forageable detail cells across the trip-end menu,
+   read only from already-generated detail grids; null, never 0,
+   when a tile has no detail grid yet). Tile-stock counts stay as
+   descriptive fields. Pure tests cover the precedence.
+3. THE POLICY DAILY RUNS IN THE LAST DAY-PART: control daily
+   entry dayTicks is 384 on most days (3 x 128), so the effective
+   budget inside daily() is 128 ticks, not 512. Trip spans measure
+   16-32 ticks, so OUT_OF_TIME's comparison (ticks remaining at
+   trip-end vs median trip span) is unchanged in form and now
+   interpreted against a 128-tick evening budget. Also documented:
+   node travelTo costs 0 dayTicks on this substrate (all control
+   travel deltas 0) — route/travel TIME is not a day-budget cost
+   here; a blocked ROUTE (washed_out / rubble / creek refusal) is
+   a separate, non-tick mechanism, visible in travel records.
+4. STRANDING IS REAL AND SUBSTRATE-FAITHFUL: control day 4's walk
+   home from (4,2) to (4,4) refused on washed_out (walkTo picks
+   the direct d<=3 jump as its best step; on refusal, with the
+   route-around and standing-home gates OFF as the substrate
+   requires, it breaks instead of hopping via (4,3)), and the
+   scholar then stays at (4,2) for 9 days (returnToVillage fires
+   only on the eventual homecoming, "9 days gone"). The trip's
+   walkHome target is its ORIGIN, so a stranded scholar walks
+   home to its away tile. This is reported as day-shape context
+   (ended-away trip-end fallback reason), not as a classified
+   stopping reason — the next arm, not this diag, judges it.
+
+Control cross-check (not a judged result): the shelling baseline
+driver on the SAME seed 51509 also records 7 live returns and
+unload 0, so the low return count is seed behavior, not driver
+contamination; live-det on 51509 is byte-identical across runs.
+
 ## Commit order (this file + skeletons BEFORE any judged sim)
 
 This prereg, scripts/haulsize-b-lib.js, scripts/haulsize-b-driver.js,

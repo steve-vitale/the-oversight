@@ -58,6 +58,19 @@ function pure() {
   check('classify NO_TRIP', lib.classifyTripDay({ forageSuccesses: 0, forageAttempts: 0 }) === 'NO_TRIP');
   check('classify failed-only UNCLASSIFIED', lib.classifyTripDay({ forageSuccesses: 0, forageAttempts: 2, forageFailures: [] }) === 'UNCLASSIFIED');
   check('classify second-trip UNCLASSIFIED', lib.classifyTripDay({ ...base, secondTripAttempted: true }) === 'UNCLASSIFIED');
+  // Amendment v2: cell availability governs NO_MORE_TARGETS.
+  check('classify cell-availability NO_TARGETS beats stocked>0',
+    lib.classifyTripDay({ ...base, stockedRemainingAtTripEnd: 5, availableCellsRemainingAtTripEnd: 0 }) === 'NO_MORE_TARGETS');
+  check('classify cell-availability>0 beats stocked==0',
+    lib.classifyTripDay({ ...base, stockedRemainingAtTripEnd: 0, availableCellsRemainingAtTripEnd: 12 }) === 'POLICY_ONE_TRIP');
+  // Failed-day classification (amendment v2 secondary).
+  check('failed WORKED_OUT', lib.classifyFailedDay({ forageSuccesses: 0, forageAttempts: 2,
+    forageFailures: [{ say: 'This patch is worked out — step on.' }, { say: 'Nothing left to take here today.' }] }) === 'FAILED_WORKED_OUT');
+  check('failed BLOCKED_TRAVEL', lib.classifyFailedDay({ forageSuccesses: 0, forageAttempts: 0,
+    travels: [{ moved: false, blocked: 'creek' }] }) === 'FAILED_BLOCKED_TRAVEL');
+  check('failed OTHER on mixed say', lib.classifyFailedDay({ forageSuccesses: 0, forageAttempts: 1,
+    forageFailures: [{ say: 'Your pack is full.' }] }) === 'FAILED_OTHER');
+  check('failed null on success', lib.classifyFailedDay({ forageSuccesses: 1, forageAttempts: 1 }) === null);
   // attributeSeed.
   const mk = (cats) => cats.map((c) => ({ category: c }));
   const a1 = lib.attributeSeed(mk(['POLICY_ONE_TRIP', 'POLICY_ONE_TRIP', 'POLICY_ONE_TRIP', 'OUT_OF_TIME', 'PACK_FULL']));
