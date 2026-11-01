@@ -113,7 +113,7 @@ async function main() {
   if (!files.length) { console.error('usage: analyze-routeblock-b.js <jsonl> [--compare <jsonl2>]'); process.exit(2); }
   const load = (f) => fs.readFileSync(f, 'utf8').split('\n').filter((l) => l.trim()).map((l) => JSON.parse(l));
   const bands = files.map((f) => {
-    const rows = load(f).map(analyzeSeedPatch);
+    const rows = load(f).map(analyzeSeedRouteblock);
     return { file: f, policy: rows[0] ? rows[0].policy : null, seeds: rows, band: bandSummary(rows) };
   });
   const out = { bands };
