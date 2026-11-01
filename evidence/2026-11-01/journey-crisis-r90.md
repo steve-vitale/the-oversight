@@ -329,5 +329,17 @@ failure is attributable to r90.
   a loop-run touch.
 
 ## Closeout
-[PENDING — commit hash, merge, rotation verification, lock deletion
-to be filled after landing.]
+- Commit c3eb9a19c (rebased from e53c6bf4 after the Loop B 0435Z
+  coordinator landing moved master mid-run; my 3 files verified
+  byte-identical across the rebase, and a post-rebase seed-9701
+  re-run diffed byte-identical to the panel JSON, so the panel
+  stands on the new master). Merged locally via --ff-only, pending
+  ship — no version bump, no push (the ship loop owns those).
+- Rotation-b advanced 6 -> 7, verified by re-read. Next Lane B leg
+  is 7 (succession).
+- Lane B lock (2026-11-01T04:58:35Z) deleted at closeout. Worktree
+  journey2-crisis-r91 released and removed; branch deleted.
+- Safe-commit index clobber hit the first commit (staged deletions
+  + untracked phantoms, the known class) and was repaired via
+  HEAD-blob cacheinfo before any rebase or merge; verified clean
+  (status empty, diff empty, hashes match).
