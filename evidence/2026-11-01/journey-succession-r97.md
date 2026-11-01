@@ -434,20 +434,12 @@ r96's seven, no NEW failure:
   and (f) pass; (e) fails on the stale-baseline drift documented
   above.
 
-## Closeout
+## Closeout (recovered and landed by the main session — the 14:00 coordinator timed out after committing the panel)
 
-- Commit (driver + analyzers + proof test + prereg + panel
-  evidence + this note; instrument only, zero src/js).
-  Safe-commit index clobber check + `git read-tree HEAD` resync
-  before any rebase or merge, per standing lessons; verified
-  clean (status empty, diff empty, hashes match).
-- Rebased onto current master if it moved during the run;
-  post-rebase panel-JSON diff check (panel stands only if the
-  re-run diffs byte-identical — otherwise the panel is re-run,
-  not claimed).
-- Merged locally via --ff-only, pending ship — no version bump, no
-  push (the ship loop owns those).
-- Rotation-b advanced 7 -> 4, verified by re-read. Next Lane B leg
-  is 4 (endgame).
-- Lane B lock deleted at closeout. Worktree
-  journey2-succession-r97 released and removed; branch deleted.
+- Panel commit c8fc90fd6 (113 files, instrument only, zero src/js), rebased onto 9d34c16fa → 57050ce1f, then onto current master 3141390ef → 801126e4b (final tip at merge).
+- Checkquick 283 passed, 7 failed in 658s — the same seven standing families as r96 (measurement-proof-update, measurement-workflow, mobile-combat-cadence, occupation-panels, phone-frame-proof, establishment-r20-fixes, capable-bot), zero attributable to r97.
+- Post-rebase proof, run by the main session on the rebased tree: seed-29161 trajectory re-run (POST_DAYS=70, EARLY_KILL_DAY=40, kill dplus 20/20/10/10), exit 0 in ~17s. Compared against the panel JSON: same byte count (886,586); 87 differing JSON leaves, ALL src/js/game.js line-number shifts (+17, from the build arms' game.js edits between the panel base and the rebase base); zero event or outcome differences. The trajectory reproduces exactly — the panel stands as measured (bump-log line numbers refer to the panel base's game.js). The final rebase (9d34c16fa → 3141390ef) adds docs/scripts only, 0 src/js, so the game code is identical to the proof tree. The re-run left the worktree clean; panel evidence intact.
+- Findings: week-1 second death FOUND (29161: Asher d10 → Carmine d12); CHAIN5 3/3 (29161 chain Asher→Carmine→…→Liam→Yuki, fifth death d+62); naming any-recent informative; MIX grief-complete; two villages scattered hungry (29163, 29165). Own proof test (a)–(d) and (f) pass; (e) fails on documented stale-baseline drift (not fixed — outside this leg's claim).
+- Merged locally via --ff-only, pending ship — no version bump, no push (the ship loop owns those).
+- Rotation-b advanced 7 -> 4, verified by re-read. Next Lane B leg is 4 (endgame).
+- No playtest-loop-2.lock existed at closeout (already gone — see the pre-flight note on the r96 closeout deleting this run's fresh lock); nothing lock-related was deleted, and the live Loop B entry-window run was untouched. Worktree journey2-succession-r97 released and removed; branch deleted.
