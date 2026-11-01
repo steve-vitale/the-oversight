@@ -199,6 +199,30 @@ Panel (MEASUREMENT.md §15): NOT APPLICABLE — single-base DIAG
 census, no before/after comparison exists in this arm; none
 fabricated.
 
+## Amendment 1 (appended BEFORE any judged sims, from a scratch smoke run)
+
+A single-seed smoke run (95304, output to scratch only, never judged,
+never split into evidence) confirmed the instrument end to end: 29
+herald gate refusals, each with exactly 1 captured say line (the
+arithmetic line, have 0 / need 10), `captureErrs` 0, and the gate's
+own outcomes record reconciling 29 refused of 29. It also surfaced
+one refinement, fixed here before any judged data exists:
+
+Non-titan return-nulls are NOT always gate refusals. On 95304 the
+moderator (day 129) and murkcap (day 149) return-null starts each
+speak a full fight-dissolve narration ("It comes apart — no one in
+reach, no one chasing") AND resolve with a joined tbEnd (`routed`)
+the same day — a fight that began and dissolved, not a refused
+audience. The return-null heuristic is valid for titans (herald
+refusals carry no tbEnd), but over-counts for non-titans. Handling:
+the analyzer reports `dissolvedSelf` per streak (tbEnds joined to
+refused starts) and EXCLUDES dissolved self-resolutions from
+`foughtAfter`, so a streak's next-class reflects a genuinely later
+event. The reproduction leg is UNCHANGED (it counts by the tbStarts
+definition, identical to vet2mfg's counting). The GO bar is
+unchanged — this amendment only sharpens what "what happens next"
+means for `other` streaks.
+
 ## Metric review (mandatory section in the evidence file)
 
 Doubts go here, never into a re-score. Known in advance: (a) the
