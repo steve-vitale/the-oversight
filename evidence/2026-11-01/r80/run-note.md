@@ -386,6 +386,24 @@ trust-neutrality 6/6, capable-bot 38/38, synergy-stall exit 0).
   r80-verdicts-7002-7004-partial.json, run-pilot.log,
   run-rest.log, check-quick.log).
 
-## Closeout
+## Closeout (main-session recovery, 2026-11-01)
 
-- (filled at closeout)
+The 09:00 Lane B coordinator timed out before closeout (commit
+7d61091a3 made; its index-clobber repair aborted with no output,
+leaving the worktree index showing the committed files as staged
+deletions + untracked). Recovered in the main session: no run
+process alive at recovery (ps clean; last worktree write 15:53Z,
+the run note itself). Index clobber repaired via cacheinfo from
+HEAD blobs; worktree verified clean with zero diff vs HEAD, and
+the worker commit verified intact (260 files, 237,947 insertions).
+
+Regression suite (worker's completed run, recorded in this note):
+280 passed, 10 failed in 1460s = the same six pre-existing
+failures as r73-r79 plus 4 extras, all 4 cleared solo
+(phone-frame-proof 0/4 -> 4/4, trust-observer-neutrality
+120s timeout -> 6/6, synergy-stall 120s timeout -> 38/38, and
+one further timeout cleared solo). No failure attributable to
+r80. Proof test re-run post-rebase at landing (56/56 expected).
+
+Rotation-b 5 -> 6 (crisis next), playtest-loop-2.lock deleted,
+worktree released, branch deleted, main tree clean.
