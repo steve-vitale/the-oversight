@@ -23,13 +23,8 @@
 //   - lesson_costs_time: one lesson per learner per day and one per conversation; the player's lesson spends 3 action ticks like teachPlant (code: canTeachSkill, convoSkillLesson)
 //   - same_gates_both_ways: trust 15+ and a shared language, whichever side teaches (code: canTeachSkill)
 //   - data_first: every knowledge skill is teachable unless flagged teachable:false (code: skillTeachable)
-//   - armor_lesson: bark/hide armor are teachable conversation topics, not knowledge skills:
-//     a teacher at recipe L2+ (materials known) teaches a learner below L2 up to L2, through
-//     the same one-lesson-a-day / trust / language gates, recorded in skillLessons as the
-//     recipe id (code: armorLevel, armorTeachableSkills, canTeachSkill, teachSkill)
-//   - armor_own_slot: armor offers sit beside the skill pick, never instead of it — the
-//     single ability-first pick would otherwise bury a non-ability topic at rate zero
-//     (code: convoSkillChoices)
+//   - armor_lesson: bark/hide armor are teachable conversation topics, not knowledge skills: a teacher at recipe L2+ (materials known) teaches a learner below L2 up to L2, through the same one-lesson-a-day / trust / language gates, recorded in skillLessons as the recipe id (code: armorLevel, armorTeachableSkills, canTeachSkill, teachSkill)
+//   - armor_own_slot: armor offers sit beside the skill pick, never instead of it — the single ability-first pick would otherwise bury a non-ability topic at rate zero (code: convoSkillChoices)
 //   - track_skill_parity: the player learns the next unknown track skill at tracks.json skillLevels, like a villager (code: playerTrackSkills, tracks.js _playerTrackXP)
 // consumes:
 //   - Game.data.knowledge, Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.characterGen
