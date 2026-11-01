@@ -499,6 +499,14 @@
         // a reader can verify the gate without re-deriving it.
         committedFinish: false, committedRounds: 0, twoblowLastTwo: null, twoblowSum: null,
         twoblowCommitMhp: null, twoblowCommitVhpFrac: null, twoblowCommitSum: null,
+        // CONTACTFINISH (sim-contactfinish-a, 2026-10-31): audit fields
+        // for the contact-finish rule at the volley-break block below.
+        // Attempted = the rule fired (a closing strike was rolled);
+        // Kill = that strike dropped the beast. Read by the
+        // contactfinish recorder; no engine code reads them back.
+        contactFinishAttempted: false, contactFinishKill: false,
+        contactFinishWeapon: null, contactFinishDmg: null,
+        contactFinishInstrument: null, contactFinishBeastHp: null,
         // CHORUS-HOLD (sim-chorus-a, 2026-10-31): audit count of
         // dance-round holds at the break check (see the break check
         // below). A committed fighter holds through a downbeat
@@ -876,6 +884,12 @@
       // - Determinism: every draw goes through lroll/RR (contest engine's
       //   seeded stream), so seeded contest fights stay deterministic.
       rec.volley = null;
+      // CONTACTFINISH (sim-contactfinish-a, 2026-10-31): the fighter's
+      // ammo count BEFORE the volley spends any of it. The
+      // contact-finish universe judges a ranged weapon by ammo held
+      // at contact (ammoAtContact), not by what survives a volley of
+      // misses; this variable carries that count to the break block.
+      var _cfAmmoBefore = null;
       try {
         var _rw = (S.equipment && S.equipment.rangedWeaponOf)
           ? S.equipment.rangedWeaponOf(vp, this.data.items) : null;
@@ -902,6 +916,7 @@
             else if (_ent) { _eid = _ent.itemId || _ent.id; _mat = _ent.material; _u = _ent.units || 1; }
             if (_eid === _ammoId || _mat === _ammoId) { _ammoIdx.push(_ai); _ammoN += _u; }
           }
+          _cfAmmoBefore = _ammoN;
           var _maxShots = clamp(1 + Math.floor(_range / Math.max(1, mSpeed)), 1, 4);
           var _shots = Math.min(_ammoN, _maxShots);
           if (_shots < 1) {
@@ -972,8 +987,96 @@
           rec.corneredHold = true;
           rec.log.push(vName + ' and their party have ' + mPhrase + ' cornered at the treeline — broken, but it cannot simply slip away before a blow.');
         } else {
-          rec.outcome = 'mFlee';
-          rec.log.push(vName + ' drove ' + mPhrase + ' off with the bow — it broke before it ever closed.');
+          // CONTACTFINISH (sim-contactfinish-a, 2026-10-31): a beast met
+          // already below its break line used to flee for free, and the
+          // narration always credited "the bow" — including fighters
+          // holding no bow, or a bow with no arrows (spikecontact:
+          // 20/20 drive-off lines lie, 13/13 on this arm's baseline
+          // band). Two changes in this branch, and nowhere else:
+          // (1) HONEST NARRATION, every wave: a remaining drive-off
+          // names the weapon actually held, or credits none at all.
+          // The old line's shapes ("drove ... off", "broke before it
+          // ever closed") are kept so log analyzers still recognize
+          // a drive-off; only the false bow credit is removed.
+          // (2) THE FINISH STRIKE, wave >= 3 only: when the fighter
+          // holds a finish instrument (coordinator decision,
+          // spear-counts-as-melee: equipped/carried melee, a spear
+          // in the ranged slot — weapon.type 'melee', range 2 — or
+          // a ranged weapon with ammoAtContact > 0) and no volley
+          // damage has landed (a true contact meeting, mDealt 0),
+          // the fighter instead spends one real action — closes
+          // and strikes, one plain tactical roll lroll([4+wb, 8+wb])
+          // with the engine's own wb fold-in, no ability multipliers,
+          // no ally strike, no second strike. If it kills, the
+          // beast dies (vKill, pack convention as for a volley
+          // kill, same settlement path as any vKill). If it does
+          // not kill, the beast flees as before and the fight
+          // ENDS — no chase, no continued round. THE BEAST CANNOT
+          // HIT BACK: it is already below its break line and
+          // turning to run, which is why the old rule gave it a
+          // free flight; no round runs, so no monster attack phase
+          // exists in this exchange, and the fighter takes no
+          // damage from an attempt. The break line, the 60% HP
+          // gate, the twoblow rule, chorus-hold, and sealed arenas
+          // are all untouched; wave-1/2 meetings keep their outcome
+          // and gain only the honest line.
+          var _cf = null;
+          try {
+            var _cfEq = (S.equipment || {});
+            var _cfDefs = this.data.items || [];
+            var _cfDefOf = function (id) { for (var _di2 = 0; _di2 < _cfDefs.length; _di2++) if (_cfDefs[_di2].id === id) return _cfDefs[_di2]; return null; };
+            var _cfIsRanged = function (d) { return !!(_cfEq.isRangedWeapon ? _cfEq.isRangedWeapon(d) : (d && d.weapon && ((d.weapon.range || 1) > 1))); };
+            var _cfMeleeEnt = _cfEq.meleeWeaponOf ? _cfEq.meleeWeaponOf(vp, _cfDefs) : (vp.equipped && (vp.equipped.melee || vp.equipped.weapon));
+            var _cfMeleeDef = _cfMeleeEnt ? _cfDefOf(_cfMeleeEnt.itemId || _cfMeleeEnt.id) : null;
+            var _cfRangedEnt = _cfEq.rangedWeaponOf ? _cfEq.rangedWeaponOf(vp, _cfDefs) : (vp.equipped && vp.equipped.ranged);
+            var _cfRangedDef = _cfRangedEnt ? _cfDefOf(_cfRangedEnt.itemId || _cfRangedEnt.id) : null;
+            var _cfCarried = null;
+            var _cfVitems = vp.items || [];
+            // Carried means in the pack but NOT equipped: equipped items
+            // also sit in the pack list, and counting them as "carried"
+            // would swallow the spear-in-ranged-slot class below (an
+            // equipped spear would label 'melee' instead of 'spear').
+            var _cfMeleeId = _cfMeleeEnt ? (_cfMeleeEnt.itemId || _cfMeleeEnt.id) : null;
+            var _cfRangedId = _cfRangedEnt ? (_cfRangedEnt.itemId || _cfRangedEnt.id) : null;
+            for (var _ci = 0; _ci < _cfVitems.length && !_cfCarried; _ci++) {
+              var _ce = _cfVitems[_ci];
+              var _cid = (typeof _ce === 'string') ? _ce : (_ce && (_ce.itemId || _ce.id));
+              if (!_cid || _cid === _cfMeleeId || _cid === _cfRangedId) continue;
+              var _cd = _cfDefOf(_cid);
+              if (!_cd || !_cd.weapon) continue;
+              if (_cd.weapon.type === 'melee' || !_cfIsRanged(_cd)) _cfCarried = _cd;
+            }
+            if (_cfMeleeDef) _cf = { kind: 'melee', def: _cfMeleeDef };
+            else if (_cfCarried) _cf = { kind: 'melee', def: _cfCarried };
+            else if (_cfRangedDef && _cfRangedDef.weapon && _cfRangedDef.weapon.type === 'melee') _cf = { kind: 'spear', def: _cfRangedDef };
+            else if (_cfRangedDef && _cfAmmoBefore != null && _cfAmmoBefore > 0) _cf = { kind: 'ranged', def: _cfRangedDef };
+          } catch (e) { _cf = null; }
+          var _cfW = _cf ? String(_cf.def.name || 'a weapon') : null;
+          if (_cfW) _cfW = _cfW.charAt(0).toLowerCase() + _cfW.slice(1);
+          if (wave >= 3 && _cf && rec.mDealt === 0 && !opts.noFlee && members[0].hp > 0) {
+            var _cfVd = lroll([4 + wb, 8 + wb]);
+            rec.contactFinishAttempted = true;
+            rec.contactFinishWeapon = _cf.def.name || null;
+            rec.contactFinishInstrument = _cf.kind;
+            rec.contactFinishBeastHp = members[0].hp;
+            rec.contactFinishDmg = _cfVd;
+            members[0].hp -= _cfVd; rec.mDealt += _cfVd;
+            if (members[0].hp <= 0) {
+              rec.outcome = 'vKill';
+              for (var _cj = 0; _cj < members.length; _cj++) { members[_cj].hp = 0; members[_cj].alive = false; }
+              rec.contactFinishKill = true;
+              rec.log.push(vName + ' does not let it slip away — they close in and strike with the ' + _cfW + ' for ' + _cfVd + ' — ' + mPhrase + ' falls. (Contact finish)');
+            } else {
+              rec.outcome = 'mFlee';
+              rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' breaks away all the same.');
+            }
+          } else if (_cf) {
+            rec.outcome = 'mFlee';
+            rec.log.push(vName + ' drove ' + mPhrase + ' off with the ' + _cfW + ' — it broke before it ever closed.');
+          } else {
+            rec.outcome = 'mFlee';
+            rec.log.push(vName + ' drove ' + mPhrase + ' off — it broke before it ever closed.');
+          }
         }
       }
 
