@@ -403,9 +403,15 @@ this new failure are reported as-is.
   a loop-run touch.
 
 ## Closeout
-- Commit [COMMIT-TO-FILL] (driver + analyzer + this note;
-  instrument only, zero src/js). Safe-commit index clobber check
-  performed before any rebase or merge (see commit step).
+- Commit b1373efbc (driver + analyzer + this note; instrument only,
+  zero src/js). Safe-commit index clobber struck the commit (3
+  files staged-deleted in the worktree index, files intact);
+  repaired via `git read-tree HEAD` resync before any rebase or
+  merge; verified clean (status empty, diff empty, hashes match).
+- Rebased onto master be352e2cb (Loop A round 1742Z coordinator
+  evidence landed mid-run); post-rebase seed-9811 re-run diffed
+  byte-identical to the panel JSON, so the panel stands on the new
+  master.
 - Merged locally via --ff-only, pending ship — no version bump, no
   push (the ship loop owns those).
 - Rotation-b advanced 6 -> 7, verified by re-read. Next Lane B leg
