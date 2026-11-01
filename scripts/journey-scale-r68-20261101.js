@@ -220,6 +220,7 @@ function runConversation(day, vid) {
   const fp = path.join(EVIDIR, `journey-scale-r68-transcript-${_currentSeed}-day${day}.txt`);
   const L = [];
   const log = (s) => L.push(s);
+  let gossipPicks = 0; // r68 fix: MUST live outside the try — the try-scoped let was invisible at the post-try log line, throwing ReferenceError and losing every transcript.
   try {
     const nm = vname(vid);
     const p = person(vid);
@@ -239,7 +240,6 @@ function runConversation(day, vid) {
     log(`THEM: ${r0.line || '(no line)'}`);
     let r = r0;
     const pickSt = { consec: 0, deflected: false, gossipDone: false }; // R33 picker-cap state (+r68 gossip-first flag)
-    let gossipPicks = 0;
     const convoAccepts = []; // R46: one entry per betrayal:accept pick IN THIS CONVO, armed captured BEFORE the pick is played
     for (let turn = 0; turn < 8; turn++) {
       let choices = (r.choices && r.choices.length) ? r.choices : null;
