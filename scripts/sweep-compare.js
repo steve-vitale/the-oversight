@@ -80,6 +80,11 @@ try { const p = require('./policies/spearfund'); POLICY_REGISTRY['spearfund-lead
 // (§15) can build its column. Additive; zero behavior change to existing
 // entries (the variant stays default-OFF: nothing loads it unless named).
 try { const m = require('./policies/competent-multisweep-b'); POLICY_REGISTRY['competent-multisweep-b'] = m.multisweep; } catch (e) {}
+// patchrot instrument (sim-patchrot-b, 2026-11-01, Loop B food-economy):
+// the competent + patch-rotation policy, registered so the balanced panel
+// (§15) can build its column. Additive; zero behavior change to existing
+// entries (the variant stays default-OFF: nothing loads it unless named).
+try { const pr = require('./policies/competent-patchrot-b'); POLICY_REGISTRY['competent-patchrot-b'] = pr.patchrot; } catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
