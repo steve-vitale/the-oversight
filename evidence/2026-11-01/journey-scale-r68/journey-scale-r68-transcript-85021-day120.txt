@@ -1,0 +1,25 @@
+(pre-talk seed: none; takenWantDay=94; convoCount=15)
+=== seed 85021 day 120 — conversation with Víctor (gen_gpgyqym) ===
+occupation=librarian temperament=intense trust=90 dead=false
+want: seek_taken (stage 0)
+open thread: grief fromSeed=false
+picker: control gossip-first
+
+THEM: "Hear me out — It's quiet today. Wrong kind of quiet."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. Víctor doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Miguel walked out of The Exchange. Alive. That's the whole story and it's enough."
+YOU: [dlg:more] "Tell me more."
+THEM: "Aria walked out of The Exchange. Alive. That's the whole story and it's enough."
+YOU: [dlg:react] (listen)
+THEM: "Did you hear? You won The Exchange on the cameras. People are still talking about it. That's my read."
+YOU: [dlg:more] "Tell me more."
+THEM: "People are talking about me. Take it for what it's worth."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread gossip
+closing line: "Talking helps. A little. Thank you."
+(gossip picks this sitting: 1)

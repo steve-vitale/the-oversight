@@ -1,0 +1,27 @@
+(pre-talk seed: curious planted d120; takenWantDay=0; convoCount=14)
+=== seed 85023 day 120 — conversation with Ryan (gen_66bxwgt) ===
+occupation=locksmith temperament=withdrawn trust=90 dead=false
+want: curious (stage 0)
+open thread: grief fromSeed=true
+picker: control gossip-first
+
+THEM: "Don't mind me. Today's just heavy."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Lounes headed out to see what's out there."
+YOU: [dlg:more] "Tell me more."
+THEM: "Miguel headed out to check the snares."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "Miguel is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Pavel? A bush pilot, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "Erin drank the creek water straight. No boiling. Nothing happened. Nothing."
+YOU: (leave)
+pre-close: want curious stage 0 thread gossip
+closing line: "...Thanks for being here. That's all."
+(gossip picks this sitting: 1)
