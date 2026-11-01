@@ -367,3 +367,6 @@ try { const rb = require('./policies/competent-routeblock-b'); POLICY_REGISTRY['
 // (§15) can build its column. Additive; zero behavior change to existing
 // entries (the variant stays default-OFF: nothing loads it unless named).
 try { const fr = require('./policies/competent-fertrot-b'); POLICY_REGISTRY['competent-fertrot-b'] = fr.fertrot; } catch (e) {}
+// entrywindow instrument (sim-entrywindow-b, 2026-11-01, Loop B food-economy):
+// additive; zero behavior change to existing entries.
+try { const ew = require('./policies/competent-entrywindow-b'); POLICY_REGISTRY['competent-entrywindow-b'] = ew.entrywindow; } catch (e) {}
