@@ -349,4 +349,14 @@ families plus this flake are reported as-is.
   a loop-run touch.
 
 ## Closeout
-CLOSEOUT-PLACEHOLDER
+- Commit c60a19ac9 (driver + analyzer + this note; instrument only,
+  zero src/js). Safe-commit index clobber struck the commit (3
+  files staged-deleted in the worktree index, files intact);
+  repaired via HEAD-blob cacheinfo before any rebase or merge;
+  verified clean (status empty, diff empty, hashes match).
+- Merged locally via --ff-only, pending ship — no version bump, no
+  push (the ship loop owns those).
+- Rotation-b advanced 6 -> 7, verified by re-read. Next Lane B leg
+  is 7 (succession).
+- Lane B lock (2026-11-01T11:01:20Z) deleted at closeout. Worktree
+  journey2-crisis-r93 released and removed; branch deleted.
