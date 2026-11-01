@@ -33,67 +33,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const BREAK_MARKER = 'breaks — wounded past its line';
-const COMMIT_MARKER = '(Committed finish, two-blow)';
-
-// Outcome lines that prove a captured log covers the fight's end.
-const OUTCOME_RE = /(breaks — wounded past its line|turns and runs|The lead falls|flees|runs while running still works|stands down|backs off, disengaging|already dead|gave it room|drove .* off with the bow)/;
-function logTruncated(lines) {
-  const hasOutcome = lines.some(l => OUTCOME_RE.test(l));
-  const lastIsRound = lines.length > 0 && /^R\d+:/.test(lines[lines.length - 1]);
-  return lastIsRound && !hasOutcome;
-}
-
-// Parse lead strikes from a fight log. Returns { strikes: [{round, dmg}],
-// truncated: bool, damageSum: number|null }. truncated is computed on
-// the log AS PASSED (callers passing a pre-commit slice must compute
-// truncation on the full log instead — see parseStrikesBeforeCommit).
-// damageSum = sum of ALL parsed damage-to-lead components (lead
-// strikes + ally strikes + volley hits + ambush opener), for the
-// reconciliation validation used where engine twoblow fields are
-// absent (baseline legs, pre-rule code).
-function parseLeadStrikes(log) {
-  const lines = Array.isArray(log) ? log.map(String) : [];
-  const byRound = new Map(); // round -> first strikes-for dmg
-  const order = [];
-  let damageSum = 0;
-  for (const line of lines) {
-    let m = /^R(\d+): (.+?) strikes for (\d+)/.exec(line);
-    if (m) {
-      const round = parseInt(m[1], 10);
-      const dmg = parseInt(m[3], 10);
-      damageSum += dmg;
-      if (dmg <= 0) continue; // not a proven blow
-      if (byRound.has(round)) continue; // ally's same-round strike
-      byRound.set(round, dmg);
-      order.push({ round, dmg });
-      continue;
-    }
-    // Ally extra strikes ("strikes again, louder — N", "strikes again for N").
-    m = /^R\d+: .+? strikes again(?:, louder)? — (\d+)/.exec(line) || /^R\d+: .+? strikes again for (\d+)/.exec(line);
-    if (m) { damageSum += parseInt(m[1], 10); continue; }
-    // Volley hits and the ambush opener.
-    m = /loosed — it takes .* for (\d+)/.exec(line) || /Opening strike for (\d+)/.exec(line);
-    if (m) { damageSum += parseInt(m[1], 10); continue; }
-  }
-  return { strikes: order, truncated: logTruncated(lines), damageSum, lines: lines.length };
-}
-
-// Strikes strictly before the LAST commit line (or null if no commit
-// line). The engine overwrites twoblowCommitMhp/twoblowCommitSum at
-// every re-fire, so the recorded engine truth describes the LAST
-// firing, not the first — the parse must match that moment.
-// Truncation is judged on the FULL log, never on the slice: the
-// slice ends at the commit line, which is not an outcome line.
-function parseStrikesBeforeCommit(log) {
-  const lines = Array.isArray(log) ? log.map(String) : [];
-  let idx = -1;
-  for (let i = 0; i < lines.length; i++) if (lines[i].indexOf(COMMIT_MARKER) >= 0) idx = i;
-  if (idx < 0) return null;
-  const sliced = parseLeadStrikes(lines.slice(0, idx));
-  sliced.truncated = logTruncated(lines);
-  return sliced;
-}
+const P = require('./spikecontact-parse-20261031.js');
+const parseLeadStrikes = P.parseLeadStrikes;
+const parseStrikesBeforeCommit = P.parseStrikesBeforeCommit;
+const BREAK_MARKER = P.BREAK_MARKER;
 
 function sumLastTwo(strikes) {
   if (!strikes || strikes.length < 2) return null;
