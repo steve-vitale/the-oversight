@@ -20178,7 +20178,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let moved = false;
       for (const m of this.worldMonsters()) {
         if (Math.random() > 0.35) continue;
-        const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+        // HERALD STEER (build-herald-steer 2026-11-01): the Herald seeks
+        // the village it watches. Same move chance, same one-tile step —
+        // but half the time a Herald step is drawn from the Haven-ward
+        // directions instead of all four. A bias, not a homing missile:
+        // it still wanders, and the safe-tile block below still keeps it
+        // off Haven's own tile. The target is Haven's map tile
+        // (state.village.px/py, the convention the rest of this file
+        // uses) — a place, never a roster or list of people.
+        let dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+        if (m.id === 'herald') {
+          const hx = (this.state.village && this.state.village.px != null) ? this.state.village.px : 4;
+          const hy = (this.state.village && this.state.village.py != null) ? this.state.village.py : 4;
+          const dHere = Math.abs(m.tx - hx) + Math.abs(m.ty - hy);
+          const ward = dirs.filter(function (dd) {
+            return Math.abs(m.tx + dd[0] - hx) + Math.abs(m.ty + dd[1] - hy) < dHere;
+          });
+          if (ward.length && Math.random() < 0.5) dirs = ward;
+        }
         const d = dirs[Math.floor(Math.random() * dirs.length)];
         const nx = m.tx + d[0], ny = m.ty + d[1];
         if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue; // 9x9 world (2026-10-07)
