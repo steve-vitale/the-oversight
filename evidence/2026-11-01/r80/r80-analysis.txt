@@ -1,0 +1,364 @@
+SEEDS: 7001 140d, 7002 141d, 7003 141d, 7004 141d
+  funnel seed 7001: {"offers":48,"forageOffers":6,"otherFavorOffers":42,"accepts":6,"acceptAttempts":6,"waits":6,"starts":6,"startBlocked":5,"forages":6,"forageNodeBarren":3,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":4,"retryAssigned":4,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":6,"keptMatched":1,"keptMatchedStrict":1}
+  funnel seed 7002: {"offers":12,"forageOffers":5,"otherFavorOffers":7,"accepts":5,"acceptAttempts":5,"waits":8,"starts":1,"startBlocked":9,"forages":1,"forageNodeBarren":1,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":1,"delivers":1,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":1,"keptMatched":0,"keptMatchedStrict":0}
+  funnel seed 7003: {"offers":29,"forageOffers":8,"otherFavorOffers":21,"accepts":7,"acceptAttempts":7,"waits":8,"starts":7,"startBlocked":6,"forages":6,"forageNodeBarren":12,"forageBarren":2,"forageBarrenTravel":0,"forageBarrenNode":2,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":6,"keptMatched":2,"keptMatchedStrict":2}
+  funnel seed 7004: {"offers":60,"forageOffers":9,"otherFavorOffers":51,"accepts":9,"acceptAttempts":9,"waits":3,"starts":3,"startBlocked":11,"forages":2,"forageNodeBarren":25,"forageBarren":7,"forageBarrenTravel":0,"forageBarrenNode":7,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":1,"talks":2,"delivers":1,"deliverBlocked":8,"completeOutings":0,"completeOutingsEvents":1,"keptMatched":0,"keptMatchedStrict":0}
+
+DAWN ATTEMPTS pooled: 48 (starts 17, blocked 31, waits 25)
+BLOCKED by adjFail: {"away":14,"no-micro-pos":9,"node-elsewhere":7,"micro-far":1}
+BLOCKED by status reason: {"Move next to your partner, on the same side of the Haven door.":31}
+BLOCKED with NO diag: 0 / 31
+DAWN CENSUS over 48 diag-carrying attempts:
+  playerAtHome: 39
+  partnerNodeAtHome: 34
+  insideMatch (partnerInside===playerInside): 42
+  partnerAway: 14
+  partnerPos null: 25
+  partnerNode defaulted (no nodePos): 0
+
+FORAGE-NODE-BARREN pooled: 41
+  by targetCanForage: {"true":33,"false":8}
+FORAGE-CELL-BLOCKED pooled: 82
+  by status reason: {"Finish the fight before foraging together.":8,"You carry 0 kcal; your partner carries 0 kcal. Nothing left to take here today — walk to another green patch.":56,"That outing belonged to the previous bearer. It is not your promise.":18}
+
+PER-FAVOR TIMELINES (accepted forage favors):
+  {"seed":7001,"vidName":"Ivy","favorId":"favor-ivy_wang-9-2","acceptDay":9,"meetDay":10,"attempts":1,"startDay":10,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":10,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":7001,"vidName":"Vasyl","favorId":"favor-vasyl_shevchenko-9-3","acceptDay":9,"meetDay":10,"attempts":3,"startDay":11,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":11,"firstKeptStep":"deliver","adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":7001,"vidName":"Vasyl","favorId":"favor-vasyl_shevchenko-15-5","acceptDay":15,"meetDay":16,"attempts":2,"startDay":16,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":16,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":7001,"vidName":"Rosa","favorId":"favor-rosa_mendez-32-10","acceptDay":32,"meetDay":33,"attempts":1,"startDay":33,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":33,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":7001,"vidName":"Lorenzo","favorId":"favor-gen_7ptmanj-105-29","acceptDay":105,"meetDay":106,"attempts":3,"startDay":106,"forages":1,"nodeBarren":2,"delivers":1,"endState":"broken","promiseKept":"broken","startedDay":106,"deliveredKcal":720,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"no-micro-pos":2}}
+  {"seed":7001,"vidName":"Ivy","favorId":"favor-ivy_wang-126-44","acceptDay":126,"meetDay":127,"attempts":1,"startDay":127,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":127,"deliveredKcal":875,"firstKeptDay":127,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":7002,"vidName":"Zoltan","favorId":"favor-zoltan_nagy-9-4","acceptDay":9,"meetDay":10,"attempts":2,"startDay":10,"forages":1,"nodeBarren":1,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":10,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":7002,"vidName":"Zoltan","favorId":"favor-zoltan_nagy-20-5","acceptDay":20,"meetDay":21,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"broken","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1,"node-elsewhere":1}}
+  {"seed":7002,"vidName":"August","favorId":"favor-gen_utcmpfy-26-7","acceptDay":26,"meetDay":27,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":7002,"vidName":"Marcelo","favorId":"favor-gen_3bulpht-38-11","acceptDay":38,"meetDay":39,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"asked","promiseKept":"released","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":7002,"vidName":"Amina","favorId":"favor-amina_diallo-38-12","acceptDay":38,"meetDay":39,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"asked","promiseKept":"released","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"node-elsewhere":2}}
+  {"seed":7003,"vidName":"Dale","favorId":"favor-dale_hoffman-9-1","acceptDay":9,"meetDay":10,"attempts":3,"startDay":11,"forages":0,"nodeBarren":5,"delivers":0,"endState":"broken","promiseKept":"broken","startedDay":11,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"micro-far":1,"no-micro-pos":1}}
+  {"seed":7003,"vidName":"Olivia","favorId":"favor-olivia_bennett-16-3","acceptDay":16,"meetDay":17,"attempts":3,"startDay":18,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":18,"deliveredKcal":620,"firstKeptDay":18,"firstKeptStep":"deliver","adjFails":{"away":1,"no-micro-pos":1}}
+  {"seed":7003,"vidName":"Yuyun","favorId":"favor-gen_1fu7u4i-26-5","acceptDay":26,"meetDay":27,"attempts":2,"startDay":28,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":28,"firstKeptStep":"deliver","adjFails":{"away":1}}
+  {"seed":7003,"vidName":"Zoe","favorId":"favor-zoe_adams-39-7","acceptDay":42,"meetDay":43,"attempts":1,"startDay":43,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":43,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":7003,"vidName":"Jovan","favorId":"favor-jovan_milic-47-11","acceptDay":47,"meetDay":48,"attempts":1,"startDay":48,"forages":1,"nodeBarren":7,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":7003,"vidName":"Jovan","favorId":"favor-jovan_milic-57-14","acceptDay":57,"meetDay":58,"attempts":1,"startDay":58,"forages":1,"nodeBarren":0,"delivers":1,"endState":"thanked","promiseKept":true,"startedDay":58,"deliveredKcal":1765,"firstKeptDay":58,"firstKeptStep":"deliver","adjFails":{}}
+  {"seed":7003,"vidName":"Jorge","favorId":"favor-jorge_silva-62-16","acceptDay":62,"meetDay":63,"attempts":2,"startDay":63,"forages":1,"nodeBarren":0,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":63,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":7004,"vidName":"Jorge","favorId":"favor-jorge_silva-9-2","acceptDay":9,"meetDay":10,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":7004,"vidName":"Tom","favorId":"favor-tom_baker-16-8","acceptDay":16,"meetDay":17,"attempts":2,"startDay":17,"forages":1,"nodeBarren":3,"delivers":1,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":18,"firstKeptStep":"deliver","adjFails":{"no-micro-pos":1}}
+  {"seed":7004,"vidName":"Ruby","favorId":"favor-ruby_callaghan-19-9","acceptDay":20,"meetDay":21,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+  {"seed":7004,"vidName":"Chantal","favorId":"favor-chantal_mukendi-22-12","acceptDay":22,"meetDay":23,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":7004,"vidName":"Zhomart","favorId":"favor-gen_0v9hlci-27-14","acceptDay":27,"meetDay":28,"attempts":1,"startDay":28,"forages":0,"nodeBarren":22,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":7004,"vidName":"Evelyn","favorId":"favor-gen_2lkw1ml-28-15","acceptDay":28,"meetDay":29,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":"broken","promiseKept":"broken","startedDay":null,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":7004,"vidName":"Jorge","favorId":"favor-jorge_silva-47-21","acceptDay":47,"meetDay":48,"attempts":2,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":2}}
+  {"seed":7004,"vidName":"Henry","favorId":"favor-henry_zhang-123-50","acceptDay":123,"meetDay":124,"attempts":1,"startDay":124,"forages":1,"nodeBarren":0,"delivers":0,"endState":"promised","promiseKept":"released","startedDay":124,"deliveredKcal":0,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{}}
+  {"seed":7004,"vidName":"Ruby","favorId":"favor-ruby_callaghan-122-49","acceptDay":123,"meetDay":124,"attempts":1,"startDay":null,"forages":0,"nodeBarren":0,"delivers":0,"endState":null,"promiseKept":null,"startedDay":null,"deliveredKcal":null,"firstKeptDay":null,"firstKeptStep":null,"adjFails":{"away":1}}
+
+KEPT-WITHOUT-START: 0
+
+BARREN SPLIT (forage-barren days): 9
+  by barrenKind: {"node-barren":9}
+TRAVEL-BLOCKED entries: 0 (walkAttempted: 0, pathFound: 0)
+TRAVEL-WALKED entries: 2
+ESCALATIONS: ended-stuck 0, end-blocked 1
+  END-BLOCKED: {"day":132,"vid":"Henry","favorId":"favor-henry_zhang-123-50","stuckDays":7,"reason":"Your partner is no longer available for this outing."}
+
+RAW-KEPT AUDIT:
+  deliver events ok: 14; missed-line-but-kept-true (must be 0): 0
+  funnel completes: events vs snapshot per seed:
+    seed 7001: events=6 snapshot=2 keptStrict=1 keptMatched=1
+    seed 7002: events=1 snapshot=0 keptStrict=0 keptMatched=0
+    seed 7003: events=6 snapshot=2 keptStrict=2 keptMatched=2
+    seed 7004: events=1 snapshot=0 keptStrict=0 keptMatched=0
+
+POSITION HISTORY (no-micro-pos blocks: ever vs never before):
+  no-micro-pos blocks: ever-before=1 never-before=1 same-day-ambiguous=7
+    seed 7001: posHistory villagers=10
+    seed 7002: posHistory villagers=8
+    seed 7003: posHistory villagers=12
+    seed 7004: posHistory villagers=12
+
+DAWN STEP-FIRST RETRIES: 9
+  stepOk: 9, stepAssigned: 9, retryStarted: 8
+  retryStarted without stepAssigned (must be 0): 0
+  retries by dayPartAfter: {"0":9}
+  retries missing stepAssigned field (binding miss if >0): 0
+
+NO-HOME ENTRIES (must all carry walk detail): 0
+  missing walkPathFound (binding miss if >0): 0
+  by step: {}
+  by walkRefusedReason: {}
+TRAVEL-WALKED entries: 2
+TRAVEL-BLOCKED refusals naming a step (walkRefusedAt present): 0 / 0
+TRAVEL-BLOCKED missing blockage read (binding miss if >0): 0
+
+POST-ENDING STARTS (a start dated after an ending in the same seed):
+  seed 7001: no endings
+  seed 7002: no endings
+  seed 7003: no endings
+  seed 7004: ending outing-end-blocked day 132 Henry -> later starts 0 (same villager 0) NONE
+
+MIDDAY POSITIONS (no-micro-pos dawn blocks vs midday history):
+  seed 7001: midday-ever=4 midday-never=0 midday villagers=11
+  seed 7002: midday-ever=0 midday-never=1 midday villagers=10
+  seed 7003: midday-ever=2 midday-never=1 midday villagers=13
+  seed 7004: midday-ever=1 midday-never=0 midday villagers=15
+
+CASE TIMELINES (from change-only daily caseSnaps):
+  seed 7001: caseSnaps=9 distinct cases=2 mootsConvened=0
+    case case_2: d9:open -> d12:open+trial -> d14:acquitted+trial | charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=bystander known=false mootIn=null
+    case case_4: d13:open -> d16:open+trial -> d18:acquitted+trial | charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=bystander known=false mootIn=null
+  seed 7002: caseSnaps=13 distinct cases=3 mootsConvened=0
+    case case_2: d12:open -> d15:open+trial -> d17:acquitted+trial | charge=ambush accused=Ivy/Marcelo/Gertrudis target=Oliver role=bystander known=false mootIn=null
+    case case_4: d16:open -> d19:open+trial -> d21:acquitted+trial | charge=ambush accused=Ivy/Marcelo/Gertrudis target=Oliver role=bystander known=false mootIn=null
+    case case_6: d41:open -> d44:open+trial -> d46:acquitted+trial | charge=murder accused=Marcelo/Ivy/Gertrudis target=August role=bystander known=false mootIn=null
+  seed 7003: caseSnaps=9 distinct cases=4 mootsConvened=0
+    case case_2: d9:open -> d11:acquitted+trial | charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=bystander known=false mootIn=null
+    case case_4: d14:open -> d15:dormant+trial -> d16:acquitted+trial | charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null
+    case case_6: d15:open -> d17:acquitted+trial | charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null
+    case case_8: d17:open -> d18:acquitted+trial | charge=murder accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null
+  seed 7004: caseSnaps=6 distinct cases=2 mootsConvened=0
+    case case_2: d8:open -> d9:resolved+trial | charge=ambush accused=Vera/Chantal/Ruby target=Tom role=bystander known=false mootIn=null
+    case case_4: d13:open -> d15:acquitted+trial | charge=ambush accused=Vera/Chantal/Ruby target=Tom role=bystander known=false mootIn=null
+
+BETRAYAL-OFFER CENSUS + MOOT PROBE:
+  seed 7001 arm=handsoff: betrayalOfferConvos=116 distinct moot-offer cases=2 probePicks=0 mootsConvened=0
+    offer d8 Ray (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d8 Lorenzo (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d9 Ray (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d10 Rosa (bond-daily-3): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d12 Aria (bond-daily-1): betrayal:accept, betrayal:decline, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d12 Rosa (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d12 Aria (bond-daily-1): betrayal:accept, betrayal:decline, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d12 Rosa (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d12 Marat (bond-daily-3): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d13 Fahd (bond-daily-1): betrayal:accept, betrayal:decline, betrayal:press:case_2:gen_oosv2d3, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d13 Aria (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2, betrayal:accept, betrayal:decline
+    offer d13 Lorenzo (bond-daily-3): betrayal:press:case_2:gen_7ptmanj, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:hearoffer:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+  seed 7002 arm=handsoff: betrayalOfferConvos=132 distinct moot-offer cases=3 probePicks=0 mootsConvened=0
+    offer d8 August (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d9 August (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d11 Jack (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d12 Marcus (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d13 Isabella (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d13 Oliver (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d13 Ivy (bond-daily-3): betrayal:press:case_2:ivy_wang, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d14 Zoltan (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d14 Marcus (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d14 Amina (bond-daily-3): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2
+    offer d15 Amina (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d15 Gertrudis (bond-daily-2): betrayal:press:case_2:gen_4qpi6nm, betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+  seed 7003 arm=mootprobe: betrayalOfferConvos=119 distinct moot-offer cases=4 probePicks=4 mootsConvened=0
+    offer d8 Frieda (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d11 Ruben (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2, betrayal:letlie:case_2 PROBE->case_2
+    offer d11 Yuyun (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d11 Dale (bond-daily-3): betrayal:moot:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2, betrayal:accept, betrayal:decline
+    offer d14 Olivia (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d15 Yuyun (bond-daily-2): betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:moot:case_4 PROBE->case_4
+    offer d15 Olivia (bond-daily-3): betrayal:press:case_4:olivia_bennett, betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:letlie:case_4, betrayal:vote_guilty:case_4, betrayal:vote_acquit:case_4
+    offer d16 Yuyun (bond-daily-1): betrayal:moot:case_4, betrayal:vote_guilty:case_4, betrayal:vote_acquit:case_4
+    offer d16 Frieda (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d16 Olivia (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d17 Yuyun (bond-daily-1): betrayal:accept, betrayal:decline, betrayal:site:case_6, betrayal:witnesses:case_6, betrayal:investigate:case_6, betrayal:moot:case_6 PROBE->case_6
+    offer d17 Olivia (bond-daily-3): betrayal:press:case_6:olivia_bennett, betrayal:site:case_6, betrayal:witnesses:case_6, betrayal:investigate:case_6, betrayal:letlie:case_6, betrayal:vote_guilty:case_6, betrayal:vote_acquit:case_6, betrayal:moot:case_6
+    PROBE d11 Ruben case=case_2 laterTrial=true
+    PROBE d15 Yuyun case=case_4 laterTrial=true
+    PROBE d17 Yuyun case=case_6 laterTrial=true
+    PROBE d18 Frieda case=case_8 laterTrial=true
+  seed 7004 arm=mootprobe: betrayalOfferConvos=118 distinct moot-offer cases=2 probePicks=2 mootsConvened=0
+    offer d6 A man, maybe 40s, with a crooked nose (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d8 Stanley (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d9 Henry (bond-daily-1): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:moot:case_2 PROBE->case_2
+    offer d9 Jorge (bond-daily-2): betrayal:site:case_2, betrayal:witnesses:case_2, betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2
+    offer d9 Evelyn (bond-daily-3): betrayal:investigate:case_2, betrayal:letlie:case_2, betrayal:vote_guilty:case_2, betrayal:vote_acquit:case_2, betrayal:moot:case_2
+    offer d10 Maikel (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d11 Vera (bond-daily-1): betrayal:accept, betrayal:decline
+    offer d11 Zhomart (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d12 Chantal (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d13 Ruby (bond-daily-2): betrayal:accept, betrayal:decline
+    offer d13 Stanley (bond-daily-3): betrayal:accept, betrayal:decline
+    offer d14 Chantal (bond-daily-1): betrayal:press:case_4:chantal_mukendi, betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:moot:case_4 PROBE->case_4
+    PROBE d9 Henry case=case_2 laterTrial=true
+    PROBE d14 Chantal case=case_4 laterTrial=true
+
+AWAY CENSUS (start-blocks with adjFail=away):
+  away blocks: 14; missing away record (binding miss if >0): 0
+  by purpose: {"visit":1,"guard":3,"water":1,"explore":2,"leave":2,"expedition":4,"hunt":1}
+  returnDay-minus-blockDay: {}
+  node distance from home (Chebyshev): {"1":7,"2":3,"3":1,"4":3}
+
+POST-ENDING REPEAT-START WINDOW (B4: ended favor -> later same-villager start):
+    seed 7001 Ivy: delivered d9 -> later start d126 (gap 117d)
+    seed 7001 Vasyl: delivered d9 -> later start d15 (gap 6d)
+  seed 7002: no post-ending repeat-start window
+    seed 7003 Jovan: delivered d47 -> later start d57 (gap 10d)
+  seed 7004: no post-ending repeat-start window
+
+R80 TRIAL CENSUS (B1: first-trial-appearance per case + SAY announcements; v.moots NEVER a count):
+  seed 7001 arm=handsoff case=case_2 charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=bystander opened d8 mootIn=null (mootInDay~d11) firstTrial snap d12 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=1 finalGuilty=null present=8 total~9 need~5 convicted=null wildDay=false playerVoter=true votes=8
+    SCORE SPREAD: guilty n=1 mean=-48.0 | acquit n=7 mean=34.6
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=1->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 7001 arm=handsoff case=case_4 charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=bystander opened d12 mootIn=null (mootInDay~d15) firstTrial snap d16 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=1 finalGuilty=null present=8 total~9 need~5 convicted=null wildDay=false playerVoter=true votes=8
+    SCORE SPREAD: guilty n=1 mean=-61.0 | acquit n=7 mean=46.6
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=1->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 7001: trials=2 mootSayLines=14 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d9: Word reaches you, days late: Lorenzo stands accused over what happened to Marat. There's going to be a moot. People are choosing sides.
+    SAY d11: Marat has been talking at the fires. Enough voices — tonight they call a moot. Lorenzo answers for what happened to Marat.
+    SAY d11: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d11: Marat calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d11: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d13: Word reaches you, days late: Lorenzo stands accused over what happened to Marat. There's going to be a moot. People are choosing sides.
+    SAY d13: The moot doesn't wait forever. Two days of silence from the fire's edge — the count is taken without you.
+    SAY d15: Marat is back at the fires, and the village doesn't need convincing this time. Lorenzo answers for what happened to Marat — again.
+    SAY d15: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d15: Marat calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d15: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d17: The moot doesn't wait forever. Two days of silence from the fire's edge — the count is taken without you.
+  seed 7002 arm=handsoff case=case_2 charge=ambush accused=Ivy/Marcelo/Gertrudis target=Oliver role=bystander opened d11 mootIn=null (mootInDay~d14) firstTrial snap d15 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=1 finalGuilty=null present=7 total~8 need~5 convicted=null wildDay=true playerVoter=true votes=7
+    SCORE SPREAD: guilty n=1 mean=-3.0 | acquit n=6 mean=65.5
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=1->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 7002 arm=handsoff case=case_4 charge=ambush accused=Ivy/Marcelo/Gertrudis target=Oliver role=bystander opened d15 mootIn=null (mootInDay~d18) firstTrial snap d19 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=1 finalGuilty=null present=6 total~7 need~4 convicted=null wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=1 mean=-63.0 | acquit n=5 mean=29.4
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=1->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 7002 arm=handsoff case=case_6 charge=murder accused=Marcelo/Ivy/Gertrudis target=August role=bystander opened d40 mootIn=null (mootInDay~d43) firstTrial snap d44 origin=autonomous (npcMootTick/playerCaseTick) status=acquitted resolution=acquitted playerConvened=false
+    VOTE: npcGuilty=2 finalGuilty=null present=4 total~5 need~3 convicted=null wildDay=false playerVoter=true votes=4
+    SCORE SPREAD: guilty n=2 mean=-3.5 | acquit n=2 mean=11.0
+    PLAYER VOTE: driverVotePicks=[] playerVoter=true npcGuilty->final=2->null (contrib pending; playerVoter true but no driver vote pick recorded — playerVoter means MAY vote (trial creation, 90% unless player-convened); no driver vote cast, so the player seat went unused)
+  seed 7002: trials=3 mootSayLines=20 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d12: Word reaches you, days late: Ivy stands accused over what happened to Oliver. There's going to be a moot. People are choosing sides.
+    SAY d14: Oliver has been talking at the fires. Enough voices — tonight they call a moot. Ivy answers for what happened to Oliver.
+    SAY d14: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d14: Oliver calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d14: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d16: Word reaches you, days late: Ivy stands accused over what happened to Oliver. There's going to be a moot. People are choosing sides.
+    SAY d16: The moot doesn't wait forever. Two days of silence from the fire's edge — the count is taken without you.
+    SAY d18: Oliver is back at the fires, and the village doesn't need convincing this time. Ivy answers for what happened to Oliver — again.
+    SAY d18: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d18: Oliver calls the moot. The fire gets built up — word travels fast, and almost everyone comes.
+    SAY d18: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d20: The moot doesn't wait forever. Two days of silence from the fire's edge — the count is taken without you.
+  seed 7003 arm=mootprobe case=case_2 charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=bystander opened d8 mootIn=null (mootInDay~d11) firstTrial snap d11 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=0 finalGuilty=1 present=8 total~9 need~5 convicted=false wildDay=false playerVoter=true votes=8
+    SCORE SPREAD: guilty n=0 mean=n/a | acquit n=8 mean=15.5
+    PLAYER VOTE: driverVotePicks=[{"day":11,"name":"Dale","vote":"guilty"}] playerVoter=true npcGuilty->final=0->1 (contrib 1; driver voted in a later convo)
+  seed 7003 arm=mootprobe case=case_4 charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander opened d13 mootIn=null (mootInDay~d16) firstTrial snap d15 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=1 finalGuilty=null present=7 total~8 need~5 convicted=null wildDay=false playerVoter=true votes=7
+    SCORE SPREAD: guilty n=1 mean=-15.0 | acquit n=6 mean=24.2
+    PLAYER VOTE: driverVotePicks=[{"day":16,"name":"Yuyun","vote":"guilty"}] playerVoter=true npcGuilty->final=1->null (contrib pending; driver voted in a later convo)
+  seed 7003 arm=mootprobe case=case_6 charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander opened d14 mootIn=null (mootInDay~d17) firstTrial snap d17 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=1 finalGuilty=2 present=5 total~6 need~4 convicted=false wildDay=false playerVoter=true votes=5
+    SCORE SPREAD: guilty n=1 mean=-2.0 | acquit n=4 mean=17.0
+    PLAYER VOTE: driverVotePicks=[{"day":17,"name":"Olivia","vote":"guilty"}] playerVoter=true npcGuilty->final=1->2 (contrib 1; driver voted in a later convo)
+  seed 7003 arm=mootprobe case=case_8 charge=murder accused=Olivia/Dmitri/Frieda target=Sari role=bystander opened d16 mootIn=null (mootInDay~d19) firstTrial snap d18 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=0 finalGuilty=1 present=6 total~7 need~4 convicted=false wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=0 mean=n/a | acquit n=6 mean=13.7
+    PLAYER VOTE: driverVotePicks=[{"day":18,"name":"Olivia","vote":"guilty"}] playerVoter=true npcGuilty->final=0->1 (contrib 1; driver voted in a later convo)
+  seed 7003: trials=4 mootSayLines=21 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d10: Word reaches you, days late: Olivia stands accused over what happened to Sari. There's going to be a moot. People are choosing sides.
+    SAY d11: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d11: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d11: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d14: Word reaches you, days late: Olivia stands accused over what happened to Sari. There's going to be a moot. People are choosing sides.
+    SAY d15: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d15: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d15: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d16: Word reaches you, days late: Olivia stands accused over what happened to Sari. There's going to be a moot. People are choosing sides.
+    SAY d17: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d17: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d17: The moot turns to you. Your vote matters here — and everyone will remember it.
+  seed 7004 arm=mootprobe case=case_2 charge=ambush accused=Vera/Chantal/Ruby target=Tom role=bystander opened d7 mootIn=null (mootInDay~d10) firstTrial snap d9 origin=probe status=resolved resolution=cold_war playerConvened=true
+    VOTE: npcGuilty=4 finalGuilty=5 present=8 total~9 need~5 convicted=true wildDay=false playerVoter=true votes=8
+    SCORE SPREAD: guilty n=4 mean=-20.3 | acquit n=4 mean=49.0
+    PLAYER VOTE: driverVotePicks=[{"day":9,"name":"Evelyn","vote":"guilty"}] playerVoter=true npcGuilty->final=4->5 (contrib 1; driver voted in a later convo)
+  seed 7004 arm=mootprobe case=case_4 charge=ambush accused=Vera/Chantal/Ruby target=Tom role=bystander opened d12 mootIn=null (mootInDay~d15) firstTrial snap d15 origin=probe status=acquitted resolution=acquitted playerConvened=true
+    VOTE: npcGuilty=2 finalGuilty=3 present=6 total~7 need~4 convicted=false wildDay=false playerVoter=true votes=6
+    SCORE SPREAD: guilty n=2 mean=-10.0 | acquit n=4 mean=55.5
+    PLAYER VOTE: driverVotePicks=[{"day":15,"name":"Vera","vote":"guilty"}] playerVoter=true npcGuilty->final=2->3 (contrib 1; driver voted in a later convo)
+  seed 7004: trials=2 mootSayLines=11 legacy mootsConvened=0 (ARTIFACT, never a count)
+    SAY d8: Word reaches you, days late: Vera stands accused over what happened to Tom. There's going to be a moot. People are choosing sides.
+    SAY d9: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d9: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d9: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d13: Word reaches you, days late: Vera stands accused over what happened to Tom. There's going to be a moot. People are choosing sides.
+    SAY d14: 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!
+    SAY d14: You call a moot. The fire gets built up. Word travels fast — almost everyone comes, even the ones who'd rather not.
+    SAY d14: The moot turns to you. Your vote matters here — and everyone will remember it.
+    SAY d15: At the moot, you lay it out: who paid whom, what changed hands. The fire goes very quiet. Nobody likes being bought — least of all the ones who weren't.
+    SAY d23: They're named, every one: Elena Okafor, Theo Park, Alba Ibrahim. Your move — ask them questions (up to three), call a MOOT on it, or turn them away at the edge of the firelight.
+    SAY d26: They waited three days at the edge of your fire. Nobody called the moot. Elena nods — not angry, just done — and they walk.
+POOLED trials=11 mootSayLines=66
+
+R80 GATE CENSUS (B7: nonverbal gate in master — case offers while thread=nonverbal with no interpreter must be ZERO):
+  seed 7001 arm=handsoff: totalConvos=443 nvConvos=36 nvNoInterp=36 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0
+  seed 7002 arm=handsoff: totalConvos=444 nvConvos=41 nvNoInterp=41 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0
+  seed 7003 arm=mootprobe: totalConvos=440 nvConvos=87 nvNoInterp=87 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0
+  seed 7004 arm=mootprobe: totalConvos=441 nvConvos=35 nvNoInterp=35 nvInterp=0 caseOffersNvNoInterp=0 caseOffersNvInterp=0
+POOLED gate: nvConvos=199 nvNoInterp=199 nvInterp=0 badOffers=0 (GATE HOLDS)
+
+R80 AUTONOMOUS-CONVENING VERDICT (hands-off arm) (B2, control arm only; post-Amendment-A rules):
+  seed 7001 case=case_2 opened d8 mootInDay~d11 (mootIn field null, tick default 3) runDays=140 trialed=true
+  seed 7001 case=case_4 opened d12 mootInDay~d15 (mootIn field null, tick default 3) runDays=140 trialed=true
+  seed 7001: eligible control cases=2 convened=2 -> AUTONOMOUS CONVENING OBSERVED
+  seed 7002 case=case_2 opened d11 mootInDay~d14 (mootIn field null, tick default 3) runDays=141 trialed=true
+  seed 7002 case=case_4 opened d15 mootInDay~d18 (mootIn field null, tick default 3) runDays=141 trialed=true
+  seed 7002 case=case_6 opened d40 mootInDay~d43 (mootIn field null, tick default 3) runDays=141 trialed=true
+  seed 7002: eligible control cases=3 convened=3 -> AUTONOMOUS CONVENING OBSERVED
+
+R80 AWAY-RETURN CENSUS (B4: computed return = sinceDay + duration; trips vs leavers SPLIT):
+  away blocks=14 missing computed return (binding miss if >0)=0
+  TRIPS (returning): n=12 computedReturn-minus-blockDay: {"1":1,"2":3,"3":1,"4":2,"7":1,"9":1,"10":1,"15":1,"16":1}
+  LEAVERS (no-return sentinel): n=2
+    LEAVER seed 7004 d23 Chantal purpose=leave sinceDay=1 duration=999 computedReturn=1000
+    LEAVER seed 7004 d24 Chantal purpose=leave sinceDay=1 duration=999 computedReturn=1000
+  ALL (unsplit, for continuity with r79): computedReturn-minus-blockDay: {"1":1,"2":3,"3":1,"4":2,"7":1,"9":1,"10":1,"15":1,"16":1,"976":1,"977":1}
+
+R80 BROKEN-ORIGIN WINDOWS (final-ledger method, kept for continuity) (B5: final broken favor -> later same-villager start):
+  seed 7001: broken favors=1 broken-origin windows=0
+  seed 7002: broken favors=1 broken-origin windows=0
+  seed 7003: broken favors=1 broken-origin windows=0
+  seed 7004: broken favors=1 broken-origin windows=0
+
+R80 END-BLOCKED REPETITION CENSUS (decision input, not a game change):
+  seed 7001: no end-blocked entries
+  seed 7002: no end-blocked entries
+  seed 7003: no end-blocked entries
+  seed 7004 Henry favor-henry_zhang-123-50: blocks=1 stuckDays=7 lastReason="Your partner is no longer available for this outing." partnerInDeaths=true
+
+R80 HANDS-OFF PICK AUDIT (binding: zero case-menu picks on handsoff seeds):
+  seed 7001: case-menu picks=0 (arm was hands-off)
+  seed 7002: case-menu picks=0 (arm was hands-off)
+
+R80 BROKEN-ORIGIN BY LOG TRACE (B5: promise-broken-seen -> later same-villager start):
+  seed 7001: broken-seen=1 broken-origin windows=0
+  seed 7002: broken-seen=2 broken-origin windows=0
+  seed 7003 Jovan: broken d50 favor favor-jovan_milic-47-11 -> later start d58 favor favor-jovan_milic-57-14 (gap 8d)
+  seed 7003: broken-seen=2 broken-origin windows=1
+  seed 7004: broken-seen=7 broken-origin windows=0
+
+R80 SAY TV EXCLUSION CENSUS:
+  seed 7001: mootSayLines=14 mootSayTvExcluded=11
+    TV-EXCLUDED d27: 📺 CONTEST: The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d28: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d28: 📺 ● LIVE — The Moot. Giulia is on television.
+    TV-EXCLUDED d28: 📺 The Moot. Giulia has been taken.
+
+Televised trial. The accusations are read out — true or not, the cameras don't care. The audience is the jury.
+
+Giulia stands at the mic alone. Seventeen systems a
+    TV-EXCLUDED d29: 📺 The Moot — the defense. Giulia is talking, and the jury-feed shows the galaxy's verdict ticking up and down with every sentence.
+
+One wrong word and it tanks. One right word and it soars. Truth is 
+    TV-EXCLUDED d29: 📺 The Moot — closing. The accusations hang in the air like smoke.
+
+The jury votes. Guilty or not, the verdict is televised, and the village will have to live next to whatever the galaxy decides.
+  seed 7002: mootSayLines=20 mootSayTvExcluded=0
+  seed 7003: mootSayLines=21 mootSayTvExcluded=4
+    TV-EXCLUDED d62: 📺 CONTEST: The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d63: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+    TV-EXCLUDED d63: 📺 The Moot. Televised trial. Defend yourself against accusations (true or not). The audience is the jury.
+
+People have been hurt in this one. Not always.
+
+The lights come up. You can hear the crowd —
+    TV-EXCLUDED d64: 📺 The Moot — YOU WIN. The crowd is a weather system.
+  seed 7004: mootSayLines=11 mootSayTvExcluded=0

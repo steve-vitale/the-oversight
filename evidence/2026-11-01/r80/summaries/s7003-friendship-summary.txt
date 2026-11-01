@@ -1,0 +1,236 @@
+# SURFACE+SEEDED — seed 7003 (141d, 8 alive)
+
+npcPairs=89 deep2=24 cracks=0 vCracks=0 friendGriev=1 stateGriev=9 stateFriend=1 stateVCrack=0 t2picks=143 closeReadsServed=35 grievanceServes=20 othersSteered=142
+COND-TP: firstDeep2Day=25 lateClose=88 lateTP=58 lateNull=0 condRate=65.9% pooledTP=58/91 pooledRate=63.7% grievReadsByWhy={"grievance":3,"vgrievance":25}
+FUNNEL (natural): convos=414 subject=344 offered=277 picked=123 classes={"no-subject-no-ans":69,"subject-no-offer":68,"offered-not-picked":45,"picked-others":123,"offered-capped":109}
+FUNNEL-UNSTEERED (r55 strict): convos=292 subjectNoOffer=68 rate=23.3% offered=155 mainOffered=10 subjectOffered=153 picked=1 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Eli / Yuyun / Frieda / Jovan — "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK-CIRCULATION: Yuyun / Zoe — "Jovan ate something last month that should've killed them. They're fine."
+REOFFER: offers=260 picks=131 latePicks=49 missedChangedNotOffered=10
+WRAPSERVE: convos=28 matcherHits=20 matcherServes=20 classes={"grievance-line":20,"deflection":2,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=153 menuProblem=121 pickProblem=32
+INVITE (wrap, carried from r63): lure={"n":11,"accepts":4,"acceptRate":0.36363636363636365,"vetoes":{},"chanceMin":27,"chanceMax":62,"chanceMean":42.4} party={"n":14,"accepts":10,"acceptRate":0.7142857142857143,"vetoes":{},"chanceMin":27.799999999999997,"chanceMax":95,"chanceMean":62.5} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=9
+FAVOR (r65): funnel={"offers":29,"forageOffers":8,"otherFavorOffers":21,"accepts":7,"acceptAttempts":7,"waits":8,"starts":7,"startBlocked":6,"forages":6,"forageNodeBarren":12,"forageBarren":2,"forageBarrenTravel":0,"forageBarrenNode":2,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":3,"retryAssigned":3,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":6,"keptMatched":2,"keptMatchedStrict":2}
+CASE (r80): snaps=9 betrayalOfferConvos=119 mootOffers=8 mootProbePicks=[{"day":11,"vid":"gen_j4q3kxr","vidName":"Ruben","caseId":"case_2"},{"day":15,"vid":"gen_1fu7u4i","vidName":"Yuyun","caseId":"case_4"},{"day":17,"vid":"gen_1fu7u4i","vidName":"Yuyun","caseId":"case_6"},{"day":18,"vid":"gen_vt931fe","vidName":"Frieda","caseId":"case_8"}] mootsConvened=0
+  CASE-SNAP d9: case_2 status=open charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d11: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_4 status=open charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d15: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=dormant charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_6 status=open charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d16: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_6 status=open charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d17: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_4 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_6 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d17: case_8 status=open charge=murder accused=Olivia/Dmitri/Frieda target=Sari role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d18: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_4 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_6 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_8 status=acquitted charge=murder accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_2 status=acquitted charge=ambush accused=Olivia/Frieda/Dmitri target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_4 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_6 status=acquitted charge=ambush accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_8 status=acquitted charge=murder accused=Olivia/Dmitri/Frieda target=Sari role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"dale_hoffman","vidName":"Dale","favorId":"favor-dale_hoffman-9-1","state":"broken","promisedDay":9,"meetDay":10,"deadline":11,"promiseKept":"broken","startedDay":11,"forageCount":7,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"dmitri_sokolov","vidName":"Dmitri","favorId":"favor-dmitri_sokolov-11-2","state":"asked","promisedDay":null,"meetDay":null,"deadline":13,"promiseKept":null,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"olivia_bennett","vidName":"Olivia","favorId":"favor-olivia_bennett-16-3","state":"thanked","promisedDay":16,"meetDay":17,"deadline":18,"promiseKept":true,"startedDay":18,"forageCount":1,"playerKcal":275,"partnerKcal":345,"deliveredKcal":620,"returnedDay":18,"talkCount":1},{"vid":"jovan_milic","vidName":"Jovan","favorId":"favor-jovan_milic-57-14","state":"thanked","promisedDay":57,"meetDay":58,"deadline":59,"promiseKept":true,"startedDay":58,"forageCount":1,"playerKcal":840,"partnerKcal":925,"deliveredKcal":1765,"returnedDay":58,"talkCount":1}]
+  FAVOR-OFFER d9: Dale kind=forage_help favorId=favor-dale_hoffman-9-1 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Dmitri kind=forage_help favorId=favor-dmitri_sokolov-11-2 task=forage with Dmitri tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Olivia kind=forage_help favorId=favor-olivia_bennett-16-3 task=forage with Olivia tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Eli kind=food_share favorId=favor-gen_vuh6yh1-20-4 task=share food with Eli — they're running on empty
+  FAVOR-OFFER d26: Yuyun kind=forage_help favorId=favor-gen_1fu7u4i-26-5 task=forage with Yuyun tomorrow to rebuild the pantry
+  FAVOR-OFFER d33: Eli kind=sick_help favorId=favor-gen_vuh6yh1-33-6 task=help Eli with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d42: Zoe kind=forage_help favorId=favor-zoe_adams-39-7 task=forage with Zoe tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Frieda kind=food_share favorId=favor-gen_vt931fe-43-8 task=share food with Frieda — they're going hungry
+  FAVOR-OFFER d43: Eli kind=food_share favorId=favor-gen_vuh6yh1-43-9 task=share food with Eli — they're past hungry
+  FAVOR-OFFER d45: Yuyun kind=heal_help favorId=favor-gen_1fu7u4i-45-10 task=help Yuyun with their injury
+  FAVOR-OFFER d47: Jovan kind=forage_help favorId=favor-jovan_milic-47-11 task=forage with Jovan tomorrow to rebuild the pantry
+  FAVOR-OFFER d48: Frieda kind=food_share favorId=favor-gen_vt931fe-48-12 task=share food with Frieda — they're going hungry
+  FAVOR-OFFER d54: Zoe kind=sick_help favorId=favor-zoe_adams-54-13 task=help Zoe with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d57: Jovan kind=forage_help favorId=favor-jovan_milic-57-14 task=forage with Jovan tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Zodwa kind=heal_help favorId=favor-app_mgpspi99815-62-15 task=help Zodwa with their injury
+  FAVOR-OFFER d62: Jorge kind=forage_help favorId=favor-jorge_silva-62-16 task=forage with Jorge tomorrow to rebuild the pantry
+  FAVOR-OFFER d64: Jorge kind=heal_help favorId=favor-jorge_silva-64-17 task=help Jorge with their injury
+  FAVOR-OFFER d70: Caleb kind=sick_help favorId=favor-caleb_jones-70-18 task=help Caleb with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d77: Zoe kind=food_share favorId=favor-zoe_adams-77-19 task=share food with Zoe — they're going hungry
+  FAVOR-OFFER d80: Pavel kind=sick_help favorId=favor-pavel_dubinin-80-20 task=help Pavel with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d84: Pavel kind=food_share favorId=favor-pavel_dubinin-84-21 task=share food with Pavel — they're running on empty
+  FAVOR-OFFER d93: Rodrigo kind=sick_help favorId=favor-app_mgpspi8q524-93-22 task=help Rodrigo with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d114: Pavel kind=food_share favorId=favor-pavel_dubinin-114-23 task=share food with Pavel — they're going hungry
+  FAVOR-OFFER d123: Pavel kind=food_share favorId=favor-pavel_dubinin-123-24 task=share food with Pavel — they're going hungry
+  FAVOR-OFFER d125: Jorge kind=food_share favorId=favor-jorge_silva-125-25 task=share food with Jorge — they're past hungry
+  FAVOR-OFFER d129: Pavel kind=sick_help favorId=favor-pavel_dubinin-129-26 task=help Pavel with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d137: Caleb kind=heal_help favorId=favor-caleb_jones-137-27 task=help Caleb with their injury
+  FAVOR-OFFER d137: Rodrigo kind=sick_help favorId=favor-app_mgpspi8q524-137-28 task=help Rodrigo with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d140: Caleb kind=heal_help favorId=favor-caleb_jones-140-29 task=help Caleb with their injury
+  FAVOR-ACCEPT d9: Dale favorId=favor-dale_hoffman-9-1 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d16: Olivia favorId=favor-olivia_bennett-16-3 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d26: Yuyun favorId=favor-gen_1fu7u4i-26-5 accepted=true state=promised meetDay=27
+  FAVOR-ACCEPT d42: Zoe favorId=favor-zoe_adams-39-7 accepted=true state=promised meetDay=43
+  FAVOR-ACCEPT d47: Jovan favorId=favor-jovan_milic-47-11 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d57: Jovan favorId=favor-jovan_milic-57-14 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d62: Jorge favorId=favor-jorge_silva-62-16 accepted=true state=promised meetDay=63
+  INVITE-DEC d7 lure: Frieda -> Sari chance=52 accept=false veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":4,"affinity":28} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d8 party: Ethel -> Frieda chance=46.6 accept=true veto=- inputs={"temp":"cautious","goal":"joy","mood":"cheerful","fear":12,"trust":29,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 29","cautious temperament (-10)","cheerful mood (+10)"]
+  INVITE-DEC d8 party: Ethel -> Eli chance=43.6 accept=true veto=- inputs={"temp":"fidgety","goal":"escape","mood":"cheerful","fear":12,"trust":34,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 34","wants out (-15)","cheerful mood (+10)"]
+  INVITE-DEC d8 party: Ethel -> Olivia chance=73.6 accept=false veto=- inputs={"temp":"warm","goal":"remember","mood":"cheerful","fear":12,"trust":34,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 34","warm temperament (+15)","cheerful mood (+10)"]
+  INVITE-DEC d8 lure: Frieda -> Sari chance=62 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"cheerful","fear":4,"affinity":28} reasons=["relationship with inviter (+7)","cheerful mood (+10)"]
+  INVITE-DEC d9 party: Ethel -> Sari chance=27.799999999999997 accept=false veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":12,"trust":32,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 32","sick (-20)"]
+  INVITE-DEC d12 lure: Dmitri -> Sari chance=52 accept=false veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":4,"affinity":29} reasons=["relationship with inviter (+7)"]
+  INVITE-DEC d13 lure: Dmitri -> Sari chance=42 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"grieving","fear":21,"affinity":29} reasons=["relationship with inviter (+7)","grieving mood (-10)"]
+  INVITE-DEC d14 lure: Dmitri -> Sari chance=43 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"grieving","fear":4,"affinity":31} reasons=["relationship with inviter (+8)","grieving mood (-10)"]
+  INVITE-DEC d15 lure: Frieda -> Sari chance=43 accept=false veto=- inputs={"temp":"steady","goal":"survive","mood":"grieving","fear":0,"affinity":33} reasons=["relationship with inviter (+8)","grieving mood (-10)"]
+  INVITE-DEC d16 party: Ruben -> Yuyun chance=77.8 accept=true veto=- inputs={"temp":"warm","goal":"legacy","mood":"steady","fear":0,"trust":57,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 57","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d16 lure: Frieda -> Sari chance=54 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":4,"affinity":34} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d32 party: Ruben -> Jovan chance=85.8 accept=true veto=- inputs={"temp":"bold","goal":"joy","mood":"steady","fear":12,"trust":77,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 77","a big party is safer (+5)","bold temperament (+15)"]
+  INVITE-DEC d41 party: Yuyun -> Olivia chance=67.80000000000001 accept=false veto=- inputs={"temp":"warm","goal":"remember","mood":"grieving","fear":13,"trust":82,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","sick (-20)","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d41 lure: Olivia -> Ruben chance=27 accept=false veto=- inputs={"temp":"prickly","goal":"lead","mood":"grieving","fear":29,"affinity":8.5} reasons=["relationship with inviter (+2)","prickly temperament (-20)","wants to lead (+10)","grieving mood (-10)"]
+  INVITE-DEC d42 lure: Olivia -> Ruben chance=27 accept=false veto=- inputs={"temp":"prickly","goal":"lead","mood":"grieving","fear":29,"affinity":8.5} reasons=["relationship with inviter (+2)","prickly temperament (-20)","wants to lead (+10)","grieving mood (-10)"]
+  INVITE-DEC d43 lure: Olivia -> Ruben chance=27 accept=false veto=- inputs={"temp":"prickly","goal":"lead","mood":"grieving","fear":29,"affinity":8.5} reasons=["relationship with inviter (+2)","prickly temperament (-20)","wants to lead (+10)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Yuyun -> Olivia chance=95 accept=true veto=- inputs={"temp":"warm","goal":"remember","mood":"steady","fear":0,"trust":83,"bond":{"v":30,"depth":1},"partySize":4} reasons=["trust 83","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d44 lure: Olivia -> Ruben chance=37 accept=false veto=- inputs={"temp":"prickly","goal":"lead","mood":"steady","fear":29,"affinity":8.5} reasons=["relationship with inviter (+2)","prickly temperament (-20)","wants to lead (+10)"]
+  INVITE-DEC d52 party: Frieda -> Zoe chance=42 accept=true veto=- inputs={"temp":"intense","goal":"understand","mood":"grieving","fear":5,"trust":55,"bond":{"v":42,"depth":1},"partySize":3} reasons=["trust 55","a real bond (+10)","a big party is safer (+5)","sick (-20)","grieving mood (-10)"]
+  INVITE-DEC d58 party: Frieda -> Pavel chance=63 accept=true veto=- inputs={"temp":"dry","goal":"protect","mood":"steady","fear":4,"trust":20,"bond":null,"partySize":3} reasons=["trust 20","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d58 party: Frieda -> Jorge chance=52.8 accept=false veto=- inputs={"temp":"steady","goal":"record","mood":"steady","fear":4,"trust":32,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 32","a big party is safer (+5)"]
+  INVITE-DEC d61 party: Frieda -> Rodrigo chance=48.4 accept=true veto=- inputs={"temp":"dry","goal":"record","mood":"steady","fear":4,"trust":21,"bond":null,"partySize":4} reasons=["trust 21","a big party is safer (+5)"]
+  INVITE-DEC d84 party: Frieda -> Jorge chance=74.4 accept=true veto=- inputs={"temp":"steady","goal":"record","mood":"grieving","fear":39,"trust":86,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 86","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d135 party: Jovan -> Caleb chance=76.4 accept=true veto=- inputs={"temp":"steady","goal":"family","mood":"grieving","fear":12,"trust":91,"bond":{"v":42,"depth":1},"partySize":3} reasons=["trust 91","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":26,"v":44,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":56,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":60,"depth":3},{"day":35,"v":60,"depth":3},{"day":36,"v":60,"depth":3},{"day":37,"v":60,"depth":3},{"day":38,"v":60,"depth":3},{"day":39,"v":64,"depth":3}] class=rise
+GOSSIP: totalPicks=152 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=18 31-60=27 61-90=28 91-120=30 121+=20 naturalPicks=123 seededPicks=20 gossipPicks=152
+SEEDED: {"pair":{"a":"gen_1fu7u4i","b":"gen_vt931fe","aName":"Yuyun","bName":"Frieda"},"day":25,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":26,"v":44,"depth":3},{"day":27,"v":44,"depth":3},{"day":28,"v":48,"depth":3},{"day":29,"v":52,"depth":3},{"day":30,"v":56,"depth":3},{"day":31,"v":56,"depth":3},{"day":32,"v":60,"depth":3},{"day":33,"v":60,"depth":3},{"day":34,"v":60,"depth":3},{"day":35,"v":60,"depth":3},{"day":36,"v":60,"depth":3},{"day":37,"v":60,"depth":3},{"day":38,"v":60,"depth":3},{"day":39,"v":64,"depth":3}],"crackTraceClass":"rise","vAt7":56,"depthAt7":3,"vDrop":-4,"depthDrop":-1,"crack7":false,"firstServe":{"day":26,"why":"vgrievance"},"serveWithin30":true,"serves":25,"servesAll":[{"day":26,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Frieda <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Pradapdao <> Olivia — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d55: Dmitri <> Olivia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Dmitri <> Frieda — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Pradapdao <> Jovan — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d25: Yuyun <> Frieda — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d55: Yuyun <> Ruben — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d70: Dmitri <> Pradapdao — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Dale <> Frieda — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d90: Pradapdao <> Zoe — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d135: Frieda <> Zoe — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Pradapdao <> Frieda — maxDepth 3, final 3 (v=99), dropped 0
+  FRIEND d95: Jovan <> Zoe — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d115: Pradapdao <> Jorge — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d115: Dmitri <> Jorge — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d140: Rodrigo <> Pradapdao — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d95: Pradapdao <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Dmitri <> Pavel — maxDepth 3, final 3 (v=89), dropped 0
+  FRIEND d105: Caleb <> Pradapdao — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d115: Caleb <> Dmitri — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d105: Rodrigo <> Dmitri — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d135: Frieda <> Jorge — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d135: Frieda <> Pavel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Rodrigo <> Frieda — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND-GRIEV d25: Yuyun vs Frieda (ambushed) depth 2 v 52 -> 56
+  CLOSE-READ d16: Frieda about Dmitri — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d19: Dale about Frieda — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Frieda about Dmitri — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Olivia about Frieda — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Frieda about Yuyun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Zoe about Frieda — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d42: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d47: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Frieda about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Frieda about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d50: Frieda about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Frieda about Olivia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Olivia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Zoe about Pradapdao — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d67: Olivia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Olivia about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Pavel about Olivia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Jovan about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Rodrigo about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Pavel about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d73: Rodrigo about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Jorge about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Jovan about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Olivia about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Zoe about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d78: Pavel about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Zoe about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d80: Pavel about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d81: Zoe about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Jorge about Olivia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Zoe about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Rodrigo about Pradapdao — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Rodrigo about Pradapdao — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Pavel about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Rodrigo about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d91: Pavel about Pradapdao — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Jorge about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Zoe about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Jovan about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Rodrigo about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Rodrigo about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d97: Caleb about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d98: Rodrigo about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d99: Pavel about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Jorge about Pradapdao — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d101: Zoe about Jovan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Rodrigo about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d103: Rodrigo about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d104: Rodrigo about Dmitri — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Pavel about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Pavel about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Jorge about Dmitri — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d109: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Pavel about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Pavel about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Jorge about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Zoe about Jovan — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Rodrigo about Dmitri — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Pavel about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Rodrigo about Dmitri — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Pavel about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Jorge about Pradapdao — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Zoe about Jovan — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Caleb about Pradapdao — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Jorge about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Jovan about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Pavel about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Rodrigo about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Caleb about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Jorge about Pradapdao — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Caleb about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Caleb about Dmitri — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d26 (betrayal): Yuyun vs Frieda (ambushed) depth 2 v 52 -> 56
+  GRIEV-READ d8: Olivia about Sari (why=grievance)
+  GRIEV-READ d9: Sari about Olivia (why=grievance)
+  GRIEV-READ d13: Yuyun about Jovan (why=grievance)
+  GRIEV-READ d26: Yuyun about Frieda (why=vgrievance)
+  GRIEV-READ d26: Yuyun about Frieda (why=vgrievance)
+  GRIEV-READ d27: Yuyun about Frieda (why=vgrievance)
+  KNACK d10 Zoe: "Quick update — that stray dog — the one that bit two people — lets Ruben touch it."
+  KNACK d18 Olivia: "Good question." "Jovan ate something last month that should've killed them. They're fine."
+  KNACK d30 Jovan: "Good question." "Dmitri ate something last month that should've killed them. They're fine."
+  KNACK d32 Eli: "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK d41 Yuyun: "that stray dog — the one that bit two people — lets Zoe touch it."
+  KNACK d42 Yuyun: "Jovan ate something last month that should've killed them. They're fine."
+  KNACK d47 Yuyun: "You want to know about that? Okay." "Pradapdao talks to the garden. The garden listens. I've seen it."
+  KNACK d47 Frieda: "that stray dog — the one that bit two people — lets Zoe touch it."
+
+deathCauses: {"the wild":2,"ambush":1,"sickness":1,"contest":1,"the night":1,"monster":2,"a wound that wouldn't close":1,"The Audit":1,"wound_fever":1}

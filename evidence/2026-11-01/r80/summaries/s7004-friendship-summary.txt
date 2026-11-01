@@ -1,0 +1,269 @@
+# SURFACE+SEEDED — seed 7004 (141d, 2 alive)
+
+npcPairs=114 deep2=23 cracks=0 vCracks=0 friendGriev=0 stateGriev=6 stateFriend=0 stateVCrack=0 t2picks=160 closeReadsServed=32 grievanceServes=20 othersSteered=158
+COND-TP: firstDeep2Day=25 lateClose=109 lateTP=91 lateNull=0 condRate=83.5% pooledTP=91/111 pooledRate=82.0% grievReadsByWhy={"grievance":16,"vgrievance":17}
+FUNNEL (natural): convos=413 subject=370 offered=309 picked=132 classes={"subject-no-offer":61,"offered-not-picked":34,"picked-others":132,"offered-capped":143,"no-subject-no-ans":40,"no-subject-ans":3}
+FUNNEL-UNSTEERED (r55 strict): convos=283 subjectNoOffer=61 rate=21.6% offered=179 mainOffered=6 subjectOffered=179 picked=2 latePicks=2 latePicksMain=0 latePicksSubject=2
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Mia / Chantal — "Zhomart found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Stanley / Nikos — "Maikel talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=287 picks=144 latePicks=45 missedChangedNotOffered=26
+WRAPSERVE: convos=33 matcherHits=20 matcherServes=20 classes={"grievance-line":20,"deflection":4,"other":9}
+FUNNEL-PROBE (subject-no-offer turns): turns=170 menuProblem=132 pickProblem=38
+INVITE (wrap, carried from r63): lure={"n":4,"accepts":2,"acceptRate":0.5,"vetoes":{},"chanceMin":25,"chanceMax":35,"chanceMean":27.5} party={"n":18,"accepts":8,"acceptRate":0.4444444444444444,"vetoes":{},"chanceMin":15.400000000000006,"chanceMax":91,"chanceMean":51.4} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":60,"forageOffers":9,"otherFavorOffers":51,"accepts":9,"acceptAttempts":9,"waits":3,"starts":3,"startBlocked":11,"forages":2,"forageNodeBarren":25,"forageBarren":7,"forageBarrenTravel":0,"forageBarrenNode":7,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":0,"outingsEndBlocked":1,"talks":2,"delivers":1,"deliverBlocked":8,"completeOutings":0,"completeOutingsEvents":1,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r80): snaps=6 betrayalOfferConvos=118 mootOffers=4 mootProbePicks=[{"day":9,"vid":"henry_zhang","vidName":"Henry","caseId":"case_2"},{"day":14,"vid":"chantal_mukendi","vidName":"Chantal","caseId":"case_4"}] mootsConvened=0
+  CASE-SNAP d8: case_2 status=open charge=ambush accused=Vera/Chantal/Ruby target=Tom role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d9: case_2 status=resolved charge=ambush accused=Vera/Chantal/Ruby target=Tom role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_2 status=resolved charge=ambush accused=Vera/Chantal/Ruby target=Tom role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_4 status=open charge=ambush accused=Vera/Chantal/Ruby target=Tom role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d15: case_2 status=resolved charge=ambush accused=Vera/Chantal/Ruby target=Tom role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=acquitted charge=ambush accused=Vera/Chantal/Ruby target=Tom role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_2 status=resolved charge=ambush accused=Vera/Chantal/Ruby target=Tom role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_4 status=acquitted charge=ambush accused=Vera/Chantal/Ruby target=Tom role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"henry_zhang","vidName":"Henry","favorId":"favor-henry_zhang-123-50","state":"promised","promisedDay":123,"meetDay":124,"deadline":125,"promiseKept":"released","startedDay":124,"forageCount":1,"playerKcal":210,"partnerKcal":210,"deliveredKcal":0,"returnedDay":null,"talkCount":1},{"vid":"gen_2lkw1ml","vidName":"Evelyn","favorId":"favor-gen_2lkw1ml-28-15","state":"broken","promisedDay":28,"meetDay":29,"deadline":30,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d7: Maikel kind=sick_help favorId=favor-gen_ld7klmn-5-1 task=help Maikel with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d9: Jorge kind=forage_help favorId=favor-jorge_silva-9-2 task=forage with Jorge tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Chantal kind=food_share favorId=favor-chantal_mukendi-10-3 task=share food with Chantal — they're going hungry
+  FAVOR-OFFER d11: Zhomart kind=food_share favorId=favor-gen_0v9hlci-11-4 task=share food with Zhomart — they're past hungry
+  FAVOR-OFFER d11: Henry kind=heal_help favorId=favor-henry_zhang-11-5 task=help Henry with their injury
+  FAVOR-OFFER d12: Maikel kind=food_share favorId=favor-gen_ld7klmn-12-6 task=share food with Maikel — they're past hungry
+  FAVOR-OFFER d16: Henry kind=heal_help favorId=favor-henry_zhang-15-7 task=help Henry with their injury
+  FAVOR-OFFER d16: Tom kind=forage_help favorId=favor-tom_baker-16-8 task=forage with Tom tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Chantal kind=food_share favorId=favor-chantal_mukendi-19-10 task=share food with Chantal — they're going hungry
+  FAVOR-OFFER d20: Ruby kind=forage_help favorId=favor-ruby_callaghan-19-9 task=forage with Ruby tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Stanley kind=food_share favorId=favor-gen_2w57ec7-21-11 task=share food with Stanley — they're running on empty
+  FAVOR-OFFER d22: Chantal kind=forage_help favorId=favor-chantal_mukendi-22-12 task=forage with Chantal tomorrow to rebuild the pantry
+  FAVOR-OFFER d25: Vera kind=food_share favorId=favor-gen_zx0102y-25-13 task=share food with Vera — they're going hungry
+  FAVOR-OFFER d27: Zhomart kind=forage_help favorId=favor-gen_0v9hlci-27-14 task=forage with Zhomart tomorrow to rebuild the pantry
+  FAVOR-OFFER d28: Evelyn kind=forage_help favorId=favor-gen_2lkw1ml-28-15 task=forage with Evelyn tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Jorge kind=heal_help favorId=favor-jorge_silva-29-16 task=help Jorge with their injury
+  FAVOR-OFFER d32: Maikel kind=heal_help favorId=favor-gen_ld7klmn-32-17 task=help Maikel with their injury
+  FAVOR-OFFER d37: Zhomart kind=food_share favorId=favor-gen_0v9hlci-37-18 task=share food with Zhomart — they're going hungry
+  FAVOR-OFFER d37: Stanley kind=food_share favorId=favor-gen_2w57ec7-37-19 task=share food with Stanley — they're past hungry
+  FAVOR-OFFER d41: Chantal kind=heal_help favorId=favor-chantal_mukendi-41-20 task=help Chantal with their injury
+  FAVOR-OFFER d47: Jorge kind=forage_help favorId=favor-jorge_silva-47-21 task=forage with Jorge tomorrow to rebuild the pantry
+  FAVOR-OFFER d51: Maikel kind=food_share favorId=favor-gen_ld7klmn-51-23 task=share food with Maikel — they're running on empty
+  FAVOR-OFFER d55: Jorge kind=sick_help favorId=favor-jorge_silva-55-24 task=help Jorge with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d55: Chantal kind=heal_help favorId=favor-chantal_mukendi-51-22 task=help Chantal with their injury
+  FAVOR-OFFER d57: Maikel kind=heal_help favorId=favor-gen_ld7klmn-57-25 task=help Maikel with their injury
+  FAVOR-OFFER d58: Jorge kind=sick_help favorId=favor-jorge_silva-58-26 task=help Jorge with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d64: Stanley kind=heal_help favorId=favor-gen_2w57ec7-64-27 task=help Stanley with their injury
+  FAVOR-OFFER d75: Jorge kind=sick_help favorId=favor-jorge_silva-75-28 task=help Jorge with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d78: Jorge kind=food_share favorId=favor-jorge_silva-78-29 task=share food with Jorge — they're going hungry
+  FAVOR-OFFER d79: Chantal kind=heal_help favorId=favor-chantal_mukendi-79-30 task=help Chantal with their injury
+  FAVOR-OFFER d82: Ruby kind=sick_help favorId=favor-ruby_callaghan-82-31 task=help Ruby with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d84: Ruby kind=food_share favorId=favor-ruby_callaghan-84-32 task=share food with Ruby — they're past hungry
+  FAVOR-OFFER d90: Jorge kind=heal_help favorId=favor-jorge_silva-90-33 task=help Jorge with their injury
+  FAVOR-OFFER d91: Ruby kind=heal_help favorId=favor-ruby_callaghan-91-34 task=help Ruby with their injury
+  FAVOR-OFFER d94: Henry kind=heal_help favorId=favor-henry_zhang-94-35 task=help Henry with their injury
+  FAVOR-OFFER d95: Stanley kind=food_share favorId=favor-gen_2w57ec7-95-36 task=share food with Stanley — they're past hungry
+  FAVOR-OFFER d96: Jorge kind=water_haul favorId=favor-jorge_silva-96-37 task=bring four liters home from the creek with Jorge; set out at dawn
+  FAVOR-OFFER d98: Stanley kind=food_share favorId=favor-gen_2w57ec7-98-38 task=share food with Stanley — they're going hungry
+  FAVOR-OFFER d99: Naran kind=water_haul favorId=favor-naran_tumen-99-39 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d102: Theo kind=stay_close favorId=favor-theo_lindqvist-102-40 task=stay close to Theo tonight
+  FAVOR-OFFER d103: Maikel kind=food_share favorId=favor-gen_ld7klmn-103-41 task=share food with Maikel — they're going hungry
+  FAVOR-OFFER d104: Tom kind=food_share favorId=favor-tom_baker-104-42 task=share food with Tom — they're going hungry
+  FAVOR-OFFER d107: Henry kind=food_share favorId=favor-henry_zhang-107-43 task=share food with Henry — they're past hungry
+  FAVOR-OFFER d109: Tom kind=water_haul favorId=favor-tom_baker-109-44 task=bring four liters home from the creek with Tom; set out at dawn
+  FAVOR-OFFER d112: Henry kind=food_share favorId=favor-henry_zhang-112-45 task=share food with Henry — they're running on empty
+  FAVOR-OFFER d114: Nikolai kind=heal_help favorId=favor-nikolai_volkov-114-47 task=help Nikolai with their injury
+  FAVOR-OFFER d115: Tom kind=water_haul favorId=favor-tom_baker-114-46 task=bring four liters home from the creek with Tom; set out at dawn
+  FAVOR-OFFER d119: Henry kind=water_haul favorId=favor-henry_zhang-119-48 task=bring four liters home from the creek with Henry; set out at dawn
+  FAVOR-OFFER d122: Ruby kind=forage_help favorId=favor-ruby_callaghan-122-49 task=forage with Ruby tomorrow to rebuild the pantry
+  FAVOR-OFFER d123: Henry kind=forage_help favorId=favor-henry_zhang-123-50 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d124: Serhiy kind=food_share favorId=favor-visjoin_114-124-51 task=share food with Serhiy — they're going hungry
+  FAVOR-OFFER d132: Stanley kind=water_haul favorId=favor-gen_2w57ec7-132-52 task=bring four liters home from the creek with Stanley; set out at dawn
+  FAVOR-OFFER d133: Tom kind=water_haul favorId=favor-tom_baker-133-53 task=bring four liters home from the creek with Tom; set out at dawn
+  FAVOR-OFFER d133: Laboni kind=food_share favorId=favor-app_mgpspj17807-133-54 task=share food with Laboni — they're going hungry
+  FAVOR-OFFER d135: Lyudmila kind=water_haul favorId=favor-visjoin_118-135-55 task=bring four liters home from the creek with Lyudmila; set out at dawn
+  FAVOR-OFFER d136: Serhiy kind=food_share favorId=favor-visjoin_114-136-56 task=share food with Serhiy — they're going hungry
+  FAVOR-OFFER d137: Tom kind=food_share favorId=favor-tom_baker-137-57 task=share food with Tom — they're past hungry
+  FAVOR-OFFER d138: Stanley kind=water_haul favorId=favor-gen_2w57ec7-138-58 task=bring four liters home from the creek with Stanley; set out at dawn
+  FAVOR-OFFER d138: Ruby kind=water_haul favorId=favor-ruby_callaghan-138-59 task=bring four liters home from the creek with Ruby; set out at dawn
+  FAVOR-OFFER d139: Klaus kind=heal_help favorId=favor-visjoin_137-139-60 task=help Klaus with their injury
+  FAVOR-ACCEPT d9: Jorge favorId=favor-jorge_silva-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d16: Tom favorId=favor-tom_baker-16-8 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d20: Ruby favorId=favor-ruby_callaghan-19-9 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d22: Chantal favorId=favor-chantal_mukendi-22-12 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d27: Zhomart favorId=favor-gen_0v9hlci-27-14 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d28: Evelyn favorId=favor-gen_2lkw1ml-28-15 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d47: Jorge favorId=favor-jorge_silva-47-21 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d123: Henry favorId=favor-henry_zhang-123-50 accepted=true state=promised meetDay=124
+  FAVOR-ACCEPT d123: Ruby favorId=favor-ruby_callaghan-122-49 accepted=true state=promised meetDay=124
+  INVITE-DEC d6 lure: A woman, maybe 40s -> Tom chance=25 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"hungry","fear":0,"affinity":0} reasons=["withdrawn temperament (-20)"]
+  INVITE-DEC d7 lure: A woman, maybe 40s -> Tom chance=25 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":4,"affinity":0} reasons=["withdrawn temperament (-20)"]
+  INVITE-DEC d8 party: Felipe -> Evelyn chance=15.400000000000006 accept=false veto=- inputs={"temp":"fidgety","goal":"alone","mood":"steady","fear":4,"trust":51,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 51","wants to be alone (-40)"]
+  INVITE-DEC d8 party: Felipe -> Stanley chance=69.2 accept=false veto=- inputs={"temp":"warm","goal":"joy","mood":"steady","fear":4,"trust":48,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 48","warm temperament (+15)"]
+  INVITE-DEC d9 party: Felipe -> Evelyn chance=17 accept=false veto=- inputs={"temp":"fidgety","goal":"alone","mood":"steady","fear":0,"trust":55,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 55","wants to be alone (-40)"]
+  INVITE-DEC d10 party: Felipe -> Maikel chance=51 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"hungry","fear":4,"trust":40,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 40"]
+  INVITE-DEC d10 party: Felipe -> Tom chance=25.799999999999997 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":4,"trust":27,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 27","withdrawn temperament (-20)"]
+  INVITE-DEC d11 lure: Chantal -> Tom chance=35 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"cheerful","fear":0,"affinity":0} reasons=["withdrawn temperament (-20)","cheerful mood (+10)"]
+  INVITE-DEC d12 lure: Chantal -> Tom chance=25 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"hungry","fear":4,"affinity":0} reasons=["withdrawn temperament (-20)"]
+  INVITE-DEC d13 party: Felipe -> Zhomart chance=61.400000000000006 accept=true veto=- inputs={"temp":"restless","goal":"prove","mood":"steady","fear":12,"trust":41,"bond":{"v":7,"depth":0},"partySize":2} reasons=["trust 41","restless temperament (+10)"]
+  INVITE-DEC d15 party: Felipe -> Tom chance=34 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":4,"trust":35,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 35","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d15 party: Felipe -> Jorge chance=79 accept=true veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":4,"trust":60,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 60","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d31 party: Felipe -> Henry chance=65 accept=false veto=- inputs={"temp":"cautious","goal":"protect","mood":"hungry","fear":12,"trust":50,"bond":{"v":10,"depth":0},"partySize":4} reasons=["trust 50","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d31 party: Felipe -> Stanley chance=91 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"hungry","fear":12,"trust":90,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d37 party: Vera -> Tom chance=37.599999999999994 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"grieving","fear":46,"trust":44,"bond":{"v":56,"depth":2},"partySize":4} reasons=["trust 44","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d51 party: Vera -> Henry chance=69 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"grieving","fear":1,"trust":60,"bond":{"v":60,"depth":2},"partySize":4} reasons=["trust 60","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d117 party: Maikel -> Serhiy chance=46 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":12,"trust":40,"bond":null,"partySize":4} reasons=["trust 40","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d119 party: Maikel -> Serhiy chance=63.2 accept=true veto=- inputs={"temp":"dry","goal":"heal","mood":"steady","fear":4,"trust":58,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 58","a big party is safer (+5)"]
+  INVITE-DEC d124 party: Maikel -> Laboni chance=64 accept=false veto=- inputs={"temp":"sardonic","goal":"heal","mood":"grieving","fear":29,"trust":85,"bond":{"v":15,"depth":0},"partySize":4} reasons=["trust 85","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d126 party: Maikel -> Laboni chance=66.4 accept=true veto=- inputs={"temp":"sardonic","goal":"heal","mood":"grieving","fear":4,"trust":91,"bond":{"v":17,"depth":0},"partySize":4} reasons=["trust 91","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d139 party: Stanley -> Klaus chance=39.2 accept=false veto=- inputs={"temp":"fidgety","goal":"record","mood":"grieving","fear":56,"trust":23,"bond":null,"partySize":4} reasons=["trust 23","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d140 party: Laboni -> Klaus chance=31 accept=false veto=- inputs={"temp":"fidgety","goal":"record","mood":"grieving","fear":92,"trust":40,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 40","grieving mood (-10)","afraid (-10)"]
+SEEDED-DAILY: [{"day":23,"v":46,"depth":3},{"day":24,"v":50,"depth":3},{"day":25,"v":56,"depth":3},{"day":26,"v":60,"depth":3},{"day":27,"v":64,"depth":3},{"day":28,"v":68,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":68,"depth":3},{"day":31,"v":68,"depth":3},{"day":32,"v":68,"depth":3},{"day":33,"v":70,"depth":3},{"day":34,"v":72,"depth":3},{"day":35,"v":78,"depth":3},{"day":36,"v":82,"depth":3}] class=rise
+GOSSIP: totalPicks=167 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=30 61-90=30 91-120=30 121+=20 naturalPicks=132 seededPicks=28 gossipPicks=167
+SEEDED: {"pair":{"a":"gen_0v9hlci","b":"gen_zx0102y","aName":"Zhomart","bName":"Vera"},"day":22,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":23,"v":46,"depth":3},{"day":24,"v":50,"depth":3},{"day":25,"v":56,"depth":3},{"day":26,"v":60,"depth":3},{"day":27,"v":64,"depth":3},{"day":28,"v":68,"depth":3},{"day":29,"v":68,"depth":3},{"day":30,"v":68,"depth":3},{"day":31,"v":68,"depth":3},{"day":32,"v":68,"depth":3},{"day":33,"v":70,"depth":3},{"day":34,"v":72,"depth":3},{"day":35,"v":78,"depth":3},{"day":36,"v":82,"depth":3}],"crackTraceClass":"rise","vAt7":56,"depthAt7":3,"vDrop":-4,"depthDrop":-1,"crack7":false,"firstServe":{"day":23,"why":"vgrievance"},"serveWithin30":true,"serves":17,"servesAll":[{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Evelyn <> Vera — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d25: Stanley <> Vera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Zhomart <> Vera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Maikel <> Vera — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Vera <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Maikel <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Vera <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Vera <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Stanley <> Maikel — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Vera <> Mia — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d55: Stanley <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Stanley <> Ruby — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d35: Zhomart <> Stanley — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Vera <> Ruby — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d50: Stanley <> Tom — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Maikel <> Henry — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d50: Stanley <> Mia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Henry <> Tom — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d85: Maikel <> Mia — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d60: Stanley <> Jorge — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Jorge <> Tom — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d40: Zhomart <> Felipe — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d140: Maikel <> Ruby — maxDepth 2, final 2 (v=55), dropped 0
+  CLOSE-READ d14: Zhomart about Vera — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Stanley about Vera — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Mia about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Jorge about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Jorge about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Evelyn about Vera — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Henry about Vera — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Jorge about Vera — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Evelyn about Vera — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Zhomart about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Zhomart about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Zhomart about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Zhomart about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Zhomart about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Zhomart about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Zhomart about Stanley — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Henry about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Zhomart about Stanley — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Tom about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Zhomart about Stanley — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Zhomart about Stanley — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Stanley about Zhomart — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Jorge about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Ruby about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Tom about Stanley — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Zhomart about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Henry about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Jorge about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Jorge about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Jorge about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Stanley about Maikel — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Henry about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Jorge about Stanley — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Henry about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Ruby about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Jorge about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Henry about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Jorge about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Henry about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Jorge about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Jorge about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Jorge about Stanley — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Henry about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Jorge about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Jorge about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Maikel about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Ruby about Stanley — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Maikel about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Henry about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Jorge about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Jorge about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Maikel about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Tom about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Maikel about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Henry about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Maikel about Tom — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Tom about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Tom about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d112: Henry about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Henry about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Stanley about Maikel — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Ruby about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d117: Henry about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Stanley about Henry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Stanley about Henry — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Ruby about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Ruby about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Laboni about Stanley — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d130: Serhiy about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d131: Ruby about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Stanley about Ruby — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Tom about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Ruby about Stanley — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Laboni about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d136: Serhiy about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d137: Serhiy about Stanley — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d138: Stanley about Ruby — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d10: Tom about Vera (why=grievance)
+  GRIEV-READ d11: Vera about Tom (why=grievance)
+  GRIEV-READ d15: Tom about Vera (why=grievance)
+  GRIEV-READ d21: Maikel about Chantal (why=grievance)
+  GRIEV-READ d22: Vera about Tom (why=grievance)
+  GRIEV-READ d23: Zhomart about Vera (why=vgrievance)
+  KNACK d18 Stanley: "Good question." "Zhomart found a lost knife by smell last week. By SMELL."
+  KNACK d23 Ruby: "Huh. Let me think about that." "Zhomart found a lost knife by smell last week. By SMELL."
+  KNACK d29 Mia: "Zhomart found a lost knife by smell last week. By SMELL."
+  KNACK d36 Chantal: "Zhomart found a lost knife by smell last week. By SMELL."
+  KNACK d42 Henry: "You want to know about that? Okay." "Sure — Zhomart found a lost knife by smell last week. By SMELL."
+  KNACK d46 Zhomart: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Tom touch it."
+  KNACK d52 Jorge: "Mia found a lost knife by smell last week. By SMELL."
+  KNACK d56 Stanley: "Maikel talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"alien":1,"the expedition":1,"monster":8,"the wild":7,"a wound that wouldn't close":2,"the night":1}

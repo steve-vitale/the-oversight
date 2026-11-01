@@ -1,0 +1,361 @@
+# SURFACE+SEEDED — seed 7001 (140d, 7 alive)
+
+npcPairs=66 deep2=48 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=251 closeReadsServed=45 grievanceServes=26 othersSteered=23
+COND-TP: firstDeep2Day=35 lateClose=182 lateTP=154 lateNull=0 condRate=84.6% pooledTP=154/200 pooledRate=77.0% grievReadsByWhy={"grievance":1,"vgrievance":33}
+FUNNEL (natural): convos=414 subject=400 offered=334 picked=228 classes={"no-subject-no-ans":14,"picked-others":228,"subject-no-offer":66,"offered-not-picked":106}
+FUNNEL-UNSTEERED (r55 strict): convos=414 subjectNoOffer=66 rate=15.9% offered=334 mainOffered=11 subjectOffered=324 picked=228 latePicks=87 latePicksMain=5 latePicksSubject=82
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Elif / Vasyl — "Ray talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=329 picks=240 latePicks=87 missedChangedNotOffered=9
+WRAPSERVE: convos=34 matcherHits=26 matcherServes=26 classes={"grievance-line":26,"deflection":0,"other":8}
+FUNNEL-PROBE (subject-no-offer turns): turns=195 menuProblem=165 pickProblem=30
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":2,"acceptRate":0.4,"vetoes":{"sick":1},"chanceMin":0,"chanceMax":61,"chanceMean":48.8} party={"n":6,"accepts":6,"acceptRate":1,"vetoes":{},"chanceMin":37.4,"chanceMax":91.4,"chanceMean":67.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=0
+FAVOR (r65): funnel={"offers":48,"forageOffers":6,"otherFavorOffers":42,"accepts":6,"acceptAttempts":6,"waits":6,"starts":6,"startBlocked":5,"forages":6,"forageNodeBarren":3,"forageBarren":0,"forageBarrenTravel":0,"forageBarrenNode":0,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":4,"retryAssigned":4,"retryStarts":3,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":6,"delivers":6,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":6,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r80): snaps=9 betrayalOfferConvos=116 mootOffers=7 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d9: case_2 status=open charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d10: case_2 status=open charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=open charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_2 status=open charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_4 status=open charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d14: case_2 status=acquitted charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_4 status=open charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=juror known=true mootIn=null trial=false
+  CASE-SNAP d16: case_2 status=acquitted charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=open charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_2 status=acquitted charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_4 status=acquitted charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_2 status=acquitted charge=ambush accused=Lorenzo/Ray/Fahd target=Marat role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_4 status=acquitted charge=ambush accused=Lorenzo/Fahd/Ray target=Marat role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"ivy_wang","vidName":"Ivy","favorId":"favor-ivy_wang-126-44","state":"thanked","promisedDay":126,"meetDay":127,"deadline":128,"promiseKept":true,"startedDay":127,"forageCount":1,"playerKcal":420,"partnerKcal":455,"deliveredKcal":875,"returnedDay":127,"talkCount":1},{"vid":"gen_7ptmanj","vidName":"Lorenzo","favorId":"favor-gen_7ptmanj-105-29","state":"broken","promisedDay":105,"meetDay":106,"deadline":107,"promiseKept":"broken","startedDay":106,"forageCount":1,"playerKcal":320,"partnerKcal":400,"deliveredKcal":720,"returnedDay":109,"talkCount":1}]
+  FAVOR-OFFER d6: Vasyl kind=sick_help favorId=favor-vasyl_shevchenko-5-1 task=help Vasyl with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d9: Ivy kind=forage_help favorId=favor-ivy_wang-9-2 task=forage with Ivy tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-9-3 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d12: Rosa kind=heal_help favorId=favor-rosa_mendez-12-4 task=help Rosa with their injury
+  FAVOR-OFFER d15: Vasyl kind=forage_help favorId=favor-vasyl_shevchenko-15-5 task=forage with Vasyl tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Rosa kind=food_share favorId=favor-rosa_mendez-22-6 task=share food with Rosa — they're going hungry
+  FAVOR-OFFER d25: Giulia kind=food_share favorId=favor-giulia_bianchi-25-7 task=share food with Giulia — they're past hungry
+  FAVOR-OFFER d27: Ray kind=food_share favorId=favor-gen_dnxt042-27-8 task=share food with Ray — they're past hungry
+  FAVOR-OFFER d28: Ray kind=food_share favorId=favor-gen_dnxt042-28-9 task=share food with Ray — they're going hungry
+  FAVOR-OFFER d32: Rosa kind=forage_help favorId=favor-rosa_mendez-32-10 task=forage with Rosa tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Ray kind=food_share favorId=favor-gen_dnxt042-38-11 task=share food with Ray — they're going hungry
+  FAVOR-OFFER d41: Ray kind=food_share favorId=favor-gen_dnxt042-41-12 task=share food with Ray — they're going hungry
+  FAVOR-OFFER d58: Rosa kind=sick_help favorId=favor-rosa_mendez-58-13 task=help Rosa with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d73: Lorenzo kind=water_haul favorId=favor-gen_7ptmanj-73-14 task=bring four liters home from the creek with Lorenzo; set out at dawn
+  FAVOR-OFFER d74: Vasyl kind=water_haul favorId=favor-vasyl_shevchenko-74-15 task=bring four liters home from the creek with Vasyl; set out at dawn
+  FAVOR-OFFER d77: Rosa kind=water_haul favorId=favor-rosa_mendez-77-16 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d90: Ray kind=water_haul favorId=favor-gen_dnxt042-90-17 task=bring four liters home from the creek with Ray; set out at dawn
+  FAVOR-OFFER d92: Elif kind=sick_help favorId=favor-elif_demir-92-18 task=help Elif with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d94: Aria kind=food_share favorId=favor-aria_thompson-94-19 task=share food with Aria — they're running on empty
+  FAVOR-OFFER d97: Rosa kind=water_haul favorId=favor-rosa_mendez-97-21 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d97: Ray kind=water_haul favorId=favor-gen_dnxt042-97-22 task=bring four liters home from the creek with Ray; set out at dawn
+  FAVOR-OFFER d98: Aria kind=water_haul favorId=favor-aria_thompson-98-24 task=bring four liters home from the creek with Aria; set out at dawn
+  FAVOR-OFFER d98: Vasyl kind=water_haul favorId=favor-vasyl_shevchenko-98-25 task=bring four liters home from the creek with Vasyl; set out at dawn
+  FAVOR-OFFER d99: Marat kind=water_haul favorId=favor-gen_hvf5aqg-99-26 task=bring four liters home from the creek with Marat; set out at dawn
+  FAVOR-OFFER d100: Ray kind=water_haul favorId=favor-gen_dnxt042-100-27 task=bring four liters home from the creek with Ray; set out at dawn
+  FAVOR-OFFER d101: Lorenzo kind=water_haul favorId=favor-gen_7ptmanj-96-20 task=bring four liters home from the creek with Lorenzo; set out at dawn
+  FAVOR-OFFER d102: Giulia kind=water_haul favorId=favor-giulia_bianchi-98-23 task=bring four liters home from the creek with Giulia; set out at dawn
+  FAVOR-OFFER d105: Lorenzo kind=forage_help favorId=favor-gen_7ptmanj-105-29 task=forage with Lorenzo tomorrow to rebuild the pantry
+  FAVOR-OFFER d107: Rosa kind=water_haul favorId=favor-rosa_mendez-107-30 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d107: Vasyl kind=water_haul favorId=favor-vasyl_shevchenko-107-31 task=bring four liters home from the creek with Vasyl; set out at dawn
+  FAVOR-OFFER d109: Elif kind=water_haul favorId=favor-elif_demir-109-33 task=bring four liters home from the creek with Elif; set out at dawn
+  FAVOR-OFFER d109: Ivy kind=water_haul favorId=favor-ivy_wang-109-32 task=bring four liters home from the creek with Ivy; set out at dawn
+  FAVOR-OFFER d110: Ray kind=food_share favorId=favor-gen_dnxt042-110-34 task=share food with Ray — they're running on empty
+  FAVOR-OFFER d116: Aria kind=water_haul favorId=favor-aria_thompson-116-35 task=bring four liters home from the creek with Aria; set out at dawn
+  FAVOR-OFFER d118: Elif kind=sick_help favorId=favor-elif_demir-118-36 task=help Elif with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d119: Aria kind=food_share favorId=favor-aria_thompson-119-37 task=share food with Aria — they're going hungry
+  FAVOR-OFFER d121: Rosa kind=water_haul favorId=favor-rosa_mendez-121-38 task=bring four liters home from the creek with Rosa; set out at dawn
+  FAVOR-OFFER d121: Ivy kind=water_haul favorId=favor-ivy_wang-121-39 task=bring four liters home from the creek with Ivy; set out at dawn
+  FAVOR-OFFER d123: Ivy kind=water_haul favorId=favor-ivy_wang-123-41 task=bring four liters home from the creek with Ivy; set out at dawn
+  FAVOR-OFFER d124: Aria kind=water_haul favorId=favor-aria_thompson-123-40 task=bring four liters home from the creek with Aria; set out at dawn
+  FAVOR-OFFER d124: Elif kind=water_haul favorId=favor-elif_demir-124-42 task=bring four liters home from the creek with Elif; set out at dawn
+  FAVOR-OFFER d125: Vasyl kind=sick_help favorId=favor-vasyl_shevchenko-125-43 task=help Vasyl with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d126: Ivy kind=forage_help favorId=favor-ivy_wang-126-44 task=forage with Ivy tomorrow to rebuild the pantry
+  FAVOR-OFFER d133: Elif kind=sick_help favorId=favor-elif_demir-132-45 task=help Elif with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d133: Aria kind=water_haul favorId=favor-aria_thompson-133-46 task=bring four liters home from the creek with Aria; set out at dawn
+  FAVOR-OFFER d136: Aria kind=water_haul favorId=favor-aria_thompson-136-47 task=bring four liters home from the creek with Aria; set out at dawn
+  FAVOR-OFFER d137: Vasyl kind=water_haul favorId=favor-vasyl_shevchenko-137-48 task=bring four liters home from the creek with Vasyl; set out at dawn
+  FAVOR-OFFER d137: Rosa kind=sick_help favorId=favor-rosa_mendez-137-49 task=help Rosa with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-ACCEPT d9: Ivy favorId=favor-ivy_wang-9-2 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d9: Vasyl favorId=favor-vasyl_shevchenko-9-3 accepted=true state=promised meetDay=10
+  FAVOR-ACCEPT d15: Vasyl favorId=favor-vasyl_shevchenko-15-5 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d32: Rosa favorId=favor-rosa_mendez-32-10 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d105: Lorenzo favorId=favor-gen_7ptmanj-105-29 accepted=true state=promised meetDay=106
+  FAVOR-ACCEPT d126: Ivy favorId=favor-ivy_wang-126-44 accepted=true state=promised meetDay=127
+  INVITE-DEC d7 lure: Ray -> Marat chance=0 accept=false veto=sick inputs={"temp":"warm","goal":"joy","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d8 party: Gus -> Ray chance=60 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":4,"trust":25,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 25","bold temperament (+15)"]
+  INVITE-DEC d8 lure: Ray -> Marat chance=61 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d9 party: Gus -> Ivy chance=37.4 accept=true veto=- inputs={"temp":"cautious","goal":"prove","mood":"steady","fear":12,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31","cautious temperament (-10)"]
+  INVITE-DEC d10 party: Gus -> Rosa chance=66 accept=true veto=- inputs={"temp":"bold","goal":"home","mood":"steady","fear":0,"trust":40,"bond":null,"partySize":2} reasons=["trust 40","bold temperament (+15)"]
+  INVITE-DEC d10 lure: Ray -> Marat chance=61 accept=false veto=- inputs={"temp":"warm","goal":"joy","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d11 lure: Ray -> Marat chance=61 accept=false veto=- inputs={"temp":"warm","goal":"joy","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d12 lure: Ray -> Marat chance=61 accept=true veto=- inputs={"temp":"warm","goal":"joy","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d15 party: Gus -> Giulia chance=77.8 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":4,"trust":57,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 57","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d31 party: Gus -> Amy chance=91.4 accept=true veto=- inputs={"temp":"warm","goal":"peace","mood":"steady","fear":0,"trust":91,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 91","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d68 party: Gus -> Aria chance=72.80000000000001 accept=true veto=- inputs={"temp":"gentle","goal":"heal","mood":"grieving","fear":29,"trust":82,"bond":{"v":36,"depth":1},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":28,"v":42,"depth":3},{"day":29,"v":42,"depth":3},{"day":31,"v":42,"depth":3},{"day":31,"v":48,"depth":3},{"day":32,"v":48,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":50,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":52,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":58,"depth":3},{"day":41,"v":58,"depth":3}] class=no-drop
+GOSSIP: totalPicks=224 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=31 31-60=55 61-90=55 91-120=54 121+=33 naturalPicks=228 seededPicks=23 gossipPicks=224
+SEEDED: {"pair":{"a":"gen_gngp2vf","b":"ivy_wang","aName":"Amy","bName":"Ivy"},"day":27,"pre":{"v":54,"depth":2},"post":{"v":42,"depth":3},"daily":[{"day":28,"v":42,"depth":3},{"day":29,"v":42,"depth":3},{"day":31,"v":42,"depth":3},{"day":31,"v":48,"depth":3},{"day":32,"v":48,"depth":3},{"day":34,"v":50,"depth":3},{"day":35,"v":50,"depth":3},{"day":36,"v":52,"depth":3},{"day":37,"v":52,"depth":3},{"day":38,"v":56,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":58,"depth":3},{"day":41,"v":58,"depth":3}],"crackTraceClass":"no-drop","vAt7":null,"depthAt7":null,"vDrop":null,"depthDrop":null,"crack7":false,"firstServe":{"day":31,"why":"vgrievance"},"serveWithin30":true,"serves":33,"servesAll":[{"day":31,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"}],"effect":true}
+  FRIEND d45: Ray <> Amy — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d50: Lorenzo <> Fahd — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Amy <> Giulia — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d130: Lorenzo <> Giulia — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d40: Aria <> Amy — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d35: Amy <> Ivy — maxDepth 3, final 3 (v=69), dropped 0
+  FRIEND d90: Giulia <> Vasyl — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d40: Amy <> Vasyl — maxDepth 2, final 2 (v=71), dropped 0
+  FRIEND d70: Ivy <> Vasyl — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d35: Amy <> Marat — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d125: Aria <> Vasyl — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d35: Aria <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Amy <> Rosa — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d130: Elif <> Lorenzo — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d85: Lorenzo <> Ray — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d95: Ray <> Fahd — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d80: Lorenzo <> Marat — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d80: Elif <> Ray — maxDepth 3, final 3 (v=95), dropped 0
+  FRIEND d60: Marat <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Aria <> Marat — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Aria <> Elif — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d115: Lorenzo <> Rosa — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d90: Marat <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Lorenzo <> Ivy — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d60: Marat <> Vasyl — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d130: Lorenzo <> Vasyl — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d100: Ray <> Rosa — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d100: Elif <> Marat — maxDepth 3, final 3 (v=81), dropped 0
+  FRIEND d120: Aria <> Ray — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d95: Aria <> Ivy — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d120: Ray <> Ivy — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d120: Elif <> Vasyl — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d130: Aria <> Lorenzo — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d105: Giulia <> Ivy — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d130: Marat <> Rosa — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d120: Ray <> Vasyl — maxDepth 2, final 2 (v=53), dropped 0
+  FRIEND d105: Ray <> Giulia — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d115: Gus <> Giulia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Gus <> Fahd — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d115: Lorenzo <> Gus — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d115: Amy <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Gus <> Vasyl — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d115: Aria <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Gus <> Ivy — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d115: Elif <> Gus — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d115: Marat <> Gus — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d115: Gus <> Rosa — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Ray <> Gus — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d16: Ivy about Amy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Ivy about Amy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d20: Aria about Marat — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Marat about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Giulia about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Amy about Ivy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Giulia about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Fahd about Lorenzo — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Giulia about Aria — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Ivy about Amy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Lorenzo about Fahd — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Rosa about Amy — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Vasyl about Amy — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Aria about Giulia — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Ray about Amy — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Fahd about Lorenzo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Rosa about Amy — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d34: Vasyl about Amy — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Ray about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d37: Giulia about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d37: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Lorenzo about Fahd — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Ray about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Vasyl about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Marat about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Giulia about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Ray about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d42: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d43: Aria about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d43: Giulia about Amy — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Marat about Amy — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Aria about Giulia — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d46: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Giulia about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d48: Ray about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Ray about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d52: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Giulia about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Giulia about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d53: Fahd about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d54: Ray about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Ray about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d56: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Fahd about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d57: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d58: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Ray about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d60: Vasyl about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Vasyl about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d62: Fahd about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d63: Ray about Amy — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Fahd about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Rosa about Amy — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d65: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Ivy about Amy — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Ivy about Vasyl — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d70: Ray about Elif — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Ivy about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Vasyl about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Lorenzo about Fahd — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Ray about Lorenzo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d76: Fahd about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Ivy about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Vasyl about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d77: Elif about Ray — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Ray about Elif — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Ray about Elif — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Marat about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Ivy about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Marat about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Ray about Lorenzo — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Fahd about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d83: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d84: Vasyl about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d85: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Ivy about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d87: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d88: Ray about Elif — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Vasyl about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Ray about Elif — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Lorenzo about Fahd — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Ivy about Vasyl — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Marat about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d92: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Rosa about Ray — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d93: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Marat about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Marat about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Rosa about Ray — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Ray about Elif — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Ray about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Rosa about Ray — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Ray about Lorenzo — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Ivy about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Rosa about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d103: Ivy about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Vasyl about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Elif about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Fahd about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Fahd about Lorenzo — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Ray about Lorenzo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Rosa about Ray — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d107: Ivy about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Vasyl about Marat — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Giulia about Aria — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Marat about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Elif about Ray — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Ivy about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Ray about Lorenzo — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Vasyl about Marat — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Ivy about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Rosa about Lorenzo — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Elif about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Ivy about Aria — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Elif about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d116: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Elif about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d119: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Rosa about Marat — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d121: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Elif about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Elif about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Rosa about Marat — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Rosa about Marat — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d129: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Elif about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Rosa about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Vasyl about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Elif about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d135: Elif about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Ivy about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Aria about Giulia — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d137: Rosa about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Rosa about Marat — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Elif about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Elif about Marat — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  GRIEV-READ d17: Marat about Lorenzo (why=grievance)
+  GRIEV-READ d31: Amy about Ivy (why=vgrievance)
+  GRIEV-READ d32: Amy about Ivy (why=vgrievance)
+  GRIEV-READ d32: Amy about Ivy (why=vgrievance)
+  GRIEV-READ d33: Amy about Ivy (why=vgrievance)
+  GRIEV-READ d34: Amy about Ivy (why=vgrievance)
+  KNACK d8 Lorenzo: "Good question." "Amy found a lost knife by smell last week. By SMELL."
+  KNACK d17 Vasyl: "that stray dog — the one that bit two people — lets Aria touch it."
+  KNACK d20 Elif: "Ray talks to the garden. The garden listens. I've seen it."
+  KNACK d31 Elif: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Giulia touch it."
+  KNACK d31 Ivy: "You want to know about that? Okay." "Ray talks to the garden. The garden listens. I've seen it."
+  KNACK d44 Elif: "Amy found a lost knife by smell last week. By SMELL."
+  KNACK d49 Fahd: "Oh! Marat talks to the garden. The garden listens. I've seen it."
+  KNACK d56 Amy: "Huh. Let me think about that." "Here's what I think — Fahd talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"monster":1,"contest":1,"the wild":2}
