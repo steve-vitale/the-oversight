@@ -380,9 +380,10 @@ means the numbers above are citable for the next BUILD arm.
 Instruments + prereg + re-analysis + pilot corpora + analyses
 committed on branch sim-spikecontact-a (commits: prereg
 0c173d9de, amendment 1 acb810c76, amendment 2 211a37d05,
-re-analysis 071dd4ddf, instruments e890a2890; pilot + evidence
-commits follow in this run's closeout — see coordinator merge
-note). Proof test scripts/test-spikecontact-20261031.js: 18/18.
+re-analysis 071dd4ddf, instruments e890a2890, pilot + evidence
+29876ac58; branch tip at closeout 29876ac58 plus this
+closeout-note commit). Proof test
+scripts/test-spikecontact-20261031.js: 18/18.
 No src/js change in any commit. Scratch dirs deleted before
 closeout. Report: ready to merge, pending coordinator
 (--ff-only merge; the batch ship job owns pushes). If master
