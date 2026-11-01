@@ -169,12 +169,17 @@ the worker's run.
 
 ## Closeout (recovery)
 
-- Commit: this note + prereg + perseed corpus + 4 scripts
-  (instrument, sweep, analyzer, proof test); instrument only,
-  zero src/js. Safe-commit index clobber check performed
-  before any rebase or merge (see commit step).
-- Rebased onto current master; post-rebase proof re-run (see
-  commit step for the re-run result).
+- Commit 19c54fa72 (this note + prereg + perseed corpus + 4
+  scripts: instrument, sweep, analyzer, proof test); instrument
+  only, zero src/js. Safe-commit index clobber struck the commit
+  (all 72 files staged-deleted in the worktree index, files
+  intact); repaired via cacheinfo from HEAD blobs, verified
+  clean (status empty, diff empty, hashes match).
+- Rebased onto master 3056aeb4f (build: Herald drift toward
+  Haven, landed mid-recovery; an earlier rebase onto 6031e16b6
+  was redone onto current master before merging, per the
+  stale-base lesson) → 7896e5e9d. Post-rebase proof re-run:
+  node scripts/test-heraldhp2-20261101.js PASS 30 checks.
 - Merged locally via --ff-only, pending ship — no version bump,
   no push (the ship loop owns those).
 - Fleshout lock + Loop A claim deleted at closeout. Worktree
