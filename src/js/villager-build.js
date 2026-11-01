@@ -1098,7 +1098,9 @@
     // recipe spends downtime sewing. KNOWLEDGE = demonstrated by wearing:
     // wearing bark_armor means bark_armor L1; wearing hide_armor means
     // hide_armor L1 (no new knowledge system — "if you don't know, it doesn't
-    // show", and wearing it IS the showing). HIDE-HANDLED (gapscomp-hide
+    // show", and wearing it IS the showing). TAUGHT (build-armor-lesson
+    // 2026-11-01): a taught avCraft level counts too, for both armors — a
+    // taught villager knows the recipe even unworn. HIDE-HANDLED (gapscomp-hide
     // 2026-10-30): handling hide also counts, hide-only — a villager the
     // stash inflow recorded via noteNpcHideHandled knows hide_armor L1
     // (the NPC analogue of the player's hide-handling beat). Materials come from the communal
@@ -1143,11 +1145,17 @@
             // knowledge: demonstrated by wearing, plus hide handled
             // (gapscomp-hide: noteNpcHideHandled records a villager who
             // brought hide home — handling the material teaches its shape,
-            // the NPC analogue of the player's hide-handling beat).
+            // the NPC analogue of the player's hide-handling beat), plus
+            // taught avCraft levels for both armors (build-armor-lesson).
             const wornIds = new Set(Object.values(p.equipped || {}).map(e => e && e.itemId).filter(Boolean));
             const known = [];
             if (wornIds.has('bark_armor')) known.push('bark_armor');
             if (wornIds.has('hide_armor')) known.push('hide_armor');
+            // TAUGHT (build-armor-lesson 2026-11-01): a villager taught an armor
+            // recipe to L2 knows it whether or not they wear a piece — hide
+            // already read avCraft; bark did not, so a taught bark-maker
+            // could never spend the lesson. Read both the same way.
+            if (!known.includes('bark_armor') && ((v.avCraft[vid] || {}).bark_armor)) known.push('bark_armor');
             if (!known.includes('hide_armor') && ((v.avCraft[vid] || {}).hide_armor)) known.push('hide_armor');
             if (!known.length) continue;
             const lv = v.avCraft[vid] = v.avCraft[vid] || {};

@@ -9,6 +9,8 @@
 //   - teachableSkills(teacher, learner) -> skill ids the teacher can teach the learner now
 //   - canTeachSkill(teacher, learner, skillId) -> {ok, why}
 //   - teachSkill(teacher, learner, skillId, opts) -> true if the learner learned it (L1)
+//   - armorLevel(who, recipeId) -> recipe level (player codex / villager avCraft, wearing = L1)
+//   - armorTeachableSkills(teacher, learner) -> armor recipes the teacher can teach (L2+) now
 //   - skillFit(vid, skillId) -> how well a skill fits a villager's target build and tracks
 //   - villagerSkillLessonsDay() -> count of villager-to-villager lessons today (daily tick)
 //   - convoSkillChoices(vid) -> conversation menu choices ("Teach me X?" / "I could show you X.")
@@ -21,6 +23,13 @@
 //   - lesson_costs_time: one lesson per learner per day and one per conversation; the player's lesson spends 3 action ticks like teachPlant (code: canTeachSkill, convoSkillLesson)
 //   - same_gates_both_ways: trust 15+ and a shared language, whichever side teaches (code: canTeachSkill)
 //   - data_first: every knowledge skill is teachable unless flagged teachable:false (code: skillTeachable)
+//   - armor_lesson: bark/hide armor are teachable conversation topics, not knowledge skills:
+//     a teacher at recipe L2+ (materials known) teaches a learner below L2 up to L2, through
+//     the same one-lesson-a-day / trust / language gates, recorded in skillLessons as the
+//     recipe id (code: armorLevel, armorTeachableSkills, canTeachSkill, teachSkill)
+//   - armor_own_slot: armor offers sit beside the skill pick, never instead of it — the
+//     single ability-first pick would otherwise bury a non-ability topic at rate zero
+//     (code: convoSkillChoices)
 //   - track_skill_parity: the player learns the next unknown track skill at tracks.json skillLevels, like a villager (code: playerTrackSkills, tracks.js _playerTrackXP)
 // consumes:
 //   - Game.data.knowledge, Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.characterGen
@@ -52,6 +61,8 @@
   const LESSON_TICKS = 3;     // teachPlant: "a real lesson takes 3 ticks"
   const VILLAGER_DAILY_CHANCE = 0.15; // a villager who wants a fitting skill and has a teacher at home
   const FIT_MIN = 1;
+  const ARMOR_RECIPES = ['bark_armor', 'hide_armor']; // recipes.json order: bark, then hide
+  const ARMOR_TEACH_LEVEL = 2; // a lesson teaches the MATERIALS (L2: 85% craft, not blind 35%)
 
   const isPlayerWho = (G, who) => who === 'player' || (G.villagerId && who === G.villagerId);
 
@@ -79,6 +90,30 @@
     skillTeachable(skillId) {
       const k = ((this.data && this.data.knowledge) || []).find(x => x.id === skillId);
       return !!(k && k.teachable !== false);
+    },
+
+    // armorLevel(who, recipeId): how well someone knows an armor recipe.
+    // The player: the codex recipe level. A villager: their avCraft level
+    // (the villagerArmorCraftDay record), with wearing a piece counting as
+    // L1 — wearing IS seeing it, the demonstrated-L1 rule of that beat.
+    armorLevel(who, recipeId) {
+      try {
+        if (isPlayerWho(this, who)) return (((this.state.codex || {}).recipes || {})[recipeId] || {}).level || 0;
+        const v = this.state.village || {};
+        let lv = ((v.avCraft || {})[who] || {})[recipeId] || 0;
+        try {
+          const p = this.getPerson ? this.getPerson(who) : null;
+          const worn = Object.values((p && p.equipped) || {}).map(e => e && e.itemId).filter(Boolean);
+          if (worn.indexOf(recipeId) >= 0) lv = Math.max(lv, 1);
+        } catch (e) {}
+        return lv;
+      } catch (e) { warn('armorLevel', e); return 0; }
+    },
+
+    // armorTeachableSkills(teacher, learner): armor recipes the teacher
+    // knows to materials level and the learner lacks.
+    armorTeachableSkills(teacher, learner) {
+      return ARMOR_RECIPES.filter(rid => this.armorLevel(teacher, rid) >= ARMOR_TEACH_LEVEL && this.armorLevel(learner, rid) < ARMOR_TEACH_LEVEL);
     },
 
     skillsKnownBy(who) {
@@ -152,6 +187,26 @@
       if (!teacher || !learner || teacher === learner) return { ok: false, why: 'nobody' };
       if (isPlayerWho(this, teacher) && isPlayerWho(this, learner)) return { ok: false, why: 'nobody' };
       if (!this._skillAlive(teacher) || !this._skillAlive(learner)) return { ok: false, why: 'gone' };
+      if (ARMOR_RECIPES.indexOf(skillId) >= 0) {
+        // ARMOR (build-armor-lesson 2026-11-01): recipes are not knowledge skills,
+        // so the skillTeachable / personKnowsSkill checks below can never pass for
+        // them — that is why armor lessons offered 0/24 in the r80+r81 sittings.
+        // Same shared gates as a skill lesson (today / trust / language), but the
+        // knowledge check is the recipe level: the teacher must know the materials
+        // (L2+) and the learner must lack them.
+        if (this.armorLevel(teacher, skillId) < ARMOR_TEACH_LEVEL) return { ok: false, why: 'teacher' };
+        if (this.armorLevel(learner, skillId) >= ARMOR_TEACH_LEVEL) return { ok: false, why: 'known' };
+        const v = this.state.village || {};
+        const day = (this.state.scholar || {}).day || 0;
+        if (((v.skillLessonDay || {})[learner]) === day) return { ok: false, why: 'today' };
+        const other = isPlayerWho(this, teacher) ? learner : (isPlayerWho(this, learner) ? teacher : null);
+        if (other) {
+          const t = (v.trust || {})[other];
+          if ((t === undefined ? 10 : t) < TRUST_GATE) return { ok: false, why: 'trust' };
+        }
+        if (!this._skillCanTalk(teacher, learner)) return { ok: false, why: 'words' };
+        return { ok: true };
+      }
       if (!this.skillTeachable(skillId)) return { ok: false, why: 'unteachable' };
       if (!this.personKnowsSkill(teacher, skillId)) return { ok: false, why: 'teacher' };
       if (this.personKnowsSkill(learner, skillId)) return { ok: false, why: 'known' };
@@ -178,9 +233,21 @@
         if (!chk.ok) return false;
         const v = this.state.village;
         const day = (this.state.scholar || {}).day || 0;
-        const k = (this.data.knowledge || []).find(x => x.id === skillId) || {};
         let ok;
-        if (isPlayerWho(this, learner)) {
+        if (ARMOR_RECIPES.indexOf(skillId) >= 0) {
+          // ARMOR: the lesson teaches the materials (L2). The player learns
+          // through the unified recipe grant; a villager's level lives in
+          // avCraft (the villagerArmorCraftDay record), never lowered.
+          if (isPlayerWho(this, learner)) {
+            ok = this.grantKnowledge ? this.grantKnowledge('recipe', skillId, ARMOR_TEACH_LEVEL, { type: 'taught', by: teacher }) : false;
+          } else {
+            const v2 = this.state.village;
+            v2.avCraft = v2.avCraft || {};
+            const lv = v2.avCraft[learner] = v2.avCraft[learner] || {};
+            if ((lv[skillId] || 0) < ARMOR_TEACH_LEVEL) lv[skillId] = ARMOR_TEACH_LEVEL;
+            ok = true;
+          }
+        } else if (isPlayerWho(this, learner)) {
           // GAP-CLOSURE 2026-10-24, findings #640: route the player lesson
           // through the unified grant path — grantKnowledge('skill', ...)
           // delegates to learnSkill (same gain, same 'taught' via), so the
@@ -201,7 +268,7 @@
         try { this.tele('skill_lesson', { teacher: isPlayerWho(this, teacher) ? 'player' : teacher, learner: isPlayerWho(this, learner) ? 'player' : learner, skill: skillId, via: opts.via || null }); } catch (e) { warn('tele skill_lesson', e); }
         if (!isPlayerWho(this, teacher) && !isPlayerWho(this, learner)) {
           const nm = (id) => { try { return this.firstRef ? this.firstRef(id) : this.displayName(id); } catch (e) { return 'Someone'; } };
-          try { this.journalNote && this.journalNote('village', 'skill-lesson:' + learner + ':' + skillId, `${nm(teacher)} taught ${nm(learner)} ${k.name || skillId}.`); } catch (e) { warn('journalNote', e); }
+          try { this.journalNote && this.journalNote('village', 'skill-lesson:' + learner + ':' + skillId, `${nm(teacher)} taught ${nm(learner)} ${this._skillName(skillId)}.`); } catch (e) { warn('journalNote', e); }
         }
         return true;
       } catch (e) { warn('teachSkill', e); return false; }
@@ -273,7 +340,9 @@
     // --- the player's side: one line per option in the conversation ---
     _skillName(sid) {
       const k = (this.data.knowledge || []).find(x => x.id === sid);
-      return (k && k.name) || sid;
+      if (k && k.name) return k.name;
+      const r = (this.data.recipes || []).find(x => x.id === sid);
+      return (r && r.name) || sid;
     },
     // the skill to offer: ones that carry an ability first, then data order
     _skillPick(list, scoreFn) {
@@ -293,6 +362,18 @@
         const give = this.teachableSkills('player', vid).filter(sid => this.canTeachSkill('player', vid, sid).ok);
         const sg = this._skillPick(give, sid => this.skillFit(vid, sid));
         if (sg) out.push({ id: 'skill_teach:' + sg, label: `"I could show you ${this._skillName(sg)}."` });
+        // ARMOR (build-armor-lesson 2026-11-01): armor recipes are not
+        // knowledge skills, so teachableSkills never lists them — and the
+        // single _skillPick above ranks ability-carrying skills first, so
+        // armor would lose the one slot even if listed. Armor therefore
+        // gets its own slot beside the skill pick: at most one learn and
+        // one teach line, each gated exactly like a skill lesson.
+        for (const rid of ARMOR_RECIPES) {
+          if (this.canTeachSkill(vid, 'player', rid).ok) { out.push({ id: 'skill_learn:' + rid, label: `"Teach me ${this._skillName(rid)}?"` }); break; }
+        }
+        for (const rid of ARMOR_RECIPES) {
+          if (this.canTeachSkill('player', vid, rid).ok) { out.push({ id: 'skill_teach:' + rid, label: `"I could show you ${this._skillName(rid)}."` }); break; }
+        }
       } catch (e) { warn('convoSkillChoices', e); }
       return out;
     },
