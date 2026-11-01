@@ -298,3 +298,25 @@ is NOT rolled on this run's numbers (prereg decision stands).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
+Master at worktree creation: 7c8745741. At closeout master had moved
+to 1a5174abc (11 commits: lane-B coordinator evidence, sim-seathes-a
+prereg + evidence, sim-supplyleg-b, sim-detourclear-b, journey-social
+r79 — ZERO src/js + src/data in the range, verified by diff). The
+branch was rebased cleanly onto 1a5174abc (3/3 picks, no conflicts,
+no stop-at-pick quirk), resynced with `git read-tree HEAD`, and
+proofs were re-run after the rebase as the body requires: node
+--check clean on driver + analyzer, classifier proof 13/13. NO quad
+re-run after the rebase: unlike r65 (where a src/js change landed
+mid-run), this rebase range holds zero game code, so the measured
+quad stands unchanged on the new base.
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 88695cb11 (prereg + driver + analyzer + proof),
+95cef9f20 (analyzer amendment + 13-check proof),
+d6d61ec26 (quad + wsplit analysis + run note), plus this landing
+section as the final branch commit, merged by a second fast-forward.
+Worktree released + branch deleted at closeout; final main-tree
+status clean. Rotation file written 3→0 at closeout and verified by
+reading it back. Playtest lock deleted at closeout. Heartbeat loop
+stopped at closeout.
