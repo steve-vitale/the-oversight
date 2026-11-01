@@ -1,0 +1,38 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Gabriel","t":90},{"id":"Penelope","t":90},{"id":"Maeve","t":90},{"id":"Hannah","t":90}], roster=11
+INH readable=true scripted=true deadItems=12 distinct=12 transferred=2 vanished=0 keptPlants=18 inheritedPlants=4 keptSkills=7 inheritedSkills=6 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","echo_location"] post=["bloodhound","echo_location"]
+DEATH d41 (a hushwolf, scripted): Donna -> Maeve | passed=true lin=true mo=true trust=58 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=0 of 12 distinct dead-bearer items
+  CONVO d+3 with Hannah (refused=false)
+  CONVO d+3 with Gabriel (refused=false)
+  CONVO d+7 with Hannah (refused=false)
+  CONVO d+7 with Gabriel (refused=false)
+  CONVO d+14 with Hannah (refused=false)
+  CONVO d+14 with Gabriel (refused=false)
+  CONVO d+30 with Hannah (refused=false)
+  CONVO d+30 with Gabriel (refused=false)
+  CONVO d+45 with Gabriel (refused=false)
+  CONVO d+45 with Colin (refused=false)
+  CONVO d+53 with Chantal (refused=false)
+  CONVO d+53 with Gabriel (refused=false)
+  CONVO d+64 with Chantal (refused=false)
+  CONVO d+64 with Gabriel (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=9) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":39,"offerLines":117,"codexPlantsDelta":15,"codexSkillsDelta":8,"codexAbilitiesDelta":7,"xpDelta":86,"any":true} pantry 59087->54502
+TRUST-DIALS: office 58->67 (+9, climb) | villageMean 79.3->90.5 (+11.2, climb) | ge60 9->8 | movers>=5: [{"id":"Chantal","from":67,"to":93,"delta":26},{"id":"Colin","from":67,"to":90,"delta":23},{"id":"Luis","from":68,"to":90,"delta":22},{"id":"Sigrun","from":68,"to":90,"delta":22},{"id":"Ava","from":74,"to":90,"delta":16},{"id":"Hannah","from":100,"to":90,"delta":-10}]
+DEED-LEDGER: calls=22 summary={"donateToPantry":{"calls":4,"ok":4,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"teachPlant":{"calls":18,"ok":18,"deltaSum":0,"deltaN":18,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=110 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+69) t2=true(deedCalls=22) trustVerdict={"readable":true,"officeMantle":58,"officeLast":67,"officeDelta":9,"officeClass":"climb","villageMantle":79.3,"villageLast":90.5,"villageDelta":11.2,"villageClass":"climb","villageGe60Mantle":9,"villageGe60Last":8,"movers":[{"id":"Chantal","from":67,"to":93,"delta":26},{"id":"Colin","from":67,"to":90,"delta":23},{"id":"Luis","from":68,"to":90,"delta":22},{"id":"Sigrun","from":68,"to":90,"delta":22},{"id":"Ava","from":74,"to":90,"delta":16},{"id":"Hannah","from":100,"to":90,"delta":-10}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":0,"trustMoves":7} callCheck={"dailyMoveDays":7,"callMoveDays":7,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":5,"soloOfficeDeltas":[1,1,1,1,1],"soloBearerDeltaExact":[1,1,1,1,1],"singleMoverBearer":1,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":7}
