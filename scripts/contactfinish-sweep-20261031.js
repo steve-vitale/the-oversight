@@ -131,11 +131,58 @@ async function oneRun(seed) {
   return out;
 }
 
+// Resilient per-seed writer (sim-contactfinish-a, flap response):
+// when OUTDIR is set, each seed's JSON goes straight to its per-seed
+// file with retry + full-size verification (Atomics.wait sleeps are
+// wall-clock, not game clock), and seeds already present and valid
+// are skipped — so a flap-killed invocation resumes cleanly.
+// Without OUTDIR the original stdout-only discipline stands.
+const _fs = require('fs');
+function _sleepSync(ms) {
+  try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {}
+}
+function _writeResilient(fp, payload) {
+  // Splitter parity: 180 attempts x 10s = 30 min budget. The 60x5s
+  // budget lost three consecutive seeds' files to one long flap
+  // window (2026-11-01 02:25-02:37Z); do not shrink it again.
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 180; attempt++) {
+    try {
+      _fs.writeFileSync(fp, payload);
+      const sz = _fs.statSync(fp).size;
+      if (sz > 0 && sz === Buffer.byteLength(payload)) return true;
+      lastErr = new Error('short write: ' + sz + ' of ' + Buffer.byteLength(payload) + ' bytes');
+    } catch (e) { lastErr = e; }
+    if (attempt % 10 === 0) console.error('  write waiting out flap (attempt ' + attempt + ', last: ' + (lastErr && lastErr.message) + ')');
+    if (attempt < 180) _sleepSync(10000);
+  }
+  try { _fs.unlinkSync(fp); } catch (e) {}
+  throw lastErr || new Error('write failed');
+}
+
 (async () => {
+  const OUTDIR = process.env.OUTDIR || null;
+  if (OUTDIR) {
+    const dir = path.join(OUTDIR, 'leadfeast');
+    _fs.mkdirSync(dir, { recursive: true });
+  }
   for (const seed of SEEDS) {
     try {
+      if (OUTDIR) {
+        const fp = path.join(OUTDIR, 'leadfeast', 's' + seed + '.json');
+        try {
+          const parsed = JSON.parse(_fs.readFileSync(fp, 'utf8'));
+          if (parsed && parsed.seed === seed) { console.error('skip s' + seed + ': already present and valid'); continue; }
+        } catch (e) {}
+      }
       const r = await oneRun(seed);
-      console.log(JSON.stringify(r));
+      if (OUTDIR) {
+        const payload = JSON.stringify(r, null, 1) + '\n';
+        _writeResilient(path.join(OUTDIR, 'leadfeast', 's' + seed + '.json'), payload);
+        console.error('wrote s' + seed + ' (' + Buffer.byteLength(payload) + ' bytes)');
+      } else {
+        console.log(JSON.stringify(r));
+      }
       console.error(`done s${seed}: daily=${(r.daily || []).length} ff=${(r.fieldFights || []).length} tb=${(r.tbFights || []).length} kills=${(r.killEvents || []).length} spawns=${(r.spawns || []).length} engineUw=${r.engineFinalUw} maxWave=${r.maxWave} nat=${r.national} table=${r.table} won=${r.won} end=${r.endReason} days=${r.gameDays} rank=${r.endScaleRank} errs=${r.recorderErrs}`);
     } catch (e) {
       console.error(`ERROR s${seed}: ${e && e.message}`);
