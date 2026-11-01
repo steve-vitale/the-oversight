@@ -1,0 +1,255 @@
+{
+  "corpusDir": "evidence/2026-11-01/sim-awayeve-b-corpus-basecheck-p1-30d",
+  "policy": "nighttravel-stack",
+  "horizonDays": 30,
+  "legs": 1,
+  "seeds": [
+    17523
+  ],
+  "gateOkLegs": 1,
+  "gateFailures": [],
+  "totalCreekTileEvenings": 8,
+  "totalConfirmedNights": 7,
+  "totalFailedReturn": 7,
+  "totalNoAttempt": 0,
+  "totalUnclassified": 0,
+  "classificationCompleteness": 1,
+  "totalBlockedCrossingNights": 7,
+  "totalUnconfirmedSleepReturn": 0,
+  "totalUnconfirmedHavenFollowing": 1,
+  "totalUnconfirmedEndOfRun": 0,
+  "totalCamps": 1,
+  "totalGenuine": 2,
+  "totalErrs": 0,
+  "totalEpisodes": 1,
+  "episodesPerLeg": 1,
+  "seedsWithEpisode": [
+    17523
+  ],
+  "lengthDist": {
+    "1": 0,
+    "2-4": 0,
+    "5+": 1
+  },
+  "episodesByEnd": {
+    "SUCCESSION": 1
+  },
+  "episodes": [
+    {
+      "seed": 17523,
+      "vesselId": "gen_l8ql01k",
+      "startDay": 7,
+      "endDay": 13,
+      "days": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "length": 7,
+      "nights": [
+        {
+          "loopDay": 7,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 9,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_l8ql01k",
+          "signals": [
+            "outcome:out-of-reach"
+          ],
+          "blockedCrossing": true
+        }
+      ],
+      "endStory": "SUCCESSION",
+      "exitDay": 14
+    }
+  ],
+  "perSeed": [
+    {
+      "seed": 17523,
+      "policy": "nighttravel-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "genuine": 2,
+      "creekTileEvenings": 8,
+      "creekTileDays": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "confirmedNights": 7,
+      "confirmedDays": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "failedReturn": 7,
+      "noAttempt": 0,
+      "unclassified": 0,
+      "blockedCrossingNights": 7,
+      "unconfirmedSleepReturn": 0,
+      "unconfirmedHavenFollowing": 1,
+      "unconfirmedEndOfRun": 0,
+      "camps": [
+        {
+          "startDay": 7,
+          "endDay": 14,
+          "length": 8,
+          "days": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "genuine": true,
+          "confirmedNights": 7,
+          "endStory": "succession"
+        }
+      ],
+      "episodes": [
+        {
+          "vesselId": "gen_l8ql01k",
+          "startDay": 7,
+          "endDay": 13,
+          "days": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "length": 7,
+          "nights": [
+            {
+              "loopDay": 7,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 8,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 9,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 10,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 11,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 12,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            },
+            {
+              "loopDay": 13,
+              "vesselId": "gen_l8ql01k",
+              "signals": [
+                "outcome:out-of-reach"
+              ],
+              "blockedCrossing": true
+            }
+          ],
+          "endStory": "SUCCESSION",
+          "exitDay": 14
+        }
+      ],
+      "episodeCount": 1
+    }
+  ]
+}

@@ -1,0 +1,714 @@
+{
+  "corpusDir": "evidence/2026-11-01/sim-awayeve-b-corpus-basecheck-creekseek-30d",
+  "policy": "creekseek-stack",
+  "horizonDays": 30,
+  "legs": 1,
+  "seeds": [
+    17523
+  ],
+  "gateOkLegs": 1,
+  "gateFailures": [],
+  "totalEvenings": 30,
+  "totalHavenEvenings": 17,
+  "totalRoadEvenings": 0,
+  "totalAwayEvenings": 13,
+  "awayShare": 0.43333333333333335,
+  "awayShareNonRoad": 0.43333333333333335,
+  "seedsWithAway": [
+    17523
+  ],
+  "awayByTile": {
+    "creek": 13
+  },
+  "awayByStart": {
+    "departure": 2,
+    "continuation": 11
+  },
+  "awayByEndCause": {
+    "return-attempted": 13
+  },
+  "awayByEndSubkind": {
+    "out-of-reach": 13
+  },
+  "awayByReturnStory": {
+    "failed-return": 11,
+    "ended-other": 2
+  },
+  "awayByReturnSubkind": {
+    "out-of-reach": 11,
+    "succession": 2
+  },
+  "totalUnclassified": 0,
+  "classificationCompleteness": 1,
+  "totalCreekAwayEvenings": 13,
+  "totalBlockedCrossingAway": 8,
+  "totalForageAway": 13,
+  "totalPatrolAway": 0,
+  "totalTravelLineAway": 13,
+  "totalEpisodes": 2,
+  "episodesPerLeg": 2,
+  "seedsWithEpisode": [
+    17523
+  ],
+  "episodeLengthDist": {
+    "1": 0,
+    "2-4": 0,
+    "5+": 2
+  },
+  "episodesByEnd": {
+    "SUCCESSION": 2
+  },
+  "episodes": [
+    {
+      "seed": 17523,
+      "vesselId": "gen_l8ql01k",
+      "startDay": 7,
+      "endDay": 14,
+      "days": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "length": 8,
+      "endStory": "SUCCESSION",
+      "exitDay": 15
+    },
+    {
+      "seed": 17523,
+      "vesselId": "gen_c7chmkk",
+      "startDay": 18,
+      "endDay": 22,
+      "days": [
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "length": 5,
+      "endStory": "SUCCESSION",
+      "exitDay": 23
+    }
+  ],
+  "totalGenuine": 2,
+  "totalCamps": 2,
+  "campEndStories": {
+    "succession": 2
+  },
+  "totalErrs": 0,
+  "perSeed": [
+    {
+      "seed": 17523,
+      "policy": "creekseek-stack",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 17,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 13,
+      "awayDays": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "awayShare": 0.43333333333333335,
+      "awayShareNonRoad": 0.43333333333333335,
+      "awayByTile": {
+        "creek": 13
+      },
+      "awayByStart": {
+        "departure": 2,
+        "continuation": 11
+      },
+      "awayByEndCause": {
+        "return-attempted": 13
+      },
+      "awayByEndSubkind": {
+        "out-of-reach": 13
+      },
+      "awayByReturnStory": {
+        "failed-return": 11,
+        "ended-other": 2
+      },
+      "awayByReturnSubkind": {
+        "out-of-reach": 11,
+        "succession": 2
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 13,
+      "creekAwayDays": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "blockedCrossingAway": 8,
+      "forageAway": 13,
+      "patrolAway": 0,
+      "travelLineAway": 13,
+      "away": [
+        {
+          "loopDay": 7,
+          "vesselId": "gen_l8ql01k",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 6,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 9,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 14,
+          "vesselId": "gen_l8ql01k",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            1,
+            7
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 1,
+              "mapPy": 7
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_c7chmkk",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": {
+            "attempted": true,
+            "tileBefore": "trail_edge",
+            "from": {
+              "tile": "trail_edge",
+              "mapPx": 5,
+              "mapPy": 1
+            },
+            "to": {
+              "x": 3,
+              "y": 1
+            },
+            "distance": 2,
+            "hopError": null,
+            "arrival": {
+              "mapPx": 3,
+              "mapPy": 1
+            },
+            "outcome": "moved-to-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_c7chmkk",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 3,
+              "mapPy": 1
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_c7chmkk",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 3,
+              "mapPy": 1
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 21,
+          "vesselId": "gen_c7chmkk",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 3,
+              "mapPy": 1
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "failed-return",
+          "returnSubkind": "out-of-reach"
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_c7chmkk",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "out-of-reach",
+          "endCause": "return-attempted",
+          "endSubkind": "out-of-reach",
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": {
+            "attempted": false,
+            "tileBefore": "creek",
+            "from": {
+              "tile": "creek",
+              "mapPx": 3,
+              "mapPy": 1
+            },
+            "skip": "already-creek"
+          },
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_l8ql01k",
+          "startDay": 7,
+          "endDay": 14,
+          "days": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "length": 8,
+          "endStory": "SUCCESSION",
+          "exitDay": 15
+        },
+        {
+          "vesselId": "gen_c7chmkk",
+          "startDay": 18,
+          "endDay": 22,
+          "days": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "length": 5,
+          "endStory": "SUCCESSION",
+          "exitDay": 23
+        }
+      ],
+      "episodeCount": 2,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 0,
+        "5+": 2
+      },
+      "episodesByEnd": {
+        "SUCCESSION": 2
+      },
+      "genuine": 2,
+      "genuineDays": [
+        7,
+        18
+      ],
+      "camps": [
+        {
+          "startDay": 7,
+          "endDay": 14,
+          "length": 8,
+          "days": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "genuine": true,
+          "confirmedNights": 7,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 18,
+          "endDay": 22,
+          "length": 5,
+          "days": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "genuine": true,
+          "confirmedNights": 4,
+          "endStory": "succession"
+        }
+      ],
+      "campCount": 2,
+      "campEndStories": {
+        "succession": 2
+      }
+    }
+  ]
+}
