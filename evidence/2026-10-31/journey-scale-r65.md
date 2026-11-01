@@ -271,4 +271,57 @@ numbers (prereg decision stands).
 Verdict: zero regressions attributable to this run.
 
 ## Landing (filled at closeout)
-Master at worktree creation: fa2c896d5. [TO BE FILLED]
+Master at worktree creation: fa2c896d5. At closeout master had moved
+to 3d0958360 (19 commits: lane-B coordinator evidence, journey
+crisis r90, and one src change — sim-contactfinish-a CONTACT-FINISH
+rule, fieldFights.js +107, wave>=3 volley-break block, plus a batch
+ship version stamp in build.js). The branch was rebased cleanly onto
+3d0958360 (no conflicts, no stop-at-pick quirk this time), and proofs
+were re-run after the rebase as the body requires: node --check clean
+on all three scripts, and a FULL quad re-run on the rebased base into
+a scratch evid dir (not committed; its comparison numbers are the
+record below).
+**Rebase re-run result — 3/4 identical, 1 seed moved by the new base:**
+85001, 85002, 85004 give 0-line capture diffs and identical census
+scalars on the new base. 85003 DIVERGES (13,114 capture diff lines):
+committed (measurement base) DEAD d154, 0/0, deaths 51, pilg 56,
+beast_calm/echo_location vs rebased DEAD d125, 5/5, deaths 48, pilg
+41, beast_calm/lucky_rock/live_broadcast — same lesser arc4 waiting
+seat, different fate.
+**First-divergence audit (85003):** captures are identical through
+line 5075. First divergence at line 5076: a door-defense against The
+Callback — measurement base: "4 driven off" (no kill); new base: "1
+put down, 3 driven off" plus the SYSTEM veteran-kill announcement
+("Olivia just put down The Callback... on CAMERA. That's a veteran
+kill") and a Codex page ("The Callback is dead"). Downstream: Ye-na
+bound up 40→55 vs 45→60 HP, a different basket-setter, a different
+outing (Olivia/Ye-na forage vs Henrik bundle), a fireside Callback
+story beat only on the new base, and later "Olivia killed the
+Callback alone" vs "Olivia stared down the Callback and it backed
+off". Hungerwatch first differs at d52, wantwatch at d56 — a mid-run
+fight divergence cascading. No volley/contact-finish line appears in
+either player capture, so the rule firing itself is inferred, not
+directly observed — stated as inference, not proof. What is proven:
+the divergence is real game behavior from the landed contact-finish
+change, not a driver bug (the range holds nothing else that could
+move a field fight: build.js stamp + fieldFights.js only) and not
+measurement noise (3/4 seeds byte-identical). The Callback kill is a
+wave-3+ field-fight outcome change, consistent with the rule's
+wave>=3 scope.
+**Scope of this finding:** it does NOT re-score Q1. Q1 parity (r65 vs
+r64, measurement base) PASSED as preregistered. The rebase re-run is
+the body's post-rebase proof check, and its verdict is: the
+contact-finish rule's scale-leg footprint on this band is 1/4 seeds
+moved, seat outcomes unchanged (lesser 2/4 on both bases), full seat
+still 0/4, wave 5 still 0/4. Q2's duty classification was measured on
+the measurement base and was not re-run on the new base.
+Merged locally via `git merge --ff-only journey-scale-r65` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 153fa55d7 (prereg + driver, rebased from 291c5297),
+3048d2cb5 (quad + duty-trace + evidence, rebased from c3fc4ae8).
+This landing-section commit follows on the same branch and is merged
+by a second fast-forward.
+Worktree released + branch deleted at closeout; final main-tree
+status clean. Rotation file written 3→0 at closeout and verified by
+reading it back. Playtest lock deleted at closeout.
