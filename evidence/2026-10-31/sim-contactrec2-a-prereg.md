@@ -232,6 +232,26 @@ under this branch via sibling landings, report the branch
 tip and that a rebase onto current master + proof re-run
 is needed at landing.
 
+## AMENDMENT (I/O only, committed BEFORE any judged verdict; no GO threshold, seed, policy, or classifier change)
+
+The candidate sweep's console.log-to-redirect path lost seed
+lines under the container EPERM flap: loud EPERM on seed
+87119's JSON line in three 8-seed attempts, and silent 0-byte
+files on clean exits in per-seed attempts (same command gave
+232934 bytes once and 0 bytes once for seed 87104). The
+candidate sweep (scripts/contactrec2-sweep-20261031.js, my own
+file) gains an optional CONTACTREC2_OUT path: each seed line
+is appended with writeFileSync + byte-size verification +
+retry (the splitter's writeResilient pattern). JSON content is
+identical to the console.log path; unset CONTACTREC2_OUT keeps
+the original behavior. The judged candidate corpus is produced
+with CONTACTREC2_OUT set; trajectories are deterministic, so
+the re-run reproduces the per-seed summaries already observed
+(all 8 seeds matching the baseline leg's day counts), and the
+evidence verifies dayHash identity against the baseline leg
+seed by seed. No judged corpus existed before this amendment
+(the failed attempts left only 0-byte files, deleted).
+
 ## Metric review (to be filled at evidence time)
 
 - Did the candidate recorder close the evade gap without

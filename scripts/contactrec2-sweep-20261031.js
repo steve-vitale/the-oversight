@@ -131,11 +131,42 @@ async function oneRun(seed) {
   return out;
 }
 
+// Resilient line writer (sim-contactrec2-a infrastructure note):
+// console.log to a redirected file LOST whole seed lines under the
+// container EPERM flap (loud EPERM on seed 87119's line; silent
+// 0-byte files on clean exits). When CONTACTREC2_OUT is set, each
+// seed line is appended with writeFileSync + byte-size verification
+// + retry (same pattern as the splitter's writeResilient); the
+// JSON content is identical to the console.log path. Unset =
+// original console.log behavior, unchanged.
+const fs = require('fs');
+function sleepSyncMs(ms) {
+  try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch (e) {}
+}
+function writeLineResilient(line) {
+  const out = process.env.CONTACTREC2_OUT;
+  if (!out) { console.log(line); return; }
+  const payload = line + '\n';
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 60; attempt++) {
+    try {
+      const before = fs.existsSync(out) ? fs.statSync(out).size : 0;
+      fs.appendFileSync(out, payload);
+      const after = fs.statSync(out).size;
+      if (after === before + Buffer.byteLength(payload)) return;
+      lastErr = new Error(`short append: ${after - before} of ${Buffer.byteLength(payload)} bytes`);
+    } catch (e) { lastErr = e; }
+    if (attempt % 10 === 0) console.error(`  CONTACTREC2_OUT append still waiting out flap (attempt ${attempt}, last: ${lastErr && lastErr.message})`);
+    if (attempt < 60) sleepSyncMs(5000);
+  }
+  throw lastErr || new Error('CONTACTREC2_OUT append failed');
+}
+
 (async () => {
   for (const seed of SEEDS) {
     try {
       const r = await oneRun(seed);
-      console.log(JSON.stringify(r));
+      writeLineResilient(JSON.stringify(r));
       console.error(`done s${seed}: daily=${(r.daily || []).length} ff=${(r.fieldFights || []).length} tb=${(r.tbFights || []).length} kills=${(r.killEvents || []).length} spawns=${(r.spawns || []).length} engineUw=${r.engineFinalUw} maxWave=${r.maxWave} nat=${r.national} table=${r.table} won=${r.won} end=${r.endReason} days=${r.gameDays} rank=${r.endScaleRank} errs=${r.recorderErrs}`);
     } catch (e) {
       console.error(`ERROR s${seed}: ${e && e.message}`);
