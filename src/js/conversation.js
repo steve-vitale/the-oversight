@@ -4393,7 +4393,16 @@
       if (c.thread === 'want' && (c.want?.favor?.state === 'promised' ||
           (c.want?.favor?.waterRun && !c.want.favor.waterRun.returned)) && !c.choosingSubject &&
           !c.pendingQ && !c.reactiveQ && !c.genericQ) {
-        return finish(this.convoFavorActionMenu(vid, c.want.favor, false).map(o => ({ id: o.id, label: o.labels[0], temper: o.temper })).concat([
+        const favorMenu = this.convoFavorActionMenu(vid, c.want.favor, false).map(o => ({ id: o.id, label: o.labels[0], temper: o.temper }));
+        // FAVOR-GOON (journey-establishment r72 2026-11-01): this branch
+        // omitted the continuer that the endtopic branch and the general
+        // path both offer whenever heldBeats is non-empty, so queued beats
+        // on favor sittings died unspoken (r71: 6 QUEUED-NOT-OFFERED, all
+        // on favor menus; Elena 361's moodBeat lost at close). Offering
+        // the continuer does not force it — picking subject/leave still
+        // drops the beat by design (one-beat turns, convoDropUnspoken).
+        if (c.heldBeats?.length) favorMenu.unshift({ id: 'goon', label: this.convoGoonLabel(vid) });
+        return finish(favorMenu.concat([
           { id: 'dlg:subject', label: '"Can I ask you something else?"' },
           { id: 'leave', label: '"I should go."' },
         ]));
