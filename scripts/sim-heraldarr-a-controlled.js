@@ -125,7 +125,21 @@ async function main() {
       out.steps.push({ name: 'control-stays', expected: 'control-unchanged', actual: 'BLOCKED', pass: false, detail: 'no adjacent candidate travel succeeded' });
     } else {
       const ct = tileOf(controlDef.id);
-      step('control-stays', '3,3', ct ? (ct.x + ',' + ct.y) : 'null', { dest: ctrlDest, controlId: controlDef.id });
+      // The control assertion is did-not-follow, not did-not-move:
+      // tile entry runs worldTick, and wander (p=0.35) may move the
+      // control monster to an ADJACENT tile on its own. A follow would
+      // land it exactly on the scholar's destination tile; anything
+      // else (stayed, or wandered adjacent-but-not-dest) is not a follow.
+      const ctKey = ct ? (ct.x + ',' + ct.y) : 'null';
+      const destKey = ctrlDest.x + ',' + ctrlDest.y;
+      const followed = ctKey === destKey;
+      const stayed = ctKey === '3,3';
+      const wanderConsistent = !followed && !stayed && ct &&
+        (Math.abs(ct.x - 3) + Math.abs(ct.y - 3) === 1);
+      const pass = !followed;
+      if (!pass) ok = false;
+      out.steps.push({ name: 'control-stays', expected: 'not-on-dest', actual: ctKey, pass: pass,
+        detail: { dest: ctrlDest, controlId: controlDef.id, classification: followed ? 'FOLLOWED' : (stayed ? 'stayed' : (wanderConsistent ? 'wander-consistent' : 'moved-elsewhere')) } });
     }
   }
 

@@ -251,7 +251,13 @@ on the scholar's tile, then:
       line present);
   (c) control: spawn a follows:false monster on the
       scholar's tile, `travelTo` adjacent -> expect the
-      monster unchanged (stays on the old tile).
+      monster NOT to land on the destination tile. (The
+      control assertion is did-not-follow, not did-not-move:
+      tile entry runs worldTick, and wander may move the
+      control to an adjacent tile on its own; only landing
+      exactly on the scholar's destination would be a
+      follow. The driver classifies stayed /
+      wander-consistent / FOLLOWED.)
 The driver records the herald def's `follows` value
 verbatim. A travel refusal/blockage on any step retries
 with another adjacent destination once, then reports the
@@ -280,8 +286,10 @@ DIAG-GO (arrival finding) iff ALL of:
    its chain + landing class (0 such windows is a reported
    zero, not a bar failure).
 6. Controlled leg green: follow-enter observed, follow-
-   hold observed, follows:false control stays (BLOCKED
-   steps reported, not counted as passes).
+   hold observed, follows:false control does not land on
+   the destination tile (stayed, or wander-consistent
+   adjacent move — see the controlled-leg section for why
+   the control asserts did-not-follow, not did-not-move).
 7. Recorder-neutrality leg: ON vs OFF end fields identical
    (days, gameDays, won, national/table flags, maxWave,
    endScaleRank, endReason) on 1 pilot seed — the FIRST
