@@ -499,6 +499,13 @@
         // a reader can verify the gate without re-deriving it.
         committedFinish: false, committedRounds: 0, twoblowLastTwo: null, twoblowSum: null,
         twoblowCommitMhp: null, twoblowCommitVhpFrac: null, twoblowCommitSum: null,
+        // CHORUS-HOLD (sim-chorus-a, 2026-10-31): audit count of
+        // dance-round holds at the break check (see the break check
+        // below). A committed fighter holds through a downbeat
+        // dance round instead of losing the finish to it; the count
+        // proves the branch fired and nowhere else it could fire
+        // from (dance rounds exist only for chorus_line).
+        chorusHoldRounds: 0,
         // PARTY SIZE (sim-partyfinish-a, 2026-10-28): the mustered party
         // (leader + opts.allies) for honest kill narration — a party kill
         // must never read as a solo kill (fieldFightSummary used to say
@@ -1076,10 +1083,16 @@
       // ally strikes never enter), plus this round's struck flag.
       var twoblowLast = [];
       var vStruckThisRound = false;
+      // CHORUS-HOLD (sim-chorus-a, 2026-10-31): whether this round's
+      // villager action was a downbeat dance. Reset each round;
+      // set in the dance trick branch. Read at the break check,
+      // where rec.trickDance has already been cleared.
+      var dancedThisRound = false;
       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
         abRoundTaken = 0;
         vStruckThisRound = false;
+        dancedThisRound = false;
         // ABILITY — HAYMAKER (throw_haymaker): every 3rd round the villager
         // winds up — the strike below lands double, but the windup leaves
         // them open (the monster's hits land +2 this round). The telegraph
@@ -1495,6 +1508,7 @@
                 }
               } else if (trickAct.type === 'dance') {
                 rec.trickDance = 1; // the downbeat kick catches air
+                dancedThisRound = true; // CHORUS-HOLD: read at the break check
                 rec.log.push('R' + round + ': ' + vName + ' dances on the downbeat.');
               } else if (trickAct.type === 'confess') {
                 // GAVEL: confess first — out loud, where everyone can hear.
@@ -2045,6 +2059,27 @@
         // skipped while the rope holds. It can still fight, and when the
         // rope's rounds run out the break check decides as before.
         if (abBoundN <= 0 && (members[0].hp / members[0].maxHp) < mBreak) {
+          // CHORUS-HOLD (sim-chorus-a, 2026-10-31): a fighter who
+          // already committed does NOT lose the finish to a downbeat
+          // dance round. The dance consumed the whole turn, so the
+          // twoblow gate's struck-this-round condition cannot fire
+          // on that round — but the dance was defensive (the kick
+          // catches air), not a disengagement, and the proven blows
+          // survive it (twoblowLast is not reset by a dance round).
+          // So the commitment persists across exactly the dance
+          // round: the beast does not flee, the loop continues, and
+          // the next strike round re-gates honestly (a 0-damage
+          // strike there still lets the beast flee). Narrow by
+          // construction: dance rounds exist only for chorus_line,
+          // and the hold requires a PRIOR commitment (which itself
+          // required >= 60% HP, engage intent, wave >= 3) — it never
+          // creates a commitment and never re-imposes or relaxes
+          // any gate. The 40% companion floor above still fires
+          // first if breached; sealed arenas are untouched.
+          if (rec.committedFinish && dancedThisRound && members[0].hp > 0 && !opts.noFlee) {
+            rec.chorusHoldRounds = (rec.chorusHoldRounds | 0) + 1;
+            rec.log.push(vName + ' holds through the downbeat — ' + mPhrase + ' is still two blows from falling, and the dance was the price of staying in it. (Committed finish, chorus hold)');
+          } else {
           // TWOBLOW (sim-twoblow-a, 2026-10-31): the committed finish
           // within two blows. The break line, the 60% fighter-HP gate,
           // the engage intent, the struck-this-round gate and the
@@ -2080,6 +2115,7 @@
           else if (!opts.allyFromStart) rec.log.push(mPhraseCap + ' breaks — wounded past its line, it turns and runs.');
           break;
           } // else (TWOBLOW gate did not fire): the flight stands.
+          } // else (CHORUS-HOLD did not fire): the twoblow gate decides.
         }
         // ABILITY bookkeeping: the debt of this round settles the next.
         abLastRoundTaken = abRoundTaken;
