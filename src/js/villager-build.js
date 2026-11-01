@@ -21,6 +21,7 @@
 //   - vesselStashFetch() -> {item, slot} | null; the vessel's own-stash weapon fetch, once a day at haven
 //   - vesselArmorFetch() -> {item, slot} | null; the vessel's own-stash armor fetch, once a day at haven (mirror of the weapon fetch)
 //   - villagerWeaponCraftDay() -> number crafted; a weaponless villager who personally knows a weapon recipe and can reach the materials (own pack / camp pile at home) crafts up the spear/bow recipe ladder and equips the result (own knowledge, own hands only)
+//   - villagerAmmoCraftDay() -> number of batches crafted; a bow/crossbow-carrier at home short of matching ammo crafts one batch from own carried materials / camp pile at home, using the existing arrow/bolt recipes (own hands only)
 //   - villagerBuildDay() -> the daily tick: gear, pending sheets
 //   - pickVillagerKnack(vid, choices) -> knack id chosen by buildScore
 //   - mantleBecome(oldId, newId) -> the new bearer keeps THEIR OWN tracks, XP, abilities, skills, knowledge, godhood and gear; the predecessor's do not pass (Steve 2026-10-14: "No I don't think you should take your XP or the abilities. You become that villager.")
@@ -1059,6 +1060,10 @@
         // can reach the materials crafts up the spear/bow ladder and
         // equips it — self-seeking, modeled on the armor-craft beat.
         try { if (this.villagerWeaponCraftDay) this.villagerWeaponCraftDay(); } catch (e) { warn('weaponcraft', e); }
+        // AMMO SELF-CRAFT (build-arrow-make 2026-11-01, Arm 5): a
+        // bow/crossbow-carrier at home short of ammo crafts a batch
+        // for themselves — the weapon-craft beat applied to arrows.
+        try { if (this.villagerAmmoCraftDay) this.villagerAmmoCraftDay(); } catch (e) { warn('ammocraft', e); }
         const v = this.state.village || {};
         for (const rid of (v.roster || [])) {
           if (rid === this.villagerId) continue;
@@ -1367,6 +1372,170 @@
           } catch (e) { warn('weaponcraft one', e); }
         }
       } catch (e) { warn('villagerWeaponCraftDay', e); }
+      return made;
+    },
+
+    // villagerAmmoCraftDay(): ARCHER ARROW-MAKING (build-arrow-make
+    // 2026-11-01, Arm 5). The blank: bows with NO arrows in 24/65
+    // wave-4 fights, volley 0% (1415Z ammo census). The volley engine
+    // already fires when the fighter CARRIES matching ammo, and
+    // villagerPocketAmmo already crafts arrows at DEPARTURE — but a
+    // bow-carrier who never departs (home defense, a failed 35%
+    // blind departure craft, arrows spent in an earlier fight)
+    // reaches a fight arrowless, and nothing at home ever re-arms
+    // them. This duty is the weapon self-craft beat
+    // (villagerWeaponCraftDay, above) applied to ammunition: a
+    // bow/crossbow-carrier AT HOME carrying fewer than one batch
+    // (5, the recipe's makesUnits; the volley caps at 4 shots per
+    // fight) crafts one batch from their own carried materials
+    // first, then the communal camp pile, using the EXISTING
+    // arrow/bolt recipes and the player's craft odds exactly
+    // (blind 35%, learned 85%; a blind success teaches, the
+    // PRACTICE rule). Knowledge is the SHARED v.ammoCraft record
+    // villagerPocketAmmo already writes — carrying the weapon IS
+    // the showing, so no new knowledge system. At most 1 attempt
+    // per villager per 3 days (the weapon-craft cooldown), so a
+    // failed blind craft cannot drain the pile day after day.
+    // REJECTED: fight-entry top-up — fieldFight deliberately gears
+    // up acquire=false ("a fighter doesn't whittle a spear
+    // mid-fight"); a fighter far from home cannot honestly spend
+    // pile materials. This beat fires only at home, standing at
+    // the pile. Spear-carriers fall out honestly: spear defs carry
+    // no weapon.ammo, so the ammo check skips them.
+    // PERCEPTION LAW (Steve 2026-10-28): every input below is the
+    // villager's OWN state or the camp pile they are standing at —
+    // own equipped/carried gear, own carried materials, the
+    // communal pile at home, and recipes.json (public recipe
+    // data). The roster is iterated only to SCHEDULE each
+    // villager's own decision (the villagerWeaponCraftDay pattern);
+    // no villager's decision reads another villager's gear,
+    // knowledge or materials, and no global "who is arrowless"
+    // list is built or consulted. Returns the number of batches
+    // successfully crafted.
+    // CAVEAT (volleyfix): perfect ammo alone is only ~2% of a
+    // wave-4 beast's HP — this restores a verb, it does not claim
+    // to fix lethality.
+    villagerAmmoCraftDay() {
+      let made = 0;
+      try {
+        const v = this.state.village || {};
+        const day = (this.state.scholar || {}).day || 0;
+        const defs = this.data.items || [];
+        const recipes = this.data.recipes || [];
+        const eq = EQ();
+        if (!eq) return 0;
+        v.ammoCraft = v.ammoCraft || {};       // vid -> { ammoId: level } (shared with villagerPocketAmmo)
+        v.arrowCraftCd = v.arrowCraftCd || {}; // vid -> last attempt day
+        const CAP = 5; // one recipe batch; the volley caps at 4 shots per fight
+        const idOf = (it) => (it && (it.itemId || it.id)) || it;
+        const defOf = (id) => defs.find(d => d.id === id) || null;
+        const home = (v.roster || []).filter(id =>
+          id !== this.villagerId && !((v.away || {})[id]) &&
+          !(this.getPerson ? (this.getPerson(id) || {}).dead : false));
+        for (const vid of home) {
+          try {
+            const p = this.getPerson ? this.getPerson(vid) : null;
+            if (!p) continue;
+            if ((v.arrowCraftCd[vid] || -99) > day - 3) continue; // ≤1 attempt / 3d
+            try { eq.autoEquip(p, defs); } catch (e) {}
+            // RANGED WEAPON: the equipped ranged weapon (autoEquip
+            // above seats a carried bow). Spears carry no ammo id
+            // and fall out at the ammo check below.
+            let rw = null;
+            try { rw = (eq.rangedWeaponOf ? eq.rangedWeaponOf(p, defs) : null) || null; } catch (e) {}
+            if (!rw) rw = (p.equipped || {}).ranged || null;
+            if (!rw) continue;
+            const rwId = rw.itemId || rw.id;
+            const rdef = defOf(rwId);
+            const ammoId = (rdef && rdef.weapon && rdef.weapon.ammo) || null;
+            if (!ammoId || (ammoId !== 'arrow' && ammoId !== 'bolt')) continue;
+            // ALREADY STOCKED: a full batch covers a fight plus a spare
+            const carried = () => {
+              let n = 0;
+              for (const e of (p.items || [])) {
+                const eid = (typeof e === 'string') ? e : (e && (e.itemId || e.id || e.material));
+                if (eid === ammoId) n += (typeof e === 'string') ? 1 : (e.units || 1);
+              }
+              return n;
+            };
+            if (carried() >= CAP) continue;
+            const recipe = recipes.find(r => r.id === ammoId);
+            if (!recipe || !recipe.materials) continue;
+            // their own carried materials: pack entries carrying a
+            // material key (the craft() matching rule), never gear
+            const isMatEntry = (e, mat) => {
+              if (typeof e === 'string') return e === mat;
+              if (!e) return false;
+              if (e.material === mat) return true;
+              if (e.itemId === mat) { const d = defOf(mat); return !(d && (d.weapon || d.armor)); }
+              return false;
+            };
+            const ownMat = (mat) => {
+              let n = 0;
+              for (const e of (p.items || [])) if (isMatEntry(e, mat)) n += (typeof e === 'string') ? 1 : (e.units || 1);
+              return n;
+            };
+            // the camp pile, reachable because the villager is at home
+            let mats = null;
+            try { const st = this.stashState ? this.stashState() : null; mats = (st && st.materials) || null; } catch (e) { warn('ammocraft stash', e); }
+            if (!mats) mats = (v.stash && v.stash.materials) || {};
+            let ok = true;
+            for (const [m, need] of Object.entries(recipe.materials)) {
+              if (ownMat(m) + (mats[m] || 0) < need) { ok = false; break; }
+            }
+            if (!ok) continue; // no materials -> no craft, no cooldown spent
+            v.arrowCraftCd[vid] = day;
+            // honest take: own carried materials first, then the pile
+            for (const [m, need] of Object.entries(recipe.materials)) {
+              let left = need;
+              const items = p.items || [];
+              for (let i = items.length - 1; i >= 0 && left > 0; i--) {
+                if (!isMatEntry(items[i], m)) continue;
+                const have = (typeof items[i] === 'string') ? 1 : (items[i].units || 1);
+                const take = Math.min(have, left);
+                left -= take;
+                if (typeof items[i] === 'string') items.splice(i, 1);
+                else { items[i].units = have - take; if (items[i].units <= 0) items.splice(i, 1); }
+              }
+              if (left > 0) {
+                mats[m] = (mats[m] || 0) - left;
+                try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+              }
+            }
+            const lv = v.ammoCraft[vid] = v.ammoCraft[vid] || {};
+            const level = lv[ammoId] || 1; // carrying the weapon IS the showing (pocketAmmo rule)
+            const rate = level >= 2 ? 0.85 : 0.35;
+            const success = Math.random() < rate;
+            let nm = 'Someone';
+            try { nm = (this.firstRef ? this.firstRef(vid) : null) || p.name || 'Someone'; } catch (e) {}
+            let atHaven = false;
+            try { atHaven = this.playerAtHaven ? this.playerAtHaven() : false; } catch (e) {}
+            const adef = defOf(ammoId) || {};
+            const ammoName = adef.name || recipe.name || ammoId;
+            if (!success) {
+              try { if (this.tele) this.tele('ammo_craft', { vid: vid, item: ammoId, ok: false }); } catch (e) {}
+              // no silent actions: a failed craft is witnessed when you're home
+              if (atHaven) { try { this.say(`${nm} spent the afternoon at the workbench, and the ${ammoName} came apart in their hands. The materials are wasted.`); } catch (e) {} }
+              continue; // materials already consumed above — the woods keep them
+            }
+            if (level < 2) lv[ammoId] = 2; // PRACTICE: blind success teaches
+            const madeN = recipe.makesUnits || 1;
+            let placed = false;
+            for (const e of (p.items || [])) {
+              if (e && typeof e !== 'string' && (e.itemId === ammoId || e.id === ammoId || e.material === ammoId)) {
+                e.units = (e.units || 1) + madeN; placed = true; break;
+              }
+            }
+            if (!placed) {
+              p.items = p.items || [];
+              p.items.push({ itemId: ammoId, material: ammoId, units: madeN, name: ammoName, kcalEach: 0, kg: adef.kg || 0.1 });
+            }
+            made++;
+            try { if (this.tele) this.tele('ammo_craft', { vid: vid, item: ammoId, ok: true }); } catch (e) {}
+            if (atHaven) { try { this.say(`${nm} spent the afternoon at the workbench and made ${madeN} ${ammoName} — and carries them now, their own work in their own hands.`); } catch (e) {} }
+          } catch (e) { warn('ammocraft one', e); }
+        }
+      } catch (e) { warn('villagerAmmoCraftDay', e); }
       return made;
     },
   };
