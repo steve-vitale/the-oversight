@@ -98,7 +98,7 @@ Nothing about h56 is claimed here.
 ## Next blanks (carried, in order)
 
 (1) daytime end-position distribution — FILLED by sim-endpos-b (above).
-(6) H5/H6 refusal cells — IN PROGRESS (sim-h56-b worker running).
+(6) H5/H6 refusal cells — CLOSED by exhaustion at the h56 closeout (below; not a band).
 Remaining 0630Z blanks carried unchanged: (2) intermediate-block
 clearing in the evening step (design question); (3) HUNGER WINTER
 relief passivity (steve-call candidate); (4) P3 reset follow-ups —
@@ -112,5 +112,24 @@ creek-block lever; whether camped stretches end by choice or by
 depletion (17549 days 9-12 arc suggests depletion, one arc is not a
 rate).
 
+## h56 closeout (main session, run timed out before coordinator closeout)
+
+The 0730Z run timed out with sim-h56-b finished but unmerged. Main
+session recovered it without re-running or re-measuring: branch
+verified (2 commits, evidence only, 0 src/js, worktree clean),
+telemetry check run (3 LOUD lines = the known missing-field artifact:
+censuses carry no national/table/wins/exiled fields; baseline NOT
+rolled), rebased onto master 8cbb490e9 (Loop A sibling merges),
+merged --ff-only at 711d1c0ec, worktree released done-merged,
+branch deleted.
+- sim-h56-b verdict HELD-by-exhaustion, judged exactly against its
+prereg: H5 0 refusals, H6 0 refusals across 16 judged legs,
+instrument gate clean on every leg. No band is reported and none is
+implied: gate 2 as a band measurement stays closed by gate2hunt
+(H4, 11/11), untouched by this arm. The carried H5/H6 blank is
+closed — the cells were run, not left unrun.
+- Wall numbers unchanged: full seat 0 / wave 5 reached 0.
+- No new src/js in this round; check.js profile unchanged 284/6.
+
 Merged locally, pending ship. Tracker review + claim/lock deletion
-follow at the h56 closeout.
+done at this closeout.
