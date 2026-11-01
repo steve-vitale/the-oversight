@@ -316,5 +316,28 @@ The pin stands in its r55 form; it does not overturn.
   (run note + checkquick log) — no stray modifications,
   nothing to discard.
 
-## Landing
-(PENDING — filled at closeout.)
+## Landing (filled at closeout)
+Master at worktree creation: be352e2cb. At closeout master had
+moved to 9aaf0a5f7 (11 commits: Loop A 1935Z coordinator evidence,
+sim-freeface-a, sim-latewin-a, journey-crisis r96 closeout,
+sim-gatecover-b, sim-routeblock-b — ZERO src/js + src/data in
+the range, verified by diff). The branch was rebased cleanly onto
+9aaf0a5f7 (4/4 picks, no conflicts, no stop-at-pick quirk), and
+proofs were re-run after the rebase as the body requires: node
+--check clean on driver + analyzer, gossip analyzer TOTAL
+unchanged (0 pairs / 0 fallback, 5 transcripts), r68 analyzer
+totals byte-identical on all four seeds. NO quad re-run after
+the rebase: the rebase range holds zero game code, so the
+measured quad stands unchanged on the new base.
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 942817444 (prereg + gossip-first driver/analyzer),
+2fcf2ce85 (gossipPicks block-scope fix), 6561b2d46 (quad +
+analyses + run note), d09258152 (run note tests section +
+checkquick log), plus this landing section as the final branch
+commit, merged by a second fast-forward.
+Worktree released + branch deleted at closeout; final main-tree
+status clean. Rotation file written 3→0 at closeout and verified
+by reading it back. Playtest lock deleted at closeout. Heartbeat
+loop stopped at closeout.
