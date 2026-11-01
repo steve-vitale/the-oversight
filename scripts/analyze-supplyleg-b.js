@@ -28,8 +28,17 @@ function classifyEvent(ev) {
   const stack = ev.stack || '';
   const name = ev.name || '';
   // Direct pushes: transforms and zero-kcal flesh are not inflows.
+  // CORRECTION (sim-supplyleg-b, found in pilot data): the smoke-racks
+  // split/convert pushes live inside resolveOneAssignment (game.js
+  // 7229/7264 on this base — the ONLY pantry.push sites in that
+  // function, verified by grep), so their stacks carry the duty name,
+  // not a smoke/preserve/rack keyword. They are net-zero transforms
+  // (split) or kcal-reducing converts, never new inflow. Skipping them
+  // implements the prereg's transform-skip definition; the keyword-only
+  // rule double-counted them as direct-other (see evidence metric
+  // review for before/after numbers).
   if (ev.t === 'direct') {
-    if (/smoke|preserve|rack/i.test(stack)) return 'transform-skip';
+    if (/smoke|preserve|rack|resolveOneAssignment/i.test(stack)) return 'transform-skip';
     if ((ev.kcal || 0) <= 0) return 'zero-kcal';
     if (/contest/i.test(stack)) return 'contest-prize';
     if (/^Tribute grain/.test(name)) return 'tribute';

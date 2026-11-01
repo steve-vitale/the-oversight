@@ -36,6 +36,8 @@ check(classifyEvent({ t: 'pantryAdd', name: 'Contest share', stack: 'at contestP
 check(classifyEvent({ t: 'surplus', name: null, stack: 'x' }), 'meal-surplus', 'surplus');
 // Direct pushes.
 check(classifyEvent({ t: 'direct', name: 'Acorn', kcal: 500, stack: 'at preserveFood smoke (game.js:7229)' }), 'transform-skip', 'smoking split skipped');
+check(classifyEvent({ t: 'direct', name: 'Foraged food', kcal: 20400, stack: 'at Object.resolveOneAssignment (src/js/game.js:7229:24)' }), 'transform-skip', 'smoke-racks split via duty name');
+check(classifyEvent({ t: 'direct', name: 'Foraged food (dried)', kcal: 6336, stack: 'at Object.resolveOneAssignment (src/js/game.js:7264:24)' }), 'transform-skip', 'smoke-racks convert via duty name');
 check(classifyEvent({ t: 'direct', name: 'Unknown flesh', kcal: 0, kcalEach: 0, units: 2, stack: 'at expeditionReturn (villager-agency.js:620)' }), 'zero-kcal', 'unknown flesh');
 check(classifyEvent({ t: 'direct', name: 'Tribute grain from X', kcal: 1000, stack: 'at tribute (hierarchy.js:3274)' }), 'tribute', 'tribute');
 check(classifyEvent({ t: 'direct', name: 'Prize share', kcal: 800, stack: 'at contestAward (contests.js:4881)' }), 'contest-prize', 'contest direct');
