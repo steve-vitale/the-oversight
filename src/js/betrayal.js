@@ -4290,6 +4290,18 @@
       out.push({ id: 'betrayal:accept', label: '"All right. Let\'s go."' });
       out.push({ id: 'betrayal:decline', label: '"Not this time."' });
     }
+    // NO-SHARED-WORDS GATE (journey-social r78): case interrogation is
+    // verbal work — press, site, witnesses, investigate, moot, letlie,
+    // expose, bribe, votes. In a nonverbal conversation with no
+    // interpreter present, the game itself states the barrier as total
+    // (nvOpen) and the case-framing line already skips nonverbal threads,
+    // yet this menu offered the full verbal case menu in English (r77
+    // Xavier transcript: German-only speaker pressed and investigated in
+    // English). Ambush survival and invitation picks above are untouched;
+    // with an interpreter (nv:translate) the gate opens. A direct
+    // betrayalTurn with an unoffered case id is out of scope here — no
+    // menu ever offers it, per the conversation contract.
+    if (c.thread === 'nonverbal' && !c.interpreter) return out;
     const cases = (this.betrayalState().cases || []).filter(x =>
       (x.status === 'open' || x.status === 'dormant') && (x.knownToPlayer || x.playerRole !== 'bystander'));
     for (const cs of cases) {
