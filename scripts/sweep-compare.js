@@ -362,3 +362,8 @@ module.exports.comparisonCapabilities = {schemaVersion:1,origin:true,region:true
 // (§15) can build its column. Additive; zero behavior change to existing
 // entries (the variant stays default-OFF: nothing loads it unless named).
 try { const rb = require('./policies/competent-routeblock-b'); POLICY_REGISTRY['competent-routeblock-b'] = rb.routeblock; } catch (e) {}
+// fertrot instrument (sim-fertrot-b, 2026-11-01, Loop B food-economy):
+// the competent + fertility-signal rotation policy, registered so the balanced panel
+// (§15) can build its column. Additive; zero behavior change to existing
+// entries (the variant stays default-OFF: nothing loads it unless named).
+try { const fr = require('./policies/competent-fertrot-b'); POLICY_REGISTRY['competent-fertrot-b'] = fr.fertrot; } catch (e) {}
