@@ -1,0 +1,370 @@
+{
+  "corpusDir": "evidence/2026-10-31/sim-refusedband-b-corpus-p1-g1",
+  "policy": "p1",
+  "horizonDays": 30,
+  "legs": 8,
+  "seeds": [
+    17601,
+    17602,
+    17603,
+    17604,
+    17605,
+    17606,
+    17607,
+    17608
+  ],
+  "eveningsJudged": 240,
+  "outcomeTotals": {
+    "already-inside": 22,
+    "completed": 214,
+    "out-of-reach": 2,
+    "travel-refused": 1,
+    "blocked-combat": 1
+  },
+  "totalRefusals": 1,
+  "seedsWithRefusals": [
+    17606
+  ],
+  "bandBar": false,
+  "hopSplit": {
+    "block:creek": 1
+  },
+  "bucketSplit": {
+    "creek": 1
+  },
+  "blockCreekDenominator": 1,
+  "blockCreekBucketCreek": 1,
+  "gate2Agreement": "1/1",
+  "gate2AgreementValue": 1,
+  "creekRefusals": [
+    {
+      "seed": 17606,
+      "loopDay": 4,
+      "eveningMap": [
+        4,
+        4
+      ],
+      "tile": "haven",
+      "havenDistance": 2,
+      "hopReturnKind": "block:creek",
+      "hopType": "creek",
+      "source": "woodcarry",
+      "bucket": "creek",
+      "blockType": "creek",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": true,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    }
+  ],
+  "narratedRefusals": 1,
+  "gateFailures": [],
+  "gatePass": true,
+  "allRefusals": [
+    {
+      "seed": 17606,
+      "loopDay": 4,
+      "eveningMap": [
+        4,
+        4
+      ],
+      "tile": "haven",
+      "havenDistance": 2,
+      "hopReturnKind": "block:creek",
+      "hopType": "creek",
+      "source": "woodcarry",
+      "bucket": "creek",
+      "blockType": "creek",
+      "probeAgrees": true,
+      "probeError": null,
+      "isCreek": true,
+      "blockedTile": {
+        "x": 4,
+        "y": 3
+      },
+      "narrated": true
+    }
+  ],
+  "perSeed": [
+    {
+      "seed": 17601,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 4,
+        "completed": 24,
+        "out-of-reach": 2
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17602,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17603,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17604,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17605,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 28
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17606,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 27,
+        "travel-refused": 1
+      },
+      "eveningsJudged": 30,
+      "refusals": 1,
+      "refusalSeeds": 1,
+      "refusalDays": [
+        4
+      ],
+      "refusalList": [
+        {
+          "loopDay": 4,
+          "eveningMap": [
+            4,
+            4
+          ],
+          "tile": "haven",
+          "havenDistance": 2,
+          "hopReturnKind": "block:creek",
+          "hopType": "creek",
+          "source": "woodcarry",
+          "bucket": "creek",
+          "blockType": "creek",
+          "probeAgrees": true,
+          "probeError": null,
+          "isCreek": true,
+          "blockedTile": {
+            "x": 4,
+            "y": 3
+          },
+          "narrated": true
+        }
+      ],
+      "storeRecords": 1,
+      "storeClassified": 1,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17607,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 2,
+        "completed": 27,
+        "blocked-combat": 1
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    },
+    {
+      "seed": 17608,
+      "policy": "p1",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "loopDays": 30,
+      "gate": {
+        "errsOk": true,
+        "decisions": 30,
+        "evenings": 30,
+        "countsMatch": true,
+        "complete": true,
+        "pass": true
+      },
+      "outcomes": {
+        "already-inside": 6,
+        "completed": 24
+      },
+      "eveningsJudged": 30,
+      "refusals": 0,
+      "refusalSeeds": 0,
+      "refusalDays": [],
+      "refusalList": [],
+      "storeRecords": 0,
+      "storeClassified": 0,
+      "storeUnclassified": 0,
+      "storeOtherRefused": 0,
+      "storeErrs": 0
+    }
+  ]
+}
