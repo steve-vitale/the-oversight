@@ -1,0 +1,6121 @@
+{
+  "corpusDir": "evidence/2026-11-01/sim-patrolsched-b-corpus-pilot-p3-30d",
+  "policy": "deed-seeking",
+  "horizonDays": 30,
+  "legs": 8,
+  "seeds": [
+    17567,
+    17568,
+    17569,
+    17570,
+    17571,
+    17572,
+    17573,
+    17574
+  ],
+  "gateOkLegs": 8,
+  "gateFailures": [],
+  "totalEvenings": 240,
+  "totalHavenEvenings": 83,
+  "totalRoadEvenings": 0,
+  "totalAwayEvenings": 157,
+  "awayShare": 0.6541666666666667,
+  "awayShareNonRoad": 0.6541666666666667,
+  "seedsWithAway": [
+    17567,
+    17568,
+    17569,
+    17570,
+    17571,
+    17572,
+    17573,
+    17574
+  ],
+  "awayByTile": {
+    "forest_floor": 63,
+    "grove": 16,
+    "trail_edge": 18,
+    "creek": 60
+  },
+  "awayByStart": {
+    "departure": 41,
+    "continuation": 116
+  },
+  "awayByEndCause": {
+    "no-return-step": 154,
+    "blocked-combat": 3
+  },
+  "awayByEndSubkind": {
+    "null": 157
+  },
+  "awayByReturnStory": {
+    "no-attempt": 114,
+    "ended-other": 22,
+    "still-away-at-horizon": 7,
+    "walked-home-next-day": 14
+  },
+  "awayByReturnSubkind": {
+    "null": 135,
+    "succession": 20,
+    "blocked-combat-continuation": 2
+  },
+  "totalUnclassified": 0,
+  "classificationCompleteness": 1,
+  "totalCreekAwayEvenings": 60,
+  "totalBlockedCrossingAway": 16,
+  "totalForageAway": 154,
+  "totalPatrolAway": 62,
+  "totalTravelLineAway": 155,
+  "totalEpisodes": 41,
+  "episodesPerLeg": 5.125,
+  "seedsWithEpisode": [
+    17567,
+    17568,
+    17569,
+    17570,
+    17571,
+    17572,
+    17573,
+    17574
+  ],
+  "episodeLengthDist": {
+    "1": 2,
+    "2-4": 28,
+    "5+": 11
+  },
+  "episodesByEnd": {
+    "SUCCESSION": 20,
+    "HORIZON": 7,
+    "WALK-HOME": 14
+  },
+  "episodes": [
+    {
+      "seed": 17567,
+      "vesselId": "gen_sot07m4",
+      "startDay": 5,
+      "endDay": 11,
+      "days": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "length": 7,
+      "endStory": "SUCCESSION",
+      "exitDay": 12
+    },
+    {
+      "seed": 17567,
+      "vesselId": "gen_x4d851u",
+      "startDay": 12,
+      "endDay": 15,
+      "days": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "length": 4,
+      "endStory": "SUCCESSION",
+      "exitDay": 16
+    },
+    {
+      "seed": 17567,
+      "vesselId": "gen_evenny1",
+      "startDay": 17,
+      "endDay": 22,
+      "days": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "length": 6,
+      "endStory": "SUCCESSION",
+      "exitDay": 23
+    },
+    {
+      "seed": 17567,
+      "vesselId": "gen_qcneun4",
+      "startDay": 24,
+      "endDay": 30,
+      "days": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "length": 7,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_92zqac3",
+      "startDay": 5,
+      "endDay": 7,
+      "days": [
+        5,
+        6,
+        7
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 8
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_92zqac3",
+      "startDay": 10,
+      "endDay": 13,
+      "days": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "length": 4,
+      "endStory": "SUCCESSION",
+      "exitDay": 14
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_44dwb62",
+      "startDay": 15,
+      "endDay": 15,
+      "days": [
+        15
+      ],
+      "length": 1,
+      "endStory": "SUCCESSION",
+      "exitDay": 16
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_j0g2sqb",
+      "startDay": 17,
+      "endDay": 20,
+      "days": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "length": 4,
+      "endStory": "WALK-HOME",
+      "exitDay": 21
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_j0g2sqb",
+      "startDay": 22,
+      "endDay": 22,
+      "days": [
+        22
+      ],
+      "length": 1,
+      "endStory": "SUCCESSION",
+      "exitDay": 23
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_wjgykh0",
+      "startDay": 24,
+      "endDay": 26,
+      "days": [
+        24,
+        25,
+        26
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 27
+    },
+    {
+      "seed": 17568,
+      "vesselId": "gen_wjgykh0",
+      "startDay": 29,
+      "endDay": 30,
+      "days": [
+        29,
+        30
+      ],
+      "length": 2,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_f1rksim",
+      "startDay": 5,
+      "endDay": 8,
+      "days": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "length": 4,
+      "endStory": "WALK-HOME",
+      "exitDay": 9
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_f1rksim",
+      "startDay": 10,
+      "endDay": 12,
+      "days": [
+        10,
+        11,
+        12
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 13
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_f1rksim",
+      "startDay": 15,
+      "endDay": 16,
+      "days": [
+        15,
+        16
+      ],
+      "length": 2,
+      "endStory": "SUCCESSION",
+      "exitDay": 17
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_froy2s9",
+      "startDay": 17,
+      "endDay": 18,
+      "days": [
+        17,
+        18
+      ],
+      "length": 2,
+      "endStory": "WALK-HOME",
+      "exitDay": 19
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_froy2s9",
+      "startDay": 22,
+      "endDay": 23,
+      "days": [
+        22,
+        23
+      ],
+      "length": 2,
+      "endStory": "SUCCESSION",
+      "exitDay": 24
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_rq7znxr",
+      "startDay": 24,
+      "endDay": 26,
+      "days": [
+        24,
+        25,
+        26
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 27
+    },
+    {
+      "seed": 17569,
+      "vesselId": "gen_rq7znxr",
+      "startDay": 29,
+      "endDay": 30,
+      "days": [
+        29,
+        30
+      ],
+      "length": 2,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    },
+    {
+      "seed": 17570,
+      "vesselId": "gen_zts5lwz",
+      "startDay": 5,
+      "endDay": 7,
+      "days": [
+        5,
+        6,
+        7
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 8
+    },
+    {
+      "seed": 17570,
+      "vesselId": "gen_zts5lwz",
+      "startDay": 10,
+      "endDay": 13,
+      "days": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "length": 4,
+      "endStory": "SUCCESSION",
+      "exitDay": 14
+    },
+    {
+      "seed": 17570,
+      "vesselId": "gen_ea1be8l",
+      "startDay": 15,
+      "endDay": 17,
+      "days": [
+        15,
+        16,
+        17
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 18
+    },
+    {
+      "seed": 17570,
+      "vesselId": "gen_ea1be8l",
+      "startDay": 19,
+      "endDay": 22,
+      "days": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "length": 4,
+      "endStory": "WALK-HOME",
+      "exitDay": 23
+    },
+    {
+      "seed": 17570,
+      "vesselId": "gen_ea1be8l",
+      "startDay": 24,
+      "endDay": 26,
+      "days": [
+        24,
+        25,
+        26
+      ],
+      "length": 3,
+      "endStory": "WALK-HOME",
+      "exitDay": 27
+    },
+    {
+      "seed": 17570,
+      "vesselId": "gen_ea1be8l",
+      "startDay": 29,
+      "endDay": 30,
+      "days": [
+        29,
+        30
+      ],
+      "length": 2,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    },
+    {
+      "seed": 17571,
+      "vesselId": "gen_v4apcm9",
+      "startDay": 17,
+      "endDay": 25,
+      "days": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "length": 9,
+      "endStory": "SUCCESSION",
+      "exitDay": 26
+    },
+    {
+      "seed": 17571,
+      "vesselId": "gen_gjzsn40",
+      "startDay": 26,
+      "endDay": 30,
+      "days": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "length": 5,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    },
+    {
+      "seed": 17572,
+      "vesselId": "gen_j0xq7al",
+      "startDay": 10,
+      "endDay": 13,
+      "days": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "length": 4,
+      "endStory": "WALK-HOME",
+      "exitDay": 14
+    },
+    {
+      "seed": 17572,
+      "vesselId": "gen_j0xq7al",
+      "startDay": 15,
+      "endDay": 16,
+      "days": [
+        15,
+        16
+      ],
+      "length": 2,
+      "endStory": "SUCCESSION",
+      "exitDay": 17
+    },
+    {
+      "seed": 17572,
+      "vesselId": "gen_luth38i",
+      "startDay": 17,
+      "endDay": 21,
+      "days": [
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "length": 5,
+      "endStory": "SUCCESSION",
+      "exitDay": 22
+    },
+    {
+      "seed": 17572,
+      "vesselId": "gen_r0qnr6n",
+      "startDay": 22,
+      "endDay": 23,
+      "days": [
+        22,
+        23
+      ],
+      "length": 2,
+      "endStory": "SUCCESSION",
+      "exitDay": 24
+    },
+    {
+      "seed": 17572,
+      "vesselId": "gen_dih270t",
+      "startDay": 24,
+      "endDay": 29,
+      "days": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "length": 6,
+      "endStory": "WALK-HOME",
+      "exitDay": 30
+    },
+    {
+      "seed": 17573,
+      "vesselId": "gen_to7fn7e",
+      "startDay": 5,
+      "endDay": 10,
+      "days": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "length": 6,
+      "endStory": "SUCCESSION",
+      "exitDay": 11
+    },
+    {
+      "seed": 17573,
+      "vesselId": "gen_4891zhr",
+      "startDay": 12,
+      "endDay": 16,
+      "days": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "length": 5,
+      "endStory": "SUCCESSION",
+      "exitDay": 17
+    },
+    {
+      "seed": 17573,
+      "vesselId": "gen_5c7o32t",
+      "startDay": 17,
+      "endDay": 19,
+      "days": [
+        17,
+        18,
+        19
+      ],
+      "length": 3,
+      "endStory": "SUCCESSION",
+      "exitDay": 20
+    },
+    {
+      "seed": 17573,
+      "vesselId": "gen_nlc83bt",
+      "startDay": 22,
+      "endDay": 30,
+      "days": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "length": 9,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    },
+    {
+      "seed": 17574,
+      "vesselId": "gen_r7xrjwa",
+      "startDay": 5,
+      "endDay": 6,
+      "days": [
+        5,
+        6
+      ],
+      "length": 2,
+      "endStory": "SUCCESSION",
+      "exitDay": 7
+    },
+    {
+      "seed": 17574,
+      "vesselId": "gen_lcvvfnz",
+      "startDay": 8,
+      "endDay": 16,
+      "days": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "length": 9,
+      "endStory": "SUCCESSION",
+      "exitDay": 17
+    },
+    {
+      "seed": 17574,
+      "vesselId": "gen_gf4skxr",
+      "startDay": 17,
+      "endDay": 20,
+      "days": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "length": 4,
+      "endStory": "WALK-HOME",
+      "exitDay": 21
+    },
+    {
+      "seed": 17574,
+      "vesselId": "gen_gf4skxr",
+      "startDay": 22,
+      "endDay": 24,
+      "days": [
+        22,
+        23,
+        24
+      ],
+      "length": 3,
+      "endStory": "SUCCESSION",
+      "exitDay": 25
+    },
+    {
+      "seed": 17574,
+      "vesselId": "gen_ljo63is",
+      "startDay": 26,
+      "endDay": 27,
+      "days": [
+        26,
+        27
+      ],
+      "length": 2,
+      "endStory": "SUCCESSION",
+      "exitDay": 28
+    },
+    {
+      "seed": 17574,
+      "vesselId": "gen_3sqr9f0",
+      "startDay": 29,
+      "endDay": 30,
+      "days": [
+        29,
+        30
+      ],
+      "length": 2,
+      "endStory": "HORIZON",
+      "exitDay": 31
+    }
+  ],
+  "totalGenuine": 39,
+  "totalCamps": 14,
+  "campEndStories": {
+    "moved-elsewhere": 8,
+    "succession": 4,
+    "horizon": 2
+  },
+  "totalErrs": 0,
+  "perSeed": [
+    {
+      "seed": 17567,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 6,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 24,
+      "awayDays": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "awayShare": 0.8,
+      "awayShareNonRoad": 0.8,
+      "awayByTile": {
+        "forest_floor": 15,
+        "grove": 9
+      },
+      "awayByStart": {
+        "departure": 4,
+        "continuation": 20
+      },
+      "awayByEndCause": {
+        "no-return-step": 24
+      },
+      "awayByEndSubkind": {
+        "null": 24
+      },
+      "awayByReturnStory": {
+        "no-attempt": 20,
+        "ended-other": 3,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 21,
+        "succession": 3
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 0,
+      "creekAwayDays": [],
+      "blockedCrossingAway": 0,
+      "forageAway": 24,
+      "patrolAway": 6,
+      "travelLineAway": 24,
+      "away": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_sot07m4",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_sot07m4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 7,
+          "vesselId": "gen_sot07m4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_sot07m4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 9,
+          "vesselId": "gen_sot07m4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_sot07m4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_sot07m4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_x4d851u",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_x4d851u",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 14,
+          "vesselId": "gen_x4d851u",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_x4d851u",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_evenny1",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_evenny1",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_evenny1",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_evenny1",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 21,
+          "vesselId": "gen_evenny1",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_evenny1",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_qcneun4",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_qcneun4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_qcneun4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 27,
+          "vesselId": "gen_qcneun4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 28,
+          "vesselId": "gen_qcneun4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_qcneun4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_qcneun4",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_sot07m4",
+          "startDay": 5,
+          "endDay": 11,
+          "days": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "length": 7,
+          "endStory": "SUCCESSION",
+          "exitDay": 12
+        },
+        {
+          "vesselId": "gen_x4d851u",
+          "startDay": 12,
+          "endDay": 15,
+          "days": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "length": 4,
+          "endStory": "SUCCESSION",
+          "exitDay": 16
+        },
+        {
+          "vesselId": "gen_evenny1",
+          "startDay": 17,
+          "endDay": 22,
+          "days": [
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "length": 6,
+          "endStory": "SUCCESSION",
+          "exitDay": 23
+        },
+        {
+          "vesselId": "gen_qcneun4",
+          "startDay": 24,
+          "endDay": 30,
+          "days": [
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "length": 7,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 4,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 1,
+        "5+": 3
+      },
+      "episodesByEnd": {
+        "SUCCESSION": 3,
+        "HORIZON": 1
+      },
+      "genuine": 4,
+      "genuineDays": [
+        5,
+        12,
+        17,
+        24
+      ],
+      "camps": [],
+      "campCount": 0,
+      "campEndStories": {}
+    },
+    {
+      "seed": 17568,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 12,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 18,
+      "awayDays": [
+        5,
+        6,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        17,
+        18,
+        19,
+        20,
+        22,
+        24,
+        25,
+        26,
+        29,
+        30
+      ],
+      "awayShare": 0.6,
+      "awayShareNonRoad": 0.6,
+      "awayByTile": {
+        "trail_edge": 18
+      },
+      "awayByStart": {
+        "departure": 7,
+        "continuation": 11
+      },
+      "awayByEndCause": {
+        "no-return-step": 18
+      },
+      "awayByEndSubkind": {
+        "null": 18
+      },
+      "awayByReturnStory": {
+        "no-attempt": 11,
+        "walked-home-next-day": 3,
+        "ended-other": 3,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 15,
+        "succession": 3
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 0,
+      "creekAwayDays": [],
+      "blockedCrossingAway": 0,
+      "forageAway": 18,
+      "patrolAway": 8,
+      "travelLineAway": 18,
+      "away": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_92zqac3",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_92zqac3",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 7,
+          "vesselId": "gen_92zqac3",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_92zqac3",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_92zqac3",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_92zqac3",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_92zqac3",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_44dwb62",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_j0g2sqb",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_j0g2sqb",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_j0g2sqb",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_j0g2sqb",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_j0g2sqb",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_wjgykh0",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 11,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_wjgykh0",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_wjgykh0",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_wjgykh0",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 11,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_wjgykh0",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "trail_edge",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 10,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_92zqac3",
+          "startDay": 5,
+          "endDay": 7,
+          "days": [
+            5,
+            6,
+            7
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 8
+        },
+        {
+          "vesselId": "gen_92zqac3",
+          "startDay": 10,
+          "endDay": 13,
+          "days": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "length": 4,
+          "endStory": "SUCCESSION",
+          "exitDay": 14
+        },
+        {
+          "vesselId": "gen_44dwb62",
+          "startDay": 15,
+          "endDay": 15,
+          "days": [
+            15
+          ],
+          "length": 1,
+          "endStory": "SUCCESSION",
+          "exitDay": 16
+        },
+        {
+          "vesselId": "gen_j0g2sqb",
+          "startDay": 17,
+          "endDay": 20,
+          "days": [
+            17,
+            18,
+            19,
+            20
+          ],
+          "length": 4,
+          "endStory": "WALK-HOME",
+          "exitDay": 21
+        },
+        {
+          "vesselId": "gen_j0g2sqb",
+          "startDay": 22,
+          "endDay": 22,
+          "days": [
+            22
+          ],
+          "length": 1,
+          "endStory": "SUCCESSION",
+          "exitDay": 23
+        },
+        {
+          "vesselId": "gen_wjgykh0",
+          "startDay": 24,
+          "endDay": 26,
+          "days": [
+            24,
+            25,
+            26
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 27
+        },
+        {
+          "vesselId": "gen_wjgykh0",
+          "startDay": 29,
+          "endDay": 30,
+          "days": [
+            29,
+            30
+          ],
+          "length": 2,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 7,
+      "episodeLengthDist": {
+        "1": 2,
+        "2-4": 5,
+        "5+": 0
+      },
+      "episodesByEnd": {
+        "WALK-HOME": 3,
+        "SUCCESSION": 3,
+        "HORIZON": 1
+      },
+      "genuine": 5,
+      "genuineDays": [
+        5,
+        10,
+        17,
+        24,
+        29
+      ],
+      "camps": [],
+      "campCount": 0,
+      "campEndStories": {}
+    },
+    {
+      "seed": 17569,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 12,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 18,
+      "awayDays": [
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        24,
+        25,
+        26,
+        29,
+        30
+      ],
+      "awayShare": 0.6,
+      "awayShareNonRoad": 0.6,
+      "awayByTile": {
+        "forest_floor": 18
+      },
+      "awayByStart": {
+        "departure": 7,
+        "continuation": 11
+      },
+      "awayByEndCause": {
+        "no-return-step": 17,
+        "blocked-combat": 1
+      },
+      "awayByEndSubkind": {
+        "null": 18
+      },
+      "awayByReturnStory": {
+        "no-attempt": 11,
+        "walked-home-next-day": 4,
+        "ended-other": 2,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 16,
+        "succession": 2
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 0,
+      "creekAwayDays": [],
+      "blockedCrossingAway": 1,
+      "forageAway": 17,
+      "patrolAway": 8,
+      "travelLineAway": 17,
+      "away": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_f1rksim",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_f1rksim",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 0,
+          "patrolDelta": 0,
+          "travelLines": 0,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 7,
+          "vesselId": "gen_f1rksim",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_f1rksim",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_f1rksim",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_f1rksim",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_f1rksim",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_f1rksim",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 16,
+          "vesselId": "gen_f1rksim",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_froy2s9",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_froy2s9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_froy2s9",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 23,
+          "vesselId": "gen_froy2s9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "blocked-combat",
+          "endSubkind": null,
+          "inCombat": true,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_rq7znxr",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_rq7znxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_rq7znxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_rq7znxr",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_rq7znxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            4,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_f1rksim",
+          "startDay": 5,
+          "endDay": 8,
+          "days": [
+            5,
+            6,
+            7,
+            8
+          ],
+          "length": 4,
+          "endStory": "WALK-HOME",
+          "exitDay": 9
+        },
+        {
+          "vesselId": "gen_f1rksim",
+          "startDay": 10,
+          "endDay": 12,
+          "days": [
+            10,
+            11,
+            12
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 13
+        },
+        {
+          "vesselId": "gen_f1rksim",
+          "startDay": 15,
+          "endDay": 16,
+          "days": [
+            15,
+            16
+          ],
+          "length": 2,
+          "endStory": "SUCCESSION",
+          "exitDay": 17
+        },
+        {
+          "vesselId": "gen_froy2s9",
+          "startDay": 17,
+          "endDay": 18,
+          "days": [
+            17,
+            18
+          ],
+          "length": 2,
+          "endStory": "WALK-HOME",
+          "exitDay": 19
+        },
+        {
+          "vesselId": "gen_froy2s9",
+          "startDay": 22,
+          "endDay": 23,
+          "days": [
+            22,
+            23
+          ],
+          "length": 2,
+          "endStory": "SUCCESSION",
+          "exitDay": 24
+        },
+        {
+          "vesselId": "gen_rq7znxr",
+          "startDay": 24,
+          "endDay": 26,
+          "days": [
+            24,
+            25,
+            26
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 27
+        },
+        {
+          "vesselId": "gen_rq7znxr",
+          "startDay": 29,
+          "endDay": 30,
+          "days": [
+            29,
+            30
+          ],
+          "length": 2,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 7,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 7,
+        "5+": 0
+      },
+      "episodesByEnd": {
+        "WALK-HOME": 4,
+        "SUCCESSION": 2,
+        "HORIZON": 1
+      },
+      "genuine": 7,
+      "genuineDays": [
+        5,
+        10,
+        15,
+        17,
+        22,
+        24,
+        29
+      ],
+      "camps": [],
+      "campCount": 0,
+      "campEndStories": {}
+    },
+    {
+      "seed": 17570,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 11,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 19,
+      "awayDays": [
+        5,
+        6,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        24,
+        25,
+        26,
+        29,
+        30
+      ],
+      "awayShare": 0.6333333333333333,
+      "awayShareNonRoad": 0.6333333333333333,
+      "awayByTile": {
+        "forest_floor": 19
+      },
+      "awayByStart": {
+        "departure": 6,
+        "continuation": 13
+      },
+      "awayByEndCause": {
+        "no-return-step": 18,
+        "blocked-combat": 1
+      },
+      "awayByEndSubkind": {
+        "null": 19
+      },
+      "awayByReturnStory": {
+        "no-attempt": 12,
+        "walked-home-next-day": 4,
+        "ended-other": 2,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 17,
+        "blocked-combat-continuation": 1,
+        "succession": 1
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 0,
+      "creekAwayDays": [],
+      "blockedCrossingAway": 0,
+      "forageAway": 19,
+      "patrolAway": 9,
+      "travelLineAway": 19,
+      "away": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_zts5lwz",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_zts5lwz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 7,
+          "vesselId": "gen_zts5lwz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_zts5lwz",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "blocked-combat",
+          "endSubkind": null,
+          "inCombat": true,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "blocked-combat-continuation"
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_zts5lwz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_zts5lwz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 5,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_zts5lwz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_ea1be8l",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 16,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_ea1be8l",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 21,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_ea1be8l",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_ea1be8l",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_ea1be8l",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_zts5lwz",
+          "startDay": 5,
+          "endDay": 7,
+          "days": [
+            5,
+            6,
+            7
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 8
+        },
+        {
+          "vesselId": "gen_zts5lwz",
+          "startDay": 10,
+          "endDay": 13,
+          "days": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "length": 4,
+          "endStory": "SUCCESSION",
+          "exitDay": 14
+        },
+        {
+          "vesselId": "gen_ea1be8l",
+          "startDay": 15,
+          "endDay": 17,
+          "days": [
+            15,
+            16,
+            17
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 18
+        },
+        {
+          "vesselId": "gen_ea1be8l",
+          "startDay": 19,
+          "endDay": 22,
+          "days": [
+            19,
+            20,
+            21,
+            22
+          ],
+          "length": 4,
+          "endStory": "WALK-HOME",
+          "exitDay": 23
+        },
+        {
+          "vesselId": "gen_ea1be8l",
+          "startDay": 24,
+          "endDay": 26,
+          "days": [
+            24,
+            25,
+            26
+          ],
+          "length": 3,
+          "endStory": "WALK-HOME",
+          "exitDay": 27
+        },
+        {
+          "vesselId": "gen_ea1be8l",
+          "startDay": 29,
+          "endDay": 30,
+          "days": [
+            29,
+            30
+          ],
+          "length": 2,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 6,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 6,
+        "5+": 0
+      },
+      "episodesByEnd": {
+        "WALK-HOME": 4,
+        "SUCCESSION": 1,
+        "HORIZON": 1
+      },
+      "genuine": 6,
+      "genuineDays": [
+        5,
+        10,
+        15,
+        19,
+        24,
+        29
+      ],
+      "camps": [],
+      "campCount": 0,
+      "campEndStories": {}
+    },
+    {
+      "seed": 17571,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 16,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 14,
+      "awayDays": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "awayShare": 0.4666666666666667,
+      "awayShareNonRoad": 0.4666666666666667,
+      "awayByTile": {
+        "creek": 7,
+        "grove": 7
+      },
+      "awayByStart": {
+        "departure": 2,
+        "continuation": 12
+      },
+      "awayByEndCause": {
+        "no-return-step": 14
+      },
+      "awayByEndSubkind": {
+        "null": 14
+      },
+      "awayByReturnStory": {
+        "no-attempt": 12,
+        "ended-other": 1,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 13,
+        "succession": 1
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 7,
+      "creekAwayDays": [
+        17,
+        18,
+        22,
+        23,
+        26,
+        27,
+        28
+      ],
+      "blockedCrossingAway": 0,
+      "forageAway": 14,
+      "patrolAway": 6,
+      "travelLineAway": 14,
+      "away": [
+        {
+          "loopDay": 17,
+          "vesselId": "gen_v4apcm9",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 21,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 23,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_v4apcm9",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_gjzsn40",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 27,
+          "vesselId": "gen_gjzsn40",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 28,
+          "vesselId": "gen_gjzsn40",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_gjzsn40",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_gjzsn40",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "grove",
+          "map": [
+            7,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_v4apcm9",
+          "startDay": 17,
+          "endDay": 25,
+          "days": [
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "length": 9,
+          "endStory": "SUCCESSION",
+          "exitDay": 26
+        },
+        {
+          "vesselId": "gen_gjzsn40",
+          "startDay": 26,
+          "endDay": 30,
+          "days": [
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "length": 5,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 2,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 0,
+        "5+": 2
+      },
+      "episodesByEnd": {
+        "SUCCESSION": 1,
+        "HORIZON": 1
+      },
+      "genuine": 2,
+      "genuineDays": [
+        17,
+        26
+      ],
+      "camps": [
+        {
+          "startDay": 17,
+          "endDay": 18,
+          "length": 2,
+          "days": [
+            17,
+            18
+          ],
+          "genuine": true,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 22,
+          "endDay": 23,
+          "length": 2,
+          "days": [
+            22,
+            23
+          ],
+          "genuine": false,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 26,
+          "endDay": 28,
+          "length": 3,
+          "days": [
+            26,
+            27,
+            28
+          ],
+          "genuine": true,
+          "confirmedNights": 3,
+          "endStory": "moved-elsewhere"
+        }
+      ],
+      "campCount": 3,
+      "campEndStories": {
+        "moved-elsewhere": 3
+      }
+    },
+    {
+      "seed": 17572,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 11,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 19,
+      "awayDays": [
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "awayShare": 0.6333333333333333,
+      "awayShareNonRoad": 0.6333333333333333,
+      "awayByTile": {
+        "creek": 11,
+        "forest_floor": 8
+      },
+      "awayByStart": {
+        "departure": 5,
+        "continuation": 14
+      },
+      "awayByEndCause": {
+        "no-return-step": 18,
+        "blocked-combat": 1
+      },
+      "awayByEndSubkind": {
+        "null": 19
+      },
+      "awayByReturnStory": {
+        "no-attempt": 13,
+        "walked-home-next-day": 2,
+        "ended-other": 4
+      },
+      "awayByReturnSubkind": {
+        "null": 15,
+        "succession": 3,
+        "blocked-combat-continuation": 1
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 11,
+      "creekAwayDays": [
+        10,
+        11,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        24,
+        25,
+        29
+      ],
+      "blockedCrossingAway": 0,
+      "forageAway": 17,
+      "patrolAway": 9,
+      "travelLineAway": 18,
+      "away": [
+        {
+          "loopDay": 10,
+          "vesselId": "gen_j0xq7al",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_j0xq7al",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_j0xq7al",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_j0xq7al",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_j0xq7al",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 16,
+          "vesselId": "gen_j0xq7al",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 0,
+          "patrolDelta": 0,
+          "travelLines": 0,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_luth38i",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 0,
+          "patrolDelta": 1,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_luth38i",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_luth38i",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "blocked-combat",
+          "endSubkind": null,
+          "inCombat": true,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "blocked-combat-continuation"
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_luth38i",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 21,
+          "vesselId": "gen_luth38i",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_r0qnr6n",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 23,
+          "vesselId": "gen_r0qnr6n",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_dih270t",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_dih270t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_dih270t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 27,
+          "vesselId": "gen_dih270t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 28,
+          "vesselId": "gen_dih270t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            6,
+            0
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_dih270t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 9,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_j0xq7al",
+          "startDay": 10,
+          "endDay": 13,
+          "days": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "length": 4,
+          "endStory": "WALK-HOME",
+          "exitDay": 14
+        },
+        {
+          "vesselId": "gen_j0xq7al",
+          "startDay": 15,
+          "endDay": 16,
+          "days": [
+            15,
+            16
+          ],
+          "length": 2,
+          "endStory": "SUCCESSION",
+          "exitDay": 17
+        },
+        {
+          "vesselId": "gen_luth38i",
+          "startDay": 17,
+          "endDay": 21,
+          "days": [
+            17,
+            18,
+            19,
+            20,
+            21
+          ],
+          "length": 5,
+          "endStory": "SUCCESSION",
+          "exitDay": 22
+        },
+        {
+          "vesselId": "gen_r0qnr6n",
+          "startDay": 22,
+          "endDay": 23,
+          "days": [
+            22,
+            23
+          ],
+          "length": 2,
+          "endStory": "SUCCESSION",
+          "exitDay": 24
+        },
+        {
+          "vesselId": "gen_dih270t",
+          "startDay": 24,
+          "endDay": 29,
+          "days": [
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "length": 6,
+          "endStory": "WALK-HOME",
+          "exitDay": 30
+        }
+      ],
+      "episodeCount": 5,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 3,
+        "5+": 2
+      },
+      "episodesByEnd": {
+        "WALK-HOME": 2,
+        "SUCCESSION": 3
+      },
+      "genuine": 5,
+      "genuineDays": [
+        10,
+        15,
+        17,
+        22,
+        24
+      ],
+      "camps": [
+        {
+          "startDay": 10,
+          "endDay": 11,
+          "length": 2,
+          "days": [
+            10,
+            11
+          ],
+          "genuine": true,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 15,
+          "endDay": 18,
+          "length": 4,
+          "days": [
+            15,
+            16,
+            17,
+            18
+          ],
+          "genuine": true,
+          "confirmedNights": 3,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 22,
+          "endDay": 25,
+          "length": 4,
+          "days": [
+            22,
+            23,
+            24,
+            25
+          ],
+          "genuine": true,
+          "confirmedNights": 3,
+          "endStory": "moved-elsewhere"
+        }
+      ],
+      "campCount": 3,
+      "campEndStories": {
+        "moved-elsewhere": 3
+      }
+    },
+    {
+      "seed": 17573,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 7,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 23,
+      "awayDays": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "awayShare": 0.7666666666666667,
+      "awayShareNonRoad": 0.7666666666666667,
+      "awayByTile": {
+        "creek": 23
+      },
+      "awayByStart": {
+        "departure": 4,
+        "continuation": 19
+      },
+      "awayByEndCause": {
+        "no-return-step": 23
+      },
+      "awayByEndSubkind": {
+        "null": 23
+      },
+      "awayByReturnStory": {
+        "no-attempt": 19,
+        "ended-other": 3,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 20,
+        "succession": 3
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 23,
+      "creekAwayDays": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "blockedCrossingAway": 13,
+      "forageAway": 23,
+      "patrolAway": 8,
+      "travelLineAway": 23,
+      "away": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_to7fn7e",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_to7fn7e",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 7,
+          "vesselId": "gen_to7fn7e",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_to7fn7e",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 9,
+          "vesselId": "gen_to7fn7e",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_to7fn7e",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_4891zhr",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 2,
+          "patrolDelta": 1,
+          "travelLines": 7,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_4891zhr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 14,
+          "vesselId": "gen_4891zhr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 3,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_4891zhr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 16,
+          "vesselId": "gen_4891zhr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_5c7o32t",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_5c7o32t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_5c7o32t",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_nlc83bt",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 6,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 23,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 3,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 25,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 27,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 28,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 1,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_nlc83bt",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            6,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_to7fn7e",
+          "startDay": 5,
+          "endDay": 10,
+          "days": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "length": 6,
+          "endStory": "SUCCESSION",
+          "exitDay": 11
+        },
+        {
+          "vesselId": "gen_4891zhr",
+          "startDay": 12,
+          "endDay": 16,
+          "days": [
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "length": 5,
+          "endStory": "SUCCESSION",
+          "exitDay": 17
+        },
+        {
+          "vesselId": "gen_5c7o32t",
+          "startDay": 17,
+          "endDay": 19,
+          "days": [
+            17,
+            18,
+            19
+          ],
+          "length": 3,
+          "endStory": "SUCCESSION",
+          "exitDay": 20
+        },
+        {
+          "vesselId": "gen_nlc83bt",
+          "startDay": 22,
+          "endDay": 30,
+          "days": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "length": 9,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 4,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 1,
+        "5+": 3
+      },
+      "episodesByEnd": {
+        "SUCCESSION": 3,
+        "HORIZON": 1
+      },
+      "genuine": 4,
+      "genuineDays": [
+        5,
+        12,
+        17,
+        22
+      ],
+      "camps": [
+        {
+          "startDay": 5,
+          "endDay": 10,
+          "length": 6,
+          "days": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "genuine": true,
+          "confirmedNights": 5,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 12,
+          "endDay": 19,
+          "length": 8,
+          "days": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "genuine": true,
+          "confirmedNights": 6,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 22,
+          "endDay": 30,
+          "length": 9,
+          "days": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "genuine": true,
+          "confirmedNights": 8,
+          "endStory": "horizon"
+        }
+      ],
+      "campCount": 3,
+      "campEndStories": {
+        "succession": 2,
+        "horizon": 1
+      }
+    },
+    {
+      "seed": 17574,
+      "policy": "deed-seeking",
+      "horizonDays": 30,
+      "daysAlive": 30,
+      "endReason": "survived",
+      "errCount": 0,
+      "decisions": 30,
+      "evenings": 30,
+      "gateOk": true,
+      "complete": true,
+      "incompleteDays": 0,
+      "totalEvenings": 30,
+      "havenEvenings": 8,
+      "roadEvenings": 0,
+      "roadDays": [],
+      "awayEvenings": 22,
+      "awayDays": [
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        26,
+        27,
+        29,
+        30
+      ],
+      "awayShare": 0.7333333333333333,
+      "awayShareNonRoad": 0.7333333333333333,
+      "awayByTile": {
+        "creek": 19,
+        "forest_floor": 3
+      },
+      "awayByStart": {
+        "departure": 6,
+        "continuation": 16
+      },
+      "awayByEndCause": {
+        "no-return-step": 22
+      },
+      "awayByEndSubkind": {
+        "null": 22
+      },
+      "awayByReturnStory": {
+        "no-attempt": 16,
+        "ended-other": 4,
+        "walked-home-next-day": 1,
+        "still-away-at-horizon": 1
+      },
+      "awayByReturnSubkind": {
+        "null": 18,
+        "succession": 4
+      },
+      "awayUnclassified": 0,
+      "classificationCompleteness": 1,
+      "creekAwayEvenings": 19,
+      "creekAwayDays": [
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        26,
+        27,
+        29,
+        30
+      ],
+      "blockedCrossingAway": 2,
+      "forageAway": 22,
+      "patrolAway": 8,
+      "travelLineAway": 22,
+      "away": [
+        {
+          "loopDay": 5,
+          "vesselId": "gen_r7xrjwa",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 6,
+          "vesselId": "gen_r7xrjwa",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 8,
+          "vesselId": "gen_lcvvfnz",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 9,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 10,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 11,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 12,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 13,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 14,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 15,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 16,
+          "vesselId": "gen_lcvvfnz",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 0,
+          "travelLines": 4,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 17,
+          "vesselId": "gen_gf4skxr",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 18,
+          "vesselId": "gen_gf4skxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 19,
+          "vesselId": "gen_gf4skxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 20,
+          "vesselId": "gen_gf4skxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "walked-home-next-day",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 22,
+          "vesselId": "gen_gf4skxr",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 23,
+          "vesselId": "gen_gf4skxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 24,
+          "vesselId": "gen_gf4skxr",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "forest_floor",
+          "map": [
+            3,
+            1
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 5,
+          "blockedCrossing": true,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 26,
+          "vesselId": "gen_ljo63is",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 27,
+          "vesselId": "gen_ljo63is",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "ended-other",
+          "returnSubkind": "succession"
+        },
+        {
+          "loopDay": 29,
+          "vesselId": "gen_3sqr9f0",
+          "start": "departure",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 3,
+          "patrolDelta": 1,
+          "travelLines": 8,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "no-attempt",
+          "returnSubkind": null
+        },
+        {
+          "loopDay": 30,
+          "vesselId": "gen_3sqr9f0",
+          "start": "continuation",
+          "startOnRoad": false,
+          "tile": "creek",
+          "map": [
+            5,
+            2
+          ],
+          "eveningOutcome": "policy-no-record",
+          "endCause": "no-return-step",
+          "endSubkind": null,
+          "inCombat": false,
+          "insideTent": false,
+          "forageDelta": 1,
+          "patrolDelta": 0,
+          "travelLines": 2,
+          "blockedCrossing": false,
+          "creekseek": null,
+          "woodcarryBucket": null,
+          "returnStory": "still-away-at-horizon",
+          "returnSubkind": null
+        }
+      ],
+      "road": [],
+      "episodes": [
+        {
+          "vesselId": "gen_r7xrjwa",
+          "startDay": 5,
+          "endDay": 6,
+          "days": [
+            5,
+            6
+          ],
+          "length": 2,
+          "endStory": "SUCCESSION",
+          "exitDay": 7
+        },
+        {
+          "vesselId": "gen_lcvvfnz",
+          "startDay": 8,
+          "endDay": 16,
+          "days": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "length": 9,
+          "endStory": "SUCCESSION",
+          "exitDay": 17
+        },
+        {
+          "vesselId": "gen_gf4skxr",
+          "startDay": 17,
+          "endDay": 20,
+          "days": [
+            17,
+            18,
+            19,
+            20
+          ],
+          "length": 4,
+          "endStory": "WALK-HOME",
+          "exitDay": 21
+        },
+        {
+          "vesselId": "gen_gf4skxr",
+          "startDay": 22,
+          "endDay": 24,
+          "days": [
+            22,
+            23,
+            24
+          ],
+          "length": 3,
+          "endStory": "SUCCESSION",
+          "exitDay": 25
+        },
+        {
+          "vesselId": "gen_ljo63is",
+          "startDay": 26,
+          "endDay": 27,
+          "days": [
+            26,
+            27
+          ],
+          "length": 2,
+          "endStory": "SUCCESSION",
+          "exitDay": 28
+        },
+        {
+          "vesselId": "gen_3sqr9f0",
+          "startDay": 29,
+          "endDay": 30,
+          "days": [
+            29,
+            30
+          ],
+          "length": 2,
+          "endStory": "HORIZON",
+          "exitDay": 31
+        }
+      ],
+      "episodeCount": 6,
+      "episodeLengthDist": {
+        "1": 0,
+        "2-4": 5,
+        "5+": 1
+      },
+      "episodesByEnd": {
+        "SUCCESSION": 4,
+        "WALK-HOME": 1,
+        "HORIZON": 1
+      },
+      "genuine": 6,
+      "genuineDays": [
+        5,
+        8,
+        17,
+        22,
+        26,
+        29
+      ],
+      "camps": [
+        {
+          "startDay": 5,
+          "endDay": 6,
+          "length": 2,
+          "days": [
+            5,
+            6
+          ],
+          "genuine": true,
+          "confirmedNights": 1,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 8,
+          "endDay": 18,
+          "length": 11,
+          "days": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
+          "genuine": true,
+          "confirmedNights": 10,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 22,
+          "endDay": 23,
+          "length": 2,
+          "days": [
+            22,
+            23
+          ],
+          "genuine": true,
+          "confirmedNights": 2,
+          "endStory": "moved-elsewhere"
+        },
+        {
+          "startDay": 26,
+          "endDay": 27,
+          "length": 2,
+          "days": [
+            26,
+            27
+          ],
+          "genuine": true,
+          "confirmedNights": 1,
+          "endStory": "succession"
+        },
+        {
+          "startDay": 29,
+          "endDay": 30,
+          "length": 2,
+          "days": [
+            29,
+            30
+          ],
+          "genuine": true,
+          "confirmedNights": 1,
+          "endStory": "horizon"
+        }
+      ],
+      "campCount": 5,
+      "campEndStories": {
+        "succession": 2,
+        "moved-elsewhere": 2,
+        "horizon": 1
+      }
+    }
+  ]
+}
