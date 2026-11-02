@@ -1,0 +1,49 @@
+
+ORGANIC DEATH d12: Hector -> Hudson, topTrust=[{"id":"Elena","t":45},{"id":"Ursula","t":31},{"id":"Alejandra","t":30},{"id":"Hudson","t":28}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=18 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=50 succTrustPost=28
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d12 (organic (phase A)): Hector -> Hudson | passed=true lin=true mo=true trust=28 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Elena (refused=false)
+  CONVO d+3 with Alejandra (refused=false)
+  CONVO d+7 with Alejandra (refused=false)
+  CONVO d+7 with Elena (refused=false)
+  CONVO d+14 with Alejandra (refused=false)
+  CONVO d+14 with Fatiha (refused=false)
+
+SECOND-KILL d+20: Hudson -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Hudson -> Alejandra passed=true lin=true mo=true
+  CONVO d+30 with Fatiha (refused=false)
+  CONVO d+30 with Elena (refused=false)
+
+THIRD-KILL d+20 since second death: Alejandra -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Alejandra -> Elena passed=true lin=true mo=true
+  CONVO d+45 with Sam (refused=false)
+  CONVO d+45 with Fatiha (refused=false)
+
+FOURTH-KILL d+11 since third death: Elena -> ? (scripted r79 chain probe)
+FOURTH DEATH d+11 since third death: Elena -> Sam passed=true lin=true mo=true
+  CONVO d+53 with Gina (refused=false)
+  CONVO d+53 with Fatiha (refused=false)
+
+FIFTH-KILL d+11 since fourth death: Fatiha -> ? (scripted r104 chain probe)
+FIFTH DEATH d+11 since fourth death: Fatiha -> Gina passed=true lin=true mo=true
+  CONVO d+64 with Caleb (refused=false)
+  CONVO d+64 with Ursula (refused=false)
+
+FUNERAL: deathBeat=2 recover=1 vouch=0 (eligible=0) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":60,"offerLines":68,"codexPlantsDelta":33,"codexSkillsDelta":18,"codexAbilitiesDelta":23,"xpDelta":51,"any":true} pantry 25274->27141
+TRUST-DIALS: office 28->72 (+44, climb) | villageMean 21.3->47.7 (+26.4, climb) | ge60 0->2 | movers>=5: [{"id":"Caleb","from":8,"to":87,"delta":79},{"id":"Yuki","from":6,"to":14,"delta":8}]
+DEED-LEDGER: calls=57 summary={"teachPlant":{"calls":25,"ok":25,"deltaSum":0,"deltaN":25,"positive":0,"meanDelta":0},"donateToPantry":{"calls":32,"ok":32,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=81 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+69) t2=true(deedCalls=57) trustVerdict={"readable":true,"officeMantle":28,"officeLast":72,"officeDelta":44,"officeClass":"climb","villageMantle":21.3,"villageLast":47.7,"villageDelta":26.4,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":2,"movers":[{"id":"Caleb","from":8,"to":87,"delta":79},{"id":"Yuki","from":6,"to":14,"delta":8}]}
+E6/CALLCHECK: e6={"callMoves":17,"withCensus":17,"chainHandoffs":7,"trustMoves":10} callCheck={"dailyMoveDays":16,"callMoveDays":17,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":10,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":9,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":7,"known":7,"unknown":0} e3={"dailyDays":71,"moves":16}
