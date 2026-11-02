@@ -272,3 +272,27 @@ this run's numbers (prereg decision stands).
   discard.
 
 ## Landing (filled at closeout)
+Base correction: the prereg names master@a8c3ee57b, but the branch
+actually forked from 26703bd81 (master moved during the 57s
+register; a8c3ee57b is an ancestor, so the quad's base is one
+commit newer than the prereg states — evidence-only difference,
+zero game code between them). At closeout master had moved to
+38b8e1666 (sim-locatedengage-a prereg + instrument — ZERO src/js
++ src/data in the range, verified by diff). The branch was rebased
+cleanly onto 38b8e1666 (2/2 picks, no conflicts, no stop-at-pick
+quirk), and proofs were re-run after the rebase as the body
+requires: gossip proof 11/11, goal proof 7/7, gossip analyzer on
+the scored quad unchanged (0 pairs / 0 fallback), node --check
+clean on both r68 scripts. NO quad re-run after the rebase: the
+rebase range holds zero game code, so the measured quad stands
+unchanged on the new base.
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 7821ef7b7 (prereg + driver, rebased from 105ffd9e0),
+fffae86ae (quad + analysis + run note, rebased from 677595c07),
+plus this landing section as the final branch commit, merged by a
+second fast-forward. Worktree released + branch deleted at
+closeout; final main-tree status clean. Rotation file written 3→0
+at closeout and verified by reading it back. Playtest lock deleted
+at closeout. Heartbeat loop stopped at closeout.
