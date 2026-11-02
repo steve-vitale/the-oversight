@@ -377,3 +377,10 @@ try { const ew = require('./policies/competent-entrywindow-b'); POLICY_REGISTRY[
 // Additive; zero behavior change to existing entries (the variant
 // stays default-OFF: nothing loads it unless named).
 try { const ls = require('./policies/competent-latescape-b'); POLICY_REGISTRY['competent-latescape-b'] = ls.latescape; } catch (e) {}
+// homewardstep-b instrument (sim-homewardstep-b / sim-homewardstep-rpt-b,
+// 2026-11-02, Loop B food-economy): the competent + lateral-escape-aware
+// guard policy with the homeward-hop exemption removed, registered so the
+// balanced panel (§15) can build its column. Additive; zero behavior
+// change to existing entries (the variant stays default-OFF: nothing
+// loads it unless named).
+try { const hs = require('./policies/competent-homewardstep-b'); POLICY_REGISTRY['competent-homewardstep-b'] = hs.homewardstep; } catch (e) {}
