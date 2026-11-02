@@ -1,0 +1,167 @@
+{
+  "seeds": [
+    {
+      "seed": 79006,
+      "endReason": "village-lost",
+      "daysAlive": 24,
+      "maxWaveUnlocked": 2,
+      "survived": false,
+      "collapsed": true,
+      "firstStarvationDay": 23,
+      "startsDisengaged": false,
+      "candidates": {
+        "a_totalSlide": {
+          "day": 16,
+          "pantry": 18895,
+          "pantryMinus5": 24600,
+          "fallPct": 0.23191056910569108,
+          "inTime": true
+        },
+        "b_hysteresis": null,
+        "c_standDownTrend": null,
+        "d_floor": {
+          "day": 21,
+          "pantry": 7560,
+          "inTime": false
+        }
+      }
+    },
+    {
+      "seed": 79019,
+      "endReason": "village-lost",
+      "daysAlive": 25,
+      "maxWaveUnlocked": 2,
+      "survived": false,
+      "collapsed": true,
+      "firstStarvationDay": 20,
+      "startsDisengaged": false,
+      "candidates": {
+        "a_totalSlide": {
+          "day": 15,
+          "pantry": 9850,
+          "pantryMinus5": 19300,
+          "fallPct": 0.48963730569948183,
+          "inTime": true
+        },
+        "b_hysteresis": null,
+        "c_standDownTrend": {
+          "day": 19,
+          "standDownDay": 15,
+          "standDownPantry": 9850,
+          "pantry": 4468,
+          "fallPctVsStandDown": 0.5463959390862945,
+          "inTime": false
+        },
+        "d_floor": {
+          "day": 15,
+          "pantry": 9850,
+          "inTime": true
+        }
+      }
+    },
+    {
+      "seed": 79031,
+      "endReason": "village-lost",
+      "daysAlive": 22,
+      "maxWaveUnlocked": 2,
+      "survived": false,
+      "collapsed": true,
+      "firstStarvationDay": 20,
+      "startsDisengaged": false,
+      "candidates": {
+        "a_totalSlide": {
+          "day": 19,
+          "pantry": 6950,
+          "pantryMinus5": 20181,
+          "fallPct": 0.6556166691442447,
+          "inTime": false
+        },
+        "b_hysteresis": {
+          "day": 19,
+          "freshDays": 2.2760768356623378,
+          "hungryStreak": 1,
+          "assumedGateOn": false,
+          "inTime": false
+        },
+        "c_standDownTrend": null,
+        "d_floor": {
+          "day": 19,
+          "pantry": 6950,
+          "inTime": false
+        }
+      }
+    },
+    {
+      "seed": 79064,
+      "endReason": "village-lost",
+      "daysAlive": 26,
+      "maxWaveUnlocked": 2,
+      "survived": false,
+      "collapsed": true,
+      "firstStarvationDay": 25,
+      "startsDisengaged": false,
+      "candidates": {
+        "a_totalSlide": {
+          "day": 15,
+          "pantry": 8853,
+          "pantryMinus5": 19522,
+          "fallPct": 0.5465116279069768,
+          "inTime": true
+        },
+        "b_hysteresis": {
+          "day": 15,
+          "freshDays": 3.351732570632704,
+          "hungryStreak": 1,
+          "assumedGateOn": false,
+          "inTime": true
+        },
+        "c_standDownTrend": {
+          "day": 20,
+          "standDownDay": 15,
+          "standDownPantry": 8853,
+          "pantry": 5450,
+          "fallPctVsStandDown": 0.3843894724951994,
+          "inTime": true
+        },
+        "d_floor": {
+          "day": 15,
+          "pantry": 8853,
+          "inTime": true
+        }
+      }
+    }
+  ],
+  "survivors": 0,
+  "collapsed": [
+    79006,
+    79019,
+    79031,
+    79064
+  ],
+  "rates": {
+    "a_totalSlide": {
+      "firingSurvivorSeeds": [],
+      "firingSurvivorCount": 0,
+      "survivorCount": 0,
+      "firingSurvivorRate": null
+    },
+    "b_hysteresis": {
+      "firingSurvivorSeeds": [],
+      "firingSurvivorCount": 0,
+      "survivorCount": 0,
+      "firingSurvivorRate": null
+    },
+    "c_standDownTrend": {
+      "firingSurvivorSeeds": [],
+      "firingSurvivorCount": 0,
+      "survivorCount": 0,
+      "firingSurvivorRate": null
+    },
+    "d_floor": {
+      "firingSurvivorSeeds": [],
+      "firingSurvivorCount": 0,
+      "survivorCount": 0,
+      "firingSurvivorRate": null
+    }
+  }
+}
