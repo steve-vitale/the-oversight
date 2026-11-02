@@ -1,0 +1,17 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=10)
+=== seed 85043 day 90 — conversation with Sebastian (gen_mhhbcqk) ===
+occupation=line cook temperament=prickly trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control gossip-first
+
+THEM: "What got you through the first week? The very first days."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Honestly? I don't think anything got me through. I just didn't stop. Some mornings that's the whole story — you keep not-stopping until not-stopping feels like a plan."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Don't be a stranger."
+(gossip picks this sitting: 0)

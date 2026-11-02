@@ -1,0 +1,24 @@
+(pre-talk seed: curious planted d109; takenWantDay=0; convoCount=14)
+=== seed 85043 day 120 — conversation with Sebastian (gen_mhhbcqk) ===
+occupation=line cook temperament=prickly trust=90 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control gossip-first
+
+THEM: "Don't mind me. Today's just heavy."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "We need to — You're kind. Don't let this place change that."
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Yeah, that was me. Ran into the treeline when I heard the screaming. Didn't think, just ran."
+YOU: [dlg:more] "Go on."
+THEM: "Lucas? They're fine. We're all a little broken right now."
+YOU: [dlg:react] (listen)
+THEM: "that stray dog — the one that bit two people — lets Rafael touch it."
+YOU: [dlg:more] "Tell me more."
+THEM: "People are talking about Lucas. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "Alright — I should get back to it."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+(gossip picks this sitting: 1)

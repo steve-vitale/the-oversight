@@ -1,0 +1,21 @@
+(pre-talk seed: none; takenWantDay=82; convoCount=10)
+=== seed 85042 day 90 — conversation with Chris (gen_i4hkb5c) ===
+occupation=tailor temperament=steady trust=91 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control gossip-first
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: dlg:more, dlg:commit, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [goon] "Keep going."
+THEM: "Come get air with me. I need to think out loud."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Chris. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Steady as she goes. We'll talk again."
+(gossip picks this sitting: 0)

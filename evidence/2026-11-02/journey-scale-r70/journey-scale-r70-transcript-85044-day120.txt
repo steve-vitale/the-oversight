@@ -1,0 +1,19 @@
+(pre-talk seed: ask_favor planted d120; takenWantDay=0; convoCount=16)
+=== seed 85044 day 120 — conversation with Franz (gen_3b4k0pk) ===
+occupation=Dentist temperament=steady trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control gossip-first
+
+THEM: "About the sickness I'm fighting — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Whatever you can do — thank you."
+YOU: [goon] "Go on."
+THEM: "Come see what I found. You won't believe it."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "All right —" Franz starts to stand, then sinks back down. "Maybe not today. The fire's got me."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Good talking. We'll figure it out."
+(gossip picks this sitting: 0)

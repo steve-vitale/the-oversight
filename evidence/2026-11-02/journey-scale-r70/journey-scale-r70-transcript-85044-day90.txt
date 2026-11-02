@@ -1,0 +1,17 @@
+(pre-talk seed: curious planted d86; takenWantDay=0; convoCount=8)
+=== seed 85044 day 90 — conversation with Franz (gen_3b4k0pk) ===
+occupation=Dentist temperament=steady trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control gossip-first
+
+THEM: "I asked Gabriela about the last time you laughed — Gabriela's gone. When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+YOU: [goon] "Take your time."
+THEM: Their tone levels out — courteous, careful, further away.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+(gossip picks this sitting: 0)

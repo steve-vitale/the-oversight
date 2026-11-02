@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d108; takenWantDay=0; convoCount=16)
+=== seed 85041 day 120 — conversation with Shanice (gen_v6l5m8r) ===
+occupation=Midwife temperament=fidgety trust=90 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control gossip-first
+
+THEM: "Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the cache spot, Shanice freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+YOU: [dlg:comfort] "You alright?"
+THEM: "Wait, also — Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Lena won Gauntlet on the cameras. People are still talking about it."
+YOU: [dlg:more] "Tell me more."
+THEM: "The way I read it — Harish headed out to check the snares."
+YOU: [dlg:react] (listen)
+THEM: "Did you hear? Jovan just walked away from Haven. Didn't look back."
+YOU: [dlg:more] "Tell me more."
+THEM: "Ella talks to the garden. The garden listens. I've seen it. Doesn't matter now."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+closing line: "I should — yeah. Later."
+(gossip picks this sitting: 1)
