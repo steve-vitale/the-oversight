@@ -1,0 +1,26 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 85061 day 90 — conversation with Vasyl (vasyl_shevchenko) ===
+occupation=infantry soldier temperament=withdrawn trust=26 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: subject-first gossip-first
+
+THEM: "The cistern's nearly dry — 7 liters left. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "Huh. Let me think about that." "James headed out for water."
+YOU: [dlg:more] "Tell me more."
+THEM: "Elijah headed out to find someone."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Go on."
+THEM: "Elijah is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Go on."
+THEM: "Okay. That's — I need a minute. A long minute."
+YOU: (leave)
+pre-close: want ask_favor stage 1 thread gossip
+(gossip picks this sitting: 1)
