@@ -44,7 +44,6 @@ async function main() {
   const oldFirst = oldName.split(' ')[0];
   const roster = (v.roster || []).filter(id => id !== oldId);
   const other = roster[0];
-  const ctrl = roster[1];
 
   // plant a curious seed as the old bearer did plant path, no stamp)
   Game.convoPlantSeed(other, { wantId: 'curious', note: 'the first week', qid: null });
@@ -79,11 +78,24 @@ async function main() {
 
   // CONTROL: a seed planted AFTER the death (the successor's own walkaway)
   // keeps the old framing — no predecessor to name.
-  Game.convoPlantSeed(ctrl, { wantId: 'curious', note: 'the storehouse', qid: null });
+  // MONSTER COMMITMENT (Steve 2026-11-02): the 10-day sim runs deadlier
+  // now that beasts hold their ground, so the roster — and which villager
+  // is grief-saturated — shifts: on seed 5101 Natalie dies during runDays
+  // and the old fixed roster[1] control lands on a villager whose grief
+  // lines starve the seed for 40+ rounds, which proves nothing about
+  // framing. The control is therefore the first roster member besides
+  // the plant target whose post-death seed surfaces; the framing
+  // assertion itself is unchanged and just as strict — if no villager
+  // surfaces one, this fails.
   let ctrlOpener = null;
-  for (let round = 0; round < 4 && !ctrlOpener; round++) {
-    const txt = openerText(Game, ctrl);
-    if (/the storehouse/i.test(txt)) ctrlOpener = txt;
+  for (const cand of roster) {
+    if (cand === other) continue;
+    Game.convoPlantSeed(cand, { wantId: 'curious', note: 'the storehouse', qid: null });
+    for (let round = 0; round < 4 && !ctrlOpener; round++) {
+      const txt = openerText(Game, cand);
+      if (/the storehouse/i.test(txt)) ctrlOpener = txt;
+    }
+    if (ctrlOpener) break;
   }
   if (ctrlOpener) console.log('CONTROL OPENER:', ctrlOpener.slice(0, 200));
   ok(!!ctrlOpener && !/I asked .* about/i.test(ctrlOpener),

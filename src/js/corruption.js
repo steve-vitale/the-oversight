@@ -660,9 +660,13 @@
                   this.say('🔪 ' + psychoName + ' attacked ' + tname + '! The village erupts — this is beyond theft or threats.');
                   // Use fieldFight: psycho vs victim (both villagers)
                   // Build a minimal "monster def" for the psycho as attacker
+                  // MONSTER COMMITMENT (Steve 2026-11-02): the psycho is a
+                  // villager, a person — people can flee, so this def
+                  // carries the flee component monsters do not get.
                   var psychoMdef = {
                     id: 'psycho_' + psychoId,
                     name: psychoName,
+                    flee: true,
                     attack: { name: 'vicious assault', damage: [8, 14] },
                     speed: 3,
                     wave: 1,

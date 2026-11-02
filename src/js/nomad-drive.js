@@ -379,9 +379,12 @@
       // The kin: a person, not a monster — dangerous and desperate, with a
       // real attack kit (fieldFights honors mdef.attacks verbatim). A duel
       // against a desperate person is a genuine fight, not a boss — and not
-      // a formality either.
+      // a formality either. MONSTER COMMITMENT (Steve 2026-11-02): a kin
+      // is a person, and another player can flee — so the kin def carries
+      // the flee component monsters do not get by default.
       const mdef = {
         id: 'kin_fighter', name: name, hp: [50, 50], maxHp: 50,
+        flee: true,
         speed: 3, wave: 1,
         attacks: [
           { name: 'wild swing', damage: [7, 12] },

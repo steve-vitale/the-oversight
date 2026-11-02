@@ -40879,6 +40879,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const list = this.tbMoveOddsList(m);
       return list ? ` 📺 SYSTEM: "Reading intent… ${list}."` : '';
     },
+    // MONSTER COMMITMENT (Steve 2026-11-02): monsters do NOT flee in
+    // turn-based combat unless their kind carries an explicit flee
+    // component (mdef.flee, default off; lockpick_raccoon is the named
+    // example). Players, animals, and alien players keep their own
+    // flight; mdef-less hostile fighters never fled through this path
+    // (their fleeAt reads 0) and still don't. Called from tbMonsterTurn.
+    monsterMayFlee(m) {
+      return !!(m && m.mdef && m.mdef.flee);
+    },
     tbMonsterTurn(m) {
       const f = this.tbfight;
       // ROUNDS SEEN: surviving its turns teaches you its toughness.
@@ -41696,7 +41705,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
       }
       const fleeAt = _fleeAt + (this.wolfIs(m) && m.wolfBroken ? 0.2 : 0);
-      if (fleeAt > 0 && m.hp / m.maxHp < fleeAt && Math.random() < 0.7) {
+      // MONSTER COMMITMENT (Steve 2026-11-02): only flee-component
+      // kinds run — the fleeAt threshold below is now read solely for
+      // them (lockpick_raccoon bolts <50%; the other fleeAt values in
+      // monsters.json no longer drive flight on their own). The gate
+      // sits AFTER the hp check and BEFORE the 0.7 roll on purpose:
+      // the roll is still drawn exactly when baseline drew it, so
+      // seeded streams that never hit a suppressed flee stay
+      // byte-identical to baseline; only the flight itself is gated.
+      if (fleeAt > 0 && m.hp / m.maxHp < fleeAt && this.monsterMayFlee(m) && Math.random() < 0.7) {
         m.fled = true;
         this.say(`${this.encSubject(m)} breaks and runs!`);
         this.tbEndCheck();

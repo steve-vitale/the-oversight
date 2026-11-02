@@ -514,6 +514,9 @@
         // proves the branch fired and nowhere else it could fire
         // from (dance rounds exist only for chorus_line).
         chorusHoldRounds: 0,
+        // MONSTER COMMITMENT (Steve 2026-11-02): count of break-check
+        // holds where a committed beast stayed instead of fleeing.
+        committedHold: 0,
         // PARTY SIZE (sim-partyfinish-a, 2026-10-28): the mustered party
         // (leader + opts.allies) for honest kill narration — a party kill
         // must never read as a solo kill (fieldFightSummary used to say
@@ -657,6 +660,18 @@
         full: m && m.hp != null ? Number.isFinite(m.maxHp) && m.hp === m.maxHp : true } };
       rec.packCount = packN;
       var mBreak = wave >= 2 ? 0.15 : 0.25; // nastier things hold longer
+      // MONSTER COMMITMENT (Steve 2026-11-02): monsters do NOT flee —
+      // players, animals, and alien players can, but a monster stays
+      // committed to the fight unless its kind carries an explicit flee
+      // component (mdef.flee, default off; lockpick_raccoon is the
+      // named example). The generic flee line below — volley drive-off,
+      // in-round break check, round-cap disengagement — fires only for
+      // flee-component monsters. Per-monster counter dismissals
+      // (offer_food, poison meal, boredom, loophole) are the designed
+      // exits of those specific monsters and are untouched, as are the
+      // player-chosen stare-down / walk-in resolutions and the sealed
+      // arena judges' call.
+      var mCanFlee = !!(mdef && mdef.flee);
 
       var vAlive = vHp > 0;
       var mName = 'something';
@@ -1066,16 +1081,29 @@
               for (var _cj = 0; _cj < members.length; _cj++) { members[_cj].hp = 0; members[_cj].alive = false; }
               rec.contactFinishKill = true;
               rec.log.push(vName + ' does not let it slip away — they close in and strike with the ' + _cfW + ' for ' + _cfVd + ' — ' + mPhrase + ' falls. (Contact finish)');
-            } else {
+            } else if (mCanFlee) {
               rec.outcome = 'mFlee';
               rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' breaks away all the same.');
+            } else {
+              // MONSTER COMMITMENT (Steve 2026-11-02): a committed beast
+              // takes the finish strike and stays — the fight proceeds
+              // to rounds, no outcome set.
+              rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' holds its ground, wounded, and still coming. (Committed)');
             }
           } else if (_cf) {
-            rec.outcome = 'mFlee';
-            rec.log.push(vName + ' drove ' + mPhrase + ' off with the ' + _cfW + ' — it broke before it ever closed.');
+            if (mCanFlee) {
+              rec.outcome = 'mFlee';
+              rec.log.push(vName + ' drove ' + mPhrase + ' off with the ' + _cfW + ' — it broke before it ever closed.');
+            } else {
+              rec.log.push(vName + ' drove at ' + mPhrase + ' with the ' + _cfW + ' — it staggers, holds its ground, and keeps coming. (Committed)');
+            }
           } else {
-            rec.outcome = 'mFlee';
-            rec.log.push(vName + ' drove ' + mPhrase + ' off — it broke before it ever closed.');
+            if (mCanFlee) {
+              rec.outcome = 'mFlee';
+              rec.log.push(vName + ' drove ' + mPhrase + ' off — it broke before it ever closed.');
+            } else {
+              rec.log.push(vName + ' drove at ' + mPhrase + ' — it staggers, holds its ground, and keeps coming. (Committed)');
+            }
           }
         }
       }
@@ -2202,6 +2230,12 @@
             rec.twoblowCommitMhp = members[0].hp; rec.twoblowCommitVhpFrac = vHp / vHpMax;
             rec.twoblowCommitSum = twoblowLast[0] + twoblowLast[1];
             rec.log.push(vName + ' holds — ' + mPhrase + ' is two blows from falling, and they are still strong enough to finish it. (Committed finish, two-blow)');
+          } else if (!mCanFlee) {
+          // MONSTER COMMITMENT (Steve 2026-11-02): a committed beast
+          // does not break — no outcome set, no break, the loop
+          // continues to a kill, a death, or the fighter walking away.
+          rec.committedHold = (rec.committedHold | 0) + 1;
+          rec.log.push(mPhraseCap + ' is wounded past its line — and holds its ground. It is not leaving. (Committed)');
           } else {
           rec.outcome = 'mFlee';
           // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
@@ -2236,6 +2270,13 @@
           rec.judges = true;
           rec.outcome = (vFrac <= mFrac) ? 'vFlee' : 'mFlee';
           rec.log.push('Fifteen rounds, no finish — the judges give it to the less-bloodied.');
+        } else if (!mCanFlee) {
+          // MONSTER COMMITMENT (Steve 2026-11-02): a committed beast
+          // never disengages — the fighter walks away and the beast
+          // holds the field. Same deed credit as a beast flight
+          // (fight_survived), honest narration.
+          rec.outcome = 'vFlee';
+          rec.log.push('Neither gives after ' + MAX_ROUNDS + ' rounds — ' + vName + ' walks away. ' + mPhraseCap + ' holds the field; it is not leaving. (Committed)');
         } else {
           rec.outcome = (vFrac <= mFrac) ? 'vFlee' : 'mFlee';
           rec.log.push('Neither gives after ' + MAX_ROUNDS + ' rounds — the worse-off side disengages.');
