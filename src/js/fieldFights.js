@@ -1892,7 +1892,7 @@
               if (round === 1 && vHasAb('stalk')) { vd += 4; abNote += ' (stalker\'s opening +4)'; }
               // ABILITY — DEAD AIM: the executioner's shot — a wounded lead
               // gets the patient kill.
-              if (lead.hp < lead.maxHp * 0.25 && vHasAb('dead_aim')) { vd = vd * 2; abNote += ' (dead aim x2)'; }
+              if (lead.hp < lead.maxHp * 0.35 && vHasAb('dead_aim')) { vd = vd * 2; abNote += ' (dead aim x2)'; }
               // ABILITY — BLOOD TRAIL: the blood tells everything — follow
               // it in, +2 against a bleeding lead.
               else if (lead.hp < lead.maxHp * 0.5 && vHasAb('blood_trail')) { vd += 2; abNote += ' (blood trail +2)'; }
