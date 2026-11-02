@@ -1604,6 +1604,22 @@
         v.promises[vid].forageVersion = 1;
         favor.meetDay = day + 1;
       }
+      // R78 (journey-establishment r78): the keep window runs from the
+      // COMMITMENT, not the ask. A favor's deadline is stamped at ask
+      // time (ask day + 2), but an asked favor never rots — only a
+      // promised one does. Promising a week-old ask therefore collapsed
+      // the window to a single dawn (meetDay == dueDay: 381 Olivia 21..21,
+      // 383 Pavel 25..25), and the promise rotted even when the partner
+      // waited at dawn. A meet-based promise always gets meetDay and
+      // meetDay+1: two dawns to set out, whatever the ask's age. The
+      // promise's own favorDeadline moves with the favor's, so
+      // promiseDueDay (max(promise day + 1, favorDeadline)) widens too.
+      if ((favor.kind === 'forage_help' || favor.kind === 'water_haul') && favor.meetDay != null) {
+        const minDue = favor.meetDay + 1;
+        if (!favor.deadline || favor.deadline < minDue) favor.deadline = minDue;
+        const pr = v.promises[vid];
+        if (pr && (!pr.favorDeadline || pr.favorDeadline < minDue)) pr.favorDeadline = minDue;
+      }
       if (favor.kind === 'stay_close') {
         v.promises[vid].companyVersion=1;v.promises[vid].companyNight=favor.companyNight;
         favor.company=null;
