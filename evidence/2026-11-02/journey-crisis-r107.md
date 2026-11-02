@@ -421,3 +421,21 @@ so no failure is attributable to r107.
   main-session inspection), journey2-succession and
   journey2-succession-r86 (both still carry uncommitted changes,
   untouched throughout this run).
+
+## Closeout
+- Commit f9dc428db (worktree journey2-crisis-r107, base cee4041c3)
+  committed cleanly. Safe-commit index clobber struck the commit
+  (3 files staged-deleted in the worktree index, files intact);
+  repaired via `git read-tree HEAD` resync before any rebase or
+  merge; verified clean (status empty, diff empty, hashes match).
+- Master moved mid-run to 99ec4fcd5 (batch ship version bump):
+  branch rebased onto 99ec4fcd5 (306a66f3d, all 3 files verified
+  byte-identical across the rebase), and a post-rebase seed-10701
+  re-run diffed byte-identical to the panel JSON, so the panel
+  stands on the new master.
+- Merged locally via --ff-only, pending ship — no version bump, no
+  push (the ship loop owns those).
+- Rotation-b advanced 6 -> 7, verified by re-read. Next Lane B leg
+  is 7 (succession).
+- Lane B lock deleted at closeout. Worktree journey2-crisis-r107
+  released and removed; branch deleted.
