@@ -303,6 +303,41 @@ mechanism noted, not a bug):
   stray-change rule (`git checkout -- docs/ONTOLOGY.md`) — a
   legitimate-looking refresh, but out of this run's scope; carried
   as an observation below, not landed here.
-- Post-rebase proofs: (filled after the rebase below)
+- Post-rebase proofs (on master 40e62ed8b, after a clean 3/3 rebase):
+  foreign-react proof 10/10 GREEN, gossip 11/11, goal-opener 7/7,
+  capable-bot 40/0 (seed 11 holds on the rebased base — the rebase
+  did not shift the stream again).
+- Post-rebase control quad (not a re-score): because the rebase
+  range holds game code (sim-npcdeadfilter-a's betrayal.js dead
+  filter, +27/-1), the quad was re-run on the new base as a CONTROL
+  (same seeds, same driver, separate evidence dir
+  journey-scale-r72-rebase) — the scored measurement stays the
+  pre-rebase quad above. Control result: **all four seeds
+  byte-identical in census outcome** (same end day, pop, pantry,
+  rank, seat, arc, abilities, courtLines) and **all 5 transcripts
+  byte-identical** to the scored quad; gossip analyzer identical
+  (0 repeat / 0 fallback). The dead-filter change moves nothing on
+  this band — the scored quad stands unchanged on the new base,
+  proven by re-execution rather than by a zero-game-code argument.
 
 ## Landing (filled at closeout)
+Master at worktree creation: 8471c5da3. At closeout master had
+moved to 40e62ed8b (14 commits: Loop B evidence + gatediseng +
+homeward + heralddepart + npcdeadfilter results — one
+conversation-adjacent game change in the range: betrayal.js dead
+filter, +27/-1). The branch was rebased cleanly onto 40e62ed8b
+(3/3 picks, no conflicts, no stop-at-pick quirk), proofs re-run
+green after the rebase (foreign-react 10/10, gossip 11/11,
+goal-opener 7/7, capable-bot 40/0), and the control quad above
+proves the measured quad stands unchanged on the new base.
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 7edb3a834 (prereg + driver/analyzer), f375ce36b
+(Q2 fix + proof test), d6d401c58 (quad + analyses + run note +
+capable-bot re-seed), plus this landing section as the final
+branch commit, merged by a second fast-forward. Worktree released
++ branch deleted at closeout; final main-tree status clean.
+Rotation file written 3→0 at closeout and verified by reading it
+back. Playtest lock deleted at closeout. Heartbeat loop stopped
+at closeout.
