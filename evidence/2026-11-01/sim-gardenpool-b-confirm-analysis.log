@@ -1,0 +1,11 @@
+gardenpool file=evidence/2026-11-01/sim-gardenpool-b-confirm-baseline.jsonl pack_full=24 overloadDays=10 dayStartMean=7.3 dayStartMax=40.4 haul=973.4 awayE=12 starv=0 pooledKcal=0 pooledLines=0 deferredLines=0
+gardenpool file=evidence/2026-11-01/sim-gardenpool-b-confirm-armed.jsonl pack_full=1 overloadDays=0 dayStartMean=7 dayStartMax=24.8 haul=1012.6 awayE=12 starv=0 pooledKcal=114060 pooledLines=16 deferredLines=0
+JUDGE PASS | regime guard: baseline pack_full >= 4 | base=24 armed=1
+JUDGE PASS | pack_full armed <= 0.5 x baseline | base=24 armed=1
+JUDGE PASS | day-start overload days armed < baseline | base=10 armed=0
+JUDGE PASS | mean daily haul armed >= baseline | base=973.4 armed=1012.6
+JUDGE PASS | away day-ends armed <= baseline | base=12 armed=12
+JUDGE PASS | shape veto: no seed armed awayE >= 10 AND >= baseline+10 | base=null armed=0
+JUDGE PASS | starvation deaths armed <= baseline | base=0 armed=0
+JUDGE PASS | mechanism gate: armed pooled or deferred event fired | base=null armed={"pooledLines":16,"deferredLines":0,"pooledKcal":114060}
+JUDGE VERDICT: CONFIRM GO

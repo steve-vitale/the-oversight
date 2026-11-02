@@ -1,12 +1,12 @@
-# sim-gardenpool-b — GARDEN-POOLING TIMING: PILOT GO (confirm running)
+# sim-gardenpool-b — GARDEN-POOLING TIMING: PILOT GO + CONFIRM GO
 
 Run: oversight-flesh-out-loop-b, run fleshout-loop-b-20261102T0330Z,
 axis food-economy, arm sim-gardenpool-b (0047Z next blank #1).
 Worktree sim-gardenpool-b, branch sim-gardenpool-b. This worker
 does NOT push, bump, verify live, or merge into master; the
 coordinator merges. Status to coordinator: committed on branch,
-PILOT GO — confirm on fresh band 74101-74112 follows in this
-same run (see Confirm section; updated by a second commit).
+PILOT GO + CONFIRM GO — ready for coordinator merge (see
+Confirm section and the landing-value recommendation).
 
 ## Verdict: PILOT GO — all eight prereg bars pass
 
@@ -217,14 +217,109 @@ reached on either policy.
   materials/road-food pool) as its own arm, not re-score
   this one.
 
-## Confirm (pending at pilot commit)
+## Confirm: CONFIRM GO — all eight prereg bars pass on a fresh band
 
-Fresh band 74101-74112 (12 seeds), same bars, same
-substrate. The confirm evidence states the landing-value
-capacity recommendation explicitly: LAND base 20 (bypass
-closed, remainder too small for a cap change), LAND a
-stated new base (justified by residual composition), or
-DEFER with a reason.
+Fresh 12-seed confirm band 74101-74112, 30d competent,
+DEPOSITGATE=0, identical seeds both legs; baseline leg on
+BASE code (game.js temporarily reverted to the prereg
+commit, then restored byte-identical — hash verified
+50b4f2f5 == HEAD blob, proof test re-ran 10/10), armed leg
+on GARDENPOOL code. Judged by
+scripts/analyze-gardenpool-b.js --judge --confirm (same
+bars, same computation as the pilot judge; --confirm only
+relabels the verdict string).
+
+| Bar (prereg) | Baseline (base code) | Armed (gardenpool) | Bar | Result |
+|---|---|---|---|---|
+| (0) Regime guard: baseline pack_full total | 24 | — | >= 4 | PASS |
+| (1) pack_full band total | 24 | 1 | <= 0.5 x baseline (= 12) | PASS, -96% |
+| (2) Day-start overload days | 10 | 0 | < baseline | PASS |
+| (3) mean daily haul | 973.4 kcal | 1012.6 kcal | >= baseline | PASS, +39.2 |
+| (4) away day-ends, band total | 12 | 12 | <= baseline | PASS (equal, not worse) |
+| Shape veto: no seed armed awayE >= 10 AND >= baseline+10 | — | none | none | PASS |
+| (5) starvation deaths | 0 | 0 | <= baseline | PASS |
+| (6) Mechanism gate | — | 16 pooled lines, 114,060 kcal pooled | >= 1 event | PASS |
+
+Diagnostics: failed-trip share 0.067 -> 0.036; day-start
+mean packKg 7.3 -> 7.0 kg, max 40.4 -> 24.8 kg; median
+survival 30 = 30; max wave 2 = 2; collapses 0 = 0. Food
+reaching the village is UP again: return-pool unload
+161,020 -> 73,080 kcal PLUS garden-pooled 114,060 kcal =
+187,140 kcal armed vs 161,020 baseline (+26,120).
+
+### Confirm per-seed table
+
+| seed | base pf | base haul | base awayE | base overload | armed pf | armed haul | armed awayE | armed overload | armed pooled |
+|---|---|---|---|---|---|---|---|---|---|
+| 74101 | 1 | 1966.8 | 3 | 0 | 1 | 1966.8 | 3 | 0 | 0 |
+| 74102 | 0 | 1345.8 | 9 | 0 | 0 | 1346.1 | 9 | 0 | 3,000 |
+| 74103 | 0 | 1134.7 | 0 | 0 | 0 | 1134.7 | 0 | 0 | 0 |
+| 74104 | 0 | 795.0 | 0 | 0 | 0 | 795.0 | 0 | 0 | 0 |
+| 74105 | 0 | 457.0 | 0 | 0 | 0 | 457.0 | 0 | 0 | 0 |
+| 74106 | 0 | 514.7 | 0 | 0 | 0 | 514.7 | 0 | 0 | 0 |
+| 74107 | 1 | 502.9 | 0 | 1 | 0 | 557.1 | 0 | 0 | 9,750 |
+| 74108 | 4 | 367.3 | 0 | 3 | 0 | 450.7 | 0 | 0 | 5,400 |
+| 74109 | 4 | 988.6 | 0 | 2 | 0 | 894.1 | 0 | 0 | 28,500 |
+| 74110 | 0 | 1165.4 | 0 | 0 | 0 | 1165.4 | 0 | 0 | 0 |
+| 74111 | 12 | 1402.5 | 0 | 3 | 0 | 1782.2 | 0 | 0 | 47,760 |
+| 74112 | 2 | 1040.5 | 0 | 1 | 0 | 1087.5 | 0 | 0 | 19,650 |
+| BAND | 24 | 973.4 | 12 | 10 | 1 | 1012.6 | 12 | 0 | 114,060 |
+
+No seed worsens on pack-full. 74111 is the clearest win
+(pack-full 12 -> 0, haul 1402.5 -> 1782.2). Away ends are
+identical per seed on both legs (74102: 9, 74101: 3, rest
+0): pre-existing rotation stranding shapes, untouched by
+this arm — which is exactly what the shape veto is for,
+and it correctly does not fire.
+
+### The confirm residual is not garden-shaped at all
+
+The single armed pack-full attempt (74101, day 28,
+attempt 2, grove tile) is BYTE-IDENTICAL on both legs:
+same day-start packKg (18.58/20), same attempt ordinal,
+same tile, same haul (1966.8 both legs), zero garden
+pooled kcal on this seed. It is a standing-load / trip
+case the garden mechanism never touches — not a garden
+remainder. The garden bypass is closed on this band:
+every garden-shaped pack-full day in the baseline (74107,
+74108, 74109, 74111, 74112) is gone on the armed leg.
+
+### 74109's haul dip is the accounting shift, not a loss
+
+74109's haul falls 988.6 -> 894.1 while its forage
+successes RISE (25 -> 27) and its pack-full attempts fall
+(4 -> 0). What moved: baseline day 26/30 harvest 300
+blackberries (30 kg) into the pack, and those berries
+count in meanDailyHaul when they pool at the next return;
+armed, the same berries pool at harvest (28,500 kcal
+pooled on this seed) and meanDailyHaul by definition does
+not count harvest-time pooling. The band haul bar still
+passes (+39.2) DESPITE this definitional headwind, and
+village food is up (+26,120). The dip must not be read
+as food lost.
+
+### Landing-value capacity recommendation: LAND base 20 (no cap change)
+
+Stated explicitly, as the prereg requires. The garden
+fix achieves MORE than the CAP40 screen did, without
+touching the live default: CAP40 on its band, 18 -> 4
+pack-full; garden-pooling on the pilot band, 17 -> 3, and
+on the harder confirm band, 24 -> 1. The residual on both
+bands is standing-load-shaped (pilot 74003: 3 attempts
+starting the day at 19.35-19.75/20 kg after the garden
+pooled; confirm 74101: 1 attempt identical on both legs)
+— kept road food + gear + materials, not garden produce.
+Flipping the live carry default 20 -> 40 for 1-3 residual
+standing-load attempts per band would be a game-wide
+default change judged on no standing-load evidence. So:
+LAND the garden-pooling change with base 20 unchanged;
+the CAP40 branch stays held (its screen value is
+superseded, not landed); any future capacity value is a
+separate standing-load arm's job, not this confirm's.
+No [needs-eyes]: the new lines are narration honesty
+(pack state + load + destination), not a feel change
+needing Steve's phone — though the pooled/deferred lines
+are player-visible and will read on the next deploy.
 
 ## Infrastructure (loud, per task)
 
@@ -241,6 +336,20 @@ DEFER with a reason.
 - No EPERM flap on this arm. No sibling tree or branch
   touched (Loop A trees and held Loop B branches
   read-only via `git show` only, per task).
-- check.js --quick: (run after the pilot commit, before
-  the confirm armed leg; result recorded in the confirm
-  commit.)
+- check.js --quick: 284 passed, 6 failed in 733s, run
+  on the gardenpool code between the pilot and confirm
+  legs. The 6 failures (measurement-proof-update,
+  measurement-workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof,
+  establishment-r20-fixes-20261020) were then re-run
+  individually on BASE code (game.js reverted to the
+  prereg commit): all 6 fail identically there —
+  pre-existing on this master, none caused by
+  gardenpool. (Prior arms measured 283/7; capable-bot,
+  previously failing, passes now — master moved under
+  the run.) The new proof test is not in check.js's
+  quick list (290 scripts both before and after); it
+  runs standalone, 10/10, before and after the revert
+  round-trip. Zero mentions of harvestGarden /
+  carryCapacity / packWeight in the check log's failure
+  section beyond the pre-existing set.

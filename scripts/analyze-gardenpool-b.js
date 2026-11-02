@@ -87,7 +87,10 @@ function judge(base, armed) {
   const mechanism = (ga.pooledLines + ga.deferredLines) > 0 && ga.gardenPooledKcal + ga.deferredLines > 0;
   checks.push({ bar: 'mechanism gate: armed pooled or deferred event fired', base: null, armed: { pooledLines: ga.pooledLines, deferredLines: ga.deferredLines, pooledKcal: ga.gardenPooledKcal }, pass: mechanism });
   const go = checks.every((c) => c.pass);
-  return { checks, veto, go, verdict: go ? 'PILOT GO' : 'PILOT NO-GO' };
+  // --confirm only relabels the verdict string for the confirm run;
+  // the bars and the computation are identical to the pilot judge.
+  const label = process.argv.includes('--confirm') ? 'CONFIRM' : 'PILOT';
+  return { checks, veto, go, verdict: go ? label + ' GO' : label + ' NO-GO' };
 }
 
 function main() {
