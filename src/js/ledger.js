@@ -655,6 +655,7 @@
       // auto-transfers). SENTIMENTALS DIE WITH THE OWNER: keepsakes are
       // buried with the body — never placed on the corpse, never lootable.
       let gearPack = [];
+      let buriedKeepsakes = 0; // r100: distinct sentimental objects left out of the pack (below)
       try {
         const defs = {}; (this.data.items || []).forEach(i => { defs[i.id] = i; });
         const carried = (s.inventory || []).slice();
@@ -683,7 +684,7 @@
           // Only SENTIMENTALS die with them (corpses.js rule). A bonded tool is
           // still stuff: the bond doesn't transfer (this entry carries none),
           // the object does (audit 2026-10-14).
-          if (it.sentimental || def.class === 'sentimental') continue; // dies with them
+          if (it.sentimental || def.class === 'sentimental') { buriedKeepsakes++; continue; } // dies with them
           gearPack.push({
             itemId: gid || it.name, name: it.name || def.name || gid || 'something',
             units: it.units || 1,
@@ -730,6 +731,11 @@
       // record starts empty; see NEW BODY, NEW RECORD below.)
       this.lineage().push({ name: oldName, villagerId: oldId, epithet: this.leadershipEpithet(), day: s.day || 0, cause: cause || 'the wild', playstyle: (typeof this.dominantPlaystyle === 'function' ? this.dominantPlaystyle() : null) });
       this.say(`🕯️ ${oldName} is dead — ${cause || 'the wild'}. The village stops. Somebody screams. Somebody else starts digging.`);
+      // KEEPSAKE BURIAL (journey-succession r100 2026-11-01): the death-pack
+      // rule buries sentimentals with the body, but no line ever told the
+      // player — a bonded keepsake vanished silently (no silent actions).
+      // Name it, only when the bearer actually carried keepsakes.
+      if (buriedKeepsakes > 0) this.say(`What ${oldFirst} kept close goes into the ground with them — keepsakes are buried, never taken from the body.`);
       // DEATH ENDS THE CAMP (break-it camps-3 2026-10-08): the mantle passes
       // the office, not the claimed patch. A camp is its keeper's claim — the
       // keeper is dead, so the claim lapses: the camp's fires die with it
