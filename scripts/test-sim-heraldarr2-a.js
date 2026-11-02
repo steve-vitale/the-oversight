@@ -1,6 +1,12 @@
 // test-sim-heraldarr2-a.js — proof test for the Herald raid-pin instrument.
 //   node scripts/test-sim-heraldarr2-a.js                          (synthetic only)
 //   node scripts/test-sim-heraldarr2-a.js <corpusDir> <analysisJson> (synthetic + corpus legs)
+//   node scripts/test-sim-heraldarr2-a.js <corpusDir> <analysisJson> <expectedSeedCount>
+//     (same legs, but the corpus-size leg asserts exact equality to the
+//     passed count instead of the default 8 — a confirm band is not an
+//     8-seed pilot, and the old hardcoded leg failed by construction on
+//     16-seed corpora. Default 8 preserves the old behavior exactly;
+//     no assertion is loosened: the leg still asserts exact equality.)
 // Exits non-zero on any failure. Prints "N passed, 0 failed" on green.
 'use strict';
 const fs = require('fs');
@@ -119,7 +125,11 @@ const corpusDir = process.argv[2];
 const analysisPath = process.argv[3];
 if (corpusDir && analysisPath) {
   const files = fs.readdirSync(corpusDir).filter(f => f.endsWith('.json')).sort();
-  check('corpus-has-8-seeds', files.length === 8, { files: files });
+  // Corpus-size leg, parameterized (heraldkill-a fix): optional 4th argv
+  // is the exact expected seed count; default 8 preserves prior behavior.
+  // The assertion stays an exact equality — nothing is loosened.
+  const expectedSeeds = process.argv[4] ? parseInt(process.argv[4], 10) : 8;
+  check('corpus-has-' + expectedSeeds + '-seeds', files.length === expectedSeeds, { files: files });
   const analysis = JSON.parse(fs.readFileSync(analysisPath, 'utf8'));
   check('analysis-seed-count-matches', analysis.seeds === files.length, { analysisSeeds: analysis.seeds, files: files.length });
   for (const f of files) {
