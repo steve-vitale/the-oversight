@@ -410,4 +410,21 @@ no failure is attributable to r103.
   untouched throughout this run).
 
 ## Closeout
-[TO FILL: commit, merge, rotation, lock]
+- Commit cbc5e47a7 (rebased from db16beab1 after the Loop A 0605Z
+  round-evidence landing moved master mid-run to 4da1c1efb; all 3
+  files verified byte-identical across the rebase, and a post-rebase
+  seed-10301 re-run diffed byte-identical to the panel JSON, so the
+  panel stands on the new master). Safe-commit index clobber hit
+  the first commit (staged deletions + untracked phantoms, the known
+  class) and was repaired via HEAD-blob cacheinfo before any rebase
+  or merge; verified clean (status empty, diff empty, hashes
+  match). No clobber on the rebased commit.
+- Merged locally via --ff-only, pending ship — no version bump, no
+  push (the ship loop owns those).
+- Rotation-b advanced 6 -> 7, verified by re-read. Next Lane B leg
+  is 7 (succession).
+- Lane B lock (2026-11-02T07:01:35Z) deleted at closeout. Worktree
+  journey2-crisis-r103 released and removed; branch deleted.
+- Lesson carried (r99's, confirmed again): verify master HEAD
+  immediately before the --ff-only merge AND run release only after
+  the merge succeeds — never release-then-merge in one chain.
