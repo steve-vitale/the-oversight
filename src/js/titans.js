@@ -949,14 +949,25 @@
       try { got = Game.playerPackSpend ? Game.playerPackSpend(need) : 0; } catch (e) {}
       if (got < need) {
         var hasAllies = (muster.allies || []).some(function(a) { return a.villageId !== 'haven'; });
-        Game.say('🍽️ The muster is hungry — ' + got.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal fed. Bellies remember who feeds them.' + (hasAllies ? ' (loyalty strains when the food runs thin.)' : ''));
+        Game.say('🍽️ The muster is hungry — ' + got.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal fed. Bellies remember who feeds them.' + (hasAllies ? ' (loyalty strains when the food runs thin.) (trust −2 per fire per day while the muster stands hungry.)' : ''));
         // hunger strains loyalty: small trust erosion across mustered links
         var seen = {};
         muster.allies.forEach(function (a) {
           if (seen[a.villageId]) return;
           seen[a.villageId] = 1;
           var link = titanAlliedLinks().filter(function (l) { return titanLinkOther(l) === a.villageId; })[0];
-          if (link) link.trust = Math.max(0, (link.trust || 0) - 2);
+          if (link) {
+            link.trust = Math.max(0, (link.trust || 0) - 2);
+            // titanghost B2 (narration only — the −2 above is unchanged):
+            // book the charge in the link's own history, one entry per
+            // charged link per hunger day, so the bleed is attributable
+            // from history alone instead of silently falling trust.
+            try {
+              link.history = link.history || [];
+              link.history.push({ day: day, kind: 'muster-hunger', amount: -2, note: 'Muster hunger — trust −2; the muster stood hungry.' });
+              if (link.history.length > 40) link.history.shift();
+            } catch (e) {}
+          }
         });
       }
     });

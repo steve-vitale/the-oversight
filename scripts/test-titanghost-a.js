@@ -138,6 +138,54 @@ async function main() {
   check('B1 follow-up: no node standing, the Network call refuses',
     netCall2 === null, 'returned ' + JSON.stringify(netCall2));
 
+  // ================= B2: hunger legibility =================
+  // Fresh muster against the (present) Herald; starve it, then feed it.
+  const st2 = T.titanState();
+  // Stand the old musters down via state reset (test-only): drop musters,
+  // release committed, keep the omen + monster. (Both the herald muster
+  // and the follow-up network muster hold ashford's fighters.)
+  st2.musters.herald = null;
+  st2.musters.the_network = null;
+  if (Game.state.village) Game.state.village.titanCommitted = {};
+  linkAsh.trust = 60;
+  linkAsh.history = [];
+  Game.soundTitanCall('herald');
+  const mst = T.titanState().musters.herald;
+  check('B2 fixture: muster stands with allied blades',
+    !!mst && (mst.allies || []).length >= 2, 'allies=' + (mst && (mst.allies || []).length));
+  if (mst) {
+    // Starve: pack pays nothing.
+    Game.playerPackSpend = function () { return 0; };
+    said.length = 0;
+    delete mst.lastUpkeep;
+    Game.state.scholar.day = 101;
+    const tb2 = linkAsh.trust;
+    T.titanMusterUpkeep(101);
+    check('B2 hunger: trust still falls exactly -2',
+      linkAsh.trust === tb2 - 2, 'trust=' + tb2 + '->' + linkAsh.trust);
+    check('B2 hunger: say line states the trust price',
+      said.some(function (t) { return /muster is hungry/i.test(t) && /trust −2 per fire per day/.test(t); }),
+      said.join(' | ').slice(0, 400));
+    const entries = (linkAsh.history || []).filter(function (h) { return h.kind === 'muster-hunger'; });
+    check('B2 hunger: exactly one muster-hunger entry, amount -2, day 101',
+      entries.length === 1 && entries[0].amount === -2 && entries[0].day === 101,
+      JSON.stringify(entries));
+    // Feed: pack pays in full — no erosion, no entry, no hunger line.
+    Game.playerPackSpend = function (n) { return n; };
+    said.length = 0;
+    delete mst.lastUpkeep;
+    Game.state.scholar.day = 102;
+    const tb3 = linkAsh.trust;
+    T.titanMusterUpkeep(102);
+    check('B2 fed: trust unchanged and no new hunger entry',
+      linkAsh.trust === tb3 &&
+      (linkAsh.history || []).filter(function (h) { return h.kind === 'muster-hunger'; }).length === 1,
+      'trust=' + tb3 + '->' + linkAsh.trust);
+    check('B2 fed: no hunger line on a fed day',
+      !said.some(function (t) { return /muster is hungry/i.test(t); }),
+      said.join(' | ').slice(0, 300));
+  }
+
   Game.playerPackSpend = savedSpend;
   console.log(pass + ' passed, ' + fail + ' failed');
   process.exit(fail ? 1 : 0);

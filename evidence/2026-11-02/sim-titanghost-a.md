@@ -1,4 +1,8 @@
-# sim-titanghost-a — TITAN GHOST STOP (B1 GO) + MUSTER-HUNGER LEGIBILITY (B2, in progress)
+# sim-titanghost-a — TITAN GHOST STOP (B1 GO) + MUSTER-HUNGER LEGIBILITY (B2 GO)
+
+- Status: BOTH sub-changes GO. B1 commit 853ed37d8; B1 follow-up
+  commit 9d950c50 (campaign-node presence + 6 more fixtures); B2
+  commit (this file's final version) — see corpus paths.
 
 - Run: fleshout-loop-a-20261102T0250Z (Loop A, axis scale-onramp).
 - Worker branch: sim-titanghost-a. Base: master tip 9da23adc5
@@ -98,17 +102,65 @@ seeds it was killing villages. Other kill seeds' end states are
 unchanged (95402 survived 181 regional w4; 95438 survived 181
 regional w4; 95440 survived 181 regional w5).
 
-## B2 — MUSTER-HUNGER LEGIBILITY (in progress at this writing)
+## B2 — MUSTER-HUNGER LEGIBILITY: VERDICT GO (all 5 bars)
 
 Change (titans.js, on top of B1): hunger say line states "trust −2
-per fire per day" on hunger days with allied links charged, and
-titanMusterUpkeep writes one link.history entry per charged link
-per hunger day (kind `muster-hunger`, amount −2). The −2 itself is
-untouched. Stack: trustbleed intervened twin
+per fire per day" on hunger days with allied links charged (as its
+own parenthetical, so the before/after line diff is exactly that
+clause), and titanMusterUpkeep writes one link.history entry per
+charged link per hunger day (kind `muster-hunger`, amount −2,
+note naming the hunger). The −2 itself is untouched — same loop,
+same guard, same assignment.
+
+Stack (named exactly): trustbleed intervened twin
 (scripts/trustbleed-replay-20261101.js UNMODIFIED,
 FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1
 FULLSEAT=1 HERALD=1 MUSTER=1, MODE=intervene, SEEDS=90111,
-DAYS=180). Results to be appended; verdict pending.
+DAYS=180). Before run on B1 code, after runs on B1+B2 code
+(identical seeds/stack isolate B2). Both twins reproduce the
+trustbleed baseline exactly: call sounded day 72, 6 allies,
+92 refused attempts, village lost day 107, maxWave 4, national 0,
+table 0, won 0, instrument errors 0.
+
+Bars: (1) Hunger-day set identical before vs after (35 days,
+73–107) — PASS. (2) History attribution — see instrument note
+below; with the corrected snapshot-diff instrument: before 0
+entries, after exactly 90 entries (3 per active link per hunger
+day, days 73–102; 0 on days 103–107 when all links are broken),
+every entry amount −2, none on non-hunger days — PASS. (3) Price
+line on every hunger day (35/35) — PASS. (4) NO balance change:
+per-link daily trust series BYTE-IDENTICAL before vs after, end
+fields identical (village-lost day 107, regional), and say lines
+identical except the price clause (306 vs 306 lines) — PASS.
+(5) Unit proof scripts/test-titanghost-a.js 21/21 green (13 B1 +
+2 follow-up + 6 B2: hunger writes one −2 entry per charged link,
+fed day writes none, trust math identical) — PASS. **B2: GO.**
+
+Instrument note (metric review, read this before judging bar 2):
+the replay's history stream CANNOT judge bar 2 past ~day 90. It
+captures new entries by slicing from the previous snapshot's
+length; once a link's history saturates the 40-entry cap, length
+stops growing and the slice goes empty — for ALL kinds, before
+and after alike (before-run historyNew goes sparse after day 85
+even for tribute/tended entries). The replay analyzer therefore
+reports bar 2 FAIL on a partial count (53 of 90) that is an
+instrument ceiling, not a code gap. The bar was re-judged with a
+new snapshot-diff instrument
+(scripts/sim-titanghost-b2-snap.js, same policy chain, same
+intervention, read-only snapshots): its trust series matches the
+replay twins exactly on both runs (proving the instrument change
+did not move the game), and it counts all 90 entries. The replay
+analyzer's bars 1, 3, 4 and line-identity check all PASS on the
+same runs and agree with the snap instrument.
+
+Plain-words reading: the bleed is now legible. Where the player
+used to watch trust fall 2 a day with no event attached, the
+hunger line now says the price ("trust −2 per fire per day") and
+each link's history carries one −2 entry per hungry day — so a
+player scrolling back can finally see what the muster cost and
+when. Nothing about the cost itself changed: the same village
+still breaks on day 103 and dies on day 107. Legibility, not
+relief — relief is the trustbleed spec's items 2–4, still open.
 
 ## Village assessment (plain words)
 
@@ -147,10 +199,50 @@ now at least stops being billed for a closed road.
   on the kill band). Death-cause shares are not in the probe
   instrument; panel deaths on controls are identical before/after.
 
+## B1 follow-up (commit 9d950c50) — campaign-node presence
+
+While classifying `check.js --quick` failures, a real B1 gap
+surfaced: campaign nodes in titans.json come in two shapes —
+finale's are plain monster ids, the Network's are objects
+({id, monster}) — and the first helper only matched string nodes.
+A live summoned Network has all nine node monsters standing
+(networkSummon spawns every piece, heart included), so live play
+was covered by the heart id, but the helper now also counts node
+monsters, so any standing node counts as present. Six more
+fixtures set stage-2 omens without placing their titan and were
+fixed the same way (no assertion changed):
+test-cell-action-handoff, test-coalition-body-turns,
+test-coalition-scale, test-main67-titan-standdown,
+test-network-commit-lock-runtime (Network heart stands in for the
+summon's spawns; Finale crew node for its started campaign),
+test-table-campaign-isolation-20261015 (crew + opening nodes for
+its started campaign). All six pass at base counts after the fix.
+Total fixture files touched by B1: 13 (7 + 6).
+
+Quick-check accounting (honest, no rerun claimed): first run on
+B1 code before any fixture fix: 273 passed, 17 failed. Second run
+after the first 7 fixes: 278 passed, 12 failed. Of those 12, 6
+were the B1-caused fixtures fixed in the follow-up (each verified
+individually at base counts afterwards) and 6 are pre-existing:
+measurement-workflow + measurement-proof-update (retained proofs
+already stale at base — the proof-update script throws "Proof
+source inputs are not current" with base titans.js too; proof
+hashes are never hand-edited, refresh belongs to the maintenance
+loop), mobile-combat-cadence, occupation-panels, phone-frame-proof
+(stale receipt), establishment-r20 (racks-voice gate). A third
+full quick run was not repeated; the ship loop's check is the
+confirming run.
+
 ## Blanks filled / documented
 
 - FILLED (code): ghost escalation, ghost muster formation, ghost
   upkeep — all three Layer-1 harms stop.
+- FILLED (code): muster-hunger legibility — price stated aloud,
+  one −2 history entry per charged link per hunger day.
+- FILLED (instrument): snapshot-diff twin instrument for history
+  attribution under the 40-entry cap (replaces the replay's
+  saturating slice for this purpose; replay twins still used for
+  timeline identity).
 - DOCUMENTED (not fixed, out of scope): Layer 2 — the field-killed
   Herald's frozen omen, missing slain credit, and the still-offered
   call/commit buttons in titanSelfActions (they now refuse honestly
@@ -168,7 +260,19 @@ now at least stops being billed for a closed road.
   any pack state) — that reading is the one the GO rests on, and
   the parenthetical should be dropped for the next run. No other
   bar moved.
-- B2 bars unchanged (see prereg).
+- B2 bar 2's instrument changed (see B2 instrument note): the
+  prereg named the replay's daily history stream as the judge, but
+  that stream saturates at the 40-entry cap and misses entries
+  after ~day 90 for all kinds. The BAR (one −2 entry per charged
+  link per hunger day) is unchanged; it is judged by the
+  snapshot-diff instrument, whose timelines match the replay twins
+  exactly. Future arms judging history attribution must use
+  snapshot-diff (or raise the cap question with Steve), never the
+  replay's slice.
+- B2 bar 3's line format: the price clause is its own
+  parenthetical after the existing loyalty clause, so the
+  before/after say-line diff is exactly the clause — verified
+  306 vs 306 lines.
 - Panel status `review_required` on 2 cases is a sample-size label,
   not a signal: all 23 paired deltas are exactly 0.
 
@@ -182,4 +286,12 @@ now at least stops being billed for a closed road.
 - Panel: evidence/2026-11-02/sim-titanghost-a-panel-base.json.gz,
   sim-titanghost-a-panel-b1.json.gz,
   sim-titanghost-a-panel-compare.md
-- Proof test: scripts/test-titanghost-a.js (13/13 at B1 commit)
+- Proof test: scripts/test-titanghost-a.js (13/13 at B1 commit,
+  15/15 at follow-up, 21/21 final)
+- B2 twins (replay): evidence/2026-11-02/titanghost-b2-before-90111.json,
+  titanghost-b2-after-90111.json
+- B2 twins (snapshot-diff): evidence/2026-11-02/titanghost-b2-snap-before-90111.json,
+  titanghost-b2-snap-after-90111.json
+- B2 instruments: scripts/sim-titanghost-b2-snap.js,
+  scripts/sim-titanghost-b2-snap-analyze.js,
+  scripts/sim-titanghost-b2-analyze.js (replay-based bars 1/3/4)
