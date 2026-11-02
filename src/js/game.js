@@ -44259,6 +44259,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           maxTier = Math.min((loot.tier || 1) + 1, 3);
         }
       }
+      // LOOT TAPER (Steve 2026-11-02): higher-wave kills sometimes pay
+      // UP a tier and rarely pay DOWN — before this the tier was set
+      // by the monster alone, no taper. Kill paths only (rewardSource
+      // prizes never taper), non-apex only (apex kills keep their
+      // earned tier 4), wave >= 2 only (the wave-1 caps above stand).
+      // Up rates grow with wave (W2 5%, W3 10%, W4 15%, W5+ 20%);
+      // down is a flat 5%, floor 1. Tier 4 stays rare: one tier, low
+      // wave-scaled rates, never a per-wave quota (Steve 2026-10-06).
+      // Runs before the tier4Chance override below, so that mechanism
+      // keeps its own rate.
+      if (!loot.rewardSource && !mdef.apex && wave >= 2) {
+        const _up = wave >= 5 ? 0.20 : wave === 4 ? 0.15 : wave === 3 ? 0.10 : 0.05;
+        const _tr = Math.random();
+        if (_tr < _up) maxTier = Math.min(maxTier + 1, 4);
+        else if (_tr < _up + 0.05) maxTier = Math.max(maxTier - 1, 1);
+      }
       // TIER-4 ON HARD KILLS (lootabilities Arm 2, 2026-10-31): a loot
       // entry may carry tier4Chance — the fraction of its successful
       // drops that pay tier 4 instead of the entry's own tier. The
