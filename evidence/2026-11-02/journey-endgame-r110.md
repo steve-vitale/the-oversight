@@ -348,13 +348,17 @@ single-seed snapshot). The re-seed proposal stands.
 
 ## Closeout
 
-- Commit 1: [COMMIT — filled at closeout]: instrument scripts
+- Commit 1: 8c115c24d (rebased from 651bb1de3 onto 93b7a4177;
+  analyzer re-run on the rebased tree: exit 0, PRIMARY GO |
+  ALL GO): instrument scripts
   (probe + analyzer, r109 renames + the three r110
   instruments) + evidence files (prereg, pilot log/err,
   det log, sweep log/err, analysis txt/err, checkquick log,
   run note, 14 perseed JSON/transcript files, 6 r110-pilot
   snapshot files, heartbeat log). Zero src/js diff.
-- Rebase/merge/release: [filled at closeout].
+- Rebase/merge/release: rebased clean onto 93b7a4177 as 8c115c24d
+  (analyzer re-run exit 0, PRIMARY GO | ALL GO); ff-merged to
+  master as 8c115c24d, worktree released, branch deleted.
 - Rotation-b written 4->5, verified by re-read (social life
   next). Lock deleted only after verifying it still carries
   this run's run_id (2026-11-02T21:55:46Z).
