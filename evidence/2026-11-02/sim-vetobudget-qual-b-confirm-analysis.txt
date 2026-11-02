@@ -1,0 +1,388 @@
+PER-SEED TABLE
+seed | base away/ep | armed away/ep | base failedShare | armed failedShare | base haul | armed haul | haulRatio | vetoes(silent) base->armed | suppressions | abandonments | maxStep silent total/days/perDay base->armed | wave | endReason
+67501 | 0/0 | 0/0 | 0.317 | 0.317 | 443.6 | 443.6 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+67502 [REP] | 8/0 | 8/0 | 0.283 | 0.283 | 243.4 | 243.4 | 1 | 36(33)->7(4) | 29 | 1 | 0,3->0,2=1/1/1;4,4->4,1=32/11/3 -> 0,3->0,2=1/1/1;4,4->4,1=3/2/2 | 3 | survived
+67503 | 1/0 | 1/0 | 0.35 | 0.35 | 417.4 | 417.4 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 4 | survived
+67504 | 2/0 | 2/0 | 0.45 | 0.45 | 399.7 | 399.7 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+67505 | 5/0 | 5/0 | 0.133 | 0.133 | 566.4 | 566.4 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+67506 | 0/0 | 0/0 | 0.517 | 0.517 | 242 | 242 | 1 | 1(0)->1(0) | 0 | 0 |  ->  | 3 | survived
+67507 | 0/0 | 0/0 | 0.567 | 0.567 | 359.5 | 359.5 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+67508 | 8/0 | 8/0 | 0.568 | 0.568 | 168.5 | 168.5 | 1 | 3(1)->3(1) | 0 | 0 | 4,1->3,0=1/1/1 -> 4,1->3,0=1/1/1 | 3 | village-lost
+67509 | 0/0 | 0/0 | 0.067 | 0.067 | 466.9 | 466.9 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+67510 | 0/0 | 0/0 | 0.567 | 0.567 | 39.9 | 39.9 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+67511 | 3/0 | 3/0 | 0.05 | 0.05 | 537.2 | 537.2 | 1 | 2(1)->2(1) | 0 | 0 | 4,7->2,7=1/1/1 -> 4,7->2,7=1/1/1 | 3 | survived
+67512 | 0/0 | 0/0 | 0.333 | 0.333 | 378.2 | 378.2 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | survived
+BAND: baseline away=27 armed away=27 baseline episodes=0 armed episodes=0 baseline vetoes=42(35 silent) armed vetoes=13(6 silent) armed suppressions=29 armed abandonments=1 baseline median=60 armed median=60 baseline deaths=404 armed deaths=404 baseline starvSeeds=1 armed starvSeeds=1 armed falseOpens=0
+PRIMARY: {
+  "P1reportOnly": {
+    "repetitionSeeds": [
+      67502
+    ],
+    "perSeed": [
+      {
+        "seed": 67502,
+        "baselineMaxPerDay": 3,
+        "armedMaxPerDay": 2,
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "P2": {
+    "violations": [],
+    "pass": true
+  },
+  "P3": {
+    "violations": [],
+    "pass": true
+  },
+  "primaryPass": true
+}
+BARS: {
+  "B1Survival": {
+    "baselineMedian": 60,
+    "armedMedian": 60,
+    "pass": true
+  },
+  "B2Deaths": {
+    "baselineDeaths": 404,
+    "armedDeaths": 404,
+    "baselinePlayerDeaths": 29,
+    "armedPlayerDeaths": 29,
+    "baselineModes": [
+      "wild/combat",
+      "other:expedition",
+      "starvation",
+      "other:ambush",
+      "other:the arena",
+      "disease/poison",
+      "other:contest",
+      "other:a wound that wouldn't close",
+      "other:a stranger",
+      "other:the expedition",
+      "other:two knobs on glass-still water, watching",
+      "other:Sunback",
+      "other:lockjaw",
+      "other:experiment",
+      "other:wound_fever",
+      "other:Don't-Look"
+    ],
+    "armedModes": [
+      "wild/combat",
+      "other:expedition",
+      "starvation",
+      "other:ambush",
+      "other:the arena",
+      "disease/poison",
+      "other:contest",
+      "other:a wound that wouldn't close",
+      "other:a stranger",
+      "other:the expedition",
+      "other:two knobs on glass-still water, watching",
+      "other:Sunback",
+      "other:lockjaw",
+      "other:experiment",
+      "other:wound_fever",
+      "other:Don't-Look"
+    ],
+    "newModes": [],
+    "pass": true
+  },
+  "B3FailedTripShare": {
+    "baseline": 0.345,
+    "armed": 0.345,
+    "threshold": "armed <= baseline + 0.05 (this arm's own tolerance)",
+    "pass": true
+  },
+  "B4MeanDailyHaul": {
+    "baseline": 355.2,
+    "armed": 355.2,
+    "threshold": ">= 0.95 x baseline",
+    "pass": true
+  },
+  "B4perSeed": {
+    "perSeedHaul": [
+      {
+        "seed": 67501,
+        "baseline": 443.6,
+        "armed": 443.6,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67502,
+        "baseline": 243.4,
+        "armed": 243.4,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67503,
+        "baseline": 417.4,
+        "armed": 417.4,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67504,
+        "baseline": 399.7,
+        "armed": 399.7,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67505,
+        "baseline": 566.4,
+        "armed": 566.4,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67506,
+        "baseline": 242,
+        "armed": 242,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67507,
+        "baseline": 359.5,
+        "armed": 359.5,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67508,
+        "baseline": 168.5,
+        "armed": 168.5,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67509,
+        "baseline": 466.9,
+        "armed": 466.9,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67510,
+        "baseline": 39.9,
+        "armed": 39.9,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67511,
+        "baseline": 537.2,
+        "armed": 537.2,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67512,
+        "baseline": 378.2,
+        "armed": 378.2,
+        "ratio": 1,
+        "pass": true
+      }
+    ],
+    "threshold": "every seed >= 0.50x its own baseline",
+    "pass": true
+  },
+  "B5Away": {
+    "baseline": 27,
+    "armed": 27,
+    "threshold": "armed <= baseline + 2",
+    "pass": true
+  },
+  "B6Idling": {
+    "baselineForageTrips": 1520,
+    "armedForageTrips": 1520,
+    "threshold": "armed >= 0.90 x baseline",
+    "pass": true
+  },
+  "B7Engagement": {
+    "repetitionSeeds": [
+      67502
+    ],
+    "suppressionsBySeed": [
+      {
+        "seed": 67501,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67502,
+        "suppressions": 29,
+        "abandonments": 1
+      },
+      {
+        "seed": 67503,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67504,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67505,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67506,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67507,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67508,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67509,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67510,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67511,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67512,
+        "suppressions": 0,
+        "abandonments": 0
+      }
+    ],
+    "missing": [],
+    "pass": true
+  },
+  "B8VetoCreatedPockets": {
+    "vetoCreated": [],
+    "pass": true
+  }
+}
+IDENTITY: {
+  "perSeed": [
+    {
+      "seed": 67501,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67502,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67503,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67504,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67505,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67506,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67507,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67508,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67509,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67510,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67511,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67512,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    }
+  ],
+  "totalDivergentDays": 0
+}
+ROUTE-REOPEN: {
+  "reopen": [
+    {
+      "seed": 67502,
+      "step": "4,4->4,1",
+      "abandonDay": 51,
+      "baselinePassesAfter": 0,
+      "firstBaselinePassDay": null,
+      "baselineVetoesAfter": 27,
+      "armedLaterHops": 0,
+      "armedLaterHopDays": [],
+      "armedSameDayHops": 1,
+      "divergentDaysOnOrAfterFirstPass": null,
+      "divergentDaysOnOrAfterAbandon": []
+    }
+  ],
+  "reopenCount": 0,
+  "structuralViolations": [],
+  "structuralPass": true
+}
+VERDICT: GO
