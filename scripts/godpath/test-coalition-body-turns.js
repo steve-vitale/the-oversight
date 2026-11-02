@@ -5,7 +5,9 @@ const K=require('./lib'),T=K.reporter('coalition-body-turns');
  const opponent=process.env.OPPONENT||'herald',musterId=opponent==='finale_crew'?'finale':opponent;
  const links=G.hierarchyState();links.length=0;
  for(const v of G.state.otherVillages){G.genVillageRoster(v);v.opinion=30;links.push({primary:'haven',subordinate:v.id,status:'active',trust:90,arrears:0,theirSpeaker:{id:v.roster.find(r=>r.age>=18).id,name:'Speaker'}});}
- G.state.titans={omens:{[musterId]:{stage:2}},musters:{},slain:{},cast:null};G.soundTitanCall(musterId);
+ G.state.titans={omens:{[musterId]:{stage:2}},musters:{},slain:{},cast:null};
+ // titanghost B1: a located titan is a PLACED titan — place the muster titan.
+ G.spawnWorldMonster(musterId,7,4,{titan:true});G.soundTitanCall(musterId);
  const site=G.titanPlacementTile(3);G.map.px=site.x;G.map.py=site.y;G.state.scholar.insideHaven=false;G.genDetail(site.x,site.y);G.state.scholar.mx=5;G.state.scholar.my=3;
  G.startCombat(opponent);let checked=0,first=null;
  function positions(){return G.tbfight?.fighters.filter(x=>x.alive&&!x.fled).map(x=>({key:x.key,x:x.mx,y:x.my,size:G.fighterSize(x)}));}

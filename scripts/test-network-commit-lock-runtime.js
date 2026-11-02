@@ -4,6 +4,10 @@ const K = require('./godpath/lib'), T = K.reporter('network-commit-lock');
 (async () => {
   const G = await K.load({ seed: 7 }); K.newRun(G);
   const st = G.state.titans = { omens: { the_network: { stage: 2 } }, musters: { the_network: { allies: [], haven: [], outfitted: {} } }, slain: {}, campaigns: { network: { summoned: true, started: false, idx: 0, cleared: [], tiles: {} } } };
+  // titanghost B1: a summoned Network is a PLACED one — networkSummon
+  // spawns every node monster (heart included); the fixture stands the
+  // heart in for those spawns.
+  G.spawnWorldMonster('network_heart', 7, 4, { titan: true, networkNode: 'heart' });
   const m = st.musters.the_network, c = st.campaigns.network;
   T.ok('before marching the real commitment button is offered', G.titanSelfActions().some(a => a.id === 'titan:commit:the_network'));
   T.ok('pre-march first tap requests confirmation', G.titanCommitOwn('the_network') === 'confirm' && m.haven.length === 0);
@@ -27,6 +31,8 @@ const K = require('./godpath/lib'), T = K.reporter('network-commit-lock');
   T.ok('repeated in-march taps never add replacements', m.haven.length === 3 && Object.keys(G.state.village.titanCommitted).length === 3);
   st.omens.finale = { stage: 2 }; st.campaigns.finale = { started: true, crew: true, opening: false };
   st.musters.finale = { allies: [], haven: [], outfitted: {} };
+  // titanghost B1: the Finale's crew node stands for this started campaign.
+  G.spawnWorldMonster('finale_crew', 2, 4, { titan: true });
   G.titanCommitOwn('finale'); G.titanCommitOwn('finale');
   T.ok('Finale retains its allowed new Haven commitments', st.musters.finale.haven.length === 3);
   T.done();

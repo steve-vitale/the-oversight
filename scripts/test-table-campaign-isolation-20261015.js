@@ -22,6 +22,10 @@ const K = require('./godpath/lib'), T = K.reporter('table-campaign-isolation');
       links.push({ primary: 'haven', subordinate: v.id, status: 'active', trust: 90, arrears: 0, theirSpeaker: { id: v.roster.find(r => r.age >= 18).id, name: 'Speaker' } });
     }
     G.state.titans = { omens: { finale: { stage: 2 } }, musters: {}, slain: { herald: true, nielsen: true }, campaigns: { finale: { started: true, crew: true, opening: true } }, cast: null };
+    // titanghost B1: a located campaign titan is a PLACED one — the
+    // fixture's started campaign has its crew + opening nodes standing.
+    G.spawnWorldMonster('finale_crew', 7, 4, { titan: true });
+    G.spawnWorldMonster('finale_opening', 2, 4, { titan: true });
     G.soundTitanCall('finale');
     const nearby = G.spawnWorldMonster(nearbyId, G.map.px, G.map.py, { mx: 5, my: 4, titan: true, veteran: true, beamPhase: 'grounded', gwGrounded: 3 });
     const table = G.tableState(); Object.assign(table, { path: 'feared', branch: 'light', phase: 'challenge', beat: 1, strength: 10, meters: { terror: 4, horror: 0 } });

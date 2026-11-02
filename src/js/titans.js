@@ -98,7 +98,14 @@
     var def = titanDefs()[titanId];
     if (!def) return false;
     var ids = [def.monster];
-    if (def.campaign && Array.isArray(def.campaign.nodes)) ids = ids.concat(def.campaign.nodes);
+    // Campaign nodes come in two shapes: finale's are plain monster ids;
+    // the Network's are objects ({id, monster}) — a live summoned Network
+    // has all nine node monsters standing, heart included, so any of them
+    // counts as the titan being present.
+    if (def.campaign && Array.isArray(def.campaign.nodes)) def.campaign.nodes.forEach(function (n) {
+      if (typeof n === 'string') ids.push(n);
+      else if (n) { if (n.monster) ids.push(n.monster); if (n.id) ids.push(n.id); }
+    });
     try {
       var mons = Game.worldMonsters ? Game.worldMonsters() : [];
       for (var i = 0; i < mons.length; i++) {

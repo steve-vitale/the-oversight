@@ -53,6 +53,8 @@ async function main() {
   Game.state.scholar.day = 100;
   // located omen, set directly (deterministic; titanOmen() would create it)
   Game._titanTest.titanState().omens.herald = { stage: 2, day: 95, warned: {} };
+  // titanghost B1: a located titan is a PLACED titan — place the Herald.
+  Game.spawnWorldMonster('herald', 7, 4, { titan: true });
 
   // ---- 1. gating: no muster, no standdown verb (nothing to break) ----
   const acts0 = Game.titanSelfActions();

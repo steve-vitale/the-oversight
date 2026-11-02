@@ -5,6 +5,9 @@ const fs=require('fs'),path=require('path'),K=require('./lib'),T=K.reporter('coa
  const links=G.hierarchyState();links.length=0;
  for(const v of G.state.otherVillages){G.genVillageRoster(v);v.opinion=30;links.push({primary:'haven',subordinate:v.id,status:'active',trust:90,arrears:0,theirSpeaker:{id:v.roster.find(r=>r.age>=18).id,name:'Speaker'}});}
  G.state.titans={omens:{herald:{stage:2}},musters:{},slain:{},cast:null};
+ // titanghost B1: a located titan is a PLACED titan — place the Herald
+ // before the call (the combat monster is still spawned at the site below).
+ G.spawnWorldMonster('herald',7,4,{titan:true});
  const muster=G.soundTitanCall('herald'),site=G.titanPlacementTile(3);
  G.map.px=site.x;G.map.py=site.y;G.state.scholar.insideHaven=false;G.genDetail(site.x,site.y);
  G.state.scholar.mx=4;G.state.scholar.my=4;

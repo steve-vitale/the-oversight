@@ -16,6 +16,8 @@ const fs=require('fs'),path=require('path'),K=require('./lib'),T=K.reporter('cel
   links.push({primary:'haven',subordinate:v.id,status:'active',trust:90,arrears:0,theirSpeaker:{id:v.roster.find(r=>r.age>=18).id,name:'Speaker'}});
  }
  G.state.titans={omens:{herald:{stage:2}},musters:{},slain:{},cast:null};
+ // titanghost B1: a located titan is a PLACED titan — place the Herald.
+ G.spawnWorldMonster('herald',7,4,{titan:true});
  const muster=G.soundTitanCall('herald');
  T.ok('prepared real recruitment supplies the unchanged entry floor', G.titanMusterReady('herald')&&muster.allies.length>=10);
  run(()=>G.startCombat('herald'));

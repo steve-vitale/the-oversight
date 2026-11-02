@@ -120,6 +120,24 @@ async function main() {
       'tap1=' + JSON.stringify(r1) + ' haven=' + havenN);
   }
 
+  // ================= B1 follow-up: campaign nodes count as presence =================
+  // A Network node monster standing (tower, no heart yet) is a present
+  // titan for the call; with no node standing, the call refuses.
+  T.titanState().omens.the_network = { stage: 2, day: 100, warned: {} };
+  linkAsh.trust = 60;
+  // Free ashford's fighters (committed to the herald muster above) so the
+  // Network call has someone to recruit.
+  T.titanState().musters.herald = null;
+  var tower = null;
+  try { tower = Game.spawnWorldMonster('network_tower', 7, 4, { titan: true, networkNode: 'mast_nw' }); } catch (e) { tower = null; }
+  var netCall = Game.soundTitanCall('the_network');
+  check('B1 follow-up: a Network node monster counts as present for the call',
+    !!netCall && (netCall.allies || []).length >= 2, 'allies=' + (netCall && (netCall.allies || []).length));
+  if (tower) { try { Game.removeWorldMonster(tower); } catch (e) {} }
+  var netCall2 = Game.soundTitanCall('the_network');
+  check('B1 follow-up: no node standing, the Network call refuses',
+    netCall2 === null, 'returned ' + JSON.stringify(netCall2));
+
   Game.playerPackSpend = savedSpend;
   console.log(pass + ' passed, ' + fail + ' failed');
   process.exit(fail ? 1 : 0);
