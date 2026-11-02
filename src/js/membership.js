@@ -364,6 +364,16 @@
       try {
         for (var i = 0; i < (this.state.village.roster || []).length; i++) used[this.state.village.roster[i]] = 1;
         for (var j = 0; j < (this.mshipState().applications || []).length; j++) used[this.mshipState().applications[j].id] = 1;
+        // DEAD-IDENTITY REUSE (journey crisis r111, seed 11101): a dead
+        // villager leaves the roster, so their background_survivor seed
+        // became eligible again and the applicant system re-issued it —
+        // Sam Wilson died day 15, "joined" again day 64 on the corpse's
+        // record (dead=true everywhere, yet acting in ambient lines and
+        // inheriting the mantle day 102). A dead person's identity is
+        // not a new person: exclude dead villagers' ids as well.
+        for (var k = 0; k < (this.data.villagers || []).length; k++) {
+          if ((this.data.villagers[k] || {}).dead) used[this.data.villagers[k].id] = 1;
+        }
       } catch (e) {}
       var bg = [];
       try { bg = (this.data.background_survivors || []).filter(function (c) { return !used[c.id]; }); } catch (e) {}
