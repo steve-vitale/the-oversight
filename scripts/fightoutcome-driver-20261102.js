@@ -156,6 +156,7 @@ async function oneRun(seed) {
     attempts: t.attempts,
     tbFights: t.tbFights,
     tbOutcomes: t.tbOutcomes,
+    tbEndNoop: t.tbEndNoop || 0,
     fieldFights: t.fieldFights,
     kills: t.kills,
     titanOutcomesAppended: t.titanOutcomesAppended,

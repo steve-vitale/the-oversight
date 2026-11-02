@@ -38,7 +38,13 @@ function analyzeOne(rec) {
   const attempts = rec.attempts || [];
   const tbFights = rec.tbFights || [];
   const fieldFights = rec.fieldFights || [];
-  const fought = attempts.filter(a => a.cls === 'FOUGHT');
+  // Starts are FOUGHT attempts plus BYPASS starts (engine paths
+  // that build tbfight directly: alien fights, uprisings,
+  // betrayals). A tbFight row joining to either class is a real
+  // outcome; only a row joining to NEITHER is a false outcome.
+  const fought = attempts.filter(a => a.cls === 'FOUGHT' || a.cls === 'BYPASS');
+  const foughtTb = attempts.filter(a => a.cls === 'FOUGHT');
+  const bypass = attempts.filter(a => a.cls === 'BYPASS');
   const bySeq = {};
   tbFights.forEach(function (f) {
     if (f.fightSeq == null) { problems.push('tbFight row without fightSeq: day ' + f.day + ' mid ' + f.mid); return; }
@@ -79,7 +85,8 @@ function analyzeOne(rec) {
     problems.push('driver unresolved (' + driverUnresolved.length + ') != re-derived missing (' + missing.length + ')');
   }
   return { seed: rec.seed, run: rec.run, callDay: rec.callDay,
-    attempts: attempts.length, fought: fought.length, tbFights: tbFights.length,
+    attempts: attempts.length, fought: fought.length, foughtTb: foughtTb.length, bypass: bypass.length,
+    tbFights: tbFights.length,
     fieldFights: fieldFights.length, titanTb: titanTbCount,
     titanOutcomes: titanEnd.map(o => ({ day: o.day, titan: o.titan, outcome: o.outcome })),
     missing: missing, orphanTb: orphanTb, unresolvedField: unresolvedField,
@@ -142,7 +149,7 @@ console.log('leg1_complete=' + leg1 + ' leg2_noFalse=' + leg2);
 console.log('wall: national=' + wallNational + ' table=' + wallTable + ' won=' + wallWon + ' wave4=' + wallW4 + ' wave5=' + wallW5 + ' medianSurvival=' + medianSurvival);
 if (det) det.forEach(d => console.log('det ' + d.file + ' == ' + d.r2 + ' : ' + d.equal));
 perSeed.forEach(function (s) {
-  console.log('seed ' + s.seed + ' call=' + s.callDay + ' fought=' + s.fought + ' tb=' + s.tbFights + ' field=' + s.fieldFights + ' titanTb=' + s.titanTb + ' problems=' + s.problems.length);
+  console.log('seed ' + s.seed + ' call=' + s.callDay + ' fought=' + s.fought + ' (tb=' + s.foughtTb + ' bypass=' + s.bypass + ') tb=' + s.tbFights + ' field=' + s.fieldFights + ' titanTb=' + s.titanTb + ' problems=' + s.problems.length);
   s.problems.forEach(p => console.log('  PROBLEM: ' + p));
   s.missing.forEach(m => console.log('  MISSING outcome: seq ' + m.fightSeq + ' day ' + m.day + ' mid ' + m.mid));
   s.orphanTb.forEach(m => console.log('  ORPHAN outcome: seq ' + m.fightSeq + ' day ' + m.day + ' mid ' + m.mid));

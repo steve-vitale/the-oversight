@@ -28,6 +28,13 @@
 //      state.titans.outcomes records are captured in the same
 //      install, so one per-seed JSON joins TB fights, field
 //      fights, kills, and titan outcomes without a second pass.
+//   4. Bypass starts: engine paths that build tbfight directly
+//      (alien fights, uprisings, betrayals) are registered at
+//      first sight (tbBeginTurn, else tbEnd / tbBarrierExit),
+//      so their tbEnd rows join to a real start row instead of
+//      reading as false outcomes. Bypass rows carry cls
+//      'BYPASS' and the fight's own flags, never a faked
+//      startCombat row.
 //
 // Wrappers are call-through, read-only, zero RNG draws, zero game-
 // state writes. The muster proxy reads muster state only and NEVER
@@ -147,10 +154,35 @@ function snapFighter(p) {
     villageId: (p.villageId == null ? null : p.villageId),
     id: (p.id == null ? null : p.id),
     mid: (p.mid == null ? null : p.mid),
+    monsterId: (p.monsterId == null ? null : p.monsterId),
+    monsterName: (p.monsterName == null ? null : p.monsterName),
     name: (p.name == null ? null : p.name),
     hp: hp, maxHp: (p.maxHp == null ? null : p.maxHp),
     alive: (p.alive != null ? !!p.alive : (hp == null ? null : hp > 0)),
   };
+}
+
+// Bypass-fight metadata: monster id from the fighter row (monster
+// fighters carry monsterId, not id/mid) plus the fight's own flags,
+// which name the bypass class (alien fight, uprising, betrayal,
+// table trial) when no startCombat row exists to name it.
+function bypassMeta(Game) {
+  const out = { mid: null, flags: {} };
+  try {
+    const f = Game.tbfight || null;
+    if (!f) return out;
+    out.flags = { alienFight: !!f.alienFight, betrayal: !!f.betrayal,
+      uprising: !!f.uprising, tableTrial: !!f.tableTrial,
+      coalitionArena: !!f.coalitionArena };
+    const fighters = f.fighters || [];
+    const mon = fighters.filter(function (x) { return x && x.kind === 'monster'; })[0];
+    if (mon) out.mid = mon.monsterId || mon.mid || mon.id || null;
+    if (!out.mid) {
+      const other = fighters.filter(function (x) { return x && x.kind !== 'villager' && x.kind !== 'ally'; })[0];
+      if (other) out.mid = other.monsterId || other.mid || other.id || null;
+    }
+  } catch (e) {}
+  return out;
 }
 
 function snapFighters(Game) {
@@ -220,6 +252,43 @@ function install(Game, t) {
       const k = fightKeys[f.id];
       return k ? k.fightSeq : null;
     } catch (e) { return null; }
+  }
+
+  // Bypass starts: several engine paths build tbfight directly
+  // instead of via startCombat (alien fights in encounters.js,
+  // uprisings in justice.js, betrayals in party.js — each file
+  // says so in its own comment). A tbEnd for such a fight is a
+  // REAL outcome, not a false one, so the recorder registers the
+  // start when it first sees the fight live: at the first
+  // tbBeginTurn, or at tbEnd / tbBarrierExit at the latest.
+  // Say lines before the first turn are not captured for bypass
+  // fights (the say wrapper deliberately does NOT register here:
+  // registering mid-startCombat would double-register the fight
+  // the after-hook then claims as FOUGHT).
+  function ensureFightKey(source) {
+    try {
+      const f = Game.tbfight;
+      if (!f || f.over || !f.id) return null;
+      if (fightKeys[f.id]) return fightKeys[f.id];
+      const meta = bypassMeta(Game);
+      fightSeq += 1;
+      const seq = fightSeq;
+      fightKeys[f.id] = { fightSeq: seq, day: gday(Game), mid: meta.mid, titan: meta.mid ? isTitanMid(Game, meta.mid) : false };
+      liveSay[seq] = { head: [], tail: [], dropped: 0 };
+      t.attempts.push({
+        fightSeq: seq, day: gday(Game), mid: meta.mid,
+        wave: meta.mid ? ((mdefOf(Game, meta.mid) || {}).wave | 0) : 0,
+        aggression: meta.mid ? ((mdefOf(Game, meta.mid) || {}).aggression || null) : null,
+        titan: fightKeys[f.id].titan, caller: 'bypass:' + source, stackTop: stackTop(),
+        cls: 'BYPASS', reason: 'bypass-start:' + source,
+        liveBefore: false, pendingBefore: false, pendingMidBefore: null,
+        pendingAfter: false, pendingMidAfter: null,
+        muster: fightKeys[f.id].titan ? musterProxy(Game, meta.mid) : null,
+        scholarPos: null, entityPos: null, entityHp: null,
+        sayDuring: [], gameOutcomes: [], fightFlags: meta.flags,
+      });
+      return fightKeys[f.id];
+    } catch (e) { err(t, 'ensureFightKey', e); return null; }
   }
 
   function pushSay(line) {
@@ -317,24 +386,54 @@ function install(Game, t) {
             else if (pre.titan && pre.muster && pre.muster.readyProxy === false) reason = 'MUSTER-GATE';
             else reason = 'OTHER';
           }
-          let seq = null;
+          let seq = null, upgraded = false;
           if (fought) {
-            fightSeq += 1;
-            seq = fightSeq;
-            fightKeys[afterId] = { fightSeq: seq, day: pre.day, mid: pre.mid, titan: pre.titan };
-            liveSay[seq] = { head: [], tail: [], dropped: 0 };
+            if (fightKeys[afterId]) {
+              upgraded = true;
+              // Registered as BYPASS during this very call: the
+              // engine's startCombat calls tbBeginTurn synchronously
+              // during fight setup (game.js startCombat -> turn
+              // loop), so the turn wrapper claimed the fight
+              // before this after-hook ran. Upgrade that row to
+              // FOUGHT with the startCombat fields instead of
+              // double-registering one fight as two starts.
+              const key = fightKeys[afterId];
+              seq = key.fightSeq;
+              key.mid = pre.mid; key.titan = pre.titan;
+              const row = t.attempts.filter(function (a) { return a.fightSeq === seq; })[0];
+              if (row) {
+                row.cls = 'FOUGHT'; row.reason = null; row.mid = pre.mid;
+                row.wave = pre.wave; row.aggression = pre.aggression;
+                row.titan = pre.titan; row.caller = pre.caller;
+                row.stackTop = pre.stackTop; row.muster = pre.muster;
+                row.scholarPos = pre.scholarPos; row.entityPos = pre.entityPos;
+                row.entityHp = pre.entityHp;
+                row.pendingAfter = pendingAfter; row.pendingMidAfter = pendingMidAfter;
+                row.gameOutcomes = newOutcomes;
+              }
+            } else {
+              fightSeq += 1;
+              seq = fightSeq;
+              fightKeys[afterId] = { fightSeq: seq, day: pre.day, mid: pre.mid, titan: pre.titan };
+              liveSay[seq] = { head: [], tail: [], dropped: 0 };
+            }
           }
-          t.attempts.push({
-            fightSeq: seq, day: pre.day, mid: pre.mid, wave: pre.wave, aggression: pre.aggression,
-            titan: pre.titan, caller: pre.caller, stackTop: pre.stackTop,
-            cls: cls, reason: reason,
-            liveBefore: pre.liveBefore,
-            pendingBefore: pre.pendingBefore, pendingMidBefore: pre.pendingMidBefore,
-            pendingAfter: pendingAfter, pendingMidAfter: pendingMidAfter,
-            muster: pre.muster, scholarPos: pre.scholarPos, entityPos: pre.entityPos, entityHp: pre.entityHp,
-            sayDuring: (cls === 'REFUSED' || cls === 'THROW') ? sayDuring : [],
-            gameOutcomes: newOutcomes,
-          });
+          // Upgraded rows are already in t.attempts (patched in
+          // place above); pushing again would double-register
+          // one fight as two starts with the same fightSeq.
+          if (!upgraded) {
+            t.attempts.push({
+              fightSeq: seq, day: pre.day, mid: pre.mid, wave: pre.wave, aggression: pre.aggression,
+              titan: pre.titan, caller: pre.caller, stackTop: pre.stackTop,
+              cls: cls, reason: reason,
+              liveBefore: pre.liveBefore,
+              pendingBefore: pre.pendingBefore, pendingMidBefore: pre.pendingMidBefore,
+              pendingAfter: pendingAfter, pendingMidAfter: pendingMidAfter,
+              muster: pre.muster, scholarPos: pre.scholarPos, entityPos: pre.entityPos, entityHp: pre.entityHp,
+              sayDuring: (cls === 'REFUSED' || cls === 'THROW') ? sayDuring : [],
+              gameOutcomes: newOutcomes,
+            });
+          }
         }
       } catch (e) { err(t, 'startCombat.push', e); }
       if (thrown) throw thrown;
@@ -342,7 +441,7 @@ function install(Game, t) {
     };
   } else { err(t, 'install.missing:startCombat', new Error('not a function')); }
 
-  function recordTbEnd(result, fightId, snap, titanOutcome) {
+  function recordTbEnd(result, fightId, snap, titanOutcome, entryStack) {
     const key = (fightId && fightKeys[fightId]) || null;
     const seq = key ? key.fightSeq : null;
     const say = seq != null ? sayLinesFor(seq) : { lines: [], dropped: 0 };
@@ -353,6 +452,7 @@ function install(Game, t) {
       fighters: snap.fighters, monster: snap.monster, bearer: snap.bearer,
       titanOutcome: titanOutcome || null,
       sayLines: say.lines, sayDropped: say.dropped,
+      endStack: entryStack || [],
     };
     row.normalized = normalizeTb(row.engineResult, snap, titanOutcome);
     t.tbFights.push(row);
@@ -361,16 +461,33 @@ function install(Game, t) {
     return row;
   }
 
+  if (typeof Game.tbBeginTurn === 'function') {
+    const o = Game.tbBeginTurn;
+    orig.tbBeginTurn = o;
+    Game.tbBeginTurn = function () {
+      try { ensureFightKey('turn'); } catch (e) {}
+      return o.apply(this, arguments);
+    };
+  } else { err(t, 'install.missing:tbBeginTurn', new Error('not a function')); }
+
   if (typeof Game.tbEnd === 'function') {
     const o = Game.tbEnd;
     orig.tbEnd = o;
     Game.tbEnd = function (result) {
-      let fightId = null;
-      try { fightId = (Game.tbfight && Game.tbfight.id) || null; } catch (e) {}
+      let fightId = null, liveAtEntry = false;
+      try { const f = Game.tbfight; fightId = (f && f.id) || null; liveAtEntry = !!(f && !f.over); } catch (e) {}
+      const entryStack = stackTop();
+      try { if (liveAtEntry && fightId && !fightKeys[fightId]) ensureFightKey('tbEnd'); } catch (e) {}
       const snap = snapFighters(Game);
       const outcomesBefore = outcomesLen(Game);
       const r = o.apply(this, arguments);
       try {
+        // A tbEnd call with no live fight at entry is a stray
+        // early-return inside the engine (tbEnd guards on
+        // !f || f.over) — it ends no fight, so it records no
+        // outcome row. Count it separately so stray calls stay
+        // visible instead of masquerading as orphan outcomes.
+        if (!liveAtEntry) { t.tbEndNoop = (t.tbEndNoop || 0) + 1; return r; }
         const newOutcomes = outcomesSlice(Game, outcomesBefore);
         newOutcomes.forEach(function (rec) { t.titanOutcomesAppended.push({ day: gday(Game), mid: (fightId && fightKeys[fightId]) ? fightKeys[fightId].mid : null, record: rec }); });
         // The titan outcome resolved by this tbEnd, if any: the
@@ -383,7 +500,7 @@ function install(Game, t) {
           const resolved = newOutcomes.filter(function (rec) { return rec && rec.titan === tid && (rec.outcome === 'slain' || rec.outcome === 'fled'); });
           if (resolved.length) titanOutcome = resolved[resolved.length - 1];
         }
-        recordTbEnd(result, fightId, snap, titanOutcome);
+        recordTbEnd(result, fightId, snap, titanOutcome, entryStack);
       } catch (e) { err(t, 'tbEnd.push', e); }
       return r;
     };
@@ -400,6 +517,7 @@ function install(Game, t) {
     Game.tbBarrierExit = function () {
       let f = null, bearer = null, over = false, fightId = null;
       try { f = Game.tbfight || null; fightId = f ? (f.id || null) : null; } catch (e) {}
+      try { if (fightId && !fightKeys[fightId]) ensureFightKey('barrier'); } catch (e) {}
       try { bearer = Game.villagerId; } catch (e) {}
       try { over = !!Game.over; } catch (e) {}
       const snap = f ? snapFighters(Game) : null;

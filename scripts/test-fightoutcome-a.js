@@ -49,12 +49,16 @@ function fakeGame() {
     tbFighter() { return null; },
   };
   let fid = 0;
-  G.startCombat = function () { fid++; G.tbfight = { id: 'f-' + fid, over: false, fighters: [{ key: 'p', kind: 'villager', villagerId: 'v1', hp: 10, maxHp: 20, alive: true }, { key: 'm_0', kind: 'monster', id: 'herald', hp: 0, maxHp: 700, alive: false }] }; return true; };
+  // Dynamic G.tbBeginTurn lookup: after install this calls the
+  // recorder-wrapped turn, mid-startCombat — the engine's own
+  // order (game.js startCombat calls tbBeginTurn during setup).
+  G.startCombat = function () { fid++; G.tbfight = { id: 'f-' + fid, over: false, fighters: [{ key: 'p', kind: 'villager', villagerId: 'v1', hp: 10, maxHp: 20, alive: true }, { key: 'm_0', kind: 'monster', id: 'herald', hp: 0, maxHp: 700, alive: false }] }; G.tbBeginTurn(); return true; };
   G.tbEnd = function () { if (G.tbfight) { G.tbfight.over = true; G.tbfight.result = 'won'; } };
   // Real engine order (game.js tbBarrierExit): the bearer changes
   // DURING the call (travelTo death/succession), then the fight is
   // dissolved with tbfight=null and no tbEnd. The wrapper's
   // before/after bearer comparison detects exactly that.
+  G.tbBeginTurn = function () {};
   G.tbBarrierExit = function () { G.villagerId = 'v2'; G.tbfight = null; };
   G.fieldFight = function () { return { outcome: 'vKill', rounds: 3, vTaken: 5, mDealt: 40, vHpLeft: 15, mHpLeft: 0 }; };
   G.recordWaveKill = function () {};
@@ -66,6 +70,7 @@ function fakeGame() {
   const uninstall = REC.install(G, t);
   G.startCombat('herald');
   check('smoke FOUGHT attempt recorded', t.attempts.length === 1 && t.attempts[0].cls === 'FOUGHT', JSON.stringify(t.attempts.map(a => a.cls)));
+  check('smoke no double row (turn-inside-startCombat upgrades, not duplicates)', t.attempts.length === 1, 'rows=' + t.attempts.length);
   const seq = t.attempts[0].fightSeq;
   check('smoke fightSeq assigned', seq === 1, 'seq=' + seq);
   G.tbEnd('won');
@@ -79,6 +84,19 @@ function fakeGame() {
   G.tbBarrierExit();
   check('smoke dissolved row recorded', t.tbFights.length === 2 && t.tbFights[1].engineResult === 'dissolved' && t.tbFights[1].fightSeq === seq2,
     JSON.stringify(t.tbFights.map(f => f.engineResult)));
+  // Bypass start: a fight built directly (alien/uprising/betrayal
+  // class) must register at first tbBeginTurn and join at tbEnd,
+  // with the monster id read off the fighter's monsterId field.
+  G.tbfight = { id: 'f-direct', over: false, alienFight: true,
+    fighters: [{ key: 'p', kind: 'villager', villagerId: 'v2', hp: 12, maxHp: 20, alive: true },
+               { key: 'm_0', kind: 'monster', monsterId: 'hushwolf', hp: 30, maxHp: 90, alive: true }] };
+  G.tbBeginTurn();
+  const byp = t.attempts.find(a => a.cls === 'BYPASS');
+  check('smoke bypass start registered at turn', !!byp && byp.mid === 'hushwolf', JSON.stringify(t.attempts.map(a => a.cls + ':' + a.mid)));
+  check('smoke bypass flags carried', byp && byp.fightFlags && byp.fightFlags.alienFight === true);
+  G.tbEnd('routed');
+  const bypRow = t.tbFights.find(f => f.fightSeq === byp.fightSeq);
+  check('smoke bypass outcome joins', !!bypRow && bypRow.engineResult === 'routed' && bypRow.normalized === 'fled');
   // Field fight.
   G.fieldFight('v9', { id: 'herald' });
   check('smoke fieldFight row recorded', t.fieldFights.length === 1 && t.fieldFights[0].outcome === 'vKill' && t.fieldFights[0].normalized === 'slain');
