@@ -391,3 +391,9 @@ try { const hs = require('./policies/competent-homewardstep-b'); POLICY_REGISTRY
 // existing entries (the variant stays default-OFF: nothing loads it
 // unless named).
 try { const xo = require('./policies/competent-homewardstep-outwardonly-b'); POLICY_REGISTRY['competent-homewardstep-outwardonly-b'] = xo.outwardonly; } catch (e) {}
+// vetobudget-b instrument (sim-vetobudget-b, 2026-11-02, Loop B
+// food-economy): the competent + guard + 3-silent-vetoes-per-expedition
+// budget policy, registered so the balanced panel (§15) can build its
+// column. Additive; zero behavior change to existing entries (the
+// variant stays default-OFF: nothing loads it unless named).
+try { const vb = require('./policies/competent-vetobudget-b'); POLICY_REGISTRY['competent-vetobudget-b'] = vb.vetobudget; } catch (e) {}
