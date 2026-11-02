@@ -15,7 +15,7 @@ exit 2 (UNDER-POWERED by design — see below). Unit proof
 `scripts/test-arrearsscreen-classify.js`: 16/16. Bars (a) and (b)
 pass; bar (c) is VACUOUS (fewer than 3 blocked seeds, so no
 waiting leg runs and none is claimed); bars (d)–(f) pass. The
-screening yield itself is the verdict: on this fresh band, the
+screening yield itself is the verdict: on this screened band, the
 block the waiting pilot needs does not occur — not because
 arrears are absent (11/24 seeds carry arrears somewhere on the
 census), but because herald contact is the rare event (1/24
@@ -24,10 +24,47 @@ own band: Haven-primary old debt never clears, with no
 back-payment verb. What this screen kills is the "just run more
 fresh bands" route to a waiting pilot, not the arrears finding.
 
+## Band-overlap disclosure (coordinator follow-up, NOT a prereg change, NOT a re-score)
+
+This screening band 97301–97324 OVERLAPS the sibling
+heraldcontact arm's pilot band 97301–97308. Both arms verified
+their bands against master at prereg time, so this is a
+parallel-arm coordination artifact, not an error by either
+worker — but 97301–97308 must NOT be presented as
+fresh/independent in this evidence. The yield split is:
+
+| Portion | Seeds | Blocked | Contacted | Classes | Census arrears ever | Wall (nat/table/won/w4/w5) |
+|---|---|---|---|---|---|---|
+| OVERLAP (shared with heraldcontact pilot) | 97301–97308 (8) | 0/8 | 1/8 (97301 only) | ready 1, no-attempt 7 | 4/8 | 5/6/6/5/0 |
+| FRESH (this screen only) | 97309–97324 (16) | 0/16 | 0/16 | no-attempt 16 | 7/16 | 8/14/12/7/1 |
+| COMBINED (overlap flagged, not independent) | 97301–97324 (24) | 0/24 | 1/24 | ready 1, no-attempt 23 | 11/24 | 13/20/18/12/1 |
+
+Consequences, stated plainly: (i) the screen's independent
+fresh evidence is the 0/16 blocked / 0/16 contacted fresh
+portion — the combined 0/24 is reported only with the overlap
+flagged, never as 24 independent seeds; (ii) the screen's sole
+contacted seed (97301, with its Ashford near-miss refuser)
+sits INSIDE the overlap portion, so the fresh portion
+contributes zero contacted seeds; (iii) the combined
+unselected-band contact figure quoted elsewhere in this file
+(5/40) is route pilots 4/16 + this screen 1/24 — the
+independent-seed version is 4/32 (route 4/16 + fresh 0/16),
+and blocks among contacted are 0/4 independent / 0/5 combined
+with overlap flagged; (iv) the 97301–97308 rows below must
+never be pooled with the heraldcontact pilot's results as
+independent seeds — they are the same seeds measured by a
+sibling arm. GO bars, thresholds, and the seed list do NOT
+change: the prereg file is left unchanged as the committed
+record of what was believed at prereg time, and no number in
+this evidence has been re-scored — only the independence
+labeling has been corrected.
+
 ## The answer in one paragraph (plain words)
 
 A village that owes tribute usually never gets asked to join a
-muster at all. On 24 fresh villages, 23 never even attempted the
+muster at all. On the 24 screened villages (8 shared with the
+sibling heraldcontact pilot — see disclosure above — plus 16
+fresh), 23 never even attempted the
 herald call — no attempt, no refusal, no block to wait out. The
 one village that did attempt was already ready (11 fighters
 against a need of 10), even though one of its fires owed 2,250
@@ -73,9 +110,18 @@ design — see Verdict).
 Blocked seeds: 0/24. Blocked at first check: 0/24.
 Seed classes: ready-at-first-check 1, no-herald-attempt 23,
 arrears-blocked 0, blocked-other 0, no-check 0.
+Split (see overlap disclosure above): overlap 97301–97308:
+blocked 0/8, contacted 1/8; fresh 97309–97324: blocked 0/16,
+contacted 0/16. The combined 0/24 is reported only with the
+overlap flagged, never as 24 independent seeds.
 
 ### Per-seed table
 
+Rows 97301–97308 are the OVERLAP portion (shared with the
+sibling heraldcontact pilot — see disclosure above); rows
+97309–97324 are the FRESH portion. Do not pool the overlap
+rows with the heraldcontact pilot's results as independent
+seeds.
 "ArrEver" = census ever showed arrears > 0 on any link row that
 day (see caveat below). "ArrDays" = days with any arrears > 0.
 "MaxArr" = largest arrears value seen on any census day.
@@ -137,11 +183,14 @@ Ashford IS a solely-arrears refuser (trust 56 ≥ 25, opinion 11 ≥
 so by the frozen definition it is NOT a block: the muster could
 sound and succeed without Ashford. The deferral machine (route
 arm) starts only on a block, so 97301 is NOT usable for a
-waiting pilot either. Counting honestly: contacted seeds 1/24;
+waiting pilot either. Counting honestly: contacted seeds 1/24 —
+split 1/8 overlap, 0/16 fresh;
 solely-arrears refusers at contact 1/1; arrears-only BLOCKS at
 contact 0/1. Across all unselected bands so far (route 4/16
-contacted, this screen 1/24): contact 5/40, blocks among
-contacted 0/5. No block rate can be estimated from 0/5 — that
+contacted, this screen 1/24): contact 5/40 combined, 4/32
+independent (route 4/16 + fresh 0/16) — see overlap disclosure;
+blocks among contacted 0/5 combined, 0/4 independent. No block
+rate can be estimated from 0/5 — that
 is why the verdict is under-powered, not a rate claim.
 
 ## Waiting leg: VACUOUS (not run, not passed, not failed)
@@ -154,6 +203,13 @@ shape rather than failing on it. Nothing in this run says
 waiting fails or succeeds: no village ever waited, because no
 village was ever blocked. The sim-arrears-a waiting observation
 (never clears on its own band) is untouched by this screen.
+WAITING-LEG SEED RULE (recorded for any future use of this
+corpus, per the coordinator follow-up): if a waiting leg ever
+runs off this screen's seeds, prefer blocked seeds from the
+fresh 97309–97324 portion, and flag any waiting-leg seed that
+comes from the overlap 97301–97308 portion as overlap-shared,
+never as an independent seed. This rule is currently vacuous
+(0 blocked seeds exist to prefer among).
 
 ## Sense-test: VACUOUS for blocked links (stated, not faked)
 
@@ -226,8 +282,12 @@ with this replay (same DAYS=180, same stack as those runs).
 
 1. FRESH-BAND SCREENING IS THE WRONG SPEND for the waiting
    pilot. Three unselected bands now (route 971xx, 972xx, this
-   973xx) give 0 blocked in 40 seeds, with contact itself at
-   5/40. A fourth fresh band is not the next move.
+   973xx) give 0 blocked in 40 seeds combined, with contact
+   itself at 5/40 combined — and on independent seeds only,
+   0 blocked in 32 (route 16 + fresh 97309–97324 16) with
+   contact 4/32, since this screen's 97301–97308 portion is
+   shared with the heraldcontact pilot (see disclosure). A
+   fourth fresh band is not the next move.
 2. THE NEXT MOVE IS SELECTION OR CONTACT, NOT MORE FRESH SEEDS:
    either (i) screen a SELECTED band — seeds pre-qualified for
    herald contact (e.g. re-derive the 0445Z screen's selection:
