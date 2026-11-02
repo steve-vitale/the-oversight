@@ -1,0 +1,1111 @@
+{
+ "seed": 95454,
+ "anchorCommit": "489ce5e90e7e",
+ "post": {
+  "sounded": true,
+  "day": 86,
+  "snapshotCallYield": 8,
+  "snapshotLinks": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "trust": 60,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 2,
+    "facesFree": 0,
+    "already": 0,
+    "wouldRefuse": false,
+    "wouldYield": 0
+   },
+   {
+    "villageId": "village_1",
+    "name": "Stonebridge",
+    "trust": 72,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 6,
+    "facesFree": 7,
+    "already": 0,
+    "wouldRefuse": false,
+    "wouldYield": 6
+   },
+   {
+    "villageId": "village_2",
+    "name": "Thornfield",
+    "trust": 53,
+    "opinion": 6,
+    "arrears": 0,
+    "quota": 2,
+    "facesFree": 5,
+    "already": 0,
+    "wouldRefuse": false,
+    "wouldYield": 2
+   }
+  ],
+  "preRoster": {
+   "village_0": {
+    "name": "Emberhold",
+    "rosterPresent": true,
+    "rosterLen": 6,
+    "generated": false
+   },
+   "village_1": {
+    "name": "Stonebridge",
+    "rosterPresent": true,
+    "rosterLen": 11,
+    "generated": true
+   },
+   "village_2": {
+    "name": "Thornfield",
+    "rosterPresent": true,
+    "rosterLen": 6,
+    "generated": true
+   }
+  },
+  "linkCountBefore": 3,
+  "linkCountAfter": 3,
+  "actualAllies": 10,
+  "perVillage": {
+   "village_0": [
+    {
+     "vid": "village_0_p1",
+     "name": "Elena Hassan"
+    },
+    {
+     "vid": "village_0_p2",
+     "name": "Lucia Costa"
+    }
+   ],
+   "village_1": [
+    {
+     "vid": "village_1_p3",
+     "name": "Nadia Sato"
+    },
+    {
+     "vid": "village_1_p4",
+     "name": "Sofia Diallo"
+    },
+    {
+     "vid": "village_1_p5",
+     "name": "Fatima Lund"
+    },
+    {
+     "vid": "village_1_p6",
+     "name": "Andre Lindqvist"
+    },
+    {
+     "vid": "village_1_p7",
+     "name": "Victor Ford"
+    },
+    {
+     "vid": "village_1_p8",
+     "name": "Ibrahim Reyes"
+    }
+   ],
+   "village_2": [
+    {
+     "vid": "village_2_p0",
+     "name": "Marcus Rhee"
+    },
+    {
+     "vid": "village_2_p1",
+     "name": "Nora Petrov"
+    }
+   ]
+  },
+  "respondersVerified": true,
+  "responderProblems": [],
+  "commitReturns": [
+   null,
+   null
+  ],
+  "havenAfter": 0,
+  "havenVids": [],
+  "readyAfter": true,
+  "interceptorErrors": [],
+  "triggerSnapCount": 1,
+  "projectionTrajectory": [
+   {
+    "day": 86,
+    "snapIdx": 0,
+    "snapshotCallYield": 8,
+    "links": [
+     {
+      "villageId": "village_0",
+      "name": "Emberhold",
+      "trust": 60,
+      "opinion": 15,
+      "arrears": 0,
+      "quota": 2,
+      "already": 0,
+      "snapFree": 0,
+      "generatedHere": true,
+      "freeAdults": 5,
+      "wouldRefuse": false,
+      "contribution": 2,
+      "naiveContribution": 2
+     },
+     {
+      "villageId": "village_1",
+      "name": "Stonebridge",
+      "trust": 72,
+      "opinion": 15,
+      "arrears": 0,
+      "quota": 6,
+      "already": 0,
+      "snapFree": 7,
+      "generatedHere": false,
+      "freeAdults": 7,
+      "wouldRefuse": false,
+      "contribution": 6,
+      "naiveContribution": 6
+     },
+     {
+      "villageId": "village_2",
+      "name": "Thornfield",
+      "trust": 53,
+      "opinion": 6,
+      "arrears": 0,
+      "quota": 2,
+      "already": 0,
+      "snapFree": 5,
+      "generatedHere": false,
+      "freeAdults": 5,
+      "wouldRefuse": false,
+      "contribution": 2,
+      "naiveContribution": 2
+     }
+    ],
+    "alliesProj": 10,
+    "havenProj": 0,
+    "volunteers": 0,
+    "total": 10,
+    "naiveTotal": 10,
+    "ready": true,
+    "generatedNow": [
+     {
+      "villageId": "village_0",
+      "name": "Emberhold",
+      "rosterLen": 6
+     }
+    ],
+    "errors": []
+   }
+  ],
+  "projectionSkipped": 0,
+  "projectionSkipReasons": [],
+  "projectedAllies": 10,
+  "projectedHaven": 0,
+  "projectedTotal": 10,
+  "naiveTotalAtTrigger": 10,
+  "triggerProjection": {
+   "day": 86,
+   "snapIdx": 0,
+   "snapshotCallYield": 8,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 60,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "already": 0,
+     "snapFree": 0,
+     "generatedHere": true,
+     "freeAdults": 5,
+     "wouldRefuse": false,
+     "contribution": 2,
+     "naiveContribution": 2
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 72,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 6,
+     "already": 0,
+     "snapFree": 7,
+     "generatedHere": false,
+     "freeAdults": 7,
+     "wouldRefuse": false,
+     "contribution": 6,
+     "naiveContribution": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 53,
+     "opinion": 6,
+     "arrears": 0,
+     "quota": 2,
+     "already": 0,
+     "snapFree": 5,
+     "generatedHere": false,
+     "freeAdults": 5,
+     "wouldRefuse": false,
+     "contribution": 2,
+     "naiveContribution": 2
+    }
+   ],
+   "alliesProj": 10,
+   "havenProj": 0,
+   "volunteers": 0,
+   "total": 10,
+   "naiveTotal": 10,
+   "ready": true,
+   "generatedNow": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "rosterLen": 6
+    }
+   ],
+   "errors": []
+  }
+ },
+ "transcript": [
+  "📯 THE CALL GOES OUT — THE HERALD must fall, and no one fire can do it.",
+  "— Emberhold answers! Elena Hassan and Lucia Costa will march. (trust holds — they are counting on you.)",
+  "— Stonebridge answers! Nadia Sato and Sofia Diallo and Fatima Lund and Andre Lindqvist and Victor Ford and Ibrahim Reyes will march. (trust holds — they are counting on you.)",
+  "— Thornfield answers! Marcus Rhee and Nora Petrov will march. (trust holds — they are counting on you.)"
+ ],
+ "triggerDefined": true,
+ "triggerUndefinedReason": null,
+ "firstContactDay": 86,
+ "firstRefusal": {
+  "day": 86,
+  "callYield": 8,
+  "omenStage": 2,
+  "links": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "trust": 60,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 2,
+    "facesFree": 0,
+    "wouldYield": 0,
+    "wouldRefuse": false
+   },
+   {
+    "villageId": "village_1",
+    "name": "Stonebridge",
+    "trust": 72,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 6,
+    "facesFree": 7,
+    "wouldYield": 6,
+    "wouldRefuse": false
+   },
+   {
+    "villageId": "village_2",
+    "name": "Thornfield",
+    "trust": 53,
+    "opinion": 6,
+    "arrears": 0,
+    "quota": 2,
+    "facesFree": 5,
+    "wouldYield": 2,
+    "wouldRefuse": false
+   }
+  ],
+  "activeCount": 3
+ },
+ "refusalTrajectory": [
+  {
+   "day": 86,
+   "callYield": 8,
+   "omenStage": 2,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 60,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": false
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 72,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 7,
+     "wouldYield": 6,
+     "wouldRefuse": false
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 53,
+     "opinion": 6,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 5,
+     "wouldYield": 2,
+     "wouldRefuse": false
+    }
+   ],
+   "activeCount": 3
+  }
+ ],
+ "refusalCountPre": 1,
+ "refusalCountTotal": 1,
+ "projectionTrajectory": [
+  {
+   "day": 86,
+   "snapIdx": 0,
+   "snapshotCallYield": 8,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 60,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "already": 0,
+     "snapFree": 0,
+     "generatedHere": true,
+     "freeAdults": 5,
+     "wouldRefuse": false,
+     "contribution": 2,
+     "naiveContribution": 2
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 72,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 6,
+     "already": 0,
+     "snapFree": 7,
+     "generatedHere": false,
+     "freeAdults": 7,
+     "wouldRefuse": false,
+     "contribution": 6,
+     "naiveContribution": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 53,
+     "opinion": 6,
+     "arrears": 0,
+     "quota": 2,
+     "already": 0,
+     "snapFree": 5,
+     "generatedHere": false,
+     "freeAdults": 5,
+     "wouldRefuse": false,
+     "contribution": 2,
+     "naiveContribution": 2
+    }
+   ],
+   "alliesProj": 10,
+   "havenProj": 0,
+   "volunteers": 0,
+   "total": 10,
+   "naiveTotal": 10,
+   "ready": true,
+   "generatedNow": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "rosterLen": 6
+    }
+   ],
+   "errors": []
+  }
+ ],
+ "projectionCount": 1,
+ "firstProjection": {
+  "day": 86,
+  "snapIdx": 0,
+  "snapshotCallYield": 8,
+  "links": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "trust": 60,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 2,
+    "already": 0,
+    "snapFree": 0,
+    "generatedHere": true,
+    "freeAdults": 5,
+    "wouldRefuse": false,
+    "contribution": 2,
+    "naiveContribution": 2
+   },
+   {
+    "villageId": "village_1",
+    "name": "Stonebridge",
+    "trust": 72,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 6,
+    "already": 0,
+    "snapFree": 7,
+    "generatedHere": false,
+    "freeAdults": 7,
+    "wouldRefuse": false,
+    "contribution": 6,
+    "naiveContribution": 6
+   },
+   {
+    "villageId": "village_2",
+    "name": "Thornfield",
+    "trust": 53,
+    "opinion": 6,
+    "arrears": 0,
+    "quota": 2,
+    "already": 0,
+    "snapFree": 5,
+    "generatedHere": false,
+    "freeAdults": 5,
+    "wouldRefuse": false,
+    "contribution": 2,
+    "naiveContribution": 2
+   }
+  ],
+  "alliesProj": 10,
+  "havenProj": 0,
+  "volunteers": 0,
+  "total": 10,
+  "naiveTotal": 10,
+  "ready": true,
+  "generatedNow": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "rosterLen": 6
+   }
+  ],
+  "errors": []
+ },
+ "firstReadyRow": {
+  "day": 86,
+  "snapIdx": 0,
+  "snapshotCallYield": 8,
+  "links": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "trust": 60,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 2,
+    "already": 0,
+    "snapFree": 0,
+    "generatedHere": true,
+    "freeAdults": 5,
+    "wouldRefuse": false,
+    "contribution": 2,
+    "naiveContribution": 2
+   },
+   {
+    "villageId": "village_1",
+    "name": "Stonebridge",
+    "trust": 72,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 6,
+    "already": 0,
+    "snapFree": 7,
+    "generatedHere": false,
+    "freeAdults": 7,
+    "wouldRefuse": false,
+    "contribution": 6,
+    "naiveContribution": 6
+   },
+   {
+    "villageId": "village_2",
+    "name": "Thornfield",
+    "trust": 53,
+    "opinion": 6,
+    "arrears": 0,
+    "quota": 2,
+    "already": 0,
+    "snapFree": 5,
+    "generatedHere": false,
+    "freeAdults": 5,
+    "wouldRefuse": false,
+    "contribution": 2,
+    "naiveContribution": 2
+   }
+  ],
+  "alliesProj": 10,
+  "havenProj": 0,
+  "volunteers": 0,
+  "total": 10,
+  "naiveTotal": 10,
+  "ready": true,
+  "generatedNow": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "rosterLen": 6
+   }
+  ],
+  "errors": []
+ },
+ "maxFaithfulTotal": 10,
+ "maxFaithfulDay": 86,
+ "maxTrustByVillage": {
+  "Emberhold": {
+   "trust": 60,
+   "opinion": 15,
+   "day": 86
+  },
+  "Stonebridge": {
+   "trust": 72,
+   "opinion": 15,
+   "day": 86
+  },
+  "Thornfield": {
+   "trust": 53,
+   "opinion": 6,
+   "day": 86
+  }
+ },
+ "foughtBeforeTriggerDays": [],
+ "foughtAfterDays": [
+  86
+ ],
+ "refusedAfterDays": [
+  86
+ ],
+ "heraldAttempts": [
+  {
+   "day": 86,
+   "cls": "REFUSED",
+   "reason": "MUSTER-GATE",
+   "caller": "wild-contact"
+  },
+  {
+   "day": 86,
+   "cls": "FOUGHT",
+   "reason": null,
+   "caller": "wild-contact"
+  }
+ ],
+ "fightOutcome": {
+  "foughtSameDay": [
+   86
+  ],
+  "foughtAfterDays": [],
+  "refusedAfterDays": [],
+  "heraldSlain": true,
+  "outcomeRecords": [
+   {
+    "day": 86,
+    "outcome": "refused",
+    "endDay": null,
+    "result": null
+   },
+   {
+    "day": 86,
+    "outcome": "slain",
+    "endDay": 86,
+    "result": "won"
+   }
+  ],
+  "tbHerald": [
+   {
+    "day": 86,
+    "result": "won"
+   }
+  ],
+  "responderFates": [
+   {
+    "villageId": "village_0",
+    "vid": "village_0_p1",
+    "name": "Elena Hassan",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_0",
+    "vid": "village_0_p2",
+    "name": "Lucia Costa",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_1",
+    "vid": "village_1_p3",
+    "name": "Nadia Sato",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_1",
+    "vid": "village_1_p4",
+    "name": "Sofia Diallo",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_1",
+    "vid": "village_1_p5",
+    "name": "Fatima Lund",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_1",
+    "vid": "village_1_p6",
+    "name": "Andre Lindqvist",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_1",
+    "vid": "village_1_p7",
+    "name": "Victor Ford",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_1",
+    "vid": "village_1_p8",
+    "name": "Ibrahim Reyes",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_2",
+    "vid": "village_2_p0",
+    "name": "Marcus Rhee",
+    "fate": "alive"
+   },
+   {
+    "villageId": "village_2",
+    "vid": "village_2_p1",
+    "name": "Nora Petrov",
+    "fate": "alive"
+   }
+  ],
+  "havenFates": [],
+  "musterAlliesEnd": null,
+  "musterExistsEnd": false,
+  "readyEnd": false
+ },
+ "musterRefusals": [
+  {
+   "idx": 0,
+   "day": 86,
+   "sayText": "⛔ THE HERALD does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 10 allied blades (you have 0). This is not courage. This is arithmetic.",
+   "have": 0,
+   "need": 10,
+   "musterExists": false,
+   "alliesRaw": 0,
+   "alliesUnique": 0,
+   "havenValid": 0,
+   "readyManual": false,
+   "readyGame": false,
+   "omenStage": 2,
+   "omenDay": 72,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 60,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 0,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 0
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 72,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 7,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 6
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 53,
+     "opinion": 6,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 5,
+     "already": 0,
+     "wouldRefuse": false,
+     "wouldYield": 2
+    }
+   ],
+   "linksActive": 3,
+   "callYield": 8,
+   "callOffered": true,
+   "commitOffered": true,
+   "volunteers": 0,
+   "outcomesPrior": 0,
+   "callsSoFar": {
+    "soundTitanCall": 0,
+    "titanCommitOwn": 0,
+    "titanSelfDo": 0,
+    "titanWarCouncil": 0
+   }
+  }
+ ],
+ "musterCalls": {
+  "soundTitanCall": 1,
+  "titanCommitOwn": 2,
+  "titanSelfDo": 0,
+  "titanWarCouncil": 0
+ },
+ "musterErrs": 0,
+ "musterErrors": [],
+ "instrumentErrors": [],
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "w4Day": 62,
+ "w5Day": null,
+ "national": 1,
+ "table": 0,
+ "won": 0,
+ "days": 90,
+ "gameDays": 90,
+ "endReason": "village-lost",
+ "endScaleRank": "global",
+ "deaths": [
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "person",
+   "who": "nora_wilson",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "villager",
+   "who": "gen_u76fqir",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "person",
+   "who": "gen_faeiheb",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 28,
+   "kind": "monster",
+   "who": "statickite",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "villager",
+   "who": "gen_aw6c6tt",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 48,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "villager",
+   "who": "gen_j0n64qr",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 57,
+   "kind": "villager",
+   "who": "gen_53wgdbx",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 60,
+   "kind": "villager",
+   "who": "gen_qa573sz",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 62,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "monster",
+   "who": "callback",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 67,
+   "kind": "villager",
+   "who": "rosa_mendez",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 73,
+   "kind": "villager",
+   "who": "ines_duarte",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 74,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 75,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 75,
+   "kind": "villager",
+   "who": "onni_korhonen",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 75,
+   "kind": "villager",
+   "who": "katarina_novak",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 75,
+   "kind": "villager",
+   "who": "sanne_bakker",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 75,
+   "kind": "villager",
+   "who": "visjoin_52",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "congregation",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 86,
+   "kind": "monster",
+   "who": "herald",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 90,
+   "kind": "villager",
+   "who": "visjoin_56",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 90,
+   "kind": "villager",
+   "who": "visjoin_63",
+   "cause": "the wild",
+   "player": true
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2378|12|4|4|1|398",
+  "3:3|95|2398|12|4|4|1|336",
+  "4:4|92|1017|12|4|4|1|308",
+  "5:5|100|1121|12|4|4|1|301",
+  "6:6|100|1200|12|4|4|1|295",
+  "7:7|95|1200|12|4|4|1|300",
+  "8:8|100|1070|12|4|4|1|282",
+  "9:9|100|1231|12|4|4|1|267",
+  "10:10|95|1200|12|4|4|1|269",
+  "11:11|100|1198|12|4|4|1|270",
+  "12:12|100|1207|11|4|4|1|265",
+  "13:13|100|2400|11|4|4|1|249",
+  "14:14|100|2390|11|4|4|1|234",
+  "15:15|100|1964|11|4|4|1|228",
+  "16:16|100|2400|10|4|4|1|228",
+  "17:17|100|2400|10|4|4|1|256",
+  "18:18|100|2390|9|4|4|2|249",
+  "19:19|80|2400|9|4|4|2|239",
+  "20:20|100|2400|9|4|4|2|282",
+  "21:21|100|2400|9|4|4|2|255",
+  "22:22|93|2400|9|4|4|2|258",
+  "23:23|100|2400|9|4|4|2|293",
+  "24:24|100|2098|9|4|4|2|293",
+  "25:25|100|2400|9|4|4|2|314",
+  "26:26|100|2400|9|4|4|2|351",
+  "27:27|100|2390|9|4|4|2|313",
+  "28:28|73|2400|9|4|4|2|288",
+  "29:29|100|2292|9|4|4|2|257",
+  "30:30|100|2400|9|4|4|2|261",
+  "31:31|100|2400|9|4|4|3|269",
+  "32:32|100|2400|9|4|4|3|328",
+  "33:33|100|2400|9|4|4|3|282",
+  "34:34|100|2400|9|4|4|3|261",
+  "35:35|100|2400|9|4|4|3|328",
+  "36:36|100|2400|9|4|4|3|257",
+  "37:37|86|2400|9|4|4|3|235",
+  "38:38|100|2400|9|4|4|3|327",
+  "39:39|100|2400|9|4|4|3|229",
+  "40:40|100|2400|9|4|4|3|192",
+  "41:41|100|2390|9|4|4|3|243",
+  "42:42|100|2400|9|4|4|3|182",
+  "43:43|100|2400|9|4|4|3|184",
+  "44:44|85|2390|9|4|4|3|244",
+  "45:45|100|2400|9|4|4|3|272",
+  "46:46|100|2400|9|4|4|3|283",
+  "47:47|100|2400|9|4|4|3|325",
+  "48:48|72|2282|8|4|4|3|241",
+  "49:49|98|2294|7|4|4|3|212",
+  "50:50|100|2342|7|4|4|3|185",
+  "51:51|100|2400|7|4|4|3|160",
+  "52:52|100|2297|7|4|4|3|143",
+  "53:53|93|2390|7|4|4|3|158",
+  "54:54|100|2344|8|4|4|3|158",
+  "55:55|100|2250|8|4|4|3|158",
+  "56:56|100|2210|8|4|4|3|196",
+  "57:57|100|1500|7|4|4|3|187",
+  "58:58|100|2400|8|4|4|3|206",
+  "59:59|62|2309|8|2|4|3|204",
+  "60:60|100|2370|7|4|4|3|191",
+  "61:61|92|2108|7|4|4|3|162",
+  "62:62|100|2390|7|4|4|3|164",
+  "63:63|98|2400|7|4|4|4|182",
+  "64:64|100|2316|7|4|4|4|195",
+  "65:65|100|2400|8|4|4|4|176",
+  "66:66|100|2325|8|4|4|4|167",
+  "67:67|100|1500|7|4|4|4|150",
+  "68:68|100|2210|7|4|4|4|150",
+  "69:69|100|2400|7|4|4|4|137",
+  "70:70|78|2390|7|4|4|4|177",
+  "71:71|75|2200|7|4|4|4|165",
+  "72:72|100|2400|7|4|4|4|170",
+  "73:73|100|1500|6|4|4|4|166",
+  "74:74|100|2400|6|4|4|4|115",
+  "75:75|100|1500|4|4|4|4|65",
+  "76:76|46|2300|2|4|4|4|42",
+  "77:77|76|2150|2|4|4|4|48",
+  "78:78|100|2330|2|4|4|4|35",
+  "79:79|100|2152|2|4|4|4|0",
+  "80:80|100|2325|2|4|4|4|0",
+  "81:81|100|1365|2|4|4|4|0",
+  "82:82|100|2380|2|4|4|4|0",
+  "83:83|100|2110|2|4|4|4|4",
+  "84:84|100|2388|2|4|4|4|8",
+  "85:85|100|2324|2|4|4|4|38",
+  "86:86|66|2304|2|4|4|4|17",
+  "87:87|100|2245|2|4|4|4|0",
+  "88:88|100|1846|2|4|4|4|0",
+  "89:89|100|2400|2|4|4|4|11"
+ ]
+}
