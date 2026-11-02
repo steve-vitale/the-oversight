@@ -1,0 +1,14 @@
+SMOKE: seed 7205, 30 days (self-test: bond census + t2pickOther wrap + grievance wrap + convos + funnel + r52 probe/class + r65 favor/outing instruments)
+SMOKE: bondSnapDays=6 convos=93 t2picks=30 grievances=1 npcPairs=43 grievStateSnaps=30 funnelTotal=84 traceBuilds=1919 traceCacheHits=911 probeTurns=28 probeTraced=28
+SMOKE-INVITE: decisions=3 lure=0 partyProbe=0 (wrap live if Game.npcInviteDecision existed; 0 decisions in 30d is report-only, not a gate)
+SMOKE-CASE: snaps=2 betrayalOfferConvos=20 mootProbePicks=0 (report-only, not a gate)
+SMOKE-FAVOR: offers=14 forageOffers=7 accepts=6 outingSteps=65 (0 favors in 30d is report-only, not a gate — the wedge proof test, not smoke, proves the wedge)
+SMOKE SELF-TEST: PASS (bond census + grievance-state census live, t2pickOther wrap firing, convos ran, funnel live)
+FLUSH: 16 written, 0 lost to EPERM flap.
+INVITE seed 7201: lure=7 acc=1 rate=14.3% chanceMean=27.1 vetoes={} partyProbeDec=0 acc=0 partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR seed 7201: funnel={"offers":11,"forageOffers":2,"otherFavorOffers":9,"accepts":2,"acceptAttempts":2,"waits":1,"starts":1,"startBlocked":2,"forages":0,"forageNodeBarren":6,"forageBarren":7,"forageBarrenTravel":0,"forageBarrenNode":7,"forageTravelBlocked":0,"forageTravelWalked":19,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":1,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0} endStates=[{"vid":"petra_novak","vidName":"Petra","favorId":"favor-petra_novak-6-1","state":"promised","promisedDay":6,"meetDay":7,"deadline":8,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"david_kim","vidName":"David","favorId":"favor-david_kim-14-4","state":"broken","promisedDay":14,"meetDay":15,"deadline":16,"promiseKept":"broken","startedDay":15,"forageCount":4,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":22,"talkCount":0}]
+CASE seed 7201: snaps=6 betrayalOfferConvos=26 mootOffers=5 mootProbePicks=0 mootsConvened=0
+FLUSH: 1 written, 0 lost to EPERM flap.
+SEED 7201 arm=handsoff steering=true unsteeredNoOffer=25/96 unsteeredLatePicks=0 knackSame=0 knackCross=0: 34d alive=1 deep2=1 cracks=0 vCracks=0 friendGriev=0 stateFriend=0 stateVCrack=0 t2picks=57 closeReads=8 lateClose=0 lateTP=0 lateNull=0 condRate=n/a grievServes=3 knack=5 stall=36/100 stallRate=0.36 shareWith=36.0% dry=44/100 dryRate=0.44 dry9=44 self3=0 endDry=0 coldOpen=0/100 ctr=44/0 othersSteered=4 reoffer=50/47 reofferLate=0 reofferMissed=2 wrap=3/3 wrapCls={"grievance-line":3,"deflection":0,"other":0} probe=85/24/61 funnel={"offered-not-picked":18,"subject-no-offer":25,"picked-others":53} windows=45/8/0/0/0 seeded={"day":26,"pair":"An<>Arnold","crack7":false,"serve30":true,"effect":true}
+FLUSH: 1 written, 0 lost to EPERM flap.
+DONE r102.

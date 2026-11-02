@@ -1,0 +1,300 @@
+# SURFACE+SEEDED — seed 7203 (140d, 7 alive)
+
+npcPairs=72 deep2=32 cracks=0 vCracks=0 friendGriev=0 stateGriev=7 stateFriend=0 stateVCrack=0 t2picks=157 closeReadsServed=37 grievanceServes=31 othersSteered=152
+COND-TP: firstDeep2Day=35 lateClose=100 lateTP=90 lateNull=0 condRate=90.0% pooledTP=91/110 pooledRate=82.7% grievReadsByWhy={"grievance":4,"vgrievance":34}
+FUNNEL (natural): convos=414 subject=382 offered=326 picked=128 classes={"subject-no-offer":56,"offered-not-picked":61,"picked-others":128,"no-subject-no-ans":30,"offered-capped":137,"no-subject-ans":2}
+FUNNEL-UNSTEERED (r55 strict): convos=291 subjectNoOffer=56 rate=19.2% offered=203 mainOffered=0 subjectOffered=203 picked=5 latePicks=2 latePicksMain=0 latePicksSubject=2
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Mohamed / Ella — "Henry talks to the garden. The garden listens. I've seen it."
+REOFFER: offers=301 picks=145 latePicks=49 missedChangedNotOffered=6
+WRAPSERVE: convos=38 matcherHits=31 matcherServes=31 classes={"grievance-line":31,"deflection":1,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=146 menuProblem=101 pickProblem=45
+INVITE (wrap, carried from r63): lure={"n":7,"accepts":3,"acceptRate":0.42857142857142855,"vetoes":{},"chanceMin":55,"chanceMax":65,"chanceMean":56.4} party={"n":18,"accepts":7,"acceptRate":0.3888888888888889,"vetoes":{},"chanceMin":24,"chanceMax":75.4,"chanceMean":53.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=6
+FAVOR (r65): funnel={"offers":57,"forageOffers":25,"otherFavorOffers":32,"accepts":25,"acceptAttempts":25,"waits":27,"starts":19,"startBlocked":28,"forages":19,"forageNodeBarren":18,"forageBarren":3,"forageBarrenTravel":0,"forageBarrenNode":3,"forageTravelBlocked":0,"forageTravelWalked":2,"stepRetries":12,"retryAssigned":12,"retryStarts":10,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":19,"delivers":19,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":19,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r80): snaps=8 betrayalOfferConvos=116 mootOffers=5 mootProbePicks=[{"day":9,"vid":"stan_kowalski","vidName":"Stan","caseId":"case_2"},{"day":13,"vid":"gen_s67g05h","vidName":"Henry","caseId":"case_4"},{"day":15,"vid":"luis_fernandez","vidName":"Luis","caseId":"case_6"}] mootsConvened=0
+  CASE-SNAP d7: case_2 status=open charge=ambush accused=Stan/LaToya/Boris target=Theo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d9: case_2 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_2 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_4 status=open charge=ambush accused=Stan/LaToya/Boris target=Theo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d13: case_2 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_4 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_6 status=open charge=ambush accused=Stan/LaToya/Boris target=Theo role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d15: case_2 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_6 status=open charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_2 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_6 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_2 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_4 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d140: case_6 status=resolved charge=ambush accused=Stan/LaToya/Boris target=Theo role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"boris_kowalski","vidName":"Boris","favorId":"favor-boris_kowalski-101-51","state":"thanked","promisedDay":101,"meetDay":102,"deadline":103,"promiseKept":true,"startedDay":102,"forageCount":1,"playerKcal":195,"partnerKcal":290,"deliveredKcal":485,"returnedDay":102,"talkCount":1},{"vid":"gen_6wsl1rg","vidName":"Ella","favorId":"favor-gen_6wsl1rg-61-34","state":"acknowledged","promisedDay":61,"meetDay":62,"deadline":63,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"gen_znwh3rt","vidName":"Mohamed","favorId":"favor-gen_znwh3rt-83-41","state":"acknowledged","promisedDay":86,"meetDay":87,"deadline":85,"promiseKept":"broken","startedDay":87,"forageCount":2,"playerKcal":640,"partnerKcal":640,"deliveredKcal":1280,"returnedDay":89,"talkCount":1},{"vid":"devon_okafor","vidName":"Devon","favorId":"favor-devon_okafor-100-50","state":"acknowledged","promisedDay":100,"meetDay":101,"deadline":102,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Henry kind=sick_help favorId=favor-gen_s67g05h-4-1 task=help Henry with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d6: Boris kind=forage_help favorId=favor-boris_kowalski-6-2 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d7: Mara kind=forage_help favorId=favor-mara_vasquez-7-3 task=forage with Mara tomorrow to rebuild the pantry
+  FAVOR-OFFER d15: Boris kind=forage_help favorId=favor-boris_kowalski-15-4 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Luis kind=forage_help favorId=favor-luis_fernandez-16-5 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d17: Henry kind=sick_help favorId=favor-gen_s67g05h-17-6 task=help Henry with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d17: Tariq kind=forage_help favorId=favor-tariq_mahmood-17-7 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Henry kind=food_share favorId=favor-gen_s67g05h-19-8 task=share food with Henry — they're going hungry
+  FAVOR-OFFER d23: Theo kind=food_share favorId=favor-theo_lindqvist-23-9 task=share food with Theo — they're running on empty
+  FAVOR-OFFER d25: Luis kind=forage_help favorId=favor-luis_fernandez-25-10 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d27: Luis kind=forage_help favorId=favor-luis_fernandez-27-11 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Ella kind=sick_help favorId=favor-gen_6wsl1rg-29-12 task=help Ella with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d29: Tariq kind=forage_help favorId=favor-tariq_mahmood-29-13 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Theo kind=forage_help favorId=favor-theo_lindqvist-30-14 task=forage with Theo tomorrow to rebuild the pantry
+  FAVOR-OFFER d31: Boris kind=food_share favorId=favor-boris_kowalski-31-15 task=share food with Boris — they're going hungry
+  FAVOR-OFFER d33: Tariq kind=forage_help favorId=favor-tariq_mahmood-33-16 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Boris kind=heal_help favorId=favor-boris_kowalski-37-17 task=help Boris with their injury
+  FAVOR-OFFER d39: Boris kind=forage_help favorId=favor-boris_kowalski-39-18 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d41: Mohamed kind=food_share favorId=favor-gen_znwh3rt-41-19 task=share food with Mohamed — they're running on empty
+  FAVOR-OFFER d43: Luis kind=food_share favorId=favor-luis_fernandez-43-20 task=share food with Luis — they're going hungry
+  FAVOR-OFFER d47: Paul kind=heal_help favorId=favor-gen_0rp0tn0-47-21 task=help Paul with their injury
+  FAVOR-OFFER d49: Luis kind=forage_help favorId=favor-luis_fernandez-49-23 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d49: Tariq kind=forage_help favorId=favor-tariq_mahmood-49-24 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d51: Henry kind=food_share favorId=favor-gen_s67g05h-48-22 task=share food with Henry — they're running on empty
+  FAVOR-OFFER d52: Paul kind=forage_help favorId=favor-gen_0rp0tn0-52-25 task=forage with Paul tomorrow to rebuild the pantry
+  FAVOR-OFFER d54: Paul kind=food_share favorId=favor-gen_0rp0tn0-54-26 task=share food with Paul — they're going hungry
+  FAVOR-OFFER d54: Ella kind=forage_help favorId=favor-gen_6wsl1rg-54-27 task=forage with Ella tomorrow to rebuild the pantry
+  FAVOR-OFFER d54: Tariq kind=forage_help favorId=favor-tariq_mahmood-54-28 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d56: Luis kind=forage_help favorId=favor-luis_fernandez-56-29 task=forage with Luis tomorrow to rebuild the pantry
+  FAVOR-OFFER d57: Paul kind=heal_help favorId=favor-gen_0rp0tn0-57-30 task=help Paul with their injury
+  FAVOR-OFFER d59: Theo kind=food_share favorId=favor-theo_lindqvist-59-31 task=share food with Theo — they're going hungry
+  FAVOR-OFFER d59: Henry kind=forage_help favorId=favor-gen_s67g05h-59-32 task=forage with Henry tomorrow to rebuild the pantry
+  FAVOR-OFFER d60: Mara kind=forage_help favorId=favor-mara_vasquez-60-33 task=forage with Mara tomorrow to rebuild the pantry
+  FAVOR-OFFER d61: Ella kind=forage_help favorId=favor-gen_6wsl1rg-61-34 task=forage with Ella tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Tariq kind=forage_help favorId=favor-tariq_mahmood-62-35 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Boris kind=heal_help favorId=favor-boris_kowalski-63-37 task=help Boris with their injury
+  FAVOR-OFFER d67: Theo kind=food_share favorId=favor-theo_lindqvist-63-36 task=share food with Theo — they're past hungry
+  FAVOR-OFFER d69: Henry kind=food_share favorId=favor-gen_s67g05h-69-38 task=share food with Henry — they're past hungry
+  FAVOR-OFFER d75: Henry kind=heal_help favorId=favor-gen_s67g05h-75-39 task=help Henry with their injury
+  FAVOR-OFFER d79: Theo kind=food_share favorId=favor-theo_lindqvist-79-40 task=share food with Theo — they're going hungry
+  FAVOR-OFFER d83: Boris kind=heal_help favorId=favor-boris_kowalski-83-42 task=help Boris with their injury
+  FAVOR-OFFER d84: Mara kind=food_share favorId=favor-mara_vasquez-84-43 task=share food with Mara — they're going hungry
+  FAVOR-OFFER d86: Mohamed kind=forage_help favorId=favor-gen_znwh3rt-83-41 task=forage with Mohamed tomorrow to rebuild the pantry
+  FAVOR-OFFER d87: Luis kind=food_share favorId=favor-luis_fernandez-87-44 task=share food with Luis — they're going hungry
+  FAVOR-OFFER d88: Henry kind=food_share favorId=favor-gen_s67g05h-88-45 task=share food with Henry — they're going hungry
+  FAVOR-OFFER d91: Mara kind=sick_help favorId=favor-mara_vasquez-90-46 task=help Mara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d96: Devon kind=food_share favorId=favor-devon_okafor-96-47 task=share food with Devon — they're going hungry
+  FAVOR-OFFER d99: Tariq kind=forage_help favorId=favor-tariq_mahmood-99-49 task=forage with Tariq tomorrow to rebuild the pantry
+  FAVOR-OFFER d100: Devon kind=forage_help favorId=favor-devon_okafor-100-50 task=forage with Devon tomorrow to rebuild the pantry
+  FAVOR-OFFER d101: Boris kind=forage_help favorId=favor-boris_kowalski-101-51 task=forage with Boris tomorrow to rebuild the pantry
+  FAVOR-OFFER d109: Mara kind=heal_help favorId=favor-mara_vasquez-108-52 task=help Mara with their injury
+  FAVOR-OFFER d117: Ji-a kind=heal_help favorId=favor-visjoin_114-117-53 task=help Ji-a with their injury
+  FAVOR-OFFER d122: Ji-a kind=heal_help favorId=favor-visjoin_114-122-54 task=help Ji-a with their injury
+  FAVOR-OFFER d133: Mara kind=food_share favorId=favor-mara_vasquez-133-55 task=share food with Mara — they're going hungry
+  FAVOR-OFFER d137: Ji-a kind=food_share favorId=favor-visjoin_114-137-56 task=share food with Ji-a — they're going hungry
+  FAVOR-OFFER d138: Luis kind=water_haul favorId=favor-luis_fernandez-138-57 task=bring four liters home from the creek with Luis; set out at dawn
+  FAVOR-OFFER d139: Tariq kind=sick_help favorId=favor-tariq_mahmood-139-58 task=help Tariq with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-ACCEPT d6: Boris favorId=favor-boris_kowalski-6-2 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d7: Mara favorId=favor-mara_vasquez-7-3 accepted=true state=promised meetDay=8
+  FAVOR-ACCEPT d15: Boris favorId=favor-boris_kowalski-15-4 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d16: Luis favorId=favor-luis_fernandez-16-5 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d17: Tariq favorId=favor-tariq_mahmood-17-7 accepted=true state=promised meetDay=18
+  FAVOR-ACCEPT d25: Luis favorId=favor-luis_fernandez-25-10 accepted=true state=promised meetDay=26
+  FAVOR-ACCEPT d27: Luis favorId=favor-luis_fernandez-27-11 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d29: Tariq favorId=favor-tariq_mahmood-29-13 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d30: Theo favorId=favor-theo_lindqvist-30-14 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d33: Tariq favorId=favor-tariq_mahmood-33-16 accepted=true state=promised meetDay=34
+  FAVOR-ACCEPT d39: Boris favorId=favor-boris_kowalski-39-18 accepted=true state=promised meetDay=40
+  FAVOR-ACCEPT d49: Luis favorId=favor-luis_fernandez-49-23 accepted=true state=promised meetDay=50
+  FAVOR-ACCEPT d49: Tariq favorId=favor-tariq_mahmood-49-24 accepted=true state=promised meetDay=50
+  FAVOR-ACCEPT d52: Paul favorId=favor-gen_0rp0tn0-52-25 accepted=true state=promised meetDay=53
+  FAVOR-ACCEPT d54: Ella favorId=favor-gen_6wsl1rg-54-27 accepted=true state=promised meetDay=55
+  FAVOR-ACCEPT d54: Tariq favorId=favor-tariq_mahmood-54-28 accepted=true state=promised meetDay=55
+  FAVOR-ACCEPT d56: Luis favorId=favor-luis_fernandez-56-29 accepted=true state=promised meetDay=57
+  FAVOR-ACCEPT d59: Henry favorId=favor-gen_s67g05h-59-32 accepted=true state=promised meetDay=60
+  FAVOR-ACCEPT d60: Mara favorId=favor-mara_vasquez-60-33 accepted=true state=promised meetDay=61
+  FAVOR-ACCEPT d61: Ella favorId=favor-gen_6wsl1rg-61-34 accepted=true state=promised meetDay=62
+  FAVOR-ACCEPT d62: Tariq favorId=favor-tariq_mahmood-62-35 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d86: Mohamed favorId=favor-gen_znwh3rt-83-41 accepted=true state=promised meetDay=87
+  FAVOR-ACCEPT d99: Tariq favorId=favor-tariq_mahmood-99-49 accepted=true state=promised meetDay=100
+  FAVOR-ACCEPT d100: Devon favorId=favor-devon_okafor-100-50 accepted=true state=promised meetDay=101
+  FAVOR-ACCEPT d101: Boris favorId=favor-boris_kowalski-101-51 accepted=true state=promised meetDay=102
+  INVITE-DEC d6 lure: LaToya -> Theo chance=55 accept=true veto=- inputs={"temp":"restless","goal":"survive","mood":"steady","fear":4,"affinity":0} reasons=["restless temperament (+10)"]
+  INVITE-DEC d7 lure: LaToya -> Theo chance=55 accept=false veto=- inputs={"temp":"restless","goal":"survive","mood":"steady","fear":0,"affinity":0} reasons=["restless temperament (+10)"]
+  INVITE-DEC d8 lure: LaToya -> Theo chance=65 accept=false veto=- inputs={"temp":"restless","goal":"survive","mood":"lonely","fear":0,"affinity":0} reasons=["restless temperament (+10)","lonely mood (+10)"]
+  INVITE-DEC d9 party: Domingo -> Ella chance=46.400000000000006 accept=false veto=- inputs={"temp":"mischievous","goal":"feed","mood":"hungry","fear":0,"trust":41,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 41","sick (-20)","feed goal (+15)"]
+  INVITE-DEC d9 lure: LaToya -> Theo chance=55 accept=false veto=- inputs={"temp":"restless","goal":"survive","mood":"hungry","fear":0,"affinity":0} reasons=["restless temperament (+10)"]
+  INVITE-DEC d10 party: Domingo -> Mohamed chance=50.6 accept=false veto=- inputs={"temp":"fidgety","goal":"answers","mood":"steady","fear":0,"trust":39,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 39"]
+  INVITE-DEC d10 lure: LaToya -> Theo chance=55 accept=false veto=- inputs={"temp":"restless","goal":"survive","mood":"steady","fear":4,"affinity":0} reasons=["restless temperament (+10)"]
+  INVITE-DEC d11 party: Domingo -> Henry chance=64 accept=false veto=- inputs={"temp":"sardonic","goal":"belong","mood":"steady","fear":4,"trust":35,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 35","belong goal (+15)"]
+  INVITE-DEC d11 party: Domingo -> Stan chance=43.4 accept=false veto=- inputs={"temp":"dry","goal":"prove","mood":"steady","fear":4,"trust":21,"bond":{"v":-7,"depth":0},"partySize":2} reasons=["trust 21"]
+  INVITE-DEC d11 lure: LaToya -> Theo chance=55 accept=true veto=- inputs={"temp":"restless","goal":"survive","mood":"hungry","fear":0,"affinity":0} reasons=["restless temperament (+10)"]
+  INVITE-DEC d12 party: Domingo -> Mara chance=52.6 accept=false veto=- inputs={"temp":"intense","goal":"remember","mood":"steady","fear":12,"trust":44,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 44"]
+  INVITE-DEC d12 party: Domingo -> Mohamed chance=53.8 accept=false veto=- inputs={"temp":"fidgety","goal":"answers","mood":"steady","fear":12,"trust":47,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 47"]
+  INVITE-DEC d12 lure: LaToya -> Theo chance=55 accept=true veto=- inputs={"temp":"restless","goal":"survive","mood":"hungry","fear":4,"affinity":0} reasons=["restless temperament (+10)"]
+  INVITE-DEC d14 party: Domingo -> Henry chance=68 accept=false veto=- inputs={"temp":"sardonic","goal":"belong","mood":"steady","fear":0,"trust":45,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 45","belong goal (+15)"]
+  INVITE-DEC d17 party: Domingo -> Henry chance=49.2 accept=false veto=- inputs={"temp":"sardonic","goal":"belong","mood":"steady","fear":4,"trust":48,"bond":{"v":8,"depth":0},"partySize":1} reasons=["trust 48","sick (-20)","belong goal (+15)"]
+  INVITE-DEC d17 party: Domingo -> Luis chance=61.8 accept=true veto=- inputs={"temp":"steady","goal":"heal","mood":"hungry","fear":4,"trust":67,"bond":{"v":12,"depth":0},"partySize":1} reasons=["trust 67"]
+  INVITE-DEC d19 party: Domingo -> Henry chance=70.4 accept=true veto=- inputs={"temp":"sardonic","goal":"belong","mood":"hungry","fear":4,"trust":51,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 51","belong goal (+15)"]
+  INVITE-DEC d20 party: Domingo -> Paul chance=56 accept=true veto=- inputs={"temp":"dry","goal":"home","mood":"steady","fear":0,"trust":90,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 90","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d32 party: Domingo -> Mohamed chance=56 accept=false veto=- inputs={"temp":"fidgety","goal":"answers","mood":"steady","fear":4,"trust":90,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 90","a big party is safer (+5)","sick (-20)"]
+  INVITE-DEC d33 party: Domingo -> Mara chance=70 accept=true veto=- inputs={"temp":"intense","goal":"remember","mood":"steady","fear":15,"trust":75,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 75","a big party is safer (+5)"]
+  INVITE-DEC d66 party: Domingo -> Boris chance=24 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":47,"trust":85,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 85","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d67 party: Domingo -> Boris chance=24 accept=false veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":19,"trust":85,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 85","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d68 party: Domingo -> Boris chance=24.400000000000006 accept=true veto=- inputs={"temp":"steady","goal":"alone","mood":"grieving","fear":12,"trust":86,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 86","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d90 party: Henry -> Mohamed chance=74.4 accept=true veto=- inputs={"temp":"fidgety","goal":"answers","mood":"grieving","fear":0,"trust":86,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 86","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d115 party: Henry -> Tiana chance=75.4 accept=true veto=- inputs={"temp":"stoic","goal":"belong","mood":"grieving","fear":37,"trust":76,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 76","a big party is safer (+5)","belong goal (+15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":33,"v":38,"depth":2},{"day":34,"v":38,"depth":2},{"day":35,"v":38,"depth":2},{"day":36,"v":44,"depth":2},{"day":37,"v":48,"depth":2},{"day":38,"v":54,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":64,"depth":3},{"day":42,"v":68,"depth":3},{"day":43,"v":72,"depth":3},{"day":44,"v":72,"depth":3},{"day":45,"v":78,"depth":3},{"day":46,"v":82,"depth":3}] class=rise
+GOSSIP: totalPicks=191 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=17 31-60=30 61-90=30 91-120=31 121+=20 naturalPicks=128 seededPicks=29 gossipPicks=191
+SEEDED: {"pair":{"a":"gen_0rp0tn0","b":"gen_s67g05h","aName":"Paul","bName":"Henry"},"day":32,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":33,"v":38,"depth":2},{"day":34,"v":38,"depth":2},{"day":35,"v":38,"depth":2},{"day":36,"v":44,"depth":2},{"day":37,"v":48,"depth":2},{"day":38,"v":54,"depth":3},{"day":39,"v":58,"depth":3},{"day":40,"v":62,"depth":3},{"day":41,"v":64,"depth":3},{"day":42,"v":68,"depth":3},{"day":43,"v":72,"depth":3},{"day":44,"v":72,"depth":3},{"day":45,"v":78,"depth":3},{"day":46,"v":82,"depth":3}],"crackTraceClass":"rise","vAt7":38,"depthAt7":2,"vDrop":12,"depthDrop":0,"crack7":true,"firstServe":{"day":33,"why":"vgrievance"},"serveWithin30":true,"serves":34,"servesAll":[{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"}],"effect":true}
+  FRIEND d35: Paul <> Henry — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Paul <> Mohamed — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Mohamed <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Boris <> Mohamed — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Mohamed <> Theo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Henry <> Luis — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d70: Boris <> Henry — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d80: Mohamed <> Tariq — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Ella <> Luis — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d60: Ella <> Mara — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d35: Henry <> Mohamed — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Paul <> Luis — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d105: Boris <> Luis — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d60: Paul <> Ella — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d60: Ella <> Henry — maxDepth 2, final 2 (v=74), dropped 0
+  FRIEND d60: Ella <> Mohamed — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Ella <> Tariq — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d80: Boris <> Ella — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d80: Ella <> Theo — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d100: Mohamed <> Mara — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d55: Boris <> Paul — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d115: Luis <> Theo — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d140: Luis <> Mara — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d135: Luis <> Tariq — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d90: Domingo <> Luis — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Paul <> Domingo — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Boris <> Domingo — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d90: Domingo <> Mara — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d90: Domingo <> Tariq — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Domingo <> Mohamed — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d90: Domingo <> Theo — maxDepth 3, final 3 (v=83), dropped 0
+  FRIEND d120: Tiana <> Mohamed — maxDepth 3, final 3 (v=80), dropped 0
+  CLOSE-READ d22: Paul about Mohamed — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Luis about Mohamed — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Henry about Paul — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Paul about Mohamed — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Mohamed about Paul — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Paul about Henry — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Tariq about Ella — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Theo about Mohamed — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Mara about Ella — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Mohamed about Henry — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Henry about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Henry about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Tariq about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Luis about Henry — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Mohamed about Paul — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d41: Theo about Mohamed — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Mara about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Henry about Paul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Henry about Paul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Boris about Henry — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Mara about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Theo about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Mara about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Henry about Paul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Theo about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Tariq about Mohamed — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d55: Mara about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Mohamed about Paul — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Theo about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Mara about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Henry about Paul — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Ella about Mara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Boris about Paul — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Tariq about Ella — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Boris about Henry — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d67: Mara about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Luis about Henry — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Boris about Henry — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Henry about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Ella about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Mara about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Luis about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Henry about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Mara about Ella — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Boris about Henry — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Henry about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Henry about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Tariq about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Henry about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Mohamed about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Tariq about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Luis about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Mohamed about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Mohamed about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Boris about Mohamed — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Mohamed about Theo — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Boris about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Mara about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Luis about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Theo about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Boris about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Mara about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Luis about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Boris about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Boris about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Mara about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d125: Tiana about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Mara about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Mara about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Tiana about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Mara about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d134: Luis about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Mara about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Boris about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Tiana about Mohamed — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Tariq about Mohamed — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d140: Mohamed about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d9: Boris about Ella (why=grievance)
+  GRIEV-READ d14: Theo about Stan (why=grievance)
+  GRIEV-READ d21: Ella about Boris (why=grievance)
+  GRIEV-READ d27: Ella about Boris (why=grievance)
+  GRIEV-READ d33: Paul about Henry (why=vgrievance)
+  GRIEV-READ d34: Paul about Henry (why=vgrievance)
+  KNACK d17 Henry: "that stray dog — the one that bit two people — lets Mara touch it."
+  KNACK d17 Luis: "that stray dog — the one that bit two people — lets Mohamed touch it."
+  KNACK d23 Mara: "that stray dog — the one that bit two people — lets Paul touch it."
+  KNACK d31 Paul: "Boris talks to the garden. The garden listens. I've seen it."
+  KNACK d36 Paul: "Huh. Let me think about that." "Tariq ate something last month that should've killed them. They're fine."
+  KNACK d37 Boris: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Mohamed touch it."
+  KNACK d42 Mohamed: "Huh. Let me think about that." "Can I be honest? that stray dog — the one that bit two people — lets Paul touch it."
+  KNACK d46 Boris: "Good question." "Henry talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"combat":1,"monster":3,"a stranger":1}

@@ -1,0 +1,89 @@
+# SURFACE+SEEDED — seed 7201 (34d, 1 alive)
+
+npcPairs=43 deep2=1 cracks=0 vCracks=0 friendGriev=0 stateGriev=3 stateFriend=0 stateVCrack=0 t2picks=57 closeReadsServed=8 grievanceServes=3 othersSteered=4
+COND-TP: firstDeep2Day=30 lateClose=0 lateTP=0 lateNull=0 condRate=n/a pooledTP=1/15 pooledRate=6.7% grievReadsByWhy={"grievance":2,"vgrievance":1}
+FUNNEL (natural): convos=96 subject=96 offered=71 picked=53 classes={"offered-not-picked":18,"subject-no-offer":25,"picked-others":53}
+FUNNEL-UNSTEERED (r55 strict): convos=96 subjectNoOffer=25 rate=26.0% offered=71 mainOffered=0 subjectOffered=71 picked=53 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=50 picks=47 latePicks=0 missedChangedNotOffered=2
+WRAPSERVE: convos=3 matcherHits=3 matcherServes=3 classes={"grievance-line":3,"deflection":0,"other":0}
+FUNNEL-PROBE (subject-no-offer turns): turns=85 menuProblem=24 pickProblem=61
+INVITE (wrap, carried from r63): lure={"n":7,"accepts":1,"acceptRate":0.14285714285714285,"vetoes":{},"chanceMin":18,"chanceMax":35,"chanceMean":27.1} party={"n":20,"accepts":6,"acceptRate":0.3,"vetoes":{},"chanceMin":5,"chanceMax":72.6,"chanceMean":38.3} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":11,"forageOffers":2,"otherFavorOffers":9,"accepts":2,"acceptAttempts":2,"waits":1,"starts":1,"startBlocked":2,"forages":0,"forageNodeBarren":6,"forageBarren":7,"forageBarrenTravel":0,"forageBarrenNode":7,"forageTravelBlocked":0,"forageTravelWalked":19,"stepRetries":1,"retryAssigned":1,"retryStarts":1,"outingsEndedStuck":1,"outingsEndBlocked":0,"talks":0,"delivers":0,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":0,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r80): snaps=6 betrayalOfferConvos=26 mootOffers=5 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d8: case_2 status=open charge=murder accused=David/Arnold/Gulnara target=Petra role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d10: case_2 status=open charge=murder accused=David/Arnold/Gulnara target=Petra role=juror known=true mootIn=null trial=false
+  CASE-SNAP d11: case_2 status=open charge=murder accused=David/Arnold/Gulnara target=Petra role=juror known=true mootIn=null trial=true
+  CASE-SNAP d13: case_2 status=acquitted charge=murder accused=David/Arnold/Gulnara target=Petra role=juror known=true mootIn=null trial=true
+  CASE-SNAP d34: case_2 status=acquitted charge=murder accused=David/Arnold/Gulnara target=Petra role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"petra_novak","vidName":"Petra","favorId":"favor-petra_novak-6-1","state":"promised","promisedDay":6,"meetDay":7,"deadline":8,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"david_kim","vidName":"David","favorId":"favor-david_kim-14-4","state":"broken","promisedDay":14,"meetDay":15,"deadline":16,"promiseKept":"broken","startedDay":15,"forageCount":4,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":22,"talkCount":0}]
+  FAVOR-OFFER d6: Petra kind=forage_help favorId=favor-petra_novak-6-1 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Vanessa kind=food_share favorId=favor-gen_9qs5end-10-2 task=share food with Vanessa — they're going hungry
+  FAVOR-OFFER d11: Vanessa kind=food_share favorId=favor-gen_9qs5end-11-3 task=share food with Vanessa — they're going hungry
+  FAVOR-OFFER d14: David kind=forage_help favorId=favor-david_kim-14-4 task=forage with David tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Arnold kind=food_share favorId=favor-gen_z8mllnc-16-5 task=share food with Arnold — they're past hungry
+  FAVOR-OFFER d16: Gulnara kind=food_share favorId=favor-gen_nuaq7gg-16-6 task=share food with Gulnara — they're going hungry
+  FAVOR-OFFER d28: Vanessa kind=sick_help favorId=favor-gen_9qs5end-28-7 task=help Vanessa with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d29: Yara kind=sick_help favorId=favor-yara_haddad-29-8 task=help Yara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d33: Yara kind=food_share favorId=favor-yara_haddad-33-9 task=share food with Yara — they're going hungry
+  FAVOR-OFFER d33: Ava kind=sick_help favorId=favor-ava_garcia-33-10 task=help Ava with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d34: Ava kind=sick_help favorId=favor-ava_garcia-34-11 task=help Ava with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-ACCEPT d6: Petra favorId=favor-petra_novak-6-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d14: David favorId=favor-david_kim-14-4 accepted=true state=promised meetDay=15
+  INVITE-DEC d6 lure: Arnold -> Petra chance=35 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d7 lure: Arnold -> Petra chance=35 accept=true veto=- inputs={"temp":"steady","goal":"escape","mood":"grateful","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d8 party: Hermann -> Mateo chance=72.6 accept=true veto=- inputs={"temp":"bold","goal":"protect","mood":"grieving","fear":5,"trust":44,"bond":{"v":4,"depth":0},"partySize":0} reasons=["trust 44","bold temperament (+15)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Hermann -> Miriam chance=5 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"grieving","fear":5,"trust":49,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 49","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d8 lure: Vanessa -> Miriam chance=18 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"grieving","fear":4,"affinity":31} reasons=["relationship with inviter (+8)","wants to be alone (-25)","grieving mood (-10)"]
+  INVITE-DEC d9 party: Hermann -> An chance=13 accept=false veto=- inputs={"temp":"restless","goal":"alone","mood":"grieving","fear":4,"trust":45,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 45","restless temperament (+10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d9 lure: Vanessa -> Miriam chance=18 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"grieving","fear":0,"affinity":32} reasons=["relationship with inviter (+8)","wants to be alone (-25)","grieving mood (-10)"]
+  INVITE-DEC d10 party: Hermann -> Arnold chance=53.8 accept=true veto=- inputs={"temp":"sardonic","goal":"family","mood":"steady","fear":4,"trust":47,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 47"]
+  INVITE-DEC d10 party: Hermann -> Gulnara chance=64.8 accept=true veto=- inputs={"temp":"mischievous","goal":"feed","mood":"steady","fear":4,"trust":37,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 37","feed goal (+15)"]
+  INVITE-DEC d10 lure: Vanessa -> Miriam chance=28 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":0,"affinity":33} reasons=["relationship with inviter (+8)","wants to be alone (-25)"]
+  INVITE-DEC d11 lure: Vanessa -> Miriam chance=28 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":0,"affinity":33} reasons=["relationship with inviter (+8)","wants to be alone (-25)"]
+  INVITE-DEC d12 lure: Vanessa -> Miriam chance=28 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":4,"affinity":33} reasons=["relationship with inviter (+8)","wants to be alone (-25)"]
+  INVITE-DEC d15 party: Hermann -> Miriam chance=27.599999999999994 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":4,"trust":69,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 69","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d16 party: Hermann -> Miriam chance=28 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":0,"trust":70,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 70","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d17 party: Hermann -> Miriam chance=20 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"grieving","fear":37,"trust":75,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 75","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d19 party: Hermann -> Ethan chance=42.2 accept=false veto=- inputs={"temp":"bold","goal":"prove","mood":"grieving","fear":4,"trust":43,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","sick (-20)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d19 party: Hermann -> Miriam chance=5 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"grieving","fear":4,"trust":78,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 78","a big party is safer (+5)","sick (-20)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d20 party: Hermann -> Vanessa chance=69.80000000000001 accept=false veto=- inputs={"temp":"bold","goal":"lead","mood":"steady","fear":4,"trust":87,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 87","a big party is safer (+5)","sick (-20)","bold temperament (+15)"]
+  INVITE-DEC d21 party: Hermann -> An chance=30.400000000000006 accept=true veto=- inputs={"temp":"restless","goal":"alone","mood":"steady","fear":0,"trust":51,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 51","a big party is safer (+5)","restless temperament (+10)","wants to be alone (-40)"]
+  INVITE-DEC d28 party: Hermann -> Vanessa chance=57 accept=false veto=- inputs={"temp":"bold","goal":"lead","mood":"grieving","fear":13,"trust":80,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 80","a big party is safer (+5)","sick (-20)","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d28 party: Hermann -> Ava chance=43.400000000000006 accept=false veto=- inputs={"temp":"gentle","goal":"belong","mood":"grieving","fear":13,"trust":46,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 46","a big party is safer (+5)","sick (-20)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d29 party: Hermann -> Yara chance=31 accept=false veto=- inputs={"temp":"cautious","goal":"feed","mood":"grieving","fear":6,"trust":40,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Hermann -> Ava chance=36 accept=false veto=- inputs={"temp":"gentle","goal":"belong","mood":"grieving","fear":1,"trust":40,"bond":{"v":18,"depth":0},"partySize":2} reasons=["trust 40","sick (-20)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Hermann -> Yara chance=43.2 accept=false veto=- inputs={"temp":"cautious","goal":"feed","mood":"grieving","fear":1,"trust":33,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 33","cautious temperament (-10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d32 party: Hermann -> Ava chance=36.400000000000006 accept=false veto=- inputs={"temp":"gentle","goal":"belong","mood":"grieving","fear":9,"trust":41,"bond":{"v":20,"depth":0},"partySize":2} reasons=["trust 41","sick (-20)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d33 party: Hermann -> Yara chance=44.8 accept=true veto=- inputs={"temp":"cautious","goal":"feed","mood":"grieving","fear":4,"trust":37,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 37","cautious temperament (-10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d33 party: Hermann -> Ava chance=42.2 accept=true veto=- inputs={"temp":"gentle","goal":"belong","mood":"grieving","fear":4,"trust":43,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 43","a big party is safer (+5)","sick (-20)","belong goal (+15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":27,"v":46,"depth":3},{"day":28,"v":50,"depth":3},{"day":29,"v":50,"depth":3},{"day":30,"v":50,"depth":3},{"day":31,"v":50,"depth":3},{"day":32,"v":50,"depth":3},{"day":33,"v":50,"depth":3},{"day":34,"v":50,"depth":3}] class=no-drop
+GOSSIP: totalPicks=63 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=45 31-60=8 61-90=0 91-120=0 121+=0 naturalPicks=53 seededPicks=4 gossipPicks=63
+SEEDED: {"pair":{"a":"gen_hxef15s","b":"gen_z8mllnc","aName":"An","bName":"Arnold"},"day":26,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":27,"v":46,"depth":3},{"day":28,"v":50,"depth":3},{"day":29,"v":50,"depth":3},{"day":30,"v":50,"depth":3},{"day":31,"v":50,"depth":3},{"day":32,"v":50,"depth":3},{"day":33,"v":50,"depth":3},{"day":34,"v":50,"depth":3}],"crackTraceClass":"no-drop","vAt7":50,"depthAt7":3,"vDrop":2,"depthDrop":-1,"crack7":false,"firstServe":{"day":27,"why":"vgrievance"},"serveWithin30":true,"serves":1,"servesAll":[{"day":27,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: An <> Arnold — maxDepth 3, final 3 (v=50), dropped 0
+  CLOSE-READ d16: Arnold about Mateo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d17: Mateo about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Arnold about Mateo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Mateo about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Mateo about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Arnold about Mateo — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Mateo about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: An about Arnold — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Ava about Arnold — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Mateo about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: An about Arnold — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Ava about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Ava about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Arnold about An — live depth=2 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Vanessa about Arnold — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  GRIEV-READ d4: Miriam about A person, maybe 50s (why=grievance)
+  GRIEV-READ d6: Petra about David (why=grievance)
+  GRIEV-READ d27: An about Arnold (why=vgrievance)
+  KNACK d13 Mateo: "that stray dog — the one that bit two people — lets Miriam touch it."
+  KNACK d17 Gulnara: "Huh. Let me think about that." "cuts close faster when Ava wraps them. Don't ask me how. What's the worst that happens.
+  KNACK d19 Ethan: "Gulnara sees in the dark. Not well — but better than you. Better than me."
+  KNACK d28 Vanessa: "Huh. Let me think about that." "cuts close faster when Ava wraps them. Don't ask me how."
+  KNACK d28 Gulnara: "You want to know about that? Okay." "Mateo talks to the garden. The garden listens. I've seen it. You'd know about that
+
+deathCauses: {"ambush":1,"monster":1,"sickness":4,"starvation":2}

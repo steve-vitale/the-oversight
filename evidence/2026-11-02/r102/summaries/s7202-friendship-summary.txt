@@ -1,0 +1,405 @@
+# SURFACE+SEEDED — seed 7202 (141d, 1 alive)
+
+npcPairs=104 deep2=31 cracks=0 vCracks=1 friendGriev=0 stateGriev=5 stateFriend=0 stateVCrack=0 t2picks=293 closeReadsServed=57 grievanceServes=34 othersSteered=29
+COND-TP: firstDeep2Day=40 lateClose=186 lateTP=152 lateNull=0 condRate=81.7% pooledTP=153/208 pooledRate=73.6% grievReadsByWhy={"grievance":7,"vgrievance":39}
+FUNNEL (natural): convos=402 subject=400 offered=341 picked=269 classes={"subject-no-offer":59,"offered-not-picked":72,"picked-others":269,"no-subject-no-ans":2}
+FUNNEL-UNSTEERED (r55 strict): convos=402 subjectNoOffer=59 rate=14.7% offered=341 mainOffered=1 subjectOffered=341 picked=269 latePicks=104 latePicksMain=0 latePicksSubject=104
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=2
+  KNACK-CIRCULATION: Petra / Pablo / Stan — "Yara found a lost knife by smell last week. By SMELL."
+  KNACK-CIRCULATION: Pablo / Elena / Kojo — "cuts close faster when Petra wraps them. Don't ask me how."
+REOFFER: offers=315 picks=282 latePicks=101 missedChangedNotOffered=4
+WRAPSERVE: convos=46 matcherHits=34 matcherServes=34 classes={"grievance-line":34,"deflection":1,"other":11}
+FUNNEL-PROBE (subject-no-offer turns): turns=224 menuProblem=157 pickProblem=67
+INVITE (wrap, carried from r63): lure={"n":9,"accepts":4,"acceptRate":0.4444444444444444,"vetoes":{},"chanceMin":36,"chanceMax":61,"chanceMean":43.9} party={"n":31,"accepts":15,"acceptRate":0.4838709677419355,"vetoes":{},"chanceMin":36,"chanceMax":91,"chanceMean":54.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=10
+FAVOR (r65): funnel={"offers":49,"forageOffers":15,"otherFavorOffers":34,"accepts":15,"acceptAttempts":15,"waits":12,"starts":11,"startBlocked":10,"forages":9,"forageNodeBarren":22,"forageBarren":7,"forageBarrenTravel":0,"forageBarrenNode":7,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":4,"retryAssigned":4,"retryStarts":4,"outingsEndedStuck":1,"outingsEndBlocked":0,"talks":9,"delivers":9,"deliverBlocked":0,"completeOutings":1,"completeOutingsEvents":9,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r80): snaps=11 betrayalOfferConvos=119 mootOffers=12 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d11: case_2 status=open charge=murder accused=Yara/Ezra/Dieter target=Ines role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=open charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=false
+  CASE-SNAP d14: case_2 status=open charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_2 status=open charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d15: case_4 status=open charge=ambush accused=Ezra/Yara/Dieter target=Andre role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d16: case_2 status=acquitted charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=open charge=ambush accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=false
+  CASE-SNAP d18: case_2 status=acquitted charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_4 status=open charge=ambush accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_6 status=open charge=ambush accused=Andre/Ingrid/Catalina target=Ezra role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d20: case_2 status=acquitted charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_4 status=resolved charge=ambush accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=true
+  CASE-SNAP d20: case_6 status=resolved charge=ambush accused=Andre/Ingrid/Catalina target=Ezra role=juror known=true mootIn=null trial=false
+  CASE-SNAP d23: case_2 status=acquitted charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_4 status=resolved charge=ambush accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=true
+  CASE-SNAP d23: case_6 status=resolved charge=ambush accused=Andre/Ingrid/Catalina target=Ezra role=juror known=true mootIn=null trial=false
+  CASE-SNAP d23: case_8 status=open charge=murder accused=Ezra/Yara/Dieter target=Andre role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d25: case_2 status=acquitted charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_4 status=resolved charge=ambush accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=true
+  CASE-SNAP d25: case_6 status=resolved charge=ambush accused=Andre/Ingrid/Catalina target=Ezra role=juror known=true mootIn=null trial=false
+  CASE-SNAP d25: case_8 status=resolved charge=murder accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=false
+  CASE-SNAP d141: case_2 status=acquitted charge=murder accused=Yara/Ezra/Dieter target=Ines role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_4 status=resolved charge=ambush accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_6 status=resolved charge=ambush accused=Andre/Ingrid/Catalina target=Ezra role=juror known=true mootIn=null trial=false
+  CASE-SNAP d141: case_8 status=resolved charge=murder accused=Ezra/Yara/Dieter target=Andre role=juror known=true mootIn=null trial=false
+OUTING END STATES: [{"vid":"gen_sjxetis","vidName":"Pasquale","favorId":"favor-gen_sjxetis-5-1","state":"moot","promisedDay":5,"meetDay":6,"deadline":7,"promiseKept":"released","startedDay":7,"forageCount":2,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"chen_wei","vidName":"Wei","favorId":"favor-chen_wei-92-30","state":"moot","promisedDay":92,"meetDay":93,"deadline":94,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"catalina_reyes","vidName":"Catalina","favorId":"favor-catalina_reyes-15-4","state":"broken","promisedDay":15,"meetDay":16,"deadline":17,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"yara_haddad","vidName":"Yara","favorId":"favor-yara_haddad-96-32","state":"thanked","promisedDay":96,"meetDay":97,"deadline":98,"promiseKept":true,"startedDay":97,"forageCount":1,"playerKcal":1365,"partnerKcal":1445,"deliveredKcal":2810,"returnedDay":97,"talkCount":1}]
+  FAVOR-OFFER d5: Pasquale kind=forage_help favorId=favor-gen_sjxetis-5-1 task=forage with Pasquale tomorrow to rebuild the pantry
+  FAVOR-OFFER d7: Andre kind=food_share favorId=favor-gen_zfwkqtq-7-2 task=share food with Andre — they're going hungry
+  FAVOR-OFFER d13: Wei kind=forage_help favorId=favor-chen_wei-13-3 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d15: Catalina kind=forage_help favorId=favor-catalina_reyes-15-4 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Wei kind=heal_help favorId=favor-chen_wei-22-5 task=help Wei with their injury
+  FAVOR-OFFER d26: Yara kind=food_share favorId=favor-yara_haddad-26-6 task=share food with Yara — they're running on empty
+  FAVOR-OFFER d26: Wei kind=food_share favorId=favor-chen_wei-26-7 task=share food with Wei — they're going hungry
+  FAVOR-OFFER d28: Elena kind=forage_help favorId=favor-elena_petrova-28-8 task=forage with Elena tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Dale kind=food_share favorId=favor-dale_hoffman-29-9 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d34: Stan kind=forage_help favorId=favor-stan_kowalski-34-10 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d41: Petra kind=sick_help favorId=favor-petra_novak-39-11 task=help Petra with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d59: Dale kind=food_share favorId=favor-dale_hoffman-57-13 task=share food with Dale — they're going hungry
+  FAVOR-OFFER d62: Yara kind=sick_help favorId=favor-yara_haddad-62-14 task=help Yara with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d67: Stan kind=sick_help favorId=favor-stan_kowalski-67-16 task=help Stan with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d68: Elena kind=sick_help favorId=favor-elena_petrova-68-17 task=help Elena with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d70: Yara kind=water_haul favorId=favor-yara_haddad-69-18 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d77: Stan kind=food_share favorId=favor-stan_kowalski-77-19 task=share food with Stan — they're running on empty
+  FAVOR-OFFER d80: Dale kind=water_haul favorId=favor-dale_hoffman-80-20 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d80: Yara kind=water_haul favorId=favor-yara_haddad-80-21 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d82: Petra kind=water_haul favorId=favor-petra_novak-82-22 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d83: Stan kind=forage_help favorId=favor-stan_kowalski-83-23 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d85: Petra kind=water_haul favorId=favor-petra_novak-85-24 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d85: Wei kind=forage_help favorId=favor-chen_wei-85-25 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d85: Yara kind=water_haul favorId=favor-yara_haddad-86-26 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d86: Dale kind=water_haul favorId=favor-dale_hoffman-86-27 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d89: Stan kind=water_haul favorId=favor-stan_kowalski-89-28 task=bring four liters home from the creek with Stan; set out at dawn
+  FAVOR-OFFER d89: Petra kind=water_haul favorId=favor-petra_novak-89-29 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d92: Wei kind=forage_help favorId=favor-chen_wei-92-30 task=forage with Wei tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Dale kind=forage_help favorId=favor-dale_hoffman-92-31 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d96: Yara kind=forage_help favorId=favor-yara_haddad-96-32 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d97: Dale kind=water_haul favorId=favor-dale_hoffman-97-33 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d105: Dale kind=forage_help favorId=favor-dale_hoffman-105-34 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d107: Pablo kind=forage_help favorId=favor-app_mgpspi0e80-107-35 task=forage with Pablo tomorrow to rebuild the pantry
+  FAVOR-OFFER d109: Kojo kind=heal_help favorId=favor-app_mgpspi3k754-109-36 task=help Kojo with their injury
+  FAVOR-OFFER d114: Dale kind=forage_help favorId=favor-dale_hoffman-114-38 task=forage with Dale tomorrow to rebuild the pantry
+  FAVOR-OFFER d116: Petra kind=forage_help favorId=favor-petra_novak-116-39 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d117: Stan kind=forage_help favorId=favor-stan_kowalski-114-37 task=forage with Stan tomorrow to rebuild the pantry
+  FAVOR-OFFER d118: Dale kind=food_share favorId=favor-dale_hoffman-118-40 task=share food with Dale — they're past hungry
+  FAVOR-OFFER d119: Pablo kind=water_haul favorId=favor-app_mgpspi0e80-119-41 task=bring four liters home from the creek with Pablo; set out at dawn
+  FAVOR-OFFER d122: Dale kind=water_haul favorId=favor-dale_hoffman-122-42 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d123: Petra kind=water_haul favorId=favor-petra_novak-123-43 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d124: Dale kind=water_haul favorId=favor-dale_hoffman-124-44 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d124: Pablo kind=water_haul favorId=favor-app_mgpspi0e80-124-45 task=bring four liters home from the creek with Pablo; set out at dawn
+  FAVOR-OFFER d126: Stan kind=water_haul favorId=favor-stan_kowalski-126-46 task=bring four liters home from the creek with Stan; set out at dawn
+  FAVOR-OFFER d128: Dale kind=water_haul favorId=favor-dale_hoffman-128-47 task=bring four liters home from the creek with Dale; set out at dawn
+  FAVOR-OFFER d128: Petra kind=water_haul favorId=favor-petra_novak-128-48 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d132: Petra kind=food_share favorId=favor-petra_novak-132-49 task=share food with Petra — they're going hungry
+  FAVOR-OFFER d136: Kojo kind=food_share favorId=favor-app_mgpspi3k754-136-50 task=share food with Kojo — they're going hungry
+  FAVOR-OFFER d139: Kojo kind=water_haul favorId=favor-app_mgpspi3k754-139-51 task=bring four liters home from the creek with Kojo; set out at dawn
+  FAVOR-ACCEPT d5: Pasquale favorId=favor-gen_sjxetis-5-1 accepted=true state=promised meetDay=6
+  FAVOR-ACCEPT d13: Wei favorId=favor-chen_wei-13-3 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d15: Catalina favorId=favor-catalina_reyes-15-4 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d28: Elena favorId=favor-elena_petrova-28-8 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d34: Stan favorId=favor-stan_kowalski-34-10 accepted=true state=promised meetDay=35
+  FAVOR-ACCEPT d83: Stan favorId=favor-stan_kowalski-83-23 accepted=true state=promised meetDay=84
+  FAVOR-ACCEPT d85: Wei favorId=favor-chen_wei-85-25 accepted=true state=promised meetDay=86
+  FAVOR-ACCEPT d92: Wei favorId=favor-chen_wei-92-30 accepted=true state=promised meetDay=93
+  FAVOR-ACCEPT d92: Dale favorId=favor-dale_hoffman-92-31 accepted=true state=promised meetDay=93
+  FAVOR-ACCEPT d96: Yara favorId=favor-yara_haddad-96-32 accepted=true state=promised meetDay=97
+  FAVOR-ACCEPT d105: Dale favorId=favor-dale_hoffman-105-34 accepted=true state=promised meetDay=106
+  FAVOR-ACCEPT d107: Pablo favorId=favor-app_mgpspi0e80-107-35 accepted=true state=promised meetDay=108
+  FAVOR-ACCEPT d114: Dale favorId=favor-dale_hoffman-114-38 accepted=true state=promised meetDay=115
+  FAVOR-ACCEPT d116: Petra favorId=favor-petra_novak-116-39 accepted=true state=promised meetDay=117
+  FAVOR-ACCEPT d117: Stan favorId=favor-stan_kowalski-114-37 accepted=true state=promised meetDay=118
+  INVITE-DEC d8 party: Pasquale -> Catalina chance=56 accept=true veto=- inputs={"temp":"bold","goal":"lead","mood":"grieving","fear":0,"trust":40,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 40","bold temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d8 party: Pasquale -> Dale chance=37.4 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"grieving","fear":0,"trust":31,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 31","grieving mood (-10)"]
+  INVITE-DEC d8 party: Pasquale -> Raed chance=42.2 accept=false veto=- inputs={"temp":"dry","goal":"legacy","mood":"grieving","fear":0,"trust":43,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 43","grieving mood (-10)"]
+  INVITE-DEC d9 party: Pasquale -> Andre chance=39.8 accept=true veto=- inputs={"temp":"dry","goal":"survive","mood":"grieving","fear":4,"trust":37,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 37","grieving mood (-10)"]
+  INVITE-DEC d9 party: Pasquale -> Dieter chance=41.400000000000006 accept=false veto=- inputs={"temp":"anxious","goal":"joy","mood":"grieving","fear":4,"trust":41,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 41","grieving mood (-10)"]
+  INVITE-DEC d10 party: Pasquale -> Ezra chance=44.6 accept=false veto=- inputs={"temp":"fidgety","goal":"answers","mood":"steady","fear":0,"trust":24,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 24"]
+  INVITE-DEC d10 party: Pasquale -> Ingrid chance=51.400000000000006 accept=true veto=- inputs={"temp":"gentle","goal":"peace","mood":"steady","fear":0,"trust":41,"bond":null,"partySize":2} reasons=["trust 41"]
+  INVITE-DEC d10 lure: Ezra -> Ines chance=61 accept=true veto=- inputs={"temp":"warm","goal":"answers","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d12 lure: Dieter -> Andre chance=36 accept=false veto=- inputs={"temp":"dry","goal":"survive","mood":"grieving","fear":4,"affinity":5} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d13 lure: Dieter -> Andre chance=47 accept=false veto=- inputs={"temp":"dry","goal":"survive","mood":"hungry","fear":0,"affinity":6} reasons=["relationship with inviter (+2)"]
+  INVITE-DEC d14 lure: Dieter -> Andre chance=47 accept=true veto=- inputs={"temp":"dry","goal":"survive","mood":"hungry","fear":0,"affinity":6} reasons=["relationship with inviter (+2)"]
+  INVITE-DEC d15 party: Pasquale -> Yara chance=44.4 accept=true veto=- inputs={"temp":"cautious","goal":"prove","mood":"steady","fear":0,"trust":36,"bond":null,"partySize":3} reasons=["trust 36","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d17 lure: Ingrid -> Ezra chance=56 accept=true veto=- inputs={"temp":"fidgety","goal":"answers","mood":"lonely","fear":0,"affinity":5} reasons=["relationship with inviter (+1)","lonely mood (+10)"]
+  INVITE-DEC d20 party: Pasquale -> Ezra chance=42.4 accept=true veto=- inputs={"temp":"fidgety","goal":"answers","mood":"grieving","fear":17,"trust":31,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 31","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d20 lure: Dieter -> Andre chance=37 accept=false veto=- inputs={"temp":"dry","goal":"survive","mood":"grieving","fear":9,"affinity":8} reasons=["relationship with inviter (+2)","grieving mood (-10)"]
+  INVITE-DEC d21 lure: Dieter -> Andre chance=37 accept=false veto=- inputs={"temp":"dry","goal":"survive","mood":"grieving","fear":4,"affinity":8} reasons=["relationship with inviter (+2)","grieving mood (-10)"]
+  INVITE-DEC d21 lure: Dieter -> Andre chance=37 accept=false veto=- inputs={"temp":"dry","goal":"survive","mood":"grieving","fear":29,"affinity":8} reasons=["relationship with inviter (+2)","grieving mood (-10)"]
+  INVITE-DEC d22 lure: Dieter -> Andre chance=37 accept=true veto=- inputs={"temp":"dry","goal":"survive","mood":"grieving","fear":1,"affinity":8} reasons=["relationship with inviter (+2)","grieving mood (-10)"]
+  INVITE-DEC d23 party: Raed -> Dale chance=42.4 accept=false veto=- inputs={"temp":"dry","goal":"home","mood":"grieving","fear":2,"trust":31,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 31","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d23 party: Raed -> Dieter chance=59.2 accept=true veto=- inputs={"temp":"anxious","goal":"joy","mood":"grieving","fear":2,"trust":48,"bond":{"v":32,"depth":1},"partySize":3} reasons=["trust 48","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d25 party: Raed -> Dale chance=39.6 accept=true veto=- inputs={"temp":"dry","goal":"home","mood":"grieving","fear":1,"trust":24,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 24","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d26 party: Ezra -> Wei chance=63.599999999999994 accept=true veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":35,"trust":59,"bond":{"v":30,"depth":1},"partySize":3} reasons=["trust 59","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Ezra -> Elena chance=41.8 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"grateful","fear":4,"trust":67,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 67","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d32 party: Ezra -> Stan chance=53.2 accept=false veto=- inputs={"temp":"dry","goal":"understand","mood":"steady","fear":0,"trust":33,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 33","a big party is safer (+5)"]
+  INVITE-DEC d33 party: Ezra -> Petra chance=67.4 accept=false veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":4,"trust":31,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 31","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d34 party: Ezra -> Stan chance=56 accept=true veto=- inputs={"temp":"dry","goal":"understand","mood":"steady","fear":12,"trust":40,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)"]
+  INVITE-DEC d70 party: Ingrid -> Petra chance=83.4 accept=true veto=- inputs={"temp":"steady","goal":"belong","mood":"grieving","fear":64,"trust":71,"bond":{"v":66,"depth":2},"partySize":4} reasons=["trust 71","a real bond (+10)","a big party is safer (+5)","belong goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d93 party: Wei -> Elena chance=51 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":36,"trust":90,"bond":{"v":78,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d95 party: Wei -> Pablo chance=91 accept=true veto=- inputs={"temp":"sardonic","goal":"protect","mood":"grieving","fear":4,"trust":90,"bond":{"v":75,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","protect goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d110 party: Yara -> Elena chance=51 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":64,"trust":90,"bond":{"v":100,"depth":3},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d112 party: Yara -> Omelyan chance=76 accept=false veto=- inputs={"temp":"steady","goal":"understand","mood":"cheerful","fear":7,"trust":65,"bond":{"v":18,"depth":0},"partySize":4} reasons=["trust 65","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d113 party: Yara -> Kojo chance=78.8 accept=false veto=- inputs={"temp":"steady","goal":"remember","mood":"steady","fear":4,"trust":72,"bond":{"v":35,"depth":1},"partySize":4} reasons=["trust 72","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d114 party: Yara -> Omelyan chance=66.8 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":0,"trust":67,"bond":{"v":20,"depth":0},"partySize":4} reasons=["trust 67","a big party is safer (+5)"]
+  INVITE-DEC d130 party: Stan -> Kojo chance=54.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"remember","mood":"grieving","fear":75,"trust":86,"bond":{"v":17,"depth":0},"partySize":3} reasons=["trust 86","a big party is safer (+5)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d131 party: Dale -> Kojo chance=59.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"remember","mood":"grieving","fear":92,"trust":86,"bond":{"v":46,"depth":1},"partySize":2} reasons=["trust 86","a real bond (+10)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d133 party: Pablo -> Elena chance=36 accept=false veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":72,"trust":90,"bond":{"v":55,"depth":2},"partySize":1} reasons=["trust 90","a real bond (+10)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d133 party: Pablo -> Kojo chance=49.80000000000001 accept=false veto=- inputs={"temp":"steady","goal":"remember","mood":"grieving","fear":72,"trust":87,"bond":{"v":24,"depth":0},"partySize":1} reasons=["trust 87","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d134 party: Petra -> Corazon chance=51.8 accept=true veto=- inputs={"temp":"restless","goal":"family","mood":"grieving","fear":68,"trust":42,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 42","restless temperament (+10)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Petra -> Kojo chance=71.4 accept=true veto=- inputs={"temp":"steady","goal":"remember","mood":"grieving","fear":65,"trust":91,"bond":{"v":34,"depth":1},"partySize":1} reasons=["trust 91","a real bond (+10)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Petra -> Elena chance=47.599999999999994 accept=true veto=- inputs={"temp":"warm","goal":"alone","mood":"grieving","fear":65,"trust":94,"bond":{"v":88,"depth":3},"partySize":2} reasons=["trust 94","a real bond (+10)","warm temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":38,"v":40,"depth":3},{"day":39,"v":40,"depth":3},{"day":40,"v":44,"depth":3},{"day":41,"v":50,"depth":3},{"day":42,"v":50,"depth":3},{"day":43,"v":50,"depth":3},{"day":44,"v":50,"depth":3},{"day":45,"v":50,"depth":3},{"day":46,"v":54,"depth":3},{"day":47,"v":54,"depth":3},{"day":48,"v":58,"depth":3},{"day":49,"v":58,"depth":3},{"day":51,"v":58,"depth":3},{"day":51,"v":58,"depth":3}] class=no-drop
+GOSSIP: totalPicks=181 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=41 31-60=58 61-90=66 91-120=65 121+=34 naturalPicks=264 seededPicks=29 gossipPicks=181
+SEEDED: {"pair":{"a":"chen_wei","b":"ingrid_vik","aName":"Wei","bName":"Ingrid"},"day":37,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":38,"v":40,"depth":3},{"day":39,"v":40,"depth":3},{"day":40,"v":44,"depth":3},{"day":41,"v":50,"depth":3},{"day":42,"v":50,"depth":3},{"day":43,"v":50,"depth":3},{"day":44,"v":50,"depth":3},{"day":45,"v":50,"depth":3},{"day":46,"v":54,"depth":3},{"day":47,"v":54,"depth":3},{"day":48,"v":58,"depth":3},{"day":49,"v":58,"depth":3},{"day":51,"v":58,"depth":3},{"day":51,"v":58,"depth":3}],"crackTraceClass":"no-drop","vAt7":44,"depthAt7":3,"vDrop":8,"depthDrop":-1,"crack7":false,"firstServe":{"day":38,"why":"vgrievance"},"serveWithin30":true,"serves":39,"servesAll":[{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":39,"why":"vgrievance"},{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":69,"why":"vgrievance"}],"effect":true}
+  FRIEND d95: Ezra <> Ingrid — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d70: Wei <> Ezra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Ezra <> Yara — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d70: Dale <> Ezra — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d45: Ingrid <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Dale <> Ingrid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Wei <> Ingrid — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Dale <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Wei <> Dale — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Wei <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Elena <> Ingrid — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d90: Elena <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Ingrid <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Petra <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d75: Wei <> Elena — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d65: Ingrid <> Stan — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d105: Dale <> Elena — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d80: Wei <> Stan — maxDepth 3, final 3 (v=93), dropped 0
+  FRIEND d75: Wei <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Elena <> Petra — maxDepth 3, final 3 (v=79), dropped 0
+  FRIEND d65: Pablo <> Ingrid — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d130: Pablo <> Elena — maxDepth 2, final 2 (v=55), dropped 0
+  FRIEND d100: Dale <> Petra — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Petra <> Stan — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d100: Dale <> Stan — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Pablo <> Stan — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d120: Pablo <> Dale — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d75: Pablo <> Wei — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Stan <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Pablo <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Ezra <> Stan — maxDepth 3, final 3 (v=92), dropped 0
+  VCRACK d14: Andre vs Ezra (ambushed) v 4 -> -10 (depth 0 -> 0)
+  CLOSE-READ d17: Raed about Dieter — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Dieter about Ezra — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Dale about Ezra — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d23: Dieter about Ezra — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Ezra about Dale — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Ingrid about Ezra — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Dale about Ezra — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Wei about Ingrid — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Wei about Ingrid — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Ingrid about Wei — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Wei about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Ingrid about Wei — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Ingrid about Wei — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Yara about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d33: Wei about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Yara about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Dale about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Dale about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Yara about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Stan about Ingrid — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Ingrid about Wei — live depth=3 ledger depth=1 class=TP late=false inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Yara about Ingrid — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Ingrid about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d40: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Dale about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Elena about Ingrid — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Ingrid about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Dale about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Yara about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Dale about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Ingrid about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Petra about Wei — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Yara about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Dale about Ingrid — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d54: Yara about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Ingrid about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Yara about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Dale about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Stan about Ingrid — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d61: Dale about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Stan about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Yara about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Stan about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Ingrid about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Stan about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Yara about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Ingrid about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Stan about Ingrid — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Dale about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Dale about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Stan about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Stan about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Elena about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Stan about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Ingrid about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Dale about Ingrid — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Stan about Ingrid — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Petra about Wei — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d71: Stan about Wei — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Stan about Wei — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d73: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Elena about Wei — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Dale about Yara — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Stan about Wei — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d75: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Petra about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Stan about Wei — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Dale about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Stan about Wei — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Dale about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Petra about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Petra about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Stan about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Dale about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Petra about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Dale about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Dale about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Petra about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Petra about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Dale about Wei — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Stan about Wei — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Petra about Wei — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Yara about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Petra about Wei — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Wei about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Petra about Yara — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Elena about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Stan about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Petra about Yara — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Yara about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Yara about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Stan about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Yara about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Petra about Dale — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Stan about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Yara about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Yara about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Pablo about Yara — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Stan about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Stan about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Pablo about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Yara about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Pablo about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Dale about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Kojo about Yara — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d106: Elena about Yara — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Pablo about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Petra about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Pablo about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Petra about Yara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Dale about Petra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Petra about Dale — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Elena about Dale — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Dale about Petra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Pablo about Dale — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Dale about Petra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Pablo about Dale — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Dale about Petra — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Petra about Dale — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Dale about Petra — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Dale about Petra — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Petra about Dale — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Pablo about Dale — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Dale about Petra — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Petra about Dale — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Dale about Petra — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Stan about Dale — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Dale about Petra — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d118: Petra about Dale — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Dale about Petra — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Pablo about Dale — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d120: Dale about Petra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Dale about Petra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d121: Pablo about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Petra about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Stan about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d123: Petra about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Pablo about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d124: Kojo about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d125: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d126: Stan about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d127: Elena about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Petra about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d128: Stan about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Pablo about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d129: Petra about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Dale about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Kojo about Dale — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d130: Pablo about Dale — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Petra about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Pablo about Elena — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Petra about Elena — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Elena about Petra — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Kojo about Elena — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d134: Kojo about Elena — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d134: Elena about Kojo — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  GRIEV-READ d12: Andre about Ezra (why=grievance)
+  GRIEV-READ d14: Andre about Ezra (why=grievance)
+  GRIEV-READ d15: Andre about Ezra (why=grievance)
+  GRIEV-READ d16: Andre about Ezra (why=grievance)
+  GRIEV-READ d20: Ezra about Andre (why=grievance)
+  GRIEV-READ d21: Andre about Ezra (why=grievance)
+  KNACK d4 Raed: "Huh. Let me think about that." "the person in their 50s ate something last month that should've killed them. They're fi
+  KNACK d6 A woman, maybe 30s, with restless hands: "Good question." "Ezra ate something last month that should've killed them. They're fine."
+  KNACK d6 A woman, maybe 30s, with restless hands: "Wei found a lost knife by smell last week. By SMELL. Give it time."
+  KNACK d10 Dieter: "Huh. Let me think about that." "Wei found a lost knife by smell last week. By SMELL."
+  KNACK d11 Wei: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Catalina touch it."
+  KNACK d11 Wei: "Ingrid ate something last month that should've killed them. They're fine."
+  KNACK d17 Wei: "Raed talks to the garden. The garden listens. I've seen it."
+  KNACK d30 Stan: "Heh. cuts close faster when Petra wraps them. Don't ask me how."
+
+deathCauses: {"the wild":6,"ambush":2,"sickness":1,"a wound that wouldn't close":2,"starvation":1,"the arena":2,"dehydration":1,"combat":1}
