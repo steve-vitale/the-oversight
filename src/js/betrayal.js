@@ -96,7 +96,33 @@
       return v.betrayal;
     },
     npcIds() {
-      return (this.state.village.roster || []).filter(id => id !== this.villagerId);
+      // NPCIDS DEAD FILTER (sim-npcdeadfilter-a, 2026-11-02): succession
+      // (ledger.js playerDeath) trusts this list alone — candidates =
+      // npcIds(), sorted by trust, candidates[0] becomes bearer — so a
+      // dead id on the roster must never be returned here, whatever
+      // path put it there (the genApplicant/arrivalTick entry gates
+      // from sim-deadid-a close the re-application path, not every
+      // path). Dead = deadMarked's triple-source mark (villagers
+      // record, background_survivors record, vpOf/rosterChars);
+      // deadMarked lives in membership.js, so fall back to the same
+      // triple check inline if it is unavailable. On a clean roster
+      // this is a no-op: same ids, same order, no RNG consumed.
+      const self = this;
+      return (this.state.village.roster || []).filter(function (id) {
+        if (id === self.villagerId) return false;
+        try {
+          if (typeof self.deadMarked === 'function') return !self.deadMarked(id);
+        } catch (e) {}
+        try {
+          const vrec = (self.data.villagers || []).find(function (r) { return r.id === id; });
+          if (vrec && vrec.dead) return false;
+          const brec = (self.data.background_survivors || []).find(function (r) { return r.id === id; });
+          if (brec && brec.dead) return false;
+          const vp = self.vpOf ? self.vpOf(id) : null;
+          if (vp && vp.dead) return false;
+        } catch (e) {}
+        return true;
+      });
     },
 
     // ---------- 2. PAIR RELATIONSHIPS (any two villagers) ----------

@@ -11,6 +11,13 @@
 //      recorded in evidence/2026-11-02/sim-rosterreturn-a.md; the live
 //      arrival assertions below now pin the NEW behavior, and the
 //      driver-JSON part (B) is untouched historical analysis.
+//  (A-FLIP-2, sim-npcdeadfilter-a 2026-11-02, design changed on
+//      purpose): npcIds() now filters dead-marked ids (betrayal.js),
+//      so a dead-flagged id ON the roster is no longer an npcIds
+//      candidate and succession can no longer pick it. The two
+//      assertions below that pinned the unfiltered npcIds() now pin
+//      the filtered behavior; everything else in this file, including
+//      the driver-JSON part (B), is untouched.
 //  (B) DRIVER-JSON analysis: the 97330 judged run reproduces the
 //      bearerorder death chain and traces Nora's return step by step
 //      (genApplicant d109 -> auto-accept d109 -> arrivalTick push d111
@@ -48,7 +55,7 @@ async function livePart() {
     const rec = (Game.data.villagers || []).find(function (r) { return r.id === X; });
     ok(!!rec, 'live: roster id resolves to a data.villagers record');
     if (rec) rec.dead = true;
-    ok(Game.npcIds().indexOf(X) >= 0, 'live: dead-flagged roster id is STILL an npcIds candidate (no dead filter)');
+    ok(Game.npcIds().indexOf(X) < 0, 'live: dead-flagged roster id is NOT an npcIds candidate (npcIds dead filter, sim-npcdeadfilter-a)');
     eq(Game.isMember(X), false, 'live: dead-flagged roster id isMember is false');
     v.trust = v.trust || {};
     v.trust[X] = 90;
@@ -133,7 +140,7 @@ function driverPart() {
     'code: nora_wilson is in the background_survivors applicant pool');
   const betrSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'betrayal.js'), 'utf8');
   const npcFn = betrSrc.slice(betrSrc.indexOf('npcIds() {'), betrSrc.indexOf('npcIds() {') + 200);
-  ok(npcFn.indexOf('dead') < 0, 'code: npcIds() has no dead filter (roster minus bearer only)');
+  ok(npcFn.indexOf('dead') >= 0, 'code: npcIds() has a dead filter (sim-npcdeadfilter-a flip; was: roster minus bearer only)');
 }
 
 (async () => {
