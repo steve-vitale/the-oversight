@@ -129,6 +129,13 @@ function fakeGame() {
   // Field fight.
   G.fieldFight('v9', { id: 'herald' });
   check('smoke fieldFight row recorded', t.fieldFights.length === 1 && t.fieldFights[0].outcome === 'vKill' && t.fieldFights[0].normalized === 'slain');
+  // Stray tbEnd: no live fight at entry must record no outcome
+  // row — it is counted separately, never an orphan outcome.
+  const tbBefore = t.tbFights.length;
+  G.tbfight = null;
+  G.tbEnd('fled');
+  check('smoke stray tbEnd records no outcome row', t.tbFights.length === tbBefore && t.tbEndNoop === 1,
+    'rows=' + t.tbFights.length + ' noop=' + t.tbEndNoop);
   uninstall();
   check('smoke uninstall restores startCombat', G.startCombat.toString().indexOf('tbfight') >= 0 && !G.startCombat.toString().includes('fightoutcome'));
   check('smoke no instrument errors', t.instrumentErrors.length === 0, t.instrumentErrors.join('; '));
