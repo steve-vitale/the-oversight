@@ -257,9 +257,24 @@ function creekwoodMarch(Game, hx, hy, st) {
         if (replans > 3) { rec.error = 'replan-cap-3'; break; }
         continue;
       }
-      // NO PATH: bridge point or advance.
+      // NO PATH: bridge point or advance, in this ORDER (fixed
+      // after the 97396 pre-pool smoke run bridged a USELESS third
+      // creek at (4,3): a sideways creek adjacent to home that lies
+      // on no route to the lair):
+      //   1. an adjacent creek STRICTLY closer to the lair than the
+      //      scholar -> bridge it (direct progress; covers the
+      //      first creek of a series and the single-creek wall);
+      //   2. else a strictly-closer reachable tile -> ADVANCE onto
+      //      it (this is the step onto a just-built bridge, and it
+      //      must outrank bridging a sideways creek);
+      //   3. else ANY adjacent creek -> bridge the closest-to-lair
+      //      one (last resort: a sideways bridge can still be the
+      //      only route when the approach runs around a corner);
+      //   4. else stuck, honestly.
+      const curD = Math.abs(here.x - hx) + Math.abs(here.y - hy);
       const creek = adjacentCreek(Game, here, hx, hy);
-      if (creek) {
+      let bridged = false;
+      if (creek && creek.d < curD) {
         let wood = woodNow(Game);
         if (wood < 4) wood = woodLeg(Game, rec);
         if (wood < 4) { rec.bridgeBlocked = { tile: { x: creek.x, y: creek.y }, wood: wood }; break; }
@@ -268,16 +283,16 @@ function creekwoodMarch(Game, hx, hy, st) {
         if (!ok) { rec.bridgeBlocked = { tile: { x: creek.x, y: creek.y }, wood: wood, buildFailed: true }; break; }
         rec.bridgesUsed.push({ x: creek.x, y: creek.y });
         st.bridgesBuilt.push({ x: creek.x, y: creek.y, day: gday(Game) });
-        continue; // re-plan over the new bridge
+        bridged = true;
       }
-      // No adjacent creek to bridge: ADVANCE to the reachable tile
-      // strictly closest (Manhattan) to the lair, then loop so the
-      // next creek becomes adjacent. Strictly-closer guarantees
-      // termination (no advance loop can revisit a distance).
+      if (bridged) continue; // re-plan over the new bridge
+      // ADVANCE to the reachable tile strictly closest (Manhattan)
+      // to the lair, then loop so the next creek becomes adjacent.
+      // Strictly-closer guarantees termination (no advance loop can
+      // revisit a distance).
       let flood = null;
       try { flood = bfsFlood(Game, here.x, here.y, hx, hy, refused); } catch (e) { flood = null; }
       if (!flood) { rec.stuck = 'flood-error'; break; }
-      const curD = Math.abs(here.x - hx) + Math.abs(here.y - hy);
       let best = null, bestD = curD;
       for (const k of Object.keys(flood.prev)) {
         const parts = k.split(',');
@@ -293,24 +308,39 @@ function creekwoodMarch(Game, hx, hy, st) {
           best = { x: tx, y: ty }; bestD = dd;
         }
       }
-      if (!best) { rec.stuck = 'no-advance'; break; }
-      const advPath = pathFromPrev(flood.prev, here.x, here.y, best.x, best.y);
-      if (!advPath) { rec.stuck = 'no-advance-path'; break; }
-      const w = walkPath(Game, advPath, st, rec);
-      for (const s of w.walked) walked.push(s);
-      const now2 = scholarTile(Game);
-      if (now2 && now2.x === hx && now2.y === hy) { rec.arrived = true; break; }
-      if (Game.over || Game.tbfight) break;
-      if (w.refusedHop) {
-        replans++;
-        if (replans > 3) { rec.error = 'replan-cap-3'; break; }
+      if (best) {
+        const advPath = pathFromPrev(flood.prev, here.x, here.y, best.x, best.y);
+        if (!advPath) { rec.stuck = 'no-advance-path'; break; }
+        const w = walkPath(Game, advPath, st, rec);
+        for (const s of w.walked) walked.push(s);
+        const now2 = scholarTile(Game);
+        if (now2 && now2.x === hx && now2.y === hy) { rec.arrived = true; break; }
+        if (Game.over || Game.tbfight) break;
+        if (w.refusedHop) {
+          replans++;
+          if (replans > 3) { rec.error = 'replan-cap-3'; break; }
+          continue;
+        }
+        if (now2 && now2.x === best.x && now2.y === best.y) {
+          rec.advances.push({ x: best.x, y: best.y });
+          continue;
+        }
+        rec.stuck = 'advance-shortfall';
+        break;
+      }
+      // No advance possible: last resort, bridge any adjacent creek.
+      if (creek) {
+        let wood = woodNow(Game);
+        if (wood < 4) wood = woodLeg(Game, rec);
+        if (wood < 4) { rec.bridgeBlocked = { tile: { x: creek.x, y: creek.y }, wood: wood }; break; }
+        let ok = false;
+        try { ok = !!Game.buildBridge(creek.x, creek.y); } catch (e) { ok = false; }
+        if (!ok) { rec.bridgeBlocked = { tile: { x: creek.x, y: creek.y }, wood: wood, buildFailed: true }; break; }
+        rec.bridgesUsed.push({ x: creek.x, y: creek.y });
+        st.bridgesBuilt.push({ x: creek.x, y: creek.y, day: gday(Game) });
         continue;
       }
-      if (now2 && now2.x === best.x && now2.y === best.y) {
-        rec.advances.push({ x: best.x, y: best.y });
-        continue;
-      }
-      rec.stuck = 'advance-shortfall';
+      rec.stuck = 'no-advance';
       break;
     }
     rec.path = walked;

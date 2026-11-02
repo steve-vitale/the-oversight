@@ -86,6 +86,19 @@ rule — quoted in the final evidence, not invented.
      memory, and swimmer lane are otherwise identical to
      creekdetour, so non-two-creek seeds should behave the same
      except where the wood leg fires.
+  AMENDMENT 2 (pre-pool, before any pooled candidate run — a
+  single-seed candidate smoke run on 97396 was run, saw the
+  defect, and is DISCARDED, not pooled): the smoke run bridged
+  a useless third creek at (4,3), a sideways creek adjacent to
+  home on no route to the lair, because the as-written rule
+  bridged the closest-to-lair adjacent creek whenever no path
+  existed. The ordered rule now is: (1) bridge an adjacent
+  creek strictly closer to the lair than the scholar; (2) else
+  advance to a strictly-closer reachable tile; (3) else bridge
+  any adjacent creek (last resort for corner approaches); (4)
+  else stuck honestly. The smoke run's arrival is NOT counted
+  toward GO — only post-fix runs are pooled, and the smoke
+  result is disclosed in the final evidence as a diagnostic.
 - No other policy difference: upkeep, fight, chores, go-home leg
   all delegate to the same base. The candidate consumes no RNG
   beyond what the base consumes (deterministic tie-breaks).

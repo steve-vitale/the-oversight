@@ -127,6 +127,31 @@ function openTile(type) { return { type: type || 'forest_floor' }; }
   eq('97396-shape: scholar ends on the lair', [G.map.px, G.map.py], [6, 4]);
 })();
 
+// --- 1b. 97396-shape + sideways creek: never bridge the useless one ---
+(function () {
+  // Same as case 1, plus (4,3) a needsBridge creek adjacent to home
+  // that lies on NO route to the lair (the pre-pool smoke run bridged
+  // it, spending 4 wood for nothing). The ordered rule must bridge
+  // only (5,4) and (6,4): (4,3) is farther from the lair than the
+  // scholar, so the advance onto (5,4) must outrank it.
+  const tiles = {
+    '4,4': { type: 'haven' }, '4,3': { type: 'creek', needsBridge: true },
+    '5,3': openTile(), '6,3': openTile(), '4,5': openTile(),
+    '5,5': openTile(), '6,5': openTile(),
+    '5,4': { type: 'creek', needsBridge: true },
+    '6,4': { type: 'creek', needsBridge: true },
+  };
+  const G = makeGame({ start: { x: 4, y: 4 }, tiles, wood: 0, pile: 8 });
+  const st = {};
+  const rec = CW.creekwoodMarch(G, 6, 4, st);
+  ok('sideways: arrives', rec.arrived === true);
+  eq('sideways: exactly the two route bridges', rec.bridgesUsed,
+    [{ x: 5, y: 4 }, { x: 6, y: 4 }]);
+  ok('sideways: (4,3) never bridged', G._tiles['4,3'].bridged !== true);
+  ok('sideways: exactly 8 logs spent (pile 8 -> 0)',
+    G.state.village.wood === 0);
+})();
+
 // --- 2. Wood-starved honest failure: pile empty ------------------------
 (function () {
   const tiles = {
