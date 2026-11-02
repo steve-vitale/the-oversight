@@ -173,12 +173,12 @@ G4. NO NEW ERROR CLASS — PASS. Driver errors empty on all
   seekReadmission error — untouched code paths). Reported
   here, not fixed — outside this arm's area, same profile
   the deadid arm recorded.
-- check.js --quick: run started; under heavy sibling load
-  it backgrounded past the foreground window (same stall
-  class the deadid arm saw). Its result is NOT claimed
-  here; if it lands green it will be appended, and if it
-  lands otherwise it will be reported to the coordinator.
-  The arm's verification rests on the proof test, the 16
+- check.js --quick: NOT green, NOT failed — the run was
+  killed by a 150s timeout while still printing progress
+  dots, no summary line (same stall class under heavy
+  sibling load the deadid arm saw; re-running it would
+  contend with siblings' jest/sims). Not claimed. The
+  arm's verification rests on the proof test, the 16
   judged sweep runs, and the neighbouring proof suites
   above, all of which ran clean.
 
