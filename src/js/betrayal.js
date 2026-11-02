@@ -4368,7 +4368,13 @@
       }
       if (cs.status === 'open' || cs.status === 'dormant') {
         // the accused player doesn't "call a moot" on themselves — they demand it
-        if (!(cs.status === 'open' && cs.trial && cs.trial.awaitingPlayerVote) && cs.playerRole !== 'accused') {
+        // MOOT-RECALL (journey-social r110 2026-11-02): a trial in session
+        // hides the choice on ANY status. The old guard only hid open +
+        // awaitingPlayerVote, so a case parked dormant by letItLie kept its
+        // trial and kept offering a moot that callMoot (idempotent on
+        // c.trial) could never re-convene — re-picks spoke "The moot is
+        // called" verbatim while the engine no-opped (r110v1 s31103 d13-15).
+        if (!cs.trial && cs.playerRole !== 'accused') {
           out.push({ id: 'betrayal:moot:' + cs.id, label: `Call a moot — put the ${cs.charge} of ${tname} to the village` });
         }
       }
@@ -4549,7 +4555,12 @@
       return finish('Said. At the moot. Let the fire decide what it means.', '(expose the bribery)');
     }
     if (act === 'moot') {
-      this.callMoot(parts[2]);
+      // MOOT-RECALL (journey-social r110): callMoot no-ops when a trial is
+      // already in session — never claim a fresh moot on a no-op. The menu
+      // hides the choice while cs.trial exists; this line is the backstop
+      // for any other path that reaches the handler with a live trial.
+      const called = this.callMoot(parts[2]);
+      if (!called) return finish('The moot is already called. The fire is built — the village is still deciding.', '"We settle this. Tonight."');
       return finish('The moot is called. The fire gets built up.', '"We settle this. Tonight."');
     }
     if (act === 'askheard') {
