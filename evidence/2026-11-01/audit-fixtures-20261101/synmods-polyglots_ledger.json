@@ -1,0 +1,54 @@
+[
+ {
+  "synergy": "polyglots_ledger",
+  "legs": {
+   "abilities": [
+    "translator",
+    "open_book"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "trust.gain_mult",
+    "op": "multiply",
+    "value": 1.25
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "trust.gain_mult": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "polyglots_ledger"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "trust.gain_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

@@ -1,0 +1,55 @@
+[
+ {
+  "synergy": "blood_iron",
+  "legs": {
+   "abilities": [
+    "blood_magic"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": [
+    "phase_blade"
+   ]
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "combat.strike_damage",
+    "value": 1.25
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "combat.strike_damage": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "blood_iron"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "combat.strike_damage": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

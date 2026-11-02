@@ -1,0 +1,54 @@
+[
+ {
+  "synergy": "trade_of_blows",
+  "legs": {
+   "abilities": [
+    "brawler_instinct",
+    "second_wind"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "combat.strike_damage",
+    "value": 1.25
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "combat.strike_damage": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "trade_of_blows"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "combat.strike_damage": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

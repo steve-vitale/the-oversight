@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "efficient_machine",
+  "legs": {
+   "abilities": [
+    "cold_blooded",
+    "hollow_bones"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "travel.cost_mult",
+    "value": 0.8
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "travel.cost_mult": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "efficient_machine"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "travel.cost_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

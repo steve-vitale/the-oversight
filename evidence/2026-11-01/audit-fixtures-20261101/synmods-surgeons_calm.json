@@ -1,0 +1,58 @@
+[
+ {
+  "synergy": "surgeons_calm",
+  "legs": {
+   "abilities": [
+    "triage",
+    "steady_hands"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "healing.amount",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "healing.amount": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "surgeons_calm"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "healing.amount": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

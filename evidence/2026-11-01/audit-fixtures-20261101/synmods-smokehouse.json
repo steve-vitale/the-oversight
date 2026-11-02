@@ -1,0 +1,67 @@
+[
+ {
+  "synergy": "smokehouse",
+  "legs": {
+   "abilities": [
+    "camp_cook"
+   ],
+   "techs": [
+    "smoke_preserving"
+   ],
+   "skills": [
+    "fishing"
+   ],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "cook.kcal",
+    "value": 1.25
+   },
+   {
+    "op": "multiply",
+    "target": "food.poison_chance",
+    "value": 0.5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "cook.kcal": "absent",
+     "food.poison_chance": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "smokehouse"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "cook.kcal": "present-in-mods-dump",
+     "food.poison_chance": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

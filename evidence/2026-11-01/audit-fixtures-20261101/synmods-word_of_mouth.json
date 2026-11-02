@@ -1,0 +1,62 @@
+[
+ {
+  "synergy": "word_of_mouth",
+  "legs": {
+   "abilities": [
+    "gossip_network",
+    "peacemaker"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "trust.gain_mult",
+    "value": 1.2
+   },
+   {
+    "op": "add",
+    "target": "drama.resolve_bonus",
+    "value": 8
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "trust.gain_mult": "absent",
+     "drama.resolve_bonus": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "word_of_mouth"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "trust.gain_mult": "present-in-mods-dump",
+     "drama.resolve_bonus": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

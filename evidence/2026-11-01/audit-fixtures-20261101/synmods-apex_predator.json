@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "apex_predator",
+  "legs": {
+   "abilities": [
+    "animal_ken"
+   ],
+   "synergyLegs": [
+    "clean_kill"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "combat.vs_beast_damage",
+    "op": "multiply",
+    "value": 1.3
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "combat.vs_beast_damage": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "apex_predator"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "combat.vs_beast_damage": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

@@ -1,0 +1,54 @@
+[
+ {
+  "synergy": "crimson_circuit",
+  "legs": {
+   "abilities": [
+    "blood_magic",
+    "leech"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "healing.amount",
+    "value": 1.3
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "healing.amount": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "crimson_circuit"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "healing.amount": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

@@ -1,0 +1,67 @@
+[
+ {
+  "synergy": "fear_itself",
+  "legs": {
+   "abilities": [
+    "fear_aura",
+    "intimidating_presence"
+   ],
+   "synergyLegs": [],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "social.intimidate",
+    "op": "add",
+    "value": 0.4
+   },
+   {
+    "target": "combat.enemy_morale",
+    "op": "multiply",
+    "value": 0.6
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "social.intimidate": "present-in-mods-dump",
+     "combat.enemy_morale": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "fear_itself"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7"
+    ],
+    "targets": {
+     "social.intimidate": "present-in-mods-dump",
+     "combat.enemy_morale": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

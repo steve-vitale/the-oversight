@@ -1,0 +1,64 @@
+[
+ {
+  "synergy": "talked_down",
+  "legs": {
+   "abilities": [
+    "silver_tongue",
+    "peacemaker"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "add",
+    "target": "drama.resolve_bonus",
+    "value": 6
+   },
+   {
+    "op": "multiply",
+    "target": "trust.gain_mult",
+    "value": 1.3
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "drama.resolve_bonus": "absent",
+     "trust.gain_mult": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "talked_down"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "drama.resolve_bonus": "present-in-mods-dump",
+     "trust.gain_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

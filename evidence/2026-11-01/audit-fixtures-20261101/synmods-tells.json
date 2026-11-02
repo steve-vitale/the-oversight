@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "tells",
+  "legs": {
+   "abilities": [
+    "lie_detector",
+    "open_book"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "trust.gain_mult",
+    "value": 1.25
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "trust.gain_mult": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "tells"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "trust.gain_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

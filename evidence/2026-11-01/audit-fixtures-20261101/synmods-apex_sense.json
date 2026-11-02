@@ -1,0 +1,62 @@
+[
+ {
+  "synergy": "apex_sense",
+  "legs": {
+   "abilities": [
+    "tracker",
+    "echo_location"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "add",
+    "target": "hunt.find_chance",
+    "value": 0.15
+   },
+   {
+    "op": "add",
+    "target": "hunt.success",
+    "value": 0.1
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "hunt.find_chance": "absent",
+     "hunt.success": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "apex_sense"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "hunt.find_chance": "present-in-mods-dump",
+     "hunt.success": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

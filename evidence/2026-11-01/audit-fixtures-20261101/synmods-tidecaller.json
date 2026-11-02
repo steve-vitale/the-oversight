@@ -1,0 +1,67 @@
+[
+ {
+  "synergy": "tidecaller",
+  "legs": {
+   "abilities": [
+    "water_breathing"
+   ],
+   "techs": [
+    "tide_reading"
+   ],
+   "skills": [
+    "fishing"
+   ],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "fishing.yield",
+    "value": 1.5
+   },
+   {
+    "op": "add",
+    "target": "fishing.rare_chance",
+    "value": 0.2
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "fishing.yield": "present-in-mods-dump",
+     "fishing.rare_chance": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "tidecaller"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "fishing.yield": "present-in-mods-dump",
+     "fishing.rare_chance": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

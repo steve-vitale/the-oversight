@@ -1,0 +1,57 @@
+[
+ {
+  "synergy": "stones_remember",
+  "legs": {
+   "abilities": [
+    "lie_detector"
+   ],
+   "techs": [
+    "ruin_reading"
+   ],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "ruin.find_mult",
+    "value": 1.5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "ruin.find_mult": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "stones_remember"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "ruin.find_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

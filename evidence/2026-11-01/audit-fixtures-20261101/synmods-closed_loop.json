@@ -1,0 +1,62 @@
+[
+ {
+  "synergy": "closed_loop",
+  "legs": {
+   "abilities": [
+    "camp_cook",
+    "compost_king"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "cook.kcal",
+    "value": 1.15
+   },
+   {
+    "op": "multiply",
+    "target": "forage.yield",
+    "value": 1.1
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "cook.kcal": "absent",
+     "forage.yield": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "closed_loop"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "cook.kcal": "present-in-mods-dump",
+     "forage.yield": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

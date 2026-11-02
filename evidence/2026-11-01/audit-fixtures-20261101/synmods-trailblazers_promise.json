@@ -1,0 +1,55 @@
+[
+ {
+  "synergy": "trailblazers_promise",
+  "legs": {
+   "abilities": [
+    "pathfinder"
+   ],
+   "techs": [
+    "trail_blazing"
+   ],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "travel.cost_mult",
+    "value": 0.75
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "travel.cost_mult": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "trailblazers_promise"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "travel.cost_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

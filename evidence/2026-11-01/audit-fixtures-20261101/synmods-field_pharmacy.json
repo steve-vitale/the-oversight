@@ -1,0 +1,54 @@
+[
+ {
+  "synergy": "field_pharmacy",
+  "legs": {
+   "abilities": [
+    "field_medicine",
+    "herbal_remedy"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "healing.amount",
+    "op": "multiply",
+    "value": 1.2
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "healing.amount": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "field_pharmacy"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "healing.amount": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

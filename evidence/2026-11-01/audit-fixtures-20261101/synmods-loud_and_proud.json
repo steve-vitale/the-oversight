@@ -1,0 +1,58 @@
+[
+ {
+  "synergy": "loud_and_proud",
+  "legs": {
+   "abilities": [
+    "loud_chewer",
+    "scream_cheese"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "combat.strike_damage",
+    "value": 1.2
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "combat.strike_damage": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "loud_and_proud"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "combat.strike_damage": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

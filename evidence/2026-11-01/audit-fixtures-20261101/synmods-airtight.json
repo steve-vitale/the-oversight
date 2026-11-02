@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "airtight",
+  "legs": {
+   "abilities": [
+    "lie_detector",
+    "evidence_board"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "drama.resolve_bonus",
+    "value": 1.4
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "drama.resolve_bonus": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "airtight"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "drama.resolve_bonus": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

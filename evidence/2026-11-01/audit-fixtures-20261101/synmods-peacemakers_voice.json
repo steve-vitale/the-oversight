@@ -1,0 +1,64 @@
+[
+ {
+  "synergy": "peacemakers_voice",
+  "legs": {
+   "abilities": [
+    "diplomat",
+    "mediator"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "trust.gain_mult",
+    "value": 1.5
+   },
+   {
+    "op": "add",
+    "target": "drama.resolve_bonus",
+    "value": 5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "trust.gain_mult": "absent",
+     "drama.resolve_bonus": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "peacemakers_voice"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "trust.gain_mult": "present-in-mods-dump",
+     "drama.resolve_bonus": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

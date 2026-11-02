@@ -1,0 +1,54 @@
+[
+ {
+  "synergy": "trails_end",
+  "legs": {
+   "abilities": [
+    "pathfinder",
+    "dead_aim"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "hunt.success",
+    "value": 1.35
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "hunt.success": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "trails_end"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "hunt.success": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

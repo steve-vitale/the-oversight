@@ -1,0 +1,63 @@
+[
+ {
+  "synergy": "one_person_army",
+  "legs": {
+   "abilities": [],
+   "synergyLegs": [
+    "unstoppable",
+    "fear_itself"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "combat.outnumbered_bonus",
+    "op": "add",
+    "value": 0.5
+   },
+   {
+    "target": "combat.solo_damage",
+    "op": "multiply",
+    "value": 1.4
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "targets": {
+     "combat.outnumbered_bonus": "absent",
+     "combat.solo_damage": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "one_person_army"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "combat.outnumbered_bonus": "present-in-mods-dump",
+     "combat.solo_damage": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

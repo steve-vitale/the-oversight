@@ -1,0 +1,67 @@
+[
+ {
+  "synergy": "read_the_patch",
+  "legs": {
+   "abilities": [
+    "green_thumb"
+   ],
+   "techs": [
+    "plant_tracking"
+   ],
+   "skills": [
+    "foraging"
+   ],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "add",
+    "target": "forage.rare_find_chance",
+    "value": 0.15
+   },
+   {
+    "op": "multiply",
+    "target": "forage.yield",
+    "value": 1.3
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "forage.rare_find_chance": "absent",
+     "forage.yield": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "read_the_patch"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "forage.rare_find_chance": "present-in-mods-dump",
+     "forage.yield": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

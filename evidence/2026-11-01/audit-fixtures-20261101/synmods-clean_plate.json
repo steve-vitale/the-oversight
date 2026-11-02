@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "clean_plate",
+  "legs": {
+   "abilities": [
+    "purify",
+    "iron_stomach"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "food.poison_chance",
+    "op": "multiply",
+    "value": 0.5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "food.poison_chance": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "clean_plate"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "food.poison_chance": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

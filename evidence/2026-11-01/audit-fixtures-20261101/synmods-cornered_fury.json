@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "cornered_fury",
+  "legs": {
+   "abilities": [
+    "adrenaline_control",
+    "cornered_rat"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "combat.strike_damage",
+    "op": "multiply",
+    "value": 1.25
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "combat.strike_damage": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "cornered_fury"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "combat.strike_damage": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

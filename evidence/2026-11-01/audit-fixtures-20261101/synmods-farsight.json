@@ -1,0 +1,64 @@
+[
+ {
+  "synergy": "farsight",
+  "legs": {
+   "abilities": [
+    "eagle_eye",
+    "pathfinder"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "add",
+    "target": "hunt.find_chance",
+    "value": 0.15
+   },
+   {
+    "op": "add",
+    "target": "forage.rare_find_chance",
+    "value": 0.1
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "hunt.find_chance": "absent",
+     "forage.rare_find_chance": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "farsight"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "hunt.find_chance": "present-in-mods-dump",
+     "forage.rare_find_chance": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

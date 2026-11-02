@@ -1,0 +1,67 @@
+[
+ {
+  "synergy": "clean_kill",
+  "legs": {
+   "abilities": [
+    "patient_aim",
+    "game_sense"
+   ],
+   "synergyLegs": [],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "hunt.first_shot_damage",
+    "op": "multiply",
+    "value": 2
+   },
+   {
+    "target": "hunt.meat_yield",
+    "op": "multiply",
+    "value": 1.5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "hunt.first_shot_damage": "absent",
+     "hunt.meat_yield": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "clean_kill"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7"
+    ],
+    "targets": {
+     "hunt.first_shot_damage": "present-in-mods-dump",
+     "hunt.meat_yield": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

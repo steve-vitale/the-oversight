@@ -1,0 +1,56 @@
+[
+ {
+  "synergy": "war_chest",
+  "legs": {
+   "abilities": [
+    "deep_reserves",
+    "blood_magic"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "food.bank_mult",
+    "value": 1.5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "food.bank_mult": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "war_chest"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "food.bank_mult": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

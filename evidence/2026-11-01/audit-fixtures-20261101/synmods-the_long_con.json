@@ -1,0 +1,58 @@
+[
+ {
+  "synergy": "the_long_con",
+  "legs": {
+   "abilities": [
+    "scarecrow",
+    "ambush"
+   ],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "op": "multiply",
+    "target": "hunt.trap_catch",
+    "value": 1.5
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "hunt.trap_catch": "present-in-mods-dump"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "the_long_con"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "targets": {
+     "hunt.trap_catch": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]

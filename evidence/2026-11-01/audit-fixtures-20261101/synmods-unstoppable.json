@@ -1,0 +1,57 @@
+[
+ {
+  "synergy": "unstoppable",
+  "legs": {
+   "abilities": [
+    "rage",
+    "iron_stomach"
+   ],
+   "synergyLegs": [],
+   "techs": [],
+   "skills": [],
+   "items": []
+  },
+  "modifiers": [
+   {
+    "target": "combat.damage_taken",
+    "op": "multiply",
+    "value": 0.7
+   }
+  ],
+  "without": {
+   "active": [],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "targets": {
+     "combat.damage_taken": "absent"
+    }
+   }
+  },
+  "with": {
+   "active": [
+    "unstoppable"
+   ],
+   "mods": {
+    "modsType": "array",
+    "modsKeys": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5"
+    ],
+    "targets": {
+     "combat.damage_taken": "present-in-mods-dump"
+    }
+   }
+  }
+ }
+]
