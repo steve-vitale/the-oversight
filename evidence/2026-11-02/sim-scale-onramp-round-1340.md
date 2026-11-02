@@ -225,11 +225,14 @@ deviation lines; baseline NOT rolled. No --update-baseline, no
   src/js, and both arm proof suites are green on merged master
   (32/32, 35/35). No stray tree changes from the terminated run
   (git status showed only this evidence file, untracked).
-- safe-commit index-clobber check: run immediately after the
-  coordinator commit — commit verified via git show --stat (single
-  evidence file) and git status --short (clean) before closeout; any
-  clobber would have been repaired via HEAD-blob cacheinfo and noted
-  here (none hit).
+- safe-commit index-clobber check: the staged-deletion variant HIT
+  the coordinator commit (main index showed the just-committed file
+  as staged-deleted + untracked; the commit itself was correct: 1
+  file, 253 insertions). Repaired via HEAD-blob cacheinfo
+  (blob d7356c33363d00b3a7f2ac246b56646c3e80e9bb); after repair,
+  git status --short empty, git diff HEAD empty, hash-object matches
+  HEAD blob. This addendum line records the hit; the repair itself
+  touched only the main index, not the commit.
 
 ## Next blanks, in order
 
