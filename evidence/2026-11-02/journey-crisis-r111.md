@@ -443,3 +443,32 @@ attributable to r111 beyond the standing six.
   pending); lately content is reported only as observations:
   steered lately attempts on 3 defenders hit a closed gate;
   unsteered lately fired 0 times.
+
+## Closeout — rebase, post-rebase proof, merge
+- Sibling landings mid-run: Lane A landing r72 (c0cf1d401) and
+  Loop B 1505Z coordinator evidence (c9b20ac2a) landed on master
+  after this branch was cut. Per the loop rules the branch was
+  rebased onto c9b20ac2a before merging.
+- Rebase quirk, same class as the documented 2026-10-30
+  stop-at-pick: the rebase stopped at the single pick with the
+  pick in BOTH the done and todo lists, worktree clean, the
+  pick's changes unapplied (fix absent, new files absent).
+  Recovery per the documented recipe: verified tree clean +
+  pick unapplied, then `git rebase --continue` — it sailed
+  through. Rebased commit 7776da714; its tree delta vs the
+  original 02eda39ac is exactly the sibling landings (my 5 files
+  identical in both), no sibling file clobbered.
+- Post-rebase proof re-run: proof test 3/3 again on the rebased
+  tree; node --check clean on driver/analyzer. Post-rebase seed
+  11101 driver run (r111-panel/postrebase/): exit 0, horizon,
+  favorNoLongerCalls [], instrumentErrors [], 0 Sam Wilson
+  lines — and BYTE-IDENTICAL to the after-fix run. Sibling r72's
+  changes do not move this seed's trajectory at all; the fix's
+  effect reproduces exactly on the new base. (It differs from
+  the pre-rebase panel JSON, as it must: the panel measured the
+  unfixed game.)
+- Merge: `git merge --ff-only journey2-crisis-r111` in the main
+  tree, fast-forwarding master to 7776da714; main tree clean
+  after, rotation 6 -> 7 written and re-read, lock deleted,
+  worktree released. Merged locally, pending ship — no version
+  bump, no push, no live verification (the ship loop owns those).
