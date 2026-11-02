@@ -293,4 +293,42 @@ The baseline is NOT rolled on this run's numbers.
   the new r71 scripts — no stray modifications, nothing to
   discard.
 
+## Post-rebase control quad (not a re-score)
+At closeout, master had moved from the branch base (95ca9266d) to
+b82b298ca. Unlike r67/r68, the range DOES hold game code: one
+conversation.js change (Lane B succession r108, recap-label
+asked-favor-first fix, +25 lines, ask_favor label path only). Per
+the body, the branch was rebased cleanly onto b82b298ca (2/2
+picks, no conflicts, no stop-at-pick quirk), and the quad was
+re-run on the new base as a CONTROL (same seeds, same driver,
+separate evidence dir journey-scale-r71-rebase) — the scored
+measurement stays the pre-rebase quad above.
+Control result: **all four seeds byte-identical in outcome**
+(same end day, pop, pantry, rank, seat, arc, abilities,
+courtLines) and **all 8 transcripts byte-identical** to the
+scored quad; gossip analyzer identical (1 pair / 0 fallback);
+gossip proof 11/11 and goal proof 7/7 green post-rebase. The
+recap-label fix moves nothing on this band — the scored quad
+stands unchanged on the new base, proven by re-execution rather
+than by a zero-game-code argument.
+
 ## Landing (filled at closeout)
+Master at worktree creation: 95ca9266d. At closeout master had
+moved to b82b298ca (Loop B succession r108 + sim-creekwood-a +
+Loop 1155Z evidence — one conversation.js label fix in the range,
+see the control section above). The branch was rebased cleanly
+onto b82b298ca (2/2 picks, no conflicts), proofs re-run green
+after the rebase (gossip 11/11, goal 7/7, gossip analyzer on the
+control quad identical 1 pair / 0 fallback), and the control quad
+above proves the measured quad stands unchanged on the new base.
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 3f44adac6 (prereg + driver/analyzer, rebased from
+8a4f4bd82), 19588e6d7 (quad + analysis + run note, rebased from
+af316f6f6f), plus this landing section as the final branch
+commit, merged by a second fast-forward. Worktree released +
+branch deleted at closeout; final main-tree status clean.
+Rotation file written 3→0 at closeout and verified by reading it
+back. Playtest lock deleted at closeout. Heartbeat loop stopped
+at closeout.
