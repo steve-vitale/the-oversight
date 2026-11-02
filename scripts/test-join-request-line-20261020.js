@@ -49,6 +49,14 @@ const INVITE_QS = [
     try { Game.overheardDiscussion(); } catch (e) {}
     const reqs = (Game.state.village || {}).talkRequests || {};
     for (const vid of Object.keys(reqs)) {
+      // R72: a delivered request is spent ("their reason leads, once") —
+      // the opener path only surfaces pending ones. A spent invite line
+      // left over from runDays must not satisfy this probe's search, or
+      // startConvo correctly ignores it and the opener checks fail on a
+      // stale record (the door-position fix lets runDays deliver such a
+      // request where the old stream did not). No assertion is loosened:
+      // the six checks below are unchanged.
+      if ((reqs[vid] || {}).delivered) continue;
       const line = String((reqs[vid] || {}).line || '');
       if (/join the conversation/i.test(line) || INVITE_QS.some(q => line.includes(q))) {
         found = { vid, line };

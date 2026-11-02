@@ -1563,6 +1563,22 @@
     // deadlines, and the journal all work. One open commitment per villager.
     convoFavorCommit(vid, favor) {
       if (!favor) return { ok: false };
+      // R72 (journey-landing r72): a presence-requiring favor cannot be
+      // promised to an away villager. The keep path for forage_help,
+      // water_haul and stay_close needs the partner present (home at dawn,
+      // on the tile, by the fire); a villager out on expedition cannot
+      // meet it, so the promise would rot on the player for the partner's
+      // own absence (701 Arun: away days 2-14, promised day 10, the single
+      // meet dawn day 11 spent away, -15 trust). Mirrors the
+      // unkeepable-promise refusal in makePromise below: do not create an
+      // obligation the keeper cannot keep. The line is spoken by the
+      // dlg:commit handler (it prefers fc.line on failure). Presence is
+      // prerequisite to every kind-specific gate, so this runs first.
+      if ((favor.kind === 'forage_help' || favor.kind === 'water_haul' || favor.kind === 'stay_close') &&
+          (this.state.village || {}).away?.[vid]) {
+        return { ok: false, away: true,
+          line: `"Wait — I'm out on the road. I can't ask you to meet me at dawn when I'm miles away. Find me when I'm back, and we'll set it then."` };
+      }
       if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
         const gate=this.companyFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
       }

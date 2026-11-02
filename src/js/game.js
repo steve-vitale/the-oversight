@@ -12162,6 +12162,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const vid of this.travelingWith()) this.npcSetInside(vid, false);
         this.placePartyAtPlayer();
       } catch (e) {}
+      // R72: same class as enterBuilding below — exiting must render the
+      // people outside, or their positions stay null until a step.
+      try { this.ensureVillagerPositions(); } catch (e) {}
       this.say('You push through the doors into open air. Haven grounds — tents, a fire pit, worn paths. The world is that way.');
       // MONSTERS WAIT (Steve 2026-10-05): if you fled through a door, they're
       // still out here. They didn't leave. Going back out re-engages.
@@ -12297,6 +12300,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const vid of this.travelingWith()) this.npcSetInside(vid, true);
         this.placePartyAtPlayer();
       } catch (e) {}
+      // R72 (journey-landing r72): entering must render the people inside.
+      // travelTo/microMove/pathStep all refresh grid positions, but the door
+      // did not — so inside villagers kept pos=null after entering, and
+      // every micro-adjacency check (favor starts, tile Talk) failed until
+      // the player happened to step. 701 Jorge days 12-13: home at dawn,
+      // same side of the door, start blocked on a null position.
+      try { this.ensureVillagerPositions(); } catch (e) {}
       this.say('You step into the Haven hall.');
       if (!doorFlee) this.save();
       return true;

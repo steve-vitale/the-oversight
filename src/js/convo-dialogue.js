@@ -547,9 +547,13 @@
                 ? w.def.commitBeat.call(this, vid)
                 : w.favor.commitLine;
             } else {
-              // Already carrying an open commitment — heard, not promised.
+              // A failed commit explains itself when it can (R72: the away
+              // guard returns its own line; the stay_close gate already
+              // returned one and it was swallowed here). Otherwise the
+              // open-commitment reading: heard, not promised.
               const openTask = ((this.state.village.promises || {})[vid] || {}).favorTask;
-              beat = openTask
+              beat = (fc && fc.line) ? fc.line
+                : openTask
                 ? `"Wait — you already gave me your word on ${openTask}. Keep that first."`
                 : '"Wait — you already gave your word somewhere. Keep that first."';
               committed = false;
