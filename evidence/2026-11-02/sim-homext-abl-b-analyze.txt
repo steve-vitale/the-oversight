@@ -1,0 +1,121 @@
+PER-SEED TABLE
+seed | base away/ep | out away/ep | full away/ep | base haul | out haul | full haul | full/out | out homeV | full homeV | out vetoes(silent) | full vetoes(silent) | out passes | full lateral | falseOpens(full)
+62801 | 1/0 | 1/0 | 1/0 | 204.2 | 204.2 | 204.2 | 1 | 0 | 0 | 2(0) | 2(0) | 0 | 0 | []
+62802 | 0/0 | 0/0 | 0/0 | 181.7 | 181.7 | 181.7 | 1 | 0 | 0 | 2(1) | 2(1) | 0 | 0 | []
+62803 | 0/0 | 0/0 | 0/0 | 0 | 0 | 0 | ? | 0 | 0 | 0(0) | 0(0) | 0 | 0 | []
+62804 | 6/1 | 2/0 | 2/0 | 211.1 | 230.8 | 230.8 | 1 | 0 | 0 | 3(0) | 3(0) | 0 | 6 | []
+62805 | 0/0 | 0/0 | 0/0 | 414.8 | 414.8 | 414.8 | 1 | 0 | 0 | 0(0) | 0(0) | 0 | 21 | []
+62806 | 0/0 | 0/0 | 0/0 | 268.3 | 268.3 | 268.3 | 1 | 0 | 0 | 0(0) | 0(0) | 0 | 0 | []
+62807 | 3/1 | 0/0 | 0/0 | 214.5 | 409.2 | 409.2 | 1 | 0 | 0 | 20(18) | 20(18) | 0 | 1 | []
+62808 | 16/2 | 0/0 | 0/0 | 120.2 | 362 | 362 | 1 | 0 | 0 | 68(66) | 68(66) | 0 | 0 | []
+BAND: baseline away=26 outward away=3 full away=3 baseline episodes=4 outward episodes=0 full episodes=0 baseline homewardEpisodes=3 preventedFull=3 {"62801":0,"62802":0,"62803":0,"62804":1,"62805":0,"62806":0,"62807":1,"62808":1} preventedOutward=3 {"62801":0,"62802":0,"62803":0,"62804":1,"62805":0,"62806":0,"62807":1,"62808":1} extensionOnly=0 {"62801":0,"62802":0,"62803":0,"62804":0,"62805":0,"62806":0,"62807":0,"62808":0} vetoCreated=[] outward homewardVetoes=0 (must be 0: OK) full homewardVetoes=0 full vetoOriginPass=0 full vetoOriginFail=0 outward outwardOnlyPasses=0 baseline median=30 outward median=30 full median=30 baseline starvSeeds=0 outward starvSeeds=0 full starvSeeds=0 full falseOpens=0 full silentVetoes=85 full lateralPasses=28 falseClosesV1 full=[{"seed":62801,"loopDay":29,"hop":"4,4->4,1"},{"seed":62801,"loopDay":29,"hop":"4,4->5,2"},{"seed":62802,"loopDay":8,"hop":"4,0->2,0"},{"seed":62802,"loopDay":8,"hop":"4,0->2,0"}] outward=[{"seed":62801,"loopDay":29,"hop":"4,4->4,1"},{"seed":62801,"loopDay":29,"hop":"4,4->5,2"},{"seed":62802,"loopDay":8,"hop":"4,0->2,0"},{"seed":62802,"loopDay":8,"hop":"4,0->2,0"}] falseClosesV2 full=[] outward=[]
+TRAJECTORY IDENTITY full-vs-outward: [{"seed":62801,"identical":true,"divergence":null},{"seed":62802,"identical":true,"divergence":null},{"seed":62803,"identical":true,"divergence":null},{"seed":62804,"identical":true,"divergence":null},{"seed":62805,"identical":true,"divergence":null},{"seed":62806,"identical":true,"divergence":null},{"seed":62807,"identical":true,"divergence":null},{"seed":62808,"identical":true,"divergence":null}]
+BARS: {
+  "primaryExtensionOnly": {
+    "value": 0,
+    "threshold": ">= 1",
+    "pass": false
+  },
+  "B1AwayTotal": {
+    "outward": 3,
+    "full": 3,
+    "pass": true
+  },
+  "B2Worsened": {
+    "worsened": [],
+    "unpairedStrandDeaths": [],
+    "pass": true
+  },
+  "B4FailedTripShare": {
+    "outward": 0.508,
+    "full": 0.508,
+    "pass": true
+  },
+  "B5perSeedVsOutward": {
+    "perSeedHaul": [
+      {
+        "seed": 62801,
+        "outward": 204.2,
+        "full": 204.2,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62802,
+        "outward": 181.7,
+        "full": 181.7,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62803,
+        "outward": 0,
+        "full": 0,
+        "ratio": null,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62804,
+        "outward": 230.8,
+        "full": 230.8,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62805,
+        "outward": 414.8,
+        "full": 414.8,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62806,
+        "outward": 268.3,
+        "full": 268.3,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62807,
+        "outward": 409.2,
+        "full": 409.2,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      },
+      {
+        "seed": 62808,
+        "outward": 362,
+        "full": 362,
+        "ratio": 1,
+        "fullHomewardVetoes": 0,
+        "pass": true
+      }
+    ],
+    "threshold": "every seed >= 1.00x its own outward-only haul",
+    "pass": true
+  },
+  "B6Survival": {
+    "outwardMedian": 30,
+    "fullMedian": 30,
+    "outwardStarvSeeds": 0,
+    "fullStarvSeeds": 0,
+    "threshold": "median >= outward AND starv seeds <= outward + 2",
+    "pass": true
+  },
+  "vetoCreatedPockets": {
+    "vetoCreated": [],
+    "pass": true
+  },
+  "B7FalseOpens": {
+    "fullFalseOpens": 0,
+    "pass": true
+  }
+}
+VERDICT: NO-GO
