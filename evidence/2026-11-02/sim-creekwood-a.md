@@ -44,10 +44,11 @@ raw lines).
   tile-shares with 0 calls) -> candidate 8 calls / 3 fights
   (97474, 97599 as before, plus 97396 FOUGHT day 93, HERALD
   SLAIN). The new contact is the whole point of this arm.
-- CONFIRM: see §Confirm — the confirm case rule is stated
-  below BEFORE confirm sims are pooled; the screen ran 300
-  fresh seeds and the confirm verdict is recorded there once
-  its runs complete. The pilot GO stands regardless.
+- CONFIRM: NOT RUN TO BAR — 0 cases banked (see §Confirm).
+  The confirm bar (bridge-assisted arrival on >= 50% of
+  12–16 two-creek-wall cases) is UNJUDGED, not failed: no
+  candidate confirm runs were pooled because no seed met the
+  case rule. The pilot GO stands regardless.
 
 ## The answer, in plain words
 
@@ -294,22 +295,68 @@ the home row is also a needsBridge creek) vs single-creek
 lair (lair itself a creek, approach open). Confirm bar
 (prereg): bridge-assisted arrival on >= 50% of confirm
 cases, same guardrail (median end-day within 20d AND
-village-lost <= baseline). Screening: fresh seeds
-97690–97989 (300, past creekdetour's screened range),
-map-gen-only nomination (Tier 2C: NB creek at BOTH (5,4)
-and (6,4); Tier L: (6,4) NB only; Tier M: (5,4) NB only),
-full baseline runs on nominations in tier-priority order
-(2C, then L, then M — disclosed deviation from numeric
-order, justified: the confirm targets two-creek walls and
-2C is the only geometry that can yield them with lair
-(6,4)). Pilot seeds are NEVER pooled into the confirm.
-Mining note: among creekdetour's 70 existing detour
-records, exactly ONE seed satisfies the baseline half of
-the case rule (97396 itself) — fresh screening is not
-optional, it is the only source of confirm cases.
+village-lost <= baseline). Screening (as run, disclosed deviations from the plan):
+fresh range 97690–97989 was TARGETED (300 seeds, past
+creekdetour's screened range) but only PARTIALLY screened
+— 59 seeds across the three sub-ranges — because map-gen
+screening ran ~30s/seed under sibling load (single-seed
+probe: 3.4s quiet) and the full 300 would have taken
+~2.5h. The three parallel screen loops were stopped
+deliberately for run bounds (no orphan processes left);
+the remaining ~241 seeds in the range are UNSCREENED and
+are the first work of the follow-up screening arm, with
+the tool (scripts/creekwood-geometry-20261102.js) and the
+partial ledger committed. Nomination was map-gen-only
+(Tier 2C: NB creek at BOTH (5,4) and (6,4); Tier L:
+(6,4) NB only; Tier M: (5,4) NB only); full baseline
+(creekdetour-arm) runs on nominations in tier-priority
+order (2C, then L, then M — disclosed deviation from
+numeric order, justified: the confirm targets two-creek
+walls and 2C is the only geometry that can yield them
+with lair (6,4)). Pilot seeds are NEVER pooled into the
+confirm. Mining note: among creekdetour's 70 existing
+detour records, exactly ONE seed satisfies the baseline
+half of the case rule (97396 itself) — fresh screening is
+not optional, it is the only source of confirm cases.
 
-CONFIRM RESULTS: (filled after the screen + confirm runs
-complete; the screen is running at the time of this draft).
+CONFIRM RESULTS (final for this run):
+- Screened: 59 fresh seeds (97690–97704, 97790–97808,
+  97890–97898 approx., from the three partial sub-ranges;
+  exact per-seed rows in confirm-geometry-ledger.json).
+- Nominations: 10 — 2C: [97898]; L: [97690, 97701, 97793,
+  97800, 97806, 97808]; M: [97795, 97807, 97894].
+- Baseline full runs on all 10 (records cw-base-s<seed>.json
+  in perseed-creekwood-a/): 7 NEVER LOCATED the herald
+  (lair None, 0 marches: 97898, 97690, 97701, 97793, 97800,
+  97795, 97894) and 3 ARRIVED (97806 swimmer 11/11,
+  97808 detour 13/14, 97807 detour 1/1). BridgeBlocked
+  days: 0 on all 10.
+- Cases banked: 0. The case rule requires lair heard + 0
+  arrivals + >= 1 bridgeBlocked day + lair tile a
+  needsBridge creek; no nomination satisfies it.
+- Confirm verdict: NOT RUN TO BAR (bar needs 12–16 cases;
+  0 banked). No candidate confirm runs were pooled, and
+  no confirm rate is claimed. This is a screening-yield
+  finding, not a bridge failure: the pilot's bridge leg
+  fired 1/1 on its wall seed, and the confirm simply has
+  no seeds to judge it on yet.
+- Yield lessons for the follow-up arm: (a) corridor-creek
+  geometry does NOT predict a lair — 7/10 nominations
+  never heard one, including the sole 2C seed (97898),
+  whose double-creek corridor holds no lair at all; (b)
+  observed lair-creek case yield is ~1 per 300+ screened
+  seeds (97396 in creekdetour's 300; 0 in this run's 59),
+  so banking 12 cases likely needs ~3,000+ seeds screened
+  — a dedicated screening run, not a pilot-run side job;
+  (c) a better nomination would need lair prediction,
+  which map-gen alone cannot give (lair hearing depends on
+  run dynamics, not just the board); the follow-up arm
+  should screen wide and cheap before spending full runs,
+  and should consider whether the confirm bar itself
+  (12 two-creek walls) is the right shape for a
+  one-in-hundreds wall type — that question goes under
+  "metric review" for the NEXT run, it does not change
+  this run's verdict.
 
 ## Balanced panel (§15 — limitation reported)
 
@@ -360,12 +407,14 @@ are reported from them.
 - 3bdcad94 — instrumented before/after driver.
 - 3292fd6a3 — bridge-order fix + sideways proof case (47/47)
   + prereg amendment 2.
-- (Evidence + per-seed records + geometry ledger + confirm
-  records: this file's commit, after confirm runs complete.)
+- d23a6942 — evidence draft (pilot GO) + geometry screen
+  script + pilot per-seed records (16 files).
+- (Evidence final + geometry ledger + confirm baseline
+  records: this file's commit.)
 
-Report: ready to merge locally, pending ship — AFTER the
-confirm section is filled. Do NOT push, do NOT bump
-versions, do NOT verify live (ship loop owns deploys).
+Report: ready to merge locally, pending ship. Do NOT push,
+do NOT bump versions, do NOT verify live (ship loop owns
+deploys).
 No [needs-eyes] (no feel/combat/UI change; policy and
 instrument only — the bridge-walk narration blank is a
 voice-queue note, not a change in this arm).
