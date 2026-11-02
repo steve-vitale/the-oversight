@@ -6439,12 +6439,20 @@
         const r = this.speakBack(vid);
         done(r.line, r.youSaid);
       } else if (choiceId === 'invite_party') {
+        // INVITE-ASK (journey-succession r112): the dialogue layer may
+        // already have spoken this choice ("Want to come with us?") —
+        // read-and-clear first so a throw below cannot leave a stale flag
+        // suppressing a later direct ask. When spoken, the handler says
+        // nothing more (a null youSaid pushes no transcript line); the
+        // direct menu path still speaks the handler's own line.
+        const alreadySpoken = !!c._inviteSpoken;
+        c._inviteSpoken = false;
         const r = (this.inviteToParty && this.inviteToParty(vid)) || { ok: false, msg: '...' };
         // SPENT (journey-succession 2026-10-12): the invitation was issued
         // and answered — accept or decline. Pestering it until they flip-flop
         // ("I work alone... Fine.") reads as no memory of their own stance.
         this.convoSpendChoice(vid, 'invite_party');
-        done(r.msg || '...', '"Want to come with me?"');
+        done(r.msg || '...', alreadySpoken ? null : '"Want to come with me?"');
       } else if (choiceId.indexOf('rumor:tgt:') === 0) {
         // RUMOR STEP 1: who are we talking about. The listener is in on
         // the secret — they become the rumor's first hearer. (Fix

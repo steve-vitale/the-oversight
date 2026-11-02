@@ -789,6 +789,12 @@
       if (dlg === 'invite') {
         // "Want to come with us?" — route to party invite.
         c.transcript.push({ who: 'you', text: '"Want to come with us?"' });
+        // INVITE-ASK (journey-succession r112): the choice is already
+        // spoken above — flag it so the handler does not speak over it
+        // with its own "Want to come with me?" (the panel's us-then-me
+        // double line: two consecutive YOU lines contradicting each
+        // other). The flag is read-and-cleared by the handler.
+        c._inviteSpoken = true;
         return origTurn.call(this, vid, 'invite_party');
       }
     }
