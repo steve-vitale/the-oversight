@@ -1,0 +1,246 @@
+{
+ "meta": {
+  "side": "armed-diag",
+  "policy": "competent-stepwalk-b",
+  "days": 30,
+  "seeds": [
+   61901,
+   61407
+  ],
+  "env": {
+   "DEPOSITGATE": "0",
+   "COMPETENT_STANDING_HOME": "unset",
+   "COMPETENT_ROUTE_AROUND": "unset",
+   "COMPETENT_TRIPHOME_ROUTE_AROUND": "unset"
+  }
+ },
+ "wall": {
+  "seeds": 2,
+  "national": 0,
+  "table": 0,
+  "wins": 0,
+  "medianSurvival": 30,
+  "maxWave": 2,
+  "waveCounts": {
+   "2": 2
+  }
+ },
+ "playerDeathCensus": {
+  "the wild": 2
+ },
+ "wildDeaths": [
+  {
+   "seed": 61901,
+   "death": {
+    "day": 10,
+    "kind": "villager",
+    "who": "gen_phep6cl",
+    "cause": "the wild",
+    "player": true
+   },
+   "fedAtHome": true,
+   "preDayEnd": {
+    "d": 9,
+    "tile": [
+     4,
+     4
+    ],
+    "away": false,
+    "kcal": 1099,
+    "frac": 0.458,
+    "pantryKcal": 21700,
+    "scholarKey": "gen_phep6cl",
+    "health": 100
+   },
+   "class": "WILD-FIGHT",
+   "reason": "tbEnd wild-fight loss: monster fighter(s), no hostile fighter",
+   "rawArg": "the wild",
+   "stackCaller": "at Object.tbEnd (src/js/game.js:44907:24)",
+   "stack": [
+    "scripts/sweep-wilddeath-b.js:152:19)",
+    "at Object.tbEnd (src/js/game.js:44907:24)",
+    "at Game.tbEnd (src/js/party.js:1466:21)",
+    "at Game.tbEnd (src/js/party-formal.js:881:25)",
+    "at G.tbEnd (src/js/alienPlayers.js:3102:31)",
+    "at G.tbEnd (src/js/justice.js:1295:23)",
+    "at Object.endWrapped (src/js/titans.js:1233:25)",
+    "at Object.wrapped (src/js/finale-campaign.js:427:20)",
+    "at Object.tableTrialWrapped (src/js/table-feared.js:227:24)",
+    "at Object.w (src/js/network-campaign.js:221:22)"
+   ],
+   "snap": {
+    "day": 10,
+    "scholarKey": "gen_phep6cl",
+    "tile": [
+     4,
+     4
+    ],
+    "tileType": "haven",
+    "departed": true,
+    "insideHaven": false,
+    "atHaven": true,
+    "kcal": 1200,
+    "kcalCap": 2400,
+    "health": 0,
+    "villageHealth": null,
+    "sick": null,
+    "fight": {
+     "live": true,
+     "betrayal": false,
+     "tableTrial": false,
+     "coalitionArena": false,
+     "arenaContest": false,
+     "fighters": [
+      {
+       "kind": "player",
+       "villagerId": null,
+       "monsterId": null,
+       "name": "You",
+       "alive": false,
+       "hp": -51.394444444444446
+      },
+      {
+       "kind": "monster",
+       "villagerId": null,
+       "monsterId": "gallowdeer",
+       "name": "Highbeam Deer",
+       "alive": true,
+       "hp": 129
+      }
+     ]
+    }
+   },
+   "fallen": [
+    {
+     "villagerId": "gen_phep6cl",
+     "day": 10,
+     "cause": "the wild",
+     "name": "Aaliyah"
+    }
+   ],
+   "corpses": [
+    {
+     "villagerId": "gen_phep6cl",
+     "dayDied": 10,
+     "cause": "the wild",
+     "mx": 4,
+     "my": 4
+    }
+   ],
+   "deathLine": {
+    "d": 10,
+    "line": "🕯️ Aaliyah Levy is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+   },
+   "locationMisleading": true,
+   "hurtTail": []
+  },
+  {
+   "seed": 61407,
+   "death": {
+    "day": 26,
+    "kind": "villager",
+    "who": "gen_ujjzkbf",
+    "cause": "the wild",
+    "player": true
+   },
+   "fedAtHome": true,
+   "preDayEnd": {
+    "d": 25,
+    "tile": [
+     4,
+     4
+    ],
+    "away": false,
+    "kcal": 2050,
+    "frac": 0.854,
+    "pantryKcal": 8928,
+    "scholarKey": "gen_ujjzkbf",
+    "health": 100
+   },
+   "class": "WILD-FIGHT",
+   "reason": "tbEnd wild-fight loss: monster fighter(s), no hostile fighter",
+   "rawArg": "the wild",
+   "stackCaller": "at Object.tbEnd (src/js/game.js:44907:24)",
+   "stack": [
+    "scripts/sweep-wilddeath-b.js:152:19)",
+    "at Object.tbEnd (src/js/game.js:44907:24)",
+    "at Game.tbEnd (src/js/party.js:1466:21)",
+    "at Game.tbEnd (src/js/party-formal.js:881:25)",
+    "at G.tbEnd (src/js/alienPlayers.js:3102:31)",
+    "at G.tbEnd (src/js/justice.js:1295:23)",
+    "at Object.endWrapped (src/js/titans.js:1233:25)",
+    "at Object.wrapped (src/js/finale-campaign.js:427:20)",
+    "at Object.tableTrialWrapped (src/js/table-feared.js:227:24)",
+    "at Object.w (src/js/network-campaign.js:221:22)"
+   ],
+   "snap": {
+    "day": 26,
+    "scholarKey": "gen_ujjzkbf",
+    "tile": [
+     4,
+     4
+    ],
+    "tileType": "haven",
+    "departed": true,
+    "insideHaven": false,
+    "atHaven": true,
+    "kcal": 2351,
+    "kcalCap": 2400,
+    "health": 0,
+    "villageHealth": null,
+    "sick": null,
+    "fight": {
+     "live": true,
+     "betrayal": false,
+     "tableTrial": false,
+     "coalitionArena": false,
+     "arenaContest": false,
+     "fighters": [
+      {
+       "kind": "player",
+       "villagerId": null,
+       "monsterId": null,
+       "name": "You",
+       "alive": false,
+       "hp": -23
+      },
+      {
+       "kind": "monster",
+       "villagerId": null,
+       "monsterId": "gallowdeer",
+       "name": "Highbeam Deer",
+       "alive": true,
+       "hp": 104
+      }
+     ]
+    }
+   },
+   "fallen": [
+    {
+     "villagerId": "gen_ujjzkbf",
+     "day": 26,
+     "cause": "the wild",
+     "name": "Hilda"
+    }
+   ],
+   "corpses": [
+    {
+     "villagerId": "gen_ujjzkbf",
+     "dayDied": 26,
+     "cause": "the wild",
+     "mx": 4,
+     "my": 4
+    }
+   ],
+   "deathLine": {
+    "d": 26,
+    "line": "🕯️ Hilda Banerjee is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+   },
+   "locationMisleading": true,
+   "hurtTail": []
+  }
+ ],
+ "fedAtHomeWildCount": 2,
+ "attributedCount": 2,
+ "verdict": "DIAG-GO"
+}

@@ -52,9 +52,15 @@ function classifyWildDeath(row, death) {
   const fallen = (row.fallen || []).filter(f => f.villagerId === death.who && f.day === death.day);
   const corpses = (row.corpses || []).filter(c => c.villagerId === death.who && c.dayDied === death.day);
   const deathLine = cap ? (cap.sayTail || []).filter(s => /is dead/.test(s.line)).slice(-1)[0] || null : null;
+  // The death line itself is said INSIDE the original playerDeath call,
+  // after the pre-death snapshot — the wrapper's post-call tail carries
+  // it; the row's full say-lines are a fallback for the death day.
+  const postDeathLine = cap ? (cap.postSayTail || []).filter(s => /is dead —/.test(s.line)).slice(-1)[0]
+    || (cap.postSayTail || []).filter(s => /is dead/.test(s.line)).slice(-1)[0] || null : null;
+  const rowDeathLine = (row.sayLines || []).filter(s => s.d === death.day && /is dead/.test(s.line)).slice(-1)[0] || null;
   if (!cap) {
     return { seed: row.seed, death, fedAtHome, preDayEnd: pre, class: 'UNRESOLVED',
-      reason: 'no playerDeath wrapper capture for this tele death (tele-only evidence)', fallen, corpses, deathLine };
+      reason: 'no playerDeath wrapper capture for this tele death (tele-only evidence)', fallen, corpses, deathLine: rowDeathLine };
   }
   const snap = cap.snap || {};
   const fight = snap.fight || {};
@@ -76,7 +82,7 @@ function classifyWildDeath(row, death) {
   }
   return { seed: row.seed, death, fedAtHome, preDayEnd: pre, class: cls, reason,
     rawArg: cap.rawArg, stackCaller: stackCaller(cap.stack), stack: cap.stack,
-    snap, fallen, corpses, deathLine,
+    snap, fallen, corpses, deathLine: (postDeathLine || rowDeathLine || deathLine),
     locationMisleading: (cls === 'WILD-FIGHT' && atHaven),
     hurtTail: cap.hurtTail || [] };
 }

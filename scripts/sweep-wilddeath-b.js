@@ -145,8 +145,7 @@ async function oneRun(seed, days) {
     } catch (e) {}
     return r;
   };
-  const oPD = Game.playerDeath;
-  if (typeof oPD === 'function') Game.playerDeath = function (cause) {
+  const oPD = Game.playerDeath;  if (typeof oPD === 'function') Game.playerDeath = function (cause) {
     let snap = null, stack = null;
     try { snap = deathSnapshot(Game); } catch (e) { snap = { error: String(e.message || e) }; }
     try {
@@ -158,11 +157,19 @@ async function oneRun(seed, days) {
       deathCaptures.push({
         rawArg: (cause === undefined ? null : cause),
         stack, snap,
-        sayTail: sayLines.slice(-30),
+        sayTail: sayLines.slice(-80),
         hurtTail: hurtTrail.slice(-20),
       });
     } catch (e) {}
-    return oPD.apply(this, arguments);
+    const pdRet = oPD.apply(this, arguments);
+    try {
+      // The death line ("X is dead — ...") is said INSIDE the original
+      // call, after the pre-death snapshot above — capture the post-call
+      // tail so the sense-test reads the actual death narration.
+      const lastCap = deathCaptures[deathCaptures.length - 1];
+      if (lastCap) lastCap.postSayTail = sayLines.slice(-20);
+    } catch (e) {}
+    return pdRet;
   };
 
   const policy = Object.assign({}, POLICY);
@@ -208,6 +215,7 @@ async function oneRun(seed, days) {
     rosterEnd: (() => { try { return ((Game.state || {}).village || {}).roster.length; } catch (e) { return 0; } })(),
     pantryEnd: Math.round(pantryKcal(Game)),
     deaths, dayEnds, deathCaptures, regCaptures, hurtTrail, fallen, corpses,
+    sayLines: sayLines.slice(-200),
     ms,
   };
 }

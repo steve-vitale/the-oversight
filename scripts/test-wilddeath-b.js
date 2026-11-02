@@ -80,6 +80,17 @@ check('analyzer verdict: no fed-at-home wild death is NO-INSTANCE', () => {
   const row = baseRow({ deaths: [{ day: 8, kind: 'villager', who: 'gen_phep6cl', cause: 'starvation', player: true }] });
   assert.strictEqual(analyze({ meta: {}, rows: [row] }).verdict, 'NO-INSTANCE');
 });
+check('analyzer prefers the post-call death line for the sense test', () => {
+  const cap = wildFightCap();
+  cap.postSayTail = [
+    { d: 10, line: '🕯️ Aaliyah is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.' },
+    { d: 10, line: "The village's quarrel was with Aaliyah — and Aaliyah is dead. The sentence doesn't cross the grave." },
+  ];
+  const row = baseRow({ deathCaptures: [cap] });
+  const c = classifyWildDeath(row, row.deaths[0]);
+  assert.strictEqual(c.class, 'WILD-FIGHT');
+  assert.ok(c.deathLine && /Aaliyah is dead — the wild/.test(c.deathLine.line));
+});
 check('driver + analyzer parse clean (node --check)', () => {
   for (const f of ['sweep-wilddeath-b.js', 'analyze-wilddeath-b.js']) {
     execSync('node --check ' + path.join(__dirname, f), { stdio: 'pipe' });
