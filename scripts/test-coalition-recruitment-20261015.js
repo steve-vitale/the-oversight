@@ -22,6 +22,10 @@ const T = K.reporter('coalition-recruitment');
   const links = G.hierarchyState(); links.length = 0;
   for (const v of villages) links.push({ primary: 'haven', subordinate: v.id, status: 'active', trust: 90, arrears: 0, theirSpeaker: { id: v.roster.find(r => r.age >= 18).id, name: 'Speaker' } });
   const st = G.state.titans = { omens: { finale: { stage: 2 }, herald: { stage: 2 } }, musters: {}, slain: {}, cast: null };
+  // titanghost B1: a located titan is a PLACED titan — place both
+  // titans this test calls against.
+  G.spawnWorldMonster('finale', 7, 4, { titan: true });
+  G.spawnWorldMonster('herald', 2, 4, { titan: true });
   // Preserve the newer Muse caller's actual wounded-person health.
   const wounded = villages[2].roster[5]; wounded.health = 61;
   const identity = a => a.villageId + ':' + a.vid;

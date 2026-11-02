@@ -88,6 +88,26 @@
     return st.omens[titanId];
   }
 
+  // Presence (titanghost 2026-11-02, Layer 1): a titan counts as present
+  // while its monster — or, for campaign titans, any campaign node —
+  // still stands in the world. A field kill removes the monster without
+  // setting slain or resolving the omen, so presence, not omen stage,
+  // is what stops the ghost: escalation, the call, and the commit all
+  // refuse an absent titan instead of billing for it.
+  function titanMonsterPresent(titanId) {
+    var def = titanDefs()[titanId];
+    if (!def) return false;
+    var ids = [def.monster];
+    if (def.campaign && Array.isArray(def.campaign.nodes)) ids = ids.concat(def.campaign.nodes);
+    try {
+      var mons = Game.worldMonsters ? Game.worldMonsters() : [];
+      for (var i = 0; i < mons.length; i++) {
+        if (mons[i] && ids.indexOf(mons[i].id) >= 0) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
   // ---------- engagement-outcome record (2026-10-21, backlog #784) ----------
   // One structured record per titan muster engagement, appended to
   // state.titans.outcomes. Outcomes: 'refused' (hard gate, no fight),
@@ -271,6 +291,7 @@
     var o = st.omens[titanId];
     if (!o || o.stage < 2 || st.slain[titanId]) return;
     if (o.resolved) return;
+    if (!titanMonsterPresent(titanId)) return;
     // every 5 days unanswered, it strikes
     if ((day - o.day) % 5 !== 0) return;
     var def = titanDefs()[titanId];
@@ -433,6 +454,10 @@
   function soundTitanCall(titanId) {
     var def = titanDefs()[titanId];
     if (!def) return null;
+    if (!titanMonsterPresent(titanId)) {
+      Game.say('There is nothing located to march against — the sky is quiet. You commit no one into the dark.');
+      return null;
+    }
     var st = titanState();
     var muster = st.musters[titanId] = st.musters[titanId] || { allies: [], haven: [], day: (Game.state.scholar || {}).day || 0, outfitted: {} };
     titanNormalizeMuster(muster);
@@ -566,7 +591,8 @@
       return null;
     }
     var o = titanOmen(titanId);
-    if (!o || o.stage < 2) {
+    if (!o || o.stage < 2 || !titanMonsterPresent(titanId)) {
+      if (st.pendingCommit && st.pendingCommit.indexOf(titanId + ':') === 0) st.pendingCommit = null;
       Game.say('There is nothing located to march against — the sky is quiet. You commit no one into the dark.');
       return null;
     }

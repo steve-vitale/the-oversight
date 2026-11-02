@@ -166,6 +166,10 @@ Game.state.titans.musters = {};
 Game._otherVillage('ashford').roster.forEach(function (x) { x.alive = true; });
 said.length = 0;
 const cinTrustBefore = linkCin.trust;
+// titanghost B1: the call refuses an absent titan — place the Herald
+// this section calls against (removed again before section (f), whose
+// stage-0 check asserts no Herald stands in the world).
+Game.spawnWorldMonster('herald', 7, 4, { titan: true });
 const muster = Game.soundTitanCall('herald');
 const cinFighters = (muster.allies || []).filter(a => a.villageId === 'cinder');
 check('low-trust ally refuses — sends nobody', cinFighters.length === 0);
@@ -176,6 +180,7 @@ check('high-trust ally answers with faces', (muster.allies || []).filter(a => a.
 
 // (f) knowledge-gated until exposure
 console.log('(f) knowledge gate');
+{ const _hg = (Game.worldMonsters() || []).find(function (m) { return m && m.id === 'herald'; }); if (_hg) Game.removeWorldMonster(_hg); }
 Game.state.titans = null;
 Game.unlockedWave = () => 3; // too early: wave 4 gate
 Game.state.scholar.day = 40;

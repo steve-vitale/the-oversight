@@ -88,7 +88,7 @@ Game.audioEvent = () => {};
 const said = [], sysSaid = [];
 Game.say = (t) => { said.push(String(t)); };
 Game.sysSay = (t) => { sysSaid.push(String(t)); };
-Game.map = { px: 4, py: 4 };
+Game.map = { px: 4, py: 4, tiles: Array.from({ length: 9 }, () => Array(9).fill('grass')) };
 // open-ground detail grid: the real tbCanOccupy path works without a full map
 Game.genDetail = () => Array.from({ length: 9 }, () => Array(9).fill(null));
 Game.cellProps = () => ({});
@@ -112,6 +112,9 @@ if (hasTitans) {
   Game.titanCast();
   // located titan, no muster yet
   Game.state.titans.omens['herald'] = { stage: 2, day: 40, warned: {} };
+  // titanghost B1: a located titan is a PLACED titan — the commit
+  // refuses an absent one, so the fixture places the Herald it commits.
+  Game.spawnWorldMonster('herald', 7, 4, { titan: true });
 
   // UI PATH: the commit button is in the player-facing self-bar actions
   const acts = Game.titanSelfActions();

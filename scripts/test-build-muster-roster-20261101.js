@@ -54,6 +54,8 @@ async function runSeed(seed) {
   ];
   const linksBefore = m.links.length;
   let muster;
+  // titanghost B1: a located titan is a PLACED titan — place the Herald.
+  Game.spawnWorldMonster('herald', 7, 4, { titan: true });
   await quietLog(async () => { muster = Game.soundTitanCall('herald'); });
   assert.ok(muster, 'seed ' + seed + ': soundTitanCall must return a muster');
   const per = {};

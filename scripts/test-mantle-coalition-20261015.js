@@ -9,6 +9,8 @@ const K = require('./godpath/lib'), T = K.reporter('mantle-coalition');
     links.push({ primary: 'haven', subordinate: town.id, status: 'active', trust: 90, arrears: 0, theirSpeaker: { id: town.roster.find(p => p.age >= 18).id, name: 'Speaker' } });
   }
   G.state.titans = { omens: { herald: { stage: 2 } }, musters: {}, slain: {}, cast: null };
+  // titanghost B1: a located titan is a PLACED titan — place the Herald.
+  G.spawnWorldMonster('herald', 7, 4, { titan: true });
   const m = G.soundTitanCall('herald'); m.allies = m.allies.slice(0, 7);
   const home = m.allies[0].villageId, n = m.allies.filter(a => a.villageId === home).length;
   G.state.scholar.inventory = Array.from({ length: n }, () => ({ itemId: 'stone_knife', units: 1 }));
