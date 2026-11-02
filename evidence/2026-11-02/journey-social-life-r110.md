@@ -269,12 +269,23 @@ rolled: writing zeros into it would destroy the reference.
 
 ## Closeout
 
-- Commits: (to be filled at merge — driver + proof + fix +
-  evidence, via safe-commit.sh in the worktree).
-- Merged locally, pending ship. No bump, no push, no live
-  check — the ship loop owns those.
-- Rotation-b: 5 → 6 (verified after writing).
-- Lock file deleted at closeout.
+- Commit adb8017c1 (rebased from d29d89aa0 after Lane A
+  landed 479313589 mid-run; the rebase hit the documented
+  stop-at-pick quirk — pick in both done and todo lists,
+  tree clean, pick unapplied — and sailed through on
+  `git rebase --continue`): driver + proof + betrayal.js fix
+  + all evidence, via safe-commit.sh in the worktree.
+  Safe-commit's index clobber hit again (committed files
+  shown staged-as-deleted, files byte-identical to HEAD);
+  repaired via per-file `update-index --cacheinfo` from
+  HEAD blobs, verified status clean + diff HEAD empty +
+  hash-object match before rebasing.
+- Merged locally (master adb8017c1), pending ship. No bump,
+  no push, no live check — the ship loop owns those.
+- Rotation-b: 5 → 6, verified by reading the file after
+  writing (see closeout verification in the run record).
+- Lock file deleted at closeout; worktree released and
+  removed; main tree verified clean.
 - Driver wart, noted not fixed: the pilot log's elapsed
   "ms=-33229761s" is a cosmetic driver bug (the game mocks
   Date during play; the driver computes elapsed from
