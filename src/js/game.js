@@ -18958,7 +18958,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const day = (this.state.scholar || {}).day || 0;
       if (v.lastExperimentDay === day) return; // one experiment per day
       if (!present) return; // the story waits until you're there to witness it
-      // target: an unknown plant lump in the camp stash, else unknown raw meat
+      // target: an unknown plant lump in the camp stash, else unknown raw meat.
+      // The meat scans run even when a plant is found: a plant test is the
+      // default, but flesh rotting by tomorrow outranks a plant queue (see
+      // the urgency step below). Scans are pure reads, so running them
+      // changes nothing on plant-first nights.
       const stash = (this.state.scholar || {}).prepStash || [];
       let lump = null, pid = null;
       for (const cont of stash) {
@@ -18970,7 +18974,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (best) { lump = cont; pid = best; break; }
       }
       let meatIt = null, meatMid = null;
-      if (!pid) {
+      {
         const inv = (this.state.scholar || {}).inventory || [];
         for (const it of inv) {
           if (it && it.foodKind === 'meat' && it.edible === false) {
@@ -18984,7 +18988,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // cautious protocol must also see pantry flesh. Same honest protocol,
       // same attribution — the meat is at the fire, and someone tries it.
       // Inventory targets keep priority (what you carried in, you watch).
-      if (!pid && !meatIt) {
+      if (!meatIt) {
         const pan = (this.state.village || {}).pantry || [];
         for (const it of pan) {
           if (it && it.foodKind === 'meat' && it.edible === false) {
@@ -18993,6 +18997,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       }
+      // (meat-channel 2026-11-02 — counter flesh): cleaned monster meat
+      // carried home lands on the prep counter (cleaned counts as
+      // unprocessed, so homecoming stages it here, not in the pantry) —
+      // and the beat above only ever scanned the counter for plant lumps,
+      // never for meat, so counter flesh sat untested until it rotted.
+      // Counter flesh at the fire gets the same cautious protocol, last
+      // in the meat priority (inventory > pantry > counter), so existing
+      // targets keep their order. Strict guards: only cleaned-or-cooked
+      // monster flesh — a raw carcass on the counter (an animal's, e.g.
+      // deer) is not monster flesh to test, and monsterFoodSafe is
+      // codex-only (false for animals), so an unguarded scan would
+      // mis-test it.
+      if (!meatIt) {
+        for (const it of stash) {
+          if (it && it.foodKind === 'meat' && it.edible === false
+              && (it.foodState === 'cleaned' || it.foodState === 'cooked')) {
+            const mid = String(it.plantId || '').replace(/^meat_/, '');
+            if (mid && this.monsterMeatGated(mid) && !this.monsterFoodSafe(mid)) { meatIt = it; meatMid = mid; break; }
+          }
+        }
+      }
+      // (meat-channel 2026-11-02 — use it or lose it): if the meat
+      // candidate found above would spoil by tomorrow, it jumps the
+      // plant queue; otherwise plant-first order is unchanged. Clockless
+      // flesh (no spoilDay) is never urgent.
+      if (pid && meatIt && meatIt.spoilDay !== undefined && meatIt.spoilDay !== null
+          && meatIt.spoilDay <= day + 1) { lump = null; pid = null; }
       if (!pid && !meatIt) return;
       // tester: someone at haven with food in their background, else anyone
       // (a little randomness so it's not always the same person).
