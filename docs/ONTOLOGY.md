@@ -662,6 +662,16 @@ Joint foraging outings for a promised pantry run: travel together, forage the sa
 
 **Consumes:** state.village, state.scholar, doAction('forage'), depositPantryPieces(v, item, pieceKcal), checkPromises(kind, vid, opts), travelingWith(), placePartyAtPlayer()
 
+### favor-outing (`favor-outing.js`)
+Dawn attempts for promised joint outings. A forage_help or
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### favor-water (`favor-water.js`)
 Joint dawn creek favors: temporary companion, real bottled cargo and home cistern settlement.
 
