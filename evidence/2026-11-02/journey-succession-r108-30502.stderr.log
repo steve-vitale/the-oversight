@@ -1,0 +1,50 @@
+
+ORGANIC DEATH d8: Vincent -> Wael, topTrust=[{"id":"Amara","t":32},{"id":"Jessica","t":27},{"id":"Mona","t":26},{"id":"Sigrun","t":24}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=4 inheritedPlants=0 keptSkills=2 inheritedSkills=0 succTrustPre=28 succTrustPost=20
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d8 (organic (phase A)): Vincent -> Wael | passed=true lin=true mo=true trust=20 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Jessica (refused=false)
+  CONVO d+3 with Amara (refused=false)
+  BOND-CONVO d+3 with Petra (depth=0 v=16 refused=false)
+  CONVO d+7 with Jessica (refused=false)
+  CONVO d+7 with Amara (refused=false)
+  CONVO d+14 with Petra (refused=false)
+  CONVO d+14 with Booker (refused=false)
+
+SECOND-KILL d+20: Amara -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Amara -> Booker passed=true lin=true mo=true
+  CONVO d+30 with Mona (refused=false)
+  CONVO d+30 with Sigrun (refused=false)
+
+THIRD-KILL d+20 since second death: Booker -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Booker -> Owen passed=true lin=true mo=true
+  CONVO d+45 with Mona (refused=false)
+  CONVO d+45 with Sigrun (refused=false)
+
+FOURTH-KILL d+11 since third death: Owen -> ? (scripted r79 chain probe)
+FOURTH DEATH d+11 since third death: Owen -> Sigrun passed=true lin=true mo=true
+  CONVO d+53 with Petra (refused=false)
+  CONVO d+53 with Mona (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Sigrun -> ? (scripted r108 chain probe)
+FIFTH DEATH d+10 since fourth death: Sigrun -> Mona passed=true lin=true mo=true
+  CONVO d+64 with Nora (refused=false)
+  CONVO d+64 with Petra (refused=false)
+
+FUNERAL: deathBeat=1 recover=1 vouch=0 (eligible=0) echo=4 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=4 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":63,"offerLines":49,"codexPlantsDelta":33,"codexSkillsDelta":26,"codexAbilitiesDelta":17,"xpDelta":87,"any":true} pantry 23250->52830
+TRUST-DIALS: office 20->86 (+66, climb) | villageMean 21.8->63.5 (+41.7, climb) | ge60 0->4 | movers>=5: [{"id":"Grace","from":13,"to":90,"delta":77},{"id":"Nora","from":17,"to":90,"delta":73},{"id":"Petra","from":21,"to":90,"delta":69},{"id":"Tom","from":20,"to":29,"delta":9}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=77 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":20,"officeLast":86,"officeDelta":66,"officeClass":"climb","villageMantle":21.8,"villageLast":63.5,"villageDelta":41.7,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":4,"movers":[{"id":"Grace","from":13,"to":90,"delta":77},{"id":"Nora","from":17,"to":90,"delta":73},{"id":"Petra","from":21,"to":90,"delta":69},{"id":"Tom","from":20,"to":29,"delta":9}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":6,"trustMoves":3} callCheck={"dailyMoveDays":8,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=6, excludedLoot=1))
+E7/R47: e7={"trustMoves":3,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":0,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":6,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":8}

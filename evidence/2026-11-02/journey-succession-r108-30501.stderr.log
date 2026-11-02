@@ -1,0 +1,49 @@
+
+ORGANIC DEATH d26: Ashley -> Rocco, topTrust=[{"id":"Tanisha","t":90},{"id":"Nikolai","t":90},{"id":"Hassan","t":60},{"id":"Mario","t":58}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=17 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=90 succTrustPost=55
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d26 (organic (phase A)): Ashley -> Rocco | passed=true lin=true mo=true trust=55 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Tanisha (refused=false)
+  CONVO d+3 with Nikolai (refused=false)
+  CONVO d+7 with Tanisha (refused=false)
+  CONVO d+7 with Mario (refused=false)
+  CONVO d+14 with Tanisha (refused=false)
+  CONVO d+14 with Mario (refused=false)
+
+SECOND-KILL d+20: Rocco -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Rocco -> Tanisha passed=true lin=true mo=true
+  CONVO d+30 with Mario (refused=false)
+  CONVO d+30 with Vasilisa (refused=false)
+
+THIRD-KILL d+20 since second death: Tanisha -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Tanisha -> Nikolai passed=true lin=true mo=true
+  CONVO d+45 with Mario (refused=false)
+  CONVO d+45 with Hassan (refused=false)
+
+FOURTH-KILL d+10 since third death: Nikolai -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Nikolai -> Mario passed=true lin=true mo=true
+  CONVO d+53 with Hassan (refused=false)
+  CONVO d+53 with Nachak (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Mario -> ? (scripted r108 chain probe)
+FIFTH DEATH d+10 since fourth death: Mario -> Aria passed=true lin=true mo=true
+  CONVO d+64 with Hassan (refused=false)
+  CONVO d+64 with Nachak (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=3) echo=5 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":43,"offerLines":79,"codexPlantsDelta":25,"codexSkillsDelta":13,"codexAbilitiesDelta":15,"xpDelta":34,"any":true} pantry 17842->49788
+TRUST-DIALS: office 55->88 (+33, climb) | villageMean 56->68.3 (+12.3, climb) | ge60 3->5 | movers>=5: [{"id":"Ursula","from":37,"to":90,"delta":53},{"id":"Nachak","from":47,"to":90,"delta":43},{"id":"Vasilisa","from":51,"to":90,"delta":39},{"id":"Nina","from":38,"to":75,"delta":37},{"id":"Hassan","from":60,"to":91,"delta":31}]
+DEED-LEDGER: calls=5 summary={"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=96 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+70) t2=true(deedCalls=5) trustVerdict={"readable":true,"officeMantle":55,"officeLast":88,"officeDelta":33,"officeClass":"climb","villageMantle":56,"villageLast":68.3,"villageDelta":12.3,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":5,"movers":[{"id":"Ursula","from":37,"to":90,"delta":53},{"id":"Nachak","from":47,"to":90,"delta":43},{"id":"Vasilisa","from":51,"to":90,"delta":39},{"id":"Nina","from":38,"to":75,"delta":37},{"id":"Hassan","from":60,"to":91,"delta":31}]}
+E6/CALLCHECK: e6={"callMoves":12,"withCensus":12,"chainHandoffs":4,"trustMoves":8} callCheck={"dailyMoveDays":11,"callMoveDays":11,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=7, excludedLoot=1))
+E7/R47: e7={"trustMoves":8,"soloOffice":5,"soloOfficeDeltas":[1,1,1,1,1],"soloBearerDeltaExact":[1,1,1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":7,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":11}

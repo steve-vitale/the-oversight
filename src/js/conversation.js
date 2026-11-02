@@ -1457,6 +1457,31 @@
           // need the favor beat itself is built from, so the label can
           // never promise a need that isn't there. Null need falls
           // through to the wid map, never to an invented label.
+          // ASK_FAVOR NAMES THE ASKED FAVOR FIRST (journey-succession r108
+          // 2026-11-02): the live scan below names the villager's CURRENT
+          // top need, which can differ from the favor this thread actually
+          // asked — follow-up openers name the old favor while the scan has
+          // moved on (probe: wound ask, hunger since, recap said "food
+          // share", a need never spoken in either conversation). When the
+          // sitting's favor (or the ledger's open favor) is still live,
+          // name it — the thread IS that ask. The live scan stays as the
+          // fallback for threads with no open favor, so a label can still
+          // never promise a need that isn't there.
+          if (wid === 'ask_favor') {
+            try {
+              const cc = this.convoGet(vid) || {};
+              const fav = (cc.want && cc.want.favor) || (typeof this.convoGetFavor === 'function' ? this.convoGetFavor(vid) : null);
+              if (fav && (fav.state === 'asked' || fav.state === 'promised') && typeof this.convoFavorNeedLive === 'function' && this.convoFavorNeedLive(fav)) {
+                const askedLabels = {
+                  food_share: 'that food share', forage_help: 'that foraging help',
+                  sick_help: 'that sickness help', heal_help: 'that wound care',
+                  water_haul: 'that water haul', watch_shift: 'that watch shift',
+                  stay_close: 'that night together', snare_mend: 'that snare mending',
+                };
+                if (fav.kind && askedLabels[fav.kind]) return askedLabels[fav.kind];
+              }
+            } catch (e) {}
+          }
           if (wid === 'ask_favor' && typeof this.convoFindFavorNeed === 'function') {
             const need = this.convoFindFavorNeed(vid);
             const needLabels = {

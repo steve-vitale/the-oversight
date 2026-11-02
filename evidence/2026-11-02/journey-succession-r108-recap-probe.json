@@ -1,0 +1,45 @@
+{
+ "seed": 39998,
+ "phase1": [
+  {
+   "villager": "Emmett",
+   "askedInConvo": true,
+   "afterEnd": {
+    "kind": "heal_help",
+    "state": "asked"
+   },
+   "opener": "NPC: \"This cut — I can't clean it properly one-handed. Will you help me clean it?\""
+  }
+ ],
+ "phase2": {
+  "villager": "Emmett",
+  "health": 50,
+  "hunger": 90,
+  "favorKind": "heal_help",
+  "favorState": "asked",
+  "favorId": "favor-gen_wyc2gxw-3-1",
+  "liveScan": "food_share",
+  "favorNeedLive": true
+ },
+ "phase3": [
+  {
+   "attempt": 0,
+   "opener": [
+    "NPC: \"About this wound — still need hands. Are you in?\""
+   ],
+   "wantInfo": {
+    "id": "ask_favor",
+    "fromSeed": true,
+    "seedFavorId": "favor-gen_wyc2gxw-3-1",
+    "favorIdMatches": true
+   },
+   "recapLine": "YOU: \"Wait — what were we talking about?\" | NPC: \"We started on that wound care, then got onto what's been happening.\"",
+   "favorNow": {
+    "kind": "heal_help",
+    "state": "asked"
+   }
+  }
+ ],
+ "verdict": "CLOSED",
+ "reason": "follow-up opener + recap both name the asked favor (wound care)"
+}
