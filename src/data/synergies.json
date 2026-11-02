@@ -1175,7 +1175,13 @@
       ]
     ],
     "minLevel": 2,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "op": "add",
+        "target": "hunt.find_chance",
+        "value": 0.15
+      }
+    ],
     "discovery": "The blood tells you where it's going. You just have to listen.",
     "discovery_method": {
       "type": "simultaneous",
