@@ -1,0 +1,17 @@
+DAY1-IDENTITY seed=69601 PASS
+INTEGRITY seed=69601 shape=C OK established=false day6Start={"x":2,"y":8} shadowAttemptSimOk=true shadowDayEndOk=true armedDayEndOk=true armedHomewardVetoes=0
+DAY1-IDENTITY seed=69602 PASS
+INTEGRITY seed=69602 shape=C OK established=false day6Start={"x":2,"y":8} shadowAttemptSimOk=true shadowDayEndOk=true armedDayEndOk=true armedHomewardVetoes=0
+DAY1-IDENTITY seed=69603 PASS
+INTEGRITY seed=69603 shape=C OK established=false day6Start={"x":3,"y":8} shadowAttemptSimOk=absent shadowDayEndOk=true armedDayEndOk=true armedHomewardVetoes=0
+DAY1-IDENTITY seed=69604 PASS
+INTEGRITY seed=69604 shape=C FAIL reason=start-at-haven sStart={"x":2,"y":8} aStart={"x":4,"y":4} sDay5After={"x":2,"y":8} aDay5After={"x":2,"y":8} sAttempt={"hop":"2,8>4,8","attempted":true,"moved":true,"reason":"ok"} aAttempt={"hop":"2,8>4,8","attempted":false,"moved":false,"reason":"not-offered"}
+DAY1-IDENTITY seed=69605 PASS
+INTEGRITY seed=69605 shape=C OK established=false day6Start={"x":3,"y":8} shadowAttemptSimOk=absent shadowDayEndOk=true armedDayEndOk=true armedHomewardVetoes=0
+DAY1-IDENTITY seed=69606 PASS
+INTEGRITY seed=69606 shape=C FAIL reason=attempt-not-offered sStart={"x":4,"y":5} aStart={"x":4,"y":5} sDay5After={"x":4,"y":5} aDay5After={"x":4,"y":5} sAttempt={"hop":"2,8>4,8","attempted":false,"moved":false,"reason":"not-offered"} aAttempt={"hop":"2,8>4,8","attempted":false,"moved":false,"reason":"not-offered"}
+DAY1-IDENTITY seed=69607 PASS
+INTEGRITY seed=69607 shape=C FAIL reason=start-at-haven sStart={"x":4,"y":4} aStart={"x":4,"y":4} sDay5After={"x":4,"y":4} aDay5After={"x":4,"y":4} sAttempt={"hop":"2,8>4,8","attempted":false,"moved":false,"reason":"not-offered"} aAttempt={"hop":"2,8>4,8","attempted":false,"moved":false,"reason":"not-offered"}
+DAY1-IDENTITY seed=69608 PASS
+INTEGRITY seed=69608 shape=C OK established=false day6Start={"x":2,"y":8} shadowAttemptSimOk=true shadowDayEndOk=true armedDayEndOk=true armedHomewardVetoes=0
+SUMMARY shape=C seeds=8 day1Pass=8 day1Fail=0 integrityOk=5 integrityFail=3 established=0 failures=69604:C:start-at-haven 69606:C:attempt-not-offered 69607:C:start-at-haven
