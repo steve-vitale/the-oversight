@@ -16,6 +16,9 @@
 //     council, call, and commit buttons in the camp self bar (app.js)
 //   - titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness
 //   - titanMusterState(titanId) / titanMusterReady(titanId)
+//   - titanCallReadiness(titanId) -> the faithful sum-readiness
+//     projection: who the call would bring if sounded now
+//     (refusal-respecting, on-demand only, momentary — see below)
 //   - titanHavenBlades(muster)
 //   - titanPlacementTile(offset) -> a free, non-village tile inside the travel map
 //   - titanLeaveArena() -> map a large battlefield back to its world node
@@ -420,6 +423,130 @@
     return faces;
   }
 
+  // ---------- sum-readiness projection (2026-11-02, sim-sumdeploy-a) ----------
+
+  // Game.titanCallReadiness(titanId): the faithful sum-readiness rule,
+  // available at the decision point. Replicates soundTitanCall's
+  // per-link math exactly — a refusing link (trust < 25, opinion <
+  // -10, or arrears > 0) contributes 0; otherwise quota is 6 iff trust
+  // >= trustedAt AND opinion >= trustedOpinion, else 2; contribution
+  // is min(quota - already, freeAdults), where freeAdults counts the
+  // link's roster AFTER the call's own roster generation — counted
+  // through titanAlliedFaces itself, so the faces counted here are
+  // the faces a sound would send. HavenProj = havenValid + min(3 -
+  // havenValid, titanVolunteers().length). READY iff alliesProj +
+  // havenProj >= def.minAllies. The naive sum (refusals ignored) is
+  // returned as naiveTotal for evidence only, NEVER the verdict.
+  // LAZY: this function is called ONLY on explicit demand — from
+  // titanWarCouncil when the player sits the council, or directly by
+  // a sim policy/test at its decision moment. It is never called
+  // from dawn ticks, link ticks, upkeep, or self-bar rendering, so
+  // no background path consumes RNG or mutates state through it.
+  // At the explicit moment it DOES generate rosters for rosterless
+  // fires (the call's own contact — a rosterless fire cannot be
+  // counted without it); the roster persists, so an immediately
+  // following sound reproduces the projection blade for blade.
+  // MOMENTARY: nothing is cached; every call recomputes (Haven
+  // availability moves within bursts). PURE CHECK: this function
+  // creates no muster, moves no trust/opinion/arrears, touches no
+  // omen, gate, stage, or ledger — the call's -8 refusal penalty
+  // belongs to sounding, never to checking. It deliberately does
+  // NOT duplicate the call's other gates (omen stage, monster
+  // presence): those stay with the buttons and soundTitanCall, and
+  // the council line only appears where the call is already a live
+  // option. One function, one question: if the call were sounded
+  // now, who would answer? Returns null for an unknown titan id.
+  function titanCallReadiness(titanId) {
+    var def = titanDefs()[titanId];
+    if (!def) return null;
+    var st = titanState();
+    // Read, never create: a readiness check must not leave a muster
+    // standing behind it.
+    var muster = (st.musters || {})[titanId] || null;
+    var committed = {};
+    try {
+      Object.keys(st.musters || {}).forEach(function (tid) {
+        if (st.slain && st.slain[tid]) return;
+        titanUniqueAllies(st.musters[tid]).forEach(function (a) { committed[a.villageId + ':' + a.vid] = true; });
+      });
+    } catch (e) {}
+    var cfg = (Game.data.titans || {})._coalition || {};
+    var trustedAt = cfg.trustedAt == null ? 70 : cfg.trustedAt;
+    var trustedOpinion = cfg.trustedOpinion == null ? 10 : cfg.trustedOpinion;
+    var trustedBlades = cfg.trustedBlades || 6;
+    var baseBlades = cfg.baseBlades || 2;
+    var need = def.minAllies || 10;
+    var out = { titanId: titanId, need: need, links: [], alliesProj: 0,
+      havenProj: null, havenValid: 0, volunteers: 0, total: null,
+      naiveTotal: 0, ready: false, generatedNow: [], errors: [] };
+    titanAlliedLinks().forEach(function (link) {
+      try {
+        var vid = titanLinkOther(link);
+        var ov = null;
+        try { ov = Game._otherVillage(vid); } catch (e) {}
+        var trust = link.trust || 0;
+        var opinion = (ov && ov.opinion) || 0;
+        var arrears = link.arrears || 0;
+        var wouldRefuse = trust < 25 || opinion < -10 || arrears > 0;
+        var quota = trust >= trustedAt && opinion >= trustedOpinion ? trustedBlades : baseBlades;
+        var already = muster ? muster.allies.filter(function (a) { return a.villageId === vid; }).length : 0;
+        // Pre-generation snapshot count (the undercounting number).
+        var snapFree = 0;
+        try {
+          snapFree = ((ov && ov.roster) || []).filter(function (r) {
+            return r && r.alive && (r.age == null || r.age >= 18) &&
+              (r.health === undefined || r.health > 0) && !committed[vid + ':' + r.id];
+          }).length;
+        } catch (e) { snapFree = 0; }
+        var rosterBefore = !!(ov && ov.roster && ov.roster.length);
+        // The call's own face-picker: generates a rosterless fire's
+        // roster (and designates its speaker, no RNG) and returns
+        // exactly the faces a sound would send, capped at quota.
+        // Called for refusing links too — the policy proof showed
+        // generation happens at the projection regardless, and the
+        // contribution is zeroed below, not the contact.
+        var faces = [];
+        try { faces = titanAlliedFaces(vid, Math.max(0, quota - already), committed); } catch (e) {
+          out.errors.push('faces ' + vid + ': ' + String((e && e.message) || e).slice(0, 120));
+        }
+        var generatedHere = !rosterBefore && !!(ov && ov.roster && ov.roster.length);
+        if (generatedHere) out.generatedNow.push({ villageId: vid, name: (ov && ov.name) || null, rosterLen: ov.roster.length });
+        var freeAdults = 0;
+        try {
+          freeAdults = ((ov && ov.roster) || []).filter(function (r) {
+            return r && r.alive && (r.age == null || r.age >= 18) &&
+              (r.health === undefined || r.health > 0) && !committed[vid + ':' + r.id];
+          }).length;
+        } catch (e) { freeAdults = 0; }
+        var contribution = wouldRefuse ? 0 : faces.length;
+        out.links.push({ villageId: vid, name: (ov && ov.name) || null, trust: trust, opinion: opinion,
+          arrears: arrears, quota: quota, already: already, snapFree: snapFree,
+          generatedHere: generatedHere, freeAdults: freeAdults,
+          wouldRefuse: wouldRefuse, contribution: contribution,
+          naiveContribution: faces.length,
+          faces: faces.map(function (f) { return f.name; }) });
+        out.alliesProj += contribution;
+        out.naiveTotal += faces.length;
+      } catch (e) { out.errors.push('link: ' + String((e && e.message) || e).slice(0, 120)); }
+    });
+    // Haven projection: the two-tap commit pool, capped at 3.
+    try {
+      var havenValid = muster ? titanHavenBlades(muster).length : 0;
+      var vols = (typeof Game.titanVolunteers === 'function') ? Game.titanVolunteers() : null;
+      var volN = vols ? vols.length : 0;
+      out.havenValid = havenValid;
+      out.volunteers = volN;
+      out.havenProj = havenValid + Math.max(0, Math.min(3 - havenValid, volN));
+    } catch (e) {
+      out.errors.push('volunteers: ' + String((e && e.message) || e).slice(0, 120));
+      out.havenProj = null;
+    }
+    out.naiveTotal += (out.havenProj == null ? 0 : out.havenProj);
+    out.total = (out.havenProj == null ? null : (out.alliesProj + out.havenProj));
+    out.ready = (out.total != null && out.total >= need);
+    return out;
+  }
+
   // ---------- war council ----------
 
   function titanWarCouncil(titanId) {
@@ -427,6 +554,35 @@
     if (!def) return null;
     var o = titanOmen(titanId);
     Game.say('⚔️ WAR COUNCIL — ' + def.title + '. The leaders sit as faces, not pieces.');
+    // SUM-READINESS LINE (2026-11-02, sim-sumdeploy-a): the council
+    // is the decision point — the one explicit moment the projection
+    // is computed (lazy rule above). A failed projection says
+    // nothing rather than breaking the council.
+    try {
+      var readiness = titanCallReadiness(titanId);
+      if (readiness && readiness.total != null) {
+        var rLine = '📯 The call, sounded now, would bring ' + readiness.total + ' blades — ' +
+          readiness.alliesProj + ' from allied fires and ' + readiness.havenProj +
+          ' of Haven\u2019s own — against the ' + readiness.need + ' ' + def.title + ' demands.';
+        if (readiness.ready) {
+          rLine += ' The coalition is ready; the cost is named, not hidden.';
+        } else {
+          rLine += ' It is not enough yet.';
+          var refusals = readiness.links.filter(function (l) { return l.wouldRefuse; });
+          if (refusals.length) {
+            rLine += ' ' + refusals.map(function (l) {
+              var nm = l.name || 'them';
+              var why = l.trust < 25 ? 'they do not trust this coalition with their people' :
+                l.opinion < -10 ? 'old blood between you' : 'debts unpaid between you';
+              return nm + ' cannot answer while ' + why + '.';
+            }).join(' ');
+          } else {
+            rLine += ' Closer bonds would bring more volunteers.';
+          }
+        }
+        Game.say(rLine);
+      }
+    } catch (e) {}
     var links = titanAlliedLinks();
     if (!links.length) {
       Game.say('No one sits with you. You have no coalition. The council is one chair.');
@@ -1306,6 +1462,7 @@
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
+    titanCallReadiness: titanCallReadiness,
     titanHavenBlades: titanHavenBlades,
     titanPlacementTile: titanPlacementTile,
     titanLeaveArena: titanLeaveArena,
@@ -1340,6 +1497,7 @@
     titanGearValue: titanGearValue,
     titanEscalate: titanEscalate,
     titanMusterUpkeep: titanMusterUpkeep,
+    titanCallReadiness: titanCallReadiness,
     titanOmen: titanOmen,
     titanState: titanState,
     titanTemptation: titanTemptation,
