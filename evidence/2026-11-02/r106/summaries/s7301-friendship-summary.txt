@@ -1,0 +1,350 @@
+# SURFACE+SEEDED — seed 7301 (118d, 0 alive)
+
+npcPairs=94 deep2=30 cracks=0 vCracks=0 friendGriev=1 stateGriev=4 stateFriend=1 stateVCrack=0 t2picks=272 closeReadsServed=40 grievanceServes=31 othersSteered=22
+COND-TP: firstDeep2Day=15 lateClose=158 lateTP=122 lateNull=0 condRate=77.2% pooledTP=122/160 pooledRate=76.3% grievReadsByWhy={"grievance":10,"vgrievance":35}
+FUNNEL (natural): convos=348 subject=345 offered=317 picked=250 classes={"subject-no-offer":28,"offered-not-picked":67,"picked-others":250,"no-subject-no-ans":3}
+FUNNEL-UNSTEERED (r55 strict): convos=348 subjectNoOffer=28 rate=8.0% offered=317 mainOffered=8 subjectOffered=316 picked=250 latePicks=79 latePicksMain=0 latePicksSubject=79
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=3
+  KNACK-CIRCULATION: Oliver / Nora — "that stray dog — the one that bit two people — lets Sofia touch it."
+  KNACK-CIRCULATION: Sofia / Donizar — "cuts close faster when Nino wraps them. Don't ask me how."
+  KNACK-CIRCULATION: Rafael / Yuki — "You want to know about that? Okay." "Dearbhail talks to the garden. The garden listens. I've seen i
+REOFFER: offers=299 picks=256 latePicks=79 missedChangedNotOffered=0
+WRAPSERVE: convos=45 matcherHits=31 matcherServes=31 classes={"grievance-line":31,"deflection":2,"other":12}
+FUNNEL-PROBE (subject-no-offer turns): turns=139 menuProblem=87 pickProblem=52
+INVITE (wrap, carried from r63): lure={"n":5,"accepts":3,"acceptRate":0.6,"vetoes":{"sick":1},"chanceMin":0,"chanceMax":54,"chanceMean":35.6} party={"n":31,"accepts":14,"acceptRate":0.45161290322580644,"vetoes":{},"chanceMin":5,"chanceMax":87.8,"chanceMean":42.7} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":58,"forageOffers":11,"otherFavorOffers":47,"accepts":12,"acceptAttempts":12,"waits":11,"starts":8,"startBlocked":14,"forages":7,"forageNodeBarren":21,"forageBarren":2,"forageBarrenTravel":0,"forageBarrenNode":2,"forageTravelBlocked":0,"forageTravelWalked":3,"stepRetries":5,"retryAssigned":5,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":7,"delivers":7,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":7,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r80): snaps=9 betrayalOfferConvos=75 mootOffers=5 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d9: case_2 status=open charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d10: case_2 status=open charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=open charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=true
+  CASE-SNAP d14: case_2 status=acquitted charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=true
+  CASE-SNAP d38: case_2 status=acquitted charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=true
+  CASE-SNAP d38: case_4 status=open charge=ambush accused=Silas/Donizar/Sofia target=Hunter role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d40: case_2 status=acquitted charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=true
+  CASE-SNAP d40: case_4 status=resolved charge=ambush accused=Silas/Donizar/Sofia target=Hunter role=juror known=true mootIn=null trial=false
+  CASE-SNAP d40: case_6 status=resolved charge=murder accused=Silas/Donizar/Sofia target=Hunter role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d42: case_2 status=acquitted charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=true
+  CASE-SNAP d42: case_4 status=resolved charge=ambush accused=Silas/Donizar/Sofia target=Hunter role=juror known=true mootIn=null trial=false
+  CASE-SNAP d42: case_6 status=resolved charge=murder accused=Silas/Donizar/Sofia target=Hunter role=juror known=true mootIn=null trial=false
+  CASE-SNAP d118: case_2 status=acquitted charge=ambush accused=Donizar/Rafael/Sofia target=Oliver role=juror known=true mootIn=null trial=true
+  CASE-SNAP d118: case_4 status=resolved charge=ambush accused=Silas/Donizar/Sofia target=Hunter role=juror known=true mootIn=null trial=false
+  CASE-SNAP d118: case_6 status=resolved charge=murder accused=Silas/Donizar/Sofia target=Hunter role=juror known=true mootIn=null trial=false
+OUTING END STATES: []
+  FAVOR-OFFER d4: Silas kind=sick_help favorId=favor-gen_5ovjm9d-4-1 task=help Silas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d4: Silas kind=sick_help favorId=favor-gen_5ovjm9d-4-2 task=help Silas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d5: Silas kind=sick_help favorId=favor-gen_5ovjm9d-5-3 task=help Silas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d7: Sofia kind=forage_help favorId=favor-sofia_chen-7-4 task=forage with Sofia tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Silas kind=food_share favorId=favor-gen_5ovjm9d-12-6 task=share food with Silas — they're going hungry
+  FAVOR-OFFER d13: Yuki kind=forage_help favorId=favor-yuki_mori-8-5 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Hunter kind=food_share favorId=favor-gen_j8r8y2c-14-7 task=share food with Hunter — they're past hungry
+  FAVOR-OFFER d17: Silas kind=food_share favorId=favor-gen_5ovjm9d-17-8 task=share food with Silas — they're going hungry
+  FAVOR-OFFER d23: Silas kind=sick_help favorId=favor-gen_5ovjm9d-23-9 task=help Silas with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d24: Nino kind=forage_help favorId=favor-nino_kapanadze-24-10 task=forage with Nino tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Dearbhail kind=heal_help favorId=favor-gen_3kouj0g-24-11 task=help Dearbhail with their injury
+  FAVOR-OFFER d24: Donizar kind=forage_help favorId=favor-gen_gq9nyln-24-12 task=forage with Donizar tomorrow to rebuild the pantry
+  FAVOR-OFFER d25: Hunter kind=food_share favorId=favor-gen_j8r8y2c-25-13 task=share food with Hunter — they're past hungry
+  FAVOR-OFFER d27: Oliver kind=food_share favorId=favor-oliver_moore-27-14 task=share food with Oliver — they're going hungry
+  FAVOR-OFFER d28: Nino kind=forage_help favorId=favor-nino_kapanadze-28-15 task=forage with Nino tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Giulia kind=heal_help favorId=favor-giulia_bianchi-29-16 task=help Giulia with their injury
+  FAVOR-OFFER d33: Donizar kind=forage_help favorId=favor-gen_gq9nyln-33-18 task=forage with Donizar tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Rafael kind=heal_help favorId=favor-rafael_torres-35-19 task=help Rafael with their injury
+  FAVOR-OFFER d38: Oliver kind=food_share favorId=favor-oliver_moore-38-20 task=share food with Oliver — they're past hungry
+  FAVOR-OFFER d40: Nino kind=food_share favorId=favor-nino_kapanadze-40-21 task=share food with Nino — they're going hungry
+  FAVOR-OFFER d40: Oliver kind=food_share favorId=favor-oliver_moore-40-22 task=share food with Oliver — they're past hungry
+  FAVOR-OFFER d44: Yuki kind=forage_help favorId=favor-yuki_mori-44-24 task=forage with Yuki tomorrow to rebuild the pantry
+  FAVOR-OFFER d44: Dearbhail kind=heal_help favorId=favor-gen_3kouj0g-43-23 task=help Dearbhail with their injury
+  FAVOR-OFFER d47: Nino kind=forage_help favorId=favor-nino_kapanadze-47-25 task=forage with Nino tomorrow to rebuild the pantry
+  FAVOR-OFFER d49: Rafael kind=food_share favorId=favor-rafael_torres-49-26 task=share food with Rafael — they're past hungry
+  FAVOR-OFFER d49: Giulia kind=food_share favorId=favor-giulia_bianchi-49-27 task=share food with Giulia — they're running on empty
+  FAVOR-OFFER d51: Donizar kind=food_share favorId=favor-gen_gq9nyln-51-29 task=share food with Donizar — they're running on empty
+  FAVOR-OFFER d52: Yuki kind=sick_help favorId=favor-yuki_mori-50-28 task=help Yuki with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d52: Nino kind=sick_help favorId=favor-nino_kapanadze-52-30 task=help Nino with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d53: Yuki kind=food_share favorId=favor-yuki_mori-53-31 task=share food with Yuki — they're going hungry
+  FAVOR-OFFER d55: Donizar kind=sick_help favorId=favor-gen_gq9nyln-55-32 task=help Donizar with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d55: Sofia kind=heal_help favorId=favor-sofia_chen-55-33 task=help Sofia with their injury
+  FAVOR-OFFER d56: Yuki kind=sick_help favorId=favor-yuki_mori-56-34 task=help Yuki with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d56: Giulia kind=sick_help favorId=favor-giulia_bianchi-56-35 task=help Giulia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d59: Yuki kind=sick_help favorId=favor-yuki_mori-59-36 task=help Yuki with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d60: Sofia kind=food_share favorId=favor-sofia_chen-60-37 task=share food with Sofia — they're past hungry
+  FAVOR-OFFER d63: Nino kind=sick_help favorId=favor-nino_kapanadze-63-38 task=help Nino with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d65: Sofia kind=food_share favorId=favor-sofia_chen-65-39 task=share food with Sofia — they're past hungry
+  FAVOR-OFFER d69: Oliver kind=food_share favorId=favor-oliver_moore-68-40 task=share food with Oliver — they're going hungry
+  FAVOR-OFFER d70: Jorge kind=food_share favorId=favor-jorge_silva-70-41 task=share food with Jorge — they're going hungry
+  FAVOR-OFFER d78: Luis kind=food_share favorId=favor-luis_fernandez-78-42 task=share food with Luis — they're past hungry
+  FAVOR-OFFER d82: Luis kind=heal_help favorId=favor-luis_fernandez-82-43 task=help Luis with their injury
+  FAVOR-OFFER d83: Jorge kind=heal_help favorId=favor-jorge_silva-83-44 task=help Jorge with their injury
+  FAVOR-OFFER d83: Dmitri kind=forage_help favorId=favor-dmitri_sokolov-83-45 task=forage with Dmitri tomorrow to rebuild the pantry
+  FAVOR-OFFER d86: Luis kind=heal_help favorId=favor-luis_fernandez-86-46 task=help Luis with their injury
+  FAVOR-OFFER d86: Sofia kind=food_share favorId=favor-sofia_chen-86-47 task=share food with Sofia — they're past hungry
+  FAVOR-OFFER d91: Dmitri kind=heal_help favorId=favor-dmitri_sokolov-91-48 task=help Dmitri with their injury
+  FAVOR-OFFER d94: Luis kind=heal_help favorId=favor-luis_fernandez-94-49 task=help Luis with their injury
+  FAVOR-OFFER d95: Dmitri kind=heal_help favorId=favor-dmitri_sokolov-95-50 task=help Dmitri with their injury
+  FAVOR-OFFER d97: Nora kind=forage_help favorId=favor-nora_wilson-97-51 task=forage with Nora tomorrow to rebuild the pantry
+  FAVOR-OFFER d97: Sofia kind=forage_help favorId=favor-sofia_chen-97-52 task=forage with Sofia tomorrow to rebuild the pantry
+  FAVOR-OFFER d101: Luis kind=food_share favorId=favor-luis_fernandez-101-53 task=share food with Luis — they're going hungry
+  FAVOR-OFFER d107: Luis kind=water_haul favorId=favor-luis_fernandez-107-54 task=bring four liters home from the creek with Luis; set out at dawn
+  FAVOR-OFFER d108: Nora kind=heal_help favorId=favor-nora_wilson-108-55 task=help Nora with their injury
+  FAVOR-OFFER d110: Sofia kind=sick_help favorId=favor-sofia_chen-110-56 task=help Sofia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d111: Luis kind=food_share favorId=favor-luis_fernandez-111-57 task=share food with Luis — they're past hungry
+  FAVOR-OFFER d113: Sofia kind=sick_help favorId=favor-sofia_chen-113-58 task=help Sofia with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d116: Nora kind=food_share favorId=favor-nora_wilson-116-59 task=share food with Nora — they're going hungry
+  FAVOR-ACCEPT d7: Sofia favorId=favor-sofia_chen-7-4 accepted=true state=promised meetDay=8
+  FAVOR-ACCEPT d13: Yuki favorId=favor-yuki_mori-8-5 accepted=true state=promised meetDay=14
+  FAVOR-ACCEPT d24: Nino favorId=favor-nino_kapanadze-24-10 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d24: Donizar favorId=favor-gen_gq9nyln-24-12 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d28: Nino favorId=favor-nino_kapanadze-28-15 accepted=true state=promised meetDay=29
+  FAVOR-ACCEPT d33: Donizar favorId=favor-gen_gq9nyln-33-18 accepted=true state=promised meetDay=34
+  FAVOR-ACCEPT d44: Yuki favorId=favor-yuki_mori-44-24 accepted=true state=promised meetDay=45
+  FAVOR-ACCEPT d47: Nino favorId=favor-nino_kapanadze-47-25 accepted=true state=promised meetDay=48
+  FAVOR-ACCEPT d83: Dmitri favorId=favor-dmitri_sokolov-83-45 accepted=true state=promised meetDay=84
+  FAVOR-ACCEPT d97: Nora favorId=favor-nora_wilson-97-51 accepted=true state=promised meetDay=98
+  FAVOR-ACCEPT d97: Sofia favorId=favor-sofia_chen-97-52 accepted=true state=promised meetDay=98
+  FAVOR-ACCEPT d103: Nora favorId=favor-nora_wilson-97-51 accepted=true state=promised meetDay=104
+  INVITE-DEC d7 lure: Rafael -> Oliver chance=35 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"hungry","fear":0,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d8 party: Hudson -> Hunter chance=48.6 accept=false veto=- inputs={"temp":"fidgety","goal":"heal","mood":"hungry","fear":0,"trust":34,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 34"]
+  INVITE-DEC d8 party: Hudson -> Silas chance=41.400000000000006 accept=true veto=- inputs={"temp":"restless","goal":"understand","mood":"hungry","fear":0,"trust":41,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 41","sick (-20)","restless temperament (+10)"]
+  INVITE-DEC d8 party: Hudson -> Sofia chance=36.2 accept=false veto=- inputs={"temp":"cautious","goal":"answers","mood":"hungry","fear":0,"trust":28,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 28","cautious temperament (-10)"]
+  INVITE-DEC d8 lure: Rafael -> Oliver chance=35 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"hungry","fear":4,"affinity":0} reasons=["wants out (-10)"]
+  INVITE-DEC d9 party: Hudson -> Giulia chance=60.4 accept=false veto=- inputs={"temp":"warm","goal":"answers","mood":"steady","fear":0,"trust":26,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 26","warm temperament (+15)"]
+  INVITE-DEC d9 party: Hudson -> Hunter chance=51 accept=true veto=- inputs={"temp":"fidgety","goal":"heal","mood":"steady","fear":0,"trust":40,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 40"]
+  INVITE-DEC d11 party: Carolina -> Giulia chance=54 accept=false veto=- inputs={"temp":"warm","goal":"answers","mood":"grieving","fear":1,"trust":35,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 35","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d11 party: Carolina -> Giulia chance=54.8 accept=true veto=- inputs={"temp":"warm","goal":"answers","mood":"grieving","fear":1,"trust":37,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 37","warm temperament (+15)","grieving mood (-10)"]
+  INVITE-DEC d15 party: Carolina -> Oliver chance=41 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":12,"trust":40,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 40","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d31 party: Carolina -> Yuki chance=9.600000000000001 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":4,"trust":49,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 49","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)"]
+  INVITE-DEC d31 party: Carolina -> Donizar chance=74.6 accept=true veto=- inputs={"temp":"warm","goal":"lead","mood":"steady","fear":4,"trust":49,"bond":{"v":21,"depth":0},"partySize":4} reasons=["trust 49","a big party is safer (+5)","warm temperament (+15)"]
+  INVITE-DEC d36 lure: Silas -> Hunter chance=0 accept=false veto=sick inputs={"temp":"fidgety","goal":"heal","mood":"hungry","fear":4} reasons=["sick — stays by the fire"]
+  INVITE-DEC d37 lure: Silas -> Hunter chance=54 accept=true veto=- inputs={"temp":"fidgety","goal":"heal","mood":"hungry","fear":0,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d39 lure: Silas -> Hunter chance=54 accept=true veto=- inputs={"temp":"fidgety","goal":"heal","mood":"hungry","fear":0,"affinity":36} reasons=["relationship with inviter (+9)"]
+  INVITE-DEC d40 party: Carolina -> Dearbhail chance=50.8 accept=false veto=- inputs={"temp":"withdrawn","goal":"record","mood":"grieving","fear":22,"trust":77,"bond":{"v":26,"depth":1},"partySize":3} reasons=["trust 77","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d40 party: Carolina -> Nino chance=47.599999999999994 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":22,"trust":69,"bond":{"v":32,"depth":1},"partySize":3} reasons=["trust 69","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d41 party: Carolina -> Rafael chance=87.8 accept=true veto=- inputs={"temp":"restless","goal":"feed","mood":"grieving","fear":40,"trust":57,"bond":{"v":36,"depth":1},"partySize":3} reasons=["trust 57","a real bond (+10)","a big party is safer (+5)","restless temperament (+10)","feed goal (+15)","grieving mood (-10)"]
+  INVITE-DEC d42 party: Carolina -> Nino chance=48.8 accept=false veto=- inputs={"temp":"prickly","goal":"prove","mood":"grieving","fear":16,"trust":72,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 72","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d42 party: Carolina -> Yuki chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":16,"trust":40,"bond":{"v":22,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d44 party: Carolina -> Yuki chance=6 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"steady","fear":4,"trust":40,"bond":{"v":24,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)","cautious temperament (-10)","wants to be alone (-40)"]
+  INVITE-DEC d44 party: Carolina -> Nino chance=58.8 accept=true veto=- inputs={"temp":"prickly","goal":"prove","mood":"steady","fear":4,"trust":72,"bond":{"v":38,"depth":1},"partySize":4} reasons=["trust 72","a real bond (+10)","a big party is safer (+5)","prickly temperament (-20)"]
+  INVITE-DEC d54 party: Carolina -> Dearbhail chance=54 accept=true veto=- inputs={"temp":"withdrawn","goal":"record","mood":"grieving","fear":5,"trust":85,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 85","a real bond (+10)","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d56 party: Carolina -> Yuki chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":1,"trust":43,"bond":{"v":34,"depth":1},"partySize":4} reasons=["trust 43","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d58 party: Carolina -> Sofia chance=56 accept=true veto=- inputs={"temp":"cautious","goal":"answers","mood":"grieving","fear":4,"trust":65,"bond":{"v":30,"depth":1},"partySize":3} reasons=["trust 65","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d58 party: Carolina -> Yuki chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":4,"trust":35,"bond":{"v":36,"depth":1},"partySize":4} reasons=["trust 35","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d59 party: Carolina -> Yuki chance=5 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":2,"trust":38,"bond":{"v":38,"depth":1},"partySize":4} reasons=["trust 38","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d61 party: Carolina -> Luis chance=38 accept=true veto=- inputs={"temp":"steady","goal":"answers","mood":"grieving","fear":35,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d64 party: Carolina -> Dmitri chance=38 accept=false veto=- inputs={"temp":"dry","goal":"joy","mood":"grieving","fear":26,"trust":20,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 20","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d66 party: Carolina -> Dmitri chance=42 accept=false veto=- inputs={"temp":"dry","goal":"joy","mood":"grieving","fear":4,"trust":30,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 30","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d68 party: Carolina -> Jorge chance=54 accept=true veto=- inputs={"temp":"steady","goal":"family","mood":"steady","fear":4,"trust":35,"bond":{"v":2,"depth":0},"partySize":3} reasons=["trust 35","a big party is safer (+5)"]
+  INVITE-DEC d69 party: Carolina -> Dmitri chance=66.4 accept=false veto=- inputs={"temp":"dry","goal":"joy","mood":"cheerful","fear":6,"trust":41,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 41","a big party is safer (+5)","cheerful mood (+10)"]
+  INVITE-DEC d70 party: Carolina -> Dmitri chance=58 accept=true veto=- inputs={"temp":"dry","goal":"joy","mood":"steady","fear":4,"trust":45,"bond":{"v":8,"depth":0},"partySize":4} reasons=["trust 45","a big party is safer (+5)"]
+  INVITE-DEC d89 party: Carolina -> Farid chance=27.599999999999994 accept=true veto=- inputs={"temp":"cautious","goal":"peace","mood":"grieving","fear":21,"trust":44,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 44","a real bond (+10)","a big party is safer (+5)","sick (-20)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d94 party: Carolina -> Nora chance=43.6 accept=false veto=- inputs={"temp":"gentle","goal":"joy","mood":"grieving","fear":0,"trust":34,"bond":{"v":14,"depth":0},"partySize":4} reasons=["trust 34","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d97 party: Carolina -> Nora chance=56 accept=true veto=- inputs={"temp":"gentle","goal":"joy","mood":"steady","fear":12,"trust":40,"bond":{"v":16,"depth":0},"partySize":4} reasons=["trust 40","a big party is safer (+5)"]
+SEEDED-DAILY: [{"day":16,"v":44,"depth":2},{"day":17,"v":50,"depth":3},{"day":18,"v":56,"depth":3},{"day":19,"v":62,"depth":3},{"day":20,"v":68,"depth":3},{"day":21,"v":74,"depth":3},{"day":22,"v":80,"depth":3},{"day":23,"v":86,"depth":3},{"day":24,"v":92,"depth":3},{"day":25,"v":98,"depth":3},{"day":26,"v":100,"depth":3},{"day":27,"v":100,"depth":3},{"day":28,"v":100,"depth":3},{"day":29,"v":100,"depth":3}] class=rise
+GOSSIP: totalPicks=123 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=42 31-60=70 61-90=59 91-120=79 121+=0 naturalPicks=250 seededPicks=22 gossipPicks=123
+SEEDED: {"pair":{"a":"gen_5ovjm9d","b":"gen_j8r8y2c","aName":"Silas","bName":"Hunter"},"day":15,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":16,"v":44,"depth":2},{"day":17,"v":50,"depth":3},{"day":18,"v":56,"depth":3},{"day":19,"v":62,"depth":3},{"day":20,"v":68,"depth":3},{"day":21,"v":74,"depth":3},{"day":22,"v":80,"depth":3},{"day":23,"v":86,"depth":3},{"day":24,"v":92,"depth":3},{"day":25,"v":98,"depth":3},{"day":26,"v":100,"depth":3},{"day":27,"v":100,"depth":3},{"day":28,"v":100,"depth":3},{"day":29,"v":100,"depth":3}],"crackTraceClass":"rise","vAt7":68,"depthAt7":3,"vDrop":-18,"depthDrop":-1,"crack7":false,"firstServe":{"day":17,"why":"vgrievance"},"serveWithin30":true,"serves":27,"servesAll":[{"day":17,"why":"vgrievance"},{"day":17,"why":"vgrievance"},{"day":18,"why":"vgrievance"},{"day":19,"why":"vgrievance"},{"day":20,"why":"vgrievance"},{"day":21,"why":"vgrievance"},{"day":22,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":23,"why":"vgrievance"},{"day":24,"why":"vgrievance"},{"day":25,"why":"vgrievance"},{"day":26,"why":"vgrievance"},{"day":27,"why":"vgrievance"},{"day":28,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":29,"why":"vgrievance"},{"day":30,"why":"vgrievance"},{"day":32,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":38,"why":"vgrievance"},{"day":39,"why":"vgrievance"}],"effect":true}
+  FRIEND d30: Dearbhail <> Hunter — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d35: Donizar <> Hunter — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d25: Hunter <> Sofia — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d50: Dearbhail <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d25: Hunter <> Yuki — maxDepth 3, final 3 (v=98), dropped 0
+  FRIEND d55: Dearbhail <> Giulia — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d30: Hunter <> Giulia — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d20: Hunter <> Rafael — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Dearbhail <> Donizar — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d100: Dearbhail <> Carolina — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d100: Carolina <> Giulia — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d100: Carolina <> Nino — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d15: Silas <> Hunter — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Silas <> Carolina — maxDepth 3, final 3 (v=84), dropped 0
+  FRIEND d100: Donizar <> Carolina — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d100: Carolina <> Sofia — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d35: Silas <> Rafael — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d100: Carolina <> Rafael — maxDepth 2, final 2 (v=51), dropped 0
+  FRIEND d55: Dearbhail <> Yuki — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d55: Dearbhail <> Rafael — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d118: Dmitri <> Luis — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d85: Luis <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Aadhya <> Sofia — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d85: Dmitri <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d90: Farid <> Sofia — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d90: Nora <> Sofia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Carolina <> Luis — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d100: Dmitri <> Carolina — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d100: Carolina <> Jorge — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d110: Carolina <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND-GRIEV d15: Silas vs Hunter (ambushed) depth 2 v 50 -> 68
+  CLOSE-READ d11: Silas about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d13: Silas about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d15: Sofia about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d16: Hunter about Silas — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d17: Giulia about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Yuki about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Hunter about Silas — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d20: Hunter about Silas — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d21: Giulia about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d22: Sofia about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Giulia about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Hunter about Silas — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d25: Dearbhail about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Dearbhail about Hunter — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d26: Hunter about Silas — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d27: Rafael about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d28: Yuki about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d29: Giulia about Hunter — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d30: Hunter about Silas — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d30: Rafael about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d31: Giulia about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d31: Yuki about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d32: Sofia about Hunter — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d32: Dearbhail about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Dearbhail about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d35: Rafael about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Dearbhail about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d36: Yuki about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d36: Nino about Hunter — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Donizar about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Yuki about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d38: Yuki about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Donizar about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Sofia about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Giulia about Dearbhail — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Donizar about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d46: Sofia about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Donizar about Dearbhail — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Yuki about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Dearbhail about Donizar — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Giulia about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Rafael about Dearbhail — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d49: Giulia about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Giulia about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Giulia about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Donizar about Dearbhail — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Sofia about Dearbhail — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Yuki about Dearbhail — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Yuki about Dearbhail — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Dearbhail about Donizar — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Donizar about Dearbhail — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Yuki about Dearbhail — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Giulia about Dearbhail — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Nino about Dearbhail — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Nino about Dearbhail — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d58: Yuki about Dearbhail — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Sofia about Dearbhail — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Dearbhail about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Nino about Dearbhail — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Luis about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d72: Sofia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d74: Sofia about Luis — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d76: Luis about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Dmitri about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d78: Luis about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Farid about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d79: Nora about Sofia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d81: Farid about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Jorge about Sofia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Farid about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Luis about Sofia — live depth=3 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Jorge about Sofia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d83: Dmitri about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Jorge about Sofia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d84: Jorge about Sofia — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Jorge about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Jorge about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d86: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Jorge about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Jorge about Sofia — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Aadhya about Sofia — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d92: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Nora about Sofia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Nora about Sofia — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Dmitri about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d110: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Sofia about Luis — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Nora about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Luis about Sofia — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d16 (betrayal): Silas vs Hunter (ambushed) depth 2 v 50 -> 68
+  GRIEV-READ d17: Silas about Hunter (why=vgrievance)
+  GRIEV-READ d17: Silas about Hunter (why=vgrievance)
+  GRIEV-READ d18: Silas about Hunter (why=vgrievance)
+  GRIEV-READ d18: Oliver about Donizar (why=grievance)
+  GRIEV-READ d19: Silas about Hunter (why=vgrievance)
+  GRIEV-READ d20: Silas about Hunter (why=vgrievance)
+  KNACK d4 Oliver: "that stray dog — the one that bit two people — lets Sofia touch it."
+  KNACK d4 Silas: "Huh. Let me think about that." "Dearbhail talks to the garden. The garden listens. I've seen it."
+  KNACK d19 Sofia: "cuts close faster when Nino wraps them. Don't ask me how."
+  KNACK d28 Donizar: "cuts close faster when Nino wraps them. Don't ask me how."
+  KNACK d41 Rafael: "You want to know about that? Okay." "Dearbhail talks to the garden. The garden listens. I've seen it."
+  KNACK d52 Sofia: "Good question." "Dearbhail talks to the garden. The garden listens. I've seen it."
+  KNACK d53 Yuki: "You want to know about that? Okay." "cuts close faster when Nino wraps them. Don't ask me how."
+  KNACK d58 Yuki: "You want to know about that? Okay." "Dearbhail talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"starvation":2,"ambush":1,"sickness":7,"a wound that wouldn't close":1,"alien":1,"the wild":2}

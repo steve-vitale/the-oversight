@@ -1,0 +1,274 @@
+# SURFACE+SEEDED — seed 7303 (142d, 3 alive)
+
+npcPairs=90 deep2=28 cracks=0 vCracks=0 friendGriev=0 stateGriev=9 stateFriend=1 stateVCrack=0 t2picks=157 closeReadsServed=16 grievanceServes=38 othersSteered=157
+COND-TP: firstDeep2Day=40 lateClose=77 lateTP=71 lateNull=0 condRate=92.2% pooledTP=72/85 pooledRate=84.7% grievReadsByWhy={"grievance":2,"vgrievance":42}
+FUNNEL (natural): convos=414 subject=388 offered=307 picked=128 classes={"subject-no-offer":82,"picked-others":128,"offered-capped":129,"offered-not-picked":50,"no-subject-no-ans":24,"no-subject-ans":1}
+FUNNEL-UNSTEERED (r55 strict): convos=286 subjectNoOffer=82 rate=28.7% offered=179 mainOffered=0 subjectOffered=179 picked=0 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Ruby / Naran / Jesse — "Sari sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=299 picks=142 latePicks=49 missedChangedNotOffered=4
+WRAPSERVE: convos=44 matcherHits=38 matcherServes=38 classes={"grievance-line":38,"deflection":0,"other":6}
+FUNNEL-PROBE (subject-no-offer turns): turns=171 menuProblem=108 pickProblem=63
+INVITE (wrap, carried from r63): lure={"n":8,"accepts":5,"acceptRate":0.625,"vetoes":{},"chanceMin":36,"chanceMax":70,"chanceMean":58.9} party={"n":14,"accepts":9,"acceptRate":0.6428571428571429,"vetoes":{},"chanceMin":32.400000000000006,"chanceMax":71.6,"chanceMean":53} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=5
+FAVOR (r65): funnel={"offers":59,"forageOffers":16,"otherFavorOffers":43,"accepts":14,"acceptAttempts":14,"waits":10,"starts":9,"startBlocked":15,"forages":9,"forageNodeBarren":4,"forageBarren":1,"forageBarrenTravel":0,"forageBarrenNode":1,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":7,"retryAssigned":7,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":9,"delivers":9,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":9,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r80): snaps=10 betrayalOfferConvos=137 mootOffers=9 mootProbePicks=[{"day":9,"vid":"nora_wilson","vidName":"Nora","caseId":"case_2"},{"day":11,"vid":"gen_ktbfx34","vidName":"Esther","caseId":"case_4"},{"day":12,"vid":"dmitri_sokolov","vidName":"Dmitri","caseId":"case_6"},{"day":17,"vid":"gen_hw31n50","vidName":"Tomoko","caseId":"case_8"},{"day":18,"vid":"olivia_bennett","vidName":"Olivia","caseId":"case_10"}] mootsConvened=0
+  CASE-SNAP d7: case_2 status=open charge=ambush accused=Stella/Esther/Naran target=Olivia role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d8: case_2 status=open charge=ambush accused=Stella/Esther/Naran target=Olivia role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d9: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d9: case_4 status=open charge=ambush accused=Stella/Esther/Naran target=Olivia role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d11: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d11: case_4 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d11: case_6 status=open charge=ambush accused=Olivia/Carlos/Esther target=Stella role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_4 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d12: case_6 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_4 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_6 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d16: case_8 status=open charge=ambush accused=Olivia/Carlos/Esther target=Stella role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d16: case_10 status=open charge=murder accused=Olivia/Carlos/Dmitri target=Stella role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d18: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_4 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_6 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_8 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d18: case_10 status=open charge=murder accused=Olivia/Carlos/Dmitri target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_4 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_6 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_8 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d19: case_10 status=resolved charge=murder accused=Olivia/Carlos/Dmitri target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_2 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_4 status=acquitted charge=ambush accused=Stella/Esther/Naran target=Olivia role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_6 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_8 status=acquitted charge=ambush accused=Olivia/Carlos/Esther target=Stella role=juror known=true mootIn=null trial=true
+  CASE-SNAP d142: case_10 status=resolved charge=murder accused=Olivia/Carlos/Dmitri target=Stella role=juror known=true mootIn=null trial=true
+OUTING END STATES: []
+  FAVOR-OFFER d4: Tomoko kind=forage_help favorId=favor-gen_hw31n50-4-1 task=forage with Tomoko tomorrow to rebuild the pantry
+  FAVOR-OFFER d8: Naran kind=food_share favorId=favor-naran_tumen-8-2 task=share food with Naran — they're going hungry
+  FAVOR-OFFER d14: Esther kind=forage_help favorId=favor-gen_ktbfx34-14-3 task=forage with Esther tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Naran kind=food_share favorId=favor-naran_tumen-19-5 task=share food with Naran — they're past hungry
+  FAVOR-OFFER d20: Esther kind=food_share favorId=favor-gen_ktbfx34-19-4 task=share food with Esther — they're past hungry
+  FAVOR-OFFER d24: Nora kind=forage_help favorId=favor-nora_wilson-24-6 task=forage with Nora tomorrow to rebuild the pantry
+  FAVOR-OFFER d34: Nora kind=forage_help favorId=favor-nora_wilson-34-7 task=forage with Nora tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Nora kind=food_share favorId=favor-nora_wilson-35-8 task=share food with Nora — they're running on empty
+  FAVOR-OFFER d36: Naran kind=forage_help favorId=favor-naran_tumen-36-9 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d37: Esther kind=food_share favorId=favor-gen_ktbfx34-37-10 task=share food with Esther — they're going hungry
+  FAVOR-OFFER d37: Lena kind=forage_help favorId=favor-lena_ruiz-37-11 task=forage with Lena tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: James kind=forage_help favorId=favor-james_okonkwo-38-12 task=forage with James tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Sari kind=food_share favorId=favor-sari_wulandari-52-13 task=share food with Sari — they're past hungry
+  FAVOR-OFFER d53: Esther kind=food_share favorId=favor-gen_ktbfx34-53-14 task=share food with Esther — they're going hungry
+  FAVOR-OFFER d63: Lena kind=food_share favorId=favor-lena_ruiz-63-15 task=share food with Lena — they're going hungry
+  FAVOR-OFFER d63: Esther kind=food_share favorId=favor-gen_ktbfx34-63-16 task=share food with Esther — they're going hungry
+  FAVOR-OFFER d70: Onni kind=forage_help favorId=favor-onni_korhonen-70-17 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d70: Nora kind=food_share favorId=favor-nora_wilson-70-18 task=share food with Nora — they're going hungry
+  FAVOR-OFFER d71: Lena kind=forage_help favorId=favor-lena_ruiz-71-19 task=forage with Lena tomorrow to rebuild the pantry
+  FAVOR-OFFER d74: Onni kind=forage_help favorId=favor-onni_korhonen-74-20 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d75: Sari kind=food_share favorId=favor-sari_wulandari-75-21 task=share food with Sari — they're past hungry
+  FAVOR-OFFER d80: Esther kind=food_share favorId=favor-gen_ktbfx34-80-22 task=share food with Esther — they're past hungry
+  FAVOR-OFFER d83: Sari kind=forage_help favorId=favor-sari_wulandari-83-23 task=forage with Sari tomorrow to rebuild the pantry
+  FAVOR-OFFER d83: Onni kind=food_share favorId=favor-onni_korhonen-83-24 task=share food with Onni — they're going hungry
+  FAVOR-OFFER d83: Nora kind=food_share favorId=favor-nora_wilson-83-25 task=share food with Nora — they're going hungry
+  FAVOR-OFFER d91: Onni kind=forage_help favorId=favor-onni_korhonen-91-26 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d92: Lena kind=food_share favorId=favor-lena_ruiz-92-27 task=share food with Lena — they're past hungry
+  FAVOR-OFFER d96: Onni kind=water_haul favorId=favor-onni_korhonen-96-28 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d98: Esther kind=food_share favorId=favor-gen_ktbfx34-98-29 task=share food with Esther — they're past hungry
+  FAVOR-OFFER d99: Onni kind=water_haul favorId=favor-onni_korhonen-99-30 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d102: Naran kind=water_haul favorId=favor-naran_tumen-102-32 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d102: Sari kind=water_haul favorId=favor-sari_wulandari-102-33 task=bring four liters home from the creek with Sari; set out at dawn
+  FAVOR-OFFER d102: Sari kind=water_haul favorId=favor-sari_wulandari-102-34 task=bring four liters home from the creek with Sari; set out at dawn
+  FAVOR-OFFER d103: Tomoko kind=water_haul favorId=favor-gen_hw31n50-103-35 task=bring four liters home from the creek with Tomoko; set out at dawn
+  FAVOR-OFFER d103: Onni kind=water_haul favorId=favor-onni_korhonen-103-36 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d104: Esther kind=forage_help favorId=favor-gen_ktbfx34-104-37 task=forage with Esther tomorrow to rebuild the pantry
+  FAVOR-OFFER d107: Sari kind=water_haul favorId=favor-sari_wulandari-107-38 task=bring four liters home from the creek with Sari; set out at dawn
+  FAVOR-OFFER d107: Onni kind=water_haul favorId=favor-onni_korhonen-107-39 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d108: Lena kind=water_haul favorId=favor-lena_ruiz-102-31 task=bring four liters home from the creek with Lena; set out at dawn
+  FAVOR-OFFER d109: Nora kind=water_haul favorId=favor-nora_wilson-109-40 task=bring four liters home from the creek with Nora; set out at dawn
+  FAVOR-OFFER d110: Esther kind=water_haul favorId=favor-gen_ktbfx34-110-42 task=bring four liters home from the creek with Esther; set out at dawn
+  FAVOR-OFFER d112: Nora kind=water_haul favorId=favor-nora_wilson-112-43 task=bring four liters home from the creek with Nora; set out at dawn
+  FAVOR-OFFER d113: Sari kind=water_haul favorId=favor-sari_wulandari-110-41 task=bring four liters home from the creek with Sari; set out at dawn
+  FAVOR-OFFER d115: Onni kind=water_haul favorId=favor-onni_korhonen-115-45 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d116: Esther kind=water_haul favorId=favor-gen_ktbfx34-116-46 task=bring four liters home from the creek with Esther; set out at dawn
+  FAVOR-OFFER d117: Nora kind=food_share favorId=favor-nora_wilson-117-47 task=share food with Nora — they're going hungry
+  FAVOR-OFFER d117: Tomoko kind=forage_help favorId=favor-gen_hw31n50-114-44 task=forage with Tomoko tomorrow to rebuild the pantry
+  FAVOR-OFFER d122: Nora kind=water_haul favorId=favor-nora_wilson-122-49 task=bring four liters home from the creek with Nora; set out at dawn
+  FAVOR-OFFER d123: Lena kind=food_share favorId=favor-lena_ruiz-118-48 task=share food with Lena — they're running on empty
+  FAVOR-OFFER d123: Nora kind=water_haul favorId=favor-nora_wilson-123-50 task=bring four liters home from the creek with Nora; set out at dawn
+  FAVOR-OFFER d124: Onni kind=water_haul favorId=favor-onni_korhonen-124-51 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d125: Naran kind=forage_help favorId=favor-naran_tumen-125-52 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d126: Lena kind=food_share favorId=favor-lena_ruiz-126-53 task=share food with Lena — they're going hungry
+  FAVOR-OFFER d128: Tomoko kind=water_haul favorId=favor-gen_hw31n50-128-54 task=bring four liters home from the creek with Tomoko; set out at dawn
+  FAVOR-OFFER d128: Nora kind=water_haul favorId=favor-nora_wilson-128-55 task=bring four liters home from the creek with Nora; set out at dawn
+  FAVOR-OFFER d135: Naran kind=water_haul favorId=favor-naran_tumen-135-56 task=bring four liters home from the creek with Naran; set out at dawn
+  FAVOR-OFFER d135: James kind=water_haul favorId=favor-james_okonkwo-135-57 task=bring four liters home from the creek with James; set out at dawn
+  FAVOR-OFFER d138: Jesse kind=forage_help favorId=favor-jesse_cortez-138-58 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d139: Jesse kind=food_share favorId=favor-jesse_cortez-139-59 task=share food with Jesse — they're going hungry
+  FAVOR-ACCEPT d14: Esther favorId=favor-gen_ktbfx34-14-3 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d24: Nora favorId=favor-nora_wilson-24-6 accepted=true state=promised meetDay=25
+  FAVOR-ACCEPT d34: Nora favorId=favor-nora_wilson-34-7 accepted=true state=promised meetDay=35
+  FAVOR-ACCEPT d36: Naran favorId=favor-naran_tumen-36-9 accepted=true state=promised meetDay=37
+  FAVOR-ACCEPT d38: James favorId=favor-james_okonkwo-38-12 accepted=true state=promised meetDay=39
+  FAVOR-ACCEPT d70: Onni favorId=favor-onni_korhonen-70-17 accepted=true state=promised meetDay=71
+  FAVOR-ACCEPT d74: Onni favorId=favor-onni_korhonen-74-20 accepted=true state=promised meetDay=75
+  FAVOR-ACCEPT d83: Sari favorId=favor-sari_wulandari-83-23 accepted=true state=promised meetDay=84
+  FAVOR-ACCEPT d91: Onni favorId=favor-onni_korhonen-91-26 accepted=true state=promised meetDay=92
+  FAVOR-ACCEPT d93: Tomoko favorId=favor-gen_hw31n50-4-1 accepted=true state=promised meetDay=94
+  FAVOR-ACCEPT d104: Esther favorId=favor-gen_ktbfx34-104-37 accepted=true state=promised meetDay=105
+  FAVOR-ACCEPT d118: Tomoko favorId=favor-gen_hw31n50-114-44 accepted=true state=promised meetDay=119
+  FAVOR-ACCEPT d125: Naran favorId=favor-naran_tumen-125-52 accepted=true state=promised meetDay=126
+  FAVOR-ACCEPT d138: Jesse favorId=favor-jesse_cortez-138-58 accepted=true state=promised meetDay=139
+  INVITE-DEC d6 lure: Esther -> Olivia chance=61 accept=true veto=- inputs={"temp":"warm","goal":"record","mood":"hungry","fear":0,"affinity":2} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d8 party: Grace -> Stella chance=60.4 accept=false veto=- inputs={"temp":"bold","goal":"prove","mood":"steady","fear":4,"trust":26,"bond":{"v":2,"depth":0},"partySize":0} reasons=["trust 26","bold temperament (+15)"]
+  INVITE-DEC d8 lure: Esther -> Olivia chance=61 accept=true veto=- inputs={"temp":"warm","goal":"record","mood":"hungry","fear":0,"affinity":3} reasons=["relationship with inviter (+1)","warm temperament (+15)"]
+  INVITE-DEC d10 party: Grace -> Isla chance=67.2 accept=true veto=- inputs={"temp":"dry","goal":"feed","mood":"steady","fear":4,"trust":43,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 43","feed goal (+15)"]
+  INVITE-DEC d10 party: Grace -> Olivia chance=71.6 accept=true veto=- inputs={"temp":"warm","goal":"record","mood":"steady","fear":4,"trust":54,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 54","warm temperament (+15)"]
+  INVITE-DEC d10 lure: Esther -> Stella chance=68 accept=true veto=- inputs={"temp":"bold","goal":"prove","mood":"steady","fear":0,"affinity":33} reasons=["relationship with inviter (+8)","bold temperament (+15)"]
+  INVITE-DEC d13 lure: Esther -> Stella chance=69 accept=false veto=- inputs={"temp":"bold","goal":"prove","mood":"hungry","fear":0,"affinity":36} reasons=["relationship with inviter (+9)","bold temperament (+15)"]
+  INVITE-DEC d14 lure: Esther -> Stella chance=70 accept=true veto=- inputs={"temp":"bold","goal":"prove","mood":"hungry","fear":0,"affinity":40} reasons=["relationship with inviter (+10)","bold temperament (+15)"]
+  INVITE-DEC d15 lure: Carlos -> Stella chance=70 accept=true veto=- inputs={"temp":"bold","goal":"prove","mood":"lonely","fear":4,"affinity":0} reasons=["bold temperament (+15)","lonely mood (+10)"]
+  INVITE-DEC d16 party: Grace -> Tomoko chance=52.400000000000006 accept=false veto=- inputs={"temp":"earnest","goal":"understand","mood":"grieving","fear":29,"trust":56,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 56","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d19 party: Grace -> Tomoko chance=47 accept=true veto=- inputs={"temp":"earnest","goal":"understand","mood":"grieving","fear":0,"trust":55,"bond":{"v":12,"depth":0},"partySize":0} reasons=["trust 55","grieving mood (-10)"]
+  INVITE-DEC d19 party: Dorothy -> Nora chance=43.400000000000006 accept=true veto=- inputs={"temp":"gentle","goal":"family","mood":"grieving","fear":0,"trust":46,"bond":{"v":4,"depth":0},"partySize":1} reasons=["trust 46","grieving mood (-10)"]
+  INVITE-DEC d19 party: Dorothy -> Lena chance=39.8 accept=true veto=- inputs={"temp":"steady","goal":"heal","mood":"grieving","fear":0,"trust":37,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 37","grieving mood (-10)"]
+  INVITE-DEC d19 lure: Isla -> Grace chance=36 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":20,"affinity":4.5} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d20 lure: Isla -> Grace chance=36 accept=false veto=- inputs={"temp":"dry","goal":"heal","mood":"grieving","fear":20,"affinity":4.5} reasons=["relationship with inviter (+1)","grieving mood (-10)"]
+  INVITE-DEC d31 party: Dorothy -> Onni chance=40 accept=false veto=- inputs={"temp":"cautious","goal":"heal","mood":"steady","fear":4,"trust":25,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 25","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d32 party: Dorothy -> Sari chance=58 accept=true veto=- inputs={"temp":"steady","goal":"understand","mood":"steady","fear":4,"trust":45,"bond":{"v":10,"depth":0},"partySize":4} reasons=["trust 45","a big party is safer (+5)"]
+  INVITE-DEC d119 party: Esther -> Onni chance=66 accept=true veto=- inputs={"temp":"cautious","goal":"heal","mood":"grieving","fear":28,"trust":90,"bond":{"v":44,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d134 party: Tomoko -> Naran chance=46.2 accept=false veto=- inputs={"temp":"dry","goal":"escape","mood":"grieving","fear":0,"trust":78,"bond":null,"partySize":4} reasons=["trust 78","a big party is safer (+5)","wants out (-15)","grieving mood (-10)"]
+  INVITE-DEC d135 party: Tomoko -> Naran chance=56.2 accept=true veto=- inputs={"temp":"dry","goal":"escape","mood":"steady","fear":4,"trust":78,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 78","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d139 party: Onni -> James chance=61 accept=true veto=- inputs={"temp":"steady","goal":"home","mood":"grieving","fear":76,"trust":90,"bond":{"v":52,"depth":2},"partySize":1} reasons=["trust 90","a real bond (+10)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d139 party: Onni -> Jesse chance=32.400000000000006 accept=false veto=- inputs={"temp":"withdrawn","goal":"belong","mood":"grieving","fear":73,"trust":56,"bond":{"v":7,"depth":0},"partySize":2} reasons=["trust 56","withdrawn temperament (-20)","belong goal (+15)","grieving mood (-10)","afraid (-10)"]
+SEEDED-DAILY: [{"day":40,"v":42,"depth":3},{"day":42,"v":50,"depth":3},{"day":42,"v":50,"depth":3},{"day":43,"v":54,"depth":3},{"day":44,"v":56,"depth":3},{"day":45,"v":56,"depth":3},{"day":46,"v":56,"depth":3},{"day":47,"v":56,"depth":3},{"day":48,"v":58,"depth":3},{"day":49,"v":58,"depth":3},{"day":50,"v":62,"depth":3},{"day":51,"v":62,"depth":3},{"day":52,"v":66,"depth":3},{"day":53,"v":72,"depth":3}] class=rise
+GOSSIP: totalPicks=173 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=21 31-60=30 61-90=28 91-120=29 121+=20 naturalPicks=128 seededPicks=29 gossipPicks=173
+SEEDED: {"pair":{"a":"lena_ruiz","b":"nora_wilson","aName":"Lena","bName":"Nora"},"day":39,"pre":{"v":52,"depth":2},"post":{"v":40,"depth":3},"daily":[{"day":40,"v":42,"depth":3},{"day":42,"v":50,"depth":3},{"day":42,"v":50,"depth":3},{"day":43,"v":54,"depth":3},{"day":44,"v":56,"depth":3},{"day":45,"v":56,"depth":3},{"day":46,"v":56,"depth":3},{"day":47,"v":56,"depth":3},{"day":48,"v":58,"depth":3},{"day":49,"v":58,"depth":3},{"day":50,"v":62,"depth":3},{"day":51,"v":62,"depth":3},{"day":52,"v":66,"depth":3},{"day":53,"v":72,"depth":3}],"crackTraceClass":"rise","vAt7":56,"depthAt7":3,"vDrop":-4,"depthDrop":-1,"crack7":false,"firstServe":{"day":40,"why":"vgrievance"},"serveWithin30":true,"serves":42,"servesAll":[{"day":40,"why":"vgrievance"},{"day":41,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":57,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":61,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":76,"why":"vgrievance"},{"day":84,"why":"vgrievance"},{"day":92,"why":"vgrievance"},{"day":100,"why":"vgrievance"},{"day":108,"why":"vgrievance"},{"day":116,"why":"vgrievance"},{"day":134,"why":"vgrievance"}],"effect":true}
+  FRIEND d45: Tomoko <> Esther — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Esther <> Nora — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Esther <> Lena — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Dorothy <> Esther — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Tomoko <> Nora — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Lena <> Nora — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Dorothy <> Lena — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Tomoko <> Lena — maxDepth 3, final 3 (v=97), dropped 0
+  FRIEND d120: Dorothy <> Tomoko — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d85: Lena <> Sari — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d90: Esther <> Sari — maxDepth 3, final 3 (v=94), dropped 0
+  FRIEND d60: Nora <> Sari — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d100: Tomoko <> Sari — maxDepth 3, final 3 (v=85), dropped 0
+  FRIEND d60: Nora <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d110: Lena <> Onni — maxDepth 2, final 2 (v=70), dropped 0
+  FRIEND d135: James <> Sari — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d65: James <> Nora — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d135: Esther <> Onni — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d110: Onni <> Sari — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d120: James <> Lena — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d130: Tomoko <> James — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d90: Esther <> James — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d130: James <> Onni — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d110: Tomoko <> Onni — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d120: Dorothy <> Nora — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Dorothy <> Naran — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d120: Dorothy <> Sari — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Dorothy <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d29: Esther about Tomoko — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Nora about Lena — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Tomoko about Esther — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Lena about Nora — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d35: Nora about Lena — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d36: Esther about Tomoko — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Esther about Tomoko — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Nora about Lena — live depth=2 ledger depth=1 class=TP late=false inGroup=true speakerHasDeep2=true
+  CLOSE-READ d40: Tomoko about Esther — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Tomoko about Esther — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Tomoko about Esther — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Onni about Nora — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Sari about Nora — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d48: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Tomoko about Esther — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Ruby about Esther — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d53: Esther about Tomoko — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Esther about Tomoko — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Sari about Nora — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Sari about Nora — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Tomoko about Esther — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: James about Nora — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Tomoko about Esther — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: James about Nora — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Onni about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Onni about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Sari about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Onni about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d67: Sari about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d69: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Tomoko about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Esther about Tomoko — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d74: Onni about Nora — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d77: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Tomoko about Esther — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Tomoko about Esther — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d81: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Esther about Tomoko — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Tomoko about Esther — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Esther about Tomoko — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Onni about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Tomoko about Esther — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Esther about Tomoko — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: James about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Tomoko about Esther — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Esther about Tomoko — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: James about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Onni about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Tomoko about Esther — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Esther about Tomoko — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Onni about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Sari about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d120: James about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d122: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d123: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d124: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d125: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d126: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d127: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d128: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d129: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d130: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d131: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d132: Tomoko about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d133: Nora about Lena — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d136: Onni about Nora — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  STATE-FRIEND-GRIEV d40 (betrayal): Lena vs Nora (ambushed) depth 3 v 42 -> 56
+  GRIEV-READ d4: Olivia about Stella (why=grievance)
+  GRIEV-READ d9: Stella about Olivia (why=grievance)
+  GRIEV-READ d40: Lena about Nora (why=vgrievance)
+  GRIEV-READ d41: Lena about Nora (why=vgrievance)
+  GRIEV-READ d42: Lena about Nora (why=vgrievance)
+  GRIEV-READ d42: Lena about Nora (why=vgrievance)
+  KNACK d16 Tomoko: "that stray dog — the one that bit two people — lets Dorothy touch it. I hope that helps."
+  KNACK d20 Esther: "Good question." "Lena talks to the garden. The garden listens. I've seen it."
+  KNACK d24 Lena: "Huh. Let me think about that." "cuts close faster when Nora wraps them. Don't ask me how."
+  KNACK d36 Naran: "You want to know about that? Okay." "James ate something last month that should've killed them. They're fine."
+  KNACK d48 Ruby: "Sari sees in the dark. Not well — but better than you. Better than me."
+  KNACK d58 Lena: "You want to know about that? Okay." "Tomoko talks to the garden. The garden listens. I've seen it."
+  KNACK d67 Onni: "You want to know about that? Okay." "Naran talks to the garden. The garden listens. I've seen it."
+  KNACK d67 Onni: "James ate something last month that should've killed them. They're fine."
+
+deathCauses: {"ambush":1,"monster":2,"betrayal":1,"the wild":5,"the night":1}

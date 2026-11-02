@@ -1,0 +1,15 @@
+SMOKE: seed 7305, 30 days (self-test: bond census + t2pickOther wrap + grievance wrap + convos + funnel + r52 probe/class + r65 favor/outing instruments)
+SMOKE: bondSnapDays=7 convos=96 t2picks=34 grievances=2 npcPairs=52 grievStateSnaps=30 funnelTotal=84 traceBuilds=1769 traceCacheHits=834 probeTurns=29 probeTraced=29
+SMOKE-INVITE: decisions=11 lure=4 partyProbe=0 (wrap live if Game.npcInviteDecision existed; 0 decisions in 30d is report-only, not a gate)
+SMOKE-CASE: snaps=6 betrayalOfferConvos=24 mootProbePicks=0 (report-only, not a gate)
+SMOKE-FAVOR: offers=12 forageOffers=3 accepts=3 outingSteps=16 (0 favors in 30d is report-only, not a gate — the wedge proof test, not smoke, proves the wedge)
+SMOKE SELF-TEST: PASS (bond census + grievance-state census live, t2pickOther wrap firing, convos ran, funnel live)
+FLUSH: 63 written, 0 lost to EPERM flap.
+INVITE seed 7301: lure=5 acc=3 rate=60.0% chanceMean=35.6 vetoes={"sick":1} partyProbeDec=0 acc=0 partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR seed 7301: funnel={"offers":58,"forageOffers":11,"otherFavorOffers":47,"accepts":12,"acceptAttempts":12,"waits":11,"starts":8,"startBlocked":14,"forages":7,"forageNodeBarren":21,"forageBarren":2,"forageBarrenTravel":0,"forageBarrenNode":2,"forageTravelBlocked":0,"forageTravelWalked":3,"stepRetries":5,"retryAssigned":5,"retryStarts":5,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":7,"delivers":7,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":7,"keptMatched":0,"keptMatchedStrict":0} endStates=[]
+CASE seed 7301: snaps=9 betrayalOfferConvos=75 mootOffers=5 mootProbePicks=0 mootsConvened=0
+FLUSH: 1 written, 0 lost to EPERM flap.
+SEED 7301 arm=handsoff steering=true unsteeredNoOffer=28/348 unsteeredLatePicks=79 knackSame=0 knackCross=3: 118d alive=0 deep2=30 cracks=0 vCracks=0 friendGriev=1 stateFriend=1 stateVCrack=0 t2picks=272 closeReads=40 lateClose=158 lateTP=122 lateNull=0 condRate=77.2% grievServes=31 knack=12 stall=75/372 stallRate=0.20 shareWith=20.2% dry=95/372 dryRate=0.26 dry9=95 self3=0 endDry=0 coldOpen=3/372 ctr=95/0 othersSteered=22 reoffer=299/256 reofferLate=79 reofferMissed=0 wrap=45/31 wrapCls={"grievance-line":31,"deflection":2,"other":12} probe=139/87/52 funnel={"subject-no-offer":28,"offered-not-picked":67,"picked-others":250,"no-subject-no-ans":3} windows=42/70/59/79/0 seeded={"day":15,"pair":"Silas<>Hunter","crack7":false,"serve30":true,"effect":true}
+FLUSH: 1 written, 0 lost to EPERM flap.
+DONE r106.
+PILOT EXIT: 0

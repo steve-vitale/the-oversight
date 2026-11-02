@@ -263,7 +263,11 @@ for (const sd of seeds) {
     const trialRows = rows.filter(r => r.row.trialDetail);
     const finalTrial = trialRows[trialRows.length - 1];
     const td = finalTrial.row.trialDetail;
-    const midFlight = (firstTrial !== finalTrial);
+    // r106 correction: mid-flight means the VALUES differ (first snap
+    // caught the trial before finishTrial), not merely that the final
+    // snapshot row is later — trialDetail persists on the case row to
+    // run end, so row inequality alone over-fires on every trial.
+    const midFlight = (firstTrial.row.trialDetail.convicted !== td.convicted || firstTrial.row.trialDetail.finalGuilty !== td.finalGuilty);
     const last = rows[rows.length - 1].row;
     const firstRow = rows[0].row;
     const driverMootPick = (sd.betrayalPickConvos || []).some(c => (c.picks || []).some(pk => pk.pickId === 'betrayal:moot:' + id));
@@ -271,7 +275,7 @@ for (const sd of seeds) {
     const mootInDay = (firstRow.day || 0) + (firstRow.mootIn || 3); // ambush cases carry mootIn=null; npcMootTick default is 3
     console.log('  seed ' + (sd.seed || '?') + ' arm=' + (sd.arm || '?') + ' case=' + id + ' charge=' + firstRow.charge + ' accused=' + (firstRow.accused || []).join('/') + ' target=' + firstRow.target + ' role=' + firstRow.playerRole + ' opened d' + firstRow.day + ' mootIn=' + firstRow.mootIn + ' (mootInDay~d' + mootInDay + ') firstTrial snap d' + firstTrial.snapDay + ' finalTrial snap d' + finalTrial.snapDay + (midFlight ? ' (MID-FLIGHT first snap: convicted=' + firstTrial.row.trialDetail.convicted + ' finalGuilty=' + firstTrial.row.trialDetail.finalGuilty + ')' : '') + ' origin=' + origin + ' status=' + last.status + ' resolution=' + (last.resolution || '-') + ' playerConvened=' + !!last.playerConvened);
     const needFinal = Math.floor((td.present + (td.playerVoter ? 1 : 0)) / 2) + 1;
-    const verdictClass = (last.status === 'resolved' && td.convicted === true) ? ((td.guilty >= needFinal) ? 'CONVICTED-NPC-ROOM' : 'CONVICTED-PLAYER-TIPPED') : (last.status === 'resolved' ? ('OTHER:' + (last.resolution || '-')) : ('OPEN:' + last.status));
+    const verdictClass = (last.status === 'acquitted') ? 'ACQUITTED' : (last.status === 'resolved' && td.convicted === true) ? ((td.guilty >= needFinal) ? 'CONVICTED-NPC-ROOM' : 'CONVICTED-PLAYER-TIPPED') : (last.status === 'resolved' ? ('OTHER:' + (last.resolution || '-')) : ('OPEN:' + last.status));
     console.log('    VERDICT (final trialDetail): ' + verdictClass + ' (need=' + needFinal + ' npcGuilty=' + td.guilty + ' finalGuilty=' + td.finalGuilty + ')');
     console.log('    VOTE: npcGuilty=' + td.guilty + ' finalGuilty=' + td.finalGuilty + ' present=' + td.present + ' total~' + (td.present + (td.playerVoter ? 1 : 0)) + ' need~' + (Math.floor((td.present + (td.playerVoter ? 1 : 0)) / 2) + 1) + ' convicted=' + td.convicted + ' wildDay=' + td.wildDay + ' playerVoter=' + td.playerVoter + ' votes=' + (td.votes || []).length);
     const gs = (td.votes || []).filter(v => v.vote === 'guilty').map(v => v.score).filter(Number.isFinite);
