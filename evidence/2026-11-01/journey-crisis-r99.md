@@ -411,3 +411,26 @@ again and the main session's r96 flag can be stood down.
   main-session inspection), journey2-succession and
   journey2-succession-r86 (both still carry uncommitted changes,
   untouched throughout this run).
+
+## Closeout (merge #1 failed, recovery via cherry-pick)
+- Commit 2df36456 (worktree journey2-crisis-r91, rebased to
+  c5905f221 onto 978ff20cf) was committed cleanly, but the
+  --ff-only merge failed: master had moved again mid-closeout to
+  f961b8dba (loop B 0047Z round evidence, docs-only, zero
+  src/js). The closeout script then ran worktree-release
+  ("merged") and removed the worktree directory before the branch
+  delete correctly refused (branch not fully merged) — so the
+  branch survived with the commit intact, the registry entry was
+  already cleaned, and no work was lost. Nothing was force-pushed
+  or ref-surgered; the main tree stayed clean throughout.
+- Recovery: fresh registered worktree journey2-crisis-r99 on
+  current master f961b8dba, cherry-pick of the run's own commit
+  c5905f221 (3 files, blob-identical, verified), node --check on
+  both scripts, determinism re-run of seed 9821 post-recovery
+  byte-identical to the panel JSON (see determinism-postrebase
+  dir — recorded in the recovery commit's verification, not as a
+  panel change). The old branch journey2-crisis-r91 is deleted
+  after this merge lands, so the commit lands exactly once.
+- Lesson carried: verify master HEAD immediately before the
+  --ff-only merge AND run release only after the merge succeeds
+  — never release-then-merge in one chain.
