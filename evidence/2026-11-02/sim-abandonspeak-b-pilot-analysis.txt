@@ -1,0 +1,25 @@
+seed | aband | spokenEvents | abandonLines | sayCount base->narr | diffConfined | deaths base->narr | haul base->narr | away base->narr | attempts base->narr | identityDiv
+67501 | 0 | 0 | 0 | 5634->5634 | YES (+0) | 44->44 | 240.4->240.4 | 3->3 | 145->145 | 0
+67502 | 0 | 0 | 0 | 5248->5248 | YES (+0) | 36->36 | 438.1->438.1 | 0->0 | 100->100 | 0
+67503 | 0 | 0 | 0 | 5422->5422 | YES (+0) | 44->44 | 315.2->315.2 | 0->0 | 130->130 | 0
+67504 | 0 | 0 | 0 | 4920->4920 | YES (+0) | 32->32 | 138.1->138.1 | 11->11 | 133->133 | 0
+67505 | 1 | 1 | 1 | 5532->5533 | YES (+1) | 32->32 | 245->245 | 8->8 | 113->113 | 0
+67506 | 0 | 0 | 0 | 4640->4640 | YES (+0) | 24->24 | 135->135 | 0->0 | 114->114 | 0
+67507 | 0 | 0 | 0 | 5184->5184 | YES (+0) | 32->32 | 276->276 | 0->0 | 125->125 | 0
+67508 | 0 | 0 | 0 | 3099->3099 | YES (+0) | 25->25 | 91.9->91.9 | 4->4 | 83->83 | 0
+BAND seeds=8 abandonments=1 spokenEvents=1 abandonLines=1 PRIMARY=1/1 = 100%
+NOHARM medianSurvival 60->60 ratio 1.000x pass=true
+NOHARM deaths 269->269 ratio 1.000x pass=true
+NOHARM meanDailyHaul(sum) 1879.7->1879.7 ratio 1.000x pass=true
+NOHARM away 26->26 ratio 1.000x pass=true
+NOHARM forageTrips 943->943 ratio 1.000x pass=true
+VERDICT primary100=true diffConfinedAll=true noharmAll=true
+WALL narration: national/table/wins 0 (driver is pre-seat 60d; wave/maxWave per seed above in analysis rows)
+WALL seed 67501 maxWave=4 end=survived daysAlive=60
+WALL seed 67502 maxWave=3 end=survived daysAlive=60
+WALL seed 67503 maxWave=3 end=survived daysAlive=60
+WALL seed 67504 maxWave=3 end=village-lost daysAlive=56
+WALL seed 67505 maxWave=3 end=survived daysAlive=60
+WALL seed 67506 maxWave=3 end=survived daysAlive=60
+WALL seed 67507 maxWave=3 end=survived daysAlive=60
+WALL seed 67508 maxWave=2 end=village-lost daysAlive=32

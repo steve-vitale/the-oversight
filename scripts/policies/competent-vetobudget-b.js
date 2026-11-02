@@ -43,11 +43,24 @@
 // (the named productive home behavior); if no candidate succeeds,
 // the day's haven chores in competent.daily still run.
 //
+// NARRATION (sim-abandonspeak-b, 2026-11-02; canon: no silent
+// actions — every action narrates honestly, including failures).
+// The abandonment itself is spoken, exactly once, through the same
+// Game.say narration hook the guard uses for its veto line, at the
+// moment the step is marked abandoned. Suppressed attempts stay
+// silent (the line is the abandonment, not a per-attempt shout).
+// The line is fixed second-person in-world wording with no counts,
+// coordinates, or mechanism words. Narration never changes
+// behavior: it is a say() call only, wrapped so a narration failure
+// cannot break travel.
+//
 // NEVER SUPPRESSED: force calls, combatExit calls, self-calls
 // (tent-clearing side effects), and any call while in combat pass
 // through untouched, exactly as the guard passes them. On wrapper
 // error, fall back to the guarded call (never break the game on
-// instrument failure). No narration is added by this arm.
+// instrument failure). Narration added by sim-abandonspeak-b only:
+// one Game.say abandonment line at the abandonment moment (see
+// NARRATION above); nothing else in this file speaks.
 //
 // KNOWN RISK (prereg, judged by the no-harm bars): E(D) is
 // recomputed per attempt, so a step refused today could pass later
@@ -66,6 +79,10 @@ const { installGuard } = require('./competent-homewardstep-b');
 
 // Prereg N. No env override: an override would invite mid-run re-scoring.
 const VETOBUDGET_N = 3;
+
+// The one abandonment line (sim-abandonspeak-b). Fixed text, second
+// person, in-world wording; no mechanism words, counts, or coords.
+const ABANDON_LINE = 'You stop trying that way \u2014 it has turned you back again and again, and you will not spend another day on a road that will not open.';
 
 function tileKey(x, y) { return x + ',' + y; }
 function stepKey(fx, fy, tx, ty) { return fx + ',' + fy + '->' + tx + ',' + ty; }
@@ -118,6 +135,9 @@ function installBudget(Game, ctx) {
             ctx.vetobudgetAbandoned.add(key);
             ctx.vetobudgetAbandonments = (ctx.vetobudgetAbandonments || 0) + 1;
             log({ from: { x: px, y: py }, to: { x, y }, abandoned: true, count });
+            // Speak the abandonment once, through the guard's own
+            // narration hook. Narration failure must never break travel.
+            try { if (Game && typeof Game.say === 'function') Game.say(ABANDON_LINE); } catch (e3) {}
           }
         }
       } catch (e2) {}
@@ -143,4 +163,4 @@ const vetobudget = Object.assign({}, competent, {
   daily(Game, ctx) { dailyWithBudget(Game, ctx); },
 });
 
-module.exports = { vetobudget, installBudget, VETOBUDGET_N, stepKey, tileKey };
+module.exports = { vetobudget, installBudget, VETOBUDGET_N, ABANDON_LINE, stepKey, tileKey };
