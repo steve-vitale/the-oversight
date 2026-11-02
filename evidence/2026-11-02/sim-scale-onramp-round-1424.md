@@ -263,3 +263,14 @@ runs). No LOUD deviation lines; baseline NOT rolled. No
     arrivals, blocked-then-arrived mechanism (97369, 97409).
 
 Rotation left at 3 (convergence work does not cycle it).
+
+## Addendum — coordinator commit index-clobber hit + repair
+
+The coordinator commit 4b48886c2 itself was correct (1 file, 265
+insertions), but the safe-commit index-clobber class hit it too
+(staged-deletion variant: the just-committed file shown as staged
+D + untracked). Repaired via HEAD-blob cacheinfo
+(blob 7265f99042cc5c8d9a09f67feb48facab17a45af); after repair
+`git status --short` empty, `git diff HEAD` empty, hash-object
+matches the HEAD blob. Third consecutive run with this class on a
+coordinator commit (1340Z, both 1424Z workers, now coordinator).
