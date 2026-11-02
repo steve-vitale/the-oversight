@@ -7673,11 +7673,26 @@
       // SCENE (Phase 2): through the resolver.
       this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'foreign:react' });
       const r = this.renderForeign(vid, ph);
-      const narr = {
-        nod: 'They nod back, slowly.',
-        smile: 'A grin breaks through, quick and warm.',
-        pointself: 'You tap your chest, then theirs. Us. They nod, emphatic.',
-      }[kind] || 'You gesture.';
+      // FOREIGN-REACT NARRATION CYCLES (journey-scale r72): these were
+      // single fixed strings, so a repeated gesture answered identically
+      // every time (r71: Nina nod-back verbatim twice in one sitting).
+      // Same convoPickCycle convention as the fluent nv: pool — the first
+      // entry preserves the old line, the rest are honest variants of the
+      // same gesture. No trust/temper/exposure/routing change here.
+      const narrPools = {
+        nod: ['They nod back, slowly.',
+              'They nod back, a little quicker this time.',
+              'They nod, holding your gaze a beat longer.'],
+        smile: ['A grin breaks through, quick and warm.',
+                'They smile back, slower this time, like it just landed.',
+                'A smile, tired but real.'],
+        pointself: ['You tap your chest, then theirs. Us. They nod, emphatic.',
+                    'You press a hand to your own chest, then point at them. Together — they get it.',
+                    'You point at yourself, then at them, then at the fire. Together. They get it.'],
+      };
+      const narr = narrPools[kind]
+        ? this.convoPickCycle(vid, 'foreign:react:' + kind, narrPools[kind])
+        : 'You gesture.';
       const frag = this.maybeEnglishFragment(vid);
       return `${r ? r.text : 'They answer at length.'} ${narr}${frag ? ` "${frag}"` : ''}${mediatedNote}`;
     },
