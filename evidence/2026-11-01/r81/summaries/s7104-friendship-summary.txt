@@ -1,0 +1,257 @@
+# SURFACE+SEEDED — seed 7104 (141d, 2 alive)
+
+npcPairs=83 deep2=21 cracks=0 vCracks=0 friendGriev=0 stateGriev=9 stateFriend=0 stateVCrack=0 t2picks=138 closeReadsServed=22 grievanceServes=4 othersSteered=138
+COND-TP: firstDeep2Day=35 lateClose=91 lateTP=73 lateNull=0 condRate=80.2% pooledTP=75/105 pooledRate=71.4% grievReadsByWhy={"grievance":7,"vgrievance":4}
+FUNNEL (natural): convos=383 subject=340 offered=241 picked=126 classes={"no-subject-no-ans":39,"offered-not-picked":28,"subject-no-offer":100,"picked-others":126,"offered-capped":87,"no-subject-ans":3}
+FUNNEL-UNSTEERED (r55 strict): convos=257 subjectNoOffer=100 rate=38.9% offered=115 mainOffered=2 subjectOffered=114 picked=0 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Yuki / Muthu — "Good question." "that stray dog — the one that bit two people — lets Grace touch it."
+REOFFER: offers=224 picks=125 latePicks=44 missedChangedNotOffered=88
+WRAPSERVE: convos=11 matcherHits=4 matcherServes=4 classes={"grievance-line":4,"deflection":2,"other":5}
+FUNNEL-PROBE (subject-no-offer turns): turns=308 menuProblem=270 pickProblem=38
+INVITE (wrap, carried from r63): lure={"n":7,"accepts":3,"acceptRate":0.42857142857142855,"vetoes":{},"chanceMin":36,"chanceMax":57,"chanceMean":42} party={"n":18,"accepts":12,"acceptRate":0.6666666666666666,"vetoes":{},"chanceMin":8.600000000000001,"chanceMax":85.8,"chanceMean":46.5} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=4
+FAVOR (r65): funnel={"offers":38,"forageOffers":18,"otherFavorOffers":20,"accepts":20,"acceptAttempts":20,"waits":19,"starts":10,"startBlocked":16,"forages":8,"forageNodeBarren":23,"forageBarren":4,"forageBarrenTravel":0,"forageBarrenNode":4,"forageTravelBlocked":0,"forageTravelWalked":7,"stepRetries":2,"retryAssigned":2,"retryStarts":2,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":8,"delivers":7,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":7,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r80): snaps=7 betrayalOfferConvos=118 mootOffers=7 mootProbePicks=[{"day":12,"vid":"gen_nuc7muy","vidName":"Wilma","caseId":"case_2"},{"day":38,"vid":"onni_korhonen","vidName":"Onni","caseId":"case_4"},{"day":39,"vid":"nikos_papadopoulos","vidName":"Nikos","caseId":"case_6"}] mootsConvened=0
+  CASE-SNAP d11: case_2 status=open charge=murder accused=Juan/Muthu/Onni target=Yuki role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d12: case_2 status=acquitted charge=murder accused=Juan/Muthu/Onni target=Yuki role=juror known=true mootIn=null trial=true
+  CASE-SNAP d37: case_2 status=acquitted charge=murder accused=Juan/Muthu/Onni target=Yuki role=juror known=true mootIn=null trial=true
+  CASE-SNAP d37: case_4 status=open charge=ambush accused=Tamika/Muthu/Nora target=Wilma role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d38: case_2 status=acquitted charge=murder accused=Juan/Muthu/Onni target=Yuki role=juror known=true mootIn=null trial=true
+  CASE-SNAP d38: case_4 status=acquitted charge=ambush accused=Tamika/Muthu/Nora target=Wilma role=juror known=true mootIn=null trial=true
+  CASE-SNAP d38: case_6 status=open charge=murder accused=Tamika/Nora/Muthu target=Wilma role=bystander known=false mootIn=null trial=false
+  CASE-SNAP d39: case_2 status=acquitted charge=murder accused=Juan/Muthu/Onni target=Yuki role=juror known=true mootIn=null trial=true
+  CASE-SNAP d39: case_4 status=acquitted charge=ambush accused=Tamika/Muthu/Nora target=Wilma role=juror known=true mootIn=null trial=true
+  CASE-SNAP d39: case_6 status=acquitted charge=murder accused=Tamika/Nora/Muthu target=Wilma role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_2 status=acquitted charge=murder accused=Juan/Muthu/Onni target=Yuki role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_4 status=acquitted charge=ambush accused=Tamika/Muthu/Nora target=Wilma role=juror known=true mootIn=null trial=true
+  CASE-SNAP d141: case_6 status=acquitted charge=murder accused=Tamika/Nora/Muthu target=Wilma role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"yuki_mori","vidName":"Yuki","favorId":"favor-yuki_mori-9-3","state":"asked","promisedDay":null,"meetDay":null,"deadline":11,"promiseKept":null,"startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"nora_wilson","vidName":"Nora","favorId":"favor-nora_wilson-46-18","state":"broken","promisedDay":57,"meetDay":58,"deadline":59,"promiseKept":"broken","startedDay":47,"forageCount":1,"playerKcal":270,"partnerKcal":360,"deliveredKcal":0,"returnedDay":null,"talkCount":1},{"vid":"sigrun_eiriksdottir","vidName":"Sigrun","favorId":"favor-sigrun_eiriksdottir-64-26","state":"thanked","promisedDay":64,"meetDay":65,"deadline":66,"promiseKept":true,"startedDay":65,"forageCount":1,"playerKcal":450,"partnerKcal":540,"deliveredKcal":990,"returnedDay":65,"talkCount":1},{"vid":"visjoin_102","vidName":"Eilis","favorId":"favor-visjoin_102-120-39","state":"broken","promisedDay":120,"meetDay":121,"deadline":122,"promiseKept":"broken","startedDay":121,"forageCount":1,"playerKcal":180,"partnerKcal":180,"deliveredKcal":360,"returnedDay":123,"talkCount":1},{"vid":"visjoin_105","vidName":"Anahera","favorId":"favor-visjoin_105-138-43","state":"broken","promisedDay":138,"meetDay":139,"deadline":140,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d4: Muthu kind=sick_help favorId=favor-gen_ikl1fyu-4-1 task=help Muthu with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d8: Tamika kind=forage_help favorId=favor-gen_83v7olr-8-2 task=forage with Tamika tomorrow to rebuild the pantry
+  FAVOR-OFFER d9: Nora kind=forage_help favorId=favor-nora_wilson-9-4 task=forage with Nora tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Zoltan kind=forage_help favorId=favor-zoltan_nagy-10-5 task=forage with Zoltan tomorrow to rebuild the pantry
+  FAVOR-OFFER d13: Chantal kind=water_haul favorId=favor-chantal_mukendi-13-6 task=bring four liters home from the creek with Chantal; set out at dawn
+  FAVOR-OFFER d15: Onni kind=forage_help favorId=favor-onni_korhonen-15-7 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d19: Muthu kind=forage_help favorId=favor-gen_ikl1fyu-19-8 task=forage with Muthu tomorrow to rebuild the pantry
+  FAVOR-OFFER d29: Tamika kind=forage_help favorId=favor-gen_83v7olr-29-9 task=forage with Tamika tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Muthu kind=forage_help favorId=favor-gen_ikl1fyu-30-10 task=forage with Muthu tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Tamika kind=food_share favorId=favor-gen_83v7olr-35-11 task=share food with Tamika — they're going hungry
+  FAVOR-OFFER d36: Onni kind=water_haul favorId=favor-onni_korhonen-36-12 task=bring four liters home from the creek with Onni; set out at dawn
+  FAVOR-OFFER d38: Muthu kind=food_share favorId=favor-gen_ikl1fyu-38-13 task=share food with Muthu — they're going hungry
+  FAVOR-OFFER d41: Nora kind=food_share favorId=favor-nora_wilson-41-14 task=share food with Nora — they're going hungry
+  FAVOR-OFFER d41: Muthu kind=forage_help favorId=favor-gen_ikl1fyu-41-15 task=forage with Muthu tomorrow to rebuild the pantry
+  FAVOR-OFFER d43: Tamika kind=heal_help favorId=favor-gen_83v7olr-43-17 task=help Tamika with their injury
+  FAVOR-OFFER d43: Muthu kind=sick_help favorId=favor-gen_ikl1fyu-43-16 task=help Muthu with their sickness — they're feverish, a cut gone hot and angry
+  FAVOR-OFFER d46: Nora kind=forage_help favorId=favor-nora_wilson-46-18 task=forage with Nora tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Onni kind=forage_help favorId=favor-onni_korhonen-46-19 task=forage with Onni tomorrow to rebuild the pantry
+  FAVOR-OFFER d52: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-52-20 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d53: Onni kind=heal_help favorId=favor-onni_korhonen-53-21 task=help Onni with their injury
+  FAVOR-OFFER d58: Onni kind=heal_help favorId=favor-onni_korhonen-58-22 task=help Onni with their injury
+  FAVOR-OFFER d60: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-60-23 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d62: Muthu kind=forage_help favorId=favor-gen_ikl1fyu-62-24 task=forage with Muthu tomorrow to rebuild the pantry
+  FAVOR-OFFER d63: Onni kind=food_share favorId=favor-onni_korhonen-63-25 task=share food with Onni — they're running on empty
+  FAVOR-OFFER d64: Sigrun kind=forage_help favorId=favor-sigrun_eiriksdottir-64-26 task=forage with Sigrun tomorrow to rebuild the pantry
+  FAVOR-OFFER d66: Onni kind=heal_help favorId=favor-onni_korhonen-66-27 task=help Onni with their injury
+  FAVOR-OFFER d67: Naran kind=forage_help favorId=favor-naran_tumen-67-28 task=forage with Naran tomorrow to rebuild the pantry
+  FAVOR-OFFER d68: Muthu kind=heal_help favorId=favor-gen_ikl1fyu-68-29 task=help Muthu with their injury
+  FAVOR-OFFER d77: Muthu kind=heal_help favorId=favor-gen_ikl1fyu-77-30 task=help Muthu with their injury
+  FAVOR-OFFER d80: Muthu kind=forage_help favorId=favor-gen_ikl1fyu-80-31 task=forage with Muthu tomorrow to rebuild the pantry
+  FAVOR-OFFER d80: Onni kind=food_share favorId=favor-onni_korhonen-80-32 task=share food with Onni — they're going hungry
+  FAVOR-OFFER d82: Naran kind=heal_help favorId=favor-naran_tumen-82-33 task=help Naran with their injury
+  FAVOR-OFFER d83: Onni kind=food_share favorId=favor-onni_korhonen-83-35 task=share food with Onni — they're past hungry
+  FAVOR-OFFER d100: Muthu kind=heal_help favorId=favor-gen_ikl1fyu-100-36 task=help Muthu with their injury
+  FAVOR-OFFER d103: Muthu kind=food_share favorId=favor-gen_ikl1fyu-103-37 task=share food with Muthu — they're running on empty
+  FAVOR-OFFER d120: Eilis kind=forage_help favorId=favor-visjoin_102-120-39 task=forage with Eilis tomorrow to rebuild the pantry
+  FAVOR-OFFER d135: Anahera kind=heal_help favorId=favor-visjoin_105-135-42 task=help Anahera with their injury
+  FAVOR-OFFER d138: Anahera kind=forage_help favorId=favor-visjoin_105-138-43 task=forage with Anahera tomorrow to rebuild the pantry
+  FAVOR-ACCEPT d8: Tamika favorId=favor-gen_83v7olr-8-2 accepted=true state=promised meetDay=9
+  FAVOR-ACCEPT d10: Zoltan favorId=favor-zoltan_nagy-10-5 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d15: Onni favorId=favor-onni_korhonen-15-7 accepted=true state=promised meetDay=16
+  FAVOR-ACCEPT d18: Onni favorId=favor-onni_korhonen-15-7 accepted=true state=promised meetDay=19
+  FAVOR-ACCEPT d19: Muthu favorId=favor-gen_ikl1fyu-19-8 accepted=true state=promised meetDay=20
+  FAVOR-ACCEPT d29: Tamika favorId=favor-gen_83v7olr-29-9 accepted=true state=promised meetDay=30
+  FAVOR-ACCEPT d30: Nora favorId=favor-nora_wilson-9-4 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d30: Muthu favorId=favor-gen_ikl1fyu-30-10 accepted=true state=promised meetDay=31
+  FAVOR-ACCEPT d41: Muthu favorId=favor-gen_ikl1fyu-41-15 accepted=true state=promised meetDay=42
+  FAVOR-ACCEPT d46: Nora favorId=favor-nora_wilson-46-18 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d46: Onni favorId=favor-onni_korhonen-46-19 accepted=true state=promised meetDay=47
+  FAVOR-ACCEPT d52: Sigrun favorId=favor-sigrun_eiriksdottir-52-20 accepted=true state=promised meetDay=53
+  FAVOR-ACCEPT d57: Nora favorId=favor-nora_wilson-46-18 accepted=true state=promised meetDay=58
+  FAVOR-ACCEPT d60: Sigrun favorId=favor-sigrun_eiriksdottir-60-23 accepted=true state=promised meetDay=61
+  FAVOR-ACCEPT d62: Muthu favorId=favor-gen_ikl1fyu-62-24 accepted=true state=promised meetDay=63
+  FAVOR-ACCEPT d64: Sigrun favorId=favor-sigrun_eiriksdottir-64-26 accepted=true state=promised meetDay=65
+  FAVOR-ACCEPT d67: Naran favorId=favor-naran_tumen-67-28 accepted=true state=promised meetDay=68
+  FAVOR-ACCEPT d80: Muthu favorId=favor-gen_ikl1fyu-80-31 accepted=true state=promised meetDay=81
+  FAVOR-ACCEPT d120: Eilis favorId=favor-visjoin_102-120-39 accepted=true state=promised meetDay=121
+  FAVOR-ACCEPT d138: Anahera favorId=favor-visjoin_105-138-43 accepted=true state=promised meetDay=139
+  INVITE-DEC d6 lure: Onni -> Yuki chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d7 lure: Onni -> Yuki chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d8 party: Leo -> Grace chance=53.8 accept=false veto=- inputs={"temp":"anxious","goal":"legacy","mood":"steady","fear":12,"trust":47,"bond":{"v":6,"depth":0},"partySize":1} reasons=["trust 47"]
+  INVITE-DEC d8 lure: Onni -> Yuki chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"steady","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d9 party: Leo -> Nikos chance=48.2 accept=true veto=- inputs={"temp":"gentle","goal":"home","mood":"steady","fear":12,"trust":33,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 33"]
+  INVITE-DEC d9 party: Leo -> Nora chance=8.600000000000001 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":12,"trust":34,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 34","wants to be alone (-40)"]
+  INVITE-DEC d9 lure: Onni -> Yuki chance=36 accept=false veto=- inputs={"temp":"cautious","goal":"joy","mood":"hungry","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d10 party: Leo -> Wilma chance=47.8 accept=true veto=- inputs={"temp":"mischievous","goal":"prove","mood":"steady","fear":0,"trust":32,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 32"]
+  INVITE-DEC d10 lure: Onni -> Yuki chance=36 accept=true veto=- inputs={"temp":"cautious","goal":"joy","mood":"hungry","fear":4,"affinity":3} reasons=["relationship with inviter (+1)","cautious temperament (-10)"]
+  INVITE-DEC d15 party: Leo -> Grace chance=65.6 accept=true veto=- inputs={"temp":"anxious","goal":"legacy","mood":"steady","fear":0,"trust":64,"bond":{"v":8,"depth":0},"partySize":3} reasons=["trust 64","a big party is safer (+5)"]
+  INVITE-DEC d16 party: Juan -> Onni chance=28.799999999999997 accept=false veto=- inputs={"temp":"cautious","goal":"home","mood":"grieving","fear":21,"trust":22,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 22","a big party is safer (+5)","cautious temperament (-10)","grieving mood (-10)"]
+  INVITE-DEC d17 party: Juan -> Muthu chance=40.8 accept=false veto=- inputs={"temp":"gentle","goal":"lead","mood":"grieving","fear":0,"trust":27,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 27","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d18 party: Juan -> Tamika chance=85.8 accept=true veto=- inputs={"temp":"intense","goal":"belong","mood":"steady","fear":12,"trust":77,"bond":{"v":10,"depth":0},"partySize":3} reasons=["trust 77","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d24 party: Grace -> Nora chance=12 accept=false veto=- inputs={"temp":"gentle","goal":"alone","mood":"grieving","fear":0,"trust":55,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 55","a big party is safer (+5)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d25 party: Grace -> Muthu chance=66 accept=true veto=- inputs={"temp":"gentle","goal":"lead","mood":"steady","fear":12,"trust":40,"bond":{"v":32,"depth":1},"partySize":3} reasons=["trust 40","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d32 party: Grace -> Nora chance=34.8 accept=true veto=- inputs={"temp":"gentle","goal":"alone","mood":"steady","fear":4,"trust":62,"bond":{"v":28,"depth":1},"partySize":4} reasons=["trust 62","a real bond (+10)","a big party is safer (+5)","wants to be alone (-40)"]
+  INVITE-DEC d36 lure: Tamika -> Wilma chance=57 accept=true veto=- inputs={"temp":"mischievous","goal":"prove","mood":"hungry","fear":0,"affinity":49} reasons=["relationship with inviter (+12)"]
+  INVITE-DEC d37 lure: Tamika -> Wilma chance=57 accept=true veto=- inputs={"temp":"mischievous","goal":"prove","mood":"hungry","fear":4,"affinity":49} reasons=["relationship with inviter (+12)"]
+  INVITE-DEC d41 party: Grace -> Onni chance=56.400000000000006 accept=true veto=- inputs={"temp":"cautious","goal":"home","mood":"steady","fear":4,"trust":41,"bond":{"v":44,"depth":1},"partySize":4} reasons=["trust 41","a real bond (+10)","a big party is safer (+5)","cautious temperament (-10)"]
+  INVITE-DEC d47 party: Nikos -> Sigrun chance=28.4 accept=false veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"steady","fear":4,"trust":21,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 21","a big party is safer (+5)","withdrawn temperament (-20)"]
+  INVITE-DEC d49 party: Tamika -> Sigrun chance=18.4 accept=true veto=- inputs={"temp":"withdrawn","goal":"peace","mood":"grieving","fear":4,"trust":21,"bond":{"v":4,"depth":0},"partySize":3} reasons=["trust 21","a big party is safer (+5)","withdrawn temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d51 party: Tamika -> Naran chance=65.4 accept=true veto=- inputs={"temp":"dry","goal":"protect","mood":"steady","fear":12,"trust":26,"bond":null,"partySize":4} reasons=["trust 26","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d83 party: Tamika -> Enyonam chance=63.8 accept=true veto=- inputs={"temp":"mischievous","goal":"protect","mood":"steady","fear":0,"trust":22,"bond":null,"partySize":4} reasons=["trust 22","a big party is safer (+5)","protect goal (+15)"]
+  INVITE-DEC d104 party: Onni -> Eilis chance=54.2 accept=true veto=- inputs={"temp":"earnest","goal":"understand","mood":"cheerful","fear":41,"trust":23,"bond":null,"partySize":1} reasons=["trust 23","cheerful mood (+10)"]
+  INVITE-DEC d107 party: Onni -> Anahera chance=58.4 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":4,"trust":21,"bond":null,"partySize":2} reasons=["trust 21","warm temperament (+15)"]
+SEEDED-DAILY: [{"day":33,"v":40,"depth":2},{"day":34,"v":40,"depth":2},{"day":35,"v":40,"depth":2},{"day":36,"v":40,"depth":2},{"day":37,"v":40,"depth":2},{"day":38,"v":40,"depth":2},{"day":39,"v":40,"depth":2},{"day":40,"v":40,"depth":2},{"day":41,"v":40,"depth":2},{"day":42,"v":40,"depth":2},{"day":43,"v":40,"depth":2},{"day":44,"v":40,"depth":2},{"day":45,"v":40,"depth":2},{"day":46,"v":40,"depth":2}] class=stick
+GOSSIP: totalPicks=124 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=30 61-90=28 91-120=29 121+=17 naturalPicks=126 seededPicks=12 gossipPicks=124
+SEEDED: {"pair":{"a":"gen_83v7olr","b":"gen_nuc7muy","aName":"Tamika","bName":"Wilma"},"day":32,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":33,"v":40,"depth":2},{"day":34,"v":40,"depth":2},{"day":35,"v":40,"depth":2},{"day":36,"v":40,"depth":2},{"day":37,"v":40,"depth":2},{"day":38,"v":40,"depth":2},{"day":39,"v":40,"depth":2},{"day":40,"v":40,"depth":2},{"day":41,"v":40,"depth":2},{"day":42,"v":40,"depth":2},{"day":43,"v":40,"depth":2},{"day":44,"v":40,"depth":2},{"day":45,"v":40,"depth":2},{"day":46,"v":40,"depth":2}],"crackTraceClass":"stick","vAt7":40,"depthAt7":2,"vDrop":10,"depthDrop":0,"crack7":true,"firstServe":{"day":33,"why":"vgrievance"},"serveWithin30":true,"serves":4,"servesAll":[{"day":33,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"}],"effect":true}
+  FRIEND d40: Tamika <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Chantal <> Grace — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d50: Chantal <> Nikos — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d45: Grace <> Nora — maxDepth 2, final 2 (v=21), dropped 0
+  FRIEND d35: Tamika <> Wilma — maxDepth 2, final 2 (v=40), dropped 0
+  FRIEND d110: Chantal <> Onni — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d85: Chantal <> Tamika — maxDepth 3, final 3 (v=78), dropped 0
+  FRIEND d45: Tamika <> Grace — maxDepth 3, final 3 (v=74), dropped 0
+  FRIEND d85: Tamika <> Nora — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d40: Tamika <> Muthu — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d40: Muthu <> Onni — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Chantal <> Muthu — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d85: Tamika <> Nikos — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d45: Grace <> Muthu — maxDepth 3, final 3 (v=35), dropped 0
+  FRIEND d50: Muthu <> Nora — maxDepth 3, final 3 (v=96), dropped 0
+  FRIEND d75: Muthu <> Sigrun — maxDepth 3, final 3 (v=80), dropped 0
+  FRIEND d85: Tamika <> Sigrun — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d75: Muthu <> Naran — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d85: Tamika <> Naran — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d125: Chantal <> Anahera — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d130: Muthu <> Anahera — maxDepth 2, final 2 (v=58), dropped 0
+  CLOSE-READ d19: Muthu about Grace — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d21: Wilma about Tamika — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d24: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d25: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d26: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d27: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d28: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d29: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d30: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d31: Tamika about Wilma — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Tamika about Wilma — live depth=2 ledger depth=1 class=TP late=false inGroup=true speakerHasDeep2=true
+  CLOSE-READ d33: Wilma about Tamika — live depth=2 ledger depth=1 class=TP late=false inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Nikos about Tamika — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Nora about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Muthu about Onni — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d38: Muthu about Onni — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d39: Tamika about Muthu — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Nora about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Nikos about Tamika — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Nora about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Muthu about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d44: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Muthu about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d45: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Nora about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d47: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Onni about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d49: Nora about Muthu — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Muthu about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d51: Nora about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Muthu about Onni — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d55: Tamika about Onni — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d56: Nora about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Nora about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d59: Nora about Muthu — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Muthu about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d61: Tamika about Onni — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d61: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d62: Naran about Muthu — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d63: Nora about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Sigrun about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d65: Naran about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d66: Muthu about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Sigrun about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d70: Naran about Muthu — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d71: Sigrun about Muthu — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d72: Naran about Muthu — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Sigrun about Muthu — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d75: Sigrun about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Naran about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Onni about Muthu — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d79: Sigrun about Muthu — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d80: Muthu about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Muthu about Onni — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Naran about Muthu — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Naran about Muthu — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d89: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d91: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d95: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d96: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d99: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d102: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Muthu about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Anahera about Chantal — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d121: Eilis about Chantal — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d122: Eilis about Chantal — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d123: Anahera about Chantal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d124: Eilis about Chantal — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d126: Eilis about Chantal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d127: Eilis about Chantal — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d128: Anahera about Chantal — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d130: Anahera about Chantal — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d131: Anahera about Chantal — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d132: Anahera about Chantal — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d133: Anahera about Chantal — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d135: Anahera about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d136: Anahera about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d137: Anahera about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d138: Anahera about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d139: Anahera about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d140: Anahera about Chantal — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d6: Nikos about Tamika (why=grievance)
+  GRIEV-READ d7: Yuki about Juan (why=grievance)
+  GRIEV-READ d9: Nikos about Tamika (why=grievance)
+  GRIEV-READ d16: Nikos about Tamika (why=grievance)
+  GRIEV-READ d18: Tamika about Nikos (why=grievance)
+  GRIEV-READ d20: Tamika about Nikos (why=grievance)
+  KNACK d4 Grace: "Good question." "Yuki ate something last month that should've killed them. They're fine."
+  KNACK d7 Yuki: "Good question." "that stray dog — the one that bit two people — lets Grace touch it."
+  KNACK d11 Nikos: "Nora ate something last month that should've killed them. They're fine."
+  KNACK d12 Nikos: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Grace touch it."
+  KNACK d15 Grace: "Good question." "Tamika talks to the garden. The garden listens. I've seen it. Not that it matters."
+  KNACK d22 Muthu: "Good question." "that stray dog — the one that bit two people — lets Grace touch it."
+  KNACK d37 Tamika: "Good question." "Sure — Onni ate something last month that should've killed them. They're fine."
+  KNACK d52 Tamika: "Sigrun talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"ambush":2,"dehydration":1,"monster":1,"the wild":5,"a stranger":1,"a wound that wouldn't close":1,"combat":1,"contest":1,"the night":1}

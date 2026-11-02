@@ -1,0 +1,197 @@
+# SURFACE+SEEDED — seed 7103 (131d, 0 alive)
+
+npcPairs=87 deep2=24 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=122 closeReadsServed=19 grievanceServes=6 othersSteered=122
+COND-TP: firstDeep2Day=25 lateClose=81 lateTP=61 lateNull=0 condRate=75.3% pooledTP=61/86 pooledRate=70.9% grievReadsByWhy={"grievance":1,"vgrievance":6}
+FUNNEL (natural): convos=375 subject=349 offered=185 picked=100 classes={"no-subject-no-ans":25,"subject-no-offer":165,"offered-not-picked":27,"picked-others":100,"offered-capped":58}
+FUNNEL-UNSTEERED (r55 strict): convos=275 subjectNoOffer=165 rate=60.0% offered=85 mainOffered=2 subjectOffered=84 picked=0 latePicks=0 latePicksMain=0 latePicksSubject=0
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=0
+REOFFER: offers=174 picks=112 latePicks=29 missedChangedNotOffered=7
+WRAPSERVE: convos=7 matcherHits=6 matcherServes=6 classes={"grievance-line":6,"deflection":0,"other":1}
+FUNNEL-PROBE (subject-no-offer turns): turns=273 menuProblem=213 pickProblem=60
+INVITE (wrap, carried from r63): lure={"n":0,"accepts":0,"acceptRate":null,"vetoes":{},"chanceMin":null,"chanceMax":null,"chanceMean":null} party={"n":22,"accepts":10,"acceptRate":0.45454545454545453,"vetoes":{},"chanceMin":11,"chanceMax":86,"chanceMean":46.6} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=5
+FAVOR (r65): funnel={"offers":25,"forageOffers":7,"otherFavorOffers":18,"accepts":7,"acceptAttempts":7,"waits":4,"starts":4,"startBlocked":5,"forages":3,"forageNodeBarren":9,"forageBarren":2,"forageBarrenTravel":0,"forageBarrenNode":2,"forageTravelBlocked":0,"forageTravelWalked":1,"stepRetries":2,"retryAssigned":2,"retryStarts":2,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":3,"delivers":3,"deliverBlocked":0,"completeOutings":0,"completeOutingsEvents":3,"keptMatched":0,"keptMatchedStrict":0}
+CASE (r80): snaps=2 betrayalOfferConvos=65 mootOffers=0 mootProbePicks=[] mootsConvened=0
+OUTING END STATES: [{"vid":"catalina_reyes","vidName":"Catalina","favorId":"favor-catalina_reyes-7-2","state":"acknowledged","promisedDay":10,"meetDay":11,"deadline":9,"promiseKept":"broken","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"nikolai_volkov","vidName":"Nikolai","favorId":"favor-nikolai_volkov-17-4","state":"broken","promisedDay":20,"meetDay":21,"deadline":19,"promiseKept":"broken","startedDay":21,"forageCount":8,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0},{"vid":"brian_otieno","vidName":"Brian","favorId":"favor-brian_otieno-119-24","state":"moot","promisedDay":119,"meetDay":120,"deadline":121,"promiseKept":"released","startedDay":null,"forageCount":0,"playerKcal":0,"partnerKcal":0,"deliveredKcal":0,"returnedDay":null,"talkCount":0}]
+  FAVOR-OFFER d6: Yara kind=forage_help favorId=favor-yara_haddad-6-1 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d10: Catalina kind=forage_help favorId=favor-catalina_reyes-7-2 task=forage with Catalina tomorrow to rebuild the pantry
+  FAVOR-OFFER d16: Tyrone kind=forage_help favorId=favor-gen_xiklxpz-16-3 task=forage with Tyrone tomorrow to rebuild the pantry
+  FAVOR-OFFER d20: Nikolai kind=forage_help favorId=favor-nikolai_volkov-17-4 task=forage with Nikolai tomorrow to rebuild the pantry
+  FAVOR-OFFER d21: Tyrone kind=food_share favorId=favor-gen_xiklxpz-21-5 task=share food with Tyrone — they're running on empty
+  FAVOR-OFFER d31: Yara kind=forage_help favorId=favor-yara_haddad-30-6 task=forage with Yara tomorrow to rebuild the pantry
+  FAVOR-OFFER d49: Hunter kind=food_share favorId=favor-gen_e9xu7lf-49-7 task=share food with Hunter — they're running on empty
+  FAVOR-OFFER d57: Wanjiru kind=heal_help favorId=favor-wanjiru_kamau-57-8 task=help Wanjiru with their injury
+  FAVOR-OFFER d88: Yara kind=water_haul favorId=favor-yara_haddad-88-9 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d90: Brian kind=sick_help favorId=favor-brian_otieno-89-10 task=help Brian with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d91: Petra kind=water_haul favorId=favor-petra_novak-91-11 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d93: Yara kind=water_haul favorId=favor-yara_haddad-93-12 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d95: Brian kind=water_haul favorId=favor-brian_otieno-95-13 task=bring four liters home from the creek with Brian; set out at dawn
+  FAVOR-OFFER d96: Sari kind=food_share favorId=favor-sari_wulandari-96-14 task=share food with Sari — they're running on empty
+  FAVOR-OFFER d100: Brian kind=water_haul favorId=favor-brian_otieno-100-16 task=bring four liters home from the creek with Brian; set out at dawn
+  FAVOR-OFFER d101: Brian kind=sick_help favorId=favor-brian_otieno-101-17 task=help Brian with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d103: Petra kind=forage_help favorId=favor-petra_novak-99-15 task=forage with Petra tomorrow to rebuild the pantry
+  FAVOR-OFFER d106: Brian kind=water_haul favorId=favor-brian_otieno-106-18 task=bring four liters home from the creek with Brian; set out at dawn
+  FAVOR-OFFER d106: Sari kind=food_share favorId=favor-sari_wulandari-106-19 task=share food with Sari — they're running on empty
+  FAVOR-OFFER d107: Yara kind=water_haul favorId=favor-yara_haddad-107-20 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d110: Brian kind=sick_help favorId=favor-brian_otieno-110-21 task=help Brian with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d115: Petra kind=water_haul favorId=favor-petra_novak-115-22 task=bring four liters home from the creek with Petra; set out at dawn
+  FAVOR-OFFER d117: Yara kind=water_haul favorId=favor-yara_haddad-117-23 task=bring four liters home from the creek with Yara; set out at dawn
+  FAVOR-OFFER d119: Brian kind=forage_help favorId=favor-brian_otieno-119-24 task=forage with Brian tomorrow to rebuild the pantry
+  FAVOR-OFFER d129: Farid kind=food_share favorId=favor-farid_ahmed-129-25 task=share food with Farid — they're running on empty
+  FAVOR-ACCEPT d6: Yara favorId=favor-yara_haddad-6-1 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d10: Catalina favorId=favor-catalina_reyes-7-2 accepted=true state=promised meetDay=11
+  FAVOR-ACCEPT d16: Tyrone favorId=favor-gen_xiklxpz-16-3 accepted=true state=promised meetDay=17
+  FAVOR-ACCEPT d20: Nikolai favorId=favor-nikolai_volkov-17-4 accepted=true state=promised meetDay=21
+  FAVOR-ACCEPT d31: Yara favorId=favor-yara_haddad-30-6 accepted=true state=promised meetDay=32
+  FAVOR-ACCEPT d103: Petra favorId=favor-petra_novak-99-15 accepted=true state=promised meetDay=104
+  FAVOR-ACCEPT d119: Brian favorId=favor-brian_otieno-119-24 accepted=true state=promised meetDay=120
+  INVITE-DEC d9 party: Kevin -> Wanjiru chance=63.2 accept=true veto=- inputs={"temp":"warm","goal":"family","mood":"steady","fear":4,"trust":33,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 33","warm temperament (+15)"]
+  INVITE-DEC d12 party: Kevin -> Yara chance=61.2 accept=true veto=- inputs={"temp":"cautious","goal":"protect","mood":"steady","fear":4,"trust":53,"bond":{"v":8,"depth":0},"partySize":2} reasons=["trust 53","cautious temperament (-10)","protect goal (+15)"]
+  INVITE-DEC d15 party: Kevin -> Hunter chance=68.4 accept=false veto=- inputs={"temp":"dry","goal":"answers","mood":"steady","fear":12,"trust":71,"bond":{"v":6,"depth":0},"partySize":3} reasons=["trust 71","a big party is safer (+5)"]
+  INVITE-DEC d17 party: Kevin -> Rim chance=80.2 accept=true veto=- inputs={"temp":"stoic","goal":"feed","mood":"steady","fear":0,"trust":63,"bond":{"v":13,"depth":0},"partySize":3} reasons=["trust 63","a big party is safer (+5)","feed goal (+15)"]
+  INVITE-DEC d32 party: Sidney -> Hunter chance=86 accept=true veto=- inputs={"temp":"dry","goal":"answers","mood":"steady","fear":0,"trust":90,"bond":{"v":42,"depth":1},"partySize":4} reasons=["trust 90","a real bond (+10)","a big party is safer (+5)"]
+  INVITE-DEC d38 party: Tyrone -> Catalina chance=45 accept=false veto=- inputs={"temp":"bold","goal":"alone","mood":"grieving","fear":56,"trust":100,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 100","a big party is safer (+5)","bold temperament (+15)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d41 party: Tyrone -> Catalina chance=55 accept=true veto=- inputs={"temp":"bold","goal":"alone","mood":"steady","fear":12,"trust":100,"bond":{"v":6,"depth":0},"partySize":4} reasons=["trust 100","a big party is safer (+5)","bold temperament (+15)","wants to be alone (-40)"]
+  INVITE-DEC d65 party: Tyrone -> Brian chance=58.8 accept=false veto=- inputs={"temp":"gentle","goal":"feed","mood":"steady","fear":0,"trust":22,"bond":null,"partySize":2} reasons=["trust 22","feed goal (+15)"]
+  INVITE-DEC d67 party: Tyrone -> Brian chance=62.8 accept=true veto=- inputs={"temp":"gentle","goal":"feed","mood":"steady","fear":0,"trust":32,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 32","feed goal (+15)"]
+  INVITE-DEC d78 party: Wanjiru -> Sari chance=36.8 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":0,"trust":42,"bond":{"v":10,"depth":0},"partySize":2} reasons=["trust 42","wants out (-15)"]
+  INVITE-DEC d81 party: Wanjiru -> Petra chance=49 accept=true veto=- inputs={"temp":"steady","goal":"survive","mood":"steady","fear":4,"trust":35,"bond":{"v":6,"depth":0},"partySize":2} reasons=["trust 35"]
+  INVITE-DEC d81 party: Wanjiru -> Sari chance=41.8 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":4,"trust":42,"bond":{"v":12,"depth":0},"partySize":3} reasons=["trust 42","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d82 party: Wanjiru -> Sari chance=42.6 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":0,"trust":44,"bond":{"v":14,"depth":0},"partySize":3} reasons=["trust 44","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d83 party: Wanjiru -> Sari chance=43.8 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":12,"trust":47,"bond":{"v":16,"depth":0},"partySize":3} reasons=["trust 47","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d84 party: Wanjiru -> Sari chance=44.6 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":12,"trust":49,"bond":{"v":18,"depth":0},"partySize":3} reasons=["trust 49","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d89 party: Wanjiru -> Sari chance=45.400000000000006 accept=false veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":4,"trust":51,"bond":{"v":20,"depth":0},"partySize":3} reasons=["trust 51","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d90 party: Wanjiru -> Sari chance=45.8 accept=true veto=- inputs={"temp":"steady","goal":"escape","mood":"steady","fear":12,"trust":52,"bond":{"v":22,"depth":0},"partySize":3} reasons=["trust 52","a big party is safer (+5)","wants out (-15)"]
+  INVITE-DEC d122 party: Nikolai -> Regina chance=11 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":96,"trust":90,"bond":{"v":78,"depth":3},"partySize":0} reasons=["trust 90","a real bond (+10)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d123 party: Nikolai -> Regina chance=11 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":76,"trust":90,"bond":{"v":80,"depth":3},"partySize":0} reasons=["trust 90","a real bond (+10)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d124 party: Nikolai -> Regina chance=21 accept=false veto=- inputs={"temp":"cautious","goal":"alone","mood":"grieving","fear":60,"trust":90,"bond":{"v":82,"depth":3},"partySize":0} reasons=["trust 90","a real bond (+10)","cautious temperament (-10)","wants to be alone (-40)","grieving mood (-10)"]
+  INVITE-DEC d126 party: Nikolai -> Regina chance=31 accept=true veto=- inputs={"temp":"cautious","goal":"alone","mood":"hungry","fear":4,"trust":90,"bond":{"v":86,"depth":3},"partySize":0} reasons=["trust 90","a real bond (+10)","cautious temperament (-10)","wants to be alone (-40)"]
+  INVITE-DEC d129 party: Sigrun -> Farid chance=21.799999999999997 accept=true veto=- inputs={"temp":"cautious","goal":"joy","mood":"grieving","fear":92,"trust":42,"bond":{"v":10,"depth":0},"partySize":0} reasons=["trust 42","cautious temperament (-10)","grieving mood (-10)","afraid (-10)"]
+SEEDED-DAILY: [{"day":24,"v":42,"depth":2},{"day":25,"v":42,"depth":2},{"day":26,"v":42,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":50,"depth":3},{"day":30,"v":50,"depth":3},{"day":31,"v":58,"depth":3},{"day":32,"v":58,"depth":3},{"day":33,"v":66,"depth":3},{"day":34,"v":68,"depth":3},{"day":35,"v":68,"depth":3},{"day":36,"v":72,"depth":3},{"day":37,"v":76,"depth":3}] class=no-drop
+GOSSIP: totalPicks=85 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=22 31-60=23 61-90=26 91-120=29 121+=0 naturalPicks=100 seededPicks=22 gossipPicks=85
+SEEDED: {"pair":{"a":"gen_e9xu7lf","b":"gen_xiklxpz","aName":"Hunter","bName":"Tyrone"},"day":23,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":24,"v":42,"depth":2},{"day":25,"v":42,"depth":2},{"day":26,"v":42,"depth":2},{"day":27,"v":42,"depth":2},{"day":28,"v":46,"depth":2},{"day":29,"v":50,"depth":3},{"day":30,"v":50,"depth":3},{"day":31,"v":58,"depth":3},{"day":32,"v":58,"depth":3},{"day":33,"v":66,"depth":3},{"day":34,"v":68,"depth":3},{"day":35,"v":68,"depth":3},{"day":36,"v":72,"depth":3},{"day":37,"v":76,"depth":3}],"crackTraceClass":"no-drop","vAt7":50,"depthAt7":3,"vDrop":0,"depthDrop":-1,"crack7":false,"firstServe":{"day":25,"why":"vgrievance"},"serveWithin30":true,"serves":6,"servesAll":[{"day":25,"why":"vgrievance"},{"day":33,"why":"vgrievance"},{"day":34,"why":"vgrievance"},{"day":35,"why":"vgrievance"},{"day":36,"why":"vgrievance"},{"day":37,"why":"vgrievance"}],"effect":true}
+  FRIEND d40: Hunter <> Sidney — maxDepth 2, final 2 (v=56), dropped 0
+  FRIEND d25: Hunter <> Tyrone — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d45: Rim <> Hunter — maxDepth 2, final 2 (v=64), dropped 0
+  FRIEND d55: Elif <> Hunter — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d35: Hunter <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Regina <> Yara — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d30: Hunter <> Yara — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d125: Wanjiru <> Yara — maxDepth 2, final 2 (v=63), dropped 0
+  FRIEND d45: Hunter <> Wanjiru — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d75: Elif <> Regina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d70: Tyrone <> Sigrun — maxDepth 2, final 2 (v=62), dropped 0
+  FRIEND d70: Tyrone <> Yara — maxDepth 2, final 2 (v=58), dropped 0
+  FRIEND d120: Elif <> Nikolai — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d70: Sigrun <> Yara — maxDepth 3, final 3 (v=92), dropped 0
+  FRIEND d30: Hunter <> Regina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Elif <> Wanjiru — maxDepth 2, final 2 (v=67), dropped 0
+  FRIEND d80: Elif <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d65: Regina <> Sigrun — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d120: Regina <> Wanjiru — maxDepth 2, final 2 (v=54), dropped 0
+  FRIEND d85: Regina <> Nikolai — maxDepth 3, final 3 (v=88), dropped 0
+  FRIEND d120: Sari <> Wanjiru — maxDepth 2, final 2 (v=57), dropped 0
+  FRIEND d100: Brian <> Regina — maxDepth 3, final 3 (v=90), dropped 0
+  FRIEND d100: Regina <> Petra — maxDepth 3, final 3 (v=76), dropped 0
+  FRIEND d120: Brian <> Wanjiru — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d16: Tyrone about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d18: Tyrone about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Yara about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d21: Tyrone about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d23: Yara about Hunter — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Yara about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Tyrone about Hunter — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d31: Yara about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d33: Tyrone about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d34: Wanjiru about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Wanjiru about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Yara about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d37: Yara about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Hunter about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d38: Yara about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Hunter about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d39: Wanjiru about Hunter — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Hunter about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d41: Hunter about Sigrun — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d42: Hunter about Sigrun — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Hunter about Yara — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d43: Yara about Hunter — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Hunter about Regina — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d44: Hunter about Regina — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d45: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d46: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d48: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Wanjiru about Hunter — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d50: Yara about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Yara about Hunter — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d52: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d55: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Hunter about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d57: Hunter about Sigrun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Hunter about Sigrun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d59: Hunter about Sigrun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Hunter about Sigrun — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Yara about Regina — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d64: Yara about Regina — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d65: Yara about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d66: Wanjiru about Elif — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d67: Wanjiru about Elif — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d77: Yara about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Brian about Regina — live depth=1 ledger depth=0 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d80: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d82: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d84: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d85: Yara about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d87: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d88: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d89: Petra about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d90: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d92: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d93: Yara about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d95: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d96: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d97: Petra about Regina — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Brian about Regina — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d100: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Yara about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d103: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d104: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d105: Petra about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d108: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d109: Yara about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d111: Brian about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Brian about Regina — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Petra about Regina — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Brian about Regina — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Brian about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Yara about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d118: Brian about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d119: Brian about Regina — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d8: Sidney about Nikolai (why=grievance)
+  GRIEV-READ d25: Hunter about Tyrone (why=vgrievance)
+  GRIEV-READ d33: Hunter about Tyrone (why=vgrievance)
+  GRIEV-READ d34: Hunter about Tyrone (why=vgrievance)
+  GRIEV-READ d35: Hunter about Tyrone (why=vgrievance)
+  GRIEV-READ d36: Hunter about Tyrone (why=vgrievance)
+  KNACK d14 Catalina: "Rim sees in the dark. Not well — but better than you. Better than me."
+  KNACK d14 Rim: "Good question." "Nikolai talks to the garden. The garden listens. I've seen it. That's the whole of it."
+  KNACK d53 Hunter: "Regina talks to the garden. The garden listens. I've seen it."
+  KNACK d55 Hunter: "Good question." "Yara found a lost knife by smell last week. By SMELL."
+  KNACK d61 Yara: "Good question." "Sigrun talks to the garden. The garden listens. I've seen it."
+  KNACK d73 Petra: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Sari touch it."
+  KNACK d126 Regina: "Huh. Let me think about that." "Sigrun talks to the garden. The garden listens. I've seen it."
+
+deathCauses: {"starvation":1,"the wild":9,"monster":4,"the night":1,"a stranger":1}

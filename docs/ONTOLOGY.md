@@ -336,6 +336,7 @@ Real back-and-forth dialogue. Player always has response choices.
 - resume_honest_time: the resume opener names how long the thread hung (a 12-day-old thread is not "last time") and nods at other hanging threads so none feel orphaned (code: convoResumeOpener, Steve 2026-10-07)
 - goodbye_once_real: endConvo is a no-op on an inactive conversation (no repeat-call trust payouts); the talk stipend scales with exchanges (0=none, 1-2=+1, 3+=+3) and the mood residue (talk-capped at 40 like the stipend — words only go so far, r8 2026-10-09) lingers only after 3+ exchanges in a SUBSTANTIVE conversation (c.substantive set by the convoTurn wrapper / convoMarkSubstantive — agree-spam must not smuggle trust past the 40 talk cap) (code: endConvo, break-it 2026-10-08)
 - question_dodge_lapse: a hanging bespoke question dodged with silence gets one noticed follow-up, then lapses honestly (same convention as dodged generic questions) — a lapsed question unblocks the winddown (!c.pendingQ gate); a queued-but-unrevealed question stonewalled twice is dropped unspoken (the moment passes, askedQs marked so it isn't re-queued) (code: convoPendingQDodge/convoHeldAskDodge, socialite r12 2026-10-10)
+- nonverbal_fallback: a blocked beat inside a nonverbal conversation falls back to unquoted gesture narration, never to the English deflection pool; the narration is not a deflection line for census or streak purposes (code: sayLine, convoNonverbalFallbackLine)
 
 **Consumes:** village.villagers, state.convos, village.topicLog, village.saidFacts, village.memory, npcNeeds(rid)
 
@@ -657,6 +658,7 @@ Joint foraging outings for a promised pantry run: travel together, forage the sa
 - known_food_only_split: plants nobody knows stay lumped in the player's bag and are never split as food; wood and crafting bits stay with the player (code: performForageFavor)
 - temporary_companion: no permanent party membership or successor escort (code: forageFavorCompanions, travelingWith wrapper)
 - no_gate_change: this module sets no deed, scale, stage, readiness, or table price (code: this file, convo-wants.js dispatch only)
+- end_without_partner: a gone partner blocks forage/deliver but never blocks ending at home; only the player's matched share banks, the partner's share is named lost, never deposited (code: forageFavorAction, performForageFavor)
 
 **Consumes:** state.village, state.scholar, doAction('forage'), depositPantryPieces(v, item, pieceKcal), checkPromises(kind, vid, opts), travelingWith(), placePartyAtPlayer()
 

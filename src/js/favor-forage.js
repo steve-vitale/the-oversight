@@ -24,6 +24,7 @@
 //   - known_food_only_split: plants nobody knows stay lumped in the player's bag and are never split as food; wood and crafting bits stay with the player (code: performForageFavor)
 //   - temporary_companion: no permanent party membership or successor escort (code: forageFavorCompanions, travelingWith wrapper)
 //   - no_gate_change: this module sets no deed, scale, stage, readiness, or table price (code: this file, convo-wants.js dispatch only)
+//   - end_without_partner: a gone partner blocks forage/deliver but never blocks ending at home; only the player's matched share banks, the partner's share is named lost, never deposited (code: forageFavorAction, performForageFavor)
 (function(){
  'use strict';
  const G=(globalThis.Scattering||{}).Game;if(!G)return;
@@ -110,6 +111,28 @@
    if(this.over||s.dead)return block('This life has ended.');
    if(this.inCombat&&this.inCombat())return block('Finish the fight before foraging together.');
    if(this.state.activeContest||this.tableActive?.())return block('Finish the current event before foraging together.');
+   // r81 END-WITHOUT-PARTNER (journey-social r81: the partner-death
+   // hang): a dead, away, or roster-gone partner blocks foraging and
+   // delivery — there is no partner to forage or deliver with — but
+   // must NOT block ENDING the outing. Before this fix the
+   // partner-dead block fired before the ending branch, so a
+   // partner-death outing could never close: the favor sat
+   // 'promised' with a released promise, delivered 0, returned null,
+   // and the wedge re-attempted it daily forever (r80 Henry 420
+   // kcal, r81 Sanne). Ending still requires the original bearer,
+   // still requires being at home, and still deposits ONLY the
+   // player's matched share — the partner's virtual share never
+   // becomes pantry food (see the unload below).
+   if(ending&&r&&r.bearer===this.villagerId){
+    const gone=!(v.roster||[]).includes(vid)||!this.getPerson(vid)||this.getPerson(vid).dead||!!v.away?.[vid];
+    if(gone){
+     const home=homePoint(this);
+     if(!(this.map.px===home.x&&this.map.py===home.y))return block('Return to Haven to unload and end this outing.');
+     const pk=haulKcal(r.playerHaul);
+     const dead=!!this.getPerson(vid)?.dead;
+     return{ready:true,action:'forage_end',reason:'You carry '+pk+' kcal; your partner is gone, and their share '+(dead?'is lost with them.':'stays with them, wherever they are.')+' Unload what you carry and end this outing.'};
+    }
+   }
    if(!(v.roster||[]).includes(vid)||vid===this.villagerId||!this.getPerson(vid)||this.getPerson(vid).dead)return block('Your partner is no longer available for this outing.');
    if(r&&r.bearer!==this.villagerId)return block('That outing belonged to the previous bearer. It is not your promise.');
    const adj=adjacent(this,vid);if(!adj.ok)return block(adj.reason);
@@ -228,7 +251,14 @@
     }
    }
    s.inventory=(s.inventory||[]).filter(it=>(it.units||0)>0);
+   // r81: a gone partner's virtual share never deposits. It was never
+   // in any inventory — it becomes real only via this deposit — so
+   // depositing it after their death would conjure food nobody
+   // carries. The player's matched share above is the only honest
+   // arrival; the loss is named in the return line below.
+   const partnerGone=!(v.roster||[]).includes(vid)||!this.getPerson(vid)||this.getPerson(vid).dead||!!v.away?.[vid];
    for(const item of (r.partnerHaul||[])){
+    if(partnerGone)break;
     try{deliveredPartner+=this.depositPantryPieces(v,Object.assign({},item),500)||0;}catch(e){}
    }
    const delivered=deliveredPlayer+deliveredPartner;
@@ -240,6 +270,10 @@
    f.state=missed?'broken':'fulfilled';if(!missed)f.fulfilledDay=s.day;
    try{this.tele('favor_forage_return',{favorId:f.id,partner:vid,playerKcal:deliveredPlayer,partnerKcal:deliveredPartner,deliveredKcal:delivered,kept:!missed,endedEarly:status.action==='forage_end'});}catch(e){}
    this.journalFavorPromise?.(vid,v.promises?.[vid]);this.save();
+   if(partnerGone&&status.action==='forage_end'){
+    const dead=!!this.getPerson(vid)?.dead;
+    return{ok:true,close:true,promiseMissed:missed,line:'You unload your share: '+deliveredPlayer+' kcal into the pantry. '+first+'\'s share '+(dead?'is lost with them.':'stays with them, wherever they are.')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':'')};
+   }
    return{ok:true,close:true,promiseMissed:missed,line:'You unload both shares: '+deliveredPlayer+' kcal from you, '+deliveredPartner+' kcal from '+first+' — '+delivered+' kcal into the pantry.'+(missed?' The promise was missed; unloading does not earn kept-promise credit.':' You both made the trip and brought the food home.')};
   },
  });

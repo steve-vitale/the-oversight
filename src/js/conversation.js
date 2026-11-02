@@ -57,6 +57,7 @@
 //   - resume_honest_time: the resume opener names how long the thread hung (a 12-day-old thread is not "last time") and nods at other hanging threads so none feel orphaned (code: convoResumeOpener, Steve 2026-10-07)
 //   - goodbye_once_real: endConvo is a no-op on an inactive conversation (no repeat-call trust payouts); the talk stipend scales with exchanges (0=none, 1-2=+1, 3+=+3) and the mood residue (talk-capped at 40 like the stipend — words only go so far, r8 2026-10-09) lingers only after 3+ exchanges in a SUBSTANTIVE conversation (c.substantive set by the convoTurn wrapper / convoMarkSubstantive — agree-spam must not smuggle trust past the 40 talk cap) (code: endConvo, break-it 2026-10-08)
 //   - question_dodge_lapse: a hanging bespoke question dodged with silence gets one noticed follow-up, then lapses honestly (same convention as dodged generic questions) — a lapsed question unblocks the winddown (!c.pendingQ gate); a queued-but-unrevealed question stonewalled twice is dropped unspoken (the moment passes, askedQs marked so it isn't re-queued) (code: convoPendingQDodge/convoHeldAskDodge, socialite r12 2026-10-10)
+//   - nonverbal_fallback: a blocked beat inside a nonverbal conversation falls back to unquoted gesture narration, never to the English deflection pool; the narration is not a deflection line for census or streak purposes (code: sayLine, convoNonverbalFallbackLine)
 // consumes:
 //   - village.villagers
 //   - state.convos
@@ -970,10 +971,16 @@
         if (runBlocked || (selfBlocked && !convoBlocked)) {
           // Another villager said it recently, or THIS villager said it in
           // an earlier sitting — the "I just said" accusation would be a
-          // lie either way. Honest dry line.
-          const dry = this.convoDryLine(vid);
-          if (!dry) return null;
-          useChunks = this.convoSplitBeats(dry);
+          // lie either way. Honest dry line — unless the conversation
+          // is nonverbal, where English meta-speech is a fiction
+          // break (r81 Chantal): gesture narration instead.
+          if (c.thread === 'nonverbal') {
+            useChunks = this.convoSplitBeats(this.convoNonverbalFallbackLine(vid));
+          } else {
+            const dry = this.convoDryLine(vid);
+            if (!dry) return null;
+            useChunks = this.convoSplitBeats(dry);
+          }
         } else {
           let fb = opts && opts.fallback;
           // LAZY FALLBACK (journey-social 2026-10-12 r6): a function fallback
@@ -981,6 +988,10 @@
           // burned a pool slot on every successful sayLine and phase-shifted
           // the cycle. Plain strings still work.
           if (typeof fb === 'function') { try { fb = fb(); } catch (e) { fb = null; } }
+          // r81: a within-sitting self-repeat with no caller fallback
+          // inside a nonverbal conversation gets the gesture fallback,
+          // never silence and never English meta-speech.
+          if (!fb && c.thread === 'nonverbal') fb = this.convoNonverbalFallbackLine(vid);
           if (!fb) return null; // blocked: already said
           useChunks = this.convoSplitBeats(String(fb));
         }
@@ -1180,6 +1191,34 @@
       const POOL = this.convoDeflectionLines().slice(9);
       const used = c.selfRepeatLines || 0;
       c.selfRepeatLines = used + 1;
+      return POOL[used % POOL.length];
+    },
+
+    // NONVERBAL FALLBACK (journey-social r81 2026-11-01): a blocked
+    // beat inside a nonverbal conversation must NEVER fall back to
+    // the English deflection pool — a French-only speaker cannot
+    // "lose their train of thought" in fluent English (transcript-
+    // caught on 7104 Chantal: 351 dry lines, every other turn, days
+    // 4-140, all English meta-speech inside a no-shared-words
+    // exchange). Gesture narration instead: unquoted, never
+    // ledgered as speech, deliberately NOT in convoDeflectionLines
+    // so neither the dry census nor the fallback-streak wind-down
+    // counts it as a deflection. Cycles forever like the self-
+    // repeat pool: blocked beats are routine here (tiny gesture
+    // pools + the shared run ledger), and a cap would re-silence
+    // turns the no-silent-actions law requires to land.
+    convoNonverbalFallbackLine(vid) {
+      const c = this.convoGet(vid);
+      const POOL = [
+        'They spread their hands, smiling — the words are missing, but the meaning lands anyway.',
+        'A gesture, patient and clear: palms up, then toward you.',
+        'They nod along, following your hands more than your words.',
+        'A shrug and a grin — some things need no translation.',
+        'They point, mime, and laugh softly at the gap between your tongues.',
+        'Hands sketch the thought in the air; you catch the shape of it, if not the words.',
+      ];
+      const used = c.nvFallbackLines || 0;
+      c.nvFallbackLines = used + 1;
       return POOL[used % POOL.length];
     },
 
@@ -5155,6 +5194,9 @@
       // in an r16 grief transcript — no-silent-actions violation). Reset
       // per sitting like the self-repeat counter.
       c.dryLines = 0;
+      // r81: nonverbal-fallback counter resets per sitting with the
+      // dry counter above — a new sitting gets fresh gestures.
+      c.nvFallbackLines = 0;
       // COHERENCE (Steve 2026-10-07): per-conversation teaching state resets
       // here — the teach skill is sticky WITHIN a conversation, not forever,
       // and "one lesson per conversation" means per conversation.

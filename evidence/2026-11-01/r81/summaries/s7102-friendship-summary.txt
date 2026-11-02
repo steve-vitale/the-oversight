@@ -1,0 +1,310 @@
+# SURFACE+SEEDED — seed 7102 (120d, 0 alive)
+
+npcPairs=90 deep2=25 cracks=0 vCracks=0 friendGriev=0 stateGriev=2 stateFriend=0 stateVCrack=0 t2picks=277 closeReadsServed=39 grievanceServes=40 othersSteered=27
+COND-TP: firstDeep2Day=45 lateClose=138 lateTP=109 lateNull=0 condRate=79.0% pooledTP=109/178 pooledRate=61.2% grievReadsByWhy={"grievance":0,"vgrievance":59}
+FUNNEL (natural): convos=348 subject=345 offered=313 picked=251 classes={"subject-no-offer":32,"no-subject-no-ans":3,"offered-not-picked":62,"picked-others":251}
+FUNNEL-UNSTEERED (r55 strict): convos=348 subjectNoOffer=32 rate=9.2% offered=313 mainOffered=27 subjectOffered=291 picked=251 latePicks=58 latePicksMain=2 latePicksSubject=56
+STEERING-ARM: steering=true knackSameSpeakerRepeats=0 knackCrossSpeakerRetells=1
+  KNACK-CIRCULATION: Jesse / Katarina / Sultan — "Owen sees in the dark. Not well — but better than you. Better than me."
+REOFFER: offers=310 picks=264 latePicks=54 missedChangedNotOffered=2
+WRAPSERVE: convos=59 matcherHits=40 matcherServes=40 classes={"grievance-line":40,"deflection":0,"other":19}
+FUNNEL-PROBE (subject-no-offer turns): turns=209 menuProblem=160 pickProblem=49
+INVITE (wrap, carried from r63): lure={"n":4,"accepts":1,"acceptRate":0.25,"vetoes":{},"chanceMin":45,"chanceMax":55,"chanceMean":47.5} party={"n":14,"accepts":10,"acceptRate":0.7142857142857143,"vetoes":{},"chanceMin":10.399999999999999,"chanceMax":89.80000000000001,"chanceMean":47.3} partyProbe={"n":0,"accepts":0,"acceptRate":null} partyProbeConvos=0 convosWithInviteOffer=7
+FAVOR (r65): funnel={"offers":42,"forageOffers":9,"otherFavorOffers":33,"accepts":9,"acceptAttempts":9,"waits":8,"starts":8,"startBlocked":8,"forages":8,"forageNodeBarren":12,"forageBarren":3,"forageBarrenTravel":0,"forageBarrenNode":3,"forageTravelBlocked":0,"forageTravelWalked":0,"stepRetries":6,"retryAssigned":6,"retryStarts":6,"outingsEndedStuck":0,"outingsEndBlocked":0,"talks":8,"delivers":8,"deliverBlocked":0,"completeOutings":2,"completeOutingsEvents":8,"keptMatched":1,"keptMatchedStrict":1}
+CASE (r80): snaps=4 betrayalOfferConvos=102 mootOffers=7 mootProbePicks=[] mootsConvened=0
+  CASE-SNAP d11: case_2 status=open charge=murder accused=Leroy/Oliver/Owen target=Eduardo role=juror known=true mootIn=null trial=false
+  CASE-SNAP d13: case_2 status=acquitted charge=murder accused=Leroy/Oliver/Owen target=Eduardo role=juror known=true mootIn=null trial=true
+  CASE-SNAP d120: case_2 status=acquitted charge=murder accused=Leroy/Oliver/Owen target=Eduardo role=juror known=true mootIn=null trial=true
+OUTING END STATES: [{"vid":"nadia_khoury","vidName":"Nadia","favorId":"favor-nadia_khoury-6-3","state":"acknowledged","promisedDay":6,"meetDay":7,"deadline":8,"promiseKept":"broken","startedDay":7,"forageCount":12,"playerKcal":270,"partnerKcal":270,"deliveredKcal":540,"returnedDay":10,"talkCount":1},{"vid":"jesse_cortez","vidName":"Jesse","favorId":"favor-jesse_cortez-35-12","state":"thanked","promisedDay":35,"meetDay":36,"deadline":37,"promiseKept":true,"startedDay":36,"forageCount":1,"playerKcal":180,"partnerKcal":270,"deliveredKcal":450,"returnedDay":37,"talkCount":1}]
+  FAVOR-OFFER d6: Adaeze kind=food_share favorId=favor-adaeze_nwosu-6-2 task=share food with Adaeze — they're past hungry
+  FAVOR-OFFER d6: Nadia kind=forage_help favorId=favor-nadia_khoury-6-3 task=forage with Nadia tomorrow to rebuild the pantry
+  FAVOR-OFFER d11: Oliver kind=heal_help favorId=favor-oliver_moore-4-1 task=help Oliver with their injury
+  FAVOR-OFFER d12: Sara kind=forage_help favorId=favor-gen_u9hmjps-8-4 task=forage with Sara tomorrow to rebuild the pantry
+  FAVOR-OFFER d14: Oliver kind=forage_help favorId=favor-oliver_moore-14-5 task=forage with Oliver tomorrow to rebuild the pantry
+  FAVOR-OFFER d22: Sara kind=forage_help favorId=favor-gen_u9hmjps-22-6 task=forage with Sara tomorrow to rebuild the pantry
+  FAVOR-OFFER d24: Adaeze kind=heal_help favorId=favor-adaeze_nwosu-24-7 task=help Adaeze with their injury
+  FAVOR-OFFER d27: Sultan kind=forage_help favorId=favor-gen_4r0r0yk-26-8 task=forage with Sultan tomorrow to rebuild the pantry
+  FAVOR-OFFER d30: Adaeze kind=food_share favorId=favor-adaeze_nwosu-30-9 task=share food with Adaeze — they're running on empty
+  FAVOR-OFFER d32: Sultan kind=forage_help favorId=favor-gen_4r0r0yk-32-10 task=forage with Sultan tomorrow to rebuild the pantry
+  FAVOR-OFFER d33: Owen kind=forage_help favorId=favor-owen_smith-33-11 task=forage with Owen tomorrow to rebuild the pantry
+  FAVOR-OFFER d35: Jesse kind=forage_help favorId=favor-jesse_cortez-35-12 task=forage with Jesse tomorrow to rebuild the pantry
+  FAVOR-OFFER d38: Sara kind=food_share favorId=favor-gen_u9hmjps-38-13 task=share food with Sara — they're going hungry
+  FAVOR-OFFER d38: Leroy kind=food_share favorId=favor-gen_jyuazfn-38-14 task=share food with Leroy — they're past hungry
+  FAVOR-OFFER d44: Adaeze kind=forage_help favorId=favor-adaeze_nwosu-44-15 task=forage with Adaeze tomorrow to rebuild the pantry
+  FAVOR-OFFER d46: Sara kind=food_share favorId=favor-gen_u9hmjps-46-16 task=share food with Sara — they're running on empty
+  FAVOR-OFFER d54: Adaeze kind=food_share favorId=favor-adaeze_nwosu-54-17 task=share food with Adaeze — they're running on empty
+  FAVOR-OFFER d58: Sultan kind=food_share favorId=favor-gen_4r0r0yk-58-18 task=share food with Sultan — they're going hungry
+  FAVOR-OFFER d70: Sara kind=food_share favorId=favor-gen_u9hmjps-69-19 task=share food with Sara — they're running on empty
+  FAVOR-OFFER d72: Sultan kind=food_share favorId=favor-gen_4r0r0yk-72-20 task=share food with Sultan — they're going hungry
+  FAVOR-OFFER d75: Sultan kind=heal_help favorId=favor-gen_4r0r0yk-75-21 task=help Sultan with their injury
+  FAVOR-OFFER d75: Sara kind=heal_help favorId=favor-gen_u9hmjps-75-22 task=help Sara with their injury
+  FAVOR-OFFER d89: Owen kind=water_haul favorId=favor-owen_smith-89-23 task=bring four liters home from the creek with Owen; set out at dawn
+  FAVOR-OFFER d90: Oliver kind=water_haul favorId=favor-oliver_moore-90-24 task=bring four liters home from the creek with Oliver; set out at dawn
+  FAVOR-OFFER d91: Sultan kind=food_share favorId=favor-gen_4r0r0yk-91-25 task=share food with Sultan — they're going hungry
+  FAVOR-OFFER d91: Sara kind=water_haul favorId=favor-gen_u9hmjps-91-26 task=bring four liters home from the creek with Sara; set out at dawn
+  FAVOR-OFFER d91: Owen kind=water_haul favorId=favor-owen_smith-91-27 task=bring four liters home from the creek with Owen; set out at dawn
+  FAVOR-OFFER d93: Katarina kind=water_haul favorId=favor-katarina_novak-93-28 task=bring four liters home from the creek with Katarina; set out at dawn
+  FAVOR-OFFER d97: Oliver kind=water_haul favorId=favor-oliver_moore-97-29 task=bring four liters home from the creek with Oliver; set out at dawn
+  FAVOR-OFFER d99: Caleb kind=heal_help favorId=favor-caleb_jones-99-30 task=help Caleb with their injury
+  FAVOR-OFFER d100: Sara kind=water_haul favorId=favor-gen_u9hmjps-100-31 task=bring four liters home from the creek with Sara; set out at dawn
+  FAVOR-OFFER d100: Oliver kind=water_haul favorId=favor-oliver_moore-100-32 task=bring four liters home from the creek with Oliver; set out at dawn
+  FAVOR-OFFER d101: Adaeze kind=water_haul favorId=favor-adaeze_nwosu-101-33 task=bring four liters home from the creek with Adaeze; set out at dawn
+  FAVOR-OFFER d103: Nikos kind=heal_help favorId=favor-nikos_papadopoulos-103-34 task=help Nikos with their injury
+  FAVOR-OFFER d106: Oliver kind=food_share favorId=favor-oliver_moore-106-35 task=share food with Oliver — they're running on empty
+  FAVOR-OFFER d108: Katarina kind=water_haul favorId=favor-katarina_novak-108-36 task=bring four liters home from the creek with Katarina; set out at dawn
+  FAVOR-OFFER d109: Sara kind=food_share favorId=favor-gen_u9hmjps-109-37 task=share food with Sara — they're going hungry
+  FAVOR-OFFER d113: Sara kind=heal_help favorId=favor-gen_u9hmjps-113-38 task=help Sara with their injury
+  FAVOR-OFFER d115: Oliver kind=sick_help favorId=favor-oliver_moore-115-39 task=help Oliver with their sickness — they're achy and wrung out, barely keeping food down
+  FAVOR-OFFER d116: Sara kind=food_share favorId=favor-gen_u9hmjps-116-40 task=share food with Sara — they're going hungry
+  FAVOR-OFFER d118: Oliver kind=food_share favorId=favor-oliver_moore-118-41 task=share food with Oliver — they're past hungry
+  FAVOR-OFFER d119: Rini kind=heal_help favorId=favor-app_mgpspj87746-119-42 task=help Rini with their injury
+  FAVOR-ACCEPT d6: Nadia favorId=favor-nadia_khoury-6-3 accepted=true state=promised meetDay=7
+  FAVOR-ACCEPT d12: Sara favorId=favor-gen_u9hmjps-8-4 accepted=true state=promised meetDay=13
+  FAVOR-ACCEPT d14: Oliver favorId=favor-oliver_moore-14-5 accepted=true state=promised meetDay=15
+  FAVOR-ACCEPT d22: Sara favorId=favor-gen_u9hmjps-22-6 accepted=true state=promised meetDay=23
+  FAVOR-ACCEPT d27: Sultan favorId=favor-gen_4r0r0yk-26-8 accepted=true state=promised meetDay=28
+  FAVOR-ACCEPT d32: Sultan favorId=favor-gen_4r0r0yk-32-10 accepted=true state=promised meetDay=33
+  FAVOR-ACCEPT d33: Owen favorId=favor-owen_smith-33-11 accepted=true state=promised meetDay=34
+  FAVOR-ACCEPT d35: Jesse favorId=favor-jesse_cortez-35-12 accepted=true state=promised meetDay=36
+  FAVOR-ACCEPT d44: Adaeze favorId=favor-adaeze_nwosu-44-15 accepted=true state=promised meetDay=45
+  INVITE-DEC d6 lure: Oliver -> Eduardo chance=55 accept=false veto=- inputs={"temp":"earnest","goal":"prove","mood":"lonely","fear":4,"affinity":0} reasons=["lonely mood (+10)"]
+  INVITE-DEC d7 lure: Oliver -> Eduardo chance=45 accept=false veto=- inputs={"temp":"earnest","goal":"prove","mood":"steady","fear":4,"affinity":0} reasons=[]
+  INVITE-DEC d8 party: Sanjay -> Clarence chance=29.4 accept=true veto=- inputs={"temp":"withdrawn","goal":"prove","mood":"steady","fear":0,"trust":36,"bond":{"v":6,"depth":0},"partySize":0} reasons=["trust 36","withdrawn temperament (-20)"]
+  INVITE-DEC d8 lure: Oliver -> Eduardo chance=45 accept=false veto=- inputs={"temp":"earnest","goal":"prove","mood":"steady","fear":4,"affinity":0} reasons=[]
+  INVITE-DEC d9 party: Sanjay -> Nadia chance=66.8 accept=true veto=- inputs={"temp":"warm","goal":"prove","mood":"hungry","fear":0,"trust":42,"bond":{"v":2,"depth":0},"partySize":1} reasons=["trust 42","warm temperament (+15)"]
+  INVITE-DEC d9 party: Sanjay -> Adaeze chance=62 accept=true veto=- inputs={"temp":"anxious","goal":"feed","mood":"cold","fear":0,"trust":30,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 30","feed goal (+15)"]
+  INVITE-DEC d9 lure: Oliver -> Eduardo chance=45 accept=true veto=- inputs={"temp":"earnest","goal":"prove","mood":"hungry","fear":4,"affinity":0} reasons=[]
+  INVITE-DEC d12 party: Nadia -> Sara chance=23 accept=false veto=- inputs={"temp":"intense","goal":"answers","mood":"grieving","fear":78,"trust":20,"bond":{"v":4,"depth":0},"partySize":2} reasons=["trust 20","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d15 party: Nadia -> Sara chance=46.2 accept=true veto=- inputs={"temp":"intense","goal":"answers","mood":"grieving","fear":25,"trust":53,"bond":{"v":12,"depth":0},"partySize":2} reasons=["trust 53","grieving mood (-10)"]
+  INVITE-DEC d31 party: Nadia -> Sultan chance=89.80000000000001 accept=true veto=- inputs={"temp":"intense","goal":"belong","mood":"steady","fear":0,"trust":87,"bond":{"v":12,"depth":0},"partySize":4} reasons=["trust 87","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d57 party: Nadia -> Oliver chance=72.80000000000001 accept=true veto=- inputs={"temp":"dry","goal":"joy","mood":"grieving","fear":25,"trust":82,"bond":{"v":38,"depth":1},"partySize":4} reasons=["trust 82","a real bond (+10)","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d99 party: Owen -> Caleb chance=63 accept=false veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":12,"trust":20,"bond":null,"partySize":4} reasons=["trust 20","a big party is safer (+5)","belong goal (+15)"]
+  INVITE-DEC d101 party: Owen -> Caleb chance=48.2 accept=false veto=- inputs={"temp":"steady","goal":"belong","mood":"steady","fear":12,"trust":33,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 33","a big party is safer (+5)","sick (-20)","belong goal (+15)"]
+  INVITE-DEC d102 party: Owen -> Caleb chance=60.6 accept=true veto=- inputs={"temp":"steady","goal":"belong","mood":"cheerful","fear":0,"trust":39,"bond":{"v":4,"depth":0},"partySize":4} reasons=["trust 39","a big party is safer (+5)","sick (-20)","belong goal (+15)","cheerful mood (+10)"]
+  INVITE-DEC d104 party: Owen -> Nikos chance=40.8 accept=true veto=- inputs={"temp":"gentle","goal":"answers","mood":"grieving","fear":43,"trust":27,"bond":{"v":2,"depth":0},"partySize":4} reasons=["trust 27","a big party is safer (+5)","grieving mood (-10)"]
+  INVITE-DEC d106 party: Adaeze -> Elif chance=25.6 accept=true veto=- inputs={"temp":"prickly","goal":"legacy","mood":"grieving","fear":68,"trust":39,"bond":null,"partySize":4} reasons=["trust 39","a big party is safer (+5)","prickly temperament (-20)","grieving mood (-10)"]
+  INVITE-DEC d116 party: Katarina -> Rini chance=10.399999999999999 accept=false veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":81,"trust":26,"bond":null,"partySize":2} reasons=["trust 26","wants out (-15)","grieving mood (-10)","afraid (-10)"]
+  INVITE-DEC d117 party: Katarina -> Rini chance=23.6 accept=true veto=- inputs={"temp":"gentle","goal":"escape","mood":"grieving","fear":61,"trust":34,"bond":{"v":2,"depth":0},"partySize":2} reasons=["trust 34","wants out (-15)","grieving mood (-10)"]
+SEEDED-DAILY: [{"day":42,"v":38,"depth":2},{"day":43,"v":42,"depth":2},{"day":44,"v":44,"depth":2},{"day":45,"v":44,"depth":2},{"day":46,"v":44,"depth":2},{"day":47,"v":44,"depth":2},{"day":48,"v":50,"depth":3},{"day":49,"v":52,"depth":3},{"day":50,"v":58,"depth":3},{"day":51,"v":60,"depth":3},{"day":52,"v":60,"depth":3},{"day":53,"v":60,"depth":3},{"day":54,"v":60,"depth":3},{"day":55,"v":62,"depth":3}] class=no-drop
+GOSSIP: totalPicks=219 (per-day reset active; r47-r50 reported per-run-capped counts — NOT comparable)
+WINDOWS (natural picks): 1-30=45 31-60=71 61-90=77 91-120=57 121+=0 naturalPicks=250 seededPicks=27 gossipPicks=219
+SEEDED: {"pair":{"a":"adaeze_nwosu","b":"jesse_cortez","aName":"Adaeze","bName":"Jesse"},"day":41,"pre":{"v":50,"depth":2},"post":{"v":38,"depth":2},"daily":[{"day":42,"v":38,"depth":2},{"day":43,"v":42,"depth":2},{"day":44,"v":44,"depth":2},{"day":45,"v":44,"depth":2},{"day":46,"v":44,"depth":2},{"day":47,"v":44,"depth":2},{"day":48,"v":50,"depth":3},{"day":49,"v":52,"depth":3},{"day":50,"v":58,"depth":3},{"day":51,"v":60,"depth":3},{"day":52,"v":60,"depth":3},{"day":53,"v":60,"depth":3},{"day":54,"v":60,"depth":3},{"day":55,"v":62,"depth":3}],"crackTraceClass":"no-drop","vAt7":44,"depthAt7":2,"vDrop":6,"depthDrop":0,"crack7":false,"firstServe":{"day":42,"why":"vgrievance"},"serveWithin30":true,"serves":59,"servesAll":[{"day":42,"why":"vgrievance"},{"day":42,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":43,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":44,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":45,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":46,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":47,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":48,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":49,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":50,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":51,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":52,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":53,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":54,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":55,"why":"vgrievance"},{"day":56,"why":"vgrievance"},{"day":58,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":59,"why":"vgrievance"},{"day":60,"why":"vgrievance"},{"day":62,"why":"vgrievance"},{"day":63,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":64,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":65,"why":"vgrievance"},{"day":66,"why":"vgrievance"},{"day":67,"why":"vgrievance"},{"day":68,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":69,"why":"vgrievance"},{"day":70,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":71,"why":"vgrievance"},{"day":72,"why":"vgrievance"},{"day":74,"why":"vgrievance"},{"day":77,"why":"vgrievance"},{"day":79,"why":"vgrievance"},{"day":83,"why":"vgrievance"},{"day":89,"why":"vgrievance"},{"day":94,"why":"vgrievance"},{"day":95,"why":"vgrievance"},{"day":96,"why":"vgrievance"},{"day":97,"why":"vgrievance"},{"day":99,"why":"vgrievance"},{"day":101,"why":"vgrievance"}],"effect":true}
+  FRIEND d50: Leroy <> Sara — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d100: Jesse <> Katarina — maxDepth 2, final 2 (v=66), dropped 0
+  FRIEND d45: Adaeze <> Jesse — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Katarina <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Katarina <> Owen — maxDepth 2, final 2 (v=69), dropped 0
+  FRIEND d75: Sultan <> Sara — maxDepth 3, final 3 (v=77), dropped 0
+  FRIEND d70: Sara <> Jesse — maxDepth 3, final 3 (v=82), dropped 0
+  FRIEND d70: Sara <> Katarina — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d60: Jesse <> Owen — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d50: Jesse <> Oliver — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d55: Leroy <> Oliver — maxDepth 2, final 2 (v=60), dropped 0
+  FRIEND d95: Sultan <> Katarina — maxDepth 2, final 2 (v=52), dropped 0
+  FRIEND d95: Sara <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Nadia <> Oliver — maxDepth 3, final 3 (v=91), dropped 0
+  FRIEND d95: Leroy <> Nadia — maxDepth 2, final 2 (v=59), dropped 0
+  FRIEND d70: Adaeze <> Sultan — maxDepth 3, final 3 (v=87), dropped 0
+  FRIEND d120: Adaeze <> Oliver — maxDepth 2, final 2 (v=65), dropped 0
+  FRIEND d105: Sara <> Oliver — maxDepth 2, final 2 (v=68), dropped 0
+  FRIEND d120: Adaeze <> Sara — maxDepth 3, final 3 (v=86), dropped 0
+  FRIEND d115: Katarina <> Oliver — maxDepth 2, final 2 (v=50), dropped 0
+  FRIEND d90: Adaeze <> Owen — maxDepth 2, final 2 (v=72), dropped 0
+  FRIEND d95: Adaeze <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d95: Jesse <> Nadia — maxDepth 2, final 2 (v=61), dropped 0
+  FRIEND d95: Sultan <> Nadia — maxDepth 3, final 3 (v=100), dropped 0
+  FRIEND d105: Nadia <> Owen — maxDepth 3, final 3 (v=100), dropped 0
+  CLOSE-READ d11: Nadia about Clarence — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d11: Clarence about Nadia — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d12: Clarence about Adaeze — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d13: Clarence about Adaeze — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d14: Adaeze about Clarence — live depth=1 ledger depth=0 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d20: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d22: Sara about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d24: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d25: Oliver about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d26: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d27: Adaeze about Jesse — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Adaeze about Jesse — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d28: Sara about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d29: Adaeze about Jesse — live depth=1 ledger depth=0 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Sara about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d30: Adaeze about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d31: Oliver about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=true speakerHasDeep2=false
+  CLOSE-READ d32: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d32: Adaeze about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Adaeze about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d34: Sara about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d35: Adaeze about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Katarina about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Adaeze about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d36: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Jesse about Adaeze — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d37: Oliver about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Sara about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Adaeze about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d38: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Adaeze about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d39: Sara about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d40: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Oliver about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d41: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d42: Katarina about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d43: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Katarina about Leroy — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d44: Leroy about Sara — live depth=1 ledger depth=1 class=shallow late=false inGroup=false speakerHasDeep2=false
+  CLOSE-READ d45: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d46: Sara about Leroy — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d47: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d47: Katarina about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d48: Leroy about Sara — live depth=2 ledger depth=1 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d49: Owen about Leroy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Owen about Leroy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d50: Leroy about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d51: Owen about Leroy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d51: Sultan about Leroy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d52: Katarina about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d52: Sara about Leroy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d53: Katarina about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d54: Sara about Leroy — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d54: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d55: Sultan about Leroy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d56: Leroy about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d56: Sultan about Leroy — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d57: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d57: Oliver about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d58: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d58: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d59: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d59: Owen about Jesse — live depth=1 ledger depth=1 class=shallow late=true inGroup=false speakerHasDeep2=false
+  CLOSE-READ d60: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d60: Oliver about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d60: Sara about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Sara about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d61: Owen about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d62: Jesse about Oliver — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d62: Oliver about Jesse — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d63: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Katarina about Sara — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d63: Jesse about Oliver — live depth=3 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d64: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d64: Owen about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d65: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d65: Sara about Katarina — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d66: Sultan about Adaeze — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d66: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d66: Katarina about Sara — live depth=1 ledger depth=1 class=shallow late=true inGroup=true speakerHasDeep2=false
+  CLOSE-READ d67: Sultan about Adaeze — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Sara about Katarina — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d67: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d68: Sultan about Adaeze — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d68: Katarina about Sara — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Sultan about Adaeze — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d69: Katarina about Sara — live depth=2 ledger depth=1 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d70: Owen about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d70: Sara about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d71: Katarina about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d72: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d73: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d73: Katarina about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d74: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Katarina about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d75: Sara about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d76: Owen about Jesse — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d76: Katarina about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d77: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d78: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d78: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d79: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d80: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d81: Katarina about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d82: Owen about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d82: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d83: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d84: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d84: Owen about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d85: Sultan about Adaeze — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d85: Sara about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Sultan about Adaeze — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d86: Jesse about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d86: Owen about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d87: Sultan about Adaeze — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Katarina about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d87: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d88: Sultan about Adaeze — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d89: Sultan about Adaeze — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Sultan about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d90: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d90: Sara about Katarina — live depth=2 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Sultan about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d91: Sara about Katarina — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Sultan about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d92: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d93: Sultan about Adaeze — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d93: Katarina about Sara — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d94: Owen about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d94: Sara about Katarina — live depth=3 ledger depth=2 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d95: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d96: Katarina about Sara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d97: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d97: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d98: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d98: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d99: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d100: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d100: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d101: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d102: Katarina about Sara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d104: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d105: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d106: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d106: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d107: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d108: Katarina about Sara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d109: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d110: Katarina about Sara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Katarina about Sara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d111: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d112: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Jesse about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d113: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d113: Katarina about Sara — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d114: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d114: Jesse about Oliver — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d115: Sara about Katarina — live depth=3 ledger depth=3 class=TP late=true inGroup=true speakerHasDeep2=true
+  CLOSE-READ d115: Oliver about Jesse — live depth=3 ledger depth=3 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Oliver about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d116: Sara about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Sara about Oliver — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  CLOSE-READ d117: Oliver about Sara — live depth=2 ledger depth=2 class=TP late=true inGroup=false speakerHasDeep2=true
+  GRIEV-READ d42: Adaeze about Jesse (why=vgrievance)
+  GRIEV-READ d42: Adaeze about Jesse (why=vgrievance)
+  GRIEV-READ d43: Adaeze about Jesse (why=vgrievance)
+  GRIEV-READ d43: Adaeze about Jesse (why=vgrievance)
+  GRIEV-READ d44: Adaeze about Jesse (why=vgrievance)
+  GRIEV-READ d44: Adaeze about Jesse (why=vgrievance)
+  KNACK d5 Clarence: "that stray dog — the one that bit two people — lets Katarina touch it."
+  KNACK d17 Owen: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Katarina touch it."
+  KNACK d33 Oliver: "Good question." "Owen sees in the dark. Not well — but better than you. Better than me."
+  KNACK d40 Jesse: "Owen sees in the dark. Not well — but better than you. Better than me."
+  KNACK d44 Katarina: "that stray dog — the one that bit two people — lets Adaeze touch it."
+  KNACK d44 Adaeze: "Huh. Let me think about that." "Owen sees in the dark. Not well — but better than you. Better than me."
+  KNACK d47 Katarina: "Owen sees in the dark. Not well — but better than you. Better than me."
+  KNACK d66 Sultan: "Owen sees in the dark. Not well — but better than you. Better than me."
+
+deathCauses: {"ambush":1,"starvation":1,"monster":5,"the wild":5,"a wound that wouldn't close":1,"thirst":1,"sickness":1}
