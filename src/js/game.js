@@ -32383,6 +32383,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // idempotent choke point; same no-double-fire / no-early guarantees
       // as the bread path above. Harness gate: Game._standingBeatOff.
       try { if (!this._standingBeatOff) this.checkWaveUnlockBeat(); } catch (e) {}
+      // OUTING ATTEMPT (gap-closing build-outing): a promised joint
+      // outing whose dawn has come sets out now, or names why it cannot
+      // (favor-outing.js). Runs at dawn, after the day roll, before save.
+      try { if (this.attemptWaitingOutings) this.attemptWaitingOutings(); } catch (e) {}
       this.save();
       return this.status();
     },
