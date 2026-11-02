@@ -1,0 +1,2885 @@
+{
+ "seeds": 6,
+ "perSeed": [
+  {
+   "seed": 95402,
+   "days": 180,
+   "gameDays": 181,
+   "endReason": "survived",
+   "raidCalls": 180,
+   "raidDraftRecords": 180,
+   "raidClsCounts": {
+    "blocked-cooldown": 88,
+    "roll-miss": 77,
+    "draft": 14,
+    "blocked-pantry": 1
+   },
+   "heraldStatusCounts": {
+    "absent": 94,
+    "gate-or-roll": 80,
+    "rank-missed": 2,
+    "drafted": 4
+   },
+   "heraldDraftedDays": [
+    {
+     "day": 119,
+     "rank": 1,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 127,
+     "rank": 1,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 138,
+     "rank": 1,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 149,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": false
+    }
+   ],
+   "dailyCalls": 180,
+   "dailyObs": 180,
+   "lingerClsCounts": {
+    "repin-moved": 20,
+    "repin-held": 4
+   },
+   "lingerMissingDays": [],
+   "endScaleRank": "regional",
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "national": 0,
+   "table": 1,
+   "won": 0,
+   "seedClass": "CONTACTED",
+   "window": 98,
+   "lairCount": 1,
+   "lairs": [
+    {
+     "day": 83,
+     "tx": 8,
+     "ty": 4,
+     "tileType": "forest_floor",
+     "scholarTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "distHavenMan": 4,
+     "distHavenCheb": 4,
+     "distScholarMan": 4,
+     "distScholarCheb": 4,
+     "titanOpt": true
+    }
+   ],
+   "contacts": 60,
+   "scholarContacts": 59,
+   "villagerContacts": 1,
+   "dawns": 180,
+   "moves": 62,
+   "moveKinds": {
+    "spawn": 1,
+    "wander": 36,
+    "raidPin": 4,
+    "lingerPin": 20,
+    "remove": 1
+   },
+   "branchCounts": {
+    "followHoldSafe": 37,
+    "followEnter": 70,
+    "oldMonsterNotFollows": 115,
+    "followBlockedOccupied": 30
+   },
+   "heraldBranchCounts": {
+    "followBlockedOccupied": 15,
+    "followEnter": 41,
+    "followHoldSafe": 13
+   },
+   "mismatches": [
+    {
+     "day": 115,
+     "from": {
+      "x": 4,
+      "y": 3
+     },
+     "dest": {
+      "x": 3,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 4,
+      "y": 3
+     },
+     "heraldAfter": {
+      "x": 3,
+      "y": 5
+     }
+    },
+    {
+     "day": 129,
+     "from": {
+      "x": 3,
+      "y": 4
+     },
+     "dest": {
+      "x": 5,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followBlockedOccupied",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 3,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 3,
+      "y": 3
+     }
+    },
+    {
+     "day": 130,
+     "from": {
+      "x": 4,
+      "y": 5
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followHoldSafe",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 4,
+      "y": 5
+     },
+     "heraldAfter": {
+      "x": 5,
+      "y": 5
+     }
+    },
+    {
+     "day": 135,
+     "from": {
+      "x": 4,
+      "y": 3
+     },
+     "dest": {
+      "x": 3,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 4,
+      "y": 3
+     },
+     "heraldAfter": {
+      "x": 3,
+      "y": 3
+     }
+    },
+    {
+     "day": 141,
+     "from": {
+      "x": 5,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followBlockedOccupied",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 5,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 5,
+      "y": 5
+     }
+    },
+    {
+     "day": 153,
+     "from": {
+      "x": 4,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 3
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 4,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 5,
+      "y": 3
+     }
+    },
+    {
+     "day": 154,
+     "from": {
+      "x": 3,
+      "y": 4
+     },
+     "dest": {
+      "x": 5,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 3,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 6,
+      "y": 4
+     }
+    }
+   ],
+   "nestedMoves": 24,
+   "travelEvents": 526,
+   "captureErrs": 0,
+   "havenWindows": [
+    {
+     "fromDawn": 119,
+     "toDawn": 120,
+     "fromTile": {
+      "x": 4,
+      "y": 6
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "wander",
+       "from": {
+        "x": 4,
+        "y": 6
+       },
+       "to": {
+        "x": 4,
+        "y": 5
+       },
+       "branch": null
+      },
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 4,
+        "y": 5
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 127,
+     "toDawn": 128,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 138,
+     "toDawn": 139,
+     "fromTile": {
+      "x": 3,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 149,
+     "toDawn": 150,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    }
+   ],
+   "changeWindows": 24,
+   "attributedWindows": 22,
+   "unattributed": [
+    {
+     "fromDawn": 115,
+     "toDawn": 116,
+     "fromTile": {
+      "x": 4,
+      "y": 3
+     },
+     "toTile": {
+      "x": 3,
+      "y": 4
+     },
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "wander",
+       "from": {
+        "x": 3,
+        "y": 4
+       },
+       "to": {
+        "x": 3,
+        "y": 5
+       }
+      },
+      {
+       "kind": "wander",
+       "from": {
+        "x": 3,
+        "y": 5
+       },
+       "to": {
+        "x": 3,
+        "y": 4
+       }
+      }
+     ]
+    },
+    {
+     "fromDawn": 135,
+     "toDawn": 136,
+     "fromTile": {
+      "x": 4,
+      "y": 3
+     },
+     "toTile": {
+      "x": 3,
+      "y": 4
+     },
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "wander",
+       "from": {
+        "x": 3,
+        "y": 4
+       },
+       "to": {
+        "x": 3,
+        "y": 3
+       }
+      },
+      {
+       "kind": "wander",
+       "from": {
+        "x": 3,
+        "y": 3
+       },
+       "to": {
+        "x": 3,
+        "y": 4
+       }
+      }
+     ]
+    }
+   ],
+   "worldTickCount": 522,
+   "wanderCalls": 522,
+   "endHerald": {
+    "present": false,
+    "tile": null,
+    "omenStage": 2,
+    "lingering": null,
+    "raidBorn": null
+   }
+  },
+  {
+   "seed": 95423,
+   "days": 180,
+   "gameDays": 181,
+   "endReason": "survived",
+   "raidCalls": 180,
+   "raidDraftRecords": 180,
+   "raidClsCounts": {
+    "blocked-cooldown": 84,
+    "roll-miss": 83,
+    "draft": 13
+   },
+   "heraldStatusCounts": {
+    "absent": 151,
+    "gate-or-roll": 27,
+    "drafted": 2
+   },
+   "heraldDraftedDays": [
+    {
+     "day": 166,
+     "rank": 1,
+     "raidN": 4,
+     "movedOff": false
+    },
+    {
+     "day": 174,
+     "rank": 2,
+     "raidN": 3,
+     "movedOff": false
+    }
+   ],
+   "dailyCalls": 180,
+   "dailyObs": 180,
+   "lingerClsCounts": {
+    "repin-moved": 6
+   },
+   "lingerMissingDays": [],
+   "endScaleRank": "global",
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "national": 1,
+   "table": 0,
+   "won": 0,
+   "seedClass": "CONTACTED",
+   "window": 29,
+   "lairCount": 1,
+   "lairs": [
+    {
+     "day": 152,
+     "tx": 7,
+     "ty": 4,
+     "tileType": "forest_floor",
+     "scholarTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "distHavenMan": 3,
+     "distHavenCheb": 3,
+     "distScholarMan": 3,
+     "distScholarCheb": 3,
+     "titanOpt": true
+    }
+   ],
+   "contacts": 36,
+   "scholarContacts": 32,
+   "villagerContacts": 4,
+   "dawns": 180,
+   "moves": 18,
+   "moveKinds": {
+    "spawn": 1,
+    "wander": 8,
+    "raidPin": 2,
+    "lingerPin": 6,
+    "mFleeMove": 1
+   },
+   "branchCounts": {
+    "noTravel": 109,
+    "followHoldSafe": 35,
+    "oldMonsterNotFollows": 43,
+    "followBlockedOccupied": 3,
+    "followEnter": 15
+   },
+   "heraldBranchCounts": {
+    "noTravel": 4,
+    "followEnter": 10,
+    "followHoldSafe": 4,
+    "followBlockedOccupied": 1
+   },
+   "mismatches": [
+    {
+     "day": 172,
+     "from": {
+      "x": 4,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 3
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 4,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 4,
+      "y": 2
+     }
+    }
+   ],
+   "nestedMoves": 8,
+   "travelEvents": 629,
+   "captureErrs": 0,
+   "havenWindows": [
+    {
+     "fromDawn": 166,
+     "toDawn": 167,
+     "fromTile": {
+      "x": 6,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 6,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 174,
+     "toDawn": 175,
+     "fromTile": {
+      "x": 4,
+      "y": 5
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "wander",
+       "from": {
+        "x": 4,
+        "y": 5
+       },
+       "to": {
+        "x": 4,
+        "y": 6
+       },
+       "branch": null
+      },
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 4,
+        "y": 6
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    }
+   ],
+   "changeWindows": 8,
+   "attributedWindows": 8,
+   "unattributed": [],
+   "worldTickCount": 354,
+   "wanderCalls": 354,
+   "endHerald": {
+    "present": true,
+    "tile": {
+     "x": 3,
+     "y": 4
+    },
+    "omenStage": 2,
+    "lingering": false,
+    "raidBorn": true
+   }
+  },
+  {
+   "seed": 95433,
+   "days": 152,
+   "gameDays": 152,
+   "endReason": "village-lost",
+   "raidCalls": 154,
+   "raidDraftRecords": 154,
+   "raidClsCounts": {
+    "blocked-cooldown": 78,
+    "roll-miss": 50,
+    "draft": 12,
+    "blocked-pantry": 14
+   },
+   "heraldStatusCounts": {
+    "absent": 110,
+    "gate-or-roll": 39,
+    "drafted": 4,
+    "rank-missed": 1
+   },
+   "heraldDraftedDays": [
+    {
+     "day": 94,
+     "rank": 1,
+     "raidN": 5,
+     "movedOff": false
+    },
+    {
+     "day": 101,
+     "rank": 2,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 120,
+     "rank": 2,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 127,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": false
+    }
+   ],
+   "dailyCalls": 154,
+   "dailyObs": 154,
+   "lingerClsCounts": {
+    "repin-held": 4,
+    "repin-moved": 19
+   },
+   "lingerMissingDays": [],
+   "endScaleRank": "regional",
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "national": 0,
+   "table": 0,
+   "won": 0,
+   "seedClass": "CONTACTED",
+   "window": 63,
+   "lairCount": 1,
+   "lairs": [
+    {
+     "day": 89,
+     "tx": 7,
+     "ty": 4,
+     "tileType": "forest_floor",
+     "scholarTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "distHavenMan": 3,
+     "distHavenCheb": 3,
+     "distScholarMan": 3,
+     "distScholarCheb": 3,
+     "titanOpt": true
+    }
+   ],
+   "contacts": 71,
+   "scholarContacts": 70,
+   "villagerContacts": 1,
+   "dawns": 151,
+   "moves": 48,
+   "moveKinds": {
+    "spawn": 1,
+    "wander": 23,
+    "raidPin": 4,
+    "lingerPin": 19,
+    "remove": 1
+   },
+   "branchCounts": {
+    "followEnter": 73,
+    "noTravel": 33,
+    "followBlockedOccupied": 31,
+    "oldMonsterNotFollows": 85,
+    "followHoldSafe": 27
+   },
+   "heraldBranchCounts": {
+    "followHoldSafe": 5,
+    "followEnter": 30,
+    "followBlockedOccupied": 13
+   },
+   "mismatches": [
+    {
+     "day": 97,
+     "from": {
+      "x": 4,
+      "y": 3
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followBlockedOccupied",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 4,
+      "y": 3
+     },
+     "heraldAfter": {
+      "x": 4,
+      "y": 2
+     }
+    },
+    {
+     "day": 101,
+     "from": {
+      "x": 4,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 3
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 4,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 5,
+      "y": 3
+     }
+    },
+    {
+     "day": 103,
+     "from": {
+      "x": 4,
+      "y": 3
+     },
+     "dest": {
+      "x": 3,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followEnter",
+     "mismatch": "followEnterDidNotLand",
+     "heraldBefore": {
+      "x": 4,
+      "y": 3
+     },
+     "heraldAfter": {
+      "x": 3,
+      "y": 5
+     }
+    },
+    {
+     "day": 106,
+     "from": {
+      "x": 4,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 3
+     },
+     "oldMonsterId": "herald",
+     "branch": "followBlockedOccupied",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 4,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 4,
+      "y": 3
+     }
+    },
+    {
+     "day": 106,
+     "from": {
+      "x": 5,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followBlockedOccupied",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 5,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 6,
+      "y": 4
+     }
+    },
+    {
+     "day": 109,
+     "from": {
+      "x": 5,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followHoldSafe",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 5,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 6,
+      "y": 4
+     }
+    },
+    {
+     "day": 133,
+     "from": {
+      "x": 4,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 3
+     },
+     "oldMonsterId": "herald",
+     "branch": "followBlockedOccupied",
+     "mismatch": "removedDuringTravel",
+     "heraldBefore": {
+      "x": 4,
+      "y": 4
+     },
+     "heraldAfter": null
+    }
+   ],
+   "nestedMoves": 17,
+   "travelEvents": 542,
+   "captureErrs": 0,
+   "havenWindows": [
+    {
+     "fromDawn": 94,
+     "toDawn": 95,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 120,
+     "toDawn": 121,
+     "fromTile": {
+      "x": 6,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "wander",
+       "from": {
+        "x": 6,
+        "y": 4
+       },
+       "to": {
+        "x": 6,
+        "y": 5
+       },
+       "branch": null
+      },
+      {
+       "kind": "wander",
+       "from": {
+        "x": 6,
+        "y": 5
+       },
+       "to": {
+        "x": 6,
+        "y": 4
+       },
+       "branch": null
+      },
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 6,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    }
+   ],
+   "changeWindows": 13,
+   "attributedWindows": 12,
+   "unattributed": [
+    {
+     "fromDawn": 89,
+     "toDawn": 90,
+     "fromTile": {
+      "x": 7,
+      "y": 4
+     },
+     "toTile": {
+      "x": 6,
+      "y": 4
+     },
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "spawn",
+       "from": null,
+       "to": {
+        "x": 7,
+        "y": 4
+       }
+      },
+      {
+       "kind": "wander",
+       "from": {
+        "x": 7,
+        "y": 4
+       },
+       "to": {
+        "x": 6,
+        "y": 4
+       }
+      }
+     ]
+    }
+   ],
+   "worldTickCount": 450,
+   "wanderCalls": 450,
+   "endHerald": {
+    "present": false,
+    "tile": null,
+    "omenStage": 2,
+    "lingering": null,
+    "raidBorn": null
+   }
+  },
+  {
+   "seed": 95438,
+   "days": 180,
+   "gameDays": 181,
+   "endReason": "survived",
+   "raidCalls": 180,
+   "raidDraftRecords": 180,
+   "raidClsCounts": {
+    "blocked-cooldown": 83,
+    "roll-miss": 69,
+    "draft": 16,
+    "blocked-pantry": 12
+   },
+   "heraldStatusCounts": {
+    "absent": 135,
+    "gate-or-roll": 41,
+    "drafted": 4
+   },
+   "heraldDraftedDays": [
+    {
+     "day": 128,
+     "rank": 3,
+     "raidN": 4,
+     "movedOff": false
+    },
+    {
+     "day": 136,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 143,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": true
+    },
+    {
+     "day": 155,
+     "rank": 1,
+     "raidN": 3,
+     "movedOff": false
+    }
+   ],
+   "dailyCalls": 180,
+   "dailyObs": 180,
+   "lingerClsCounts": {
+    "repin-moved": 6
+   },
+   "lingerMissingDays": [],
+   "endScaleRank": "regional",
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "national": 0,
+   "table": 1,
+   "won": 0,
+   "seedClass": "CONTACTED",
+   "window": 70,
+   "lairCount": 1,
+   "lairs": [
+    {
+     "day": 111,
+     "tx": 7,
+     "ty": 4,
+     "tileType": "forest_floor",
+     "scholarTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "distHavenMan": 3,
+     "distHavenCheb": 3,
+     "distScholarMan": 3,
+     "distScholarCheb": 3,
+     "titanOpt": true
+    }
+   ],
+   "contacts": 26,
+   "scholarContacts": 14,
+   "villagerContacts": 12,
+   "dawns": 180,
+   "moves": 40,
+   "moveKinds": {
+    "spawn": 1,
+    "wander": 24,
+    "raidPin": 3,
+    "lingerPin": 6,
+    "mFleeMove": 5,
+    "remove": 1
+   },
+   "branchCounts": {
+    "followHoldSafe": 41,
+    "oldMonsterNotFollows": 43,
+    "followEnter": 64,
+    "followBlockedOccupied": 18
+   },
+   "heraldBranchCounts": {
+    "followHoldSafe": 5,
+    "followEnter": 17,
+    "followBlockedOccupied": 8
+   },
+   "mismatches": [
+    {
+     "day": 120,
+     "from": {
+      "x": 5,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followHoldSafe",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 5,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 5,
+      "y": 3
+     }
+    },
+    {
+     "day": 138,
+     "from": {
+      "x": 5,
+      "y": 4
+     },
+     "dest": {
+      "x": 4,
+      "y": 4
+     },
+     "oldMonsterId": "herald",
+     "branch": "followHoldSafe",
+     "mismatch": "movedDespiteHold",
+     "heraldBefore": {
+      "x": 5,
+      "y": 4
+     },
+     "heraldAfter": {
+      "x": 5,
+      "y": 5
+     }
+    }
+   ],
+   "nestedMoves": 23,
+   "travelEvents": 446,
+   "captureErrs": 0,
+   "havenWindows": [
+    {
+     "fromDawn": 128,
+     "toDawn": 129,
+     "fromTile": {
+      "x": 4,
+      "y": 6
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 4,
+        "y": 6
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 136,
+     "toDawn": 137,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    }
+   ],
+   "changeWindows": 22,
+   "attributedWindows": 20,
+   "unattributed": [
+    {
+     "fromDawn": 143,
+     "toDawn": 144,
+     "fromTile": {
+      "x": 6,
+      "y": 3
+     },
+     "toTile": {
+      "x": 3,
+      "y": 4
+     },
+     "reason": "chain-gap-at-event-2",
+     "movesInWindow": [
+      {
+       "kind": "wander",
+       "from": {
+        "x": 6,
+        "y": 3
+       },
+       "to": {
+        "x": 6,
+        "y": 4
+       }
+      },
+      {
+       "kind": "wander",
+       "from": {
+        "x": 6,
+        "y": 4
+       },
+       "to": {
+        "x": 5,
+        "y": 4
+       }
+      },
+      {
+       "kind": "mFleeMove",
+       "from": {
+        "x": 4,
+        "y": 4
+       },
+       "to": {
+        "x": 3,
+        "y": 4
+       }
+      },
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 3,
+        "y": 4
+       }
+      }
+     ]
+    },
+    {
+     "fromDawn": 155,
+     "toDawn": 156,
+     "fromTile": {
+      "x": 5,
+      "y": 3
+     },
+     "toTile": null,
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "remove",
+       "from": {
+        "x": 4,
+        "y": 4
+       },
+       "to": null
+      }
+     ]
+    }
+   ],
+   "worldTickCount": 440,
+   "wanderCalls": 440,
+   "endHerald": {
+    "present": false,
+    "tile": null,
+    "omenStage": 2,
+    "lingering": null,
+    "raidBorn": null
+   }
+  },
+  {
+   "seed": 95439,
+   "days": 174,
+   "gameDays": 174,
+   "endReason": "village-lost",
+   "raidCalls": 174,
+   "raidDraftRecords": 174,
+   "raidClsCounts": {
+    "blocked-cooldown": 96,
+    "roll-miss": 56,
+    "draft": 15,
+    "blocked-pantry": 7
+   },
+   "heraldStatusCounts": {
+    "absent": 149,
+    "gate-or-roll": 21,
+    "rank-missed": 1,
+    "drafted": 3
+   },
+   "heraldDraftedDays": [
+    {
+     "day": 133,
+     "rank": 0,
+     "raidN": 4,
+     "movedOff": false
+    },
+    {
+     "day": 140,
+     "rank": 1,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 147,
+     "rank": 0,
+     "raidN": 4,
+     "movedOff": false
+    }
+   ],
+   "dailyCalls": 174,
+   "dailyObs": 174,
+   "lingerClsCounts": {},
+   "lingerMissingDays": [],
+   "endScaleRank": "global",
+   "maxWave": 4,
+   "wave4": 1,
+   "wave5": 0,
+   "national": 1,
+   "table": 0,
+   "won": 0,
+   "seedClass": "CONTACTED",
+   "window": 51,
+   "lairCount": 1,
+   "lairs": [
+    {
+     "day": 123,
+     "tx": 7,
+     "ty": 4,
+     "tileType": "forest_floor",
+     "scholarTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "distHavenMan": 3,
+     "distHavenCheb": 3,
+     "distScholarMan": 3,
+     "distScholarCheb": 3,
+     "titanOpt": true
+    }
+   ],
+   "contacts": 18,
+   "scholarContacts": 6,
+   "villagerContacts": 12,
+   "dawns": 173,
+   "moves": 19,
+   "moveKinds": {
+    "spawn": 1,
+    "wander": 15,
+    "raidPin": 2,
+    "remove": 1
+   },
+   "branchCounts": {
+    "oldMonsterNotFollows": 140,
+    "followHoldSafe": 67,
+    "followEnter": 57,
+    "followBlockedOccupied": 32,
+    "noTravel": 1
+   },
+   "heraldBranchCounts": {
+    "followHoldSafe": 11,
+    "followEnter": 5,
+    "followBlockedOccupied": 4
+   },
+   "mismatches": [],
+   "nestedMoves": 15,
+   "travelEvents": 660,
+   "captureErrs": 0,
+   "havenWindows": [
+    {
+     "fromDawn": 133,
+     "toDawn": 134,
+     "fromTile": {
+      "x": 4,
+      "y": 5
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 4,
+        "y": 5
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 140,
+     "toDawn": 141,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 4,
+        "y": 5
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    }
+   ],
+   "changeWindows": 13,
+   "attributedWindows": 11,
+   "unattributed": [
+    {
+     "fromDawn": 123,
+     "toDawn": 124,
+     "fromTile": {
+      "x": 7,
+      "y": 4
+     },
+     "toTile": {
+      "x": 6,
+      "y": 4
+     },
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "spawn",
+       "from": null,
+       "to": {
+        "x": 7,
+        "y": 4
+       }
+      },
+      {
+       "kind": "wander",
+       "from": {
+        "x": 7,
+        "y": 4
+       },
+       "to": {
+        "x": 6,
+        "y": 4
+       }
+      }
+     ]
+    },
+    {
+     "fromDawn": 147,
+     "toDawn": 148,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": null,
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "remove",
+       "from": {
+        "x": 4,
+        "y": 4
+       },
+       "to": null
+      }
+     ]
+    }
+   ],
+   "worldTickCount": 658,
+   "wanderCalls": 658,
+   "endHerald": {
+    "present": false,
+    "tile": null,
+    "omenStage": 2,
+    "lingering": null,
+    "raidBorn": null
+   }
+  },
+  {
+   "seed": 95440,
+   "days": 180,
+   "gameDays": 181,
+   "endReason": "survived",
+   "raidCalls": 180,
+   "raidDraftRecords": 180,
+   "raidClsCounts": {
+    "blocked-cooldown": 90,
+    "roll-miss": 53,
+    "draft": 14,
+    "blocked-pantry": 23
+   },
+   "heraldStatusCounts": {
+    "absent": 137,
+    "gate-or-roll": 38,
+    "rank-missed": 2,
+    "drafted": 3
+   },
+   "heraldDraftedDays": [
+    {
+     "day": 120,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 128,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": false
+    },
+    {
+     "day": 143,
+     "rank": 0,
+     "raidN": 3,
+     "movedOff": false
+    }
+   ],
+   "dailyCalls": 180,
+   "dailyObs": 180,
+   "lingerClsCounts": {
+    "repin-moved": 5,
+    "repin-held": 1
+   },
+   "lingerMissingDays": [],
+   "endScaleRank": "regional",
+   "maxWave": 5,
+   "wave4": 1,
+   "wave5": 1,
+   "national": 0,
+   "table": 0,
+   "won": 0,
+   "seedClass": "CONTACTED",
+   "window": 80,
+   "lairCount": 1,
+   "lairs": [
+    {
+     "day": 101,
+     "tx": 7,
+     "ty": 4,
+     "tileType": "forest_floor",
+     "scholarTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "distHavenMan": 3,
+     "distHavenCheb": 3,
+     "distScholarMan": 3,
+     "distScholarCheb": 3,
+     "titanOpt": true
+    }
+   ],
+   "contacts": 41,
+   "scholarContacts": 33,
+   "villagerContacts": 8,
+   "dawns": 180,
+   "moves": 22,
+   "moveKinds": {
+    "spawn": 1,
+    "wander": 13,
+    "raidPin": 2,
+    "lingerPin": 5,
+    "remove": 1
+   },
+   "branchCounts": {
+    "oldMonsterNotFollows": 57,
+    "followEnter": 78,
+    "followHoldSafe": 104,
+    "followBlockedOccupied": 46,
+    "noTravel": 65
+   },
+   "heraldBranchCounts": {
+    "followHoldSafe": 8,
+    "noTravel": 9,
+    "followEnter": 7,
+    "followBlockedOccupied": 7
+   },
+   "mismatches": [],
+   "nestedMoves": 12,
+   "travelEvents": 708,
+   "captureErrs": 0,
+   "havenWindows": [
+    {
+     "fromDawn": 120,
+     "toDawn": 121,
+     "fromTile": {
+      "x": 5,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 5,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    },
+    {
+     "fromDawn": 128,
+     "toDawn": 129,
+     "fromTile": {
+      "x": 3,
+      "y": 4
+     },
+     "toTile": {
+      "x": 4,
+      "y": 4
+     },
+     "havenTile": {
+      "x": 4,
+      "y": 4
+     },
+     "movesInWindow": [
+      {
+       "kind": "raidPin",
+       "from": {
+        "x": 3,
+        "y": 4
+       },
+       "to": {
+        "x": 4,
+        "y": 4
+       },
+       "branch": null
+      }
+     ],
+     "attributed": true,
+     "landingCls": "raidPin",
+     "reason": "chain-continuous"
+    }
+   ],
+   "changeWindows": 15,
+   "attributedWindows": 14,
+   "unattributed": [
+    {
+     "fromDawn": 143,
+     "toDawn": 144,
+     "fromTile": {
+      "x": 4,
+      "y": 5
+     },
+     "toTile": null,
+     "reason": "chain-gap-at-event-0",
+     "movesInWindow": [
+      {
+       "kind": "remove",
+       "from": {
+        "x": 4,
+        "y": 4
+       },
+       "to": null
+      }
+     ]
+    }
+   ],
+   "worldTickCount": 617,
+   "wanderCalls": 617,
+   "endHerald": {
+    "present": false,
+    "tile": null,
+    "omenStage": 2,
+    "lingering": null,
+    "raidBorn": null
+   }
+  }
+ ],
+ "pooled": {
+  "seeds": 6,
+  "totalRaidCalls": 1048,
+  "totalRaidDraftRecords": 1048,
+  "raidClsCounts": {
+   "blocked-cooldown": 519,
+   "roll-miss": 388,
+   "draft": 84,
+   "blocked-pantry": 57
+  },
+  "heraldStatusCounts": {
+   "absent": 776,
+   "gate-or-roll": 246,
+   "rank-missed": 6,
+   "drafted": 20
+  },
+  "lingerClsCounts": {
+   "repin-moved": 56,
+   "repin-held": 9
+  },
+  "totalLingerMissingDays": 0,
+  "draftedSeeds": [
+   95402,
+   95423,
+   95433,
+   95438,
+   95439,
+   95440
+  ],
+  "heraldDraftedDays": [
+   {
+    "seed": 95402,
+    "day": 119,
+    "rank": 1,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95402,
+    "day": 127,
+    "rank": 1,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95402,
+    "day": 138,
+    "rank": 1,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95402,
+    "day": 149,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95423,
+    "day": 166,
+    "rank": 1,
+    "raidN": 4,
+    "movedOff": false
+   },
+   {
+    "seed": 95423,
+    "day": 174,
+    "rank": 2,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95433,
+    "day": 94,
+    "rank": 1,
+    "raidN": 5,
+    "movedOff": false
+   },
+   {
+    "seed": 95433,
+    "day": 101,
+    "rank": 2,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95433,
+    "day": 120,
+    "rank": 2,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95433,
+    "day": 127,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95438,
+    "day": 128,
+    "rank": 3,
+    "raidN": 4,
+    "movedOff": false
+   },
+   {
+    "seed": 95438,
+    "day": 136,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95438,
+    "day": 143,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": true
+   },
+   {
+    "seed": 95438,
+    "day": 155,
+    "rank": 1,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95439,
+    "day": 133,
+    "rank": 0,
+    "raidN": 4,
+    "movedOff": false
+   },
+   {
+    "seed": 95439,
+    "day": 140,
+    "rank": 1,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95439,
+    "day": 147,
+    "rank": 0,
+    "raidN": 4,
+    "movedOff": false
+   },
+   {
+    "seed": 95440,
+    "day": 120,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95440,
+    "day": 128,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": false
+   },
+   {
+    "seed": 95440,
+    "day": 143,
+    "rank": 0,
+    "raidN": 3,
+    "movedOff": false
+   }
+  ],
+  "contactedSeeds": 6,
+  "locatedUnfacedSeeds": 0,
+  "neverLocatedSeeds": 0,
+  "won": 0,
+  "wonDay90": null,
+  "survivedUnwonPast120": 6,
+  "totalContacts": 252,
+  "totalScholarContacts": 214,
+  "totalVillagerContacts": 38,
+  "totalMoves": 209,
+  "totalTravelEvents": 3511,
+  "totalMismatches": 17,
+  "havenWindows": [
+   {
+    "seed": 95402,
+    "fromDawn": 119,
+    "toDawn": 120,
+    "fromTile": {
+     "x": 4,
+     "y": 6
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "wander",
+      "from": {
+       "x": 4,
+       "y": 6
+      },
+      "to": {
+       "x": 4,
+       "y": 5
+      },
+      "branch": null
+     },
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 4,
+       "y": 5
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95402,
+    "fromDawn": 127,
+    "toDawn": 128,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95402,
+    "fromDawn": 138,
+    "toDawn": 139,
+    "fromTile": {
+     "x": 3,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95402,
+    "fromDawn": 149,
+    "toDawn": 150,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95423,
+    "fromDawn": 166,
+    "toDawn": 167,
+    "fromTile": {
+     "x": 6,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 6,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95423,
+    "fromDawn": 174,
+    "toDawn": 175,
+    "fromTile": {
+     "x": 4,
+     "y": 5
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "wander",
+      "from": {
+       "x": 4,
+       "y": 5
+      },
+      "to": {
+       "x": 4,
+       "y": 6
+      },
+      "branch": null
+     },
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 4,
+       "y": 6
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95433,
+    "fromDawn": 94,
+    "toDawn": 95,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95433,
+    "fromDawn": 120,
+    "toDawn": 121,
+    "fromTile": {
+     "x": 6,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "wander",
+      "from": {
+       "x": 6,
+       "y": 4
+      },
+      "to": {
+       "x": 6,
+       "y": 5
+      },
+      "branch": null
+     },
+     {
+      "kind": "wander",
+      "from": {
+       "x": 6,
+       "y": 5
+      },
+      "to": {
+       "x": 6,
+       "y": 4
+      },
+      "branch": null
+     },
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 6,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95438,
+    "fromDawn": 128,
+    "toDawn": 129,
+    "fromTile": {
+     "x": 4,
+     "y": 6
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 4,
+       "y": 6
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95438,
+    "fromDawn": 136,
+    "toDawn": 137,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95439,
+    "fromDawn": 133,
+    "toDawn": 134,
+    "fromTile": {
+     "x": 4,
+     "y": 5
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 4,
+       "y": 5
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95439,
+    "fromDawn": 140,
+    "toDawn": 141,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 4,
+       "y": 5
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95440,
+    "fromDawn": 120,
+    "toDawn": 121,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   },
+   {
+    "seed": 95440,
+    "fromDawn": 128,
+    "toDawn": 129,
+    "fromTile": {
+     "x": 3,
+     "y": 4
+    },
+    "toTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "movesInWindow": [
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 3,
+       "y": 4
+      },
+      "to": {
+       "x": 4,
+       "y": 4
+      },
+      "branch": null
+     }
+    ],
+    "attributed": true,
+    "landingCls": "raidPin",
+    "reason": "chain-continuous"
+   }
+  ],
+  "changeWindows": 95,
+  "attributedWindows": 87,
+  "unattributedWindows": [
+   {
+    "seed": 95402,
+    "fromDawn": 115,
+    "toDawn": 116,
+    "fromTile": {
+     "x": 4,
+     "y": 3
+    },
+    "toTile": {
+     "x": 3,
+     "y": 4
+    },
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "wander",
+      "from": {
+       "x": 3,
+       "y": 4
+      },
+      "to": {
+       "x": 3,
+       "y": 5
+      }
+     },
+     {
+      "kind": "wander",
+      "from": {
+       "x": 3,
+       "y": 5
+      },
+      "to": {
+       "x": 3,
+       "y": 4
+      }
+     }
+    ]
+   },
+   {
+    "seed": 95402,
+    "fromDawn": 135,
+    "toDawn": 136,
+    "fromTile": {
+     "x": 4,
+     "y": 3
+    },
+    "toTile": {
+     "x": 3,
+     "y": 4
+    },
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "wander",
+      "from": {
+       "x": 3,
+       "y": 4
+      },
+      "to": {
+       "x": 3,
+       "y": 3
+      }
+     },
+     {
+      "kind": "wander",
+      "from": {
+       "x": 3,
+       "y": 3
+      },
+      "to": {
+       "x": 3,
+       "y": 4
+      }
+     }
+    ]
+   },
+   {
+    "seed": 95433,
+    "fromDawn": 89,
+    "toDawn": 90,
+    "fromTile": {
+     "x": 7,
+     "y": 4
+    },
+    "toTile": {
+     "x": 6,
+     "y": 4
+    },
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "spawn",
+      "from": null,
+      "to": {
+       "x": 7,
+       "y": 4
+      }
+     },
+     {
+      "kind": "wander",
+      "from": {
+       "x": 7,
+       "y": 4
+      },
+      "to": {
+       "x": 6,
+       "y": 4
+      }
+     }
+    ]
+   },
+   {
+    "seed": 95438,
+    "fromDawn": 143,
+    "toDawn": 144,
+    "fromTile": {
+     "x": 6,
+     "y": 3
+    },
+    "toTile": {
+     "x": 3,
+     "y": 4
+    },
+    "reason": "chain-gap-at-event-2",
+    "movesInWindow": [
+     {
+      "kind": "wander",
+      "from": {
+       "x": 6,
+       "y": 3
+      },
+      "to": {
+       "x": 6,
+       "y": 4
+      }
+     },
+     {
+      "kind": "wander",
+      "from": {
+       "x": 6,
+       "y": 4
+      },
+      "to": {
+       "x": 5,
+       "y": 4
+      }
+     },
+     {
+      "kind": "mFleeMove",
+      "from": {
+       "x": 4,
+       "y": 4
+      },
+      "to": {
+       "x": 3,
+       "y": 4
+      }
+     },
+     {
+      "kind": "raidPin",
+      "from": {
+       "x": 5,
+       "y": 4
+      },
+      "to": {
+       "x": 3,
+       "y": 4
+      }
+     }
+    ]
+   },
+   {
+    "seed": 95438,
+    "fromDawn": 155,
+    "toDawn": 156,
+    "fromTile": {
+     "x": 5,
+     "y": 3
+    },
+    "toTile": null,
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "remove",
+      "from": {
+       "x": 4,
+       "y": 4
+      },
+      "to": null
+     }
+    ]
+   },
+   {
+    "seed": 95439,
+    "fromDawn": 123,
+    "toDawn": 124,
+    "fromTile": {
+     "x": 7,
+     "y": 4
+    },
+    "toTile": {
+     "x": 6,
+     "y": 4
+    },
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "spawn",
+      "from": null,
+      "to": {
+       "x": 7,
+       "y": 4
+      }
+     },
+     {
+      "kind": "wander",
+      "from": {
+       "x": 7,
+       "y": 4
+      },
+      "to": {
+       "x": 6,
+       "y": 4
+      }
+     }
+    ]
+   },
+   {
+    "seed": 95439,
+    "fromDawn": 147,
+    "toDawn": 148,
+    "fromTile": {
+     "x": 5,
+     "y": 4
+    },
+    "toTile": null,
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "remove",
+      "from": {
+       "x": 4,
+       "y": 4
+      },
+      "to": null
+     }
+    ]
+   },
+   {
+    "seed": 95440,
+    "fromDawn": 143,
+    "toDawn": 144,
+    "fromTile": {
+     "x": 4,
+     "y": 5
+    },
+    "toTile": null,
+    "reason": "chain-gap-at-event-0",
+    "movesInWindow": [
+     {
+      "kind": "remove",
+      "from": {
+       "x": 4,
+       "y": 4
+      },
+      "to": null
+     }
+    ]
+   }
+  ],
+  "moveKinds": {
+   "spawn": 6,
+   "wander": 119,
+   "raidPin": 17,
+   "lingerPin": 56,
+   "remove": 5,
+   "mFleeMove": 6
+  },
+  "heraldBranchCounts": {
+   "followBlockedOccupied": 48,
+   "followEnter": 110,
+   "followHoldSafe": 46,
+   "noTravel": 13
+  },
+  "national": 2,
+  "table": 2,
+  "wave4": 6,
+  "wave5": 1,
+  "medianSurvival": 181
+ }
+}
