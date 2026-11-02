@@ -22,7 +22,11 @@ function stubGame(opts) {
   const G = {
     state: { scholar: { day: opts.day || 130, kcal: opts.kcal != null ? opts.kcal : 1800,
       hydration: opts.hydration != null ? opts.hydration : 80,
-      hp: opts.hp != null ? opts.hp : 100, maxHp: 100 },
+      // Real Game shape: scholar HP lives in `health`, not `hp`
+      // (competent reads s.hp || s.health). Stubs use health only
+      // unless the case explicitly passes hp.
+      health: opts.health != null ? opts.health : (opts.hp != null ? opts.hp : 100),
+      maxHp: 100 },
       titans: { slain: opts.slain ? { herald: true } : {} } },
     map: { px: opts.px != null ? opts.px : 4, py: opts.py != null ? opts.py : 4 },
     over: false, tbfight: null,

@@ -127,7 +127,11 @@ function withTitanRoute(base, id, desc) {
       try { cap = Game.kcalCap() || 2000; } catch (e) { /* keep default */ }
       const fed = (s.kcal || 0) > cap * 0.5;
       const watered = (s.hydration || 0) > 45;
-      const healthy = (s.hp || 0) > (s.maxHp || 100) * 0.5;
+      // Scholar HP lives in `health` (game.js: scholar.health; competent
+      // reads s.hp || s.health). Reading hp alone always blocks — fixed
+      // after the void pilot batch showed healthy:false every day.
+      const hp = (s.hp != null ? s.hp : (s.health != null ? s.health : 100));
+      const healthy = hp > (s.maxHp || 100) * 0.5;
       if (!fed || !watered || !healthy) {
         st.lastGuardBlock = { day: gday(Game), fed: fed, watered: watered, healthy: healthy };
         return;
