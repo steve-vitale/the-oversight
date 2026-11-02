@@ -420,8 +420,8 @@ survival) are reported from them.
 
 - e4f483c01 — prereg (before any judged sim) + proof skeleton.
 - 25574ebbc — creekdetour policy, full proof 31/31, driver.
-- (this file + per-seed records + screening ledger — commit
-  hash to be filled at commit time; see report.)
+- 38702af59 — pilot evidence (this file), all 78 per-seed
+  records (70 baseline + 8 detour), and the screening ledger.
 
 Report: ready to merge locally, pending ship. Do NOT push, do NOT
 bump versions, do NOT verify live (ship loop owns deploys).
