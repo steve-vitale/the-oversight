@@ -32,7 +32,7 @@ for (const k of ['FEASTSCALE_R13', 'TRIBFLOOR', 'WINPURSUIT', 'WINDEFER', 'SEATD
   if (process.env[k] !== '1') { console.error(`MUSTERGAP STOP: ${k}=1 is required.`); process.exit(2); }
 }
 const ARM = process.env.ARM || 'route';
-if (ARM !== 'route' && ARM !== 'gap') { console.error('MUSTERGAP STOP: ARM must be route|gap.'); process.exit(2); }
+if (ARM !== 'route' && ARM !== 'gap' && ARM !== 'gap2') { console.error('MUSTERGAP STOP: ARM must be route|gap|gap2.'); process.exit(2); }
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10)) : []).filter(Number.isFinite);
 const DAYS = parseInt(process.env.DAYS || '180', 10) || 180;
 if (!SEEDS.length) { console.error('MUSTERGAP STOP: SEEDS required.'); process.exit(2); }
@@ -48,7 +48,7 @@ function basePolicy() {
 function policyFor() {
   const b = basePolicy();
   const rt = TR.withTitanRoute(b, 'lead-titanroute', 'lead-fullseat + titanroute march/call');
-  if (ARM === 'gap') return MG.withMusterGap(rt, 'lead-mustergap', 'lead-titanroute + mustergap commit-own');
+  if (ARM === 'gap' || ARM === 'gap2') return MG.withMusterGap(rt, 'lead-mustergap', 'lead-titanroute + mustergap commit-own');
   return rt;
 }
 

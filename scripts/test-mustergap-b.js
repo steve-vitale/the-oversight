@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 // test-mustergap-b.js — unit proof for scripts/policies/mustergap.js
-// (sim-mustergap-b). Synthetic stub Game only; no harness load, no RNG.
-// Proves the prereg's policy claims:
+// (sim-mustergap-b, gap2 button-faithful semantics). Synthetic stub Game
+// only; no harness load, no RNG. Proves the prereg's policy claims:
 //   1. the policy never reads a monster roster, allied roster, or link
 //      list (perception law) — counters on worldMonsters, _otherVillage,
 //      hierarchyState, and a guarded state.village getter;
-//   2. a short, still-standing sounded muster gets commit taps, one per
-//      daily, across the two-tap confirm, stopping at haven 3;
-//   3. no commit when the gate is ready, uncalled, spent, haven-full,
-//      slain, or when the commit verb reports nothing located;
-//   4. a commit failure is recorded, never a crash.
+//   2. a short, still-standing sounded muster gets ONE commit episode:
+//      two taps in the same daily, haven reaches 3, never tapped again;
+//   3. no commit when the gate is ready, uncalled, spent, haven-full, or
+//      slain; a nothing-free answer ends the episode with one tap;
+//   4. a confirm-only stutter ends the episode (no daily re-tap spam);
+//   5. a commit failure is recorded, never a crash.
 'use strict';
 const { withMusterGap } = require('./policies/mustergap');
 
@@ -44,6 +45,7 @@ function stubGame(opts) {
     titanCommitOwn() {
       this.commitCalls++;
       if (opts.commitNull) return null;
+      if (opts.commitStutter) return 'confirm';
       if (!this._pending) { this._pending = true; return 'confirm'; }
       this._pending = false;
       while (muster.haven.length < 3) muster.haven.push({ vid: 'h' + muster.haven.length });
@@ -65,17 +67,17 @@ function runCase(opts, days) {
   return { G: G, ctx: ctx };
 }
 
-// 1+2: short standing muster (6 allies, 0 haven) => taps across dailies,
-// two-tap confirm, stops at haven 3, zero forbidden reads.
+// 1+2: short standing muster (6 allies, 0 haven) => ONE episode, two taps
+// in the same daily, haven 3, never tapped again.
 {
   const allies = [];
   for (let i = 0; i < 6; i++) allies.push({ villageId: 'v1', vid: 'a' + i });
   const r = runCase({ allies: allies, haven: [] }, 4);
-  check('short muster => commit tapped', r.G.commitCalls >= 2, r.G.commitCalls);
-  check('two-tap => haven reaches 3', r.G._muster.haven.length === 3, r.G._muster.haven);
-  check('stops at haven 3 (no 4th tap storm)', r.G.commitCalls === 2, r.G.commitCalls);
-  check('commit calls recorded', (r.ctx.mustergap.commitCalls || []).length === 2, r.ctx.mustergap.commitCalls);
-  check('first tap records confirm', r.ctx.mustergap.commitCalls[0].result === 'confirm', r.ctx.mustergap.commitCalls);
+  check('short muster => exactly two taps total', r.G.commitCalls === 2, r.G.commitCalls);
+  check('two-tap episode => haven reaches 3', r.G._muster.haven.length === 3, r.G._muster.haven);
+  check('one episode recorded', (r.ctx.mustergap.commitCalls || []).length === 1, r.ctx.mustergap.commitCalls);
+  check('episode records committed + taps', r.ctx.mustergap.commitCalls[0].result === 'committed' &&
+    r.ctx.mustergap.commitCalls[0].taps === 2, r.ctx.mustergap.commitCalls);
   check('zero monster-roster reads', r.G.reads.monsters === 0, r.G.reads);
   check('zero allied-village reads', r.G.reads.otherVillage === 0, r.G.reads);
   check('zero link-list reads', r.G.reads.hierarchy === 0, r.G.reads);
@@ -110,14 +112,22 @@ function runCase(opts, days) {
   const r = runCase({ slain: true }, 2);
   check('slain => no commit', r.G.commitCalls === 0, r.G.commitCalls);
 }
-// 4: commit verb reports nothing located => recorded, no crash, retries.
+// 4a: nothing free => one tap, episode ends, no retry.
 {
   const allies = [];
   for (let i = 0; i < 6; i++) allies.push({ villageId: 'v1', vid: 'a' + i });
-  const r = runCase({ allies: allies, haven: [], commitNull: true }, 2);
-  check('null commit => recorded, no crash', (r.ctx.mustergap.commitCalls || []).length === 2 &&
-    r.ctx.mustergap.commitCalls.every(function (c) { return c.result === 'null'; }), r.ctx.mustergap.commitCalls);
+  const r = runCase({ allies: allies, haven: [], commitNull: true }, 3);
+  check('null commit => exactly one tap, no retry', r.G.commitCalls === 1, r.G.commitCalls);
+  check('null commit => recorded null', r.ctx.mustergap.commitCalls[0].result === 'null', r.ctx.mustergap.commitCalls);
   check('null commit => no commitError', !r.ctx.mustergap.commitError, r.ctx.mustergap);
+}
+// 4b: confirm-only stutter => two taps, episode ends, no daily spam.
+{
+  const allies = [];
+  for (let i = 0; i < 6; i++) allies.push({ villageId: 'v1', vid: 'a' + i });
+  const r = runCase({ allies: allies, haven: [], commitStutter: true }, 3);
+  check('stutter => exactly two taps, no retry', r.G.commitCalls === 2, r.G.commitCalls);
+  check('stutter => recorded confirm-only', r.ctx.mustergap.commitCalls[0].result === 'confirm-only', r.ctx.mustergap.commitCalls);
 }
 
 console.log(failures === 0 ? 'ALL GREEN' : failures + ' FAILURES');

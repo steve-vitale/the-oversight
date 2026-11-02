@@ -3,8 +3,18 @@
 // Wraps a titanroute-wrapped base policy and adds ONE leg: after the call
 // has sounded, while the sounded coalition still stands and the hard gate
 // is unmet, commit Haven's own blades via the player's own two-tap verb
-// (Game.titanCommitOwn), one tap per daily. It NEVER re-sounds the call,
-// never touches a spent muster, and never commits when the gate is met.
+// (Game.titanCommitOwn). It NEVER re-sounds the call, never touches a
+// spent muster, and never commits when the gate is met.
+//
+// TAP CADENCE (gap2, button-faithful — see prereg addendum): ONE commit
+// episode per muster: titanCommitOwn is called twice in the SAME daily
+// (tap + confirm, exactly as the button offers in one sitting), then the
+// episode ends — no daily re-taps. The gap1 cadence (one tap per daily)
+// is NOT the button: titanCommitOwn re-keys its pending confirm to the
+// volunteer set on every call, so a churning pool resets pending instead
+// of committing (97338 gap1: 13 days of stutter, 1 blade). One episode
+// also means committed blades that later attrit are NOT replaced daily;
+// a player would have to notice and re-commit, which is out of scope.
 //
 // PERCEPTION LAW (load-bearing): the policy NEVER reads a monster roster,
 // an allied roster, or a link list for this decision. It decides only from:
@@ -64,8 +74,11 @@ function withMusterGap(base, id, desc) {
       try {
         const called = ctx.titan && ctx.titan.called;
         // Only a call THIS policy's march sounded (an object record), not a
-        // preexisting muster and not an unsounded run.
+        // preexisting muster and not an unsounded run. One episode per
+        // muster: after an episode ends (committed, nothing free, or a
+        // confirm-only stutter), never tap again.
         if (!called || typeof called !== 'object') return;
+        if (mg.episodeDone) return;
         if (Game.over || Game.tbfight) return;
         if (slain(Game)) return;
         if (typeof Game.titanCommitOwn !== 'function') { mg.commitError = 'titanCommitOwn missing'; return; }
@@ -77,11 +90,16 @@ function withMusterGap(base, id, desc) {
         if (musterReady(Game)) return;
         if (havenCount(muster) >= 3) return;
         const before = havenCount(muster);
-        const r = Game.titanCommitOwn('herald');
+        // ONE episode, two taps in the same daily: tap, then confirm.
+        const r1 = Game.titanCommitOwn('herald');
+        let r2 = null, r2done = false;
+        if (r1 === 'confirm') { r2 = Game.titanCommitOwn('herald'); r2done = true; }
         const afterMuster = musterOf(Game);
         mg.commitCalls.push({ day: gday(Game),
-          result: r === 'confirm' ? 'confirm' : (r == null ? 'null' : 'committed'),
+          result: r1 == null ? 'null' : (r2done ? (r2 == null ? 'null' : (r2 === 'confirm' ? 'confirm-only' : 'committed')) : 'committed'),
+          taps: r2done ? 2 : 1,
           havenBefore: before, havenAfter: havenCount(afterMuster) });
+        mg.episodeDone = true;
       } catch (e) {
         mg.commitError = String((e && e.message) || e).slice(0, 120);
       }
