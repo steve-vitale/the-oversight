@@ -351,4 +351,26 @@ and is NOT in the failing list — GREEN, as r100 reported.
   sentimental's saving location is named; no surviving
   sentimental lacks one.
 
-## Closeout (to be filled after merge)
+## Closeout
+
+- Commit 1 (d7db7577): 79 files — 5 instrument scripts
+  (driver, main analyzer, naming analyzer, keepsake proof,
+  naming proof) + 74 evidence files (prereg, 4 panel
+  stdout/stderr, 4 tele, 58 transcripts, analyzer + naming
+  outputs, 2 proof logs, checkquick log, run note).
+  Post-commit index clobber (documented class, staged-deletion
+  variant): all 79 files showed staged-deleted AND untracked
+  with worktree bytes identical to HEAD. Repaired with
+  `git update-index --add --cacheinfo` per file from HEAD
+  blobs; verified `git status --short` empty + `git diff
+  HEAD` empty. The commit itself was always correct.
+- Commit 2 (this closeout section) + merge plan: merge
+  --ff-only into master in the main tree, then release +
+  remove the worktree and delete the branch, final reap,
+  rotation-b verified at 4, lock deleted only if it still
+  carries this run's run_id (2026-11-02T07:56:10Z).
+- No push, no bump, no live check — merged locally, pending
+  ship (ship loop owns version bumps, pushes, live
+  verification).
+- No [needs-eyes] flag: zero src/js changes, instrument +
+  evidence only; nothing here changes what Steve plays.
