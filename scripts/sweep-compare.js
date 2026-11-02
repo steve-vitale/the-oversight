@@ -370,3 +370,10 @@ try { const fr = require('./policies/competent-fertrot-b'); POLICY_REGISTRY['com
 // entrywindow instrument (sim-entrywindow-b, 2026-11-01, Loop B food-economy):
 // additive; zero behavior change to existing entries.
 try { const ew = require('./policies/competent-entrywindow-b'); POLICY_REGISTRY['competent-entrywindow-b'] = ew.entrywindow; } catch (e) {}
+// falseclose-b instrument (sim-falseclose-b, 2026-11-02, Loop B food-economy):
+// the competent + lateral-escape-aware guard policy (ported from
+// sim-latescape-b with only the hop-log `arrived` field added),
+// registered so the balanced panel (§15) can build its column.
+// Additive; zero behavior change to existing entries (the variant
+// stays default-OFF: nothing loads it unless named).
+try { const ls = require('./policies/competent-latescape-b'); POLICY_REGISTRY['competent-latescape-b'] = ls.latescape; } catch (e) {}
