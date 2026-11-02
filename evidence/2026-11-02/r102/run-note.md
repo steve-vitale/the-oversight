@@ -426,4 +426,28 @@ to r102. B-REG holds.
 
 ## Closeout
 
-[PENDING — appended after check, commit, merge.]
+- Commit e29b477cf (194 files: 4 scripts + 190 evidence
+  files) on base 75c78a805; safe-commit index clobber hit
+  (staged deletions, the known class) and was repaired via
+  HEAD-blob cacheinfo before any rebase (verified: status
+  empty, diff HEAD empty, hash-object matches HEAD blob).
+  EPERM flap note: git index-lock writes failed for ~15 min
+  mid-closeout (worktree gitdir + /tmp index locks; plain
+  writes and object writes kept working) — safe-commit
+  succeeded on retry once the flap cleared for git writes.
+  No ref surgery was performed during the flap.
+- Sibling landings during the run moved master
+  75c78a805 -> 6d9dd7193 (sim-sumdeploy-a, Loop A/B
+  coordinator evidence, journey-landing r71, loot audit);
+  branch rebased onto 6d9dd7193 cleanly (new tip
+  4dcd57ecd, my files verified byte-identical across
+  the rebase, post-rebase wedge proof 67/67 on SEED=42
+  and SEED=7), then merged locally via --ff-only,
+  pending ship — no version bump, no push (the ship
+  loop owns those).
+- Rotation-b advanced 5 -> 6, verified by re-read. Next
+  Lane B leg is 6 (crisis).
+- Lane B lock deleted at closeout. Worktree
+  journey2-social-r102 released and removed; branch
+  deleted. Final HEAD verified in the run's memory-log
+  entry for 2026-11-02.
