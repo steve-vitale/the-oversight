@@ -65,7 +65,13 @@ function analyzeOne(rec) {
   // Titan outcome joins (raw end snapshot, independent of tbFights).
   const titanEnd = rec.titanOutcomesEnd || [];
   const slainFled = titanEnd.filter(o => o.outcome === 'slain' || o.outcome === 'fled');
-  const foughtRecs = titanEnd.filter(o => o.outcome === 'fought');
+  // Engine semantics (titans.js titanResolveOutcome): the 'fought'
+  // record appended at fight start is RESOLVED IN PLACE to
+  // 'slain'/'fled' at tbEnd — it is not a second record. So the
+  // count invariant is fought+slain+fled records == titan TB
+  // fights, not fought records alone (a fought-only count would
+  // read every resolved fight as missing).
+  const foughtRecs = titanEnd.filter(o => o.outcome === 'fought' || o.outcome === 'slain' || o.outcome === 'fled');
   const titanJoins = [];
   slainFled.forEach(function (o) {
     const matches = tbFights.filter(f => f.titan && f.mid === o.titan && f.endDay === o.day && f.normalized === o.outcome);

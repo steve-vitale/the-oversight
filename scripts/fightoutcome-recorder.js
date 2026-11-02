@@ -41,6 +41,16 @@
 // calls titanMusterReady (that helper can create state.titans when
 // absent — the herald instrument's warning, preserved here).
 //
+// TITAN LINK (why the driver backfills): titans.js wraps tbEnd
+// lazily and resolves the 'fought' record to 'slain'/'fled' AFTER
+// the original tbEnd returns, outside this recorder's after-hook
+// regardless of install order. So a tbFight row's titanOutcome is
+// normally linked by the driver's end-snapshot backfill
+// (titanOutcomeSource 'end-snapshot'), never by the tbEnd hook
+// alone ('tbEnd' when it does catch one). The analyzer validates
+// every such link independently against the end snapshot, so a
+// backfilled link can never invent a slay.
+//
 // Contract: install(Game, t) where t = { attempts, tbFights,
 // tbOutcomes, fieldFights, kills, titanOutcomesAppended,
 // transcripts, instrumentErrors }. Returns uninstall.
@@ -356,6 +366,7 @@ function install(Game, t) {
           titan, liveBefore, beforeId, pendingBefore, pendingMidBefore, muster,
           scholarPos, entityPos, entityHp, stackTop: stackTop(),
           outcomesBefore: outcomesLen(Game), sayBefore: sayCount,
+          attemptCount: t.attempts.length,
         };
         pre.caller = classifyCaller(pre.stackTop);
       } catch (e) { err(t, 'startCombat.before', e); }
@@ -387,6 +398,37 @@ function install(Game, t) {
             else reason = 'OTHER';
           }
           let seq = null, upgraded = false;
+          if (!fought && !thrown) {
+            // INSTANT FIGHTS: in node, combat runs synchronously,
+            // so a fight can start AND end inside this one
+            // startCombat call ("It comes apart — no one in
+            // reach"). The tbEnd wrapper already registered it
+            // as BYPASS during the call (tbfight is null again
+            // by the after-hook, so fought reads false). Upgrade
+            // that row to FOUGHT instead of pushing a spurious
+            // REFUSED row for a fight that actually happened —
+            // the transcript on the REFUSED-shaped row proves it
+            // ("THE UNION REP! You're on your own." ... "It
+            // comes apart"). The outcome row already joins to
+            // this seq via tbEnd.
+            const added = t.attempts.slice(pre.attemptCount || 0).filter(function (a) { return a.cls === 'BYPASS'; });
+            const match = added.filter(function (a) { return a.mid === pre.mid; })[0] || added[0];
+            if (match) {
+              upgraded = true;
+              seq = match.fightSeq;
+              match.cls = 'FOUGHT'; match.reason = null; match.mid = pre.mid;
+              match.wave = pre.wave; match.aggression = pre.aggression;
+              match.titan = pre.titan; match.caller = pre.caller;
+              match.stackTop = pre.stackTop; match.muster = pre.muster;
+              match.scholarPos = pre.scholarPos; match.entityPos = pre.entityPos;
+              match.entityHp = pre.entityHp;
+              match.pendingAfter = pendingAfter; match.pendingMidAfter = pendingMidAfter;
+              match.gameOutcomes = newOutcomes;
+              match.sayDuring = sayDuring;
+              const key = fightKeys[afterId] || null;
+              if (key) { key.mid = pre.mid; key.titan = pre.titan; }
+            }
+          }
           if (fought) {
             if (fightKeys[afterId]) {
               upgraded = true;
@@ -451,6 +493,7 @@ function install(Game, t) {
       engineResult: (result === undefined || result === null) ? 'unknown' : String(result),
       fighters: snap.fighters, monster: snap.monster, bearer: snap.bearer,
       titanOutcome: titanOutcome || null,
+      titanOutcomeSource: titanOutcome ? 'tbEnd' : null,
       sayLines: say.lines, sayDropped: say.dropped,
       endStack: entryStack || [],
     };

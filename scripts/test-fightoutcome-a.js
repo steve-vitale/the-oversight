@@ -97,6 +97,35 @@ function fakeGame() {
   G.tbEnd('routed');
   const bypRow = t.tbFights.find(f => f.fightSeq === byp.fightSeq);
   check('smoke bypass outcome joins', !!bypRow && bypRow.engineResult === 'routed' && bypRow.normalized === 'fled');
+  // Instant fight: the fight starts AND ends synchronously inside
+  // one startCombat call (node combat), leaving tbfight null at
+  // the after-hook. It must read as one FOUGHT row joined to its
+  // outcome — never as a BYPASS row plus a spurious REFUSED row.
+  // The builder override is installed BEFORE REC.install so the
+  // dynamic G2.tbBeginTurn / G2.tbEnd lookups hit the recorder's
+  // wrappers mid-call, exactly like the engine's synchronous
+  // startCombat -> turn -> tbEnd flow.
+  (function instant() {
+    const G2 = fakeGame();
+    G2.startCombat = function () {
+      G2.tbfight = { id: 'f-instant', over: false,
+        fighters: [{ key: 'p', kind: 'villager', villagerId: 'v1', hp: 10, maxHp: 20, alive: true },
+                   { key: 'm_0', kind: 'monster', monsterId: 'union_rep', hp: 131, maxHp: 200, alive: true }] };
+      G2.tbBeginTurn();
+      G2.tbEnd('routed');
+      G2.tbfight = null;
+      return true;
+    };
+    const t2 = { attempts: [], tbFights: [], tbOutcomes: {}, fieldFights: [], kills: [], titanOutcomesAppended: [], transcripts: [], instrumentErrors: [] };
+    const un2 = REC.install(G2, t2);
+    G2.startCombat('union_rep');
+    check('instant fight is one FOUGHT row', t2.attempts.length === 1 && t2.attempts[0].cls === 'FOUGHT',
+      JSON.stringify(t2.attempts.map(a => a.cls)));
+    check('instant fight outcome joins', t2.tbFights.length === 1 && t2.tbFights[0].fightSeq === t2.attempts[0].fightSeq &&
+      t2.tbFights[0].engineResult === 'routed', JSON.stringify(t2.tbFights.map(f => f.engineResult)));
+    check('instant fight keeps mid', t2.attempts[0].mid === 'union_rep', 'mid=' + t2.attempts[0].mid);
+    un2();
+  })();
   // Field fight.
   G.fieldFight('v9', { id: 'herald' });
   check('smoke fieldFight row recorded', t.fieldFights.length === 1 && t.fieldFights[0].outcome === 'vKill' && t.fieldFights[0].normalized === 'slain');
@@ -114,7 +143,9 @@ function fakeGame() {
                { fightSeq: null, day: 11, mid: 'herald', cls: 'REFUSED', titan: true }],
     tbFights: [{ fightSeq: 1, day: 11, endDay: 11, mid: 'herald', titan: true, engineResult: 'won', normalized: 'slain' }],
     fieldFights: [{ day: 12, vid: 'v1', mid: 'herald', outcome: 'vFlee', normalized: 'fled' }],
-    kills: [], titanOutcomesEnd: [{ day: 11, titan: 'herald', outcome: 'fought' }, { day: 11, titan: 'herald', outcome: 'slain' }],
+    // Engine semantics: the 'fought' record resolves IN PLACE to
+    // 'slain'/'fled', so the end snapshot holds one record, not two.
+    kills: [], titanOutcomesEnd: [{ day: 11, titan: 'herald', outcome: 'slain' }],
     unresolved: [] };
   const bad = { seed: 2, run: 'r1', callDay: 10,
     attempts: [{ fightSeq: 1, day: 11, mid: 'herald', cls: 'FOUGHT', titan: true },

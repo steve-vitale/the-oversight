@@ -66,7 +66,14 @@ async function oneRun(seed) {
   const policy = policyFor();
   const { Game } = await loadGame({ seed, mode: 'herald', fullTelemetry: false });
   const t = { attempts: [], tbFights: [], tbOutcomes: {}, fieldFights: [], kills: [], titanOutcomesAppended: [], transcripts: [], instrumentErrors: [] };
-  const uninstall = REC.install(Game, t);
+  // Recorder installed AFTER setupGame: no combat runs during
+  // setup, so nothing is missed, and the recorder sits outside
+  // the setup-installed wrappers. (The titan outcome link does
+  // NOT depend on this order — titans.js resolves outcomes
+  // outside the recorder's tbEnd hook regardless; the driver
+  // backfills the link from the end snapshot. See the recorder
+  // header's titan-link note.)
+  let uninstall = null;
 
   let lairTile = null;
   const anchoredLines = [];
@@ -124,6 +131,7 @@ async function oneRun(seed) {
   });
 
   await setupGame(Game);
+  uninstall = REC.install(Game, t);
   let result = null;
   await quietLog(async () => { result = await runDays(Game, wrapped, { days: DAYS, manifest: undefined, sampleEvery: 30 }); });
   try { uninstall(); } catch (e) { errors.push('uninstall: ' + String(e.message).slice(0, 80)); }
@@ -149,6 +157,23 @@ async function oneRun(seed) {
     .map(function (a) { return { fightSeq: a.fightSeq, day: a.day, mid: a.mid }; });
   let titanOutcomesEnd = null;
   try { titanOutcomesEnd = JSON.parse(JSON.stringify((((Game.state || {}).titans || {}).outcomes || []))); } catch (e) { titanOutcomesEnd = null; }
+  // Backfill (order-independent safety net): a titan tbFight row
+  // whose titanOutcome was not linked live (e.g. the recorder was
+  // installed before setupGame, inside the titans wrapper) gets
+  // its record from the engine's own end snapshot — same titan,
+  // same end day, normalized matching — and only when exactly one
+  // record matches. The analyzer re-validates this join
+  // independently, so a backfill can never invent a link.
+  if (titanOutcomesEnd) {
+    (t.tbFights || []).forEach(function (f) {
+      if (!f.titan || f.titanOutcome) return;
+      const matches = titanOutcomesEnd.filter(function (o) {
+        return o.titan === f.mid && o.day === f.endDay &&
+          (o.outcome === 'slain' || o.outcome === 'fled') && o.outcome === f.normalized;
+      });
+      if (matches.length === 1) { f.titanOutcome = matches[0]; f.titanOutcomeSource = 'end-snapshot'; }
+    });
+  }
 
   const out = { seed, arm: 'closecommit', run: RUN, anchorCommit: ANCHOR,
     lairTile: lairTile, callDay: callDay,
