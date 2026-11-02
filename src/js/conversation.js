@@ -6730,8 +6730,18 @@
       // same answer from another person, not a parrot bug. Scoped to
       // invite_party only: teach / tell-me drops share the ledger but
       // ride different handlers and are not touched here.
+      // SKILL LESSONS ARE DIEGETIC ACTS TOO (journey-deepening r86
+      // 2026-11-02): a lesson's consequences already fired before this
+      // emission (teachSkill recorded, trust bumped, ticks spent), so
+      // blocking its outcome line misreports a landed lesson as a
+      // fizzle — transcript-caught on the r86 panel (seed 42254 day 80:
+      // Stella's Bark armor lesson recorded 'learned' while the spoken
+      // line was the dry deflection, because Oliver's identical day-60
+      // teach line was still in the run window). The lesson line is the
+      // same answer from another person, not a parrot bug.
       const inviteOutcome = choiceId === 'invite_party';
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome }) || line;
+      const lessonOutcome = choiceId.indexOf('skill_learn:') === 0 || choiceId.indexOf('skill_teach:') === 0;
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
