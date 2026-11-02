@@ -805,13 +805,13 @@
         v.health[vid2] = Math.min(100, ((v.health[vid2] !== undefined) ? v.health[vid2] : 100) + 25);
       }
       if (mode === 'triage-worst') {
-        this.say('⛺ Triage tents go up — the worst first. ' + nurse + ' doesn\'t leave their side: broth by the spoonful, the watch in shifts, no sleep. (-' + cost.toLocaleString() + ' kcal, said aloud and spent.)');
+        this.say('⛺ Triage tents go up — the worst first. ' + nurse + ' doesn\'t leave their side: broth by the spoonful, the watch in shifts, no sleep. (-' + paid.toLocaleString() + ' kcal, said aloud and spent.)');
         this.say((worstNames.length ? worstNames.join(', ') : 'The worst') + ' get intensive tending: their fevers break four days sooner and the worst of it passes — they step back from the brink. The walking sick get broth and a blessing — one day sooner. We\'re betting the mild pull through on their own.');
       } else if (mode === 'triage-hale') {
-        this.say('⛺ Triage tents go up — the walking sick first. ' + nurse + ' gets the mild cases back on their feet fast: back to the treeline in days, not weeks. (-' + cost.toLocaleString() + ' kcal, said aloud and spent.)');
+        this.say('⛺ Triage tents go up — the walking sick first. ' + nurse + ' gets the mild cases back on their feet fast: back to the treeline in days, not weeks. (-' + paid.toLocaleString() + ' kcal, said aloud and spent.)');
         this.say('The mild mend four days sooner. The severe get broth and watching — one day sooner. We\'re betting the strong pull through on their own.');
       } else {
-        this.say('⛺ Triage tents go up. ' + nurse + ' runs them — broth, boiled water, clean bandages, no sleep. (-' + cost.toLocaleString() + ' kcal from the pantry, said aloud and spent.)');
+        this.say('⛺ Triage tents go up. ' + nurse + ' runs them — broth, boiled water, clean bandages, no sleep. (-' + paid.toLocaleString() + ' kcal from the pantry, said aloud and spent.)');
         if (sickIds.length) this.say('The sick get real tending: every fever breaks two days sooner. The hurt get stitched and splinted.');
       }
       this.say('And while the tents stand — three days — the water gets boiled and every wound gets cleaned. Nobody new should catch it from the cistern.');
