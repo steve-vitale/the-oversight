@@ -1,0 +1,123 @@
+60207 ARMED — away stretches (extracted from sim-entrywindow-confirm-b-armed.jsonl sayLines + day snapshots + travels; no lines added or edited)
+
+BASELINE 60207 for contrast: scholar starts AND ends every day at the haven (4,4); 30 days, same circuit (4,4)->(4,3)->(3,4)->(5,4)->(4,4); 84 attempts, all on (4,3)/(3,4)/(5,4); NEVER stands on (5,3); 0 away days, 0 starvation deaths.
+
+--- loopDay 5 start=(4,4) end=(5,3) forages=[{"ok":true,"win":1,"reason":null}]
+    travels: (4,4)->(5,3:ok) (5,3)->(4,4:fallen_tree)
+--- loopDay 6 start=(5,3) end=(6,2) forages=[{"ok":false,"win":0,"reason":"worked_out"},{"ok":false,"win":0,"reason":"worked_out"}]
+    travels: (5,3)->(6,3:ok) (6,3)->(6,2:ok) (6,2)->(7,3:creek) (6,2)->(5,3:creek)
+--- loopDay 13 start=(6,2) end=(6,2) forages=[{"ok":true,"win":1,"reason":null}]
+    travels: (6,2)->(7,3:creek) (6,2)->(8,3:rubble) (6,2)->(7,3:creek) (6,2)->(6,1:ok) (6,1)->(6,2:ok)
+--- loopDay 14 start=(4,4) end=(4,4) forages=[{"ok":true,"win":1,"reason":null}]
+    travels: (4,4)->(3,4:ok) (3,4)->(4,4:ok)
+--- loopDay 18 start=(4,4) end=(5,3) forages=[{"ok":true,"win":1,"reason":null}]
+    travels: (4,4)->(5,3:ok) (5,3)->(4,4:fallen_tree)
+--- loopDay 19 start=(5,3) end=(5,3) forages=[{"ok":false,"win":0,"reason":"worked_out"}]
+    travels: (5,3)->(4,2:creek) (5,3)->(7,3:ok) (7,3)->(6,1:creek) (7,3)->(5,3:ok)
+--- loopDay 20 start=(5,3) end=(5,3) forages=[]
+    travels: (5,3)->(4,2:creek) (5,3)->(6,1:creek) (5,3)->(3,2:creek)
+--- loopDay 27 start=(5,3) end=(5,3) forages=[]
+    travels: (5,3)->(4,4:fallen_tree) (5,3)->(4,2:creek) (5,3)->(5,5:fallen_tree) (5,3)->(6,1:creek)
+--- loopDay 28 start=(4,4) end=(4,4) forages=[{"ok":true,"win":1,"reason":null}]
+    travels: (4,4)->(3,4:ok) (3,4)->(4,4:ok)
+
+--- say lines: the blockage is voiced per attempt, the stranded state never is ---
+d5: The pantry is in the hall. Your hands are not.
+d5: A fallen tree blocks the path.
+d5: ⚠ STARVING: health and energy falling. The spiral has started.
+d6: Your stomach is a fist. Eat — anything real, now.
+d6: The pantry is in the hall. Your hands are not.
+d6: The creek runs fast here — no crossing without a bridge or a swim.
+d6: The creek runs fast here — no crossing without a bridge or a swim.
+d6: ⚠ STARVING: health and energy falling. The spiral has started.
+d7: Your stomach is a fist. Eat — anything real, now.
+d7: The pantry is in the hall. Your hands are not.
+d7: ⚠ STARVING: health and energy falling. The spiral has started.
+d8: Your stomach is a fist. Eat — anything real, now.
+d8: The pantry is in the hall. Your hands are not.
+d8: ⚠ STARVING: health and energy falling. The spiral has started.
+d9: Your stomach is a fist. Eat — anything real, now.
+d9: The pantry is in the hall. Your hands are not.
+d9: The creek runs fast here — no crossing without a bridge or a swim.
+d9: The creek runs fast here — no crossing without a bridge or a swim.
+d9: The creek runs fast here — no crossing without a bridge or a swim.
+d9: ⚠ STARVING: health and energy falling. The spiral has started.
+d10: Your stomach is a fist. Eat — anything real, now.
+d10: The pantry is in the hall. Your hands are not.
+d10: ⚠ STARVING: health and energy falling. The spiral has started.
+d11: Your stomach is a fist. Eat — anything real, now.
+d11: The pantry is in the hall. Your hands are not.
+d11: ⚠ STARVING: health and energy falling. The spiral has started.
+d12: Your stomach is a fist. Eat — anything real, now.
+d12: The pantry is in the hall. Your hands are not.
+d12: The creek runs fast here — no crossing without a bridge or a swim.
+d12: The creek runs fast here — no crossing without a bridge or a swim.
+d12: The creek runs fast here — no crossing without a bridge or a swim.
+d12: The creek runs fast here — no crossing without a bridge or a swim.
+d12: ⚠ STARVING: health and energy falling. The spiral has started.
+d13: Your stomach is a fist. Eat — anything real, now.
+d13: Dawn. You wake stiff and half-frozen. (-33 health, restless night. The cold got in — no healing, and it took its cut. (Sleeping unsheltered in a cold snap is a mistake you only make once.))
+d13: The pantry is in the hall. Your hands are not.
+d13: The creek runs fast here — no crossing without a bridge or a swim.
+d13: The creek runs fast here — no crossing without a bridge or a swim.
+d13: ⚠ STARVING: health and energy falling. The spiral has started.
+d13: 🕯️ Amelia Knight is dead — starvation. The village stops. Somebody screams. Somebody else starts digging.
+d13: ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+d14: Dawn. You wake stiff and half-frozen. (+64 health, restless night. The cold got in — no healing, and it took its cut. (Sleeping unsheltered in a cold snap is a mistake you only make once.))
+d14: ⚠ STARVING: health and energy falling. The spiral has started.
+d15: The pantry is in the hall. Your hands are not.
+d15: ⚠ STARVING: health and energy falling. The spiral has started.
+d16: The pantry is in the hall. Your hands are not.
+d16: The creek runs fast here — no crossing without a bridge or a swim.
+d16: ⚠ STARVING: health and energy falling. The spiral has started.
+d17: The pantry is in the hall. Your hands are not.
+d17: ⚠ STARVING: health and energy falling. The spiral has started.
+d18: A fallen tree blocks the path.
+d18: 🧳 A traveler from northwest says Emberhold is starving — Theo's been seen counting empty jars, and the kids have gone quiet.
+d19: Your stomach is a fist. Eat — anything real, now.
+d19: The creek runs fast here — no crossing without a bridge or a swim.
+d19: The creek runs fast here — no crossing without a bridge or a swim.
+d20: Your stomach is a fist. Eat — anything real, now.
+d20: The creek runs fast here — no crossing without a bridge or a swim.
+d20: The creek runs fast here — no crossing without a bridge or a swim.
+d20: The creek runs fast here — no crossing without a bridge or a swim.
+d21: Your stomach is a fist. Eat — anything real, now.
+d21: A fallen tree blocks the path.
+d21: The creek runs fast here — no crossing without a bridge or a swim.
+d21: The creek runs fast here — no crossing without a bridge or a swim.
+d21: The creek runs fast here — no crossing without a bridge or a swim.
+d22: Your stomach is a fist. Eat — anything real, now.
+d22: A fallen tree blocks the path.
+d22: The creek runs fast here — no crossing without a bridge or a swim.
+d22: The creek runs fast here — no crossing without a bridge or a swim.
+d22: The creek runs fast here — no crossing without a bridge or a swim.
+d23: Your stomach is a fist. Eat — anything real, now.
+d23: Dawn. You wake stiff and half-frozen. (-27 health, restless night. Your sleeping body burned less — 675 kcal conserved. The cold got in — no healing, and it took its cut. (Sleeping unsheltered in a cold snap is a mistake you only make once.))
+d23: A fallen tree blocks the path.
+d23: The creek runs fast here — no crossing without a bridge or a swim.
+d23: A fallen tree blocks the path.
+d23: The creek runs fast here — no crossing without a bridge or a swim.
+d24: Your stomach is a fist. Eat — anything real, now.
+d24: A fallen tree blocks the path.
+d24: The creek runs fast here — no crossing without a bridge or a swim.
+d24: A fallen tree blocks the path.
+d24: The creek runs fast here — no crossing without a bridge or a swim.
+d25: Your stomach is a fist. Eat — anything real, now.
+d25: A fallen tree blocks the path.
+d25: The creek runs fast here — no crossing without a bridge or a swim.
+d25: A fallen tree blocks the path.
+d25: The creek runs fast here — no crossing without a bridge or a swim.
+d25: ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
+d26: Your stomach is a fist. Eat — anything real, now.
+d26: A fallen tree blocks the path.
+d26: The creek runs fast here — no crossing without a bridge or a swim.
+d26: A fallen tree blocks the path.
+d26: The creek runs fast here — no crossing without a bridge or a swim.
+d27: Your stomach is a fist. Eat — anything real, now.
+d27: A fallen tree blocks the path.
+d27: The creek runs fast here — no crossing without a bridge or a swim.
+d27: A fallen tree blocks the path.
+d27: The creek runs fast here — no crossing without a bridge or a swim.
+d27: 🕯️ Zoey Cao is dead — dehydration. The village stops. Somebody screams. Somebody else starts digging.
+d27: The village's quarrel was with Zoey — and Zoey is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.
+d27: ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.
