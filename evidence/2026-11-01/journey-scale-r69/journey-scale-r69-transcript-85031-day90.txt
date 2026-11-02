@@ -1,0 +1,17 @@
+(pre-talk seed: seek_taken planted d82; takenWantDay=82; convoCount=5)
+=== seed 85031 day 90 — conversation with Luke (gen_xgge74l) ===
+occupation=mason temperament=withdrawn trust=90 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control gossip-first
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "See you at the fire."
+(gossip picks this sitting: 0)

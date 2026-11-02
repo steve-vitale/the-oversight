@@ -1,0 +1,15 @@
+(pre-talk seed: seek_taken planted d115; takenWantDay=115; convoCount=16)
+=== seed 85032 day 120 — conversation with Salvador (gen_m6aek51) ===
+occupation=pottery instructor temperament=intense trust=86 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=true
+picker: control gossip-first
+
+THEM: "I asked Ernesto about what happened to my taken kin — Ernesto's gone. I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. Doesn't matter now."
+(turn0 choices: dlg:more, dlg:commit, dlg:cant, goon, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "I should — yeah. Later."
+(gossip picks this sitting: 0)
