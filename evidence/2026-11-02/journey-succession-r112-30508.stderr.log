@@ -1,0 +1,45 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Andre","t":90},{"id":"Andres","t":90},{"id":"Aria","t":61},{"id":"Tariq","t":60}], roster=9
+INH readable=true scripted=true deadItems=23 distinct=21 transferred=5 vanished=2 keptPlants=20 inheritedPlants=4 keptSkills=5 inheritedSkills=9 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","bird_whisperer"] post=["beast_calm","bird_whisperer"]
+DEATH d41 (a hushwolf, scripted): Piper -> Andres | passed=true lin=true mo=true trust=58 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=6 vanished=2 of 21 distinct dead-bearer items
+  CONVO d+3 with Andre (refused=false)
+  CONVO d+3 with Aria (refused=false)
+  CONVO d+7 with Andre (refused=false)
+  CONVO d+7 with Aria (refused=false)
+  CONVO d+14 with Andre (refused=false)
+  CONVO d+14 with Tariq (refused=false)
+
+SECOND-KILL d+20: Aria -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Aria -> Andre passed=true lin=true mo=true
+  CONVO d+30 with Miriam (refused=false)
+  CONVO d+30 with Tariq (refused=false)
+
+THIRD-KILL d+20 since second death: Andre -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Andre -> Diana passed=true lin=true mo=true
+  CONVO d+45 with Zoe (refused=false)
+  CONVO d+45 with Miriam (refused=false)
+
+FOURTH-KILL d+10 since third death: Diana -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Diana -> Zoe passed=true lin=true mo=true
+  CONVO d+53 with Miriam (refused=false)
+  CONVO d+53 with Tariq (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=3) echo=5 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=53 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=53 signals={"levelUp":true,"systemVoice":39,"offerLines":58,"codexPlantsDelta":27,"codexSkillsDelta":20,"codexAbilitiesDelta":16,"xpDelta":-21,"any":true} pantry 6130->14672
+TRUST-DIALS: office 58->90 (+32, climb) | villageMean 54.1->56.9 (+2.8, flat) | ge60 3->4 | movers>=5: [{"id":"Miriam","from":48,"to":90,"delta":42},{"id":"Zoe","from":56,"to":90,"delta":34},{"id":"Diana","from":59,"to":90,"delta":31},{"id":"Tariq","from":60,"to":90,"delta":30}]
+DEED-LEDGER: calls=33 summary={"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0},"donateToPantry":{"calls":31,"ok":31,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=6 grief-excluded=4
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=94 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=53
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=33) trustVerdict={"readable":true,"officeMantle":58,"officeLast":90,"officeDelta":32,"officeClass":"climb","villageMantle":54.1,"villageLast":56.9,"villageDelta":2.8,"villageClass":"flat","villageGe60Mantle":3,"villageGe60Last":4,"movers":[{"id":"Miriam","from":48,"to":90,"delta":42},{"id":"Zoe","from":56,"to":90,"delta":34},{"id":"Diana","from":59,"to":90,"delta":31},{"id":"Tariq","from":60,"to":90,"delta":30}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":4,"trustMoves":6} callCheck={"dailyMoveDays":10,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":2,"soloOfficeDeltas":[2,1],"soloBearerDeltaExact":[2,1],"singleMoverBearer":1,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":8,"known":8,"unknown":0} e3={"dailyDays":54,"moves":10}

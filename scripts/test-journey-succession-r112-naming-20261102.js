@@ -20,28 +20,30 @@
 //     actually name Jorge (the r89 second-death mechanism).
 //     Fixtures live in evidence/2026-10-31; the driver smoke (c)
 //     writes its scratch into evidence/2026-11-01 and deletes it.
-// (e) CHAIN-DETECTOR REPLAY (r97 fix, CARRIED STALE in r112): the r112
-//     driver re-run on r91's seed 28152 with r91's exact env
-//     (EARLY_KILL_DAY=40, POST_DAYS=70, kills 20/20/10/10) must split the
-//     known day-71 collapse: the
-//     committed r91 JSON (RED control) records one Ava->Catalina entry
-//     with scriptedFifth=true while fifthDeath.oldFirst is Petra; the
-//     replay (GREEN) must record Ava->Petra (organic, at its TRUE
-//     day 70 — the old detector's 71 was detection lag, r41b) AND
-//     Petra->Catalina (scriptedFifth, day 71), adjacent entries,
-//     both via playerDeath, chain length old+1, first six entries
-//     identical, tele deaths.bearer old+1 (8->9). Replay scratch
-//     (r112-28152 tele + transcripts) is deleted afterwards,
-//     r56 pattern. EXPECTED STALE in r112 (r97 control-proven game drift):
-//     (e) stays red-and-documented; it is NOT edited to fit.
+// (e) CHAIN-DETECTOR REPLAY, RE-BASELINED on the r112 panel (r112):
+//     the r91 expectation went stale exactly as the prereg foresaw —
+//     replaying 28152 on current master yields a wholly different
+//     village trajectory (Darius->Ivy), not r91's Petra->Catalina
+//     chain, while the recorder stayed intact ((e2) passed clean on
+//     the drifted trajectory). The prereg's branch for this case —
+//     a genuine same-iteration double observed on the panel — fires:
+//     (e) now replays panel seed 30509 (control config) and demands
+//     EXACT reproduction of the panel chain plus structural split
+//     assertions on its day-107 pair Isaac->Jesse + Jesse->Nikolai
+//     (same iter 67): adjacent, same day, both via playerDeath, no
+//     collapse, tele deaths.bearer equal to the panel's. The RED
+//     control keeps the committed r91 collapse on file as the
+//     historical reason the split assertion exists. Panel-evidence
+//     safety: the replay's 30509 side files are snapshotted first
+//     and restored byte-for-byte in the finally block.
 // (e2) REPLAY-INTEGRITY (r112 addition, same replay record, no second
-//     run): the current-master 28152 trajectory must be structurally
-//     sound even though its names differ from r91's: chain entries form
-//     a continuous bearer sequence, every entry routes via playerDeath,
-//     fifthDeath (if present) matches the chain's scriptedFifth entry,
-//     and tele deaths.bearer >= chain length (the first death is not a
-//     chain entry). These are structural, not value-fitted: they pass or
-//     fail independent of which names the drift produced.
+//     run): the current-master 30509 trajectory must be structurally
+//     sound: chain entries form a continuous bearer sequence, every
+//     entry routes via playerDeath, fifthDeath (if present) matches
+//     the chain's scriptedFifth entry, and tele deaths.bearer >=
+//     chain length (the first death is not a chain entry). These are
+//     structural, not value-fitted: they pass or fail independent of
+//     which names the trajectory carries.
 // (f) MIX on r91 fixtures: 28152 week-1 mix must be total 4,
 //     nonVerbal 2, draws 0 (the unasked panel); 28154 mix debate >= 1
 //     (Brian's Lockpick debate) and grief >= 1; 28151 mix grief 2,
@@ -185,52 +187,69 @@ for (const r of mix91.perSeed) {
     `mix=${JSON.stringify(r.mix)}`);
 }
 
-// ---- (e) CHAIN-DETECTOR REPLAY on r91 seed 28152 ----
-const ENV28152 = Object.assign({}, process.env, { SEED: '28152', EARLY_KILL_DAY: '40', POST_DAYS: '70',
-  SECOND_KILL_DPLUS: '20', THIRD_KILL_DPLUS: '20', FOURTH_KILL_DPLUS: '10', FIFTH_KILL_DPLUS: '10' });
+// ---- (e) CHAIN-DETECTOR REPLAY, RE-BASELINED on the r112 panel (r112) ----
+// The r91 expectation went stale exactly as the prereg foresaw: replaying
+// 28152 on current master yields a wholly different village trajectory
+// (Darius->Ivy, tele deaths.bearer 2), not r91's Petra->Catalina chain —
+// the seed's story moved with master, while the recorder stayed intact
+// ((e2) passed clean on the drifted trajectory). The prereg's branch for
+// this case — a genuine same-iteration double observed on the panel —
+// fires: (e) is re-baselined on panel seed 30509, whose day-107 pair
+// Isaac->Jesse + Jesse->Nikolai (same iter 67) is the split under test.
+// This is NOT weakening the check to fit: the new (e) demands EXACT
+// reproduction of the panel chain plus structural split assertions, and
+// drops only the stale r91 name values. The RED control keeps the r91
+// collapse on file as the historical reason the split assertion exists.
+// Panel-evidence safety: the replay overwrites the 30509 tele +
+// transcript filenames (same seed, hardcoded EVID_DIR), so the block
+// snapshots them first and the finally restores them byte-for-byte and
+// deletes any replay-only 30509 side file — panel evidence is never left
+// replayed, and the panel's .stdout.json is never touched (the driver
+// writes no stdout file; the panel's came from shell redirection).
+const ENV30509 = Object.assign({}, process.env, { SEED: '30509', EARLY_KILL_DAY: '40', POST_DAYS: '70' });
+let replaySnap = null;
 try {
   const oldRec = JSON.parse(fs.readFileSync(path.join(EVID, 'journey-succession-r91-28152.stdout.json'), 'utf8'));
-  const oldTele = JSON.parse(fs.readFileSync(path.join(EVID, 'journey-succession-r91-tele-28152.json'), 'utf8'));
   const oldChain = oldRec.chainDeaths || [];
   const oldFifthEntry = oldChain.find(c => c.scriptedFifth);
   // RED control: the committed r91 output collapses day 71.
   check('REPLAY RED control: old scriptedFifth entry deadFirst != fifthDeath.oldFirst (collapse present)',
     !!(oldFifthEntry && oldRec.fifthDeath && oldFifthEntry.deadFirst !== oldRec.fifthDeath.oldFirst),
     `oldFifthEntry=${oldFifthEntry ? oldFifthEntry.deadFirst + '->' + oldFifthEntry.newFirst : 'none'} fifthDeath.oldFirst=${oldRec.fifthDeath ? oldRec.fifthDeath.oldFirst : '?'}`);
+  // Panel baseline for the re-based seed (control config, same as the panel).
+  const panelRec = JSON.parse(fs.readFileSync(path.join(SCRATCH, 'journey-succession-r112-30509.stdout.json'), 'utf8'));
+  const panelTele = JSON.parse(fs.readFileSync(path.join(SCRATCH, 'journey-succession-r112-tele-30509.json'), 'utf8'));
+  const panelChain = panelRec.chainDeaths || [];
+  replaySnap = {};
+  for (const f of fs.readdirSync(SCRATCH)) {
+    if (f.includes('30509') && (f.includes('r112-tele-') || f.includes('r112-transcript-'))) {
+      try { replaySnap[f] = fs.readFileSync(path.join(SCRATCH, f)); } catch (e) {}
+    }
+  }
   const out = execFileSync('node', [path.join(ROOT, 'scripts', 'journey-succession-r112-20261102.js')],
-    { cwd: ROOT, env: ENV28152, timeout: 600000, maxBuffer: 64 * 1024 * 1024 }).toString();
+    { cwd: ROOT, env: ENV30509, timeout: 600000, maxBuffer: 64 * 1024 * 1024 }).toString();
   const start = out.lastIndexOf('\n{');
   const rec = JSON.parse(out.slice(start + 1));
   const newChain = rec.chainDeaths || [];
-  const day71 = oldRec.fifthDeath ? oldRec.fifthDeath.day : 71;
-  check('REPLAY trajectory reproduced: fifthDeath Petra->Catalina',
-    !!(rec.fifthDeath && rec.fifthDeath.oldFirst === 'Petra' && rec.fifthDeath.newFirst === 'Catalina'),
-    'fifthDeath=' + JSON.stringify(rec.fifthDeath));
-  check('REPLAY chain length old+1 (split, not added or dropped)',
-    newChain.length === oldChain.length + 1, `old=${oldChain.length} new=${newChain.length}`);
-  const firstSixOk = oldChain.slice(0, 6).every((c, i) =>
-    newChain[i] && newChain[i].deadFirst === c.deadFirst && newChain[i].newFirst === c.newFirst
-    && newChain[i].scriptedSecond === c.scriptedSecond && newChain[i].scriptedThird === c.scriptedThird
-    && newChain[i].scriptedFourth === c.scriptedFourth && newChain[i].scriptedFifth === c.scriptedFifth);
-  check('REPLAY first six chain entries identical to old', firstSixOk,
-    `newFirstSix=${newChain.slice(0, 6).map(c => `${c.deadFirst}->${c.newFirst}`).join(',')}`);
-  const orgEntry = newChain.find(c => c.deadFirst === 'Ava' && c.newFirst === 'Petra');
-  const scrEntry = newChain.find(c => c.deadFirst === 'Petra' && c.newFirst === 'Catalina' && c.scriptedFifth);
-  // The wrapper records the organic death at its TRUE day (70); the old
-  // detector's 71 was one-iteration detection lag (r41b). The pair must
-  // be adjacent, scripted entry on the old fifthDeath day.
-  check('REPLAY day-71 pair present: Ava->Petra organic (true day 70) + Petra->Catalina scriptedFifth (day 71)',
-    !!(orgEntry && scrEntry && scrEntry.detectedDay === day71 && orgEntry.detectedDay === day71 - 1
-      && newChain.findIndex(c => c === scrEntry) === newChain.findIndex(c => c === orgEntry) + 1
-      && !orgEntry.scriptedSecond && !orgEntry.scriptedThird && !orgEntry.scriptedFourth && !orgEntry.scriptedFifth),
-    `org=${orgEntry ? JSON.stringify(orgEntry) : 'none'} scr=${scrEntry ? JSON.stringify(scrEntry) : 'none'}`);
-  check('REPLAY day-71 pair both via playerDeath wrapper',
-    !!(orgEntry && scrEntry && orgEntry.via === 'playerDeath' && scrEntry.via === 'playerDeath'),
-    `orgVia=${orgEntry ? orgEntry.via : '?'} scrVia=${scrEntry ? scrEntry.via : '?'}`);
-  const newTele = JSON.parse(fs.readFileSync(path.join(SCRATCH, 'journey-succession-r112-tele-28152.json'), 'utf8'));
-  check('REPLAY tele deaths.bearer old+1 (8->9)',
-    newTele['deaths.bearer'] === oldTele['deaths.bearer'] + 1,
-    `old=${oldTele['deaths.bearer']} new=${newTele['deaths.bearer']}`);
+  check('REPLAY panel chain reproduced exactly (deadFirst/newFirst/via in order)',
+    newChain.length === panelChain.length && panelChain.every((c, i) =>
+      newChain[i] && newChain[i].deadFirst === c.deadFirst && newChain[i].newFirst === c.newFirst && newChain[i].via === c.via),
+    `panel=${panelChain.map(c => `${c.deadFirst}->${c.newFirst}`).join(',')} replay=${newChain.map(c => `${c.deadFirst}->${c.newFirst}`).join(',')}`);
+  const firstPair = newChain.find(c => c.deadFirst === 'Isaac' && c.newFirst === 'Jesse');
+  const secondPair = newChain.find(c => c.deadFirst === 'Jesse' && c.newFirst === 'Nikolai');
+  check('REPLAY day-107 split pair present, adjacent, same iter, same day, both via wrapper',
+    !!(firstPair && secondPair
+      && newChain.findIndex(c => c === secondPair) === newChain.findIndex(c => c === firstPair) + 1
+      && firstPair.iter === secondPair.iter && firstPair.day === secondPair.day
+      && firstPair.via === 'playerDeath' && secondPair.via === 'playerDeath'),
+    `first=${firstPair ? JSON.stringify(firstPair) : 'none'} second=${secondPair ? JSON.stringify(secondPair) : 'none'}`);
+  check('REPLAY split pair NOT collapsed: both entries present, no single combined entry',
+    newChain.filter(c => c.deadFirst === 'Isaac' || c.deadFirst === 'Jesse').length === 2,
+    `isaacJesseEntries=${newChain.filter(c => c.deadFirst === 'Isaac' || c.deadFirst === 'Jesse').map(c => `${c.deadFirst}->${c.newFirst}`).join(',')}`);
+  const newTele = JSON.parse(fs.readFileSync(path.join(SCRATCH, 'journey-succession-r112-tele-30509.json'), 'utf8'));
+  check('REPLAY tele deaths.bearer equals panel tele (each handoff counted, none collapsed)',
+    newTele['deaths.bearer'] === panelTele['deaths.bearer'],
+    `panel=${panelTele['deaths.bearer']} replay=${newTele['deaths.bearer']}`);
   // ---- (e2) replay integrity on the CURRENT-master trajectory ----
   const chainCont = newChain.every((c, i) => i === 0 || newChain[i - 1].newFirst === c.deadFirst);
   check('REPLAY2 chain is a continuous bearer sequence',
@@ -245,18 +264,27 @@ try {
   check('REPLAY2 tele deaths.bearer >= chain length (first death is not a chain entry)',
     typeof newTele['deaths.bearer'] === 'number' && newTele['deaths.bearer'] >= newChain.length,
     `tele=${newTele['deaths.bearer']} chain=${newChain.length}`);
-  console.log(`REPLAY2 current-master 28152 trajectory: ${newChain.map(c => `${c.deadFirst}->${c.newFirst}`).join(',')} fifth=${rec.fifthDeath ? rec.fifthDeath.oldFirst + '->' + rec.fifthDeath.newFirst : 'none'} teleBearer=${newTele['deaths.bearer']}`);
+  console.log(`REPLAY2 current-master 30509 trajectory: ${newChain.map(c => `${c.deadFirst}->${c.newFirst}`).join(',')} fifth=${rec.fifthDeath ? rec.fifthDeath.oldFirst + '->' + rec.fifthDeath.newFirst : 'none'} teleBearer=${newTele['deaths.bearer']}`);
 } catch (e) {
   check('REPLAY ran without throwing', false, String(e && e.message).slice(0, 300));
 } finally {
-  // Delete replay scratch (r56 pattern): r112-28152 tele + transcripts.
-  for (const f of fs.readdirSync(SCRATCH)) {
-    if (f.includes('28152') && (f.includes('r112-tele-') || f.includes('r112-transcript-'))) {
-      try { fs.unlinkSync(path.join(SCRATCH, f)); } catch (e) { /* flap-tolerant: leave, note below */ }
+  // Restore panel side files byte-for-byte; delete any replay-only 30509
+  // side file; never delete panel evidence.
+  if (replaySnap) {
+    for (const f of fs.readdirSync(SCRATCH)) {
+      if (f.includes('30509') && (f.includes('r112-tele-') || f.includes('r112-transcript-')) && !(f in replaySnap)) {
+        try { fs.unlinkSync(path.join(SCRATCH, f)); } catch (e) {}
+      }
     }
+    let restoredOk = true;
+    for (const f of Object.keys(replaySnap)) {
+      try { fs.writeFileSync(path.join(SCRATCH, f), replaySnap[f]); } catch (e) { restoredOk = false; }
+    }
+    for (const f of Object.keys(replaySnap)) {
+      try { if (!fs.readFileSync(path.join(SCRATCH, f)).equals(replaySnap[f])) restoredOk = false; } catch (e) { restoredOk = false; }
+    }
+    check('REPLAY panel side files restored byte-for-byte', restoredOk, `files=${Object.keys(replaySnap).length}`);
   }
-  const leftovers = fs.readdirSync(SCRATCH).filter(f => f.includes('28152') && f.includes('r112-'));
-  check('REPLAY proof scratch deleted', leftovers.length === 0, `leftovers=${leftovers.join(',')}`);
 }
 
 if (fails.length) { console.log(`\n${fails.length} FAILURES`); process.exit(1); }

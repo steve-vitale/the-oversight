@@ -1,0 +1,49 @@
+
+ORGANIC DEATH d32: Antonio -> Shannon, topTrust=[{"id":"Seamus","t":90},{"id":"Thoa","t":83},{"id":"Elena","t":67},{"id":"Dale","t":64}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=12 inheritedPlants=0 keptSkills=7 inheritedSkills=0 succTrustPre=87 succTrustPost=57
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock"] post=["beast_calm","lucky_rock"]
+DEATH d31 (organic (phase A)): Antonio -> Shannon | passed=true lin=true mo=true trust=57 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Seamus (refused=false)
+  CONVO d+3 with Thoa (refused=false)
+  CONVO d+7 with Seamus (refused=false)
+  CONVO d+7 with Thoa (refused=false)
+  CONVO d+14 with Seamus (refused=false)
+  CONVO d+14 with Thoa (refused=false)
+
+SECOND-KILL d+20: Shannon -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Shannon -> Seamus passed=true lin=true mo=true
+  CONVO d+30 with Emma (refused=false)
+  CONVO d+30 with Marcus (refused=false)
+
+THIRD-KILL d+20 since second death: Thoa -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Thoa -> Marcus passed=true lin=true mo=true
+  CONVO d+45 with Priya (refused=false)
+  CONVO d+45 with Nadia (refused=false)
+
+FOURTH-KILL d+10 since third death: Elena -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Elena -> Nadia passed=true lin=true mo=true
+  CONVO d+53 with Priya (refused=false)
+  CONVO d+53 with Hernán (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Nadia -> ? (scripted r112 chain probe)
+FIFTH DEATH d+10 since fourth death: Nadia -> Priya passed=true lin=true mo=true
+  CONVO d+64 with Hernán (refused=false)
+  CONVO d+64 with Aki (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=5) echo=3 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":49,"offerLines":54,"codexPlantsDelta":50,"codexSkillsDelta":16,"codexAbilitiesDelta":13,"xpDelta":-2,"any":true} pantry 6360->8914
+TRUST-DIALS: office 57->80 (+23, climb) | villageMean 66->57.6 (-8.4, fall) | ge60 5->4 | movers>=5: []
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=102 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":57,"officeLast":80,"officeDelta":23,"officeClass":"climb","villageMantle":66,"villageLast":57.6,"villageDelta":-8.4,"villageClass":"fall","villageGe60Mantle":5,"villageGe60Last":4,"movers":[]}
+E6/CALLCHECK: e6={"callMoves":13,"withCensus":13,"chainHandoffs":7,"trustMoves":6} callCheck={"dailyMoveDays":13,"callMoveDays":13,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":2,"deed-only":2,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":8,"known":8,"unknown":0} e3={"dailyDays":71,"moves":13}

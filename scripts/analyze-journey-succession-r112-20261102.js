@@ -20,7 +20,7 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const EVID = path.join(ROOT, 'evidence', '2026-11-02');
-const SEEDS = [30507, 30508, 30509, 30510]; // r112 pilot: 30507, 30508 chain-forced; 30509, 30510 controls (expansion adds 30505 forced, 30506 control)
+const SEEDS = [30507, 30508, 30509, 30510, 30511, 30512]; // r112 pilot: 30507, 30508 chain-forced; 30509, 30510 controls; expansion (trigger fired: same-iteration doubles on 30508/30509) adds 30511 forced, 30512 control
 const ARMOR_LOCS = ['scholarPack', 'scholarWorn', 'scholarPrepStash', 'pantry',
   'livingWorn', 'livingPack', 'deadWorn', 'deadPack', 'corpses', 'stashed'];
 const recs = [];
@@ -223,7 +223,7 @@ for (const r of recs) {
   const finalEndB = relSuccBonds(r.relEnd, r.relEndFinalId || (r.relEnd && r.relEnd.selfId));
   const grievAfter2 = sd ? ((r.relEnd && r.relEnd.grievances) || []).filter(g => (g.by === succ1Id || g.against === succ1Id) && (g.day || 0) > sd.day).length : null;
   const i2 = r.inh2 || {};
-  const forced = [30507, 30508].includes(r.seed);
+  const forced = [30507, 30508, 30511].includes(r.seed);
   console.log(`seed ${r.seed}${forced ? ' FORCED' : ' control'}: ${d.oldFirst} -> ${d.newFirst} -> ${sd ? sd.newFirst : '(no second)'} secondDeath=${sd ? 'd+' + sd.dplus + ' lin=' + sd.linOk + ' mo=' + sd.moOk : 'ABSENT'} relPre2=${!!pre2} relPost2=${!!post2} origEndId=${r.relEndOrigId ? 'set' : 'MISSING'} finalEndId=${r.relEndFinalId ? 'set' : 'MISSING'}`);
   if (sd) {
     console.log(`  succ2Bonds: pre2=${pre2B.length} post2=${post2B.length} (survived=${surv2}) topPre2=${tPre2 ? tPre2.partnerName + ' depth=' + tPre2.depth + ' v=' + tPre2.v : 'none'} topPost2=${tPost2 ? tPost2.partnerName + ' depth=' + tPost2.depth + ' v=' + tPost2.v : 'none'} affinityDiff=${affDiff}`);
@@ -238,7 +238,7 @@ console.log('\n== CHAIN POOLED ==');
 {
   let surv2T = 0, pre2T = 0, phantom1 = 0, forcedWith2nd = 0, forcedN = 0;
   for (const r of recs) {
-    if (![30507, 30508].includes(r.seed)) continue;
+    if (![30507, 30508, 30511].includes(r.seed)) continue;
     forcedN++;
     if (!r.secondDeath) continue;
     forcedWith2nd++;
@@ -300,7 +300,7 @@ for (const r of recs) {
   const succ2Phantom = relDeadBonds(r.relEnd, succ2Id).length;
   const grievAfter3 = td ? ((r.relEnd && r.relEnd.grievances) || []).filter(g => (g.by === succ2Id || g.against === succ2Id) && (g.day || 0) > td.day).length : null;
   const i3 = r.inh3 || {};
-  const forced = [30507, 30508].includes(r.seed);
+  const forced = [30507, 30508, 30511].includes(r.seed);
   console.log(`seed ${r.seed}${forced ? ' FORCED' : ' control'}: ${d.oldFirst} -> ${d.newFirst} -> ${sd ? sd.newFirst : '(no second)'} -> ${td ? td.newFirst : '(no third)'} thirdDeath=${td ? 'd+' + td.dplus + ' since2nd, d+' + td.dplusFirst + ' since1st, lin=' + td.linOk + ' mo=' + td.moOk : 'ABSENT'} relPre3=${!!pre3} relPost3=${!!post3}`);
   if (td) {
     console.log(`  succ3Bonds: pre3=${pre3B.length} post3=${post3B.length} (survived=${surv3}) topPre3=${tPre3 ? tPre3.partnerName + ' depth=' + tPre3.depth + ' v=' + tPre3.v : 'none'} topPost3=${tPost3 ? tPost3.partnerName + ' depth=' + tPost3.depth + ' v=' + tPost3.v : 'none'} affinityDiff3=${affDiff3}`);
@@ -318,7 +318,7 @@ console.log('\n== CHAIN3 POOLED ==');
 {
   let surv3T = 0, pre3T = 0, phOrig = 0, phS1 = 0, phS2 = 0, forcedWith3rd = 0, forcedN = 0;
   for (const r of recs) {
-    if (![30507, 30508].includes(r.seed)) continue;
+    if (![30507, 30508, 30511].includes(r.seed)) continue;
     forcedN++;
     if (!r.thirdDeath) continue;
     forcedWith3rd++;
@@ -385,7 +385,7 @@ for (const r of recs) {
   const succ3Phantom = relDeadBonds(r.relEnd, succ3Id).length;
   const grievAfter4 = fd ? ((r.relEnd && r.relEnd.grievances) || []).filter(g => (g.by === succ3Id || g.against === succ3Id) && (g.day || 0) > fd.day).length : null;
   const i4 = r.inh4 || {};
-  const forced = [30507, 30508].includes(r.seed);
+  const forced = [30507, 30508, 30511].includes(r.seed);
   console.log(`seed ${r.seed}${forced ? ' FORCED' : ' control'}: ${d.oldFirst} -> ${d.newFirst} -> ${sd ? sd.newFirst : '(no second)'} -> ${td ? td.newFirst : '(no third)'} -> ${fd ? fd.newFirst : '(no fourth)'} fourthDeath=${fd ? 'd+' + fd.dplus + ' since3rd, d+' + fd.dplusSecond + ' since2nd, d+' + fd.dplusFirst + ' since1st, lin=' + fd.linOk + ' mo=' + fd.moOk : 'ABSENT'} relPre4=${!!pre4} relPost4=${!!post4}`);
   if (fd) {
     console.log(`  succ4Bonds: pre4=${pre4B.length} post4=${post4B.length} (survived=${surv4}) topPre4=${tPre4 ? tPre4.partnerName + ' depth=' + tPre4.depth + ' v=' + tPre4.v : 'none'} topPost4=${tPost4 ? tPost4.partnerName + ' depth=' + tPost4.depth + ' v=' + tPost4.v : 'none'} affinityDiff4=${affDiff4}`);
@@ -404,7 +404,7 @@ console.log('\n== CHAIN4 POOLED ==');
 {
   let surv4T = 0, pre4T = 0, phOrig = 0, phS1 = 0, phS2 = 0, phS3 = 0, forcedWith4th = 0, forcedN = 0;
   for (const r of recs) {
-    if (![30507, 30508].includes(r.seed)) continue;
+    if (![30507, 30508, 30511].includes(r.seed)) continue;
     forcedN++;
     if (!r.fourthDeath) continue;
     forcedWith4th++;
@@ -476,7 +476,7 @@ for (const r of recs) {
   const succ4Phantom = relDeadBonds(r.relEnd, succ4Id).length;
   const grievAfter5 = fid ? ((r.relEnd && r.relEnd.grievances) || []).filter(g => (g.by === succ4Id || g.against === succ4Id) && (g.day || 0) > fid.day).length : null;
   const i5 = r.inh5 || {};
-  const forced = [30507, 30508].includes(r.seed);
+  const forced = [30507, 30508, 30511].includes(r.seed);
   console.log(`seed ${r.seed}${forced ? ' FORCED' : ' control'}: ${d.oldFirst} -> ${d.newFirst} -> ${sd ? sd.newFirst : '(no second)'} -> ${td ? td.newFirst : '(no third)'} -> ${fd ? fd.newFirst : '(no fourth)'} -> ${fid ? fid.newFirst : '(no fifth)'} fifthDeath=${fid ? 'd+' + fid.dplus + ' since4th, d+' + fid.dplusThird + ' since3rd, d+' + fid.dplusSecond + ' since2nd, d+' + fid.dplusFirst + ' since1st, lin=' + fid.linOk + ' mo=' + fid.moOk : 'ABSENT'} relPre5=${!!pre5} relPost5=${!!post5}`);
   if (fid) {
     console.log(`  succ5Bonds: pre5=${pre5B.length} post5=${post5B.length} (survived=${surv5}) topPre5=${tPre5 ? tPre5.partnerName + ' depth=' + tPre5.depth + ' v=' + tPre5.v : 'none'} topPost5=${tPost5 ? tPost5.partnerName + ' depth=' + tPost5.depth + ' v=' + tPost5.v : 'none'} affinityDiff5=${affDiff5}`);
@@ -496,7 +496,7 @@ console.log('\n== CHAIN5 POOLED ==');
 {
   let surv5T = 0, pre5T = 0, phOrig = 0, phS1 = 0, phS2 = 0, phS3 = 0, phS4 = 0, forcedWith5th = 0, forcedN = 0;
   for (const r of recs) {
-    if (![30507, 30508].includes(r.seed)) continue;
+    if (![30507, 30508, 30511].includes(r.seed)) continue;
     forcedN++;
     if (!r.fifthDeath) continue;
     forcedWith5th++;
@@ -914,8 +914,8 @@ for (const r of recs) {
 }
 console.log(`BAND TEACH-NEW: targetKnowsBefore=false total=${bandTeachNew} (known=${bandTeachKnown} null=${bandTeachNull})`);
 console.log('\\n== STAGING RATE (r53: mature regime is an aspiration, not a guarantee) ==');
-const young = recs.filter(r => [30507, 30508].includes(r.seed)); // r79: chain-forced
-const mature = recs.filter(r => [30509, 30510].includes(r.seed)); // r79: controls (r75 analyzer carried a stale r72-era list here; fixed)
+const young = recs.filter(r => [30507, 30508, 30511].includes(r.seed)); // r79: chain-forced
+const mature = recs.filter(r => [30509, 30510, 30512].includes(r.seed)); // r79: controls (r75 analyzer carried a stale r72-era list here; fixed)
 const rate = (xs) => `${xs.filter(r => r.death && r.death.scripted).length}/${xs.length} scripted (organic ${xs.filter(r => r.death && !r.death.scripted).length})`;
 console.log(`chain-forced: ${rate(young)}; controls: ${rate(mature)} (r79 labels; scripted here = FIRST death staged day-40, as in r56 — second/third kills are chain-forced separately)`);
 for (const r of recs) console.log(`seed ${r.seed}: scripted=${r.death && r.death.scripted} deathDay=${r.death && r.death.day}`);
