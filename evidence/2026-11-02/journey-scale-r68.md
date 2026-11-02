@@ -292,7 +292,11 @@ ship (no bump, no push, no live verify — ship loop owns those).
 Branch commits: 7821ef7b7 (prereg + driver, rebased from 105ffd9e0),
 fffae86ae (quad + analysis + run note, rebased from 677595c07),
 plus this landing section as the final branch commit, merged by a
-second fast-forward. Worktree released + branch deleted at
-closeout; final main-tree status clean. Rotation file written 3→0
+second fast-forward. Second rebase at closeout: master moved again
+to a9f30affb (Loop A 0815Z round evidence, single evidence-only
+commit, zero game code in range) — branch rebased 3/3 cleanly onto
+it, proofs re-run green (gossip 11/11, goal 7/7, analyzer 0/0), no
+quad re-run for the same zero-game-code reason. Worktree released
++ branch deleted at closeout; final main-tree status clean. Rotation file written 3→0
 at closeout and verified by reading it back. Playtest lock deleted
 at closeout. Heartbeat loop stopped at closeout.
