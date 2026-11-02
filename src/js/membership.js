@@ -359,7 +359,28 @@
       } catch (e) {}
     },
 
+    // deadMarked: the DEAD-IS-DEAD mark read three ways. removeVillager
+    // ('killed'/'ambushed') marks the FIRST record it finds (villagers
+    // record OR background_survivors seed), and hydration can leave the
+    // mark visible only through vpOf (rosterChars). Intake must consult
+    // all three, or a dead villager re-enters through the copy that
+    // wasn't marked (sim-deadid-a, 2026-11-02: a killed background
+    // survivor re-applied, walked in, and won the mantle).
+    deadMarked(id) {
+      try {
+        if (!id) return false;
+        var vrec = (this.data.villagers || []).find(function (r) { return r.id === id; });
+        if (vrec && vrec.dead) return true;
+        var brec = (this.data.background_survivors || []).find(function (r) { return r.id === id; });
+        if (brec && brec.dead) return true;
+        var vp = this.vpOf ? this.vpOf(id) : null;
+        if (vp && vp.dead) return true;
+      } catch (e) {}
+      return false;
+    },
+
     genApplicant() {
+      var self = this;
       var used = {};
       try {
         for (var i = 0; i < (this.state.village.roster || []).length; i++) used[this.state.village.roster[i]] = 1;
@@ -376,7 +397,11 @@
         }
       } catch (e) {}
       var bg = [];
-      try { bg = (this.data.background_survivors || []).filter(function (c) { return !used[c.id]; }); } catch (e) {}
+      // DEAD-ID EXCLUSION (sim-deadid-a, 2026-11-02): the dead never
+      // re-enter candidacy. The used set alone cannot do this — a
+      // removed villager is off the roster, so only the death mark
+      // keeps them out of the pool.
+      try { bg = (this.data.background_survivors || []).filter(function (c) { return !used[c.id] && !self.deadMarked(c.id); }); } catch (e) {}
       var c = null, id = null, name = null, occ = null;
       if (bg.length && R() < 0.7) {
         c = pick(bg);
@@ -619,6 +644,19 @@
           v.roster = v.roster || [];
           // ensure a character record exists
           var nid = app.charId || app.id;
+          // DEAD-ID EXCLUSION, BACKSTOP (sim-deadid-a, 2026-11-02):
+          // an application accepted BEFORE the applicant died must
+          // still never walk in. Refused honestly, not silently —
+          // one generic non-arrival line. This names no burial and
+          // no prior life: identity-aware narration is a separate
+          // future arm and is deliberately not built here.
+          var _deadArrival = false;
+          try { _deadArrival = this.deadMarked ? !!this.deadMarked(nid) : false; } catch (e2) {}
+          if (_deadArrival) {
+            this.say(`Word came too late: ${app.name} never made it — they're already gone.`);
+            try { if (this.journalNote) this.journalNote('village', 'arrival-refused', app.name + ' never arrived — already gone.'); } catch (e2) {}
+            continue;
+          }
           if (v.roster.indexOf(nid) < 0) v.roster.push(nid);
           // RECRUIT-GHOST FIX (journey deepening r11 2026-10-13): a bare
           // roster id is an un-talkable ghost (vpOf misses -> startConvo

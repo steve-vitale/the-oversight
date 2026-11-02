@@ -3,8 +3,14 @@
 // Proves the traced mechanism two ways:
 //  (A) LIVE harness: a dead-flagged roster id stays an npcIds candidate
 //      (isMember false, candidacy true); removeVillager preserves its
-//      trust entry and sets vp dead; arrivalTick re-adds the same id
-//      appended last, trust preserved, dead flag NOT cleared.
+//      trust entry and sets vp dead.
+//  (A-FLIP, sim-deadid-a 2026-11-02, design changed on purpose): the
+//      arrival half of (A) no longer re-adds the id — arrivalTick now
+//      REFUSES a dead-flagged arrival (no roster push) and genApplicant
+//      excludes dead ids. The original 29/29 run (old behavior) is
+//      recorded in evidence/2026-11-02/sim-rosterreturn-a.md; the live
+//      arrival assertions below now pin the NEW behavior, and the
+//      driver-JSON part (B) is untouched historical analysis.
 //  (B) DRIVER-JSON analysis: the 97330 judged run reproduces the
 //      bearerorder death chain and traces Nora's return step by step
 //      (genApplicant d109 -> auto-accept d109 -> arrivalTick push d111
@@ -58,12 +64,12 @@ async function livePart() {
     const beforeLen = (v.roster || []).length;
     Game.arrivalTick();
     const after = v.roster || [];
-    eq(after[after.length - 1], X, 'live: arrivalTick re-adds the id appended LAST');
-    eq(after.length, beforeLen + 1, 'live: arrivalTick grows the roster by exactly one');
+    ok(after.indexOf(X) < 0, 'live: arrivalTick REFUSES a dead-flagged arrival (no roster push, sim-deadid-a)');
+    eq(after.length, beforeLen, 'live: arrivalTick leaves roster length unchanged for a dead-flagged arrival');
     eq(v.trust[X], 90, 'live: arrivalTick preserves the old trust entry (no reset to 20)');
     eq(!!(Game.vpOf(X) || {}).dead, true, 'live: arrivalTick does NOT clear the vp dead flag');
-    eq(Game.isMember(X), false, 'live: returned id isMember still false (dead-flagged)');
-    ok(Game.npcIds().indexOf(X) >= 0, 'live: returned id is an npcIds candidate again');
+    eq(Game.isMember(X), false, 'live: refused id isMember still false (dead-flagged)');
+    ok(Game.npcIds().indexOf(X) < 0, 'live: refused id is NOT an npcIds candidate (never rejoined)');
   } finally {
     Game.say = origSay;
   }
@@ -119,9 +125,9 @@ function driverPart() {
     'driver 97338: death chain reproduces bearerorder (incl. d115/d117 muster events)');
   // Code properties (read, not inferred): genApplicant used-set, npcIds, arrival trust guard.
   const membSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'membership.js'), 'utf8');
-  const genFn = membSrc.slice(membSrc.indexOf('genApplicant()'), membSrc.indexOf('genApplicant()') + 2000);
-  ok(genFn.indexOf('fallen') < 0 && genFn.indexOf('.dead') < 0,
-    'code: genApplicant used-set excludes nothing dead/fallen (roster + applications only)');
+  const genFn = membSrc.slice(membSrc.indexOf('genApplicant() {'), membSrc.indexOf('genApplicant() {') + 2000);
+  ok(genFn.indexOf('deadMarked') >= 0,
+    'code: genApplicant excludes dead ids via deadMarked (sim-deadid-a flip; was: nothing dead/fallen excluded)');
   const bg = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'data', 'background_survivors.json'), 'utf8'));
   ok(bg.some(function (c) { return c.id === 'nora_wilson'; }),
     'code: nora_wilson is in the background_survivors applicant pool');
