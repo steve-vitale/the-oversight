@@ -1,0 +1,319 @@
+#!/usr/bin/env node
+// analyze-vetobudget-b.js — veto-budget pilot analyzer (sim-vetobudget-b).
+// Adapted from analyze-homewardstep-rpt-b.js (same haul valuation,
+// away/failed-trip/episode definitions). Reads driver .jsonl files
+// (baseline guard-only + budgeted guard+budget, one JSON object per
+// seed, stdout of vetobudget-b-driver.js) and judges the prereg bars
+// (evidence/2026-11-02/sim-vetobudget-b-prereg.md).
+//
+// Definitions (prereg, implemented exactly):
+// - away day-end: post-daily snapshot position != haven tile.
+// - failed-trip day: >= 1 forage attempt, 0 successes.
+// - meanDailyHaul: band mean of seed mean-daily forage kcal (same
+//   valuation as the roadguard analyzer: finished rows at kcalEach x
+//   units; lump components at plants.json calories, nuts x 0.75; a
+//   success whose components cannot all be valued falls back to
+//   hiddenKcal where present, else is flagged unvalued, never
+//   zero-filled).
+// - repetition seed (baseline): a seed where some step accumulates
+//   >= 6 total silent vetoes at baseline OR same-step silent vetoes
+//   on >= 4 distinct days.
+// - same-step silent vetoes per seed-day: from the per-day hop-log
+//   slices (vetoed && silent), grouped by from->to step key and
+//   loopDay. Budgeted-leg silent vetoes are guard vetoes only;
+//   suppressions are counted separately and are NEVER vetoes.
+// - pocket-entry stranding episode: a maximal run of consecutive away
+//   day-ends containing >= 1 day-end whose live dayEndReturnSim
+//   FAILS, AND (the run lasts >= 2 day-ends OR a strand-linked player
+//   death follows: a player starvation/dehydration death whose
+//   deaths[].day maps to an away day-end that day or the day before).
+//
+// Modes: --baseline <jsonl> --armed <jsonl> judges the pilot (exit 1
+// on any bar FAIL, 0 when all PASS). If no repetition seed exists at
+// baseline, the primary is unjudgeable: prints VERDICT: DIAG and
+// exits 2 (never a GO on an unjudgeable primary).
+'use strict';
+const fs = require('fs');
+const path = require('path');
+
+const arg = (name, fallback) => {
+  const i = process.argv.indexOf('--' + name);
+  return i < 0 ? fallback : process.argv[i + 1];
+};
+const baseFile = arg('baseline', null), armedFile = arg('armed', null);
+if (!baseFile || !armedFile) { console.error('usage: analyze-vetobudget-b.js --baseline <jsonl> --armed <jsonl>'); process.exit(2); }
+
+function readJsonl(file) {
+  return fs.readFileSync(file, 'utf8').split('\n').filter((l) => l.trim()).map((l) => JSON.parse(l));
+}
+
+let plants = null;
+function plantData(pid) {
+  try {
+    if (!plants) plants = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'plants.json'), 'utf8'));
+    if (Array.isArray(plants)) return plants.find((x) => x && x.id === pid) || null;
+  } catch (e) {}
+  return null;
+}
+function isNutPid(pid) {
+  if (!pid) return false;
+  if (pid === 'hickory_nut' || pid === 'acorn_white_oak') return true;
+  const p = plantData(pid);
+  return p ? /crack|shell|husk/i.test(p.preparation || '') : false;
+}
+function forageKcal(ev) {
+  let kcal = 0, valued = true;
+  for (const r of (ev.added || [])) {
+    if (r.foodState === 'unknown') continue;
+    if ((r.kcalEach || 0) > 0) kcal += r.kcalEach * (r.units || 0);
+  }
+  for (const c of (ev.addedLump || [])) {
+    const p = plantData(c.pid);
+    if (p && typeof p.caloriesPerUnit === 'number') {
+      kcal += c.units * (isNutPid(c.pid) ? Math.round(p.caloriesPerUnit * 0.75) : p.caloriesPerUnit);
+    } else valued = false;
+  }
+  return { kcal, valued };
+}
+function deathMode(d) {
+  const raw = (d && typeof d === 'object' && d.cause) ? String(d.cause) : (typeof d === 'string' ? d : JSON.stringify(d));
+  const s = raw.toLowerCase();
+  if (/starvat/.test(s)) return 'starvation';
+  if (/dehydrat/.test(s)) return 'dehydration';
+  if (/monster|beast|wild|combat|fight|kill/.test(s)) return 'wild/combat';
+  if (/disease|poison|sick/.test(s)) return 'disease/poison';
+  return 'other:' + raw.slice(0, 80);
+}
+
+function analyzeSeed(inst) {
+  const days = inst.days || [];
+  const haven = (days[0] && days[0].start && days[0].start.haven) || { x: 4, y: 4 };
+  const away = (snap) => !!snap && !!snap.pos && (snap.pos.x !== haven.x || snap.pos.y !== haven.y);
+  const awayByDay = {};
+  let awayDayEnds = 0, failedTripDays = 0, haulKcal = 0, successes = 0, valuedSuccesses = 0, attempts = 0;
+  for (const d of days) {
+    const isAway = away(d.end);
+    awayByDay[d.loopDay] = isAway;
+    if (isAway) awayDayEnds++;
+    const att = (d.forages || []).length;
+    const suc = (d.forages || []).filter((f) => f.ok).length;
+    attempts += att; successes += suc;
+    if (att > 0 && suc === 0) failedTripDays++;
+    for (const f of (d.forages || []).filter((x) => x.ok)) {
+      const v = forageKcal(f);
+      haulKcal += v.kcal;
+      if (v.valued) valuedSuccesses++;
+    }
+  }
+  const loopDays = days.length;
+  const deaths = (inst.deaths || []);
+  const playerDeaths = deaths.filter((x) => (typeof x === 'string' ? true : x.player !== false));
+  const playerDeathTexts = playerDeaths.map((x) => (typeof x === 'string' ? x : JSON.stringify(x)));
+  const strandDeathDays = [];
+  for (const d of playerDeaths) {
+    const cause = (typeof d === 'string' ? d : JSON.stringify(d));
+    if (!/starvat|dehydrat/i.test(cause)) continue;
+    const day = (d && typeof d === 'object' && d.day) || null;
+    if (day == null) continue;
+    if (awayByDay[day] || awayByDay[day - 1]) strandDeathDays.push(day);
+  }
+  const episodes = [];
+  let run = null;
+  const flushRun = () => {
+    if (!run) return;
+    const pocket = run.days.some((d) => d.dayEndReturnSim && d.dayEndReturnSim.ok === false);
+    const deathLinked = strandDeathDays.some((dd) => dd >= run.start && dd <= run.end + 1);
+    if (pocket && (run.days.length >= 2 || deathLinked)) {
+      episodes.push({ start: run.start, end: run.end, days: run.days.map((d) => d.loopDay),
+        positions: run.days.map((d) => (d.end.pos ? d.end.pos.x + ',' + d.end.pos.y : '?')),
+        simFailDays: run.days.filter((d) => d.dayEndReturnSim && d.dayEndReturnSim.ok === false).map((d) => d.loopDay),
+        deathLinked });
+    }
+    run = null;
+  };
+  for (const d of days) {
+    if (away(d.end)) {
+      if (!run) run = { start: d.loopDay, end: d.loopDay, days: [d] };
+      else { run.end = d.loopDay; run.days.push(d); }
+    } else flushRun();
+  }
+  flushRun();
+  const vetoes = days.reduce((t, d) => t + (d.vetoes || 0), 0);
+  const silentVetoes = days.reduce((t, d) => t + (d.silentVetoes || 0), 0);
+  const homewardVetoes = days.reduce((t, d) => t + (d.homewardVetoes || 0), 0);
+  const lateralPasses = days.reduce((t, d) => t + (d.lateralPasses || 0), 0);
+  const creditUses = days.reduce((t, d) => t + (d.creditUses || 0), 0);
+  const simChecks = days.reduce((t, d) => t + (d.simChecks || 0), 0);
+  const beyondUngenerated = days.reduce((t, d) => t + (d.beyondUngenerated || 0), 0)
+    + days.reduce((t, d) => t + (((d.dayEndReturnSim || {}).beyondUngenerated) || 0), 0);
+  const suppressions = days.reduce((t, d) => t + (d.suppressions || 0), 0);
+  const abandonments = days.reduce((t, d) => t + (d.abandonments || 0), 0);
+  const falseOpens = days.filter((d) => away(d.end) && (d.vetoes || 0) === 0 &&
+    d.dayEndReturnSim && d.dayEndReturnSim.ok === false).map((d) => d.loopDay);
+  // Per-step silent-veto stats from hop-log slices (vetoed && silent).
+  const stepStats = {};
+  for (const d of days) {
+    for (const h of (d.hops || [])) {
+      if (!h.vetoed || !h.silent) continue;
+      const k = h.from.x + ',' + h.from.y + '->' + h.to.x + ',' + h.to.y;
+      stepStats[k] = stepStats[k] || { total: 0, days: {}, maxPerDay: 0 };
+      stepStats[k].total++;
+      stepStats[k].days[d.loopDay] = (stepStats[k].days[d.loopDay] || 0) + 1;
+      if (stepStats[k].days[d.loopDay] > stepStats[k].maxPerDay) stepStats[k].maxPerDay = stepStats[k].days[d.loopDay];
+    }
+  }
+  for (const k of Object.keys(stepStats)) {
+    stepStats[k].dayCount = Object.keys(stepStats[k].days).length;
+    stepStats[k].dayList = Object.keys(stepStats[k].days).map(Number).sort((a, b) => a - b);
+  }
+  const maxStepTotal = Math.max(0, ...Object.values(stepStats).map((s) => s.total));
+  const maxStepDays = Math.max(0, ...Object.values(stepStats).map((s) => s.dayCount));
+  const maxStepPerDay = Math.max(0, ...Object.values(stepStats).map((s) => s.maxPerDay));
+  const isRepetitionSeed = Object.values(stepStats).some((s) => s.total >= 6 || s.dayCount >= 4);
+  // Abandoned steps (budgeted leg): from budgetLog abandonment entries.
+  const abandonedSteps = [];
+  for (const d of days) {
+    for (const b of (d.budgetLog || [])) {
+      if (b.abandoned) abandonedSteps.push({ loopDay: d.loopDay, step: b.from.x + ',' + b.from.y + '->' + b.to.x + ',' + b.to.y, count: b.count });
+    }
+  }
+  return { seed: inst.seed, policy: inst.policy, loopDays, daysAlive: inst.daysAlive,
+    endReason: inst.endReason, maxWaveUnlocked: inst.maxWaveUnlocked,
+    awayDayEnds, failedTripDays,
+    failedTripDayShare: loopDays ? +(failedTripDays / loopDays).toFixed(3) : null,
+    haulKcal: Math.round(haulKcal), meanDailyHaul: loopDays ? +(haulKcal / loopDays).toFixed(1) : null,
+    haulCoverage: successes ? valuedSuccesses / successes : null,
+    attempts, successes, vetoes, silentVetoes, lateralPasses, creditUses, simChecks, beyondUngenerated,
+    suppressions, abandonments, abandonedSteps,
+    deaths, deathModes: deaths.map(deathMode), playerDeathTexts, strandDeathDays, episodes, falseOpens,
+    homewardVetoes, stepStats, maxStepTotal, maxStepDays, maxStepPerDay, isRepetitionSeed,
+    strandLinked: strandDeathDays.length > 0 };
+}
+
+function analyzeBand(insts) {
+  const seeds = insts.map(analyzeSeed);
+  const totalDays = seeds.reduce((t, s) => t + s.loopDays, 0);
+  const failed = seeds.reduce((t, s) => t + s.failedTripDays, 0);
+  const away = seeds.reduce((t, s) => t + s.awayDayEnds, 0);
+  const meanHaul = seeds.length ? seeds.reduce((t, s) => t + (s.meanDailyHaul || 0), 0) / seeds.length : null;
+  const sorted = seeds.map((s) => s.daysAlive).sort((a, b) => a - b);
+  const median = sorted.length ? sorted[Math.floor(sorted.length / 2)] : null;
+  const starvDeaths = seeds.filter((s) => (s.playerDeathTexts || []).some((d) => /starvat/i.test(d))).length;
+  const episodes = seeds.reduce((t, s) => t + s.episodes.length, 0);
+  const vetoes = seeds.reduce((t, s) => t + s.vetoes, 0);
+  const silentVetoes = seeds.reduce((t, s) => t + s.silentVetoes, 0);
+  const suppressions = seeds.reduce((t, s) => t + s.suppressions, 0);
+  const abandonments = seeds.reduce((t, s) => t + s.abandonments, 0);
+  const forageTrips = seeds.reduce((t, s) => t + s.attempts, 0);
+  const deaths = seeds.reduce((t, s) => t + s.deaths.length, 0);
+  const deathModes = [...new Set(seeds.flatMap((s) => s.deathModes))];
+  const falseOpens = seeds.reduce((t, s) => t + s.falseOpens.length, 0);
+  return { seeds, totalDays, failedTripDays: failed,
+    failedTripDayShare: totalDays ? +(failed / totalDays).toFixed(3) : null,
+    awayDayEnds: away, meanDailyHaul: meanHaul == null ? null : +meanHaul.toFixed(1),
+    medianSurvival: median, starvationDeathSeeds: starvDeaths,
+    episodes, vetoes, silentVetoes, suppressions, abandonments, forageTrips, deaths, deathModes, falseOpens };
+}
+
+const baseline = analyzeBand(readJsonl(baseFile));
+const armed = analyzeBand(readJsonl(armedFile));
+
+// PRIMARY: repetition seeds are defined on the BASELINE leg.
+const repetitionSeeds = baseline.seeds.filter((s) => s.isRepetitionSeed).map((s) => s.seed);
+const p1 = { repetitionSeeds, perSeed: [], pass: true };
+for (const b of baseline.seeds.filter((s) => s.isRepetitionSeed)) {
+  const a = armed.seeds.find((s) => s.seed === b.seed) || {};
+  const v = (a.maxStepPerDay == null ? null : a.maxStepPerDay);
+  const pass = v != null && v <= 3;
+  if (!pass) p1.pass = false;
+  p1.perSeed.push({ seed: b.seed, baselineMaxPerDay: b.maxStepPerDay, armedMaxPerDay: v, pass });
+}
+const p2violations = [];
+for (const a of armed.seeds) {
+  for (const [k, s] of Object.entries(a.stepStats)) {
+    if (s.dayCount > 3) p2violations.push({ seed: a.seed, step: k, silentDays: s.dayCount, total: s.total });
+  }
+}
+const p2 = { violations: p2violations, pass: p2violations.length === 0 };
+const p3violations = [];
+for (const a of armed.seeds) {
+  for (const [k, s] of Object.entries(a.stepStats)) {
+    if (s.total > 3) p3violations.push({ seed: a.seed, step: k, total: s.total, silentDays: s.dayCount });
+  }
+}
+const p3 = { violations: p3violations, pass: p3violations.length === 0 };
+const primaryPass = repetitionSeeds.length > 0 && p1.pass && p2.pass && p3.pass;
+
+// NO-HARM BARS
+const bars = {};
+bars.B1Survival = { baselineMedian: baseline.medianSurvival, armedMedian: armed.medianSurvival,
+  pass: armed.medianSurvival >= baseline.medianSurvival };
+const newModes = armed.deathModes.filter((m) => !baseline.deathModes.includes(m));
+bars.B2Deaths = { baselineDeaths: baseline.deaths, armedDeaths: armed.deaths,
+  baselineModes: baseline.deathModes, armedModes: armed.deathModes, newModes,
+  pass: armed.deaths <= baseline.deaths && newModes.length === 0 };
+bars.B3FailedTripShare = { baseline: baseline.failedTripDayShare, armed: armed.failedTripDayShare,
+  threshold: 'armed <= baseline + 0.05 (this arm\'s own tolerance)',
+  pass: armed.failedTripDayShare <= baseline.failedTripDayShare + 0.05 };
+bars.B4MeanDailyHaul = { baseline: baseline.meanDailyHaul, armed: armed.meanDailyHaul,
+  threshold: '>= 0.95 x baseline', pass: armed.meanDailyHaul >= 0.95 * baseline.meanDailyHaul };
+const perSeedHaul = baseline.seeds.map((b) => {
+  const a = armed.seeds.find((x) => x.seed === b.seed) || {};
+  const ratio = (b.meanDailyHaul || 0) > 0 ? (a.meanDailyHaul || 0) / b.meanDailyHaul : null;
+  return { seed: b.seed, baseline: b.meanDailyHaul, armed: a.meanDailyHaul ?? null,
+    ratio: ratio == null ? null : +ratio.toFixed(3), pass: ratio == null ? true : ratio >= 0.50 };
+});
+bars.B4perSeed = { perSeedHaul, threshold: 'every seed >= 0.50x its own baseline',
+  pass: perSeedHaul.every((r) => r.pass) };
+bars.B5Away = { baseline: baseline.awayDayEnds, armed: armed.awayDayEnds,
+  threshold: 'armed <= baseline + 2', pass: armed.awayDayEnds <= baseline.awayDayEnds + 2 };
+bars.B6Idling = { baselineForageTrips: baseline.forageTrips, armedForageTrips: armed.forageTrips,
+  threshold: 'armed >= 0.90 x baseline', pass: armed.forageTrips >= 0.90 * baseline.forageTrips };
+const b7missing = [];
+for (const b of baseline.seeds.filter((s) => s.isRepetitionSeed)) {
+  const a = armed.seeds.find((s) => s.seed === b.seed) || {};
+  if (!((a.suppressions || 0) > 0)) b7missing.push(b.seed);
+}
+bars.B7Engagement = { repetitionSeeds, suppressionsBySeed: armed.seeds.map((s) => ({ seed: s.seed, suppressions: s.suppressions, abandonments: s.abandonments })),
+  missing: b7missing, pass: b7missing.length === 0 };
+const vetoCreated = [];
+for (const a of armed.seeds) {
+  const b = baseline.seeds.find((s) => s.seed === a.seed);
+  if (!b) continue;
+  if (a.episodes.length > 0 && b.episodes.length === 0) vetoCreated.push({ seed: a.seed, armedEpisodes: a.episodes });
+}
+bars.B8VetoCreatedPockets = { vetoCreated, pass: vetoCreated.length === 0 };
+const allBarsPass = Object.values(bars).every((b) => b.pass);
+
+console.log('PER-SEED TABLE');
+console.log('seed | base away/ep | armed away/ep | base failedShare | armed failedShare | base haul | armed haul | haulRatio | vetoes(silent) base->armed | suppressions | abandonments | maxStep silent total/days/perDay base->armed | wave | endReason');
+for (const b of baseline.seeds) {
+  const a = armed.seeds.find((s) => s.seed === b.seed) || {};
+  const bs = Object.entries(b.stepStats).map(([k, s]) => k + '=' + s.total + '/' + s.dayCount + '/' + s.maxPerDay).join(';');
+  const as = Object.entries(a.stepStats || {}).map(([k, s]) => k + '=' + s.total + '/' + s.dayCount + '/' + s.maxPerDay).join(';');
+  console.log(b.seed + (b.isRepetitionSeed ? ' [REP]' : '') + ' | ' + b.awayDayEnds + '/' + b.episodes.length + ' | ' + (a.awayDayEnds ?? '?') + '/' + ((a.episodes || []).length) +
+    ' | ' + b.failedTripDayShare + ' | ' + (a.failedTripDayShare ?? '?') +
+    ' | ' + b.meanDailyHaul + ' | ' + (a.meanDailyHaul ?? '?') +
+    ' | ' + ((b.meanDailyHaul || 0) > 0 && a.meanDailyHaul != null ? +((a.meanDailyHaul / b.meanDailyHaul).toFixed(3)) : '?') +
+    ' | ' + b.vetoes + '(' + b.silentVetoes + ')->' + (a.vetoes ?? 0) + '(' + (a.silentVetoes ?? 0) + ')' +
+    ' | ' + (a.suppressions ?? 0) + ' | ' + (a.abandonments ?? 0) +
+    ' | ' + bs + ' -> ' + as +
+    ' | ' + (a.maxWaveUnlocked ?? '?') + ' | ' + (a.endReason ?? '?'));
+}
+console.log('BAND: baseline away=' + baseline.awayDayEnds + ' armed away=' + armed.awayDayEnds +
+  ' baseline episodes=' + baseline.episodes + ' armed episodes=' + armed.episodes +
+  ' baseline vetoes=' + baseline.vetoes + '(' + baseline.silentVetoes + ' silent)' +
+  ' armed vetoes=' + armed.vetoes + '(' + armed.silentVetoes + ' silent)' +
+  ' armed suppressions=' + armed.suppressions + ' armed abandonments=' + armed.abandonments +
+  ' baseline median=' + baseline.medianSurvival + ' armed median=' + armed.medianSurvival +
+  ' baseline deaths=' + baseline.deaths + ' armed deaths=' + armed.deaths +
+  ' baseline starvSeeds=' + baseline.starvationDeathSeeds + ' armed starvSeeds=' + armed.starvationDeathSeeds +
+  ' armed falseOpens=' + armed.falseOpens);
+console.log('PRIMARY: ' + JSON.stringify({ P1: p1, P2: p2, P3: p3, primaryPass }, null, 2));
+console.log('BARS: ' + JSON.stringify(bars, null, 2));
+if (repetitionSeeds.length === 0) {
+  console.log('VERDICT: DIAG (no repetition seed at baseline — primary unjudgeable)');
+  process.exit(2);
+}
+console.log('VERDICT: ' + (primaryPass && allBarsPass ? 'GO' : 'NO-GO'));
+process.exit(primaryPass && allBarsPass ? 0 : 1);
