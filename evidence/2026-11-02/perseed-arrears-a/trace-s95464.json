@@ -1,0 +1,1429 @@
+{
+ "seed": 95464,
+ "anchorCommit": "bcb537990c3d",
+ "days": 180,
+ "firstFailure": {
+  "day": 128,
+  "callYield": 6,
+  "omenStage": 2,
+  "links": [
+   {
+    "villageId": "village_0",
+    "name": "Emberhold",
+    "trust": 69,
+    "opinion": 6,
+    "arrears": 3000,
+    "quota": 2,
+    "facesFree": 0,
+    "wouldYield": 0,
+    "wouldRefuse": true
+   },
+   {
+    "villageId": "village_1",
+    "name": "Stonebridge",
+    "trust": 71,
+    "opinion": 38,
+    "arrears": 0,
+    "quota": 6,
+    "facesFree": 7,
+    "wouldYield": 6,
+    "wouldRefuse": false
+   },
+   {
+    "villageId": "village_2",
+    "name": "Thornfield",
+    "trust": 61,
+    "opinion": 15,
+    "arrears": 0,
+    "quota": 2,
+    "facesFree": 0,
+    "wouldYield": 0,
+    "wouldRefuse": false
+   }
+  ]
+ },
+ "firstFailureSource": "muster-diag-snapshot",
+ "firstFailureLinks": [
+  {
+   "linkId": "link_mgpspi1l840",
+   "pair": "haven>village_0",
+   "villageId": "village_0",
+   "name": "Emberhold",
+   "direction": "Haven-primary",
+   "kind": "tribute",
+   "trust": 69,
+   "opinion": 6,
+   "arrears": 3000,
+   "tributeKcalPerWeek": 2250,
+   "subordinatePantryKcal": 0,
+   "subordinateId": "village_0",
+   "linkDay": 41,
+   "linkAgeDays": 87,
+   "status": "active",
+   "wouldRefuse": true,
+   "refusalReasons": [
+    "arrears>0"
+   ]
+  },
+  {
+   "linkId": "link_mgpspi2l560",
+   "pair": "haven>village_1",
+   "villageId": "village_1",
+   "name": "Stonebridge",
+   "direction": "Haven-primary",
+   "kind": "tribute",
+   "trust": 71,
+   "opinion": 38,
+   "arrears": 0,
+   "tributeKcalPerWeek": 2250,
+   "subordinatePantryKcal": 57640,
+   "subordinateId": "village_1",
+   "linkDay": 45,
+   "linkAgeDays": 83,
+   "status": "active",
+   "wouldRefuse": false,
+   "refusalReasons": []
+  },
+  {
+   "linkId": "link_mgpspi33306",
+   "pair": "haven>village_2",
+   "villageId": "village_2",
+   "name": "Thornfield",
+   "direction": "Haven-primary",
+   "kind": "tribute",
+   "trust": 61,
+   "opinion": 15,
+   "arrears": 0,
+   "tributeKcalPerWeek": 2250,
+   "subordinatePantryKcal": 17676,
+   "subordinateId": "village_2",
+   "linkDay": 46,
+   "linkAgeDays": 82,
+   "status": "active",
+   "wouldRefuse": false,
+   "refusalReasons": []
+  }
+ ],
+ "traces": {
+  "village_0:Emberhold": {
+   "firstFailure": {
+    "day": 128,
+    "arrears": 3000,
+    "trust": 69,
+    "opinion": 6,
+    "direction": "Haven-primary",
+    "tributeKcalPerWeek": 2250,
+    "subordinatePantryKcal": 0,
+    "linkAgeDays": 87
+   },
+   "series": [
+    {
+     "day": 128,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 6,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 87,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 129,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 6,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 88,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 130,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 89,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 131,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 90,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 132,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 91,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 133,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 92,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 134,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 93,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 135,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 69,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 2250,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 94,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 136,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 56,
+     "opinion": 8,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 1688,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 95,
+     "direction": "Haven-primary"
+    },
+    {
+     "day": 137,
+     "linkId": "link_mgpspi1l840",
+     "status": "active",
+     "trust": 56,
+     "opinion": 4,
+     "arrears": 3000,
+     "tributeKcalPerWeek": 1688,
+     "subordinatePantryKcal": 0,
+     "linkAgeDays": 96,
+     "direction": "Haven-primary"
+    }
+   ],
+   "changes": [],
+   "statusChanges": [],
+   "endState": {
+    "day": 137,
+    "linkId": "link_mgpspi1l840",
+    "status": "active",
+    "trust": 56,
+    "opinion": 4,
+    "arrears": 3000,
+    "tributeKcalPerWeek": 1688,
+    "subordinatePantryKcal": 0,
+    "linkAgeDays": 96,
+    "direction": "Haven-primary"
+   },
+   "clearedDay": null
+  }
+ },
+ "traceSay": {
+  "village_0": [
+   {
+    "day": 129,
+    "line": "🏃 Ellis of Stonebridge walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Stonebridge has grain to spare — 1,783 kcal, no tribute, no ceremony. Say the word.\""
+   },
+   {
+    "day": 133,
+    "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+   },
+   {
+    "day": 133,
+    "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+   },
+   {
+    "day": 133,
+    "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+   },
+   {
+    "day": 136,
+    "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+   },
+   {
+    "day": 136,
+    "line": "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+   },
+   {
+    "day": 136,
+    "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+   },
+   {
+    "day": 136,
+    "line": "Took Tribute grain from Thornfield."
+   },
+   {
+    "day": 136,
+    "line": "You eat Tribute grain from Thornfield (500 kcal)."
+   }
+  ]
+ },
+ "refusalSnapshots": [
+  {
+   "day": 128,
+   "callYield": 6,
+   "omenStage": 2,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 69,
+     "opinion": 6,
+     "arrears": 3000,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": true
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 71,
+     "opinion": 38,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 7,
+     "wouldYield": 6,
+     "wouldRefuse": false
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 61,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": false
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "callYield": 6,
+   "omenStage": 2,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 69,
+     "opinion": 6,
+     "arrears": 3000,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": true
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 71,
+     "opinion": 38,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 7,
+     "wouldYield": 6,
+     "wouldRefuse": false
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 61,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": false
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "callYield": 6,
+   "omenStage": 2,
+   "links": [
+    {
+     "villageId": "village_0",
+     "name": "Emberhold",
+     "trust": 69,
+     "opinion": 6,
+     "arrears": 3000,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": true
+    },
+    {
+     "villageId": "village_1",
+     "name": "Stonebridge",
+     "trust": 71,
+     "opinion": 38,
+     "arrears": 0,
+     "quota": 6,
+     "facesFree": 7,
+     "wouldYield": 6,
+     "wouldRefuse": false
+    },
+    {
+     "villageId": "village_2",
+     "name": "Thornfield",
+     "trust": 61,
+     "opinion": 15,
+     "arrears": 0,
+     "quota": 2,
+     "facesFree": 0,
+     "wouldYield": 0,
+     "wouldRefuse": false
+    }
+   ]
+  }
+ ],
+ "refusalSnapshotCount": 3,
+ "sayLines": [
+  {
+   "day": 41,
+   "line": "⛓️ Ella brings it home: Emberhold bows to Haven — one organization, us primary. Tribute: 4,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 42,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 45,
+   "line": "⛓️ Ella brings it home: Stonebridge bows to Haven — one organization, us primary. Tribute: 4,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 46,
+   "line": "⛓️ Ella brings it home: Thornfield bows to Haven — one organization, us primary. Tribute: 4,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 48,
+   "line": "🏃 Ellis of Stonebridge walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Stonebridge has grain to spare — 2,160 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 49,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 49,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 49,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 56,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 56,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 56,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 62,
+   "line": "◈ SYSTEM: \"One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast.\""
+  },
+  {
+   "day": 63,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 63,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 63,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 70,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 70,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 70,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 77,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 77,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 77,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 84,
+   "line": "🌾 Haven sends 1,636 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 84,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 84,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 84,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 88,
+   "line": "🌾 Haven sends 1,578 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 91,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 91,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 91,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 92,
+   "line": "◈ SYSTEM: \"Four fires. One head. GOVERNANCE LAYER: online — polity tribute routing, the court calendar, famine reserves. You built a realm. Try not to lose it the way you found it.\""
+  },
+  {
+   "day": 95,
+   "line": "🏃 Ellis of Stonebridge walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Stonebridge has grain to spare — 1,986 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 98,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 98,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 98,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 104,
+   "line": "🌾 Haven sends 1,565 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 104,
+   "line": "🌾 Haven sends 1,524 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 104,
+   "line": "🌾 Haven sends 1,634 kcal of grain to Thornfield's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 105,
+   "line": "🌾 Haven sends 1,740 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 105,
+   "line": "🌾 Haven sends 1,789 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 105,
+   "line": "🌾 Haven sends 1,598 kcal of grain to Thornfield's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)"
+  },
+  {
+   "day": 105,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 105,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 105,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 112,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 112,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 112,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 117,
+   "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 117,
+   "line": "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 117,
+   "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 118,
+   "line": "🏃 Ellis of Stonebridge walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Stonebridge has grain to spare — 2,764 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 119,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 119,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 119,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 126,
+   "line": "🌾 Nothing comes from Emberhold this week — their fields are as empty as the wagons look. Hunger isn't defiance, but the ledger doesn't know the difference. (Arrears +3,000 kcal, trust -2.)"
+  },
+  {
+   "day": 126,
+   "line": "🌾 Tribute from Stonebridge arrives — 3,750 kcal of grain into the pantry. Their fields, our fire."
+  },
+  {
+   "day": 127,
+   "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 127,
+   "line": "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 127,
+   "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 127,
+   "line": "Took Tribute grain from Stonebridge."
+  },
+  {
+   "day": 127,
+   "line": "You eat Tribute grain from Stonebridge (500 kcal)."
+  },
+  {
+   "day": 127,
+   "line": "Took Tribute grain from Stonebridge."
+  },
+  {
+   "day": 127,
+   "line": "You eat Tribute grain from Stonebridge (500 kcal)."
+  },
+  {
+   "day": 127,
+   "line": "Took Tribute grain from Stonebridge."
+  },
+  {
+   "day": 127,
+   "line": "You eat Tribute grain from Stonebridge (500 kcal)."
+  },
+  {
+   "day": 127,
+   "line": "Took Tribute grain from Stonebridge."
+  },
+  {
+   "day": 127,
+   "line": "You eat Tribute grain from Stonebridge (500 kcal)."
+  },
+  {
+   "day": 129,
+   "line": "🏃 Ellis of Stonebridge walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Stonebridge has grain to spare — 1,783 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 133,
+   "line": "🌾 Tribute wagons from Emberhold turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 133,
+   "line": "🌾 Tribute wagons from Stonebridge turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 133,
+   "line": "🌾 Tribute wagons from Thornfield turn at the gate — our shelves are full past tomorrow. \"Eat well,\" we send back. \"That IS your tribute this week.\" (Trust +1.)"
+  },
+  {
+   "day": 136,
+   "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 136,
+   "line": "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 136,
+   "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+  },
+  {
+   "day": 136,
+   "line": "Took Tribute grain from Thornfield."
+  },
+  {
+   "day": 136,
+   "line": "You eat Tribute grain from Thornfield (500 kcal)."
+  }
+ ],
+ "finalLinks": [
+  {
+   "linkId": "link_mgpspi1l840",
+   "pair": "haven>village_0",
+   "status": "active",
+   "trust": 56,
+   "arrears": 3000,
+   "history": [
+    {
+     "day": 41,
+     "kind": "formed",
+     "note": "Emberhold joined Haven as subordinate."
+    },
+    {
+     "day": 42,
+     "kind": "accord",
+     "note": "First gesture: gift of 2,000 kcal."
+    },
+    {
+     "day": 42,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 44,
+     "kind": "aid",
+     "note": "Gave Emberhold 1,970 kcal aid. Credit stands."
+    },
+    {
+     "day": 49,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 56,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 58,
+     "kind": "aid",
+     "note": "Gave Emberhold 2,100 kcal aid. Credit stands."
+    },
+    {
+     "day": 63,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 70,
+     "kind": "aid",
+     "note": "Gave Emberhold 1,827 kcal aid. Credit stands."
+    },
+    {
+     "day": 70,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 77,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 84,
+     "kind": "tended",
+     "note": "Haven sent grain (1,636 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 84,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 91,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 93,
+     "kind": "court",
+     "note": "First court: shared granary feast (5,280 kcal)."
+    },
+    {
+     "day": 98,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 104,
+     "kind": "tended",
+     "note": "Haven sent grain (1,565 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 105,
+     "kind": "tended",
+     "note": "Haven sent grain (1,740 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 105,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 112,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 117,
+     "kind": "succession",
+     "note": "Emberhold pressed tribute down in Haven's chaos."
+    },
+    {
+     "day": 117,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 119,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 126,
+     "kind": "tribute",
+     "note": "Emberhold paid nothing — empty fields. Arrears +3,000."
+    },
+    {
+     "day": 127,
+     "kind": "succession",
+     "note": "Emberhold pressed tribute down in Haven's chaos."
+    },
+    {
+     "day": 127,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 133,
+     "kind": "tribute",
+     "note": "Emberhold rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 136,
+     "kind": "succession",
+     "note": "Emberhold pressed tribute down in Haven's chaos."
+    }
+   ]
+  },
+  {
+   "linkId": "link_mgpspi2l560",
+   "pair": "haven>village_1",
+   "status": "active",
+   "trust": 62,
+   "arrears": 0,
+   "history": [
+    {
+     "day": 45,
+     "kind": "formed",
+     "note": "Stonebridge joined Haven as subordinate."
+    },
+    {
+     "day": 46,
+     "kind": "accord",
+     "note": "First gesture: gift of 2,114 kcal."
+    },
+    {
+     "day": 49,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 56,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 63,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 70,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 77,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 84,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 88,
+     "kind": "tended",
+     "note": "Haven sent grain (1,578 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 91,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 93,
+     "kind": "court",
+     "note": "First court: shared granary feast (5,280 kcal)."
+    },
+    {
+     "day": 98,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 104,
+     "kind": "tended",
+     "note": "Haven sent grain (1,524 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 105,
+     "kind": "tended",
+     "note": "Haven sent grain (1,789 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 105,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 112,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 117,
+     "kind": "succession",
+     "note": "Stonebridge pressed tribute down in Haven's chaos."
+    },
+    {
+     "day": 117,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 119,
+     "kind": "titan",
+     "note": "THE HERALD struck Stonebridge in the night — trust −5; they notice who wasn't there."
+    },
+    {
+     "day": 119,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 124,
+     "kind": "titan",
+     "note": "THE HERALD struck Stonebridge in the night — trust −5; they notice who wasn't there."
+    },
+    {
+     "day": 126,
+     "kind": "tribute",
+     "note": "Stonebridge paid. The pantry grows."
+    },
+    {
+     "day": 127,
+     "kind": "succession",
+     "note": "Stonebridge pressed tribute down in Haven's chaos."
+    },
+    {
+     "day": 127,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 133,
+     "kind": "tribute",
+     "note": "Stonebridge rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 134,
+     "kind": "titan",
+     "note": "THE HERALD struck Stonebridge in the night — trust −5; they notice who wasn't there."
+    },
+    {
+     "day": 136,
+     "kind": "succession",
+     "note": "Stonebridge pressed tribute down in Haven's chaos."
+    }
+   ]
+  },
+  {
+   "linkId": "link_mgpspi33306",
+   "pair": "haven>village_2",
+   "status": "active",
+   "trust": 53,
+   "arrears": 0,
+   "history": [
+    {
+     "day": 46,
+     "kind": "formed",
+     "note": "Thornfield joined Haven as subordinate."
+    },
+    {
+     "day": 47,
+     "kind": "accord",
+     "note": "First gesture: gift of 2,320 kcal."
+    },
+    {
+     "day": 49,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 56,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 63,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 70,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 77,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 84,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 91,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 93,
+     "kind": "court",
+     "note": "First court: shared granary feast (5,280 kcal)."
+    },
+    {
+     "day": 98,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 104,
+     "kind": "tended",
+     "note": "Haven sent grain (1,634 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 105,
+     "kind": "tended",
+     "note": "Haven sent grain (1,598 kcal, trust +8); the bond is fed."
+    },
+    {
+     "day": 105,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 112,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 117,
+     "kind": "succession",
+     "note": "Thornfield pressed tribute down in Haven's chaos."
+    },
+    {
+     "day": 117,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 119,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 126,
+     "kind": "tribute",
+     "note": "Thornfield paid. The pantry grows."
+    },
+    {
+     "day": 127,
+     "kind": "succession",
+     "note": "Thornfield pressed tribute down in Haven's chaos."
+    },
+    {
+     "day": 127,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 133,
+     "kind": "tribute",
+     "note": "Thornfield rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)"
+    },
+    {
+     "day": 136,
+     "kind": "succession",
+     "note": "Thornfield pressed tribute down in Haven's chaos."
+    }
+   ]
+  }
+ ],
+ "censusDays": 135,
+ "soundTotals": {
+  "soundTitanCall": 0,
+  "titanCommitOwn": 0,
+  "titanSelfDo": 0,
+  "titanWarCouncil": 0
+ },
+ "musterExistsAtEnd": false,
+ "heraldAttempts": [
+  {
+   "day": 128,
+   "cls": "REFUSED"
+  },
+  {
+   "day": 128,
+   "cls": "REFUSED"
+  },
+  {
+   "day": 128,
+   "cls": "REFUSED"
+  }
+ ],
+ "instrumentErrors": 0,
+ "musterErrs": 0,
+ "wall": {
+  "national": 1,
+  "table": 1,
+  "won": 1,
+  "maxWave": 4,
+  "gameDays": 137,
+  "endScaleRank": "national",
+  "endReason": "over-other"
+ },
+ "deaths": [
+  {
+   "day": 8,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 16,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 16,
+   "kind": "villager",
+   "who": "gen_y14zkav",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 20,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 24,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 28,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "person",
+   "who": "aria_thompson",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 31,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 54,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 70,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 80,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 86,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 87,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 89,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 91,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 91,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 91,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 93,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 94,
+   "kind": "monster",
+   "who": "sweeps_week",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 95,
+   "kind": "monster",
+   "who": "moderator",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 96,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 98,
+   "kind": "monster",
+   "who": "callback",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 110,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 111,
+   "kind": "monster",
+   "who": "landlord",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 112,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 115,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 115,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 116,
+   "kind": "monster",
+   "who": "landlord",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 117,
+   "kind": "villager",
+   "who": "gen_elq0s5w",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 117,
+   "kind": "villager",
+   "who": "gen_3rwne5u",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 127,
+   "kind": "villager",
+   "who": "gen_508g1ry",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 127,
+   "kind": "villager",
+   "who": "grace_obi",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 136,
+   "kind": "villager",
+   "who": "emma_larsen",
+   "cause": "the wild",
+   "player": true
+  }
+ ]
+}
