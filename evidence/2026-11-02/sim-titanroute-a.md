@@ -374,8 +374,8 @@ that is tooling work for a separate arm, noted here.
   before any arm run).
 - eb59d271b — HP-field fix (health, not hp) + stub-shape regression
   pin. (Unit proof re-green after fix.)
-- Evidence + per-seed JSON + probe script: committed with this
-  report (see coordinator merge step — hashes below at commit time).
+- f8324ea14 — pilot evidence, per-seed records (including the VOID
+  batch), and the 97307 creek probe (this file).
 
 Report: ready to merge locally, pending ship. Do NOT push, do NOT
 bump versions, do NOT verify live (ship loop owns deploys).
