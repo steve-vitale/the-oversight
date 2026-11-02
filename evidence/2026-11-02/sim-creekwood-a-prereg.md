@@ -67,7 +67,20 @@ rule — quoted in the final evidence, not invented.
   replaced by scripts/policies/creekwood.js — same lair hearing
   (scouts' say line only), same fed/watered/healthy guardrails,
   same sound-the-call-once on arrival, but the march is:
-  1. Wood leg (above) before the march, every march day wood < 8.
+  1. Wood leg (above) at each bridge point, not on every march
+     day: when the march finds no walkable path AND stands
+     adjacent to an unbridged needsBridge creek AND wood < 4,
+     it tops up to 4 via takeWood (until no gain) before
+     bridging. AMENDMENT (pre-sim, before any judged run — the
+     as-committed prereg said "before the march, every march
+     day wood < 8"): firing takeWood on pure-detour march days
+     would drain the village pile on seeds that need no bridge
+     at all, muddying bridge-leg attribution on 7/8 pilot
+     seeds. The amended trigger keeps the task's condition
+     (wood < 4 when a bridge is actually needed, first such
+     day = first march day on 97396) while leaving detour
+     seeds untouched. The driver still instruments wood at
+     first march day in both arms regardless of trigger.
   2. Walk-toward-then-bridge march (above) instead of
      creekdetour's single-bridge march. Detour BFS, refusal
      memory, and swimmer lane are otherwise identical to
