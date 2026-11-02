@@ -822,6 +822,27 @@
         return;
       }
       const trust = (v.trust || {});
+      // DEAD NEVER SPEAK, CLOSED (sim-npcdeadfilter-confirm, 2026-11-02):
+      // closeId and the grave vouchers below read trust keys ∩ roster
+      // membership, NOT npcIds() — so the npcIds dead filter does not
+      // cover them. A dead id on the roster (any non-entry path) would
+      // otherwise deliver the "you're not her" line, vouch at the grave,
+      // and inflate the successor's inherited trust (+4 per voucher).
+      // Membership alone is not liveness: consult deadMarked (triple
+      // source, same as npcIds) with the inline triple check as fallback.
+      const selfPD = this;
+      const isDeadHere = function (id) {
+        try { if (typeof selfPD.deadMarked === 'function') return !!selfPD.deadMarked(id); } catch (e) {}
+        try {
+          const vrec = (selfPD.data.villagers || []).find(function (r) { return r.id === id; });
+          if (vrec && vrec.dead) return true;
+          const brec = (selfPD.data.background_survivors || []).find(function (r) { return r.id === id; });
+          if (brec && brec.dead) return true;
+          const vp = selfPD.vpOf ? selfPD.vpOf(id) : null;
+          if (vp && vp.dead) return true;
+        } catch (e) {}
+        return false;
+      };
       candidates.sort((a, b) => (trust[b] || 0) - (trust[a] || 0));
       const newId = candidates[0];
       const newChar = (this.data.villagers || []).find(x => x.id === newId) || {};
@@ -832,7 +853,7 @@
       // unpruned trust map, so a corpse could deliver the "you're not her"
       // line. Only the living roster can look at you.
       const liveRoster = new Set(v.roster || []);
-      const closeId = Object.keys(trust).filter(id => id !== newId && liveRoster.has(id) && (trust[id] || 0) > 55)
+      const closeId = Object.keys(trust).filter(id => id !== newId && liveRoster.has(id) && !isDeadHere(id) && (trust[id] || 0) > 55)
         .sort((a, b) => (trust[b] || 0) - (trust[a] || 0))[0];
       if (closeId) {
         const cn = ((this.data.villagers || []).find(x => x.id === closeId) || {}).name || 'Someone';
@@ -1112,7 +1133,7 @@
         v.trust = v.trust || {};
         const office = (trust[oldId] == null ? 20 : trust[oldId]);
         const own = (trust[newId] == null ? 0 : trust[newId]);
-        const vouchers = (v.roster || []).filter(id => id !== newId && liveRoster.has(id) && (trust[id] || 0) >= 60);
+        const vouchers = (v.roster || []).filter(id => id !== newId && liveRoster.has(id) && !isDeadHere(id) && (trust[id] || 0) >= 60);
         const vouchBonus = Math.min(16, vouchers.length * 4);
         const inherit = Math.max(10, Math.min(100, Math.round(office * 0.4 + own * 0.4 + vouchBonus)));
         v.trust[newId] = inherit;
