@@ -1,0 +1,112 @@
+{
+ "seed": 39997,
+ "phaseUnlock": {
+  "unlocked": true,
+  "day": 11,
+  "scholarDay": 11
+ },
+ "invites": [
+  {
+   "villager": "Jacob",
+   "trust": 63,
+   "picked": true,
+   "refused": false,
+   "turns": 2,
+   "inParty": false
+  },
+  {
+   "villager": "Nora",
+   "trust": 40,
+   "picked": false,
+   "refused": false,
+   "turns": 6,
+   "inParty": false
+  },
+  {
+   "villager": "Wanjiru",
+   "trust": 38,
+   "picked": true,
+   "refused": false,
+   "turns": 2,
+   "inParty": false
+  },
+  {
+   "villager": "Boris",
+   "trust": 40,
+   "picked": false,
+   "refused": false,
+   "turns": 6,
+   "inParty": false
+  },
+  {
+   "villager": "Lena",
+   "trust": 32,
+   "picked": true,
+   "refused": false,
+   "turns": 2,
+   "inParty": true
+  },
+  {
+   "villager": "Victor",
+   "trust": 30,
+   "picked": true,
+   "refused": false,
+   "turns": 1,
+   "inParty": true
+  }
+ ],
+ "naming": {
+  "stepsPicked": [
+   "party_name",
+   "party_namepick:0"
+  ],
+  "pickedAll": true,
+  "turns": 3,
+  "named": true,
+  "partyName": "APEX SNACKS"
+ },
+ "roleA": {
+  "stepsPicked": [
+   "party_role",
+   "party_rolepick:scout"
+  ],
+  "pickedAll": true,
+  "turns": 3,
+  "roleOfA": "scout"
+ },
+ "roleB": {
+  "stepsPicked": [
+   "party_role",
+   "party_rolepick:scout"
+  ],
+  "pickedAll": true,
+  "turns": 4,
+  "roleOfB": "scout",
+  "roleOfAAfter": null,
+  "sayDuringPick": [
+   "Lena nods, stepping back. \"Scout is yours now.\" (Roles are promises. There's only one of each.)",
+   "🤝 Victor is 👁️ Scout now. Sees trouble first. Warns the party on the road."
+  ],
+  "handoverInSay": [
+   "Lena nods, stepping back. \"Scout is yours now.\" (Roles are promises. There's only one of each.)"
+  ],
+  "assignInSay": [
+   "🤝 Victor is 👁️ Scout now. Sees trouble first. Warns the party on the road."
+  ],
+  "transcriptAfter": [
+   "NPC: \"The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground.\"",
+   "YOU: \"Tell me why you need this.\"",
+   "NPC: \"Another day like today and we're choosing who eats. I know the water chestnut patch past the treeline — come with me and we'll fill packs before dark.\"",
+   "YOU: \"I’ll come back to help.\"",
+   "NPC: \"Done. The water chestnut patch past the treeline, at sunup. Pack and knife. We travel light.\"",
+   "YOU: \"Let's talk roles.\"",
+   "NPC: \"Roles. Not ranks — promises.\"\n🗡️ point — First in. Hits harder (+3 strike), draws the eye.\n🩹 healer — Carries the wounded, patches them up (+6 heal).\n🎒 carrier — Hauls. Carry order reaches further, steadier hands.\n🗣️ talker — The face. People join easier, leaving hurts less.\n👁️ scout (hel",
+   "YOU: 👁️ Scout",
+   "NPC: \"Sure. I'll be around.\"",
+   "NPC: \"First light. The pantry's counting on us.\""
+  ],
+  "handoverInTx": []
+ },
+ "verdict": "CLOSED-as-channel",
+ "reason": "handover line fires into the sayLog (narration) but not convo.transcript — the r108 transcript gap is a capture-channel limit, not a silent transfer"
+}
