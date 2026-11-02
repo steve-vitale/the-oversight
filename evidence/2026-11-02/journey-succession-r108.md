@@ -400,9 +400,50 @@ not the killed attempt.
 
 ## Closeout
 
-[PENDING — fill after commit + merge: commit hash, index
-clobber check, merge hash, release, rotation-b verified at 4,
-lock deleted if it still carries this run's run_id.]
+- Commit 1 (0a6cd78bc, rebased to 4d07ea867): 87 files — 1
+  game fix (src/js/conversation.js +25/-0) + 7 instrument
+  scripts (driver, main analyzer, naming analyzer, keepsake
+  proof, naming proof, recap probe, recap-label proof) + 79
+  evidence files (prereg, 4 panel stdout/stderr, 4 tele,
+  59 transcripts, analyzer + naming outputs, 2 proof logs,
+  recap-probe JSON, checkquick log, run note).
+  Post-commit index clobber (documented class, staged-
+  deletion variant): all 86 evidence/script files showed
+  staged-deleted AND untracked, plus conversation.js as MM
+  (index holding the pre-fix blob, worktree holding the
+  post-fix blob — hash-object proved worktree == HEAD).
+  Repaired with `git update-index --add --cacheinfo` per
+  file from HEAD blobs (mode from ls-tree); verified `git
+  status --short` empty + `git diff HEAD` empty. The commit
+  itself was always correct.
+- Rebase: main tree had moved twice during the run (Lane A
+  r85 95ca9266d, then flesh-out sim-creekwood-a ba0423e0e).
+  Rebase hit the documented stop-at-pick quirk (pick
+  0a6cd78bc in BOTH done and todo, tree clean, pick
+  unapplied) — recovered with `git rebase --continue` per
+  the AGENTS.md lesson, landing cleanly as 4d07ea867 with
+  each commit exactly once. Post-rebase proofs re-run:
+  recap-label ALL PASS, keepsake ALL GREEN.
+- Merge: `git merge --ff-only journey2-succession-r108` in
+  the main tree, HEAD verified 4d07ea867, main tree clean.
+  Commit 2 (this closeout section) merged the same way
+  immediately after; final HEAD below.
+- Release: worktree released + removed, branch deleted,
+  final reap run, main tree verified clean.
+- Rotation-b written 7->4, verified by re-read (endgame
+  next). Lock deleted only after verifying it still
+  carries this run's run_id (2026-11-02T11:55:00Z).
+- Heartbeat loop: the original loop died silently mid-run
+  (last registry beat 12:14:54Z, loop process gone by
+  12:47Z); a manual beat landed 12:49:02Z (verified by
+  registry read-back) and a fresh loop was started for
+  closeout, killed after release. Lesson carried: verify
+  loop liveness by process + registry, not just by log
+  lines — the log showed 3 beats while the loop was dead
+  (the 3rd beat was the stuck child landing late).
+- No push, no bump, no live check — merged locally, pending
+  ship (ship loop owns version bumps, pushes, live
+  verification).
 - One game change, flagged [needs-eyes]: src/js/conversation.js
   +25/-0 (recap-label asked-favor-first). Instrument +
   evidence otherwise: driver, main analyzer, naming analyzer,
