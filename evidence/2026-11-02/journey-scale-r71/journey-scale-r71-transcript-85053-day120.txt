@@ -1,0 +1,27 @@
+(pre-talk seed: curious planted d101; takenWantDay=0; convoCount=17)
+=== seed 85053 day 120 — conversation with Tanisha (gen_h3i9kj1) ===
+occupation=ER nurse temperament=anxious trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: subject-first gossip-first
+
+THEM: "About the food I needed — still on my mind. I keep coming back to it."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Did you hear? Ines won Gauntlet on the cameras. People are still talking about it."
+YOU: [dlg:more] "Tell me more."
+THEM: "You walked out of Gauntlet. Alive. That's the whole story and it's enough."
+YOU: [dlg:react] (listen)
+THEM: "Emma? A Veterinarian, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "You ever notice Ines? ...I don't know what to make of that. Nobody does."
+YOU: [dlg:react] (listen)
+THEM: "Ernesto? A Social worker, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "Ruth? A librarian, back before. Solid person."
+YOU: (leave)
+pre-close: want ask_favor stage 1 thread gossip
+closing line: "Steady as she goes. We'll talk again."
+(gossip picks this sitting: 1)

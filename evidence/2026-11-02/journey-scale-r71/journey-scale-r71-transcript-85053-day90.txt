@@ -1,0 +1,27 @@
+(pre-talk seed: ask_favor planted d62; takenWantDay=0; convoCount=14)
+=== seed 85053 day 90 — conversation with Tanisha (gen_h3i9kj1) ===
+occupation=ER nurse temperament=anxious trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: subject-first gossip-first
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Catalina headed out to find someone."
+YOU: [dlg:more] "I’m listening."
+THEM: "Leave Ines alone. They're harmless. Weird, but harmless."
+YOU: [dlg:react] (listen)
+THEM: "Ines headed out to forage."
+YOU: [dlg:more] "Tell me more."
+THEM: "Catalina is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Ethan headed out to forage."
+YOU: [dlg:more] "Tell me more."
+THEM: "that stray dog — the one that bit two people — lets Ines touch it."
+YOU: (leave)
+pre-close: want ask_favor stage 1 thread gossip
+closing line: "Steady as she goes. See you at dinner."
+(gossip picks this sitting: 1)

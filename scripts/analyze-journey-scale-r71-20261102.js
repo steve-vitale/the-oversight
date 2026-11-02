@@ -163,7 +163,7 @@ function main() {
   const recipesById = {};
   for (const r of recipes) recipesById[r.id] = r;
   const out = {};
-  for (const seed of [85051, 85042, 85043, 85044]) {
+  for (const seed of [85051, 85052, 85053, 85054]) {
     out[seed] = analyzeSeed(evid, r65dir, seed, weaponSet, armorSet, recipesById);
     const s = out[seed];
     console.log(`seed ${seed}: villagerDays=${s.totals.villagerDays} knowerDays=${s.totals.knowerDays} armed(stick-only=${s.totals.stickOnlyDays} real=${s.totals.realArmedDays} both=${s.totals.bothArmedDays} srcEq=${s.totals.knowerArmedEquipped} srcPack=${s.totals.knowerArmedPack} srcBoth=${s.totals.knowerArmedBoth}) weaponless=${s.totals.weaponlessDays} weaponlessKnower=${s.totals.weaponlessKnowerDays} eligibleDays=${s.totals.eligibleDays} attempts(Cd)=${s.totals.attempts} unexplained=${s.unexplainedCount} stickBlocked=${s.totals.stickBlockedDays} wcLines=${s.wcLines} deadfallDuty=${s.deadfallDutyLines} captureDiff=${s.diffLines} gossipPicks=${s.gossipPicks} gossipThem=${s.gossipThem} sittings=${s.sittings}`);
