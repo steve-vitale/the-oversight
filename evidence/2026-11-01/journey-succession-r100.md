@@ -454,7 +454,24 @@ tests (r100 instrument proof + keepsake proof) pass standalone.
 The new r100 scripts never ran inside check (fixed 290-script
 list, same as r97) — their standalone runs are the proof.
 
-## Closeout
+## Closeout (main-session recovery)
 
-[PENDING — fill in after merge: commit hash, rebase/merge record,
-rotation verification, lock handling.]
+- Coordinator hit the 3600s execution timeout during closeout; all
+  panel, proof, telemetry, and regression work was already committed
+  on branch journey2-succession-r100 (299caa97, base 9da23adc5).
+- Main-session recovery: verified branch tip + parent and zero live
+  run processes; killed the surviving heartbeat loop (PID 133024 —
+  the coordinator's loop outlived its timeout); rebased onto
+  d88731c4b (r75) with a clean tree; re-ran the keepsake proof
+  (ALL GREEN) and the r100 proof (43 PASS, same 6 stale-(e) FAILs
+  byte-identical to the panel log — no rebase regression); merged
+  --ff-only, HEAD verified caefba17a.
+- Worktree released + removed, branch deleted (tip == HEAD at
+  release).
+- Rotation-b written 7→4, verified by re-read (endgame next).
+- Lock: no playtest-loop-2.lock existed at recovery — the run's
+  coordinator left none, so there was nothing to delete.
+- Telemetry: LOUD lines explained (stale baseline field names),
+  baseline NOT rolled. Checkquick 284/6 standing families.
+- Merged locally, pending ship (game change: keepsake burial line
+  in playerDeath [needs-eyes]).
