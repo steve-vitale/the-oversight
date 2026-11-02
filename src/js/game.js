@@ -22234,9 +22234,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const plots = this.gardenPlots();
       const ripe = plots.filter(p => this.plotRipe(p, day));
       if (!ripe.length) { this.say('Nothing ripe — the garden is growing, not giving. Check back.'); return null; }
+      // GARDEN-POOLING (food-economy, sim-gardenpool-b): the garden is
+      // behind the hall, so a harvest the pack cannot take does not
+      // have to ride in the pack overnight and block tomorrow's
+      // foraging. Per plot: pack it if it fits; else pool finished
+      // food straight to the pantry through the same
+      // depositPantryPieces path returnToVillage uses (same finished
+      // definition: kcalEach > 0 AND NOT isUnprocessed); else leave
+      // it on its plot, still ripe, for a later day. Food NEVER
+      // vanishes: every plot ends packed, pooled, or still growing.
+      // Unprocessed food cannot be pantry-stored (depositPantryPieces
+      // returns 0 for kcalEach <= 0), so it defers rather than
+      // evaporating; a plot bigger than the pantry's remaining room
+      // defers rather than blowing the pantry cap.
+      const v = this.state.village;
+      const packKgBefore = Math.round(this.packWeight() * 10) / 10;
+      const packCap = this.packCapacity();
+      const pantryRoom = () => {
+        try { return Math.max(0, this.pantryCapKcal() - this.pantryKcal()); } catch (e) { return 0; }
+      };
       let totalKcal = 0;
       let allKnown = true, needsPrep = false;
-      const bits = [];
+      const bits = [], pooledBits = [], deferredBits = [];
+      let took = false;
       for (const p of ripe) {
         const plant = (this.data.plants || []).find(x => x.id === p.pid) || {};
         const kcal = this.plotYieldKcal(p);
@@ -22246,14 +22266,53 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const known = this.plantKnown(p.pid);
         const item = this.foodForageItem(plant, known, units, kcal, day, this.harvestOrigin(this.villagerId));
         item.gardenShares = this.gardenHarvestOrigin(p);
-        this.state.scholar.inventory.push(item);
-        allKnown = allKnown && known;
-        needsPrep = needsPrep || item.edible === false || !!item.needsCooking;
-        totalKcal += kcal;
-        this.gardenHarvestTaken(p, day);
-        bits.push(`${units}\u00d7 ${item.name}`);
+        const plotKg = Math.round(units * (item.kg || 0.1) * 10) / 10;
+        const finished = (item.kcalEach || 0) > 0 && !this.isUnprocessed(item);
+        // True deposited kcal (legacy plots round units, so this can
+        // differ from plotYieldKcal by a few kcal — the room check
+        // must use the deposited figure, not the nominal one).
+        const itemKcal = (item.kcalEach || 0) * units;
+        if (this.canCarry(plotKg)) {
+          this.state.scholar.inventory.push(item);
+          allKnown = allKnown && known;
+          needsPrep = needsPrep || item.edible === false || !!item.needsCooking;
+          totalKcal += kcal;
+          this.gardenHarvestTaken(p, day);
+          bits.push(`${units}\u00d7 ${item.name}`);
+          took = true;
+        } else if (finished && v && itemKcal <= pantryRoom()) {
+          // Same field contract as returnToVillage's pool.
+          this.depositPantryPieces(v, { name: item.name || 'Foraged food', plantId: item.plantId,
+            kcalEach: item.kcalEach, units: item.units,
+            spoilDay: item.spoilDay ?? 9999, unit: item.unit,
+            safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
+            foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
+            hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk,
+            poisonRisk: item.poisonRisk, wellMade: item.wellMade, burnt: item.burnt,
+            needsCooking: item.needsCooking, rawKcal: item.rawKcal, cookedKcal: item.cookedKcal,
+            parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares }, 500);
+          this.gardenHarvestTaken(p, day);
+          pooledBits.push(`${units}\u00d7 ${item.name} (${plotKg} kg, ${itemKcal} kcal)`);
+          took = true;
+        } else {
+          // DEFER: no push, no gardenHarvestTaken — the plot stays
+          // ripe and the food stays on the plant.
+          const why = !finished
+            ? 'it still needs identifying or preparing before the pantry can take it'
+            : (!v ? 'there is no pantry here' : `the pantry has only ${pantryRoom()} kcal of room`);
+          deferredBits.push(`${units}\u00d7 ${item.name} (${plotKg} kg, ${why})`);
+        }
       }
-      this.say(`Harvest: ${bits.join(', ')}.${allKnown ? ` About ${totalKcal} kcal before preparation.` : ''}${needsPrep ? ' Check Pack for identification or preparation before eating.' : ''}`);
+      if (bits.length) this.say(`Harvest: ${bits.join(', ')}.${allKnown ? ` About ${totalKcal} kcal before preparation.` : ''}${needsPrep ? ' Check Pack for identification or preparation before eating.' : ''}`);
+      if (pooledBits.length) this.say(`Your pack is full (${packKgBefore} kg of ${packCap} kg) — ${pooledBits.join(', ')} ${pooledBits.length > 1 ? 'go' : 'goes'} straight to the pantry instead.`);
+      // Deferral narrates once per day: workGarden calls harvest
+      // twice per counterPlay, and the second call must not repeat
+      // the same refusal.
+      if (deferredBits.length && this._gardenPoolDeferDay !== day) {
+        this._gardenPoolDeferDay = day;
+        this.say(`Your pack is full (${packKgBefore} kg of ${packCap} kg) — ${deferredBits.join(', ')} ${deferredBits.length > 1 ? 'stay' : 'stays'} in its bed for now.`);
+      }
+      if (!took) return this.status();
       this.tickAction(16); this.save(); return this.status();
     },
 
