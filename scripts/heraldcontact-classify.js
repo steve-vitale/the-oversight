@@ -55,7 +55,13 @@ function classify(rec) {
     if (end === 'over-other') return { code: 'DIED_BEFORE_REGIONAL', why: 'wave4 day ' + d.wave4Day + ', regional never reached, run ended over-other', detail: d };
     if (end === 'village-lost') return { code: 'LOST_BEFORE_REGIONAL', why: 'wave4 day ' + d.wave4Day + ', regional never reached, village lost', detail: d };
   }
-  if (d.wave4Day == null && d.regionalDay == null) {
+  // Wave-4 legs key on wave4Day == null ONLY (prereg text: "wave 4
+  // never reached, endReason X" — no regional condition). Regional
+  // is routinely reached before wave 4, so requiring regionalDay ==
+  // null here wrongly left regional-reached, wave-4-less seeds
+  // UNCLASSIFIED. The regional legs above already claimed the
+  // wave4-reached/regional-never case, so order keeps the legs disjoint.
+  if (d.wave4Day == null) {
     if (end === 'survived') return { code: 'NEVER_WAVE4', why: 'wave4 never reached, survived', detail: d };
     if (end === 'over-other') return { code: 'DIED_BEFORE_WAVE4', why: 'wave4 never reached, run ended over-other', detail: d };
     if (end === 'village-lost') return { code: 'LOST_BEFORE_WAVE4', why: 'wave4 never reached, village lost', detail: d };

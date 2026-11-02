@@ -27,6 +27,11 @@ check('LOST_BEFORE_REGIONAL', { samples: [S(10, 4, 'village', null)], attempts: 
 check('NEVER_WAVE4', { samples: [S(10, 3, 'village', null)], attempts: [], endReason: 'survived', gameDays: 180, endOmen: null }, 'NEVER_WAVE4');
 check('DIED_BEFORE_WAVE4', { samples: [S(10, 2, 'village', null)], attempts: [], endReason: 'over-other', gameDays: 45, endOmen: null }, 'DIED_BEFORE_WAVE4');
 check('LOST_BEFORE_WAVE4', { samples: [S(10, 2, 'village', null)], attempts: [], endReason: 'village-lost', gameDays: 45, endOmen: null }, 'LOST_BEFORE_WAVE4');
+// Regional routinely precedes wave 4: wave-4 legs must NOT require
+// regionalDay == null (classifier bug found on pilot 97304/97306/97308).
+check('NEVER_WAVE4 regional-reached', { samples: [S(10, 3, 'regional', null)], attempts: [], endReason: 'survived', gameDays: 180, endOmen: null }, 'NEVER_WAVE4');
+check('DIED_BEFORE_WAVE4 regional-reached', { samples: [S(10, 3, 'regional', null)], attempts: [], endReason: 'over-other', gameDays: 90, endOmen: null }, 'DIED_BEFORE_WAVE4');
+check('LOST_BEFORE_WAVE4 regional-reached', { samples: [S(10, 3, 'regional', null)], attempts: [], endReason: 'village-lost', gameDays: 89, endOmen: null }, 'LOST_BEFORE_WAVE4');
 check('UNCLASSIFIED empty record', {}, 'UNCLASSIFIED');
 check('UNCLASSIFIED undecidable end', { samples: [S(10, 3, 'village', null)], attempts: [], endReason: 'bogus', gameDays: 90, endOmen: null }, 'UNCLASSIFIED');
 // Decision-order guard: stage-2 sample + attempts must still be ATTEMPTED.
