@@ -466,5 +466,5 @@ nonverbal fallback changes what a player sees in any
 no-shared-language conversation, which is a feel change
 under the repo rule — flagged, documented here for
 overrule. Merge, release, rotation advance, and lock
-deletion are recorded in the closeout-facts commit that
-follows the merge.
+deletion follow in this same recovery and are recorded
+in the main-session memory note for 2026-11-01.
