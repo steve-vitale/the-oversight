@@ -453,4 +453,40 @@ single-seed snapshot). The re-seed proposal stands.
 
 ## Closeout
 
-[APPENDED AFTER LANDING — see below]
+- Commit 1 (2484dc7d0, rebased to 2a1c245f4): 31 files — 2
+  instrument scripts (probe + analyzer, r105 renames + the four
+  r109 instruments) + 29 evidence files (prereg, pilot log/err,
+  sweep log/err, analysis txt/err, checkquick log, run note, 14
+  perseed JSON/transcript files, 6 r109-pilot snapshot files).
+  Zero src/js diff.
+- Post-commit index clobber (documented class, staged-deletion
+  variant): all 31 committed files showed staged-deleted in the
+  main index, worktree files byte-identical to HEAD. Repaired
+  with `git update-index --add --cacheinfo` per file from HEAD
+  blobs; verified `git status --short` empty + `git diff HEAD`
+  empty. The commit itself was always correct (message + file
+  list verified via `git show --stat HEAD`).
+- Rebase: main tree had moved during the run (flesh-out
+  sim-creekwide-a + sim-closedecay-a landed; HEAD b82b298ca ->
+  3f8d5568f). Rebase onto the new master landed cleanly, no
+  quirk, single commit, each commit exactly once. Post-rebase
+  proofs re-run: node --check OK on both scripts, analyzer
+  re-run byte-identical to the committed analysis (exit 1, same
+  NO-GO).
+- Merge: `git merge --ff-only journey2-endgame` in the main tree,
+  HEAD verified 2a1c245f4, main tree clean.
+- Commit 2 (this closeout section) merged the same way
+  immediately after; final HEAD below.
+- Release: worktree released + removed, branch deleted, final
+  reap run, main tree verified clean.
+- Rotation-b written 4->5, verified by re-read (social life
+  next). Lock deleted only after verifying it still carries
+  this run's run_id (2026-11-02T12:55:33+00:00).
+- Heartbeat loop: the loop's beats landed throughout (verified
+  by registry read-back at every step); loop killed after
+  release.
+- No push, no bump, no live check — merged locally, pending
+  ship (ship loop owns version bumps, pushes, live
+  verification).
+- No game change this run: instrument + evidence only. No
+  [needs-eyes] flag — nothing player-facing changed.
