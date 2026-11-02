@@ -1,0 +1,58 @@
+PER-SEED TABLE
+seed | base away/ep | out away/ep | full away/ep | base haul | out haul | full haul | full/out | out homeV | full homeV | out vetoes(silent) | full vetoes(silent) | out passes | full lateral | falseOpens(full)
+61807 | 6/1 | 4/1 | 4/0 | 215.1 | 237.2 | 280.7 | 1.183 | 0 | 2 | 3(2) | 3(1) | 2 | 11 | []
+BAND: baseline away=6 outward away=4 full away=4 baseline episodes=1 outward episodes=1 full episodes=0 baseline homewardEpisodes=1 preventedFull=1 {"61807":1} preventedOutward=0 {"61807":0} extensionOnly=1 {"61807":1} vetoCreated=[] outward homewardVetoes=0 (must be 0: OK) full homewardVetoes=2 full vetoOriginPass=2 full vetoOriginFail=0 outward outwardOnlyPasses=2 baseline median=30 outward median=30 full median=30 baseline starvSeeds=1 outward starvSeeds=0 full starvSeeds=0 full falseOpens=0 full silentVetoes=1 full lateralPasses=11 falseClosesV1 full=[] outward=[] falseClosesV2 full=[] outward=[]
+TRAJECTORY IDENTITY full-vs-outward: [{"seed":61807,"identical":false,"divergence":"loopDay 4 full end={\"pos\":{\"x\":2,\"y\":0},\"haven\":{\"x\":4,\"y\":4},\"over\":false,\"day\":4,\"kcal\":930,\"hydration\":100} vetoes=3 vs outward end={\"pos\":{\"x\":3,\"y\":0},\"haven\":{\"x\":4,\"y\":4},\"over\":false,\"day\":4,\"kcal\":1210,\"hydration\":100} vetoes=0"}]
+BARS: {
+  "primaryExtensionOnly": {
+    "value": 1,
+    "threshold": ">= 1",
+    "pass": true
+  },
+  "B1AwayTotal": {
+    "outward": 4,
+    "full": 4,
+    "pass": true
+  },
+  "B2Worsened": {
+    "worsened": [],
+    "unpairedStrandDeaths": [],
+    "pass": true
+  },
+  "B4FailedTripShare": {
+    "outward": 0.233,
+    "full": 0.233,
+    "pass": true
+  },
+  "B5perSeedVsOutward": {
+    "perSeedHaul": [
+      {
+        "seed": 61807,
+        "outward": 237.2,
+        "full": 280.7,
+        "ratio": 1.183,
+        "fullHomewardVetoes": 2,
+        "pass": true
+      }
+    ],
+    "threshold": "every seed >= 1.00x its own outward-only haul",
+    "pass": true
+  },
+  "B6Survival": {
+    "outwardMedian": 30,
+    "fullMedian": 30,
+    "outwardStarvSeeds": 0,
+    "fullStarvSeeds": 0,
+    "threshold": "median >= outward AND starv seeds <= outward + 2",
+    "pass": true
+  },
+  "vetoCreatedPockets": {
+    "vetoCreated": [],
+    "pass": true
+  },
+  "B7FalseOpens": {
+    "fullFalseOpens": 0,
+    "pass": true
+  }
+}
+VERDICT: GO
