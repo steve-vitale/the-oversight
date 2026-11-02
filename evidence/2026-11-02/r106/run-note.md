@@ -439,3 +439,15 @@ to r106. B-REG holds.
   HEAD empty, hash-object matches HEAD blob).
 - (Closeout commit, rebase/merge, rotation and lock
   disposition appended below at closeout.)
+- Closeout: evidence commit d0eca184a rebased onto master
+  44145372d (sibling journey-landing r87 landed mid-run)
+  as 7b037b7b9, files verified byte-identical across the
+  rebase (run-note 3e94f286, analyzer d75c1f352, driver
+  7d00a9c31a), wedge proof re-run 67/67 on SEED=42 and
+  SEED=7 post-rebase, then merged locally via --ff-only
+  as 7b037b7b9, pending ship — no version bump, no push
+  (the ship loop owns those). Rotation-b advanced 5 -> 6,
+  verified by re-read. Next Lane B leg is 6 (crisis).
+  Lane B lock deleted at closeout. Worktree
+  journey2-social-r106 released and removed; branch
+  deleted. Main tree verified clean.
