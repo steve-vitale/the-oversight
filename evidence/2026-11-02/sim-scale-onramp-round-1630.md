@@ -169,7 +169,20 @@ unreadable.
 - check.js --quick NOT re-run by coordinator (npcdeadfilter arm: one
   minimal src/js file, proof suites green on merged master; heralddepart
   arm: zero src/js; standing pre-existing profile recorded by sibling
-  runs). Origin/master ancestor check: see closeout note below.
+  runs). Origin/master ancestor check: PASSED — origin/master
+  (99ec4fcd5 batch ship) is an ancestor of local master, no divergence.
+- Telemetry: prescribed invocation REFUSED the recorder corpus (same
+  class as 1030Z/1135Z/1155Z/1233Z/1340Z/1424Z/1515Z): all 16 --current
+  rows carry top-level anchorCommit, so they are sweep recorder rows, not
+  runs. No LOUD lines; baseline NOT rolled (rolling it from recorder rows
+  would corrupt the run baseline).
+- Safe-commit index clobber hit the coordinator evidence commit
+  (staged-deletion variant; commit itself correct, verified via
+  git show --stat). Repaired via HEAD-blob cacheinfo; a first repair
+  attempt collided with a transient index.lock (sibling lane active) and
+  the clobber re-appeared; second repair verified clean twice in one
+  call (status empty, diff HEAD empty, diff cached empty, hash-object
+  matches HEAD blob).
 
 ## Next blanks, in order
 
