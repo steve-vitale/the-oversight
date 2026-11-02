@@ -1,0 +1,412 @@
+PER-SEED TABLE
+seed | base away/ep | armed away/ep | base failedShare | armed failedShare | base haul | armed haul | haulRatio | vetoes(silent) base->armed | suppressions | abandonments | maxStep silent total/days/perDay base->armed | wave | endReason
+67501 | 6/0 | 6/0 | 0.267 | 0.267 | 393.4 | 393.4 | 1 | 4(2)->4(2) | 0 | 0 | 4,4->7,4=2/1/2 -> 4,4->7,4=2/1/2 | 4 | village-lost
+67502 [REP] | 1/0 | 1/0 | 0.242 | 0.242 | 475.8 | 475.8 | 1 | 22(20)->5(3) | 17 | 1 | 4,4->4,1=20/7/3 -> 4,4->4,1=3/2/2 | 4 | survived
+67503 | 0/0 | 0/0 | 0.483 | 0.483 | 319.1 | 319.1 | 1 | 2(1)->2(1) | 0 | 0 | 4,0->2,0=1/1/1 -> 4,0->2,0=1/1/1 | 4 | survived
+67504 | 11/0 | 11/0 | 0.429 | 0.429 | 265.3 | 265.3 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | village-lost
+67505 [REP] | 22/0 | 22/0 | 0.325 | 0.325 | 387.3 | 387.3 | 1 | 10(5)->9(4) | 1 | 1 | 1,3->1,2=4/4/1;4,1->5,0=1/1/1 -> 1,3->1,2=3/3/1;4,1->5,0=1/1/1 | 4 | survived
+67506 | 1/0 | 1/0 | 0.588 | 0.588 | 150.3 | 150.3 | 1 | 1(0)->1(0) | 0 | 0 |  ->  | 4 | village-lost
+67507 | 0/0 | 0/0 | 0.583 | 0.583 | 298.8 | 298.8 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | village-lost
+67508 | 4/0 | 4/0 | 0.563 | 0.563 | 120.8 | 120.8 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 2 | village-lost
+67509 | 0/0 | 0/0 | 0.275 | 0.275 | 161.7 | 161.7 | 1 | 2(1)->2(1) | 0 | 0 | 4,7->2,7=1/1/1 -> 4,7->2,7=1/1/1 | 4 | survived
+67510 | 7/0 | 7/0 | 0.593 | 0.593 | 52.9 | 52.9 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 3 | village-lost
+67511 | 0/0 | 0/0 | 0.067 | 0.067 | 569.1 | 569.1 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 4 | survived
+67512 | 1/0 | 1/0 | 0.301 | 0.301 | 866.2 | 866.2 | 1 | 0(0)->0(0) | 0 | 0 |  ->  | 4 | village-lost
+BAND: baseline away=53 armed away=53 baseline episodes=0 armed episodes=0 baseline vetoes=41(29 silent) armed vetoes=23(11 silent) armed suppressions=18 armed abandonments=2 baseline median=120 armed median=120 baseline deaths=635 armed deaths=635 baseline starvSeeds=1 armed starvSeeds=1 armed falseOpens=0
+PRIMARY: {
+  "P1reportOnly": {
+    "repetitionSeeds": [
+      67502,
+      67505
+    ],
+    "perSeed": [
+      {
+        "seed": 67502,
+        "baselineMaxPerDay": 3,
+        "armedMaxPerDay": 2,
+        "pass": true
+      },
+      {
+        "seed": 67505,
+        "baselineMaxPerDay": 1,
+        "armedMaxPerDay": 1,
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "P2": {
+    "violations": [],
+    "pass": true
+  },
+  "P3": {
+    "violations": [],
+    "pass": true
+  },
+  "primaryPass": true
+}
+BARS: {
+  "B1Survival": {
+    "baselineMedian": 120,
+    "armedMedian": 120,
+    "pass": true
+  },
+  "B2Deaths": {
+    "baselineDeaths": 635,
+    "armedDeaths": 635,
+    "baselinePlayerDeaths": 93,
+    "armedPlayerDeaths": 93,
+    "baselineModes": [
+      "wild/combat",
+      "other:expedition",
+      "other:Old Stare",
+      "other:a wound that wouldn't close",
+      "other:a stranger",
+      "other:Ugly-Eyes",
+      "other:the arena",
+      "other:contest",
+      "other:ambush",
+      "starvation",
+      "disease/poison",
+      "other:Extended Warranty",
+      "dehydration",
+      "other:Sunbasker",
+      "other:Choir Toad"
+    ],
+    "armedModes": [
+      "wild/combat",
+      "other:expedition",
+      "other:Old Stare",
+      "other:a wound that wouldn't close",
+      "other:a stranger",
+      "other:Ugly-Eyes",
+      "other:the arena",
+      "other:contest",
+      "other:ambush",
+      "starvation",
+      "disease/poison",
+      "other:Extended Warranty",
+      "dehydration",
+      "other:Sunbasker",
+      "other:Choir Toad"
+    ],
+    "newModes": [],
+    "pass": true
+  },
+  "B3FailedTripShare": {
+    "baseline": 0.363,
+    "armed": 0.363,
+    "threshold": "armed <= baseline + 0.05 (this arm's own tolerance)",
+    "pass": true
+  },
+  "B4MeanDailyHaul": {
+    "baseline": 338.4,
+    "armed": 338.4,
+    "threshold": ">= 0.95 x baseline",
+    "pass": true
+  },
+  "B4perSeed": {
+    "perSeedHaul": [
+      {
+        "seed": 67501,
+        "baseline": 393.4,
+        "armed": 393.4,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67502,
+        "baseline": 475.8,
+        "armed": 475.8,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67503,
+        "baseline": 319.1,
+        "armed": 319.1,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67504,
+        "baseline": 265.3,
+        "armed": 265.3,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67505,
+        "baseline": 387.3,
+        "armed": 387.3,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67506,
+        "baseline": 150.3,
+        "armed": 150.3,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67507,
+        "baseline": 298.8,
+        "armed": 298.8,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67508,
+        "baseline": 120.8,
+        "armed": 120.8,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67509,
+        "baseline": 161.7,
+        "armed": 161.7,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67510,
+        "baseline": 52.9,
+        "armed": 52.9,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67511,
+        "baseline": 569.1,
+        "armed": 569.1,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "seed": 67512,
+        "baseline": 866.2,
+        "armed": 866.2,
+        "ratio": 1,
+        "pass": true
+      }
+    ],
+    "threshold": "every seed >= 0.50x its own baseline",
+    "pass": true
+  },
+  "B5Away": {
+    "baseline": 53,
+    "armed": 53,
+    "threshold": "armed <= baseline + 2",
+    "pass": true
+  },
+  "B6Idling": {
+    "baselineForageTrips": 2469,
+    "armedForageTrips": 2469,
+    "threshold": "armed >= 0.90 x baseline",
+    "pass": true
+  },
+  "B7Engagement": {
+    "repetitionSeeds": [
+      67502,
+      67505
+    ],
+    "suppressionsBySeed": [
+      {
+        "seed": 67501,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67502,
+        "suppressions": 17,
+        "abandonments": 1
+      },
+      {
+        "seed": 67503,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67504,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67505,
+        "suppressions": 1,
+        "abandonments": 1
+      },
+      {
+        "seed": 67506,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67507,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67508,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67509,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67510,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67511,
+        "suppressions": 0,
+        "abandonments": 0
+      },
+      {
+        "seed": 67512,
+        "suppressions": 0,
+        "abandonments": 0
+      }
+    ],
+    "missing": [],
+    "pass": true
+  },
+  "B8VetoCreatedPockets": {
+    "vetoCreated": [],
+    "pass": true
+  }
+}
+IDENTITY: {
+  "perSeed": [
+    {
+      "seed": 67501,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67502,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67503,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67504,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67505,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67506,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67507,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67508,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67509,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67510,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67511,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    },
+    {
+      "seed": 67512,
+      "divergentDays": 0,
+      "divergentLoopDays": [],
+      "firstDivergentDay": null,
+      "divergentFields": {}
+    }
+  ],
+  "totalDivergentDays": 0
+}
+ROUTE-REOPEN: {
+  "reopen": [
+    {
+      "seed": 67502,
+      "step": "4,4->4,1",
+      "abandonDay": 88,
+      "baselinePassesAfter": 0,
+      "firstBaselinePassDay": null,
+      "baselineVetoesAfter": 15,
+      "postAbandonWindowDays": 32,
+      "reopenRate": 0,
+      "armedLaterHops": 0,
+      "armedLaterHopDays": [],
+      "armedSameDayHops": 1,
+      "divergentDaysOnOrAfterFirstPass": null,
+      "divergentDaysOnOrAfterAbandon": []
+    },
+    {
+      "seed": 67505,
+      "step": "1,3->1,2",
+      "abandonDay": 15,
+      "baselinePassesAfter": 0,
+      "firstBaselinePassDay": null,
+      "baselineVetoesAfter": 1,
+      "postAbandonWindowDays": 105,
+      "reopenRate": 0,
+      "armedLaterHops": 0,
+      "armedLaterHopDays": [],
+      "armedSameDayHops": 1,
+      "divergentDaysOnOrAfterFirstPass": null,
+      "divergentDaysOnOrAfterAbandon": []
+    }
+  ],
+  "reopenCount": 0,
+  "structuralViolations": [],
+  "structuralPass": true
+}
+REOPEN-SUMMARY: {"totalAbandonments":2,"abandonedSteps":2,"stepsWithPassAfter":0,"totalReopenPasses":0,"totalReopenVetoes":16,"bandReopenRate":0,"structuralViolations":0,"barsPass":true,"barsFailing":[]}
+VERDICT: DIAG-GO (judged: 2 abandonment(s), 2 abandoned step(s), 0 post-abandonment baseline pass(es), band reopen rate 0; bars all pass)
