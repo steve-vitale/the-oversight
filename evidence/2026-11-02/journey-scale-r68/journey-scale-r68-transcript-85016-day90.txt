@@ -1,0 +1,20 @@
+(pre-talk seed: curious planted d75; takenWantDay=0; convoCount=6)
+=== seed 85016 day 90 — conversation with Giuseppe (gen_er8hje9) ===
+occupation=tattoo artist temperament=stoic trust=100 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control+gossip-first
+
+THEM: "What's the most useful thing you've learned since we got here?"
+(turn0 choices: ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, leave, silence)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Inspiration — It brightens. It hunts at night — give the dark a wide berth."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Guava. Leaf, stem, smell. You won't forget it now."
+YOU: [goon] "I'm listening."
+THEM: "sewing. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Later."

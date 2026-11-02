@@ -1,0 +1,16 @@
+(pre-talk seed: curious planted d112; takenWantDay=0; convoCount=9)
+=== seed 85017 day 120 — conversation with Tom (gen_dbd7opm) ===
+occupation=Vintner temperament=mischievous trust=90 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control+gossip-first
+
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+YOU: [goon] "Go on."
+THEM: "Well — Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Alright. One thing at a time. That's how we get through."

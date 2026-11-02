@@ -1,0 +1,16 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 85018 day 120 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter temperament=steady trust=24 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control+gossip-first
+
+THEM: "Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, ans:q_alone_time:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Steady as she goes. We'll talk again."
