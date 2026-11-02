@@ -1,0 +1,5 @@
+DET GREEN byte-identical on seed 89701 (2x 120d), foreground rerun 2026-11-02.
+Note: the first background DET invocation exited 1 with empty log files
+(22:25Z) — the EPERM flap struck its redirect/output files; the foreground
+rerun is authoritative and green. Pilot snapshot in r110-pilot/ predates
+both DET runs; DET mode does not overwrite pilot per-seed files.
