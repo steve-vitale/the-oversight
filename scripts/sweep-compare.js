@@ -384,3 +384,10 @@ try { const ls = require('./policies/competent-latescape-b'); POLICY_REGISTRY['c
 // change to existing entries (the variant stays default-OFF: nothing
 // loads it unless named).
 try { const hs = require('./policies/competent-homewardstep-b'); POLICY_REGISTRY['competent-homewardstep-b'] = hs.homewardstep; } catch (e) {}
+// homext-abl-b instrument (sim-homext-abl-b, 2026-11-02, Loop B
+// food-economy): the outward-only ablation of the homewardstep guard
+// (homeward hops never vetoed), registered so the balanced panel
+// (§15) can build its column. Additive; zero behavior change to
+// existing entries (the variant stays default-OFF: nothing loads it
+// unless named).
+try { const xo = require('./policies/competent-homewardstep-outwardonly-b'); POLICY_REGISTRY['competent-homewardstep-outwardonly-b'] = xo.outwardonly; } catch (e) {}
