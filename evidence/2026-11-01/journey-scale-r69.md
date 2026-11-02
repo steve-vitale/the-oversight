@@ -238,3 +238,27 @@ form; it does not overturn.
   modifications, nothing to discard.
 
 ## Landing (filled at closeout)
+Master at worktree creation: 9b310a82c. At closeout master had
+moved to 33d1a2089 (1 commit: Loop B 2330Z round evidence — ZERO
+src/js + src/data in the range, verified by diff). The branch was
+rebased cleanly onto 33d1a2089 (2/2 picks; the documented
+stop-at-pick quirk struck at the 2nd pick — pick in both done and
+todo lists, worktree clean, pick unapplied — and recovered with
+`git rebase --continue`, which sailed through). Proofs were re-run
+after the rebase as the body requires: node --check clean on driver
++ analyzer + capable-bot file, capable-bot 40 passed / 0 failed,
+r69 analyzer totals byte-identical on all four seeds, gossip
+analyzer TOTAL unchanged (1 NEAR template pair, 0 fallback pairs).
+NO quad re-run after the rebase: the rebase range holds zero game
+code, so the measured quad stands unchanged on the new base.
+Merged locally via `git merge --ff-only journey-scale` → master
+(verified: master tip equals the branch tip after merge), pending
+ship (no bump, no push, no live verify — ship loop owns those).
+Branch commits: 56cc7e162 (prereg + instruments), 104035376
+(quad + analyses + run note + capable-bot re-seed), plus this
+landing section as the final branch commit, merged by a single
+fast-forward below.
+Worktree released + branch deleted at closeout; final main-tree
+status clean. Rotation file written 3→0 at run start and verified
+by reading it back. Playtest lock deleted at closeout. Heartbeat
+loop stopped at closeout.
