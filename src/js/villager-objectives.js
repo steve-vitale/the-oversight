@@ -8,7 +8,8 @@
 //   - objDanger(vid, tx, ty, hx, hy)
 //   - objMaybeDepart(rid, node, atHaven, hx, hy)
 //   - objAwayStep(rid, node, away, hx, hy)
-//   - objAskCompanion(vid, obj, hx, hy)
+//   - objAskCompanion(vid, obj, hx, hy, opts)
+//   - objRallyFreshRaid()
 //   - objTick()
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
 // rules:
@@ -19,6 +20,7 @@
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
 //   - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
+//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; no new RNG draws, so games without a fresh raid are bit-identical to base. (code: villager-objectives.js, win-drives 2026-11-03)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
@@ -853,10 +855,31 @@
       try { if (this.state.weather === 'rain') score += 1; } catch (e) {}
       return score;
     },
+    // RALLY-GUARD (win-drives 2026-11-03, Drive 1): is there a fresh raid
+    // in the village's heard record? Same 3-day window objDanger already
+    // uses for raid warnings, same gossip store — no new state, no list.
+    // A raid the village heard about is the perception precondition for
+    // the rally-guard drive; a raid nobody heard about arms nothing.
+    objRallyFreshRaid() {
+      var day = 0;
+      try { day = this.state.scholar.day; } catch (e) {}
+      try {
+        var g = (this.state.village.gossip || []);
+        for (var i = 0; i < g.length; i++) {
+          if (g[i].action === 'raid' && day - (g[i].day || 0) <= 3) return true;
+        }
+      } catch (e) {}
+      return false;
+    },
     // ASK: find someone to walk with. A companion with their own outdoor
     // errand is ideal; otherwise the willing (bold, warm, trusting, sociable).
     // Both are marked away together, and the village hears about it.
-    objAskCompanion(vid, obj, hx, hy) {
+    // opts.rallyOnly (rally-guard drive): only villagers whose reason is
+    // protection or ambition ('protect' / 'prove' / 'lead') volunteer —
+    // the drive's reason IS the goal, so anyone else is not a volunteer
+    // for this drive, and no fallback to other companions happens.
+    objAskCompanion(vid, obj, hx, hy, opts) {
+      var rallyOnly = !!(opts && opts.rallyOnly);
       var v = this.state.village;
       var roster = v.roster || [];
       var tripDist = this.objDist(obj.tx, obj.ty, hx, hy);
@@ -877,6 +900,12 @@
         // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers are never asked
         // to walk guard — leave them be. Reads the GENERATED npcGoal.
         try { if (this.npcGoal && this.npcGoal(id) === 'alone') continue; } catch (e) {}
+        // RALLY-GUARD (win-drives 2026-11-03): rally volunteers only.
+        if (rallyOnly) {
+          var _rg = null;
+          try { _rg = this.npcGoal ? this.npcGoal(id) : null; } catch (e) {}
+          if (_rg !== 'protect' && _rg !== 'prove' && _rg !== 'lead') continue;
+        }
         var node = null;
         try { node = this.npcNode(id); } catch (e) { continue; }
         if (!node || node.nx !== hx || node.ny !== hy) continue;
@@ -1069,7 +1098,33 @@
       if (o.kind === 'LEAVE') { this.objDepart(rid, o, hx, hy, playerAtHaven); return; }
       var dg = this.objDanger(rid, o.tx, o.ty, hx, hy);
       if (dg.verdict === 'go') {
-        this.objDepart(rid, o, hx, hy, playerAtHaven);
+        // RALLY-GUARD (win-drives 2026-11-03, Drive 1): the danger check
+        // alone would send this villager out solo — but the village
+        // heard about a raid in the last 3 days, and a protect / prove /
+        // lead villager at haven may answer it with company. Same
+        // exclusions as the 'ask' path (solo principals walk alone;
+        // a HUNT never drags along someone who has not seen the beast),
+        // same heal gates, same trust bumps. No new RNG draws on any
+        // path: the gossip scan and goal filter are pure reads, so
+        // games without a fresh raid are bit-identical to base.
+        var rgCid = null;
+        if (!o.solo && o.kind !== 'HUNT') {
+          try { if (this.objRallyFreshRaid && this.objRallyFreshRaid()) rgCid = this.objAskCompanion(rid, o, hx, hy, { rallyOnly: true }); } catch (e) { rgCid = null; }
+        }
+        if (rgCid) {
+          var rgCo = this.objOf(rgCid);
+          var rgRidOk = this.objHealGate(rid, o, hx, hy, playerAtHaven);
+          var rgCidOk = rgRidOk && this.objHealGate(rgCid, rgCo, hx, hy, playerAtHaven);
+          if (rgRidOk && rgCidOk) {
+            this.objDepart(rid, o, hx, hy, playerAtHaven);
+            this.objDepart(rgCid, rgCo, hx, hy, playerAtHaven);
+            try { this.bumpTrust(rid, 1, 'they walk out with me'); this.bumpTrust(rgCid, 1, 'heading out together'); } catch (e) {}
+          } else if (rgRidOk) {
+            this.objTightenOrDefer(rid, o, hx, hy, playerAtHaven);
+          }
+        } else {
+          this.objDepart(rid, o, hx, hy, playerAtHaven);
+        }
       } else if (dg.verdict === 'ask') {
         // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers deprioritize
         // companions (o.solo, set in objPick) — they tighten or stay rather
