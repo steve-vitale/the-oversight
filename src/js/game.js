@@ -28853,6 +28853,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const order = dm.order || livePaths[0] || reqs;
           if (usedId === order[1] || `tech:${usedId}` === order[1] || `skill:${usedId}` === order[1]) {
             combined = otherSeen(order[0], u => u.day === ctx.day) || otherResonant(order[0]);
+          } else if (!ctx.synthetic && (usedId === order[0] || `tech:${usedId}` === order[0] || `skill:${usedId}` === order[0])) {
+            // TRIGGER-SIDE RESONANCE (gap audit 2026-11-02): when the SECOND
+            // sequential leg is passive (no button, no practice to perform),
+            // the trigger use can never happen — the pair stalls at 0
+            // attempts forever even while co-held. A passive second leg held
+            // is always brought to bear, so using the first step while
+            // holding it IS the combined use. Synthetic events are excluded:
+            // they derive from a real use that already had its chance to
+            // count, and counting both would double-count one moment.
+            combined = otherResonant(order[1]);
           }
         } else if (dm.type === 'same_target') {
           // Both applied to the same target today.
