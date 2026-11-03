@@ -503,13 +503,28 @@
 
       if (dlg === 'commit') {
         const favor = c.want?.favor;
-        if (favor?.kind === 'stay_close' && this.companyFavorCommitGate) {
+        // RESIDUAL-COMMIT RESOLUTION (journey-deepening r88 2026-11-03):
+        // the r87 away fix resolved BLOCKED commits as 'stated', but these
+        // two early returns still spoke their reason and returned WITHOUT
+        // resolving the want -- a raw re-press re-heard the reason verbatim
+        // forever, the same loop shape. Two parts, both required:
+        // (1) a live want resolves as 'stated' on the refused turn, exactly
+        // as the blocked-commit path does (the favor itself stays open and
+        // can be asked again later); (2) the early returns apply ONLY
+        // while the want is still live -- otherwise a resolved want
+        // re-pressed raw would hit the gate again and re-hear the reason
+        // instead of the decided-want line below. Menu-visible behavior
+        // is unchanged: the menu already hides dlg:commit when either
+        // gate fails, so menu-faithful players never reach these branches.
+        const wantLiveEarly = !!(c.want && (c.want.stage || 0) < 3);
+        if (wantLiveEarly && favor?.kind === 'stay_close' && this.companyFavorCommitGate) {
           const gate=this.companyFavorCommitGate(vid,favor);
-          if(!gate.ok){this.sayLine(vid,gate.reason,{diegeticAct:true});return{line:gate.reason,choices:this.convoChoices(vid),ended:false,transcript:c.transcript.slice()};}
+          if(!gate.ok){this.sayLine(vid,gate.reason,{diegeticAct:true});this.convoWantEngage(vid,'stated');return{line:gate.reason,choices:this.convoChoices(vid),ended:false,transcript:c.transcript.slice()};}
         }
-        if (favor && this.convoFavorAction(vid, favor).unsupported) {
+        if (wantLiveEarly && favor && this.convoFavorAction(vid, favor).unsupported) {
           const line = this.convoFavorAction(vid, favor).reason;
           this.sayLine(vid, line, { diegeticAct: true });
+          this.convoWantEngage(vid, 'stated');
           return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
         // "I'll do it." — the formal commitment. REBUILD 2026-10-11: new
