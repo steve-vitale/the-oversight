@@ -17,6 +17,7 @@
 //   stone_knife: vine 1 (keepKnife + armUp win the vine race in the base
 //     policy, deliberately, before workTrapline runs)
 //   bark_armor:  vine 2
+//   hide_armor:  vine 1 (gap-hidecraft 2026-11-03: gearUp hide craft)
 //   arrow:       stick 2 (gearUp knaps arrows when the best weapon is dry)
 //   snare:       vine 1 + stick 1 (the blind band this layer spends)
 // Fires do NOT burn stick (fireFuel prefers branch, falls back to wood
@@ -37,6 +38,7 @@ const BANK = { vine: 2, stick: 2 }; // the blind band's 2+2
 const COMPETITORS = {
   stone_knife: ['vine'], // keepKnife (butchering knife), armUp (weapon knife)
   bark_armor: ['vine'],  // gearUp armor craft — eats the whole vine bank
+  hide_armor: ['vine'],  // gearUp armor craft (gap-hidecraft 2026-11-03) — eats 1 banked vine
   arrow: ['stick'],      // gearUp dry-weapon arrow craft — eats the stick bank
 };
 

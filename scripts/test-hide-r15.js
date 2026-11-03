@@ -55,7 +55,14 @@ function ownHideArmor(Game) {
   const hide = require('./policies/hide');
   const { belonghide } = hide;
 
-  // ---- RED: gate off -> pure delegation, parent-identical ----
+  // ---- RED: gate off -> the LAYER adds nothing; the base policy crafts ----
+  // (gap-hidecraft 2026-11-03: the old RED premise — "gate off = no craft
+  // at all" — is intentionally superseded. The base player policy (competent
+  // gearUp, which belonghide inherits) now attempts hide armor itself from
+  // pack materials, so gate-off no longer means nothing happens. What gate-off
+  // still proves: the layer contributes no attempts, no sweeps, no learning.
+  // The craft roll is forced to fail here so the base attempt is observable
+  // (materials consumed) without a 35%-flaky success flipping RED2/RED3.)
   {
     delete process.env.HIDE_R15;
     const Game = await freshGame(51001);
@@ -63,14 +70,21 @@ function ownHideArmor(Game) {
     giveMaterials(Game, 2);
     const ctx = {};
     const before = JSON.stringify(Game.state.scholar.inventory.map(i => i.itemId || i.material));
-    for (let i = 0; i < 3; i++) { try { belonghide.upkeep(Game, ctx); } catch (e) {} }
-    check('RED1 no craft attempt with gate off', ctx.hideCraftAttempts === undefined,
+    const savedRandom = Math.random; Math.random = () => 0.99;
+    try { for (let i = 0; i < 3; i++) { try { belonghide.upkeep(Game, ctx); } catch (e) {} } }
+    finally { Math.random = savedRandom; }
+    check('RED1 no layer craft attempt with gate off', ctx.hideCraftAttempts === undefined,
       'attempts=' + ctx.hideCraftAttempts);
-    check('RED2 no hide_armor in inventory with gate off', !ownHideArmor(Game));
+    check('RED2 no hide_armor in inventory with gate off (forced-fail roll)', !ownHideArmor(Game));
     check('RED3 recipe level untouched by the layer (L1 stays L1)', (Game.state.codex.recipes.hide_armor.level || 0) === 1,
       'level=' + Game.state.codex.recipes.hide_armor.level);
     const after = JSON.stringify(Game.state.scholar.inventory.map(i => i.itemId || i.material));
-    check('RED4 inventory has no phantom hide_armor (craft consumed nothing)', !after.includes('hide_armor'));
+    check('RED4 inventory has no phantom hide_armor (failed attempt created nothing)', !after.includes('hide_armor'));
+    const hideLeft = (Game.state.scholar.inventory || []).filter(i => i && i.material === 'hide').reduce((t, i) => t + (i.units || 0), 0);
+    const vineLeft = (Game.state.scholar.inventory || []).filter(i => i && i.material === 'vine').reduce((t, i) => t + (i.units || 0), 0);
+    check('RED5 base policy attempted (materials consumed) while layer stayed off',
+      (ctx.hideArmorCraftAttempts || 0) >= 1 && hideLeft === 0 && vineLeft === 0,
+      'baseAttempts=' + (ctx.hideArmorCraftAttempts || 0) + ' hide=' + hideLeft + ' vine=' + vineLeft);
   }
 
   // ---- HONESTY: L0 + materials -> no craft ----

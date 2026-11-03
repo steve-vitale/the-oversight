@@ -1905,6 +1905,49 @@ function gearUp(Game, ctx) {
       const p = protOf(inv[i]);
       if (p > 0 && p > abestP) { abestP = p; abestI = i; }
     }
+    if (armorCraftOn && abestP < 20 && wornMax < 20) {
+      // HIDE ARMOR (gap-hidecraft 2026-11-03): the armor section only ever
+      // crafted bark, and only when nothing decent was worn or owned — so
+      // a player who learned hide_armor (handling a hide teaches L1), carried
+      // 2 hide + 1 vine in the pack, and already wore bark (P=10) or owned
+      // any armor never attempted hide on any day. Hide (P=20) beats anything
+      // below 20, so attempt it first, from pack materials only, through the
+      // engine's own craft() gates (L1+ knowledge, blind 35% at L1 with
+      // materials at risk, a successful blind craft teaching L2). Once per
+      // day — blind attempts 3x/day would machine-gun scarce hides — and
+      // never on a day the hide layer already tried. Never when hide armor
+      // is already owned or worn, and never against the vine bank's claim
+      // (VINEBANK=1: hide joins bark as a vine competitor).
+      try {
+        const sH = Game.state.scholar;
+        const day = (sH.day || 0);
+        const ownedHide = (sH.inventory || []).concat(Object.values(sH.equipped || {}))
+          .some(it => it && ((it.itemId || it.id) === 'hide_armor'));
+        const rk = ((Game.state.codex || {}).recipes || {}).hide_armor || {};
+        if (!ownedHide && (rk.level || 0) >= 1 && ctx._competentHideCraftDay !== day && ctx.hideCraftDay !== day && !Game.over) {
+          const have = (m) => (sH.inventory || []).filter(it => it && it.material === m)
+            .reduce((t, it) => t + (it.units || 0), 0);
+          const vbDefer = vinebank.defersCraft(Game, 'hide_armor');
+          if (vbDefer) { ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1; ctx.vinebankDeferHide = (ctx.vinebankDeferHide || 0) + 1; }
+          else if (have('hide') >= 2 && have('vine') >= 1 && Game.craft) {
+            ctx._competentHideCraftDay = day;
+            ctx.hideArmorCraftAttempts = (ctx.hideArmorCraftAttempts || 0) + 1;
+            const made = Game.craft('hide_armor');
+            if (made) {
+              ctx.hideArmorCrafted = (ctx.hideArmorCrafted || 0) + 1;
+              // re-scan: craft() replaced scholar.inventory with a new
+              // filtered array — rebind the local before indexing into it.
+              inv = Game.state.scholar.inventory || [];
+              abestI = -1; abestP = -1;
+              for (let i = 0; i < inv.length; i++) {
+                const p = protOf(inv[i]);
+                if (p > 0 && p > abestP) { abestP = p; abestI = i; }
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    }
     if (armorCraftOn && abestI < 0 && wornMax < 10) {
       // Nothing owned and nothing decent worn: craft bark armor when the
       // recipe is known (handling a villager's bark armor teaches L1) and
