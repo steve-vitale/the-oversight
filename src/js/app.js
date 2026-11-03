@@ -17594,7 +17594,7 @@
                   if (tp.overtime) otLine += `<br>⏱ <b>OVERTIME ×${tp.overtime}</b> — reruns hit harder, raids come sooner. Standing −${tp.standingCost}${tp.losses ? ` (${tp.losses} lost)` : ''}.`;
                   try { const ns = Game.networkStatus ? Game.networkStatus() : null; if (ns) otLine += `<br>${esc(ns)}`; } catch (e) { console.warn('network status html', e); }
                   if (tp.key) otLine += `<br>🍽️ <b>The key is yours:</b> every door now ends with THE HOSTS.`;
-                  html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.${otLine}<br>` +
+                  html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.${otLine}${tp.fullShortfall ? `<br>${esc(tp.fullShortfall)}` : ''}<br>` +
                     `<button class="btn sm" data-table-seat${tp.ready ? '' : ' disabled'}>◈ Take your seat</button>${tp.why ? `<br>${esc(tp.why)}` : ''}` +
                     `</p></div>`;
                 }

@@ -3,6 +3,7 @@
 // description: The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
 // provides:
 //   - tableSeat()
+//   - tableSeatLine(), tableWithdrawLine(), fullSeatShortfall() — seat voicing; the shortfall names what a full seat still wants, in plain words
 //   - tableEarnedPaths()
 //   - tableBranch(pathId)
 //   - tableRegisterPath(def)
@@ -126,6 +127,68 @@
         if (parts.length) extra = `, with ${parts.join(' and ')} fought`;
       } catch (e) {}
       return `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0})${extra}, ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
+    },
+
+    // fullSeatShortfall: the full-seat offer/audit path never named what
+    // was missing — the Nov 2 scale-onramp round (seed 97339) sat on a
+    // lesser seat with every bar met except wave-4/5 deeds (0/3, 0/2)
+    // and heard nothing about the full seat at all. This names the
+    // shortfall in plain words: which waves are short and by how many
+    // distinct monsters, which deeds are short, and whether standing,
+    // integration, or the food-thesis deeds are what stands in the way.
+    // VOICING ONLY: every bar and threshold below is deedGateReady()'s
+    // own (5/5/4/3/2 distinct fought, 3 contests, 3 crises, stage>=2,
+    // food-thesis deeds, national/global standing) — nothing here
+    // retunes a gate, price, or requirement, and nothing here writes
+    // state (the food-thesis split is read defensively from
+    // scholar.prog, never created, so calling it from an audit cannot
+    // mint a deed). Accepts a tableSeat() result or nothing (live
+    // deedGateReady()). Returns { ready, missing, line }: ready true
+    // means the full seat is earned and line is '' — callers speak only
+    // when something is actually missing, so a full seat's text never
+    // changes.
+    fullSeatShortfall(seat) {
+      try {
+        let d = (seat && seat.detail) || null;
+        if (!d || typeof d.w1 !== 'number') {
+          try { d = (typeof this.deedGateReady === 'function') ? this.deedGateReady() : {}; } catch (e) { d = {}; }
+        }
+        const need = { w1: 5, w2: 5, w3: 4, w4: 3, w5: 2 };
+        const missing = [];
+        for (let w = 1; w <= 5; w++) {
+          const have = (d['w' + w] | 0);
+          if (have < need['w' + w]) missing.push(`only ${have} of ${need['w' + w]} different wave-${w} monsters faced`);
+        }
+        const contestsN = (d.contestsN | 0);
+        if (contestsN < 3) missing.push(`only ${contestsN} of 3 contests survived`);
+        const crisesN = (d.crisesN | 0);
+        if (crisesN < 3) missing.push(`only ${crisesN} of 3 crises weathered`);
+        const rank = d.rank || 'village';
+        if (rank !== 'national' && rank !== 'global') missing.push(`standing is ${rank} — the full seat asks for national standing or higher`);
+        const stage = (d.stage | 0);
+        if (stage < 2) missing.push(`integration too shallow (stage ${stage} of 2 needed)`);
+        // Food-thesis split: deedGateReady() reports the pair combined
+        // (foodDeeds), but the two halves are different deeds in play —
+        // the keepsake lesson (sentimentTaught) and a feast's surge spent
+        // where it counts (feastSurgeUsed). Name the half that is
+        // actually missing; when the live split cannot be read, fall
+        // back to the combined wording rather than guessing a half.
+        let sentiment = null, surge = null;
+        try {
+          const spr = ((this.state || {}).scholar || {}).prog || null;
+          if (spr && typeof spr === 'object') {
+            sentiment = !!spr.sentimentTaught; surge = !!spr.feastSurgeUsed;
+          }
+        } catch (e) {}
+        if (sentiment === null || surge === null) {
+          if (!d.foodDeeds) missing.push('the food-thesis deeds are unfinished');
+        } else {
+          if (!sentiment) missing.push('the keepsake lesson has not yet been taught');
+          if (!surge) missing.push('a feast surge has not yet been spent in a real fight');
+        }
+        if (!missing.length) return { ready: true, missing: [], line: '' };
+        return { ready: false, missing, line: `For a full seat, the ledger still wants: ${missing.join('; ')}.` };
+      } catch (e) { return { ready: false, missing: [], line: '' }; }
     },
 
     // tableWithdrawLine: the withdrawal beat names the failing bar aloud,
@@ -761,6 +824,19 @@
       // the voicing is proof-testable; wave-4/5 deeds are named when nonzero.)
       const seatLine = this.tableSeatLine(seat);
       this.say(`◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. ${seatLine}`);
+      // FULL-SEAT SHORTFALL (gap round 2026-11-02, item 2): a lesser seat
+      // is offered, but the audit never said what a full seat still
+      // wants — the Nov 2 round's lesser holder heard its own counts and
+      // nothing about the two missing waves. The audit now names the
+      // full-seat shortfall right after the seat line, on a lesser seat
+      // only (a full seat has nothing missing; a missing seat is already
+      // withdrawn above with its own nearer bars named).
+      try {
+        if (seat.seat === 'lesser' && typeof this.fullSeatShortfall === 'function') {
+          const fs = this.fullSeatShortfall(seat);
+          if (fs && fs.line) this.say(`◈ ${fs.line}`);
+        }
+      } catch (e) { console.warn('table full-seat shortfall', e); }
       // SEAT-TAKER VOICE: a villager sitter is named aloud at the sitting,
       // once. A self-sitter adds no line — the self flow's transcript is
       // unchanged. (The sitter's scenario beats vary in the path modules;
@@ -851,7 +927,13 @@
         let ot = null;
         try { ot = this.overtimeStanding ? this.overtimeStanding() : null; } catch (e) { console.warn('tablePreview overtime', e); }
         const why = this.tableEntryBlock();
-        return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
+        // FULL-SEAT SHORTFALL (gap round 2026-11-02, item 2): the Haven
+        // offer names the seat held, never what a full seat still wants.
+        // The preview now carries that naming ('' when the full seat is
+        // earned) so the Haven panel can show it where the seat is.
+        let fullShort = null;
+        try { fullShort = (typeof this.fullSeatShortfall === 'function') ? this.fullSeatShortfall(seat) : null; } catch (e) { fullShort = null; }
+        return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen, fullReady: !!(fullShort && fullShort.ready), fullShortfall: (fullShort && fullShort.line) || '' };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
     // ============ THE SEAT-TAKER CHOICE (Steve 2026-10-26, item 495) ============
