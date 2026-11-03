@@ -234,20 +234,41 @@
     const pBits=haulBits(partnerHaul),yBits=haulBits(playerHaul);
     return{ok:true,incomplete:true,line:first+' holds up their share. "Look at that — '+pBits+' for me, '+yBits+' for you. Same patch, both packs. ('+partnerKcal+' kcal theirs, '+playerKcal+' kcal yours.)"'};
    }
-   // Delivery and early ending share one unload: both shares become pantry
-   // items. The player's share is matched back out of the pack by its
-   // fields, so eating or dropping part of it before home honestly
-   // shrinks what arrives — the pantry never receives food nobody carries.
+   // Delivery and early ending share one unload: both shares come home.
+   // The player's share is matched back out of the pack by its fields, so
+   // eating or dropping part of it before home honestly shrinks what
+   // arrives — the pantry never receives food nobody carries. R73: the
+   // walk home runs the homecoming block FIRST, which stages every
+   // unprocessed pack item onto the kitchen counter (prep stash) — only
+   // finished food goes to the pantry. A player share of unprocessed food
+   // (elderberry that still needs cooking, unknown berries) is therefore
+   // already home on the counter when deliver runs; matching the pack
+   // alone reported it as "0 kcal from you" for food the player did carry
+   // home. Match the counter too, without removing counter food (it is
+   // already in the village's stores — deliver only counts it).
    const playerItems=[...(r.playerHaul||[])];
-   let deliveredPlayer=0,deliveredPartner=0;
+   let deliveredPlayer=0,deliveredPartner=0,pantryPlayer=0,counterKcal=0;
    for(const snap of playerItems){
     let need=snap.units||0;
     for(const it of [...(s.inventory||[])]){
      if(need<=0)break;
      if(!sameFields(it,snap))continue;
      const take=Math.min(need,it.units||0);
-     try{deliveredPlayer+=this.depositPantryPieces(v,Object.assign({},snap,{units:take}),500)||0;}catch(e){}
+     let dep=0;
+     try{dep=this.depositPantryPieces(v,Object.assign({},snap,{units:take}),500)||0;}catch(e){console.log('forage deliver deposit: '+(e&&e.message));}
+     deliveredPlayer+=dep;pantryPlayer+=dep;
      it.units-=take;need-=take;
+    }
+    if(need>0){
+     let stash=null;
+     try{stash=(typeof this.prepStash==='function')?this.prepStash():null;}catch(e){console.log('forage deliver counter read: '+(e&&e.message));}
+     for(const it of [...(stash||[])]){
+      if(need<=0)break;
+      if(!sameFields(it,snap))continue;
+      const take=Math.min(need,it.units||0);
+      const kcal=(Number(snap.kcalEach)||0)*take;
+      deliveredPlayer+=kcal;counterKcal+=kcal;need-=take;
+     }
     }
    }
    s.inventory=(s.inventory||[]).filter(it=>(it.units||0)>0);
@@ -262,19 +283,20 @@
     try{deliveredPartner+=this.depositPantryPieces(v,Object.assign({},item),500)||0;}catch(e){}
    }
    const delivered=deliveredPlayer+deliveredPartner;
-   r.returned=true;r.returnedDay=s.day;r.deliveredKcal=delivered;r.deliveredPlayerKcal=deliveredPlayer;r.deliveredPartnerKcal=deliveredPartner;
+   const deliveredPantry=pantryPlayer+deliveredPartner;
+   r.returned=true;r.returnedDay=s.day;r.deliveredKcal=delivered;r.deliveredPlayerKcal=deliveredPlayer;r.deliveredPartnerKcal=deliveredPartner;r.deliveredPlayerCounterKcal=counterKcal;
    if(status.action==='forage_end'){
     if(v.promises?.[vid]&&!v.promises[vid].kept)this.convoFavorRenounce(vid);
    }else this.checkPromises('food',vid,{forageFavorId:f.id});
    const missed=v.promises?.[vid]?.kept!==true;
    f.state=missed?'broken':'fulfilled';if(!missed)f.fulfilledDay=s.day;
-   try{this.tele('favor_forage_return',{favorId:f.id,partner:vid,playerKcal:deliveredPlayer,partnerKcal:deliveredPartner,deliveredKcal:delivered,kept:!missed,endedEarly:status.action==='forage_end'});}catch(e){}
+   try{this.tele('favor_forage_return',{favorId:f.id,partner:vid,playerKcal:deliveredPlayer,partnerKcal:deliveredPartner,deliveredKcal:delivered,playerCounterKcal:counterKcal,kept:!missed,endedEarly:status.action==='forage_end'});}catch(e){}
    this.journalFavorPromise?.(vid,v.promises?.[vid]);this.save();
    if(partnerGone&&status.action==='forage_end'){
     const dead=!!this.getPerson(vid)?.dead;
-    return{ok:true,close:true,promiseMissed:missed,line:'You unload your share: '+deliveredPlayer+' kcal into the pantry. '+first+'\'s share '+(dead?'is lost with them.':'stays with them, wherever they are.')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':'')};
+    return{ok:true,close:true,promiseMissed:missed,line:'You unload your share: '+pantryPlayer+' kcal into the pantry'+(counterKcal>0?' — and your '+counterKcal+' kcal waits on the counter, still to be cooked':'')+'. '+first+'\'s share '+(dead?'is lost with them.':'stays with them, wherever they are.')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':'')};
    }
-   return{ok:true,close:true,promiseMissed:missed,line:'You unload both shares: '+deliveredPlayer+' kcal from you, '+deliveredPartner+' kcal from '+first+' — '+delivered+' kcal into the pantry.'+(missed?' The promise was missed; unloading does not earn kept-promise credit.':' You both made the trip and brought the food home.')};
+   return{ok:true,close:true,promiseMissed:missed,line:'You unload both shares: '+deliveredPlayer+' kcal from you, '+deliveredPartner+' kcal from '+first+' — '+deliveredPantry+' kcal into the pantry'+(counterKcal>0?' (your '+counterKcal+' kcal waits on the counter — it still needs cooking)':'')+'.'+(missed?' The promise was missed; unloading does not earn kept-promise credit.':' You both made the trip and brought the food home.')};
   },
  });
  const traveling=G.travelingWith;
