@@ -1654,6 +1654,14 @@
       if (this.inCombat && this.inCombat()) return blocked('Finish the fight before helping.');
       const person = this.getPerson(vid);
       if (!(v.roster || []).includes(vid) || vid === this.villagerId || !person || person.dead) return blocked('They are no longer available to receive help.');
+      // GAP-BATCH 16(a) (r107 F1): an away partner used to fall through to
+      // the walk-to-them line below — telling the player to step next to
+      // someone miles out on the road. Away is not unavailability (they
+      // come back) and it is not adjacency (you cannot walk to them), so
+      // it gets its own plain line. Ready stays false either way; only
+      // the wording changes, and only for the generic kinds (delegated
+      // kinds returned above with their own wording).
+      if (v.away?.[vid]) return blocked('They are out on the road, miles from here. Find them when they are back.');
       const node = v.nodePos?.[vid] || { nx: v.px ?? 4, ny: v.py ?? 4 }, pos = v.positions?.[vid];
       const haven = this.map.px === (v.px ?? 4) && this.map.py === (v.py ?? 4);
       if (v.away?.[vid] || node.nx !== this.map.px || node.ny !== this.map.py ||
