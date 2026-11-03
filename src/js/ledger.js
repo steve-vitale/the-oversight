@@ -882,6 +882,16 @@
       // should take your XP or the abilities. You become that villager."):
       // their own abilities, tracks, XP, skills, knowledge and gear; what
       // they wore stays worn (villager-build.js mantleBecome lists each field).
+      // MANTLE-PASS REACTOR VOICE (journey-scale r91, carried from r90):
+      // the install promised "It does not come out" / "You will never be
+      // hungry again" — but the benefit is per-bearer: mantleBecome gives
+      // the successor their own abilities, so a reactor bearer's successor
+      // wakes uncovered while the world's installed flag stays set (no
+      // second reactor ever rises, by design). Say the loss aloud — the
+      // new bearer must not be left believing hunger is still covered.
+      // Narration only: no state, number, gate, or threshold changes.
+      const _mantleHadReactor = !!((s.fusionReactor || {}).installed)
+        && (s.abilities || []).some(a => ((a && a.id) || a) === 'fusion_reactor');
       try {
         if (typeof this.mantleBecome === 'function') this.mantleBecome(oldId, newId);
         // KEEPSAKE GROWTH (Steve 2026-10-14): the successor's keepsakes start
@@ -889,6 +899,10 @@
         delete s.ksGrowthV;
         if (typeof this.migrateKeepsakes === 'function') this.migrateKeepsakes();
       } catch (e) { console.warn('[mantle] successor kit', e); }
+      try {
+        const _mantleHasReactor = (s.abilities || []).some(a => ((a && a.id) || a) === 'fusion_reactor');
+        if (_mantleHadReactor && !_mantleHasReactor) this.say(`The warm hum behind your ribs is gone. The reactor went with ${oldFirst}'s body — it does not come out, and it does not pass on. Hunger is back on the table. (One reactor per world, and the world already spent its one.)`);
+      } catch (e) { console.warn('[mantle] reactor voice', e); }
       // NEW BODY, NEW RECORD (rogue P1 2026-10-22): the playstyle axes, the
       // practiced stats and the earned passives are the OLD body's personal
       // record — "the game notices who you are" was THEIR behavior, "the work
