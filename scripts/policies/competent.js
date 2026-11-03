@@ -1747,6 +1747,41 @@ function assignAnother(Game, task, occWords, ctx) {
   } catch (e) { return false; }
 }
 
+// STAFF DEADFALL (gap-batch 14, 2026-11-03): the competent policy never
+// assigned the 'deadfall' duty (journey-scale r61-r73: 0 duty lines on
+// every seed), so the communal stick/fiber pile only grew by accident
+// while arrow and fletching work starved. The duty itself already exists
+// in game code (delegateTasks + resolveOneAssignment, stone-duty shape)
+// and the sim-deadfall-b layer already proved the staffing shape; this
+// ports that shape into the base policy, following the fish crew in
+// counterPlay exactly: the same assignAnother walk-down (a refusal moves
+// to the next candidate, never forced), the same free-villagers-only
+// pool, the same in-person verb. Thresholds are deadfall-b's, unchanged
+// (no retune): top up to 2 workers while the communal pile holds fewer
+// than 6 sticks. Called after fish and cook in counterPlay, so it takes
+// only leftover hands — fish and cook staffing are untouched.
+const DEADFALL_PILE_WANT = 6;
+const DEADFALL_WANT = 2;
+function staffDeadfallDuty(Game, ctx) {
+  try {
+    if (!Game.playerAtHaven || !Game.playerAtHaven()) return 0;
+    const v = Game.state.village || {};
+    const have = Object.values(v.assignments || {}).filter(a => a && a.task === 'deadfall').length;
+    if (have >= DEADFALL_WANT) return 0;
+    let sticks = 0;
+    try { const st = Game.stashState ? Game.stashState() : null; sticks = (st && st.materials && st.materials.stick) || 0; } catch (e) {}
+    if (sticks >= DEADFALL_PILE_WANT) return 0;
+    let staffed = 0;
+    for (let i = have; i < DEADFALL_WANT; i++) {
+      if (assignAnother(Game, 'deadfall', ['forager', 'lumberjack', 'carpenter', 'handyman', 'builder', 'farmer', 'gardener'], ctx)) {
+        staffed++;
+        if (ctx) ctx.deadfallStaffed = (ctx.deadfallStaffed || 0) + 1;
+      } else break;
+    }
+    return staffed;
+  } catch (e) { return 0; }
+}
+
 function counterPlay(Game, ctx) {
   try {
     if (!Game.playerAtHaven || !Game.playerAtHaven()) return;
@@ -1822,6 +1857,9 @@ function counterPlay(Game, ctx) {
         }
       }
     } catch (e) {}
+    // STAFF DEADFALL (gap-batch 14): after fish + cook, top up the
+    // deadfall crew from leftover free hands (see staffDeadfallDuty).
+    try { staffDeadfallDuty(Game, ctx); } catch (e) {}
     // (trap setting now lives in workTrapline, called from daily)
   } catch (e) {}
 }
@@ -3014,6 +3052,126 @@ function w2disengageSkipTile(Game, ctx, x, y) {
   } catch (e) {}
   return false;
 }
+// HAVEN-DOORSTEP (gap-batch 15, 2026-11-03): ports journey-landing r88's
+// driver-only HAVEN-DOORSTEP step into the policy, and extends it to
+// non-scholars. r88 proved the scholar trap: a scholar standing at the
+// Haven node but OUTSIDE the hall, hungry or thirsty, with a full pantry,
+// starved because competentEat's hands are blocked outside the hall
+// (havenStoresAccess() === 'none') and no step ever walked them inside.
+// The r88 driver step rescued scholars (31 of 32 triggered steps ate) by
+// stepping inside and eating/drinking before sleep. That step only ever
+// looked at the scholar, so a starving villager at Haven had no
+// classifier and no rescue at all. This step is ONE step with two
+// branches sharing the same enter-hall + pantry-take path (no second,
+// parallel rescue system):
+//   SCHOLAR branch — r88's thresholds, unchanged: at Haven, outside the
+//   hall (not in a tent), kcal < 50% of cap or hydration < 25 -> step
+//   inside, eat (competentEat: pack, then pantry takes to 95% cap),
+//   drink (drinkSafe). Runs at the end of daily(), i.e. before sleep,
+//   exactly where the r88 driver ran it.
+//   VILLAGER branch — the classifier for non-scholars: a living
+//   villager who is AT Haven with the scholar (not away, not dead, not
+//   the scholar — people the scholar can actually see and hand food to;
+//   away villagers are excluded on purpose, even though giveFood would
+//   accept them: handing food to someone miles away would be a
+//   roster-fed shortcut, not a sensed one) and visibly hungry
+//   (npcNeeds hunger >= 70, the engine's own hungry threshold — the
+//   "watching the cookpot" state) is doorstep-needy when food is at
+//   hand. The scholar shares a meal through the existing giveFood
+//   'meal' verb (the same verb keepPromiseFood uses), drawing ready
+//   pantry food into the pack first when the pack is thin, exactly as
+//   keepPromiseFood already does. The scholar eats first: villagers are
+//   fed only when the scholar holds at least 500 kcal after their own
+//   branch (keepPromiseFood's floor, not a new threshold), so the leader
+//   never starves themself to feed the village. A "fed" villager is one
+//   whose hunger fell after giveFood; a triggered step that gains
+//   nothing counts as noGain, the same honesty rule as r88's ate/noGain
+//   split. Counts live on ctx (doorstep*) and nowhere else.
+const DOORSTEP_HUNGER = 70;
+const DOORSTEP_SCHOLAR_FLOOR = 500;
+function doorstepPackUnits(Game) {
+  try {
+    const inv = ((Game.state || {}).scholar || {}).inventory || [];
+    let n = 0;
+    for (const it of inv) {
+      if (!it || (it.kcalEach || 0) <= 0 || (it.units || 0) <= 0 || it.edible === false || it.bonded) continue;
+      try { if (Game.isSpoiled && Game.isSpoiled(it)) continue; } catch (e) {}
+      n += it.units;
+    }
+    return n;
+  } catch (e) { return 0; }
+}
+function doorstepStep(Game, ctx) {
+  try {
+    if (Game.over) return;
+    try { if (Game.inCombat && Game.inCombat()) return; } catch (e) {}
+    if (!Game.playerAtHaven || !Game.playerAtHaven()) return;
+    const s = Game.state.scholar || {};
+    if (ctx) ctx.doorstepChecks = (ctx.doorstepChecks || 0) + 1;
+    // SCHOLAR branch (r88, in-policy).
+    const cap = (Game.kcalCap ? Game.kcalCap() : 2000) || 2000;
+    const needEat = (s.kcal || 0) < cap * 0.5;
+    const needDrink = (s.hydration || 0) < 25;
+    if (!s.insideHaven && !s.insideTent && (needEat || needDrink)) {
+      const kcalBefore = s.kcal || 0, hydBefore = s.hydration || 0;
+      try { Game.enterBuilding(); } catch (e) {}
+      try { if (needEat) competentEat(Game); } catch (e) {}
+      try { if (needDrink) drinkSafe(Game, ctx); } catch (e) {}
+      if (ctx) {
+        ctx.doorstepScholarTrig = (ctx.doorstepScholarTrig || 0) + 1;
+        if (((Game.state.scholar || {}).kcal || 0) > kcalBefore) ctx.doorstepScholarAte = (ctx.doorstepScholarAte || 0) + 1;
+        else if (needEat) ctx.doorstepScholarNoGain = (ctx.doorstepScholarNoGain || 0) + 1;
+        if (((Game.state.scholar || {}).hydration || 0) > hydBefore) ctx.doorstepScholarDrank = (ctx.doorstepScholarDrank || 0) + 1;
+      }
+    }
+    // VILLAGER branch (the non-scholar classifier + rescue, same step).
+    try {
+      const v = Game.state.village || {};
+      const s2 = Game.state.scholar || {};
+      if ((s2.kcal || 0) < DOORSTEP_SCHOLAR_FLOOR) {
+        if (ctx) ctx.doorstepVillagerSkippedLeader = (ctx.doorstepVillagerSkippedLeader || 0) + 1;
+        return;
+      }
+      const inside = !!s2.insideHaven;
+      for (const vid of (v.roster || [])) {
+        if (vid === Game.villagerId) continue;
+        let person = null;
+        try { person = Game.getPerson(vid); } catch (e) {}
+        if (!person || person.dead) continue;
+        if (v.away && v.away[vid]) continue; // not here: cannot see or hand food to them
+        let hunger = 0;
+        try { hunger = (Game.npcNeeds(vid) || {}).hunger || 0; } catch (e) {}
+        if (hunger < DOORSTEP_HUNGER) continue;
+        let packUnits = doorstepPackUnits(Game);
+        if (packUnits < 3 && inside) {
+          let guard = 0;
+          while (packUnits < 3 && guard++ < 20) {
+            const pantry = v.pantry || [];
+            let bi = -1;
+            for (let i = 0; i < pantry.length; i++) {
+              const it = pantry[i];
+              if (it && (it.kcalEach || 0) > 0 && (it.units || 0) > 0 && it.plantId !== 'meat_human' && gardenFoodReady(Game, it)) { bi = i; break; }
+            }
+            if (bi < 0) break;
+            try { Game.takeFromPantry(bi); } catch (e) { break; }
+            packUnits = doorstepPackUnits(Game);
+          }
+        }
+        if (packUnits < 1) { if (ctx) ctx.doorstepVillagerNoFood = (ctx.doorstepVillagerNoFood || 0) + 1; continue; }
+        const before = hunger;
+        try { Game.giveFood(vid, 'meal'); } catch (e) {}
+        let after = before;
+        try { after = (Game.npcNeeds(vid) || {}).hunger || 0; } catch (e) {}
+        if (ctx) {
+          ctx.doorstepVillagerTrig = (ctx.doorstepVillagerTrig || 0) + 1;
+          if (after < before) ctx.doorstepVillagerFed = (ctx.doorstepVillagerFed || 0) + 1;
+          else ctx.doorstepVillagerNoGain = (ctx.doorstepVillagerNoGain || 0) + 1;
+        }
+      }
+    } catch (e) {}
+  } catch (e) {}
+}
+
 // ---------------------------------------------------------------------------
 
 const competent = {
@@ -3173,6 +3331,10 @@ const competent = {
     // away-origin trip returns, and failed trip returns alike: the
     // villager is away at day's end and home is known.
     goHomeStanding(Game, ctx);
+    // HAVEN-DOORSTEP (gap-batch 15): end-of-day step inside + eat/drink
+    // for the scholar, and a shared meal for hungry villagers at Haven —
+    // the r88 driver step, in-policy, before the harness sleeps.
+    try { doorstepStep(Game, ctx); } catch (e) {}
   },
   // Fight only with advantage: assess at fight START and walk away from bad
   // ones (an experienced player doesn't take 3:1 fights). Below 35% HP,
@@ -3494,5 +3656,10 @@ module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walk
 module.exports.gearUp = gearUp;
 
 module.exports.workGarden = workGarden;
+module.exports.staffDeadfallDuty = staffDeadfallDuty;
+module.exports.doorstepStep = doorstepStep;
+module.exports.DEADFALL_PILE_WANT = DEADFALL_PILE_WANT;
+module.exports.DEADFALL_WANT = DEADFALL_WANT;
+module.exports.DOORSTEP_HUNGER = DOORSTEP_HUNGER;
 module.exports.donateSurplus = donateSurplus;
 module.exports.assignAnother = assignAnother; // sim-fishfallback-b proof test
