@@ -1,0 +1,40 @@
+DAY1-IDENTITY seed=69702 PASS
+REPRO seed=69702 dest=0,7 stage2Start=0,6 shadowDay6Start={"x":0,"y":6} shadowDay5AfterForced={"x":0,"y":6} armedDay5AfterForced={"x":3,"y":6} PASS
+INTEGRITY seed=69702 shape=C dest=0,7 origin=0,6 FAIL reason=start-mismatch sStart={"x":0,"y":6} aStart={"x":3,"y":6} sDay5After={"x":0,"y":6} aDay5After={"x":3,"y":6} sAttempt={"hop":"0,6>0,7","attempted":true,"moved":false,"reason":"refused"} aAttempt={"hop":"0,6>0,7","attempted":false,"moved":false,"reason":"not-offered"} shadowAttemptSimOk=false armedAttemptVetoed=absent armedAttemptOriginSimOk=absent
+SUMMARY shape=C dest=0,7 origin=0,6 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=0 integrityFail=1 establishedBand=0 establishedStrict=0 failures=69702:C:start-mismatch
+
+DAY1-IDENTITY seed=69704 PASS
+REPRO seed=69704 dest=1,7 stage2Start=2,7 shadowDay6Start={"x":2,"y":7} shadowDay5AfterForced={"x":2,"y":7} armedDay5AfterForced={"x":2,"y":7} PASS
+INTEGRITY seed=69704 shape=C dest=1,7 origin=0,7 OK day6Start={"x":2,"y":7} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=true armedDayEndOk=true armedDay6End={"x":3,"y":6} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=1,7 origin=0,7 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
+DAY1-IDENTITY seed=69706 PASS
+REPRO seed=69706 dest=0,1 stage2Start=1,1 shadowDay6Start={"x":1,"y":1} shadowDay5AfterForced={"x":1,"y":1} armedDay5AfterForced={"x":1,"y":1} PASS
+INTEGRITY seed=69706 shape=C dest=0,1 origin=0,2 OK day6Start={"x":1,"y":1} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=true armedDayEndOk=true armedDay6End={"x":1,"y":1} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=0,1 origin=0,2 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
+DAY1-IDENTITY seed=69707 PASS
+REPRO seed=69707 dest=8,3 stage2Start=7,3 shadowDay6Start={"x":7,"y":3} shadowDay5AfterForced={"x":7,"y":3} armedDay5AfterForced={"x":7,"y":3} PASS
+INTEGRITY seed=69707 shape=C dest=8,3 origin=7,3 OK day6Start={"x":7,"y":3} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=false armedDayEndOk=true armedDay6End={"x":7,"y":3} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=8,3 origin=7,3 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
+DAY1-IDENTITY seed=69709 PASS
+REPRO seed=69709 dest=1,1 stage2Start=1,2 shadowDay6Start={"x":1,"y":2} shadowDay5AfterForced={"x":1,"y":2} armedDay5AfterForced={"x":1,"y":2} PASS
+INTEGRITY seed=69709 shape=C dest=1,1 origin=1,2 OK day6Start={"x":1,"y":2} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=false armedDayEndOk=true armedDay6End={"x":1,"y":2} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=1,1 origin=1,2 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
+DAY1-IDENTITY seed=69713 PASS
+REPRO seed=69713 dest=8,4 stage2Start=6,4 shadowDay6Start={"x":6,"y":4} shadowDay5AfterForced={"x":6,"y":4} armedDay5AfterForced={"x":6,"y":4} PASS
+INTEGRITY seed=69713 shape=C dest=8,4 origin=7,4 OK day6Start={"x":6,"y":4} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=true armedDayEndOk=true armedDay6End={"x":6,"y":4} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=8,4 origin=7,4 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
+DAY1-IDENTITY seed=69714 PASS
+REPRO seed=69714 dest=0,3 stage2Start=1,4 shadowDay6Start={"x":1,"y":4} shadowDay5AfterForced={"x":1,"y":4} armedDay5AfterForced={"x":1,"y":4} PASS
+INTEGRITY seed=69714 shape=C dest=0,3 origin=0,4 OK day6Start={"x":1,"y":4} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=true armedDayEndOk=true armedDay6End={"x":1,"y":4} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=0,3 origin=0,4 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
+DAY1-IDENTITY seed=69717 PASS
+REPRO seed=69717 dest=0,3 stage2Start=0,4 shadowDay6Start={"x":0,"y":4} shadowDay5AfterForced={"x":0,"y":4} armedDay5AfterForced={"x":0,"y":4} PASS
+INTEGRITY seed=69717 shape=C dest=0,3 origin=0,4 OK day6Start={"x":0,"y":4} shadowAttemptSimOk=false armedAttemptVetoed=true armedAttemptOriginSimOk=null armedAttemptHomeward=false establishedBand=true establishedStrict=false shadowDayEndOk=false armedDayEndOk=true armedDay6End={"x":0,"y":4} armedHomewardVetoes=0 armedVetoOriginPass=0 armedVetoOriginFail=0
+SUMMARY shape=C dest=0,3 origin=0,4 seeds=1 day1Pass=1 day1Fail=0 reproPass=1 reproFail=0 integrityOk=1 integrityFail=0 establishedBand=1 establishedStrict=0 failures=
+
