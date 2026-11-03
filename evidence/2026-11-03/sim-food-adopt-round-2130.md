@@ -23,12 +23,17 @@ not assumed:
   streakfree-cost heartbeat was 19+ min stale (23:14:27Z at ~17:33
   CST check); no fresh corpus writes after the timeout. The run
   is dead; this closeout does not race a live worker.
-- Streakfree-cost arm: NOT merged (correct — see below). Branch
-  sim-streakfree-cost-b exists with exactly its three commits
-  (c14c9902a, 9818ac98a, 271a46089); worktree clean at tip.
-  Branch + worktree PRESERVED (same standing practice as
-  sim-streakfree-b from 1930Z); the reaper keeps unmerged
-  branches, so nothing is lost by leaving it.
+- Streakfree-cost arm: UNMERGED AT VERIFICATION (~17:35 CST) —
+  branch sim-streakfree-cost-b existed with exactly its three
+  commits (c14c9902a, 9818ac98a, 271a46089); worktree clean at
+  tip. SUPERSEDED BEFORE THIS EVIDENCE MERGED: the incoming
+  2330Z Loop B run's stale-lock recovery landed the arm first
+  (rebased as bd99525a7 / 5caadc1c3 / e483747cc on master; its
+  claim says so explicitly), and the batch ship then shipped
+  master. The arm's verdict below is unchanged — only its landing
+  status changed, from unmerged to landed, between verification
+  and merge. The original branch still exists; master now carries
+  the arm.
 - Main tree clean at closeout except the landed commits; HEAD
   42f0bd49f verified after all steps below.
 
@@ -56,13 +61,15 @@ no still-collapsing exclusions, cross-check 0 mismatches on 26/26
 verified legs, determinism 3/3 byte-identical, tracer-vs-screen
 28/28 byte-identical (substrate finding, carried below).
 
-NOT merged because there is nothing to land: the arm judged an
-instrument question and the instrument did not verify. Proofs were
-not re-run on a rebased tip because no rebase is needed for an
-unmerged arm. Next streakfree work must answer the tracer
-question first (is daysAlive miscounted by the tracer, or does
-the engine end a leg a day early on these two shapes?) before any
-cost-leg judging can be trusted.
+LANDING STATUS, CORRECTED: the arm's evidence commits were
+subsequently landed by the 2330Z run's stale-lock recovery
+(rebased as bd99525a7 / 5caadc1c3 / e483747cc on master, then
+shipped). The "not merged" observation in the recovery section
+above was true at ~17:35 CST verification and stale by merge time;
+the verdict itself (INSUFFICIENT-DATA) is unchanged. Next
+streakfree work must answer the tracer question first (is daysAlive
+miscounted by the tracer, or does the engine end a leg a day early
+on these two shapes?) before any cost-leg judging can be trusted.
 
 ## Arm 2 — sim-hurttraveler-b: GO, LANDED (narration-only)
 
@@ -149,7 +156,9 @@ Food-economy stays CONVERGING (not converged): the away-ration
 formula story is closed (1930Z); the hurt-traveler narration gap
 is closed (this run); the (v*) cost leg is inconclusive again,
 this time on instrument verification rather than survivor drift.
-Claim file and lock file deleted at closeout end. Run note
+Claim file and lock file were retired to .DEAD by the incoming
+2330Z Loop B run's stale-lock recovery (23:38Z), not deleted by
+this closeout. Run note
 appended to ~/memory/2026-11-03.md. No goal-timeline file exists
 in hidden_files; the record is this evidence file + the tracker
 review below + the memory note.
