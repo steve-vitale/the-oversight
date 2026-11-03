@@ -176,7 +176,8 @@ async function main() {
     const sn = hl.snap, purp = (sn.away && sn.away.purpose) || '?';
     const err = errandFor(purp);
     if (err) assert.ok(hl.line.includes(err), `live line must carry errand "${err}" for ${purp}: ${hl.line}`);
-    if (sn.obj && sn.obj.state === 'returning') assert.ok(/already walking home/.test(hl.line), 'returning line: ' + hl.line);
+    if (purp === 'leave') assert.ok(/walked away from Haven and haven't come back/.test(hl.line), 'leave line: ' + hl.line);
+    else if (sn.obj && sn.obj.state === 'returning') assert.ok(/already walking home/.test(hl.line), 'returning line: ' + hl.line);
     else if (sn.partsLeft != null && sn.partsLeft <= 0) assert.ok(/due home/.test(hl.line), 'due-home line: ' + hl.line);
     else assert.ok(/trip isn.t over yet/.test(hl.line), 'ongoing-trip line: ' + hl.line);
     assert.ok(hl.line.startsWith(sn.name.split(' ')[0]), 'live line starts with own first name: ' + hl.line);
