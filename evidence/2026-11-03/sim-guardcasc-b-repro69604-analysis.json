@@ -1,0 +1,493 @@
+{
+  "seed": 69604,
+  "day1": {
+    "ok": true,
+    "diverging": []
+  },
+  "shadow": {
+    "daysAlive": 30,
+    "endReason": "survived",
+    "playerDeaths": []
+  },
+  "armed": {
+    "daysAlive": 30,
+    "endReason": "survived",
+    "playerDeaths": [
+      {
+        "day": 6,
+        "kind": "villager",
+        "who": "gen_5rd3jnj",
+        "cause": "the wild"
+      }
+    ]
+  },
+  "vetoes": {
+    "day5": [
+      {
+        "from": [
+          2,
+          8
+        ],
+        "to": [
+          1,
+          8
+        ],
+        "simOk": false,
+        "silent": false,
+        "homeward": false,
+        "vetoCause": "escape",
+        "allowPrime": false
+      }
+    ],
+    "day6": []
+  },
+  "armedVetoDays": [
+    5
+  ],
+  "candidateDetail": [
+    {
+      "vetoDay": 5,
+      "window": [
+        5,
+        7
+      ],
+      "armedDeaths": [
+        {
+          "day": 6,
+          "kind": "villager",
+          "who": "gen_5rd3jnj",
+          "cause": "the wild"
+        }
+      ],
+      "shadowDeaths": [],
+      "successor": {
+        "record": [
+          {
+            "loopDay": 6,
+            "pos": [
+              4,
+              4
+            ],
+            "kcal": 1500
+          }
+        ],
+        "say": [
+          {
+            "day": 6,
+            "seq": 499,
+            "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+          },
+          {
+            "day": 6,
+            "seq": 501,
+            "line": "🪞 You wake up somebody else. Colton Ochoa, 35 — a welder. Their hands know different work now: Iron Stomach."
+          }
+        ],
+        "found": true
+      },
+      "candidate": true
+    }
+  ],
+  "candidate": true,
+  "firstDivergenceDay5": {
+    "index": 60,
+    "shadow": "Travel 1 tile to creek.\n— Moving water —\nWater over stone, loud enough to cover your noise. You could drink here without announcing it.",
+    "armed": "You don't walk there — you couldn't get home from there."
+  },
+  "trace": {
+    "shadowDays": [
+      {
+        "loopDay": 5,
+        "start": {
+          "pos": {
+            "x": 4,
+            "y": 4
+          },
+          "kcal": 1000,
+          "day": 5
+        },
+        "end": {
+          "pos": {
+            "x": 2,
+            "y": 8
+          },
+          "kcal": 980,
+          "day": 5
+        },
+        "vetoes": 0,
+        "silentVetoes": 0,
+        "construct": {
+          "kind": "walkout",
+          "startPos": {
+            "x": 4,
+            "y": 4
+          },
+          "posAfterForced": {
+            "x": 2,
+            "y": 8
+          },
+          "attempt": null
+        },
+        "dayEndReturnSim": {
+          "ok": true,
+          "via": "direct",
+          "directOk": true,
+          "legs": 0,
+          "reason": null,
+          "creditUsed": 0,
+          "hops": 2,
+          "beyondUngenerated": 0
+        }
+      },
+      {
+        "loopDay": 6,
+        "start": {
+          "pos": {
+            "x": 2,
+            "y": 8
+          },
+          "kcal": 234,
+          "day": 6
+        },
+        "end": {
+          "pos": {
+            "x": 4,
+            "y": 8
+          },
+          "kcal": 164,
+          "day": 6
+        },
+        "vetoes": 0,
+        "silentVetoes": 0,
+        "construct": {
+          "kind": "attempt",
+          "startPos": {
+            "x": 2,
+            "y": 8
+          },
+          "posAfterForced": {
+            "x": 4,
+            "y": 8
+          },
+          "attempt": {
+            "hop": "2,8>4,8",
+            "attempted": true,
+            "moved": true,
+            "reason": "ok"
+          }
+        },
+        "dayEndReturnSim": {
+          "ok": true,
+          "via": "direct",
+          "directOk": true,
+          "legs": 0,
+          "reason": null,
+          "creditUsed": 0,
+          "hops": 2,
+          "beyondUngenerated": 0
+        }
+      },
+      {
+        "loopDay": 7,
+        "start": {
+          "pos": {
+            "x": 4,
+            "y": 8
+          },
+          "kcal": 49,
+          "day": 7
+        },
+        "end": {
+          "pos": {
+            "x": 4,
+            "y": 8
+          },
+          "kcal": 0,
+          "day": 7
+        },
+        "vetoes": 0,
+        "silentVetoes": 0,
+        "construct": null,
+        "dayEndReturnSim": {
+          "ok": true,
+          "via": "direct",
+          "directOk": true,
+          "legs": 0,
+          "reason": null,
+          "creditUsed": 0,
+          "hops": 2,
+          "beyondUngenerated": 0
+        }
+      }
+    ],
+    "armedDays": [
+      {
+        "loopDay": 5,
+        "start": {
+          "pos": {
+            "x": 4,
+            "y": 4
+          },
+          "kcal": 1000,
+          "day": 5
+        },
+        "end": {
+          "pos": {
+            "x": 2,
+            "y": 8
+          },
+          "kcal": 920,
+          "day": 5
+        },
+        "vetoes": 1,
+        "silentVetoes": 0,
+        "construct": {
+          "kind": "walkout",
+          "startPos": {
+            "x": 4,
+            "y": 4
+          },
+          "posAfterForced": {
+            "x": 2,
+            "y": 8
+          },
+          "attempt": null
+        },
+        "dayEndReturnSim": {
+          "ok": true,
+          "via": "direct",
+          "directOk": true,
+          "legs": 0,
+          "reason": null,
+          "creditUsed": 0,
+          "hops": 2,
+          "beyondUngenerated": 0
+        }
+      },
+      {
+        "loopDay": 6,
+        "start": {
+          "pos": {
+            "x": 4,
+            "y": 4
+          },
+          "kcal": 1500,
+          "day": 6
+        },
+        "end": {
+          "pos": {
+            "x": 4,
+            "y": 4
+          },
+          "kcal": 1430,
+          "day": 6
+        },
+        "vetoes": 0,
+        "silentVetoes": 0,
+        "construct": {
+          "kind": "attempt",
+          "startPos": {
+            "x": 4,
+            "y": 4
+          },
+          "posAfterForced": {
+            "x": 4,
+            "y": 4
+          },
+          "attempt": {
+            "hop": "2,8>4,8",
+            "attempted": false,
+            "moved": false,
+            "reason": "not-offered"
+          }
+        },
+        "dayEndReturnSim": {
+          "ok": true,
+          "via": "home",
+          "directOk": true,
+          "legs": 0,
+          "reason": "home",
+          "creditUsed": 0,
+          "hops": 0,
+          "beyondUngenerated": 0
+        }
+      },
+      {
+        "loopDay": 7,
+        "start": {
+          "pos": {
+            "x": 4,
+            "y": 4
+          },
+          "kcal": 2180,
+          "day": 7
+        },
+        "end": {
+          "pos": {
+            "x": 4,
+            "y": 4
+          },
+          "kcal": 2110,
+          "day": 7
+        },
+        "vetoes": 0,
+        "silentVetoes": 0,
+        "construct": null,
+        "dayEndReturnSim": {
+          "ok": true,
+          "via": "home",
+          "directOk": true,
+          "legs": 0,
+          "reason": "home",
+          "creditUsed": 0,
+          "hops": 0,
+          "beyondUngenerated": 0
+        }
+      }
+    ],
+    "armedVetoLines": [
+      {
+        "day": 5,
+        "seq": 403,
+        "line": "You don't walk there — you couldn't get home from there."
+      }
+    ],
+    "armedDeathLines": [
+      {
+        "day": 6,
+        "seq": 494,
+        "line": "🕯️ Ingrid Kelleher is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+      },
+      {
+        "day": 6,
+        "seq": 499,
+        "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+      },
+      {
+        "day": 6,
+        "seq": 501,
+        "line": "🪞 You wake up somebody else. Colton Ochoa, 35 — a welder. Their hands know different work now: Iron Stomach."
+      }
+    ],
+    "armedWakeDay6": [
+      {
+        "day": 6,
+        "seq": 427,
+        "line": "Dawn. You wake stiff and cold. (+0 health, energy restored. Your sleeping body burned less — 276 kcal conserved. Exposed. You'll wake stiff.)"
+      },
+      {
+        "day": 6,
+        "seq": 435,
+        "line": "You catch fragments by the fire — Arlo telling A woman, maybe 50s, with a wiry build about you. The details have shifted. Nobody seems to mind."
+      },
+      {
+        "day": 6,
+        "seq": 448,
+        "line": "You catch fragments by the fire — A woman, maybe 60s telling A woman, maybe 40s about Colton. Half of it's true anymore. You're not sure which half."
+      },
+      {
+        "day": 6,
+        "seq": 449,
+        "line": "You catch fragments by the fire — Arlo telling Colton about themself. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+      },
+      {
+        "day": 6,
+        "seq": 501,
+        "line": "🪞 You wake up somebody else. Colton Ochoa, 35 — a welder. Their hands know different work now: Iron Stomach."
+      }
+    ],
+    "shadowWakeDay6": [
+      {
+        "day": 6,
+        "seq": 428,
+        "line": "Dawn. You wake stiff and cold. (+0 health, energy restored. Your sleeping body burned less — 294 kcal conserved. Exposed. You'll wake stiff.)"
+      },
+      {
+        "day": 6,
+        "seq": 437,
+        "line": "You catch fragments by the fire — A woman, maybe 50s, with a wiry build telling Ethan about herself. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+      },
+      {
+        "day": 6,
+        "seq": 444,
+        "line": "You catch fragments by the fire — A woman, maybe 50s, with a wiry build telling Ethan about Colton. It's picking up decorations as it travels."
+      },
+      {
+        "day": 6,
+        "seq": 445,
+        "line": "You catch fragments by the fire — Yuki telling Colton about themself. It's barely the same story now. That's what fires do."
+      },
+      {
+        "day": 6,
+        "seq": 446,
+        "line": "You catch fragments by the fire — Arlo telling Yuki about A person, maybe 50s, with deep-set eyes. The truth left this story two fires ago. What's left is better theater."
+      },
+      {
+        "day": 6,
+        "seq": 447,
+        "line": "You catch fragments by the fire — Ethan telling Colton about himself. The story's getting bigger than what happened."
+      },
+      {
+        "day": 6,
+        "seq": 475,
+        "line": "You catch fragments by the fire — Devon telling A woman, maybe 60s about A person, maybe 50s, with deep-set eyes. The truth left this story two fires ago. What's left is better theater."
+      },
+      {
+        "day": 6,
+        "seq": 476,
+        "line": "You catch fragments by the fire — Colton telling Arlo about you. The story's getting bigger than what happened."
+      },
+      {
+        "day": 6,
+        "seq": 477,
+        "line": "You catch fragments by the fire — Carmine telling Devon about Arlo. Someone's added a flourish that wasn't there this morning."
+      }
+    ]
+  },
+  "repro": {
+    "rShadow": true,
+    "rShadowDiffs": [],
+    "rVeto": true,
+    "rVetoHop": {
+      "from": [
+        2,
+        8
+      ],
+      "to": [
+        1,
+        8
+      ],
+      "simOk": false,
+      "silent": false
+    },
+    "rOutcome": true,
+    "deathOk": true,
+    "successorSigDay6": {
+      "record": [
+        {
+          "loopDay": 6,
+          "pos": [
+            4,
+            4
+          ],
+          "kcal": 1500
+        }
+      ],
+      "say": [
+        {
+          "day": 6,
+          "seq": 499,
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "day": 6,
+          "seq": 501,
+          "line": "🪞 You wake up somebody else. Colton Ochoa, 35 — a welder. Their hands know different work now: Iron Stomach."
+        }
+      ],
+      "found": true
+    },
+    "entryVetoesDays56": [],
+    "reproYes": true
+  }
+}
