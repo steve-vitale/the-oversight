@@ -2289,6 +2289,67 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
   endTurn();
   return 'struck';
 }
+// Attempt one combat-ability press this turn (gap audit 2026-11-02, leg 1).
+// The competent policy used to press only garden buttons: fight() never
+// called useAbility, so held combat abilities sat at 0 calls across long
+// runs. This cascade presses a held combat button when its condition holds
+// and the food cost passes the dinner test (200 kcal kept back for dinner).
+// At most one turn-costing press per turn; a refused press costs nothing
+// and falls through to tricks/strikes. A spent turn is never followed by a
+// second endTurn (double-advance hazard): after a press we end the turn
+// ONLY if it is still the player's turn. Turn accounting reads engine
+// state, not the press return value — a fizzled press still spent the turn,
+// so nothing strikes after it.
+function abilityPressPlay(Game, f, ctx, p, endTurn) {
+  try {
+    if (ctx._abFight !== f) { ctx._abFight = f; ctx._abPressed = {}; }
+    const pressed = ctx._abPressed;
+    const live = (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+    if (!live.length) return false;
+    const hpPct = (p.hp || 0) / Math.max(1, p.maxHp || p.hp || 1);
+    const losing = hpPct < 0.5;
+    const totalMaxHp = live.reduce((s, m) => s + (m.maxHp || m.hp || 0), 0);
+    const nontrivial = totalMaxHp >= 40 || live.length >= 2 || losing;
+    const scholar = (Game.state || {}).scholar || {};
+    const DINNER_RESERVE = 200;
+    const tryPress = (aid, act) => {
+      try {
+        if (!Game.hasAbility(aid)) return false;
+        const def = ((Game.data || {}).abilities || []).find(a => a.id === aid);
+        const action = def && (def.actions || []).find(a => a.id === act);
+        if (!action) return false;
+        const avail = Game._actionAvailable(aid, action);
+        if (!avail || !avail.ok) return false;
+        if ((scholar.kcal || 0) - ((action.cost || {}).kcal || 0) < DINNER_RESERVE) return false;
+        const ok = Game.useAbility(aid, act);
+        const pf = Game.tbFighter ? Game.tbFighter('p') : p;
+        if (pf && pf.acted) {
+          if (ok) { ctx.abilityPresses = ctx.abilityPresses || {}; ctx.abilityPresses[aid] = (ctx.abilityPresses[aid] || 0) + 1; }
+          if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) endTurn();
+          return true;
+        }
+        if (!Game.tbfight || Game.tbfight.over || !Game.tbIsPlayerTurn()) return true;
+        return false;
+      } catch (e) { return false; }
+    };
+    // 1. Turncoat: split a multi-monster fight before anything else.
+    if (live.length >= 2 && tryPress('turncoat', 'persuade')) return true;
+    // 2. Losing: rally first.
+    if (losing && tryPress('war_cry', 'bellow')) return true;
+    // 3. Bird strike once per fight, on non-trivial fights only — never
+    // spend 60 kcal of birds on a lone hummice.
+    if (!pressed.bird_strike && nontrivial && tryPress('bird_strike', 'call')) { pressed.bird_strike = 1; return true; }
+    // 4. Losing: buy space with a control action, first available.
+    if (losing) {
+      if (tryPress('pocket_sand', 'throw_sand')) return true;
+      if (tryPress('freeze_tag', 'tag')) return true;
+      if (tryPress('fear_aura', 'loom')) return true;
+    }
+    // 5. Winning and non-trivial: press the advantage.
+    if (!losing && nontrivial && tryPress('rage', 'unleash_rage')) return true;
+    return false;
+  } catch (e) { return false; }
+}
 // Attempt one beast trick this turn. Returns true when the turn is consumed.
 function beastTrickPlay(Game, f, ctx, p, endTurn) {
   try {
@@ -3355,6 +3416,10 @@ const competent = {
         const _dpsVerdict = dpsRaceAssess(Game, f, ctx, p, flee);
         if (_dpsVerdict) return _dpsVerdict;
       } catch (e) {}
+      // COMBAT BUTTONS (gap audit 2026-11-02, leg 1): press a held combat
+      // ability when its condition holds, before trick play. A spent turn
+      // returns handled; a refusal falls through to tricks/strikes.
+      try { if (abilityPressPlay(Game, f, ctx, p, endTurn)) return true; } catch (e) {}
       // BEAST TRICKS (longsim combat r5 2026-10-12): play known monster
       // counters tactically before the generic strike-the-weakest. Never
       // overrides the walk-away assessment above.
