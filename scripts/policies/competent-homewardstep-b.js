@@ -81,6 +81,27 @@
 // lookup checks). It never calls genDetail and never reads unrevealed
 // ground beyond what travelTargets itself offers. Candidate stock is
 // read from tiles the policy itself could see (travelTargets offers).
+//
+// DEPLOY (gap round 2026-11-02, guard-E entry-checked allow):
+// the live veto rule is now allow' (see allowFromParts), validated as
+// an instrument in sim-guarde-entry-b (25/25 allow'-pass fidelity,
+// vetoes unchanged, 37/37 entry agreement) and deployed here with two
+// decisions that instrument deliberately left open:
+//   1. VETO WORDING: an entry veto says why the step itself cannot be
+//      taken (creek / washed-out / rubble / fallen tree), never the
+//      escape line. The escape line is kept verbatim for escape vetoes
+//      (E fails). Veto memory is unchanged: first veto of a destination
+//      speaks, repeats are silent, whatever the cause.
+//   2. ROADWORK CREDIT-POOL CARVE-OUT: the entry check shares E's ONE
+//      roadwork credit, it does not create a second one. A rubble-only,
+//      single-tile entry blockage passes ONLY when E's evaluation spent
+//      no credit (esc.creditUsed === 0); when E already spent the credit
+//      on the way home, the rubble entry vetoes. Creek, washed_out,
+//      fallen_tree and multi-tile entries never use the carve-out.
+//      On the validated corpus no rubble entry occurs, so the carve-out
+//      fires 0 times there and live allow equals the validated allow'
+//      on every validated hop. Thresholds, E itself, lateral legs,
+//      veto memory and all passthroughs are UNCHANGED.
 const { competent } = require('./competent');
 
 function havenOf(Game) {
@@ -194,6 +215,61 @@ function attemptHop(Game, px, py, tx, ty, pool) {
     pool.credit--; return { pass: true, creditUsed: 1, blockers: chk.blockers, beyondUngenerated: chk.beyondUngenerated };
   }
   return { pass: false, creditUsed: 0, blockers: chk.blockers, beyondUngenerated: chk.beyondUngenerated };
+}
+
+// ENTRY-CHECKED ALLOW' (deploy, see DEPLOY header note). Pure core, shared
+// by the live guard (allowPrimeForHop) and by record replay
+// (allowPrimeFromRecordLive), so the proof test exercises the same rule
+// the guard runs — never a second copy of it.
+//   allow = E ok AND entry passes, where entry passes iff blockers are
+//   empty OR the shared-credit carve-out applies: every blocker is
+//   rubble on a SINGLE distinct tile AND E spent no credit.
+function allowFromParts(eOk, creditUsed, blockers) {
+  const list = blockers || [];
+  if (!eOk) return { allow: false, carveOutUsed: false, entryBlocked: list.length > 0 };
+  if (list.length === 0) return { allow: true, carveOutUsed: false, entryBlocked: false };
+  const distinct = new Set(list.map((b) => (b.x + ',' + b.y)));
+  const allRubble = list.every((b) => b.blockType === 'rubble');
+  if (allRubble && distinct.size === 1 && !(creditUsed > 0)) {
+    return { allow: true, carveOutUsed: true, entryBlocked: true };
+  }
+  return { allow: false, carveOutUsed: false, entryBlocked: true };
+}
+
+function allowPrimeForHop(Game, px, py, tx, ty, esc) {
+  const entry = checkHop(Game, px, py, tx, ty);
+  const core = allowFromParts(!!(esc && esc.ok), (esc && esc.creditUsed) || 0, entry.blockers);
+  return {
+    allow: core.allow, eOk: !!(esc && esc.ok), carveOutUsed: core.carveOutUsed,
+    entryBlocked: core.entryBlocked,
+    entryBlockers: (entry.blockers || []).map((b) => ({ x: b.x, y: b.y, blockType: b.blockType || 'unknown' })),
+    entryBlockType: (entry.blockers && entry.blockers.length) ? (entry.blockers[0].blockType || 'unknown') : null,
+  };
+}
+
+function allowPrimeFromRecordLive(hop) {
+  const eOk = !!(hop && hop.E && hop.E.ok);
+  const creditUsed = (hop && hop.E && hop.E.creditUsed) || 0;
+  const blockers = (hop && hop.entry && hop.entry.blockers) || [];
+  const core = allowFromParts(eOk, creditUsed, blockers);
+  return {
+    allow: core.allow, eOk, carveOutUsed: core.carveOutUsed, entryBlocked: core.entryBlocked,
+    vetoOld: !eOk, vetoNew: !core.allow,
+    entryBlockers: blockers.map((b) => ({ x: b.x, y: b.y, blockType: b.blockType || 'unknown' })),
+    entryBlockType: blockers.length ? (blockers[0].blockType || 'unknown') : null,
+  };
+}
+
+// Player-facing veto line for an ENTRY veto, naming the barrier on the
+// step itself. The escape line (below, unchanged) is used only when E
+// fails. First blocker in engine scan order names the cause.
+function vetoLineForEntry(entryBlockers) {
+  const t = (entryBlockers && entryBlockers.length) ? (entryBlockers[0].blockType || 'unknown') : 'unknown';
+  if (t === 'creek') return "You don't step there — the creek runs fast here, with no bridge and no swim.";
+  if (t === 'washed_out') return "You don't step there — the path is washed out.";
+  if (t === 'rubble') return "You don't step there — rubble chokes the path.";
+  if (t === 'fallen_tree') return "You don't step there — a fallen tree blocks the way in.";
+  return "You don't step there — you can't get in that way.";
 }
 
 // Full walkTo-faithful return simulation against a SHARED credit pool.
@@ -324,41 +400,36 @@ function installGuard(Game, ctx, opts) {
       const dDest = manhattan(x, y, hv.x, hv.y);
       const isHomeward = dDest < dCur; // evaluated, NOT exempt (this arm's change)
       const esc = escapeCheck(Game, x, y, hv.x, hv.y);
-      // DEPLOY (sim-guarde-deploy-b): entry-checked allow' — the hop
-      // is allowed only if E passes AND the hop itself is
-      // engine-crossable from this origin (raw checkHop, no credit).
-      // vetoCause: 'escape' when E fails (the old veto set),
-      // 'entry' when E passes but entry is blocked (the new vetoes).
-      const entry = checkHop(Game, px, py, x, y);
-      const entryBlockers = (entry.blockers || []).map((b) => b.blockType || 'unknown');
-      const allowPrime = !!esc.ok && entryBlockers.length === 0;
-      const vetoCause = !esc.ok ? 'escape' : (!allowPrime ? 'entry' : null);
-      if (ctx) {
+      // DEPLOY: live allow is allow', not E alone. prime is computed on
+      // every guarded hop (shadow included) so the hop log records what
+      // the live rule would do even in shadow mode.
+      const prime = allowPrimeForHop(Game, px, py, x, y, esc);      if (ctx) {
         ctx.homewardstepSimChecks = (ctx.homewardstepSimChecks || 0) + 1;
         ctx.homewardstepBeyondUngenerated = (ctx.homewardstepBeyondUngenerated || 0) + (esc.beyondUngenerated || 0);
         if (esc.creditUsed) ctx.homewardstepCreditUses = (ctx.homewardstepCreditUses || 0) + esc.creditUsed;
         if (esc.ok && !esc.directOk) ctx.homewardstepLateralPasses = (ctx.homewardstepLateralPasses || 0) + 1;
+        if (prime.carveOutUsed) ctx.homewardstepEntryCreditUses = (ctx.homewardstepEntryCreditUses || 0) + 1;
         try {
           (ctx.homewardstepHopLog = ctx.homewardstepHopLog || []).push({
             from: { x: px, y: py }, to: { x, y },
             simOk: !!esc.ok, directOk: !!esc.directOk, via: esc.via || null,
             legs: esc.legs || 0, creditUsed: esc.creditUsed || 0,
             vetoed: false, homeward: !!isHomeward, originSimOk: null, silent: false, shadow: !!shadow,
-            allowPrime: !!allowPrime, vetoCause, entryBlockers,
-          });
+            allowPrime: !!prime.allow, entryBlockers: prime.entryBlockers,
+            carveOutUsed: !!prime.carveOutUsed, vetoCause: null,          });
           if (ctx.homewardstepHopLog.length > 20000) ctx.homewardstepHopLog.splice(0, ctx.homewardstepHopLog.length - 20000);
         } catch (e) {}
       }
-      if (allowPrime || shadow) {
+      if (prime.allow || shadow) {
         inOrig = true;
         try { return origTravelTo.apply(this, arguments); } finally { inOrig = false; }
       }
-      // VETO (when NOT allow': E fails, or E passes but entry is
-      // blocked): the scholar stays. walkTo breaks
-      // cleanly on no-move; a forage trip tries its next candidate,
-      // as it does for any refused hop. VETO MEMORY: first veto of a
-      // destination says the line; repeats are silent, still vetoed.
-      let silent = false;
+      // VETO (only when allow' fails — E fails, or the entry step itself
+      // is blocked): the scholar stays. walkTo breaks cleanly on
+      // no-move; a forage trip tries its next candidate, as it does
+      // for any refused hop. VETO MEMORY: first veto of a destination
+      // says the line; repeats are silent, still vetoed.
+      const vetoCause = !esc.ok ? 'escape' : 'entry';      let silent = false;
       try {
         if (!ctx) silent = false;
         else {
@@ -387,15 +458,16 @@ function installGuard(Game, ctx, opts) {
         else ctx.homewardstepSpokenVetoes = (ctx.homewardstepSpokenVetoes || 0) + 1;
         try {
           const log = ctx.homewardstepHopLog || [];
-          if (log.length) { log[log.length - 1].vetoed = true; log[log.length - 1].silent = !!silent; }
+          if (log.length) { log[log.length - 1].vetoed = true; log[log.length - 1].silent = !!silent; log[log.length - 1].vetoCause = vetoCause; }
         } catch (e) {}
       }
       if (!silent) {
-        // Veto line by cause (sim-guarde-deploy-b decision (a)):
-        // entry vetoes name the blocked step, escape vetoes keep
-        // the old line. A both-blocked hop is an escape veto.
-        try { Game.say(vetoCause === 'entry' ? "You can't step there — you couldn't get in from here." : "You don't walk there — you couldn't get home from there."); } catch (e) {}
-      }
+        // DEPLOY wording: an entry veto names the step's own barrier;
+        // the escape line is kept verbatim for escape vetoes only.
+        const line = vetoCause === 'entry'
+          ? vetoLineForEntry(prime.entryBlockers)
+          : "You don't walk there — you couldn't get home from there.";
+        try { Game.say(line); } catch (e) {}      }
       let block = null;
       try { block = Game.travelBlockage(x, y); } catch (e) {}
       if (block) return block;
@@ -421,4 +493,4 @@ const homewardstepShadow = Object.assign({}, competent, {
   daily(Game, ctx) { dailyWithGuard(Game, ctx, true); },
 });
 
-module.exports = { homewardstep, homewardstepShadow, installGuard, simulateReturnJump, checkHop, offersFrom, escapeCheck, lateralCandidates, havenOf };
+module.exports = { homewardstep, homewardstepShadow, installGuard, simulateReturnJump, checkHop, offersFrom, escapeCheck, lateralCandidates, havenOf, allowFromParts, allowPrimeForHop, allowPrimeFromRecordLive, vetoLineForEntry };
