@@ -357,7 +357,14 @@
         if (ling.length && (Game.state.lingererBeatDay || 0) !== lday) {
           const lnames = ling.map(m => { try { const d = (Game.data.monsters || []).find(x => x.id === m.id) || {}; return Game.monsterNoun ? Game.monsterNoun(d.id) : (d.name || 'something'); } catch (e) { return 'something'; } });
           const lnm = [...new Set(lnames)].join(', ');
-          out.push(`<div class="statrow beat-open">⚔️ <b>${esc(lnm)}</b> hold${ling.length === 1 ? 's' : ''} the treeline — gorging nightly. <button class="btn sm ghost" data-beat="lingerer:endure">Endure it</button> <button class="btn sm" data-beat="lingerer:sortie">Send a sortie (fighters, rations, real risk)</button></div>`);
+          // SORTIE TARGET (sim-sortietarget-a 2026-11-03, MATCH-FIRST): one
+          // sortie button per lingerer, carrying that entity's lingerKey —
+          // the player aims at the named beast, which is fought first.
+          // (Twin-name caveat: unidentified twins share a label by design
+          // — knowledge-gating — but each button still aims at its own
+          // entity. Endure stays single: it is a global answer.)
+          const sortieBtns = ling.map((m, i) => `<button class="btn sm" data-beat="lingerer:sortie:${esc(m.lingerKey || '')}">Send a sortie — ${esc(lnames[i])} first</button>`).join(' ');
+          out.push(`<div class="statrow beat-open">⚔️ <b>${esc(lnm)}</b> hold${ling.length === 1 ? 's' : ''} the treeline — gorging nightly. <button class="btn sm ghost" data-beat="lingerer:endure">Endure it</button> ${sortieBtns}</div>`);
         }
       } catch (e) { console.warn('lingerer beat', e); }
       // SAFETY NETS (2026-10-10): System aid quests, crisis relief, and
@@ -16915,7 +16922,7 @@
         if (spec[1] === 'cry') Game.callForHelp('cry', { abilityId: spec[2] });
         else Game.callForHelp(spec[1]);
       }
-      else if (kind === 'lingerer') Game.answerLingerer(spec[1]);
+      else if (kind === 'lingerer') Game.answerLingerer(spec[1], spec[2]);
       // SHELTER MUSTER (2026-10-17, journey crisis r20): manual stand-down
       // (the player's call, their risk) and re-muster (clears the
       // stand-down stamp and re-runs the episode check).

@@ -12,8 +12,9 @@
 //   - havenNeedGossip(next)
 //   - havenRaidTick()
 //   - lingeringRaiders()
-//   - answerLingerer(how)
-//   - lingererSortie()
+//   - lingerKeyFor(m)
+//   - answerLingerer(how, targetKey?)
+//   - lingererSortie(targetKey?)
 //   - raidPillage(v, kcal)
 //   - hearthStretch()
 //   - granarySpoilBonus(foodState)
@@ -245,6 +246,11 @@
           // is the honest default — name it and its price. The sortie is the
           // other answer, on the beats panel while they linger.
           this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.`);
+          // SORTIE TARGET (sim-sortietarget-a 2026-11-03): the gorge line
+          // IS the offer — record what was just announced, so an answer can
+          // aim at it. Announcement memory, not a roster: one entity, the
+          // last spoken, overwritten nightly.
+          try { this.state.lastLingererOffer = { key: this.lingerKeyFor ? this.lingerKeyFor(m) : null, name: mn, day }; } catch (e) {}
         }
         try { if (this.syncMonsterAlias) this.syncMonsterAlias(); } catch (e) {}
       } catch (e) {}
@@ -654,6 +660,7 @@
           // re-stamp an already-lingering raider.
           if (!m.lingering) { try { m.lingerSince = (this.state.scholar || {}).day || 0; } catch (e) {} }
           m.lingering = true;
+          try { if (this.lingerKeyFor) this.lingerKeyFor(m); } catch (e) {}
           this.say(`Nobody met ${this.articlePhrase(mname(m))} — it's still out there at the treeline. It'll gorge every night until it's driven off.`);
         }
       }
@@ -700,6 +707,7 @@
           for (const rm of live) {
             if (!rm.lingering) { try { rm.lingerSince = (this.state.scholar || {}).day || 0; } catch (e) {} }
             rm.lingering = true;
+            try { if (this.lingerKeyFor) this.lingerKeyFor(rm); } catch (e) {}
           }
           if (live.length) this.say(`Another shape at the treeline — but the way is already watched. It'll wait out there with the rest.`);
         } else if (live.length) {
@@ -771,31 +779,61 @@
     // Steve 2026-10-08.) Not routed through aidFight: it would replace the
     // mustered party with foreign allies mid-sortie and resolve the crisis
     // after the first kill — the sortie is the village's own fight.
+    // lingerKeyFor: stable per-entity token for a lingerer. World monsters
+    // carry no unique id (m.id is the monster-def id — twins share it — and
+    // havenGrowthDaily re-pins all lingerers to the Haven tile, so tile
+    // does not disambiguate either). The sortie target threads this token,
+    // stamped once when lingering starts and never re-stamped.
+    lingerKeyFor(m) {
+      try {
+        if (!m) return null;
+        if (!m.lingerKey) {
+          this.state.lingerKeySeq = ((this.state.lingerKeySeq || 0) + 1);
+          m.lingerKey = 'ling' + this.state.lingerKeySeq;
+        }
+        return m.lingerKey;
+      } catch (e) { console.warn('lingerKeyFor', e); return null; }
+    },
+
     lingeringRaiders() {
       try {
         const ms = this.worldMonsters ? this.worldMonsters() : [];
-        return ms.filter(m => m && m.lingering && (m.hp || 0) > 0);
+        const rs = ms.filter(m => m && m.lingering && (m.hp || 0) > 0);
+        for (const m of rs) { try { this.lingerKeyFor(m); } catch (e) {} }
+        return rs;
       } catch (e) { console.warn('lingeringRaiders', e); return []; }
     },
 
     // answerLingerer: the beats-panel choice. 'endure' is the explicit default
     // (doing nothing was always the same answer); 'sortie' pays the price.
-    answerLingerer(how) {
+    // targetKey (optional, sim-sortietarget-a 2026-11-03): the lingerKey of
+    // the lingerer to fight first — from a per-lingerer beats button, or
+    // from the last announced offer. Absent/unmatched: current order.
+    answerLingerer(how, targetKey) {
       if (how === 'endure') {
         const day = (this.state.scholar || {}).day || 0;
         this.state.lingererBeatDay = day;
         this.say(`You endure it. The treeline holds its shape against the dark; the stores take the night's cut. (They'll drift off within ~6 nights — the gorge is the price of waiting.)`);
         return 'endured';
       }
-      if (how === 'sortie') return this.lingererSortie();
+      if (how === 'sortie') return this.lingererSortie(targetKey);
       return null;
     },
 
-    lingererSortie() {
+    lingererSortie(targetKey) {
       const raiders = this.lingeringRaiders();
       if (!raiders.length) {
         this.say('Nothing holds the treeline. (No lingerers to sortie against.)');
-        return { ok: false, why: 'none' };
+        return { ok: false, why: 'none', fought: [], targetKey: targetKey || null, targetMatched: false, raidersAtStart: 0 };
+      }
+      // SORTIE TARGET (sim-sortietarget-a 2026-11-03, MATCH-FIRST): when a
+      // target key is given and matches a current raider, fight it FIRST,
+      // then the rest in current order if the party survives. Absent or
+      // unmatched key falls back to current order, unchanged.
+      let order = raiders.slice(), targetMatched = false;
+      if (targetKey) {
+        const mi = order.findIndex(m => m && m.lingerKey === targetKey);
+        if (mi >= 0) { targetMatched = true; const mm = order.splice(mi, 1)[0]; order.unshift(mm); }
       }
       // MUSTER: real fighters, never the player. Two besides-you minimum —
       // a lone villager against a treeline monster is a funeral, not a sortie.
@@ -803,7 +841,7 @@
       try { muster = this._musterAway ? this._musterAway(3, 'defense') : []; } catch (e) { console.warn('lingererSortie muster', e); }
       if (muster.length < 2) {
         this.say(`Not enough fighters to send — a sortie needs at least two besides you, and the bench is bare. (Endure it, or call for help.)`);
-        return { ok: false, why: 'no-fighters' };
+        return { ok: false, why: 'no-fighters', fought: [], targetKey: targetKey || null, targetMatched, raidersAtStart: raiders.length };
       }
       const leader = muster[0], allyVids = muster.slice(1);
       const refName = (id) => { try { return this.firstRef ? this.firstRef(id) : this.displayName(id); } catch (e) { return 'Someone'; } };
@@ -816,18 +854,25 @@
       // THE FIGHTS: one played fieldFight per lingerer, in turn — the same
       // blow-by-blow engine as every villager-vs-monster meeting. The party
       // leader fights wounded from the last one; a fallen leader breaks it.
+      // With a matched target, the target is first in `order` (match-first).
       let broke = false, cleared = 0;
-      for (const m of raiders.slice()) {
+      const fought = [];
+      for (const m of order) {
         if (!m.lingering || (m.hp || 0) <= 0) continue;
         const mdef = (this.data.monsters || []).find(x => x.id === m.id) || {};
         let mName = 'something';
         try { mName = this.monsterNoun ? this.monsterNoun(mdef.id) : (mdef.name || 'something'); } catch (e) { console.warn('lingererSortie noun', e); }
         // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class).
         const mPhrase = this.articlePhrase ? this.articlePhrase(mName) : mName;
+        // ATTRIBUTION (0815 lesson): capture fight identity at fight START,
+        // before the synchronous fieldFight call — never after it returns.
+        const foughtEntry = { key: m.lingerKey || null, id: m.id, name: mName, outcome: null };
+        fought.push(foughtEntry);
         let rec = null;
         try { rec = this.fieldFight(leader, mdef, m, { allies: allyVids.length, allyVids: allyVids.slice(), cornered: true }); }
         catch (e) { console.warn('lingererSortie fight', e); }
-        if (!rec || !rec.outcome) continue;
+        if (!rec || !rec.outcome) { foughtEntry.outcome = 'none'; continue; }
+        foughtEntry.outcome = rec.outcome;
         let summary = `${refName(leader)} fought ${mPhrase}`;
         try { summary = this.fieldFightSummary ? this.fieldFightSummary(rec, refName(leader), mName) : summary; } catch (e) { console.warn('lingererSortie summary', e); }
         if (rec.outcome === 'vKill') {
@@ -895,7 +940,7 @@
       } else if (!broke) {
         this.say(`${still.length} still hold${still.length === 1 ? 's' : ''} the treeline — the gorge goes on. (Endure it, or send another sortie.)`);
       }
-      return { ok: true, cleared, broke, remaining: still.length, paid };
+      return { ok: true, cleared, broke, remaining: still.length, paid, fought, targetKey: targetKey || null, targetMatched, raidersAtStart: raiders.length };
     },
 
     // raidPillage: raiders eat from the real pantry (best-fit draw, discarded).

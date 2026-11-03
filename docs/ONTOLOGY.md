@@ -960,7 +960,7 @@ Persistent grave markers at the Haven fire. Every villager burial raises a marke
 ### havenGrowth (`havenGrowth.js`)
 Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, Steve 2026-10-10). Resource-based, System-announced, never deed-based, never calendar. Each tier visibly improves the Haven and grants real mechanics. The raid system gives the Palisade something to defend against.
 
-**Provides:** havenTier(), havenPopCap(), havenStores(), havenGrowthMeter(), havenGrowthDaily(), havenTierUp(), announceHavenBar(tier), havenNeedGossip(next), havenRaidTick(), lingeringRaiders(), answerLingerer(how), lingererSortie(), raidPillage(v, kcal), hearthStretch(), granarySpoilBonus(foodState), famineGraceDays()
+**Provides:** havenTier(), havenPopCap(), havenStores(), havenGrowthMeter(), havenGrowthDaily(), havenTierUp(), announceHavenBar(tier), havenNeedGossip(next), havenRaidTick(), lingeringRaiders(), lingerKeyFor(m), answerLingerer(how, targetKey?), lingererSortie(targetKey?), raidPillage(v, kcal), hearthStretch(), granarySpoilBonus(foodState), famineGraceDays()
 
 **Rules:**
 - resource_based: tiers unlock on stockpile thresholds only (code: havenGrowth.js — havenGrowthDaily checks havenStores() vs HAVEN_TIERS req; no deed, calendar, or knowledge reads anywhere in the tier path)
