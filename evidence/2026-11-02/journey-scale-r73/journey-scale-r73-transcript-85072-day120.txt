@@ -1,0 +1,27 @@
+(pre-talk seed: seek_taken planted d115; takenWantDay=115; convoCount=16)
+=== seed 85072 day 120 — conversation with Asher (gen_2ohap4b) ===
+occupation=zookeeper temperament=steady trust=89 dead=false
+want: seek_taken (stage 0)
+open thread: goal fromSeed=true
+picker: subject-first gossip-first
+
+THEM: I don't want to be in charge. I want us to survive. Those look the same from the outside.
+(turn0 choices: dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Look — Lena is back. Walked in like they'd never left."
+YOU: [dlg:more] "I’m listening."
+THEM: "Yeah, that was me. I walked away from Haven once. Didn't look back."
+YOU: [dlg:react] (listen)
+THEM: "Word is you know what you're doing out there. You'd know about that."
+YOU: [dlg:more] "Go on."
+THEM: "Bottom line: People are keeping to themselves."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [dlg:more] "Tell me more."
+THEM: "Lost my waterskin in the treeline. Elijah sniffed it out in an hour. An HOUR."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread gossip
+closing line: "Good. We've got a plan forming. I can feel it."
+(gossip picks this sitting: 1)

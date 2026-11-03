@@ -1,0 +1,27 @@
+(pre-talk seed: ask_favor planted d70; takenWantDay=56; convoCount=10)
+=== seed 85072 day 90 — conversation with Asher (gen_2ohap4b) ===
+occupation=zookeeper temperament=steady trust=87 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: subject-first gossip-first
+
+THEM: "Short version — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: dlg:cant, dlg:more, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Lena? An army medic, back before. Solid person."
+YOU: [dlg:more] "I’m listening."
+THEM: "Did you hear? You won Duel on the cameras. People are still talking about it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:more] "Go on."
+THEM: "Amina drank the creek water straight. No boiling. Nothing happened. Nothing."
+YOU: [dlg:react] (listen)
+THEM: "Can I be honest? Lorena talks to the garden. The garden listens. I've seen it."
+YOU: [dlg:more] "Tell me more."
+THEM: "that stray dog — the one that bit two people — lets Devon touch it."
+YOU: (leave)
+pre-close: want seek_taken stage 1 thread gossip
+closing line: "Alright. One thing at a time. That's how we get through."
+(gossip picks this sitting: 1)

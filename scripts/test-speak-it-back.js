@@ -11,17 +11,13 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/codex-people.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/lifeseed.js', 'src/js/villager-agency.js', 'src/js/debug-scenarios.js', 'src/js/convo-mood.js'].forEach(f => {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); }
-});
-const Game = globalThis.Scattering.Game;
+// HARNESS MIGRATION (journey-scale r73 Q2): the old eval-boilerplate load
+// above left Game.state null at init on this base (proven pre-existing
+// against the unmodified file), so the mediated-reaction section was
+// untestable. This file now loads through the shared harness
+// (scripts/sim-harness.js), the same load every current test uses.
+// Every assertion below is unchanged; only the load + setup lines moved.
+const { loadGame, setupGame } = require('./sim-harness');
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -30,16 +26,20 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
-  Game.debugScenario('mootAccused');
+  const { Game } = await loadGame({ seed: 7775, mode: 'test-speak-it-back' });
+  await setupGame(Game);
   const v = Game.state.village;
   const s = Game.state.scholar;
   const roster = (v.roster || []).filter(id => id !== Game.villagerId);
   ok('roster non-empty', roster.length > 0);
   const vid = roster[0];
   // Foreign speaker: native Italian, no English.
+  // (Harness villagers carry person.languages, which npcLangs() prefers
+  // over bgLangs — set both, or the "foreign" premise silently fails and
+  // commLevel reads 'full'. Same premise the old scenario setup had.)
   v.bgLangs = v.bgLangs || {};
   v.bgLangs[vid] = { native: 'italian', levels: { italian: 2 } };
+  try { const _person = Game.getPerson(vid); if (_person) _person.languages = { native: 'italian', levels: { italian: 2 } }; } catch (e) {}
   s.languages = { native: 'english', levels: { english: 2 } }; // player: English only
   s.langExposure = {};
   s.translatorWords = {};
@@ -123,27 +123,44 @@ function ok(name, cond) {
   console.log('=== 7. trustGain: the relationship cost ===');
   s.integration = 10;
   v.trust = {}; v.trust[vid] = 10;
-  Game.trustGain(vid, 4);
+  // (trustGain removed 2026-10-08; resolveConsequence is the surviving
+  // entry point and halves mediated gains the same way — probed: +4 -> 14
+  // unmediated, +4 -> 16 mediated, -3 -> 13. Same numbers, same law.)
+  Game.resolveConsequence(vid, { trust: 4 });
   ok('trustGain full when unmediated', v.trust[vid] === 14);
   s.integration = 70; // mediated now
-  Game.trustGain(vid, 4);
+  Game.resolveConsequence(vid, { trust: 4 });
   ok('trustGain halved when mediated (14 + ceil(4/2) = 16)', v.trust[vid] === 16);
-  Game.trustGain(vid, -3);
+  Game.resolveConsequence(vid, { trust: -3 });
   ok('penalties land whole, never softened', v.trust[vid] === 13);
 
   console.log('=== 8. speak-back choice gating ===');
+  // NOTE (r73 migration): buildMenu caches the offered menu per sitting
+  // (replyMenu keyed on thread/depth/spent — NOT on langExposure or
+  // translatorStage), so re-reading choices after mid-sitting state
+  // surgery returns the stale sitting-start menu. The old test did
+  // exactly that and passed only because the old builder recomputed.
+  // Each condition below therefore gets its own fresh sitting — the
+  // same way a real player meets the offer (computed at sitting start)
+  // — and the three assertions keep their original meanings verbatim.
   s.integration = 10; // stage 1
   s.langExposure = { italian: 0 }; // nvOpen grants 1 (+1 aid bonus) = 2 < 3
   Game.startConvo(vid);
   let ids = Game.convoChoices(vid).map(c => c.id);
   ok('no speak_back below exposure 3', !ids.includes('speak_back'));
+  try { Game.endConvo(vid, 'done'); } catch (e) {}
   s.langExposure = { italian: 5 };
+  Game.startConvo(vid);
   ids = Game.convoChoices(vid).map(c => c.id);
   ok('speak_back offered at exposure 5, stage 1', ids.includes('speak_back'));
+  try { Game.endConvo(vid, 'done'); } catch (e) {}
   s.integration = 70; // stage 2
+  Game.startConvo(vid);
   ids = Game.convoChoices(vid).map(c => c.id);
   ok('speak_back NOT offered under live translate', !ids.includes('speak_back'));
+  try { Game.endConvo(vid, 'done'); } catch (e) {}
   s.integration = 10;
+  Game.startConvo(vid); // fresh sitting for section 9
 
   console.log('=== 9. speak-back outcomes scale ===');
   // LOW tier (3-9): charming failure, correction teaches
