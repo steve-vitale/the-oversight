@@ -20,7 +20,16 @@
 // repeat-shouted: 49 vetoes on 61704, the same western hop 3x/day.
 //
 // THE ONE DESIGN (prereg, decided up front): veto ONLY when the
-// lateral-escape-aware check E(D) fails from the hop destination D:
+// lateral-escape-aware check E(D) fails from the hop destination D,
+// DEPLOYED 2026-11-03 (sim-guarde-deploy-b) as the entry-checked
+// allow' (see below): veto when E(D) fails OR the hop itself is
+// entry-blocked (checkHop from the hop origin), with the veto line
+// distinguishing the cause — escape vetoes keep the old line,
+// entry vetoes say "You can't step there — you couldn't get in
+// from here." The entry check uses RAW checkHop, never E's
+// roadwork credit (credit answers "could you get home if you
+// cleared rubble on the way", entry answers "can you step on
+// from here"; the engine grants no credit on a real hop).
 //   1. DIRECT: the walkTo-faithful return sim (travelTo jumps, d<=3,
 //      intermediate-blockage scan replicated exactly, 10-hop cap).
 //   2. LATERAL (only if direct fails): up to 4 lateral legs. At sim
@@ -315,6 +324,15 @@ function installGuard(Game, ctx, opts) {
       const dDest = manhattan(x, y, hv.x, hv.y);
       const isHomeward = dDest < dCur; // evaluated, NOT exempt (this arm's change)
       const esc = escapeCheck(Game, x, y, hv.x, hv.y);
+      // DEPLOY (sim-guarde-deploy-b): entry-checked allow' — the hop
+      // is allowed only if E passes AND the hop itself is
+      // engine-crossable from this origin (raw checkHop, no credit).
+      // vetoCause: 'escape' when E fails (the old veto set),
+      // 'entry' when E passes but entry is blocked (the new vetoes).
+      const entry = checkHop(Game, px, py, x, y);
+      const entryBlockers = (entry.blockers || []).map((b) => b.blockType || 'unknown');
+      const allowPrime = !!esc.ok && entryBlockers.length === 0;
+      const vetoCause = !esc.ok ? 'escape' : (!allowPrime ? 'entry' : null);
       if (ctx) {
         ctx.homewardstepSimChecks = (ctx.homewardstepSimChecks || 0) + 1;
         ctx.homewardstepBeyondUngenerated = (ctx.homewardstepBeyondUngenerated || 0) + (esc.beyondUngenerated || 0);
@@ -326,15 +344,17 @@ function installGuard(Game, ctx, opts) {
             simOk: !!esc.ok, directOk: !!esc.directOk, via: esc.via || null,
             legs: esc.legs || 0, creditUsed: esc.creditUsed || 0,
             vetoed: false, homeward: !!isHomeward, originSimOk: null, silent: false, shadow: !!shadow,
+            allowPrime: !!allowPrime, vetoCause, entryBlockers,
           });
           if (ctx.homewardstepHopLog.length > 20000) ctx.homewardstepHopLog.splice(0, ctx.homewardstepHopLog.length - 20000);
         } catch (e) {}
       }
-      if (esc.ok || shadow) {
+      if (allowPrime || shadow) {
         inOrig = true;
         try { return origTravelTo.apply(this, arguments); } finally { inOrig = false; }
       }
-      // VETO (only when E fails): the scholar stays. walkTo breaks
+      // VETO (when NOT allow': E fails, or E passes but entry is
+      // blocked): the scholar stays. walkTo breaks
       // cleanly on no-move; a forage trip tries its next candidate,
       // as it does for any refused hop. VETO MEMORY: first veto of a
       // destination says the line; repeats are silent, still vetoed.
@@ -362,6 +382,7 @@ function installGuard(Game, ctx, opts) {
       }
       if (ctx) {
         ctx.homewardstepVetoes = (ctx.homewardstepVetoes || 0) + 1;
+        if (vetoCause === 'entry') ctx.homewardstepEntryVetoes = (ctx.homewardstepEntryVetoes || 0) + 1;
         if (silent) ctx.homewardstepSilentVetoes = (ctx.homewardstepSilentVetoes || 0) + 1;
         else ctx.homewardstepSpokenVetoes = (ctx.homewardstepSpokenVetoes || 0) + 1;
         try {
@@ -370,7 +391,10 @@ function installGuard(Game, ctx, opts) {
         } catch (e) {}
       }
       if (!silent) {
-        try { Game.say("You don't walk there — you couldn't get home from there."); } catch (e) {}
+        // Veto line by cause (sim-guarde-deploy-b decision (a)):
+        // entry vetoes name the blocked step, escape vetoes keep
+        // the old line. A both-blocked hop is an escape veto.
+        try { Game.say(vetoCause === 'entry' ? "You can't step there — you couldn't get in from here." : "You don't walk there — you couldn't get home from there."); } catch (e) {}
       }
       let block = null;
       try { block = Game.travelBlockage(x, y); } catch (e) {}
