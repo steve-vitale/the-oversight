@@ -447,3 +447,35 @@ Read in full: all 23 driven transcripts. fabricHits 0 panel-wide
   field-name mismatch into a baseline would launder the mapping
   gap into a number. The mapping proposal stands for a future
   run to land with a same-shape comparison.
+
+## Recovery closeout (Lane B run 2026-11-03 05:00 CST, landing r116)
+- Stale-lock recovery at run start: lock held run_id
+  2026-11-03T09:55:47Z (the 04:00 run's lock) with NO registry entry
+  for that run_id; the adopted tree's heartbeat (10:33 UTC) was
+  22+ min stale, so the previous run is DEAD per the overlap
+  guard. Lock deleted, fresh lock written (2026-11-03T10:56:45Z),
+  deleted at closeout below.
+- Adopted the r115 tree (no new registration: the branch already
+  held the unmerged commit). No rebase was in progress at
+  adoption (no rebase-* dir; branch tip still 7845b5d14; no live
+  Lane B process). Heartbeat re-established and verified by
+  registry read-back (11:07 UTC).
+- Master had moved since the 04:00 run's rebase target
+  (665627fcc -> e534dc00f, sibling w5faced merge, already
+  landed). Rebase of the single commit onto e534dc00f applied
+  cleanly, no conflict, no stop-at-pick quirk; new tip
+  9825a41c3. Post-rebase proof re-runs: both proof tests ALL
+  PASS; src diffs vs 7845b5d14 empty (identical hunks).
+- Telemetry re-checked in this run (same command as above):
+  same 2 LOUD lines, same EXPLAINED verdict (field-name mapping
+  gap), baseline NOT rolled.
+- Merged locally with `git merge --ff-only` in the main tree,
+  worktree released, branch deleted, main tree verified clean.
+  Rotation-b written 6 -> 7 (succession next), verified by
+  re-read. Lock deleted. Reported "merged locally, pending
+  ship" — no version bump, no push, no live verification (ship
+  loop owns those).
+- NOT done here, still owed elsewhere: the journey2-succession
+  tree's uncommitted aimed-shot dodge fix (+3/-3, noted
+  2026-11-03 ~01:04 CST) was left untouched; the app.js
+  shared-inode break (main-session follow-up) is still open.
