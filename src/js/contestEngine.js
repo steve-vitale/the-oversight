@@ -163,10 +163,15 @@
     // (DPR x HP x pack) is matched instead: competitive fights, real wins,
     // real deaths. Wave-scoping comes from monsterWavePool() (unlocked waves
     // only); the wave param is kept for the documented signature.
-    contestBeastFor: function(wave, targetThreat) {
+    contestBeastFor: function(wave, targetThreat, opts) {
       var pool = [];
       try { pool = this.monsterWavePool ? this.monsterWavePool() : (this.data.monsters || []); }
       catch (e) { pool = this.data.monsters || []; }
+      // opts.excludeFlee (beastmaster only, Steve 2026-11-02): a beast that
+      // can bolt must never be the picked beast — its flight counts as
+      // "dominated", so the pick would decide the contest before it starts.
+      // Other callers pass nothing and see the pool exactly as before.
+      if (opts && opts.excludeFlee) pool = pool.filter(function(m) { return !m.flee; });
       if (!pool.length) return null;
       var best = null, bestD = Infinity;
       for (const m of pool) {
@@ -637,9 +642,13 @@
         return results;
       }
       if (id === 'beastmaster') {
-        // Dominance, not murder: mFlee counts as won.
+        // Dominance, not murder: mFlee counts as won. So the pick itself
+        // must be a beast that stays: flee-capable beasts are excluded
+        // from this contest's pool only (Steve 2026-11-02). The dominance
+        // rule is untouched, and the excluded beasts keep their flight
+        // everywhere else — this filter changes the pick, nothing else.
         for (const pid of pids) {
-          const beast = this.contestBeastFor(1, 700);
+          const beast = this.contestBeastFor(1, 700, { excludeFlee: true });
           let rec = null;
           try { rec = this.fieldFight(pid, beast, null, { rng: R }); } catch (e) {}
           const st = stats[pid];
