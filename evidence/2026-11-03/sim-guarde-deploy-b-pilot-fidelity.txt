@@ -1,0 +1,54 @@
+SEED 69501 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+HOP 69501 4,4->5,4 E=pass entry=- allow'=pass engine=- moved=true tile=meadow swimmer=false
+HOP 69501 5,4->6,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69501 6,4->7,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69501 7,4->7,3 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=creek swimmer=false
+HOP 69501 7,3->7,2 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=forest_floor swimmer=false
+HOP 69501 7,2->7,1 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=creek swimmer=false
+SEED 69502 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,false] control=PASS
+HOP 69502 4,4->5,4 E=pass entry=- allow'=pass engine=- moved=true tile=trail_edge swimmer=false
+HOP 69502 5,4->6,4 E=pass entry=- allow'=pass engine=- moved=true tile=meadow swimmer=false
+HOP 69502 6,4->7,4 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69502 7,4->7,3 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69502 7,3->7,2 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69502 7,2->7,1 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+SEED 69503 day5Start={"x":4,"y":4} moved=[false] control=PASS
+HOP 69503 4,4->5,4 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+SEED 69504 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+HOP 69504 4,4->5,4 E=pass entry=- allow'=pass engine=- moved=true tile=trail_edge swimmer=false
+HOP 69504 5,4->6,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69504 6,4->7,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69504 7,4->7,3 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=forest_floor swimmer=false
+HOP 69504 7,3->7,2 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=forest_floor swimmer=false
+HOP 69504 7,2->7,1 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=forest_floor swimmer=false
+SEED 69505 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+HOP 69505 4,4->5,4 E=pass entry=- allow'=pass engine=- moved=true tile=trail_edge swimmer=false
+HOP 69505 5,4->6,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69505 6,4->7,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69505 7,4->7,3 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69505 7,3->7,2 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69505 7,2->7,1 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+SEED 69506 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+HOP 69506 4,4->5,4 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69506 5,4->6,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69506 6,4->7,4 E=pass entry=- allow'=pass engine=- moved=true tile=grove swimmer=false
+HOP 69506 7,4->7,3 E=pass entry=- allow'=pass engine=- moved=true tile=grove swimmer=false
+HOP 69506 7,3->7,2 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69506 7,2->7,1 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+SEED 69507 day5Start={"x":4,"y":4} moved=[true,false] control=PASS
+HOP 69507 4,4->5,4 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=true
+HOP 69507 5,4->6,4 E=pass entry=washed_out allow'=FAIL engine=washed_out moved=false tile=forest_floor swimmer=true
+SEED 69508 day5Start={"x":4,"y":4} moved=[false] control=PASS
+HOP 69508 4,4->5,4 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+TOTALS hops=34 legsAtHaven=8/8
+EPASS fidelity=24/28
+ALLOWPRIME fidelity=24/24
+ENTRY agreement=34/34
+VETO invariance: E-fail hops=6 vetoChangesOnEfail=0 eFailOutcomeChanges=0
+EFAIL moved(pocket)=6 69501:7,4->7,3 69501:7,3->7,2 69501:7,2->7,1 69504:7,4->7,3 69504:7,3->7,2 69504:7,2->7,1
+EFAIL refused=0
+CONVERSIONS allow->veto=4 census={"creek":3,"washed_out":1}
+CONV 69502 7,2->7,1 moved=false entry=creek engine=creek
+CONV 69503 4,4->5,4 moved=false entry=creek engine=creek
+CONV 69507 5,4->6,4 moved=false entry=washed_out engine=washed_out
+CONV 69508 4,4->5,4 moved=false entry=creek engine=creek

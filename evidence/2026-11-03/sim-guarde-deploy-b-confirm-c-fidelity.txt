@@ -1,0 +1,52 @@
+SEED 69608 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=n/a
+HOP 69608 4,4->4,5 E=pass entry=- allow'=pass engine=- moved=true tile=meadow swimmer=false
+HOP 69608 4,5->4,6 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69608 4,6->4,7 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69608 4,7->4,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69608 4,8->3,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69608 3,8->2,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+SEED 69609 day5Start={"x":4,"y":4} moved=[false] control=n/a
+HOP 69609 4,4->4,5 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+SEED 69610 day5Start={"x":4,"y":4} moved=[true,true,false] control=n/a
+HOP 69610 4,4->4,5 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69610 4,5->4,6 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69610 4,6->4,7 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+SEED 69611 day5Start={"x":4,"y":4} moved=[true,true,false] control=n/a
+HOP 69611 4,4->4,5 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69611 4,5->4,6 E=pass entry=- allow'=pass engine=- moved=true tile=creek swimmer=false
+HOP 69611 4,6->4,7 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+SEED 69612 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=n/a
+HOP 69612 4,4->4,5 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69612 4,5->4,6 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69612 4,6->4,7 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69612 4,7->4,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69612 4,8->3,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69612 3,8->2,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+SEED 69613 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=n/a
+HOP 69613 4,4->4,5 E=pass entry=- allow'=pass engine=- moved=true tile=meadow swimmer=false
+HOP 69613 4,5->4,6 E=pass entry=- allow'=pass engine=- moved=true tile=meadow swimmer=false
+HOP 69613 4,6->4,7 E=pass entry=- allow'=pass engine=- moved=true tile=trail_edge swimmer=false
+HOP 69613 4,7->4,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69613 4,8->3,8 E=FAIL entry=- allow'=FAIL engine=- moved=true tile=forest_floor swimmer=false
+HOP 69613 3,8->2,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+SEED 69614 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=n/a
+HOP 69614 4,4->4,5 E=pass entry=- allow'=pass engine=- moved=true tile=grove swimmer=false
+HOP 69614 4,5->4,6 E=pass entry=- allow'=pass engine=- moved=true tile=grove swimmer=false
+HOP 69614 4,6->4,7 E=pass entry=- allow'=pass engine=- moved=true tile=grove swimmer=false
+HOP 69614 4,7->4,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69614 4,8->3,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+HOP 69614 3,8->2,8 E=pass entry=- allow'=pass engine=- moved=true tile=forest_floor swimmer=false
+SEED 69615 day5Start={"x":4,"y":4} moved=[false] control=n/a
+HOP 69615 4,4->4,5 E=pass entry=creek allow'=FAIL engine=creek moved=false tile=creek(needsBridge,unbridged) swimmer=false
+TOTALS hops=32 legsAtHaven=8/8
+EPASS fidelity=27/31
+ALLOWPRIME fidelity=27/27
+ENTRY agreement=32/32
+VETO invariance: E-fail hops=1 vetoChangesOnEfail=0 eFailOutcomeChanges=0
+EFAIL moved(pocket)=1 69613:4,8->3,8
+EFAIL refused=0
+CONVERSIONS allow->veto=4 census={"creek":4}
+CONV 69609 4,4->4,5 moved=false entry=creek engine=creek
+CONV 69610 4,6->4,7 moved=false entry=creek engine=creek
+CONV 69611 4,6->4,7 moved=false entry=creek engine=creek
+CONV 69615 4,4->4,5 moved=false entry=creek engine=creek
