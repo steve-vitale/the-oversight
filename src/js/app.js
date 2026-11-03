@@ -13156,9 +13156,19 @@
     if (journal) contents.menu.prepend(journal);
     const choose = name => {
       fieldPanel = name;
-      if (name && inlineView && inlineView.kind !== 'person') {
-        inlineView = null;
-        const slot = frame.querySelector('#inlineslot'); if (slot) slot.innerHTML = '';
+      if (name) {
+        // STALE-SLOT COVER (gap-playtest9 2026-11-02): tile/blockage cards
+        // write DIRECTLY into #inlineslot without touching inlineView, so
+        // the old "clear only when inlineView is set" left them painted
+        // over a newly opened tool workspace (slot z 8 > workspace z 7):
+        // Haven panel buttons — and the Menu workspace's Sleep — sat
+        // covered until reload, with the board itself hidden behind the
+        // workspace so no fresh tap could replace the card. Opening a tool
+        // panel always clears the slot now; the board re-renders fresh
+        // when the panel closes. Person cards live in narration, untouched.
+        if (inlineView && inlineView.kind !== 'person') inlineView = null;
+        const slot = frame.querySelector('#inlineslot');
+        if (slot) { slot.innerHTML = ''; delete slot.dataset.cx; delete slot.dataset.cy; }
       }
       workspace.hidden = !name;
       workspace.querySelector('.field-tool-title').textContent = ({place:'This place',actions:'Actions',menu:'Expedition',messages:'Messages'})[name] || '';
@@ -17477,7 +17487,7 @@
     return `
       <div class="card"><h3>🏠 HAVEN — ${st.rosterCount} souls</h3>
       <p class="small"><i>${v.atmos}</i></p>
-      <p class="small">Pantry: ${Game.fmtKcal(st.pantryKcal)} (${st.pantryDays >= 999 ? 'holding steady — the village feeds itself' : `about ${Game.pluralize(st.pantryDays, 'day')} at this burn`})${st.hungryDays ? ' · ⚠ HUNGRY day ' + st.hungryDays : ''}</p>
+      <p class="small">Pantry: ${Game.fmtKcal(st.pantryKcal)} (${st.pantryDays >= 999 ? 'holding steady — the village feeds itself' : st.pantryNetBurn ? `about ${Game.pluralize(st.pantryDays, 'day')} at a net draw of ${st.pantryNetBurn.toLocaleString()}/day (after what the village brings in)` : `about ${Game.pluralize(st.pantryDays, 'day')} at this burn`})${st.hungryDays ? ' · ⚠ HUNGRY day ' + st.hungryDays : ''}</p>
       <p class="small">💧 Water: ${st.waterClean}L clean / ${st.waterDirty}L dirty</p>
       ${(() => {
         // One entry: controls live in the Garden panel, never duplicated
@@ -17725,7 +17735,7 @@
           })()}`;
         } catch (e) { return ''; }
       })()}
-      <p class="small" style="opacity:.75">${st.rosterCount} mouths need ${st.villageEat.toLocaleString()}/day · the village brings in ${st.villageGive.toLocaleString()} · shortfall ${net.toLocaleString()}/day</p>
+      <p class="small" style="opacity:.75">${st.rosterCount} mouths need ${st.villageEat.toLocaleString()}/day · the village brings in ${st.villageGive.toLocaleString()}${st.pantryNetBurn ? ` · pantry net draw ${st.pantryNetBurn.toLocaleString()}/day (7-day average)` : ` · shortfall ${net.toLocaleString()}/day`}</p>
       ${(() => {
         // WHO'S PULLING WEIGHT (Steve 2026-10-09): per-person actual vs expected.
         // Knowledge-gated like everything: you see effort bands, not numbers

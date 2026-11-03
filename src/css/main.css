@@ -2054,7 +2054,9 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
   .field-layout .ord-lowermenu { grid-area:menu; margin:0; }
   .field-layout .lowermenu { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px; }
   .field-layout .lowermenu .lm-btn { padding:4px 1px; min-height:44px; font-size:12px; margin:0; }
-  .field-workspace { grid-area:board; z-index:7; min-height:0; overflow:hidden; background:var(--bg2); border:1px solid var(--line); border-radius:8px; display:flex; flex-direction:column; }
+  .field-workspace { grid-area:board; position:relative; z-index:10; min-height:0; overflow:hidden; background:var(--bg2); border:1px solid var(--line); border-radius:8px; display:flex; flex-direction:column; }
+  /* (gap-playtest9: workspace outranks the inline slot's z 8, so an open
+     tool panel's buttons can never sit under a stale inline card again.) */
   .field-workspace[hidden],.field-tool-content[hidden],.field-notice[hidden] { display:none; }
   .field-workspace > header { display:flex; justify-content:space-between; align-items:center; padding:2px 8px; flex:none; border-bottom:1px solid var(--line); }
   .field-workspace > header button { width:44px; min-height:44px; margin:0; }
@@ -2064,6 +2066,9 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
   .field-layout #inlineslot { position:absolute; inset:0; max-height:none; overflow:auto; margin:0; z-index:8; background:var(--bg2); overscroll-behavior:contain; }
   .field-layout #inlineslot:empty { display:none; }
   .field-layout #inlineslot .inline-head { position:sticky; top:0; z-index:2; background:var(--bg2); padding:4px; }
+  /* (gap-playtest9: the tile card's ✕ sticks too — a long card scrolled
+     down used to carry its only close button out of reach.) */
+  .field-layout #inlineslot .tp-head { position:sticky; top:0; z-index:2; background:var(--bg2); padding:4px; }
   .field-layout .danger-message { border-color:var(--danger); color:var(--warn); }
   .field-layout .ord-taphint,.field-layout .toast-layer { display:none; }
   body.in-combat .field-layout { grid-template-rows:40px minmax(0,1fr) 128px 144px 44px; }

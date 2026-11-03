@@ -16124,6 +16124,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // (rolling 7-day net from villageEats). Falls back to the 12x2000 worst
     // case before the first endDay. Returns 999 when the village covers
     // itself (no net draw) — the pantry is holding, not draining.
+    // pantryNetBurn: the MEASURED daily pantry draw behind
+    // pantryDaysEstimate — the rolling 7-day net from villageEats (pantry
+    // outflow minus village inflows, plus the player's pantry meals).
+    // Null before the first endDay (no measurement yet) and when the
+    // measured draw is zero or less (the village covers itself).
+    // pantryDaysEstimate shares this helper so the panel's days figure
+    // and its burn figure can never drift apart (gap-playtest9 2026-11-02:
+    // the panel printed "about 7 days" from this net draw next to a
+    // gross "12 mouths need 22,089/day", and dividing the pantry by the
+    // gross need gave ~2 days — both numbers were honest, but about
+    // different burns, and the display never said so).
+    pantryNetBurn() {
+      const v = this.state.village || {};
+      const hist = v.burnHistory || [];
+      if (!hist.length) return null;
+      const burn = hist.reduce((a, b) => a + b, 0) / hist.length;
+      return burn > 0 ? burn : null;
+    },
+
     pantryDaysEstimate() {
       const v = this.state.village || {};
       const pk = (v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
@@ -16132,8 +16151,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const pop = ((v.roster || []).length) || 12;
         return Math.floor(pk / Math.max(1, pop * 2000));
       }
-      const burn = hist.reduce((a, b) => a + b, 0) / hist.length;
-      if (burn <= 0) return 999;
+      const burn = this.pantryNetBurn();
+      if (burn == null) return 999;
       return Math.floor(pk / burn);
     },
 
@@ -46400,6 +46419,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // Pantry kcal computed from ITEMS, not a bucket. Unsafe food counts (it's there, it's risky).
         pantryKcal: Math.round((this.state.village.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0)),
         pantryDays: this.pantryDaysEstimate(),
+        // Measured net pantry draw/day behind pantryDays (null pre-history
+        // or when the village covers itself) — the Haven panel prints this
+        // same burn beside its days figure so the two reconcile exactly.
+        pantryNetBurn: (() => { const b = this.pantryNetBurn ? this.pantryNetBurn() : null; return b == null ? null : Math.round(b); })(),
         waterClean: Math.round((this.state.village.water || {}).clean || 0),
         waterDirty: Math.round((this.state.village.water || {}).dirty || 0),
         // Weight: everything has mass. Carrying capacity 20kg.
