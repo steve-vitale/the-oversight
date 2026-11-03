@@ -14,7 +14,11 @@
 //   spawnRows   — spawnWorldMonster() placements (id, wave, tile,
 //                 distance to player tile / home tile, caller)
 //   triggerRows — triggerEncounter() calls (id, wave)
-//   startRows   — startCombat() player-TB starts (id, wave)
+//   startRows   — startCombat() player-TB starts (id, wave, provenance:
+//                 pending:<id> vs world:<id> vs other, read BEFORE the
+//                 call — startCombat instantiates by id, so a start at
+//                 the home tile is usually a faced pending, not a
+//                 world-tile fight)
 //   tbEndRows   — tbEnd() results (result, monster id if readable)
 //   fieldRows   — fieldFight() villager fights (vid, id, wave, outcome)
 //   removeRows  — removeWorldMonster() removals (id, wave, hp, caller,
@@ -113,7 +117,7 @@ function install(Game) {
       const id = (r && r.id) || r || null;
       let unlocked = null;
       try { unlocked = Game.unlockedWave ? Game.unlockedWave() : null; } catch (e) {}
-      t.castRows.push({ day: dayOf(Game), id: id, wave: waveOf(Game, id), veteran: !!(r && r.veteran), unlocked: unlocked });
+      t.castRows.push({ day: dayOf(Game), id: id, wave: waveOf(Game, id), veteran: !!(r && r.veteran), unlocked: unlocked, caller: callerFromStack() });
     } catch (e) { errs.push('castMonster: ' + String(e.message).slice(0, 80)); }
     return r;
   });
@@ -161,7 +165,16 @@ function install(Game) {
   });
 
   wrap('startCombat', function (mid) {
-    try { t.startRows.push({ day: dayOf(Game), id: mid, wave: waveOf(Game, mid), playerTile: playerTile(Game) }); } catch (e) { errs.push('startCombat: ' + String(e.message).slice(0, 80)); }
+    try {
+      let worldId = null, pendingId = null, feastId = null;
+      try { const s = Game.state.scholar || {}; if (s.monster) worldId = s.monster.id || null; } catch (e) {}
+      try { pendingId = Game.pendingMonsterId || null; } catch (e) {}
+      try { const s = Game.state.scholar || {}; if (s.feastDraw) feastId = s.feastDraw.monsterId || null; } catch (e) {}
+      const effId = mid || pendingId || 'bulldozer';
+      t.startRows.push({ day: dayOf(Game), id: effId, wave: waveOf(Game, effId), playerTile: playerTile(Game),
+        provenance: (Game.pendingEncounter && pendingId) ? ('pending:' + pendingId) : (worldId ? ('world:' + worldId) : 'other'),
+        pendingLive: !!Game.pendingEncounter, worldMonsterId: worldId, feastDrawId: feastId });
+    } catch (e) { errs.push('startCombat: ' + String(e.message).slice(0, 80)); }
     fightStartDepth++;
     try { return orig.startCombat.apply(this, arguments); }
     finally { fightStartDepth--; }
@@ -224,6 +237,11 @@ function install(Game) {
       const pt = playerTile(Game);
       snap.wanderer = w ? { id: w.monsterId, wave: waveOf(Game, w.monsterId), x: w.x, y: w.y, distPlayer: manhattan({ x: w.x, y: w.y }, pt) } : null;
     } catch (e) { snap.wanderer = null; }
+    try {
+      snap.pending = Game.pendingEncounter
+        ? { id: Game.pendingMonsterId || null, wave: waveOf(Game, Game.pendingMonsterId) }
+        : null;
+    } catch (e) { snap.pending = null; }
     try {
       const ds = Game.deedState ? Game.deedState() : null;
       const faced = (ds && ds.wavesFaced) || {};
